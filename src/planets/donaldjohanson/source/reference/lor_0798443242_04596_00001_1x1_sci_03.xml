@@ -1,0 +1,1041 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1K00.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1K00_1960.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1K00_1870.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/proc/v1/PDS4_PROC_1K00_1300.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1K00_1510.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/sb/v1/PDS4_SB_1K00_1110.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/ebt/v1/PDS4_EBT_1L00_1100.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/mission/lucy/v1/PDS4_LUCY_1K00_1000.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:geom="http://pds.nasa.gov/pds4/geom/v1" xmlns:img="http://pds.nasa.gov/pds4/img/v1" xmlns:disp="http://pds.nasa.gov/pds4/disp/v1" xmlns:ebt="http://pds.nasa.gov/pds4/ebt/v1" xmlns:proc="http://pds.nasa.gov/pds4/proc/v1" xmlns:sb="http://pds.nasa.gov/pds4/sb/v1" xmlns:lucy="http://pds.nasa.gov/pds4/mission/lucy/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1K00.xsd                         http://pds.nasa.gov/pds4/geom/v1 https://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1K00_1960.xsd                         http://pds.nasa.gov/pds4/img/v1 https://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1K00_1870.xsd                         http://pds.nasa.gov/pds4/disp/v1 https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1K00_1510.xsd                         http://pds.nasa.gov/pds4/proc/v1 https://pds.nasa.gov/pds4/proc/v1/PDS4_PROC_1K00_1300.xsd                         http://pds.nasa.gov/pds4/sb/v1 https://pds.nasa.gov/pds4/sb/v1/PDS4_SB_1K00_1110.xsd                         http://pds.nasa.gov/pds4/ebt/v1 https://pds.nasa.gov/pds4/ebt/v1/PDS4_EBT_1L00_1100.xsd                         http://pds.nasa.gov/pds4/mission/lucy/v1 https://pds.nasa.gov/pds4/mission/lucy/v1/PDS4_LUCY_1K00_1000.xsd">
+    <Identification_Area>
+        <logical_identifier>urn:nasa:pds:lucy.llorri:data_donaldjohanson_partially_processed:lor_0798443242_04596_00001_1x1_sci</logical_identifier>
+        <version_id>1.0</version_id>
+        <title>L'LORRI Calibrated Data Product: lor_0798443242_04596_00001_1x1_sci</title>
+        <information_model_version>1.20.0.0</information_model_version>
+        <product_class>Product_Observational</product_class>
+        <Citation_Information>
+            <author_list>Weaver, H.; Dello Russo, N.; Barnouin, O.; Taylor, H.; Spencer, J.</author_list>
+            <editor_list>Kaufmann, D.; Crombie, M. K.; Gobat, C.</editor_list>
+            <publication_year>2025</publication_year>
+            <description>L'LORRI observational calibrated science data product</description>
+        </Citation_Information>
+        <Modification_History>
+            <Modification_Detail>
+                <modification_date>2025-07-08</modification_date>
+                <version_id>1.0</version_id>
+                <description>Produced by Lucy SOC for Donaldjohanson data delivery (September 2025).</description>
+            </Modification_Detail>
+        </Modification_History>
+    </Identification_Area>
+    <Observation_Area>
+        <Time_Coordinates>
+            <start_date_time>2025-04-20T17:49:26.021Z</start_date_time>
+            <stop_date_time>2025-04-20T17:49:26.026Z</stop_date_time>
+        </Time_Coordinates>
+        <Primary_Result_Summary>
+            <purpose>Science</purpose>
+            <processing_level>Partially Processed</processing_level>
+            <Science_Facets>
+                <wavelength_range>Visible</wavelength_range>
+                <domain>Surface</domain>
+                <discipline_name>Imaging</discipline_name>
+                <facet1>Grayscale</facet1>
+            </Science_Facets>
+        </Primary_Result_Summary>
+        <Investigation_Area>
+            <name>Lucy</name>
+            <type>Mission</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:investigation:mission.lucy</lid_reference>
+                <reference_type>data_to_investigation</reference_type>
+            </Internal_Reference>
+        </Investigation_Area>
+        <Observing_System>
+            <Observing_System_Component>
+                <name>Lucy</name>
+                <type>Host</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.lucy</lid_reference>
+                    <reference_type>is_instrument_host</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+            <Observing_System_Component>
+                <name>Lucy LOng Range Reconnaissance Imager (L'LORRI)</name>
+                <type>Instrument</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument:lucy.llorri</lid_reference>
+                    <reference_type>is_instrument</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+        </Observing_System>
+        <Target_Identification>
+            <name>(52246) Donaldjohanson</name>
+            <type>Asteroid</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:target:asteroid.52246_donaldjohanson</lid_reference>
+                <reference_type>data_to_target</reference_type>
+            </Internal_Reference>
+        </Target_Identification>
+        <Mission_Area>
+            <lucy:Lucy_Observation_Planning>
+                <lucy:load_identifier>25106</lucy:load_identifier>
+                <lucy:mission_segment>DONALDJOHANSON</lucy:mission_segment>
+                <lucy:sap_identifier>SAP.LO.E.401.v01__DJ_HiRes</lucy:sap_identifier>
+                <lucy:visit_name>25106.donj.LO.E.401.v01.110ae__DJ_HiRes</lucy:visit_name>
+                <lucy:instrument_side>SIDE_1</lucy:instrument_side>
+                <lucy:llorri_status>ACTIVE</lucy:llorri_status>
+                <lucy:lralph_status>ACTIVE</lucy:lralph_status>
+                <lucy:ltes_status>ACTIVE</lucy:ltes_status>
+                <lucy:ttcam_status>UNKNOWN</lucy:ttcam_status>
+            </lucy:Lucy_Observation_Planning>
+            <lucy:Lucy_Observation_Time_Information>
+                <lucy:observation_id>4596</lucy:observation_id>
+                <lucy:observation_id_count>1</lucy:observation_id_count>
+                <lucy:observation_complete>COMPLETE</lucy:observation_complete>
+                <lucy:observation_missing_packets>0</lucy:observation_missing_packets>
+                <lucy:start_sclk unit="s">798443243.6009827</lucy:start_sclk>
+                <lucy:mid_sclk unit="s">798443243.6034827</lucy:mid_sclk>
+                <lucy:stop_sclk unit="s">798443243.6059827</lucy:stop_sclk>
+                <lucy:mid_utc>2025-04-20T17:49:26.023Z</lucy:mid_utc>
+                <lucy:mid_sclk_string>1/0798443243-39550</lucy:mid_sclk_string>
+                <lucy:mid_utc_doy>2025-110T17:49:26.023Z</lucy:mid_utc_doy>
+                <lucy:mid_utc_jd unit="julian day">2460786.2426623</lucy:mid_utc_jd>
+                <lucy:mid_ephemeris_time unit="s">798443435.2087991</lucy:mid_ephemeris_time>
+                <lucy:ccsds_sclk_time unit="s">798450873</lucy:ccsds_sclk_time>
+            </lucy:Lucy_Observation_Time_Information>
+            <lucy:Lucy_Target_List>
+                <lucy:target_fov_count>1</lucy:target_fov_count>
+                <lucy:target_fov_name>DONALDJOHANSON</lucy:target_fov_name>
+            </lucy:Lucy_Target_List>
+            <lucy:Lucy_Product_Information>
+                <lucy:internal_product_version_id>3</lucy:internal_product_version_id>
+            </lucy:Lucy_Product_Information>
+            <lucy:LLORRI_Instrument_Parameters>
+                <lucy:attached_sync_marker_dec>449838109</lucy:attached_sync_marker_dec>
+                <lucy:attached_sync_marker_hex>0x1ACFFC1D</lucy:attached_sync_marker_hex>
+                <lucy:latch_count>0</lucy:latch_count>
+                <lucy:calibration_lamp_level_1 unit="DN">0</lucy:calibration_lamp_level_1>
+                <lucy:calibration_lamp_level_2 unit="DN">0</lucy:calibration_lamp_level_2>
+                <lucy:bias_level unit="DN">122.322333905369</lucy:bias_level>
+                <lucy:read_noise unit="DN">0.9</lucy:read_noise>
+                <lucy:ccd_gain unit="electron/DN">21.1</lucy:ccd_gain>
+                <lucy:bias_offset unit="DN">3.2</lucy:bias_offset>
+                <lucy:frame_transfer_scrub_time unit="ms">11.7762</lucy:frame_transfer_scrub_time>
+                <lucy:Radiometric_Conversion_Constants>
+                    <lucy:pivot_wavelength unit="Angstrom">6030.0</lucy:pivot_wavelength>
+                    <lucy:Diffuse_Source>
+                        <lucy:units_of_conversion_constants>(DN/s/pixel)/(erg/cm^2/s/Angstrom/sr)</lucy:units_of_conversion_constants>
+                        <lucy:solar_constant>271300.0</lucy:solar_constant>
+                        <lucy:red_trojan_constant>278400.0</lucy:red_trojan_constant>
+                        <lucy:gray_trojan_constant>271200.0</lucy:gray_trojan_constant>
+                        <lucy:dinkinesh_constant>286000.0</lucy:dinkinesh_constant>
+                    </lucy:Diffuse_Source>
+                    <lucy:Point_Source>
+                        <lucy:units_of_conversion_constants>(DN/s)/(erg/cm^2/s/Angstrom)</lucy:units_of_conversion_constants>
+                        <lucy:solar_constant>1.101e+16</lucy:solar_constant>
+                        <lucy:red_trojan_constant>1.13e+16</lucy:red_trojan_constant>
+                        <lucy:gray_trojan_constant>1.101e+16</lucy:gray_trojan_constant>
+                    </lucy:Point_Source>
+                    <lucy:photometric_zero_point>18.93</lucy:photometric_zero_point>
+                </lucy:Radiometric_Conversion_Constants>
+            </lucy:LLORRI_Instrument_Parameters>
+        </Mission_Area>
+        <Discipline_Area>
+            <geom:Geometry>
+                <geom:SPICE_Kernel_Files>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>MK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy.donj.dl.v08.tm</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>SPK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>de440s.bsp</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>SPK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_250125_260315_250610_od092-N_v1.bsp</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>SPK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_250201_250601_240801_eugenisis_v2.bsp</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>FK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lucy_v12.tf</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>IK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_lorri_v03.ti</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>IK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ralph_v04.ti</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>IK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_tes_v01.ti</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>IK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ttcam_v04.ti</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>IK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_struct_v00.ti</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>SCLK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>LUCY_SCLKSCET.00037.tsc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>LSK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>naif0012.tls</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>PCK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>pck00010.tpc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>PCK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>donaldjohanson_v11.tpc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ipp_rel_250217_250224_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ipp_rel_250224_250303_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ipp_rel_250303_250310_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ipp_rel_250310_250317_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ipp_rel_250317_250324_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ipp_rel_250324_250331_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ipp_rel_250331_250407_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ipp_rel_250407_250414_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ipp_rel_250414_250421_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ipp_rel_250421_250428_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_sc_rel_250217_250224_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_sc_rel_250224_250303_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_sc_rel_250303_250310_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_sc_rel_250310_250317_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_sc_rel_250317_250324_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_sc_rel_250324_250331_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_sc_rel_250331_250407_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_sc_rel_250407_250414_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_sc_rel_250414_250421_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_sc_rel_250421_250428_v02.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>CK</geom:kernel_type>
+                        <geom:spice_kernel_file_name>lcy_ralph_r_250413_250423_v01.bc</geom:spice_kernel_file_name>
+                        <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+                    </geom:SPICE_Kernel_Identification>
+                </geom:SPICE_Kernel_Files>
+                <geom:Image_Display_Geometry>
+                    <Local_Internal_Reference>
+                        <local_identifier_reference>image</local_identifier_reference>
+                        <local_identifier_reference>error</local_identifier_reference>
+                        <local_identifier_reference>quality</local_identifier_reference>
+                        <local_reference_type>display_to_data_object</local_reference_type>
+                    </Local_Internal_Reference>
+                    <geom:Display_Direction>
+                        <geom:horizontal_display_axis>Sample</geom:horizontal_display_axis>
+                        <geom:horizontal_display_direction>Left to Right</geom:horizontal_display_direction>
+                        <geom:vertical_display_axis>Line</geom:vertical_display_axis>
+                        <geom:vertical_display_direction>Bottom to Top</geom:vertical_display_direction>
+                    </geom:Display_Direction>
+                    <geom:Object_Orientation_RA_Dec>
+                        <geom:reference_pixel_location>Center</geom:reference_pixel_location>
+                        <geom:right_ascension_angle unit="deg">184.3817113362017</geom:right_ascension_angle>
+                        <geom:declination_angle unit="deg">-6.844777987247725</geom:declination_angle>
+                        <geom:celestial_north_clock_angle unit="deg">112.61187971062091</geom:celestial_north_clock_angle>
+                        <geom:Reference_Frame_Identification>
+                            <geom:frame_spice_name>J2000</geom:frame_spice_name>
+                        </geom:Reference_Frame_Identification>
+                    </geom:Object_Orientation_RA_Dec>
+                    <geom:Object_Orientation_Clock_Angles>
+                        <geom:celestial_north_clock_angle unit="deg">112.61187971062091</geom:celestial_north_clock_angle>
+                        <geom:ecliptic_north_clock_angle unit="deg">89.16720131906624</geom:ecliptic_north_clock_angle>
+                        <geom:sun_direction_clock_angle unit="deg">0.4988064630011878</geom:sun_direction_clock_angle>
+                    </geom:Object_Orientation_Clock_Angles>
+                    <geom:Quaternion_Plus_To_From>
+                        <geom:qcos>0.1745898661933822</geom:qcos>
+                        <geom:qsin1>-0.6552536708474065</geom:qsin1>
+                        <geom:qsin2>0.105131574522834</geom:qsin2>
+                        <geom:qsin3>-0.7273983485696991</geom:qsin3>
+                        <geom:Rotate_From>
+                            <geom:name>Instrument</geom:name>
+                        </geom:Rotate_From>
+                        <geom:Rotate_To>
+                            <geom:name>J2000</geom:name>
+                        </geom:Rotate_To>
+                    </geom:Quaternion_Plus_To_From>
+                    <geom:Quaternion_Plus_To_From>
+                        <geom:qcos>0.544485775868752</geom:qcos>
+                        <geom:qsin1>0.8358740416685108</geom:qsin1>
+                        <geom:qsin2>-0.06453575803787878</geom:qsin2>
+                        <geom:qsin3>-0.02617178396342955</geom:qsin3>
+                        <geom:Rotate_From>
+                            <geom:name>Spacecraft</geom:name>
+                        </geom:Rotate_From>
+                        <geom:Rotate_To>
+                            <geom:name>J2000</geom:name>
+                        </geom:Rotate_To>
+                    </geom:Quaternion_Plus_To_From>
+                </geom:Image_Display_Geometry>
+                <geom:Geometry_Orbiter>
+                    <geom:geometry_reference_time_utc>2025-04-20T17:49:26.023Z</geom:geometry_reference_time_utc>
+                    <geom:geometry_reference_time_tdb unit="s">798443435.2087991</geom:geometry_reference_time_tdb>
+                    <geom:Orbiter_Identification>
+                        <geom:Geometry_Target_Identification>
+                            <geom:name>DONALDJOHANSON</geom:name>
+                        </geom:Geometry_Target_Identification>
+                    </geom:Orbiter_Identification>
+                    <geom:Distances>
+                        <geom:Distances_Specific>
+                            <geom:spacecraft_geocentric_distance unit="km">222838563.5471467</geom:spacecraft_geocentric_distance>
+                            <geom:spacecraft_heliocentric_distance unit="km">308972995.615199</geom:spacecraft_heliocentric_distance>
+                            <geom:spacecraft_target_center_distance unit="km">1761.495804094424</geom:spacecraft_target_center_distance>
+                            <geom:target_geocentric_distance unit="km">222839795.7803017</geom:target_geocentric_distance>
+                            <geom:target_heliocentric_distance unit="km">308974665.9031444</geom:target_heliocentric_distance>
+                        </geom:Distances_Specific>
+                    </geom:Distances>
+                    <geom:Illumination_Geometry>
+                        <geom:Illumination_Specific>
+                            <geom:reference_location>Boresight Intercept Point</geom:reference_location>
+                            <geom:solar_elongation unit="deg">161.4710513517982</geom:solar_elongation>
+                            <geom:phase_angle unit="deg">18.51841087340518</geom:phase_angle>
+                        </geom:Illumination_Specific>
+                    </geom:Illumination_Geometry>
+                    <geom:Vectors>
+                        <geom:Vectors_Cartesian_Specific>
+                            <geom:Vector_Cartesian_Position_Spacecraft_To_Target>
+                                <geom:x_position unit="km">-1743.961049787759</geom:x_position>
+                                <geom:y_position unit="km">-133.8031697821138</geom:y_position>
+                                <geom:z_position unit="km">-208.7199952608698</geom:z_position>
+                                <geom:light_time_correction_applied>None</geom:light_time_correction_applied>
+                            </geom:Vector_Cartesian_Position_Spacecraft_To_Target>
+                            <geom:Vector_Cartesian_Position_Sun_To_Spacecraft>
+                                <geom:x_position unit="km">-301497858.1637846</geom:x_position>
+                                <geom:y_position unit="km">67469490.86824246</geom:y_position>
+                                <geom:z_position unit="km">3349827.467258925</geom:z_position>
+                                <geom:light_time_correction_applied>None</geom:light_time_correction_applied>
+                            </geom:Vector_Cartesian_Position_Sun_To_Spacecraft>
+                            <geom:Vector_Cartesian_Position_Sun_To_Target>
+                                <geom:x_position unit="km">-301499602.1248344</geom:x_position>
+                                <geom:y_position unit="km">67469357.06507267</geom:y_position>
+                                <geom:z_position unit="km">3349618.747263664</geom:z_position>
+                                <geom:light_time_correction_applied>None</geom:light_time_correction_applied>
+                            </geom:Vector_Cartesian_Position_Sun_To_Target>
+                            <geom:Vector_Cartesian_Position_Earth_To_Spacecraft>
+                                <geom:x_position unit="km">-172041341.7218832</geom:x_position>
+                                <geom:y_position unit="km">137554166.4639601</geom:y_position>
+                                <geom:z_position unit="km">33729118.4393412</geom:z_position>
+                                <geom:light_time_correction_applied>None</geom:light_time_correction_applied>
+                            </geom:Vector_Cartesian_Position_Earth_To_Spacecraft>
+                            <geom:Vector_Cartesian_Position_Earth_To_Target>
+                                <geom:x_position unit="km">-172043085.682933</geom:x_position>
+                                <geom:y_position unit="km">137554032.6607903</geom:y_position>
+                                <geom:z_position unit="km">33728909.71934594</geom:z_position>
+                                <geom:light_time_correction_applied>None</geom:light_time_correction_applied>
+                            </geom:Vector_Cartesian_Position_Earth_To_Target>
+                            <geom:Vector_Cartesian_Velocity_Spacecraft_Relative_To_Target>
+                                <geom:x_velocity unit="km/s">-11.96399885211666</geom:x_velocity>
+                                <geom:y_velocity unit="km/s">5.832087392500553</geom:y_velocity>
+                                <geom:z_velocity unit="km/s">1.50520171627141</geom:z_velocity>
+                                <geom:light_time_correction_applied>None</geom:light_time_correction_applied>
+                            </geom:Vector_Cartesian_Velocity_Spacecraft_Relative_To_Target>
+                            <geom:Vector_Cartesian_Velocity_Spacecraft_Relative_To_Sun>
+                                <geom:x_velocity unit="km/s">-19.28904208050536</geom:x_velocity>
+                                <geom:y_velocity unit="km/s">-13.11684186895018</geom:y_velocity>
+                                <geom:z_velocity unit="km/s">-7.102461817759886</geom:z_velocity>
+                                <geom:light_time_correction_applied>None</geom:light_time_correction_applied>
+                            </geom:Vector_Cartesian_Velocity_Spacecraft_Relative_To_Sun>
+                            <geom:Vector_Cartesian_Velocity_Target_Relative_To_Sun>
+                                <geom:x_velocity unit="km/s">-7.325043228388703</geom:x_velocity>
+                                <geom:y_velocity unit="km/s">-18.94892926145073</geom:y_velocity>
+                                <geom:z_velocity unit="km/s">-8.607663534031296</geom:z_velocity>
+                                <geom:light_time_correction_applied>None</geom:light_time_correction_applied>
+                            </geom:Vector_Cartesian_Velocity_Target_Relative_To_Sun>
+                            <geom:Vector_Cartesian_Velocity_Spacecraft_Relative_To_Earth>
+                                <geom:x_velocity unit="km/s">-33.93399780232488</geom:x_velocity>
+                                <geom:y_velocity unit="km/s">10.52936687348069</geom:y_velocity>
+                                <geom:z_velocity unit="km/s">3.148518125204387</geom:z_velocity>
+                                <geom:light_time_correction_applied>None</geom:light_time_correction_applied>
+                            </geom:Vector_Cartesian_Velocity_Spacecraft_Relative_To_Earth>
+                            <geom:Vector_Cartesian_Velocity_Target_Relative_To_Earth>
+                                <geom:x_velocity unit="km/s">-21.96999895020822</geom:x_velocity>
+                                <geom:y_velocity unit="km/s">4.697279480980139</geom:y_velocity>
+                                <geom:z_velocity unit="km/s">1.643316408932977</geom:z_velocity>
+                                <geom:light_time_correction_applied>None</geom:light_time_correction_applied>
+                            </geom:Vector_Cartesian_Velocity_Target_Relative_To_Earth>
+                        </geom:Vectors_Cartesian_Specific>
+                    </geom:Vectors>
+                </geom:Geometry_Orbiter>
+            </geom:Geometry>
+            <img:Imaging>
+                <Local_Internal_Reference>
+                    <local_identifier_reference>image</local_identifier_reference>
+                    <local_reference_type>imaging_parameters_to_image_object</local_reference_type>
+                </Local_Internal_Reference>
+                <img:Downsampling>
+                    <img:processing_venue>Onboard Hardware</img:processing_venue>
+                    <img:Pixel_Averaging_Dimensions>
+                        <img:height_pixels unit="pixel">1</img:height_pixels>
+                        <img:width_pixels unit="pixel">1</img:width_pixels>
+                    </img:Pixel_Averaging_Dimensions>
+                </img:Downsampling>
+                <img:Exposure>
+                    <img:exposure_duration unit="s">0.005</img:exposure_duration>
+                    <img:exposure_type>Manual</img:exposure_type>
+                </img:Exposure>
+                <img:Instrument_State>
+                    <img:Device_Component_States>
+                        <img:Device_Component_State>
+                            <img:device_name>Data Processing Unit in use</img:device_name>
+                            <img:device_state>DPU0</img:device_state>
+                        </img:Device_Component_State>
+                        <img:Device_Component_State>
+                            <img:device_name>Calibration Lamp 2 Power Enable</img:device_name>
+                            <img:device_state>OFF</img:device_state>
+                        </img:Device_Component_State>
+                        <img:Device_Component_State>
+                            <img:device_name>Calibration Lamp 1 Power Enable</img:device_name>
+                            <img:device_state>OFF</img:device_state>
+                        </img:Device_Component_State>
+                        <img:Device_Component_State>
+                            <img:device_name>Image Source</img:device_name>
+                            <img:device_state>CCD</img:device_state>
+                        </img:Device_Component_State>
+                        <img:Device_Component_State>
+                            <img:device_name>OTA Survival Heater Control Mode</img:device_name>
+                            <img:device_state>THERMOSTATIC</img:device_state>
+                        </img:Device_Component_State>
+                        <img:Device_Component_State>
+                            <img:device_name>FPE Survival Heater Control Mode</img:device_name>
+                            <img:device_state>THERMOSTATIC</img:device_state>
+                        </img:Device_Component_State>
+                        <img:Device_Component_State>
+                            <img:device_name>Decontamination Heater Set Point Status </img:device_name>
+                            <img:device_state>NON_OP</img:device_state>
+                        </img:Device_Component_State>
+                        <img:Device_Component_State>
+                            <img:device_name>DPU Survival Heater Set Point Status</img:device_name>
+                            <img:device_state>OP</img:device_state>
+                        </img:Device_Component_State>
+                        <img:Device_Component_State>
+                            <img:device_name>FPE Survival Heater Set Point Status</img:device_name>
+                            <img:device_state>OP</img:device_state>
+                        </img:Device_Component_State>
+                        <img:Device_Component_State>
+                            <img:device_name>Telescope Survival Heater Set Point Status</img:device_name>
+                            <img:device_state>OP</img:device_state>
+                        </img:Device_Component_State>
+                    </img:Device_Component_States>
+                    <img:Device_Currents>
+                        <img:Device_Current>
+                            <img:device_name>FPU Low Current</img:device_name>
+                            <img:current_value unit="mA">153.650442</img:current_value>
+                        </img:Device_Current>
+                        <img:Device_Current>
+                            <img:device_name>+5V DPU</img:device_name>
+                            <img:current_value unit="mA">156.687012</img:current_value>
+                        </img:Device_Current>
+                        <img:Device_Current>
+                            <img:device_name>FPU High Current</img:device_name>
+                            <img:current_value unit="mA">67.836527</img:current_value>
+                        </img:Device_Current>
+                        <img:Device_Current>
+                            <img:device_name>+18V Heater</img:device_name>
+                            <img:current_value unit="mA">18.523138</img:current_value>
+                        </img:Device_Current>
+                        <img:Device_Current>
+                            <img:device_name>Primary Input</img:device_name>
+                            <img:current_value unit="mA">158.851352</img:current_value>
+                        </img:Device_Current>
+                    </img:Device_Currents>
+                    <img:Device_Temperatures>
+                        <img:Device_Temperature>
+                            <img:device_name>DPU Chassis Temperature Sensor</img:device_name>
+                            <img:temperature_value unit="degC">-15.68894968965422</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>FPE Chassis Temperature Sensor</img:device_name>
+                            <img:temperature_value unit="degC">-23.72681375744747</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>CCD Carrier Plate Sensor</img:device_name>
+                            <img:temperature_value unit="degC">-87.34857574228907</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>Baffle Ring Sensor</img:device_name>
+                            <img:temperature_value unit="degC">-103.8389224912886</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>Low Voltage Power Supply PWB in DPU</img:device_name>
+                            <img:temperature_value unit="degC">-12.39486439443772</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>CCD Temperature</img:device_name>
+                            <img:temperature_value unit="degC">-78.20434205064402</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>Focal Plane Electronics Temerature</img:device_name>
+                            <img:temperature_value unit="degC">-19.97692796026699</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>OTA M2 Temperature</img:device_name>
+                            <img:temperature_value unit="degC">-98.0702</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>OTA M1 Temperature at Bulkhead</img:device_name>
+                            <img:temperature_value unit="degC">-95.1029</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>FPE Temperature 1</img:device_name>
+                            <img:temperature_value unit="degC">-23.2801</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>FPE Temperature 2</img:device_name>
+                            <img:temperature_value unit="degC">-23.2801</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>DPU Temperature 1</img:device_name>
+                            <img:temperature_value unit="degC">-15.9169</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>DPU Temperature 2</img:device_name>
+                            <img:temperature_value unit="degC">-15.9169</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>Detector Temperature 1, on CCD carrier plate attached to OTA bulhead</img:device_name>
+                            <img:temperature_value unit="degC">-85.579</img:temperature_value>
+                        </img:Device_Temperature>
+                        <img:Device_Temperature>
+                            <img:device_name>Detector Temperature 2, on CCD carrier plate attached to OTA bulhead</img:device_name>
+                            <img:temperature_value unit="degC">-86.1755</img:temperature_value>
+                        </img:Device_Temperature>
+                    </img:Device_Temperatures>
+                    <img:Device_Voltages>
+                        <img:Device_Voltage>
+                            <img:device_name>FPU Low Voltage</img:device_name>
+                            <img:voltage_value unit="V">8.000487462</img:voltage_value>
+                        </img:Device_Voltage>
+                        <img:Device_Voltage>
+                            <img:device_name>FPU High Voltage</img:device_name>
+                            <img:voltage_value unit="V">16.115944227</img:voltage_value>
+                        </img:Device_Voltage>
+                        <img:Device_Voltage>
+                            <img:device_name>+5V DPU</img:device_name>
+                            <img:voltage_value unit="V">5.261229930000001</img:voltage_value>
+                        </img:Device_Voltage>
+                        <img:Device_Voltage>
+                            <img:device_name>+18V Heater</img:device_name>
+                            <img:voltage_value unit="V">18.978808685</img:voltage_value>
+                        </img:Device_Voltage>
+                        <img:Device_Voltage>
+                            <img:device_name>+3.3V DPU</img:device_name>
+                            <img:voltage_value unit="V">3.323974269</img:voltage_value>
+                        </img:Device_Voltage>
+                        <img:Device_Voltage>
+                            <img:device_name>Output Transistor Source of the CCD, Right Amplifier</img:device_name>
+                            <img:voltage_value unit="V">27.144306</img:voltage_value>
+                        </img:Device_Voltage>
+                        <img:Device_Voltage>
+                            <img:device_name>Output Transistor Source of the CCD, Left Amplifier</img:device_name>
+                            <img:voltage_value unit="V">28.172298</img:voltage_value>
+                        </img:Device_Voltage>
+                        <img:Device_Voltage>
+                            <img:device_name>+13V Focal Plane Electronics</img:device_name>
+                            <img:voltage_value unit="V">15.783222</img:voltage_value>
+                        </img:Device_Voltage>
+                        <img:Device_Voltage>
+                            <img:device_name>-29V Focal Plane Electronics</img:device_name>
+                            <img:voltage_value unit="V">29.785182</img:voltage_value>
+                        </img:Device_Voltage>
+                        <img:Device_Voltage>
+                            <img:device_name>+6V Focal Plane Electronics</img:device_name>
+                            <img:voltage_value unit="V">7.560375999999999</img:voltage_value>
+                        </img:Device_Voltage>
+                    </img:Device_Voltages>
+                </img:Instrument_State>
+            </img:Imaging>
+            <proc:Processing_Information>
+                <Local_Internal_Reference>
+                    <local_identifier_reference>data_file</local_identifier_reference>
+                    <local_reference_type>processing_information_to_data_object</local_reference_type>
+                </Local_Internal_Reference>
+                <proc:Process>
+                    <proc:name>Lucy Data Processing Pipeline</proc:name>
+                    <proc:process_owner_name>Lucy Science Operations Center</proc:process_owner_name>
+                    <proc:process_owner_institution_name>Southwest Research Institute</proc:process_owner_institution_name>
+                    <proc:Software>
+                        <proc:software_id>UDP</proc:software_id>
+                        <proc:software_version_id>1.1.3</proc:software_version_id>
+                    </proc:Software>
+                    <proc:Software>
+                        <proc:software_id>CDP</proc:software_id>
+                        <proc:software_version_id>2.4</proc:software_version_id>
+                    </proc:Software>
+                </proc:Process>
+            </proc:Processing_Information>
+            <disp:Display_Settings>
+                <Local_Internal_Reference>
+                    <local_identifier_reference>image</local_identifier_reference>
+                    <local_identifier_reference>error</local_identifier_reference>
+                    <local_identifier_reference>quality</local_identifier_reference>
+                    <local_reference_type>display_settings_to_array</local_reference_type>
+                </Local_Internal_Reference>
+                <disp:Display_Direction>
+                    <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+                    <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+                    <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+                    <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+                </disp:Display_Direction>
+            </disp:Display_Settings>
+            <ebt:Earth_Based_Telescope_Parameters>
+                <ebt:Telescope_Geometry>
+                    <ebt:World_Coordinate_System>
+                        <ebt:Reference_Frame_Parameters>
+                            <ebt:wcs_axes>2</ebt:wcs_axes>
+                            <ebt:coordinate_system_celestial_pole_longitude unit="deg">180.0</ebt:coordinate_system_celestial_pole_longitude>
+                            <ebt:coordinate_system_celestial_pole_latitude unit="deg">-6.8447779872477</ebt:coordinate_system_celestial_pole_latitude>
+                            <ebt:vertical_coordinate_pixel unit="pixel">512.5</ebt:vertical_coordinate_pixel>
+                            <ebt:horizontal_coordinate_pixel unit="pixel">512.5</ebt:horizontal_coordinate_pixel>
+                            <ebt:World_Axis>
+                                <ebt:axis_index>1</ebt:axis_index>
+                                <ebt:coordinate_name>Right Ascension</ebt:coordinate_name>
+                                <ebt:coordinate_system_projection>Gnomonic plus SIP</ebt:coordinate_system_projection>
+                                <ebt:world_coordinate_reference_point unit="deg">184.3817113362017</ebt:world_coordinate_reference_point>
+                            </ebt:World_Axis>
+                            <ebt:World_Axis>
+                                <ebt:axis_index>2</ebt:axis_index>
+                                <ebt:coordinate_name>Declination</ebt:coordinate_name>
+                                <ebt:coordinate_system_projection>Gnomonic plus SIP</ebt:coordinate_system_projection>
+                                <ebt:world_coordinate_reference_point unit="deg">-6.844777987247725</ebt:world_coordinate_reference_point>
+                            </ebt:World_Axis>
+                            <ebt:Reference_Frame_Identification>
+                                <ebt:frame_spice_name>J2000</ebt:frame_spice_name>
+                                <ebt:name>ICRS</ebt:name>
+                            </ebt:Reference_Frame_Identification>
+                        </ebt:Reference_Frame_Parameters>
+                        <ebt:Coordinate_Frame_Transformation_Matrix>
+                            <ebt:Pixel_Axes>
+                                <ebt:horizontal_axis>1</ebt:horizontal_axis>
+                                <ebt:vertical_axis>2</ebt:vertical_axis>
+                            </ebt:Pixel_Axes>
+                            <ebt:Transformation_Element>
+                                <ebt:world_axis_index>1</ebt:world_axis_index>
+                                <ebt:pixel_axis_index>1</ebt:pixel_axis_index>
+                                <ebt:element_value>0.000108682375799126</ebt:element_value>
+                            </ebt:Transformation_Element>
+                            <ebt:Transformation_Element>
+                                <ebt:world_axis_index>2</ebt:world_axis_index>
+                                <ebt:pixel_axis_index>1</ebt:pixel_axis_index>
+                                <ebt:element_value>0.000260940129356476</ebt:element_value>
+                            </ebt:Transformation_Element>
+                            <ebt:Transformation_Element>
+                                <ebt:world_axis_index>1</ebt:world_axis_index>
+                                <ebt:pixel_axis_index>2</ebt:pixel_axis_index>
+                                <ebt:element_value>0.000260940129356476</ebt:element_value>
+                            </ebt:Transformation_Element>
+                            <ebt:Transformation_Element>
+                                <ebt:world_axis_index>2</ebt:world_axis_index>
+                                <ebt:pixel_axis_index>2</ebt:pixel_axis_index>
+                                <ebt:element_value>-0.00010868237579912</ebt:element_value>
+                            </ebt:Transformation_Element>
+                        </ebt:Coordinate_Frame_Transformation_Matrix>
+                        <ebt:SIP_Distortion_Terms>
+                            <ebt:A_ORDER>
+                                <ebt:polynomial_order>3</ebt:polynomial_order>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>2</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>0</ebt:q_polynomial_degree>
+                                    <ebt:element_value>1.570530437375e-07</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>1</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>1</ebt:q_polynomial_degree>
+                                    <ebt:element_value>8.133468652948e-07</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>0</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>2</ebt:q_polynomial_degree>
+                                    <ebt:element_value>1.726418009563e-07</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>3</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>0</ebt:q_polynomial_degree>
+                                    <ebt:element_value>-4.28337365037e-09</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>2</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>1</ebt:q_polynomial_degree>
+                                    <ebt:element_value>-8.057796390924e-11</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>1</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>2</ebt:q_polynomial_degree>
+                                    <ebt:element_value>-4.125795241026e-09</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>0</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>3</ebt:q_polynomial_degree>
+                                    <ebt:element_value>-2.624143400288e-10</ebt:element_value>
+                                </ebt:SIP_Element>
+                            </ebt:A_ORDER>
+                            <ebt:B_ORDER>
+                                <ebt:polynomial_order>3</ebt:polynomial_order>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>2</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>0</ebt:q_polynomial_degree>
+                                    <ebt:element_value>4.250434534e-07</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>1</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>1</ebt:q_polynomial_degree>
+                                    <ebt:element_value>2.516442536339e-07</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>0</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>2</ebt:q_polynomial_degree>
+                                    <ebt:element_value>1.222464781111e-06</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>3</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>0</ebt:q_polynomial_degree>
+                                    <ebt:element_value>2.42273550494e-10</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>2</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>1</ebt:q_polynomial_degree>
+                                    <ebt:element_value>-4.735049720216e-09</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>1</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>2</ebt:q_polynomial_degree>
+                                    <ebt:element_value>-2.87595336793e-10</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>0</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>3</ebt:q_polynomial_degree>
+                                    <ebt:element_value>-4.1188944949639e-09</ebt:element_value>
+                                </ebt:SIP_Element>
+                            </ebt:B_ORDER>
+                            <ebt:AP_ORDER>
+                                <ebt:polynomial_order>3</ebt:polynomial_order>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>2</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>0</ebt:q_polynomial_degree>
+                                    <ebt:element_value>-1.570530437375e-07</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>1</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>1</ebt:q_polynomial_degree>
+                                    <ebt:element_value>-8.133468652948e-07</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>3</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>0</ebt:q_polynomial_degree>
+                                    <ebt:element_value>4.28337365037e-09</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>1</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>2</ebt:q_polynomial_degree>
+                                    <ebt:element_value>4.125795241026e-09</ebt:element_value>
+                                </ebt:SIP_Element>
+                            </ebt:AP_ORDER>
+                            <ebt:BP_ORDER>
+                                <ebt:polynomial_order>3</ebt:polynomial_order>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>1</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>1</ebt:q_polynomial_degree>
+                                    <ebt:element_value>-2.516442536339e-07</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>0</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>2</ebt:q_polynomial_degree>
+                                    <ebt:element_value>-1.222464781111e-06</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>2</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>1</ebt:q_polynomial_degree>
+                                    <ebt:element_value>4.735049720216e-09</ebt:element_value>
+                                </ebt:SIP_Element>
+                                <ebt:SIP_Element>
+                                    <ebt:p_polynomial_degree>0</ebt:p_polynomial_degree>
+                                    <ebt:q_polynomial_degree>3</ebt:q_polynomial_degree>
+                                    <ebt:element_value>4.11889449496399e-09</ebt:element_value>
+                                </ebt:SIP_Element>
+                            </ebt:BP_ORDER>
+                        </ebt:SIP_Distortion_Terms>
+                    </ebt:World_Coordinate_System>
+                </ebt:Telescope_Geometry>
+            </ebt:Earth_Based_Telescope_Parameters>
+            <sb:SB_Metadata>
+                <sb:Calibration_Information>
+                    <sb:Raw_Data_Product>
+                        <sb:file_name>lor_0798443242_04596_00001_1x1_eng_03.fit</sb:file_name>
+                        <Internal_Reference>
+                            <lidvid_reference>urn:nasa:pds:lucy.llorri:data_donaldjohanson_raw:lor_0798443242_04596_00001_1x1_eng::1.0</lidvid_reference>
+                            <reference_type>processed_data_to_raw_data</reference_type>
+                        </Internal_Reference>
+                    </sb:Raw_Data_Product>
+                    <sb:Calibration_Applied>
+                        <sb:bias_subtraction>true</sb:bias_subtraction>
+                        <sb:dark_current_removal>false</sb:dark_current_removal>
+                        <sb:flat_field_applied>true</sb:flat_field_applied>
+                        <sb:smear_removal_applied>true</sb:smear_removal_applied>
+                        <sb:conversion_to_physical_units>false</sb:conversion_to_physical_units>
+                    </sb:Calibration_Applied>
+                    <sb:Calibration_Reference_Files>
+                        <sb:Flat_Field>
+                            <sb:file_name>dj_auto_flat_1x1.fits</sb:file_name>
+                            <Internal_Reference>
+                                <lidvid_reference>urn:nasa:pds:lucy.llorri:calibration:dj_auto_flat_1x1::1.0</lidvid_reference>
+                                <reference_type>image_to_flat_field_file</reference_type>
+                            </Internal_Reference>
+                        </sb:Flat_Field>
+                        <sb:Bias_Map>
+                            <sb:file_name>llorri_superbias_1x1.fits</sb:file_name>
+                            <Internal_Reference>
+                                <lidvid_reference>urn:nasa:pds:lucy.llorri:calibration:llorri_superbias_1x1::1.0</lidvid_reference>
+                                <reference_type>image_to_bias_map_file</reference_type>
+                            </Internal_Reference>
+                        </sb:Bias_Map>
+                    </sb:Calibration_Reference_Files>
+                </sb:Calibration_Information>
+            </sb:SB_Metadata>
+        </Discipline_Area>
+    </Observation_Area>
+    <Reference_List>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:lucy.llorri:data_donaldjohanson_raw:lor_0798443242_04596_00001_1x1_eng</lid_reference>
+            <reference_type>data_to_raw_product</reference_type>
+        </Internal_Reference>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:lucy.llorri:calibration:llorri_flat_1x1</lid_reference>
+            <reference_type>data_to_calibration_product</reference_type>
+        </Internal_Reference>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:lucy.llorri:calibration:llorri_superbias_1x1</lid_reference>
+            <reference_type>data_to_calibration_product</reference_type>
+        </Internal_Reference>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:lucy.llorri:calibration:llorri_toffsets_1x1</lid_reference>
+            <reference_type>data_to_calibration_product</reference_type>
+        </Internal_Reference>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:lucy.llorri:calibration:llorri_superbias_1x1</lid_reference>
+            <reference_type>data_to_calibration_product</reference_type>
+        </Internal_Reference>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:lucy.llorri:calibration:dj_auto_flat_1x1</lid_reference>
+            <reference_type>data_to_calibration_product</reference_type>
+        </Internal_Reference>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:lucy.llorri:calibration:llorri_toffsets_1x1</lid_reference>
+            <reference_type>data_to_calibration_product</reference_type>
+        </Internal_Reference>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:lucy.llorri:document:llorri_sis</lid_reference>
+            <reference_type>data_to_document</reference_type>
+        </Internal_Reference>
+        <External_Reference>
+            <doi>10.1007/s11214-023-01028-z</doi>
+            <reference_text>Weaver, H. A., Wilson, J. P., Conard, S. J. et al. The Lucy Long Range Reconnaissance Imager (L'LORRI). Space Sci Rev 219, 82 (2023).</reference_text>
+            <description>SSR instrument paper</description>
+        </External_Reference>
+    </Reference_List>
+    <File_Area_Observational>
+        <File>
+            <file_name>lor_0798443242_04596_00001_1x1_sci_03.fit</file_name>
+            <local_identifier>data_file</local_identifier>
+            <creation_date_time>2025-07-07T23:15:13Z</creation_date_time>
+            <file_size unit="byte">10526400</file_size>
+            <md5_checksum>be44ce6a3b7df6969126166460e84d78</md5_checksum>
+        </File>
+        <Header>
+            <offset unit="byte">0</offset>
+            <object_length unit="byte">28800</object_length>
+            <parsing_standard_id>FITS 4.0</parsing_standard_id>
+        </Header>
+        <Array_2D_Image>
+            <name>L'LORRI observational image</name>
+            <local_identifier>image</local_identifier>
+            <offset unit="byte">28800</offset>
+            <axes>2</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <description>Image Array</description>
+            <Element_Array>
+                <data_type>IEEE754MSBSingle</data_type>
+                <unit>DN/s</unit>
+                <scaling_factor>1</scaling_factor>
+                <value_offset>0</value_offset>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>1024</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>1024</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+        </Array_2D_Image>
+        <Header>
+            <offset unit="byte">4224960</offset>
+            <object_length unit="byte">2880</object_length>
+            <parsing_standard_id>FITS 4.0</parsing_standard_id>
+        </Header>
+        <Array_2D>
+            <name>L'LORRI Error Image</name>
+            <local_identifier>error</local_identifier>
+            <offset unit="byte">4227840</offset>
+            <axes>2</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <description>L'LORRI Error Image</description>
+            <Element_Array>
+                <data_type>IEEE754MSBSingle</data_type>
+                <unit>DN/s</unit>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>1024</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>1024</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+        </Array_2D>
+        <Header>
+            <offset unit="byte">8424000</offset>
+            <object_length unit="byte">2880</object_length>
+            <parsing_standard_id>FITS 4.0</parsing_standard_id>
+        </Header>
+        <Array_2D>
+            <name>L'LORRI Quality Flag Image</name>
+            <local_identifier>quality</local_identifier>
+            <offset unit="byte">8426880</offset>
+            <axes>2</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <description>Quality Flag Image</description>
+            <Element_Array>
+                <data_type>SignedMSB2</data_type>
+                <unit>DN/s</unit>
+                <scaling_factor>1</scaling_factor>
+                <value_offset>32768</value_offset>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>1024</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>1024</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+        </Array_2D>
+    </File_Area_Observational>
+</Product_Observational>

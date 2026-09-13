@@ -1,0 +1,1055 @@
+{
+  "baseRevision": "55fe2579fa741da71a0bd5498712d0f3d7e5fe25",
+  "mergedMain": "0636327babf3f6a52c3cfd265453555532739985",
+  "workingChanges": "Expanded imagery and observation-only refresh before commit; exact source, recipe and delivered byte hashes bind this evidence.",
+  "beforeRevision": "55fe2579fa741da71a0bd5498712d0f3d7e5fe25",
+  "captureImplementation": "tests/objects/browser/asteroid-photographic-coverage.mts",
+  "captureImplementationSha256": "d6ce1404597bf76f55bd4fb8cff21fe6d8a3c707647e355959a16ac18a02187d",
+  "beforeCapture": {
+    "id": "donaldjohanson",
+    "phase": "before",
+    "overrides": {},
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "dpr": 1,
+    "browser": "152.0.7977.84",
+    "manifestHash": "90ea3b90a2796a82219c34810f29da344ed216d223dee1d13c2163a48700014a",
+    "runtimeManifest": {
+      "schema": "cssdonaldjohanson-runtime-assets@1",
+      "assets": [
+        {
+          "filename": "donaldjohanson-directional-sun.webp",
+          "bytes": 4798,
+          "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+        },
+        {
+          "filename": "donaldjohanson-directional-sun@2x.webp",
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "filename": "donaldjohanson-features.json",
+          "bytes": 7930,
+          "sha256": "ff7f6eebc5b85ac5912badd40fd4970bec98d95b2b5952ff99701344c4274692"
+        },
+        {
+          "filename": "donaldjohanson-lighting.webp",
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "filename": "donaldjohanson-llorri-shadow@2x.webp",
+          "bytes": 259856,
+          "sha256": "1ca318b44187722eea2cc4c099cbb67264c6ef7b9f4a9a74117bf5e3a8573d33"
+        },
+        {
+          "filename": "donaldjohanson-llorri-surface@2x.webp",
+          "bytes": 588884,
+          "sha256": "1e6511e38006f9be67994da3cab08c4313b115757349ebe91904a96eaf8ca4c9"
+        },
+        {
+          "filename": "donaldjohanson-llorri-thumbnail.webp",
+          "bytes": 1404,
+          "sha256": "04819d89aada26cfc41338c4eda34be652c50440eb5e78d3ca8d7ae68d3f185f"
+        },
+        {
+          "filename": "donaldjohanson-shape-shadow@2x.webp",
+          "bytes": 145784,
+          "sha256": "e600d4cf487e309caf5ce8775501ca16a9aade1699fdb6492705a2104ef3fff5"
+        },
+        {
+          "filename": "donaldjohanson-shape-surface@2x.webp",
+          "bytes": 205278,
+          "sha256": "fdab40973f952fad5e32ed40a551d22a998f19da6ad9cc84c86638b353694a99"
+        },
+        {
+          "filename": "donaldjohanson-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f"
+        },
+        {
+          "filename": "donaldjohanson-starfield-back-standard.webp",
+          "bytes": 53856,
+          "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9"
+        },
+        {
+          "filename": "donaldjohanson-starfield-back-standard@2x.webp",
+          "bytes": 171294,
+          "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0"
+        },
+        {
+          "filename": "donaldjohanson-starfield-back.webp",
+          "bytes": 210188,
+          "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7"
+        },
+        {
+          "filename": "donaldjohanson-starfield-back@2x.webp",
+          "bytes": 598648,
+          "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf"
+        },
+        {
+          "filename": "donaldjohanson-starfield-bottom-standard.webp",
+          "bytes": 63946,
+          "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90"
+        },
+        {
+          "filename": "donaldjohanson-starfield-bottom-standard@2x.webp",
+          "bytes": 200212,
+          "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687"
+        },
+        {
+          "filename": "donaldjohanson-starfield-bottom.webp",
+          "bytes": 232844,
+          "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8"
+        },
+        {
+          "filename": "donaldjohanson-starfield-bottom@2x.webp",
+          "bytes": 690706,
+          "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a"
+        },
+        {
+          "filename": "donaldjohanson-starfield-front-standard.webp",
+          "bytes": 67226,
+          "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d"
+        },
+        {
+          "filename": "donaldjohanson-starfield-front-standard@2x.webp",
+          "bytes": 208208,
+          "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d"
+        },
+        {
+          "filename": "donaldjohanson-starfield-front.webp",
+          "bytes": 251588,
+          "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28"
+        },
+        {
+          "filename": "donaldjohanson-starfield-front@2x.webp",
+          "bytes": 687190,
+          "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d"
+        },
+        {
+          "filename": "donaldjohanson-starfield-left-standard.webp",
+          "bytes": 31200,
+          "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828"
+        },
+        {
+          "filename": "donaldjohanson-starfield-left-standard@2x.webp",
+          "bytes": 112118,
+          "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa"
+        },
+        {
+          "filename": "donaldjohanson-starfield-left.webp",
+          "bytes": 142736,
+          "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650"
+        },
+        {
+          "filename": "donaldjohanson-starfield-left@2x.webp",
+          "bytes": 413462,
+          "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9"
+        },
+        {
+          "filename": "donaldjohanson-starfield-right-standard.webp",
+          "bytes": 23676,
+          "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8"
+        },
+        {
+          "filename": "donaldjohanson-starfield-right-standard@2x.webp",
+          "bytes": 83896,
+          "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79"
+        },
+        {
+          "filename": "donaldjohanson-starfield-right.webp",
+          "bytes": 116010,
+          "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa"
+        },
+        {
+          "filename": "donaldjohanson-starfield-right@2x.webp",
+          "bytes": 312496,
+          "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85"
+        },
+        {
+          "filename": "donaldjohanson-starfield-top-standard.webp",
+          "bytes": 64674,
+          "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738"
+        },
+        {
+          "filename": "donaldjohanson-starfield-top-standard@2x.webp",
+          "bytes": 202204,
+          "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3"
+        },
+        {
+          "filename": "donaldjohanson-starfield-top.webp",
+          "bytes": 235140,
+          "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310"
+        },
+        {
+          "filename": "donaldjohanson-starfield-top@2x.webp",
+          "bytes": 682934,
+          "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4"
+        },
+        {
+          "filename": "donaldjohanson-system-point.webp",
+          "bytes": 96,
+          "sha256": "b54cb3204797eaea901e467475ff0ce5d38ca1586182cf5961c954d3eadb2453"
+        }
+      ]
+    },
+    "reports": [
+      {
+        "yaw": 0,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(1,0,0,0,0,0.990186019998,-0.139755664649,0,0,0.139755664649,0.990186019998,0,0,0,0,1)",
+            "skybox": "matrix3d(0.3292938,0.131961141842,0.934960870197,0,-0.8663117,0.43609645863,0.243564486574,0,-0.3755921,-0.890171884388,0.257923317636,0,0,0,0,1)",
+            "sunView": "matrix3d(-0.5,-0.707452802801,0.499510291996,0,0,0.576784803093,0.816896132272,0,-0.866025403784,0.408448066136,-0.288392401547,0,0,0,0,1)"
+          },
+          "pitch": 100,
+          "controlPitch": 100,
+          "controlYaw": 0,
+          "zoom": 1.7,
+          "distance": 839.0725059390505,
+          "distanceKilometers": 8.774965544990636,
+          "distanceRadii": 3.6481413301697843,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 710.9090903434192,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 355.4545451717096
+        }
+      },
+      {
+        "yaw": 90,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0,-0.139755664649,-0.990186019998,0,0,0.990186019998,-0.139755664649,0,1,0,0,0,0,0,0,1)",
+            "skybox": "matrix3d(0.9442275,-0.046020673884,-0.326062117232,0,0.3021211,0.514945290922,0.802218131308,0,0.1309855,-0.855986726427,0.500129353355,0,0,0,0,1)",
+            "sunView": "matrix3d(-0.866025403784,0.408448066136,-0.288392401547,0,0,0.576784803093,0.816896132272,0,0.5,0.707452802801,-0.499510291996,0,0,0,0,1)"
+          },
+          "pitch": 100,
+          "controlPitch": 100,
+          "controlYaw": 90,
+          "zoom": 1.7,
+          "distance": 839.0725059390505,
+          "distanceKilometers": 8.774965544990636,
+          "distanceRadii": 3.6481413301697843,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 710.909090666622,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 355.454545333311
+        }
+      },
+      {
+        "yaw": 180,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-1,0,0,0,0,0.990186019998,-0.139755664649,0,0,-0.139755664649,-0.990186019998,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.3292938,-0.131961141842,-0.934960870197,0,0.8663117,0.35165018836,-0.354747692559,0,0.3755921,-0.926783815611,-0.001476704209,0,0,0,0,1)",
+            "sunView": "matrix3d(0.5,0.707452802801,-0.499510291996,0,0,0.576784803093,0.816896132272,0,0.866025403784,-0.408448066136,0.288392401547,0,0,0,0,1)"
+          },
+          "pitch": 100,
+          "controlPitch": 100,
+          "controlYaw": 180,
+          "zoom": 1.7,
+          "distance": 839.0725059390505,
+          "distanceKilometers": 8.774965544990636,
+          "distanceRadii": 3.6481413301697843,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 710.9090894221235,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 355.45454471106177
+        }
+      },
+      {
+        "yaw": 270,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0,0.139755664649,0.990186019998,0,0,0.990186019998,-0.139755664649,0,-1,0,0,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.9442275,0.046020673884,0.326062117232,0,-0.3021211,0.272801356069,-0.913401337293,0,-0.1309855,-0.960968973572,-0.243682739928,0,0,0,0,1)",
+            "sunView": "matrix3d(0.866025403784,-0.408448066136,0.288392401547,0,0,0.576784803093,0.816896132272,0,-0.5,-0.707452802801,0.499510291996,0,0,0,0,1)"
+          },
+          "pitch": 100,
+          "controlPitch": 100,
+          "controlYaw": 270,
+          "zoom": 1.7,
+          "distance": 839.0725059390505,
+          "distanceKilometers": 8.774965544990636,
+          "distanceRadii": 3.6481413301697843,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 710.9090935350573,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 355.45454676752865
+        }
+      }
+    ],
+    "errors": [],
+    "interaction": {},
+    "selection": {
+      "desired": {
+        "lensId": "llorri",
+        "shadows": false,
+        "orbit": true
+      },
+      "committed": {
+        "lensId": "llorri",
+        "shadows": false,
+        "orbit": true
+      },
+      "plan": {
+        "required": [
+          "surface:llorri",
+          "poles:llorri",
+          "lighting"
+        ],
+        "prewarm": [],
+        "materials": {},
+        "pressedLenses": [
+          "llorri"
+        ]
+      },
+      "pending": false,
+      "loadingMaterial": false,
+      "ready": true,
+      "error": null,
+      "viewRevision": 9
+    }
+  },
+  "afterCapture": {
+    "id": "donaldjohanson",
+    "phase": "after",
+    "overrides": {},
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "dpr": 1,
+    "browser": "152.0.7977.84",
+    "manifestHash": "195067bbbdc3edc718d171ce4ed385c5c664887369e5d47af8aa7a4eca31a85f",
+    "runtimeManifest": {
+      "schema": "cssdonaldjohanson-runtime-assets@1",
+      "assets": [
+        {
+          "filename": "donaldjohanson-directional-sun.webp",
+          "bytes": 4798,
+          "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+        },
+        {
+          "filename": "donaldjohanson-directional-sun@2x.webp",
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "filename": "donaldjohanson-features.json",
+          "bytes": 7930,
+          "sha256": "ff7f6eebc5b85ac5912badd40fd4970bec98d95b2b5952ff99701344c4274692"
+        },
+        {
+          "filename": "donaldjohanson-lighting.webp",
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "filename": "donaldjohanson-llorri-shadow@2x.webp",
+          "bytes": 279152,
+          "sha256": "99155f82de1a009eea094cedba924b127a1a49dd962abc9f793433e126d29b50"
+        },
+        {
+          "filename": "donaldjohanson-llorri-surface@2x.webp",
+          "bytes": 686116,
+          "sha256": "be9059df07c37f955eda071b92027bb69beefd44b88ccbd6f9b1abc544226792"
+        },
+        {
+          "filename": "donaldjohanson-llorri-thumbnail.webp",
+          "bytes": 1380,
+          "sha256": "658e0d5f48f4f33932012526c2f1687bd7f33f8302095ff79c519b289b5067de"
+        },
+        {
+          "filename": "donaldjohanson-shape-shadow@2x.webp",
+          "bytes": 145784,
+          "sha256": "e600d4cf487e309caf5ce8775501ca16a9aade1699fdb6492705a2104ef3fff5"
+        },
+        {
+          "filename": "donaldjohanson-shape-surface@2x.webp",
+          "bytes": 205278,
+          "sha256": "fdab40973f952fad5e32ed40a551d22a998f19da6ad9cc84c86638b353694a99"
+        },
+        {
+          "filename": "donaldjohanson-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f"
+        },
+        {
+          "filename": "donaldjohanson-starfield-back-standard.webp",
+          "bytes": 53856,
+          "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9"
+        },
+        {
+          "filename": "donaldjohanson-starfield-back-standard@2x.webp",
+          "bytes": 171294,
+          "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0"
+        },
+        {
+          "filename": "donaldjohanson-starfield-back.webp",
+          "bytes": 210188,
+          "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7"
+        },
+        {
+          "filename": "donaldjohanson-starfield-back@2x.webp",
+          "bytes": 598648,
+          "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf"
+        },
+        {
+          "filename": "donaldjohanson-starfield-bottom-standard.webp",
+          "bytes": 63946,
+          "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90"
+        },
+        {
+          "filename": "donaldjohanson-starfield-bottom-standard@2x.webp",
+          "bytes": 200212,
+          "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687"
+        },
+        {
+          "filename": "donaldjohanson-starfield-bottom.webp",
+          "bytes": 232844,
+          "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8"
+        },
+        {
+          "filename": "donaldjohanson-starfield-bottom@2x.webp",
+          "bytes": 690706,
+          "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a"
+        },
+        {
+          "filename": "donaldjohanson-starfield-front-standard.webp",
+          "bytes": 67226,
+          "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d"
+        },
+        {
+          "filename": "donaldjohanson-starfield-front-standard@2x.webp",
+          "bytes": 208208,
+          "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d"
+        },
+        {
+          "filename": "donaldjohanson-starfield-front.webp",
+          "bytes": 251588,
+          "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28"
+        },
+        {
+          "filename": "donaldjohanson-starfield-front@2x.webp",
+          "bytes": 687190,
+          "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d"
+        },
+        {
+          "filename": "donaldjohanson-starfield-left-standard.webp",
+          "bytes": 31200,
+          "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828"
+        },
+        {
+          "filename": "donaldjohanson-starfield-left-standard@2x.webp",
+          "bytes": 112118,
+          "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa"
+        },
+        {
+          "filename": "donaldjohanson-starfield-left.webp",
+          "bytes": 142736,
+          "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650"
+        },
+        {
+          "filename": "donaldjohanson-starfield-left@2x.webp",
+          "bytes": 413462,
+          "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9"
+        },
+        {
+          "filename": "donaldjohanson-starfield-right-standard.webp",
+          "bytes": 23676,
+          "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8"
+        },
+        {
+          "filename": "donaldjohanson-starfield-right-standard@2x.webp",
+          "bytes": 83896,
+          "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79"
+        },
+        {
+          "filename": "donaldjohanson-starfield-right.webp",
+          "bytes": 116010,
+          "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa"
+        },
+        {
+          "filename": "donaldjohanson-starfield-right@2x.webp",
+          "bytes": 312496,
+          "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85"
+        },
+        {
+          "filename": "donaldjohanson-starfield-top-standard.webp",
+          "bytes": 64674,
+          "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738"
+        },
+        {
+          "filename": "donaldjohanson-starfield-top-standard@2x.webp",
+          "bytes": 202204,
+          "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3"
+        },
+        {
+          "filename": "donaldjohanson-starfield-top.webp",
+          "bytes": 235140,
+          "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310"
+        },
+        {
+          "filename": "donaldjohanson-starfield-top@2x.webp",
+          "bytes": 682934,
+          "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4"
+        },
+        {
+          "filename": "donaldjohanson-system-point.webp",
+          "bytes": 96,
+          "sha256": "b54cb3204797eaea901e467475ff0ce5d38ca1586182cf5961c954d3eadb2453"
+        }
+      ]
+    },
+    "reports": [
+      {
+        "yaw": 0,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(1,0,0,0,0,0.990186019998,-0.139755664649,0,0,0.139755664649,0.990186019998,0,0,0,0,1)",
+            "skybox": "matrix3d(0.3292938,0.131961141842,0.934960870197,0,-0.8663117,0.43609645863,0.243564486574,0,-0.3755921,-0.890171884388,0.257923317636,0,0,0,0,1)",
+            "sunView": "matrix3d(-0.5,-0.707452802801,0.499510291996,0,0,0.576784803093,0.816896132272,0,-0.866025403784,0.408448066136,-0.288392401547,0,0,0,0,1)"
+          },
+          "pitch": 100,
+          "controlPitch": 100,
+          "controlYaw": 0,
+          "zoom": 1.7,
+          "distance": 839.0725059390505,
+          "distanceKilometers": 8.774965544990636,
+          "distanceRadii": 3.6481413301697843,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 710.9090903434192,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 355.4545451717096
+        }
+      },
+      {
+        "yaw": 90,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0,-0.139755664649,-0.990186019998,0,0,0.990186019998,-0.139755664649,0,1,0,0,0,0,0,0,1)",
+            "skybox": "matrix3d(0.9442275,-0.046020673884,-0.326062117232,0,0.3021211,0.514945290922,0.802218131308,0,0.1309855,-0.855986726427,0.500129353355,0,0,0,0,1)",
+            "sunView": "matrix3d(-0.866025403784,0.408448066136,-0.288392401547,0,0,0.576784803093,0.816896132272,0,0.5,0.707452802801,-0.499510291996,0,0,0,0,1)"
+          },
+          "pitch": 100,
+          "controlPitch": 100,
+          "controlYaw": 90,
+          "zoom": 1.7,
+          "distance": 839.0725059390505,
+          "distanceKilometers": 8.774965544990636,
+          "distanceRadii": 3.6481413301697843,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 710.909090666622,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 355.454545333311
+        }
+      },
+      {
+        "yaw": 180,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-1,0,0,0,0,0.990186019998,-0.139755664649,0,0,-0.139755664649,-0.990186019998,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.3292938,-0.131961141842,-0.934960870197,0,0.8663117,0.35165018836,-0.354747692559,0,0.3755921,-0.926783815611,-0.001476704209,0,0,0,0,1)",
+            "sunView": "matrix3d(0.5,0.707452802801,-0.499510291996,0,0,0.576784803093,0.816896132272,0,0.866025403784,-0.408448066136,0.288392401547,0,0,0,0,1)"
+          },
+          "pitch": 100,
+          "controlPitch": 100,
+          "controlYaw": 180,
+          "zoom": 1.7,
+          "distance": 839.0725059390505,
+          "distanceKilometers": 8.774965544990636,
+          "distanceRadii": 3.6481413301697843,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 710.9090894221235,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 355.45454471106177
+        }
+      },
+      {
+        "yaw": 270,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0,0.139755664649,0.990186019998,0,0,0.990186019998,-0.139755664649,0,-1,0,0,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.9442275,0.046020673884,0.326062117232,0,-0.3021211,0.272801356069,-0.913401337293,0,-0.1309855,-0.960968973572,-0.243682739928,0,0,0,0,1)",
+            "sunView": "matrix3d(0.866025403784,-0.408448066136,0.288392401547,0,0,0.576784803093,0.816896132272,0,-0.5,-0.707452802801,0.499510291996,0,0,0,0,1)"
+          },
+          "pitch": 100,
+          "controlPitch": 100,
+          "controlYaw": 270,
+          "zoom": 1.7,
+          "distance": 839.0725059390505,
+          "distanceKilometers": 8.774965544990636,
+          "distanceRadii": 3.6481413301697843,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 710.9090935350573,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 355.45454676752865
+        }
+      }
+    ],
+    "errors": [],
+    "interaction": {
+      "heroCamera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-1,0,0,0,0,0.712631640221,-0.701538413315,0,0,-0.701538413315,-0.712631640221,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.3292938,-0.662411862158,-0.672886392066,0,0.8663117,0.071518990092,-0.494356970625,0,0.3755921,-0.74571806237,0.550304454815,0,0,0,0,1)",
+          "sunView": "matrix3d(0.5,0.865805185877,0.019528955652,0,0,-0.022550095605,0.999745714263,0,0.866025403784,-0.499872857132,-0.011275047803,0,0,0,0,1)"
+        },
+        "pitch": 150,
+        "controlPitch": 150,
+        "controlYaw": 180,
+        "zoom": 1.3,
+        "distance": 1079.9965255653078,
+        "distanceKilometers": 11.294533229805971,
+        "distanceRadii": 4.695637067675251,
+        "levelOfDetail": {
+          "stage": "geometry",
+          "silhouetteDiameter": 543.636364500326,
+          "billboardOpacity": 0,
+          "markerOpacity": 0,
+          "proxyOpacity": 0
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 0,
+        "silhouetteRadius": 271.818182250163
+      },
+      "defaultShadows": false,
+      "retainedAfterDragAndLighting": true,
+      "cameraAfterDrag": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.938930818182,0.017961524045,-0.343636875673,0,-0.03023994995,0.999080122915,-0.030404825669,0,0.342774654978,0.038939589763,0.938610272825,0,0,0,0,1)",
+          "skybox": "matrix3d(0.63284135259,0.04268245,0.773104138774,0,-0.721876057063,0.393615387223,0.569176270664,0,-0.280011878426,-0.918283714232,0.279907511927,0,0,0,0,1)",
+          "sunView": "matrix3d(-0.653822495727,-0.662210892341,0.366050376514,0,-0.270355700534,0.656301185518,0.704398004736,0,-0.706699327345,0.361587455469,-0.608136968764,0,0,0,0,1)"
+        },
+        "pitch": 94.07755713443328,
+        "controlPitch": 94.07755713443328,
+        "controlYaw": 20.13630574292686,
+        "zoom": 1.7,
+        "distance": 839.0725059390505,
+        "distanceKilometers": 8.774965544990636,
+        "distanceRadii": 3.6481413301697843,
+        "levelOfDetail": {
+          "stage": "geometry",
+          "silhouetteDiameter": 710.9090902262502,
+          "billboardOpacity": 0,
+          "markerOpacity": 0,
+          "proxyOpacity": 0
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 0,
+        "silhouetteRadius": 355.4545451131251
+      },
+      "dpr2Selection": {
+        "desired": {
+          "lensId": "llorri",
+          "shadows": false,
+          "orbit": true
+        },
+        "committed": {
+          "lensId": "llorri",
+          "shadows": false,
+          "orbit": true
+        },
+        "plan": {
+          "required": [
+            "surface:llorri",
+            "poles:llorri",
+            "lighting"
+          ],
+          "prewarm": [],
+          "materials": {},
+          "pressedLenses": [
+            "llorri"
+          ]
+        },
+        "pending": false,
+        "loadingMaterial": false,
+        "ready": true,
+        "error": null,
+        "viewRevision": 6
+      }
+    },
+    "selection": {
+      "desired": {
+        "lensId": "llorri",
+        "shadows": false,
+        "orbit": true
+      },
+      "committed": {
+        "lensId": "llorri",
+        "shadows": false,
+        "orbit": true
+      },
+      "plan": {
+        "required": [
+          "surface:llorri",
+          "poles:llorri",
+          "lighting"
+        ],
+        "prewarm": [],
+        "materials": {},
+        "pressedLenses": [
+          "llorri"
+        ]
+      },
+      "pending": false,
+      "loadingMaterial": false,
+      "ready": true,
+      "error": null,
+      "viewRevision": 27
+    }
+  },
+  "comparison": {
+    "pixelmatch": "7.2.0",
+    "threshold": 0.1,
+    "includeAA": false,
+    "width": 1440,
+    "height": 1000,
+    "changedPixels": 18199,
+    "comparedPixels": 1440000,
+    "inputSha256": [
+      "682f1d244a72d7f0ab5c0c68518156b15dcae9731a5d8113cad37b63c7b2eb97",
+      "eebd043133ce14ecb5d2176514667d4c717f651677c2dbc37d7c4b1f31788cb8"
+    ],
+    "diffSha256": "d8e22cadfb196b9086b98e6a8e78f36274442cb7c2bf90a7f1fd4b626bcc88e5",
+    "masks": "none",
+    "interpretation": "Difference count locates changes, not scientific accuracy or sharpness."
+  },
+  "stability": {
+    "pixelmatch": "7.2.0",
+    "threshold": 0.1,
+    "includeAA": false,
+    "width": 1440,
+    "height": 1000,
+    "changedPixels": 0,
+    "comparedPixels": 1440000,
+    "inputSha256": [
+      "eebd043133ce14ecb5d2176514667d4c717f651677c2dbc37d7c4b1f31788cb8",
+      "eebd043133ce14ecb5d2176514667d4c717f651677c2dbc37d7c4b1f31788cb8"
+    ],
+    "diffSha256": "a5e5b202233f86d000114033c9f49283b62dfd2dfd21622ef6bc6c3a1a769dad",
+    "masks": "none",
+    "interpretation": "Difference count locates changes, not scientific accuracy or sharpness."
+  },
+  "geometry": {
+    "camera": {
+      "unchanged": true,
+      "sha256": "bfdbc653cf6cd208e32e601d6117bdf11b0d82d95f13fe1b0cfd2cc27e3b6d5b"
+    },
+    "tree": {
+      "unchanged": true,
+      "sha256": "90710662c3eb3e5c7854418ba231a07aed1a2fce40c6eebddfd2531b56e961ab"
+    },
+    "surfaceHit": {
+      "unchanged": true,
+      "sha256": "13d2c5d3f97438c62c96300c3b94c0c25982f64353f883054363268672f293cd"
+    }
+  },
+  "sourceManifestSha256": "3e4d5e8e407d3d4d149e95f915eff92e7d5eefc9c203bc8033349984e0b5d4d1",
+  "recipeSha256": "4c54f277f5ab1f229e9db77b03ab8e93e29adf91e9fd5f18e45896559d4a8638",
+  "measurements": [
+    {
+      "name": "pipeline-before",
+      "frames": [
+        "llorri"
+      ],
+      "samplesPerTriangle": 64,
+      "triangles": 800,
+      "meshSha256": "b3547cd3cffec93bf3d426aaf209aedbe1411360860a1f2b94f3514bc3539211",
+      "areaCoverage": 0.2542229148178591,
+      "frameAreaFractions": {
+        "llorri": 0.2542229148178591
+      },
+      "counts": {
+        "geometry-mismatch": 14741,
+        "grazing": 9297,
+        "no-geometry": 416,
+        "accepted": 14201,
+        "photometry": 1402,
+        "outside-detector": 11063,
+        "quality": 76,
+        "source-distance": 4
+      },
+      "display": {
+        "range": "reference-pixels",
+        "percentiles": [
+          1,
+          99
+        ],
+        "low": 29369.138671875,
+        "high": 62502.3515625,
+        "units": "relative DN/s with original illumination; linear grayscale display",
+        "referenceFrame": "llorri"
+      },
+      "levelMatching": null
+    },
+    {
+      "name": "pipeline-current",
+      "frames": [
+        "llorri-close",
+        "llorri-approach"
+      ],
+      "samplesPerTriangle": 64,
+      "triangles": 800,
+      "meshSha256": "b3547cd3cffec93bf3d426aaf209aedbe1411360860a1f2b94f3514bc3539211",
+      "areaCoverage": 0.31061138616282064,
+      "frameAreaFractions": {
+        "llorri-approach": 0.05638847134496092,
+        "llorri-close": 0.2542229148178591
+      },
+      "counts": {
+        "no-qualified-observation": 33565,
+        "accepted": 17635
+      },
+      "display": {
+        "range": "reference-pixels",
+        "percentiles": [
+          1,
+          99
+        ],
+        "low": 29369.138671875,
+        "high": 62502.3515625,
+        "units": "relative DN/s with original illumination; linear grayscale display",
+        "referenceFrame": "llorri-close"
+      },
+      "levelMatching": {
+        "samplesPerTriangle": 24,
+        "minimumPairs": 128,
+        "maximumLogMad": 0.25,
+        "maximumGain": 1.5,
+        "maximumAngleDegrees": 60,
+        "gains": [
+          1,
+          0.6721398780000193
+        ],
+        "pairs": [
+          {
+            "a": 0,
+            "b": 1,
+            "samples": 4148,
+            "medianLogRatio": -0.39728880833382174,
+            "logMad": 0.03174040219906815,
+            "accepted": true,
+            "residualLogRatio": -5.551115123125783e-17
+          }
+        ],
+        "referenceIndex": 0,
+        "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo.",
+        "sampledPoints": 19200
+      }
+    }
+  ],
+  "newArchiveInputs": [
+    {
+      "id": "donaldjohanson",
+      "path": "observations/lor_0798443242_04596_00001_1x1_sci_03.fit",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.fit",
+      "bytes": 10526400,
+      "sha256": "d7b06c7b8cb27ecb630d0b36b4c566adaeb272bfaea4b80ea55079627cdf8284"
+    },
+    {
+      "id": "donaldjohanson",
+      "path": "reference/lor_0798443242_04596_00001_1x1_sci_03.xml",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.xml",
+      "bytes": 71269,
+      "sha256": "99df931af2c813f11e280ac73469521cbb01a80873d1be5f16672df163ac3c58"
+    }
+  ],
+  "newRemoteAssets": [
+    {
+      "id": "donaldjohanson",
+      "filename": "donaldjohanson-llorri-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/99155f82de1a009eea094cedba924b127a1a49dd962abc9f793433e126d29b50/donaldjohanson-llorri-shadow@2x.webp",
+      "bytes": 279152,
+      "sha256": "99155f82de1a009eea094cedba924b127a1a49dd962abc9f793433e126d29b50"
+    },
+    {
+      "id": "donaldjohanson",
+      "filename": "donaldjohanson-llorri-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/be9059df07c37f955eda071b92027bb69beefd44b88ccbd6f9b1abc544226792/donaldjohanson-llorri-surface@2x.webp",
+      "bytes": 686116,
+      "sha256": "be9059df07c37f955eda071b92027bb69beefd44b88ccbd6f9b1abc544226792"
+    },
+    {
+      "id": "donaldjohanson",
+      "filename": "donaldjohanson-llorri-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/658e0d5f48f4f33932012526c2f1687bd7f33f8302095ff79c519b289b5067de/donaldjohanson-llorri-thumbnail.webp",
+      "bytes": 1380,
+      "sha256": "658e0d5f48f4f33932012526c2f1687bd7f33f8302095ff79c519b289b5067de"
+    }
+  ],
+  "retainedAssetEvidence": "The 35 baseline assets were installed and hash-verified on this checkout before capture. Eight changed assets across the three bodies were subsequently downloaded and verified.",
+  "checks": {
+    "focusedSourceDecoderCameraMinimap": 13,
+    "bodySourceAndPackage": 7,
+    "sourceCatalogue": {
+      "passed": 9,
+      "skipped": 1,
+      "reason": "Unrelated un-restored asteroid-1998-ml14 Warner PDF."
+    },
+    "geometry": "Unchanged camera, tree and hit mesh.",
+    "scope": "Focused checks only; full repository suites not run."
+  }
+}

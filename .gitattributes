@@ -106,3 +106,6 @@ src/planets/comet-1p/evidence/encounters/*.log -whitespace
 # Preserve native New Horizons labels, including fixed-width CRLF records.
 src/planets/arrokoth/source/observations/*.lbl -text -whitespace
 src/planets/arrokoth/source/observations/*.lblx -text -whitespace
+
+# Preserve the original AMICA fixed-width, CRLF archive labels.
+src/planets/itokawa/source/observations/*.lbl -text -whitespace
