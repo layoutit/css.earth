@@ -6,7 +6,7 @@
 
 ## Evidence
 
-- **Excluded as a surface texture:** five original Galileo SSI observations from the E4 and C9 encounters, C0374674100, C0401718000, C0401749000, C0401764300, C0401776900. Their pinned OPUS records give 6.614–8.747 km/pixel and only 2.286–3.024 pixels across the modeled maximum diameter. Frame metadata is retained in [source/survey](source/survey); original frames are available from the records’ PDS file specifications.
+- Galileo SSI frames resolve Adrastea across only 2.286–3.024 pixels, so no surface texture is prepared; see the [investigation ledger](investigations.json).
 
 ## Known problems
 
@@ -27,13 +27,7 @@ The long axis points toward Jupiter and the short axis is the pole. Units, sampl
 
 ## Dataset survey
 
-- **Included:** PCK dimensions and IAU rotation, with JPL Horizons physical and fitted orbit data.
-
-- This resolves an outline, not terrain.
-
-- **Excluded as a geometry source:** the NASA/JPL [PIA01624 montage](https://science.nasa.gov/photojournal/shapes-of-the-small-inner-satellites-of-jupiter/) illustrates the inferred axes but is not a downloadable numeric shape mesh.
-
-- **Literature:** [Denk et al., Io and the Minor Jovian Moons – Prospects for JUICE (2026)](https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf), Table 3 and section 3, explicitly says only Adrastea’s axis dimensions could be derived. Figure 10 identifies the five Galileo observations. No resolved elevation or composition map is qualified, so no such lens is offered.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 All surface pixels are marked as missing observational coverage on the approximate ellipsoid. The original science inputs remain separate from the prepared display assets. The surface, poles, thumbnail, small minimap and context portrait use the same standard grid.
 
