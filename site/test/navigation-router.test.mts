@@ -1032,3 +1032,23 @@ test('cross-body dataset failure finishes on the destination default without cla
   assert.match(required(h.shells[0].datasetNotice), /default dataset/);
   assert.equal(h.writes.filter(write => write === 'push').length, 1); h.router.destroy();
 });
+
+test('input that interrupts the arrival flight after mount also ends the flight state', async () => {
+  let visible = true, mounted = false;
+  const arrival = deferred();
+  const h = harness({ prepare: async () => ({ afterMount: () => { mounted = true; return arrival.promise; } }), systemTarget: () => ({ id: 'system-camera' }),
+    persistentWorldContext: { async mount() {
+      return { selectObject() {}, publish() {}, destroy() {},
+        setNavigationInFlight(value) { visible = !value; } };
+    } } });
+  await h.router.settled;
+  const selection = h.router.navigate('venus', { sceneSelection: true });
+  for (let step = 0; step < 20 && !mounted; step++) await flush();
+  assert.equal(mounted, true, 'The destination mounted and its arrival flight began');
+  assert.equal(visible, false, 'The arrival flight holds the flight state');
+  arrival.reject(Object.assign(new Error('Input interrupted the flight'), { name: 'AbortError', preserveView: true }));
+  await selection;
+  await flush();
+  assert.equal(visible, true, 'Annotations, picking and the minimap resume once input takes the camera');
+  h.router.destroy();
+});
