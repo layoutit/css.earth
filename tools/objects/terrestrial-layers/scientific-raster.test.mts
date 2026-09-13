@@ -104,8 +104,7 @@ test('observed color retains dark valid pixels and rejects incomplete footprints
 });
 
 test('channel composition uses all three bands from one observation and source density precedence', () => {
-  const profile = { filters: ['red', 'green', 'blue'], gamma: 1, referenceRadiusMeters: 1, centerLongitude: 180,
-    colorDisplay:{kind:'band-composite',inputQuantity:'radiance-factor',bands:['red','green','blue'],displayRange:[0,1],outputEncoding:'srgb'} };
+  const profile = { filters: ['red', 'green', 'blue'], referenceRadiusMeters: 1, centerLongitude: 180, displayRange: [0, 1] };
   const band = (filter: string, value: number, resolution: number) => ({ filter, width: 2, height: 2, origin: [-resolution, resolution], resolution: [resolution, -resolution],
     data: new Float32Array(4).fill(value), noData: 0, specialValueMagnitude: 1e30 });
   const groups = new Map([

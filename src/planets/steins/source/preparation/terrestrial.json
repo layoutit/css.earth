@@ -83,29 +83,6 @@
         "consumer": "osiris-observation",
         "filter": "Empty_OI",
         "allowLossy": true,
-        "transfer": {
-          "maximumSourceDistanceMeters": 100,
-          "maximumSeparationMeters": 450,
-          "maximumEmissionDegrees": 70,
-          "visibilityToleranceMeters": 0.5
-        },
-        "photometry": {
-          "model": "retained-observation",
-          "referenceIncidenceDegrees": 0,
-          "referenceEmissionDegrees": 0,
-          "maximumIncidenceDegrees": 70,
-          "maximumEmissionDegrees": 70,
-          "maximumGain": 1
-        },
-        "displayPercentiles": [
-          1,
-          99
-        ],
-        "metadata": {
-          "label": "OSIRIS",
-          "coverage": "Two OI-filter photographs show Šteins as Rosetta approached. Original illumination is retained, with a bounded brightness match where the images overlap. The grid marks gaps; this is not an albedo map.",
-          "falseColor": false
-        },
         "frames": [
           {
             "id": "approach",
@@ -126,6 +103,31 @@
           "minimumPairs": 64,
           "maximumLogMad": 0.25,
           "maximumGain": 1.35
+        },
+        "transfer": {
+          "maximumSourceDistanceMeters": 100,
+          "maximumSeparationMeters": 450,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ]
+        },
+        "metadata": {
+          "label": "OSIRIS",
+          "coverage": "Two OI-filter photographs show Šteins as Rosetta approached. Original illumination is retained, with a bounded brightness match where the images overlap. The grid marks gaps; this is not an albedo map.",
+          "falseColor": false
         }
       }
     ]

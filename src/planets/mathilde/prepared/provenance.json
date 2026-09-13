@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "46d30256c1c5bfbf2826915a78849f1d05bf55fca5f5e2934b440ad45c17f08d"
+    "sha256": "4ae3b2c7edb785a4b83787299b069d9002b3c844b550f389a7539a3f9c4c3c77"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "566216c11fbd9bcbed39c33e709d91b8681dc5f7007fd7bd5e344afa055dad37",
+      "sha256": "95d57fa2fc62f3d5d2b01a60187b03f5690db61d386886a252348cf850545191",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -115,7 +115,6 @@
                 }
               ],
               "filter": "0",
-              "allowLossy": false,
               "refinement": {
                 "method": "mesh-limb",
                 "maximumCorrectionDegrees": 0.5,
@@ -145,10 +144,12 @@
                 "maximumEmissionDegrees": 75,
                 "maximumGain": 1
               },
-              "displayPercentiles": [
-                0,
-                99.5
-              ],
+              "display": {
+                "percentiles": [
+                  0,
+                  99.5
+                ]
+              },
               "metadata": {
                 "label": "NEAR close-ups",
                 "coverage": "Two calibrated broadband images from the 1997 flyby. Original shadows and detector artifacts remain. Grid marks unavailable image coverage; the visualization shape includes modeled crater floors and unseen areas."

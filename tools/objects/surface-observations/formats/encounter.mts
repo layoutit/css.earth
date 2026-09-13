@@ -1,7 +1,8 @@
 /** Encounter FITS photographs: calibrated flyby images whose cameras come from a registered control network. */
 import type { ObservationCamera, ObservationFrame, ObservationImage, SurfaceObservationFormat } from '../contract.mts';
 import type { SourceMesh } from '../../terrestrial-layers/contracts.mts';
-import { parseEncounterRecipe, parseSurfaceGeometry, parseEncounterSourceControl, decodeProfile } from '../../terrestrial-layers/source-records.mts';
+import { array, decodeProfile, number, optional, shape, text, publishedOr, parseLevelMatching, parseSurfaceGeometry, parseEncounterSourceControl, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
+import { requireArray, requireRecord } from '../../../source-values.mts';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
@@ -12,33 +13,25 @@ import { validPublishedPhotometryShape } from '../../terrestrial-layers/publishe
 import { castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
 import { observedPhotometry, publishedPhotometry } from '../photometry.mts';
-import { deriveLimits, MAXIMUM_SEPARATION_FOOTPRINTS } from '../limits.mts';
+import { deriveLimits } from '../limits.mts';
+import { LENS_KEYS, MOSAIC_KEYS, checkKeys, parseDisplay, validateEnvelope, validateTransfer } from '../recipe.mts';
 
-const safePath = (p: unknown) => typeof p === 'string' && p.length > 0 && !p.startsWith('/') && !p.split(/[\\/]/).includes('..');
-const positive = (n: number | undefined): n is number => n !== undefined && Number.isFinite(n) && n > 0;
+const CONTEXT = 'encounter photography recipe';
 const sha256 = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 
+export const parseEncounterLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text }),
+  frames: array(shape({ id: text, path: text, labelPath: text, controlPath: text })), transfer: surfaceTransfer,
+  photometry: publishedOr(shape({ model: text, maximumGain: number })), selection: optional(text), levelMatching: optional(parseLevelMatching), display: parseDisplay });
+
 export function validateEncounterRecipe(value: unknown, sourceGeometry: unknown) {
-  const recipe = decodeProfile(parseEncounterRecipe, value, 'Invalid source-bound encounter photography recipe.'), geometry = parseSurfaceGeometry(sourceGeometry);
-  const t = recipe.transfer, levels = recipe.levelMatching, paths = recipe.frames.flatMap(f => [f.path, f.labelPath, f.controlPath]);
-  if (recipe.format !== 'encounter-fits' || !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
-      !Array.isArray(recipe.frames) || recipe.frames.length < 1 || recipe.frames.length > 8 ||
-      recipe.frames.some(f => !f || !/^[a-z][a-z0-9-]*$/.test(f.id) || ![f.path, f.labelPath, f.controlPath].every(safePath)) ||
-      new Set(recipe.frames.map(f => f.id)).size !== recipe.frames.length || new Set(paths).size !== paths.length || !recipe.metadata?.label || !recipe.metadata?.coverage ||
-      geometry?.simplification?.method !== 'source-meshoptimizer' ||
-      !positive(t?.maximumSourceDistanceMeters) || t.maximumSourceDistanceMeters > geometry.simplification.maximumErrorMeters ||
-      !(t.maximumSeparationFootprints === undefined ? positive(t.maximumSeparationMeters)
-        : t.maximumSeparationMeters === undefined && positive(t.maximumSeparationFootprints) && t.maximumSeparationFootprints <= MAXIMUM_SEPARATION_FOOTPRINTS) ||
-      !positive(t?.visibilityToleranceMeters) || t.visibilityToleranceMeters > 1 ||
-      !positive(t?.maximumEmissionDegrees) || t.maximumEmissionDegrees >= 90 ||
-      !('referenceDegrees' in recipe.photometry ? validPublishedPhotometryShape(recipe.photometry, t.maximumEmissionDegrees) : recipe.photometry.model === 'observed' && recipe.photometry.maximumGain === 1) ||
-      !['lowest-emission', 'finest-resolution'].includes(recipe.selection) || !Array.isArray(recipe.displayPercentiles) || recipe.displayPercentiles.length !== 2 ||
-      !recipe.displayPercentiles.every(Number.isFinite) || recipe.displayPercentiles[0] < 0 || recipe.displayPercentiles[1] > 100 || recipe.displayPercentiles[0] >= recipe.displayPercentiles[1] ||
-      (recipe.frames.length > 1 && (!levels || !Number.isInteger(levels.minimumPairs) || levels.minimumPairs < 64 || !(levels.maximumLogMad > 0 && levels.maximumLogMad <= .3) ||
-        !(levels.maximumGain >= 1 && levels.maximumGain <= 3) ||
-        (levels.samplesPerTriangle !== undefined && (!Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > 64))))) {
-    throw new TypeError('Invalid source-bound encounter photography recipe.');
-  }
+  checkKeys(value, [...LENS_KEYS], [...MOSAIC_KEYS], CONTEXT);
+  for (const frame of requireArray(requireRecord(value).frames)) checkKeys(frame, ['id', 'path', 'labelPath', 'controlPath'], [], `${CONTEXT} frame`);
+  const recipe = decodeProfile(parseEncounterLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
+  validateEnvelope(recipe, recipe.frames.flatMap(f => [f.path, f.labelPath, f.controlPath]),
+    { selections: ['lowest-emission', 'finest-resolution'], displays: ['percentiles'], maximumFrames: 8, maximumLevelGain: 3, samplesPerTriangle: 'optional' }, CONTEXT);
+  validateTransfer(recipe.transfer, geometry, CONTEXT);
+  if (recipe.format !== 'encounter-fits' || !('referenceDegrees' in recipe.photometry ? validPublishedPhotometryShape(recipe.photometry, recipe.transfer.maximumEmissionDegrees)
+      : recipe.photometry.model === 'observed' && recipe.photometry.maximumGain === 1)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
 }
 
 interface EncounterReference { id: string; imageSha256: string; controlSha256: string; camera: Pick<ObservationCamera, 'project' | 'positionMeters'>; sample(point: readonly number[]): { reason?: string } }
@@ -59,9 +52,9 @@ export function validateEncounterImageReference(control: { registration: { metho
 
 export const encounterFormat: SurfaceObservationFormat = {
   validate: validateEncounterRecipe,
-  paths: value => parseEncounterRecipe(value).frames.flatMap(f => [f.path, f.labelPath, f.controlPath]),
+  paths: value => parseEncounterLens(value).frames.flatMap(f => [f.path, f.labelPath, f.controlPath]),
   async load(value, { sourceDirectory, source, radial, config }) {
-    const recipe = parseEncounterRecipe(value), shape = await source.validatePath(config.geometry.radialTerrain.path);
+    const recipe = parseEncounterLens(value), shape = await source.validatePath(config.geometry.radialTerrain.path);
     const photometry = 'referenceDegrees' in recipe.photometry ? await publishedPhotometry(sourceDirectory, source.manifest, recipe.photometry) : observedPhotometry(recipe.photometry);
     const frames: ObservationFrame[] = [], references = new Map<string, EncounterReference>();
     let units = '';
@@ -84,6 +77,6 @@ export const encounterFormat: SurfaceObservationFormat = {
     return { frames, exceeded, policy: { format: recipe.format, maximumSourceDistanceMeters: recipe.transfer.maximumSourceDistanceMeters, precheckDisplayPoint: false,
       selection: frames.length === 1 ? 'single' : recipe.selection === 'finest-resolution' ? 'finest-resolution' : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
-      display: { range: 'surface-samples', percentiles: recipe.displayPercentiles, units: photometry.units ?? units }, photometry: photometry.report, limits } };
+      display: { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: photometry.units ?? units }, photometry: photometry.report, limits } };
   },
 };

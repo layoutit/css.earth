@@ -226,7 +226,7 @@ export function parseTerrestrialProfile(input:unknown) {
   }
   for (const lens of value.raster.observedColors ?? []) {
     const p = lens.profile;
-    if (!p || !(p.referenceRadiusMeters > 0) || !(p.gamma > 0) || !isArray(p.filters) || p.filters.length !== 3 ||
+    if (!p || !(p.referenceRadiusMeters > 0) || !isArray(p.filters) || p.filters.length !== 3 ||
         new Set(p.filters).size !== 3 || !Number.isFinite(p.noData) || !(p.specialValueMagnitude > 0)) {
       throw new TypeError('Invalid observed-color preparation profile.');
     }

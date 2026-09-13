@@ -577,10 +577,6 @@
           "maximumGain": 1,
           "maximumIncidenceDegrees": 75,
           "maximumEmissionDegrees": 75,
-          "displayMaximum": 0.5,
-          "gamma": 1,
-          "minimumLevel": 1,
-          "maximumLevel": 1,
           "backgroundMaximum": 0.003
         },
         "metadata": {
@@ -597,19 +593,129 @@
           "latitudeDegrees": 11.099796511627906,
           "zoom": 1.1
         },
-        "colorDisplay": {
-          "kind": "band-composite",
-          "inputQuantity": "radiance-factor",
-          "bands": [
-            "IR3",
-            "IR1",
-            "UV3"
+        "displayRange": [
+          0,
+          0.5
+        ],
+        "registration": {
+          "references": [
+            {
+              "id": "n1506388174",
+              "path": "observations/N1506388174_2_CALIB.IMG",
+              "labelPath": "observations/N1506388174_2_CALIB.LBL",
+              "observerLatitude": 11.11,
+              "observerWestLongitude": 200.35,
+              "sunLatitude": 11.11,
+              "sunWestLongitude": 252.51,
+              "rangeKm": 35121.2,
+              "northAzimuthDegrees": 329.49,
+              "center": [
+                304.2,
+                704.6
+              ],
+              "pixelAngleMicroradians": 5.9896977199
+            },
+            {
+              "id": "n1506388518",
+              "path": "observations/N1506388518_2_CALIB.IMG",
+              "labelPath": "observations/N1506388518_2_CALIB.LBL",
+              "observerLatitude": 11.08,
+              "observerWestLongitude": 200.69,
+              "sunLatitude": 11.11,
+              "sunWestLongitude": 252.8,
+              "rangeKm": 33179.5,
+              "northAzimuthDegrees": 329.4881395636382,
+              "center": [
+                795.6432528242227,
+                693.0825442393206
+              ],
+              "pixelAngleMicroradians": 5.9896977199
+            },
+            {
+              "id": "n1506388840",
+              "path": "observations/N1506388840_2_CALIB.IMG",
+              "labelPath": "observations/N1506388840_2_CALIB.LBL",
+              "observerLatitude": 11.06,
+              "observerWestLongitude": 201.02,
+              "sunLatitude": 11.11,
+              "sunWestLongitude": 253.07,
+              "rangeKm": 31362.1,
+              "northAzimuthDegrees": 329.5148374472504,
+              "center": [
+                954.5496224776113,
+                354.7923754989466
+              ],
+              "pixelAngleMicroradians": 5.9896977199
+            },
+            {
+              "id": "n1506389178",
+              "path": "observations/N1506389178_2_CALIB.IMG",
+              "labelPath": "observations/N1506389178_2_CALIB.LBL",
+              "observerLatitude": 11.02,
+              "observerWestLongitude": 201.36,
+              "sunLatitude": 11.11,
+              "sunWestLongitude": 253.35,
+              "rangeKm": 29454.5,
+              "northAzimuthDegrees": 329.5557440988126,
+              "center": [
+                791.9102781333677,
+                -144.44871944628045
+              ],
+              "pixelAngleMicroradians": 5.9896977199
+            }
           ],
-          "displayRange": [
-            0,
-            0.5
-          ],
-          "outputEncoding": "srgb"
+          "checks": [
+            {
+              "reference": "n1506388174",
+              "targets": [
+                "n1506388518",
+                "n1506388324",
+                "n1506388291",
+                "n1506388236",
+                "n1506388668",
+                "n1506388635",
+                "n1506388580",
+                "n1506389683",
+                "n1506389650",
+                "n1506389595"
+              ]
+            },
+            {
+              "reference": "n1506388518",
+              "targets": [
+                "n1506388840",
+                "n1506388668",
+                "n1506388635",
+                "n1506388580",
+                "n1506388324",
+                "n1506388291",
+                "n1506388236",
+                "n1506388990",
+                "n1506388957",
+                "n1506388902"
+              ]
+            },
+            {
+              "reference": "n1506388840",
+              "targets": [
+                "n1506389178",
+                "n1506388990",
+                "n1506388957",
+                "n1506388902",
+                "n1506389328",
+                "n1506389295",
+                "n1506389240"
+              ]
+            },
+            {
+              "reference": "n1506389178",
+              "targets": [
+                "n1506389328",
+                "n1506389295",
+                "n1506389240"
+              ]
+            }
+          ]
         }
       }
     ]

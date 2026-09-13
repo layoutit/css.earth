@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "itokawa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8a99854f5003c32314875b2f3d2d9b2af2ff83f19afa31c9f7bc140efebd5968"
+    "sha256": "ea921421b2abdec999196c5cbb0e4acfc02b4d23b3a2a7a47af8dcc0c64981ab"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fb33cf8dfd2cd3868ddb88db921eed5f1ed117fa03ce93bfd3c4f143cddb8ead",
+      "sha256": "961f6522c767d52946ff5bf75a838859b43503620d30145453c9c502e10d5b01",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -86,32 +86,6 @@
               "format": "amica-gaskell",
               "consumer": "amica-observation",
               "filter": "V",
-              "allowLossy": true,
-              "flatPath": "observations/flat_v.fit",
-              "transfer": {
-                "maximumSourceDistanceMeters": 6,
-                "maximumSeparationMeters": 5,
-                "maximumEmissionDegrees": 70,
-                "visibilityToleranceMeters": 0.05,
-                "interpretation": "Full-source nearest point within the existing 6 m display simplification allowance; all interpolation contributors within 5 m of that same point; full-source camera visibility to 0.05 m. These are acceptance bounds, not source accuracy estimates."
-              },
-              "photometry": {
-                "model": "lommel-seeliger",
-                "referenceIncidenceDegrees": 0,
-                "referenceEmissionDegrees": 0,
-                "maximumIncidenceDegrees": 70,
-                "maximumEmissionDegrees": 70,
-                "maximumGain": 1.5
-              },
-              "displayPercentiles": [
-                1,
-                99
-              ],
-              "metadata": {
-                "label": "AMICA mosaic",
-                "coverage": "Eight Hayabusa AMICA v-band photographs from September and October 2005, including closer views from north and south of the equator. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows remain. The grid marks unsupported surface coverage.",
-                "falseColor": false
-              },
               "frames": [
                 {
                   "id": "amica-2481672682",
@@ -170,12 +144,39 @@
                   "startTime": "2005-10-19T14:53:17"
                 }
               ],
+              "flatPath": "observations/flat_v.fit",
               "selection": "lowest-emission",
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
                 "maximumLogMad": 0.25,
                 "maximumGain": 1.35
+              },
+              "transfer": {
+                "maximumSourceDistanceMeters": 6,
+                "maximumSeparationMeters": 5,
+                "maximumEmissionDegrees": 70,
+                "visibilityToleranceMeters": 0.05,
+                "interpretation": "Full-source nearest point within the existing 6 m display simplification allowance; all interpolation contributors within 5 m of that same point; full-source camera visibility to 0.05 m. These are acceptance bounds, not source accuracy estimates."
+              },
+              "photometry": {
+                "model": "lommel-seeliger",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1.5
+              },
+              "display": {
+                "percentiles": [
+                  1,
+                  99
+                ]
+              },
+              "metadata": {
+                "label": "AMICA mosaic",
+                "coverage": "Eight Hayabusa AMICA v-band photographs from September and October 2005, including closer views from north and south of the equator. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows remain. The grid marks unsupported surface coverage.",
+                "falseColor": false
               }
             }
           ]
@@ -511,40 +512,6 @@
         ],
         "path": "shape/ver128q.tab",
         "url": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "amica-v-flat",
-      "path": "observations/flat_v.fit",
-      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/preflight/flat_v.fit",
-      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
-      "license": "PDS scientific archive; retain dataset attribution and original notices.",
-      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-itokawa-amica-v-flat",
-            "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      },
-      "sha256": "b68d5b25053f7a6574d876619cb4f00dd5f609392a861d1c3998976f9f8980d6",
-      "bytes": 4199040,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "restore",
-          "refresh"
-        ],
-        "path": "observations/flat_v.fit",
-        "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/preflight/flat_v.fit"
       },
       "verificationOperations": []
     },
@@ -1390,6 +1357,40 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "amica-v-flat",
+      "path": "observations/flat_v.fit",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/preflight/flat_v.fit",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-v-flat",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      },
+      "sha256": "b68d5b25053f7a6574d876619cb4f00dd5f609392a861d1c3998976f9f8980d6",
+      "bytes": 4199040,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/flat_v.fit",
+        "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/preflight/flat_v.fit"
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -1575,7 +1576,6 @@
         "kind": "surfaceObservations"
       },
       "inputs": [
-        "amica-v-flat",
         "amica-2481672682-geometry",
         "amica-2481672682-label",
         "amica-2481672682-detector",
@@ -1600,6 +1600,7 @@
         "amica-2473604354-geometry",
         "amica-2473604354-label",
         "amica-2473604354-detector",
+        "amica-v-flat",
         "itokawa-shape"
       ],
       "outputs": [

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "88976d55e86a1edd1ae72836fa759fb7d7966018c3486955acf0d709841d47cf"
+    "sha256": "66606d7151977983b33bb89120cfe3446597cd76affc99c7ef00b67248669d46"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "269899c03e5c22546fc5940bf2ed5dbb201187997375b5e2563c185f51e0535e",
+      "sha256": "af0f35e8374b1cd95ad5536874fa290f94661e4a96df14b441ed93b153a73993",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -99,6 +99,13 @@
                   "controlPath": "photography/hri/hv10110413_5004008_001_d050.json"
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 32,
+                "minimumPairs": 64,
+                "maximumLogMad": 0.3,
+                "maximumGain": 1.5
+              },
               "transfer": {
                 "maximumSourceDistanceMeters": 20,
                 "maximumSeparationMeters": 50,
@@ -109,17 +116,12 @@
                 "model": "observed",
                 "maximumGain": 1
               },
-              "selection": "finest-resolution",
-              "levelMatching": {
-                "samplesPerTriangle": 32,
-                "minimumPairs": 64,
-                "maximumLogMad": 0.3,
-                "maximumGain": 1.5
+              "display": {
+                "percentiles": [
+                  1,
+                  99.5
+                ]
               },
-              "displayPercentiles": [
-                1,
-                99.5
-              ],
               "metadata": {
                 "label": "EPOXI photographs",
                 "coverage": "MRI and restored HRI photographs from the EPOXI flyby are combined on the nucleus. HRI supplies finer image sampling, with MRI extending the coverage. Original shadows remain; the gray grid marks gaps or poorly constrained shape."

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "61db37fbb387f4fd1caf116894f0ad83446a63a0a2f56c1bae34bf39638c74c1"
+    "sha256": "25f7523f997dc6d3d94d3dde8a2fd960e3c2222193d726a1f8fb296cf15f4967"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "13729ca09fc84ceb4d7ca76c1270ae38629aba1bd7e5af106150a66de56cc9d6",
+      "sha256": "b4201655d61d85f3715b83515edf469c17b1a550cc31040bdab40faddffa30a5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -80,6 +80,13 @@
                   "controlPath": "photography/navcam/n2079we02_rr.json"
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 32,
+                "minimumPairs": 64,
+                "maximumLogMad": 0.3,
+                "maximumGain": 3
+              },
               "transfer": {
                 "maximumSourceDistanceMeters": 55,
                 "maximumSeparationMeters": 150,
@@ -90,17 +97,12 @@
                 "model": "observed",
                 "maximumGain": 1
               },
-              "selection": "finest-resolution",
-              "levelMatching": {
-                "samplesPerTriangle": 32,
-                "minimumPairs": 64,
-                "maximumLogMad": 0.3,
-                "maximumGain": 3
+              "display": {
+                "percentiles": [
+                  1,
+                  99.5
+                ]
               },
-              "displayPercentiles": [
-                1,
-                99.5
-              ],
               "metadata": {
                 "label": "Stardust photographs",
                 "coverage": "Four Stardust photographs fitted to the measured part of the nucleus. Original shadows and some seams remain. The gray grid marks gaps; surface placement is approximate."
