@@ -14,6 +14,7 @@ import { encounterCamera } from './encounter-camera.mts';
 import { validateEncounterRegistration } from './encounter-registration.mts';
 import { sampleTrianglePoints, fitObservationLevels, selectObservation } from './observation-mosaic.mts';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
+import { resolvePublishedPhotometry, validPublishedPhotometryShape } from './published-photometry.mts';
 
 const dot = (a: Vector,b: Vector) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
 const sub = (a: Vector,b: Vector) => a.map((n,i)=>n-b[i]);
@@ -33,8 +34,7 @@ export function validateEncounterRecipe(value: unknown, sourceGeometry: unknown)
       !positive(t?.maximumSeparationMeters) || t.maximumSeparationMeters>400 ||
       !positive(t?.visibilityToleranceMeters) || t.visibilityToleranceMeters>1 ||
       !positive(t?.maximumEmissionDegrees) || t.maximumEmissionDegrees>80 ||
-      recipe.photometry?.model!=='observed' ||
-      recipe.photometry.maximumGain!==1 ||
+      !('referenceDegrees' in recipe.photometry ? validPublishedPhotometryShape(recipe.photometry,t.maximumEmissionDegrees) : recipe.photometry.model==='observed' && recipe.photometry.maximumGain===1) ||
       !['lowest-emission','finest-resolution'].includes(recipe.selection) || !Array.isArray(recipe.displayPercentiles) || recipe.displayPercentiles.length!==2 ||
       !recipe.displayPercentiles.every(Number.isFinite) || recipe.displayPercentiles[0]<0 || recipe.displayPercentiles[1]>100 || recipe.displayPercentiles[0]>=recipe.displayPercentiles[1]) {
     throw new TypeError('Invalid source-bound encounter photography recipe.');
@@ -71,7 +71,7 @@ function qualifiedFace(mesh: Pick<SourceMesh,'indices'|'faceProvenance'|'constra
 
 /** Reconstructed pixel backplanes use the original source mesh and camera,
  * never the simplified display mesh. They are preparation-only working data. */
-export function buildEncounterBackplane(frame: Pick<EncounterFrame,'width'|'height'|'reason'>,camera: Pick<Camera,'project'|'positionMeters'|'ray'>,mesh: Pick<SourceMesh,'positions'|'indices'|'faceProvenance'|'constraintFlags'> & {intersect: (...args:Parameters<SourceMesh['intersect']>)=>{faceId:number;radius:number}|null},recipe: {transfer:Pick<EncounterRecipe['transfer'],'maximumEmissionDegrees'>}) {
+export function buildEncounterBackplane(frame: Pick<EncounterFrame,'width'|'height'|'reason'>,camera: Pick<Camera,'project'|'positionMeters'|'ray'|'sunDirection'>,mesh: Pick<SourceMesh,'positions'|'indices'|'faceProvenance'|'constraintFlags'> & {intersect: (...args:Parameters<SourceMesh['intersect']>)=>{faceId:number;radius:number}|null},recipe: {transfer:Pick<EncounterRecipe['transfer'],'maximumEmissionDegrees'>},normalize?: (incidence:number,emission:number,phase:number)=>number|null) {
   const count=frame.width*frame.height;
   const plane={accepted:new Uint8Array(count),xyz:new Float64Array(count*3),gains:new Float32Array(count),emissions:new Float32Array(count),reasons:new Array<string>()};
   const tally:Record<string,number>={};const reject=(i:number,reason:string)=>{plane.reasons[i]=reason;tally[reason]=(tally[reason]??0)+1;};
@@ -92,7 +92,14 @@ export function buildEncounterBackplane(frame: Pick<EncounterFrame,'width'|'heig
     // A photograph can record shadowed or night-facing terrain. Sun incidence
     // cannot invalidate a detector pixel when no reflectance division is used.
     if(mu<emissionLimit){reject(i,'acquisition-angle');continue;}
-    const gain=1;
+    let gain=1;
+    if(normalize){
+      // A published model normalizes each pixel from its own incidence, emission and phase on the source mesh.
+      const mu0=dot(normal,camera.sunDirection),observedPhase=Math.acos(Math.max(-1,Math.min(1,-dot(direction,camera.sunDirection))));
+      const value=mu0>0?normalize(Math.acos(Math.min(1,mu0)),Math.acos(Math.min(1,mu)),observedPhase):null;
+      if(value===null){reject(i,'photometric-limits');continue;}
+      gain=value;
+    }
     plane.accepted[i]=1;plane.xyz.set(point,i*3);plane.gains[i]=gain;plane.emissions[i]=Math.acos(Math.min(1,mu))*180/Math.PI;accepted++;
   }
   return {...plane,report:{projectedBounds:bounds,acceptedPixels:accepted,rejectedPixels:tally}};
@@ -123,6 +130,7 @@ export async function loadEncounterSurface({sourceDirectory,source,recipe:value,
   if(entries.length!==paths.length || new Set(paths).size!==paths.length || !paths.every(p=>entries.some(e=>e.path===p))) throw new Error('Encounter surface must consume its exact pinned photographs, labels and controls.');
   if(recipe.frames.length>1 && (!recipe.levelMatching || !Number.isInteger(recipe.levelMatching.minimumPairs) || recipe.levelMatching.minimumPairs<64 || !(recipe.levelMatching.maximumLogMad>0 && recipe.levelMatching.maximumLogMad<=.3) || !(recipe.levelMatching.maximumGain>=1 && recipe.levelMatching.maximumGain<=3))) throw new Error('Invalid encounter level-matching budget.');
   const shape=await source.validatePath(config.geometry.radialTerrain.path);
+  const resolved='referenceDegrees' in recipe.photometry?await resolvePublishedPhotometry(sourceDirectory,source.manifest,recipe.photometry):null;
   const observations: BoundEncounter[]=[];const metersPerUnit=config.geometry.radiusKm*1000/config.geometry.radius;
   for(const f of recipe.frames) {
     const controlBytes=await readFile(resolve(sourceDirectory,f.controlPath)),imageBytes=await readFile(resolve(sourceDirectory,f.path));
@@ -130,7 +138,7 @@ export async function loadEncounterSurface({sourceDirectory,source,recipe:value,
     const frame=decodeEncounterFits(imageBytes,control.observation);
     const camera=encounterCamera(frame.header,control.camera);
     const registration=validateEncounterRegistration(camera,control.registration,shape.expectedSha256);
-    const plane=buildEncounterBackplane(frame,camera,radial.grid,recipe);
+    const plane=buildEncounterBackplane(frame,camera,radial.grid,recipe,resolved?.normalize);
     const sampleSource=(point: readonly number[])=>sampleEncounterFootprint(frame,camera,plane,point,recipe.transfer);
     validateEncounterImageReference(control,observations.find(o=>o.id===control.registration.reference?.id),radial.grid);
     observations.push({id:f.id,imageSha256:createHash('sha256').update(imageBytes).digest('hex'),controlSha256:createHash('sha256').update(controlBytes).digest('hex'),frame,camera,plane,sampleSource,control,registration});
@@ -170,8 +178,8 @@ export async function loadEncounterSurface({sourceDirectory,source,recipe:value,
   areaCoverage.acceptedFraction=areaCoverage.acceptedSquareMeters/areaCoverage.totalSquareMeters;
   const report={areaCoverage,camera:observations[0].camera.report,frames:observations.map((o,i)=>({id:recipe.frames[i].id,startTime:o.frame.startTime,filter:o.frame.filter,camera:o.camera.report,quality:o.frame.report,sourceCoverage:o.plane.report,registration:o.registration})),
     sourceIds:entries.map(e=>({id:e.id,sha256:e.expectedSha256})),selection:recipe.selection,levelMatching:levels,
-    photometry:{...recipe.photometry,limitations:'Original acquisition shading retained; bounded relative display levels only, not albedo.'},
-    display:{percentiles:recipe.displayPercentiles,low,high,units:observations[0].frame.units},
+    photometry:resolved?resolved.report:{...recipe.photometry,limitations:'Original acquisition shading retained; bounded relative display levels only, not albedo.'},
+    display:{percentiles:recipe.displayPercentiles,low,high,units:resolved?resolved.units:observations[0].frame.units},
     previewPolicy:'Unique radial intersections only; atlas samples the closest full-source surface point in 3D.'};
   const preview=(width:number,height:number)=>{
     const rgb=Buffer.alloc(width*height*3),missingPixels=new Uint8Array(width*height);

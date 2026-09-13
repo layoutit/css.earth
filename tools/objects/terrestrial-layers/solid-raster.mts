@@ -34,7 +34,7 @@ import { prepareByteObservation } from './observed-image.mts';
 import { preparePds4Observation } from './observed-pds4.mts';
 import { prepareFitsObservation } from './observed-fits.mts';
 import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mts';
-import { prepareShapeCameraMosaic, prepareShapeCameraColor } from './shape-camera-mosaic.mts';
+import { prepareShapeCameraMosaic, prepareShapeCameraColor, resolveCameraPhotometry } from './shape-camera-mosaic.mts';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mts';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mts';
 import { loadGeoObservationSurface } from './observed-geo-surface.mts';
@@ -195,7 +195,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     const { rgb, missing, grid } = recipe.format === 'controlled-shape-color'
       ? await prepareShapeCameraColor(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain)
       : recipe.format === 'controlled-shape-camera'
-      ? await prepareShapeCameraMosaic(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain)
+      ? await prepareShapeCameraMosaic(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain,
+        { photometry: await resolveCameraPhotometry(sourceDirectory, source.manifest, recipe) })
       : recipe.format === 'controlled-orthographic'
       ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, recipe, width, height)
       : await preparePdsByteMosaic(sourceDirectory, tiles, width, height);

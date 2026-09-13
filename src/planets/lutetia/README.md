@@ -22,7 +22,7 @@ Feature notes: 2 of the labelled names carry a caption note, the lead summary of
 
 The shape joins detailed northern OSIRIS reconstruction to coarser lightcurve/outline modeling; the published join discontinuity and local defects remain. Photographic coverage is partial and gaps remain a grid.
 
-`N20100710T154047674ID4DF22` explicitly records skipped in-field and out-of-field stray-light correction despite its STR-REFL collection name. The regional Minnaert approximation and 1.09501 relative display gain do not recover global albedo, cast shadows or phase/roughness effects.
+`N20100710T154047674ID4DF22` explicitly records skipped in-field and out-of-field stray-light correction despite its STR-REFL collection name. The regional Hapke model and 0.98497 relative display gain do not recover global albedo or cast shadows.
 
 The 15:43:54 candidate failed image/model registration; the 15:45:28 candidate failed the independent archived-intercept check. Neither is included. The two-image selection supersedes the earlier single-image account below.
 
@@ -80,7 +80,7 @@ The released ROS_V33 frame and OSIRIS V15 corrected focal length bind the camera
 
 These metadata checks do **not** prove photographic registration. The image is displaced from the nominal projected shape. Following the image/model correlation approach documented in the pinned OSIRIS boresight technical note, preparation estimates a two-parameter image translation using two disjoint relief windows and reserves two other windows as holdouts. Standard zero-mean normalized cross correlation uses a 2/30 px difference of Gaussian scales and a bounded ±128 px search. The accepted translation is −30.5 px in samples and +92 px in lines. Independent window residuals are at most 7.44 px, with correlation above 0.77; the source-scale acceptance limit is 12 px (about 1 km, comparable to the source facet scale). This is registration to this source model, not absolute ground truth. Both original and controlled pointing evidence remain in the camera record.
 
-The Minnaert approximation uses the Baetica study’s k = 0.5505 + 0.005 × phase in degrees, D = cos(i)^k cos(e)^(k−1), at reference D(0,0)=1. This regional fit is an approximation for the selected view, not a global albedo solution. Incidence and emission are limited to 70°, correction gain to 2.5. Phase/roughness correction and cast-shadow recovery are omitted. A common 1st–99th percentile stretch displays linear, disk-normalized relative I/F.
+Photometry uses the Hapke (1993) model that [Hasselmann et al. (2016)](https://doi.org/10.1016/j.icarus.2015.11.023) fitted to NAC F82+F22 images of the Baetica and Etruria regions. Their Table 5 gives single-scattering albedo 0.238, Henyey–Greenstein asymmetry −0.271, shadow-hiding amplitude 1.69 and width 0.047, and roughness 29.2°. The same study supplied the Minnaert law this view used before. [The model record](source/photometry/hasselmann-2016-hapke-1993.json) transcribes the values, and the manifest cites the paper. Each pixel is carried to 35° incidence, 0° emission and 35° phase. Incidence and emission are limited to 70°, phase to 25–45° inside the fitted 0.15–144.15°, and gain to 0.4–2.5; pixels outside these limits are withheld. This regional fit is not a global albedo solution, and cast shadows are not recovered. A common 1st–99th percentile stretch displays linear, normalized relative I/F.
 
 All interpolation contributors must have accepted quality, finite nonnegative sigma and source geometry within 600 m of the same original surface point. Closest source correspondence uses the existing 1,200 m display allowance; the full-source BVH checks camera visibility to 0.5 m. These are acceptance tolerances, not source accuracy claims. Unqualified coverage remains the ordinary grid. The 800 raster triangles, 128 px atlas cells and prepared lighting route are unchanged.
 
@@ -100,7 +100,7 @@ The selected [PDS Rosetta Lutetia shape release](https://pdssbn.astro.umd.edu/ho
 
 **Elevation** colors source radius minus a 49 km reference sphere, in kilometers, from −16 to +16 km. This includes the body's broad irregular shape; it is not height above a gravitational equipotential. The original mesh is sampled on a 721×361 angular grid for this display; that interpolation does not add source measurements. Cartographic relief uses this same scalar field, with a 49,000 m reference radius. Mesh geometry and the scalar map use the same published body frame.
 
-The existing phase-dependent Minnaert approximation, incidence/emission limits and source-mesh transfer limits remain. Qualified overlaps fit a 1.09501 relative display gain, within the 1.35 limit. Lowest emission selects the source. The prepared lossless observation-index raster records each contributing original image, including atlas bleed, outside runtime delivery.
+The published Hapke model replaced the Minnaert approximation; the incidence/emission and source-mesh transfer limits remain. Over the same 5,410 qualified overlap samples, the two photographs now need a 0.98497 relative display gain, where the Minnaert approximation needed 1.09501. The transfer still accepts all 1,735,478 samples. Lowest emission selects the source. The prepared lossless observation-index raster records each contributing original image, including atlas bleed, outside runtime delivery.
 
 The model combines stereophotoclinometry from 60 Rosetta OSIRIS images of illuminated, visible terrain with lightcurve inversion and adaptive-optics outlines for the remainder. Image coverage exceeded half the surface, predominantly northern terrain. The archive specifically documents a discontinuity at the join of the two reconstruction methods and local shape defects. These remain source limitations; no terrain is filled or cosmetically repaired by this package. The selected 25k mesh itself is closed, despite the archive's illustrative description of some defects as “holes.” The unvisited side is a coarser observationally constrained model, not an equally detailed Rosetta reconstruction.
 
@@ -108,6 +108,6 @@ The same-filter encounter inventory was surveyed. The 15:43:54 close-up failed t
 
 The collection is named STR-REFL, but this frame’s HISTORY says in-field and out-of-field stray-light corrections were **skipped**. No stray-light restoration is claimed. Original terrain shadows remain. Shape and Elevation remain selectable; Shadows defaults off.
 
-The phase-dependent Minnaert correction is a regional approximation, with a relative display gain between photographs. It does not recover global albedo, cast shadows or phase/roughness effects.
+The Hapke model is a regional fit applied to the whole view, with a small relative display gain between photographs. It does not recover global albedo or cast shadows, and baked Shadows lighting stays Lambert.
 
 </details>

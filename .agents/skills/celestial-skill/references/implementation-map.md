@@ -101,6 +101,12 @@ instead of editing a shared list or atlas position.
   the shared `tools/objects/terrestrial-layers/` path for native image geometry,
   photometric correction, compositing and gaps. Reuse the capability with the
   target body's inputs and conventions.
+- **Photometric normalization:** `tools/photometry/` evaluates published
+  photometric models, including Hapke with macroscopic roughness, for the
+  observation seam, encounter and shape-camera routes. Lutetia's
+  `source/photometry/` record and its manifest binding are the worked example;
+  `tools/photometry/isis.oracle.test.mts` holds the library to the values ISIS
+  prints.
 - **Elevation relief:** Ceres's `source/preparation/terrestrial.json` supplies
   its height datum, validity limits and cartographic lighting to
   `tools/objects/terrestrial-layers/scientific-raster.mts`. These values and gap
@@ -238,8 +244,9 @@ layouts. Comparing tests sit beside each reader, and `tools/oracle-fixtures.test
 refuses a fixture from an unpinned environment or unpinned inputs. A new reader
 or geometry route brings its oracle; regenerate a fixture only when its tool or
 inputs change, and say so in the PR. ALE and usgscsm (pixel models and
-distortion) need conda and arrive with the first Cassini ISS lens; ISIS
-`photomet` with the photometric step. See `tools/oracles/README.md`.
+distortion) need conda and arrive with the first Cassini ISS lens. ISIS's
+photometric models are checked against the truth files of their unit tests,
+which need no ISIS install. See `tools/oracles/README.md`.
 
 ## Commands and test routing
 
