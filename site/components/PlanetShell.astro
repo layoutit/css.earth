@@ -63,7 +63,7 @@ const sources = sceneSources(resources);
 // One footer entry per provider name, so a shared name is printed once.
 const sourceGroups = sceneSourceGroups(sources);
 const hasResources = sources.length > 0;
-const searchPlaceholder = `Search ${OBJECTS.length} celestial bodies...`;
+const searchPlaceholder = 'Search celestial objects...';
 // Each pill types the plural classification query the search already understands.
 const searchCategories = ([
   ['planet', 'public'], ['satellite', 'moon_stars'], ['comet', 'motion_blur'], ['asteroid', 'grain'],
@@ -250,7 +250,7 @@ const searchCategories = ([
       aria-label="Planets"
       hidden
     >
-      {!navigation && <><PlanetCard data-prepared-focus-card hidden>
+      {!navigation && <><PlanetCard class="planet-prepared-information-panel" data-prepared-focus-card hidden>
         <section class="planet-selected-panel">
           <div class="planet-title-row">
             <p class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-focus-name></p>
@@ -258,8 +258,18 @@ const searchCategories = ([
           </div>
           <p class="planet-introduction" data-focus-aliases hidden></p>
         </section>
-        <PreparedFocusLenses />
-        <PlanetAccordion title="Factsheet" open>
+        <div class="planet-card-tabs" role="tablist" aria-label="Object information">
+          {['dataset', 'factsheet'].map((id, index) => <button type="button" role="tab"
+            id={`prepared-focus-${id}-tab`} data-information-tab={id} data-information-group="prepared-focus"
+            aria-controls={`prepared-focus-${id}-content`} aria-selected={index === 0 ? 'true' : 'false'}
+            tabindex={index === 0 ? 0 : -1}>{id === 'dataset' ? 'Datasets' : 'Factsheet'}</button>)}
+        </div>
+        <div class="planet-card-tabpanel" id="prepared-focus-dataset-content" data-information-panel="dataset"
+          data-information-group="prepared-focus" role="tabpanel" aria-labelledby="prepared-focus-dataset-tab" tabindex="0">
+          <PreparedFocusLenses />
+        </div>
+        <div class="planet-card-tabpanel" id="prepared-focus-factsheet-content" data-information-panel="factsheet"
+          data-information-group="prepared-focus" role="tabpanel" aria-labelledby="prepared-focus-factsheet-tab" tabindex="0" hidden>
           <div class="planet-factsheet-body"><div class="planet-facts"><ul class="planet-primary-facts">
             {[['distance', 'Distance from Sun'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
               <li><span class="planet-fact-label">{label}</span><span class="planet-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
@@ -269,7 +279,7 @@ const searchCategories = ([
           <div class="planet-resources-links">
             {Array.from({ length: 3 }, () => <a class="planet-resource-row" data-focus-source target="_blank" rel="noreferrer" hidden></a>)}
           </div>
-        </PlanetAccordion>
+        </div>
       </PlanetCard>
       <PlanetCard class="planet-galactic-overview" data-galactic-overview hidden>
         <PlanetCardHeader heading={false} title={OVERVIEW_TITLES['milky-way']}

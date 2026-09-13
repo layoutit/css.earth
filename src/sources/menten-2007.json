@@ -1,0 +1,32 @@
+{
+  "id": "menten-2007",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Menten et al. (2007) · Orion distance",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/0709.0485",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/m42/README.md",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "08acb748175f09e3687645bfe73a7581812c8fb738b18976df2be9419b299e8d",
+      "locator": "/"
+    }
+  ],
+  "publisher": "Menten et al. (2007) · Orion distance",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Menten et al. (2007) · Orion distance",
+      "scope": "Published source",
+      "evidence": "src/objects/m42/README.md#/"
+    }
+  ]
+}

@@ -318,6 +318,90 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       }
+    },
+    {
+      "id": "donaldjohanson-lor_0798443242_04596_00001_1x1_sci_03-fit",
+      "path": "observations/lor_0798443242_04596_00001_1x1_sci_03.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.fit",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "llorri-observation"
+      ],
+      "expectedBytes": 10526400,
+      "expectedSha256": "d7b06c7b8cb27ecb630d0b36b4c566adaeb272bfaea4b80ea55079627cdf8284",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lucy-llorri-0798443242",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.xml"
+          }
+        ]
+      }
+    },
+    {
+      "id": "donaldjohanson-lor_0798443242_04596_00001_1x1_sci_03-xml",
+      "path": "reference/lor_0798443242_04596_00001_1x1_sci_03.xml",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.xml",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 71269,
+      "expectedSha256": "99df931af2c813f11e280ac73469521cbb01a80873d1be5f16672df163ac3c58",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lucy-llorri-0798443242",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.xml"
+          }
+        ]
+      }
+    },
+    {
+      "id": "donaldjohanson-llorri-overlap",
+      "path": "preparation/llorri-overlap.json",
+      "origin": "Source-bound overlap registration derived from pinned Lucy products.",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-llorri-overlap.mts --write.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 1138,
+      "expectedSha256": "d5a7330117679c90185ad02c2a286854d8d6f7a9803d5151db1e8d9598ff3b3b",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Reproducible camera translation from native image overlap with disjoint fit and holdout controls."
+      }
+    },
+    {
+      "id": "donaldjohanson-llorri-approach-camera",
+      "path": "observations/llorri-approach-camera.json",
+      "origin": "Source-bound overlap registration derived from pinned Lucy products.",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-llorri-overlap.mts --write.",
+      "consumers": [
+        "llorri-observation"
+      ],
+      "expectedBytes": 276961,
+      "expectedSha256": "b0b13261ce3adcd46636d9ece1bfcca4567423d90b08f3046358430773e47003",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Reproducible camera translation from native image overlap with disjoint fit and holdout controls."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -350,8 +434,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 13437,
-      "expectedSha256": "6b1e91afe3a792eda78ec69e4399a38b8a8cd57ff154d98fe0dc80ec9632c8e2",
+      "expectedBytes": 13495,
+      "expectedSha256": "3b70231bb876c41bbe5b6eec127c031a8a94055b30d31b99810a658d1a50fb79",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -359,8 +443,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2806,
-      "expectedSha256": "b8f29469878851ac94f32e23401b9866a529e491e7ee00120de4f951231f9581"
+      "expectedBytes": 3485,
+      "expectedSha256": "d1ebdb99c197fd1a007039f1913a778afe22cc58886b22711ae370821fedc475"
     },
     {
       "path": "preparation/navigation.json",
@@ -374,8 +458,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3724,
-      "expectedSha256": "9ee5b5c1ad7c413d0769da744725d1623a9cfc02b5c8c311ebbc766f20d4fe8f"
+      "expectedBytes": 4273,
+      "expectedSha256": "e09b9bd0cb4d23ffeafa89be1f626d8cb4ab8855a93454b4b445f72bf1768b6a"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-emission-inference@1",
+  "id": "helix-model-prior",
+  "source": {
+    "url": "https://esahubble.org/media/archives/images/original/opo0432b.tif",
+    "sha256": "3dfe0b4a06ff2d57c35324e76975565f253b78302eab7ec5ac4d2d2c47227165",
+    "width": 4731,
+    "height": 3129,
+    "publisher": "https://esahubble.org/images/opo0432b/",
+    "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute)."
+  },
+  "crop": {
+    "left": 0,
+    "top": 0,
+    "width": 4731,
+    "height": 3129
+  },
+  "pointMasks": [],
+  "nativeRemoval": {
+    "directory": ".local/nebula-lab/research/helix/nox",
+    "model": {
+      "path": ".local/open-star-removal/noxGeneratorColor.pb",
+      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
+    },
+    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+  },
+  "grid": {
+    "width": 144,
+    "height": 95,
+    "depth": 144
+  },
+  "prior": {
+    "axis": [
+      -0.37181755529189064,
+      0.120093798121565,
+      0.9205048534524404
+    ],
+    "center": [
+      74.5437539632213,
+      45.78555449025248,
+      71.5
+    ],
+    "binWidth": 1
+  },
+  "tau": 0.001,
+  "iterations": 100,
+  "blackLevel": 0.02,
+  "displayExposure": 1.5,
+  "slices": 48,
+  "registration": {
+    "sourceRaster": "x right, y down; zero-based pixel centers",
+    "centralStarPixel": [
+      2465,
+      1524
+    ],
+    "fieldOfViewArcminutes": [
+      20.96,
+      13.86
+    ],
+    "northRightOfVerticalDegrees": 0.1,
+    "workingVoxelsPerArcsecond": 0.11450381679389311,
+    "workingAspectRoundingPercent": 0.25164369388912533
+  },
+  "modelReference": {
+    "paper": "https://doi.org/10.1086/424621",
+    "pdfSha256": "6f3b712d794030b50812d1d530d03f04e6fabbdd15bd9cb847dc7cebc1e575f4",
+    "sections": [
+      "3.1",
+      "4.6"
+    ],
+    "inner": {
+      "diameterArcseconds": 499,
+      "inclinationToSightlineDegrees": 23,
+      "nearSidePositionAngleDegrees": 288
+    },
+    "outer": {
+      "diameterArcseconds": 742,
+      "inclinationToSightlineDegrees": 53,
+      "nearSidePositionAngleDegrees": 168
+    }
+  },
+  "assumptions": [
+    "Same full native HST/CTIO TIFF and pinned native NOX diffuse result for both Helix comparisons; no crop or additional point-source removal.",
+    "The source is an outreach display composite, not calibrated line flux. Small nebular knots can be affected by NOX; no observed stellar membership or depth is assigned.",
+    "Uses the 2004 inner-disk/outer-ring interpretation, not a uniquely established structure; 2005 and 2015 studies also propose barrel/lobe alternatives.",
+    "The source FOV and orientation come from the publisher; the original central star fixes the image/model center. Working raster dimensions round the aspect by approximately 0.26 percent.",
+    "Only relative display units are rendered. The angular registration does not establish a new physical distance or measured 3D gas density.",
+    "One baseline per method, then at most two adjustments. Inspect the front, oblique and both side views before accepting a direction.",
+    "Gaussian cross-sections, component weights and thicknesses (25-50 arcsecond sigmas) are authored visualization assumptions; only diameters, inclinations and near-side position angles are taken from the paper.",
+    "The image allocates RGB emission along each supported prior ray. Projection agreement on those rays is imposed by construction and cannot validate depth. Unsupported signal is measured and omitted, never extruded onto a plane.",
+    "The model represents the bright main structure only; it does not claim a reconstruction of the full outer halo or individual cometary-knot depths."
+  ],
+  "shapePrior": {
+    "sigmaCutoff": 3,
+    "components": [
+      {
+        "kind": "disk",
+        "axis": [
+          -0.37181755529189064,
+          0.120093798121565,
+          0.9205048534524404
+        ],
+        "radius": 28.56870229007633,
+        "radialSigma": 2.862595419847328,
+        "axialSigma": 5.725190839694656,
+        "weight": 0.2
+      },
+      {
+        "kind": "torus",
+        "axis": [
+          -0.37181755529189064,
+          0.120093798121565,
+          0.9205048534524404
+        ],
+        "radius": 28.56870229007633,
+        "radialSigma": 5.725190839694656,
+        "axialSigma": 5.15267175572519,
+        "weight": 1
+      },
+      {
+        "kind": "torus",
+        "axis": [
+          0.16740882790007416,
+          -0.7808924140044023,
+          0.6018150231520483
+        ],
+        "radius": 42.480916030534345,
+        "radialSigma": 5.15267175572519,
+        "axialSigma": 5.725190839694656,
+        "weight": 0.6
+      }
+    ]
+  }
+}

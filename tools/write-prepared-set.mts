@@ -1,18 +1,21 @@
-import { readFile, writeFile, rename, rm } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, rename, rm } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
+import { dirname } from 'node:path';
 import { hasErrorCode } from './source-values.mts';
 /** Validate callers' entire output set first, then stage it before replacing files. */
-export async function writePreparedSet(outputs: readonly { path: string; text: string }[]) {
+export async function writePreparedSet(outputs: readonly { path: string; text: string | Uint8Array }[]) {
   const transaction = randomUUID();
-  const staged: { path: string; temporary: string; previous: string | null }[] = [];
+  const staged: { path: string; temporary: string; previous: Buffer | null }[] = [];
   const published: typeof staged = [];
   try {
     for (const output of outputs) {
-      const previous = await readFile(output.path, 'utf8').catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-      if (previous === output.text) continue;
+      const previous = await readFile(output.path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+      const bytes = typeof output.text === 'string' ? Buffer.from(output.text) : output.text;
+      if (previous?.equals(bytes)) continue;
       const entry = { path: output.path, temporary: `${output.path}.${transaction}.tmp`, previous };
       staged.push(entry);
-      await writeFile(entry.temporary, output.text);
+      await mkdir(dirname(output.path), { recursive: true });
+      await writeFile(entry.temporary, bytes);
     }
     for (const entry of staged) { await rename(entry.temporary, entry.path); published.push(entry); }
   } catch (error) {

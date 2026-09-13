@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-emission-inference@1",
+  "id": "m2-9-inferred",
+  "source": {
+    "url": "https://apod.nasa.gov/apod/image/0402/m2-9_hst_big.jpg",
+    "sha256": "29b1575bff3bb8dbbe8cb9934ef214676c98d49fcf488df488576e3723049e71",
+    "width": 800,
+    "height": 525,
+    "publisher": "https://apod.nasa.gov/apod/ap040201.html",
+    "credit": "B. Balick (University of Washington), V. Icke (Leiden University), G. Mellema (Stockholm University), NASA / HST / WFPC2. 1997 false-color composite, distributed by NASA APOD."
+  },
+  "crop": { "left": 6, "top": 6, "width": 788, "height": 438 },
+  "pointMasks": [
+    { "x": 391, "y": 235, "radius": 19 },
+    { "x": 307, "y": 151, "radius": 12 },
+    { "x": 180, "y": 44, "radius": 6 },
+    { "x": 653, "y": 317, "radius": 5 }
+  ],
+  "grid": { "width": 144, "height": 80, "depth": 80 },
+  "prior": { "axis": [0.906307787, -0.422618262, 0], "center": [69.8553, 41.3265, 39.5], "binWidth": 1 },
+  "tau": 0.001,
+  "iterations": 100,
+  "blackLevel": 0.035,
+  "displayExposure": 1.5,
+  "slices": 48,
+  "assumptions": [
+    "Approximate axial symmetry; axis at -25 degrees in the source raster and zero inclination to its plane. This is a modeling prior, not a measured orientation.",
+    "Crop removes only the publisher frame and caption. Original 800x525 bytes remain intact in the cache.",
+    "Four manually inspected point masks use local annular median attenuation, including the central star; bright nebular knots remain. This baseline does not claim complete NOX extraction.",
+    "RGB is display-stretched false color, not calibrated line intensity. Channels are solved independently on a 144x80 working image; tau refers to [0,1] values.",
+    "Single-image depth is underdetermined. No measured gas density, physical extent, distance, inclination or stellar catalogue is inferred.",
+    "The existing PolyCSS shared-opacity slab renderer approximates the paper's additive emission; brightness can depend on direction and must be inspected separately."
+  ]
+}

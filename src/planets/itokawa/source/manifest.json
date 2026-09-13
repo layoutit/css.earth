@@ -461,6 +461,391 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "amica-2480981469-geometry",
+      "path": "observations/st_2480981469_v_ddr.img.gz",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.img.gz",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 28891943,
+      "expectedSha256": "6258068a9de0722b72255e9e727c25f770a8e90748de6bda6bb25f3ad0a956d0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2480981469-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.img.gz"
+          }
+        ]
+      },
+      "observationDate": "2005-10-22T07:00:19",
+      "productId": "20051022_ST_2480981469_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2480981469-label",
+      "path": "observations/st_2480981469_v_ddr.lbl",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.lbl",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 6640,
+      "expectedSha256": "953e823514e2fa1ade56cc353fac7265ec3fd5080049763db3bd2df93b3db9d4",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2480981469-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.lbl"
+          }
+        ]
+      },
+      "observationDate": "2005-10-22T07:00:19",
+      "productId": "20051022_ST_2480981469_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2480981469-detector",
+      "path": "observations/st_2480981469_v.fit",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051022/st_2480981469_v.fit",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 1056960,
+      "expectedSha256": "52117052336333442c52754a242cadc45939b98288cf3b63f698d8fc31b6e938",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2480981469-detector",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051022/st_2480981469_v.fit"
+          }
+        ]
+      },
+      "observationDate": "2005-10-22T07:00:19"
+    },
+    {
+      "id": "amica-2481672682-geometry",
+      "path": "observations/st_2481672682_v_ddr.img.gz",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2481672682_v_ddr.img.gz",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 25666359,
+      "expectedSha256": "7b59b7616c5bb5973e4f7137d1b9325c421708ab7315e15f2a738fcbe6a0a928",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2481672682-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2481672682_v_ddr.img.gz"
+          }
+        ]
+      },
+      "observationDate": "2005-10-22T13:00:19",
+      "productId": "20051022_ST_2481672682_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2481672682-label",
+      "path": "observations/st_2481672682_v_ddr.lbl",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2481672682_v_ddr.lbl",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 6640,
+      "expectedSha256": "c6a4671ee695d5a451c51c7a728cae8728c7f1acc767f3bdddfa6b5efaec6b09",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2481672682-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2481672682_v_ddr.lbl"
+          }
+        ]
+      },
+      "observationDate": "2005-10-22T13:00:19",
+      "productId": "20051022_ST_2481672682_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2481672682-detector",
+      "path": "observations/st_2481672682_v.fit",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051022/st_2481672682_v.fit",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 1056960,
+      "expectedSha256": "d1ff54eb9a55159f1dc655d4a7e4f68af83dff777ad503c8e1045dcd2a9905a8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2481672682-detector",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051022/st_2481672682_v.fit"
+          }
+        ]
+      },
+      "observationDate": "2005-10-22T13:00:19"
+    },
+    {
+      "id": "amica-2492513077-geometry",
+      "path": "observations/st_2492513077_v_ddr.img.gz",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2492513077_v_ddr.img.gz",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 17052744,
+      "expectedSha256": "d3684ac52b7acf53502a0bb2c09e77450824825bc0c48f4fd4fff58035f51132",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2492513077-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2492513077_v_ddr.img.gz"
+          }
+        ]
+      },
+      "observationDate": "2005-10-26T11:01:16",
+      "productId": "20051026_ST_2492513077_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2492513077-label",
+      "path": "observations/st_2492513077_v_ddr.lbl",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2492513077_v_ddr.lbl",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 6640,
+      "expectedSha256": "8cd89d023e484cbada0ece6173e256efe5235ea634e0fc7445c8ca6a9b2dfdb0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2492513077-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2492513077_v_ddr.lbl"
+          }
+        ]
+      },
+      "observationDate": "2005-10-26T11:01:16",
+      "productId": "20051026_ST_2492513077_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2492513077-detector",
+      "path": "observations/st_2492513077_v.fit",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051026/st_2492513077_v.fit",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 1056960,
+      "expectedSha256": "dd3cf6042057d50e87b50d09c58563e252cafce34dcebc2130ecdd3f30e837b9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2492513077-detector",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051026/st_2492513077_v.fit"
+          }
+        ]
+      },
+      "observationDate": "2005-10-26T11:01:16"
+    },
+    {
+      "id": "amica-2495230070-geometry",
+      "path": "observations/st_2495230070_v_ddr.img.gz",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2495230070_v_ddr.img.gz",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 31131915,
+      "expectedSha256": "bbf8c65b2bc7094208a11f65542098e20046dbc9bebda5b5a74cdd6aaf3740b6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2495230070-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2495230070_v_ddr.img.gz"
+          }
+        ]
+      },
+      "observationDate": "2005-10-27T10:36:18",
+      "productId": "20051027_ST_2495230070_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2495230070-label",
+      "path": "observations/st_2495230070_v_ddr.lbl",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2495230070_v_ddr.lbl",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 6640,
+      "expectedSha256": "a9f15d06923aee52bcd48c3deaa8e48413c17906515068f85f3080e92c6fbd8c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2495230070-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2495230070_v_ddr.lbl"
+          }
+        ]
+      },
+      "observationDate": "2005-10-27T10:36:18",
+      "productId": "20051027_ST_2495230070_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2495230070-detector",
+      "path": "observations/st_2495230070_v.fit",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051027/st_2495230070_v.fit",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 1056960,
+      "expectedSha256": "7fcfe4069083c86611724dc92b8f14776b617db0032b4e1c88057321474daeb6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2495230070-detector",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051027/st_2495230070_v.fit"
+          }
+        ]
+      },
+      "observationDate": "2005-10-27T10:36:18"
+    },
+    {
+      "id": "amica-2473604354-label",
+      "path": "observations/st_2473604354_v_ddr.lbl",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2473604354_v_ddr.lbl",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 6640,
+      "expectedSha256": "b9a2926adf3fc22b5ccc88a9b4e9c2b743512f742e65a93bd3190a422b6a0db8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2473604354-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2473604354_v_ddr.lbl"
+          }
+        ]
+      },
+      "observationDate": "2005-10-19T14:53:17",
+      "productId": "20051019_ST_2473604354_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2473604354-geometry",
+      "path": "observations/st_2473604354_v_ddr.img.gz",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2473604354_v_ddr.img.gz",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 19500685,
+      "expectedSha256": "8388ce181b20156c072230ca9cdb34618e577c6894ee05d083055e7cca196a5c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2473604354-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2473604354_v_ddr.img.gz"
+          }
+        ]
+      },
+      "observationDate": "2005-10-19T14:53:17",
+      "productId": "20051019_ST_2473604354_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2473604354-detector",
+      "path": "observations/st_2473604354_v.fit",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051019/st_2473604354_v.fit",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 1056960,
+      "expectedSha256": "81dd34cc05b6d547c876cfbf1c69161c5d88e97bdc4dbcffae5d30578d892daa",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2473604354-detector",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051019/st_2473604354_v.fit"
+          }
+        ]
+      },
+      "observationDate": "2005-10-19T14:53:17"
     }
   ],
   "generatedIntermediates": [
@@ -493,8 +878,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9583,
-      "expectedSha256": "2e8fb3414b446234b87f4255bff80b19bdd473806e1037d35e9dc547b1ad2275",
+      "expectedBytes": 9480,
+      "expectedSha256": "3518b728b4dce39ae8ac1f5ae4d5fe090b742042ce9cfb4becaba5f669d9aa10",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -502,8 +887,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 4239,
-      "expectedSha256": "ab1dd51a85ec073e520c4964d4930089bd52ebca02b54182e7d43d76a2608c6c"
+      "expectedBytes": 8454,
+      "expectedSha256": "ba93b10dc3f3eb6470a9cc7d0561cfbcaddc15a8f82bbbcf17e2e8e7f70ac44b"
     },
     {
       "path": "preparation/navigation.json",
@@ -517,8 +902,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5604,
-      "expectedSha256": "1c71748dd97e03741e8f075e4089bc1a6f1524d24a2c3ccd90c08fd74672b13d"
+      "expectedBytes": 6999,
+      "expectedSha256": "961f6522c767d52946ff5bf75a838859b43503620d30145453c9c502e10d5b01"
     },
     {
       "path": "presentation/title-mark.json",

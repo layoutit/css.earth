@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-nebula-compiler@1",
+  "id": "m78",
+  "label": "Messier 78",
+  "observationRecipe": "labs/nebula/models/m78/observations.json",
+  "observationCatalogue": ".local/nebula-lab/observations/m78/observations.json",
+  "structureRecipe": "labs/nebula/models/m78/observation-structures.json",
+  "structureCatalogue": ".local/nebula-lab/observations/m78/structures/catalogue.json",
+  "defaultSourceId": "eso-optical",
+  "maximumStars": 650,
+  "interpretation": "Experimental relative display-emission fit to registered optical and near-infrared outreach composites. This is not calibrated luminosity, gas density, or a measured 3D reconstruction. Depth has a declared unconstrained diffuse prior; no planetary expansion or Helix velocity scaffold is transferred. Shared geometry is painted by separate source lenses. Compact lights retain observed image positions but have illustrative sampled depths and unconfirmed membership. Reflection and extinction are not yet physically modeled; the fitted positive-emission field cannot recover dark dust from its silhouette."
+}
