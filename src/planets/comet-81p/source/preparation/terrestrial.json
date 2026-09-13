@@ -62,6 +62,13 @@
             "controlPath": "photography/navcam/n2079we02_rr.json"
           }
         ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 32,
+          "minimumPairs": 64,
+          "maximumLogMad": 0.3,
+          "maximumGain": 3
+        },
         "transfer": {
           "maximumSourceDistanceMeters": 55,
           "maximumSeparationMeters": 150,
@@ -72,17 +79,12 @@
           "model": "observed",
           "maximumGain": 1
         },
-        "selection": "finest-resolution",
-        "levelMatching": {
-          "samplesPerTriangle": 32,
-          "minimumPairs": 64,
-          "maximumLogMad": 0.3,
-          "maximumGain": 3
+        "display": {
+          "percentiles": [
+            1,
+            99.5
+          ]
         },
-        "displayPercentiles": [
-          1,
-          99.5
-        ],
         "metadata": {
           "label": "Stardust photographs",
           "coverage": "Four Stardust photographs fitted to the measured part of the nucleus. Original shadows and some seams remain. The gray grid marks gaps; surface placement is approximate."

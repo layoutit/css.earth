@@ -153,11 +153,16 @@
         "id": "micas",
         "format": "isis2-orthographic",
         "consumer": "micas",
-        "path": "micas/ccd_near_1_ortho.cub",
-        "coordinatePaths": [
-          "micas/dem_x_component.cub",
-          "micas/dem_y_component.cub",
-          "micas/dem_z_component.cub"
+        "frames": [
+          {
+            "id": "micas",
+            "path": "micas/ccd_near_1_ortho.cub",
+            "coordinatePaths": [
+              "micas/dem_x_component.cub",
+              "micas/dem_y_component.cub",
+              "micas/dem_z_component.cub"
+            ]
+          }
         ],
         "grid": {
           "width": 356,
@@ -170,11 +175,15 @@
           ]
         },
         "maximumCoordinateErrorMeters": 1e-06,
-        "maximumSourceDistanceMeters": 85,
-        "displayRange": [
-          0,
-          0.018
-        ],
+        "transfer": {
+          "maximumSourceDistanceMeters": 85
+        },
+        "display": {
+          "displayRange": [
+            0,
+            0.018
+          ]
+        },
         "metadata": {
           "label": "MICAS",
           "coverage": "Mission orthophoto registered to USGS terrain, retaining its original lighting. The grid marks missing imagery and an estimated completion of the unmeasured side."

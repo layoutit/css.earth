@@ -68,32 +68,6 @@
         "format": "amica-gaskell",
         "consumer": "amica-observation",
         "filter": "V",
-        "allowLossy": true,
-        "flatPath": "observations/flat_v.fit",
-        "transfer": {
-          "maximumSourceDistanceMeters": 6,
-          "maximumSeparationMeters": 5,
-          "maximumEmissionDegrees": 70,
-          "visibilityToleranceMeters": 0.05,
-          "interpretation": "Full-source nearest point within the existing 6 m display simplification allowance; all interpolation contributors within 5 m of that same point; full-source camera visibility to 0.05 m. These are acceptance bounds, not source accuracy estimates."
-        },
-        "photometry": {
-          "model": "lommel-seeliger",
-          "referenceIncidenceDegrees": 0,
-          "referenceEmissionDegrees": 0,
-          "maximumIncidenceDegrees": 70,
-          "maximumEmissionDegrees": 70,
-          "maximumGain": 1.5
-        },
-        "displayPercentiles": [
-          1,
-          99
-        ],
-        "metadata": {
-          "label": "AMICA mosaic",
-          "coverage": "Eight Hayabusa AMICA v-band photographs from September and October 2005, including closer views from north and south of the equator. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows remain. The grid marks unsupported surface coverage.",
-          "falseColor": false
-        },
         "frames": [
           {
             "id": "amica-2481672682",
@@ -152,12 +126,39 @@
             "startTime": "2005-10-19T14:53:17"
           }
         ],
+        "flatPath": "observations/flat_v.fit",
         "selection": "lowest-emission",
         "levelMatching": {
           "samplesPerTriangle": 24,
           "minimumPairs": 128,
           "maximumLogMad": 0.25,
           "maximumGain": 1.35
+        },
+        "transfer": {
+          "maximumSourceDistanceMeters": 6,
+          "maximumSeparationMeters": 5,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.05,
+          "interpretation": "Full-source nearest point within the existing 6 m display simplification allowance; all interpolation contributors within 5 m of that same point; full-source camera visibility to 0.05 m. These are acceptance bounds, not source accuracy estimates."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1.5
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ]
+        },
+        "metadata": {
+          "label": "AMICA mosaic",
+          "coverage": "Eight Hayabusa AMICA v-band photographs from September and October 2005, including closer views from north and south of the equator. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows remain. The grid marks unsupported surface coverage.",
+          "falseColor": false
         }
       }
     ]
