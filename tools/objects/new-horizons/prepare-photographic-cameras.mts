@@ -3,7 +3,7 @@
  * and fixed released STL.  This is deliberately not a pose or shape solver.
  *
  * Usage: node --experimental-strip-types tools/objects/new-horizons/prepare-photographic-cameras.mts \
- *   src/planets/nix/source/preparation/photography.json
+ *   src/objects/nix/source/preparation/photography.json
  */
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
