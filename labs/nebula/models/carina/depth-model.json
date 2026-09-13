@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-nebula-depth-model@1",
+  "id": "carina",
+  "centerIcrsDegrees": [
+    161.3994714009992,
+    -59.70454067972527
+  ],
+  "evidence": {
+    "path": "labs/nebula/models/carina/physical-evidence.json",
+    "sha256": "e23d4052da49aa753bd6bd5cbce039a59a83f274c4a1c73d39013905dd2f9be2"
+  },
+  "background": {
+    "id": "unconstrained-wide-front",
+    "methodId": "coherent-irregular-front",
+    "evidenceIds": [
+      "observer-frame",
+      "single-front-hypothesis",
+      "wide-front-parameters"
+    ],
+    "support": "unconstrained",
+    "centerArcsec": [
+      0,
+      0
+    ],
+    "radiusArcsec": [
+      3360,
+      3360
+    ],
+    "angleDegrees": 0,
+    "depthArcsec": 0,
+    "gradient": [
+      0.035,
+      -0.04
+    ],
+    "curvaturePerArcsec": [
+      3.5e-05,
+      1.5e-05,
+      -2.2e-05
+    ],
+    "thicknessArcsec": 90,
+    "strength": 1,
+    "rationale": "All settings are authored: zero fixes an arbitrary depth origin; the shallow mixed-curvature warp avoids a constant-depth extrusion without assigning image luminance to depth. Radius records the 112 arcminute frame half width; background is not a measured front or a finite cloud mask."
+  },
+  "features": [
+    {
+      "id": "trumpler-14-local-front",
+      "methodId": "coherent-irregular-front",
+      "evidenceIds": [
+        "trumpler-14-anchor",
+        "local-distorted-regions",
+        "localized-trial-parameters",
+        "single-front-hypothesis"
+      ],
+      "support": "paper-guided",
+      "centerArcsec": [
+        751.188701,
+        545.346447
+      ],
+      "radiusArcsec": [
+        300,
+        300
+      ],
+      "angleDegrees": 0,
+      "depthArcsec": -100,
+      "gradient": [
+        0,
+        0
+      ],
+      "curvaturePerArcsec": [
+        0.0002,
+        0,
+        0.00015
+      ],
+      "thicknessArcsec": 45,
+      "strength": 0.65,
+      "rationale": "Published topology motivates a localized deformation near this observed sky anchor. The 300 arcsecond circular window, negative z offset, curvature, thickness and 65 percent blend are authored. This changes one front only; it neither reconstructs a separate shell nor models absorption or a true empty cavity. Lens material never chooses the depth."
+    },
+    {
+      "id": "eta-car-local-front",
+      "methodId": "coherent-irregular-front",
+      "evidenceIds": [
+        "eta-car-anchor",
+        "local-distorted-regions",
+        "localized-trial-parameters",
+        "single-front-hypothesis"
+      ],
+      "support": "paper-guided",
+      "centerArcsec": [
+        244.617271,
+        72.395207
+      ],
+      "radiusArcsec": [
+        300,
+        300
+      ],
+      "angleDegrees": 0,
+      "depthArcsec": -160,
+      "gradient": [
+        0,
+        0
+      ],
+      "curvaturePerArcsec": [
+        0.0002,
+        0,
+        0.00015
+      ],
+      "thicknessArcsec": 45,
+      "strength": 0.65,
+      "rationale": "Published topology motivates a localized deformation near this observed sky anchor. The 300 arcsecond circular window, negative z offset, curvature, thickness and 65 percent blend are authored. This changes one front only; it neither reconstructs a separate shell nor models absorption or a true empty cavity. Lens material never chooses the depth."
+    },
+    {
+      "id": "wr25-local-front",
+      "methodId": "coherent-irregular-front",
+      "evidenceIds": [
+        "wr25-anchor",
+        "local-distorted-regions",
+        "localized-trial-parameters",
+        "single-front-hypothesis"
+      ],
+      "support": "paper-guided",
+      "centerArcsec": [
+        646.848681,
+        -54.760054
+      ],
+      "radiusArcsec": [
+        300,
+        300
+      ],
+      "angleDegrees": 0,
+      "depthArcsec": -65,
+      "gradient": [
+        0,
+        0
+      ],
+      "curvaturePerArcsec": [
+        0.0002,
+        0,
+        0.00015
+      ],
+      "thicknessArcsec": 45,
+      "strength": 0.65,
+      "rationale": "Published topology motivates a localized deformation near this observed sky anchor. The 300 arcsecond circular window, negative z offset, curvature, thickness and 65 percent blend are authored. This changes one front only; it neither reconstructs a separate shell nor models absorption or a true empty cavity. Lens material never chooses the depth."
+    }
+  ],
+  "detailThicknessRatio": 0.45,
+  "minimumThicknessArcsec": 1.5,
+  "interpretation": "Authored coherent height-surface experiment with three topology-inspired local deformations. Sky anchors are observed; all unmeasured depth, gradient, curvature, thickness and strength choices remain authored. The background is unconstrained. Only one surface exists per sightline: overlapping shells, disconnected fronts, foreground extinction and true cavities are unsupported. No published velocity, density, distance or extinction measurement is fitted; no Helix expansion law or Homunculus geometry is transferred. All source lenses share the same cloud and compact-light distribution."
+}

@@ -1,0 +1,383 @@
+{
+  "schema": "cssearth-nebula-physical-evidence@1",
+  "subjectId": "carina",
+  "asOf": "2026-09-12",
+  "status": "evidence-linked authored single-surface experiment; no velocity fit",
+  "parameterClasses": {
+    "observed": "Published measurement or actual source metadata.",
+    "published-model": "Conditional literature interpretation.",
+    "authored": "Our assumed geometry, coordinate convention or display regularizer."
+  },
+  "sources": [
+    {
+      "id": "damiani-2016",
+      "url": "https://arxiv.org/html/1604.01208",
+      "doi": "https://doi.org/10.1051/0004-6361/201628169",
+      "locator": "Sections3.3–3.4, Figures29–39",
+      "access": "primary full-text morphology and velocity interpretation inspected"
+    },
+    {
+      "id": "damiani-cds",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/591/A74",
+      "manifest": "physical-sources.json",
+      "access": "complete866-row table and ReadMe downloaded and inspected"
+    },
+    {
+      "id": "rebolledo-2016",
+      "url": "https://arxiv.org/html/1511.07513",
+      "locator": "Sections2–5; molecular cloud regions",
+      "access": "primary full-text coverage and morphology inspected; no CO cube imported"
+    },
+    {
+      "id": "preibisch-herschel",
+      "url": "https://www.usm.uni-muenchen.de/people/preibisch/carina-herschel.html",
+      "access": "author project coverage inspected; no FITS maps imported"
+    },
+    {
+      "id": "shull-2021",
+      "url": "https://arxiv.org/abs/2103.07922",
+      "access": "primary abstract distance results inspected"
+    },
+    {
+      "id": "optical-image",
+      "url": "https://www.eso.org/public/images/eso0905a/",
+      "manifest": "observations.json"
+    },
+    {
+      "id": "infrared-image",
+      "url": "https://www.eso.org/public/images/eso1828b/",
+      "manifest": "observations.json"
+    },
+    {
+      "id": "anchor-trumpler-14",
+      "url": "https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Trumpler+14",
+      "locator": "ICRS (ep=J2000); 2021A&A...647A..19T",
+      "access": "SIMBAD coordinate record inspected"
+    },
+    {
+      "id": "anchor-eta-car",
+      "url": "https://simbad.u-strasbg.fr/simbad/sim-id?Ident=HD+93308",
+      "locator": "ICRS (ep=J2000); 2012yCat.1322....0Z",
+      "access": "SIMBAD coordinate record inspected"
+    },
+    {
+      "id": "anchor-wr25",
+      "url": "https://simbad.u-strasbg.fr/simbad/sim-id?Ident=WR+25",
+      "locator": "ICRS (ep=J2000); 2020yCat.1350....0G",
+      "access": "SIMBAD coordinate record inspected"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "observer-frame",
+      "classification": "authored",
+      "sourceIds": [],
+      "quantity": "compiler sky frame",
+      "value": {
+        "centerIcrsDegrees": [
+          161.3994714009992,
+          -59.70454067972527
+        ],
+        "axes": [
+          "west",
+          "north",
+          "away"
+        ],
+        "fieldArcminutes": [
+          112,
+          112
+        ]
+      },
+      "unit": "mixed units named in keys",
+      "scope": "Same origin as observations.json",
+      "limitations": "The112 arcminute square is an authored common processing frame, not the measured nebula extent. Zero depth is arbitrary."
+    },
+    {
+      "id": "image-footprints",
+      "classification": "observed",
+      "sourceIds": [
+        "optical-image",
+        "infrared-image"
+      ],
+      "quantity": "publisher angular footprints",
+      "value": {
+        "eso-optical": [
+          33.3744504,
+          33.0907675716
+        ],
+        "eso-vista": [
+          88.48691492374405,
+          71.78246193273485
+        ]
+      },
+      "unit": "arcmin",
+      "scope": "Pinned original full footprints in observations.json",
+      "limitations": "Optical and infrared observe different extents and tracers; missing coverage is not zero signal."
+    },
+    {
+      "id": "trumpler-14-anchor",
+      "classification": "observed",
+      "sourceIds": [
+        "anchor-trumpler-14"
+      ],
+      "quantity": "sky reference",
+      "value": {
+        "coordinates": [
+          160.98583333333335,
+          -59.55305555555555
+        ],
+        "native": "10 43 56.6 -59 33 11",
+        "quality": "E; error ellipse not supplied",
+        "url": "https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Trumpler+14",
+        "bibcode": "2021A&A...647A..19T",
+        "westNorthArcsec": [
+          751.188701,
+          545.346447
+        ]
+      },
+      "unit": "deg and arcsec as named",
+      "scope": "ICRS catalogue epoch J2000; offsets west/north from observer-frame",
+      "limitations": "Cluster/star coordinates anchor trial windows; they are not gas-depth measurements or fitted shell centers. Offsets use the existing small-angle tangentOffsetWestNorth convention; no proper-motion update is applied."
+    },
+    {
+      "id": "eta-car-anchor",
+      "classification": "observed",
+      "sourceIds": [
+        "anchor-eta-car"
+      ],
+      "quantity": "sky reference",
+      "value": {
+        "coordinates": [
+          161.26477419999998,
+          -59.684430899999995
+        ],
+        "native": "10 45 03.545808 -59 41 03.95124",
+        "quality": "B",
+        "errorEllipseMasDegrees": [
+          20,
+          20,
+          90
+        ],
+        "url": "https://simbad.u-strasbg.fr/simbad/sim-id?Ident=HD+93308",
+        "bibcode": "2012yCat.1322....0Z",
+        "westNorthArcsec": [
+          244.617271,
+          72.395207
+        ]
+      },
+      "unit": "deg and arcsec as named",
+      "scope": "ICRS catalogue epoch J2000; offsets west/north from observer-frame",
+      "limitations": "Cluster/star coordinates anchor trial windows; they are not gas-depth measurements or fitted shell centers. Offsets use the existing small-angle tangentOffsetWestNorth convention; no proper-motion update is applied."
+    },
+    {
+      "id": "wr25-anchor",
+      "classification": "observed",
+      "sourceIds": [
+        "anchor-wr25"
+      ],
+      "quantity": "sky reference",
+      "value": {
+        "coordinates": [
+          161.04328761088,
+          -59.7197518057
+        ],
+        "native": "10 44 10.3890266112 -59 43 11.106500520",
+        "quality": "A",
+        "errorEllipseMasDegrees": [
+          0.0177,
+          0.0177,
+          90
+        ],
+        "url": "https://simbad.u-strasbg.fr/simbad/sim-id?Ident=WR+25",
+        "bibcode": "2020yCat.1350....0G",
+        "westNorthArcsec": [
+          646.848681,
+          -54.760054
+        ]
+      },
+      "unit": "deg and arcsec as named",
+      "scope": "ICRS catalogue epoch J2000; offsets west/north from observer-frame",
+      "limitations": "Cluster/star coordinates anchor trial windows; they are not gas-depth measurements or fitted shell centers. Offsets use the existing small-angle tangentOffsetWestNorth convention; no proper-motion update is applied."
+    },
+    {
+      "id": "local-distorted-regions",
+      "classification": "published-model",
+      "sourceIds": [
+        "damiani-2016"
+      ],
+      "quantity": "central geometry interpretation",
+      "value": {
+        "regions": [
+          "Trumpler 14",
+          "Eta Car",
+          "WR25"
+        ],
+        "approximateRadiusArcmin": 5
+      },
+      "unit": "arcmin",
+      "scope": "Central spectroscopic region; local structures only",
+      "limitations": "Distorted incomplete expanding regions, not one global shell. Approximate size is not an uncertainty interval or an exact boundary."
+    },
+    {
+      "id": "optical-velocity-data",
+      "classification": "observed",
+      "sourceIds": [
+        "damiani-cds"
+      ],
+      "quantity": "published double-Gaussian fits",
+      "value": {
+        "rows": 866,
+        "uniqueSkyPositions": 666,
+        "frame": "heliocentric",
+        "instrumentalWidthIncludedKms": 7,
+        "availableVelocityErrors": false
+      },
+      "unit": "mixed units named in keys",
+      "scope": "Sparse approximately 21 by 24 arcminute central field; exact footprints/units in physical-sources.json",
+      "limitations": "Not used to fit this recipe. Line widths are not centroid errors; retain blanks, fibre identity and repeated sky positions."
+    },
+    {
+      "id": "molecular-regions",
+      "classification": "observed",
+      "sourceIds": [
+        "rebolledo-2016"
+      ],
+      "quantity": "projected molecular-region partition",
+      "value": [
+        "Northern Cloud",
+        "Southern Cloud",
+        "Southern Pillars",
+        "Gum 31"
+      ],
+      "unit": "region names",
+      "scope": "Published 8 square-degree survey",
+      "limitations": "No CO volume or region mask imported. Distinct spectral clouds do not have known XYZ locations from this intake."
+    },
+    {
+      "id": "dust-context",
+      "classification": "published-model",
+      "sourceIds": [
+        "preibisch-herschel"
+      ],
+      "quantity": "cloud morphology and diagnostics",
+      "value": "filamentary clouds and pillars; dust column and temperature",
+      "unit": "qualitative",
+      "scope": "Published 2.3 by 2.3 degree Herschel field",
+      "limitations": "No FITS maps imported. Extinction/reflection physics is absent from the current positive-emission solver."
+    },
+    {
+      "id": "cluster-distance",
+      "classification": "published-model",
+      "sourceIds": [
+        "shull-2021"
+      ],
+      "quantity": "cluster-distance scale",
+      "value": {
+        "distanceKpc": 2.35,
+        "reportedRmsKpc": 0.08
+      },
+      "unit": "kpc",
+      "scope": "Massive-star sample in Carina OB1",
+      "limitations": "Mean and rms, not individual gas-depth errors. Used only for interpretation; the runnable recipe remains angular."
+    },
+    {
+      "id": "single-front-hypothesis",
+      "classification": "authored",
+      "sourceIds": [],
+      "quantity": "supported solver topology",
+      "value": "one smooth height surface with finite local thickness",
+      "unit": "method",
+      "scope": "All valid image evidence",
+      "limitations": "Cannot represent multiple ray intersections, overlapping shells, disconnected fronts, foreground dust or true empty cavities. Local depressions only deform the one surface."
+    },
+    {
+      "id": "wide-front-parameters",
+      "classification": "authored",
+      "sourceIds": [],
+      "quantity": "wide unsupported depth prior",
+      "value": {
+        "zeroDepthArcsec": 0,
+        "gradient": [
+          0.035,
+          -0.04
+        ],
+        "curvaturePerArcsec": [
+          3.5e-05,
+          1.5e-05,
+          -2.2e-05
+        ],
+        "thicknessArcsec": 90
+      },
+      "unit": "mixed units named in keys",
+      "scope": "Full common frame",
+      "limitations": "Bounded shallow warp chosen for an initial visual comparison. Shape/thickness are not published physical dimensions; no image intensity-to-depth mapping."
+    },
+    {
+      "id": "localized-trial-parameters",
+      "classification": "authored",
+      "sourceIds": [
+        "damiani-2016"
+      ],
+      "quantity": "local trial settings",
+      "value": {
+        "windowRadiusArcsec": 300,
+        "depthOffsetsArcsec": {
+          "trumpler-14": -100,
+          "eta-car": -160,
+          "wr25": -65
+        },
+        "strength": 0.65,
+        "curvaturePerArcsec": [
+          0.0002,
+          0,
+          0.00015
+        ],
+        "thicknessArcsec": 45
+      },
+      "unit": "mixed units named in keys",
+      "scope": "Three windows at the observed anchors",
+      "limitations": "All numeric choices are authored, including circular windows inferred from the approximate 5 arcminute scale. Topology guidance does not measure chosen depths, wall curvature or thickness."
+    },
+    {
+      "id": "detail-thickness-parameters",
+      "classification": "authored",
+      "sourceIds": [],
+      "quantity": "detail-normal support",
+      "value": {
+        "detailThicknessRatio": 0.45,
+        "minimumThicknessArcsec": 1.5
+      },
+      "unit": "mixed units named in keys",
+      "scope": "All projected components",
+      "limitations": "Authored sampling regularizer; prevents thin projected features becoming long columns. Not measured gas thickness."
+    }
+  ],
+  "methods": [
+    {
+      "id": "coherent-irregular-front",
+      "inputRequirements": [
+        "verified registered images",
+        "published sky anchors",
+        "explicit unconstrained background",
+        "classified parameter ledger"
+      ],
+      "evidenceIds": [
+        "single-front-hypothesis",
+        "local-distorted-regions",
+        "wide-front-parameters",
+        "localized-trial-parameters"
+      ],
+      "limitations": [
+        "One height surface only.",
+        "No spectroscopy, extinction, proper-motion or dynamical forward fit.",
+        "Cannot represent the full proposed physical topology of Carina."
+      ]
+    }
+  ],
+  "implementationContract": [
+    "Each lens shares geometry, neutral alpha and compact-light positions.",
+    "Every geometric depth, gradient, curvature, thickness and blend weight is authored; the paper supplies only localized morphological motivation.",
+    "Do not attach the Homunculus symmetry or expansion law to the whole complex.",
+    "This recipe does not import the optical velocities, Herschel maps or CO cubes."
+  ]
+}

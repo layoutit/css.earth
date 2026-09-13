@@ -14,6 +14,7 @@ import type { ProvenanceDocument } from '../../src/platform/object-provenance.mt
 import { explorationArray, explorationId, explorationRecord, explorationText } from '../../src/platform/exploration-catalog.mts';
 import type { Capture } from '../../src/platform/exploration-catalog.mts';
 import type { ExplorationImage } from '../../src/platform/prepared-exploration.mts';
+import { prepareVolumeProvenance } from '../../tools/prepare-volume-provenance.mts';
 
 const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 const { sources } = parsePreparedSources(await json('../prepared-sources.json'));
@@ -128,6 +129,7 @@ test('every migrated capture stays bound to its source; the full prepared graph 
     objects.push(await objectInput(object.id, document));
   }
   assert.ok(authored >= 374); assert.ok(captured > 300 && captured <= authored);
+  objects.push(...await prepareVolumeProvenance());
   const graph = compileContributions(objects, catalog);
   assert.deepEqual(graph, prepared.graph);
   assert.deepEqual(compileContributions(objects, catalog), graph);

@@ -10,6 +10,7 @@ For a body's sources, processing, evidence and known problems, read its
 | Topic | Guide |
 | --- | --- |
 | Galaxies, LMC image lenses and extragalactic datasets | [Galaxies and the nearby universe](galaxies/README.md) |
+| Nebula reconstruction, spectral lenses and reproducible delivery | [Prepared nebulae](nebulae/README.md) |
 | Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
 | Catalog-wide image-to-shape faithfulness review | [Surface-registration review](provenance/surface-registration-review.md) |
 | Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |

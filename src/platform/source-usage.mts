@@ -2,6 +2,7 @@ import { productSourceIds, validateObjectProvenance } from './object-provenance.
 import type { ProvenanceDocument } from './object-provenance.mts';
 import { parseSourceBinding, sourceArray, sourceEnum, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from './source-catalog.mts';
 import type { SourceResolver, SourceReference } from './source-catalog.mts';
+import { datasetDestination, parseDatasetDestination } from './dataset-destination.mts';
 
 export type SourceUseKind = 'product-input' | 'method' | 'citation' | 'shared-context' | 'artwork';
 export interface SourceUse {
@@ -19,7 +20,7 @@ export interface SourceUsage {
   readonly edges: readonly SourceUse[]; readonly datasets: readonly SourceDataset[];
   readonly bySource: Readonly<Record<string, readonly number[]>>; readonly byObject: Readonly<Record<string, readonly number[]>>;
 }
-export interface SourceUsageObject { readonly id: string; readonly name: string; readonly route: string; readonly controls: readonly {readonly id: string; readonly label: string}[]; readonly provenance: ProvenanceDocument; }
+export interface SourceUsageObject { readonly id: string; readonly name: string; readonly route: string; readonly base: string; readonly controls: readonly {readonly id: string; readonly label: string}[]; readonly provenance: ProvenanceDocument; }
 export const sourceDatasetKey = (objectId: string, lensId: string) => `${objectId}/${lensId}`;
 export function sourceUsageIndexes(edges: readonly SourceUse[]) {
   const bySource: Record<string, number[]> = Object.create(null), byObject: Record<string, number[]> = Object.create(null);
@@ -35,6 +36,9 @@ export function compileSourceUsage(objects: readonly SourceUsageObject[], source
   sourceUnique(objects.map(object => object.id), 'usage object');
   for (const object of objects) {
     const document = validateObjectProvenance(object.provenance,object.id), local = new Map(document.sources.map(source => [source.id,source]));
+    const base = sourcePath(object.base), manifestPath = sourcePath(document.manifest.path);
+    if (base.split('/').at(-1) !== object.id) throw new TypeError('Source package owner differs from its object.');
+    const ownerPath = `${base}/${manifestPath}`;
     const controls = new Set(object.controls.map(lens => lens.id)), usedLenses = new Set<string>();
     sourceUnique(object.controls.map(lens => lens.id), 'dataset control');
     for (const source of document.sources) if (source.sourceBinding) parseSourceBinding(source.sourceBinding,sources);
@@ -54,7 +58,7 @@ export function compileSourceUsage(objects: readonly SourceUsageObject[], source
           edges.push(Object.freeze({ catalogueId: canonical.id, kind: useKind(ref.role), consumerKind:'object-product',
             consumerId:`${object.id}/${product.id}`,consumerLabel:`${object.name} · ${product.label}`,
             objectId:object.id,productId:product.id,localSourceId,
-            ownerPath:`src/planets/${object.id}/source/manifest.json`,locator:ref.locator ?? source.path,evidence:ref.evidence,
+            ownerPath,locator:ref.locator ?? source.path,evidence:ref.evidence,
             lensIds:Object.freeze(lensIds),limitations:Object.freeze(limitations),credit:source.credit,
             ...(source.license === undefined ? {} : {license:source.license}),...(source.redistribution === undefined ? {} : {redistribution:source.redistribution}) }));
           lensIds.forEach(id => usedLenses.add(id));
@@ -62,8 +66,7 @@ export function compileSourceUsage(objects: readonly SourceUsageObject[], source
       }
     }
     for (const lens of object.controls) if (usedLenses.has(lens.id)) {
-      if (object.route !== `/${object.id}/`) throw new TypeError('Source dataset needs an object route.');
-      datasets.push(Object.freeze({objectId:object.id,objectName:object.name,lensId:lens.id,label:lens.label,href:`${object.route}#dataset=${encodeURIComponent(lens.id)}`}));
+      datasets.push(Object.freeze({objectId:object.id,objectName:object.name,lensId:lens.id,label:lens.label,href:datasetDestination(object.id,object.route,lens.id)}));
     }
   }
   edges.push(...metadata);
@@ -73,7 +76,7 @@ export function parseSourceUsage(raw: unknown, sources: SourceResolver): SourceU
   const value = sourceObject(raw,['edges','datasets','bySource','byObject']);
   const datasets = sourceArray(value.datasets,raw => {
     const dataset = sourceObject(raw,['objectId','objectName','lensId','label','href']), objectId = sourceId(dataset.objectId),lensId = sourceId(dataset.lensId);
-    const href = sourceText(dataset.href); if (href !== `/${objectId}/#dataset=${encodeURIComponent(lensId)}`) throw new TypeError('Invalid source dataset URL.');
+    const href = parseDatasetDestination(dataset.href,objectId,lensId);
     return Object.freeze({objectId,lensId,href,objectName:sourceText(dataset.objectName),label:sourceText(dataset.label)});
   });
   const keys = datasets.map(dataset => sourceDatasetKey(dataset.objectId,dataset.lensId)); sourceUnique(keys,'dataset destination');

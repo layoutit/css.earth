@@ -1,4 +1,4 @@
-import { isPreparedCluster } from '@cssearth/catalog';
+import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
 import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
 import type { createPreparedUniverse } from '../src/renderers/css/universe/prepared-universe-runtime.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
@@ -47,7 +47,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
   };
   const publishContent = (id: string | null) => {
     const record = id ? layer.resolveGalaxy(id) : null;
-    const references = record ? [record.skyPosition.sourceRef, record.distance.sourceRef, (isPreparedCluster(record) ? record.classification.sourceRef : record.membership.sourceRef)].filter((reference): reference is string => Boolean(reference)) : [];
+    const references = record ? [record.skyPosition.sourceRef, record.distance.sourceRef, (isPreparedCluster(record) || isPreparedNebula(record) ? record.classification.sourceRef : record.membership.sourceRef)].filter((reference): reference is string => Boolean(reference)) : [];
     const state = lensState(id);
     const canSelect = () => ready && navigation?.preparedFocus?.()?.id === id && selected === id;
     const controls = state ? { ...state,
@@ -83,7 +83,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     const frame = volume?.frame ?? (detailedObjectId ? layer.imageLayerFrames?.[detailedObjectId] : null);
     const radius = object.presentation?.focusRadiusM ?? (volume ? volume.framingRadiusUnits * volume.frame.metersPerUnit : frame
       ? Math.max(...frame.boundsUnits.max.map((value, axis) => Math.abs(value - frame.boundsUnits.min[axis]) / 2)) * frame.metersPerUnit
-      : (!isPreparedCluster(object) && object.halfLightRadius ? object.halfLightRadius.valuePc * presentation.metersPerParsec * 3 : presentation.defaultFocusRadiusM));
+      : (!isPreparedCluster(object) && !isPreparedNebula(object) && object.halfLightRadius ? object.halfLightRadius.valuePc * presentation.metersPerParsec * 3 : presentation.defaultFocusRadiusM));
     return { id, positionM: object.positionM, framingRadiusM: radius,
       limits: { minimumDistanceM: radius * presentation.minimumDistanceRadii, maximumDistanceM: presentation.maximumDistanceM } };
   };
@@ -125,6 +125,16 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         selected = id; layer.selectGalaxy(id); observeLens(id);
         publishContent(id);
         if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);
+        // A focus-only link is a destination. Saved camera links retain their
+        // exact observer pose; changing the pivot alone must not reframe them.
+        if (focus && !query.has('v')) {
+          flight?.abort();
+          const controller = new AbortController(); flight = controller;
+          beforeFlight();
+          void navigation.flyToPreparedFocus(focus, { signal: controller.signal, reducedMotion: true })
+            .catch(error => { if (!controller.signal.aborted) onError(error); })
+            .finally(() => { if (flight === controller) flight = null; });
+        }
       } catch (error) {
         selected = navigation.preparedFocus?.()?.id ?? null;
         layer.selectGalaxy(selected); observeLens(selected);

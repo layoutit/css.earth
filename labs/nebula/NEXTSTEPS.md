@@ -1,6 +1,16 @@
 # Continue from here
 
-Updated 2026-09-10. Research sources and unimplemented methods are in [RESEARCH.md](RESEARCH.md). The current reproducible pipeline is in [METHOD.md](METHOD.md).
+Updated 2026-09-12. Research sources and method status are in [RESEARCH.md](RESEARCH.md). The current reproducible pipeline is in [METHOD.md](METHOD.md).
+
+**Active comparison:** the [six irregular candidates](models/inference-candidates/README.md) now test the compiler beyond Helix. M42, M8, Carina, NGC 6357 and the Horsehead environment have two-lens image-only experiments; M78 remains blocked by false star correspondences. Inspect these alongside Helix. The first comparison exposes residual stellar halos, target/background confusion, missing color coverage and smeared oblique detail. The linked assessment records results, source limits and the next experiments; no physical/visual acceptance is implied.
+
+The [joint molecular-wall fit](docs/joint-fit.md) remains an independent diagnostic with alternative surfaces and withheld residuals. Its single-component models leave substantial unexplained structure. Preserve the separate ionized-core slit, original photographs and failed Hubble baselines. Better image reprojection cannot establish individual depths or physical density.
+
+The Helix compiler runs through a textured, rotatable result with shared stars and three lenses; [its receipt and visual assessment](models/helix/README.md#compiler-checkpoint--2026-09-12) record the evidence. Next, address **color placement in the continuous field**: VISTA retains oblique streaks even with finer slab spacing. Compare emission-weighted slab color integration with fitting per-component color coefficients, keeping neutral geometry/alpha fixed and checking the Earth projection across the new cases too. Distinguish residual stellar halos and surrounding sky from target emission before adding components. Extinction/reflection require separate physical assumptions. These are follow-up experiments, not established solutions.
+
+**M2–9 baseline:** the [image-to-volume experiment](models/m2-9/README.md) remains available. Front/oblique/side views show connected lobes, with remaining ring artifacts, background and color/brightness differences. It is not promoted; see [planetary-nebulae.md](docs/planetary-nebulae.md).
+
+**Historical Helix comparison:** [two completed trial recipes](models/helix/README.md) share one full-native Hubble/CTIO image and NOX separation. One-axis fitting fails from the side; the published-diameter/orientation disk/ring prior gives distinct components but is oversimplified and omits outer signal. Neither passes visual acceptance. Those failures motivated the current wider-source compiler; higher image resolution alone cannot repair their depth assumptions.
 
 ## Completed handoff: LMC into the extragalactic app
 
@@ -11,9 +21,9 @@ Updated 2026-09-10. Research sources and unimplemented methods are in [RESEARCH.
 5. Integrate the lenses into the app's existing object/sidebar mechanism and shared world renderer. Do not introduce a separate LMC page owner or runtime image processing. Preserve existing M31 and SMC renderings and the other extragalactic objects.
 6. Verify actual LMC world placement, orientation, scale, lens switching and retained camera. Verify stars and labels in context and byte preservation for untouched M31/SMC sources. Open the resulting local app for the user.
 
-## Next experiment: reconstruct a cloud without a simulation
+## Earlier research plan: reconstruct a cloud without a simulation
 
-This is proposed research, not an implemented feature or an instruction to launch a large job now.
+The checklist below preserves the research path that led to the M2–9 baseline and Helix compiler. Current work is the compiler assessment above; this list does not authorize a second object or production promotion.
 
 1. Read the Wenger 2012 method and 2013 follow-up in full. Check available code and licensing before reuse. Record exact algorithmic assumptions; do not infer them from an abstract.
 2. Choose **one** roughly symmetric planetary nebula with a high-quality, sufficiently wide observation and published morphology/distance. A shell or bipolar example is a better first test than Orion/Tarantula.
@@ -33,7 +43,7 @@ This is proposed research, not an implemented feature or an instruction to launc
 
 ## Do not lose these boundaries
 
-- The currently accepted shape reference is the exact Alignment density cloud. Older photo-derived benchmarks are historical experiments.
+- For the density method, the accepted shape reference is the exact Alignment density cloud. The separate emission compiler has conditional depth; older photo-derived benchmarks remain historical experiments.
 - Source registration and the image-to-simulation visual fit are different; preserve both.
 - Candidate photos change the material, not the star catalogue or the model's extent.
 - A plausible volume is not a measured gas-density reconstruction. Record priors and uncertainty.
