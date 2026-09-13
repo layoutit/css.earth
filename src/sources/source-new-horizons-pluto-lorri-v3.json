@@ -1,0 +1,13 @@
+{
+  "id": "source-new-horizons-pluto-lorri-v3",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "New Horizons LORRI Pluto Encounter Calibrated V3.0",
+  "identifiers": [{"type": "PDS dataset", "value": "NH-P-LORRI-3-PLUTO-V3.0"}],
+  "version": "3.0",
+  "publisher": "NASA Planetary Data System",
+  "links": [{"role": "archive", "url": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/", "label": "Calibrated LORRI encounter archive"}],
+  "evidence": [{"url": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/catalog/dataset.cat", "checkedOn": "2026-09-13", "locator": "DATA_SET_ID, DATA_SET_NAME, DATA_SET_RELEASE_DATE (2017-04-30)"}],
+  "relations": [],
+  "statements": []
+}
