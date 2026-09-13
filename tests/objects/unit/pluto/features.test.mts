@@ -27,8 +27,8 @@ test("the plan anchors labels to the single body mesh for every surface lens", (
   const node = runtimeDefinition.tree.nodes[plan.target];
   assert.match(node.className ?? "", /(^|\s)pluto-body(\s|$)/u);
   assert.equal(runtimeDefinition.tree.nodes.filter(n => /(^|\s)pluto-body(\s|$)/u.test(n.className ?? "")).length, 1, "one body mesh; the static lane's polar carriers are gone");
-  assert.deepEqual(plan.lensIds, ['surface', 'topography', 'monochrome']);
+  assert.deepEqual(plan.lensIds, ['surface', 'topography', 'monochrome', 'methane-ice', 'nitrogen-ice', 'water-ice']);
   assert.equal(plan.meshRadiusUnits, runtimeDefinition.camera.logicalBodyDiameter / 2 / runtimeDefinition.camera.sceneScale);
   assert.deepEqual(plan.outline, { pieces: 256 });
-  assert.equal(plan.policy.minimumZoomShare, 1);
+  assert.equal(plan.policy.minimumZoomShare, 0);
 });

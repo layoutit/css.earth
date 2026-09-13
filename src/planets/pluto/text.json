@@ -40,6 +40,21 @@
       "title": "LORRI/MVIC mosaic",
       "detail": "Photo mosaic",
       "summary": "LORRI and MVIC images, with detail varying across the surface."
+    },
+    "methane-ice": {
+      "title": "LEISA methane ice",
+      "detail": "LEISA",
+      "summary": "Methane-rich ice is widespread in the northern terrain. Colors show its estimated share of each area."
+    },
+    "nitrogen-ice": {
+      "title": "LEISA nitrogen ice",
+      "detail": "LEISA",
+      "summary": "Nitrogen-rich ice stands out in Sputnik Planitia. Colors show its estimated share, which depends on the ice model."
+    },
+    "water-ice": {
+      "title": "LEISA water ice",
+      "detail": "LEISA",
+      "summary": "Water ice underlies Pluto’s more volatile ices. Colors show its surface share estimated from infrared spectra."
     }
   }
 }

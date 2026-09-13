@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1L00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1L00_1510.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1L00_1970.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/sp/v1/PDS4_SP_1L00_1311.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:disp="http://pds.nasa.gov/pds4/disp/v1"
+    xmlns:geom="http://pds.nasa.gov/pds4/geom/v1"
+    xmlns:sp="http://pds.nasa.gov/pds4/sp/v1"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1L00.xsd
+    http://pds.nasa.gov/pds4/disp/v1        http://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1L00_1510.xsd
+    http://pds.nasa.gov/pds4/geom/v1        http://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1L00_1970.xsd
+    http://pds.nasa.gov/pds4/sp/v1          http://pds.nasa.gov/pds4/sp/v1/PDS4_SP_1L00_1311.xsd">
+    
+    <Identification_Area>
+        <logical_identifier>urn:nasa:pds:nh_derived:arrokoth_composition:ca05_mvic_cube</logical_identifier>
+        <version_id>1.0</version_id>
+        <title>Highest Spatial-Resolution Color Observation of (486958) Arrokoth 
+            obtained by the New Horizons Multispectral Visible Imaging Camera (MVIC)</title>
+        <information_model_version>1.21.0.0</information_model_version>
+        <product_class>Product_Observational</product_class>
+        
+        <Alias_List>
+            <Alias>
+                <alternate_id>NH-A-LEISA/MVIC-5-COMP-V1.0:CA05_MVIC_CUBE</alternate_id>
+                <comment>PDS3 DATA_SET_ID:PRODUCT_ID</comment>
+            </Alias>
+            <Alias>
+                <alternate_id>CA05</alternate_id>
+                <comment>This designation was made and used by the NH team both internally and in publications.</comment>
+            </Alias>
+        </Alias_List>
+        
+        <Modification_History>
+            <Modification_Detail>
+                <modification_date>2025-04-25</modification_date>
+                <version_id>1.0</version_id>
+                <description>
+                    ACR: Minimal-effort migration from PDS3
+                </description>
+            </Modification_Detail>
+        </Modification_History>
+    </Identification_Area>
+    
+    <Observation_Area>
+        <Time_Coordinates>
+            <start_date_time>2019-01-01T05:12:55.280Z</start_date_time>
+            <stop_date_time>2019-01-01T05:14:34.148Z</stop_date_time>
+        </Time_Coordinates>
+        
+        <Primary_Result_Summary>
+            <purpose>Science</purpose>
+            <processing_level>Derived</processing_level>
+            <Science_Facets>
+                <discipline_name>Imaging</discipline_name>
+                <facet1>Color</facet1>
+            </Science_Facets>
+        </Primary_Result_Summary>
+        
+        <Investigation_Area>
+            <name>New Horizons Kuiper Belt Extended Mission</name>
+            <type>Mission</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:investigation:mission.new_horizons_kem1</lid_reference>
+                <reference_type>data_to_investigation</reference_type>
+            </Internal_Reference>
+        </Investigation_Area>
+        
+        <Observing_System>
+            <Observing_System_Component>
+                <name>New Horizons</name>
+                <type>Host</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.nh</lid_reference>
+                    <reference_type>is_instrument_host</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+            <Observing_System_Component>
+                <name>Multispectral Visible Imaging Camera</name>
+                <type>Instrument</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument:nh.mvic</lid_reference>
+                    <reference_type>is_instrument</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+        </Observing_System>
+        
+        <Target_Identification>
+            <name>(486958) Arrokoth</name>
+            <type>Trans-Neptunian Object</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:target:trans-neptunian_object.486958_2014_mu69</lid_reference>
+                <reference_type>data_to_target</reference_type>
+            </Internal_Reference>
+        </Target_Identification>
+        
+        <Discipline_Area>
+            <disp:Display_Settings>
+                <Local_Internal_Reference>
+                    <local_identifier_reference>ImageCube</local_identifier_reference>
+                    <local_reference_type>display_settings_to_array</local_reference_type>
+                </Local_Internal_Reference>
+                <disp:Display_Direction>
+                    <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+                    <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+                    <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+                    <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+                </disp:Display_Direction>
+            </disp:Display_Settings>
+            
+            <geom:Geometry>
+                <geom:Image_Display_Geometry>
+                    <Local_Internal_Reference>
+                        <local_identifier_reference>ImageCube</local_identifier_reference>
+                        <local_reference_type>display_to_data_object</local_reference_type>
+                    </Local_Internal_Reference>
+                    <geom:Display_Direction>
+                        <geom:horizontal_display_axis>Sample</geom:horizontal_display_axis>
+                        <geom:horizontal_display_direction>Left to Right</geom:horizontal_display_direction>
+                        <geom:vertical_display_axis>Line</geom:vertical_display_axis>
+                        <geom:vertical_display_direction>Bottom to Top</geom:vertical_display_direction>
+                    </geom:Display_Direction>
+                    <geom:Geometry_Target_Identification>
+                        <geom:name>(486958) Arrokoth</geom:name>
+                        <Internal_Reference>
+                            <lid_reference>urn:nasa:pds:context:target:trans-neptunian_object.486958_2014_mu69</lid_reference>
+                            <reference_type>geometry_to_body</reference_type>
+                        </Internal_Reference>
+                    </geom:Geometry_Target_Identification>
+                    <geom:Object_Orientation_RA_Dec>
+                        <geom:right_ascension_angle unit="deg">276.8</geom:right_ascension_angle>
+                        <geom:declination_angle unit="deg">-33.8</geom:declination_angle>
+                        <geom:celestial_north_clock_angle unit="deg">351.6</geom:celestial_north_clock_angle>
+                        <geom:Reference_Frame_Identification>
+                            <geom:name>J2000</geom:name>
+                            <geom:comment>This is assumed, as no frame was specified in the PDS3 data.</geom:comment>
+                        </geom:Reference_Frame_Identification>
+                    </geom:Object_Orientation_RA_Dec>
+                    <geom:Object_Orientation_Clock_Angles>
+                        <geom:central_body_north_pole_clock_angle unit="deg">264.7</geom:central_body_north_pole_clock_angle>
+                    </geom:Object_Orientation_Clock_Angles>
+                </geom:Image_Display_Geometry>
+                
+                <geom:Geometry_Orbiter>
+                    <geom:geometry_reference_time_utc>2019-01-01T04:57:46.148Z</geom:geometry_reference_time_utc>
+                    <geom:Orbiter_Identification>
+                        <geom:Geometry_Target_Identification>
+                            <geom:name>(486958) Arrokoth</geom:name>
+                            <Internal_Reference>
+                                <lid_reference>urn:nasa:pds:context:target:trans-neptunian_object.486958_2014_mu69</lid_reference>
+                                <reference_type>geometry_to_body</reference_type>
+                            </Internal_Reference>
+                        </geom:Geometry_Target_Identification>
+                        <geom:Coordinate_System_Identification>
+                            <geom:coordinate_system_type>Cartesian</geom:coordinate_system_type>
+                            <geom:Coordinate_System_Origin_Identification>
+                                <geom:name>Not Specified</geom:name>
+                            </geom:Coordinate_System_Origin_Identification>
+                            <geom:Reference_Frame_Identification>
+                                <geom:name>J2000</geom:name>
+                                <geom:comment>Assumed - not specified</geom:comment>
+                            </geom:Reference_Frame_Identification>
+                        </geom:Coordinate_System_Identification>
+                    </geom:Orbiter_Identification>
+                    <geom:Distances>
+                        <geom:Distances_Specific>
+                            <geom:spacecraft_geocentric_distance unit="km">6620524663.5573339</geom:spacecraft_geocentric_distance>
+                            <geom:spacecraft_heliocentric_distance unit="km">6474349486.4456940</geom:spacecraft_heliocentric_distance>
+                            <geom:spacecraft_target_center_distance unit="km">17364.424</geom:spacecraft_target_center_distance>
+                            <geom:target_heliocentric_distance unit="km">6474366229.4303379</geom:target_heliocentric_distance>
+                        </geom:Distances_Specific>
+                    </geom:Distances>
+                    <geom:Surface_Geometry>
+                        <geom:Surface_Geometry_Specific>
+                            <geom:subsolar_latitude unit="deg">-61.9</geom:subsolar_latitude>
+                            <geom:subsolar_longitude unit="deg">87.2</geom:subsolar_longitude>
+                            <geom:subspacecraft_latitude unit="deg">-53.5</geom:subspacecraft_latitude>
+                            <geom:subspacecraft_longitude unit="deg">111.7</geom:subspacecraft_longitude>
+                        </geom:Surface_Geometry_Specific>
+                    </geom:Surface_Geometry>
+                    <geom:Illumination_Geometry>
+                        <geom:comment>
+                            NOTE: The "reference_location" for the illumination geometry is not specified in the PDS3 label.
+                        </geom:comment>
+                        <geom:Illumination_Specific>
+                            <geom:reference_location>Boresight Intercept Point</geom:reference_location>
+                            <geom:phase_angle unit="deg">15.4</geom:phase_angle>
+                            <geom:solar_elongation unit="deg">164.6</geom:solar_elongation>
+                        </geom:Illumination_Specific>
+                    </geom:Illumination_Geometry>
+                    <geom:Vectors>
+                        <geom:comment>
+                            Because of the lack of documentation in the PDS3 labels regarding reference frames, the directional
+                            sense of most PDS3 vectors being the opposite of the PDS4 vector classes, and the light travel time
+                            having a significant effect on the vector components over most of the distances being measured, the 
+                            PDS3 position and velocity vectors could not be included in the PDS4 label. Users requiring accurate
+                            information for these values are advised to either recalculate or to consult the best available
+                            geometry in the archival source data.
+                        </geom:comment>
+                    </geom:Vectors>
+                </geom:Geometry_Orbiter>
+            </geom:Geometry>
+            
+            <sp:Spectral_Characteristics>
+                <Local_Internal_Reference>
+                    <local_identifier_reference>ImageCube</local_identifier_reference>
+                    <local_reference_type>spectral_characteristics_to_array_object</local_reference_type>
+                </Local_Internal_Reference>
+                <sp:spectrum_format>3D</sp:spectrum_format>
+                <sp:spectral_bin_type>wavelength</sp:spectral_bin_type>
+                <sp:Field_of_View>
+                    <sp:description>
+                        These data were taken in the Time-Delay Integration (TDI) mode in which the 
+                        spacecraft scans across the array to build up an image with an arbitrary number
+                        of rows.
+                    </sp:description>
+                    <sp:Rectangular_FOV>
+                        <sp:width_angle unit="deg">5.7</sp:width_angle>
+                        <sp:length_angle unit="deg">0.037</sp:length_angle>
+                    </sp:Rectangular_FOV>
+                </sp:Field_of_View>
+                    <sp:Bin_Description>
+                        <sp:bin_profile_description>
+                            Four of the MVIC detectors sit behind filters. Each band of this image corresponds
+                            to one of the filters. For the purposes of this class, the "band center" is calculated
+                            as the mathematical midpoint between short and long wavelengths. See the documentation
+                            for details of the bandpass for each filter.
+                        </sp:bin_profile_description>
+                        <sp:Axis_Bin_Set_Wavelength>
+                            <sp:axis_name>Band</sp:axis_name>
+                            <sp:Bin_Wavelength>
+                                <sp:bin_sequence_number>1</sp:bin_sequence_number>
+                                <sp:center_wavelength unit="nm">475</sp:center_wavelength>
+                                <sp:bin_width_wavelength unit="nm">150</sp:bin_width_wavelength>
+                                <sp:Filter>
+                                    <sp:filter_name>Blue</sp:filter_name>
+                                </sp:Filter>
+                            </sp:Bin_Wavelength>
+                            <sp:Bin_Wavelength>
+                                <sp:bin_sequence_number>2</sp:bin_sequence_number>
+                                <sp:center_wavelength unit="nm">620</sp:center_wavelength>
+                                <sp:bin_width_wavelength unit="nm">160</sp:bin_width_wavelength>
+                                <sp:Filter>
+                                    <sp:filter_name>Red</sp:filter_name>
+                                </sp:Filter>
+                            </sp:Bin_Wavelength>
+                            <sp:Bin_Wavelength>
+                                <sp:bin_sequence_number>3</sp:bin_sequence_number>
+                                <sp:center_wavelength unit="nm">877.5</sp:center_wavelength>
+                                <sp:bin_width_wavelength unit="nm">195</sp:bin_width_wavelength>
+                                <sp:Filter>
+                                    <sp:filter_name>NIR</sp:filter_name>
+                                </sp:Filter>
+                            </sp:Bin_Wavelength>
+                            <sp:Bin_Wavelength>
+                                <sp:bin_sequence_number>4</sp:bin_sequence_number>
+                                <sp:center_wavelength unit="nm">885</sp:center_wavelength>
+                                <sp:bin_width_wavelength unit="nm">50</sp:bin_width_wavelength>
+                                <sp:Filter>
+                                    <sp:filter_name>CH4</sp:filter_name>
+                                </sp:Filter>
+                            </sp:Bin_Wavelength>
+                        </sp:Axis_Bin_Set_Wavelength>
+                    </sp:Bin_Description>
+            </sp:Spectral_Characteristics>
+        </Discipline_Area>
+    </Observation_Area>
+    
+    <File_Area_Observational>
+        <File>
+            <file_name>ca05_mvic_cube.fit</file_name>
+            <comment>
+                This file is the highest spatial resolution MVIC color observation of     
+                Arrokoth designated as CA05, which was obtained on 2019 January 1         
+                between 5:12:44 and 5:14:34 UTC (coordinated universal time). During      
+                this observation period the spacecraft-center to target-center distance   
+                decreased from 18,080 to 16,681 km, giving an image scale of the          
+                observation between 330 and 362 meters per pixel. Over the observation    
+                period the phase varied from 15.08 to 15.70 degrees.                      
+                
+                The color filters are identified as 'BLUE' (400-550 nm),                  
+                'RED' (540-700 nm), 'NIR' (780-975 nm) and 'CH4' (860-910 nm)
+            </comment>
+        </File>
+        <Header>
+            <offset unit="byte">0</offset>
+            <object_length unit="byte">2880</object_length>
+            <parsing_standard_id>FITS 3.0</parsing_standard_id>
+        </Header>
+        <Array_3D_Spectrum>
+            <local_identifier>ImageCube</local_identifier>
+            <offset unit="byte">2880</offset>
+            <axes>3</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <Element_Array>
+                <data_type>IEEE754MSBDouble</data_type>
+                <unit>data number</unit>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Band</axis_name>
+                <elements>4</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>300</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>300</elements>
+                <sequence_number>3</sequence_number>
+            </Axis_Array>
+        </Array_3D_Spectrum>
+    </File_Area_Observational>
+</Product_Observational>

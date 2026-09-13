@@ -25,13 +25,13 @@ export const browserProfile = createObjectBrowserProfile({
     ]),
     lensRace: Object.freeze({
       defaultId: "surface",
-      slowId: "topography",
-      winnerId: "monochrome",
-      slowAsset: "/scenes/pluto/pluto-topography@2x.webp",
+      slowId: "methane-ice",
+      winnerId: "water-ice",
+      slowAsset: "/scenes/pluto/pluto-methane-ice@2x.webp",
       preReadyDisabled: true,
     }),
     retained: Object.freeze({
-      lensIds: Object.freeze(["surface", "topography", "monochrome"]),
+      lensIds: Object.freeze(["surface", "topography", "monochrome", "methane-ice", "nitrogen-ice", "water-ice"]),
       speedClicks: 5,
       allowedMountSelectors: Object.freeze([]),
     }),
