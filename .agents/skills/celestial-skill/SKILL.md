@@ -39,6 +39,10 @@ Explain meaningful model differences beside the dataset and qualify registration
 coverage and picking against the selected mesh. The [implementation map](references/implementation-map.md)
 locates the existing support for alternative models.
 
+For shape-only alternatives, bind each `shapeViews` entry to its selected
+`radialTerrain` source as well. Verify that generated surface provenance names
+that mesh, rather than reusing the default mesh's source for every dataset.
+
 Surface places also belong to a source frame. Use `source/preparation/features.json`
 and its pinned `landmarks` document for mission-defined regions, paper coordinates,
 or explicitly inferred model anatomy. Keep mission names distinct from IAU names.

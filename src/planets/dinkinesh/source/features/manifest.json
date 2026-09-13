@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-surface-features-source@1",
   "source": "IAU/USGS Gazetteer of Planetary Nomenclature, Dinkinesh centre points",
-  "snapshotDate": "2026-09-12",
+  "snapshotDate": "2026-09-13",
   "sourcePage": "https://planetarynames.wr.usgs.gov/Page/DINKINESH/target",
   "license": "Public domain (United States Government work)",
   "licenseEvidence": "The archive ships no FGDC record; USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits, read 2026-09-12) states that USGS-authored or produced data and information are in the U.S. Public Domain, and every Gazetteer export that ships a record declares the use constraint “Public domain.”",
@@ -11,7 +11,7 @@
       "path": "DINKINESH_nomenclature_center_pts.zip",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DINKINESH_nomenclature_center_pts.zip",
       "bytes": 14569,
-      "sha256": "816e61347e9ac78a896ee01077bd391da4e9c0bf8d90679eccbb8d9a5a1ab0b6"
+      "sha256": "b3e19298f41ce5d9f908fa37fe10621817ecb9a8c78b09096879296060a2c2c4"
     }
   ]
 }
