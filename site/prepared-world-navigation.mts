@@ -19,7 +19,7 @@ interface FlightCheckpoint {world: WorldCamera; elapsedS: number; time?: number;
 interface FlightPace {speed: number;}
 interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean; pace?: FlightPace;}
 
-import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
+import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
 import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, CLASSIFICATION_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
@@ -386,12 +386,12 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
         const previousElapsed = elapsedS;
         elapsedS = reducedMotion ? requestedElapsedS
           : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
-        // At extreme range ratios the source curve reaches its exact terminal
-        // position before its duration cap. Do not keep publishing that same
-        // pose after both position and orientation have finished. A detail
-        // readiness hold must still be respected.
+        // The curve approaches its terminal pose exponentially. At extreme range ratios it
+        // reaches that pose before its duration cap; otherwise its last second or so moves the
+        // view by under a pixel. Finish once the rest is invisible instead of publishing that
+        // tail. A detail readiness hold must still be respected.
         if (endElapsedS === flight.durationS && permittedEndS >= endElapsedS &&
-            sample.progress === 1) elapsedS = endElapsedS;
+            (sample.progress === 1 || arrivalIsInvisible(flight, anchors, sample))) elapsedS = endElapsedS;
         const world = worldSample(flight, from, elapsedS, sample);
         const advance = (shown = true, continueNow = false) => {
           if (finished) return;
@@ -423,6 +423,16 @@ function worldSample(flight: Flight, from: WorldCamera, elapsedS: number, sample
   sampleSelectionFlightInto(flight, elapsedS, sample);
   return { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt,
     pose: { positionM: [...sample.positionM], orientationXyzw: [...sample.orientationXyzw] } };
+}
+// The rest of a flight is invisible once the camera is within the arrival tolerance of its final
+// pose: that fraction of its depth to the nearest anchor surface, and that many radians of turn.
+function arrivalIsInvisible(flight: Flight, anchors: FlightAnchors, sample: FlightSample) {
+  const [x, y, z] = sample.positionM, end = flight.to.positionM, q = sample.orientationXyzw, r = flight.to.orientationXyzw;
+  let depthM = Infinity;
+  for (const anchor of anchors) depthM = Math.min(depthM, Math.hypot(x - anchor.positionM[0], y - anchor.positionM[1], z - anchor.positionM[2]) - anchor.radiusM);
+  const cosine = Math.min(1, Math.abs(q[0] * r[0] + q[1] * r[1] + q[2] * r[2] + q[3] * r[3]));
+  return depthM > 0 && Math.hypot(x - end[0], y - end[1], z - end[2]) <= FLIGHT_ARRIVAL_TOLERANCE * depthM
+    && 2 * Math.acos(cosine) <= FLIGHT_ARRIVAL_TOLERANCE;
 }
 function isFlightInput(event: Event) {
   const target = event.target;
