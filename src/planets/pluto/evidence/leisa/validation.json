@@ -1,0 +1,176 @@
+{
+  "checkedOn": "2026-09-13",
+  "baseCommit": "982eb52f4567d90ec694176a6ed6b56685fbeafa",
+  "pins": {
+    "src/planets/pluto/source/manifest.json": "65aa889c59e4deb7723412a8350a5c7b371297805433757c33bf3b638e9488de",
+    "src/planets/pluto/source/preparation/raster.json": "d42cb9dde57e8d5fe359499f88e0db03db4d8e0c2d72072ed25d4e6da37e2faf",
+    "src/planets/pluto/source/preparation/features.json": "e3b8d6d6c9d3132108b3505292c74a6a41a3af95f0c65503d06d99840ca6d2b3",
+    "src/planets/pluto/source/content/object.json": "8cdb254475f0f575d8530bc0ed86f2c83ca5f98f0695a193e252c04a05e04dbf",
+    "src/planets/pluto/runtime-assets.json": "2fd08551743c471c3d494d6b5fcc895b8a9337d6033d106bb9d346de325bf81e",
+    "src/planets/pluto/prepared/runtime.refs.json": "84bfcda41223b3a65dd72399476d13ca5017137e6c0c233ebe46240ce796ad45",
+    "src/renderers/css/styles/planet-surfaces.css": "3ee660b3a2a709d4aa1acc7093672290b79941342ee128b6634d7153ac93f29b",
+    "tools/objects/terrestrial-layers/fits-image-map.mts": "8478bb2274dd11fe376b301fc561622029ce696139877227f31cb5882dc071d7",
+    "tools/objects/terrestrial-layers/scientific-raster.mts": "47cbe9d3b7386b01ad995501bb5d2c690619de1ec0948ecffb4a2dd71f838c25",
+    "tests/objects/unit/pluto/leisa.test.mts": "15884d7f4724567cb45e8895271bdec68ed2449da9dce4e16b867b2877c1e11a",
+    "tests/objects/browser/pluto/ice-surfaces-browser.mts": "d085111de6d498b68a34aab1a494f75a63a31258c6b9b3c0294284326f150b30"
+  },
+  "scientificReference": "tests/objects/fixtures/pluto/leisa-astropy.json",
+  "sourceRestoration": {
+    "method": "Declared acquisition operations into an empty source directory",
+    "files": 2,
+    "bytesPerFile": 22841280,
+    "verifiedSha256": true
+  },
+  "runtimeRestoration": {
+    "method": "installRuntimeAssets into an empty destination",
+    "installed": 125,
+    "reused": 0
+  },
+  "reproduction": {
+    "expectedInventory": "Selected after the first successful preparation, before the second run",
+    "comparison": "Exact byte count and SHA-256 for every runtime file",
+    "changed": 0
+  },
+  "assetDelta": {
+    "beforeBytes": 21124634,
+    "afterBytes": 24640310,
+    "unchangedExistingFiles": 110,
+    "addedFiles": 15
+  },
+  "browser": {
+    "browser": "152.0.7977.84",
+    "reports": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "id": "methane-ice",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-methane-ice@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-poles-methane-ice@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/pluto/?v=MMZAts9pmKiic0FCxzNAAAAAP9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA#dataset=methane-ice"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "id": "nitrogen-ice",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-nitrogen-ice@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-poles-nitrogen-ice@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/pluto/?v=MMZAts9pmKiic0FCxzNAAAAAP9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA#dataset=nitrogen-ice"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "id": "water-ice",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-water-ice@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-poles-water-ice@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/pluto/?v=MMZAts9pmKiic0FCxzNAAAAAP9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA#dataset=water-ice"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "id": "surface",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-surface@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-poles-surface@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/pluto/?v=MMZAts9pmKiic0FCxzNAAAAAP9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "id": "methane-ice",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-methane-ice@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-poles-methane-ice@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/pluto/?v=MMZAs7KftRPjo0FCxzNAAAAAP9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA#dataset=methane-ice"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "id": "nitrogen-ice",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-nitrogen-ice@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-poles-nitrogen-ice@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/pluto/?v=MMZAs7KftRPjo0FCxzNAAAAAP9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA#dataset=nitrogen-ice"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "id": "water-ice",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-water-ice@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-poles-water-ice@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/pluto/?v=MMZAs7KftRPjo0FCxzNAAAAAP9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA#dataset=water-ice"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "id": "surface",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-surface@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/pluto/pluto-poles-surface@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/pluto/?v=MMZAs7KftRPjo0FCxzNAAAAAP9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA"
+      }
+    ]
+  },
+  "checks": {
+    "passed": [
+      "FITS layout and missing-value tests",
+      "Independent Astropy/NumPy comparison",
+      "Pluto source and runtime closure (3 tests)",
+      "Source catalogue, provenance and credits (64 passed, 1 unrelated skip)",
+      "Affected preparation and test TypeScript",
+      "All six dataset interactions at DPR 1 and 2",
+      "Lens race, reacquisition and rejection/retry",
+      "Desktop and mobile latitude/pole texture selection"
+    ],
+    "remaining": [
+      "Full typecheck stops at existing site/test/universe-browser.mts indexing errors",
+      "Shared native-startup fixture tests fail on this branch and the base revision",
+      "Runtime ownership audit rejects existing orbit/minimap/world-context code on this branch and the base revision",
+      "Aggregate source suite reports an existing stale Moon factsheet preparation on both revisions",
+      "Full browser conformance stops in shared recenter, mobile camera invariance and wheel-distance checks; focused dataset checks pass"
+    ]
+  }
+}

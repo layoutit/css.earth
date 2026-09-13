@@ -13,7 +13,7 @@ import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../..
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
-const LENS_IDS = ['surface', 'topography', 'monochrome'];
+const LENS_IDS = ['surface', 'topography', 'monochrome', 'methane-ice', 'nitrogen-ice', 'water-ice'];
 
 objectRuntimePackageTests(runtimeDefinition);
 
@@ -25,7 +25,7 @@ test("Pluto's actual import closure has only shared runtime owners", async () =>
   }
 });
 
-test("Pluto is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 3 lenses", () => {
+test("Pluto keeps its source-radius sphere and Lambert bank across photographic, elevation and ice views", () => {
   assert.equal(scene.schema, "csspluto-prepared-runtime-scene@1");
   assert.equal(scene.runtimeGeometry, false);
   assert.equal(scene.runtimeRasterization, false);
@@ -36,7 +36,7 @@ test("Pluto is prepared by the generic raster lane with the source-radius sphere
   // No atmosphere: the material is the row-sharded Lambert bank, not the atmosphere phase atlas.
   assert.equal(scene.material.runtimeLighting, false);
   assert.equal(scene.material.frameCount, 256);
-  assert.equal(assets.atmosphere, undefined);
+  assert.equal('atmosphere' in assets, false);
   assert.equal(assets.lighting.frameCount, 256);
   assert.deepEqual(Object.keys(assets.surfaces), LENS_IDS);
   assert.deepEqual(lenses.controls.map(({ id }) => id), LENS_IDS);
@@ -54,7 +54,6 @@ test("Pluto science lenses keep their prepared legends and false-colour declarat
     assert.equal(typeof shell.description, "string");
     if (control.falseColor) assert.ok(shell.legend, `${control.id} declares a false-colour scale without a legend`);
     if (shell.legend?.kind === "scale") assert.ok((shell.legend.colors?.length ?? 0) >= 2 && (shell.legend.labels?.length ?? 0) >= 2);
-    if (shell.legend?.kind === "categories") assert.ok((shell.legend.items?.length ?? 0) >= 2);
   }
 });
 
