@@ -196,13 +196,13 @@ async function loadGeoFrame(recipe: GeoRecipe, id: string, { sourceDirectory, so
 
 function displayUnits(recipe: GeoRecipe, photometry: ObservationPhotometry) {
   const retained = !('referenceDegrees' in recipe.photometry) && recipe.photometry.model === 'retained-observation';
-  const treatment = retained ? 'with original illumination' : 'disk-normalized';
-  return photometry.units ?? (recipe.format === 'amica-gaskell' ? 'relative flat-fielded detector brightness with approximate disk normalization; linear grayscale display'
-    : recipe.format === 'llorri-camera' ? 'relative DN/s with original illumination; linear grayscale display'
-    : recipe.format === 'osiris-camera' ? `relative I/F ${treatment}; linear grayscale display`
-    : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? `relative disk-normalized ${cubeDeclaration(recipe).quantity}; linear grayscale display`
-    : kernelCamera(recipe) ? `relative ${spiceDeclaration(recipe).image.quantity} ${treatment}; linear grayscale display`
-    : recipe.radiometry === 'radiance-factor' ? 'relative disk- and phase-normalized I/F; linear grayscale display' : 'relative disk-normalized radiance; linear grayscale display');
+  const quantity = (name: string) => retained ? `relative ${name} with original illumination` : `relative disk-normalized ${name}`;
+  return photometry.units ?? `${recipe.format === 'amica-gaskell' ? 'relative flat-fielded detector brightness with approximate disk normalization'
+    : recipe.format === 'llorri-camera' ? 'relative DN/s with original illumination'
+    : recipe.format === 'osiris-camera' ? quantity('I/F')
+    : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? quantity(cubeDeclaration(recipe).quantity)
+    : kernelCamera(recipe) ? quantity(spiceDeclaration(recipe).image.quantity)
+    : recipe.radiometry === 'radiance-factor' ? 'relative disk- and phase-normalized I/F' : 'relative disk-normalized radiance'}; linear grayscale display`;
 }
 
 export const geoFormat: SurfaceObservationFormat = {

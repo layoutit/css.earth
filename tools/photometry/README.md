@@ -58,9 +58,8 @@ and the limits:
   `displayMaximum`, `gamma`, `minimumLevel`, `maximumLevel` and the optional
   `backgroundMaximum`.
 
-The observation seam (`observed-geo-surface.mts`), the encounter route
-(`encounter-surface.mts`) and shape-camera mosaics (`shape-camera-mosaic.mts`)
-accept this block. Filter-colour composites refuse it, because a model fitted in
+Surface-observation lenses with Sun geometry (`tools/objects/surface-observations/`)
+and shape-camera mosaics (`shape-camera-mosaic.mts`) accept this block. Filter-colour composites refuse it, because a model fitted in
 one filter would change band ratios. Observed-colour lenses keep their
 per-observation ISIS Lunar-Lambert weights, and ISIS2 orthographic images carry
 no Sun geometry to normalize with.
