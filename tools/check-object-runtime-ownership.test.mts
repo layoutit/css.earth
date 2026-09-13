@@ -369,7 +369,7 @@ test('typed renderer closure rejects forbidden scene APIs, styles, hidden import
   const file = 'src/renderers/css/runtime/object-runtime.ts', source = await readFile(file, 'utf8');
   const rendererMutations: readonly [string, RegExp][] = [
     ["document.createElement(('canvas' as const));", /Forbidden runtime canvas/],
-    ["document.createElementNS('http://www.w3.org/2000/svg', 'svg');", /Forbidden runtime canvas/],
+    ["new OffscreenCanvas(1, 1);", /Forbidden runtime canvas/],
     ["function hidden(node: HTMLElement) { node.style.filter = 'blur(2px)'; }", /Forbidden runtime CSS/],
     ["function hidden(node: HTMLElement) { node.style.background = 'linear-gradient(red, blue)'; }", /Forbidden runtime CSS/],
     ["function hidden(node: HTMLElement) { node.style.setProperty('mask-image', 'url(mask.png)'); }", /Forbidden runtime CSS/],
@@ -378,6 +378,9 @@ test('typed renderer closure rejects forbidden scene APIs, styles, hidden import
     ["function hidden() { createObjectRuntime({}); }", /actual shared factory call/],
   ];
   for (const [injected, expected] of rendererMutations) await assert.rejects(descriptorOverlay({ [file]: `${source}\n${injected}` }), expected);
+  // SVG is allowed at runtime; only canvas and WebGL scene rendering are forbidden.
+  const svg = inspectObjectRuntimeModule(`${source}\ndocument.createElementNS('http://www.w3.org/2000/svg', 'svg');`, file, { shared: true });
+  assert.ok(!svg.violations.some(violation => /canvas or WebGL/.test(violation.reason)), 'SVG rendering is allowed');
 });
 
 test('typed shell compatibility exports remain inside the checked runtime closure', async () => {
