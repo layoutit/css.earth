@@ -353,7 +353,8 @@
       "id": "mvic-label",
       "path": "observations/ca05_mvic_cube.lblx",
       "consumers": [
-        "photography-reference"
+        "photography-reference",
+        "mvic-observation"
       ],
       "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx",
       "credit": "Grundy et al.; NASA / JHUAPL / SwRI; New Horizons science team",
@@ -467,8 +468,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6915,
-      "expectedSha256": "f04f29310a16838dd3288d0c8bfd0e7fbae43ab37d5ecf407107bc137456f092",
+      "expectedBytes": 7113,
+      "expectedSha256": "90263d6e9e853754148bf4691a53ff9ca94e77729e84fe7376f5ac40bce98571",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -496,8 +497,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6104,
-      "expectedSha256": "ab09d3c4d323427c27d2c9274116446d18c20faa856096ec9e085ed5e62f3619"
+      "expectedBytes": 6171,
+      "expectedSha256": "2ec5c5caa9da307035e752d52f47013f5a5b5d4da5094782322708f0d885f70c"
     },
     {
       "path": "presentation/minimap.json",

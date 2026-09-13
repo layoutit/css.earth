@@ -1,0 +1,27 @@
+{
+  "baseline": "8cc1a2fae",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
+  "assets": [
+    {
+      "filename": "janus-filter-color-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d72c8bef310dd362ae62d9c7a904a2243bc3e32320c91f08a1d2c4ccb89ddea2/janus-filter-color-shadow@2x.webp",
+      "bytes": 232288,
+      "sha256": "d72c8bef310dd362ae62d9c7a904a2243bc3e32320c91f08a1d2c4ccb89ddea2",
+      "verified": true
+    },
+    {
+      "filename": "janus-filter-color-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/468d164a210ddd313d1b71d7116f2ffde2bac5dd995d232646b24c3a3f3aa095/janus-filter-color-surface@2x.webp",
+      "bytes": 327594,
+      "sha256": "468d164a210ddd313d1b71d7116f2ffde2bac5dd995d232646b24c3a3f3aa095",
+      "verified": true
+    },
+    {
+      "filename": "janus-filter-color-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/da7918a3df206acfec17311646fdf783d646133bdf6d56b489aac8997341042a/janus-filter-color-thumbnail.webp",
+      "bytes": 2696,
+      "sha256": "da7918a3df206acfec17311646fdf783d646133bdf6d56b489aac8997341042a",
+      "verified": true
+    }
+  ]
+}

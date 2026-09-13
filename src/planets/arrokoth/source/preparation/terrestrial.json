@@ -110,6 +110,7 @@
           {
             "id": "mvic",
             "path": "observations/ca05_mvic_cube.fit",
+            "labelPath": "observations/ca05_mvic_cube.lblx",
             "cameraPath": "observations/mvic-camera.json",
             "startTime": "2019-01-01T05:12:55.280"
           }
@@ -129,7 +130,7 @@
           "maximumGain": 1
         },
         "display": {
-          "linear": [
+          "displayRange": [
             0,
             0.17
           ]

@@ -57,7 +57,7 @@
           "height": 361
         },
         "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
-        "description": "Cassini shape · radial height",
+        "description": "Cassini shape \u00b7 radial height",
         "title": "Radial height from the Cassini-derived Janus shape model above the 89.2 km reference sphere. Includes the broad irregular figure; not a local geodetic DEM.",
         "labels": [
           "-17",
@@ -205,6 +205,122 @@
             "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
             "url": "https://pds-rings.seti.org/cassini/iss/"
           }
+        }
+      },
+      {
+        "id": "filter-color",
+        "format": "controlled-shape-color",
+        "consumer": "cassini-color-frames",
+        "channels": [
+          {
+            "channel": "red",
+            "filter": "IR3",
+            "frames": [
+              {
+                "id": "n1627319215",
+                "path": "observations/N1627319215_1_CALIB.IMG",
+                "labelPath": "observations/N1627319215_1_CALIB.LBL",
+                "observerLatitude": -41.49,
+                "observerWestLongitude": 170.3,
+                "sunLatitude": -0.29,
+                "sunWestLongitude": 118.13,
+                "rangeKm": 99347.5,
+                "northAzimuthDegrees": 35.46,
+                "center": [
+                  633.3,
+                  589.2
+                ],
+                "pixelAngleMicroradians": 5.989697719850105,
+                "coverageInsetPixels": 2
+              }
+            ]
+          },
+          {
+            "channel": "green",
+            "filter": "GRN",
+            "frames": [
+              {
+                "id": "n1627319647",
+                "path": "observations/N1627319647_1_CALIB.IMG",
+                "labelPath": "observations/N1627319647_1_CALIB.LBL",
+                "observerLatitude": -39.51,
+                "observerWestLongitude": 173.39,
+                "sunLatitude": -0.28,
+                "sunWestLongitude": 120.72,
+                "rangeKm": 97777.7,
+                "northAzimuthDegrees": 34.78,
+                "center": [
+                  644.8,
+                  585.5
+                ],
+                "pixelAngleMicroradians": 5.989697719850105,
+                "coverageInsetPixels": 2
+              }
+            ]
+          },
+          {
+            "channel": "blue",
+            "filter": "UV3",
+            "frames": [
+              {
+                "id": "n1627319759",
+                "path": "observations/N1627319759_1_CALIB.IMG",
+                "labelPath": "observations/N1627319759_1_CALIB.LBL",
+                "observerLatitude": -39.03,
+                "observerWestLongitude": 174.12,
+                "sunLatitude": -0.29,
+                "sunWestLongitude": 121.33,
+                "rangeKm": 97446.4,
+                "northAzimuthDegrees": 34.62,
+                "center": [
+                  645.4,
+                  586.3
+                ],
+                "pixelAngleMicroradians": 5.989697719850105,
+                "coverageInsetPixels": 2
+              }
+            ]
+          }
+        ],
+        "photometry": {
+          "model": "observed",
+          "weight": 0.5,
+          "maximumGain": 1,
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 75,
+          "displayMaximum": 0.8,
+          "gamma": 1,
+          "minimumLevel": 1,
+          "maximumLevel": 1,
+          "backgroundMaximum": 0.003
+        },
+        "metadata": {
+          "label": "False color",
+          "falseColor": true,
+          "coverage": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
+          "attribution": {
+            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/cassini/iss/"
+          }
+        },
+        "focus": {
+          "longitudeDegrees": 186.61,
+          "latitudeDegrees": -39.51,
+          "zoom": 1.1
+        },
+        "colorDisplay": {
+          "kind": "band-composite",
+          "inputQuantity": "radiance-factor",
+          "bands": [
+            "IR3",
+            "GRN",
+            "UV3"
+          ],
+          "displayRange": [
+            0,
+            0.8
+          ],
+          "outputEncoding": "srgb"
         }
       }
     ]

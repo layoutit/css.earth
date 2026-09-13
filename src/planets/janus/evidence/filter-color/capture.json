@@ -1,0 +1,306 @@
+{
+  "body": "janus",
+  "lens": "filter-color",
+  "baselineRef": "8cc1a2fae",
+  "baselineCommit": "8cc1a2faead111bd3535c0bed326180631b42f09",
+  "toolSha256": "89775171909802da8bad5ada20f2e21bc8880b632541920f3d31aea1ee1f7aea",
+  "colorTransferSha256": "4fdacc08867ab12c5b4f4b5819210f52f044155a5ebcbbf912f0ff0d9d201fe5",
+  "recipeSha256": "7bec6027414e23f6df2d667a1346530d2eada3a75e85d88e3f23a32575be92c4",
+  "runtimeSha256": "ce25620a1a63956157f0232157ee7f5aeaf54a70833854e3be655976f8dcc957",
+  "geometrySha256": "4224a16893e80bdde1ccefdda6794ce04db83f2f377d5dd37d8e27009369c8cc",
+  "surfaceTrianglesSha256": "7fde91fa11a10f78619cb2d1a06ca38fdd47a57b63d2da0f0f72f7a91ffa85f2",
+  "geometryUnchanged": true,
+  "browser": "152.0.7977.84",
+  "channel": "chrome",
+  "purpose": "Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.",
+  "existingAssetChanges": [
+    {
+      "filename": "janus-filter-color-shadow@2x.webp",
+      "beforeSha256": "2712efdfbfc2dbf034fb85c264338ae11f8bacdcdd1e3795e43eb41c7929531e",
+      "afterSha256": "d72c8bef310dd362ae62d9c7a904a2243bc3e32320c91f08a1d2c4ccb89ddea2",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "janus-filter-color-surface@2x.webp",
+      "beforeSha256": "5268306adaf2a44b9380a4681fded569917596c6658aa686fc1e38a770d1b04f",
+      "afterSha256": "468d164a210ddd313d1b71d7116f2ffde2bac5dd995d232646b24c3a3f3aa095",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "janus-filter-color-thumbnail.webp",
+      "beforeSha256": "43a1ffdcc0c6b610e7b5179a464d0437d68ff538f1be0da0ee10d3f4f3244c4f",
+      "afterSha256": "da7918a3df206acfec17311646fdf783d646133bdf6d56b489aac8997341042a",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    }
+  ],
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 2,
+    "rowText": "False color\nCassini",
+    "bounds": {
+      "x": 20,
+      "y": 740.46875,
+      "width": 350,
+      "height": 20
+    },
+    "pageWidth": 390,
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(-0.492651917463,0.293500280451,-0.81923847175,0,0,0.941408370442,0.337268854273,0,0.87022645801,0.166156147758,-0.463786638813,0,0,0,0,1)",
+      "skybox": "matrix3d(-0.634223100964,0.260759409721,-0.72784986776,0,0.709351259208,0.570723477712,-0.41363665028,0,0.307541380299,-0.778639234052,-0.546936087255,0,0,0,0,1)",
+      "sunView": "matrix3d(0.741616033188,0.270835294981,0.613721355593,0,0,0.91487602739,-0.40373488146,0,-0.670824611443,0.299416261248,0.678486730292,0,0,0,0,1)"
+    },
+    "stableDom": true,
+    "sha256": "1ec86c2db1108fdf6da5f04e16461e34b3f7915fc8d144afcad90f404911c2c7",
+    "errors": []
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr1.png",
+          "sha256": "91872169d954b6b0d582d1549abec249ab387ae9a514659f30594b57b3a3e237",
+          "url": "http://127.0.0.1:4284/janus/?v=MEZAhPfL56Y6aEFCxzNAAAAAP7YRo7Tqbr0_wu1CT5GeTz_fwjQJ3wEpAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.492651917463,0.293500280451,-0.81923847175,0,0,0.941408370442,0.337268854273,0,0.87022645801,0.166156147758,-0.463786638813,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.634223100964,0.260759409721,-0.72784986776,0,0.709351259208,0.570723477712,-0.41363665028,0,0.307541380299,-0.778639234052,-0.546936087255,0,0,0,0,1)",
+            "sunView": "matrix3d(0.741616033188,0.270835294981,0.613721355593,0,0,0.91487602739,-0.40373488146,0,-0.670824611443,0.299416261248,0.678486730292,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 732,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.784633030779,0.184007362957,-0.592023899338,0,0.104245107832,0.980500285878,0.166589756244,0,0.61113334429,0.068996230113,-0.788514778382,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.877591283371,0.169496341318,-0.448446620218,0,0.470791436918,0.481263544353,-0.739419095782,0,0.090492178113,-0.860032684872,-0.502150164389,0,0,0,0,1)",
+          "sunView": "matrix3d(0.430663597641,0.154228131651,0.88923706011,0,0.131279732894,0.964105927225,-0.230792965275,0,-0.892913488193,0.216132932467,0.394958299198,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "janus-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "janus-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
+          "filename": "janus-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-normal-thumbnail.webp",
+          "sha256": "e640293798183cfd5f3b4011a7b089e130811dc70762ae2e8a937285e4b4d010",
+          "bytes": 3902
+        },
+        {
+          "filename": "janus-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-filter-color-thumbnail.webp",
+          "sha256": "da7918a3df206acfec17311646fdf783d646133bdf6d56b489aac8997341042a",
+          "bytes": 2696
+        },
+        {
+          "filename": "janus-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "janus-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-normal-surface@2x.webp",
+          "sha256": "82814f37cddf65c604aaa7740df6cda97c123b33d76c2f5595fa1c839a8214b6",
+          "bytes": 489858
+        },
+        {
+          "filename": "janus-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
+          "filename": "janus-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-elevation-thumbnail.webp",
+          "sha256": "214ba20aaa94bada5f93c128355886dce9f624f0b3ba0b5ed0c7dd75b9ccaf9b",
+          "bytes": 6882
+        },
+        {
+          "filename": "janus-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-filter-color-surface@2x.webp",
+          "sha256": "468d164a210ddd313d1b71d7116f2ffde2bac5dd995d232646b24c3a3f3aa095",
+          "bytes": 327594
+        },
+        {
+          "filename": "janus-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-filter-color-shadow@2x.webp",
+          "sha256": "d72c8bef310dd362ae62d9c7a904a2243bc3e32320c91f08a1d2c4ccb89ddea2",
+          "bytes": 232288
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr2.png",
+          "sha256": "4992c25794507ed9cd1ca16de85917ef321d6bd995716697731c949d704841df",
+          "url": "http://127.0.0.1:4284/janus/?v=MEZAhPfL56Y6aEFCxzNAAAAAP7YRo7Tqbr0_wu1CT5GeTz_fwjQJ3wEpAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.492651917463,0.293500280451,-0.81923847175,0,0,0.941408370442,0.337268854273,0,0.87022645801,0.166156147758,-0.463786638813,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.634223100964,0.260759409721,-0.72784986776,0,0.709351259208,0.570723477712,-0.41363665028,0,0.307541380299,-0.778639234052,-0.546936087255,0,0,0,0,1)",
+            "sunView": "matrix3d(0.741616033188,0.270835294981,0.613721355593,0,0,0.91487602739,-0.40373488146,0,-0.670824611443,0.299416261248,0.678486730292,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 732,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.784633030779,0.184007362957,-0.592023899338,0,0.104245107832,0.980500285878,0.166589756244,0,0.61113334429,0.068996230113,-0.788514778382,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.877591283371,0.169496341318,-0.448446620218,0,0.470791436918,0.481263544353,-0.739419095782,0,0.090492178113,-0.860032684872,-0.502150164389,0,0,0,0,1)",
+          "sunView": "matrix3d(0.430663597641,0.154228131651,0.88923706011,0,0.131279732894,0.964105927225,-0.230792965275,0,-0.892913488193,0.216132932467,0.394958299198,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "janus-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "janus-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
+          "filename": "janus-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "janus-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-normal-thumbnail.webp",
+          "sha256": "e640293798183cfd5f3b4011a7b089e130811dc70762ae2e8a937285e4b4d010",
+          "bytes": 3902
+        },
+        {
+          "filename": "janus-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-normal-surface@2x.webp",
+          "sha256": "82814f37cddf65c604aaa7740df6cda97c123b33d76c2f5595fa1c839a8214b6",
+          "bytes": 489858
+        },
+        {
+          "filename": "janus-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-filter-color-thumbnail.webp",
+          "sha256": "da7918a3df206acfec17311646fdf783d646133bdf6d56b489aac8997341042a",
+          "bytes": 2696
+        },
+        {
+          "filename": "janus-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-elevation-thumbnail.webp",
+          "sha256": "214ba20aaa94bada5f93c128355886dce9f624f0b3ba0b5ed0c7dd75b9ccaf9b",
+          "bytes": 6882
+        },
+        {
+          "filename": "janus-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
+          "filename": "janus-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-filter-color-surface@2x.webp",
+          "sha256": "468d164a210ddd313d1b71d7116f2ffde2bac5dd995d232646b24c3a3f3aa095",
+          "bytes": 327594
+        },
+        {
+          "filename": "janus-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/janus/janus-filter-color-shadow@2x.webp",
+          "sha256": "d72c8bef310dd362ae62d9c7a904a2243bc3e32320c91f08a1d2c4ccb89ddea2",
+          "bytes": 232288
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

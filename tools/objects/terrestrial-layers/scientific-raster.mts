@@ -13,6 +13,7 @@ import { fromFile } from 'geotiff';
 import {loadIsis3Raster} from './isis3-raster.mts';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 import {composeCorrectedColor} from './photometric-observations.mts';
+import { parseBandColorDisplay, encodeBandColor, bandColorEvidence } from '../color-transfer.mts';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mts';
 import { loadPdsRadialTable } from './pds-radial-table.mts';
 import { loadShapeScalarGrid } from './obj-shape.mts';
@@ -242,6 +243,8 @@ export function sampleColorBand(band: Omit<ColorBand, "filter">, easting: number
 
 export async function prepareObservedColor({ sourceDirectory, entries:values, profile:profileValue, width, height, photometry }: {sourceDirectory:string;entries:readonly unknown[];profile:unknown;width:number;height:number;photometry?:{geometry:ReadonlyMap<string,ObservationGeometry>;profile:PhotometryProfile}|null}) {
   const entries=values.map(parseColorEntry),profile=parseColorSourceProfile(profileValue);
+  const display=parseBandColorDisplay(profile.colorDisplay,profile.filters);
+  if(profile.gamma!==1||display.inputQuantity!=='radiance-factor')throw new TypeError('Observed calibrated color requires its I/F band display before reading the source rasters.');
   const groups = new Map<string,ColorBand[]>();
   for (const entry of entries) {
     const file = await fromFile(resolve(sourceDirectory, entry.path));
@@ -271,7 +274,9 @@ export async function prepareObservedColor({ sourceDirectory, entries:values, pr
 
 /** Highest native density owns a pixel only when every authored channel exists. */
 export function composeObservedColor({ groups, profile, width, height, sourceIds = [] }: ObservedColorContext) {
-  const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height).fill(1), coverage: Record<string,{pixels:number;surfacePercent:number}> = {};
+  const display=parseBandColorDisplay(profile.colorDisplay,profile.filters);
+  if(profile.gamma!==1)throw new TypeError('Band color cannot apply legacy gamma before its final display encoding.');
+  const samples = new Float32Array(width * height * 3), missing = new Uint8Array(width * height).fill(1), coverage: Record<string,{pixels:number;surfacePercent:number}> = {};
   const ordered = [...groups].sort((a, b) => a[1][0].resolution[0] - b[1][0].resolution[0]);
   for (const [observation, bands] of ordered) {
     const channels = profile.filters.map(filter => bands.filter(band => band.filter === filter));
@@ -293,10 +298,10 @@ export function composeObservedColor({ groups, profile, width, height, sourceIds
         });
         if (!values.every((value): value is number => value !== null)) continue;
         missing[index] = 0; pixels++; solidAngle += Math.cos(latitude);
-        for (let c = 0; c < 3; c++) rgb[index * 3 + c] = Math.round(255 * Math.min(1, Math.max(0, values[c])) ** (1 / profile.gamma));
+        for (let c = 0; c < 3; c++) samples[index * 3 + c] = values[c];
       }
     }
     coverage[observation] = { pixels, surfacePercent: solidAngle / (width * height * 2 / Math.PI) * 100 };
   }
-  return { rgb, missing, coverage, sourceIds };
+  return { rgb:encodeBandColor(samples,missing,display), missing, coverage, sourceIds,display,colorDisplay:bandColorEvidence(display) };
 }
