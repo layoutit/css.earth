@@ -31,6 +31,22 @@ test('navigation timing records phases once and bounds retained entries without 
   performance.clearMarks('unrelated');
 });
 
+test('a settled navigation records no later phase', () => {
+  const timing = createNavigationTiming({ performance } as unknown as Window, 'source', 'destination');
+  timing.mark('finished'); timing.mark('cancelled'); timing.mark('mounted');
+  const finished = performance.getEntriesByName('cssEarth:navigation:finished', 'mark')[0];
+  assert.ok(finished);
+  const id = requireFiniteNumber(SourceEvidence.parse(finished.detail).field('id'));
+  for (const phase of ['cancelled', 'mounted']) {
+    const late = performance.getEntriesByName(`cssEarth:navigation:${phase}`, 'mark').filter(entry => SourceEvidence.parse(entry.detail).field('id') === id);
+    assert.equal(late.length, 0, `${phase} recorded after finished`);
+  }
+  for (const phase of ['requested', 'finished', 'cancelled', 'mounted']) {
+    performance.clearMarks(`cssEarth:navigation:${phase}`);
+    performance.clearMeasures(`cssEarth:navigation:${phase}`);
+  }
+});
+
 test('timing is optional in non-browser hosts', () => {
   assert.doesNotThrow(() => createNavigationTiming({} as Window, 'a', 'b').mark('first-motion'));
 });
