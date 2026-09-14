@@ -154,13 +154,64 @@
             ],
             "pixelAngleMicroradians": 5.989697719921734,
             "backgroundMaximum": 0.003
+          },
+          {
+            "id": "n1530371111_1",
+            "path": "observations/N1530371111_1_CALIB.IMG",
+            "labelPath": "observations/N1530371111_1_CALIB.LBL",
+            "observerLatitude": -0.35,
+            "observerWestLongitude": 105.79,
+            "sunLatitude": -16.87,
+            "sunWestLongitude": 153.83,
+            "rangeKm": 270031.4,
+            "northAzimuthDegrees": 359.91,
+            "center": [
+              506.9,
+              520.2
+            ],
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
+          },
+          {
+            "id": "n1524970213_1",
+            "path": "observations/N1524970213_1_CALIB.IMG",
+            "labelPath": "observations/N1524970213_1_CALIB.LBL",
+            "observerLatitude": -0.03,
+            "observerWestLongitude": 212.98,
+            "sunLatitude": -17.67,
+            "sunWestLongitude": 262.84,
+            "rangeKm": 220399.8,
+            "northAzimuthDegrees": 359.91,
+            "center": [
+              592.0,
+              511.0
+            ],
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
+          },
+          {
+            "id": "n1867600368_1",
+            "path": "observations/N1867600368_1_CALIB.IMG",
+            "labelPath": "observations/N1867600368_1_CALIB.LBL",
+            "observerLatitude": 73.0,
+            "observerWestLongitude": 106.67,
+            "sunLatitude": 26.71,
+            "sunWestLongitude": 168.12,
+            "rangeKm": 97965.6,
+            "northAzimuthDegrees": 19.41,
+            "center": [
+              508.0,
+              511.2
+            ],
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           }
         ],
         "selection": "finest-resolution",
         "levelMatching": {
           "samplesPerTriangle": 64,
           "minimumPairs": 64,
-          "maximumGain": 1.9,
+          "maximumGain": 2.5,
           "maximumAngleDegrees": 70
         },
         "transfer": {
@@ -180,7 +231,7 @@
         "display": {
           "displayRange": [
             0,
-            0.859
+            0.967
           ]
         }
       },
