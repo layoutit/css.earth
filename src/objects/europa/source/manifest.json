@@ -1996,8 +1996,8 @@
     {
       "id": "europa-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 9991,
-      "expectedSha256": "086f7fd9933c8de9738fd857b5f6f94b56bba63344fe42c5bc7437d81a942b83",
+      "expectedBytes": 14604,
+      "expectedSha256": "f932b8bacf14fc327519ad725ce0d8a816857e1bb03abc6b4ec07f501fcbb1d6",
       "origin": "Repository-authored Europa raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2090,8 +2090,8 @@
     {
       "id": "europa-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 18810,
-      "expectedSha256": "94cec47f070ff5ecd4418e1bb74ddc91bd58eb5d1b04339555e7443f81ba9cb3",
+      "expectedBytes": 21053,
+      "expectedSha256": "1f54a490a7154e8d1f3e984eaddccd567d284b87ac7108f9c4cf6f8eea68d491",
       "origin": "Repository-authored Europa acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2109,8 +2109,8 @@
     {
       "id": "europa-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15477,
-      "expectedSha256": "4d2167638813433949ae30191514e7fd5dcdc9d0a8b156d00a2c9ad45788b484",
+      "expectedBytes": 20870,
+      "expectedSha256": "ecdadd63438967d6e9dd54f21b5d7777fd3d4819fa2c1e50bfd38a403c7903ab",
       "origin": "Repository-authored Europa object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2123,6 +2123,204 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "europa-composition-coarse-ice-uncertainty",
+      "path": "composition/coarse-ice-uncertainty.tif",
+      "expectedBytes": 260920,
+      "expectedSha256": "b1b7cca42a3714e00d73af4d5503463532cd490ea2306f4c83651e1323459a2f",
+      "origin": "https://doi.org/10.5281/zenodo.6034904",
+      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6034904"
+      ],
+      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "composition-source"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "europa-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6034904"
+          }
+        ]
+      }
+    },
+    {
+      "id": "europa-composition-coarse-ice",
+      "path": "composition/coarse-ice.tif",
+      "expectedBytes": 260920,
+      "expectedSha256": "ab127d09bb072a660e6893184bfa4f4e54fbe1095674f86e22dd1f749617b10e",
+      "origin": "https://doi.org/10.5281/zenodo.6034904",
+      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6034904"
+      ],
+      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "coarse-ice"
+      ],
+      "lensId": "coarse-ice",
+      "label": "Coarse ice",
+      "falseColor": true,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "europa-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6034904"
+          }
+        ]
+      }
+    },
+    {
+      "id": "europa-composition-fine-ice-uncertainty",
+      "path": "composition/fine-ice-uncertainty.tif",
+      "expectedBytes": 260920,
+      "expectedSha256": "ac2a7850bb19a41d533c84fc0de32b5966d605f274f5081dcd5b61ff1fead8b1",
+      "origin": "https://doi.org/10.5281/zenodo.6034904",
+      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6034904"
+      ],
+      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "composition-source"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "europa-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6034904"
+          }
+        ]
+      }
+    },
+    {
+      "id": "europa-composition-fine-ice",
+      "path": "composition/fine-ice.tif",
+      "expectedBytes": 260920,
+      "expectedSha256": "49d1e99a5ee82018cfebb27d7554a70eb845b83e1bef811400ac66aad8f2ceff",
+      "origin": "https://doi.org/10.5281/zenodo.6034904",
+      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6034904"
+      ],
+      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "fine-ice"
+      ],
+      "lensId": "fine-ice",
+      "label": "Fine ice",
+      "falseColor": true,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "europa-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6034904"
+          }
+        ]
+      }
+    },
+    {
+      "id": "europa-composition-fit-SPHERE",
+      "path": "composition/fit_SPHERE.json.gz",
+      "expectedBytes": 2700255,
+      "expectedSha256": "f991ea9cef84b48b09fe5dd0195d98b5962e505b98bf49f562b577f56c537199",
+      "origin": "https://raw.githubusercontent.com/ortk95/king-2022-compositional-mapping-europa/9dc54ad9984875f5766eb3d80d65eb66a74e10ce/fit_SPHERE.json.gz",
+      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6034904"
+      ],
+      "acquisition": "Download the pinned native release member.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "composition-source"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "europa-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6034904"
+          }
+        ]
+      }
+    },
+    {
+      "id": "europa-composition-ice-signature",
+      "path": "composition/ice-signature.tif",
+      "expectedBytes": 260920,
+      "expectedSha256": "6d0eab3e645a2d81262818e7227ee37a4a3bf82718e55613cf2ac24c641a4f71",
+      "origin": "https://doi.org/10.5281/zenodo.6034904",
+      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6034904"
+      ],
+      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "ice-signature"
+      ],
+      "lensId": "ice-signature",
+      "label": "Ice signature",
+      "falseColor": true,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "europa-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6034904"
+          }
+        ]
+      }
+    },
+    {
+      "id": "europa-composition-reflectance-SPHERE",
+      "path": "composition/reflectance_SPHERE.json.gz",
+      "expectedBytes": 2072834,
+      "expectedSha256": "e8d8f85e838180e1363aef0d57e9205ff476f6573fa0f44e588366d3728fa2c3",
+      "origin": "https://raw.githubusercontent.com/ortk95/king-2022-compositional-mapping-europa/9dc54ad9984875f5766eb3d80d65eb66a74e10ce/reflectance_SPHERE.json.gz",
+      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6034904"
+      ],
+      "acquisition": "Download the pinned native release member.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "composition-source"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "europa-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6034904"
+          }
+        ]
       }
     }
   ],
@@ -2345,7 +2543,7 @@
       "id": "europa-dtm-controlled-dtms-intake-downloads-json",
       "path": "science/controlled-dtms/intake-downloads.json",
       "expectedBytes": 2777,
-      "expectedSha256": "bfb826fe5ff7a6b47519a3925065fcb202a91dbee561784505965d83fc58bdc9",
+      "expectedSha256": "9c08ca79c6a88fc7dd40483b39114b131592153eedef010f9f5e0029b7e999f9",
       "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
       "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
       "license": "CC0-1.0 source and repository-authored validation metadata",
@@ -2475,6 +2673,42 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "composition/model-conversion.json",
+      "expectedBytes": 3198,
+      "expectedSha256": "7dc4db19ae50a40efbaca6b58f162b4c36194df19106e805d5bdff851eadf07a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Conversion receipt identifying native numerical input, selected fields, coordinate mapping and unchanged coverage."
+      }
+    },
+    {
+      "path": "composition/model-recipe.json",
+      "expectedBytes": 952,
+      "expectedSha256": "ac4f528953750429a1a78d19040e765fbb75a9a68341ba670369af199049fb21",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored selection of exact published numerical fields, wavelengths and output coordinates."
+      }
+    },
+    {
+      "path": "composition/reflectance-conversion.json",
+      "expectedBytes": 2521,
+      "expectedSha256": "ff970bea462deab4cc10fdee0b194ca1b2a47750a523dbb2999364f0f0585b95",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Conversion receipt identifying native numerical input, selected fields, coordinate mapping and unchanged coverage."
+      }
+    },
+    {
+      "path": "composition/reflectance-recipe.json",
+      "expectedBytes": 452,
+      "expectedSha256": "351d7cd6018fd6200e1e0beff607ec668105acc6e8a6fbf97d9d4dbf809717ce",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored selection of exact published numerical fields, wavelengths and output coordinates."
       }
     }
   ]

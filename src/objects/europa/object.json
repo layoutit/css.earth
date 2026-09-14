@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ba0b9a78a14c4686a859157167d0ab50d47773aa00c7d92eb90607b3d6a68f06"
+    "sha256": "4bf1d55fb4ad72e7995544db4caca61717e15bc9c3dedc276aaf885703a0f4e3"
   },
   "id": "europa",
   "properties": {
@@ -83,6 +83,21 @@
               "id": "infrared",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "ice-signature",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "fine-ice",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "coarse-ice",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -103,7 +118,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "086f7fd9933c8de9738fd857b5f6f94b56bba63344fe42c5bc7437d81a942b83"
+          "sha256": "f932b8bacf14fc327519ad725ce0d8a816857e1bb03abc6b4ec07f501fcbb1d6"
         },
         {
           "id": "geometry",
@@ -123,7 +138,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4d2167638813433949ae30191514e7fd5dcdc9d0a8b156d00a2c9ad45788b484"
+          "sha256": "ecdadd63438967d6e9dd54f21b5d7777fd3d4819fa2c1e50bfd38a403c7903ab"
         },
         {
           "id": "solar-system",
@@ -143,7 +158,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "94cec47f070ff5ecd4418e1bb74ddc91bd58eb5d1b04339555e7443f81ba9cb3"
+          "sha256": "1f54a490a7154e8d1f3e984eaddccd567d284b87ac7108f9c4cf6f8eea68d491"
         },
         {
           "id": "features",
@@ -158,11 +173,12 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/planet-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/objects/europa/composition.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6483d26ec9d5e834c809187ff6b901c5f4ae0d14ecf67cd36ea8df0bb2cbb2ec"
+        "sha256": "033169d9062a0223f52f9a91cb2aa88f1718c0d4bbdc402237afc47c37c2149e"
       }
     },
     "catalog": {
