@@ -28,9 +28,9 @@ test('source support and nearest 3D facet are retained through a concave radial 
   assert.equal(sampler.sample(0,0),null,'Multiple radial source sheets are withheld');
 });
 
-const header = (values: Record<string, string | number | undefined>) => {
+const header = (values: Record<string, string | number | boolean | undefined>) => {
   const cards = Object.entries(values).map(([key,value]) => (key.padEnd(8) + '= ' +
-    (typeof value === 'string' ? "'" + value + "'" : String(value))).padEnd(80));
+    (typeof value === 'boolean' ? value ? 'T' : 'F' : typeof value === 'string' ? "'" + value + "'" : String(value))).padEnd(80));
   cards.push('END'.padEnd(80));
   return Buffer.from(cards.join('').padEnd(Math.ceil(cards.length*80/2880)*2880,' '),'ascii');
 };
@@ -39,8 +39,8 @@ function fitsFixture(reverseSource=false) {
     {metersPerUnit:1000,expectedVertices:6,expectedFaces:2});
   const names=['FACET_NUM','LATITUDE','LONGITUDE','RADIUS','SLOPE','SIGMA'];
   const units=[undefined,'DEGREES','DEGREES','KILOMETERS','DEGREES','DEGREES'];
-  const primary=header({SIMPLE:'T',BITPIX:8,NAXIS:0,TARGET:'FIXTURE',OBJ_FILE:'fixture.obj',PRODNAME:'fixture.fits'});
-  const columns: Record<string, string | number | undefined>={XTENSION:'BINTABLE',BITPIX:8,NAXIS:2,NAXIS1:24,NAXIS2:2,PCOUNT:0,GCOUNT:1,TFIELDS:6};
+  const primary=header({SIMPLE:true,BITPIX:8,NAXIS:0,TARGET:'FIXTURE',OBJ_FILE:'fixture.obj',PRODNAME:'fixture.fits'});
+  const columns: Record<string, string | number | boolean | undefined>={XTENSION:'BINTABLE',BITPIX:8,NAXIS:2,NAXIS1:24,NAXIS2:2,PCOUNT:0,GCOUNT:1,TFIELDS:6};
   names.forEach((name,i) => {columns['TTYPE'+(i+1)]=name;columns['TFORM'+(i+1)]=i?'1E':'1J';if(units[i])columns['TUNIT'+(i+1)]=units[i];});
   const data=Buffer.alloc(2880);data.writeInt32BE(0);
   [Math.asin(1/Math.sqrt(3))*180/Math.PI,45,Math.sqrt(3),0,0].forEach((n,i) => data.writeFloatBE(n,(i+1)*4));
@@ -100,4 +100,13 @@ test('derived gzip facet tables retain their NaN gaps and exact mesh binding', a
     await writeFile(join(root,'fields.csv.gz'),gzipSync(csv.replace('0.005,0.001','0.006,0.001')));
     await assert.rejects(()=>loadFacetScalarSurface(root,lens,mesh),/does not match source geometry/);
   }finally{await rm(root,{recursive:true,force:true});}
+});
+
+test('facet tables explicitly reject column scaling and null sentinels', () => {
+  for (const key of ['TSCAL5', 'TZERO5', 'TNULL1']) {
+    const f = fitsFixture();
+    const end = f.bytes.indexOf('END'.padEnd(80), 2880);
+    f.bytes.write((key.padEnd(8) + '= 1').padEnd(80) + 'END'.padEnd(80), end, 'ascii');
+    assert.throws(() => parseFacetFits(f.bytes, f.xml, f.profile, f.source), /scaling or null/);
+  }
 });
