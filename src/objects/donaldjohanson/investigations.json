@@ -45,18 +45,27 @@
     {
       "id": "source-surface-elevation",
       "subject": "Source-surface Elevation on the contact shape",
-      "status": "deferred",
-      "finding": "The README withholds radial Elevation because directions can intersect multiple surfaces. The shared closest-source-point sampler already evaluates scalar radius on full source triangles with a finite distance bound. This is a candidate for a bounded qualification trial, not a completed Donaldjohanson lens. The source authors’ modeled unseen terrain would remain modeled.",
-      "revisitWhen": "Bind the existing sampler to this mesh and qualify neck correspondence, source/display distance, scalar interpretation and visual seams within the current face budget.",
+      "status": "included",
+      "finding": "The earlier radial approach was withheld because 729 original face centroids differ from the first surface on their ray by up to 400.124 m, despite an 8,192-direction scan finding no second intersections. The 13 September audit identified the existing closest-source-point path as unqualified for this body. The 14 September qualification now includes Elevation on the unchanged 800-face mesh. Independent full-source checks retain the outer patch at source facet 487421 at 942.724 m above the 2,405.325 m sphere, rather than the first-ray value 400.124 m lower. The 56 m transfer limit withholds 13,810 of 5,778,049 triangle-interior texels (0.239%), shown as gray grid patches; those counts are not observed area. Existing photographs remain byte-identical. Headless DPR 1/2, mobile, rotation and lighting checks pass. Stereo constrains about 40% of the source shape; reconstructed unseen terrain remains reconstructed. Fine triangle boundaries remain visible at close zoom.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/donaldjohanson/README.md",
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/obj-shape.mts#L272",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/source-surface.test.mts"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/source-surface.test.mts",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/donaldjohanson/README.md",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/donaldjohanson/evidence/source-surface/independent.json",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/donaldjohanson/evidence/source-surface/preparation.json",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/donaldjohanson/evidence/source-surface/conformance.json",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/donaldjohanson/evidence/source-surface/browser.json",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/donaldjohanson/evidence/source-surface/delivery.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "256c455a34f2e9449e142e9f62471ce4cd005b77"
         }
       ]
     }
