@@ -321,7 +321,7 @@ function createLensBrowserController(drawer: HTMLElement, windowTarget: BrowserW
   const options = [...root.querySelectorAll("[data-lens-option]")]
     .filter((option) => option instanceof windowTarget.HTMLElement);
   const buttons = options.map((option) =>
-    requiredElement<HTMLButtonElement>(option, 'button[name="lens"]'));
+    requiredElement<HTMLButtonElement>(option, 'button[name="dataset"]'));
   if (options.length === 0 || buttons.some((button) =>
     !(button instanceof windowTarget.HTMLButtonElement))) {
     throw new Error("Planet shell surface lens browser has no valid lenses.");
@@ -714,7 +714,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     if (open !== next) resetResultsScroll();
     open = next;
     const currentUrl = new URL(windowTarget.location.href);
-    for (const input of searchCard.querySelectorAll<HTMLInputElement>('[data-search-context]')) {
+    for (const input of documentTarget.querySelectorAll<HTMLInputElement>('[data-search-context], [data-dataset-context]')) {
       input.value = currentUrl.searchParams.get(input.name) ?? '';
       input.disabled = !input.value;
     }

@@ -39,7 +39,7 @@ if (!(panel instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetail
 return panel.open; })) {
         await page.locator(".planet-lenses > summary").click();
       }
-      await page.locator('button[name="lens"][value="buenos-aires-noise"]').click();
+      await page.locator('button[name="dataset"][value="buenos-aires-noise"]').click();
       await page.waitForFunction(() => {
         function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
 return !requiredDiagnostics(window.__earth).camera.stats().dragInertia.destinationFlyTo.active; });

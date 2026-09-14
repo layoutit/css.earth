@@ -39,10 +39,10 @@ try {
     await page.waitForFunction(id => window.__cssearthTest.object(id).ready, id);
     await page.evaluate(() => { const input = document.querySelector<HTMLInputElement>('input[name="motion"]'); if (input?.checked) input.click(); });
     assert.equal(await page.evaluate(id => window.__cssearthTest.object(id).runtime.selection().committed?.shadows, id), false);
-    const lenses = await page.locator('button[name="lens"]').evaluateAll(nodes => nodes.map(node => (node as HTMLButtonElement).value));
+    const lenses = await page.locator('button[name="dataset"]').evaluateAll(nodes => nodes.map(node => (node as HTMLButtonElement).value));
     for (const lens of mode === 'desktop' ? lenses : ['draco']) {
       if (mode === 'mobile') await page.evaluate(({ id, lens }) => window.__cssearthTest.object(id).selectLens(lens), { id, lens });
-      else await page.locator(`button[name="lens"][value="${lens}"]`).click();
+      else await page.locator(`button[name="dataset"][value="${lens}"]`).click();
       await page.waitForFunction(({ id, lens }) => window.__cssearthTest.object(id).runtime.selection().committed?.lensId === lens, { id, lens });
       assert.equal(await page.evaluate(id => window.__cssearthTest.object(id).assertStableDomIdentity(), id), true);
     }

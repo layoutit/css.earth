@@ -23,6 +23,22 @@ test('serialization publishes the authenticated topology without changing its pr
   assert.equal(JSON.stringify(definition), before);
 });
 
+test('every Saturn dataset keeps the same topology and applies its prepared presentation', () => {
+  const before = JSON.stringify(definition);
+  const normal = serializePreparedScene(definition);
+  for (const lens of definition.controls.lenses!.controls) {
+    const scene = serializePreparedScene(definition, lens.id);
+    assert.equal(scene.nodes, normal.nodes);
+    assert.deepEqual([...scene.html.matchAll(/data-prepared-node="\d+"/g)].map(match => match[0]), [...normal.html.matchAll(/data-prepared-node="\d+"/g)].map(match => match[0]));
+    if (lens.id === 'normal') assert.deepEqual(scene, normal);
+    else assert.notEqual(scene.html, normal.html);
+    if (lens.id === 'cross-section') assert.equal(scene.attributes['data-view'], 'interior');
+    if (lens.id === 'ultraviolet') assert.equal(scene.attributes['data-lens'], 'ultraviolet');
+  }
+  assert.throws(() => serializePreparedScene(definition, 'unknown'), /Unknown object lens/);
+  assert.equal(JSON.stringify(definition), before);
+});
+
 test('HTML escaping and ordered CSS writes preserve quoted semicolons and the initial selection', () => {
   const scene = serializePreparedScene({ ...definition, controls: { lenses: null, settings: null },
     materials: [], motion: [], animations: [], textureLevels: undefined,

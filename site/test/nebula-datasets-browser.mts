@@ -93,7 +93,7 @@ try {
   await waitReady();
   await selectedContext('mercury', 'enhanced').waitFor({ state: 'visible' });
   assert.equal(await selectedContext('mercury', 'enhanced').locator('[data-mission="messenger"]').isVisible(), true);
-  await page.locator('button[name="lens"][value="topography"]').click();
+  await page.locator('button[name="dataset"][value="topography"]').click();
   await selectedContext('mercury', 'topography').waitFor({ state: 'visible' });
   assert.equal(await selectedContext('mercury', 'topography').locator('[data-mission="messenger"]').isVisible(), true);
   assert.equal(new URL(page.url()).hash, '#dataset=topography');

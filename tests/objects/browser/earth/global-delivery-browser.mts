@@ -65,11 +65,11 @@ return window.__deliveryNodes=[...requiredElement(document.querySelector(".plane
         run.views.push({name,keys,elapsedMs:Date.now()-start});
         await page.screenshot({path:resolve(output,`${name.toLowerCase().replaceAll(" ","-")}-dpr${dpr}.png`)});
         if(name==="Buenos Aires"){
-          await page.locator('button[name="lens"][value="buenos-aires-noise"]').click();
+          await page.locator('button[name="dataset"][value="buenos-aires-noise"]').click();
           const noise=await settled("noise-");assert.ok(noise.length>0);
           run.views.push({name:"noise",keys:noise});
           await page.screenshot({path:resolve(output,`noise-dpr${dpr}.png`)});
-          await page.locator('button[name="lens"][value="normal"]').click();
+          await page.locator('button[name="dataset"][value="normal"]').click();
         }
       }
       run.stable=await page.evaluate(()=>{

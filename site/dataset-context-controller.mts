@@ -32,7 +32,7 @@ export function createDatasetContextController(drawer: HTMLElement, documentTarg
       const owner = host === card ? card : focusCard;
       const active = !host.closest('[hidden]') && owner?.ariaBusy !== 'true' && owner?.dataset.cardView !== 'overview'
         && Boolean(owner?.querySelector('[data-information-tab="dataset"]:checked'));
-      const lens = host.querySelector<HTMLButtonElement>('button:is([name="lens"], [name="focusLens"])[aria-pressed="true"]')?.value;
+      const lens = host.querySelector<HTMLButtonElement>('button:is([name="dataset"], [name="focusLens"])[aria-pressed="true"]')?.value;
       hide(region, !active);
       for (const context of contexts) hide(context, context.dataset.datasetContext !== lens);
       available ||= active && contexts.some(context => !context.hidden && context.children.length > 0);

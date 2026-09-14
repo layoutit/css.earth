@@ -38,7 +38,7 @@ test('both graph compilers retain body URLs and admit shared-camera focus URLs w
   const objects = [object('mercury', '/mercury/', 'src/objects/mercury'), object('m42', '/sun/?focus=m42', 'src/objects/m42')];
   const usage = compileSourceUsage(objects, sources), contributions = compileContributions(objects, catalog);
   assert.deepEqual(usage.datasets, contributions.datasets);
-  assert.deepEqual(usage.datasets.map(view => view.href), ['/mercury/#dataset=optical', '/sun/?focus=m42&focusLens=optical']);
+  assert.deepEqual(usage.datasets.map(view => view.href), ['/mercury/?dataset=optical', '/sun/?focus=m42&focusLens=optical']);
   assert.deepEqual(usage.edges.map(edge => edge.ownerPath), ['src/objects/mercury/source/manifest.json', 'src/objects/m42/source/manifest.json']);
   assert.deepEqual(parseContributionGraph(contributions, catalog), contributions);
   assert.deepEqual(parseSourceUsage(usage, sources), usage);

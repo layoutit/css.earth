@@ -31,7 +31,7 @@ try{
     return page.locator(`.${id}-body > u`).evaluateAll(nodes=>[...new Set(nodes.filter(n=>getComputedStyle(n).display!=='none').map(n=>getComputedStyle(n).backgroundImage))]);
    };
    for(const lens of lensIds){
-    await page.locator(`button[name="lens"][value="${lens}"]`).click();
+    await page.locator(`button[name="dataset"][value="${lens}"]`).click();
     await page.waitForFunction(lens=>{
       function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
 return requiredElement(document.querySelector('.planet-stage')).dataset.lens===lens; },lens);
