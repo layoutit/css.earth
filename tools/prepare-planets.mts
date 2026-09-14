@@ -48,7 +48,7 @@ export async function preparationEnvironment() {
 }
 
 /** The environment of a traced preparation: the trace directory, and the trace loaded into every Node process. */
-export function tracedPreparationEnvironment(traceDirectory: string, environment: Readonly<Record<string, string | undefined>> = process.env) {
+export function tracedPreparationEnvironment(traceDirectory: string, environment: Readonly<Record<string, string | undefined>> = process.env): Record<string, string | undefined> {
   const flag = `--import=${traceModule}`, options = environment.NODE_OPTIONS ?? "";
   return { ...environment, [PREPARATION_TRACE_VARIABLE]: traceDirectory,
     NODE_OPTIONS: options.split(/\s+/u).includes(flag) ? options : `${options} ${flag}`.trim() };
