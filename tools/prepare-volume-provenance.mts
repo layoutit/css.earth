@@ -163,7 +163,7 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
       outputs.push({ path: resolve(root, `public${previewUrl}`), text: image.bytes });
       controls.push({ id: lens.id, label: lens.label, title: lens.title, thumbnailUrl: previewUrl,
         texture: { url: previewUrl, width: image.width, height: image.height, attribution: { label: own.displayCredit ?? own.credit, url: own.sourceUrl } },
-        summary: lens.summary, detail: lens.detail, facts: lens.facts });
+        description: lens.description, summary: lens.summary, detail: lens.detail, facts: lens.facts });
       products.push({ id: lens.id, label: lens.label, process: 'Apply the pinned source image to the shared prepared volume field; preserve the saved reconstruction and display settings.',
         recipe: 'presentation', selector: `/lenses/${index}`, recipeDependencies: recipes.map(recipe => recipe.id),
         inputs: [...new Set([lens.input, ...record.sharedInputs])], parents: [], lensIds: [lens.id],

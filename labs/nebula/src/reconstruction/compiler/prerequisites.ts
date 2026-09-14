@@ -35,7 +35,7 @@ async function structuresReady(root: string, path: string) {
 }
 
 /** Calls the existing source owners; success requires their artifact, never only process exit. */
-async function command(root: string, name: string, recipe: string, sentinel: string, signal: AbortSignal, progress: CompilerProgress) {
+export async function runCompilerSourceCommand(root: string, name: string, recipe: string, sentinel: string, signal: AbortSignal, progress: CompilerProgress) {
   signal.throwIfAborted();
   await new Promise<void>((accept, reject) => {
     const child = spawn(process.execPath, ['--experimental-strip-types', resolve(root, 'labs/nebula/src/run.ts'), name, recipe], { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] });
@@ -61,14 +61,14 @@ export async function restoreCompilerInputs(root: string, recipe: CompilerRecipe
     if (jointRecord(value) && jointRecord(value.provenance)) prepared &&= value.provenance.recipeSha256 === geometrySha(await readFile(resolve(root, recipe.observationRecipe)));
   }
   if (!prepared) {
-    await command(root, 'prepare-observations', recipe.observationRecipe, 'NEBULA_OBSERVATIONS_COMPLETE', signal, progress); restored = true;
+    await runCompilerSourceCommand(root, 'prepare-observations', recipe.observationRecipe, 'NEBULA_OBSERVATIONS_COMPLETE', signal, progress); restored = true;
   }
   if (!await compilerLayersReady(root, JSON.parse(await readFile(resolve(root, recipe.observationCatalogue), 'utf8'))))
     throw new Error('Observation preparation did not restore all original/starless/residual layers.');
   steps.push({ id: 'observations', label: 'Align + remove stars', state: restored ? 'complete' : 'reused', seconds: (performance.now() - started) / 1000 });
   started = performance.now(); progress('Checking structure evidence…', .12);
   const existing = await structuresReady(root, recipe.structureCatalogue);
-  if (!existing || restored) await command(root, 'prepare-observation-structures', recipe.structureRecipe, 'OBSERVATION_STRUCTURES_COMPLETE', signal, progress);
+  if (!existing || restored) await runCompilerSourceCommand(root, 'prepare-observation-structures', recipe.structureRecipe, 'OBSERVATION_STRUCTURES_COMPLETE', signal, progress);
   if (!await structuresReady(root, recipe.structureCatalogue)) throw new Error('Structure preparation did not restore every registered raster.');
   steps.push({ id: 'structures', label: 'Extract + combine structure', state: existing && !restored ? 'reused' : 'complete', seconds: (performance.now() - started) / 1000 });
   if (recipe.jointRecipe) {

@@ -5,8 +5,8 @@
   "defaultLens": "hst-optical",
   "bank": {
     "path": "src/objects/m2-9/prepared/lenses.json",
-    "sha256": "b29c84b6040183f1867e20a85835754a46efec602c8d268c112d28043668e2c9",
-    "bytes": 219826
+    "sha256": "aded0209986b0333f9ed3ebc8e48459f5ee0d372d6e6db96a6b799a0bbfdaf39",
+    "bytes": 222816
   },
   "recipes": [
     {
@@ -18,20 +18,21 @@
     {
       "id": "delivery",
       "path": "src/objects/m2-9/source/delivery.json",
-      "sha256": "b4c999b140798a2e00b20d61f62d9e1c0eca1273d178b7230cbba7c8667f279d",
-      "bytes": 1156
+      "sha256": "e737db3770654a8d820445967a6c886a30374f4a9aeb334389f894a01c08d12e",
+      "bytes": 1382
     }
   ],
   "sharedInputs": [
-    "image-frame"
+    "image-frame",
+    "stellar-field"
   ],
   "lenses": [
     {
       "id": "hst-optical",
       "label": "Hubble · optical",
       "title": "The Twin Jet Nebula in visible light",
-      "description": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted 650pc model distance is uncertain; published expansion distance 1300±200pc would double this physical size. The accepted baseline contains no stellar catalogue. The reference image shows the photograph before star removal and symmetry reconstruction.",
-      "summary": "Visible-light outreach photograph; axial-symmetry depth model.",
+      "description": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted 650pc model distance is uncertain; published expansion distance 1300±200pc would double this physical size. The accepted baseline contains no stellar catalogue. The reference image shows the photograph before star removal and symmetry reconstruction. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Hubble optical colors on an assumed symmetric cloud; depth and inclination are not measured.",
       "detail": "788 × 438 px",
       "facts": [
         {

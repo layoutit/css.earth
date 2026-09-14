@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m2-9",
+  "entries": [
+    {
+      "id": "lens-hst-optical",
+      "subject": "hst-optical shipped image lens",
+      "status": "included",
+      "finding": "The 1997 Hubble/WFPC2 optical photograph is pinned through its APOD JPEG and cross-edition ESA astrometry. The caption-free crop is 788 by 438 pixels, 58.0350 by 32.2766 arcsec. The 144-slice symmetry fit is conditional emission, not measured depth; four manual point masks are not a catalogue.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m2-9/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m2-9/source/image-frame.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m2-9/experiment.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "gaia-surroundings",
+      "subject": "Gaia DR3 astrometry/photometry and Bailer-Jones EDR3 geometric distances",
+      "status": "included",
+      "finding": "Seven Gaia sources in an authored 10 pc sphere, G < 14; sparse surroundings are preserved without inventing missing stars. Actual catalogue source IDs, median distances and uncertainty intervals are retained. Sphere, quality cuts, budget, brightness response and fade are display selections, not a membership survey; Cardiel BP-RP display color uses a neutral fallback outside its valid range.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m2-9/source/stellar-field.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m2-9/source/delivery.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/src/delivery/catalogue-field.ts",
+        "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+        "https://arxiv.org/abs/2012.05220",
+        "https://arxiv.org/abs/2107.08734"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "symmetry-method",
+      "subject": "Independent Wenger 2013 reconstruction",
+      "status": "included",
+      "finding": "Strictly independent axial group-sparsity/FISTA implementation uses deterministic proximal evaluation and four manual point masks. Hollow-shell and zero-regularization controls test radial behavior; they do not measure the nebula inclination or gas depth. No author code or restricted volumes were imported.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m2-9/README.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m2-9/experiment.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/planetary-nebulae.md",
+        "https://doi.org/10.1111/cgf.12216"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "adopted-distance",
+      "subject": "650 pc adopted model scale",
+      "status": "included",
+      "finding": "The selected Sánchez Contreras 2024 interpretation sets the frame scale; the displayed optical crop is about 0.183 pc wide at 650 pc. It is not a new parallax or the full paper nebula extent.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m2-9/source/nebula.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m2-9/source/image-frame.json",
+        "https://arxiv.org/abs/2411.03825v1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "expansion-distance",
+      "subject": "1300 ± 200 pc expansion-distance alternative",
+      "status": "deferred",
+      "finding": "Corradi 2011 gives a substantially different expansion distance. Applying it would double physical size; it cannot be silently averaged with the adopted 650 pc model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m2-9/source/nebula.json",
+        "https://arxiv.org/abs/1102.5634"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Choose an explicitly justified distance model and propagate its uncertainty through every frame/extent before changing scale."
+    },
+    {
+      "id": "publisher-coordinate-conflict",
+      "subject": "Inconsistent outreach-page coordinates",
+      "status": "excluded",
+      "finding": "The original trial identified an inconsistent NASA science-page coordinate. The app uses the pinned cross-edition image-frame evidence rather than that page value.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m2-9/README.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m2-9/source/image-frame.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Revisit only if corrected publisher astrometry is independently verified against the selected native photograph."
+    },
+    {
+      "id": "side-view-limit",
+      "subject": "Background plane and directional color",
+      "status": "unresolved",
+      "finding": "Real front/oblique views keep connected lobes but retain background plane, rings and directional color/brightness artifacts. The original external review timed out; neither successful transport nor low image-fit residual is independent scientific acceptance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m2-9/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Improve the owning symmetry/material assumptions against fixed views without masking the defect through exposure or a fabricated depth field."
+    }
+  ]
+}

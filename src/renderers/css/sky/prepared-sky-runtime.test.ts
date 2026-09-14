@@ -203,7 +203,7 @@ test.each([
   mounted.destroy(); expect(stage.children).toEqual([detail]); expect(document.defaultView.pending.size).toBe(0);
 });
 
-test('shared universe preserves nearby independent nebulae at zero Milky Way opacity while culling their unresolved banks', () => {
+test('shared universe draws only resolved nebulae and never prefetches their lenses with the galaxy', async () => {
   vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
   const base = new URL('../../../', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
@@ -225,6 +225,8 @@ test('shared universe preserves nearby independent nebulae at zero Milky Way opa
       brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } }] };
   const { contextVisibility: _independent, ...galacticBank } = bank;
   const document = new FakeDocument(), stage = document.createElement();
+  const fetchResource = vi.fn<typeof fetch>(async () => new Response(new Uint8Array([1])));
+  Object.assign(document.defaultView, { fetch: fetchResource });
   const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
     volumeLenses: [bank, { ...galacticBank, id: 'galactic-default' }].map(payload => ({ payload,
@@ -236,10 +238,12 @@ test('shared universe preserves nearby independent nebulae at zero Milky Way opa
     const galactic = root.children.find(node => node.dataset.volumeLensObject === 'galactic-default')!;
     const cloud = independent.children.find(node => node.className === 'prepared-volume-lens-cloud')!;
     const axes = cloud.children.filter(node => node.className === 'css-volume-projection');
+    const images = (node: FakeElement): string[] => [node.style.backgroundImage, ...node.children.flatMap(images)].filter(Boolean);
+    expect(images(independent)).toEqual([]); expect(images(galactic)).toEqual([]);
     const count = document.count, retained = [...root.children];
     expect(axes).toHaveLength(3);
     // A 0.1 pc radius spans 30 px at 2 pc and 1.25 px at 48 pc, using the default visibility thresholds.
-    for (const [distancePc, visible] of [[52, true], [98, false], [52, true]] as const) {
+    for (const [index, [distancePc, visible]] of ([[98, false], [52, true], [98, false], [52, true]] as const).entries()) {
       const camera: WorldCameraPose = { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
         pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
           orientationXyzw: [0, 0, 0, 1] } };
@@ -250,13 +254,25 @@ test('shared universe preserves nearby independent nebulae at zero Milky Way opa
       expect(galactic.style.display).toBe('none');
       expect(independent.style.opacity).toBe(visible ? '1' : '0');
       expect(independent.style.display).toBe(visible ? 'block' : 'none');
+      if (index === 0) expect(images(independent)).toEqual([]);
       if (visible) {
         expect(Number(independent.dataset.cloudOpacity)).toBeGreaterThan(0);
         expect(axes.some(axis => axis.style.visibility === 'visible' && Number(axis.style.opacity) > 0)).toBe(true);
+        expect([...new Set(images(independent))]).toEqual(['url("/nebula/nearby-nebula/z.webp")']);
       }
+      expect(images(galactic)).toEqual([]);
       expect(root.children).toEqual(retained);
       expect(document.count).toBe(count);
     }
+    // Trigger the actual universe warm-up: it must finish without any nebula
+    // URL, even for legacy banks with no distant-image payload or leaf bounds.
+    mounted.publish({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
+      pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1],
+        context.focus.positionM[2] + context.volume.fullDistanceM * 2], orientationXyzw: [0, 0, 0, 1] } }, viewport);
+    const skyPaths = new Set([...volume.sky?.faces ?? [], ...volume.sky?.nearFaces ?? []].map(face => face.texturePath));
+    const expected = volume.resources.filter(resource => !skyPaths.has(resource.path)).map(resource => `/volume/${resource.path}`);
+    await vi.waitFor(() => expect(fetchResource).toHaveBeenCalledTimes(expected.length));
+    expect(fetchResource.mock.calls.map(([url]) => url)).toEqual(expected);
   } finally { mounted.destroy(); }
   expect(stage.children).toEqual([]);
   expect(document.defaultView.pending.size).toBe(0);

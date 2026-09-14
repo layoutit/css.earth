@@ -1,0 +1,37 @@
+{
+  "id": "hipparcos-esa-1997",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "ESA 1997, The Hipparcos and Tycho Catalogues, ESA SP-1200",
+  "identifiers": [
+    {
+      "type": "CDS catalogue",
+      "value": "I/239/hip_main"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/239",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m45/stellar-sources.json",
+      "revision": "9d0a453d4c82637ebc54277f97281e0c8426e85b",
+      "sha256": "483abd56f7602a659ec15af739dee1c9a828d567f71c479170d91c7fa1e9a75d",
+      "locator": "/sources/0"
+    }
+  ],
+  "publisher": "ESA 1997, The Hipparcos and Tycho Catalogues, ESA SP-1200",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA 1997, The Hipparcos and Tycho Catalogues, ESA SP-1200",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m45/stellar-sources.json#/sources/0"
+    }
+  ]
+}

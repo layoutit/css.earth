@@ -170,7 +170,15 @@ export function verifyRegistration(pairs: Pair[], source: SkyRaster, frame: SkyF
     residualArcseconds: rmsPixels * frame.fieldArcminutes[0] * 60 / frame.width,
     matches: ordered.map((pair, index) => ({ source: pair.source, frame: pair.frame, predictedFrame: applyAffine(matrix, pair.source),
       heldOut: index % 3 === 0, fitInlier: best.includes(pair), residualPixels: distance(applyAffine(matrix, pair.source), pair.frame) })),
-    interpretation: 'Relative field-star alignment to an ESO image; absolute sky scale and orientation remain publisher metadata. No stellar membership or physical depth.',
+    interpretation: 'Relative field-star alignment to the configured reference image; absolute sky scale and orientation remain publisher metadata. No stellar membership or physical depth.',
   };
   return { matrix, evidence, pass };
+}
+
+/** An inspectable footprint is not a successful registration or a processing input. */
+export function publisherRegistration(reason: string): ReturnType<typeof verifyRegistration>['evidence'] {
+  return { status: 'publisher', matchedStars: 0, trainingStars: 0, trainingCandidates: 0, rejectedTrainingStars: 0,
+    heldOutStars: 0, rmsPixels: 0, maxResidualPixels: 0, spatialQuadrants: 0, coverageFraction: [0, 0],
+    relativeScale: 1, centreShiftPixels: 0, coverageDomain: { kind: 'complete-source', sourcePixelPolygon: [] },
+    residualArcseconds: 0, matches: [], interpretation: reason };
 }

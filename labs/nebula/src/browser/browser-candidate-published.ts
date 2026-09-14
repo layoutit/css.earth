@@ -1,7 +1,8 @@
 /** Inspect CLI-prepared candidates through their public lab URLs without recompiling. */
 import assert from 'node:assert/strict';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
+import { readCompilerResult } from '../reconstruction/compiler/result';
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4331';
 const checkCancellation = process.argv.includes('--cancel');
@@ -30,7 +31,8 @@ async function starPresentation() {
   return page.locator('div[data-compiler-stars] s').evaluateAll(items => items.map(item => {
     const node = item as HTMLElement, rect = node.getBoundingClientRect();
     return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2, width: rect.width,
-      color: node.style.backgroundColor, alpha: node.style.opacity, visible: getComputedStyle(node).visibility !== 'hidden' };
+      color: node.style.backgroundColor, atlas: node.style.backgroundImage, tile: node.style.backgroundPosition,
+      alpha: node.style.opacity, visible: getComputedStyle(node).visibility !== 'hidden' };
   }));
 }
 const receipts: { id: string; result: string; lenses: string[]; stars: number }[] = [];
@@ -38,6 +40,7 @@ try {
   for (const id of candidates) {
     await page.goto(`${base}/reconstruction?subject=${id}&inspection=compiler`); await ready();
     const result = await page.locator('.compiler-controls').getAttribute('data-result-id'); assert.ok(result);
+    const prepared = readCompilerResult(JSON.parse(await readFile(`.local/nebula-lab/compiler/${result}/result.json`, 'utf8')));
     const lenses = await page.locator('#compiler-lens option').evaluateAll(items => items.map(item => (item as HTMLOptionElement).value));
     assert.ok(lenses.length > 0);
     const stars = await page.locator('div[data-compiler-stars] s').count(); assert.ok(stars > 0);
@@ -46,6 +49,10 @@ try {
       await page.locator('#compiler-lens').selectOption(lens); await material(lens); await snapshot(`${id}-${lens}-earth`);
       const currentStars = await starPresentation();
       assert.equal(currentStars.length, stars, 'Changing image recreated the stellar catalogue.');
+      if (prepared.scene.starSprites) assert.ok(currentStars.every(star => star.atlas.startsWith('url("blob:') && star.color === 'transparent'),
+        'Prepared core/halo atlas was replaced with flat stellar disks.');
+      if (previousStars && id === 'm45') assert.deepEqual(currentStars, previousStars,
+        'An image lens changed the shared optical reference catalogue.');
       if (previousStars && id === 'm42') {
         let compared = 0;
         currentStars.forEach((star, i) => {
@@ -55,7 +62,7 @@ try {
           assert.ok(Math.hypot(star.x - previous.x, star.y - previous.y) < .05, 'Photometry changed a star sky position.');
         });
         assert.ok(compared > 100, 'Not enough shared stars remained visible for the lens-switch check.');
-        assert.ok(currentStars.some((star, i) => star.color !== previousStars![i]!.color || star.alpha !== previousStars![i]!.alpha),
+        assert.ok(currentStars.some((star, i) => star.color !== previousStars![i]!.color || star.tile !== previousStars![i]!.tile || star.alpha !== previousStars![i]!.alpha),
           'The infrared lens retained optical star photometry.');
       }
       previousStars = currentStars;
@@ -70,7 +77,7 @@ try {
       assert.equal(await page.locator('.compiler-stage').getAttribute('data-compiler-pose'), pose);
     }
     await page.getByRole('button', { name: 'Neutral', exact: true }).click(); await material('', 'neutral'); await snapshot(`${id}-neutral-oblique`);
-    if (id === 'm42' || id === 'carina') {
+    if (id === 'm42' || id === 'carina' || id === 'm8') {
       for (const axis of ['west', 'north'] as const) {
         await page.getByRole('button', { name: 'Earth view', exact: true }).click();
         await page.getByRole('button', { name: 'Orbit', exact: true }).click();

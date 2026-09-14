@@ -121,7 +121,7 @@ export function volumeLensCompositeOpacity(banks: readonly { axis: VolumeAxis; o
   return brightness.overall * gain;
 }
 
-/** Fixed prepared resource bank. The application awaits prepareObjectResources(assets).ready before mounting. */
+/** Fixed declared bank; visible LODs attach their own textures on demand. */
 export function createPreparedVolumeLenses({ payload, resolveResource }: {
   payload: PreparedVolumeLenses; resolveResource(path: string): string;
 }) {
@@ -135,7 +135,7 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
   const entries = paths.map(path => ({ key: `${pool}:${path}`, url: urls.get(path)!, pool }));
   const assets: PreparedAssets = Object.freeze({ entries: Object.freeze(entries),
     pools: Object.freeze([{ id: pool, retention: 'mount' as const, capacity: paths.length, concurrency: 4,
-      reuse: false, decoding: 'async' as const }]), startup: Object.freeze(entries.map(entry => entry.key)) });
+      reuse: false, decoding: 'async' as const }]), startup: Object.freeze([]) });
   const resolvePrepared = (path: string) => {
     const url = urls.get(path);
     if (!url) throw new TypeError(`Undeclared prepared volume lens resource: ${path}.`);
@@ -162,8 +162,12 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         for (const bank of banks) bank.runtime.destroy();
         stars?.destroy(); root.remove();
       };
-      const publish = (publication: VolumeCameraPublication) => {
+      const publish = (publication: VolumeCameraPublication, visible = true) => {
         if (destroyed) return;
+        // A hidden bank must forget its last near camera; otherwise selecting a
+        // lens while zoomed out could load detail using that stale publication.
+        latest = visible ? publication : null;
+        if (!visible) return;
         const bank = banks.find(candidate => candidate.lens.id === selected)!;
         bank.runtime.publish(publication);
         const opacity = volumeLensCompositeOpacity(bank.runtime.roots.map((axisRoot, index) => ({
@@ -178,7 +182,6 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         // Hidden points leave layout; projecting them only wrote styles nobody draws.
         if (starsVisible && pointOpacity > 0) stars!.publish(publication);
         root.dataset.pointOpacity = String(pointOpacity); root.dataset.cloudOpacity = String(opacity);
-        latest = publication;
       };
       try {
         for (const lens of data.lenses) {

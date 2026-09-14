@@ -1,3 +1,4 @@
+import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import { createMotionRecorder, runMotionScript } from './motion-script.mts';
@@ -542,6 +543,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const browser = documentTarget.querySelector(".planet-object-browser");
   const empty = documentTarget.querySelector(".planet-object-empty");
   const galaxy = browser?.querySelector<HTMLElement>('[data-galactic-overview]');
+  const largeScaleCards = [...(browser?.querySelectorAll<HTMLElement>('[data-large-scale-overview]') ?? [])];
   const focusCard = browser?.querySelector<HTMLElement>('[data-prepared-focus-card]');
   const system = browser?.querySelector<HTMLElement>('[data-solar-system-results]');
   if (!(search instanceof windowTarget.HTMLInputElement) ||
@@ -636,7 +638,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   let overview = false;
   let overviewScope: OverviewScope = 'solar-system';
   let preparedFocus: PreparedCatalogObject | null = null;
-  const overviewName = () => overviewScope === 'milky-way' ? 'Milky Way' : 'Solar System';
+  const overviewName = () => ({ 'solar-system': 'Solar System', 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe' })[overviewScope];
   let visibleObjects = 0;
   const destinations = createDestinationBrowser({
     documentTarget,
@@ -692,9 +694,14 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     destinations?.setOpen(query.length > 0);
     const focused = preparedFocus && query === preparedFocus.name.toLocaleLowerCase('en');
     const galactic = !focused && query === 'milky way';
+    const neighborCard = largeScaleCards.find(card => card.dataset.largeScaleOverview === 'local-group');
+    const galaxySelected = focused && preparedFocus && neighborCard && [...neighborCard.querySelectorAll<HTMLElement>('[data-neighbor-id]')].some(row => row.dataset.neighborId === preparedFocus!.id);
+    const largeScale = galaxySelected ? neighborCard : !focused ? largeScaleCards.find(card => card.dataset.largeScaleName?.toLocaleLowerCase('en') === query) : undefined;
+    if (neighborCard && (galaxySelected || galactic || largeScale === neighborCard)) selectGalaxyNeighbor(neighborCard, galaxySelected ? preparedFocus!.id : 'milky-way');
+    for (const card of largeScaleCards) setPanelHidden(card, card !== largeScale);
     if (focusCard) setPanelHidden(focusCard, !focused);
     if (galaxy) setPanelHidden(galaxy, !galactic);
-    if (system) setPanelHidden(system, galactic || Boolean(focused));
+    if (system) setPanelHidden(system, galactic || Boolean(focused) || Boolean(largeScale));
     if (focused && preparedFocus) {
       browser.ariaLabel = preparedFocus.name;
       setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
@@ -702,7 +709,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       return;
     }
     browser.ariaLabel = galactic ? 'Milky Way' : 'Celestial objects';
-    if (galactic) {
+    if (galactic || largeScale) {
+      if (largeScale) browser.ariaLabel = largeScale.dataset.largeScaleName!;
       setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
       void destinations?.search(''); void features?.search('');
       return;

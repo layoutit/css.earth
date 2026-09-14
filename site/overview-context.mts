@@ -1,7 +1,7 @@
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { WorldCameraPose, PreparedWorldCameraFrame } from '../src/renderers/css/navigation/world-camera.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
-export type OverviewScope = 'solar-system' | 'milky-way';
+export type OverviewScope = 'solar-system' | 'milky-way' | 'local-group' | 'nearby-universe';
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 
@@ -25,8 +25,13 @@ export function bodyCardViewAtCamera(world: WorldCameraPose | null | undefined, 
 
 /** Follow the prepared galaxy's fade, with a separate return threshold to avoid flicker. */
 export function overviewScopeAtCamera(world: WorldCameraPose, previous: OverviewScope = 'solar-system', plan = context): OverviewScope {
+  // UI scale thresholds, not physical boundaries or membership claims.
+  const range = distance(world.pose.positionM, plan.focus.positionM);
+  const parsec = 3.085677581491367e16;
+  if (range >= (previous === 'nearby-universe' ? 4 : 5) * 1e6 * parsec) return 'nearby-universe';
+  if (range >= (previous === 'local-group' || previous === 'nearby-universe' ? 240000 : 300000) * parsec) return 'local-group';
   const { fadeStartDistanceM, fullDistanceM } = plan.volume;
-  const threshold = previous === 'milky-way' ? fadeStartDistanceM
+  const threshold = previous !== 'solar-system' ? fadeStartDistanceM
     : Math.sqrt(fadeStartDistanceM * fullDistanceM);
   return distance(world.pose.positionM, plan.focus.positionM) >= threshold ? 'milky-way' : 'solar-system';
 }
@@ -34,7 +39,7 @@ export function overviewScopeAtCamera(world: WorldCameraPose, previous: Overview
 export function viewDistance(world: WorldCameraPose, frame: PreparedWorldCameraFrame, scope: OverviewScope, plan = context, focus: Pick<PreparedCatalogObject, 'name' | 'positionM'> | null = null) {
   if (focus) return { label: `Distance to ${focus.name}:`, meters: distance(world.pose.positionM, focus.positionM),
     title: `Camera distance from the prepared center of ${focus.name}` };
-  return scope === 'milky-way' ? {
+  return scope !== 'solar-system' ? {
     label: 'Distance from Sun:',
     meters: distance(world.pose.positionM, plan.focus.positionM),
     title: 'Camera distance from the center of the Sun',

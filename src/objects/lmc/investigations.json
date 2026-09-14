@@ -1,0 +1,305 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "lmc",
+  "entries": [
+    {
+      "id": "lens-vista-infrared",
+      "subject": "vista-infrared shipped image lens",
+      "status": "included",
+      "finding": "Default ESO Y/J/Ks display, 8954 by 10000 pixels, repaints the existing simulated density without changing geometry or alpha. The 5340 held-out matches qualify relative registration inside its matched hull; exterior placement is extrapolated.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/lenses/vista-infrared/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/candidates/source/alignment-report.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "lens-horalek-widefield",
+      "subject": "horalek-widefield shipped image lens",
+      "status": "included",
+      "finding": "Horálek visible-light photograph, 6582 by 4388 pixels, with acquisition instrument/bands unresolved. The 198 held-out matches qualify relative registration over a 60.2 percent hull. Exact density/alpha and the shared catalogue remain fixed; extended placement is extrapolated.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/lenses/horalek-widefield/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/candidates/source/alignment-report.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "lens-wise-wide-infrared",
+      "subject": "wise-wide-infrared shipped image lens",
+      "status": "included",
+      "finding": "NASA/IPAC AllWISE W4/W2/W1 color HiPS mosaic, 6000² pixels across 24 degrees. Its fixed WCS passed 34,811 independently retrieved AllWISE W1 matches without fitting a transform. This validates W1 geometry, not diffuse photometry, visible seams or simulated gas depth.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/lenses/wise-wide-infrared/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/candidates/source/alignment-report.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "stellar-density-prior",
+      "subject": "Garver et al. simulated stellar density",
+      "status": "included",
+      "finding": "The existing full-density simulation supplies cloud support, not observed gas/dust density. Candidate images repaint its exact geometry and alpha; the common image-to-model placement is a display fit, not a particle-to-star identification.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/full-density/source/volume.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/slice-stability.md",
+        "https://doi.org/10.5061/dryad.1vhhmgr82"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "bonanos-stars",
+      "subject": "Bonanos 2009 massive-star catalogue",
+      "status": "included",
+      "finding": "Measured J2000 sky positions and Johnson V <= 16 inside the SMASH footprint select 943 stars. A deterministic joint cloud-emission and stellar-density prior assigns depth along each ray; no individual distances or proper-motion propagation are measured by this preparation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/stars/README.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/lenses.json",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "smash-registration-reference",
+      "subject": "SMASH noirlab2030a sky frame",
+      "status": "included",
+      "finding": "The original SMASH publisher frame remains the image-registration and stellar-selection reference. The former photo-colored lens and parametric source recipe are historical; their retained source.jpg is a publisher AstroPix derivative, not a local observation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/candidates/source/alignment-report.json",
+        "https://noirlab.edu/public/images/noirlab2030a/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "native-star-removal",
+      "subject": "Native NOX plus classical residual baseline",
+      "status": "included",
+      "finding": "Pinned native source removal and the earlier positive compact-residual union supply starless color inputs. Exact RGB recombination and unchanged pixels outside masks qualify accounting only; crowded blends and intrinsic knots remain ambiguous.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/star-separation/README.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/lenses/vista-infrared/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "saved-appearance",
+      "subject": "Three-lens 2026-09-09 handoff",
+      "status": "included",
+      "finding": "The saved browser handoff pins VISTA, Horálek and WISE result identities and authored appearance controls. Existing delivery byte targets make restoration reviewable; this 2026-09-14 documentation audit is not a new cold-cache replay or material acceptance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/lens-settings-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/lenses.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/lmc/source/lens-manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "dss2-wide-optical",
+      "subject": "DSS2 24-degree optical comparison",
+      "status": "deferred",
+      "finding": "Survey-WCS display preview retains plate seams, foreground stars and uneven backgrounds; it was not processed as a cloud.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/candidates/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Qualify native photometry/background and independent registration with usable diffuse coverage before any processing."
+    },
+    {
+      "id": "smash-dr2-wide-mosaic",
+      "subject": "SMASH team wider mosaic",
+      "status": "deferred",
+      "finding": "The 4111 by 5000 author mosaic has 6887 held-out star checks but only its central 30 percent is qualified. Black fields are missing observations, seams remain and image-specific rights are not declared.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/candidates/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Resolve reuse terms and outer-field registration/masks before adopting the wider source."
+    },
+    {
+      "id": "ciel-austral-optical",
+      "subject": "Ciel Austral optical/line-enhanced image",
+      "status": "excluded",
+      "finding": "The 14400 by 14200 author image has a 74.1 percent matched hull and detailed central structure but no open reuse licence was found; APOD credits author copyright. It remains a comparison.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/candidates/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Obtain derivative-compatible permission and qualify all intended footprint/processing before inclusion."
+    },
+    {
+      "id": "naztronomy-optical",
+      "subject": "Naztronomy mosaic preview",
+      "status": "excluded",
+      "finding": "The acquired 3074 by 3163 author preview is smaller than the unavailable advertised high-resolution version. RGB versus dual-narrowband labeling remains ambiguous; no open reuse licence was identified.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/candidates/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Acquire a usable original with explicit derivative permission, band/processing history and qualified astrometry."
+    },
+    {
+      "id": "smash-photo-volumes",
+      "subject": "Historical SMASH broad/filled/photo-conditioned volumes",
+      "status": "excluded",
+      "finding": "The full-photo and connected-component depth trials retained photographic edges, thick-sheet side views and sampling streaks after their bounded loop. Front-ray agreement and repeatability did not override the failed morphology gate.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/research/filled-observation.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/research/coherent-depth.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Revisit only with a source/depth hypothesis that improves the same fixed-camera failures while preserving qualified support and stellar positions."
+    },
+    {
+      "id": "structure-comparators",
+      "subject": "Starlet, median and getsf comparisons",
+      "status": "deferred",
+      "finding": "Automatic sparse masks did not pass production morphology. The official getsf full-crop run reached its 30-minute bound without final component maps; adapter tests and installation were verified separately and do not constitute a completed scientific comparison.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/research/structure-benchmark.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/research/getsf.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Complete a bounded same-native-crop comparison with actual valid outputs and assess connected morphology; preserve signed residuals and uncalibrated display-unit caveats."
+    },
+    {
+      "id": "classical-removal-rejections",
+      "subject": "Broader shape masks and profile-threshold trials",
+      "status": "excluded",
+      "finding": "Stronger minimum-width settings improved compact-light removal, but broader shape/mask variants introduced dark patches and were rejected. Raising profile thresholds increased zero-covariance cores; exact accounting alone did not make the diffuse target star-free.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/lmc/star-separation/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "A revised removal method must preserve adjacent extended emission and original-source accounting while visibly reducing blends/halos without dark patches."
+    },
+    {
+      "id": "fixed-benchmark-material",
+      "subject": "Wrong-cloud fixed-benchmark repaint",
+      "status": "excluded",
+      "finding": "The 416-slice historical painter selected an old photo-derived cloud and removed the saved Alignment fit. Internal projection checks passed while the cross-tab view was wrong; the current density repaint supersedes that ownership error.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/research/fixed-benchmark-material.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/slice-stability.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Do not restore this route; any alternative must identify the actual shared cloud and pass independent cross-tab geometry/registration checks."
+    },
+    {
+      "id": "raw-density-calibration",
+      "subject": "Historical smooth-density and sampling calibration",
+      "status": "excluded",
+      "finding": "The earlier 309-quad density route changed the viewed cloud. Physical pitch and quantization feedback improved integrated energy but all strict browser handoff comparisons still failed; further sampling reached an impasse.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/research/raw-density-slice-calibration.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Reopen only at the common encoding/compositing owner with identical-camera evidence, fixed intended density support and no per-image gain fitting."
+    },
+    {
+      "id": "bank-handoff",
+      "subject": "Current XYZ handoff brightness/banding limits",
+      "status": "unresolved",
+      "finding": "Current source-colored density uses shared geometry and alpha, but six historical dedicated handoff comparisons remained failed. Those numerical measurements belong to their recorded banks; successful later interaction checks do not establish rotation stability.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/slice-stability.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/RESEARCH.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Run the unchanged same-camera bank-isolation gate on the actual candidate and fix the common material/compositing cause while preserving stars and local texture continuity."
+    }
+  ]
+}
