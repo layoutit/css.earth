@@ -4,7 +4,6 @@
   "id": "himalia",
   "displayName": "Himalia",
   "panel": {
-    "introduction": "Himalia is Jupiter’s largest irregular moon. This approximate ellipsoid uses Cassini’s observed elongation with assumed equal short axes and orientation. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "radius",
@@ -39,9 +38,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Approximate elongated shape using Cassini’s observed 1.25:1 outline and JPL’s size estimate. Equal short axes and the viewing orientation are assumed. The gray grid marks unmapped terrain.",
-        "title": "Outline approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/himalia/himalia-model-thumbnail.webp",
         "surface": "himalia-model-surface@2x.webp",
         "poles": "himalia-model-poles@2x.webp",
@@ -49,7 +45,9 @@
           "id": "size-approximation",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1126/science.1079462"
-        }
+        },
+        "notes": "Approximate elongated shape using Cassini’s observed 1.25:1 outline and JPL’s size estimate. Equal short axes and the viewing orientation are assumed. The gray grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c198b5a5fe6c7b73b424effdfe8e5214acc72e5996787327f7a8cddd841c96fc"
+    "sha256": "767738eeb554a94375166d5d48e3dd7b4e7b043733bf1e2bada352056a998bba"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -149,14 +149,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c89d12c8ae2e79841c42c100b02e423685810c7a1f956e27415a7d9683f1c4b7",
+      "sha256": "8272ea490eeb320a863d02f2ea363169ad873bfae21d7dde824ea18f44aa4326",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "felicitas",
         "displayName": "Felicitas",
         "panel": {
-          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -220,8 +219,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex light-curve reconstruction with the thermally preferred pole. The selected archive mesh has an 85 km equivalent-volume size; the paper reports a thermal-size 3-sigma interval of 80–92 km. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "DAMIT 3097 shape model",
               "thumbnail": "/scenes/felicitas/felicitas-shape-thumbnail.webp",
               "surface": "felicitas-shape-surface@2x.webp",
               "poles": "felicitas-shape-surface@2x.webp",
@@ -230,13 +227,11 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 42.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "DAMIT 3097 radial height",
               "thumbnail": "/scenes/felicitas/felicitas-elevation-thumbnail.webp",
               "surface": "felicitas-elevation-surface@2x.webp",
               "poles": "felicitas-elevation-surface@2x.webp",
@@ -258,7 +253,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3097",
                 "image": "/scenes/felicitas/felicitas-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 42.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -388,7 +383,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -397,8 +392,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c89d12c8ae2e79841c42c100b02e423685810c7a1f956e27415a7d9683f1c4b7",
-      "bytes": 10808,
+      "sha256": "8272ea490eeb320a863d02f2ea363169ad873bfae21d7dde824ea18f44aa4326",
+      "bytes": 10257,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -413,9 +408,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 42.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -457,9 +450,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex light-curve reconstruction with the thermally preferred pole. The selected archive mesh has an 85 km equivalent-volume size; the paper reports a thermal-size 3-sigma interval of 80–92 km. The grid marks unavailable imagery; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -494,7 +485,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -506,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7685,
-          "sha256": "8e146124f4dec3b82eff20d1cd26ccceca23cceada9bcf2cabd820769fa5b994",
+          "bytes": 7589,
+          "sha256": "5ae7ca244eb3afaaceda8025c937e8bc7a125126daaeae421bd296135ef285e2",
           "verification": "bytes-verified"
         }
       ],

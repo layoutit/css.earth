@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "oberon",
+  "card": {
+    "text": "Uranus's second-largest moon, heavily cratered and about half ice, half rock.",
+    "sources": [
+      {
+        "catalogueId": "nasa-uranus-moons",
+        "url": "https://science.nasa.gov/uranus/moons/oberon/",
+        "label": "NASA Science · Uranus’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Oberon has at least one large mountain, about 6 km high. Little was known about it before Voyager 2 flew past.",
+    "sources": [
+      {
+        "catalogueId": "nasa-uranus-moons",
+        "url": "https://science.nasa.gov/uranus/moons/oberon/",
+        "label": "NASA Science · Uranus’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "Monochrome mosaic",
+      "detail": "Corrected mosaic",
+      "summary": "Lighting is corrected, but terrain shadows and seams in the photographs remain."
+    }
+  }
+}

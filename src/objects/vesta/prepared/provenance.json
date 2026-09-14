@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bc5f4f8f890d493473d2de17f422976cefef064dba76cef6e192f6706cd98ddb"
+    "sha256": "7c5a227cc54e8caed2c40e0291f70d01a9864cc6323bdd21633aec55fa9ffb62"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -181,7 +181,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5a9e4adc9a3b4fa03ae7b818534502103c6013b4df7dda36b01cb37c711b27df",
+      "sha256": "edfaa3085f4bd342dd00fd01e992d98376f37e52e903b8cb6538406625b78056",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,7 +205,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Vesta is a rocky asteroid in the main belt between Mars and Jupiter. NASA’s Dawn spacecraft mapped its surface, revealing giant impact basins, equatorial troughs, and a diverse volcanic crust.",
           "facts": [
             {
               "id": "radius",
@@ -251,8 +250,6 @@
             {
               "id": "normal",
               "label": "Natural color",
-              "description": "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain.",
-              "title": "FC natural-color composite",
               "thumbnail": "/scenes/vesta/vesta-normal-thumbnail.webp",
               "surface": "vesta-normal-surface@2x.webp",
               "poles": "vesta-normal-surface@2x.webp",
@@ -260,14 +257,12 @@
                 "id": "dlr-hamo-natural-color",
                 "path": "../manifest.json"
               },
-              "detail": "Dawn HAMO",
-              "summary": "The 650, 550 and 430 nm bands approximate visible color. Bright terrain clips to white; shadows and color offsets remain."
+              "notes": "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain.",
+              "noData": true
             },
             {
               "id": "ratios",
               "label": "Spectral ratios",
-              "description": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
-              "title": "Clementine-style color composite",
               "thumbnail": "/scenes/vesta/vesta-ratios-thumbnail.webp",
               "surface": "vesta-ratios-surface@2x.webp",
               "poles": "vesta-ratios-surface@2x.webp",
@@ -276,14 +271,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": true,
-              "detail": "Dawn FC",
-              "summary": "Published false-color Dawn filter ratios emphasize spectral differences. Source seams and missing coverage remain visible."
+              "notes": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting.",
-              "title": "HAMO digital terrain model",
               "thumbnail": "/scenes/vesta/vesta-elevation-thumbnail.webp",
               "surface": "vesta-elevation-surface@2x.webp",
               "poles": "vesta-elevation-surface@2x.webp",
@@ -305,8 +298,7 @@
                 "id": "dlr-hamo-radius-model",
                 "path": "../manifest.json"
               },
-              "detail": "Shaded relief",
-              "summary": "Height relative to a 255 km sphere. Polar gaps are interpolated; those areas are not stereo measurements."
+              "notes": "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting."
             }
           ]
         },
@@ -608,7 +600,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -617,8 +609,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5a9e4adc9a3b4fa03ae7b818534502103c6013b4df7dda36b01cb37c711b27df",
-      "bytes": 9706,
+      "sha256": "edfaa3085f4bd342dd00fd01e992d98376f37e52e903b8cb6538406625b78056",
+      "bytes": 8859,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -733,9 +725,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -785,9 +775,7 @@
       "selector": "/raster/observations/1",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid."
-      ],
+      "limitations": [],
       "lensIds": [
         "ratios"
       ],
@@ -835,9 +823,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -878,7 +864,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -890,8 +876,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5464,
-          "sha256": "9c0168d29c87aac8284b4e329066f96599c7c3e98c53e18c03c455225ae39956",
+          "bytes": 5252,
+          "sha256": "c5bf339f2ac0cfea0df18b63ff36969e04364c92e0ba874296668ed4063eef0b",
           "verification": "bytes-verified"
         }
       ],

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c2bad0b2805d0f60936a9e68695b359453a286fa701f43de79555f518f5ba8f9"
+    "sha256": "fd227ec238bd0bef08f019f31649820ca7ecec5ab08aa38500b1133847d5b938"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -405,7 +405,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a4eb854350db772e27c6ac80631f75095378be3db5cca1fd7332e84b877b8b8c",
+      "sha256": "a718326cfe99d522e99a4bb56eec126ae346312a7383d360a6a322d1b4f60fe9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -429,7 +429,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Ganymede is the largest moon in the solar system. Bright grooved ice crosses ancient dark terrain, above an ocean thought to lie beneath its crust.",
           "facts": [
             {
               "id": "radius",
@@ -501,8 +500,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
-              "title": "Global image mosaic",
               "thumbnail": "ganymede-lens-normal.webp",
               "surface": "ganymede-normal.webp",
               "poles": "ganymede-poles-normal.webp",
@@ -510,14 +507,12 @@
                 "id": "usgs-voyager-galileo-mono",
                 "path": "../manifest.json"
               },
-              "detail": "Global mosaic",
-              "summary": "Source detail ranges from 400 m to 20 km per pixel. Photographed shadows remain; the gray grid marks missing imagery."
+              "notes": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
+              "noData": true
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
-              "description": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
-              "title": "Color mosaic",
               "thumbnail": "ganymede-lens-enhanced.webp",
               "surface": "ganymede-enhanced.webp",
               "poles": "ganymede-poles-enhanced.webp",
@@ -525,15 +520,11 @@
                 "id": "usgs-voyager-galileo-color",
                 "path": "../manifest.json"
               },
-              "detail": "Infrared color",
-              "summary": "Infrared, green and violet bands add color to monochrome detail. Missing or synthesized color is left monochrome."
+              "notes": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary."
             },
             {
               "id": "geology",
               "label": "Geology",
-              "detail": "Interpreted units",
-              "description": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
-              "title": "Global geologic map",
               "thumbnail": "ganymede-lens-geology.webp",
               "surface": "ganymede-geology.webp",
               "poles": "ganymede-poles-geology.webp",
@@ -687,14 +678,13 @@
                     "color": "#d1c59f"
                   }
                 ]
-              }
+              },
+              "notes": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+              "noData": true
             },
             {
               "id": "oxygen-signature",
               "label": "Oxygen signature",
-              "description": "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved.",
-              "title": "Oxygen-sensitive visible reflectance ratio",
-              "summary": "A 565/577.3 nm surface-ice oxygen signature, not oxygen concentration. These 2° samples have approximate registration. Gray grid marks missing or withheld data; joins between nights remain.",
               "thumbnail": "ganymede-lens-oxygen-signature.webp",
               "surface": "ganymede-oxygen-signature.webp",
               "poles": "ganymede-poles-oxygen-signature.webp",
@@ -703,7 +693,6 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.5281/zenodo.11402374"
               },
-              "detail": "2019 MUSE",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -749,7 +738,9 @@
                     "1.02"
                   ]
                 }
-              }
+              },
+              "notes": "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved.",
+              "noData": true
             }
           ],
           "labels": {
@@ -1342,10 +1333,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "a4eb854350db772e27c6ac80631f75095378be3db5cca1fd7332e84b877b8b8c",
-      "bytes": 19049,
+      "sha256": "a718326cfe99d522e99a4bb56eec126ae346312a7383d360a6a322d1b4f60fe9",
+      "bytes": 18120,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1466,9 +1457,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1523,9 +1512,7 @@
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced"
       ],
@@ -1580,9 +1567,7 @@
       "selector": "/surfaces/2",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added."
-      ],
+      "limitations": [],
       "lensIds": [
         "geology"
       ],
@@ -1638,9 +1623,7 @@
       "selector": "/surfaces/3",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved."
-      ],
+      "limitations": [],
       "lensIds": [
         "oxygen-signature"
       ],
@@ -2111,7 +2094,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -2123,8 +2106,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8715,
-          "sha256": "a1a1fdaa8e5cfa9cd87be545b654f83cb0dbbc7f88f3a91b51a25ee15539e970",
+          "bytes": 8550,
+          "sha256": "39101647122459fcbc5612b5999b289a75baf1a0340c30ba83a8ef4c625cf20b",
           "verification": "bytes-verified"
         }
       ],

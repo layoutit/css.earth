@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0bdb9c3a1596191c9ce9d71c4edba0f55325cd69a6e194cfa163f1c92994ac31"
+          "sha256": "876b37013290bd6715b956930662023f85745505f8c6eb93bd11be338106bad7"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2671fe0065f388a43adcdf34fa61ec5ebb044e7e004ab90e1df6050e9969e7c7"
+        "sha256": "54d0623476e90827dcf133802f708e865c1358e947886d3f480e72f2f11b7a11"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.0799439098043286,
-      "description": "Explore Cerberus, a near-Earth asteroid, through its published shape model.",
+      "description": "Stony near-Earth asteroid, discovered in October 1971.",
       "systemName": "Solar System",
       "order": 127,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "9be37f1a40a95b475778826cf641c26dbe2e7049c46f0e82a32ab23d073ea1c6"
+    "sha256": "c961ec0915121a6386cfbb784c3cb42e1f935f54ae884636ba5524c75cd86984"
   }
 }

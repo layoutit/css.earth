@@ -677,7 +677,7 @@
       "expectedSha256": "3cf4d02e87f7ab896f668acb8caed93ea9f36136a756c6e6c69b01b20e6e2671",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -753,7 +753,7 @@
       "path": "presentation/solar-system.json",
       "expectedSha256": "118b64ae531350d309ff002299cdc2aed9fa42691d0614bcde65ea71cda423cd",
       "expectedBytes": 1587,
-      "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40\u00b0) carried over from the retired static-surface geometry",
+      "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked source recipe authored from the retired static camera plan and the shared Mercury/Venus/Mars marker layout",
@@ -885,8 +885,8 @@
     {
       "id": "moon-object-content",
       "path": "content/object.json",
-      "expectedSha256": "ebccc20d6f7f238fad5aca33df03e2763cfa63eabee7ed6503a0c3da56330375",
-      "expectedBytes": 36485,
+      "expectedSha256": "7ab905836804b5f16347c9a1a05db64f3f059659506c38bd9f952679521406f5",
+      "expectedBytes": 34535,
       "origin": "Repository-authored Moon panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -898,7 +898,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {

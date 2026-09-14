@@ -4,7 +4,6 @@
   "id": "menoetius",
   "displayName": "Menoetius",
   "panel": {
-    "introduction": "Menoetius forms a binary system with Patroclus. This published ellipsoid combines stellar-occultation and light-curve constraints. Local shape deviations are unresolved; no crater or albedo pattern is reconstructed. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "parent",
@@ -44,9 +43,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Published approximate ellipsoid with full dimensions 117×108×90 km, inferred from occultation and photometry. Orbital-pole alignment is a synchronous approximation; the display meridian is arbitrary. The grid marks unmapped terrain.",
-        "title": "Occultation shape approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/menoetius/menoetius-model-thumbnail.webp",
         "surface": "menoetius-model-surface@2x.webp",
         "poles": "menoetius-model-poles@2x.webp",
@@ -54,7 +50,8 @@
           "id": "occultation-approximation",
           "path": "../manifest.json",
           "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html"
-        }
+        },
+        "noData": true
       }
     ]
   },

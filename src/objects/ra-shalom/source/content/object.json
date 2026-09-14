@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Ra-Shalom is an irregular near-Earth asteroid reconstructed from Arecibo radar observations in 2000 and 2003. This is the 2008 radar model and its adopted prograde spin interpretation. The original radar data did not uniquely determine the pole; later lightcurve studies favor a different, retrograde solution and a slightly longer period. The displayed attitude is model-specific and has arbitrary phase, not a current rotational ephemeris. No resolved optical surface map is supplied. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -53,8 +52,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Published radar shape model",
-        "title": "Radar shape model",
         "thumbnail": "/scenes/ra-shalom/ra-shalom-shape-thumbnail.webp",
         "surface": "ra-shalom-shape-surface@2x.webp",
         "poles": "ra-shalom-shape-surface@2x.webp",
@@ -63,13 +60,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "notes": "Published radar shape model"
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows source-model radius minus a 1.15 km reference sphere, transferred from the closest point on the original triangular surface. It includes overall shape and is not gravitational height or an independent topographic measurement. This is the 2008 radar model and its adopted prograde spin interpretation. The original radar data did not uniquely determine the pole; later lightcurve studies favor a different, retrograde solution and a slightly longer period. The displayed attitude is model-specific and has arbitrary phase, not a current rotational ephemeris. No resolved optical surface map is supplied. Ambiguous or out-of-range samples retain the shared grid.",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/ra-shalom/ra-shalom-elevation-thumbnail.webp",
         "surface": "ra-shalom-elevation-surface@2x.webp",
         "poles": "ra-shalom-elevation-surface@2x.webp",
@@ -91,7 +86,8 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/rashalom.obj",
           "image": "/scenes/ra-shalom/ra-shalom-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Color shows source-model radius minus a 1.15 km reference sphere, transferred from the closest point on the original triangular surface. It includes overall shape and is not gravitational height or an independent topographic measurement. This is the 2008 radar model and its adopted prograde spin interpretation. The original radar data did not uniquely determine the pole; later lightcurve studies favor a different, retrograde solution and a slightly longer period. The displayed attitude is model-specific and has arbitrary phase, not a current rotational ephemeris. No resolved optical surface map is supplied. Ambiguous or out-of-range samples retain the shared grid.",
+        "noData": true
       }
     ]
   },

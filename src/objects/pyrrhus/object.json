@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "53dda7d5c12d07d21e50675c51f1d43f0efaababa46fd139d8b16e64ea039b30"
+          "sha256": "0940453572dd07cd5f10270f2dca713c7183afd9b39c2c68a378ff8ca7f8c09c"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b6fbfc5bd81a2db28ce4da47dcbfe11442fa7f4c8522135379e64d485c3a1c5c"
+        "sha256": "2dfc95b69d7ed985ba22fdec7ada41eac264d3f58bcb5de15e734d8e6c6cb5f1"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.198966960927357,
-      "description": "Explore Pyrrhus in 3D with its published shape model and radial elevation.",
+      "description": "Jupiter Trojan asteroid, discovered in January 1989.",
       "systemName": "Solar System",
       "order": 365,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2b4f133156314218100e68fb6dafd65d443e95be548ca6b6cb0734128a427340"
+    "sha256": "69a9368101183158854ee3a31fd87cfba43ac86dbecf071b0940d2ae989bc69f"
   }
 }

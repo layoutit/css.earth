@@ -17,7 +17,7 @@ test("publishes one source-bound Saturn panel model", async () => {
   assert.equal(moonCatalog.counts.confirmed,293);
   assert.ok(Number.isFinite(Date.parse(moonCatalog.retrievedAt)));
   const panel = await readFile(new URL('../../../../site/components/PreparedObjectPanel.astro',import.meta.url),'utf8');
-  assert.match(panel, /content\.introduction/u);
+  assert.match(panel, /text\.introduction\.text/u);
   assert.match(panel, /content\.facts/u);
   assert.match(panel, /content\.moreFacts/u);
   assert.doesNotMatch(panel, /1\.4 billion|120,500|29\.4 Earth|10\.7 hours|274/u);

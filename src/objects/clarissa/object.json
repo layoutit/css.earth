@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0261bb792a4f7d202aaf20ea814f12dc007edf7dfde6377ec9944be1115ee1ee"
+          "sha256": "dc76c114b63d64edef0edb0d961ca2c05fcdb43cf9736044759cc008e622dc55"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "93f8a715343666cbbcaaab8ca49ede5f247e970d8c4348cb394fc266313514a1"
+        "sha256": "74c05785f8b83009dda8003411422c5528e29fe7d0bb1b09a31de0c14f3be580"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.405392127505063,
-      "description": "Explore Clarissa in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 14 November 1890.",
       "systemName": "Solar System",
       "order": 355,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "eb56c5cfab8e9e16aaf2fac544b7aaa8bbf4f32a00fd8d31e2f8c7ff073df849"
+    "sha256": "a20c8d9608ce43e1d0e7c2ac66e16e8ccb8f9a30f7b2ab28aab250e5db4b579a"
   }
 }

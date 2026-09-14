@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Ganymede is the largest moon in the solar system. Bright grooved ice crosses ancient dark terrain, above an ocean thought to lie beneath its crust.",
     "facts": [
       {
         "id": "radius",
@@ -93,8 +92,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
-        "title": "Global image mosaic",
         "thumbnail": "ganymede-lens-normal.webp",
         "surface": "ganymede-normal.webp",
         "poles": "ganymede-poles-normal.webp",
@@ -102,14 +99,12 @@
           "id": "usgs-voyager-galileo-mono",
           "path": "../manifest.json"
         },
-        "detail": "Global mosaic",
-        "summary": "Source detail ranges from 400 m to 20 km per pixel. Photographed shadows remain; the gray grid marks missing imagery."
+        "notes": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
+        "noData": true
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
-        "title": "Color mosaic",
         "thumbnail": "ganymede-lens-enhanced.webp",
         "surface": "ganymede-enhanced.webp",
         "poles": "ganymede-poles-enhanced.webp",
@@ -117,15 +112,11 @@
           "id": "usgs-voyager-galileo-color",
           "path": "../manifest.json"
         },
-        "detail": "Infrared color",
-        "summary": "Infrared, green and violet bands add color to monochrome detail. Missing or synthesized color is left monochrome."
+        "notes": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary."
       },
       {
         "id": "geology",
         "label": "Geology",
-        "detail": "Interpreted units",
-        "description": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
-        "title": "Global geologic map",
         "thumbnail": "ganymede-lens-geology.webp",
         "surface": "ganymede-geology.webp",
         "poles": "ganymede-poles-geology.webp",
@@ -279,14 +270,13 @@
               "color": "#d1c59f"
             }
           ]
-        }
+        },
+        "notes": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+        "noData": true
       },
       {
         "id": "oxygen-signature",
         "label": "Oxygen signature",
-        "description": "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved.",
-        "title": "Oxygen-sensitive visible reflectance ratio",
-        "summary": "A 565/577.3 nm surface-ice oxygen signature, not oxygen concentration. These 2° samples have approximate registration. Gray grid marks missing or withheld data; joins between nights remain.",
         "thumbnail": "ganymede-lens-oxygen-signature.webp",
         "surface": "ganymede-oxygen-signature.webp",
         "poles": "ganymede-poles-oxygen-signature.webp",
@@ -295,7 +285,6 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.5281/zenodo.11402374"
         },
-        "detail": "2019 MUSE",
         "falseColor": true,
         "legend": {
           "kind": "scale",
@@ -341,7 +330,9 @@
               "1.02"
             ]
           }
-        }
+        },
+        "notes": "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved.",
+        "noData": true
       }
     ],
     "labels": {

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "cfd5ccd19837ac9126b4722909c4789ec1a2e18ece7577c31d9219a251c20f81"
+          "sha256": "8797277e59f9c3d187d88bf076f0b1b0cf95aad0c455eda58f8154823dc484e0"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "52a5755681c2063671866437e2be4e93e0aa6b1e438c6284f47adc1100d22aef"
+        "sha256": "df3741b77f50f44d9aebb43c5bfc6ff97336ae9474224f71f7b76c76a2105705"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.66979749127311,
-      "description": "Explore Kallisto in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in October 1879.",
       "systemName": "Solar System",
       "order": 311,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "cdc69b3059d478a2dc8ec98c1c58b8157ff7b5aecb96a2c7d054007d88327be6"
+    "sha256": "86d7ca1d4df7bafb605e71cc0965d8e3932654a6f8cd249710f545725513000a"
   }
 }

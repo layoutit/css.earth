@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-55p",
+  "card": {
+    "text": "Parent comet of the Leonid meteor shower.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=55P",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "55P/Tempel-Tuttle; Discovered 1866-01-06 by Tuttle, Horace at Harvard College Observatory, Massachusetts; orbit class: Halley-type Comet*; q: 0.976 au"
+      },
+      {
+        "catalogueId": "nasa-leonids",
+        "url": "https://science.nasa.gov/solar-system/meteors-meteorites/leonids/",
+        "label": "NASA Science · Leonids",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Horace Tuttle found this comet at Harvard College Observatory in 1866. Each November, Earth crosses its trail of dust.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=55P",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "55P/Tempel-Tuttle; Discovered 1866-01-06 by Tuttle, Horace at Harvard College Observatory, Massachusetts; orbit class: Halley-type Comet*; q: 0.976 au"
+      },
+      {
+        "catalogueId": "nasa-leonids",
+        "url": "https://science.nasa.gov/solar-system/meteors-meteorites/leonids/",
+        "label": "NASA Science · Leonids",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Celestia catalog nucleus",
+      "detail": "Catalog size",
+      "summary": "Celestia's nucleus shape at its catalog size. The real shape is unknown."
+    }
+  }
+}

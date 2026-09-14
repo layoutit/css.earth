@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "46e95ca35de1d8d82acdac7d70fffb5dc3b5c5c22652bd4dcbbb31da7f6d77e2"
+          "sha256": "a4628d67392157bc9ee29ae0ac94b1693603f9e4fbe31ccb0ecbf7ed1eca8558"
         },
         {
           "id": "title",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4876e08b66fb007950d1074765a2ec61ca9978c50c7995afc0a6e77cf82ab105"
+        "sha256": "fc6118810721c1af42824f5688500ba62ca687e61fd9abc5bacad6b8a95135ad"
       }
     },
     "worldFrame": {
@@ -118,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 6.3177563009608955,
-      "description": "29P: Schwassmann–Wachmann 1 releases gas and dust far from the Sun. Webb detected several jets with different mixtures of carbon monoxide and carbon dioxide. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Comet that erupts again and again, far from the Sun.",
       "systemName": "Solar System",
       "order": 54,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "c756145bff6aaada3a87ce5102f0e4c25fca07efd4a2c04c71362eeb214c326d"
+    "sha256": "d832086f3417d1a8ad2cf26a40b2d389dedcb1066741c2aa8993302d47dab059"
   }
 }

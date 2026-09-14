@@ -4,7 +4,6 @@
   "id": "clementina",
   "displayName": "Clementina",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 67.67 km effective diameter (catalog ±0.82 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "DAMIT 1912 shape model",
         "thumbnail": "/scenes/clementina/clementina-shape-thumbnail.webp",
         "surface": "clementina-shape-surface@2x.webp",
         "poles": "clementina-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 33.835 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 1912 radial height",
         "thumbnail": "/scenes/clementina/clementina-elevation-thumbnail.webp",
         "surface": "clementina-elevation-surface@2x.webp",
         "poles": "clementina-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1912",
           "image": "/scenes/clementina/clementina-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 33.835 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

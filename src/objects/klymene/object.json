@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2eeb10f7a8defc3313afb5c1036d5569127ac0dbb224d8786caaf1ea2f0b72c8"
+          "sha256": "04be63f60b3e6ad3cde88ca64c38d08cadebb2e2bae4549cbec06c688dc1aa70"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "90f29be4a8a6029e4746f5962c25449c91ba3816e99dd6daa934d78182fe45cb"
+        "sha256": "d83309ec247d0deb843a1b0dbe46c02e33ac34b11553905c2bec6d8914d76985"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1462660059874397,
-      "description": "Explore Klymene in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 13 September 1868.",
       "systemName": "Solar System",
       "order": 259,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "faaa4e6f93ea41e12d06fac84099a8669015550184c975b6c81802db77c7fa59"
+    "sha256": "ac6d83b438b58f19df151d6de810d1fb2bc4f740469eca770f32e7eda5de1685"
   }
 }

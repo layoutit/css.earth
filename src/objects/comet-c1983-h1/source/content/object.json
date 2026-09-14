@@ -4,7 +4,6 @@
   "id": "comet-c1983-h1",
   "displayName": "IRAS–Araki–Alcock",
   "panel": {
-    "introduction": "IRAS–Araki–Alcock was discovered in 1983 by the IRAS satellite and two independent observers. Its name records all three discoveries.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "C/1983 H1 IRAS–Araki–Alcock",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-c1983-h1/comet-c1983-h1-model-thumbnail.webp",
         "surface": "comet-c1983-h1-model-surface@2x.webp",
         "poles": "comet-c1983-h1-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "0.996 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4678adb6704c777fa45f9fc5c2e99b9d0361922709b8ac580d0f4603fcd55bb6"
+    "sha256": "44a53b4c06b0cf63abae62f0c81298552b881c3c36c4e801c61e4235362e7ac7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "972b8c5ca1a43dae92cf3fef1ec7531591c3171e965c1db9583985ced320def4",
+      "sha256": "c04c62da569d3c69c1bf7c01eee18192f3889c2f1faea7a7bac77160fd3a7b5a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "styx",
         "displayName": "Styx",
         "panel": {
-          "introduction": "Styx is the innermost of Pluto’s four small moons. New Horizons revealed an elongated body, but too little surface detail for a map.",
           "facts": [
             {
               "id": "radius",
@@ -161,9 +160,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "An approximate ellipsoid based on the 10.6 × 6.0 × 5.3 km dimensions presented by Porter and colleagues in 2025. New Horizons resolved only a few pixels across Styx, so the grid marks unavailable surface coverage. The spin pole remains uncertain; lighting shows the modeled shape.",
-              "title": "Approximate shape model",
-              "detail": "Measured axes",
               "thumbnail": "/scenes/styx/styx-model-thumbnail.webp",
               "surface": "styx-model-surface@2x.webp",
               "poles": "styx-model-poles@2x.webp",
@@ -172,7 +168,8 @@
                 "path": "../manifest.json",
                 "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
               },
-              "summary": "Shape estimated from New Horizons images that resolve only a few pixels. The pole is uncertain; gray grid: no imagery."
+              "notes": "An approximate ellipsoid based on the 10.6 × 6.0 × 5.3 km dimensions presented by Porter and colleagues in 2025. New Horizons resolved only a few pixels across Styx, so the grid marks unavailable surface coverage. The spin pole remains uncertain; lighting shows the modeled shape.",
+              "noData": true
             }
           ]
         },
@@ -316,7 +313,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -325,8 +322,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "972b8c5ca1a43dae92cf3fef1ec7531591c3171e965c1db9583985ced320def4",
-      "bytes": 3711,
+      "sha256": "c04c62da569d3c69c1bf7c01eee18192f3889c2f1faea7a7bac77160fd3a7b5a",
+      "bytes": 3351,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -341,9 +338,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "An approximate ellipsoid based on the 10.6 × 6.0 × 5.3 km dimensions presented by Porter and colleagues in 2025. New Horizons resolved only a few pixels across Styx, so the grid marks unavailable surface coverage. The spin pole remains uncertain; lighting shows the modeled shape."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -383,7 +378,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -395,8 +390,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4173,
-          "sha256": "de6ba3cbb76b9ca2bce6d21fc53d0b1a80f2dca8a1bd0c14bdbd0d3361e824cf",
+          "bytes": 4021,
+          "sha256": "234fe7224bcd50901618157dce597b2157d0087ff5c94548c03fd1c9e4dc6ec3",
           "verification": "bytes-verified"
         }
       ],

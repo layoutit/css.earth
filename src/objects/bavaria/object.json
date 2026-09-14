@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "03fbc6db395c6356be847611e58e99fee99e929a92070d32b9ad49676070f467"
+          "sha256": "6184eee1d70315c425fbcbb1a674264582f8d8315548cb9804ed5a2b4408264a"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "49e35282f807daa38dd038ec79e7d94070a114298f0b34b2567abcf64ee6f9aa"
+        "sha256": "a3a01cc085d89bbc86c79ecb74a26c642bea46193e2a622816b078e9e18118a1"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7267724486531284,
-      "description": "Explore Bavaria in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 16 November 1890.",
       "systemName": "Solar System",
       "order": 354,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a1b70fc8813c1ae2b8984067edf3a2a674fcd4f8f074a2a64fce504b7d28213c"
+    "sha256": "01876df04e19784af77efe6e6948c58b78cd58d75473e7c1de2fa01b3008ff50"
   }
 }

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2c5c7ef62388ee86f9bef169b55c75468d1db5769cb447add648b9deab47e6c7"
+          "sha256": "fe99a21599dd39cc9deb006db9c92785ccd45135088b8ba9fb0222ada255f2b3"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3267afd64611b0322bf85994001759bb2391478e835a08bfe62d0b8e946c5a0d"
+        "sha256": "5997778f60f2ee131c80a53c1a25ec68fe11d16ade9fee7d1dfa38894b1f199f"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3823847582527136,
-      "description": "Explore Brucia in 3D with its published shape model and documented physical size scale.",
+      "description": "Stony main-belt asteroid, discovered in December 1891.",
       "systemName": "Solar System",
       "order": 383,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ef8770773696fdc6cfa757e3a255161b0056ded877cfb82cd61ac45a777339c7"
+    "sha256": "84eaf5893dcdd9f979e60a70c0f993010eaed23a695b11f2286b223561c7797a"
   }
 }

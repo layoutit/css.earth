@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dfb20e802405223aff33bf297f33b52a8e6f23b7d9d9f318234155521afb8132"
+    "sha256": "1328f8dc4553be68233a0656a4c112159407be5f4076add8615a3f6e74a218cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "55de32cf204af31f27e4f4133896eb17273be65ab29249c5b7ac0f2a9eb85be2",
+      "sha256": "fdde515fd30cb4de63984265344a5ac939375b51dff3151d71ab032c086db00f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +167,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Psyche is a main-belt asteroid whose observations suggest a mixture of metal and rock. Its flattened, irregular shape is reconstructed from ground-based observations; the grid conveys no surface composition. Explore its published shape and radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -199,8 +198,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "VLT/SPHERE shape model",
-              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/psyche/psyche-shape-thumbnail.webp",
               "surface": "psyche-shape-surface@2x.webp",
               "poles": "psyche-shape-surface@2x.webp",
@@ -209,14 +206,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape made from VLT/SPHERE observations. Gray grid: no surface imagery; lighting shows the model's form."
+              "notes": "VLT/SPHERE shape model",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/psyche/psyche-elevation-thumbnail.webp",
               "surface": "psyche-elevation-surface@2x.webp",
               "poles": "psyche-elevation-surface@2x.webp",
@@ -238,8 +233,7 @@
                 "sourceUrl": "https://observations.lam.fr/astero/3Dshape/16_Psyche_mpcd.obj",
                 "image": "/scenes/psyche/psyche-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -364,7 +358,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -373,8 +367,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "55de32cf204af31f27e4f4133896eb17273be65ab29249c5b7ac0f2a9eb85be2",
-      "bytes": 8049,
+      "sha256": "fdde515fd30cb4de63984265344a5ac939375b51dff3151d71ab032c086db00f",
+      "bytes": 7305,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -389,9 +383,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -433,9 +425,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "VLT/SPHERE shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -470,7 +460,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -482,8 +472,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5456,
-          "sha256": "1d025c3030646033351b12679bfcd96263dc80d254344f85f2256ae2ac6445f7",
+          "bytes": 5139,
+          "sha256": "9918d8f8196d76108023aa97bf4699a71e6ae9d6981c9c6d26eadddf52942f50",
           "verification": "bytes-verified"
         }
       ],

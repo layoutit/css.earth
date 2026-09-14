@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2cbb0fdada5bf6d0896006dee1af9e7e1ae46c431884a4fbc6e0188080410ed8"
+          "sha256": "6e3694d1560a3f3a9253ad0896013ca9d2b5a6f3e3f9b6dde635d054274e524c"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b315a6e18d6faca98fc4bac0e7ed8818cca90067aa0d231a7182cc0a6b113c2b"
+        "sha256": "1c31a131af71b5391bdac976dd8c79b50062f82241a403b0840fd1f91eb2258f"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.603483726490706,
-      "description": "Explore United Nations in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in October 1987.",
       "systemName": "Solar System",
       "order": 416,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a458b02b8f03f9bd6a41d702251bb8a04d8444f39b970dc8996abfba2509d02c"
+    "sha256": "109aa008e2955a42cfaf037ca1eeef072740795d893db9551b8628f6eacca0a6"
   }
 }

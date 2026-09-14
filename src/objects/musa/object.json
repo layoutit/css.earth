@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "84112960bc9b542edc7d263d3e1f73ce111b1ac0c6f64e30d5d795ef014e2882"
+          "sha256": "1e13c32344eee09b88597fae8f1fd51f100988ead87121509f7cb57ca990e9ae"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d1edf7de62b3ec4a5d668ace2e2c8b18e3f22899394e5a64e70deb2cd59becce"
+        "sha256": "8d5d7668eb815e482125b3192a3d994163dad5bc3c03fa41538a7d11ec1f1035"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6610456785966816,
-      "description": "Explore Musa in 3D with its published shape model and documented physical size scale.",
+      "description": "Stony main-belt asteroid, discovered in June 1906.",
       "systemName": "Solar System",
       "order": 392,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "bf1ac5ca4ef7cfb6abf8e8292e820cdf331f719db70ba8b37610810600150178"
+    "sha256": "ffd16231c84a16ae65aa3b25dcfac715ad48701da6d4084abca4f7fe22735d79"
   }
 }

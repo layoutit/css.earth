@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "88a65fcfe728e592069c49301945917f4c45d09318530c9ee5abaa67b948b9b3"
+    "sha256": "75b5a9906bfd07b78ec9f62ffe2618fc1ff5100622eb5bedb9669a8d040f3e30"
   },
   "id": "pluto",
   "properties": {
@@ -51,7 +51,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "8cdb254475f0f575d8530bc0ed86f2c83ca5f98f0695a193e252c04a05e04dbf"
+          "sha256": "bcb4d6769eb2a27bf8ca40629f95f408200aaa4d70ef7627ae534adae50c5fec"
         },
         {
           "id": "solar-system",
@@ -167,7 +167,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e16f3c2d5d58538876af1996e1a493723ef7ae036680c6b748dc0a8579650e7b"
+        "sha256": "8c72c07106bf69b87ed436199e89cde67ec165fb19de65145c94a7c2376bd8dc"
       }
     },
     "catalog": {
@@ -175,7 +175,7 @@
       "classification": "dwarf-planet",
       "color": "#bca18a",
       "distanceAu": 39,
-      "description": "Explore Pluto in 3D with cssEarth. Discover this distant dwarf planet’s icy landscape, its heart-shaped region, and its companion Charon.",
+      "description": "Dwarf planet with a vast, heart-shaped plain.",
       "systemName": "Solar System",
       "order": 454,
       "context": {

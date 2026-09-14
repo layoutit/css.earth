@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7f602ddfbf4198b015a6403d3435d9ee202216bde29d5c435251a476030edf5"
+    "sha256": "a471d4e2f4f6ee531efbec8389d581d9a424f6357af342234749e73897c73811"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e6934925bc2eded248d70f7baf6f06ad63068458489191bb76e886a804404197",
+      "sha256": "5d229eb23722aae97d1d9a1bdc44e6b7811ac37be2211cd9559515fa378fb8e9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -39,7 +39,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Uranus is a cold, windy ice giant whose unusual orientation makes it appear to spin on its side.",
           "facts": [
             {
               "id": "distance-from-sun",
@@ -176,8 +175,6 @@
             {
               "id": "normal",
               "label": "Visible color",
-              "description": "Hubble OPAL F657N/F547M/F467M composite from October 2025. The northern region is observed; the unobserved southern region fades into a uniform Voyager-derived color baseline with no measured local detail.",
-              "title": "OPAL visible-color map",
               "thumbnail": "/scenes/uranus/uranus-lens-normal.webp",
               "surface": "/scenes/uranus/uranus-surface-normal.webp",
               "poles": "/scenes/uranus/uranus-poles-normal.webp",
@@ -187,14 +184,11 @@
                 "id": "normal",
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
               },
-              "detail": "Visible light",
-              "summary": "The north is observed in October 2025. The unseen south fades to a uniform Voyager-derived color, without measured detail."
+              "notes": "Hubble OPAL F657N/F547M/F467M composite from October 2025. The northern region is observed; the unobserved southern region fades into a uniform Voyager-derived color baseline with no measured local detail."
             },
             {
               "id": "methane",
               "label": "Methane",
-              "description": "Hubble OPAL 727 nm single-band reflectance, October 2025, in false color. Northern coverage is observed; the unobserved south uses a uniform boundary-band mean and contains no measured spectral detail.",
-              "title": "OPAL FQ727N map",
               "thumbnail": "/scenes/uranus/uranus-lens-methane.webp",
               "surface": "/scenes/uranus/uranus-surface-methane.webp",
               "poles": "/scenes/uranus/uranus-poles-methane.webp",
@@ -233,14 +227,11 @@
                 "id": "methane",
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
               },
-              "detail": "727 nm",
-              "summary": "False colors show 727 nm reflectance in the observed north. The unseen south uses uniform color without measured detail."
+              "notes": "Hubble OPAL 727 nm single-band reflectance, October 2025, in false color. Northern coverage is observed; the unobserved south uses a uniform boundary-band mean and contains no measured spectral detail."
             },
             {
               "id": "near-infrared",
               "label": "Near infrared",
-              "description": "Hubble OPAL 845 nm single-band reflectance, October 2025, in false color. Northern coverage is observed; the unobserved south uses a uniform boundary-band mean and contains no measured spectral detail.",
-              "title": "OPAL F845M map",
               "thumbnail": "/scenes/uranus/uranus-lens-near-infrared.webp",
               "surface": "/scenes/uranus/uranus-surface-near-infrared.webp",
               "poles": "/scenes/uranus/uranus-poles-near-infrared.webp",
@@ -279,8 +270,7 @@
                 "id": "near-infrared",
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
               },
-              "detail": "845 nm",
-              "summary": "False colors show 845 nm reflectance in the observed north. The unseen south uses uniform color without measured detail."
+              "notes": "Hubble OPAL 845 nm single-band reflectance, October 2025, in false color. Northern coverage is observed; the unobserved south uses a uniform boundary-band mean and contains no measured spectral detail."
             }
           ]
         },
@@ -1159,10 +1149,10 @@
       "redistribution": "checked authored source with embedded provenance",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "e6934925bc2eded248d70f7baf6f06ad63068458489191bb76e886a804404197",
-      "bytes": 15395,
+      "sha256": "5d229eb23722aae97d1d9a1bdc44e6b7811ac37be2211cd9559515fa378fb8e9",
+      "bytes": 14621,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1265,9 +1255,7 @@
       "selector": "/lenses/0",
       "parents": [],
       "process": "Apply the declared observation, polar coverage and spectral display operation.",
-      "limitations": [
-        "Hubble OPAL F657N/F547M/F467M composite from October 2025. The northern region is observed; the unobserved southern region fades into a uniform Voyager-derived color baseline with no measured local detail."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1331,9 +1319,7 @@
       "selector": "/lenses/1",
       "parents": [],
       "process": "Apply the declared observation, polar coverage and spectral display operation.",
-      "limitations": [
-        "Hubble OPAL 727 nm single-band reflectance, October 2025, in false color. Northern coverage is observed; the unobserved south uses a uniform boundary-band mean and contains no measured spectral detail."
-      ],
+      "limitations": [],
       "lensIds": [
         "methane"
       ],
@@ -1397,9 +1383,7 @@
       "selector": "/lenses/2",
       "parents": [],
       "process": "Apply the declared observation, polar coverage and spectral display operation.",
-      "limitations": [
-        "Hubble OPAL 845 nm single-band reflectance, October 2025, in false color. Northern coverage is observed; the unobserved south uses a uniform boundary-band mean and contains no measured spectral detail."
-      ],
+      "limitations": [],
       "lensIds": [
         "near-infrared"
       ],
@@ -1462,7 +1446,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1474,8 +1458,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9767,
-          "sha256": "01903c6339a1fd7ccefdb5b5faf62a57283586f029a89b9535636e9ec6997aa0",
+          "bytes": 9653,
+          "sha256": "18cc71da29cd70e05aa5da3bc2c74755eca70b72785f9a0271deaa4617e99b08",
           "verification": "bytes-verified"
         }
       ],

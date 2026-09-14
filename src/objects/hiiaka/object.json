@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "69dc6c66b862d22d405b35595b1f37017b56e387c489e4cab53d1ee9454f5761"
+          "sha256": "3effa4f2b1857fee30138a2700ea9faf1d1e6ac7ed8aa2c929eb854fcf0f8471"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "364e7c3b6eb95a959153dd5ff96e3c8dfe62517272241da4a7dccb11db85b962"
+        "sha256": "727f43813e6db5f9b0ed0900ec1f7ed32d91f1a0a4dc3244bbfb600f99b8a278"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 43.1,
-      "description": "Explore Hiʻiaka, a moon of Haumea, through its occultation-constrained ellipsoid.",
+      "description": "Haumea's largest moon, about 370 km across.",
       "systemName": "Solar System",
       "order": 23,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "dddc6b70e5e6feced3ffe6706430f75f1f9d070a819cefbe44e1d83557118869"
+    "sha256": "fcf2593e80551a856f19d2b6c89f774756a7f1104a24cc9f175b2e395a46403f"
   }
 }

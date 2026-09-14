@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "rosalind",
+  "card": {
+    "text": "Inner moon of Uranus, named for a character in As You Like It.",
+    "sources": [
+      {
+        "catalogueId": "nasa-uranus-moons",
+        "url": "https://science.nasa.gov/uranus/moons/rosalind/",
+        "label": "NASA Science · Uranus’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Rosalind is about 72 km across and orbits about 69,927 km from Uranus.",
+    "sources": [
+      {
+        "catalogueId": "nasa-uranus-moons",
+        "url": "https://science.nasa.gov/uranus/moons/rosalind/",
+        "label": "NASA Science · Uranus’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Measured shape",
+      "summary": "A 72 km sphere matching the measured outline; local terrain is not resolved."
+    }
+  }
+}

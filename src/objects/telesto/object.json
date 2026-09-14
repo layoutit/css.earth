@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "32ee32d4813758504b7e295fab2a8dbb90eb18de5b00e6c169d640e91609a56e"
+          "sha256": "ba7e1362169705ba4519d58fb75f4d27a8778758c714a83d9d8eab8853ed8a66"
         },
         {
           "id": "title",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e51c139cfc924175cde8d9bd8baa1ac454a2bc2391cabf334cdb0e97a25298ad"
+        "sha256": "d30f12344fe7abcd138b36729d9df6ee6d5eadcbc02c6df461e996325abe78a3"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#c3bfb7",
       "distanceAu": 9.58,
-      "description": "Explore Telesto in 3D with Cassini imagery and its measured irregular shape.",
+      "description": "Small moon that leads Tethys along its orbit around Saturn.",
       "systemName": "Solar System",
       "order": 114,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "6fd9c3011a477711705d59aa471b85b0a01a1e52a1ca0a2e4643cdbe5bfc8c27"
+    "sha256": "e4ad8aba8991d243007e1c91f39175e70b34052bc9cfdb048b7f966de6c0b700"
   }
 }

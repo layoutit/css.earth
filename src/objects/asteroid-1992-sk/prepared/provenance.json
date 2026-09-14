@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c1d8e564cb3893ffc213ac776f18efeed9a391cbb1fb3fc24f3ee91217f06cc6"
+    "sha256": "f81fae80bad27fa2e19f5db555fae260f4236ee2b99de1429e5dae0392e61ac7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2a9da5aeb9ee98e7efb7eec9687fb492caa56e70805da28d3f95ee2c98bd5f4a",
+      "sha256": "5c8226ee11ab3b0d8d297bffc13d8af3d743b1dbb3abfe6c9e4795ee31254d4f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,7 +171,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "1992 SK is an elongated near-Earth asteroid reconstructed from Goldstone radar and optical lightcurves obtained in 1999. This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -203,8 +202,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Published radar shape model",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-thumbnail.webp",
               "surface": "asteroid-1992-sk-shape-surface@2x.webp",
               "poles": "asteroid-1992-sk-shape-surface@2x.webp",
@@ -213,13 +210,11 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "notes": "Published radar shape model"
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows source-model radius minus a 0.5 km reference sphere, transferred from the closest point on the original triangular surface. It includes overall shape and is not gravitational height or an independent topographic measurement. This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied. Ambiguous or out-of-range samples retain the shared grid.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-thumbnail.webp",
               "surface": "asteroid-1992-sk-elevation-surface@2x.webp",
               "poles": "asteroid-1992-sk-elevation-surface@2x.webp",
@@ -241,7 +236,8 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/sk.obj",
                 "image": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Color shows source-model radius minus a 0.5 km reference sphere, transferred from the closest point on the original triangular surface. It includes overall shape and is not gravitational height or an independent topographic measurement. This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied. Ambiguous or out-of-range samples retain the shared grid.",
+              "noData": true
             }
           ]
         },
@@ -363,7 +359,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -372,8 +368,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2a9da5aeb9ee98e7efb7eec9687fb492caa56e70805da28d3f95ee2c98bd5f4a",
-      "bytes": 9480,
+      "sha256": "5c8226ee11ab3b0d8d297bffc13d8af3d743b1dbb3abfe6c9e4795ee31254d4f",
+      "bytes": 8695,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -388,9 +384,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows source-model radius minus a 0.5 km reference sphere, transferred from the closest point on the original triangular surface. It includes overall shape and is not gravitational height or an independent topographic measurement. This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied. Ambiguous or out-of-range samples retain the shared grid."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -432,9 +426,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Published radar shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -469,7 +461,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -481,8 +473,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6328,
-          "sha256": "0addf9a169710811476a8dffac23728ab1aa69b97797d5955e84811bc02bec1e",
+          "bytes": 5709,
+          "sha256": "5a1c3eb72a757e91b1fbf350d58ca8927cded9d9eb78321db9dbbef84f470f5c",
           "verification": "bytes-verified"
         }
       ],

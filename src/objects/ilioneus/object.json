@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "73220b75820ad5745be803620fa04fd30c58947ae098cb0986e08d907dff8006"
+          "sha256": "0690f1882a2b3d190c80eb6021b49c7711b9c4a84307f273f48f6f81993eb0bd"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6a578d3c3c012816d9693f943f66a7d5837d072154eebb11f65a077366bc3030"
+        "sha256": "28501c5fb5e3782404b74c12d6a1733346b6cdd816700b41ea9e9bb0a33f7aab"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.182702514637422,
-      "description": "Explore Ilioneus in 3D with its published shape model and radial elevation.",
+      "description": "Dark Jupiter Trojan asteroid, discovered in September 1989.",
       "systemName": "Solar System",
       "order": 364,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "176a9ebe42f676c745f74094db5a1955d986aeb16525176141c2c9862b3a031b"
+    "sha256": "f6f3f2612bf33d1e93d0a69e8bfb6281942fd26e369aae55b36f633e11e131e6"
   }
 }

@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Castalia is a two-lobed near-Earth asteroid reconstructed from the 1989 Arecibo radar observations. Explore its original shape and radial heights. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -53,8 +52,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Published radar shape model",
-        "title": "Radar shape model",
         "thumbnail": "/scenes/castalia/castalia-shape-thumbnail.webp",
         "surface": "castalia-shape-surface@2x.webp",
         "poles": "castalia-shape-surface@2x.webp",
@@ -63,14 +60,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape",
-        "summary": "Shape from radar observations. The gray grid marks missing optical imagery; lighting shows the model."
+        "notes": "Published radar shape model",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Source shape · radial height",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/castalia/castalia-elevation-thumbnail.webp",
         "surface": "castalia-elevation-surface@2x.webp",
         "poles": "castalia-elevation-surface@2x.webp",
@@ -92,8 +87,7 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/castalia.obj",
           "image": "/scenes/castalia/castalia-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height",
-        "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+        "notes": "Source shape · radial height"
       }
     ]
   },

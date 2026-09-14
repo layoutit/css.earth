@@ -4,7 +4,6 @@
   "id": "comet-103p",
   "displayName": "Hartley 2",
   "panel": {
-    "introduction": "EPOXI passed Hartley 2 in 2010. A smooth waist joins its two rough lobes, while jets carry gas, dust and icy particles away from the nucleus.",
     "facts": [
       {
         "id": "diameter",
@@ -38,9 +37,6 @@
       {
         "id": "constraints",
         "label": "Source constraints",
-        "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
-        "title": "Shape-constraint map",
-        "detail": "PDS",
         "thumbnail": "/scenes/comet-103p/comet-103p-constraints-thumbnail.webp",
         "surface": "comet-103p-constraints-surface@2x.webp",
         "poles": "comet-103p-constraints-poles@2x.webp",
@@ -60,14 +56,13 @@
             "label": "Blue",
             "value": "Limb outlines"
           }
-        ]
+        ],
+        "notes": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
+        "noData": true
       },
       {
         "id": "model",
         "label": "Shape model",
-        "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
-        "title": "Nucleus shape reconstruction",
-        "detail": "PDS",
         "thumbnail": "/scenes/comet-103p/comet-103p-model-thumbnail.webp",
         "surface": "comet-103p-model-surface@2x.webp",
         "poles": "comet-103p-model-poles@2x.webp",
@@ -87,14 +82,13 @@
             "label": "Shape observations",
             "value": "4 November 2010"
           }
-        ]
+        ],
+        "notes": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
+        "noData": true
       },
       {
         "id": "mri",
         "label": "EPOXI photographs",
-        "description": "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape.",
-        "title": "EPOXI mosaic",
-        "detail": "EPOXI",
         "thumbnail": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
         "surface": "comet-103p-mri-surface@2x.webp",
         "poles": "comet-103p-mri-poles@2x.webp",
@@ -115,15 +109,12 @@
             "value": "3.9–8 m/pixel"
           }
         ],
-        "summary": "MRI views and restored HRI close-ups show the smooth waist and rough lobes. The photographs retain their shadows; the grid marks gaps or uncertain shape."
+        "notes": "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape.",
+        "noData": true
       },
       {
         "id": "temperature",
         "label": "Color temperature",
-        "title": "EPOXI infrared color temperature",
-        "detail": "HRI-IR",
-        "description": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
-        "summary": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
         "thumbnail": "/scenes/comet-103p/comet-103p-temperature-thumbnail.webp",
         "surface": "comet-103p-temperature-surface@2x.webp",
         "poles": "comet-103p-temperature-poles@2x.webp",
@@ -162,15 +153,13 @@
           "meta": "K",
           "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml",
           "image": "/scenes/comet-103p/comet-103p-temperature-legend.webp"
-        }
+        },
+        "notes": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
+        "noData": true
       },
       {
         "id": "spectral-slope",
         "label": "Infrared slope",
-        "title": "EPOXI infrared continuum",
-        "detail": "HRI-IR",
-        "description": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
-        "summary": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
         "thumbnail": "/scenes/comet-103p/comet-103p-spectral-slope-thumbnail.webp",
         "surface": "comet-103p-spectral-slope-surface@2x.webp",
         "poles": "comet-103p-spectral-slope-poles@2x.webp",
@@ -209,7 +198,9 @@
           "meta": "%/100nm",
           "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml",
           "image": "/scenes/comet-103p/comet-103p-spectral-slope-legend.webp"
-        }
+        },
+        "notes": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
+        "noData": true
       }
     ]
   },

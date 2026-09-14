@@ -11,10 +11,12 @@ const labels = categories?.map(item => ({ text: item.label, detail: item.descrip
   ?? legend?.labels?.map((text, index) => ({
     text: `${text}${index === (legend.labels?.length ?? 0) - 1 && legend.meta ? ` ${legend.meta}` : ''}`,
   })) ?? [];
+// The shell explains the shared no-data grid once, so dataset text never repeats it.
+const noData = lens.noData === true;
 ---
-{legend && <section id={`${objectId}-${lens.id}-legend`} class="planet-lens-legend-panel"
+{(legend || noData) && <section id={`${objectId}-${lens.id}-legend`} class="planet-lens-legend-panel"
   data-lens-legend={lens.id} aria-label={`${lens.label} legend`}>
-  <div class="planet-lens-legend-scale-row">
+  {legend && <div class="planet-lens-legend-scale-row">
     {legend?.src
       ? <img class="planet-lens-legend-scale" src={legend.src}
           width={legend.width} height={legend.height} alt={scaleLabel} />
@@ -22,8 +24,8 @@ const labels = categories?.map(item => ({ text: item.label, detail: item.descrip
           {colors?.map(color => <span class="planet-lens-legend-segment"
             style={`--planet-lens-legend-color: ${color}`} aria-hidden="true"></span>)}
         </span>}
-  </div>
-  {categories ? <ul class="planet-lens-legend-categories">
+  </div>}
+  {legend && (categories ? <ul class="planet-lens-legend-categories">
     {categories.map(item => <li>
       <span class="planet-lens-legend-swatch" style={`--planet-lens-legend-color: ${item.color}`} aria-hidden="true"></span>
       <span class="planet-lens-legend-category-label">{item.label}</span>
@@ -31,5 +33,12 @@ const labels = categories?.map(item => ({ text: item.label, detail: item.descrip
     </li>)}
   </ul> : <div class="planet-lens-legend-labels" style={`--legend-label-count: ${labels.length}`}>
     {labels.map(label => <span>{label.text}</span>)}
-  </div>}
+  </div>)}
+  {noData && <p class="planet-lens-legend-no-data">
+    <svg class="planet-lens-legend-no-data-swatch" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      <rect width="12" height="12" fill="#525452" />
+      <path d="M0 4.5H12M0 9.5H12M4.5 0V12M9.5 0V12" stroke="#70736f" stroke-width="1" />
+    </svg>
+    No data
+  </p>}
 </section>}

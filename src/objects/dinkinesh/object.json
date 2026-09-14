@@ -29,7 +29,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "5c18d03676a357f07020f1c29522988582011e3d92a885be3cce8e78acab51a2"
+          "sha256": "db1844a83409a3d718aef655a1474d0b7c9a6abd3ab51aba262c0564eb5adfb7"
         },
         {
           "id": "title",
@@ -98,7 +98,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7bb2cd4d7efd015060e4f8637f8d48ab949dacef36c5d2653529740a12c822f1"
+        "sha256": "df6900b6b5bea6136cd2ab32add256932127d775859b7707a6418f75d5e42d82"
       }
     },
     "worldFrame": {
@@ -134,13 +134,13 @@
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 2.073581431805674,
-      "description": "Dinkinesh was Lucy’s first asteroid encounter. Its equatorial ridge and trough accompany a remarkable moon: the contact binary Selam.",
+      "description": "Small asteroid with a two-lobed moon, Selam.",
       "context": {}
     }
   },
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "19f79ec1fc606878f52cdf4018c1d023fb1f80c2cd39c61f2701f66046704f03"
+    "sha256": "b08ce2b0114b314f0d9f4fae50e3f14f4196b496fe9dfe7cf1f17ff3b2dbf8f1"
   }
 }

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "46e01ae08d160d17c3d053a9c3adf29d8ac142573091a652e666f4defa563a82"
+          "sha256": "06b9324203fe893aa69d9a1f00cafa3392e2c94c8e51a8a53219cd4a4f627085"
         },
         {
           "id": "title",
@@ -115,7 +115,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9a2ca2d0f98de55f871d4638642196ceeaf25ad200d007e3e4e5aee88d53a6a9"
+        "sha256": "3a10262ab02860026a82d305db065a1a87476929a1cb35118631f0d2ed991769"
       }
     },
     "catalog": {
@@ -123,7 +123,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 39.482,
-      "description": "Explore Nix through the measured New Horizons shape model.",
+      "description": "Small moon of Pluto with a reddish spot seen by New Horizons.",
       "systemName": "Solar System",
       "order": 457,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "628cff3a88c097cec2168cd88fc8ac8397cce09b2b858f62846bcf93199ca161"
+    "sha256": "d1b27880e13750ce168efede26d86b55f3be800119fb7e05bc1a7091597a72d4"
   }
 }

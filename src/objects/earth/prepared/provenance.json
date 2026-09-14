@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "06dcccff830a3ca3c7ebc99c90b3055077b51de7fb6bc48e4d4a4da243b4a8cc"
+    "sha256": "a8921a815a9146ad2315d28c9661aec0e59dab26d3c7d566e4b101c32063bf27"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -534,7 +534,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "50e9a88dc17065449cad996166561eb11c968dc6e4a500f2b26eae7d8b69345f",
+      "sha256": "38ff89966c0093260afef6a4d67a3953287ffacb3a78d9d651136453d6364805",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -558,7 +558,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Earth (our home planet) is the third planet from the Sun, and the fifth largest planet. It’s the only place we know of inhabited by living things.",
           "facts": [
             {
               "id": "distance-from-sun",
@@ -687,41 +686,31 @@
             {
               "id": "normal",
               "label": "Visible color",
-              "description": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones.",
-              "title": "Blue Marble Next Generation",
               "thumbnail": "/scenes/earth/earth-lens-normal.webp",
               "source": {
                 "id": "nasa-blue-marble-july",
                 "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
               },
-              "detail": "NASA · July 2004",
-              "summary": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones."
+              "notes": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones."
             },
             {
               "id": "clouds",
               "label": "Cloud coverage",
-              "detail": "NASA · archival",
-              "title": "Blue Marble cloud composite",
-              "description": "Archival NASA cloud imagery over the July 2004 surface mosaic with brighter display midtones. Clouds and surface are from different observation periods; this is not live weather.",
-              "summary": "Archival NASA clouds over a brighter July 2004 surface mosaic. This is not live weather.",
               "thumbnail": "/scenes/earth/earth-lens-clouds.webp",
               "source": {
                 "id": "nasa-blue-marble-clouds",
                 "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif"
-              }
+              },
+              "notes": "Archival NASA cloud imagery over the July 2004 surface mosaic with brighter display midtones. Clouds and surface are from different observation periods; this is not live weather."
             },
             {
               "id": "topography",
               "label": "Elevation",
-              "description": "GEBCO_2026 terrain model. Colors show meters above and below mean sea level; relief is shaded for readability. Ocean depths combine measured and estimated terrain. Land includes the ice surface.",
-              "title": "GEBCO land and seafloor heights",
               "thumbnail": "/scenes/earth/earth-lens-topography.webp",
               "source": {
                 "id": "gebco-2026-elevation",
                 "url": "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
               },
-              "detail": "GEBCO · 2026",
-              "summary": "GEBCO_2026 modeled terrain. Colors show height and depth relative to mean sea level; ocean depths include estimates.",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -736,20 +725,17 @@
                   "+10,000 m"
                 ]
               },
-              "legendNote": "0 = mean sea level. Shading emphasizes relief; the color scale is unshaded. Some coastal source datums differ."
+              "legendNote": "0 = mean sea level. Shading emphasizes relief; the color scale is unshaded. Some coastal source datums differ.",
+              "notes": "GEBCO_2026 terrain model. Colors show meters above and below mean sea level; relief is shaded for readability. Ocean depths combine measured and estimated terrain. Land includes the ice surface."
             },
             {
               "id": "night-lights",
               "label": "Night lights",
-              "description": "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting.",
-              "title": "Black Marble annual night lights · 2025",
               "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
               "source": {
                 "id": "nasa-black-marble-2025-public-radiance",
                 "url": "https://www.lightpollutionmap.info/help.html"
               },
-              "detail": "NASA · 2025",
-              "summary": "2025 annual snow-free satellite radiance. Warm false color; logarithmic scale. Gray: missing data or outside 75°N–65°S. Aurora can remain at high latitudes. NASA Black Marble / Jurij Stare, lightpollutionmap.info.",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -763,14 +749,12 @@
                   "≥ 100 nW/cm²/sr"
                 ]
               },
-              "legendNote": "Logarithmic color scale, capped at 100 nW/cm²/sr. Native pixels are averaged for this globe. Aurora and transient lights can remain; this does not measure sky brightness."
+              "legendNote": "Logarithmic color scale, capped at 100 nW/cm²/sr. Native pixels are averaged for this globe. Aurora and transient lights can remain; this does not measure sky brightness.",
+              "notes": "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting."
             },
             {
               "id": "enso",
               "label": "ENSO",
-              "detail": "7 Sept 2026",
-              "title": "ENSO: sea-surface temperature anomalies · 7 Sept 2026",
-              "description": "NASA MUR · 1 km source imagery · 7 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery.",
               "thumbnail": "/scenes/earth/earth-lens-enso.webp",
               "falseColor": true,
               "source": {
@@ -807,13 +791,12 @@
                   "≥ +3"
                 ]
               },
-              "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state."
+              "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+              "notes": "NASA MUR · 1 km source imagery · 7 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
             },
             {
               "id": "cross-section",
               "label": "Cross section",
-              "description": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
-              "title": "Interior structure model",
               "thumbnail": "/scenes/earth/earth-view-interior.webp",
               "legend": {
                 "kind": "categories",
@@ -847,14 +830,11 @@
                 "id": "surface-observation",
                 "url": "https://science.nasa.gov/earth/facts/"
               },
-              "detail": "Structure",
-              "summary": "A cut through Earth’s crust, rocky mantle, liquid outer core and solid inner core. Layer sizes follow the NASA Science model; colors are schematic."
+              "notes": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging."
             },
             {
               "id": "mantle-tomography",
               "label": "Mantle tomography",
-              "description": "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic.",
-              "title": "GLAD-M35 mantle tomography",
               "thumbnail": "/scenes/earth/earth-view-tomography.webp",
               "legend": {
                 "kind": "scale",
@@ -873,8 +853,6 @@
                 "id": "glad-m35-vsv",
                 "url": "https://data.earthscope.org/app/products/portal/emc_model_viewer.html?id=EMC-GLAD-M35"
               },
-              "detail": "GLAD-M35 · 2024",
-              "summary": "Red and blue map slower and faster mantle waves relative to the mean at each depth. This is not temperature. Crust and core colors are schematic; gray marks depths outside the model.",
               "falseColor": true,
               "legendNote": "GLAD-M35 r0.1 · 10–2,890 km depth · 1° / 10 km sample grid. Gray: outside model depth coverage. Grid spacing is not resolving power.",
               "facts": [
@@ -893,7 +871,8 @@
                   "label": "Inner core",
                   "value": "Solid iron alloy"
                 }
-              ]
+              ],
+              "notes": "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic."
             }
           ]
         },
@@ -2703,7 +2682,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -2712,8 +2691,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "50e9a88dc17065449cad996166561eb11c968dc6e4a500f2b26eae7d8b69345f",
-      "bytes": 18680,
+      "sha256": "38ff89966c0093260afef6a4d67a3953287ffacb3a78d9d651136453d6364805",
+      "bytes": 16859,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -4280,7 +4259,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -4292,8 +4271,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8318,
-          "sha256": "979c17be432f365d07c6b3038539c0d39d174aeb8223ddd79220d8fff10b2004",
+          "bytes": 8152,
+          "sha256": "719af6f75e38ff8570cb6f57635a4ce513ba9f73f60103699913dfd107ebd50d",
           "verification": "bytes-verified"
         }
       ],

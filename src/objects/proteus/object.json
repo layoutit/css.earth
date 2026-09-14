@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2456ceb80037284da257500ee13b31c9c888368f8e8cbb26ca6082d7b5dde760"
+          "sha256": "cb2bda1b080fa50e138c76deed52806f10a44ed1ca851b2224ef19bcae09c76c"
         },
         {
           "id": "title",
@@ -115,7 +115,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "553d84360e6c9993276bdec6a338e3efc9c773d3a0bb6cb2ca139e56fb09ded7"
+        "sha256": "4166a0d53715659cfd47988280823842956c5dcd20438aefeafc9c62af571900"
       }
     },
     "catalog": {
@@ -123,7 +123,7 @@
       "classification": "satellite",
       "color": "#a39e96",
       "distanceAu": 30.07,
-      "description": "Explore Proteus with Voyager 2 imagery and its source-backed irregular shape.",
+      "description": "Box-shaped moon of Neptune, one of the darkest objects in the solar system.",
       "systemName": "Solar System",
       "order": 110,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "8bf10e8f715d794941af006380c053aedd19e57db15ab92ca93f74c1eb26a561"
+    "sha256": "7ce43f8650373348fb72e88768a18942bfc2898b1fcc391b49ce8b2519679fe4"
   }
 }

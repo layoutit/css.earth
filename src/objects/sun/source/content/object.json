@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "At the center of our solar system, the Sun is a 4.5-billion-year-old yellow dwarf star. Its light and heat make life on Earth possible.",
     "facts": [
       {
         "id": "radius",
@@ -109,10 +108,6 @@
         "id": "photosphere",
         "label": "Photosphere",
         "shortLabel": "Continuum",
-        "description": "Colorized HMI continuum mosaic for Carrington Rotation 2311, 12 May–9 June 2026. It combines different observation dates; limb normalization and polar continuation are prepared display adjustments.",
-        "title": "HMI continuum mosaic CR2311",
-        "detail": "Continuum",
-        "summary": "Visible-light observations span May–June 2026. Color and brightness are adjusted; missing polar coverage is filled.",
         "thumbnail": "sun-lens-photosphere.webp",
         "surface": "sun-surface-photosphere.webp",
         "poles": "sun-poles-photosphere.webp",
@@ -120,16 +115,13 @@
           "id": "sdo-hmi-continuum-cr2311-20260513"
         },
         "falseColor": false,
-        "qualification": "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation"
+        "qualification": "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation",
+        "notes": "Colorized HMI continuum mosaic for Carrington Rotation 2311, 12 May–9 June 2026. It combines different observation dates; limb normalization and polar continuation are prepared display adjustments."
       },
       {
         "id": "magnetic",
         "label": "Magnetic field",
         "shortLabel": "HMI Bᵣ",
-        "description": "False-color HMI radial magnetic field for Carrington Rotation 2311, 12 May–9 June 2026. A synoptic mosaic, not a simultaneous photograph; weak and strong fields use a nonlinear color scale.",
-        "title": "HMI radial magnetic field CR2311",
-        "detail": "Radial field",
-        "summary": "Colors show the radial field on a nonlinear scale. Measurements span May–June 2026 rather than a single instant.",
         "thumbnail": "sun-lens-magnetic.webp",
         "surface": "sun-surface-magnetic.webp",
         "poles": "sun-poles-magnetic.webp",
@@ -173,16 +165,13 @@
           },
           "meta": "G",
           "sourceUrl": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html"
-        }
+        },
+        "notes": "False-color HMI radial magnetic field for Carrington Rotation 2311, 12 May–9 June 2026. A synoptic mosaic, not a simultaneous photograph; weak and strong fields use a nonlinear color scale."
       },
       {
         "id": "chromosphere",
         "label": "Chromosphere",
         "shortLabel": "304 Å",
-        "description": "False-color AIA 304 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026.",
-        "title": "AIA 304 Å synoptic map CR2311",
-        "detail": "304 Å",
-        "summary": "The 304 Å measurements span May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May.",
         "thumbnail": "sun-lens-chromosphere.webp",
         "surface": "sun-surface-chromosphere.webp",
         "poles": "sun-poles-chromosphere.webp",
@@ -224,16 +213,13 @@
           },
           "meta": "304 Å",
           "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
-        }
+        },
+        "notes": "False-color AIA 304 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026."
       },
       {
         "id": "corona",
         "label": "Corona",
         "shortLabel": "171 Å",
-        "description": "False-color AIA 171 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026.",
-        "title": "AIA 171 Å synoptic map CR2311",
-        "detail": "171 Å",
-        "summary": "The 171 Å measurements span May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May.",
         "thumbnail": "sun-lens-corona.webp",
         "surface": "sun-surface-corona.webp",
         "poles": "sun-poles-corona.webp",
@@ -275,7 +261,8 @@
           },
           "meta": "171 Å",
           "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
-        }
+        },
+        "notes": "False-color AIA 171 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026."
       }
     ]
   },

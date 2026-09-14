@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "metis",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf0098bee540ef58adab60a60916542e78c7debad7a6e9819751bbfd20818c1b"
+    "sha256": "7acb7a46ebbca322ddf7eff9e00a06c63f7dd632629e59b16727922df12bec6f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -233,14 +233,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d7bf6c23227922ed76a45502ab32a0145a2d57f72229f64397579e62cf9fdb08",
+      "sha256": "0649f58ed5e3940f634d8716d5224a9641de4c1865c083e6a5c63e9fabf15d1b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "metis",
         "displayName": "Metis",
         "panel": {
-          "introduction": "Metis is Jupiter’s innermost moon, a small elongated world embedded in the main ring. Dust knocked from its surface helps replenish that faint ring. Synchronous rotation is assumed; its actual rotation period is unknown.",
           "facts": [
             {
               "id": "radius",
@@ -322,9 +321,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
-              "title": "SSI mosaic",
-              "detail": "Galileo SSI",
               "thumbnail": "/scenes/metis/metis-normal-thumbnail.webp",
               "surface": "metis-normal-surface@2x.webp",
               "poles": "metis-normal-surface@2x.webp",
@@ -333,7 +329,8 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/galileo/"
               },
-              "summary": "The finest source pixels span about 3 km; other views are coarser. Brightness is adjusted; the gray grid marks unreliable data."
+              "notes": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
+              "noData": true
             }
           ]
         },
@@ -435,7 +432,7 @@
       "sha256": "4c3501a4e341b74405b89b285b404361fcff442b4819423a745cd6dbf26fe811",
       "bytes": 857088,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -482,7 +479,7 @@
       "sha256": "05b777e7781d3ade918ccbb7ce8993b54624cd7ac1c5a4f237f16f2a6f672bd0",
       "bytes": 5033,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -536,7 +533,7 @@
       "sha256": "9a3e93326e589847d6033a75cae9dbbd884ff52a9022c6f96ae722321f3f8895",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -583,7 +580,7 @@
       "sha256": "a2d5298b3f28aaa247d402ae7269d8744233bf97c123fd2d800e09d3c1cfc3a7",
       "bytes": 4837,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -637,7 +634,7 @@
       "sha256": "d34cbf3bafcc2d7f079c3ad250287660d0dac936082b183436ecc7d1f92c2e3b",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -684,7 +681,7 @@
       "sha256": "9e63ce4fcadfc499663fffca4460971ff94b7f7514e13ac55842d9fd18d3dbda",
       "bytes": 4837,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -738,7 +735,7 @@
       "sha256": "4daafe1c0c21cdaca61cc258f7835d31561ec76e7ac2ef8e07f033471ec67d71",
       "bytes": 810000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -785,7 +782,7 @@
       "sha256": "9d258a9ae9a4229a9e66d5af9379b205ea50e412c90e64ce7e871bb89b1930db",
       "bytes": 4835,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -839,7 +836,7 @@
       "sha256": "9df4199697827534e3d6429f4a879d2cc851c5a17f287c8d6b46925227ad3f69",
       "bytes": 808000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -886,7 +883,7 @@
       "sha256": "73057c454d46f4fa7cc024ab8b005a4742935f38375718255f919e02e0f3693a",
       "bytes": 4728,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -927,7 +924,7 @@
       "sha256": "e7dc2d82d1e95a2cfb35ed9466bfcc21196b883887ce48981e96bf61b2c93a91",
       "bytes": 67525,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -935,7 +932,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -944,10 +941,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d7bf6c23227922ed76a45502ab32a0145a2d57f72229f64397579e62cf9fdb08",
-      "bytes": 4972,
+      "sha256": "0649f58ed5e3940f634d8716d5224a9641de4c1865c083e6a5c63e9fabf15d1b",
+      "bytes": 4530,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -960,9 +957,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -990,13 +985,13 @@
           "url": "/scenes/metis/metis-normal-thumbnail.webp",
           "bytes": 1414,
           "sha256": "dcf8b7a04cb1c530804827acd1340a4faa0ed4f12d553968700659b23c4a2eb7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
           "bytes": 30766,
           "sha256": "f6077d939c90aa90f39ae2cb546ff1f2b311477010f65d753e12df2ca7978859",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1007,7 +1002,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1019,8 +1014,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5776,
-          "sha256": "fca6ab5a5b2e37afa706ff2424a536277990c8c84d34f647ef01159d24e9f894",
+          "bytes": 5536,
+          "sha256": "07343bfd08d73830bae6333d3dcdeeb82495ec21d11ad153dd365e17fb13b6b0",
           "verification": "bytes-verified"
         }
       ],

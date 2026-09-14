@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8706ec931210741948584a1c97a3eee35459bd94ba5ab2284fefd36ed12902f4"
+    "sha256": "5dea279b4e7df3902d6e74204ff59ae142f233a32fb86c39dabb73b0e72ce5d9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -219,7 +219,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9c0d44c1273a05ed51008f0e4c4967af201fcd544a6c0e2251a6d6cf21602748",
+      "sha256": "c30b3306843a145214368fafa7309683aed023533725cb36e3d495169dcf303c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -243,7 +243,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Saturn’s two-toned moon, with a dark leading hemisphere, bright icy terrain and a mountain ridge along its equator.",
           "facts": [
             {
               "id": "radius",
@@ -321,8 +320,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "USGS May 2008 Cassini/Voyager mosaic at 803 m per source pixel (5760 × 2880), resampled into the shared texture layout. No additional detail is created. Coarse polar coverage, source seams and photographed shading remain; gray grid marks explicit no-data. Shared Shadows adds approximate globe lighting. Mean-radius sphere: the real equatorial ridge does not change the silhouette.",
-              "title": "Multi-mission image mosaic",
               "thumbnail": "iapetus-lens-normal.webp",
               "surface": "iapetus-normal.webp",
               "poles": "iapetus-poles-normal.webp",
@@ -330,13 +327,12 @@
                 "id": "cassini-voyager-2008-iapetus",
                 "path": "../manifest.json"
               },
-              "summary": "Polar detail is coarse compared with the rest of the surface. Photographed shadows and seams remain; the grid marks gaps."
+              "notes": "USGS May 2008 Cassini/Voyager mosaic at 803 m per source pixel (5760 × 2880), resampled into the shared texture layout. No additional detail is created. Coarse polar coverage, source seams and photographed shading remain; gray grid marks explicit no-data. Shared Shadows adds approximate globe lighting. Mean-radius sphere: the real equatorial ridge does not change the silhouette.",
+              "noData": true
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
-              "description": "Published 2014 enhanced-color Cassini composite, photometrically corrected by Paul Schenk, with nominal 400 m source pixels. Colors extend into ultraviolet and infrared. The dark leading hemisphere is real surface albedo, not a shadow or missing imagery. All supplied pixels are preserved; coarse patches and residual photographed shading remain. Shared Shadows and globe lighting remain active; shape is approximated by a sphere.",
-              "title": "Enhanced-color composite",
               "thumbnail": "iapetus-lens-enhanced.webp",
               "surface": "iapetus-enhanced.webp",
               "poles": "iapetus-poles-enhanced.webp",
@@ -344,14 +340,11 @@
                 "id": "cassini-iss-2014-iapetus-color",
                 "path": "../manifest.json"
               },
-              "summary": "Colors extend into infrared and ultraviolet. The dark leading hemisphere is real surface material, not missing imagery."
+              "notes": "Published 2014 enhanced-color Cassini composite, photometrically corrected by Paul Schenk, with nominal 400 m source pixels. Colors extend into ultraviolet and infrared. The dark leading hemisphere is real surface albedo, not a shadow or missing imagery. All supplied pixels are preserved; coarse patches and residual photographed shading remain. Shared Shadows and globe lighting remain active; shape is approximated by a sphere."
             },
             {
               "id": "infrared",
               "label": "Infrared",
-              "description": "Three Cassini VIMS observations from 10 September 2007. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.45 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps.",
-              "summary": "Cassini false color: red 2.02, green 1.59, blue 1.28 µm. Coverage is partial; gray grid marks gaps. Illumination and archive filtering remain in these uncorrected measurements.",
-              "title": "Cassini VIMS flyby spectra · 10 September 2007",
               "thumbnail": "iapetus-lens-infrared.webp",
               "surface": "iapetus-infrared.webp",
               "poles": "iapetus-poles-infrared.webp",
@@ -360,15 +353,13 @@
                 "path": "../manifest.json",
                 "url": "https://vims.univ-nantes.fr/cube/1568157352_4"
               },
-              "detail": "Partial VIMS",
-              "falseColor": true
+              "falseColor": true,
+              "notes": "Three Cassini VIMS observations from 10 September 2007. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.45 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps.",
+              "noData": true
             },
             {
               "id": "ice-absorption",
               "label": "Ice absorption",
-              "description": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using three Cassini VIMS observations from 10 September 2007. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0–0.8; original numerical values are retained. Gray grid marks unsupported areas and scan gaps.",
-              "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size, noise and archive filtering affect these uncorrected values; they do not measure ice abundance.",
-              "title": "Cassini VIMS flyby water-ice absorption · 10 September 2007",
               "thumbnail": "iapetus-lens-ice-absorption.webp",
               "surface": "iapetus-ice-absorption.webp",
               "poles": "iapetus-poles-ice-absorption.webp",
@@ -377,7 +368,6 @@
                 "path": "../manifest.json",
                 "url": "https://vims.univ-nantes.fr/cube/1568157352_4"
               },
-              "detail": "Partial VIMS",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -418,7 +408,9 @@
                     "0.8"
                   ]
                 }
-              }
+              },
+              "notes": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using three Cassini VIMS observations from 10 September 2007. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0–0.8; original numerical values are retained. Gray grid marks unsupported areas and scan gaps.",
+              "noData": true
             }
           ]
         },
@@ -799,10 +791,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "9c0d44c1273a05ed51008f0e4c4967af201fcd544a6c0e2251a6d6cf21602748",
-      "bytes": 13793,
+      "sha256": "c30b3306843a145214368fafa7309683aed023533725cb36e3d495169dcf303c",
+      "bytes": 12674,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -917,9 +909,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "USGS May 2008 Cassini/Voyager mosaic at 803 m per source pixel (5760 × 2880), resampled into the shared texture layout. No additional detail is created. Coarse polar coverage, source seams and photographed shading remain; gray grid marks explicit no-data. Shared Shadows adds approximate globe lighting. Mean-radius sphere: the real equatorial ridge does not change the silhouette."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -974,9 +964,7 @@
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "Published 2014 enhanced-color Cassini composite, photometrically corrected by Paul Schenk, with nominal 400 m source pixels. Colors extend into ultraviolet and infrared. The dark leading hemisphere is real surface albedo, not a shadow or missing imagery. All supplied pixels are preserved; coarse patches and residual photographed shading remain. Shared Shadows and globe lighting remain active; shape is approximated by a sphere."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced"
       ],
@@ -1031,9 +1019,7 @@
       "selector": "/surfaces/2",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Three Cassini VIMS observations from 10 September 2007. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.45 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps."
-      ],
+      "limitations": [],
       "lensIds": [
         "infrared"
       ],
@@ -1087,9 +1073,7 @@
       "selector": "/surfaces/3",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using three Cassini VIMS observations from 10 September 2007. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0–0.8; original numerical values are retained. Gray grid marks unsupported areas and scan gaps."
-      ],
+      "limitations": [],
       "lensIds": [
         "ice-absorption"
       ],
@@ -1558,7 +1542,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1570,8 +1554,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7010,
-          "sha256": "ef21a249389f3acbe166fea4ac38a5567859f86a6c6fc824460b5a6c524488cf",
+          "bytes": 6875,
+          "sha256": "21dc3761a8f7e66bf7e549317281a7803cc5b4868a0c6e1a499732665a5b96de",
           "verification": "bytes-verified"
         }
       ],

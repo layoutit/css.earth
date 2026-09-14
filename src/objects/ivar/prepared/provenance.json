@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d5cbcb2edd978eb469a062a09edcf851a919b764f823d6aec86b8a7f0544ce37"
+    "sha256": "6bbd1fb31ec25fb260e02e8d4d7fc26d8dedbf78d11bda37030b4cfad78695b2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -150,14 +150,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1e34915e3683dd3486400db0dc1cca71a943d8bc831dd5cef21b0ccdc2480403",
+      "sha256": "a02c5b01df9adc357fcffc1207c2a7f0ba9ce14f1c51ba9d08b03055e92f19fd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "ivar",
         "displayName": "Ivar",
         "panel": {
-          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived ±0.2 km; additional shape-model uncertainty). Grid marks unavailable imagery.",
-              "title": "Ivar · DAMIT shape model 271",
               "thumbnail": "/scenes/ivar/ivar-shape-thumbnail.webp",
               "surface": "ivar-shape-surface@2x.webp",
               "poles": "ivar-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived ±0.2 km; additional shape-model uncertainty). Grid marks unavailable imagery.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 3.7 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Ivar · radius relative to the 3.7 km reference sphere",
               "thumbnail": "/scenes/ivar/ivar-elevation-thumbnail.webp",
               "surface": "ivar-elevation-surface@2x.webp",
               "poles": "ivar-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/271",
                 "image": "/scenes/ivar/ivar-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 3.7 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -389,7 +385,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -398,8 +394,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1e34915e3683dd3486400db0dc1cca71a943d8bc831dd5cef21b0ccdc2480403",
-      "bytes": 8219,
+      "sha256": "a02c5b01df9adc357fcffc1207c2a7f0ba9ce14f1c51ba9d08b03055e92f19fd",
+      "bytes": 7888,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -414,9 +410,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 3.7 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -458,9 +452,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived ±0.2 km; additional shape-model uncertainty). Grid marks unavailable imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -495,7 +487,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -507,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5207,
-          "sha256": "34e9d5f39b3b499fd107af39a722b6113c43bcd49955a77238bbb52af3c40eba",
+          "bytes": 5111,
+          "sha256": "945f69398edc4c8a967170e2f8f3683b929d811f83a436131ba4ac33305f2a04",
           "verification": "bytes-verified"
         }
       ],

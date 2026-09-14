@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "d72059de4472a1ec773a35aa7086413c50fecdf270ec31c74835b81d9bcf110f"
+          "sha256": "8ca61c2308d8a9cc087be1c26e2a9b62e52b4c2d27162b1a83e1e8ec3ac69b33"
         },
         {
           "id": "title",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9266d6c3da1f90cf2ac26532444429d21166233a952d7cd881c4580666239b92"
+        "sha256": "121c15a57044e16d9f550283049cb25828a08494dcb9c8ad38e02e8dac4c2af1"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#c3bfb7",
       "distanceAu": 9.58,
-      "description": "Explore Helene in 3D with Cassini imagery and its measured irregular shape.",
+      "description": "Small moon that leads Dione around Saturn from a Lagrange point.",
       "systemName": "Solar System",
       "order": 115,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "9a8dd55b0710f15513858ab77f4a162f7ae85aa2c5c90c12cce4b6a34ef8aedc"
+    "sha256": "4c9db918699ab9bdd7ffb1779cf40b0228a0f93fd00be97240e126fa475c0084"
   }
 }

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3f8715e9595b6883e822a028dfe3bc60cb0ee02ba6583e556930be08d761a9f7"
+          "sha256": "cf62b2707bea4681b3be10fdb032f24482c642a80f5ffcaaa16ffb08554fd312"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c9ed40d0dafe348937e1e5806225043ed98e2b6d23522e135027d913c03a2bf9"
+        "sha256": "59752b6cca96fcf7ad1005b475f4a3b21bf51f6d54a172399e248dbbe130f974"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 3.491,
-      "description": "Explore Romulus, a moon of Sylvia, through its explicitly approximate occultation shape.",
+      "description": "Outer of the two small moons of the asteroid Sylvia.",
       "systemName": "Solar System",
       "order": 25,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "734a0a6e40e11877c44f9c41a3ca364290b1711375eb37897d893e6a700b59be"
+    "sha256": "140ec189b9c61af7d967cf30a6715049593aed5c780271464d348236f368bb80"
   }
 }

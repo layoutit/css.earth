@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "An icy moon of Saturn marked by the enormous Odysseus crater and Ithaca Chasma, a vast canyon crossing its surface. The shape view reveals a simplified Cassini SPC model. Relative albedo shows the model’s brightness variation; elevation uses its own stated reference sphere.",
     "facts": [
       {
         "id": "radius",
@@ -103,8 +102,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-        "title": "Global image mosaic",
         "thumbnail": "/scenes/tethys/tethys-normal-thumbnail.webp",
         "surface": "tethys-normal-surface@2x.webp",
         "poles": "tethys-normal-poles@2x.webp",
@@ -112,13 +109,12 @@
           "id": "cassini-iss-2012-tethys",
           "path": "../manifest.json"
         },
-        "summary": "Source pixels span 293 m in the 2012 mosaic. Shadows and uneven detail remain; the gray grid marks missing observations."
+        "notes": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+        "noData": true
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-        "title": "Enhanced-color composite",
         "thumbnail": "/scenes/tethys/tethys-enhanced-thumbnail.webp",
         "surface": "tethys-enhanced-surface@2x.webp",
         "poles": "tethys-enhanced-poles@2x.webp",
@@ -126,13 +122,11 @@
           "id": "cassini-iss-2014-tethys-color",
           "path": "../manifest.json"
         },
-        "summary": "Infrared, green and ultraviolet bands reveal colors beyond human vision. Detail varies; photographed shadows and seams remain."
+        "notes": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       },
       {
         "id": "iss",
         "label": "ISS photograph",
-        "description": "One Cassini narrow-angle photograph from 11 April 2015, projected onto the shape model through a camera derived from Cassini's SPICE kernels and refined to the limb. Grid marks surface the camera did not see or that lay in shadow. Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo.",
-        "title": "Cassini ISS narrow-angle image",
         "thumbnail": "/scenes/tethys/tethys-iss-thumbnail.webp",
         "surface": "tethys-iss-surface@2x.webp",
         "poles": "tethys-iss-poles@2x.webp",
@@ -142,7 +136,6 @@
           "url": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484"
         },
         "falseColor": false,
-        "detail": "ISS · Cassini",
         "facts": [
           {
             "id": "observed",
@@ -160,13 +153,12 @@
             "value": "CL1 and CL2 · clear"
           }
         ],
-        "summary": "One Cassini photograph from 190,000 km, projected onto the shape model. Grid marks unphotographed or shadowed surface."
+        "notes": "One Cassini narrow-angle photograph from 11 April 2015, projected onto the shape model through a camera derived from Cassini's SPICE kernels and refined to the limb. Grid marks surface the camera did not see or that lay in shadow. Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
-        "title": "SPC terrain model",
         "thumbnail": "/scenes/tethys/tethys-elevation-thumbnail.webp",
         "surface": "tethys-elevation-surface@2x.webp",
         "poles": "tethys-elevation-poles@2x.webp",
@@ -187,13 +179,13 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
           "image": "/scenes/tethys/tethys-elevation-legend.webp"
-        }
+        },
+        "notes": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
+        "noData": true
       },
       {
         "id": "relative-albedo",
         "label": "Relative albedo",
-        "description": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
-        "title": "SPC relative brightness model",
         "thumbnail": "/scenes/tethys/tethys-relative-albedo-thumbnail.webp",
         "surface": "tethys-relative-albedo-surface@2x.webp",
         "poles": "tethys-relative-albedo-poles@2x.webp",
@@ -214,27 +206,26 @@
           "meta": "relative to mean ≈ 1",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
           "image": "/scenes/tethys/tethys-relative-albedo-legend.webp"
-        }
+        },
+        "notes": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+        "noData": true
       },
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
-        "title": "SPC shape model",
         "thumbnail": "/scenes/tethys/tethys-shape-thumbnail.webp",
         "surface": "tethys-shape-surface@2x.webp",
         "poles": "tethys-shape-poles@2x.webp",
         "source": {
           "id": "cassini-spc-2025-tethys-q128-shape",
           "path": "../manifest.json"
-        }
+        },
+        "notes": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+        "noData": true
       },
       {
         "id": "infrared",
         "label": "Infrared",
-        "description": "Seven Cassini VIMS observations from 2007–2015. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.65 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps.",
-        "summary": "Cassini false color: red 2.02, green 1.59, blue 1.28 µm. Coverage is partial; gray grid marks gaps. Illumination and archive filtering remain in these uncorrected measurements.",
-        "title": "Cassini VIMS regional spectra · 2007–2015",
         "thumbnail": "/scenes/tethys/tethys-infrared-thumbnail.webp",
         "surface": "tethys-infrared-surface@2x.webp",
         "poles": "tethys-infrared-poles@2x.webp",
@@ -243,15 +234,13 @@
           "path": "../manifest.json",
           "url": "https://vims.univ-nantes.fr/cube/1719616836_1"
         },
-        "detail": "Partial VIMS",
-        "falseColor": true
+        "falseColor": true,
+        "notes": "Seven Cassini VIMS observations from 2007–2015. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.65 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps.",
+        "noData": true
       },
       {
         "id": "ice-absorption",
         "label": "Ice absorption",
-        "description": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using nine Cassini VIMS observations from 2007–2015. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.55–0.75; original numerical values are retained. Gray grid marks unsupported areas and scan gaps.",
-        "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size, noise and archive filtering affect these uncorrected values; they do not measure ice abundance.",
-        "title": "Cassini VIMS regional water-ice absorption · 2007–2015",
         "thumbnail": "/scenes/tethys/tethys-ice-absorption-thumbnail.webp",
         "surface": "tethys-ice-absorption-surface@2x.webp",
         "poles": "tethys-ice-absorption-poles@2x.webp",
@@ -260,7 +249,6 @@
           "path": "../manifest.json",
           "url": "https://vims.univ-nantes.fr/cube/1719616836_1"
         },
-        "detail": "Partial VIMS",
         "falseColor": true,
         "legend": {
           "kind": "scale",
@@ -275,7 +263,9 @@
           "meta": "band-depth fraction",
           "sourceUrl": "https://vims.univ-nantes.fr/cube/1719616836_1",
           "image": "/scenes/tethys/tethys-ice-absorption-legend.webp"
-        }
+        },
+        "notes": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using nine Cassini VIMS observations from 2007–2015. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.55–0.75; original numerical values are retained. Gray grid marks unsupported areas and scan gaps.",
+        "noData": true
       }
     ]
   },

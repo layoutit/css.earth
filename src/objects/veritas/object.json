@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "479d4d70469a09f18c622b75377ef344757ff37a96a87facd627d3e5bb3ab0e9"
+          "sha256": "7fb88a9915c0f19ea13e50c95ccec55c11a47cbefa11162f9ea24b2f3221bf0e"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fd9f8a0920f5d1505303b5194e4a47fbde04688ef809fc9ffbf3a99b205c5240"
+        "sha256": "9a9b754c3de931fde3f3a53c65033ce6183542844a857952659a5fa00bcebde1"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1755270453241122,
-      "description": "Explore Veritas in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in September 1902.",
       "systemName": "Solar System",
       "order": 388,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d4cb4b9e39f432543830e442f17ddc8e6be357f72d3f8e8f53d5c9fdaa2b6cfd"
+    "sha256": "e634472b6f784849af6d4967d2777e051eae523c8e777b10acc5aac14a3bea69"
   }
 }

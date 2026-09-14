@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8cb14831e06177b10aafd1bde5a2e07cd7efcbac9825af11c4f2887e09f560f5"
+    "sha256": "5ffb3b77397813db80f73844ea8766810f984e96190a052355b827a08696de2f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "649775aee4f23dd16390aa35d0e86a323500b996004d0596f6d6faef1e35fcf4",
+      "sha256": "6c3a989efcb310a35c1be5c161539745e132cfd71731acd119517b5e34188b4e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-c2006-p1",
         "displayName": "McNaught",
         "panel": {
-          "introduction": "McNaught became exceptionally bright during its January 2007 passage around the Sun. JPL lists it among history’s great comets.",
           "facts": [
             {
               "id": "diameter",
@@ -173,9 +172,6 @@
             {
               "id": "model",
               "label": "Illustrative nucleus",
-              "detail": "Celestia",
-              "title": "C/2006 P1 McNaught",
-              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
               "thumbnail": "/scenes/comet-c2006-p1/comet-c2006-p1-model-thumbnail.webp",
               "surface": "comet-c2006-p1-model-surface@2x.webp",
               "poles": "comet-c2006-p1-model-poles@2x.webp",
@@ -195,7 +191,9 @@
                   "label": "Closest to Sun",
                   "value": "0.173 AU"
                 }
-              ]
+              ],
+              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -294,7 +292,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -303,8 +301,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "649775aee4f23dd16390aa35d0e86a323500b996004d0596f6d6faef1e35fcf4",
-      "bytes": 3257,
+      "sha256": "6c3a989efcb310a35c1be5c161539745e132cfd71731acd119517b5e34188b4e",
+      "bytes": 3053,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -319,9 +317,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -356,7 +352,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -368,8 +364,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6753,
-          "sha256": "656d85ed93b5776ba3ab607df179ac15909c8929461509027d9da88e2e7f21c4",
+          "bytes": 6606,
+          "sha256": "55a9d005cf8a490fa48d07061b639c300fead005b7b14c3c789ae96d3d9d0f8e",
           "verification": "bytes-verified"
         }
       ],

@@ -449,8 +449,8 @@
     {
       "id": "ariel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 8184,
-      "expectedSha256": "f353330cd8626bf91a855035e348c881104be918e8faab51889937b3036c9194",
+      "expectedBytes": 7555,
+      "expectedSha256": "905f3658fa3abf655a1640e164d4e05889586cb782a4f912990ed2f7bb9ac690",
       "origin": "Repository-authored Ariel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -462,7 +462,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     }
   ],

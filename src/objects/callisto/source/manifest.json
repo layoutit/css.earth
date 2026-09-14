@@ -631,8 +631,8 @@
     {
       "id": "callisto-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12032,
-      "expectedSha256": "738d0e5ba469fc6423d8e5c4dce18a31bb9fcd8267f93b8fcfdb3945fa111195",
+      "expectedBytes": 11390,
+      "expectedSha256": "476b0270ae1e908854c1e8c60fd111917f0c83a1a90d8090d10289793e799a69",
       "origin": "Repository-authored Callisto object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -644,7 +644,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     }
   ],

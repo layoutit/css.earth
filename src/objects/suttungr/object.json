@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c61817f99aecd51406aadcbe8eb1f81ff25dee1cecb879e2d248adaa905af070"
+          "sha256": "3b9d00fa2d9f97f1b2ba3fe1d4e52aa7804e5eb210282b043c17bccc02983fa4"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b198457f83e49038bf2ad5364ac3fc52a31bc9b3aac4654b81dd65d848f47903"
+        "sha256": "ffdc49295410ed84d627000d86e7b2dec35170409834f49cd3a178de718aad80"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Suttungr, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Norse-group moon of Saturn whose brightness peaks two or three times per turn.",
       "systemName": "Solar System",
       "order": 34,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "63773eaca82669f019fd736512b813440ce45470804ec2d0e6785398a8a7154d"
+    "sha256": "5f152946c91f9e41eb1d644b43b109b424ee794b55a8b80d28ef11411f6a887c"
   }
 }

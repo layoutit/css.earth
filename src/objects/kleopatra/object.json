@@ -56,7 +56,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "9bac00803721992cd31b42a26fc3a148cc4bb7377816d55896bc2a8653b8b28b"
+          "sha256": "9b37d34152310c168ffd3014f3825de1959c4e4fec569ecfd4897bb469e8c78a"
         },
         {
           "id": "title",
@@ -108,7 +108,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "be18ddf65074e8c95e97ce5b20ebf0042b3af8941a6e7df0de0f0437e4e29b22"
+        "sha256": "dfccf9361db2e8ca39a5c91db8e4689769cd4af5c446c069957a07da19fc26d2"
       }
     },
     "catalog": {
@@ -116,7 +116,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.795397676845876,
-      "description": "Explore Kleopatra’s two lobes and narrow neck with its published shape model.",
+      "description": "Dog-bone-shaped asteroid with two small moons.",
       "systemName": "Solar System",
       "order": 137,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "784d6c50ae91f03026c77d57593b482f780b5a27fa1811d15b976c33d08311df"
+    "sha256": "3b76ff86710c471bb89911d8323fe3cec35dbbbc26d2660db15ad1a2f059fb29"
   }
 }

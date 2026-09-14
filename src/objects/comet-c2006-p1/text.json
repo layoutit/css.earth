@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-c2006-p1",
+  "card": {
+    "text": "Listed by JPL among history's great comets.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=C/2006%20P1",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "C/2006 P1 (McNaught); orbit class: Hyperbolic Comet; q: 0.171 au"
+      },
+      {
+        "catalogueId": "jpl-great-comets",
+        "url": "https://ssd.jpl.nasa.gov/sb/great_comets.html",
+        "label": "JPL Solar System Dynamics · Great comets in history",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "McNaught grew exceptionally bright as it passed within about 0.17 AU of the Sun.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=C/2006%20P1",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "C/2006 P1 (McNaught); orbit class: Hyperbolic Comet; q: 0.171 au"
+      },
+      {
+        "catalogueId": "jpl-great-comets",
+        "url": "https://ssd.jpl.nasa.gov/sb/great_comets.html",
+        "label": "JPL Solar System Dynamics · Great comets in history",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Celestia catalog nucleus",
+      "detail": "Catalog size",
+      "summary": "Celestia's nucleus shape at its catalog size. The real shape is unknown."
+    }
+  }
+}

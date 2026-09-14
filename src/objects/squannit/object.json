@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "763ca719bce5b9a3a29dfc98be2fc44aa464f895b99c743cc3bd491a6f2bf735"
+          "sha256": "6d0d54c55943e07c7cb7598d3b99d0d4d07e1bdfeddd1801d99bea6321c88752"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "692122799cebcbd56bf688acbba53fc197c54a489129dfd88bedc0998b7814be"
+        "sha256": "1a3d5ef663e79df90602b819afe15bbe1c8e95e0de886734c8304264455bcb38"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 0.642,
-      "description": "Explore Squannit, the companion of Moshup, through its radar-derived shape model.",
+      "description": "The small moon of the near-Earth asteroid Moshup.",
       "systemName": "Solar System",
       "order": 24,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "33b1e6017e6f302408e75f97e6ced60ca04d3bafcb6802802218dec7a2850948"
+    "sha256": "fbcb46f0adb22b50764c457fc1f1090b852b8b9de82ce5ef9cacc180f77136a9"
   }
 }

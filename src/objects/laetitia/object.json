@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0699c40e22137a591b80c23637e1cfe93bdbf2bcf1a0b2c510ce8ce9c458fa18"
+          "sha256": "c767c302b4af6f6e3103256e87b6a6e0ff043e6fedb0aa8606991fe9b48e5c28"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f658a5ea0972d0043afa78608235b4ab899bbc0b77fa7adbcfcf4f37f2124626"
+        "sha256": "b63d84a478114229618a8c6928e2ee0ac0b8fb7f6e996bb22d1e666f74af12db"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7684445031801124,
-      "description": "Explore Laetitia in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in February 1856.",
       "systemName": "Solar System",
       "order": 225,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "756d726e738fed6cf4793d7a1a02215e491478fe92cf9093eb7024a640a04c9d"
+    "sha256": "655cec39d42654c175fce7bbacaed7c46a440ec1b620124d151beed16266e72d"
   }
 }
