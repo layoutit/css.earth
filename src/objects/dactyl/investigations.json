@@ -23,14 +23,15 @@
       "id": "galileo-surface",
       "subject": "Galileo resolved Dactyl observations",
       "status": "deferred",
-      "finding": "Native SSI data are decoded and the i2278 camera pointing is now evaluated against CSPICE. A fixed-ellipsoid fit to the limb and Acmon misses the withheld Celmis by 12.70 native pixels. An alternative selected using Celmis reaches 0.54 pixels but has no independent holdout left. No photographic lens is enabled; another download of the same frames will not resolve this orientation ambiguity.",
+      "finding": "Native SSI data and evaluated spacecraft pointing are retained, but the fixed-ellipsoid orientation is sensitive to the sampled outline. Celmis error is 12.70 pixels using the left limb, 0.23 after adding the lower cap, and 18.48 with both caps. Each fit is selected without Celmis; the development check is not a fresh blind validation. No photographic lens is enabled.",
       "revisitWhen": "Actual SSI products and their camera/shape relation pass independent surface registration for the selected geometry.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/README.md",
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/source/measurements.json",
         "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json",
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/review.json",
-        "https://github.com/layoutit/css.earth/blob/6b8250ac355c000c592e161fe0522ed5d74d3b18/src/objects/dactyl/evidence/registration/report.json"
+        "https://github.com/layoutit/css.earth/blob/6b8250ac355c000c592e161fe0522ed5d74d3b18/src/objects/dactyl/evidence/registration/report.json",
+        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/limb-extent.json"
       ],
       "checked": [
         {
@@ -44,6 +45,11 @@
         {
           "date": "2026-09-14",
           "commit": "6b8250ac355c000c592e161fe0522ed5d74d3b18"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08",
+          "pr": 199
         }
       ]
     },
@@ -127,12 +133,13 @@
       "id": "ssi-i2278",
       "subject": "Galileo SSI i2278 CLEAR exposure",
       "status": "deferred",
-      "finding": "Original VICAR data prove that the retained FITS rows are vertically reversed. The diagnostic applies the source SSI radial distortion and attempts 576 ellipsoid-pose starts at the rounded 3900 km range. The best limb-and-Acmon fit has 0.27 ideal-pixel limb RMS but fails the withheld Celmis check by 12.70 native pixels. A different solution agrees with both named centers but is not independently qualified.",
+      "finding": "Original VICAR proves the FITS vertical inversion and the diagnostic includes SSI radial distortion. Additional lower and upper outline crossings change the selected orientation despite limb RMS below 0.60 pixels. The apparently successful lower-cap fit does not survive the upper-cap check. This is an unresolved camera/shape interpretation, not evidence that a faithful registered area is impossible.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/i2278-crop.png",
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/native/i2278.lbl",
-        "https://github.com/layoutit/css.earth/blob/6b8250ac355c000c592e161fe0522ed5d74d3b18/src/objects/dactyl/evidence/registration/report.json"
+        "https://github.com/layoutit/css.earth/blob/6b8250ac355c000c592e161fe0522ed5d74d3b18/src/objects/dactyl/evidence/registration/report.json",
+        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/limb-extent.json"
       ],
       "checked": [
         {
@@ -142,6 +149,11 @@
         {
           "date": "2026-09-14",
           "commit": "6b8250ac355c000c592e161fe0522ed5d74d3b18"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08",
+          "pr": 199
         }
       ],
       "revisitWhen": "The exposure has a source-backed Dactyl body-frame camera solution or distributed surface controls with independent holdouts for the existing ellipsoid."
@@ -249,15 +261,21 @@
       "id": "veverka-full-camera-details",
       "subject": "Veverka et al. 1996 full paper camera and shape details",
       "status": "unresolved",
-      "finding": "The publisher abstract and metadata were inspected. Full PDF access was unsuccessful through the publisher, ADS and article API; the publisher browser route reached a PDF URL but no readable or saved paper. The full text, tables and figures remain unexamined. No absence of controls is inferred from this access failure.",
+      "finding": "The publisher opens a 12-page full PDF. The first page and part of Table I were read in the browser, but modeled views and remaining tables are still unexamined: subsequent access reached human verification. ADS legacy routes, Semantic Scholar and OpenAlex did not provide a downloadable alternative. This paper is partly retrieved, not fully reviewed.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
-        "https://doi.org/10.1006/icar.1996.0045"
+        "https://doi.org/10.1006/icar.1996.0045",
+        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/README.md#camera-and-orientation-experiment"
       ],
       "checked": [
         {
           "date": "2026-09-14",
           "commit": "41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08",
+          "pr": 199
         }
       ],
       "revisitWhen": "A readable full paper or author-repository copy permits inspection of the observation geometry, axis convention, tables and figures."
@@ -325,6 +343,77 @@
         {
           "date": "2026-09-14",
           "commit": "6b8250ac355c000c592e161fe0522ed5d74d3b18"
+        }
+      ]
+    },
+    {
+      "id": "ssi-limb-extent",
+      "subject": "i2278 bright-outline extent and orientation sensitivity",
+      "status": "unresolved",
+      "finding": "The serial experiment compares 17, 29 and 31 native threshold crossings with the same 576 pose starts, instrument distortion, fixed ellipsoid and Acmon control. The selected Celmis discrepancy changes from 12.70 to 0.23 to 18.48 native pixels. The cap samples are not equally spaced by arc length, and Celmis has been inspected during development.",
+      "revisitWhen": "A source-backed Dactyl frame and independent surface evidence resolve the sensitivity without selecting an outline subset for its desired crater fit.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/limb-extent.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08",
+          "pr": 199
+        }
+      ]
+    },
+    {
+      "id": "veverka-spectral-body-controls",
+      "subject": "Veverka 1996 spectral paper as Dactyl surface controls",
+      "status": "excluded",
+      "finding": "All eleven pages, figures and the filter table were examined. Dactyl has disk-averaged spectra; the mapped figures are Ida. This paper does not supply Dactyl image-specific body orientation or distributed surface controls.",
+      "revisitWhen": "A linked supplement or explicit Dactyl camera/control product is identified.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/additional-sources.json",
+        "https://doi.org/10.1006/icar.1996.0037"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08",
+          "pr": 199
+        }
+      ]
+    },
+    {
+      "id": "oberst-1995-body-controls",
+      "subject": "Oberst 1995 photogrammetry abstract as Dactyl surface controls",
+      "status": "excluded",
+      "finding": "Both pages of extracted text were examined. The 96-point network and more than 5000 matched points are explicitly Ida surface points. The Dactyl paragraph proposes ephemeris work and publishes no Dactyl surface coordinates or camera-to-body solution.",
+      "revisitWhen": "A subsequent release publishes Dactyl-specific surface controls or observation geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/additional-sources.json",
+        "https://www.lpi.usra.edu/meetings/lpsc1995/pdf/1535.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08",
+          "pr": 199
+        }
+      ]
+    },
+    {
+      "id": "generic-pck00011",
+      "subject": "Generic pck00011 as a Dactyl body-orientation source",
+      "status": "excluded",
+      "finding": "Retrieved the complete generic pck00011 file, read its introduction/body inventory and searched every byte for Dactyl and 2431011. Neither appears. This is a file-specific exclusion, not a claim that no archive contains Dactyl geometry.",
+      "revisitWhen": "A Dactyl-specific body frame with epoch and selected-shape axis binding is identified.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/additional-sources.json",
+        "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08",
+          "pr": 199
         }
       ]
     }
