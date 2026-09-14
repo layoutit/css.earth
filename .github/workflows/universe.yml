@@ -46,6 +46,11 @@ jobs:
           pnpm build:renderer
           pnpm build:preparation
           pnpm prepare:object-json
+      - name: Test unavailable prepared packages and focus controls
+        run: >-
+          node --test tools/prepare-context-availability.test.mts
+          site/test/prepared-context-navigation.test.mts
+          site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts
       - name: Test authored preparation publication and cache
         run: |
           pnpm exec playwright install --with-deps chromium
