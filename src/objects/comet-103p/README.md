@@ -14,7 +14,11 @@
 
 The selected scan yields 162 accepted spatial pixels and 757 of the model’s 32,040 facets. These are **facet counts, not area percentages**. The retained values span 337.2–364.3 K and −0.077–4.490%/100 nm. Both views use the same missing-data mask and keep Shadows off by default. The grid marks rejected spectra, unsupported shape, and gaps; it is not filled from nearby values.
 
+[Investigation ledger](investigations.json): tested alternatives and the evidence needed to revisit them.
+
 ## Evidence
+
+- **Photometric trial, 2026-09-13:** a trial with the published Hapke parameters reduced accepted photographic area from 57.98% to 32.00%. Eight of ten overlap pairs improved, but much of the photographed terrain became grid. The original EPOXI mosaic remains in use. [Parameters, measurements and limitations](evidence/photometry/trial.json) record the diagnostic trial; the original paper's H-function approximation remains unverified.
 
 - **Recipe update, 2026-09-13:** a full preparation after merging main's observation recipes (`2f2752abb` plus this infrared change) preserves all 46 delivered images byte-for-byte against `be628e35f`. Runtime values are unchanged, so the earlier browser captures still apply to the comet views. The photographic display fields, source pins and navigation receipts use the new shared recipe; source/package and numerical-frame checks pass.
 

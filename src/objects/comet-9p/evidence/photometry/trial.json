@@ -1,0 +1,648 @@
+{
+  "status": "not-promoted",
+  "pipelineCommit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d",
+  "method": "Same source mesh, source frames and registered cameras. Fixed production level gains are tested at 48 barycentric points per display triangle, disjoint from the production fit samples. Each pair compares identical source points accepted by both treatments. Coverage uses the production area-weighted sampler and is separate from this overlap comparison.",
+  "limitations": [
+    "Diagnostic parameter trials, not qualified reproductions of the three original publications. The numerical parameters were checked in Li et al. 2013 Table 6; the original papers’ H-function approximation was not verified. These trials use the 1981 approximation.",
+    "The Tempel phase bound is the published encounter range, not a verified final fitting range. Tempel applies a model tabulated at 550 nm to the clear-filter photographs.",
+    "A lower overlap error is not proof of more accurate albedo. Smooth source normals do not recover unresolved topography or remove coma.",
+    "Offline source-sampler snapshots were inspected; these trials were not integrated into the application. No screenshot is retained in this numerical record.",
+    "No runtime dataset is replaced. Original photographed shadows remain valid in the delivered views."
+  ],
+  "sourceUrls": [
+    "https://arxiv.org/abs/1310.4165",
+    "https://doi.org/10.1016/j.icarus.2012.02.011",
+    "https://www.lpi.usra.edu/meetings/acm2012/pdf/6385.pdf"
+  ],
+  "preparationSha256": "87cbc2658f4f763b2782e2e71ea109c9fabbedefb1852382a83b931f6e8bec2a",
+  "sourcePins": [
+    {
+      "path": "shape/tempel1_2012_plan.tab",
+      "expectedBytes": 1634142,
+      "expectedSha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000632_001_r.fit",
+      "expectedBytes": 2436480,
+      "expectedSha256": "53884c4e586680b1d7d286c253bb1f220c03208edb88a8481963781947659c81"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000632_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "fb1f2818491dc9044faedc2be1088d6400b13ff8e8549a9c905a610ceb5f5a90"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000632_001_r.json",
+      "expectedBytes": 22719,
+      "expectedSha256": "2b145f846105a7b972360041c31a94d1f01fdb4e756520a88b8248c44fef4f51"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000639_001_r.fit",
+      "expectedBytes": 662400,
+      "expectedSha256": "acacb9588329abd83d742ba0f558fafd84c0aad554c7c0ead1ead2f913345599"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000639_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "00474e4d21fded4b78524f21f7b4e25b34c9496cf1d413e2dbf27de1d8538cc5"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000639_001_r.json",
+      "expectedBytes": 17827,
+      "expectedSha256": "f43b5c3747b1b2fbc55c696067dc5fdea036a0ae6286c64e32a495967fd41628"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000654_001_r.fit",
+      "expectedBytes": 662400,
+      "expectedSha256": "fc64a20ea7c923e0c208fb3597632182ceaa44a6d2a0f4656968a4e6e1b48afb"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000654_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "981707f100e66c0cb36c555ad2a9d269e18e19ddbf9a654fa0d2873c08dc98e1"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000654_001_r.json",
+      "expectedBytes": 14834,
+      "expectedSha256": "3f7535c22735e89e43f77f77b32ee423ea0fb8a18bfeba6b2a43c137bdb4234d"
+    },
+    {
+      "path": "photography/next/n30036te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "3bad06293d092e0be85d473086dc7babdb5a00040fc449649d9603b2188fbe24"
+    },
+    {
+      "path": "photography/next/n30036te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "fa2b468b95fe75d16c432b42343168938f61f4b5785dbf9594579a7940373e92"
+    },
+    {
+      "path": "photography/next/n30036te02_rr.json",
+      "expectedBytes": 23080,
+      "expectedSha256": "0cf2cdb79d4e5a10173125aa102e628820ec61f31b15793490133dcea8c886e4"
+    },
+    {
+      "path": "photography/next/n30039te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "7991991b7dbbb8c84b1f5777feb22d1687eb55453c719af64d533d466c1ce68a"
+    },
+    {
+      "path": "photography/next/n30039te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "99fb4fa6678e66610566b1137fbd62e120d5c6f58f6601066367191e1ba1a92c"
+    },
+    {
+      "path": "photography/next/n30039te02_rr.json",
+      "expectedBytes": 16354,
+      "expectedSha256": "90c0459b6a86faab62a1ca22e4bd3c079e3bae88e786d82260bb32925f577691"
+    },
+    {
+      "path": "photography/next/n30042te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "d2c82af5395924f21660bf3466f22b63173c3adf1ac23b0b533b54bbf2eb1a95"
+    },
+    {
+      "path": "photography/next/n30042te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "bef821e9f2d607ed4ccf45722f0a5c854f73c9247e644bd6f2285f41ab7d7822"
+    },
+    {
+      "path": "photography/next/n30042te02_rr.json",
+      "expectedBytes": 17694,
+      "expectedSha256": "9e799a22bcfe3363817a606f77a5a9dbb60eaad94d1836221e65337d2e84447e"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000644_001_r.fit",
+      "expectedBytes": 662400,
+      "expectedSha256": "2f9aa28cc08a216e56884e950fc83fcb79f6480e695d0c4dc5e3f9933cfbd087"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000644_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "454beb14950398f963f0b7db0595cbc259993420296ed81fee65bd79f80a60cb"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000644_001_r.json",
+      "expectedBytes": 17997,
+      "expectedSha256": "696ffa2a70e8f1eb26b135d786af0789c6b7943f47f68bbaf1a111d63b8c8452"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
+      "expectedBytes": 662400,
+      "expectedSha256": "26ecb6a0e4f51ea717f922aea44702585d73303c858771a8417368135a1ab026"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "c07fa63ecc2bdb86466e5927419c94a966f5d2defaf79576d735db1b217b9d1c"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.json",
+      "expectedBytes": 13379,
+      "expectedSha256": "41a8b4f8558f50db5dfd8fa7e54aa2bee03d0c5f8a6ef1a0944d914314ef36e1"
+    },
+    {
+      "path": "photography/next/n30033te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "7b6b3ea7dc38f0c00430538caa172037ecfdb8a87aaf3bbd548c71102bd087bc"
+    },
+    {
+      "path": "photography/next/n30033te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "99e77ed612f4323d72076ddbf82fde723dd5093f779acd33183eb63c1f2bd97a"
+    },
+    {
+      "path": "photography/next/n30033te02_rr.json",
+      "expectedBytes": 17740,
+      "expectedSha256": "ff0de3863638c44954eec125b8ecedf6228d13a127913e575ea11ebf269bbd15"
+    },
+    {
+      "path": "photography/next/n30045te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "40012e16420e8a54f1528b8281cc7547a80243ee7693b7ab0684261ff3bba2b4"
+    },
+    {
+      "path": "photography/next/n30045te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "73f982e326d08c0aa3b4c0921ad187ec5259187899eab514080534a5536ba408"
+    },
+    {
+      "path": "photography/next/n30045te02_rr.json",
+      "expectedBytes": 17370,
+      "expectedSha256": "3c0ce1af03d4a374b68c6cde5ae4fba4f8f9e8182272e8f2baffdd95a88ec781"
+    },
+    {
+      "path": "photography/next/n30048te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "fe0f92dd79880c4e39d646277e06e957844de800b15747e9b92a7685f7e03506"
+    },
+    {
+      "path": "photography/next/n30048te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "8bbcfa09263bf4109e3fcb9e44557451ca64a5c6ef4a419b0aca10f860c19aa2"
+    },
+    {
+      "path": "photography/next/n30048te02_rr.json",
+      "expectedBytes": 17360,
+      "expectedSha256": "1c07ba7d6547cb8e51d959fb38c6ba9bb3a4b020eb1b8b6020ab4f2d6bac9904"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000675_001_r.fit",
+      "expectedBytes": 662400,
+      "expectedSha256": "1e16220cef4edf6961f06b0a0651be5bb1202c8cf716ebdb0e2c74c7fe115520"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000675_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "72fa11fcdd26d2259f5bc1c0764cf7c651c8776b2658f543181d04c33ce671db"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000675_001_r.json",
+      "expectedBytes": 57084,
+      "expectedSha256": "87d8b0a9e4992ad62bd57fd7c8165f0cce39e639ce7873d7bff67634c583eacb"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000680_001_r.fit",
+      "expectedBytes": 216000,
+      "expectedSha256": "8cf1f35342c0caec7a22e6a610d66b2d8a91f866d70b4c0f5a9a41de6b799a70"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000680_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "b74737563964f780b19367d8c9418498f7aa3a536f5407cb9401f16013472d40"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000680_001_r.json",
+      "expectedBytes": 15703,
+      "expectedSha256": "75faeb131deaf390f5931556db492878570eb94fb72d185b6ef55d70fb69c7b1"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000688_001_r.fit",
+      "expectedBytes": 216000,
+      "expectedSha256": "360666794a059670d870c3049354c0a1f6cdbc53619a005817cb2fe940f9fe82"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000688_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "be1f12db5f5bf473485a9c575d669a6b3274b6a6e524ebecf09307066cbd2d9f"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000688_001_r.json",
+      "expectedBytes": 16038,
+      "expectedSha256": "5c081d34acb7869b2432322ff1bc13ace9b9d935ed4aaee412b8d335e1e7156d"
+    }
+  ],
+  "cases": [
+    {
+      "lens": "deep-impact",
+      "model": "li-2013-hapke",
+      "beforeCoverage": 0.32576307274448807,
+      "afterCoverage": 0.24481252856709693,
+      "improvedPairs": 11,
+      "pairCount": 28,
+      "pairs": [
+        {
+          "a": "iv05070405-9000632-001-r",
+          "b": "iv05070405-9000639-001-r",
+          "samples": 9188,
+          "before": 0.030157164788837496,
+          "after": 0.030496160185486572
+        },
+        {
+          "a": "iv05070405-9000632-001-r",
+          "b": "iv05070405-9000654-001-r",
+          "samples": 4015,
+          "before": 0.03637087332568234,
+          "after": 0.03653465632213494
+        },
+        {
+          "a": "iv05070405-9000632-001-r",
+          "b": "iv05070405-9000644-001-r",
+          "samples": 8510,
+          "before": 0.02209421757556776,
+          "after": 0.02283190966134872
+        },
+        {
+          "a": "iv05070405-9000632-001-r",
+          "b": "iv05070405-9000673-001-r",
+          "samples": 2903,
+          "before": 0.054606498786557295,
+          "after": 0.05490761516328154
+        },
+        {
+          "a": "iv05070405-9000632-001-r",
+          "b": "iv05070405-9000675-001-r",
+          "samples": 2222,
+          "before": 0.06057841170401643,
+          "after": 0.0605960428813746
+        },
+        {
+          "a": "iv05070405-9000632-001-r",
+          "b": "iv05070405-9000680-001-r",
+          "samples": 262,
+          "before": 0.06286486596085254,
+          "after": 0.06252732401034221
+        },
+        {
+          "a": "iv05070405-9000632-001-r",
+          "b": "iv05070405-9000688-001-r",
+          "samples": 81,
+          "before": 0.0733724845394874,
+          "after": 0.07249022614591874
+        },
+        {
+          "a": "iv05070405-9000639-001-r",
+          "b": "iv05070405-9000654-001-r",
+          "samples": 4021,
+          "before": 0.03336853096314318,
+          "after": 0.0342914052906204
+        },
+        {
+          "a": "iv05070405-9000639-001-r",
+          "b": "iv05070405-9000644-001-r",
+          "samples": 8509,
+          "before": 0.02134568853179368,
+          "after": 0.02119907997872221
+        },
+        {
+          "a": "iv05070405-9000639-001-r",
+          "b": "iv05070405-9000673-001-r",
+          "samples": 2904,
+          "before": 0.05155289022730914,
+          "after": 0.05180923752695484
+        },
+        {
+          "a": "iv05070405-9000639-001-r",
+          "b": "iv05070405-9000675-001-r",
+          "samples": 2216,
+          "before": 0.05461622674877164,
+          "after": 0.05480152069317704
+        },
+        {
+          "a": "iv05070405-9000639-001-r",
+          "b": "iv05070405-9000680-001-r",
+          "samples": 262,
+          "before": 0.06182817776811461,
+          "after": 0.06162127288501348
+        },
+        {
+          "a": "iv05070405-9000639-001-r",
+          "b": "iv05070405-9000688-001-r",
+          "samples": 81,
+          "before": 0.06385901031531377,
+          "after": 0.06406468112933195
+        },
+        {
+          "a": "iv05070405-9000654-001-r",
+          "b": "iv05070405-9000644-001-r",
+          "samples": 4025,
+          "before": 0.03435255343606249,
+          "after": 0.03468761627925829
+        },
+        {
+          "a": "iv05070405-9000654-001-r",
+          "b": "iv05070405-9000673-001-r",
+          "samples": 2914,
+          "before": 0.07086878213316178,
+          "after": 0.070551177243661
+        },
+        {
+          "a": "iv05070405-9000654-001-r",
+          "b": "iv05070405-9000675-001-r",
+          "samples": 2229,
+          "before": 0.07615030377335065,
+          "after": 0.07568680835939735
+        },
+        {
+          "a": "iv05070405-9000654-001-r",
+          "b": "iv05070405-9000680-001-r",
+          "samples": 261,
+          "before": 0.087857467449288,
+          "after": 0.0891668198442394
+        },
+        {
+          "a": "iv05070405-9000654-001-r",
+          "b": "iv05070405-9000688-001-r",
+          "samples": 81,
+          "before": 0.09184213506693843,
+          "after": 0.0927933475032489
+        },
+        {
+          "a": "iv05070405-9000644-001-r",
+          "b": "iv05070405-9000673-001-r",
+          "samples": 2897,
+          "before": 0.048971829568653716,
+          "after": 0.0490481007286523
+        },
+        {
+          "a": "iv05070405-9000644-001-r",
+          "b": "iv05070405-9000675-001-r",
+          "samples": 2219,
+          "before": 0.05417973837730956,
+          "after": 0.05389435899802742
+        },
+        {
+          "a": "iv05070405-9000644-001-r",
+          "b": "iv05070405-9000680-001-r",
+          "samples": 263,
+          "before": 0.053831231469882966,
+          "after": 0.052092552503835654
+        },
+        {
+          "a": "iv05070405-9000644-001-r",
+          "b": "iv05070405-9000688-001-r",
+          "samples": 81,
+          "before": 0.07140579382798423,
+          "after": 0.07384683442073263
+        },
+        {
+          "a": "iv05070405-9000673-001-r",
+          "b": "iv05070405-9000675-001-r",
+          "samples": 2238,
+          "before": 0.008723212155484784,
+          "after": 0.008747116470570212
+        },
+        {
+          "a": "iv05070405-9000673-001-r",
+          "b": "iv05070405-9000680-001-r",
+          "samples": 261,
+          "before": 0.022550729755889336,
+          "after": 0.022314117369038565
+        },
+        {
+          "a": "iv05070405-9000673-001-r",
+          "b": "iv05070405-9000688-001-r",
+          "samples": 80,
+          "before": 0.04091925015830702,
+          "after": 0.04134332644531668
+        },
+        {
+          "a": "iv05070405-9000675-001-r",
+          "b": "iv05070405-9000680-001-r",
+          "samples": 263,
+          "before": 0.01807302194344193,
+          "after": 0.017790597040733627
+        },
+        {
+          "a": "iv05070405-9000675-001-r",
+          "b": "iv05070405-9000688-001-r",
+          "samples": 81,
+          "before": 0.03655511267707458,
+          "after": 0.03605083933912605
+        },
+        {
+          "a": "iv05070405-9000680-001-r",
+          "b": "iv05070405-9000688-001-r",
+          "samples": 81,
+          "before": 0.02283087375368303,
+          "after": 0.023530582137604894
+        }
+      ],
+      "parameters": {
+        "schema": "cssearth-photometric-model@1",
+        "id": "li-2013-hapke",
+        "instrument": "Deep Impact ITS and Stardust-NExT NAVCAM",
+        "filter": "Published 550 nm model applied to clear-filter photographs",
+        "quantity": "radiance-factor",
+        "model": {
+          "family": "hapke",
+          "singleScatteringAlbedo": 0.039,
+          "hFunction": "hapke-1981",
+          "phaseFunction": {
+            "form": "henyey-greenstein",
+            "asymmetry": -0.49
+          },
+          "shadowHiding": {
+            "amplitude": 1,
+            "width": 0.01
+          },
+          "roughnessDegrees": 16
+        },
+        "fit": {
+          "phaseDegrees": [
+            16,
+            95
+          ]
+        }
+      },
+      "reference": {
+        "model": "photometry/li-2013-hapke.json",
+        "referenceDegrees": {
+          "incidence": 60,
+          "emission": 0,
+          "phase": 60
+        },
+        "limits": {
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 75,
+          "phaseDegrees": [
+            16,
+            95
+          ],
+          "minimumGain": 0.2,
+          "maximumGain": 5
+        }
+      }
+    },
+    {
+      "lens": "next",
+      "model": "li-2013-hapke",
+      "beforeCoverage": 0.564346495041032,
+      "afterCoverage": 0.34283593512054,
+      "improvedPairs": 4,
+      "pairCount": 15,
+      "pairs": [
+        {
+          "a": "n30033te02-rr",
+          "b": "n30039te02-rr",
+          "samples": 3440,
+          "before": 0.09660093856894647,
+          "after": 0.10196463800891664
+        },
+        {
+          "a": "n30033te02-rr",
+          "b": "n30036te02-rr",
+          "samples": 7618,
+          "before": 0.06841023860961389,
+          "after": 0.07767489918143251
+        },
+        {
+          "a": "n30033te02-rr",
+          "b": "n30042te02-rr",
+          "samples": 1820,
+          "before": 0.09683785410625667,
+          "after": 0.11536606035963588
+        },
+        {
+          "a": "n30033te02-rr",
+          "b": "n30045te02-rr",
+          "samples": 1043,
+          "before": 0.09387960072091268,
+          "after": 0.1330609680307115
+        },
+        {
+          "a": "n30033te02-rr",
+          "b": "n30048te02-rr",
+          "samples": 640,
+          "before": 0.11467449022127782,
+          "after": 0.13459744290291129
+        },
+        {
+          "a": "n30039te02-rr",
+          "b": "n30036te02-rr",
+          "samples": 2509,
+          "before": 0.12391306052385681,
+          "after": 0.12002555142493376
+        },
+        {
+          "a": "n30039te02-rr",
+          "b": "n30042te02-rr",
+          "samples": 10465,
+          "before": 0.09080385688354635,
+          "after": 0.04603863941154682
+        },
+        {
+          "a": "n30039te02-rr",
+          "b": "n30045te02-rr",
+          "samples": 9572,
+          "before": 0.07768601951222379,
+          "after": 0.07832885981338315
+        },
+        {
+          "a": "n30039te02-rr",
+          "b": "n30048te02-rr",
+          "samples": 8998,
+          "before": 0.06939073592358247,
+          "after": 0.08543850705239127
+        },
+        {
+          "a": "n30036te02-rr",
+          "b": "n30042te02-rr",
+          "samples": 1233,
+          "before": 0.157399873191206,
+          "after": 0.10105384510388572
+        },
+        {
+          "a": "n30036te02-rr",
+          "b": "n30045te02-rr",
+          "samples": 766,
+          "before": 0.0793182701494611,
+          "after": 0.11909073107058515
+        },
+        {
+          "a": "n30036te02-rr",
+          "b": "n30048te02-rr",
+          "samples": 578,
+          "before": 0.06451356969313748,
+          "after": 0.10730886218157785
+        },
+        {
+          "a": "n30042te02-rr",
+          "b": "n30045te02-rr",
+          "samples": 9623,
+          "before": 0.051972577833953565,
+          "after": 0.05762474150959725
+        },
+        {
+          "a": "n30042te02-rr",
+          "b": "n30048te02-rr",
+          "samples": 9038,
+          "before": 0.06449944306937613,
+          "after": 0.0648562932843847
+        },
+        {
+          "a": "n30045te02-rr",
+          "b": "n30048te02-rr",
+          "samples": 9022,
+          "before": 0.026674642852803142,
+          "after": 0.026572007715647026
+        }
+      ],
+      "parameters": {
+        "schema": "cssearth-photometric-model@1",
+        "id": "li-2013-hapke",
+        "instrument": "Deep Impact ITS and Stardust-NExT NAVCAM",
+        "filter": "Published 550 nm model applied to clear-filter photographs",
+        "quantity": "radiance-factor",
+        "model": {
+          "family": "hapke",
+          "singleScatteringAlbedo": 0.039,
+          "hFunction": "hapke-1981",
+          "phaseFunction": {
+            "form": "henyey-greenstein",
+            "asymmetry": -0.49
+          },
+          "shadowHiding": {
+            "amplitude": 1,
+            "width": 0.01
+          },
+          "roughnessDegrees": 16
+        },
+        "fit": {
+          "phaseDegrees": [
+            16,
+            95
+          ]
+        }
+      },
+      "reference": {
+        "model": "photometry/li-2013-hapke.json",
+        "referenceDegrees": {
+          "incidence": 60,
+          "emission": 0,
+          "phase": 60
+        },
+        "limits": {
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 75,
+          "phaseDegrees": [
+            16,
+            95
+          ],
+          "minimumGain": 0.2,
+          "maximumGain": 5
+        }
+      }
+    }
+  ]
+}

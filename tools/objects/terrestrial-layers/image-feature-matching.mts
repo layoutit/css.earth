@@ -48,9 +48,13 @@ export function matchImageFeatures(target:MatchRaster,referenceWarp:MatchRaster,
         }
         const i=sy*side+sx;counts[i]=count;
         if(count<patchArea*p.minimumJointValidFraction)continue;
-        const variance=(aa-a*a/count)*(bb-b*b/count);
-        if(variance<=1e-16)continue;
-        const score=(ab-a*b/count)/Math.sqrt(variance);scores[i]=score;
+        const varianceA=aa-a*a/count,varianceB=bb-b*b/count;
+        // Calibrated radiance may be about 1e-7 (Stardust NAVCAM). A fixed
+        // variance-product cutoff discards real texture merely because of its
+        // units. Reject only variance unresolved at the sums' numerical scale.
+        const roundoff=8*count*Number.EPSILON;
+        if(varianceA<=roundoff*aa||varianceB<=roundoff*bb)continue;
+        const score=(ab-a*b/count)/Math.sqrt(varianceA*varianceB);scores[i]=score;
         if(score>best){best=score;bestX=sx;bestY=sy;}
       }
       let next=-2;

@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "comet-81p",
+  "entries": [
+    {
+      "id": "navcam-li-2009-photometric-normalization",
+      "subject": "Wild 2 NAVCAM normalization using Li 2009 Hapke parameters",
+      "status": "deferred",
+      "finding": "The diagnostic trial reduces accepted photographed area from 39.52% to 29.73%; 5 of 6 common-point overlap pairs improve. The running app shows large new grid gaps in photographed depressions. Retain the observed photographs. Parameters were checked in Li 2013 Table 6, but the original H-function approximation is unverified.",
+      "revisitWhen": "A verified original model formulation and source-normal or coverage evidence can support normalization without discarding the photographed terrain.",
+      "evidence": [
+        "https://arxiv.org/abs/1310.4165",
+        "https://doi.org/10.1016/j.icarus.2009.06.002",
+        "https://www.lpi.usra.edu/meetings/acm2008/pdf/8290.pdf",
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/tools/photometry/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+        }
+      ]
+    },
+    {
+      "id": "n2081-overlap-n2079we02",
+      "subject": "Wild 2 N2081 camera registration using N2079WE02 image overlap",
+      "status": "excluded",
+      "finding": "Matching calibrated radiance now finds 13 fit and 11 holdout controls, but the camera fails the unchanged 1-pixel RMS and 2-pixel maximum limits. Fit RMS is 9.84 pixels; holdout RMS is 17.84 pixels. N2081 is not added to the mosaic.",
+      "revisitWhen": "New source attitude or intrinsics, independent terrain controls, or an independently qualified registration method resolves the residuals without relaxing the existing positional limits.",
+      "evidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.fit",
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.lbl",
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/comet-81p/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+        }
+      ]
+    },
+    {
+      "id": "n2081-overlap-n2077we02",
+      "subject": "Wild 2 N2081 camera registration using N2077WE02 image overlap",
+      "status": "excluded",
+      "finding": "Matching calibrated radiance now finds 9 fit and 10 holdout controls, but the camera fails the unchanged 1-pixel RMS and 2-pixel maximum limits. Fit RMS is 16.78 pixels; holdout RMS is 5.66 pixels. N2081 is not added to the mosaic.",
+      "revisitWhen": "New source attitude or intrinsics, independent terrain controls, or an independently qualified registration method resolves the residuals without relaxing the existing positional limits.",
+      "evidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.fit",
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.lbl",
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/comet-81p/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+        }
+      ]
+    }
+  ]
+}
