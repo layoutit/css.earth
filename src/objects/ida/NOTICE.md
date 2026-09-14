@@ -6,7 +6,7 @@ The Stooke map guide and unchanged candidate JPEG are preserved as survey and im
 
 Physical/orbital data and legacy pole constants: NASA/JPL Horizons and NAIF. The observed image is processed monochrome, with source shadows and varying detail; the elevation palette is a scientific display derivative, not a photograph.
 
-ESO/S. Brunier Milky Way panorama: CC BY 4.0, with complete terms in `source/stars/ESO-IMAGE-LICENSE.md`. HYG Stellar Database: David Nash/Astronexus, CC BY-SA 4.0, with notice in `source/stars/LICENSE.md`. Inter title outlines/font: Inter Project Authors, SIL Open Font License 1.1; see `source/presentation/LICENSE.INTER-OFL`.
+Inter title outlines/font: Inter Project Authors, SIL Open Font License 1.1; see `source/presentation/LICENSE.INTER-OFL`.
 
 Calibrated Galileo SSI observation: D. L. Domingue / NASA Planetary Data System; raw detector images and bad-data tables: NASA/JPL/Galileo SSI team. Camera controls and shape: P. C. Thomas and colleagues. Galileo SSI instrument geometry: NASA/JPL NAIF. The separate I/F image lens retains observed illumination and does not portray absolute surface albedo.
 

@@ -4,7 +4,6 @@
   "namespace": "nix",
   "displayName": "Nix",
   "publicBase": "/scenes/nix/",
-  "distanceAu": 39.482,
   "raster": {
     "width": 512,
     "height": 256,
@@ -117,12 +116,6 @@
     "sunSource": "JPL Pluto-system ephemeris; rapid nonsynchronous Nix spin. Mesh prime-meridian registration is unresolved and its orientation is a stated display convention."
   },
   "presentation": {
-    "defaultLens": "monochrome",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "monochrome"
   }
 }

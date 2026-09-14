@@ -118,6 +118,6 @@ unchanged. Both datasets retain the app's flood and directional lighting.
 <details>
 <summary>Shape, rotation and camera on the shared raster lane</summary>
 
-The recipe declares a sphere of 1352.6 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 5.8770-day retrograde rotation (synchronous with the retrograde orbit; IAU pole) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 0.08° initial pitch, 84.34° yaw, taken from the retired lane's camera). The heliocentric view keeps the orbit around Neptune and the parent marker now comes from the shared navigation atlas.
+The recipe declares a sphere of 1352.6 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 5.8770-day retrograde rotation (synchronous with the retrograde orbit; IAU pole) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 0.08° initial pitch, 84.34° yaw, taken from the retired lane's camera).
 
 </details>

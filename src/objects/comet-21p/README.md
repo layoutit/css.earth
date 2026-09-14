@@ -2,7 +2,7 @@
 
 Giacobini–Zinner was the first comet visited by a spacecraft, when ICE passed through its tail in 1985. Its dust also feeds the Draconid meteor shower.
 
-One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows and Orbit default off.
+One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.
 
 ## Sources
 

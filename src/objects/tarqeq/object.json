@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "e1267aa36456ab0d03f2f0f1cdf36375ada23d93034d7c4453a880482f33d118"
+          "sha256": "8a083a41870a5245b7fc7fe6e12b85c8d142443569551c537825e993e1d71070"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "dd6e89054c4aba13fee7dbeee683ee30ca34689d247eddc2f80722d4d1daaa57"
+          "sha256": "6d1eb770434946f2b06b69b3c3d4e685620fc5b84d6c7df005166931e50f6c2d"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
+          "sha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
         },
         {
           "id": "rotation",

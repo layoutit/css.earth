@@ -4,7 +4,6 @@
   "namespace": "patroclus",
   "displayName": "Patroclus",
   "publicBase": "/scenes/patroclus/",
-  "distanceAu": 5.2,
   "raster": {
     "width": 512,
     "height": 256,
@@ -79,12 +78,6 @@
     "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

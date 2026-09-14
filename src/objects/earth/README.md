@@ -462,10 +462,6 @@ The Moon is a separate object package and route. Earth keeps only the checked re
 facts used by its information panel; the Earth scene does not prepare, mount, animate, toggle,
 or request a Moon representation.
 
-The photographic starfield uses ESO/S. Brunier’s `eso0932a` full-sky panorama. HYG Database
-v4.1 at commit `c7f7f883fe678cc7680169a50ccd7dcc49b060ce` supplies a coordinate-registration
-subset for checking the sky mapping.
-
 It is not the displayed photograph, and the panorama is not tied to the Earth imagery’s epoch.
 
 #### Heading source

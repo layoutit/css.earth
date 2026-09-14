@@ -127,33 +127,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -3919,8 +3892,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8936,
-      "expectedSha256": "bcec99e421a5a39e15e94c96af614d413f7276ff0ed1fe817eb35707f759adbd",
+      "expectedBytes": 8657,
+      "expectedSha256": "f5ef1ced48bfb6d55c7f3c02e2614380bbad4523704075d2ebf14e331672fedb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -3928,8 +3901,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 38425,
-      "expectedSha256": "e0fde0afca207381a01f1abe02d4d1732f4096d8070a2b1dba74704c8b7faafe"
+      "expectedBytes": 38241,
+      "expectedSha256": "0d6d963d983b38a42a056a74ae7a8a769c060c54445d1441dc9305db783f180c"
     },
     {
       "path": "preparation/navigation.json",
@@ -3943,8 +3916,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9465,
-      "expectedSha256": "302776f3802e991ae11e64ae5f3032cbeff14411ea44a3f2b38cd7a4acb8e364"
+      "expectedBytes": 9323,
+      "expectedSha256": "fc1208e91d43654605d45f1514276e47e5bd4bc132f58ca518072102675435e3"
     },
     {
       "path": "presentation/minimap.json",
@@ -3965,21 +3938,6 @@
       "path": "shape/hartley2_2012_plan.lbl",
       "expectedBytes": 12560,
       "expectedSha256": "7890b02a5df3d77a18d195c3fb1a1880927613af07006f8d4489f3ea951db223"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 853,
-      "expectedSha256": "e25995be192ffa81faad3695eb34be3d208fc94402945394d6059777433cb14e"
     },
     {
       "path": "reference/encounter-photography.md",

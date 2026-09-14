@@ -2,7 +2,7 @@
 
 Swift–Tuttle leaves the dust behind the Perseid meteor shower. Its long orbit carries it far beyond the planets before it returns to the inner Solar System.
 
-One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows and Orbit default off.
+One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.
 
 ## Sources
 

@@ -61,12 +61,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": false
       }
     ]
   },
@@ -89,12 +83,6 @@
       "role": "observations",
       "description": "Observations and history",
       "href": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/ESA_s_new_camera_follows_disintegration_of_a_comet"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

@@ -2,33 +2,6 @@
   "schema": "cssryugu-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "ryugu-shape",
       "path": "shape/ryugu_shape_spc_200k_v20200323.obj.gz",
       "origin": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
@@ -469,8 +442,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11906,
-      "expectedSha256": "854286864c3262a82af2221ad9e8c0c24e71d430649cff76f6a4fdf474092040",
+      "expectedBytes": 11627,
+      "expectedSha256": "c69c3b149ca57fb05e0289ce76a4dc91d566d4ad1c8d769d0cc834d62bd8e9c1",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -478,8 +451,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3632,
-      "expectedSha256": "2ea589e3a4683f7fecc35b06874f71f495609d52e17dbbfcf22ae7a2dd0911bb"
+      "expectedBytes": 3429,
+      "expectedSha256": "4447dee54993b63f26027f613ddc5de7bc52e45cc191299032919f3911f94284"
     },
     {
       "path": "preparation/navigation.json",
@@ -493,8 +466,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6526,
-      "expectedSha256": "236b312a46c8b994471e2445a38f10a3564fe63a607db0eaebb604c03b70f4f7"
+      "expectedBytes": 6385,
+      "expectedSha256": "db35b8b9ea6b6fd11ba9b0133ca04cf3621d7475e92172c9d12d04e2d4d70d38"
     },
     {
       "path": "presentation/title-mark.json",
@@ -545,21 +518,6 @@
       "path": "reference/ryugu_v10.tpc",
       "expectedBytes": 11410,
       "expectedSha256": "5c06e668bbc96fdd1c7a5e027543a5b8f8b70d75bc2dbb5e171b24389d0db10c"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 89771,
-      "expectedSha256": "11d325c515fecc6566d5564f78dda3b4e6ac7aeda786fdde8c1059307c6ba8ae"
     },
     {
       "id": "ryugu-surface-features-source",

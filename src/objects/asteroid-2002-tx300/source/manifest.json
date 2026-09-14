@@ -2,33 +2,6 @@
   "schema": "cssasteroid-2002-tx300-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/asteroid-2002-tx300/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -121,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3611,
-      "expectedSha256": "b263bb1b2c5bf875f155a2759fdf920d2b6a380bd46230a6343664221fadf805",
+      "expectedBytes": 3331,
+      "expectedSha256": "dc0521abd1afd70800f8f2218f052882061313d05123ce651e60a2454637cc03",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -135,8 +108,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 728,
-      "expectedSha256": "82e6913ccc738b7e096d4ead292217b3d566364a22509b8279f1ceb5f25a2c4c"
+      "expectedBytes": 525,
+      "expectedSha256": "11b46138a39f747f9e84c84391691baed3a8d4a8aac672e88b3bfc897908ecc7"
     },
     {
       "path": "preparation/navigation.json",
@@ -150,8 +123,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2952,
-      "expectedSha256": "d09a85d9ab11b7d4b11efcc8f0ac00b7207c14693c2e7c74bd3fc1637b8af2e1"
+      "expectedBytes": 2797,
+      "expectedSha256": "d69ea3d3ebce4ede884e9e37cec3395bc247657bb3c41593c5cce5957aa01ee1"
     },
     {
       "path": "presentation/minimap.json",
@@ -177,21 +150,6 @@
       "path": "reference/tx300-vilenius-2018.pdf",
       "expectedBytes": 535526,
       "expectedSha256": "294601d107c3dcb9bbe8d8f193e63d2ae12eed4ae4349590a7c35099a8c3a130"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 862,
-      "expectedSha256": "b94934a1048b0efec4a8f6dfc3fa5ed1602de6c6d0e14e4f293533918f149064"
     }
   ],
   "generatedIntermediates": [

@@ -4,7 +4,6 @@
   "namespace": "squannit",
   "displayName": "Squannit",
   "publicBase": "/scenes/squannit/",
-  "distanceAu": 0.642,
   "raster": {
     "width": 512,
     "height": 256,
@@ -78,12 +77,6 @@
     "sunSource": "Scheirich et al. (2021) phase-bearing secular mutual-orbit model, extrapolated from 2000–2019 observations to the retained scene epoch. Current orbital phase is approximate; source/validation/epoch-state.json records limitations. Display attitude remains illustrative."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

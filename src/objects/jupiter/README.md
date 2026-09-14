@@ -98,12 +98,6 @@ not an input to this shared runtime.
 
 ## Background stars
 
-The shared cubic photographic sky uses the pinned ESO panorama and its HYG
-registration inputs. The historical HYG Stellar Database v4.1 field remains
-preserved under `source/stars/`, credited to David Nash / Astronexus under
-CC BY-SA 4.0. Runtime consumes prepared sky assets, not a star catalog or a
-synthetic fallback field.
-
 </details>
 
 <details>

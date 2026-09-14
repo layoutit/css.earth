@@ -4,7 +4,6 @@
   "namespace": "prospero",
   "displayName": "Prospero",
   "publicBase": "/scenes/prospero/",
-  "distanceAu": 19.19,
   "raster": {
     "width": 512,
     "height": 256,
@@ -79,12 +78,6 @@
     "sunSource": "JPL Horizons geometric vectors. Published doubled rotational interpretation; phase/pole are illustrative."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }
