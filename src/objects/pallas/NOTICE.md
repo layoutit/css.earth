@@ -21,3 +21,9 @@ CC-BY-4.0, alongside the corresponding released camera images. cssEarth cropped
 the panel, aligned and brightness-matched the native images for comparison,
 and displayed an amplified absolute difference. Those display operations do
 not constitute camera registration or reflectance calibration.
+
+The camera-transfer diagnostic additionally uses the LAM deconvolved
+2017-10-11 06:05:07 UTC Camera 2 photograph. Its predicted panel samples the
+05:08:49 photograph through the released MPCD mesh. Linear display stretches,
+an unseen-surface marker and an observed/predicted overlay were added by cssEarth;
+the result remains an unqualified registration diagnostic.

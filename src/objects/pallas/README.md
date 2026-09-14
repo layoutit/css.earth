@@ -23,54 +23,54 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
 
-The [September 2026 photographic projection trial](evidence/photographic-projection.json) examined four native SPHERE frames and the LAM/DAMIT model correspondence. Outline fits on three separated views reached 0.63–1.33 pixels withheld RMS, but cross-observation interior registration did not qualify. The record keeps the cameras, source hashes, matcher trials and their limitations; this was an offline investigation, not a prepared or browser-tested photographic view. See the [ledger](investigations.json) for the remaining source decisions.
+Photographic placement remains unqualified. The [initial native-frame trial](evidence/photographic-projection.json)
+checked four SPHERE views and their source models; the [crater-control replay](evidence/projected-controls.json)
+retains discrepancies against tentative identifications, not verified ground truth.
+The [full-sequence investigation](evidence/sequence-orientation.json) inspected all
+ten October 11 images and identified 05:08:49 Camera 2 as the closest match to
+Vernazza et al. (2021), Figure B.2 (withheld image correlation 0.9986).
+That identifies the published photograph; it does not establish 3D placement.
+The earlier tentative crater picks and 1.44–2.41° raster pole-marker differences
+remain unresolved. The image panels and full measurements remain in those records.
 
-![Offline Pallas photographic projection: native SPHERE image, mesh and projected photograph](evidence/photographic-projection.png)
+The [camera-transfer investigation](evidence/camera-transfer.json) tests native
+photographs directly, including simultaneous exposures and a later view after
+43° of rotation. The selected MPCD results are:
 
-Diagnostic from the LAM SPHERE release, Marsset et al. (2020); observation 2017-10-11 05:04:27 UTC. Linear display stretch retains observed illumination. Grey marks omitted photographic samples. The right panel uses a different viewing direction and scale; it is not an app capture or a pixel-difference comparison.
+| Comparison | Withheld patches | RMS / maximum residual, native pixels |
+| --- | ---: | ---: |
+| Same image, identity check | 17 | 0.10 / 0.22 |
+| Simultaneous Camera 1 and Camera 2, fitted center and roll | 10 | 1.17 / 2.06 |
+| Four minutes apart, fitted center and roll | 12 | 1.47 / 3.16 |
+| 56 minutes apart, limb-adjusted cameras with no interior fit | 6 | 2.72 / 3.23 |
+| Same 56-minute pair, fitted center and roll | 6 | 4.37 / 7.52 |
 
-The [native crater check](evidence/projected-controls.json) now replays four
-published crater coordinates against frozen cameras for both source models.
-Three tentative native identifications differ by 23–29 pixels from their projected
-positions; Hoplon differs by 9–11 pixels. The yellow regions below are visual
-identification ranges, not confidence intervals. This does **not** establish an
-absolute camera error: the feature identities and the published coordinate-to-model
-correspondence still need to be resolved. Switching between ADAM and MPCD does
-not remove the discrepancy. No camera correction was adopted from these picks.
-An exploratory quadratic illumination correction, following the method class in
-[Fétick et al. (2019), section 4.4](https://arxiv.org/pdf/1902.01287), did not
-make the crater identifications unambiguous; it is not reflectance calibration.
+The simultaneous pair shows that these residuals include disagreement between
+detectors, processing and feature measurement, even without body rotation.
+They are not absolute camera errors. Selecting reference patches that repeat
+within one pixel in the simultaneous pair leaves only five matches in the later
+frame, too few for six separate fit and six withheld controls. These trials do
+not qualify a photographic surface. The one-pixel criterion inherited from the
+spacecraft filter matcher is not an established SPHERE uncertainty; the telescope
+resolution cannot simply replace it as a camera-error bound either.
 
-![Tentative native crater centres and projected catalogue positions for ADAM and MPCD](evidence/projected-controls.png)
+![Later Pallas photograph compared with a prediction from an earlier photograph](evidence/camera-transfer.png)
 
-October 11 SPHERE image, LAM release / Marsset et al. (2020). Yellow marks tentative
-native-image identifications; cyan marks projected published coordinates. Both
-panels use the same native pixels, linear stretch and nearest-neighbour enlargement.
-They are source-space diagnostics, not app captures or qualified surface imagery.
+Offline prediction from the 05:08:49 Camera 2 photograph into the 06:05:07 view,
+using the full MPCD shape. Linear display stretches retain observed lighting;
+blue marks surface unseen in the earlier image. The overlay compares appearance,
+including illumination differences, and is not a reflectance or camera-error map.
+No app surface was prepared. The record preserves input hashes, cameras, measured
+patch positions and failures. Residuals were replayed against the retained camera
+formulas; the exploratory feature-search drivers remain in ignored `output/`.
 
-The [full-sequence follow-up](evidence/sequence-orientation.json) inspected all
-ten October 11 photographs: five exposures in both ZIMPOL cameras, following the
-sequence check described by Marsset et al. The prominent lower-right structure
-persists throughout the sequence. Its persistence does not establish a named
-crater's coordinates; the earlier tentative picks remain unresolved.
-
-![All ten native October 11 SPHERE photographs](evidence/oct11-sequence.png)
-
-The 05:08:49 **Camera 2** frame best matches the photographic panel in Vernazza
-et al. (2021), Figure B.2. Its correlation in the two withheld interior quadrants
-is 0.9986, compared with 0.9909 for Camera 1. The image-to-paper fit needs only
-−0.031° rotation. This identifies a better source/reference pairing for the next
-registration check; it is not a measurement of 3D placement accuracy.
-
-![Published photographic panel compared with the two released cameras](evidence/published-photo-identity.png)
-
-Frozen model projections also reproduce the broad appearance of the published
-models, but their pole-marker directions differ by 1.44–2.41° across three
-matching epochs. Using the scattering law in the published ADAM code, instead
-of the original diagnostic's Lambert shading, improves the model-image
-comparison without changing the cameras. The OASIS renderer settings are not
-reproduced exactly. These findings narrow the investigation; they do not resolve
-the named-crater correspondence or qualify a photographic surface.
+[Schmid et al. (2018)](https://doi.org/10.1051/0004-6361/201833620),
+§2.2.1, Equation 2, documents an approximately 2° counterclockwise offset of
+celestial north in preprocessed ZIMPOL images, dependent on camera and requested
+field angle. Applying that hypothesis did not improve this transfer. Its exact
+application to the released Pallas images remains unverified. The separate
+DAMIT IAU rotation record and a quadratic illumination-removal trial likewise
+failed to qualify the later-frame correspondence. No correction was adopted.
 
 ## Known problems
 
