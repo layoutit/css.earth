@@ -41,7 +41,7 @@
     "status:earth-city-global": "node tools/objects/geographic-pages/operations/status-global-city.mts --object=earth",
     "test": "pnpm test:packages && pnpm test:renderer && pnpm test:platform && pnpm test:shell && pnpm test:preparation --universe && pnpm test:lab:nebula",
     "test:platform": "node --test src/platform/*.test.mts src/navigation/*.test.mts tools/*.test.mts tools/photometry/*.test.mts",
-    "test:sources": "pnpm prepare:catalog && pnpm prepare:sources && node --test src/platform/source-manifest.test.mts src/platform/source-catalog.test.mts src/platform/exploration-catalog.test.mts tools/source-catalogue.test.mts tools/object-provenance.test.mts tools/factsheet-sources.test.mts tools/prepare-factsheets.test.mts site/test/object-sources.test.mts site/test/dataset-machines.test.mts site/test/scene-sources.test.mts tools/objects/surface-observations/recipes.test.mts",
+    "test:sources": "pnpm prepare:catalog && pnpm prepare:sources && node --test src/platform/source-manifest.test.mts src/platform/source-catalog.test.mts src/platform/exploration-catalog.test.mts tools/source-catalogue.test.mts tools/object-provenance.test.mts tools/factsheet-sources.test.mts tools/prepare-factsheets.test.mts site/test/object-sources.test.mts site/test/dataset-machines.test.mts site/test/scene-sources.test.mts tools/objects/surface-observations/recipes.test.mts tools/nebula-provenance-contract.test.mts",
     "test:planets": "node tools/run-implemented-planets.mts test",
     "test:shell": "pnpm prepare:environment-images && pnpm prepare:nebulae && node --test site/test/*.test.mts",
     "test:browser": "node site/test/dom-cleanliness-browser.mts",

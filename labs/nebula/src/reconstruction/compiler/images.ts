@@ -6,7 +6,6 @@ import { invertAffine, applyAffine } from '../../alignment/observations/registra
 import { jointRecord } from '../joint-fit/model';
 import { tangentOffsetWestNorth } from '../joint-fit/input';
 import { readGeometryPin } from '../geometry/registered-source';
-import type { EvidenceInputs } from '../evidence-fusion/model';
 import type { SkyBounds } from './field-types';
 import type { CompilerRequest } from './model';
 export interface CompilerRaster { width: number; height: number; data: Uint8Array; path: string; sha256: string }
@@ -14,6 +13,8 @@ export interface CompilerImage { id: string; label: string; credit: string; page
   nativeWidth: number; nativeHeight: number; original: CompilerRaster; diffuse: CompilerRaster; stars: CompilerRaster;
   sampleRgb(x: number, y: number, out: [number, number, number]): boolean;
   sampleOriginal(x: number, y: number, out: [number, number, number]): boolean;
+  sampleLowRgb?(x: number, y: number, out: [number, number, number]): boolean;
+  sampleLowOriginal?(x: number, y: number, out: [number, number, number]): boolean;
   pixelToSky(x: number, y: number): [number, number] }
 async function raster(root: string, v: unknown): Promise<CompilerRaster> {
   if (!jointRecord(v) || typeof v.path !== 'string' || typeof v.sha256 !== 'string' || typeof v.width !== 'number' || typeof v.height !== 'number') throw new TypeError('Missing pinned source layer.');
@@ -32,7 +33,9 @@ function sampleRaster(layer: CompilerRaster, x: number, y: number, out: [number,
   }
   return true;
 }
-export async function loadCompilerImages(root: string, path: string, request: CompilerRequest, center: [number, number]) {
+export async function loadCompilerImages(root: string, path: string, request: CompilerRequest, center: [number, number], native = false, lowFrequencyArcsec?: number) {
+  if (lowFrequencyArcsec !== undefined && (!native || !Number.isFinite(lowFrequencyArcsec) || lowFrequencyArcsec < 1 || lowFrequencyArcsec > 3600))
+    throw new TypeError('Low-frequency optical sampling requires a bounded native angular scale.');
   const raw: unknown = JSON.parse(await readFile(resolve(root, path), 'utf8')), observations = readObservations(raw);
   if (!jointRecord(raw) || !Array.isArray(raw.images)) throw new TypeError('Missing observation layers.');
   const offset = tangentOffsetWestNorth(observations.frame.centerIcrsDegrees, center), f = observations.frame;
@@ -40,7 +43,25 @@ export async function loadCompilerImages(root: string, path: string, request: Co
   for (const image of observations.images) {
     const row = raw.images.find((r: unknown) => jointRecord(r) && r.id === image.id);
     if (!jointRecord(row) || !jointRecord(row.layers)) throw new TypeError('Missing source pixels.');
-    const layers = row.layers;
+    let layers: Record<string, unknown> = row.layers;
+    if (native) {
+      const removal = row.removal, source = row.source;
+      if (!jointRecord(source) || !jointRecord(removal) || !jointRecord(removal.settings) || typeof removal.settings.directory !== 'string' ||
+          typeof removal.receiptSha256 !== 'string' || image.registration.status === 'publisher') throw new TypeError('Native composite requires verified registration and completed NOX.');
+      const directory = removal.settings.directory;
+      const receipt: unknown = JSON.parse((await readGeometryPin(root, { path: `${directory}/result.json`, sha256: removal.receiptSha256 })).toString());
+      if (!jointRecord(receipt) || receipt.schema !== 'cssearth-nox-output@1' || receipt.sourceSha256 !== removal.sourceSha256 ||
+          !jointRecord(receipt.artifactSha256) || !jointRecord(receipt.applied) || !jointRecord(receipt.applied.verification) ||
+          receipt.applied.verification.coverageComplete !== true || receipt.applied.verification.maximumReconstructionErrorCodeValues !== 0)
+        throw new TypeError('Native composite NOX accounting is incomplete.');
+      const dimensions = { width: image.source.width, height: image.source.height };
+      if (JSON.stringify(receipt.nativeDimensions) !== JSON.stringify([dimensions.width, dimensions.height]) ||
+          receipt.artifactSha256['diffuse.png'] !== removal.diffuseSha256 || receipt.artifactSha256['stars.png'] !== removal.residualSha256)
+        throw new TypeError('Native composite source grid or separation pins differ.');
+      layers = { original: { ...dimensions, path: source.path, sha256: source.sha256 },
+        diffuse: { ...dimensions, path: `${directory}/diffuse.png`, sha256: removal.diffuseSha256 },
+        stars: { ...dimensions, path: `${directory}/stars.png`, sha256: removal.residualSha256 } };
+    }
     const [original, diffuse, stars] = await Promise.all(['original', 'diffuse', 'stars'].map(name => raster(root, layers[name])));
     const matrix = request.imageToFrame[image.id] ?? image.imageToFrame, inverse = invertAffine(matrix);
     const sample = (layer: CompilerRaster) => (x: number, y: number, out: [number, number, number]) => {
@@ -48,9 +69,14 @@ export async function loadCompilerImages(root: string, path: string, request: Co
       const native = applyAffine(inverse, frame);
       return sampleRaster(layer, native[0] * layer.width / image.source.width, native[1] * layer.height / image.source.height, out);
     };
+    const pixelArcsec = Math.sqrt(Math.abs(matrix[0] * matrix[3] - matrix[1] * matrix[2]) * f.fieldArcminutes[0] * 60 / f.width * f.fieldArcminutes[1] * 60 / f.height);
+    const low = async (layer: CompilerRaster) => ({ ...layer, data: await sharp(layer.data, { raw: { width: layer.width, height: layer.height, channels: 3 } })
+      .blur(Math.max(.3, Math.min(1000, lowFrequencyArcsec! / pixelArcsec))).raw().toBuffer() });
+    const lowLayers = lowFrequencyArcsec === undefined ? undefined : await Promise.all([low(diffuse!), low(original!)]);
     images.push({ id: image.id, label: image.label, credit: image.source.credit, page: image.source.page, matrix,
       nativeWidth: image.source.width, nativeHeight: image.source.height, original: original!, diffuse: diffuse!, stars: stars!,
-      sampleRgb: sample(diffuse!), sampleOriginal: sample(original!), pixelToSky(x, y) {
+      sampleRgb: sample(diffuse!), sampleOriginal: sample(original!),
+      ...(lowLayers ? { sampleLowRgb: sample(lowLayers[0]!), sampleLowOriginal: sample(lowLayers[1]!) } : {}), pixelToSky(x, y) {
         const p = applyAffine(matrix, [x, y]); return [(p[0] - f.width / 2) * f.fieldArcminutes[0] * 60 / f.width + offset[0],
           (f.height / 2 - p[1]) * f.fieldArcminutes[1] * 60 / f.height + offset[1]];
       } });
@@ -61,37 +87,7 @@ export async function loadCompilerImages(root: string, path: string, request: Co
     max: [Math.max(...corners.map(p => p[0])), Math.max(...corners.map(p => p[1]))] };
   return { observations, images, inspectionBoundsArcsec };
 }
-const quantile = (values: number[], q: number) => values[Math.min(values.length - 1, Math.floor(q * values.length))] ?? 0;
-/** All observed footprints enter one positive display-emission target; source color is kept separately. */
-export function compilerTarget(inputs: EvidenceInputs, weights: number[], centerOffset: [number, number] = [0, 0]) {
-  const g = inputs.grid, width = Math.min(512, g.width), height = Math.max(1, Math.round(g.height * width / g.width));
-  const target = new Float32Array(width * height), coverage = new Uint8Array(target.length);
-  const normalization = inputs.sources.map(source => {
-    const samples: number[] = [];
-    for (let p = 0; p < source.footprint.length; p += 3) if (source.footprint[p]) samples.push((.2126 * source.registeredRgba[p * 4]! + .7152 * source.registeredRgba[p * 4 + 1]! + .0722 * source.registeredRgba[p * 4 + 2]!) / 255);
-    samples.sort((a, b) => a - b); const black = quantile(samples, .25), lowerSpread = Math.max(.002, quantile(samples, .5) - black);
-    return { background: black + lowerSpread * 1.5, white: quantile(samples, .995), observedPixels: samples.length * 3 };
-  });
-  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-    let strongest = 0, sum = 0, total = 0;
-    for (let s = 0; s < inputs.sources.length; s++) {
-      const weight = weights[s] ?? 1; if (weight <= 0) continue;
-      const source = inputs.sources[s]!, n = normalization[s]!; let value = 0, observed = 0;
-      for (const dx of [.25, .75]) for (const dy of [.25, .75]) {
-        const gx = Math.min(g.width - 1, Math.floor((x + dx) * g.width / width)), gy = Math.min(g.height - 1, Math.floor((y + dy) * g.height / height)), p = gy * g.width + gx;
-        if (!source.footprint[p]) continue; observed++;
-        const luminance = (.2126 * source.registeredRgba[p * 4]! + .7152 * source.registeredRgba[p * 4 + 1]! + .0722 * source.registeredRgba[p * 4 + 2]!) / 255;
-        value += Math.pow(Math.max(0, Math.min(2, (luminance - n.background) / Math.max(.03, n.white - n.background))), .85);
-      }
-      if (!observed) continue; value = value / observed * weight; strongest = Math.max(strongest, value); sum += value; total += weight;
-    }
-    if (total > 0) { coverage[y * width + x] = 1; target[y * width + x] = .7 * strongest + .3 * sum / total; }
-  }
-  const x = (p: number) => (p - g.frameWidth / 2) * g.fieldArcminutes[0] * 60 / g.frameWidth + centerOffset[0];
-  const y = (p: number) => (g.frameHeight / 2 - p) * g.fieldArcminutes[1] * 60 / g.frameHeight + centerOffset[1];
-  const bounds: SkyBounds = { min: [x(g.originX), y(g.originY + g.extentHeight)], max: [x(g.originX + g.extentWidth), y(g.originY)] };
-  return { target, coverage, width, height, bounds, normalization };
-}
+export { compilerTarget } from './target';
 export async function compilerImagePanel(image: CompilerImage, bounds: SkyBounds, original: boolean, width = 768) {
   const height = Math.max(1, Math.round(width * (bounds.max[1] - bounds.min[1]) / (bounds.max[0] - bounds.min[0]))), rgba = Buffer.alloc(width * height * 4), rgb: [number, number, number] = [0, 0, 0];
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {

@@ -1,0 +1,132 @@
+{
+  "purpose": "Original pre-contract-repair app evidence, retained unchanged. New source-card evidence supersedes its metadata checks; these reports preserve prior cloud/core/edge findings.",
+  "baseCommit": "5569fa211db447927cb9c30284f13d2a37049695",
+  "reports": [
+    {
+      "path": "site/test/evidence/nebulae/2026-09-14/field-defaults.json",
+      "bytes": 164385,
+      "sha256": "c97a4a2ffd07a13f3b73f145bb809a6bf56429db8421c878bdd51ae2d47037ba",
+      "originalPath": "output/nebula-field-browser-defaults/report.json",
+      "unchanged": true
+    },
+    {
+      "path": "site/test/evidence/nebulae/2026-09-14/field-m8.json",
+      "bytes": 89108,
+      "sha256": "08b9245acd5288c2ec1b5962e29020ee88c433add9922aa4c9bb503c794ca8ac",
+      "originalPath": "output/nebula-field-browser-m8/report.json",
+      "unchanged": true
+    },
+    {
+      "path": "site/test/evidence/nebulae/2026-09-14/final-helix-m8.json",
+      "bytes": 30875,
+      "sha256": "a82666ad9bcaed445031cf90dd3d525408bbd7cf96b550d4045f8340a841f34c",
+      "originalPath": "output/nebula-final-visual/report.json",
+      "unchanged": true
+    }
+  ],
+  "captures": [
+    {
+      "report": "field-defaults.json",
+      "originalPath": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-defaults/m45-optical-composite.png",
+      "path": "docs/images/nebulae/m45-galaxy.png",
+      "bytes": 492793,
+      "sha256": "f6c055b073202bc590fff12a2e5694b9d286990a671ec4de5a63318f3be84569"
+    },
+    {
+      "report": "field-defaults.json",
+      "originalPath": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-defaults/m1-hubble-optical.png",
+      "path": "docs/images/nebulae/m1-galaxy.png",
+      "bytes": 759447,
+      "sha256": "bd2464c1ac97c90fb4c2909be2e8eb2c2dcd6329286805920e464f9a6f237da2"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/helix-eso-wfi-front.png",
+      "path": "docs/images/nebulae/helix-cores.png",
+      "bytes": 523324,
+      "sha256": "628e5e812dde3f6d151b80726c0e7dfbeafbd9792b1679c55866950e96e40a8b"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/helix-eso-vista-front.png",
+      "path": "site/test/evidence/nebulae/2026-09-14/images/helix-eso-vista-front.png",
+      "bytes": 613696,
+      "sha256": "23717e200cc33d46a44846fc821bd7fb475885ed4bda2772cf30a3aaff7efb82"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/helix-eso-wide-front.png",
+      "path": "site/test/evidence/nebulae/2026-09-14/images/helix-eso-wide-front.png",
+      "bytes": 504823,
+      "sha256": "a74b6016160e9cd8597d3b62ac89b73290b731c22566dc84e26470d97b1d3044"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/helix-eso-wfi-oblique.png",
+      "path": "site/test/evidence/nebulae/2026-09-14/images/helix-eso-wfi-oblique.png",
+      "bytes": 383904,
+      "sha256": "8156b31539316700b5a8559add2b7781a5ebe192ab0f97015ef033b620f20330"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/helix-eso-vista-oblique.png",
+      "path": "site/test/evidence/nebulae/2026-09-14/images/helix-eso-vista-oblique.png",
+      "bytes": 476473,
+      "sha256": "cc7a6a76026c5d172fb1820c17904385eb2feaa7e46a179070dd93c5c34a91c3"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/helix-eso-wide-oblique.png",
+      "path": "site/test/evidence/nebulae/2026-09-14/images/helix-eso-wide-oblique.png",
+      "bytes": 358382,
+      "sha256": "4526729f81974b9b9c7fc4194300d996eef67f25745e4a5ff9f47c3e9f21d7a5"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/m8-eso-optical-front.png",
+      "path": "docs/images/nebulae/m8-galaxy.png",
+      "bytes": 597393,
+      "sha256": "97057e13d1204ff9f78415d7f9213adb30bdfb1ea48ab46b7c463b6de26a66ad"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/m8-eso-vista-front.png",
+      "path": "site/test/evidence/nebulae/2026-09-14/images/m8-eso-vista-front.png",
+      "bytes": 609925,
+      "sha256": "f94991d4919b96922f0b283a9d4883d6c27471430f7ea3bd9240453a696dd07f"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/m8-spitzer-mid-infrared-front.png",
+      "path": "site/test/evidence/nebulae/2026-09-14/images/m8-spitzer-mid-infrared-front.png",
+      "bytes": 652915,
+      "sha256": "d6b6d9b840041762729bc80a021ca8b34e8ca73c83446ff6831b450012e9a3d6"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/m8-eso-optical-oblique.png",
+      "path": "site/test/evidence/nebulae/2026-09-14/images/m8-eso-optical-oblique.png",
+      "bytes": 469320,
+      "sha256": "91a2fd0b586664c823f8b5806cfce4e203b6e64f59528fe19eb3c1f26ee2f459"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/m8-eso-vista-oblique.png",
+      "path": "site/test/evidence/nebulae/2026-09-14/images/m8-eso-vista-oblique.png",
+      "bytes": 480006,
+      "sha256": "c331e5577e211b90113c2c2fb60bfcdda796e6d42bd31b532548382d110be394"
+    },
+    {
+      "report": "final-helix-m8.json",
+      "originalPath": "output/nebula-final-visual/m8-spitzer-mid-infrared-oblique.png",
+      "path": "site/test/evidence/nebulae/2026-09-14/images/m8-spitzer-mid-infrared-oblique.png",
+      "bytes": 521526,
+      "sha256": "506cfcfee83fbd53867e2976504381b5bad242cb599128ce45a491d1be9f60ed"
+    }
+  ],
+  "limitations": [
+    "Reports retain their original local capture paths; the capture map supplies portable locations for the retained images. Routine navigation/state screenshots not used in the maintained visual explanation remain scratch.",
+    "The final Helix/M8 historical report records cameras and payload hashes but omits browser version and viewport. It is not by itself a complete browser reproduction receipt; the new current source-card run records those settings.",
+    "Prior pass/failure assertions remain at their original versions. This retention does not re-run or upgrade scientific or material acceptance."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "sitelle-2016-released-points",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Crab SITELLE 2016 · released emission and velocity samples",
+  "identifiers": [
+    {
+      "type": "Git commit",
+      "value": "af491d4a13d408464ffb3ea75e6a424f6ef5d140"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
+      "label": "Published source"
+    },
+    {
+      "role": "rights",
+      "url": "https://github.com/thomasorb/M1_paper/blob/af491d4a13d408464ffb3ea75e6a424f6ef5d140/LICENSE",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m1/physical-sources.json",
+      "revision": "9d0a453d4c82637ebc54277f97281e0c8426e85b",
+      "sha256": "0e6618a4fe139686e224143553f2ed43618ca870a7210cd7d7501f2a9e2b97f8",
+      "locator": "/dataset"
+    }
+  ],
+  "publisher": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m1/physical-sources.json#/dataset"
+    }
+  ]
+}

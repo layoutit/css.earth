@@ -6,7 +6,7 @@ import test from 'node:test';
 import sharp from 'sharp';
 import { sha256 } from '../../../../../src/preparation/volume/source.js';
 import type { VolumeSliceQuad, VolumeSlices } from '../../../../../src/preparation/volume/slices.js';
-import { compilerAlphaDigest, compilerFrame, compilerSliceCounts, verifyCompilerAlphaIdentity } from './bake.js';
+import { bakeCompiler, compilerAlphaDigest, compilerFrame, compilerSliceCounts, verifyCompilerAlphaIdentity } from './bake.js';
 
 function slices(path: string, bytes: Buffer): VolumeSlices {
   const quad: VolumeSliceQuad = { id: 'z-0', axis: 'z', sliceIndex: 0, texturePath: path, widthPx: 2, heightPx: 1,
@@ -24,6 +24,16 @@ test('compiler frame centers absolute west/north/away coordinates without changi
   assert.deepEqual(result.frame.boundsUnits, result.localBounds);
   assert.equal(result.frame.referenceFrame, 'lab-sky-angular');
   assert.throws(() => compilerFrame({ min: [0, 0, 0], max: [1, 0, 1] }), /finite increasing/);
+});
+
+test('default compiler bake refuses projected-image-only lenses before creating output', async () => {
+  await assert.rejects(bakeCompiler({ root: tmpdir(), outputDirectory: 'should-not-create-image-extrusion', id: 'invalid-xy-material',
+    fieldIdentity: '0'.repeat(64), boundsArcsec: { min: [-1, -1, -1], max: [1, 1, 1] },
+    skyBoundsArcsec: { min: [-1, -1], max: [1, 1] }, sampleEmission(_x, _y, _z, out) { out[0] = out[1] = out[2] = 1; },
+    // This exercises the actual default boundary, with no fine-feature option to select a safer path.
+    // @ts-expect-error Historical XY image samplers are deliberately forbidden at the new boundary.
+    lenses: [{ id: 'legacy', label: 'Legacy projected color', sampleRgb(_x: number, _y: number, out: [number, number, number]) { out[0] = 255; return true; } }],
+  }), /3D material sampler/);
 });
 
 test('thin supported features receive finer equally spaced banks without an unbounded slice count', () => {

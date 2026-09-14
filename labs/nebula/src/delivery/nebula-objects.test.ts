@@ -7,9 +7,22 @@ import { test } from 'node:test';
 import sharp from 'sharp';
 import type { PreparedCssVolume, VolumeAxis } from '../../../../src/renderers/css/volume/types.js';
 import { validatePreparedVolumeLenses } from '../../../../src/renderers/css/volume/prepared-volume-lenses.js';
-import { prepareNebulaObject } from './nebula-objects.js';
+import { prepareNebulaObject, readNebulaDelivery } from './nebula-objects.js';
 
 const hash = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
+
+test('a pinned optical composite is a compiler delivery stage, never a symmetry fallback', async () => {
+  const recipe: unknown = JSON.parse(await readFile('src/objects/m45/source/delivery.json', 'utf8'));
+  const parsed = readNebulaDelivery(recipe);
+  assert.equal(parsed.defaultLens, 'optical-composite');
+  assert.equal(parsed.compositeRecipe?.path, 'labs/nebula/models/m45/optical-composite.json');
+  assert.ok(parsed.compositeRecipe);
+  assert.equal(hash(await readFile(parsed.compositeRecipe.path)), parsed.compositeRecipe.sha256);
+  assert.throws(() => readNebulaDelivery({ ...parsed, schema: 'cssearth-nebula-delivery@1', method: 'axial-symmetry' }), /requires compiler/);
+  assert.throws(() => readNebulaDelivery({ ...parsed, schema: 'cssearth-nebula-delivery@1', compositeRecipe: { path: 'missing.json', sha256: 'invalid' } }), /source identity/);
+  const ordinary = readNebulaDelivery(JSON.parse(await readFile('src/objects/m8/source/delivery.json', 'utf8')));
+  assert.equal(ordinary.compositeRecipe, undefined);
+});
 async function put(root: string, path: string, bytes: Uint8Array | string) {
   await mkdir(dirname(join(root,path)),{recursive:true});
   await writeFile(join(root,path),bytes);
@@ -27,6 +40,10 @@ async function fixture(root: string) {
   await put(root,starsOwner,await readFile(starsOwner));
   const request = '{}', directory = join(root,'object');
   const recipe = JSON.parse(await readFile('src/objects/m2-9/source/delivery.json','utf8'));
+  for (const path of [recipe.fieldStars.path, 'src/renderers/css/navigation/world-camera-math.ts',
+    'src/renderers/css/stars/prepared-catalogue-points.ts']) {
+    await put(root,path,await readFile(path));
+  }
   await put(root,'input/request.json',request);
   await put(directory,'source/delivery.json',JSON.stringify({...recipe,
     request:{path:'input/request.json',sha256:hash(request)},inputPins:[],symmetryDirectory:'input'}));
@@ -62,6 +79,7 @@ test('delivery restores missing impostors, rejects drift and rebuilds when their
     assert.equal((await prepareNebulaObject(root,directory,true)).status,'prepared');
     const envelope = JSON.parse(await readFile(join(directory,'prepared/lenses.json'),'utf8'));
     const data = validatePreparedVolumeLenses(envelope.data), lens = data.lenses[0]!;
+    assert.equal(lens.stars?.points.length,7,'The isolated delivery must include its pinned catalogue field.');
     assert.ok(lens.volume.impostors,'Delivery must retain the generated impostor descriptor.');
     const proxies = lens.volume.resources.filter(resource=>resource.path.includes('/impostors/'));
     assert.ok(proxies.length>0,'Generated views must join the fixed resource inventory.');

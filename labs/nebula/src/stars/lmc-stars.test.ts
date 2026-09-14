@@ -100,7 +100,7 @@ test('joint CDF preserves solid-angle weighting and rejects missing cloud/densit
 test('parser rejects mismatched frames, nonfinite geometry, duplicate identifiers and invalid display values', async () => {
   const p = await load();
   for (const mutate of [
-    (v: PreparedLmcStars) => {v.frame.metersPerUnit *= 3;},
+    (v: PreparedLmcStars) => {v.frame = {...v.frame, metersPerUnit: v.frame.metersPerUnit * 3};},
     (v: PreparedLmcStars) => {v.stars[0].positionUnits[0] = NaN;},
     (v: PreparedLmcStars) => {v.stars[1].id = v.stars[0].id;},
     (v: PreparedLmcStars) => {v.stars[0].sizePx = 500;},

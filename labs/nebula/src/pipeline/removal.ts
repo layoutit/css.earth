@@ -2,9 +2,10 @@ import assert from 'node:assert/strict';
 import { stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { BakeRecipe } from './config.js';
+import type { ProcessingEnvironmentRecipe } from './processing-environment';
 import { acquire, json, pinned, run } from './io.js';
 
-export async function prepareEnvironment(root: string, recipe: BakeRecipe, suppliedPython?: string) {
+export async function prepareEnvironment(root: string, recipe: ProcessingEnvironmentRecipe, suppliedPython?: string) {
   const python = suppliedPython ? resolve(suppliedPython) : resolve(root, '.local/open-star-removal/venv/bin/python');
   const environment = recipe.environment;
   const probe = `import sys,importlib.metadata as m; assert '.'.join(map(str,sys.version_info[:2])) in ${JSON.stringify(environment.pythonVersions)}; ` +

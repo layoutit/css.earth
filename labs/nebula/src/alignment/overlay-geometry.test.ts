@@ -31,10 +31,13 @@ test('every prepared image maps its full raster edges to the calibrated provenan
   }
   assert.ok(images >= 7, 'check the real prepared reference bank');
 });
-test('full-precision projective interior maps independently calculated Astropy ICRS rays', async () => {
+test('full-precision TAN projective interior maps independently calculated Astropy ICRS rays', async () => {
   const oracle = parseLabModelJson(await readFile('labs/nebula/src/alignment/fixtures/astropy-wcs.json', 'utf8'));
   const records = await prepared(); let checked = 0;
   for (const fixture of oracle.fixtures) {
+    // A tangent-plane image admits an exact projective quad. Ordinary SIN is
+    // nonlinear; its independent ray oracle belongs to overlay-wcs.test.ts.
+    if (fixture.wcs.projection !== 'TAN') continue;
     const record = records.find(item => fixture.id.startsWith(`${basename(item.target.directory)}-`));
     assert.ok(record, fixture.id); const { frame } = record;
     const [width, height] = fixture.wcs.referenceDimension;
@@ -45,7 +48,7 @@ test('full-precision projective interior maps independently calculated Astropy I
       close(project(geometry.matrix, fx - .5, height + .5 - fy), css(expected), `${fixture.id} independent pixel ${i}`); checked++;
     }
   }
-  assert.ok(checked >= 20);
+  assert.ok(checked >= 30, 'retain every legacy TAN corner and interior sample');
 });
 test('old real Tarantula leaf fails calibrated edges even with atlas seamBleed zero', async () => {
   const item = (await prepared()).flatMap(record => record.provenance.images).find(item => /tarantula/.test(item.input.id));

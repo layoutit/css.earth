@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-nebula-catalog@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "sources": [
+    {
+      "id": "melis-2014",
+      "url": "https://arxiv.org/pdf/1408.6544",
+      "sha256": "b60bd625411305565c3156c73f29cde2d09e3641efbc744d495b961203e2e697",
+      "bytes": 977008,
+      "citation": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy"
+    },
+    {
+      "id": "m45-registered-frame",
+      "url": "https://github.com/layoutit/css.earth/blob/9d0a453d4c82637ebc54277f97281e0c8426e85b/labs/nebula/models/m45/processing-observations.json",
+      "sha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705",
+      "bytes": 8832,
+      "citation": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid."
+    }
+  ],
+  "objects": [
+    {
+      "id": "m45",
+      "kind": "nebula",
+      "name": "Pleiades",
+      "aliases": [
+        "M45",
+        "Seven Sisters",
+        "Pleiades reflection nebula"
+      ],
+      "positionM": [
+        2103176798555586300,
+        3207877728988750000,
+        1717205624183990800
+      ],
+      "skyPosition": {
+        "raDeg": 56.75,
+        "decDeg": 24.1167,
+        "sourceRef": "m45-registered-frame"
+      },
+      "distance": {
+        "valuePc": 136.2,
+        "minusPc": 1.2,
+        "plusPc": 1.2,
+        "sourceRef": "melis-2014",
+        "method": "Adopted VLBI stellar-cluster distance from Melis et al. (2014), main text and Table 1; not a measured distance to each dust filament."
+      },
+      "classification": {
+        "name": "Reflection nebula around an open cluster",
+        "basis": "Observed optical reflection nebulosity and infrared dust emission painted on an authored finite depth surface. The stellar distance locates the scene; dust depth, scattering and individual stellar distances are not recovered.",
+        "sourceRef": "m45-registered-frame"
+      },
+      "status": "confirmed",
+      "detailedObjectId": "m45"
+    }
+  ]
+}

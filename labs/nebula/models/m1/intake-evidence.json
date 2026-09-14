@@ -1,0 +1,624 @@
+{
+  "schema": "cssearth-nebula-intake-evidence@1",
+  "objectId": "m1",
+  "acquiredAt": "2026-09-13",
+  "scope": "Alignment observation intake only. No removal, reconstruction or bake.",
+  "images": [
+    {
+      "id": "hubble-optical",
+      "localPath": ".local/nebula-lab/intake/m1/hubble-optical.tif",
+      "url": "https://esahubble.org/media/archives/images/original/heic0515a.tif",
+      "page": "https://esahubble.org/images/heic0515a/",
+      "sha256": "8a4a08d56893e1a03339b2705dc41acb177693da75e21858800bdb584c5901c6",
+      "bytes": 30692506,
+      "nativeDimensions": [
+        3864,
+        3864
+      ],
+      "format": "TIFF, 8-bit RGB",
+      "master": {
+        "url": "https://esahubble.org/media/archives/images/original/heic0515a.tif",
+        "width": 3864,
+        "height": 3864
+      },
+      "releaseLicense": "CC BY 4.0 under publisher terms",
+      "termsUrl": "https://esahubble.org/copyright/",
+      "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
+      "avm": {
+        "Spatial.CoordinateFrame": "ICRS",
+        "Spatial.CoordsystemProjection": "TAN",
+        "Spatial.ReferenceDimension": [
+          "3864.0",
+          "3864.0"
+        ],
+        "Spatial.ReferencePixel": [
+          "1933.0",
+          "1933.0"
+        ],
+        "Spatial.ReferenceValue": [
+          "83.6355343",
+          "22.0152411"
+        ],
+        "Spatial.Scale": [
+          "-2.76551527063e-05",
+          "2.76381692778e-05"
+        ],
+        "Spatial.Rotation": "0",
+        "Spatial.Quality": "Full",
+        "Spatial.Notes": [
+          "WCS info from NASA/Hubble"
+        ],
+        "Temporal.StartTime": null,
+        "Temporal.IntegrationTime": null,
+        "Spectral.CentralWavelength": [
+          "502",
+          "673",
+          "631"
+        ],
+        "Spectral.Bandpass": [
+          "OIII",
+          "SII",
+          "OI"
+        ],
+        "Spectral.Notes": "<rdf:Alt>\n     <rdf:li xml:lang=\"x-default\"/>\n    </rdf:Alt>",
+        "Facility": [
+          "Hubble Space Telescope",
+          "Hubble Space Telescope",
+          "Hubble Space Telescope"
+        ],
+        "Instrument": [
+          "WFPC2",
+          "WFPC2",
+          "WFPC2"
+        ],
+        "ObservationID": null
+      },
+      "pixelSamplingArcseconds": [
+        0.09955854974268,
+        0.09949740940007999
+      ],
+      "samplingNote": "Derived from publisher AVM footprint and delivered raster dimensions; not the instrumental PSF or independent astrometric accuracy.",
+      "evidenceLinks": [
+        "Eight-field observation interval is documented in Dubner et al. §V: https://arxiv.org/html/1704.02968v1"
+      ]
+    },
+    {
+      "id": "webb-infrared",
+      "localPath": ".local/nebula-lab/intake/m1/webb-infrared.tif",
+      "url": "https://esawebb.org/media/archives/images/publicationtiff/weic2326a.tif",
+      "page": "https://esawebb.org/images/weic2326a/",
+      "sha256": "bb1b9a0023eb5424bb75a7c29e9c8a83a7e3c06601bb3019ab58c24beb02f8dd",
+      "bytes": 27148280,
+      "nativeDimensions": [
+        4000,
+        3483
+      ],
+      "format": "TIFF, 8-bit RGB",
+      "master": {
+        "url": "https://esawebb.org/media/archives/images/original/weic2326a.tif",
+        "width": 10509,
+        "height": 9151
+      },
+      "releaseLicense": "CC BY 4.0 under publisher terms",
+      "termsUrl": "https://esawebb.org/copyright/",
+      "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
+      "avm": {
+        "Spatial.CoordinateFrame": "ICRS",
+        "Spatial.CoordsystemProjection": "TAN",
+        "Spatial.ReferenceDimension": [
+          "10509.0",
+          "9151.0"
+        ],
+        "Spatial.ReferencePixel": [
+          "5254.5",
+          "4575.5"
+        ],
+        "Spatial.ReferenceValue": [
+          "83.63572694617777",
+          "22.016661852311525"
+        ],
+        "Spatial.Scale": [
+          "-8.671937118724234e-06",
+          "8.671937118724234e-06"
+        ],
+        "Spatial.Rotation": "-2.100000000000001",
+        "Spatial.Quality": "Position",
+        "Spatial.Notes": "<rdf:Alt>\n     <rdf:li xml:lang=\"x-default\"/>\n    </rdf:Alt>",
+        "Temporal.StartTime": null,
+        "Temporal.IntegrationTime": null,
+        "Spectral.CentralWavelength": [
+          "1620",
+          "4800",
+          "5600",
+          "11300",
+          "18000",
+          "21000"
+        ],
+        "Spectral.Bandpass": [
+          "None",
+          "None",
+          "None",
+          "PAH",
+          "Silicate",
+          "None"
+        ],
+        "Spectral.Notes": "<rdf:Alt>\n     <rdf:li xml:lang=\"x-default\"/>\n    </rdf:Alt>",
+        "Facility": [
+          "James Webb Space Telescope",
+          "James Webb Space Telescope",
+          "James Webb Space Telescope",
+          "James Webb Space Telescope",
+          "James Webb Space Telescope",
+          "James Webb Space Telescope"
+        ],
+        "Instrument": [
+          "NIRCam",
+          "NIRCam",
+          "MIRI",
+          "MIRI",
+          "MIRI",
+          "MIRI"
+        ],
+        "ObservationID": null
+      },
+      "pixelSamplingArcseconds": [
+        0.08202004846260569,
+        0.08202263211725629
+      ],
+      "samplingNote": "Derived from publisher AVM footprint and delivered raster dimensions; not the instrumental PSF or independent astrometric accuracy.",
+      "evidenceLinks": [
+        "Program 1714 and imaging epochs: https://arxiv.org/html/2406.00172v1"
+      ]
+    },
+    {
+      "id": "webb-components",
+      "localPath": ".local/nebula-lab/intake/m1/webb-components.tif",
+      "url": "https://esawebb.org/media/archives/images/original/weic2417a.tif",
+      "page": "https://esawebb.org/images/weic2417a/",
+      "sha256": "1ec85e2b0cf6a35d176af48a48e1f37c8922abadb60dc53866ee282855808a36",
+      "bytes": 13141722,
+      "nativeDimensions": [
+        2958,
+        2569
+      ],
+      "format": "TIFF, 8-bit RGB",
+      "master": {
+        "url": "https://esawebb.org/media/archives/images/original/weic2417a.tif",
+        "width": 2958,
+        "height": 2569
+      },
+      "releaseLicense": "CC BY 4.0 under publisher terms",
+      "termsUrl": "https://esawebb.org/copyright/",
+      "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
+      "avm": {
+        "Spatial.CoordinateFrame": "ICRS",
+        "Spatial.CoordsystemProjection": "TAN",
+        "Spatial.ReferenceDimension": [
+          "2958.0",
+          "2569.0"
+        ],
+        "Spatial.ReferencePixel": [
+          "1479.0",
+          "1284.5"
+        ],
+        "Spatial.ReferenceValue": [
+          "83.63568254179599",
+          "22.01633447322993"
+        ],
+        "Spatial.Scale": [
+          "-3.0004350534238327e-05",
+          "3.0004350534238327e-05"
+        ],
+        "Spatial.Rotation": "-1.9200000000000035",
+        "Spatial.Quality": "Full",
+        "Spatial.Notes": "<rdf:Alt>\n     <rdf:li xml:lang=\"x-default\"/>\n    </rdf:Alt>",
+        "Temporal.StartTime": null,
+        "Temporal.IntegrationTime": null,
+        "Spectral.CentralWavelength": [
+          "4800",
+          "18000",
+          "21000",
+          "18000",
+          "21000"
+        ],
+        "Spectral.Bandpass": [
+          "Synchrotron",
+          "Sulfur",
+          "Sulfur",
+          "Dust",
+          "Dust"
+        ],
+        "Spectral.Notes": "<rdf:Alt>\n     <rdf:li xml:lang=\"x-default\"/>\n    </rdf:Alt>",
+        "Facility": [
+          "James Webb Space Telescope",
+          "James Webb Space Telescope",
+          "James Webb Space Telescope",
+          "James Webb Space Telescope",
+          "James Webb Space Telescope"
+        ],
+        "Instrument": [
+          "NIRCam",
+          "MIRI",
+          "MIRI",
+          "MIRI",
+          "MIRI"
+        ],
+        "ObservationID": null
+      },
+      "pixelSamplingArcseconds": [
+        0.10801566192325798,
+        0.10801566192325797
+      ],
+      "samplingNote": "Derived from publisher AVM footprint and delivered raster dimensions; not the instrumental PSF or independent astrometric accuracy.",
+      "evidenceLinks": [
+        "Component isolation depends on subtraction and PSF matching: https://arxiv.org/html/2406.00172v1"
+      ]
+    },
+    {
+      "id": "spitzer-infrared",
+      "localPath": ".local/nebula-lab/intake/m1/spitzer-infrared-esahubble.tif",
+      "url": "https://esahubble.org/media/archives/images/original/potw1720c.tif",
+      "page": "https://esahubble.org/images/potw1720c/",
+      "sha256": "0df6c12a08d63852a11e966495ad79660edd79978767072ffdf2552bceee75c8",
+      "bytes": 9291804,
+      "nativeDimensions": [
+        5290,
+        5290
+      ],
+      "format": "TIFF, 8-bit RGB",
+      "master": {
+        "url": "https://esahubble.org/media/archives/images/original/potw1720c.tif",
+        "width": 5290,
+        "height": 5290
+      },
+      "releaseLicense": "CC BY 4.0 under publisher terms",
+      "termsUrl": "https://esahubble.org/copyright/",
+      "credit": "JPL/Caltech",
+      "avm": {
+        "Spatial.CoordinateFrame": "ICRS",
+        "Spatial.CoordsystemProjection": "TAN",
+        "Spatial.ReferenceDimension": [
+          "5290.0",
+          "5290.0"
+        ],
+        "Spatial.ReferencePixel": [
+          "2645.0",
+          "2645.0"
+        ],
+        "Spatial.ReferenceValue": [
+          "83.6334511837",
+          "22.0151236394"
+        ],
+        "Spatial.Scale": [
+          "-2.78194934801e-05",
+          "2.78194934801e-05"
+        ],
+        "Spatial.Rotation": "0.49999999999999961",
+        "Spatial.Quality": "Full",
+        "Spatial.Notes": "<rdf:Alt>\n     <rdf:li xml:lang=\"x-default\"/>\n    </rdf:Alt>",
+        "Temporal.StartTime": null,
+        "Temporal.IntegrationTime": null,
+        "Spectral.CentralWavelength": null,
+        "Spectral.Bandpass": null,
+        "Spectral.Notes": "<rdf:Alt>\n     <rdf:li xml:lang=\"x-default\"/>\n    </rdf:Alt>",
+        "Facility": [
+          "Spitzer Space Telescope"
+        ],
+        "Instrument": [
+          "None"
+        ],
+        "ObservationID": null
+      },
+      "pixelSamplingArcseconds": [
+        0.10015017652836,
+        0.10015017652836
+      ],
+      "samplingNote": "Derived from publisher AVM footprint and delivered raster dimensions; not the instrumental PSF or independent astrometric accuracy.",
+      "evidenceLinks": [
+        "Selected ESA/Hubble release omits instrument/filter tags. MIPS and 24 µm come from the linked CXC companion TIFF AVM, not a measured spectrum: https://chandra.harvard.edu/photo/2017/crab/more.html"
+      ]
+    },
+    {
+      "id": "vla-radio",
+      "localPath": ".local/nebula-lab/intake/m1/vla-radio-esahubble.tif",
+      "url": "https://esahubble.org/media/archives/images/original/potw1720b.tif",
+      "page": "https://esahubble.org/images/potw1720b/",
+      "sha256": "64eccbc054b905c11d1ebfd34cacc42a1dbb6a39ea48d67dd417875929cd451b",
+      "bytes": 8402348,
+      "nativeDimensions": [
+        5290,
+        5290
+      ],
+      "format": "TIFF, 8-bit RGB",
+      "master": {
+        "url": "https://esahubble.org/media/archives/images/original/potw1720b.tif",
+        "width": 5290,
+        "height": 5290
+      },
+      "releaseLicense": "CC BY 4.0 under publisher terms",
+      "termsUrl": "https://esahubble.org/copyright/",
+      "credit": "NRAO/AUI/NSF",
+      "avm": {
+        "Spatial.CoordinateFrame": "ICRS",
+        "Spatial.CoordsystemProjection": "TAN",
+        "Spatial.ReferenceDimension": [
+          "5290.0",
+          "5290.0"
+        ],
+        "Spatial.ReferencePixel": [
+          "2645.0",
+          "2645.0"
+        ],
+        "Spatial.ReferenceValue": [
+          "83.6334511837",
+          "22.0151236394"
+        ],
+        "Spatial.Scale": [
+          "-2.78194934801e-05",
+          "2.78194934801e-05"
+        ],
+        "Spatial.Rotation": "0.49999999999999961",
+        "Spatial.Quality": "Full",
+        "Spatial.Notes": "<rdf:Alt>\n     <rdf:li xml:lang=\"x-default\"/>\n    </rdf:Alt>",
+        "Temporal.StartTime": null,
+        "Temporal.IntegrationTime": null,
+        "Spectral.CentralWavelength": null,
+        "Spectral.Bandpass": null,
+        "Spectral.Notes": "<rdf:Alt>\n     <rdf:li xml:lang=\"x-default\"/>\n    </rdf:Alt>",
+        "Facility": [
+          "Very Large Array (VLA)"
+        ],
+        "Instrument": [
+          "None"
+        ],
+        "ObservationID": null
+      },
+      "pixelSamplingArcseconds": [
+        0.10015017652836,
+        0.10015017652836
+      ],
+      "samplingNote": "Derived from publisher AVM footprint and delivered raster dimensions; not the instrumental PSF or independent astrometric accuracy.",
+      "evidenceLinks": [
+        "Parent map combines S-band data with an expanded, spectrally scaled older template; an additional high-pass version exists: https://arxiv.org/html/1704.02968v1"
+      ]
+    },
+    {
+      "id": "chandra-xray",
+      "localPath": ".local/nebula-lab/intake/m1/chandra-xray-esahubble.tif",
+      "url": "https://esahubble.org/media/archives/images/original/potw1720f.tif",
+      "page": "https://esahubble.org/images/potw1720f/",
+      "sha256": "8647bce741a6eeb5c8595ec179cf75eaa0e43a026045057c1ce5f02362a19350",
+      "bytes": 8125068,
+      "nativeDimensions": [
+        5290,
+        5290
+      ],
+      "format": "TIFF, 8-bit RGB",
+      "master": {
+        "url": "https://esahubble.org/media/archives/images/original/potw1720f.tif",
+        "width": 5290,
+        "height": 5290
+      },
+      "releaseLicense": "CC BY 4.0 under publisher terms",
+      "termsUrl": "https://esahubble.org/copyright/",
+      "credit": "CXC",
+      "avm": {
+        "Spatial.CoordinateFrame": "ICRS",
+        "Spatial.CoordsystemProjection": "TAN",
+        "Spatial.ReferenceDimension": [
+          "5290.0",
+          "5290.0"
+        ],
+        "Spatial.ReferencePixel": [
+          "2645.0",
+          "2645.0"
+        ],
+        "Spatial.ReferenceValue": [
+          "83.6334511837",
+          "22.0151236394"
+        ],
+        "Spatial.Scale": [
+          "-2.78194934801e-05",
+          "2.78194934801e-05"
+        ],
+        "Spatial.Rotation": "0.49999999999999961",
+        "Spatial.Quality": "Full",
+        "Spatial.Notes": "<rdf:Alt>\n     <rdf:li xml:lang=\"x-default\"/>\n    </rdf:Alt>",
+        "Temporal.StartTime": null,
+        "Temporal.IntegrationTime": null,
+        "Spectral.CentralWavelength": null,
+        "Spectral.Bandpass": null,
+        "Spectral.Notes": "<rdf:Alt>\n     <rdf:li xml:lang=\"x-default\"/>\n    </rdf:Alt>",
+        "Facility": [
+          "Chandra"
+        ],
+        "Instrument": [
+          "None"
+        ],
+        "ObservationID": null
+      },
+      "pixelSamplingArcseconds": [
+        0.10015017652836,
+        0.10015017652836
+      ],
+      "samplingNote": "Derived from publisher AVM footprint and delivered raster dimensions; not the instrumental PSF or independent astrometric accuracy.",
+      "evidenceLinks": [
+        "Epoch range and ACIS attribution: https://chandra.harvard.edu/photo/2017/crab/"
+      ]
+    }
+  ],
+  "rejectedAlternates": [
+    {
+      "pin": {
+        "id": "chandra-xray",
+        "url": "https://chandra.harvard.edu/photo/2017/crab/crab_xray.tif",
+        "path": ".local/nebula-lab/intake/m1/chandra-xray.tif",
+        "bytes": 10192896,
+        "sha256": "6f5452d168d4695499857fe85d42a8eef1549dd09bf58a53cd3f954d4c31e9ea",
+        "width": 5290,
+        "height": 5290,
+        "format": "tiff",
+        "space": "srgb",
+        "depth": "uchar",
+        "channels": 3,
+        "xmp": 24601
+      },
+      "avm": {
+        "Spatial.CoordinateFrame": "ICRS",
+        "Spatial.CoordsystemProjection": "TAN",
+        "Spatial.ReferenceDimension": [
+          "5290.00",
+          "5290.00"
+        ],
+        "Spatial.ReferencePixel": [
+          "4811.93272558996",
+          "508.53793404719"
+        ],
+        "Spatial.ReferenceValue": [
+          "83.63793182370",
+          "22.02352142330"
+        ],
+        "Spatial.Scale": [
+          "-0.00001383215",
+          "0.00001383215"
+        ],
+        "Spatial.Rotation": "0.24718511834",
+        "Spatial.Quality": "Full",
+        "Spatial.Notes": [
+          "World Coordinate System resolved using PinpointWCS 0.9.0 revision 213+ by the Chandra X-ray Center"
+        ],
+        "Temporal.StartTime": null,
+        "Temporal.IntegrationTime": null,
+        "Spectral.CentralWavelength": [
+          "0.8267"
+        ],
+        "Spectral.Bandpass": [
+          "X-ray"
+        ],
+        "Spectral.Notes": null,
+        "Facility": [
+          "Chandra"
+        ],
+        "Instrument": [
+          "ACIS"
+        ],
+        "ObservationID": null
+      },
+      "reason": "Not selected: embedded WCS places the nominal Crab reference close to a raster corner and has about half the angular footprint of the official ESA/Hubble companion release. No local morphology fit or guessed metadata repair was applied. Decoded pixels differ, so the selected ESA file has its own native pin."
+    },
+    {
+      "pin": {
+        "id": "spitzer-infrared",
+        "url": "https://chandra.harvard.edu/photo/2017/crab/crab_ir.tif",
+        "path": ".local/nebula-lab/intake/m1/spitzer-infrared.tif",
+        "bytes": 15110708,
+        "sha256": "4c375c8da447a3e103335fed73882e09af4bd375141a3a99186117ff5b8465a8",
+        "width": 5290,
+        "height": 5290,
+        "format": "tiff",
+        "space": "srgb",
+        "depth": "uchar",
+        "channels": 3,
+        "xmp": 24167
+      },
+      "avm": {
+        "Spatial.CoordinateFrame": "ICRS",
+        "Spatial.CoordsystemProjection": "TAN",
+        "Spatial.ReferenceDimension": [
+          "5290.00",
+          "5290.00"
+        ],
+        "Spatial.ReferencePixel": [
+          "4811.93272558996",
+          "508.53793404719"
+        ],
+        "Spatial.ReferenceValue": [
+          "83.63793182370",
+          "22.02352142330"
+        ],
+        "Spatial.Scale": [
+          "-0.00001383215",
+          "0.00001383215"
+        ],
+        "Spatial.Rotation": "0.24718511834",
+        "Spatial.Quality": "Full",
+        "Spatial.Notes": [
+          "World Coordinate System resolved using PinpointWCS 0.9.0 revision 213+ by the Chandra X-ray Center"
+        ],
+        "Temporal.StartTime": null,
+        "Temporal.IntegrationTime": null,
+        "Spectral.CentralWavelength": [
+          "24000"
+        ],
+        "Spectral.Bandpass": [
+          "Mid-IR"
+        ],
+        "Spectral.Notes": null,
+        "Facility": [
+          "Spitzer"
+        ],
+        "Instrument": [
+          "MIPS"
+        ],
+        "ObservationID": null
+      },
+      "reason": "Not selected: embedded WCS places the nominal Crab reference close to a raster corner and has about half the angular footprint of the official ESA/Hubble companion release. No local morphology fit or guessed metadata repair was applied. Decoded pixels differ, so the selected ESA file has its own native pin."
+    },
+    {
+      "pin": {
+        "id": "vla-radio",
+        "url": "https://chandra.harvard.edu/photo/2017/crab/crab_radio.tif",
+        "path": ".local/nebula-lab/intake/m1/vla-radio.tif",
+        "bytes": 13948440,
+        "sha256": "e268e1b71e5e4dbd6af48f2bfa410802e839ff4bcfc76801db8d396dd02c95c1",
+        "width": 5290,
+        "height": 5290,
+        "format": "tiff",
+        "space": "srgb",
+        "depth": "uchar",
+        "channels": 3,
+        "xmp": 24020
+      },
+      "avm": {
+        "Spatial.CoordinateFrame": "ICRS",
+        "Spatial.CoordsystemProjection": "TAN",
+        "Spatial.ReferenceDimension": [
+          "5290.00",
+          "5290.00"
+        ],
+        "Spatial.ReferencePixel": [
+          "4811.93272558996",
+          "508.53793404719"
+        ],
+        "Spatial.ReferenceValue": [
+          "83.63793182370",
+          "22.02352142330"
+        ],
+        "Spatial.Scale": [
+          "-0.00001383215",
+          "0.00001383215"
+        ],
+        "Spatial.Rotation": "0.24718511834",
+        "Spatial.Quality": "Full",
+        "Spatial.Notes": [
+          "World Coordinate System resolved using PinpointWCS 0.9.0 revision 213+ by the Chandra X-ray Center"
+        ],
+        "Temporal.StartTime": null,
+        "Temporal.IntegrationTime": null,
+        "Spectral.CentralWavelength": [
+          "1e8"
+        ],
+        "Spectral.Bandpass": [
+          "S-band"
+        ],
+        "Spectral.Notes": null,
+        "Facility": [
+          "VLA"
+        ],
+        "Instrument": null,
+        "ObservationID": null
+      },
+      "reason": "Not selected: embedded WCS places the nominal Crab reference close to a raster corner and has about half the angular footprint of the official ESA/Hubble companion release. No local morphology fit or guessed metadata repair was applied. Decoded pixels differ, so the selected ESA file has its own native pin."
+    }
+  ]
+}

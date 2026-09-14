@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { compilerStars, compilerStarLensPoints, createCompilerStarPhotometer } from './stars';
+import { compilerStars, compilerStarLensPoints, createCompilerStarPhotometer, detectCompilerStarCandidates } from './stars';
 import { compilerStarAppearance, validCompilerStarMaterials, validCompilerStarSize, type PreparedCompilerStar } from './bake-types';
 import type { CompilerImage } from './images';
 import type { EmissionFieldModel } from './field-types';
@@ -159,4 +159,35 @@ test('equal measured light keeps stable source identity order and weak positive 
   assert.deepEqual(weak, full, 'Scaling a positive depth distribution must not select or dim observed field stars');
   assert.deepEqual(await compilerStars(source, selectionField(0), 2), [], 'No depth may be invented without positive field support');
   assert.deepEqual(await compilerStars(source, selectionField(), 1), full.slice(0, 1));
+});
+
+test('more than 6000 sharper faint peaks cannot preempt a bright broad star before aperture ranking', async () => {
+  const width = 1000, height = 1000, data = new Uint8Array(width * height * 3);
+  function add(cx: number, cy: number, peak: number, variance: number) {
+    for (let y = Math.max(0, cy - 10); y <= Math.min(height - 1, cy + 10); y++)
+      for (let x = Math.max(0, cx - 10); x <= Math.min(width - 1, cx + 10); x++) {
+        const value = Math.round(peak * Math.exp(-((x - cx) ** 2 + (y - cy) ** 2) / variance));
+        for (let c = 0; c < 3; c++) data[(y * width + x) * 3 + c] += value;
+      }
+  }
+  for (let y = 0; y < 80; y++) for (let x = 0; x < 81; x++) add(8 + x * 12, 8 + y * 12, 180, .8);
+  add(500, 985, 90, 10);
+  const layer = { width, height, data, path: 'fixture', sha256: 'fixture' };
+  const sample = (x: number, y: number, out: [number, number, number]) => {
+    const px = Math.floor(x), py = Math.floor(-y);
+    if (px < 0 || py < 0 || px >= width || py >= height) return false;
+    for (let c = 0; c < 3; c++) out[c] = data[(py * width + px) * 3 + c]!; return true;
+  };
+  const source: CompilerImage = { ...image(), nativeWidth: width, nativeHeight: height, original: layer, diffuse: layer, stars: layer,
+    sampleOriginal: sample, sampleRgb: sample };
+  const bytes = await sharp(data, { raw: { width, height, channels: 3 } }).png().toBuffer();
+  const truncated = await detectStars(bytes, [width, height]);
+  assert.equal(truncated.length, 6000); assert.ok(truncated.every(star => star.point[1] < 970), 'Fixture must expose the old detector quota.');
+  const complete = await detectCompilerStarCandidates(source);
+  assert.equal(complete.length, 6481);
+  const model = selectionField(); model.bounds = { min: [0, -1000, -100], max: [1000, 0, 100] };
+  model.components[0] = { ...model.components[0]!, center: [500, -500, 0], sigma: [1000, 1000, 20] };
+  const selected = await compilerStars(source, model, 1);
+  assert.equal(selected.length, 1); assert.ok(Math.abs(selected[0]!.positionArcsec[0] - 500.5) < .1);
+  assert.ok(Math.abs(selected[0]!.positionArcsec[1] + 985.5) < .1, 'The observed broad bright star must win the unchanged one-star budget.');
 });
