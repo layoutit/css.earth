@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ivar",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "DAMIT 271: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-271.txt. Model 271, version 2016-04-22, pole (334°, 39°), period 4.795168 h match the retained metadata. The archive diameter field is 7.4 ±0.2 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ivar/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/271",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ivar/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ivar/source/reference/damit-model.json",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/913/shape.txt",
+        "https://damit.cuni.cz/projects/damit/pages/documentation",
+        "https://ui.adsabs.harvard.edu/abs/2004Icar..167..178K"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "No registered reusable reflectance texture was examined for the selected model. The grid marks missing imagery; Elevation is source-model radius relative to a sphere, not measured geology.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ivar/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "damit-alternatives",
+      "subject": "Other DAMIT shape solutions",
+      "status": "unresolved",
+      "finding": "The live DAMIT export lists these other models for this target: 272: pole (336°, 39°), 4.79517 h, version 2007-02-22. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "Independent shape, spin or scale evidence distinguishes these alternatives, or a changed release offers a demonstrably better supported model.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/272"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "physical-scale",
+      "subject": "Ivar thermophysical scale alternatives",
+      "status": "included",
+      "finding": "The selected DAMIT 271 mesh keeps its 7.4 ± 0.2 km fixed-shape archive scale. Hanuš et al. (2015), Table 4, reports a wider varied-shape thermophysical result of 8.0 km with −0.9/+0.3 km bounds. The latter is not substituted onto this mesh; it shows that the selected archive error is not total physical-size uncertainty and supplies no local terrain constraint.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ivar/source/reference/calibration.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ivar/source/reference/damit-model.json",
+        "https://arxiv.org/html/1504.04199",
+        "https://ui.adsabs.harvard.edu/abs/2015Icar..256..101H"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    }
+  ]
+}

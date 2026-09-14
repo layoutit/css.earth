@@ -19,7 +19,7 @@
 - Spin alignment with the ring normal is assumed; spin direction is unknown, and display longitude and phase are arbitrary. Orbit context is fixed at 2026-09-03 TT.
 - Settings is hidden; optional Shadows were checked through the checkbox event. These reports do not establish a full-suite pass or physical-device performance.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods
 
@@ -37,10 +37,6 @@ The ICRS ring-plane normal is RA 151.03° ± 0.14°, Dec +41.81° ± 0.07°. The
 The selected contact gives C1R radius 385.9 km and radial width 7.04 km, and C2R radius 400.3 km and radial width 1.009 km. [The ring record](source/rings/occultation-2022.json) retains the uncertainties, normal occultation opacity and its explicitly schematic use as constant display alpha. C2R has broad uncertainties, and ring properties vary with longitude, wavelength and epoch. Its 2021 equivalent width of 0.117 km is opacity times radial width, not a geometric width. No unsampled longitude structure is added.
 
 Preparation uses the existing annular geometry helper and coplanar raster compiler: 256 source quads become 16 retained image tiles, preserving the central aperture and gap. Ring triangles are absent from the body surface-picking structure; no separate ring picking is provided. [The batch ring account](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#chariklos-rings) explains this processing and its source choices.
-
-### Source survey
-
-[The source survey](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#source-survey-dispositions) records the selected constraints and alternatives; [NASA’s JWST account](https://science.nasa.gov/blogs/webb/2023/01/25/webb-spies-chariklo-ring-system-with-high-precision-technique/) provides observation context. Published papers are cited, not relicensed or bundled. Credits and reuse terms for the authored approximation, ESO panorama, Inter font and HYG metadata are in [NOTICE.md](NOTICE.md) and the manifest.
 
 ### Orbit
 

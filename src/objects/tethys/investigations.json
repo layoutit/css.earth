@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "tethys",
+  "entries": [
+    {
+      "id": "usgs-cassini-293m",
+      "subject": "USGS Tethys Cassini 293 m mosaic",
+      "status": "included",
+      "finding": "Tethys_Cassini_mosaic_global_293m.tif supplies Monochrome. Exactly zero is gap; other dark source values, seams and shadows remain observed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/tethys_cassini_global_mosaic_293m"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pia18439-enhanced-color",
+      "subject": "NASA/JPL PIA18439 2014 enhanced-color map",
+      "status": "included",
+      "finding": "The 2014 ultraviolet/infrared map supplies Enhanced color after producer calibration, registration and photometric correction; it is not natural color.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/source/manifest.json",
+        "https://www.jpl.nasa.gov/images/pia18439-color-maps-of-tethys-2014/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "n1807429484-iss",
+      "subject": "Cassini ISS NAC N1807429484 calibrated frame",
+      "status": "included",
+      "finding": "The 2015-04-11 clear-filter I/F frame supplies the ISS photograph lens. Its SPICE camera is limb-refined and empirical Lommel-Seeliger correction is not measured albedo.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/source/manifest.json",
+        "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "spc-2025-q128-shape",
+      "subject": "Weirich et al. 2025 Tethys SPC Q128 OBJ",
+      "status": "included",
+      "finding": "tethys_128_o.obj supplies Shape; its 2,000-face source-preserving display is a finite approximation rather than geographic qualification.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/source/manifest.json",
+        "https://doi.org/10.26033/hpv0-eh61"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "spc-2025-radius",
+      "subject": "Weirich et al. 2025 Tethys SPC radius grids",
+      "status": "included",
+      "finding": "Equatorial and polar radius grids supply Elevation as radius minus 531 km; their datum and missing-data limits remain distinct from shape.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/source/manifest.json",
+        "https://doi.org/10.26033/hpv0-eh61"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "spc-2025-relative-albedo",
+      "subject": "Weirich et al. 2025 Tethys SPC relative-albedo grids",
+      "status": "included",
+      "finding": "Dimensionless equatorial and polar brightness fields supply Relative albedo, not calibrated reflectance or geometric albedo.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/source/manifest.json",
+        "https://doi.org/10.26033/hpv0-eh61"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "nine-vims-ice",
+      "subject": "Nine selected Cassini VIMS IR observations for ice absorption",
+      "status": "included",
+      "finding": "C1561668191, C1606213356, C1660463972, C1719613772, C1719616836, C1807456038, C1807469104, C1807473499 and C1818547570 supply continuum-relative near-2.02 micrometre absorption under native support masks.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/source/manifest.json",
+        "https://vims.univ-nantes.fr/cube/1807469104_1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "seven-vims-infrared",
+      "subject": "Seven selected Cassini VIMS IR observations for false-color infrared",
+      "status": "included",
+      "finding": "The selected subset supplies near-2.02/1.59/1.28 micrometre Infrared after clipping exclusions; detector support remains distinct from exact pointing.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/tethys/source/manifest.json",
+        "https://vims.univ-nantes.fr/cube/1807469104_1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

@@ -6,6 +6,8 @@
 
 - **Elevation:** Philip Stooke’s [PDS radius table](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/j14thebe.tab), DOI [10.26033/yt84-5y91](https://doi.org/10.26033/yt84-5y91). Heights are radius minus a 49.3 km reference sphere, displayed over −15 to +15 km.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Evidence
 
 - Original `.IMG` and detached `.LBL` pairs are pinned in [source/manifest.json](source/manifest.json) and restored by [source/preparation/acquisition.json](source/preparation/acquisition.json).
@@ -50,19 +52,6 @@ The archived 5° grid uses planetocentric latitude, **west-positive longitude**,
 Shared preparation skips VICAR telemetry and per-line prefixes, subtracts the recorded constant sky-background estimate, and applies bounded lunar-Lambert illumination normalization (weight 0.5, maximum gain 1.75, incidence limit 75°, emission limit 70°). At a 2.5 cap, the 5,606 samples of C0532888400 normalized by more than 1.75 held 627 of the view's 629 saturated display samples, a white patch. The 1.75 cap withholds them and 3,617 more from C0401759200 and C0420691700; other frames fill most of those points, and area coverage stays at 65.1% (65.2% before). Samples beyond 70° of emission smeared single pixels into feathered strips along the edge of C0532888400, as on Calypso; limiting emission to 70° removes them, and area coverage is 56.0%. Overlap level matching, fitted where both frames see the surface within 70° of incidence and emission (widest gain 1.69), reduces brightness jumps while keeping the original image detail.
 
 Source-aware visibility and shadow tests withhold geometrically unreliable or hidden samples. Normalized coverage is reused by the surface, poles, minimap and prepared context portrait. The shared flood lighting and directional Shadows remain enabled; no photographed terminator is substituted for application lighting.
-
-## Candidate survey
-
-| Candidate | Adds | Disposition |
-| --- | --- | --- |
-| [Galileo SSI archive/OPUS](https://opus.pds-rings.seti.org/opus/#/target=Thebe) | Best resolved photographic coverage from multiple longitudes | Four original clear-filter frames included. C0368591600 (November 1996) is excluded: Thebe is a 77-pixel lit crescent in it, and no level reconciles it with the other frames; without it their fitted levels span 1 to 0.59 instead of 1 to 0.20, and coverage falls from 78% to 65%. Repeated exposures/cutouts and lower resolution duplicates excluded. C0420644201's useful registration is unresolved and it is not used. |
-| [Stooke PDS bundle](https://sbn.psi.edu/pds/resource/stkshape.html) | Released irregular radius model, 5° grid | Included as geometry and explicitly model-derived Elevation. |
-| [NASA Juno SRU PIA26751, May 1, 2026](https://science.nasa.gov/photojournal/nasas-juno-misson-captures-jupiter-moon-thebe/) | New ~3 km/pixel image, comparable resolution and a later encounter | Useful source candidate; precise camera geometry/calibration and a registered science release remain unresolved. The display JPEG is not silently projected with invented coordinates. |
-| [Denk et al., 2026, Fig. 10](https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf) | Original image identifiers and orientation/resolution comparison | Used to cross-check Galileo survey and native north-down orientation; figure is not used as a texture. No separate mapped composition/geology product was identified in this release. |
-| [Galileo/Thebe photojournal releases](https://science.nasa.gov/photojournal/best-images-yet-of-thebe-amalthea-and-metis/) | Presentation composites of selected spacecraft images | Native PDS originals used instead of reprojecting enlarged/rotated press panels. |
-| Voyager observations | Earlier unresolved or very coarse views | No resolution or useful mapped coverage improvement over selected Galileo data. |
-
-The selected views are distinct observation and shape-model products. No invented color, atmosphere, crater detail or extra lens is added. [NASA’s Thebe overview](https://science.nasa.gov/jupiter/moons/thebe/) and the pinned astronomy package supply facts and system placement.
 
 ## Preparation and credits
 

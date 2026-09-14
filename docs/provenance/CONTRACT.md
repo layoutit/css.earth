@@ -79,10 +79,28 @@ or `deferred`), the finding, evidence links and the commit it was checked at.
 An entry that is not included names what would reopen it in `revisitWhen`.
 Link repository evidence at a commit or pull request; a branch link moves.
 
+Give distinct source decisions their own entries. `included` means selected for
+the stated use, not that every scientific claim is qualified. Ledger coverage
+counts objects with records, not objects with complete imagery or an exhaustive
+source search.
+
 The README links the ledger instead of repeating a source survey. Read the
 ledger before investigating an object. Reopen an excluded, unresolved or
 deferred entry only when its `revisitWhen` condition is met, and say which.
 `node tools/report-investigations.mts` lists every open entry across objects.
+Use `--summary` for catalogue coverage and `--classification` to select an
+existing object classification. Filter decisions with `--status=deferred,unresolved`
+and `--search=registration`, or export with `--json`. Filters select detail rows;
+summary counts cover the selected population. Counts measure recorded decisions,
+not qualified views or an exhaustive source search.
+
+When consolidating historical records, `checked` identifies the version of the
+records reviewed. Preserve source decisions and original trial dates, results
+and evidence. Explain the migration method and extent of manual review in the PR.
+A schema or link check does not verify the finding; consolidation does not claim
+a fresh archive search or repeat qualification. After a finding changes, retain
+its entry id and previous checks, append the new checked revision, and preserve
+the earlier result in the finding or its pinned evidence.
 
 ### Examples
 

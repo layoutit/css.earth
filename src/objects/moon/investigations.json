@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "moon",
+  "entries": [
+    {
+      "id": "lroc-wac-morphology",
+      "subject": "LROC WAC global morphologic mosaic v1.3",
+      "status": "included",
+      "finding": "Selected 643 nm morphology product supplies Monochrome, with original shadows and gaps retained.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "lola-ldem16",
+      "subject": "LRO LOLA LDEM16 v3.1",
+      "status": "included",
+      "finding": "Selected grid supplies Elevation above the stated reference sphere; spacing and quantization are not terrain accuracy.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "diviner-ghrm",
+      "subject": "LRO Diviner GHRM v1.0 thermal products",
+      "status": "included",
+      "finding": "Three selected products supply Midnight temperature, heat anomaly and rock abundance with polar and internal gaps retained.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "usgs-lunar-geology",
+      "subject": "USGS Unified Geologic Map v2",
+      "status": "included",
+      "finding": "Selected 49-unit map supplies categorical Geology, not observed color.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "lucey-christiansen-feature",
+      "subject": "Lucey et al. 2021 Christiansen-feature raster",
+      "status": "included",
+      "finding": "Selected wavelength map supplies the silicate-signature lens; it is not mineral abundance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "moon-kit-and-hapke-color",
+      "subject": "NASA Moon Kit and LROC Hapke color alternatives",
+      "status": "excluded",
+      "finding": "The documented survey found filled CGI polar coverage and color tiles limited to 70 degrees with less relief than the selected morphology product.",
+      "revisitWhen": "A registered color product retains polar coverage and comparable source detail.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

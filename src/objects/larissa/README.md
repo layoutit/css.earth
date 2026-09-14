@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - **[Voyager archive](https://pds-rings.seti.org/voyager/iss/):** **Monochrome:** Voyager clear-filter frame C1138148.
 
 - **Elevation:** Stooke `n7larissa.tab`, radial height relative to 96 km, displayed from −12 to +12 km.
@@ -39,14 +41,7 @@
 
 - The displayed shape uses 600 triangles with a 1.8 km simplification-error ceiling, below the 2,000-leaf budget.
 
-## Candidate survey
-
-| Candidate | Decision |
-| --- | --- |
-| [Voyager ISS archive](https://pds-rings.seti.org/voyager/iss/), C1138148 | Included: resolved clear-filter image with recoverable geometry. |
-| C1138142 and C1138153 | Inspected archive frames. Excluded: repeated similar coverage or much coarser wide-angle sampling; no distinct dataset or useful added detail. |
-| Stooke global radius grid and shaded-relief drawings | Radius grid included as shape/Elevation; drawings excluded as photographic imagery. |
-| USGS/PDS mapping, colour, composition and altimetry searches | No additional registered scientific layer was qualified. Global radius values are a coarse shape reconstruction and must not be presented as an observed high-resolution DEM. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 ## Source interpretation
 

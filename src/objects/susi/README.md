@@ -80,15 +80,4 @@ IAUspin is retained as provenance and as an independent frame/rate consistency c
 
 <a id="views-and-source-survey"></a>
 
-<details>
-<summary>Views and source survey</summary>
-
-| Source candidate | Disposition | Reason |
-| --- | --- | --- |
-| DAMIT model search | included | Original body-specific convex shape and spin. Current search found no size-calibrated model. |
-| [IRAS SIMPS V6.0 original diamalb.tab and label](https://doi.org/10.26033/pf3k-m168) | included-qualified | Original flux-derived radiometric mean with retained 1σ flux precision; contemporary two-band NEOWISE alternatives have much larger formal errors and do not justify replacing it. |
-| Optical surface / resolved DEM / composition map | excluded | No registered surface map is supplied by the selected lightcurve inversion release. Shared grid and source-shape radial elevation are appropriate; no fabricated texture. |
-
-The model page and publication describe disk-integrated inversion data; such photometry cannot be repackaged as registered surface texels. Any unresolved complementary release remains a future source candidate rather than a fabricated view.
-
-</details>
+The [investigation ledger](investigations.json) records the source survey and alternative models.

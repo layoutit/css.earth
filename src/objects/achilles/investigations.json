@@ -1,0 +1,85 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "achilles",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 3934: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-3934.txt. Model 3934, version 2019-05-07, pole (172°, -5°), period 7.3063 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/achilles/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/3934",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/achilles/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/achilles/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "The retained calibration uses 131 ±8 km. occultation-constrained volume-equivalent diameter",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/achilles/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/achilles/source/reference/calibration.json",
+        "https://doi.org/10.1051/0004-6361/202346022"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The Shape view uses the shared normal grid because the source release provides no registered surface imagery. The grid is a coordinate guide, not regolith, measured albedo or an optical photograph.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/achilles/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-reference-1",
+      "subject": "NEOWISE thermal diameter 130.099 ± 0.554 km",
+      "status": "excluded",
+      "finding": "[NEOWISE thermal diameter 130.099 ± 0.554 km](https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=588&phys-par=1) — alternative — Consistent thermal effective diameter, but its formal precision omits systematic errors; occultation volume scale is more directly compatible.",
+      "revisitWhen": "New calibration or independent size evidence makes this alternative preferable to the currently adopted, physically compatible scale; do not average incompatible thermal fits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/achilles/README.md",
+        "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=588&phys-par=1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "methone",
+  "entries": [
+    {
+      "id": "measured-ellipsoid",
+      "subject": "Thomas et al. Methone measured ellipsoid",
+      "status": "included",
+      "finding": "The measured axes and PCK00011 BODY632_RADII support the analytic ellipsoid, which is not a detailed terrain mesh.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2013.07.022",
+        "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/methone/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/methone/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-n1716192103",
+      "subject": "Cassini N1716192103 clear-filter view",
+      "status": "included",
+      "finding": "The May 2012 calibrated image supplies the coarse Monochrome view. Its limb/terminator fit is pointing evidence, not independent feature registration.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/methone/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/methone/source/survey/source-camera.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/methone/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "other-clear-frames",
+      "subject": "Other Methone clear-filter frames",
+      "status": "excluded",
+      "finding": "Other 2012 frames cover similar longitudes and the next independent encounter is about one pixel across the body, so they do not add a useful qualified patch.",
+      "revisitWhen": "A distinct resolved view with useful coverage and controlled geometry can be projected.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/methone/source/survey/observation-metadata.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/methone/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "multispectral-route",
+      "subject": "Methone UV, green and infrared route",
+      "status": "excluded",
+      "finding": "Surveyed complementary frames did not establish a significant UV/IR-ratio correlation with the oval, so no colour or composition lens is claimed.",
+      "revisitWhen": "A registered multispectral product with reproducible spatial signal can support a lens.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://www.lpi.usra.edu/meetings/lpsc2013/pdf/1598.pdf",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/methone/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "updated-shape-survey",
+      "subject": "Updated Methone shape and corrected-map route",
+      "status": "deferred",
+      "finding": "The LPSC corrected map remains a comparison rather than a substitute for calibrated pixels; the newer shape survey was inspected but full text was unavailable.",
+      "revisitWhen": "A released full study or body-specific local-elevation product can be assessed.",
+      "evidence": [
+        "https://www.lpi.usra.edu/meetings/lpsc2013/pdf/1598.pdf",
+        "https://doi.org/10.1016/j.icarus.2019.06.016",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/methone/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

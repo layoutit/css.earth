@@ -32,7 +32,6 @@ The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) chec
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
-
 ## False color preparation
 
 <details>
@@ -77,16 +76,7 @@ Navigation portraits and small dedicated minimaps are derived from the prepared 
 
 ## Dataset survey
 
-- Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
-
-- **Not separate lenses:** individual clear-filter frames and alternate contrast versions of the same observations. They contribute complementary resolution or coverage to Monochrome.
-
-- **Investigated, not included as an observed map:** legacy Voyager/Stooke maps and global shaded-relief illustrations. They do not offer the combination of Cassini detail and measured camera registration used here; drawings are not observational textures.
-
-
-- **Spectroscopy:** [Cassini spectra and photometry of small inner satellites](https://www.usgs.gov/publications/cassini-spectra-and-photometry-025-51-mm-small-inner-satellites-saturn) and [small-moon photometric analyses](https://doi.org/10.3847/1538-3881/ab659d) inform interpretation. Disk-integrated measurements do not supply a spatially resolved composition texture.
-
-- **Facts and imagery reference:** [NASA Daphnis](https://science.nasa.gov/saturn/moons/daphnis/), [JPL satellite parameters](https://ssd.jpl.nasa.gov/sats/phys_par/) and the PDS shape document. No atmosphere or internal cross section is claimed.
+Recorded source selections, alternatives and failed trials are in the [investigation ledger](investigations.json).
 
 ## Orbit and orientation limits
 

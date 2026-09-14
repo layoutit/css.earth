@@ -12,7 +12,17 @@
 
 - The infrared view uses [the registered Galileo NIMS archive](https://doi.org/10.17189/4sz4-5024), observations 17ENGLOBAL01A and 17ENGLOBAL02A, Minnaert-corrected CIOF products.
 
+- **Ice signature**, **Fine ice**, and **Coarse ice** use the VLT/SPHERE release of [King, Fletcher and Ligier (2022)](https://doi.org/10.3847/PSJ/ac596d), pinned as [Zenodo 6034904](https://doi.org/10.5281/zenodo.6034904). [reflectance-conversion.json](source/composition/reflectance-conversion.json) and [model-conversion.json](source/composition/model-conversion.json) bind the exact source bytes and prepared fields.
+
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Evidence
+
+The 14 September 2026 composition preparation adds **Ice signature**, **Fine ice**, and **Coarse ice**. [Reflectance evidence](evidence/composition/reflectance-values.json) and [model evidence](evidence/composition/model-values.json) compare all 64,800 geographic nodes in each of five converted grids, including the two retained uncertainty products, with the original release. Values agree exactly after float32 rounding; missing samples and the periodic seam retain their source meaning. [Fresh restoration](evidence/composition/restoration.json) downloads both original archives into an empty source root and reproduces all eleven composition manifest entries.
+
+[Ice signature](evidence/composition/ice-signature.png) · [Fine ice](evidence/composition/fine-ice.png) · [Coarse ice](evidence/composition/coarse-ice.png) · [DPR 2](evidence/composition/ice-signature-dpr2.png) · [Mobile](evidence/composition/coarse-ice-mobile.png). The [browser receipt](evidence/composition/browser.json) pins the tested files above `f8fbdaa0b`, viewport, camera, selected textures and inspected captures. Dataset switching retains 450 surface leaves; minimap rotation and keyboard zoom work. [Delivery evidence](evidence/composition/delivery.json) verifies the unchanged scene and prior assets; fifteen added image files total 222,678 bytes.
+
+Focused checks pass: numeric conversion/acquisition (15), body behavior and content (14 across both moons), source/provenance (30), source-usage conservation (1), and strict preparation/tool TypeScript. Eight shared startup-fixture/import-closure failures across the two bodies were reproduced on base `a15706943`; these remain outside this surface change. Full application checks and public asset installation are not qualified. The local preview omits six unavailable unrelated nebula context banks. Mobile keeps the texture without horizontal overflow, but shared orbit/label clutter and the open information sheet limit visual review. The texture bake receipt retains its original source hashes; later content and provenance refreshes do not claim another full bake.
 
 The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
@@ -50,7 +60,6 @@ those source files, coordinate transforms, masks, geometry and scene structure.
 Its new evidence concerns finer sampling of the photographs; it does not repeat
 the scientific-lens review.
 
-
 Earlier run at base `53b262bd` (12 September 2026): `node tools/objects/dist/prepare-authored.js europa --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/europa/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
 A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, elevation, geology, infrared) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 4878).
@@ -60,6 +69,8 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 - Original files, STAC metadata, source processing, seven independently Pillow-decoded value anchors, and the exclusion evidence are retained under [source/science/controlled-dtms/](source/science/controlled-dtms/).
 
 - Focused checks are defined in the [unit tests](../../../tests/objects/unit/europa) and [browser profile](../../../tests/objects/browser/europa/browser-profile.mts).
+
+Composition conversion: **Ice signature** is the observed, photometrically corrected `1.30000 / 1.50263 µm` reflectance ratio. The numerator and denominator are exact released samples; “1.51 µm” is only the paper's rounded label. It has 19,644 valid native nodes. **Fine ice** and **Coarse ice** are separate posterior-median model components for crystalline 0.1–0.3 mm and 0.3–1 mm ice, each with 19,616 valid nodes. The pinned source hashes, output hashes, ranges and interval-width uncertainty fields are in the two conversion records; preparation only reorders coordinates, reverses latitude and repeats the periodic seam.
 
 ## Known problems
 
@@ -79,6 +90,10 @@ Feature notes: 12 of the labelled names carry a caption note, the lead summary o
 - **Illumination:** This is an approximate disk correction, not calibrated unlit albedo: there is no phase-angle normalization, fitted Europa scattering model, terrain model, or removal of cast shadows.
 
 - **Infrared:** The blue channels differ slightly (0.732919 and 0.740634 µm); this is a spectral color display, not a uniform quantitative abundance map.
+
+- **Composition lenses:** Native coordinates are latitude north-positive and longitude east-positive; source-paper labels in west longitude must therefore be converted before comparison with this body. The 1° release grid is resampling, not independent detail: SPHERE sampling is about 25 km/px but diffraction limits resolved features to about 150 km. Ice signature is a reflectance-ratio proxy, not an abundance. Fine and coarse ice are MCMC component estimates with 16th/84th-percentile bounds; they are not a total-ice posterior, so no component medians or percentile bounds are summed. Individual salt fits remain degenerate.
+
+- **Reuse:** The Zenodo record is open/`other-open`, but neither the tagged source nor the located record metadata provides explicit terms for reusing the numerical release. Article or preprint licensing does not settle those data rights. These composition assets are limited to local preview and a private draft PR; they are not qualified for public publication.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 

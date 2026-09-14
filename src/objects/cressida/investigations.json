@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "cressida",
+  "entries": [
+    {
+      "id": "voyager-iss-photographic-products",
+      "subject": "Voyager ISS photographic products",
+      "status": "deferred",
+      "finding": "The inspected GEOMED raster and label for C2684646 list 10.52882 km/native pixel by nominal body-center sampling, but no recorded Cressida surface intersection or located pixel center. Center-resolution metadata alone does not qualify a surface. A separate non-null surface-intersection query returns 3 observations, with best listed sampling 162.59793 km/pixel.",
+      "revisitWhen": "A Cressida observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cressida/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cressida/source/manifest.json",
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "published-shape-photometry",
+      "subject": "Karkoschka (2001) adopted Voyager/HST shape",
+      "status": "included",
+      "finding": "Table IV of the HST study supplies the adopted prolate semiaxes 46 × 37 × 37 km. The repeated minor axis is a model assumption, not an independently measured third dimension. French et al. (2024), Table 3 reproduces the separate Voyager size paper’s projected-radius and axis-ratio uncertainties; they are not individual-axis errors. The selected analytic shape supplies no local relief or surface pixels.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cressida/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cressida/source/manifest.json",
+        "https://doi.org/10.1006/icar.2001.6596",
+        "https://arxiv.org/abs/2401.04634",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cressida/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "keck-near-infrared-photometry",
+      "subject": "Keck near-infrared photometry",
+      "status": "excluded",
+      "finding": "2023 primary study, integrated photometry rather than a spatial spectral map. Excluded as a spatial surface lens.",
+      "revisitWhen": "A spatially resolved Cressida measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cressida/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cressida/source/manifest.json",
+        "https://www.sciencedirect.com/science/article/pii/S0019103522004237"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jwst-hst-system-images",
+      "subject": "JWST/HST system images",
+      "status": "unresolved",
+      "finding": "Unresolved moon detections do not establish cartographic coverage. No texture is derived from them.",
+      "revisitWhen": "A spatially resolved Cressida measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cressida/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cressida/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "dem-geology-composition-maps",
+      "subject": "DEM/geology/composition maps",
+      "status": "unresolved",
+      "finding": "No qualified spatial product was located in the inspected mission releases and cited studies. This is the survey outcome, not a claim that no other data exist.",
+      "revisitWhen": "A Cressida source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cressida/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cressida/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

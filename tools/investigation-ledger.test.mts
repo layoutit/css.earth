@@ -3,20 +3,39 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { OBJECTS } from '../site/objects.mts';
 import { INVESTIGATION_LEDGER_FILE, INVESTIGATION_LEDGER_SCHEMA, parseInvestigationLedger, readInvestigationLedgers } from './investigation-ledger.mts';
 import { fixtureRecord } from './test-values.mts';
+import { readCatalog } from './prepare-catalog.mts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 // The source survey a body README used to carry: list items led by a bold decision such as Included, Excluded or Selected.
 const SURVEY_ITEM = /^\s*[-*] \*\*(?:Included|Excluded|Unresolved|Deferred|Selected|Superseded|Not selected|Older interpretation|Literature)\b/m;
+// This is deliberately limited to an explicit README section title. Bodies may still use
+// source tables or source-method prose without duplicating an investigation survey.
+const SOURCE_SURVEY_HEADING = /^\s*#{2,6}\s+(?:focused\s+)?source survey(?:\s+(?:and|&)\b.*)?\s*$/im;
 
-test('every investigation ledger parses, and its body README links it instead of repeating a source survey', async () => {
-  const ledgers = await readInvestigationLedgers(root);
+test('every catalogued asteroid retains its source investigation decisions', async () => {
+  const [objects, ledgers] = await Promise.all([readCatalog(resolve(root, 'src/objects')), readInvestigationLedgers(root)]);
+  const recorded = new Set(ledgers.map(ledger => ledger.objectId));
+  const asteroids = objects.filter(object => object.classification === 'asteroid');
+  assert.ok(asteroids.length > 0);
+  assert.deepEqual(asteroids.filter(object => !recorded.has(object.id)).map(object => object.id), [], 'New asteroid packages need a ledger linked by their README.');
+});
+
+test('every comet has a ledger, and each ledger parses with a README link instead of a repeated source survey', async () => {
+  const [objects, ledgers] = await Promise.all([readCatalog(resolve(root, 'src/objects')), readInvestigationLedgers(root)]);
   assert.ok(ledgers.length > 0, 'At least one object keeps an investigation ledger.');
+  const asteroidIds = new Set(objects.filter(object => object.classification === 'asteroid').map(object => object.id));
+  const recordedObjects = new Set(ledgers.map(({ objectId }) => objectId));
+  for (const object of OBJECTS.filter(object => object.classification === 'comet')) {
+    assert.ok(recordedObjects.has(object.id), `${object.id} keeps its investigation history beside the body.`);
+  }
   for (const { objectId } of ledgers) {
     const readme = await readFile(resolve(root, 'src/objects', objectId, 'README.md'), 'utf8');
     assert.ok(readme.includes(`](${INVESTIGATION_LEDGER_FILE})`), `${objectId} README links its investigation ledger.`);
     assert.doesNotMatch(readme, SURVEY_ITEM, `${objectId} README leaves its source survey to the ledger.`);
+    if (asteroidIds.has(objectId)) assert.doesNotMatch(readme, SOURCE_SURVEY_HEADING, `${objectId} README leaves its explicit source-survey section to the ledger.`);
   }
 });
 

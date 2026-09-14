@@ -4,6 +4,8 @@ Romulus is Sylvia’s outer moon.
 
 ## Sources
 
+[Investigation ledger](investigations.json): recorded source decisions, evidence and conditions for revisiting them.
+
 One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and 2.7±0.3 axis ratio, with equal depth assumed. The 2020 reanalysis allows other correlated ellipse shapes. The grid marks unmapped terrain.
 
 - [Berthier et al. Sylvia physical/dynamical properties](https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X)
@@ -42,6 +44,6 @@ The [validation records](source/validation) identify the parent-relative state a
 
 **Survey and sources**
 
-Other candidates and rejected sources are recorded in [the source review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json) and [preparation inputs](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b1-preparation/outer-inputs.json).
+Source decisions and the historical review they came from are recorded in the [investigation ledger](investigations.json).
 
 </details>

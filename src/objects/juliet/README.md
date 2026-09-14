@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - [Karkoschka (2001), Table IV, printed page 55](https://doi.org/10.1006/icar.2001.6596) adopts radius axes A=75 km and B=37 km in a prolate model: A points toward Uranus and both perpendicular radii equal B.
 
 - [French et al. (2024), Table 3, PDF page 10](https://arxiv.org/abs/2401.04634) reproduces the Voyager paper's Table V: projected √(AB) radius 53 ± 4 km and B/A=0.5 ± 0.1.
@@ -35,14 +37,7 @@ The reference radius ∛(AB²)=46.8261 km is derived from the adopted volume; it
 
 The PCK's old 42 km spherical radii are deliberately not used for geometry. The body coordinates are east-positive longitude with the modeled long axis at 0°/180° longitude. Shared Flood and Shadows shade the same retained mesh.
 
-| Candidate | Disposition |
-| --- | --- |
-| Karkoschka 2001 HST photometry, adopted Voyager dimensions | Included as a prolate shape approximation, not local relief. HST rotational photometry independently supports strong elongation. |
-| [PDS Voyager ISS](https://pds-rings.seti.org/voyager/iss/), calibrated/geometrically corrected images | Sorted 3,441 indexed Juliet observations by body-center sampling. Best C2673225 is 46.28754 km per native pixel, about 3.2 samples along the longest possible diameter. Downloaded and inspected the 1000×1000 GEOMED raster and label: geometric resampling cannot add native surface detail. Its 15.36 s exposure and 5:1 scan also limit an inferred footprint. Excluded as a photographic surface map. |
-| French 2024 occultation analysis | Included for shape uncertainty and orbital context; no spatial surface field. |
-| [HST photometry](https://doi.org/10.1006/icar.2001.6596) and [Keck near-infrared photometry](https://www.sciencedirect.com/science/article/pii/S0019103522004237) | Integrated brightness/color measurements cannot supply resolved surface texels. No separate Color or composition map qualified. |
-| [JPL texture catalog](https://space.jpl.nasa.gov/tmaps/uranus.html), PDS shape releases and USGS mapping survey | No usable registered Juliet texture, detailed mesh, elevation or geology product located. Absence from the inspected catalogs is not a claim that no future dataset can exist. |
-| [NASA overview](https://science.nasa.gov/uranus/moons/juliet/) | Used for discovery and naming only. Its older size/albedo paragraph predates the source measurements and does not override them. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 The original Voyager paper's full table is paywalled; the 2024 primary study explicitly reproduces it. The accessible HST paper independently lists the adopted axes. A compact measured-data transcription is checked in; preparation does not depend on downloading papers or the Northwestern mirror's invalid TLS certificate.
 
