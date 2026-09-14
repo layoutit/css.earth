@@ -138,7 +138,9 @@
     "lab:nebula:catalogue": "node --experimental-strip-types labs/nebula/src/run.ts inventory-messier",
     "lab:nebula:catalogue:enrich": "node --experimental-strip-types labs/nebula/src/run.ts enrich-messier-catalogue",
     "oracles:setup": "node tools/oracles/setup.mts",
-    "oracles:run": "node tools/oracles/run.mts"
+    "oracles:run": "node tools/oracles/run.mts",
+    "preview:native-scroll": "node tools/experiments/native-scroll/run.mts",
+    "test:browser:native-scroll": "node site/test/native-scroll-browser.mts && node site/test/native-scroll-touch-browser.mts"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",
