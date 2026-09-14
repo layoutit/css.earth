@@ -98,7 +98,7 @@ changed inputs, wrong software bytes and incomplete stages fail explicitly.
 | Bad or unsupported inputs | `projection.test.mts` | Missing/duplicate fields, unsafe paths, hash drift, dimensions, degenerate cameras, non-affine frusta and unsupported SUM distortion/K matrices |
 
 This is coverage of the named input and numerical cases, not every SBMT feature
-or every asteroid. PDS/DSK/OBJ/STL geometry import, arbitrary image rotation,
+or every asteroid. Other PDS shape layouts, DSK/OBJ/STL geometry import, arbitrary image rotation,
 distorted camera models, multi-image photometric mosaics and scientific
 registration to a different shape version need their own qualified case and
 adapter. Unsupported options are rejected, never approximated silently.
