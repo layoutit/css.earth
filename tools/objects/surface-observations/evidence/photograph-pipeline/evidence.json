@@ -1,0 +1,3711 @@
+{
+  "schema": "cssearth-pipeline-evidence@1",
+  "reference": {
+    "revision": "origin/main",
+    "commit": "3785f09de351c63fae771d0412ebedb03d2a92ec"
+  },
+  "comparison": "node tools/compare-visual-evidence.mts on the exact committed bytes of both revisions: Pixelmatch threshold 0.1, anti-aliasing included, no resizing or masks. A mismatch count locates change; it does not measure quality.",
+  "minimaps": {
+    "method": "Prepared 640 x 320 minimap per lens at the reference revision and in the branch working tree; sheets show reference, branch and diff at 480 x 240.",
+    "sheets": [
+      "minimaps-01.webp",
+      "minimaps-02.webp",
+      "minimaps-03.webp",
+      "minimaps-04.webp",
+      "minimaps-05.webp",
+      "minimaps-06.webp"
+    ],
+    "lenses": [
+      {
+        "body": "amalthea",
+        "lens": "elevation",
+        "path": "src/objects/amalthea/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 15414,
+          "sha256": "aa8ecf230b3648353b7d843f66531788905d8ed91b7ee27c13fab5143895c2d5"
+        },
+        "branch": {
+          "bytes": 15414,
+          "sha256": "aa8ecf230b3648353b7d843f66531788905d8ed91b7ee27c13fab5143895c2d5"
+        },
+        "changed": false
+      },
+      {
+        "body": "amalthea",
+        "lens": "normal",
+        "path": "src/objects/amalthea/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 12248,
+          "sha256": "7a07e644c26a780b9e4432c2b8d6bf653779d66b8db0672ab147dddb30350aa8"
+        },
+        "branch": {
+          "bytes": 13858,
+          "sha256": "fbea88a2776af0f82458728d5264213af89f8783740e99fd2268f93e3f3449f8"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 123401,
+          "mismatchPercent": 60.25439453125,
+          "diff": {
+            "path": "diffs/amalthea-normal.png",
+            "bytes": 19775,
+            "sha256": "a0a21b90f3bfb26c12c63d5feee0d670c09eb985d096a127b09a647a3d21939a"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-01.webp",
+        "row": 1
+      },
+      {
+        "body": "arrokoth",
+        "lens": "albedo",
+        "path": "src/objects/arrokoth/prepared/minimaps/albedo.webp",
+        "reference": {
+          "bytes": 4464,
+          "sha256": "78ec86e2cd05302624ba032faded32bc436f7692ec34e953cb532877114118c6"
+        },
+        "branch": {
+          "bytes": 4464,
+          "sha256": "78ec86e2cd05302624ba032faded32bc436f7692ec34e953cb532877114118c6"
+        },
+        "changed": false
+      },
+      {
+        "body": "arrokoth",
+        "lens": "lorri",
+        "path": "src/objects/arrokoth/prepared/minimaps/lorri.webp",
+        "reference": {
+          "bytes": 24562,
+          "sha256": "807cd3931f067b74a975309e69559d2c2b526ab21768ed92b92a9b1b391237b7"
+        },
+        "branch": {
+          "bytes": 24706,
+          "sha256": "4f3dd062ae84147d51277a720ffb733f22c0e6c12a7eb9cb47204e3261d23286"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 212,
+          "mismatchPercent": 0.1617431640625,
+          "diff": {
+            "path": "diffs/arrokoth-lorri.png",
+            "bytes": 48447,
+            "sha256": "1627362b0d5fb03e3df2112af4b021a4c6a0415cc2b1e140cb589dc7ab90e0b1"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-01.webp",
+        "row": 2
+      },
+      {
+        "body": "arrokoth",
+        "lens": "model",
+        "path": "src/objects/arrokoth/prepared/minimaps/model.webp",
+        "reference": {
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2"
+        },
+        "branch": {
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2"
+        },
+        "changed": false
+      },
+      {
+        "body": "arrokoth",
+        "lens": "mvic",
+        "path": "src/objects/arrokoth/prepared/minimaps/mvic.webp",
+        "reference": {
+          "bytes": 5928,
+          "sha256": "7bc2dbea824ad18ca778120b0ee7cd8d010a7ee490eb8dfd4e99a7bd4fdafd15"
+        },
+        "branch": {
+          "bytes": 5890,
+          "sha256": "2b440e9c8eabf263e8de1fc651405776caa3c99bcb20aae4b62d3eb9f1fa1f66"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 609,
+          "mismatchPercent": 0.464630126953125,
+          "diff": {
+            "path": "diffs/arrokoth-mvic.png",
+            "bytes": 12240,
+            "sha256": "e220adb715d937b9b89c665be70f4abc59a9147f40ff398e25a08c6a7b0fd0f4"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-01.webp",
+        "row": 3
+      },
+      {
+        "body": "atlas",
+        "lens": "elevation",
+        "path": "src/objects/atlas/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 6766,
+          "sha256": "3374f22692082522aa1f3dbc636d9058faa9e8ce746d38f2a1d661aa2edb06a7"
+        },
+        "branch": {
+          "bytes": 6766,
+          "sha256": "3374f22692082522aa1f3dbc636d9058faa9e8ce746d38f2a1d661aa2edb06a7"
+        },
+        "changed": false
+      },
+      {
+        "body": "atlas",
+        "lens": "filter-color",
+        "path": "src/objects/atlas/prepared/minimaps/filter-color.webp",
+        "reference": {
+          "bytes": 6924,
+          "sha256": "60ec14d0b4a67d98505b24896639d4fb96dcb122370018392bf5f279f7c29457"
+        },
+        "branch": {
+          "bytes": 7198,
+          "sha256": "0858952a93eb889f62a1ac6ed099aa9205ea81b4110c09dfd71292dcf3e8c5c8"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 272,
+          "mismatchPercent": 0.1328125,
+          "diff": {
+            "path": "diffs/atlas-filter-color.png",
+            "bytes": 17137,
+            "sha256": "9d7d46ed59ba1407f23ca16ed31b8c1e26e936da6b4a8bc3ba398f723b3433a4"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-01.webp",
+        "row": 4
+      },
+      {
+        "body": "atlas",
+        "lens": "normal",
+        "path": "src/objects/atlas/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 9758,
+          "sha256": "6ce9d9a9e690e8398dc5aa5024e80c69bf3b3f3a94e1327ba47eac9d49ec9fd1"
+        },
+        "branch": {
+          "bytes": 11176,
+          "sha256": "8867a7d200e627411e18dd1f227ee8cd278bb6f57cf876c4001b8c52ad040ea9"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 42748,
+          "mismatchPercent": 20.873046875,
+          "diff": {
+            "path": "diffs/atlas-normal.png",
+            "bytes": 26814,
+            "sha256": "2d29119721700b1705f2a7ad7f92513ccade1af633b538f13cc5e53028ffc217"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-01.webp",
+        "row": 5
+      },
+      {
+        "body": "calypso",
+        "lens": "elevation",
+        "path": "src/objects/calypso/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 9478,
+          "sha256": "8793417a18e6feb8912880d1c789fae81e8d75db694da6a91c9ced89d413ba4b"
+        },
+        "branch": {
+          "bytes": 9478,
+          "sha256": "8793417a18e6feb8912880d1c789fae81e8d75db694da6a91c9ced89d413ba4b"
+        },
+        "changed": false
+      },
+      {
+        "body": "calypso",
+        "lens": "false-color",
+        "path": "src/objects/calypso/prepared/minimaps/false-color.webp",
+        "reference": {
+          "bytes": 9208,
+          "sha256": "bcad22c7fdb4bf127e9031f1cb02642b3670ca258a9954c0a33ccaca4fedf4d7"
+        },
+        "branch": {
+          "bytes": 9838,
+          "sha256": "49f152d6e3c806a96c89660970c5458bc6d655248fa1df918c56b0191e15b94f"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 2696,
+          "mismatchPercent": 1.31640625,
+          "diff": {
+            "path": "diffs/calypso-false-color.png",
+            "bytes": 24862,
+            "sha256": "cbdee8194c571908ebd778d6a1a9c3272984f350f7ae2c0e9820c5253ff4a9a2"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-01.webp",
+        "row": 6
+      },
+      {
+        "body": "calypso",
+        "lens": "normal",
+        "path": "src/objects/calypso/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 13632,
+          "sha256": "3c579d2b62151a8ff83ceabbaa2ebba44243b6da1d7efe8405ffa2990e6d87eb"
+        },
+        "branch": {
+          "bytes": 10694,
+          "sha256": "3a24f9ca4818b86cf817ee314a271d8aa4241788db8e5c65e096f5f1e3ce7a6a"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 37365,
+          "mismatchPercent": 18.24462890625,
+          "diff": {
+            "path": "diffs/calypso-normal.png",
+            "bytes": 32378,
+            "sha256": "26cdf148c65acc85d8fd26d021197ae148e0cb62720afaad661152a2ce33f22e"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-01.webp",
+        "row": 7
+      },
+      {
+        "body": "comet-103p",
+        "lens": "constraints",
+        "path": "src/objects/comet-103p/prepared/minimaps/constraints.webp",
+        "reference": {
+          "bytes": 9838,
+          "sha256": "ed560b6faff52eb114ff11747b4e372d44d861560d3949de567fb17497193d54"
+        },
+        "branch": {
+          "bytes": 9838,
+          "sha256": "ed560b6faff52eb114ff11747b4e372d44d861560d3949de567fb17497193d54"
+        },
+        "changed": false
+      },
+      {
+        "body": "comet-103p",
+        "lens": "mri",
+        "path": "src/objects/comet-103p/prepared/minimaps/mri.webp",
+        "reference": {
+          "bytes": 17430,
+          "sha256": "e624f688c1ae192cb218d452bc63443bc5a0c7d7eecf8851ee45f8315fab6b0d"
+        },
+        "branch": {
+          "bytes": 16278,
+          "sha256": "0bb42f146df815108e679cdc516c1f9e2e9a926990b04bfece9ac94e07d3dfc9"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 3468,
+          "mismatchPercent": 2.6458740234375,
+          "diff": {
+            "path": "diffs/comet-103p-mri.png",
+            "bytes": 41014,
+            "sha256": "8acce54f2eb37499fa6c57ebf2b8f15f8fc24564a1df316bf2d687edf6553786"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-01.webp",
+        "row": 8
+      },
+      {
+        "body": "comet-103p",
+        "lens": "spectral-slope",
+        "path": "src/objects/comet-103p/prepared/minimaps/spectral-slope.webp",
+        "reference": {
+          "bytes": 3182,
+          "sha256": "044694bb4fb12dd78c4f87e569f0de7d215917c29d728befc29f3b67123876cb"
+        },
+        "branch": {
+          "bytes": 3182,
+          "sha256": "044694bb4fb12dd78c4f87e569f0de7d215917c29d728befc29f3b67123876cb"
+        },
+        "changed": false
+      },
+      {
+        "body": "comet-103p",
+        "lens": "temperature",
+        "path": "src/objects/comet-103p/prepared/minimaps/temperature.webp",
+        "reference": {
+          "bytes": 3074,
+          "sha256": "5c2f266e96181d2aa781a3a6965bb1b3196f1cfef6175a05dac4cde434d7f5f3"
+        },
+        "branch": {
+          "bytes": 3074,
+          "sha256": "5c2f266e96181d2aa781a3a6965bb1b3196f1cfef6175a05dac4cde434d7f5f3"
+        },
+        "changed": false
+      },
+      {
+        "body": "comet-67p",
+        "lens": "absorption",
+        "path": "src/objects/comet-67p/prepared/minimaps/absorption.webp",
+        "reference": {
+          "bytes": 47736,
+          "sha256": "c95d9478c13bc22f0edfa0d33b2ba8dfd3494db3c4243b9a2fac025d189e4676"
+        },
+        "branch": {
+          "bytes": 47736,
+          "sha256": "c95d9478c13bc22f0edfa0d33b2ba8dfd3494db3c4243b9a2fac025d189e4676"
+        },
+        "changed": false
+      },
+      {
+        "body": "comet-67p",
+        "lens": "albedo",
+        "path": "src/objects/comet-67p/prepared/minimaps/albedo.webp",
+        "reference": {
+          "bytes": 41232,
+          "sha256": "330989754ba55aa6ff32d16e778e5ebe0b82db4446b4810277d8140b79fc72b9"
+        },
+        "branch": {
+          "bytes": 41232,
+          "sha256": "330989754ba55aa6ff32d16e778e5ebe0b82db4446b4810277d8140b79fc72b9"
+        },
+        "changed": false
+      },
+      {
+        "body": "comet-67p",
+        "lens": "geology",
+        "path": "src/objects/comet-67p/prepared/minimaps/geology.webp",
+        "reference": {
+          "bytes": 10156,
+          "sha256": "c73ce2f2c814371f3ab8d651cc29c02c966875e637171f9a72498d9d2123025b"
+        },
+        "branch": {
+          "bytes": 10156,
+          "sha256": "c73ce2f2c814371f3ab8d651cc29c02c966875e637171f9a72498d9d2123025b"
+        },
+        "changed": false
+      },
+      {
+        "body": "comet-67p",
+        "lens": "ice",
+        "path": "src/objects/comet-67p/prepared/minimaps/ice.webp",
+        "reference": {
+          "bytes": 27380,
+          "sha256": "c52cc596b8276c1dfc8eaf34d4a634e2104a791625b6586f63bc0ead7a272c15"
+        },
+        "branch": {
+          "bytes": 27380,
+          "sha256": "c52cc596b8276c1dfc8eaf34d4a634e2104a791625b6586f63bc0ead7a272c15"
+        },
+        "changed": false
+      },
+      {
+        "body": "comet-67p",
+        "lens": "osiris",
+        "path": "src/objects/comet-67p/prepared/minimaps/osiris.webp",
+        "reference": {
+          "bytes": 58968,
+          "sha256": "e8296bd0129bd58d97beb3e52370cd00aacd60b2a81a9a2e5615745c2eabdecd"
+        },
+        "branch": {
+          "bytes": 60610,
+          "sha256": "b26307e2cc285052061c7faca59925fc016024202cdb137dbd5e96632ae97326"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 10168,
+          "mismatchPercent": 7.757568359375,
+          "diff": {
+            "path": "diffs/comet-67p-osiris.png",
+            "bytes": 87139,
+            "sha256": "838791baa997f82a6fba7825dcd8adc731fe5a8af210bf3b832767a82c01d064"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-01.webp",
+        "row": 9
+      },
+      {
+        "body": "comet-67p",
+        "lens": "regions",
+        "path": "src/objects/comet-67p/prepared/minimaps/regions.webp",
+        "reference": {
+          "bytes": 4288,
+          "sha256": "ab09325ba964db0b8fd92c5d85ae75372b68323aa2c8fb4b90914ce57d106ef5"
+        },
+        "branch": {
+          "bytes": 4288,
+          "sha256": "ab09325ba964db0b8fd92c5d85ae75372b68323aa2c8fb4b90914ce57d106ef5"
+        },
+        "changed": false
+      },
+      {
+        "body": "comet-67p",
+        "lens": "slope",
+        "path": "src/objects/comet-67p/prepared/minimaps/slope.webp",
+        "reference": {
+          "bytes": 40740,
+          "sha256": "a054b8e4993c0e522447b416b248a5b1035b16d75b40f190cfc87958cc803cd7"
+        },
+        "branch": {
+          "bytes": 40740,
+          "sha256": "a054b8e4993c0e522447b416b248a5b1035b16d75b40f190cfc87958cc803cd7"
+        },
+        "changed": false
+      },
+      {
+        "body": "comet-81p",
+        "lens": "navcam",
+        "path": "src/objects/comet-81p/prepared/minimaps/navcam.webp",
+        "reference": {
+          "bytes": 13486,
+          "sha256": "3a69304cac05618b281eda9841cb29ecdb770682db23bde986a714a71f0a546f"
+        },
+        "branch": {
+          "bytes": 12698,
+          "sha256": "a6e0e3d7f66869584aede564e3f0da4891a14f784751555b545b15c108fcdaf5"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 3161,
+          "mismatchPercent": 2.411651611328125,
+          "diff": {
+            "path": "diffs/comet-81p-navcam.png",
+            "bytes": 32574,
+            "sha256": "b8ff044c03e8de5596c3b215133d722f72018b074d056ba554e10a0329bac5db"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-01.webp",
+        "row": 10
+      },
+      {
+        "body": "comet-9p",
+        "lens": "constraints",
+        "path": "src/objects/comet-9p/prepared/minimaps/constraints.webp",
+        "reference": {
+          "bytes": 8776,
+          "sha256": "72dd3dd6838797fba0ca21ffad27e501322f5f312f186fa6515220d2d44f360e"
+        },
+        "branch": {
+          "bytes": 8776,
+          "sha256": "72dd3dd6838797fba0ca21ffad27e501322f5f312f186fa6515220d2d44f360e"
+        },
+        "changed": false
+      },
+      {
+        "body": "comet-9p",
+        "lens": "deep-impact",
+        "path": "src/objects/comet-9p/prepared/minimaps/deep-impact.webp",
+        "reference": {
+          "bytes": 12636,
+          "sha256": "2b60b595aca080693f52546cff3006fabb9d2651a4e58eaca2d4049834c122fe"
+        },
+        "branch": {
+          "bytes": 12470,
+          "sha256": "88f2e4f87950744b10f1e377795f0973169488d74f4ac20921223d823310146f"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 1440,
+          "mismatchPercent": 1.0986328125,
+          "diff": {
+            "path": "diffs/comet-9p-deep-impact.png",
+            "bytes": 31137,
+            "sha256": "4acb7903531a3ed0b5dd247fbbd0adb63d3302516312ebcc075dce85e5883f8b"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-02.webp",
+        "row": 1
+      },
+      {
+        "body": "comet-9p",
+        "lens": "next",
+        "path": "src/objects/comet-9p/prepared/minimaps/next.webp",
+        "reference": {
+          "bytes": 19554,
+          "sha256": "3081b480818487c3a15c58c12528ede23b170f4c874cc38063ffb180450741f3"
+        },
+        "branch": {
+          "bytes": 18834,
+          "sha256": "b9c3ac7a37838259ec17e5bbb9f5e5e6d180f697fc8da122d0fa20f62de022ce"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 2611,
+          "mismatchPercent": 1.992034912109375,
+          "diff": {
+            "path": "diffs/comet-9p-next.png",
+            "bytes": 43485,
+            "sha256": "f2f396273438e96028869116d861e039f76008624ef7e91e5016a4d1240be205"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-02.webp",
+        "row": 2
+      },
+      {
+        "body": "comet-9p",
+        "lens": "spectral-slope",
+        "path": "src/objects/comet-9p/prepared/minimaps/spectral-slope.webp",
+        "reference": {
+          "bytes": 4130,
+          "sha256": "09373cbd6063f6a558d38d9e35985053227b0b4475603b7dbd44d405e46e9863"
+        },
+        "branch": {
+          "bytes": 4130,
+          "sha256": "09373cbd6063f6a558d38d9e35985053227b0b4475603b7dbd44d405e46e9863"
+        },
+        "changed": false
+      },
+      {
+        "body": "comet-9p",
+        "lens": "temperature",
+        "path": "src/objects/comet-9p/prepared/minimaps/temperature.webp",
+        "reference": {
+          "bytes": 4056,
+          "sha256": "a98cb99e0c2c80405983f3008a339801e55357cf2d872fc565bca785593cf5c5"
+        },
+        "branch": {
+          "bytes": 4056,
+          "sha256": "a98cb99e0c2c80405983f3008a339801e55357cf2d872fc565bca785593cf5c5"
+        },
+        "changed": false
+      },
+      {
+        "body": "daphnis",
+        "lens": "elevation",
+        "path": "src/objects/daphnis/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 7384,
+          "sha256": "82585bed56df2093f7072931ddf7db844e5def1afab5ad77c9b97742e4e48c4e"
+        },
+        "branch": {
+          "bytes": 7384,
+          "sha256": "82585bed56df2093f7072931ddf7db844e5def1afab5ad77c9b97742e4e48c4e"
+        },
+        "changed": false
+      },
+      {
+        "body": "daphnis",
+        "lens": "filter-color",
+        "path": "src/objects/daphnis/prepared/minimaps/filter-color.webp",
+        "reference": {
+          "bytes": 5204,
+          "sha256": "cd271f76cdca3bc5c4b54474ec622acdf729aade10a3f8c41e807845c16a8671"
+        },
+        "branch": {
+          "bytes": 5434,
+          "sha256": "7236ca6955bdd4cc6d5dcf12dcbee1393c001d8c8f23d3b9c7c8a2c8351c1b4f"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 6242,
+          "mismatchPercent": 3.0478515625,
+          "diff": {
+            "path": "diffs/daphnis-filter-color.png",
+            "bytes": 16390,
+            "sha256": "09a9bcd5165960b8ac0ddb947ecc43f4d7900a4178dcb8e50cf724398f017d88"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-02.webp",
+        "row": 3
+      },
+      {
+        "body": "daphnis",
+        "lens": "normal",
+        "path": "src/objects/daphnis/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 5902,
+          "sha256": "860fd8fced3d713e05acce11059453bf8462ce095ff76209d642fcff9c9a2376"
+        },
+        "branch": {
+          "bytes": 8094,
+          "sha256": "b93cfa770c931d17aff424e176e6094a3ac0d015ef554f2161d26b170086bf3a"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 63636,
+          "mismatchPercent": 31.072265625,
+          "diff": {
+            "path": "diffs/daphnis-normal.png",
+            "bytes": 17424,
+            "sha256": "a28a079eebfbe980a8de1b80396fad980067d57af23c6ac58682c9e2f84503c2"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-02.webp",
+        "row": 4
+      },
+      {
+        "body": "didymos",
+        "lens": "albedo",
+        "path": "src/objects/didymos/prepared/minimaps/albedo.webp",
+        "reference": {
+          "bytes": 6390,
+          "sha256": "23ed50b625d72a69dfc1ea8fb1a705217678e76b6c19b645c49e6064bc8952af"
+        },
+        "branch": {
+          "bytes": 6390,
+          "sha256": "23ed50b625d72a69dfc1ea8fb1a705217678e76b6c19b645c49e6064bc8952af"
+        },
+        "changed": false
+      },
+      {
+        "body": "didymos",
+        "lens": "draco",
+        "path": "src/objects/didymos/prepared/minimaps/draco.webp",
+        "reference": {
+          "bytes": 9804,
+          "sha256": "476162bcaa59b1ab19b5c491fdcf98afed3ff87b77b291feffc7c3073a4bbcf5"
+        },
+        "branch": {
+          "bytes": 6342,
+          "sha256": "cff43fee6181bd3f429eced7c3fb96af13d0466b064e29e82b1fa8b4d478ff36"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 5003,
+          "mismatchPercent": 2.44287109375,
+          "diff": {
+            "path": "diffs/didymos-draco.png",
+            "bytes": 27179,
+            "sha256": "0c349783f2ac5454887bcccb2521c2d5ae764b6295c48135960e11f817fd0985"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-02.webp",
+        "row": 5
+      },
+      {
+        "body": "didymos",
+        "lens": "elevation",
+        "path": "src/objects/didymos/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 8730,
+          "sha256": "ece2e28b1480019990a53f5506089c63476ed66054601aafbc58b60ff26bb0ef"
+        },
+        "branch": {
+          "bytes": 8730,
+          "sha256": "ece2e28b1480019990a53f5506089c63476ed66054601aafbc58b60ff26bb0ef"
+        },
+        "changed": false
+      },
+      {
+        "body": "didymos",
+        "lens": "shape",
+        "path": "src/objects/didymos/prepared/minimaps/shape.webp",
+        "reference": {
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+        },
+        "branch": {
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+        },
+        "changed": false
+      },
+      {
+        "body": "dimorphos",
+        "lens": "albedo",
+        "path": "src/objects/dimorphos/prepared/minimaps/albedo.webp",
+        "reference": {
+          "bytes": 8124,
+          "sha256": "e7ccb5233be78eff69cde9b2321c4d0a80cb0ca8d8318dd035c8ba271e48345a"
+        },
+        "branch": {
+          "bytes": 8124,
+          "sha256": "e7ccb5233be78eff69cde9b2321c4d0a80cb0ca8d8318dd035c8ba271e48345a"
+        },
+        "changed": false
+      },
+      {
+        "body": "dimorphos",
+        "lens": "draco",
+        "path": "src/objects/dimorphos/prepared/minimaps/draco.webp",
+        "reference": {
+          "bytes": 17596,
+          "sha256": "dad9a65a245591bd24dd103c4a2a7a993e31fcc5baab95bbc7d8c4d17a8f2e75"
+        },
+        "branch": {
+          "bytes": 20016,
+          "sha256": "1f6f809de01bf2e3db60058d2dd7f232838851ccf9ee1dcc6b600c5380fc4b66"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 3031,
+          "mismatchPercent": 1.47998046875,
+          "diff": {
+            "path": "diffs/dimorphos-draco.png",
+            "bytes": 41858,
+            "sha256": "b7000e569b19fe8b07d2b628d3170c5d8fd4217efa0493632b61cec4fd9282b7"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-02.webp",
+        "row": 6
+      },
+      {
+        "body": "dimorphos",
+        "lens": "elevation",
+        "path": "src/objects/dimorphos/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 12988,
+          "sha256": "495cd437f29a45d2da35cc3dc44c17bbfa4611137e42d3212899761055b40c54"
+        },
+        "branch": {
+          "bytes": 12988,
+          "sha256": "495cd437f29a45d2da35cc3dc44c17bbfa4611137e42d3212899761055b40c54"
+        },
+        "changed": false
+      },
+      {
+        "body": "dimorphos",
+        "lens": "shape",
+        "path": "src/objects/dimorphos/prepared/minimaps/shape.webp",
+        "reference": {
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+        },
+        "branch": {
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+        },
+        "changed": false
+      },
+      {
+        "body": "dimorphos",
+        "lens": "slope",
+        "path": "src/objects/dimorphos/prepared/minimaps/slope.webp",
+        "reference": {
+          "bytes": 168022,
+          "sha256": "ea9c3bdced0a6cf38fd73a6cf5f99e88584e037bc5c5eb4496bb9c91613f1fdf"
+        },
+        "branch": {
+          "bytes": 168022,
+          "sha256": "ea9c3bdced0a6cf38fd73a6cf5f99e88584e037bc5c5eb4496bb9c91613f1fdf"
+        },
+        "changed": false
+      },
+      {
+        "body": "donaldjohanson",
+        "lens": "llorri",
+        "path": "src/objects/donaldjohanson/prepared/minimaps/llorri.webp",
+        "reference": {
+          "bytes": 20606,
+          "sha256": "01c24f4166d5d3a8e77767f4bf94cf54fa784642e8357afe475e0ef25842c126"
+        },
+        "branch": {
+          "bytes": 21142,
+          "sha256": "03a840948fc2675c1b09b7dde52ed2d51df8c3b34d0ad4fbb10d16f65e0e5012"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 1654,
+          "mismatchPercent": 0.8076171875,
+          "diff": {
+            "path": "diffs/donaldjohanson-llorri.png",
+            "bytes": 56568,
+            "sha256": "ffa756f70ef104f82aeca19a7fe272ebc2b69c732bb120b25bec6f43abd4eb6d"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-02.webp",
+        "row": 7
+      },
+      {
+        "body": "donaldjohanson",
+        "lens": "shape",
+        "path": "src/objects/donaldjohanson/prepared/minimaps/shape.webp",
+        "reference": {
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+        },
+        "branch": {
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+        },
+        "changed": false
+      },
+      {
+        "body": "epimetheus",
+        "lens": "elevation",
+        "path": "src/objects/epimetheus/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 15332,
+          "sha256": "d8118ce02dc51cff3c37858ff4e7d274885770dbc0af51df3a4a36bf9a0303a7"
+        },
+        "branch": {
+          "bytes": 15332,
+          "sha256": "d8118ce02dc51cff3c37858ff4e7d274885770dbc0af51df3a4a36bf9a0303a7"
+        },
+        "changed": false
+      },
+      {
+        "body": "epimetheus",
+        "lens": "filter-color",
+        "path": "src/objects/epimetheus/prepared/minimaps/filter-color.webp",
+        "reference": {
+          "bytes": 6730,
+          "sha256": "10ca09ac599b9eeddf6cff458ab2e6a530bc64a8711dcfebfaa0519d2e64b99b"
+        },
+        "branch": {
+          "bytes": 6678,
+          "sha256": "ec129d0594b0910e1671de06b0e30f5888e31623d5f9b3e91ed1c7c3c23ae903"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 0,
+          "mismatchPercent": 0,
+          "diff": {
+            "path": "diffs/epimetheus-filter-color.png",
+            "bytes": 19508,
+            "sha256": "80253f17190a7325269f3501a507361838ca2698cf45854c80f3e84c137b81f1"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-02.webp",
+        "row": 8
+      },
+      {
+        "body": "epimetheus",
+        "lens": "normal",
+        "path": "src/objects/epimetheus/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 32340,
+          "sha256": "8d02cb18dd1944273d3e0fbe4cb751bc6e0317ea75ef2c430c650e7f679b4a06"
+        },
+        "branch": {
+          "bytes": 35716,
+          "sha256": "e7c67c26c74ce36ed833680367f994e4a4ba9d448a09846ac3cd9e807326e7c5"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 55209,
+          "mismatchPercent": 26.95751953125,
+          "diff": {
+            "path": "diffs/epimetheus-normal.png",
+            "bytes": 66191,
+            "sha256": "6d502cbbc39284e961fff9bbb82c1add1e6b7766414f4ca882692589f39fa0d8"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-02.webp",
+        "row": 9
+      },
+      {
+        "body": "gaspra",
+        "lens": "calibrated",
+        "path": "src/objects/gaspra/prepared/minimaps/calibrated.webp",
+        "reference": {
+          "bytes": 6568,
+          "sha256": "11384c9589afcd72d5759b54363b90b01fe1fa183fe9685e19b4a0a1c03db617"
+        },
+        "branch": {
+          "bytes": 7798,
+          "sha256": "3cc7f6c1149c11b06fe75debc804490dea96dbeae9782e41a3cf14ea4d06d0c0"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 3343,
+          "mismatchPercent": 1.63232421875,
+          "diff": {
+            "path": "diffs/gaspra-calibrated.png",
+            "bytes": 21726,
+            "sha256": "5660d01bbdaaaa462c972782cf8716485c0bcd06a3f3727e3dec7ac942d3da06"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-02.webp",
+        "row": 10
+      },
+      {
+        "body": "gaspra",
+        "lens": "elevation",
+        "path": "src/objects/gaspra/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 8848,
+          "sha256": "736fa7e8aeacf1871fe1dc57ee5f218690babb5034ff09451003ebdff8e9448b"
+        },
+        "branch": {
+          "bytes": 8848,
+          "sha256": "736fa7e8aeacf1871fe1dc57ee5f218690babb5034ff09451003ebdff8e9448b"
+        },
+        "changed": false
+      },
+      {
+        "body": "gaspra",
+        "lens": "normal",
+        "path": "src/objects/gaspra/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 21022,
+          "sha256": "5bbeb73e1f4f09079f4bfb0b035269c3111485828a5ec945946c61d7b87b95bf"
+        },
+        "branch": {
+          "bytes": 21022,
+          "sha256": "5bbeb73e1f4f09079f4bfb0b035269c3111485828a5ec945946c61d7b87b95bf"
+        },
+        "changed": false
+      },
+      {
+        "body": "helene",
+        "lens": "elevation",
+        "path": "src/objects/helene/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 15140,
+          "sha256": "ec09412ab9fbdac7663cea6bcacf1b2ba1a7038196c48a3d9d73a5e8980a22e6"
+        },
+        "branch": {
+          "bytes": 15140,
+          "sha256": "ec09412ab9fbdac7663cea6bcacf1b2ba1a7038196c48a3d9d73a5e8980a22e6"
+        },
+        "changed": false
+      },
+      {
+        "body": "helene",
+        "lens": "false-color",
+        "path": "src/objects/helene/prepared/minimaps/false-color.webp",
+        "reference": {
+          "bytes": 8432,
+          "sha256": "6e5acb72b23168e20c0b9f279f87068867886f33073b886d94c6f4858b599f84"
+        },
+        "branch": {
+          "bytes": 8592,
+          "sha256": "0c17fa8b51216dc133432c944eeb238c91175c503731df138a4fd79ca47c47e6"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 171,
+          "mismatchPercent": 0.08349609375,
+          "diff": {
+            "path": "diffs/helene-false-color.png",
+            "bytes": 25882,
+            "sha256": "3ec50d69859da6fedaa2e986dc89864a9eb864839eebe60bac4becf7b0fbf47e"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-03.webp",
+        "row": 1
+      },
+      {
+        "body": "helene",
+        "lens": "normal",
+        "path": "src/objects/helene/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 20454,
+          "sha256": "5d849ea218aa5187f4889258bfc7aa648c6e99f3c05fbbe9ba6f3af62498e984"
+        },
+        "branch": {
+          "bytes": 18726,
+          "sha256": "33731e5eb03b0943987be1170ed51ea5ea6fde012730cec1f42b89dad1277d67"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 92342,
+          "mismatchPercent": 45.0888671875,
+          "diff": {
+            "path": "diffs/helene-normal.png",
+            "bytes": 29206,
+            "sha256": "97241879bed398fcceee754a8ce5275ea1c8d4cb2edd51cf6ed4898f70c66a2a"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-03.webp",
+        "row": 2
+      },
+      {
+        "body": "hyperion",
+        "lens": "elevation",
+        "path": "src/objects/hyperion/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 15664,
+          "sha256": "b8e6e78af253aebebe9288191aeb09a2ba75de156f12b2c11334c79ddca077e0"
+        },
+        "branch": {
+          "bytes": 15664,
+          "sha256": "b8e6e78af253aebebe9288191aeb09a2ba75de156f12b2c11334c79ddca077e0"
+        },
+        "changed": false
+      },
+      {
+        "body": "hyperion",
+        "lens": "filter-color",
+        "path": "src/objects/hyperion/prepared/minimaps/filter-color.webp",
+        "reference": {
+          "bytes": 18454,
+          "sha256": "1aa50cf9accd4c596be0c66979cf17a9c9c784c84c1ec8c5496a5d1d34123359"
+        },
+        "branch": {
+          "bytes": 18592,
+          "sha256": "528b8e5b07ba16ff86bbaa4c907c1590abe34441c3156597bb8066cda32d30aa"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 46,
+          "mismatchPercent": 0.0224609375,
+          "diff": {
+            "path": "diffs/hyperion-filter-color.png",
+            "bytes": 47336,
+            "sha256": "4fda84cb6aa1d1816e01809b3b2c40868269f6b20a0c63ad4e47e6c763109756"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-03.webp",
+        "row": 3
+      },
+      {
+        "body": "hyperion",
+        "lens": "normal",
+        "path": "src/objects/hyperion/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 43988,
+          "sha256": "010db482ea0825f1d30042106107e3cb7d5778f213a411f21b2b75d2d97df5ce"
+        },
+        "branch": {
+          "bytes": 45380,
+          "sha256": "6aa5e8e0d30ad572a1fd0ced793c6a579dda335f918f2dc1035fb9218d06bca1"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 12103,
+          "mismatchPercent": 5.90966796875,
+          "diff": {
+            "path": "diffs/hyperion-normal.png",
+            "bytes": 103509,
+            "sha256": "98c56dd283a8dd10f516b9e36e3652af8273831b24308ecd45e09b58c5149a4c"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-03.webp",
+        "row": 4
+      },
+      {
+        "body": "ida",
+        "lens": "calibrated",
+        "path": "src/objects/ida/prepared/minimaps/calibrated.webp",
+        "reference": {
+          "bytes": 6900,
+          "sha256": "936b2f57fdcb6d26070a57f907d3b7756fc48ed388c7e93c71352c080a6190f2"
+        },
+        "branch": {
+          "bytes": 8604,
+          "sha256": "239dbd855ea24039ffcd02cdcebd3bf09999ef686c4138a785db8051734c7210"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 786,
+          "mismatchPercent": 0.3837890625,
+          "diff": {
+            "path": "diffs/ida-calibrated.png",
+            "bytes": 21045,
+            "sha256": "dc082c8660e2e959e28432a3ec2c274e735931b015802db72d41b4a93835238c"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-03.webp",
+        "row": 5
+      },
+      {
+        "body": "ida",
+        "lens": "elevation",
+        "path": "src/objects/ida/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 11318,
+          "sha256": "3d21cdff683207b9846992d211ba082c1b9a1ca1b1e25c9833dcf83b3327fba2"
+        },
+        "branch": {
+          "bytes": 11318,
+          "sha256": "3d21cdff683207b9846992d211ba082c1b9a1ca1b1e25c9833dcf83b3327fba2"
+        },
+        "changed": false
+      },
+      {
+        "body": "ida",
+        "lens": "normal",
+        "path": "src/objects/ida/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 24534,
+          "sha256": "5e90483a07be8d129518b6828c66407c16fcf58a7a83b2086ad82142351f6a03"
+        },
+        "branch": {
+          "bytes": 24534,
+          "sha256": "5e90483a07be8d129518b6828c66407c16fcf58a7a83b2086ad82142351f6a03"
+        },
+        "changed": false
+      },
+      {
+        "body": "itokawa",
+        "lens": "amica",
+        "path": "src/objects/itokawa/prepared/minimaps/amica.webp",
+        "reference": {
+          "bytes": 48930,
+          "sha256": "c4bef8180ffe6ea140f426e85232512dc8f2a08fb6a0b27c832b1acf964615b6"
+        },
+        "branch": {
+          "bytes": 52294,
+          "sha256": "7a11f64a6f18e3e346054c3a44a6a7b90f17dbb04f49c920d021ddda68cd4bf0"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 16690,
+          "mismatchPercent": 8.1494140625,
+          "diff": {
+            "path": "diffs/itokawa-amica.png",
+            "bytes": 90423,
+            "sha256": "0a07bdf25d8a5acab67c75ce60d899bbfc7cc4ad961da582aaa6159fd7b6e93f"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-03.webp",
+        "row": 6
+      },
+      {
+        "body": "itokawa",
+        "lens": "elevation",
+        "path": "src/objects/itokawa/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 21892,
+          "sha256": "0d3b2c675abad14df2466228151c2b216527fd795f3db0279b3f796f8bc258aa"
+        },
+        "branch": {
+          "bytes": 21892,
+          "sha256": "0d3b2c675abad14df2466228151c2b216527fd795f3db0279b3f796f8bc258aa"
+        },
+        "changed": false
+      },
+      {
+        "body": "janus",
+        "lens": "elevation",
+        "path": "src/objects/janus/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 15628,
+          "sha256": "23310f1302bd263cccd2dfdf2947a70fe8582633f4494c2367fe39609dbc4cbb"
+        },
+        "branch": {
+          "bytes": 15628,
+          "sha256": "23310f1302bd263cccd2dfdf2947a70fe8582633f4494c2367fe39609dbc4cbb"
+        },
+        "changed": false
+      },
+      {
+        "body": "janus",
+        "lens": "filter-color",
+        "path": "src/objects/janus/prepared/minimaps/filter-color.webp",
+        "reference": {
+          "bytes": 7678,
+          "sha256": "12c98554dfcd8b35015d74384401622f73ea96727446dd3e0d94456e1dbc1263"
+        },
+        "branch": {
+          "bytes": 7702,
+          "sha256": "982c31c1e5b03238f7deb045a398d2b086bd79987c319ca5ba93f4784a749479"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 61,
+          "mismatchPercent": 0.02978515625,
+          "diff": {
+            "path": "diffs/janus-filter-color.png",
+            "bytes": 24133,
+            "sha256": "56a3d9b50beb2097972e3e896bf69b99c6ded18a5da9dec8981a8c09ede82496"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-03.webp",
+        "row": 7
+      },
+      {
+        "body": "janus",
+        "lens": "normal",
+        "path": "src/objects/janus/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 18902,
+          "sha256": "f377edf4fcba9419dbec8ccfd653df1404cbe322d92311b954fa31e989d9e67e"
+        },
+        "branch": {
+          "bytes": 21144,
+          "sha256": "85660f2f4f120e30cd083d560904d57e0dae3fd3a742126109078f31a0cb8216"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 39654,
+          "mismatchPercent": 19.3623046875,
+          "diff": {
+            "path": "diffs/janus-normal.png",
+            "bytes": 50380,
+            "sha256": "143e883abf013256051e506d0a35fd94d6f8cfe7c8b4bc8b478cbfb04d122f3c"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-03.webp",
+        "row": 8
+      },
+      {
+        "body": "larissa",
+        "lens": "elevation",
+        "path": "src/objects/larissa/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 11170,
+          "sha256": "44be6758828c88c177017921956c9817b9ee8cd608de5e295c206d67fc3c0f5f"
+        },
+        "branch": {
+          "bytes": 11170,
+          "sha256": "44be6758828c88c177017921956c9817b9ee8cd608de5e295c206d67fc3c0f5f"
+        },
+        "changed": false
+      },
+      {
+        "body": "larissa",
+        "lens": "normal",
+        "path": "src/objects/larissa/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 6690,
+          "sha256": "329ea8c5f04a650498a40d5c8be896c121610121f76038b4272b3d0c1f1758ff"
+        },
+        "branch": {
+          "bytes": 8186,
+          "sha256": "dcc6c2cda4e3383e6f9395a2e8d991b77221b3376bf14749f078769253249f0f"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 56342,
+          "mismatchPercent": 27.510742187499996,
+          "diff": {
+            "path": "diffs/larissa-normal.png",
+            "bytes": 18766,
+            "sha256": "03be21755e9ec5f65cf02e33fc00072b9cbf81c5a21293bee36096726aed3822"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-03.webp",
+        "row": 9
+      },
+      {
+        "body": "lutetia",
+        "lens": "elevation",
+        "path": "src/objects/lutetia/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 13866,
+          "sha256": "acf728789c7a55400ab7276a2142ec306a5af20b16340264cd31562c7df6d2d3"
+        },
+        "branch": {
+          "bytes": 13866,
+          "sha256": "acf728789c7a55400ab7276a2142ec306a5af20b16340264cd31562c7df6d2d3"
+        },
+        "changed": false
+      },
+      {
+        "body": "lutetia",
+        "lens": "osiris",
+        "path": "src/objects/lutetia/prepared/minimaps/osiris.webp",
+        "reference": {
+          "bytes": 30752,
+          "sha256": "dd015a835dc66984b3fbe8796674ec31f8f7eef81bb9698bb9525f7dca42f95d"
+        },
+        "branch": {
+          "bytes": 29842,
+          "sha256": "46b2cfd611ca94145dff80d8f7a9bf069715b58e170452b85c8b1ca4e5f03c47"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 20705,
+          "mismatchPercent": 10.10986328125,
+          "diff": {
+            "path": "diffs/lutetia-osiris.png",
+            "bytes": 59673,
+            "sha256": "6af48c3fdcbcb0eeb24a8ae88970e06d0327f1a4c0d284d9b9ac78031f116737"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-03.webp",
+        "row": 10
+      },
+      {
+        "body": "lutetia",
+        "lens": "shape",
+        "path": "src/objects/lutetia/prepared/minimaps/shape.webp",
+        "reference": {
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+        },
+        "branch": {
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+        },
+        "changed": false
+      },
+      {
+        "body": "mathilde",
+        "lens": "elevation",
+        "path": "src/objects/mathilde/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 16474,
+          "sha256": "d7e841a69f2526a4f47163f2b10ab3f712868913a80e9dd856048955dce9fd95"
+        },
+        "branch": {
+          "bytes": 16474,
+          "sha256": "d7e841a69f2526a4f47163f2b10ab3f712868913a80e9dd856048955dce9fd95"
+        },
+        "changed": false
+      },
+      {
+        "body": "mathilde",
+        "lens": "near-msi",
+        "path": "src/objects/mathilde/prepared/minimaps/near-msi.webp",
+        "reference": {
+          "bytes": 12498,
+          "sha256": "142e74730a054b0dc9aa015709492231820a8a77153fb73ba2f447b84ad71e74"
+        },
+        "branch": {
+          "bytes": 10098,
+          "sha256": "bc83b454af83dcf9083b006b96be5ba931687cfdff227a1f54bf7fbd7f6e56a7"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 11173,
+          "mismatchPercent": 5.45556640625,
+          "diff": {
+            "path": "diffs/mathilde-near-msi.png",
+            "bytes": 31438,
+            "sha256": "eb5d58e46175413ebabc7ade95c5a89d2644f7e97e0a3c556522e6a0e37bc177"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-04.webp",
+        "row": 1
+      },
+      {
+        "body": "mathilde",
+        "lens": "normal",
+        "path": "src/objects/mathilde/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 15302,
+          "sha256": "cbc7dbd3977dbd8feb044e13ec49a2b2d7eefd30af96ea577b4a64f13cd821cb"
+        },
+        "branch": {
+          "bytes": 15302,
+          "sha256": "cbc7dbd3977dbd8feb044e13ec49a2b2d7eefd30af96ea577b4a64f13cd821cb"
+        },
+        "changed": false
+      },
+      {
+        "body": "methone",
+        "lens": "normal",
+        "path": "src/objects/methone/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 4374,
+          "sha256": "a6dfc8dc493d11690c05ba3191b27598a2e40cb0ddcb2675814a1b7a53826726"
+        },
+        "branch": {
+          "bytes": 5148,
+          "sha256": "b8649aa1fe6849f269cb8c84d2c6292c661c77e2eb8199013b95840faf94474f"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 22183,
+          "mismatchPercent": 16.924285888671875,
+          "diff": {
+            "path": "diffs/methone-normal.png",
+            "bytes": 8444,
+            "sha256": "6f42129a3ba8c4bec0a80c1c92cf4ad381cf8ebb52f9ae818ea615e7ba0ea8d6"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-04.webp",
+        "row": 2
+      },
+      {
+        "body": "metis",
+        "lens": "normal",
+        "path": "src/objects/metis/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 5382,
+          "sha256": "c28f5c4b7c1f56375eb8e84097c6258f7b91d2aacd9eded9a3159fb24a3335e6"
+        },
+        "branch": {
+          "bytes": 5628,
+          "sha256": "063f037bc0be3aecf108ba2a3b89618b27d14d6fa157c8af0010582bd79a1beb"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 15565,
+          "mismatchPercent": 11.875152587890625,
+          "diff": {
+            "path": "diffs/metis-normal.png",
+            "bytes": 14729,
+            "sha256": "644423a093f0c3e100347976b2b22d8dc1973af1b3ab319bca3f43c407009ee5"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-04.webp",
+        "row": 3
+      },
+      {
+        "body": "pallene",
+        "lens": "normal",
+        "path": "src/objects/pallene/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 4208,
+          "sha256": "5a659252a8a19030269aa8511bebeaea15cdb1a4ff82c7b799fd92b8b89671c7"
+        },
+        "branch": {
+          "bytes": 4270,
+          "sha256": "41a7c1170aef3b404d06823a69917fa3c410333ed63edab3b7a3cd6647737789"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 12038,
+          "mismatchPercent": 9.18426513671875,
+          "diff": {
+            "path": "diffs/pallene-normal.png",
+            "bytes": 9581,
+            "sha256": "9e38ff0eb17f2f4d4c1504c8139db216c845fab7e95dd7c615e45116198636d1"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-04.webp",
+        "row": 4
+      },
+      {
+        "body": "pan",
+        "lens": "elevation",
+        "path": "src/objects/pan/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 8384,
+          "sha256": "02a3056eb2ffe96c3b37f6d6fa0b5c62f3a48588680fabc1a6989ec6e39d187e"
+        },
+        "branch": {
+          "bytes": 8384,
+          "sha256": "02a3056eb2ffe96c3b37f6d6fa0b5c62f3a48588680fabc1a6989ec6e39d187e"
+        },
+        "changed": false
+      },
+      {
+        "body": "pan",
+        "lens": "filter-color",
+        "path": "src/objects/pan/prepared/minimaps/filter-color.webp",
+        "reference": {
+          "bytes": 6926,
+          "sha256": "d41ea13fae9ffc0e3ed91e02dd88c26deb77fab24f04aae0ae593bcf7404588f"
+        },
+        "branch": {
+          "bytes": 7674,
+          "sha256": "c2ee39d88894de2e51fbdd89018c3b746eaa18e909f5c725dd1cacaa404426d0"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 756,
+          "mismatchPercent": 0.369140625,
+          "diff": {
+            "path": "diffs/pan-filter-color.png",
+            "bytes": 17972,
+            "sha256": "0e84a1e50cbd9ce1e6842997721fcf1756c167b678bdcf127a2702c83bfc9c87"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-04.webp",
+        "row": 5
+      },
+      {
+        "body": "pan",
+        "lens": "normal",
+        "path": "src/objects/pan/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 9670,
+          "sha256": "898cac732f46b87fd7f07bd43135a0dba3bc69c0f928b5d1d3ee495f99b01226"
+        },
+        "branch": {
+          "bytes": 10918,
+          "sha256": "7b2a4058c61e5d58e61144da5509821c296d0398502b3043f18d42d7166c05f1"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 2736,
+          "mismatchPercent": 1.3359375,
+          "diff": {
+            "path": "diffs/pan-normal.png",
+            "bytes": 35027,
+            "sha256": "44ca1c7443825e0486c0a9e556bcf18033ba42d0c14d4eff630f692be603fc02"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-04.webp",
+        "row": 6
+      },
+      {
+        "body": "pandora",
+        "lens": "elevation",
+        "path": "src/objects/pandora/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 12302,
+          "sha256": "2e6a1f990edf8c86f74f70e7784f599624ec2352ee9abf2b78f8def7aee60cf8"
+        },
+        "branch": {
+          "bytes": 12302,
+          "sha256": "2e6a1f990edf8c86f74f70e7784f599624ec2352ee9abf2b78f8def7aee60cf8"
+        },
+        "changed": false
+      },
+      {
+        "body": "pandora",
+        "lens": "filter-color",
+        "path": "src/objects/pandora/prepared/minimaps/filter-color.webp",
+        "reference": {
+          "bytes": 8188,
+          "sha256": "c0f1ee8c42686f391665d7cc5b295f428ff3d6e1537fbc6e9948eb8c931314b0"
+        },
+        "branch": {
+          "bytes": 8048,
+          "sha256": "4afba84a4ca4ceaf185511507b65473b20e8c43fc636014ab67e29274fd44cc3"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 485,
+          "mismatchPercent": 0.23681640624999997,
+          "diff": {
+            "path": "diffs/pandora-filter-color.png",
+            "bytes": 22312,
+            "sha256": "4db18454b8f9037cef3f3dee97da491b3e2514432a7adb75615b7e3d344cfeda"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-04.webp",
+        "row": 7
+      },
+      {
+        "body": "pandora",
+        "lens": "normal",
+        "path": "src/objects/pandora/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 16458,
+          "sha256": "93d5885605d873e878c605691375e37c2fb6aac722fc95a66012639f0e0f488c"
+        },
+        "branch": {
+          "bytes": 17370,
+          "sha256": "6aa644fc89c44d45f41dcc95efc8ece50f17c75b7c504c6523364c4920b228e3"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 31437,
+          "mismatchPercent": 15.35009765625,
+          "diff": {
+            "path": "diffs/pandora-normal.png",
+            "bytes": 51007,
+            "sha256": "ca1fe3dc0e72caffaf5b0b0d10f5ac52e0e8aed996b25e828f425b118ae15c07"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-04.webp",
+        "row": 8
+      },
+      {
+        "body": "polydeuces",
+        "lens": "normal",
+        "path": "src/objects/polydeuces/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 3976,
+          "sha256": "637949da9222e33d449cde48ff9c2bd65eb9e45bcb0767caec62d1a818537365"
+        },
+        "branch": {
+          "bytes": 3792,
+          "sha256": "78b3a149148e893269778d70379817dfb43671c978a22569cc70d2b9c250b6ec"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 5359,
+          "mismatchPercent": 4.088592529296875,
+          "diff": {
+            "path": "diffs/polydeuces-normal.png",
+            "bytes": 9011,
+            "sha256": "a53cc06551e5c41428e31b7016f91c94ba7bcba578cf8a2f509a7d79b36acc73"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-04.webp",
+        "row": 9
+      },
+      {
+        "body": "prometheus",
+        "lens": "elevation",
+        "path": "src/objects/prometheus/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 10752,
+          "sha256": "bc3e76423884c8436a5f4e0e678ce61c5eb93cf07420c32589bab625dc647bbb"
+        },
+        "branch": {
+          "bytes": 10752,
+          "sha256": "bc3e76423884c8436a5f4e0e678ce61c5eb93cf07420c32589bab625dc647bbb"
+        },
+        "changed": false
+      },
+      {
+        "body": "prometheus",
+        "lens": "filter-color",
+        "path": "src/objects/prometheus/prepared/minimaps/filter-color.webp",
+        "reference": {
+          "bytes": 9396,
+          "sha256": "1355f371c80cbb6b23819ab2fb5e029aebc66916ea4ef1ca7560d17520cd157d"
+        },
+        "branch": {
+          "bytes": 9386,
+          "sha256": "eb41da3be047b8c1aaf7a0787ba0d0056d264a25d64e2f8d40c29b7295d7db22"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 579,
+          "mismatchPercent": 0.28271484375,
+          "diff": {
+            "path": "diffs/prometheus-filter-color.png",
+            "bytes": 24090,
+            "sha256": "e001445202e058454ee0e5a9e28be41feb4af8abe03e91c47399afe925bfcf04"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-04.webp",
+        "row": 10
+      },
+      {
+        "body": "prometheus",
+        "lens": "normal",
+        "path": "src/objects/prometheus/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 15052,
+          "sha256": "65a18a2ccd30636499c24f2d5acefa228410e288b194a5f0220df6369b5c4086"
+        },
+        "branch": {
+          "bytes": 16314,
+          "sha256": "5b35c474a77af4c067ecaac6832ee15cbe5abe5433b268157ec765334941fb85"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 19324,
+          "mismatchPercent": 9.435546875,
+          "diff": {
+            "path": "diffs/prometheus-normal.png",
+            "bytes": 43568,
+            "sha256": "56e9ce535be95300799a08353717bbe4c092cd59053858979daf0bded008cd13"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-05.webp",
+        "row": 1
+      },
+      {
+        "body": "proteus",
+        "lens": "elevation",
+        "path": "src/objects/proteus/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 18448,
+          "sha256": "cc9136fdf0390b5bdd8a3b25b9068171343f4846c3b757843dc910e661aeefe6"
+        },
+        "branch": {
+          "bytes": 18448,
+          "sha256": "cc9136fdf0390b5bdd8a3b25b9068171343f4846c3b757843dc910e661aeefe6"
+        },
+        "changed": false
+      },
+      {
+        "body": "proteus",
+        "lens": "filter-color",
+        "path": "src/objects/proteus/prepared/minimaps/filter-color.webp",
+        "reference": {
+          "bytes": 6622,
+          "sha256": "c31166a6461d4712d20cda1d8572db74d11a9789a446322e6a41d3b4af4aa3c1"
+        },
+        "branch": {
+          "bytes": 6716,
+          "sha256": "5b733852c439afdb0c424a8377fb8dfbe24ef4dd71ce3ae33334cc6b5059e211"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 2747,
+          "mismatchPercent": 1.34130859375,
+          "diff": {
+            "path": "diffs/proteus-filter-color.png",
+            "bytes": 17211,
+            "sha256": "24a5426559307af52fcb4a87141b48b7e23d98a0a492b570cde22dde83778962"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-05.webp",
+        "row": 2
+      },
+      {
+        "body": "proteus",
+        "lens": "normal",
+        "path": "src/objects/proteus/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 22918,
+          "sha256": "bdedc167a33d261e3c4bf62daad7d4ef33051e885b356eba76423a73111f0db5"
+        },
+        "branch": {
+          "bytes": 22414,
+          "sha256": "0c46236aa6741417f9f068699b205f94842393941becea324f3024b8671a5903"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 42470,
+          "mismatchPercent": 20.7373046875,
+          "diff": {
+            "path": "diffs/proteus-normal.png",
+            "bytes": 55819,
+            "sha256": "165711f43dba1ed8526573974563c30085970e55e7931c665c80f4c755be57c5"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-05.webp",
+        "row": 3
+      },
+      {
+        "body": "puck",
+        "lens": "normal",
+        "path": "src/objects/puck/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 5102,
+          "sha256": "4a4d0d53ebc728b5b85c5db892ce848460fe3c82492fa3b4818641667e19211b"
+        },
+        "branch": {
+          "bytes": 5546,
+          "sha256": "571880ae1ec88362405ebbdcd1210e7b5dceaf83b4c72d63e09d433031a941cf"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 1284,
+          "mismatchPercent": 0.9796142578125,
+          "diff": {
+            "path": "diffs/puck-normal.png",
+            "bytes": 15899,
+            "sha256": "93a35e1fd364a429dcac829c59b61cd6cdd19a7c07b87e2b19e23cf26edc4e93"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-05.webp",
+        "row": 4
+      },
+      {
+        "body": "steins",
+        "lens": "elevation",
+        "path": "src/objects/steins/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 11126,
+          "sha256": "cf54315d8c0247e4f3ac1a55d218dc94ffc9e459553c983fd12fc5cde9d7d516"
+        },
+        "branch": {
+          "bytes": 11126,
+          "sha256": "cf54315d8c0247e4f3ac1a55d218dc94ffc9e459553c983fd12fc5cde9d7d516"
+        },
+        "changed": false
+      },
+      {
+        "body": "steins",
+        "lens": "normal",
+        "path": "src/objects/steins/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 13144,
+          "sha256": "83c9574cafcbf0e46a1607dc205ef8e31f28fed16220697a313989c22b861738"
+        },
+        "branch": {
+          "bytes": 13144,
+          "sha256": "83c9574cafcbf0e46a1607dc205ef8e31f28fed16220697a313989c22b861738"
+        },
+        "changed": false
+      },
+      {
+        "body": "steins",
+        "lens": "osiris",
+        "path": "src/objects/steins/prepared/minimaps/osiris.webp",
+        "reference": {
+          "bytes": 8502,
+          "sha256": "fa7479ca6c5d2a6f8616c796238f80cb2249b1b98717594390817c36f6d8e724"
+        },
+        "branch": {
+          "bytes": 9876,
+          "sha256": "830dee0eac8f4e1585d1e771b58fc49f409df1384995639e81df3f35d926e655"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 10543,
+          "mismatchPercent": 5.14794921875,
+          "diff": {
+            "path": "diffs/steins-osiris.png",
+            "bytes": 23477,
+            "sha256": "2c1bc01cf7a2b8a2c33692b9e8f8d421dee6d1a80e8b408acbddfc6541d033dc"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-05.webp",
+        "row": 5
+      },
+      {
+        "body": "telesto",
+        "lens": "elevation",
+        "path": "src/objects/telesto/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 11366,
+          "sha256": "adaff471f4b03e2a1c6e366d394b3b4cbcf143e4af836ab86148fe55728f7c12"
+        },
+        "branch": {
+          "bytes": 11366,
+          "sha256": "adaff471f4b03e2a1c6e366d394b3b4cbcf143e4af836ab86148fe55728f7c12"
+        },
+        "changed": false
+      },
+      {
+        "body": "telesto",
+        "lens": "false-color",
+        "path": "src/objects/telesto/prepared/minimaps/false-color.webp",
+        "reference": {
+          "bytes": 6246,
+          "sha256": "a9031634bc1a9974331c399aaa6891f2acddeba2bdd1cd4841fad0101f4097f3"
+        },
+        "branch": {
+          "bytes": 6684,
+          "sha256": "69377a88cde7e27239279b84134697bf7362ce4969b5d516b1d3a9974e04471c"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 640,
+          "mismatchPercent": 0.3125,
+          "diff": {
+            "path": "diffs/telesto-false-color.png",
+            "bytes": 19094,
+            "sha256": "8a696791fe4229d42055886224c553fbeb9f8b482f14a14e6b14d15affe2e0dd"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-05.webp",
+        "row": 6
+      },
+      {
+        "body": "telesto",
+        "lens": "normal",
+        "path": "src/objects/telesto/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 16098,
+          "sha256": "f5cee3b3141bab2578b58e3c9c4cacc75120208c063dfb2015fa3c1c530950be"
+        },
+        "branch": {
+          "bytes": 12332,
+          "sha256": "cbf0266da6a286689a43f3f0857772ad0ab64d88f56855bed2010330103b88e1"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 80348,
+          "mismatchPercent": 39.232421875,
+          "diff": {
+            "path": "diffs/telesto-normal.png",
+            "bytes": 39119,
+            "sha256": "e7aa70779413b11860dc739f35e6176b1e3824bc1151a871e4ef4711919d1932"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-05.webp",
+        "row": 7
+      },
+      {
+        "body": "tethys",
+        "lens": "elevation",
+        "path": "src/objects/tethys/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 69668,
+          "sha256": "8d249f62b9687b1326911fa6d13b501566b87d291f1c13b8a353a79897871943"
+        },
+        "branch": {
+          "bytes": 69668,
+          "sha256": "8d249f62b9687b1326911fa6d13b501566b87d291f1c13b8a353a79897871943"
+        },
+        "changed": false
+      },
+      {
+        "body": "tethys",
+        "lens": "enhanced",
+        "path": "src/objects/tethys/prepared/minimaps/enhanced.webp",
+        "reference": {
+          "bytes": 93628,
+          "sha256": "83738f6d749d22beb1710ce55f8bd9bb3111ee542dcc2f7b2baea7b83ceddc27"
+        },
+        "branch": {
+          "bytes": 93628,
+          "sha256": "83738f6d749d22beb1710ce55f8bd9bb3111ee542dcc2f7b2baea7b83ceddc27"
+        },
+        "changed": false
+      },
+      {
+        "body": "tethys",
+        "lens": "ice-absorption",
+        "path": "src/objects/tethys/prepared/minimaps/ice-absorption.webp",
+        "reference": {
+          "bytes": 40752,
+          "sha256": "23564d57d6c0715f090ca0cc53b307adb4a9dd96fcd226d948b4b9327d6335a3"
+        },
+        "branch": {
+          "bytes": 40752,
+          "sha256": "23564d57d6c0715f090ca0cc53b307adb4a9dd96fcd226d948b4b9327d6335a3"
+        },
+        "changed": false
+      },
+      {
+        "body": "tethys",
+        "lens": "infrared",
+        "path": "src/objects/tethys/prepared/minimaps/infrared.webp",
+        "reference": {
+          "bytes": 11062,
+          "sha256": "778bd091712150e6e7db421fc5835eac1e9c673c64150b50a6a1bc5290c16fbf"
+        },
+        "branch": {
+          "bytes": 11062,
+          "sha256": "778bd091712150e6e7db421fc5835eac1e9c673c64150b50a6a1bc5290c16fbf"
+        },
+        "changed": false
+      },
+      {
+        "body": "tethys",
+        "lens": "iss",
+        "path": "src/objects/tethys/prepared/minimaps/iss.webp",
+        "reference": {
+          "bytes": 22440,
+          "sha256": "81ad74453f479474425316a223e0c2fa493b973ef1142d23fbb6b0507196fc00"
+        },
+        "branch": {
+          "bytes": 21284,
+          "sha256": "0cf9f3d90ccf0b2fa4cc6c959c4bf3e32c74060f2392bf3d6cc4449fa0490d08"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 1249,
+          "mismatchPercent": 0.60986328125,
+          "diff": {
+            "path": "diffs/tethys-iss.png",
+            "bytes": 52998,
+            "sha256": "82a982abc4d7f1683f3052970426da97a407c6a405955ba70bff07ad239402ca"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-05.webp",
+        "row": 8
+      },
+      {
+        "body": "tethys",
+        "lens": "normal",
+        "path": "src/objects/tethys/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 84710,
+          "sha256": "e98eb0c99116a0125c0dde13fa4d2c0f607529287ef15a5f09408ebce9ab052d"
+        },
+        "branch": {
+          "bytes": 84710,
+          "sha256": "e98eb0c99116a0125c0dde13fa4d2c0f607529287ef15a5f09408ebce9ab052d"
+        },
+        "changed": false
+      },
+      {
+        "body": "tethys",
+        "lens": "relative-albedo",
+        "path": "src/objects/tethys/prepared/minimaps/relative-albedo.webp",
+        "reference": {
+          "bytes": 194014,
+          "sha256": "ea38e14c079f3e7eb28d111f499385ba6fe41c18bd11cf7564e2f78761a63c36"
+        },
+        "branch": {
+          "bytes": 194014,
+          "sha256": "ea38e14c079f3e7eb28d111f499385ba6fe41c18bd11cf7564e2f78761a63c36"
+        },
+        "changed": false
+      },
+      {
+        "body": "tethys",
+        "lens": "shape",
+        "path": "src/objects/tethys/prepared/minimaps/shape.webp",
+        "reference": {
+          "bytes": 3072,
+          "sha256": "a9cb6cc97276626a14edcd279353d31529dcc61182f6fda4b87a655af951eae7"
+        },
+        "branch": {
+          "bytes": 3072,
+          "sha256": "a9cb6cc97276626a14edcd279353d31529dcc61182f6fda4b87a655af951eae7"
+        },
+        "changed": false
+      },
+      {
+        "body": "thebe",
+        "lens": "elevation",
+        "path": "src/objects/thebe/prepared/minimaps/elevation.webp",
+        "reference": {
+          "bytes": 11154,
+          "sha256": "07edf17b5cdc6e06d2fa98eb37622c05256bddaec9790e63028aec3d9b528209"
+        },
+        "branch": {
+          "bytes": 11154,
+          "sha256": "07edf17b5cdc6e06d2fa98eb37622c05256bddaec9790e63028aec3d9b528209"
+        },
+        "changed": false
+      },
+      {
+        "body": "thebe",
+        "lens": "normal",
+        "path": "src/objects/thebe/prepared/minimaps/normal.webp",
+        "reference": {
+          "bytes": 9696,
+          "sha256": "bc4d53c1b1fa307dfc2245500e0c05eaaa79fc8dc9ed403ab805cd6af39b35a5"
+        },
+        "branch": {
+          "bytes": 9626,
+          "sha256": "3e444aee4d12da2795d07544c7a9c2f608c57eb136f980b54dffcfcc1429808c"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 640,
+          "height": 320,
+          "comparedPixels": 204800,
+          "mismatchedPixels": 85980,
+          "mismatchPercent": 41.982421875,
+          "diff": {
+            "path": "diffs/thebe-normal.png",
+            "bytes": 21678,
+            "sha256": "9646a0216586a1b370b93d452ef237cee684a8ec07d0ee5813144145d36d29be"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-05.webp",
+        "row": 9
+      },
+      {
+        "body": "nix",
+        "lens": "monochrome",
+        "path": "src/objects/nix/prepared/minimaps/monochrome.webp",
+        "reference": {
+          "bytes": 9678,
+          "sha256": "8daea7724a9501c198e95c9389da94575d5be05c355b4e506955527fcba7af03"
+        },
+        "branch": {
+          "bytes": 10078,
+          "sha256": "8aab96d3a981083ab7f96a098fbc64d1bf0d806ffbfe8c780ec38601103d7927"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 797,
+          "mismatchPercent": 0.608062744140625,
+          "diff": {
+            "path": "diffs/nix-monochrome.png",
+            "bytes": 28698,
+            "sha256": "96f86fa9055a956d134bd0fcbb034ca0e7a2221ff6e1ca80e8e26d5630cc9a50"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-05.webp",
+        "row": 10
+      },
+      {
+        "body": "hydra",
+        "lens": "monochrome",
+        "path": "src/objects/hydra/prepared/minimaps/monochrome.webp",
+        "reference": {
+          "bytes": 4828,
+          "sha256": "be95bc9e3d895d5d62507d8dd53317c9261e07e91ebe2d7c812d89458c39b5c9"
+        },
+        "branch": {
+          "bytes": 4968,
+          "sha256": "b7c6234912d7aae6624b7ecd6855571bac18903834ea7e3d4a1236c2aebbda09"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 256,
+          "comparedPixels": 131072,
+          "mismatchedPixels": 2666,
+          "mismatchPercent": 2.03399658203125,
+          "diff": {
+            "path": "diffs/hydra-monochrome.png",
+            "bytes": 14703,
+            "sha256": "103bae9166418ae2764a86f155fbf07567aad7cd60680063ffeaf95dfc954a2d"
+          }
+        },
+        "changed": true,
+        "sheet": "minimaps-06.webp",
+        "row": 1
+      }
+    ]
+  },
+  "contexts": {
+    "method": "Manifest-pinned context snapshot per body at the reference revision and in the branch working tree; the sheet shows reference, branch and diff at 256 x 256.",
+    "sheet": "contexts.webp",
+    "bodies": [
+      {
+        "body": "amalthea",
+        "path": "src/objects/amalthea/source/presentation/context.png",
+        "reference": {
+          "bytes": 44558,
+          "sha256": "cc24a3d225625321b94229125518492454d0d2262642fdcf215f5c8719c516d7"
+        },
+        "branch": {
+          "bytes": 46346,
+          "sha256": "fac868da09c4a7adf37c39a09588f3661f13f47e989b42af6c3bf3168e070abb"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 33528,
+          "mismatchPercent": 12.7899169921875,
+          "diff": {
+            "path": "diffs/amalthea-context.png",
+            "bytes": 12010,
+            "sha256": "b084f06d9d2391148f38b875f9199f5b912ce5244318d0763b1b774acdd53be7"
+          }
+        },
+        "row": 1,
+        "column": 1
+      },
+      {
+        "body": "atlas",
+        "path": "src/objects/atlas/source/presentation/context.png",
+        "reference": {
+          "bytes": 71406,
+          "sha256": "552a7c0e3d9c464ac2cc8efac2b5b87f44d45126ccb1940fd11c1c79163d83f6"
+        },
+        "branch": {
+          "bytes": 72269,
+          "sha256": "082f9b97c047ec1ada0e1290a92a18aa88c21c53fd403620d024de241b35745d"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 2158,
+          "mismatchPercent": 0.823211669921875,
+          "diff": {
+            "path": "diffs/atlas-context.png",
+            "bytes": 27751,
+            "sha256": "5c0181764f06447674ed4cf60831cd3d4ffd6e493c5968ee0b9d151fbd841e7d"
+          }
+        },
+        "row": 1,
+        "column": 2
+      },
+      {
+        "body": "calypso",
+        "path": "src/objects/calypso/source/presentation/context.png",
+        "reference": {
+          "bytes": 73451,
+          "sha256": "e7e543483802a247f72e9de483de97452419f7b29d5edb380e64931e22c4ed37"
+        },
+        "branch": {
+          "bytes": 65266,
+          "sha256": "744a1569ed2560e5ea9274dd083e875395ec2ba9ec7b94ebb413b5b206819f8b"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 31965,
+          "mismatchPercent": 12.193679809570312,
+          "diff": {
+            "path": "diffs/calypso-context.png",
+            "bytes": 19883,
+            "sha256": "3b7e3a58f8ef4258ab85571aa688e455dea84fe70c171d30206c3779dfc98cd7"
+          }
+        },
+        "row": 1,
+        "column": 3
+      },
+      {
+        "body": "comet-19p",
+        "path": "src/objects/comet-19p/source/presentation/context.png",
+        "reference": {
+          "bytes": 58255,
+          "sha256": "d86c4cd1b6ba6b2f0aa528c7c29493732cc60ac6de58a17e59a0aae589b2c170"
+        },
+        "branch": {
+          "bytes": 61739,
+          "sha256": "dfd488df8488052545e8dc47d0d2cf8a9f1f7faf32ce8dbfd845dbdab09020f7"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 182,
+          "mismatchPercent": 0.069427490234375,
+          "diff": {
+            "path": "diffs/comet-19p-context.png",
+            "bytes": 25486,
+            "sha256": "af1ec61d375e1d7fe5076f446c176c65c246be3922a61565e66c95f235b32b5c"
+          }
+        },
+        "row": 2,
+        "column": 1
+      },
+      {
+        "body": "daphnis",
+        "path": "src/objects/daphnis/source/presentation/context.png",
+        "reference": {
+          "bytes": 66439,
+          "sha256": "89152bff736cbbf17defa35f285136cfc305f6d7ef41c11e52b77cc11d63627b"
+        },
+        "branch": {
+          "bytes": 71562,
+          "sha256": "0a151a85ef1d44e43532a1dda022b80e42e676a58a7a8b5c6fc400c2abf4df7f"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 48538,
+          "mismatchPercent": 18.515777587890625,
+          "diff": {
+            "path": "diffs/daphnis-context.png",
+            "bytes": 19132,
+            "sha256": "03bff71fef0c4786a8f3f65d9f3cbd8ea7a7c77f234bd7193f561b115f203eb7"
+          }
+        },
+        "row": 2,
+        "column": 2
+      },
+      {
+        "body": "epimetheus",
+        "path": "src/objects/epimetheus/source/presentation/context.png",
+        "reference": {
+          "bytes": 137367,
+          "sha256": "2badc18dba9c7ac7a732ee8a07782b4ff10020dd4b9756831dcaa61403ac0218"
+        },
+        "branch": {
+          "bytes": 134520,
+          "sha256": "00f8ef64542e54520dea03c4ba409b874565bb31a7fe3abcacb35a713b4dc627"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 3997,
+          "mismatchPercent": 1.5247344970703125,
+          "diff": {
+            "path": "diffs/epimetheus-context.png",
+            "bytes": 68901,
+            "sha256": "8eba3f07f78227d72344fd1ed632cff765d8c5e0025a40003756319c84373aa1"
+          }
+        },
+        "row": 2,
+        "column": 3
+      },
+      {
+        "body": "gaspra",
+        "path": "src/objects/gaspra/source/presentation/context.png",
+        "reference": {
+          "bytes": 91335,
+          "sha256": "8d6b2077244356f99618c76e18a7d47c7d514f85e2f8c9c747b1837078b577b8"
+        },
+        "branch": {
+          "bytes": 90870,
+          "sha256": "2b8893d9517f0e2a419fa4b6f43cc52dd5ce29888b53479a993f7daca792ac95"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 1928,
+          "mismatchPercent": 0.7354736328125,
+          "diff": {
+            "path": "diffs/gaspra-context.png",
+            "bytes": 47075,
+            "sha256": "e6912de3a3e45e3906f3bac475759a366d48d86f5c2ecd0491b39d5c4d940470"
+          }
+        },
+        "row": 3,
+        "column": 1
+      },
+      {
+        "body": "helene",
+        "path": "src/objects/helene/source/presentation/context.png",
+        "reference": {
+          "bytes": 125152,
+          "sha256": "0c6debb1e298710d4e861ddf60ffd3b5e0b22d01f16d297ff90c87b0225fb2ae"
+        },
+        "branch": {
+          "bytes": 121982,
+          "sha256": "aadf516e124bab82d636393864e8557fb198e153b65309ed7239e21d4d77052e"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 69310,
+          "mismatchPercent": 26.439666748046875,
+          "diff": {
+            "path": "diffs/helene-context.png",
+            "bytes": 33109,
+            "sha256": "314c3bde73e848b20b7c7b74caad4d139e2fdfc58675322e573e94aca0364631"
+          }
+        },
+        "row": 3,
+        "column": 2
+      },
+      {
+        "body": "hyperion",
+        "path": "src/objects/hyperion/source/presentation/context.png",
+        "reference": {
+          "bytes": 168939,
+          "sha256": "5ce12c03b1f3aae7b8897ddbc4186cedbf79a229968ef2dbff90e34b4084a6de"
+        },
+        "branch": {
+          "bytes": 170734,
+          "sha256": "88ce5403764e98cd026dcb6e01a199ccdbea22e8abd2e6adbeb8d16509af33f0"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 1413,
+          "mismatchPercent": 0.5390167236328125,
+          "diff": {
+            "path": "diffs/hyperion-context.png",
+            "bytes": 92011,
+            "sha256": "f99de7c7a723213fd674fad6beeb5460bee3c8dad9d13c71997a59dc9d32933b"
+          }
+        },
+        "row": 3,
+        "column": 3
+      },
+      {
+        "body": "ida",
+        "path": "src/objects/ida/source/presentation/context.png",
+        "reference": {
+          "bytes": 82228,
+          "sha256": "13b575ec0accebfad5989e3da1f2053896a83e935db19dc9ed73026be96c606e"
+        },
+        "branch": {
+          "bytes": 81982,
+          "sha256": "80f7026d8a229c3dd26719ab0fc7ff926276959deea98c4edcbe1e7f9fc570d5"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 3198,
+          "mismatchPercent": 1.219940185546875,
+          "diff": {
+            "path": "diffs/ida-context.png",
+            "bytes": 45671,
+            "sha256": "8450db5c0eb70d8fa35db6b068c96614cc82ac1d6207044200b27c2d9c263d21"
+          }
+        },
+        "row": 4,
+        "column": 1
+      },
+      {
+        "body": "janus",
+        "path": "src/objects/janus/source/presentation/context.png",
+        "reference": {
+          "bytes": 128526,
+          "sha256": "09abcf834508767ef6080284556597cddf2143ad5de3e9a3305d59c13a718460"
+        },
+        "branch": {
+          "bytes": 129444,
+          "sha256": "bdba55cfab5e2c3a29c754c1fc90741740b7ac13033b62aca232f60548335e86"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 7628,
+          "mismatchPercent": 2.90985107421875,
+          "diff": {
+            "path": "diffs/janus-context.png",
+            "bytes": 53544,
+            "sha256": "066be884f9f03a80be74e545dd314f896f0f6e7ff8954074f7ba6d127b2aa667"
+          }
+        },
+        "row": 4,
+        "column": 2
+      },
+      {
+        "body": "larissa",
+        "path": "src/objects/larissa/source/presentation/context.png",
+        "reference": {
+          "bytes": 107361,
+          "sha256": "468d514a3fe40d8815536d38d3001d78ebf80c7144d42f07c7107a718b0df522"
+        },
+        "branch": {
+          "bytes": 113352,
+          "sha256": "ca398ffc9d4152c8924784d5283c4ecef757262bf77f0410315f249aa4fe10ef"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 53322,
+          "mismatchPercent": 20.340728759765625,
+          "diff": {
+            "path": "diffs/larissa-context.png",
+            "bytes": 36316,
+            "sha256": "e6c397f9a7ff273024ee00e2008f2961a7ca553545ee922f314bee8ddd6050ad"
+          }
+        },
+        "row": 4,
+        "column": 3
+      },
+      {
+        "body": "methone",
+        "path": "src/objects/methone/source/presentation/context.png",
+        "reference": {
+          "bytes": 71756,
+          "sha256": "8ee36a8bfb6bb808ec7bd25708cc4a1d38a3f61ee1d61526b220ca552f906576"
+        },
+        "branch": {
+          "bytes": 78463,
+          "sha256": "c6e92dea177c8ab82833086ba09c30bc6c8bb2dedf85e8b767aea725b37386ce"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 71667,
+          "mismatchPercent": 27.338790893554688,
+          "diff": {
+            "path": "diffs/methone-context.png",
+            "bytes": 16765,
+            "sha256": "43f1b7cb5ff913c7353a2406695e280a1379fabf3aa9add6dde520ac8545f258"
+          }
+        },
+        "row": 5,
+        "column": 1
+      },
+      {
+        "body": "metis",
+        "path": "src/objects/metis/source/presentation/context.png",
+        "reference": {
+          "bytes": 22553,
+          "sha256": "3fa83e935ae0be5f3807c4da3ff757e7a403d42af973e0a0bb5ad724756f2cae"
+        },
+        "branch": {
+          "bytes": 22483,
+          "sha256": "34dae451cf04ea394693f3caad77e529c0adae6e2bf24cee0d6f8a0baf0b50f8"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 256,
+          "height": 256,
+          "comparedPixels": 65536,
+          "mismatchedPixels": 2945,
+          "mismatchPercent": 4.49371337890625,
+          "diff": {
+            "path": "diffs/metis-context.png",
+            "bytes": 8044,
+            "sha256": "36d60c36ca7f364724798f4607b671415c5b9867d51374e0e1239b1fc3e2bb5a"
+          }
+        },
+        "row": 5,
+        "column": 2
+      },
+      {
+        "body": "pallene",
+        "path": "src/objects/pallene/source/presentation/context.png",
+        "reference": {
+          "bytes": 67251,
+          "sha256": "1a7909939de1601a25f41d8b09c6ef918f47cb7b127ebee8076a6552a2bee33e"
+        },
+        "branch": {
+          "bytes": 71432,
+          "sha256": "c3423e4caf9baa6da5d3e2da8886c38b437b2524693db4a01e00df64c443682e"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 41208,
+          "mismatchPercent": 15.7196044921875,
+          "diff": {
+            "path": "diffs/pallene-context.png",
+            "bytes": 20785,
+            "sha256": "6b78315cf8cbe00a176bfbf5ef1339dd3b45c8721bfd2742da4b3bdc1d563a73"
+          }
+        },
+        "row": 5,
+        "column": 3
+      },
+      {
+        "body": "pan",
+        "path": "src/objects/pan/source/presentation/context.png",
+        "reference": {
+          "bytes": 91496,
+          "sha256": "b2d3467d917b83e1197e2811f3a892f841218b41ad1d0fdbc9684a2e952e7902"
+        },
+        "branch": {
+          "bytes": 95511,
+          "sha256": "9ccbe5812f99abb613d3f202e3622b8063a5459f19ed75f9d699f30635a85712"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 607,
+          "mismatchPercent": 0.2315521240234375,
+          "diff": {
+            "path": "diffs/pan-context.png",
+            "bytes": 38168,
+            "sha256": "94bb1127fd9151c2056b29ac6f8d70306a636f7373350c156cc4407f3ec6aa44"
+          }
+        },
+        "row": 6,
+        "column": 1
+      },
+      {
+        "body": "pandora",
+        "path": "src/objects/pandora/source/presentation/context.png",
+        "reference": {
+          "bytes": 100718,
+          "sha256": "aa97ebb43be933d9cda78fb01f6172095406ff26ce842c61dcec1d026b38c980"
+        },
+        "branch": {
+          "bytes": 97231,
+          "sha256": "30e5c55016b5c9fa0ac9541492ececc23b0be886a6ce4a69353718b77eb058b9"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 24583,
+          "mismatchPercent": 9.377670288085938,
+          "diff": {
+            "path": "diffs/pandora-context.png",
+            "bytes": 39616,
+            "sha256": "578411f5a221d8bf5dfbc42fa2f22fa666481a557125e8784ad93253f4fb21f5"
+          }
+        },
+        "row": 6,
+        "column": 2
+      },
+      {
+        "body": "polydeuces",
+        "path": "src/objects/polydeuces/source/presentation/context.png",
+        "reference": {
+          "bytes": 76826,
+          "sha256": "2759bf95149c135394e46cbc0dde99f793a93a98048c2cfe41297b60f78fc97b"
+        },
+        "branch": {
+          "bytes": 78354,
+          "sha256": "0eca82ec75197907f207451d173bf18c360259ad0429d4e126ee142ae760f1cb"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 22885,
+          "mismatchPercent": 8.729934692382812,
+          "diff": {
+            "path": "diffs/polydeuces-context.png",
+            "bytes": 22504,
+            "sha256": "880b17a27829c3c7a491bf59cb17dba2b9925ed3174fd77cf24abab8898da8c2"
+          }
+        },
+        "row": 6,
+        "column": 3
+      },
+      {
+        "body": "prometheus",
+        "path": "src/objects/prometheus/source/presentation/context.png",
+        "reference": {
+          "bytes": 74125,
+          "sha256": "577aad09d36527107f03ec65320f042e3af3e327fccf3c80feb22eb0084c1208"
+        },
+        "branch": {
+          "bytes": 75070,
+          "sha256": "3d8e3bad3c97043d7d2a1662fd78115bfad3f6e7c3e4f3b589901cf7e818c55d"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 6097,
+          "mismatchPercent": 2.3258209228515625,
+          "diff": {
+            "path": "diffs/prometheus-context.png",
+            "bytes": 30949,
+            "sha256": "ea8cf402fd59934baa18a032d23eca7443040f899099e22df5628023ff8fc7e9"
+          }
+        },
+        "row": 7,
+        "column": 1
+      },
+      {
+        "body": "proteus",
+        "path": "src/objects/proteus/source/presentation/context.png",
+        "reference": {
+          "bytes": 171596,
+          "sha256": "a9c3c8c3da8064423c8a14cea97470034ec1ee52c7500cdcc83b7926decf1546"
+        },
+        "branch": {
+          "bytes": 165480,
+          "sha256": "1ed2c94ec699bc6aaaf4c85d2349c6cd265dbeb8954fb0576cf28c7241396c57"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 1790,
+          "mismatchPercent": 0.682830810546875,
+          "diff": {
+            "path": "diffs/proteus-context.png",
+            "bytes": 86728,
+            "sha256": "f5e91b34a55fdd83933fa7641d661a6853b8990340fbfc1c470369b242f4e175"
+          }
+        },
+        "row": 7,
+        "column": 2
+      },
+      {
+        "body": "puck",
+        "path": "src/objects/puck/source/presentation/context.png",
+        "reference": {
+          "bytes": 126671,
+          "sha256": "9de80fc3e93b6d47117ed00505995211e4bc12a1e857d569e34231b9ab812ebd"
+        },
+        "branch": {
+          "bytes": 120686,
+          "sha256": "ff3cd581759f775b743bfc85028df48b59084156ab9ba47be743747101e18e0a"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 3162,
+          "mismatchPercent": 1.206207275390625,
+          "diff": {
+            "path": "diffs/puck-context.png",
+            "bytes": 43126,
+            "sha256": "d7236b983cc586ebb3d7678c4fbc86a155e3c5e2e11679e48d8dce063321888a"
+          }
+        },
+        "row": 7,
+        "column": 3
+      },
+      {
+        "body": "telesto",
+        "path": "src/objects/telesto/source/presentation/context.png",
+        "reference": {
+          "bytes": 97630,
+          "sha256": "f8f9d02b2d7ecf5f3111df1b4f09c019028db426e7562b548b3b124bfe0a77a6"
+        },
+        "branch": {
+          "bytes": 91172,
+          "sha256": "9bf151de98036ee23d8e3b1e97495712f14429d95d070ce20ae59902b15a1e77"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 27413,
+          "mismatchPercent": 10.457229614257812,
+          "diff": {
+            "path": "diffs/telesto-context.png",
+            "bytes": 35418,
+            "sha256": "80d35f9157d75f04afde5ca90fb058df6b714f7e1801cb126deb55b4bd6605c9"
+          }
+        },
+        "row": 8,
+        "column": 1
+      },
+      {
+        "body": "thebe",
+        "path": "src/objects/thebe/source/presentation/context.png",
+        "reference": {
+          "bytes": 86897,
+          "sha256": "4ce6673f4841257d1378ea381aee467595c01b3aaa7ed305f7ca48c62f94e71e"
+        },
+        "branch": {
+          "bytes": 87103,
+          "sha256": "89b909c7dc504416e58e08021b8d9dee239a7cd49d04cc1ab8dc0ec4a6a31209"
+        },
+        "pixelmatch": {
+          "tool": "pixelmatch",
+          "version": "7.2.0",
+          "settings": {
+            "threshold": 0.1,
+            "includeAA": true,
+            "alpha": 0.2,
+            "diffColor": [
+              255,
+              0,
+              0
+            ]
+          },
+          "width": 512,
+          "height": 512,
+          "comparedPixels": 262144,
+          "mismatchedPixels": 71003,
+          "mismatchPercent": 27.085494995117188,
+          "diff": {
+            "path": "diffs/thebe-context.png",
+            "bytes": 21203,
+            "sha256": "892d18b7423620929fbf7d2082a50461aab0b99791d4b944f1b8acd84d04ca56"
+          }
+        },
+        "row": 8,
+        "column": 2
+      }
+    ]
+  }
+}

@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import editorial from "../../../../data/planets/saturn.json" with { type: "json" };
-import moonCatalog from '../../../../src/planets/saturn/source/moons/saturn-moons.json' with {type:'json'};
+import moonCatalog from '../../../../src/objects/saturn/source/moons/saturn-moons.json' with {type:'json'};
 import {readPreparedFixture} from '../../fixtures.mts';
 const PREPARED_SATURN_PANEL=await readPreparedFixture('saturn','content');
 

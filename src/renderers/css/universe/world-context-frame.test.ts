@@ -5,7 +5,7 @@ import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { createWorldContextFrameEncoder, createWorldContextFrameReceiver, contextFrameTransfers } from './world-context-frame.js';
 
-const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
 // Tests move the observer in place; the planner itself receives the readonly view.
 type World = WorldContextView['world'];
 type TestView = Omit<WorldContextView, 'world'> & { world: Omit<World, 'pose'> & { pose: Omit<World['pose'], 'positionM'> & { positionM: [number, number, number] } } };

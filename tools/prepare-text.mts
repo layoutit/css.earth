@@ -23,7 +23,7 @@ const describe = (findings: readonly TextFinding[]) => findings.map(({ objectId,
 interface BodyText { readonly id: string; readonly directory: string; readonly sha256: string; readonly text: ObjectText; readonly context: TextContext }
 
 async function readBody(projectRoot: string, object: { id: string; name: string }, catalogue: ReadonlySet<string>): Promise<BodyText> {
-  const directory = resolve(projectRoot, 'src/planets', object.id);
+  const directory = resolve(projectRoot, 'src/objects', object.id);
   const bytes = await readFile(resolve(directory, 'text.json'));
   const page = requireRecord(await readJson(resolve(directory, 'prepared/page.json')));
   const lenses = requireRecord(page.controls).lenses;

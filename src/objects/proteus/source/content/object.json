@@ -1,0 +1,175 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "proteus",
+  "displayName": "Proteus",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "208 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-physical-parameters",
+          "locator": "/references/0; radius"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "System solar semimajor axis",
+        "value": "30.070 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-approximate-planetary-positions",
+          "locator": "/references/1; distance-from-sun"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Neptune",
+        "value": "26.94 hours"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "Synchronous with its orbit"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Mean distance from Neptune",
+        "value": "About 117,674 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 2 imaging team · 1989"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome",
+      "elevation": "Elevation",
+      "filter-color": "False color"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "thumbnail": "/scenes/proteus/proteus-normal-thumbnail.webp",
+        "surface": "proteus-normal-surface@2x.webp",
+        "poles": "proteus-normal-surface@2x.webp",
+        "source": {
+          "id": "c1137317",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/voyager/iss/"
+        },
+        "notes": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed. Fine grain is largely source-image noise and must not be interpreted as resolved terrain.",
+        "noData": true
+      },
+      {
+        "id": "filter-color",
+        "label": "False color",
+        "thumbnail": "/scenes/proteus/proteus-filter-color-thumbnail.webp",
+        "surface": "proteus-filter-color-surface@2x.webp",
+        "poles": "proteus-filter-color-surface@2x.webp",
+        "source": {
+          "id": "c1137350-color",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/voyager/iss/"
+        },
+        "notes": "Voyager green, blue and violet filters are displayed as red, green and blue. Only their common reliable interior is mapped; the gray grid marks unknown samples. Blur and registration uncertainty limit interpretation to broad patterns at roughly 40 km or coarser near the image centre. Small colored details can be image noise or registration error. This is not true color or a calibrated albedo map.",
+        "noData": true
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/proteus/proteus-elevation-thumbnail.webp",
+        "surface": "proteus-elevation-surface@2x.webp",
+        "poles": "proteus-elevation-surface@2x.webp",
+        "source": {
+          "id": "stooke-shape",
+          "path": "../manifest.json",
+          "url": "https://sbn.psi.edu/pds/resource/stkshape.html"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-35",
+            "0",
+            "+25"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
+          "image": "/scenes/proteus/proteus-elevation-legend.webp"
+        },
+        "notes": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Proteus overview",
+      "href": "https://science.nasa.gov/neptune/moons/proteus/"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "surface",
+      "description": "Voyager imagery and Stooke shape model",
+      "href": "https://sbn.psi.edu/pds/resource/stkshape.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/neptune/moons/proteus/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

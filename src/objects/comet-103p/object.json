@@ -1,0 +1,164 @@
+{
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Hartley 2",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "features",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "302776f3802e991ae11e64ae5f3032cbeff14411ea44a3f2b38cd7a4acb8e364"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "bcec99e421a5a39e15e94c96af614d413f7276ff0ed1fe817eb35707f759adbd"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "15b341f13ed33579391eda0943a1d6af71a7be18928572e95308b534064d69e8"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "f94b9fb7bd168c12c52e2622aa815e0e7b1d56537e72323199df3336b0ae24f4"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "e0fde0afca207381a01f1abe02d4d1732f4096d8070a2b1dba74704c8b7faafe"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "96fb45bb515a9e33170ee398574e8aef17dd599d1ae0445807a3e778494fb201"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "cc55131be459b1b5a46be89e88c5f09a09d8ecfa665a6c5efb1a1b32faab4f51"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 0.58
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "constraints",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "mri",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "spectral-slope",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 100
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -703662494358.4695,
+        -469508002218.5181,
+        -217397325274.42587
+      ],
+      "presentationToReference": [
+        -0.8057373679842841,
+        -5.551115123125783e-17,
+        0.5922729892826099,
+        -0.5433998435148873,
+        0.39777715593191365,
+        -0.7392495818644162,
+        -0.23559266521212924,
+        -0.9174820620691819,
+        -0.3205039186648544
+      ],
+      "orbitUpReference": [
+        5.551115123125783e-17,
+        -0.39777715593191365,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 2.5217391304347827,
+      "bodyRadiusM": 580
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/comet-103p-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "830460117300ac8db5e5da1b13a2f0818a149b36b5fd988ee8cd022db91f9727"
+      }
+    },
+    "catalog": {
+      "name": "Hartley 2",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 3.477,
+      "description": "Small, active comet that EPOXI flew past.",
+      "systemName": "Solar System",
+      "order": 80,
+      "context": {
+        "order": 165
+      }
+    }
+  },
+  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "92ccfc56a8771200168adbf5035202ac6593ddc1e2e00598b1319fd17598afa3"
+  },
+  "type": "layered-body",
+  "id": "comet-103p"
+}

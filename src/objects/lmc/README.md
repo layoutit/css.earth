@@ -43,3 +43,5 @@ App development/build and shell tests run `pnpm prepare:nebulae` automatically: 
 ## Remaining visual limits
 
 These are visualization lenses on modeled depth, not independent 3D observations. XYZ slice handoff brightness/banding and finite-resolution detail remain lab research issues; promotion does not solve them. See [slice stability](../../../labs/nebula/docs/slice-stability.md), [research](../../../labs/nebula/RESEARCH.md) and [next steps](../../../labs/nebula/NEXTSTEPS.md).
+
+The shared dataset cards use the [source manifest](source/manifest.json) and [presentation record](source/presentation.json). Preparation generates the standard source-to-product provenance and small local image previews. These previews show the published photograph before star removal; source pixel counts describe image sampling, not telescope resolution. Preparing the cards checks their inputs and the installed volume identity, but does not rerun or scientifically validate the reconstruction.

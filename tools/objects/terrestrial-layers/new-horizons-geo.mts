@@ -1,3 +1,4 @@
+import { pds4Blocks, pds4Elements } from '../pds-labels.mts';
 import { createHash } from 'node:crypto';
 import { readFitsHeader, readFitsPrimary } from '../observation/fits.mts';
 import { archivedCameraFields, array, dimensions, number, shape, sipCameraFields, text } from './source-records.mts';
@@ -72,8 +73,16 @@ export function decodeNewHorizonsLorri(bytes: Buffer, value: unknown) {
 
 /** Provider-registered, PSF-matched CA05 MVIC cube: BLUE, RED, NIR, CH4.
  * The archive resamples 340 m native pixels threefold; that adds no resolution.
- * Keep a common linear display scale across NIR / RED / BLUE. */
-export function decodeArrokothMvic(bytes: Buffer, value: unknown) {
+ * Keep derived band values floating until the shared display boundary. */
+export function decodeArrokothMvic(bytes: Buffer, value: unknown, label: string) {
+  const bins=pds4Blocks(label,'sp:Bin_Wavelength').map(block=>{
+    const wavelength=pds4Elements(block,'sp:center_wavelength')[0];
+    return {sequence:Number(pds4Elements(block,'sp:bin_sequence_number')[0]?.content),filter:pds4Elements(block,'sp:filter_name')[0]?.content.trim(),
+      wavelength:Number(wavelength?.tag==='<sp:center_wavelength unit="nm">'?wavelength.content:undefined)};
+  });
+  if(!pds4Elements(label,'file_name').some(element=>element.content==='ca05_mvic_cube.fit') || !pds4Elements(label,'unit').some(element=>element.content.trim()==='data number') ||
+      bins.length!==4 || bins.some((bin,i)=>bin.sequence!==i+1 || bin.filter!==['Blue','Red','NIR','CH4'][i] || bin.wavelength!==[475,620,877.5,885][i]))
+    throw new Error('MVIC color requires its native band order, wavelengths and data-number units.');
   const camera = shape({...archivedCameraFields,...dimensions,imageSha256:text,startTime:text,
     imageTransform:array(array(number)),referenceCamera:shape(sipCameraFields)})(value);
   const {header:h,dataOffset} = readFitsHeader(bytes);

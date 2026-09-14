@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "pan",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Pan",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "b91133c601c0e6d5c382068b86de004f74eb7c38751dd28408645627ca9d5bc0"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "22b8cc1e8f76c2ddf2258724fcf253cfadf4836b8161c72f5caf83e6fa30dcdc"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "fd72bf3e88bc576f3cdd0625888e70e1ea151da306964fa23f98f4fa880a720e"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "efdae11aa7774731d26e49a6adeb65b46152cfab49c86eb4c5d919e604d95cb3"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "43ef89a52289bd18f1aa7309bfce2a462ab9ce0e5c7101e0fef123b16892d7c1"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "ab12e80c7384fd986d1784dfad63942dac750aa27200c0d878825005628808a3"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 14
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "filter-color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1390766568197.3586,
+        245151678044.09644,
+        41352938411.37314
+      ],
+      "presentationToReference": [
+        0.9852716000124423,
+        -8.326672684688674e-17,
+        -0.17099670818153673,
+        0.15688641242943843,
+        0.39777715593191376,
+        0.9039690192776177,
+        0.06801858425417101,
+        -0.9174820620691817,
+        0.3919185348734354
+      ],
+      "orbitUpReference": [
+        8.326672684688674e-17,
+        -0.39777715593191376,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 60.869565217391305,
+      "bodyRadiusM": 14000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/pan-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2114a2ab1e14f05bf945ae95d1ac78a09e7a51072044dced3c647640ae6fea58"
+      }
+    },
+    "catalog": {
+      "name": "Pan",
+      "classification": "satellite",
+      "color": "#a6a29a",
+      "distanceAu": 9.58,
+      "description": "Saucer-shaped moon that keeps Saturn's Encke Gap open.",
+      "systemName": "Solar System",
+      "order": 431,
+      "context": {
+        "order": 40
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "a1a167b4b568548f9eeb88e971ca20b9cde41a3c12998c1e37806301764ce374"
+  }
+}

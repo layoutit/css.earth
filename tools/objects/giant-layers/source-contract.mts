@@ -7,7 +7,7 @@ import{parseAuthoredObjectDescriptor}from'@cssearth/objects';
 import{verifySourceManifest,validateSourceManifest}from'../../../src/platform/source-manifest.mts';
 
 export async function assertAuthoredGiantSourceContract(id: string){
- const directory=resolve('src/planets',id),sourceRoot=resolve(directory,'source'),manifest=validateSourceManifest(id,JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')));
+ const directory=resolve('src/objects',id),sourceRoot=resolve(directory,'source'),manifest=validateSourceManifest(id,JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')));
  await verifySourceManifest({manifest,planetName:id,sourceRoot});
  const descriptor=parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(directory,'object.json'),'utf8')));
  for(const source of descriptor.recipe.sources){const bytes=await readFile(resolve(directory,source.path));assert.equal(createHash('sha256').update(bytes).digest('hex'),source.sha256,source.path);}

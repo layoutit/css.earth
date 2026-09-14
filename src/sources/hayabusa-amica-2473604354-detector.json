@@ -1,0 +1,28 @@
+{
+  "id": "hayabusa-amica-2473604354-detector",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Itokawa · AMICA detector image 2005-10-19T14:53:17",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051019/st_2473604354_v.fit",
+      "label": "Native source"
+    },
+    {
+      "role": "archive",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051019/st_2473604354_v.fit",
+      "label": "Archive input"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051019/st_2473604354_v.fit",
+      "checkedOn": "2026-09-13",
+      "locator": "Original FITS camera header and exact detector sample comparison with the controlled DDR"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

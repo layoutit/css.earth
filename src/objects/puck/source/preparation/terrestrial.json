@@ -1,0 +1,130 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "puck",
+  "displayName": "Puck",
+  "publicBase": "/scenes/puck/",
+  "distanceAu": 19.19,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [],
+    "observedColors": [],
+    "surfaceObservations": [
+      {
+        "id": "normal",
+        "format": "controlled-shape-camera",
+        "consumer": "voyager-clear-frames",
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain.",
+          "attribution": {
+            "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/voyager/iss/"
+          }
+        },
+        "frames": [
+          {
+            "id": "c2683716",
+            "path": "observations/C2683716_GEOMED.IMG",
+            "labelPath": "observations/C2683716_GEOMED.LBL",
+            "observerLatitude": -56.091,
+            "observerWestLongitude": 53.645,
+            "sunLatitude": -82.109,
+            "sunWestLongitude": 137.517,
+            "rangeKm": 515621.4,
+            "northAzimuthDegrees": 83.29067463820111,
+            "center": [
+              426.9,
+              700.2
+            ],
+            "pixelAngleMicroradians": 7.841764329210524,
+            "backgroundOffset": -0.0005000000237487257,
+            "backgroundMaximum": 0.002965199761092663,
+            "coverageInsetPixels": 2
+          }
+        ],
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 70
+        },
+        "photometry": {
+          "model": "lunar-lambert",
+          "weight": 0.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 2.5
+        },
+        "display": {
+          "displayRange": [
+            0,
+            0.0594
+          ]
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 81,
+    "camera": {
+      "initialScenePitchDegrees": 41.017848203987,
+      "defaultControlYawDegrees": -69.1448941840709
+    },
+    "mapUrl": "/scenes/puck/puck-normal-surface@2x.webp",
+    "polesUrl": "/scenes/puck/puck-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/ellipsoid.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 2522,
+        "expectedFaces": 5040,
+        "stepDegrees": 5,
+        "longitudeDirection": "east-positive"
+      },
+      "faceBudget": 2000,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 480,
+        "maximumErrorMeters": 1500,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Uranus-system ephemeris and IAU/WGCCRE Puck rotation; calibrated Voyager image is registered in that source body frame."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

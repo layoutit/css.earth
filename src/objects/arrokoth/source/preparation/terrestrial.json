@@ -1,0 +1,196 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "arrokoth",
+  "displayName": "Arrokoth",
+  "publicBase": "/scenes/arrokoth/",
+  "distanceAu": 44.05655144131418,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "model",
+        "consumer": "model-surface",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Shape model",
+          "modeled": true,
+          "coverage": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain."
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "albedo",
+        "label": "Modeled albedo",
+        "consumer": "albedo-model",
+        "path": "science/albedo_arrokoth4_fp36h2_masked1.fits",
+        "labelPath": "science/albedo_arrokoth4_fp36h2_masked1.lblx",
+        "meshPath": "shape/arrokoth_porter_2024_v01.obj",
+        "format": "obj-uv-fits",
+        "grid": {
+          "width": 600,
+          "height": 1200,
+          "bitpix": -32,
+          "flipV": false
+        },
+        "sampling": "bilinear",
+        "sourceUnits": "fraction",
+        "displayUnits": "Fraction",
+        "minimum": 0.03,
+        "maximum": 0.08,
+        "colors": [
+          "#242424",
+          "#e4e4e4"
+        ],
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 250
+        }
+      }
+    ],
+    "observedColors": [],
+    "mosaics": [],
+    "surfaceObservations": [
+      {
+        "id": "lorri",
+        "format": "nh-lorri-camera",
+        "consumer": "lorri-observation",
+        "filter": "PANCHROMATIC",
+        "frames": [
+          {
+            "id": "lorri",
+            "path": "observations/lor_0408626332_0x636_sci.fit",
+            "cameraPath": "observations/ca06-camera.json",
+            "startTime": "2019-01-01T05:26:54.116"
+          }
+        ],
+        "transfer": {
+          "maximumSeparationMeters": 180,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1
+        },
+        "display": {
+          "percentiles": [
+            0.9,
+            99.8
+          ]
+        },
+        "metadata": {
+          "label": "LORRI",
+          "falseColor": false,
+          "coverage": "New Horizons photograph from 1 January 2019 at 33 metres per native pixel. Original illumination retained. The grid marks unseen, grazing or rejected coverage."
+        }
+      },
+      {
+        "id": "mvic",
+        "format": "nh-mvic-camera",
+        "consumer": "mvic-observation",
+        "filter": "NIR/RED/BLUE",
+        "frames": [
+          {
+            "id": "mvic",
+            "path": "observations/ca05_mvic_cube.fit",
+            "labelPath": "observations/ca05_mvic_cube.lblx",
+            "cameraPath": "observations/mvic-camera.json",
+            "startTime": "2019-01-01T05:12:55.280"
+          }
+        ],
+        "transfer": {
+          "maximumSeparationMeters": 600,
+          "maximumEmissionDegrees": 65,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 65,
+          "maximumEmissionDegrees": 65,
+          "maximumGain": 1
+        },
+        "display": {
+          "displayRange": [
+            0,
+            0.17
+          ]
+        },
+        "metadata": {
+          "label": "MVIC",
+          "falseColor": true,
+          "coverage": "New Horizons near-infrared, red and blue bands, registered and blur-matched by the mission team. Enhanced color at 340 m native resolution. Unseen and grazing surfaces remain gridded."
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 9.948,
+    "camera": {
+      "initialScenePitchDegrees": 27.475878662587284,
+      "defaultControlYawDegrees": 122.28168102581337,
+      "framingScale": 0.5105107661972121
+    },
+    "mapUrl": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
+    "polesUrl": "/scenes/arrokoth/arrokoth-lorri-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/arrokoth_porter_2024_v01.obj",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 20484,
+        "expectedFaces": 40960
+      },
+      "faceBudget": 2000,
+      "tileSize": 96,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 1000,
+        "maximumErrorMeters": 250,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim."
+  },
+  "presentation": {
+    "defaultLens": "lorri",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

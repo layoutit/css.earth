@@ -51,6 +51,20 @@ test('raw downloads install exact streamed bytes and verify source closure',()=>
   assert.equal((await verifySources({sourceRoot:directory,manifest})).verifiedCount,1);
 }));
 
+test('HRI-IR acquisition validates its recipe and preserves an existing output when preparation fails',()=>temporary(async directory=>{
+  const step={kind:'hrii-facets',path:'source.img',recipePath:'scan.json',product:'fields',groups:['refresh']};
+  for(const changed of [{recipePath:'../scan.json'},{recipePath:undefined},{product:'image'}]) {
+    assert.throws(()=>parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{...step,...changed}]}));
+  }
+  const old=Buffer.from('previous qualified output');
+  await writeFile(join(directory,'source.img'),old);
+  await writeFile(join(directory,'scan.json'),'{}');
+  await assert.rejects(executeAcquisition({sourceRoot:directory,manifest:rawManifest(old),
+    plan:parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[step]}),
+    transport:{fetch:async()=>{throw new Error('Native facet preparation must use its restored inputs');}}}));
+  assert.deepEqual(await readFile(join(directory,'source.img')),old);
+}));
+
 for(const [name,received,error] of [
   ['short',Buffer.from('pin'),/size drifted/],
   ['overlong',Buffer.from('pinned data extra'),/size drifted/],

@@ -33,7 +33,7 @@ export async function prepareCloseups(sourceDirectory:string,write=false) {
   await pinned('preparation/closeups.json');
   assert.equal(digest(await pinned(geometry.path)),recipe.shapeSha256);
   const mesh=await loadPdsPlanetocentricShape(resolve(source,geometry.path),geometry.grid);
-  const transfer={maximumSourceDistanceMeters:90,maximumSeparationMeters:200,visibilityToleranceMeters:.5,maximumEmissionDegrees:75};
+  const transfer={maximumSeparationMeters:200,visibilityToleranceMeters:.5,maximumEmissionDegrees:75};
   const reports=[];
   for(const entry of recipe.frames){
     assert.match(entry.id,/^iv05070405_9000\d{3}_001_r$/);assert.match(entry.referenceId,/^iv05070405_9000\d{3}_001_r$/);
@@ -41,7 +41,7 @@ export async function prepareCloseups(sourceDirectory:string,write=false) {
     const reference=decodeEncounterFits(refBytes,refControl.observation),refCamera=encounterCamera(reference.header,refControl.camera);
     validateEncounterRegistration(refCamera,refControl.registration,recipe.shapeSha256);
     const referenceCamera={kind:'control-network' as const,project:refCamera.project,ray:refCamera.ray,positionMeters:refCamera.positionMeters,positionKm:refCamera.positionKm,sunDirection:refCamera.sunDirection,pinhole:true,report:refCamera.report};
-    const footprint={image:{width:reference.width,height:reference.height,values:reference.values,reject:reference.reason,startTime:String(reference.startTime),filter:String(reference.filter),report:reference.report},camera:referenceCamera,geometry:castSourceRays(referenceCamera,mesh,reference.width,reference.height),photometry:{gain:()=>1}},targetBytes=await pinned(`${directory}/${entry.id}.fit`),target=decodeEncounterFits(targetBytes,entry.observation);
+    const footprint={image:{width:reference.width,height:reference.height,values:reference.values,reject:reference.reason,startTime:String(reference.startTime),filter:String(reference.filter),report:reference.report},camera:referenceCamera,geometry:castSourceRays(referenceCamera,mesh,reference.width,reference.height),photometry:{gain:()=>1,retainsIllumination:true}},targetBytes=await pinned(`${directory}/${entry.id}.fit`),target=decodeEncounterFits(targetBytes,entry.observation);
     const seed={bodyToJ2000:refControl.camera.bodyToJ2000,offsetPixels:[0,0],maximumOffsetPixels:256},camera=encounterCamera(target.header,seed);
     const width=target.width+2*recipe.margin,height=target.height+2*recipe.margin,values=new Float32Array(width*height),valid=new Uint8Array(width*height),xyz=new Float64Array(width*height*3),uv=new Float64Array(width*height*2);
     for(let y=0;y<height;y++)for(let x=0;x<width;x++){
@@ -66,5 +66,5 @@ export async function prepareCloseups(sourceDirectory:string,write=false) {
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
   assert.ok(process.argv.slice(2).every(a=>a==='--write'));
-  console.log(JSON.stringify(await prepareCloseups(resolve('src/planets/comet-9p/source'),process.argv.includes('--write')),null,2));
+  console.log(JSON.stringify(await prepareCloseups(resolve('src/objects/comet-9p/source'),process.argv.includes('--write')),null,2));
 }

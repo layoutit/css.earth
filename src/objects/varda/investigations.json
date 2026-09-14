@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "varda",
+  "entries": [
+    {
+      "id": "triaxial-fit-2026",
+      "subject": "2026 triaxial occultation fit",
+      "status": "included",
+      "finding": "The 2026 triaxial example was the most recent qualified numerical fit found in the source survey. Its depth degeneracy is retained.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/varda/README.md#L35"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "maclaurin-2020",
+      "subject": "2020 Maclaurin interpretations",
+      "status": "excluded",
+      "finding": "The 2020 study offered several Maclaurin interpretations. If spin and satellite orbit are aligned, the 2026 study rules out the older mirror-orbit interpretation supporting the spheroidal fit.",
+      "revisitWhen": "New constraints reopen the spin–orbit alignment that rules them out.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/varda/README.md#L36"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "light-curves",
+      "subject": "Astrometry and occultation light curves as surface data",
+      "status": "excluded",
+      "finding": "[Astrometry and occultation light curves](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/643/A125) are unresolved time series; they imply neither a spatial surface mosaic nor additional terrain.",
+      "revisitWhen": "A spatially resolved surface map or registered imaging of this object is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/varda/README.md#L37",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/643/A125"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "occult3d-software",
+      "subject": "occult3d analysis software at runtime",
+      "status": "excluded",
+      "finding": "The existing ellipsoid preparer consumes the published numbers rather than running the [published occult3d analysis software](https://github.com/benp175/occult3d); it introduces no new fitting or rendering technique.",
+      "revisitWhen": "Preparation needs to refit occultation chords rather than use published numbers.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/varda/README.md#L38",
+        "https://github.com/benp175/occult3d"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    }
+  ]
+}

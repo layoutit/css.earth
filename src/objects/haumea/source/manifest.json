@@ -1,0 +1,144 @@
+{
+  "schema": "csshaumea-authoritative-sources@2",
+  "inputs": [
+    {
+      "path": "measurements.json",
+      "expectedBytes": 574,
+      "expectedSha256": "8fdbabb8a5f880c3872ae30c31b9f0b95f475e63bc69516c1ef0a2eaf294f452",
+      "id": "ortiz-2017-shape",
+      "origin": "https://doi.org/10.1038/nature24051",
+      "credit": "Ortiz et al. 2017",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed nominal model measurements",
+      "redistribution": "Factual parameter transcription only; no article figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1038-nature24051",
+            "role": "method",
+            "evidence": "src/planets/haumea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Run node src/objects/ceres/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/haumea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-vtad-haumea-model",
+      "path": "nasa-haumea.glb",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/h/Haumea_1_1000.glb",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+      "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
+      "acquisition": "Original downloadable GLB from NASA Science",
+      "redistribution": "NASA media; not photographed terrain or a measured normal map",
+      "consumers": [
+        "shape-model"
+      ],
+      "expectedBytes": 11335060,
+      "expectedSha256": "7b31737593054bd4ef8f61138a6ad1a2577bec03b84d1c3e76e8ac78632a87f8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-haumea-nasa-vtad-haumea-model",
+            "role": "material",
+            "evidence": "src/planets/haumea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3505,
+      "expectedSha256": "71afdd3236e654eb583867fe1425ac0ddd658fdbcc89b70cf9c53fea79bc074d",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 474,
+      "expectedSha256": "1ac9085d300170054a4c12d31a61f9ec80f38b887f8336f989f2a4b4498bf865"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 417,
+      "expectedSha256": "1a8dea075c8f33eddda26b738ebfaf449b48a538a75b2fcdf73e50b20762dd83"
+    },
+    {
+      "path": "preparation/shape-model.json",
+      "expectedBytes": 802,
+      "expectedSha256": "60f82227a1f198e5c6639e1021cc6a4eb6e677c62d08d7780fca515561138630"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4414,
+      "expectedSha256": "1f635c92818e5ff839af6a183994e5f1ea75c77031f1198ad29b00059190de5e"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 100844,
+      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 826,
+      "expectedSha256": "449cf74e1345de447de78e42d74fb6626b9d72a5c0d14f95fcc91828018ea9b3"
+    },
+    {
+      "path": "presentation/navigation-marker.svg",
+      "expectedBytes": 127,
+      "expectedSha256": "4a5b570337f9ae9054d3dfe34d37ed4a055d726b789792dce13582192fd26666"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://science.nasa.gov/dwarf-planets/haumea/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 272,
+      "expectedSha256": "10122d07da9668df1bea395c8b5f4db9e76e66c34451a92767c5989ff523c1a1"
+    }
+  ],
+  "generatedIntermediates": []
+}

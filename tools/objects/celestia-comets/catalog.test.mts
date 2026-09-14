@@ -18,14 +18,14 @@ test('pinned upstream files and inventory retain their identities and license',(
 
 test('packages use the native Celestia mesh, with only physical scaling',()=>{
  for(const c of candidates){
-  const root=`src/planets/${c.id}/source/`,model=JSON.parse(readFileSync(root+'shape/model.json', 'utf8'));
+  const root=`src/objects/${c.id}/source/`,model=JSON.parse(readFileSync(root+'shape/model.json', 'utf8'));
   assert.equal(model.catalogRadiusKm,c.radiusKm);assert.equal(model.source,c.mesh);assert.equal(model.illustrative,true);
   const native=readFileSync(new URL(`meshes/${c.mesh.replace('.cms','')}.obj`,sourceRoot),'utf8');
   const expected=native.split('\n').map(line=>line.startsWith('v ')?'v '+line.slice(2).split(' ').map(Number).map(v=>v*(c.radiusKm*1000)).join(' '):line).join('\n');
   assert.equal(readFileSync(root+'shape/model.obj','utf8'),expected);
   assert.equal(readFileSync(root+'shape/'+c.mesh,'utf8'),readFileSync(new URL(c.mesh,sourceRoot),'utf8'));
   const content=JSON.parse(readFileSync(root+'content/object.json', 'utf8'));assert.equal(content.lenses.controls.length,1);
-  assert.equal(JSON.parse(readFileSync(`src/planets/${c.id}/text.json`,'utf8')).datasets.model.detail,'Catalog size');assert.equal(content.panel.facts.length,2);
+  assert.equal(JSON.parse(readFileSync(`src/objects/${c.id}/text.json`,'utf8')).datasets.model.detail,'Catalog size');assert.equal(content.panel.facts.length,2);
   for(const control of requireArray(content.settings.controls).map(value=>fixtureRecord(value)).filter(c=>['shadows','orbit'].includes(String(c.name))))assert.equal(control.checked,false);
   assert.equal(JSON.parse(readFileSync(root+'preparation/rotation.json', 'utf8')).phase,'arbitrary-display-phase');
  }

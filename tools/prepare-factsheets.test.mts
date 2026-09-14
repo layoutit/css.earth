@@ -9,7 +9,7 @@ import { prepareFactsheet } from './prepare-factsheets.mts';
 
 test('every registered factsheet reproduces its pinned authored facts and evidence', async () => {
   for (const object of OBJECTS) {
-    await prepareFactsheet(resolve(import.meta.dirname, '../src/planets', object.id), { check: true });
+    await prepareFactsheet(resolve(import.meta.dirname, '../src/objects', object.id), { check: true });
   }
 });
 

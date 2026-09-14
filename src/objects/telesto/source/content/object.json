@@ -1,0 +1,166 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "telesto",
+  "displayName": "Telesto",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "12.35 km"
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "System solar semimajor axis",
+        "value": "9.537 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-approximate-planetary-positions",
+          "locator": "/references/0; distance-from-sun"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Saturn",
+        "value": "45.3 hours"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "Synchronous with its orbit"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Mean distance from Saturn",
+        "value": "About 295,000 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Smith, Reitsema, Larson and Fountain · 1980"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome",
+      "elevation": "Elevation",
+      "false-color": "False color"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "thumbnail": "/scenes/telesto/telesto-normal-thumbnail.webp",
+        "surface": "telesto-normal-surface@2x.webp",
+        "poles": "telesto-normal-surface@2x.webp",
+        "source": {
+          "id": "n1514156123_1",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/calibration.html"
+        },
+        "notes": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+        "noData": true
+      },
+      {
+        "id": "false-color",
+        "label": "False color",
+        "thumbnail": "/scenes/telesto/telesto-false-color-thumbnail.webp",
+        "surface": "telesto-false-color-surface@2x.webp",
+        "poles": "telesto-false-color-surface@2x.webp",
+        "source": {
+          "id": "n1831466962_1",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        },
+        "notes": "Cassini ISS NAC IR3, green and UV3 filters projected independently with the released PDS shape-camera table. Colors explicitly encode those three bands as red, green and blue; they are not natural color or a calibrated albedo map. Gray grid marks terrain outside the common reliable observation footprint and cast-shadow terrain is not reconstructed. The filters span 14 minutes and phase angles of 66–78 degrees. Hue can reflect changing illumination as well as filter response; it does not establish composition.",
+        "noData": true
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/telesto/telesto-elevation-thumbnail.webp",
+        "surface": "telesto-elevation-surface@2x.webp",
+        "poles": "telesto-elevation-surface@2x.webp",
+        "source": {
+          "id": "thomas-2018-shape",
+          "path": "../manifest.json",
+          "url": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-5",
+            "0",
+            "+5"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+          "image": "/scenes/telesto/telesto-elevation-legend.webp"
+        },
+        "notes": "Radial height above a 12.35 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Telesto overview",
+      "href": "https://science.nasa.gov/saturn/moons/telesto/"
+    },
+    {
+      "label": "NASA/JPL/SSI; PDS",
+      "role": "surface",
+      "description": "Cassini calibrated observations and measured shape",
+      "href": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/saturn/moons/telesto/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

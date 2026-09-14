@@ -1,0 +1,278 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "comet-103p",
+  "displayName": "Hartley 2",
+  "publicBase": "/scenes/comet-103p/",
+  "distanceAu": 3.477,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "model",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Shape model",
+          "modeled": true,
+          "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
+        }
+      },
+      {
+        "id": "constraints",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Source constraints",
+          "modeled": true,
+          "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "temperature",
+        "label": "Color temperature",
+        "consumer": "hrii-spectra",
+        "path": "science/hrii/fields.csv.gz",
+        "format": "facet-scalars",
+        "meshPath": "shape/hartley2_2012_plan.tab",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 16022,
+          "expectedFaces": 32040
+        },
+        "table": {
+          "format": "facet-csv-gzip",
+          "field": "Color temperature",
+          "units": "K",
+          "expectedRows": 32040,
+          "maximumCentroidErrorMeters": 0.001
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 20
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": 280,
+        "maximum": 380,
+        "colors": [
+          "#172c68",
+          "#2a8cba",
+          "#73c7bd",
+          "#f1dc77",
+          "#ec853e",
+          "#af2341"
+        ],
+        "focus": {
+          "longitudeDegrees": 335.76,
+          "latitudeDegrees": -61.358,
+          "zoom": 0.8
+        }
+      },
+      {
+        "id": "spectral-slope",
+        "label": "Infrared slope",
+        "consumer": "hrii-spectra",
+        "path": "science/hrii/fields.csv.gz",
+        "format": "facet-scalars",
+        "meshPath": "shape/hartley2_2012_plan.tab",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 16022,
+          "expectedFaces": 32040
+        },
+        "table": {
+          "format": "facet-csv-gzip",
+          "field": "Continuum slope",
+          "units": "%/100nm",
+          "expectedRows": 32040,
+          "maximumCentroidErrorMeters": 0.001
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 20
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": -1,
+        "maximum": 6,
+        "colors": [
+          "#263264",
+          "#459cb1",
+          "#b7d1a2",
+          "#f0cd75",
+          "#ba653f"
+        ],
+        "focus": {
+          "longitudeDegrees": 335.76,
+          "latitudeDegrees": -61.358,
+          "zoom": 0.8
+        }
+      }
+    ],
+    "observedColors": [],
+    "mosaics": [],
+    "surfaceObservations": [
+      {
+        "id": "mri",
+        "format": "encounter-fits",
+        "consumer": "photographs-mri",
+        "frames": [
+          {
+            "id": "mv10110413-6000001-001-r",
+            "path": "photography/mri/mv10110413_6000001_001_r.fit",
+            "labelPath": "photography/mri/mv10110413_6000001_001_r.lbl",
+            "controlPath": "photography/mri/mv10110413_6000001_001_r.json"
+          },
+          {
+            "id": "mv10110413-6000002-001-r",
+            "path": "photography/mri/mv10110413_6000002_001_r.fit",
+            "labelPath": "photography/mri/mv10110413_6000002_001_r.lbl",
+            "controlPath": "photography/mri/mv10110413_6000002_001_r.json"
+          },
+          {
+            "id": "mv10110414-6000003-001-r",
+            "path": "photography/mri/mv10110414_6000003_001_r.fit",
+            "labelPath": "photography/mri/mv10110414_6000003_001_r.lbl",
+            "controlPath": "photography/mri/mv10110414_6000003_001_r.json"
+          },
+          {
+            "id": "hv10110413-5004004-001-d050",
+            "path": "photography/hri/hv10110413_5004004_001_d050.fit",
+            "labelPath": "photography/hri/hv10110413_5004004_001_d050.lbl",
+            "controlPath": "photography/hri/hv10110413_5004004_001_d050.json"
+          },
+          {
+            "id": "hv10110413-5004008-001-d050",
+            "path": "photography/hri/hv10110413_5004008_001_d050.fit",
+            "labelPath": "photography/hri/hv10110413_5004008_001_d050.lbl",
+            "controlPath": "photography/hri/hv10110413_5004008_001_d050.json"
+          }
+        ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 32,
+          "minimumPairs": 64,
+          "maximumGain": 1.5
+        },
+        "transfer": {
+          "maximumSeparationMeters": 50,
+          "maximumEmissionDegrees": 75,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "observed",
+          "maximumGain": 1
+        },
+        "display": {
+          "percentiles": [
+            0.9,
+            99.3
+          ]
+        },
+        "metadata": {
+          "label": "EPOXI photographs",
+          "coverage": "MRI and restored HRI photographs from the EPOXI flyby are combined on the nucleus. HRI supplies finer image sampling, with MRI extending the coverage. Original shadows remain; the gray grid marks gaps or poorly constrained shape."
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 0.58,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/comet-103p/comet-103p-constraints-surface@2x.webp",
+    "polesUrl": "/scenes/comet-103p/comet-103p-constraints-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/hartley2_2012_plan.tab",
+      "format": "pds-planetocentric-plate",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 16022,
+        "expectedFaces": 32040
+      },
+      "faceBudget": 2000,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 1000,
+        "maximumErrorMeters": 20
+      },
+      "primitive": "u",
+      "sourceLighting": {
+        "maximumDistanceMeters": 60,
+        "rayOffsetMeters": 0.25,
+        "ambient": 0.16,
+        "diffuse": 0.84,
+        "floodLights": [
+          {
+            "direction": [
+              0,
+              0,
+              1
+            ],
+            "weight": 0.36
+          },
+          {
+            "direction": [
+              0,
+              1,
+              0
+            ],
+            "weight": 0.24
+          },
+          {
+            "direction": [
+              1,
+              0,
+              0
+            ],
+            "weight": 0.24
+          }
+        ]
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons osculating elements; PDS source orientation held at arbitrary phase.",
+    "qualification": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
+  },
+  "presentation": {
+    "defaultLens": "constraints",
+    "pointColor": [
+      184,
+      182,
+      178
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

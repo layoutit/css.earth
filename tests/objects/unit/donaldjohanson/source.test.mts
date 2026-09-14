@@ -9,12 +9,12 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.mts';
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/donaldjohanson/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/donaldjohanson/source');
 const read=async (path: string)=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Donaldjohanson retains original source pins and DSK acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'donaldjohanson',planetName:'Donaldjohanson',sourceRoot:root});await source.verify();
  const plan=await read('preparation/acquisition.json');
- for(const input of source.manifest.inputs)if(!input.path.endsWith('.obj.gz')&&!['preparation/camera.json','observations/llorri-camera.json'].includes(input.path))assert.ok(plan.operations.some((step: { path: string; })=>step.path===input.path));
+ for(const input of source.manifest.inputs)if(!input.path.endsWith('.obj.gz')&&!['preparation/camera.json','observations/llorri-camera.json','preparation/llorri-overlap.json','observations/llorri-approach-camera.json'].includes(input.path))assert.ok(plan.operations.some((step: { path: string; })=>step.path===input.path));
  const dsk=await read('reference/dsk-inspection.json');assert.deepEqual([dsk.center,dsk.frame,dsk.surface,dsk.type],[20052246,20052246,200522461,2]);
 });
 test('Donaldjohanson preserves the Lucy mesh scale and withholds ambiguous radial elevation',async()=>{

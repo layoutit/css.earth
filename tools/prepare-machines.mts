@@ -1,6 +1,6 @@
 import { sourceResolver, parseSourceBinding } from '../src/platform/source-catalog.mts';
 import { compileSourceUsage } from '../src/platform/source-usage.mts';
-import type { SourceUse } from '../src/platform/source-usage.mts';
+import type { SourceUse, SourceUsageObject } from '../src/platform/source-usage.mts';
 import { parsePreparedSources, sourceCatalogDigest } from '../src/platform/prepared-sources.mts';
 import { readSourceCatalog } from './read-source-catalogue.mts';
 import { sourceInventory, metadataCitations, factsheetCitations } from './source-catalogue-inputs.mts';
@@ -15,7 +15,6 @@ import sharp from 'sharp';
 import { OBJECTS } from '../site/objects.mts';
 import { explorationRecord, explorationArray, explorationText, parseAgencies, parseCapture, validateCapture, parseExplorationCatalog } from '../src/platform/exploration-catalog.mts';
 import { compileContributions } from '../src/platform/exploration-contributions.mts';
-import type { ContributionObject } from '../src/platform/exploration-contributions.mts';
 import { parsePreparedExploration, parseExplorationImage } from '../src/platform/prepared-exploration.mts';
 import type { ExplorationImage } from '../src/platform/prepared-exploration.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
@@ -23,6 +22,7 @@ import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
 import { restoreFactsheetEvidence } from './restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from './restore-factsheet-evidence.mts';
+import { prepareVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
 export const explorationCompilerClosure = [
   'tools/prepare-machines.mts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'site/objects.mts', 'site/object-schema.mts',
@@ -31,6 +31,7 @@ export const explorationCompilerClosure = [
   'site/source/agency-logos.json', 'tools/read-source-catalogue.mts',
   'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
   'src/platform/prepared-sources.mts', 'tools/source-catalogue-inputs.mts',
+  'src/platform/dataset-destination.mts', ...volumeProvenanceCompilerClosure,
   'tools/factsheet-sources.mts', 'site/fact-order.mts', 'tools/restore-factsheet-evidence.mts',
   'tools/source-values.mts', 'tools/objects/operations.ts', 'tools/objects/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
@@ -52,7 +53,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
   const catalog = parseExplorationCatalog(await json('site/source/machines/catalog.json'), agencies, sources);
   const metadata: SourceUse[] = metadataCitations(catalog, 'site/source/machines/catalog.json', sources);
   const inventory: SourceInventoryEntry[] = [];
-  for (const path of explorationCompilerClosure.filter(path => path.startsWith('src/objects/'))) {
+  for (const path of explorationCompilerClosure.filter(path => path.startsWith('src/objects/') && path.endsWith('/provenance.json'))) {
     const owner = explorationRecord(await json(path)), display = explorationRecord(owner.catalogueDisplay);
     const binding = parseSourceBinding(owner.sourceBinding, sources);
     inventory.push({ownerPath:path,localId:explorationText(display.feature),binding,used:true});
@@ -90,10 +91,10 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     const bytes = await input(`public${agency.src}`);
     if (digest(bytes) !== agency.sha256 || bytes.length !== agency.bytes) throw new Error(`Agency logo identity changed: ${agency.name}.`);
   }
-  const objects: ContributionObject[] = [];
+  const objects: SourceUsageObject[] = [];
   const factsheets = { facts: 0, cited: 0, uncited: [] as { objectId: string; factId: string }[] };
   for (const object of OBJECTS) {
-    const base = `src/planets/${object.id}`;
+    const base = `src/objects/${object.id}`;
     const descriptor = explorationRecord(await json(`${base}/object.json`));
     const manifest = explorationRecord(await json(`${base}/source/manifest.json`));
     const recipe = explorationRecord(explorationRecord(descriptor.properties).recipe);
@@ -132,7 +133,24 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     else document = validateObjectProvenance(await json(path), object.id);
     if (document.manifest.sha256 !== closure[`${base}/source/manifest.json`]) throw new Error(`Stale provenance for ${object.id}; run pnpm prepare:provenance.`);
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
-    objects.push({ id: object.id, name: object.name, route: object.route, controls: lenses, provenance: document });
+    objects.push({ id: object.id, name: object.name, route: object.route, base, controls: lenses, provenance: document });
+  }
+  const volumes = await prepareVolumeProvenance({ root, input });
+  for (const volume of volumes) {
+    const document = validateObjectProvenance(volume.provenance, volume.id);
+    const manifestPath = `${sourcePath(volume.base)}/${sourcePath(document.manifest.path)}`;
+    const manifest = explorationRecord(await json(manifestPath));
+    if (document.manifest.sha256 !== closure[manifestPath]) throw new Error(`Stale provenance for ${volume.id}; run pnpm prepare:provenance.`);
+    for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
+    inventory.push(...sourceInventory(manifest, manifestPath, sources, new Set(document.sources.map(source => source.path))));
+    objects.push(volume);
+    for (const output of volume.outputs) {
+      // Generated lineage and presentation join the same atomic set as both graphs.
+      const path = sourcePath(output.path.slice(resolve(root).length + 1));
+      if (resolve(root, path) !== output.path) throw new TypeError('Volume output escapes its package.');
+      if (path.startsWith(`${volume.base}/prepared/`)) closure[path] = digest(output.text);
+      else if (!new RegExp(`^public/scenes/${volume.id}/datasets/[a-f0-9]{64}\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
+    }
   }
   const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,catalogSha256:sourceCatalogDigest(sourceCatalog),
     usage:compileSourceUsage(objects,sources,metadata),inventory,closure};
@@ -142,7 +160,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
   const prepared = parsePreparedExploration(payload,sources);
   const output = { path: resolve(root, 'site/prepared-machines.json'), text: JSON.stringify(payload, null, 2) + '\n' };
   const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
-  const outputs = [sourcesOutput,output];
+  const outputs = [...volumes.flatMap(volume => volume.outputs),sourcesOutput,output];
   if (publish) await writePreparedSet(outputs);
   return { prepared, preparedSources, output, outputs, factsheets };
 

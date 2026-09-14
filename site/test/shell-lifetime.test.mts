@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { mountPlanetShell, type ShellOptions } from "../planet-shell-client.mts";
-import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import context from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import catalogueInput from '../../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
 import clustersInput from '../../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
 
@@ -370,6 +370,9 @@ test('overview and detail tabs keep independent selections and keyboard focus ac
     assert.equal(overviewTabs[2].getAttribute('aria-selected'), 'true');
     assert.equal(search.value, 'my search');
   }
+  overviewTabs[1].hidden = true;
+  overviewTabs[0].focus(); key('ArrowRight');
+  assert.equal(f.documentTarget.activeElement, overviewTabs[2], 'Tabs hidden after mount are skipped by the shared keyboard control');
   shell.destroy();
   assert.equal(listeners.size, 0);
   assert.ok([...overviewTabs, datasetTab, factsTab].every(tab => tab.listeners.size === 0));

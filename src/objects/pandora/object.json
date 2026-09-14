@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "pandora",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Pandora",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "bbac3b032d7b977c287072c9599241e34f741657b4ec989e0c847d9bbe6a300e"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "7b0d7edbc49375ba73b4063760149fbf1951a43529a639d63438fada07f02f15"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "d4f8212a24a5d58a632d7285d1cf4da2d4501631049c40786401e18bd987672c"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "7ccb6b2cb97ec2f52d08aaea5b8793b2114742fea46c533440bf444b531e6cc4"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "bf2e66f27721552c2d928de7e7223c5ebcad288cd991f6881317ddece43a67f1"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "d5b25770a7642091ebaebc55aeefd9747b08048b1eb1256687143bdc072b3a9b"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 40.6
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "filter-color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1390659119597.6562,
+        244999893795.19397,
+        41373397518.70142
+      ],
+      "presentationToReference": [
+        0.985285022577306,
+        2.7755575615628914e-17,
+        -0.17091935023524302,
+        0.15681543790135555,
+        0.3977771559319137,
+        0.903981334240107,
+        0.06798781303030563,
+        -0.9174820620691816,
+        0.39192387406311213
+      ],
+      "orbitUpReference": [
+        -2.7755575615628914e-17,
+        -0.3977771559319137,
+        0.9174820620691816
+      ],
+      "metersPerUnit": 176.52173913043478,
+      "bodyRadiusM": 40600
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/pandora-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "40e80c9cdc9d9f9ec31c196440e292f408c309c2eb829ad77944c6925acf5dfb"
+      }
+    },
+    "catalog": {
+      "name": "Pandora",
+      "classification": "satellite",
+      "color": "#a6a29a",
+      "distanceAu": 9.58,
+      "description": "Potato-shaped moon just outside Saturn's F ring, which it tends to disrupt.",
+      "systemName": "Solar System",
+      "order": 434,
+      "context": {
+        "order": 43
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "8c10994f7c33dd2c4d7abb9511291c9f9f0dc114162975ef8b9af968c0773b0e"
+  }
+}

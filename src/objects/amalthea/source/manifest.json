@@ -1,0 +1,658 @@
+{
+  "schema": "cssamalthea-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "c0420626379",
+      "path": "observations/C0420626379R.IMG",
+      "expectedBytes": 831488,
+      "expectedSha256": "5183ec1e59c472691fd82c30956f485b37d499154a0ca9fddbc245ccadf25e0a",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420626379",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-io-c0420626379r",
+            "role": "material",
+            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0420626379-label",
+      "path": "observations/C0420626379R.LBL",
+      "expectedBytes": 4842,
+      "expectedSha256": "ba48dd397a1e9dfd94b6dce4c71c07e9c3c9f80f0958fa1140d9b4e67a793a73",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420626379",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-io-c0420626379r",
+            "role": "material",
+            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0420652501",
+      "path": "observations/C0420652501R.IMG",
+      "expectedBytes": 831488,
+      "expectedSha256": "ed9310d63df477a715f46349aec4d07eb66466ef7878046f6de8fcc7a8e33495",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420652501",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-sml-sats-c0420652501r",
+            "role": "material",
+            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0420652501-label",
+      "path": "observations/C0420652501R.LBL",
+      "expectedBytes": 5012,
+      "expectedSha256": "ec662262f35a5c10841283d69884888b2ba639bde352826224afd1ae8f35430d",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420652501",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-sml-sats-c0420652501r",
+            "role": "material",
+            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0512324200",
+      "path": "observations/C0512324200R.IMG",
+      "expectedBytes": 831488,
+      "expectedSha256": "28617d6c3a4e3efe8532db03d6479ed494f79712dd2c24d1ddd0e99964bc5b4f",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0512324200",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0021-c22-sml-sats-c0512324200r",
+            "role": "material",
+            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0512324200-label",
+      "path": "observations/C0512324200R.LBL",
+      "expectedBytes": 5010,
+      "expectedSha256": "2223991ed2b60d11428be5efc996132318c440be0f945ae4fc8f576e10a8dd32",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0512324200",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0021-c22-sml-sats-c0512324200r",
+            "role": "material",
+            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0532888100",
+      "path": "observations/C0532888100R.IMG",
+      "expectedBytes": 840192,
+      "expectedSha256": "a9984536219b37e770cd92036aca30cd53a83b91b9d87e881550ed0de23a01bf",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532888100",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0023-e26-sml-sats-c0532888100r",
+            "role": "material",
+            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0532888100-label",
+      "path": "observations/C0532888100R.LBL",
+      "expectedBytes": 5038,
+      "expectedSha256": "7f3421111331a7dad25384ac63a89eebc4b63e672d34905e977ece5f5dbbe73e",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532888100",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0023-e26-sml-sats-c0532888100r",
+            "role": "material",
+            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stooke-shape",
+      "path": "shape/j5amalthea.tab",
+      "expectedBytes": 70226,
+      "expectedSha256": "031ee6036cf67e170d39da24487672cd3d4dd2bbb5e9391cf1e3ad56c67706f1",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/j5amalthea.tab",
+      "catalog": "https://sbn.psi.edu/pds/resource/stkshape.html",
+      "credit": "Philip Stooke; NASA PDS",
+      "license": "Public PDS scientific data release; cite Stooke (2025), DOI 10.26033/yt84-5y91.",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "acquisition": "Download released radius grid.",
+      "redistribution": "Retain Stooke and PDS attribution.",
+      "consumers": [
+        "shape",
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "projection": {
+        "type": "body-centered-radius-grid",
+        "longitudeDirection": "west-positive"
+      },
+      "coverage": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amalthea-stooke-shape",
+            "role": "material",
+            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-amalthea-nomenclature-center-pts",
+      "path": "features/AMALTHEA_nomenclature_center_pts.zip",
+      "expectedBytes": 47678,
+      "expectedSha256": "6c8c8921eb0929a738207b862d02ee3d5452bcc89f7d8f98714260d7cc1ee8db",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/AMALTHEA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Amalthea on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Amalthea centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/AMALTHEA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "amalthea-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1014,
+      "expectedSha256": "13c207f7804b474543fc841279f64ab3c7e6aea5b4270f491e2c4c9534609e4a",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "amalthea-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1157,
+      "expectedSha256": "d67357bb1382bd4e03ebb6cf82a84390d492634dcafc20f331b03a7a776b479a",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "amalthea-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 155,
+      "expectedSha256": "38f55714f6a719c11d68896d591602df177cddda737cd39b411c23590e06be83",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbn.psi.edu/pds/resource/stkshape.html",
+      "credit": "NASA/JPL; Philip Stooke; NASA PDS",
+      "license": "Public PDS scientific data; retain mission and model attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "c0420626379",
+          "c0420652501",
+          "c0512324200",
+          "c0532888100",
+          "stooke-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 196.11,
+        "latitudeDegrees": 0.18,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 46346,
+      "expectedSha256": "fac868da09c4a7adf37c39a09588f3661f13f47e989b42af6c3bf3168e070abb"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5379,
+      "expectedSha256": "10a4b76d7c39032187256c5bcfeae8bd779364db61a8a7f35ea905483cd32064",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "geometry/c0420626379-opus.json",
+      "expectedBytes": 11837,
+      "expectedSha256": "599e1a01848fa006fe07437da0060b8fee6e634e5e035e9f8a64ac6ce2e3461f"
+    },
+    {
+      "path": "geometry/c0420652501-opus.json",
+      "expectedBytes": 11861,
+      "expectedSha256": "543c22228daf4fa42b8504da65b30a4232ff17cd77f3b4d54637d97b54a9474b"
+    },
+    {
+      "path": "geometry/c0512324200-opus.json",
+      "expectedBytes": 11743,
+      "expectedSha256": "45e26a333c72e95b5a1e750299af1319166711b0a8cec746a2e2df126bda5dba"
+    },
+    {
+      "path": "geometry/c0532888100-opus.json",
+      "expectedBytes": 11894,
+      "expectedSha256": "178124fb4138043d6547fd4cb3eea736d6255f1084ee40160da42b9a3ff3647c"
+    },
+    {
+      "path": "geometry/registration.json",
+      "expectedBytes": 4525,
+      "expectedSha256": "06b779f9cfca636e8770b9b7d1284ab4263e720b478e397967e574cf0dc39684"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 2896,
+      "expectedSha256": "c0efd09f334665b1841de95c63250f1b684c2d7734c88f94f02f3dfafc146d3d"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1312,
+      "expectedSha256": "178b57839f0baa77ffd11ad7b07f29ca76f4d3a085101dced3f7a2c72c11a018"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 7210,
+      "expectedSha256": "5f6ebbc6ba7e99e7815b6687db3817dc1fd853497facbd1dfede9bbfb29b1af5"
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4916,
+      "expectedSha256": "e09217233c486be1bed48d9f4d5387cafd9452f4fdfbce8574ea87534b02c2fe"
+    },
+    {
+      "path": "shape/bundle_description.txt",
+      "expectedBytes": 5105,
+      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+    },
+    {
+      "path": "shape/j5amalthea.xml",
+      "expectedBytes": 7253,
+      "expectedSha256": "28dc9407ec6bcc566522edbede2bc7255e3f5fd8ed7167df49a4aa227e9d7aed"
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "9bac48f4709cae24d64c479cd796f9fb8dfbbc5e53b4262c340256954769c72b"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1089,
+      "expectedSha256": "cac7d991a2ef6c5ece98f64dc2dfe9e60b0a72a72ddb61b3b2801789f09c92b6"
+    },
+    {
+      "id": "amalthea-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 2424,
+      "expectedSha256": "1be489ba72361b411b6aff145ec081f6834c4c791c14c93de2fe45a6cf37359b",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 4 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts amalthea: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    }
+  ]
+}

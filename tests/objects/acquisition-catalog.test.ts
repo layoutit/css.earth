@@ -60,7 +60,7 @@ test('request transforms are ordered, source-authored and hash gated',()=>tempor
 }));
 
 test('all pinned satellite records survive source-table normalization without changing their facts',async()=>{
- const sourceRoot='src/planets/saturn/source';
+ const sourceRoot='src/objects/saturn/source';
  const config=JSON.parse(await readFile(sourceRoot+'/preparation/satellite-catalog.json','utf8'));
  const pinned=JSON.parse(await readFile(sourceRoot+'/moons/saturn-moons.json','utf8'));
  // These are reconstructed parser fixtures, not claimed raw upstream HTML.
@@ -73,16 +73,16 @@ test('all pinned satellite records survive source-table normalization without ch
 });
 
 test('Sun HYG refresh regenerates every pinned projected star from the local full catalogue',()=>temporary(async root=>{
- const sourceRoot='src/planets/sun/source',manifest=JSON.parse(await readFile(sourceRoot+'/manifest.json','utf8'));
+ const sourceRoot='src/objects/sun/source',manifest=JSON.parse(await readFile(sourceRoot+'/manifest.json','utf8'));
  const authored=JSON.parse(await readFile(sourceRoot+'/preparation/acquisition.json','utf8'));
  const plan=parseAcquisitionPlan({...authored,operations:authored.operations.filter((step:{kind:string})=>step.kind==='catalog-field')});
- const bytes=await readFile('src/planets/earth/source/stars/hygdata_v41.csv');let requests=0;
+ const bytes=await readFile('src/objects/earth/source/stars/hygdata_v41.csv');let requests=0;
  await executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async url=>{assert.ok(url.includes('hygdata_v41.csv'));requests++;return new Response(bytes);}}});
  assert.equal(requests,1);assert.deepEqual(await readFile(join(root,'stars/hyg-v41-field.json')),await readFile(sourceRoot+'/stars/hyg-v41-field.json'));
 }));
 
 test('Earth refresh preserves normalized PSG, gzip, editorial and pinned derived records',()=>temporary(async root=>{
- const sourceRoot='src/planets/earth/source',manifest=JSON.parse(await readFile(sourceRoot+'/manifest.json','utf8'));
+ const sourceRoot='src/objects/earth/source',manifest=JSON.parse(await readFile(sourceRoot+'/manifest.json','utf8'));
  const authored=JSON.parse(await readFile(sourceRoot+'/preparation/acquisition.json','utf8'));
  const plan=parseAcquisitionPlan({...authored,operations:authored.operations.filter((step:{kind:string;encoding?:string})=>step.kind==='request-download'||step.kind==='json-document'||step.encoding)});
  const config=await readFile(sourceRoot+'/atmosphere/psg-earth-20260830.cfg','utf8'),spectrum=await readFile(sourceRoot+'/atmosphere/psg-earth-r120-rif.txt','utf8'),noise=await readFile(sourceRoot+'/noise/buenos-aires-day-2025.geojson.gz'),editorial=await readFile(sourceRoot+'/editorial/nasa-earth-record.json','utf8');

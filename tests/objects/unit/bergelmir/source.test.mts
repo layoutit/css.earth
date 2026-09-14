@@ -1,4 +1,4 @@
-import {irregularSatelliteConfig, satelliteOrbitEvidence, simplifiedSatelliteReport, satelliteSurvey, satelliteContent, satelliteRotation} from '../irregular-satellite-fixture.mts';
+import {irregularSatelliteConfig, satelliteOrbitEvidence, simplifiedSatelliteReport, satelliteSurvey, satelliteContent, satelliteRotation, satelliteText} from '../irregular-satellite-fixture.mts';
 import {requireFiniteNumber} from '../../../../tools/source-values.mts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -6,7 +6,7 @@ import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { simplifyRadialShape, validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root = new URL('../../../../src/planets/bergelmir/source/', import.meta.url);
+const root = new URL('../../../../src/objects/bergelmir/source/', import.meta.url);
 const read = async (path:string):Promise<unknown> => JSON.parse(await readFile(new URL(path, root), 'utf8'));
 
 test('Bergelmir preserves the selected lower-limit elongation and explicit volume scale', async () => {
@@ -62,8 +62,9 @@ test('Bergelmir preserves the source identity and honest rotation/shape interpre
   assert.equal(evidence.identity.solution, 'SAT456');
   assert.equal(evidence.rotation.tentative, false);
   assert.equal(evidence.scale.geometricAlbedoAssumption, 0.06);
-  assert.equal(content.lenses.controls[0].detail, 'Approximate shape');
-  assert.match(content.lenses.controls[0].description, /assumed/);
+  const datasetText = satelliteText(await read('../text.json')).datasets[content.lenses.controls[0].id];
+  assert.equal(datasetText?.detail, 'Approximate shape');
+  assert.match(datasetText?.summary ?? '', /assumed/);
   assert.equal(rotation.phase, 'arbitrary-display-phase');
   assert.equal(rotation.declinationDegrees, 90);
   const rotationFact = content.panel.facts.find(fact => fact.id === 'rotation'); assert.ok(rotationFact);

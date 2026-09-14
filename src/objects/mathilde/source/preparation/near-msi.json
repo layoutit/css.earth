@@ -1,0 +1,31 @@
+{
+  "mesh": "shape/stooke-253mathilde.tab",
+  "imageGeometry": "reference/253mathimg.tab",
+  "references": [
+    "reference/253mathimg.xml",
+    "reference/stooke-253mathilde.xml"
+  ],
+  "method": "Thomas et al. 1999 reconstructed image geometry in the J2000-parallel shape frame. Murchie et al. 1999 section 4.1 gives 166.85 mm focal length and 16 by 27 micrometre pixels. The table image coordinates are interpreted as square samples with row-down north azimuth; native FITS line coordinate is table line times 16/27. This inferred table sampling convention requires the source-mesh limb holdout check.",
+  "citations": [
+    "https://doi.org/10.1006/icar.1999.6121",
+    "https://doi.org/10.1006/icar.1999.6118"
+  ],
+  "frames": [
+    {
+      "met": 42826360,
+      "filter": "0",
+      "image": "observations/near-msi/m0042826360f0_2p_iof.fit",
+      "raw": "observations/near-msi/m0042826360f0_2p.fit",
+      "label": "observations/near-msi/m0042826360f0_2p_iof.xml",
+      "output": "observations/near-msi/42826360-camera.json"
+    },
+    {
+      "met": 42826370,
+      "filter": "0",
+      "image": "observations/near-msi/m0042826370f0_2p_iof.fit",
+      "raw": "observations/near-msi/m0042826370f0_2p.fit",
+      "label": "observations/near-msi/m0042826370f0_2p_iof.xml",
+      "output": "observations/near-msi/42826370-camera.json"
+    }
+  ]
+}

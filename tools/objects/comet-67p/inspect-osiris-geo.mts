@@ -39,7 +39,7 @@ async function main() {
   const output = resolve(args.find(a => a.startsWith('--output='))?.slice(9) ?? resolve(root, 'output/comet-intake/67p-rosetta'));
   const tileSize = Number(args.find(a => a.startsWith('--tile-size='))?.slice(12) ?? 64);
   if (![32, 64].includes(tileSize)) throw new Error('Bounded trial requires 32 or 64 pixel tiles.');
-  const sourceDirectory = resolve(root, 'src/planets/comet-67p/source');
+  const sourceDirectory = resolve(root, 'src/objects/comet-67p/source');
   const manifestBytes = await readFile(resolve(sourceDirectory, 'reference/osiris-trial.json'));
   const manifest = parseTrial(JSON.parse(manifestBytes.toString('utf8'))), policy = manifest.transfer;
   const sourceBytes = await readFile(resolve(sourceDirectory, manifest.shape.path));
@@ -82,7 +82,7 @@ async function main() {
   const metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
   const eye = camera.positionKm.map(n => n * 1000);
   const footprint = { image: { width: frame.width, height: frame.height, values: frame.planes.IMAGE, reject: () => null, startTime: frame.startTime, filter: frame.filter, report: {} },
-    camera: { project: (point: readonly number[]) => project(camera.matrix, point.map(n => n / 1000)) }, geometry: archiveBackplanes(frame, { positionMeters: eye }), photometry: { gain: () => 1 } };
+    camera: { project: (point: readonly number[]) => project(camera.matrix, point.map(n => n / 1000)) }, geometry: archiveBackplanes(frame, { positionMeters: eye }), photometry: { gain: () => 1, retainsIllumination: true } };
   const rgb = Buffer.alloc(radial.width * radial.height * 3), coverage = Buffer.alloc(rgb.length);
   const counts:Record<string,number> = {}, distances:number[] = [], separations:number[] = [];
   let interiorTexels = 0;

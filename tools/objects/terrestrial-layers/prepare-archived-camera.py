@@ -1,7 +1,7 @@
 """Reproduce preparation-only OSIRIS or L'LORRI cameras from pinned archives.
 
 Requires numpy, scipy, astropy and spiceypy. No ephemerides are fetched here.
-Usage: python prepare-archived-camera.py src/planets/<id>/source
+Usage: python prepare-archived-camera.py src/objects/<id>/source
 """
 from pathlib import Path
 import argparse, hashlib, json, re, subprocess, tempfile
@@ -71,10 +71,28 @@ def osiris(source, profile):
         matrix=p.tolist(),rayMatrix=np.linalg.inv(p[:,:3]).tolist(),positionKm=eye.tolist(),sunDirection=sun.tolist(),checks=checks)
 
 
+def llorri_target(header, profile):
+    """The camera's body must be one of the frame's field-of-view targets; a frame showing several needs the profile to name it."""
+    targets = [str(header[f'TRGFOV{i}']).strip() for i in range(1, int(header['TRGFOVN']) + 1)]
+    target = profile.get('target', targets[0] if len(targets) == 1 else None)
+    if target not in targets:
+        raise ValueError(f"L'LORRI camera target {target} is not among the frame's field-of-view targets {targets}")
+    return target
+
+
+def body_frame_note(target, profile):
+    """Name the body frame from the profile's one PCK kernel, which is valid near the encounter only."""
+    kernels = [Path(path).stem for path in profile['kernels'] if path.endswith('.tpc')]
+    if len(kernels) != 1:
+        raise ValueError("Expected one body-frame PCK kernel in the L'LORRI profile")
+    version = re.search(r'_(v\d+)$', kernels[0])
+    return f"{target.title()} {version.group(1) if version else kernels[0]}; valid near the encounter epoch only"
+
+
 def llorri(source, profile):
     from astropy.io import fits
     from astropy.wcs import WCS
-    h = fits.getheader(source / profile['image']); w = WCS(h)
+    h = fits.getheader(source / profile['image']); w = WCS(h); target = llorri_target(h, profile)
     et = sp.str2et(h['MIDUTC']); r = sp.tipbod('J2000', profile['bodyId'], et).T
     eye = np.array([h['SPCTSC'+c] for c in 'XYZ']); sun = r.T @ np.array([h['SPCTSO'+c] for c in 'XYZ']); sun /= np.linalg.norm(sun)
     ra, dec = np.radians([h['CRVAL1'],h['CRVAL2']])
@@ -103,11 +121,11 @@ def llorri(source, profile):
         for y in [41,211,557,933]:
             ra,dec=np.radians(w.all_pix2world([[x,y]],0)[0]);v=np.array([np.cos(dec)*np.cos(ra),np.cos(dec)*np.sin(ra),np.sin(dec)])
             oracle.append(dict(pointKm=(r.T@(eye+v*1272)).tolist(),pixel=(np.array([x,y])+offset).tolist()))
-    return dict(schema='cssearth-archived-camera@1',target='DONALDJOHANSON',startTime=h['STARTUTC'],filter='PANCHROMATIC',
+    return dict(schema='cssearth-archived-camera@1',target=target,startTime=h['STARTUTC'],filter='PANCHROMATIC',
         width=1024,height=1024,matrix=p.tolist(),rayMatrix=np.linalg.inv(k@r).tolist(),positionKm=(r.T@eye).tolist(),sunDirection=sun.tolist(),
         sip=dict(referencePixel=ref.tolist(),a=terms('A'),b=terms('B'),offsetPixels=offset.tolist()),
         checks=dict(anchors=anchors,maximumHoldoutResidualPixels=maximum,maximumAcceptedHoldoutResidualPixels=3,
-            astropyProjectionAnchors=oracle,bodyFrame='Donaldjohanson v12; valid near the encounter epoch only',
+            astropyProjectionAnchors=oracle,bodyFrame=body_frame_note(target,profile),
             pointing='Two published landmarks constrain translation; third withheld. Original TAN-SIP distortion unchanged.'))
 
 
@@ -116,21 +134,27 @@ def register_osiris(source, profile, camera, temporary):
     from scipy.signal import fftconvolve
     camera_path=temporary/'camera.json';camera_path.write_text(json.dumps(camera))
     output=temporary/'reference.f32'
-    subprocess.run(['node',str(Path(__file__).with_name('camera-reference.mjs')),str(source),str(camera_path),str(source/profile['image']),str(output)],check=True)
+    subprocess.run(['node',str(Path(__file__).with_name('camera-reference.mts')),str(source),str(camera_path),str(source/profile['image']),str(output)],check=True)
     width,height=camera['width'],camera['height'];m=np.fromfile(output,'<f4').reshape(height,width)
     data=(source/profile['image']).read_bytes();offset=(int(field(data[:65536].decode('ascii',errors='replace'),'^IMAGE'))-1)*512
     a=np.frombuffer(data,dtype='<f4',count=width*height,offset=offset).reshape(height,width).astype('float64');a[~np.isfinite(a)]=0
     # A standard difference of Gaussians removes unmatched broad photometric
     # trends. Matching only estimates a translation, never modifies source pixels.
     a=gaussian_filter(a,2)-gaussian_filter(a,30);m=gaussian_filter(m,2)-gaussian_filter(m,30)
+    pad=profile.get('registrationSearchRadiusPixels',128)
+    if type(pad) is not int or not 128<=pad<=256:
+        raise ValueError('Registration search must be between 128 and 256 source pixels')
     results=[]
     for window in profile['registrationWindows']:
-        x0,y0,x1,y1=window['rectangle'];t=m[y0:y1,x0:x1];im=a[y0-128:y1+128,x0-128:x1+128];t=t-t.mean();ones=np.ones(t.shape);n=t.size
+        x0,y0,x1,y1=window['rectangle']
+        if not (pad<=x0<x1<=width-pad and pad<=y0<y1<=height-pad):
+            raise ValueError('Registration window and search margin must fit inside the source image')
+        t=m[y0:y1,x0:x1];im=a[y0-pad:y1+pad,x0-pad:x1+pad];t=t-t.mean();ones=np.ones(t.shape);n=t.size
         sums=fftconvolve(im,ones,mode='valid');sq=fftconvolve(im*im,ones,mode='valid');cov=fftconvolve(im,t[::-1,::-1],mode='valid')
         cc=cov/np.sqrt(np.maximum(1e-30,(sq-sums*sums/n)*np.sum(t*t)));iy,ix=np.unravel_index(cc.argmax(),cc.shape)
-        if min(ix,iy)<=0 or max(ix,iy)>=256 or cc[iy,ix]<.7:
-            raise ValueError('Unqualified image/model correlation window')
-        results.append(dict(**window,offsetPixels=[int(ix)-128,int(iy)-128],correlation=float(cc[iy,ix])))
+        if min(ix,iy)<=0 or max(ix,iy)>=2*pad or cc[iy,ix]<.7:
+            raise ValueError(f"Unqualified image/model correlation window {window['name']}: offset ({int(ix)-pad}, {int(iy)-pad}), correlation {float(cc[iy,ix]):.6f}")
+        results.append(dict(**window,offsetPixels=[int(ix)-pad,int(iy)-pad],correlation=float(cc[iy,ix])))
     fits=[w for w in results if w['role']=='fit'];holdouts=[w for w in results if w['role']=='holdout']
     if len(fits)!=2 or len(holdouts)!=2:
         raise ValueError('Expected disjoint two-fit/two-holdout registration')
@@ -142,6 +166,8 @@ def register_osiris(source, profile, camera, temporary):
     camera['checks']['imageRegistration']=dict(method='Bounded zero-mean normalized image/model correlation; BORESIGHT_V01 section 4.2.',
         windows=results,offsetPixels=delta.tolist(),maximumHoldoutResidualPixels=maximum,maximumAcceptedHoldoutResidualPixels=12,
         interpretation='Registration to the pinned source shape; not absolute ground truth. Header pointing checks describe the camera before adjustment.')
+    if pad!=128:
+        camera['checks']['imageRegistration']['searchRadiusPixels']=pad
 
 
 def main():

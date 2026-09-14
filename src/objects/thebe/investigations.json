@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "thebe",
+  "entries": [
+    {
+      "id": "galileo-c0368591600",
+      "subject": "Galileo SSI frame C0368591600 in the Monochrome lens",
+      "status": "excluded",
+      "finding": "Thebe is a 77-pixel lit crescent, and no level reconciles it with the other frames: without it their fitted levels span 1 to 0.59 instead of 1 to 0.20.",
+      "revisitWhen": "An overlapping frame can set its level, or a closer view of the same longitudes is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/4fea925cce611d30704d68df60d91df92596b87c/src/planets/thebe/README.md#L58"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "4fea925cce611d30704d68df60d91df92596b87c"
+        }
+      ]
+    }
+  ]
+}

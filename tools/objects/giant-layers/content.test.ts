@@ -7,7 +7,7 @@ import type { ObjectContentSource } from '../content/types.js';
 
 for (const id of ['jupiter', 'saturn', 'uranus', 'neptune']) {
   test(`${id} authored content preserves the accepted shell fields and controls`, async () => {
-    const root = resolve(process.cwd(), 'src/planets', id);
+    const root = resolve(process.cwd(), 'src/objects', id);
     const source = JSON.parse(await readFile(resolve(root, 'source/content/object.json'), 'utf8')) as ObjectContentSource;
     const expected = JSON.parse(await readFile(resolve(root, 'prepared/content.json'), 'utf8'));
     const controls = JSON.parse(await readFile(resolve(root, 'prepared/controls.json'), 'utf8'));

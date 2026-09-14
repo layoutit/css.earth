@@ -11,8 +11,8 @@ import { fileURLToPath } from 'node:url';
 import type { ObjectMountOptions, ObjectRuntimeDefinition } from './object-runtime-types.js';
 
 async function preparedFixture() {
-  const descriptor = requirePreparedCssDescriptor(JSON.parse(await readFile(new URL('../../../planets/venus/object.json', import.meta.url), 'utf8')));
-  const envelope = record(JSON.parse(await readFile(new URL('../../../planets/venus/prepared/object.json', import.meta.url), 'utf8')), 'prepared Venus fixture');
+  const descriptor = requirePreparedCssDescriptor(JSON.parse(await readFile(new URL('../../../objects/venus/object.json', import.meta.url), 'utf8')));
+  const envelope = record(JSON.parse(await readFile(new URL('../../../objects/venus/prepared/object.json', import.meta.url), 'utf8')), 'prepared Venus fixture');
   const source = requireObjectRuntimeDefinition(await inlineSharedFromBanks(fileURLToPath(new URL('../../../../', import.meta.url)), envelope.data));
   // Retain the real tree and selections while keeping image decoding in its browser gate.
   const data = { ...source, assets: { ...source.assets, startup: [] }, materials: [],

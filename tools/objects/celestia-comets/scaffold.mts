@@ -12,7 +12,7 @@ const write=async(p:string,o:unknown)=>{await mkdir(dirname(p),{recursive:true})
 const pin=async(p:string)=>{const b=await readFile(p);return {expectedBytes:b.length,expectedSha256:createHash('sha256').update(b).digest('hex')};};
 const intake=await readIntake(),editorial=await read(new URL('./editorial.json',import.meta.url));
 if(intake.length!==candidates.length)throw Error('Run acquire-orbits first');
-const base='src/planets/comet-209p';
+const base='src/objects/comet-209p';
 const url=`https://github.com/CelestiaProject/CelestiaContent/blob/${upstream.commit}/data/comets.ssc`;
 const credit='Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara';
 const license='GPL-2.0-or-later (Celestia catalog); independent cssEarth preparation code MIT';
@@ -20,7 +20,7 @@ if(upstream.commit!=='1993a082ee6307c0df7fdc0828eb117a0e8e9958')throw Error('Cur
 const header=(await readFile(new URL('comets.ssc',sourceRoot),'utf8')).split('# Periodic Comets')[0];
 for(const c of intake){
  const ed=requireRecord(editorial[c.id]??{}),name=ed.name===undefined?c.name.replaceAll('-','–'):requireString(ed.name),full=c.designation+(c.designation.startsWith('C/')?' ':'/')+name;
- const p=`src/planets/${c.id}`,s=`${p}/source`;
+ const p=`src/objects/${c.id}`,s=`${p}/source`;
  try{await access(`${p}/object.json`);throw Error(`Refusing to overwrite ${c.id}`);}catch(e){if(!hasErrorCode(e,'ENOENT'))throw e;}
  const clone=async(rel:string)=>requireRecord(JSON.parse((await readFile(`${base}/${rel}`,'utf8')).replaceAll('comet-209p',c.id).replaceAll('LINEAR',name)));
  for(const rel of ['stars/eso0932a.tif','stars/ESO-IMAGE-LICENSE.md','stars/LICENSE.md','presentation/InterVariable.ttf','presentation/minimap.json']){

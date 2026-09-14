@@ -6,7 +6,7 @@ import {readFile} from 'node:fs/promises';
 import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {decodeCalibratedCamera,controlledShapeCamera} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 
-const root=new URL('../../../../src/planets/puck/source/',import.meta.url);
+const root=new URL('../../../../src/objects/puck/source/',import.meta.url);
 
 test('Puck decodes the actual Voyager calibrated HALF raster without consuming header bytes',async()=>{
   const bytes=await readFile(new URL('observations/C2683716_GEOMED.IMG',root));
@@ -22,7 +22,7 @@ test('Puck decodes the actual Voyager calibrated HALF raster without consuming h
 test('Puck camera scale and north roll agree with the source matrix and 81 km reference sphere',async()=>{
   const recipe=JSON.parse((await readFile(new URL('preparation/terrestrial.json',root))).toString('utf8'));
   const registration=JSON.parse((await readFile(new URL('geometry/registration.json',root))).toString('utf8'));
-  const frame=recipe.raster.mosaics[0].frames[0];
+  const frame=recipe.raster.surfaceObservations[0].frames[0];
   const shape=parsePdsRadiusTable(await readFile(new URL('shape/ellipsoid.tab',root),'utf8'),recipe.geometry.radialTerrain.grid);
   for(const [lon,lat] of [[0,0],[90,0],[180,0],[0,90],[0,-90]] as const)assert.ok(Math.abs(required(shape.sample(lon,lat))-81000)<1e-6);
   const evidence=registration.frames[0].rollEvidence;

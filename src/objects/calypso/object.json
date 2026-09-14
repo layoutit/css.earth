@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "calypso",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Calypso",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "1f16947344e4e772e4b329385ce8fe280066ac6493449a958601c15d55c66443"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "056216b95c0e91cad93d502460aae2c74857798a4d9aa77a976636a090d3a60b"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "53ac68a0b17ae29199a5157f3d90e7da8b42aa765a24975f2d38e0cb9496f4fd"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "e1d7c94640f34bb7bc30a0b294967183841eac928c2e55ab4e33f5f5ce793cca"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "2598ea05e5e7e154b53f9f8815eb6e627f2828ddb33bc99cec780d3c0126ef02"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "d5a16a29a7dedeb13d604d0903f4417bab7db26620632a4d1e78b8dad3220651"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 10.7
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "false-color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1390917470096.553,
+        245060265618.80432,
+        41349724029.27045
+      ],
+      "presentationToReference": [
+        0.9852848845891089,
+        2.7755575615628914e-17,
+        -0.17092014568279124,
+        0.15681616771021226,
+        0.39777715593191365,
+        0.9039812076384115,
+        0.0679881294411691,
+        -0.9174820620691818,
+        0.3919238191745595
+      ],
+      "orbitUpReference": [
+        -2.7755575615628914e-17,
+        -0.39777715593191365,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 46.52173913043478,
+      "bodyRadiusM": 10700
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/calypso-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f74f4278cbcdf268d3e68442a10b6125579397b0c84358c8142c8cedb3b1897d"
+      }
+    },
+    "catalog": {
+      "name": "Calypso",
+      "classification": "satellite",
+      "color": "#c3bfb7",
+      "distanceAu": 9.58,
+      "description": "Small moon that trails Tethys along its orbit around Saturn.",
+      "systemName": "Solar System",
+      "order": 113,
+      "context": {
+        "order": 54
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "438f08074745c7b887fb79e0bc249294c1e156b9f526a4e56af40f7084931e87"
+  }
+}

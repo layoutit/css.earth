@@ -1,6 +1,6 @@
 import type {RadialState} from './solid-contract.mts';
 type TerrainContext = Parameters<typeof loadRadialTerrain>[0];
-const lensGroups = ['observations', 'scientific', 'mosaics', 'observedColors', 'shapeViews', 'surfaceObservations'] as const;
+const lensGroups = ['observations', 'scientific', 'observedColors', 'shapeViews', 'surfaceObservations'] as const;
 interface ModelConfig {
   namespace: string;
   geometry: {radius: number; radiusKm: number; radialTerrain?: unknown; radialTerrainAlternatives?: (Record<string, unknown> & {lensId: string})[]};

@@ -7,7 +7,7 @@ import { parseSourceManifest, verifySources } from '../../../../tools/objects/di
 // test runner. Verify actual source bytes through the shared package contract.
 export function testDistantWorldSources(id: string|undefined) {
   test(`${id}: every declared source retains its pinned bytes`, async () => {
-    const source = new URL(`../../../../src/planets/${id}/source/`, import.meta.url);
+    const source = new URL(`../../../../src/objects/${id}/source/`, import.meta.url);
     const manifest = parseSourceManifest(JSON.parse(await readFile(new URL('manifest.json', source), 'utf8')), id);
     await verifySources({ sourceRoot: fileURLToPath(source), manifest });
   });

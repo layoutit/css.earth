@@ -25,7 +25,6 @@ export const parseSolidRasterConfig = shape({namespace:text,publicBase:text,
   raster:shape({width:number,height:number,bandCount:number,gutter:number,poleSize:number,surfaceQuality:optional(number),reportMissingPixels:optional(boolean),
     observations:array(parseSolidObservation),scientific:optional(array(parseSolidScience)),
     shapeViews:optional(array(shape({...identity,label:text}))),
-    mosaics:optional(array(shape({...identity,format:text,photometry:optional(shape({consumer:optional(text)}))}))),
     surfaceObservations:optional(array(shape(identity))),
     observedColors:optional(array(shape({...identity,profile:requireRecord,monochromeBase:text,photometry:optional(parseColorPhotometry)})))})});
 

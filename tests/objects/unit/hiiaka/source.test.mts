@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=new URL('../../../../src/planets/hiiaka/source/',import.meta.url);
+const root=new URL('../../../../src/objects/hiiaka/source/',import.meta.url);
 test('Hiʻiaka radius table preserves independently derived physical-axis anchors',async()=>{
  const config=JSON.parse(await readFile(new URL('preparation/terrestrial.json',root),'utf8'));
  const shape=parsePdsRadiusTable(await readFile(new URL('shape/ellipsoid.tab',root),'utf8'),config.geometry.radialTerrain.grid);

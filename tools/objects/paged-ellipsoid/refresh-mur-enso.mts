@@ -4,14 +4,14 @@ import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefre
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
-import { acquireMurImagery, murEnsoContent, murCapabilitiesUrl, murColormapUrl, murDescriptionUrl, murLayer, sha256 } from './mur-imagery.mts';
+import { acquireMurImagery, murEnsoContent, murEnsoText, murCapabilitiesUrl, murColormapUrl, murDescriptionUrl, murLayer, sha256 } from './mur-imagery.mts';
 import { parseEnsoAdvisory } from './enso-advisory.mts';
 
 const json = (value: unknown) => JSON.stringify(value, null, 2) + '\n';
 // A completed anonymous acquisition is installed only after every source tile
 // and the reproducible mosaic have been verified. No partial face publication.
 export async function installMurEnso(root: string, acquiredDirectory: string) {
-  const object = resolve(root, 'src/planets/earth'), source = join(object, 'source');
+  const object = resolve(root, 'src/objects/earth'), source = join(object, 'source');
   const config = await readMapConfiguration(join(source, 'preparation/paged-ellipsoid.json'));
   const map = config.surface.maps.find(map => map.name === 'earth-enso');
   const receipt = parseMurReceipt(await readJsonSource(join(acquiredDirectory, 'mur-gibs-receipt.json')));
@@ -40,7 +40,7 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
   const bindings = await readRefreshBindings(join(source, 'content/lens-bindings.json'));
   const binding = bindings.controls.find(lens => lens.id === 'enso');
   if (!binding) throw new Error('ENSO presentation binding is missing.');
-  binding.qualification = lens.description;
+  binding.qualification = lens.notes;
   updates.set('preparation/paged-ellipsoid.json', Buffer.from(json(config)));
   updates.set('content/object.json', Buffer.from(json(content)));
   updates.set('content/lens-bindings.json', Buffer.from(json(bindings)));
@@ -60,7 +60,7 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
     const at = manifest.inputs.findIndex(e => e.id === id); if (at < 0) manifest.inputs.push(record); else manifest.inputs[at] = record;
   }
   const mosaic = { id: 'nasa-mur-gibs-mosaic', path: 'science/mur-gibs.png', origin: 'tools/objects/paged-ellipsoid/mur-imagery.mts',
-    generator: 'tools/objects/paged-ellipsoid/mur-imagery.mts restore src/planets/earth/source/science',
+    generator: 'tools/objects/paged-ellipsoid/mur-imagery.mts restore src/objects/earth/source/science',
     expectedSha256: receipt.mosaic.sha256, expectedBytes: requireUpdateBytes(updates, 'science/mur-gibs.png').length,
     description: 'Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.',
     consumers: ['enso'] };
@@ -76,6 +76,10 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
   for (const [path, bytes] of updates) await writeFile(join(source, path), bytes);
   await writeFile(join(source, 'manifest.json'), json(manifest));
   await writeFile(join(object, 'object.json'), json(descriptor));
+  // The dated reader text lives beside object.json; pnpm prepare:text publishes it.
+  const text = JSON.parse(await readFile(join(object, 'text.json'), 'utf8'));
+  text.datasets.enso = murEnsoText(recipe);
+  await writeFile(join(object, 'text.json'), json(text));
   return { date: receipt.date, sourceBytes: receipt.sourceBytes, tileCount: receipt.tiles.length, mosaic: receipt.mosaic };
 }
 

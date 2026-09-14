@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import test from 'node:test';
 import {readPreparedFixture} from '../../fixtures.mts';
-const sourceRoot=new URL('../../../../src/planets/saturn/source/',import.meta.url);
+const sourceRoot=new URL('../../../../src/objects/saturn/source/',import.meta.url);
 const catalog=JSON.parse(await readFile(new URL('moons/saturn-moons.json',sourceRoot),'utf8'));
 const manifest=JSON.parse(await readFile(new URL('manifest.json',sourceRoot),'utf8'));
 const expectedMoons=['mimas','enceladus','tethys','dione','rhea','titan','hyperion','iapetus'];
@@ -29,7 +29,7 @@ test('retains every pinned moon source image and catalog byte',async()=>{
 });
 test('keeps dormant moon billboards, orbit guides and shadow banks outside the parent runtime',async()=>{
  const [definition,scene]=await Promise.all([readPreparedFixture('saturn','runtime'),readPreparedFixture('saturn','scene')]);
- const assets=JSON.parse(await readFile(new URL('../../../../src/planets/saturn/runtime-assets.json',import.meta.url),'utf8'));
+ const assets=JSON.parse(await readFile(new URL('../../../../src/objects/saturn/runtime-assets.json',import.meta.url),'utf8'));
  assert.doesNotMatch(JSON.stringify(definition),/saturn-moon|PREPARED_SATURN_MOON|mountPreparedOrbitGuide|createPreparedOrbitGuideInteraction/);
  assert.ok(assets.assets.every((asset: { filename: string|string[]; })=>!asset.filename.includes('moon')));
  assert.ok(Object.keys(scene.counts).every(key=>!key.startsWith('moon')));

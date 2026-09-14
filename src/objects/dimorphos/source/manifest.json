@@ -1,0 +1,1053 @@
+{
+  "schema": "cssdimorphos-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dimorphos-shape",
+      "path": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+      "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation",
+        "facet-science",
+        "albedo"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 75
+      },
+      "coverage": "Closed DART encounter model v004 derived from DRACO and LICIACube; source uncertainty varies with imaging coverage. Not a reconstructed post-impact surface.",
+      "expectedBytes": 14454228,
+      "expectedSha256": "9633847a16c34faad7590f43ba6b07fed53926fb363da0a72f977f6cf2c61f3e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dimorphos-shape",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "id": "dimorphos-facet-science",
+      "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "consumers": [
+        "facet-science"
+      ],
+      "expectedBytes": 4726080,
+      "expectedSha256": "6bd56d7f107552ef6220b4e629848954f0630f9017f5914eb2c5e140493e66be",
+      "coverage": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dimorphos-facet-science",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dimorphos-relative-albedo",
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "credit": "NASA/JHUAPL DART; Daly, Barnouin, Ernst, Nair, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "albedo"
+      ],
+      "expectedBytes": 4728960,
+      "expectedSha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd",
+      "lensId": "albedo",
+      "projection": {
+        "kind": "source-triangle-facet-field",
+        "units": "relative albedo",
+        "facetNumberBase": 0
+      },
+      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dimorphos-relative-albedo",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dimorphos-relative-albedo-label",
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "credit": "NASA/JHUAPL DART; Daly, Barnouin, Ernst, Nair, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "albedo"
+      ],
+      "expectedBytes": 6781,
+      "expectedSha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e",
+      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dimorphos-relative-albedo-label",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-dimorphos-nomenclature-center-pts",
+      "path": "features/DIMORPHOS_nomenclature_center_pts.zip",
+      "expectedBytes": 30289,
+      "expectedSha256": "665b495e7b2841e18d8c362f41ec6775c4399a94d473e975ec936cec99684963",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIMORPHOS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dimorphos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Dimorphos centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DIMORPHOS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "draco-0401930040-12262-geo",
+      "path": "observations/dart_0401930040_12262_01_geo.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930040_12262_01_geo.fits",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930040_12262_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation",
+        "draco-spice"
+      ],
+      "expectedBytes": 67132800,
+      "expectedSha256": "280764106bd4a2eb43fd614a5f70a5008b3820b0ef22d3f75bfea8875300edd2",
+      "observationDate": "2022-09-26T23:14:12.737Z",
+      "width": 1024,
+      "height": 1024,
+      "interpretation": "Calibrated DRACO I/F with SPICE geometric backplanes: pixel-centre surface intercepts on dimorphos_g_00243mm_spc_0000n00000_v004.bds, latitude, longitude, radius, incidence, emission, phase, pixel scales, slope, elevation and gravity.",
+      "coverage": "One approach frame started 2022-09-26T23:14:12.737Z; on-body pixels are bounded by the readout window and the terminal-approach footprint.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-draco-0401930040-12262-geo",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@264978a37b9d6699d429166f6c835f3daee4e9a6#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "draco-0401930040-12262-label",
+      "path": "observations/dart_0401930040_12262_01_geo.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930040_12262_01_geo.xml",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930040_12262_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 40081,
+      "expectedSha256": "3b417f2952fb40a01ff395e6b55c81fbe7d1b150a61fb47a0118e8b4bff48890",
+      "observationDate": "2022-09-26T23:14:12.737Z",
+      "interpretation": "PDS4 label defining the cube planes, byte offsets, units, special constants and the SPICE kernels used for the backplanes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-draco-0401930040-12262-label",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@264978a37b9d6699d429166f6c835f3daee4e9a6#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-naif0012-tls",
+      "path": "spice/lsk/naif0012.tls",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/lsk/naif0012.tls",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:lsk_naif0012.tls::1.0",
+      "credit": "NASA/JPL NAIF; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+      "interpretation": "SPICE LSK file incorporating leapseconds up to 2017-JAN-01, created by NAIF, JPL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-pck00010-tpc",
+      "path": "spice/pck/pck00010.tpc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/pck/pck00010.tpc",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:pck_pck00010.tpc::1.0",
+      "credit": "NASA/JPL NAIF; IAU Working Group on Cartographic Coordinates and Rotational Elements (2009); archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 126143,
+      "expectedSha256": "59468328349aa730d18bf1f8d7e86efe6e40b75dfb921908f99321b3a7a701d2",
+      "interpretation": "SPICE text PCK file containing constants from the IAU 2009 report, created by NAIF, JPL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-didymos-system-15-tpc",
+      "path": "spice/pck/didymos_system_15.tpc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/pck/didymos_system_15.tpc",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:pck_didymos_system_15.tpc::1.0",
+      "credit": "DART SOC, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 7968,
+      "expectedSha256": "c36bf56a5f93cb1f4ddc1eb09623a628b82ac225bb08e86c8a34c03cf7355600",
+      "interpretation": "SPICE text PCK file containing constants for the Didymos system, created by the DART SOC, JHU/APL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-dart-009-tf",
+      "path": "spice/fk/dart_009.tf",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/fk/dart_009.tf",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:fk_dart_009.tf::1.0",
+      "credit": "DART project, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 35651,
+      "expectedSha256": "57f62d53298e88e536dcd4c3608cff436629608ea8eee7ff8840e5e2e9e69610",
+      "interpretation": "SPICE FK file defining reference frames for the DART spacecraft, its structures, and science instruments, created by the DART SOC, JHU/APL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-didymos-system-007-tf",
+      "path": "spice/fk/didymos_system_007.tf",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/fk/didymos_system_007.tf",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:fk_didymos_system_007.tf::1.0",
+      "credit": "DART SOC, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 17325,
+      "expectedSha256": "3bd7214663c830018d1db80587976fc03b149b206a585f146146f0f612c30d57",
+      "interpretation": "SPICE FK file defining reference frames for the Didymos system, by the DART SOC, JHU/APL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-dart-draco-003-ti",
+      "path": "spice/ik/dart_draco_003.ti",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/ik/dart_draco_003.ti",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:ik_dart_draco_003.ti::1.0",
+      "credit": "DART project, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 13132,
+      "expectedSha256": "377b5183ed63f8da2b413a7a50823f7961cd54482893fc0ddb4f296ba651a049",
+      "interpretation": "SPICE IK file providing FOV definitions for the DART Didymos Reconnaissance and Asteroid Camera for OpNav (DRACO) instrument, created by by the DART science team, JHU/APL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/14"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-dart-sclk-0204-tsc",
+      "path": "spice/sclk/dart_sclk_0204.tsc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/sclk/dart_sclk_0204.tsc",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:sclk_dart_sclk_0204.tsc::1.0",
+      "credit": "DART mission operations, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 21282,
+      "expectedSha256": "66e74d60be322137012f55659a1bff72ef308f29540b5599148ab68dbf76546f",
+      "interpretation": "SPICE SCLK file containing actual time correlation data for the DART on-board clock, created by the DART science team, JHU/APL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-de430-bsp",
+      "path": "spice/spk/de430.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/de430.bsp",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_de430.bsp::1.0",
+      "credit": "NASA/JPL Solar System Dynamics Group; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 119741440,
+      "expectedSha256": "6e1b277c5f07135a84950604b83e56b736be696a7f3560bcddb1d4aeb944fca1",
+      "interpretation": "SPICE SPK file containing JPL planetary ephemerides version DE430, created by the Solar System Dynamics group (SSD), JPL. Covers 1549-12-30T23:59:19Z to 2650-01-24T23:58:51Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-didymos-barycenter-s205-v01-bsp",
+      "path": "spice/spk/didymos_barycenter_s205_v01.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/didymos_barycenter_s205_v01.bsp",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_didymos_barycenter_s205_v01.bsp::1.0",
+      "credit": "NASA/JPL Solar System Dynamics Group; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 236544,
+      "expectedSha256": "e627aa63662e4700ae3590d6be2e740fcbc9b4b8fd11de9aa53ae8ee111ce69a",
+      "interpretation": "SPICE SPK file containing ephemeris of the asteroid system barycenter (20065803) Didymos, created by the Solar System Dynamics group (SSD), JPL. This file was originally named didymos_barycenter_s205_v01.bsp. Label coverage 2000-12-31T23:58:56Z to 2025-07-13T23:58:51Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/17"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-didymos-system-s542-v01-bsp",
+      "path": "spice/spk/didymos_system_s542_v01.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/didymos_system_s542_v01.bsp",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_didymos_system_s542_v01.bsp::1.0",
+      "credit": "NASA/JPL Solar System Dynamics Group; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 51214336,
+      "expectedSha256": "6a5d9fe10131d43a941fc6c71424e8a3207e4d5ade8f0a57be3d974118bb6ae6",
+      "interpretation": "SPICE SPK file containing ephemerides of Didymos and Dimorphos, created by the Solar System Dynamics group (SSD), JPL. This file was originally named didymos_system_s542_v01.bsp. Label coverage 2000-01-01T00:12:05Z to 2024-12-30T23:58:51Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/18"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-dart-struct-v04-bsp",
+      "path": "spice/spk/dart_struct_v04.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/dart_struct_v04.bsp",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_dart_struct_v04.bsp::1.0",
+      "credit": "DART project, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 14336,
+      "expectedSha256": "12d0ed3831ab96bb3d5228953a84d69ee82334ad4a872e245cbbf903767a6bc3",
+      "interpretation": "SPICE SPK file containing relative locations of selected DART structures and science instruments, created by the DART SOC, JHU/APL. Label coverage 2021-11-26T23:58:51Z to 2022-10-17T23:58:51Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/19"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-dart-2022-231-2022-269-rec-v03-bsp",
+      "path": "spice/spk/dart_2022_231_2022_269_rec_v03.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/dart_2022_231_2022_269_rec_v03.bsp",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_dart_2022_231_2022_269_rec_v03.bsp::1.0",
+      "credit": "DART Navigation Team, NASA/JPL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 11256832,
+      "expectedSha256": "0014277e927ffe6191b1404497d3ad5011eb67121ef248f5959a25c1b3ac632f",
+      "interpretation": "SPICE SPK file providing reconstructed trajectory of the DART spacecraft, created by the DART Navigation Team at JPL. This file was originally named dart_2022_231_2022_269_rec_v03.bsp. Label coverage 2022-08-19T00:00:00Z to 2022-09-26T21:58:51Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/20"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-dart-2022-269-2022-269-rec-v03-bsp",
+      "path": "spice/spk/dart_2022_269_2022_269_rec_v03.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/dart_2022_269_2022_269_rec_v03.bsp",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_dart_2022_269_2022_269_rec_v03.bsp::1.0",
+      "credit": "DART Navigation Team, NASA/JPL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 357376,
+      "expectedSha256": "88f75d64552f33573f0da607f1295ee84c08d32187f9b575a78a56fa8330dad0",
+      "interpretation": "SPICE SPK file providing reconstructed trajectory of the DART spacecraft, created by the DART Navigation Team at JPL. This file was originally named dart_2022_269_2022_269_rec_v03.bsp. Label coverage 2022-09-26T21:58:51Z to 2022-09-26T23:14:24Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/21"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-dart-2022-269-2022-269-spc-v04-bsp",
+      "path": "spice/spk/dart_2022_269_2022_269_spc_v04.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/dart_2022_269_2022_269_spc_v04.bsp",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_dart_2022_269_2022_269_spc_v04.bsp::1.0",
+      "credit": "DART Navigation Team, NASA/JPL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 10240,
+      "expectedSha256": "cbc254ea38d919880571cb7a6ef1f546260d0910012da53783d63886f24d0d28",
+      "interpretation": "SPICE SPK file providing reconstructed trajectory of the DART spacecraft, created by the DART Navigation Team at JPL. This file was originally named dart_2022_269_2022_269_spc_v04.bsp. Label coverage 2022-09-26T23:13:36Z to 2022-09-26T23:14:24Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart-spice-dart-2022-269-2022-269-spc-v04-bc",
+      "path": "spice/ck/dart_2022_269_2022_269_spc_v04.bc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/ck/dart_2022_269_2022_269_spc_v04.bc",
+      "productId": "urn:nasa:pds:dart.spice:spice_kernels:ck_dart_2022_269_2022_269_spc_v04.bc::1.0",
+      "credit": "DART mission operations, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
+      "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
+      "consumers": [
+        "draco-spice"
+      ],
+      "expectedBytes": 11264,
+      "expectedSha256": "1a3f4a50808b9ad0a5c790659da1aea41b45bfae6336104606dba2efcaa76517",
+      "interpretation": "SPICE CK file containing DART spacecraft attitude history from DOY 2022-269 to 2022-269, created by DART mission operations, JHU/APL. Label coverage 2022-09-26T23:13:36.148Z to 2022-09-26T23:14:24.184Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@95b3cff2858ae64a4007591e735660b6ce8f5f46#/inputs/23"
+          }
+        ]
+      }
+    },
+    {
+      "id": "draco-0401930049-43695-geo",
+      "path": "observations/dart_0401930049_43695_01_geo.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.fits",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930049_43695_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 67132800,
+      "expectedSha256": "d8b2171b610235dced9306b01bcf2c6dbfb9317693457b441cdb36678a9ab629",
+      "observationDate": "2022-09-26T23:14:22.365Z",
+      "width": 1024,
+      "height": 1024,
+      "interpretation": "Calibrated DRACO I/F and pixel-centre geometry on the Dimorphos v004 0.243 m DSK.",
+      "coverage": "One approach observation acquired 2022-09-26T23:14:22.365Z; valid coverage is bounded by the native readout window and qualified surface geometry.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930049-43695-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.xml: Identification_Area and the labelled File_Area_Observational."
+          }
+        ]
+      }
+    },
+    {
+      "id": "draco-0401930049-43695-label",
+      "path": "observations/dart_0401930049_43695_01_geo.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.xml",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930049_43695_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 39996,
+      "expectedSha256": "3085249f3334090f2227c30cf4037be88d82ddef78e4c79edebaf94c1ad27fee",
+      "observationDate": "2022-09-26T23:14:22.365Z",
+      "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930049-43695-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.xml: Identification_Area and the labelled product metadata."
+          }
+        ]
+      },
+      "coverage": "One approach observation acquired 2022-09-26T23:14:22.365Z; valid coverage is bounded by the native readout window and qualified surface geometry."
+    },
+    {
+      "id": "draco-0401930046-49265-geo",
+      "path": "observations/dart_0401930046_49265_01_geo.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930046_49265_01_geo.fits",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930046_49265_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 67132800,
+      "expectedSha256": "d16f3b899ee14588f0ee89abf60babe85c5b1dc8f1d2203f322c3db980c68443",
+      "observationDate": "2022-09-26T23:14:19.477Z",
+      "width": 1024,
+      "height": 1024,
+      "interpretation": "Calibrated DRACO I/F and pixel-centre geometry on the Dimorphos v004 0.243 m DSK.",
+      "coverage": "One approach observation acquired 2022-09-26T23:14:19.477Z; valid coverage is bounded by the native readout window and qualified surface geometry.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930046-49265-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930046_49265_01_geo.xml: Identification_Area and the labelled File_Area_Observational."
+          }
+        ]
+      }
+    },
+    {
+      "id": "draco-0401930046-49265-label",
+      "path": "observations/dart_0401930046_49265_01_geo.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930046_49265_01_geo.xml",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930046_49265_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 40081,
+      "expectedSha256": "bea15e0e21e86f9e41a30013fe9d58241d1d827638e0007b2ebd44b812c15319",
+      "observationDate": "2022-09-26T23:14:19.477Z",
+      "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930046-49265-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930046_49265_01_geo.xml: Identification_Area and the labelled product metadata."
+          }
+        ]
+      },
+      "coverage": "One approach observation acquired 2022-09-26T23:14:19.477Z; valid coverage is bounded by the native readout window and qualified surface geometry."
+    },
+    {
+      "id": "draco-0401930045-02979-geo",
+      "path": "observations/dart_0401930045_02979_01_geo.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930045_02979_01_geo.fits",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930045_02979_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 67132800,
+      "expectedSha256": "12a5f0021799f65f1ee3fb35dfda3b6857def98473fbc4d43307b9e6cb082bbe",
+      "observationDate": "2022-09-26T23:14:17.551Z",
+      "width": 1024,
+      "height": 1024,
+      "interpretation": "Calibrated DRACO I/F and pixel-centre geometry on the Dimorphos v004 0.243 m DSK.",
+      "coverage": "One approach observation acquired 2022-09-26T23:14:17.551Z; valid coverage is bounded by the native readout window and qualified surface geometry.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930045-02979-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930045_02979_01_geo.xml: Identification_Area and the labelled File_Area_Observational."
+          }
+        ]
+      }
+    },
+    {
+      "id": "draco-0401930045-02979-label",
+      "path": "observations/dart_0401930045_02979_01_geo.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930045_02979_01_geo.xml",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930045_02979_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 40081,
+      "expectedSha256": "7e9cafb0c623e63b8f07f82ede148e8ebd77fd05169092d0cc9487eec59c0a5e",
+      "observationDate": "2022-09-26T23:14:17.551Z",
+      "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930045-02979-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930045_02979_01_geo.xml: Identification_Area and the labelled product metadata."
+          }
+        ]
+      },
+      "coverage": "One approach observation acquired 2022-09-26T23:14:17.551Z; valid coverage is bounded by the native readout window and qualified surface geometry."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+      "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 77883,
+      "expectedSha256": "196461dde8a88c016767e001674986c3081ac9226ea89568725b165a5475cd78",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "dimorphos-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 13778,
+      "expectedSha256": "e5898eeaab7969dc66bb4f4d1721c14b428cdb920917b63ea30fc214b4475215",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 8716,
+      "expectedSha256": "6b6d27e3edef2155e8d0986567410aed553e0342ee48af918d0f1ab6d5f5df4b"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1360,
+      "expectedSha256": "bc6d4e9e4fb3beba3a69ca8fa9415fd64b31fe0bc2a665dac2d8494969a7752a"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 488,
+      "expectedSha256": "2f91bf27f5132abf38cbffc81555b4ba8c076c0346bf3219eedae0557d6c7e18"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 9756,
+      "expectedSha256": "afe4b3ed0e0ea7327a112c12f712e11abbf4b34e8e5580758f0d726422fadf95"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5121,
+      "expectedSha256": "cabcef33ffacd495b2498ebff20faab3fae511aff5ba42ef88182f2c4922afb3"
+    },
+    {
+      "path": "reference/albedo.xml",
+      "expectedBytes": 6780,
+      "expectedSha256": "770da3f4556d34af44772010a3fa753718d011ed6fb5ba95a6690dc2cf2a66e1"
+    },
+    {
+      "path": "reference/dart_shapemodel_sis.pdf",
+      "expectedBytes": 1197607,
+      "expectedSha256": "618cbcead6ec54925d2db3a44449b8357cc354d539a2712fe77efe4b79f97bd8"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "expectedBytes": 2244,
+      "expectedSha256": "16ecfd9e99cb49fc1a776f1406135e58ec8869436af327000ffeedea8512b33f"
+    },
+    {
+      "path": "reference/model-overview.txt",
+      "expectedBytes": 5510,
+      "expectedSha256": "34b300648d7ed08d16bcf39c2572d3a1052391395a0366c28e78b4146aac144d"
+    },
+    {
+      "path": "reference/shape.xml",
+      "expectedBytes": 9206,
+      "expectedSha256": "885aedadb7836a6b93a739d64efba816c982e72da427d111b124b5231d3e6eb8"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 89775,
+      "expectedSha256": "24d402ce62ef2a0c31b0782f806340a79acfd0c2c8ecc3074c1984698c36f596"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "purpose": "Native label identifying the slope FITS table, field units and model interpretation.",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "expectedBytes": 7093,
+      "expectedSha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
+      "kind": "source-document",
+      "title": "Dimorphos global slope relative to gravity, model v004 — PDS4 label",
+      "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
+      "acquisition": "Unmodified PDS4 product label; restored through source/preparation/acquisition.json.",
+      "productId": "urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004:dimorphos_g_0972mm_spc_slp_0000n00000_v004::1.0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dimorphos-facet-science",
+            "role": "reference",
+            "evidence": "Native PDS label identifies this product and its associated science file.",
+            "locator": "Identification_Area and File_Area_Observational/File"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dimorphos-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1319,
+      "expectedSha256": "0ced0dce2347e266e2393a9e20df4efb6355a7f6749092ba6f08a3080faa8d29",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "dimorphos-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1193,
+      "expectedSha256": "c93be12a666cd7216804b2e6c2c59a3bc1385a1f63ba92f5a22f51bfe7bd48a2",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "dimorphos-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 156,
+      "expectedSha256": "49a8398207a279568f098d9629215d1b3f33dee77c82ac50669540b4837a704d",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "dimorphos-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 1428,
+      "expectedSha256": "609602bd18bbf589de8d86c3a374a6f0f5bfe73a86bb790053ccfbc4223ad0a2",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "id": "dimorphos-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 478,
+      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts dimorphos: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    }
+  ]
+}

@@ -6,7 +6,7 @@ import{resolve}from'node:path';
 import{loadPdsRadialTable}from'../../../../tools/objects/terrestrial-layers/pds-radial-table.mts';
 import{readAuthoredRotation}from'../../../../tools/objects/authored-rotation.mts';
 import{assertAsteroidPackage}from'../asteroid-contract.mts';
-const base=resolve(import.meta.dirname,'../../../../src/planets/mathilde');
+const base=resolve(import.meta.dirname,'../../../../src/objects/mathilde');
 const read=async (p: string)=>JSON.parse(await readFile(resolve(base,p),'utf8'));
 test('Mathilde Stooke column order, east longitude and meter scale preserve independent release anchors',async()=>{
  const config=await read('source/preparation/terrestrial.json'),profile=config.geometry.radialTerrain;
@@ -35,4 +35,4 @@ test('Mathilde arbitrary orientation does not produce a measured spin rate',asyn
  const a=await readAuthoredRotation(base,ref,2451545),b=await readAuthoredRotation(base,ref,2461286.5);
  assert.equal(a.spinRateRadPerDay,0);assert.deepEqual(a,b);
 });
-test('Mathilde has a closed published visualization mesh, retained raster leaves and prepared asset closure',()=>assertAsteroidPackage('mathilde',['normal','elevation'],26400));
+test('Mathilde has closed published visualization meshes, retained raster leaves and prepared asset closure',()=>assertAsteroidPackage('mathilde',['normal','near-msi','elevation'],26400));

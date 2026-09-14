@@ -1,0 +1,48 @@
+{
+  "baseline": "ebd16155a",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
+  "assets": [
+    {
+      "filename": "calypso-false-color-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/5a54a4fbbaa4a49ddd6da85b9da4fdb7b295abbb201bd32120d0b698fbb09235/calypso-false-color-shadow@2x.webp",
+      "bytes": 208238,
+      "sha256": "5a54a4fbbaa4a49ddd6da85b9da4fdb7b295abbb201bd32120d0b698fbb09235",
+      "verified": true
+    },
+    {
+      "filename": "calypso-false-color-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4a491cf98cb71e15f83df8be32c25e411fffba6c24ed45598b218854cb4411b2/calypso-false-color-surface@2x.webp",
+      "bytes": 325124,
+      "sha256": "4a491cf98cb71e15f83df8be32c25e411fffba6c24ed45598b218854cb4411b2",
+      "verified": true
+    },
+    {
+      "filename": "calypso-false-color-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9cc119d87b127dfd6c066e2b4d5f0698b90bf80cf86f6040371f21873a5eff95/calypso-false-color-thumbnail.webp",
+      "bytes": 3252,
+      "sha256": "9cc119d87b127dfd6c066e2b4d5f0698b90bf80cf86f6040371f21873a5eff95",
+      "verified": true
+    },
+    {
+      "filename": "calypso-normal-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2d5f17548451728527176b1eade8f5743dd26637696983e4cc6adac6031d6b97/calypso-normal-shadow@2x.webp",
+      "bytes": 213696,
+      "sha256": "2d5f17548451728527176b1eade8f5743dd26637696983e4cc6adac6031d6b97",
+      "verified": true
+    },
+    {
+      "filename": "calypso-normal-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e9af8bc7f11247955a65565b550739c243632e15d1380e2b105f9b82cea45181/calypso-normal-surface@2x.webp",
+      "bytes": 398940,
+      "sha256": "e9af8bc7f11247955a65565b550739c243632e15d1380e2b105f9b82cea45181",
+      "verified": true
+    },
+    {
+      "filename": "calypso-normal-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/091d933d954d558a170e996b9a985be787b30057a9a971f21371e5443e6bd90d/calypso-normal-thumbnail.webp",
+      "bytes": 3732,
+      "sha256": "091d933d954d558a170e996b9a985be787b30057a9a971f21371e5443e6bd90d",
+      "verified": true
+    }
+  ]
+}

@@ -6,10 +6,10 @@ import { decodePds4GeometryCube } from '../../../../tools/objects/terrestrial-la
 import { fitBackplaneCamera } from '../../../../tools/objects/surface-observations/cameras.mts';
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 
-const root = resolve(import.meta.dirname, '../../../../src/planets/dimorphos/source');
+const root = resolve(import.meta.dirname, '../../../../src/objects/dimorphos/source');
 const config = JSON.parse((await readFile(resolve(root, 'preparation/terrestrial.json'))).toString('utf8'));
 const recipe = config.raster.surfaceObservations.find((recipe: { id: string }) => recipe.id === 'draco');
-const frame = recipe.frames ? recipe.frames.find((frame: { id: string }) => frame.id === 't-minus-11s') : recipe;
+const frame = recipe.frames.find((frame: { id: string }) => frame.id === 't-minus-11s');
 const name = 'dart_0401930040_12262_01_geo.fits';
 assert.equal(frame.path, `observations/${name}`);
 const cube = decodePds4GeometryCube(await readFile(resolve(root, frame.path)), await readFile(resolve(root, frame.labelPath), 'utf8'), { fileName: name, cube: recipe.cube, filter: recipe.filter });

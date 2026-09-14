@@ -9,7 +9,7 @@ const recordAt=(value:Record<string,unknown>,key:string,label:string):Record<str
 const arrayAt=(value:Record<string,unknown>,key:string,label:string):unknown[]=>requireArray(value[key],label);
 const vector=(value:unknown,label:string):number[]=>requireArray(value,label).map((entry,index)=>requireFiniteNumber(entry,`${label}[${index}]`));
 export async function assertAsteroidPackage(id:string, expectedLenses:readonly string[], radiusM:number):Promise<void> {
- const directory=resolve(root,'src/planets',id),read=async(path:string):Promise<Record<string,unknown>>=>requireRecord(await readJsonSource(resolve(directory,path)),`${id} ${path}`);
+ const directory=resolve(root,'src/objects',id),read=async(path:string):Promise<Record<string,unknown>>=>requireRecord(await readJsonSource(resolve(directory,path)),`${id} ${path}`);
  const [runtime,terrain,descriptor,manifest,scene]=await Promise.all(['prepared/runtime.json','prepared/terrain.json','object.json','runtime-assets.json','prepared/scene.json'].map(read));
  const descriptorProperties=recordAt(descriptor,'properties','descriptor properties');
  assert.equal(requireFiniteNumber(recordAt(recordAt(descriptorProperties,'recipe','descriptor recipe'),'shape','descriptor shape').radiusKm,'descriptor radiusKm')*1000,radiusM);
@@ -19,10 +19,28 @@ export async function assertAsteroidPackage(id:string, expectedLenses:readonly s
  assert.equal(nodes.filter(node=>typeof node.className==='string'&&node.className.includes('polycss-camera')).length,1);
  const faces=arrayAt(terrain,'faces','terrain faces').map((face,index)=>requireRecord(face,`terrain face ${index}`));
  const triangles=arrayAt(recordAt(runtime,'surfaceHit','runtime surface hit'),'triangles','runtime surface triangles');
- assert.equal(triangles.length,faces.length);
+ const ranges=runtime.surfaceHit && recordAt(runtime,'surfaceHit','runtime surface hit').lensRanges;
+ const modelRanges = ranges === undefined ? [{start:0,count:faces.length}] : [...new Map(requireArray(ranges,'surface lens ranges').map(value=>{
+  const range=requireRecord(value,'surface lens range'),start=requireFiniteNumber(range.start),count=requireFiniteNumber(range.count);
+  assert.ok(Number.isInteger(start)&&start>=0&&Number.isInteger(count)&&count>0&&count<=800);
+  assert.ok(expectedLenses.includes(requireString(range.lensId)));
+  return [`${start}:${count}`,{start,count}] as const;
+ })).values()].sort((a,b)=>a.start-b.start);
+ assert.deepEqual(modelRanges[0],{start:0,count:faces.length});
+ let total=0;for(const range of modelRanges){assert.equal(range.start,total);total+=range.count;}assert.equal(triangles.length,total);
  assert.ok(faces.length<=800);
  const leaves=arrayAt(scene,'bodyLeaves','scene body leaves').map((leaf,index)=>requireRecord(leaf,`scene body leaf ${index}`));
- assert.equal(leaves.length,faces.length);
+ assert.equal(leaves.length,triangles.length);
+ for(const leaf of leaves){assert.equal(leaf.tag,'u');assert.equal(recordAt(leaf,'attributes','scene leaf attributes')['data-polycss-texture-leaf-sizing'],'raster');}
+ for(const range of modelRanges.slice(1)){
+  const points:number[][]=[],ids:number[]=[],keys=new Map<string,number>();
+  for(const triangle of triangles.slice(range.start,range.start+range.count))for(const vertex of requireArray(triangle,'alternate model triangle')){
+   // Surface-hit coordinates swap source x/y, reversing handedness.
+   const hit=vector(vertex,'alternate model vertex'),point=[hit[1],hit[0],hit[2]],key=point.join(',');
+   if(!keys.has(key)){keys.set(key,points.length);points.push(point);}ids.push(keys.get(key)!);
+  }
+  const closed=validateClosedMesh(ids,points);assert.equal(closed.components,1);assert.equal(closed.eulerCharacteristic,2);
+ }
  const positions:number[][]=[],lookup=new Map<string,number>(),indices:number[]=[];
  for(const[index,face]of faces.entries()){
   const leaf=leaves[index];assert.equal(leaf.tag,'u');assert.equal(recordAt(leaf,'attributes','scene leaf attributes')['data-polycss-texture-leaf-sizing'],'raster');
@@ -35,7 +53,7 @@ export async function assertAsteroidPackage(id:string, expectedLenses:readonly s
   }
  }
  const topology=validateClosedMesh(indices,positions);assert.equal(topology.components,1);assert.equal(topology.eulerCharacteristic,2);
- const context=requireRecord(await readJsonSource(resolve(root,'src/planets/sun/prepared/world-context.json')),'world context'),body=arrayAt(context,'bodies','world context bodies').map((entry,index)=>requireRecord(entry,`world context body ${index}`)).find(entry=>entry.id===id);
+ const context=requireRecord(await readJsonSource(resolve(root,'src/objects/sun/prepared/world-context.json')),'world context'),body=arrayAt(context,'bodies','world context bodies').map((entry,index)=>requireRecord(entry,`world context body ${index}`)).find(entry=>entry.id===id);
  assert.ok(body, 'Asteroid is reachable through the application context');assert.equal(body.radiusM,radiusM);
  assert.deepEqual(body.positionM,recordAt(descriptorProperties,'worldFrame','world frame').originM);
  const assets=arrayAt(manifest,'assets','runtime assets').map((asset,index)=>requireRecord(asset,`runtime asset ${index}`));

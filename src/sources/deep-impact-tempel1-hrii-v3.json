@@ -1,0 +1,35 @@
+{
+  "id": "deep-impact-tempel1-hrii-v3",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Deep Impact Tempel 1 calibrated HRI-IR spectra",
+  "version": "3.0",
+  "identifiers": [
+    {
+      "type": "PDS3 data set",
+      "value": "DIF-C-HRII-3/4-9P-ENCOUNTER-V3.0"
+    }
+  ],
+  "publisher": "NASA Planetary Data System",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml",
+      "label": "Archived spectra"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1016/j.icarus.2012.10.003",
+      "label": "Groussin et al. (2013), spectral method"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml",
+      "checkedOn": "2026-09-13",
+      "locator": "Dataset identity, version and citation"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

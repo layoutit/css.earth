@@ -8,7 +8,7 @@ const read = async (path: string) => requireRecord(JSON.parse(await readFile(pat
 const intake = await readIntake();
 const records = new Map((await readBodyRecords()).map(record => [record.id, record]));
 for (const candidate of intake) {
-  const directory = `src/planets/${candidate.id}`;
+  const directory = `src/objects/${candidate.id}`;
   const model = await read(`${directory}/source/shape/model.json`);
   const content = await read(`${directory}/source/content/object.json`);
   const descriptor = await read(`${directory}/object.json`);

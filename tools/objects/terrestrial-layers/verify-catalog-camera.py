@@ -3,7 +3,7 @@
 No camera fit or pixel correction. All four image patches are checks, withheld
 from the published camera solution. Uses the existing bounded DoG/ZNCC method.
 Requires numpy, scipy, astropy, Pillow, and Node; downloads nothing.
-Usage: python verify-catalog-camera.py src/planets/ida/source OUTPUT_DIRECTORY
+Usage: python verify-catalog-camera.py src/objects/ida/source OUTPUT_DIRECTORY
 """
 from pathlib import Path
 import argparse,hashlib,json,subprocess
@@ -16,10 +16,10 @@ p=argparse.ArgumentParser();p.add_argument('source',type=Path);p.add_argument('o
 p.add_argument('--frame');p.add_argument('--profile',default='reference/calibrated-registration.json')
 a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
 if Path(a.profile).is_absolute() or '..' in Path(a.profile).parts:raise ValueError('Registration profile must be inside its source package')
-config=json.loads((a.source/'preparation/terrestrial.json').read_text());profile=json.loads((a.source/a.profile).read_text());frames=config['raster']['mosaics'][0]['frames']
+config=json.loads((a.source/'preparation/terrestrial.json').read_text());profile=json.loads((a.source/a.profile).read_text());frames=next(l for l in config['raster']['surfaceObservations'] if l['id']=='calibrated')['frames']
 frame=next(f for f in frames if f['id']==a.frame) if a.frame else frames[0]
 reference=a.output/'reference.f32'
-subprocess.run(['node',str(Path(__file__).with_name('catalog-camera-reference.mjs')),str(a.source),str(reference),frame['id']],check=True)
+subprocess.run(['node',str(Path(__file__).with_name('catalog-camera-reference.mts')),str(a.source),str(reference),frame['id']],check=True)
 r=np.fromfile(reference,'<f4').reshape(800,800).astype(float);original=fits.getdata(a.source/frame['path']).astype(float)
 # Source special values are not radiance. This is correlation preprocessing,
 # never a modification to retained observations or their production eligibility.

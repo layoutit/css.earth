@@ -86,3 +86,18 @@ test('explicit centroid bijection reconciles exporter order and retains the orig
   const duplicate=Buffer.from(f.bytes);duplicate.copy(duplicate,5760+24+4,5760+4,5760+24);
   assert.throws(()=>parseFacetFits(duplicate,f.xml,{...f.profile,registration:'centroid-bijection'},f.source),/bijection/);
 });
+
+test('derived gzip facet tables retain their NaN gaps and exact mesh binding', async () => {
+  const {mkdtemp,writeFile,rm}=await import('node:fs/promises'),{tmpdir}=await import('node:os'),{join}=await import('node:path'),{gzipSync}=await import('node:zlib');
+  const {loadFacetScalarSurface}=await import('./facet-scalars.mts');
+  const root=await mkdtemp(join(tmpdir(),'hrii-facets-'));
+  try{
+    await writeFile(join(root,'fields.csv.gz'),gzipSync(csv));
+    const lens={sampling:'nearest',path:'fields.csv.gz',meshPath:'shape.obj',table:{...profile,format:'facet-csv-gzip',validityField:'Albedo'},surfaceSampling:{method:'closest-source-point',maximumDistanceMeters:.2},minimum:0,maximum:30};
+    const sampler=await loadFacetScalarSurface(root,lens,mesh);
+    assert.equal(sampler.samplePoint([1,1,1]),null);
+    assert.equal(required(sampler.samplePoint([5.1,1,1])).value,30);
+    await writeFile(join(root,'fields.csv.gz'),gzipSync(csv.replace('0.005,0.001','0.006,0.001')));
+    await assert.rejects(()=>loadFacetScalarSurface(root,lens,mesh),/does not match source geometry/);
+  }finally{await rm(root,{recursive:true,force:true});}
+});

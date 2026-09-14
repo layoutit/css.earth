@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-spectral-band-maps@1",
+  "radiusKm": 606,
+  "width": 720,
+  "height": 360,
+  "maximumEmission": 70,
+  "maximumIncidence": 70,
+  "firstBand": 0,
+  "lastBand": 196,
+  "scans": [
+    {
+      "id": "0299175509_charon_cube",
+      "cube": "science/leisa/0299175509_charon_cube.fit",
+      "wavelengths": "science/leisa/0299175509_charon_wavelengths.fit",
+      "geometry": "science/leisa/0299175509_charon_geometry.fit",
+      "label": "science/leisa/0299175509_charon_cube.lblx",
+      "width": 640,
+      "height": 640,
+      "nativeResolutionKm": 5.01,
+      "mapBlocks": [
+        {
+          "id": "water-ice",
+          "method": "linear-band-depth",
+          "windows": [
+            {
+              "minimum": 1.76,
+              "maximum": 1.81,
+              "minimumChannels": 6
+            },
+            {
+              "minimum": 1.98,
+              "maximum": 2.025,
+              "minimumChannels": 5
+            },
+            {
+              "minimum": 2.24,
+              "maximum": 2.27,
+              "minimumChannels": 3
+            }
+          ],
+          "block": 3
+        },
+        {
+          "id": "ammonia",
+          "method": "continuum-ratio",
+          "windows": [
+            {
+              "minimum": 2.1,
+              "maximum": 2.17,
+              "minimumChannels": 8
+            },
+            {
+              "minimum": 2.2,
+              "maximum": 2.24,
+              "minimumChannels": 4
+            },
+            {
+              "minimum": 2.26,
+              "maximum": 2.29,
+              "minimumChannels": 3
+            }
+          ],
+          "block": 6
+        }
+      ]
+    },
+    {
+      "id": "0299171308_charon_cube",
+      "cube": "science/leisa/0299171308_charon_cube.fit",
+      "wavelengths": "science/leisa/0299171308_charon_wavelengths.fit",
+      "geometry": "science/leisa/0299171308_charon_geometry.fit",
+      "label": "science/leisa/0299171308_charon_cube.lblx",
+      "width": 320,
+      "height": 320,
+      "nativeResolutionKm": 8.56,
+      "mapBlocks": [
+        {
+          "id": "water-ice",
+          "method": "linear-band-depth",
+          "windows": [
+            {
+              "minimum": 1.76,
+              "maximum": 1.81,
+              "minimumChannels": 6
+            },
+            {
+              "minimum": 1.98,
+              "maximum": 2.025,
+              "minimumChannels": 5
+            },
+            {
+              "minimum": 2.24,
+              "maximum": 2.27,
+              "minimumChannels": 3
+            }
+          ],
+          "block": 3
+        },
+        {
+          "id": "ammonia",
+          "method": "continuum-ratio",
+          "windows": [
+            {
+              "minimum": 2.1,
+              "maximum": 2.17,
+              "minimumChannels": 8
+            },
+            {
+              "minimum": 2.2,
+              "maximum": 2.24,
+              "minimumChannels": 4
+            },
+            {
+              "minimum": 2.26,
+              "maximum": 2.29,
+              "minimumChannels": 3
+            }
+          ],
+          "block": 3
+        }
+      ]
+    }
+  ]
+}

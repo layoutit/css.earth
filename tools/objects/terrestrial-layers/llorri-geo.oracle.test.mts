@@ -9,9 +9,9 @@ import { requireRecord, requireArray, requireString, requireFiniteNumber } from 
 /** astropy as the oracle for the L'LORRI FITS reader and the TAN-SIP distortion (Donaldjohanson). */
 const fixture = await readOracleFixture('fits/llorri.json');
 const [input] = fixture.inputs;
-const source = resolve(ORACLE_ROOT, 'src/planets/donaldjohanson/source');
+const source = resolve(ORACLE_ROOT, 'src/objects/donaldjohanson/source');
 const config = JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json'), 'utf8'));
-const recipe = config.raster.surfaceObservations[0], camera = JSON.parse(await readFile(resolve(source, recipe.cameraPath), 'utf8'));
+const recipe = config.raster.surfaceObservations[0], camera = JSON.parse(await readFile(resolve(source, recipe.frames[0].cameraPath), 'utf8'));
 const frame = decodeLlorri(await readFile(resolve(ORACLE_ROOT, input.path)), camera);
 const cards = requireRecord(fixture.cases.cards), planes = requireRecord(fixture.cases.planes), sip = requireRecord(fixture.cases.sip);
 const exposure = requireFiniteNumber(cards.EXPTIME);

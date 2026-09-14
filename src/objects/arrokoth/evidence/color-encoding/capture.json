@@ -1,0 +1,318 @@
+{
+  "body": "arrokoth",
+  "lens": "mvic",
+  "baselineRef": "8cc1a2fae",
+  "baselineCommit": "8cc1a2faead111bd3535c0bed326180631b42f09",
+  "toolSha256": "89775171909802da8bad5ada20f2e21bc8880b632541920f3d31aea1ee1f7aea",
+  "colorTransferSha256": "4fdacc08867ab12c5b4f4b5819210f52f044155a5ebcbbf912f0ff0d9d201fe5",
+  "recipeSha256": "314eabd1f022d1740f6174fcc3f367a97386826ecec60eeb98f6e4327bf7267d",
+  "runtimeSha256": "3e1fe1df2b49bfea5758934cf12031efcb99fd93087cecf046647021ba84b485",
+  "geometrySha256": "72fcdcda608912715826c9790bf45e4032cbb326031a089a9ed0ce6642c82218",
+  "surfaceTrianglesSha256": "c5f89bcaa80294e953f9ac0f0aa54f798457d18308a0cb65980ff3bfa7b729db",
+  "geometryUnchanged": true,
+  "browser": "152.0.7977.84",
+  "channel": "chrome",
+  "purpose": "Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.",
+  "existingAssetChanges": [
+    {
+      "filename": "arrokoth-mvic-shadow@2x.webp",
+      "beforeSha256": "21f3d2f821a5f4f9bdf87f733e2f55fafe4889c10ad41d04bb2f09571bf766d2",
+      "afterSha256": "542c2fefa64d4c80d92f61b76d3c6bf67a83da8bd9a8545820e27b100b0834c2",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "arrokoth-mvic-surface@2x.webp",
+      "beforeSha256": "8864742cfd5e837d59be23ae6d033b6724ff3e70880b10b55e2db8486ebb8f42",
+      "afterSha256": "d7c807ca1763f467c01e0bde7e3e8e9b601af45b661898cae0ed03a688c8be8b",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "arrokoth-mvic-thumbnail.webp",
+      "beforeSha256": "08d59b0d4b3d628b600549e500ef7c34ef4351c276929a1759cf99e29870b87e",
+      "afterSha256": "cc041d2351ead311fb0283ee6863ca393bc6f58fdce47b1e73fa6ec30ee0dff2",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    }
+  ],
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 2,
+    "rowText": "False color\nNew Horizons",
+    "bounds": {
+      "x": 20,
+      "y": 718.078125,
+      "width": 350,
+      "height": 20
+    },
+    "pageWidth": 390,
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(-0.534082069547,0.39006160414,-0.750072188502,0,0,0.887205149235,0.461375143641,0,0.845432636577,0.246412191553,-0.473840362216,0,0,0,0,1)",
+      "skybox": "matrix3d(0.525218193592,0.392615264897,-0.754982771581,0,0.780747407286,0.130583239363,0.611049341342,0,0.338495344786,-0.910385151123,-0.237948679398,0,0,0,0,1)",
+      "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+    },
+    "stableDom": true,
+    "sha256": "248e0a8799f84063a8d88d19cbd635d0cf2678bc1f1c87a2f27e55cd4d6f66cb",
+    "errors": []
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr1.png",
+          "sha256": "a2932b2fde8a99a80826163bd9569dea5004fea20058c75f2f71c460f8da32bb",
+          "url": "http://127.0.0.1:4284/arrokoth/?v=MEZAUrUiM3hAa0FCxzNAAAAAP71X5B_08XA_yp9cczrPYj_eAaUG0zPvAAA#dataset=mvic",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.534082069547,0.39006160414,-0.750072188502,0,0,0.887205149235,0.461375143641,0,0.845432636577,0.246412191553,-0.473840362216,0,0,0,0,1)",
+            "skybox": "matrix3d(0.525218193592,0.392615264897,-0.754982771581,0,0.780747407286,0.130583239363,0.611049341342,0,0.338495344786,-0.910385151123,-0.237948679398,0,0,0,0,1)",
+            "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": false
+          },
+          "lens": {
+            "id": "mvic",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 1012,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.798349322331,0.290961384346,-0.527237927651,0,0.154867225235,0.945280358699,0.287160557888,0,0.581940290822,0.147602561895,-0.799724316024,0,0,0,0,1)",
+          "skybox": "matrix3d(0.172470439636,0.260334857164,-0.949989258935,0,0.954096204371,0.19558903827,0.226815243874,0,0.244855347109,-0.945500150252,-0.214651160537,0,0,0,0,1)",
+          "sunView": "matrix3d(0.918375372691,-0.030609235241,0.394524713487,0,-0.030609235241,0.988521536785,0.147946767558,0,-0.394524713487,-0.147946767558,0.906896909476,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "arrokoth-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "arrokoth-lorri-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
+          "sha256": "a384095b589f6084b5ab530d2c963f418f3500c4041e3794406eff5a724c2076",
+          "bytes": 1372
+        },
+        {
+          "filename": "arrokoth-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-system-point.webp",
+          "sha256": "d0ae999b83dcb1983f478efc04e5912bf1872146c4b98919111992eb90ed7caf",
+          "bytes": 96
+        },
+        {
+          "filename": "arrokoth-mvic-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
+          "sha256": "cc041d2351ead311fb0283ee6863ca393bc6f58fdce47b1e73fa6ec30ee0dff2",
+          "bytes": 2036
+        },
+        {
+          "filename": "arrokoth-lorri-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
+          "sha256": "4022dde474771158d08d13d78c503b573dade60d66216549fe0e4571b37d0c34",
+          "bytes": 903156
+        },
+        {
+          "filename": "arrokoth-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "arrokoth-albedo-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
+          "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c",
+          "bytes": 610
+        },
+        {
+          "filename": "arrokoth-model-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-model-thumbnail.webp",
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "bytes": 444
+        },
+        {
+          "filename": "arrokoth-albedo-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-albedo-legend.webp",
+          "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845",
+          "bytes": 58
+        },
+        {
+          "filename": "arrokoth-mvic-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
+          "sha256": "d7c807ca1763f467c01e0bde7e3e8e9b601af45b661898cae0ed03a688c8be8b",
+          "bytes": 254052
+        },
+        {
+          "filename": "arrokoth-mvic-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-mvic-shadow@2x.webp",
+          "sha256": "542c2fefa64d4c80d92f61b76d3c6bf67a83da8bd9a8545820e27b100b0834c2",
+          "bytes": 207780
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr2.png",
+          "sha256": "ec52e483e055806f60f776130f97d59cb2b5ccb98b8fd00fb735076ba7d0b62c",
+          "url": "http://127.0.0.1:4284/arrokoth/?v=MEZAUrUiM3hAa0FCxzNAAAAAP71X5B_08XA_yp9cczrPYj_eAaUG0zPvAAA#dataset=mvic",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.534082069547,0.39006160414,-0.750072188502,0,0,0.887205149235,0.461375143641,0,0.845432636577,0.246412191553,-0.473840362216,0,0,0,0,1)",
+            "skybox": "matrix3d(0.525218193592,0.392615264897,-0.754982771581,0,0.780747407286,0.130583239363,0.611049341342,0,0.338495344786,-0.910385151123,-0.237948679398,0,0,0,0,1)",
+            "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": false
+          },
+          "lens": {
+            "id": "mvic",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 1012,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.798349322331,0.290961384346,-0.527237927651,0,0.154867225235,0.945280358699,0.287160557888,0,0.581940290822,0.147602561895,-0.799724316024,0,0,0,0,1)",
+          "skybox": "matrix3d(0.172470439636,0.260334857164,-0.949989258935,0,0.954096204371,0.19558903827,0.226815243874,0,0.244855347109,-0.945500150252,-0.214651160537,0,0,0,0,1)",
+          "sunView": "matrix3d(0.918375372691,-0.030609235241,0.394524713487,0,-0.030609235241,0.988521536785,0.147946767558,0,-0.394524713487,-0.147946767558,0.906896909476,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "arrokoth-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "arrokoth-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "arrokoth-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-system-point.webp",
+          "sha256": "d0ae999b83dcb1983f478efc04e5912bf1872146c4b98919111992eb90ed7caf",
+          "bytes": 96
+        },
+        {
+          "filename": "arrokoth-lorri-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
+          "sha256": "4022dde474771158d08d13d78c503b573dade60d66216549fe0e4571b37d0c34",
+          "bytes": 903156
+        },
+        {
+          "filename": "arrokoth-mvic-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
+          "sha256": "cc041d2351ead311fb0283ee6863ca393bc6f58fdce47b1e73fa6ec30ee0dff2",
+          "bytes": 2036
+        },
+        {
+          "filename": "arrokoth-lorri-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
+          "sha256": "a384095b589f6084b5ab530d2c963f418f3500c4041e3794406eff5a724c2076",
+          "bytes": 1372
+        },
+        {
+          "filename": "arrokoth-albedo-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
+          "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c",
+          "bytes": 610
+        },
+        {
+          "filename": "arrokoth-model-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-model-thumbnail.webp",
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "bytes": 444
+        },
+        {
+          "filename": "arrokoth-albedo-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-albedo-legend.webp",
+          "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845",
+          "bytes": 58
+        },
+        {
+          "filename": "arrokoth-mvic-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
+          "sha256": "d7c807ca1763f467c01e0bde7e3e8e9b601af45b661898cae0ed03a688c8be8b",
+          "bytes": 254052
+        },
+        {
+          "filename": "arrokoth-mvic-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/arrokoth/arrokoth-mvic-shadow@2x.webp",
+          "sha256": "542c2fefa64d4c80d92f61b76d3c6bf67a83da8bd9a8545820e27b100b0834c2",
+          "bytes": 207780
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

@@ -7,7 +7,7 @@ import { PREPARED_EARTH_CITY_PAGES as existing } from "../../unit/earth/prepared
 import { prepareRegionPack } from "../../../../tools/objects/geographic-pages/prepare-wmts-tree.mts";
 import { prepareWmtsTile,wmtsAddress } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mts";
 import { prepareLocationPoint,prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mts";
-import sourceConfig from '../../../../src/planets/earth/source/preparation/paged-ellipsoid.json' with { type: 'json' };
+import sourceConfig from '../../../../src/objects/earth/source/preparation/paged-ellipsoid.json' with { type: 'json' };
 import { parseGlobalManifest, parseBodyAttitude } from "../../../../tools/objects/geographic-pages/source-records.mts";
 import { requireRecord } from "../../../../tools/source-values.mts";
 import type { PageLayerStats } from "../../../../src/renderers/css/runtime/object-runtime-types.js";
