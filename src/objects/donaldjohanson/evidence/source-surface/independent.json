@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-14",
+  "method": "Full original mesh: independent planar projection plus closest edge comparison in bounded chunks; no product sampler imported",
+  "verifier": {
+    "path": "tools/objects/terrestrial-layers/verify-source-surface.py",
+    "sha256": "50fb6d23fc7c870d2595dc849a47572f760f2e3f95d5c1c471ee70aaf535cb18"
+  },
+  "fixtures": {
+    "path": "tools/objects/terrestrial-layers/fixtures/source-surface-cases.json",
+    "sha256": "73d9ffc49eb3e874450e06555f1ed21abb810b6589b272c32035c58d02304e35"
+  },
+  "result": {
+    "id": "donaldjohanson",
+    "sourceSha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7",
+    "sourceFaces": 547996,
+    "checks": [
+      {
+        "kind": "exact-outer-source-ray-surface",
+        "sourceFace": 487421,
+        "sourcePointMeters": [
+          -3015.316737275648,
+          503.08981936143385,
+          1365.356208179241
+        ],
+        "value": 942.7239792793316,
+        "distanceMeters": 0
+      },
+      {
+        "kind": "exact-middle-source-ray-surface",
+        "sourceFace": 268013,
+        "sourcePointMeters": [
+          -2915.1761566691416,
+          486.3818874930244,
+          1320.011862846783
+        ],
+        "value": 831.5331499580393,
+        "distanceMeters": 5.684341886080802e-14
+      },
+      {
+        "kind": "offset-outer-source-surface",
+        "sourceFace": 487421,
+        "sourcePointMeters": [
+          -3018.137567534937,
+          503.31848681810874,
+          1366.2668801544924
+        ],
+        "value": 945.6702347840883,
+        "distanceMeters": 0.40162718537271314
+      }
+    ]
+  }
+}

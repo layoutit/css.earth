@@ -51,6 +51,11 @@
       "title": "Encounter shape model",
       "detail": "Lucy shape model",
       "summary": "Lucy's published encounter shape; stereo images constrain about 40% of the surface."
+    },
+    "elevation": {
+      "title": "Lucy-model elevation",
+      "detail": "Height from reference sphere",
+      "summary": "Height above a 2,405 m sphere from the Lucy model. Stereo constrains about 40%; the rest is reconstructed."
     }
   }
 }
