@@ -11,6 +11,7 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 type ContextLayer = Parameters<typeof createPreparedContextNavigation>[0]['layer'];
 type Content = { record: PreparedCatalogObject | null; references: readonly SpatialCitation[]; presentation: PreparedFocusPresentation | null };
 type FixtureOptions = { object?: Partial<PreparedGalaxyRecord> & Partial<Pick<PreparedClusterRecord, 'kind' | 'classification'>>;
+  unavailableObjectIds?: readonly string[];
   imageLayerFrames?: ContextLayer['imageLayerFrames']; volumeLensFrames?: ContextLayer['volumeLensFrames']; volumeBank?: PreparedVolumeLensState | null };
 const baseFrame: DensityVolumeFrame = { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0,0,0], localToReferenceXyzw: [0,0,0,1],
   metersPerUnit: 1e18, boundsUnits: { min: [-500,-500,-500], max: [500,500,500] } };
@@ -18,7 +19,7 @@ function required<T>(value: T | null | undefined): T { assert.ok(value !== null 
 function last<T>(values: T[]): T { return required(values.at(-1)); }
 
 
-function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, volumeBank = null }: FixtureOptions = {}) {
+function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, volumeBank = null, unavailableObjectIds = [] }: FixtureOptions = {}) {
   let current: PreparedNavigationFocus | null = null, signal: AbortSignal | undefined;
   const flights: {id:string; reducedMotion?:boolean}[] = [];
   const callbacks = new Set<() => void>(), errors: Error[] = [], selections: (string | null)[] = [], writes: (string | URL)[] = [], content: Content[] = [];
@@ -59,10 +60,21 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
     { id: 'unrelated', url: 'https://example.test/unrelated', sha256: '0'.repeat(64), bytes: 1, citation: 'Unused audit input' }];
   // Narrow test doubles intentionally expose only this controller's browser/runtime surface.
   const controller = createPreparedContextNavigation({ layer: layer as unknown as ContextLayer, windowTarget: windowTarget as unknown as Window, onError: error => { assert.ok(error instanceof Error); errors.push(error); },
-    sources, presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
+    sources, unavailableObjectIds, presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
   controller.connect(owner as unknown as ObjectWorldNavigation, { onFocusContentChange: (record, references, presentation) => content.push({ record, references, presentation }) });
   return { controller, owner, layer, lensCallbacks, lensWrites, windowTarget, errors, selections, writes, callbacks, content, flights, signal: () => signal };
 }
+
+test('a saved lens link to an unavailable package still opens its actual catalogue record', () => {
+  const f = fixture({ object: { detailedObjectId: 'helix' }, unavailableObjectIds: ['helix'] });
+  f.windowTarget.location.searchParams.set('focusLens', 'eso-vista');
+  f.controller.restore(f.windowTarget.location.href);
+  assert.deepEqual(f.errors, []);
+  assert.equal(last(f.content).record?.id, 'catalogue:a');
+  assert.equal(last(f.content).presentation, null);
+  assert.deepEqual(f.lensWrites, []);
+  f.controller.destroy();
+});
 
 test('a direct focus link without a saved camera frames its target immediately', () => {
   const f = fixture();
