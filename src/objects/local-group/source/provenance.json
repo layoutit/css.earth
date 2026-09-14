@@ -80,7 +80,14 @@
       "url": "https://arxiv.org/pdf/2010.08754",
       "citation": "Graczyk et al. (2020), ApJ904,13; DOI10.3847/1538-4357/abbb2b. Original paper supporting the adopted SMC direct distance and separate statistical/systematic errors.",
       "sha256": "6e3dd9d45208af0cefaec579deee84f5e6726bfb7e3c7a2257facacbf790711d",
-      "bytes": 3328489
+      "bytes": 3328489,
+      "references": [
+        {
+          "id": "Graczyk2020ApJ...904...13G",
+          "url": "https://arxiv.org/abs/2010.08754",
+          "citation": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b"
+        }
+      ]
     },
     {
       "id": "membership-extractor",

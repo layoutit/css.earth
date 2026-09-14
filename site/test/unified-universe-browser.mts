@@ -2,7 +2,7 @@ import { createTestPage } from './browser-observations.mts';
 import type { Page } from 'playwright';
 // Native navigation/picking/wheel acceptance over one retained physical universe.
 import assert from 'node:assert/strict';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { required } from './navigation-test-values.mts';
 import type { WorldCameraPose, PreparedWorldCameraFrame } from '../../src/renderers/css/navigation/world-camera.ts';
 type Snapshot = Awaited<ReturnType<typeof snapshot>>;
@@ -67,7 +67,7 @@ try {
       requestAnimationFrame(sample);
     };
     sample();
-  }, Object.fromEntries(OBJECTS.map(object => [object.id, object.worldFrame] as const)));
+  }, Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, object.worldFrame] as const)));
   await pauseMotion(page);
   const initialResources = await backgroundRequests(page);
   let commonWorld: WorldCameraPose | undefined;

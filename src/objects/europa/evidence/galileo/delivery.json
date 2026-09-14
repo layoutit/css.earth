@@ -1,0 +1,147 @@
+{
+  "date": "2026-09-14",
+  "baseCommit": "4b74bbfd599a6ab4f60c2139f3b399ca7349a4db",
+  "tested": "Uncommitted Monochrome photographic inserts over PR #205 commit 72257bdd72ba70b43833430b8cee5bb6a11980b1; exact content pinned below.",
+  "codePins": {
+    "tools/objects/observation/controlled-map-mosaic.mts": "56767e16ea8781aefab2c2d9b19ad1befea5a11563603d10ba3508b558990e5d",
+    "tools/objects/observation/interpret.mts": "1aaa93936262de4ed289273c1253446102ee6e8aa2c54b5a4a243da7921df0b0",
+    "tools/objects/provenance-recipes.mts": "b1af9d03b242cecd77b21643e5a878f06baa2473131ee869479812eeaf3dcbea",
+    "src/objects/europa/source/preparation/raster.json": "c1fd90d5c68c04e5ff9d901db7442057143ba4c4c12ee2213521fba056decede",
+    "src/objects/europa/source/preparation/presentation.json": "e688a2fc4afd8b205a34e7769384b9d56c4c7ad13e33befc1384119321d42c41",
+    "src/objects/europa/source/content/object.json": "ecdadd63438967d6e9dd54f21b5d7777fd3d4819fa2c1e50bfd38a403c7903ab",
+    "src/objects/europa/prepared/runtime.refs.json": "13cee674704e009995a27dd52d87eb90a2d2e5d234ec7b86e8643a739be4e104",
+    "src/objects/europa/prepared/minimaps/normal.webp": "5a3bebee06e92fcd71bd72739eafb3029384ac71e403522f93bc3b429fb6c1fa",
+    "src/objects/europa/text.json": "012d3d36bbb0acf8bf5fc2532cefb6753d4c74b02425f17edc1e6f0e29fd992a"
+  },
+  "retained": {
+    "runtimeDefinitionIdenticalToMain": true,
+    "sceneDefinitionIdenticalToMain": true,
+    "originalDatasets": 8,
+    "existingAssets": 135,
+    "unchangedImageFilesVerified": 130,
+    "atlasDimensionsUnchanged": true,
+    "runtimeSourcesChanged": false
+  },
+  "source": {
+    "count": 332,
+    "bytes": 1554362780,
+    "pinListSha256": "54b0b23dfda3f2d3b6734ed13b73553f4cbc53fb633cd7d4a30704dc55cfc739",
+    "allInputsVerifiedAndDecodedDuringBake": true,
+    "freshRestoration": "restoration.json"
+  },
+  "preparation": {
+    "recipeSha256": "c1fd90d5c68c04e5ff9d901db7442057143ba4c4c12ee2213521fba056decede",
+    "seconds": 214.603,
+    "maxRssMiB": 3551,
+    "assets": {
+      "europa-lens-normal.webp": {
+        "bytes": 922,
+        "sha256": "7656c4698d76da9e393e23eb26504436bfbcf5364c6066faca4aa26cc65022d3"
+      },
+      "europa-normal.webp": {
+        "bytes": 2367852,
+        "sha256": "b408e252043299a1003e62449621bb0d13d263fc0228a297570789849f8e2acb"
+      },
+      "europa-poles-normal.webp": {
+        "bytes": 46680,
+        "sha256": "dbbd90ec419dad5ebf56f952ac1483b6244d813fb8e8a24f0738b067e7823e33"
+      },
+      "europa-normal@2x.webp": {
+        "bytes": 6976746,
+        "sha256": "5e1f982d5483762ec96f269d88d9e4cd2645a06e4def0b1ba27d4d67179a87c9"
+      },
+      "europa-poles-normal@2x.webp": {
+        "bytes": 141700,
+        "sha256": "4530e8b2d4fbb1bcb190c57fbe2c0d9039809f7fcb254fbc3e860761a6eb16b6"
+      }
+    },
+    "profiles": {
+      "1": {
+        "surfacePercent": 15.104584974955312,
+        "contributingFrames": 324,
+        "clippedHighlights": 0,
+        "clippedNegative": 0,
+        "matching": {
+          "method": "bounded-median-display-ratio-at-selected-footprint-boundaries",
+          "boundaryPixels": 4,
+          "matched": 324,
+          "minimumGain": 0.30449487508035294,
+          "maximumGain": 11.534224622643487,
+          "highlightLimited": 110
+        }
+      },
+      "2": {
+        "surfacePercent": 15.223818809390172,
+        "contributingFrames": 330,
+        "clippedHighlights": 0,
+        "clippedNegative": 0,
+        "matching": {
+          "method": "bounded-median-display-ratio-at-selected-footprint-boundaries",
+          "boundaryPixels": 4,
+          "matched": 330,
+          "minimumGain": 0.30632753898739123,
+          "maximumGain": 11.534224622643487,
+          "highlightLimited": 110
+        }
+      }
+    }
+  },
+  "delivery": {
+    "freshPublicDownloadsVerified": true,
+    "totalBytes": 9533900,
+    "previousTotalBytes": 9992826,
+    "files": [
+      {
+        "filename": "europa-lens-normal.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/7656c4698d76da9e393e23eb26504436bfbcf5364c6066faca4aa26cc65022d3/europa-lens-normal.webp",
+        "bytes": 922,
+        "sha256": "7656c4698d76da9e393e23eb26504436bfbcf5364c6066faca4aa26cc65022d3",
+        "width": 64,
+        "height": 64,
+        "rgbaDecodedMiB": 0.015625
+      },
+      {
+        "filename": "europa-normal.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/b408e252043299a1003e62449621bb0d13d263fc0228a297570789849f8e2acb/europa-normal.webp",
+        "bytes": 2367852,
+        "sha256": "b408e252043299a1003e62449621bb0d13d263fc0228a297570789849f8e2acb",
+        "width": 4160,
+        "height": 3072,
+        "rgbaDecodedMiB": 48.75
+      },
+      {
+        "filename": "europa-normal@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/5e1f982d5483762ec96f269d88d9e4cd2645a06e4def0b1ba27d4d67179a87c9/europa-normal@2x.webp",
+        "bytes": 6976746,
+        "sha256": "5e1f982d5483762ec96f269d88d9e4cd2645a06e4def0b1ba27d4d67179a87c9",
+        "width": 8320,
+        "height": 6144,
+        "rgbaDecodedMiB": 195
+      },
+      {
+        "filename": "europa-poles-normal.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/dbbd90ec419dad5ebf56f952ac1483b6244d813fb8e8a24f0738b067e7823e33/europa-poles-normal.webp",
+        "bytes": 46680,
+        "sha256": "dbbd90ec419dad5ebf56f952ac1483b6244d813fb8e8a24f0738b067e7823e33",
+        "width": 512,
+        "height": 256,
+        "rgbaDecodedMiB": 0.5
+      },
+      {
+        "filename": "europa-poles-normal@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/4530e8b2d4fbb1bcb190c57fbe2c0d9039809f7fcb254fbc3e860761a6eb16b6/europa-poles-normal@2x.webp",
+        "bytes": 141700,
+        "sha256": "4530e8b2d4fbb1bcb190c57fbe2c0d9039809f7fcb254fbc3e860761a6eb16b6",
+        "width": 1024,
+        "height": 512,
+        "rgbaDecodedMiB": 2
+      }
+    ]
+  },
+  "limits": [
+    "Brightness joins, photographed shadows and differences between the two published control frames remain.",
+    "Display matching is not photometric calibration or albedo recovery.",
+    "Only two original inputs were freshly restored into an empty source root; all 332 were verified for this bake.",
+    "No physical-phone performance qualification or all-body conformance."
+  ]
+}

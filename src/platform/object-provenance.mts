@@ -21,6 +21,8 @@ export interface ProvenanceSource {
 export interface ProvenanceRecipe { readonly id: string; readonly path: string; readonly sha256: string; readonly parameters: ProvenanceJson; }
 export interface ProvenanceOutput { readonly url: string; readonly sha256: string; readonly bytes: number; readonly verification: string; }
 export interface ProvenanceProduct {
+  /** Whether source capture lineage may credit a displayed view; never an observation-quality claim. */
+  readonly observationAttribution?: 'source-lineage' | 'none';
   readonly id: string; readonly label: string; readonly process: string; readonly recipe: string; readonly selector: string;
   readonly recipeDependencies: readonly string[]; readonly inputs: readonly string[]; readonly parents: readonly string[];
   readonly interpretation?: { readonly kind?: string; readonly sourceKind?: string };
@@ -91,6 +93,7 @@ function outputShape(value: unknown): value is ProvenanceOutput {
 }
 function productShape(value: unknown): value is ProvenanceProduct {
   return record(value) && ['id','label','process','recipe','selector'].every(key => typeof value[key] === 'string')
+    && (value.observationAttribution === undefined || value.observationAttribution === 'source-lineage' || value.observationAttribution === 'none')
     && ['recipeDependencies','inputs','parents'].every(key => strings(value[key]))
     && ['limitations','lensIds'].every(key => value[key] === undefined || strings(value[key]))
     && (value.interpretation === undefined || record(value.interpretation) && optionalString(value.interpretation.kind) && optionalString(value.interpretation.sourceKind))
@@ -171,7 +174,7 @@ export function validateObjectProvenance(input: unknown, objectId?: string): Pro
 }
 
 /** A source can reach a product through other prepared products (e.g. a preview). */
-export function productSourceIds(document: ProvenanceDocument, productId: string): string[] {
+export function productSourceIds(document: ProvenanceDocument, productId: string, acceptProduct: (product: ProvenanceProduct) => boolean = () => true): string[] {
   const products = new Map(document.products.map(product => [product.id, product]));
   const sources = new Map(document.sources.map(source => [source.id, source]));
   const ids = new Set<string>();
@@ -185,6 +188,7 @@ export function productSourceIds(document: ProvenanceDocument, productId: string
   const visit = (id: string): void => {
     const product = products.get(id);
     if (!product) throw new TypeError(`Unknown provenance product: ${id}.`);
+    if (!acceptProduct(product)) return;
     product.inputs.forEach(addSource);
     product.parents.forEach(visit);
   };

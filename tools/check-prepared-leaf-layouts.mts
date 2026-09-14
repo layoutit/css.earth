@@ -11,7 +11,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "./check-object-runtime-ownership.mts";
 import { readPreparedPresentationModule } from "./check-prepared-presentation.mts";
 import { applyPreparedProjectiveLayout } from "../src/platform/prepared-projective-texture-leaf.mts";
@@ -86,7 +86,7 @@ function requireLeaf(carrier:StyleRecord, nativeRaster = false) {
 }
 
 export async function censusPreparedLeafLayouts({
-  root = process.cwd(), objects = OBJECTS, ignoreLayouts = false,
+  root = process.cwd(), objects = SCENE_OBJECTS, ignoreLayouts = false,
   readText = path => readFile(path, "utf8"),
 }:Pick<NonNullable<Parameters<typeof auditObjectRuntimeOwnership>[0]>,'root'|'objects'|'readText'> & {ignoreLayouts?:boolean} = {}) {
   const closure = await auditObjectRuntimeOwnership({ root, objects, strict: false, readText });

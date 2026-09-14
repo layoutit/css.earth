@@ -1,7 +1,7 @@
 import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { OBJECTS } from "../../site/objects.mts";
+import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { createObjectControlBinding } from '../renderers/css/dist/testing.js';
 import { initialObjectSelection, reduceObjectSelection, objectCycleStates } from '../renderers/css/dist/testing.js';
 import { parsePreparedObjectRuntime } from '../renderers/css/dist/index.js';
@@ -70,7 +70,7 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
   };
 }
 
-for (const object of OBJECTS) test(`${object.id}: one binder consumes every actual control and owns no shell preference listener`, async () => {
+for (const object of SCENE_OBJECTS) test(`${object.id}: one binder consumes every actual control and owns no shell preference listener`, async () => {
   const {controls} = parsePreparedObjectRuntime(await loadObjectTestDefinition(object.id));
   const h = harness(controls);
   assert.ok([...h.lensInputs, ...h.settingInputs.filter(input => !["motion", "skyContrast", "heliosphere", "asteroidBodies", "asteroidOrbits", "asteroidLabels"].includes(input.name))].every(input => input.disabled));

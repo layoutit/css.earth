@@ -7,6 +7,7 @@ export interface ContributionEdge {
   readonly objectId: string; readonly productId: string; readonly sourceId: string;
   readonly lensIds: readonly string[]; readonly attribution: CaptureAttribution;
 }
+/** One selectable presentation (object + lens), which can combine several published sources and products. */
 export interface DatasetView { readonly objectId: string; readonly objectName: string; readonly lensId: string; readonly label: string; readonly href: string; }
 export interface ContributionGraph {
   readonly edges: readonly ContributionEdge[]; readonly datasets: readonly DatasetView[];
@@ -36,6 +37,7 @@ export function compileContributions(objects: readonly ContributionObject[], cat
     if (objectIds.has(object.id)) throw new TypeError('Duplicate contribution object.');
     objectIds.add(object.id);
     const document = validateObjectProvenance(object.provenance, object.id);
+    for (const product of document.products) if (product.observationAttribution === undefined) throw new TypeError(`Undeclared observation attribution: ${object.id}/${product.id}.`);
     const sources = new Map(document.sources.map(source => [source.id, source]));
     const lensIds = new Set(object.controls.map(control => control.id));
     if (lensIds.size !== object.controls.length) throw new TypeError('Duplicate prepared dataset ID.');
@@ -43,9 +45,8 @@ export function compileContributions(objects: readonly ContributionObject[], cat
     for (const source of document.sources) if (source.capture) validateCapture(source.capture, catalog);
     for (const product of document.products) {
       for (const lensId of product.lensIds ?? []) if (!lensIds.has(lensId)) throw new TypeError(`Unknown prepared dataset: ${object.id}/${lensId}.`);
-      const interpretation = product.interpretation ?? {};
-      if (['schematic-interior', 'illustrative-model', 'modeled-noise'].includes(interpretation.kind ?? '') || interpretation.sourceKind === 'schematic-morphology-illustration') continue;
-      for (const sourceId of productSourceIds(document, product.id)) {
+      if (product.observationAttribution === 'none') continue;
+      for (const sourceId of productSourceIds(document, product.id, product => product.observationAttribution === 'source-lineage')) {
         for (const attribution of sources.get(sourceId)?.capture?.attributions ?? []) {
           edges.push(Object.freeze({ objectId: object.id, productId: product.id, sourceId, lensIds: Object.freeze([...(product.lensIds ?? [])]), attribution }));
           for (const id of product.lensIds ?? []) linked.add(id);

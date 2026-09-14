@@ -2,10 +2,10 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,readdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {OBJECTS} from '../../site/objects.mts';
+import {SCENE_OBJECTS} from '../../site/objects.mts';
 import {projectRoot} from './fixtures.mts';
 import type { PathLike } from 'node:fs';
-const selected=OBJECTS;
+const selected=SCENE_OBJECTS;
 assert.ok(selected.length>0,'The registry must exercise source closure.');
 const executable=/\.(?:[cm]?[jt]sx?|astro|css)$/i;
 async function files(root: string):Promise<string[]>{const result=[];for(const entry of await readdir(root,{withFileTypes:true})){const path=resolve(root,entry.name);if(entry.isDirectory())result.push(...await files(path));else {assert.ok(entry.isFile(),`Unexpected non-file ${path}`);result.push(path);}}return result;}

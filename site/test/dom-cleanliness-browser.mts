@@ -9,13 +9,13 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { browserObjects } from './browser-objects.mts';
 import { conformanceBrowserLaunch } from './conformance-browser-launch.mts';
 // Reuse an already-running server. Optionally select one body after the URL.
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const requestedId = process.argv[3];
-const selected = requestedId ? OBJECTS.filter(object => object.id === requestedId) : browserObjects();
+const selected = requestedId ? SCENE_OBJECTS.filter(object => object.id === requestedId) : browserObjects();
 assert.ok(selected.length, `Unknown object: ${requestedId}`);
 const output = resolve('output/dom-cleanliness');
 await mkdir(output, { recursive: true });

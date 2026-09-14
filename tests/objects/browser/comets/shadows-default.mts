@@ -6,14 +6,14 @@ import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {chromium} from 'playwright';
-import {OBJECTS} from '../../../../site/objects.mts';
+import {SCENE_OBJECTS} from '../../../../site/objects.mts';
 import { loadObjectTestDefinition } from '../../../../tools/object-test-data.mts';
 
 const origin=process.argv[2]??'http://127.0.0.1:53136',output=resolve('output/playwright/comet-shadows-default');
 await mkdir(output,{recursive:true});
 const browser=await chromium.launch({channel:'chrome',headless:true}),reports=[];
 try{
- for(const {id} of OBJECTS.filter(o=>o.classification==='comet')){
+ for(const {id} of SCENE_OBJECTS.filter(o=>o.classification==='comet')){
   const context=await browser.newContext({viewport:{width:1440,height:900}}),page=await context.newPage(),errors: string[]=[];
   page.on('pageerror',e=>errors.push(e.message));
   try{
