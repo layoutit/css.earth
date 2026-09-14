@@ -2009,8 +2009,8 @@
     {
       "id": "titan-object-content",
       "path": "content/object.json",
-      "expectedBytes": 16133,
-      "expectedSha256": "fc03cf7c708181b9b3d29b199160edc74232bfe1bff00d22651c25b701f73a53",
+      "expectedBytes": 15281,
+      "expectedSha256": "5f3b5fa5532549b0c937f17d1a360d2f4339b74801af247f427aaad7cd65bcd4",
       "origin": "Repository-authored Titan object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2022,7 +2022,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     }
   ],

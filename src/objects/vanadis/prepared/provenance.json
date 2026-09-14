@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b03d71fd2063b273245bfa70b0bd53eee230757d6a440f923df3038824af998b"
+    "sha256": "a82e517386dc14b827851d8690c4c2199f60907e01e591f0c983c6aeb79cfe52"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -149,14 +149,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "37fbcfeb87f7b3f90752bd7c232dbbd611cb9b7606c6513f863871f782a90e3e",
+      "sha256": "3f1360bffc6be40a3d561fb9b836f609f5004caa1cf7987c48cfcf756e3a2f58",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "vanadis",
         "displayName": "Vanadis",
         "panel": {
-          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -220,8 +219,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex light-curve reconstruction with approximate thermal size: 90.13 km effective diameter (catalog ±1.22 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "DAMIT 6039 shape model",
               "thumbnail": "/scenes/vanadis/vanadis-shape-thumbnail.webp",
               "surface": "vanadis-shape-surface@2x.webp",
               "poles": "vanadis-shape-surface@2x.webp",
@@ -230,13 +227,11 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 45.065 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "DAMIT 6039 radial height",
               "thumbnail": "/scenes/vanadis/vanadis-elevation-thumbnail.webp",
               "surface": "vanadis-elevation-surface@2x.webp",
               "poles": "vanadis-elevation-surface@2x.webp",
@@ -258,7 +253,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6039",
                 "image": "/scenes/vanadis/vanadis-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 45.065 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -388,7 +383,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -397,8 +392,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "37fbcfeb87f7b3f90752bd7c232dbbd611cb9b7606c6513f863871f782a90e3e",
-      "bytes": 11064,
+      "sha256": "3f1360bffc6be40a3d561fb9b836f609f5004caa1cf7987c48cfcf756e3a2f58",
+      "bytes": 10496,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -411,11 +406,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 45.065 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -448,6 +442,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "vanadis-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -455,11 +456,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex light-curve reconstruction with approximate thermal size: 90.13 km effective diameter (catalog ±1.22 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -486,6 +486,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "vanadis-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -493,8 +500,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -506,8 +514,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7944,
-          "sha256": "7a482c3397042b9861e7954e4ac2c09de08083908ea6033548115fccd25460c2",
+          "bytes": 7848,
+          "sha256": "3fbd002f3b909f40cb3ede122f1b1c5b39d9252ed4dabd38f164fcd91f97d128",
           "verification": "bytes-verified"
         }
       ],
@@ -521,6 +529,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -545,6 +554,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

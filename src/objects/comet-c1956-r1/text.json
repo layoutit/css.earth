@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-c1956-r1",
+  "card": {
+    "text": "A great comet of the 1950s, on a one-way orbit.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=C/1956%20R1",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "C/1956 R1 (Arend-Roland); orbit class: Hyperbolic Comet; q: 0.316 au"
+      },
+      {
+        "catalogueId": "jpl-great-comets",
+        "url": "https://ssd.jpl.nasa.gov/sb/great_comets.html",
+        "label": "JPL Solar System Dynamics · Great comets in history",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Arend–Roland shone brightly as it swung close to the Sun, then left on an orbit that will not bring it back.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=C/1956%20R1",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "C/1956 R1 (Arend-Roland); orbit class: Hyperbolic Comet; q: 0.316 au"
+      },
+      {
+        "catalogueId": "jpl-great-comets",
+        "url": "https://ssd.jpl.nasa.gov/sb/great_comets.html",
+        "label": "JPL Solar System Dynamics · Great comets in history",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Celestia catalog nucleus",
+      "detail": "Catalog size",
+      "summary": "Celestia's nucleus shape at its catalog size. The real shape is unknown."
+    }
+  }
+}

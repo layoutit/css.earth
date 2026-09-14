@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "himalia",
+  "entries": [
+    {
+      "id": "cassini-jpl-shape-approximation",
+      "subject": "Cassini projected outline and JPL size estimate",
+      "status": "included",
+      "finding": "Cassini / Porco et al. (2003) reports a 150 × 120 km projected outline (±20 km) near 70° phase. The display uses that 1.25 ratio and equal short axes, normalizing volume to JPL’s 85 ± 10 km radius; derived semiaxes 98.63 × 78.91 × 78.91 km are not three measured axes or a reconstruction of Cassini’s viewing geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/himalia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/himalia/source/measurements.json",
+        "https://doi.org/10.1126/science.1079462",
+        "https://ssd.jpl.nasa.gov/sats/phys_par/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "older-ellipse",
+      "subject": "Preliminary large occultation ellipse",
+      "status": "excluded",
+      "finding": "Gomes-Júnior’s 2021 analysis rejects the preliminary roughly 200 × 150 km ellipse using negative chords and Cassini evidence. Combining the May 2018 events suggests an 85 km equatorial radius, with a possible crater and 3D solution still unresolved. The 205.6 × 141.3 km secondary-catalog outline is not adopted and no speculative crater is rendered.",
+      "revisitWhen": "A published shape solution supplies a documented three-dimensional model and body frame.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/himalia/README.md",
+        "https://iota-es.de/JOA/JOA2021_2.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "orbital-solution",
+      "subject": "Pinned independent orbital observations",
+      "status": "included",
+      "finding": "Selected vector-epoch evidence constrains the documented orbit correction, not a surface map.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/himalia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/himalia/source/manifest.json",
+        "https://iota-es.de/JOA/JOA2021_2.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-n1355869401",
+      "subject": "Cassini N1355869401 native-frame inspection",
+      "status": "deferred",
+      "finding": "The OPUS survey returned 93 matches and retained the first 12. The finest-distance calibrated native N1355869401 (CL1/CB3, 8.2-second exposure, about 26.60 km/pixel) was inspected but does not establish a securely registered disc. Exact raster hash and original label are retained.",
+      "revisitWhen": "A registered mapped release supports a defined lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/himalia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/himalia/source/survey/opus.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "denk-cassini-new-horizons",
+      "subject": "Denk et al. (2026) Cassini and New Horizons review",
+      "status": "excluded",
+      "finding": "Section 4.3.3 and Figure 20 examine shorter Cassini exposures in seven filters: about 4–6 pixels across with no unambiguous surface spots. New Horizons 2007 views are barely resolved. Integrated colors are not a spatial color or composition map.",
+      "revisitWhen": "A source observation or validated reconstruction resolves independently registered surface information beyond these sampling limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/himalia/README.md",
+        "https://refubium.fu-berlin.de/bitstream/handle/fub188/51747/11214_2026_Article_1263.pdf?sequence=1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "mapped-product-search",
+      "subject": "Registered DEM and geology search",
+      "status": "unresolved",
+      "finding": "No registered DEM or mapped geological release was qualified in the documented survey. This is a bounded search result, not evidence that no future source can exist.",
+      "revisitWhen": "A primary release supplies downloadable Himalia mapped data with coordinates, quantity and coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/himalia/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

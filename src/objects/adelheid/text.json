@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "adelheid",
+  "card": {
+    "text": "Dark main-belt asteroid, discovered on 17 April 1888 at Vienna.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=276",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1888-04-17 by Palisa, J. at Vienna; albedo: 0.051; orbit class: Main-belt Asteroid; spec_T: X"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "J. Palisa found Adelheid at Vienna on 17 April 1888. It is very dark, reflecting only about 5% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=276",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1888-04-17 by Palisa, J. at Vienna; albedo: 0.051; orbit class: Main-belt Asteroid; spec_T: X"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 189 shape model",
+      "detail": "Published shape",
+      "summary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "DAMIT 189 radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 52 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

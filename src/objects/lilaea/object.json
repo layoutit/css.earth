@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4c5dc57da7127711fdaeb0fd078a37f1c1d9c788e8de2836d5b7c4c27b57f7ce"
+          "sha256": "c11e55db1f354ba4dfd52746f963351ff1b8721bc9d7b76a1039865b1d3ea2ff"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "147cceb145380189ded94d9cb67d461c1f6ca75cbf0844cbf49e2bb65d25479c"
+        "sha256": "e9774e5bc0717af2f13af7b0e5ec6a1717786755656155bf8acb3ba5b8287285"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.752207905556241,
-      "description": "Explore Lilaea in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in February 1880.",
       "systemName": "Solar System",
       "order": 317,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2f81e5ca9adec41ce03b1955d6d5dd267d3fc061c17aa5da35afd1b9ff070d69"
+    "sha256": "3b4b450de3793908370c652da7e744233cb473783ba434d5a80816d5addfc3ab"
   }
 }

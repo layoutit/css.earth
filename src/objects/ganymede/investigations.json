@@ -1,0 +1,154 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ganymede",
+  "entries": [
+    {
+      "id": "king-fletcher-2022-sphere-composition",
+      "subject": "King and Fletcher 2022 mapped VLT/SPHERE reflectance and composition fits",
+      "status": "deferred",
+      "finding": "The 2026-09-13 intake established available numerical grids and deferred preparation. The 2026-09-14 implementation below is ready for local review; public inclusion remains deferred for explicit reuse terms. Implemented Ice fraction (derived_total_ices) and Dark material (derived_total_synthetic) from the v1.0.1 posterior medians. Each native grid has 38,473 valid nodes, east-positive 0-359 degree longitude, latitude -90 through 89 degrees, -99 no-data and 16th/84th-percentile bounds. The converter retains no-data and uncertainty widths, reverses latitude and repeats only the seam; its one-degree resampling does not add detail beyond the paper's approximately 100-150 km effective resolution. The fit header names the 2015 observation, but the native fit mask is the four 2015/2021 0.95-1.65 micrometre reflectance masks' union minus five excluded 2015 nodes; the registration receipt records the pinned source hashes and coordinates. This establishes aggregate coverage correspondence, not a per-cell epoch contribution. These are model abundances, not uniquely detected species; individual salt fits remain degenerate. Zenodo is other-open/Open Access, but no explicit numerical-data reuse licence was located. Use remains local scientific preview and private draft PR only; do not publish the assets.",
+      "revisitWhen": "Reopen if the authors or archive publish explicit numerical-data reuse terms, corrected fit metadata, or a replacement release. Keep posterior bounds and no-data; do not present individual salts as identified deposits.",
+      "evidence": [
+        "https://doi.org/10.1029/2022JE007323",
+        "https://doi.org/10.5281/zenodo.6390469",
+        "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/v1.0.1/README.md",
+        "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/v1.0.1/fit_SPHERE.json.gz",
+        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/README.md",
+        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/evidence/composition/browser.json",
+        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/evidence/composition/registration.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "f8fbdaa0b203f11b4f121b867eb478d38d6c311e"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "78038ef3913db7d48cde75d9fe97248b6db67d98"
+        }
+      ]
+    },
+    {
+      "id": "jwst-bockelee-morvan-2024-surface-composition",
+      "subject": "Bockelee-Morvan et al. 2024 JWST spectral mapping",
+      "status": "unresolved",
+      "finding": "Located the primary paper describing NIRSpec and MIRI observations of both hemispheres, with water, carbon-dioxide and thermal results. This pass established a relevant paper, not a downloaded numerical surface-map release; coordinates, processing, masks and reuse were not verified.",
+      "revisitWhen": "Inspect the paper's data-availability route and retrieve the numerical map or reproducible source closure before selecting a surface quantity.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202347326"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
+        }
+      ]
+    },
+    {
+      "id": "juno-uvs-oxygen-emission-maps",
+      "subject": "Juno UVS oxygen-emission brightness maps associated with Duling et al. 2026",
+      "status": "deferred",
+      "finding": "Inspected the Zenodo release description. Its observed OI 1356-Angstrom and combined OI 1304/1356-Angstrom brightness maps describe atmospheric emissions; a separate field estimates reflected sunlight using CII 1335 Angstrom. A longitude/latitude display grid alone does not make atmospheric emission a surface-composition measurement. Numerical files and altitude/line-of-sight treatment were not qualified.",
+      "revisitWhen": "Reconsider only for a scientifically supported observation view that preserves the atmospheric and reflected-light distinction; this is not a candidate for literal surface chemistry under the current fixed-scene scope.",
+      "evidence": [
+        "https://zenodo.org/records/17964985"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
+        }
+      ]
+    },
+    {
+      "id": "usgs-monochrome-mosaic",
+      "subject": "USGS Voyager/Galileo 1 km monochrome mosaic",
+      "status": "included",
+      "finding": "Selected 16,539 by 8,270 source provides Monochrome; variable 400 m to 20 km detail, original shadows, and zero-marked gaps remain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_global_mosaic_1km"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "usgs-enhanced-color-mosaic",
+      "subject": "USGS Voyager/Galileo 1.4 km color mosaic",
+      "status": "included",
+      "finding": "Selected SSI 991/559/413 nm product provides Enhanced color, not natural color; missing color falls back to observed monochrome.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_color_global_mosaic_1_4km"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "synthesized-red-sector",
+      "subject": "Voyager color mosaic red channel in 210–250 degrees west",
+      "status": "excluded",
+      "finding": "The source synthesized red while green and blue were observed. The package uses monochrome from 110–150 degrees east rather than present synthesized red as measurement.",
+      "revisitWhen": "A release supplies an observed red channel and coverage evidence for that sector.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_color_global_mosaic_1_4km"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "sim3237-geology",
+      "subject": "USGS SIM 3237 GeologyUnits polygons",
+      "status": "included",
+      "finding": "Selected 3,046-record, 23-unit source supplies categorical Geology. The known degenerate one-point ring is excluded while valid multipart geometry, no-data and uncovered poles remain explicit.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://pubs.usgs.gov/sim/3237/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "muse-oxygen-signature",
+      "subject": "King et al. July 2019 VLT/MUSE 577.3 nm oxygen-signature maps",
+      "status": "included",
+      "finding": "Pinned native maps supply Oxygen signature under the documented first-valid-night, coordinate, coverage, registration and residual-night limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://doi.org/10.5281/zenodo.11402374"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "belinda",
+  "entries": [
+    {
+      "id": "voyager-pds-iss",
+      "subject": "Voyager/PDS ISS",
+      "status": "deferred",
+      "finding": "The 3,275-candidate OPUS review selected C2673019 for metadata inspection: 46.77632 km/native pixel, 13.801° phase, 15.36-second clear exposure and 5:1 scan. Original archive products, calibrated products and geometric corrections are available through PDS. Even an ideal full long diameter spans only 2.74 native pixels at that sampling. Its surface intercept, body center and north-clock fields are null; the target label is Uranus. The search is a geometric candidate list, not proof that Belinda is resolved in that frame.",
+      "revisitWhen": "A Belinda observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/belinda/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/belinda/source/manifest.json",
+        "https://pds-rings.seti.org/voyager/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "hst-photometry",
+      "subject": "Karkoschka (2001) adopted Voyager/HST shape",
+      "status": "included",
+      "finding": "Table IV of the HST study supplies the adopted prolate semiaxes 64 × 32 × 32 km. The repeated minor axis is a model assumption, not an independently measured third dimension. French et al. (2024), Table 3 reproduces the separate Voyager size paper’s projected-radius and axis-ratio uncertainties; they are not individual-axis errors. The selected analytic shape supplies no local relief or surface pixels.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/belinda/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/belinda/source/manifest.json",
+        "https://doi.org/10.1006/icar.2001.6596",
+        "https://arxiv.org/abs/2401.04634",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/belinda/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "keck-spectral-photometry",
+      "subject": "Keck spectral photometry",
+      "status": "deferred",
+      "finding": "The 2023 study adopts the published axes. Integrated spectra do not create a spatial color or composition map.",
+      "revisitWhen": "A spatially resolved Belinda measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/belinda/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/belinda/source/manifest.json",
+        "https://www.sciencedirect.com/science/article/pii/S0019103522004237"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jwst-nircam",
+      "subject": "JWST/NIRCam",
+      "status": "excluded",
+      "finding": "The official Uranus image identifies inner moons as unresolved points. It does not provide a body texture.",
+      "revisitWhen": "A spatially resolved Belinda measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/belinda/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/belinda/source/manifest.json",
+        "https://science.nasa.gov/asset/webb/uranus-close-up-nircam-image/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "detailed-shape-dem-and-geology",
+      "subject": "Detailed shape, DEM and geology",
+      "status": "unresolved",
+      "finding": "No qualified detailed mesh or registered map was located in the inspected mission/map releases and linked publications. The selected approximation remains explicit; this survey is not a claim that no additional research data exist.",
+      "revisitWhen": "A Belinda source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/belinda/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/belinda/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

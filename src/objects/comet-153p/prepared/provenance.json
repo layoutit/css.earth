@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "02e7447e93e1dabb0dda0d01b60e1e6225513c70e1e4de17b24125eeaa3d5b55"
+    "sha256": "4f330339496d00569c4fa7478becd7946fbd297345a0e79d944d2520976bf252"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "148053072b8ea61902928e37640f7823ae6ffaffab51d9f53222d0083acbf851",
+      "sha256": "e6e85791e52086ef79cecd76f651872617a3ea2ac4396ea78f282a70fc7eed04",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-153p",
         "displayName": "Ikeya–Zhang",
         "panel": {
-          "introduction": "Ikeya–Zhang brightened the skies in 2002. Its journey around the Sun takes centuries, unlike the frequent returns of comets such as Encke.",
           "facts": [
             {
               "id": "diameter",
@@ -173,9 +172,6 @@
             {
               "id": "model",
               "label": "Illustrative nucleus",
-              "detail": "Celestia",
-              "title": "153P/Ikeya–Zhang",
-              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
               "thumbnail": "/scenes/comet-153p/comet-153p-model-thumbnail.webp",
               "surface": "comet-153p-model-surface@2x.webp",
               "poles": "comet-153p-model-poles@2x.webp",
@@ -195,7 +191,9 @@
                   "label": "Closest to Sun",
                   "value": "0.494 AU"
                 }
-              ]
+              ],
+              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -294,7 +292,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -303,8 +301,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "148053072b8ea61902928e37640f7823ae6ffaffab51d9f53222d0083acbf851",
-      "bytes": 3297,
+      "sha256": "e6e85791e52086ef79cecd76f651872617a3ea2ac4396ea78f282a70fc7eed04",
+      "bytes": 3082,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -317,11 +315,10 @@
       "label": "Illustrative nucleus",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -348,6 +345,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "celestia-mesh",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -355,8 +359,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -368,8 +373,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7531,
-          "sha256": "a488f74e5bb848e6b4e8d797ae84460b0aa244e66776c8346679f288952ad957",
+          "bytes": 7373,
+          "sha256": "de5bd84ab3927fad10d3437186fb42087ac39e4fb5caf737e3c312ac7141dfaf",
           "verification": "bytes-verified"
         }
       ],

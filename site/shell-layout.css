@@ -413,7 +413,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 .planet-header-action:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
 .planet-header-action[aria-pressed="true"],
 .planet-machine-action:has(:checked),
-body:has(.planet-settings-panel:popover-open) .planet-settings-action {
+.planet-ui-layer:has(.planet-settings-panel:popover-open) .planet-settings-action {
   color: var(--shell-text);
   background: var(--explorer-header-control-selected);
 }
@@ -482,10 +482,10 @@ body:has(.planet-settings-panel:popover-open) .planet-settings-action {
 .planet-machine-action:has(:focus-visible) { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
 .planet-settings-panel[popover]:not(:popover-open) { display: none; }
 .planet-settings-panel[popover] { color: var(--shell-text-secondary); }
-body:has(.planet-machine-toggle:not(:checked)) .planet-dataset-context-rail,
-body:has(.planet-settings-panel:popover-open) .planet-dataset-context-rail,
+.planet-ui-layer:has(.planet-machine-toggle:not(:checked)) .planet-dataset-context-rail,
+.planet-ui-layer:has(.planet-settings-panel:popover-open) .planet-dataset-context-rail,
 .planet-information-panel:is([aria-busy="true"], [data-card-view="overview"]) > .planet-dataset-context-rail,
-.planet-information-panel:has(> .planet-native-tabs [data-information-tab="dataset"]:not(:checked)) > .planet-dataset-context-rail,
+.planet-information-panel > .planet-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .planet-dataset-context-rail,
 .planet-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
 
 /* Dataset context uses the same cards as the left sidebar, above the minimap. */
@@ -717,9 +717,9 @@ body:has(.planet-settings-panel:popover-open) .planet-dataset-context-rail,
 
   .explorer-brand-row,
   .planet-machine-action { transition: opacity 160ms ease, visibility 0s; }
-  body:has(.planet-sheet-handle:checked) .explorer-brand-row,
+  .planet-ui-layer:has(.planet-sheet-handle:checked) .explorer-brand-row,
   body:is([data-sheet="half"], [data-sheet="full"]) .explorer-brand-row,
-  body:has(.planet-sheet-handle:checked) .planet-machine-action,
+  .planet-ui-layer:has(.planet-sheet-handle:checked) .planet-machine-action,
   body[data-sheet="full"] .planet-machine-action {
     opacity: 0;
     visibility: hidden;

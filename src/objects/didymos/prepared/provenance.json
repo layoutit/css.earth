@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "didymos",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "505b51540f78181fbaa6c50bebb5bc4fe5ab0dc6fbd734526657a93a7e448790"
+    "sha256": "b290543ea249303ffa1c737aec0943ccc679028eef8287b7c6e361a5c76ed167"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1df8a290f9fdfcf55ac76c8c8f52a5b1973f5be3258316ce8d1821f2c1051a3d",
+      "sha256": "1c9077ace0b62716386b164ff8be071ef0bd04d4f17973e7d397f6168ca203f4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -203,14 +203,12 @@
               "levelMatching": {
                 "samplesPerTriangle": 64,
                 "minimumPairs": 64,
-                "maximumLogMad": 0.15,
                 "maximumGain": 1.2,
                 "maximumAngleDegrees": 70
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 8,
                 "maximumSeparationMeters": 8,
-                "maximumEmissionDegrees": 80,
+                "maximumEmissionDegrees": 65,
                 "visibilityToleranceMeters": 0.5,
                 "interpretation": "Every interpolation contributor must match the full Didymos v003 mesh within 8 m and pass visibility. These acceptance limits match the retained mesh preparation budget; they do not estimate scientific accuracy."
               },
@@ -218,14 +216,14 @@
                 "model": "lommel-seeliger",
                 "referenceIncidenceDegrees": 0,
                 "referenceEmissionDegrees": 0,
-                "maximumIncidenceDegrees": 80,
-                "maximumEmissionDegrees": 80,
+                "maximumIncidenceDegrees": 65,
+                "maximumEmissionDegrees": 65,
                 "maximumGain": 3
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99
+                  1.1,
+                  99.9
                 ]
               },
               "metadata": {
@@ -295,14 +293,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "839a445fa202da60a7754a1086f2d9429b95b3e92321139d814288d094af3447",
+      "sha256": "997906495363a7dc18d488baeb9686fa910479d51e6d300afdfcadb3cc0ce324",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "didymos",
         "displayName": "Didymos",
         "panel": {
-          "introduction": "Didymos is the rapidly rotating primary of the near-Earth binary visited by DART and LICIACube in 2022. Its broad equatorial ridge and flattened poles are reconstructed from their images. Its moon Dimorphos was the target of DART’s asteroid-deflection experiment. Explore the published shape, radial heights and derived relative surface brightness.",
           "facts": [
             {
               "id": "radius",
@@ -334,8 +331,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "The shared grid marks unavailable surface imagery over the final Didymos v003 stereophotoclinometry shape. Image-resolved regions contain greater detail; smoothly modeled regions lack image coverage. The source estimates approximately 14 m uncertainty in each Cartesian axis and 3.3% in volume. This is a shape model, not a photograph or an albedo map.",
-              "title": "SPC shape model v003",
               "thumbnail": "/scenes/didymos/didymos-shape-thumbnail.webp",
               "surface": "didymos-shape-surface@2x.webp",
               "poles": "didymos-shape-surface@2x.webp",
@@ -344,14 +339,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "An image-based shape model. Smooth regions lack image coverage; no surface photograph is mapped."
+              "notes": "The shared grid marks unavailable surface imagery over the final Didymos v003 stereophotoclinometry shape. Image-resolved regions contain greater detail; smoothly modeled regions lack image coverage. The source estimates approximately 14 m uncertainty in each Cartesian axis and 3.3% in volume. This is a shape model, not a photograph or an albedo map.",
+              "noData": true
             },
             {
               "id": "draco",
               "label": "DRACO mosaic",
-              "description": "Two DRACO frames from 158 and 94 seconds before impact. The later partial frame supplies closer detail; the earlier frame supplies wider coverage. The unseen surface keeps the grid. Each image is registered through its archived geometry and checked against the source shape. Brightness is approximately disk-normalized and matched over shared surface patches; shadows remain in the photographs. This is not measured albedo or a post-impact surface.",
-              "title": "DART approach photographs",
               "thumbnail": "/scenes/didymos/didymos-draco-thumbnail.webp",
               "surface": "didymos-draco-surface@2x.webp",
               "poles": "didymos-draco-poles@2x.webp",
@@ -361,7 +354,6 @@
                 "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/"
               },
               "falseColor": false,
-              "detail": "DRACO · DART",
               "facts": [
                 {
                   "id": "observed",
@@ -379,13 +371,12 @@
                   "value": "None · panchromatic"
                 }
               ],
-              "summary": "Two DRACO frames from 158 and 94 seconds before impact: one wider view and one closer partial view. Brightness is approximately normalized; photographed shadows remain. Grid marks unobserved or rejected areas."
+              "notes": "Two DRACO frames from 158 and 94 seconds before impact. The later partial frame supplies closer detail; the earlier frame supplies wider coverage. The unseen surface keeps the grid. Each image is registered through its archived geometry and checked against the source shape. Brightness is approximately disk-normalized and matched over shared surface patches; shadows remain in the photographs. This is not measured albedo or a post-impact surface.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows radius in the published Didymos shape minus a 365 m reference sphere. It includes the equatorial ridge and overall flattened shape; it is not height above a gravitational equipotential. Smooth regions are less constrained by images. Cartographic relief and optional Sun lighting are display treatments.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/didymos/didymos-elevation-thumbnail.webp",
               "surface": "didymos-elevation-surface@2x.webp",
               "poles": "didymos-elevation-surface@2x.webp",
@@ -407,15 +398,11 @@
                 "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_obj_0000n00000_v003.xml",
                 "image": "/scenes/didymos/didymos-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Height relative to a 365 m sphere, including the ridge. Smooth regions have weaker image constraints."
+              "notes": "Color shows radius in the published Didymos shape minus a 365 m reference sphere. It includes the equatorial ridge and overall flattened shape; it is not height above a gravitational equipotential. Smooth regions are less constrained by images. Cartographic relief and optional Sun lighting are display treatments."
             },
             {
               "id": "albedo",
               "label": "Relative albedo",
-              "detail": "DART surface brightness",
-              "description": "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph.",
-              "title": "Relative-albedo model",
               "thumbnail": "/scenes/didymos/didymos-albedo-thumbnail.webp",
               "surface": "didymos-albedo-surface@2x.webp",
               "poles": "didymos-albedo-surface@2x.webp",
@@ -437,7 +424,8 @@
                 "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
                 "image": "/scenes/didymos/didymos-albedo-legend.webp"
               },
-              "summary": "Grayscale shows modeled brightness, not absolute albedo. Accepted facets cover about 58% of the shape; the grid marks the rest."
+              "notes": "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph.",
+              "noData": true
             }
           ]
         },
@@ -616,7 +604,7 @@
       "sha256": "b5349374186d254ca21b7b00ddd9f6dea7e2762ca6bbff13f43151ee448e3f20",
       "bytes": 3616200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -657,7 +645,7 @@
       "sha256": "eeaaefa6031372e2ade0be010ff77bd85f0402a845ce1c8125f1b135ca7b7b69",
       "bytes": 1189440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -691,7 +679,7 @@
       "sha256": "6fd1eede1d4c1bb8c5edd83c95b4c5de24dfdea2ca41e1263583fdb389b7a9e5",
       "bytes": 6724,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -731,7 +719,7 @@
       "sha256": "e3a24cd1589987b2454f95dbb7c557e1fe2eb2b0e9c04a378d6768091b69750e",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -769,7 +757,7 @@
       "sha256": "4d4847a207f5e14975431949b8d500ade608c0bb0612bac54f1f3deed91cc5aa",
       "bytes": 40054,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -809,7 +797,7 @@
       "sha256": "3290224e1f16b41abe2999763a8416c781d41657c81b02b749571f953dfdd04f",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -847,7 +835,7 @@
       "sha256": "ab5b4d3eea17bd6ac8e0f03024cfbd5145b23545a2434c0577a207a07ff9e9bc",
       "bytes": 40053,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -863,7 +851,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -872,10 +860,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "839a445fa202da60a7754a1086f2d9429b95b3e92321139d814288d094af3447",
-      "bytes": 12871,
+      "sha256": "997906495363a7dc18d488baeb9686fa910479d51e6d300afdfcadb3cc0ce324",
+      "bytes": 11577,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -897,7 +885,7 @@
       "sha256": "8ed3c280d5b3adb81f765b4b6363aee811b80e47958a17f5b0a1ce74193f90a5",
       "bytes": 1310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -923,7 +911,7 @@
       "sha256": "b72760080705582e68464923dbcd079b49a49f4894ca2214b1b53baa1be93be9",
       "bytes": 6693,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -952,7 +940,7 @@
       "sha256": "05b03ddd8348fb0c98249dd46fa42334fbdb33c6822cb8323f1cbd37d5c08bd3",
       "bytes": 154,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -979,7 +967,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -990,11 +978,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows radius in the published Didymos shape minus a 365 m reference sphere. It includes the equatorial ridge and overall flattened shape; it is not height above a gravitational equipotential. Smooth regions are less constrained by images. Cartographic relief and optional Sun lighting are display treatments."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1012,19 +999,26 @@
           "url": "/scenes/didymos/didymos-elevation-thumbnail.webp",
           "bytes": 5004,
           "sha256": "cd4746448a1140e2b673d293d13883d930167f1cf1450c4329aca95fadabf2e1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-elevation-surface@2x.webp",
           "bytes": 266414,
           "sha256": "8e9557aa0ad081585ab38030268ddffa34ccaec7088d55a5f506c8f08bd5a7c6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "didymos-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1034,11 +1028,10 @@
       "label": "Relative albedo",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph."
-      ],
+      "limitations": [],
       "lensIds": [
         "albedo"
       ],
@@ -1058,19 +1051,26 @@
           "url": "/scenes/didymos/didymos-albedo-thumbnail.webp",
           "bytes": 2558,
           "sha256": "713c5a1e83de5145eb85c02ac447aa6bf452e74b9ba66308ad8a6853baecf041",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-albedo-legend.webp",
           "bytes": 64,
           "sha256": "fbf50802a71d951fd9e6393c53c70993edffbe7d465f76e25428470bac81ac3f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-albedo-surface@2x.webp",
           "bytes": 220476,
           "sha256": "cb356d725517464cba58633a62e9937d879bb38be31aca73ccc5430b70d9fdd6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "didymos-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1080,11 +1080,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The shared grid marks unavailable surface imagery over the final Didymos v003 stereophotoclinometry shape. Image-resolved regions contain greater detail; smoothly modeled regions lack image coverage. The source estimates approximately 14 m uncertainty in each Cartesian axis and 3.3% in volume. This is a shape model, not a photograph or an albedo map."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -1102,13 +1101,20 @@
           "url": "/scenes/didymos/didymos-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-shape-surface@2x.webp",
           "bytes": 219240,
           "sha256": "fd36cf7c204e365b94bd58ecf2df23ace7403765e0fff7da3deab3ce69a51c0d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "didymos-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1118,11 +1124,10 @@
       "label": "DRACO mosaic",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Two DRACO frames from 158 and 94 seconds before impact. The later partial frame supplies closer detail; the earlier frame supplies wider coverage. The unseen surface keeps the grid. Each image is registered through its archived geometry and checked against the source shape. Brightness is approximately disk-normalized and matched over shared surface patches; shadows remain in the photographs. This is not measured albedo or a post-impact surface."
-      ],
+      "limitations": [],
       "lensIds": [
         "draco"
       ],
@@ -1142,15 +1147,22 @@
       "outputs": [
         {
           "url": "/scenes/didymos/didymos-draco-thumbnail.webp",
-          "bytes": 2050,
-          "sha256": "fe974867ff0f38dc94de7e57d80a61ca9c1b7db854bca9c82dd88d57c687fc22",
-          "verification": "bytes-verified"
+          "bytes": 1990,
+          "sha256": "7b1e3111b0359471b762f8a3dbd43de43ee1e72dc0f4c65a9a1cc256524241c1",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-draco-surface@2x.webp",
-          "bytes": 521240,
-          "sha256": "74b891edca2161463002d97ea0666b1824855d3211ff62bd88baa18cf3e9b9a4",
-          "verification": "bytes-verified"
+          "bytes": 294862,
+          "sha256": "6aed92cba1296c3c4ec147f385cc89197eca0850e7ed84bcdae399d2db0e9a44",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "didymos-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1160,8 +1172,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1173,8 +1186,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6458,
-          "sha256": "18787e55fdd8a6f151c800a73dcbb8ecab0dc71f533a961f449610b0762dc840",
+          "bytes": 6090,
+          "sha256": "c4f6becd13e99900dabea00a6b75d1eb07cd584d548efdfbb4c14168ebd12611",
           "verification": "bytes-verified"
         }
       ],
@@ -1185,6 +1198,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -1210,7 +1224,7 @@
           "url": "/scenes/didymos/didymos-features.json",
           "bytes": 2800,
           "sha256": "ee9e99967f0c679ac737bc5c350087575e67eb138478807b6d2f2c9a6f250a73",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1223,6 +1237,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -1247,6 +1262,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "draco"
@@ -1257,8 +1273,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/draco.webp",
-          "bytes": 9804,
-          "sha256": "476162bcaa59b1ab19b5c491fdcf98afed3ff87b77b291feffc7c3073a4bbcf5",
+          "bytes": 6342,
+          "sha256": "cff43fee6181bd3f429eced7c3fb96af13d0466b064e29e82b1fa8b4d478ff36",
           "verification": "bytes-verified"
         }
       ]
@@ -1271,6 +1287,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"
@@ -1295,6 +1312,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "albedo"
@@ -1315,5 +1333,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "didymos",
+    "materialSha256": "238666420cecf4447776c2ccfd1474b836d3f69c5d5823aab8daeeedc3a716a3",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/didymos/prepared/provenance.json",
+      "sha256": "fec0a5dd824b6f29f4afaf2b9ba942403179595d73f0ac2fd4bc00d2b3a167c2"
+    }
   }
 }

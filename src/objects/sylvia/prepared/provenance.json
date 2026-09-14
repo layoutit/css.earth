@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "59c3ac497b7066b89a7f3c3fd107ea0fc478977046151ecb65a3380b057c7493"
+    "sha256": "abf1a297790596a906341a754f6b380f891feb4d0d2021612300929b3b200f9f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "72a6fdc5589abaff52203872aa06e43ed5bfaddbd10695da4850c2511b499997",
+      "sha256": "cc40cd512bd9e95727f7d29ac82e8c8f418c05aa7f7a212107699bb4f735ff83",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +167,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Sylvia is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape. Explore its published shape and radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -199,8 +198,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "VLT/SPHERE shape model",
-              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/sylvia/sylvia-shape-thumbnail.webp",
               "surface": "sylvia-shape-surface@2x.webp",
               "poles": "sylvia-shape-surface@2x.webp",
@@ -209,14 +206,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape made from VLT/SPHERE observations. Gray grid: no surface imagery; lighting shows the model's form."
+              "notes": "VLT/SPHERE shape model",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/sylvia/sylvia-elevation-thumbnail.webp",
               "surface": "sylvia-elevation-surface@2x.webp",
               "poles": "sylvia-elevation-surface@2x.webp",
@@ -238,8 +233,7 @@
                 "sourceUrl": "https://observations.lam.fr/astero/3Dshape/87_Sylvia_mpcd.obj",
                 "image": "/scenes/sylvia/sylvia-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -364,7 +358,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -373,8 +367,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "72a6fdc5589abaff52203872aa06e43ed5bfaddbd10695da4850c2511b499997",
-      "bytes": 7531,
+      "sha256": "cc40cd512bd9e95727f7d29ac82e8c8f418c05aa7f7a212107699bb4f735ff83",
+      "bytes": 6832,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -387,11 +381,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -424,6 +417,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "sylvia-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -431,11 +431,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "VLT/SPHERE shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -462,6 +461,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "sylvia-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -469,8 +475,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -482,8 +489,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4938,
-          "sha256": "81ce863477c2639c9389df05a381d8eb2e9b4cead3ff88796d2866b895d6de60",
+          "bytes": 4666,
+          "sha256": "dc38088dea28692419c1f466ce005dbb19750b29b7e03daf3d244e4d90717dea",
           "verification": "bytes-verified"
         }
       ],
@@ -497,6 +504,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -521,6 +529,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

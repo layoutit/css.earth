@@ -4,13 +4,15 @@
 
 **False color** combines original Cassini ISS IR3, IR1 and UV3 observations from September 26, 2005, displayed as red, green and blue. Both red and green display channels are infrared; this is false color. Fifteen FULL-resolution, losslessly compressed CISSCAL 4.0beta products cover five neighboring pointings at about 159–208 m per detector pixel near the centre. Their image IDs and registration records are listed below.
 
-- **Monochrome** uses 12 clear-filter Cassini ISS observations, calibrated to I/F by CISSCAL 4.0beta and distributed by the [PDS Ring-Moon Systems Node](https://pds-rings.seti.org/cassini/iss/access.html).
+- **Monochrome** uses 11 clear-filter Cassini ISS observations, calibrated to I/F by CISSCAL 4.0beta and distributed by the [PDS Ring-Moon Systems Node](https://pds-rings.seti.org/cassini/iss/access.html).
 
 - The [PDS Saturn Small Moon Shape Models release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) provides Thomas's Hyperion model: 14,636 vertices and 29,268 triangular plates, with Cartesian coordinates in kilometers.
 
 - **Elevation** is radial height above a 135 km reference sphere, sampled from the released shape.
 
 ## Evidence
+
+The new [regional-frame camera checks](evidence/cassini-coverage/hyperion-row-0-check.json) and [alternate-row check](evidence/cassini-coverage/hyperion-row-1-check.json) both lacked independent feature patches. These are unsuccessful fixed-camera investigations against native PDS inputs, recorded with code/shape/image hashes; scratch input paths name the investigated products, not installable new surfaces. Neither published row is promoted. See the [investigation ledger](investigations.json) for the decision and reopening condition.
 
 The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/filter-color/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
@@ -48,7 +50,6 @@ fits on screen; facing and overlap still control display.
 - No public release of the newer 2025 mosaic and DEM was located; see the [investigation ledger](investigations.json).
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
-
 
 ## Filter camera registration
 
@@ -92,7 +93,7 @@ node tools/objects/terrestrial-layers/register-camera-bands.mts \
   output/hyperion-color-validation.json --check-only
 ```
 
-The delivered [recipe](source/preparation/terrestrial.json) uses the accepted cameras and untouched calibrated pixels. Matching indices in its three filter lists form one observing triplet. Preparation intersects each complete triplet first, then adds the five pointings from coarse to fine. Overlap uses one common detector-edge and incidence/emission weight for all three channels; missing bands never borrow a different pointing’s channel. It withholds non-common coverage, samples beyond 75° incidence or emission, and a three-pixel detector coverage margin. The existing edge-connected 0.003 I/F background exclusion is an approximate background mask, not a detector-quality flag; interior dark samples remain. All channels share a 0–0.5 I/F range assigned to linear display channels. The [shared IEC sRGB output transfer](../../../docs/color-preparation.md) follows floating-point overlap composition; only then are values clipped and quantized to 8 bits. No per-filter equalization, clear-filter detail injection or photometric model alters their ratios. Existing geometry and the shared Shadows control are retained.
+The delivered [recipe](source/preparation/terrestrial.json) uses the accepted cameras and untouched calibrated pixels. Each of its five band sets names one observing triplet’s three photographs. A point is colored only where all three bands of a set qualify, and it keeps the set with the finest resolution; a missing band never borrows another set’s channel. Level matching scales a set’s three bands by one gain, so their measured ratios stay; the widest fitted gain is 1.02. It withholds non-common coverage, samples beyond 75° incidence or emission, and a three-pixel detector coverage margin. The existing edge-connected 0.003 I/F background exclusion is an approximate background mask, not a detector-quality flag; interior dark samples remain. All channels share a 0–0.5 I/F range assigned to linear display channels. The [shared IEC sRGB output transfer](../../../docs/color-preparation.md) follows floating-point surface transfer; only then are values clipped and quantized to 8 bits. No per-filter equalization, clear-filter detail injection or photometric model alters their ratios. Existing geometry and the shared Shadows control are retained.
 
 </details>
 
@@ -129,7 +130,7 @@ Every examined source, with its decision and what would reopen it, is in the [in
 
 Facts and context follow [NASA's Hyperion overview](https://science.nasa.gov/saturn/moons/hyperion/) and the vendored JPL physical/orbital data. The stars and title retain the common ESO/S. Brunier and Inter credits documented beside the source inputs.
 
-Three additional published control rows (N1497116847, N1550270298 and N1550320098) produced grossly mismatched source-image silhouettes and were excluded. Four SUM2 close-up frames were also excluded: their full-resolution center convention was ambiguous and their binned resolution did not improve on the retained full-resolution mosaic images.
+The [investigation ledger](investigations.json) records the rejected control rows and SUM2 trials, including their unresolved camera conventions.
 
 The 1,200-leaf approximation was compared with the released 29,268-plate model using 2,048 equal-area Fibonacci radial rays. Mean radial difference was 371 m, 95th percentile 945 m, 99th percentile 1.34 km and maximum sampled difference 1.94 km. These are sampled approximation errors, not exhaustive bounds or a claim that the observational shape itself is accurate to those values.
 

@@ -2,8 +2,8 @@
 import { uniqueCitations } from '../sources-catalog.mts';
 import SourceCitations from './SourceCitations.astro';
 import { MACHINES, EXPLORATION, referenceUrl, missionParticipation, machineDatasets } from '../exploration-catalog.mts';
-interface Props { machineId: string; objectId: string; contributed: boolean; }
-const { machineId, contributed } = Astro.props;
+interface Props { machineId: string; objectId: string; contributed: boolean; missionDescription?: string; }
+const { machineId, contributed, missionDescription } = Astro.props;
 const vehicle = MACHINES[machineId];
 const image = vehicle.imageId ? EXPLORATION.images[vehicle.imageId] : null;
 const participation = missionParticipation(machineId);
@@ -11,8 +11,9 @@ const uses = machineDatasets(machineId);
 const references = uniqueCitations([vehicle.name, vehicle.description, vehicle.kind, ...vehicle.aliases, ...(vehicle.launch ? [vehicle.launch] : [])].flatMap(field => field.citations));
 ---
 <details class="planet-machine-details" data-machine={vehicle.id}>
-  <summary><span>{vehicle.name.value}</span> <small>{contributed ? 'Dataset contributor' : 'Mission participant'}</small></summary>
-  <p>{vehicle.description.value}</p>
+  <summary><span>{vehicle.name.value}</span> <small>{contributed ? 'Contributes to dataset views' : 'Mission participant'}</small></summary>
+  {/* A spacecraft that is its mission's only machine shares its description; the mission card already shows it. */}
+  {vehicle.description.value !== missionDescription && <p>{vehicle.description.value}</p>}
   <p class="planet-machine-facts">{vehicle.kind.value}{vehicle.launch && <> · Launched <a href={referenceUrl(vehicle.launch)} target="_blank" rel="noreferrer">{vehicle.launch.value}</a></>}</p>
   {vehicle.aliases.length > 0 && <p>Also named {vehicle.aliases.map(alias => alias.value).join(', ')}.</p>}
   {image && <a href={image.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${vehicle.name.value} artwork source — ${image.credit}`}>
@@ -22,6 +23,6 @@ const references = uniqueCitations([vehicle.name, vehicle.description, vehicle.k
   <ul>{participation.map(mission => <li><a href={referenceUrl(mission.name)} target="_blank" rel="noreferrer">{mission.name.value}</a>{mission.started && <> · {mission.started.value}</>}{mission.ended && <>–{mission.ended.value}</>}</li>)}</ul>
   <h4>Used in cssEarth</h4>
   {uses.length ? <ul class="planet-mission-datasets">{uses.map(view => <li><a href={view.href} data-dataset-link data-dataset-object={view.objectId} data-dataset-id={view.lensId}>{view.objectName} · {view.label}</a></li>)}</ul>
-    : <p>No prepared dataset attributes observations to this vehicle.</p>}
+    : <p>No dataset here uses its observations yet.</p>}
   <details class="planet-mission-references"><summary>Machine references</summary><SourceCitations citations={references} /></details>
 </details>

@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "steins",
+  "entries": [
+    {
+      "id": "recorded-survey-1",
+      "subject": "Jorda, Gaskell and Kaasalainen shape, PDS 2013, DOI 10.26007/55FK-CB77",
+      "status": "included",
+      "finding": "[Jorda, Gaskell and Kaasalainen shape, PDS 2013](https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/dataset.shtml), DOI 10.26007/55FK-CB77 — **Included**. `steins_cart.wrl` has 10,242 vertices and 20,480 triangles in km. The wrapped VRML is parsed directly; source axes, connectivity and physical scale are preserved before meshoptimizer simplification.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/steins/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "Stooke Small Bodies Maps V3",
+      "status": "included",
+      "finding": "[Stooke Small Bodies Maps V3](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html) — **Included** Monochrome. Unannotated 3600×1800 cylindrical map, controlled by Leyrat2010. Higher-resolution visualization compilation than the referenced original figure, but heavily processed and not calibrated reflectance. The gridded and named companions establish the projection and remain reference documents.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/steins/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "OSIRIS photographic lens registration",
+      "status": "deferred",
+      "finding": "The calibrated NAC/WAC release and native labels were examined. The README’s older source survey called the WAC view qualified, but its current Known problems records that neither former selected image has a surface-intercept anchor or fitted image-to-shape registration. The photographic lens is deferred. Camera/quaternion metadata and footprint agreement alone do not establish registration; the separately selected Stooke Monochrome map is unaffected.",
+      "revisitWhen": "Source-supported image-to-shape registration with independent withheld checks qualifies the actual frames, together with their quality masks and declared illumination treatment.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/steins/README.md",
+        "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac-4-ast1-steins-reflect-v1.0/dataset.shtml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "Rosetta NAC stray-light corrected reflectance and WAC counterparts",
+      "status": "deferred",
+      "finding": "[Rosetta NAC stray-light corrected reflectance](https://pds.nasa.gov/ds-view/pds/viewDataset.jsp?dsid=RO-A-OSINAC-4-AST1-STEINS-STR-REFL-V1.0) and WAC counterparts — **Deferred** with the camera-data route above. Their calibrated products address stray light/distortion, not the per-surface incidence/emission normalization required for a global albedo lens. Catalog availability is not evidence that a ready registered map exists.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/steins/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-5",
+      "subject": "Leyrat et al. 2010 and Schröder et al. 2010",
+      "status": "excluded",
+      "finding": "[Leyrat et al. 2010](https://doi.org/10.1016/j.pss.2010.04.003) and [Schröder et al. 2010](https://arxiv.org/abs/1702.00184) — **Excluded as texture inputs**. These studies provide photometric/variegation interpretations, and Leyrat controls the selected released map. The bounded archive/citation survey found the registered Stooke release and calibrated mission images; it did not locate an independently released, unannotated global corrected-albedo raster. This remains an unresolved dataset candidate, not a claim no such data exist.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/steins/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-6",
+      "subject": "USGS/LPI cartography and IAU nomenclature",
+      "status": "included",
+      "finding": "USGS/LPI cartography and IAU nomenclature — **Reference only**. Searches identified nomenclature and annotated image products, not a higher-resolution registered science raster for this package.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/steins/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "rejected-followup-frames",
+      "subject": "OSIRIS 18:37:16 and later follow-up frames",
+      "status": "excluded",
+      "finding": "The 18:37:16 image required gain 1.56, above the retained 1.35 limit. The examined 18:37:56, 18:38:36 and 18:39:43 views had progressively poorer source/model footprint agreement. They remain excluded; the former Minnaert treatment is superseded.",
+      "revisitWhen": "Corrected source calibration or independently verified camera/model registration changes the failed result without raising acceptance limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/steins/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "mosaic-coverage-mask",
+      "subject": "Stooke mosaic coverage and coordinate limits",
+      "status": "unresolved",
+      "finding": "The retained registration note binds the east-positive map with 0° at its center and documents the half-turn conversion. Its edge-connected dark-pixel test marks 3,567,208 of 6,480,000 map pixels as exterior. This is a display heuristic, not a scientific validity mask or 55% physical-surface coverage. The original map lacks a verified source mask, and its registration to each vertex of the later shape is not bounded by that test.",
+      "revisitWhen": "A source validity mask or independent per-pixel coverage/registration reference can replace or qualify the documented heuristic.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/steins/source/reference/registration.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/steins/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    }
+  ]
+}

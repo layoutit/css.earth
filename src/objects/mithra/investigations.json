@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "mithra",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original Mithra.v1.PA.prograde.mod.obj](https://echo.jpl.nasa.gov/asteroids/shapes/Mithra.v1.PA.prograde.mod.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/4486_Mithra/brozovic.etal.2010.mithra.pdf): Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy. The paper and original geometry are pinned beside the recipe. Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.845 km sphere, from -0.51 to 0.55 km. The scalar is evaluated at the closest source triangle point, not the first center-ray intersection. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments. The live JPL index was checked against the actual preparation input shape/Mithra.v1.PA.prograde.mod.obj; it still links this exact model. The page is dated 2024-08-10, not a new scientific-model release. This confirms the published source route, not new mesh bytes, optical imagery or independent source-fit accuracy.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mithra/README.md",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/Mithra.v1.PA.prograde.mod.obj",
+        "https://echo.jpl.nasa.gov/asteroids/4486_Mithra/brozovic.etal.2010.mithra.pdf",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mithra/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The selected radar-shape release supplies geometry and spin information, not a registered optical surface map. No optical texture is selected in this package; this does not establish that every image archive was searched.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mithra/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mithra/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-1",
+      "subject": "Complementary surface products",
+      "status": "unresolved",
+      "finding": "The [PDS SBN shape index](https://sbn.psi.edu/pds/shape-models/) and JPL model and publication listings were checked for complementary released products. The selected original mesh remains the body geometry; no calibrated optical mosaic, optical reflectance map, geology map or separate elevation survey was located in those releases. This bounded survey is not a claim that no other dataset exists.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mithra/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

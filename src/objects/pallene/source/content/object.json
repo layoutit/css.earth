@@ -4,7 +4,6 @@
   "id": "pallene",
   "displayName": "Pallene",
   "panel": {
-    "introduction": "Pallene is a small, elongated moon between Mimas and Enceladus. Cassini discovered it in 2004 and later resolved its smooth-looking outline. A faint dust ring follows its orbit around Saturn.",
     "facts": [
       {
         "id": "radius",
@@ -44,9 +43,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
-        "title": "ISS clear-filter image",
-        "detail": "Cassini ISS",
         "thumbnail": "/scenes/pallene/pallene-normal-thumbnail.webp",
         "surface": "pallene-normal-surface@2x.webp",
         "poles": "pallene-normal-poles@2x.webp",
@@ -55,7 +51,8 @@
           "path": "../manifest.json",
           "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1496910582"
         },
-        "summary": "Only about 8 × 12 source pixels resolve the moon. Brightness shows coarse detail; the gray grid marks unobserved surface."
+        "notes": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
+        "noData": true
       }
     ]
   },

@@ -192,7 +192,7 @@
         "type": "body-centered-radius-grid",
         "longitudeDirection": "west-positive"
       },
-      "coverage": "Radial height above a 208 km reference sphere from Stooke\u2019s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5\u00b0 radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+      "coverage": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -533,18 +533,18 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 171596,
-      "expectedSha256": "a9c3c8c3da8064423c8a14cea97470034ec1ee52c7500cdcc83b7926decf1546"
+      "expectedBytes": 165480,
+      "expectedSha256": "1ed2c94ec699bc6aaaf4c85d2349c6cd265dbeb8954fb0576cf28c7241396c57"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6697,
-      "expectedSha256": "2456ceb80037284da257500ee13b31c9c888368f8e8cbb26ca6082d7b5dde760",
+      "expectedBytes": 5879,
+      "expectedSha256": "cb2bda1b080fa50e138c76deed52806f10a44ed1ca851b2224ef19bcae09c76c",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
@@ -595,12 +595,12 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1255,
-      "expectedSha256": "795a412edd657b6fb039fc48ac62b46b4d7a4149cc563fc2c85d95e973ae06a5"
+      "expectedSha256": "729a338c8d39e9fdc4eec4cc5d2ad7f4e3da4668c4e892e0b68e6ac338117b17"
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9323,
-      "expectedSha256": "e99b87c68a7c72b9bd9a714b19b7237e47ec5be76d5cbc8c80aab5af0a65e7ae"
+      "expectedBytes": 9925,
+      "expectedSha256": "4d78797270717daf290e77258d20eacddb7733b7e6498c25e39a0b6f0ad7c228"
     },
     {
       "path": "presentation/minimap.json",

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6e14e3b62278bfa030a4f98276cd538811bb75a470899966eaaafe826f57aec1"
+    "sha256": "8897aa72d1a5ffd0f52c3c7bf3edb10183280583d365fe1d6849c0e73684d817"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "640c0356e11f86da7a5f7695fd74aa14164683479b2869d7705b2e899d9f7a21",
+      "sha256": "75970961757ded21b2b0cc337da6a4bd8e92012ed610b4d4906b7526f5e3d2fb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,7 +171,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Golevka is a near-Earth asteroid whose radar reconstruction has angular faces, sharp edges and large concavities. Explore its original shape and radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -203,8 +202,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "The shared grid marks unavailable imagery over the original Golevka radar reconstruction, shown with prepared lighting. The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes.",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/golevka/golevka-shape-thumbnail.webp",
               "surface": "golevka-shape-surface@2x.webp",
               "poles": "golevka-shape-surface@2x.webp",
@@ -213,14 +210,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Radar shape resolved at tens of metres. Its angular edges are modeled; no optical texture is mapped."
+              "notes": "The shared grid marks unavailable imagery over the original Golevka radar reconstruction, shown with prepared lighting. The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows the original radar-model radius minus a 0.265 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. The reconstruction resolves global shape at tens of meters; display pixels add no measured detail. Cartographic relief and optional Sun lighting are display treatments.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/golevka/golevka-elevation-thumbnail.webp",
               "surface": "golevka-elevation-surface@2x.webp",
               "poles": "golevka-elevation-surface@2x.webp",
@@ -242,8 +237,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/golevka.obj",
                 "image": "/scenes/golevka/golevka-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Radar height relative to a 265 m sphere. Colors include the overall form; pixels add no measured detail."
+              "notes": "Color shows the original radar-model radius minus a 0.265 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. The reconstruction resolves global shape at tens of meters; display pixels add no measured detail. Cartographic relief and optional Sun lighting are display treatments."
             }
           ]
         },
@@ -365,7 +359,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -374,8 +368,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "640c0356e11f86da7a5f7695fd74aa14164683479b2869d7705b2e899d9f7a21",
-      "bytes": 8984,
+      "sha256": "75970961757ded21b2b0cc337da6a4bd8e92012ed610b4d4906b7526f5e3d2fb",
+      "bytes": 8346,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -388,11 +382,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows the original radar-model radius minus a 0.265 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. The reconstruction resolves global shape at tens of meters; display pixels add no measured detail. Cartographic relief and optional Sun lighting are display treatments."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -425,6 +418,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "golevka-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -432,11 +432,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The shared grid marks unavailable imagery over the original Golevka radar reconstruction, shown with prepared lighting. The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -463,6 +462,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "golevka-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -470,8 +476,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -483,8 +490,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5609,
-          "sha256": "2f2fc23da8eec04d80444ae11532389b31187f17f82a337bbd524d4a98eb85ea",
+          "bytes": 5387,
+          "sha256": "4928abeaf179ef4687e3abe42a620c6e2beda56d83346ad368c6ea5fa96d0a6b",
           "verification": "bytes-verified"
         }
       ],
@@ -498,6 +505,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -522,6 +530,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

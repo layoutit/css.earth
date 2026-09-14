@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -69,8 +68,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Thermal diameter 69.73 ± 2.8 km; quoted error excludes unquantified shape, viewing and thermal-model effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
-        "title": "Light-curve shape model",
         "thumbnail": "/scenes/badenia/badenia-shape-thumbnail.webp",
         "surface": "badenia-shape-surface@2x.webp",
         "poles": "badenia-shape-surface@2x.webp",
@@ -79,13 +76,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "notes": "Thermal diameter 69.73 ± 2.8 km; quoted error excludes unquantified shape, viewing and thermal-model effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 34.865 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Shape-derived elevations",
         "thumbnail": "/scenes/badenia/badenia-elevation-thumbnail.webp",
         "surface": "badenia-elevation-surface@2x.webp",
         "poles": "badenia-elevation-surface@2x.webp",
@@ -107,7 +103,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3298",
           "image": "/scenes/badenia/badenia-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 34.865 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cb89b9822f9b7431733ccc9ee67c7056cf2456988c4e141ec01cd479afaa2980"
+    "sha256": "42831110b8ba2415a96fb7a4e06f4311d873defd223075f7bd09b7c9f38be800"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fa99c3d12d673f06214a4fd73934027af1176253ecd64482c64824bd62b6303c",
+      "sha256": "5910a4c8087f6f0a4e6bb9fa9205de62ba5ab20c8b8f57a534d51c296514e098",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,7 +171,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Bacchus is a small near-Earth asteroid with a prominent central indentation in its radar-derived shape. Explore its original shape and radial heights. The grid marks unavailable surface imagery. This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied.",
           "facts": [
             {
               "id": "radius",
@@ -203,8 +202,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "The shared grid marks unavailable surface imagery on this radar model. This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/bacchus/bacchus-shape-thumbnail.webp",
               "surface": "bacchus-shape-surface@2x.webp",
               "poles": "bacchus-shape-surface@2x.webp",
@@ -213,14 +210,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "A radar model based on half a rotation. Its shape and pole are uncertain; gray grid: no surface imagery."
+              "notes": "The shared grid marks unavailable surface imagery on this radar model. This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "False color shows radius at the nearest source-surface point minus a 0.315 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 1 m is withheld. This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/bacchus/bacchus-elevation-thumbnail.webp",
               "surface": "bacchus-elevation-surface@2x.webp",
               "poles": "bacchus-elevation-surface@2x.webp",
@@ -242,8 +237,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
                 "image": "/scenes/bacchus/bacchus-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Radar-model height relative to a 315 m sphere. Half a rotation was observed; the shape is uncertain."
+              "notes": "False color shows radius at the nearest source-surface point minus a 0.315 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 1 m is withheld. This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied."
             }
           ]
         },
@@ -365,7 +359,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -374,8 +368,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fa99c3d12d673f06214a4fd73934027af1176253ecd64482c64824bd62b6303c",
-      "bytes": 10485,
+      "sha256": "5910a4c8087f6f0a4e6bb9fa9205de62ba5ab20c8b8f57a534d51c296514e098",
+      "bytes": 9546,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -388,11 +382,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "False color shows radius at the nearest source-surface point minus a 0.315 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 1 m is withheld. This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -425,6 +418,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "bacchus-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -432,11 +432,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The shared grid marks unavailable surface imagery on this radar model. This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -463,6 +462,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "bacchus-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -470,8 +476,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -483,8 +490,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6961,
-          "sha256": "67b4d201ec954ad5163ed474ceeda00f52402a0789dea14f3ed853f84f8bd0d0",
+          "bytes": 6438,
+          "sha256": "2d79a045d9bb70353271c200fef5bcec40b3f99ab2c47e7a109d6cba558f7c71",
           "verification": "bytes-verified"
         }
       ],
@@ -498,6 +505,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -522,6 +530,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

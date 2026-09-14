@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "466f007406745cf8171ff90f9fa9efb74f89524b272ad52b8cbf993169749865"
+    "sha256": "02f4b7db590ae2acf6355e5679ed60adad05ce622a527e2813c2c5bf064fb5ac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "54ca301f85e183577f7b214759d2939a1efdce33dd82d509f42beb65c43a9dd2",
+      "sha256": "f7f98fb9f90932e6c709c2fd2808d77e76b7d1cfa5e4a6d35715f08bd235e664",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-26p",
         "displayName": "Grigg–Skjellerup",
         "panel": {
-          "introduction": "Grigg–Skjellerup was Giotto’s second comet encounter. The spacecraft passed about 200 km from its nucleus in July 1992, six years after visiting Halley.",
           "facts": [
             {
               "id": "diameter",
@@ -173,9 +172,6 @@
             {
               "id": "model",
               "label": "Illustrative nucleus",
-              "detail": "Celestia",
-              "title": "26P/Grigg–Skjellerup",
-              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
               "thumbnail": "/scenes/comet-26p/comet-26p-model-thumbnail.webp",
               "surface": "comet-26p-model-surface@2x.webp",
               "poles": "comet-26p-model-poles@2x.webp",
@@ -195,7 +191,9 @@
                   "label": "Closest to Sun",
                   "value": "1.08 AU"
                 }
-              ]
+              ],
+              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -294,7 +292,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -303,8 +301,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "54ca301f85e183577f7b214759d2939a1efdce33dd82d509f42beb65c43a9dd2",
-      "bytes": 3345,
+      "sha256": "f7f98fb9f90932e6c709c2fd2808d77e76b7d1cfa5e4a6d35715f08bd235e664",
+      "bytes": 3110,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -317,11 +315,10 @@
       "label": "Illustrative nucleus",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -348,6 +345,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "celestia-mesh",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -355,8 +359,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -368,8 +373,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9582,
-          "sha256": "b110b6f876e22611b2f48a39d1dff8de3cd19437c06e0ee1473546b9db3154ed",
+          "bytes": 9408,
+          "sha256": "8caca94b469b62b187a8b62ce7b31fe0a881955edaf0c08cd8534654434ac363",
           "verification": "bytes-verified"
         }
       ],

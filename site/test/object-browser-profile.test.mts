@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { runInNewContext } from 'node:vm';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { createObjectBrowserProfile } from './object-browser-profile.mts';
 import { loadPlanetBrowserProfile } from './load-browser-profile.mts';
 import type { BrowserPage, CameraField } from './browser-profile-types.mts';
@@ -17,14 +17,14 @@ function nativePage(id: string, cameraState: unknown = state): BrowserPage {
 }
 
 test('every actual profile reads its recorded coordinates from the shared camera endpoint', async () => {
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const profile = await loadPlanetBrowserProfile(object);
     const value = await profile.camera(nativePage(object.id));
     assert.equal(value.pitch, state.pitch); assert.equal(value.zoom, state.zoom);
     for (const [field, coordinate] of Object.entries(value)) assert.equal(coordinate, state[field as CameraField]);
   }
   for (const id of ['mars', 'jupiter']) {
-    const found = OBJECTS.find(object => object.id === id); assert.ok(found);
+    const found = SCENE_OBJECTS.find(object => object.id === id); assert.ok(found);
     const profile = await loadPlanetBrowserProfile(found);
     assert.deepEqual(await profile.camera(nativePage(id)), state);
   }
@@ -51,7 +51,7 @@ test('camera reporting rejects missing, repeated and unsupported coordinates', (
 });
 
 test('an already ready object does not depend on a redundant browser waiter', async () => {
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const profile = await loadPlanetBrowserProfile(object);
     await profile.waitForRuntime({
       evaluate: (fn: { toString(): string }, key: unknown) => runInNewContext(`(${fn.toString()})(key)`, {
@@ -63,7 +63,7 @@ test('an already ready object does not depend on a redundant browser waiter', as
 });
 
 test('a missing or loading object still requires successful readiness before returning', async () => {
-  const moon = OBJECTS.find(object => object.id === 'moon'); assert.ok(moon);
+  const moon = SCENE_OBJECTS.find(object => object.id === 'moon'); assert.ok(moon);
   const profile = await loadPlanetBrowserProfile(moon);
   for (const runtime of [undefined, { ready: false }]) {
     const window = { __moon: runtime };
@@ -78,7 +78,7 @@ test('a missing or loading object still requires successful readiness before ret
 });
 
 test('the actual Saturn profile observes one exclusive lens and rejects the former dual selection', async () => {
-  const saturn = OBJECTS.find(object => object.id === 'saturn'); assert.ok(saturn);
+  const saturn = SCENE_OBJECTS.find(object => object.id === 'saturn'); assert.ok(saturn);
   const profile = await loadPlanetBrowserProfile(saturn);
   const pressed: string[] = [], selected: string[] = [], committed = { lensId: 'normal' };
   const page = { async evaluate(fn: { toString(): string }, payload: unknown) {

@@ -17,10 +17,10 @@ export function createDatasetContextController(drawer: HTMLElement, _document: D
       }
     }
   };
-  const observer = new windowTarget.MutationObserver(render);
-  observer.observe(drawer, { subtree: true, attributes: true, attributeFilter: ['aria-pressed'] });
+  const observer = hosts.length ? new windowTarget.MutationObserver(render) : null;
+  observer?.observe(drawer, { subtree: true, attributes: true, attributeFilter: ['aria-pressed'] });
   render();
-  const destroy = () => observer.disconnect();
+  const destroy = () => observer?.disconnect();
   lifetime.onDispose(destroy);
   return { destroy };
 }

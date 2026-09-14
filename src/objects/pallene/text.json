@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "pallene",
+  "card": {
+    "text": "Small moon of Saturn that shares its orbit with a faint dust ring.",
+    "sources": [
+      {
+        "catalogueId": "nasa-saturn-moons",
+        "url": "https://science.nasa.gov/saturn/moons/pallene/",
+        "label": "NASA Science · Saturn’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Pallene orbits between Mimas and Enceladus. The Cassini imaging team found it in 2004.",
+    "sources": [
+      {
+        "catalogueId": "nasa-saturn-moons",
+        "url": "https://science.nasa.gov/saturn/moons/pallene/",
+        "label": "NASA Science · Saturn’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "ISS clear-filter image",
+      "detail": "Cassini ISS",
+      "summary": "Only about 8 by 12 source pixels cover the moon, so only coarse detail shows."
+    }
+  }
+}

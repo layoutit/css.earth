@@ -4,7 +4,7 @@ import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { browserObjects } from './browser-objects.mts';
 import { wheelWithReceipt } from './wheel-zoom-distance.mts';
 
@@ -55,19 +55,19 @@ function requireFrames(objects: readonly ObjectEntry[]) {
     assert.equal(frame.bodyRadiusM, point.radiusM, `${object.id}: exact prepared radius`);
   }
 }
-requireFrames(OBJECTS);
-assert.throws(() => requireFrames(OBJECTS.map((object, index) => index ? object : { ...object, worldFrame: null })), /registry world frame is required/);
-const controls = Object.fromEntries(await Promise.all(OBJECTS.map(async ({ id }) => [id,
+requireFrames(SCENE_OBJECTS);
+assert.throws(() => requireFrames(SCENE_OBJECTS.map((object, index) => index ? object : { ...object, worldFrame: null })), /registry world frame is required/);
+const controls = Object.fromEntries(await Promise.all(SCENE_OBJECTS.map(async ({ id }) => [id,
   parse(JSON.parse(await readFile(`src/objects/${id}/prepared/controls.json`, 'utf8')), schemaObject({ lenses: optional(schemaObject({ controls: array(schemaObject({ id: string })), defaultLens: string })) }), `${id} controls`)] as const)));
 // Keep only each object's small expectation record; loading every retained
 // runtime concurrently exhausts Node's heap with a large open-ended registry.
 const presentations: Record<string, Pick<ExpectedObject, "materialTracks" | "assetUrls">> = {};
-for (const { id } of OBJECTS) {
+for (const { id } of SCENE_OBJECTS) {
   const definition = parse(JSON.parse(await readFile(`src/objects/${id}/prepared/runtime.json`, 'utf8')), schemaObject({ materials: array(schemaObject({ id: string })), assets: schemaObject({ entries: array(schemaObject({ key: string, url: string })) }) }), `${id} runtime expectations`);
   presentations[id] = { materialTracks: definition.materials.map(track => track.id),
     assetUrls: Object.fromEntries(definition.assets.entries.map(entry => [entry.key, entry.url])) };
 }
-const expected: Record<string, ExpectedObject> = Object.fromEntries(OBJECTS.map(({ id, worldFrame }) => {
+const expected: Record<string, ExpectedObject> = Object.fromEntries(SCENE_OBJECTS.map(({ id, worldFrame }) => {
   const point = points.find(point => point.id === id);
   assert.ok(worldFrame); assert.ok(point);
   return [id, {

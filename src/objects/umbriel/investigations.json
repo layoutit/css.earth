@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "umbriel",
+  "entries": [
+    {
+      "id": "schenk-2020-corrected-image-cube",
+      "subject": "Schenk 2020 corrected image cube",
+      "status": "included",
+      "finding": "Included as Monochrome: controlled, mapped original with numeric validity and processing history.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "schenk-uumapzlimb-cub",
+      "subject": "Schenk uumapZlimb.cub",
+      "status": "excluded",
+      "finding": "Excluded from Elevation: the release labels it a limb profile in map form. Its README warns this separate product uses an older control network displaced by degrees. Sparse limb measurements cannot supply a surface elevation map.",
+      "revisitWhen": "A released Umbriel topographic reconstruction provides extended measured coverage registered to the selected mosaic; sparse limb values alone cannot fill that gap.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "schenk-and-moore-2023",
+      "subject": "Schenk and Moore 2023",
+      "status": "included",
+      "finding": "Supports native 4 km imaging and limited Umbriel topography; no complementary extended terrain raster qualified.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/source/manifest.json",
+        "https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8140.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jpl-legacy-map-catalog",
+      "subject": "JPL legacy map catalog",
+      "status": "excluded",
+      "finding": "Older display texture; no additional scientific meaning over the corrected original. Replaced rather than a duplicate lens.",
+      "revisitWhen": "A controlled replacement provides useful observed detail or coverage beyond the selected corrected mosaic.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/source/manifest.json",
+        "https://space.jpl.nasa.gov/tmaps/uranus.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-voyager-imaging-archive",
+      "subject": "PDS Voyager imaging archive",
+      "status": "deferred",
+      "finding": "Original frames require independent calibration, registration and mosaic preparation. No better ready registered Umbriel product qualified here.",
+      "revisitWhen": "A Umbriel observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/source/manifest.json",
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "carbon-oxide-spectroscopy",
+      "subject": "Carbon oxide spectroscopy",
+      "status": "deferred",
+      "finding": "Hemispheric spectra are scientifically useful but do not provide a qualified spatial composition raster for this lens system.",
+      "revisitWhen": "A spatially resolved Umbriel measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/source/manifest.json",
+        "https://arxiv.org/abs/2607.05600"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "nasa-press-photographs-and-interior-models",
+      "subject": "NASA press photographs and interior models",
+      "status": "excluded",
+      "finding": "Disc photographs are not longitude/latitude maps; inferred interiors are not observed surface data. No fabricated color or interior lens.",
+      "revisitWhen": "A Umbriel observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "wunda-display-range",
+      "subject": "Wunda ring display-range trial",
+      "status": "included",
+      "finding": "The narrower monochrome stretch clipped the bright Wunda ring and was rejected. The selected 0–1950 DN display range retains that feature while the original floating-point cube remains intact. This is not a physical reflectance scale.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/umbriel/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

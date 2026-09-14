@@ -1,14 +1,10 @@
 # Registered photographic mosaics
 
-The shared `camera-band-registration.mts` matcher accepts a bounded
-`searchRadiusPixels` (1–64; default 9) when an independently justified pointing
-seed is farther away. This changes the search window only. Preserve its
-correlation, disjoint holdout and residual requirements; a larger search does
-not qualify a camera. Recheck from the fitted camera with the normal window.
-
-Use this when preparing several observations onto a known surface, especially
-an irregular mesh. Reuse already-controlled maps when suitable; this is not a
-requirement to fit a camera for an existing global mosaic. The
+Use this when registering or combining observations on a known surface, especially
+an irregular mesh. First choose the applicable
+[photographic investigation route](photographic-investigation.md). For an existing
+producer map or mapped paper figure, follow that guide's map checks instead of
+the camera reconstruction sequence below. The
 [implementation map](implementation-map.md#registered-photographic-mosaics)
 locates the 67P example and reusable helpers. Keep all decoding, camera fitting,
 selection, level matching and atlas construction in preparation.
@@ -66,6 +62,28 @@ to the actual selected model. Report coverage on different meshes separately;
 compare before/after percentages only on a common, justified surface basis.
 
 ## Bind observations and validate cameras
+
+Before reusing a matcher for another instrument or processing level, check its
+reference-camera assumption, signal units and thresholds, patch selection and
+acceptance limits. `camera-band-registration.mts` holds the reference camera
+fixed while correcting each target's detector center and roll. An error in that
+reference changes the inferred surface points; fitting a target does not qualify
+the reference or establish an absolute body frame. Keep such results exploratory
+until the reference's surface placement is supported.
+
+The same matcher uses positive-signal thresholds and a brightness-derived body
+box. Check the selected region and control distribution on the native image:
+nonzero sky backgrounds can make that box cover almost the whole detector.
+Repair and check an unsuitable selection before treating sparse or failed
+matches as evidence about the mesh. A search region is not a delivered coverage
+mask. Its fixed pixel-error limits are tool defaults, not a measured uncertainty
+for every instrument; do not weaken them merely to obtain an accepted result.
+
+The shared `camera-band-registration.mts` matcher accepts a bounded
+`searchRadiusPixels` (1–64; default 9) when an independently justified pointing
+seed is farther away. This changes the search window only. Preserve its
+correlation, disjoint holdout and residual requirements; a larger search does
+not qualify a camera. Recheck from the fitted camera with the normal window.
 
 Apply detector distortion inside both the fit and its holdout ray checks, not
 only when drawing the final overlay. The shared limb-refinement helper accepts
@@ -182,6 +200,14 @@ exact fraction of the real body. A precise percentage is not evidence of equally
 precise accuracy; increase sampling if a decision depends on that precision.
 
 ## Qualify the result
+
+For very large released maps, check decoded dimensions before preparation.
+The projected byte-image reader writes native validity to a temporary lossless
+mask when it exceeds 64 megapixels, then resamples it separately. This preserves
+the existing rule that mixed fill footprints remain missing without retaining
+a multi-gigabyte mask. Do not combine threshold and resize in one Sharp pipeline:
+Sharp resizes first. Distinguish the publisher's native resolution from the
+normalized map and final atlas resolution in the body's README.
 
 Use the relevant [qualification checks](qualification.md). Exercise changed
 behavior with independent geometric cases and source anchors: displaced or

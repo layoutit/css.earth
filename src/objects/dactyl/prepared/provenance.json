@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a59c8ff57964af13ba61b7a918ef567a76015690388b8175cea8e8bf64a02ddb"
+    "sha256": "26d2ec5564dbd78bbca0186332c0ca69af3927025c3cd1ed7ba621c57dcc4dfc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -100,14 +100,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "06ab52cf7b5a8fd767b87d4f6f8e1c807b3199a982984fe35c6d81a788710aaa",
+      "sha256": "3bd2e9be756a44f9c8eda4ac60d0d507068e5039cd05b1d285e7650987df4ed7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "dactyl",
         "displayName": "Dactyl",
         "panel": {
-          "introduction": "Dactyl, discovered beside Ida in Galileo images, was the first moon found orbiting an asteroid. Approximate orbital placement. The 1993 encounter did not determine a unique orbit; the present orbital phase is illustrative. A synchronous orientation is assumed, not measured.",
           "facts": [
             {
               "id": "parent",
@@ -137,9 +136,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "detail": "Galileo",
-              "title": "Galileo shape estimate",
-              "description": "A smooth ellipsoid at the dimensions measured from Galileo images: 1.6 × 1.4 × 1.2 km. Craters and surface imagery are not represented; the grid marks missing imagery.",
               "thumbnail": "/scenes/dactyl/dactyl-shape-thumbnail.webp",
               "surface": "dactyl-shape-surface@2x.webp",
               "poles": "dactyl-shape-poles@2x.webp",
@@ -147,7 +143,8 @@
                 "id": "shape-model",
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.1006/icar.1996.0045"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -306,7 +303,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -315,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "06ab52cf7b5a8fd767b87d4f6f8e1c807b3199a982984fe35c6d81a788710aaa",
-      "bytes": 3273,
+      "sha256": "3bd2e9be756a44f9c8eda4ac60d0d507068e5039cd05b1d285e7650987df4ed7",
+      "bytes": 2731,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -433,11 +430,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "A smooth ellipsoid at the dimensions measured from Galileo images: 1.6 × 1.4 × 1.2 km. Craters and surface imagery are not represented; the grid marks missing imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -464,6 +460,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "shape-model",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -471,8 +474,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -484,8 +488,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5199,
-          "sha256": "965f9fda011ac7f15c61617b7b2eebe40823d17eb7b1d0787b3ec1aba33a4621",
+          "bytes": 4907,
+          "sha256": "744494788ae98af5503042a6690a3ea6bbcbe70a10bf87086e4556c75b449867",
           "verification": "bytes-verified"
         }
       ],
@@ -496,6 +500,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -534,6 +539,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"

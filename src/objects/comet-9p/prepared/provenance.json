@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e8f943b386d8e9ea41eec06c4b86c174a15d1b0f82338c5d62b0b37eec8881cf"
+    "sha256": "01b8404c7669653f15f8d4f9ee768cfe4d2bf3c518bdaa950dd96d0ef8a52399"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fb6590ebe40d8b41f98ec6460aae24e6d6157496da491735a31d746c0d0f4600",
+      "sha256": "87cbc2658f4f763b2782e2e71ea109c9fabbedefb1852382a83b931f6e8bec2a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -203,11 +203,9 @@
               "levelMatching": {
                 "samplesPerTriangle": 64,
                 "minimumPairs": 64,
-                "maximumLogMad": 0.3,
                 "maximumGain": 1.5
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 90,
                 "maximumSeparationMeters": 200,
                 "maximumEmissionDegrees": 75,
                 "visibilityToleranceMeters": 0.5
@@ -218,8 +216,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99.5
+                  1.7,
+                  99.4
                 ]
               },
               "metadata": {
@@ -273,11 +271,9 @@
               "levelMatching": {
                 "samplesPerTriangle": 32,
                 "minimumPairs": 64,
-                "maximumLogMad": 0.3,
                 "maximumGain": 3
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 90,
                 "maximumSeparationMeters": 200,
                 "maximumEmissionDegrees": 75,
                 "visibilityToleranceMeters": 0.5
@@ -288,8 +284,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99.5
+                  1.2,
+                  99.4
                 ]
               },
               "metadata": {
@@ -388,14 +384,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a201c29e1e7aabb838f3c06a9b790c68dce95add97d5c00120114f3e5f425f46",
+      "sha256": "71ef160ccdb3e74bca8126a2d210050a236fcfa98e28e2b5755ac6f0f0385ca7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-9p",
         "displayName": "Tempel 1",
         "panel": {
-          "introduction": "Deep Impact struck Tempel 1 in 2005; Stardust returned in 2011. Explore the two encounters separately, alongside the shape model built from both visits.",
           "facts": [
             {
               "id": "diameter",
@@ -430,9 +425,6 @@
             {
               "id": "constraints",
               "label": "Source constraints",
-              "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
-              "title": "Shape-constraint map",
-              "detail": "PDS",
               "thumbnail": "/scenes/comet-9p/comet-9p-constraints-thumbnail.webp",
               "surface": "comet-9p-constraints-surface@2x.webp",
               "poles": "comet-9p-constraints-poles@2x.webp",
@@ -452,14 +444,13 @@
                   "label": "Blue",
                   "value": "Limb outlines"
                 }
-              ]
+              ],
+              "notes": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
+              "noData": true
             },
             {
               "id": "model",
               "label": "Shape model",
-              "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
-              "title": "Nucleus shape reconstruction",
-              "detail": "PDS",
               "thumbnail": "/scenes/comet-9p/comet-9p-model-thumbnail.webp",
               "surface": "comet-9p-model-surface@2x.webp",
               "poles": "comet-9p-model-poles@2x.webp",
@@ -479,14 +470,13 @@
                   "label": "Shape observations",
                   "value": "2005 and 2011"
                 }
-              ]
+              ],
+              "notes": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
+              "noData": true
             },
             {
               "id": "deep-impact",
               "label": "Deep Impact · 2005",
-              "description": "Eight images follow Deep Impact’s approach in 2005. The closest views reveal finer ridges and depressions within the earlier photographs. Original shadows remain; the grid marks gaps or uncertain shape.",
-              "title": "ITS mosaic",
-              "detail": "ITS",
               "thumbnail": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
               "surface": "comet-9p-deep-impact-surface@2x.webp",
               "poles": "comet-9p-deep-impact-poles@2x.webp",
@@ -507,14 +497,12 @@
                   "value": "3–34 m/pixel"
                 }
               ],
-              "summary": "Eight approach images show the surface before impact. Close-ups add detail in smaller patches. Original shadows remain; the grid marks gaps or uncertain shape."
+              "notes": "Eight images follow Deep Impact’s approach in 2005. The closest views reveal finer ridges and depressions within the earlier photographs. Original shadows remain; the grid marks gaps or uncertain shape.",
+              "noData": true
             },
             {
               "id": "next",
               "label": "Stardust-NExT · 2011",
-              "description": "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps.",
-              "title": "Encounter image mosaic",
-              "detail": "NAVCAM",
               "thumbnail": "/scenes/comet-9p/comet-9p-next-thumbnail.webp",
               "surface": "comet-9p-next-surface@2x.webp",
               "poles": "comet-9p-next-poles@2x.webp",
@@ -535,15 +523,12 @@
                   "value": "12–42 m/pixel"
                 }
               ],
-              "summary": "These images show the surface six years after the 2005 encounter. Lighting differs between visits; the grid marks gaps."
+              "notes": "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps.",
+              "noData": true
             },
             {
               "id": "temperature",
               "label": "Color temperature",
-              "title": "Deep Impact infrared color temperature",
-              "detail": "HRI-IR",
-              "description": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
-              "summary": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
               "thumbnail": "/scenes/comet-9p/comet-9p-temperature-thumbnail.webp",
               "surface": "comet-9p-temperature-surface@2x.webp",
               "poles": "comet-9p-temperature-poles@2x.webp",
@@ -582,15 +567,13 @@
                 "meta": "K",
                 "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml",
                 "image": "/scenes/comet-9p/comet-9p-temperature-legend.webp"
-              }
+              },
+              "notes": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
+              "noData": true
             },
             {
               "id": "spectral-slope",
               "label": "Infrared slope",
-              "title": "Deep Impact infrared continuum",
-              "detail": "HRI-IR",
-              "description": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
-              "summary": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
               "thumbnail": "/scenes/comet-9p/comet-9p-spectral-slope-thumbnail.webp",
               "surface": "comet-9p-spectral-slope-surface@2x.webp",
               "poles": "comet-9p-spectral-slope-poles@2x.webp",
@@ -629,7 +612,9 @@
                 "meta": "%/100nm",
                 "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml",
                 "image": "/scenes/comet-9p/comet-9p-spectral-slope-legend.webp"
-              }
+              },
+              "notes": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
+              "noData": true
             }
           ]
         },
@@ -5344,7 +5329,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -5353,8 +5338,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a201c29e1e7aabb838f3c06a9b790c68dce95add97d5c00120114f3e5f425f46",
-      "bytes": 11443,
+      "sha256": "71ef160ccdb3e74bca8126a2d210050a236fcfa98e28e2b5755ac6f0f0385ca7",
+      "bytes": 10135,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -5438,11 +5423,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -5474,6 +5458,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "pds-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -5481,11 +5477,10 @@
       "label": "Source constraints",
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions."
-      ],
+      "limitations": [],
       "lensIds": [
         "constraints"
       ],
@@ -5517,6 +5512,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "constraint-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/1."
+        },
+        {
+          "sourceId": "pds-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -5524,11 +5531,10 @@
       "label": "Color temperature",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps."
-      ],
+      "limitations": [],
       "lensIds": [
         "temperature"
       ],
@@ -5648,6 +5654,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "pds-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -5655,11 +5668,10 @@
       "label": "Infrared slope",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals."
-      ],
+      "limitations": [],
       "lensIds": [
         "spectral-slope"
       ],
@@ -5779,6 +5791,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "pds-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -5786,11 +5805,10 @@
       "label": "Deep Impact · 2005",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Eight images follow Deep Impact’s approach in 2005. The closest views reveal finer ridges and depressions within the earlier photographs. Original shadows remain; the grid marks gaps or uncertain shape."
-      ],
+      "limitations": [],
       "lensIds": [
         "deep-impact"
       ],
@@ -5830,15 +5848,22 @@
       "outputs": [
         {
           "url": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
-          "bytes": 2062,
-          "sha256": "416ffb53b24aec606c8a4e80991e0461d9fa4eb35e4faa46b9495de1d73fc7ac",
+          "bytes": 2048,
+          "sha256": "61b9259ac92a0259b3938c48b81472877141c7a5932240a842fb01ca815251a9",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-9p/comet-9p-deep-impact-surface@2x.webp",
-          "bytes": 228984,
-          "sha256": "7bf85add71c15b7c83635aec718f18da1207f363c68a9403738f3dbe3c39f8dc",
+          "bytes": 225984,
+          "sha256": "26bcdc297afec5e9a281765e98df70980ece01cf6d833c0db0679d1017a542da",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "pds-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -5848,11 +5873,10 @@
       "label": "Stardust-NExT · 2011",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps."
-      ],
+      "limitations": [],
       "lensIds": [
         "next"
       ],
@@ -5886,15 +5910,22 @@
       "outputs": [
         {
           "url": "/scenes/comet-9p/comet-9p-next-thumbnail.webp",
-          "bytes": 1774,
-          "sha256": "e81c2984489f500ab115586c381085bdc0e434c40fb85f21e9270448b582240f",
+          "bytes": 1764,
+          "sha256": "721ccafd63b12dfdd4ce870b6c8ceba73a81e82b0545c13f893a4527591e636a",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-9p/comet-9p-next-surface@2x.webp",
-          "bytes": 327034,
-          "sha256": "60d00addee9e0a6182f0af07cb8704a31088271fea55454d031df8cb757b5d26",
+          "bytes": 301446,
+          "sha256": "b1d65f9f3b15bcebce12f916dbfff30b7513157f7285c7e09e744b981c1dabcd",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "pds-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -5904,8 +5935,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -5917,8 +5949,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5512,
-          "sha256": "56b3b2db7d62694bea75b26d96c0fd74e227e3550afe133816de5eb907d303c1",
+          "bytes": 5342,
+          "sha256": "11dd8097dccdb97f3c7ef13f592a9ffae865995cc9c2c07487d971c08fe273e4",
           "verification": "bytes-verified"
         }
       ],
@@ -5929,6 +5961,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.",
       "limitations": [],
@@ -5964,6 +5997,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "constraints"
@@ -5988,6 +6022,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "deep-impact"
@@ -5998,8 +6033,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/deep-impact.webp",
-          "bytes": 12636,
-          "sha256": "2b60b595aca080693f52546cff3006fabb9d2651a4e58eaca2d4049834c122fe",
+          "bytes": 12470,
+          "sha256": "88f2e4f87950744b10f1e377795f0973169488d74f4ac20921223d823310146f",
           "verification": "bytes-verified"
         }
       ]
@@ -6012,6 +6047,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "next"
@@ -6022,8 +6058,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/next.webp",
-          "bytes": 19554,
-          "sha256": "3081b480818487c3a15c58c12528ede23b170f4c874cc38063ffb180450741f3",
+          "bytes": 18834,
+          "sha256": "b9c3ac7a37838259ec17e5bbb9f5e5e6d180f697fc8da122d0fa20f62de022ce",
           "verification": "bytes-verified"
         }
       ]
@@ -6036,6 +6072,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "temperature"
@@ -6060,6 +6097,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "spectral-slope"
@@ -6080,5 +6118,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-9p",
+    "materialSha256": "aee0ae33160432137cd2eab884b8484e0c5873bc6a46e044927261c7dad2653f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/comet-9p/prepared/provenance.json",
+      "sha256": "009b6bc312b0a81b40c2f082f2e50c981a4ac69f8ed5b56c8190fe02843e57e3"
+    }
   }
 }

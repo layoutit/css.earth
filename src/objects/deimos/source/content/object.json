@@ -4,7 +4,6 @@
   "id": "deimos",
   "displayName": "Deimos",
   "panel": {
-    "introduction": "Deimos is the smaller, outer moon of Mars. A blanket of fine debris gives much of its cratered surface a smooth appearance. It takes about thirty hours to orbit Mars.",
     "facts": [
       {
         "id": "radius",
@@ -82,9 +81,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask.",
-        "title": "Multi-mission image mosaic",
-        "detail": "Multi-mission mosaic",
         "thumbnail": "/scenes/deimos/deimos-normal-thumbnail.webp",
         "surface": "deimos-normal-surface@2x.webp",
         "poles": "deimos-normal-poles@2x.webp",
@@ -93,14 +89,11 @@
           "path": "../manifest.json",
           "url": "https://sbn.psi.edu/pds/resource/stookemaps.html"
         },
-        "summary": "Photographed shadows, image seams and interpolated poles remain. Detail varies; missing coverage is not masked in this mosaic."
+        "notes": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask."
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius above a 6.2 km reference sphere, sampled from the Ernst et al. (2023) shape model. Facets without a solved SPC albedo are conservatively withheld; the full shape includes less-constrained terrain.",
-        "title": "Shape-derived radial height",
-        "detail": "Shaded relief",
         "thumbnail": "/scenes/deimos/deimos-elevation-thumbnail.webp",
         "surface": "deimos-elevation-surface@2x.webp",
         "poles": "deimos-elevation-poles@2x.webp",
@@ -123,14 +116,11 @@
           "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
           "image": "/scenes/deimos/deimos-elevation-legend.webp"
         },
-        "summary": "Height relative to a 6.2 km sphere, from the 2023 shape model. Areas without a solved surface brightness are withheld."
+        "notes": "Radius above a 6.2 km reference sphere, sampled from the Ernst et al. (2023) shape model. Facets without a solved SPC albedo are conservatively withheld; the full shape includes less-constrained terrain."
       },
       {
         "id": "albedo",
         "label": "Relative albedo",
-        "description": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
-        "title": "SPC relative albedo model",
-        "detail": "Released facet values",
         "thumbnail": "/scenes/deimos/deimos-albedo-thumbnail.webp",
         "surface": "deimos-albedo-surface@2x.webp",
         "poles": "deimos-albedo-surface@2x.webp",
@@ -152,14 +142,13 @@
           "meta": "SPC relative scale",
           "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
           "image": "/scenes/deimos/deimos-albedo-legend.webp"
-        }
+        },
+        "notes": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
+        "noData": true
       },
       {
         "id": "slope",
         "label": "Slope",
-        "description": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
-        "title": "Modeled surface slopes",
-        "detail": "Released facet values",
         "thumbnail": "/scenes/deimos/deimos-slope-thumbnail.webp",
         "surface": "deimos-slope-surface@2x.webp",
         "poles": "deimos-slope-surface@2x.webp",
@@ -181,7 +170,9 @@
           "meta": "deg",
           "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
           "image": "/scenes/deimos/deimos-slope-legend.webp"
-        }
+        },
+        "notes": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
+        "noData": true
       }
     ]
   },

@@ -1,0 +1,395 @@
+{
+  "schema": "cssearth-nebula-physical-evidence@1",
+  "subjectId": "m45",
+  "asOf": "2026-09-13",
+  "status": "Source-backed evidence with explicitly authored single-surface display approximation; no physical-fit acceptance.",
+  "sources": [
+    {
+      "id": "gibson-nordsieck-2003-i",
+      "file": "gibson-2003-i",
+      "url": "https://doi.org/10.1086/374589",
+      "fullTextUrl": "http://physics.wku.edu/~gibson/offprints/gibson_2003_pleiades_phot_color.pdf",
+      "locator": "Abstract; sections 2-3 and 5",
+      "scope": "WISP 165/220 nm and Schmidt B imaging over 5 by 1.7 degrees; original calibrated arrays unavailable in this intake.",
+      "sha256": "73cd968f5e7a009011c69c94897750c52c324131aa2fe0dd8e774e09688d51c2",
+      "bytes": 2793234,
+      "localPath": "output/m45-research/gibson-2003-i.pdf",
+      "access": "Complete PDF downloaded; listed sections read; original paper rights retained and PDF excluded from Git."
+    },
+    {
+      "id": "gibson-nordsieck-2003-ii",
+      "file": "gibson-2003-ii",
+      "url": "https://doi.org/10.1086/374590",
+      "fullTextUrl": "http://physics.wku.edu/~gibson/offprints/gibson_2003_pleiades_scat_color.pdf",
+      "locator": "Sections 3, 6.2.2-6.2.3 and 7; Table 3; conclusion page visually checked",
+      "scope": "Conditional dust scattering models; 130 pc adopted stellar distance; no model volume imported.",
+      "sha256": "cf3f5f2e0792a4a6f0eede54401258f5fc557ab2cf325502dbde9b53c0fabec1",
+      "bytes": 1869362,
+      "localPath": "output/m45-research/gibson-2003-ii.pdf",
+      "access": "Complete PDF downloaded; listed sections read; original paper rights retained and PDF excluded from Git."
+    },
+    {
+      "id": "gibson-2007",
+      "file": "gibson-2007",
+      "url": "https://arxiv.org/abs/astro-ph/0703055v1",
+      "fullTextUrl": "https://arxiv.org/pdf/astro-ph/0703055",
+      "locator": "All six pages; Figure 4 visually checked",
+      "scope": "Optical and HI angular power spectra; heterogeneous beams and local footprints; arrays not imported.",
+      "sha256": "b0c2944322ddd398c125029d73c5bbeae459265f0873d12842dfb2cf803349ba",
+      "bytes": 294204,
+      "localPath": "output/m45-research/gibson-2007.pdf",
+      "access": "Complete PDF downloaded; listed sections read; original paper rights retained and PDF excluded from Git."
+    },
+    {
+      "id": "melis-2014",
+      "file": "melis-2014",
+      "url": "https://doi.org/10.1126/science.1256101",
+      "fullTextUrl": "https://arxiv.org/pdf/1408.6544",
+      "locator": "Main text and supplementary observing method; Table 1",
+      "scope": "VLBI parallaxes of radio-bright cluster stars; stellar scale, not dust depth.",
+      "sha256": "b60bd625411305565c3156c73f29cde2d09e3641efbc744d495b961203e2e697",
+      "bytes": 977008,
+      "localPath": "output/m45-research/melis-2014.pdf",
+      "access": "Complete PDF downloaded; listed sections read; original paper rights retained and PDF excluded from Git."
+    },
+    {
+      "id": "miville-lagache-2005",
+      "file": "miville-2005",
+      "url": "https://doi.org/10.1086/427938",
+      "fullTextUrl": "https://arxiv.org/pdf/astro-ph/0412216",
+      "locator": "Table 1; sections 2 and 5",
+      "scope": "IRIS all-sky calibration/beam characterization; excluded RGB HiPS is not a calibrated array.",
+      "sha256": "5c3d499253125a268ee6c11581c637060a9fb9b9f746bf27186cebef3f71fe1e",
+      "bytes": 835839,
+      "localPath": "output/m45-research/miville-2005.pdf",
+      "access": "Complete PDF downloaded; listed sections read; original paper rights retained and PDF excluded from Git."
+    },
+    {
+      "id": "ritchey-2006",
+      "file": "ritchey-2006",
+      "url": "https://doi.org/10.1086/506585",
+      "fullTextUrl": "https://arxiv.org/pdf/astro-ph/0606644",
+      "locator": "Sections 2, 4.1, 4.3 and 6; Tables 1, 6 and 7",
+      "scope": "20 member-star pencil beams, January 2002, 1.7 km/s spectral resolution; no original spectral arrays acquired.",
+      "sha256": "22ed75a1cd1988a5ea90767ea8a30a81b7d0f0a31cbfcae2f3a5679a717bab60",
+      "bytes": 459764,
+      "localPath": "output/m45-research/ritchey-2006.pdf",
+      "access": "Complete PDF downloaded; listed sections read; original paper rights retained and PDF excluded from Git."
+    },
+    {
+      "id": "aligned-images",
+      "url": "https://noirlab.edu/public/images/noao-m45/",
+      "manifest": "processing-observations.json",
+      "access": "Four source-hash-pinned rasters with passing relative-star checks."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "observer-frame",
+      "classification": "authored",
+      "sourceIds": [],
+      "quantity": "coordinate convention",
+      "value": {
+        "x": "west",
+        "y": "north",
+        "z": "away from Earth",
+        "origin": "Common tangent-frame center; z=0 is arbitrary display depth, not the stellar plane."
+      },
+      "unit": "direction convention",
+      "scope": "ICRS tangent frame centered 56.75,24.1167 degrees",
+      "limitations": "Neither conditional compact-light depths nor display surface zero is a measured stellar/dust distance."
+    },
+    {
+      "id": "image-coverage",
+      "classification": "observed",
+      "sourceIds": [
+        "aligned-images"
+      ],
+      "quantity": "full selected footprints",
+      "value": {
+        "opticalArcmin": [
+          68.676,
+          50.1264
+        ],
+        "spitzerArcmin": [
+          58.07,
+          58.07
+        ],
+        "wiseApproxDegrees": [
+          3.05,
+          2.33
+        ]
+      },
+      "unit": "units named in keys",
+      "scope": "All four complete registered rasters; 252 arcminute square processing frame",
+      "limitations": "Different footprints and stretches. WISE outskirts lack optical/Spitzer coverage. RGB samples are relative appearance, not surface brightness."
+    },
+    {
+      "id": "uv-observations",
+      "classification": "observed",
+      "sourceIds": [
+        "gibson-nordsieck-2003-i"
+      ],
+      "quantity": "UV/optical imaging coverage",
+      "value": {
+        "wavelengthsNm": [
+          165,
+          220,
+          440
+        ],
+        "fieldDegrees": [
+          5,
+          1.7
+        ]
+      },
+      "unit": "units named in keys",
+      "scope": "WISP UV and Burrell Schmidt B field",
+      "limitations": "Difficult UV stellar PSF subtraction; intended polarimetry unsuccessful. No untouched UV raster, calibration arrays, masks or per-pixel uncertainties ingested."
+    },
+    {
+      "id": "foreground-multilayer-model",
+      "classification": "published-model",
+      "sourceIds": [
+        "gibson-nordsieck-2003-ii"
+      ],
+      "quantity": "conditional dust/star separation",
+      "value": {
+        "widespreadForegroundPc": 0.7,
+        "denserSecondLayerPcAtMost": 0.35,
+        "paperStellarDistancePc": 130,
+        "ordering": "West-side central dust is on average closer to stars than east-side dust; some second-layer dust may be among or behind stars."
+      },
+      "unit": "units named in keys",
+      "scope": "Central Pleiades; see paper 6.2.2 and 7",
+      "limitations": "Not measured voxel depths. Thin/plane-parallel geometry and multi-star illumination assumptions; outskirts 1-2 degrees away may have other illuminators. Single supported surface cannot represent both layers."
+    },
+    {
+      "id": "uv-grain-model",
+      "classification": "published-model",
+      "sourceIds": [
+        "gibson-nordsieck-2003-ii"
+      ],
+      "quantity": "effective UV scattering parameters",
+      "value": {
+        "albedo": 0.22,
+        "asymmetry": 0.74,
+        "wavelengthBelowNm": 260
+      },
+      "uncertainty": {
+        "albedo": 0.07,
+        "asymmetry": 0.06
+      },
+      "unit": "dimensionless, wavelength nm",
+      "scope": "Best-performing modified Gordon-Clayton-Witt model, UV only",
+      "limitations": "Grain/bulk-medium interpretation and Henyey-Greenstein large-angle bias remain uncertain. These parameters are not applied to optical/IR RGB or the current positive-emission solver."
+    },
+    {
+      "id": "multiscale-morphology",
+      "classification": "published-model",
+      "sourceIds": [
+        "gibson-2007"
+      ],
+      "quantity": "projected angular power-spectrum comparison",
+      "value": {
+        "slope": -2.8,
+        "scaleDecades": 5,
+        "illuminationBiasAboveArcsec": 1000
+      },
+      "unit": "dimensionless; arcsec where named",
+      "scope": "Separate Schmidt, WIYN, HST, VLA and single-dish maps, each within stated frequency limits",
+      "limitations": "Slope adopted visually; relative spectra rescaled; HI noise correction incomplete. Projected power is insensitive to morphology and cannot determine topology/depth. No fractal noise or inferred 3D spectrum synthesized."
+    },
+    {
+      "id": "stellar-distance",
+      "classification": "observed",
+      "sourceIds": [
+        "melis-2014"
+      ],
+      "quantity": "VLBI cluster parallax distance",
+      "value": 136.2,
+      "uncertainty": 1.2,
+      "unit": "pc",
+      "scope": "2014 radio-bright member-star sample; historical distance measurement",
+      "limitations": "Not the distance of each filament, illuminator or compact residual light. Not claimed as a current exhaustive Gaia-based cluster solution. No pc-to-depth conversion used in this baseline."
+    },
+    {
+      "id": "absorption-kinematics",
+      "classification": "observed",
+      "sourceIds": [
+        "ritchey-2006"
+      ],
+      "quantity": "interstellar absorption components",
+      "value": {
+        "typicalMolecularVelocityKms": [
+          7,
+          9.5
+        ],
+        "spectralResolutionKms": 1.7,
+        "sightlines": 20,
+        "tracers": [
+          "CN",
+          "Ca II",
+          "Ca I",
+          "CH+",
+          "CH"
+        ]
+      },
+      "unit": "km/s LSR; counts where named",
+      "scope": "20 pencil beams, January 2002; Table 1 J2000 positions span RA 56.200917 to 57.718458 deg, Dec 23.147139 to 24.839250 deg",
+      "limitations": "No continuous map or measured velocity-to-depth law. Ca II has several components; Doppler b is not centroid uncertainty. Original spectra and machine-readable per-component errors not imported, so no velocity fit is performed."
+    },
+    {
+      "id": "gas-density-diagnostic",
+      "classification": "published-model",
+      "sourceIds": [
+        "ritchey-2006"
+      ],
+      "quantity": "typical diffuse gas density from chemistry",
+      "value": {
+        "densityPerCm3": 50,
+        "adoptedMolecularFraction": 0.07
+      },
+      "unit": "cm^-3; dimensionless molecular fraction",
+      "scope": "CH/CH+ and H2 rotational diagnostics on the measured sightlines",
+      "limitations": "Conditional steady-state chemistry; time-dependent CH+ formation omitted. Dense HD23512 cloud is a distinct regime. This is not a calibrated dust density prior and is not assigned to every image pixel."
+    },
+    {
+      "id": "hd23512-anchor",
+      "classification": "observed",
+      "sourceIds": [
+        "ritchey-2006"
+      ],
+      "quantity": "molecular-cloud sightline anchor",
+      "value": [
+        56.6425,
+        23.6240277778
+      ],
+      "unit": "deg J2000",
+      "scope": "Table 1 HD23512, 03h46m34.20s +23d37m26.5s; one sightline",
+      "limitations": "Anchor is a star direction, not a measured cloud center or footprint. Published reddening E(B-V)=0.35 mag and CH velocity +9.8 km/s concern this pencil beam only."
+    },
+    {
+      "id": "iris-beam",
+      "classification": "observed",
+      "sourceIds": [
+        "miville-lagache-2005"
+      ],
+      "quantity": "IRIS delivered beam FWHM",
+      "value": [
+        3.8,
+        4,
+        4.3
+      ],
+      "uncertainty": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "unit": "arcmin",
+      "scope": "IRIS 25,60,100 micron bands, Table 1",
+      "limitations": "The archived stretched IRIS HiPS PNG is excluded from processing; its output sampling does not improve these beams. No SED, temperature or column density is fitted."
+    },
+    {
+      "id": "single-warped-layer",
+      "classification": "authored",
+      "sourceIds": [
+        "gibson-nordsieck-2003-ii",
+        "ritchey-2006"
+      ],
+      "quantity": "supported baseline approximation",
+      "value": "One smooth finite display-emission support; broad weak warp, central west/east tilt and local deformation around the HD23512 sightline.",
+      "unit": "method",
+      "scope": "All covered images, with central literature guidance scoped locally",
+      "limitations": "All amplitudes, thickness, radii and blend weights are authored. A local deformation does not recreate the second dust layer. No illumination, scattering, extinction, dust mass, hydrodynamics or independent stellar depth is solved."
+    },
+    {
+      "id": "authored-surface-settings",
+      "classification": "authored",
+      "sourceIds": [],
+      "quantity": "exact numeric baseline settings",
+      "value": {
+        "background": {
+          "depth": 0,
+          "gradient": [
+            0.018,
+            -0.012
+          ],
+          "curvature": [
+            0.000003,
+            0.000002,
+            -0.000002
+          ],
+          "thickness": 150
+        },
+        "core": {
+          "radius": [
+            2100,
+            1900
+          ],
+          "depth": -100,
+          "gradient": [
+            0.16,
+            0.03
+          ],
+          "curvature": [
+            0.00002,
+            -0.000015,
+            0.000008
+          ],
+          "thickness": 100,
+          "strength": 0.85
+        },
+        "local": {
+          "radius": [
+            500,
+            400
+          ],
+          "depth": 280,
+          "gradient": [
+            0.05,
+            -0.06
+          ],
+          "curvature": [
+            0.0002,
+            0.0001,
+            -0.00015
+          ],
+          "thickness": 75,
+          "strength": 0.7
+        },
+        "detailThicknessRatio": 0.45,
+        "minimumThicknessArcsec": 2
+      },
+      "unit": "depth/radius/thickness arcsec; gradients dimensionless; curvature arcsec^-1",
+      "scope": "Values reproduced in depth-model.json",
+      "limitations": "Display choices bounded before bake; not derived from image brightness, measured gas densities, 0.7 pc scattering model, or stellar distance."
+    }
+  ],
+  "methods": [
+    {
+      "id": "coherent-irregular-front",
+      "inputRequirements": [
+        "verified registered images",
+        "source-pinned evidence ledger",
+        "authored finite support settings",
+        "preserved per-source footprints"
+      ],
+      "evidenceIds": [
+        "foreground-multilayer-model",
+        "hd23512-anchor",
+        "single-warped-layer",
+        "authored-surface-settings"
+      ],
+      "limitations": [
+        "Available one-surface positive-emission model only approximates display topology. Scattering and multiple overlapping layers remain unsupported.",
+        "No literature diagnostic is fitted quantitatively; reflection brightness is not dust density."
+      ]
+    }
+  ],
+  "implementationContract": [
+    "All lenses share geometry, every alpha byte and compact-light positions.",
+    "Never use velocity or projected luminance as unique depth.",
+    "Preserve native NOX receipts and report remaining saturated stellar halos.",
+    "Separate completed processing, useful visualization and physical acceptance."
+  ]
+}

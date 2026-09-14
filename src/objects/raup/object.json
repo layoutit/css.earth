@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e39c0dc2c81dc3a57e7a9aafcf5db2d4a3f5bde3f615d80a86b35a0fe171a8de"
+          "sha256": "e704323cd2d5e906d83ca5e56381eaadcd64038cfe6ea4f49821d9821d3cfc15"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a1b25435ba6ee30247a84025bb2d02a95c0b72ba58ebbd6a5d53db757a1a6432"
+        "sha256": "3560547e47b7cebee8bd3113aaa767ac3fa517ce1b13d4728c3e9d477bcc228c"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.9862246368080674,
-      "description": "Explore Raup in 3D with its published shape model and documented physical size scale.",
+      "description": "Asteroid in the inner main belt, discovered in September 1987.",
       "systemName": "Solar System",
       "order": 418,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5f6b2e2f97bd22c92518f5b1465f350cc1de29fa9d757015e19c9f670c22f8aa"
+    "sha256": "a9b012aa1c522b65861a7083b1f137c87a5fef0d484221da12c55e2cc435076e"
   }
 }

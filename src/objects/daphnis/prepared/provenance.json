@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "daphnis",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3362ad403b9178e4916d1b9032ecf3ecb23fa80085f66b612e2ed4bc0e06dd08"
+    "sha256": "ec2ff959fc2ecd8cabb0ebf9442a55128bbeb263c00f5e171375c77dd452b903"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "20c6643655d5bf675a9cffc04514bd15f4413ab21854bac36efa14c0e419644e",
+      "sha256": "48c8488fcabae9a9c2e557f274f9d4b8ce3fbf888160ac3aecf4217e6302cab5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -77,11 +77,20 @@
             }
           ],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "cassini-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Cassini clear-filter observations with fine detail from a green-filter image, projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+                "attribution": {
+                  "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/cassini/iss/"
+                }
+              },
               "frames": [
                 {
                   "id": "n1656997950_1",
@@ -97,7 +106,8 @@
                     121.1,
                     186.5
                   ],
-                  "pixelAngleMicroradians": 5.989697719921734
+                  "pixelAngleMicroradians": 5.989697719921734,
+                  "backgroundMaximum": 0.003
                 },
                 {
                   "id": "n1656998640_1",
@@ -113,7 +123,8 @@
                     142.8,
                     121.5
                   ],
-                  "pixelAngleMicroradians": 5.989697719921734
+                  "pixelAngleMicroradians": 5.989697719921734,
+                  "backgroundMaximum": 0.003
                 },
                 {
                   "id": "n1863267232_1",
@@ -129,113 +140,42 @@
                     672.6,
                     768
                   ],
-                  "pixelAngleMicroradians": 5.989697719921734
+                  "pixelAngleMicroradians": 5.989697719921734,
+                  "backgroundMaximum": 0.003
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumGain": 1.1,
+                "maximumAngleDegrees": 70
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 78
+              },
               "photometry": {
+                "model": "lunar-lambert",
                 "weight": 0.5,
-                "maximumGain": 2.5,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 80,
                 "maximumEmissionDegrees": 78,
-                "displayMaximum": 0.6,
-                "gamma": 1,
-                "minimumLevel": 0.7,
-                "maximumLevel": 1.4,
-                "backgroundMaximum": 0.003
+                "maximumGain": 2.5
               },
-              "metadata": {
-                "label": "Monochrome",
-                "falseColor": false,
-                "coverage": "Cassini clear-filter observations with fine detail from a green-filter image, projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-                "attribution": {
-                  "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
-                  "url": "https://pds-rings.seti.org/cassini/iss/"
-                }
+              "display": {
+                "displayRange": [
+                  0,
+                  0.528
+                ]
               }
             },
             {
               "id": "filter-color",
               "format": "controlled-shape-color",
               "consumer": "cassini-color-frames",
-              "channels": [
-                {
-                  "channel": "red",
-                  "filter": "RED",
-                  "frames": [
-                    {
-                      "id": "n1656999219",
-                      "path": "observations/N1656999219_1_CALIB.IMG",
-                      "labelPath": "observations/N1656999219_1_CALIB.LBL",
-                      "observerLatitude": 20.4,
-                      "observerWestLongitude": 113.94,
-                      "sunLatitude": 4.97,
-                      "sunWestLongitude": 63.64,
-                      "rangeKm": 72779.3,
-                      "northAzimuthDegrees": 21.53,
-                      "center": [
-                        148.6,
-                        67
-                      ],
-                      "pixelAngleMicroradians": 5.989697719850105,
-                      "coverageInsetPixels": 2
-                    }
-                  ]
-                },
-                {
-                  "channel": "green",
-                  "filter": "GRN",
-                  "frames": [
-                    {
-                      "id": "n1656999274",
-                      "path": "observations/N1656999274_1_CALIB.IMG",
-                      "labelPath": "observations/N1656999274_1_CALIB.LBL",
-                      "observerLatitude": 20.68,
-                      "observerWestLongitude": 113.98,
-                      "sunLatitude": 4.97,
-                      "sunWestLongitude": 64.03,
-                      "rangeKm": 72728.8,
-                      "northAzimuthDegrees": 21.51,
-                      "center": [
-                        145.9,
-                        62.3
-                      ],
-                      "pixelAngleMicroradians": 5.989697719850105,
-                      "coverageInsetPixels": 2
-                    }
-                  ]
-                },
-                {
-                  "channel": "blue",
-                  "filter": "BL1",
-                  "frames": [
-                    {
-                      "id": "n1656999330",
-                      "path": "observations/N1656999330_1_CALIB.IMG",
-                      "labelPath": "observations/N1656999330_1_CALIB.LBL",
-                      "observerLatitude": 20.95,
-                      "observerWestLongitude": 114.03,
-                      "sunLatitude": 4.97,
-                      "sunWestLongitude": 64.41,
-                      "rangeKm": 72682,
-                      "northAzimuthDegrees": 21.49,
-                      "center": [
-                        144.2,
-                        58.1
-                      ],
-                      "pixelAngleMicroradians": 5.989697719850105,
-                      "coverageInsetPixels": 2
-                    }
-                  ]
-                }
-              ],
-              "photometry": {
-                "model": "observed",
-                "weight": 0.5,
-                "maximumGain": 1,
-                "maximumIncidenceDegrees": 75,
-                "maximumEmissionDegrees": 75,
-                "backgroundMaximum": 0.003
-              },
               "metadata": {
                 "label": "False color",
                 "falseColor": true,
@@ -245,15 +185,103 @@
                   "url": "https://pds-rings.seti.org/cassini/iss/"
                 }
               },
+              "bands": [
+                {
+                  "channel": "red",
+                  "filter": "RED"
+                },
+                {
+                  "channel": "green",
+                  "filter": "GRN"
+                },
+                {
+                  "channel": "blue",
+                  "filter": "BL1"
+                }
+              ],
+              "frames": [
+                {
+                  "id": "set-1",
+                  "red": {
+                    "id": "n1656999219",
+                    "path": "observations/N1656999219_1_CALIB.IMG",
+                    "labelPath": "observations/N1656999219_1_CALIB.LBL",
+                    "observerLatitude": 20.4,
+                    "observerWestLongitude": 113.94,
+                    "sunLatitude": 4.97,
+                    "sunWestLongitude": 63.64,
+                    "rangeKm": 72779.3,
+                    "northAzimuthDegrees": 21.53,
+                    "center": [
+                      148.6,
+                      67
+                    ],
+                    "pixelAngleMicroradians": 5.989697719850105,
+                    "coverageInsetPixels": 2,
+                    "backgroundMaximum": 0.003
+                  },
+                  "green": {
+                    "id": "n1656999274",
+                    "path": "observations/N1656999274_1_CALIB.IMG",
+                    "labelPath": "observations/N1656999274_1_CALIB.LBL",
+                    "observerLatitude": 20.68,
+                    "observerWestLongitude": 113.98,
+                    "sunLatitude": 4.97,
+                    "sunWestLongitude": 64.03,
+                    "rangeKm": 72728.8,
+                    "northAzimuthDegrees": 21.51,
+                    "center": [
+                      145.9,
+                      62.3
+                    ],
+                    "pixelAngleMicroradians": 5.989697719850105,
+                    "coverageInsetPixels": 2,
+                    "backgroundMaximum": 0.003
+                  },
+                  "blue": {
+                    "id": "n1656999330",
+                    "path": "observations/N1656999330_1_CALIB.IMG",
+                    "labelPath": "observations/N1656999330_1_CALIB.LBL",
+                    "observerLatitude": 20.95,
+                    "observerWestLongitude": 114.03,
+                    "sunLatitude": 4.97,
+                    "sunWestLongitude": 64.41,
+                    "rangeKm": 72682,
+                    "northAzimuthDegrees": 21.49,
+                    "center": [
+                      144.2,
+                      58.1
+                    ],
+                    "pixelAngleMicroradians": 5.989697719850105,
+                    "coverageInsetPixels": 2,
+                    "backgroundMaximum": 0.003
+                  }
+                }
+              ],
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 75
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 75,
+                "maximumEmissionDegrees": 75,
+                "maximumGain": 1
+              },
+              "display": {
+                "displayRange": [
+                  0,
+                  0.8
+                ]
+              },
               "focus": {
                 "longitudeDegrees": 246.01999999999998,
                 "latitudeDegrees": 20.68,
                 "zoom": 1.1
-              },
-              "displayRange": [
-                0,
-                0.8
-              ]
+              }
             }
           ]
         },
@@ -313,14 +341,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a730f46ca459773e07ee89a79f9eca529c37189152e1277a5e92fa49d2a8c050",
+      "sha256": "e24489061d4d1267b3f4156059e11ab956aef5e09e7d83ec64d1f57cd6a7f0a2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "daphnis",
         "displayName": "Daphnis",
         "panel": {
-          "introduction": "Daphnis travels inside the Keeler Gap in Saturn’s A ring. This tiny moon raises waves along the gap’s edges, while Cassini’s close views reveal ridges and a coating of fine material. The displayed 2026 orbit extrapolates a 2005–2018 fit; Horizons has no ephemeris at this date. Its orientation uses an arbitrary display phase, not a measured attitude.",
           "facts": [
             {
               "id": "radius",
@@ -375,9 +402,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini clear-filter observations with fine detail from a green-filter image, projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-              "title": "ISS mosaic",
-              "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/daphnis/daphnis-normal-thumbnail.webp",
               "surface": "daphnis-normal-surface@2x.webp",
               "poles": "daphnis-normal-surface@2x.webp",
@@ -386,14 +410,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/calibration.html"
               },
-              "summary": "Green-filter detail is combined with clear-filter images. Brightness matching reduces shading; the gray grid marks gaps."
+              "notes": "Cassini clear-filter observations with fine detail from a green-filter image, projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "noData": true
             },
             {
               "id": "filter-color",
               "label": "False color",
-              "description": "Cassini RED, GRN, BL1 filters displayed as red, green and blue; observed illumination and common coverage only.",
-              "title": "Cassini false color",
-              "detail": "Cassini",
               "thumbnail": "/scenes/daphnis/daphnis-filter-color-thumbnail.webp",
               "surface": "daphnis-filter-color-surface@2x.webp",
               "poles": "daphnis-filter-color-surface@2x.webp",
@@ -402,14 +424,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
+              "notes": "Cassini RED, GRN, BL1 filters displayed as red, green and blue; observed illumination and common coverage only.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radial height above a 3.8 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-              "title": "Shape-derived radial height",
-              "detail": "Cassini shape · radial height",
               "thumbnail": "/scenes/daphnis/daphnis-elevation-thumbnail.webp",
               "surface": "daphnis-elevation-surface@2x.webp",
               "poles": "daphnis-elevation-surface@2x.webp",
@@ -432,7 +452,7 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
                 "image": "/scenes/daphnis/daphnis-elevation-legend.webp"
               },
-              "summary": "Height relative to a 3.8 km sphere, from the Cassini shape model. Small craters are unresolved."
+              "notes": "Radial height above a 3.8 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
             }
           ]
         },
@@ -536,7 +556,7 @@
       "sha256": "8fc85246848ad05de7c68b0686f9fde7d3c23529d02db9c1e7287864b74c34be",
       "bytes": 2019600,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -590,7 +610,7 @@
       "sha256": "d13c92192552c1c7a7cc4146b6767da7b7cc3dd1b753e80438670b08c1b16320",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -637,7 +657,7 @@
       "sha256": "4e9288fef8b341477517ceb86d5daaf12bedbf0b21178657b881628308563423",
       "bytes": 3829,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -691,7 +711,7 @@
       "sha256": "c8c1b35ac229a1b69b6767088298b1c412e7e6f9c28b762f1ccaf30a73a39eb0",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -738,7 +758,7 @@
       "sha256": "4c6172fabd9dadeb93d70b6896bdf78194c8350ceed7e5ef81fd429f27fae940",
       "bytes": 3828,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -792,7 +812,7 @@
       "sha256": "b026a3faac020e7829dd36c6b7e69f7e5cb17995961117bd3c9dbdc86c93d3ac",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -839,7 +859,7 @@
       "sha256": "25e85a27af3d62e800738d7819cd5022dc21140bc6b215c74b3e27b54dae93cc",
       "bytes": 3865,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -894,7 +914,7 @@
       "sha256": "82678aef88673ec6bd4b1bea7987eb04606295a904a535c09ad1c50d2961b6b5",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -941,7 +961,7 @@
       "sha256": "770bd966143aeb525caeb88bdbbb96ce5017dcb8a06ca2276dd812406d5474e6",
       "bytes": 3828,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -996,7 +1016,7 @@
       "sha256": "86c6033321f89e1b8b5e56ee964098c1bdecee7643265eea6ed106bec748b562",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1043,7 +1063,7 @@
       "sha256": "cd51d655fabfaf4c6bb1b7dcc2f20bd7044c3c6ff55be6db5e8aa70ed24337d7",
       "bytes": 3828,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1098,7 +1118,7 @@
       "sha256": "b1a19650d4aca16fa48cea205070a30b3baafcf427ae5aba9e6e79bc6483e157",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1145,7 +1165,7 @@
       "sha256": "1f52334470142a743b6efe7b0f20f172f6981ac3ec12a90f7827fdb64f80952b",
       "bytes": 3829,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1160,7 +1180,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1169,10 +1189,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a730f46ca459773e07ee89a79f9eca529c37189152e1277a5e92fa49d2a8c050",
-      "bytes": 6244,
+      "sha256": "e24489061d4d1267b3f4156059e11ab956aef5e09e7d83ec64d1f57cd6a7f0a2",
+      "bytes": 5179,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1183,11 +1203,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radial height above a 3.8 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1205,19 +1224,26 @@
           "url": "/scenes/daphnis/daphnis-elevation-thumbnail.webp",
           "bytes": 4514,
           "sha256": "5a7fab90da67b55a8cffcfc0e9e1b006549959b3c2d206077e1dbecc02040b70",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/daphnis/daphnis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/daphnis/daphnis-elevation-surface@2x.webp",
           "bytes": 267548,
           "sha256": "b6a819ab54e43a39431d3e04d0eb2060fd02229d8382a0c00c050f88f5914993",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "thomas-2018-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1226,12 +1252,11 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini clear-filter observations with fine detail from a green-filter image, projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed."
-      ],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1239,7 +1264,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "n1656997950_1",
@@ -1253,15 +1278,22 @@
       "outputs": [
         {
           "url": "/scenes/daphnis/daphnis-normal-thumbnail.webp",
-          "bytes": 2328,
-          "sha256": "526f75327b04f745b9e6e56f4eb13494d34c5fb6fe06d6b167c8d3ecbf504b65",
-          "verification": "bytes-verified"
+          "bytes": 1632,
+          "sha256": "ccb21269ba469c77071d78832bb8f113dd68f91ee45890b9b41637feb776ac38",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/daphnis/daphnis-normal-surface@2x.webp",
-          "bytes": 181544,
-          "sha256": "0a951ef3f3e1a2a3b85c3aa5302e4ba064de02204d130a7ab3e810acc37d4099",
-          "verification": "bytes-verified"
+          "bytes": 190648,
+          "sha256": "f8b64793a200f81a88d19658a0ae16c486c7087112280ea5aabd6c21511605cb",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "thomas-2018-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1270,12 +1302,11 @@
       "id": "filter-color",
       "label": "False color",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/1",
+      "selector": "/raster/surfaceObservations/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini RED, GRN, BL1 filters displayed as red, green and blue; observed illumination and common coverage only."
-      ],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
       "lensIds": [
         "filter-color"
       ],
@@ -1283,7 +1314,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "n1656999219",
@@ -1297,15 +1328,22 @@
       "outputs": [
         {
           "url": "/scenes/daphnis/daphnis-filter-color-thumbnail.webp",
-          "bytes": 2566,
-          "sha256": "c3c1a9844c7b1d000e4ff504d4da6b1d288d8e5cb20d3216b97f3ee79883654c",
-          "verification": "bytes-verified"
+          "bytes": 1926,
+          "sha256": "f947f37b7e5009453c9650d27063955be3c79bdc62a0edbe137a457de49ebc10",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/daphnis/daphnis-filter-color-surface@2x.webp",
-          "bytes": 182240,
-          "sha256": "3c3866822ece15c5089dd5dfb335e5a3540976b067f82b9f897353cbdb3bdec0",
-          "verification": "bytes-verified"
+          "bytes": 170796,
+          "sha256": "b47fc0ddadaaed1a8a98304f98533aed374038ccf635ff5736e4fe33be0f5636",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "thomas-2018-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1315,8 +1353,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1328,8 +1367,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6212,
-          "sha256": "5c37d261bb4993df261fb673b12bcd1a388a3d02854f36bd798898269071b659",
+          "bytes": 5835,
+          "sha256": "a359f4f5b936dcf9b1fb76391e0f6f12165f20878abf2be8105e35ee483fe3a4",
           "verification": "bytes-verified"
         }
       ],
@@ -1339,10 +1378,11 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -1353,8 +1393,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 5902,
-          "sha256": "860fd8fced3d713e05acce11059453bf8462ce095ff76209d642fcff9c9a2376",
+          "bytes": 8094,
+          "sha256": "b93cfa770c931d17aff424e176e6094a3ac0d015ef554f2161d26b170086bf3a",
           "verification": "bytes-verified"
         }
       ]
@@ -1363,10 +1403,11 @@
       "id": "preview:filter-color",
       "label": "False color preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/1",
+      "selector": "/raster/surfaceObservations/1",
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "filter-color"
@@ -1377,8 +1418,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 5204,
-          "sha256": "cd271f76cdca3bc5c4b54474ec622acdf729aade10a3f8c41e807845c16a8671",
+          "bytes": 5434,
+          "sha256": "7236ca6955bdd4cc6d5dcf12dcbee1393c001d8c8f23d3b9c7c8a2c8351c1b4f",
           "verification": "bytes-verified"
         }
       ]
@@ -1391,6 +1432,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"
@@ -1411,5 +1453,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "daphnis",
+    "materialSha256": "758d5bbae7c64421d574df0d65f835a7c273e894da603baa37150d7b9c8d938c",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/daphnis/prepared/provenance.json",
+      "sha256": "df25ec4741b4a14be2064b6c91518f2b9f57c580f1be4a0f112232816898f002"
+    }
   }
 }

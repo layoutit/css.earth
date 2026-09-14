@@ -1,0 +1,158 @@
+{
+  "objectId": "vesta",
+  "date": "2026-09-14",
+  "testedCommit": "86364a47f5ab7261a3716897b5e421e81abf5458",
+  "baselineCommit": "943179c7c748c4e9727b9d94e15b214c2d20a68c",
+  "purpose": "Qualify the released LAMO photographic map on the unchanged Vesta display mesh.",
+  "source": {
+    "path": "maps/vesta-lamo-clear.png",
+    "url": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png",
+    "bytes": 878609842,
+    "sha256": "1a135e6111e0e4f69596583c8ff1662a0a01b8ccc66226b31040a8497e5b9c5a",
+    "dimensions": [
+      80112,
+      40056
+    ],
+    "label": "../source/reference/lamo-clear.lbl",
+    "verification": "Original PNG downloaded and hash-verified during preparation. Companion attached label inspected from a 65,536-byte archive range; full PDS pixels were not retrieved."
+  },
+  "preparation": {
+    "command": "VIPS_CONCURRENCY=1 UV_THREADPOOL_SIZE=2 OPENBLAS_NUM_THREADS=1 node --max-old-space-size=2048 tools/objects/dist/prepare-authored.js vesta --write",
+    "elapsedSeconds": 344.5,
+    "maximumResidentBytes": 2864496640,
+    "normalizedDimensions": [
+      8192,
+      4096
+    ],
+    "atlasDimensions": [
+      2048,
+      6400
+    ],
+    "leavesUnchanged": true,
+    "hitsUnchanged": true,
+    "faces": 800,
+    "changed": [],
+    "added": [
+      {
+        "filename": "vesta-surface-shadow@2x.webp",
+        "bytes": 1123818,
+        "sha256": "887ba3728704461e2fe2c1f17b274876a7eec900785a5d1c961981c76e3e5929"
+      },
+      {
+        "filename": "vesta-surface-surface@2x.webp",
+        "bytes": 2994634,
+        "sha256": "5413356efef96c61ca5e63d63ad7a7f1fccf5bbf3f961a456ffe69f890d4f308"
+      },
+      {
+        "filename": "vesta-surface-thumbnail.webp",
+        "bytes": 3782,
+        "sha256": "5ede0b312706a02cd2d1f554c0a5a2611a5281a0fb9089bbc9f6773713cad621"
+      }
+    ],
+    "unchangedGeometry": {
+      "drawingSha256": "0ac1c6e47799c3a8f94dcd1e2d6e79331057df36e6e60cff8696b16cfbc807af",
+      "pickingSha256": "7d02c244a96654573d4e47b3c6953cc01f973904f221e7bb2aaf7f3fce4c9976"
+    }
+  },
+  "checks": {
+    "projectedByteImageReader": {
+      "passed": 6,
+      "command": "node --test tools/objects/terrestrial-layers/observed-image.test.mts",
+      "claim": "Native validity resampling preserves mixed fill footprints; grayscale brightness, RGB channels, dark valid samples, longitude and cropped gaps retain their behavior."
+    },
+    "vestaBody": {
+      "passed": 3,
+      "command": "node --test tests/objects/unit/vesta/source.test.mts",
+      "claim": "LAMO original PNG dimensions match its label and recipe; Dawn radius anchors, PolyCSS u raster faces, drawing/hit geometry and installed runtime hashes pass."
+    },
+    "strictPreparationTypes": {
+      "command": "pnpm typecheck:preparation",
+      "passed": true
+    },
+    "sourceGraph": {
+      "command": "node tools/prepare-provenance.mts vesta",
+      "unresolved": 0
+    },
+    "browser": {
+      "tool": "Playwright CLI, headless Chromium",
+      "origin": "http://127.0.0.1:4278",
+      "desktop": [
+        {
+          "viewport": [
+            1440,
+            900
+          ],
+          "dpr": 1,
+          "faces": 800,
+          "scenes": 1,
+          "retainedStageNodeIdentityAfterDrag": true,
+          "cameraChangedAfterDrag": true,
+          "shadowsDefaultOff": true,
+          "atlasUrl": "/scenes/vesta/vesta-surface-surface@2x.webp"
+        },
+        {
+          "viewport": [
+            1440,
+            900
+          ],
+          "dpr": 2,
+          "faces": 800,
+          "scenes": 1,
+          "retainedStageNodeIdentityAfterDrag": true,
+          "cameraChangedAfterDrag": true,
+          "shadowsDefaultOff": true,
+          "atlasUrl": "/scenes/vesta/vesta-surface-surface@2x.webp"
+        }
+      ],
+      "manual": "Selected Clear-filter photography through the dataset control; checked the Dawn mission and DLR source cards; zoomed and rotated the body; toggled optional Shadows through its visible label and returned it off. A direct check() of the styled checkbox was intercepted by its label; clicking that label passed.",
+      "screenshots": [
+        {
+          "path": "lamo-desktop.png",
+          "bytes": 566909,
+          "sha256": "9e7b3d8336bd1a0824fa08dd0fa7c3c2e45a57a5e4027dce80c846e3021a1544"
+        },
+        {
+          "path": "lamo-mobile.png",
+          "bytes": 195861,
+          "sha256": "5b208e322adb6a1986223b84a4444a475bfeb4544b1d142a56ccdb8eb2e00cd8"
+        }
+      ],
+      "limits": "Visual and prepared-byte checks, not an independently fitted camera or absolute source-image pixel parity result.",
+      "mobile": {
+        "viewport": [
+          390,
+          844
+        ],
+        "dpr": 1,
+        "documentWidth": 390,
+        "faces": 800,
+        "scenes": 1,
+        "datasetSelection": "Expanded the existing information sheet, selected the photographic dataset, then cycled the handle to peek and waited for its resting position.",
+        "limits": "Viewport layout and dataset interaction checked; not a separate touch-gesture conformance run."
+      }
+    },
+    "delivery": [
+      {
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/887ba3728704461e2fe2c1f17b274876a7eec900785a5d1c961981c76e3e5929/vesta-surface-shadow@2x.webp",
+        "bytes": 1123818,
+        "sha256": "887ba3728704461e2fe2c1f17b274876a7eec900785a5d1c961981c76e3e5929"
+      },
+      {
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/5413356efef96c61ca5e63d63ad7a7f1fccf5bbf3f961a456ffe69f890d4f308/vesta-surface-surface@2x.webp",
+        "bytes": 2994634,
+        "sha256": "5413356efef96c61ca5e63d63ad7a7f1fccf5bbf3f961a456ffe69f890d4f308"
+      },
+      {
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/5ede0b312706a02cd2d1f554c0a5a2611a5281a0fb9089bbc9f6773713cad621/vesta-surface-thumbnail.webp",
+        "bytes": 3782,
+        "sha256": "5ede0b312706a02cd2d1f554c0a5a2611a5281a0fb9089bbc9f6773713cad621"
+      }
+    ]
+  },
+  "limits": [
+    "The producer mosaic retains illumination and seams, and missing northern coverage.",
+    "Exact black is a fill heuristic: photographed black can also be withheld.",
+    "The displayed atlas is coarser than the native 20 m/pixel image; geometry remains the 800-face model.",
+    "No aggregate build or repository-wide browser suite was run."
+  ]
+}

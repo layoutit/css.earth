@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "3181380f74ce8ac97d7e2ddae0db47faa7944d8edc951fdfb209ff4af25ae041"
+          "sha256": "1f16947344e4e772e4b329385ce8fe280066ac6493449a958601c15d55c66443"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "870aef96f8e720d0d73b15c7d5a32f7ba35bf9dfdf1b9a6fbf288d2a0a2ba158"
+          "sha256": "056216b95c0e91cad93d502460aae2c74857798a4d9aa77a976636a090d3a60b"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "bf12c693b74debb40686f6497c54050fd922fa97ac58e5567a68d878b98aac54"
+          "sha256": "e1d7c94640f34bb7bc30a0b294967183841eac928c2e55ab4e33f5f5ce793cca"
         },
         {
           "id": "acquisition",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3839638d46061076202c89feea375258c3d1d7358fe5112d74d67ecdad8ab34c"
+        "sha256": "f74f4278cbcdf268d3e68442a10b6125579397b0c84358c8142c8cedb3b1897d"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#c3bfb7",
       "distanceAu": 9.58,
-      "description": "Explore Calypso in 3D with Cassini imagery and its measured irregular shape.",
+      "description": "Small moon that trails Tethys along its orbit around Saturn.",
       "systemName": "Solar System",
       "order": 113,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "943fca183e49f0e4310155a4e653f83e09c4666245e5ed87eea224844f4a37d8"
+    "sha256": "438f08074745c7b887fb79e0bc249294c1e156b9f526a4e56af40f7084931e87"
   }
 }

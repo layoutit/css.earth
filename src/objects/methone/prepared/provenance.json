@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e6d56caf806e1306aba2130dfd274bafc283a447adcd9c70dce5f64575ac68b3"
+    "sha256": "c790554fb291f79f68397e7a70eb12a4cf2ed5a03682776e097760721d434a66"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ce47ac830f221102a1d79dc79a3594fdc4ca4c6d259a179d5326061b4a0bca98",
+      "sha256": "2d50a5f92718b8badb36711ea9ad809da489c3b6c4d7ee7e590278f20cc73dc0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -34,11 +34,20 @@
           "observations": [],
           "scientific": [],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "cassini-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Cassini calibrated clear-filter observation projected onto the measured ellipsoid. Bounded illumination correction preserves the real darker leading-side oval; grid marks unavailable or unstable samples. Native detail is about 27 m/pixel, not an HD terrain survey.",
+                "attribution": {
+                  "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/cassini/iss/"
+                }
+              },
               "frames": [
                 {
                   "id": "n1716192103_1",
@@ -55,28 +64,29 @@
                     650.8201198506287
                   ],
                   "pixelAngleMicroradians": 5.989697719921734,
-                  "coverageInsetPixels": 3
+                  "coverageInsetPixels": 3,
+                  "backgroundMaximum": 0.012
                 }
               ],
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 72
+              },
               "photometry": {
+                "model": "lunar-lambert",
                 "weight": 0.5,
-                "maximumGain": 2.5,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 75,
                 "maximumEmissionDegrees": 72,
-                "displayMaximum": 0.65,
-                "gamma": 1,
-                "minimumLevel": 1,
-                "maximumLevel": 1,
-                "backgroundMaximum": 0.012
+                "maximumGain": 2.5
               },
-              "metadata": {
-                "label": "Monochrome",
-                "falseColor": false,
-                "coverage": "Cassini calibrated clear-filter observation projected onto the measured ellipsoid. Bounded illumination correction preserves the real darker leading-side oval; grid marks unavailable or unstable samples. Native detail is about 27 m/pixel, not an HD terrain survey.",
-                "attribution": {
-                  "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
-                  "url": "https://pds-rings.seti.org/cassini/iss/"
-                }
+              "display": {
+                "displayRange": [
+                  0,
+                  0.505
+                ]
               }
             }
           ]
@@ -139,14 +149,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "327c9bf6bad91a83fdf0f4990a277da0658416e0a3f43ab16f83e0a8e60ce756",
+      "sha256": "c9b689e7f8de5c562311873486b849fd8d3ebc3ab381ad16b05ee0e449eea59a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "methone",
         "displayName": "Methone",
         "panel": {
-          "introduction": "Methone is a tiny, egg-shaped moon between Mimas and Enceladus. Cassini found an exceptionally smooth surface with a darker oval on its leading side.",
           "facts": [
             {
               "id": "radius",
@@ -186,9 +195,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
-              "title": "ISS clear-filter image",
-              "detail": "Cassini ISS",
               "thumbnail": "/scenes/methone/methone-normal-thumbnail.webp",
               "surface": "methone-normal-surface@2x.webp",
               "poles": "methone-normal-poles@2x.webp",
@@ -197,7 +203,8 @@
                 "path": "../manifest.json",
                 "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1716192103"
               },
-              "summary": "The darker oval is visible at about 27 m per source pixel. Gaps are marked; tiny isolated spots may be detector noise."
+              "notes": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
+              "noData": true
             }
           ]
         },
@@ -402,7 +409,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -411,8 +418,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "327c9bf6bad91a83fdf0f4990a277da0658416e0a3f43ab16f83e0a8e60ce756",
-      "bytes": 3486,
+      "sha256": "c9b689e7f8de5c562311873486b849fd8d3ebc3ab381ad16b05ee0e449eea59a",
+      "bytes": 3114,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -424,12 +431,11 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts."
-      ],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -437,7 +443,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "n1716192103_1",
@@ -447,15 +453,22 @@
       "outputs": [
         {
           "url": "/scenes/methone/methone-normal-thumbnail.webp",
-          "bytes": 1450,
-          "sha256": "e49f8f9a22da85f2ba4cc9d34fecccba401f9c0ddd221766f491eef3d5a93def",
+          "bytes": 1650,
+          "sha256": "fa9c892e33eaa9b9f8ce833c6e7ae5b1122c0afa5fc1b48f93d46f92ee2bd610",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/methone/methone-normal-surface@2x.webp",
-          "bytes": 61390,
-          "sha256": "4490339387c23ce5381cce07e83e458ceea84612956144c8e81e78258eea3d58",
+          "bytes": 70644,
+          "sha256": "f1578449cb91bd75ffb6fc64d74017553414e441bd4ece61556eec8edc4324e0",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "measured-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -465,8 +478,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -478,8 +492,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5731,
-          "sha256": "471cdd2cafd33c5ca743c70b65c1faa6b2199a5878aeff04e1fdb37eff39a743",
+          "bytes": 5564,
+          "sha256": "a94d946f80ff9ed21d1dd4c5ab88eca41bf593897cbd15768b4b58c76302ed0f",
           "verification": "bytes-verified"
         }
       ],
@@ -489,10 +503,11 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -503,8 +518,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 4374,
-          "sha256": "a6dfc8dc493d11690c05ba3191b27598a2e40cb0ddcb2675814a1b7a53826726",
+          "bytes": 5148,
+          "sha256": "b8649aa1fe6849f269cb8c84d2c6292c661c77e2eb8199013b95840faf94474f",
           "verification": "bytes-verified"
         }
       ]
@@ -513,5 +528,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "methone",
+    "materialSha256": "d9ede083fffc29efecc9ff1871ef56595d5e80d204063c40f135c25785efcb5b",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/methone/prepared/provenance.json",
+      "sha256": "83b5f86ae8353950300f1361f1068fc356309bd6c9085938872b435310539611"
+    }
   }
 }

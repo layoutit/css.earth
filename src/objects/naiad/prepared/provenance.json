@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "52f7a62add059aa6f9b387b4620de85a23fbf0522bac865ee5a8ceeb75d46c61"
+    "sha256": "0089c6860f03f43c3116ae693b00404228590f05b1709122b5944a817ab1a494"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e736f26dd6bbd0217edb7a7462624e374b16e48699373092b0446efaa877db4c",
+      "sha256": "01ee2acaf24df17c903e0165fd41fe1a8bcb702f17769e8bd2e66b44d1b829c9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "naiad",
         "displayName": "Naiad",
         "panel": {
-          "introduction": "Naiad is Neptune’s innermost moon. Its elongated shape is inferred from Voyager observations; the grid marks the absence of a usable surface map.",
           "facts": [
             {
               "id": "radius",
@@ -161,9 +160,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
-              "title": "Approximate shape model",
-              "detail": "Measured axes",
               "thumbnail": "/scenes/naiad/naiad-model-thumbnail.webp",
               "surface": "naiad-model-surface@2x.webp",
               "poles": "naiad-model-poles@2x.webp",
@@ -172,7 +168,8 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.1016/S0019-1035(03)00002-2"
               },
-              "summary": "Voyager-based shape estimate. The outline is measured but local terrain is unresolved; gray grid: no imagery."
+              "notes": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
+              "noData": true
             }
           ]
         },
@@ -316,7 +313,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -325,8 +322,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e736f26dd6bbd0217edb7a7462624e374b16e48699373092b0446efaa877db4c",
-      "bytes": 3533,
+      "sha256": "01ee2acaf24df17c903e0165fd41fe1a8bcb702f17769e8bd2e66b44d1b829c9",
+      "bytes": 3169,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -339,11 +336,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -375,6 +371,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "measured-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -382,8 +390,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -395,8 +404,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5463,
-          "sha256": "e700d2e400c13c0840029b4a38bdfe2663a80a1f0624809adbb44283cd0a9f1e",
+          "bytes": 5298,
+          "sha256": "9930f15b9f2622d64e6ce913006361a65c56d19e48a749cae5da4a4d3459ac30",
           "verification": "bytes-verified"
         }
       ],
@@ -410,6 +419,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

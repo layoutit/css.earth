@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-mapped-composition-conversion@1",
+  "target": "Europa",
+  "source": {
+    "path": "composition/reflectance_SPHERE.json.gz",
+    "sha256": "e8d8f85e838180e1363aef0d57e9205ff476f6573fa0f44e588366d3728fa2c3",
+    "bytes": 2072834,
+    "metadata": {
+      "reference": "Oliver King, Leigh Fletcher & Nicolas Ligier (2022) Compositional Mapping of Europa using MCMC Modelling of Near-IR VLT/SPHERE and Galileo/NIMS Observations",
+      "source_url": "https://github.com/ortk95/king-2022-compositional-mapping-europa",
+      "data_doi": "10.5281/zenodo.6034735",
+      "instrument": "VLT/SPHERE",
+      "observation_name": "SPHER.2014-12-09T07:57:34.998.fits",
+      "observation_date": "2014-12-09T07:57:34.9979",
+      "target": "Europa",
+      "nan_value": -99,
+      "wavelengths": [
+        0.95,
+        0.96842,
+        0.98684,
+        1.00526,
+        1.02368,
+        1.04211,
+        1.06053,
+        1.07895,
+        1.09737,
+        1.11579,
+        1.13421,
+        1.15263,
+        1.17105,
+        1.18947,
+        1.20789,
+        1.22632,
+        1.24474,
+        1.26316,
+        1.28158,
+        1.3,
+        1.31842,
+        1.33684,
+        1.35526,
+        1.37368,
+        1.39211,
+        1.41053,
+        1.42895,
+        1.44737,
+        1.46579,
+        1.48421,
+        1.50263,
+        1.52105,
+        1.53947,
+        1.55789,
+        1.57632,
+        1.59474,
+        1.61316,
+        1.63158,
+        1.65,
+        2.11,
+        2.251
+      ],
+      "file_creation_date": "2022-02-10T12:13:39.753808"
+    }
+  },
+  "grid": {
+    "width": 361,
+    "height": 180,
+    "coordinates": "degrees",
+    "centerLongitude": 0,
+    "referenceRadiusMeters": 1560800,
+    "origin": [
+      -180.5,
+      89.5
+    ],
+    "resolution": [
+      1,
+      -1
+    ],
+    "wrapLongitude": true,
+    "noData": -99
+  },
+  "processing": "Reverse latitude rows, reorder east-positive longitude nodes, repeat the periodic seam column, round values to float32. No spatial smoothing, gap fill or fitted abundance aggregation.",
+  "products": {
+    "ice-signature": {
+      "selection": {
+        "id": "ice-signature",
+        "kind": "ratio",
+        "numeratorMicrons": 1.3,
+        "denominatorMicrons": 1.50263
+      },
+      "validNativeNodes": 19644,
+      "missingNativeNodes": 45156,
+      "minimum": 1.7684239665354329,
+      "maximum": 3.1352896341463414,
+      "outputBytes": 260920,
+      "outputSha256": "6d0eab3e645a2d81262818e7227ee37a4a3bf82718e55613cf2ac24c641a4f71"
+    }
+  }
+}

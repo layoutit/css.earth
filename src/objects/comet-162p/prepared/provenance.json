@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "12f5375ae4810a1eb2989254b92c208e5264aec3f92f3fe55bf991c6b1af753a"
+    "sha256": "f874272d8f43dfa916c5c53d6599ffee5d6db8a03d8992c873deb9afa9397cf9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5a72b57374009d2fb879585f6d2390c38cb322577b2bacb854ed50332b18401b",
+      "sha256": "aefce7f25e640fb7def61e21e5c285298f09c4f764b00d06f3fac8d5139dc407",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-162p",
         "displayName": "Siding Spring",
         "panel": {
-          "introduction": "Siding Spring has a large, elongated nucleus and rotates once in about thirty-three hours. Its thickness is less certain than its length.",
           "facts": [
             {
               "id": "radius",
@@ -173,9 +172,6 @@
             {
               "id": "model",
               "label": "Shape approximation",
-              "detail": "Lightcurves",
-              "title": "Inferred shape",
-              "description": "A smooth approximation of the published proportions. Its thickness is uncertain. The grid marks missing surface imagery; it does not show terrain. Rotation phase is illustrative.",
               "thumbnail": "/scenes/comet-162p/comet-162p-model-thumbnail.webp",
               "surface": "comet-162p-model-surface@2x.webp",
               "poles": "comet-162p-model-poles@2x.webp",
@@ -195,7 +191,9 @@
                   "label": "Rotation period",
                   "value": "32.86 hours"
                 }
-              ]
+              ],
+              "notes": "A smooth approximation of the published proportions. Its thickness is uncertain. The grid marks missing surface imagery; it does not show terrain. Rotation phase is illustrative.",
+              "noData": true
             }
           ]
         },
@@ -288,7 +286,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -297,8 +295,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5a72b57374009d2fb879585f6d2390c38cb322577b2bacb854ed50332b18401b",
-      "bytes": 2983,
+      "sha256": "aefce7f25e640fb7def61e21e5c285298f09c4f764b00d06f3fac8d5139dc407",
+      "bytes": 2772,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -311,11 +309,10 @@
       "label": "Shape approximation",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "A smooth approximation of the published proportions. Its thickness is uncertain. The grid marks missing surface imagery; it does not show terrain. Rotation phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -342,6 +339,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "shape-parameters",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -349,8 +353,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -362,8 +367,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8495,
-          "sha256": "89a30ba7a528247f4101364813d3f3f31c594ab9f9d36dba6075537f0941e268",
+          "bytes": 8340,
+          "sha256": "0cb0fb68c09c1b66f0e89f8d837b7b6d0a3504133440c92d1fd7effe15454868",
           "verification": "bytes-verified"
         }
       ],

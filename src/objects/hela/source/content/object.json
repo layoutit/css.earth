@@ -4,7 +4,6 @@
   "id": "hela",
   "displayName": "Hela",
   "panel": {
-    "introduction": "Hela is a Mars-crossing asteroid. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex lightcurve reconstruction at approximate thermal scale: 13.39 km effective diameter (catalog ±0.45 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
-        "title": "Hela · DAMIT shape model 454",
         "thumbnail": "/scenes/hela/hela-shape-thumbnail.webp",
         "surface": "hela-shape-surface@2x.webp",
         "poles": "hela-shape-surface@2x.webp",
@@ -78,13 +75,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "notes": "Convex lightcurve reconstruction at approximate thermal scale: 13.39 km effective diameter (catalog ±0.45 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 6.695 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Hela · radius relative to the 6.695 km reference sphere",
         "thumbnail": "/scenes/hela/hela-elevation-thumbnail.webp",
         "surface": "hela-elevation-surface@2x.webp",
         "poles": "hela-elevation-surface@2x.webp",
@@ -106,7 +102,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/454",
           "image": "/scenes/hela/hela-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 6.695 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

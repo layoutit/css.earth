@@ -16,11 +16,15 @@
     "observations": [],
     "scientific": [],
     "observedColors": [],
-    "mosaics": [
+    "surfaceObservations": [
       {
         "id": "normal",
         "format": "controlled-shape-camera",
         "consumer": "cassini-frames",
+        "metadata": {
+          "label": "Monochrome",
+          "coverage": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions."
+        },
         "frames": [
           {
             "id": "n1496910582",
@@ -41,19 +45,25 @@
             "coverageInsetPixels": 1
           }
         ],
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 55
+        },
         "photometry": {
+          "model": "lunar-lambert",
           "weight": 1,
-          "maximumGain": 2,
-          "displayMaximum": 0.7,
-          "gamma": 2.2,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 55,
           "maximumEmissionDegrees": 55,
-          "minimumLevel": 1,
-          "maximumLevel": 1
+          "maximumGain": 2
         },
-        "metadata": {
-          "label": "Monochrome",
-          "coverage": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions."
+        "display": {
+          "displayRange": [
+            0,
+            0.492
+          ]
         }
       }
     ]

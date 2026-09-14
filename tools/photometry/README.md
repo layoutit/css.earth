@@ -54,12 +54,11 @@ and the limits:
   with its phase inside the fitted range.
 - Phase limits may extend past the fitted range. The prepared report then says
   the model is extrapolated.
-- A shape-camera mosaic keeps its display settings beside the model:
-  `displayMaximum`, `gamma`, `minimumLevel`, `maximumLevel` and the optional
-  `backgroundMaximum`.
+- A lens names the model as its `photometry`; its display range and level
+  matching stay in their own recipe blocks.
 
-Surface-observation lenses with Sun geometry (`tools/objects/surface-observations/`)
-and shape-camera mosaics (`shape-camera-mosaic.mts`) accept this block. Filter-colour composites refuse it, because a model fitted in
+Surface-observation lenses with Sun geometry (`tools/objects/surface-observations/`),
+controlled-camera lenses included, accept this block. Filter-colour lenses refuse it, because a model fitted in
 one filter would change band ratios. Observed-colour lenses keep their
 per-observation ISIS Lunar-Lambert weights, and ISIS2 orthographic images carry
 no Sun geometry to normalize with.

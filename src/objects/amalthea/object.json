@@ -24,12 +24,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "2fd15ae8786fc1886e0aed3b55aa5c186afc20728f253ba70724eb5a8e529bae"
+          "sha256": "5f6ebbc6ba7e99e7815b6687db3817dc1fd853497facbd1dfede9bbfb29b1af5"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0ce5495fa7995818a8c3b27514b397a15cdccf86b153d2e3afe8f4d3e7c98243"
+          "sha256": "10a4b76d7c39032187256c5bcfeae8bd779364db61a8a7f35ea905483cd32064"
         },
         {
           "id": "title",
@@ -39,12 +39,12 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "22fa62d0f01c74e99cb86e2f55fb0ae858053d9498cb9796aa45fcf381a125c4"
+          "sha256": "178b57839f0baa77ffd11ad7b07f29ca76f4d3a085101dced3f7a2c72c11a018"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "a68c219108489716553c0b2cf1729927e0f944e09709f979c96f5cdd8ec7ac87"
+          "sha256": "c0efd09f334665b1841de95c63250f1b684c2d7734c88f94f02f3dfafc146d3d"
         },
         {
           "id": "features",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4c79cd9e8dd12beafbec336898d1dee92daf06c49eb0bc2335bbc6c2ccb3024e"
+        "sha256": "70186c555e802af337892213c2c4cf9ef11afc26effba301b0b3298e24130370"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#b39a85",
       "distanceAu": 5.2,
-      "description": "Explore Amalthea with Galileo imagery and its source-backed irregular shape.",
+      "description": "The reddest object in the solar system, an inner moon of Jupiter.",
       "systemName": "Solar System",
       "order": 102,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "0ad0fe9328acaa0faa2eb67047133a1e4c01c3012f9eb58f5209f7901cf15f1f"
+    "sha256": "b3cd1f72c1b3b88f5a7983373902632368e109531f09c33c4de32e1b8f5e43ea"
   }
 }

@@ -15,7 +15,7 @@
       "navigation"
     ],
     "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
       "inputs": [
         "n1563643679_1",
         "n1606207298_1",
@@ -24,6 +24,10 @@
         "n1687121104_1",
         "n1687121284_1",
         "n1687121464_1",
+        "n1687119135_1",
+        "n1687121164_1",
+        "n1687121224_1",
+        "n1687121524_1",
         "thomas-2018-shape"
       ],
       "size": 512,
@@ -33,9 +37,9 @@
       "diffuse": 0.55,
       "lensId": "normal"
     },
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 124861,
-    "expectedSha256": "1368161a6dea3bcf3cec0bd9e4a5ef98ef2ce84b686aa3ab37b7dcd817d0db66"
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+    "expectedBytes": 121982,
+    "expectedSha256": "aadf516e124bab82d636393864e8557fb198e153b65309ed7239e21d4d77052e"
   },
   "operations": [
     {

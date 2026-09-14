@@ -1,3 +1,4 @@
+import { testDistance } from './navigation-test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createSceneRouter, type RouterOptions } from '../scene-router.mts';
@@ -12,7 +13,7 @@ import type { NavigationOptions } from '../navigation-history.mts';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.js';
 import type { ObjectWorldNavigation, ObjectWorldNavigationListener } from '../../src/renderers/css/runtime/world-navigation-types.js';
 import type { PreparedNavigationFocus } from '../../src/renderers/css/navigation/prepared-focus.js';
-import type { PreparedGalaxyRecord, SpatialCatalogSource } from '@cssearth/catalog';
+import type { PreparedGalaxyRecord, SpatialCitation, SpatialCatalogSource } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from '../prepared-context-navigation.mts';
 import type { ShellOptions } from '../planet-shell-client.mts';
 import type { PreparedVolumeLensState } from '../../src/renderers/css/volume/prepared-volume-lenses.ts';
@@ -33,8 +34,8 @@ type MockWorldContext = { mount(options: { stage: HTMLElement; signal: AbortSign
 type MockWorldMount = { destroy(): void; publish?(world: WorldCameraPose & {pose: {id?: string}}, viewport: {principalOffsetPixels: readonly [number, number]}): void; selectObject?(id: string, frame: PreparedWorldCameraFrame & {id?: string}): void; previewSelection?(id?: string | null): void; setHighContrastSky?(value: boolean): void; setAsteroidBodiesEnabled?(value: boolean): void; setAsteroidLabelsEnabled?(value: boolean): void; setAsteroidOrbitsEnabled?(value: boolean): void; setNavigationInFlight?(value: boolean): void; connectNavigation?: FocusController['connect']; suspendFocus?: FocusController['suspend']; restoreFocus?: FocusController['restore'] };
 type MockDataset = { ids: readonly string[]; defaultId: string; current(): string; select(id: string, options?: { signal?: AbortSignal }): Promise<boolean>; subscribe(listener: (id: string) => void): () => void };
 type MockMount = Mutable<Omit<ObjectSceneLifecycle, 'navigation' | 'datasets'>> & { id: string; options: MountOptions & {proof?: string}; value: SharedView; calls: string[]; restores: number; publishCamera?(camera: WorldCameraPose): void; manualDataset?(id: string): void; datasets?: MockDataset; navigation?: ObjectWorldNavigation };
-type MockShell = { input: Record<string, never>; options: ShellOptions; destroyed: number; selected: string; playback?: unknown; datasetShown?: boolean; datasetNotice?: string | null; preparedFocus?: PreparedGalaxyRecord | null; focusSources?: readonly SpatialCatalogSource[]; focusPresentation?: PreparedFocusPresentation | null; beginCardNavigation?: (object: ObjectEntry, world: unknown) => () => void; beginOverviewSelection?: (scope?: string) => (() => void) | void; setPlaybackState(value: unknown): void; showDataset(): void; setDatasetNotice(message: string | null): void; setMotionEnabled(value: boolean): void; setPreparedFocus(record: PreparedGalaxyRecord | null, sources: readonly SpatialCatalogSource[], presentation: PreparedFocusPresentation | null): void; setObject(content: { id: string; apply(): void }): void; destroy(): void };
-type MockDocument = EventTarget & {hidden: boolean; documentElement: {dataset: Record<string, string>}; body: {classList: {add(): void; remove(): void}}};
+type MockShell = { input: Record<string, never>; options: ShellOptions; destroyed: number; selected: string; playback?: unknown; datasetShown?: boolean; datasetNotice?: string | null; preparedFocus?: PreparedGalaxyRecord | null; focusSources?: readonly SpatialCitation[]; focusPresentation?: PreparedFocusPresentation | null; beginCardNavigation?: (object: ObjectEntry, world: unknown) => () => void; beginOverviewSelection?: (scope?: string) => (() => void) | void; setPlaybackState(value: unknown): void; showDataset(): void; setDatasetNotice(message: string | null): void; setMotionEnabled(value: boolean): void; setPreparedFocus(record: PreparedGalaxyRecord | null, sources: readonly SpatialCitation[], presentation: PreparedFocusPresentation | null): void; setObject(content: { id: string; apply(): void }): void; destroy(): void };
+type MockDocument = EventTarget & {hidden: boolean; querySelector(selector: string): null; documentElement: {dataset: Record<string, string>}; body: {classList: {add(): void; remove(): void}}};
 type MockMedia = EventTarget & {matches: boolean};
 type MockHistory = {readonly state: Record<string, unknown>; replaceState(state: Record<string, unknown>, unused: string, url: string | URL | null): void; pushState(state: Record<string, unknown>, unused: string, url: string | URL | null): void; back(): void; forward(): void};
 type MockWindow = EventTarget & {readonly location: URL; history: MockHistory; matchMedia(): MockMedia; performance: Pick<Performance, 'now'>; setTimeout(callback: () => void, delay?: number): ReturnType<typeof setTimeout> | number; clearTimeout(id: ReturnType<typeof setTimeout> | number | undefined): void; requestAnimationFrame(callback: FrameRequestCallback): number; cancelAnimationFrame(handle: number): void};
@@ -53,7 +54,7 @@ const saved = (distance: number): SharedView => ({ camera: { distanceKilometers:
   pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } },
   playback: { times: [1234], speed: 1, motionRequested: false } });
 function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget, overviewTarget, savedTarget, initialUrl = null, factoryGate = null, contentGate = null, persistentWorldContext = null, withSun = false, worldFrames = null, datasets = false, datasetGate = null }: HarnessOptions = {}): Harness {
-  const documentTarget: MockDocument = Object.assign(new EventTarget(), { hidden: false, documentElement: { dataset: {} }, body: { classList: { add() {}, remove() {} } } });
+  const documentTarget: MockDocument = Object.assign(new EventTarget(), { hidden: false, querySelector: (_selector: string) => null, documentElement: { dataset: {} }, body: { classList: { add() {}, remove() {} } } });
   const media: MockMedia = Object.assign(new EventTarget(), {matches: false});
   const windowTarget = new EventTarget() as MockWindow;
   documentTarget.hidden = false; documentTarget.documentElement = { dataset: {} };
@@ -73,7 +74,7 @@ function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget
     back() { if (index) { const entry = entries[--index]; location = new URL(entry.url); windowTarget.dispatchEvent(Object.assign(new Event('popstate'), { state: entry.state })); } },
     forward() { if (index + 1 < entries.length) { const entry = entries[++index]; location = new URL(entry.url); windowTarget.dispatchEvent(Object.assign(new Event('popstate'), { state: entry.state })); } },
   };
-  const object = (id: string, name = id): ObjectEntry => ({ id, name, systemName: name, classification: id === 'sun' ? 'star' : 'planet', color: '#000000', distanceAu: 0, route: `/${id}/`, description: name, loadScene: async () => factory(id), worldFrame: null });
+  const object = (id: string, name = id): ObjectEntry => ({ kind: 'scene', id, name, systemName: name, classification: id === 'sun' ? 'star' : 'planet', color: '#000000', distance: testDistance(0), route: `/${id}/`, description: name, loadScene: async () => factory(id), worldFrame: null });
   const objects = ['mercury', 'venus', 'earth'].map(id => object(id));
   if (withSun) objects.push(object('sun', 'Sun'));
   if (worldFrames) for (const object of objects) Object.assign(object, { worldFrame: worldFrames[object.id] });
@@ -195,6 +196,7 @@ const identityRotation = [1,0,0,0,1,0,0,0,1] as const;
 const cameraFrame = (originM: readonly [number, number, number], bodyRadiusM: number): PreparedWorldCameraFrame => ({
   originM, bodyRadiusM, referenceFrame: 'test', epochJdTt: 1, presentationToReference: identityRotation, metersPerUnit: 1,
 });
+const catalogueSources: SpatialCatalogSource[] = ['catalogue', 'paper'].map(id => ({ id, citation: id, url: `https://example.test/${id}`, bytes: 1, sha256: '0'.repeat(64) }));
 const galaxyRecord = (id: string): PreparedGalaxyRecord => ({id, name: id, aliases: [], status: 'confirmed', positionM: [1e20,0,0],
   skyPosition: {raDeg: 0, decDeg: 0, sourceRef: 'catalogue:coordinates'}, distance: {valuePc: 1, method: 'fixture', sourceRef: 'paper'},
   membership: {group: 'local-group', subgroup: 'field', basis: 'fixture', sourceRef: 'catalogue:membership'}});
@@ -205,7 +207,7 @@ function catalogueContext() {
     const layer = { imageLayerFrames: {},
       resolveGalaxy: (id: string) => ['catalogue:a', 'catalogue:b'].includes(id) ? galaxyRecord(id) : null,
       selectGalaxy: (id: string | null) => selected.push(id) };
-    const controller = createPreparedContextNavigation({ layer: layer as unknown as Parameters<typeof createPreparedContextNavigation>[0]['layer'], windowTarget, onError: error => errors.push(error),
+    const controller = createPreparedContextNavigation({ sources: catalogueSources, layer: layer as unknown as Parameters<typeof createPreparedContextNavigation>[0]['layer'], windowTarget, onError: error => errors.push(error),
       presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
     return { publish() {}, connectNavigation: controller.connect, suspendFocus: controller.suspend,
       restoreFocus: controller.restore, destroy: controller.destroy };
@@ -1025,7 +1027,7 @@ test('source focus links preserve the requested lens and create history without 
       volumeLensState: (id: string) => id === bank.objectId ? bank : null,
       selectVolumeLens(id: string, lensId: string) { assert.equal(id, bank.objectId); bank = { ...bank, id: lensId, selectedLens: lensId }; },
     };
-    const controller = createPreparedContextNavigation({ layer: layer as unknown as Parameters<typeof createPreparedContextNavigation>[0]['layer'], windowTarget,
+    const controller = createPreparedContextNavigation({ sources: catalogueSources, layer: layer as unknown as Parameters<typeof createPreparedContextNavigation>[0]['layer'], windowTarget,
       onError: error => errors.push(error), presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
     return { publish() {}, connectNavigation: controller.connect, suspendFocus: controller.suspend, restoreFocus: controller.restore, destroy: controller.destroy };
   } };
@@ -1060,18 +1062,22 @@ test('only canonical focus dataset URLs bypass ordinary same-body framing', () =
   }
 });
 
-test('manual datasets replace history and ordinary body navigation removes only the dataset fragment', async () => {
+test('manual dataset queries survive Back and preserve unrelated anchors', async () => {
   const h = harness({ datasets: true }); await h.router.settled;
   required(h.mounts[0].manualDataset)('mapped');
-  assert.equal(h.windowTarget.location.hash, '#vault&dataset=mapped');
+  assert.equal(h.windowTarget.location.hash, '#vault');
+  assert.equal(h.windowTarget.location.searchParams.get('dataset'), 'mapped');
   assert.equal(h.writes.includes('push'), false);
   await h.router.navigate('venus');
   assert.equal(h.windowTarget.location.hash, '#vault');
+  assert.equal(h.windowTarget.location.searchParams.has('dataset'), false);
   assert.equal(required(h.mounts[1].datasets).current(), 'normal');
   h.windowTarget.history.back(); await h.router.settled;
   assert.equal(required(required(h.mounts.at(-1)).datasets).current(), 'mapped');
-  assert.equal(h.windowTarget.location.hash, '#vault&dataset=mapped');
+  assert.equal(h.windowTarget.location.hash, '#vault');
+  assert.equal(h.windowTarget.location.searchParams.get('dataset'), 'mapped');
   required(required(h.mounts.at(-1)).manualDataset)('normal'); assert.equal(h.windowTarget.location.hash, '#vault');
+  assert.equal(h.windowTarget.location.searchParams.has('dataset'), false);
   h.router.destroy();
 });
 

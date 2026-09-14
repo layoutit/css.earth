@@ -1,0 +1,117 @@
+{
+  "date": "2026-09-14",
+  "baseCommit": "4b74bbfd599a6ab4f60c2139f3b399ca7349a4db",
+  "tested": "Updated Monochrome inserts in the uncommitted revision of PR #205; delivery.json binds its code, recipes and image bytes.",
+  "browser": "Codex in-app Chromium",
+  "server": "http://127.0.0.1:4294",
+  "dataset": "normal",
+  "retainedSurfaceElements": 450,
+  "singleMountedObject": "europa",
+  "datasets": 8,
+  "regionalUrl": "http://127.0.0.1:4294/europa/?v=QEa-ZB7QJMEHBz4-fkCpdcd3wKQ-23TTTK9BQsczQAAAAL-bPUbQ5ULyv7h9NXt4ES8_0Q_DSjQMmgABAAAAAAAAAAA#dataset=normal",
+  "southernUrl": "http://127.0.0.1:4294/europa/?v=QEa-frZLxqfvnj5n8Cj1wo9cwKQ-23TROlJBQsczQAAAAD-yiIxo9sM-P9DnIU6PTls_z7woth1gGAABAAAAAAAAAAA#dataset=normal",
+  "checks": [
+    "No separate Galileo control remains.",
+    "Actual regional, southern and south-polar surface inspection.",
+    "Shadows enabled and disabled on the same photographic surface.",
+    "Mobile information sheet expanded and dragged down; switched from Monochrome to False color and back with 450 retained surface elements.",
+    "Document scroll width is 390 at the 390-pixel viewport.",
+    "No errors or warnings were reported by the browser log during the completed interactions."
+  ],
+  "captures": [
+    {
+      "image": "regional-before.png",
+      "view": "Before: retained global mosaic at 10 N, 178 E",
+      "shadows": false,
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "dpr": 1
+      },
+      "sha256": "e7e951d01e44b5509a757becdc3d8989ec9d1e952800b94c9da9239465fb4535"
+    },
+    {
+      "image": "regional.png",
+      "view": "After: same regional camera with controlled inserts",
+      "shadows": false,
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "dpr": 1
+      },
+      "sha256": "bdf9e816bf9312967ac65b2a379aacf407f326f4d8b2e3a7e82821cbc6140f9c"
+    },
+    {
+      "image": "southern-before.png",
+      "view": "Before: retained global mosaic at approximately 33.2 S, 178 E",
+      "shadows": false,
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "dpr": 1
+      },
+      "sha256": "16998b591ec6747e02196ef8b8d0d06e271703b5801e62125e1915b04425fbba"
+    },
+    {
+      "image": "southern-regions.png",
+      "view": "After: same southern camera with controlled inserts",
+      "shadows": false,
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "dpr": 1
+      },
+      "sha256": "4d7d8368ad11f1c81a40e60cefdb735031c767f2e9f081f9760d0410e9f4c72a"
+    },
+    {
+      "image": "south-polar.png",
+      "view": "Updated Monochrome at approximately 80.04 S, 177.6 E",
+      "shadows": false,
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "dpr": 1
+      },
+      "sha256": "9143671d18e874ab82d3fdd4fbfcca73d7d83c735b0b9cd4a2365c8ff072b925"
+    },
+    {
+      "image": "shadows.png",
+      "view": "Updated regional Monochrome with Shadows enabled",
+      "shadows": true,
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "dpr": 1
+      },
+      "sha256": "1d690bf3964ddd963c1c21de09ab8fa0b9eee72e1389c71897c281093c94a7cd"
+    },
+    {
+      "image": "mobile-controls.png",
+      "view": "Eight original dataset controls; switched to False color and back to Monochrome",
+      "shadows": true,
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "sha256": "b84ea83cb630fd6a9ffc5b3e42ac37aa1627ff921eaae5b8e0b1e0be6a9a9184"
+    },
+    {
+      "image": "mobile-surface.png",
+      "view": "Updated Monochrome with the information sheet lowered",
+      "shadows": true,
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "sha256": "638d1be31244db888b0258b09ed0c634c5c862d38d14496e8799872144f89bf0"
+    }
+  ],
+  "limits": [
+    "Photographic inserts change pixels; the before/after images document appearance and remaining joins, not pixel identity or photometric accuracy.",
+    "Published registration is inherited; the old global mosaic and newer control network have different errors.",
+    "The fixed polar sprites remain coarse at extreme close zoom.",
+    "No physical-phone memory or all-browser performance qualification."
+  ]
+}

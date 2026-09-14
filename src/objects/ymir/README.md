@@ -22,7 +22,7 @@
 
 - The pole solution does not establish a current landmark phase; the initial meridian is arbitrary.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 ## Methods and source notes
 
@@ -39,15 +39,9 @@ The authored polygon has vertices `(0,0)`, `(25,0)` and `(16.02, sqrt(24²−16.
 
 The geometry preserves those absolute dimensions. Its analytic volume is approximately **2,382.75 km³**, equivalent to a radius of **8.2857 km**. That is not a measured volume constraint. The shape is not silently rescaled to 9.6 km while retaining the quoted edge lengths. Exact recipe values are in `source/measurements.json`.
 
-## Dataset candidates
+## Investigation record
 
-- **Cassini ISS imagery and lightcurves:** [PDS archive](https://pds-rings.seti.org/cassini/iss/) and the [author's observation record](https://tilmanndenk.de/outersaturnianmoons/ymir/) provide disk-integrated measurements, not qualified mapped texels. The released [multi-observation lightcurve table](https://tilmanndenk.de/wp-content/uploads/619_Ymi_4_LC_Paper1.txt) and [2008 lightcurve](https://tilmanndenk.de/wp-content/uploads/619_ymi_4_lc064.txt) are useful future chart candidates; no lightcurve chart is implemented here.
-
-- The native mesh remains an unresolved replacement candidate. The authored geometry is not presented as a download of that mesh.
-
-- **Color and spectroscopy:** published disk-integrated color observations do not establish a spatial color map. The author notes possible UVIS/VIMS observations but no qualified extracted spectrum; instrument observations alone do not justify a spectral lens. No spectrum is implemented.
-
-- **Elevation/geology:** no registered DEM or mapped geology product was qualified. Neither the lightcurve facets nor a speculative contact-binary interpretation supply terrain, craters or a neck to render.
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json), including what would reopen each decision.
 
 ## Orientation and presentation
 

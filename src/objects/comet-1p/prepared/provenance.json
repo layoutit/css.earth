@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "700d4877cec74352421b5fc832850185610171eed3f751a6b9cc031c4150fa74"
+    "sha256": "46b0b049586fd4acbce238e92354707c214af7c96d3c419eb8318c69fea73edb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -154,14 +154,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bf88b81e1a75015c01dd98ad266f47bd029df8579738aa239cd8e4894b2812fd",
+      "sha256": "56f7c9b11d48fd68ea935276ad35f6369e3b36edd900596e3af3e9d2c1b3c24a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-1p",
         "displayName": "Halley",
         "panel": {
-          "introduction": "Giotto and Vega 2 photographed Halley in 1986. Their images cover about 28% of this nucleus model; the grid shows where the surface is not mapped.",
           "facts": [
             {
               "id": "giotto-approach",
@@ -192,9 +191,6 @@
             {
               "id": "model",
               "label": "Historical model",
-              "description": "A historical shape reconstructed from Giotto and Vega images. The grid follows the model; depressions and fine details are uncertain.",
-              "title": "Stooke nucleus shape reconstruction",
-              "detail": "Highly uncertain",
               "thumbnail": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
               "surface": "comet-1p-model-surface@2x.webp",
               "poles": "comet-1p-model-poles@2x.webp",
@@ -202,14 +198,13 @@
                 "id": "stooke-halley",
                 "path": "../manifest.json",
                 "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
-              }
+              },
+              "notes": "A historical shape reconstructed from Giotto and Vega images. The grid follows the model; depressions and fine details are uncertain.",
+              "noData": true
             },
             {
               "id": "giotto",
               "label": "Giotto + Vega",
-              "description": "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid.",
-              "title": "Halley spacecraft photographic mosaic",
-              "detail": "Partial coverage",
               "thumbnail": "/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
               "surface": "comet-1p-giotto-surface@2x.webp",
               "poles": "comet-1p-giotto-poles@2x.webp",
@@ -217,7 +212,9 @@
                 "id": "encounter-projection",
                 "path": "../manifest.json",
                 "url": "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
-              }
+              },
+              "notes": "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid.",
+              "noData": true
             }
           ]
         },
@@ -369,7 +366,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -378,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bf88b81e1a75015c01dd98ad266f47bd029df8579738aa239cd8e4894b2812fd",
-      "bytes": 4293,
+      "sha256": "56f7c9b11d48fd68ea935276ad35f6369e3b36edd900596e3af3e9d2c1b3c24a",
+      "bytes": 3969,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -392,11 +389,10 @@
       "label": "Giotto + Vega",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid."
-      ],
+      "limitations": [],
       "lensIds": [
         "giotto"
       ],
@@ -428,6 +424,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "encounter-projection",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "stooke-halley",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -435,11 +443,10 @@
       "label": "Historical model",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "A historical shape reconstructed from Giotto and Vega images. The grid follows the model; depressions and fine details are uncertain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -466,6 +473,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "stooke-halley",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -473,8 +487,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -486,8 +501,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4740,
-          "sha256": "89eddfd95adcf2914c7a15f8fbd33f47453e077eb8eb5b215a4f709563e4a5b5",
+          "bytes": 4576,
+          "sha256": "bba84940a56cf2ce67eeb1f629f1606a3b8978f1ced330ddf6ff22ed5a317b06",
           "verification": "bytes-verified"
         }
       ],
@@ -501,6 +516,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "giotto"

@@ -4,7 +4,6 @@
   "id": "comet-67p",
   "displayName": "67P",
   "panel": {
-    "introduction": "67P/Churyumov–Gerasimenko is the two-lobed comet explored by Rosetta. Rotate its measured nucleus to inspect the narrow neck, steep cliffs and recessed terrain.",
     "facts": [
       {
         "id": "diameter",
@@ -51,9 +50,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Nucleus shape measured by Rosetta and simplified for display. The gray surface is a model material.",
-        "title": "Nucleus shape reconstruction",
-        "detail": "ESA/RMOC",
         "thumbnail": "/scenes/comet-67p/comet-67p-model-thumbnail.webp",
         "surface": "comet-67p-model-surface@2x.webp",
         "poles": "comet-67p-model-poles@2x.webp",
@@ -73,14 +69,12 @@
             "label": "Observed",
             "value": "Aug 2014 – Aug 2015"
           }
-        ]
+        ],
+        "notes": "Nucleus shape measured by Rosetta and simplified for display. The gray surface is a model material."
       },
       {
         "id": "osiris",
         "label": "OSIRIS mosaic",
-        "description": "Eight Rosetta photographs show cliffs, pits and smoother plains across both hemispheres. Grid marks gaps in the photography; original shadows and some seams remain.",
-        "title": "OSIRIS image mosaic",
-        "detail": "OSIRIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-osiris-thumbnail.webp",
         "surface": "comet-67p-osiris-surface@2x.webp",
         "poles": "comet-67p-osiris-poles@2x.webp",
@@ -106,14 +100,12 @@
             "value": "Orange · 649 nm"
           }
         ],
-        "summary": "Eight Rosetta photographs show cliffs, pits and smoother plains across both hemispheres. Grid marks gaps in the photography; original shadows and some seams remain."
+        "notes": "Eight Rosetta photographs show cliffs, pits and smoother plains across both hemispheres. Grid marks gaps in the photography; original shadows and some seams remain.",
+        "noData": true
       },
       {
         "id": "albedo",
         "label": "Albedo",
-        "description": "How strongly surface grains scatter green light. Higher values mean more scattering. Turn Shadows off to read the color scale.",
-        "title": "VIRTIS single-scattering albedo",
-        "detail": "VIRTIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-albedo-thumbnail.webp",
         "surface": "comet-67p-albedo-surface@2x.webp",
         "poles": "comet-67p-albedo-poles@2x.webp",
@@ -147,14 +139,12 @@
             "label": "Wavelength",
             "value": "550 nm"
           }
-        ]
+        ],
+        "notes": "How strongly surface grains scatter green light. Higher values mean more scattering. Turn Shadows off to read the color scale."
       },
       {
         "id": "slope",
         "label": "Spectral slope",
-        "description": "How much reflectance rises from green to red light. Higher values mean a redder spectrum. Turn Shadows off to read the color scale.",
-        "title": "VIRTIS visible spectral slope",
-        "detail": "VIRTIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-slope-thumbnail.webp",
         "surface": "comet-67p-slope-surface@2x.webp",
         "poles": "comet-67p-slope-poles@2x.webp",
@@ -188,14 +178,12 @@
             "label": "Wavelengths",
             "value": "500–800 nm"
           }
-        ]
+        ],
+        "notes": "How much reflectance rises from green to red light. Higher values mean a redder spectrum. Turn Shadows off to read the color scale."
       },
       {
         "id": "absorption",
         "label": "3.2 µm absorption",
-        "description": "Strength of the broad 3.2 µm absorption band. This measurement alone cannot tell us how much organic material is present. Turn Shadows off to read the scale.",
-        "title": "VIRTIS 3.2 µm absorption depth",
-        "detail": "VIRTIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-absorption-thumbnail.webp",
         "surface": "comet-67p-absorption-surface@2x.webp",
         "poles": "comet-67p-absorption-poles@2x.webp",
@@ -229,14 +217,12 @@
             "label": "Quantity",
             "value": "Absorption depth"
           }
-        ]
+        ],
+        "notes": "Strength of the broad 3.2 µm absorption band. This measurement alone cannot tell us how much organic material is present. Turn Shadows off to read the scale."
       },
       {
         "id": "ice",
         "label": "Modeled ice",
-        "description": "Estimated ice seen in reflected light, not the ice stored inside the comet. A value of 0% means the model fitted no ice. Turn Shadows off to read the scale.",
-        "title": "VIRTIS surface ice fraction",
-        "detail": "VIRTIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-ice-thumbnail.webp",
         "surface": "comet-67p-ice-surface@2x.webp",
         "poles": "comet-67p-ice-poles@2x.webp",
@@ -275,14 +261,12 @@
             "label": "Model assumes",
             "value": "Ice mixed with dark grains"
           }
-        ]
+        ],
+        "notes": "Estimated ice seen in reflected light, not the ice stored inside the comet. A value of 0% means the model fitted no ice. Turn Shadows off to read the scale."
       },
       {
         "id": "regions",
         "label": "Regions",
-        "title": "Named regions of 67P",
-        "description": "Color separates the 26 named regions used to describe the comet’s terrain. These are geographical divisions, not different minerals. Grid marks places where the source maps could not be matched reliably to this shape.",
-        "detail": "OSIRIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-regions-thumbnail.webp",
         "surface": "comet-67p-regions-surface@2x.webp",
         "poles": "comet-67p-regions-poles@2x.webp",
@@ -412,14 +396,13 @@
               "color": "#a7a987"
             }
           ]
-        }
+        },
+        "notes": "Color separates the 26 named regions used to describe the comet’s terrain. These are geographical divisions, not different minerals. Grid marks places where the source maps could not be matched reliably to this shape.",
+        "noData": true
       },
       {
         "id": "geology",
         "label": "Geology",
-        "title": "Geological features mapped from OSIRIS",
-        "description": "Fractures, cliffs, terraces and small features mapped from Rosetta images. Lines and dots are map symbols, not their true widths or sizes. Grid marks areas outside the study or without a reliable shape match.",
-        "detail": "OSIRIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-geology-thumbnail.webp",
         "surface": "comet-67p-geology-surface@2x.webp",
         "poles": "comet-67p-geology-poles@2x.webp",
@@ -497,7 +480,9 @@
               "color": "#8cb457"
             }
           ]
-        }
+        },
+        "notes": "Fractures, cliffs, terraces and small features mapped from Rosetta images. Lines and dots are map symbols, not their true widths or sizes. Grid marks areas outside the study or without a reliable shape match.",
+        "noData": true
       }
     ]
   },

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a74db8371bd9e3c0960ff808685de776ecbe827a709fb91dd7b98059c0acdea1"
+          "sha256": "0909aeb0a4e266c4ef875b00840ca4227e5983b0ae3877f1eda8f0262f339263"
         },
         {
           "id": "title",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3d99df2b5a2351e34a6efa28488e6ca0b2450e60716bcd576b81cf80d793e681"
+        "sha256": "f6f29f4227761baa245e3b94f38eedb52dff386ca2982d529407ba372693ca4c"
       }
     },
     "worldFrame": {
@@ -118,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 62.962581525461886,
-      "description": "C/1983 H1: IRAS–Araki–Alcock was discovered in 1983 by the IRAS satellite and two independent observers. Its name records all three discoveries. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Comet named after a satellite and two observers who each found it.",
       "systemName": "Solar System",
       "order": 61,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "aaf1e03d67fa027b3e42dd8e657c91808ce00107a48fe878bc7a4d70404f19e3"
+    "sha256": "e8130ec41532309ef4643fafc130891f3a39de05824288cbc52353ed06515358"
   }
 }

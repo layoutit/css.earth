@@ -32,6 +32,11 @@
               "id": "shape",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -52,7 +57,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "e09b9bd0cb4d23ffeafa89be1f626d8cb4ab8855a93454b4b445f72bf1768b6a"
+          "sha256": "cb7b9827001555045e54ea2f472b339d9bffae888371b9455384654ee9fc434e"
         },
         {
           "id": "rotation",
@@ -62,7 +67,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3b70231bb876c41bbe5b6eec127c031a8a94055b30d31b99810a658d1a50fb79"
+          "sha256": "d932591c265563b28b226014e22d784ac9ea919a7991a828b39d4635f4cdd011"
         },
         {
           "id": "title",
@@ -123,7 +128,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "73e4f59850ed02670288b1a70050212ea01a844654c1bf779969f34d098c0426"
+        "sha256": "98019fde0a60a5b140ef34b5e0a0a5615c06c87e07c8b05779a90a13d2a9e6b3"
       }
     },
     "catalog": {
@@ -131,7 +136,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3839407716914627,
-      "description": "Explore Donaldjohanson in 3D with its published Lucy shape model.",
+      "description": "Contact-binary asteroid that Lucy flew past.",
       "systemName": "Solar System",
       "order": 203,
       "context": {
@@ -144,6 +149,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ff82a017a93972a1f97782761acc3dbf6b2c2477ed505dac4016a109f1fba5a4"
+    "sha256": "ade4eee383bf4c4c69794784969a21544aa025a56db0e8683f96c00ef945a64f"
   }
 }

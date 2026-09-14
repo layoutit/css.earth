@@ -29,7 +29,7 @@ src/objects/<id>/
 public/scenes/<id>/                    prepared assets
 site/pages/[id].astro                  one shared route for all body ids
 tests/objects/unit/<id>/               focused body tests
-tests/objects/browser/<id>/browser-profile.mjs
+tests/objects/browser/<id>/browser-profile.mts
 ```
 
 The [documentation contract](../../../../docs/provenance/CONTRACT.md) explains
@@ -124,7 +124,8 @@ instead of editing a shared list or atlas position.
 - **Published ellipsoids and unresolved outlines:**
   `tools/objects/source-authoring/distant-worlds/README.md` documents the existing
   analytical radius-table extraction. Its helpers accept a selected input file;
-  `outer-worlds/inputs.json` supplies the later occultation and thermal examples.
+  `tools/objects/source-authoring/outer-worlds/inputs.json` supplies the later
+  occultation and thermal examples.
   Keep a projected ellipse distinct from a 3D shape, disclose any assumed depth,
   and use the normal unmapped grid. A short title must match the content display
   name; a longer designation can remain in the shared registry for search.
@@ -152,11 +153,25 @@ browser comparisons relevant to the actual feature.
 
 ## Choose a photograph route
 
-Start from what the archive ships beside the image. Each row gives the recipe
-format, a body that uses it, what the body owner writes, and the oracle that
-checks the reader. When nothing fits, open the
+Start with the [photographic investigation route](photographic-investigation.md):
+an existing map need not pass through camera reconstruction. For supported
+cylindrical photographic maps, `tools/objects/terrestrial-layers/native-photograph-source.mts`
+reads the pinned raster with its declared grid and validity policy;
+`native-photograph.mts` samples it onto existing triangle-atlas rectangles.
+`radial-terrain.mts` selects this path through an observation's
+`nativePhotographicSampling`. Inspect its source-schema and configuration guards:
+it does not accept arbitrary projections, recover a paper figure's registration
+or establish compatibility with another shape. Source and atlas checks live in
+`native-photograph-source.test.mts` and `native-photograph.test.mts` beside those
+owners. These paths were inspected at main `943179c7c748c4e9727b9d94e15b214c2d20a68c`.
+
+For individual observations, each row below gives the recipe format, an example,
+what the body owner writes, and the reader oracle. For a demonstrated missing
+decoder, route or kernel bank, implement shared support when authorized, even if
+this is its first body. Keep product data in the body and executable code in the
+shared owner. When that work is outside scope, record the missing stage; the
 [archive-product issue template](../../../../.github/ISSUE_TEMPLATE/archive-product.md)
-instead of writing a reader for one body.
+supports a requested handoff, not an automatic stop for authorized implementation.
 
 | The archive ships | Recipe format | Example | The body owner writes | Reader oracle |
 | --- | --- | --- | --- | --- |
@@ -169,17 +184,16 @@ instead of writing a reader for one body.
 | Arrokoth CA05 registered four-band MVIC cube | `nh-mvic-camera` | Arrokoth `mvic` | Image-space registration to its contemporaneous LORRI camera; its native PDS label confirms the bands and data-number quantity, and the recipe declares one `displayRange` | `new-horizons-geo.test.mts` (Astropy pixels) |
 | Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/spice/oracle.test.mts` |
 | Encounter FITS frames with a control network | `encounter-fits` | Wild 2 `navcam`, Tempel 1, Hartley 2 | Frame, label and control pins, level matching | `encounter-fits.oracle.test.mts` |
-| Catalog cameras for a shape model | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame catalog pins and display settings | None yet |
-| Three filters with controlled cameras | `controlled-shape-color` | Proteus and Hyperion `filter-color` | Equal-length filter frame lists; matching indices form complete observing triplets. Native filters/units and the shared color-display policy are required. No single-filter photometric model | None yet |
+| Published camera controls for a shape model, or the Galileo SSI image catalog | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame pins with the control network's camera fields or a `cameraCatalog`, photometry, transfer limits, level matching | None yet; preparation refuses a frame whose camera puts more than a quarter of its lit shape on sky |
+| Three filters with controlled cameras | `controlled-shape-color` | Proteus and Hyperion `filter-color` | `bands` naming the three filters, and `frames` as band sets naming each set's red, green and blue photographs. Native filters/units and the shared color-display policy are required. No single-filter photometric model | None yet |
 | ISIS2 orthographic image cubes | `isis2-orthographic` | Borrelly `micas` | Cube pins; no Sun geometry, so no photometry | `isis2-qube.oracle.test.mts` |
 
-For `controlled-shape-color`, matching indices in the three `frames` lists
-identify one observing triplet. Preparation intersects that triplet's valid
-coverage before adding it to the mosaic. It processes coarser pointings first
-and uses one shared overlap weight for all three channels. A missing filter
-withholds that triplet; an earlier complete triplet can still cover the point.
-Existing single-triplet recipes retain their output. The runtime consumes the
-same prepared color atlas.
+For `controlled-shape-color`, each band set is one observing triplet. A point is
+colored only where all three of its bands qualify, and band sets compete for a
+point like the frames of a monochrome mosaic. Level matching scales the three
+bands of a set by one gain, so their measured ratios stay. Cameras named in
+`registration` are measured again against their reference images before any
+pixel is sampled. The runtime consumes the same prepared color atlas.
 
 When a photographed patch ends at a straight boundary, trace that edge to the
 detector bounds and validity masks, then inspect adjacent pointings in the
@@ -263,11 +277,13 @@ Tethys's Cassini ISS lens is the first lens on this route. It reads its kernels
 from the shared Cassini bank, decodes a VICAR image, and evaluates the camera at
 mid-exposure from the clock counts in the PDS3 label (`image.format:
 "vicar-pds3"`, `clock.start` and `clock.stop`). `IAU_<body>` frames resolve
-without a frame kernel, as they do in SPICE. A recipe may state the separation of
-bilinear image contributors in pixel footprints, which grow with range and
-emission, so frames with kilometre-scale pixels transfer without a hand-tuned
-distance. Tethys does; fixed distances are capped at four footprints of the
-coarsest frame, as the [surface-observation README](../../../../tools/objects/surface-observations/README.md#transfer-limits) explains.
+without a frame kernel, as they do in SPICE. A recipe may constrain separation
+among bilinear image contributors. This is distinct from correspondence between
+the displayed mesh and the source mesh; applying a contributor-distance limit to
+that correspondence can create false coverage holes. Use the current
+[transfer policy](../../../../tools/objects/surface-observations/README.md#route-policy)
+and [contributor limits](../../../../tools/objects/surface-observations/README.md#transfer-limits)
+rather than copying a distance from another body.
 
 Archived and kernel pointing carries the archive's error: a fraction of a pixel
 for a solution tuned to the images, tens of pixels for a reconstructed C-kernel.
@@ -289,6 +305,16 @@ metadata. Range, focal length and Sun direction are never changed.
 DRACO backplanes: the kernel camera stays within 0.6 px of the archive, and
 cameras pushed 30 and 150 px away return to 0.24 and 0.55 px.
 
+For an initial comparison of published planetocentric coordinates with native
+image picks, `tools/objects/surface-features/check-projected-controls.mts` replays
+a pinned `cssearth-projected-controls@1` recipe. It uses the existing FITS reader,
+OBJ mesh and archived-camera contract, reports visibility and pixel discrepancies,
+and renders the native picks beside projected positions. It does not fit a camera,
+set acceptance limits or qualify a surface. Keep ambiguous identifications explicit;
+a sketch-assisted identification region is not a measurement uncertainty. Pallas's
+`evidence/photographic-controls.json` is a diagnostic example with unresolved
+feature and coordinate correspondence, not a photographic preparation template.
+
 The PDS3 routes (OSIRIS GEO, AMICA) stay instrument decoders behind the same
 pipeline, decided 2026-09-12 after a code review: their archives do not declare
 plane units or semantics the way a PDS4 label does, and about half of each
@@ -303,18 +329,33 @@ The pipeline derives nothing from an oracle; an oracle recomputes what the
 pipeline computed so a test can compare. `tools/oracles/` holds them with a
 pinned Python environment (`pnpm oracles:setup`, `tools/oracles/requirements.txt`),
 and each writes a fixture under `tests/oracles/` that names its versions and the
-sha256 of every input. Every archive reader in the surface-observation pipeline has one:
+sha256 of every input. Existing decoder references include
 SpiceyPy for `tools/spice/` (a microsecond in time, a millimetre in position, a
 nanoradian in rotation); pds4_tools for the PDS4 geometry cube; pvl and numpy for
 the OSIRIS geometry, OSIRIS reflectance, AMICA and ISIS2 readers; astropy for
 the L'LORRI reader and its TAN-SIP distortion and for the three encounter FITS
 layouts. Comparing tests sit beside each reader, and `tools/oracle-fixtures.test.mts`
-refuses a fixture from an unpinned environment or unpinned inputs. A new reader
-or geometry route brings its oracle; regenerate a fixture only when its tool or
-inputs change, and say so in the PR. ALE and usgscsm (pixel models and
+refuses a fixture from an unpinned environment or unpinned inputs. A new scientific
+source-format parser, decoder or interpretation algorithm needs independent reference evidence.
+Use the existing pinned oracle framework for new decoding behavior; do not use
+the implementation's own output as its expected result.
+Reusing validated readers or composing an existing route needs focused consumer
+checks; it does not automatically require another oracle environment or regenerated
+fixtures. Camera controls still need their geometric checks. Regenerate a fixture
+only when its tool or inputs change, and say so in the PR. ALE and usgscsm (pixel models and
 distortion) need conda and arrive with the first Cassini ISS lens. ISIS's
 photometric models are checked against the truth files of their unit tests,
 which need no ISIS install. See `tools/oracles/README.md`.
+
+For SUM/INFO image-to-shape investigations, use the optional
+[native SBMT preparation oracle](../../../../tools/oracles/sbmt/README.md).
+Add a source-pinned case to its shared inventory rather than writing a body-only
+reference script. Its staged comparison separates pointing, visible intercepts,
+FITS samples and UV projection. SBMT's angular UV approximation is not exact
+pinhole projection, and its clamped off-image UVs are not photographic coverage.
+Keep discrepancies explicit; a green regression test can mean a known mismatch
+was correctly detected. A/A repetition establishes reproducibility, not source
+registration. Oracle output must never become a camera recipe or surface input.
 
 ## Commands and test routing
 

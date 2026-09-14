@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "f1aafad7cd07f04868554e260f67a7598516f754b0014e5fea86b4b1b6dda77a"
+          "sha256": "4bd97cd357a8cae524531e45844ac58111005b85f9d6853a61f523bcc5041226"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f39d9089118c25e4cad79d483ba182e36320192c53b0a7c02079ba7f168bc8b7"
+        "sha256": "839d1b614858b7a8fbc434db8bfda25439687ab420098934351dd16fe5b899d3"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1544316494785694,
-      "description": "Explore Dido in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in October 1879.",
       "systemName": "Solar System",
       "order": 314,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "fa20175db0da5ee8cc1f8cb06dee26e0716cf93f47669ce0540b806c2ea58ee6"
+    "sha256": "d1da1bb2d1864175575372a962c63a9a50942d157e033f983540327ba2290a8d"
   }
 }

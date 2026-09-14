@@ -16,7 +16,8 @@ export function searchObjects<T extends ObjectSearchLabels>(items: readonly T[],
   const normalized = normalizeDestinationQuery(query);
   const showAll = query === 'all objects';
   const classification = items.find(item => query === item.classificationName || query === `${item.classificationName}s`
-    || item.classificationName === 'nebula' && query === 'nebulae' || query === item.classification)?.classification;
+    || item.classificationName === 'nebula' && query === 'nebulae'
+    || item.classificationName === 'galaxy' && query === 'galaxies' || query === item.classification)?.classification;
   const systemName = items.find(item => query === item.systemName)?.systemName;
   const matches = items.filter(item => classification && classification !== 'planet' ? item.classification === classification
     : showAll || classification || (systemName ? item.systemName === systemName

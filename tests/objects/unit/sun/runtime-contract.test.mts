@@ -13,12 +13,13 @@ import scene from "../../../../src/objects/sun/prepared/scene.json" with { type:
 import lenses from "../../../../src/objects/sun/prepared/lenses.json" with { type: "json" };
 import controls from "../../../../src/objects/sun/prepared/controls.json" with { type: "json" };
 import panel from "../../../../src/objects/sun/prepared/panel.json" with { type: "json" };
+import text from "../../../../src/objects/sun/prepared/text.json" with { type: "json" };
 import raster from "../../../../src/objects/sun/source/preparation/raster.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { validateRuntimeAssetManifest } from "../../../../src/platform/runtime-asset-closure.mts";
 import { createSourceManifest } from "../../../../src/platform/source-manifest.mts";
 import { scientificFalseColor, prepareFitsMap, readFitsPrimary } from "../../../../tools/objects/observation/fits.mts";
-import { OBJECTS } from "../../../../site/objects.mts";
+import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 import { projectRoot } from "../../fixtures.mts";
 import { resolve } from "node:path";
@@ -39,7 +40,7 @@ test("binds the exact Sun source and runtime closures", async () => {
 });
 
 test("Sun's actual import closure has only shared runtime owners", async () => {
-  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "sun") });
+  const audit = await auditObjectRuntimeOwnership({ objects: SCENE_OBJECTS.filter(object => object.id === "sun") });
   assert.equal(audit.complete, true);
   assert.ok(audit.sharedClosure.includes("src/renderers/css/universe/world-context-runtime.ts"));
   for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/prepared-playback"]) {
@@ -98,7 +99,7 @@ test("publishes the NASA facts with their citations and the four lens legends", 
   const byId = new Map(controls.lenses.controls.map(control => [control.id, control]));
   for (const control of lenses.controls) {
     const shell = required(byId.get(control.id));
-    assert.equal(typeof shell.description, "string");
+    assert.equal(typeof Object.getOwnPropertyDescriptor(text.datasets, control.id)?.value?.summary, "string");
     if (control.falseColor) assert.ok(shell.legend, `${control.id} declares a false-colour scale without a legend`);
     if (shell.legend?.kind === "scale") assert.ok((shell.legend.colors?.length ?? 0) === 64 && (shell.legend.labels?.length ?? 0) >= 2);
   }

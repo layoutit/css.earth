@@ -1,0 +1,475 @@
+{
+  "schema": "cssearth-dactyl-limb-extent@1",
+  "qualifiedSurface": false,
+  "inputSha256": "36babc47a849fde247a70d43655cb4e4bbd0a87733b47a1c46f155134ce38b24",
+  "generatorSha256": "1fc6f000dcad7600d921d16bdce720af1ae3d6572667829c316df7e2740dc118",
+  "dependencySha256": [
+    {
+      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mts",
+      "sha256": "d0942ffb78df494a2a9ae6a76833fdf43ceffbae0cbef6a88fa7e806d23cf262"
+    },
+    {
+      "path": "tools/objects/observation/fits.mts",
+      "sha256": "7e500791e91d41e7ef93c9ce13f0239b2b85a1ad3944fec8935f704d79171a66"
+    },
+    {
+      "path": "tools/spice/ck.mts",
+      "sha256": "8ffd9a8af1045820cd90cf0529932bfa018c0838aa60def22b48abb1dd5e67f8"
+    },
+    {
+      "path": "tools/spice/daf.mts",
+      "sha256": "a58acc8044398b154326d6ce886133e7b719229efecb6e94944c7c94b62f87e6"
+    },
+    {
+      "path": "tools/spice/sclk.mts",
+      "sha256": "509b222632dc9f42020913297947128ce0e5848c3cf04bb3237be604459c25fd"
+    },
+    {
+      "path": "tools/spice/lsk.mts",
+      "sha256": "08b4990bfaa2eb8f387bccc36464240ecf85b740bbe76e887a32f5e5f0c18623"
+    },
+    {
+      "path": "tools/spice/text-kernel.mts",
+      "sha256": "4b81fb9ee416c4527476a903da3c6e40af4f85aa217b8d726b00d00511ffe0a9"
+    }
+  ],
+  "thresholdDN": 10,
+  "capScans": [
+    {
+      "name": "lower",
+      "firstSample": 182,
+      "lastSample": 204,
+      "sampleStep": 2,
+      "startLine": 248,
+      "endLine": 190,
+      "direction": -1
+    },
+    {
+      "name": "upper",
+      "firstSample": 188,
+      "lastSample": 191,
+      "sampleStep": 2,
+      "startLine": 190,
+      "endLine": 248,
+      "direction": 1
+    }
+  ],
+  "selection": "Each case minimizes the same limb-and-Acmon objective across the same 576 starts; Celmis is never used to rank these cases.",
+  "limitations": [
+    "Analyst-selected bright-outline crossings, not a published control network; cap samples are added cumulatively and are not equal arc-length samples.",
+    "Celmis was inspected during development. The residual is a diagnostic check, not a newly blind independent validation.",
+    "Changing which outline samples are included changes the fitted orientation. The result cannot qualify a photographic surface."
+  ],
+  "cases": [
+    {
+      "name": "left only",
+      "detectorPixels": [
+        [
+          185.07142857142858,
+          202
+        ],
+        [
+          182.71428571428572,
+          204
+        ],
+        [
+          181.07142857142858,
+          206
+        ],
+        [
+          179.2,
+          208
+        ],
+        [
+          177.71428571428572,
+          210
+        ],
+        [
+          176.23076923076923,
+          212
+        ],
+        [
+          175.28571428571428,
+          214
+        ],
+        [
+          174.71428571428572,
+          216
+        ],
+        [
+          174.23529411764707,
+          218
+        ],
+        [
+          174.36363636363637,
+          220
+        ],
+        [
+          175.0222222222222,
+          222
+        ],
+        [
+          175.21052631578948,
+          224
+        ],
+        [
+          176.02173913043478,
+          226
+        ],
+        [
+          176.8,
+          228
+        ],
+        [
+          178.10714285714286,
+          230
+        ],
+        [
+          180.04761904761904,
+          232
+        ],
+        [
+          182.625,
+          234
+        ]
+      ],
+      "bestFit": {
+        "pose": [
+          -51.5,
+          199.09375,
+          188.9375,
+          192.91228752927344,
+          218.4291891477882
+        ],
+        "objective": 1.2293172443937361,
+        "limbRmsIdealPixels": 0.2688500929402912,
+        "fitControl": {
+          "name": "Acmon",
+          "predictedDetectorPixel": [
+            197.4885145616002,
+            222.00245678472803
+          ],
+          "residualPixels": 0.011745258040396946,
+          "observerFacingCosine": 0.9462101614573931
+        },
+        "checkControl": {
+          "name": "Celmis",
+          "predictedDetectorPixel": [
+            183.4008868381705,
+            214.0031192330637
+          ],
+          "residualPixels": 12.703734837038052,
+          "observerFacingCosine": 0.7951969657277156
+        }
+      }
+    },
+    {
+      "name": "left + lower cap",
+      "detectorPixels": [
+        [
+          185.07142857142858,
+          202
+        ],
+        [
+          182.71428571428572,
+          204
+        ],
+        [
+          181.07142857142858,
+          206
+        ],
+        [
+          179.2,
+          208
+        ],
+        [
+          177.71428571428572,
+          210
+        ],
+        [
+          176.23076923076923,
+          212
+        ],
+        [
+          175.28571428571428,
+          214
+        ],
+        [
+          174.71428571428572,
+          216
+        ],
+        [
+          174.23529411764707,
+          218
+        ],
+        [
+          174.36363636363637,
+          220
+        ],
+        [
+          175.0222222222222,
+          222
+        ],
+        [
+          175.21052631578948,
+          224
+        ],
+        [
+          176.02173913043478,
+          226
+        ],
+        [
+          176.8,
+          228
+        ],
+        [
+          178.10714285714286,
+          230
+        ],
+        [
+          180.04761904761904,
+          232
+        ],
+        [
+          182.625,
+          234
+        ],
+        [
+          182,
+          233.7058823529412
+        ],
+        [
+          184,
+          234.86363636363637
+        ],
+        [
+          186,
+          235.73333333333332
+        ],
+        [
+          188,
+          236.63636363636363
+        ],
+        [
+          190,
+          236.9655172413793
+        ],
+        [
+          192,
+          237.54545454545453
+        ],
+        [
+          194,
+          237.73333333333332
+        ],
+        [
+          196,
+          237.63636363636363
+        ],
+        [
+          198,
+          237.28571428571428
+        ],
+        [
+          200,
+          236.8
+        ],
+        [
+          202,
+          235.78571428571428
+        ],
+        [
+          204,
+          233.8
+        ]
+      ],
+      "bestFit": {
+        "pose": [
+          -25.09375,
+          203.5,
+          241.21875,
+          191.6466625292734,
+          220.55731414778822
+        ],
+        "objective": 5.62507958038146,
+        "limbRmsIdealPixels": 0.4395858730780523,
+        "fitControl": {
+          "name": "Acmon",
+          "predictedDetectorPixel": [
+            197.4507335108816,
+            222.05374590976675
+          ],
+          "residualPixels": 0.07290959996261251,
+          "observerFacingCosine": 0.8383963814139077
+        },
+        "checkControl": {
+          "name": "Celmis",
+          "predictedDetectorPixel": [
+            194.15359684331926,
+            207.17571021252814
+          ],
+          "residualPixels": 0.2333796672041681,
+          "observerFacingCosine": 0.5147996266390593
+        }
+      }
+    },
+    {
+      "name": "left + lower + upper caps",
+      "detectorPixels": [
+        [
+          185.07142857142858,
+          202
+        ],
+        [
+          182.71428571428572,
+          204
+        ],
+        [
+          181.07142857142858,
+          206
+        ],
+        [
+          179.2,
+          208
+        ],
+        [
+          177.71428571428572,
+          210
+        ],
+        [
+          176.23076923076923,
+          212
+        ],
+        [
+          175.28571428571428,
+          214
+        ],
+        [
+          174.71428571428572,
+          216
+        ],
+        [
+          174.23529411764707,
+          218
+        ],
+        [
+          174.36363636363637,
+          220
+        ],
+        [
+          175.0222222222222,
+          222
+        ],
+        [
+          175.21052631578948,
+          224
+        ],
+        [
+          176.02173913043478,
+          226
+        ],
+        [
+          176.8,
+          228
+        ],
+        [
+          178.10714285714286,
+          230
+        ],
+        [
+          180.04761904761904,
+          232
+        ],
+        [
+          182.625,
+          234
+        ],
+        [
+          182,
+          233.7058823529412
+        ],
+        [
+          184,
+          234.86363636363637
+        ],
+        [
+          186,
+          235.73333333333332
+        ],
+        [
+          188,
+          236.63636363636363
+        ],
+        [
+          190,
+          236.9655172413793
+        ],
+        [
+          192,
+          237.54545454545453
+        ],
+        [
+          194,
+          237.73333333333332
+        ],
+        [
+          196,
+          237.63636363636363
+        ],
+        [
+          198,
+          237.28571428571428
+        ],
+        [
+          200,
+          236.8
+        ],
+        [
+          202,
+          235.78571428571428
+        ],
+        [
+          204,
+          233.8
+        ],
+        [
+          188,
+          200.1818181818182
+        ],
+        [
+          190,
+          199.85714285714286
+        ]
+      ],
+      "bestFit": {
+        "pose": [
+          -57.59375,
+          209.625,
+          153.15625,
+          192.89353752927343,
+          218.6823141477882
+        ],
+        "objective": 10.973966709882319,
+        "limbRmsIdealPixels": 0.5906440661307109,
+        "fitControl": {
+          "name": "Acmon",
+          "predictedDetectorPixel": [
+            197.6937844880068,
+            221.95169798301512
+          ],
+          "residualPixels": 0.199713576496102,
+          "observerFacingCosine": 0.9741129845755945
+        },
+        "checkControl": {
+          "name": "Celmis",
+          "predictedDetectorPixel": [
+            181.70847394868386,
+            220.7992245588649
+          ],
+          "residualPixels": 18.479724324138697,
+          "observerFacingCosine": 0.780544016011238
+        }
+      }
+    }
+  ]
+}

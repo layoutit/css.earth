@@ -48,7 +48,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "f353330cd8626bf91a855035e348c881104be918e8faab51889937b3036c9194"
+          "sha256": "905f3658fa3abf655a1640e164d4e05889586cb782a4f912990ed2f7bb9ac690"
         },
         {
           "id": "solar-system",
@@ -144,7 +144,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fa7008dfabc99c53cc3592f33ddd99073bf5a4e19c38f96d8c8ffd479b095021"
+        "sha256": "09a7fd066e4edd0ebf588e103d5e3b6d044b0d1116d3c13834b72f04c1c66431"
       }
     },
     "catalog": {
@@ -152,7 +152,7 @@
       "classification": "satellite",
       "color": "#b0afa9",
       "distanceAu": 19.2,
-      "description": "Explore Ariel in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.",
+      "description": "The brightest of Uranus's five large moons, with the youngest surface.",
       "systemName": "Solar System",
       "order": 448,
       "context": {
@@ -163,6 +163,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2b163b0e1a6600efe86699874f3df15f77dc8ff1982d58a44a4d3a25b245d08a"
+    "sha256": "4dfa58cdea53dadc0c53b0bfe3ed31a1099cbcc90642f376d4a3cdf3634dbb9c"
   }
 }

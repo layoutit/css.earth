@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "1b46a8450f5b25d391d5e3739ac1bbfcb292d2915f45f5b05b97b84630c45b1e"
+          "sha256": "142e6c49ac7b635260d2a13d8a0bb31099ec454fdca4fb0bd349502a48be78a6"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2695d022d10db4daa81c4e5c56d5df9419107ae377d7db5544ada57f50cd29f5"
+        "sha256": "48d14e14c86baa3be430abb47cec6a5aa8c606df4163f6ea7299b7fd3bbd4979"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.229240298100407,
-      "description": "Explore Diomedes in 3D with its published shape model and radial elevation.",
+      "description": "Very dark Jupiter Trojan asteroid, discovered in August 1937.",
       "systemName": "Solar System",
       "order": 362,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "b72ebdd464e64b80896a5b05e3187effc9b4fbb4558c1c089e410e718db8bda6"
+    "sha256": "f157c31eeead6f4ee4d8611ad074fc042bd8c096cc29e4752290d4aa5241b7c8"
   }
 }

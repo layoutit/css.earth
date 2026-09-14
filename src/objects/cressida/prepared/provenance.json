@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bb3c05c4ff972308263433763d79b93adad0c8513094741161787e2697533bde"
+    "sha256": "867ebd57e52688bd86664d61b7b326bb29103b09448eb8fb72a9969c9068d3ea"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6477a1f064f9f92bc103e7baa2a3ad4b7fda5ced21d5f35f67377a2f440b6778",
+      "sha256": "d339968c55b8653b4ffede12495e22ff31cdc3ce7f53bd76516458b3b7433266",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "cressida",
         "displayName": "Cressida",
         "panel": {
-          "introduction": "Cressida is an elongated inner moon of Uranus. Its gravitational influence on the eta ring lets researchers estimate its mass.",
           "facts": [
             {
               "id": "radius",
@@ -161,9 +160,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published 92 × 74 × 74 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
-              "title": "Approximate shape model",
-              "detail": "Measured shape",
               "thumbnail": "/scenes/cressida/cressida-model-thumbnail.webp",
               "surface": "cressida-model-surface@2x.webp",
               "poles": "cressida-model-poles@2x.webp",
@@ -172,7 +168,8 @@
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/2401.04634"
               },
-              "summary": "A 92 × 74 × 74 km shape estimate. Two axes are assumed equal; gray grid: no imagery, not observed terrain."
+              "notes": "Published 92 × 74 × 74 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+              "noData": true
             }
           ]
         },
@@ -316,7 +313,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -325,8 +322,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6477a1f064f9f92bc103e7baa2a3ad4b7fda5ced21d5f35f67377a2f440b6778",
-      "bytes": 3509,
+      "sha256": "d339968c55b8653b4ffede12495e22ff31cdc3ce7f53bd76516458b3b7433266",
+      "bytes": 3166,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -339,11 +336,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published 92 × 74 × 74 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -375,6 +371,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "measured-ellipsoid",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -382,8 +390,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -395,8 +404,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7155,
-          "sha256": "8632b6ce5fa444d6fcd975ef45a5e2508ad585a1437285d51e64b0d0901ef11a",
+          "bytes": 7011,
+          "sha256": "febffa7c12787f14cea0a8ba11eff32b9d5f9784e5ac473af9399a31cdeaf5db",
           "verification": "bytes-verified"
         }
       ],
@@ -410,6 +419,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

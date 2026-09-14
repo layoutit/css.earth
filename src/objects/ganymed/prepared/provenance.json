@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1f491b04036de7293d6ebabeb13ef5c168055ed16a44c2d54cc6661b99cb4355"
+    "sha256": "6495592fc6bbc964ae229bfd6a761dc58ae17af07ae327eee146ebd685c8cbc0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c53ed1c3051e7c77ae169c1f06b96d4942da4ad058ac0029aa51274989179001",
+      "sha256": "33c6de7a8cf40bad62acd10c161c34e0e7685976ee082adf7a2eec4bff5a811d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,7 +169,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Ganymed is a near-Earth asteroid. Explore its calibrated nonconvex reconstruction from DAMIT, version 2017-09-21. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -201,8 +200,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Calibrated DAMIT shape",
-              "title": "DAMIT model 1849",
               "thumbnail": "/scenes/ganymed/ganymed-shape-thumbnail.webp",
               "surface": "ganymed-shape-surface@2x.webp",
               "poles": "ganymed-shape-surface@2x.webp",
@@ -211,14 +208,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
+              "notes": "Calibrated DAMIT shape",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/ganymed/ganymed-elevation-thumbnail.webp",
               "surface": "ganymed-elevation-surface@2x.webp",
               "poles": "ganymed-elevation-surface@2x.webp",
@@ -240,8 +235,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1849",
                 "image": "/scenes/ganymed/ganymed-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -353,7 +347,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -362,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c53ed1c3051e7c77ae169c1f06b96d4942da4ad058ac0029aa51274989179001",
-      "bytes": 9319,
+      "sha256": "33c6de7a8cf40bad62acd10c161c34e0e7685976ee082adf7a2eec4bff5a811d",
+      "bytes": 8739,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -376,11 +370,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -413,6 +406,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "ganymed-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -420,11 +420,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Calibrated DAMIT shape"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -451,6 +450,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "ganymed-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -458,8 +464,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -471,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6737,
-          "sha256": "d7dd84de2c3db2c0e7510658aa73c24a59ff0b50fcf90b12894879c9220ce7bb",
+          "bytes": 6562,
+          "sha256": "cba2fa2800541dc15d4b3a5ba0ab43154d59a538738a72a387e29d2574dbc7cc",
           "verification": "bytes-verified"
         }
       ],
@@ -486,6 +493,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -510,6 +518,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

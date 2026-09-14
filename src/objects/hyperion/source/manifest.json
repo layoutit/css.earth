@@ -420,88 +420,6 @@
       }
     },
     {
-      "id": "cassini-n1513999046",
-      "path": "observations/N1513999046_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "13b6d5694f2e9024f220e7564d5cb5ae8227047fa7a1659b62b7655769f97183",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1513999046",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "consumers": [
-        "cassini-frames"
-      ],
-      "width": 1024,
-      "height": 1024,
-      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "missionId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2017-data-1513745034-1514010212-n1513999046-1-calib",
-            "role": "material",
-            "evidence": "src/planets/hyperion/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
-          }
-        ]
-      }
-    },
-    {
-      "id": "cassini-n1513999046-label",
-      "path": "observations/N1513999046_1_CALIB.LBL",
-      "expectedBytes": 3824,
-      "expectedSha256": "43892adf0226af67675dfcfccc6550e912520507d76cae00bc29c5f5a1b935a2",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1513999046",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "consumers": [
-        "cassini-frames"
-      ],
-      "width": 1024,
-      "height": 1024,
-      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "missionId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.LBL"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2017-data-1513745034-1514010212-n1513999046-1-calib",
-            "role": "material",
-            "evidence": "src/planets/hyperion/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      }
-    },
-    {
       "id": "cassini-n1530182624",
       "path": "observations/N1530182624_1_CALIB.IMG",
       "expectedBytes": 4202496,
@@ -1102,7 +1020,7 @@
       "expectedSha256": "4e516858ee1881f66658648066ba11aee2fb11a2c1dde846a17a6d5e31847ad3",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/HYPERION_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -2483,7 +2401,6 @@
           "cassini-n1506388518",
           "cassini-n1506388840",
           "cassini-n1506389178",
-          "cassini-n1513999046",
           "cassini-n1530182624",
           "cassini-n1530201013",
           "cassini-n1692997492",
@@ -2499,18 +2416,18 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 168939,
-      "expectedSha256": "5ce12c03b1f3aae7b8897ddbc4186cedbf79a229968ef2dbff90e34b4084a6de"
+      "expectedBytes": 170734,
+      "expectedSha256": "88ce5403764e98cd026dcb6e01a199ccdbea22e8abd2e6adbeb8d16509af33f0"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7143,
-      "expectedSha256": "1c20f125075eb9fcc25381920cd603153fa4c1466ddb02d85847a0bc13dd18b4",
+      "expectedBytes": 6131,
+      "expectedSha256": "b13c104497d7dbe4bf96be23c447d3169de33b50e4837b725cb6b3afec3f982d",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
@@ -2520,13 +2437,13 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 16558,
-      "expectedSha256": "cb6f98d059aa2456eeeb4033f1ca221dace135c08cf6100499dc4c8aa852fd51"
+      "expectedBytes": 16002,
+      "expectedSha256": "62203c1ba728f4c10c495433ba88dc39dc8ff8fbad69e6efcb3534c986817d91"
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1656,
-      "expectedSha256": "bf4c90df3751f7c04e6a5ebf22a0893d2a6dc3aac14f884df65efafc77b9d924"
+      "expectedBytes": 1625,
+      "expectedSha256": "b2deeafd1fc0828339593ab8a584558d9b06a66801c35991a86dc673b2aacc05"
     },
     {
       "path": "preparation/rotation.json",
@@ -2535,8 +2452,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 27465,
-      "expectedSha256": "c824fdf13bd29a402bf417628b2b203c846a3daa1a5325b67d36292c70206196"
+      "expectedBytes": 28701,
+      "expectedSha256": "d6346f4248d44f1f62e52103d4c8d9e89d1d69c8fca8faac3294e6049725c0d7"
     },
     {
       "path": "presentation/minimap.json",

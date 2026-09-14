@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1b03f7ee2c69e73934f1f39d50a08cb9d83d3fc4591b62a56000e33759618599"
+    "sha256": "010d901a2923cb8cb0b7e360ec8e3ae57e154f9fec5bec323bf0a51c56d2667c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0573bdfabe763fbfb4e9f8238071ae23cbfa543629141860169a6e655350206a",
+      "sha256": "c26829651a9f34cf4c2dce4a90ebe9d38b7f2bfcff51c6d1c1c0e8f7ac6bd0af",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "setebos",
         "displayName": "Setebos",
         "panel": {
-          "introduction": "Setebos is an outer moon of Uranus. This model translates observed brightness variation into a minimum elongation, assuming uniform reflectivity, equal short axes and a doubled shape-driven rotation period. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "parent",
@@ -157,9 +156,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Approximate ellipsoid from brightness variability, using an assumed-albedo 47 km size. Equal short axes and orientation are assumed; the rotation period adopts a doubled shape interpretation. The grid marks unmapped terrain.",
-              "title": "Light-curve shape approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/setebos/setebos-model-thumbnail.webp",
               "surface": "setebos-model-surface@2x.webp",
               "poles": "setebos-model-poles@2x.webp",
@@ -167,7 +163,8 @@
                 "id": "lightcurve-approximation",
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/pdf/1706.06837"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -333,7 +330,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -342,8 +339,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0573bdfabe763fbfb4e9f8238071ae23cbfa543629141860169a6e655350206a",
-      "bytes": 3365,
+      "sha256": "c26829651a9f34cf4c2dce4a90ebe9d38b7f2bfcff51c6d1c1c0e8f7ac6bd0af",
+      "bytes": 2784,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -356,11 +353,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Approximate ellipsoid from brightness variability, using an assumed-albedo 47 km size. Equal short axes and orientation are assumed; the rotation period adopts a doubled shape interpretation. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -392,6 +388,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "lightcurve-approximation",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -399,8 +407,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -412,8 +421,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6689,
-          "sha256": "678ab9f8250075157db877d9084871e158e995d760f51904cda1f0664c3f590e",
+          "bytes": 6432,
+          "sha256": "c8fb247373e50a4377c33d4e5dea755ee090748a3ed2cbafafa621fbd046ff7a",
           "verification": "bytes-verified"
         }
       ],
@@ -427,6 +436,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

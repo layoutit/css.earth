@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a44e8dc7956e0e41dcbc7040a04b25db8c4388add19206f623f867f38ad2e0b"
+    "sha256": "dbcef75149ad69ea282eae9ee40e788c96ca6026fdc2563d5c6ee242443dd8c3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "efa435ecac1fed07bc643139361c033f24b1dca4178a3fdc170af5aa9870c020",
+      "sha256": "e272c1655730cf2c172f7f0a5160607b4ef0a24518cdd242f9ff2aa4a0e4dc36",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "prospero",
         "displayName": "Prospero",
         "panel": {
-          "introduction": "Prospero is an outer Uranian moon. Brightness variations support an elongated approximation, but several photometric periods are possible. The model uses a doubled, shape-driven period interpretation with assumed depth and orientation. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "parent",
@@ -157,9 +156,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Approximate ellipsoid from brightness variability, using an assumed-albedo 50 km size. Equal short axes and orientation are assumed; the doubled period is one interpretation of an ambiguous light curve. The grid marks unmapped terrain.",
-              "title": "Light-curve shape approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/prospero/prospero-model-thumbnail.webp",
               "surface": "prospero-model-surface@2x.webp",
               "poles": "prospero-model-poles@2x.webp",
@@ -167,7 +163,8 @@
                 "id": "lightcurve-approximation",
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/pdf/1706.06837"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -333,7 +330,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -342,8 +339,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "efa435ecac1fed07bc643139361c033f24b1dca4178a3fdc170af5aa9870c020",
-      "bytes": 3412,
+      "sha256": "e272c1655730cf2c172f7f0a5160607b4ef0a24518cdd242f9ff2aa4a0e4dc36",
+      "bytes": 2791,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -356,11 +353,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Approximate ellipsoid from brightness variability, using an assumed-albedo 50 km size. Equal short axes and orientation are assumed; the doubled period is one interpretation of an ambiguous light curve. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -392,6 +388,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "lightcurve-approximation",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -399,8 +407,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -412,8 +421,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6463,
-          "sha256": "d8f7ba2020abb85394cc4e911a24c0f1a00440b2f0e24e7bf69ee3dfb15e89ff",
+          "bytes": 6177,
+          "sha256": "7f344320c695fb48dc7db73363ad7001432c7afe5c29e509e3f04c503410ff4e",
           "verification": "bytes-verified"
         }
       ],
@@ -427,6 +436,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

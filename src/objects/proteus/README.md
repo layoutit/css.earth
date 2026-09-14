@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - **[Voyager archive](https://pds-rings.seti.org/voyager/iss/):** **Monochrome:** clear-filter frames C1137317 and C1138920.
 
 - **False color:** original green C1137350, blue C1137339 and violet C1137328 shown as red, green and blue, with one independently registered camera per band.
@@ -45,15 +47,7 @@ The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) chec
 
 - The displayed shape uses 1,100 triangles with a 2 km simplification-error ceiling, below the 2,000-leaf budget.
 
-## Candidate survey
-
-| Candidate | Decision |
-| --- | --- |
-| [Original Voyager ISS archive](https://pds-rings.seti.org/voyager/iss/), clear frames C1137317 / C1138920 | Included: complementary coverage and the closest available observation. |
-| Violet C1137328, blue C1137339, green C1137350 | Included as a separate coarse filter-color lens after per-frame source-geometry and limb-registration checks. The roughly 60-pixel discs and long exposures cannot supply the close clear frame's detail; no clear-frame sharpening is transferred into color. |
-| [Ted Stryk colour composite](https://www.planetary.org/space-images/proteus_stryk) | Excluded as a texture: published under CC BY-NC-ND; no permission to reproject or redistribute derivatives is provided. |
-| Stooke global radius grid and shaded-relief drawings | Radius grid included as shape/Elevation; interpretive drawings excluded as photographic imagery. |
-| USGS/PDS map and terrain products; Stooke 1994 linked research | No separately registered colour, altimetric DEM or composition product was qualified. The paper download was unavailable; any linked data not present in the PDS release remain unresolved, not claimed absent. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 ## Source interpretation
 

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a82085a02122ae80ce4123c04ceb794005afaf4f9c60919e336d23b93f4f1b75"
+    "sha256": "7e90a18034350b8b4143a319ed5444069cf194e39926e2584bd95be8474aede3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "089f69d4c6f915722d2962e77e43df881b693b33263f1b941e81cc950295b5a3",
+      "sha256": "a99c8d5baee5c95a68a805dd41012e21f53e943badc47b7f9cb74c5170a47e9f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "mundilfari",
         "displayName": "Mundilfari",
         "panel": {
-          "introduction": "A roughly nine-hour Cassini sequence provided Mundilfari’s elongation constraint and 6.74-hour rotation estimate. This ellipsoid uses assumed polar depth and orientation. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "diameter",
@@ -168,9 +167,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.43:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
-              "title": "Light-curve shape approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/mundilfari/mundilfari-model-thumbnail.webp",
               "surface": "mundilfari-model-surface@2x.webp",
               "poles": "mundilfari-model-poles@2x.webp",
@@ -178,7 +174,9 @@
                 "id": "lightcurve-approximation",
                 "path": "../manifest.json",
                 "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
-              }
+              },
+              "notes": "Approximate ellipsoid adopting minimum equatorial ratio 1.43:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -324,7 +322,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -333,8 +331,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "089f69d4c6f915722d2962e77e43df881b693b33263f1b941e81cc950295b5a3",
-      "bytes": 3676,
+      "sha256": "a99c8d5baee5c95a68a805dd41012e21f53e943badc47b7f9cb74c5170a47e9f",
+      "bytes": 3374,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -347,11 +345,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Approximate ellipsoid adopting minimum equatorial ratio 1.43:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -383,6 +380,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "lightcurve-approximation",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -390,8 +399,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -403,8 +413,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6615,
-          "sha256": "1cb776571bd61b5d0385819cd7b07766fe2ee65807a5d90a1d8a4500289570d4",
+          "bytes": 6392,
+          "sha256": "30c88ffaab596a5c689abac7e2f6d6cc80fdb48d3a812fcf9653aace3608a87f",
           "verification": "bytes-verified"
         }
       ],
@@ -418,6 +428,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

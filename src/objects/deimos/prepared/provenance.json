@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6d52d35022823235d4744699d8ee2fb130012b097e4454f9e5197ef0101b47ff"
+    "sha256": "555fae631adea15df4e799d784a4d5e3247c7404a4760e22ee3e14ba3ee887d7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -238,14 +238,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "47f2a22a4fb4108758d921f49bcea52756c31515e4473657b7e5005b63d231f7",
+      "sha256": "1d10743ae4d301dca84ab06f839eef4a435739c01e7b9a2fa8f92f540bfe20d9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "deimos",
         "displayName": "Deimos",
         "panel": {
-          "introduction": "Deimos is the smaller, outer moon of Mars. A blanket of fine debris gives much of its cratered surface a smooth appearance. It takes about thirty hours to orbit Mars.",
           "facts": [
             {
               "id": "radius",
@@ -323,9 +322,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask.",
-              "title": "Multi-mission image mosaic",
-              "detail": "Multi-mission mosaic",
               "thumbnail": "/scenes/deimos/deimos-normal-thumbnail.webp",
               "surface": "deimos-normal-surface@2x.webp",
               "poles": "deimos-normal-poles@2x.webp",
@@ -334,14 +330,11 @@
                 "path": "../manifest.json",
                 "url": "https://sbn.psi.edu/pds/resource/stookemaps.html"
               },
-              "summary": "Photographed shadows, image seams and interpolated poles remain. Detail varies; missing coverage is not masked in this mosaic."
+              "notes": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask."
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius above a 6.2 km reference sphere, sampled from the Ernst et al. (2023) shape model. Facets without a solved SPC albedo are conservatively withheld; the full shape includes less-constrained terrain.",
-              "title": "Shape-derived radial height",
-              "detail": "Shaded relief",
               "thumbnail": "/scenes/deimos/deimos-elevation-thumbnail.webp",
               "surface": "deimos-elevation-surface@2x.webp",
               "poles": "deimos-elevation-poles@2x.webp",
@@ -364,14 +357,11 @@
                 "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
                 "image": "/scenes/deimos/deimos-elevation-legend.webp"
               },
-              "summary": "Height relative to a 6.2 km sphere, from the 2023 shape model. Areas without a solved surface brightness are withheld."
+              "notes": "Radius above a 6.2 km reference sphere, sampled from the Ernst et al. (2023) shape model. Facets without a solved SPC albedo are conservatively withheld; the full shape includes less-constrained terrain."
             },
             {
               "id": "albedo",
               "label": "Relative albedo",
-              "description": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
-              "title": "SPC relative albedo model",
-              "detail": "Released facet values",
               "thumbnail": "/scenes/deimos/deimos-albedo-thumbnail.webp",
               "surface": "deimos-albedo-surface@2x.webp",
               "poles": "deimos-albedo-surface@2x.webp",
@@ -393,14 +383,13 @@
                 "meta": "SPC relative scale",
                 "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
                 "image": "/scenes/deimos/deimos-albedo-legend.webp"
-              }
+              },
+              "notes": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
+              "noData": true
             },
             {
               "id": "slope",
               "label": "Slope",
-              "description": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
-              "title": "Modeled surface slopes",
-              "detail": "Released facet values",
               "thumbnail": "/scenes/deimos/deimos-slope-thumbnail.webp",
               "surface": "deimos-slope-surface@2x.webp",
               "poles": "deimos-slope-surface@2x.webp",
@@ -422,7 +411,9 @@
                 "meta": "deg",
                 "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
                 "image": "/scenes/deimos/deimos-slope-legend.webp"
-              }
+              },
+              "notes": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
+              "noData": true
             }
           ]
         },
@@ -717,7 +708,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -726,8 +717,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "47f2a22a4fb4108758d921f49bcea52756c31515e4473657b7e5005b63d231f7",
-      "bytes": 11990,
+      "sha256": "1d10743ae4d301dca84ab06f839eef4a435739c01e7b9a2fa8f92f540bfe20d9",
+      "bytes": 11187,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -840,11 +831,10 @@
       "label": "Monochrome",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -880,6 +870,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "stooke-mosaic",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "ernst-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -887,11 +889,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius above a 6.2 km reference sphere, sampled from the Ernst et al. (2023) shape model. Facets without a solved SPC albedo are conservatively withheld; the full shape includes less-constrained terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -925,6 +926,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "ernst-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -932,11 +940,10 @@
       "label": "Relative albedo",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement."
-      ],
+      "limitations": [],
       "lensIds": [
         "albedo"
       ],
@@ -970,6 +977,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "ernst-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -977,11 +991,10 @@
       "label": "Slope",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement."
-      ],
+      "limitations": [],
       "lensIds": [
         "slope"
       ],
@@ -1015,6 +1028,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "ernst-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1022,8 +1042,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1035,8 +1056,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6191,
-          "sha256": "1c9a9850c81cbc137a3c2e817fefee36fd34343256b83befa4cf4aca9411a887",
+          "bytes": 6007,
+          "sha256": "bbe9118473ced460907d14acee7bf77bb1d528e8e333d791c8b52f460c51461d",
           "verification": "bytes-verified"
         }
       ],
@@ -1047,6 +1068,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -1085,6 +1107,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -1109,6 +1132,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"
@@ -1133,6 +1157,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "albedo"
@@ -1157,6 +1182,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "slope"

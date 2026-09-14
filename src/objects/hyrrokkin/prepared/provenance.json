@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2a315b7f5d6ce0f07bfdad6e0f1d8f06d2ba7dd33f8a63b8f49ff37d8ada858f"
+    "sha256": "703eba4472eb7ea50125858d7e10f9ac62d9c30e26f6e469ab692253246bac92"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9984482c410bbf6bcdd9406a3dfb35c4af3d0741e2d13aff08ce5351e3ebd886",
+      "sha256": "ea85afc908334dc7eb329d13cb50e106a704840c51ece9cdc85df7ac22591f28",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "hyrrokkin",
         "displayName": "Hyrrokkin",
         "panel": {
-          "introduction": "Hyrrokkin’s light curve has three brightness peaks per rotation. This ellipsoid illustrates only a minimum elongation, with assumed polar depth and orientation. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "diameter",
@@ -168,9 +167,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.27:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
-              "title": "Light-curve shape approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/hyrrokkin/hyrrokkin-model-thumbnail.webp",
               "surface": "hyrrokkin-model-surface@2x.webp",
               "poles": "hyrrokkin-model-poles@2x.webp",
@@ -178,7 +174,9 @@
                 "id": "lightcurve-approximation",
                 "path": "../manifest.json",
                 "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
-              }
+              },
+              "notes": "Approximate ellipsoid adopting minimum equatorial ratio 1.27:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -324,7 +322,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -333,8 +331,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9984482c410bbf6bcdd9406a3dfb35c4af3d0741e2d13aff08ce5351e3ebd886",
-      "bytes": 3662,
+      "sha256": "ea85afc908334dc7eb329d13cb50e106a704840c51ece9cdc85df7ac22591f28",
+      "bytes": 3370,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -347,11 +345,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Approximate ellipsoid adopting minimum equatorial ratio 1.27:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -383,6 +380,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "lightcurve-approximation",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -390,8 +399,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -403,8 +413,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5021,
-          "sha256": "084a8126a76828f106b71ded9d5194e2d1ffcdb8fe33ec9459bc50bbabe499bc",
+          "bytes": 4808,
+          "sha256": "f3325e55858d51324118f234ebb0e4b8352ca1a793984e76e1096138f177056f",
           "verification": "bytes-verified"
         }
       ],
@@ -418,6 +428,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

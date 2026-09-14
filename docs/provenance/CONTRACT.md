@@ -6,6 +6,10 @@ view means, how we processed it and what the checks prove. Use the existing
 [AGENTS.md](../../AGENTS.md) for application rules and the
 [celestial skill](../../.agents/skills/celestial-skill/SKILL.md) for preparation.
 
+[Navigation identity and evidence](../navigation-identity.md) distinguishes
+subjects, scene capability, rendering resources, dataset views and published
+sources. Preserve these distinctions when changing metadata or attribution.
+
 ## Standards basis
 
 Use **PDS4 1.26.0 and ISO 24495-1:2023 together**: PDS4 guides provenance content;
@@ -41,6 +45,7 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | [Source records](../../src/sources/) (`<id>.json`) | One shared published identity per file, with versions, citation links and evidence |
 | `source/manifest.json` | Local input identities, canonical bindings, byte pins, acquisition and per-input credits |
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
+| Body `text.json` | [Reader text](../reader-text.md): the card line, introduction and dataset text, each citing the source records it is checked against. It stays outside `source/` and provenance; `pnpm prepare:text` publishes `prepared/text.json` |
 | `prepared/provenance.json` | Generated connections between inputs, processing and outputs; never edit by hand |
 | `runtime-assets.json` at the body root | Generated delivery inventory used by installation and publication |
 | `site/prepared-sources.json` and `site/prepared-machines.json` | Ignored source usage and mission attribution outputs; prepare together |
@@ -78,10 +83,28 @@ or `deferred`), the finding, evidence links and the commit it was checked at.
 An entry that is not included names what would reopen it in `revisitWhen`.
 Link repository evidence at a commit or pull request; a branch link moves.
 
+Give distinct source decisions their own entries. `included` means selected for
+the stated use, not that every scientific claim is qualified. Ledger coverage
+counts objects with records, not objects with complete imagery or an exhaustive
+source search.
+
 The README links the ledger instead of repeating a source survey. Read the
 ledger before investigating an object. Reopen an excluded, unresolved or
 deferred entry only when its `revisitWhen` condition is met, and say which.
 `node tools/report-investigations.mts` lists every open entry across objects.
+Use `--summary` for catalogue coverage and `--classification` to select an
+existing object classification. Filter decisions with `--status=deferred,unresolved`
+and `--search=registration`, or export with `--json`. Filters select detail rows;
+summary counts cover the selected population. Counts measure recorded decisions,
+not qualified views or an exhaustive source search.
+
+When consolidating historical records, `checked` identifies the version of the
+records reviewed. Preserve source decisions and original trial dates, results
+and evidence. Explain the migration method and extent of manual review in the PR.
+A schema or link check does not verify the finding; consolidation does not claim
+a fresh archive search or repeat qualification. After a finding changes, retain
+its entry id and previous checks, append the new checked revision, and preserve
+the earlier result in the finding or its pinned evidence.
 
 ### Examples
 
@@ -151,7 +174,7 @@ Explain the following where relevant:
 - Units, coordinate frame, datum, orientation, epoch, observation dates, resolution
   and coverage; valid/missing data, upstream corrections and our processing.
 - Source uncertainty, display simplification and visual enhancement. Keep limits
-  affecting viewers in the product's dataset description too.
+  affecting viewers in the dataset's reader text in `text.json` too.
 
 Link generated processing records. For facts outside them, such as factsheet
 values or orbital assumptions, name the source field/table and show any calculation.

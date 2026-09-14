@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d231dc7ce9cc5d37e12dd030fc310887da18c7996a750260b186ab220e316053"
+    "sha256": "187c486d4e53499969cdcf34e77454d1049f4b1cb3e39557aa89c4f18c4b7fe5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f4c4ee17df02440d5694e6a982ddd402603f453f2584956926f7a4aa08b29e82",
+      "sha256": "60a2d33035ef6b9c30b5e6cf4ab3d55806f4c2bd8d9af5d01080fad257ca1e19",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -34,11 +34,15 @@
           "observations": [],
           "scientific": [],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "cassini-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "coverage": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions."
+              },
               "frames": [
                 {
                   "id": "n1496910582",
@@ -59,19 +63,25 @@
                   "coverageInsetPixels": 1
                 }
               ],
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 55
+              },
               "photometry": {
+                "model": "lunar-lambert",
                 "weight": 1,
-                "maximumGain": 2,
-                "displayMaximum": 0.7,
-                "gamma": 2.2,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 55,
                 "maximumEmissionDegrees": 55,
-                "minimumLevel": 1,
-                "maximumLevel": 1
+                "maximumGain": 2
               },
-              "metadata": {
-                "label": "Monochrome",
-                "coverage": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions."
+              "display": {
+                "displayRange": [
+                  0,
+                  0.492
+                ]
               }
             }
           ]
@@ -134,14 +144,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "82b2c84a6d17e4fe3bfd2b2bc681c2da27a952f079a4305b63c78ce4e0688c75",
+      "sha256": "d8a9211014d0b6048b9201c9c8e10e139aa3b2d252770e0d0990ad9aa1a6ecb4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "pallene",
         "displayName": "Pallene",
         "panel": {
-          "introduction": "Pallene is a small, elongated moon between Mimas and Enceladus. Cassini discovered it in 2004 and later resolved its smooth-looking outline. A faint dust ring follows its orbit around Saturn.",
           "facts": [
             {
               "id": "radius",
@@ -181,9 +190,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
-              "title": "ISS clear-filter image",
-              "detail": "Cassini ISS",
               "thumbnail": "/scenes/pallene/pallene-normal-thumbnail.webp",
               "surface": "pallene-normal-surface@2x.webp",
               "poles": "pallene-normal-poles@2x.webp",
@@ -192,7 +198,8 @@
                 "path": "../manifest.json",
                 "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1496910582"
               },
-              "summary": "Only about 8 × 12 source pixels resolve the moon. Brightness shows coarse detail; the gray grid marks unobserved surface."
+              "notes": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
+              "noData": true
             }
           ]
         },
@@ -414,7 +421,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -423,8 +430,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "82b2c84a6d17e4fe3bfd2b2bc681c2da27a952f079a4305b63c78ce4e0688c75",
-      "bytes": 3753,
+      "sha256": "d8a9211014d0b6048b9201c9c8e10e139aa3b2d252770e0d0990ad9aa1a6ecb4",
+      "bytes": 3335,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -436,12 +443,11 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions."
-      ],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -449,7 +455,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "cassini-n1496910582",
@@ -459,15 +465,22 @@
       "outputs": [
         {
           "url": "/scenes/pallene/pallene-normal-thumbnail.webp",
-          "bytes": 1310,
-          "sha256": "0e8aedd9afa95e85a1c78428da735ce9cbade1198c0e3da93275bcf524882329",
+          "bytes": 1816,
+          "sha256": "af697b55c121f343c8351ef32c64831bf485ff5f873416d2c40c38d07ba8a09c",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pallene/pallene-normal-surface@2x.webp",
-          "bytes": 61294,
-          "sha256": "c0676be12b4d0877e326eca6a7f2ea0d623593e8ddfc64352ee0c2a894e43f0d",
+          "bytes": 64508,
+          "sha256": "e1c2fd265ec28f13462a6277abcc8e0e59f20bb0cee18df5872c25de23f9c45d",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "pallene-ellipsoid",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -477,8 +490,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -490,8 +504,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5401,
-          "sha256": "eaa38363f4b863482e67e13387ce71a6da6c64faf673437480dbb48b4926e4c1",
+          "bytes": 5192,
+          "sha256": "582b5a23dc1fd65f0441f879a47a5655c506e98ee73e641eaf6497a224cbc42a",
           "verification": "bytes-verified"
         }
       ],
@@ -501,10 +515,11 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -515,8 +530,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 4208,
-          "sha256": "5a659252a8a19030269aa8511bebeaea15cdb1a4ff82c7b799fd92b8b89671c7",
+          "bytes": 4270,
+          "sha256": "41a7c1170aef3b404d06823a69917fa3c410333ed63edab3b7a3cd6647737789",
           "verification": "bytes-verified"
         }
       ]
@@ -525,5 +540,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "pallene",
+    "materialSha256": "b1e9b0cd352ff3aebcf696db168031405cd74289954130509b8c639eb9b8252f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/pallene/prepared/provenance.json",
+      "sha256": "3d57aa651f8e7d1268a7268236c555adbdaf180b5aa26648d89801ec52144344"
+    }
   }
 }

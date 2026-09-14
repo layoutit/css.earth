@@ -2,11 +2,11 @@ declare global { interface Window { __cometNavigation: { document: Document; sel
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium, type Page } from 'playwright';
-import { OBJECTS } from '../../../../site/objects.mts';
+import { SCENE_OBJECTS } from '../../../../site/objects.mts';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4258';
-const comets = OBJECTS.filter(object => object.classification === 'comet');
+const comets = SCENE_OBJECTS.filter(object => object.classification === 'comet');
 assert.ok(comets.length > 0);
-const earth = OBJECTS.find(o => o.id === 'earth'); assert.ok(earth, 'Earth is registered');
+const earth = SCENE_OBJECTS.find(o => o.id === 'earth'); assert.ok(earth, 'Earth is registered');
 const browser = await chromium.launch({ channel: 'chrome', headless: true }), reports = [], errors: string[] = [];
 try {
   for (const dpr of [1, 2]) {
@@ -26,7 +26,7 @@ try {
       window.__cometNavigation = { ...probe, observer };
     });
     const visits: { id: string; nodes: number; styleCount: number; documentRetained: boolean; shellRetained: boolean; universeRetained: boolean; scenes: number; maxScenes: number }[] = [];
-    const itinerary: readonly (typeof OBJECTS)[number][] = [...comets, earth, ...comets];
+    const itinerary: readonly (typeof SCENE_OBJECTS)[number][] = [...comets, earth, ...comets];
     for (const object of itinerary) {
       await page.locator('.planet-sidebar-search').fill(object.name);
       await page.locator(`a.planet-object-link[data-object-id="${object.id}"]`).click();

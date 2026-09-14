@@ -24,14 +24,13 @@ The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) chec
 
 **False color:** Three filters were acquired sequentially, and are not a simultaneous true-color photograph or a composition map. Source shadows and phase-dependent brightness remain. The common footprint is smaller than Monochrome coverage; gray grid marks gaps. Small color fringes can remain at sharp relief because the shape and camera solutions have finite accuracy. These 2010 observations resolve only about 18 pixels across the moon; the sharper 2017 Monochrome photograph remains the detail view.
 
-- **Monochrome:** This is a grayscale visualization across these bandpasses, not a uniform-band albedo product.
+- **Monochrome:** This is a grayscale visualization across these bandpasses, not a uniform-band albedo product. Frame N1863267232_1 samples beyond 70° of incidence carry photometric gains of 1.8–2.1 and read a median 0.38–0.41 against 0.31–0.33 below 70°; they draw strips along the northern edge of the map. N1656997950_1 reads a median 0.03–0.07 between 40° and 75° of incidence against 0.26–0.41 in the other two frames, which draws a dark crescent in the south. Limiting incidence and emission to 70° shrank the crescent but kept the strips and cut coverage from 39.3% to 29.4%, so the lens keeps its 80° incidence and 78° emission limits.
 
 - **Elevation and gaps:** Includes the broad irregular figure; it is not local altitude above a geoid. Published regional radius uncertainty is 0.2–0.7 km. Small crater morphology is not reliably represented. Missing samples remain gray grid.
 
 - **Orbit:** Its model is fitted only to 2005–2018; the 2026 scene extrapolates that fit and has no validated current-epoch position accuracy. Its display uses an approximate Saturn-equatorial pole and explicitly arbitrary meridian because this package does not include the binary Cassini attitude kernel.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
-
 
 ## False color preparation
 
@@ -69,7 +68,7 @@ The observed I/F samples remain floating point through registration and overlap 
 
 The shared controlled-shape camera preparer uses source perspective, west-positive sub-spacecraft and sub-solar coordinates, north azimuth and image-center pixels. Camera registration is taken from the release, not fitted by eye. The NAC pixel angle is 12 µm / 2003.44 mm from the [instrument kernel](https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti). The attached VICAR label owns pixel offset and record size; these calibrated products retain a telemetry record before the raster.
 
-Preparation applies bounded Lunar-Lambert illumination correction (maximum gain 2.5), source-mesh visibility and cast-shadow rejection, and overlap exposure matching (0.7–1.4). Edge-connected sky below 0.003 I/F is excluded before interpolation; isolated dark features are retained. Corrected values are displayed linearly over 0–0.6 I/F. Source files remain unchanged. Illumination correction does not recover unobserved or truly shadowed terrain. Resolution varies with the source views; this is a visualization mosaic, not a new scientific global albedo measurement.
+Preparation applies bounded Lunar-Lambert illumination correction (maximum gain 2.5), source-mesh visibility and cast-shadow rejection, and overlap level matching fitted where both frames see the surface within 70° of incidence and emission (widest gain 1.02). Edge-connected sky below 0.003 I/F is excluded before interpolation; isolated dark features are retained. Corrected values are displayed linearly over 0–0.528 I/F, the 99.5th percentile of displayed samples. Source files remain unchanged. Illumination correction does not recover unobserved or truly shadowed terrain. Resolution varies with the source views; this is a visualization mosaic, not a new scientific global albedo measurement.
 
 The original connected shape is simplified before atlas baking to 400 native PolyCSS `u` leaves (maximum estimated simplifier error 200 m), under the 2,000-leaf budget. Textures use 2,048 × 1,024 intermediate maps and prepared triangle atlases; WebP quality 94 is a delivery choice, not added source resolution. Flood and directional lighting use the same shared mesh-normal preparation and Shadows control. No detached spherical overlay, atmosphere, ring mesh or private controller is added.
 
@@ -77,16 +76,7 @@ Navigation portraits and small dedicated minimaps are derived from the prepared 
 
 ## Dataset survey
 
-- Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
-
-- **Not separate lenses:** individual clear-filter frames and alternate contrast versions of the same observations. They contribute complementary resolution or coverage to Monochrome.
-
-- **Investigated, not included as an observed map:** legacy Voyager/Stooke maps and global shaded-relief illustrations. They do not offer the combination of Cassini detail and measured camera registration used here; drawings are not observational textures.
-
-
-- **Spectroscopy:** [Cassini spectra and photometry of small inner satellites](https://www.usgs.gov/publications/cassini-spectra-and-photometry-025-51-mm-small-inner-satellites-saturn) and [small-moon photometric analyses](https://doi.org/10.3847/1538-3881/ab659d) inform interpretation. Disk-integrated measurements do not supply a spatially resolved composition texture.
-
-- **Facts and imagery reference:** [NASA Daphnis](https://science.nasa.gov/saturn/moons/daphnis/), [JPL satellite parameters](https://ssd.jpl.nasa.gov/sats/phys_par/) and the PDS shape document. No atmosphere or internal cross section is claimed.
+Recorded source selections, alternatives and failed trials are in the [investigation ledger](investigations.json).
 
 ## Orbit and orientation limits
 

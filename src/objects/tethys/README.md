@@ -12,6 +12,8 @@
 | Infrared and Ice absorption | [Nantes Cassini VIMS archive](https://vims.univ-nantes.fr/), 2007–2015. All 9 selected observations supply near-2.02 µm continuum-relative absorption; 7 supply near-2.02/1.59/1.28 µm false-color infrared after clipping exclusions. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/TETHYS/target) Tethys centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Evidence
 
 The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
@@ -29,7 +31,7 @@ The [Tethys visual review](https://github.com/layoutit/cssEarth/blob/cc01831f595
 
 ## Known problems
 
-- The ISS photograph is one frame with an empirical Lommel-Seeliger law, and its reconstructed pointing needed a 6.8 px limb correction.
+- The ISS photograph is one frame with an empirical Lommel-Seeliger law, and its reconstructed pointing needed a 9.5 px limb correction.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Tethys (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
 
@@ -114,9 +116,21 @@ The lens projects one Cassini ISS narrow-angle frame onto the SPC shape model. T
 | Check | Result |
 | --- | --- |
 | Range and phase against OPUS's geometry for this frame | Within 0.3 km and 0.001° |
-| Limb residual before and after refinement, holdout edges | 5.4 px → 0.70 px RMS |
-| Refinement rotation | 0.012°, a 6.8 px boresight shift |
-| Surface showing the photograph | 28.5% of the displayed surface area; 3,590,340 of 13,174,380 atlas texels |
+| Limb residual before and after refinement, holdout edges | 6.7 px → 0.89 px RMS |
+| Refinement rotation | 0.0061°, a 9.5 px boresight shift |
+| Surface showing the photograph | 29.7% of the displayed surface area; 3,769,832 of 13,174,380 atlas texels |
 | Largest distance from the displayed mesh to the source surface | 4.39 km, within the 5.31 km limit |
 
 A texel keeps the photograph only when four conditions hold. Its four image contributors lie within two diagonal pixel footprints of the closest source-mesh point; a footprint is about 1.1 km at nadir and grows with emission. The surface is seen at less than 75° emission. That point lies within 5.31 km of the displayed mesh, and the camera can see it. The far side, the night side and surface seen beyond 75° keep the grid. Brightness uses the empirical Lommel-Seeliger law, with incidence limited to 80° and emission to 75°. No published Tethys photometric model has been checked yet. A fixed 3 km separation used to leave a stippled fringe where it cut foreshortened pixels. Stating it in footprints removed that fringe, and coverage rose from 27.1% to 28.5% of the displayed surface area.
+
+Preparing Tethys again on 14 September 2026 refined the same frame differently. The limb fit used 152 fit and 147 holdout edges instead of 89 and 93, and its rotation fell from 0.012° to 0.0061°. The limb refinement module had not changed since before the previous images were committed, and two preparation runs on 14 September produced identical images. Why the fit found a different edge set is not identified.
+
+A [Pixelmatch comparison](evidence/iss-re-preparation/comparison.webp) renders both image sets in one page with Chrome 153.0.8010.37, 1440 × 1000, DPR 2 and an unchanged 1480 × 1560 crop. The previous capture swaps in the three earlier ISS images; every other file is unchanged. [Capture settings and byte pins](evidence/iss-re-preparation/capture.json) identify both image sets. Pixelmatch 7.2.0 uses threshold **0.1**, including anti-aliasing, without masks. Differences follow the limb and the edge of the photograph.
+
+| Comparison | Mismatched pixels / 2,308,800 |
+| --- | ---: |
+| Repeat capture of the re-prepared lens, both views | 0; identical bytes |
+| [Previous → re-prepared, facing the photograph](evidence/iss-re-preparation/pose-1-change.json) | 141,030 |
+| [Previous → re-prepared, photograph edge at the limb](evidence/iss-re-preparation/pose-2-change.json) | 215,631 |
+
+[In the images themselves](evidence/iss-re-preparation/assets.json), 8.0% of the surface texture's 32,768,000 pixels differ, as do 0.12% of the shadow texture, 2 of the thumbnail's 4,608 pixels and 3.4% of the [minimap](evidence/iss-re-preparation/minimap.webp).

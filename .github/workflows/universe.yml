@@ -46,6 +46,20 @@ jobs:
           pnpm build:renderer
           pnpm build:preparation
           pnpm prepare:object-json
+      - name: Test unavailable prepared packages and focus controls
+        run: >-
+          node --test tools/prepare-context-availability.test.mts
+          site/test/prepared-context-navigation.test.mts
+          site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts
+      - name: Test authored preparation publication and cache
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          node --test --test-concurrency=1 \
+            tests/objects/prepared-finalization.test.mts \
+            tests/objects/publication.test.mts \
+            tools/write-prepared-set.test.mts \
+            tools/preparation-cache.test.mts \
+            tools/prepare-planets.test.mts
       - name: Restore environment images and prepare minimap
         run: |
           pnpm prepare:environment-images
@@ -71,6 +85,14 @@ jobs:
           node --test tools/objects/material-composition/coplanar-raster.test.mts
       - name: Test pinned JSON transport restoration
         run: node --test tools/restore-object-json.test.mts
+      - name: Test FITS decoding and offline reference comparisons
+        # Small independent FITS inputs are checked in; no archive downloads or Python needed.
+        run: pnpm test:fits --unit
+      - name: Test SBMT oracle contract and offline projection cases
+        # Native SBMT and real-body archive restoration are opt-in local checks.
+        run: |
+          pnpm typecheck:oracles
+          pnpm test:sbmt --unit
       - name: Test selected dataset textures and bounded residency
         run: |
           node --test src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts tests/objects/unit/earth/dataset-selection.test.mts tests/objects/unit/earth/surface-image-banks.test.mts
@@ -78,7 +100,8 @@ jobs:
         run: node --test site/test/minimap-point-range.test.mts site/test/minimap-point-coverage.test.mts
       - name: Test shared shell and search ownership
         run: >-
-          node --test site/test/shell-lifetime.test.mts
+          node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts
+          --test site/test/shell-lifetime.test.mts
           site/test/navigation-router.test.mts site/test/planet-shell.test.mts
           site/test/router-runtime.test.mts
           site/test/object-page-data.test.mts

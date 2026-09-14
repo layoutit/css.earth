@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bb515cc66f6b7a833e00b326754954c981e146beff80bcd38a4595f1929d9abe"
+    "sha256": "2d4e82bab78de83311540f621845752c90a22b85a4b0203fd0c02154d7604187"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -268,14 +268,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "433e669926c4bb484f84e74bdd9eacc67d751ab5d091473e768a11d56b0065f0",
+      "sha256": "fdc9a0032b323c2ca768a478fc5e9a1770f23db1790f38f402f9fd9204e9e8c3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "enceladus",
         "displayName": "Enceladus",
         "panel": {
-          "introduction": "An icy moon with an ocean beneath its crust. Jets escape through fractures near the south pole, feeding Saturn’s E ring. The Shape view uses JPL’s corrected v2 surface model. The earlier Schenk elevation map retains its separate ellipsoidal height datum.",
           "facts": [
             {
               "id": "radius",
@@ -354,8 +353,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data.",
-              "title": "Schenk–McKinnon mosaic",
               "thumbnail": "/scenes/enceladus/enceladus-normal-thumbnail.webp",
               "surface": "enceladus-normal-surface@2x.webp",
               "poles": "enceladus-normal-poles@2x.webp",
@@ -363,13 +360,12 @@
                 "id": "cassini-schenk-2024-normal",
                 "path": "../manifest.json"
               },
-              "summary": "Images are aligned to a common surface model, but source detail varies. Photographed shadows remain; the grid marks gaps."
+              "notes": "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
-              "title": "Stereo and shading terrain model",
               "thumbnail": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
               "surface": "enceladus-elevation-surface@2x.webp",
               "poles": "enceladus-elevation-poles@2x.webp",
@@ -391,27 +387,25 @@
                 "sourceUrl": "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-dem-200m-schenk",
                 "image": "/scenes/enceladus/enceladus-elevation-legend.webp"
               },
-              "summary": "Height relative to the source ellipsoid, clipped at ±1 km. Gray grid: missing stereo and shading data."
+              "notes": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
+              "noData": true
             },
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
-              "title": "JPL v2 SPC shape model",
               "thumbnail": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
               "surface": "enceladus-shape-surface@2x.webp",
               "poles": "enceladus-shape-poles@2x.webp",
               "source": {
                 "id": "jpl-spc-enceladus-v2-q256",
                 "path": "../manifest.json"
-              }
+              },
+              "notes": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
+              "noData": true
             },
             {
               "id": "ice-absorption",
               "label": "Ice absorption",
-              "description": "Water-ice absorption relative to a native 1.82–2.20 µm continuum. Six calibrated Cassini VIMS observations cover selected regions; gray grid marks unsupported areas. Strength also varies with viewing geometry and grain size. Archive noise filtering is retained; no photometric correction is applied. This is not ice percentage.",
-              "title": "Partial Cassini VIMS water-ice signature",
-              "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size and archive filtering affect the uncorrected values; these are not ice percentages.",
               "thumbnail": "/scenes/enceladus/enceladus-ice-absorption-thumbnail.webp",
               "surface": "enceladus-ice-absorption-surface@2x.webp",
               "poles": "enceladus-ice-absorption-poles@2x.webp",
@@ -420,7 +414,6 @@
                 "path": "../manifest.json",
                 "url": "https://vims.univ-nantes.fr/cube/1487299582_1"
               },
-              "detail": "Partial VIMS",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -435,14 +428,13 @@
                 "meta": "band-depth fraction",
                 "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
                 "image": "/scenes/enceladus/enceladus-ice-absorption-legend.webp"
-              }
+              },
+              "notes": "Water-ice absorption relative to a native 1.82–2.20 µm continuum. Six calibrated Cassini VIMS observations cover selected regions; gray grid marks unsupported areas. Strength also varies with viewing geometry and grain size. Archive noise filtering is retained; no photometric correction is applied. This is not ice percentage.",
+              "noData": true
             },
             {
               "id": "infrared-ratio",
               "label": "Infrared ratio",
-              "description": "Median reflectance in three channels near 3.1 µm divided by the near-1.66 µm channel. This samples an ice-sensitive infrared feature in six calibrated Cassini observations. Illumination, grain size and noise affect the ratio; it is not a crystallinity percentage or a temperature map. Archive filtering remains; no photometric correction. Gray grid marks unsupported areas.",
-              "title": "Partial Cassini VIMS spectral ratio",
-              "summary": "A near-3.1/1.66 µm ice-sensitive ratio with partial Cassini coverage. Viewing angle, grain size and archive filtering affect the uncorrected values. Gray grid marks gaps; this does not measure temperature or crystallinity.",
               "thumbnail": "/scenes/enceladus/enceladus-infrared-ratio-thumbnail.webp",
               "surface": "enceladus-infrared-ratio-surface@2x.webp",
               "poles": "enceladus-infrared-ratio-poles@2x.webp",
@@ -451,7 +443,6 @@
                 "path": "../manifest.json",
                 "url": "https://vims.univ-nantes.fr/cube/1487299582_1"
               },
-              "detail": "Partial VIMS",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -466,7 +457,9 @@
                 "meta": "reflectance ratio",
                 "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
                 "image": "/scenes/enceladus/enceladus-infrared-ratio-legend.webp"
-              }
+              },
+              "notes": "Median reflectance in three channels near 3.1 µm divided by the near-1.66 µm channel. This samples an ice-sensitive infrared feature in six calibrated Cassini observations. Illumination, grain size and noise affect the ratio; it is not a crystallinity percentage or a temperature map. Archive filtering remains; no photometric correction. Gray grid marks unsupported areas.",
+              "noData": true
             }
           ]
         },
@@ -909,7 +902,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -918,8 +911,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "433e669926c4bb484f84e74bdd9eacc67d751ab5d091473e768a11d56b0065f0",
-      "bytes": 16090,
+      "sha256": "fdc9a0032b323c2ca768a478fc5e9a1770f23db1790f38f402f9fd9204e9e8c3",
+      "bytes": 14838,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1032,11 +1025,10 @@
       "label": "Monochrome",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1082,6 +1074,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-schenk-2024-normal",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "jpl-spc-enceladus-v2-q256",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1089,11 +1093,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1128,6 +1131,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "jpl-spc-enceladus-v2-q256",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1135,11 +1145,10 @@
       "label": "Ice absorption",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Water-ice absorption relative to a native 1.82–2.20 µm continuum. Six calibrated Cassini VIMS observations cover selected regions; gray grid marks unsupported areas. Strength also varies with viewing geometry and grain size. Archive noise filtering is retained; no photometric correction is applied. This is not ice percentage."
-      ],
+      "limitations": [],
       "lensIds": [
         "ice-absorption"
       ],
@@ -1174,6 +1183,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "jpl-spc-enceladus-v2-q256",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1181,11 +1197,10 @@
       "label": "Infrared ratio",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Median reflectance in three channels near 3.1 µm divided by the near-1.66 µm channel. This samples an ice-sensitive infrared feature in six calibrated Cassini observations. Illumination, grain size and noise affect the ratio; it is not a crystallinity percentage or a temperature map. Archive filtering remains; no photometric correction. Gray grid marks unsupported areas."
-      ],
+      "limitations": [],
       "lensIds": [
         "infrared-ratio"
       ],
@@ -1220,6 +1235,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "jpl-spc-enceladus-v2-q256",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1227,11 +1249,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -1258,6 +1279,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "jpl-spc-enceladus-v2-q256",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1265,8 +1293,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1278,8 +1307,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8400,
-          "sha256": "facbf45ca5680274c88f44b18b1336fb68e24e982cf85428b18654826c6404fc",
+          "bytes": 8124,
+          "sha256": "fc21484da2e69924e5b16028754d9780935f6dd98395e8fd63a4c094f42f8af0",
           "verification": "bytes-verified"
         }
       ],
@@ -1290,6 +1319,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -1328,6 +1358,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -1352,6 +1383,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -1376,6 +1408,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"
@@ -1400,6 +1433,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "ice-absorption"
@@ -1424,6 +1458,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "infrared-ratio"

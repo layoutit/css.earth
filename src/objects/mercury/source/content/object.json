@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Closest to the Sun, Mercury is the smallest planet: a cratered terrestrial world with a large metallic core and extreme surface temperatures.",
     "facts": [
       {
         "id": "distance-from-sun",
@@ -153,8 +152,6 @@
       {
         "id": "normal",
         "label": "750 nm",
-        "description": "MESSENGER at 750 nm",
-        "title": "MDIS Global Basemap BDR",
         "thumbnail": "mercury-lens-normal.webp",
         "surface": "mercury-surface-normal.jpg",
         "source": {
@@ -165,14 +162,11 @@
         "falseColor": false,
         "filter": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
         "view": "exterior",
-        "detail": "750 nm",
-        "summary": "Brightness at 750 nm varies with the surface and the lighting when each image was taken. The mosaic is grayscale."
+        "notes": "MESSENGER at 750 nm"
       },
       {
         "id": "enhanced",
         "label": "Enhanced",
-        "description": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color Missing polar regions use reconstructed color from nearby enhanced imagery with BDR and topographic detail; these are not observed enhanced-color coverage.",
-        "title": "MDIS Enhanced Color Mosaic",
         "thumbnail": "mercury-lens-enhanced.webp",
         "surface": "mercury-surface-enhanced.jpg",
         "source": {
@@ -183,8 +177,6 @@
         "falseColor": true,
         "filter": "NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion",
         "view": "exterior",
-        "detail": "False color",
-        "summary": "Colors distinguish surface materials. Missing polar color is reconstructed from nearby imagery and terrain, not observed.",
         "legend": {
           "kind": "categories",
           "title": "Enhanced-color terrain",
@@ -206,13 +198,12 @@
             }
           ],
           "sourceUrl": "https://science.nasa.gov/resource/mercury-false-color-rotation-movie/"
-        }
+        },
+        "notes": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color Missing polar regions use reconstructed color from nearby enhanced imagery with BDR and topographic detail; these are not observed enhanced-color coverage."
       },
       {
         "id": "topography",
         "label": "Topography",
-        "description": "MESSENGER shaded relief",
-        "title": "MDIS Color Shaded Relief",
         "thumbnail": "mercury-lens-topography.webp",
         "surface": "mercury-surface-topography.jpg",
         "source": {
@@ -253,14 +244,11 @@
         "falseColor": true,
         "filter": "USGS MESSENGER global color shaded relief",
         "view": "exterior",
-        "detail": "Shaded relief",
-        "summary": "Colors show elevation, while shading makes slopes visible. Both describe the terrain; they do not depict its visible color."
+        "notes": "MESSENGER shaded relief"
       },
       {
         "id": "interior",
         "label": "Interior",
-        "description": "Interior structure",
-        "title": "Interior structure model",
         "thumbnail": "mercury-lens-interior.webp",
         "surface": "mercury-interior-section.webp",
         "source": {
@@ -298,8 +286,7 @@
         "falseColor": false,
         "filter": "NASA-dimensioned retained 3D metallic-core cutaway",
         "view": "interior",
-        "detail": "Structure",
-        "summary": "A large metallic core sits inside a rocky outer shell. Layer sizes follow the structural model; colors identify each layer."
+        "notes": "Interior structure"
       }
     ],
     "labels": {

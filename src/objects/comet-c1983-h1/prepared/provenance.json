@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea458ee06ecb2ecff18e88fcda5306267505f4732a04ac6f4966c16d8a03c2f0"
+    "sha256": "151c278a778f9095c9ad248d3ab907d859e2345a613f9d1ba59001f86f2c269b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a74db8371bd9e3c0960ff808685de776ecbe827a709fb91dd7b98059c0acdea1",
+      "sha256": "0909aeb0a4e266c4ef875b00840ca4227e5983b0ae3877f1eda8f0262f339263",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-c1983-h1",
         "displayName": "IRAS–Araki–Alcock",
         "panel": {
-          "introduction": "IRAS–Araki–Alcock was discovered in 1983 by the IRAS satellite and two independent observers. Its name records all three discoveries.",
           "facts": [
             {
               "id": "diameter",
@@ -173,9 +172,6 @@
             {
               "id": "model",
               "label": "Illustrative nucleus",
-              "detail": "Celestia",
-              "title": "C/1983 H1 IRAS–Araki–Alcock",
-              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
               "thumbnail": "/scenes/comet-c1983-h1/comet-c1983-h1-model-thumbnail.webp",
               "surface": "comet-c1983-h1-model-surface@2x.webp",
               "poles": "comet-c1983-h1-model-poles@2x.webp",
@@ -195,7 +191,9 @@
                   "label": "Closest to Sun",
                   "value": "0.996 AU"
                 }
-              ]
+              ],
+              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -294,7 +292,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -303,8 +301,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a74db8371bd9e3c0960ff808685de776ecbe827a709fb91dd7b98059c0acdea1",
-      "bytes": 3303,
+      "sha256": "0909aeb0a4e266c4ef875b00840ca4227e5983b0ae3877f1eda8f0262f339263",
+      "bytes": 3078,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -317,11 +315,10 @@
       "label": "Illustrative nucleus",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -348,6 +345,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "celestia-mesh",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -355,8 +359,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -368,8 +373,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8335,
-          "sha256": "2e6150537a654b7c35ca22399905bc98c65775fc2c93b34643e8a62ef0dae7af",
+          "bytes": 8180,
+          "sha256": "60bcf557accb75991e7de5f5bfeac0d014217450e2103cd7ec34b600f3574333",
           "verification": "bytes-verified"
         }
       ],

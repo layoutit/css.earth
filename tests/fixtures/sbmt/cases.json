@@ -1,0 +1,46 @@
+[
+  {
+    "id": "eros-sum",
+    "shape": "src/objects/eros/source/shape/ver128q.tab",
+    "pointing": "src/objects/eros/source/observations/M0146235607.SUM",
+    "format": "sum",
+    "image": "src/objects/eros/source/observations/M0146235607F4_2P_CIF_DBL.FIT",
+    "width": 537,
+    "height": 244,
+    "vertices": 99846,
+    "faces": 196608
+  },
+  {
+    "id": "eros-info",
+    "shape": "src/objects/eros/source/shape/ver128q.tab",
+    "pointing": "src/objects/eros/source/observations/M0146235607F4_2P_CIF_DBL.INFO",
+    "format": "info",
+    "image": "src/objects/eros/source/observations/M0146235607F4_2P_CIF_DBL.FIT",
+    "width": 537,
+    "height": 244,
+    "vertices": 99846,
+    "faces": 196608
+  },
+  {
+    "id": "itokawa-sum",
+    "shape": "src/objects/itokawa/source/shape/ver128q.tab",
+    "pointing": "src/objects/itokawa/source/observations/N2402987304.SUM",
+    "format": "sum",
+    "image": "src/objects/itokawa/source/observations/st_2402987304_v.fit",
+    "width": 1024,
+    "height": 1024,
+    "vertices": 99846,
+    "faces": 196608
+  },
+  {
+    "id": "concave-boundaries",
+    "shape": "tests/fixtures/sbmt/concave.tab",
+    "pointing": "tests/fixtures/sbmt/concave.sum",
+    "format": "sum",
+    "image": "tests/fixtures/fits/byte.fits",
+    "width": 2,
+    "height": 2,
+    "vertices": 12,
+    "faces": 20
+  }
+]

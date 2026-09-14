@@ -5,15 +5,15 @@
   "defaultLens": "eso-optical",
   "bank": {
     "path": "src/objects/m42/prepared/lenses.json",
-    "sha256": "bb9dce10a66ca9e4acdcfcdaf97a236b50f3568a9fc61a57abb23d8ed3ac0b96",
-    "bytes": 2875897
+    "sha256": "92363dc68cdf80744d9800b548725b25af2ae370688ea573abafed46ea41739b",
+    "bytes": 3609596
   },
   "recipes": [
     {
       "id": "recipe-1",
       "path": "src/objects/m42/source/delivery.json",
-      "sha256": "b4e3da0a6639f432b4ef877d6920b73a6acd699f07421612d617ff7120059254",
-      "bytes": 1727
+      "sha256": "ba6190b1940abaeae89f2b103556f59384ddb2fb2859e76d902e5f09ecdd552a",
+      "bytes": 1891
     },
     {
       "id": "recipe-2",
@@ -56,15 +56,16 @@
     "eso-optical",
     "eso-vista",
     "physical-evidence",
-    "distance"
+    "distance",
+    "stellar-field"
   ],
   "lenses": [
     {
       "id": "eso-optical",
       "label": "ESO · optical",
       "title": "Orion in visible light",
-      "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting.",
-      "summary": "Optical · i / H-alpha / r / G",
+      "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Optical display colors on an inferred cloud; physical depth and faint outer structure remain uncertain.",
       "detail": "4000 × 3106 px",
       "facts": [
         {
@@ -95,8 +96,8 @@
       "id": "eso-vista",
       "label": "ESO VISTA · infrared",
       "title": "Orion in near infrared",
-      "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting.",
-      "summary": "Near-infrared · K / J / Z",
+      "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Near-infrared false color on the same inferred cloud; the image does not measure its depth.",
       "detail": "3252 × 4000 px",
       "facts": [
         {

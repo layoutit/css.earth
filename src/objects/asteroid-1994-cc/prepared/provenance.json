@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "14a10ea5b1c2ea40d423ba971a63256241d7d563a17f2af85b2415e5fae90cb7"
+    "sha256": "10cb88364814767f4d62604790499eaa93395bc21c26b00a0439b6478c8baf84"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "09f4cc39fae0907ef4cd1214292737e8ea6a07d66f5c2df451634cc01b5e0c15",
+      "sha256": "b41d07ea83e678cf4be23549cd08d9cce627c839222451854914a2cbe56f851a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +167,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "1994 CC Alpha is the primary of a triple near-Earth asteroid system. This view contains the published primary model alone. Explore its original shape and radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -199,8 +198,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Published radar shape model",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-thumbnail.webp",
               "surface": "asteroid-1994-cc-shape-surface@2x.webp",
               "poles": "asteroid-1994-cc-shape-surface@2x.webp",
@@ -209,14 +206,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape from radar observations. The gray grid marks missing optical imagery; lighting shows the model."
+              "notes": "Published radar shape model",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-thumbnail.webp",
               "surface": "asteroid-1994-cc-elevation-surface@2x.webp",
               "poles": "asteroid-1994-cc-elevation-surface@2x.webp",
@@ -238,8 +233,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/1994CC_nominal.mod.wf",
                 "image": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -367,7 +361,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -376,8 +370,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "09f4cc39fae0907ef4cd1214292737e8ea6a07d66f5c2df451634cc01b5e0c15",
-      "bytes": 11026,
+      "sha256": "b41d07ea83e678cf4be23549cd08d9cce627c839222451854914a2cbe56f851a",
+      "bytes": 10381,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -390,11 +384,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -427,6 +420,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "asteroid-1994-cc-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -434,11 +434,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Published radar shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -465,6 +464,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "asteroid-1994-cc-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -472,8 +478,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -485,8 +492,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8305,
-          "sha256": "957def4220eab65ade3ee88c010330908d20fc5867111759d4f33094b30f25b3",
+          "bytes": 8074,
+          "sha256": "2f0f3efab450ff9cf45aadd0baf5cc20383358f8413d18348eba1990ae7b8afd",
           "verification": "bytes-verified"
         }
       ],
@@ -500,6 +507,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -524,6 +532,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

@@ -1,5 +1,6 @@
 import type { JointParameters } from '../joint-fit/model.js';
 import type { CompilerControls } from './model.js';
+import type { EmissionWindow } from './emission-window.js';
 export { defaultCompilerControls, readCompilerControls, type CompilerControls } from './model.js';
 
 export type EmissionVector3 = [number, number, number];
@@ -15,6 +16,8 @@ export interface EmissionFitInput {
   target: Float32Array; width: number; height: number; bounds: SkyBounds;
   /** One means observed, zero means unavailable. Unavailable is never treated as measured zero. */
   coverage?: Uint8Array;
+  /** Authored source-footprint display selection, independent of source coverage/no-data. */
+  emissionWindow?: EmissionWindow;
   scaffold?: JointParameters;
   /** Measured beam footprints establish coverage only, never unique depth. */
   velocityCoverage?: { x: number; y: number; radiusArcsec: number }[];
@@ -34,6 +37,7 @@ export interface EmissionFieldModel {
   schema: 'cssearth-conditional-emission-field@1'; identity: string;
   controls: CompilerControls; components: EmissionComponent[]; bounds: EmissionBounds;
   skyBounds: SkyBounds; scaffold: JointParameters | null;
+  emissionWindow?: EmissionWindow;
   depthConstraints?: {
     recipeId: string; evidenceSha256: string; paperGuidedComponents: number; authoredComponents: number;
     assignments: { componentId: string; featureId: string; methodId: string; evidenceIds: string[]; support: string }[];

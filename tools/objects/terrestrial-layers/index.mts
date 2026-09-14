@@ -67,7 +67,7 @@ export function parseTerrestrialProfile(input:unknown) {
       !Number.isSafeInteger(value.lighting?.frameSize) || value.lighting.frameSize <= 0 ||
       !Number.isSafeInteger(value.lighting.frameCount) || value.lighting.frameCount < 2 ||
       !Number.isSafeInteger(value.lighting.columns) || value.lighting.columns <= 0 || value.lighting.frameCount % value.lighting.columns ||
-      value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.mosaics ?? []), ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? []), ...(value.raster.shapeViews ?? []), ...(value.raster.surfaceObservations ?? [])].some(lens => lens.id === value.presentation?.defaultLens)) {
+      value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? []), ...(value.raster.shapeViews ?? []), ...(value.raster.surfaceObservations ?? [])].some(lens => lens.id === value.presentation?.defaultLens)) {
     throw new TypeError('Invalid terrestrial surface preparation profile.');
   }
   validateTerrestrialRings(value.rings, value.geometry.radiusKm);
@@ -217,13 +217,9 @@ export function parseTerrestrialProfile(input:unknown) {
     }
     observationIds.add(observation.id);
   }
-  for (const mosaic of value.raster.mosaics ?? []) {
-    if (!['pds3-byte-equirectangular', 'controlled-orthographic', 'controlled-shape-camera', 'controlled-shape-color'].includes(mosaic.format) || !/^[a-z][a-z0-9-]*$/.test(mosaic.id) ||
-        observationIds.has(mosaic.id) || !/^[a-z][a-z0-9-]*$/.test(mosaic.consumer)) {
-      throw new TypeError('Invalid PDS byte mosaic identity or format.');
-    }
-    observationIds.add(mosaic.id);
-  }
+  // Photograph lenses moved to raster.surfaceObservations. A recipe may keep the retired group only while it stays empty.
+  const retired = requireRecord(header.raster).mosaics;
+  if (retired !== undefined && (!isArray(retired) || retired.length)) throw new TypeError('raster.mosaics is retired; a photograph lens belongs in raster.surfaceObservations.');
   for (const lens of value.raster.observedColors ?? []) {
     const p = lens.profile;
     if (!p || !(p.referenceRadiusMeters > 0) || !isArray(p.filters) || p.filters.length !== 3 ||

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b16eebe6285373cc6f9c5af6c8104773f75d751c917dbf621c96a73d950e0ac0"
+    "sha256": "498af8fb0fc633130b2d05b31800489c4c53e790acbcca6a2f6c2ca45d10c780"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -129,14 +129,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3e47b5cd546cc90ee38740673d64a03658f53206c12585b07136634792a99ed3",
+      "sha256": "31003eeda76a6bfb69d54e7cd6b14140d91d18097cc8c718961b374974e0705a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "oberon",
         "displayName": "Oberon",
         "panel": {
-          "introduction": "Oberon is Uranus’s second-largest moon. Voyager 2 revealed an icy surface crowded with impact craters, bright rays and dark crater floors.",
           "facts": [
             {
               "id": "radius",
@@ -211,9 +210,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
-              "title": "Monochrome mosaic",
-              "detail": "Corrected mosaic",
               "thumbnail": "oberon-lens-normal.webp",
               "surface": "oberon-normal.webp",
               "poles": "oberon-poles-normal.webp",
@@ -222,7 +218,8 @@
                 "path": "../manifest.json",
                 "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
               },
-              "summary": "Illumination is corrected, but photographed terrain shadows and seams remain. The gray grid marks missing observations."
+              "notes": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
+              "noData": true
             }
           ]
         },
@@ -437,10 +434,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "3e47b5cd546cc90ee38740673d64a03658f53206c12585b07136634792a99ed3",
-      "bytes": 8134,
+      "sha256": "31003eeda76a6bfb69d54e7cd6b14140d91d18097cc8c718961b374974e0705a",
+      "bytes": 7770,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -553,11 +550,10 @@
       "label": "Monochrome",
       "recipe": "raster",
       "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -603,6 +599,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "schenk-2020-oberon-normal",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -610,6 +613,7 @@
       "label": "lighting",
       "recipe": "raster",
       "selector": "/lighting",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Evaluate the declared surface-lighting model into phase banks.",
       "limitations": [],
@@ -1026,8 +1030,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1039,8 +1044,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6065,
-          "sha256": "bc2f9693a6932df27d93d437fe3d25c3c330df90287a94fa839bda38d0718a5c",
+          "bytes": 5907,
+          "sha256": "d3974c03e5ead65a169ce10c8f477627a15b695a7712b7f4ad16541cbb9de7d2",
           "verification": "bytes-verified"
         }
       ],
@@ -1051,6 +1056,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -1089,6 +1095,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"

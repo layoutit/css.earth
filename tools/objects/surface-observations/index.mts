@@ -5,6 +5,7 @@ import { requireRecord, requireString } from '../../source-values.mts';
 import { GEO_FORMATS, geoFormat } from './formats/geo.mts';
 import { encounterFormat } from './formats/encounter.mts';
 import { orthographicFormat } from './formats/orthographic.mts';
+import { controlledCameraFormat, controlledColorFormat } from './formats/controlled-camera.mts';
 import { createSurfaceObservation, type SurfaceObservation } from './surface.mts';
 
 export type { SurfaceObservation, SurfaceObservationReport } from './surface.mts';
@@ -14,6 +15,8 @@ export const SURFACE_OBSERVATION_FORMATS: Readonly<Record<string, SurfaceObserva
   ...Object.fromEntries(GEO_FORMATS.map(format => [format, geoFormat])),
   'encounter-fits': encounterFormat,
   'isis2-orthographic': orthographicFormat,
+  'controlled-shape-camera': controlledCameraFormat,
+  'controlled-shape-color': controlledColorFormat,
 };
 
 const formatOf = (recipe: unknown) => {

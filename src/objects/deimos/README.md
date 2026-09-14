@@ -8,6 +8,8 @@
 
 - Relative albedo preserves the archive scale without an absolute-albedo claim. Slope is gravity-relative under the source authors’ rotation, uniform-density and Mars-distance assumptions.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Evidence
 
 The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
@@ -56,17 +58,6 @@ Incomplete interpolation footprints remain gaps. The recipe derives relief and p
 The [SBMT March 2025 release](https://sbmt.jhuapl.edu/shared-files/) supplies version 002 at 83 m spacing: 98,306 vertices and 196,608 triangles, with matching per-facet attributes. Its XYZ coordinates are in kilometres in the source body-fixed frame. Preparation simplifies the original indexed mesh to a 1,600-face native triangle presentation. The full shape includes less-constrained regions; only part of Deimos has detailed SPC support. Do not describe the entire mesh as equally measured or infer new detail from it.
 
 The vendored astronomy package supplies Mars-relative orbit, size and IAU orientation at the shared scene date. The newer shape and older mosaic have separate control histories, so geographic registration and shape extremities require visual inspection.
-
-## Dataset survey
-
-| Candidate | Decision |
-| --- | --- |
-| Stooke Viking/MRO 7200 × 3600 mosaic | Selected. Best mapped version in this release; its mixed detail and remaining source illumination are disclosed. |
-| Earlier Stooke 3600 × 1800 mosaic | Superseded by the selected version; not a duplicate lens. |
-| Ernst/SBMT 83 m shape and matching facet attributes | Selected for shape, supported Elevation, Relative albedo and gravity-relative Slope. Missing albedo support remains withheld in the scientific views. |
-| Original Viking and MRO frames | Available mission observations; the selected mosaic already integrates the identified useful HiRISE images. |
-| Hope EXI and TGO/CaSSIS color observations | Regional/perspective observations, not a qualified registered global color raster for this shape. Excluded from this PR rather than extrapolated over the surface. |
-| Thermal/spectral measurements | No qualified mapped product selected; disk spectra do not become texture lenses. |
 
 Exact originals and acquisition URLs are pinned in `source/manifest.json`. The map guide and SBMT label remain beside the package. Prepared textures, minimaps and shape-correct navigation images share the same source interpretation. No private controller or body-specific shell is introduced.
 

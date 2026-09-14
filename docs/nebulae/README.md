@@ -1,34 +1,55 @@
 # Prepared nebulae in the shared world
 
-M42, Helix and M2–9 use the retained `volume-lens-bank` capability, shared camera, focus card and source controls. They do not have separate scene owners. Open `/sun/?focus=m42`, `/sun/?focus=helix` or `/sun/?focus=m2-9`, or double-click their scene labels.
+M42, Helix, M2–9, Pleiades, Crab and Lagoon use the retained `volume-lens-bank` capability, shared camera, focus card and source controls. Open `/sun/?focus=m45`, `/sun/?focus=m1` or `/sun/?focus=m8` for the new scenes; the existing `m42`, `helix` and `m2-9` focus links remain available. Double-clicking a scene label uses the same shared navigation.
 
-Search by common name or catalogue alias (Orion/M42/NGC 1976, Helix/NGC 7293, Twin Jet/M2–9), or browse the Nebulae category. Search rows come from each object's nebula record; selecting a result uses the current scene's shared fly-to without loading another page.
+Search by common name or catalogue alias (Orion/M42/NGC 1976, Helix/NGC 7293, Twin Jet/M2–9, Pleiades/M45/Seven Sisters, Crab/M1/NGC 1952, Lagoon/M8/NGC 6523), or browse the Nebulae category. Search rows come from each object's nebula record; selecting a result uses the current scene's shared fly-to without loading another page.
 
 | Object | Method | Lenses | Adopted distance |
 | --- | --- | --- | --- |
 | [M42](../../src/objects/m42/README.md) | Image emission with an evidence-guided coherent depth surface | ESO optical and VISTA infrared | 414 ± 7 pc |
 | [Helix](../../src/objects/helix/README.md) | Multi-image emission with a molecular velocity scaffold | ESO WFI optical, VISTA infrared, wide optical | 216 −12/+14 pc |
 | [M2–9](../../src/objects/m2-9/README.md) | Axially symmetric image-conditioned emission | Hubble optical | 650 pc, uncertain |
+| [Pleiades · M45](../../src/objects/m45/README.md) | Authored finite dust-display surface and observed stellar catalogue | NOIRLab + Niittee optical composite, NOIRLab optical, two Spitzer composites, WISE | 136.2 ± 1.2 pc |
+| [Crab · M1](../../src/objects/m1/README.md) | Released SITELLE ejecta samples with conditional expansion depth and separate pulsar-wind components | Hubble, two Webb views, Spitzer, VLA, Chandra | 2,000 pc adopted model scale |
+| [Lagoon · M8](../../src/objects/m8/README.md) | Authored coherent front with local published structure constraints | ESO optical, VISTA infrared, Spitzer infrared | 1,326 −69/+77 pc |
 | [LMC](../../src/objects/lmc/README.md) | Registered image colors on a simulated stellar-density prior | VISTA infrared, Horálek visible light, WISE infrared | The Local Group catalogue owns its distance |
 
-These are plausible **relative display emission** models, not measured 3D gas density. Compact lights retain image positions and display photometry; their conditional depths do not establish stellar distance or membership. The accepted M2–9 baseline has no star catalogue, so none is invented.
+These are **relative display emission** models, not measured 3D gas density. The six Galactic nebulae use [surrounding Gaia/Bailer-Jones stellar fields](stellar-fields.md), independent of source-image boundaries. Their parallax-informed distance estimates retain uncertainty; retained named Pleiades stars, the Crab pulsar and bright Helix image cores keep explicitly conditional display depths. LMC keeps its separate model-conditioned stellar catalogue. Pleiades and Lagoon retain thin-layer and source-coverage artifacts; Crab's historical color-through-depth material defect remains separately documented. Each body README distinguishes those model limits from app integration.
 
 ## Reproduce from a clean checkout
 
 Requires Node 22.18+, pnpm 10.33.0, Python 3.9–3.12 with pip/venv, a supported TensorFlow wheel, internet access and disk space for native images. Run from the repository root. This uses the existing lab processing environment without opening its UI or restarting a running lab.
 
 ```sh
-pnpm install --frozen-lockfile
-python3 -m venv .local/open-star-removal/venv
-.local/open-star-removal/venv/bin/python -m pip install tensorflow==2.16.2 numpy==1.26.4 opencv-python-headless==4.11.0.86 scipy==1.13.1
-curl -fL https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb -o .local/open-star-removal/noxGeneratorColor.pb
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:packages
+node --experimental-strip-types labs/nebula/src/run.ts prepare-processing-environment
 pnpm prepare:nebulae
 pnpm dev
 ```
 
-`pnpm prepare:nebulae` handles **all nine accepted lenses**, then regenerates their dataset cards and the shared source/telescope graphs. Success prints `DELIVERY_CACHED` or `BAKE_COMPLETE` for LMC, `NEBULA_OBJECTS_COMPLETE` for the three smaller nebulae, and the prepared mission/machine/dataset totals. A cached invocation hashes every installed texture before reporting `verified`; it does not rerun NOX. Missing derived products are restored; changed pinned scientific inputs fail. M2–9 replays its symmetry recipe if its local volume is absent.
+`pnpm prepare:nebulae` handles **all 23 configured lenses**, then regenerates their dataset cards and the shared source/telescope graphs. Success prints `DELIVERY_CACHED` or `BAKE_COMPLETE` for LMC, `NEBULA_OBJECTS_COMPLETE` for the six smaller nebulae, and the prepared mission/machine/dataset totals. A cached invocation hashes every installed texture before reporting `verified`; it does not rerun NOX. Missing derived products are restored; changed pinned scientific inputs fail. M2–9 replays its symmetry recipe if its local volume is absent. The delivery receipts identify actual output versions; a successful replay is not an independent visual or scientific acceptance.
 
 Source recipes, provenance, requests and small object descriptors are committed. Textures, prepared descriptors and receipts under each object's `prepared/`, native caches and intermediate results are ignored. Runtime consumes prepared geometry and pixels only.
+
+For work elsewhere in the application, `pnpm dev` no longer runs this full nebula
+preparation. Startup checks each volume's bank, textures, previews and presentation
+against its existing identities. Missing or invalid packages show an unavailable
+3D view with their catalogue facts; installed packages remain usable. This is an
+installation state, not a change to the object registry or scientific catalogue.
+Production builds require all configured packages, including when invoking
+`astro build` directly.
+
+To restore one of the six Galactic nebulae through its existing delivery recipe:
+
+```sh
+node --experimental-strip-types labs/nebula/src/run.ts prepare-nebula-objects --object=helix --if-missing
+pnpm prepare:sources
+```
+
+The processing prerequisites above still apply. Restart the development server
+after restoration; available banks are selected once at startup. LMC keeps the
+existing `bake-nebula --if-missing` preparation used by `pnpm prepare:nebulae`.
 
 ## Spectral datasets and source cards
 
@@ -37,9 +58,12 @@ Source recipes, provenance, requests and small object descriptors are committed.
 | M42 | `eso-optical`, `eso-vista` | `source/request.json`, `source/delivery.json`, and the pinned lab compiler/evidence recipes |
 | Helix | `eso-vista`, `eso-wfi`, `eso-wide` | The same compiler contract, including its molecular-velocity evidence |
 | M2–9 | `hst-optical` | The symmetry recipe and `source/image-frame.json` |
+| M45 | `optical-composite`, `noirlab-optical`, `spitzer-irac`, `spitzer-irac-mips`, `wise-four-band` | Delivery and request records; compiler, observed stellar catalogue and the declared optical-composite recipe |
+| M1 | `hubble-optical`, `webb-infrared`, `webb-components`, `spitzer-infrared`, `vla-radio`, `chandra-xray` | Delivery and request records; sampled ejecta/pulsar-wind recipe and per-image registration records |
+| M8 | `eso-optical`, `eso-vista`, `spitzer-mid-infrared` | Delivery and request records; selected three-image observations and the local evidence-guided depth recipe |
 | LMC | `vista-infrared`, `horalek-widefield`, `wise-wide-infrared` | `labs/nebula/models/lmc/bake.json`, accepted registration, per-image appearance and `source/lenses.json` |
 
-The native images and their completed star-removal products feed reconstruction. **The small source-card previews never feed the cloud bake.** Shared geometry and star positions remain independent of lens selection; each lens carries its registered color treatment and saved display settings. The accepted M2–9 model has no prepared stars.
+The native images and their completed star-removal or explicit compact-emission-preservation products feed reconstruction. **The source-card previews never feed the cloud bake.** Shared geometry and star positions remain independent of lens selection; each lens carries its registered color treatment and saved display settings. Pleiades' composite reference preview is Niittee's original wide photograph before NOIRLab detail fusion. Crab's Hubble 2017 bridge supports registration and is excluded from selectable lenses. M2–9 gains an independently catalogued surrounding field; its symmetry image does not infer those stellar positions.
 
 Each object owns `source/presentation.json` and a source manifest with image identities, credits, capture evidence and supporting scientific references. `prepare:nebulae` and `prepare:sources` generate `prepared/presentation.json`, standard `cssearth-object-provenance@3` lineage, bounded WebP previews and shared source usage. These generated files are ignored. An ordinary rebake takes the current descriptor's output identity; it does not require editing a duplicate presentation hash.
 
@@ -47,21 +71,24 @@ The site reuses the planets' dataset selector, descriptions, details and source/
 
 ## Using the shared dataset panels
 
-Select a dataset on the left to recolor the retained cloud. Its image credit and supporting observations appear on the right. The catalogue-star toggle preserves the common positions across spectral lenses; M2–9 has no inferred star catalogue.
+Select a dataset on the left to recolor the retained cloud. Its image credit and supporting observations appear on the right. The catalogue-star toggle preserves the common positions across spectral lenses. Dataset rows show only image names; the selected image dimensions and passbands are in Factsheet. Scene labels follow the top of each projected cloud and retain fading and double-click navigation.
 
-![Orion with its VISTA dataset, source preview and observation sidebar](../images/nebulae/m42-datasets.jpg)
+![Pleiades optical composite in the shared galaxy app](../images/nebulae/m45-galaxy.png)
 
-Orion, ESO VISTA near infrared (ESO/J. Emerson/VISTA; Cambridge Astronomical Survey Unit).
+Pleiades: Taavi Niittee / Tõrva Astronomy Club wide optical image, with central
+NOIRLab detail. The photo coverage and remaining inferred thin-cloud limitations
+are described in the object record above.
 
-![Helix with its wide optical dataset and the supporting telescopes](../images/nebulae/helix-datasets.jpg)
+![Crab optical cloud in the shared galaxy app](../images/nebulae/m1-galaxy.png)
 
-Helix, ESO wider-field optical observation, with VISTA and WFI retained as supporting observations.
+Crab: NASA/ESA, Allison Loll, Jeff Hester and Davide De Martin; released SITELLE
+spatial samples supply the conditional ejecta structure.
 
-![M2–9 with its Hubble dataset and source attribution](../images/nebulae/m2-9-datasets.jpg)
+![Lagoon optical cloud in the shared galaxy app](../images/nebulae/m8-galaxy.png)
 
-M2–9, Hubble optical (Bruce Balick, Vincent Icke, Garrelt Mellema, NASA/ESA).
-
-These are actual shared-app captures at 1440 × 1000 CSS pixels, DPR 1, from `6d07dface` with the subsequent dependency and browser-readiness corrections. They illustrate the dataset workflow and current appearance, not an independent measurement of 3D shape. The browser probe switches all nine datasets and retains the camera; the source records linked above own the processing and scientific limits.
+Lagoon: ESO optical. These are main-app captures, with the shared dataset panels,
+catalogue fields and labels above the projected clouds. Front and oblique views
+are checked separately; a front screenshot does not prove physical depth.
 
 ## Distant appearance
 
@@ -87,8 +114,26 @@ The main site's prepared-resource glob includes the generated proxy PNGs automat
 
 ## Integration evidence
 
-`site/test/nebula-datasets-browser.mts` checks all nine accepted lenses, preview decoding, image-source links, retained camera/scene, star toggles and responsive dataset/factsheet panels. Shared source/graph tests verify canonical bindings and actual package ownership. This checks delivery and presentation, not the physical validity of inferred depth.
+The [current provenance inspection](../../site/test/evidence/nebula-provenance-2026-09-14/)
+records the source-card cases, delivered input identities, browser version,
+viewport, DPR and cameras. It concerns application behavior and attribution,
+not scientific validation of inferred cloud depth. Every object README links its
+own investigation ledger and original processing assessments.
 
-The main-site browser check (`site/test/nebula-world-browser.mts`) exercises all three objects and six lenses through the real shared input surface: label double-clicks navigate with one document load, lens changes retain the camera and scene nodes, and approaching M42/Helix enlarges their prepared compact lights. Front and oblique captures were inspected for this delivery. M2–9 has no prepared star catalogue. Existing image-coverage/background artifacts remain; these checks do not establish measured three-dimensional density.
+The [retained integration reports](../../site/test/evidence/nebulae/2026-09-14/)
+preserve earlier catalogue-field and final Helix/Lagoon visual checks without
+rewriting their results. The capture map locates the original images and their
+hashes; routine navigation screenshots remain scratch. The final historical
+visual report omitted browser version and viewport, a limitation recorded
+beside it rather than filled retrospectively.
 
-Deleting one prepared M42 texture and replaying preparation restored its exact original hash and retained the assessed result. The full preparation command verified all three deliveries. A fresh native-image/NOX environment replay was not performed for this integration; the clean-checkout sequence above documents its required dependencies.
+The screenshots above show the delivered clouds at `5569fa211`. Their original
+source-card text predates the attribution corrections. All seven prepared
+volume-bank identities remain unchanged during the contract alignment; that
+comparison permits reuse of cloud appearance findings, not old metadata claims.
+
+The [earlier integration account](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/docs/nebulae/README.md#integration-evidence)
+retains its original scope and limitations. Cold native-processing replay,
+quantitative axis-handoff requalification and unrelated planet suites are not
+claimed by a provenance-only update. Existing material defects remain in the
+object records and investigation ledgers.

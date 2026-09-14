@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { assertRenderedObjectControls, loadPlanetBrowserProfile, validatePlanetBrowserProfile } from "./load-browser-profile.mts";
 import type { BrowserPage, ObjectBrowserProfile } from "./browser-profile-types.mts";
 import type { ObjectControls } from "../../src/renderers/css/dist/platform/object-contract.js";
@@ -99,7 +99,7 @@ test("a single supplied lens keeps interaction proof without inventing a race", 
 });
 
 test("all objects retain browser evidence for the controls they support", async () => {
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const current = await loadPlanetBrowserProfile(object);
     if (current.objectControls.settings?.controls.some(({ name }) => name === "speed")) {
       assert.equal(current.audit?.retained.speedClicks, 5, object.id);

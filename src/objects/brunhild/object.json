@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0d125c7a809824c4cb4433c678d04ef751dbdad86cafc05566bbe57682ec01a7"
+          "sha256": "aa2b24707cf0f90692e7a5ad8d1aa605ccab39850f6f98044c28200cdc09d0de"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f30701d7a29f480b04c5ba5a8befa17b121caf1e97afc7394678ae6b6d29d9dd"
+        "sha256": "a70ef1ee98cf6dd77c6095b755d897950423e7f28a8a0e14623ae678a4cb617b"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6955168441339983,
-      "description": "Explore Brunhild in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in July 1872.",
       "systemName": "Solar System",
       "order": 271,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "cf3ef70264e311d823e824338212aa68f9db785814cb9e545632af6335dfc1ac"
+    "sha256": "50f554213d5c2076f3cc57f2b2629acb36cb16328a99ab4b8609a4e59533cd33"
   }
 }

@@ -4,7 +4,6 @@
   "id": "ophelia",
   "displayName": "Ophelia",
   "panel": {
-    "introduction": "Ophelia is the outer shepherd of Uranus’s epsilon ring. Together with Cordelia, it helps confine the narrow ring through gravitational resonances.",
     "facts": [
       {
         "id": "radius",
@@ -49,9 +48,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
-        "title": "Approximate shape model",
-        "detail": "Published shape",
         "thumbnail": "/scenes/ophelia/ophelia-model-thumbnail.webp",
         "surface": "ophelia-model-surface@2x.webp",
         "poles": "ophelia-model-poles@2x.webp",
@@ -60,7 +56,8 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.1006/icar.2001.6596"
         },
-        "summary": "A 54 × 38 × 38 km shape estimate from Voyager. Two axes are assumed equal; gray grid: no surface imagery."
+        "notes": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
+        "noData": true
       }
     ]
   },

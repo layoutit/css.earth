@@ -4,7 +4,6 @@
   "id": "belinda",
   "displayName": "Belinda",
   "panel": {
-    "introduction": "Belinda is an elongated inner moon of Uranus, discovered in Voyager 2 images in 1986. Its changing brightness supports a shape about twice as long as it is wide. It travels around Uranus in roughly fifteen hours.",
     "facts": [
       {
         "id": "radius",
@@ -49,9 +48,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "A prolate ellipsoid fitted to Voyager measurements and Hubble photometry. Its long axis is twice the short axis; the equal short axes are a source assumption. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the approximate shape.",
-        "title": "Approximate shape model",
-        "detail": "Measured shape",
         "thumbnail": "/scenes/belinda/belinda-model-thumbnail.webp",
         "surface": "belinda-model-surface@2x.webp",
         "poles": "belinda-model-poles@2x.webp",
@@ -60,7 +56,8 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.1006/icar.2001.6596"
         },
-        "summary": "Shape estimated from Voyager and Hubble observations. Two axes are assumed equal; gray grid: no imagery."
+        "notes": "A prolate ellipsoid fitted to Voyager measurements and Hubble photometry. Its long axis is twice the short axis; the equal short axes are a source assumption. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the approximate shape.",
+        "noData": true
       }
     ]
   },

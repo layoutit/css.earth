@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e025e95903072722bf92632faf2e04b5805593fac0ba75ad394a1287202f14e6"
+          "sha256": "07fdc008b375a26d4f26f65e1bea408e9432a3450b6518744e24172b42725a3b"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "366146518441c90856fd79a4cae47af4bbd21393d979474293605fcad8f2b623"
+        "sha256": "9b4f28dea088423656f55f4bbf93921cc5cfbafeab11c525e36406c78abf29f7"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.426170909674805,
-      "description": "Explore Hebe in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in July 1847.",
       "systemName": "Solar System",
       "order": 155,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "1cedaf0196ce4130bcc957ea2864686d5536f6ba19a024ab89aada2efed86e07"
+    "sha256": "3e75d18457c2a11dbfdb71ff749f240de038f1453c85c189ed50b8f3aeef481d"
   }
 }

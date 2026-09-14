@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "1f5b4bcfe98983358a0dbbc0a752e6846d43f815a1160e7da3266e6c47aa2d2a"
+    "sha256": "4bf1d55fb4ad72e7995544db4caca61717e15bc9c3dedc276aaf885703a0f4e3"
   },
   "id": "europa",
   "properties": {
@@ -65,6 +65,11 @@
               "material": "lighting"
             },
             {
+              "id": "galileo",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "enhanced",
               "source": "content",
               "material": "lighting"
@@ -81,6 +86,21 @@
             },
             {
               "id": "infrared",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ice-signature",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "fine-ice",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "coarse-ice",
               "source": "content",
               "material": "lighting"
             }
@@ -103,7 +123,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "086f7fd9933c8de9738fd857b5f6f94b56bba63344fe42c5bc7437d81a942b83"
+          "sha256": "c1fd90d5c68c04e5ff9d901db7442057143ba4c4c12ee2213521fba056decede"
         },
         {
           "id": "geometry",
@@ -123,7 +143,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "95869f5400c626c6d3302c9466003ede4b3b6eba525f87d6de0e56e516814c81"
+          "sha256": "ecdadd63438967d6e9dd54f21b5d7777fd3d4819fa2c1e50bfd38a403c7903ab"
         },
         {
           "id": "solar-system",
@@ -143,7 +163,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "94cec47f070ff5ecd4418e1bb74ddc91bd58eb5d1b04339555e7443f81ba9cb3"
+          "sha256": "c867b450940c18b42b6f567f672c3606ee8f61054763881cc66fab2c71164130"
         },
         {
           "id": "features",
@@ -158,11 +178,12 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/planet-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/objects/europa/composition.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "56b5dbaa4ea9eda82f55bd29adc9c5110951af5d59697ba5bba0932ebebd0677"
+        "sha256": "033169d9062a0223f52f9a91cb2aa88f1718c0d4bbdc402237afc47c37c2149e"
       }
     },
     "catalog": {
@@ -170,7 +191,7 @@
       "classification": "satellite",
       "color": "#b5b3a9",
       "distanceAu": 5.2,
-      "description": "Explore Europa in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s fractured icy moon and its orbit around Jupiter.",
+      "description": "Icy moon of Jupiter whose ocean may hold twice the water of Earth's oceans.",
       "systemName": "Solar System",
       "order": 427,
       "context": {

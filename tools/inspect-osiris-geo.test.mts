@@ -13,7 +13,7 @@ const sampleGeo = (frame: ReturnType<typeof decodeOsirisGeo> & { quality?: { fla
   image: { width: frame.width, height: frame.height, values: frame.planes.IMAGE, ...(frame.colorPlanes ? { colorValues: frame.colorPlanes } : {}), startTime: frame.startTime, filter: frame.filter, report: {},
     reject: i => (frame.acceptPixel && !frame.acceptPixel(i)) || (frame.quality && !acceptOsirisQuality(frame.quality.flags[i], frame.quality.allowLossy)) ? 'quality' : null },
   camera: { project: point => project(matrix, point.map(n => n / 1000)) }, geometry: archiveBackplanes(frame, { positionMeters: [0, 0, 0] }),
-  photometry: photometry ? diskPhotometry(photometry) : { gain: () => 1 } }, pointKm.map(n => n * 1000), { maximumSeparationMeters, maximumEmissionDegrees });
+  photometry: photometry ? diskPhotometry(photometry) : { gain: () => 1, retainsIllumination: true } }, pointKm.map(n => n * 1000), { maximumSeparationMeters, maximumEmissionDegrees });
 
 test('radiance factor uses calibrated solar flux and squared distance without normalizing twice', () => {
   const history = 'SOLAR_DISTANCE = 2 <AU>\nSOLAR_FLUX = 4 <W/m**2/nm>\nROSETTA:REFLECTIVITY_NORMALIZATION_FLAG = FALSE\n';
@@ -85,7 +85,9 @@ test('quality map requires positive VALID and exact companion identity/radiance'
   assert.equal(acceptOsirisQuality(9, false), false);
   for (const bit of [2, 4, 16, 32, 64, 128]) assert.equal(acceptOsirisQuality(1 | bit, true), false);
   const qualifiedFrame = { ...frame, quality: { ...quality, allowLossy: true } };
-  assert.equal(sampleGeo(qualifiedFrame, [[1, 0, 0, .5], [0, 1, 0, .5], [0, 0, 1, 1]], [0, 0, 0], { maximumSeparationMeters: 20, maximumEmissionDegrees: 80 }).reason, 'quality');
+  // Two qualified pixels carry half the weight at the centre; nearer the rejected row, too little qualified weight remains.
+  assert.equal(sampleGeo(qualifiedFrame, [[1, 0, 0, .5], [0, 1, 0, .5], [0, 0, 1, 1]], [0, 0, 0], { maximumSeparationMeters: 20, maximumEmissionDegrees: 80 }).reason, undefined);
+  assert.equal(sampleGeo(qualifiedFrame, [[1, 0, 0, .5], [0, 1, 0, .75], [0, 0, 1, 1]], [0, 0, 0], { maximumSeparationMeters: 20, maximumEmissionDegrees: 80 }).reason, 'quality');
   const wrongImage = Buffer.from(bytes); wrongImage.writeFloatLE(0, 2048);
   assert.throws(() => decodeOsirisQuality(wrongImage, frame), /radiance differs/);
   const wrongDate = Buffer.from(bytes); wrongDate.write('2015', wrongDate.indexOf('2014'));
@@ -137,13 +139,21 @@ test('surface sampling rejects occlusion boundaries and grazing geometry without
   assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance, 1);
   frame.planes.IMAGE.fill(-2);
   assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance, -2);
+  // One contributor across an occlusion boundary, at grazing emission or without geometry is left out, and darkness stays; most of the weight rejects.
+  const z = frame.planes.COORDINATE_Z_IMAGE.slice(), emissions = frame.planes.EMISSION_ANGLE_IMAGE.slice();
   frame.planes.COORDINATE_Z_IMAGE[3] = .1;
+  assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance, -2);
+  for (const i of [0, 1]) frame.planes.COORDINATE_Z_IMAGE[i] = .1;
   assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).reason, 'geometry-mismatch');
-  frame.planes.COORDINATE_Z_IMAGE[3] = 0;
+  frame.planes.COORDINATE_Z_IMAGE.set(z);
   frame.planes.EMISSION_ANGLE_IMAGE[0] = Math.PI / 2;
+  assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance, -2);
+  for (const i of [1, 2]) frame.planes.EMISSION_ANGLE_IMAGE[i] = Math.PI / 2;
   assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).reason, 'grazing');
-  frame.planes.EMISSION_ANGLE_IMAGE[0] = .2;
+  frame.planes.EMISSION_ANGLE_IMAGE.set(emissions);
   frame.planes.FACET_INDEX_IMAGE[0] = 0;
+  assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance, -2);
+  frame.planes.FACET_INDEX_IMAGE.set([0, 0, 0]);
   assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).reason, 'no-geometry');
   assert.equal(sampleGeo(frame, matrix, [2, 0, 0], policy).reason, 'outside-detector');
 });
@@ -156,8 +166,12 @@ test('registered filter colors share interpolation and geometry rejection with g
   const sampled = sampleGeo(frame, matrix, [0, 0, 0], policy);
   assert.equal(sampled.reason, undefined);
   assert.deepEqual(sampled.reason ? undefined : sampled.color, [0, 3, 8]);
+  // A pixel on another surface or failing quality leaves every band together.
   native.planes.COORDINATE_Z_IMAGE[3] = .1;
-  assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).reason, 'geometry-mismatch');
+  const withoutFourth = sampleGeo(frame, matrix, [0, 0, 0], policy);
+  assert.deepEqual(withoutFourth.reason ? undefined : withoutFourth.color, [0, 2, 8]);
   native.planes.COORDINATE_Z_IMAGE[3] = 0;
-  assert.equal(sampleGeo({ ...frame, acceptPixel: i => i !== 3 }, matrix, [0, 0, 0], policy).reason, 'quality');
+  const qualityDropped = sampleGeo({ ...frame, acceptPixel: i => i !== 3 }, matrix, [0, 0, 0], policy);
+  assert.deepEqual(qualityDropped.reason ? undefined : qualityDropped.color, [0, 2, 8]);
+  assert.equal(sampleGeo({ ...frame, acceptPixel: i => i === 0 }, matrix, [0, 0, 0], policy).reason, 'quality');
 });

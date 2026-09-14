@@ -5,10 +5,10 @@ import { availableParallelism, totalmem } from "node:os";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { authoredObject } from './authored-object.mts';
 
-export interface ObjectCommand {command: string; argumentsList: readonly string[]; cwd?: string;}
+export interface ObjectCommand {command: string; argumentsList: readonly string[]; cwd?: string; env?: Readonly<Record<string, string | undefined>>;}
 export interface PreparationCommand extends ObjectCommand {id: string; cwd: string;}
 export interface ObjectCommandOutcome {exitCode: number | null; signal: string | null;}
 export interface PreparationResult {id: string; script: string; status: 'not-started' | 'running' | 'succeeded' | 'failed'; startedAt?: string; exitCode?: number | null; signal?: string | null; error?: string; elapsedMilliseconds?: number;}
@@ -116,9 +116,9 @@ export function defaultPreparationConcurrency({
   return 1;
 }
 
-export async function runObjectCommand({ command, argumentsList, cwd }: ObjectCommand): Promise<ObjectCommandOutcome> {
+export async function runObjectCommand({ command, argumentsList, cwd, env }: ObjectCommand): Promise<ObjectCommandOutcome> {
   return new Promise<ObjectCommandOutcome>((resolvePromise, reject) => {
-    const child = spawn(command, argumentsList, { cwd, stdio: "inherit" });
+    const child = spawn(command, argumentsList, { cwd, env, stdio: "inherit" });
     child.once("error", reject);
     // close follows process exit and closure of its inherited output streams.
     child.once("close", (exitCode, signal) => resolvePromise({ exitCode, signal }));
@@ -127,16 +127,16 @@ export async function runObjectCommand({ command, argumentsList, cwd }: ObjectCo
 
 export async function runPreparationObjects({
   projectRoot = process.cwd(),
-  objectIds = OBJECTS.map(({ id }) => id),
+  objectIds = SCENE_OBJECTS.map(({ id }) => id),
   concurrency = defaultPreparationConcurrency(),
   argumentsList = [],
   runCommand = runObjectCommand,
   onEvent = printPreparationProgress,
 }: PreparationOptions = {}) {
-  const knownIds = new Set(OBJECTS.map(({ id }) => id));
+  const knownIds = new Set(SCENE_OBJECTS.map(({ id }) => id));
   if (!isArray(objectIds) || objectIds.some(id => !knownIds.has(id)) ||
       new Set(objectIds).size !== objectIds.length) {
-    throw new TypeError("Preparation requires unique IDs from OBJECTS.");
+    throw new TypeError("Preparation requires unique IDs from SCENE_OBJECTS.");
   }
   if (!Number.isSafeInteger(concurrency) || concurrency < 1 ||
       !isArray(argumentsList) || argumentsList.some(value => typeof value !== "string") ||
@@ -248,7 +248,7 @@ async function main(mode = process.argv[2]) {
     return;
   }
 
-  for (const { id } of OBJECTS) {
+  for (const { id } of SCENE_OBJECTS) {
     const argumentsList = mode === "test"
       ? ["--test", ...await discoverPlanetTests(id)]
       : [await resolvePlanetCommand(id, mode), ...(await authoredObject(id) && mode !== 'browser' ? [mode, id] : []), ...process.argv.slice(3)];

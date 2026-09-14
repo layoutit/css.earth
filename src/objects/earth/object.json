@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a419086f745edda3a536cc00d033043f671d36db6aa7b98a8e2fbb4fe7223821"
+    "sha256": "8f1bf7700ac1aa818ae9e601ffba3eb8c9ef64a70352c813ca017194e0f8abfc"
   },
   "id": "earth",
   "properties": {
@@ -37,7 +37,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "50e9a88dc17065449cad996166561eb11c968dc6e4a500f2b26eae7d8b69345f"
+          "sha256": "38ff89966c0093260afef6a4d67a3953287ffacb3a78d9d651136453d6364805"
         },
         {
           "id": "lens-bindings",
@@ -183,7 +183,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1b832151063f9916fa136e00d75cfea25e40754be64d8ceaf867cccecf4a8001"
+        "sha256": "76feaff8832bf9158cef5e46927aeae782149f73cd8c547c2f316b9a2ff8ec7a"
       }
     },
     "catalog": {
@@ -191,7 +191,7 @@
       "classification": "planet",
       "color": "#5b82a7",
       "distanceAu": 1,
-      "description": "Explore Earth in 3D with cssEarth. Orbit our home planet, discover its surface and atmosphere, and browse scientific facts in your browser.",
+      "description": "Our home planet, the only place known to host life.",
       "systemName": "Solar System",
       "order": 119,
       "context": {

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "b701c422af28edc5146da02138cfaccc89f061f4a39618954385a9c21af65083"
+          "sha256": "b9248fd625e9da053c602bc9afe667e42e521370c8d6787a75cc605ce8ed70bc"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "39d0d4a9cc88b158054f75a4b538bc64785ad7f0830d1306c21cacd8ebd5db8f"
+        "sha256": "6ab0900e570296dce1959dccf8e20de459fcc96b02534055f3b0d944058ae22b"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.339551786449215,
-      "description": "Explore Braille with a clearly labelled approximation of its published flyby dimensions.",
+      "description": "Small Mars-crossing asteroid that Deep Space 1 flew past.",
       "systemName": "Solar System",
       "order": 361,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "9340b8ff11386832559e45600cf47049b7863ce45a170218d04040f9354e3b1c"
+    "sha256": "804b87d486f9a29a6cd4b0013bb8707d0f763d573506b404e8b017ad0a5ed03b"
   }
 }

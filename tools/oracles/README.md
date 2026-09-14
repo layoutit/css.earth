@@ -8,6 +8,7 @@ are older standalone audits; the groups below are fixture oracles.
 
 | Oracle | Verifies | Script | Comparing test |
 | --- | --- | --- | --- |
+| [Native SBMT](sbmt/README.md) | SUM/INFO pointing, PDS vertex-facet geometry, visibility, FITS samples and image-to-mesh UV projection; differences remain explicit | `sbmt/projection.mts` | `sbmt/projection.test.mts` |
 | SpiceyPy (CSPICE N0067) | `tools/spice/`: leap seconds, TDB, SCLK, SPK states with `NONE`, `LT`, `LT+S`, `CN`, `CN+S`, every frame class, and where the DRACO camera places archived intercepts (read with pds4_tools) | `spice/dart-draco.py` | `tools/spice/oracle.test.mts` |
 | pds4_tools | `pds4-geometry-cube.mts`: every label-defined plane of the DART DRACO cube, values, flags and unit conversions | `pds/dart-draco-cube.py` | `pds4-geometry-cube.oracle.test.mts` |
 | pvl, numpy | `osiris-geo.mts`: the Rosetta OSIRIS level-5 geometry planes and level-4 quality companion (67P) | `pds3/osiris-geo.py` | `osiris-geo.oracle.test.mts` |
@@ -15,6 +16,9 @@ are older standalone audits; the groups below are fixture oracles.
 | pvl, numpy, astropy | `amica-geo.mts`: the Hayabusa AMICA Gaskell DDR cube, detector FITS and flat field (Itokawa) | `pds3/amica-ddr.py` | `amica-geo.oracle.test.mts` |
 | astropy | `llorri-geo.mts`: the Lucy L'LORRI HDUs and the TAN-SIP distortion through `astropy.wcs` (Donaldjohanson) | `fits/llorri.py` | `llorri-geo.oracle.test.mts` |
 | astropy | `encounter-fits.mts`: Deep Impact ITS (Tempel 1), Stardust NAVCAM (Wild 2) and MRI (Hartley 2) planes, identity and accept or reject counts | `fits/encounter.py` | `encounter-fits.oracle.test.mts` |
+| astropy | Shared FITS numeric decoding, scaling, missing values, cube planes and image extensions | `fits/core.py` | `tools/fits.oracle.test.mts` |
+| astropy | Every ESO HIERARCH value and every pixel of four released Pallas SPHERE images; no camera or surface qualification | `fits/pallas.py` | `tools/fits-pallas.test.mts` |
+| astropy | Sun synoptic and Jupiter HST/OPAL images, including archived header conventions | `fits/synoptic.py` | `tools/fits-products.test.mts` |
 | astropy, numpy | `observation/spectral-band-maps.mts`: Charon LEISA spectra, per-pixel wavelengths, archived coordinates and ice-band estimators near Organa | `fits/charon-leisa.py` | `observation/spectral-band-maps.test.mts` |
 | pvl, numpy | `isis2-qube.mts`: the Deep Space 1 MICAS orthographic image and DEM component cubes and their special pixels (Borrelly) | `isis2/borrelly-micas.py` | `isis2-qube.oracle.test.mts` |
 | USGS ISIS 10.0.0_LTS unit-test truth files | `tools/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `isis/photometric-truth.py` | `tools/photometry/isis.oracle.test.mts` |
@@ -30,11 +34,15 @@ same group and name, and the comparing tests beside the code they check (under
   another project's test data, is a reference: its URL names a commit, and the
   fixture records its sha256 and size. `tools/oracle-fixtures.test.mts`, part of
   `pnpm test:platform`, refuses a fixture whose tool versions differ from
-  `requirements.txt`, whose inputs are not the bodies' manifest pins, or whose
+  `requirements.txt`, whose inputs are not the bodies' manifest input/document pins
+  or the hashed checked-in test files and test-only archive acquisition record
+  under `tests/fixtures/fits/`, or whose
   references are not pinned to a commit. It needs neither Python nor restored
   sources.
 - Comparing tests read the committed fixture and the same pinned inputs the
   pipeline reads. They run without Python.
+  `readOracleInput` checks the actual bytes and SHA-256 immediately before a FITS
+  comparison; matching a fixture to a manifest declaration alone is not that check.
 - An oracle reads the archive with its own reader. It may read a recipe's declared
   policy, such as a detector border, but never a value the pipeline computed.
 - Regenerate a fixture only when the oracle version or an input changes, and say
@@ -44,6 +52,13 @@ same group and name, and the comparing tests beside the code they check (under
   a recipe or a prepared file.
 
 ## Setup and use
+
+SBMT is an opt-in native backend: `pnpm oracles:setup sbmt`, then
+`pnpm oracles:run sbmt/projection`. It uses the same fixture envelope with a
+pinned executable/software lock and generator digest. `pnpm test:sbmt --unit`
+runs offline in CI; `pnpm test:sbmt --restore` restores only its selected inputs
+and runs all cases. See its [coverage and known differences](sbmt/README.md).
+The commands below operate on the Python backends.
 
 ```bash
 pnpm oracles:setup

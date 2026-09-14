@@ -1,0 +1,42 @@
+{
+  "id": "nasa-pia09263",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Pleiades · Spitzer · IRAC + MIPS 4.5–24 µm",
+  "identifiers": [
+    {
+      "type": "NASA Photojournal",
+      "value": "PIA09263"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
+      "label": "Published source"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.spitzer.caltech.edu/page/image-use-policy",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m45/processing-observations.json",
+      "revision": "9d0a453d4c82637ebc54277f97281e0c8426e85b",
+      "sha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705",
+      "locator": "/images/2"
+    }
+  ],
+  "publisher": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m45/processing-observations.json#/images/2"
+    }
+  ]
+}

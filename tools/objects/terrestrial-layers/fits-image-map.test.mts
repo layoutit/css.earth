@@ -50,7 +50,7 @@ test('FITS scalar maps refuse wrong quantities, units, solution identities and i
     { extension: 3 }, { sampling: 'bilinear' }, { grid: { ...recipe.grid, width: 5 } }]) {
     assert.throws(() => decodeFitsImageMap(file(), { ...recipe, ...change }));
   }
-  assert.throws(() => decodeFitsImageMap(file().subarray(0, -1), recipe), /truncated/);
+  assert.throws(() => decodeFitsImageMap(file().subarray(0, -1), recipe), /truncated/i);
   const scaled = file(); Buffer.from('BSCALE  = 2'.padEnd(80)).copy(scaled, 2880 + 9 * 80);
   Buffer.from('END'.padEnd(80)).copy(scaled, 2880 + 10 * 80);
   assert.throws(() => decodeFitsImageMap(scaled, recipe), /layout/);

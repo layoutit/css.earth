@@ -1,198 +1,36 @@
 import { isArray } from '../src/platform/is-array.mts';
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
-import { access, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { createHash, randomUUID } from "node:crypto";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
-import { basename, dirname, isAbsolute, relative, resolve } from "node:path";
+import { basename, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import sharp from "sharp";
-import type { Node, ImportDeclaration, VariableDeclaration } from 'estree';
-import { parseRuntimeSource } from './runtime-source-graph.mts';
-import { nodeName } from './runtime-ast.mts';
-import { hasErrorCode, isRecord, requireRecord, requireArray, requireString } from './source-values.mts';
-import type { PreparationOptions, PreparationEvent, PreparationCommand, ObjectCommandOutcome } from './run-implemented-planets.mts';
-import type { PreparationInputKinds } from './preparation-cache.mts';
-export interface PreparationFileSet {inputs: string[]; outputs: string[]; inputKinds?: PreparationInputKinds;}
-type CacheEvent = PreparationEvent | {phase: 'verified-cache-hit'; id: string; outputs: number};
+import { hasErrorCode, requireString } from './source-values.mts';
+import type { PreparationOptions, PreparationEvent } from './run-implemented-planets.mts';
+type CacheEvent = PreparationEvent | {phase: 'verified-cache-hit'; id: string; inputs: number; outputs: number}
+  | {phase: 'receipt-refused'; id: string; reason: string};
 export interface CachedPreparationOptions extends Omit<PreparationOptions, 'onEvent' | 'argumentsList'> {
   force?: boolean; schedule?: typeof runPreparationObjects;
   environment?: () => Promise<Record<string, unknown>>;
   sharedFiles?: (root: string) => Promise<readonly string[]>;
-  packageFiles?: (root: string, id: string) => Promise<PreparationFileSet>;
   onEvent?: (event: CacheEvent) => void;
 }
 
 import cwebpPath from "cwebp-bin";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { defaultPreparationConcurrency, runObjectCommand, runPreparationObjects } from "./run-implemented-planets.mts";
-import { fingerprintPreparationFiles, readPreparationReceipt, writePreparationReceipt } from "./preparation-cache.mts";
-import { readObjectPreparation } from "./object-preparation.mts";
-import { authoredObject } from './authored-object.mts';
+import { readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "./preparation-cache.mts";
+import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
 
 const sharedSteps = ["prepare-shell-titles.mts", "prepare-wordmark-rail.mts",
   "prepare-planet-title-sources.mts", "prepare-scientific-charts.mts"];
 const cacheRoot = ".local/preparation";
+const traceModule = new URL("./preparation-trace.mts", import.meta.url).href;
 const hash = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
 const require = createRequire(import.meta.url);
-const generatedModule = (path: string) => /\/(?:runtime|site)\/prepared[^/]*\.mjs$/.test(path);
-const ignoredSource = (path: string) => /\/(?:test|oracle|node_modules)\//.test(path) || path.endsWith(".test.mjs");
 
-export async function listPreparationFiles(root: string, directory: string): Promise<string[]> {
-  const files: string[] = [];
-  async function visit(path: string): Promise<void> {
-    let entries;
-    try { entries = await readdir(resolve(root, path), { withFileTypes: true }); }
-    catch (error) { if (hasErrorCode(error, "ENOENT")) return; throw error; }
-    for (const entry of entries.sort((a, b) => a.name.localeCompare(b.name))) {
-      const child = `${path}/${entry.name}`;
-      if (entry.name === ".DS_Store" || ignoredSource(child + (entry.isDirectory() ? "/" : ""))) continue;
-      if (entry.isDirectory()) await visit(child);
-      else files.push(child);
-    }
-  }
-  await visit(directory);
-  return files.sort();
-}
-
-export async function preparationFileSets(root: string, id: string) {
-  const declaration = `src/objects/${id}/preparation.json`;
-  let recipe;
-  try { recipe = requireRecord(JSON.parse(await readFile(resolve(root, declaration), "utf8"))); }
-  catch (error) { if (hasErrorCode(error, "ENOENT")) return []; throw error; }
-  assert.equal(recipe.schema, "cssearth-preparation-inputs@1");
-  assert.ok(isArray(recipe.fileSets));
-  const paths = [declaration];
-  for (const value of requireArray(recipe.fileSets)) {
-    const set = requireRecord(value);
-    for (const path of [set.manifest, set.directory]) {
-      assert.ok(typeof path === "string" && path && !isAbsolute(path) && !path.split(/[\\/]/).includes(".."), "Unsafe preparation file set");
-    }
-    const manifest = requireRecord(JSON.parse(await readFile(resolve(root, requireString(set.manifest)), "utf8")));
-    assert.ok(typeof manifest.version === "string" && /^[a-zA-Z0-9_-]+$/.test(manifest.version));
-    assert.ok(isArray(manifest.files) && manifest.files.length);
-    paths.push(requireString(set.manifest));
-    const names = new Set();
-    for (const value of requireArray(manifest.files)) {
-      const file = requireRecord(value);
-      assert.ok(typeof file.filename === "string" && /^[a-zA-Z0-9_.-]+$/.test(file.filename) &&
-        ![".", ".."].includes(file.filename) && !names.has(file.filename), "Unsafe or duplicate prepared input file");
-      names.add(file.filename);
-      paths.push(`${set.directory}/${manifest.version}/${file.filename}`);
-    }
-  }
-  return paths;
-}
-
-export async function objectPreparationFiles(root: string, id: string): Promise<PreparationFileSet> {
-  assert.ok(OBJECTS.some(object => object.id === id), "Preparation object must belong to OBJECTS");
-  const base = `src/objects/${id}`;
-  if (await authoredObject(id, root)) {
-    const descriptor = `${base}/object.json`;
-    const directories = ['tools/objects', 'src/preparation', 'src/renderers/css/preparation', 'packages/objects/src'];
-    const compiler = (await Promise.all(directories.map(directory => listPreparationFiles(root, directory)))).flat()
-      .filter(path => !path.includes('/dist/') && !/\.test\.ts$/.test(path));
-    const shared = await preparationDependencies(root, ['tools/prepare-surface-minimaps.mts', 'tools/prepared-node-tree.mts', 'tools/prepared-cssom.mts',
-      'tools/prepare-materials.mts', 'src/platform/prepare-cubic-sky-source.mts', 'src/platform/prepare-directional-sun.mts',
-      'tools/objects/solar-system-scene.mts', 'tools/objects/solar-system-presentation.mts', 'tools/objects/solar-system-markers.mts',
-      'tools/objects/provenance.mts']);
-    const outputs = [descriptor, `${base}/runtime-assets.json`, `${base}/prepared/object.json`,
-      ...await listPreparationFiles(root, `${base}/prepared`), ...await listPreparationFiles(root, `public/scenes/${id}`)];
-    return { inputs: [...new Set([descriptor, ...compiler, ...shared, ...await listPreparationFiles(root, `${base}/source`)])].sort(),
-      outputs: [...new Set(outputs)].sort(), inputKinds: {[descriptor]: 'object-descriptor-authored@1'} };
-  }
-  const packageFiles = await listPreparationFiles(root, base);
-  const source = requireRecord(JSON.parse(await readFile(resolve(root, base, "source/manifest.json"), "utf8")));
-  const generatedSources = new Set(requireArray(source.generatedIntermediates).map(value => `${base}/source/${requireString(requireRecord(value).path)}`));
-  const output = (path: string) => generatedModule(path) || path === `${base}/site/control-content.mjs` ||
-    path === `${base}/runtime-assets.json` ||
-    path.includes("/.prepared/") || generatedSources.has(path);
-  const outputs = [...packageFiles.filter(output), ...await listPreparationFiles(root, `public/scenes/${id}`)];
-  const generators = [`${base}/tools/prepare.mjs`];
-  const content = `${base}/site/control-content.source.mjs`;
-  const dependencies = await preparationDependencies(root, [...generators, content]);
-  const descriptorPath = `${base}/object.json`;
-  const inputKinds: PreparationInputKinds = dependencies.includes(descriptorPath) ? { [descriptorPath]: 'object-descriptor-authored@1' } : {};
-  if (Object.hasOwn(inputKinds, descriptorPath)) outputs.push(descriptorPath, `${base}/prepared/object.json`);
-  const inputs = [...dependencies.filter(path => !output(path)),
-    ...packageFiles.filter(path => path.startsWith(`${base}/source/`) && !output(path)),
-    ...await preparationFileSets(root, id)];
-  // Editorial input is also a preparation output for packages which enrich it.
-  // Its content is checked with all other outputs on every cache hit.
-  const editorial = `data/planets/${id}.json`;
-  try { await readFile(resolve(root, editorial)); outputs.push(editorial); }
-  catch (error) { if (!hasErrorCode(error, "ENOENT")) throw error; }
-  return { inputs: [...new Set(inputs)].sort(), outputs: [...new Set(outputs)].sort(), inputKinds };
-}
-
-// Follow code imported by generators, including their literal CLI steps. Do
-// not fingerprint whole runtime, shell or tooling directories.
-export async function preparationDependencies(root: string, entries: readonly string[]): Promise<string[]> {
-  const visited = new Set<string>();
-  async function visit(path: string): Promise<void> {
-    if (path.endsWith('.js')) {
-      try { await access(resolve(root, path)); }
-      catch (error) {
-        if (!hasErrorCode(error, 'ENOENT')) throw error;
-        const typed = path.replace(/\.js$/, '.ts');
-        try { await access(resolve(root, typed)); path = typed; }
-        catch (typedError) { if (!hasErrorCode(typedError, 'ENOENT')) throw typedError; }
-      }
-    }
-    if (visited.has(path)) return;
-    assert.ok(!path.startsWith("../") && !isAbsolute(path), "Preparation import escaped the project");
-    visited.add(path);
-    const source = await readFile(resolve(root, path), "utf8");
-    if (!/\.(?:mjs|js|mts|ts)$/.test(path) || generatedModule(path)) return;
-    const ast = parseRuntimeSource(source, path);
-    const dependencies = ast.body.flatMap(node => node.type === 'ImportDeclaration' || node.type === 'ExportNamedDeclaration' || node.type === 'ExportAllDeclaration'
-      ? typeof node.source?.value === 'string' && node.source.value.startsWith('.') ? [node.source.value] : [] : []);
-    // Steps are executed by preparation-runner, rather than imported.
-    if (path.endsWith("/tools/prepare.mjs")) {
-      const recipeImport = ast.body.find((node): node is ImportDeclaration => node.type === "ImportDeclaration" &&
-        typeof node.source.value === "string" && node.source.value.startsWith(".") &&
-        resolve(root, dirname(path), node.source.value) === resolve(root, "tools/object-preparation.mts"));
-      if (recipeImport) {
-        const binding = recipeImport.specifiers.find(specifier => specifier.type === "ImportSpecifier" &&
-          nodeName(specifier.imported) === "runObjectPreparation")?.local.name;
-        const calls = ast.body.flatMap(node => node.type === 'ExpressionStatement' && node.expression.type === 'AwaitExpression'
-          && node.expression.argument.type === 'CallExpression' && nodeName(node.expression.argument.callee) === binding ? [node.expression.argument] : []);
-        assert.equal(calls.length, 1, "Preparation bridge must invoke its shared runner once");
-        const call = calls[0], reference = call.arguments[0];
-        assert.ok(call.arguments.length === 1 && reference?.type === "NewExpression" && nodeName(reference.callee) === "URL" &&
-          reference.arguments.length === 2 && reference.arguments[0].type === "Literal" && reference.arguments[0].value === "../object.json" &&
-          reference.arguments[1].type === "MemberExpression" && nodeName(reference.arguments[1].property) === "url" &&
-          reference.arguments[1].object.type === "MetaProperty" && reference.arguments[1].object.meta.name === "import" &&
-          reference.arguments[1].object.property.name === "meta", "Preparation bridge must address its own descriptor");
-        const descriptorPath = resolve(root, dirname(path), reference.arguments[0].value);
-        const plan = await readObjectPreparation(descriptorPath, { projectRoot: root });
-        dependencies.push(relative(resolve(root, dirname(path)), descriptorPath),
-          ...plan.steps.map(([script]) => relative(resolve(root, dirname(path)), resolve(plan.toolDirectory, script))));
-      } else {
-      const declaration = ast.body.find((node): node is VariableDeclaration => node.type === 'VariableDeclaration' && node.declarations.some(value => nodeName(value.id) === 'steps'));
-      let value: Node | null | undefined = declaration?.declarations.find(value => nodeName(value.id) === 'steps')?.init;
-      function findSteps(input: unknown): void {
-        if (!isRecord(input)) return;
-        // The input belongs to the parser's ESTree, not arbitrary source JSON.
-        const node = input as unknown as Node;
-        if (node.type === 'Property' && nodeName(node.key) === 'steps') value = node.value;
-        for (const child of Object.values(node as unknown as Record<string, unknown>)) if (isArray(child)) child.forEach(findSteps);
-        else if (child && typeof child === "object") findSteps(child);
-      }
-      if (!value) findSteps(ast);
-      const steps = value?.type === "CallExpression" ? value.arguments[0] : value;
-      assert.ok(steps?.type === "ArrayExpression", "Preparation steps must be a literal list");
-      for (const step of steps.elements) {
-        assert.ok(step?.type === 'ArrayExpression' && step.elements[0]?.type === 'Literal' && typeof step.elements[0].value === 'string', 'Preparation step must name its script');
-        dependencies.push(step.elements[0].value);
-      }
-      }
-    }
-    for (const dependency of dependencies) await visit(relative(root, resolve(root, dirname(path), dependency)));
-  }
-  for (const entry of entries) await visit(entry);
-  return [...visited].sort();
-}
-
+// Installed packages are read from node_modules, which receipts do not fingerprint; the manifest and lockfile stand for them.
 export async function sharedPreparationFiles(_root?: string) {
   return ["package.json", "pnpm-lock.yaml"];
 }
@@ -209,48 +47,59 @@ export async function preparationEnvironment() {
     cwebpSha256: hash(await readFile(requireString(cwebpPath))), dependencies };
 }
 
+/** The environment of a traced preparation: the trace directory, and the trace loaded into every Node process. */
+export function tracedPreparationEnvironment(traceDirectory: string, environment: Readonly<Record<string, string | undefined>> = process.env): Record<string, string | undefined> {
+  const flag = `--import=${traceModule}`, options = environment.NODE_OPTIONS ?? "";
+  return { ...environment, [PREPARATION_TRACE_VARIABLE]: traceDirectory,
+    NODE_OPTIONS: options.split(/\s+/u).includes(flag) ? options : `${options} ${flag}`.trim() };
+}
+
+/**
+ * Reuse a body's prepared files while everything its last preparation read is unchanged. Each preparation runs
+ * with tools/preparation-trace.mts, and its receipt lists exactly the files that run read and wrote.
+ */
 export async function runCachedPreparationObjects({ projectRoot = process.cwd(), force = false,
-  objectIds = OBJECTS.map(({ id }) => id), concurrency = defaultPreparationConcurrency(),
+  objectIds = SCENE_OBJECTS.map(({ id }) => id), concurrency = defaultPreparationConcurrency(),
   runCommand = runObjectCommand, schedule = runPreparationObjects,
   environment = preparationEnvironment, sharedFiles = sharedPreparationFiles,
-  packageFiles = objectPreparationFiles, onEvent = event => console.log(JSON.stringify(event)) }: CachedPreparationOptions = {}) {
+  onEvent = event => console.log(JSON.stringify(event)) }: CachedPreparationOptions = {}) {
   assert.ok(isArray(objectIds) && new Set(objectIds).size === objectIds.length &&
-    objectIds.every(id => OBJECTS.some(object => object.id === id)), "Preparation requires unique IDs from OBJECTS");
+    objectIds.every(id => SCENE_OBJECTS.some(object => object.id === id)), "Preparation requires unique IDs from SCENE_OBJECTS");
   assert.equal(typeof force, "boolean");
   const root = resolve(projectRoot), shared = await sharedFiles(root), toolchain = await environment();
   const pending: string[] = [], cached: string[] = [];
   for (const id of objectIds) {
-    assert.ok(OBJECTS.some(object => object.id === id), "Unknown preparation object");
-    const files = await packageFiles(root, id);
-    const inputPaths = [...new Set([...shared, ...files.inputs])].sort();
-    const receipt = !force && await readPreparationReceipt({ root, path: `${cacheRoot}/${id}.json`, inputPaths,
-      inputKinds: files.inputKinds });
-    if (receipt && JSON.stringify(receipt.metadata?.toolchain) === JSON.stringify(toolchain) &&
-        JSON.stringify(Object.keys(receipt.outputs)) === JSON.stringify(files.outputs)) {
+    const receipt = !force && await readPreparationReceipt({ root, path: `${cacheRoot}/${id}.json` });
+    if (receipt && JSON.stringify(receipt.metadata?.toolchain) === JSON.stringify(toolchain)) {
       cached.push(id);
-      onEvent({ phase: "verified-cache-hit", id, outputs: files.outputs.length });
+      onEvent({ phase: "verified-cache-hit", id, inputs: Object.keys(receipt.inputs).length, outputs: Object.keys(receipt.outputs).length });
     } else pending.push(id);
   }
   const report = await schedule({ projectRoot: root, objectIds: pending, concurrency, onEvent,
     runCommand: async request => {
-      const files = await packageFiles(root, request.id);
-      const inputPaths = [...new Set([...shared, ...files.inputs])].sort();
-      const inputs = await fingerprintPreparationFiles(root, inputPaths, files.inputKinds);
-      const result = await runCommand(request);
-      if (result.exitCode === 0 && result.signal === null) {
-        const after = await packageFiles(root, request.id);
-        assert.deepEqual(after.inputs, files.inputs, `${request.id} preparation input set changed during generation`);
-        assert.deepEqual(after.inputKinds, files.inputKinds, `${request.id} preparation input kinds changed during generation`);
-        await writePreparationReceipt({ root, path: `${cacheRoot}/${request.id}.json`, inputs,
-          inputKinds: files.inputKinds, outputPaths: after.outputs, metadata: { toolchain } });
+      const receiptPath = `${cacheRoot}/${request.id}.json`;
+      const traces = resolve(root, cacheRoot, "traces", `${request.id}-${randomUUID()}`);
+      await rm(resolve(root, receiptPath), { force: true });
+      await mkdir(traces, { recursive: true });
+      try {
+        const result = await runCommand({ ...request, env: tracedPreparationEnvironment(traces, request.env) });
+        if (result.exitCode === 0 && result.signal === null) {
+          const { refusal, changed } = await writePreparationReceipt({ root, path: receiptPath, objectId: request.id,
+            traces: await readPreparationTraces(traces), sharedFiles: shared, metadata: { toolchain } });
+          // Outputs made from inputs that changed mid-run are stale; fail so the run is repeated, as before receipts were traced.
+          assert.equal(changed.length, 0, `${request.id} preparation inputs changed during generation: ${changed.join(", ")}`);
+          if (refusal) onEvent({ phase: "receipt-refused", id: request.id, reason: refusal });
+        }
+        return result;
+      } finally {
+        await rm(traces, { recursive: true, force: true });
       }
-      return result;
     } });
   return { ...report, cached, rebuilt: pending, force };
 }
 
 export async function preparePlanets({ projectRoot = process.cwd(), force = false,
-  objectIds = OBJECTS.map(({ id }) => id), concurrency = defaultPreparationConcurrency() }: Pick<CachedPreparationOptions, "projectRoot" | "force" | "objectIds" | "concurrency"> = {}) {
+  objectIds = SCENE_OBJECTS.map(({ id }) => id), concurrency = defaultPreparationConcurrency() }: Pick<CachedPreparationOptions, "projectRoot" | "force" | "objectIds" | "concurrency"> = {}) {
   const root = resolve(projectRoot), lock = resolve(root, cacheRoot, "running.lock");
   await mkdir(resolve(root, cacheRoot), { recursive: true });
   try { await writeFile(lock, JSON.stringify({ pid: process.pid, started: new Date().toISOString() }) + "\n", { flag: "wx" }); }

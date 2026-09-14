@@ -1,109 +1,81 @@
 import assert from 'node:assert/strict';
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import test from 'node:test';
-import { objectPreparationFiles, runCachedPreparationObjects } from './prepare-planets.mts';
-import { fingerprintPreparationFiles } from './preparation-cache.mts';
-import type { CachedPreparationOptions, PreparationFileSet } from './prepare-planets.mts';
+import { runCachedPreparationObjects } from './prepare-planets.mts';
+import type { CachedPreparationOptions } from './prepare-planets.mts';
+import { runObjectCommand } from './run-implemented-planets.mts';
 import type { PreparationCommand, PreparationReport } from './run-implemented-planets.mts';
 import { requireRecord } from './source-values.mts';
 
 const repository = resolve(import.meta.dirname, '..'), descriptorPath = 'src/objects/mercury/object.json';
 const payloadPath = 'src/objects/mercury/prepared/object.json';
-type FixtureContext = { root: string; write: (path: string, value: unknown) => Promise<void>; descriptor: Record<string, unknown> };
-async function fixture(run: (context: FixtureContext) => Promise<void>) {
-  const root = await mkdtemp(join(tmpdir(), 'object-preparation-cache-'));
-  const write = async (path: string, value: unknown): Promise<void> => {
-    await mkdir(dirname(resolve(root, path)), { recursive: true });
-    await writeFile(resolve(root, path), typeof value === 'string' ? value : JSON.stringify(value));
-  };
+// Mirrors an authored preparation: read the descriptor, write the payload from its recipe, then pin the descriptor to
+// the payload. Asked to, it also edits its own recipe while running.
+const producer = `import { createHash } from 'node:crypto';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+const descriptor = JSON.parse(readFileSync('${descriptorPath}', 'utf8'));
+const payload = JSON.stringify({ radiusKm: descriptor.properties.recipe.shape.radiusKm });
+mkdirSync('src/objects/mercury/prepared', { recursive: true });
+writeFileSync('${payloadPath}', payload);
+if (process.argv[2] === 'edit-recipe') descriptor.properties.recipe.shape.radiusKm += 1;
+descriptor.prepared = { ...descriptor.prepared, sha256: createHash('sha256').update(payload).digest('hex') };
+writeFileSync('${descriptorPath}', JSON.stringify(descriptor, null, 2) + '\\n');
+`;
+type Descriptor = Record<string, unknown> & { properties: Record<string, unknown> & { catalog: Record<string, unknown>; recipe: { shape: { radiusKm: number } } }; prepared: Record<string, unknown> };
+type FixtureContext = { root: string; options: CachedPreparationOptions; runs: string[]; edit: (change: (descriptor: Descriptor) => void) => Promise<void> };
+
+async function fixture(run: (context: FixtureContext) => Promise<void>, argumentsList: string[] = []) {
+  const root = await realpath(await mkdtemp(join(tmpdir(), 'object-preparation-cache-')));
   try {
     const descriptor = requireRecord(JSON.parse(await readFile(resolve(repository, descriptorPath), 'utf8')), 'Mercury descriptor');
-    await write(descriptorPath, descriptor);
-    await write(payloadPath, { prepared: 'fixture' });
-    await write('tools/objects/compiler.ts', '// shared compiler\n');
-    await write('src/objects/mercury/prepared/runtime.json', {prepared:'fixture'});
-    await run({ root, write, descriptor });
+    await mkdir(dirname(join(root, descriptorPath)), { recursive: true });
+    await writeFile(join(root, descriptorPath), JSON.stringify(descriptor, null, 2) + '\n');
+    await writeFile(join(root, 'producer.mjs'), producer);
+    const runs: string[] = [];
+    const options: CachedPreparationOptions = {
+      projectRoot: root, objectIds: ['mercury'], sharedFiles: async () => [], environment: async () => ({ version: 'fixture' }), onEvent() {},
+      async schedule({ objectIds = [], runCommand } = {}) {
+        if (!runCommand) throw new TypeError('Fixture schedule requires its command runner.');
+        for (const id of objectIds) {
+          const outcome = await runCommand({ id, command: process.execPath, argumentsList: [], cwd: root });
+          if (outcome.exitCode !== 0) throw new Error(`${id} failed`);
+        }
+        const report: PreparationReport = { mode: 'prepare', startedAt: 'fixture', requestedConcurrency: 1, concurrency: objectIds.length, elapsedMilliseconds: 0, results: [] };
+        return report;
+      },
+      async runCommand({ id, env }: PreparationCommand) {
+        runs.push(id);
+        return runObjectCommand({ command: process.execPath, argumentsList: ['producer.mjs', ...argumentsList], cwd: root, env });
+      },
+    };
+    const edit = async (change: (descriptor: Descriptor) => void) => {
+      const value = JSON.parse(await readFile(join(root, descriptorPath), 'utf8'));
+      change(value);
+      await writeFile(join(root, descriptorPath), JSON.stringify(value, null, 2) + '\n');
+    };
+    await run({ root, options, runs, edit });
   } finally { await rm(root, { recursive: true, force: true }); }
 }
 
-const packageFiles = async (): Promise<PreparationFileSet> => ({
-  inputs: [descriptorPath, 'tools/objects/compiler.ts'].sort(),
-  outputs: [descriptorPath, payloadPath, 'src/objects/mercury/prepared/runtime.json'].sort(),
-  inputKinds: {[descriptorPath]: 'object-descriptor-authored@1'} as const,
-});
-const scheduleFixture: NonNullable<CachedPreparationOptions['schedule']> = async (options = {}) => {
-  const { objectIds = [], runCommand } = options;
-  if (!runCommand) throw new TypeError('Fixture schedule requires its command runner.');
-  for (const id of objectIds) await runCommand({ id, command: 'fixture', argumentsList: [], cwd: '' });
-  const report: PreparationReport = { mode: 'prepare', startedAt: 'fixture', requestedConcurrency: 1, concurrency: objectIds.length, elapsedMilliseconds: 0, results: [] };
-  return report;
-};
-test('authored closure binds source JSON and shared TypeScript compilers without object executables', async () => {
-  const files = await objectPreparationFiles(repository, 'mercury');
-  assert.equal(files.inputKinds?.[descriptorPath], 'object-descriptor-authored@1');
-  for (const path of ['tools/objects/prepare-authored.ts', 'src/renderers/css/preparation/scene/index.ts',
-    'src/objects/mercury/source/preparation/raster.json']) assert.ok(files.inputs.includes(path), path);
-  assert.ok(files.outputs.includes(payloadPath));
-  assert.ok(!files.inputs.some(path => /^src\/objects\/mercury\/(tools|runtime|site)\//.test(path)));
-});
-
-test('authored recipe and producer mutations rebuild; generated hash updates seal only verified outputs', async () => fixture(async ({ root, write, descriptor }) => {
-  const runs = [], options = {
-    projectRoot: root, objectIds: ['mercury'], packageFiles, sharedFiles: async () => [], environment: async () => ({ version: 'fixture' }),
-    onEvent() {},
-    schedule: scheduleFixture,
-    async runCommand({ id }: PreparationCommand) {
-      runs.push(id);
-      const current = JSON.parse(await readFile(resolve(root, descriptorPath), 'utf8'));
-      await write(descriptorPath, { ...current, prepared: { ...current.prepared, sha256: '1'.repeat(64) } });
-      await write(payloadPath, { prepared: 'fixture' });
-      return { exitCode: 0, signal: null };
-    },
-  };
-  const files = await packageFiles();
-  const original = await fingerprintPreparationFiles(root, [descriptorPath], files.inputKinds);
+test('an authored recipe edit rebuilds the object; its card and damaged pins are handled by owner', async () => fixture(async ({ root, options, runs, edit }) => {
   assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury']);
-  assert.deepEqual(await fingerprintPreparationFiles(root, [descriptorPath], files.inputKinds), original);
   assert.deepEqual((await runCachedPreparationObjects(options)).cached, ['mercury']);
-  assert.equal(runs.length, 1);
-
-  const modified = requireRecord(JSON.parse(await readFile(resolve(root, descriptorPath), 'utf8')), 'modified Mercury descriptor');
-  const modifiedRecipe = requireRecord(requireRecord(modified.properties, 'modified Mercury properties').recipe, 'modified Mercury recipe');
-  requireRecord(requireRecord(modifiedRecipe.shape, 'modified Mercury shape'), 'modified Mercury shape').radiusKm = Number(requireRecord(modifiedRecipe.shape, 'modified Mercury shape').radiusKm) + 1;
-  await write(descriptorPath, modified);
-  assert.notDeepEqual(await fingerprintPreparationFiles(root, [descriptorPath], files.inputKinds), original);
+  await edit(descriptor => { descriptor.properties.catalog.description = 'A new card from prepare:text.'; });
+  assert.deepEqual((await runCachedPreparationObjects(options)).cached, ['mercury'], 'reader text does not rebuild the object');
+  await edit(descriptor => { descriptor.properties.recipe.shape.radiusKm += 1; });
   assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury']);
-  await write('tools/objects/compiler.ts', '// changed producer\n');
-  assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury']);
-
-  const stable = await fingerprintPreparationFiles(root, [descriptorPath], files.inputKinds);
-  const damaged = requireRecord(JSON.parse(await readFile(resolve(root, descriptorPath), 'utf8')), 'damaged Mercury descriptor');
-  requireRecord(damaged.prepared, 'damaged Mercury prepared output').sha256 = '2'.repeat(64);
-  await write(descriptorPath, damaged);
-  assert.deepEqual(await fingerprintPreparationFiles(root, [descriptorPath], files.inputKinds), stable);
-  assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury']);
+  assert.deepEqual((await runCachedPreparationObjects(options)).cached, ['mercury']);
+  await edit(descriptor => { descriptor.prepared.sha256 = '2'.repeat(64); });
+  assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury'], 'a damaged pin rebuilds');
+  await rm(join(root, payloadPath));
+  assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury'], 'a missing payload rebuilds');
   assert.deepEqual((await runCachedPreparationObjects(options)).cached, ['mercury']);
   assert.equal(runs.length, 4);
-  await rm(resolve(root, payloadPath));
-  assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury']);
-  assert.deepEqual((await runCachedPreparationObjects(options)).cached, ['mercury']);
-  assert.equal(runs.length, 5);
-  assert.equal(requireRecord(requireRecord(descriptor.properties, 'Mercury properties').recipe, 'Mercury recipe').schema, 'cssearth-authored-object@1');
 }));
 
-test('a descriptor edit during preparation cannot be sealed as an unchanged authored input', async () => fixture(async ({ root, write }) => {
-  await assert.rejects(runCachedPreparationObjects({ projectRoot: root, objectIds: ['mercury'], packageFiles,
-    sharedFiles: async () => [], environment: async () => ({}), onEvent() {},
-    schedule: scheduleFixture,
-    async runCommand() {
-      const current = requireRecord(JSON.parse(await readFile(resolve(root, descriptorPath), 'utf8')), 'current Mercury descriptor');
-      const recipe = requireRecord(requireRecord(current.properties, 'current Mercury properties').recipe, 'current Mercury recipe');
-      const shape = requireRecord(recipe.shape, 'current Mercury shape');
-      shape.radiusKm = Number(shape.radiusKm) + 1;
-      await write(descriptorPath, current);
-      return { exitCode: 0, signal: null };
-    },
-  }), /inputs changed during generation/);
-}));
+test('a descriptor edit during preparation cannot be sealed as an unchanged authored input', async () => fixture(async ({ root, options }) => {
+  await assert.rejects(runCachedPreparationObjects(options), /inputs changed during generation: src\/objects\/mercury\/object\.json/);
+  await assert.rejects(readFile(join(root, '.local/preparation/mercury.json')), { code: 'ENOENT' });
+}, ['edit-recipe']));

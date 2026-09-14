@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c2801f35764d995e38c198fab54c87d7234fa4dbc83dd1d4d770321cccd279f9"
+          "sha256": "dd6e89054c4aba13fee7dbeee683ee30ca34689d247eddc2f80722d4d1daaa57"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0b8ac54ba2a695b4f9197a5a68287b425dadb46ad94a734e6850126b786224f9"
+        "sha256": "528ca08b1043ccc65b9d0fef065597d08e985d22a833e21e2e60cd06eb9f2727"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Tarqeq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Slowly spinning Inuit-group moon of Saturn.",
       "systemName": "Solar System",
       "order": 48,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ba3e07ed38830a39569e1e5a8132d72381e7c52dd417ba99d62ca5ee154af297"
+    "sha256": "4cb1a02ec1686f523043766723872afa2708d4fcb07045a81bc60e2fe302c285"
   }
 }

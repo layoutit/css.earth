@@ -5,7 +5,9 @@
  * oracle.
  */
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
+import { fitsArchiveInputs } from './fits/archive-inputs.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../source-values.mts';
 
 export const ORACLE_ROOT = resolve(import.meta.dirname, '../..');
@@ -26,15 +28,45 @@ export async function pinnedOracleVersions() {
   return new Map(text.split('\n').map(line => line.trim()).filter(line => line && !line.startsWith('#')).map(line => { const [name, version] = line.split('=='); return [name.toLowerCase().replace(/-/g, '_'), version] as const; }));
 }
 
-/** Every fixture input must be a pinned manifest input of its body with the same sha256. */
+/** Every input matches a body manifest, checked-in FITS fixture or test-only archive record. */
 export async function assertPinnedInputs(inputs: readonly { path: string; sha256: string; bytes: number }[]) {
   for (const input of inputs) {
+    if (/^tests\/fixtures\/sbmt\/[a-z0-9-]+\.(json|tab|sum|info)$/u.test(input.path)) {
+      verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
+      continue;
+    }
+    if (input.path.startsWith('.local/fits-reference/')) {
+      const pin = (await fitsArchiveInputs()).find(pin => pin.path === input.path);
+      if (!pin || pin.sha256 !== input.sha256 || pin.bytes !== input.bytes) throw new Error(`FITS test archive pin changed: ${input.path}`);
+      continue;
+    }
+    if (/^tests\/fixtures\/fits\/[a-z0-9-]+\.fits$/u.test(input.path)) {
+      verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
+      continue;
+    }
     const match = /^src\/objects\/([^/]+)\/source\/(.+)$/u.exec(input.path);
     if (!match) throw new Error(`Oracle input outside a body's sources: ${input.path}`);
     const manifest = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects', match[1], 'source/manifest.json'), 'utf8')));
-    const entry = requireArray(manifest.inputs).map(e => requireRecord(e)).find(e => e.path === match[2]);
-    if (!entry) throw new Error(`Oracle input is not a manifest input: ${input.path}`);
+    const entry = [...requireArray(manifest.inputs), ...requireArray(manifest.documents)].map(e => requireRecord(e)).find(e => e.path === match[2]);
+    if (!entry) throw new Error(`Oracle input is not a manifest input or document: ${input.path}`);
     if (entry.expectedSha256 !== input.sha256 || entry.expectedBytes !== input.bytes) throw new Error(`Oracle input differs from the manifest pin: ${input.path}`);
+  }
+}
+
+/** Verify the actual buffer about to be decoded, not just two declarations. */
+export function verifyOracleBytes(input: { path: string; sha256: string; bytes: number }, bytes: Buffer) {
+  if (bytes.length !== input.bytes || createHash('sha256').update(bytes).digest('hex') !== input.sha256)
+    throw new Error(`Oracle source bytes differ from their pin: ${input.path}`);
+  return bytes;
+}
+
+export async function readOracleInput(input: { path: string; sha256: string; bytes: number }) {
+  await assertPinnedInputs([input]);
+  try { return verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path))); }
+  catch (error) {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT')
+      throw new Error(`Missing FITS oracle input ${input.path}. Run pnpm test:fits --restore.`, { cause: error });
+    throw error;
   }
 }
 

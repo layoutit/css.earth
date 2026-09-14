@@ -1,5 +1,5 @@
 import { pds4Blocks, pds4Elements, pds4Field } from '../pds-labels.mts';
-import { readFitsHeader } from '../observation/fits.mts';
+import { readFitsHdu, type FitsHeader } from '../../fits.mts';
 import type { GeometryCubeDeclaration } from './source-records.mts';
 
 /**
@@ -15,7 +15,6 @@ import type { GeometryCubeDeclaration } from './source-records.mts';
  * retained mesh.
  */
 export const PDS4_GEOMETRY_CUBE_FORMAT = 'pds4-geometry-cube';
-type FitsHeader = Record<string, string | number | boolean>;
 type Role = 'image' | 'x' | 'y' | 'z' | 'incidence' | 'emission' | 'phase';
 const ROLES = ['image', 'x', 'y', 'z', 'incidence', 'emission', 'phase'] as const;
 const ROLE_UNITS: Record<Role, readonly (string | null)[]> = { image: [null], x: ['km', 'm'], y: ['km', 'm'], z: ['km', 'm'], incidence: ['deg', 'rad'], emission: ['deg', 'rad'], phase: ['deg', 'rad'] };
@@ -108,13 +107,18 @@ export function decodePds4GeometryCube(bytes: Buffer, xml: string, { fileName, c
   const width = roles.image.width, height = roles.image.height, count = width * height;
   if (ROLES.some(name => roles[name].width !== width || roles[name].height !== height)) throw new Error('Geometry cube planes differ in size.');
 
-  const headers = pds4Blocks(xml, 'Header'), { header, dataOffset } = readFitsHeader(bytes);
+  const headers = pds4Blocks(xml, 'Header'), hdu = readFitsHdu(bytes), { header, dataOffset } = hdu;
   if (headers.length !== 1 || labelNumber(headers[0], 'offset') !== 0 || labelNumber(headers[0], 'object_length') !== dataOffset ||
       !pds4Field(headers[0], 'parsing_standard_id').startsWith('FITS')) throw new Error('Geometry cube header disagrees with its label.');
   if (header.SIMPLE !== true || (header.BSCALE ?? 1) !== 1 || (header.BZERO ?? 0) !== 0 || header.NAXIS1 !== width || header.NAXIS2 !== height ||
-      (header.NAXIS === 3 && header.NAXIS3 !== planes.length)) throw new Error('Unsupported geometry cube layout.');
+      header.NAXIS !== 3 || header.NAXIS3 !== planes.length || hdu.nextOffset !== bytes.length) throw new Error('Unsupported geometry cube layout.');
   const ordered = [...planes].sort((a, b) => a.offset - b.offset);
+  if (ROLES.reduce((total, role) => total + count * (DATA_TYPES[roles[role].dataType].bytes + 4), 0) > 512 * 1024 * 1024)
+    throw new Error('Geometry cube decoded allocation exceeds budget.');
   for (const [i, plane] of ordered.entries()) {
+    if (plane.dataType !== (hdu.bitpix === -32 ? 'IEEE754MSBSingle' : hdu.bitpix === -64 ? 'IEEE754MSBDouble' : null) ||
+        plane.offset !== dataOffset + i * count * Math.abs(hdu.bitpix) / 8 || plane.width !== width || plane.height !== height)
+      throw new Error('Geometry cube label disagrees with FITS storage.');
     const end = plane.offset + plane.width * plane.height * DATA_TYPES[plane.dataType].bytes;
     if (plane.offset < dataOffset || end > bytes.length) throw new Error(`Truncated geometry cube plane ${plane.id}.`);
     if (i > 0 && ordered[i - 1].offset + ordered[i - 1].width * ordered[i - 1].height * DATA_TYPES[ordered[i - 1].dataType].bytes > plane.offset) throw new Error('Geometry cube planes overlap.');

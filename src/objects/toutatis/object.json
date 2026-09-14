@@ -26,6 +26,11 @@
               "id": "shape",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -46,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "6c32e54d541c090334da48beb4b1e8bd0cd0a476b1cc67ed700325ca8ab1ba0b"
+          "sha256": "74a58b7c9677b5ec82db51e333bc67a9c0ff682e77b8030b7c747443bcff443c"
         },
         {
           "id": "rotation",
@@ -56,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c4b8a1028284c0ee6670046313beb027dbdf49f6c0626c09110c1aa4d9a4f220"
+          "sha256": "636d316b13c161a86e6e5650d192bbbd9dc3a5377c97cba1aa22a67ecc568a4b"
         },
         {
           "id": "title",
@@ -108,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4de249f8e88a961bd00ad8e9ce6efd6ab999651db2c9b4e27234ec82cc06a56f"
+        "sha256": "aea456ff4bb9f0e05491a12420832c1d541cc7c4cbb6d5495e8789ea31565713"
       }
     },
     "catalog": {
@@ -116,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.543055738919472,
-      "description": "Explore Toutatis with its published radar shape model.",
+      "description": "Elongated near-Earth asteroid that tumbles through space.",
       "systemName": "Solar System",
       "order": 138,
       "context": {
@@ -129,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5c53a341e73c35796465f5700f5775efecdbdab11d49532790c94e07b2427ca4"
+    "sha256": "0a22173a23cc2a57a8eb6fbaa7bf70457e7b3104764ff6ae2d5258c63635c1e1"
   }
 }

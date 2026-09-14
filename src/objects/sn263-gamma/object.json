@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "03dce908df25238e7dfd73bcae5ba829233366bc63cce6cca2e88d7ace02f45e"
+          "sha256": "8a3b6c0e54a8e1bf40fe217b759278cc9cc50b4cc5abb9de884f4ffcb1411f87"
         },
         {
           "id": "title",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cf89e7b1160cdcfc7b4fde70dfe31db9aa22a46b21d7bde1582ab352ae34bb86"
+        "sha256": "93ace83b9f03ad39f9b000fe925b8f44882bd6fc50fa16233f4fc4d7690c1dc5"
       }
     },
     "worldFrame": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 1.9869,
-      "description": "Explore the smaller inner moon of 2001 SN263 through its archived radar shape.",
+      "description": "The smaller, inner moon of the triple asteroid 2001 SN263.",
       "systemName": "Solar System",
       "order": 17,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "132b821123ebda4b981d17a0d26bd3f94b5df8033e219b3ff0f737aeb0fd2643"
+    "sha256": "8539b9177df4344bf400d341537eb55dd2f4163510dfa45b77a49dc4ef91ea0d"
   }
 }

@@ -1,0 +1,87 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "aegaeon",
+  "entries": [
+    {
+      "id": "measured-axes",
+      "subject": "Hedman et al. Aegaeon measured axes",
+      "status": "included",
+      "finding": "Hedman et al. (2020), Table 1 supplies semiaxes 0.70 ± 0.05, 0.25 ± 0.06 and 0.20 ± 0.08 km. The selected analytic ellipsoid approximates those dimensions; it is not a detailed irregular mesh.",
+      "evidence": [
+        "https://arxiv.org/abs/1912.09192",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/aegaeon/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/aegaeon/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "2850792ab49dc0fa64f31198852c16ea2e4d413f"
+        }
+      ]
+    },
+    {
+      "id": "cassini-2010-2015-registration",
+      "subject": "Cassini Aegaeon 2010 sequence and 2015 candidate registration",
+      "status": "unresolved",
+      "finding": "The earlier N1643264167/N1829223369 check remained unregistered. Figure 18 and Table 27 reopen the route with N1643265020 and adjacent N1643264914: both native crops contain a diffuse disc candidate. Historical BPC/SPK combinations give N1643265020 viewing longitude 158.04–158.09 degrees west, near the paper's 158.3, whereas OPUS reports 291.756. This narrows the frame mismatch; it does not recover the producer's star-based image navigation or verify interior surface placement. Updated ephemerides and the 2015 frame were sampled without qualifying a camera. No photographic texels were promoted.",
+      "revisitWhen": "The producer's navigated image centre/attitude or an independently checked camera registration becomes available for the identified 2010 disc; validate interior placement on the fixed ellipsoid before preparation. Do not repeat the existence or longitude checks as if they were unresolved source retrieval.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/aegaeon/source/survey/native-inspection.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/aegaeon/source/survey/opus.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/aegaeon/README.md",
+        "https://github.com/layoutit/css.earth/blob/642d15f827ce1ba529068b5b3508ef70a379723e/src/objects/aegaeon/evidence/registration/native-geometry.json",
+        "https://github.com/layoutit/css.earth/blob/642d15f827ce1ba529068b5b3508ef70a379723e/src/objects/aegaeon/evidence/registration/review.json",
+        "https://github.com/layoutit/css.earth/blob/642d15f827ce1ba529068b5b3508ef70a379723e/src/objects/aegaeon/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "2850792ab49dc0fa64f31198852c16ea2e4d413f"
+        }
+      ]
+    },
+    {
+      "id": "shape-release",
+      "subject": "PDS Saturn shape release for Aegaeon",
+      "status": "excluded",
+      "finding": "The reviewed release did not provide a body-specific deliverable qualified for this package; the measured axes retain ownership of the approximation.",
+      "revisitWhen": "A released Aegaeon shape with usable frame and provenance can be reviewed.",
+      "evidence": [
+        "https://doi.org/10.26033/ewy3-jy61",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/aegaeon/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "mapped-lenses",
+      "subject": "Aegaeon terrain, colour and composition routes",
+      "status": "excluded",
+      "finding": "Published photometry and spectra are integrated constraints, and no DEM, geology or mapped composition product was qualified.",
+      "revisitWhen": "A spatially registered image, spectral, terrain or geology product can support a lens.",
+      "evidence": [
+        "https://arxiv.org/abs/1912.09192",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/aegaeon/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

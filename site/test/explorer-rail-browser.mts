@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { browserObjects } from './browser-objects.mts';
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
@@ -71,7 +71,7 @@ try {
     const roots = await page.locator(".planet-stage > .planet-render-root").elementHandles();
     assert.ok(roots.length > 0, `${config.label}: mounted scene layers`);
     const rootCount = roots.length;
-    const activeObject = required(OBJECTS.find(object => object.route === config.route));
+    const activeObject = required(SCENE_OBJECTS.find(object => object.route === config.route));
     const systemTag = page.locator(".planet-system-tag");
     const classificationTag = page.locator(".planet-classification-tag");
     const tagLabel = await classificationTag.innerText();
@@ -87,20 +87,20 @@ try {
     assert.equal(await search.inputValue(), activeObject.systemName);
     const visibleObjects = () => page.locator('.planet-object-item:not([hidden]) [data-object-id]')
       .evaluateAll(links => links.map(link => link.dataset.objectId).sort());
-    assert.deepEqual(await visibleObjects(), OBJECTS.filter(object =>
+    assert.deepEqual(await visibleObjects(), SCENE_OBJECTS.filter(object =>
       object.systemName === activeObject.systemName).map(object => object.id).sort());
     assert.equal(page.url(), beforeBrowseUrl, "browsing a system does not navigate");
     await search.press("Escape");
     await classificationTag.focus();
     await page.keyboard.press("Enter");
     assert.equal(await search.inputValue(), `${tagLabel}s`);
-    assert.deepEqual(await visibleObjects(), OBJECTS.filter(object =>
+    assert.deepEqual(await visibleObjects(), SCENE_OBJECTS.filter(object =>
       object.classification === activeObject.classification).map(object => object.id).sort());
     assert.equal(page.url(), beforeBrowseUrl, "browsing a classification does not navigate");
     assert.equal(await page.locator('.planet-destination-results').isVisible(), false,
       "classification browsing does not start city search");
     await search.fill("planets");
-    assert.deepEqual(await visibleObjects(), OBJECTS.filter(object =>
+    assert.deepEqual(await visibleObjects(), SCENE_OBJECTS.filter(object =>
       object.classification === "planet").map(object => object.id).sort(), "planets excludes dwarf planets");
     await search.fill("ceres");
     assert.deepEqual(await visibleObjects(), ["ceres"], "typing a name replaces the classification query");

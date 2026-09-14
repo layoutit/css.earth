@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "313895bdae4987e7fc3d5c9a24315898008394cb4289397909e96ec38d4612c0"
+    "sha256": "00f02c1e13ddc8330d278c88c5a694df176bfe6ee8b1e21313a58722ecf6de17"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9a1ef38b4428287b35cb0cc763d1934f57dfbdce8cc0a62627b9f72a487884d2",
+      "sha256": "fb22c52e7cc635d6c460d6bc8767517e8d5468c8f659aa5e0027634687c6d7df",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "cordelia",
         "displayName": "Cordelia",
         "panel": {
-          "introduction": "Cordelia travels just inside Uranus’s bright epsilon ring. Its gravity helps confine the ring’s inner edge, while Voyager observations constrain the moon’s elongated shape.",
           "facts": [
             {
               "id": "radius",
@@ -171,9 +170,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published prolate shape fit: 50 × 36 × 36 km. The third axis is assumed equal to the shorter measured axis. Voyager observations constrain size and elongation but do not resolve a useful mapped surface. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
-              "title": "Shape approximation",
-              "detail": "Measured shape",
               "thumbnail": "/scenes/cordelia/cordelia-model-thumbnail.webp",
               "surface": "cordelia-model-surface@2x.webp",
               "poles": "cordelia-model-poles@2x.webp",
@@ -182,7 +178,8 @@
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/2401.04634"
               },
-              "summary": "A 50 × 36 × 36 km shape estimate from Voyager. Two axes are assumed equal; gray grid: no surface imagery."
+              "notes": "Published prolate shape fit: 50 × 36 × 36 km. The third axis is assumed equal to the shorter measured axis. Voyager observations constrain size and elongation but do not resolve a useful mapped surface. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+              "noData": true
             }
           ]
         },
@@ -326,7 +323,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -335,8 +332,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9a1ef38b4428287b35cb0cc763d1934f57dfbdce8cc0a62627b9f72a487884d2",
-      "bytes": 3862,
+      "sha256": "fb22c52e7cc635d6c460d6bc8767517e8d5468c8f659aa5e0027634687c6d7df",
+      "bytes": 3472,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -349,11 +346,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published prolate shape fit: 50 × 36 × 36 km. The third axis is assumed equal to the shorter measured axis. Voyager observations constrain size and elongation but do not resolve a useful mapped surface. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -385,6 +381,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "measured-ellipsoid",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -392,8 +400,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -405,8 +414,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6564,
-          "sha256": "e2b40be64e7e59cdd80e9caaafb74359b8c06fc4bc37d465298b2ab751f96351",
+          "bytes": 6368,
+          "sha256": "f67683d68ee8c3d09b09b36b72faa2c5a3e38d191c0893fbbaff05623debc65d",
           "verification": "bytes-verified"
         }
       ],
@@ -420,6 +429,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

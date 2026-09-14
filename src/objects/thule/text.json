@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "thule",
+  "card": {
+    "text": "Dark asteroid in the outer main belt, discovered in October 1888.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Thule",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1888-10-25 by Palisa, J. at Vienna; albedo: 0.0412; orbit class: Outer Main-belt Asteroid; spec_B: X; spec_T: D"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "J. Palisa found Thule at Vienna in 1888. It is very dark, reflecting only about 4% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Thule",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1888-10-25 by Palisa, J. at Vienna; albedo: 0.0412; orbit class: Outer Main-belt Asteroid; spec_B: X; spec_T: D"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT model 16313",
+      "detail": "Published shape",
+      "summary": "Shape inferred from brightness changes as it spins, so hollows are smoothed over. Another pole also fits."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a reference sphere. Colors mix the overall shape with local relief."
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "61e26e913d4311c58372d6612ca48f7d5a2837235a40dcb65e6a7b99a9563599"
+    "sha256": "8cef4ec690056f3ead5769749f82ce7e44626a5076adfb57b707428072e8ab42"
   },
   "id": "ida",
   "properties": {
@@ -62,7 +62,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "049d96dfb0f099dc69e5af33cb81859fc7e8541e95d3d2f677e8dc94aeb3e065"
+          "sha256": "83f4bd75a42a1babad4a919dd981957c16b3f67c2e26433f0d9e30ea01c35d51"
         },
         {
           "id": "rotation",
@@ -72,7 +72,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "6fd1aecbdc81935d450358f95b63085b15ff53c9799a860f68f32e7cc337f737"
+          "sha256": "e18ce2bd9cfb261a76356db3c65174fe7780f2e613b12be9eacbf168a622f6d9"
         },
         {
           "id": "title",
@@ -82,7 +82,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "b9c0defb9f9f4ed54068af189d7476f17972267493bdca8a64d4bf604ae8ca39"
+          "sha256": "7563e9e8c7ee415a0260131e9f831014f3c103ccebb1000c1f5ac0e16b9a05df"
         },
         {
           "id": "acquisition",
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "025e1f26d15fd2c06e6164aad13eb6a4c207d18bda37199aba8713e5c5fa2d1d"
+        "sha256": "5a758116ec374299dc1fb8b6aa674fe7c8b83f120870ca4159ec1fb84db7905b"
       }
     },
     "catalog": {
@@ -141,7 +141,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.861,
-      "description": "Explore Ida in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.",
+      "description": "Asteroid with a tiny moon, Dactyl.",
       "systemName": "Solar System",
       "order": 130,
       "context": {

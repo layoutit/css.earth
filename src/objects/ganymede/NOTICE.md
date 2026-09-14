@@ -27,6 +27,15 @@ edges, rounds to float32 and prepares false-color display assets. Original
 values, observations from different nights and scientific limitations remain
 documented in `source/muse/INTERPRETATION.md`.
 
+VLT/SPHERE composition fits: Oliver King and Leigh Fletcher (2022), [Global
+Modelling of Ganymede's Surface Composition](https://doi.org/10.1029/2022JE007323),
+[Zenodo 6390469](https://doi.org/10.5281/zenodo.6390469), and tagged
+[v1.0.1 source](https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/tree/v1.0.1).
+cssEarth converts released posterior medians and preserves no-data; the maps are
+model outputs, not direct mineral detections. The numerical release has no located
+explicit reuse licence. It is retained only for local preview and a private draft PR;
+no public composition asset is published.
+
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
 
 Lighting: the shared prepared Lambert row bank follows the OpenSpace globebrowsing shading model (MIT, snapshot 56e29b54) as recorded in `source/preparation/raster.json`; no OpenSpace pixels are shipped.

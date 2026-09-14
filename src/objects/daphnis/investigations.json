@@ -19,6 +19,91 @@
           "pr": 83
         }
       ]
+    },
+    {
+      "id": "cassini-coverage-2026-09-13",
+      "subject": "Four repeat clear-filter candidates",
+      "status": "deferred",
+      "finding": "N1656997840_1, N1656997895_1, N1656998530_1 and N1656998585_1 were acquired and their published camera rows inventoried. They repeat the existing 2010 viewing geometry. No new surface trial or independent registration was completed for these candidates, and the existing crescent/illumination limitations remain. The package is unchanged; this inventory is not a qualification result.",
+      "revisitWhen": "A bounded native-image and projected-coverage comparison demonstrates useful additional reliable terrain, followed by independent registration checks.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/daphnis_document.pdf",
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
+        }
+      ]
+    },
+    {
+      "id": "cassini-filter-color",
+      "subject": "Selected calibrated Cassini filter-color observations",
+      "status": "included",
+      "finding": "RED N1656999219, GRN N1656999274 and BL1 N1656999330 supply a coarse 2010 False color footprint at about 435–436 m per pixel. Their roughly 18-pixel moon diameter does not match the fine detail in the 2017 Monochrome image.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/daphnis/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/daphnis/source/preparation/terrestrial.json",
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/daphnis_document.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "legacy-voyager-stooke-maps",
+      "subject": "Legacy Voyager/Stooke maps and shaded-relief illustrations",
+      "status": "excluded",
+      "finding": "The retained source review did not select these as observed maps: they lack the combination of Cassini detail and measured camera registration used by this package. Shaded-relief drawings are not observational textures.",
+      "revisitWhen": "A registered observational map supplies useful independent coverage or detail on this source frame.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/daphnis/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "integrated-spectroscopy",
+      "subject": "Cassini small-moon spectra and integrated photometry",
+      "status": "excluded",
+      "finding": "The examined small-inner-satellite spectra and photometric analyses inform interpretation but are disk-integrated. They do not support painting a spatial composition texture onto this moon.",
+      "revisitWhen": "A spatially resolved, calibrated spectrum or mapped product is tied to this moon’s surface coordinates.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/daphnis/README.md",
+        "https://www.usgs.gov/publications/cassini-spectra-and-photometry-025-51-mm-small-inner-satellites-saturn",
+        "https://doi.org/10.3847/1538-3881/ab659d"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "incidence-limit-trial",
+      "subject": "70-degree incidence/emission trial for Monochrome seams",
+      "status": "excluded",
+      "finding": "The retained trial reduced coverage from39.3% to29.4% while retaining bright strips from N1863267232_1 and a reduced dark crescent from N1656997950_1. Tightening the angles alone did not solve their level mismatch; the existing80/78-degree limits were retained.",
+      "revisitWhen": "A source-backed frame-level correction or replacement observation addresses the brightness mismatch while preserving reliable coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/daphnis/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/daphnis/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
     }
   ]
 }

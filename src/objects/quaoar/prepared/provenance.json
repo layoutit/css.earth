@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0c39275beff7eac739918ffdb00384c4a09b8b32952fc3dbe9f274d39c646d86"
+    "sha256": "3550ab21d384e7a43a0984a32830cea0d5e4794bf120a73fb3e8c008df9423ca"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -133,14 +133,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ccb4984a3f9c4abf41b9b7b02d50e3c1bb30ec8641b9ea3b59b41427bb83c651",
+      "sha256": "9f1b4e949e98d9159c387e615965ac93a17031cdf6188742ceefc5bc6a206cce",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "quaoar",
         "displayName": "Quaoar",
         "panel": {
-          "introduction": "This large Kuiper-belt object has two known rings. Its oblate shape is fitted to stellar occultations with the ring plane as a pole constraint; surface detail is unresolved.",
           "facts": [
             {
               "id": "shape",
@@ -186,9 +185,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved. Pole RA 259.7°, DEC 53.4° inherits the measured ring-plane prior; arbitrary meridian. The 8.8394 h and 17.6788 h period interpretations remain model-dependent and no sidereal spin is installed. The grid marks unmapped terrain.",
-              "title": "Published occultation shape model",
-              "detail": "Source shape · unmapped surface grid",
               "thumbnail": "/scenes/quaoar/quaoar-model-thumbnail.webp",
               "surface": "quaoar-model-surface@2x.webp",
               "poles": "quaoar-model-poles@2x.webp",
@@ -196,7 +192,9 @@
                 "id": "published-shape",
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/2607.06450"
-              }
+              },
+              "notes": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved. Pole RA 259.7°, DEC 53.4° inherits the measured ring-plane prior; arbitrary meridian. The 8.8394 h and 17.6788 h period interpretations remain model-dependent and no sidereal spin is installed. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -331,7 +329,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -340,8 +338,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ccb4984a3f9c4abf41b9b7b02d50e3c1bb30ec8641b9ea3b59b41427bb83c651",
-      "bytes": 4140,
+      "sha256": "9f1b4e949e98d9159c387e615965ac93a17031cdf6188742ceefc5bc6a206cce",
+      "bytes": 3848,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -354,11 +352,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved. Pole RA 259.7°, DEC 53.4° inherits the measured ring-plane prior; arbitrary meridian. The 8.8394 h and 17.6788 h period interpretations remain model-dependent and no sidereal spin is installed. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -390,6 +387,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "published-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -397,8 +406,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -410,8 +420,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6646,
-          "sha256": "9e6b898b9c03fbd0d1fe5c5e22cbcefdd2bcaa69b661091921a202dff1ae924d",
+          "bytes": 6455,
+          "sha256": "e5eb447c8ee6f513b8c7136789947cbb0bc21a1c817ddde5affec8ccd96f8c8b",
           "verification": "bytes-verified"
         }
       ],
@@ -425,6 +435,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

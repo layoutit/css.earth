@@ -4,11 +4,13 @@
 
 **False color** adds three original Cassini ISS NAC filter observations displayed as RGB (IR3 / GRN / UV3), calibrated by CISSCAL 4.0beta into linear I/F. This is false color. Each frame uses its own measured camera row in the [Thomas 2018 pandora document](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pandora_document.pdf), registered to the matching original plate model.
 
-- **Monochrome** uses 11 original Cassini ISS NAC clear-filter images, calibrated by the PDS Ring-Moon Systems Node with CISSCAL 4.0beta into linear I/F.
+- **Monochrome** uses 10 original Cassini ISS NAC clear-filter images, calibrated by the PDS Ring-Moon Systems Node with CISSCAL 4.0beta into linear I/F.
 
 - **Elevation** comes from the same [Thomas, Joseph and Ansty (2018) PDS shape release](https://doi.org/10.26033/ewy3-jy61), shown as radial height above an explicitly chosen 40.6 km reference sphere.
 
 ## Evidence
+
+The [additional color-sequence fit](evidence/cassini-coverage/pandora-registration-0-fit.json) failed its independent maximum-residual criterion. The original diagnostic retains source/shape/code hashes and feature controls; scratch paths identify investigated native products. No imagery from this trial is added. See the [investigation ledger](investigations.json) for the decision and reopening condition.
 
 The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/filter-color/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
@@ -31,7 +33,6 @@ The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) chec
 - **Orientation:** Small optical librations and dynamical phase errors are not represented.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
-
 
 ## False color preparation
 
@@ -65,7 +66,7 @@ The original floating-point IMG products and their detached PDS labels are pinne
 
 The shared camera projection intersects the original PDS shape and applies each observation’s range, center sample/line, projected north and observer/Sun directions. The camera focal length and pixel pitch come from the [Cassini ISS instrument kernel](https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti): 2003.44 mm and 12 µm. The PDF longitudes are positive west; the rendered mesh and map use positive east. The source frame has +X toward Saturn, +Y opposite orbital motion and +Z north. VICAR `LBLSIZE + NLB × RECSIZE` owns the pixel-data offset; the detached labels omit the binary header record.
 
-A bounded Lunar-Lambert display normalization reduces photographed disk shading. Per-frame level matching is limited to 0.7–1.4. An edge-connected threshold of 0.003 I/F rejects faint sky noise; isolated dark pixels within the body are retained. This conservative display mask does not classify every low signal as missing. Fine photographed relief and residual exposure differences may remain. The app’s directional Shadows setting remains independent of this source correction.
+A bounded Lunar-Lambert display normalization reduces photographed disk shading. Per-frame levels are fitted from overlaps that both frames see within 70° of incidence and emission; the widest gain, 5.16, belongs to N1860792666_1 at 109° phase, where Lunar-Lambert normalization leaves the phase function to the level. An edge-connected threshold of 0.003 I/F rejects faint sky noise; isolated dark pixels within the body are retained. This conservative display mask does not classify every low signal as missing. Fine photographed relief and residual exposure differences may remain. The app’s directional Shadows setting remains independent of this source correction.
 
 Fixed relief illumination makes model slopes readable. Palette bounds and the unshaded numeric legend are in the authored recipe.
 
@@ -78,6 +79,8 @@ All lenses use the same prepared geometry and coverage interpretation. A dedicat
 ## Source survey
 
 Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
+
+Cassini frame `N1860792100_1` is not used: its published camera places 99.9% of the lit source shape on the photograph's sky while the photographed body lies elsewhere in the frame, so preparation refuses it. No camera correction is invented, and the frame had supplied no displayed samples.
 
 [NASA’s Pandora overview](https://science.nasa.gov/saturn/moons/pandora/) supplies editorial context. JPL values in the vendored astronomy package supply the physical radius and orbit used by the shared application. Restore source bytes with the authored acquisition recipe, then run the shared object preparer; prepared runtime files are distributed through `runtime-assets.json`.
 

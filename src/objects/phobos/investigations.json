@@ -1,0 +1,112 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "phobos",
+  "entries": [
+    {
+      "id": "stooke-dlr-mosaic",
+      "subject": "Stooke DLR-controlled 5 m Phobos mosaic",
+      "status": "included",
+      "finding": "Selected mosaic supplies Monochrome with its existing source shading and variable resolution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/source/manifest.json",
+        "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "dlr-mars-express-mosaic",
+      "subject": "DLR Mars Express SRC 12 m global mosaic",
+      "status": "excluded",
+      "finding": "Lower-density overlapping monochrome content underlies the selected mosaic, so it is not a second lens.",
+      "revisitWhen": "A distinct registered product supplies materially different valid coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/source/manifest.json",
+        "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "hrsc-viking-dem",
+      "subject": "HRSC/Viking 100 m terrain model",
+      "status": "excluded",
+      "finding": "The source survey records it as superseded by the newer SPC mesh for Elevation because the selected shape preserves shared registration without its seam.",
+      "revisitWhen": "A revision demonstrates better frame-compatible terrain coverage than the selected SPC model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/source/manifest.json",
+        "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "ernst-spc-shape",
+      "subject": "Ernst et al. 2023 SBMT 148 m shape and facet attributes",
+      "status": "included",
+      "finding": "Selected shape and facet table supply Shape, Elevation, Relative albedo and Slope; albedo remains relative and support-limited.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/source/manifest.json",
+        "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "thermal-and-mineral-spectra",
+      "subject": "Disk-integrated thermal and mineralogical spectra",
+      "status": "deferred",
+      "finding": "The recorded survey found no qualified mapped product, so disk spectra are not texture lenses.",
+      "revisitWhen": "A registered mapped product with documented quantity, frame and coverage becomes available.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/source/manifest.json",
+        "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "regional-color-images",
+      "subject": "HiRISE and HRSC regional color images",
+      "status": "excluded",
+      "finding": "The recorded survey treats these perspective observations as not a registered global color map and does not infer color from monochrome.",
+      "revisitWhen": "A controlled projection onto the selected irregular shape and per-observation photometry are qualified.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phobos/source/manifest.json",
+        "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

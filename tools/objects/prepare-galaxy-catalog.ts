@@ -1,12 +1,13 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parsePreparedGalaxyCatalog } from '@cssearth/catalog';
+import { parsePreparedGalaxyCatalog, spatialPublicationId } from '@cssearth/catalog';
 import { parseGalaxyRecipe, record, text } from '../../src/preparation/galaxy-catalog/config.js';
 import { prepareGalaxyCatalog } from '../../src/preparation/galaxy-catalog/prepare.js';
 import { parseGalaxyCsv, parseMembershipTable, readAuthorMetadata } from '../../src/preparation/galaxy-catalog/source.js';
 import { verifiedBytes, sha256 } from '../../src/preparation/volume/source.js';
 import type { GalaxySource } from '../../src/preparation/galaxy-catalog/types.js';
+import { readBibliography } from '../../src/preparation/galaxy-catalog/bibliography.js';
 
 export async function prepareGalaxyCatalogObject(options: { objectDirectory: string; outputDirectory?: string }) {
   const objectDirectory = resolve(options.objectDirectory), sourceDirectory = resolve(objectDirectory, 'source');
@@ -19,7 +20,10 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     const path = text(s.path, 'Source path'), hash = text(s.sha256, 'Source hash');
     const bytes = await verifiedBytes(sourceDirectory, { path, sha256: hash });
     if (bytes.length !== s.bytes) throw new TypeError(`Source byte-count mismatch: ${path}`);
-    sources.push({ id: text(s.id, 'Source id'), path, sha256: hash, bytes: bytes.length, url: text(s.url, 'Source URL'), citation: text(s.citation, 'Source citation') });
+    const references = path.endsWith('.bib') ? [...readBibliography(bytes.toString('utf8')).values()] : s.references;
+    if (references !== undefined && !Array.isArray(references)) throw new TypeError('Source references must be an array.');
+    sources.push({ id: text(s.id, 'Source id'), path, sha256: hash, bytes: bytes.length, url: text(s.url, 'Source URL'), citation: text(s.citation, 'Source citation'),
+      ...(references ? { references: references.map(value => { const r = record(value, 'Source reference'); return { id: text(r.id, 'Reference id'), catalogueId: spatialPublicationId(text(r.id, 'Reference id')), url: text(r.url, 'Reference URL'), citation: text(r.citation, 'Reference citation') }; }) } : {}) });
   }
   const read = async (pin: { path: string; sha256: string; bytes: number }) => {
     const bytes = await verifiedBytes(sourceDirectory, pin);
@@ -30,6 +34,8 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
   const metadata = readAuthorMetadata(await read(recipe.archive), recipe.archiveInputPrefix, recipe.eligibleTables);
   const membership = parseMembershipTable((await read(recipe.membershipTable)).toString('utf8'));
   const data = prepareGalaxyCatalog(rows, metadata, membership, recipe, sources);
+  const used = new Set(data.objects.flatMap(object => [object.skyPosition.sourceRef, object.distance.sourceRef, object.halfLightRadius?.sourceRef, object.membership.sourceRef]));
+  for (const source of sources) if (source.references) source.references = source.references.filter(reference => used.has(reference.id));
   parsePreparedGalaxyCatalog(data);
   const bytes = Buffer.from(JSON.stringify(data) + '\n');
   const outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory, 'prepared')), path = resolve(outputDirectory, 'catalogue.json');

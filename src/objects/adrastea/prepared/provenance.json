@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "805c4e96cec6444ded76cfc69801141da4e3fddb62114e19031a1fce43a4ee0b"
+    "sha256": "b925118d131b5a3527449b4c7fe0b126e7e45b333c16208e528d8e642270d8a3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5ea563039827a4a2d65d74627b9e13992183eee756f22e76af17dbe075cf4bf5",
+      "sha256": "1404ff3c716b3a33ecc01b6211bd5fcbcaec962a61a134a4c65b2f6c804a1d0e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "adrastea",
         "displayName": "Adrastea",
         "panel": {
-          "introduction": "Adrastea is a tiny moon near the outer edge of Jupiter’s main ring. Galileo barely resolved its outline; this view shows a model based on its measured dimensions.",
           "facts": [
             {
               "id": "radius",
@@ -169,9 +168,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "A triaxial ellipsoid based on the 10 × 8 × 7 km semi-axes in the IAU/WGCCRE PCK. Galileo resolved Adrastea only a few pixels across, so no craters, relief map or observed surface texture are represented. The standard gray grid marks the absence of surface imagery; shared lighting describes the model shape.",
-              "title": "Approximate shape model",
-              "detail": "Measured axes",
               "thumbnail": "/scenes/adrastea/adrastea-model-thumbnail.webp",
               "surface": "adrastea-model-surface@2x.webp",
               "poles": "adrastea-model-poles@2x.webp",
@@ -180,7 +176,8 @@
                 "path": "../manifest.json",
                 "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
               },
-              "summary": "Galileo-based shape estimate. No surface imagery is available; craters and terrain are unresolved."
+              "notes": "A triaxial ellipsoid based on the 10 × 8 × 7 km semi-axes in the IAU/WGCCRE PCK. Galileo resolved Adrastea only a few pixels across, so no craters, relief map or observed surface texture are represented. The standard gray grid marks the absence of surface imagery; shared lighting describes the model shape.",
+              "noData": true
             }
           ]
         },
@@ -324,7 +321,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -333,8 +330,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5ea563039827a4a2d65d74627b9e13992183eee756f22e76af17dbe075cf4bf5",
-      "bytes": 4040,
+      "sha256": "1404ff3c716b3a33ecc01b6211bd5fcbcaec962a61a134a4c65b2f6c804a1d0e",
+      "bytes": 3670,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -347,11 +344,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "A triaxial ellipsoid based on the 10 × 8 × 7 km semi-axes in the IAU/WGCCRE PCK. Galileo resolved Adrastea only a few pixels across, so no craters, relief map or observed surface texture are represented. The standard gray grid marks the absence of surface imagery; shared lighting describes the model shape."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -383,6 +379,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "pck-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -390,8 +398,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -403,8 +412,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7487,
-          "sha256": "a3a0da9d6c1554efc8126ba052de9c9c1c0bfcd6b422e7dd52cd8e9e595af659",
+          "bytes": 7305,
+          "sha256": "086ace039d9c54289242fc8c9ee6f529388920255934d7e92f2615cd1485baa1",
           "verification": "bytes-verified"
         }
       ],
@@ -418,6 +427,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

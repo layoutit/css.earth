@@ -4,7 +4,6 @@
   "id": "alkmene",
   "displayName": "Alkmene",
   "panel": {
-    "introduction": "Published convex shape with a shape-aware thermophysical size calibration. The grid marks unavailable imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve shape with thermophysical volume-equivalent diameter 58.6 ± 1.2 km. The published fit uses the same pole family; an alternative pole remains possible. The grid marks unavailable imagery and rotational phase is illustrative.",
-        "title": "DAMIT shape model",
         "thumbnail": "/scenes/alkmene/alkmene-shape-thumbnail.webp",
         "surface": "alkmene-shape-surface@2x.webp",
         "poles": "alkmene-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 29.3 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Shape-derived elevations",
         "thumbnail": "/scenes/alkmene/alkmene-elevation-thumbnail.webp",
         "surface": "alkmene-elevation-surface@2x.webp",
         "poles": "alkmene-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/146",
           "image": "/scenes/alkmene/alkmene-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 29.3 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

@@ -128,6 +128,12 @@ export function diskGain(incidence: number, emission: number, policy: DiskPhotom
   if (policy.model === 'retained-observation') return Number.isFinite(incidence) && Number.isFinite(emission) &&
     incidence >= 0 && emission >= 0 && incidence <= policy.maximumIncidenceDegrees*Math.PI/180 &&
     emission <= policy.maximumEmissionDegrees*Math.PI/180 ? 1 : null;
+  if (policy.model === 'lunar-lambert') {
+    if (![incidence, emission].every(Number.isFinite) || incidence < 0 || emission < 0 ||
+        incidence > policy.maximumIncidenceDegrees * Math.PI / 180 || emission > policy.maximumEmissionDegrees * Math.PI / 180) return null;
+    const gain = diskFunctionGain({ family: 'lunar-lambert', weight: policy.weight ?? NaN }, { mu0: Math.cos(incidence), mu: Math.cos(emission), phase: 0 }, NORMAL_GEOMETRY);
+    return gain > 0 && gain <= policy.maximumGain ? gain : null;
+  }
   if (policy.model !== 'minnaert') return lommelSeeligerGain(incidence, emission, policy);
   if (phase === undefined || ! [incidence, emission, phase].every(Number.isFinite) || incidence < 0 || emission < 0 || phase < 0 || phase > Math.PI ||
       incidence > policy.maximumIncidenceDegrees * Math.PI/180 || emission > policy.maximumEmissionDegrees * Math.PI/180) return null;

@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "athor",
+  "card": {
+    "text": "Main-belt asteroid, discovered in April 1876.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=161",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1876-04-19 by Watson, J. C. at Ann Arbor; albedo: 0.230; orbit class: Main-belt Asteroid; spec_B: Xc; spec_T: M"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "J. C. Watson found Athor at Ann Arbor in 1876. Its surface reflects about 23% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=161",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1876-04-19 by Watson, J. C. at Ann Arbor; albedo: 0.230; orbit class: Main-belt Asteroid; spec_B: Xc; spec_T: M"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 461 shape model",
+      "detail": "Published shape",
+      "summary": "Shape inferred from brightness changes as it spins, so hollows are smoothed over. Another pole also fits."
+    },
+    "elevation": {
+      "title": "DAMIT 461 radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 20.42 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "d430d01e1e20fb934c8930f805d62ec6726aec1a1f049ef29718c763a58dda07"
+          "sha256": "e1aa07bdf5d512a54c576a01ee3bf3325003f8a32439588012d77483e27cafc6"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1c6c4d7c1b926ef06be24f81f12356517559daa4f69f5cd19f2d3214c949280c"
+        "sha256": "17283ce5606ddf7ea4b2b6d8af9a2ca0794ca47d3a3ed1efdb54c2afb75f4e87"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 15.733429335695405,
-      "description": "Explore Chariklo, a Centaur, with its observation-constrained shape and two narrow rings.",
+      "description": "Centaur with two narrow rings.",
       "systemName": "Solar System",
       "order": 463,
       "context": {
@@ -132,6 +132,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "3c6d7195c7fb82759687df692e025b0286d61e107d1e10f39e9b0ff2b46ad412"
+    "sha256": "8ba1a0a735a3a505a2d08758254a490350a75bd4b6aae118bab2d5bb539d0707"
   }
 }

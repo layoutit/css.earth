@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4a098e47460eb16de340933abaa5e643d35f6d3f70851720a01e8954941e8c8c"
+          "sha256": "dc8274da77c10609fcd970f18c70afda71f6cf0b8002dda7d3097cbfeefaa387"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "962e7840ccf84d84b70839ca38818c075abe33fbb8e17ca1149bcb3fd4c735a7"
+        "sha256": "0894a860b34b180d28f56fd29aba7c20175da9e64d746c782857147fb447027b"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.3713315960899832,
-      "description": "Explore Sibylla in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich asteroid in the outer main belt, discovered in September 1876.",
       "systemName": "Solar System",
       "order": 300,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "73236df48d132a4d8f52ee5d5536ce8e8219b6a652fc62d41a426193efc62483"
+    "sha256": "70c281874baf03e4d09f9bbfc2a0be0b05813a6b5384c7383659002a90b7273e"
   }
 }

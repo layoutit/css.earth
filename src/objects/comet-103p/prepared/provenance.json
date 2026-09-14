@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "584a33009463c600e1dc5404d7ce5a5f15ea9eb7a9168b37bcc78de11ad52721"
+    "sha256": "f6f462360d6ee2a9498c388715dd670c3e303f42370e53b6c7183b007f82ee4e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "225013e36cc91344ab073adacebd8272136484e2b7db4973368f883c9bcc6ed9",
+      "sha256": "302776f3802e991ae11e64ae5f3032cbeff14411ea44a3f2b38cd7a4acb8e364",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -185,11 +185,9 @@
               "levelMatching": {
                 "samplesPerTriangle": 32,
                 "minimumPairs": 64,
-                "maximumLogMad": 0.3,
                 "maximumGain": 1.5
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 20,
                 "maximumSeparationMeters": 50,
                 "maximumEmissionDegrees": 75,
                 "visibilityToleranceMeters": 0.5
@@ -200,8 +198,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99.5
+                  0.9,
+                  99.3
                 ]
               },
               "metadata": {
@@ -300,14 +298,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "34e97d7d3ff5715b4b443942533e71ccc5844d18a92d1bd762986bf8e5b1a401",
+      "sha256": "bcec99e421a5a39e15e94c96af614d413f7276ff0ed1fe817eb35707f759adbd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-103p",
         "displayName": "Hartley 2",
         "panel": {
-          "introduction": "EPOXI passed Hartley 2 in 2010. A smooth waist joins its two rough lobes, while jets carry gas, dust and icy particles away from the nucleus.",
           "facts": [
             {
               "id": "diameter",
@@ -341,9 +338,6 @@
             {
               "id": "constraints",
               "label": "Source constraints",
-              "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
-              "title": "Shape-constraint map",
-              "detail": "PDS",
               "thumbnail": "/scenes/comet-103p/comet-103p-constraints-thumbnail.webp",
               "surface": "comet-103p-constraints-surface@2x.webp",
               "poles": "comet-103p-constraints-poles@2x.webp",
@@ -363,14 +357,13 @@
                   "label": "Blue",
                   "value": "Limb outlines"
                 }
-              ]
+              ],
+              "notes": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
+              "noData": true
             },
             {
               "id": "model",
               "label": "Shape model",
-              "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
-              "title": "Nucleus shape reconstruction",
-              "detail": "PDS",
               "thumbnail": "/scenes/comet-103p/comet-103p-model-thumbnail.webp",
               "surface": "comet-103p-model-surface@2x.webp",
               "poles": "comet-103p-model-poles@2x.webp",
@@ -390,14 +383,13 @@
                   "label": "Shape observations",
                   "value": "4 November 2010"
                 }
-              ]
+              ],
+              "notes": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
+              "noData": true
             },
             {
               "id": "mri",
               "label": "EPOXI photographs",
-              "description": "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape.",
-              "title": "EPOXI mosaic",
-              "detail": "EPOXI",
               "thumbnail": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
               "surface": "comet-103p-mri-surface@2x.webp",
               "poles": "comet-103p-mri-poles@2x.webp",
@@ -418,15 +410,12 @@
                   "value": "3.9–8 m/pixel"
                 }
               ],
-              "summary": "MRI views and restored HRI close-ups show the smooth waist and rough lobes. The photographs retain their shadows; the grid marks gaps or uncertain shape."
+              "notes": "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape.",
+              "noData": true
             },
             {
               "id": "temperature",
               "label": "Color temperature",
-              "title": "EPOXI infrared color temperature",
-              "detail": "HRI-IR",
-              "description": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
-              "summary": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
               "thumbnail": "/scenes/comet-103p/comet-103p-temperature-thumbnail.webp",
               "surface": "comet-103p-temperature-surface@2x.webp",
               "poles": "comet-103p-temperature-poles@2x.webp",
@@ -465,15 +454,13 @@
                 "meta": "K",
                 "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml",
                 "image": "/scenes/comet-103p/comet-103p-temperature-legend.webp"
-              }
+              },
+              "notes": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
+              "noData": true
             },
             {
               "id": "spectral-slope",
               "label": "Infrared slope",
-              "title": "EPOXI infrared continuum",
-              "detail": "HRI-IR",
-              "description": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
-              "summary": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
               "thumbnail": "/scenes/comet-103p/comet-103p-spectral-slope-thumbnail.webp",
               "surface": "comet-103p-spectral-slope-surface@2x.webp",
               "poles": "comet-103p-spectral-slope-poles@2x.webp",
@@ -512,7 +499,9 @@
                 "meta": "%/100nm",
                 "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml",
                 "image": "/scenes/comet-103p/comet-103p-spectral-slope-legend.webp"
-              }
+              },
+              "notes": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
+              "noData": true
             }
           ]
         },
@@ -5583,7 +5572,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -5592,8 +5581,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "34e97d7d3ff5715b4b443942533e71ccc5844d18a92d1bd762986bf8e5b1a401",
-      "bytes": 10024,
+      "sha256": "bcec99e421a5a39e15e94c96af614d413f7276ff0ed1fe817eb35707f759adbd",
+      "bytes": 8936,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -5672,11 +5661,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -5708,6 +5696,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "pds-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -5715,11 +5715,10 @@
       "label": "Source constraints",
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions."
-      ],
+      "limitations": [],
       "lensIds": [
         "constraints"
       ],
@@ -5751,6 +5750,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "constraint-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/1."
+        },
+        {
+          "sourceId": "pds-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -5758,11 +5769,10 @@
       "label": "Color temperature",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps."
-      ],
+      "limitations": [],
       "lensIds": [
         "temperature"
       ],
@@ -5916,6 +5926,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "pds-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -5923,11 +5940,10 @@
       "label": "Infrared slope",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals."
-      ],
+      "limitations": [],
       "lensIds": [
         "spectral-slope"
       ],
@@ -6081,6 +6097,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "pds-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -6088,11 +6111,10 @@
       "label": "EPOXI photographs",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape."
-      ],
+      "limitations": [],
       "lensIds": [
         "mri"
       ],
@@ -6123,15 +6145,22 @@
       "outputs": [
         {
           "url": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
-          "bytes": 1024,
-          "sha256": "43a91452476aec6954c268cb26ba3d17b2e2eae12e7175267be4225e3d917bed",
+          "bytes": 1032,
+          "sha256": "b91854478634ca6d48503495a3662f8b0113f66a1dc71411d7ca6af8eaaf4720",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-103p/comet-103p-mri-surface@2x.webp",
-          "bytes": 292400,
-          "sha256": "274e35d4e697da3c1d5f794fb50ccda159dcbdaed91f02fbf77a392ffb589c59",
+          "bytes": 267282,
+          "sha256": "1af70e805ab48fa88113f4f2591688ffaa00ec76ea6944a36ed8735537c62095",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "pds-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -6141,8 +6170,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -6154,8 +6184,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5825,
-          "sha256": "768df8f5e870ad067d7ecb760608cb7478b4eaceccb3425c211ba3dc318bc65c",
+          "bytes": 5666,
+          "sha256": "f2ea9cf8e588d3a2f99db27c4239299ef59f9a0ec5260b8b1ced17374621ec07",
           "verification": "bytes-verified"
         }
       ],
@@ -6166,6 +6196,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.",
       "limitations": [],
@@ -6201,6 +6232,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "constraints"
@@ -6225,6 +6257,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "mri"
@@ -6235,8 +6268,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/mri.webp",
-          "bytes": 17430,
-          "sha256": "e624f688c1ae192cb218d452bc63443bc5a0c7d7eecf8851ee45f8315fab6b0d",
+          "bytes": 16278,
+          "sha256": "0bb42f146df815108e679cdc516c1f9e2e9a926990b04bfece9ac94e07d3dfc9",
           "verification": "bytes-verified"
         }
       ]
@@ -6249,6 +6282,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "temperature"
@@ -6273,6 +6307,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "spectral-slope"
@@ -6293,5 +6328,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-103p",
+    "materialSha256": "5086119deca033d008f6b10dc07c99c29ae4cfcbc6a2b973bd111bb8e05387df",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/comet-103p/prepared/provenance.json",
+      "sha256": "05c401367decf6dae441049ed72f342df656fd99f91187bc7ea5fb7d52b13a76"
+    }
   }
 }

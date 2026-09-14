@@ -1,0 +1,189 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "charon",
+  "entries": [
+    {
+      "id": "jwst-protopapa-2024-carbon-dioxide-peroxide",
+      "subject": "Protopapa et al. 2024 JWST carbon dioxide and hydrogen peroxide detections",
+      "status": "deferred",
+      "finding": "Inspected the published study as a possible composition-map source. Its detections characterize disk-integrated spectra of the observed northern hemisphere; they do not supply resolved regional abundance maps. Painting regional deposits from these detections would invent spatial information.",
+      "revisitWhen": "A release provides spatially resolved measurements with body-coordinate registration, or a separately authorized non-spatial spectroscopy view makes the existing disk-integrated measurements useful.",
+      "evidence": [
+        "https://doi.org/10.1038/s41467-024-51826-4",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11448499/"
+      ],
+      "checked": [{ "date": "2026-09-13", "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393" }]
+    },
+    {
+      "id": "lorri-mvic-mosaic",
+      "subject": "USGS New Horizons 300 m monochrome mosaic",
+      "status": "included",
+      "finding": "The selected 2017 LORRI/MVIC GeoTIFF supplies Monochrome. Its 300 m grid has variable observational resolution and existing Lunar-Lambert normalization to 15-degree phase; values are relative brightness, with original gaps and cast shadows retained.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_mosaic_300m"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "new-horizons-dem",
+      "subject": "USGS 300 m stereo and shape-from-shading terrain model",
+      "status": "included",
+      "finding": "The signed terrain model supplies Elevation in metres above the 606 km sphere. The 300 m post spacing is not a terrain-accuracy claim; missing heights and mapping artifacts remain explicit.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "mvic-enhanced-color",
+      "subject": "PDS nh_charon_color_mosaic version 1.0",
+      "status": "included",
+      "finding": "The original four-band floating array supplies enhanced false color using NIR/red/blue, not natural color. Its own metric coordinates, finite missing-data sentinel and common channel range are retained; the source mixes panchromatic detail and coarser color.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/source/validation/color-source-inspection.json",
+        "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "bond-albedo",
+      "subject": "PDS nh_charon_bond version 1.0",
+      "status": "included",
+      "finding": "The mapped product supplies modeled Bond albedo under the source scattering assumptions, with missing regions preserved. Its label summary incorrectly says Pluto; target, title, LIDVID and data identify Charon.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/source/manifest.json",
+        "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "leisa-ice-scans",
+      "subject": "C_LEISA_HIRES and C_LEISA_LORRI_1 ice absorption views",
+      "status": "included",
+      "finding": "The two closest scans supply Water ice and Ammonia from spectra, per-pixel wavelengths and geometry. Native sampling is about 5.0 and 8.6 km; spatial pooling further limits detail. Band strength is not abundance, and the weak ammonia signal is not a new mineral detection. Native FITS endian, unit and missing-value discrepancies remain documented.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/source/science/leisa/bands.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/source/science/leisa/preparation.json",
+        "https://boulder.swri.edu/~buie/biblio/pub106.SOM.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "earlier-leisa-scans",
+      "subject": "Six earlier Charon LEISA scans",
+      "status": "deferred",
+      "finding": "The retained source review surveyed metadata for six earlier scans with approximately 30–132 km native sampling. Their spectra were not processed or qualified; they cannot supply crater-scale detail.",
+      "revisitWhen": "A coarse-scale coverage question warrants processing their spectra and qualifying their geometry and calibration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/source/science/leisa/bands.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "leisa-high-resolution-segment",
+      "subject": "LEISA channels 199–207 and high-resolution segment",
+      "status": "excluded",
+      "finding": "The ice recipes use channels 0–196. The archive warns that scattered-light calibration in the high-resolution segment, especially channels 199–207, is uncertain.",
+      "revisitWhen": "A calibration and applicable uncertainty assessment support the omitted segment for these scans.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/source/science/leisa/bands.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pluto-absorption-maps",
+      "subject": "Neighboring ready-made Pluto absorption maps",
+      "status": "excluded",
+      "finding": "The neighboring ready-made absorption products inspected in the New Horizons archive target Pluto, not Charon. Charon composition views instead derive from its own LEISA scans.",
+      "revisitWhen": "A Charon-specific mapped absorption product with documented coordinates and processing is available.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "less-pooled-leisa-display",
+      "subject": "Less-averaged LEISA display trial",
+      "status": "excluded",
+      "finding": "The recorded visual trial showed stronger scan-pattern variation without establishing finer surface features. The selected spatial pooling and existing broad-signal texture dimensions were retained.",
+      "revisitWhen": "Independent spectral and spatial evidence shows that less pooling resolves real Charon structure above instrument and scan noise.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/source/science/leisa/preparation.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "organa-and-gazetteer",
+      "subject": "IAU Gazetteer and informal Organa mission landmark",
+      "status": "included",
+      "finding": "The selected Gazetteer export supplies IAU places. Grundy et al. supplies the informal Organa centre at 310.9 degrees east, 54.3 degrees north, without an invented rim. Current features and minimaps share the photographic 0-degree east map edge.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/charon/source/preparation/features.json",
+        "https://boulder.swri.edu/~buie/biblio/pub106.SOM.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,6 @@
   "id": "gallia",
   "displayName": "Gallia",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 80.87 km (catalog ±1.04 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery.",
-        "title": "DAMIT 4618 shape model",
         "thumbnail": "/scenes/gallia/gallia-shape-thumbnail.webp",
         "surface": "gallia-shape-surface@2x.webp",
         "poles": "gallia-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 40.435 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 4618 radial height",
         "thumbnail": "/scenes/gallia/gallia-elevation-thumbnail.webp",
         "surface": "gallia-elevation-surface@2x.webp",
         "poles": "gallia-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4618",
           "image": "/scenes/gallia/gallia-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 40.435 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

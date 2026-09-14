@@ -6,6 +6,8 @@
 
 - The surface is a **smooth reference ellipsoid**, with semi-axes 30 × 20 × 17 km from `BODY516_RADII` in NAIF `pck00011.tpc`.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Evidence
 
 - OPUS owns observer and Sun planetocentric latitude, west-positive longitude and range, checked against recorded phase and image pixel scale.
@@ -37,24 +39,13 @@ The soft appearance is the information in the original photographs. No invented 
 
 The prepared surface uses 480 native raster triangles and shared flood and directional lighting.
 
-## Candidate survey
-
-| Candidate | Disposition |
-| --- | --- |
-| [Galileo reconstructed SSI archive](https://pds-rings.seti.org/galileo/), January 2000 frame C0532890500 | Included: the best resolved photographic view, at approximately 3 km/pixel. |
-| Earlier Galileo G8/C9/E11 observations | Five complementary views selected after inspecting originals. C0401639113 is badly affected by radiation noise; C0401773600 and C0401786800 add much coarser or redundant coverage and are excluded. |
-| [NASA PIA02531 montage](https://science.nasa.gov/photojournal/best-images-yet-of-thebe-amalthea-and-metis/) | Source comparison only. It is a presentation of the same January 2000 image, not an independent high-resolution texture. |
-| Voyager discovery images and Hubble images in OPUS | Unresolved or nearly unresolved; useful for detection/orbits, not additional surface lenses. |
-| [Stooke shape-model archive](https://sbn.psi.edu/pds/resource/stkshape.html) | No Metis model in this archive's released body list. Thomas et al. (1998) and later research describe a Metis shape reconstruction, but a reusable numerical release was not located. The explicitly labeled PCK ellipsoid is used instead. |
-| Colour, composition, altimetry and geological maps | No registered, resolved complementary map qualified from the inspected mission and mapping releases. Disk-integrated colour or albedo is not a resolved colour map. |
-
 ## Geometry and photographic preparation
 
 Original eight-bit reconstructed SSI data are decoded from their attached VICAR layout, preserving line prefixes and binary-header offsets. The original files and detached labels are preserved unchanged.
 
 Several early raw PDS labels contain inconsistent Sun/range values, so those fields are not used. `NORTH_AZIMUTH` is clockwise from image right under the [PDS definition](https://pds.nasa.gov/datastandards/documents/dd/all/current/ch33s02.html); adding 90 degrees supplies the shared camera's clockwise angle from image up. In particular, north is approximately down in the January 2000 raw image. The OPUS image-center and pole-clock values disagree with that image and are not used. Image-center translation is refined against the illuminated ellipsoid while holding its dimensions, camera scale and source directions fixed. Coordinates and the original metadata are recorded in `source/geometry/`.
 
-A measured empty-sky median is removed, then the shared bounded lunar-Lambert approximation (weight 0.5, maximum gain 2, incidence/emission below 70 degrees) reduces photographed illumination. Overlap levels are bounded to 0.7–1.4. The coarse ellipsoid limits registration.
+A measured empty-sky median is removed, then the shared bounded lunar-Lambert approximation (weight 0.5, maximum gain 1.5, incidence/emission below 70 degrees) reduces photographed illumination. At a cap of 2, 739 of the 766 saturated display samples had been normalized by more than 1.5, in thin slivers at the edge of C0532890500 and C0394682801; the 1.5 cap withholds 5,057 of C0394682801's 5,445 samples and lowers area coverage from 60.4% to 53.9%. Overlap level matching is fitted where both frames see the surface within 70° of incidence and emission and needs gains up to 1.75 (C0394682801). The coarse ellipsoid limits registration.
 
 `source/shape/model.json` records the analytic ellipsoid sampling formula. `metis-ellipsoid.tab` is a checked-in 5-degree sampling of that formula, not independent radius measurements. Its sampling is verified against the original PCK dimensions in the numerical source test. Shared meshoptimizer preparation simplifies its 5,040 triangles to 480 within a 500 m library error allowance; that allowance is a preparation setting, not a measurement uncertainty. Original dimension uncertainties are roughly kilometres.
 

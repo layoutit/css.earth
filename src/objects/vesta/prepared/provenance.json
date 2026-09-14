@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bc5f4f8f890d493473d2de17f422976cefef064dba76cef6e192f6706cd98ddb"
+    "sha256": "97bf7da97e6dd7d819163740706ffb23c5e31b0dcc87e167682e0db2f0a5b420"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "37a62563a7c3c2401a93341dbb63a33e8aad0e17153281ebbb8443498089fe91",
+      "sha256": "cbc43a3c921fe3b065df6d3fed43cd2cecfb8a084cc0f2597e6bdac29508047d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -46,6 +46,20 @@
               "nativePhotographicSampling": {
                 "samplesPerAxis": 2,
                 "quality": 95
+              }
+            },
+            {
+              "id": "surface",
+              "validity": {
+                "kind": "image-monochrome-no-data",
+                "noData": 0,
+                "centerLongitude": 180,
+                "grid": {
+                  "pixelsPerDegree": 222.529479629277,
+                  "sampleOffset": 40055.3,
+                  "lineOffset": 20027
+                },
+                "labelPath": "reference/lamo-clear.lbl"
               }
             },
             {
@@ -181,7 +195,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5a9e4adc9a3b4fa03ae7b818534502103c6013b4df7dda36b01cb37c711b27df",
+      "sha256": "c41c721ef13da6241661e1f28bc82719ffbb23fc5d6d8e7324bbabdbfe1f31a0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,7 +219,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Vesta is a rocky asteroid in the main belt between Mars and Jupiter. NASA’s Dawn spacecraft mapped its surface, revealing giant impact basins, equatorial troughs, and a diverse volcanic crust.",
           "facts": [
             {
               "id": "radius",
@@ -251,8 +264,6 @@
             {
               "id": "normal",
               "label": "Natural color",
-              "description": "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain.",
-              "title": "FC natural-color composite",
               "thumbnail": "/scenes/vesta/vesta-normal-thumbnail.webp",
               "surface": "vesta-normal-surface@2x.webp",
               "poles": "vesta-normal-surface@2x.webp",
@@ -260,14 +271,25 @@
                 "id": "dlr-hamo-natural-color",
                 "path": "../manifest.json"
               },
-              "detail": "Dawn HAMO",
-              "summary": "The 650, 550 and 430 nm bands approximate visible color. Bright terrain clips to white; shadows and color offsets remain."
+              "notes": "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain.",
+              "noData": true
+            },
+            {
+              "id": "surface",
+              "label": "Clear-filter photography",
+              "thumbnail": "/scenes/vesta/vesta-surface-thumbnail.webp",
+              "surface": "vesta-surface-surface@2x.webp",
+              "poles": "vesta-surface-surface@2x.webp",
+              "source": {
+                "id": "dlr-vesta-lamo-clear",
+                "path": "../manifest.json"
+              },
+              "notes": "Dawn low-altitude clear-filter photographs in the published DLR mosaic. Sunlit crater walls, shadows and mosaic seams belong to the observations. The source is 20 m/pixel; this simplified display is coarser. Gray grid marks missing coverage and exact black pixels withheld by the fill heuristic.",
+              "noData": true
             },
             {
               "id": "ratios",
               "label": "Spectral ratios",
-              "description": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
-              "title": "Clementine-style color composite",
               "thumbnail": "/scenes/vesta/vesta-ratios-thumbnail.webp",
               "surface": "vesta-ratios-surface@2x.webp",
               "poles": "vesta-ratios-surface@2x.webp",
@@ -276,14 +298,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": true,
-              "detail": "Dawn FC",
-              "summary": "Published false-color Dawn filter ratios emphasize spectral differences. Source seams and missing coverage remain visible."
+              "notes": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting.",
-              "title": "HAMO digital terrain model",
               "thumbnail": "/scenes/vesta/vesta-elevation-thumbnail.webp",
               "surface": "vesta-elevation-surface@2x.webp",
               "poles": "vesta-elevation-surface@2x.webp",
@@ -305,8 +325,7 @@
                 "id": "dlr-hamo-radius-model",
                 "path": "../manifest.json"
               },
-              "detail": "Shaded relief",
-              "summary": "Height relative to a 255 km sphere. Polar gaps are interpolated; those areas are not stereo measurements."
+              "notes": "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting."
             }
           ]
         },
@@ -550,6 +569,63 @@
     },
     {
       "kind": "source-input",
+      "id": "dlr-vesta-lamo-clear",
+      "path": "maps/vesta-lamo-clear.png",
+      "origin": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public Dawn scientific image mosaic; attribution required. See NOTICE.md.",
+      "acquisition": "Unmodified 8-bit PNG from the DLR Dawn LAMO clear-filter release, October 2012. Companion attached PDS label is preserved in reference/lamo-clear.lbl.",
+      "redistribution": "Prepared display derivatives with the source credit and scientific limitations.",
+      "lensId": "surface",
+      "label": "Clear-filter photography",
+      "falseColor": false,
+      "width": 80112,
+      "height": 40056,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "coordinateSystem": "Dawn Claudia",
+        "referenceRadiusMeters": 255000
+      },
+      "coverage": "Published low-altitude mosaic with original illumination, seams and missing northern coverage. Exact black is treated as likely fill; no independent validity mask is supplied, so photographic black can also be withheld. Prepared display resolution is lower than the 20 m/pixel source.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "dawn",
+            "evidence": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
+            "missionId": "dawn"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dlr-vesta-lamo-clear",
+            "role": "material",
+            "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png"
+          }
+        ]
+      },
+      "sha256": "1a135e6111e0e4f69596583c8ff1662a0a01b8ccc66226b31040a8497e5b9c5a",
+      "bytes": 878609842,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "maps/vesta-lamo-clear.png",
+        "url": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "vesta-ratios",
       "path": "maps/vesta-clementine.pds.zip",
       "origin": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
@@ -608,7 +684,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -617,8 +693,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5a9e4adc9a3b4fa03ae7b818534502103c6013b4df7dda36b01cb37c711b27df",
-      "bytes": 9706,
+      "sha256": "c41c721ef13da6241661e1f28bc82719ffbb23fc5d6d8e7324bbabdbfe1f31a0",
+      "bytes": 9562,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -731,11 +807,10 @@
       "label": "Natural color",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -776,18 +851,89 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "dlr-hamo-natural-color",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "dlr-hamo-radius-model",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "surface",
+      "label": "Clear-filter photography",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [],
+      "lensIds": [
+        "surface"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 0,
+          "centerLongitude": 180,
+          "grid": {
+            "pixelsPerDegree": 222.529479629277,
+            "sampleOffset": 40055.3,
+            "lineOffset": 20027
+          },
+          "labelPath": "reference/lamo-clear.lbl"
+        }
+      },
+      "inputs": [
+        "dlr-vesta-lamo-clear",
+        "dlr-hamo-radius-model"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/vesta/vesta-surface-thumbnail.webp",
+          "bytes": 3782,
+          "sha256": "5ede0b312706a02cd2d1f554c0a5a2611a5281a0fb9089bbc9f6773713cad621",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/vesta/vesta-surface-surface@2x.webp",
+          "bytes": 2994634,
+          "sha256": "5413356efef96c61ca5e63d63ad7a7f1fccf5bbf3f961a456ffe69f890d4f308",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "dlr-vesta-lamo-clear",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/1."
+        },
+        {
+          "sourceId": "dlr-hamo-radius-model",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
       "id": "ratios",
       "label": "Spectral ratios",
       "recipe": "terrestrial",
-      "selector": "/raster/observations/1",
+      "selector": "/raster/observations/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid."
-      ],
+      "limitations": [],
       "lensIds": [
         "ratios"
       ],
@@ -826,6 +972,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "vesta-ratios",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/2."
+        },
+        {
+          "sourceId": "dlr-hamo-radius-model",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -833,11 +991,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -870,6 +1027,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "dlr-hamo-radius-model",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -877,8 +1041,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -890,8 +1055,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5464,
-          "sha256": "9c0168d29c87aac8284b4e329066f96599c7c3e98c53e18c03c455225ae39956",
+          "bytes": 5252,
+          "sha256": "c5bf339f2ac0cfea0df18b63ff36969e04364c92e0ba874296668ed4063eef0b",
           "verification": "bytes-verified"
         }
       ],
@@ -902,6 +1067,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -940,6 +1106,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -957,13 +1124,39 @@
       ]
     },
     {
-      "id": "preview:ratios",
-      "label": "Spectral ratios preview",
+      "id": "preview:surface",
+      "label": "Clear-filter photography preview",
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "surface"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/surface.webp",
+          "bytes": 63264,
+          "sha256": "d86da7d326ff8d1187df2804402d56dfe8e13681aeaa2c3abd1c5700d5d8c655",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:ratios",
+      "label": "Spectral ratios preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "ratios"
@@ -988,6 +1181,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"
@@ -1008,5 +1202,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "vesta",
+    "materialSha256": "ff3b69813fa13e13b119123ed46b4799e00650db5ea51073f471f38f3a2f891a",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/vesta/prepared/provenance.json",
+      "sha256": "e402baf94565e5fe2136155d2ebcb053d96cf18f510acbb0e6993f314bd9a2ea"
+    }
   }
 }
