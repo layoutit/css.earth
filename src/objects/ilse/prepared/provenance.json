@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ilse",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d3dd08ed8202d2ec65097c7f4da9bfff7a2912c75c833c397ff76f8b94e5d180"
+    "sha256": "bbd89870ab807506d87f886309e49bf1e412919786c97f75a58be1f0f39c42b0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5f1666ef3badf5bf36afaef6c6c2076f0086ed0bae97f1ff581dfeed7a106400",
+      "sha256": "dd74ad68d42b1919949495df8418ca2f2e0801c9d516f1dc7f00d2b3d1e8fe9d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "ilse",
         "displayName": "Ilse",
         "publicBase": "/scenes/ilse/",
-        "distanceAu": 2.377447027685721,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 864 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c2a9af8b4ca0fc0f2cf5633a86a8595173101d4a03baf8aa4a7e76b7a1483f14",
+      "sha256": "1fe3d4173b4a5756f4a8d38b4a976bbd69296833d116807f9019729d24186e4e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/864"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "39f5363411a234415535e0ece44d5783636a4655bfd0bf0bcc8e1d00493414fc",
       "bytes": 80601,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c2a9af8b4ca0fc0f2cf5633a86a8595173101d4a03baf8aa4a7e76b7a1483f14",
-      "bytes": 7784,
+      "sha256": "1fe3d4173b4a5756f4a8d38b4a976bbd69296833d116807f9019729d24186e4e",
+      "bytes": 7505,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/ilse/ilse-elevation-thumbnail.webp",
           "bytes": 5448,
           "sha256": "64be20f56c43022eac5805d4ed63ecccb445afd92614e7208f801b57bda953e3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ilse/ilse-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ilse/ilse-elevation-surface@2x.webp",
           "bytes": 296574,
           "sha256": "06d69a32934f7ca399f9daf473f6b8947b0f0bceb073c82f15b6c60ab5fc7367",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/ilse/ilse-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ilse/ilse-shape-surface@2x.webp",
           "bytes": 229036,
           "sha256": "cf024211bc7fe0e92307eb4320770640fad5a14a4051186d76df2b8869b4193b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5178,
-          "sha256": "1d98b4020b1cd1f1905190799a878c0c7516cdf450c44db9d4fb3555524ff610",
+          "bytes": 5059,
+          "sha256": "3665f3df8579b06d513bafb37aeb690c66ddb9b3fda6841651bdd15dfdd54a71",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "medusa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7d95fa8b7510a4cc631958e50f7426275576fdb27d44e126d443caaa554a7be6"
+    "sha256": "d5c83cd9c3bbcb64eefc2983c6806d36a0d76a2a5026bbf339f61272e5076ddd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "089f4206f81d59cb580f2006fd997e403da81c7e801645e7f1916f98d795bfe7",
+      "sha256": "d597dbe2c1d483e20fab8075306dd4afad80262cf6defb94358508881bdbdeef",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "medusa",
         "displayName": "Medusa",
         "publicBase": "/scenes/medusa/",
-        "distanceAu": 2.174593942921186,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 570 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "62a6eb4140bddecc5d5780dd4a87a5d1bb51ff879bd5117ac5c2f3053c61b38f",
+      "sha256": "ce82a6735b62125fa059821653821f47bfd538280f69c2898004ead5c74411c5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/570"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "ac8826e64a7f1eb168ab78c9ed24005a668817f2f32137eecf417ce94a9ee6c0",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "62a6eb4140bddecc5d5780dd4a87a5d1bb51ff879bd5117ac5c2f3053c61b38f",
-      "bytes": 10481,
+      "sha256": "ce82a6735b62125fa059821653821f47bfd538280f69c2898004ead5c74411c5",
+      "bytes": 10202,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/medusa/medusa-elevation-thumbnail.webp",
           "bytes": 4326,
           "sha256": "d1a4e753ed02ff3de47f2fc879e7c225d23021309d662ca0b6ece563f33ad7df",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/medusa/medusa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/medusa/medusa-elevation-surface@2x.webp",
           "bytes": 268304,
           "sha256": "179fff3d9221f86e87148a253021a9334195b85e4c347d381adc5563a7e3e673",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/medusa/medusa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/medusa/medusa-shape-surface@2x.webp",
           "bytes": 164036,
           "sha256": "852362e8593423a53bcfc8a5be61ca79cb7ad1c024c1963cb2fb82e46903488d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7849,
-          "sha256": "9e45101bb2352ef300992fe1b7f780fefdd20e0790b889d6d1fe5dde095b741b",
+          "bytes": 7730,
+          "sha256": "98d9914f596748c61f73619d7ed019c5e5697a41a4140ee3a51c4c202bfa91c5",
           "verification": "bytes-verified"
         }
       ],

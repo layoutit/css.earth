@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "thalia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a986c9b53d55a10aaad02af6f29fcfb9e9792265879a96a04e9ad7a365ca1f0"
+    "sha256": "f5677419f1c5c408019cf34764795ccb229af9fb67da9d6b9d2b079a5b7c4dbb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b2d6d74dd05d8e41396698d826233086630ef07f8d2610b881c7d14eb9fa1ee4",
+      "sha256": "e4742447501a1a4b386a39904cd39b479b05d564bdba7380522556975bf3e681",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "thalia",
         "displayName": "Thalia",
         "publicBase": "/scenes/thalia/",
-        "distanceAu": 2.628581333515509,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1858 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e79429e92ded7ce901938326b66de76c52557a13679a656650dc4e5f0d8b4f86",
+      "sha256": "519c7de6d28e18b4c68c6d2cf77aa9aecb5789a3aaf0fd0b2bf045b8581d027b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1858"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "667be44f59441cbb117e91d5153cc6b6547810348ff58a7dc946a4d1dad4bf21",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e79429e92ded7ce901938326b66de76c52557a13679a656650dc4e5f0d8b4f86",
-      "bytes": 8939,
+      "sha256": "519c7de6d28e18b4c68c6d2cf77aa9aecb5789a3aaf0fd0b2bf045b8581d027b",
+      "bytes": 8660,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/thalia/thalia-elevation-thumbnail.webp",
           "bytes": 5532,
           "sha256": "b682f059065b682c92c24a5f3c997a9af7a9c04f424d91a086bc97f4720621d7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thalia/thalia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thalia/thalia-elevation-surface@2x.webp",
           "bytes": 308384,
           "sha256": "60000e45d6de8bac50bb46d6c898ec9519e977fd5711dde1acbd0162a987baea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/thalia/thalia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thalia/thalia-shape-surface@2x.webp",
           "bytes": 199974,
           "sha256": "23f12295bbcc7f7e8f2eb9de8788c04151a1ec0a6dfa38d87138d46dce26b168",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6311,
-          "sha256": "1a9d5a5ac3230381dac04b873b8179c317505b571527c1fc456ae9912551a39c",
+          "bytes": 6192,
+          "sha256": "d539d474c2a6eac2dbdcb6d2c7ca903cf884a419375be2da6b057eff675bd6a4",
           "verification": "bytes-verified"
         }
       ],

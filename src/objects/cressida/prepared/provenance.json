@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "cressida",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "867ebd57e52688bd86664d61b7b326bb29103b09448eb8fb72a9969c9068d3ea"
+    "sha256": "9eb43cacf22fc1c9f64c81f30af1ce2a0122fc6e587f05df9b2043dcd096ff31"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5aa58495eeb0d37fcd1063769011f163db19b8eb22ba41690272d86b75b85e94",
+      "sha256": "39a03af2bf4e73275dbbcd6f79864f75cbcbb6d00712c4fa2d09a95efce061f0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "cressida",
         "displayName": "Cressida",
         "publicBase": "/scenes/cressida/",
-        "distanceAu": 19.19,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Uranus-system ephemeris; IAU Cressida BODY709 pole and meridian from PCK00011, with periodic terms frozen at the prepared epoch."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d339968c55b8653b4ffede12495e22ff31cdc3ce7f53bd76516458b3b7433266",
+      "sha256": "a6f5511ea4de500b8413964deadc8911d651051e8ba916f138b431a488af13f4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,12 +174,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -209,12 +196,6 @@
             "role": "observations",
             "description": "Voyager source inventory",
             "href": "https://pds-rings.seti.org/voyager/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -270,7 +251,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,7 +286,7 @@
       "sha256": "9013b85c39cda35d3eb37dde9d2a703cb05b02464af614937a386661d9c9fe78",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -322,10 +303,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d339968c55b8653b4ffede12495e22ff31cdc3ce7f53bd76516458b3b7433266",
-      "bytes": 3166,
+      "sha256": "a6f5511ea4de500b8413964deadc8911d651051e8ba916f138b431a488af13f4",
+      "bytes": 2887,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -361,13 +342,13 @@
           "url": "/scenes/cressida/cressida-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/cressida/cressida-model-surface@2x.webp",
           "bytes": 56856,
           "sha256": "addb3f1e736c0d7935556b7665944df54f19b762c0070e43a8640a6617fd1862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -390,8 +371,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7011,
-          "sha256": "febffa7c12787f14cea0a8ba11eff32b9d5f9784e5ac473af9399a31cdeaf5db",
+          "bytes": 6892,
+          "sha256": "9b1f881d91ecb7c618b99228e85f1e7c0eb54b4eaa3103da2dcc3771c15e218a",
           "verification": "bytes-verified"
         }
       ],

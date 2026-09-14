@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "eugenia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5b3fcc67ad4fac326cd8ed205a52a8659772f8dbe97941ef275db012e70685b9"
+    "sha256": "74f91d5da4f8fad8029bbf99e5981b099ebd502e76e72df0f46731fc50388c05"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c4b7c1e11d0988768f4e3fd9b683e3d66682a77b5af675c449f4505834ce8fff",
+      "sha256": "f097102873aabbc84da834268ee62dc1680ab6b00c9356c7fed5dca3d430752b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "eugenia",
         "displayName": "Eugenia",
         "publicBase": "/scenes/eugenia/",
-        "distanceAu": 2.723129080316478,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ef57487fbd24e9a64aec235be9ee4cfa2b66426e078677550a4009c758310863",
+      "sha256": "2fa8ede7ca913e12cba5938548bc868106ac41a14ba09acdc69ff1984024330e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "4270363c28eb82e2174a7768bdce96f8cb0522fd4947c4f8a73499edbe9396d2",
       "bytes": 436219,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ef57487fbd24e9a64aec235be9ee4cfa2b66426e078677550a4009c758310863",
-      "bytes": 7802,
+      "sha256": "2fa8ede7ca913e12cba5938548bc868106ac41a14ba09acdc69ff1984024330e",
+      "bytes": 7523,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -401,19 +382,19 @@
           "url": "/scenes/eugenia/eugenia-elevation-thumbnail.webp",
           "bytes": 4922,
           "sha256": "fe7a88c59409b59437edc3f93698bc262b29a855651b5d276c1a7e08288370fc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eugenia/eugenia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eugenia/eugenia-elevation-surface@2x.webp",
           "bytes": 305880,
           "sha256": "e04bef44f8df97e3837ed3fa7bf4d7993b7717a36fe27b487932f5a71a68c891",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -443,13 +424,13 @@
           "url": "/scenes/eugenia/eugenia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eugenia/eugenia-shape-surface@2x.webp",
           "bytes": 211188,
           "sha256": "309b9f2c210d0be1974874cc1b9dc30e77fc153c841c4deaab5976f350cf0b62",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -472,8 +453,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5625,
-          "sha256": "662b69f460cf7445a976c3e9e715f83e348c490645402ea565e34801580c01f8",
+          "bytes": 5506,
+          "sha256": "766fdb5a6974f3574e71c558db614806ff69b8163249f574d7a43e41e63e549e",
           "verification": "bytes-verified"
         }
       ],

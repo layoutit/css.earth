@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "naiad",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0089c6860f03f43c3116ae693b00404228590f05b1709122b5944a817ab1a494"
+    "sha256": "4c7e41bd85eda1308296f6f085b97132eb1be277d40840113a738fedd3a553aa"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "db3ecab28e79b622a78a8134f807e711b2214f6f97bb9b695c350fe22bf8073c",
+      "sha256": "ea851e47871e7c8ff6cc4b3e1b27fd0497f534f671365efb2ae1051bbba09e89",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "naiad",
         "displayName": "Naiad",
         "publicBase": "/scenes/naiad/",
-        "distanceAu": 30.07,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; Karkoschka2003 measured reference ellipsoid."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "01ee2acaf24df17c903e0165fd41fe1a8bcb702f17769e8bd2e66b44d1b829c9",
+      "sha256": "53e5389960cd7a2e7a13316d35dc93c7ce0bfa7be2255129240ec69bcb14bb1d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,12 +174,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -209,12 +196,6 @@
             "role": "observations",
             "description": "Voyager calibrated imagery",
             "href": "https://pds-rings.seti.org/voyager/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -270,7 +251,7 @@
       "sha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "bytes": 135,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,7 +286,7 @@
       "sha256": "06397011cc1d3bb859e2f761fcb0cc3c4d6a885f3ded29d1aca3cf5260c07ec8",
       "bytes": 18278,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -322,10 +303,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "01ee2acaf24df17c903e0165fd41fe1a8bcb702f17769e8bd2e66b44d1b829c9",
-      "bytes": 3169,
+      "sha256": "53e5389960cd7a2e7a13316d35dc93c7ce0bfa7be2255129240ec69bcb14bb1d",
+      "bytes": 2890,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -361,13 +342,13 @@
           "url": "/scenes/naiad/naiad-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/naiad/naiad-model-surface@2x.webp",
           "bytes": 50068,
           "sha256": "f50f8d765d35a5d8efe7f20f222e162a217df17446802bf9ae33f8eff2ae6398",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -390,8 +371,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5298,
-          "sha256": "9930f15b9f2622d64e6ce913006361a65c56d19e48a749cae5da4a4d3459ac30",
+          "bytes": 5179,
+          "sha256": "b5d80bf73416d889c3f71525927c66db311a476c8602f22052664c745609f121",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "klymene",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "95ff90ff853b902a7b774b96c205bac4e0a8f935e808824ec3126cc19df44c1b"
+    "sha256": "557d94f7a845d8f015f21c6714e97daac48c4de343ba01f7684adeda9cab4f7d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1cf2bd660a34dd2f18e7b0829562bada9cd4aab452809bfe5dc91ca10f2c8e96",
+      "sha256": "a0f983762e10aac485e1d32968eb3bf6159c2007d65de7ceefc503b1eaaea8e4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "klymene",
         "displayName": "Klymene",
         "publicBase": "/scenes/klymene/",
-        "distanceAu": 3.1462660059874397,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 797 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "04be63f60b3e6ad3cde88ca64c38d08cadebb2e2bae4549cbec06c688dc1aa70",
+      "sha256": "ad8370ed4726d133b2c650f9a431d2c2f5e5b4afe477e1591cb34083d2c43c47",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/797"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "f1d26036f42cd12a1a45edb1d953d4b064b85c83474b898368bfde1a6b5ac7cc",
       "bytes": 80439,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "04be63f60b3e6ad3cde88ca64c38d08cadebb2e2bae4549cbec06c688dc1aa70",
-      "bytes": 9449,
+      "sha256": "ad8370ed4726d133b2c650f9a431d2c2f5e5b4afe477e1591cb34083d2c43c47",
+      "bytes": 9170,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/klymene/klymene-elevation-thumbnail.webp",
           "bytes": 5118,
           "sha256": "c51fd9b51eefccbfa80447471c0243b5af612d0b1f4192f134b55a77fa4748e9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klymene/klymene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klymene/klymene-elevation-surface@2x.webp",
           "bytes": 311888,
           "sha256": "65cc043cb01939801b5a15f4040654fd78d54003456d78acf663ec0945d8739c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/klymene/klymene-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klymene/klymene-shape-surface@2x.webp",
           "bytes": 267436,
           "sha256": "f7213f81388c19a5561f74aa46d62555489b7678aa4517bfbd1e9828e18dec38",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6805,
-          "sha256": "46dbbe09b61832c7236510be20db7544a04576c96187782e72e88642bb0d4a42",
+          "bytes": 6686,
+          "sha256": "02295a78c986d19dce13d550492d7f3743cc986c727db0f26877ebb167a9c43c",
           "verification": "bytes-verified"
         }
       ],

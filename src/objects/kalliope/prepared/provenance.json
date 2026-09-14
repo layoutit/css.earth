@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "kalliope",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1f4f16853b3fd4ed0f9ffd34f792d84b03a67453248502b70e50a1222b515563"
+    "sha256": "2024bd2b604082d9d1e584ed849afb5883bb3e960b66ff4a79515bd9940171d1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "aa17cd7d92d111b707a02453ecd5e1e225c3cc06f8574c1ba50c441fcb488489",
+      "sha256": "2d0fac8cc2e842d20ce693964b66f6f3e535373a0c6042ebb705b66c97d30bad",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "kalliope",
         "displayName": "Kalliope",
         "publicBase": "/scenes/kalliope/",
-        "distanceAu": 2.909387673184708,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "475673dc2ba749aa4cd771da24be87c4d92d937b97ab59cf60fa20428fe051d8",
+      "sha256": "ff6d5c7cdeb5b54a3754b2d25d4a6002e0f21ed6a5ab4af2a46fa02e7a091aec",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "034f925d1e76ae7022d29ffa0488ffbc322f2cc0b8c5d32f7eabc82060f83b0c",
       "bytes": 154459,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "475673dc2ba749aa4cd771da24be87c4d92d937b97ab59cf60fa20428fe051d8",
-      "bytes": 7622,
+      "sha256": "ff6d5c7cdeb5b54a3754b2d25d4a6002e0f21ed6a5ab4af2a46fa02e7a091aec",
+      "bytes": 7343,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -401,19 +382,19 @@
           "url": "/scenes/kalliope/kalliope-elevation-thumbnail.webp",
           "bytes": 5202,
           "sha256": "672e1399769c300a422b4d124415554069acd94cbe692e518c02feceb1f2c716",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalliope/kalliope-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalliope/kalliope-elevation-surface@2x.webp",
           "bytes": 320338,
           "sha256": "4b91419175b297c4835cf91727b7758e0023d3275f623db61d2e5068b72908a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -443,13 +424,13 @@
           "url": "/scenes/kalliope/kalliope-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalliope/kalliope-shape-surface@2x.webp",
           "bytes": 219510,
           "sha256": "cbb092ef83d169f6ee7bc351e1adef73c0ec39a9839cf95f7778853aa065d24e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -472,8 +453,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5430,
-          "sha256": "adebabb46ac9d0c148eff88921cf1f31bf7740f8986c6e7c2cc8315b942f89d7",
+          "bytes": 5311,
+          "sha256": "f2920782d80cf119f72d2f45be34952bd5c16df9a843a754bfb4196ae4a04165",
           "verification": "bytes-verified"
         }
       ],

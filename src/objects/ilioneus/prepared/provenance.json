@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ilioneus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ba590aa0846e7f6a716cdff33fa4c5f35a487b2e56fb0974251fa3a72c8a8c4e"
+    "sha256": "e5ad0d3482af95bf7dbe455c2488998cd533502c88909df039306f50cd874b4b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "74869ac20b4acfd9a27334bbd71362751708afc5ab722a6a032510bd6a500586",
+      "sha256": "ef749e2bdc46230b7117699c575e808af5dfcad4022579c06dbbc6aa1408f041",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "ilioneus",
         "displayName": "Ilioneus",
         "publicBase": "/scenes/ilioneus/",
-        "distanceAu": 5.182702514637422,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -137,20 +136,14 @@
           "sunSource": "DAMIT model 4172 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0690f1882a2b3d190c80eb6021b49c7711b9c4a84307f273f48f6f81993eb0bd",
+      "sha256": "0ce42123f6dc50e9cf6ce5a02679c834f5901b19375ecad25f07264226d919a9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4172"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -369,7 +350,7 @@
       "sha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -394,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0690f1882a2b3d190c80eb6021b49c7711b9c4a84307f273f48f6f81993eb0bd",
-      "bytes": 9593,
+      "sha256": "0ce42123f6dc50e9cf6ce5a02679c834f5901b19375ecad25f07264226d919a9",
+      "bytes": 9313,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -428,19 +409,19 @@
           "url": "/scenes/ilioneus/ilioneus-elevation-thumbnail.webp",
           "bytes": 5726,
           "sha256": "29245acb2921dfe6de01e4b1933416e091c78ffc58544425b762c57b50e500a5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ilioneus/ilioneus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ilioneus/ilioneus-elevation-surface@2x.webp",
           "bytes": 303480,
           "sha256": "68af0936b174ea58aee62eae54a26620d23aef8882a5828a7d2a7bba2e7329f9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -470,13 +451,13 @@
           "url": "/scenes/ilioneus/ilioneus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ilioneus/ilioneus-shape-surface@2x.webp",
           "bytes": 226680,
           "sha256": "0dc86070ed02211765705665ba7b55dcbeb85a3ee055083d538a8dc45598a7ea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6663,
-          "sha256": "4cf80a02cc59e46f35f9316fcc7ba85a1596025129836422b4d8ba39dfdee5da",
+          "bytes": 6544,
+          "sha256": "4a0d0db5617993ebf27b19aeb269b47421938eff6c32d34f98711b6fbf475c3a",
           "verification": "bytes-verified"
         }
       ],

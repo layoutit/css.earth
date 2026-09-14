@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "siwa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cd31dabd1b5abd5deaf1cc0086f2b35402f2f781aa3ab97c5e0ce57d40df819d"
+    "sha256": "caba47fc2682f9f1aa0a74406a18f9be6ff64ac03ffc991f479aa5999a2f93f5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4c5074ec16ab54217f17e92ae41dc835dd5dc038aef5d6ba2310ea4ef3d490a0",
+      "sha256": "921ca4720bc33bd9bb1cf4895f1cb749e485da6fd71dc3b42fc4af85638b2b90",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "siwa",
         "displayName": "Siwa",
         "publicBase": "/scenes/siwa/",
-        "distanceAu": 2.72994935329283,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 5987 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "45f99d078307cbba569d3adba6cf36697ed69e9e4ab462359b394bf9aa30bac8",
+      "sha256": "8436caa3536e19a9fdc8aebf874a9a2ae27861bda8009e61ae4b9e6262475309",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5987"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "a6cf15b20cd4bcfb839a14044d91774e83056e3457b568b0c3659da8d0607b67",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "45f99d078307cbba569d3adba6cf36697ed69e9e4ab462359b394bf9aa30bac8",
-      "bytes": 8938,
+      "sha256": "8436caa3536e19a9fdc8aebf874a9a2ae27861bda8009e61ae4b9e6262475309",
+      "bytes": 8659,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/siwa/siwa-elevation-thumbnail.webp",
           "bytes": 5476,
           "sha256": "ae8bdb55331b82272345bcbcf0c5bedeee1ab8df4a98593f5135d2591e22b7bf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/siwa/siwa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/siwa/siwa-elevation-surface@2x.webp",
           "bytes": 278062,
           "sha256": "2734ee3049b6af435196e238dc3df87a1a3b3a7118fe5ae2cff4ce3f54ebf892",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/siwa/siwa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/siwa/siwa-shape-surface@2x.webp",
           "bytes": 204220,
           "sha256": "34c66eb4d8acbdef2d10930ead96a127beb123a2bcb7ddeba419c6ff906231fa",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6329,
-          "sha256": "535511b5a933522fcdde5fe46c2cd5459731ac7c31fab18dd3a2204f40e8302c",
+          "bytes": 6210,
+          "sha256": "6887bbbc81e2a32527e156012fa27a286082d93c62a661fd334d8ffd7d18207c",
           "verification": "bytes-verified"
         }
       ],

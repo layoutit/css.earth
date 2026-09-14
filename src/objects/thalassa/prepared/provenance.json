@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "thalassa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3ae441d4166f8559436448bedef5e641aff162a028654410c8e22e6c5587f00b"
+    "sha256": "9033bba36cdf97763ce29ecf3bb577432870628388098a34faa6a56f59524c90"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6e29cba25803b5779a8b23d740f8f26c7a513a7b4f7a6ff1a11cdafd06b9c148",
+      "sha256": "32bbdab638e1479b2abc489101d3cd14d0e55e1defeebd984c19cfb78f4e9d96",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "thalassa",
         "displayName": "Thalassa",
         "publicBase": "/scenes/thalassa/",
-        "distanceAu": 30.07,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; Karkoschka2003 measured ellipsoid dimensions."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dcdfc90d29938c945330e8d27f01248b24f6f4bf4557e0cbe2f9989be60cc87e",
+      "sha256": "104607836fb5645a760ddff3d5f977ae94d7e97cca620da3a4e1a4e165d7f1c9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,12 +174,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -209,12 +196,6 @@
             "role": "observations",
             "description": "Voyager ISS archive",
             "href": "https://pds-rings.seti.org/voyager/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -270,7 +251,7 @@
       "sha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "bytes": 135,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,7 +286,7 @@
       "sha256": "f22264ce2d158afd700f19ef0e7dcb56df5cdedac9629d428f069eca2e20101e",
       "bytes": 14147,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -322,10 +303,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dcdfc90d29938c945330e8d27f01248b24f6f4bf4557e0cbe2f9989be60cc87e",
-      "bytes": 3336,
+      "sha256": "104607836fb5645a760ddff3d5f977ae94d7e97cca620da3a4e1a4e165d7f1c9",
+      "bytes": 3057,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -361,13 +342,13 @@
           "url": "/scenes/thalassa/thalassa-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thalassa/thalassa-model-surface@2x.webp",
           "bytes": 45126,
           "sha256": "ecb4f801a198c7efc0d6444f4b84643919a443c312e0f763502ecbc066d28986",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -390,8 +371,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7049,
-          "sha256": "1fa2f715252dc6ae9adb44aa9dc0490c6260880a634be7bc237e7255adbebf04",
+          "bytes": 6930,
+          "sha256": "16a0c1bfc1a4ab0e56070e552a666eadf574462c9a5f8c2277ebec4c99fa7767",
           "verification": "bytes-verified"
         }
       ],

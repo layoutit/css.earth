@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ganymed",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6495592fc6bbc964ae229bfd6a761dc58ae17af07ae327eee146ebd685c8cbc0"
+    "sha256": "dd13d5832feba1d13bed580f2cf7d9d96a72f239ad9b5cbbd820d7611aa6459b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e02084cad9827c0a17740e28adcdbdcd9d566102c3dd278b4426f7b7c35dbd07",
+      "sha256": "1904314e60802b457a5ba95635c609fe5a50a36b7e453e245028336b397375e6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "ganymed",
         "displayName": "Ganymed",
         "publicBase": "/scenes/ganymed/",
-        "distanceAu": 2.663715621121006,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 1849 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "33c6de7a8cf40bad62acd10c161c34e0e7685976ee082adf7a2eec4bff5a811d",
+      "sha256": "84c73b8bce7b41896aeca85bc8da91c775f0ae14756be77efaeecc8a7eddb75d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1849"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "e5bed02f38bf6f35af801ace96871400ffab07f18036f1f3f51a3e6e4de3858a",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "33c6de7a8cf40bad62acd10c161c34e0e7685976ee082adf7a2eec4bff5a811d",
-      "bytes": 8739,
+      "sha256": "84c73b8bce7b41896aeca85bc8da91c775f0ae14756be77efaeecc8a7eddb75d",
+      "bytes": 8460,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -390,19 +371,19 @@
           "url": "/scenes/ganymed/ganymed-elevation-thumbnail.webp",
           "bytes": 5016,
           "sha256": "04b110bd42dc4a92d9d749b0515d31b60208428495613dfb307c89ef91f82885",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymed/ganymed-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymed/ganymed-elevation-surface@2x.webp",
           "bytes": 257922,
           "sha256": "aab6eecfe8f72c41cff47c9179e2c8e5c9fec87d354e67bc4237f0334ff58924",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -432,13 +413,13 @@
           "url": "/scenes/ganymed/ganymed-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymed/ganymed-shape-surface@2x.webp",
           "bytes": 196764,
           "sha256": "c3c8e25f21ab5c753e1859b59d6ad490d402f44a57d98b9ab4b2c86c49f56247",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -461,8 +442,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6562,
-          "sha256": "cba2fa2800541dc15d4b3a5ba0ab43154d59a538738a72a387e29d2574dbc7cc",
+          "bytes": 6443,
+          "sha256": "68d4322f2057413b4b6dc0348b18b0ce9a5aace0bc5c15c39b291ae5e3da732f",
           "verification": "bytes-verified"
         }
       ],

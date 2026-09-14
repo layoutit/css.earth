@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "schorria",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cb5fccabb9c05c6a1a86b1bf532e2b52ef7af7753da89dd7930ba2828eaa737b"
+    "sha256": "64bcff1cc223a70a6640c5daa47f6612c2b8e190c6938b4cfac1aded2494293a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dd0347f04ee52c2bda865a88a0e5165c6a91cf3b034e062e99077dbcce7d31f5",
+      "sha256": "8fee38e645845c2cf9029e9de105d01d9e0bb49767de92506937e763468f3949",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "schorria",
         "displayName": "Schorria",
         "publicBase": "/scenes/schorria/",
-        "distanceAu": 1.9102898161034227,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "448845b80adf63c7dda8fcc7325ae2aed12cbc1acca2579d3c7431ad513eea49",
+      "sha256": "da3cba2b680fa7e29a37afdd22a976b961b9d3feda5b825e9f0a4b5550a738a9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5955"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "4a415264ae5f3a3d9feb32668b739e2a6b0750b285553425be2a5243f86760ea",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "448845b80adf63c7dda8fcc7325ae2aed12cbc1acca2579d3c7431ad513eea49",
+      "sha256": "da3cba2b680fa7e29a37afdd22a976b961b9d3feda5b825e9f0a4b5550a738a9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9625,
+      "bytes": 9346,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/schorria/schorria-elevation-thumbnail.webp",
           "bytes": 4850,
           "sha256": "732ef62f62e72d93d015e58df92cbc0f3dc15ff64ad6719daa4ab3f03335b680",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/schorria/schorria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/schorria/schorria-elevation-surface@2x.webp",
           "bytes": 290212,
           "sha256": "c843fecf85e8539112e96a082f14c9dbf5819163d9aa51b1816fd5263d330983",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/schorria/schorria-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/schorria/schorria-shape-surface@2x.webp",
           "bytes": 177366,
           "sha256": "891a6d008d4bcfdae3de179d70f5bbdf13b7e79023a43d5732a3ce0c08b26435",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6924,
-          "sha256": "921290a7d3692ed30be9c79873d0fbd0612647927521afd4abb04c1c54762563",
+          "bytes": 6805,
+          "sha256": "b61234d805ad58c26e29eccad403ae55019b4c086485801ed79149fac30b75e4",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "libussa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c31363b9fae5ddc94cc4ae5e17e207e2d6aee3c6745eca0d722612c37cb4d32f"
+    "sha256": "5019e8feb6fc41d22070d0590d640a740e64a630c5ad7a0fc02e8f7856a1e0e6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5e324e11496e0bdf40aa0cc9482e078693081267be17d1345cab55f07797a631",
+      "sha256": "b1e3a658504d6b9a0f3b321d17b87aaca04cb692c01d523b5e3c83eba5804b2c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "libussa",
         "displayName": "Libussa",
         "publicBase": "/scenes/libussa/",
-        "distanceAu": 2.7991273130765797,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 331 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "84ce875d24ca4c848f23d56948d4cfeb45bb1c163114b9250e1f7f7a36041b2e",
+      "sha256": "7b91dcd8f44bee2d3d0de90f91d02925c9a7ff067ee52cd4e22c94e8f624e82a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/331"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "90c6c85577e5615ac761ae75898680215bdae93bdb749b5aa4905a095fdca08c",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "84ce875d24ca4c848f23d56948d4cfeb45bb1c163114b9250e1f7f7a36041b2e",
-      "bytes": 10115,
+      "sha256": "7b91dcd8f44bee2d3d0de90f91d02925c9a7ff067ee52cd4e22c94e8f624e82a",
+      "bytes": 9836,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/libussa/libussa-elevation-thumbnail.webp",
           "bytes": 4510,
           "sha256": "49dbb39f70c32b543899ebb29d1e189d6225b6ec6f317dc172347eaa362d0b18",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/libussa/libussa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/libussa/libussa-elevation-surface@2x.webp",
           "bytes": 254120,
           "sha256": "a60f257cc2d895cb8efe3ee330583672d684f747facd6aa1fb38dc4f66469a55",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/libussa/libussa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/libussa/libussa-shape-surface@2x.webp",
           "bytes": 188710,
           "sha256": "b79cfc8562d7e4d3f210ff4fdac0a06e614fe4e01815e7656770b85a355a6584",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7468,
-          "sha256": "f496ff71e759c75a2499f721f0f63593dbf99cf43e6b64503e761abd9567f359",
+          "bytes": 7349,
+          "sha256": "7787b1135dc8f151e03a1c5fc971224e2c4c92ddd9d279eb00ce609d62878acf",
           "verification": "bytes-verified"
         }
       ],

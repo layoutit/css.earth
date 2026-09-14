@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "bergelmir",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1f19bb56bb9584d9327899209ddc14db7c3812d85d78325bf69af10503c28f1d"
+    "sha256": "5949777d250bee37df6550349d1828002e87bfcac1d624b7f4a7d417075150de"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6ed4a73c707b1a4b4b5dbd1b4df37000b64ac81752adc9ad479d5d9d8cb33340",
+      "sha256": "5c383a50a75eb5f3b989620d5f7a38204d26ef3845fd11522ce615d55a33c5d9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "bergelmir",
         "displayName": "Bergelmir",
         "publicBase": "/scenes/bergelmir/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Saturn-system ephemeris; Physical pole, spin sense and current rotational phase remain unmeasured. The displayed motion does not fit the Cassini lightcurve."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8c746477c74c168d57b8ee3a642662c2267d20a4debd13ca10c5e5509d76a5d4",
+      "sha256": "e7aeaee9c5bbc38633bce8bfadef77fc3d449de0f5ba04acc62232036e991027",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -188,12 +181,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -216,12 +203,6 @@
             "role": "observations",
             "description": "Cassini ISS archive",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -314,7 +295,7 @@
       "sha256": "c84f957e9f59db44a89975b73f7c1091f94c5d09552921df998ca734ff0de788",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -331,10 +312,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8c746477c74c168d57b8ee3a642662c2267d20a4debd13ca10c5e5509d76a5d4",
-      "bytes": 3365,
+      "sha256": "e7aeaee9c5bbc38633bce8bfadef77fc3d449de0f5ba04acc62232036e991027",
+      "bytes": 3086,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -370,13 +351,13 @@
           "url": "/scenes/bergelmir/bergelmir-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bergelmir/bergelmir-model-surface@2x.webp",
           "bytes": 55160,
           "sha256": "7f5b449002bb64692214ae943849d1f4e4c6bf4c560bbcd3b8a5c625c996fc07",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -399,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6556,
-          "sha256": "07400837d8101d13496ba1ae3276f43741cc3924e6e8b9c4700d71d014cce6c9",
+          "bytes": 6437,
+          "sha256": "b8a9498faa8669dc6fd624da03ec6c39f399528a8ecda29ef2e189527c5443cd",
           "verification": "bytes-verified"
         }
       ],

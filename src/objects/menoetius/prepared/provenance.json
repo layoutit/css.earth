@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "menoetius",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e7b4da3d4ef0890ea08637f9db912a15a684ecb59f20c2d0dedb83f901b29e3b"
+    "sha256": "8eac115a00e31ec89e3eb89ca04d32049557b546aee6e16734b6aa6533f9f0be"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f74191e4a14a38bc39bcb65da2a28a226f0422c83c0f3b35e8fb95cb5773712a",
+      "sha256": "e7ff41c2535a396ee779d13aaf064261ea971cb5ddcb217860a28a4324a73aca",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "menoetius",
         "displayName": "Menoetius",
         "publicBase": "/scenes/menoetius/",
-        "distanceAu": 5.2,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "Retained JPL Horizons parent-relative and parent-heliocentric state at the fixed scene epoch; source/validation/epoch-state.json. JPL#82 Patroclus-system solution. 2024 orbital pole used as synchronous spin approximation; arbitrary meridian."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cdc220febde34e101a265d4bc5a2b515c68a35e288714e1c7e477f7d5fd66b68",
+      "sha256": "eaac6e5257b7a7e212dd1cd8adae5318959d050ee513d447c3f020288b315242",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -176,12 +169,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -192,12 +179,6 @@
             "role": "surface",
             "description": "Source measurements and model interpretation",
             "href": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -253,7 +234,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -288,7 +269,7 @@
       "sha256": "9f853500baa4d63714786dafd8b129565e4c7225f09cc8abc78f5eb6db18d767",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,10 +286,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cdc220febde34e101a265d4bc5a2b515c68a35e288714e1c7e477f7d5fd66b68",
-      "bytes": 2501,
+      "sha256": "eaac6e5257b7a7e212dd1cd8adae5318959d050ee513d447c3f020288b315242",
+      "bytes": 2222,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -344,13 +325,13 @@
           "url": "/scenes/menoetius/menoetius-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/menoetius/menoetius-model-surface@2x.webp",
           "bytes": 55310,
           "sha256": "ac6d0f1ca55903faaf0419e176a4cbe9f2beef2802a765a33094ee3d97ef98d6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -373,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6376,
-          "sha256": "395e4258d009b519909494dabb77b09aa6cbe142e6240b67e00c4b9f980e264e",
+          "bytes": 6257,
+          "sha256": "1ba1217739733a00c2021116a3a5e14a6d8ef6075d02861e03a6ce299dca1fa5",
           "verification": "bytes-verified"
         }
       ],

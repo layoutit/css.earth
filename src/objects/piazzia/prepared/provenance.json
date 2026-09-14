@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "piazzia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ce44788eacdca439bdb37ae62b4a0fbb5cc5d7948895d8d389457597d734e829"
+    "sha256": "c68d0ccc0644eb2bbb499a7da94b67dbc6024180ccc53dc5f0c77d87e44f7db0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "869106bc9b96823c5cc1eafee1c1712f137aac38daeb511e8f32a79343ba84d4",
+      "sha256": "a2b023af8d80319d97f8f07c618ce451a48c023387261d8fdb047209842fcbaa",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "piazzia",
         "displayName": "Piazzia",
         "publicBase": "/scenes/piazzia/",
-        "distanceAu": 3.1710520001451843,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8c94bb3bdd02ea1dcd05f3d3bd868c45cd8de6ba68246c6387e423d740816c0e",
+      "sha256": "bb802d74209207d5ed1ea02dfdaa1123467591ba00e454278da2ca5260f04064",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3529"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "fb52ac0fccad4ef29a233531a572785aedd8686267f4998d3a7b090c5a93850e",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "8c94bb3bdd02ea1dcd05f3d3bd868c45cd8de6ba68246c6387e423d740816c0e",
+      "sha256": "bb802d74209207d5ed1ea02dfdaa1123467591ba00e454278da2ca5260f04064",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8347,
+      "bytes": 8068,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/piazzia/piazzia-elevation-thumbnail.webp",
           "bytes": 5808,
           "sha256": "b5f7cbec84232fe031860648b389c526f494478c21ea955b1cf44f9f45076de8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/piazzia/piazzia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/piazzia/piazzia-elevation-surface@2x.webp",
           "bytes": 326918,
           "sha256": "570aab918199d42702e6028c79f11a5a5abcce6f7e2d93ccb1d8b79f4fc2f8a8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/piazzia/piazzia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/piazzia/piazzia-shape-surface@2x.webp",
           "bytes": 216868,
           "sha256": "0f1efa8bc28179e7785557825a1fc463a96caf5af5e1e7a22eaa34170d1a3400",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5667,
-          "sha256": "ae6f0e12220116dc790c6632179aa7a22a9d0984f66871a31b456bb126d226a8",
+          "bytes": 5548,
+          "sha256": "8c736477cca026d7cb19bcce37e3438a0b064fc56a414c06a38979b874c43890",
           "verification": "bytes-verified"
         }
       ],

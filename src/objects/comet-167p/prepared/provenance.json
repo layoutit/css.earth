@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-167p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f641471794e73d4d3afefd62287fc57d1ea9b2a72ec1c481203bd55d5f2b15f3"
+    "sha256": "963c58b0896998b7297d5de0ae2a363095d8b378c929aff5b06d059d4ed55822"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "784a48ed7537866ac2154753283e9774ae6e2df0ac32422d3706b2014eb854c7",
+      "sha256": "ae22f061af82fed9edbf0b071c64ec3edd7639b1659e960c3d1cbab0af4c5183",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-167p",
         "displayName": "CINEOS",
         "publicBase": "/scenes/comet-167p/",
-        "distanceAu": 19.938682340272877,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "773e59c57e71c7136e7dc4771c5cbf91c0f9879202134b9b00c263b83006b55c",
+      "sha256": "b1ab5e6dfd6d9cbff54926930c028536b4a41e1a83ad3b19e34a0a536a78a033",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -227,12 +214,6 @@
             "role": "observations",
             "description": "Position at 3 September 2026",
             "href": "https://ssd.jpl.nasa.gov/horizons/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "73fcd40cc476546ff1cf79d38c82c9a9fa87711f11f5bad0a80c18382a8eb1da",
       "bytes": 439384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -295,10 +276,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "773e59c57e71c7136e7dc4771c5cbf91c0f9879202134b9b00c263b83006b55c",
-      "bytes": 2942,
+      "sha256": "b1ab5e6dfd6d9cbff54926930c028536b4a41e1a83ad3b19e34a0a536a78a033",
+      "bytes": 2662,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -329,13 +310,13 @@
           "url": "/scenes/comet-167p/comet-167p-model-thumbnail.webp",
           "bytes": 1394,
           "sha256": "f18b990a1e78f7d08e63948b8deac5ebb9e170dc43751a6a4d76aa9c3bc7a9b5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-167p/comet-167p-model-surface@2x.webp",
           "bytes": 121406,
           "sha256": "8a7a4be4ff4bcab94a8c3be6bd0c6b7c735c4ed9e69d3b9884953c7a95481bf5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -358,8 +339,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4462,
-          "sha256": "8672f3bc05f7191688e7b1c6e767da8651b5d68ef9ed5f53bad2bfa56c5b706d",
+          "bytes": 4343,
+          "sha256": "a6615e516b7e4eccff007b8111a1829637211ab2ed7632de735f3a61c60156f2",
           "verification": "bytes-verified"
         }
       ],

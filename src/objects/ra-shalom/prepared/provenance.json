@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ra-shalom",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b6f3a5ffde250430d6acce23ebf4f1702c83bf005cd8ab027c556169d420596c"
+    "sha256": "413eda01bba2c04834a98863343bd92c8c6736dc85f9c73d5f4db53b5e9fcdd2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6a2c3536ab36670019b7ae21da8a4087f2d6364d8120d2ab844c893840fb5b81",
+      "sha256": "71c2fba631dff1538371dea5537d451040e0a2ca9e4c05b7623892326295a52c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "ra-shalom",
         "displayName": "Ra-Shalom",
         "publicBase": "/scenes/ra-shalom/",
-        "distanceAu": 0.8320332524916527,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -134,20 +133,14 @@
           "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8e394548cd858faa4d5e17f25753059f2794569b3240203ff97e4bfd97a958b3",
+      "sha256": "a8e79e767fffd21dc7913bbf651ef6783ad316db8cbf4d43803edb60df5b92cd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -249,12 +242,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -277,12 +264,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://echo.jpl.nasa.gov/asteroids/2100_RaShalom/shepard.etal.2008.rashalom.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -343,7 +324,7 @@
       "sha256": "ca9286eb9d89d384f3d7860a78a78ce94d7a22f6e5c5071f04349729684ada2d",
       "bytes": 67284,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -368,10 +349,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8e394548cd858faa4d5e17f25753059f2794569b3240203ff97e4bfd97a958b3",
-      "bytes": 9984,
+      "sha256": "a8e79e767fffd21dc7913bbf651ef6783ad316db8cbf4d43803edb60df5b92cd",
+      "bytes": 9705,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/ra-shalom/ra-shalom-elevation-thumbnail.webp",
           "bytes": 6754,
           "sha256": "99e9adc1988d01ff26ec4ae2737d4f862c0e1f8a9de2a294af7e06b0718bb162",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ra-shalom/ra-shalom-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ra-shalom/ra-shalom-elevation-surface@2x.webp",
           "bytes": 413586,
           "sha256": "b780582b6d2ebf3fcebb86e5e978115e8c16af47f6f00c40370e50cefb03586b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +425,13 @@
           "url": "/scenes/ra-shalom/ra-shalom-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ra-shalom/ra-shalom-shape-surface@2x.webp",
           "bytes": 214196,
           "sha256": "86c3fe1177033526fc612b3d04fd72239b89ec2591d48998b03d60453f953083",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -473,8 +454,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7133,
-          "sha256": "ba4c349829d43ec88a39ed769316a4eee2614a1a2a8faf24d242370ac812dee3",
+          "bytes": 7014,
+          "sha256": "a9e4bad4b9b01f8b93b0436c5650167b31a1ea0a93b461d564a9ede7f43ddb69",
           "verification": "bytes-verified"
         }
       ],

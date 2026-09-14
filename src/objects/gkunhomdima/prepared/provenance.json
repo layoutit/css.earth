@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "gkunhomdima",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "942782d22abed7f627a42a9573bd2f5617ace9ab22a6aebc7bf5098072187f91"
+    "sha256": "496ec5e788c5f113cde9099ff4a7e379bf12765ef47f4a9b61bf1789ac8b8088"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8fc7d959513ff8a0933f259176b12bb19e907a2ea5a648023009a0b682cc1485",
+      "sha256": "7b9d8ebfcae6e346b11d5086ab9f74e25af55f6d26e46e94013cb0a44c892248",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "gkunhomdima",
         "displayName": "Gǃkúnǁʼhòmdímà",
         "publicBase": "/scenes/gkunhomdima/",
-        "distanceAu": 74.45925441086162,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons fixed 2026-09-03 epoch. J2000 pole prior RA 20.6 ± 1.5°, DEC 46.25 ± 0.32° from satellite-orbit alignment. Arbitrary meridian; 11.05 h photometric period has aliases and is not installed as a qualified sidereal spin."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ebdeedb8fa1b14f7024dd61a5e81eff9894978043b23f2ec704ff68aa81b8702",
+      "sha256": "624d6d64f37ccda93a9de2202c50e538508f38a7858f8a48f9a2d17359a19f35",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -178,12 +171,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -200,12 +187,6 @@
             "role": "facts",
             "description": "Published data and interpretation",
             "href": "https://github.com/benp175/occult3d"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -252,7 +233,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -287,7 +268,7 @@
       "sha256": "78d131d1e67026b4c5f9dbcbafbbce798db9cd2401f50bcae6643e44253bfa88",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -304,10 +285,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ebdeedb8fa1b14f7024dd61a5e81eff9894978043b23f2ec704ff68aa81b8702",
-      "bytes": 3356,
+      "sha256": "624d6d64f37ccda93a9de2202c50e538508f38a7858f8a48f9a2d17359a19f35",
+      "bytes": 3076,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -343,13 +324,13 @@
           "url": "/scenes/gkunhomdima/gkunhomdima-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gkunhomdima/gkunhomdima-model-surface@2x.webp",
           "bytes": 56174,
           "sha256": "42e8495a96632291d0cbe2d23dd157aa35ab9fe9ea98d5c0156196ec062cccdc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -372,8 +353,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8430,
-          "sha256": "b17d6e2a16a5b5661f49a2f98f8f111a4172bb1a8757da9538a6607a56364226",
+          "bytes": 8311,
+          "sha256": "dad469bcccf08b79fe970b39f1e86dcd75af1fb10c0a969df5f7769efddaf687",
           "verification": "bytes-verified"
         }
       ],

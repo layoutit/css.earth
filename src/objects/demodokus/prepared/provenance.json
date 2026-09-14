@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "demodokus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ee428d310a2e26d7fe7230b182dae75adb8b1bc5839aded9d9507a90e96879eb"
+    "sha256": "be70811d75ef368abed5e6a3a3830853b0e5fe35e283f817c37cfb243a6eb4cf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "69d3975061e8371226df8da238c956f6269f08e802a3e236bab78fd95497aff0",
+      "sha256": "531c381854a7bfcdb06e972d5bca53c9b32edad19724b8d25f71c91bc157356f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "demodokus",
         "displayName": "Demodokus",
         "publicBase": "/scenes/demodokus/",
-        "distanceAu": 5.199474785432278,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -137,20 +136,14 @@
           "sunSource": "DAMIT model 3896 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9c57966d334bc00d6a5eb81ce753b3925ad5d2872ee9334551da6ac1a1ddf7f3",
+      "sha256": "1265067945d4ee35ef932f7f3e28e8fe09541e240eb67ff6b37985c5705c148f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3896"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -369,7 +350,7 @@
       "sha256": "8bccce94993f84b19d6d0944ae3aff994cf00cd0a75b4b8599bad18b7d706855",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -394,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9c57966d334bc00d6a5eb81ce753b3925ad5d2872ee9334551da6ac1a1ddf7f3",
-      "bytes": 11566,
+      "sha256": "1265067945d4ee35ef932f7f3e28e8fe09541e240eb67ff6b37985c5705c148f",
+      "bytes": 11286,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -428,19 +409,19 @@
           "url": "/scenes/demodokus/demodokus-elevation-thumbnail.webp",
           "bytes": 6080,
           "sha256": "52fbb7464ea42643bc000d36a12118af3cd542341da67358d7070b49a9505540",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/demodokus/demodokus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/demodokus/demodokus-elevation-surface@2x.webp",
           "bytes": 316256,
           "sha256": "689dea27871052cda0dde5324070f97b45c2ae4ef4db943cc0af574e117b64ee",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -470,13 +451,13 @@
           "url": "/scenes/demodokus/demodokus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/demodokus/demodokus-shape-surface@2x.webp",
           "bytes": 235994,
           "sha256": "7e3685e6cacb382f1d06792820143f28a797c6455e0ecda527156bee36e2a079",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8577,
-          "sha256": "5a00229ea3c9db6b194e7556dc2fb16f5487dfc0a976e1192968b928e812ca6c",
+          "bytes": 8458,
+          "sha256": "cbe2e85001ff1ef2c3b3a1cde5826548a82af4f13116253ab063f0db7f1eebf5",
           "verification": "bytes-verified"
         }
       ],

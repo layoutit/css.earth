@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1994-cc",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "10cb88364814767f4d62604790499eaa93395bc21c26b00a0439b6478c8baf84"
+    "sha256": "ccff7ad62c67af04cc13c6d502030d3dda9812f95fac3a6782dc339a98cb5910"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "436705b7a10466bf04215261db60a793b94b2d8f8a5b3caa02fd6cfa3571a9cc",
+      "sha256": "afcc48cb198f818c105a80b0dd40fd51eb0f25eb7118ba7729acc941f71e7eb3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asteroid-1994-cc",
         "displayName": "1994 CC Alpha",
         "publicBase": "/scenes/asteroid-1994-cc/",
-        "distanceAu": 1.637667637945242,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b41d07ea83e678cf4be23549cd08d9cce627c839222451854914a2cbe56f851a",
+      "sha256": "551959c8ea1eeb7a077426eb896c71160a3628e947e8bf8959ea3b967f83f5d3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://echo.jpl.nasa.gov/asteroids/1994CC/brozovic.etal.2011.1994cc.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -345,7 +326,7 @@
       "sha256": "8df685e9f555ba71a07ba4364af3ea59e485fcb5afa43fb54e5a12f645fca78b",
       "bytes": 120595,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -370,10 +351,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b41d07ea83e678cf4be23549cd08d9cce627c839222451854914a2cbe56f851a",
-      "bytes": 10381,
+      "sha256": "551959c8ea1eeb7a077426eb896c71160a3628e947e8bf8959ea3b967f83f5d3",
+      "bytes": 10102,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -404,19 +385,19 @@
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-thumbnail.webp",
           "bytes": 7542,
           "sha256": "6f2021266b63661777f52557d74476ecdb9b854d2fd94b7899be440bef49d1ba",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-surface@2x.webp",
           "bytes": 450112,
           "sha256": "548e772fe603a1d90c1f68b81cdb235acd21db190cfeea17b42aefd8ed78af7c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -446,13 +427,13 @@
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-surface@2x.webp",
           "bytes": 224574,
           "sha256": "b465e70d9720970217357168d14bf36c02e1864bbc911d47ec8c3633d8401c9e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -475,8 +456,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8074,
-          "sha256": "2f0f3efab450ff9cf45aadd0baf5cc20383358f8413d18348eba1990ae7b8afd",
+          "bytes": 7955,
+          "sha256": "78cf60440dbedd3de929188ac7f98d14248c6762a4c5a09867719496e44bd638",
           "verification": "bytes-verified"
         }
       ],

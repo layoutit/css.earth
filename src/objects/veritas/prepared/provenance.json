@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "veritas",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8cb52e84160856f901dd886e474c795b97011af5547c50510cf2f6c1867815b4"
+    "sha256": "e046e3ba7f60c6c7e443cbdbe4f438e6700f66221654222f272a2e61165b4868"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fcd5a045e62e229abadb56b78ea18a4a8cd917d5a330376f5bf0be1a67595c8d",
+      "sha256": "609439877c3c3449ed569933cb191baba0c1d808265ff9fefd3708845f8e48b5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "veritas",
         "displayName": "Veritas",
         "publicBase": "/scenes/veritas/",
-        "distanceAu": 3.1755270453241122,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7fb88a9915c0f19ea13e50c95ccec55c11a47cbefa11162f9ea24b2f3221bf0e",
+      "sha256": "af7ce9cb0126f9deeb1ff67e11b08db20eaed9746fc5dd5c53bf0e290ab5e146",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/833"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "4b038d538898e8c11f692d3f034461d6cd06c41ece0c30f1d0b72d7ee4bca39a",
       "bytes": 82465,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "7fb88a9915c0f19ea13e50c95ccec55c11a47cbefa11162f9ea24b2f3221bf0e",
+      "sha256": "af7ce9cb0126f9deeb1ff67e11b08db20eaed9746fc5dd5c53bf0e290ab5e146",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8727,
+      "bytes": 8448,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/veritas/veritas-elevation-thumbnail.webp",
           "bytes": 5962,
           "sha256": "d11cc33b7e21a1e57a862717a4adb167777f1259744a42b4b440b48f5da667b0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/veritas/veritas-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/veritas/veritas-elevation-surface@2x.webp",
           "bytes": 313132,
           "sha256": "93228f06d87d14f615297af6d83aac37428bab01bf68e5d37d49522eebcfa721",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/veritas/veritas-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/veritas/veritas-shape-surface@2x.webp",
           "bytes": 225162,
           "sha256": "cf918e80d7df690319d73da2f90466dad65a94102fa88de18a63afcea43795a0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6050,
-          "sha256": "79f96bcb7cb22116a9426e60188e2162f274942325277f05ad1c6fa37d46fabe",
+          "bytes": 5931,
+          "sha256": "eaabb09790b32b2925b969d4b5e09ce4199c2a089311cdd1182c9d4b4648c5bb",
           "verification": "bytes-verified"
         }
       ],

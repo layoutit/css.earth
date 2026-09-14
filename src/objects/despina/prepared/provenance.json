@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "despina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bb4d526e2e4fb13f841f618bdecfd3482d65a2ed0d419f3946b173c9c2bdb608"
+    "sha256": "befe8120a4c7562de418d6801a600351b3d6b08e9579ec662bf96f56be893c6a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a7020d3cb3c71b1de54b4c94b5e7529078b87579149417413ee1fbacf7183143",
+      "sha256": "538732f6c7ff6a9aab50b8f875bdf758d412c68d9bdb052959841f436736ba42",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "despina",
         "displayName": "Despina",
         "publicBase": "/scenes/despina/",
-        "distanceAu": 30.07,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; Karkoschka (2003) measured ellipsoid axes, not the spherical PCK mean-radius entry."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cccdd5cf405a75f9c3708dafd69756684c091094760a2bf7dd65e628e83c5f6b",
+      "sha256": "5c85152ec0c96551489720940011a3e26e6cbd6ffa05d14bbae68cfc2adfb100",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,12 +174,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -209,12 +196,6 @@
             "role": "observations",
             "description": "Calibrated Voyager ISS archive",
             "href": "https://pds-rings.seti.org/voyager/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -270,7 +251,7 @@
       "sha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "bytes": 135,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,7 +286,7 @@
       "sha256": "33433bfde43462cb04ed29e2dce75928e249c8976d307a76bb65f7f15adf2560",
       "bytes": 14147,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -322,10 +303,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cccdd5cf405a75f9c3708dafd69756684c091094760a2bf7dd65e628e83c5f6b",
-      "bytes": 3312,
+      "sha256": "5c85152ec0c96551489720940011a3e26e6cbd6ffa05d14bbae68cfc2adfb100",
+      "bytes": 3033,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -361,13 +342,13 @@
           "url": "/scenes/despina/despina-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/despina/despina-model-surface@2x.webp",
           "bytes": 49032,
           "sha256": "3765b7ecee1b03ac9a275d3b193665f590467357621de6d01bbe661b3c8e93d0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -390,8 +371,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6050,
-          "sha256": "2f05037e854c56200f6cc829ee679ac5892f156196b66394604f472684dcade4",
+          "bytes": 5931,
+          "sha256": "a5ecd38d24ab99b93ab7962634103a045e35a78301005cc941a1ce8b2458ecf8",
           "verification": "bytes-verified"
         }
       ],

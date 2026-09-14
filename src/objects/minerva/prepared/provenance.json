@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "minerva",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7c697ae55663f9006f911b22aebebc69e5e1f1d21a3c805277172d7673723ffc"
+    "sha256": "07a70b11cc25fcdce5532c549fa0ee3e8163d0e42e1243637bd04c08678326f7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cbbeb8d1b6f5c570fd1383377ee57fb8966afd667bd3b1e312607c4275399dcd",
+      "sha256": "870a2a90cd170a356597bc59d67dbd2913e6a912935d4219676b4de3e0f58fa5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "minerva",
         "displayName": "Minerva",
         "publicBase": "/scenes/minerva/",
-        "distanceAu": 2.753464096843689,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1797 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "82baf4a6b9cf810538d3eb2981fe40a8995bef518630706d65efacdc6fca87bc",
+      "sha256": "7808f71556e37e79b9fbdc46a630f9f728c958e9b34b06ae91ee1e1f92c0582c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1797"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "e8db727155bfaf5ccc6d996a603ed712b472a2585f75fc3c5ea9472039bbe434",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "82baf4a6b9cf810538d3eb2981fe40a8995bef518630706d65efacdc6fca87bc",
-      "bytes": 9689,
+      "sha256": "7808f71556e37e79b9fbdc46a630f9f728c958e9b34b06ae91ee1e1f92c0582c",
+      "bytes": 9410,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/minerva/minerva-elevation-thumbnail.webp",
           "bytes": 5104,
           "sha256": "9169705bdae1724e5840d064448bd820a176b4686c8ce53cc104751de28ae4cf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/minerva/minerva-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/minerva/minerva-elevation-surface@2x.webp",
           "bytes": 298088,
           "sha256": "270c371107baa4783f0cd492e458ed919e4acb464fcb77d7d7ec08af1d3469ea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/minerva/minerva-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/minerva/minerva-shape-surface@2x.webp",
           "bytes": 195558,
           "sha256": "16290b526f0376e44d2c081a14bdb438c0edec4feacd3034bc90b5693cef1db2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7049,
-          "sha256": "b2e848e193f6bc72cd4da2bd80ff36dc86d84f91b7731690c3de700d47c32627",
+          "bytes": 6930,
+          "sha256": "6cd0096d53cb8640194281e69886ba555b4db5379a88ff2a9ff9d8dba4872f30",
           "verification": "bytes-verified"
         }
       ],

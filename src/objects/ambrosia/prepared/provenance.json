@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ambrosia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "515f1c3b3115528a9cf0c7fe447488259a1acb2470d1d7aa4e7d02775a4d60cf"
+    "sha256": "2a373ec6cb760ff601a23a601bd1928cb857fabbce065a373e1375dafa3fed03"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7da444dbaf6a31aa649b1a1e15a3f0dda8d1fdf74dbe37b3d4e54377ccbbeb6d",
+      "sha256": "b521907c71fbcd070bc16961fffb060374ebb2b779925adb4be56190f290c105",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "ambrosia",
         "displayName": "Ambrosia",
         "publicBase": "/scenes/ambrosia/",
-        "distanceAu": 2.59809056583152,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 548 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "aa587d7cb3e56e5692ba8f1f8b00dba790c8921958eff0d703bb0c6879fc4ae6",
+      "sha256": "36bcbd145795e4fe7db59c12b224121fd475f591ba7eb6c6720f46d217d74a06",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/548"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "f448756b26da376283009caf5049d40dc1054ed2370c003ee80fe2cf831ecf49",
       "bytes": 81088,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "aa587d7cb3e56e5692ba8f1f8b00dba790c8921958eff0d703bb0c6879fc4ae6",
-      "bytes": 10785,
+      "sha256": "36bcbd145795e4fe7db59c12b224121fd475f591ba7eb6c6720f46d217d74a06",
+      "bytes": 10506,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/ambrosia/ambrosia-elevation-thumbnail.webp",
           "bytes": 4370,
           "sha256": "b3d544ee11390b9075a9a65dc7617805665287a4b6c94ddf85b697dde38cd4b0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ambrosia/ambrosia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ambrosia/ambrosia-elevation-surface@2x.webp",
           "bytes": 254676,
           "sha256": "a08f34cdf29cd5b28c6f4ddb5602a2538fa8ea08d093ac409ff6e2a17fd6a8f5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/ambrosia/ambrosia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ambrosia/ambrosia-shape-surface@2x.webp",
           "bytes": 187612,
           "sha256": "b09a8f9eb7e4bf7d59d635f04b1b6934eea4bd8b5f7878cc27e743f6b51af588",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8127,
-          "sha256": "767fec94dbb052db67e0d286b96140448f0bc9cf2a76d45b68bbb770c7b23719",
+          "bytes": 8008,
+          "sha256": "4a07de83b8635ec7150b3382f5b7ee46796d9eb972f39f1ff4e426328305d7d0",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "patroclus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c135eeabea3436146b813e95667adbc94df593546821609303729dbc8a53f70a"
+    "sha256": "2cc274cee34b64dceabe1e33d3946d794224c2373ddc44e66abefba071662e0e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "38b7e5803fea0edcdfd61625dbdd067b0b8e380fda65da46dbce4f72b0bdd247",
+      "sha256": "f083667e02a16c910ecf070f578d90b43524b9aeb18d4b5b555c8c31c1e70ffd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "patroclus",
         "displayName": "Patroclus",
         "publicBase": "/scenes/patroclus/",
-        "distanceAu": 5.2,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "25da2bfaa45f705b780cb2eed66bd714a1ecd011320da95b5c38179bcff8b6e9",
+      "sha256": "8306e935bb51c0a50ed65f5af9ffb93b846a38ba656675973c1828499c27d196",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,12 +164,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -205,12 +192,6 @@
             "role": "facts",
             "description": "Published model and interpretation",
             "href": "https://www.iac.es/es/ciencia-y-tecnologia/publicaciones/orbit-patroclus-menoetius-binary-system-and-predictions-20242025-mutual-events-season"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -266,7 +247,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,7 +282,7 @@
       "sha256": "d42d1b58ea65d003fb1b31f8b32bc0c79e833c5bcb7aa060fd395039ae0ee9c4",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -318,10 +299,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "25da2bfaa45f705b780cb2eed66bd714a1ecd011320da95b5c38179bcff8b6e9",
-      "bytes": 3246,
+      "sha256": "8306e935bb51c0a50ed65f5af9ffb93b846a38ba656675973c1828499c27d196",
+      "bytes": 2966,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -357,13 +338,13 @@
           "url": "/scenes/patroclus/patroclus-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/patroclus/patroclus-model-surface@2x.webp",
           "bytes": 54756,
           "sha256": "c3c3d1453704acce233544c959810f7a2bc768b54fea7a535eabc21e6e90109e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -386,8 +367,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6769,
-          "sha256": "1afb910936883521213a56d5dd6b33317054160c6e48690b01b1db67db4779f8",
+          "bytes": 6650,
+          "sha256": "64999471222153cffd99dee2a1ff4acb7ffc78096861d5efa374459f518e8142",
           "verification": "bytes-verified"
         }
       ],

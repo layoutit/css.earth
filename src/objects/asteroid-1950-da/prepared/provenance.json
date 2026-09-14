@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1950-da",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "59e12f83d6c42376bd762c4980a6ee092c5f0a5711fd7ba82c3f17dd19fbbc19"
+    "sha256": "0e989fb3800ae807f61bf55434538070b3b1a12bdc77c0e7ec931f4b4c20e751"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "862f537cd58571f476367a5177b02bf4e2e7569dc30b0635bab8338e958c68b4",
+      "sha256": "4217a26438fee5b8f75b97ed66e0eab1c1017b81fe159b9adacfa7693ea4ab28",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asteroid-1950-da",
         "displayName": "1950 DA",
         "publicBase": "/scenes/asteroid-1950-da/",
-        "distanceAu": 1.6984168410443714,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5e635507f2b0920d1b244e859fce0c3c18d8066673b062d142776c8749b174c0",
+      "sha256": "0d76ae1d65b97e495bf00546a426ddf50f23f649e3119a9ea0bbc142efb03303",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://echo.jpl.nasa.gov/asteroids/29075_1950DA/busch.etal.2007.1950da.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -345,7 +326,7 @@
       "sha256": "2a9078d6ea00783ec32d4598517789f1f293d90807b024f5b03b1fda5de10657",
       "bytes": 29079,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -370,10 +351,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5e635507f2b0920d1b244e859fce0c3c18d8066673b062d142776c8749b174c0",
-      "bytes": 7253,
+      "sha256": "0d76ae1d65b97e495bf00546a426ddf50f23f649e3119a9ea0bbc142efb03303",
+      "bytes": 6974,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -404,19 +385,19 @@
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-elevation-thumbnail.webp",
           "bytes": 5780,
           "sha256": "769b22a8c2fb978bf76aef980a3c8cef180cbd0a6293745cfdb88654195d0e75",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-elevation-surface@2x.webp",
           "bytes": 329432,
           "sha256": "d11a7b270b4246f282be9cb8878e48a0e26b09e7dc6dfe3dcd1e0d7ed17886d3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -446,13 +427,13 @@
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp",
           "bytes": 205014,
           "sha256": "8be2fc86a148582e03e15d77193a96d9b4d636d7b459c4b8edc3aade513e7bb6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -475,8 +456,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4947,
-          "sha256": "4958784e904e99eaf5b6952d7991afbd6cb50af9094244882ffa070d75631df0",
+          "bytes": 4828,
+          "sha256": "a93ddea01cbe9132682c509610de9d6f85c45380c22447071e392a11638af2ef",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "eurykleia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "94535ce6bd86afedb3acb44e36453dfcc4e9c0d0415d2fbd87e550fe483f3cc8"
+    "sha256": "732e825dfdad2a7255c697dab444b1c392ef5c74a90d0898a469b094d92cc8b7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5d3353a910574c30333e6ecd1f6628eca02b26d67a0ca34292706d8f42edf595",
+      "sha256": "39d8c6a6c02014d9422c956e024dde046ea923f9536a9a5df5d97fe26dc76b18",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "eurykleia",
         "displayName": "Eurykleia",
         "publicBase": "/scenes/eurykleia/",
-        "distanceAu": 2.878679745406444,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 3102 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4e3d7155e640f114faa4284c18d53b60dcd10806a4bb40159c514171294f0241",
+      "sha256": "1b86cb5cab0e262768c206c88fce37cec5f946782fcf11880871f9921b087762",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3102"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "f357504dd44ea1e679c796b0878da27943b23109fd4c576ae8e8673abaee1eb9",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4e3d7155e640f114faa4284c18d53b60dcd10806a4bb40159c514171294f0241",
-      "bytes": 9639,
+      "sha256": "1b86cb5cab0e262768c206c88fce37cec5f946782fcf11880871f9921b087762",
+      "bytes": 9360,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/eurykleia/eurykleia-elevation-thumbnail.webp",
           "bytes": 6424,
           "sha256": "b262b464ad1923c7bd8c6921c5024a3c4636bdcc4490b98cb781e3a5454ccc0f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eurykleia/eurykleia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eurykleia/eurykleia-elevation-surface@2x.webp",
           "bytes": 310614,
           "sha256": "8e459d5df6f3e182397320b2b0cd3ad586d1f7377e5cf86b94d3fc8a59136434",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/eurykleia/eurykleia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eurykleia/eurykleia-shape-surface@2x.webp",
           "bytes": 230104,
           "sha256": "08ef7f2e1cf181cea9b784ebf39d8452d0e5a65874643a585b04dac0ab909292",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6972,
-          "sha256": "ddc0ce34f3a466189545bc178f5deaad18e0703fd8cbb0c146a76eb9be931b28",
+          "bytes": 6853,
+          "sha256": "e5bf2bfec272b5541f9871fd855f34956bd369406dc8474b32dbc379a0440598",
           "verification": "bytes-verified"
         }
       ],

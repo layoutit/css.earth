@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "clementina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2bb17bb32ea303d5da1a21acb3b992f263c2b9c2bf31553b18adf4df21cdbe65"
+    "sha256": "2bbfb0c9d021c2441d15e59caaf9b921f563a7efdb8171107269cf5eb41d2f14"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "477a9acec5f98c69e4b0e4f6e4ed62fabce3ba7df636b479153c1b1c8b73e709",
+      "sha256": "100ca6fba4ce0f45b76e02ade8ced886254007572ecdf91e99c11658bdf794a4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "clementina",
         "displayName": "Clementina",
         "publicBase": "/scenes/clementina/",
-        "distanceAu": 3.159622955651379,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1912 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ed5d2aae31b2bdf05606e249d8bee218181e9cf689d1a92f69d3686f44ddd14f",
+      "sha256": "7d610eb4785778b8aa0fd36498e55f3a975e2583532a60d704c512046735bd70",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1912"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "15e30ddcead93addfefb8473a689b601d549eab3710abf227abce3b7761d2be4",
       "bytes": 44799,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ed5d2aae31b2bdf05606e249d8bee218181e9cf689d1a92f69d3686f44ddd14f",
-      "bytes": 11515,
+      "sha256": "7d610eb4785778b8aa0fd36498e55f3a975e2583532a60d704c512046735bd70",
+      "bytes": 11236,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/clementina/clementina-elevation-thumbnail.webp",
           "bytes": 5846,
           "sha256": "9ae3229f5e4f62e143af4dd6ad22344e1436d32cd5924d083626186606122ddf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/clementina/clementina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/clementina/clementina-elevation-surface@2x.webp",
           "bytes": 335526,
           "sha256": "d4ff784419c5e098dfdaeab8fb0a06c69900c155f2ef91d3b8b00f1788bca1c6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/clementina/clementina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/clementina/clementina-shape-surface@2x.webp",
           "bytes": 241738,
           "sha256": "3aec4aad0c81a91a362ed2ea2044c191b3d41253eb9f19dcaecc5c0653c619f5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8829,
-          "sha256": "41a65daa88c62c8666317b60e40845db8762f44fe94334ede399d0ed45511a25",
+          "bytes": 8710,
+          "sha256": "b202479c44d361d1100b7bfe94e9b46d9dddfe2cbface6bd95e84465ab7a97ee",
           "verification": "bytes-verified"
         }
       ],

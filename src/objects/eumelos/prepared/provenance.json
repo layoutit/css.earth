@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "eumelos",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c9de5b710b29f0d29817da371fb7d001a5558af4110315bb3866e8fc8f01ddb8"
+    "sha256": "29565bc0c5672c3a060ba95dd4f9bc609b9bf31c54ca93382892c8a1df94a752"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4159c79b64c56e915e9db27dcf7ce68c68d70c7f671ae4eded5fa70516fad295",
+      "sha256": "45846492d4d492e02e44b9026014eadb8d08090f600c3344856abeca3820a9dd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "eumelos",
         "displayName": "Eumelos",
         "publicBase": "/scenes/eumelos/",
-        "distanceAu": 5.201650929201143,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -137,20 +136,14 @@
           "sunSource": "DAMIT model 3920 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "37cbc00073077be9366935e76bef3896fbb364aeb5a96f7559301a628391af45",
+      "sha256": "3292afe1597191104323b9e0a03aca9ae0d0f9c70e903ac8550a34983142c30d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3920"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -369,7 +350,7 @@
       "sha256": "02274aeb1ea9366ecd4cf1d93edd0ae05a027de53ad5261f0b3a1a2333755008",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -394,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "37cbc00073077be9366935e76bef3896fbb364aeb5a96f7559301a628391af45",
-      "bytes": 9779,
+      "sha256": "3292afe1597191104323b9e0a03aca9ae0d0f9c70e903ac8550a34983142c30d",
+      "bytes": 9499,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -428,19 +409,19 @@
           "url": "/scenes/eumelos/eumelos-elevation-thumbnail.webp",
           "bytes": 5514,
           "sha256": "32feee1b79eef7b1a315a967e714036e132246c581a3829c3c4c448133f8a673",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eumelos/eumelos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eumelos/eumelos-elevation-surface@2x.webp",
           "bytes": 300618,
           "sha256": "b604313e835cbcecfe3bb73358c29876061f200ac424fda91c22130667d76d58",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -470,13 +451,13 @@
           "url": "/scenes/eumelos/eumelos-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eumelos/eumelos-shape-surface@2x.webp",
           "bytes": 227744,
           "sha256": "07a0c2b860dc2941e0445ebb153c8b379288819bbec20f713d36d2f8b5ebed3c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6813,
-          "sha256": "f6419a65919482d51fb4cafc9d58061f2d7e8fb2224867ddf9f5806797897e30",
+          "bytes": 6694,
+          "sha256": "d25477aac947608ba770154d67672c11644aa006336dc939a2ce3e1d0e9c34ab",
           "verification": "bytes-verified"
         }
       ],

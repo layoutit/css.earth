@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1998-wt24",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "18f2933e681036f8ce377e502cad71028a410ca49f302ee2839c61229a7174c4"
+    "sha256": "9e8195ddbb8d05f990aa2c2fe8b718e23b4186497c72c08a43e885bcf8d6fec1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "56bf81ec1604fc053f5ab061023f70e6f13cd91d0fb32345320e64c110644ae7",
+      "sha256": "713560129f744160bb8b9d4d32430814335c3483ad42e53900168d01fad86574",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asteroid-1998-wt24",
         "displayName": "1998 WT24",
         "publicBase": "/scenes/asteroid-1998-wt24/",
-        "distanceAu": 0.7186940115527254,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a10fc754ead999d8468334dac7dc076b407ee877e2ad54facd00293b0b4b09ea",
+      "sha256": "52a5a7351abca28e147b421222ca81d4da1dda5a324f1133d33aa94f6089aff1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://echo.jpl.nasa.gov/asteroids/1998WT24/busch.etal.2008.1998wt24.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -345,7 +326,7 @@
       "sha256": "dade62d25e160a1d19099aae9b1e316946d034e7ae9d8cd234888c60387c37a8",
       "bytes": 248733,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -370,10 +351,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a10fc754ead999d8468334dac7dc076b407ee877e2ad54facd00293b0b4b09ea",
-      "bytes": 8832,
+      "sha256": "52a5a7351abca28e147b421222ca81d4da1dda5a324f1133d33aa94f6089aff1",
+      "bytes": 8553,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -404,19 +385,19 @@
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-elevation-thumbnail.webp",
           "bytes": 5906,
           "sha256": "227b9705387394a69c396b105b9f3e2736ffa11f856825c70b54e7d386b5b941",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-elevation-surface@2x.webp",
           "bytes": 347114,
           "sha256": "594efba3688ea0348707a69117cc2fbc4642362998cf2772f7a391ce498973e3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -446,13 +427,13 @@
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-shape-surface@2x.webp",
           "bytes": 223552,
           "sha256": "1ed5e7a5fbbf06d130778afb7422511d2ab0c34cfa6bfd242c529c80dd2b1ab9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -475,8 +456,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6517,
-          "sha256": "9ca8b9601e95067fcba0bf385a62e898a61d1e1de35461513b66937b6a20d11b",
+          "bytes": 6398,
+          "sha256": "b0f6ce77b4ee4bf4f1674b79860615e241cf42c6409891ec893a92d55f18ca64",
           "verification": "bytes-verified"
         }
       ],

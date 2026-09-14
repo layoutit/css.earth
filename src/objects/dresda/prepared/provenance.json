@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dresda",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7d2795bd37a90935a0bbf81707f02a1bcc8d47a8b9fe09796b41eb4bcbfed4dd"
+    "sha256": "9ffc7e6fda408c1bd24193a9d92121dc05ba071b70d1a56f95d4a06923b3c71a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f857e1a56744e6d13758d26dc373ff07c2379d1d63c09eba81b5487178fc7ee2",
+      "sha256": "89110ea242e6199f2a2f8bf3cbe300f2193671af72c08b9cafe5a1fb7ec6fa2f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "dresda",
         "displayName": "Dresda",
         "publicBase": "/scenes/dresda/",
-        "distanceAu": 2.884592869415074,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1163 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "755e78b74c1107b7b4a79ffd776b57868264b4c6140f7bd86c3571fba9abe211",
+      "sha256": "31047545e800189944e4ece2d1843db2b3a5202c2d1b7bb13ba5fea144f06a82",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1163"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "eb9e234766f9bce4ed9fd95ff4e674802af3255a98ae411a37b3a36f5f52b230",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "755e78b74c1107b7b4a79ffd776b57868264b4c6140f7bd86c3571fba9abe211",
-      "bytes": 10113,
+      "sha256": "31047545e800189944e4ece2d1843db2b3a5202c2d1b7bb13ba5fea144f06a82",
+      "bytes": 9834,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/dresda/dresda-elevation-thumbnail.webp",
           "bytes": 5812,
           "sha256": "a92ab7f06f96a209e0a9ec04e53926b7cc74d77a79b202146138c2dcce046cb9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dresda/dresda-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dresda/dresda-elevation-surface@2x.webp",
           "bytes": 291416,
           "sha256": "40ab7fdb3d7469e14358c80fe384ae3e209bc84ddfc5083a2e292fe0b18669a3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/dresda/dresda-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dresda/dresda-shape-surface@2x.webp",
           "bytes": 232950,
           "sha256": "35d2d6d3bb238f90cb580213132700c2a4cedb61044ccd72357c73ac90127c50",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7482,
-          "sha256": "2d71b3f1ac3234ee5665c223414fd8b75cf8c8121a8743f6d473cb4eb837f911",
+          "bytes": 7363,
+          "sha256": "22d714032156159489e9e52e7ea27e45e0f530f6132672fdbee894b1f3a4ccd0",
           "verification": "bytes-verified"
         }
       ],

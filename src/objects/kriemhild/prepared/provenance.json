@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "kriemhild",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3622feca8aba4f157aaf09a2160d7218adb06108f9adb71a532e8ee4b0d5837e"
+    "sha256": "d46c57fc769bc495d27a3951ebe2263ba5d6925b2df9748a7266f5f3ae545d39"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "80ca020249e6f477c363ac44ba2d7fb56717196434248ff09c99e5c00c41a91d",
+      "sha256": "51d85072e85513d548f63214efbc44ba4dc06dfc4663af37a9f70adcbc53f457",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "kriemhild",
         "displayName": "Kriemhild",
         "publicBase": "/scenes/kriemhild/",
-        "distanceAu": 2.8618233448142756,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 621 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1f4629bff97f269317862ba5e4eb42d2d4992e3bddf9b8afb518161d03e83b58",
+      "sha256": "4a649fb103ff3e77ea60211fb04d96cea7f23f500aa10ed318f1766a39155fe9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/621"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "d1556ed22d1a7df79537f2d50d2cc6389142aa9eccda3e14f362efb2375bcb17",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1f4629bff97f269317862ba5e4eb42d2d4992e3bddf9b8afb518161d03e83b58",
-      "bytes": 9825,
+      "sha256": "4a649fb103ff3e77ea60211fb04d96cea7f23f500aa10ed318f1766a39155fe9",
+      "bytes": 9546,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/kriemhild/kriemhild-elevation-thumbnail.webp",
           "bytes": 5688,
           "sha256": "2f9cb7dfbd21ff256e5ab45b3b0e9e31170a5cfc076368eeca3c2eae10126bc2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kriemhild/kriemhild-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kriemhild/kriemhild-elevation-surface@2x.webp",
           "bytes": 296414,
           "sha256": "7de0ab30269cb258695422f042fd75af9d0bca61697d38e4717b91e0ae4edd61",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/kriemhild/kriemhild-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kriemhild/kriemhild-shape-surface@2x.webp",
           "bytes": 213030,
           "sha256": "442e95d93138ee781f71b5422905458f86fc549b2bf9ca84a6d8b0b3dd66d0a8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7157,
-          "sha256": "cc54256dcc76a131ec807a21a9d2431ad96f23254eb8c6052a80458322392879",
+          "bytes": 7038,
+          "sha256": "0d33c950ae61340704dc40308a80cfd06d7fe052370930de6324d6e587f7dbc2",
           "verification": "bytes-verified"
         }
       ],

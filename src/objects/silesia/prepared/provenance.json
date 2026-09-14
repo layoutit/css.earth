@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "silesia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d278e5af0cc9ce8e12e64ab2232a5b1f8dfc767bdcd8e6ab32288afed6c3423f"
+    "sha256": "afe6effdc2bee6dcd07cdb57b98960c28e6996c8eef55ec4fcf1a773c2df940c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dc9d232440affea18ad88339f6b6d1e140955831923888cfa8acee1cbbedc11b",
+      "sha256": "956b7b1878e88422a6d827c2e966faa18176fd691af59459275e46f6b5e3679f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "silesia",
         "displayName": "Silesia",
         "publicBase": "/scenes/silesia/",
-        "distanceAu": 3.1183254802109865,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 702 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ed30bd329742b4d4214bbfa8f6ef7bf716b774ee3cb47c3c3ae90ef278ec5d79",
+      "sha256": "cae8656ee4e216241ee0a3c9198c37011aa43517215505949a8b0f0959b98493",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/702"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "a32b67db173623ddbff30c471278e92fb0925f0d0a1b787b0f9a7ed23c24ce96",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ed30bd329742b4d4214bbfa8f6ef7bf716b774ee3cb47c3c3ae90ef278ec5d79",
-      "bytes": 10137,
+      "sha256": "cae8656ee4e216241ee0a3c9198c37011aa43517215505949a8b0f0959b98493",
+      "bytes": 9858,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/silesia/silesia-elevation-thumbnail.webp",
           "bytes": 5248,
           "sha256": "e32cf5e7b6157137aa7559488d4c9fc27f777f29bfeefb99b361519347edf7fe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/silesia/silesia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/silesia/silesia-elevation-surface@2x.webp",
           "bytes": 282984,
           "sha256": "9e927707e5d13f3cccebab68d68b83eb61ee6da97730a59c711f17c4a3f1e8ff",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/silesia/silesia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/silesia/silesia-shape-surface@2x.webp",
           "bytes": 211944,
           "sha256": "fe9ea59b504612fa4d3b4eb6810f029c60cb52694f4ccb35b8d0215551838330",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7494,
-          "sha256": "62ad5cfdb01dc89605fc40d9b3df04b85aa426e23c9289446d4fbf3c320f374c",
+          "bytes": 7375,
+          "sha256": "01439efbd71f82872a78c476384902393b0101c534008862a2fc67ec79d47e34",
           "verification": "bytes-verified"
         }
       ],

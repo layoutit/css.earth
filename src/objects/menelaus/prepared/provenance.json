@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "menelaus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "21b830b2b9ff47c445363d9cc2ec46dfdfb8f69b863231ff39ad3e9ae3208e39"
+    "sha256": "707d8df2d72318f8df0c3f206b04a8b3a3bc6d15b5a003c01c6b111a7e843d83"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d2d8f70a3df90838e1798d2dcb939658a174e54f5435c5a395073c1cee4f908d",
+      "sha256": "dd5bac32520479c55e4582eb2511d8fc1162261e9a7fc662d7d4faf926539a39",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "menelaus",
         "displayName": "Menelaus",
         "publicBase": "/scenes/menelaus/",
-        "distanceAu": 5.197053008241417,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -137,20 +136,14 @@
           "sunSource": "DAMIT model 8131 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2a30562b1149501e40b528f53fc3811850d7e29091a255d2b8ce62dee76c7ff8",
+      "sha256": "9fc2120ef07a5f8d1a83394e0d9f16557a3f3847a88acd1052c4c650c28aca8b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/8131"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -369,7 +350,7 @@
       "sha256": "6d021451ff77ee883cf053c605fdcd6de8774910a6f553e3734bfadbff7e7b8e",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -394,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2a30562b1149501e40b528f53fc3811850d7e29091a255d2b8ce62dee76c7ff8",
-      "bytes": 11273,
+      "sha256": "9fc2120ef07a5f8d1a83394e0d9f16557a3f3847a88acd1052c4c650c28aca8b",
+      "bytes": 10993,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -428,19 +409,19 @@
           "url": "/scenes/menelaus/menelaus-elevation-thumbnail.webp",
           "bytes": 4688,
           "sha256": "02aa7c63fe588bf751d6cd7aec666c5a9c1cf765f77848b0e0f0d1bb117731df",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/menelaus/menelaus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/menelaus/menelaus-elevation-surface@2x.webp",
           "bytes": 258420,
           "sha256": "d7643837e56267dfbd453439e34ccb3ce79670e6825ddc2cdbf6454819341cef",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -470,13 +451,13 @@
           "url": "/scenes/menelaus/menelaus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/menelaus/menelaus-shape-surface@2x.webp",
           "bytes": 189398,
           "sha256": "56e5c7670b0579a22743dd0912f0fbb7eec5176e436470ed0970c2180cf48f42",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8293,
-          "sha256": "d12c9c422178afe75af079927c4714b03085cf9e9ab469a5a3799a92daf28428",
+          "bytes": 8174,
+          "sha256": "38a2a793f4da5f6e7381dd4d63039a9c278beb72754483ebb375a8df03450c3c",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "alkmene",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ed6097fb2c556a5d5f5d8d46fae3e81e71c1197e854d6ffecd9049673957a934"
+    "sha256": "531b0497efb70e29a7649428fbb9e2a3065e620d8d7470a914bc85f65635e357"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5c367e1ea3f2c8288703511a93964db06650070c4e542fe969c8e2b2a8a748cd",
+      "sha256": "06615801f5004e653013f9911d33d218dd5eb0c9b27ab3dacf92d0428f0a0550",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "alkmene",
         "displayName": "Alkmene",
         "publicBase": "/scenes/alkmene/",
-        "distanceAu": 2.762763911317985,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 146 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0d84f807be7a6a7cd1122813ba1a3036440658e8bfec4312214ccc70b0b5487b",
+      "sha256": "b6cf7ec611b7aa51de24ef11d0e77d138db017d66795a59c6d751df234c5d66a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/146"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "b1248125111cb430f90a711830816a8132f7fed1682bbebab7e10ee127af24d5",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0d84f807be7a6a7cd1122813ba1a3036440658e8bfec4312214ccc70b0b5487b",
-      "bytes": 9007,
+      "sha256": "b6cf7ec611b7aa51de24ef11d0e77d138db017d66795a59c6d751df234c5d66a",
+      "bytes": 8728,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/alkmene/alkmene-elevation-thumbnail.webp",
           "bytes": 5990,
           "sha256": "d9ee369ea8fd0ab67a5dbc91c0542fed3d65b4dc2373471ba19ee60de54d9321",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alkmene/alkmene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alkmene/alkmene-elevation-surface@2x.webp",
           "bytes": 298774,
           "sha256": "8c55567bd095690b7ff377f534955c2580a294643b2da2e0801dc234cbf46e53",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/alkmene/alkmene-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alkmene/alkmene-shape-surface@2x.webp",
           "bytes": 229362,
           "sha256": "87c9bda56950e6af3d4fa6055aa3c3544fdee001e259e6145abc0346c25c217a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6365,
-          "sha256": "3d6782049634395f6f06800813e8067885db7babadf8dd430a5037e52f0b25f9",
+          "bytes": 6246,
+          "sha256": "9fa6d4061a54c42e137935df2ec68a9297606c75586e36f95c13a97a6a5825f5",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "paaliaq",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf4a5ea013f8466a42b6e4f8567d3b92d6fce0f51ffc32c1121990e735837e7b"
+    "sha256": "bdc6137739ca4edc771d0cb30b18dc746122019e0340b10e3d611abf1f2f2fe8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d14f63a451adac27400cbf12f02fee53609a17b2ecbdc4f18d3c316de6d4450e",
+      "sha256": "1f94aac25387e338e8d8ba443f11120cd6d19dfb151fe60afaa1129884b5f79d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "paaliaq",
         "displayName": "Paaliaq",
         "publicBase": "/scenes/paaliaq/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Saturn-system ephemeris; Physical pole, spin sense and current rotational phase remain unmeasured. The displayed motion does not fit the Cassini lightcurve."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3bec51999fc8f7488341bc2d4d96ef289fce6efc662d962d8e558e041cb01819",
+      "sha256": "dddcb73eb01be7111807ecc37b8a911a5ad364e6bc517c8cc30268c2d66da153",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -188,12 +181,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -216,12 +203,6 @@
             "role": "observations",
             "description": "Cassini ISS archive",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -314,7 +295,7 @@
       "sha256": "07fe033dd9b4e0d4681011c8db1b58eb7473e32bbe76bb07b7a86998ea8b514e",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -331,10 +312,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3bec51999fc8f7488341bc2d4d96ef289fce6efc662d962d8e558e041cb01819",
-      "bytes": 3349,
+      "sha256": "dddcb73eb01be7111807ecc37b8a911a5ad364e6bc517c8cc30268c2d66da153",
+      "bytes": 3070,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -370,13 +351,13 @@
           "url": "/scenes/paaliaq/paaliaq-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/paaliaq/paaliaq-model-surface@2x.webp",
           "bytes": 57662,
           "sha256": "2066e628416884e5ca26af642ea52473b80a408f9438fe4ccb95378421cdb630",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -399,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6477,
-          "sha256": "1ffc370ab75647149f4ff67541575ef21044c153f3757b7945f11ac865f78722",
+          "bytes": 6358,
+          "sha256": "9e9dac0b1af4b9cdac07010f538bafdd2a16308908735938baa8aba1c6ba2c0c",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "julia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "06c9160030a91fabf46f103c184be62ab33cda74ed426ce13dae1d43e8d8115f"
+    "sha256": "ca68e7c2e8fe4f8fa755bc97b7d59c43671ce09566cdf6d53e399745b9b61e16"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "59b75556af975f8b97770c09b88005605ed87f6a041f09c6b846ec56ef73a8d9",
+      "sha256": "34b31ea345bc491cb6feecab52e2565fdf510634675ab606a9fb3055d428e667",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "julia",
         "displayName": "Julia",
         "publicBase": "/scenes/julia/",
-        "distanceAu": 2.550930934639707,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8c68ebcdaf826719bd711c5cc044ccd7817cd210ddb6eaf2bc70d614b35adaf6",
+      "sha256": "db72d267ebce67495dc82e5bb25e946616e0d85fc53237123d181ea1fb71a620",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "aa0104b2bd32fcf228a7abdacc8b5223890562bb11c74f61a4dcbefb5e2dead2",
       "bytes": 363259,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8c68ebcdaf826719bd711c5cc044ccd7817cd210ddb6eaf2bc70d614b35adaf6",
-      "bytes": 5970,
+      "sha256": "db72d267ebce67495dc82e5bb25e946616e0d85fc53237123d181ea1fb71a620",
+      "bytes": 5691,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -401,19 +382,19 @@
           "url": "/scenes/julia/julia-elevation-thumbnail.webp",
           "bytes": 5086,
           "sha256": "d8b173920aba3b2227db4c250541afcac08e8952ccbd376345b099a1c7a91496",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/julia/julia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/julia/julia-elevation-surface@2x.webp",
           "bytes": 305474,
           "sha256": "b9be29f330924a65af383d6c3fbcc2c3957ce35a17debb7553b0e164daf65610",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -443,13 +424,13 @@
           "url": "/scenes/julia/julia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/julia/julia-shape-surface@2x.webp",
           "bytes": 222628,
           "sha256": "33c3b7ce0ecad43c71176dbd9a9fae084a95e4b079e6fa2e31c0d7d4c9440fec",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -472,8 +453,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3821,
-          "sha256": "a37ecd813a501ec0475d63c70419753ba76f46d45ee8bf376703dd9fddecc3e1",
+          "bytes": 3702,
+          "sha256": "0e1efbe557bb019b00137c115d3ff9a7697913c45cd91d0a5fd043b280380323",
           "verification": "bytes-verified"
         }
       ],

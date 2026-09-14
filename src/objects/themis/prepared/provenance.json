@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "themis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "744dd3414386da86d6bb03967a676523cc470868ea3ddf04cf3489592f3bd9cf"
+    "sha256": "b4f748d23f05e76831c621fcab14f5c06a713186d7137a9212ba95d6fae004a9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "75857f4f6b765f8423fb7721c6c7b0140b5779fb0995cd52e709b85125cd0999",
+      "sha256": "508dec85c4aeb99a680e70292e8446662ff6f4b986d96a886bdb0e279323ab2f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "themis",
         "displayName": "Themis",
         "publicBase": "/scenes/themis/",
-        "distanceAu": 3.1442518680771308,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7e4c8f102529d386aa6de0a256e0ed0258003a84d51cb2aa16fbdcadb7ee0003",
+      "sha256": "4e71fd3109e6cbba2fc3f9e2fa6d27d6b222d10b1e3c39197e4309c4ed29015b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "6a3b36dbee88acca8365d8b4baada532ec83ebedfd3c5ed2842ec4dd36889853",
       "bytes": 357499,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7e4c8f102529d386aa6de0a256e0ed0258003a84d51cb2aa16fbdcadb7ee0003",
-      "bytes": 6777,
+      "sha256": "4e71fd3109e6cbba2fc3f9e2fa6d27d6b222d10b1e3c39197e4309c4ed29015b",
+      "bytes": 6498,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -401,19 +382,19 @@
           "url": "/scenes/themis/themis-elevation-thumbnail.webp",
           "bytes": 5416,
           "sha256": "85eacdae20394251b0b4db10204cf792ad54b5d2a719d367295a06dee737e323",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/themis/themis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/themis/themis-elevation-surface@2x.webp",
           "bytes": 298092,
           "sha256": "61a95e73aba1ce3b87df1457144f53e3f6d05b5c6f92426ce4b0f8539ae422e1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -443,13 +424,13 @@
           "url": "/scenes/themis/themis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/themis/themis-shape-surface@2x.webp",
           "bytes": 221022,
           "sha256": "12ef18091e8044f32bafc5db7da9553c8f455e9e7e75a0dc2b0afd3622fce53c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -472,8 +453,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4612,
-          "sha256": "d52683aecf4f4cc231c9563a2531fde429b969fe3fc1b564a5fafffa905d086d",
+          "bytes": 4493,
+          "sha256": "1878b37a02882a96e958b2733ddef442d417ec1d78885a5ce8be4ac0559eb724",
           "verification": "bytes-verified"
         }
       ],

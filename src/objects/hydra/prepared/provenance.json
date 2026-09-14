@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hydra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f7c217a5b4ee8f92fe687e574994529c55b869cd4222b1d2ca1fe6d85370b971"
+    "sha256": "22d8f31a15400fd53fa8410b72475413c8ba8551dd94b229a17ff3f3b8b9c518"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "37961fe127adb95b91c7729421731b84b636e2a08e781f76722ed8e5f84b82fc",
+      "sha256": "f352586342aa02bed513d7fd79c79b3c0f8dffff6722c3b7d868c3acb2a4399c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hydra",
         "displayName": "Hydra",
         "publicBase": "/scenes/hydra/",
-        "distanceAu": 39.482,
         "raster": {
           "width": 512,
           "height": 256,
@@ -135,20 +134,14 @@
           "sunSource": "JPL Pluto-system ephemeris; rapid nonsynchronous Hydra spin. Mesh prime-meridian registration is unresolved and its orientation is a stated display convention."
         },
         "presentation": {
-          "defaultLens": "monochrome",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "monochrome"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "db78835311ba8a75c351bbfd73277a69bba4865322b04226e5d762d52d2dd2b9",
+      "sha256": "bb0b9e360cbb8d2df56bac39d1dd28d5bf61330de0cbca8a9d4f2a417c48c8bf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -235,12 +228,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -269,12 +256,6 @@
             "role": "composition",
             "description": "Calibrated LEISA spectral products",
             "href": "https://doi.org/10.26007/mc7j-ef52"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -330,7 +311,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -378,7 +359,7 @@
       "sha256": "8bbfce67597caf2bfef95e3f526f66cac7d967e9b425cb183a1088fc0e97d163",
       "bytes": 3043916,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -421,7 +402,7 @@
       "sha256": "7b225229428505208024279bf86104381ce24617e56be89a1cc89236ad17e91b",
       "bytes": 10529280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -448,7 +429,7 @@
       "sha256": "52d4415d0070d87828cf0a4794223bce26bfd5e32d411b3d988c10c8b349bddb",
       "bytes": 2917,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -465,10 +446,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "db78835311ba8a75c351bbfd73277a69bba4865322b04226e5d762d52d2dd2b9",
-      "bytes": 4079,
+      "sha256": "bb0b9e360cbb8d2df56bac39d1dd28d5bf61330de0cbca8a9d4f2a417c48c8bf",
+      "bytes": 3800,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -504,13 +485,13 @@
           "url": "/scenes/hydra/hydra-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hydra/hydra-model-surface@2x.webp",
           "bytes": 71382,
           "sha256": "a44dab31a19630cf501154fcfac5c659aa9ca5fe20da3e214dc040d58593a5ba",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -542,13 +523,13 @@
           "url": "/scenes/hydra/hydra-monochrome-thumbnail.webp",
           "bytes": 1806,
           "sha256": "1fbbc6a8ad6ef48bf64d273cd5e9d91beeb0b5d610ea7547abb5c13fcfef6bf6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hydra/hydra-monochrome-surface@2x.webp",
           "bytes": 100400,
           "sha256": "aeb9345b6492f3e4443433bb02e0dbe91eb8ac966bf5faa0de067b9119ad0e68",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -571,8 +552,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4684,
-          "sha256": "4352d072db5f8c19318349958f3d9827003757d6c91cbae8b29cc6a680ee334c",
+          "bytes": 4565,
+          "sha256": "3f67f8b63d846af98ef2d8370ed49301e598b13fd07c5187bfa5c257fe76043f",
           "verification": "bytes-verified"
         }
       ],

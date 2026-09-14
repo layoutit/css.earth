@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "felicitas",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "767738eeb554a94375166d5d48e3dd7b4e7b043733bf1e2bada352056a998bba"
+    "sha256": "90de138729295e40a2f206da1aa4d695c67fde2ca278aa13f8344272638d98c3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cdb1fcfaddb8f20e1c518a5c673c5cce47b6d332cf1ddf285f0b7b56e828231c",
+      "sha256": "c21f7094b70a8a176cefa1a3c16b689a3e534921e716892b67f07d55daa04266",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "felicitas",
         "displayName": "Felicitas",
         "publicBase": "/scenes/felicitas/",
-        "distanceAu": 2.6925655976731475,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 3097 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8272ea490eeb320a863d02f2ea363169ad873bfae21d7dde824ea18f44aa4326",
+      "sha256": "3bb18668f86262ca34c182ec12acd0c58658c3cc84b8e17ae63cee37b087b644",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3097"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "7c4aa5b44d5ef71a8caa8719f647e29ac0d4dc23d64f50ca30c682718df9a9e0",
       "bytes": 79953,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8272ea490eeb320a863d02f2ea363169ad873bfae21d7dde824ea18f44aa4326",
-      "bytes": 10257,
+      "sha256": "3bb18668f86262ca34c182ec12acd0c58658c3cc84b8e17ae63cee37b087b644",
+      "bytes": 9978,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/felicitas/felicitas-elevation-thumbnail.webp",
           "bytes": 6228,
           "sha256": "80ae5c37d208730fa7101a179b65c583f6d1ff694edbdebbdae8c6c734e1d9ca",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/felicitas/felicitas-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/felicitas/felicitas-elevation-surface@2x.webp",
           "bytes": 316328,
           "sha256": "8a9281329bb9a67cc6e8bae78e51bca174590caf264a47c79e362cc19579698f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/felicitas/felicitas-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/felicitas/felicitas-shape-surface@2x.webp",
           "bytes": 230646,
           "sha256": "64b701c946202afefc0fbf6e9ce2e7608bb818562a263e2eaf637feb7f1711b4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7589,
-          "sha256": "5ae7ca244eb3afaaceda8025c937e8bc7a125126daaeae421bd296135ef285e2",
+          "bytes": 7470,
+          "sha256": "1d7452e4bc509f34b4b5c65d4f22958c0c39c51e3e461aaef27a60ed3c3614e6",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "toro",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "55de496a0fc199cb80064181a7cc7afdaca952d7e57a43d8382e4218e91543f2"
+    "sha256": "cce6bdcc26f69ad9ab4a2d2b4a0d311eafc750286ff267c317b5c7d51d301311"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a25876d96d35c0c57780da548a180216ce324752ee9fee74a5679d824c6ea597",
+      "sha256": "6b75431029a5b432434ceec414a4f51cbd405ec49f37d56ba52812a4cbe9baa4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "toro",
         "displayName": "Toro",
         "publicBase": "/scenes/toro/",
-        "distanceAu": 1.3678992132175503,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1862 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "71a9c76a341f7563050db9bdce3e2e422faf16219cd7b9fc28ddce1ade4723c3",
+      "sha256": "e8df64f94f643cf34b55d41d512180e55b59537e8cc89024006fe5120d6e60d3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -266,12 +259,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -294,12 +281,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1862"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -368,7 +349,7 @@
       "sha256": "37dcd0f6ee31357b06abbd911720dcc46f36b7dd28bd1449a29a202c7dc8c373",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -393,10 +374,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "71a9c76a341f7563050db9bdce3e2e422faf16219cd7b9fc28ddce1ade4723c3",
-      "bytes": 7896,
+      "sha256": "e8df64f94f643cf34b55d41d512180e55b59537e8cc89024006fe5120d6e60d3",
+      "bytes": 7616,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/toro/toro-elevation-thumbnail.webp",
           "bytes": 5174,
           "sha256": "dcd948a40cde773d1926abfe06a4d02fb49e881e62c279e20bbd8caed7b110b2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toro/toro-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toro/toro-elevation-surface@2x.webp",
           "bytes": 280902,
           "sha256": "f22d0f042e6f472a8d4fef607577448c3e4ec53806695bb6b56a902446c82d65",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -469,13 +450,13 @@
           "url": "/scenes/toro/toro-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toro/toro-shape-surface@2x.webp",
           "bytes": 217542,
           "sha256": "4935ea31afd6dc41b631b4922660a71757a3269e2ec24005f21b87b669b8f522",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -498,8 +479,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5124,
-          "sha256": "2bc1c35a08dfe1be58a4b334ff03dcd48ffe3b98d13e78f93c38df6829938ff7",
+          "bytes": 5005,
+          "sha256": "da595a7b541dd24b3a3dbbfc8734295b561fd287627c855f7108f26cc12ed00c",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "fortuna",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a0023660bd112eb0109b1b9ec8aba644656124255089d16fa9458612d6aece10"
+    "sha256": "5d4dcb54fe016e439be87fa16b5f1588c0d5c28364c136b0f1e2c1127d2ee926"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "05d03aba4a5cacbe9de6e493d93e8ebbd2330a5cf435101ef58a0cb8a785ef73",
+      "sha256": "b6b5e3381de89ad77e885045dfd8f4e82634b9a5d28d2ffcefed86c8f43be0b4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "fortuna",
         "displayName": "Fortuna",
         "publicBase": "/scenes/fortuna/",
-        "distanceAu": 2.4414298428674326,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a0b31164567ac9461eb33a84fa1f7512d3f56bb17a73bfac92e4f749eb1d1981",
+      "sha256": "32a1815d487792ababdd6cda790e13b01d16f467a79a4d5bef08197e374ca3d1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "2524c91828685a8f8e6d12a96e84187c2b7b68da1723c3055265f561380af726",
       "bytes": 557179,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a0b31164567ac9461eb33a84fa1f7512d3f56bb17a73bfac92e4f749eb1d1981",
-      "bytes": 7085,
+      "sha256": "32a1815d487792ababdd6cda790e13b01d16f467a79a4d5bef08197e374ca3d1",
+      "bytes": 6806,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -401,19 +382,19 @@
           "url": "/scenes/fortuna/fortuna-elevation-thumbnail.webp",
           "bytes": 5534,
           "sha256": "b42567210f3f8d4763c5269cb6935011c774a6c69b033c88a418a4e1d94f7abf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/fortuna/fortuna-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/fortuna/fortuna-elevation-surface@2x.webp",
           "bytes": 309980,
           "sha256": "c17f9a6d7eaec220af5155d593ddd531068d2d07b86466b74f7f2fa9e46cdd70",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -443,13 +424,13 @@
           "url": "/scenes/fortuna/fortuna-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/fortuna/fortuna-shape-surface@2x.webp",
           "bytes": 224710,
           "sha256": "e8af4a99e44dc6ea5eef13803aa1528427f81139ff09bdf76fe9c93c5f9afffa",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -472,8 +453,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4905,
-          "sha256": "7dfbd63c4c4013da96cea7f314719eead32782883badeb24b3f8f9f9c54b8068",
+          "bytes": 4786,
+          "sha256": "c109329b5caef86da422a5d57575aee43b39dd0d2ce3060db6e033c38cca739e",
           "verification": "bytes-verified"
         }
       ],

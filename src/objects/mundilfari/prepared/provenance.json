@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mundilfari",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7e90a18034350b8b4143a319ed5444069cf194e39926e2584bd95be8474aede3"
+    "sha256": "acbc481a339a85f1e969978c34bcaa41238a9b0c911363f2383e93ce9e7c4509"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8268d24b96342549afa8b13f5243502b60ea8af21323597b7452aeb185ae1df9",
+      "sha256": "09c5f382e885a5d9b3677bbfa1af296c10107e59d6f915e2f3b07e0c798e8b8f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "mundilfari",
         "displayName": "Mundilfari",
         "publicBase": "/scenes/mundilfari/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Saturn-system ephemeris; Physical pole, spin sense and current rotational phase remain unmeasured. The displayed motion does not fit the Cassini lightcurve."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a99c8d5baee5c95a68a805dd41012e21f53e943badc47b7f9cb74c5170a47e9f",
+      "sha256": "f29827a2c794889f38ece5d6dc5c3a21553dddf9e5a9072ca9e6bc39412db78e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -188,12 +181,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -216,12 +203,6 @@
             "role": "observations",
             "description": "Cassini ISS archive",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -314,7 +295,7 @@
       "sha256": "a0336f06626b022432ccfa9686400891c605332ebe826f6f134faae71bd17594",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -331,10 +312,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a99c8d5baee5c95a68a805dd41012e21f53e943badc47b7f9cb74c5170a47e9f",
-      "bytes": 3374,
+      "sha256": "f29827a2c794889f38ece5d6dc5c3a21553dddf9e5a9072ca9e6bc39412db78e",
+      "bytes": 3095,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -370,13 +351,13 @@
           "url": "/scenes/mundilfari/mundilfari-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mundilfari/mundilfari-model-surface@2x.webp",
           "bytes": 55544,
           "sha256": "7ed6c16d23077146020d1d9fa5147122faa590d96ab6cc1f67f2bb44bb107e92",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -399,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6392,
-          "sha256": "30c88ffaab596a5c689abac7e2f6d6cc80fdb48d3a812fcf9653aace3608a87f",
+          "bytes": 6273,
+          "sha256": "f9bc20d64460f23f1ab369e66360f4f337bd166e6a6da804b6dd6ca62ebceae2",
           "verification": "bytes-verified"
         }
       ],

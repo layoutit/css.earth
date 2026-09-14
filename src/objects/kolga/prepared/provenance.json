@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "kolga",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "17a687f999da248e27f4647071f51575152262e5aab7395618289a2488d57b5f"
+    "sha256": "a59e68526e5c67e9b5cc09aa9904f1163a4afc09ba77ca3e6d8e5b02c94fe4bd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "07cadc86982e53ffadd6f6e09369bb103f5c28759e6ccec326689438c580b24b",
+      "sha256": "e609000eca22a2c8c8a4d8695eea9971f81bb48dd22e6acde13906cb32570cb7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "kolga",
         "displayName": "Kolga",
         "publicBase": "/scenes/kolga/",
-        "distanceAu": 2.8959502139804503,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 4072 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "33e5b024d3b872cf19f701e424032aab761909da9655c12b5f69ad5309b44e3c",
+      "sha256": "4481647f37230d05051029874c15216730c8066bbe02b61741e6a5028a6adc58",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4072"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "74994217a690be9e8736a7709f52c8e70c80a0f63c0d7160f73e7cd9924ec078",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "33e5b024d3b872cf19f701e424032aab761909da9655c12b5f69ad5309b44e3c",
-      "bytes": 9120,
+      "sha256": "4481647f37230d05051029874c15216730c8066bbe02b61741e6a5028a6adc58",
+      "bytes": 8841,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/kolga/kolga-elevation-thumbnail.webp",
           "bytes": 5796,
           "sha256": "4751895b49ffa927eeb7d4a5491899140b1d3651197993f4af6436a307bfca86",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kolga/kolga-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kolga/kolga-elevation-surface@2x.webp",
           "bytes": 297772,
           "sha256": "0410f5b9a31b4c6ccd2dd3f6a560b929dcb8c3b1e074e1348e73c3e384d97bf5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/kolga/kolga-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kolga/kolga-shape-surface@2x.webp",
           "bytes": 241814,
           "sha256": "23882c3ac95da1770607888c81c5ac318a1c9707c7c57c71dfa9e309fdd7f018",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6498,
-          "sha256": "07cb180278b6d0d08f84534a70cddd6ca3f4ccafc75c8bbaafb4208f37622671",
+          "bytes": 6379,
+          "sha256": "ce8addbe8efa4f06b78ca410891835493f7bfcf5d96b1d4497a9ecd80f0c2509",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "unitas",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0e5695a4aa631eef87020922475570ed28aec64e238f9f8937ae1fc8ff4d6b66"
+    "sha256": "97a13098ec1a2225b5bab507b75b69ea6666ca15c678ff210f4ed10d2f89e5ff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1cf51137c7f7ec921c1cc900c8814aaf236712e598f9fdf85f5da5bb881f85a0",
+      "sha256": "e02d6a4a274f2d5bf406331b928f6db7adbb35d545b477eae551d857be17444f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "unitas",
         "displayName": "Unitas",
         "publicBase": "/scenes/unitas/",
-        "distanceAu": 2.357778522320458,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 197 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c6f4340ac55a33b3787ab02bb38475f3beb65b3897368ae761d1c07aec0ac300",
+      "sha256": "e66a8cf9b4a8ccb0f3894fbf0e53c6560521b52616939fb31d0949a7f10d1fd8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/197"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "e3b4f00f07c7daec58d937c2ec27613c00c336979c81241dcfeb593048bbca64",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c6f4340ac55a33b3787ab02bb38475f3beb65b3897368ae761d1c07aec0ac300",
-      "bytes": 9162,
+      "sha256": "e66a8cf9b4a8ccb0f3894fbf0e53c6560521b52616939fb31d0949a7f10d1fd8",
+      "bytes": 8883,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/unitas/unitas-elevation-thumbnail.webp",
           "bytes": 5788,
           "sha256": "1a0bd4817900313c84fa8398ffa16d5ef0014b73a5eba9099ad173ac90b05bec",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/unitas/unitas-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/unitas/unitas-elevation-surface@2x.webp",
           "bytes": 297574,
           "sha256": "560566544640458355939366e005a7848edeb187518b62f1f7b3cba3d3fecb4a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/unitas/unitas-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/unitas/unitas-shape-surface@2x.webp",
           "bytes": 225794,
           "sha256": "c0c93bd7a5664167f3932f8ddd4677840fab7d856ca0c9ac1731325c24b3da4c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6534,
-          "sha256": "447800ae5657a3b17ec7a181d39ef88eae3c66b9c29380fc3d34f3ccc2de9b88",
+          "bytes": 6415,
+          "sha256": "0121b99affb32c26bfcf2e0cccf2bd894956de20f5ff6ae6c6c1bc6f48b22d75",
           "verification": "bytes-verified"
         }
       ],

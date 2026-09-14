@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-8p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5cfdd8be3f0193dfda5ca2ded0c0fe1fe6ffe62824eb2912c9b6efec2bcc8f6c"
+    "sha256": "6d7f4c31d31be432aec787daef0ac269e440ec0637522fc49593e051fd3c4b66"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1f8074a74c5d85afba3b718a07779ab0f48a5539d67b37ab6e0456660288211d",
+      "sha256": "367e465e11cab17ca24edac66edbf5a6e97ee06514c87fff328025afe8e437b2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-8p",
         "displayName": "Tuttle",
         "publicBase": "/scenes/comet-8p/",
-        "distanceAu": 5.706764532787596,
         "raster": {
           "width": 512,
           "height": 256,
@@ -207,20 +206,14 @@
           "qualification": "Two touching lobes inferred from Hubble brightness changes and sized using Spitzer infrared measurements. The smooth gray surface represents the model. Its rotation phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d00c37189954eaa16bb6383591b7925d3a39e7c7accb0941c8890c79dca805c3",
+      "sha256": "ce5629aee40cb9ecaff001ef7744db9d2ad24db9276e72f3010b60e9d3dce909",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,12 +302,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -331,12 +318,6 @@
             "role": "observations",
             "description": "The alternative Arecibo radar model",
             "href": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -434,7 +415,7 @@
       "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "bytes": 137,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -464,7 +445,7 @@
       "sha256": "5e77878847b22470f97526a424915efd34a6feef44d11482b2104b320c33d12e",
       "bytes": 896,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -498,7 +479,7 @@
       "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "bytes": 137,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -528,7 +509,7 @@
       "sha256": "1ce08f3c47306e7bd0fa70685e55e111cfdbd01ede582c167bb9eb2093bc2022",
       "bytes": 1154,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -545,10 +526,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d00c37189954eaa16bb6383591b7925d3a39e7c7accb0941c8890c79dca805c3",
-      "bytes": 3643,
+      "sha256": "ce5629aee40cb9ecaff001ef7744db9d2ad24db9276e72f3010b60e9d3dce909",
+      "bytes": 3364,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -568,7 +549,7 @@
       "sha256": "4ec0506d8e02b4fcc8fd5bb42bfb9584c0ac9c0ca2b703b268d335bd92a1a22e",
       "bytes": 1010,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -588,7 +569,7 @@
       "sha256": "c44248203014bbbaacb4b926763a747f4dc0fce5536d672bbeef191671ba4bac",
       "bytes": 155,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -614,7 +595,7 @@
       "sha256": "8c9a1e0d2803bed6d99a69492b943693ff5b5fecf9bf17b25654c17d1fb647ad",
       "bytes": 2066,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -650,13 +631,13 @@
           "url": "/scenes/comet-8p/comet-8p-model-thumbnail.webp",
           "bytes": 1458,
           "sha256": "01d5ce463e113416edbebb42a1cacc4bf75718c3debdd9297c6546de9d330dfd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-8p/comet-8p-model-surface@2x.webp",
           "bytes": 105472,
           "sha256": "578704d0981e7648e4ed30581dedab06d2ff32e89f1f751a057dc3fa6b19c0a4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -691,13 +672,13 @@
           "url": "/scenes/comet-8p/comet-8p-arecibo-thumbnail.webp",
           "bytes": 1298,
           "sha256": "40841a80d448e25210b873a102bf2c9ff11ca27e060cddd24a2a58af12022ef3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-8p/comet-8p-arecibo-surface@2x.webp",
           "bytes": 109186,
           "sha256": "63f03008ebbfcd2d767e3ea6bc7779970897a084bcaa89388f493e2ac0bc2930",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -720,8 +701,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3385,
-          "sha256": "8ee0ca7f05817644b06a278c6f2e6ceb1a88e68d30c7923ff38864650a444879",
+          "bytes": 3266,
+          "sha256": "a106a84606174c20186ea334e30ddc3ea16329a63335630f4aa9412acd73540e",
           "verification": "bytes-verified"
         }
       ],
@@ -754,7 +735,7 @@
           "url": "/scenes/comet-8p/comet-8p-features.json",
           "bytes": 3454,
           "sha256": "9facda5bfcfcbfe502828c83e72538e1e479b96e1dae80007b1c96d56a9d7df0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "steins",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "403c3692d13d6e91a9f71f973dbda6d3dd074ffb4edf510e6c97fc9ec35f4d28"
+    "sha256": "55cc90ae24f0e518805e688605824b0a8f9e6fc24283e46db618df162970e399"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7076a75a2b4d15399c344c439eb36de46e90deab43e1b2652242d8e045fdd27d",
+      "sha256": "65f62d859904de4d58fbcf6f49d59829b3356b738b4f0c1909268bdabe01b561",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "steins",
         "displayName": "Steins",
         "publicBase": "/scenes/steins/",
-        "distanceAu": 2.36320692758966,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -194,20 +193,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
         },
         "presentation": {
-          "defaultLens": "osiris",
-          "pointColor": [
-            180,
-            180,
-            180
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "osiris"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5630463a2e329b08951995123361970234d9f8a0f8186d32c2f5e3bf5a442395",
+      "sha256": "4fa01c09ff8ab742bd5e65c3d8262701a008c49cbfb3556b11db832fcb1e7ad1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -348,12 +341,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -382,12 +369,6 @@
             "role": "terrain",
             "description": "Jorda OSIRIS shape model",
             "href": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/dataset.shtml"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -512,7 +493,7 @@
       "sha256": "3362a9e73ddf7b4d11e9a4a2076e9c181d1c3e6e70a2ff71f742e27b6a96e9c9",
       "bytes": 725269,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -558,7 +539,7 @@
       "sha256": "4ef16c6d805336dc4dd878835e900b62c8ba4f0f8056da1ae18189cb6dc67aff",
       "bytes": 2470000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -595,7 +576,7 @@
       "sha256": "8bfed974937fd7efc870911d9d7c6c8e2938e56633f0987f51bcfbd1388678f6",
       "bytes": 615424,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -623,7 +604,7 @@
       "sha256": "3b855f3764ab7baa2606a03fa3495e84ee8f4e3f0971d7a8757e5f29371069e9",
       "bytes": 2899,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -649,7 +630,7 @@
       "sha256": "f3c3f69503c25b4508d9d9b3fc37a602b0d25b8b7c843016c099c31d72e1791d",
       "bytes": 615424,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -680,7 +661,7 @@
       "sha256": "c300b7604f69398ee30f89554bd79e5aaeaa722ef48e4fb58a9d0425ca87430e",
       "bytes": 2932,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -697,10 +678,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5630463a2e329b08951995123361970234d9f8a0f8186d32c2f5e3bf5a442395",
-      "bytes": 9767,
+      "sha256": "4fa01c09ff8ab742bd5e65c3d8262701a008c49cbfb3556b11db832fcb1e7ad1",
+      "bytes": 9488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -720,7 +701,7 @@
       "sha256": "987fa5861a1e49485dd57340708cd38ca9b863f1538f09c02e686bb6333243c0",
       "bytes": 1004,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -746,7 +727,7 @@
       "sha256": "16001f4727a58377f0482f02f19f38cb1da71930894acbc9c7c7e5f007ffb5e6",
       "bytes": 99707,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -773,7 +754,7 @@
       "sha256": "d3f502433696ef6dfb39d4070fc32ebe84d266034f2857e3d0221508152daf8a",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -800,7 +781,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -845,13 +826,13 @@
           "url": "/scenes/steins/steins-normal-thumbnail.webp",
           "bytes": 3332,
           "sha256": "ec0458c470557ad861f7b96fcfbcb3b506fb78c696c6fbb7fc7f69d85c07b7a4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/steins/steins-normal-surface@2x.webp",
           "bytes": 549196,
           "sha256": "57e0d02efc28bdcff47299bd63b29b776a12a90bc98cef36f498bfee9c083c1a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -881,19 +862,19 @@
           "url": "/scenes/steins/steins-elevation-thumbnail.webp",
           "bytes": 5488,
           "sha256": "c08bbe36248074cd7b95ccc68f8af37ad32b32ce305525cee72d46e53efefc87",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/steins/steins-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/steins/steins-elevation-surface@2x.webp",
           "bytes": 326066,
           "sha256": "ad844e537f006d2ad48935b7be2ca29f89fd1eb5bc24ac22b2fb21ef7b458f09",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -927,13 +908,13 @@
           "url": "/scenes/steins/steins-osiris-thumbnail.webp",
           "bytes": 1672,
           "sha256": "118b33b0b5ae52e2a5beaf35bfb7f08a74af35cbf1209132d304529b848bc208",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/steins/steins-osiris-surface@2x.webp",
           "bytes": 298938,
           "sha256": "f288d6973feef9a9ec85fbca44a405f36ed203ba5e86505121d443dd84f56232",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -956,8 +937,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5776,
-          "sha256": "1a3571a78feba9b1501ccfb99ffa14392814c29d8a86622ef1b9267b7f96ab7d",
+          "bytes": 5657,
+          "sha256": "44ea23fadca3517e40a72255255f3f7e3542c5d0f0dffd2b6d70b8756a605068",
           "verification": "bytes-verified"
         }
       ],
@@ -993,7 +974,7 @@
           "url": "/scenes/steins/steins-features.json",
           "bytes": 17067,
           "sha256": "55da6b09e2ece924b9acbad3608143bf84010df77d4a2606ef149422a0e6f541",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "loreley",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1fbe8af529168d45d51499e345b4d55f3583cf35bf11ca6dc2a4c75e9e35b0d6"
+    "sha256": "56b3686cba9b185d1f9e38e3946b8ada6656daaa73a75039f6b7eef70628bce0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "82aa198ea9bc6c7cdc4ff16eba2018b62d0bce8fa6ce6333f5df04eab43ca7de",
+      "sha256": "9b177461a9ed1edc00d1d057de312d7505b111719dc272c969921c94f50ad561",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "loreley",
         "displayName": "Loreley",
         "publicBase": "/scenes/loreley/",
-        "distanceAu": 3.126208058670846,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1809 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fb5441bc70bbf11485d157f45b23d92214d61ef9063b90bffa373c33f5ee9ad4",
+      "sha256": "bfd025ded02a54ba07a39539abe5081562ff45ac4629d785137ec051082c1647",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1809"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "0da05739bf0a1b246d7930dbcc5e8d8a7198a16b02fb97ea8ff9d3f38703c9d6",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fb5441bc70bbf11485d157f45b23d92214d61ef9063b90bffa373c33f5ee9ad4",
-      "bytes": 8978,
+      "sha256": "bfd025ded02a54ba07a39539abe5081562ff45ac4629d785137ec051082c1647",
+      "bytes": 8699,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/loreley/loreley-elevation-thumbnail.webp",
           "bytes": 6112,
           "sha256": "4d6358501add844df181936f27c1fe21cf4646713c86d025130e7d00db22946f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/loreley/loreley-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/loreley/loreley-elevation-surface@2x.webp",
           "bytes": 340198,
           "sha256": "7c6315aee17c59dce2ab498784a55fd065d73c73ae852ac2e4033d6ad7e8d071",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/loreley/loreley-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/loreley/loreley-shape-surface@2x.webp",
           "bytes": 207384,
           "sha256": "f65254d68da63dc4e01c94733a04e1f3617c8e53399ac60fffa4a9cb55fe163f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6334,
-          "sha256": "2eedfdbabcb9eb3e7e0fda9729966c7fab3f406f004380a729a8f8a2a59f372c",
+          "bytes": 6215,
+          "sha256": "35867ba97a633ba6a95a94add58fb06a47435924a727e2394f7ee42ca69791c2",
           "verification": "bytes-verified"
         }
       ],

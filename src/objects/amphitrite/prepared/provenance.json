@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "amphitrite",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b97748d8df8e2f1561ceba51c8c37b9fdad48bd7ba41a8eed5cf0c34ca217ede"
+    "sha256": "f07e9ac9d72e83a74b3b05343939fe6562f1c45cb2da2a689e3b162818ddfe55"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d89341a5565509628c671054700db84fbe9fe4c5ecf91eefe8a21f39fa7e4eb1",
+      "sha256": "e2b7b60dc2eec1575f92dbd54e1ac7698e40cf55f093a8c05b361c197320d18d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "amphitrite",
         "displayName": "Amphitrite",
         "publicBase": "/scenes/amphitrite/",
-        "distanceAu": 2.5547309956514517,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "44a42290d474a5041d1e3b5710bcc7ec9f53c013db6ca3e0765282df01341240",
+      "sha256": "25ff65a9665654bb76504637df5452e75ea0a17f6564c737e95c125cc6c0efb9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "2f5544aa2a2d416094b1367d833a44077f83ed2fa9a0d64ab13154f2a843c18b",
       "bytes": 81979,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "44a42290d474a5041d1e3b5710bcc7ec9f53c013db6ca3e0765282df01341240",
-      "bytes": 8104,
+      "sha256": "25ff65a9665654bb76504637df5452e75ea0a17f6564c737e95c125cc6c0efb9",
+      "bytes": 7825,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -401,19 +382,19 @@
           "url": "/scenes/amphitrite/amphitrite-elevation-thumbnail.webp",
           "bytes": 5974,
           "sha256": "a8a320075b3def059de09d7576ec5bfdab4b7d65b0ced603d18826099adfc1e0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amphitrite/amphitrite-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amphitrite/amphitrite-elevation-surface@2x.webp",
           "bytes": 315570,
           "sha256": "98e6f6c0798e747a5e4fc9d12b86e0cf49c2d81b9496b1306b272cff03d009be",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -443,13 +424,13 @@
           "url": "/scenes/amphitrite/amphitrite-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amphitrite/amphitrite-shape-surface@2x.webp",
           "bytes": 224540,
           "sha256": "f96c1014bd1bcca8e3a6aaacdd63fe493e9897e48f5440930ade8faca70a6eef",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -472,8 +453,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5885,
-          "sha256": "596b2bbcea05808c12c9b041f4e3a47ba6e9e25c134c9a1997274a3020a05e13",
+          "bytes": 5766,
+          "sha256": "65221670fc7ee3a900aa976bffc67630f1d1059dd3017eafe3bb1736decd98d9",
           "verification": "bytes-verified"
         }
       ],

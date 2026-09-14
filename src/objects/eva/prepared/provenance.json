@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "eva",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "530a411c0635992ab1bd7fb24e8228ba13fb2ebf6c11e7ba90cec2fa92bb502d"
+    "sha256": "867a5a819c9d7324083d420eb8cb3068122085d1e2998e5a813b1d0409d8e459"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1f9f7f4c9c26feffc3754a9a31a420b67c9684e93e3e1f693aff7bb602b15c8c",
+      "sha256": "e85ba92963d413e748390266e885c58a20284ce6d33f58e74e20c2691170bf23",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "eva",
         "displayName": "Eva",
         "publicBase": "/scenes/eva/",
-        "distanceAu": 2.6327474235794797,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1021 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "286e9e56102332daa0e2147f3050cd12c07064a755580a6700d28f6064548cf3",
+      "sha256": "6250b6feb347ca157f141faf2e881d315a127565b80a9d1dea83a3093298cf79",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1021"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "c9f55273db249c8adb0a08784259e0967e93a8f1876f48dd6afe7d7f634ad87d",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "286e9e56102332daa0e2147f3050cd12c07064a755580a6700d28f6064548cf3",
-      "bytes": 7660,
+      "sha256": "6250b6feb347ca157f141faf2e881d315a127565b80a9d1dea83a3093298cf79",
+      "bytes": 7381,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/eva/eva-elevation-thumbnail.webp",
           "bytes": 5314,
           "sha256": "b45b37b2acfc4114f06f431b9ebc719e46a5a68ddc9623f91da08710fe2ade98",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eva/eva-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eva/eva-elevation-surface@2x.webp",
           "bytes": 268338,
           "sha256": "a7b95e46b3c66e953b939e98de456286965690c057614534036b8faf0a23390a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/eva/eva-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eva/eva-shape-surface@2x.webp",
           "bytes": 227314,
           "sha256": "1432a8b8143afeb23d3413d71febfe46c3b3442292d45d4bc2d8c7a84cc7ea15",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5065,
-          "sha256": "541b877ebad7a0d2b8d0d839c21b5506dc65ca9aeee5fa45fa228316da8f3c11",
+          "bytes": 4946,
+          "sha256": "e4de18df23674376b8087a0461b2bb37717d6008ed9d72600d9eebeb228c5806",
           "verification": "bytes-verified"
         }
       ],

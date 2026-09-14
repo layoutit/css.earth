@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "leucus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "afd210335bf19c60f63fbc1ba4d4f37786a2485deff731539c543428bd597c40"
+    "sha256": "7f61ee4eef103218493ff75a217671cb32ca621cc38c801a82116f1f296b21c8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e68088180d392d5de0ae73c708c103b1ed3cda2688fb7b7c5a8cb1604f2796f7",
+      "sha256": "cbacabeb94f2ed0dda7894be2e68df4f487cf92e0cee8be0a7913edd3c881efa",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "leucus",
         "displayName": "Leucus",
         "publicBase": "/scenes/leucus/",
-        "distanceAu": 5.2,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c22432bb0c8b0fef54a36945a01afed2237456b55e8be6ebc026087503bd5a87",
+      "sha256": "0b09598023876fd4f8b77c7c8f9f54c26585402a7e5aa621fe7a2f805ed228af",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,12 +164,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -199,12 +186,6 @@
             "role": "facts",
             "description": "Published model and interpretation",
             "href": "https://doi.org/10.1007/s11214-025-01173-7"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -260,7 +241,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -295,7 +276,7 @@
       "sha256": "113b8dbb6c6b971a1acec8b926afdb7df7ba40e5d2a63b45565766fd2438284c",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -312,10 +293,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c22432bb0c8b0fef54a36945a01afed2237456b55e8be6ebc026087503bd5a87",
-      "bytes": 2955,
+      "sha256": "0b09598023876fd4f8b77c7c8f9f54c26585402a7e5aa621fe7a2f805ed228af",
+      "bytes": 2675,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -351,13 +332,13 @@
           "url": "/scenes/leucus/leucus-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/leucus/leucus-model-surface@2x.webp",
           "bytes": 47842,
           "sha256": "8fc5b50dc871de86ff9338b37e11232f28434f9d17f16d5c9c348204776d6628",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -380,8 +361,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4965,
-          "sha256": "2e202c155e5ecd65fbd8a49da9709cb9a3dc81417bf1a4a4135ac6c907bdc791",
+          "bytes": 4846,
+          "sha256": "650dd716433153a40cab5555eb6819d05d283e02bbecd7ad9464315f26a08948",
           "verification": "bytes-verified"
         }
       ],

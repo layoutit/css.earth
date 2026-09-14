@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "phocaea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "08e78f16ee3141ce30431eacee9eb3b1cbb9806d13e783125cfe19bfc7d95516"
+    "sha256": "dd2bd47fa26bafa1adcfbab27b5aff1ead552f7ca4f29cc9c7dea4d7388f3376"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a250cc0d0b4b01d05760edb19129b380cf2cc1defa9189c0b3dee6ed308566c5",
+      "sha256": "1fa6f2e8be2eec35b09c6e2d2c8bf88c5e64843a2912bec60eb2e44de3b45573",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "phocaea",
         "displayName": "Phocaea",
         "publicBase": "/scenes/phocaea/",
-        "distanceAu": 2.4015197093590164,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 697 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8e1622b130f163967f776d495076c3ac2ec0b60dbb55ce7082867b996928d7d4",
+      "sha256": "0572f7e815b0073d234b3949a13255db1384a5b18b64f1e52eba26e9bcd3718c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/697"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "508b7c0d7855f6aa60a8aa63d9ed3f2f7226718ca88d3eb72b0427228b69804e",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8e1622b130f163967f776d495076c3ac2ec0b60dbb55ce7082867b996928d7d4",
-      "bytes": 11149,
+      "sha256": "0572f7e815b0073d234b3949a13255db1384a5b18b64f1e52eba26e9bcd3718c",
+      "bytes": 10870,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/phocaea/phocaea-elevation-thumbnail.webp",
           "bytes": 5188,
           "sha256": "0f4dd4cbce28ae3e57c3cba67ff8cf2fcdf2944f5f46a8940c487d240565128a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phocaea/phocaea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phocaea/phocaea-elevation-surface@2x.webp",
           "bytes": 258658,
           "sha256": "1037289079eefa6390e3781c84462738971ac7ca53e1bcca874e5b106e0814ea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/phocaea/phocaea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phocaea/phocaea-shape-surface@2x.webp",
           "bytes": 217110,
           "sha256": "92e0dd157b3293def0198450bd527ad9b35781deb15d31eb0dcd7cf0bf5352d6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8502,
-          "sha256": "bf52164f0cce40418c30980169469ded5d99f70e1fea0d735cf2655102668fdf",
+          "bytes": 8383,
+          "sha256": "3231ee26ffc48c9ddb4324e0bd4e4a0d6342fee018a9e8fa0d23faa8e06e4e6a",
           "verification": "bytes-verified"
         }
       ],

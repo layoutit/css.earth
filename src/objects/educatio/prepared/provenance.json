@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "educatio",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1ea5d88db285f3041e436590ff7e88327463418d7f24cbdacc400cc85df986c5"
+    "sha256": "70a790174a6dc87bcbad870f0d2743abed8da13feb3177ad7be9dc7c7228448c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3bb55be6c28f6b3a584735911a9b53df73693b97f6b980a900b99dd318173724",
+      "sha256": "1702e6769b194119160c5c2faaa53b14019da5e8c14246ae0c34a6d0f278b604",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "educatio",
         "displayName": "Educatio",
         "publicBase": "/scenes/educatio/",
-        "distanceAu": 2.2152610738212455,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "aa679d09db9e4d34db77f90c804870d0620e5bf01ed21fcd1bab0585e0bf8458",
+      "sha256": "779039ffcedb7662231c35c3dc1f9e7d8e77619bea48fa5caa90abb81ac94384",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/9541"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "1aa7bf28a3514adb552d13c7061f7734b81e281b2d8e5a2f97958256ea2700f0",
       "bytes": 45933,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "aa679d09db9e4d34db77f90c804870d0620e5bf01ed21fcd1bab0585e0bf8458",
+      "sha256": "779039ffcedb7662231c35c3dc1f9e7d8e77619bea48fa5caa90abb81ac94384",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9477,
+      "bytes": 9198,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/educatio/educatio-elevation-thumbnail.webp",
           "bytes": 4738,
           "sha256": "2a2bd40e3fd9b6cc72ab87b20447813a7be1be44f299d50dca265200e630bfef",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/educatio/educatio-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/educatio/educatio-elevation-surface@2x.webp",
           "bytes": 293944,
           "sha256": "c4124f6a4ac4b4833f6fa49471c52eaf4dd2b4d5e752eeff583436210b2343c2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/educatio/educatio-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/educatio/educatio-shape-surface@2x.webp",
           "bytes": 181068,
           "sha256": "f60060748a4ccde42529bad722a94ac161dd5dad6ae59cd362661ae3cb7aad2b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6771,
-          "sha256": "2cdd947c40dce1374225c42dc3ec11ffae8c66ea183c399ac51f7ddd05188b03",
+          "bytes": 6652,
+          "sha256": "e3649534083d007a1950a0447af0ded19225617c3696ecec466d8ea76f970f14",
           "verification": "bytes-verified"
         }
       ],

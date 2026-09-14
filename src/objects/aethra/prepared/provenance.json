@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "aethra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2d36c2ea7f43dfaf5c4fbfa121cf8fbb94bc9c21728cd1a9eb2870637df20ca7"
+    "sha256": "69e8cc33784528e665150d117ff3c11f0871a8b480c81393349e5409ae83cd85"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b221e75d6566e40d033b9a410a015aae90bca8289a7f0872805ce327654b2479",
+      "sha256": "88ef69a386d2dc7636157abb76c469f50edfffe6be5beddcf0ee6e40597e84b0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "aethra",
         "displayName": "Aethra",
         "publicBase": "/scenes/aethra/",
-        "distanceAu": 2.611974207733697,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -137,20 +136,14 @@
           "sunSource": "DAMIT model 161 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "69ee8d782078cc47e12c53e222a1323cee772df8be624451282b38174b457218",
+      "sha256": "c8ef5c7a2c7556e20fa2152dd6fcbf62e30f03ac1ed166ca80952f09418159d0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/161"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -369,7 +350,7 @@
       "sha256": "c05291e6311058380b5fa35a033df4579bbfc67922699d57fba7c5898c8d5e41",
       "bytes": 81898,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -394,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "69ee8d782078cc47e12c53e222a1323cee772df8be624451282b38174b457218",
-      "bytes": 9331,
+      "sha256": "c8ef5c7a2c7556e20fa2152dd6fcbf62e30f03ac1ed166ca80952f09418159d0",
+      "bytes": 9051,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -428,19 +409,19 @@
           "url": "/scenes/aethra/aethra-elevation-thumbnail.webp",
           "bytes": 4846,
           "sha256": "e48ee96e65516824dd4329bff8382640a10a3d34453962d61c56247d1c6fc29d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aethra/aethra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aethra/aethra-elevation-surface@2x.webp",
           "bytes": 253776,
           "sha256": "264ab0d41e18352262fd23709506635bc1dc9f236e49b0be13ead772e613c50e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -470,13 +451,13 @@
           "url": "/scenes/aethra/aethra-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aethra/aethra-shape-surface@2x.webp",
           "bytes": 207500,
           "sha256": "770238dd74b0247bd26c4d5df0c1738e1aa9c5246c147fc4d5565b34e548ebdb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6458,
-          "sha256": "801fcbd54ff7532cc712042b561c827b718cbcb686945abae5f6839fba283d51",
+          "bytes": 6339,
+          "sha256": "4f56486b2528a6bcbffc79f596b68d40fc5f7005fedb5d755096533cee71ea92",
           "verification": "bytes-verified"
         }
       ],

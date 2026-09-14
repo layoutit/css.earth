@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "puck",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0f91d1ac2ad63c1c06ecc25e78cb7f00199cc85ccb89123c7c2f14d26eb57afc"
+    "sha256": "1d109599dc68fb035b7050e689bdf0395496e1a5dbfdaff842418afe8e4425ab"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "88ed72b63e85e5c747d4ac17569b989e02c254288f06de2c9f2d4cf7b14629dd",
+      "sha256": "fca510d159e67273da72026469c761e105e66ea8aae0a9bb41f53275dbf13bda",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "puck",
         "displayName": "Puck",
         "publicBase": "/scenes/puck/",
-        "distanceAu": 19.19,
         "raster": {
           "width": 512,
           "height": 256,
@@ -137,20 +136,14 @@
           "sunSource": "JPL Uranus-system ephemeris and IAU/WGCCRE Puck rotation; calibrated Voyager image is registered in that source body frame."
         },
         "presentation": {
-          "defaultLens": "normal",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "normal"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "33cc13defeaf3dbe010e75fbe43705851d5f3e2c1e1bcad3fafec4307d5d96ef",
+      "sha256": "08da394be7aa66ab0f41bde31fe3259e9d5c521049f4f323334291be2f438df8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -217,12 +210,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -239,12 +226,6 @@
             "role": "surface",
             "description": "Calibrated Voyager clear-filter image",
             "href": "https://pds-rings.seti.org/voyager/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -307,7 +288,7 @@
       "sha256": "b13a0124dc199090c2047ef316df5bee68c12cb6b008ff2a49beb238a6c38832",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -354,7 +335,7 @@
       "sha256": "084f2e10d36a1145501a2545a936ed106e52fdd63c33064395d54f02976dda88",
       "bytes": 3294,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -396,7 +377,7 @@
       "sha256": "45d0f9b644507f15a1e08ec5cb945382cd5739d7fab74909f12216753446b3fe",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -413,10 +394,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "33cc13defeaf3dbe010e75fbe43705851d5f3e2c1e1bcad3fafec4307d5d96ef",
-      "bytes": 2842,
+      "sha256": "08da394be7aa66ab0f41bde31fe3259e9d5c521049f4f323334291be2f438df8",
+      "bytes": 2563,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -449,13 +430,13 @@
           "url": "/scenes/puck/puck-normal-thumbnail.webp",
           "bytes": 2464,
           "sha256": "079ce2ca4b769905f89c0271bdb0fa5a4194fea7694520c87138d55bb2158285",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/puck/puck-normal-surface@2x.webp",
           "bytes": 76150,
           "sha256": "4ba643c5b5dac95deb0fcbfd65c40d21e9478013b890f1b0df0ab091e892e237",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -478,8 +459,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3294,
-          "sha256": "b38664bd432106d1741590fae2063560f9ba59ae3a3174e342b415262176e7ee",
+          "bytes": 3175,
+          "sha256": "f0dddedf8b038f3c55b86e707d96ec241999b906c6ac1aee3f25ccf323719a96",
           "verification": "bytes-verified"
         }
       ],

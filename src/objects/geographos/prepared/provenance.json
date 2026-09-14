@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "geographos",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "90f3e9408e382bea030b7de9ff61ceb1996e34b3e964058e86dc80071f0cbef5"
+    "sha256": "d378d261a0821ede621f3b9f6a7ecfb2884f04ff1e3b24c2ce2b6f33ab8c252b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4267438c1b3d0c8f27025b456500e68c5ea67e35f8b35e2ef9f648c6467ba4dc",
+      "sha256": "a8e28ae88c1b974fb03dbdb9a521b38e49fe3aa1e9ee9b7f763fc5095ef7dc11",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "geographos",
         "displayName": "Geographos",
         "publicBase": "/scenes/geographos/",
-        "distanceAu": 1.245645513766084,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -134,20 +133,14 @@
           "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "afce9256efee908a8071b5ca8dd7fa707ba9ea4c5e55b45a607196d88bf7b7ac",
+      "sha256": "45adfa5f3109abd26cdbd08bcaafca24e21c0a4c933fb12ea10fb1d8b81c2822",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -249,12 +242,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -277,12 +264,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://echo.jpl.nasa.gov/asteroids/hudson-ostro_1999_geo_icarus.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -343,7 +324,7 @@
       "sha256": "fea2d6afa17abbcf0f5db3f85223bf6bd9f295a177c98f62389feb7fdbcb28d5",
       "bytes": 148206,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -368,10 +349,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "afce9256efee908a8071b5ca8dd7fa707ba9ea4c5e55b45a607196d88bf7b7ac",
-      "bytes": 11877,
+      "sha256": "45adfa5f3109abd26cdbd08bcaafca24e21c0a4c933fb12ea10fb1d8b81c2822",
+      "bytes": 11598,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/geographos/geographos-elevation-thumbnail.webp",
           "bytes": 5538,
           "sha256": "fa8528b828074b1bfa80cba6409a9144df58890eb897b9f4856471cce76e73f6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/geographos/geographos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/geographos/geographos-elevation-surface@2x.webp",
           "bytes": 347490,
           "sha256": "87c324b72c0d83e32ae94262d399a94265307c7c3e48f92f152862247535d547",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +425,13 @@
           "url": "/scenes/geographos/geographos-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/geographos/geographos-shape-surface@2x.webp",
           "bytes": 206066,
           "sha256": "a6cf5206de1259e7596cd56e3ef600ffc07f708fddf14d8383a24c965b7b98fe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -473,8 +454,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8677,
-          "sha256": "5b1642d79453556b799117080525e691a35ca2e6979a7301f18e4a52b1db592f",
+          "bytes": 8558,
+          "sha256": "0bda0aa0497225eaff2290f6aa4d4065c887c2a58dc169cf8d4278f7a68ae96b",
           "verification": "bytes-verified"
         }
       ],

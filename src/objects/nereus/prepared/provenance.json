@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nereus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0189f377be68528126f956172ef3f997d8061fab985ac8f87c3bf678ad88849a"
+    "sha256": "d81ef017083d7aa5f432060abf8803ff1c1590ef1c7c86599407ec2991c09c59"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b0214d564c0ac7d8c162f28ebff2c02950e50d3c80f6d0b25014f81b6f6842bf",
+      "sha256": "2b972ec0482472e97edaa8998d301e3e3fcc73be5f9e897a8987862947edfdc7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "nereus",
         "displayName": "Nereus",
         "publicBase": "/scenes/nereus/",
-        "distanceAu": 1.485139038607293,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -134,20 +133,14 @@
           "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2605efe3b4c774e23218a0638d2709f6b4b46ce4f6485de023518a9df7633459",
+      "sha256": "55376daa479f80bdaeb57cb649b8f03da1cfb3d2f0eadbf6a29cf625b76bfcb7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -250,12 +243,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -278,12 +265,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -350,7 +331,7 @@
       "sha256": "894989269e8cf2db397933247cfe4650408eecde3e59d5966161532b84c88b19",
       "bytes": 67291,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -375,10 +356,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2605efe3b4c774e23218a0638d2709f6b4b46ce4f6485de023518a9df7633459",
-      "bytes": 7731,
+      "sha256": "55376daa479f80bdaeb57cb649b8f03da1cfb3d2f0eadbf6a29cf625b76bfcb7",
+      "bytes": 7452,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -409,19 +390,19 @@
           "url": "/scenes/nereus/nereus-elevation-thumbnail.webp",
           "bytes": 4902,
           "sha256": "e9050c106e32c677f2282ff3cc04fe059fb51642e44d75688ec8ce405a721838",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nereus/nereus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nereus/nereus-elevation-surface@2x.webp",
           "bytes": 285002,
           "sha256": "0db9bef8b0002b0ecb90a4d0b9b338dabe077cb4bd5edc3029452fa1f71c96e1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -451,13 +432,13 @@
           "url": "/scenes/nereus/nereus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nereus/nereus-shape-surface@2x.webp",
           "bytes": 202324,
           "sha256": "6a3aa0c41f0b7b04b42c6021289524ed22182b8bfb46df5ccdc26f5aeea24fa4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -480,8 +461,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5166,
-          "sha256": "a890591def8a7e0eadaee4871edd470e10dc3be69450d45868424df414aa8153",
+          "bytes": 5047,
+          "sha256": "da9fbd79486791aad3870d090c4cc46db867d8ff6bf039b822cfd1ee5a352099",
           "verification": "bytes-verified"
         }
       ],

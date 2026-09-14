@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "menippe",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "791ca4c84b8c193205dfcdabe0943b994360972c7fa853dd9269937598350b28"
+    "sha256": "2589e198c1316bda6df212823d1901b1c0b36afbc99a1bfebb140e6a04b55f8d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2f321120a4bcc2406472d00e0b9e1e47d1afcffed051aa5224e2e734d5746545",
+      "sha256": "7178b5b211e30c4d6cd667f6c269b9fc314a64a79db957a6544214cebcac507a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "menippe",
         "displayName": "Menippe",
         "publicBase": "/scenes/menippe/",
-        "distanceAu": 2.761609095120294,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 327 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "191fdcd4751ea4d8b13279ae5820a44b7a0d89d5925eebd4239c171c695cf246",
+      "sha256": "c393172a5f590bccede6d42b6a6c267267865ba93386339fd39395838941be12",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/327"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "6edbc9d49a54ef72199ed7da9d5827c133f1aa1c2170e2ee8c65e747454c8077",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "191fdcd4751ea4d8b13279ae5820a44b7a0d89d5925eebd4239c171c695cf246",
-      "bytes": 10187,
+      "sha256": "c393172a5f590bccede6d42b6a6c267267865ba93386339fd39395838941be12",
+      "bytes": 9908,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/menippe/menippe-elevation-thumbnail.webp",
           "bytes": 5812,
           "sha256": "b0ce672c39544e8d2b1664a7fd9b2725a463da45b534ccf8cc910c0d4aefca85",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/menippe/menippe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/menippe/menippe-elevation-surface@2x.webp",
           "bytes": 302148,
           "sha256": "e7e0d663e33dae83a5f1aa416a7a8c7f271e3e6d119bf8e51daca51ac781e344",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/menippe/menippe-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/menippe/menippe-shape-surface@2x.webp",
           "bytes": 222366,
           "sha256": "34dbf3a932ed116ee7597cdbea3ffc1d2bcce23cf6b2748951186eb7fc995ba6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7545,
-          "sha256": "35c4c71739df2ad814f58feb8afb66c18c9be3cd0648c925f512315186a9a0e7",
+          "bytes": 7426,
+          "sha256": "6af9803261a2dd3783bd379fb72eb1bbdafc87c09940b13a1412c4e9573410bc",
           "verification": "bytes-verified"
         }
       ],

@@ -1,26 +1,25 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "haumea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9fb47422afdee41384014979b8691e944133d8c05df690e6598a8d89104b309d"
+    "sha256": "994b47d23cc93df1e358a4c2e5de631c04c4df55433d1e87a25a118d0ec47f64"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "shape-model",
       "path": "source/preparation/shape-model.json",
-      "sha256": "60f82227a1f198e5c6639e1021cc6a4eb6e677c62d08d7780fca515561138630",
+      "sha256": "82d56ed1afcc66144635a06f2a20b4f1753ca8d1d7425c014c4b3048c97830e2",
       "parameters": {
         "schema": "cssearth-shape-model@1",
         "displayName": "Haumea",
         "displayRadius": 230,
-        "distanceAu": 43.1,
         "quadBudget": 2000,
         "mesh": {
           "latitudeSegments": 32,
@@ -49,7 +48,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "71afdd3236e654eb583867fe1425ac0ddd658fdbcc89b70cf9c53fea79bc074d",
+      "sha256": "2b70d6ebe1aec17f19c744009f62f4598d3460391419c90e5776f93518242e4f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -160,12 +159,6 @@
             "role": "shape",
             "description": "2017 occultation shape and ring measurements",
             "href": "https://doi.org/10.1038/nature24051"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -207,7 +200,7 @@
       "sha256": "7b31737593054bd4ef8f61138a6ad1a2577bec03b84d1c3e76e8ac78632a87f8",
       "bytes": 11335060,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -231,10 +224,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "71afdd3236e654eb583867fe1425ac0ddd658fdbcc89b70cf9c53fea79bc074d",
-      "bytes": 3505,
+      "sha256": "2b70d6ebe1aec17f19c744009f62f4598d3460391419c90e5776f93518242e4f",
+      "bytes": 3344,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -268,19 +261,19 @@
           "url": "/scenes/haumea/illustration-thumbnail.webp",
           "bytes": 2420,
           "sha256": "c9f82de3c313e4610d82aed7e14cbf363a92491624902a5ca5662a35baa4c9ab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/haumea/surface.webp",
           "bytes": 3525294,
           "sha256": "c69a552407aa144d2c47741928cfac6bfdc798a25503c29941d2639b96f60742",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/haumea/poles.webp",
           "bytes": 75844,
           "sha256": "ceb4de7e2d997b2b0cda4ef9fc932e5bd8edd1cc0052dd85c3fc716c3ec9d8b1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -303,8 +296,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6313,
-          "sha256": "5428212e69dafe11be0a8f1c6112f62be5fdb98d49170ecb3b08d146506f4d63",
+          "bytes": 6194,
+          "sha256": "43b57e29f2176173831916f143d8807b5b62d5de24342c8bae967da4d5e502b9",
           "verification": "bytes-verified"
         }
       ],

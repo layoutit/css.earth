@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "polyhymnia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8a5a91f5c890e5391bf1c3aef0e8fb5f314fd2736a19e7b75560e0673e10cfc1"
+    "sha256": "8d5ad9fd77e4858692f9eb33bdc12bcc9f770b309ac57697843015a36e819c71"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e5fdb1809bf02645cecba360d73b66e51b131e5c31390d700fe1fd5d7a5335fb",
+      "sha256": "133cdfbef0fe109111f18b3ce453d11c0b57926b341c1909cdfdd1660b73ff7b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "polyhymnia",
         "displayName": "Polyhymnia",
         "publicBase": "/scenes/polyhymnia/",
-        "distanceAu": 2.8701879510937207,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "66f81fb029c2a538e5ad6625b0c38f33ffcf77860dff7b3465f23394268249a8",
+      "sha256": "46bfd313486d4e5352a632450bb69b615b45159bacbaf59d35c60306713f39ce",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5163"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "ad4eef6efbc7473338d3a427724875eec7f1bf08e61afddb552a0668c44d4ee9",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "66f81fb029c2a538e5ad6625b0c38f33ffcf77860dff7b3465f23394268249a8",
+      "sha256": "46bfd313486d4e5352a632450bb69b615b45159bacbaf59d35c60306713f39ce",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10008,
+      "bytes": 9729,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/polyhymnia/polyhymnia-elevation-thumbnail.webp",
           "bytes": 5980,
           "sha256": "549e549507df7658120be54b529cc69ec2a1180c62197d8701462f854c1ef31d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polyhymnia/polyhymnia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polyhymnia/polyhymnia-elevation-surface@2x.webp",
           "bytes": 312352,
           "sha256": "e0531372817e761b18a24b4830a8464c3ba1648aa6d3893fad4881252de2f66a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/polyhymnia/polyhymnia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polyhymnia/polyhymnia-shape-surface@2x.webp",
           "bytes": 219058,
           "sha256": "a52c745b0f3ba5a1f3497d420a6ad58c33f6e5fe283b5ea8fbd6ab3a9999eeb1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7305,
-          "sha256": "6067881ba6c225ee7a3dbfe7f5587e438299e4349f1b21ebe9ba81c9c60664a3",
+          "bytes": 7186,
+          "sha256": "bed6cf2481b7e2b84f9c2a92057ad572506a699751180eb7ede9e1dc18907a42",
           "verification": "bytes-verified"
         }
       ],

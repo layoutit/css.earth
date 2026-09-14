@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hekate",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "050f6d2d5cacf842cedd5b64dd6d781ab31d2527a3920307e7cf9516a69b1f81"
+    "sha256": "be945cc5cabcc124d9c41f719a04dfc7668e5ad3ccfb4147158b3b73bc9b0f17"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d5a91f5a84147e29bf52e63685e3b3b69cdb83760a8feb89308480cbccae82b3",
+      "sha256": "1426e8787b6062d5c33bbf770b93a5ec97f5f56577742f43b9cc2f48896f9c0b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hekate",
         "displayName": "Hekate",
         "publicBase": "/scenes/hekate/",
-        "distanceAu": 3.0905910748647547,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 3088 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "56c199e123d5c8b4a6a681cc0c17f39b3aff5dfa4784fde20e72efd3bafe646b",
+      "sha256": "c6323964966f48367500bde2724f353f83ec9cd26930ebf36050a0dfed7f9e7e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3088"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "982fb3441909f80413120b9a2caf82a2e0ffd81c9198b95c41d6ed7951546e17",
       "bytes": 79467,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "56c199e123d5c8b4a6a681cc0c17f39b3aff5dfa4784fde20e72efd3bafe646b",
-      "bytes": 7194,
+      "sha256": "c6323964966f48367500bde2724f353f83ec9cd26930ebf36050a0dfed7f9e7e",
+      "bytes": 6915,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -390,19 +371,19 @@
           "url": "/scenes/hekate/hekate-elevation-thumbnail.webp",
           "bytes": 5576,
           "sha256": "f9eade59c1f65d7d99aefabd8fba942eff467b082d9a7d61de823ec82569fb5b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hekate/hekate-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hekate/hekate-elevation-surface@2x.webp",
           "bytes": 344402,
           "sha256": "10afa919ef057968c1e88b53568bcf2766ce8697cc02703c35cd46e1686a05a5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -432,13 +413,13 @@
           "url": "/scenes/hekate/hekate-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hekate/hekate-shape-surface@2x.webp",
           "bytes": 214976,
           "sha256": "74a4d95c9babe9a2b091e12f1a0a8648bb4681478bd3876ef8a562d19cac644e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -461,8 +442,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5028,
-          "sha256": "9741c96e429be0a1f7c84d518cf8ceaa835410bcdab4716f145a6b010286c88b",
+          "bytes": 4909,
+          "sha256": "cb76b5262cb782a5e7da542af1e56884c51646b07664f5492aaef005bbc62d20",
           "verification": "bytes-verified"
         }
       ],

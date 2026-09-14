@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "coelestina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "42ee322cc2a4112a3d25f8efee023049f6f1efb13a71d8a818801c1e20993b76"
+    "sha256": "d54f484f765f372f32a889960378aab8c336c159fae752e577cf399028ec4d2d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ecb1ae07e57f4823896822a01e311e1ec8fcd1487d66a3a898ba61999d5ca8b6",
+      "sha256": "57883e1396320c6d87b2e9bf2f1630dec37d8abc92727f5c9e9fd99235d667ef",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "coelestina",
         "displayName": "Coelestina",
         "publicBase": "/scenes/coelestina/",
-        "distanceAu": 2.7617393088127553,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1218 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dd8a8efd8029f34a794d6353bc4df01b2aec3d350ba713d32109c5cc2eedab78",
+      "sha256": "51ed597846e2395cd563edea4af9f261976e24f31e7318d5fe8e0db87852a07e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1218"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "427b7e385d125ecccedc0cbf7129a960bf32bcb5f793e1fb0c8464d464d6a784",
       "bytes": 80926,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dd8a8efd8029f34a794d6353bc4df01b2aec3d350ba713d32109c5cc2eedab78",
-      "bytes": 11743,
+      "sha256": "51ed597846e2395cd563edea4af9f261976e24f31e7318d5fe8e0db87852a07e",
+      "bytes": 11464,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/coelestina/coelestina-elevation-thumbnail.webp",
           "bytes": 5754,
           "sha256": "c421f25af4291c2f194e7ed9f7216d6a312a45d231d897327d2c45c4826b36f9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/coelestina/coelestina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/coelestina/coelestina-elevation-surface@2x.webp",
           "bytes": 301416,
           "sha256": "739731b4830613adaaa8893f90afcfa127208a6394a3a7eda4a6aeaf7e4277ad",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/coelestina/coelestina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/coelestina/coelestina-shape-surface@2x.webp",
           "bytes": 233998,
           "sha256": "8df62409b138858d8ee4f11631ad69d8f02b48e4bb0d137841937974581d1333",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9060,
-          "sha256": "7bd2c24d96004c9950c185685550b30b2ac6c1a64fdde40abbdca17e1096f6b4",
+          "bytes": 8941,
+          "sha256": "03f863d937365b5d936fa5196f07ce279502b6284282af3c118f095f4979779d",
           "verification": "bytes-verified"
         }
       ],

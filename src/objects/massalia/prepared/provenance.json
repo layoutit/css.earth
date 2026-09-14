@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "massalia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5d1eb3dc614fc27e0a769db0dd22b190a4435ef6a546c03b66e731ec7c977083"
+    "sha256": "c121796f50a973e2be5981ae835362e014827d803463e194feb8822848c2b0c8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "43ac9598db72b74b5e5a7dda55e110fb292742c2bc3b9cfab3a363a44984032e",
+      "sha256": "bc8dcab462f9705c902dca10b677cfb017fee55d183bd45ac5094ba5a257ab89",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "massalia",
         "displayName": "Massalia",
         "publicBase": "/scenes/massalia/",
-        "distanceAu": 2.4079553806420346,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "77377d7b96821f3905f77bac039f95866348d20f50dad635a371921dbab82eb6",
+      "sha256": "c302345c255658a70ab90128d477f5431becbf2502ebff428212db8be19304f2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16321"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "524c84346cc770f9974d2493b0b2d9a2c06ca58f0a1701e2e159ec20d01e1045",
       "bytes": 293943,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "77377d7b96821f3905f77bac039f95866348d20f50dad635a371921dbab82eb6",
+      "sha256": "c302345c255658a70ab90128d477f5431becbf2502ebff428212db8be19304f2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11042,
+      "bytes": 10763,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/massalia/massalia-elevation-thumbnail.webp",
           "bytes": 5392,
           "sha256": "8b843e9ebde6827c4c1099a530b663c53b78602695de3e755ad34521b140f9c4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/massalia/massalia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/massalia/massalia-elevation-surface@2x.webp",
           "bytes": 281756,
           "sha256": "5f6235c1429610ef6c15cb22eddee8b3fed8b0210af86ef34e914ba28a24015f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/massalia/massalia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/massalia/massalia-shape-surface@2x.webp",
           "bytes": 219678,
           "sha256": "18a1a2aedbadf5db3cc8e5b81363a8f0ba88aaf0845bbb16ca406ccac8befd33",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8333,
-          "sha256": "bc4c35add535223216857db14a18b06ee0ffb18f8a2cc1931f0d6eb7928fa51f",
+          "bytes": 8214,
+          "sha256": "811b83b2dc6d5b481ee894297d9e62fe2c2a65f0c4aa1be34707fdb29cc7f751",
           "verification": "bytes-verified"
         }
       ],

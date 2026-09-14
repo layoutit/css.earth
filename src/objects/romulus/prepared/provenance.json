@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "romulus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f989b10b3c15173bbc67e5a491076e7c31959fe2ccfda50d9301cad2c6a53032"
+    "sha256": "4224899abcdd8e7bb4e2036a2d24ad0663b749bb4ba71a7c9cfc1cb65e9c29e1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "945c16fc593f8d8b2e2e0fe0b780530c9398beb92972cccb982021e02a76d1ad",
+      "sha256": "606e232a040405336a0932c0f981374a29541171a55d710bb16aa47500ffc9bf",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "romulus",
         "displayName": "Romulus",
         "publicBase": "/scenes/romulus/",
-        "distanceAu": 3.48,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "Published 2021 Sylvia-system orbit, with an independently checked newer Miriade projection at the retained epoch. Current phase is approximate; source/validation records the roughly 42 mas scene-epoch difference. Shape attitude is illustrative."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cf62b2707bea4681b3be10fdb032f24482c642a80f5ffcaaa16ffb08554fd312",
+      "sha256": "4b04a1313185d8dd6b09c12e55e13c8f998e7e4ffcd4341ccaf4d2c9de01815f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -177,12 +170,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -205,12 +192,6 @@
             "role": "facts",
             "description": "Correlated alternative occultation-limb fits",
             "href": "https://academic.oup.com/mnras/article/499/3/4570/5918397"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -266,7 +247,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,7 +282,7 @@
       "sha256": "5c69e809aa9b9e5c5e91080423fc6f22fbdce4630923efbb94f0331bde192bce",
       "bytes": 60130,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -318,10 +299,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cf62b2707bea4681b3be10fdb032f24482c642a80f5ffcaaa16ffb08554fd312",
-      "bytes": 3088,
+      "sha256": "4b04a1313185d8dd6b09c12e55e13c8f998e7e4ffcd4341ccaf4d2c9de01815f",
+      "bytes": 2809,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -357,13 +338,13 @@
           "url": "/scenes/romulus/romulus-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/romulus/romulus-model-surface@2x.webp",
           "bytes": 51692,
           "sha256": "8fe8f2d650ef4dc1ad40c39a22314aa82ed2d79ce9ff0e076c745bc23aed124d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -386,8 +367,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5292,
-          "sha256": "d7c9ce22dbc3aa4d658c1bf1f0c20d9192b9031ab90de31ef511ec874f8b31f1",
+          "bytes": 5173,
+          "sha256": "fb227c52c8e7e79b4b9f0a72160bfd87fc50b65fe31dcc69077f63864e252410",
           "verification": "bytes-verified"
         }
       ],
