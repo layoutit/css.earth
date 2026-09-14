@@ -101,6 +101,7 @@
     "prepare:universe": "pnpm build:preparation && pnpm prepare:volume src/objects/milky-way && pnpm prepare:stars src/objects/stellar-neighbourhood && pnpm prepare:surface-shell src/objects/heliosphere && pnpm prepare:world-context",
     "test:preparation": "node tools/test-preparation.mts",
     "test:fits": "node tools/oracles/test-fits.mts",
+    "test:sbmt": "node tools/oracles/test-sbmt.mts",
     "typecheck:preparation": "pnpm --filter @cssearth/engine exec tsc -p ../../tools/objects/tsconfig.json",
     "test:seo": "node site/test/seo-browser.mts",
     "prepare:social": "node tools/prepare-social-images.mts",

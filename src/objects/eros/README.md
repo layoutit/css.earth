@@ -10,6 +10,25 @@
 
 ## Evidence
 
+### Native SBMT comparison, 14 September 2026
+
+The [shared SBMT oracle](../../../tools/oracles/sbmt/README.md) reads this body's
+full Gaskell ver128q mesh and the 537×244 NEAR MSI exposure M0146235607 directly.
+Its [corrected SUM](source/observations/M0146235607.SUM) and
+[SPICE INFO](source/observations/M0146235607F4_2P_CIF_DBL.INFO) are separate camera
+cases. They give identical sampled image values and matching visible intercepts
+between the native reference and cssEarth; the maximum tested UV difference is
+0.0817 pixel, within the fixed quarter-pixel comparison limit. These results
+cover the probes and software/input pins in the
+[committed fixture](../../../tests/oracles/sbmt/projection.json).
+
+The new observation records support preparation tests. The production surface
+continues to use the controlled Golish maps listed above. The comparison does
+not qualify this individual frame's physical registration or a new photographic
+lens. SBMT's archive uses the public access pair published by its client
+(`public` / `wide-open`); the acquisition plan records that public authorization
+header and verifies each downloaded file's bytes.
+
 The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
 
 | View | Original grid | Both lighting images, before → current |

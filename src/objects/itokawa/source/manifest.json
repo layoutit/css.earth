@@ -391,7 +391,7 @@
       "expectedSha256": "f26f0ede45114bcaaead6c875b6f8992bd0c52498affc647efe14ab059db38a1",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ITOKAWA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -1041,8 +1041,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 10140,
-      "expectedSha256": "bca25ef6e834ba0115336eb9bd86aded645b159bec70499a0eda00c671817ce5"
+      "expectedBytes": 10468,
+      "expectedSha256": "999c80407b4120b1af7a4fe93bb0310b8a88d5055834cd75dd7461211d3701e5"
     },
     {
       "path": "preparation/navigation.json",
@@ -1115,6 +1115,24 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "observations/N2402987304.SUM",
+      "expectedBytes": 10449,
+      "expectedSha256": "a5c2ad8714f3442bd9a0495a58d09e178b47ed5badfcafdf4f8516c2e4670a87",
+      "origin": "https://sbmt.jhuapl.edu/sbmt/prod/data/ITOKAWA/AMICA/sumfiles/N2402987304.SUM",
+      "credit": "JAXA/Hayabusa and SBMT team",
+      "purpose": "Independent SBMT preparation oracle input; not a production surface or a qualified registration.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "sbmt-n2402987304-sum",
+            "role": "reference",
+            "evidence": "https://sbmt.jhuapl.edu/sbmt/prod/data/ITOKAWA/AMICA/sumfiles/N2402987304.SUM"
+          }
+        ]
       }
     }
   ]
