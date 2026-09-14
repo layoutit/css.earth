@@ -1,29 +1,36 @@
 import assert from "node:assert/strict";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { preparationDependencies, preparationFileSets, runCachedPreparationObjects, sharedPreparationFiles, objectPreparationFiles } from "./prepare-planets.mts";
-import type { CachedPreparationOptions, PreparationFileSet } from './prepare-planets.mts';
-import type { ObjectCommandOutcome, PreparationCommand, PreparationOptions, PreparationReport } from './run-implemented-planets.mts';
+import { runCachedPreparationObjects, tracedPreparationEnvironment } from "./prepare-planets.mts";
+import type { CachedPreparationOptions } from './prepare-planets.mts';
+import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
+import { runObjectCommand } from './run-implemented-planets.mts';
+import type { PreparationCommand, PreparationOptions, PreparationReport } from './run-implemented-planets.mts';
 
-type FixtureOptions = CachedPreparationOptions & Required<Pick<PreparationOptions, 'projectRoot' | 'objectIds' | 'runCommand' | 'onEvent'>>;
-interface Fixture { root: string; options: FixtureOptions; started: string[]; }
+type FixtureOptions = CachedPreparationOptions & Required<Pick<PreparationOptions, 'projectRoot' | 'objectIds' | 'runCommand'>>;
+interface Fixture { root: string; options: FixtureOptions; started: string[]; events: { phase: string; id?: string; reason?: string }[]; }
+
+// Each producer is a real Node process under the preparation trace: it reads its input and the shared generator,
+// writes its output, and runs a shell command when asked.
+const producer = `import { execSync } from 'node:child_process';
+import { readFileSync, writeFileSync } from 'node:fs';
+const [id, command] = process.argv.slice(2);
+writeFileSync(id + '-output', 'prepared ' + readFileSync(id + '-input', 'utf8') + ' with ' + readFileSync('shared', 'utf8'));
+if (command) execSync(command);
+`;
 
 async function fixture(run: (fixture: Fixture) => Promise<void>) {
-  const root = await mkdtemp(join(tmpdir(), "cssearth-prepare-planets-"));
+  const root = await realpath(await mkdtemp(join(tmpdir(), "cssearth-prepare-planets-")));
   try {
     await writeFile(join(root, "shared"), "shared generator");
-    for (const id of ["moon", "pluto"]) {
-      await writeFile(join(root, `${id}-input`), id);
-      await writeFile(join(root, `${id}-output`), `prepared ${id}`);
-    }
-    const started: string[] = [];
+    await writeFile(join(root, "producer.mjs"), producer);
+    for (const id of ["moon", "pluto"]) await writeFile(join(root, `${id}-input`), id);
+    const started: string[] = [], events: Fixture['events'] = [];
     const options: FixtureOptions = {
       projectRoot: root, objectIds: ["moon", "pluto"], environment: async () => ({ version: "pinned" }),
-      sharedFiles: async () => ["shared"],
-      packageFiles: async (_root: string, id: string): Promise<PreparationFileSet> => ({ inputs: [`${id}-input`], outputs: [`${id}-output`] }),
-      onEvent: () => {},
+      sharedFiles: async () => [], onEvent: event => { events.push(event); },
       schedule: async ({ objectIds, runCommand }: PreparationOptions = {}): Promise<PreparationReport> => {
         if (!objectIds || !runCommand) throw new TypeError('Fixture schedule requires its queue and command.');
         for (const id of objectIds) {
@@ -33,23 +40,22 @@ async function fixture(run: (fixture: Fixture) => Promise<void>) {
         return { mode: 'prepare', startedAt: new Date().toISOString(), requestedConcurrency: 1, concurrency: 1, elapsedMilliseconds: 0,
           results: objectIds.map(id => ({ id, script: 'fixture', status: "succeeded" })) };
       },
-      runCommand: async ({ id }: PreparationCommand): Promise<ObjectCommandOutcome> => {
+      runCommand: async ({ id, env }: PreparationCommand) => {
         started.push(id);
-        await writeFile(join(root, `${id}-output`), `prepared ${await readFile(join(root, `${id}-input`), "utf8")}`);
-        return { exitCode: 0, signal: null };
+        return runObjectCommand({ command: process.execPath, argumentsList: ["producer.mjs", id], cwd: root, env });
       },
     };
-    await run({ root, options, started });
+    await run({ root, options, started, events });
   } finally { await rm(root, { recursive: true, force: true }); }
 }
 
-test("unchanged existing objects reuse verified files without starting their producers", async () => fixture(async ({ options, started }) => {
+test("unchanged objects reuse verified files without starting their producers", async () => fixture(async ({ options, started }) => {
   assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ["moon", "pluto"]);
   started.length = 0;
   assert.deepEqual((await runCachedPreparationObjects(options)).cached, ["moon", "pluto"]);
   assert.deepEqual(started, []);
 }));
-test("one package edit or damaged output rebuilds only that object", async () => fixture(async ({ root, options, started }) => {
+test("one input edit or damaged output rebuilds only that object", async () => fixture(async ({ root, options, started }) => {
   await runCachedPreparationObjects(options); started.length = 0;
   await writeFile(join(root, "moon-input"), "changed moon");
   await runCachedPreparationObjects(options);
@@ -58,7 +64,7 @@ test("one package edit or damaged output rebuilds only that object", async () =>
   await runCachedPreparationObjects(options);
   assert.deepEqual(started, ["pluto"]);
 }));
-test("shared generator or actual toolchain changes invalidate every affected cache", async () => fixture(async ({ root, options, started }) => {
+test("a changed generator both producers read, or a changed toolchain, rebuilds both", async () => fixture(async ({ root, options, started }) => {
   await runCachedPreparationObjects(options); started.length = 0;
   await writeFile(join(root, "shared"), "changed generator");
   await runCachedPreparationObjects(options);
@@ -66,64 +72,41 @@ test("shared generator or actual toolchain changes invalidate every affected cac
   await runCachedPreparationObjects({ ...options, environment: async () => ({ version: "changed" }) });
   assert.deepEqual(started, ["moon", "pluto"]);
 }));
-test("runtime and shell edits do not prepare objects; imported generators and source edits do", async () => fixture(async ({ root, options, started }) => {
-  for (const directory of ["site", "src/platform", "tools"]) await mkdir(join(root, directory), { recursive: true });
-  await writeFile(join(root, "package.json"), "{}");
-  await writeFile(join(root, "pnpm-lock.yaml"), "lock");
-  await writeFile(join(root, "tools/generator.mjs"), "export const value = 1;");
-  for (const id of ["moon", "pluto"]) {
-    const base = `src/objects/${id}`;
-    for (const directory of ["tools", "site", "source", "runtime"]) await mkdir(join(root, base, directory), { recursive: true });
-    await writeFile(join(root, base, "source/manifest.json"), JSON.stringify({ generatedIntermediates: [] }));
-    await writeFile(join(root, base, "site/control-content.source.mjs"), "export const objectControls = {};");
-    await writeFile(join(root, base, "tools/prepare.mjs"), 'const steps = [["generate.mjs"]];');
-    await writeFile(join(root, base, "runtime/preparedOutput.mjs"), "export const VALUE = 1;");
-    await writeFile(join(root, base, "tools/generate.mjs"), "import { value } from '../../../../tools/generator.mjs';");
-    await writeFile(join(root, base, "runtime/client.mjs"), "// runtime");
+test("files a preparation never read leave its receipt valid", async () => fixture(async ({ root, options, started }) => {
+  await runCachedPreparationObjects(options); started.length = 0;
+  for (const path of ["site/runtime-policy.mts", "tools/audit.mjs", "src/objects/moon/text.json", "pluto-notes.md"]) {
+    await mkdir(join(root, path, ".."), { recursive: true });
+    await writeFile(join(root, path), "// changed runtime, audit or reader text");
   }
-  const actual = { ...options, sharedFiles: sharedPreparationFiles, packageFiles: objectPreparationFiles };
-  await runCachedPreparationObjects(actual); started.length = 0;
-  for (const path of ["site/runtime-policy.mts", "site/shell.mjs", "src/platform/camera-input.mts", "tools/audit.mjs", "src/objects/moon/runtime/client.mjs"]) {
-    await writeFile(join(root, path), "// changed runtime or audit code");
-  }
-  assert.deepEqual((await runCachedPreparationObjects(actual)).cached, ["moon", "pluto"]);
+  assert.deepEqual((await runCachedPreparationObjects(options)).cached, ["moon", "pluto"]);
   assert.deepEqual(started, []);
-  await writeFile(join(root, "tools/generator.mjs"), "export const value = 2;");
-  await runCachedPreparationObjects(actual); assert.deepEqual(started, ["moon", "pluto"]); started.length = 0;
-  await writeFile(join(root, "src/objects/moon/source/texture.bin"), "changed source");
-  await runCachedPreparationObjects(actual); assert.deepEqual(started, ["moon"]);
 }));
 test("full rebuild bypasses a valid cache and failed producers cannot seal outputs", async () => fixture(async ({ options, root, started }) => {
   await runCachedPreparationObjects(options); started.length = 0;
   await runCachedPreparationObjects({ ...options, force: true });
   assert.deepEqual(started, ["moon", "pluto"]);
-  await rm(join(root, ".local/preparation/moon.json"));
-  await assert.rejects(runCachedPreparationObjects({ ...options, runCommand: async () => ({ exitCode: 2, signal: null }) }));
+  await assert.rejects(runCachedPreparationObjects({ ...options, force: true, runCommand: async () => ({ exitCode: 2, signal: null }) }));
   await assert.rejects(readFile(join(root, ".local/preparation/moon.json")), { code: "ENOENT" });
+}));
+test("a program the trace cannot follow leaves its object to rebuild", async () => fixture(async ({ root, options, started, events }) => {
+  const unrecorded = { ...options, runCommand: async ({ id, env }: PreparationCommand) => {
+    started.push(id);
+    return runObjectCommand({ command: process.execPath, argumentsList: ["producer.mjs", id, "true"], cwd: root, env });
+  } };
+  await runCachedPreparationObjects(unrecorded);
+  assert.deepEqual(events.filter(event => event.phase === "receipt-refused").map(event => [event.id, /shell command/.test(event.reason ?? "")]), [["moon", true], ["pluto", true]]);
+  started.length = 0;
+  await runCachedPreparationObjects(unrecorded);
+  assert.deepEqual(started, ["moon", "pluto"]);
 }));
 test("cache selection rejects unknown or duplicate registry objects", async () => fixture(async ({ options }) => {
   await assert.rejects(runCachedPreparationObjects({ ...options, objectIds: ["moon", "moon"] }), /unique IDs/);
   await assert.rejects(runCachedPreparationObjects({ ...options, objectIds: ["invented-object"] }), /unique IDs/);
 }));
-test("external prepared inputs are declared as data and cannot escape the project", async () => fixture(async ({ root }) => {
-  await mkdir(join(root, "src/objects/earth"), { recursive: true });
-  const declaration = join(root, "src/objects/earth/preparation.json");
-  await writeFile(join(root, "release.json"), JSON.stringify({ version: "v1", files: [{ filename: "tile.pack" }] }));
-  await writeFile(declaration, JSON.stringify({ schema: "cssearth-preparation-inputs@1",
-    fileSets: [{ manifest: "release.json", directory: ".local/geometry" }] }));
-  assert.deepEqual(await preparationFileSets(root, "earth"), ["src/objects/earth/preparation.json", "release.json", ".local/geometry/v1/tile.pack"]);
-  await writeFile(join(root, "release.json"), JSON.stringify({ version: "../escape", files: [{ filename: "tile.pack" }] }));
-  await assert.rejects(preparationFileSets(root, "earth"));
-}));
-
-// Type-only imports cannot affect generated bytes; executable typed helpers do.
-test("preparation closure follows executable TypeScript and resolves source .js specifiers", async () => {
-  const root = await mkdtemp(join(tmpdir(), "cssearth-typed-preparation-"));
-  try {
-    await writeFile(join(root, 'entry.mts'), "import type { Absent } from './type-only.mts';\nimport { prepare } from './helper.js';\nexport const value: number = prepare();\n");
-    await writeFile(join(root, 'helper.ts'), "export const prepare = (): number => 42;\n");
-    assert.deepEqual(await preparationDependencies(root, ['entry.mts']), ['entry.mts', 'helper.ts']);
-    await writeFile(join(root, 'helper.ts'), "export { value } from './missing.mts';\n");
-    await assert.rejects(preparationDependencies(root, ['entry.mts']), /missing\.mts/);
-  } finally { await rm(root, {recursive: true, force: true}); }
+test("the traced environment adds the trace once and keeps other Node options", () => {
+  const environment = tracedPreparationEnvironment("/traces", { NODE_OPTIONS: "--max-old-space-size=4096", PATH: "/bin" });
+  assert.equal(environment[PREPARATION_TRACE_VARIABLE], "/traces");
+  assert.equal(environment.PATH, "/bin");
+  assert.match(environment.NODE_OPTIONS, /^--max-old-space-size=4096 --import=file:\S+\/tools\/preparation-trace\.mts$/u);
+  assert.equal(tracedPreparationEnvironment("/traces", environment).NODE_OPTIONS, environment.NODE_OPTIONS);
 });
