@@ -2,33 +2,6 @@
   "schema": "csseros-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/eros/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "eros-shape",
       "path": "shape/ver128q.tab",
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab",
@@ -94,7 +67,7 @@
         "longitudeDirection": "east",
         "referenceRadiusMeters": 17000
       },
-      "coverage": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
+      "coverage": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05\u20130.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
       "expectedBytes": 228242957,
       "expectedSha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
       "capture": {
@@ -140,7 +113,7 @@
         "longitudeDirection": "east",
         "referenceRadiusMeters": 17000
       },
-      "coverage": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
+      "coverage": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05\u20130.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
       "expectedBytes": 228242957,
       "expectedSha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
       "capture": {
@@ -171,7 +144,7 @@
       "expectedSha256": "6c42a16f2ee32aea95f5a4bd753d8723b9ec75c68470f8f3c5f8d5de2ad5f9cb",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EROS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -274,8 +247,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7847,
-      "expectedSha256": "de58cb2b15477c4d00b1667c4232c923fece53b2a3e28abf957ccee14963475e",
+      "expectedBytes": 7568,
+      "expectedSha256": "3adf476ea82137d704e81490bc9e1045bd5a17fa6400623eb38766e50e8b1570",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -283,8 +256,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3779,
-      "expectedSha256": "89c982d73713ba2f6a3b0756ede4de0e47c29b40160e45a397de0e682bb90b8d"
+      "expectedBytes": 3576,
+      "expectedSha256": "b8007ace1f1b655e735a35fda198bf9e80b463b5a3db2509ee367a5b5ed98a42"
     },
     {
       "path": "preparation/navigation.json",
@@ -298,8 +271,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3904,
-      "expectedSha256": "0632d7d5fc200365ac4b1e683410d466b9c254b5e7173f521dccf3c64c1cf1fc"
+      "expectedBytes": 3762,
+      "expectedSha256": "f5425ad98f8a2d033debde0d30f3c795d7ee68bfe8f8361e9992db7f666b023f"
     },
     {
       "path": "presentation/title-mark.json",
@@ -335,21 +308,6 @@
       "path": "reference/ver128q.xml",
       "expectedBytes": 9673,
       "expectedSha256": "e6fbe936c28b12699ae66d80c2e6b19c56d8889f1d280c9fa3974879bfdc9df8"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 89770,
-      "expectedSha256": "906f78c79d3a55d17498d4d02807899d7b06aa10da1e143eb00a8ad065f6d0bd"
     },
     {
       "path": "reference/eros_nearmsi_filter4.lbl",

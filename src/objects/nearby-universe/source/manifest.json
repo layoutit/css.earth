@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "cosmicflows-4",
+      "path": ".local/galaxy-field/sources/cosmicflows-4.tsv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=tsv&MAXREC=1000000&QUERY=SELECT+PGC%2CDM%2Ce_DM%2CRAJ2000+AS+RAdeg%2CDEJ2000+AS+DEdeg+FROM+%22J%2FApJ%2F944%2F94%2Ftable2%22+ORDER+BY+PGC",
+      "sourceUrl": "https://doi.org/10.3847/1538-4357/ac94d8",
+      "title": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94",
+      "credit": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; distributed by CDS/VizieR",
+      "acquisition": "Pinned TSV response to the exact ADQL query in source/catalogue.json. Read directly from CDS TAP; no upstream application catalogue used.",
+      "expectedSha256": "8e92211df1993985472fc0109fe8cf62585adf85b09f46c8030b8b0176c50950",
+      "expectedBytes": 2001726,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cosmicflows-4",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/catalogue.json#/sources/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; no blanket redistribution license established. Downloads stay ignored; cite original authors and CDS/VizieR."
+    },
+    {
+      "id": "hyperleda-pgc",
+      "path": ".local/galaxy-field/sources/hyperleda-pgc.tsv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=tsv&MAXREC=1000000&QUERY=SELECT+TOP+50000+PGC%2CRAJ2000+AS+RAdeg%2CDEJ2000+AS+DEdeg%2CMType%2ClogD25+FROM+%22VII%2F237%2Fpgc%22+WHERE+logD25+IS+NOT+NULL+AND+RAJ2000+IS+NOT+NULL+AND+DEJ2000+IS+NOT+NULL+ORDER+BY+logD25+DESC%2C+PGC+ASC",
+      "sourceUrl": "https://doi.org/10.1051/0004-6361:20031411",
+      "title": "Paturel et al. (2003), HYPERLEDA I, A&A 412, 45",
+      "credit": "Paturel et al. (2003), HYPERLEDA I, A&A 412, 45; distributed by CDS/VizieR",
+      "acquisition": "Pinned TSV response to the exact ADQL query in source/catalogue.json. Read directly from CDS TAP; no upstream application catalogue used.",
+      "expectedSha256": "bc6927d3c542df539063f43fb1ee04fab460aa0f16c66568f0bf202bec250e7b",
+      "expectedBytes": 2656024,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyperleda-pgc",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/catalogue.json#/sources/1"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; no blanket redistribution license established. Downloads stay ignored; cite original authors and CDS/VizieR."
+    },
+    {
+      "id": "hyperleda-hi",
+      "path": ".local/galaxy-field/sources/hyperleda-hi.tsv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=tsv&MAXREC=1000000&QUERY=SELECT+PGC%2CVHI+FROM+%22VII%2F238%2Fhidat%22+WHERE+VHI+IS+NOT+NULL+ORDER+BY+PGC",
+      "sourceUrl": "https://doi.org/10.1051/0004-6361:20031412",
+      "title": "Paturel et al. (2003), HYPERLEDA II, A&A 412, 57",
+      "credit": "Paturel et al. (2003), HYPERLEDA II, A&A 412, 57; distributed by CDS/VizieR",
+      "acquisition": "Pinned TSV response to the exact ADQL query in source/catalogue.json. Read directly from CDS TAP; no upstream application catalogue used.",
+      "expectedSha256": "ce39ddb475713a9c917bf147ae4d3f348689feb6d5c257398f22cfb5ae885d85",
+      "expectedBytes": 218461,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyperleda-hi",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/catalogue.json#/sources/2"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; no blanket redistribution license established. Downloads stay ignored; cite original authors and CDS/VizieR."
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-catalogue",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/catalogue.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored source selection, processing or display configuration; not an external observation.",
+      "expectedBytes": 2454,
+      "expectedSha256": "1c53eb5de62d6bc2465a4f6a85a02204851a1f821ea7d0605bd6c031b9e0cf7f",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-field",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/preparation/field.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored source selection, processing or display configuration; not an external observation.",
+      "expectedBytes": 839,
+      "expectedSha256": "f1bda9eba1032dfa4414729c7d2b7798e95c607400b394a0f24f507ad79bd6b6",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-presentation",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/presentation.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored source selection, processing or display configuration; not an external observation.",
+      "expectedBytes": 1235,
+      "expectedSha256": "aab12b142ea281b7bd3faabb6a546b6711340af26b214b9608d7e2c44906578d",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "navigation-frame",
+      "kind": "generated-intermediate",
+      "path": "src/objects/sun/prepared/world-context.json",
+      "origin": "project-preparation",
+      "credit": "cssEarth contributors",
+      "acquisition": "Existing prepared shared world frame; only the frame identity and navigation epoch are read. No solar data supplies galaxy positions.",
+      "expectedSha256": "d7adb8fb71451816ae8d044814cc145c98a29cb2345351e1396dedd542642e22",
+      "expectedBytes": 7148043,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared application frame identity, not a galaxy measurement."
+      }
+    }
+  ]
+}

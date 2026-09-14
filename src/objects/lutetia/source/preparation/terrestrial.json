@@ -4,7 +4,6 @@
   "namespace": "lutetia",
   "displayName": "Lutetia",
   "publicBase": "/scenes/lutetia/",
-  "distanceAu": 2.4345822333960907,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -181,12 +180,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements and the Jorda–Vincent rotation model released with the PDS Lutetia shape"
   },
   "presentation": {
-    "defaultLens": "osiris",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "osiris"
   }
 }

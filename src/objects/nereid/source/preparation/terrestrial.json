@@ -4,7 +4,6 @@
   "namespace": "nereid",
   "displayName": "Nereid",
   "publicBase": "/scenes/nereid/",
-  "distanceAu": 30.07,
   "raster": {
     "width": 512,
     "height": 256,
@@ -78,12 +77,6 @@
     "sunSource": "JPL Neptune-system ephemeris. Representative model pole from Kiss et al. (2016), Fig. 8: ecliptic longitude 320°, latitude 32°, converted using J2000 obliquity. It is one possible model orientation, not a unique measured pole. The display meridian is arbitrary, not a current landmark phase."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

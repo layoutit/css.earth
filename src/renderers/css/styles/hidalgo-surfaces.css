@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hidalgo"])[data-lod="billboard"] .hidalgo-scene, .planet-stage:where([data-object-id="hidalgo"])[data-lod="marker"] .hidalgo-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hidalgo"])[data-lod="marker"] .hidalgo-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hidalgo"]).hidalgo-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

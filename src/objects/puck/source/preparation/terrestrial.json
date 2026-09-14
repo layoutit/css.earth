@@ -4,7 +4,6 @@
   "namespace": "puck",
   "displayName": "Puck",
   "publicBase": "/scenes/puck/",
-  "distanceAu": 19.19,
   "raster": {
     "width": 512,
     "height": 256,
@@ -119,12 +118,6 @@
     "sunSource": "JPL Uranus-system ephemeris and IAU/WGCCRE Puck rotation; calibrated Voyager image is registered in that source body frame."
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

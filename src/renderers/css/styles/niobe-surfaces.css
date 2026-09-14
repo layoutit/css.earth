@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="niobe"])[data-lod="billboard"] .niobe-scene, .planet-stage:where([data-object-id="niobe"])[data-lod="marker"] .niobe-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="niobe"])[data-lod="marker"] .niobe-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="niobe"]).niobe-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="siarnaq"])[data-lod="billboard"] .siarnaq-scene, .planet-stage:where([data-object-id="siarnaq"])[data-lod="marker"] .siarnaq-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="siarnaq"])[data-lod="marker"] .siarnaq-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="siarnaq"]).siarnaq-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

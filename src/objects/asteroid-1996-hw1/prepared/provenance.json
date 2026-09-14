@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1996-hw1",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6317e934654c807e3f7ecaa8f5294d02ac4937390f50f23c2256337231b6f339"
+    "sha256": "c54e2895586644a2c4f4dcf8b069986164e33f511606a73765b019bbb29d8fc5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c98a16e2df63e76f9e62932091f4d33efeae138165e968b6173bbc031672e613",
+      "sha256": "63a843996404f241752f4e567c5a1ceae9b722635f36ebc860ca8904f766a049",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asteroid-1996-hw1",
         "displayName": "1996 HW1",
         "publicBase": "/scenes/asteroid-1996-hw1/",
-        "distanceAu": 2.0457349024000404,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -134,20 +133,14 @@
           "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3752cf435c7ca30dcdecf2b61cb45321cdfc23cf5dd0e21c5795797e393c5d55",
+      "sha256": "a9312c90cff530e3ee216eaef12a9e4d1801a3f7089a8edb3e53c3b2ec13ebf8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -249,12 +242,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -277,12 +264,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -343,7 +324,7 @@
       "sha256": "f40ee6ba66abccd5393f991fdfe240b54df49c31559e07a431760996024d2996",
       "bytes": 83069,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -368,10 +349,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3752cf435c7ca30dcdecf2b61cb45321cdfc23cf5dd0e21c5795797e393c5d55",
-      "bytes": 8895,
+      "sha256": "a9312c90cff530e3ee216eaef12a9e4d1801a3f7089a8edb3e53c3b2ec13ebf8",
+      "bytes": 8616,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -403,19 +384,19 @@
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-thumbnail.webp",
           "bytes": 5714,
           "sha256": "b8fa624375ce6b8c51090f6d326522b96297b1a0c87def366ddeae0660d23144",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-surface@2x.webp",
           "bytes": 362878,
           "sha256": "f4b7bcf01bfcc1aed14573c063e93f0bfc3da7c53eea0788891e14ad70f74850",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -453,13 +434,13 @@
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-surface@2x.webp",
           "bytes": 221278,
           "sha256": "f39f66258eebb62ca9cb0c888de3b503636477004ff88f4629e66c8c0fcf71ff",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -490,8 +471,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5741,
-          "sha256": "0a6f0134edf2e5205651a28dc556c3c6f20fa1cd5f9cd354b82c162b1ac8251b",
+          "bytes": 5622,
+          "sha256": "24f1b818525b064e3ff4d584886ca6aad10dbf135560209e9864890a8a88b17e",
           "verification": "bytes-verified"
         }
       ],
@@ -551,5 +532,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "asteroid-1996-hw1",
+    "materialSha256": "0ce9dd3b4631ec25a6e02779d66e375274f00070357f6c9200edb5f8fe60994a",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

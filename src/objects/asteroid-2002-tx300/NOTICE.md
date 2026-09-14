@@ -6,4 +6,4 @@ Vilenius et al. (2018), A&A 618, A136, §3.3 and Table 6.: https://doi.org/10.10
 
 Published numerical facts are credited. The analytical model extraction and missing-coverage grid are cssEarth MIT work. Paper originals are reacquired through their pinned URLs; scientific figures are not copied into surface maps.
 
-Shared sky: ESO/S. Brunier panorama, CC BY 4.0; [ESO terms](source/stars/ESO-IMAGE-LICENSE.md). Star catalog: HYG, [supplied license](source/stars/LICENSE.md). Type: Inter, SIL Open Font License 1.1.
+Type: Inter, SIL Open Font License 1.1.

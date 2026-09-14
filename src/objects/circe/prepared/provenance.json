@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "circe",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "afe14f8ee84747cc6556d4e9dc5de3c3ab92f7e884a0c4a19b04ecf5e351c25c"
+    "sha256": "9b2617325923d43430620a69da52835408e83b0dfc78f45e2ae29bf25d1902aa"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "386e8dc7083d3d3f174c63a80b0162cb132b333c05f51ca2eafb9912928f33c2",
+      "sha256": "6c40f03b04487b5465f71ab0d4d6e9305bb85d3a23379961f8b86f66cd0d452a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "circe",
         "displayName": "Circe",
         "publicBase": "/scenes/circe/",
-        "distanceAu": 2.6871357085881864,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 129 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "552b0519bf06f2f711644010edc08722f6047d377ccf8873e7d021d4dee40594",
+      "sha256": "7fe2f90b200a491ecb2b4d583b19d1d24b3d39591d81257139aa78dc5cc72199",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/129"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "8f88f8efb84bd02178b61f335fd11196ed53786ddc60ec281bd834b9a3f1152f",
       "bytes": 72825,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "552b0519bf06f2f711644010edc08722f6047d377ccf8873e7d021d4dee40594",
-      "bytes": 8777,
+      "sha256": "7fe2f90b200a491ecb2b4d583b19d1d24b3d39591d81257139aa78dc5cc72199",
+      "bytes": 8498,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/circe/circe-elevation-thumbnail.webp",
           "bytes": 5560,
           "sha256": "a2e35597480b83131709a6bf06c2816c23583672180dac1a0994dfc30caaeca9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/circe/circe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/circe/circe-elevation-surface@2x.webp",
           "bytes": 284696,
           "sha256": "a997d649255baa3f935c76fa0ffecf86d07c8f0cb818f1eda7a2b6200d37e602",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/circe/circe-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/circe/circe-shape-surface@2x.webp",
           "bytes": 250404,
           "sha256": "f10be593fe0ad5647accece0f54c0736d326b74d8a9ebea14fbed1a92bf8a974",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6160,
-          "sha256": "5dc8911949f34550c6654a0b1890334eb264e9a0d5cfb603bfd173492178b5f5",
+          "bytes": 6041,
+          "sha256": "6280cb5c0214c778199fe9980ec817b31a0513aaf5eabe0f9ea166b5aae43831",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "circe",
+    "materialSha256": "4012937208363b41a29a2e8ceb5eab762316c91d826809c5d5661c0298ff36c8",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

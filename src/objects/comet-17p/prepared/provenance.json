@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-17p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "95b0b2c2ca852f3f147f14cf9f0bfc336b3285d60bf2ce521092158b7fb16055"
+    "sha256": "f1e7ea3c39b627945cc69ab077c4fe0030c8c380e6de2bfb9b853a1e02215cdc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2c199aeb606ea76c25d359d6706cde20b95a2e894d1ebac40d2f8002df3f4996",
+      "sha256": "0b28f759b2e9b6cf59c6b23ce5be7606ab2052c355cc998e3f093a1d48fd65fd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-17p",
         "displayName": "Holmes",
         "publicBase": "/scenes/comet-17p/",
-        "distanceAu": 3.840891878074923,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0d6225a2b2aae891ac6338b0a975ffc229e46da8390ad54505365f24836d0cba",
+      "sha256": "3e83217e212c30a34b938d7fb2803b412cd0a374ddff0cd7012a64e96ff44e6c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://science.nasa.gov/asset/hubble/comet-17pholmes-hubble-image-series/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "d413403a4ed05d140f934b908e7d411cd056c5a36c3bfb8d4a1bedd05100ec6f",
       "bytes": 436660,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0d6225a2b2aae891ac6338b0a975ffc229e46da8390ad54505365f24836d0cba",
-      "bytes": 3082,
+      "sha256": "3e83217e212c30a34b938d7fb2803b412cd0a374ddff0cd7012a64e96ff44e6c",
+      "bytes": 2802,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -336,13 +317,13 @@
           "url": "/scenes/comet-17p/comet-17p-model-thumbnail.webp",
           "bytes": 1392,
           "sha256": "29e7ca146d38d59989f17d3bf293d98b1f0004ce41139d1d4ea6c92432fec84a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-17p/comet-17p-model-surface@2x.webp",
           "bytes": 120564,
           "sha256": "4222a528b55f1e8489a8fc1e84698f604c3a7d295d351b949a92455779404cd8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -373,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4621,
-          "sha256": "7849ccfd42e5800b7e0a2d473e8cfe8dd0c8a40d31d801d32396f1525a8934ef",
+          "bytes": 4502,
+          "sha256": "5088126f875a615a812223887093b98acc239f63db4cab2bd8fcee8aa7247629",
           "verification": "bytes-verified"
         }
       ],
@@ -384,5 +365,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-17p",
+    "materialSha256": "81f851289014b4de87007f9c2ad689cd8ee8a9907ad86647823516d69262601e",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

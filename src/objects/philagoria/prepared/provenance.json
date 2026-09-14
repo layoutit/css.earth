@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "philagoria",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "09d2bf1ba19c4c80ac8abe7f2967e48199ccfb6ccd2eb5417e05517d7d2de465"
+    "sha256": "aeac753c8fdce73d78acdf8b60af508ecd303681fdc7ec62ad4b3bf8f3c96296"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c0e90094e719f0bdf2481e08c96aa6633c7da2c9b02b7dcb8c9e519cd53cf0d0",
+      "sha256": "f23aacc6e2b683de1bb082829e33f29d981e3ec37948c558b7ac52e92bd78052",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "philagoria",
         "displayName": "Philagoria",
         "publicBase": "/scenes/philagoria/",
-        "distanceAu": 3.0476100267473623,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 883 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "21c3eeec5d1425bde992b95ac48465a33598495c980684f1c32428faf6fc9108",
+      "sha256": "b87e11a20e8fbc6157e03caaee6980806bf6955deeaedc9aa9aef8fa76a69809",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/883"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "d00a5edc3e2c3ccfd5fc8ec04d264eb5fc651bf5b4015258f7878aa48f1bae1d",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "21c3eeec5d1425bde992b95ac48465a33598495c980684f1c32428faf6fc9108",
-      "bytes": 11596,
+      "sha256": "b87e11a20e8fbc6157e03caaee6980806bf6955deeaedc9aa9aef8fa76a69809",
+      "bytes": 11317,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/philagoria/philagoria-elevation-thumbnail.webp",
           "bytes": 4978,
           "sha256": "f01cf6bda46f75dd532a4802360a036afc5a61ea6d0d0cf5119dfc433518d611",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/philagoria/philagoria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/philagoria/philagoria-elevation-surface@2x.webp",
           "bytes": 293490,
           "sha256": "3aebafa0e8e35b6e7b37caa186fe4caec7768ce00027bb41b7642fcbe2c66e43",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/philagoria/philagoria-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/philagoria/philagoria-shape-surface@2x.webp",
           "bytes": 183704,
           "sha256": "18dcbf4fcd1c9e0db73cc7c1c0e9fdb817db138e2661d6c1f6e9ae88019a86e9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8915,
-          "sha256": "5bb5f52f400ed6b03f82a27581448b23bb30bb5107e4bc2b3eea24d6cb329b3b",
+          "bytes": 8796,
+          "sha256": "16d8efa14ee4c430ebefd9b313f3cb3393c16beca8c99c9fee636494bcbe8d41",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "philagoria",
+    "materialSha256": "6f0916d800716713cde8dd3aa37292b15da16166f937fd171ce1e05d92696dc7",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

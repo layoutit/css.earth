@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "galatea-74",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6c822a2bdcd3db1bf35251dd654f76030cc6726d2add3d5e2ba781e89f09315b"
+    "sha256": "231b40c2071c92f382513c5b59236a647df5866cef8281bc5d733a3bec12a271"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8f2ffc7de43fd35474bd21bd5943834878585f3e02ebd83a8029e586cb334247",
+      "sha256": "1244d5619ac0038ffd1ed0dd3d5c2abd20712f885608dc04135775f810833e25",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "galatea-74",
         "displayName": "74 Galatea",
         "publicBase": "/scenes/galatea-74/",
-        "distanceAu": 2.780620996918218,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 6181 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d05bf2805919a2e79a9e342dafbcc2854551e9fc37a4e9447c880b807a04f8eb",
+      "sha256": "aa7b883273d398228194094ce59266bd54b881498199dce4f6c483d68cdac74c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6181"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "6ddcee1db0ceec15c3dfae6c178336914650b00826fba507d8cd6dd3dab41087",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d05bf2805919a2e79a9e342dafbcc2854551e9fc37a4e9447c880b807a04f8eb",
-      "bytes": 11614,
+      "sha256": "aa7b883273d398228194094ce59266bd54b881498199dce4f6c483d68cdac74c",
+      "bytes": 11335,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/galatea-74/galatea-74-elevation-thumbnail.webp",
           "bytes": 6640,
           "sha256": "f4c6b5c785d0ca9ed36a8923c39fcb8d2c9dc5475fe248b4ea96f3370b7eaf4f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/galatea-74/galatea-74-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/galatea-74/galatea-74-elevation-surface@2x.webp",
           "bytes": 327910,
           "sha256": "2ae49299a8e00d80d03261fcd6bdc3525033b501d5b48ebcff3247963fd5bcd9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/galatea-74/galatea-74-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/galatea-74/galatea-74-shape-surface@2x.webp",
           "bytes": 232500,
           "sha256": "64f7def732d887327e8e7863c1b9fbdef882d0f8d318bf7c3954495d60a9cc9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8931,
-          "sha256": "92aceb2390106ba70bcef2e2db6d237649f93df14df3ca42fba8df42027782d7",
+          "bytes": 8812,
+          "sha256": "bd15a8ffa77f00a36e8ec29a314b186fd3c58acd8131073036fd078ecb1023d0",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "galatea-74",
+    "materialSha256": "8c10399a44faf7c175b3182ec4f8290a3dd50f773305d9a560ee4d65a3a57430",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

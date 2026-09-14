@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "smc",
+  "name": "Small Magellanic Cloud",
+  "defaultLens": "optical",
+  "bank": {
+    "path": "src/objects/smc/prepared/image-layers.json",
+    "sha256": "80075d89330548560ba584a949398f1500a53e8d327245ae563d43b57e316ea6",
+    "bytes": 178276
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/smc/source/recipe.json",
+      "sha256": "fbe9ee025ef9935b0e037452281ff5acdc0a5e4316372aabb03c07dd41c6fbde",
+      "bytes": 2880
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/smc/source/provenance.json",
+      "sha256": "23ec5aaec69500bce667a2b37bd686fd9e235dbf7b6ecab6fca47428964f4505",
+      "bytes": 1689
+    }
+  ],
+  "sharedInputs": [],
+  "lenses": [
+    {
+      "id": "optical",
+      "label": "NSF's NOIRLab via AstroPix \u00b7 optical",
+      "title": "Deepest, widest view of the Small Magellanic Cloud from SMASH",
+      "description": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth. The SMASH image covers the main optical body, not the full Bridge, Wing or tidal debris. Released foreground and background sources remain.",
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "detail": "3000 \u00d7 2501 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "DECam g / DECam r / DECam i / DECam z"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3000 \u00d7 2501"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "318.00 \u00d7 264.00 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/smc/source/source.jpg",
+        "sha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c",
+        "bytes": 4359408,
+        "url": "https://www.astropix.org/archive/noirlab/noirlab2030b/noirlab_noirlab2030b_3000.jpg"
+      }
+    }
+  ]
+}

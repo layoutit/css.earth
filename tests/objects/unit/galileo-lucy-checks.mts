@@ -7,10 +7,8 @@ import { createSourceManifest } from '../../../src/platform/source-manifest.mts'
 import { loadRadialTerrain } from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { contactEllipsoidMesh } from '../../../tools/objects/terrestrial-layers/contact-ellipsoids.mts';
 import { ellipsoidParameterMesh } from '../../../tools/objects/terrestrial-layers/ellipsoid-parameters.mts';
-import { preparePlanetarySystem } from '../../../src/platform/prepare-planetary-system.mts';
-import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
 
-export function checkGalileoLucy(id: Parameters<typeof preparePlanetarySystem>[0]["bodyId"]) {
+export function checkGalileoLucy(id: string) {
   const sourceDirectory = resolve('src/objects', id, 'source');
   const read = async (path: string) => JSON.parse((await readFile(resolve(sourceDirectory, path))).toString('utf8'));
   test(`${id}: source closure and representation are consistent`, async () => {
@@ -37,16 +35,11 @@ export function checkGalileoLucy(id: Parameters<typeof preparePlanetarySystem>[0
     const content = await read('content/object.json');
     assert(content.lenses.controls.every((control:{detail:string}) => control.detail.length <= 7));
   });
-  if (id !== 'dinkinesh') test(`${id}: parent brightness and approximate placement are complete`, async () => {
-    const config = await read('preparation/terrestrial.json');
-    const system = await preparePlanetarySystem({ bodyId: id, presentationFrame: prepareEclipticPresentationFrame(id), kilometersPerUnit: config.geometry.radiusKm / config.geometry.radius });
-    const parent = required(system.bodies.find(body => body.id === (id === 'dactyl' ? 'ida' : 'dinkinesh')));
-    assert(parent.pointPresentation.samples.every(Number.isFinite));
-    assert.equal(parent.illumination.geometricAlbedo, id === 'dactyl' ? .262 : .27);
+  if (id !== 'dinkinesh') test(`${id}: approximate placement around its parent is complete`, async () => {
     const world = JSON.parse((await readFile('src/objects/sun/prepared/world-context.json')).toString('utf8'));
     const context = world.bodies.find((body: { id: string; }) => body.id === id);
     assert.equal(context.placement, 'approximate');
-    assert.equal(context.orbit.centerBodyId, parent.id);
+    assert.equal(context.orbit.centerBodyId, id === 'dactyl' ? 'ida' : 'dinkinesh');
     assert.match((await read('content/object.json')).panel.introduction, /Approximate orbital placement/);
   });
 }

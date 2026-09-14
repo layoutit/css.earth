@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="greip"])[data-lod="billboard"] .greip-scene, .planet-stage:where([data-object-id="greip"])[data-lod="marker"] .greip-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="greip"])[data-lod="marker"] .greip-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="greip"]).greip-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

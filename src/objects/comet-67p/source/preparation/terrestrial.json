@@ -4,7 +4,6 @@
   "namespace": "comet-67p",
   "displayName": "67P",
   "publicBase": "/scenes/comet-67p/",
-  "distanceAu": 3.46,
   "raster": {
     "width": 512,
     "height": 256,
@@ -753,12 +752,6 @@
     "qualification": "ESA/RMOC MTP019 measured nucleus shape, simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 3 September 2026 epoch."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      184,
-      182,
-      178
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

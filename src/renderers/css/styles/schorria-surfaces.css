@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="schorria"])[data-lod="billboard"] .schorria-scene, .planet-stage:where([data-object-id="schorria"])[data-lod="marker"] .schorria-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="schorria"])[data-lod="marker"] .schorria-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="schorria"]).schorria-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

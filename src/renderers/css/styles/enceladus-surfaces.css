@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="enceladus"])[data-lod="billboard"] .enceladus-scene, .planet-stage:where([data-object-id="enceladus"])[data-lod="marker"] .enceladus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="enceladus"])[data-lod="marker"] .enceladus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="enceladus"]).enceladus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

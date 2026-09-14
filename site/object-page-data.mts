@@ -4,9 +4,6 @@ import { createHash } from 'node:crypto';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { requireAssets, requireControls } from '../src/renderers/css/dist/index.js';
 import { record } from './browser-types.mts';
-import { hasErrorCode } from '../tools/source-values.mts';
-import { listSharedBankFiles, sharedBankPath } from '../src/platform/prepared-shared-banks.mts';
-import type { SharedReference } from '../src/platform/prepared-shared.mts';
 
 /** Server/build-only metadata read. Scene trees remain separate runtime assets. */
 export async function readPreparedObjectBytes(id: string, root = process.cwd()) {
@@ -44,18 +41,4 @@ export async function loadObjectPageData(id: string, root = process.cwd()) {
   requireAssets(object.assets);
   requireControls(object.controls);
   return { assets: object.assets, controls: object.controls };
-}
-
-/** Every checked-in shared bank, for the static bank endpoint. */
-export async function listSharedBanks(root = process.cwd()) {
-  return (await listSharedBankFiles(root)).map(({ reference }) => reference);
-}
-
-/** Bank bytes, only when they reproduce their content address. */
-export async function readSharedBankBytes(reference: SharedReference, root = process.cwd()) {
-  let bytes: Buffer;
-  try { bytes = await readFile(sharedBankPath(root, reference)); }
-  catch (error) { if (hasErrorCode(error, 'ENOENT')) return null; throw error; }
-  if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new Error(`Shared bank ${reference.kind}/${reference.sha256} differs from its content address.`);
-  return bytes;
 }

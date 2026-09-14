@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="sylvia"])[data-lod="billboard"] .sylvia-scene, .planet-stage:where([data-object-id="sylvia"])[data-lod="marker"] .sylvia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="sylvia"])[data-lod="marker"] .sylvia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="sylvia"]).sylvia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

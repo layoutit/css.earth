@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hestia"])[data-lod="billboard"] .hestia-scene, .planet-stage:where([data-object-id="hestia"])[data-lod="marker"] .hestia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hestia"])[data-lod="marker"] .hestia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hestia"]).hestia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

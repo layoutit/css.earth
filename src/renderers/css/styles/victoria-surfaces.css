@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="victoria"])[data-lod="billboard"] .victoria-scene, .planet-stage:where([data-object-id="victoria"])[data-lod="marker"] .victoria-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="victoria"])[data-lod="marker"] .victoria-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="victoria"]).victoria-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

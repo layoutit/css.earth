@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ra-shalom"])[data-lod="billboard"] .ra-shalom-scene, .planet-stage:where([data-object-id="ra-shalom"])[data-lod="marker"] .ra-shalom-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ra-shalom"])[data-lod="marker"] .ra-shalom-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ra-shalom"]).ra-shalom-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

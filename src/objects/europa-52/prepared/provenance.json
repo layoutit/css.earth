@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "europa-52",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "41942264b1096f8d9240fef73b07ffbc1f4088a60a6c81d94b0f4d2342209d22"
+    "sha256": "d4b2eef39199a98ce0878bfbc070ad1d87aee925c70e2567722159ed22a8ba82"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3fdbd291377e2c05b8e108c4af519a3c794fede774fae6beb1f003250fb00fbf",
+      "sha256": "1ffa939986fdcd42a662895e7979e74b279b3a8668293f597aeeaca90b4762b4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "europa-52",
         "displayName": "52 Europa",
         "publicBase": "/scenes/europa-52/",
-        "distanceAu": 3.0951664844463056,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "38e57785af41740bdd628851b622327414525973e350c5cb9cbdb195d638832b",
+      "sha256": "93eebccabfbc42b3b3c63bfe4213da6697e02605812c59f9caef14c5ba137b43",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "0b9db737f62916855519b472444c4ba6e96afe472d5ae4256dc9eb4d9aa1d935",
       "bytes": 440059,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "38e57785af41740bdd628851b622327414525973e350c5cb9cbdb195d638832b",
-      "bytes": 8446,
+      "sha256": "93eebccabfbc42b3b3c63bfe4213da6697e02605812c59f9caef14c5ba137b43",
+      "bytes": 8167,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/europa-52/europa-52-elevation-thumbnail.webp",
           "bytes": 4732,
           "sha256": "d2d86747c299c00bc0c40d1db8f86b0fd42a7cb8189baab037a32ac670a2dbfc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa-52/europa-52-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa-52/europa-52-elevation-surface@2x.webp",
           "bytes": 280818,
           "sha256": "6cec4adfd9f851f84080ed4f6f12e931834e71ec1b2e04eabe6917ddf9ee5b3d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -452,13 +433,13 @@
           "url": "/scenes/europa-52/europa-52-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa-52/europa-52-shape-surface@2x.webp",
           "bytes": 215994,
           "sha256": "b581f341f2815ae284c1e936cda5fd95625c2953ede168fe0cd0158d17417682",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -489,8 +470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6242,
-          "sha256": "179167ace26c6f60ab91b55faf13b322c525f4e348982f32e9d638ca77b331c5",
+          "bytes": 6123,
+          "sha256": "0d2444cf525f25dce0fd1b1ec51df38f7388c1c545f577bef385b598ca00f257",
           "verification": "bytes-verified"
         }
       ],
@@ -550,5 +531,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "europa-52",
+    "materialSha256": "745e454428be4b2177d2000640fa219b6bfd12b813dd20014cd98557209d67c1",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

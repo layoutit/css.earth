@@ -4,6 +4,24 @@ Seven retained catalogue-centre annotations share the application camera: Virgo,
 Fornax, Hydra, Centaurus, Norma, Perseus, and Coma. They contain no synthetic member
 galaxies, luminous gas, or density volume.
 
+## Sources
+
+| Retained release | Use |
+| --- | --- |
+| MCXC-II, Sadibekova et al. (2024), CDS J/A+A/688/A187 | Seven named centres, redshifts, angular scale and R500 apertures |
+
+The [source manifest](source/manifest.json) pins all retained bytes and authored records. [Acknowledgments and terms](NOTICE.md) document unresolved upstream reuse terms. The [investigation ledger](investigations.json) consolidates the retained source decisions without claiming a new archive search.
+
+## Evidence
+
+The [cluster tests](../../preparation/cluster-catalog/cluster-catalog.test.ts) compare catalogue selection and the independent published kpc/arcsec scale with the derived cosmology. The [prepared inventory](prepared/manifest.json) pins the delivered catalogue. These checks cover data and derivation; they do not qualify a cluster image or density model.
+
+## Known problems
+
+Redshift-derived positions are sensitive to peculiar velocities, especially for nearby Virgo and Fornax. R500 is an analysis aperture, not a physical edge. The resource provides annotations only. No fresh browser qualification is claimed by these metadata changes.
+
+## Method
+
 The canonical input is the full 2,221-row MCXC-II release by Sadibekova et al.
 (2024), A&A 688 A187, mirrored by CDS as J/A+A/688/A187. The gzip table and its
 byte-column ReadMe are checked in with SHA-256 and size pins. The source recipe
@@ -23,15 +41,7 @@ radius, not a measured cluster boundary. Navigation frames 1.5 times this apertu
 The shared navigation limit is 200 Mpc, covering the furthest selected centre
 (Coma, about 98 Mpc) with room to orbit it.
 
-From the repository root:
-
-```sh
-pnpm install --ignore-scripts
-pnpm build:astronomy
-pnpm build:catalog
-pnpm build:preparation
-node tools/objects/dist/prepare-cluster-catalog.js src/objects/galaxy-clusters
-```
+Common installation and preparation are documented in the [shared contributor guide](../README.md).
 
 The prepared JSON includes every source reference used by the runtime. No source
 table, coordinate conversion, cosmology integration, or geometry bake runs in the

@@ -1,7 +1,7 @@
 import { requireRecord } from '../../tools/source-values.mts';
 import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.js';
 interface QualityDecode {url:string;start:number;end:number|null;error?:string;}
-interface QualityFrame {time:number;id:string|undefined;ready:boolean|undefined;stageOpacity:number;skies:number;scenes:number;proxyDiameter:number;sourceDiameter:number|null;paintedProxyWidth:number;detailDiameter:number|null;detailOnscreen:boolean|undefined;detailMaterialReady:boolean;pendingRequired:unknown;inputEnabled:boolean;spinner:string;}
+interface QualityFrame {time:number;id:string|undefined;ready:boolean|undefined;stageOpacity:number;skies:number;scenes:number;sourceDiameter:number|null;detailDiameter:number|null;detailOnscreen:boolean|undefined;detailMaterialReady:boolean;pendingRequired:unknown;inputEnabled:boolean;spinner:string;}
 interface QualityProof {from:string;to:string;start:number;frames:QualityFrame[];raf:number;}
 interface RequestSample {url:string;start:number;status?:number;cached?:boolean;headerBytes?:number;networkStatus?:number;transferredBytes?:number;}
 declare global {interface Window {__qualityDecodes:QualityDecode[];__navigationQuality:QualityProof;__qualityPointerDown:{input:boolean;diameter:number|undefined};}}
@@ -105,15 +105,11 @@ try {
           const camera = stage.querySelector('.polycss-camera')?.getBoundingClientRect();
           const centre = body?.screen && camera ? [camera.x + camera.width / 2 + body.screen[0],
             camera.y + camera.height / 2 + body.screen[1]] : null;
-          const marker = window.__cssEarth?.object(from)?.sky.state()?.planetarySystem?.bodies?.find(body => body.id === to);
-          const element = stage.querySelector(`.planet-heliocentric-system-marker[data-body="${to}"]`);
           proof.frames.push({ time, id, ready: window.__cssEarth?.ready,
             stageOpacity: Number(getComputedStyle(window.__cssearthTest.required(stage, 'computed style element')).opacity), skies: stage.querySelectorAll('.planet-cubic-sky').length,
             scenes: stage.querySelectorAll('.polycss-scene').length,
-            proxyDiameter: id === from && marker?.visible ? marker.physicalDiameterPx : 0,
-            sourceDiameter: id === from ? diagnostics?.sky.state().lod?.silhouetteDiameter ?? null : null,
-            paintedProxyWidth: id === from && element && !window.__cssearthTest.htmlElement(element).hidden ? element.getBoundingClientRect().width : 0,
-            detailDiameter: diagnostics?.sky.state().lod?.silhouetteDiameter ?? null,
+            sourceDiameter: id === from ? diagnostics?.runtime.view()?.levelOfDetail?.silhouetteDiameter ?? null : null,
+            detailDiameter: diagnostics?.runtime.view()?.levelOfDetail?.silhouetteDiameter ?? null,
             detailOnscreen: body?.visible && centre !== null && centre[0] > 0 && centre[0] < innerWidth &&
               centre[1] > 0 && centre[1] < innerHeight,
             detailMaterialReady: diagnostics?.runtime.selection().ready ?? false,
@@ -149,7 +145,6 @@ try {
       const sourceFrames = proof.frames.filter(frame => frame.id === from);
       const switched = proof.frames.find(frame => frame.id === to && frame.scenes === 1);
       const limit = required(definition.camera.levelOfDetail).billboardFadeStartDiscPixels;
-      const largeProxy = sourceFrames.filter(frame => frame.proxyDiameter > limit);
       const requiredDecodes = proof.decodes.filter(event => requiredUrls.has(event.url));
       const startupDecodes = proof.decodes.filter(event => startupUrls.has(event.url));
       // A304 response revalidates an already decoded entity; it does not fetch
@@ -160,9 +155,6 @@ try {
         frame.detailOnscreen && frame.detailDiameter !== null && frame.detailDiameter > limit && frame.detailDiameter < 300);
       const report = { from, to, delayedImages, start: proof.start, end: proof.end,
         durationMs: proof.end - proof.start, switchMs: switched ? switched.time - proof.start : null,
-        proxyLimitPixels: limit, maximumProxyDiameter: Math.max(...sourceFrames.map(frame => frame.proxyDiameter)),
-        oversizedProxyFrames: largeProxy.length,
-        oversizedProxyDurationMs: largeProxy.length ? required(largeProxy.at(-1)).time - largeProxy[0].time : 0,
         startupImagesReadyMs: Math.max(...startupDecodes.map(event => event.end ?? Infinity)) - proof.start,
         lastRequiredDecodeMs: Math.max(...requiredDecodes.map(event => event.end ?? Infinity)) - proof.start,
         lateRequiredDecodes: requiredDecodes.filter(event => event.start > (switched?.time ?? Infinity)),
@@ -190,10 +182,10 @@ try {
       await page.mouse.move(720, 500);
       await page.evaluate(() => document.addEventListener('pointerdown', event => {
         window.__qualityPointerDown = { input: Boolean((event.target instanceof Element ? event.target : null)?.closest('.planet-input-surface')),
-          diameter: window.__mercury?.sky.state().lod?.silhouetteDiameter };
+          diameter: window.__mercury?.runtime.view()?.levelOfDetail?.silhouetteDiameter };
       }, { capture: true, once: true }));
       await page.waitForFunction(() => {
-        const diagnostics = window.__mercury, diameter = diagnostics?.sky.state().lod?.silhouetteDiameter;
+        const diagnostics = window.__mercury, diameter = diagnostics?.runtime.view()?.levelOfDetail?.silhouetteDiameter;
         const body = diagnostics?.runtime.view()?.body;
         const camera = document.querySelector('.polycss-camera')?.getBoundingClientRect();
         if (!body?.visible || !body.screen || !camera || diameter === undefined) return false;
@@ -205,7 +197,7 @@ try {
       await page.mouse.down(); await page.mouse.up();
       await page.waitForFunction(() => window.__cssEarth?.ready === true);
       const stopped = await page.evaluate(() => ({ id: window.__cssearthTest.scene().activeObjectId, path: location.pathname,
-        diameter: window.__mercury?.sky.state().lod?.silhouetteDiameter,
+        diameter: window.__mercury?.runtime.view()?.levelOfDetail?.silhouetteDiameter,
         pointer: window.__qualityPointerDown,
         transform: window.__cssearthTest.html('.polycss-scene').style.transform }));
       await page.waitForTimeout(300);
@@ -227,7 +219,6 @@ try {
   }
   await writeFile(`${directory}/report.json`, JSON.stringify({ reports, interruption }, null, 2));
   for (const report of reports) {
-    assert.equal(report.oversizedProxyFrames, 0, `${report.from} → ${report.to}: detail must own the scene before the prepared20px geometry transition`);
     assert.equal(report.maximumDetailedScenes, 1);
     assert.deepEqual(report.gaps, [], 'The world sky must remain fully visible');
     assert.deepEqual(report.lateRequiredDecodes, [], 'Required destination images must decode before detailed handoff');
@@ -246,5 +237,5 @@ try {
       assert.ok(report.distantWaitFrames >= 20, 'The source remains distant while destination images are unavailable');
     }
   }
-  console.log('NAVIGATION QUALITY PASS: detailed handoff precedes proxy enlargement, including delayed destination images');
+  console.log('NAVIGATION QUALITY PASS: detailed handoff paints a growing approach, including delayed destination images');
 } finally { await browser.close(); }

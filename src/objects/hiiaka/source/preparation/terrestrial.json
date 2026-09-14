@@ -4,7 +4,6 @@
   "namespace": "hiiaka",
   "displayName": "Hiʻiaka",
   "publicBase": "/scenes/hiiaka/",
-  "distanceAu": 43.13,
   "raster": {
     "width": 512,
     "height": 256,
@@ -79,12 +78,6 @@
     "sunSource": "Retained JPL Horizons parent-relative and parent-heliocentric state at the fixed scene epoch; source/validation/epoch-state.json. Older JPL#110 Haumea-system solution; limited phase accuracy. Illustrative display pole and meridian."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

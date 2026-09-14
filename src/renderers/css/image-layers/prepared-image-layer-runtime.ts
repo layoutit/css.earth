@@ -21,16 +21,16 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     camera.className = 'css-volume-camera'; scene.className = 'css-volume-scene'; mesh.className = 'css-volume-mesh';
     // Same camera-driven scene as a volume: keep slice raster scales through rotation.
     scene.style.willChange = 'transform';
+    const textures: { element: HTMLElement; path: string }[] = [];
     for (const leaf of stack.leaves) {
       const element = document.createElement('s');
       element.dataset.imageLayerLeaf = leaf.id;
       Object.assign(element.style, leaf.style);
-      const url = resolveResource(leaf.texturePath).replace(/["\\\n\r]/g, char => `\\${char}`);
-      element.style.backgroundImage = `url("${url}")`;
+      textures.push({ element, path: leaf.texturePath });
       mesh.appendChild(element);
     }
     scene.appendChild(mesh); camera.appendChild(scene); projection.appendChild(camera); root.appendChild(projection);
-    return { axis: stack.axis, projection, camera, scene };
+    return { axis: stack.axis, projection, camera, scene, textures, loaded: false };
   });
   host.insertBefore(root, before);
   let destroyed = false;
@@ -47,6 +47,13 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
         bank.camera.style.perspectiveOrigin = `calc(50% + ${ox}px) calc(50% + ${oy}px)`;
         bank.scene.style.transform = cssTransform;
         const weight = weights[bank.axis];
+        if (weight > 0 && !bank.loaded) {
+          for (const { element, path } of bank.textures) {
+            const url = resolveResource(path).replace(/["\\\n\r]/g, char => `\\${char}`);
+            element.style.backgroundImage = `url("${url}")`;
+          }
+          bank.loaded = true;
+        }
         bank.projection.style.opacity = String(weight);
         bank.projection.style.visibility = weight > 0 ? 'visible' : 'hidden';
         // A zero-weight axis contributes nothing; its 3D leaves leave compositing.

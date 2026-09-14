@@ -1,12 +1,7 @@
-import {requireRecord} from '../../../../tools/source-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import {
-  ASTROMETRIC_CUBE_FRAME,
-  prepareAstrometricCubeSampling,
-  prepareAstrometricSkySceneRegistration,
-} from "../../../../src/platform/astrometric-sky-registration.mts";
+import { prepareAstrometricSkySceneRegistration } from "../../../../src/platform/astrometric-sky-registration.mts";
 import {
   ICRS_TO_GALACTIC,
   transformDirection,
@@ -18,7 +13,6 @@ import {
 } from "../../../../src/platform/solar-geometry.mts";
 import PREPARED_MERCURY_SCENE from "../../../../src/objects/mercury/prepared/scene.json" with {type: "json"};
 import PREPARED_MERCURY_SKY_SUN from "../../../../src/objects/mercury/prepared/sun.json" with {type: "json"};
-import PREPARED_MERCURY_STARFIELD from "../../../../src/objects/mercury/prepared/sky.json" with {type: "json"};
 
 // The published registration, parsed the way the runtime parses it
 // (DOMMatrix column order), as a row-major 3x3.
@@ -34,28 +28,6 @@ function parseRegistration(cssTransform: string) {
   ];
 }
 
-test("the Mercury cube was sampled in the astrometric ICRF frame, not by Euler angles", () => {
-  const registration = PREPARED_MERCURY_STARFIELD.astrometricRegistration;
-  assert.equal(registration.cubeFrame, ASTROMETRIC_CUBE_FRAME);
-  assert.equal("photographicRegistration" in PREPARED_MERCURY_STARFIELD, false);
-  assert.equal("centerRaDegrees" in PREPARED_MERCURY_STARFIELD, false);
-  // The recorded sampling matrix is the one the chain derives today, so a
-  // change to any constant in the chain demands a re-preparation.
-  const expected = prepareAstrometricCubeSampling();
-  for (let index = 0; index < 9; index += 1) {
-    assert.ok(
-      Math.abs(registration.matrix[index] - expected.matrix[index]) < 1e-12,
-      `sampling matrix element ${index}`,
-    );
-  }
-  assert.equal(registration.panorama.anchors.length, 5);
-  const declaredMaximum=requireRecord(registration.panorama.frameCorrection).maximumResidualDegrees;
-  assert.ok(declaredMaximum === undefined || (typeof declaredMaximum === "number" && declaredMaximum < 0.3));
-  assert.ok(Object.values(registration.panorama.frameCorrection.residualsDegrees)
-    .every((residual) => residual < 0.3));
-  assert.match(PREPARED_MERCURY_STARFIELD.qualification, /sampled in ICRF/u);
-});
-
 test("the published scene registration is the derived ICRF -> presentation rotation", () => {
   const starfield = PREPARED_MERCURY_SCENE.starfield;
   assert.equal(starfield.sceneRegistrationModel,
@@ -68,7 +40,7 @@ test("the published scene registration is the derived ICRF -> presentation rotat
       `registration element ${index}`);
   }
   // Independent of the derivation: the registration must take the Sun, via
-  // ICRF, onto the Sun the sprite and the terminator use.
+  // ICRF, onto the Sun direction the terminator uses.
   const sunIcrf = transformDirection(
     requireBodyFixedToIcrf("mercury"),
     requireBodyFixedSunDirection("mercury"),

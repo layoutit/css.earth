@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "phaethon",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5a43208e66bd0542404619ab44ca0e1ec595f4708d813128a06191629c583618"
+    "sha256": "3fc1ce5b99d4b72a05872925e7c8e63783f2c658b475dcbf28ceb8a45db4dc77"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "04765f5fe8778dc84e6447d658d828f689ddba845dbbfb026790aa5c2c858491",
+      "sha256": "7dc59e1957633a13c37139d6542d9e574ab7c9130a747cf9b8de43a3b5061cfe",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "phaethon",
         "displayName": "Phaethon",
         "publicBase": "/scenes/phaethon/",
-        "distanceAu": 1.2714545674912625,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 4394 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7733d9465c02e9c62b44be859a7f01f82db3c2dca0422808399a6bde9ff8a955",
+      "sha256": "317abf561b148a61cb009bd01bae42926c771ae3ca44718a45c130e42bbca323",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4394"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "c800be46f47775bd0d1d777265503c2dd20db422a3a41b5c29aa5ae179ffb948",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7733d9465c02e9c62b44be859a7f01f82db3c2dca0422808399a6bde9ff8a955",
-      "bytes": 8282,
+      "sha256": "317abf561b148a61cb009bd01bae42926c771ae3ca44718a45c130e42bbca323",
+      "bytes": 8003,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -391,19 +372,19 @@
           "url": "/scenes/phaethon/phaethon-elevation-thumbnail.webp",
           "bytes": 5726,
           "sha256": "35fc592cf7808f7b8f8c43fe8733c2dbd5bdb67b1541664e691fa3d4585352a0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phaethon/phaethon-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phaethon/phaethon-elevation-surface@2x.webp",
           "bytes": 339952,
           "sha256": "caf2915fb199a34eb703be5b07da18c9b3aa453c278ea414574ce9e38fe4dd94",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -441,13 +422,13 @@
           "url": "/scenes/phaethon/phaethon-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phaethon/phaethon-shape-surface@2x.webp",
           "bytes": 230964,
           "sha256": "a814d025cfef8f33e915bc80076a20c3aa375b816af132e4e433413ca8f4a848",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -478,8 +459,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6087,
-          "sha256": "0ed3f6ab2fdd907e70361cf3b8ce12bd61243dd3f7c5d9cb07df186fc55c90c1",
+          "bytes": 5968,
+          "sha256": "b238fe69c31b768009c3d20d5d36930ff1d51b4d9d3dd3f69f3c83c500a59016",
           "verification": "bytes-verified"
         }
       ],
@@ -539,5 +520,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "phaethon",
+    "materialSha256": "9fca3e146becaeef3a0592d7ffad3a1035f2f71258336352fb3ce9486bdbe863",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

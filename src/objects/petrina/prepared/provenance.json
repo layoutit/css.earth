@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "petrina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "03b6b98b86805d7cddb744987005eeadec1c6d744bac2d59fcc14200e57e118c"
+    "sha256": "0d1a4210ce0832355475a3abb8b9f66f90102abd38e5e0280d098d62bb22fe22"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fd0435216906300c6fa6a1574c60426ad2f6bf08119ad746b7ee19d5fd39cef0",
+      "sha256": "1517d2829f405cfc37bfd170d85b7b21d318e98cf55c823c47cb2124244fac82",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "petrina",
         "displayName": "Petrina",
         "publicBase": "/scenes/petrina/",
-        "distanceAu": 3.0015196284082286,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1e9a7718c4a95cb1208a7ec46a078eda1810b0e092659c53bbf26679c0519bd3",
+      "sha256": "483ec8ea52461a7434df3e3b381d11274551cd91f49e1d41b7da0a17e27dc57f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1152"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "1189e6d6480532a0b3bd0dc2b18f9663f4e0154145640f0638bd5e6348033632",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "1e9a7718c4a95cb1208a7ec46a078eda1810b0e092659c53bbf26679c0519bd3",
+      "sha256": "483ec8ea52461a7434df3e3b381d11274551cd91f49e1d41b7da0a17e27dc57f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8552,
+      "bytes": 8273,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/petrina/petrina-elevation-thumbnail.webp",
           "bytes": 5506,
           "sha256": "69529a35362dbcfaf75be07e4cddca8f70ccc77e18afe778f588d8ec3f9b6d9d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/petrina/petrina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/petrina/petrina-elevation-surface@2x.webp",
           "bytes": 308346,
           "sha256": "3a196b12e3bc9f50e35b47132a07f0d8f27756b90baba4be32ffb5f5e5665a91",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/petrina/petrina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/petrina/petrina-shape-surface@2x.webp",
           "bytes": 216980,
           "sha256": "ba8f53bf8c4052e3841c9640364a96c0ade7d6385b23f3b322973b79d4c48647",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5916,
-          "sha256": "321fe5d8b84b067624524ed43c8d7b2b867ee41a76e5feeafd6bd33e882d1d86",
+          "bytes": 5797,
+          "sha256": "1c0d74fc6cb5caf042d09bcc0075e8babe05272be9ab4a3cc5b26768c35051d9",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "petrina",
+    "materialSha256": "a7121c554eac9873c9a45315cc2472c98422381f2bbef492e9eb07eae1af3d99",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

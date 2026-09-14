@@ -43,9 +43,7 @@ test('actual prepared Mercury and Venus documents preserve every JSON value and 
     assert.equal(parsed, original);
     assert.equal(parsed.schema, 'cssearth-object-runtime@4');
   }
-  const first = parsePreparedObjectRuntime(originals[0]);
-  assert.equal(first.heliocentricView?.plan.system?.bodies.length, 12);
-  assert.equal(first.heliocentricView?.labels?.stars?.policy.poolSize, 1);
+  assert.equal('heliocentricView' in record(originals[0], 'Mercury runtime'), false, 'the shared universe draws the solar system');
   assert.equal(parsePreparedObjectRuntime(originals[1]).controls.lenses?.defaultLens, 'clouds');
 });
 
@@ -103,21 +101,11 @@ test('prepared material ordering, variant coverage and animation ownership remai
   assert.throws(() => parsePreparedObjectRuntime(input), /animation cannot target/);
 });
 
-test('celestial direction, photometry samples and label identities are validated', () => {
+test('celestial direction and sky registration are validated', () => {
   const direction = copy(); child(direction, 'sun').localDirection = [1, 1, 1];
   assert.throws(() => parsePreparedObjectRuntime(direction), /unit direction/);
-  const samples = copy(0), body = item(child(child(child(samples, 'heliocentricView'), 'plan'), 'system').bodies);
-  child(body, 'pointPresentation').samples = [1];
-  assert.throws(() => parsePreparedObjectRuntime(samples), /point samples/);
-  const exposure = copy(0); child(child(child(exposure, 'sky'), 'catalogueStars'), 'exposure').maxRadiusPx = 0.1;
-  assert.throws(() => parsePreparedObjectRuntime(exposure), /exposure exceeds/);
   const registration = copy(0); delete child(registration, 'sky').sceneRegistration;
   assert.throws(() => parsePreparedObjectRuntime(registration), /scene registration/);
-  const labels = copy(0); child(child(child(labels, 'heliocentricView'), 'labels'), 'stars').records = [
-    {id: 'same', name: 'Named', magnitude: 1, direction: [0, 0, -1]},
-    {id: 'same', name: 'Named', magnitude: 1, direction: [0, 0, -1]},
-  ];
-  assert.throws(() => parsePreparedObjectRuntime(labels), /duplicate identities/);
 });
 
 test('executable values, symbols, nonfinite numbers and cycles are rejected without evaluating getters', () => {

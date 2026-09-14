@@ -9,15 +9,7 @@ export const browserProfile = createObjectBrowserProfile({
         one: "/scenes/saturn/saturn-rings.webp",
         two: "/scenes/saturn/saturn-rings@2x.webp",
       }),
-      Object.freeze({
-        one: "/scenes/saturn/saturn-starfield-front.webp",
-        two: "/scenes/saturn/saturn-starfield-front@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/saturn/saturn-directional-sun.webp",
-        two: "/scenes/saturn/saturn-directional-sun@2x.webp",
-      }),
-    ]),
+      ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "ultraviolet",

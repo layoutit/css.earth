@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/rhodope/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'rhodope',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/rhodope/rhodope-directional-sun.webp",
-      "two": "/scenes/rhodope/rhodope-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/rhodope/rhodope-shape-surface@2x.webp"
   ],

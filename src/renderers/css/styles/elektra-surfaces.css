@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="elektra"])[data-lod="billboard"] .elektra-scene, .planet-stage:where([data-object-id="elektra"])[data-lod="marker"] .elektra-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="elektra"])[data-lod="marker"] .elektra-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="elektra"]).elektra-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/lucina/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'lucina',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/lucina/lucina-directional-sun.webp",
-      "two": "/scenes/lucina/lucina-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/lucina/lucina-shape-surface@2x.webp"
   ],

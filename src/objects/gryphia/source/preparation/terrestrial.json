@@ -4,7 +4,6 @@
   "namespace": "gryphia",
   "displayName": "Gryphia",
   "publicBase": "/scenes/gryphia/",
-  "distanceAu": 2.1987067011231507,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -118,12 +117,6 @@
     "sunSource": "Fixed illustrative display orientation for a qualified convex shape of a known tumbler; the incomplete physical attitude is not propagated."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

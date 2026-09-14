@@ -6,14 +6,12 @@ import { requireObjectRuntimeDefinition } from '../../../../tools/object-runtime
 import { requirePreparedCssDescriptor } from '../prepared-object-decoder.js';
 import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
 import { record } from '../validation/guards.js';
-import { inlineSharedFromBanks } from '../../../platform/prepared-shared-banks.mts';
-import { fileURLToPath } from 'node:url';
 import type { ObjectMountOptions, ObjectRuntimeDefinition } from './object-runtime-types.js';
 
 async function preparedFixture() {
   const descriptor = requirePreparedCssDescriptor(JSON.parse(await readFile(new URL('../../../objects/venus/object.json', import.meta.url), 'utf8')));
   const envelope = record(JSON.parse(await readFile(new URL('../../../objects/venus/prepared/object.json', import.meta.url), 'utf8')), 'prepared Venus fixture');
-  const source = requireObjectRuntimeDefinition(await inlineSharedFromBanks(fileURLToPath(new URL('../../../../', import.meta.url)), envelope.data));
+  const source = requireObjectRuntimeDefinition(envelope.data);
   // Retain the real tree and selections while keeping image decoding in its browser gate.
   const data = { ...source, assets: { ...source.assets, startup: [] }, materials: [],
     variants: source.variants.map(variant => ({ ...variant, required: [], materials: [],

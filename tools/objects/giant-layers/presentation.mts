@@ -10,7 +10,7 @@ import type {PreparedCubicSkyPlan} from '../../../src/platform/cubic-sky-contrac
 import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
 import type {PreparedProjectiveTextureLeaf} from '../../../src/renderers/css/rendering/prepared-projective-texture-leaf.ts';
 import {createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform} from '@layoutit/polycss';
-import {preparedSunResources,preparedResourcePool} from '../../../src/platform/prepared-object-assets.mts';
+import {preparedResourcePool} from '../../../src/platform/prepared-object-assets.mts';
 import {PREPARED_PRESENTATION_SCHEMA} from '../../../src/platform/prepared-presentation-contract.mts';
 import {prepareCssomDeclarationReads} from '../../prepared-cssom.mts';
 import {createPreparedNodeTree} from '../../prepared-node-tree.mts';
@@ -40,7 +40,7 @@ export async function prepareLayeredSurfacePresentation({config:input,geometryCo
       [resources.fixedRole]:url(prefix,highest(material.fixed.filter(product=>!product.shadowless)).filename),[resources.shadowlessRole]:url(prefix,highest(material.fixed.filter(product=>product.shadowless)).filename)};
   };
   const staticRoles=['surface','poles',resources.fixedRole,resources.shadowlessRole],staticKeys=(id:string)=>staticRoles.map(role=>`${role}:${id}`);
-  const celestial=[...preparedSunResources(sun,resources.celestialPool),...config.planes.map(plane=>({key:plane.assetKey,url:plane.assetUrl,pool:resources.celestialPool}))];
+  const celestial=[...config.planes.map(plane=>({key:plane.assetKey,url:plane.assetUrl,pool:resources.celestialPool}))];
   const rowCount=bank.frames/bank.columns,rowUrl=(id:string,row:number)=>{const lens=materialConfig.lenses.find(lens=>lens.id===id);if(!lens)throw new TypeError(`Missing material lens ${id}`);return url(prefix,lens.rowOutput.replace('{row}',String(row).padStart(2,'0')));};
   const entries=[...celestial,...lensIds.flatMap(id=>[...Object.entries(surface(id)).map(([role,url])=>({key:`${role}:${id}`,url,pool:resources.staticPool})),...Array.from({length:rowCount},(_,row)=>({key:`${resources.rowKey}:${id}:${row}`,url:rowUrl(id,row),pool:resources.rowPool}))])];
   const meshTransform=authoredTransform(config.meshTransform),systemTransform=authoredTransform(config.systemTransform);

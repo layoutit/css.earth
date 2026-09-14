@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/atalante/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'atalante',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/atalante/atalante-directional-sun.webp",
-      "two": "/scenes/atalante/atalante-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/atalante/atalante-shape-surface@2x.webp"
   ],

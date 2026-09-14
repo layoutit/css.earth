@@ -62,7 +62,7 @@ scene decoding.
 Dataset buttons submit an ordinary GET form to the current object's route, for
 example `/saturn/?dataset=ultraviolet`. The response uses the same prepared
 decoder and scene serializer as the initial page. It verifies the descriptor
-embedded in that page, fetches the content-addressed object and shared banks,
+embedded in that page, fetches the complete content-addressed object,
 and applies the requested prepared variant, including material banks, visibility
 and cross-section state. It replaces the existing stage markup and selects the
 existing dataset description and button. The response contains exactly one scene;
@@ -107,7 +107,7 @@ boundaries. Search alone passes the scene through unchanged; dataset, setting,
 saved-view and focus requests also update the existing stage between the
 `prepared-scene` boundaries. The
 head, stylesheet bytes and application scripts pass through unchanged. The
-function fetches existing scene banks and never regenerates them. The feature
+function fetches existing prepared data and never regenerates it. The feature
 index is checked against its byte count and SHA-256 pin from that same page;
 warm function instances cache only authenticated index data. Query responses
 are not cached and carry `noindex, follow`. An index failure leaves object

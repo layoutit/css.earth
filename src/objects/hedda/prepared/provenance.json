@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hedda",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6b8f61cd4da2fd3520b2f1064528167ae0a1636733d6c7a8b1c9f8e07cd4b053"
+    "sha256": "e121728d0266691ebb7c1435779a8a738c2c2c989534c80b2220ce580ba3edf3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "adfd14ff357952d9fab5758483ca04ed9c9c9260877bda82caf04061e4296702",
+      "sha256": "b8065b5dc5fc98b4c271938f66e63cc595f9e8acc16b84407486dd7d79498e4b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hedda",
         "displayName": "Hedda",
         "publicBase": "/scenes/hedda/",
-        "distanceAu": 2.28374355631575,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 4799 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "430c0199334666a47c60c48fe06295a5437a12192387f4a7c5542114d207c9f1",
+      "sha256": "32b16b33547db2c96a4a3f597cfcc53b1d5d8c30f5bd84f2830e47cabd0fad0a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4799"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "2960870d9b24a38294260667c205abc1a2d88ca5b62af00ff47a50747cf67838",
       "bytes": 44637,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "430c0199334666a47c60c48fe06295a5437a12192387f4a7c5542114d207c9f1",
-      "bytes": 9429,
+      "sha256": "32b16b33547db2c96a4a3f597cfcc53b1d5d8c30f5bd84f2830e47cabd0fad0a",
+      "bytes": 9150,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/hedda/hedda-elevation-thumbnail.webp",
           "bytes": 6274,
           "sha256": "bde4e7a3ed00a011498e43fbcc54bf6faf832867c1085b24e064aeb2f78247ba",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hedda/hedda-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hedda/hedda-elevation-surface@2x.webp",
           "bytes": 318628,
           "sha256": "e1e836525802114b9db59635803fd36a34a1aebc66754a64fea683bf86fa91d8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/hedda/hedda-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hedda/hedda-shape-surface@2x.webp",
           "bytes": 265212,
           "sha256": "ecc399fb7341404f7c426aba897cb02190c35f9d0cdc2d8482284ae3606fa81d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6809,
-          "sha256": "53e95540f6a352680dd0aad1648cc460cd851b63cb7d66922bbb344b8a132c96",
+          "bytes": 6690,
+          "sha256": "e9d287ff05702a3a384dcf78fa388705a74d6cade229114c0af965a728d227a0",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "hedda",
+    "materialSha256": "e603cc85f5b9f84e4bf112b2f280ed5262793d68f7a89921798bf6e6fbda8022",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

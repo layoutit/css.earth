@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="rhea"])[data-lod="billboard"] .rhea-scene, .planet-stage:where([data-object-id="rhea"])[data-lod="marker"] .rhea-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="rhea"])[data-lod="marker"] .rhea-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="rhea"]).rhea-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

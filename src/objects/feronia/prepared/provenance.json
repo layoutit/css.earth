@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "feronia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "be031d5db791b7eb34f6e9a0f34b1227b92a57c5767e4a12257d6d2d1d7d1639"
+    "sha256": "ceb7377075030da992cbd3dc04cb1fce536abde7d0f148fe2404650ac6f0b856"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1521dbd3ac206aaae492d65fb19a65e0477329fb0c95bbabfc82e4c83bb6e11c",
+      "sha256": "5e8bb567552a596754c18fd75c154ad52f7a43f7acfe0be357dcc6042d65f566",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "feronia",
         "displayName": "Feronia",
         "publicBase": "/scenes/feronia/",
-        "distanceAu": 2.265860062248244,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1853 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d701d957ff184b7469f1bc1575fe392db6f0530c102be662b671ebeee02e0306",
+      "sha256": "bd28ceb211eefac2fe638cb5f272a7a023968cd368852188c696e53709031f40",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1853"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "d8096c0152a3739961254f1d3b305b3c6da0ad42d80ce7fc073cb63702a40bcc",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d701d957ff184b7469f1bc1575fe392db6f0530c102be662b671ebeee02e0306",
-      "bytes": 9487,
+      "sha256": "bd28ceb211eefac2fe638cb5f272a7a023968cd368852188c696e53709031f40",
+      "bytes": 9208,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/feronia/feronia-elevation-thumbnail.webp",
           "bytes": 5498,
           "sha256": "83fd877781ab4430f6af49ba84459d9a5d165b4766728e215af544b68c2669da",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/feronia/feronia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/feronia/feronia-elevation-surface@2x.webp",
           "bytes": 273386,
           "sha256": "4eb153a4bef0ccada24e181361deff4a0767e05b9841757ee5154de130dd36a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/feronia/feronia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/feronia/feronia-shape-surface@2x.webp",
           "bytes": 205906,
           "sha256": "3c09e6237f4a0eb15f9bcac14293f60f2683cb6d5e1d4e807bb76ce8f2391f95",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6843,
-          "sha256": "5ca462e718a80b6bfc98b3c87d01590591ed0d6623997ffcba27c94315874a2b",
+          "bytes": 6724,
+          "sha256": "9ecb5d4db4983836928df9918726e05b6ff4ca77647793ff8c3d2650c163a595",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "feronia",
+    "materialSha256": "abfa354e1f4adde6b05c26348f200b1f3906af4fab8c458187fefc0b5b5231c0",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

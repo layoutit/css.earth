@@ -4,7 +4,6 @@
   "namespace": "hekate",
   "displayName": "Hekate",
   "publicBase": "/scenes/hekate/",
-  "distanceAu": 3.0905910748647547,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -114,12 +113,6 @@
     "sunSource": "Pinned JPL Horizons elements and DAMIT model 3088 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

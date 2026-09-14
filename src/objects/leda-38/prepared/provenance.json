@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "leda-38",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6946f12e56a96a2d88c4219d50c2d17d90b9401dd4d4e502bcfa3233e2966c8c"
+    "sha256": "19a5645cdda4b5606f89e85e0aeda1e6fd063fb35448fb6398f2455d37695dd9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5e3adbc7f1ae6ab3356f41160af869997c56b6ca9eeee2d90be2ad07ed4348f4",
+      "sha256": "36bdedc9ed18fec0462f1af317899d13887cb538f013fce09ba8fab71d60b177",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "leda-38",
         "displayName": "38 Leda",
         "publicBase": "/scenes/leda-38/",
-        "distanceAu": 2.7426288995401285,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 720 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "114b637a543d14028cd3e3b45139409e8e33cc647e267b5573d8b620b44463d3",
+      "sha256": "17e7d7bf7fc1f70bbb905804b4a22d2c863a3d70e3a651bbc253898e74a9e9b6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/720"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "109763528dc5541c8d5ee603522994a0c754eb2f8220a8b3fcef950ccd5f9f4c",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "114b637a543d14028cd3e3b45139409e8e33cc647e267b5573d8b620b44463d3",
-      "bytes": 10794,
+      "sha256": "17e7d7bf7fc1f70bbb905804b4a22d2c863a3d70e3a651bbc253898e74a9e9b6",
+      "bytes": 10515,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/leda-38/leda-38-elevation-thumbnail.webp",
           "bytes": 5444,
           "sha256": "18014f83c021243f5eb676c90c1d147c55179b235b7dac04f47f1eff002e4199",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/leda-38/leda-38-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/leda-38/leda-38-elevation-surface@2x.webp",
           "bytes": 265514,
           "sha256": "71b1cec431e9a92b85d14acfe43be8a4ddc91ae417b0616c740a53a1964dfb96",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/leda-38/leda-38-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/leda-38/leda-38-shape-surface@2x.webp",
           "bytes": 236828,
           "sha256": "711b2a6a3691c203304d5dfa0664d069c5b43b495f9a87500c70a3e0702b1bae",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8149,
-          "sha256": "1a559d1106c05baa713641b9b06ccbb16004f514d64b7a187dbb8bbce678600b",
+          "bytes": 8030,
+          "sha256": "1a33224c1ca3d7959cc0068b75340fd65854beb025f5644fcf400991b86b684a",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "leda-38",
+    "materialSha256": "47bd99b64e046e90503b1caebeaf3d1ebc31cedafc69392d8f3d414d40a8bbc3",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

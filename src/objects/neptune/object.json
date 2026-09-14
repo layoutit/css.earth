@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d02fd9ae8e27523809e4c74d65a26388be0c5eaa066b7e9c733f403008e0bb0b"
+    "sha256": "ab4707d8398d2958f8e6bd144fe3cc8a6506e135fd9e455cf02aaf7269135170"
   },
   "id": "neptune",
   "properties": {
@@ -66,7 +66,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e2a3d86cda4fd43a71f449be62b7d42b7d29cebd4689629e4fd278350348cc22"
+          "sha256": "f736731bb293f719cdabfa65974fc3c720895869c6836de7f6efa11245bf26c7"
         },
         {
           "id": "rings",
@@ -86,12 +86,12 @@
         {
           "id": "observations",
           "path": "source/preparation/observations.json",
-          "sha256": "67711c6f0e6aa548d94ca2a434a40ab10dea79da9d40965eba74654987e51a6c"
+          "sha256": "07663ddafe19626090ff139ee2c0e49ef36eb8361b5eb8eb3861e6e3943e1798"
         },
         {
           "id": "materials",
           "path": "source/preparation/materials.json",
-          "sha256": "7ddf646b781a982b02f66e22a6bad93964c260da8a1e3abf56cd94b820cbfbc8"
+          "sha256": "472ee4ef2aa39ab2e02bb1c71e6fdce97fd3bf34dcf3ef20159c1f8a9501e33c"
         },
         {
           "id": "geometry",
@@ -114,14 +114,9 @@
           "sha256": "aa2c0a3e4b1d6f7958d930ecc7e4b9bcb2de8797473f35d52399b5039ce3b060"
         },
         {
-          "id": "celestial",
-          "path": "source/preparation/celestial.json",
-          "sha256": "d382149e96d1fe9decaf6bbe994cb3489021bb12b08ddd7c4cf89e8f246161c2"
-        },
-        {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "22b65e4b3ae72156ea64c98ba71d3d8ef347537e05d2ef6ba8bcfc1cccdfa0a2"
+          "sha256": "b675fa7f8133bce1cdc5b724db7c8398b9528a397a5803e16c80deff156ebc5a"
         }
       ],
       "shape": {
@@ -214,7 +209,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5ed0c56ccbefdbcdfd14856b1b728899c57b6542f3f96cc94f31750035c98a58"
+        "sha256": "087d44e717fa8818b2e904faad046404a298743db2fc2449af6b1dc0028a0e53"
       }
     },
     "catalog": {

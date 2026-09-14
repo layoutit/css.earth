@@ -4,7 +4,6 @@
   "namespace": "ophelia",
   "displayName": "Ophelia",
   "publicBase": "/scenes/ophelia/",
-  "distanceAu": 19.19,
   "raster": {
     "width": 512,
     "height": 256,
@@ -78,12 +77,6 @@
     "sunSource": "JPL Uranus-system ephemeris; IAU Ophelia BODY707 from PCK00011 with the small periodic correction frozen at the prepared epoch."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

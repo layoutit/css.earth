@@ -4,7 +4,6 @@
   "namespace": "romulus",
   "displayName": "Romulus",
   "publicBase": "/scenes/romulus/",
-  "distanceAu": 3.48,
   "raster": {
     "width": 512,
     "height": 256,
@@ -79,12 +78,6 @@
     "sunSource": "Published 2021 Sylvia-system orbit, with an independently checked newer Miriade projection at the retained epoch. Current phase is approximate; source/validation records the roughly 42 mas scene-epoch difference. Shape attitude is illustrative."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

@@ -9,7 +9,7 @@ export async function optionalPreviewJson(path:string) {
 }
 export const parsePreviewControls=shape({controls:array(shape({id:text,surface2xUrl:optional(text),surfaceUrl:optional(text),thumbnailUrl:optional(text),view:optional(text),overlayId:optional(text)}))});
 export const parsePolarPreview=shape({dimensions:shape({width:number,height:number}),packing:shape({latitudeBoundsDegrees:array(number),gutter:number}),lenses:array(shape({id:text,files:shape({surface2x:text})}))});
-export const parseObservedPreview=shape({lenses:array(shape({id:text,products:array(shape({kind:text,filename:text,packing:shape({bandCount:number,gutter:number})}))}))});
+export const parseObservedPreview=shape({lenses:array(shape({id:text,products:array(shape({kind:text,filename:text,packing:optional(shape({bandCount:number,gutter:number}))}))}))});
 export const parseSpectralPreview=shape({namespace:text,descriptor:parsePreviewControls,parameters:shape({body2xWidth:number,body2xHeight:number,latitudeBandCount:number}),lenses:array(shape({id:text}))});
 export const parseGeometryPreview=shape({parameters:shape({planetRasterCellSize:number,longitudeSegments:number,latitudeSegments:number})});
 // Authored rasters reference a source path; prepared surfaces instead retain

@@ -4,7 +4,6 @@
   "namespace": "comet-8p",
   "displayName": "Tuttle",
   "publicBase": "/scenes/comet-8p/",
-  "distanceAu": 5.706764532787596,
   "raster": {
     "width": 512,
     "height": 256,
@@ -189,12 +188,6 @@
     "qualification": "Two touching lobes inferred from Hubble brightness changes and sized using Spitzer infrared measurements. The smooth gray surface represents the model. Its rotation phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      184,
-      182,
-      178
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "klio",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f28aed80aa495a9b2bc680c04ac23ad58b9111476b4777476727a67a8774180f"
+    "sha256": "9e82daefc5cf3313529d38399c9a0e6f7a021edca1d96db8755b976e496d6516"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9cd662081ee610dbac09a26a853be21b34869788728d570f206ed9628dfa453f",
+      "sha256": "e96716a8337b2ec03890c1f5a1706ae1846e4fa1847f50af58c415028df50ab3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "klio",
         "displayName": "Klio",
         "publicBase": "/scenes/klio/",
-        "distanceAu": 2.3638584071567386,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 5792 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "82e068729a952b75ee91e07d06b4b3d6bc6097c2f088290650e025d4c6fe0f5c",
+      "sha256": "ed98379936281b942d004edb244ec1329ecfef4212310070139450af47aa1732",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5792"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "470fb94f84bd323b2b698252ff223a2bf7cd2cd4b30c7c996141135c18ec8cfb",
       "bytes": 46095,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "82e068729a952b75ee91e07d06b4b3d6bc6097c2f088290650e025d4c6fe0f5c",
-      "bytes": 7440,
+      "sha256": "ed98379936281b942d004edb244ec1329ecfef4212310070139450af47aa1732",
+      "bytes": 7161,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/klio/klio-elevation-thumbnail.webp",
           "bytes": 5728,
           "sha256": "b38c9e5ecbc1b303dbdba9c3ed76ececca9c1705235e82ce0268134867bb8fc3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klio/klio-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klio/klio-elevation-surface@2x.webp",
           "bytes": 332352,
           "sha256": "5034fc9a9e49ef2f6a5aa9bf953328521e68439480b808e88ba4e7ff304b0f3d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/klio/klio-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klio/klio-shape-surface@2x.webp",
           "bytes": 234182,
           "sha256": "23faa50faf2e9ebe5729eb9d3964c9a323f5847f50c235ad65835343452081da",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4833,
-          "sha256": "ee36240a36917bfe2ee7996cacb89d37d5aa2b3de6eafde0811017aa93f29bf3",
+          "bytes": 4714,
+          "sha256": "eba34ca17c45d083bea1c21316d3d5a39f399dc118537927876a4b3a3b3047a0",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "klio",
+    "materialSha256": "4780bea18af9fe17e5d4d2b64cfd548c35753959c6450d3630b046a83028730f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

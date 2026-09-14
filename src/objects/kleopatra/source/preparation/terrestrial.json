@@ -4,7 +4,6 @@
   "namespace": "kleopatra",
   "displayName": "Kleopatra",
   "publicBase": "/scenes/kleopatra/",
-  "distanceAu": 2.795397676845876,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -71,12 +70,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements with the observed 2021 MPCD pole and an explicitly arbitrary display phase; not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

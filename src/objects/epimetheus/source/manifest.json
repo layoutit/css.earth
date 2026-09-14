@@ -465,33 +465,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/epimetheus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -1204,6 +1177,8 @@
           "n1864504186_1",
           "n1828124037_1",
           "n1575363079_1",
+          "n1864500586_1",
+          "n1649345705_1",
           "thomas-2018-shape"
         ],
         "size": 512,
@@ -1214,15 +1189,15 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 134520,
-      "expectedSha256": "00f8ef64542e54520dea03c4ba409b874565bb31a7fe3abcacb35a713b4dc627"
+      "expectedBytes": 134835,
+      "expectedSha256": "ee675afe3b3689bb0a67f62e3c97f90c34dd67db9bdeeea723ab9ca82adb3fb1"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5998,
-      "expectedSha256": "532b162aa1aed6966828325f16aeb1942264e0f969114948b25fbb625e16fe7b",
+      "expectedBytes": 5719,
+      "expectedSha256": "713654322679194b0e33936b5a5f1b602c00d7ecc826082cb35c3ed71b224e39",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1230,13 +1205,13 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 7964,
-      "expectedSha256": "b38ee17ea39b7ed37df58823ffc5ad21bc131467e683f95b9f9e56d72bd4fffa"
+      "expectedBytes": 7780,
+      "expectedSha256": "78a75c6975eab60ea6f04bac135c206a3df35b6f8c573fd2c1dae86df81b583d"
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1380,
-      "expectedSha256": "6179436cc56b555ca32c161f52acf1f307b7648a6f8fcee47c48e4a465e0e2cc"
+      "expectedBytes": 1430,
+      "expectedSha256": "ef0a1b369ba6ae82a87d673b4973947d3cb71fffc0c2fe6f10a57673b616270c"
     },
     {
       "path": "preparation/rotation.json",
@@ -1245,8 +1220,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 14703,
-      "expectedSha256": "caaf84cc3b18ecd82917c7b1176eede4c4f49cf2d5c48ddcc162c254d35347a9"
+      "expectedBytes": 14562,
+      "expectedSha256": "31dfb8f1379f73090e3e15e579c502ca749a5c5fac4533b8e43ec5985105993b"
     },
     {
       "path": "presentation/minimap.json",
@@ -1272,21 +1247,6 @@
       "path": "shape/pck00011.tpc",
       "expectedBytes": 131226,
       "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 853,
-      "expectedSha256": "a804231ac8d6488e82f1bf60d8e7a7cd4dc8747af7b1312625181783433f7f94"
     },
     {
       "path": "editorial/factsheet-review.json",

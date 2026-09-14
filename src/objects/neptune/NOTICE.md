@@ -9,7 +9,6 @@
 - Satellite tables: NASA/JPL Solar System Dynamics.
 - Ring table: NASA Planetary Data System Rings Node, SETI Institute.
 - OpenSpace asset records: OpenSpace Team, under the included MIT licence.
-- HYG Stellar Database v4.1: David Nash / Astronexus, CC-BY-SA-4.0.
 - Neptune title outline: Inter Variable 4.001 by Rasmus Andersson and the
   Inter project, SIL Open Font License 1.1.
 

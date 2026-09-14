@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hygiea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f784cec5687989ab1d81afb73308720a0eddac7b957e2a4c1f47b9b2259b2771"
+    "sha256": "86cf51cd311efcc26079846f5ef4f534cf4924a3315dca38503a1bc943b6280a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7eb86135071a9e13f2e05180be797248fd1210196b84fabf315a0b3a04c878d7",
+      "sha256": "c39ce39ec8b8fc5e3a4c9a7023a22b5a1050952ac65429391d0d0e152954b5a2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hygiea",
         "displayName": "Hygiea",
         "publicBase": "/scenes/hygiea/",
-        "distanceAu": 3.1509104848150167,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f352cb5041ab2b1b44ae7a90d5da4aff1439bb8b42795f0d9e8cef3b79b58027",
+      "sha256": "368fa459c63409b7d1839734505d9f2141c645ccd1edf83fba73b47726f82c74",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "caaf2ab054168680b4962a16b480998ed1c2a5364c7e392ebb99fb211d6ba4bd",
       "bytes": 1060219,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f352cb5041ab2b1b44ae7a90d5da4aff1439bb8b42795f0d9e8cef3b79b58027",
-      "bytes": 7497,
+      "sha256": "368fa459c63409b7d1839734505d9f2141c645ccd1edf83fba73b47726f82c74",
+      "bytes": 7218,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/hygiea/hygiea-elevation-thumbnail.webp",
           "bytes": 5814,
           "sha256": "c6f27892beee4b3ebeddb030c3a63710e1649a7795eecb16a02f7fe6ccdfa8c5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hygiea/hygiea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hygiea/hygiea-elevation-surface@2x.webp",
           "bytes": 282434,
           "sha256": "098f17f46803025d64f81754d66f38ff8f0ed96acea1f19028e3f1256d0a370d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -452,13 +433,13 @@
           "url": "/scenes/hygiea/hygiea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hygiea/hygiea-shape-surface@2x.webp",
           "bytes": 226980,
           "sha256": "a3cbef8d9ab9f5f389f639578d42db5365c1fa0cc58c2034dd96ca0666500c27",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -489,8 +470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5330,
-          "sha256": "87b003a828693f2c10522902a446abb9116f5dd88154eac911865615eb643efa",
+          "bytes": 5211,
+          "sha256": "871ba39702970012858ff4809d06007d36c84ef6638b8298e343828cc9047acf",
           "verification": "bytes-verified"
         }
       ],
@@ -550,5 +531,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "hygiea",
+    "materialSha256": "6aca296feea16152d5b54b49ec43c6116479b42e2090751912eac8c37af79e84",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

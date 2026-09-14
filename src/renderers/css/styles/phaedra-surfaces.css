@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="phaedra"])[data-lod="billboard"] .phaedra-scene, .planet-stage:where([data-object-id="phaedra"])[data-lod="marker"] .phaedra-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="phaedra"])[data-lod="marker"] .phaedra-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="phaedra"]).phaedra-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

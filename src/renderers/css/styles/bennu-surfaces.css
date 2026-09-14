@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bennu"])[data-lod="billboard"] .bennu-scene, .planet-stage:where([data-object-id="bennu"])[data-lod="marker"] .bennu-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bennu"])[data-lod="marker"] .bennu-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bennu"]).bennu-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

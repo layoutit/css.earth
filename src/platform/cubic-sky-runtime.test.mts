@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test, { type TestContext } from "node:test";
+import test from "node:test";
 
 import { measureRetainedPlanetTrackball, measureRetainedPlanetFlyToDisc, retainedPlanetUniformScale } from "./camera-layout.mts";
 import { createUnboundedMatrixDragControls } from "./camera-input.mts";
@@ -12,35 +12,14 @@ import {
   interactionTrackball,
 } from "./trackball-drag-inertia.mts";
 import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "@cssearth/engine";
-import { mountRetainedCubicSky } from "./cubic-sky-runtime.mts";
-import type { CubicSkyMountOptions, RetainedCubicSky } from "./cubic-sky-runtime.mts";
 import type { TrackballMetrics, CameraDelta, Quaternion } from "../renderers/css/navigation/types.ts";
-import PREPARED_MERCURY_STARFIELD from "../../src/objects/mercury/prepared/sky.json" with {type: "json"};
 
 type Rotate = Parameters<typeof createUnboundedMatrixDragControls>[0]["rotate"];
 type Publication = Parameters<Rotate>[0];
 type AnimationCallback = (time: number) => void;
-type CssStyle = Record<string, string | undefined> & {
-  setProperty(name: string, value: string): void;
-  removeProperty(name: string): void;
-};
-
 /** The renderer validates HTMLElement with instanceof; this is the one test-only native boundary. */
 function nativeElement<T>(element: T): HTMLElement {
   return element as unknown as HTMLElement;
-}
-
-function mockStyle(element: HTMLElement): CssStyle {
-  return element.style as unknown as CssStyle;
-}
-
-function overrideGlobal(name: "document" | "HTMLElement" | "ResizeObserver", value: unknown): () => void {
-  const descriptor = Object.getOwnPropertyDescriptor(globalThis, name);
-  Object.defineProperty(globalThis, name, { configurable: true, value });
-  return () => {
-    if (descriptor !== undefined) Object.defineProperty(globalThis, name, descriptor);
-    else Reflect.deleteProperty(globalThis, name);
-  };
 }
 
 function completeTrackball(metrics: Omit<TrackballMetrics, "viewportWidth">): TrackballMetrics {
@@ -57,105 +36,6 @@ function requiredThrow<T>(value: T | null): T {
   assert.ok(value !== null, "the recorded drag produces a throw");
   return value;
 }
-
-function mountStarFixture(t: TestContext, { width = 1440, height = 900 }: { width?: number; height?: number } = {}) {
-  let resize: (() => void) | undefined;
-  let disconnected = false;
-  const viewport = { width, height };
-  class Element {
-    children: Element[] = [];
-    style: CssStyle = Object.assign(Object.create(null) as Record<string, string | undefined>, { setProperty(name: string, value: string) { Object.defineProperty(this, name, { configurable: true, value, writable: true }); }, removeProperty() {} });
-    dataset: Record<string, string | undefined> = {};
-    className = "";
-    ownerDocument = document;
-    get clientWidth() { return viewport.width; }
-    get clientHeight() { return viewport.height; }
-    get childElementCount() { return this.children.length; }
-    appendChild(child: Element) { this.children.push(child); return child; }
-    prepend(child: Element) { this.children.unshift(child); return child; }
-    remove() {}
-    querySelectorAll(selector: string): Element[] {
-      return this.children.flatMap(child => [
-        ...(child.className.split(" ").includes(selector.slice(1)) ? [child] : []),
-        ...child.querySelectorAll(selector),
-      ]);
-    }
-  }
-  const document = { createElement: () => new Element(),
-    defaultView: { getComputedStyle: () => ({ perspective: "1000px" }) } };
-  const restore = [
-    overrideGlobal("document", document),
-    overrideGlobal("HTMLElement", Element),
-    overrideGlobal("ResizeObserver", class {
-    constructor(callback: () => void) { resize = callback; }
-    observe() {}
-    disconnect() { disconnected = true; }
-  }),
-  ];
-  t.after(() => {
-    for (const restoreOne of restore.reverse()) restoreOne();
-  });
-  const sky = mountRetainedCubicSky({ host: nativeElement(new Element()), plan: PREPARED_MERCURY_STARFIELD,
-    imageDensity: 1, objectId: "mercury" } satisfies CubicSkyMountOptions);
-  t.after(() => sky.destroy());
-  assert.ok(sky.starGroup !== null, "prepared Mercury fixture includes retained stars");
-  const starGroup = sky.starGroup;
-  const elements = Array.from(starGroup.children);
-  // CSS multiplies the stored radius by this shared viewport factor; cube
-  // perspective transport cancels its own scale at the optical axis.
-  const radius = (element: HTMLElement) => parseFloat(mockStyle(element)["--planet-cubic-sky-star-radius"] ?? "0") *
-    Number(mockStyle(starGroup)["--planet-cubic-sky-star-screen-factor"]);
-  return { sky, elements, radius, disconnected: () => disconnected,
-    resize(nextWidth: number, nextHeight: number) { Object.assign(viewport, { width: nextWidth, height: nextHeight }); resize?.(); } };
-}
-
-test("prepared star radii keep Galaxio's pixel ceiling on mount and resize", t => {
-  const f = mountStarFixture(t);
-  const originalElements = [...f.elements];
-  const originalOpacities = f.elements.map(element => mockStyle(nativeElement(element))['--planet-cubic-sky-star-luminance']);
-  const bright = f.elements.find(element => nativeElement(element).dataset.name === "Sirius");
-  const faint = f.elements.find(element => Number(nativeElement(element).dataset.magnitude) === 5);
-  assert.ok(bright && faint, "the real retained catalogue exercises bright and faint points");
-  for (const [width, height, faintRadius] of [[1440, 900, 1.224], [800, 600, .816],
-    [390, 844, .6], [1920, 1080, 1.224]]) {
-    if (width !== 1440) f.resize(width, height);
-    assert.ok(Math.abs(f.radius(nativeElement(bright)) - 1.25) < .0001, "a saturated star stays at the 1.25px cap");
-    assert.ok(Math.abs(f.radius(nativeElement(faint)) - faintRadius) < .002, "the raw faint radius scales before its pixel floor");
-    assert.ok(f.elements.every(element => f.radius(nativeElement(element)) <= 1.2501), "no retained disc exceeds the ceiling");
-  }
-  assert.deepEqual(f.elements, originalElements, "resizing retains the mounted stars");
-  assert.deepEqual(f.elements.map(element => mockStyle(nativeElement(element))['--planet-cubic-sky-star-luminance']), originalOpacities,
-    "radius correction preserves the prepared exposure");
-  f.sky.destroy();
-  assert.equal(f.disconnected(), true);
-});
-
-test("session star radius limits survive resize and reset to the prepared ceiling", t => {
-  const f = mountStarFixture(t, { width: 800, height: 600 });
-  const bright = f.elements.find(element => nativeElement(element).dataset.name === "Sirius");
-  assert.ok(bright !== undefined, "prepared Mercury fixture includes Sirius");
-  f.sky.setStarExposure({ maxRadiusPx: 2, intensityMax: .7 });
-  for (const [width, height] of [[800, 600], [1440, 900], [390, 844]]) {
-    f.resize(width, height);
-    assert.ok(Math.abs(f.radius(nativeElement(bright)) - 2) < .0001, "viewport factor cannot enlarge or shrink the session ceiling");
-    assert.equal(mockStyle(nativeElement(bright))['--planet-cubic-sky-star-luminance'], "0.7");
-  }
-  f.sky.setStarExposure(null);
-  assert.ok(Math.abs(f.radius(nativeElement(bright)) - 1.25) < .0001, "reset applies the prepared ceiling at the current viewport");
-  assert.equal(mockStyle(nativeElement(bright))['--planet-cubic-sky-star-luminance'], "0.95");
-  assert.equal(mockStyle(nativeElement(bright)).opacity, undefined, 'Presentation emphasis belongs to CSS, not an inline opacity override');
-  assert.equal(f.sky.starExposure()?.source, "prepared");
-});
-
-test('zero-exposure stars stay dark under either presentation mode and reset without remounting', t => {
-  const f = mountStarFixture(t), original = [...f.elements];
-  const dark = f.sky.setStarExposure({ exposureScale: .000001 });
-  assert.equal(dark?.drawnCount, 0);
-  assert.ok(f.elements.every(element => mockStyle(nativeElement(element))['--planet-cubic-sky-star-luminance'] === '0'));
-  f.sky.setStarExposure(null);
-  assert.deepEqual(f.elements, original);
-  assert.equal(f.sky.starExposure()?.drawnCount, original.length);
-});
 
 test("release publishes both launch steps once and leaves no idle clock", (t) => {
   const original = Object.getOwnPropertyDescriptor(globalThis, "HTMLElement");

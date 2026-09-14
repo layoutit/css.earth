@@ -10,6 +10,6 @@ The analytic representation of the published dimensions is cssEarth data under
 the repository MIT license. Mission body orientation and reconstructed camera
 attitude: NASA/JPL NAIF Cassini SPICE kernel archive.
 
-Facts: NASA Science. Milky Way: ESO/S. Brunier, CC BY 4.0. Title font:
-Inter by Rasmus Andersson, SIL Open Font License 1.1. Full source identities,
-URLs, pins, interpretation and limitations accompany the source manifest.
+Facts: NASA Science. Title font: Inter by Rasmus Andersson, SIL Open Font
+License 1.1. Full source identities, URLs, pins, interpretation and
+limitations accompany the source manifest.

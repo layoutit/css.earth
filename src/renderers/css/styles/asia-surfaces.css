@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asia"])[data-lod="billboard"] .asia-scene, .planet-stage:where([data-object-id="asia"])[data-lod="marker"] .asia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asia"])[data-lod="marker"] .asia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asia"]).asia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

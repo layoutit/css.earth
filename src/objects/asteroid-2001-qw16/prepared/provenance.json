@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2001-qw16",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "19ac58eacf383d12b92bb9dd6776e9168b90bbe9931b0c4a6412977c2443a1b3"
+    "sha256": "6e2f149b0aa1713e3793746ad62cfe5dcb6fd142736d863854ea927de19bb93f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f22871ac6ec4dae804b6799811cdf36114659db22480fcde1a3871d5aa84ceea",
+      "sha256": "17d40edc402b666ad514def6a5f84663cf268c49b93eb8e9d77f6b619736311e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asteroid-2001-qw16",
         "displayName": "2001 QW16",
         "publicBase": "/scenes/asteroid-2001-qw16/",
-        "distanceAu": 3.177455279524888,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4860cd935999cb776c88fc42bbfe61e75762ae82539f81a3c80de180ed88ffbe",
+      "sha256": "ee1a43de14e7b0c3f5cac03f6103b6b9ccfaef39b419ebd79501cd2a07f0e65d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/15015"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "e41e4dae7371422f0d9aa7c771b916832311f7b74ca5cc3995dc9f1317433f33",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "4860cd935999cb776c88fc42bbfe61e75762ae82539f81a3c80de180ed88ffbe",
+      "sha256": "ee1a43de14e7b0c3f5cac03f6103b6b9ccfaef39b419ebd79501cd2a07f0e65d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9738,
+      "bytes": 9459,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-elevation-thumbnail.webp",
           "bytes": 5054,
           "sha256": "f4002dc51a7b10d82b891a6ae1c2938a3e21dae6b03027a96f1dc2267d780ede",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-elevation-surface@2x.webp",
           "bytes": 301596,
           "sha256": "01546108e94f89bf0b88c2aca11ef21b10dfe19b1b2556e58d4c700a295d816b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-surface@2x.webp",
           "bytes": 219752,
           "sha256": "e937884c7b12fb7f4369f6b11ce6ee4beec6a3201cac47258b3608e3f689bdf4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6910,
-          "sha256": "a254580457cb8074d1b6f391c5af2cc42e20770424550f9ffd565833251909c5",
+          "bytes": 6791,
+          "sha256": "a41630565d59fca9789220a4bd629050f8aaa4f27a7affae794db64b3c4032a5",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "asteroid-2001-qw16",
+    "materialSha256": "84d22f95674e8a2140b8dc6ac5032fa9a3f34364a2fc06455cc790fdec2ac18b",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

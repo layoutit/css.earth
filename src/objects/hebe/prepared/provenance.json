@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hebe",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fd315ae564f3aef209c273244519a4da61338d2dbd1bbc44c164bb0a3db264c6"
+    "sha256": "d73fd4347e57307ea2ba25b7a68db63a9b623aee7efd03e6ed96e9e625820b94"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ac5288bfd80f8399fda08928e81c71904ae784aee12c4d4451b5d4081f322bb5",
+      "sha256": "29e1663d41e2bba3947a30946ed9e812d734e760a8f397bd3b25ff1587707739",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hebe",
         "displayName": "Hebe",
         "publicBase": "/scenes/hebe/",
-        "distanceAu": 2.426170909674805,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "07fdc008b375a26d4f26f65e1bea408e9432a3450b6518744e24172b42725a3b",
+      "sha256": "65144b98bacd6e734c6428cefa48e9b5666a281f74a79876d163c3d14aa398c1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "11d9c03ff44613f4d70e54719067f5ad69c668a1c59c181a1de1564e61c264fc",
       "bytes": 668539,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "07fdc008b375a26d4f26f65e1bea408e9432a3450b6518744e24172b42725a3b",
-      "bytes": 6190,
+      "sha256": "65144b98bacd6e734c6428cefa48e9b5666a281f74a79876d163c3d14aa398c1",
+      "bytes": 5911,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/hebe/hebe-elevation-thumbnail.webp",
           "bytes": 5956,
           "sha256": "13fd131b0b9e39feda149f818b591a373253c682b09d283a593e6cd671fd61b9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hebe/hebe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hebe/hebe-elevation-surface@2x.webp",
           "bytes": 361096,
           "sha256": "558e8d23a3f821ad0d85562caeaa6e395459552f2be3d505b762344bfa451950",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -452,13 +433,13 @@
           "url": "/scenes/hebe/hebe-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hebe/hebe-shape-surface@2x.webp",
           "bytes": 221676,
           "sha256": "4e9ebef15ea61ca4f4c669f22828e9e3e8e8067d8474e81207e398ab2b5cc6ef",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -489,8 +470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4054,
-          "sha256": "8de7120d97a3e8dc8ac792583b5ad7613e4861ae61965916189399f8576878b6",
+          "bytes": 3935,
+          "sha256": "a6a9b8c6f6e76eccde0aded40e2e66db802b4de019c8e365371c03f20cdf39df",
           "verification": "bytes-verified"
         }
       ],
@@ -550,5 +531,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "hebe",
+    "materialSha256": "703b2395479eba057265ee98aaa1a367b19118f30b73db83e5287c4e06027c05",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

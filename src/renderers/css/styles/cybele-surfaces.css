@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="cybele"])[data-lod="billboard"] .cybele-scene, .planet-stage:where([data-object-id="cybele"])[data-lod="marker"] .cybele-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="cybele"])[data-lod="marker"] .cybele-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="cybele"]).cybele-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

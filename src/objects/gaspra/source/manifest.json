@@ -2,33 +2,6 @@
   "schema": "cssgaspra-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
       "license": "NASA PDS public scientific data; retain attribution and source notices.",
       "acquisition": "Checked-in original; restore and hash-verify through preparation/acquisition.json.",
@@ -559,8 +532,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10536,
-      "expectedSha256": "89eace3af6e5324588de7c0db95fce55e61383596d34a77b2a9e7329c313fb08",
+      "expectedBytes": 10257,
+      "expectedSha256": "1ff35975cbfe93f3ec06d81b28d4cf3801be97b19cea8c69a40649cc7302decd",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -568,8 +541,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 5360,
-      "expectedSha256": "61c1d0ede16f6b967896ee0649e494fb1f44fde3ef3559f84ee05bb02e104043"
+      "expectedBytes": 5157,
+      "expectedSha256": "5815bf5f76e82bd97efb167b8a6f33789db0fc819bcef15c4d651fe567f0008b"
     },
     {
       "path": "preparation/navigation.json",
@@ -583,8 +556,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6714,
-      "expectedSha256": "33d3053757b3e68179d30b8bb45f2325bd4810a1c1054a0a803288bfd451b97c"
+      "expectedBytes": 6560,
+      "expectedSha256": "7fafe4abb5cc9d9eaccda89f7aec7822670ac41864d222bcc3bbe256da770e0c"
     },
     {
       "path": "presentation/title-mark.json",
@@ -660,21 +633,6 @@
       "path": "reference/stooke-gq5gedis.jpg",
       "expectedBytes": 226540,
       "expectedSha256": "52322646ebcc8c0a65dc34f3698a5dcaa59e0951a2421810aa323d74ea4c6893"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 596,
-      "expectedSha256": "e0ce396ecd8248da152da0f67d7e2de2df102c6b81c2c88ca37d66bd35c03009"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 89772,
-      "expectedSha256": "506f238ccd2407eddad42f20cd79a5e32991e473371898f73a7d4242831fd266"
     },
     {
       "path": "reference/calibrated-registration.json",

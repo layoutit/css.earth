@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bavaria"])[data-lod="billboard"] .bavaria-scene, .planet-stage:where([data-object-id="bavaria"])[data-lod="marker"] .bavaria-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bavaria"])[data-lod="marker"] .bavaria-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bavaria"]).bavaria-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

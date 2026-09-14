@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/parysatis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'parysatis',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/parysatis/parysatis-directional-sun.webp",
-      "two": "/scenes/parysatis/parysatis-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/parysatis/parysatis-shape-surface@2x.webp"
   ],

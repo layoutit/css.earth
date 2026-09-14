@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "iris",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a73f1d12062df1bb7b8a53765c96b1926c6abbad58d1508abb05fed5327c1fc"
+    "sha256": "c1baa2d0d41f948c0f897c524f24cb595e3d3b09933ebf0ae2e9a3525d4c78e7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9ad311b05077b6efaad6a91a7f5517ece95691657ba327d1d78f81edcda98b6b",
+      "sha256": "c0b3159a8bc7d601a1f20232fe3fe07be26fb77bbc8983ebb9b6a1d3313a18c9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "iris",
         "displayName": "Iris",
         "publicBase": "/scenes/iris/",
-        "distanceAu": 2.3855680410669247,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0b1f109f443cd92f8ca412aa61b2890edf31115544b97cac06583d8505ae9ae6",
+      "sha256": "14045b48511ca3ebda574bb9baf1581bc866697dcc76ae7015eca5ce926bf478",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "643b9de344348458d1c2b32e41cb9cec01d3b98033a8a821f2c09757ac3f0d04",
       "bytes": 1676539,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0b1f109f443cd92f8ca412aa61b2890edf31115544b97cac06583d8505ae9ae6",
-      "bytes": 5314,
+      "sha256": "14045b48511ca3ebda574bb9baf1581bc866697dcc76ae7015eca5ce926bf478",
+      "bytes": 5035,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/iris/iris-elevation-thumbnail.webp",
           "bytes": 5674,
           "sha256": "f4395ea2887217f8a8f9660977968ed70a63499629a73911381195d5e6343d12",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iris/iris-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iris/iris-elevation-surface@2x.webp",
           "bytes": 428656,
           "sha256": "63eb3113c06660f18733ca11a3a7dd21f3590c83f5d5f798d4fb9738f9e2b17b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -452,13 +433,13 @@
           "url": "/scenes/iris/iris-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iris/iris-shape-surface@2x.webp",
           "bytes": 209846,
           "sha256": "51f53c83f1b70cce3cee81cc2c386c678290354f8f6ab7c179434ba90e80edc8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -489,8 +470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3178,
-          "sha256": "fc450ca5d5ba80e0088dcbc929a322b4c7f33f94bb4362bb05a90021e0585079",
+          "bytes": 3059,
+          "sha256": "6287ad90df5ea845cdde1ee040c6fbb099303d4def546181b1600cd8e4f49eb2",
           "verification": "bytes-verified"
         }
       ],
@@ -550,5 +531,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "iris",
+    "materialSha256": "71f63b1d67ea514e54d7684b8926eec7fc650fc9427c29fc125fc859027e0091",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

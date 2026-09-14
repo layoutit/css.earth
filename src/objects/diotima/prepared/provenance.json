@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "diotima",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "50be96807b21f32cb5a63969cc5d3a47503010e4ba2eade5482981bc1bafb804"
+    "sha256": "7a9fabd14fe0603eb668d465da807232630e0eba9c823592ce4c62002d105190"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e9bec76375efdd275ff9af0708487d848152f28218ec0bdd5cb376f9c6295d34",
+      "sha256": "05b5b8a805c91d3ef5a54ee003e1d8a83035a1f4c6ecb92e372d42b2b55bfd6e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "diotima",
         "displayName": "Diotima",
         "publicBase": "/scenes/diotima/",
-        "distanceAu": 3.0693983225273733,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 1836 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c008aacd92cd793fdad83c28534aafb1b556d9bd3a035e7aff4712d023e6079c",
+      "sha256": "ca2502a57c15d263f0c65a0729cc669148be2d89cb073c174e99a448bb91800c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1836"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "f4ebfdb042ea8edcb01566473054ce07149f4cc1e25e33d583b01e3f2fbfd6b3",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c008aacd92cd793fdad83c28534aafb1b556d9bd3a035e7aff4712d023e6079c",
-      "bytes": 7630,
+      "sha256": "ca2502a57c15d263f0c65a0729cc669148be2d89cb073c174e99a448bb91800c",
+      "bytes": 7351,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -391,19 +372,19 @@
           "url": "/scenes/diotima/diotima-elevation-thumbnail.webp",
           "bytes": 5458,
           "sha256": "c96519047026987a7cd1368c6483b87f694e08a0381428ed6643097e19fced93",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/diotima/diotima-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/diotima/diotima-elevation-surface@2x.webp",
           "bytes": 301826,
           "sha256": "b5a76ab40f0a363aadd6dae789a0e34cffd29e4e3a34ae6d710d7277c3616581",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -441,13 +422,13 @@
           "url": "/scenes/diotima/diotima-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/diotima/diotima-shape-surface@2x.webp",
           "bytes": 194224,
           "sha256": "af9580d757c63aa0a0dce6c89dd3c142f94a5154991a17023e27b46d35a88c83",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -478,8 +459,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5450,
-          "sha256": "2fa9797b5e91eb301bcf3509f827acc009111e85a06f508169fe249953a8d50d",
+          "bytes": 5331,
+          "sha256": "1c64c48db9ebea388afc054d7339a3d87c13ef23a8cfa180c37a0bfe67ebe81b",
           "verification": "bytes-verified"
         }
       ],
@@ -539,5 +520,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "diotima",
+    "materialSha256": "feec0b23a6d3278c038d1452d8d96d572d728f0fea94de92cfd554701ffc06b5",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

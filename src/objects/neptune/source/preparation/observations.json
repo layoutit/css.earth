@@ -36,15 +36,6 @@
       "origin": "https://ras.ac.uk/sites/default/files/2024-01/Combined_figures_crop.jpg",
       "credit": "Patrick Irwin, University of Oxford, and NASA",
       "license": "CC BY 4.0"
-    },
-    {
-      "id": "eso-neptune-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0"
     }
   ],
   "lenses": [
@@ -101,6 +92,28 @@
           "filename": "neptune-poles-normal.webp",
           "projection": {
             "tileSize": 128,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 20,
+            "angularMode": "direct-segment",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 95,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "neptune-poles-normal@2x.webp",
+          "projection": {
+            "tileSize": 256,
             "poles": [
               "north",
               "south",
@@ -287,6 +300,28 @@
           }
         },
         {
+          "kind": "poles",
+          "filename": "neptune-poles-methane@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 20,
+            "angularMode": "direct-segment",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 95,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
           "kind": "thumbnail",
           "filename": "neptune-lens-methane.webp",
           "transforms": [
@@ -428,6 +463,28 @@
           "filename": "neptune-poles-near-infrared.webp",
           "projection": {
             "tileSize": 128,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 20,
+            "angularMode": "direct-segment",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 95,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "neptune-poles-near-infrared@2x.webp",
+          "projection": {
+            "tileSize": 256,
             "poles": [
               "north",
               "south",

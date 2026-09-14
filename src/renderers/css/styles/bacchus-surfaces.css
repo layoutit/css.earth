@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bacchus"])[data-lod="billboard"] .bacchus-scene, .planet-stage:where([data-object-id="bacchus"])[data-lod="marker"] .bacchus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bacchus"])[data-lod="marker"] .bacchus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bacchus"]).bacchus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

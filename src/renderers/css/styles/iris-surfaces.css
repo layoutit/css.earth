@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="iris"])[data-lod="billboard"] .iris-scene, .planet-stage:where([data-object-id="iris"])[data-lod="marker"] .iris-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="iris"])[data-lod="marker"] .iris-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="iris"]).iris-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

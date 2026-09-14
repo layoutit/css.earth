@@ -2,7 +2,6 @@ import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView, Pa
 import type { ObjectSelectionState } from "../rendering/object-selection-runtime.js";
 import type { OrbitPublication, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import type { SharedView } from "../navigation/view-url.js";
-import type { RetainedHeliocentricView } from "../solar-system/heliocentric-view-runtime.js";
 import type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './world-navigation-types.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { ObjectDatasets } from './deferred-object-mount.js';
@@ -21,8 +20,6 @@ import { createObjectControlBinding } from "../rendering/object-control-binding.
 import { createPreparedPlayback } from "../rendering/prepared-playback.js";
 import { createRetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import { mountRetainedCubicSky } from "../solar-system/cubic-sky-runtime.js";
-import { mountRetainedDirectionalSun } from "../solar-system/directional-sun-runtime.js";
-import { mountRetainedHeliocentricView } from "../solar-system/heliocentric-view-runtime.js";
 import { mountPreparedPresentation } from "../rendering/prepared-presentation.js";
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
 import { initialObjectSelection, requireObjectRuntimeDefinition } from "./object-contract.js";
@@ -31,7 +28,7 @@ import { createWorldNavigationPublicationHub } from './world-navigation-publicat
 
 const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, createResources: createPreparedResidency,
   createPlayback: createPreparedPlayback, createSelection: createObjectSelectionRuntime, createControls: createObjectControlBinding, createOrbit: createRetainedCubicSkyOrbit,
-  mountSky: mountRetainedCubicSky, mountSun: mountRetainedDirectionalSun, mountHeliocentric: mountRetainedHeliocentricView,
+  mountSky: mountRetainedCubicSky,
   waitDocument: waitForSceneDocument, waitPaint: waitForScenePaint });
 
 // Every registry loader binds this factory. The optional services argument is
@@ -40,7 +37,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
   requireObjectRuntimeDefinition(definition);
   if (!Array.isArray(definition.motion)) throw new TypeError('Object motion bindings must be prepared before mount.');
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, externalWorldContext = false, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, deferTextureRefinement = false }: ObjectMountOptions) {
+  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, deferTextureRefinement = false }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
@@ -72,9 +69,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     const ready = new Promise<void>((resolve, reject) => { resolveReady = resolve; rejectReady = reject; });
     ready.catch(() => {});
     let mounted: ReturnType<typeof mountPreparedPresentation> | null = null, orbit: RetainedCubicSkyOrbit | null = null;
-    let worldLayer: import('./object-runtime-types.js').WorldContextLayer | null = null;
     let currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
-    let heliocentric: RetainedHeliocentricView | null = null;
     const pageLayers = new Map<string, PageLayerRuntime>();
     let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null;
     let allowed = false, navigatedLens: string | null = null, maximumZoom = definition.camera.maximumZoom;
@@ -120,8 +115,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
         controlYaw: definition.camera.defaultControlYawDegrees, zoom: getOrbit().initialResponsiveZoom() }),
     }) : null;
-    const legacyPreparedEpochJdTt = definition.heliocentricView?.plan.system?.epochJdTt ?? null;
-    const preparedEpochJdTt = worldFrame?.epochJdTt ?? legacyPreparedEpochJdTt;
+    const preparedEpochJdTt = worldFrame?.epochJdTt ?? null;
     let restoreVersion = 0;
     const sharedView = Object.freeze({
       capture(motionRequested = false): SharedView | null {
@@ -140,9 +134,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         if (!view) throw new TypeError("A saved object view is required.");
         const version = ++restoreVersion;
         if (!readyPublished || lifetime.disposed) return false;
-        // Older local views of objects without an embedded orbital layer did
-        // not carry an epoch. New captures use the shared prepared world frame.
-        const legacyLocalView = view.preparedEpochJdTt == null && legacyPreparedEpochJdTt === null;
+        // Older local views did not carry an epoch. New captures use the shared
+        // prepared world frame.
+        const legacyLocalView = view.preparedEpochJdTt == null;
         if (!legacyLocalView && (view.preparedEpochJdTt ?? null) !== preparedEpochJdTt) {
           throw new TypeError("This view uses a different prepared astronomical date.");
         }
@@ -342,49 +336,18 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       }
       syncPagePlayback();
       // Presentation owns its roots immediately during construction, including
-      // partial construction failures. Shared celestial layers join afterwards.
-      const cubicSky = environment.mountSky({ host: stage, plan: definition.sky,
-        imageDensity: context.density, objectId: definition.id, requireSun: false, renderContent: !externalWorldContext });
+      // partial construction failures. The application-owned universe draws the
+      // visible sky and Sun; the object keeps only the sky orientation handles
+      // its orbit publishes to, hidden beneath the stage.
+      const cubicSky = environment.mountSky({ host: stage, plan: definition.sky, objectId: definition.id });
       context.own(() => cubicSky.destroy());
-      if (externalWorldContext) {
-        // The application-owned context supplies the visible sky. Keep the
-        // orientation handles mounted for the orbit contract, without the
-        // unused photographic faces or catalogue star leaves.
-        const skyFade = stage.ownerDocument.createElement('div');
-        skyFade.className = 'prepared-context-sky-fade';
-        skyFade.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;visibility:hidden';
-        if (cubicSky.root.parentNode === stage) {
-          stage.insertBefore(skyFade, cubicSky.root);
-          skyFade.appendChild(cubicSky.root);
-        } else {
-          stage.appendChild(skyFade);
-          skyFade.appendChild(cubicSky.root);
-        }
-        context.own(() => skyFade.remove());
-      } else if (worldContext && capabilities.mountWorldContext) {
-        worldLayer = capabilities.mountWorldContext({ stage, before: mounted.cameraElement, skyElement: cubicSky.root,
-          worldContext, own: context.own, onError: fatal });
-        context.own(() => worldLayer?.destroy());
-      }
-      const orbitWorldContext = worldContext && worldLayer
-        ? Object.freeze({ ...worldContext, onWorldPublish: (world: WorldCameraPose, viewport: WorldCameraViewport) => {
-            worldContext.onWorldPublish?.(world, viewport);
-            worldLayer?.publish(world, viewport);
-          } })
-        : worldContext;
-      // A heliocentric view renders the Sun as real geometry beneath the body
-      // (its own perspective root before the camera root) with the orbit and
-      // marker overlay; otherwise the Sun is the directional billboard.
-      if (definition.heliocentricView && !definition.sun) throw new TypeError("A heliocentric view requires its prepared Sun.");
-      heliocentric = externalWorldContext || definition.heliocentricView == null || !definition.sun ? null : environment.mountHeliocentric({ host: stage,
-        before: mounted.cameraElement, plan: definition.heliocentricView.plan, objectId: definition.id,
-        sunImageUrl: context.density === 2 ? definition.sun.asset.url2x : definition.sun.asset.url,
-        markerSprite: definition.heliocentricView.bodyMarker, systemMarkers: definition.heliocentricView.systemMarkers ?? null,
-        labels: definition.heliocentricView.labels ?? null });
-      if (heliocentric) context.own(() => heliocentric?.destroy());
-      const directionalSun = externalWorldContext || definition.sun == null || heliocentric ? null : environment.mountSun({ host: stage, plan: definition.sun,
-        imageDensity: context.density, objectId: definition.id, before: mounted.cameraElement });
-      if (directionalSun) context.own(() => directionalSun.destroy());
+      const skyFade = stage.ownerDocument.createElement('div');
+      skyFade.className = 'prepared-context-sky-fade';
+      skyFade.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;visibility:hidden';
+      if (cubicSky.root.parentNode === stage) stage.insertBefore(skyFade, cubicSky.root);
+      else stage.appendChild(skyFade);
+      skyFade.appendChild(cubicSky.root);
+      context.own(() => skyFade.remove());
       if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
       selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, deferTextureRefinement, initialLens, initialSettings,
         onCommit: next => {
@@ -409,7 +372,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         ...(mounted.revealGroups ? { revealGroups: mounted.revealGroups } : {}),
         // An undrawn mesh commits no textures; it stays hidden until it has them.
         canReveal: () => selection?.state().plan?.deferredTextures !== true,
-        cubicSky, skyPlan: definition.sky, directionalSun, directionalSunPlan: definition.sun ?? null, heliocentric, worldContext: orbitWorldContext,
+        cubicSky, skyPlan: definition.sky, directionalSunPlan: definition.sun ?? null, worldContext,
         cameraPlan, viewport, framePresenter, objectId: definition.id, requireSun: false, preparedSurfaceHitTest: mounted.surfaceHitTest,
         mobilePreviewElement, onPublish: publication => guarded(() => publish(publication)), onError: fatal });
       context.own(() => orbit?.destroy());
@@ -439,7 +402,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       controls.setReady();
       readyPublished = true;
-      if (diagnostics) publishObjectDiagnostics({ stage, definition, mounted, orbit, cubicSky, heliocentric, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, pageLayers, surfaceFeatures, getCurrentView: () => currentView });
+      if (diagnostics) publishObjectDiagnostics({ stage, definition, mounted, orbit, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, pageLayers, surfaceFeatures, getCurrentView: () => currentView });
       settled = true;
       resolveReady();
       // First paint owns the small prepared bank. Refinement uses the same

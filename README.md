@@ -33,6 +33,13 @@ To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 `pnpm preview`. To regenerate assets from source instead, run
 `pnpm prepare:checkout`; that is the full preparation workflow described below.
 
+The Nearby Universe field is baked from pinned scientific catalogue downloads
+by `pnpm prepare:galaxy-field`; installation, development startup and production
+preparation already invoke it. Rerun that command after pulling changed field
+recipes or receipts to replace stale generated assets. `pnpm prepare:sources`
+only recovers metadata and does not replace stale imagery. See the
+[field source and evidence record](src/objects/nearby-universe/README.md).
+
 ## Checks
 
 With Node 22.18+ or Node 24 and the pinned pnpm version, first run
@@ -121,8 +128,7 @@ src/objects/<id>/
 ├── object.json                  Pinned capability recipe and transport digest
 ├── source/                      Authored JSON, scientific inputs and provenance
 ├── prepared/                    Baked JSON, committed for clean checkouts
-│   ├── *.refs.json              Runtime, scene and sky with shared banks referenced
-│   ├── runtime.json, scene.json, sky.json   Restored full files (Git-ignored)
+│   ├── runtime.json, scene.json, sky.json   Runtime, scene and sky plans
 │   └── object.json              Rebuilt runtime payload (Git-ignored)
 ├── runtime-assets.json          Reproducible asset inventory
 ├── README.md                    Sources, processing, evidence and known problems
