@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -1697,6 +1697,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-cassini-iss-2026-938nm",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1750,6 +1757,13 @@
           "bytes": 286340,
           "sha256": "f71a2d97094ae55c9c28bfa8910a0385c864dc517c3aa2e0f78ca6520b985855",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-radar-midr-090",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1808,6 +1822,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-gtdr-2019-gtfed00n090_t126_v01",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1862,6 +1883,13 @@
           "bytes": 118052,
           "sha256": "bdfd3d10e1eb0c67b5320383940fb1c28f2a449e5b17d33146cbd4550a753a47",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-gtdr-2019-gtied00n090_t126_v01",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/3/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1920,6 +1948,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-gtdr-2019-gtded00n090_t126_v01",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/4/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1973,6 +2008,13 @@
           "bytes": 16728,
           "sha256": "2cdabb1e7d2355b546e0cf0258b061957b7c729f33a1d13f4f09117126dc2442",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "titan-global-geomorphology-grid",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/5/source."
         }
       ],
       "inputBasis": "bound-inputs"

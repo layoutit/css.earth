@@ -1,9 +1,19 @@
+import { validatePhysicalHosts, validateSpatialPosition } from './spatial-relations.ts';
+import type { DistanceSubject, UnpositionedHost } from './spatial-relations.ts';
 /** Prepared scientific positions and their evidence. This does not alter GXCT. */
 export interface SpatialCitation {
   readonly id: string;
   readonly url: string;
   readonly citation: string;
+  readonly catalogueId?: string;
 }
+/** Stable crosswalk from an upstream bibliography key to the existing Sources namespace. */
+export function spatialPublicationId(reference: string): string {
+  const id = reference.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/-$/u, '');
+  if (!id || !/^[a-z0-9]/u.test(id)) throw new TypeError('Invalid bibliography identity.');
+  return `publication-${id}`;
+}
+
 export interface SpatialCatalogSource extends SpatialCitation {
   readonly sha256: string;
   readonly bytes: number;
@@ -36,6 +46,8 @@ export interface PreparedGalaxyRecord {
   readonly skyPosition: { readonly raDeg: number; readonly decDeg: number; readonly sourceRef: string };
   readonly distance: SpatialMeasurement & {
     readonly method: string;
+    /** Omitted when the measurement describes this object itself. */
+    readonly subject?: DistanceSubject;
     readonly uncertainty?: { readonly statisticalPc: number; readonly systematicPc: number };
   };
   readonly halfLightRadius?: SpatialMeasurement;
@@ -57,6 +69,7 @@ export interface PreparedGalaxyCatalog {
   readonly frame: { readonly referenceFrame: string; readonly epochJdTt: number };
   readonly sources: readonly SpatialCatalogSource[];
   readonly objects: readonly PreparedGalaxyRecord[];
+  readonly unpositionedHosts?: readonly UnpositionedHost[];
   readonly exclusions: readonly { readonly id: string; readonly reason: string }[];
   readonly selection: { readonly description: string };
 }
@@ -80,6 +93,7 @@ export function parsePreparedGalaxyCatalog(input: unknown): PreparedGalaxyCatalo
       unique(referenceIds, text(reference.id, 'reference id'), 'bibliographic reference');
       if (!/^https?:\/\//u.test(text(reference.url, 'reference URL'))) throw new TypeError('Invalid bibliographic URL.');
       text(reference.citation, 'reference citation');
+      if (reference.catalogueId !== undefined && !/^[a-z][a-z0-9-]*$/u.test(text(reference.catalogueId, 'canonical citation id'))) throw new TypeError('Invalid canonical citation id.');
     }
   }
   if ([...sourceIds].some(id => referenceIds.has(id))) throw new TypeError('Ambiguous source and bibliographic identity.');
@@ -123,6 +137,16 @@ export function parsePreparedGalaxyCatalog(input: unknown): PreparedGalaxyCatalo
     if (row.detailedObjectId !== undefined) unique(detailIds, text(row.detailedObjectId, 'detailed object id'), 'detailed object');
     if (row.presentation !== undefined) positive(record(row.presentation, 'presentation').focusRadiusM, 'navigation framing radius');
   }
+  const hosts = data.unpositionedHosts === undefined ? [] : array(data.unpositionedHosts, 'unpositioned hosts');
+  for (const item of hosts) {
+    const host = record(item, 'unpositioned host');
+    text(host.id, 'host id'); text(host.name, 'host name'); text(host.reason, 'missing position reason');
+    boundReference(host.sourceRef, 'host reference');
+    if (host.hostId !== undefined) text(host.hostId, 'physical host id');
+  }
+  const validated = input as PreparedGalaxyCatalog;
+  validatePhysicalHosts(validated.objects, validated.unpositionedHosts ?? []);
+  for (const row of validated.objects) validateSpatialPosition(validated.frame, row);
   for (const item of array(data.exclusions, 'exclusions')) {
     const exclusion = record(item, 'exclusion');
     text(exclusion.id, 'excluded id'); text(exclusion.reason, 'exclusion reason');

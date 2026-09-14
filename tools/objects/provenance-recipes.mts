@@ -68,6 +68,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       add(plan.id, 'raster', `/surfaces/${index}`, used, nativePoles
         ? 'Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.'
         : 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
+        inputRoles: frames ? {} : { [text(plan.source)]: { role: 'appearance', evidence: `Raster source at /surfaces/${index}/source.` } },
         urls: outputUrls, interpretation: { falseColor: plan.falseColor,
           ...(controlledDetail ? { controlledPhotographicDetail: controlledDetail, originalIllumination:true } : {}),
           ...(nativePoles ? { polarSampling: 'original-photograph-footprint' } : {}),
@@ -103,6 +104,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
         plan.nativePhotographicSampling
           ? 'Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.'
           : 'Apply the source-defined validity and registration policy, then prepare the projected observation texture.', {
+          inputRoles: Object.fromEntries(observation.map(input => [input.path, { role: 'appearance', evidence: `Observation selected at /raster/observations/${index}.` }])),
           parents: plan.monochromeBase ? [text(plan.monochromeBase)] : [], interpretation: { validity: plan.validity,
             ...(plan.nativePhotographicSampling ? {nativePhotographicSampling:plan.nativePhotographicSampling} : {}) },
         });
@@ -123,7 +125,9 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       for (const product of products) {
         const model = records(geometry.radialTerrainAlternatives ?? []).find(model => model.lensId === product.id)
           ?? geometry.radialTerrain;
-        product.inputPaths = [...new Set([...product.inputPaths, ...paths(model)])];
+        const modelPaths = paths(model);
+        product.inputPaths = [...new Set([...product.inputPaths, ...modelPaths])];
+        product.inputRoles = { ...product.inputRoles, ...Object.fromEntries(modelPaths.map(path => [path, { role: 'geometry' as const, evidence: 'Source selected by the terrestrial radial-terrain geometry recipe.' }])) };
       }
     }
   } else if (terrestrial?.kind === 'affine-photographic-atmosphere') {

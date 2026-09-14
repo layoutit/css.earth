@@ -21,7 +21,7 @@ export function prepareSceneDistance(descriptor: unknown) {
   return parseNavigationDistance({ meters, value: meters / AU_M, unit: 'AU', quantity: 'geometric', referencePoint: 'heliocentre', epochJdTt: frame.epochJdTt });
 }
 
-export function prepareFocusObject(object: PreparedCatalogObject, hostId: string) {
+export function prepareFocusObject(object: PreparedCatalogObject, sceneHostId: string) {
   const classification = isPreparedCluster(object) ? 'galaxy-cluster' : isPreparedNebula(object) ? 'nebula' : 'galaxy';
   return definePreparedFocus({ kind: 'prepared-focus', id: object.id, focusId: object.id, name: object.name,
     searchNames: [...new Set([object.id, object.name, ...object.aliases].flatMap(name => {
@@ -30,13 +30,13 @@ export function prepareFocusObject(object: PreparedCatalogObject, hostId: string
     }))], classification,
     systemName: isPreparedNebula(object) ? 'Milky Way' : isPreparedCluster(object) ? 'Galaxy clusters'
       : object.membership.group === 'local-group' ? 'Local Group' : 'Galaxy catalogue',
-    hostId, route: `/${hostId}/?focus=${encodeURIComponent(object.id)}`,
-    distance: { meters: object.distance.valuePc * PC_M, value: object.distance.valuePc, unit: 'pc',
+    sceneHostId, route: `/${sceneHostId}/?focus=${encodeURIComponent(object.id)}`,
+    distance: { ...(object.distance.subject ? { subject: object.distance.subject } : {}), meters: object.distance.valuePc * PC_M, value: object.distance.valuePc, unit: 'pc',
       quantity: isPreparedCluster(object) ? 'comoving' : 'catalogue', referencePoint: 'observer', epochJdTt: null } });
 }
 
 /** Source catalogues own identity. Rendering-resource descriptors do not add destinations. */
-export async function readPreparedFocusObjects(objectsDirectory: string, hostId: string) {
+export async function readPreparedFocusObjects(objectsDirectory: string, sceneHostId: string) {
   const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
   const objects: PreparedCatalogObject[] = [];
   for (const directory of await readdir(objectsDirectory, { withFileTypes: true })) {
@@ -51,6 +51,6 @@ export async function readPreparedFocusObjects(objectsDirectory: string, hostId:
       else if (path === 'source/nebula.json') objects.push(...parsePreparedNebulaCatalog(value).objects);
     }
   }
-  const destinations = objects.map(object => prepareFocusObject(object, hostId)).sort((a, b) => a.id.localeCompare(b.id, 'en'));
+  const destinations = objects.map(object => prepareFocusObject(object, sceneHostId)).sort((a, b) => a.id.localeCompare(b.id, 'en'));
   return destinations.length ? defineObjects(destinations) : Object.freeze(destinations);
 }

@@ -41,6 +41,13 @@ issue from the archive-product template instead of writing a reader for one body
 as a failure with no steps recorded, so no branch has CI evidence and every check
 must be run locally. Cite this section in a PR instead of explaining it again.
 
+Browser checks also require the exact prepared rendering assets. Sources and
+catalogue preparation restore metadata, not those assets. An error such as
+`Prepared focus lenses unavailable: helix` means the application cannot complete
+startup; it is not a browser-conformance pass. Record the missing bank and any
+404s, and restore the pinned assets before claiming an interaction check. The
+installed-bank tamper test likewise requires its referenced bank to be present.
+
 ## Where things live
 
 | You want to | Read |

@@ -1,0 +1,36 @@
+{
+  "id": "publication-karachentsev2021aj-161-205k",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Karachentsev2021AJ....161..205K: Distance and Mass of the NGC 253 Galaxy Group",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "Karachentsev2021AJ....161..205K"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..205K",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/prepared/catalogue.json",
+      "revision": "340f4ef6ea7f2a6cc540b906dec35436a1d549c5",
+      "sha256": "1987e9658d963826cc1717afdfa0b9267fa1ce79b79e0d3f9d5905bd55f00c8f",
+      "locator": "/sources/3/references/20"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/3/references/20"
+    }
+  ]
+}

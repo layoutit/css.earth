@@ -22,6 +22,12 @@ its image resource through `detailedObjectId`; it does not create a second
 navigable Andromeda. Non-navigable context resources remain outside `OBJECTS`.
 Adding a classification does not add a renderer, shell or camera owner.
 
+`sceneHostId` identifies the scene displaying a prepared focus. A galaxy's
+`hostId` identifies its physical host. Referenced hosts excluded from positional
+selection remain in the catalogue's `unpositionedHosts`, with a source reference
+and exclusion reason. They acquire no position or destination. The reader rejects
+missing hosts, duplicate identities and cycles, including self-hosting.
+
 ## Distances
 
 The navigation preparer publishes the displayed value, its unit and a common
@@ -36,6 +42,17 @@ metre value for sorting together. Runtime only presents and sorts those values.
   Sorting their numeric values with nearby distances is a navigation convenience,
   not a claim that the scientific quantities are interchangeable.
 
+Catalogue readers check the prepared Cartesian position against the adopted
+right ascension, declination and distance in `sun-icrf`. The relative component
+tolerance is `1e-10`, allowing the producer's 12-significant-digit rounding.
+This checks derivation consistency, not independent scientific accuracy.
+
+A distance describes its row's subject unless `distance.subject` identifies a
+different measured subject, its relationship and the adoption reason. M45 records
+the Pleiades stellar cluster as the measured subject; navigation carries that
+qualification into the distance description. It does not label the cluster's
+uncertainty as a measurement of each dust filament.
+
 The legacy descriptor field `catalog.distanceAu` mixed orbital references,
 nominal spacing and positions. It is no longer published in an application
 object or used by search. Existing nominal Sun-sprite preparation still reads
@@ -49,6 +66,11 @@ source such as the SMC distance paper. The resulting paper link is a citation
 transcribed from the retained source, not a claim that the linked paper’s bytes
 have the bibliography file’s hash. Unresolved distance, sky-position,
 half-light-radius or membership references fail catalogue validation.
+
+Each retained galaxy or cluster bibliography entry also names a canonical
+`catalogueId` in `src/sources/`. Spatial measurement citations join the shared
+Sources usage graph, keyed by object and quantity; missing or conflicting
+bibliography bindings fail preparation. These edges create no dataset view.
 
 Prepared provenance products declare `observationAttribution` as `source-lineage`
 or `none`. The former permits a view to credit capture information on its
