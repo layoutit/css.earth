@@ -218,14 +218,14 @@ export async function preparedSelectionFixture(value: unknown, { silhouetteDiame
     const inputs = new Map<string, FixtureElement>(), buttons: FixtureElement[] = [];
     const input = (fields: Partial<FixtureElement>): FixtureElement => Object.assign(new FixtureElement(f.document, fields.tagName ?? "input"), fields);
     for (const lens of definition.controls.lenses?.controls ?? [])
-        buttons.push(input({ name: "lens", value: lens.id, tagName: "BUTTON", type: "button" }));
+        buttons.push(input({ name: "dataset", value: lens.id, tagName: "BUTTON", type: "button" }));
     for (const control of definition.controls.settings?.controls ?? [])
         inputs.set(control.name, input({ name: control.name, type: control.kind === "toggle" ? "checkbox" : "range", min: "0", max: "4", step: "1" }));
     const lensRoot = f.document.createElement("div"), settingsRoot = f.document.createElement("div");
     const information = Object.assign(f.document.createElement("section"), {
         querySelector: (selector: string): FixtureElement | null => selector === ".planet-lenses" ? lensRoot : null,
     });
-    lensRoot.querySelectorAll = selector => selector === 'button[name="lens"]' ? buttons : [];
+    lensRoot.querySelectorAll = selector => selector === 'button[name="dataset"]' ? buttons : [];
     settingsRoot.querySelectorAll = selector => selector === 'input[name], button[name]' ? [...inputs.values()] : [];
     f.document.querySelector = selector => selector === ".planet-information-panel" ? information
         : selector === ".planet-settings" ? settingsRoot : null;

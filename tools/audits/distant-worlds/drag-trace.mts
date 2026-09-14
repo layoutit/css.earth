@@ -58,8 +58,8 @@ try {
   await page.waitForFunction(id => document.documentElement.dataset.ready === 'true' &&
     document.querySelector('.planet-stage')?.getAttribute('data-object-id') === id, id);
   if (lensId) {
-    await page.locator(`button[name="lens"][value="${lensId}"]`).click();
-    await page.waitForFunction(lens => document.querySelector(`button[name="lens"][value="${lens}"]`)?.getAttribute('aria-pressed') === 'true', lensId);
+    await page.locator(`button[name="dataset"][value="${lensId}"]`).click();
+    await page.waitForFunction(lens => document.querySelector(`button[name="dataset"][value="${lens}"]`)?.getAttribute('aria-pressed') === 'true', lensId);
   }
   assert.equal(await page.locator('input[name="shadows"]').isChecked(), false);
   await page.waitForLoadState('networkidle');

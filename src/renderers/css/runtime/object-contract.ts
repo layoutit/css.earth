@@ -62,9 +62,10 @@ export function objectCycleStates(control: CycleControl): readonly CycleState[] 
   return states;
 }
 
-export function initialObjectSelection(controls: ObjectControls): ObjectSelection {
+export function initialObjectSelection(controls: ObjectControls, lensId?: string): ObjectSelection {
   requireObjectControls(controls);
-  const selection: { lensId: string | null; [name: string]: string | number | boolean | null } = { lensId: controls.lenses?.defaultLens ?? null };
+  if (lensId !== undefined) requireObjectAction(controls, { kind: 'lens', id: lensId });
+  const selection: { lensId: string | null; [name: string]: string | number | boolean | null } = { lensId: lensId ?? controls.lenses?.defaultLens ?? null };
   for (const control of controls.settings?.controls ?? []) {
     if (control.kind === 'toggle') selection[control.name] = control.checked;
     else {

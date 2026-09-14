@@ -33,7 +33,7 @@ page.on('response', response => {
 async function ready(body: string, lens?: string) {
   await page.waitForFunction(({ body, lens }) => document.documentElement.dataset.ready === 'true'
     && document.querySelector<HTMLElement>('.planet-stage')?.dataset.objectId === body
-    && (!lens || document.querySelector<HTMLButtonElement>('button[name="lens"][aria-pressed="true"]')?.value === lens), { body, lens });
+    && (!lens || document.querySelector<HTMLButtonElement>('button[name="dataset"][aria-pressed="true"]')?.value === lens), { body, lens });
   assert.equal(await page.locator('.planet-stage').count(), 1, 'One retained object stage');
 }
 async function visit(path: string, body: string, lens?: string) {
@@ -45,7 +45,7 @@ async function state() {
   return page.evaluate(() => ({ hash: location.hash, pathname: location.pathname,
     camera: new URL(location.href).searchParams.get('v'),
     transform: [...document.querySelectorAll('.planet-stage .polycss-camera > .polycss-scene')].map(node => getComputedStyle(node).transform),
-    lens: document.querySelector<HTMLButtonElement>('button[name="lens"][aria-pressed="true"]')?.value,
+    lens: document.querySelector<HTMLButtonElement>('button[name="dataset"][aria-pressed="true"]')?.value,
     tab: document.querySelector<HTMLInputElement>('[aria-label="Object information"] input:checked')?.labels?.[0]?.textContent?.trim() }));
 }
 async function noOverflow(target: Page) {
@@ -63,7 +63,7 @@ try {
   assert.equal(await page.locator('template[data-object-card]').count(), 0, 'Routes ship no resident card bank');
   const stage = await page.locator('.planet-stage .polycss-camera').elementHandle();
   const before = await state();
-  const thermal = page.locator('button[name="lens"][value="thermal"]');
+  const thermal = page.locator('button[name="dataset"][value="thermal"]');
   await thermal.focus();
   await page.keyboard.press('Enter');
   await ready('mars', 'thermal');
@@ -94,7 +94,7 @@ try {
   cases.push({ name: 'Moons navigation selects the body and Back restores dataset context' });
 
   await visit('/mars/#vault&dataset=elevation', 'mars', 'elevation');
-  await page.locator('button[name="lens"][value="normal"]').click();
+  await page.locator('button[name="dataset"][value="normal"]').click();
   await page.waitForFunction(() => location.hash === '#vault');
   assert.equal(await active().locator('[data-mission]').count(), 0);
   assert.match(await active().innerText(), /Viking/);
@@ -102,7 +102,7 @@ try {
 
   await visit('/mars/#dataset=missing', 'mars', 'normal');
   assert.equal(await page.locator('[data-dataset-notice]').isVisible(), true);
-  await page.locator('button[name="lens"][value="normal"]').click();
+  await page.locator('button[name="dataset"][value="normal"]').click();
   await page.waitForFunction(() => !location.hash.includes('dataset='));
   assert.equal(await page.locator('[data-dataset-notice]').isVisible(), false);
   cases.push({ name: 'invalid dataset fallback and manual repair' });
@@ -129,7 +129,7 @@ try {
   const source = active().locator('[data-source]').first();
   await source.focus();
   assert.equal(await source.evaluate(node => getComputedStyle(node).textDecorationLine), 'underline');
-  await page.locator('button[name="lens"][value="interior"]').click();
+  await page.locator('button[name="dataset"][value="interior"]').click();
   await ready('mercury', 'interior');
   assert.equal(await active().locator('[data-mission]').count(), 0);
   assert.equal(await active().getByRole('region', { name: 'Sources', exact: true }).isVisible(), true);

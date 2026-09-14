@@ -14,11 +14,12 @@ import "../explorer-rail.css";
 import "../shell-layout.css";
 import "../minimap/minimap.css";
 import type { PreparedSceneMarkup } from '../../tools/serialize-prepared-scene.mts';
+import type { loadPreparedSceneMarkup } from '../../tools/load-prepared-scene.mts';
 
 interface Props {
   objectId: string;
   navigation?: boolean;
-  scene?: PreparedSceneMarkup;
+  scene?: PreparedSceneMarkup & Pick<Awaited<ReturnType<typeof loadPreparedSceneMarkup>>, 'descriptor'>;
 }
 
 const { objectId, navigation = false, scene } = Astro.props;
@@ -61,8 +62,12 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
       <slot name="planet-ui" />
     </div>
     <!--search-shell:end-->
+    <!--prepared-descriptor:start-->
+    {scene && <script is:inline type="application/json" data-prepared-descriptor set:html={JSON.stringify(scene.descriptor).replace(/</g, '\\u003c')}></script>}
+    <!--prepared-descriptor:end-->
     <div class="planet-viewport">
       <div class="planet-world-stage">
+        <!--prepared-scene:start-->
         <main
           class:list={['planet-stage', 'example-stage', ...scene?.classes ?? []]}
           {...scene?.attributes}
@@ -73,6 +78,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
           aria-label={`3D CSS view of ${objectRecord.name}`}
           set:html={scene?.html ?? ''}
         />
+        <!--prepared-scene:end-->
       </div>
       <div class="planet-input-surface" tabindex="0" role="group" aria-label={`Explore ${objectRecord.name}`} />
       <div class="planet-scene-overlays"></div>

@@ -206,7 +206,7 @@ async function snapshot() {
       residency: probe.residency(diagnostic, id),
       startupDecodedAssets: diagnostic.renderStats.visibleAssetsDecodedBeforeMount,
       texturedLeaves: [...document.querySelectorAll('.polycss-camera [style]')].filter(node => getComputedStyle(node).backgroundImage !== 'none').length,
-      lensButtons: [...document.querySelectorAll<HTMLButtonElement>('button[name="lens"]')].map(button => ({ id: button.value, disabled: button.disabled,
+      lensButtons: [...document.querySelectorAll<HTMLButtonElement>('button[name="dataset"]')].map(button => ({ id: button.value, disabled: button.disabled,
         visible: button.getClientRects().length > 0 && getComputedStyle(button).visibility === 'visible',
         pressed: button.getAttribute('aria-pressed') })) };
   });
@@ -237,7 +237,7 @@ async function proveArrival(id: string) {
   const alternate = contract.lenses.find(lens => lens !== contract.defaultLens);
   if (alternate) {
     for (const lens of [alternate, contract.defaultLens]) {
-      await page.locator(`button[name="lens"][value="${lens}"]`).click();
+      await page.locator(`button[name="dataset"][value="${lens}"]`).click();
       await page.waitForFunction(({ id, lens }) => {
         const state = window.__cssearthTest.object(id).runtime.selection();
         return state?.ready && !state.pending && state.committed?.lensId === lens;

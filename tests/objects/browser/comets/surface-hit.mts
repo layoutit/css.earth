@@ -30,7 +30,7 @@ try{
     function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
 return document.documentElement.dataset.ready==='true'&&requiredElement(document.querySelector('.planet-stage')).dataset.objectId===id; },id);
   const lens=process.argv[4];
-  if(lens){await page.locator(`button[name="lens"][value="${lens}"]`).click();await page.waitForLoadState('networkidle');}
+  if(lens){await page.locator(`button[name="dataset"][value="${lens}"]`).click();await page.waitForLoadState('networkidle');}
   const views: {nativeLeaves:number;nativeFrontHits:number;clearMisses:number;backfaceOnlyMisses:number;boundarySkipped:number;rasterEdgeSamples:{x:number;y:number;distanceCssPixels:number;kind:string}[];mismatches:{x:number;y:number;expected:string;nativeFaces?:number[];distanceCssPixels?:number}[];sceneTransform:string}[]=[];
   for(let view=0;view<6;view++){
    if(view){await page.mouse.move(950,450);await page.mouse.down();await page.mouse.move(1200,450,{steps:30});await page.mouse.up();await page.waitForTimeout(700);}

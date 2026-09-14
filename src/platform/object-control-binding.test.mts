@@ -41,7 +41,7 @@ function selectionState(initial: ObjectSelection): ObjectSelectionState {
 }
 function harness(controls: ObjectControls = moonControls, mutate: HarnessMutation = () => {}) {
   const initial = initialObjectSelection(controls);
-  const lensInputs = (controls.lenses?.controls ?? []).map(lens => new Input({ name: "lens", value: lens.id, tagName: "BUTTON", type: "button" }));
+  const lensInputs = (controls.lenses?.controls ?? []).map(lens => new Input({ name: "dataset", value: lens.id, tagName: "BUTTON", type: "submit" }));
   const settingInputs = (controls.settings?.controls ?? []).map(control => new Input({ name: control.name,
     type: control.kind === "toggle" ? "checkbox" : "range", checked: control.kind === "toggle" && control.checked, value: String(initial[control.name]) }));
   const motion = new Input({ name: "motion" }), contrast = new Input({ name: "skyContrast" }), heliosphere = new Input({ name: "heliosphere" });
@@ -73,7 +73,8 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
 for (const object of OBJECTS) test(`${object.id}: one binder consumes every actual control and owns no shell preference listener`, async () => {
   const {controls} = parsePreparedObjectRuntime(await loadObjectTestDefinition(object.id));
   const h = harness(controls);
-  assert.ok([...h.lensInputs, ...h.settingInputs.filter(input => !["motion", "skyContrast", "heliosphere", "asteroidBodies", "asteroidOrbits", "asteroidLabels"].includes(input.name))].every(input => input.disabled));
+  assert.ok(h.lensInputs.every(input => !input.disabled));
+  assert.ok(h.settingInputs.filter(input => !["motion", "skyContrast", "heliosphere", "asteroidBodies", "asteroidOrbits", "asteroidLabels"].includes(input.name)).every(input => input.disabled));
   assert.equal(h.motion.disabled, false); assert.equal(h.contrast.disabled, false);
   assert.equal(h.heliosphere.disabled, false); assert.equal(h.asteroidBodies.disabled, false);
   assert.equal(h.asteroidOrbits.disabled, false); assert.equal(h.asteroidLabels.disabled, false);
@@ -100,6 +101,18 @@ for (const object of OBJECTS) test(`${object.id}: one binder consumes every actu
   assert.equal(h.lensRoot.classList.contains("is-loading"), false);
   assert.equal(h.settingsRoot.classList.contains("is-loading"), false);
   assert.equal(h.settingsRoot.attributes["aria-busy"], "false");
+});
+
+test('native dataset submission is intercepted only while its runtime can switch in place', () => {
+  const h = harness();
+  const button = h.lensInputs[0];
+  const click = () => {
+    const event = new Event('click', { cancelable: true }); button.dispatchEvent(event); return event.defaultPrevented;
+  };
+  assert.equal(click(), false); assert.equal(button.disabled, false);
+  h.ready(); assert.equal(click(), true); assert.equal(h.actions.length, 1);
+  h.binding.setReady(false); assert.equal(click(), false); assert.equal(button.disabled, false);
+  h.binding.destroy(); assert.equal(click(), false); assert.equal(button.disabled, false);
 });
 
 test("duplicate, missing, undeclared and incorrectly rendered controls are rejected before binding", () => {
@@ -157,7 +170,7 @@ test("one failed native listener removal does not stop the rest of control clean
   h.lensInputs[0].removeEventListener = () => { throw new Error("native listener cleanup"); };
   assert.throws(() => h.binding.destroy(), AggregateError);
   assert.equal(h.binding.stats().listenerCount, 0);
-  assert.ok(h.lensInputs.every(input => input.disabled));
+  assert.ok(h.lensInputs.every(input => !input.disabled));
   assert.equal(h.lensRoot.attributes["aria-busy"], "false");
   h.lensInputs[0].emit("click"); assert.equal(h.actions.length, 0);
   h.binding.destroy();

@@ -83,6 +83,8 @@ jobs:
           site/test/router-runtime.test.mts
           site/test/object-page-data.test.mts
           site/test/search-response.test.mts
+          site/test/dataset-response.test.mts
+          site/test/dataset-url.test.mts
           tools/serialize-prepared-scene.test.mts
       - name: Enforce activation preparation for every registered object
         run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts

@@ -125,7 +125,7 @@ export function createObjectBrowserProfile({
         stage.getAttribute("data-lens") ?? mappings.defaultLens,
     { defaultLens, visibleViews }),
     pressedLens: (page) => page.evaluate(() => {
-      const pressed = [...document.querySelectorAll<HTMLButtonElement>('button[name="lens"][aria-pressed="true"]')].map((button) => button.value);
+      const pressed = [...document.querySelectorAll<HTMLButtonElement>('button[name="dataset"][aria-pressed="true"]')].map((button) => button.value);
       if (pressed.length > 1) throw new Error(`Lens selection is exclusive; found multiple pressed buttons: ${pressed.join(", ")}`);
       return pressed[0] ?? null;
     }),

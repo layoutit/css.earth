@@ -28,11 +28,11 @@ export default async (page: Page) => {
       await p.keyboard.press('Escape');
       const views = [];
       for (const id of ['albedo', 'slope', 'absorption', 'ice']) {
-        await p.locator(`button[name="lens"][value="${id}"]`).click();
+        await p.locator(`button[name="dataset"][value="${id}"]`).click();
         await p.waitForFunction(id => {
           function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
           function requiredInput(value: Element | null): HTMLButtonElement { if (!(value instanceof HTMLButtonElement)) throw new Error("Expected required HTMLButtonElement"); return value; }
-return requiredInput(document.querySelector(`button[name="lens"][value="${id}"]`)).getAttribute('aria-pressed') === 'true'; }, id);
+return requiredInput(document.querySelector(`button[name="dataset"][value="${id}"]`)).getAttribute('aria-pressed') === 'true'; }, id);
         await p.waitForLoadState('networkidle');
         const image = p.locator(`img[src*="comet-67p-${id}-legend.webp"]`);
         if (await image.count() !== 1 || !await image.isVisible()) throw new Error(`Missing visible ${id} legend`);
@@ -49,7 +49,7 @@ return rows.map(row => {
             leaderWidth: parseFloat(getComputedStyle(row, '::before').width) };
         }); });
         if (factLayout.some(row => row.height <= 20 && Math.abs(row.valueWidth - row.textWidth) > 1)) throw new Error(`Unused value-column space in ${id} facts`);
-        const dataset = await p.locator(`button[name="lens"][value="${id}"]`).innerText();
+        const dataset = await p.locator(`button[name="dataset"][value="${id}"]`).innerText();
         if (!dataset.includes('VIRTIS') || /2014|Aug|Sep/.test(dataset)) throw new Error(`Verbose ${id} dataset row`);
         const legend = p.locator(`[data-lens-legend="${id}"]`);
         await legend.evaluate(node => node.scrollIntoView({ block: 'center', behavior: 'instant' }));

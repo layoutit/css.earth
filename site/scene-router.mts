@@ -423,7 +423,7 @@ export function createSceneRouter({
       if (source && objectId === object.id && sceneState === 'ready') {
         const destination = new URL(request.url);
         const datasetLink = Boolean(request.options.url) &&
-          (destination.hash.split('&').some(field => /^#?dataset=/.test(field)) || isFocusDatasetUrl(destination));
+          (readDatasetUrl(destination).requested || isFocusDatasetUrl(destination));
         const datasetSelection = selectDataset(source, request.url, request.controller.signal);
         if (!(typeof datasetSelection === 'boolean' ? datasetSelection : await datasetSelection)) {
           if (pending !== request) return false;

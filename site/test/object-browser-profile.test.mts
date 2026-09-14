@@ -85,7 +85,7 @@ test('the actual Saturn profile observes one exclusive lens and rejects the form
     return structuredClone(await runInNewContext(`(${fn.toString()})(payload)`, {
       payload,
       document: { querySelectorAll(selector: string) {
-        assert.equal(selector, 'button[name="lens"][aria-pressed="true"]');
+        assert.equal(selector, 'button[name="dataset"][aria-pressed="true"]');
         return pressed.map(value => ({ value }));
       } },
       window: { __saturn: {

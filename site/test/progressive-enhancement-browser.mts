@@ -99,7 +99,7 @@ try {
     if (viewport.width < 821) await page.locator('.planet-sheet-handle').check();
     await page.locator('label[for="saturn-dataset-tab"]').click();
     assert.equal(await page.locator('.planet-dataset-context-rail').isVisible(), true);
-    await page.locator('button[name="lens"][value="ultraviolet"]').click();
+    await page.locator('button[name="dataset"][value="ultraviolet"]').click();
     await page.screenshot({ path: `${output}/enhanced-${viewport.width}.png` });
     cases.push(`Interactive startup adopts all ${count} scene elements, preserves native selection, and adds drag and dataset controls at ${viewport.width}px`);
     await context.close();

@@ -1,6 +1,5 @@
-import { loadPreparedCssObject, initialObjectSelection } from '../src/renderers/css/dist/index.js';
+import { initialObjectSelection } from '../src/renderers/css/dist/index.js';
 import type { ObjectRuntimeDefinition } from '../src/renderers/css/runtime/object-runtime-types.js';
-import { readPreparedObjectBytes, readSharedBankBytes } from '../site/object-page-data.mts';
 
 export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; sha256?: string; }
 const escape = (value: string) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -30,8 +29,8 @@ const styleText = (style: ReadonlyMap<string, string>) => [...style].map(([key, 
 
 /** Serialize the selected package's prepared reference view. No replacement mesh,
  * texture generation, camera inference or source processing belongs here. */
-export function serializePreparedScene(definition: ObjectRuntimeDefinition): PreparedSceneMarkup {
-  const selection = initialObjectSelection(definition.controls);
+export function serializePreparedScene(definition: ObjectRuntimeDefinition, lensId?: string): PreparedSceneMarkup {
+  const selection = initialObjectSelection(definition.controls, lensId);
   const variant = definition.variants.find(entry => Object.entries(entry.when).every(([key, value]) => selection[key] === value));
   if (!variant) throw new TypeError(`${definition.id}: initial presentation is missing.`);
   const elements = definition.tree.nodes.map(node => ({
@@ -93,17 +92,4 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition): Pre
   };
   return { html: roots.map(serialize).join(''), classes: [...stage.classes], attributes: stage.attributes,
     style: styleText(stage.style), nodes: elements.length };
-}
-
-export async function loadPreparedSceneMarkup(id: string): Promise<PreparedSceneMarkup> {
-  const { descriptor, bytes } = await readPreparedObjectBytes(id);
-  const definition = await loadPreparedCssObject(descriptor, {
-    async read() { return Uint8Array.from(bytes).buffer; },
-    async readShared(reference) {
-      const bytes = await readSharedBankBytes(reference);
-      if (!bytes) throw new Error(`${id}: prepared bank ${reference.kind}/${reference.sha256} is missing.`);
-      return Uint8Array.from(bytes).buffer;
-    },
-  });
-  return { ...serializePreparedScene(definition), sha256: descriptor.prepared?.sha256 };
 }
