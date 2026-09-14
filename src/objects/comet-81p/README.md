@@ -10,7 +10,11 @@
 
 - **Mayo, Left Foot and Right Foot:** mission-team names and terrain descriptions from [Brownlee et al. (2004), Fig. 2](https://doi.org/10.1126/science.1097899). NASA's [PIA06285 photograph and diagram](https://science.nasa.gov/photojournal/wild-2-close-look/) supply the image callouts. These are approximate places within depressions, with no surveyed centres or boundaries.
 
+[Investigation ledger](investigations.json): tested alternatives and the evidence needed to revisit them. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
+
 ## Evidence
+
+- **Photometric trial, 2026-09-13:** a trial with the published Hapke parameters reduced accepted photographic area from 39.52% to 29.73%. Five of six overlap pairs improved, but the running application showed large new grid gaps in photographed depressions. The original photographs remain in use. [Parameters, measurements and limitations](evidence/photometry/trial.json) record the trial; the original paper's H-function approximation remains unverified.
 
 - **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
 
