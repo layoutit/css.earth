@@ -1,5 +1,31 @@
 {
   "fadeStartDistanceM": 9.257032744474102e+22,
   "fullDistanceM": 3.085677581491367e+23,
-  "note": "Annotation fade at 3 to 10 Mpc camera distance from the common origin; not a visibility or detection threshold."
+  "note": "Annotation fade at 3 to 10 Mpc camera distance from the common origin; not a visibility or detection threshold.",
+  "provenance": {
+    "name": "Nearby galaxy clusters",
+    "products": [
+      {
+        "id": "catalogue",
+        "label": "MCXC-II, CDS J/A+A/688/A187, 2024-11-29",
+        "process": "Select seven MCXC-II identifiers and integrate their redshifts in the declared flat cosmology.",
+        "recipe": "source/catalogue.json",
+        "selector": "",
+        "inputs": [
+          "mcxc-ii",
+          "mcxc-ii-readme"
+        ],
+        "outputs": [
+          "prepared/catalogue.json"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Distances are modelled comoving values; no peculiar-velocity correction or physical boundary is claimed."
+        ]
+      }
+    ]
+  }
 }

@@ -1,0 +1,21 @@
+{
+  "schema": "cssgalaxy-clusters-runtime-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "catalogue.json",
+      "sha256": "0685a83533e32ab31d0eb36ad3f02df8afa3a53bffa39df709f1e54b4f0b95c3",
+      "bytes": 9841
+    },
+    {
+      "filename": "provenance.json",
+      "bytes": 8931,
+      "sha256": "150e1be7364c9165e1e46577ad0d1235558fc4dd71d1d09e84df52f740ab4b4a"
+    },
+    {
+      "filename": "presentation.json",
+      "bytes": 301,
+      "sha256": "4ed3a4be164d464c4344e2d0f3584e2d5df62ec86c611fa624a8e94971913298"
+    }
+  ]
+}

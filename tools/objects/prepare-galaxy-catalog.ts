@@ -1,6 +1,6 @@
-import { prepareGalaxyDisplaySample } from '../../src/preparation/galaxy-catalog/display-sample.js';
+import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample } from '../../src/preparation/galaxy-catalog/display-sample.js';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parsePreparedGalaxyCatalog, spatialPublicationId } from '@cssearth/catalog';
 import { parseGalaxyRecipe, record, text } from '../../src/preparation/galaxy-catalog/config.js';
@@ -12,7 +12,10 @@ import { readBibliography } from '../../src/preparation/galaxy-catalog/bibliogra
 
 export async function prepareGalaxyCatalogObject(options: { objectDirectory: string; outputDirectory?: string }) {
   const objectDirectory = resolve(options.objectDirectory), sourceDirectory = resolve(objectDirectory, 'source');
-  const recipe = parseGalaxyRecipe(JSON.parse(await readFile(resolve(sourceDirectory, 'catalogue.json'), 'utf8')) as unknown);
+  const recipeBytes = await readFile(resolve(sourceDirectory, 'catalogue.json'));
+  const recipe = parseGalaxyRecipe(JSON.parse(recipeBytes.toString('utf8')) as unknown);
+  const presentation = record(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation.json'), 'utf8')) as unknown, 'Galaxy presentation');
+  const sampling = parseGalaxyDisplaySampling(presentation.sampling);
   const provenance = record(JSON.parse((await verifiedBytes(sourceDirectory, recipe.provenance)).toString('utf8')) as unknown, 'Catalogue provenance');
   if (!Array.isArray(provenance.sources)) throw new TypeError('Catalogue provenance must list sources.');
   const sources: GalaxySource[] = [];
@@ -42,12 +45,21 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
   const outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory, 'prepared')), path = resolve(outputDirectory, 'catalogue.json');
   await mkdir(dirname(path), { recursive: true });
   await writeFile(`${path}.tmp`, bytes); await rename(`${path}.tmp`, path);
-  await writeFile(resolve(outputDirectory, 'display-sample.json'), JSON.stringify(prepareGalaxyDisplaySample(data), null, 2) + '\n');
+  const displayBytes = Buffer.from(JSON.stringify(prepareGalaxyDisplaySample(data, sampling), null, 2) + '\n');
+  await writeFile(resolve(outputDirectory, 'display-sample.json'), displayBytes);
   const receipt = { schema: data.schema, path: 'catalogue.json', sha256: sha256(bytes), bytes: bytes.length,
+    outputs: [{ path: 'catalogue.json', sha256: sha256(bytes), bytes: bytes.length },
+      { path: 'display-sample.json', sha256: sha256(displayBytes), bytes: displayBytes.length }],
     sourceRows: rows.length, objects: data.objects.length, exclusions: data.exclusions.length,
     localGroup: data.objects.filter(row => row.membership.group === 'local-group').length,
     confirmedLocalGroup: data.objects.filter(row => row.membership.group === 'local-group' && row.status === 'confirmed').length };
   await writeFile(resolve(outputDirectory, 'manifest.json'), JSON.stringify(receipt, null, 2) + '\n');
+  if (outputDirectory === resolve(objectDirectory, 'prepared')) {
+    const descriptor = { schema: 'cssearth-object@1', id: basename(objectDirectory), type: 'galaxy-catalog',
+      properties: { preparation: { source: 'source/catalogue.json', sha256: sha256(recipeBytes) } },
+      prepared: { format: data.schema, url: 'prepared/catalogue.json', sha256: sha256(bytes) } };
+    await writeFile(resolve(objectDirectory, 'object.json'), JSON.stringify(descriptor, null, 2) + '\n');
+  }
   console.log(`PREPARED GALAXY CATALOGUE: ${JSON.stringify(receipt)}`);
   return data;
 }

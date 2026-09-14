@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "nearby-universe",
+  "type": "galaxy-point-field",
+  "properties": {
+    "preparation": {
+      "source": "source/preparation/field.json",
+      "sha256": "f1bda9eba1032dfa4414729c7d2b7798e95c607400b394a0f24f507ad79bd6b6"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-galaxy-points@1",
+    "url": "prepared/points.json",
+    "sha256": "595fac1eade3b55da32fe3a8047a751ec992e5eb850d39ab5a15f64dddca2aee"
+  }
+}

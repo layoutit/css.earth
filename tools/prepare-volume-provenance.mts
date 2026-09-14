@@ -13,8 +13,9 @@ import type { ProvenanceDocument, ProvenanceSource, ProvenanceJson } from '../sr
 import { parseSourceBinding, sourceArray, sourceDigest, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '../src/platform/source-catalog.mts';
 import { hasErrorCode } from './source-values.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
+import { manifestSources } from './context-source-records.mts';
 
-export const volumeProvenanceCompilerClosure = ['tools/prepare-volume-provenance.mts', 'site/dataset-content.mts'] as const;
+export const volumeProvenanceCompilerClosure = ['tools/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/context-source-records.mts'] as const;
 const digest = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const integer = (value: unknown): number => {
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value <= 0) throw new TypeError('Expected a positive integer.');
@@ -130,7 +131,9 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
     const manifestPath = `${base}/source/manifest.json`, manifestBytes = await input(manifestPath);
     const manifest = sourceObject(json(manifestBytes), ['schema', 'pathBase', 'inputs', 'documents', 'generatedIntermediates']);
     if (manifest.schema !== 'cssearth-volume-source-manifest@1' || manifest.pathBase !== 'repository') throw new TypeError('Invalid volume source manifest.');
-    const sources = sourceArray(manifest.inputs, source);
+    const descriptor = sourceObject(json(await input(`${base}/object.json`)));
+    const sources = [...sourceArray(manifest.inputs, source), ...(descriptor.type === 'image-layer-bank'
+      ? await manifestSources({ documents: manifest.documents, generatedIntermediates: manifest.generatedIntermediates }, root, input) : [])];
     const bySource = new Map(sources.map(source => [source.id, source]));
     // Small checked-in evidence records are real compiler inputs. Original
     // rasters/table downloads remain recovered pins, outside source closure.
@@ -138,7 +141,6 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
       const bytes = await input(source.path);
       if (digest(bytes) !== source.sha256 || bytes.length !== source.bytes) throw new Error(`Changed volume evidence: ${source.path}`);
     }
-    const descriptor = sourceObject(json(await input(`${base}/object.json`)));
     const prepared = sourceObject(descriptor.prepared);
     if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-lens-bank' && prepared.format === 'cssearth-volume-lenses@1') ||
       (descriptor.type === 'image-layer-bank' && prepared.format === 'cssearth-image-layer-bank@1' && record.lenses.length === 1 && record.defaultLens === 'optical'))) throw new TypeError(`Invalid volume descriptor: ${record.objectId}`);
@@ -149,6 +151,24 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
     // no presentation edit. The source receipt only supplies size offline when
     // it still identifies precisely the descriptor's bank.
     const bankBytes = installedBank?.length ?? (bankPath === record.bank.path && bankSha256 === record.bank.sha256 ? record.bank.bytes : undefined);
+    const layerOutputs: { url: string; sha256: string; bytes: number; verification: string }[] = [];
+    if (descriptor.type === 'image-layer-bank') {
+      if (!bankPath.startsWith(`${base}/prepared/`)) throw new TypeError(`Image-layer delivery must be prepared: ${record.objectId}`);
+      if (installedBank === null) throw new Error(`Image-layer bank required for complete delivery inventory: ${record.objectId}`);
+      const bank = sourceObject(json(await input(bankPath))); // Retained small resource receipt, not image bytes.
+      const resources = sourceArray(bank.resources, raw => {
+        const resource = sourceObject(raw);
+        return pin({ path: resource.path, sha256: resource.sha256, bytes: resource.bytes });
+      });
+      if (!resources.length) throw new Error(`Empty image-layer resource inventory: ${record.objectId}`);
+      sourceUnique(resources.map(resource => resource.path), 'image-layer resource');
+      for (const resource of resources) {
+        const url = `${dirname(bankPath)}/${resource.path}`;
+        const bytes = await readFile(resolve(root, url)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+        if (bytes !== null && (bytes.length !== resource.bytes || digest(bytes) !== resource.sha256)) throw new Error(`Changed image-layer resource: ${url}`);
+        layerOutputs.push({ url, sha256: resource.sha256, bytes: resource.bytes, verification: 'manifest-pin' });
+      }
+    }
     const recipes = [{ id: 'presentation', path: presentationPath, sha256: digest(ownedPresentationBytes), parameters: provenanceJson(json(ownedPresentationBytes)) }];
     for (const recipe of record.recipes) {
       const bytes = await input(recipe.path);
@@ -173,7 +193,7 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
         inputEvidence: [{ sourceId: lens.input, role: 'appearance', evidence: `Selected image at source/presentation.json#/lenses/${index}/input.` }, ...record.inputEvidence], parents: [], lensIds: [lens.id],
         observationAttribution: 'source-lineage', interpretation: { kind: 'observation-conditioned-volume', sourceKind: 'published-display-image' }, limitations: [lens.description, lens.detail],
         outputs: [...(bankBytes === undefined ? [] : [{ url: bankPath, sha256: bankSha256, bytes: bankBytes, verification: installedBank === null ? 'descriptor-pin' : 'bytes-verified' }]),
-          { url: previewUrl, sha256: digest(image.bytes), bytes: image.bytes.length, verification: 'bytes-verified' }] });
+          ...layerOutputs, { url: previewUrl, sha256: digest(image.bytes), bytes: image.bytes.length, verification: 'bytes-verified' }] });
     }
     const provenance = validateObjectProvenance({ schema: 'cssearth-object-provenance@3', objectId: record.objectId, basis: 'recovered',
       manifest: { path: 'source/manifest.json', sha256: digest(manifestBytes) },
@@ -184,6 +204,24 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
       ] } }, record.objectId);
     outputs.push({ path: resolve(root, `${base}/prepared/provenance.json`), text: stringify(provenance) },
       { path: resolve(root, `${base}/prepared/presentation.json`), text: stringify({ schema: 'cssearth-volume-presentation@1', objectId: record.objectId, controls, defaultLens: record.defaultLens }) });
+    if (descriptor.type === 'image-layer-bank') {
+      const prefix = `${base}/prepared/`;
+      const assets = [
+        { filename: bankPath.slice(prefix.length), bytes: bankBytes, sha256: bankSha256 },
+        ...layerOutputs.map(output => ({ filename: output.url.slice(prefix.length), bytes: output.bytes, sha256: output.sha256 })),
+        ...outputs.filter(output => output.path.startsWith(resolve(root, prefix) + '/')).map(output => {
+          const bytes = Buffer.from(output.text);
+          return { filename: output.path.slice(resolve(root, prefix).length + 1), bytes: bytes.length, sha256: digest(bytes) };
+        }),
+        ...outputs.filter(output => output.path.startsWith(resolve(root, `public/scenes/${record.objectId}`) + '/')).map(output => {
+          const bytes = Buffer.from(output.text);
+          return { filename: output.path.slice(resolve(root, `public/scenes/${record.objectId}`).length + 1), location: 'public', bytes: bytes.length, sha256: digest(bytes) };
+        }),
+      ];
+      const inventory = stringify({ schema: `css${record.objectId}-runtime-assets@1`, resourceRoot: 'prepared', assets });
+      outputs.push({ path: resolve(root, `${base}/runtime-assets.json`), text: inventory },
+        { path: resolve(root, `${base}/prepared/runtime-assets.json`), text: inventory });
+    }
     results.push({ id: record.objectId, name: record.name, route: `/sun/?focus=${record.objectId}`, base, controls, defaultLens: record.defaultLens, provenance, outputs });
   }
   return results;

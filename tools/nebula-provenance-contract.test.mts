@@ -10,7 +10,7 @@ const root = resolve(import.meta.dirname, '..');
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, path), 'utf8'));
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
-async function volumes() {
+async function presentedBanks() {
   const entries: { id: string; base: string }[] = [];
   for (const folder of await readdir(resolve(root, 'src/objects'), { withFileTypes: true })) {
     if (!folder.isDirectory()) continue;
@@ -19,13 +19,17 @@ async function volumes() {
     if (!names.includes('object.json')) continue;
     const descriptor = sourceObject(await read(`${base}/object.json`));
     if (descriptor.type === 'volume-lens-bank') entries.push({ id: sourceText(descriptor.id), base });
+    else if (descriptor.type === 'image-layer-bank' && names.includes('source')) {
+      const sourceFiles = await readdir(resolve(root, base, 'source'));
+      if (sourceFiles.includes('presentation.json')) entries.push({ id: sourceText(descriptor.id), base });
+    }
   }
   assert.ok(entries.length > 0, 'Exercise the delivered objects, not an empty fixture.');
   return entries;
 }
 
-test('every delivered volume lens has an included, revision-pinned investigation', async () => {
-  for (const { id, base } of await volumes()) {
+test('every presented bank lens has an included, revision-pinned investigation', async () => {
+  for (const { id, base } of await presentedBanks()) {
     const ledger = parseInvestigationLedger(await read(`${base}/investigations.json`), id);
     const presentation = sourceObject(await read(`${base}/source/presentation.json`));
     for (const lens of sourceArray(presentation.lenses, sourceObject)) {
@@ -36,8 +40,8 @@ test('every delivered volume lens has an included, revision-pinned investigation
   }
 });
 
-test('volume manifests account for each retained source file and verify its bytes', async () => {
-  for (const { id, base } of await volumes()) {
+test('presented bank manifests account for each retained source file and verify its bytes', async () => {
+  for (const { id, base } of await presentedBanks()) {
     const manifest = sourceObject(await read(`${base}/source/manifest.json`));
     const entries = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section =>
       sourceArray(manifest[section], sourceObject));

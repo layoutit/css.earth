@@ -156,3 +156,30 @@ Mercury coverage, Saturn material dependencies, Earth noise identity, preview
 inheritance, and preservation of source entries across the full registry.
 Those checks qualify this contract; they do not replace complete object or
 scientific qualification.
+
+## Prepared context resources
+
+Catalogue fields and image-layer galaxies use the same version-3 provenance
+schema without becoming independently mounted scenes. Their source manifests,
+recipes and prepared receipts feed the shared Sources compiler.
+
+Their root `runtime-assets.json` declares `resourceRoot: "prepared"`. Asset
+filenames may contain safe relative subdirectories; they resolve below the
+object's `prepared/` directory. An asset with `location: "public"` instead
+resolves below `public/scenes/<id>/`, for shared dataset previews. Absolute paths,
+parent traversal and symlink installation paths are rejected. Inventories list
+byte counts and SHA-256 values for both locations; the prepared mirror must
+match the root inventory. Prepared-directory verification preserves the root metadata receipts and
+requires an explicit public root when public assets are listed, checking both
+locations. The public-scene assembler rejects prepared resources before writes;
+it must never prune object preparation records.
+
+An explicit `--object=<id>` can select an inventoried context resource for
+shared asset setup. Default scene selection is unchanged. An inventory does
+not claim its files have been published to the runtime asset mirror. The Nearby
+Universe's `prepare:galaxy-field` command reproduces its assets from pinned
+catalogue downloads and regenerates provenance; source and generated-image
+caches remain ignored. `prepare:sources` recovers lineage from retained metadata receipts without
+requiring downloads or prepared imagery. Available output bytes are checked,
+but recovered records retain manifest-pin verification independently of the
+local cache.
