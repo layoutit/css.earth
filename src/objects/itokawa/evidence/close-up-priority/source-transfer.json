@@ -1,0 +1,94 @@
+{
+  "baseRevision": "e609e66d66ea2d701253de4a3681a354324927ff",
+  "date": "2026-09-14",
+  "sourceMesh": "source/shape/ver128q.tab",
+  "sourceMeshSha256": "e9d3a15129ec04b01064840a3425def21238e2fc818f127311b9d52fa52f5964",
+  "readers": [
+    "tools/objects/terrestrial-layers/amica-geo.mts",
+    "tools/objects/surface-observations/cameras.mts",
+    "tools/objects/terrestrial-layers/radial-terrain.mts"
+  ],
+  "interpretation": "Every thirteenth valid archived Gaskell XYZ pixel compared with the full ver128q surface. Camera holdouts check internal backplane consistency, not independent absolute accuracy.",
+  "rows": [
+    {
+      "id": "2492225173",
+      "cubeSha256": "d241ebf033e4760583fd72cbeb0fa0024e6b3c37076949b4c8ca3e5d090ea543",
+      "nativeXyzSampleStride": 13,
+      "samples": 39565,
+      "meanMeters": 0.12014991711771197,
+      "p95Meters": 0.36212727805377243,
+      "maximumMeters": 1.710826158155573,
+      "camera": {
+        "matrix": [
+          [
+            -185.87025070920959,
+            709.3403837410443,
+            10015.68540915303,
+            2001.2500694896994
+          ],
+          [
+            -9126.945958638442,
+            4166.340431667683,
+            -438.32733252182175,
+            2208.877819913819
+          ],
+          [
+            0.36865744692888286,
+            0.9295315749945925,
+            -0.007920726731197413,
+            4.055580616011214
+          ]
+        ],
+        "positionKm": [
+          -1.482941414334121,
+          -3.774553269872489,
+          0.039993099481464775
+        ],
+        "fitPixels": 2870,
+        "holdoutPixels": 511490,
+        "maximumResidualPixels": 0.000024809786623481338,
+        "rmsResidualPixels": 0.000008514057294771568
+      }
+    },
+    {
+      "id": "2493031594",
+      "cubeSha256": "9525cf54d1c6f854fa6cab5a0227d453e828a8fa3dcc76cd15768e0595f540ab",
+      "nativeXyzSampleStride": 13,
+      "samples": 41769,
+      "meanMeters": 0.1460694298845007,
+      "p95Meters": 0.45655135359732163,
+      "maximumMeters": 1.5548239980074239,
+      "camera": {
+        "matrix": [
+          [
+            -131.67479278290614,
+            -840.2901365775443,
+            10006.411238249875,
+            2424.8437919190897
+          ],
+          [
+            6734.982070846073,
+            -7431.843881271865,
+            -509.3180322146199,
+            1868.532707070843
+          ],
+          [
+            -0.7063012685054193,
+            -0.7076924181707852,
+            -0.017605663044082547,
+            3.8865784381116018
+          ]
+        ],
+        "positionKm": [
+          2.752525066973937,
+          2.744183786526923,
+          0.024334892788359833
+        ],
+        "fitPixels": 3034,
+        "holdoutPixels": 540000,
+        "maximumResidualPixels": 0.00003720318226017638,
+        "rmsResidualPixels": 0.000010111427166641015
+      }
+    }
+  ]
+}

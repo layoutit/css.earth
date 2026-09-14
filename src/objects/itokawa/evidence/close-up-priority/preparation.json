@@ -1,0 +1,188 @@
+{
+  "beforeRevision": "e609e66d66ea2d701253de4a3681a354324927ff",
+  "afterRevision": "b7e79702738ceda157502dfef311890ba8cef85c",
+  "recipeSha256": "a2bd53758a3dbdc997f70ba728d56d551b485161744c2924a24537e9ac31af4b",
+  "retainedSceneSha256": "88089d21d3f22c741a90850c59213f75f543ef35edfa8af6b4219b1c42a31f83",
+  "preparation": {
+    "command": "node tools/objects/refresh-surface-observations.mts itokawa amica",
+    "seconds": 542.827241959,
+    "peakRssMiB": 1670.28125,
+    "provenanceBasis": "recovered"
+  },
+  "areaCoverage": {
+    "before": {
+      "method": "Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed",
+      "samplesPerTriangle": 24,
+      "totalSquareMeters": 396465.33089577995,
+      "acceptedSquareMeters": 330011.45485779323,
+      "sourceSquareMeters": {
+        "amica-2481672682": 49274.43733109053,
+        "amica-2492513077": 27985.86554024826,
+        "amica-2495230070": 24882.5655135441,
+        "sep29": 63058.99776004885,
+        "amica-2480981469": 57274.62126374178,
+        "sep24": 44188.001996148116,
+        "sep26": 37796.21365548609,
+        "amica-2473604354": 25550.751797477045
+      },
+      "acceptedFraction": 0.8323841434310542
+    },
+    "after": {
+      "method": "Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed",
+      "samplesPerTriangle": 24,
+      "totalSquareMeters": 396465.33089577995,
+      "acceptedSquareMeters": 334047.2305987936,
+      "sourceSquareMeters": {
+        "amica-2481672682": 99631.4837290295,
+        "amica-2492513077": 4116.438085366855,
+        "amica-2495230070": 88595.39028940772,
+        "sep29": 7107.859501562536,
+        "sep24": 5530.982431094015,
+        "amica-2492225173": 53443.85351078686,
+        "sep26": 8621.92495131228,
+        "amica-2480981469": 25545.818070667257,
+        "amica-2493031594": 33501.58076737501,
+        "amica-2473604354": 7951.899262181227
+      },
+      "acceptedFraction": 0.8425635347333954
+    },
+    "interpretation": "Deterministic area-weighted samples of the same 794 retained triangles, not exact photographed area."
+  },
+  "selection": "recipe-order",
+  "frameOrder": [
+    "amica-2481672682",
+    "amica-2495230070",
+    "amica-2493031594",
+    "amica-2492513077",
+    "amica-2492225173",
+    "amica-2480981469",
+    "amica-2473604354",
+    "sep29",
+    "sep26",
+    "sep24"
+  ],
+  "levelGains": [
+    1,
+    0.7701079526658929,
+    0.8929672319026278,
+    1.0308281575630382,
+    0.9947241855395867,
+    1.0386338825347834,
+    0.9569844289750548,
+    0.890173629180051,
+    0.9863792987894084,
+    0.9704576816923821
+  ],
+  "newFrames": [
+    {
+      "id": "amica-2493031594",
+      "startTime": "2005-10-26T15:31:19",
+      "cameraHoldouts": {
+        "count": 540000,
+        "maximumResidualPixels": 0.00003720318226017638,
+        "rmsResidualPixels": 0.000010111427166641015
+      },
+      "quality": {
+        "matchedOriginalPixels": 1048576,
+        "originalArrayOrientation": "vertical reversal verified pixel for pixel",
+        "imageQualityFlag": 0,
+        "outputMode": "LOSSY",
+        "defectiveFlatPixels": 2976,
+        "clippedPixels": 0,
+        "exposureSeconds": 0.087,
+        "calibration": "Archived SUM minus near-zero-exposure DIFF removes bias/dark/smear onboard; divide by the original preflight v flat and exposure. Relative detector brightness, not absolute radiance or albedo.",
+        "limitations": "Lossy 8-bit image; no pixel-quality plane, stray-light restoration, temporal flat correction or absolute calibration."
+      },
+      "footprint": {
+        "pixelAngleMicroradians": 99.59096422162223,
+        "nadirMedianMeters": 0.375770256543037,
+        "nadirMinimumMeters": 0.3631276675920076,
+        "sampledPixels": 5599
+      }
+    },
+    {
+      "id": "amica-2492225173",
+      "startTime": "2005-10-26T08:31:17",
+      "cameraHoldouts": {
+        "count": 511490,
+        "maximumResidualPixels": 0.000024809786623481338,
+        "rmsResidualPixels": 0.000008514057294771568
+      },
+      "quality": {
+        "matchedOriginalPixels": 1048576,
+        "originalArrayOrientation": "vertical reversal verified pixel for pixel",
+        "imageQualityFlag": 0,
+        "outputMode": "LOSSY",
+        "defectiveFlatPixels": 2976,
+        "clippedPixels": 0,
+        "exposureSeconds": 0.087,
+        "calibration": "Archived SUM minus near-zero-exposure DIFF removes bias/dark/smear onboard; divide by the original preflight v flat and exposure. Relative detector brightness, not absolute radiance or albedo.",
+        "limitations": "Lossy 8-bit image; no pixel-quality plane, stray-light restoration, temporal flat correction or absolute calibration."
+      },
+      "footprint": {
+        "pixelAngleMicroradians": 99.59097747629386,
+        "nadirMedianMeters": 0.3935810550654692,
+        "nadirMinimumMeters": 0.38611790254932954,
+        "sampledPixels": 5303
+      }
+    }
+  ],
+  "sourceRestoration": {
+    "method": "restoreMissingSources, six new inputs into an empty unlinked destination using their checked-in acquisition operations",
+    "files": [
+      {
+        "path": "observations/st_2492225173_v_ddr.lbl",
+        "bytes": 6640,
+        "sha256": "3526b3b396a1e1ce5d0548d9732c7092faa1fd14ade6961f711675a2e92fc9cc"
+      },
+      {
+        "path": "observations/st_2492225173_v_ddr.img.gz",
+        "bytes": 26305966,
+        "sha256": "d241ebf033e4760583fd72cbeb0fa0024e6b3c37076949b4c8ca3e5d090ea543"
+      },
+      {
+        "path": "observations/st_2492225173_v.fit",
+        "bytes": 1056960,
+        "sha256": "802b81455a3f25982c127cc2fd4771d2cc17a96804fbf971a5a5cc9afd211f22"
+      },
+      {
+        "path": "observations/st_2493031594_v_ddr.lbl",
+        "bytes": 6640,
+        "sha256": "21d38408acbf181edfc5f5a0451ebd703608c4f734f362d109763dea48f7ed36"
+      },
+      {
+        "path": "observations/st_2493031594_v_ddr.img.gz",
+        "bytes": 27202758,
+        "sha256": "9525cf54d1c6f854fa6cab5a0227d453e828a8fa3dcc76cd15768e0595f540ab"
+      },
+      {
+        "path": "observations/st_2493031594_v.fit",
+        "bytes": 1056960,
+        "sha256": "33b6cc60bc286ea6ab96934aa12fc1e36a381a3f707edc6cd6b971c8c9335800"
+      }
+    ]
+  },
+  "runtimeInstallation": {
+    "installed": 36,
+    "reused": 0,
+    "totalBytes": 11850964
+  },
+  "changedRuntimeAssets": [
+    {
+      "filename": "itokawa-amica-surface@2x.webp",
+      "bytes": 2215602,
+      "sha256": "191b37d1edf01c64a8e7954b3a634d4649c85ba5981b86a4d293f7beb0fa6c97"
+    },
+    {
+      "filename": "itokawa-amica-shadow@2x.webp",
+      "bytes": 916482,
+      "sha256": "48e1b6140e53c7a24f41c6d8b5b6c81eee0f87975b5465dea0de62ed27ed9ab9"
+    },
+    {
+      "filename": "itokawa-amica-thumbnail.webp",
+      "bytes": 1320,
+      "sha256": "8d23fbfbacd396c8cc75b31abb90e187e0fbc8ac33cc1e84b85e7207afedd491"
+    }
+  ],
+  "retainedRuntimeAssetCount": 33
+}

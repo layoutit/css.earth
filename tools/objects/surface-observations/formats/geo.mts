@@ -50,7 +50,7 @@ export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
     photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
   // AMICA admits lossy frames and counts them in the report; one flat field serves every frame.
   'amica-gaskell': { camera: 'backplane-fit', frame: { required: ['labelPath', 'originalPath'] }, lens: { required: ['filter', 'flatPath'] },
-    photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
+    photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 10 },
   [PDS4_GEOMETRY_CUBE_FORMAT]: { camera: 'backplane-fit', frame: { required: ['labelPath'] }, lens: { required: ['filter', 'cube'] },
     photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
   // Archived cameras close over the exact source mesh, so they may also keep the acquisition illumination.
