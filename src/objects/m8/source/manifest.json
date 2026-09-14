@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/observations/m8-processed/sources/eso-optical.tif",
       "origin": "https://www.eso.org/public/images/eso0936a/",
       "sourceUrl": "https://www.eso.org/public/images/eso0936a/",
-      "title": "Lagoon Nebula \u00b7 ESO \u00b7 optical",
+      "title": "Lagoon Nebula · ESO · optical",
       "credit": "ESO",
       "displayCredit": "ESO",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -41,7 +41,7 @@
       "path": ".local/nebula-lab/observations/m8-processed/sources/eso-vista.tif",
       "origin": "https://www.eso.org/public/images/eso1101d/",
       "sourceUrl": "https://www.eso.org/public/images/eso1101d/",
-      "title": "Lagoon Nebula \u00b7 ESO VISTA \u00b7 infrared",
+      "title": "Lagoon Nebula · ESO VISTA · infrared",
       "credit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
       "displayCredit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -75,7 +75,7 @@
       "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.tif",
       "origin": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula",
       "sourceUrl": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula",
-      "title": "Lagoon Nebula \u00b7 Spitzer \u00b7 mid-infrared",
+      "title": "Lagoon Nebula · Spitzer · mid-infrared",
       "credit": "NASA/JPL-Caltech",
       "displayCredit": "NASA/JPL-Caltech",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -190,7 +190,16 @@
         ]
       },
       "dependencies": [],
-      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements."
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -217,8 +226,8 @@
     {
       "id": "document-3",
       "path": "src/objects/m8/source/presentation.json",
-      "expectedSha256": "55aa9596fba13fee518bf561870b524620068dee3e70d83a36d267d81d06d730",
-      "expectedBytes": 6673,
+      "expectedSha256": "3be0c4752171b5db8d907e593fe29b3f2ec597b5ba7269e73ff0b0149183ba28",
+      "expectedBytes": 6784,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."

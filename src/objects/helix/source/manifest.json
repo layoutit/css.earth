@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/observations/helix/sources/eso-vista.tif",
       "origin": "https://www.eso.org/public/images/eso1205a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1205a/",
-      "title": "Helix \u00b7 eso1205a",
+      "title": "Helix · eso1205a",
       "credit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
       "displayCredit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -41,7 +41,7 @@
       "path": ".local/nebula-lab/observations/helix/sources/eso-wfi.tif",
       "origin": "https://www.eso.org/public/images/eso0907a/",
       "sourceUrl": "https://www.eso.org/public/images/eso0907a/",
-      "title": "Helix \u00b7 eso0907a",
+      "title": "Helix · eso0907a",
       "credit": "ESO",
       "displayCredit": "ESO",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -75,7 +75,7 @@
       "path": ".local/nebula-lab/observations/helix/sources/eso-wide.tif",
       "origin": "https://www.eso.org/public/images/helix/",
       "sourceUrl": "https://www.eso.org/public/images/helix/",
-      "title": "Helix \u00b7 helix",
+      "title": "Helix · helix",
       "credit": "ESO",
       "displayCredit": "ESO",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -109,7 +109,7 @@
       "path": ".local/nebula-lab/kinematics/helix/hco/table1.dat",
       "origin": "https://doi.org/10.26093/cds/vizier.17780016",
       "sourceUrl": "https://doi.org/10.26093/cds/vizier.17780016",
-      "title": "Helix HCO+ J=1\u20130 component fits",
+      "title": "Helix HCO+ J=1–0 component fits",
       "credit": "Zeigler, Zack, Woolf & Ziurys (2013); CDS/VizieR",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
       "expectedSha256": "61804353d393ced6650b31424591877a6481f9f01696031b2dabfb5d0cf0acaf",
@@ -129,7 +129,16 @@
           }
         ]
       },
-      "dependencies": []
+      "dependencies": [],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "aro-12m-original",
+            "evidence": "https://doi.org/10.1088/0004-637X/778/1/16 — Zeigler et al. (2013) abstract: HCO+ J=1–0 at 89 GHz mapped with the Arizona Radio Observatory 12 m telescope; https://experts.arizona.edu/en/publications/the-helix-nebula-viewed-in-hcosupsup-large-scale-mapping-of-the-j/"
+          }
+        ]
+      }
     },
     {
       "id": "distance",
@@ -185,7 +194,16 @@
         ]
       },
       "dependencies": [],
-      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements."
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -212,8 +230,8 @@
     {
       "id": "document-3",
       "path": "src/objects/helix/source/presentation.json",
-      "expectedSha256": "ed4d729eaea6c5e460142cdff30c1fbb4a8f08dc8254e3506ca731a240625070",
-      "expectedBytes": 6168,
+      "expectedSha256": "366c4687f11385174311ef512dc6ee7fb48a0ca14f6d7c451ab04e619f329228",
+      "expectedBytes": 6334,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."

@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/hubble-optical.tif",
       "origin": "https://esahubble.org/images/heic0515a/",
       "sourceUrl": "https://esahubble.org/images/heic0515a/",
-      "title": "Crab Nebula \u00b7 Hubble \u00b7 optical lines",
+      "title": "Crab Nebula · Hubble · optical lines",
       "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
       "displayCredit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -41,7 +41,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/webb-infrared.tif",
       "origin": "https://esawebb.org/images/weic2326a/",
       "sourceUrl": "https://esawebb.org/images/weic2326a/",
-      "title": "Crab Nebula \u00b7 Webb \u00b7 near/mid-infrared",
+      "title": "Crab Nebula · Webb · near/mid-infrared",
       "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "displayCredit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -63,10 +63,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "James Webb Space Telescope",
-            "evidence": "https://esawebb.org/images/weic2326a/",
-            "reason": "The published image identifies Webb, which is not yet represented in the shared machine catalogue."
+            "kind": "machine",
+            "machineId": "webb",
+            "evidence": "https://esawebb.org/images/weic2326a/ — NIRCam and MIRI; Colours & filters"
           }
         ]
       }
@@ -76,7 +75,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/webb-components.tif",
       "origin": "https://esawebb.org/images/weic2417a/",
       "sourceUrl": "https://esawebb.org/images/weic2417a/",
-      "title": "Crab Nebula \u00b7 Webb \u00b7 dust, sulfur, synchrotron",
+      "title": "Crab Nebula · Webb · dust, sulfur, synchrotron",
       "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "displayCredit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -98,10 +97,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "James Webb Space Telescope",
-            "evidence": "https://esawebb.org/images/weic2417a/",
-            "reason": "The published image identifies Webb, which is not yet represented in the shared machine catalogue."
+            "kind": "machine",
+            "machineId": "webb",
+            "evidence": "https://esawebb.org/images/weic2417a/ — Webb infrared components"
           }
         ]
       }
@@ -111,7 +109,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/spitzer-infrared.tif",
       "origin": "https://esahubble.org/images/potw1720c/",
       "sourceUrl": "https://esahubble.org/images/potw1720c/",
-      "title": "Crab Nebula \u00b7 Spitzer \u00b7 mid-infrared",
+      "title": "Crab Nebula · Spitzer · mid-infrared",
       "credit": "JPL/Caltech",
       "displayCredit": "JPL/Caltech",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -145,7 +143,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/vla-radio.tif",
       "origin": "https://esahubble.org/images/potw1720b/",
       "sourceUrl": "https://esahubble.org/images/potw1720b/",
-      "title": "Crab Nebula \u00b7 VLA \u00b7 radio synchrotron",
+      "title": "Crab Nebula · VLA · radio synchrotron",
       "credit": "NRAO/AUI/NSF",
       "displayCredit": "NRAO/AUI/NSF",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -167,10 +165,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "Very Large Array",
-            "evidence": "https://esahubble.org/images/potw1720b/",
-            "reason": "The published image identifies the VLA, which is not yet represented in the shared machine catalogue."
+            "kind": "machine",
+            "machineId": "vla",
+            "evidence": "https://esahubble.org/images/potw1720b/ — VLA radio observation"
           }
         ]
       }
@@ -180,7 +177,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/chandra-xray.tif",
       "origin": "https://esahubble.org/images/potw1720f/",
       "sourceUrl": "https://esahubble.org/images/potw1720f/",
-      "title": "Crab Nebula \u00b7 Chandra \u00b7 X-ray pulsar wind",
+      "title": "Crab Nebula · Chandra · X-ray pulsar wind",
       "credit": "CXC",
       "displayCredit": "CXC",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -202,10 +199,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "Chandra X-ray Observatory",
-            "evidence": "https://esahubble.org/images/potw1720f/",
-            "reason": "The published image identifies Chandra, which is not yet represented in the shared machine catalogue."
+            "kind": "machine",
+            "machineId": "chandra",
+            "evidence": "https://esahubble.org/images/potw1720f/ — Chandra X-ray observation"
           }
         ]
       }
@@ -215,7 +211,7 @@
       "path": ".local/nebula-lab/observations/m1/sources/hubble-2017-bridge.tif",
       "origin": "https://esahubble.org/images/potw1720d/",
       "sourceUrl": "https://esahubble.org/images/potw1720d/",
-      "title": "Crab Nebula \u00b7 Hubble \u00b7 2017 common-grid astrometric bridge",
+      "title": "Crab Nebula · Hubble · 2017 common-grid astrometric bridge",
       "credit": "NASA, ESA, and J. Hester (Arizona State University)",
       "displayCredit": "NASA, ESA, and J. Hester (Arizona State University)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -290,7 +286,7 @@
       "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZflux.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/3dmap_XYZflux.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
-      "title": "Crab SITELLE \u00b7 3dmap_XYZflux.fits",
+      "title": "Crab SITELLE · 3dmap_XYZflux.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
       "expectedSha256": "da365348b258952cd9ea00292f5915c45785e1cb939ff580ad0b43ccf38d0f4e",
@@ -306,14 +302,23 @@
         ]
       },
       "dependencies": [],
-      "license": "GPL-3.0 repository licence retained in the pinned physical-source receipt."
+      "license": "GPL-3.0 repository licence retained in the pinned physical-source receipt.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cfht",
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+          }
+        ]
+      }
     },
     {
       "id": "sitelle-2",
       "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZvel.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/3dmap_XYZvel.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
-      "title": "Crab SITELLE \u00b7 3dmap_XYZvel.fits",
+      "title": "Crab SITELLE · 3dmap_XYZvel.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
       "expectedSha256": "0d7fbdcda2da31ce39b6ef3880e5a107d04101cd46100695c45abebd56a9c605",
@@ -329,14 +334,23 @@
         ]
       },
       "dependencies": [],
-      "license": "GPL-3.0 repository licence retained in the pinned physical-source receipt."
+      "license": "GPL-3.0 repository licence retained in the pinned physical-source receipt.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cfht",
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+          }
+        ]
+      }
     },
     {
       "id": "sitelle-4",
       "path": ".local/nebula-lab/intake/m1/physical/m1.deep_frame.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/m1.deep_frame.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
-      "title": "Crab SITELLE \u00b7 m1.deep_frame.fits",
+      "title": "Crab SITELLE · m1.deep_frame.fits",
       "credit": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "acquisition": "Native released FITS product pinned by the physical-source receipt. Coordinate units, grid transport and conditional depth interpretation are separately qualified in the sampled recipe.",
       "expectedSha256": "b1515f62eb6d9e402e93a756609848de86a193b9156fa1a2e47794ca569946c7",
@@ -352,7 +366,16 @@
         ]
       },
       "dependencies": [],
-      "license": "GPL-3.0 repository licence retained in the pinned physical-source receipt."
+      "license": "GPL-3.0 repository licence retained in the pinned physical-source receipt.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cfht",
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+          }
+        ]
+      }
     },
     {
       "id": "distance",
@@ -408,7 +431,16 @@
         ]
       },
       "dependencies": [],
-      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements."
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -435,8 +467,8 @@
     {
       "id": "document-3",
       "path": "src/objects/m1/source/presentation.json",
-      "expectedSha256": "3fd8b5f96bd9874679388683eb45419e8b64b157f967087d4da0abfef6e6b6c1",
-      "expectedBytes": 13435,
+      "expectedSha256": "88145df02c5879ecb0d756938b9c08bb0173dfa2878bee800c78e036da74cd0b",
+      "expectedBytes": 13557,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."

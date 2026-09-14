@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/observations/m42/sources/eso-optical.tif",
       "origin": "https://www.eso.org/public/images/eso1723a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1723a/",
-      "title": "Orion \u00b7 eso1723a",
+      "title": "Orion · eso1723a",
       "credit": "ESO/G. Beccari",
       "displayCredit": "ESO/G. Beccari",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -41,7 +41,7 @@
       "path": ".local/nebula-lab/observations/m42/sources/eso-vista.tif",
       "origin": "https://www.eso.org/public/images/eso1006a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1006a/",
-      "title": "Orion \u00b7 eso1006a",
+      "title": "Orion · eso1006a",
       "credit": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
       "displayCredit": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -161,7 +161,16 @@
         ]
       },
       "dependencies": [],
-      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements."
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -188,8 +197,8 @@
     {
       "id": "document-3",
       "path": "src/objects/m42/source/presentation.json",
-      "expectedSha256": "3a685fa4941adc7031c1917bbe91d5d31d293dd2acf992ea1f2d6d6f45a8086e",
-      "expectedBytes": 4764,
+      "expectedSha256": "85f807e6007fb2be0453e32a7d49bb9c31a00a3b9b1a630be004d350a1001795",
+      "expectedBytes": 4854,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."

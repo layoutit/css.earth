@@ -63,26 +63,26 @@
   "lenses": [
     {
       "id": "eso-vista",
-      "label": "ESO VISTA \u00b7 infrared",
+      "label": "ESO VISTA · infrared",
       "title": "Helix in near infrared",
       "description": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Near-infrared \u00b7 Y / J / K",
-      "detail": "6592 \u00d7 6592 px",
+      "summary": "Near-infrared false color on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
+      "detail": "6592 × 6592 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Near-infrared \u00b7 Y / J / K"
+          "value": "Near-infrared · Y / J / K"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "6592 \u00d7 6592"
+          "value": "6592 × 6592"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "37.51 \u00d7 37.51 arcmin"
+          "value": "37.51 × 37.51 arcmin"
         }
       ],
       "input": "eso-vista",
@@ -95,26 +95,26 @@
     },
     {
       "id": "eso-wfi",
-      "label": "ESO WFI \u00b7 optical detail",
+      "label": "ESO WFI · optical detail",
       "title": "Helix in visible light",
       "description": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Optical \u00b7 B / V / R",
-      "detail": "7059 \u00d7 6535 px",
+      "summary": "Optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
+      "detail": "7059 × 6535 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Optical \u00b7 B / V / R"
+          "value": "Optical · B / V / R"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "7059 \u00d7 6535"
+          "value": "7059 × 6535"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "28.02 \u00d7 25.94 arcmin"
+          "value": "28.02 × 25.94 arcmin"
         }
       ],
       "input": "eso-wfi",
@@ -127,26 +127,26 @@
     },
     {
       "id": "eso-wide",
-      "label": "ESO \u00b7 wider field",
+      "label": "ESO · wider field",
       "title": "The wider Helix field",
       "description": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "ESO 3.6 m \u00b7 filters not listed",
-      "detail": "6850 \u00d7 4759 px",
+      "summary": "Wide optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
+      "detail": "6850 × 4759 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "ESO 3.6 m \u00b7 filters not listed"
+          "value": "ESO 3.6 m · filters not listed"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "6850 \u00d7 4759"
+          "value": "6850 × 4759"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "48.82 \u00d7 33.92 arcmin"
+          "value": "48.82 × 33.92 arcmin"
         }
       ],
       "input": "eso-wide",
