@@ -1,8 +1,9 @@
+import { testDistance } from './navigation-test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, access } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { prepareBodyOverview, overviewMeasurements } from '../prepare-body-overview.mts';
 import { required } from './navigation-test-values.mts';
 import { SourceEvidence } from './source-evidence-values.mts';
@@ -12,7 +13,7 @@ import { renderCompactSpectrum } from '../../tools/objects/content/compact-spect
 
 test('overview charts retain every supplied spectrum sample across the registry', async () => {
   let charts = 0;
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const source = new URL(`../../src/objects/${object.id}/source/`, import.meta.url);
     const recipe = await readFile(new URL('content/charts.json', source), 'utf8').then(text => SourceEvidence.parse(JSON.parse(text)))
       .catch(error => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
@@ -35,9 +36,9 @@ test('overview charts retain every supplied spectrum sample across the registry'
 });
 
 test('overview measurements use the body reference radius and catalogue distance', () => {
-  assert.deepEqual(overviewMeasurements({ worldFrame: frame(25559), distanceAu: 19.2 }, 6378.137),
+  assert.deepEqual(overviewMeasurements({ worldFrame: frame(25559), distance: testDistance(19.2) }, 6378.137),
     { radiusEarth: '4.01', distanceAu: '19.2' });
-  assert.deepEqual(overviewMeasurements({ worldFrame: frame(6378.137), distanceAu: 1 }, 6378.137),
+  assert.deepEqual(overviewMeasurements({ worldFrame: frame(6378.137), distance: testDistance(1) }, 6378.137),
     { radiusEarth: '1', distanceAu: '1' });
 });
 

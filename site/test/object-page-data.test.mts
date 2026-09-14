@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {loadObjectPageData,readPreparedObjectBytes} from '../object-page-data.mts';
 import {objectPageStyles} from '../object-page-contract.mts';
 import {preparePageMetadata} from '../../tools/prepared-page-metadata.mts';
-import {OBJECTS} from '../objects.mts';
+import {SCENE_OBJECTS} from '../objects.mts';
 
 test('page metadata stays hash-bound to its scene without needing scene bytes during page emission',async t=>{
  const root=await mkdtemp(resolve(tmpdir(),'cssearth-page-data-'));
@@ -35,7 +35,7 @@ test('page metadata stays hash-bound to its scene without needing scene bytes du
 });
 
 test('all registry objects own ordered CSS and scene-bound page metadata',async()=>{
- for(const {id} of OBJECTS){
+ for(const {id} of SCENE_OBJECTS){
   const descriptor=JSON.parse(await readFile(new URL(`../../src/objects/${id}/object.json`,import.meta.url),'utf8'));
   const page=await loadObjectPageData(id);
   const styles=objectPageStyles(descriptor);
@@ -47,10 +47,10 @@ test('all registry objects own ordered CSS and scene-bound page metadata',async(
  }
 });
 
-test('generic routes derive membership from OBJECTS and never import scene transports',async()=>{
+test('generic routes derive membership from SCENE_OBJECTS and never import scene transports',async()=>{
  for(const path of ['../pages/[id].astro','../pages/navigation/[id].astro']){
   const source=await readFile(new URL(path,import.meta.url),'utf8');
-  assert.match(source,/OBJECTS\.map/); assert.match(source,/getStaticPaths/);
+  assert.match(source,/SCENE_OBJECTS\.map/); assert.match(source,/getStaticPaths/);
  }
  const page=await readFile(new URL('../components/ObjectPage.astro',import.meta.url),'utf8');
  assert.match(page,/loadObjectPageData\(objectId\)/);

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-19p",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "2fa7aa1ed0839f9e2b1baa511ab0a15809dd124a933bdc116a3481c9156cbc45"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
+    "bindingsSha256": "ed78a3a952f988e7a1c8417fdeae45db39a728c6a6362b4a42537094ed09086e"
   },
   "recipes": [
     {
@@ -739,7 +739,7 @@
       "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "bytes": 137,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -770,7 +770,7 @@
       "sha256": "88643dbc92765eae3ca00e87166e25b33ad18b268f43e28537bd7c6ed5c387ef",
       "bytes": 3521224,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -811,7 +811,7 @@
       "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "bytes": 137,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -841,7 +841,7 @@
       "sha256": "e2e6ebc47dcff737d830391e4f8457d809c2e85c5fd8aff7e514dc089e002091",
       "bytes": 67770,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -879,7 +879,7 @@
       "sha256": "19912df4bac7177bafe5556bebbcd4dd178dd1ea57d94c5f3ecfd2f60c8cccd1",
       "bytes": 704512,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -917,7 +917,7 @@
       "sha256": "3c415666d9ca641371c8579f659171273e36abfc4d1407a150f3900f67e8bf1e",
       "bytes": 704000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -955,7 +955,7 @@
       "sha256": "237a7f02e7ea4b64a92640abc2e69054218f4eb44b0710cce4ca6f81bd9f7e54",
       "bytes": 704000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -993,7 +993,7 @@
       "sha256": "ebda490e2e50e974406cda51fdba84859894e5d232a3a66ef4e0e14684705bc6",
       "bytes": 704000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1020,7 +1020,7 @@
       "sha256": "ab211aaf254a80048dff5a5520b48aee0c6ae3e923ae2809e36ca9e8d80195ef",
       "bytes": 7662,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1040,7 +1040,7 @@
       "sha256": "92187753ce01452ad567972ae483c20143f01f532999fe4d4d35a2772ca75876",
       "bytes": 1847,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1060,7 +1060,7 @@
       "sha256": "7c3d92c8f600faa16a501fab68162fb473f92ed528199e427825ef1d0bbf4059",
       "bytes": 156,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1080,7 +1080,7 @@
       "sha256": "c2a22b9e5cbd60d5d8b0332c92d4e6b56d06a71f7292d733e47ae72e2960246a",
       "bytes": 3503,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1100,7 +1100,7 @@
       "sha256": "5308b6cbff25b419b9dc89cf8d22e0d3b620da513377863bc35b21b48c8f3c1c",
       "bytes": 56879,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1120,7 +1120,7 @@
       "sha256": "9adf195d756bd5b95bb39be59f1cf5956e8795d554d8775b57dec68c46cd9635",
       "bytes": 56004,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1140,7 +1140,7 @@
       "sha256": "872724f5243c30c4e64fc1df8e4e55f899440e60d8282ec6ea35f4b991e95ba3",
       "bytes": 80209,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1151,6 +1151,7 @@
       "label": "USGS",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
       "limitations": [],
@@ -1176,13 +1177,13 @@
           "url": "/scenes/comet-19p/comet-19p-usgs-thumbnail.webp",
           "bytes": 1112,
           "sha256": "8d369fa65143b27eec4ae73c2229caef847361cb74b38adad954e5039d1c639c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-usgs-surface@2x.webp",
           "bytes": 136448,
           "sha256": "5b6f1d989a60b12a7217ea09c2491399dd8229b7f654c8b6fa1c07268f569a9d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1192,6 +1193,7 @@
       "label": "DLR",
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
       "limitations": [],
@@ -1217,13 +1219,13 @@
           "url": "/scenes/comet-19p/comet-19p-dlr-thumbnail.webp",
           "bytes": 958,
           "sha256": "c864e0d89a069a381088cb4778dcb00cacc5ddcb84418a8cde1c2f5f9202761d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-dlr-surface@2x.webp",
           "bytes": 239172,
           "sha256": "400f3a676c5d4f799b318245ca2404eaf81527c24490897ce052d72bce443d8b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1233,6 +1235,7 @@
       "label": "Height",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
       "limitations": [],
@@ -1253,19 +1256,19 @@
           "url": "/scenes/comet-19p/comet-19p-height-thumbnail.webp",
           "bytes": 1610,
           "sha256": "8ff789867ee6aec32e0678f094da4181a4146516d401533de4deba9a5e3e7a92",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-height-legend.webp",
           "bytes": 178,
           "sha256": "1c9f1f7c6d50ff53a25ed4ac6ac04d71c1b89bff2acba269a8a6ece9e2e2bac3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-height-surface@2x.webp",
           "bytes": 214782,
           "sha256": "8fcb7ca3f64994ce066e54a0f75e6bb5f296373176edae8da928ab0cab262f56",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1275,6 +1278,7 @@
       "label": "Difference",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
       "limitations": [],
@@ -1296,19 +1300,19 @@
           "url": "/scenes/comet-19p/comet-19p-difference-thumbnail.webp",
           "bytes": 1544,
           "sha256": "6bb076a2d0a892eec5d7be69b0ffdd4e8b7cec1824c211fdaa19b4bf53f374d9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-difference-legend.webp",
           "bytes": 272,
           "sha256": "84e84bed22545a2801117c6ca377766cc4462285a03ddbf33e0af9088e26d450",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-difference-surface@2x.webp",
           "bytes": 324392,
           "sha256": "b20f27e952938a1d989d858d4902d3af6c5895717b1e345972c6ab9ac5347be6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1318,6 +1322,7 @@
       "label": "MICAS",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [],
@@ -1342,13 +1347,13 @@
           "url": "/scenes/comet-19p/comet-19p-micas-thumbnail.webp",
           "bytes": 1082,
           "sha256": "82d4fefa81fd9b00ddd95522b87f76e1c7ff3ab39c733e0dfd61843cd71d2388",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-micas-surface@2x.webp",
           "bytes": 144762,
           "sha256": "152b158d9540d2f44e930fc87527683d545d2de9cf76f1bb30559c14d7f4ec8e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1358,6 +1363,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -1383,6 +1389,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.",
       "limitations": [],
@@ -1412,7 +1419,7 @@
           "url": "/scenes/comet-19p/comet-19p-features.json",
           "bytes": 5288,
           "sha256": "13d421e64e90db168703eeaea51e6d8df8cb126131a82168c29d024d06004729",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

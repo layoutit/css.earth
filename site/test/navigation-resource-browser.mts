@@ -7,7 +7,7 @@ import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { browserObjects } from './browser-objects.mts';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
@@ -75,7 +75,7 @@ try {
             };
           } });
       }, id);
-      await page.locator('.planet-sidebar-search').fill(required(OBJECTS.find(object => object.id === id)).name);
+      await page.locator('.planet-sidebar-search').fill(required(SCENE_OBJECTS.find(object => object.id === id)).name);
       await page.locator(`.planet-object-link[data-object-id="${id}"]`).click();
       await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === id, id);
       const preparation = await page.evaluate(async id => {

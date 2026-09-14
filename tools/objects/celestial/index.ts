@@ -41,13 +41,19 @@ function solarSource(value: unknown): SolarSource { const source = record(value,
 export async function prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config }: CelestialContext): Promise<CelestialAssets> {
   if (typeof sourceDirectory !== 'string' || typeof publicDirectory !== 'string' || typeof outputDirectory !== 'string') throw new TypeError('Celestial preparation needs source, public, and output directories.');
   const options = profile(config); await verifySources(sourceDirectory, options.sources);
-  const solar = solarSource(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation/solar-system.json'), 'utf8'))); const api = await loadCelestialAdapters(); const body = api.requireObject(solar.bodyId);
+  const solar = solarSource(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation/solar-system.json'), 'utf8'))); const api = await loadCelestialAdapters(); api.requireSceneObject(solar.bodyId);
+  // Preserve the authored nominal sprite-scaling reference. Navigation now has
+  // its own epoch-specific distance; it must not change this preparation recipe.
+  const descriptor = record(JSON.parse(await readFile(resolve(sourceDirectory, '../object.json'), 'utf8')), 'Object descriptor');
+  const catalog = record(record(descriptor.properties, 'Object properties').catalog, 'Object catalogue');
+  const nominalSunDistanceAu = catalog.distanceAu;
+  if (typeof nominalSunDistanceAu !== 'number' || !Number.isFinite(nominalSunDistanceAu) || nominalSunDistanceAu < 0) throw new TypeError('Invalid nominal Sun-sprite distance.');
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   {
     const astrometric = options.sky.registration === 'astrometric';
     const sky = json(await api.preparePlanetCubicSky({ objectId: solar.bodyId, sourceRoot: sourceDirectory, publicRoot: publicDirectory, ensureDirectories: () => mkdir(publicDirectory, { recursive: true }), validateSourceGroup: async () => undefined, includeSun: false, cameraContract: api.cubicSkyCamera, pointSourceContract: api.cubicSkyPoints, astrometricSampling: astrometric ? api.prepareAstrometricCubeSampling() : null, catalogueStars: astrometric ? await api.prepareCatalogueStars({ fovDegrees: api.cubicSkyCamera.horizontalFovDegrees }) : null, sourceSchema: options.catalogueSchema, writeModule: false }));
     // A star has no directional Sun; sun.json records null so the runtime contract sees the absence explicitly.
-    const sun = options.directionalSun ? json(await api.preparePlanetDirectionalSun({ objectId: solar.bodyId, publicRoot: publicDirectory, ensureDirectories: () => mkdir(publicDirectory, { recursive: true }), meanHeliocentricDistanceAu: body.distanceAu, presentation: api.prepareSolarSystemSunPresentation(solar), writeModule: false })) : null;
+    const sun = options.directionalSun ? json(await api.preparePlanetDirectionalSun({ objectId: solar.bodyId, publicRoot: publicDirectory, ensureDirectories: () => mkdir(publicDirectory, { recursive: true }), meanHeliocentricDistanceAu: nominalSunDistanceAu, presentation: api.prepareSolarSystemSunPresentation(solar), writeModule: false })) : null;
     const preparedMarkers = await api.prepareSolarSystemMarkerStrip(solar.markerStrip), markers = json(preparedMarkers.plan), assets = preparedMarkers.assets; for (const asset of assets) await writeFile(resolve(publicDirectory, asset.url.split('/').at(-1) ?? ''), asset.bytes);
     await Promise.all([writeFile(resolve(outputDirectory, 'sky.json'), `${JSON.stringify(sky)}\n`), writeFile(resolve(outputDirectory, 'sun.json'), `${JSON.stringify(sun)}\n`), writeFile(resolve(outputDirectory, 'markers.json'), `${JSON.stringify(markers)}\n`)]);
     return Object.freeze({ sky, sun, markers });

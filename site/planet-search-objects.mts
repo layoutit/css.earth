@@ -6,9 +6,9 @@ export function objectClassificationLabel(classification: string) {
 }
 
 // Classification describes an object; it never disables an interaction gate.
-export function objectNavigation<T extends { distanceAu: number; classification: string }>(objects: readonly T[]) {
+export function objectNavigation<T extends { distance: { meters: number }; classification: string }>(objects: readonly T[]) {
   const search = Object.freeze([...objects].sort((left, right) =>
-    left.distanceAu - right.distanceAu));
+    left.distance.meters - right.distance.meters));
   return Object.freeze({
     search,
     planets: Object.freeze(search.filter(({ classification }) =>

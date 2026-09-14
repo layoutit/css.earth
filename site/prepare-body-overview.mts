@@ -3,28 +3,28 @@ import { record } from './browser-types.mts';
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { requireObject } from './objects.mts';
+import { requireSceneObject } from './objects.mts';
 import { objectClassificationLabel } from './planet-search-objects.mts';
 import { parseSpectrumRecipe, readSpectrumData } from '../tools/objects/content/spectrum-data.mts';
 import { renderCompactSpectrum } from '../tools/objects/content/compact-spectrum.mts';
 
 const root = resolve(import.meta.dirname, '..');
 const number = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
-const earthRadiusM = requireObject('earth').worldFrame!.bodyRadiusM;
+const earthRadiusM = requireSceneObject('earth').worldFrame!.bodyRadiusM;
 
-export function overviewMeasurements(object: Pick<ObjectEntry, 'worldFrame' | 'distanceAu'>, referenceRadiusM = earthRadiusM) {
+export function overviewMeasurements(object: Pick<ObjectEntry, 'worldFrame' | 'distance'>, referenceRadiusM = earthRadiusM) {
   const radius = object.worldFrame?.bodyRadiusM ?? Number.NaN;
   const ratio = radius / referenceRadiusM;
   return {
     radiusEarth: Number.isFinite(ratio) && ratio > 0 ?
       (ratio < .01 ? ratio.toPrecision(2) : number.format(ratio)) : null,
-    distanceAu: Number.isFinite(object.distanceAu) ? number.format(object.distanceAu) : null,
+    distanceAu: number.format(object.distance.value),
   };
 }
 
 // Runs in Astro's preparation/build process; the browser receives only HTML and an image.
 export async function prepareBodyOverview(objectId: string) {
-  const object = requireObject(objectId);
+  const object = requireSceneObject(objectId);
   const sourceDirectory = resolve(root, 'src/objects', objectId, 'source');
   const presentationPath = resolve(sourceDirectory, 'presentation/overview.json');
   const presentation: unknown = existsSync(presentationPath) ? JSON.parse(await readFile(presentationPath, 'utf8')) : {};

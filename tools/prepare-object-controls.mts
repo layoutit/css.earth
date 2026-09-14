@@ -5,7 +5,7 @@ import { readFile, rename, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { hasErrorCode } from "./source-values.mts";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { requireObjectControls } from "../site/scene-contract.mts";
 
 const projectRoot = resolve(import.meta.dirname, "..");
@@ -49,9 +49,9 @@ export function serializeObjectControls(controls: unknown) {
     `export const objectControls = ${Object.isFrozen(controls) ? data : `Object.freeze(${data})`};\n`;
 }
 
-export async function prepareObjectControls({ root = projectRoot, objectIds = OBJECTS.map(({ id }) => id) } = {}) {
+export async function prepareObjectControls({ root = projectRoot, objectIds = SCENE_OBJECTS.map(({ id }) => id) } = {}) {
   assert.ok(isArray(objectIds) && objectIds.length > 0 && new Set(objectIds).size === objectIds.length &&
-    objectIds.every(id => OBJECTS.some(object => object.id === id)), "Select unique objects from OBJECTS");
+    objectIds.every(id => SCENE_OBJECTS.some(object => object.id === id)), "Select unique objects from SCENE_OBJECTS");
   const results = [];
   for (const id of objectIds) {
     const recipePath = resolve(root, `src/objects/${id}/site/control-content.source.mjs`);

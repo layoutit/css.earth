@@ -6,7 +6,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import sharp from 'sharp';
 import { readPreparedFixture } from '../../fixtures.mts';
-import { OBJECTS } from '../../../../site/objects.mts';
+import { SCENE_OBJECTS } from '../../../../site/objects.mts';
 const [scene, runtime] = await Promise.all([readPreparedFixture('saturn','scene'),readPreparedFixture('saturn','runtime')]);
 const root = new URL('../../../../', import.meta.url);
 const readJson = async (path: string|URL) => JSON.parse(await readFile(new URL(path, root), 'utf8'));
@@ -89,7 +89,7 @@ test('warms active material and shared sky assets before declaring ready', () =>
     assert.match(entry.url, /@2x.webp$/);
     assert.ok(runtime.assets.startup.includes(entry.key));
   }
-  assert.ok(OBJECTS.some(object => object.id === 'saturn'));
+  assert.ok(SCENE_OBJECTS.some(object => object.id === 'saturn'));
   assert.doesNotMatch(JSON.stringify(runtime), /devicePixelRatio|createPreparedSaturn|loadPreparedOrbitBank|DecompressionStream/);
 });
 

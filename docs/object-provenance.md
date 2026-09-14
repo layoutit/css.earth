@@ -1,8 +1,12 @@
 # Prepared object provenance
 
+[Navigation identity and evidence](navigation-identity.md) explains the explicit
+observation-attribution policy and why a selectable dataset view can combine
+several products and published sources.
+
 ## Lineage contract
 
-Every registered object uses the same `prepared/provenance.json` contract,
+Every registered scene package uses the same `prepared/provenance.json` contract,
 `cssearth-object-provenance@3`. It connects local inputs to prepared outputs.
 The [Sources catalogue](sources-catalogue.md) supplies the published identities
 and combines usage across bodies. Neither infers dependencies from labels or URLs.
