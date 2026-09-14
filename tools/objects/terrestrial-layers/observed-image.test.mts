@@ -4,7 +4,36 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { prepareByteObservation } from './observed-image.mts';
+import { prepareByteObservation, resizeProjectedValidity } from './observed-image.mts';
+
+test('disk-backed native validity preserves mixed edge footprints for gray and RGB maps', async () => {
+  for (const channels of [1, 3] as const) {
+    const pixels = Buffer.from([0, 1, 90, 0, 20, 30, 40, 50].flatMap(value => channels === 1 ? [value] : [0, value, 0]));
+    const options = {raw: {width: 4, height: 2, channels}};
+    const native = await sharp(pixels, options).bandbool('or').threshold(1).toColourspace('b-w').raw().toBuffer();
+    for (const width of [2, 4, 8]) {
+      const height = width / 2;
+      const expected = await sharp(native, {raw: {width: 4, height: 2, channels: 1}})
+        .resize(width, height, {fit: 'fill', kernel: 'linear'}).toColourspace('b-w').raw().toBuffer();
+      assert.deepEqual(await resizeProjectedValidity(pixels, options, width, height), expected);
+      if (width === 2) assert.ok(expected.some(value => value > 0 && value < 255), 'mixed fill footprints remain withheld');
+    }
+  }
+});
+
+test('projected monochrome maps preserve byte brightness and declared gaps', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-gray-projected-'));
+  try {
+    const path = join(directory, 'gray.png'), pixels = Buffer.from([0, 1, 90, 180, 20, 30, 40, 50]);
+    await sharp(pixels, {raw: {width: 4, height: 2, channels: 1}}).toColourspace('b-w').png().toFile(path);
+    const result = await prepareByteObservation(path, {width: 4, height: 2}, {
+      kind: 'image-monochrome-no-data', noData: 0, centerLongitude: 180,
+      grid: {pixelsPerDegree: 1 / 90, sampleOffset: 1.5, lineOffset: .5}
+    }, 4, 2);
+    assert.deepEqual([...result.rgb], [...pixels].flatMap(value => [value, value, value]));
+    assert.deepEqual([...result.missing], [1, 0, 0, 0, 0, 0, 0, 0]);
+  } finally { await rm(directory, {recursive: true, force: true}); }
+});
 
 test('projected RGB crops keep their extent, channel identity and dark valid samples', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-cropped-map-'));

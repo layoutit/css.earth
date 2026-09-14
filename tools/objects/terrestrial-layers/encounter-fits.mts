@@ -1,17 +1,16 @@
 import {parseEncounterPolicy} from './source-records.mts';
-import { readFitsHeader } from '../observation/fits.mts';
+import { readFitsHdu, fitsImageAccessor, type FitsHeader } from '../../fits.mts';
 // Preparation-only decoding of calibrated Stardust and Deep Impact/EPOXI
 // observations. Detector quality is independent of brightness and display tone.
 const integer = (n: unknown, min: number, max: number): n is number => typeof n === "number" && Number.isSafeInteger(n) && n >= min && n <= max;
 export function readEncounterHdus(bytes: Buffer) {
   if (!Buffer.isBuffer(bytes) || bytes.length % 2880) throw new Error('Truncated FITS records.');
-  const hdus: {name:string;header:Record<string,string|number|boolean>;width:number;height:number;bitpix:number;values:Uint8Array|Float32Array;offset:number}[] = []; let start = 0;
+  const hdus: {name:string;header:FitsHeader;width:number;height:number;bitpix:number;values:Uint8Array|Float32Array;offset:number}[] = []; let start = 0;
   while (start < bytes.length) {
-    let parsed: ReturnType<typeof readFitsHeader> | null = null;
-    try { parsed = readFitsHeader(bytes, start); } catch (error) { if (!(error instanceof Error) || !error.message.includes('no END card')) throw error; }
-    const header = parsed?.header ?? {};
+    const parsed = readFitsHdu(bytes, start);
+    const header = parsed.header;
     const width = header.NAXIS1, height = header.NAXIS2, bitpix = header.BITPIX;
-    if (!parsed || header.NAXIS !== 2 || !integer(width, 1, 4096) || !integer(height, 1, 4096) ||
+    if (header.NAXIS !== 2 || !integer(width, 1, 4096) || !integer(height, 1, 4096) ||
         typeof bitpix !== "number" || ![8, -32].includes(bitpix) || (hdus.length ? header.XTENSION !== 'IMAGE' || header.PCOUNT !== 0 || header.GCOUNT !== 1 : header.SIMPLE !== true)) {
       throw new Error('Unsupported encounter FITS layout.');
     }
@@ -19,10 +18,12 @@ export function readEncounterHdus(bytes: Buffer) {
     if (offset + size > bytes.length || (header.BSCALE ?? 1) !== 1 || (header.BZERO ?? 0) !== 0) throw new Error('Truncated or scaled encounter FITS plane.');
     const name = hdus.length ? header.EXTNAME : 'PRIMARY';
     if (typeof name !== 'string' || hdus.some(hdu => hdu.name === name)) throw new Error('Invalid encounter FITS plane identity.');
+    if (parsed.blank !== undefined) throw new Error('Unsupported encounter quality BLANK convention.');
+    const at = fitsImageAccessor(bytes, parsed);
     const values = bitpix === 8 ? new Uint8Array(bytes.subarray(offset, offset + size)) : new Float32Array(width * height);
-    if (bitpix === -32) for (let i = 0; i < values.length; i++) values[i] = bytes.readFloatBE(offset + i * 4);
+    if (bitpix === -32) for (let i = 0; i < values.length; i++) values[i] = at(i);
     hdus.push({ name, header, width, height, bitpix, values, offset });
-    start = offset + Math.ceil(size / 2880) * 2880;
+    start = parsed.nextOffset;
   }
   if (!hdus.length) throw new Error('Empty encounter FITS.');
   return hdus;

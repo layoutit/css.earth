@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import test from 'node:test';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { SourceEvidence } from './source-evidence-values.mts';
 import { required } from './navigation-test-values.mts';
 import { parseObjectDescriptor } from '@cssearth/objects';
@@ -109,7 +109,7 @@ test('small shell attribution records match the checked scientific provenance', 
 });
 
 test('every shared route retains its object sources and the actual environment credits', async () => {
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const content = SourceEvidence.parse(JSON.parse(await readFile(new URL(`../../src/objects/${object.id}/prepared/content.json`, import.meta.url), 'utf8')));
     const resources = content.rows('resources').map(source => ({ label: source.text('label'), href: source.text('href'), role: source.text('role'), description: source.text('description') }));
     const sources = sceneSources(resources), byLabel = new Map(sources.map(source => [source.label, source]));

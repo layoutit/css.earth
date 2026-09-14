@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, type FileHandle } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { requireAuthoredWorldFrame } from './authored-world-frame.mts';
 import type { PathLike } from 'node:fs';
 
@@ -16,11 +16,11 @@ async function inputs(id: string) {
     runtime: await read('prepared/runtime.json'), readText };
 }
 test('every authored object closes over its numerical publication stage', async () => {
-  for (const object of OBJECTS) await requireAuthoredWorldFrame(await inputs(object.id));
+  for (const object of SCENE_OBJECTS) await requireAuthoredWorldFrame(await inputs(object.id));
 });
 test('final numerical stage rejects mutated frame, source pins, scene scale and removed receipt', async () => {
   let input;
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const descriptor = JSON.parse(await readText(resolve('src/objects', object.id, 'object.json')));
     if (!requireArray(fixtureRecord(descriptor, 'properties', 'recipe').sources).some(source => fixtureRecord(source).id === 'world-context')) {
       input = await inputs(object.id);

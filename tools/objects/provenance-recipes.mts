@@ -42,7 +42,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
   const group = (consumer: string) => manifest.inputs.filter(input => input.consumers.includes(consumer)).map(input => input.path);
   const add = (key: string, recipeId: string, selector: string, used: string[], process: string, extra: Partial<ProductBinding> = {}) => {
     const lens = controls.find(lens => lens.id === key);
-    const value = { id: key, label: lens?.label ?? key, recipe: recipeId, selector,
+    const value: ProductBinding = { id: key, label: lens?.label ?? key, recipe: recipeId, selector, observationAttribution: 'source-lineage',
       inputPaths: [...new Set(used)], parents: [], urls: outputs(key), process,
       limitations: [lens?.qualification, lens?.description].filter((value): value is string => Boolean(value)), lensIds: lens ? [key] : [],
       recipeDependencies: [recipeId], ...extra };
@@ -57,6 +57,8 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       // A continuum mosaic names its frames under the science block; its `source` is their directory, not an input.
       const frames = Array.isArray(maybeRecord(maybeRecord(plan.science)?.synoptic)?.mapFiles);
       const used = [...(frames ? [] : [text(plan.source)]), ...paths(plan.coverage), ...paths(plan.science)];
+      const controlledDetail=maybeRecord(maybeRecord(plan.science)?.detailMosaic);
+      if(controlledDetail?.format==='controlled-geotiff')used.push(...group(text(controlledDetail.consumer)));
       const outputUrls = [...numbers(raster.densities).map(d => name(plan.output, d, plan.id)), name(plan.thumbnail, 1, plan.id)];
       if (!raster.polesCombined) outputUrls.push(...numbers(raster.densities).map(d => name(raster.polesOutput, d, plan.id)));
       const emission = maybeRecord(raster.emission);
@@ -66,7 +68,9 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       add(plan.id, 'raster', `/surfaces/${index}`, used, nativePoles
         ? 'Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.'
         : 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
+        inputRoles: frames ? {} : { [text(plan.source)]: { role: 'appearance', evidence: `Raster source at /surfaces/${index}/source.` } },
         urls: outputUrls, interpretation: { falseColor: plan.falseColor,
+          ...(controlledDetail ? { controlledPhotographicDetail: controlledDetail, originalIllumination:true } : {}),
           ...(nativePoles ? { polarSampling: 'original-photograph-footprint' } : {}),
           ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}),
           ...(synoptic ? { synoptic: { kind: synoptic.kind, ...(synoptic.fits ? { fits: synoptic.fits } : {}), ...(maybeRecord(synoptic.continuum) ? { observationInterval: synoptic.continuum } : {}) } } : {}) },
@@ -79,7 +83,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       const plan = record(raster.interior);
       add('interior', 'raster', '/interior', [text(plan.source), text(plan.surface)], 'Prepare a schematic core and outer shell from the structural source; pack the cutaway textures.', {
         urls: [...numbers(raster.densities).flatMap(d => ['outerOutput', 'outerPolesOutput', 'coreOutput', 'corePolesOutput', 'sectionOutput'].map(key => name(plan[key], d))), name(plan.thumbnail, 1)],
-        interpretation: { kind: 'schematic-interior', observedInteriorImagery: false },
+        observationAttribution: 'none', interpretation: { kind: 'schematic-interior', observedInteriorImagery: false },
       });
     }
     if (raster.lighting) {
@@ -100,6 +104,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
         plan.nativePhotographicSampling
           ? 'Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.'
           : 'Apply the source-defined validity and registration policy, then prepare the projected observation texture.', {
+          inputRoles: Object.fromEntries(observation.map(input => [input.path, { role: 'appearance', evidence: `Observation selected at /raster/observations/${index}.` }])),
           parents: plan.monochromeBase ? [text(plan.monochromeBase)] : [], interpretation: { validity: plan.validity,
             ...(plan.nativePhotographicSampling ? {nativePhotographicSampling:plan.nativePhotographicSampling} : {}) },
         });
@@ -120,7 +125,9 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       for (const product of products) {
         const model = records(geometry.radialTerrainAlternatives ?? []).find(model => model.lensId === product.id)
           ?? geometry.radialTerrain;
-        product.inputPaths = [...new Set([...product.inputPaths, ...paths(model)])];
+        const modelPaths = paths(model);
+        product.inputPaths = [...new Set([...product.inputPaths, ...modelPaths])];
+        product.inputRoles = { ...product.inputRoles, ...Object.fromEntries(modelPaths.map(path => [path, { role: 'geometry' as const, evidence: 'Source selected by the terrestrial radial-terrain geometry recipe.' }])) };
       }
     }
   } else if (terrestrial?.kind === 'affine-photographic-atmosphere') {
@@ -134,7 +141,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     const plan = record(recipe('shape-model'));
     for (const lens of controls) add(lens.id, 'shape-model', '', [text(plan.surfaceModel)],
       'Extract the source model base color and project it onto the authored shape.', {
-        interpretation: { kind: 'illustrative-model', resolvedSurfaceObservation: false },
+        observationAttribution: 'none', interpretation: { kind: 'illustrative-model', resolvedSurfaceObservation: false },
       });
   } else if (recipe('observations')?.lenses) {
     namedRecords(record(recipe('observations')).lenses).forEach((plan, index) => add(plan.id, 'observations', `/lenses/${index}`, paths(plan),
@@ -150,13 +157,14 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     namedRecords(plan.lenses).forEach((lens, index) => add(lens.id, 'surface', `/lenses/${index}`,
       [...paths(lens, `${plan.sourceSubdirectory}/`), ...baseInputs, ...paths(recipe('materials')), ...paths(recipe('rings'))],
       'Prepare the declared spectral material operation over the prepared body and ring materials.', {
+        observationAttribution: lens.sourceKind === 'schematic-morphology-illustration' ? 'none' : 'source-lineage',
         interpretation: { operation: lens.operation, sourceKind: lens.sourceKind }, recipeDependencies: ['surface', ...baseRecipes],
       }));
     // The base material and cutaway are produced by the material recipe.
     for (const lens of controls.filter(lens => !products.some(product => product.id === lens.id))) {
       add(lens.id, 'geometry', '', [...baseInputs, ...paths(recipe('materials')), ...paths(recipe('rings'))],
         'Prepare the source-defined oblate body, ring and cutaway material.', { recipeDependencies: baseRecipes,
-          ...(lens.view === 'interior' ? { interpretation: { kind: 'schematic-interior' } } : {}),
+          ...(lens.view === 'interior' ? { observationAttribution: 'none' as const, interpretation: { kind: 'schematic-interior' } } : {}),
         });
     }
   } else if (recipe('paged-ellipsoid')) {
@@ -189,6 +197,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
         add(lens.id, 'paged-ellipsoid', '/interiorPath', [text(plan.interiorPath), ...paths(tomography)],
           tomography ? 'Sample pinned mantle velocities on the cut planes and shell; normalize by the area-weighted depth mean and bake the signed palette. Keep crust and core schematic.'
             : 'Prepare the source-defined schematic interior.', {
+            observationAttribution: tomography ? 'source-lineage' : 'none',
             interpretation: { kind: tomography ? 'seismic-model-with-schematic-layers' : 'schematic-interior',
               ...(tomography ? { quantity: tomography.quantity, reference: tomography.reference, source: tomography.source, depth: tomography.depth, sectionLongitudesDegrees: tomography.sectionLongitudesDegrees } : {}) },
             recipeDependencies: ['paged-ellipsoid', ...(tomography ? ['mantle-tomography'] : [])],
@@ -203,7 +212,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
         add(lens.id, 'paged-ellipsoid', '/geographic/noise', [`${directory}/manifest.json`, `${directory}/${pin.file}`],
           'Decode the pinned GeoJSON, validate coordinates and period, rasterize source-colored polygons, then prepare geographic texture pages.', {
             urls: [...urls(prepared.roots), prefix + id + '-lens-noise.webp'],
-            interpretation: { kind: 'modeled-noise', year: pin.year, period: pin.period, units: pin.units,
+            observationAttribution: 'none', interpretation: { kind: 'modeled-noise', year: pin.year, period: pin.period, units: pin.units,
               decodedSourceSha256: pin.decodedSha256, qualification: pin.qualification },
           });
       }

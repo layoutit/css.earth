@@ -76,6 +76,33 @@
         "falseColor": false,
         "notes": "The shared grid marks unavailable surface imagery over the Hudson–Ostro–Scheeres shape reconstructed from 1992 and 1996 radar observations. This is a simplified model, not a photographic texture or measured albedo. Later radar and Chang’e-2 images reveal differences from this model. The long axis is displayed in a fixed arbitrary orientation; the light does not reproduce a specific observation.",
         "noData": true
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/toutatis/toutatis-elevation-thumbnail.webp",
+        "surface": "toutatis-elevation-surface@2x.webp",
+        "poles": "toutatis-elevation-surface@2x.webp",
+        "source": {
+          "id": "toutatis-shape",
+          "path": "../manifest.json"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-500",
+            "450",
+            "1400"
+          ],
+          "meta": "m · 1,224 m reference sphere",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.tab",
+          "image": "/scenes/toutatis/toutatis-elevation-legend.webp"
+        },
+        "notes": "Color shows radius minus a 1,224 m reference sphere, including the body's broad shape. This is model-derived radial height, not gravitational height or a photograph. Brightness adds cartographic relief from the full source model; optional Shadows uses illustrative lighting. The radar model reflects 1992 and 1996 observations; later images show shape differences. The map follows the closest unique source point within 50 m of the simplified display; the grid marks rejected transfers. Flat previews withhold overlapping radial surfaces."
       }
     ]
   },

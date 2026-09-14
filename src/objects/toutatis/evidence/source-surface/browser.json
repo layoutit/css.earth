@@ -1,0 +1,69 @@
+{
+  "date": "2026-09-14",
+  "id": "toutatis",
+  "headless": true,
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "defaultShadows": false,
+  "poses": [
+    {
+      "pose": "front",
+      "camera": {
+        "pitch": 70,
+        "zoom": 0.991721739130435
+      },
+      "requestedControlYaw": 0
+    },
+    {
+      "pose": "opposite",
+      "camera": {
+        "pitch": 100,
+        "zoom": 0.991721739130435
+      },
+      "requestedControlYaw": 180
+    },
+    {
+      "pose": "close",
+      "camera": {
+        "pitch": 90,
+        "zoom": 1.7850991304347832
+      },
+      "requestedControlYaw": 65
+    },
+    {
+      "pose": "edge",
+      "camera": {
+        "pitch": 170,
+        "zoom": 0.991721739130435
+      },
+      "requestedControlYaw": 90
+    }
+  ],
+  "mobile": {
+    "width": 390,
+    "height": 844,
+    "camera": {
+      "pitch": 25,
+      "zoom": 0.31334730752705814
+    },
+    "freshContext": true
+  },
+  "errors": [],
+  "environment": "Existing port 4278; three stale nebula banks restored with current preparers. Their local descriptor pins are excluded from the asteroid PR.",
+  "commit": "22530863b602e90684fe778b16136de3d890fe2d",
+  "visualInspection": "Both sides, close-up, extreme angle, optional shadows and fresh mobile view inspected. Fine triangle boundaries remain at close zoom; Donaldjohanson retains gray withheld patches. No claim of unseen terrain measurement.",
+  "images": {
+    "hero": {
+      "path": "elevation.webp",
+      "pose": "opposite",
+      "shadows": false
+    },
+    "close": {
+      "path": "close.webp",
+      "pose": "close",
+      "shadows": false
+    }
+  }
+}

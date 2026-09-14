@@ -3,14 +3,15 @@ import test from 'node:test';
 import { createPreparedContextNavigation } from '../prepared-context-navigation.mts';
 import { isPreparedCluster } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from '../prepared-context-navigation.mts';
-import type { PreparedCatalogObject, PreparedGalaxyRecord, PreparedClusterRecord, SpatialCatalogSource } from '@cssearth/catalog';
+import type { PreparedCatalogObject, PreparedGalaxyRecord, PreparedClusterRecord, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
 import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
 import type { PreparedNavigationFocus } from '../../src/renderers/css/navigation/prepared-focus.ts';
 import type { PreparedVolumeLensState } from '../../src/renderers/css/volume/prepared-volume-lenses.ts';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 type ContextLayer = Parameters<typeof createPreparedContextNavigation>[0]['layer'];
-type Content = { record: PreparedCatalogObject | null; references: readonly SpatialCatalogSource[]; presentation: PreparedFocusPresentation | null };
+type Content = { record: PreparedCatalogObject | null; references: readonly SpatialCitation[]; presentation: PreparedFocusPresentation | null };
 type FixtureOptions = { object?: Partial<PreparedGalaxyRecord> & Partial<Pick<PreparedClusterRecord, 'kind' | 'classification'>>;
+  unavailableObjectIds?: readonly string[];
   imageLayerFrames?: ContextLayer['imageLayerFrames']; volumeLensFrames?: ContextLayer['volumeLensFrames']; volumeBank?: PreparedVolumeLensState | null };
 const baseFrame: DensityVolumeFrame = { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0,0,0], localToReferenceXyzw: [0,0,0,1],
   metersPerUnit: 1e18, boundsUnits: { min: [-500,-500,-500], max: [500,500,500] } };
@@ -18,7 +19,7 @@ function required<T>(value: T | null | undefined): T { assert.ok(value !== null 
 function last<T>(values: T[]): T { return required(values.at(-1)); }
 
 
-function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, volumeBank = null }: FixtureOptions = {}) {
+function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, volumeBank = null, unavailableObjectIds = [] }: FixtureOptions = {}) {
   let current: PreparedNavigationFocus | null = null, signal: AbortSignal | undefined;
   const flights: {id:string; reducedMotion?:boolean}[] = [];
   const callbacks = new Set<() => void>(), errors: Error[] = [], selections: (string | null)[] = [], writes: (string | URL)[] = [], content: Content[] = [];
@@ -47,22 +48,33 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
       if (!['catalogue:a','catalogue:b'].includes(id)) return null;
       const galaxy: PreparedGalaxyRecord = { id, name: id, aliases: [], status: 'confirmed', positionM: [1e20,0,0],
         skyPosition: { raDeg: 0, decDeg: 0, sourceRef: 'positions:row' },
-        distance: { valuePc: 1, method: 'Published distance', sourceRef: 'UnresolvedBibliographicKey' },
+        distance: { valuePc: 1, method: 'Published distance', sourceRef: 'PublishedBibliographicKey' },
         membership: { group: 'local-group', subgroup: 'field', basis: 'Published membership', sourceRef: 'membership:row' }, ...object };
       if (object.kind !== 'galaxy-cluster') return galaxy;
       return { ...galaxy, kind: 'galaxy-cluster', classification: required(object.classification),
         redshift: { value: .01, type: 'spectroscopic', sourceRef: 'positions:row' },
         aperture: { definition: 'R500', properRadiusM: 1e22, comovingRadiusM: 1e22, sourceRef: 'positions:row' } };
     } } satisfies Pick<ContextLayer, 'imageLayerFrames' | 'volumeLensFrames' | 'selectVolumeLens' | 'setVolumeStarsVisible' | 'subscribeVolumeLens' | 'selectGalaxy' | 'resolveGalaxy'> & { volumeLensState(id: string): PreparedVolumeLensState | null };
-  const sources: SpatialCatalogSource[] = [{ id: 'positions', url: 'https://example.test/positions', sha256: '0'.repeat(64), bytes: 1, citation: 'Published positions' },
+  const sources: SpatialCatalogSource[] = [{ id: 'positions', url: 'https://example.test/positions', sha256: '0'.repeat(64), bytes: 1, citation: 'Published positions', references: [{ id: 'PublishedBibliographicKey', url: 'https://example.test/paper', citation: 'Distance paper' }] },
     { id: 'membership', url: 'https://example.test/membership', sha256: '0'.repeat(64), bytes: 1, citation: 'Published membership' },
     { id: 'unrelated', url: 'https://example.test/unrelated', sha256: '0'.repeat(64), bytes: 1, citation: 'Unused audit input' }];
   // Narrow test doubles intentionally expose only this controller's browser/runtime surface.
   const controller = createPreparedContextNavigation({ layer: layer as unknown as ContextLayer, windowTarget: windowTarget as unknown as Window, onError: error => { assert.ok(error instanceof Error); errors.push(error); },
-    sources, presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
+    sources, unavailableObjectIds, presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
   controller.connect(owner as unknown as ObjectWorldNavigation, { onFocusContentChange: (record, references, presentation) => content.push({ record, references, presentation }) });
   return { controller, owner, layer, lensCallbacks, lensWrites, windowTarget, errors, selections, writes, callbacks, content, flights, signal: () => signal };
 }
+
+test('a saved lens link to an unavailable package still opens its actual catalogue record', () => {
+  const f = fixture({ object: { detailedObjectId: 'helix' }, unavailableObjectIds: ['helix'] });
+  f.windowTarget.location.searchParams.set('focusLens', 'eso-vista');
+  f.controller.restore(f.windowTarget.location.href);
+  assert.deepEqual(f.errors, []);
+  assert.equal(last(f.content).record?.id, 'catalogue:a');
+  assert.equal(last(f.content).presentation, null);
+  assert.deepEqual(f.lensWrites, []);
+  f.controller.destroy();
+});
 
 test('a direct focus link without a saved camera frames its target immediately', () => {
   const f = fixture();
@@ -85,8 +97,8 @@ test('suspension isolates camera restore publications from incoming focus histor
   const f = fixture();
   f.controller.restore(f.windowTarget.location.href);
   assert.equal(required(last(f.content).record).id, 'catalogue:a');
-  assert.deepEqual(last(f.content).references.map(source => source.id), ['positions', 'membership']);
-  assert.equal(required(last(f.content).record).distance.sourceRef, 'UnresolvedBibliographicKey');
+  assert.deepEqual(last(f.content).references.map(source => source.id), ['positions', 'PublishedBibliographicKey', 'membership']);
+  assert.equal(required(last(f.content).record).distance.sourceRef, 'PublishedBibliographicKey');
   const flight = f.controller.select({ id: 'catalogue:b' });
   assert.equal(required(f.owner.preparedFocus()).id, 'catalogue:b');
   assert.equal(required(last(f.content).record).id, 'catalogue:b');
@@ -145,7 +157,7 @@ test('a cluster focus uses its prepared aperture framing and source without pret
   f.controller.restore(f.windowTarget.location.href);
   assert.deepEqual(f.errors, []);
   assert.equal(required(f.owner.preparedFocus()).framingRadiusM, 9e22);
-  assert.deepEqual(last(f.content).references.map(source => source.id), ['positions', 'membership']);
+  assert.deepEqual(last(f.content).references.map(source => source.id), ['positions', 'PublishedBibliographicKey', 'membership']);
   const cluster = required(last(f.content).record);
   assert.ok(isPreparedCluster(cluster));
   assert.equal(cluster.kind, 'galaxy-cluster');

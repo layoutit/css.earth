@@ -4,13 +4,86 @@
 
 | View or property | Source and interpretation |
 | --- | --- |
-| AMICA mosaic | Eight v-band observations from September–October 2005, with [Gaskell-controlled AMICA records](https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/), original FITS and preflight flat. The October close-ups add finer terrain detail and views north and south of the equator. Relative detector brightness, not absolute radiance or albedo. |
+| AMICA mosaic | Ten v-band observations from September–October 2005, with [Gaskell-controlled AMICA records](https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/), original FITS and preflight flat. The October close-ups take priority over distant September images where their qualified coverage overlaps. Relative detector brightness, not absolute radiance or albedo. |
 | Shape and Elevation | [Gaskell ver128q](https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab), derived from 775 AMICA images. Elevation is source radius minus 165 m; the original black-rock prime meridian is retained. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/ITOKAWA/target) Itokawa centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
+### Close-up priority, 14 September 2026
+
+The AMICA view adds two controlled October photographs and uses the existing
+`recipe-order` selection. Frame `2481672682` stays first to preserve the established
+brightness reference. The other frames follow in increasing measured median
+pixel footprint: October close-ups precede the more distant September images.
+This is a fixed source-backed preference, not a per-pixel optimum. All existing
+visibility, incidence, emission, transfer and brightness limits still apply.
+The 794 triangles, hit mesh and other datasets are retained.
+
+| Added observation | UTC, 26 October 2005 | Median nadir pixel footprint | Disjoint camera holdouts | Sampled maximum distance to source mesh |
+| --- | --- | --- | --- | --- |
+| [2492225173](source/observations/st_2492225173_v_ddr.lbl) | 08:31:17 | 0.394 m | 511,490; maximum 0.0000249 px | 1.711 m over 39,565 points |
+| [2493031594](source/observations/st_2493031594_v_ddr.lbl) | 15:31:19 | 0.376 m | 540,000; maximum 0.0000373 px | 1.555 m over 41,769 points |
+
+Every detector value in both 1,048,576-pixel originals matches the reversed DDR
+image band. The unchanged reader applies the archived flat and exposure, rejects
+defective flat pixels and checks the supported paired-exposure acquisition.
+Camera holdouts measure consistency with archived backplanes, not independent
+absolute navigation accuracy. The separate mesh check samples every thirteenth
+valid archived XYZ point against the complete ver128q surface; its sampled maxima
+are below the unchanged 5 m contributor limit, not exhaustive accuracy bounds.
+
+At the same 24 area-weighted samples per retained triangle, current-main coverage
+is **83.24%**, increasing to **84.26%**. More significantly, distant September
+images supply **36.58% → 5.36%** of the display mesh; qualified October close-ups
+replace most of that area. These estimates describe the simplified display mesh,
+not exact photographed area. The old 73.41% result below belongs to an earlier
+transfer implementation and is not this change's baseline.
+
+Two other paired-exposure candidates, `2495806075` and `2506694595`, were decoded
+and tested but exceeded the existing overlap-gain bound in the tested mosaics.
+Single-exposure products `2532629277` and `2516129281` were inspected as raw
+previews only; their calibration remains unqualified. No detector correction or
+brightness-bound relaxation was introduced to include them.
+
+[Matched comparison](evidence/close-up-priority/comparison.webp) ·
+[Before](evidence/close-up-priority/before.webp) ·
+[After](evidence/close-up-priority/after.webp) ·
+[Pixelmatch diff](evidence/close-up-priority/diff.webp) ·
+[Capture settings](evidence/close-up-priority/browser.json) ·
+[Source-transfer checks](evidence/close-up-priority/source-transfer.json) ·
+[Preparation and restoration measurements](evidence/close-up-priority/preparation.json).
+
+The comparison swaps the previous eight-image bank and the new ten-image bank
+in the same Chrome 153 application at `b7e797027`, with the same scene, camera,
+1440×1000 viewport and DPR 1. Identical unscaled body crops exclude the current
+UI text. Pixelmatch 7.2.0 at threshold 0.1 finds 26,682 changed pixels among
+353,280; this locates texture changes, not sharpness or scientific accuracy.
+The inspected views show additional small terrain detail while preserving the
+silhouette. Three orientations, real mouse dragging, AMICA/Elevation switching
+and optional lighting were checked. Dragging retains all 794 triangle nodes.
+Shadows defaults off and returns off after the lighting check. Inspected
+[DPR 2](evidence/close-up-priority/dpr2.webp),
+[390×844 mobile layout](evidence/close-up-priority/mobile.webp) and
+[lighting](evidence/close-up-priority/shadows.webp) captures accompany the record.
+DPR 1 and 2 request the same body assets; the mobile check is viewport emulation,
+not physical-device performance evidence.
+
+The partial refresh took 542.8 s, peaking at 1,670 MiB RSS. It replaced three
+runtime images and retained 33 assets. All six added native files restored into
+an empty directory; all 36 runtime files (11.85 MB) independently installed into
+another empty directory with exact byte/hash agreement. Twelve focused
+profile/package tests, preparation typechecking, the post-bake package check and
+all 54 source-file checks pass. The source suite reports 74 passes, one existing
+missing-PDF skip and one failure in Europa's unchanged tracked preparation
+receipt: its content hash differs from current `main` content. That unrelated
+failure remains outside this change. Full repository suites were not run.
+
 ### Eight-image expansion, 13 September 2026
+
+This historical record predates the current transfer implementation. The same
+eight inputs are the baseline at `e609e66d66ea2d701253de4a3681a354324927ff`, but
+their current coverage is reported above.
 
 The new southern view `2473604354` fills additional coverage while retaining the same 794 triangles, camera and hit mesh. At the same 64 stratified samples per triangle, area-weighted coverage is **61.88% → 73.41%** across this PR (72.66% before the final southern addition). The eighth frame contributes 5.60% of displayed area, mostly replacing more foreshortened views.
 

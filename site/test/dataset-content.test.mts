@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { validateDatasetText } from '../dataset-content.mts';
 import { datasetCaption } from '../dataset-caption.mts';
 import { parsePreparedText } from '../object-text.mts';
@@ -11,7 +11,7 @@ import { requireArray, requireRecord, requireString } from '../../tools/source-v
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 
 test('every registered dataset has a specific published title, independent of category and source-link availability', async () => {
-  for (const { id } of OBJECTS) {
+  for (const { id } of SCENE_OBJECTS) {
     const root = `../../src/objects/${id}/`;
     const [rawControls, rawText, rawProvenance] = await Promise.all([
       read(root + 'prepared/controls.json'), read(root + 'prepared/text.json'), read(root + 'prepared/provenance.json'),

@@ -6,7 +6,7 @@ import { join, relative } from 'node:path';
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { promisify } from 'node:util';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { sourceInventory } from './source-catalogue-inputs.mts';
 import { hasErrorCode } from './source-values.mts';
 import { sourceObject, sourceArray, sourceText, parseSourceCatalog, sourceResolver } from '../src/platform/source-catalog.mts';
@@ -99,7 +99,7 @@ test('source files reject mismatched IDs, duplicate provider identities and stal
   await assert.rejects(checkSourceCatalog(root, {...prepared, catalogSha256: sourceCatalogDigest(tampered)}), /differs from its records/);
 });
 const objectInput = async (id: string) => {
-  const object = OBJECTS.find(object => object.id === id)!;
+  const object = SCENE_OBJECTS.find(object => object.id === id)!;
   const page = sourceObject(await read(`src/objects/${id}/prepared/page.json`)), controls = sourceObject(page.controls);
   const lenses = controls.lenses === null ? [] : sourceArray(sourceObject(controls.lenses).controls, raw => {
     const lens=sourceObject(raw);return {id:sourceText(lens.id),label:sourceText(lens.label)};
@@ -107,14 +107,16 @@ const objectInput = async (id: string) => {
   return {id,name:object.name,route:object.route,base:`src/objects/${id}`,controls:lenses,provenance:validateObjectProvenance(await read(`src/objects/${id}/prepared/provenance.json`))};
 };
 test('source uses conserve all product dependencies, include models, and never convert metadata into observations', async () => {
-  const objects = await Promise.all(OBJECTS.map(object=>objectInput(object.id)));
+  const objects = await Promise.all(SCENE_OBJECTS.map(object=>objectInput(object.id)));
   objects.push(...await prepareVolumeProvenance());
   const metadata=prepared.usage.edges.filter(edge=>edge.consumerKind!=='object-product');
   assert.deepEqual(compileSourceUsage(objects,prepared.sources,metadata),prepared.usage);
   assert.equal(metadata.filter(edge=>edge.kind==='shared-context').length,4);
   const artworkCount = (await Promise.all(['render','emblem'].map(async kind => sourceArray(sourceObject(await read(`site/source/machines/${kind}-library.json`)).entries,sourceObject).length))).reduce((a,b)=>a+b,0);
   assert.equal(metadata.filter(edge=>edge.kind==='artwork').length,artworkCount);
-  assert.ok(metadata.every(edge=>!edge.lensIds.length && (edge.consumerKind==='object-fact' || !edge.objectId)));
+  assert.ok(metadata.every(edge=>!edge.lensIds.length && (edge.consumerKind==='object-fact' || edge.consumerKind==='spatial-measurement' || !edge.objectId)));
+  assert.equal(prepared.usage.bySource['eso-eso0932a'],undefined,'unused retained panorama creates no active use');
+  assert.ok(prepared.usage.edges.filter(edge => edge.kind === 'shared-context').every(edge => edge.catalogueId !== 'hyg-v41'), 'the current shared sky uses HYG v4.4');
   assert.ok(prepared.usage.bySource['hyg-v44'].length===1);
   assert.ok(prepared.usage.edges.some(edge=>edge.objectId==='adrastea' && edge.kind==='method' && edge.lensIds.length));
   assert.ok(prepared.usage.edges.some(edge=>edge.objectId==='mercury' && edge.lensIds.includes('interior')));
@@ -196,7 +198,7 @@ test('changed fact evidence and stale displayed facts leave both published catal
   const outputs = ['site/prepared-sources.json', 'site/prepared-machines.json'];
   // Declared metadata and bounded preview inputs suffice; no baked body/volume assets or downloads.
   const records = new Set((await promisify(execFile)('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { maxBuffer: 16 * 1024 * 1024 })).stdout.split('\0'));
-  const generated = new Set(['site/prepared-object-catalog.mts', ...(await prepareVolumeProvenance()).flatMap(volume => volume.outputs.map(output => relative(process.cwd(), output.path)))]);
+  const generated = new Set(['site/prepared-object-catalog.mts', 'site/prepared-object-distances.json', 'site/prepared-focus-objects.json', ...(await prepareVolumeProvenance()).flatMap(volume => volume.outputs.map(output => relative(process.cwd(), output.path)))]);
   assert.deepEqual(Object.keys(prepared.closure).filter(path => !records.has(path) && !generated.has(path)), [],
     'Sources may regenerate declared metadata outputs, but must not depend on ignored downloads or baked assets');
   for (const path of [...Object.keys(prepared.closure), ...outputs, ...await volumePreviewInputs()]) {

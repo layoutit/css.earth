@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-dactyl-registration-input@1",
+  "objectId": "dactyl",
+  "baseCommit": "6644779ec06eb1e8cb3142d0b1336d94ac52382c",
+  "date": "2026-09-14",
+  "files": [
+    {
+      "id": "vicar",
+      "path": "src/objects/dactyl/evidence/registration/native/2278r.img",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2278r.img",
+      "expectedBytes": 808000,
+      "expectedSha256": "218a59544dc0d6fafbb870297a161a15ac5621ffaf2a3f9542f5f834a6f37370"
+    },
+    {
+      "id": "vicar-label",
+      "path": "src/objects/dactyl/evidence/registration/native/2278r.lbl",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2278r.lbl",
+      "expectedBytes": 11760,
+      "expectedSha256": "302e7448ee3aded3159a091df0b15a9dfebf93776c7300a279cd3d1721c21626"
+    },
+    {
+      "id": "catalog-document",
+      "path": "src/objects/dactyl/evidence/registration/native/catstat.txt",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/document/catstat.txt",
+      "expectedBytes": 30148,
+      "expectedSha256": "87a745f68d2cd3300c8548280dca2248fb18b79807ebe3da52229cef454345ed"
+    },
+    {
+      "id": "sclk",
+      "path": "src/objects/dactyl/evidence/registration/native/mk00062a.tsc",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/sclk/mk00062a.tsc",
+      "expectedBytes": 10127,
+      "expectedSha256": "cea5234f9769f83aa6da65f360c6940a70b72461ed2c577cb531448e7498295c"
+    },
+    {
+      "id": "lsk",
+      "path": "src/objects/dactyl/evidence/registration/native/naif0008.tls",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/lsk/naif0008.tls",
+      "expectedBytes": 4542,
+      "expectedSha256": "bbf419803aa31b787d681bd9b807930f60c7504695df3ad016bd47ca1bb89f42"
+    },
+    {
+      "id": "instrument",
+      "path": "src/objects/ida/source/reference/gll36001.ti",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/ik/gll36001.ti",
+      "expectedBytes": 9964,
+      "expectedSha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652"
+    },
+    {
+      "id": "ck",
+      "path": "src/objects/dactyl/evidence/galileo/native/gll_plt_rec_1993_tav_v00.bc",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/ck/gll_plt_rec_1993_tav_v00.bc",
+      "expectedBytes": 342016,
+      "expectedSha256": "0c0c50f8358fe1826e4147a45ec7c6663db92e89df2ebab7bc7e19554a219e86"
+    },
+    {
+      "id": "fits",
+      "path": "src/objects/dactyl/evidence/galileo/native/i2278.fit",
+      "expectedBytes": 645120,
+      "expectedSha256": "aecdbd30e0c7aa3f2607a89b6c12c6d1553de2ba273cbd0ca9d2ffd1fa60c181"
+    },
+    {
+      "id": "i1578-label",
+      "path": "src/objects/dactyl/evidence/galileo/native/i1578.lbl",
+      "expectedBytes": 10480,
+      "expectedSha256": "7a717766a0a8f396c30318a386aa71adb7cb0d141ce5a7e1f525309cb682369a"
+    },
+    {
+      "id": "i2278-label",
+      "path": "src/objects/dactyl/evidence/galileo/native/i2278.lbl",
+      "expectedBytes": 10480,
+      "expectedSha256": "0c527a1b56a9ba54a24d84c542c7283cad08929a48d052e7983fc3c7a0518eeb"
+    },
+    {
+      "id": "i2700-label",
+      "path": "src/objects/dactyl/evidence/galileo/native/i2700.lbl",
+      "expectedBytes": 10480,
+      "expectedSha256": "3009babb4002308267bdcf1045881e99b76ec5705f6e80f277011528c2ab513c"
+    },
+    {
+      "id": "shape",
+      "path": "src/objects/dactyl/source/shape/model.json",
+      "expectedBytes": 163,
+      "expectedSha256": "ad79a5bea948b73c0f842a3609939da15914a0dbb1d88ecc8f371ffefe50c2b4"
+    },
+    {
+      "id": "oracle",
+      "path": "tests/objects/fixtures/dactyl/galileo-pointing.json",
+      "expectedBytes": 2421,
+      "expectedSha256": "1fb184b1c89fd426f71b2fa740e15ff91a74716ba8b6a2b9b0fe862bed9e87fd"
+    }
+  ],
+  "rangeKm": 3900,
+  "rangeMeaning": "Rounded Dactyl range from NASA PIA00297 caption; not a measured full camera position and not an uncertainty bound.",
+  "rangeSource": "https://science.nasa.gov/photojournal/high-resolution-view-of-dactyl/",
+  "initialCenterDetector": [
+    191,
+    220
+  ],
+  "coordinates": "Zero-based original VICAR SSI samples right, lines down. FITS is vertically reversed. Source mesh X=0E,Y=90E,Z=north; CSS swaps X/Y later.",
+  "limb": {
+    "scan": [
+      202,
+      235,
+      2,
+      158,
+      198
+    ],
+    "thresholdDN": 10,
+    "meaning": "Analyst-selected bright left limb only; excludes the terminator. Interpolate the threshold crossing between adjacent samples."
+  },
+  "features": {
+    "fit": {
+      "name": "Acmon",
+      "latitudeDegrees": -39,
+      "eastLongitudeDegrees": 138,
+      "detectorPixel": [
+        197.5,
+        222
+      ],
+      "pickingUncertaintyPixels": 1
+    },
+    "holdout": {
+      "name": "Celmis",
+      "latitudeDegrees": -46,
+      "eastLongitudeDegrees": 220,
+      "detectorPixel": [
+        194,
+        207
+      ],
+      "pickingUncertaintyPixels": 1
+    },
+    "interpretation": "Named centers from Belton 1996 overview Table III and the current USGS Gazetteer. Detector picks made by the author against the USGS annotated photograph; neither is a published image control. About one-pixel picking uncertainty, not a confidence interval.",
+    "sources": [
+      "https://doi.org/10.1006/icar.1996.0032",
+      "https://planetarynames.wr.usgs.gov/Feature/39",
+      "https://planetarynames.wr.usgs.gov/Feature/1097",
+      "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/dactyl.pdf"
+    ]
+  },
+  "gates": {
+    "qualification": "deferred",
+    "reason": "No distributed independent surface controls or equivalent measured Dactyl camera for the selected shape. A solution selected using Celmis cannot use Celmis again as a holdout."
+  }
+}

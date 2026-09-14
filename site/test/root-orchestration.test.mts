@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import {
   discoverPlanetTests,
   resolvePlanetCommand,
@@ -12,7 +12,7 @@ import { loadPlanetBrowserProfile } from "./load-browser-profile.mts";
 const root = new URL("../../", import.meta.url);
 
 test("derives every root planet lane from the validated catalog", async () => {
-  const implemented = OBJECTS;
+  const implemented = SCENE_OBJECTS;
   for (const { id } of implemented) {
     assert.ok((await discoverPlanetTests(id, { projectRoot: root.pathname }))
       .length > 0);
@@ -34,7 +34,7 @@ test("derives every root planet lane from the validated catalog", async () => {
 });
 
 test("loads object-owned browser and audit expectations for every implementation", async () => {
-  const implemented = OBJECTS;
+  const implemented = SCENE_OBJECTS;
   const profiles = await Promise.all(implemented.map(loadPlanetBrowserProfile));
   assert.deepEqual(profiles.map(({ id }) => id), implemented.map(({ id }) => id));
 

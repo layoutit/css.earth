@@ -1,5 +1,5 @@
-import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
-import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
+import { isPreparedCluster, isPreparedNebula, resolveSpatialCitation } from '@cssearth/catalog';
+import type { PreparedCatalogObject, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
 import type { createPreparedUniverse } from '../src/renderers/css/universe/prepared-universe-runtime.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
@@ -14,7 +14,7 @@ export type PreparedFocusPresentation = VolumeLensState & {
 export interface FocusCallbacks {
   onFocusChange?(url: string): void;
   onFlightStart?(): void;
-  onFocusContentChange?(record: PreparedCatalogObject | null, sources: readonly SpatialCatalogSource[], presentation: PreparedFocusPresentation | null): void;
+  onFocusContentChange?(record: PreparedCatalogObject | null, sources: readonly SpatialCitation[], presentation: PreparedFocusPresentation | null): void;
 }
 interface ContextNavigationOptions {
   layer: PreparedContextLayer;
@@ -22,10 +22,11 @@ interface ContextNavigationOptions {
   sources?: readonly SpatialCatalogSource[];
   windowTarget: Window;
   onError?(error: unknown): void;
+  unavailableObjectIds?: readonly string[];
 }
 
 /** Catalogue focus on the current detailed scene's shared camera owner. */
-export function createPreparedContextNavigation({ layer, presentation, sources = [], windowTarget, onError = console.error }: ContextNavigationOptions) {
+export function createPreparedContextNavigation({ layer, presentation, sources = [], windowTarget, onError = console.error, unavailableObjectIds = [] }: ContextNavigationOptions) {
   let navigation: ObjectWorldNavigation | null = null;
   let unsubscribe: (() => void) | null = null, unsubscribeLens: (() => void) | null = null;
   let lensObjectId: string | null = null, selected: string | null = null, ready = false, flight: AbortController | null = null;
@@ -62,7 +63,12 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         if (!unsubscribeLens) publishLens();
       } } : {}),
     } : null;
-    notifyContent(record, sources.filter(source => references.some(reference => reference === source.id || reference.startsWith(`${source.id}:`))), controls);
+    const citations = references.map(reference => {
+      const citation = resolveSpatialCitation(reference, sources);
+      if (!citation) throw new TypeError(`Unresolved prepared focus reference: ${reference}`);
+      return citation;
+    });
+    notifyContent(record, [...new Map(citations.map(citation => [citation.id, citation])).values()], controls);
   };
   const publishLens = () => {
     if (!ready || !selected) return;
@@ -117,7 +123,9 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         if (query.getAll('focusLens').length > 1) throw new TypeError('A saved view may have only one prepared focus lens.');
         const id = query.get('focus'), focus = id ? resolve(id) : null, state = lensState(id);
         const lensId = query.get('focusLens') ?? state?.defaultLens;
-        if (id && lensId !== undefined && (!state || !state.lenses.some(lens => lens.id === lensId))) {
+        const object = id ? layer.resolveGalaxy(id) : null;
+        const unavailable = object && !isPreparedCluster(object) && object.detailedObjectId && unavailableObjectIds.includes(object.detailedObjectId);
+        if (id && !unavailable && lensId !== undefined && (!state || !state.lenses.some(lens => lens.id === lensId))) {
           throw new TypeError(`Unknown prepared focus lens: ${lensId}`);
         }
         navigation.setPreparedFocus(focus);

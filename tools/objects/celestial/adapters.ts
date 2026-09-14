@@ -13,12 +13,13 @@ export interface SolarSource {
 /** Load native TypeScript preparers with their implementation-owned signatures. */
 export async function loadCelestialAdapters() {
   const path = (value: string): string => pathToFileURL(resolve(process.cwd(), value)).href;
-  const [sky, sun, contract, scene] = await Promise.all([
+  const [objects, sky, sun, contract, scene] = await Promise.all([
+    import(path('site/objects.mts')) as Promise<typeof import('../../../site/objects.mts')>,
     import(path('src/platform/prepare-cubic-sky-source.mts')) as Promise<Sky>,
     import(path('src/platform/prepare-directional-sun.mts')) as Promise<Sun>,
     import(path('src/platform/cubic-sky-contract.mts')) as Promise<typeof import('../../../src/platform/cubic-sky-contract.mts')>,
     import(path('tools/objects/solar-system-scene.mts')) as Promise<typeof import('../solar-system-scene.mts')>,
   ]);
-  return { preparePlanetCubicSky: sky.preparePlanetCubicSky, preparePlanetDirectionalSun: sun.preparePlanetDirectionalSun,
+  return { requireSceneObject: objects.requireSceneObject, preparePlanetCubicSky: sky.preparePlanetCubicSky, preparePlanetDirectionalSun: sun.preparePlanetDirectionalSun,
     prepareSolarSystemSunPresentation: scene.prepareSolarSystemSunPresentation, cubicSkyCamera: contract.CUBIC_SKY_CAMERA_PRESENTATION_STANDARD };
 }

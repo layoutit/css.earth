@@ -243,3 +243,7 @@ src/spice/**/*.bc
 
 # Restored from the pinned author-hosted method paper, not redistributed in Git.
 /src/objects/charon/source/science/leisa/grundy-2016-supplement.pdf
+
+# Navigation capability projections rebuilt by prepare:catalog.
+/site/prepared-object-distances.json
+/site/prepared-focus-objects.json

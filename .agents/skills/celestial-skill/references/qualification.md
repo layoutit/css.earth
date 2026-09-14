@@ -15,11 +15,13 @@ establishes; a valid manifest does not prove that its dates or units match the d
 | Change | Relevant evidence |
 | --- | --- |
 | Documentation only | Links and affected instructions; no surface bake or browser suite unless the documented behavior also changed. |
+| Research or a source diagnostic | Input interpretation and the focused numerical/tool checks supporting the finding; no delivery or browser qualification for unchanged runtime assets. |
 | Source metadata or bindings | `pnpm test:sources`; add body/scientific checks when the interpretation changes. |
 | New/changed source or preparation | Body/preparer tests, source validity and coordinate interpretation, prepared asset closure, source-to-result visual inspection. |
 | New acquisition path or missing restoration evidence | Restore its required ignored inputs into an empty temporary destination using the documented acquisition path. Preserve working inputs; cached verification does not prove restoration. |
 | Body registration/content | Package contract, reachable route/search/parent context, supported controls and correct attribution. |
-| Shared runtime or a new capability | Existing affected conformance for retained DOM, decode/readiness, lens races, pause/resume, destroy/cancellation, drag/wheel/fly-to and resource cleanup. Cover supported behavior and absence of unsupported UI/assets. |
+| Shared preparation or a new offline reader | Independent decoding/interpretation evidence and affected preparer/consumer checks. Reuse unchanged runtime conformance; inspect changed delivered views under the presentation and delivery rows. |
+| Shared runtime or a new runtime capability | Existing affected conformance for retained DOM, decode/readiness, lens races, pause/resume, destroy/cancellation, drag/wheel/fly-to and resource cleanup. Cover supported behavior and absence of unsupported UI/assets. |
 | Changed presentation | Reported view plus relevant close zoom, limb, pole/seam/shape extremes and lighting states; matched established-body views when shared behavior changed. |
 | New triangle-mesh presentation or mesh reduction | Source-fit and topology checks from [irregular meshes](irregular-meshes.md), plus [matched drag and cost measurements](#measure-mesh-changes). |
 | Changed delivery | Fresh installation against the published runtime inventory; complete cold-load and incremental lens costs. |
