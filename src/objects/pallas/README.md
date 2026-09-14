@@ -72,6 +72,30 @@ application to the released Pallas images remains unverified. The separate
 DAMIT IAU rotation record and a quadratic illumination-removal trial likewise
 failed to qualify the later-frame correspondence. No correction was adopted.
 
+The final bounded attempt jointly fitted detector centers and rolls for the
+05:04, 05:08 and 06:05 photographs against their lit outlines and interior
+matches. The published mesh, spin, range and focal scale stayed fixed; reference
+pixels were intersected with the mesh again at every fit step. Equally weighted
+native-pixel residuals used the existing limb fitter's robust loss. Previously
+examined withheld matches in the 06:05 image still differed by 2.61 pixels RMS,
+with a 5.46-pixel maximum.
+
+That solution was frozen before testing the unused 06:07:17 Camera 2 photograph.
+The new image received only the existing limb adjustment, with no interior fit.
+Its eight held-out matches differed by **5.29 pixels RMS, maximum 8.18 pixels**.
+All fourteen accepted matches in that image were evaluation data; the six in the
+matcher's usual fit partition were not fitted either. The
+[retained joint-fit result](evidence/camera-transfer.json) includes the frozen
+cameras, objective, input pins, matched pixels and numerical replay checks.
+
+![Unused Pallas photograph, frozen prediction and measured feature discrepancies](evidence/joint-fit.png)
+
+This attempt is closed without a photographic surface. The result rejects this
+camera solution, not the possibility of mapping Pallas. Reopen it with new
+registration evidence, such as producer-controlled image geometry or independently
+verified surface correspondences and their measurement precision. Further fits
+to these same uncertain controls would not provide that evidence.
+
 ## Known problems
 
 Shape uses the shared no-imagery grid. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 255.5 km reference sphere, with a -60 to 40 km legend. This includes global shape, not height above a gravitational equipotential.
