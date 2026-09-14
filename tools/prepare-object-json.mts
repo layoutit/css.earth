@@ -13,8 +13,6 @@ import { OBJECTS } from '../site/objects.mts';
 import { authoredObject } from './authored-object.mts';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 import { writePreparedText } from './write-prepared-text.mts';
-import { sharedTwinName } from '../src/platform/prepared-shared.mts';
-import { syncPreparedShared } from '../src/platform/prepared-shared-banks.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -53,13 +51,13 @@ export async function writeObjectJson(id:string, definitionValue:unknown, option
   return { id, ...pin };
 }
 
-/** Sync the shared twins and banks, transport the referenced runtime, and pin descriptor and page to it. */
+/** Transport the prepared runtime and pin descriptor and page to it. */
 async function pinPreparedObject(id: string, originalDescriptor: Record<string, unknown>, properties: Record<string, unknown>, root: string) {
   const objectDirectory = resolve(root, 'src/objects', id), preparedDirectory = resolve(objectDirectory, 'prepared');
   await mkdir(preparedDirectory, { recursive: true });
-  await syncPreparedShared(root, preparedDirectory);
-  const definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8')));
-  const runtime: unknown = JSON.parse(await readFile(resolve(preparedDirectory, sharedTwinName('runtime.json')), 'utf8'));
+  const runtimeText = await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8');
+  const definition = requireObjectRuntimeDefinition(JSON.parse(runtimeText));
+  const runtime: unknown = JSON.parse(runtimeText);
   const originalProperties = requireRecord(originalDescriptor.properties);
   const descriptor = parseObjectDescriptor({ ...originalDescriptor, properties: { ...originalProperties, ...properties } });
   const payload = serializeObjectJson(descriptor, runtime);
@@ -75,7 +73,7 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
   return { bytes: Buffer.byteLength(payload), ...prepared };
 }
 
-/** Re-pin an already prepared object to its shared-bank transport without preparing anything. */
+/** Re-pin an already prepared object to its transport without preparing anything. */
 export async function repinObjectJson(id: string, projectRoot = root) {
   const descriptorPath = resolve(projectRoot, 'src/objects', id, 'object.json');
   const originalDescriptor = requireRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));

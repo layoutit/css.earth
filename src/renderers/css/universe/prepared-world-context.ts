@@ -18,7 +18,7 @@ import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer 
 import type { PreparedOrbitStrokes } from '../solar-system/prepared-orbit-strokes.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
-import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
+import type { OrbitSegment } from '../solar-system/types.js';
 
 import { compactOrbitFootprint } from './context-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';

@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/galatea-74/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'galatea-74',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/galatea-74/galatea-74-shape-surface@2x.webp"
   ],

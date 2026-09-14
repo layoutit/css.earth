@@ -3,7 +3,6 @@ import objectControls from '../../../../src/objects/comet-67p/prepared/controls.
 
 export const browserProfile = createObjectBrowserProfile({ id: 'comet-67p', controls: objectControls,
   audit: {
-    preparedAssetPairs: [],
     canonicalPreparedAssets: ['/scenes/comet-67p/comet-67p-model-surface@2x.webp', '/scenes/comet-67p/comet-67p-lighting.webp'],
     lensRace: { defaultId: 'model', slowId: 'geology', winnerId: 'regions',
       slowAsset: '/scenes/comet-67p/comet-67p-geology-surface@2x.webp', preReadyDisabled: false },

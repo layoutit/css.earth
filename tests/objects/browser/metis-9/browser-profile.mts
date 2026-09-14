@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/metis-9/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'metis-9',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/metis-9/metis-9-shape-surface@2x.webp"
   ],

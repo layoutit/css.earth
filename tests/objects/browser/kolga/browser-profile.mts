@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/kolga/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'kolga',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/kolga/kolga-shape-surface@2x.webp"
   ],

@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/hidalgo/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hidalgo',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/hidalgo/hidalgo-shape-surface@2x.webp"
   ],

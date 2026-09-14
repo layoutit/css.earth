@@ -1,21 +1,19 @@
-import { required } from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
 import mercuryDefinition from "../../../../src/objects/mercury/prepared/runtime.json" with {type: "json"};
 import venusDefinition from "../../../../src/objects/venus/prepared/runtime.json" with {type: "json"};
+import mercurySolar from "../../../../src/objects/mercury/source/presentation/solar-system.json" with {type: "json"};
+import venusSolar from "../../../../src/objects/venus/source/presentation/solar-system.json" with {type: "json"};
 import { prepareEclipticPresentationFrame } from '../../../platform/solar-presentation-frame.mts';
 import { ASTRONOMICAL_UNIT_KILOMETERS, BODY_FIXED_SUN_DIRECTIONS, BODY_FIXED_TO_ICRF_MATRICES,
   BODY_ORBITS, SOLAR_GEOMETRY_EPOCH_JD_TT } from '../../../platform/solar-geometry.mts';
-import { projectHeliocentricView } from '../solar-system/heliocentric-view.js';
 import { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraViewport } from './world-camera.js';
 
-// Independent oracle: checked-in ephemerides and the real preparation basis,
+// Independent oracle: checked-in ephemerides, the real preparation basis and the authored body radii,
 // without importing the new shared frame preparer or transport's matrix helpers.
-const plan = mercuryDefinition.heliocentricView.plan;
-const venusBody = plan.system.bodies.find(body => body.id === 'venus');
 function preparedFrame(id: 'mercury' | 'venus', radiusM: number, radiusUnits: number): PreparedWorldCameraFrame {
   const bodyFixedToIcrf = BODY_FIXED_TO_ICRF_MATRICES[id];
   const basis = prepareEclipticPresentationFrame(id).basis;
@@ -29,8 +27,9 @@ function preparedFrame(id: 'mercury' | 'venus', radiusM: number, radiusUnits: nu
     presentationToReference: [0, 1, 2].flatMap(row => columns.map(column => column[row])),
     bodyRadiusM: radiusM, metersPerUnit: radiusM / radiusUnits };
 }
-const mercury = preparedFrame('mercury', plan.units.bodyRadiusKilometers * 1000, plan.units.bodyRadiusUnits);
-const venus = preparedFrame('venus', required(venusBody).radiusKilometers * 1000, venusDefinition.camera.logicalBodyDiameter / 2);
+const mercuryRadiusUnits = mercuryDefinition.camera.logicalBodyDiameter / 2;
+const mercury = preparedFrame('mercury', mercurySolar.bodyRadiusKilometers * 1000, mercuryRadiusUnits);
+const venus = preparedFrame('venus', venusSolar.bodyRadiusKilometers * 1000, venusDefinition.camera.logicalBodyDiameter / 2);
 // Measured from installed Chrome with the actual Mercury shell at 1440 x1000.
 const viewport: WorldCameraViewport = { focalPixels: 1247.08, principalOffsetPixels: [-170, 0] };
 const initialDistance = 1250.2459507895273;
@@ -57,20 +56,53 @@ function eyeInMeters(rotation: readonly number[], relative: PositionM): Position
   const component = (row: number) => [0, 1, 2].reduce((sum, col) => sum + rotation[row * 3 + col] * relative[col], 0);
   return [component(0), component(1), component(2)];
 }
+function cross(a: readonly number[], b: readonly number[]): number[] {
+  return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+}
+function unit(vector: readonly number[]): number[] {
+  const length = Math.hypot(...vector);
+  return vector.map(value => value / length);
+}
+// Where a CSS translate lands on screen through the shared perspective origin.
+function cssProject(translate: readonly number[], { focalPixels: focal, principalOffsetPixels: [ox, oy] }: WorldCameraViewport): number[] {
+  const depth = focal - translate[2];
+  return [ox + (translate[0] - ox) * focal / depth, oy + (translate[1] - oy) * focal / depth];
+}
+// The sphere's tangent cone traced ray by ray through the same pinhole; its extents are the drawn silhouette.
+function silhouetteOracle(center: readonly number[], radius: number, { focalPixels: focal, principalOffsetPixels: [ox, oy] }: WorldCameraViewport) {
+  const distance = Math.hypot(...center), axis = center.map(value => value / distance);
+  const alpha = Math.asin(radius / distance);
+  const e1 = unit(cross(axis, Math.abs(axis[0]) < .9 ? [1, 0, 0] : [0, 1, 0])), e2 = cross(axis, e1);
+  const planar = Math.hypot(center[0], center[1]);
+  const radial = planar > 0 ? [center[0] / planar, center[1] / planar] : [1, 0];
+  let nearest = Infinity, farthest = -Infinity, across = 0;
+  for (let index = 0; index < 20000; index++) {
+    const phi = 2 * Math.PI * index / 20000;
+    const ray = [0, 1, 2].map(component => axis[component] * Math.cos(alpha) +
+      (e1[component] * Math.cos(phi) + e2[component] * Math.sin(phi)) * Math.sin(alpha));
+    const x = focal * ray[0] / -ray[2], y = focal * ray[1] / -ray[2];
+    const along = x * radial[0] + y * radial[1];
+    nearest = Math.min(nearest, along);
+    farthest = Math.max(farthest, along);
+    across = Math.max(across, Math.abs(y * radial[0] - x * radial[1]));
+  }
+  const middle = (nearest + farthest) / 2;
+  return { radialSemiAxis: (farthest - nearest) / 2, tangentialSemiAxis: across,
+    centre: [ox + middle * radial[0], oy + middle * radial[1]] };
+}
 
 test('actual Mercury centred pose round-trips with its principal point, physical size and accumulated roll', () => {
   for (const rotation of [initialRotation, rolledRotation]) {
     const world = worldCameraFromCenteredPresentation({ rotation, distanceUnits: initialDistance }, mercury, viewport);
     const result = presentWorldCamera(world, mercury, viewport);
-    const oracle = projectHeliocentricView(plan, { rotation, distance: initialDistance,
-      focal: viewport.focalPixels, principalOffset: viewport.principalOffsetPixels, viewportWidth: 1440, viewportHeight: 1000 });
     close(result.rotation, rotation, 2e-15);
-    close(result.translateCssPixels, oracle.body.translate, 3e-9);
     close(result.centerPixels!, [0, 0], 3e-9);
+    close(cssProject(result.translateCssPixels, viewport), result.centerPixels!, 3e-9);
     assert.ok(Math.abs(result.distanceM - initialDistance * mercury.metersPerUnit) < 3e-5);
+    const oracle = silhouetteOracle(result.bodyCenterUnits, mercuryRadiusUnits, viewport);
     close([result.silhouette!.tangentialSemiAxis, result.silhouette!.radialSemiAxis],
-      [required(oracle.body.silhouette).tangentialSemiAxis, required(oracle.body.silhouette).radialSemiAxis], 1e-9);
-    close(result.silhouette!.centre, required(oracle.body.silhouette).centre, 3e-9);
+      [oracle.tangentialSemiAxis, oracle.radialSemiAxis], 1e-5);
+    close(result.silhouette!.centre, oracle.centre, 1e-5);
     const again = worldCameraFromPresentation(result, mercury);
     close(again.pose.positionM, world.pose.positionM, 3e-5);
     close(again.pose.orientationXyzw, world.pose.orientationXyzw, 1e-15);

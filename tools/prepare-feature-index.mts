@@ -37,7 +37,7 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
     // dataset selection so search never moves to a point on an incompatible model.
     let lensIds: string[] | undefined;
     if (catalog.landmarks !== undefined) {
-      const runtime: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.refs.json'), 'utf8'));
+      const runtime: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.json'), 'utf8'));
       if (!record(runtime) || !record(runtime.features) || !Array.isArray(runtime.features.lensIds) || !runtime.features.lensIds.length) throw new TypeError(`${object.id}: landmark datasets are missing.`);
       lensIds = runtime.features.lensIds.map(id => text(id, 'landmark dataset'));
     }

@@ -23,7 +23,7 @@ export async function refreshObservedPoles(id: string, lensIds: readonly string[
   if(!/^[a-z][a-z0-9-]*$/u.test(id)||!lensIds.length||new Set(lensIds).size!==lensIds.length)throw new TypeError('Choose one body and distinct observed lens ids.');
   sharp.cache(false);sharp.concurrency(1);
   const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),recipePath=resolve(sourceDirectory,'preparation/observations.json'),manifestPath=resolve(sourceDirectory,'manifest.json');
-  const scenePath=`src/objects/${id}/prepared/scene.refs.json`,sceneBytes=await readFile(scenePath);
+  const scenePath=`src/objects/${id}/prepared/scene.json`,sceneBytes=await readFile(scenePath);
   const [descriptorBytes,recipeBytes,manifestBytes]=await Promise.all([readFile(resolve(objectDirectory,'object.json')),readFile(recipePath),readFile(manifestPath)]);
   const descriptor=parseAuthoredObjectDescriptor(JSON.parse(descriptorBytes.toString('utf8'))),recipeSource=descriptor.recipe.sources.find(source=>source.id==='observations');
   if(descriptor.id!==id||!recipeSource||recipeSource.path!=='source/preparation/observations.json'||recipeSource.sha256!==hash(recipeBytes))throw new Error('Observed pole refresh requires the current descriptor recipe pin.');

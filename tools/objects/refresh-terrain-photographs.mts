@@ -49,7 +49,7 @@ async function refreshContext(id:string,ids:readonly string[]) {
   const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),outputDirectory=resolve(objectDirectory,'prepared');
   const stage=resolve('output/terrain-photographs',id),publicDirectory=resolve('public/scenes',id);
   const descriptor=await json(resolve(objectDirectory,'object.json')),recipe=await json(resolve(sourceDirectory,'preparation/terrestrial.json'));
-  const source=await json(resolve(sourceDirectory,'manifest.json')),sceneBytes=await readFile(resolve(outputDirectory,'scene.refs.json'));
+  const source=await json(resolve(sourceDirectory,'manifest.json')),sceneBytes=await readFile(resolve(outputDirectory,'scene.json'));
   const scene=requireRecord(JSON.parse(sceneBytes.toString('utf8'))),radial=retainedPhotographicAtlas(scene);
   const raster=requireRecord(recipe.raster),geometry=requireRecord(recipe.geometry),terrain=requireRecord(geometry.radialTerrain);
   if(terrain.sourceLighting || geometry.radialModels || geometry.radialTerrainAlternatives)throw new Error('This refresh requires the existing single-model cylindrical photographic lane.');
@@ -164,7 +164,7 @@ export async function applyStagedTerrainPhotographs(id:string,ids:readonly strin
   for(const reference of records(requireRecord(requireRecord(context.descriptor.properties).recipe).sources))if(reference.id==='terrestrial')reference.sha256=hash(recipeBytes);
   await save(resolve(context.sourceDirectory,'manifest.json'),context.source);await save(resolve(context.objectDirectory,'object.json'),context.descriptor);
   await prepareObjectProvenance({objectDirectory:context.objectDirectory,publicDirectory:context.publicDirectory,outputDirectory:context.outputDirectory,basis:'recovered'});
-  if(hash(await readFile(resolve(context.outputDirectory,'scene.refs.json')))!==hash(context.sceneBytes))throw new Error('Photographic refresh changed the retained scene.');
+  if(hash(await readFile(resolve(context.outputDirectory,'scene.json')))!==hash(context.sceneBytes))throw new Error('Photographic refresh changed the retained scene.');
   return results;
 }
 

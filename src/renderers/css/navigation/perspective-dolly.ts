@@ -1,7 +1,7 @@
 import { physicalProjectionFromCamera } from '../rendering/physical-projection.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
 import type { CameraPlan, PerspectiveCameraPlan, CameraUpdate, LevelOfDetailPlan, OrbitLineFade } from './types.js';
-import type { BodyProjection } from '../solar-system/heliocentric-view.js';
+import type { BodyProjection } from '../solar-system/types.js';
 import type { Matrix3dLike, VisibleRect } from '../solar-system/types.js';
 import type { PositionM } from '@cssearth/engine';
 import type { PhysicalProjection } from '../rendering/physical-projection.js';
@@ -30,7 +30,7 @@ import {
   distanceForSilhouetteRadius,
   rotationFromMatrix3d,
   silhouetteRadiusAtDistance,
-} from "../solar-system/heliocentric-view.js";
+} from "../solar-system/heliocentric-geometry.js";
 
 // A true perspective camera for the shared orbit: the eye sits at the sky's
 // vanishing point (the camera root's CSS perspective, re-read whenever the

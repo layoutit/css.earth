@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/lutetia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'lutetia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/lutetia/lutetia-osiris-surface@2x.webp"
   ],

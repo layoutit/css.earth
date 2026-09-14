@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/sophrosyne/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'sophrosyne',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/sophrosyne/sophrosyne-shape-surface@2x.webp"
   ],

@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/augusta/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'augusta',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/augusta/augusta-shape-surface@2x.webp"
   ],

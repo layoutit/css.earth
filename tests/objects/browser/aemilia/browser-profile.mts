@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/aemilia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'aemilia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/aemilia/aemilia-shape-surface@2x.webp"
   ],

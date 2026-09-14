@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/elpis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'elpis',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/elpis/elpis-shape-surface@2x.webp"
   ],

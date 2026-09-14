@@ -3,7 +3,6 @@ import objectControls from '../../../../src/objects/telesto/prepared/controls.js
 
 export const browserProfile = createObjectBrowserProfile({ id: 'telesto', controls: objectControls,
   audit: {
-    preparedAssetPairs: [],
     canonicalPreparedAssets: ['/scenes/telesto/telesto-normal-surface@2x.webp', '/scenes/telesto/telesto-lighting.webp'],
     lensRace: { defaultId: 'normal', slowId: 'elevation', winnerId: 'normal',
       slowAsset: '/scenes/telesto/telesto-elevation-surface@2x.webp', preReadyDisabled: true },

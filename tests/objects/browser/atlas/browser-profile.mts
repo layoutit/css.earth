@@ -3,7 +3,6 @@ import objectControls from '../../../../src/objects/atlas/prepared/controls.json
 
 export const browserProfile = createObjectBrowserProfile({ id: 'atlas', controls: objectControls,
   audit: {
-    preparedAssetPairs: [],
     canonicalPreparedAssets: ['/scenes/atlas/atlas-normal-surface@2x.webp', '/scenes/atlas/atlas-lighting.webp'],
     lensRace: { defaultId: 'normal', slowId: 'elevation', winnerId: 'normal',
       slowAsset: '/scenes/atlas/atlas-elevation-surface@2x.webp', preReadyDisabled: true },

@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/pandora-55/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'pandora-55',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/pandora-55/pandora-55-shape-surface@2x.webp"
   ],

@@ -42,9 +42,8 @@ test("elongated-body framing changes only the prepared viewport fit", () => {
 
 for (const [id, definition] of [["ceres", ceres], ["mercury", mercury]] as const) {
   test(`${id} mesh vertices and lighting use the same world radius through perspective zoom`, () => {
-    const { camera, tree, heliocentricView, viewBindings } = definition;
-    assert.ok(heliocentricView);
-    const radius = heliocentricView.plan.units.bodyRadiusUnits;
+    const { camera, tree, viewBindings } = definition;
+    const radius = camera.logicalBodyDiameter / 2;
     const fit = viewBindings.find(binding => binding.kind === "silhouette-fit");
     assert.ok(fit && fit.kind === "silhouette-fit");
     assert.equal(typeof fit.unitScale, "number");

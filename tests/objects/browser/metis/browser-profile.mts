@@ -3,7 +3,6 @@ import objectControls from '../../../../src/objects/metis/prepared/controls.json
 
 export const browserProfile = createObjectBrowserProfile({ id: 'metis', controls: objectControls,
   audit: {
-    preparedAssetPairs: [],
     canonicalPreparedAssets: ['/scenes/metis/metis-normal-surface@2x.webp', '/scenes/metis/metis-lighting.webp'],
     retained: { lensIds: browserProfileLensIds(objectControls), speedClicks: 5, allowedMountSelectors: [] },
   },

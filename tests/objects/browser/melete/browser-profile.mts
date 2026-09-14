@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/melete/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'melete',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/melete/melete-shape-surface@2x.webp"
   ],

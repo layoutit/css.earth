@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/musa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'musa',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/musa/musa-shape-surface@2x.webp"
   ],

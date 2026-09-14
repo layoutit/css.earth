@@ -1,3 +1,3 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import objectControls from '../../../../src/objects/sn263-beta/prepared/controls.json' with {type:'json'};
-export const browserProfile=createObjectBrowserProfile({id:'sn263-beta',controls:objectControls,audit:{preparedAssetPairs:[],canonicalPreparedAssets:['/scenes/sn263-beta/sn263-beta-shape-surface@2x.webp'],retained:{lensIds:['shape'],speedClicks:5,allowedMountSelectors:[]}}});
+export const browserProfile=createObjectBrowserProfile({id:'sn263-beta',controls:objectControls,audit:{canonicalPreparedAssets:['/scenes/sn263-beta/sn263-beta-shape-surface@2x.webp'],retained:{lensIds:['shape'],speedClicks:5,allowedMountSelectors:[]}}});

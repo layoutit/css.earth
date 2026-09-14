@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/coelestina/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'coelestina',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/coelestina/coelestina-shape-surface@2x.webp"
   ],

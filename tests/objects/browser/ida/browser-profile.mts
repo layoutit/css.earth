@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/ida/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'ida',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/ida/ida-normal-surface@2x.webp"
   ],

@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/fides/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'fides',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/fides/fides-shape-surface@2x.webp"
   ],

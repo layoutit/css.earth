@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/lycomedes/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'lycomedes',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/lycomedes/lycomedes-shape-surface@2x.webp"
   ],

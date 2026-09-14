@@ -8,7 +8,6 @@ export const browserProfile = createObjectBrowserProfile({
     preparedAssetPairs: Object.freeze([
       Object.freeze({ one: "/scenes/umbriel/umbriel-normal.webp", two: "/scenes/umbriel/umbriel-normal@2x.webp" }),
       Object.freeze({ one: "/scenes/umbriel/umbriel-poles-normal.webp", two: "/scenes/umbriel/umbriel-poles-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/umbriel/umbriel-starfield-front.webp", two: "/scenes/umbriel/umbriel-starfield-front@2x.webp" }),
       ]),
     retained: Object.freeze({
       lensIds: Object.freeze(["normal"]),

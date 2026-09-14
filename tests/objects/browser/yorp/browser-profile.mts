@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/yorp/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'yorp',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/yorp/yorp-shape-surface@2x.webp"
   ],

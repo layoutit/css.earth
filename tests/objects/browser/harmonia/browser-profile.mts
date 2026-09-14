@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/harmonia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'harmonia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/harmonia/harmonia-shape-surface@2x.webp"
   ],

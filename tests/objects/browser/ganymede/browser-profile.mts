@@ -8,7 +8,6 @@ export const browserProfile = createObjectBrowserProfile({
     preparedAssetPairs: Object.freeze([
       Object.freeze({ one: "/scenes/ganymede/ganymede-normal.webp", two: "/scenes/ganymede/ganymede-normal@2x.webp" }),
       Object.freeze({ one: "/scenes/ganymede/ganymede-poles-normal.webp", two: "/scenes/ganymede/ganymede-poles-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/ganymede/ganymede-starfield-front.webp", two: "/scenes/ganymede/ganymede-starfield-front@2x.webp" }),
       ]),
     lensRace: Object.freeze({
       defaultId: "normal",

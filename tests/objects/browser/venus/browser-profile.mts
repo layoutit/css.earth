@@ -22,10 +22,6 @@ export const browserProfile = createObjectBrowserProfile({
         one: "/scenes/venus/venus-lighting.webp",
         two: "/scenes/venus/venus-lighting@2x.webp",
       }),
-      Object.freeze({
-        one: "/scenes/venus/venus-starfield-front.webp",
-        two: "/scenes/venus/venus-starfield-front@2x.webp",
-      }),
       ]),
     lensRace: Object.freeze({
       defaultId: "clouds",

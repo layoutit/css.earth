@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/ambrosia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'ambrosia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/ambrosia/ambrosia-shape-surface@2x.webp"
   ],

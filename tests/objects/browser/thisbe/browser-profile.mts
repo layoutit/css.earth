@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/thisbe/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'thisbe',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/thisbe/thisbe-shape-surface@2x.webp"
   ],

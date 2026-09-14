@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/camilla/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'camilla',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/camilla/camilla-shape-surface@2x.webp"
   ],

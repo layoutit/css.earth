@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/vibilia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'vibilia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/vibilia/vibilia-shape-surface@2x.webp"
   ],
