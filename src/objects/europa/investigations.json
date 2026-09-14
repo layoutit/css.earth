@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "europa",
+  "entries": [
+    {
+      "id": "voyager-galileo-monochrome",
+      "subject": "USGS Voyager/Galileo 500 m global mosaic",
+      "status": "included",
+      "finding": "Selected global GeoTIFF supplies Monochrome with published control, variable resolution, seams and gaps.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/europa_voyager_galileo_ssi_global_mosaic_500m"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "controlled-galileo-color",
+      "subject": "USGS controlled Galileo SSI color sequences",
+      "status": "included",
+      "finding": "G1ESGLOBAL01, 12ESGLOCOL01 and 14ESGLOCOL01 supply Enhanced color only where registered three-band support is present.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/source/manifest.json",
+        "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "agenor-dtm",
+      "subject": "USGS controlled Agenor DTM",
+      "status": "included",
+      "finding": "Released controlled Agenor DTM supplies Elevation; it is regional terrain and does not establish global relief.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/source/manifest.json",
+        "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "sim3513-geology",
+      "subject": "USGS SIM 3513 Europa geologic units",
+      "status": "included",
+      "finding": "Ten source units and no-data regions supply categorical Geology; colors are interpretation rather than observed color or chemistry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/source/manifest.json",
+        "https://pubs.usgs.gov/publication/sim3513"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "nims-infrared",
+      "subject": "Registered Galileo NIMS 17ENGLOBAL01A and 17ENGLOBAL02A CIOF observations",
+      "status": "included",
+      "finding": "Two Minnaert-corrected registered observations supply Infrared within their documented coverage and registration limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/source/manifest.json",
+        "https://doi.org/10.17189/4sz4-5024"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

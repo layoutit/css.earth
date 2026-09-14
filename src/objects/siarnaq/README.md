@@ -24,7 +24,7 @@
 
 - This constrains the approximate spin axis, not a current prime-meridian or landmark phase; the initial meridian is arbitrary.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 ## Methods and source notes
 
@@ -41,15 +41,9 @@ A threshold of 8 separates the right silhouette from the black background; its c
 
 At height `z`, the polygon is scaled by `sqrt(1−(z/c)²)`. These symmetric elliptical caps are an explicit assumption. The resulting dimensions and figure coordinates are recorded in `source/measurements.json`.
 
-## Dataset candidates
+## Investigation record
 
-- **Cassini ISS imagery and lightcurves:** [PDS archive](https://pds-rings.seti.org/cassini/iss/) and [author's observation record](https://tilmanndenk.de/outersaturnianmoons/siarnaq/) supply disk-integrated observations underlying the shape inference. Lightcurve data remain a useful future chart candidate.
-
-- The figure is the selected envelope evidence; obtaining the numeric inversion model remains an unresolved replacement candidate, not a claim that no model exists.
-
-- **JWST spectrum:** [Belyakov and Brown (2025)](https://doi.org/10.3847/PSJ/adc55d), also [arXiv:2503.20046](https://arxiv.org/abs/2503.20046), presents NIRSpec PRISM measurements from 0.7–5.3 µm. These constrain unresolved composition, not its spatial distribution. A spectrum chart is useful follow-up work; no spectrum or composition map is implemented here.
-
-- **Elevation/geology:** no resolved DEM or registered geology release was qualified from these archives and cited studies. Shape-model facets are not measured surface relief.
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json), including what would reopen each decision.
 
 ## Orientation and presentation
 

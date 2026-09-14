@@ -4,6 +4,8 @@ Titania uses Voyager 2 mosaics and terrain reconstruction, plus digitized histor
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 | View or quantity | Source |
 | --- | --- |
 | Monochrome and elevation | [Schenk's 2020 mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), described by [Schenk and Moore (2020)](https://doi.org/10.1098/rsta.2020.0102) |
@@ -128,15 +130,7 @@ Reproduce the categorical input with `python tools/objects/prepare-geologic-cate
 
 ## Source survey
 
-| Candidate | Disposition |
-| --- | --- |
-| Schenk/LPI 2020 registered monochrome mosaic | Included as Monochrome: updated control network, numeric validity and documented source correction. |
-| Schenk/LPI 2020 stereo plus limb DEM | Included as Elevation with its own coverage, datum, numeric scale and relief. |
-| [JPL/USGS Voyager display map](https://space.jpl.nasa.gov/tmaps/uranus.html), 1440 × 720 | Superseded by the registered numeric LPI mosaic; not a duplicate lens. |
-| [Nathan, Head and Huber (2024)](https://iopscience.iop.org/article/10.3847/PSJ/ad04d6/pdf), deblurred imagery and geologic mapping | Excluded as a direct mapped replacement. Appendix p. 9 explicitly states that the workflow discards geospatial information and requires registration to another map. The supporting data are paper figures/tables and a processing tutorial; a qualified registered raster was not identified. A future re-registration could improve visual interpretation. |
-| [PDS OPUS](https://opus.pds-rings.seti.org/) Voyager frames, including `vg-iss-2-u-c2683649` used by Nathan et al. | Authoritative acquisition archive; selected LPI products already provide controlled mosaicking and DEMs. Reprocessing individual images requires its own calibration/registration evidence. |
-| [NASA color composite](https://science.nasa.gov/uranus/moons/titania/) | Useful visual reference, excluded as a map lens: a published disc composite does not establish registered global color coverage. |
-| [USGS Gazetteer](https://planetarynames.wr.usgs.gov/Page/TITANIA/target) | Coordinate and nomenclature reference, not a separate observation lens. Named sample locations also appear in Nathan et al. Table A1. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 No complete mapped color or composition lens is claimed. The historical Geology view retains its own mapped coverage and registration limits; it does not turn the newer deblurring study into a registered observation product.
 

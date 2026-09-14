@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "dactyl",
+  "entries": [
+    {
+      "id": "galileo-dimensions",
+      "subject": "Veverka 1996 Galileo dimensions",
+      "status": "included",
+      "finding": "The measured full dimensions 1.6 × 1.4 × 1.2 km define a smooth ellipsoid. This is an envelope, not a recovered crater mesh, and the reference radius is its computed volume-equivalent radius.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/source/measurements.json",
+        "https://doi.org/10.1006/icar.1996.0045"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "galileo-surface",
+      "subject": "Galileo resolved Dactyl observations",
+      "status": "deferred",
+      "finding": "The examined Galileo literature and retained package records establish resolved shape and craters, but no camera-controlled surface texture is qualified. Observation availability is distinct from image-to-shape registration.",
+      "revisitWhen": "Actual SSI products and their camera/shape relation pass independent surface registration for the selected geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "stooke-companion-mesh",
+      "subject": "Stooke shape collection membership",
+      "status": "excluded",
+      "finding": "The historical inventory explicitly includes Ida but not Dactyl. The primary mesh cannot substitute for its moon; this collection-specific result does not rule out another Dactyl release.",
+      "revisitWhen": "A Dactyl-specific numerical model is identified with its native frame and source attribution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/README.md",
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json",
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "celestia-rock",
+      "subject": "Generic Celestia Dactyl texture",
+      "status": "excluded",
+      "finding": "The retained source-selection record excludes a generic rock texture because it is not observed Dactyl imagery.",
+      "revisitWhen": "An observational Dactyl texture with traceable native data and controlled registration replaces the generic material.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "encounter-orbit",
+      "subject": "Belton/Petit encounter and stability orbit constraints",
+      "status": "included",
+      "finding": "The papers constrain encounter orbit families but not a unique current phase. The displayed candidate conic uses a=82.3 km and e=0.15 from the retained Celestia record; its plane, periapsis, synchronous orientation and zero mean anomaly at the scene epoch are explicitly approximate.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/source/orbit/published-parameters.json",
+        "https://doi.org/10.1006/icar.1996.0044",
+        "https://doi.org/10.1006/icar.1997.5788"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

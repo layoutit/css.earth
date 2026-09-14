@@ -2,6 +2,8 @@
 
 ## Sources
 
+[Investigation ledger](investigations.json): recorded source decisions, evidence and conditions for revisiting them.
+
 - Porter, Verbiscer and Canup (2025), [presentation slide 9](https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf), reports a 10.6 × 6.0 × 5.3 km best fit and a 7.0 km equivalent diameter.
 
 - The [conference abstract](https://www.hou.usra.edu/meetings/plutosystem2025/pdf/7035.pdf) rounds those dimensions to 11 × 6 × 5 km.
@@ -31,14 +33,7 @@ Styx, Pluto’s innermost small moon, uses a labeled **Shape model** with the st
 
 It is not a uniquely measured pose or a prediction of long-term chaotic rotation.
 
-| Candidate | Disposition |
-| --- | --- |
-| Porter et al. (2025) shape fit | Adopted dimensions as an approximate ellipsoid. No local relief inferred. |
-| Weaver et al. (2016), [Table 2](https://doi.org/10.1126/science.aae0030) | Earlier 16 × 9 × 8 km fit superseded for geometry. Retained period and historical pole, with the newer pole ambiguity disclosed. |
-| [PDS LORRI calibrated archive](https://pds-smallbodies.astro.umd.edu/data_sb/missions/newhorizons/index.shtml), U_TBD_1_02 | Survey sorted all 2,605 indexed Styx observations by source sampling. The best six are 3.125–3.133 km per native pixel. Downloaded and inspected `lor_0299137075_0x630_sci.fit` with its detached label: only a few pixels describe the moon. Not adopted as a cartographic texture. |
-| New Horizons MVIC | PDS surface-geometry search returned no indexed Styx observations. The published resolved-observation log contains LORRI only for Styx. No color lens qualified. |
-| NASA composite / Weaver Fig. 1 | A six-image deconvolved composite enlarged eight times beyond native pixel spacing. Useful observational context, but not eight times more surface detail. Not projected onto the globe. |
-| USGS mapping / PDS shape releases / HST observations | No usable Styx map, scalar field, or downloadable controlled mesh found. HST detections and lightcurves constrain orbit/shape, not local terrain. |
+Source selections and alternative products are recorded in the [investigation ledger](investigations.json).
 
 Shape, thumbnail, minimap and context portrait all use that grid. Flood and Shadows are prepared on the same mesh. No elevation, photometric correction, color reconstruction, fabricated terrain, or body-specific runtime controller is introduced. Preparation targets 480 native `u` leaves with a hard 2,000-leaf maximum.
 

@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 Oberon's Monochrome view uses Paul Schenk's September 2020 [Uranian Satellites — Global Mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), based on Voyager 2 images registered with updated control networks. The original selected product is [`oumap-cyl-180180.cub`](https://repository.hou.usra.edu/bitstreams/33526bf8-69e4-4246-b995-0b238a8b31d0/download). The release's [author README](https://repository.hou.usra.edu/bitstreams/00528589-53e3-496b-ac5d-b6d86fe527c9/download) is retained in [the retained author notes](source/observations/aaReadMe_uranian_MAP_DEM.txt).
 
 Source photometric correction does not remove local cast shadows or guarantee seamless exposures. The Monochrome view is a display of the published corrected observations, not a newly calibrated albedo measurement.
@@ -71,18 +73,7 @@ The shared 452-face sphere uses the vendored mean radius of 761.4 km, within the
 
 The 5760 × 2880 prepared sampling grid, 64-pixel atlas gutters and 1024-pixel pole tiles provide adequate projective sampling on the retained sphere. This denser atlas prevents rendering artifacts; it adds no native observations or resolved detail. Final surface WebP uses quality 95. A 180 × 180 crop beginning at (35, 265) in the 957 × 479 normalized map feeds the 256-pixel context marker; its complete source footprint is observed.
 
-**Dataset survey**
-
-| Candidate | Decision and limits |
-| --- | --- |
-| Schenk/LPI 2020 `oumap-cyl-180180.cub` | Included as Monochrome. Updated control network and native numeric samples make it preferable to the older display-texture map. The release supplies photometrically corrected imagery; preserved shadows and seams are disclosed. |
-| Schenk/LPI 2020 [`oumap_Zlimb.cub`](https://repository.hou.usra.edu/bitstreams/c256d12e-7dd9-4e1a-a190-7c2f05932d06/download) | Excluded as an Elevation lens. These are sparse digitized limb profiles, not extended surface elevation coverage. The author warns that their older control network may displace them by several degrees. They must not be expanded into neighboring terrain or treated as a registered full-surface DEM. |
-| [Schenk and Moore 2023 topography overview](https://www.hou.usra.edu/meetings/uranusflagship2023/pdf/8140.pdf) and [2020 source paper](https://doi.org/10.1098/rsta.2020.0102) | Supporting scientific context. The authors explicitly describe the lack of extended topography on Oberon and Umbriel, confirming why this package has no Elevation lens. Paper figures are not substitutes for measured raster coverage. |
-| [JPL simulator Oberon texture](https://space.jpl.nasa.gov/tmaps/uranus.html), 1440 × 720, 4 pixels/degree | Superseded as a display source. It derives from USGS/Voyager grayscale imagery, but does not provide the selected release's revised control metadata and floating-point source values. Its nominal pixel count is not evidence of more native detail. No duplicate lens is added. |
-| [PDS Voyager 2 Uranus ISS EDR archive](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=VG2-U-ISS-2-EDR-V1.0) | Underlying observation archive, excluded from this presentation in favor of the already corrected and controlled release. Raw frames would require a separate radiometric and pointing reconstruction; PDS warns about errors in original emission/incidence metadata. |
-| [Helfenstein et al. 1991 color photometry](https://ntrs.nasa.gov/citations/19910046112) | Distinct color/albedo candidate. The cited calibrated Voyager sequence was reconstructed in the final trial below; its mounted visual quality did not qualify a second lens for this package. |
-| [JPL PIA00034 color disc](https://www.jpl.nasa.gov/images/pia00034-oberon-at-voyager-closest-approach/) | Excluded from mapped lenses. The published disc reconstructs color from violet, clear and green filters; the press image alone does not supply a calibrated, registered surface product or new coverage. |
-| [Geologic map manuscript catalog](https://planetarymapping.elte.hu/map-catalog/map/6000/geologic-map-of-oberon/) | Unresolved interpretive candidate. The catalog records a manuscript color plate but supplies no downloadable qualified geospatial units or source projection/coverage metadata. It is not used as a scientific raster. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 **Final color reconstruction trial (2026-09-07)**
 
