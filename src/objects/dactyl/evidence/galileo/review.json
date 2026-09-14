@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-galileo-frame-review-result@1",
+  "inputSha256": "aa569aec0a3896d17cd23ba055d3808160a7862910a974f3799b4520fc954686",
+  "baseCommit": "ef958900c9ecab2632fff75fd629fa4789947f79",
+  "generatorSha256": "15c64c97b1bf1ede770044ab71530443f0eceea448bf85092ffb6a67c4158a13",
+  "qualifiedSurface": false,
+  "coordinates": "Crops use zero-based columns and rows in the decoded FITS storage array. No north-up or body-fixed interpretation is assigned.",
+  "frames": [
+    {
+      "id": "i1578",
+      "productId": "IGSSI-I1578-199509",
+      "startTime": "1993-08-28T16:40:45.390Z",
+      "filter": "IR-8890",
+      "labelGeometryTarget": "IDA",
+      "width": 800,
+      "height": 800,
+      "bitpix": 8,
+      "units": "uncalibrated DN",
+      "storageCrop": {
+        "left": 494,
+        "top": 200,
+        "width": 48,
+        "height": 48
+      },
+      "displayGain": 2,
+      "displayZoom": 5,
+      "displayClippedPixels": 0,
+      "cropMin": 6,
+      "cropMax": 94,
+      "qualityMaskApplied": false,
+      "finding": "Complete low-resolution Dactyl disk; finer crater controls are poorly resolved."
+    },
+    {
+      "id": "i2278",
+      "productId": "IGSSI-I2278-199509",
+      "startTime": "1993-08-28T16:47:49.956Z",
+      "filter": "CLEAR",
+      "labelGeometryTarget": "IDA",
+      "width": 800,
+      "height": 800,
+      "bitpix": 8,
+      "units": "uncalibrated DN",
+      "storageCrop": {
+        "left": 158,
+        "top": 548,
+        "width": 64,
+        "height": 64
+      },
+      "displayGain": 2,
+      "displayZoom": 5,
+      "displayClippedPixels": 0,
+      "cropMin": 3,
+      "cropMax": 106,
+      "qualityMaskApplied": false,
+      "finding": "Best complete candidate: a cratered disk. The label body-fixed geometry belongs to Ida."
+    },
+    {
+      "id": "i2700",
+      "productId": "IGSSI-I2700-199509",
+      "startTime": "1993-08-28T16:52:01.315Z",
+      "filter": "CLEAR",
+      "labelGeometryTarget": "IDA",
+      "width": 800,
+      "height": 800,
+      "bitpix": 8,
+      "units": "uncalibrated DN",
+      "storageCrop": {
+        "left": 0,
+        "top": 290,
+        "width": 80,
+        "height": 104
+      },
+      "displayGain": 2,
+      "displayZoom": 5,
+      "displayClippedPixels": 0,
+      "cropMin": 1,
+      "cropMax": 101,
+      "qualityMaskApplied": false,
+      "finding": "Only fragments at the detector edge; no complete disk or distributed interior controls."
+    }
+  ],
+  "scanPlatformKernel": {
+    "segments": 1,
+    "frameId": -77001,
+    "referenceFrame": "B1950",
+    "type": 3,
+    "evaluatedAttitude": false
+  },
+  "limitations": [
+    "No radiometric or geometric calibration.",
+    "No camera fit, surface reprojection, or registration residual is claimed.",
+    "Bad-pixel tables are pinned for a future projection; these detector previews show the input values without masking."
+  ]
+}
