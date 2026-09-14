@@ -12,7 +12,10 @@
         "https://doi.org/10.1029/2022JE007323",
         "https://doi.org/10.5281/zenodo.6390469",
         "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/v1.0.1/README.md",
-        "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/v1.0.1/fit_SPHERE.json.gz"
+        "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/v1.0.1/fit_SPHERE.json.gz",
+        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/README.md",
+        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/evidence/composition/browser.json",
+        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/evidence/composition/registration.json"
       ],
       "checked": [
         {
@@ -22,6 +25,10 @@
         {
           "date": "2026-09-14",
           "commit": "f8fbdaa0b203f11b4f121b867eb478d38d6c311e"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "78038ef3913db7d48cde75d9fe97248b6db67d98"
         }
       ]
     },
