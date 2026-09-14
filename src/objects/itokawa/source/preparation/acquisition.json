@@ -16,15 +16,6 @@
         "restore",
         "refresh"
       ],
-      "path": "stars/eso0932a.tif",
-      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "observations/st_2402987304_v_ddr.img.gz",
       "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2402987304_v_ddr.img.gz"
     },

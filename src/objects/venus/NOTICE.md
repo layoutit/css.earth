@@ -21,10 +21,6 @@ records are treated as public-domain scientific data under the basis and
 limitations documented in `source/venera/RIGHTS.md`. This repository includes
 no later restoration or creative derivative of those files.
 
-The prepared starfield is derived from HYG Stellar Database v4.1, credited to
-David Nash / Astronexus and licensed under CC BY-SA 4.0. Its local attribution
-and license record is `source/stars/LICENSE.md`.
-
 Source-product false color, fixed lighting, atmosphere shading, accelerated
 rotation, camera orientation, polar presentation, retained topology, and
 PolyCSS projection are documented presentation choices. They do not claim

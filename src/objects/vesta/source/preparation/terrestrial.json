@@ -4,7 +4,6 @@
   "namespace": "vesta",
   "displayName": "Vesta",
   "publicBase": "/scenes/vesta/",
-  "distanceAu": 2.3619,
   "raster": {
     "width": 8192,
     "height": 4096,
@@ -150,12 +149,6 @@
     "sunSource": "JPL Horizons osculating Kepler elements and the DLR Dawn Claudia rotation model"
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      180,
-      180,
-      180
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

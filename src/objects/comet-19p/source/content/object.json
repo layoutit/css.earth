@@ -195,12 +195,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": true
       }
     ]
   },
@@ -223,12 +217,6 @@
       "role": "observations",
       "description": "How the terrain models were made and compared",
       "href": "https://www.isprs.org/proceedings/xxxiv/part4/pdfpapers/277.pdf"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

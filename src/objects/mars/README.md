@@ -71,9 +71,9 @@ configuration and provenance reference; the browser never loads OpenSpace data.
 The prepared camera is the shared solar-system camera: default zoom 1.1, a
 40-degree initial scene pitch over the shared 0-through-89-degree control
 orbit, the continuous viewport fit shared with Mercury and Venus, and the
-photographic cubic sky prepared for the same 60-degree horizontal field of
-view. The previous Google Earth Pro-derived camera and material-depth contract
-were retired with the affine lane.
+shared 60-degree horizontal field of view. The previous Google Earth
+Pro-derived camera and material-depth contract were retired with the affine
+lane.
 
 </details>
 
@@ -131,25 +131,6 @@ The reflectance spectrum and temperature-pressure profile are prepared from a
 pinned NASA GSFC Planetary Spectrum Generator configuration and raw I/F
 response. The charts are static SVG outputs. The browser performs no PSG
 request or scientific calculation.
-
-</details>
-
-<details>
-<summary>Background sky and Sun</summary>
-
-## Background sky
-
-The retained background uses the shared cubic-sky standard. ESO's 6,000 by
-3,000 `eso0932a` photographic panorama by S. Brunier (CC BY 4.0) is projected
-during preparation into six 1,024-square faces and six 2,048-square DPR-2
-faces. HYG v4.1 (David Nash / Astronexus, CC BY-SA 4.0) is the pinned
-coordinate-registration subset; the visible stars are the licensed ESO pixels.
-The Sun is a repository-authored prepared raster mounted as a separate
-retained billboard, prepared through the shared directional-sun standard. That
-standard cites the earlier Google Earth Pro Mars measurement record, which is
-retained as a document at `source/sky/google-earth-pro-contract.json`; Mars
-preparation no longer reads it. This is a presentation sky, not an
-epoch-correct Mars observer sky.
 
 </details>
 

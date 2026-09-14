@@ -170,60 +170,6 @@
       }
     },
     {
-      "id": "stars-eso0932a-tif",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "https://www.eso.org/public/images/eso0932a/"
-      ],
-      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
-      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
-          }
-        ]
-      }
-    },
-    {
-      "id": "stars-hyg-v41-field-json",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 144990,
-      "expectedSha256": "49eb1e69ecf508ebebf98e688b5732c96200d9abf3252754a78f2fdd45a1e303",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
-      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
-          }
-        ]
-      }
-    },
-    {
       "id": "lenses-pluto-dem-lbl",
       "path": "lenses/pluto-dem.lbl",
       "expectedBytes": 1576,
@@ -359,8 +305,8 @@
     {
       "id": "pluto-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "ef3df7c9ba745d79d866f20f01f5b311e2ae492af013dbf03519d24e40e2a640",
-      "expectedBytes": 1574,
+      "expectedSha256": "3ef36d78f7f57a4d65e16ed65317a7fdb84de30306f3087e8f6d750226063bc4",
+      "expectedBytes": 272,
       "origin": "Repository-authored physical scene recipe; mean radius 1188.3 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -418,8 +364,8 @@
     {
       "id": "pluto-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedSha256": "a510ef9ffb0f65da272702eb8351bae713b0e4056d24f5926378b12424b6d8f6",
-      "expectedBytes": 222,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
+      "expectedBytes": 108,
       "origin": "Repository-authored Pluto sky, sun, and marker recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -474,8 +420,8 @@
     {
       "id": "pluto-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "f1e6c908348cb7912c6bb2b450fed902f3ee096a46520674b4f8bd8fbe3b489b",
-      "expectedBytes": 1943,
+      "expectedSha256": "c566e1566d60357ec1f71ad9e2fad80648848d0307aa68fcf4e8b9fa74a3f2a2",
+      "expectedBytes": 1759,
       "origin": "Repository-authored Pluto acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -493,8 +439,8 @@
     {
       "id": "pluto-object-content",
       "path": "content/object.json",
-      "expectedSha256": "bcb4d6769eb2a27bf8ca40629f95f408200aaa4d70ef7627ae534adae50c5fec",
-      "expectedBytes": 15777,
+      "expectedSha256": "08a3762c948b4d962735f9c6fd9976a1eff0a238de27f33fee2a51b26218220c",
+      "expectedBytes": 15495,
       "origin": "Repository-authored Pluto panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -598,18 +544,6 @@
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 656,
-      "expectedSha256": "0e18ae8586f57984d99faa2c39880a60cfa1254d726223d35c1aa66d87cd6d79",
-      "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 1395,
-      "expectedSha256": "2148f82d076d4b11a3e25be02fe4f9414df6d43f8f6461ff88f7eadf2cb08af1",
-      "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
-    },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",

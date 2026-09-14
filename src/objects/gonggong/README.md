@@ -4,7 +4,7 @@ Gonggong is a large, distant trans-Neptunian world with the moon Xiangliu. Its s
 
 ## Sources
 
-The published spherical thermophysical interpretation has diameter **1230 ±50 km**. This size assumes Xiangliu orbits near Gonggong’s equatorial plane. The **Shape model** uses the normal unmapped-surface grid. Shadows and Orbit default off.
+The published spherical thermophysical interpretation has diameter **1230 ±50 km**. This size assumes Xiangliu orbits near Gonggong’s equatorial plane. The **Shape model** uses the normal unmapped-surface grid. Shadows defaults off.
 
 | Source | Used for |
 | --- | --- |

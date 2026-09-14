@@ -99,12 +99,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "stars",
-        "label": "Stars",
-        "checked": true
       }
     ]
   },
@@ -133,12 +127,6 @@
       "role": "rotation",
       "description": "2023 photometry showing synchronous rotation",
       "href": "https://arxiv.org/abs/2303.13445"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

@@ -13,7 +13,7 @@ Published primary-body oblate model with semiaxes a=b=218.05 ±0.11 km and c=187
 
 Uses the paper’s J2000-equatorial satellite-orbit pole RA 20.8° ±1.9°, Dec 34.9° ±1.9° as a body-pole prior under the explicit equatorial-orbit assumption. Arbitrary prime meridian and rotational phase.
 
-The normal grid marks unmapped terrain. Shadows and Orbit default off. The radius used for display scale is the volume-equivalent radius of the adopted model, not a new independent physical measurement. [Measurements](source/measurements.json), [source manifest](source/manifest.json), and [credits](NOTICE.md) retain the numerical extraction, original byte pins and terms.
+The normal grid marks unmapped terrain. Shadows defaults off. The radius used for display scale is the volume-equivalent radius of the adopted model, not a new independent physical measurement. [Measurements](source/measurements.json), [source manifest](source/manifest.json), and [credits](NOTICE.md) retain the numerical extraction, original byte pins and terms.
 
 ## Evidence
 

@@ -2,33 +2,6 @@
   "schema": "cssmathilde-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/mathilde/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "mathilde-visualization-shape",
       "path": "shape/stooke-253mathilde.tab",
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab",
@@ -594,8 +567,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10455,
-      "expectedSha256": "3ff27bd56d08f24f6abe2f57349d42b5a7db3781ade47de3ff289c5561cb0dfb",
+      "expectedBytes": 10176,
+      "expectedSha256": "90946b384216cf4018964acb8de9b7ddb8940a39bc8be6116cd90955eaf1c0b3",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -608,8 +581,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 4910,
-      "expectedSha256": "6fea76b92632f77cc09f5d08c435fa5bbcc5153bd96b1930b1cb9733ee82a4ce"
+      "expectedBytes": 4707,
+      "expectedSha256": "1697ac5ff7dff3bda36f5ae98f78cb7b9ec9ce188648b268ad06fdab5a2c2596"
     },
     {
       "path": "preparation/navigation.json",
@@ -623,8 +596,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6555,
-      "expectedSha256": "c1086762e7e1201473bf07265b308a5a26232e792878dd74060f011f3de51a8e"
+      "expectedBytes": 6401,
+      "expectedSha256": "5c44931db0f5c1e9627ab5d9a519b4903ad17e9adae3caed4fc31111028ce7ab"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -680,21 +653,6 @@
       "path": "reference/stooke-mapindex.tab",
       "expectedBytes": 38880,
       "expectedSha256": "ae74da29036ac2d4ff84aea829fa6cf63311234abadb0de95295407372a6a048"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 89774,
-      "expectedSha256": "7898287cb9d92e1e04f8cc83f3fee9206439527dd0183dfc82f01f39f10a37c3"
     },
     {
       "id": "mathilde-surface-feature-notes",

@@ -65,12 +65,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": false
       }
     ]
   },
@@ -93,12 +87,6 @@
       "role": "facts",
       "description": "Published observations and interpretation",
       "href": "https://www.almaobservatory.org/en/press-releases/alma-investigates-deedee-a-distant-dim-member-of-our-solar-system/"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

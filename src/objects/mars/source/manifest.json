@@ -4,8 +4,8 @@
     {
       "id": "mars-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "dc5bf43aad04eb5e7e60cde51fcb3ac3fa3040a589e8fe4012ff35e079f756ed",
-      "expectedBytes": 1568,
+      "expectedSha256": "d35d136c52c84f11d4492c00c7f62535903f1732713028288e70a01397687674",
+      "expectedBytes": 271,
       "origin": "Repository-authored physical scene recipe; equatorial radius 3396.19 km from the JPL physical parameters pinned in editorial/factsheet-review.json and the USGS Viking MDIM product; pinned solar geometry from VSOP87A and IAU/WGCCRE",
       "credit": "Published physical facts and repository-authored presentation",
       "license": "Repository-authored factual data",
@@ -317,113 +317,10 @@
       }
     },
     {
-      "id": "hyg-v41-cubic-sky-registration",
-      "path": "stars/hyg-v41-field.json",
-      "expectedSha256": "b1a35dbb883a26a69cf61fffc36bac48be948972a1ba68d892e003b98a753332",
-      "expectedBytes": 144988,
-      "origin": "HYG Stellar Database v4.1 commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
-      "credit": "David Nash / Astronexus",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "stars/LICENSE.md"
-      ],
-      "acquisition": "Prepared deterministic coordinate-registration subset from the pinned HYG v4.1 source.",
-      "redistribution": "Share-alike prepared subset with attribution and license evidence.",
-      "consumers": [
-        "stars",
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "HYG v4.1 at commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce; the local record retains the extracted stars or licence."
-          }
-        ]
-      }
-    },
-    {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "expectedBytes": 29082084,
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield",
-        "scene"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
-          }
-        ]
-      }
-    },
-    {
-      "id": "google-maps-cubic-sky-sun-oracle-asset",
-      "path": "sun/google-maps-sun.png",
-      "expectedSha256": "e9c2b33612abd121905845cd19aad83382b977e2a68b68058bc6702292b15e9f",
-      "expectedBytes": 10947,
-      "origin": "https://mw1.google.com/mw-weather/static/sun.png",
-      "credit": "Google Maps visual presentation reference",
-      "license": "Google proprietary; no redistribution grant verified",
-      "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the source for the generic cubic-sky presentation standard.",
-      "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
-      "consumers": [
-        "starfield",
-        "sun-oracle",
-        "scene"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "google-maps-sun-symbol",
-            "role": "material",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
-          }
-        ]
-      }
-    },
-    {
-      "id": "google-maps-cubic-sky-sun-oracle-measurements",
-      "path": "sun/google-maps-sun-oracle.json",
-      "expectedSha256": "0fcc54b72a064eb76adf2a3be008f23c6fb6f3ffae3cdc5df228b83d16b3a27b",
-      "expectedBytes": 2895,
-      "origin": "https://www.google.com/maps/space/venus/ and https://mw1.google.com/mw-weather/static/sun.png",
-      "credit": "Google Maps visual presentation reference; measurements recorded by this project",
-      "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
-      "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
-      "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
-      "consumers": [
-        "starfield",
-        "sun-oracle",
-        "scene",
-        "materials"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
-      }
-    },
-    {
       "id": "mars-object-content",
       "path": "content/object.json",
-      "expectedSha256": "4bb942375cb753e010be227203a2497852dea366dfe9928e5ce56b4887e336e1",
-      "expectedBytes": 14249,
+      "expectedSha256": "cd4446b0424aaf55fada395ee123375dda44549517539b70af29e4e8dfd709c5",
+      "expectedBytes": 13958,
       "origin": "Repository-authored Mars panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -460,8 +357,8 @@
     {
       "id": "mars-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "d4e14590f9608d9d88132dc1fcd314c862c00be1c840f462dff0ae5c41709d24",
-      "expectedBytes": 4473,
+      "expectedSha256": "5eac3ab5a540468f42758a60ad836811b39394dd1cdda2c7b5e8c000f21dc20f",
+      "expectedBytes": 4100,
       "origin": "Repository-authored Mars acquisition and qualification recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -517,8 +414,8 @@
     {
       "id": "mars-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedSha256": "0c5e523e45c2662ed848b43d184f2df7b81c56829b3212ec286455eb03647c7b",
-      "expectedBytes": 221,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
+      "expectedBytes": 108,
       "origin": "Repository-authored Mars sky, sun, and marker recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -702,18 +599,6 @@
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "stars/LICENSE.md",
-      "expectedSha256": "5590879b8df6e808e0c8287a28fe7c1a421b1eca88cb23575b5a82a470c989b2",
-      "expectedBytes": 597,
-      "purpose": "HYG v4.1 attribution and CC-BY-SA-4.0 license record"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
-      "expectedBytes": 1271,
-      "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
-    },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",

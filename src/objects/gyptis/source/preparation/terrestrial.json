@@ -4,7 +4,6 @@
   "namespace": "gyptis",
   "displayName": "Gyptis",
   "publicBase": "/scenes/gyptis/",
-  "distanceAu": 2.7713762475315957,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -118,12 +117,6 @@
     "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

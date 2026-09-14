@@ -2,33 +2,6 @@
   "schema": "cssrusthawelia-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/rusthawelia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "rusthawelia-shape",
       "path": "shape/model-3188.txt",
       "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/10084/shape.txt",
@@ -122,8 +95,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11345,
-      "expectedSha256": "db95f331df2fea4cdc32c3567dac553605f90883504337a6a04fe452e49e988d",
+      "expectedBytes": 11066,
+      "expectedSha256": "aef1f21ceaded7b9fa6e0c7a86bc5e74bc4e3935d4e10c64af76e3c39a7c58e3",
       "sha256": "0521854babea86954a3dfa5f548649793d28d889c66a92fe88a8694933b6c1a4",
       "sourceBinding": {
         "kind": "local",
@@ -132,8 +105,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 947,
-      "expectedSha256": "eb4213648a3152b74a9cf91a04fada27da950346cfee9a441551f5b813a69c3f"
+      "expectedBytes": 744,
+      "expectedSha256": "fecba94856c5a0ea292655b9262c311bf9bdac78d268dc77e0837a3f8052aa09"
     },
     {
       "path": "preparation/navigation.json",
@@ -147,8 +120,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3214,
-      "expectedSha256": "d3302f4ada4c72d48a46b082a0e54d35958f81f901e516f47a3ad3e9341e9f07"
+      "expectedBytes": 3060,
+      "expectedSha256": "4f19c0edbb85ba268f1e9039bd61cef851ebeb5319b20027bacdcfbe65dfb5d0"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -213,21 +186,6 @@
       "path": "reference/spin.txt",
       "expectedBytes": 45,
       "expectedSha256": "f508399fce9407d94d4d6ca9d15dd53d1362ec8213ea41b398f705c6898e1588"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 144980,
-      "expectedSha256": "216526c5b6a94a4a0c8c63f473df2b183097df825853647fb88e2d13631fb758"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     }
   ]
 }

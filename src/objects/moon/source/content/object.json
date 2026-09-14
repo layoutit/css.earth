@@ -1055,12 +1055,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "stars",
-        "label": "Stars",
-        "checked": true
       }
     ]
   },
@@ -1089,12 +1083,6 @@
       "role": "scene",
       "description": "Globe configuration",
       "href": "https://github.com/OpenSpace/OpenSpace"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Background star field",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     },
     {
       "label": "NASA PDS / LOLA",

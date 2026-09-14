@@ -2,7 +2,7 @@
 
 Machholz 1 repeatedly sweeps close to the Sun. SOHO and STEREO have watched its passages from different sides of Earth’s orbit.
 
-One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows and Orbit default off.
+One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.
 
 ## Sources
 

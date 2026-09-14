@@ -100,7 +100,7 @@ Both GeoTIFFs declare GDAL_NODATA=0. The monochrome zero value, or a missing col
 
 Prepared maps are 8192 × 4096 (about 2.02 km per equatorial texel), downsampled from the source. The canonical projective atlases are fixed across DPR. Poles use separate 1024-pixel disks sampled from the same map; each latitude band uses the shared inverse mapping for the retained spherical mesh. Proportional atlas gutters preserve the shared texture registration at this density.
 
-Its 2631.2 km mean radius, pole/spin model, synchronous orbit and epoch come from the pinned astronomy package (JPL satellite elements and IAU/WGCCRE rotation). The small cartographic reference-radius difference remains a source-map fact, not a change to Ganymede's physical radius. Sky, Sun and Jupiter positions use the same prepared body frame and epoch. The parent Jupiter marker is prepared independently from the pinned Hubble photograph; it is not an embedded Jupiter scene. ESO/S. Brunier and HYG supply the shared astrometric sky.
+Its 2631.2 km mean radius, pole/spin model, synchronous orbit and epoch come from the pinned astronomy package (JPL satellite elements and IAU/WGCCRE rotation). The small cartographic reference-radius difference remains a source-map fact, not a change to Ganymede's physical radius.
 
 [NASA Ganymede facts](https://science.nasa.gov/jupiter/jupiter-moons/ganymede/facts/) support the introduction, ocean interpretation, thin oxygen atmosphere and approximately 1.07 million km orbit. The tenuous atmosphere is factual content; it does not justify a visible atmospheric halo. No rings, terrain-height lens, magnetosphere illustration or speculative layer is included.
 
@@ -108,7 +108,7 @@ Its 2631.2 km mean radius, pole/spin model, synchronous orbit and epoch come fro
 
 This package contains authored JSON recipes, source provenance, and generated JSON. Reusable observation masking, projection, lighting, celestial, and retained-scene operations live in `tools/objects/terrestrial-layers/`; no package-local executable preparer or runtime is required.
 
-Delivery keeps the prepared HD texture dimensions. The photographic normal and enhanced polar sprites sample their pinned source grids directly with a 2 × 2 footprint and retain lossless WebP encoding. Latitude-band and non-photographic prepared assets retain their existing encodings; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+Delivery keeps the prepared HD texture dimensions. The photographic normal and enhanced polar sprites sample their pinned source grids directly with a 2 × 2 footprint and retain lossless WebP encoding. Latitude-band and non-photographic prepared assets retain their existing encodings; source maps remain lossless. Lighting stays lossless.
 
 ## Interpreted geology
 
@@ -127,6 +127,6 @@ Every conversion is offline; the scene geometry remains unchanged.
 <details>
 <summary>Shape, rotation and camera on the shared raster lane</summary>
 
-The recipe declares a sphere of 2631.2 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 7.1556-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera). The heliocentric view keeps the orbit around Jupiter and the parent marker now comes from the shared navigation atlas.
+The recipe declares a sphere of 2631.2 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 7.1556-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera).
 
 </details>

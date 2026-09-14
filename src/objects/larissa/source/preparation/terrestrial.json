@@ -4,7 +4,6 @@
   "namespace": "larissa",
   "displayName": "Larissa",
   "publicBase": "/scenes/larissa/",
-  "distanceAu": 30.07,
   "raster": {
     "width": 1024,
     "height": 512,
@@ -162,12 +161,6 @@
     "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; the Stooke source origin and west-positive longitude are preserved."
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      155,
-      151,
-      146
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

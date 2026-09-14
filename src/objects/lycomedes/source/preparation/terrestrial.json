@@ -4,7 +4,6 @@
   "namespace": "lycomedes",
   "displayName": "Lycomedes",
   "publicBase": "/scenes/lycomedes/",
-  "distanceAu": 5.0677482891717345,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -119,12 +118,6 @@
     "sunSource": "DAMIT model 4284 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }
