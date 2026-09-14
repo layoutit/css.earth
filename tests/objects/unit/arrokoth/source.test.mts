@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {readFitsPrimary} from '../../../../tools/objects/observation/fits.mts';
 import {parseObjTextureCoordinates,createObjUvFitsSampler} from '../../../../tools/objects/terrestrial-layers/obj-uv-fits.mts';
-const root=new URL('../../../../src/planets/arrokoth/source/',import.meta.url);
+const root=new URL('../../../../src/objects/arrokoth/source/',import.meta.url);
 const json=async (path: string|URL)=>JSON.parse((await readFile(new URL(path,root))).toString('utf8'));
 test('released Arrokoth topology retains two closed source lobes at kilometre scale',async()=>{
  const config=await json('preparation/terrestrial.json'),text=await readFile(new URL(config.geometry.radialTerrain.path,root),'utf8');
@@ -47,6 +47,6 @@ test('Arrokoth UV orientation matches independently decoded released PNG scalar 
  }
  assert.equal(lens.grid.noData,undefined,'the uniform source baseline is not an inferred observation mask');
  const content=await json('content/object.json');assert.equal(content.lenses.defaultLens,'lorri');
- assert.match(content.lenses.controls.find((l: { id: string; })=>l.id==='albedo').description,/unconstrained model fill/);
+ assert.match(content.lenses.controls.find((l: { id: string; })=>l.id==='albedo').notes,/unconstrained model fill/);
  assert.ok(content.settings.controls.filter((c: { name: string; })=>['shadows','orbit'].includes(c.name)).every((c: { checked: boolean; })=>c.checked===false));
 });

@@ -1,0 +1,16 @@
+{
+  "action": "apply",
+  "imageId": "compiler",
+  "recipePath": "labs/nebula/models/helix/compiler.json",
+  "cataloguePath": ".local/nebula-lab/observations/helix/structures/catalogue.json",
+  "imageToFrame": {},
+  "evidence": {
+    "sensitivity": 1,
+    "weights": []
+  },
+  "controls": {
+    "detail": 0.65,
+    "faint": 0.35,
+    "depth": 1
+  }
+}

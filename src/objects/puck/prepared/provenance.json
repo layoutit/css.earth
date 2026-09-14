@@ -1,0 +1,517 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "puck",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "0f91d1ac2ad63c1c06ecc25e78cb7f00199cc85ccb89123c7c2f14d26eb57afc"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "88ed72b63e85e5c747d4ac17569b989e02c254288f06de2c9f2d4cf7b14629dd",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "puck",
+        "displayName": "Puck",
+        "publicBase": "/scenes/puck/",
+        "distanceAu": 19.19,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "surfaceObservations": [
+            {
+              "id": "normal",
+              "format": "controlled-shape-camera",
+              "consumer": "voyager-clear-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain.",
+                "attribution": {
+                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/voyager/iss/"
+                }
+              },
+              "frames": [
+                {
+                  "id": "c2683716",
+                  "path": "observations/C2683716_GEOMED.IMG",
+                  "labelPath": "observations/C2683716_GEOMED.LBL",
+                  "observerLatitude": -56.091,
+                  "observerWestLongitude": 53.645,
+                  "sunLatitude": -82.109,
+                  "sunWestLongitude": 137.517,
+                  "rangeKm": 515621.4,
+                  "northAzimuthDegrees": 83.29067463820111,
+                  "center": [
+                    426.9,
+                    700.2
+                  ],
+                  "pixelAngleMicroradians": 7.841764329210524,
+                  "backgroundOffset": -0.0005000000237487257,
+                  "backgroundMaximum": 0.002965199761092663,
+                  "coverageInsetPixels": 2
+                }
+              ],
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 70
+              },
+              "photometry": {
+                "model": "lunar-lambert",
+                "weight": 0.5,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 75,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 2.5
+              },
+              "display": {
+                "displayRange": [
+                  0,
+                  0.0594
+                ]
+              }
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 81,
+          "camera": {
+            "initialScenePitchDegrees": 41.017848203987,
+            "defaultControlYawDegrees": -69.1448941840709
+          },
+          "mapUrl": "/scenes/puck/puck-normal-surface@2x.webp",
+          "polesUrl": "/scenes/puck/puck-normal-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 1500,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Uranus-system ephemeris and IAU/WGCCRE Puck rotation; calibrated Voyager image is registered in that source body frame."
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "33cc13defeaf3dbe010e75fbe43705851d5f3e2c1e1bcad3fafec4307d5d96ef",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "puck",
+        "displayName": "Puck",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "About 81 km"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Uranus",
+              "value": "About 18.28 hours"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Distance from Uranus",
+              "value": "About 86,000 km"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation",
+              "value": "Synchronous model"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Voyager 2 imaging team · 1985"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "labels": {
+            "normal": "Monochrome"
+          },
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "thumbnail": "/scenes/puck/puck-normal-thumbnail.webp",
+              "surface": "puck-normal-surface@2x.webp",
+              "poles": "puck-normal-poles@2x.webp",
+              "source": {
+                "id": "c2683716",
+                "path": "../manifest.json",
+                "url": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-u-c2683716"
+              },
+              "notes": "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain.",
+              "noData": true
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Puck overview",
+            "href": "https://science.nasa.gov/uranus/moons/puck/"
+          },
+          {
+            "label": "NASA/JPL; PDS",
+            "role": "surface",
+            "description": "Calibrated Voyager clear-filter image",
+            "href": "https://pds-rings.seti.org/voyager/iss/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/uranus/moons/puck/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Karkoschka (2001); NASA/JPL; IAU/WGCCRE"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "c2683716",
+      "path": "observations/C2683716_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-u-c2683716",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "width": 1000,
+      "height": 1000,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.IMG",
+            "missionId": "voyager-2"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-7xxx-vgiss-7206-data-c26837xx-c2683716-geomed",
+            "role": "material",
+            "evidence": "src/planets/puck/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "b13a0124dc199090c2047ef316df5bee68c12cb6b008ff2a49beb238a6c38832",
+      "bytes": 2002000,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C2683716_GEOMED.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c2683716-label",
+      "path": "observations/C2683716_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-u-c2683716",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.LBL",
+            "missionId": "voyager-2"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-7xxx-vgiss-7206-data-c26837xx-c2683716-geomed",
+            "role": "material",
+            "evidence": "src/planets/puck/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
+      "sha256": "084f2e10d36a1145501a2545a936ed106e52fdd63c33064395d54f02976dda88",
+      "bytes": 3294,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C2683716_GEOMED.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "reference-sphere",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://pds-rings.seti.org/uranus/uranus_satellites_table.html",
+      "credit": "PDS Ring-Moon Systems Node; Karkoschka (2001)",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/uranus/uranus_satellites_table.html"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "coverage": "Approximate 81 km reference sphere for mapping the observed image, not detailed terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 81000
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-puck-reference-sphere",
+            "role": "material",
+            "evidence": "src/planets/puck/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
+      "sha256": "45d0f9b644507f15a1e08ec5cb945382cd5739d7fab74909f12216753446b3fe",
+      "bytes": 62404,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "33cc13defeaf3dbe010e75fbe43705851d5f3e2c1e1bcad3fafec4307d5d96ef",
+      "bytes": 2842,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "c2683716",
+        "c2683716-label",
+        "reference-sphere"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/puck/puck-normal-thumbnail.webp",
+          "bytes": 2464,
+          "sha256": "079ce2ca4b769905f89c0271bdb0fa5a4194fea7694520c87138d55bb2158285",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/puck/puck-normal-surface@2x.webp",
+          "bytes": 76150,
+          "sha256": "4ba643c5b5dac95deb0fcbfd65c40d21e9478013b890f1b0df0ab091e892e237",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 3294,
+          "sha256": "b38664bd432106d1741590fae2063560f9ba59ae3a3174e342b415262176e7ee",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 5546,
+          "sha256": "571880ae1ec88362405ebbdcd1210e7b5dceaf83b4c72d63e09d433031a941cf",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

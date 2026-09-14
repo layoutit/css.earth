@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "adrastea",
+  "entries": [
+    {
+      "id": "galileo-ssi-frames",
+      "subject": "Galileo SSI frames as a surface texture",
+      "status": "excluded",
+      "finding": "Five original Galileo SSI observations from the E4 and C9 encounters, C0374674100, C0401718000, C0401749000, C0401764300, C0401776900. Their pinned OPUS records give 6.614–8.747 km/pixel and only 2.286–3.024 pixels across the modeled maximum diameter. Frame metadata is retained in [source/survey](https://github.com/layoutit/css.earth/tree/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/adrastea/source/survey); original frames are available from the records’ PDS file specifications.",
+      "revisitWhen": "Imaging that resolves Adrastea across many pixels, with a camera model for its shape, becomes available.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/adrastea/README.md#L9",
+        "https://github.com/layoutit/css.earth/tree/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/adrastea/source/survey"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    },
+    {
+      "id": "pck-dimensions",
+      "subject": "PCK dimensions, IAU rotation and JPL Horizons data",
+      "status": "included",
+      "finding": "PCK dimensions and IAU rotation, with JPL Horizons physical and fitted orbit data. They resolve an outline, not terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/adrastea/README.md#L30"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    },
+    {
+      "id": "pia01624-montage",
+      "subject": "PIA01624 montage as a geometry source",
+      "status": "excluded",
+      "finding": "The NASA/JPL [PIA01624 montage](https://science.nasa.gov/photojournal/shapes-of-the-small-inner-satellites-of-jupiter/) illustrates the inferred axes but is not a downloadable numeric shape mesh.",
+      "revisitWhen": "A downloadable numeric shape model or radius table is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/adrastea/README.md#L34",
+        "https://science.nasa.gov/photojournal/shapes-of-the-small-inner-satellites-of-jupiter/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    },
+    {
+      "id": "denk-2026-review",
+      "subject": "Denk et al. (2026) review of the minor Jovian moons",
+      "status": "included",
+      "finding": "[Denk et al., Io and the Minor Jovian Moons – Prospects for JUICE (2026)](https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf), Table 3 and section 3, explicitly says only Adrastea’s axis dimensions could be derived. Figure 10 identifies the five Galileo observations. No resolved elevation or composition map is qualified, so no such lens is offered.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/adrastea/README.md#L36",
+        "https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    }
+  ]
+}

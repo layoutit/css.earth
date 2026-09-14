@@ -1,22 +1,19 @@
-import { diskGain as diskFunctionGain, NORMAL_GEOMETRY } from '../../photometry/disk.mts';
-import type { SourceManifest } from '../../../src/platform/source-manifest.mts';
-import { resolvePublishedPhotometry, validPublishedPhotometryShape, type ResolvedPhotometry } from './published-photometry.mts';
-import type { SourceMesh } from './contracts.mts';
-import { parseControlledCamera, parseCameraFrame, parseCameraShape, parseRadialTableProfile, parseCameraMosaic, parseCameraColor } from './source-records.mts';
+import { parseControlledCamera, parseCameraFrame, parseCameraShape } from './source-records.mts';
 type Vector = readonly number[] | Float32Array | Float64Array;
-interface CameraImage {data:Float32Array | Float64Array; width:number; height:number; offset?:number; encoding?:string; allowZero?:boolean; sampleFormat?:string;
+export interface CameraImage {data:Float32Array | Float64Array; width:number; height:number; offset?:number; encoding?:string; allowZero?:boolean; sampleFormat?:string;
  missing?:Uint8Array;allowFiniteSigned?:boolean;quality?:{records:number;badBlockPixels:number;saturatedPixels:number;specialPixels:number;withheldPixels:number}}
 type CameraFrame = ReturnType<typeof parseCameraFrame>;
-interface CameraEntry {expectedSha256?:string;path:string;width?:number;height?:number}
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable,parsePdsRadiusTable} from './obj-shape.mts';
-import {parsePdsRadialTable} from './pds-radial-table.mts';
+import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.mts';
+import {loadPdsRadialTableMesh} from './pds-radial-table.mts';
 import {readFitsPrimary} from '../observation/fits.mts';
+import { createHash } from 'node:crypto';
+import { pds3Keyword } from '../pds-labels.mts';
+import { registerCameraBands, REGISTRATION_CRITERIA } from './camera-band-registration.mts';
 
 const rad = Math.PI / 180;
 const dot = (a: Vector,b: Vector) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
-const sub = (a: Vector,b: Vector) => a.map((v,i)=>v-b[i]);
 const cross = (a: Vector,b: Vector) => [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
 const unit = (a: Vector) => a.map(v=>v/Math.hypot(...a));
 const vector = (latitude: number, westLongitude: number) => [Math.cos(latitude*rad)*Math.cos(-westLongitude*rad),Math.cos(latitude*rad)*Math.sin(-westLongitude*rad),Math.sin(latitude*rad)];
@@ -98,7 +95,7 @@ export async function resolveCatalogCamera(sourceDirectory: string, source: unkn
 
 // Only edge-connected low-signal sky is withheld. Isolated dark crater floors
 // remain observed, even when their intensity is below this authored threshold.
-function maskBackground(image: CameraImage,threshold: number | undefined){
+export function maskBackground(image: CameraImage,threshold: number | undefined){
   if(threshold===undefined)return;
   if(!Number.isFinite(threshold)||threshold<0)throw new Error('Invalid source background threshold.');
   const mask=image.missing??new Uint8Array(image.data.length),seen=new Uint8Array(mask.length),queue=new Int32Array(mask.length);let end=0;
@@ -125,46 +122,12 @@ export function insetCoverage(image: CameraImage,pixels: number | undefined){
   image.missing=mask;
 }
 
-function bilinear(image: CameraImage,x: number,y: number){
-  if(x<1||y<1||x>=image.width-2||y>=image.height-2)return null;
-  const ix=Math.floor(x),iy=Math.floor(y),u=x-ix,v=y-iy,i=iy*image.width+ix;
-  const {missing}=image;
-  if(missing && [i,i+1,i+image.width,i+image.width+1].some(j=>missing[j]))return null;
-  const p=[image.data[i],image.data[i+1],image.data[i+image.width],image.data[i+image.width+1]];
-  if(p.some(n=>!Number.isFinite(n)||(!image.allowFiniteSigned&&(n<0||(!image.allowZero&&n===0)))||Math.abs(n)>1e10))return null;
-  return (p[0]*(1-u)+p[1]*u)*(1-v)+(p[2]*(1-u)+p[3]*u)*v;
-}
-
-function smoothNormals(mesh: SourceMesh){
-  const sums=mesh.positions.map(()=>[0,0,0]);
-  for(const f of mesh.indices){
-    const [a,b,c]=f.map(i=>mesh.positions[i]);let n=cross(sub(b,a),sub(c,a));
-    if(dot(n,a)<0)n=n.map(v=>-v);
-    for(const i of f)for(let k=0;k<3;k++)sums[i][k]+=n[k];
-  }
-  const normals=sums.map(unit);
-  return (faceId: number,p: Vector)=>{
-    const f=mesh.indices[faceId],[a,b,c]=f.map(i=>mesh.positions[i]),v0=sub(b,a),v1=sub(c,a),v2=sub(p,a);
-    const d00=dot(v0,v0),d01=dot(v0,v1),d11=dot(v1,v1),d20=dot(v2,v0),d21=dot(v2,v1),d=d00*d11-d01*d01;
-    const v=(d11*d20-d01*d21)/d,w=(d00*d21-d01*d20)/d,u=1-v-w;
-    return unit([0,1,2].map(k=>u*normals[f[0]][k]+v*normals[f[1]][k]+w*normals[f[2]][k]));
-  };
-}
-
 /** The latitude-first Thomas tables use the same released regular-grid
  * connectivity as the existing radius-table mesh reader. Validate the source
  * grid before changing column order; this does not change the display mesh. */
 export async function loadCameraShape(sourceDirectory: string, source: unknown){
   const shape = parseCameraShape(source);
-  if(shape.format==='pds-radial-table'){
-    const text=await readFile(resolve(sourceDirectory,shape.path),'utf8'),grid=parsePdsRadialTable(text,shape.grid);
-    const profile = parseRadialTableProfile(shape.grid);
-    const step=profile.latitudeStepDegrees,columns=profile.columns??['latitude','longitude','radius'];
-    if(step!==profile.longitudeStepDegrees)throw new Error('Camera source mesh requires equal angular steps.');
-    const reordered=text.trim().split(/\r?\n/).map(line=>{const row=line.trim().split(/\s+/);return ['longitude','latitude','radius'].map(name=>row[columns.indexOf(name)]).join(' ');}).join('\n');
-    return parsePdsRadiusTable(reordered,{stepDegrees:step,longitudeDirection:profile.longitudeDirection+'-positive',metersPerUnit:profile.metersPerUnit,
-      expectedVertices:(grid.width-1)*(grid.height-2)+2,expectedFaces:2*(grid.width-1)*(grid.height-2)});
-  }
+  if(shape.format==='pds-radial-table')return loadPdsRadialTableMesh(resolve(sourceDirectory,shape.path),shape.grid);
   const load=shape.format==='stl'?loadStlShape:shape.format==='pds-radius-table'?loadPdsRadiusTable:shape.format==='pds-plate-model'?loadPdsPlateShape:shape.format==='pds-vertex-facet'?loadPdsVertexFacetShape:loadObjShape;
   return load(resolve(sourceDirectory,shape.path),shape.grid);
 }
@@ -210,7 +173,7 @@ export async function loadShapeCameraImage(sourceDirectory: string, source: unkn
     const q=frame.quality;
     if(!q)throw new Error('Calibrated SSI requires its archived detector-quality companions.');
     const rawLabel=await readFile(resolve(sourceDirectory,q.rawLabelPath),'utf8'),label=await readFile(resolve(sourceDirectory,frame.labelPath),'utf8');
-    const field=(name: string)=>rawLabel.match(new RegExp('^'+name+'\\s*=\\s*"?([^"\\r\\n]+)','m'))?.[1].trim();
+    const field=(name: string)=>pds3Keyword(rawLabel,name);
     if(field('TARGET_NAME')!==q.target||field('START_TIME')!==q.startTime||field('FILTER_NAME')!==q.filter||
         !label.includes('>'+q.startTime+'<')||!label.includes('>'+q.filter+'<')||
         !rawLabel.includes('"'+q.imageId.toUpperCase()+'.FIT"')||
@@ -224,136 +187,41 @@ export async function loadShapeCameraImage(sourceDirectory: string, source: unkn
   return image;
 }
 
-const framePaths=(f: CameraFrame)=>[f.path,f.labelPath,...(f.cameraCatalog?[f.cameraCatalog.path,f.cameraCatalog.labelPath,f.cameraCatalog.instrumentPath]:[]),...(f.quality?[f.quality.rawPath,f.quality.rawLabelPath,f.quality.badDataPath,f.quality.badDataLabelPath]:[])];
+export const framePaths=(f: CameraFrame)=>[f.path,f.labelPath,...(f.cameraCatalog?[f.cameraCatalog.path,f.cameraCatalog.labelPath,f.cameraCatalog.instrumentPath]:[]),...(f.quality?[f.quality.rawPath,f.quality.rawLabelPath,f.quality.badDataPath,f.quality.badDataLabelPath]:[])];
 
-function sampleStatistics(values: ArrayLike<number>,missing?: Uint8Array){
-  let count=0,minimum=Infinity,maximum=-Infinity,sum=0,negative=0,zero=0;
-  for(let i=0;i<values.length;i++)if(!missing?.[i]&&Number.isFinite(values[i])){
-    const value=values[i];count++;minimum=Math.min(minimum,value);maximum=Math.max(maximum,value);sum+=value;
-    if(value<0)negative++;if(value===0)zero++;
+/** Measure every registered camera against its declared reference images. References are used in order: the first is the
+ * camera seed, and each later one once a check has confirmed it. Every channel camera must be confirmed. */
+export async function checkBandRegistration(sourceDirectory: string,channels: readonly {filter:string;frames:readonly CameraFrame[]}[],
+  registration: {references:readonly CameraFrame[];checks:readonly {reference:string;targets:readonly string[]}[]},mesh: Parameters<typeof registerCameraBands>[0]['mesh']){
+  const frames=new Map<string,{frame:CameraFrame;filter:string}>();
+  for(const entry of [...registration.references.map(frame=>({frame,filter:'reference'})),...channels.flatMap(channel=>channel.frames.map(frame=>({frame,filter:channel.filter})))]){
+    if(frames.has(entry.frame.id))throw new Error(`Registered camera ids must be unique: ${entry.frame.id}`);
+    frames.set(entry.frame.id,entry);
   }
-  return {count,minimum:count?minimum:null,maximum:count?maximum:null,mean:count?sum/count:null,negative,zero};
-}
-
-/** Independently project each calibrated filter; display only their common
- * footprint. A common transfer function preserves band ratios. No invented
- * luminance detail, per-channel gain matching, or missing-band fill is used. */
-export async function prepareShapeCameraColor(sourceDirectory: string,entries: readonly CameraEntry[],source: unknown,width: number,height: number,shape: unknown){
-  const recipe = parseCameraColor(source);
-  if('referenceDegrees' in recipe.photometry)throw new Error("Filter colour keeps each filter's observed brightness; a published photometric model is fitted to one filter.");
-  if(recipe.channels?.length!==3||recipe.photometry?.minimumLevel!==1||recipe.photometry?.maximumLevel!==1||
-      recipe.frames!==undefined||recipe.metadata?.falseColor!==true||
-      new Set(recipe.channels.map(c=>c.filter)).size!==3||
-      ['red','green','blue'].some((name,i)=>recipe.channels[i]?.channel!==name||
-        typeof recipe.channels[i].filter!=='string'||!recipe.channels[i].filter||recipe.channels[i].frames?.length!==1))
-    throw new Error('Filter color requires three distinct ordered filters, one camera per channel, and a common fixed display scale.');
-  const paths=new Set(recipe.channels.flatMap(c=>c.frames.flatMap(framePaths)));
-  if(entries.length!==paths.size||entries.some(e=>!paths.has(e.path)))throw new Error('Unconsumed color camera input.');
-  const channels=[];
-  for(const channel of recipe.channels){
-    const paths=new Set(channel.frames.flatMap(framePaths));
-    const map=await prepareShapeCameraMosaic(sourceDirectory,entries.filter(e=>paths.has(e.path)),
-      {frames:channel.frames,photometry:recipe.photometry},width,height,shape);
-    channels.push({channel:channel.channel,filter:channel.filter,...map});
-  }
-  const rgb=Buffer.alloc(width*height*3),missing=new Uint8Array(width*height).fill(1);
-  for(let i=0;i<missing.length;i++)if(channels.every(c=>!c.missing[i])){
-    missing[i]=0;for(let c=0;c<3;c++)rgb[i*3+c]=channels[c].rgb[i*3];
-  }
-  return {rgb,missing,grid:{model:'controlled-shape-color',photometry:recipe.photometry,
-    channels:channels.map(({channel,filter,grid})=>({channel,filter,...grid})),
-    coveragePixels:missing.reduce((sum,v)=>sum+1-v,0),totalPixels:missing.length}};
-}
-
-/** Project source observations using their source mesh and camera solution.
- * All ray intersections, illumination normalization and level matching happen
- * here at preparation time. Unobserved/unstable pixels remain explicit gaps. */
-/** The resolved published photometric model of a camera mosaic, or null when it keeps the historical block. */
-export async function resolveCameraPhotometry(sourceDirectory: string,manifest: SourceManifest | undefined,source: unknown): Promise<ResolvedPhotometry | null>{
-  const p=parseCameraMosaic(source).photometry;
-  // Display settings stay with the mosaic; the model record's strict reader sees only the photometric keys.
-  return 'referenceDegrees' in p?resolvePublishedPhotometry(sourceDirectory,manifest,{model:p.model,referenceDegrees:p.referenceDegrees,limits:p.limits}):null;
-}
-
-export async function prepareShapeCameraMosaic(sourceDirectory: string,entries: readonly CameraEntry[],source: unknown,width: number,height: number,shape: unknown,{retainContributions=false,photometry=null}: {retainContributions?:boolean;photometry?:ResolvedPhotometry|null}={}){
-  const recipe = parseCameraMosaic(source);
-  const p=recipe.photometry;
-  // A published block carries its own angle and gain limits; the historical block is ISIS Lunar-Lambert or observed brightness.
-  const published='referenceDegrees' in p?p:null, legacy='referenceDegrees' in p?null:p;
-  const observed=legacy?.model==='observed';
-  const maximumIncidenceDegrees=published?published.limits.maximumIncidenceDegrees:legacy?legacy.maximumIncidenceDegrees:NaN;
-  const maximumEmissionDegrees=published?published.limits.maximumEmissionDegrees:legacy?legacy.maximumEmissionDegrees:NaN;
-  const maximumGain=published?published.limits.maximumGain:legacy?legacy.maximumGain:NaN;
-  if(!recipe.frames?.length||!shape||(legacy&&!(legacy.weight>=0&&legacy.weight<=1))||!(maximumGain>=1)||
-      !(p.displayMaximum>0)||!(p.gamma>0)||!(p.minimumLevel>0&&p.minimumLevel<=1&&p.maximumLevel>=1)||
-      ![maximumIncidenceDegrees,maximumEmissionDegrees].every(v=>v>0&&v<90)||(published&&!validPublishedPhotometryShape(published,90)))throw new Error('Invalid shape-camera mosaic profile.');
-  if(published&&!photometry)throw new Error('A published camera photometry block needs its resolved model record.');
-  if(!published&&photometry)throw new Error('A resolved photometric model needs a published camera photometry block.');
-  const paths=new Set(entries.map(e=>e.path));
-  for(const f of recipe.frames)if(framePaths(f).some(path=>!paths.has(path)))throw new Error(`Unpinned camera input: ${f.id}`);
-  if(paths.size!==new Set(recipe.frames.flatMap(framePaths)).size)throw new Error('Unconsumed camera input.');
-  const frames=await Promise.all(recipe.frames.map(frame=>resolveCatalogCamera(sourceDirectory,frame)));
-  if(legacy&&legacy.model!==undefined&&(!observed||legacy.maximumGain!==1||legacy.minimumLevel!==1||legacy.maximumLevel!==1))throw new Error('Observed camera brightness must not be photometrically normalized.');
-  const mesh=await loadCameraShape(sourceDirectory,shape),normalAt=smoothNormals(mesh);
-  const points=new Float64Array(width*height*3),normals=new Float32Array(points.length),valid=new Uint8Array(width*height);
-  for(let y=0;y<height;y++)for(let x=0;x<width;x++){
-    const lon=(x+.5)/width*360,lat=90-(y+.5)/height*180,h=mesh.hit(lon,lat);if(!h)continue;
-    const point=vector(lat,-lon).map(v=>v*h.radius),i=y*width+x;
-    points.set(point,i*3);normals.set(normalAt(h.faceId,point),i*3);valid[i]=1;
-  }
-  const values=new Float32Array(width*height),missing=new Uint8Array(values.length).fill(1),statistics=[];
-  // Optional preparation evidence: retain every contributor, including blends.
-  // These weights are never part of the material or runtime transport.
-  const contributions:{id:string;path:string;sha256:string;weights:Float32Array}[]|null=retainContributions?[]:null;
-  const minI=Math.cos(maximumIncidenceDegrees*rad),minE=Math.cos(maximumEmissionDegrees*rad),epsilon=.01;
-  // Coarse coverage first; finer images replace only their reliable interior.
-  for(const frame of frames.sort((a,b)=>b.rangeKm-a.rangeKm)){
-    const weights=contributions&&new Float32Array(values.length);
-    const image=await loadShapeCameraImage(sourceDirectory,frame),camera=controlledShapeCamera(frame);
-    maskBackground(image,frame.backgroundMaximum??p.backgroundMaximum);
-    insetCoverage(image,frame.coverageInsetPixels);
-    const entry=entries.find(e=>e.path===frame.path);
-    if(!entry || entry.width!==image.width||entry.height!==image.height)throw new Error(`Camera dimensions differ from pinned metadata: ${frame.id}`);
-    const samples=[],ratios=[];
-    for(let i=0;i<values.length;i++){
-      if(!valid[i])continue;
-      const point=points.subarray(i*3,i*3+3),n=normals.subarray(i*3,i*3+3),direction=unit(sub(camera.position,point));
-      const mu=dot(n,direction),mu0=dot(n,camera.sun);if(mu<minE||mu0<minI)continue;
-      const xy=camera.project(point),source=xy&&bilinear(image,xy[0],xy[1]);if(!xy||source===null||source===undefined)continue;
-      // Direction points from the surface to the camera and camera.sun to the Sun, so their angle is the phase angle.
-      const gain=photometry?photometry.normalize(Math.acos(Math.min(1,mu0)),Math.acos(Math.min(1,mu)),Math.acos(Math.max(-1,Math.min(1,dot(direction,camera.sun))))):
-        observed||!legacy?1:diskFunctionGain({family:'lunar-lambert',weight:legacy.weight},{mu0,mu,phase:0},NORMAL_GEOMETRY);
-      if(gain===null||gain>maximumGain)continue;
-      const origin=point.map((v,k)=>v+n[k]*epsilon);
-      // Camera occlusion and terrain shadows cannot be inverted into imagery.
-      if(mesh.intersect(Array.from(origin),Array.from(direction),Math.hypot(...sub(camera.position,point)))||mesh.intersect(Array.from(origin),Array.from(camera.sun)))continue;
-      const value=source*gain;
-      if(!missing[i]&&i%16===0&&values[i]>.015&&value>.015)ratios.push(values[i]/value);
-      const weight=Math.min(1,(mu-minE)/.12,(mu0-minI)/.12,xy[0]/8,xy[1]/8,(image.width-xy[0])/8,(image.height-xy[1])/8);
-      samples.push(i,value,weight);
+  const sources=new Map<string,Promise<{frame:CameraFrame;image:CameraImage;sha256:string}>>();
+  const load=(frame:CameraFrame)=>{
+    let pending=sources.get(frame.id);
+    if(!pending){pending=readFile(resolve(sourceDirectory,frame.path)).then(bytes=>({frame,image:decodeCalibratedCamera(bytes),sha256:createHash('sha256').update(bytes).digest('hex')}));sources.set(frame.id,pending);}
+    return pending;
+  };
+  const confirmed=new Set(registration.references.slice(0,1).map(frame=>frame.id)),checks=[];
+  for(const check of registration.checks){
+    const reference=registration.references.find(frame=>frame.id===check.reference);
+    if(!reference||!confirmed.has(reference.id))throw new Error(`Registration reference ${check.reference} is neither the camera seed nor confirmed by an earlier check.`);
+    const targets=[];
+    for(const id of check.targets){
+      const entry=frames.get(id);
+      if(!entry||id===reference.id)throw new Error(`Unknown registration target: ${id}`);
+      targets.push({filter:entry.filter,...await load(entry.frame)});
     }
-    ratios.sort((a,b)=>a-b);
-    const level=ratios.length>=100?Math.max(p.minimumLevel,Math.min(p.maximumLevel,ratios[Math.floor(ratios.length/2)])):1;
-    for(let j=0;j<samples.length;j+=3){const [i,value,weight]=samples.slice(j,j+3);
-      if(weights && contributions){
-        const applied=missing[i]?1:weight;
-        for(const previous of contributions)previous.weights[i]*=1-applied;
-        weights[i]=applied;
-      }
-      values[i]=missing[i]?value*level:values[i]*(1-weight)+value*level*weight;missing[i]=0;}
-    if(weights && contributions){
-      if(typeof entry.expectedSha256!=='string'||!/^[a-f0-9]{64}$/.test(entry.expectedSha256))throw new Error(`Camera contribution requires its pinned source hash: ${frame.id}`);
-      contributions.push({id:frame.id,path:frame.path,sha256:entry.expectedSha256,weights});
+    const {reports}=registerCameraBands({mesh,camera:controlledShapeCamera,reference:await load(reference),targets,checkOnly:true});
+    for(const report of reports){
+      if(!('holdout' in report)||!report.accepted)throw new Error(`Camera ${report.id} is not confirmed by reference ${reference.id}: ${'holdout' in report?JSON.stringify(report.holdout):report.reason}.`);
+      confirmed.add(report.id);
+      checks.push({reference:reference.id,target:report.id,filter:report.filter,fit:report.fit,holdout:report.holdout});
     }
-    statistics.push({id:frame.id,sourceWidth:image.width,sourceHeight:image.height,rasterOffset:image.offset,
-      ...(image.allowFiniteSigned?{allowFiniteSigned:true,maskedSourceSamples:sampleStatistics(image.data,image.missing)}:{}),
-      encoding:image.encoding,...(image.quality?{quality:image.quality}:{}),resolutionMeters:frame.rangeKm*frame.pixelAngleMicroradians*.001,correctedPixels:samples.length/3,level,overlapSamples:ratios.length,
-      // With a published model, the unclamped median overlap ratio measures what level matching would still have to correct.
-      ...(photometry&&ratios.length>=100?{overlapMedianRatio:ratios[Math.floor(ratios.length/2)]}:{})});
   }
-  const rgb=Buffer.alloc(values.length*3);
-  for(let i=0;i<values.length;i++){const v=Math.round(255*Math.max(0,Math.min(1,values[i]/p.displayMaximum))**(1/p.gamma));rgb.fill(v,i*3,i*3+3);}
-  return {rgb,missing,...(contributions?{contributions}:{}),grid:{model:'controlled-shape-camera',photometry:photometry?{...photometry.report,display:{displayMaximum:p.displayMaximum,gamma:p.gamma,minimumLevel:p.minimumLevel,maximumLevel:p.maximumLevel}}:p,frames:statistics,
-    ...(frames.some(f=>f.allowFiniteSigned)?{beforeDisplay:sampleStatistics(values,missing)}:{}),
-    coveragePixels:missing.reduce((sum,v)=>sum+1-v,0),totalPixels:values.length}};
+  const unconfirmed=channels.flatMap(channel=>channel.frames).filter(frame=>!confirmed.has(frame.id));
+  if(unconfirmed.length)throw new Error(`Filter cameras lack a registration check: ${unconfirmed.map(frame=>frame.id).join(', ')}.`);
+  return {method:'The authored cameras are measured against their reference images; preparation refits nothing.',criteria:REGISTRATION_CRITERIA,checks};
 }

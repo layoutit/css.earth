@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "prometheus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Prometheus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "0536fbc838fa8c05117708481068e19787333ec200fee05824d194416b30ebd0"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "40832eedad8d52dd7ca9af0242f2ba4e8da34b56c2701ca1abca726b50053a57"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "f6f34534c263d52fd16e2f2770b3403a8353c25bb69d1c2e352efc243564bb58"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "5368b990e471f2d2423b0b0a2051b8599de45cec2e38a4a65b47ae1b1235b41d"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "6ada6c5f7efc3d568956659c788b0ec507010bcf2dc16ca21a0874c8766c5d81"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "752290028895dc0746f3160a82883458239ec5e05afa63abea0107ed1de66782"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 43.1
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "filter-color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1390511009748.7805,
+        245205508057.90292,
+        41370967053.9886
+      ],
+      "presentationToReference": [
+        0.985259550973335,
+        -2.7755575615628914e-17,
+        -0.17106611942702787,
+        0.1569500960020825,
+        0.3977771559319136,
+        0.9039579645003715,
+        0.06804619446199227,
+        -0.9174820620691818,
+        0.3919137420409275
+      ],
+      "orbitUpReference": [
+        2.7755575615628914e-17,
+        -0.3977771559319136,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 187.3913043478261,
+      "bodyRadiusM": 43100
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/prometheus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8f532005c2a4a31609e9449c1fc2289bcef75429a59e0e622c3dd35a93084939"
+      }
+    },
+    "catalog": {
+      "name": "Prometheus",
+      "classification": "satellite",
+      "color": "#a6a29a",
+      "distanceAu": 9.58,
+      "description": "Potato-shaped moon that shepherds the inner edge of Saturn's F ring.",
+      "systemName": "Solar System",
+      "order": 433,
+      "context": {
+        "order": 42
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "9e063c58d9d8175601bf693834010ad4194a7de9eae4e7952b7c632c7b474935"
+  }
+}

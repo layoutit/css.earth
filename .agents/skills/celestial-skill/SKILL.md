@@ -39,6 +39,10 @@ Explain meaningful model differences beside the dataset and qualify registration
 coverage and picking against the selected mesh. The [implementation map](references/implementation-map.md)
 locates the existing support for alternative models.
 
+For shape-only alternatives, bind each `shapeViews` entry to its selected
+`radialTerrain` source as well. Verify that generated surface provenance names
+that mesh, rather than reusing the default mesh's source for every dataset.
+
 Surface places also belong to a source frame. Use `source/preparation/features.json`
 and its pinned `landmarks` document for mission-defined regions, paper coordinates,
 or explicitly inferred model anatomy. Keep mission names distinct from IAU names.
@@ -49,6 +53,10 @@ entry and expose those places only on that dataset. A shared body name does not
 make coordinates transferable between models. Keep approximate placement visible
 in the caption. Unresolved photograph-to-shape registration cannot establish a
 terrain landmark; neither can a camera direction alone.
+
+For a body explicitly prepared as a reference sphere, published geographic
+landmarks can use that sphere without a triangle hit mesh. This exception does
+not apply to missing irregular-body meshes or Cartesian model coordinates.
 
 Check label discovery with no place selected: selection bypasses the zoom gate.
 Inspect whole-body framing, a closer view and rotation on a sparse asteroid,
@@ -91,12 +99,39 @@ silently validate a different checkout or accumulate servers on new ports.
 
 Inspect available pinned inputs before downloading alternatives. Before
 finalizing a new body's lenses or expanding its views, make a brief source
-survey beyond the first usable texture. Search the relevant mission archives,
-mapping repositories (such as PDS, USGS and LPI/USRA), and papers' linked data
-releases for better-resolution, registered or photometrically corrected imagery
-and useful complementary products, such as elevation, geology or composition.
+survey beyond the first usable texture. Use the
+[source directory](references/source-directory.md) to choose concrete archives
+for the target and product: mission images and geometry, mapped surfaces,
+radar or optical shape models, paper tables, and research-code inputs.
+Search those relevant sources for better-resolution, registered or
+photometrically corrected imagery and useful complementary products, such as
+elevation, geology or composition. The directory also gives the public Git-history
+route when a paper's input model is missing from a repository's current files.
 Follow promising citations to the actual release; a display-texture catalog or
 press-image search alone does not establish what datasets exist.
+
+For photograph-to-shape work, inspect the selected shape release as a bundle
+before deriving a camera or looking for a replacement model. Read its labels,
+file inventory and linked methods for companion image-geometry tables,
+reconstructed pointing, control points, backplanes and detector-quality files.
+Compare their observation IDs and model frame with the image headers; headers
+may retain preliminary geometry superseded by the shape reconstruction.
+Read kernel comments before accepting a body frame: a mission-hosted file can
+retain placeholder pole coordinates or a pre-encounter rotation period. A
+trajectory correction does not also establish the shape's prime meridian or
+rotational phase. Keep these questions separate in the qualification evidence.
+Establish sample/line order, pixel origin, aspect ratio, flips and units, then
+inspect one native-pixel projection before fitting or baking. Follow the
+[source investigation sequence](references/registered-photographic-mosaics.md#inspect-the-release-before-reconstructing-geometry)
+for conflicting or undocumented conventions. Record the selected companion and
+any remaining inference in the existing recipe and body README.
+
+Blank body-fixed convenience fields in an image header do not establish that
+PDS lacks geometry. Inspect the mission SPICE release, including reconstructed
+ephemerides, pointing, instrument and body-orientation kernels. Distinguish
+active kernel assignments from commented or rejected alternatives, and match
+receive time, target emission time and aberration conventions to the image.
+Recover and verify the available archive inputs before declaring a source gap.
 
 Search the relevant papers explicitly as well as the data archives. Inspect
 full text, tables, appendices and supplementary files: a usable radius table,
@@ -108,9 +143,12 @@ Record any transcription or digitization and check it against the published
 table or figure. A paper's availability does not establish image or data reuse
 rights; unresolved access remains unresolved evidence, not proof of absence.
 
-Explain the selected sources and useful alternatives once in the body's README
-or a linked detailed method: source link,
-what it adds, and whether it is included, excluded or unresolved, with a reason.
+Read the object's investigation ledger (`investigations.json`) before searching.
+Reopen an excluded, unresolved or deferred entry only when its `revisitWhen`
+condition is met, and say which. Record each examined source, route, lens or
+frame there once, including failed trials: status, finding, evidence pinned to a
+commit or pull request, and what would reopen it. The body README explains the
+selected sources and links the ledger instead of repeating the survey.
 Compare detail, registration, coverage and reuse terms before choosing. A better
 mosaic can replace a weaker one without becoming a duplicate lens. Missing
 metadata or a failed download leaves a candidate unresolved; it is not evidence
@@ -174,7 +212,7 @@ examples of capabilities, not templates for a new controller or a whole planet.
   Body selection navigates one active scene; standalone moons have their own
   routes, not embedded moon scenes in the parent's package.
 - Register additions in the body's descriptor and individual astronomy record,
-  following the [contributor guide](../../../src/planets/README.md#register-a-body-without-editing-shared-lists).
+  following the [contributor guide](../../../src/objects/README.md#register-a-body-without-editing-shared-lists).
   Keep combined catalogues and navigation outputs generated. Do not edit shared
   body lists or force-add ignored build files to register a destination.
 - Put source interpretation, geometry, materials, scientific content and
@@ -197,6 +235,7 @@ Read the applicable preparation guidance **before** processing those assets:
 
 | Source or issue | Preparation decision |
 | --- | --- |
+| Surface color, calibrated filters or RGB imagery | [Source-backed surface color](../../../docs/color-preparation.md): identify the input quantity and published color meaning; keep measured bands floating until one final display encoding. Registration and calibration do not qualify natural color. Never guess missing visible bands, white balance or an instrument color transform. |
 | Photographed shading or mosaic seams | [Photographic observations](references/surface-preparation.md#photographic-observations): corrected source or justified per-observation normalization, then bounded level matching where useful. Preserve shared lighting controls. |
 | Soft photographic textures | [Photographic observations](references/surface-preparation.md#photographic-observations): trace intermediate resizes, sample registered originals at the delivered footprint, and separate sampling gains from encoding quality. |
 | Multiple photographs registered to a surface | [Registered photographic mosaics](references/registered-photographic-mosaics.md): camera holdouts, quality and visibility checks, deterministic selection, overlap levels, provenance and area coverage. |
@@ -224,6 +263,15 @@ Keep the essential interpretation visible beside the active view: measured or
 modeled, false color, datum and meaningful coverage/date limits. A source note,
 tooltip or image alt text alone does not disclose these to a sighted user.
 
+For slit spectroscopy, a detector column may be wavelength rather than a surface
+coordinate. Preserve the wavelength/quality planes and construct spatial sampling
+from the observation times and slit pointing. Keep an independent numerical fit
+reference, validate the image-to-shape placement separately, and preserve missing
+spectra. A small reprojection residual is relative to the selected reference frame;
+it does not remove inherited absolute shape or pointing uncertainty. The
+[HRI-IR preparer](../../../tools/objects/terrestrial-layers/hrii-facets.mts) is one
+example using native spectra and a dataset-owned source mesh.
+
 ## 4. Inspect the mounted body
 
 Mount the first usable presentation early, before expanding views or polishing.
@@ -237,6 +285,9 @@ them as limitations of the observations.
 Check a few independent numerical anchors for changed scientific quantities or
 positions. Source closure and self-consistent prepared files cannot detect a
 shared wrong interpretation; attractive screenshots cannot validate it either.
+Choose a meaningful reference before using Pixelmatch; it is not a mandatory
+check for every new view. Different datasets and A/A repeats cannot qualify a
+new surface. Follow the [comparison decision rule](../../../docs/provenance/CONTRACT.md#say-what-the-checks-prove).
 For a reported defect, start with the user's actual camera, lens and settings;
 an ambient tab URL alone may not identify the body shown in a screenshot.
 
@@ -265,6 +316,16 @@ camera record. A limb/terminator-only fit, generic sphere, approximate orbit or
 attitude, visual similarity, or same-renderer screenshot does not establish
 image-to-shape registration. Keep an honest model or coarse pointing view, mark
 the photographic lens deferred, and preserve the source gaps.
+
+For image-transfer diagnostics, distinguish detector alignment from surface
+control. A nearly repeated view can correlate closely without constraining the
+mesh frame or depth. Inspect distributed interior detail and a meaningfully
+different viewing direction; retain contradictory results, including reverse
+transfer when it exposes a concrete ambiguity. Keep fitting pixels separate
+from holdouts. Report native pixel scales, search boundaries and broad or weak
+correlation peaks. A correlation score or an arbitrary residual cutoff is not a
+publication gate. Removing a brightness plane for a diagnostic must not change
+the delivered photograph or be described as a photometric calibration.
 
 Treat model transfer as its own gate: a map registered to one shape cannot be
 draped onto another shape until their frame and surface correspondence are
@@ -312,7 +373,7 @@ Use reader feedback to fix confusing wording or structure; do not treat agent
 review or a word count as reader testing.
 
 Finish with the working location/URL, supported views, checked outcomes and
-remaining limitations, including useful unresolved dataset candidates. A working
+remaining limitations, including useful unresolved dataset candidates recorded in the investigation ledger. A working
 first lens does not establish that the body's useful datasets have been covered.
 Complete authorized commit/PR work, respecting the
 user's merge instructions. Source fidelity, visual acceptance and runtime

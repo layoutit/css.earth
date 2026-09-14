@@ -15,7 +15,7 @@ import {
 } from "../src/platform/source-manifest.mts";
 
 export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name">, projectRoot = process.cwd(), authored = false) {
-  const root = resolve(projectRoot, "src", "planets", objectRecord.id);
+  const root = resolve(projectRoot, "src", "objects", objectRecord.id);
   return Object.freeze({
     root,
     requiredFiles: Object.freeze([

@@ -30,7 +30,7 @@ wording. A renderer-wide change warrants broader regression work than a source
 thumbnail change. Add performance traces when observed cost or changed runtime
 behavior justifies them; missing features do not need invented test scenarios.
 
-Use the [body commands](../../../../src/planets/README.md) for the selected package.
+Use the [body commands](../../../../src/objects/README.md) for the selected package.
 Follow the contract's [PR check rules](../../../../docs/provenance/CONTRACT.md#pull-requests)
 for reuse, broader checks and unrelated failures. Inspect runner arguments before
 launching a suite: `pnpm test:planets` runs every body, and `pnpm test:preparation`
@@ -55,6 +55,13 @@ For a like-for-like visual comparison, show reference, browser result and
 absolute diff with matched coordinates/framing. Otherwise show the source and
 result with the comparison's limits; do not fabricate a native oracle or claim
 pixel parity between unrelated views. Mark unbound comparisons `INVALID`.
+
+Choose the reference and the defect the comparison could reveal before running
+Pixelmatch. It is not mandatory for every visual change: different datasets
+(such as Monochrome and filter color) are not fidelity references for each other,
+and A/A repeats prove only capture stability. Follow the
+[comparison decision rule and threshold](../../../../docs/provenance/CONTRACT.md#say-what-the-checks-prove);
+use inspected images and source/registration checks when no matched reference exists.
 
 ## Measure mesh changes
 

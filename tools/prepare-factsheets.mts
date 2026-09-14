@@ -64,7 +64,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   assert.ok(ids.every(id => OBJECTS.some(object => object.id === id)), 'Unregistered factsheet target');
   const results = [];
   for (const object of OBJECTS) if (!ids.length || ids.includes(object.id)) {
-    results.push(await prepareFactsheet(resolve(import.meta.dirname, '../src/planets', object.id), { check }));
+    results.push(await prepareFactsheet(resolve(import.meta.dirname, '../src/objects', object.id), { check }));
   }
   console.log(JSON.stringify({ check, objects: results.length, facts: results.reduce((sum, body) => sum + body.count, 0), results }));
 }

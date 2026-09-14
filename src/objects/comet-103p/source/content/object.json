@@ -1,0 +1,270 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-103p",
+  "displayName": "Hartley 2",
+  "panel": {
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Equivalent diameter",
+        "value": "1.16 ± 0.036 km"
+      },
+      {
+        "id": "mission",
+        "label": "Explored by",
+        "value": "EPOXI"
+      },
+      {
+        "id": "source-epoch",
+        "label": "Shape observations",
+        "value": "4 November 2010"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "constraints",
+    "labels": {
+      "model": "Shape model",
+      "constraints": "Source constraints",
+      "mri": "EPOXI photographs",
+      "temperature": "Color temperature",
+      "spectral-slope": "Infrared slope"
+    },
+    "controls": [
+      {
+        "id": "constraints",
+        "label": "Source constraints",
+        "thumbnail": "/scenes/comet-103p/comet-103p-constraints-thumbnail.webp",
+        "surface": "comet-103p-constraints-surface@2x.webp",
+        "poles": "comet-103p-constraints-poles@2x.webp",
+        "source": {
+          "id": "pds-shape",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab"
+        },
+        "facts": [
+          {
+            "id": "stereo",
+            "label": "Gray",
+            "value": "Stereo measurements"
+          },
+          {
+            "id": "limb",
+            "label": "Blue",
+            "value": "Limb outlines"
+          }
+        ],
+        "notes": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
+        "noData": true
+      },
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/comet-103p/comet-103p-model-thumbnail.webp",
+        "surface": "comet-103p-model-surface@2x.webp",
+        "poles": "comet-103p-model-poles@2x.webp",
+        "source": {
+          "id": "pds-shape",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab"
+        },
+        "facts": [
+          {
+            "id": "diameter",
+            "label": "Equivalent diameter",
+            "value": "1.16 ± 0.036 km"
+          },
+          {
+            "id": "source-epoch",
+            "label": "Shape observations",
+            "value": "4 November 2010"
+          }
+        ],
+        "notes": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
+        "noData": true
+      },
+      {
+        "id": "mri",
+        "label": "EPOXI photographs",
+        "thumbnail": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
+        "surface": "comet-103p-mri-surface@2x.webp",
+        "poles": "comet-103p-mri-poles@2x.webp",
+        "source": {
+          "id": "mv10110413-6000001-001-r-path",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
+        },
+        "facts": [
+          {
+            "id": "observed",
+            "label": "Observed",
+            "value": "4 Nov 2010"
+          },
+          {
+            "id": "scale",
+            "label": "Image sampling",
+            "value": "3.9–8 m/pixel"
+          }
+        ],
+        "notes": "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape.",
+        "noData": true
+      },
+      {
+        "id": "temperature",
+        "label": "Color temperature",
+        "thumbnail": "/scenes/comet-103p/comet-103p-temperature-thumbnail.webp",
+        "surface": "comet-103p-temperature-surface@2x.webp",
+        "poles": "comet-103p-temperature-poles@2x.webp",
+        "source": {
+          "id": "hrii-fields",
+          "path": "../manifest.json",
+          "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
+        },
+        "facts": [
+          {
+            "id": "observed",
+            "label": "Observed",
+            "value": "4 Nov 2010"
+          },
+          {
+            "id": "band",
+            "label": "Thermal fit",
+            "value": "3.1–4.4 µm"
+          },
+          {
+            "id": "sampling",
+            "label": "Image sampling",
+            "value": "29–34 m/pixel"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Color temperature",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "280",
+            "330",
+            "380"
+          ],
+          "meta": "K",
+          "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml",
+          "image": "/scenes/comet-103p/comet-103p-temperature-legend.webp"
+        },
+        "notes": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
+        "noData": true
+      },
+      {
+        "id": "spectral-slope",
+        "label": "Infrared slope",
+        "thumbnail": "/scenes/comet-103p/comet-103p-spectral-slope-thumbnail.webp",
+        "surface": "comet-103p-spectral-slope-surface@2x.webp",
+        "poles": "comet-103p-spectral-slope-poles@2x.webp",
+        "source": {
+          "id": "hrii-fields",
+          "path": "../manifest.json",
+          "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
+        },
+        "facts": [
+          {
+            "id": "observed",
+            "label": "Observed",
+            "value": "4 Nov 2010"
+          },
+          {
+            "id": "band",
+            "label": "Wavelengths",
+            "value": "1.5–2.2 µm"
+          },
+          {
+            "id": "sampling",
+            "label": "Image sampling",
+            "value": "29–34 m/pixel"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Infrared slope",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-1",
+            "2.5",
+            "6"
+          ],
+          "meta": "%/100nm",
+          "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml",
+          "image": "/scenes/comet-103p/comet-103p-spectral-slope-legend.webp"
+        },
+        "notes": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA PDS",
+      "role": "surface",
+      "description": "Farnham & Thomas 2013 shape model and constraint codes",
+      "href": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/dataset.shtml"
+    },
+    {
+      "label": "HRI",
+      "role": "surface",
+      "description": "Restored HRI photographs archived encounter images",
+      "href": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
+    },
+    {
+      "label": "MRI",
+      "role": "surface",
+      "description": "EPOXI photographs archived encounter images",
+      "href": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "HRI-IR",
+      "role": "surface",
+      "description": "Calibrated infrared spectra and thermal fitting method",
+      "href": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/catalog/dataset.cat",
+      "credit": "Farnham & Thomas (2013)"
+    },
+    "physical": {
+      "path": "../reference/dataset.cat",
+      "credit": "Farnham & Thomas (2013)"
+    }
+  }
+}

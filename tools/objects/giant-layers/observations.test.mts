@@ -46,7 +46,7 @@ test('pole products bypass coordinate-preserving lens resizes while retained map
   }finally{await rm(directory,{recursive:true,force:true});}
 });
 test('recipe and source failures are rejected before output writes',async()=>{
-  const config=JSON.parse(await readFile(new URL('../../../src/planets/neptune/source/preparation/observations.json',import.meta.url),'utf8'));
+  const config=JSON.parse(await readFile(new URL('../../../src/objects/neptune/source/preparation/observations.json',import.meta.url),'utf8'));
   for(const mutate of[
  (c: unknown)=>fixtureRecord(c,'lenses',0,'products',0).filename='../escape.webp',
  (c: unknown)=>requireArray(requireArray(fixtureRecord(c,'lenses',1,'decode','color').palette)[0])[0]=Infinity,
@@ -55,7 +55,7 @@ test('recipe and source failures are rejected before output writes',async()=>{
 ]){const copy=structuredClone(config);mutate(copy);assert.throws(()=>parseObservedSurfaceRecipe(copy));}
   const directory=await mkdtemp(join(tmpdir(),'observation-fail-closed-'));try{
     config.sources[0].expectedSha256='0'.repeat(64);
-    await assert.rejects(prepareObservedSurfaces({sourceDirectory:new URL('../../../src/planets/neptune/source/',import.meta.url).pathname,publicDirectory:directory,config,write:true}),/pin mismatch/);
+    await assert.rejects(prepareObservedSurfaces({sourceDirectory:new URL('../../../src/objects/neptune/source/',import.meta.url).pathname,publicDirectory:directory,config,write:true}),/pin mismatch/);
     assert.deepEqual(await readdir(directory),[]);
   }finally{await rm(directory,{recursive:true,force:true});}
 });

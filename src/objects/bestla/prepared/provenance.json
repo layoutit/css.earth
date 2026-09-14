@@ -1,0 +1,438 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "bestla",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "f6f29b7d43e12d90a2641ccdc79a1fb219aa6d86bdd12c6600ddcee2f56b724b"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "612c1044baad5276ed23f33de615d327668b035cbed7dafb0e8d41b1dd4e03a5",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "bestla",
+        "displayName": "Bestla",
+        "publicBase": "/scenes/bestla/",
+        "distanceAu": 9.58,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "model",
+              "consumer": "model-surface",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 160,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Shape model",
+                "modeled": true,
+                "coverage": "Approximate ellipsoid adopting minimum equatorial ratio 1.47:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. The display axis represents a measured southward pole constraint; its exact direction and phase are unknown. The grid marks unmapped terrain."
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 3.3,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": -45,
+            "framingScale": 0.7734907245854383
+          },
+          "mapUrl": "/scenes/bestla/bestla-model-surface@2x.webp",
+          "polesUrl": "/scenes/bestla/bestla-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 82.5,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Saturn-system ephemeris; Partial observed south-ecliptic pole latitude and retrograde sense are preserved. Exact pole longitude and current phase remain unknown; ecliptic south is a representative display convention, not the full measured pole. Author body-page pole cells are blank; the primary paper supplies this partial constraint."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "7400f914c0e35798db91c3f938046fa84bbb5e4e638344b2ca6c871884bcbf4c",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "bestla",
+        "displayName": "Bestla",
+        "panel": {
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Diameter estimate",
+              "value": "7 (+2/−1.25) km"
+            },
+            {
+              "id": "parent",
+              "label": "Orbits",
+              "value": "Saturn"
+            },
+            {
+              "id": "shape",
+              "label": "Minimum equatorial ratio",
+              "value": "1.47:1 · uniform-reflectivity model"
+            },
+            {
+              "id": "rotation",
+              "label": "Observed rotation period",
+              "value": "14.6238 ± 0.0001 h"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "2004"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "scale-assumption",
+              "label": "Size assumption",
+              "value": "Geometric albedo 0.06; brightness-based estimate"
+            },
+            {
+              "id": "orientation-limit",
+              "label": "Orientation",
+              "value": "Southward pole constraint; exact pole and phase unknown"
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape model"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape model",
+              "thumbnail": "/scenes/bestla/bestla-model-thumbnail.webp",
+              "surface": "bestla-model-surface@2x.webp",
+              "poles": "bestla-model-poles@2x.webp",
+              "source": {
+                "id": "lightcurve-approximation",
+                "path": "../manifest.json",
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
+              },
+              "notes": "Approximate ellipsoid adopting minimum equatorial ratio 1.47:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. The display axis represents a measured southward pole constraint; its exact direction and phase are unknown. The grid marks unmapped terrain.",
+              "noData": true
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Denk et al. (2018)",
+            "role": "surface",
+            "description": "Lightcurve shape constraints",
+            "href": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
+          },
+          {
+            "label": "Tilmann Denk",
+            "role": "facts",
+            "description": "Physical estimates and Cassini observations",
+            "href": "https://tilmanndenk.de/outersaturnianmoons/bestla/"
+          },
+          {
+            "label": "NASA PDS",
+            "role": "observations",
+            "description": "Cassini ISS archive",
+            "href": "https://pds-rings.seti.org/cassini/iss/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://tilmanndenk.de/outersaturnianmoons/bestla/",
+            "credit": "Tilmann Denk"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Denk et al. (2018); Denk and Mottola (2019)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "origin": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+      "credit": "Denk et al. (2018) minimum elongation; cssEarth assumed-depth ellipsoid and standard missing-data grid",
+      "license": "MIT authored representation from published scientific parameters",
+      "licenseEvidence": [
+        "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+        "https://tilmanndenk.de/outersaturnianmoons/bestla/"
+      ],
+      "acquisition": "Checked-in data. Formula, lower-limit interpretation, adopted scale and assumptions are in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "coverage": "Approximate ellipsoid adopting minimum equatorial ratio 1.47:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. The display axis represents a measured southward pole constraint; its exact direction and phase are unknown. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 3300
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "denk-2018-irregular-moons",
+            "role": "method",
+            "evidence": "src/planets/bestla/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lightcurve-approximation",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+      "credit": "Denk et al. (2018) minimum elongation; cssEarth assumed-depth ellipsoid and standard missing-data grid",
+      "license": "MIT authored representation from published scientific parameters",
+      "licenseEvidence": [
+        "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+        "https://tilmanndenk.de/outersaturnianmoons/bestla/"
+      ],
+      "acquisition": "Checked-in data. Formula, lower-limit interpretation, adopted scale and assumptions are in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "coverage": "Approximate ellipsoid adopting minimum equatorial ratio 1.47:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. The display axis represents a measured southward pole constraint; its exact direction and phase are unknown. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 3300
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "denk-2018-irregular-moons",
+            "role": "method",
+            "evidence": "src/planets/bestla/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
+      "sha256": "8d8045f97ca67fc05545255bdcd90db27a2d0879ce00e464fd9928bffaca48b0",
+      "bytes": 59703,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "7400f914c0e35798db91c3f938046fa84bbb5e4e638344b2ca6c871884bcbf4c",
+      "bytes": 3418,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape model",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "model-surface",
+        "lightcurve-approximation"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/bestla/bestla-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/bestla/bestla-model-surface@2x.webp",
+          "bytes": 56040,
+          "sha256": "502d6d13528fb67f4f07289dcfdec51b3e5f1679ce9c15c6b529afaf9f171f00",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5480,
+          "sha256": "d9de1e1b8425bcf20eebe34cb30150433fb9bf8789d7017ad068b034d8a8eba1",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:model",
+      "label": "Shape model preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "model"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/model.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

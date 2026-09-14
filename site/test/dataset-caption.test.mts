@@ -5,7 +5,7 @@ import { datasetCaption } from '../dataset-caption.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
 const read = async (id: string): Promise<ProvenanceDocument> => validateObjectProvenance(
-  JSON.parse(await readFile(new URL(`../../src/planets/${id}/prepared/provenance.json`, import.meta.url), 'utf8')), id,
+  JSON.parse(await readFile(new URL(`../../src/objects/${id}/prepared/provenance.json`, import.meta.url), 'utf8')), id,
 );
 const lens = (id: string) => ({ id, label: id, title: `${id} instrument dataset`, summary: 'Brightness records the measured surface response.' });
 

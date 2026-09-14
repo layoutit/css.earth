@@ -23,7 +23,7 @@ export function setupObjectIds(args: readonly string[]) {
 export async function runtimeAssets(root: string, objectIds: readonly string[]): Promise<RuntimeAssetLocation[]> {
   const assets: RuntimeAssetLocation[] = [];
   for (const id of objectIds) {
-    const manifest: unknown = JSON.parse(await readFile(resolve(root, `src/planets/${id}/runtime-assets.json`), "utf8"));
+    const manifest: unknown = JSON.parse(await readFile(resolve(root, `src/objects/${id}/runtime-assets.json`), "utf8"));
     validateRuntimeAssetManifest(id, manifest);
     // The validator above checks filenames, byte counts and hashes for every asset.
     for (const asset of (manifest as RuntimeManifest).assets) {

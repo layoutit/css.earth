@@ -1171,6 +1171,22 @@
   background-image: url("/scenes/charon/charon-poles-albedo@2x.webp") !important;
 }
 
+.planet-stage[data-object-id="charon"][data-lens="water-ice"] .polycss-scene s:not(.charon-polar) {
+  background-image: url("/scenes/charon/charon-water-ice@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="charon"][data-lens="water-ice"] .polycss-scene s.charon-polar {
+  background-image: url("/scenes/charon/charon-poles-water-ice@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="charon"][data-lens="ammonia"] .polycss-scene s:not(.charon-polar) {
+  background-image: url("/scenes/charon/charon-ammonia@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="charon"][data-lens="ammonia"] .polycss-scene s.charon-polar {
+  background-image: url("/scenes/charon/charon-poles-ammonia@2x.webp") !important;
+}
+
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .planet-stage[data-object-id="charon"] .charon-fixed-material {

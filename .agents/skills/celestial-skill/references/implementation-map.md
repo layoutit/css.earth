@@ -7,14 +7,14 @@ current checkout before using them.
 
 ## Start from authored data
 
-Current celestial packages live under `src/planets/<id>/`, including moons and
+Current celestial packages live under `src/objects/<id>/`, including moons and
 dwarf planets. Their `object.json` supplies a `properties.recipe` with pinned
 source references and supported capabilities. Shared preparation produces the
 renderer payload. Do not scaffold a private runtime, preparation script suite,
 or shell for each new body.
 
 ```text
-src/planets/<id>/
+src/objects/<id>/
   object.json                         authored recipe and prepared reference
   README.md                           sources, processing, evidence and known problems
   NOTICE.md                           credits and reuse terms
@@ -85,7 +85,7 @@ Navigation marker appearance comes from each authored package's
 individual `public/navigation/body-<id>.webp` images and their 2x counterparts.
 Builds assemble the ignored `site/prepared-navigation-markers.mjs` from those
 images and recipes; `PlanetNavigationMarker.astro` consumes it. Follow the
-[registration steps](../../../../src/planets/README.md#register-a-body-without-editing-shared-lists)
+[registration steps](../../../../src/objects/README.md#register-a-body-without-editing-shared-lists)
 instead of editing a shared list or atlas position.
 
 ## Choose examples by source needs
@@ -111,6 +111,12 @@ instead of editing a shared list or atlas position.
   its height datum, validity limits and cartographic lighting to
   `tools/objects/terrestrial-layers/scientific-raster.mts`. These values and gap
   rules belong to its dataset.
+- **Spectral absorption maps:** Charon's `source/science/leisa/bands.json`
+  pairs LEISA spectra with wavelength and geometry cubes.
+  `tools/objects/observation/spectral-band-maps.mts` prepares footprint-limited
+  numeric maps; `tools/oracles/fits/charon-leisa.py` independently checks the
+  native samples and arithmetic. Follow the spectral guidance in
+  [scientific faithfulness](scientific-faithfulness.md).
 - **A sourced shape model:** Haumea's `source/preparation/shape-model.json` uses
   `tools/objects/shape-model/`. Inspect both the authored schema and that
   preparer's actual shape support before choosing it for another body; verify
@@ -160,12 +166,25 @@ instead of writing a reader for one body.
 | AMICA Gaskell DDR cubes | `amica-gaskell` | Itokawa `amica` | Image, label, original and flat-field pins | `amica-geo.oracle.test.mts` |
 | L'LORRI images with TAN-SIP distortion | `llorri-camera` | Donaldjohanson `llorri` | Camera pins | `llorri-geo.oracle.test.mts` |
 | New Horizons LORRI calibrated FITS, uncertainty and quality HDUs | `nh-lorri-camera` | Arrokoth `lorri` | Camera pins with a qualified attitude for the exact mesh; native TAN-SIP WCS | `new-horizons-geo.test.mts` (Astropy pixels and WCS) |
-| Arrokoth CA05 registered four-band MVIC cube | `nh-mvic-camera` | Arrokoth `mvic` | Image-space registration to its contemporaneous LORRI camera; one common linear NIR / RED / BLUE scale | `new-horizons-geo.test.mts` (Astropy pixels) |
+| Arrokoth CA05 registered four-band MVIC cube | `nh-mvic-camera` | Arrokoth `mvic` | Image-space registration to its contemporaneous LORRI camera; its native PDS label confirms the bands and data-number quantity, and the recipe declares one `displayRange` | `new-horizons-geo.test.mts` (Astropy pixels) |
 | Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/spice/oracle.test.mts` |
 | Encounter FITS frames with a control network | `encounter-fits` | Wild 2 `navcam`, Tempel 1, Hartley 2 | Frame, label and control pins, level matching | `encounter-fits.oracle.test.mts` |
-| Catalog cameras for a shape model | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame catalog pins and display settings | None yet |
-| Three filters, one catalog camera each | `controlled-shape-color` | Proteus `filter-color` | Filters and frames; no published model | None yet |
+| Published camera controls for a shape model, or the Galileo SSI image catalog | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame pins with the control network's camera fields or a `cameraCatalog`, photometry, transfer limits, level matching | None yet; preparation refuses a frame whose camera puts more than a quarter of its lit shape on sky |
+| Three filters with controlled cameras | `controlled-shape-color` | Proteus and Hyperion `filter-color` | `bands` naming the three filters, and `frames` as band sets naming each set's red, green and blue photographs. Native filters/units and the shared color-display policy are required. No single-filter photometric model | None yet |
 | ISIS2 orthographic image cubes | `isis2-orthographic` | Borrelly `micas` | Cube pins; no Sun geometry, so no photometry | `isis2-qube.oracle.test.mts` |
+
+For `controlled-shape-color`, each band set is one observing triplet. A point is
+colored only where all three of its bands qualify, and band sets compete for a
+point like the frames of a monochrome mosaic. Level matching scales the three
+bands of a set by one gain, so their measured ratios stay. Cameras named in
+`registration` are measured again against their reference images before any
+pixel is sampled. The runtime consumes the same prepared color atlas.
+
+When a photographed patch ends at a straight boundary, trace that edge to the
+detector bounds and validity masks, then inspect adjacent pointings in the
+archive sequence. A real detector edge can still mean the selected mosaic is
+missing available neighboring observations. Qualify those cameras and complete
+filter sets before expanding coverage; do not stretch the existing image.
 
 Routes with Sun geometry accept a published photometric model record (see
 `tools/photometry/README.md`), and [photometric models](photometric-models.md)
@@ -183,13 +202,13 @@ for availability; this reference does not establish merge or deployment status.
 
 | Capability | Owner relative to the repository |
 | --- | --- |
-| Observation pins, quality policy, photometry and transfer limits | `src/planets/comet-67p/source/preparation/terrestrial.json` and `acquisition.json` in the same directory |
+| Observation pins, quality policy, photometry and transfer limits | `src/objects/comet-67p/source/preparation/terrestrial.json` and `acquisition.json` in the same directory |
 | OSIRIS decoding, companion identity and quality flags | `tools/objects/terrestrial-layers/osiris-geo.mts` |
 | Projective fit with a disjoint holdout, footprint sampling, source-mesh correspondence and visibility | `tools/objects/surface-observations/`, described in its [README](../../../../tools/objects/surface-observations/README.md) |
 | Deterministic surface samples, bounded overlap gains and observation selection | `tools/objects/surface-observations/levels.mts` |
 | Atlas baking and lossless observation-index output | `tools/objects/terrestrial-layers/radial-terrain.mts` |
 | Selection/level regressions and prepared provenance checks | `tools/objects/surface-observations/levels.test.mts`, `tests/objects/unit/comet-67p/mosaic.test.mts` |
-| Worked method, limitations and measured evidence | [67P source and evidence account](../../../../src/planets/comet-67p/README.md) |
+| Worked method, limitations and measured evidence | [67P source and evidence account](../../../../src/objects/comet-67p/README.md) |
 
 Inspect the actual recipe/schema before reuse. The OSIRIS decoder and quality
 bits are instrument-specific; source identity, geometry qualification and
@@ -204,11 +223,11 @@ FITS header expectations. `tools/objects/terrestrial-layers/pds4-geometry-cube.m
 validates all of it against the label (offsets, units, special constants) and
 the header, converts units, and recovers nothing else; the camera comes from the
 shared fit above. Dimorphos's DART DRACO view
-(`src/planets/dimorphos/source/preparation/terrestrial.json`) is the first
+(`src/objects/dimorphos/source/preparation/terrestrial.json`) is the first
 instance; a second archive needs a recipe, not a decoder. Frames that share one
 viewing direction use `selection: "recipe-order"`, finest footprint first,
 because lowest-emission selection cannot separate them. The
-[Dimorphos README](../../../../src/planets/dimorphos/README.md) records the
+[Dimorphos README](../../../../src/objects/dimorphos/README.md) records the
 measured residuals, transfer distances and the archive's pixel-scale unit slip.
 
 A cube can contain intercepts for multiple bodies in their respective local

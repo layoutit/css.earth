@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
-const source=new URL('../../../../src/planets/metis/source/',import.meta.url);
+const source=new URL('../../../../src/objects/metis/source/',import.meta.url);
 test('Metis reference shape reproduces the PCK dimensions without invented terrain',async()=>{
  const pck=await readFile(new URL('shape/pck00011.tpc',source),'utf8');
  const axes=required(pck.match(/BODY516_RADII\s*=\s*\(([^)]+)\)/))[1].trim().split(/\s+/).map(Number);
@@ -20,7 +20,7 @@ test('Metis reference shape reproduces the PCK dimensions without invented terra
 });
 test('Metis camera directions agree with source phase, scale and raw image north',async()=>{
  const recipe=JSON.parse((await readFile(new URL('preparation/terrestrial.json',source))).toString('utf8'));
- for(const frame of recipe.raster.mosaics[0].frames){
+ for(const frame of recipe.raster.surfaceObservations.find((lens:{id:string})=>lens.id==='normal').frames){
   const metadata=JSON.parse((await readFile(new URL(`geometry/${frame.id}-opus.json`,source))).toString('utf8'))['Metis Surface Geometry Constraints'];
   const [lat,lon,slat,slon]=[frame.observerLatitude,frame.observerWestLongitude,frame.sunLatitude,frame.sunWestLongitude].map(v=>v*Math.PI/180);
   const phase=Math.acos(Math.sin(lat)*Math.sin(slat)+Math.cos(lat)*Math.cos(slat)*Math.cos(lon-slon))*180/Math.PI;

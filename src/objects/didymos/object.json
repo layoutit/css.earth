@@ -1,0 +1,159 @@
+{
+  "id": "didymos",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Didymos",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "features",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "draco",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "albedo",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 0.365
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "1c9077ace0b62716386b164ff8be071ef0bd04d4f17973e7d397f6168ca203f4"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "8977cdc0c88fdb6f5119838f0f80fed7a72617a9fa2e572bdcfc079a0aca6f14"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "997906495363a7dc18d488baeb9686fa910479d51e6d300afdfcadb3cc0ce324"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "e0d5dcf47be0d58535ff1e587ea79bf49126bd3027dbc24ea9a4269980b4f049"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "9196dce7632ddbb3fdccae7e7c0a91184c0d1d0e655a79f8b0470eecc462aaee"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "c707be7cfed7cee7453b78b4e99e5a40ac76e2e35f4621b08e99924e5483bc02"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "9b08a7c1432b04421a7146cf83df73007d0a812d8d12cbb5dba8346d88152414"
+        }
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        75014299781.10619,
+        -196383452959.9806,
+        -93945311428.15709
+      ],
+      "presentationToReference": [
+        0.32598248071912084,
+        -1.3877787807814457e-17,
+        0.9453758100693118,
+        -0.8673653476527154,
+        0.39777715593191365,
+        0.2990830786086063,
+        -0.37604890101620003,
+        -0.9174820620691817,
+        0.12966838406408177
+      ],
+      "orbitUpReference": [
+        1.3877787807814457e-17,
+        -0.39777715593191365,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 1.5869565217391304,
+      "bodyRadiusM": 365
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/didymos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "1c229a63ebc4eca95c38996bae1ac6e9e0f5fd473125a67e82688ed4b8428bf4"
+      }
+    },
+    "catalog": {
+      "name": "Didymos",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.6427722213006,
+      "description": "Near-Earth asteroid whose moon DART struck.",
+      "systemName": "Solar System",
+      "order": 135,
+      "context": {
+        "order": 56
+      }
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "8174046f0923c506545526439107833563af875286c60cac99c3aa06dc717632"
+  }
+}

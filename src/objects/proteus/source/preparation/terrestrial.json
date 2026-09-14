@@ -1,0 +1,316 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "proteus",
+  "displayName": "Proteus",
+  "publicBase": "/scenes/proteus/",
+  "distanceAu": 30.07,
+  "raster": {
+    "width": 2048,
+    "height": 1024,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 256,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "scientific-surfaces",
+        "path": "shape/n8proteus.tab",
+        "format": "pds-radius-table",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 2522,
+          "expectedFaces": 5040,
+          "stepDegrees": 5,
+          "longitudeDirection": "west-positive"
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -208
+        },
+        "minimum": -35,
+        "maximum": 25,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 208000,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.45
+        },
+        "sampleGrid": {
+          "width": 361,
+          "height": 181
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceObservations": [
+      {
+        "id": "normal",
+        "format": "controlled-shape-camera",
+        "consumer": "voyager-clear-frames",
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+          "attribution": {
+            "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/voyager/iss/"
+          }
+        },
+        "frames": [
+          {
+            "id": "c1137317",
+            "path": "observations/C1137317_GEOMED.IMG",
+            "labelPath": "observations/C1137317_GEOMED.LBL",
+            "observerLatitude": -26.863,
+            "observerWestLongitude": 93.582,
+            "sunLatitude": -23.66,
+            "sunWestLongitude": 116.998,
+            "rangeKm": 868236.818,
+            "northAzimuthDegrees": 13.455091520022258,
+            "center": [
+              480.502,
+              804.866
+            ],
+            "pixelAngleMicroradians": 7.841764329210524,
+            "backgroundOffset": 0.0002,
+            "backgroundMaximum": 0.0017791
+          },
+          {
+            "id": "c1138920",
+            "path": "observations/C1138920_GEOMED.IMG",
+            "labelPath": "observations/C1138920_GEOMED.LBL",
+            "observerLatitude": 3.482,
+            "observerWestLongitude": 333.923,
+            "sunLatitude": -23.659,
+            "sunWestLongitude": 288.621,
+            "rangeKm": 145964.65,
+            "northAzimuthDegrees": 137.38487394947322,
+            "center": [
+              411.728,
+              680
+            ],
+            "pixelAngleMicroradians": 7.841764329210524,
+            "backgroundOffset": 0.0532,
+            "backgroundMaximum": 0.0051891
+          }
+        ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 64,
+          "maximumGain": 1.05,
+          "maximumAngleDegrees": 70
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 75
+        },
+        "photometry": {
+          "model": "lunar-lambert",
+          "weight": 0.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 75,
+          "maximumGain": 2.5
+        },
+        "display": {
+          "displayRange": [
+            0,
+            0.0587
+          ]
+        }
+      },
+      {
+        "id": "filter-color",
+        "format": "controlled-shape-color",
+        "consumer": "voyager-color-frames",
+        "metadata": {
+          "label": "False color",
+          "falseColor": true,
+          "coverage": "Voyager green, blue and violet filters displayed as red, green and blue. Only the common reliable interior is shown. Registration and blur limit interpretation to broad patterns at roughly 40 km or coarser; small colored details are noise or uncertain. This is not true color or a calibrated albedo map.",
+          "attribution": {
+            "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/voyager/iss/"
+          }
+        },
+        "bands": [
+          {
+            "channel": "red",
+            "filter": "GREEN"
+          },
+          {
+            "channel": "green",
+            "filter": "BLUE"
+          },
+          {
+            "channel": "blue",
+            "filter": "VIOLET"
+          }
+        ],
+        "frames": [
+          {
+            "id": "set-1",
+            "red": {
+              "id": "c1137350",
+              "observerLatitude": -27.148,
+              "observerWestLongitude": 99.3,
+              "sunLatitude": -23.66,
+              "sunWestLongitude": 122.857,
+              "rangeKm": 830648.272,
+              "northAzimuthDegrees": 12.96074677895093,
+              "center": [
+                392.7015186610059,
+                375.5350675293314
+              ],
+              "path": "observations/C1137350_GEOMED.IMG",
+              "labelPath": "observations/C1137350_GEOMED.LBL",
+              "pixelAngleMicroradians": 7.841764329210524,
+              "backgroundOffset": -0.0037,
+              "backgroundMaximum": 0.00622692,
+              "coverageInsetPixels": 9,
+              "allowFiniteSigned": true
+            },
+            "green": {
+              "id": "c1137339",
+              "observerLatitude": -27.05,
+              "observerWestLongitude": 97.385,
+              "sunLatitude": -23.66,
+              "sunWestLongitude": 120.904,
+              "rangeKm": 843163.326,
+              "northAzimuthDegrees": 12.960728432154356,
+              "center": [
+                466.5813375784345,
+                591.0689911870909
+              ],
+              "path": "observations/C1137339_GEOMED.IMG",
+              "labelPath": "observations/C1137339_GEOMED.LBL",
+              "pixelAngleMicroradians": 7.841764329210524,
+              "backgroundOffset": -0.0011,
+              "backgroundMaximum": 0.0048925800000000005,
+              "coverageInsetPixels": 9,
+              "allowFiniteSigned": true
+            },
+            "blue": {
+              "id": "c1137328",
+              "observerLatitude": -26.955,
+              "observerWestLongitude": 95.465,
+              "sunLatitude": -23.66,
+              "sunWestLongitude": 118.937,
+              "rangeKm": 855785.645,
+              "northAzimuthDegrees": 13.455111379559261,
+              "center": [
+                473.69993148676184,
+                499.6632419233105
+              ],
+              "path": "observations/C1137328_GEOMED.IMG",
+              "labelPath": "observations/C1137328_GEOMED.LBL",
+              "pixelAngleMicroradians": 7.841764329210524,
+              "backgroundOffset": -0.0017000000000000001,
+              "backgroundMaximum": 0.00533736,
+              "coverageInsetPixels": 9,
+              "allowFiniteSigned": true
+            }
+          }
+        ],
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 60
+        },
+        "photometry": {
+          "model": "lunar-lambert",
+          "weight": 0.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 60,
+          "maximumEmissionDegrees": 60,
+          "maximumGain": 2.5
+        },
+        "display": {
+          "displayRange": [
+            0,
+            0.1
+          ]
+        },
+        "focus": {
+          "longitudeDegrees": 261,
+          "latitudeDegrees": -27,
+          "zoom": 1.1
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 208,
+    "camera": {
+      "initialScenePitchDegrees": -10.970382790652298,
+      "defaultControlYawDegrees": 1.6473023715265165
+    },
+    "mapUrl": "/scenes/proteus/proteus-normal-surface@2x.webp",
+    "polesUrl": "/scenes/proteus/proteus-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/n8proteus.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 2522,
+        "expectedFaces": 5040,
+        "stepDegrees": 5,
+        "longitudeDirection": "west-positive"
+      },
+      "faceBudget": 2000,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 1100,
+        "maximumErrorMeters": 2000,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; the Stooke source origin and west-positive longitude are preserved."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      155,
+      151,
+      146
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

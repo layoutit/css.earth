@@ -13,7 +13,7 @@ export async function loadPlanetBrowserProfile(planet: BrowserProfileObject): Pr
   assert.ok(await authoredObject(planet.id), `${planet.id}: browser profile requires an authored object descriptor`);
   const browserProfile = requireRecord(await import(new URL(`../../tests/objects/browser/${planet.id}/browser-profile.mts`, import.meta.url).href), `${planet.id} browser profile`).browserProfile;
   assert.ok(isObjectBrowserProfile(browserProfile), `${planet.id}: profile must use the common browser-profile factory`);
-  const rawControls = requireRecord(await import(new URL(`../../src/planets/${planet.id}/prepared/controls.json`, import.meta.url).href, {with: {type: 'json'}}), `${planet.id} browser controls`).default;
+  const rawControls = requireRecord(await import(new URL(`../../src/objects/${planet.id}/prepared/controls.json`, import.meta.url).href, {with: {type: 'json'}}), `${planet.id} browser controls`).default;
   const controls = requireBrowserProfileControls(rawControls, planet.id);
   assert.deepEqual(browserProfile.objectControls, controls, `${planet.id}: browser profile must use prepared JSON controls`);
   return validatePlanetBrowserProfile(planet, browserProfile, controls);
@@ -80,7 +80,7 @@ export async function assertRenderedObjectControls(page: BrowserPage, profile: O
     ...remainingSettings.map(({ name, kind }) => ({ name, kind })),
   ];
   const actual = await page.evaluate(() => ({
-    lensPanelCount: document.querySelectorAll('.planet-lenses[aria-label="Datasets"]').length,
+    lensPanelCount: document.querySelectorAll('.planet-lenses nav[aria-label="Datasets"]:has(button[name="lens"])').length,
     settingsPanelCount: document.querySelectorAll(".planet-settings").length,
     lenses: [...document.querySelectorAll<HTMLButtonElement>('.planet-lenses button[name="lens"]')].map((button) => button.value),
     settings: [...document.querySelectorAll(".planet-settings input, .planet-settings button")]

@@ -1,0 +1,1775 @@
+{
+  "schema": "csstethys-authoritative-sources@2",
+  "inputs": [
+    {
+      "credit": "NASA/JPL-Caltech/Space Science Institute",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-iss-2012-tethys",
+      "path": "observations/Tethys_Cassini_mosaic_global_293m.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Tethys_Cassini_mosaic_global_293m.tif",
+      "catalog": "https://astrogeology.usgs.gov/search/map/tethys_cassini_global_mosaic_293m",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 11520,
+      "height": 5760,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 536300,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "GeoTIFF no-data is exactly 0; preserve all other source values. Native image resolution and photographed shading vary.",
+      "expectedBytes": 66401923,
+      "expectedSha256": "40723c3ebfaaa52a657827b37309bc84234811db1cf26a21d086e26aba2b3640",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Tethys_Cassini_mosaic_global_293m.tif"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-iss-2012-tethys",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-iss-2014-tethys-color",
+      "path": "observations/PIA18439.jpg",
+      "origin": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18439.jpg",
+      "catalog": "https://www.jpl.nasa.gov/images/pia18439-color-maps-of-tethys-2014/",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 13467,
+      "height": 6734,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 536300,
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Published global rectangular display map has no separate validity mask. Preserve original imagery, including dark terrain, photographed shading and source seams.",
+      "expectedBytes": 10809057,
+      "expectedSha256": "aa3c249de2432699157638dae11c6f5c5e22c3dda94dd803af8666269f1a3da4",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18439.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-iss-2014-tethys-color",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-spc-2025-tethys-eq",
+      "path": "observations/tethys_eqradius_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqradius_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "width": 2222,
+      "height": 679,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 531000,
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
+      "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
+      "expectedBytes": 6044029,
+      "expectedSha256": "02b967b03598630765ec61545a7886ee8f4abda45fdae500f5af03358ebf5546",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqradius_g.tif"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-eq",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-spc-2025-tethys-np",
+      "path": "observations/tethys_npradius_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npradius_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "projection": {
+        "type": "polar-stereographic",
+        "referenceRadiusMeters": 531000,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
+      "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
+      "expectedBytes": 790789,
+      "expectedSha256": "2770434e4d2473c4febac01cd206ffecde17170f05a082942cd3b841a5724453",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npradius_g.tif"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-np",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-spc-2025-tethys-sp",
+      "path": "observations/tethys_spradius_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spradius_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "projection": {
+        "type": "polar-stereographic",
+        "referenceRadiusMeters": 531000,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
+      "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
+      "expectedBytes": 790789,
+      "expectedSha256": "2f301f3a334665829a2d8dae8342273f2bc77c6ceac1aa88dbc5ed243e869c74",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spradius_g.tif"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-sp",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/tethys_128_o.obj",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_128_o.obj",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "id": "cassini-spc-2025-tethys-q128-shape",
+      "consumers": [
+        "shape"
+      ],
+      "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
+      "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
+      "expectedBytes": 17694840,
+      "expectedSha256": "afa8fe486779512d843e645bcb56d088bd9f948553e0b4d26bc25d5d40c20759",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-q128-shape",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
+          }
+        ]
+      },
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/tethys_eqalbedo_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqalbedo_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "id": "cassini-spc-2025-tethys-tethys_eqalbedo_g",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "relative-albedo",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 2222,
+      "height": 679,
+      "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
+      "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "expectedBytes": 6044029,
+      "expectedSha256": "57e0a23ea94acc47b3eb1d2d62d108a90f4d1a345b38b9b800abf19ebb16b73f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-tethys-eqalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
+          }
+        ]
+      },
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/tethys_npalbedo_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npalbedo_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "id": "cassini-spc-2025-tethys-tethys_npalbedo_g",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "relative-albedo",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
+      "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "expectedBytes": 790789,
+      "expectedSha256": "0047f9474973b09588f5aec6c549d6bc2dd4c70cd06600fab8d3a579aa03c610",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-tethys-npalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
+          }
+        ]
+      },
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/tethys_spalbedo_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spalbedo_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "id": "cassini-spc-2025-tethys-tethys_spalbedo_g",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "relative-albedo",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
+      "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "expectedBytes": 790789,
+      "expectedSha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-tethys-spalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-c1807469104_1_ir-cub",
+      "path": "cassini-ice/native/C1807469104_1_ir.cub",
+      "expectedBytes": 572731,
+      "expectedSha256": "4b6bee3bfa4f19b51025c326cf7ac207bd4ea48bc35075f5ee83f86400c398ae",
+      "origin": "https://vims.univ-nantes.fr/cube/C1807469104_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1807469104-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-n1807469104_1_ir-cub",
+      "path": "cassini-ice/native/N1807469104_1_ir.cub",
+      "expectedBytes": 382352,
+      "expectedSha256": "55355c71d5b6c921ff7c5f4564e14ce28a0d787fb3d8963b28736a66cd6146f0",
+      "origin": "https://vims.univ-nantes.fr/cube/N1807469104_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1807469104-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-v1807469104_1-qub",
+      "path": "cassini-ice/raw/v1807469104_1.qub",
+      "expectedBytes": 252928,
+      "expectedSha256": "be1e54ea809e092370dd8a09f2ed96ee5aa350671241b0e46310c2adf3f4ebdc",
+      "origin": "https://vims.univ-nantes.fr/cube/1807469104_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1807469104-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-c1807456038_1_ir-cub",
+      "path": "cassini-ice/native/C1807456038_1_ir.cub",
+      "expectedBytes": 454887,
+      "expectedSha256": "4f7935c46b21af2bb0036382658b0e205be274b091f36e76084df6b4096733a6",
+      "origin": "https://vims.univ-nantes.fr/cube/C1807456038_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1807456038-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-n1807456038_1_ir-cub",
+      "path": "cassini-ice/native/N1807456038_1_ir.cub",
+      "expectedBytes": 312508,
+      "expectedSha256": "0dcf493ccef3b5e016d69d636053bb9934960262e3ded3512425895aea5b065c",
+      "origin": "https://vims.univ-nantes.fr/cube/N1807456038_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1807456038-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-v1807456038_1-qub",
+      "path": "cassini-ice/raw/v1807456038_1.qub",
+      "expectedBytes": 195584,
+      "expectedSha256": "dc8f4b201a002c900c11314e7c2ad65fdcfab344469f5e14d2f42d0a74d0b732",
+      "origin": "https://vims.univ-nantes.fr/cube/1807456038_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1807456038-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-c1807473499_1_ir-cub",
+      "path": "cassini-ice/native/C1807473499_1_ir.cub",
+      "expectedBytes": 446797,
+      "expectedSha256": "accd3bed917401cd4ca82558bb2d1f8181e646c27f3272cc18a3f69a1c8c220f",
+      "origin": "https://vims.univ-nantes.fr/cube/C1807473499_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1807473499-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-n1807473499_1_ir-cub",
+      "path": "cassini-ice/native/N1807473499_1_ir.cub",
+      "expectedBytes": 158730,
+      "expectedSha256": "4b2b82f80a99bf4488e301203d62bbf9b7c7c29aed549526bf2952927398d76b",
+      "origin": "https://vims.univ-nantes.fr/cube/N1807473499_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1807473499-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-v1807473499_1-qub",
+      "path": "cassini-ice/raw/v1807473499_1.qub",
+      "expectedBytes": 248320,
+      "expectedSha256": "c0e1697c5cc5f72b6fede8ef71a20fb460fe80f083f4587acf2c1f5bd98f62ef",
+      "origin": "https://vims.univ-nantes.fr/cube/1807473499_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1807473499-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-c1818547570_1_ir-cub",
+      "path": "cassini-ice/native/C1818547570_1_ir.cub",
+      "expectedBytes": 695517,
+      "expectedSha256": "4eeddcbdf2405d627bb186a4bcb5fdd0beae2d5e754ea1081ea16c10fa320795",
+      "origin": "https://vims.univ-nantes.fr/cube/C1818547570_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1818547570-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-n1818547570_1_ir-cub",
+      "path": "cassini-ice/native/N1818547570_1_ir.cub",
+      "expectedBytes": 183450,
+      "expectedSha256": "2b45033ab5cf0450c13bc05b019dcd0dba34ba7f2f39deb7c9aad012052c4aa6",
+      "origin": "https://vims.univ-nantes.fr/cube/N1818547570_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1818547570-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-v1818547570_1-qub",
+      "path": "cassini-ice/raw/v1818547570_1.qub",
+      "expectedBytes": 415232,
+      "expectedSha256": "5077a518b0af23d1321cf2d196200793d6d826bade577afe575888d626c72957",
+      "origin": "https://vims.univ-nantes.fr/cube/1818547570_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1818547570-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-c1561668191_1_ir-cub",
+      "path": "cassini-ice/native/C1561668191_1_ir.cub",
+      "expectedBytes": 562527,
+      "expectedSha256": "918a27b9b76de708dcfb5fb7b8db990b825006b4d71317cbcf87f727da9e3ddb",
+      "origin": "https://vims.univ-nantes.fr/cube/C1561668191_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1561668191-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-n1561668191_1_ir-cub",
+      "path": "cassini-ice/native/N1561668191_1_ir.cub",
+      "expectedBytes": 170460,
+      "expectedSha256": "be6f1d27fbd977f750fb79ed0d9a0758d279435aedbd57cd6020e4348b2e61e5",
+      "origin": "https://vims.univ-nantes.fr/cube/N1561668191_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1561668191-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-v1561668191_1-qub",
+      "path": "cassini-ice/raw/v1561668191_1.qub",
+      "expectedBytes": 326144,
+      "expectedSha256": "373d8b8f871879f760a48ba4ca1b3fe405bd93776ac4a6c48383cca952a3599c",
+      "origin": "https://vims.univ-nantes.fr/cube/1561668191_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1561668191-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-c1660463972_1_ir-cub",
+      "path": "cassini-ice/native/C1660463972_1_ir.cub",
+      "expectedBytes": 456069,
+      "expectedSha256": "d85ed15fae82d390ad395d133615a188ecee84e2aaf9a382a71b99760145b6f9",
+      "origin": "https://vims.univ-nantes.fr/cube/C1660463972_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1660463972-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-n1660463972_1_ir-cub",
+      "path": "cassini-ice/native/N1660463972_1_ir.cub",
+      "expectedBytes": 168002,
+      "expectedSha256": "2cbf9230387dd49ceb4cf142a72cabb50eb49d9e4cda26479c17335cb62df875",
+      "origin": "https://vims.univ-nantes.fr/cube/N1660463972_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1660463972-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-v1660463972_1-qub",
+      "path": "cassini-ice/raw/v1660463972_1.qub",
+      "expectedBytes": 248320,
+      "expectedSha256": "8e82a329b1fd42fc243c3f89515466cda86a2f7bd188a61ae74305a207d645a9",
+      "origin": "https://vims.univ-nantes.fr/cube/1660463972_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1660463972-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/28"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-c1719613772_1_ir-cub",
+      "path": "cassini-ice/native/C1719613772_1_ir.cub",
+      "expectedBytes": 735315,
+      "expectedSha256": "7afb633bcb10bfa6def52b2c4fde32d68b7d9c3714c9e70cd922146f922a0042",
+      "origin": "https://vims.univ-nantes.fr/cube/C1719613772_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1719613772-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-n1719613772_1_ir-cub",
+      "path": "cassini-ice/native/N1719613772_1_ir.cub",
+      "expectedBytes": 191248,
+      "expectedSha256": "0b780aa84669bb56b24ebfa9f79fc583e3f3b853c6bbe45c050e7787024411f6",
+      "origin": "https://vims.univ-nantes.fr/cube/N1719613772_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1719613772-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-v1719613772_1-qub",
+      "path": "cassini-ice/raw/v1719613772_1.qub",
+      "expectedBytes": 439808,
+      "expectedSha256": "d599c14f6f0ecbcbe253726b04e9b4a0a03e913b69a554fe050f972fa848d032",
+      "origin": "https://vims.univ-nantes.fr/cube/1719613772_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1719613772-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/31"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-c1719616836_1_ir-cub",
+      "path": "cassini-ice/native/C1719616836_1_ir.cub",
+      "expectedBytes": 730703,
+      "expectedSha256": "f1ab5891ca92a4af956643ff3f05df404dfc5369e82eb1e77c1c2d980323be43",
+      "origin": "https://vims.univ-nantes.fr/cube/C1719616836_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1719616836-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-n1719616836_1_ir-cub",
+      "path": "cassini-ice/native/N1719616836_1_ir.cub",
+      "expectedBytes": 186636,
+      "expectedSha256": "94cded98862d5d1ff665d627bae87ae5a97d8a9ff2993e23fd4831cefdf7b002",
+      "origin": "https://vims.univ-nantes.fr/cube/N1719616836_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1719616836-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-v1719616836_1-qub",
+      "path": "cassini-ice/raw/v1719616836_1.qub",
+      "expectedBytes": 439808,
+      "expectedSha256": "137bcba59f43f125cc03f8b5a692b8b531ca9915bf67817e4bb68a65ce9d3766",
+      "origin": "https://vims.univ-nantes.fr/cube/1719616836_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1719616836-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/34"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-c1606213356_1_ir-cub",
+      "path": "cassini-ice/native/C1606213356_1_ir.cub",
+      "expectedBytes": 621243,
+      "expectedSha256": "76e99719ab53c5c500a5a607c8de6457a6a4d2f6018a5345422499a988227d91",
+      "origin": "https://vims.univ-nantes.fr/cube/C1606213356_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1606213356-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/35"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-n1606213356_1_ir-cub",
+      "path": "cassini-ice/native/N1606213356_1_ir.cub",
+      "expectedBytes": 189176,
+      "expectedSha256": "8af91d04b7a71f66c1fb7053fbad38203255a8f09b0da12271210acaa97cf744",
+      "origin": "https://vims.univ-nantes.fr/cube/N1606213356_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1606213356-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-original-v1606213356_1-qub",
+      "path": "cassini-ice/raw/v1606213356_1.qub",
+      "expectedBytes": 360448,
+      "expectedSha256": "3aceb080e213415421a130236188f80b02a8bd4e03c1eeea2cca8eb8037c91af",
+      "origin": "https://vims.univ-nantes.fr/cube/1606213356_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1606213356-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-ice-absorption",
+      "path": "cassini-ice/tethys-ice-absorption.tif",
+      "expectedBytes": 126710,
+      "expectedSha256": "d55c543360d7612d68271dea75721766cf484c560c4f4d4f34cae1d813864d6a",
+      "origin": "https://vims.univ-nantes.fr/cube/1807469104_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-ice-surfaces.py and cassini-ice/prepare.json.",
+      "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
+      "consumers": [
+        "ice-absorption"
+      ],
+      "lensId": "ice-absorption",
+      "label": "Ice absorption",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 0,
+        "referenceRadiusMeters": 531000,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Supported detector apertures cover approximately 22.59% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-ice-absorption",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tethys-cassini-infrared",
+      "path": "cassini-ice/tethys-infrared-display.tif",
+      "expectedBytes": 117380,
+      "expectedSha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc",
+      "origin": "https://vims.univ-nantes.fr/cube/1807469104_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-ice-surfaces.py and cassini-ice/prepare.json.",
+      "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "infrared",
+      "label": "Infrared",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "referenceRadiusMeters": 531000,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Supported detector apertures cover approximately 14.76% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-infrared",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-tethys-nomenclature-center-pts",
+      "path": "features/TETHYS_nomenclature_center_pts.zip",
+      "expectedBytes": 176019,
+      "expectedSha256": "5592104993c28326db51e3438ad90e98327ab66dbd7ba979f7264561856c9eac",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TETHYS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Tethys on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Tethys centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/TETHYS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "tethys-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1005,
+      "expectedSha256": "00870b543185b5e886cc0e1737d6eebfa786378dc2e434392ba7fe9fd1b99957",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "tethys-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1233,
+      "expectedSha256": "b730d65a323144778eea6b8bad691469c82644094278e8cf22d84f3c1d5d2494",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "tethys-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 153,
+      "expectedSha256": "6c2b8a9f7f7b9959adc5b77ec09fd2b22daa182f043bb119bc362e3cc6b2cbd3",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "n1807429484",
+      "path": "observations/N1807429484_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "35fddf10a0f669e60677b9b9f5668d1a6d9bf9d8ee86ca91055eead5964526f7",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "iss-observation"
+      ],
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "width": 1024,
+      "height": 1024,
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-n1807429484",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@7f457e1b401738a0688a6f6c8bf44f55b2f5cae5#/inputs/44"
+          }
+        ]
+      }
+    },
+    {
+      "id": "n1807429484-label",
+      "path": "observations/N1807429484_1_CALIB.LBL",
+      "expectedBytes": 3845,
+      "expectedSha256": "7ea4077893d9524e32ec252ba0633605a59770293ea0c2e86e0ad2cd06f991c3",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "iss-observation"
+      ],
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-n1807429484-label",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@7f457e1b401738a0688a6f6c8bf44f55b2f5cae5#/inputs/45"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 849,
+      "expectedSha256": "502bc3491551dfea7200823e84b0a182ee417840a267f8a8a66ebc5152bca73b"
+    },
+    {
+      "path": "observations/catalog.json",
+      "expectedBytes": 2201,
+      "expectedSha256": "45d1ae5f7836b02eaa5052ddca756bb78a81443561affc1e91bee9d71ed4c3ae"
+    },
+    {
+      "path": "observations/productdescription.pdf",
+      "expectedBytes": 52481,
+      "expectedSha256": "218932f056d4a1ee3efcd772b8076fe9a09b4af4e68f13bdbf538c83f2da0c7f"
+    },
+    {
+      "path": "observations/tethys_eqradius_g.xml",
+      "expectedBytes": 9211,
+      "expectedSha256": "c21944d7875a9f7d15082ab6505ff55b796e9a34924f8ae4232e7d945913c6f2"
+    },
+    {
+      "path": "observations/tethys_npradius_g.xml",
+      "expectedBytes": 9251,
+      "expectedSha256": "df9904a94d69c2804322227f32d66fbc28dff0a6936c6a6e6769c3c1212c1cba"
+    },
+    {
+      "path": "observations/tethys_spradius_g.xml",
+      "expectedBytes": 9254,
+      "expectedSha256": "b858898852e1e9bdcef72a310e5c0cfb135355e94b05fe784e17dcbf758ea588"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 14937,
+      "expectedSha256": "3485dda4743917fd5bb1dd690461767e3cff893da603819a60dc8ecf118e94b9"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1928,
+      "expectedSha256": "7301216b47f25c99c212ba352971718e320b7d8220f7fe8d05d49505031e68c1"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 14655,
+      "expectedSha256": "7105046ef5d72b851580646b805bec1dcc7dc2c38f6ba2562a908ea78957aeba"
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 15788,
+      "expectedSha256": "adda5c50d0f8b79493a536b3be4c9f7b8ea5d82d1a1883fd18a1125193633b18",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3090,
+      "expectedSha256": "ea44513853afbd33861f7cbda1c4e01d01f0ed5a14dbd4e782b4641f644de2c4"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1086,
+      "expectedSha256": "fa3c920f3b9d68eabc74fb1c1f048021f7e79e3f705e7c1e47b698127e01698f"
+    },
+    {
+      "path": "science/b2-intake/tethys_128_o.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_128_o.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9398,
+      "expectedSha256": "f4c61f4dc76e12f9b155d7aea41335b462041713a73e5c57309474dd974ff1b7"
+    },
+    {
+      "path": "science/b2-intake/tethys_512_o.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_512_o.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9404,
+      "expectedSha256": "953842f282fc399253a7e2dfa8c9cc062c20366180e0081dc536e843f423d575"
+    },
+    {
+      "path": "science/b2-intake/tethys_sigma_c.cub",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_sigma_c.cub",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 326142,
+      "expectedSha256": "6c517f07d3db2778022bbf0b67891951b751b7058863a3354c12d61046b7819f"
+    },
+    {
+      "path": "science/b2-intake/tethys_sigma_c.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_sigma_c.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 7257,
+      "expectedSha256": "6910aed066e1c31ab523b0e90e3bd648abbc36dc17ef67a5bf4e1c3548ef0359"
+    },
+    {
+      "path": "science/b2-intake/tethys_numimg_c.cub",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_numimg_c.cub",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 326361,
+      "expectedSha256": "5b04811cfd5af475721b2259df6c443f85e0c14155510fc32f8c15b6c7a53395"
+    },
+    {
+      "path": "science/b2-intake/tethys_numimg_c.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_numimg_c.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 7314,
+      "expectedSha256": "e2769a6341887bf98a6f7f6e0ab3f85683b46dc54989b8e0f2ff5fb90b890108"
+    },
+    {
+      "path": "science/b2-intake/tethys_eqalbedo_g.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqalbedo_g.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9218,
+      "expectedSha256": "24cb5b3bfac749f6a3f691cad484a0a0a76dac74c738823fdc10f17ae9df2f32"
+    },
+    {
+      "path": "science/b2-intake/tethys_npalbedo_g.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npalbedo_g.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9258,
+      "expectedSha256": "c9201bbc370acd5c0ac2287228f3090a5997cb30ffd4e8a875e908ed7a15d56f"
+    },
+    {
+      "path": "science/b2-intake/tethys_spalbedo_g.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spalbedo_g.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9261,
+      "expectedSha256": "67f912f8459cec5504d76d87d7f1232bab88349a9807f5315c752772cc808d3a"
+    },
+    {
+      "path": "science/b2-intake/bundle_description.txt",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/bundle_description.txt",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 5767,
+      "expectedSha256": "d8b44f242e4adec72f9449ef84f5c4c5aeef101e825aa75511c3bf1b566cbd59"
+    },
+    {
+      "path": "science/b2-intake/tethyskernellist.txt",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethyskernellist.txt",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 22949,
+      "expectedSha256": "68c07a665d2211a87965f1c25cea0c8ab449eaed00886a125404fb01528ab697"
+    },
+    {
+      "path": "science/b2-intake/tethysimagelist.txt",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysimagelist.txt",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 31070,
+      "expectedSha256": "4120269663e920e577f76403bfb9941ada9129c533ef99d13fd26e9d18ca9abf"
+    },
+    {
+      "path": "science/b2-intake/tethysshapeassessment.pdf",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysshapeassessment.pdf",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 14224166,
+      "expectedSha256": "34dd9e83930f96c7e6b76025acd9bab6de25713439a4f87a981c6dc3a99595e4"
+    },
+    {
+      "path": "validation/b2-scalar-anchors.json",
+      "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending.",
+      "expectedBytes": 3160,
+      "expectedSha256": "539a080366a26bba704c14b305a889dcf4dbc90c853bbf9ba34fb6187e33aa02"
+    },
+    {
+      "path": "cassini-ice/evidence/download-receipts.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 8556,
+      "expectedSha256": "f2af477511b404a8c3448fe068979fffe5146cc51fee39d7eb3a2307469d7449"
+    },
+    {
+      "path": "cassini-ice/evidence/registration.md",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 971,
+      "expectedSha256": "942fdb6592821e810983962c922ee447ba3d9effcc1b4e2c7357c6efa837bd74"
+    },
+    {
+      "path": "cassini-ice/preparation-receipt.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 100999,
+      "expectedSha256": "215b540b5660bd30501659d4c6a9aca0978dc3e5f2643565a0d2b8410d30f48a"
+    },
+    {
+      "path": "cassini-ice/prepare.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 7768,
+      "expectedSha256": "946b2641db5a3dee9508d6c0273e6dadb910498a02ff48af10fe6ea3677e44e1"
+    },
+    {
+      "path": "cassini-ice/tethys-ice-absorption-observation.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 17720,
+      "expectedSha256": "3d90aec662312d48ea563efbe9768d15736740606c82da2f5930b4a9fc7a40da"
+    },
+    {
+      "path": "cassini-ice/tethys-ice-absorption-source-pixel.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 33870,
+      "expectedSha256": "b48993134b1d17199d344188747f769c2eb59f4cd947cdf78e4a5243339083ed"
+    },
+    {
+      "path": "cassini-ice/tethys-infrared-if-observation.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 13081,
+      "expectedSha256": "1cc530c1f92226156ab280a24082385732291001fb166e94a2bfef7802f449b6"
+    },
+    {
+      "path": "cassini-ice/tethys-infrared-if-source-pixel.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 22505,
+      "expectedSha256": "9efeb7b820abed78404ecc4cdbdcfe53448fb6203af3974b7355a3550493caf8"
+    },
+    {
+      "path": "cassini-ice/tethys-infrared-if.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 216690,
+      "expectedSha256": "b18ecacb19d5c3d873f59bbfee385e609a94746fdddb93aeb5c601ea2df1cce6"
+    },
+    {
+      "id": "tethys-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 3263,
+      "expectedSha256": "c4d4c76caec33ebcbfedf4c5f93aff7b16596b22d2cc0cc5d43cc6bfd4f22ff0",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 6 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts tethys: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

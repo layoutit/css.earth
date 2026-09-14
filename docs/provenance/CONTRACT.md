@@ -47,7 +47,7 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | `site/prepared-sources.json` and `site/prepared-machines.json` | Ignored source usage and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
 | Test fixtures under `tests/`; processing code under `tools/` | Inputs and implementation used by executable checks and preparation |
-| Root README and [body contributor guide](../../src/planets/README.md) | Shared installation, controls, commands and contribution workflow |
+| Root README and [body contributor guide](../../src/objects/README.md) | Shared installation, controls, commands and contribution workflow |
 
 Every file under `source/` needs a manifest entry. Body packages contain data,
 not private executables. Shared astronomy, artwork and sky sources keep their
@@ -65,16 +65,30 @@ and short paragraphs.
 Keep observation dates, measured-versus-modeled meaning, false color, coverage
 limits, failures and unresolved problems beside their claims, outside collapsed methods.
 
-Put long calculations, decoding steps and source surveys in labeled `<details>`
+Put long calculations and decoding steps in labeled `<details>`
 sections below the overview, using short paragraphs or steps. Link existing
 method notes instead of copying them. Do not create a second account, separate
 SOURCE summary, EVIDENCE index or body USAGE guide.
 
+### Investigation ledger
+
+Record every source, route, lens or frame examined for an object in its
+`investigations.json`, beside the README, including trials that failed. Each
+entry says what was examined, its status (`included`, `excluded`, `unresolved`
+or `deferred`), the finding, evidence links and the commit it was checked at.
+An entry that is not included names what would reopen it in `revisitWhen`.
+Link repository evidence at a commit or pull request; a branch link moves.
+
+The README links the ledger instead of repeating a source survey. Read the
+ledger before investigating an object. Reopen an excluded, unresolved or
+deferred entry only when its `revisitWhen` condition is met, and say which.
+`node tools/report-investigations.mts` lists every open entry across objects.
+
 ### Examples
 
-Examples: [67P](../../src/planets/comet-67p/README.md),
-[Earth](../../src/planets/earth/README.md), [Sun](../../src/planets/sun/README.md)
-and [Rhea](../../src/planets/rhea/README.md).
+Examples: [67P](../../src/objects/comet-67p/README.md),
+[Earth](../../src/objects/earth/README.md), [Sun](../../src/objects/sun/README.md)
+and [Rhea](../../src/objects/rhea/README.md).
 
 ## Identify and explain the sources
 
@@ -122,6 +136,14 @@ GitHub language classification does not determine what belongs in Git.
 
 ### Interpretation
 
+For color surfaces, follow [Source-backed surface color](../color-preparation.md).
+Keep source calibration, geometric registration and display interpretation
+separate. A natural-color claim requires an applicable sourced color method;
+calibrated bands, three RGB channels, or an sRGB encoding cannot establish it.
+Never invent missing visible measurements or tune an undocumented white balance.
+Measured-band composition retains floating values until its final declared
+display encoding; publisher-prepared RGB does not receive that transfer twice.
+
 Explain the following where relevant:
 
 - Observations, derived measurements, models or illustrations; the provider's
@@ -130,7 +152,7 @@ Explain the following where relevant:
 - Units, coordinate frame, datum, orientation, epoch, observation dates, resolution
   and coverage; valid/missing data, upstream corrections and our processing.
 - Source uncertainty, display simplification and visual enhancement. Keep limits
-  affecting viewers in the product's dataset description too.
+  affecting viewers in the dataset's reader text in `text.json` too.
 
 Link generated processing records. For facts outside them, such as factsheet
 values or orbital assumptions, name the source field/table and show any calculation.
@@ -179,8 +201,24 @@ comparisons, retain reference, result and diff with matching capture settings.
 Disclose different sources or framing and inspect affected views, boundaries and
 lighting before making comparison claims.
 
-**Use Pixelmatch with threshold `0.1` for matched visual evidence.** This cssEarth
-requirement makes pixel changes inspectable and reproducible. Compare equal-sized, unscaled
+**Choose a meaningful comparison before choosing a tool.** State the reference,
+what visual content should agree, and what defect a difference could reveal.
+Pixelmatch is conditional on that comparison; it is not a required deliverable
+for every visual PR. For example, checking that an existing Monochrome view is
+unchanged after adding a lens is meaningful. Comparing Monochrome with false
+color, two different filters, or a photograph with an elevation map is not a
+fidelity check: those datasets are supposed to look different. Do not run such
+comparisons merely to produce a mismatch count.
+
+If no meaningful matched reference exists, retain inspected source and browser
+images, explain their relationship, and use the relevant calibration, coordinate
+or registration checks. An A/A repeat establishes capture stability only; it
+does not qualify a new surface or substitute for independent source evidence.
+Run it when capture noise could affect an actual matched comparison, not as a
+standalone delivery gate.
+
+**When using Pixelmatch for matched visual evidence, use threshold `0.1`.** This
+cssEarth requirement makes pixel changes inspectable and reproducible. Compare equal-sized, unscaled
 captures or identical documented crops. Retain the input images, generated diff,
 input hashes, Pixelmatch version, threshold, anti-aliasing setting, mismatch count
 and compared pixel count beside the owning evidence. Choose settings before

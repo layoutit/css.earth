@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { loadPdsPlateShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { preparePdsConstraintMap } from '../../../../tools/objects/terrestrial-layers/pds-constraint-map.mts';
-const root = resolve(import.meta.dirname, '../../../../src/planets/comet-81p');
+const root = resolve(import.meta.dirname, '../../../../src/objects/comet-81p');
 const json = async (path: string) => JSON.parse((await readFile(resolve(root, path))).toString('utf8'));
 
 test('Wild 2 coverage material reproduces from plate flags and registers every source plate center', async () => {

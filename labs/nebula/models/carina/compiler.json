@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-nebula-compiler@1",
+  "id": "carina",
+  "label": "Carina",
+  "observationRecipe": "labs/nebula/models/carina/observations.json",
+  "observationCatalogue": ".local/nebula-lab/observations/carina/observations.json",
+  "structureRecipe": "labs/nebula/models/carina/observation-structures.json",
+  "structureCatalogue": ".local/nebula-lab/observations/carina/structures/catalogue.json",
+  "defaultSourceId": "eso-optical",
+  "maximumStars": 650,
+  "interpretation": "Experimental relative display-emission fit to registered optical and near-infrared outreach images on an evidence-linked authored single height surface. Observed sky anchors and published local topology motivate deformations; all depth, curvature and thickness remain authored and the wide background is unconstrained. No velocities, extinction or gas-density measurements are fitted. This solver cannot represent overlapping shells or foreground absorption. Shared geometry and conditional compact lights remain identical across image lenses.",
+  "depthRecipe": "labs/nebula/models/carina/depth-model.json"
+}

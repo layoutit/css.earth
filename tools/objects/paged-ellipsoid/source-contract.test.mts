@@ -5,7 +5,7 @@ import test from 'node:test';
 import {parsePagedProfile, parsePagedLensBindings, parsePagedCelestial} from './profile-source.mts';
 import {parseInteriorSource, parseAtmosphereResponse} from './source-contract.mts';
 import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, readRefreshDescriptor} from './refresh-source.mts';
-const sourceRoot = new URL('../../../src/planets/earth/source/', import.meta.url);
+const sourceRoot = new URL('../../../src/objects/earth/source/', import.meta.url);
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, sourceRoot), 'utf8'));
 
 test('Earth preparation boundaries preserve every source and provenance field', async () => {

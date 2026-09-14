@@ -31,7 +31,7 @@ try {
     const page = await createTestPage(browser, { viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr });
     page.on('pageerror', error => report.errors.push(error.message));
     // Match the immutable emitted bank by bytes, independent of Astro's filename hash.
-    const expected = await readFile(`src/planets/${replacement}/prepared/object.json`);
+    const expected = await readFile(`src/objects/${replacement}/prepared/object.json`);
     const hash = createHash('sha256').update(expected).digest('hex');
     const filenames = (await readdir(resolve(buildDirectory, '_astro'))).filter(name => name.startsWith('object.') && name.endsWith('.json'));
     let bank;

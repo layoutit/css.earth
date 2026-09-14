@@ -1,0 +1,154 @@
+{
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "8cef4ec690056f3ead5769749f82ce7e44626a5076adfb57b707428072e8ab42"
+  },
+  "id": "ida",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ida",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "features",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "calibrated",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 16
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "83f4bd75a42a1babad4a919dd981957c16b3f67c2e26433f0d9e30ea01c35d51"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "e9f1952a6c593ecbad2d0a8a544307ac64f75334db061d56ea72d77a31945ba5"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "e18ce2bd9cfb261a76356db3c65174fe7780f2e613b12be9eacbf168a622f6d9"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "9d069652a17dc41f374dce86b05979f8b4914c343742dee33bc3e0cdf370faa9"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "7563e9e8c7ee415a0260131e9f831014f3c103ccebb1000c1f5ac0e16b9a05df"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "a15f6558ccf59374ea03b736cd6319f4fbfad7429e9624425aa5ded82fca61f3"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "5c97f6239a9bb0f080ee6d2a514130e8a177c89de30bcc0e9f13626fea968e20"
+        }
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -360929403692.4176,
+        200015536271.1016,
+        85869094625.52826
+      ],
+      "presentationToReference": [
+        -0.8563291013563339,
+        -1.3877787807814457e-17,
+        -0.5164305085587544,
+        0.4738157279079223,
+        0.39777715593191376,
+        -0.7856665897222586,
+        0.2054242589309732,
+        -0.9174820620691818,
+        -0.340628154479254
+      ],
+      "orbitUpReference": [
+        1.3877787807814457e-17,
+        -0.39777715593191376,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 69.56521739130434,
+      "bodyRadiusM": 16000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ida-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5a758116ec374299dc1fb8b6aa674fe7c8b83f120870ca4159ec1fb84db7905b"
+      }
+    },
+    "catalog": {
+      "name": "Ida",
+      "classification": "asteroid",
+      "color": "#a49c8d",
+      "distanceAu": 2.861,
+      "description": "Asteroid with a tiny moon, Dactyl.",
+      "systemName": "Solar System",
+      "order": 130,
+      "context": {
+        "order": 47
+      }
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
+}

@@ -7,7 +7,7 @@ import { validateSurfaceObservation, loadSurfaceObservation } from './index.mts'
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
-const policy = { minimumPairs: 64, maximumLogMad: .25, maximumGain: 1.35 };
+const policy = { minimumPairs: 64, maximumGain: 1.35 };
 const sample = (radiance: number, maximumEmissionDegrees = 30) => ({ radiance, maximumEmissionDegrees });
 
 test('calibration withholds steep-angle pairs without changing displayed source eligibility', () => {
@@ -19,7 +19,9 @@ test('calibration withholds steep-angle pairs without changing displayed source 
   assert.ok(Math.abs(fit.gains[1] - 1.1) < 1e-12);
   assert.deepEqual([a, b], before);
   assert.equal(selectObservation([a[150], b[150]]), 0);
-  assert.throws(() => fitObservationLevels([a.map(s => ({ ...s, maximumIncidenceDegrees: NaN })), b], { ...policy, maximumAngleDegrees: 70 }), /connect/);
+  // With every pair withheld, each frame keeps its own level.
+  const unlevelled = fitObservationLevels([a.map(s => ({ ...s, maximumIncidenceDegrees: NaN })), b], { ...policy, maximumAngleDegrees: 70 });
+  assert.deepEqual(unlevelled.gains, [1, 1]); assert.deepEqual(unlevelled.groups, [[0], [1]]);
 });
 
 test('robust overlap fit recovers connected source scales despite missing pairs and outliers', () => {
@@ -32,7 +34,7 @@ test('robust overlap fit recovers connected source scales despite missing pairs 
 });
 
 test('archived-camera mosaics bind a separate camera to each image', async () => {
-  const config = JSON.parse(await readFile(new URL('../../../src/planets/steins/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
+  const config = JSON.parse(await readFile(new URL('../../../src/objects/steins/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
   const recipe = config.raster.surfaceObservations[0], shape = config.geometry.radialTerrain;
   validateSurfaceObservation(recipe, shape);
   for (const alter of [(r: unknown) => fixtureRecord(r,"frames",1)["cameraPath"] = fixtureRecord(r,"frames",0)["cameraPath"],
@@ -44,7 +46,7 @@ test('archived-camera mosaics bind a separate camera to each image', async () =>
 });
 
 test('each archived-camera mosaic frame verifies its original source closure before decoding', async () => {
-  const sourceDirectory = resolve('src/planets/steins/source');
+  const sourceDirectory = resolve('src/objects/steins/source');
   const config = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json'), 'utf8'));
   const source = await createSourceManifest({ planetId: 'steins', planetName: 'Steins', sourceRoot: sourceDirectory });
   const drift = new Error('Original camera kernel bytes changed');
@@ -62,8 +64,13 @@ test('each archived-camera mosaic frame verifies its original source closure bef
   assert.equal(checked, true);
 });
 
-test('level matching rejects disconnected overlaps and excessive brightness gains', () => {
-  assert.throws(() => fitObservationLevels([Array(100).fill(sample(1)), Array(100).fill({ reason: 'missing' })], policy), /connect/);
+test('level matching keeps unconnected frames at their own level, accepts precise overlaps and rejects excessive gains', () => {
+  const unconnected = fitObservationLevels([Array(100).fill(sample(1)), Array(100).fill({ reason: 'missing' })], policy);
+  assert.deepEqual(unconnected.gains, [1, 1]); assert.deepEqual(unconnected.groups, [[0], [1]]);
+  // Overlaps that scatter by a log spread of 0.4 around one 1.2 level ratio: many samples know the level, few do not.
+  const scattered = (n: number) => [Array.from({ length: n }, () => sample(1)), Array.from({ length: n }, (_, i) => sample(Math.exp([-.4, 0, .4][i % 3]) / 1.2))];
+  assert.ok(Math.abs(fitObservationLevels(scattered(999), policy).gains[1] - 1.2) < 1e-12);
+  assert.deepEqual(fitObservationLevels(scattered(99), policy).groups, [[0], [1]]);
   assert.throws(() => fitObservationLevels([Array(100).fill(sample(1)), Array(100).fill(sample(.1))], policy), /budget/);
 });
 
@@ -81,7 +88,7 @@ test('overlap points stay inside their own triangle and include both shape lobes
 });
 
 test('the authored mosaic binds distinct images and rejects ambiguous frame policies', async () => {
-  const config = JSON.parse(await readFile(new URL('../../../src/planets/comet-67p/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
+  const config = JSON.parse(await readFile(new URL('../../../src/objects/comet-67p/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
   const recipe = config.raster.surfaceObservations[0], shape = config.geometry.radialTerrain;
   validateSurfaceObservation(recipe, shape);
   for (const alter of [(r: unknown) => fixtureRecord(r,"frames",1)["id"] = fixtureRecord(r,"frames",0)["id"], (r: unknown) => fixtureRecord(r,"frames",1)["qualityPath"] = fixtureRecord(r,"frames",0)["qualityPath"],

@@ -192,7 +192,7 @@ test('an operation must resolve inside its pinned recipe', async t => {
 });
 
 test('Saturn binds its actual base material and all contributing recipe identities', async () => {
-  const document = await prepareObjectProvenance({ objectDirectory: resolve('src/planets/saturn'),
+  const document = await prepareObjectProvenance({ objectDirectory: resolve('src/objects/saturn'),
     publicDirectory: resolve('public/scenes/saturn'), basis: 'recovered', write: false });
   for (const id of ['normal', 'ultraviolet', 'methane', 'thermal', 'cross-section']) {
     const sources = productSourceIds(document, id);
@@ -205,7 +205,7 @@ test('Saturn binds its actual base material and all contributing recipe identiti
 });
 
 test('Earth globe provenance excludes the retired local noise dataset', async () => {
-  const document = await prepareObjectProvenance({ objectDirectory: resolve('src/planets/earth'),
+  const document = await prepareObjectProvenance({ objectDirectory: resolve('src/objects/earth'),
     publicDirectory: resolve('public/scenes/earth'), basis: 'recovered', write: false });
   assert.ok(document.products.some(product => product.id === 'normal'));
   assert.ok(!document.products.some(product => product.id === 'buenos-aires-noise'));
@@ -223,7 +223,7 @@ test('Earth globe provenance excludes the retired local noise dataset', async ()
 
 test('spacecraft photographs bind their image, registration, and source-shape dependencies', async () => {
   for (const id of ['itokawa', 'donaldjohanson', 'comet-81p', 'comet-103p', 'comet-9p']) {
-    const objectDirectory = resolve('src/planets', id);
+    const objectDirectory = resolve('src/objects', id);
     const descriptor = await read(resolve(objectDirectory, 'object.json'));
     const recipeSources = requireArray(requireRecord(requireRecord(descriptor.properties, `${id} properties`).recipe, `${id} recipe`).sources, `${id} recipe sources`);
     const reference = requireEntry(requireValue(recipeSources.map(source => requireEntry(source, `${id} recipe source`)).find(source => source.id === 'terrestrial'), `${id} terrestrial recipe`), `${id} terrestrial recipe`);
@@ -237,7 +237,7 @@ test('spacecraft photographs bind their image, registration, and source-shape de
       assert.ok(product, id + '/' + observation.id);
       const sourceIds = new Set(productSourceIds(document, product.id));
       const paths = new Set(document.sources.filter(source => sourceIds.has(source.id)).map(source => source.path));
-      const frames = observation.frames === undefined ? [observation] : requireArray(observation.frames, `${id} observation frames`).map(frame => requireEntry(frame, `${id} observation frame`));
+      const frames = requireArray(observation.frames, `${id} observation frames`).map(frame => requireEntry(frame, `${id} observation frame`));
       for (const frame of frames) {
         for (const key of ['path', 'labelPath', 'controlPath', 'cameraPath', 'originalPath']) {
           if (typeof frame[key] === 'string') assert.ok(paths.has(frame[key]), id + ': ' + frame[key]);
@@ -250,7 +250,7 @@ test('spacecraft photographs bind their image, registration, and source-shape de
 });
 
 test('Mercury coverage completion binds all three maps; previews retain their parent lineage', async () => {
-  const objectDirectory = resolve('src/planets/mercury');
+  const objectDirectory = resolve('src/objects/mercury');
   const document = await prepareObjectProvenance({ objectDirectory, publicDirectory: resolve('public/scenes/mercury'), basis: 'recovered', write: false });
   assert.deepEqual(new Set(productSourceIds(document, 'enhanced')), new Set([
     'usgs-messenger-enhanced-global-z3', 'usgs-messenger-bdr-global-z3', 'usgs-messenger-topography-z3',

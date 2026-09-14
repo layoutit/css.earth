@@ -64,7 +64,9 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             throw new TypeError('falseColor must be boolean.');
         if (surface.resolutionScale !== undefined) {
             finite(surface.resolutionScale, 'surface.resolutionScale', true);
-            if (!Number.isInteger(surface.resolutionScale) || recipe.resample !== 'density-before-pack' || recipe.polesCombined || thumbnail.crop !== undefined || recipe.emission !== undefined)
+            const width = Number(recipe.width) * surface.resolutionScale;
+            const height = Number(recipe.height) * surface.resolutionScale;
+            if (![width, height, height / Number(recipe.latitudeBands) / 4].every(n => Number.isSafeInteger(n) && n > 0) || recipe.resample !== 'density-before-pack' || recipe.polesCombined || thumbnail.crop !== undefined || recipe.emission !== undefined)
                 throw new TypeError('Surface resolution scaling needs integer density-before-pack output with separate poles and an uncropped thumbnail.');
         }
         if (surface.encoding !== undefined) {
@@ -97,6 +99,9 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             if (surface.coverage !== undefined || surface.sharpen !== undefined || surface.exposure !== undefined) throw new TypeError('surface.science replaces coverage, sharpen and exposure.');
             // Absent kind keeps the static-observation contract; other kinds are validated by their decoder owners in tools.
             if (science.kind !== undefined) text(science.kind, 'surface.science.kind');
+            const validity = science.validity === undefined ? undefined : record(science.validity, 'surface.science.validity');
+            if ((science.kind === 'terrestrial-observed-color' || validity?.kind === 'pds4-float-rgb') && !surface.falseColor)
+                throw new TypeError('Measured band composites must declare falseColor; display encoding does not establish natural color.');
         }
         if (surface.sharpen !== undefined)
             numbers(surface.sharpen, 'surface.sharpen', 2);

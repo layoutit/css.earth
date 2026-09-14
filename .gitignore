@@ -25,130 +25,130 @@ output/playwright/
 
 # Reacquirable binary source inputs. Source manifests, hashes, provenance,
 # licenses, configuration, and authored source modules remain tracked.
-src/planets/*/source/**/*.csv
-src/planets/*/source/**/*.fits
-src/planets/*/source/**/*.fit
-src/planets/*/source/**/*.gif
-src/planets/*/source/**/*.glb
-src/planets/*/source/**/*.IMG.gz
-src/planets/*/source/**/*.cub.gz
-src/planets/*/source/**/*.jpeg
-src/planets/*/source/**/*.jpg
-src/planets/*/source/**/*.png
-src/planets/*/source/**/*.tif
-src/planets/*/source/**/*.tiff
-src/planets/europa/source/photometry/*.lbl
-src/planets/*/source/**/*.ttf
-src/planets/*/source/**/*.webp
-src/planets/*/source/**/*.zip
+src/objects/*/source/**/*.csv
+src/objects/*/source/**/*.fits
+src/objects/*/source/**/*.fit
+src/objects/*/source/**/*.gif
+src/objects/*/source/**/*.glb
+src/objects/*/source/**/*.IMG.gz
+src/objects/*/source/**/*.cub.gz
+src/objects/*/source/**/*.jpeg
+src/objects/*/source/**/*.jpg
+src/objects/*/source/**/*.png
+src/objects/*/source/**/*.tif
+src/objects/*/source/**/*.tiff
+src/objects/europa/source/photometry/*.lbl
+src/objects/*/source/**/*.ttf
+src/objects/*/source/**/*.webp
+src/objects/*/source/**/*.zip
 # Binary SPICE kernels are restored through each body's acquisition plan; text kernels stay beside the body.
-src/planets/*/source/**/*.bsp
-src/planets/*/source/**/*.bc
-src/planets/*/source/**/*.bds
+src/objects/*/source/**/*.bsp
+src/objects/*/source/**/*.bc
+src/objects/*/source/**/*.bds
 
 # Accepted Saturn source-of-truth inputs without a direct acquisition URL.
-!src/planets/saturn/source/cassini-pia21611.jpg
-!src/planets/saturn/source/approved/saturn-fixed-material.webp
-!src/planets/saturn/source/saturn-weather-static.webp
+!src/objects/saturn/source/cassini-pia21611.jpg
+!src/objects/saturn/source/approved/saturn-fixed-material.webp
+!src/objects/saturn/source/saturn-weather-static.webp
 
-src/planets/*/.prepared/
+src/objects/*/.prepared/
 
 # Prepared JSON transport rebuilt from checked-in object preparation output.
-/src/planets/*/prepared/object.json
+/src/objects/*/prepared/object.json
 # Full prepared files restored from their checked-in `*.refs.json` twins and the
 # shared banks (`pnpm prepare:object-json`). The twins reference the planet point
 # photometry, star catalogue and label banks instead of repeating them per body.
-/src/planets/*/prepared/runtime.json
-/src/planets/*/prepared/scene.json
-/src/planets/*/prepared/sky.json
+/src/objects/*/prepared/runtime.json
+/src/objects/*/prepared/scene.json
+/src/objects/*/prepared/sky.json
 
-/src/planets/charon/source/observations/*.tif
-/src/planets/charon/source/science/*.tif
+/src/objects/charon/source/observations/*.tif
+/src/objects/charon/source/science/*.tif
 
 # Pinned PDS raster and vertex-facet source products.
-src/planets/*/source/**/*.IMG
-src/planets/*/source/**/*.tab
-src/planets/*/source/**/*.obj
-src/planets/*/source/**/*.bds
+src/objects/*/source/**/*.IMG
+src/objects/*/source/**/*.tab
+src/objects/*/source/**/*.obj
+src/objects/*/source/**/*.bds
 
 # Reacquirable released STL shape models.
-src/planets/*/source/**/*.stl.gz
+src/objects/*/source/**/*.stl.gz
 
 # Pinned mission attitude kernels restored by body acquisition recipes.
-src/planets/*/source/**/*.bc
-src/planets/*/source/**/*.bpc
+src/objects/*/source/**/*.bc
+src/objects/*/source/**/*.bpc
 
 # Published SHAP5 reference mesh, restored from its pinned archive.
-/src/planets/comet-67p/source/science/*.wrl
+/src/objects/comet-67p/source/science/*.wrl
 
 # Pinned thermophysical paper originals are restored through the body acquisition plans.
-/src/planets/klytia/source/reference/hanus-2018.pdf
-/src/planets/alkmene/source/reference/hanus-2018.pdf
+/src/objects/klytia/source/reference/hanus-2018.pdf
+/src/objects/alkmene/source/reference/hanus-2018.pdf
 
 # New reference-paper originals are reacquired from their manifest-pinned URLs.
-/src/planets/*/source/reference/*.pdf
+/src/objects/*/source/reference/*.pdf
 # Pinned Borrelly orthophoto and coordinate cubes, restored from PDS.
-/src/planets/comet-19p/source/micas/*.cub
+/src/objects/comet-19p/source/micas/*.cub
 
 # Nebula density textures are rebuilt from the checked-in scalar grids.
 /labs/nebula/models/*/full-density/prepared/slices/
 # Authored models and reviewed source images required before preparation.
-!src/planets/*/source/presentation/context.png
-!src/planets/*/source/material/*.png
-!src/planets/*/source/shape/*ellipsoid.tab
-!src/planets/*/source/shape/model.tab
+!src/objects/*/source/presentation/context.png
+!src/objects/*/source/material/*.png
+!src/objects/*/source/shape/*ellipsoid.tab
+!src/objects/*/source/shape/model.tab
 
 # Retained, physically scaled meshes used as preparation inputs.
-!src/planets/*/source/shape/model.obj
+!src/objects/*/source/shape/model.obj
 
 # Native metadata, extracted reference rows and inspected source evidence.
-!src/planets/*/source/reference/*.csv
-!src/planets/*/source/reference/*-row.tab
-!src/planets/*/source/reference/reflect-index.tab
-!src/planets/*/source/reference/*.png
-!src/planets/*/source/reference/*.jpg
-!src/planets/*/source/nims/*_wavelengths.csv
-!src/planets/*/source/validation/*.png
+!src/objects/*/source/reference/*.csv
+!src/objects/*/source/reference/*-row.tab
+!src/objects/*/source/reference/reflect-index.tab
+!src/objects/*/source/reference/*.png
+!src/objects/*/source/reference/*.jpg
+!src/objects/*/source/nims/*_wavelengths.csv
+!src/objects/*/source/validation/*.png
 
 # Retained interpretation documents without a pinned restoration operation.
-!src/planets/*/source/reference/*sis.pdf
-!src/planets/*/source/reference/*coordinate_system_description*.pdf
-!src/planets/didymos/source/reference/Sunshine_LPSC.pdf
-!src/planets/comet-81p/source/reference/wild-stereo-paper.pdf
-!src/planets/lutetia/source/reference/lutetia_rotation.pdf
-!src/planets/ryugu/source/reference/paper.pdf
+!src/objects/*/source/reference/*sis.pdf
+!src/objects/*/source/reference/*coordinate_system_description*.pdf
+!src/objects/didymos/source/reference/Sunshine_LPSC.pdf
+!src/objects/comet-81p/source/reference/wild-stereo-paper.pdf
+!src/objects/lutetia/source/reference/lutetia_rotation.pdf
+!src/objects/ryugu/source/reference/paper.pdf
 
 # Compact source conversions and the evidence needed to inspect them.
-!src/planets/moon/source/science/diviner-ghrm/*-compact.tif
-!src/planets/*/source/nims/*-composite.tif
-!src/planets/*/source/muse/*/*.tif
-!src/planets/*/source/vims/*-infrared.tif
-!src/planets/*/source/vims/*-water-ice.tif
-!src/planets/*/source/vims-chemistry/*.tif
-!src/planets/*/source/cassini-ice/*.tif
-!src/planets/*/source/geology/*-geologic-units.tif
-!src/planets/*/source/science/*-georeferenced.tif
-!src/planets/moon/source/science/diviner-ghrm/*-compact.tif
-!src/planets/*/source/science/geology-*/categories.tif
-!src/planets/*/source/science/geology-*/nomenclature.zip
-!src/planets/*/source/observations/*-registered-rgba.tif
+!src/objects/moon/source/science/diviner-ghrm/*-compact.tif
+!src/objects/*/source/nims/*-composite.tif
+!src/objects/*/source/muse/*/*.tif
+!src/objects/*/source/vims/*-infrared.tif
+!src/objects/*/source/vims/*-water-ice.tif
+!src/objects/*/source/vims-chemistry/*.tif
+!src/objects/*/source/cassini-ice/*.tif
+!src/objects/*/source/geology/*-geologic-units.tif
+!src/objects/*/source/science/*-georeferenced.tif
+!src/objects/moon/source/science/diviner-ghrm/*-compact.tif
+!src/objects/*/source/science/geology-*/categories.tif
+!src/objects/*/source/science/geology-*/nomenclature.zip
+!src/objects/*/source/observations/*-registered-rgba.tif
 
 # Original GIS releases and registration images kept with their derived maps.
-!src/planets/*/source/science/geology-*/*.gdb.zip
-!src/planets/*/source/science/geology-*/Screenshot *.png
+!src/objects/*/source/science/geology-*/*.gdb.zip
+!src/objects/*/source/science/geology-*/Screenshot *.png
 
 # Native Mathilde map retained as orientation evidence.
-!src/planets/mathilde/source/maps/253mathm.fit
+!src/objects/mathilde/source/maps/253mathm.fit
 
 # Reviewed Mars navigation snapshot; the upstream image has changed.
-!src/planets/mars/source/presentation/navigation-marker.jpg
+!src/objects/mars/source/presentation/navigation-marker.jpg
 
 # Retained mission kernel and dated catalog snapshot.
-!src/planets/*/source/geometry/vg2_nep_version1_type1_iss_sedr.bc
-!src/planets/earth/source/places/cities15000.zip
+!src/objects/*/source/geometry/vg2_nep_version1_type1_iss_sedr.bc
+!src/objects/earth/source/places/cities15000.zip
 
 # Quaoar source paper is restored from its pinned arXiv URL.
-/src/planets/quaoar/source/reference/quaoar-2026.html
+/src/objects/quaoar/source/reference/quaoar-2026.html
 
 # Replayed by the nebula bake recipe; keep source/settings and expected hashes.
 /labs/nebula/models/*/star-separation/prepared/
@@ -159,35 +159,36 @@ src/planets/*/source/**/*.bpc
 /labs/nebula/models/*/candidates/prepared/*.webp
 /labs/nebula/models/*/clouds-observation/source/target.png
 # Reacquirable distant-world paper originals; acquisition recipes pin exact bytes.
-/src/planets/oumuamua/source/reference/*.html
-/src/planets/sedna/source/reference/*.html
-/src/planets/gonggong/source/reference/*.html
-/src/planets/orcus/source/reference/*.html
-/src/planets/salacia/source/reference/*.html
-/src/planets/varuna/source/reference/*.html
-/src/planets/mani/source/reference/*.html
-/src/planets/achlys/source/reference/*.html
-!src/planets/salacia/source/reference/salacia-kiss-2025.html
+/src/objects/oumuamua/source/reference/*.html
+/src/objects/sedna/source/reference/*.html
+/src/objects/gonggong/source/reference/*.html
+/src/objects/orcus/source/reference/*.html
+/src/objects/salacia/source/reference/*.html
+/src/objects/varuna/source/reference/*.html
+/src/objects/mani/source/reference/*.html
+/src/objects/achlys/source/reference/*.html
+!src/objects/salacia/source/reference/salacia-kiss-2025.html
 
 # Already tracked lunar science extracts retained by the merged Moon package.
-!src/planets/moon/source/science/diviner-ghrm/ra_sam-compact.tif
-!src/planets/moon/source/science/diviner-ghrm/tbol_anom-compact.tif
-!src/planets/moon/source/science/diviner-ghrm/tbol_m-compact.tif
+!src/objects/moon/source/science/diviner-ghrm/ra_sam-compact.tif
+!src/objects/moon/source/science/diviner-ghrm/tbol_anom-compact.tif
+!src/objects/moon/source/science/diviner-ghrm/tbol_m-compact.tif
 
 # Combined catalogues and navigation are rebuilt from individual body records.
 /site/prepared-sources.json
 /site/prepared-machines.json
 /site/prepared-object-catalog.mts
+/site/prepared-context-objects.mts
 /site/prepared-feature-index.json
 /public/features/
 /packages/astronomy/src/data/generated/
 /site/prepared-navigation-markers.mjs
 /src/platform/solar-geometry.mts
-/src/planets/sun/prepared/world-context.json
+/src/objects/sun/prepared/world-context.json
 /site/minimap/prepared.json
 
 # AKARI AcuA v1: restored and verified from each body source manifest.
-/src/planets/*/source/reference/AcuA_V1.txt.gz
+/src/objects/*/source/reference/AcuA_V1.txt.gz
 
 # Shared shell outputs, replayed by pnpm prepare:shell from pinned fonts and vectors.
 /site/prepared-overview-titles.mjs
@@ -197,34 +198,48 @@ src/planets/*/source/**/*.bpc
 
 # Radial-terrain reports and source-index rasters are preparation output that
 # only the audits read. Comet 67P's are cited as evidence by its README and stay.
-/src/planets/*/prepared/terrain.json
-/src/planets/*/prepared/terrain-*.json
-/src/planets/*/prepared/*-source-index.json
-!/src/planets/comet-67p/prepared/terrain.json
-!/src/planets/comet-67p/prepared/osiris-source-index.json
+/src/objects/*/prepared/terrain.json
+/src/objects/*/prepared/terrain-*.json
+/src/objects/*/prepared/*-source-index.json
+!/src/objects/comet-67p/prepared/terrain.json
+!/src/objects/comet-67p/prepared/osiris-source-index.json
 
 # Large source inputs with pinned archive downloads; `pnpm prepare:checkout` (or
 # `node tools/objects/dist/operations.js acquire <id>`) restores and verifies them.
-/src/planets/comet-67p/source/geology/shap7-regions.vtk
-/src/planets/dione/source/science/b2-intake/dioneshapeassessment.pdf
-/src/planets/enceladus/source/vims-chemistry/native/C1489049741_1_ir.cub
-/src/planets/enceladus/source/vims-chemistry/native/C1702362997_1_ir.cub
-/src/planets/iapetus/source/cassini-ice/native/C1568129671_1_ir.cub
-/src/planets/iapetus/source/cassini-ice/native/C1568157352_4_ir.cub
-/src/planets/iapetus/source/cassini-ice/raw/v1568129671_1.qub
-/src/planets/iapetus/source/cassini-ice/raw/v1568157352_4.qub
-/src/planets/lutetia/source/shape/lutetia_025k_cart.wrl
-/src/planets/phoebe/source/cassini-ice/native/C1465671822_1_ir.cub
-/src/planets/phoebe/source/science/2023/phoebe_albedo_c.cub
-/src/planets/phoebe/source/science/2023/phoebe_radius_c.cub
-/src/planets/steins/source/shape/steins_cart.wrl
-/src/planets/tethys/source/science/b2-intake/tethysshapeassessment.pdf
-/src/planets/titan/source/science/b2-intake/topo_4PPD.cub
-/src/planets/titan/source/science/b2-intake/topo_4PPD_interp.cub
+/src/objects/comet-67p/source/geology/shap7-regions.vtk
+/src/objects/dione/source/science/b2-intake/dioneshapeassessment.pdf
+/src/objects/enceladus/source/vims-chemistry/native/C1489049741_1_ir.cub
+/src/objects/enceladus/source/vims-chemistry/native/C1702362997_1_ir.cub
+/src/objects/iapetus/source/cassini-ice/native/C1568129671_1_ir.cub
+/src/objects/iapetus/source/cassini-ice/native/C1568157352_4_ir.cub
+/src/objects/iapetus/source/cassini-ice/raw/v1568129671_1.qub
+/src/objects/iapetus/source/cassini-ice/raw/v1568157352_4.qub
+/src/objects/lutetia/source/shape/lutetia_025k_cart.wrl
+/src/objects/phoebe/source/cassini-ice/native/C1465671822_1_ir.cub
+/src/objects/phoebe/source/science/2023/phoebe_albedo_c.cub
+/src/objects/phoebe/source/science/2023/phoebe_radius_c.cub
+/src/objects/steins/source/shape/steins_cart.wrl
+/src/objects/tethys/source/science/b2-intake/tethysshapeassessment.pdf
+/src/objects/titan/source/science/b2-intake/topo_4PPD.cub
+/src/objects/titan/source/science/b2-intake/topo_4PPD_interp.cub
 
+# Nebula display volumes are restored from their pinned lab delivery recipes.
+/src/objects/m42/prepared/
+/src/objects/helix/prepared/
+/src/objects/m2-9/prepared/
+/src/objects/m42/.prepared-*/
+/src/objects/helix/.prepared-*/
+/src/objects/m2-9/.prepared-*/
+# Shared dataset cards and lineage are restored by prepare:nebulae / prepare:sources.
+# Name each object: bodies commit their prepared/provenance.json in the same folder.
+/src/objects/lmc/prepared/presentation.json
+/src/objects/lmc/prepared/provenance.json
 # Binary kernels in shared SPICE kernel banks are restored by tools/spice/kernel-bank.mts; text kernels are committed.
 src/spice/**/*.bsp
 src/spice/**/*.bc
 
 # Original Pluto LEISA maps, restored from pinned published Zenodo downloads.
-/src/planets/pluto/source/science/leisa/*.fits
+/src/objects/pluto/source/science/leisa/*.fits
+
+# Restored from the pinned author-hosted method paper, not redistributed in Git.
+/src/objects/charon/source/science/leisa/grundy-2016-supplement.pdf

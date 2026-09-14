@@ -1,41 +1,30 @@
 ---
-import SelectedContent from './SelectedContent.astro';
+import DatasetLenses from './DatasetLenses.astro';
+import DatasetContextPanels from './DatasetContextPanels.astro';
+import { parsePreparedVolumePresentation } from '../volume-presentation.mts';
+import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { PreparedVolumeLensBank } from '../../src/renderers/css/volume/prepared-volume-lenses';
+import { CONTEXT_OBJECT_DESCRIPTORS, CONTEXT_OBJECT_PREPARED_JSON } from '../prepared-context-objects.mts';
 
 type Descriptor = { id: string; type: string; prepared?: { url: string } };
-const descriptors = import.meta.glob<Descriptor>('../../src/objects/*/object.json', { eager: true, import: 'default' });
-const prepared = import.meta.glob<{ data: PreparedVolumeLensBank }>('../../src/objects/*/prepared/*.json', { eager: true, import: 'default' });
+// Bodies share src/objects; only the generated context objects' prepared JSON is read here.
+const descriptors = CONTEXT_OBJECT_DESCRIPTORS as Record<string, Descriptor>;
+const prepared = CONTEXT_OBJECT_PREPARED_JSON as Record<string, { data: PreparedVolumeLensBank } | undefined>;
+const presentations = CONTEXT_OBJECT_PREPARED_JSON, provenanceDocuments = CONTEXT_OBJECT_PREPARED_JSON;
 const banks = Object.entries(descriptors).filter(([, descriptor]) => descriptor.type === 'volume-lens-bank').map(([path, descriptor]) => {
   const bank = prepared[path.replace(/object\.json$/u, descriptor.prepared?.url ?? '')]?.data;
   if (!bank || bank.id !== descriptor.id) throw new TypeError(`Prepared focus lenses unavailable: ${descriptor.id}.`);
-  return bank;
+  const provenance = validateObjectProvenance(provenanceDocuments[path.replace(/object\.json$/u, 'prepared/provenance.json')], bank.id);
+  const presentation = parsePreparedVolumePresentation(presentations[path.replace(/object\.json$/u, 'prepared/presentation.json')], bank, provenance);
+  return { bank, provenance, presentation };
 });
 ---
-{banks.map(bank => <div class="planet-card-tabpanel" data-focus-lens-bank={bank.id} hidden>
-  <section class="planet-lenses" aria-label="Datasets">
-    <div class="planet-layers-menu">
-      <nav class="planet-observation-controls" aria-label="Datasets">
-        {bank.lenses.map(lens => <div class="planet-observation-option">
-          <button class="planet-observation-control" type="button" name="focusLens"
-            value={lens.id} data-focus-lens aria-pressed={lens.id === bank.defaultLens ? 'true' : 'false'}
-            aria-controls={`focus-${bank.id}-${lens.id}-details`} title={lens.title}>
-            <span class="planet-lens-label">{lens.label}</span>
-          </button>
-        </div>)}
-      </nav>
-    </div>
-  </section>
-  <section class="planet-lens-details">
-    <div class="planet-lens-details-body" aria-live="polite" aria-atomic="true">
-      {bank.lenses.map(lens => <div id={`focus-${bank.id}-${lens.id}-details`}
-        data-focus-lens-details={lens.id} hidden={lens.id !== bank.defaultLens}>
-        <SelectedContent title={lens.title} description={lens.description} href={lens.sourceUrl} />
-      </div>)}
-    </div>
-    <label class="planet-setting-control">
+{banks.map(({ bank, provenance, presentation }) => <div class="planet-dataset-content" data-focus-lens-bank={bank.id} hidden>
+  <DatasetLenses objectId={`focus-${bank.id}`} lenses={presentation} {provenance} controlName="focusLens" />
+    {bank.lenses.some(lens => lens.stars.points.length > 0) && <label class="planet-setting-control">
       <input type="checkbox" data-focus-stars checked />
       <span class="planet-setting-text">Catalogue stars</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>
-  </section>
+    </label>}
+  <DatasetContextPanels objectId={bank.id} lenses={presentation} {provenance} />
 </div>)}

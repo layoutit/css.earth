@@ -1,0 +1,192 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "lutetia",
+  "displayName": "Lutetia",
+  "publicBase": "/scenes/lutetia/",
+  "distanceAu": 2.4345822333960907,
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/lutetia_025k_cart.wrl",
+        "format": "vrml-mesh",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 12265,
+          "expectedFaces": 24526
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -49
+        },
+        "minimum": -16,
+        "maximum": 16,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 49000,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90,
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ],
+    "surfaceObservations": [
+      {
+        "id": "osiris",
+        "format": "osiris-camera",
+        "consumer": "osiris-observation",
+        "filter": "FFP-Vis_Orange",
+        "allowLossy": true,
+        "frames": [
+          {
+            "id": "approach",
+            "path": "observations/n20100710t154047674id4df22.img",
+            "cameraPath": "observations/osiris-camera.json",
+            "startTime": "2010-07-10T15:41:06.632"
+          },
+          {
+            "id": "image-n20100710t154135529id4df22",
+            "path": "observations/n20100710t154135529id4df22.img",
+            "cameraPath": "observations/n20100710t154135529id4df22-camera.json",
+            "startTime": "2010-07-10T15:41:54.488"
+          },
+          {
+            "id": "image-n20100710t154241240id4df22",
+            "path": "observations/n20100710t154241240id4df22.img",
+            "cameraPath": "observations/n20100710t154241240id4df22-camera.json",
+            "startTime": "2010-07-10T15:43:00.199"
+          }
+        ],
+        "selection": "lowest-emission",
+        "levelMatching": {
+          "samplesPerTriangle": 24,
+          "minimumPairs": 64,
+          "maximumGain": 1.35
+        },
+        "transfer": {
+          "maximumSeparationMeters": 600,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "photometry/hasselmann-2016-hapke-1993.json",
+          "referenceDegrees": {
+            "incidence": 35,
+            "emission": 0,
+            "phase": 35
+          },
+          "limits": {
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "phaseDegrees": [
+              25,
+              55
+            ],
+            "minimumGain": 0.4,
+            "maximumGain": 2.5
+          }
+        },
+        "display": {
+          "percentiles": [
+            2.7,
+            97.6
+          ]
+        },
+        "metadata": {
+          "label": "OSIRIS",
+          "coverage": "Three Rosetta orange-filter photographs show Lutetia’s craters and ridges, including a closer view at 15:43 UTC. Each uses the published shape and a separately checked camera. Published photometric normalization reduces broad shading; the grid marks gaps.",
+          "falseColor": false
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 49,
+    "camera": {
+      "initialScenePitchDegrees": 25,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+    "polesUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/lutetia_025k_cart.wrl",
+      "format": "vrml-mesh",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 12265,
+        "expectedFaces": 24526
+      },
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 1200,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Pinned JPL Horizons heliocentric elements and the Jorda–Vincent rotation model released with the PDS Lutetia shape"
+  },
+  "presentation": {
+    "defaultLens": "osiris",
+    "pointColor": [
+      170,
+      170,
+      170
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

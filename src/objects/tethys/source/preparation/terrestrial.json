@@ -1,0 +1,496 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "tethys",
+  "displayName": "Tethys",
+  "publicBase": "/scenes/tethys/",
+  "distanceAu": 9.58,
+  "raster": {
+    "width": 8192,
+    "height": 4096,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 1024,
+    "surfaceQuality": 90,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "channels": "monochrome",
+          "zeroValidity": "all-channels",
+          "noData": 0,
+          "centerLongitude": 0,
+          "resolutionMeters": 292.50627432643
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
+      },
+      {
+        "id": "enhanced",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
+      },
+      {
+        "id": "infrared",
+        "textureScale": 0.125,
+        "validity": {
+          "kind": "geotiff-rgb-bands",
+          "samples": [
+            0,
+            1,
+            2
+          ],
+          "alphaBand": 3,
+          "sampleBytes": 2,
+          "noData": 0,
+          "centerLongitude": 180,
+          "resolutionMeters": 3258.175193469102,
+          "origin": [
+            -1668185.6990561802,
+            834092.8495280901
+          ],
+          "grid": {
+            "pixelsPerDegree": 2.8444444444444446,
+            "sampleOffset": 511.5,
+            "lineOffset": 255.5
+          }
+        },
+        "focus": {
+          "longitudeDegrees": 281.77734,
+          "latitudeDegrees": -7.55859,
+          "zoom": 1.15
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "geotiff",
+        "path": "observations/tethys_eqradius_g.tif",
+        "description": "Cassini terrain model · shaded relief",
+        "title": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
+        "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+        "minimum": -12.5,
+        "maximum": 12.5,
+        "colors": [
+          "#2166ac",
+          "#92c5de",
+          "#f7f7f7",
+          "#f4a582",
+          "#b35806"
+        ],
+        "labels": [
+          "−12.5",
+          "0",
+          "+12.5"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "sampling": "bilinear",
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -531
+        },
+        "grid": {
+          "width": 2222,
+          "height": 679,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 531000,
+          "noData": -3.4028226550889045e+38,
+          "specialValueMagnitude": 1e+30,
+          "origin": [
+            -1668185.69905618,
+            509723.408044944
+          ],
+          "resolution": [
+            1501.51728087865,
+            -1501.3944272310573
+          ],
+          "latitudeRange": [
+            -55,
+            55
+          ]
+        },
+        "relief": {
+          "referenceRadiusMeters": 531000,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        },
+        "additionalGrids": [
+          {
+            "path": "observations/tethys_npradius_g.tif",
+            "grid": {
+              "width": 444,
+              "height": 444,
+              "centerLongitude": 0,
+              "referenceRadiusMeters": 531000,
+              "noData": -3.4028226550889045e+38,
+              "specialValueMagnitude": 1e+30,
+              "origin": [
+                -333637.139811236,
+                333637.139811236
+              ],
+              "resolution": [
+                1502.8699991497117,
+                -1502.8699991497117
+              ],
+              "latitudeRange": [
+                55,
+                90
+              ],
+              "projection": "polar-stereographic",
+              "poleLatitude": 90
+            }
+          },
+          {
+            "path": "observations/tethys_spradius_g.tif",
+            "grid": {
+              "width": 444,
+              "height": 444,
+              "centerLongitude": 0,
+              "referenceRadiusMeters": 531000,
+              "noData": -3.4028226550889045e+38,
+              "specialValueMagnitude": 1e+30,
+              "origin": [
+                -333637.139811236,
+                333637.139811236
+              ],
+              "resolution": [
+                1502.8699991497117,
+                -1502.8699991497117
+              ],
+              "latitudeRange": [
+                -90,
+                -55
+              ],
+              "projection": "polar-stereographic",
+              "poleLatitude": -90
+            }
+          }
+        ]
+      },
+      {
+        "id": "relative-albedo",
+        "label": "Relative albedo",
+        "format": "geotiff",
+        "path": "science/b2-intake/tethys_eqalbedo_g.tif",
+        "description": "Cassini SPC relative albedo · dimensionless",
+        "title": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+        "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+        "minimum": 0.5,
+        "maximum": 1.5,
+        "colors": [
+          "#403362",
+          "#aba0be",
+          "#f4f1e8",
+          "#c0a257",
+          "#755013"
+        ],
+        "labels": [
+          "0.5",
+          "1",
+          "≥ 1.5"
+        ],
+        "units": "relative to mean ≈ 1",
+        "consumer": "scientific-surfaces",
+        "sampling": "bilinear",
+        "grid": {
+          "width": 2222,
+          "height": 679,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 531000,
+          "noData": -3.4028226550889045e+38,
+          "specialValueMagnitude": 1e+30,
+          "origin": [
+            -1668185.69905618,
+            509723.408044944
+          ],
+          "resolution": [
+            1501.51728087865,
+            -1501.3944272310573
+          ],
+          "latitudeRange": [
+            -55,
+            55
+          ]
+        },
+        "additionalGrids": [
+          {
+            "path": "science/b2-intake/tethys_npalbedo_g.tif",
+            "grid": {
+              "width": 444,
+              "height": 444,
+              "centerLongitude": 0,
+              "referenceRadiusMeters": 531000,
+              "noData": -3.4028226550889045e+38,
+              "specialValueMagnitude": 1e+30,
+              "origin": [
+                -333637.139811236,
+                333637.139811236
+              ],
+              "resolution": [
+                1502.8699991497117,
+                -1502.8699991497117
+              ],
+              "latitudeRange": [
+                55,
+                90
+              ],
+              "projection": "polar-stereographic",
+              "poleLatitude": 90
+            }
+          },
+          {
+            "path": "science/b2-intake/tethys_spalbedo_g.tif",
+            "grid": {
+              "width": 444,
+              "height": 444,
+              "centerLongitude": 0,
+              "referenceRadiusMeters": 531000,
+              "noData": -3.4028226550889045e+38,
+              "specialValueMagnitude": 1e+30,
+              "origin": [
+                -333637.139811236,
+                333637.139811236
+              ],
+              "resolution": [
+                1502.8699991497117,
+                -1502.8699991497117
+              ],
+              "latitudeRange": [
+                -90,
+                -55
+              ],
+              "projection": "polar-stereographic",
+              "poleLatitude": -90
+            }
+          }
+        ],
+        "displaySampling": "nearest"
+      },
+      {
+        "id": "ice-absorption",
+        "label": "Ice absorption",
+        "format": "geotiff",
+        "path": "cassini-ice/tethys-ice-absorption.tif",
+        "consumer": "ice-absorption",
+        "title": "Partial Cassini VIMS water-ice signature",
+        "description": "Near-2.02 µm water-ice absorption in selected Cassini observations; not ice abundance.",
+        "minimum": 0.55,
+        "maximum": 0.75,
+        "colors": [
+          "#312b66",
+          "#327caf",
+          "#7fcdbb",
+          "#edf8b1"
+        ],
+        "labels": [
+          "0.55",
+          "0.65",
+          "0.75"
+        ],
+        "units": "band-depth fraction",
+        "sourceUrl": "https://vims.univ-nantes.fr/cube/1807469104_1",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "textureScale": 0.125,
+        "grid": {
+          "width": 1024,
+          "height": 512,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 531000,
+          "noData": -9999,
+          "origin": [
+            -1668185.6990561802,
+            834092.8495280901
+          ],
+          "resolution": [
+            3258.175193469102,
+            -3258.175193469102
+          ],
+          "wrapLongitude": true
+        },
+        "focus": {
+          "longitudeDegrees": 247.67578,
+          "latitudeDegrees": 5.44922,
+          "zoom": 1.15
+        }
+      }
+    ],
+    "observedColors": [],
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ],
+    "surfaceObservations": [
+      {
+        "id": "iss",
+        "format": "spice-camera",
+        "consumer": "iss-observation",
+        "filter": "CL1,CL2",
+        "frames": [
+          {
+            "id": "iss",
+            "path": "observations/N1807429484_1_CALIB.IMG",
+            "labelPath": "observations/N1807429484_1_CALIB.LBL",
+            "startTime": "2015-04-11T06:43:09.748Z"
+          }
+        ],
+        "spice": {
+          "kernelSet": "cassini",
+          "kernels": [
+            "lsk/naif0012.tls",
+            "pck/pck00011.tpc",
+            "sclk/cas00172.tsc",
+            "fk/cas_v43.tf",
+            "ik/cas_iss_v10.ti",
+            "spk/150828R_SCPSE_15066_15116.bsp",
+            "ck/15098_15103ra.bc"
+          ],
+          "observer": -82,
+          "target": 603,
+          "bodyFrame": "IAU_TETHYS",
+          "instrument": -82360,
+          "clock": {
+            "start": "SPACECRAFT_CLOCK_START_COUNT",
+            "stop": "SPACECRAFT_CLOCK_STOP_COUNT",
+            "spacecraft": -82
+          },
+          "aberration": "LT+S",
+          "pixels": {
+            "focalLength": {
+              "key": "FOCAL_LENGTH",
+              "unit": "mm"
+            },
+            "pixelPitch": {
+              "key": "PIXEL_SIZE",
+              "unit": "micrometre"
+            },
+            "center": "CCD_CENTER",
+            "boresight": "BORESIGHT",
+            "samples": "PIXEL_SAMPLES",
+            "lines": "PIXEL_LINES",
+            "frame": "FOV_FRAME",
+            "origin": 1,
+            "column": "-X",
+            "row": "-Y"
+          },
+          "image": {
+            "format": "vicar-pds3",
+            "quantity": "I/F",
+            "header": {
+              "INSTRUMENT_ID": "ISSNA",
+              "TARGET_NAME": "TETHYS",
+              "INSTRUMENT_MODE_ID": "FULL"
+            }
+          }
+        },
+        "refinement": {
+          "method": "mesh-limb",
+          "maximumCorrectionDegrees": 0.2,
+          "maximumResidualPixels": 2.5,
+          "minimumControls": 48,
+          "searchPixels": 400,
+          "maximumControls": 1500
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "maximumEmissionDegrees": 75,
+          "visibilityToleranceMeters": 0.5,
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must lie within two diagonal pixel footprints of the closest source-mesh point; a footprint is the pixel's range times the camera's pixel angle, stretched by the emission angle, about 1.6 km across the diagonal at nadir from 190,000 km. Emission is limited to 75°, where a pixel stretches nearly four times along the surface. The closest point must lie within 5.31 km of the displayed mesh, its simplification error, and be visible from the refined camera in the full mesh."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 75,
+          "maximumGain": 3
+        },
+        "display": {
+          "percentiles": [
+            1.2,
+            99.4
+          ]
+        },
+        "metadata": {
+          "label": "ISS photograph",
+          "falseColor": false,
+          "coverage": "One Cassini ISS narrow-angle photograph from 190,000 km on 11 April 2015, projected through a camera derived from Cassini SPICE kernels and refined to the shape model's limb. Unphotographed or shadowed surface retains the grid."
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 536.3,
+    "camera": {
+      "initialScenePitchDegrees": 40,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/tethys/tethys-normal-surface@2x.webp",
+    "polesUrl": "/scenes/tethys/tethys-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "science/b2-intake/tethys_128_o.obj",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 98306,
+        "expectedFaces": 196608
+      },
+      "faceBudget": 2000,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 2000,
+        "maximumErrorMeters": 5310,
+        "regularize": false
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Tethys orbit plus VSOP87 Saturn position and IAU/WGCCRE Tethys rotation"
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      188,
+      187,
+      174
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

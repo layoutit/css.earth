@@ -13,7 +13,9 @@ class Element extends EventTarget {
   removeAttribute(name: string) { this.attributes.delete(name); }
 }
 function fixture() {
-  const root = new Element(), bank = new Element(), stars = new Element();
+  const root = new Element(), bank = new Element(), stars = new Element(), datasetTab = new Element();
+  const tabs: string[] = [];
+  root.selectors.set('[data-information-tab="dataset"]', datasetTab);
   bank.dataset.focusLensBank = 'prepared-galaxy';
   const ids = ['first', 'second', 'third'];
   const buttons = ids.map(id => Object.assign(new Element(), { value: id }));
@@ -31,7 +33,8 @@ function fixture() {
   const presentation: PreparedFocusPresentation = { id: 'first', defaultLens: 'first', objectId: 'prepared-galaxy', selectedLens: 'first', starsVisible: true,
     lenses: ids.map(id => ({ id, label: id, title: id, description: id, sourceUrl: 'https://example.test/source' })), selectLens() {}, setStarsVisible() {} };
   // This retained DOM stand-in implements only the card's queried fields and events.
-  return { root, bank, stars, buttons, details, record, presentation, card: createPreparedFocusCard(root as unknown as HTMLElement) };
+  return { root, bank, stars, buttons, details, record, presentation, datasetTab, tabs,
+    card: createPreparedFocusCard(root as unknown as HTMLElement, id => tabs.push(id)) };
 }
 
 test('prepared focus lenses retain controls and reflect only the applied runtime selection', () => {
@@ -77,5 +80,33 @@ test('departed or unsupported galaxy focus hides its retained lens bank and disa
   assert.equal(f.bank.hidden, true);
   f.buttons[2].dispatchEvent(new Event('click'));
   assert.deepEqual(requested, []);
+  f.card.destroy();
+});
+
+test('a nebula focus displays its actual classification and preserves the shared lens controls', () => {
+  const f = fixture();
+  const { membership: _membership, ...common } = f.record;
+  f.card.set({ ...common, kind: 'nebula', detailedObjectId: 'prepared-galaxy',
+    classification: { name: 'Emission nebula', basis: 'Conditional image reconstruction.', sourceRef: 'observations' } }, [], f.presentation);
+  assert.equal(f.root.querySelector('[data-focus-status]')?.textContent, 'Emission nebula');
+  assert.equal(f.root.querySelector('[data-focus-membership]')?.textContent, 'Milky Way');
+  assert.equal(f.root.querySelector('[data-focus-association]')?.textContent, 'Galactic nebula');
+  assert.equal(f.bank.hidden, false);
+  f.card.destroy();
+});
+
+test('focus uses shared dataset tabs only when a prepared presentation is available', () => {
+  const f = fixture();
+  f.card.set(f.record);
+  assert.equal(f.datasetTab.hidden, true);
+  assert.deepEqual(f.tabs, ['factsheet']);
+  f.card.set(f.record, [], f.presentation);
+  assert.equal(f.datasetTab.hidden, false);
+  assert.deepEqual(f.tabs, ['factsheet', 'dataset']);
+  f.card.set(f.record, [], { ...f.presentation, selectedLens: 'second' });
+  assert.deepEqual(f.tabs, ['factsheet', 'dataset'], 'Lens updates preserve the user’s current information tab');
+  f.card.set({ ...f.record, id: 'catalogue:other', detailedObjectId: undefined });
+  assert.equal(f.datasetTab.hidden, true);
+  assert.deepEqual(f.tabs, ['factsheet', 'dataset', 'factsheet']);
   f.card.destroy();
 });

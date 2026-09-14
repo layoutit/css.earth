@@ -4,7 +4,8 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
 import {loadCameraShape,controlledShapeCamera,decodeCalibratedCamera} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
-const source=resolve(import.meta.dirname,'../../../../src/planets/hyperion/source');
+import {registerCameraBands} from '../../../../tools/objects/terrestrial-layers/camera-band-registration.mts';
+const source=resolve(import.meta.dirname,'../../../../src/objects/hyperion/source');
 const json=async (path: string)=>JSON.parse(await readFile(resolve(source,path),'utf8'));
 
 test('Hyperion close observation retains native calibrated detector layout and independent numeric samples',async()=>{
@@ -21,7 +22,7 @@ test('Hyperion close observation retains native calibrated detector layout and i
 test('Hyperion corrected close-frame camera reproduces terrain in independent Cassini observations',async()=>{
  const config=await json('preparation/terrestrial.json'),proof=await json('validation/n1506391424-registration.json');
  for(const pin of proof.sourcePins){const b=await readFile(resolve(source,pin.path));assert.equal(b.length,pin.bytes,pin.path);assert.equal(createHash('sha256').update(b).digest('hex'),pin.sha256,pin.path);}
- const frame=config.raster.mosaics[0].frames.find((f: { id: string; })=>f.id==='n1506391424');assert.ok(frame);
+ const frame=config.raster.surfaceObservations.find((lens: { id: string })=>lens.id==='normal').frames.find((f: { id: string; })=>f.id==='n1506391424');assert.ok(frame);
  for(const key of ['northAzimuthDegrees','center','rangeKm','pixelAngleMicroradians'])assert.deepEqual(frame[key],proof.acceptedCamera[key]);
  assert.ok(frame.coverageInsetPixels>=16);
  const camera=controlledShapeCamera(frame),mesh=await loadCameraShape(source,config.geometry.radialTerrain);
@@ -51,4 +52,14 @@ test('Hyperion corrected close-frame camera reproduces terrain in independent Ca
   const correlation=(ab-a*b/n)/Math.sqrt((aa-a*a/n)*(bb-b*b/n));
   assert.ok(correlation>=minimum,`held-out patch ${x0},${y0}: unshifted source correlation ${correlation}`);
  }
+});
+
+test('filter colour preparation measures each committed camera against its reference and refuses a displaced one',async()=>{
+ const config=await json('preparation/terrestrial.json'),colour=config.raster.surfaceObservations.find((m: {id: string})=>m.id==='filter-color');
+ const mesh=await loadCameraShape(source,config.geometry.radialTerrain);
+ const load=async (frame: {id: string; path: string})=>{const bytes=await readFile(resolve(source,frame.path));return {frame,image:decodeCalibratedCamera(bytes),sha256:createHash('sha256').update(bytes).digest('hex')};};
+ const reference=await load(colour.registration.references[0]),target=colour.frames[0][colour.bands[0].channel];
+ const measure=async (frame: typeof target)=>registerCameraBands({mesh,camera:controlledShapeCamera,reference,targets:[{filter:'IR3',...await load(frame)}],checkOnly:true}).reports[0];
+ assert.equal((await measure(target)).accepted,true,'the delivered IR3 camera is confirmed by its reference image');
+ assert.equal((await measure({...target,center:[target.center[0]+3,target.center[1]]})).accepted,false,'a camera three detector pixels off fails the held-out budget');
 });

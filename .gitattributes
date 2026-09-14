@@ -6,102 +6,118 @@ tools/objects/celestia-comets/native/celmath/** -text -whitespace
 tools/objects/celestia-comets/native/celcompat/** -text -whitespace
 tools/objects/celestia-comets/native/meshmanager.cpp -text -whitespace
 tools/objects/celestia-comets/native/model.cpp -text -whitespace
-src/planets/comet-*/source/shape/*.cms -text -whitespace
-src/planets/comet-*/source/reference/celestia.ssc -text -whitespace
-src/planets/comet-*/source/reference/GPL-2.0-or-later.txt -text -whitespace
-src/planets/comet-*/source/reference/horizons-elements.txt -text -whitespace
-src/planets/comet-*/source/reference/horizons-vectors.txt -text -whitespace
-src/planets/pluto/source/lenses/pluto-dem.lbl -whitespace
-src/planets/pluto/source/lenses/usgs-dem-metadata.html -whitespace
-src/planets/pluto/source/lenses/usgs-mosaic-metadata.html -whitespace
-src/planets/pluto/source/orbit/jpl-physical.html -whitespace
-src/planets/pluto/source/surface/nasa-color-metadata.html -whitespace
-src/planets/ida/source/reference/** -whitespace
-src/planets/gaspra/source/reference/** -whitespace
-src/planets/mathilde/source/reference/** -whitespace
-src/planets/lutetia/source/reference/** -whitespace
-src/planets/steins/source/reference/** -whitespace
-src/planets/lutetia/source/shape/*.wrl -whitespace
-src/planets/steins/source/shape/*.wrl -whitespace
+src/objects/comet-*/source/shape/*.cms -text -whitespace
+src/objects/comet-*/source/reference/celestia.ssc -text -whitespace
+src/objects/comet-*/source/reference/GPL-2.0-or-later.txt -text -whitespace
+src/objects/comet-*/source/reference/horizons-elements.txt -text -whitespace
+src/objects/comet-*/source/reference/horizons-vectors.txt -text -whitespace
+src/objects/pluto/source/lenses/pluto-dem.lbl -whitespace
+src/objects/pluto/source/lenses/usgs-dem-metadata.html -whitespace
+src/objects/pluto/source/lenses/usgs-mosaic-metadata.html -whitespace
+src/objects/pluto/source/orbit/jpl-physical.html -whitespace
+src/objects/pluto/source/surface/nasa-color-metadata.html -whitespace
+src/objects/ida/source/reference/** -whitespace
+src/objects/gaspra/source/reference/** -whitespace
+src/objects/mathilde/source/reference/** -whitespace
+src/objects/lutetia/source/reference/** -whitespace
+src/objects/steins/source/reference/** -whitespace
+src/objects/lutetia/source/shape/*.wrl -whitespace
+src/objects/steins/source/shape/*.wrl -whitespace
 
 # Retain original scientific archive text bytes.
 packages/astronomy/source/scene-epoch/*.txt -whitespace
-src/planets/didymos/source/reference/** -whitespace
-src/planets/dimorphos/source/reference/** -whitespace
-src/planets/kleopatra/source/reference/** -whitespace
-src/planets/toutatis/source/reference/** -whitespace
-src/planets/toutatis/source/shape/4179toutatis2.tab -whitespace
-src/planets/comet-67p/source/reference/osiris-2014080[56]-*.lbl -text -whitespace
+src/objects/didymos/source/reference/** -whitespace
+src/objects/dimorphos/source/reference/** -whitespace
+src/objects/kleopatra/source/reference/** -whitespace
+src/objects/toutatis/source/reference/** -whitespace
+src/objects/toutatis/source/shape/4179toutatis2.tab -whitespace
+src/objects/comet-67p/source/reference/osiris-2014080[56]-*.lbl -text -whitespace
 
 # Preserve the exact B3 spacecraft archive labels and release documentation.
-src/planets/callisto/source/observations/C0605271600R.LBL -text -whitespace
-src/planets/hyperion/source/observations/N1506391424_2_CALIB.LBL -text -whitespace
-src/planets/phoebe/source/science/2023/phoebe_albedo_c.xml -text -whitespace
-src/planets/phoebe/source/science/2023/phoebe_bestmap_c.xml -text -whitespace
-src/planets/phoebe/source/science/2023/phoebe_numimg_c.xml -text -whitespace
-src/planets/phoebe/source/science/2023/phoebe_radius_c.xml -text -whitespace
-src/planets/phoebe/source/science/2023/phoebeimglist.txt -text -whitespace
-src/planets/phoebe/source/science/2023/phoebekernellist.txt -text -whitespace
-src/planets/phoebe/source/science/2023/productdescription.txt -text -whitespace
-src/planets/phoebe/source/shape/2023/phoebe_128_o.xml -text -whitespace
-src/planets/proteus/source/observations/C1137328_GEOMED.LBL -text -whitespace
-src/planets/proteus/source/observations/C1137339_GEOMED.LBL -text -whitespace
-src/planets/proteus/source/observations/C1137350_GEOMED.LBL -text -whitespace
-src/planets/proteus/source/observations/PROCESSING.TXT -text -whitespace
+src/objects/*/source/observations/N*_CALIB.LBL -text -whitespace
+src/objects/callisto/source/observations/C0605271600R.LBL -text -whitespace
+src/objects/hyperion/source/observations/N1506391424_2_CALIB.LBL -text -whitespace
+src/objects/phoebe/source/science/2023/phoebe_albedo_c.xml -text -whitespace
+src/objects/phoebe/source/science/2023/phoebe_bestmap_c.xml -text -whitespace
+src/objects/phoebe/source/science/2023/phoebe_numimg_c.xml -text -whitespace
+src/objects/phoebe/source/science/2023/phoebe_radius_c.xml -text -whitespace
+src/objects/phoebe/source/science/2023/phoebeimglist.txt -text -whitespace
+src/objects/phoebe/source/science/2023/phoebekernellist.txt -text -whitespace
+src/objects/phoebe/source/science/2023/productdescription.txt -text -whitespace
+src/objects/phoebe/source/shape/2023/phoebe_128_o.xml -text -whitespace
+src/objects/proteus/source/observations/C1137328_GEOMED.LBL -text -whitespace
+src/objects/proteus/source/observations/C1137339_GEOMED.LBL -text -whitespace
+src/objects/proteus/source/observations/C1137350_GEOMED.LBL -text -whitespace
+src/objects/proteus/source/observations/PROCESSING.TXT -text -whitespace
 
-src/planets/comet-19p/source/reference/*.cat -text -whitespace
-src/planets/comet-19p/source/reference/*.lbl -text -whitespace
-src/planets/comet-19p/source/reference/*.txt -text -whitespace
-src/planets/comet-19p/source/reference/*.htm -text -whitespace
+src/objects/comet-19p/source/reference/*.cat -text -whitespace
+src/objects/comet-19p/source/reference/*.lbl -text -whitespace
+src/objects/comet-19p/source/reference/*.txt -text -whitespace
+src/objects/comet-19p/source/reference/*.htm -text -whitespace
 
 # Original 67P categorical geometry and SBMT archive records are hash-pinned.
-src/planets/comet-67p/source/geology/** -text -whitespace
+src/objects/comet-67p/source/geology/** -text -whitespace
 
 # Exact archive labels used by the expanded comet photographic mosaics.
-src/planets/comet-67p/source/reference/n201409*-*.lbl -text -whitespace
-src/planets/comet-67p/source/reference/n2015*id[45]0f22.lbl -text -whitespace
-src/planets/comet-81p/source/photography/**/*.lbl -text -whitespace
-src/planets/comet-9p/source/photography/**/*.lbl -text -whitespace
-src/planets/comet-103p/source/photography/**/*.lbl -text -whitespace
+src/objects/comet-67p/source/reference/n201409*-*.lbl -text -whitespace
+src/objects/comet-67p/source/reference/n2015*id[45]0f22.lbl -text -whitespace
+src/objects/comet-81p/source/photography/**/*.lbl -text -whitespace
+src/objects/comet-9p/source/photography/**/*.lbl -text -whitespace
+src/objects/comet-103p/source/photography/**/*.lbl -text -whitespace
 
 # Preserve the pinned Apophis spin-state row, including its CRLF ending.
-src/planets/apophis/source/reference/apophis_v233s7_spin_state.csv -text -whitespace
+src/objects/apophis/source/reference/apophis_v233s7_spin_state.csv -text -whitespace
 
 # Preserve pinned Cassini cubes and archive text byte-for-byte.
-src/planets/*/source/cassini-ice/**/*.cub binary
-src/planets/*/source/cassini-ice/**/*.qub binary
-src/planets/*/source/cassini-ice/evidence/*.html -text -whitespace
+src/objects/*/source/cassini-ice/**/*.cub binary
+src/objects/*/source/cassini-ice/**/*.qub binary
+src/objects/*/source/cassini-ice/evidence/*.html -text -whitespace
 
 # Preserve original Diviner GHRM product labels byte-for-byte.
-src/planets/moon/source/science/diviner-ghrm/*.xml -text -whitespace
+src/objects/moon/source/science/diviner-ghrm/*.xml -text -whitespace
 
 # Retain native Horizons text for current and future body packages.
-src/planets/*/source/reference/horizons-*.txt -text -whitespace
+src/objects/*/source/reference/horizons-*.txt -text -whitespace
 
 # Preserve SN263 archive bytes without adding non-data files to body packages.
-src/planets/asteroid-2001-sn263/source/orbit/*.txt -text -whitespace
-src/planets/asteroid-2001-sn263/source/reference/* -text -whitespace
-src/planets/asteroid-2001-sn263/source/shape/*.tab -text -whitespace
-src/planets/sn263-beta/source/orbit/*.txt -text -whitespace
-src/planets/sn263-beta/source/reference/* -text -whitespace
-src/planets/sn263-beta/source/shape/*.tab -text -whitespace
-src/planets/sn263-gamma/source/orbit/*.txt -text -whitespace
-src/planets/sn263-gamma/source/reference/* -text -whitespace
-src/planets/sn263-gamma/source/shape/*.tab -text -whitespace
+src/objects/asteroid-2001-sn263/source/orbit/*.txt -text -whitespace
+src/objects/asteroid-2001-sn263/source/reference/* -text -whitespace
+src/objects/asteroid-2001-sn263/source/shape/*.tab -text -whitespace
+src/objects/sn263-beta/source/orbit/*.txt -text -whitespace
+src/objects/sn263-beta/source/reference/* -text -whitespace
+src/objects/sn263-beta/source/shape/*.tab -text -whitespace
+src/objects/sn263-gamma/source/orbit/*.txt -text -whitespace
+src/objects/sn263-gamma/source/reference/* -text -whitespace
+src/objects/sn263-gamma/source/shape/*.tab -text -whitespace
 
 # Preserve the pinned Galileo candidate-orbit catalog bytes.
-src/planets/dactyl/source/reference/asteroids.ssc -text -whitespace
+src/objects/dactyl/source/reference/asteroids.ssc -text -whitespace
 
 # Preserve the Halley archives' fixed-width records and original tool reports.
-src/planets/comet-1p/source/giotto/*.hdr -text -whitespace
-src/planets/comet-1p/source/giotto/*.lbl -text -whitespace
-src/planets/comet-1p/source/giotto/*.txt -text -whitespace
-src/planets/comet-1p/evidence/*.log -whitespace
-src/planets/comet-1p/source/vega/*.hdr -text -whitespace
-src/planets/comet-1p/source/vega/*.lbl -text -whitespace
-src/planets/comet-1p/source/vega/*.doc -text -whitespace
-src/planets/comet-1p/evidence/encounters/*.log -whitespace
+src/objects/comet-1p/source/giotto/*.hdr -text -whitespace
+src/objects/comet-1p/source/giotto/*.lbl -text -whitespace
+src/objects/comet-1p/source/giotto/*.txt -text -whitespace
+src/objects/comet-1p/evidence/*.log -whitespace
+src/objects/comet-1p/source/vega/*.hdr -text -whitespace
+src/objects/comet-1p/source/vega/*.lbl -text -whitespace
+src/objects/comet-1p/source/vega/*.doc -text -whitespace
+src/objects/comet-1p/evidence/encounters/*.log -whitespace
 
 # Preserve native New Horizons labels, including fixed-width CRLF records.
-src/planets/arrokoth/source/observations/*.lbl -text -whitespace
-src/planets/arrokoth/source/observations/*.lblx -text -whitespace
+src/objects/arrokoth/source/observations/*.lbl -text -whitespace
+src/objects/arrokoth/source/observations/*.lblx -text -whitespace
+src/objects/nix/source/observations/*.lbl -text -whitespace
+src/objects/hydra/source/observations/*.lbl -text -whitespace
+# The native PCK history heading contains seven equals signs. Use longer
+# actual conflict markers while retaining the original kernel bytes.
+src/objects/nix/source/geometry/*.tpc -text -whitespace conflict-marker-size=32
+src/objects/hydra/source/geometry/*.tpc -text -whitespace conflict-marker-size=32
+
+# Preserve HRI-IR native calibration tables and fixed-width archive labels.
+src/objects/comet-103p/source/science/hrii/*.lbl -text -whitespace
+src/objects/comet-103p/source/science/hrii/*.tab -text -whitespace
+src/objects/comet-9p/source/science/hrii/*.lbl -text -whitespace
+src/objects/comet-9p/source/science/hrii/*.tab -text -whitespace
+
+# Preserve the original AMICA fixed-width, CRLF archive labels.
+src/objects/itokawa/source/observations/*.lbl -text -whitespace

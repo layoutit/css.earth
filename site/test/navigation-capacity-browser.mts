@@ -26,7 +26,7 @@ try {
       const bank = await page.evaluate(async ({ id, sourceFrame }) => {
         const modulePath='/site/packaged-object-runtime.mts';
         const { loadPackagedObject }:typeof import('../packaged-object-runtime.mts') = await import(modulePath);
-        const descriptor = await (await fetch(`/src/planets/${id}/object.json`)).json();
+        const descriptor = await (await fetch(`/src/objects/${id}/object.json`)).json();
         const factory = await loadPackagedObject(descriptor);
         const source = window.__cssearthTest.object('sun').camera;
         const navigation=window.__cssearthTest.required(factory.navigation,"prepared navigation");

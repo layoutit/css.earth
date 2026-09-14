@@ -15,7 +15,7 @@ import { requireString } from '../source-values.mts';
 export async function refreshPhotographs(id: string, lensIds: readonly string[]) {
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !lensIds.length || new Set(lensIds).size !== lensIds.length)
     throw new TypeError('Choose an object and distinct photographic lens IDs.');
-  const objectDirectory = resolve('src/planets', id), sourceDirectory = resolve(objectDirectory, 'source');
+  const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
   const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')));
   const sources = new Map<string, unknown>();
@@ -30,8 +30,9 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   if (lensIds.some(id => !config.surfaces.some(surface => surface.id === id))) throw new TypeError('Unknown photographic lens.');
   const selected = { ...config, surfaces: config.surfaces.filter(surface => lensIds.includes(surface.id)),
     lighting: undefined, atmosphere: undefined, interior: undefined };
-  const { createSurfaceInterpreter } = await import(pathToFileURL(resolve('tools/objects/observation/interpret.mts')).href) as typeof import('./observation/interpret.mts');
-  const interpret = await createSurfaceInterpreter({ objectId: id, displayName: id, sourceDirectory, recipe: selected, sourceVerification: 'photographs' });
+  const { createSurfaceInterpreter, selectSurfaceDependencies } = await import(pathToFileURL(resolve('tools/objects/observation/interpret.mts')).href) as typeof import('./observation/interpret.mts');
+  const interpret = await createSurfaceInterpreter({ objectId: id, displayName: id, sourceDirectory,
+    recipe: selectSurfaceDependencies(config, lensIds), sourceVerification: 'photographs' });
   const stageRoot = resolve('.local/photographic-refresh'); await mkdir(stageRoot, { recursive: true });
   const stage = await mkdtemp(resolve(stageRoot, `${id}-`));
   // One encoder worker and no libvips image cache: the previous surface need not remain resident.
@@ -54,8 +55,24 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   await writeFile(resolve(outputDirectory, 'assets.json'), JSON.stringify(combined) + '\n');
   const inventory = JSON.stringify({ ...manifest, assets: manifest.assets.map(asset => replacements.get(asset.filename) ?? asset) }, null, 2) + '\n';
   await writeFile(manifestPath, inventory); await writeFile(resolve(outputDirectory, 'runtime-assets.json'), inventory);
+  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve('tools/prepare-surface-minimaps.mts')).href) as typeof import('../prepare-surface-minimaps.mts');
+  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
+  await refreshSurfaceContent(id, lensIds);
+  return { id, lenses: lensIds, assets: replacements.size, bytes: [...replacements.values()].reduce((sum, entry) => sum + entry.bytes, 0),
+    seconds: (Date.now() - start) / 1000, maxRssMiB: process.resourceUsage().maxRSS / 1024, stage };
+}
+
+/** Refresh selected authored captions while preserving the retained scene and other lens controls. */
+export async function refreshSurfaceContent(id: string, lensIds: readonly string[]) {
+  if (!/^[a-z][a-z0-9-]*$/.test(id) || !lensIds.length || new Set(lensIds).size !== lensIds.length)
+    throw new TypeError('Choose an object and distinct surface lens IDs.');
+  const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
+  const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
+  const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')));
   const content = descriptor.recipe.sources.find(source => source.id === 'content');
   if (!content?.path.startsWith('source/')) throw new TypeError('Photographic refresh needs authored content.');
+  const contentBytes = await readFile(resolve(objectDirectory, content.path));
+  if (createHash('sha256').update(contentBytes).digest('hex') !== content.sha256) throw new Error(`Recipe pin differs: ${content.path}`);
   const previousLenses = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'lenses.json'), 'utf8')));
   const previousContent = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8')));
   await prepareObjectContentAssets({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: content.path.slice(7) } });
@@ -72,11 +89,12 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
     const content = requireRecord(JSON.parse(await readFile(path, 'utf8')));
     await writeFile(path, JSON.stringify({ ...content, features: { searchLabel: requireString(features.searchLabel), description: requireString(features.description) } }) + '\n');
   }
-  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve('tools/prepare-surface-minimaps.mts')).href) as typeof import('../prepare-surface-minimaps.mts');
-  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
   // Asset URLs and the scene are retained. The writer updates the descriptor/page transport from the new content.
+  const { restorePreparedShared } = await import(pathToFileURL(resolve('src/platform/prepared-shared-banks.mts')).href) as typeof import('../../src/platform/prepared-shared-banks.mts');
+  // Checked-in twins own the retained scene; ignored expanded files may predate a merge.
+  await restorePreparedShared(process.cwd(), outputDirectory);
   const runtime = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')));
-  const { writeObjectJson } = await import(pathToFileURL(resolve('tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
+  const { repinObjectJson } = await import(pathToFileURL(resolve('tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
   const updatedControls = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'controls.json'), 'utf8')));
   const labels = new Map(requireArray(requireRecord(updatedControls.lenses).controls).map(value => { const lens = requireRecord(value); return [requireString(lens.id), lens] as const; }));
   const controls = requireRecord(runtime.controls), lenses = requireRecord(controls.lenses);
@@ -85,12 +103,16 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
     if (!lensIds.includes(key)) return lens;
     const label = labels.get(key); if (!label) throw new Error(`Missing photographic caption: ${key}`); return label;
   });
-  await writeObjectJson(id, { ...runtime, controls: { ...controls, lenses: { ...lenses, controls: selection } } });
+  const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./prepare-world-navigation.js');
+  const navigation = await prepareWorldNavigationDefinition({ objectDirectory, projectRoot: process.cwd(),
+    definition: { ...runtime, controls: { ...controls, lenses: { ...lenses, controls: selection } } } });
+  const scene = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8')));
+  await writeWorldNavigationArtifacts(outputDirectory, navigation, scene);
+  // Captions do not require recompiling texture matrices, seam treatment or body geometry.
+  await repinObjectJson(id);
   const { prepareObjectProvenance } = await import(pathToFileURL(resolve('tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
   // Only these photographs ran. Bind the retained products without claiming a full package preparation.
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
-  return { id, lenses: lensIds, assets: replacements.size, bytes: [...replacements.values()].reduce((sum, entry) => sum + entry.bytes, 0),
-    seconds: (Date.now() - start) / 1000, maxRssMiB: process.resourceUsage().maxRSS / 1024, stage };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

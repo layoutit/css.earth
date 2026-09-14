@@ -24,26 +24,25 @@ export interface SymbolSegment {a:number[];b:number[];radius:number;category:num
 export interface PreparedSymbolSegment extends SymbolSegment {delta:number[];squared:number}
 export interface LinearTransform {scale:number;offset:number}
 export interface ScalarGrid {width:number;height:number;noData?:number|null;specialValueMagnitude?:number}
-export interface ScienceProjection {referenceRadiusMeters:number;projection?:string;poleLatitude?:number;centerLongitude:number;longitudeRange?:number[];wrapLongitude?:boolean}
+export interface ScienceProjection {referenceRadiusMeters:number;coordinates?:string;projection?:string;poleLatitude?:number;centerLongitude:number;longitudeRange?:number[];wrapLongitude?:boolean}
 export interface Relief {referenceRadiusMeters:number;lightDirection:number[];ambient:number;heightToMeters?:number}
 export type SciencePalette = ({categories:{color:string}[];minimum?:number;maximum?:number;colors?:string[]} | {categories?:undefined;minimum:number;maximum:number;colors:string[]}) & {relief?:Relief;outputLongitudeOrigin?:number};
 export interface ObservationGeometry {sun:number[];observer:number[]}
 export interface ColorBand extends ScalarGrid {data:ArrayLike<number>;origin:number[];resolution:number[];filter:string;capture?:ObservationGeometry}
-export interface ObservedColorProfile {filters:string[];referenceRadiusMeters:number;centerLongitude:number;gamma:number}
+export interface ObservedColorProfile {filters:string[];referenceRadiusMeters:number;centerLongitude:number;displayRange?:readonly number[]}
 export interface PhotometryProfile {radiusKm:number;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;referenceIncidenceDegrees:number;referenceEmissionDegrees:number;observationWeights:Record<string,number>}
 export interface ObservedColorContext {groups:ReadonlyMap<string,ColorBand[]>;profile:ObservedColorProfile;width:number;height:number;sourceIds?:string[]}
 export interface PhasePhotometry {model:string;asymmetry:number;amplitude:number;width:number;minimumDegrees:number;maximumDegrees:number;referenceDegrees:number;maximumGain:number}
-export interface DiskPhotometry {phaseCorrection?:PhasePhotometry;model?:string;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;maximumGain:number;coefficient?:number;phaseCoefficientPerDegree?:number}
+export interface DiskPhotometry {phaseCorrection?:PhasePhotometry;model?:string;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;maximumGain:number;coefficient?:number;phaseCoefficientPerDegree?:number;weight?:number}
 export interface GeoFrame {colorPlanes?:readonly ArrayLike<number>[];radianceFactor?:{factor:number;solarDistanceAu:number;solarFlux:number};width:number;height:number;planes:Record<string,ArrayLike<number>>;xyz(index:number):number[];valid(index:number):boolean;
   acceptPixel?(index:number):boolean;projectPoint?(point:readonly number[]):number[];quality?:{flags:ArrayLike<number>;allowLossy:boolean}}
 export interface SipCamera {matrix:number[][];sip:{referencePixel:number[];a:number[][];b:number[][];offsetPixels:number[]}}
 
 export interface ObservationSample {maximumIncidenceDegrees?:number;reason?:string; radiance?:number; maximumEmissionDegrees?:number}
-export interface ObservationLevelPolicy {maximumAngleDegrees?:number;minimumPairs:number;maximumLogMad:number;maximumGain:number;samplesPerTriangle?:number}
+export interface ObservationLevelPolicy {maximumAngleDegrees?:number;minimumPairs:number;maximumGain:number;samplesPerTriangle?:number}
 export interface SourceAccess {manifest?:SourceManifest;validateGroup(consumer:string):Promise<readonly SourceInput[]>;validatePath(path:string):Promise<SourceEntry>}
 export interface SurfaceConfig {geometry:{radius:number;radiusKm:number;radialTerrain:{path:string;format?:string;sourceTopology?:string;simplification:{method:string;maximumErrorMeters:number}}};raster:{height:number}}
 export interface RadialSurface {grid:SourceMesh;faces:PreparedTriangle[]}
 export interface SurfaceOptions {sourceDirectory:string;source:SourceAccess;recipe:unknown;radial:RadialSurface;config:SurfaceConfig}
 export type SurfaceColorSample = {reason:string;color:number[];radiance?:never;maximumEmissionDegrees?:never;maximumIncidenceDegrees?:never} |
   {reason?:undefined;color:number[];radiance:number;maximumIncidenceDegrees?:number;distanceMeters?:number;separationMeters?:number;gain?:number;maximumEmissionDegrees?:number;frameId?:string;frameIndex?:number};
-

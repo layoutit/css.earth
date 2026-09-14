@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/panopaea/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/panopaea/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'panopaea',controls,audit:{
   "preparedAssetPairs": [
     {

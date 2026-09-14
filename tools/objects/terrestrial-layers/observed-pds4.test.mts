@@ -2,9 +2,10 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { validatePds4ObservationPolicy, readPds4ColorLabel, decodePds4Color, mapPds4Color } from './observed-pds4.mts';
+import {linearToSrgb} from '../color-transfer.mts';
 
 // This test reads only the small pinned label, never an ignored image.
-const label = readFileSync(new URL('../../../src/planets/charon/source/observations/nh_charon_color_mosaic.lblx', import.meta.url), 'utf8');
+const label = readFileSync(new URL('../../../src/objects/charon/source/observations/nh_charon_color_mosaic.lblx', import.meta.url), 'utf8');
 const radius = 2 / Math.PI;
 const small = label.replace('<elements>1904</elements>', '<elements>2</elements>').replace('<elements>3808</elements>', '<elements>4</elements>')
   .replaceAll('>606000<', `>${radius}<`).replaceAll('>1000<', '>1<').replaceAll('>10.576695267086<', `>${1 / 90}<`)
@@ -33,7 +34,7 @@ test('little-endian BSQ channels and north-up east-positive longitudes map witho
   assert.deepEqual(source.selected, [8, 16, 24]);
   assert.equal(source.values[10], 22);
   const result = mapPds4Color(source, policy, 4, 2);
-  const expected = [2, 3, 0, 1, 6, 7, 4, 5].flatMap(i => [20 + i, 30 + i, 40 + i].map(v => Math.round(255 * v / 100)));
+  const expected = [2, 3, 0, 1, 6, 7, 4, 5].flatMap(i => [20 + i, 30 + i, 40 + i].map(v => Math.round(255 * linearToSrgb(v / 100))));
   assert.deepEqual([...result.rgb], expected);
   assert.equal(result.missing.reduce((a, b) => a + b), 0);
 });
@@ -56,7 +57,7 @@ test('negative observations remain valid and unused-band missing values do not e
 test('rounded extent retains the source metric origin instead of assigning an exact 360-degree array roll', () => {
   const shifted = small.replace('>-2<', '>-2.1<');
   const result = mapPds4Color(decodePds4Color(bytes(), shifted, entry, policy), policy, 4, 2);
-  assert.deepEqual([...result.rgb.subarray(0, 3)], [22.1, 32.1, 42.1].map(v => Math.round(v * 255 / 100)));
+  assert.deepEqual([...result.rgb.subarray(0, 3)], [22.1, 32.1, 42.1].map(v => Math.round(255 * linearToSrgb(v / 100))));
   const expanded = mapPds4Color(decodePds4Color(bytes(), small, entry, policy), policy, 16, 8);
   assert.equal(expanded.missing.reduce((a, b) => a + b), 0);
 });
@@ -71,4 +72,5 @@ test('unsupported identities, orders, projection conventions, units, scales and 
   assert.throws(() => decodePds4Color(bytes(), small, entry, { ...policy, bands: [1, 3, 4] }), /identity, bands/);
   assert.throws(() => validatePds4ObservationPolicy({ ...policy, labelPath: '../other.xml' }), /policy/);
   assert.throws(() => validatePds4ObservationPolicy({ ...policy, displayRange: [1, 0] }), /policy/);
+  assert.throws(() => validatePds4ObservationPolicy({ ...policy, colorDisplay: {} }), /unknown colorDisplay/);
 });

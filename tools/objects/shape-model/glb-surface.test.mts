@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { prepareGlbSurface } from './glb-surface.mts';
 
-const model = (id: string) => new URL(`../../../src/planets/${id}/source/nasa-${id}.glb`, import.meta.url);
+const model = (id: string) => new URL(`../../../src/objects/${id}/source/nasa-${id}.glb`, import.meta.url);
 
 // Small actual-source reprojections cover the high-density Eris triangles,
 // Haumea's polar UV islands, and Makemake's slightly irregular cube-mapped mesh.

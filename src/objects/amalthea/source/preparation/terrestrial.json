@@ -1,0 +1,239 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "amalthea",
+  "displayName": "Amalthea",
+  "publicBase": "/scenes/amalthea/",
+  "distanceAu": 5.2,
+  "raster": {
+    "width": 1024,
+    "height": 512,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 256,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "scientific-surfaces",
+        "path": "shape/j5amalthea.tab",
+        "format": "pds-radius-table",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 2522,
+          "expectedFaces": 5040,
+          "stepDegrees": 5,
+          "longitudeDirection": "west-positive"
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -83.5
+        },
+        "minimum": -35,
+        "maximum": 50,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 83500,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.45
+        },
+        "sampleGrid": {
+          "width": 361,
+          "height": 181
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceObservations": [
+      {
+        "id": "normal",
+        "format": "controlled-shape-camera",
+        "consumer": "galileo-frames",
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
+          "attribution": {
+            "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/galileo/ssi/"
+          }
+        },
+        "frames": [
+          {
+            "id": "c0420626379",
+            "path": "observations/C0420626379R.IMG",
+            "labelPath": "observations/C0420626379R.LBL",
+            "encoding": "vicar-byte-dn",
+            "observerLatitude": -0.511,
+            "observerWestLongitude": 76.3,
+            "sunLatitude": 0.131,
+            "sunWestLongitude": 76.501,
+            "rangeKm": 680739.779,
+            "northAzimuthDegrees": 350.25,
+            "center": [
+              235.953,
+              235.733
+            ],
+            "pixelAngleMicroradians": 10.15,
+            "backgroundOffset": 0.0078431,
+            "backgroundMaximum": 0.0078431
+          },
+          {
+            "id": "c0420652501",
+            "path": "observations/C0420652501R.IMG",
+            "labelPath": "observations/C0420652501R.LBL",
+            "encoding": "vicar-byte-dn",
+            "observerLatitude": -0.839,
+            "observerWestLongitude": 205.53,
+            "sunLatitude": 0.13,
+            "sunWestLongitude": 209.011,
+            "rangeKm": 474680.745,
+            "northAzimuthDegrees": 351.67,
+            "center": [
+              352.01,
+              107.804
+            ],
+            "pixelAngleMicroradians": 10.15,
+            "backgroundOffset": 0.0078431,
+            "backgroundMaximum": 0.0078431
+          },
+          {
+            "id": "c0512324200",
+            "path": "observations/C0512324200R.IMG",
+            "labelPath": "observations/C0512324200R.LBL",
+            "encoding": "vicar-byte-dn",
+            "observerLatitude": 0.708,
+            "observerWestLongitude": 153.769,
+            "sunLatitude": 3.208,
+            "sunWestLongitude": 175.545,
+            "rangeKm": 443554.251,
+            "northAzimuthDegrees": 347.322,
+            "center": [
+              562.121,
+              227.923
+            ],
+            "pixelAngleMicroradians": 10.15,
+            "backgroundOffset": 0.0156863,
+            "backgroundMaximum": 0.0078431
+          },
+          {
+            "id": "c0532888100",
+            "path": "observations/C0532888100R.IMG",
+            "labelPath": "observations/C0532888100R.LBL",
+            "encoding": "vicar-byte-dn",
+            "observerLatitude": 0.184,
+            "observerWestLongitude": 163.894,
+            "sunLatitude": 3.388,
+            "sunWestLongitude": 104.162,
+            "rangeKm": 237799.22,
+            "northAzimuthDegrees": 184.57299999999998,
+            "center": [
+              445.95,
+              179.155
+            ],
+            "pixelAngleMicroradians": 10.15,
+            "backgroundOffset": 0.023529411764705882,
+            "backgroundMaximum": 0.011764705882352941,
+            "coverageInsetPixels": 10
+          }
+        ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 64,
+          "maximumGain": 9.1,
+          "maximumAngleDegrees": 70
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 75
+        },
+        "photometry": {
+          "model": "lunar-lambert",
+          "weight": 0.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 72,
+          "maximumEmissionDegrees": 75,
+          "maximumGain": 2
+        },
+        "display": {
+          "displayRange": [
+            0,
+            0.133
+          ]
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 83.5,
+    "camera": {
+      "initialScenePitchDegrees": 1.319689164252455,
+      "defaultControlYawDegrees": -20.79765038440197
+    },
+    "mapUrl": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
+    "polesUrl": "/scenes/amalthea/amalthea-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/j5amalthea.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 2522,
+        "expectedFaces": 5040,
+        "stepDegrees": 5,
+        "longitudeDirection": "west-positive"
+      },
+      "faceBudget": 2000,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 800,
+        "maximumErrorMeters": 1500,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Jupiter-system ephemeris and IAU/WGCCRE rotation; the PDS Stooke body origin and west-positive longitude are preserved."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      155,
+      151,
+      146
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

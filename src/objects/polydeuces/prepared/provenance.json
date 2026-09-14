@@ -1,0 +1,530 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "polydeuces",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "27aece0c405361802f710f1b03863e15024bda2650b4d9df90e514c7a8b0622f"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "f035a065b8da2b2fdf04d65fc11feec44275431da03f325adce75af35785d866",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "polydeuces",
+        "displayName": "Polydeuces",
+        "publicBase": "/scenes/polydeuces/",
+        "distanceAu": 9.58,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "surfaceObservations": [
+            {
+              "id": "normal",
+              "format": "controlled-shape-camera",
+              "consumer": "cassini-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "coverage": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions."
+              },
+              "frames": [
+                {
+                  "id": "n1527002576",
+                  "path": "observations/N1527002576_1_CALIB.IMG",
+                  "labelPath": "observations/N1527002576_1_CALIB.LBL",
+                  "observerLatitude": -0.51,
+                  "observerWestLongitude": 282.09,
+                  "sunLatitude": -17.38,
+                  "sunWestLongitude": 272.34,
+                  "rangeKm": 64087.42,
+                  "northAzimuthDegrees": 359.92,
+                  "center": [
+                    524.1,
+                    511.2
+                  ],
+                  "pixelAngleMicroradians": 5.992,
+                  "backgroundMaximum": 0.03,
+                  "coverageInsetPixels": 1
+                }
+              ],
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 55
+              },
+              "photometry": {
+                "model": "lunar-lambert",
+                "weight": 1,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 55,
+                "maximumEmissionDegrees": 55,
+                "maximumGain": 2
+              },
+              "display": {
+                "displayRange": [
+                  0,
+                  0.658
+                ]
+              }
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 1.525973578806757,
+          "camera": {
+            "initialScenePitchDegrees": 13.172927488458257,
+            "defaultControlYawDegrees": 44.85563673651928
+          },
+          "mapUrl": "/scenes/polydeuces/polydeuces-normal-surface@2x.webp",
+          "polesUrl": "/scenes/polydeuces/polydeuces-normal-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 38.149339470168925,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Saturn-system ephemeris. Display pole aligned to the fitted orbital normal; arbitrary meridian, no measured spin or current landmark phase is claimed."
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "bb19904969e73308c3f61323dbe584b6281616b10637f62f75ddea9234f45400",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "polydeuces",
+        "displayName": "Polydeuces",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "1.53 ± 0.20 km"
+            },
+            {
+              "id": "dimensions",
+              "label": "Measured dimensions",
+              "value": "3.5 × 3.1 × 2.62 km"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Distance from Saturn",
+              "value": "About 377,400 km"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "About 65.69 hours"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery images",
+              "value": "Cassini imaging team · 2004"
+            },
+            {
+              "id": "shape",
+              "label": "Shape interpretation",
+              "value": "Analytic ellipsoid approximating measured axes, not the detailed shape solution"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "labels": {
+            "normal": "Monochrome"
+          },
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "thumbnail": "/scenes/polydeuces/polydeuces-normal-thumbnail.webp",
+              "surface": "polydeuces-normal-surface@2x.webp",
+              "poles": "polydeuces-normal-poles@2x.webp",
+              "source": {
+                "id": "cassini-n1527002576",
+                "path": "../manifest.json",
+                "url": "https://arxiv.org/abs/1912.09192"
+              },
+              "notes": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions.",
+              "noData": true
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Polydeuces overview",
+            "href": "https://science.nasa.gov/saturn/moons/polydeuces/"
+          },
+          {
+            "label": "Hedman et al.",
+            "role": "surface",
+            "description": "Cassini shape and photometric analysis",
+            "href": "https://arxiv.org/abs/1912.09192"
+          },
+          {
+            "label": "NASA/JPL; PDS",
+            "role": "observations",
+            "description": "Cassini source inventory",
+            "href": "https://pds-rings.seti.org/cassini/iss/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/saturn/moons/polydeuces/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Hedman et al. (2020), Table 1 and Appendix B"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "cassini-n1527002576",
+      "path": "observations/N1527002576_1_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.IMG",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "NASA/PDS scientific data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/PolicyOnUseOfPDSSourcedMaterials.txt"
+      ],
+      "acquisition": "Pinned original PDS download in preparation/acquisition.json.",
+      "redistribution": "Attribute NASA/JPL-Caltech/SSI and the PDS archive. No endorsement.",
+      "coverage": "Original CISSCAL 4.0beta I/F,1024×1024; mapped only within authored illumination and pointing validity.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "survey/camera.json",
+        "referenceRadiusMeters": 1525.973578806757
+      },
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2023-data-1526963400-1527153972-n1527002576-1-calib",
+            "role": "material",
+            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "30e586a1594776e581f559be522b2a93643753ad2c5a909350e723f1cd7396c1",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1527002576_1_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "cassini-n1527002576-label",
+      "path": "observations/N1527002576_1_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "NASA/PDS scientific data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/PolicyOnUseOfPDSSourcedMaterials.txt"
+      ],
+      "acquisition": "Pinned original PDS download in preparation/acquisition.json.",
+      "redistribution": "Attribute NASA/JPL-Caltech/SSI and the PDS archive. No endorsement.",
+      "coverage": "Original detached PDS label describing calibration, exposure and instrument.",
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "survey/camera.json",
+        "referenceRadiusMeters": 1525.973578806757
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2023-data-1526963400-1527153972-n1527002576-1-calib",
+            "role": "material",
+            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
+      "sha256": "e97f2e076e4d3e41d9197c51ad4c52ad08f18165d2185404440a5e30914e5555",
+      "bytes": 3858,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1527002576_1_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "measured-ellipsoid",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://arxiv.org/abs/1912.09192",
+      "credit": "Hedman et al. (2020), Table 1 and Appendix B; cssEarth standard grid",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://arxiv.org/abs/1912.09192"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "coverage": "Ellipsoidal approximation to measured 3.5 × 3.1 × 2.62 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1525.973578806757
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1912-09192",
+            "role": "method",
+            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
+      "sha256": "529125f91d71589dda0a4ae68991fc1dace4448dd3bf768bcb13015d19fd053b",
+      "bytes": 59703,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "bb19904969e73308c3f61323dbe584b6281616b10637f62f75ddea9234f45400",
+      "bytes": 3271,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "cassini-n1527002576",
+        "cassini-n1527002576-label",
+        "measured-ellipsoid"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/polydeuces/polydeuces-normal-thumbnail.webp",
+          "bytes": 1894,
+          "sha256": "2e28d19ecd32824054c6bce9b053f96b9c7ab77d29856fc555ae483583ab747c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/polydeuces/polydeuces-normal-surface@2x.webp",
+          "bytes": 66582,
+          "sha256": "52eb9cab48c7892a0077b321f8cb650fb1779e7ff1105c221d592802eb626460",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 7399,
+          "sha256": "09fc77c686a40c62e9b0b9aa19cdfb9cd5d2d4588c5891948dbdf32e0d5d12a2",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 3792,
+          "sha256": "78b3a149148e893269778d70379817dfb43671c978a22569cc70d2b9c250b6ec",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

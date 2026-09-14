@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "helene",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Helene",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "d7cbe557e2e47bc17d6eb17d6d3892462bf255989e9bfd85d4603306299075fb"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "8ca61c2308d8a9cc087be1c26e2a9b62e52b4c2d27162b1a83e1e8ec3ac69b33"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "48a6ef1679e09019a418985383089ae4b2f4af00fee1e749febce3803124a68a"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "bd58348de81d40f9f8990d4247b7009bf510fd92a6fc1e0579e4c7c69fadd6cb"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "dbc7bd7f82473f76cd5477bf978097c64f58be8fd442a9b78c4b50385072f30f"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "7b9917ef09b2e3619a8994a3ed9b74483f3cf53099b18f1f6e5cdccd2a12dc55"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 18
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "false-color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1390385649885.622,
+        245421260610.86624,
+        41364632345.69086
+      ],
+      "presentationToReference": [
+        0.9852335997440341,
+        4.163336342344337e-17,
+        -0.17121551896779846,
+        0.15708716740082085,
+        0.3977771559319137,
+        0.9039341547129991,
+        0.06810562218641751,
+        -0.9174820620691817,
+        0.39190341923474326
+      ],
+      "orbitUpReference": [
+        -4.163336342344337e-17,
+        -0.3977771559319137,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 78.26086956521739,
+      "bodyRadiusM": 18000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/helene-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "686097199efb5f36b340d44abbed870f02a0a7b124b85a50df260b71a23d3c96"
+      }
+    },
+    "catalog": {
+      "name": "Helene",
+      "classification": "satellite",
+      "color": "#c3bfb7",
+      "distanceAu": 9.58,
+      "description": "Small moon that leads Dione around Saturn from a Lagrange point.",
+      "systemName": "Solar System",
+      "order": 115,
+      "context": {
+        "order": 52
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "de519909b08d101338fa55c9a304195a24086694008bb30ac27a83cf09597460"
+  }
+}

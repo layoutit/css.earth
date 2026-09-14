@@ -13,8 +13,8 @@ const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argume
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 
 const bodies = await Promise.all(OBJECTS.map(async ({ id }) => {
-  const text = parsePreparedText(await read(`../../src/planets/${id}/prepared/text.json`), id);
-  const lenses = requireRecord(await read(`../../src/planets/${id}/prepared/controls.json`)).lenses;
+  const text = parsePreparedText(await read(`../../src/objects/${id}/prepared/text.json`), id);
+  const lenses = requireRecord(await read(`../../src/objects/${id}/prepared/controls.json`)).lenses;
   const labels = new Map(lenses === null || lenses === undefined ? [] : requireArray(requireRecord(lenses).controls).map(value => {
     const control = requireRecord(value);
     return [requireString(control.id), requireString(control.label)] as const;

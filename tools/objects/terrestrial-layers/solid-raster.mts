@@ -1,6 +1,7 @@
 import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {RgbObservation} from './contracts.mts';
 import type {RadialState} from './solid-contract.mts';
+import { encodeBandColor } from '../color-transfer.mts';
 import {parseSolidRasterConfig,parseSurfaceSource} from './solid-source.mts';
 import {requireTerrainMesh} from './radial-terrain.mts';
 import {shape,text,number} from './source-records.mts';
@@ -33,8 +34,6 @@ import { preparePdsRgbObservation } from './observed-pds-rgb.mts';
 import { prepareByteObservation } from './observed-image.mts';
 import { preparePds4Observation } from './observed-pds4.mts';
 import { prepareFitsObservation } from './observed-fits.mts';
-import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mts';
-import { prepareShapeCameraMosaic, prepareShapeCameraColor, resolveCameraPhotometry } from './shape-camera-mosaic.mts';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mts';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mts';
 import { loadSurfaceObservation } from '../surface-observations/index.mts';
@@ -181,27 +180,15 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   }
   for (const view of config.raster.shapeViews ?? []) {
     const entries = await source.validateGroup(view.consumer);
-    const entry = entries.find(input => input.path === config.geometry?.radialTerrain?.path);
+    const modelConfig = modelForLens(view.id)?.config ?? config;
+    const terrain = requireRecord(requireRecord(modelConfig.geometry).radialTerrain);
+    const entry = entries.find(input => input.path === terrain.path);
     if (!entry) throw new Error('Shape display is not bound to the rendered source mesh.');
     const rgb = Buffer.alloc(width * height * 3);
     const missingImagery = new Uint8Array(width * height).fill(1);
     surfaces.push(await packSurface(view.id, rgb, missingImagery, { label: view.label,
       appearance: 'Shared no-imagery grid over source geometry; not observed surface color or albedo.',
       source: { id: entry.id, sha256: entry.expectedSha256 } }));
-  }
-  for (const recipe of config.raster.mosaics ?? []) {
-    const tiles = await source.validateGroup(recipe.consumer);
-    if (recipe.photometry?.consumer) await source.validateGroup(recipe.photometry.consumer);
-    const { rgb, missing, grid } = recipe.format === 'controlled-shape-color'
-      ? await prepareShapeCameraColor(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain)
-      : recipe.format === 'controlled-shape-camera'
-      ? await prepareShapeCameraMosaic(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain,
-        { photometry: await resolveCameraPhotometry(sourceDirectory, source.manifest, recipe) })
-      : recipe.format === 'controlled-orthographic'
-      ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, recipe, width, height)
-      : await preparePdsByteMosaic(sourceDirectory, tiles, width, height);
-    surfaces.push(await packSurface(recipe.id, rgb, missing, { ...recipe.metadata,
-      sourceIds: tiles.map(tile => tile.id), sourceGrid: grid }));
   }
   for (const recipe of config.raster.surfaceObservations ?? []) {
     const model = modelForLens(recipe.id), observationRadial = model?.radial ?? radial, observationConfig = model?.config ?? config;
@@ -288,14 +275,13 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     if (!base) throw new Error(`Color observation base does not exist: ${recipe.monochromeBase}`);
     if (photometry && !('owners' in color)) throw new Error('Corrected color has no observation ownership.');
     const levels=recipe.photometry && 'owners' in color ? matchObservedColorLevels(color,base,{width,height,...recipe.photometry.levels}):null;
-    if(photometry && !color.rgb.every(value=>Number.isFinite(value)&&value>=0&&value<=255))throw new Error('Corrected observation exceeds the display range.');
-    const rgb = color.rgb instanceof Uint8Array ? color.rgb : Buffer.from(color.rgb);
+    const rgb = color.rgb instanceof Uint8Array ? color.rgb : encodeBandColor(color.rgb,color.missing,color.display);
     let monochromePixels = 0;
     for (let i = 0; i < color.missing.length; i++) if (color.missing[i] && !base.missing[i]) {
       rgb.set(base.rgb.subarray(i * 3, i * 3 + 3), i * 3); color.missing[i] = 0; monochromePixels++;
     }
     surfaces.push(await packSurface(recipe.id, rgb, color.missing, {
-      ...recipe.metadata, sourceIds: color.sourceIds, monochromePixels, observationCoverage: color.coverage,
+      ...recipe.metadata, sourceIds: color.sourceIds, monochromePixels, observationCoverage: color.coverage,colorDisplay:color.colorDisplay,
       ...(photometry?{photometry:'photometry' in color ? color.photometry : undefined,levels}:{}),
     }));
   }

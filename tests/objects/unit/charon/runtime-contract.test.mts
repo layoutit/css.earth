@@ -4,16 +4,17 @@
 import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../src/planets/charon/prepared/runtime.json" with { type: "json" };
-import assets from "../../../../src/planets/charon/prepared/assets.json" with { type: "json" };
-import scene from "../../../../src/planets/charon/prepared/scene.json" with { type: "json" };
-import lenses from "../../../../src/planets/charon/prepared/lenses.json" with { type: "json" };
-import controls from "../../../../src/planets/charon/prepared/controls.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/charon/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/objects/charon/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/objects/charon/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/objects/charon/prepared/lenses.json" with { type: "json" };
+import controls from "../../../../src/objects/charon/prepared/controls.json" with { type: "json" };
+import text from "../../../../src/objects/charon/prepared/text.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
-const LENS_IDS = ["normal","enhanced-color","elevation","albedo"];
+const LENS_IDS = ["normal","enhanced-color","elevation","albedo","water-ice","ammonia"];
 
 objectRuntimePackageTests(runtimeDefinition);
 
@@ -25,7 +26,7 @@ test("Charon's actual import closure has only shared runtime owners", async () =
   }
 });
 
-test("Charon is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 4 lenses", () => {
+test("Charon is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its lenses", () => {
   assert.equal(scene.schema, "csscharon-prepared-runtime-scene@1");
   assert.equal(scene.runtimeGeometry, false);
   assert.equal(scene.runtimeRasterization, false);
@@ -53,7 +54,7 @@ test("Charon lenses keep their prepared legends and false-colour declarations", 
   const byId = new Map(controls.lenses.controls.map(control => [control.id, control]));
   for (const control of lenses.controls) {
     const shell = required(byId.get(control.id));
-    assert.equal(typeof shell.description, "string");
+    assert.equal(typeof Object.getOwnPropertyDescriptor(text.datasets, control.id)?.value?.summary, "string");
     if (shell.legend?.kind === "scale") assert.ok((shell.legend.colors?.length ?? 0) >= 2 && (shell.legend.labels?.length ?? 0) >= 2);
     if (shell.legend?.kind === "categories") assert.ok((shell.legend.items?.length ?? 0) >= 2);
   }

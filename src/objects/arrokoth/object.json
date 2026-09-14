@@ -1,0 +1,140 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "arrokoth",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Arrokoth",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "906188010b6526c0f881940f6068f4fdd3b21f8aa1afc983963e603b58d87c76"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "5a63306abdb39a70a80e30b57fb39f33d3e2fd26c76f4598af35bd2d3301d73e"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "e58b93ac7ee5768044b3fc78455aa5c0a393e688533aea3fa890e8a2e49c786a"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "e7dc0403db56018a9aefb0b02a9594a76c8b3b7d79f31fe04ac4241e9ca0b0dd"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "3f800af539eaddd54e5fb0db02b9873a4b94afe8cd0a9f15c6ec964dc4bee07e"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "7a8f48363057c21782ce822396c1c75f66e795b981dfb2ee8e55f25dd36489ea"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 9.948
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "albedo",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/arrokoth-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5e801fc236721991ff0ab8561da90dae571267c4b0ef58ae13dc462aed8446ea"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2825689377771.6777,
+        -5381877859225.271,
+        -2128517993934.0159
+      ],
+      "presentationToReference": [
+        0.43892614272844166,
+        -2.7755575615628914e-17,
+        0.8985231445152271,
+        -0.8243788674467161,
+        0.3977771559319137,
+        0.4027068625265626,
+        -0.3574119809642669,
+        -0.9174820620691817,
+        0.17459479271868478
+      ],
+      "orbitUpReference": [
+        2.7755575615628914e-17,
+        -0.3977771559319137,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 43.25217391304348,
+      "bodyRadiusM": 9948
+    },
+    "catalog": {
+      "name": "Arrokoth",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 44.05655144131418,
+      "description": "Two-lobed Kuiper Belt object that New Horizons flew past.",
+      "systemName": "Solar System",
+      "order": 357,
+      "context": {
+        "order": 423,
+        "color": "#9d9388"
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "574b7be8679ca1f25934b425fa5e9b7481ecb7eaaa0590cedc0333196b20f9aa"
+  }
+}

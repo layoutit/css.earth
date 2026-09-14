@@ -5,14 +5,13 @@ import { basename, resolve } from 'node:path';
 import { decodePds4GeometryCube } from '../../../../tools/objects/terrestrial-layers/pds4-geometry-cube.mts';
 import { fitBackplaneCamera } from '../../../../tools/objects/surface-observations/cameras.mts';
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
-import { parseGeoRecipe } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
+import { parseGeoLens } from '../../../../tools/objects/surface-observations/formats/geo.mts';
 
-const root = resolve(import.meta.dirname, '../../../../src/planets/didymos/source');
+const root = resolve(import.meta.dirname, '../../../../src/objects/didymos/source');
 const config = JSON.parse(await readFile(resolve(root, 'preparation/terrestrial.json'), 'utf8'));
-const recipe = parseGeoRecipe(config.raster.surfaceObservations.find((entry: { id: string }) => entry.id === 'draco'));
+const recipe = parseGeoLens(config.raster.surfaceObservations.find((entry: { id: string }) => entry.id === 'draco'));
 const declaration = recipe.cube;
 assert.ok(declaration?.geometrySelection);
-assert.ok(recipe.frames);
 const mesh = await loadObjShape(resolve(root, config.geometry.radialTerrain.path), config.geometry.radialTerrain.grid);
 
 test('the selected native radius interval encloses the complete Didymos mesh and excludes Dimorphos', async () => {

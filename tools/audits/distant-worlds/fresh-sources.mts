@@ -8,7 +8,7 @@ const root=resolve(reportDirectory,'fresh-sources');
 assert.equal(await stat(root).then(()=>true,e=>{if(e.code==='ENOENT')return false;throw e;}),false,'Fresh source root must start absent');
 const downloaded=new Map<string,string>(),results:Array<{readonly id:string;readonly inputCount:number;readonly generatedIntermediateCount:number;readonly documentCount:number;readonly verifiedCount:number;readonly downloaded:readonly string[];readonly reusedFreshPinnedDownloads:readonly string[]}>=[];
 for(const {id} of bodies){
- const original=resolve('src/planets',id,'source'),sourceRoot=resolve(root,id);
+ const original=resolve('src/objects',id,'source'),sourceRoot=resolve(root,id);
  const manifestInput:unknown=JSON.parse(await readFile(resolve(original,'manifest.json'),'utf8'));
  const planInput:unknown=JSON.parse(await readFile(resolve(original,'preparation/acquisition.json'),'utf8'));
  const manifest=parseSourceManifest(manifestInput,id);

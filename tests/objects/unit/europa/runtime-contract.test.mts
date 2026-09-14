@@ -4,11 +4,12 @@
 import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../src/planets/europa/prepared/runtime.json" with { type: "json" };
-import assets from "../../../../src/planets/europa/prepared/assets.json" with { type: "json" };
-import scene from "../../../../src/planets/europa/prepared/scene.json" with { type: "json" };
-import lenses from "../../../../src/planets/europa/prepared/lenses.json" with { type: "json" };
-import controls from "../../../../src/planets/europa/prepared/controls.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/europa/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/objects/europa/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/objects/europa/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/objects/europa/prepared/lenses.json" with { type: "json" };
+import controls from "../../../../src/objects/europa/prepared/controls.json" with { type: "json" };
+import text from "../../../../src/objects/europa/prepared/text.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
@@ -53,7 +54,7 @@ test("Europa lenses keep their prepared legends and false-colour declarations", 
   const byId = new Map(controls.lenses.controls.map(control => [control.id, control]));
   for (const control of lenses.controls) {
     const shell = required(byId.get(control.id));
-    assert.equal(typeof shell.description, "string");
+    assert.equal(typeof Object.getOwnPropertyDescriptor(text.datasets, control.id)?.value?.summary, "string");
     if (shell.legend?.kind === "scale") assert.ok((shell.legend.colors?.length ?? 0) >= 2 && (shell.legend.labels?.length ?? 0) >= 2);
     if (shell.legend?.kind === "categories") assert.ok((shell.legend.items?.length ?? 0) >= 2);
   }

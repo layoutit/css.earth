@@ -1,0 +1,708 @@
+{
+  "schema": "csslutetia-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-shape",
+      "path": "shape/lutetia_025k_cart.wrl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
+      "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 49000
+      },
+      "coverage": "Closed published model: image-derived northern terrain joined to lightcurve/adaptive-optics constrained unseen regions; source seams and local defects remain.",
+      "expectedBytes": 2954640,
+      "expectedSha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "rosetta",
+            "missionId": "rosetta",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-lutetia-lutetia-shape",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-observations-n20100710t154047674id4df22-img",
+      "path": "observations/n20100710t154047674id4df22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154047674id4df22.img",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 37775872,
+      "expectedSha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-lutetia-lutetia-observations-n20100710t154047674id4df22-img",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-reference-naif0012-tls",
+      "path": "reference/naif0012.tls",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "naif-leapseconds-0012",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-reference-ROS_V33-TF",
+      "path": "reference/ROS_V33.TF",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/fk/former_versions/ROS_V33.TF",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 237356,
+      "expectedSha256": "f6101b9c71fbcb8f0805a32b29631e8a20676f860e0eeff4a951649d77753bb1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "rosetta-frames-v33",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-reference-ROS_OSIRIS_V15-TI",
+      "path": "reference/ROS_OSIRIS_V15.TI",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/ik/former_versions/ROS_OSIRIS_V15.TI",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 23016,
+      "expectedSha256": "92efe258f66d12b6b4cddfeadab158e8d1e28d838669dc8d8520442cf46e9587",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "rosetta-osiris-v15",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-reference-ROS_LUTETIA_RSOC_V03-TPC",
+      "path": "reference/ROS_LUTETIA_RSOC_V03.TPC",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/pck/ROS_LUTETIA_RSOC_V03.TPC",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 3482,
+      "expectedSha256": "b4d42ae56a08391ff72c7d6ac3a9f6f2c6ecddcdf3f081c862f0919e23ce0b6f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-lutetia-lutetia-reference-ros-lutetia-rsoc-v03-tpc",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-reference-ROS_LUTETIA_RSOC_V03-TF",
+      "path": "reference/ROS_LUTETIA_RSOC_V03.TF",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/fk/ROS_LUTETIA_RSOC_V03.TF",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 2041,
+      "expectedSha256": "88b7ad6e1bc04dd6ebca124c771c2780d6f33c348acd0f8aa914cca428056346",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-lutetia-lutetia-reference-ros-lutetia-rsoc-v03-tf",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-reference-osiris-boresight-pdf",
+      "path": "reference/osiris-boresight.pdf",
+      "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSIWAC/RO-C-OSIWAC-5-ESC2-67P-M15-GEO-V2.0/DOCUMENT/CALIB/BORESIGHT_V01.PDF",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 801308,
+      "expectedSha256": "3f3b07c90b8180d0a7212b1679844765cc8672b8b8f50ed4e686f24139ac5318",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "rosetta-osiris-boresight-v01",
+            "role": "method",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-reference-osiris-photometry-pdf",
+      "path": "reference/osiris-photometry.pdf",
+      "origin": "https://arxiv.org/pdf/1710.01356",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 14720439,
+      "expectedSha256": "5d7264ac14a57179b7c381c92aab7756993624deb58cf70a6936b0ceb00b9b9b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1710-01356",
+            "role": "method",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-preparation-camera-json",
+      "path": "preparation/camera.json",
+      "origin": "Authored source-bound camera profile",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 1240,
+      "expectedSha256": "1f769499fd728829262741e3686092566b21e065af70fba582ca9a3bf2d7ee70",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera solution for the source image; the file records the camera parameters and the image it registers."
+      }
+    },
+    {
+      "id": "lutetia-observations-osiris-camera-json",
+      "path": "observations/osiris-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 5070,
+      "expectedSha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Camera geometry calculated from the pinned image and mission kernels for 21 LUTETIA at 2010-07-10T15:41:06.632."
+      }
+    },
+    {
+      "id": "lutetia-n20100710t154135529id4df22-camera",
+      "path": "observations/n20100710t154135529id4df22-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 5104,
+      "expectedSha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Camera geometry calculated from the pinned image and mission kernels for 21 LUTETIA at 2010-07-10T15:41:54.488."
+      }
+    },
+    {
+      "id": "lutetia-n20100710t154135529id4df22-img",
+      "path": "observations/n20100710t154135529id4df22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154135529id4df22.img",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 37775872,
+      "expectedSha256": "b9435d017f9469503f099f224ca86567b6722ff877aa27d3a178a857e23b43b1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-lutetia-lutetia-n20100710t154135529id4df22-img",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-n20100710t154135529id4df22-camera-json",
+      "path": "preparation/n20100710t154135529id4df22-camera.json",
+      "origin": "Authored source-bound camera profile",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 1260,
+      "expectedSha256": "2cff0cedc5f8f5aa083d50925bc88645b2c24975f022485ed613a202faa84b1c",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera solution for the source image; the file records the camera parameters and the image it registers."
+      }
+    },
+    {
+      "id": "usgs-gazetteer-lutetia-nomenclature-center-pts",
+      "path": "features/LUTETIA_nomenclature_center_pts.zip",
+      "expectedBytes": 134132,
+      "expectedSha256": "5feb1d89610b0dcc1be87d6f4d80d604e723c1be4ec310262951de0581a4fbf7",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/LUTETIA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Lutetia on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Lutetia centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/LUTETIA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "lutetia-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1010,
+      "expectedSha256": "4c8dd8e79922736361cfec1d91ef62c077141e96d6a5930abfc0589971e7f58b",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "lutetia-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1163,
+      "expectedSha256": "a4eaa26f71b3e4d11f0874914e4c0a01438192ab3cd5f512846fbf041fe16ae7",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "lutetia-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 154,
+      "expectedSha256": "f508382e29ce3a5c5f70723acc78f74488ac01491c005469b370bb423c97386d",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "lutetia-n20100710t154241240id4df22-img",
+      "path": "observations/n20100710t154241240id4df22.img",
+      "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSINAC/RO-A-OSINAC-4-AST2-LUTETIA-STR-REFL-V1.0/DATA/IMG/N20100710T154241240ID4DF22.IMG",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 37776384,
+      "expectedSha256": "b1c6c6ecf86cd733290f2eebd972d6b227d235e5f5552bb3a1e42f3d9f496481",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "rosetta-osiris-n20100710t154241240id4df22",
+            "role": "material",
+            "evidence": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSINAC/RO-A-OSINAC-4-AST2-LUTETIA-STR-REFL-V1.0/DATA/IMG/N20100710T154241240ID4DF22.IMG"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-n20100710t154241240id4df22-profile",
+      "path": "preparation/n20100710t154241240id4df22-camera.json",
+      "origin": "Authored source-bound camera profile",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 1305,
+      "expectedSha256": "f02475659a396f1543440155fec7a7caaf53966b2348b090cc18e0751c78a66c",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera solution for the source image; the file records the camera parameters and the image it registers."
+      }
+    },
+    {
+      "id": "lutetia-n20100710t154241240id4df22-camera",
+      "path": "observations/n20100710t154241240id4df22-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 5140,
+      "expectedSha256": "b6e70f70299f772905d3063b891fd8110c00799d54476ed66d068dd39dbefa3a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Camera computed from the exact native image, released kernels and pinned source shape. Two disjoint image windows fit a translation; two withheld windows check it."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
+      "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 84494,
+      "expectedSha256": "119daaded8bc58a2eccd1d1c7f05c18d9dd40c88abf4cd9fed1f8305088e695b",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "lutetia-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 9557,
+      "expectedSha256": "e7f044ab21704eab1dce605a1ae61512e898b5a9bae7e714a57c774aa9288cb1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 3784,
+      "expectedSha256": "f51b72478274bf4abd6f4e5166ae027471e349c1add33798abbe439afb581dc2"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1337,
+      "expectedSha256": "30b69785f621a11b2e228038377f2324daeacbe13f158546b6928ad60df5c791"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 419,
+      "expectedSha256": "ac51093359c7090b9af0c940126b79a71ebe29471c1d4de2d62b390a79bcea82"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 5300,
+      "expectedSha256": "8fd61a24e4831ee7b6b2c473f06aa522d829712b737dff9791fe15c145fb1e3b"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3488,
+      "expectedSha256": "66b61e0c640562a0355f525012460c85856f1710da801f2882a3439c0d6aaeed"
+    },
+    {
+      "path": "reference/dataset.cat",
+      "expectedBytes": 14720,
+      "expectedSha256": "38385e9b54b1dbd93fc4d2c751fb7ddff721ddc5fefcc733ea121f99b48993fb"
+    },
+    {
+      "path": "reference/esa-coverage.jpg",
+      "expectedBytes": 700991,
+      "expectedSha256": "68906de5b12f11022030d1a783308f5735cc7045686b84f3777b14f01fa9ff46"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "expectedBytes": 1289,
+      "expectedSha256": "f4cfa64a0c0decbd32561f2f9aa84911489f66a6704316fc464ca72bc3796acf"
+    },
+    {
+      "path": "reference/lutetia_025k_cart.lbl",
+      "expectedBytes": 10000,
+      "expectedSha256": "cc31291601551f5f3555c7a5ec3ca93dbb48319eaa76726fc9ff3ecab7f52a24"
+    },
+    {
+      "path": "reference/lutetia_0n0e.png",
+      "expectedBytes": 80177,
+      "expectedSha256": "59854cccb0e49ffac99fd6e91012610ccb8693e498a4468d6e5fb59e2feb4702"
+    },
+    {
+      "path": "reference/lutetia_90n.png",
+      "expectedBytes": 136033,
+      "expectedSha256": "49ad0789054d26dc054df9312bb1e954e5e75d518968c082c6f2a35a23cc1cda"
+    },
+    {
+      "path": "reference/lutetia_rotation.pdf",
+      "expectedBytes": 1090650,
+      "expectedSha256": "c7b362305104aaaa578d10f2aa5295995312428e7daf88418e3012a2004962a7"
+    },
+    {
+      "path": "reference/lutetia_shape_defects.lbl",
+      "expectedBytes": 1680,
+      "expectedSha256": "c978d10512ea99e42ddad8bdd705edb4b189c527a149c0a6b0c5614f41632e8c"
+    },
+    {
+      "path": "reference/osiris-example-label.txt",
+      "expectedBytes": 27648,
+      "expectedSha256": "5111f7ea57a1b54fa3b03c9b3cf15659b6ed361d9995d3dda9c07355911132f9"
+    },
+    {
+      "path": "reference/osiris-str-refl-dataset.cat",
+      "expectedBytes": 5935,
+      "expectedSha256": "9c300606cc8fabe1372ab7bb22586ed2d0205e09be403ae69a7dcafddd00479a"
+    },
+    {
+      "path": "reference/plate_shape_definition.asc",
+      "expectedBytes": 6640,
+      "expectedSha256": "cc775dc2d1d15cedb26b4badbeb777f480689510fa34652b75cdc6ba85ef677a"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 89773,
+      "expectedSha256": "f613473b1e268a1f3f2b29ea43c0b2c76c921b85b9904fb8c2c0263f8cf8e4f6"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "id": "lutetia-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 1335,
+      "expectedSha256": "92372088c940f9dddf30480811a68ac518a0704a943de78c4bd622c8e8e87cc9",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts lutetia: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "photometry/hasselmann-2016-hapke-1993.json",
+      "expectedBytes": 663,
+      "expectedSha256": "c2e60730c7d6c0b9bc8b5a688d8d5dfeed8fe948bb240141da3c8ecf9037f718",
+      "purpose": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2015-11-023",
+            "role": "method",
+            "evidence": "Hasselmann et al. (2016) fit the Hapke (1993) model to NAC F82+F22 images of the Baetica and Etruria regions. Table 5 prints the parameters with uncertainties. Table 1 gives the 0.15-144.15 degree phase range, and the analysis removed facets beyond 80 degrees incidence or emission.",
+            "locator": "Table 5, Hapke (1993) column; Table 1, NAC F82+F22 row"
+          }
+        ]
+      }
+    }
+  ]
+}

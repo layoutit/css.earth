@@ -1,0 +1,535 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "elektra",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "8a408851f5a01c92b6de4672835870bec9ca837f1ade331f4dc363b2d309cf89"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "cf3a35c13b9c1b050c8eaf5558ccbd59e2e3068fde454a8435e8c0a7da66dbf9",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "elektra",
+        "displayName": "Elektra",
+        "publicBase": "/scenes/elektra/",
+        "distanceAu": 3.126562817910036,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/130_Elektra_mpcd.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 2642,
+                "expectedFaces": 5280
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -99.5
+              },
+              "minimum": -30,
+              "maximum": 40,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 99500,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 99.5,
+          "camera": {
+            "initialScenePitchDegrees": 46.741573033707866,
+            "defaultControlYawDegrees": 90
+          },
+          "mapUrl": "/scenes/elektra/elektra-shape-surface@2x.webp",
+          "polesUrl": "/scenes/elektra/elektra-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/130_Elektra_mpcd.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2642,
+              "expectedFaces": 5280
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 1700,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "97b7ea2370a9829f5efd79d80b1f547fb20dbbcfa3d7d67a2881df42f22e1210",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "elektra",
+        "displayName": "Elektra",
+        "title": {
+          "label": "Elektra",
+          "viewBox": "0 0 82.8712 35",
+          "width": 82.8712,
+          "height": 35,
+          "path": "M0 29L0 8.63L13.52 8.63L13.52 11.29L3.05 11.29L3.05 17.32L12.74 17.32L12.74 19.95L3.05 19.95L3.05 26.33L13.54 26.33L13.54 29ZM19.16 8.63L19.16 29L16.25 29L16.25 8.63ZM28.76 29.33Q26.59 29.33 25.03 28.36Q23.46 27.4 22.62 25.68Q21.78 23.97 21.78 21.74Q21.78 19.5 22.65 17.77Q23.51 16.04 25.05 15.05Q26.58 14.07 28.59 14.07Q30.06 14.07 31.29 14.6Q32.52 15.12 33.43 16.11Q34.34 17.09 34.83 18.49Q35.33 19.88 35.33 21.66L35.33 22.51L23.17 22.51L23.17 20.3L33.82 20.3L32.51 20.99Q32.51 19.62 32.04 18.61Q31.57 17.6 30.69 17.05Q29.82 16.5 28.6 16.5Q27.38 16.5 26.5 17.06Q25.62 17.61 25.14 18.6Q24.66 19.59 24.66 20.91L24.66 22.23Q24.66 23.64 25.16 24.69Q25.66 25.75 26.58 26.32Q27.49 26.89 28.79 26.89Q29.72 26.89 30.44 26.62Q31.16 26.35 31.64 25.83Q32.11 25.31 32.33 24.63L35.12 24.78Q34.83 26.12 33.94 27.14Q33.04 28.17 31.72 28.75Q30.39 29.33 28.76 29.33ZM40.58 24.08L40.58 20.61L40.91 20.61L47.05 14.37L50.63 14.37L43.75 21.44L43.29 21.44ZM37.9 29L37.9 8.63L40.81 8.63L40.81 29ZM47.46 29L42.03 22.1L44.03 20.06L51.04 29ZM59.51 14.37L59.51 16.78L51.17 16.78L51.17 14.37ZM53.64 10.5L56.55 10.5L56.55 25.1Q56.55 25.94 56.9 26.28Q57.25 26.62 58.11 26.62Q58.41 26.62 58.81 26.61Q59.2 26.59 59.49 26.58L59.6 28.97Q59.23 29.01 58.72 29.03Q58.21 29.05 57.73 29.05Q55.69 29.05 54.67 28.15Q53.64 27.25 53.64 25.47ZM61.85 29L61.85 14.37L64.67 14.37L64.67 16.75L64.74 16.75Q65.13 15.53 66.04 14.86Q66.94 14.18 68.32 14.18Q68.63 14.18 68.92 14.21Q69.21 14.23 69.41 14.26L69.41 17Q69.23 16.94 68.8 16.89Q68.37 16.85 67.88 16.85Q67.02 16.85 66.31 17.23Q65.6 17.61 65.18 18.38Q64.76 19.16 64.76 20.3L64.76 29ZM75.63 29.26Q74.19 29.26 73.04 28.75Q71.89 28.25 71.23 27.26Q70.57 26.28 70.57 24.83Q70.57 23.59 71.04 22.78Q71.52 21.97 72.34 21.51Q73.16 21.04 74.2 20.8Q75.23 20.56 76.32 20.44Q77.68 20.26 78.48 20.16Q79.29 20.06 79.64 19.83Q79.99 19.59 79.99 19.07L79.99 18.96Q79.99 18.21 79.64 17.67Q79.3 17.13 78.65 16.81Q78 16.49 77.06 16.49Q76.13 16.49 75.42 16.8Q74.71 17.11 74.3 17.63Q73.89 18.14 73.78 18.76L70.94 18.6Q71.13 17.23 71.93 16.22Q72.74 15.22 74.07 14.67Q75.39 14.11 77.07 14.11Q78.33 14.11 79.39 14.42Q80.45 14.73 81.23 15.36Q82.01 15.98 82.44 16.9Q82.87 17.82 82.87 19.05L82.87 29L80.01 29L80.01 26.95L79.95 26.95Q79.64 27.52 79.1 28.06Q78.56 28.59 77.72 28.92Q76.87 29.26 75.63 29.26ZM76.24 26.91Q77.5 26.91 78.34 26.45Q79.18 25.99 79.59 25.23Q80 24.46 80 23.57L80 21.82Q79.85 21.96 79.48 22.06Q79.11 22.16 78.61 22.26Q78.1 22.36 77.55 22.44Q77.01 22.53 76.49 22.6Q75.68 22.71 74.99 22.96Q74.3 23.22 73.88 23.67Q73.46 24.13 73.46 24.88Q73.46 25.53 73.81 25.98Q74.15 26.43 74.77 26.67Q75.39 26.91 76.24 26.91Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "99.5 km"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Distance from Sun",
+              "value": "3.127 AU (mean)"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "5.53 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.224663 hours"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "thumbnail": "/scenes/elektra/elektra-shape-thumbnail.webp",
+              "surface": "elektra-shape-surface@2x.webp",
+              "poles": "elektra-shape-surface@2x.webp",
+              "source": {
+                "id": "elektra-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "notes": "VLT/SPHERE shape model",
+              "noData": true
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "thumbnail": "/scenes/elektra/elektra-elevation-thumbnail.webp",
+              "surface": "elektra-elevation-surface@2x.webp",
+              "poles": "elektra-elevation-surface@2x.webp",
+              "source": {
+                "id": "elektra-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-30",
+                  "5",
+                  "40"
+                ],
+                "meta": "km · 99.5 km reference sphere",
+                "sourceUrl": "https://observations.lam.fr/astero/3Dshape/130_Elektra_mpcd.obj",
+                "image": "/scenes/elektra/elektra-elevation-legend.webp"
+              },
+              "notes": "Source shape · radial height"
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "VLT/SPHERE survey and physical properties",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          },
+          {
+            "label": "Shape data",
+            "role": "terrain",
+            "description": "Released MPCD shape model",
+            "href": "https://observations.lam.fr/astero/3Dshape/130_Elektra_mpcd.obj"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Observed pole and period; arbitrary display phase",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.1051/0004-6361/202141781",
+            "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "elektra-shape",
+      "path": "shape/130_Elektra_mpcd.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/130_Elektra_mpcd.obj",
+      "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
+      "acquisition": "Restore the unmodified OBJ through source/preparation/acquisition.json; the public-site cookie is recorded there.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 99500
+      },
+      "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-shape",
+            "role": "material",
+            "evidence": "src/planets/elektra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
+      "sha256": "fbda436c7c355e1e15554c69147c02f053d77d97cf20a39bc30179704b91a7a2",
+      "bytes": 317179,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/130_Elektra_mpcd.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/130_Elektra_mpcd.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "97b7ea2370a9829f5efd79d80b1f547fb20dbbcfa3d7d67a2881df42f22e1210",
+      "bytes": 6723,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "elektra-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/elektra/elektra-elevation-thumbnail.webp",
+          "bytes": 4874,
+          "sha256": "811ec9cff5150f83f1476d32504e93c368ee1de18853df6a3463e6da04f7d5c4",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/elektra/elektra-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/elektra/elektra-elevation-surface@2x.webp",
+          "bytes": 301670,
+          "sha256": "012227f126c77c488373181628db685c5614f98f7fdb541a2802caf8135da721",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "elektra-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/elektra/elektra-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/elektra/elektra-shape-surface@2x.webp",
+          "bytes": 213610,
+          "sha256": "ea285ba48c7cf7402d4941ccedabbddd00fb21e5d2095b80f76a4499a5e38917",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4543,
+          "sha256": "79733c27ff5313de9437278cfd87d79b9ace1986a7150166c44ea10d33ef95b2",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 9952,
+          "sha256": "cd88b6eab6dadca26aad0a44bef54ed8f700f5ededc46ebe520381d463bab583",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

@@ -11,13 +11,9 @@ export function deriveLimits(transfer: TransferLimits & { interpretation?: strin
   const emissionStretch = Math.sqrt(1 + 1 / Math.cos(transfer.maximumEmissionDegrees * Math.PI / 180) ** 2);
   // Archive backplanes come from the archive's own shape model, which may differ from the source mesh by up to its error.
   const shapeAllowanceMeters = frames.some(frame => frame.geometrySource === 'archive-backplanes') ? meshErrorMeters : 0;
-  const derived = { maximumSourceDistanceMeters: meshErrorMeters,
-    maximumSeparationMeters: shapeAllowanceMeters + MAXIMUM_SEPARATION_FOOTPRINTS * coarsestNadirFootprintMeters * emissionStretch,
+  const derived = { maximumSeparationMeters: shapeAllowanceMeters + MAXIMUM_SEPARATION_FOOTPRINTS * coarsestNadirFootprintMeters * emissionStretch,
     coarsestNadirFootprintMeters, emissionStretch, separationFootprints: MAXIMUM_SEPARATION_FOOTPRINTS, shapeAllowanceMeters,
-    rule: 'Source distance may not exceed the displayed mesh simplification error. A fixed contributor separation may not exceed four diagonal pixel footprints of the coarsest frame at the emission limit, plus the mesh error when the backplanes come from the archive\'s own shape model. A per-sample separation scales with each footprint\'s own range and emission.' };
-  const exceeded = [
-    ...(transfer.maximumSourceDistanceMeters > derived.maximumSourceDistanceMeters ? ['maximumSourceDistanceMeters'] : []),
-    ...(transfer.maximumSeparationMeters !== undefined && transfer.maximumSeparationMeters > derived.maximumSeparationMeters ? ['maximumSeparationMeters'] : []),
-  ];
+    rule: 'A fixed contributor separation may not exceed four diagonal pixel footprints of the coarsest frame at the emission limit, plus the mesh error when the backplanes come from the archive\'s own shape model. A per-sample separation scales with each footprint\'s own range and emission. Every displayed point samples its closest source point.' };
+  const exceeded = transfer.maximumSeparationMeters !== undefined && transfer.maximumSeparationMeters > derived.maximumSeparationMeters ? ['maximumSeparationMeters'] : [];
   return { report: { ...transfer, derived }, exceeded };
 }

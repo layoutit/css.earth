@@ -1,11 +1,53 @@
 # Registered photographic mosaics
 
+The shared `camera-band-registration.mts` matcher accepts a bounded
+`searchRadiusPixels` (1–64; default 9) when an independently justified pointing
+seed is farther away. This changes the search window only. Preserve its
+correlation, disjoint holdout and residual requirements; a larger search does
+not qualify a camera. Recheck from the fitted camera with the normal window.
+
 Use this when preparing several observations onto a known surface, especially
 an irregular mesh. Reuse already-controlled maps when suitable; this is not a
 requirement to fit a camera for an existing global mosaic. The
 [implementation map](implementation-map.md#registered-photographic-mosaics)
 locates the 67P example and reusable helpers. Keep all decoding, camera fitting,
 selection, level matching and atlas construction in preparation.
+
+## Inspect the release before reconstructing geometry
+
+Start with the pinned model's release and its companion products. A mesh-only
+download or an image header can omit the reconstruction that made the two
+usable together. Work through the following before adding camera derivation:
+
+1. Read the model label, release inventory and linked paper or supplement.
+   Look for image-geometry tables, reconstructed pointing, control networks,
+   per-pixel geometry and raw or quality companions. Match exact observation
+   identifiers and model versions; a similar filename is insufficient.
+2. Compare the geometry sources. Determine whether a table or corrected product
+   supersedes preliminary header pointing and which mesh/frame it supports.
+   Prefer an already qualified map or compatible archived geometry over rebuilding
+   it. Document unresolved conflicts rather than silently choosing whichever fits.
+3. Resolve units, axis handedness, longitude direction, sample/line order,
+   zero/one-based centres, rectangular pixels and display flips. Keep an inference
+   distinct from a convention explicitly stated by the archive. Use metadata and
+   independent image features to discriminate plausible interpretations, not a
+   sequence of unrecorded sign or axis guesses.
+4. Project the selected mesh into one native-size observation and inspect the
+   illuminated limb and any identifiable internal features. Keep both in the same
+   pixel coordinates; composite the overlay before resizing the whole diagnostic.
+   Check the diagnostic transform itself before treating a mismatch as bad source
+   geometry. Separate a bounded pointing correction from model-shape disagreement,
+   then validate any fit on withheld controls before the full bake.
+
+Mathilde illustrates this failure mode: the already-pinned Thomas release's
+`253mathimg.tab` supplies reconstructed image centres and geometry that differ
+from preliminary NEAR FITS pointing. The `near-msi-camera` recipe uses that table;
+its conversion from square-pixel table lines to rectangular detector rows is an
+explicit inference checked against withheld limb points. Read
+[Mathilde's source method](../../../../src/objects/mathilde/README.md) for the
+exact inputs and limits. Its raw companions support missing-telemetry and
+saturation checks, while the archive's unresolved quality index stays unresolved.
+These are NEAR-specific facts, not default conventions for other instruments.
 
 ## Match observations to their shape model
 
@@ -24,6 +66,16 @@ to the actual selected model. Report coverage on different meshes separately;
 compare before/after percentages only on a common, justified surface basis.
 
 ## Bind observations and validate cameras
+
+Apply detector distortion inside both the fit and its holdout ray checks, not
+only when drawing the final overlay. The shared limb-refinement helper accepts
+a fixed `pixelMapping` between detector and pinhole coordinates; Lucy diagnostics
+use the existing TAN-SIP forward/inverse mapping. Limb agreement alone does not
+establish rotational phase or internal terrain registration. Test the proposed
+orientation against another viewing angle and identifiable surface features.
+When limiting edge controls, sample the entire detected boundary. Check that
+both fit and holdout points cover its extent; a count alone can conceal a
+truncated limb and produce a misleading pass.
 
 Record each observation's pinned bytes, calibration level, units, filter,
 acquisition time, pixel conventions, body frame and geometry's shape-model
@@ -45,6 +97,13 @@ source precision and the output's needs; reject degenerate or unexplained fits.
 Do not infer a precise camera from a caption or sub-spacecraft longitude alone.
 A holdout from the same GEO product proves internal consistency, not independent
 absolute accuracy or agreement with a different display mesh.
+
+For OSIRIS image/model registration, the existing archived-camera preparer
+accepts `registrationSearchRadiusPixels` in the source profile (128 by default,
+up to 256 source pixels). A wider search locates a larger pointing translation;
+it does not relax the 0.70 correlation or 12-pixel withheld-error limits. Keep
+two spatially disjoint fit windows and two holdouts, include the search margin
+inside the image, and report the adjustment and its source-shape limitations.
 
 ## Qualify a surface sample before interpolation
 
