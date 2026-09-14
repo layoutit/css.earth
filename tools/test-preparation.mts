@@ -12,6 +12,7 @@ const universeOnly = process.argv.length === 3 && process.argv[2] === '--univers
 if (process.argv.length > 2 && !universeOnly) throw new TypeError('Usage: test-preparation.mts [--universe]');
 const universeEntries = [
   'src/preparation/galaxy-catalog/galaxy-catalog.test.ts',
+  'src/preparation/galaxy-catalog/bibliography.test.ts',
   'src/preparation/cluster-catalog/cluster-catalog.test.ts',
   'src/preparation/image-layers/image-layers.test.ts',
   'src/preparation/volume/volume.test.ts',

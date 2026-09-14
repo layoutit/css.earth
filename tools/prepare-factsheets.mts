@@ -8,7 +8,7 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { orderFacts } from '../site/fact-order.mts';
 import { writePreparedText } from './write-prepared-text.mts';
 import { verifyFactsheetSources } from './factsheet-sources.mts';
@@ -61,9 +61,9 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const check = process.argv.includes('--check');
   const ids = process.argv.slice(2).filter(id => !['--', '--check'].includes(id));
-  assert.ok(ids.every(id => OBJECTS.some(object => object.id === id)), 'Unregistered factsheet target');
+  assert.ok(ids.every(id => SCENE_OBJECTS.some(object => object.id === id)), 'Unregistered factsheet target');
   const results = [];
-  for (const object of OBJECTS) if (!ids.length || ids.includes(object.id)) {
+  for (const object of SCENE_OBJECTS) if (!ids.length || ids.includes(object.id)) {
     results.push(await prepareFactsheet(resolve(import.meta.dirname, '../src/objects', object.id), { check }));
   }
   console.log(JSON.stringify({ check, objects: results.length, facts: results.reduce((sum, body) => sum + body.count, 0), results }));

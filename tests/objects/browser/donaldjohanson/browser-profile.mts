@@ -3,5 +3,5 @@ import controls from '../../../../src/objects/donaldjohanson/prepared/controls.j
 export const browserProfile=createObjectBrowserProfile({id:'donaldjohanson',controls,audit:{
  canonicalPreparedAssets:['/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp'],
  lensRace:{defaultId:'llorri',slowId:'shape',winnerId:'llorri',slowAsset:'/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp',preReadyDisabled:true},
- retained:{lensIds:['llorri','shape'],speedClicks:5,allowedMountSelectors:[]}
+ retained:{lensIds:['llorri','shape','elevation'],speedClicks:5,allowedMountSelectors:[]}
 }});

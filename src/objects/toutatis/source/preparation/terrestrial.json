@@ -12,7 +12,53 @@
     "poleSize": 512,
     "reportMissingPixels": true,
     "observations": [],
-    "scientific": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/4179toutatis2.tab",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 20000,
+          "expectedFaces": 39996
+        },
+        "sampleGrid": {
+          "width": 1025,
+          "height": 513
+        },
+        "valueTransform": {
+          "scale": 1,
+          "offset": -1224
+        },
+        "minimum": -500,
+        "maximum": 1400,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 1224,
+          "heightToMeters": 1,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 50
+        }
+      }
+    ],
     "observedColors": [],
     "surfaceQuality": 90,
     "shapeViews": [

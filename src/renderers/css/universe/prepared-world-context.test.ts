@@ -9,7 +9,7 @@ import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import { createWorldContextFrameEncoder } from './world-context-frame.js';
 import { createWorldContextPlanner, CONTEXT_LINE_WIDTH } from './world-context-planner.js';
-import { OBJECTS } from '../../../../site/objects.mts';
+import { SCENE_OBJECTS } from '../../../../site/objects.mts';
 import { CONTEXT_ANNOTATION_PRIORITY } from '../../../../site/runtime-policy.mts';
 import { SYSTEM_VIEWS, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
 
@@ -95,7 +95,7 @@ test('approximate orbit cues stay on retained groups through selection and publi
   expect(all(root).length).toBe(count);
   layer.destroy();
 });
-const contextPriorityByClassification: Readonly<Partial<Record<(typeof OBJECTS)[number]['classification'], number>>> = CONTEXT_ANNOTATION_PRIORITY;
+const contextPriorityByClassification: Readonly<Partial<Record<(typeof SCENE_OBJECTS)[number]['classification'], number>>> = CONTEXT_ANNOTATION_PRIORITY;
 const sprite = { url: '/marker.png', index: 0, count: 1, size: 16 };
 const presentation = {
   projection: { model: 'css-perspective-shared-with-sky', cssPerspective: '86.60254037844386cqw' },
@@ -538,7 +538,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
     .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
   expect(parsePreparedWorldContext(source).bodies.map(body => body.id)).toEqual(contextEntries.map(body => body.id));
   for (const body of parsePreparedWorldContext(source).bodies) {
-    const frame = OBJECTS.find(object => object.id === body.id)!.worldFrame!;
+    const frame = SCENE_OBJECTS.find(object => object.id === body.id)!.worldFrame!;
     expect(body.radiusM, `${body.id} context must match the selectable detail radius`).toBe(frame.bodyRadiusM);
     expectAlignedContextOrigin(body.positionM, frame.originM, `${body.id} context must match the selectable detail origin`);
     expect(body.orbit?.bounds, `${body.id} orbit bounds are owned by preparation`).toBeDefined();
@@ -611,7 +611,7 @@ test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits s
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const viewport = { focalPixels: 1100, framingRadiusPixels: 200, principalOffsetPixels: [0, 0] as const,
     widthPixels: 1280, heightPixels: 720, visibleRect: null, detailHandoffDiameterPixels: 20 };
-  const frame = OBJECTS.find(object => object.id === planet)!.worldFrame;
+  const frame = SCENE_OBJECTS.find(object => object.id === planet)!.worldFrame;
   const target = systemViewTarget({ referenceFrame: required(frame).referenceFrame, epochJdTt: required(frame).epochJdTt,
     pose: { positionM: [0, 0, 1e15], orientationXyzw: [0, 0, 0, 1] } },
     required(frame), viewport, required(SYSTEM_VIEWS.get(planet)), systemFramingRect(viewport));
@@ -650,13 +650,13 @@ test('initial Jupiter system framing makes the four large moons and their labels
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const viewport = { focalPixels: 1100, framingRadiusPixels: 200, principalOffsetPixels: [0, 0] as const,
     widthPixels: 1280, heightPixels: 720, visibleRect: null, detailHandoffDiameterPixels: 20 };
-  const frame = OBJECTS.find(object => object.id === 'jupiter')!.worldFrame;
+  const frame = SCENE_OBJECTS.find(object => object.id === 'jupiter')!.worldFrame;
   const target = systemViewTarget({ referenceFrame: required(frame).referenceFrame, epochJdTt: required(frame).epochJdTt,
     pose: { positionM: [0, 0, 1e15], orientationXyzw: [0, 0, 0, 1] } },
     required(frame), viewport, required(SYSTEM_VIEWS.get('jupiter')), systemFramingRect(viewport));
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])),
-    annotationPriorities: Object.fromEntries(OBJECTS.map(object => [object.id, contextPriorityByClassification[object.classification] ?? 0])),
+    annotationPriorities: Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextPriorityByClassification[object.classification] ?? 0])),
   });
   layer.selectObject('jupiter');
   layer.publish(target, viewport); document.defaultView.advance(200);
@@ -963,7 +963,7 @@ test.each([
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 5000; host.clientHeight = 1000; host.append(before);
   const source = plan(1);
-  const objects = [lower, higher].map(classification => OBJECTS.find(object => object.classification === classification)!);
+  const objects = [lower, higher].map(classification => SCENE_OBJECTS.find(object => object.classification === classification)!);
   const context = parsePreparedWorldContext({ ...source,
     system: { fadeOutStartDistanceM: 10_000, hiddenDistanceM: 1e30 },
     bodies: objects.map((object, index) => ({

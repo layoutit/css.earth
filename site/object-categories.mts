@@ -1,8 +1,8 @@
 export const OBJECT_CATEGORIES: readonly (readonly [string, string])[] = [
   ['all', 'All'], ['planet', 'Planets'],
-  ['satellite', 'Moons'], ['comet', 'Comets'], ['nebula', 'Nebulae'], ['asteroid', 'Other'],
+  ['satellite', 'Moons'], ['comet', 'Comets'], ['nebula', 'Nebulae'], ['galaxy', 'Galaxies'], ['galaxy-cluster', 'Galaxy clusters'], ['asteroid', 'Other'],
 ];
-const OWN_TABS = new Set(['planet', 'satellite', 'comet', 'nebula']);
+const OWN_TABS = new Set(['planet', 'satellite', 'comet', 'nebula', 'galaxy', 'galaxy-cluster']);
 
 /** The tab a classification is listed under: dwarf planets with Planets; every class
  * without its own tab (asteroids, trans-Neptunian and interstellar objects) in Other. */

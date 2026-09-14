@@ -6,7 +6,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import sharp from 'sharp';
 import { readPreparedFixture } from '../../fixtures.mts';
-import { OBJECTS } from '../../../../site/objects.mts';
+import { SCENE_OBJECTS } from '../../../../site/objects.mts';
 const [scene, runtime] = await Promise.all([readPreparedFixture('saturn','scene'),readPreparedFixture('saturn','runtime')]);
 const root = new URL('../../../../', import.meta.url);
 const readJson = async (path: string|URL) => JSON.parse(await readFile(new URL(path, root), 'utf8'));
@@ -84,7 +84,7 @@ test('retains the cropped ring-shadow bitmap on its original logical plane', asy
 test('warms active material assets before declaring ready, with no private sky or Sun', () => {
   for (const key of ['exterior:normal', 'ring-shadow']) assert.ok(runtime.assets.startup.includes(key));
   assert.equal(runtime.assets.entries.some((entry: { key: string; }) => entry.key.startsWith('sky:') || entry.key === 'directional-sun'), false);
-  assert.ok(OBJECTS.some(object => object.id === 'saturn'));
+  assert.ok(SCENE_OBJECTS.some(object => object.id === 'saturn'));
   assert.doesNotMatch(JSON.stringify(runtime), /devicePixelRatio|createPreparedSaturn|loadPreparedOrbitBank|DecompressionStream/);
 });
 

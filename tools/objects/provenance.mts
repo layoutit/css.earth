@@ -1,10 +1,12 @@
+import type { ProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
+import { recordPreparationEvidence } from '../preparation-evidence.mts';
 import {hasErrorCode} from '../source-values.mts';
 import {record, records, maybeRecord, text, namedRecords, identity, sourceEntry, provenanceManifest} from './provenance-records.mts';
 import type {ProvenanceRecipeSource, ProductBinding, GeographicProvenance} from './provenance-records.mts';
 type Identity = ReturnType<typeof identity>;
 type BoundSource = ReturnType<typeof sourceEntry> & {id: string; kind: string; consumers?: readonly string[]};
-type BoundProduct = Omit<ProductBinding, 'inputPaths' | 'urls'> & {
-  inputs: string[]; outputs: (Identity & {url: string; verification: string})[]; inputBasis?: string;
+type BoundProduct = Omit<ProductBinding, 'inputPaths' | 'urls' | 'inputRoles'> & {
+  inputEvidence?: readonly ProductInputEvidence[]; inputs: string[]; outputs: (Identity & {url: string; verification: string})[]; inputBasis?: string;
 };
 interface PreparationOptions {objectDirectory: string; publicDirectory: string; outputDirectory?: string; basis?: 'prepared' | 'recovered'; verify?: boolean; write?: boolean;}
 import { createHash } from 'node:crypto';
@@ -162,8 +164,9 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       outputs.push({ url, ...pin, verification: measuredOutputs.has(url) ? 'bytes-verified' : 'asset-manifest-pin' });
     }
     if (!outputs.length) { unresolved.push({ product: binding.id, reason: 'No prepared output is bound to this recipe operation.' }); continue; }
-    const { inputPaths, urls, ...product } = binding;
+    const { inputPaths, urls, inputRoles, ...product } = binding;
     products.push({ ...product, inputs: [...new Set(inputs)], outputs,
+      ...(inputRoles && Object.keys(inputRoles).length ? { inputEvidence: Object.entries(inputRoles).map(([path, evidence]) => ({ sourceId: sources.get(byPath.get(path)!.id)!.id, ...evidence })) } : {}),
       inputBasis: inputs.length || product.parents.length ? 'bound-inputs' : 'authored-recipe' });
   }
   // Minimap previews have their own outputs, but inherit the interpretation and
@@ -175,7 +178,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     const identity = await fileIdentity(path).catch((error: unknown) => { if (basis === 'recovered' && hasErrorCode(error, 'ENOENT')) return null; throw error; });
     if (!identity) { unresolved.push({ product: `preview:${preview.id}`, reason: 'Prepared preview file is unavailable.' }); continue; }
     products.push({ id: `preview:${preview.id}`, label: `${parent.label} preview`, recipe: parent.recipe, selector: parent.selector,
-      recipeDependencies: parent.recipeDependencies,
+      recipeDependencies: parent.recipeDependencies, observationAttribution: parent.observationAttribution,
       inputs: [], parents: [parent.id], lensIds: [], process: 'Prepare a small surface preview from the same interpreted dataset.',
       limitations: [], outputs: [{ url: `object:prepared/${preview.path}`, ...identity, verification: 'bytes-verified' }] });
   }
@@ -194,7 +197,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     }
   };
   [...usedSources].forEach(includeDependencies);
-  const document = validateObjectProvenance({
+  let document = validateObjectProvenance({
     schema: OBJECT_PROVENANCE_SCHEMA, objectId: id, basis,
     manifest: { path: 'source/manifest.json', sha256: sha256(manifestBytes) },
     generator: { path: 'tools/objects/provenance.mts', sha256: sha256(await readFile(new URL('./provenance.mts', import.meta.url))),
@@ -203,6 +206,11 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     sources: [...sources.values()].filter(source => usedSources.has(source.id)), products,
     coverage: { scope: 'object-datasets-and-bound-rendering-products', unresolved },
   }, id);
+  const previousRaw = await optionalJson(resolve(outputDirectory, 'provenance.json'));
+  const previous = previousRaw?.schema === OBJECT_PROVENANCE_SCHEMA ? validateObjectProvenance(previousRaw, id) : undefined;
+  const lastPreparation = basis === 'prepared' ? recordPreparationEvidence(document)
+    : previous?.lastPreparation ?? (previous?.basis === 'prepared' ? recordPreparationEvidence(previous) : undefined);
+  if (lastPreparation) document = validateObjectProvenance({ ...document, lastPreparation }, id);
   if (write) {
     await mkdir(outputDirectory, { recursive: true });
     await writeFile(resolve(outputDirectory, 'provenance.json'), JSON.stringify(document, null, 2) + '\n');

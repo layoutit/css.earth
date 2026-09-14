@@ -4,7 +4,7 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { machineAgencies } from '../dataset-machines.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { parsePreparedExploration } from '../../src/platform/prepared-exploration.mts';
@@ -48,7 +48,7 @@ const artworkLibrary = (value: unknown, emblem: boolean): readonly ArtworkEntry[
   });
 };
 async function objectInput(id: string, document: ProvenanceDocument | null = null): Promise<ContributionObject> {
-  const object = OBJECTS.find(object => object.id === id);
+  const object = SCENE_OBJECTS.find(object => object.id === id);
   assert.ok(object, `${id}: registered object`);
   const rawPage = explorationRecord(await json(`../../src/objects/${id}/prepared/page.json`));
   const rawControls = explorationRecord(rawPage.controls);
@@ -115,7 +115,7 @@ test('agency choices count individual missions and preserve joint credits', () =
 
 test('every migrated capture stays bound to its source; the full prepared graph is deterministic', async () => {
   const objects = []; let captured = 0, authored = 0;
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const document = await provenance(object.id);
     const manifest = explorationRecord(await json(`../../src/objects/${object.id}/source/manifest.json`));
     const inputs = explorationArray(manifest.inputs, raw => {

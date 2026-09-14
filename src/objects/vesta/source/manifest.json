@@ -217,6 +217,53 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "dlr-vesta-lamo-clear",
+      "path": "maps/vesta-lamo-clear.png",
+      "origin": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public Dawn scientific image mosaic; attribution required. See NOTICE.md.",
+      "acquisition": "Unmodified 8-bit PNG from the DLR Dawn LAMO clear-filter release, October 2012. Companion attached PDS label is preserved in reference/lamo-clear.lbl.",
+      "redistribution": "Prepared display derivatives with the source credit and scientific limitations.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "surface",
+      "label": "Clear-filter photography",
+      "falseColor": false,
+      "width": 80112,
+      "height": 40056,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "coordinateSystem": "Dawn Claudia",
+        "referenceRadiusMeters": 255000
+      },
+      "coverage": "Published low-altitude mosaic with original illumination, seams and missing northern coverage. Exact black is treated as likely fill; no independent validity mask is supplied, so photographic black can also be withheld. Prepared display resolution is lower than the 20 m/pixel source.",
+      "expectedBytes": 878609842,
+      "expectedSha256": "1a135e6111e0e4f69596583c8ff1662a0a01b8ccc66226b31040a8497e5b9c5a",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dlr-vesta-lamo-clear",
+            "role": "material",
+            "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -250,8 +297,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8580,
-      "expectedSha256": "7146275356034ccb26145ca2ceca892540055a34fda22212c610a5d69405de31",
+      "expectedBytes": 9283,
+      "expectedSha256": "97b4de406a5fa5f45c6c511b2b0cb0692f1f88bfe7ebf8a4372ca14918d31925",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -259,8 +306,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1084,
-      "expectedSha256": "1904ffd196f8925cece2e13621313dadb01720099bf082cc64fde8fb6ebef4e2"
+      "expectedBytes": 1327,
+      "expectedSha256": "5f258e2a5837e9f317936d4546ff196e5491bc5a81ac3777f3e1523f0a0e2336"
     },
     {
       "path": "preparation/navigation.json",
@@ -274,8 +321,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3781,
-      "expectedSha256": "2e79a0dc6afd530a826abca14f4570847d273df45094686d886fbd75d4370abe"
+      "expectedBytes": 4159,
+      "expectedSha256": "34f5341fa2301c11b9d6423c2c1756b591909858c3a14b0ff072152ef6cf6020"
     },
     {
       "path": "presentation/title-mark.json",
@@ -327,6 +374,22 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "reference/lamo-clear.lbl",
+      "expectedBytes": 2179,
+      "expectedSha256": "aeeed3460397190a05e6c6c003114bee28f44becccc085a4c6525a7e897a0c92",
+      "purpose": "Unmodified attached PDS metadata for the same released LAMO grid: native size, planetocentric east-positive Claudia projection and pixel offsets.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dlr-vesta-lamo-clear",
+            "role": "reference",
+            "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.pds.zip"
+          }
+        ]
       }
     }
   ]

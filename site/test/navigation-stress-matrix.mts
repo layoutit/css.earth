@@ -1,8 +1,8 @@
 import { spawn, execFileSync } from 'node:child_process';
 import { mkdir, open, writeFile } from 'node:fs/promises';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 
-const planets = OBJECTS.filter(object => object.classification === 'planet');
+const planets = SCENE_OBJECTS.filter(object => object.classification === 'planet');
 interface Chain { seed: number; start: string; dpr: number; hops: number; exit?: number | null; }
 const chains: Chain[] = [], seen = new Set<string>(); let seed = Number(process.env.MATRIX_SEED ?? 424242) >>> 0;
 while (chains.length < Math.min(6, planets.length)) {

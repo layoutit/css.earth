@@ -1,4 +1,5 @@
-import { requireRecord } from '../../tools/source-values.mts';
+import { requireRecord, requireFiniteNumber } from '../../tools/source-values.mts';
+import { readFile } from 'node:fs/promises';
 import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";

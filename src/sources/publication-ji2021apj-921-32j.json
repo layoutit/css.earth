@@ -1,0 +1,36 @@
+{
+  "id": "publication-ji2021apj-921-32j",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ji2021ApJ...921...32J: Kinematics of Antlia 2 and Crater 2 from the Southern Stellar Stream Spectroscopic Survey (S$^5$)",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "Ji2021ApJ...921...32J"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021ApJ...921...32J",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/prepared/catalogue.json",
+      "revision": "340f4ef6ea7f2a6cc540b906dec35436a1d549c5",
+      "sha256": "1987e9658d963826cc1717afdfa0b9267fa1ce79b79e0d3f9d5905bd55f00c8f",
+      "locator": "/sources/3/references/53"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/3/references/53"
+    }
+  ]
+}

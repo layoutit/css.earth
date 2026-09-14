@@ -5,12 +5,12 @@ import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
-import {OBJECTS} from '../../../site/objects.mts';
+import {SCENE_OBJECTS} from '../../../site/objects.mts';
 import {conformanceBrowserLaunch} from '../../../site/test/conformance-browser-launch.mts';
 declare global { interface Window { __distantRetained?: Element[];  } }
 interface AssetLoad { id: string; filename: string; bytes: number; sha256: string; }
 interface BrowserResult { [key: string]: unknown; id?: string; dpr?: number; leaves?: number; shadowsDefault?: boolean; orbitDefault?: boolean; loadedFreshAssets?: AssetLoad[]; optInControls?: {shadows: boolean; bodyPixelsChanged: boolean; orbit: boolean}; }
-function requiredObject(id: string): (typeof OBJECTS)[number] { const object=OBJECTS.find(candidate=>candidate.id===id); if(!object) throw new Error(`Unknown object ${id}.`); return object; }
+function requiredObject(id: string): (typeof SCENE_OBJECTS)[number] { const object=SCENE_OBJECTS.find(candidate=>candidate.id===id); if(!object) throw new Error(`Unknown object ${id}.`); return object; }
 const origin='http://127.0.0.1:4278';
 const build=process.env.CSSEARTH_AUDIT_BUILD ?? 'production';
 assert.ok(['production','development'].includes(build));
@@ -79,7 +79,7 @@ try{
    assert.equal(await page.locator('[data-solar-system-results]').evaluate(node=>node.scrollLeft),0,
     'Category overflow must scroll the tab row, not the whole card.');
    const entries=page.locator('.planet-object-results-scroll .planet-object-link:visible');
-   assert.equal(await entries.count(),OBJECTS.filter(o=>o.classification==='trans-neptunian').length);
+   assert.equal(await entries.count(),SCENE_OBJECTS.filter(o=>o.classification==='trans-neptunian').length);
    const listed=await entries.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('data-object-id')));for(const id of bodies.filter(body=>body.classification==='trans-neptunian').map(body=>body.id))assert.ok(listed.includes(id));
    await page.screenshot({path:`${output}/trans-neptunian-category.png`});
    await page.locator('[data-object-tab="interstellar"]').click();

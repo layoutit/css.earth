@@ -121,16 +121,39 @@
     {
       "id": "versioned-view-evidence",
       "subject": "Versioned Vesta test and browser evidence",
-      "status": "unresolved",
-      "finding": "The baseline README says it cites no dated test result or browser report. The source/recipe inventory therefore cannot establish current view qualification. No new browser run is claimed by this ledger migration.",
-      "revisitWhen": "Retain focused source/registration and browser evidence identifying the actual tested revision, dataset and served input pins.",
+      "status": "included",
+      "finding": "Lack of dated evidence was the baseline finding. The LAMO update now has focused qualification at 86364a47f5ab7261a3716897b5e421e81abf5458: three Vesta source/package checks, six projected-image checks and strict preparation types pass. Headless DPR 1/2 checks retain one scene and 800 faces through drag with the same photographic atlas and shadows off. All prior runtime image hashes and draw/hit geometry match the main baseline. New runtime downloads were fetched from their published hash URLs and verified. Evidence is retained beside the body in evidence/lamo-2026-09-14.json; this is not an aggregate build or independent camera-registration result.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md",
+        "https://github.com/layoutit/css.earth/blob/86364a47f5ab7261a3716897b5e421e81abf5458/src/objects/vesta/source/preparation/terrestrial.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "86364a47f5ab7261a3716897b5e421e81abf5458"
+        }
+      ]
+    },
+    {
+      "id": "dlr-lamo-clear-photographs",
+      "subject": "DLR Dawn LAMO clear-filter global photographic mosaic",
+      "status": "included",
+      "finding": "Retrieved the original global 8-bit PNG (80,112 × 40,056) and inspected the companion attached PDS label using a bounded archive range. This is a different observation product from the already selected HAMO color composite and the excluded corrected HAMO grayscale candidate: it retains low-altitude crater and trough photography with source illumination. The label supplies the planetocentric, positive-east Claudia grid, 255 km map radius, 20 m/pixel spacing and fractional pixel offsets. The prepared 8192 × 4096 map and fixed 800-face atlas have coarser display resolution. Exact-black fill is a heuristic because the publisher supplies no independent validity mask; gaps and seams remain visible. Full PDS pixels were not downloaded or compared against the PNG; only the original PNG is the selected photographic input.",
+      "evidence": [
+        "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
+        "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png",
+        "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.pds.zip",
+        "https://github.com/layoutit/css.earth/blob/86364a47f5ab7261a3716897b5e421e81abf5458/src/objects/vesta/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/86364a47f5ab7261a3716897b5e421e81abf5458/src/objects/vesta/source/reference/lamo-clear.lbl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "86364a47f5ab7261a3716897b5e421e81abf5458"
         }
       ]
     }

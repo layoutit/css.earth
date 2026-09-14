@@ -1,3 +1,4 @@
+import { spatialSourceCitations } from './spatial-source-citations.mts';
 import { sourceResolver, parseSourceBinding } from '../src/platform/source-catalog.mts';
 import { compileSourceUsage } from '../src/platform/source-usage.mts';
 import type { SourceUse, SourceUsageObject } from '../src/platform/source-usage.mts';
@@ -12,7 +13,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { explorationRecord, explorationArray, explorationText, parseAgencies, parseCapture, validateCapture, parseExplorationCatalog } from '../src/platform/exploration-catalog.mts';
 import { compileContributions } from '../src/platform/exploration-contributions.mts';
 import { parsePreparedExploration, parseExplorationImage } from '../src/platform/prepared-exploration.mts';
@@ -24,9 +25,11 @@ import { restoreFactsheetEvidence } from './restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from './restore-factsheet-evidence.mts';
 import { prepareVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
 export const explorationCompilerClosure = [
-  'tools/prepare-machines.mts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
-  'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'site/objects.mts', 'site/object-schema.mts',
+  'tools/prepare-machines.mts', 'tools/spatial-source-citations.mts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
+  'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'src/platform/preparation-evidence.mts', 'tools/preparation-evidence.mts', 'src/platform/product-input-evidence.mts', 'site/objects.mts', 'site/object-schema.mts',
   'site/object-catalog.mts', 'site/prepared-object-catalog.mts', 'tools/prepare-catalog.mts',
+  'site/prepared-focus-object.mts', 'site/navigation-distance.mts', 'tools/prepare-navigation-destinations.mts',
+  'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
   'site/source/machines/catalog.json', 'site/source/machines/render-library.json', 'site/source/machines/emblem-library.json',
   'site/source/agency-logos.json', 'tools/read-source-catalogue.mts',
   'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
@@ -93,7 +96,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
   }
   const objects: SourceUsageObject[] = [];
   const factsheets = { facts: 0, cited: 0, uncited: [] as { objectId: string; factId: string }[] };
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const base = `src/objects/${object.id}`;
     const descriptor = explorationRecord(await json(`${base}/object.json`));
     const manifest = explorationRecord(await json(`${base}/source/manifest.json`));
@@ -152,6 +155,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
       else if (!new RegExp(`^public/scenes/${volume.id}/datasets/[a-f0-9]{64}\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
     }
   }
+  metadata.push(...await spatialSourceCitations(root, sources, input));
   const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,catalogSha256:sourceCatalogDigest(sourceCatalog),
     usage:compileSourceUsage(objects,sources,metadata),inventory,closure};
   const preparedSources = parsePreparedSources(sourcePayload);

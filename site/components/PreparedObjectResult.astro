@@ -1,19 +1,21 @@
 ---
-import type { NebulaSearchEntry } from '../prepare-nebula-search.mts';
+import type { PreparedFocusObject } from '../prepared-focus-object.mts';
+import { distanceDescription } from '../navigation-distance.mts';
+import { objectClassificationLabel } from '../planet-search-objects.mts';
 import MaterialSymbol from './MaterialSymbol.astro';
-interface Props { object: NebulaSearchEntry; hidden?: boolean; }
+interface Props { object: PreparedFocusObject; hidden?: boolean; }
 const { object, hidden = false } = Astro.props;
 ---
 <li class="planet-object-item" role="listitem" hidden={hidden}
   data-object-name={object.name.toLocaleLowerCase('en')}
   data-object-search-names={JSON.stringify(object.searchNames)}
-  data-object-distance-au={object.distanceAu}
+  data-object-distance-m={object.distance.meters}
   data-object-system-name={object.systemName.toLocaleLowerCase('en')}
-  data-object-classification={object.classification} data-object-classification-name="nebula">
+  data-object-classification={object.classification} data-object-classification-name={objectClassificationLabel(object.classification).toLocaleLowerCase('en')}>
   <a class="planet-object-link planet-observation-control planet-thumbnail-leading"
     href={object.route} data-prepared-focus-id={object.focusId}>
     <span class="planet-lens-icon"><MaterialSymbol name="grain" /></span>
     <span class="planet-object-name planet-lens-label">{object.name}</span>
-    <span class="planet-object-distance planet-lens-detail">{object.distancePc} pc</span>
+    <span class="planet-object-distance planet-lens-detail" title={distanceDescription(object.distance)} aria-label={`${object.distance.value} pc. ${distanceDescription(object.distance)}`}>{new Intl.NumberFormat('en', { maximumSignificantDigits: 4 }).format(object.distance.value)} pc{object.distance.quantity === 'comoving' ? ' (comoving)' : ''}</span>
   </a>
 </li>

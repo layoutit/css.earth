@@ -1,4 +1,4 @@
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import type { ObjectEntry } from '../object-schema.mts';
 
 // Routine browser checks walk a representative sample, not the whole registry:
@@ -6,7 +6,7 @@ import type { ObjectEntry } from '../object-schema.mts';
 // classification. Walking all 473 objects at two pixel densities made one
 // suite a forty-minute run. CSSEARTH_TEST_OBJECTS=all restores the full walk;
 // a comma-separated list of ids selects exactly those objects.
-export function browserObjects(all: readonly ObjectEntry[] = OBJECTS): ObjectEntry[] {
+export function browserObjects(all: readonly ObjectEntry[] = SCENE_OBJECTS): ObjectEntry[] {
   const request = process.env.CSSEARTH_TEST_OBJECTS?.trim();
   if (request === 'all') return [...all];
   if (request) {

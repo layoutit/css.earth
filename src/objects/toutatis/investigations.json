@@ -42,15 +42,20 @@
     {
       "id": "radial-elevation",
       "subject": "Source-surface Elevation after the failed radial trial",
-      "status": "deferred",
-      "finding": "A trial found multiple surface intersections in 7 of 8,192 sampled directions through the concave neck. One direction intersects the source at 1,285.61, 1,363.00 and 1,734.56 m. The trial’s radial scalar would assign one ray height to distinct surface patches, so it cannot truthfully color this full connected mesh. Geometry itself retains the neck. That trial required mesh-attached scalar preparation. The repository audit now identifies an existing closest-source-point sampler that evaluates radius at individual source triangles with a distance bound. This meets the old missing-capability condition at code level, but no Toutatis preparation or qualification using it has been run.",
-      "revisitWhen": "Qualify the existing closest-source-point path on Toutatis: preserve distinct neck surfaces, establish a source/display distance bound and check seams and withheld coverage without changing the geometry budget.",
+      "status": "included",
+      "finding": "The earlier radial trial found multiple intersections in 7 of 8,192 sampled directions. One neck ray crosses radii 1,285.61, 1,363.00 and 1,734.56 m, so its first intersection cannot color every connected patch. The 13 September audit identified an existing closest-source-point sampler but had not prepared this body. The 14 September qualification now includes Elevation: the outer patch retains its 510.557 m height above the 1,224 m reference sphere instead of the incorrect first-ray 61.607 m. Independent full-source checks verify both overlapping patches and an offset point. All 5,775,099 triangle-interior texels pass the 50 m transfer limit; this is an atlas count, not observed area. Geometry stays at 800 faces, existing images are byte-identical, and headless DPR 1/2, mobile, rotation and lighting checks pass. Flat previews withhold ambiguous rays. The lens describes the radar model, including its differences from later photographs; fine triangle boundaries remain visible at close zoom.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L19",
         "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/tests/objects/unit/toutatis/source.test.mts",
         "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.xml",
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/obj-shape.mts#L272",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/source-surface.test.mts"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/source-surface.test.mts",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/README.md",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/evidence/source-surface/independent.json",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/evidence/source-surface/preparation.json",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/evidence/source-surface/conformance.json",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/evidence/source-surface/browser.json",
+        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/evidence/source-surface/delivery.json"
       ],
       "checked": [
         {
@@ -66,6 +71,10 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "256c455a34f2e9449e142e9f62471ce4cd005b77"
         }
       ]
     },

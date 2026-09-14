@@ -6,11 +6,21 @@ The Shape view uses the original high-resolution Hudson, Ostro and Scheeres (200
 
 Shape uses the shared no-imagery grid with Shadows disabled by default. Optional prepared directional lighting conveys the source geometry, with no photographic texture, albedo claim, invented craters or compositional colors. The map, thumbnail and navigation context derive from the same mesh and grid.
 
+Elevation colors the same source model by radius minus the **1,224 m reference sphere**. It includes the asteroid’s broad shape; it is not gravitational height or an observation of surface composition. The palette spans −500 to 1,400 m, with cartographic relief from the source normals. The original Shape view remains the default, and Shadows starts off.
+
 ## Evidence
+
+![Elevation on the source shape, Shadows off](evidence/source-surface/elevation.webp)
+
+The 14 September 2026 qualification at `22530863b602e90684fe778b16136de3d890fe2d` passed both body source/package checks, three focused source-surface regressions, the independent full-source verifier and strict TypeScript. [Headless browser conformance](evidence/source-surface/conformance.json) passed mobile and dataset interactions at DPR 1 and 2. [Additional views](evidence/source-surface/browser.json) cover both sides, a close-up, an extreme angle and Shadows on/off. [Close-up](evidence/source-surface/close.webp): fine triangle boundaries remain visible at close zoom; the fixed 800-face silhouette remains faceted. These are focused checks, not a full-suite pass.
+
+All 5,775,099 triangle-interior texels passed the 50 m transfer limit; the maximum sampled distance, including atlas bleed, was 47.947 m. These are atlas sample counts, not measured surface-area coverage. The [preparation comparison](evidence/source-surface/preparation.json) verifies unchanged geometry, camera, retained leaves and every pre-existing image hash. Elevation adds 747,604 image bytes. The [fresh-install record](evidence/source-surface/delivery.json) verifies published asset hashes in an empty destination.
 
 Meshoptimizer 1.2.0 simplifies the original connectivity to 800 triangles before texture preparation, with `ErrorAbsolute` and `RegularizeLight`, a 50 m error setting, no radial geometry replacement, and no removed opposite faces. The result is closed and consistently wound. The library estimate is 27.55 m, distinct from a geometric bound. Two-way area-stratified surface samples (8,192 per direction) give source-to-display mean 6.12 m, p95 16.57 m, maximum 33.31 m, and display-to-source mean 6.10 m, p95 16.55 m, maximum 40.50 m. These are sampled nearest-triangle distances, not exhaustive Hausdorff bounds or source measurement uncertainties. Native PolyCSS `u` triangles use 128 px raster cells and the established prepared lighting path.
 
 [Source test definitions](../../../tests/objects/unit/toutatis/source.test.mts).
+
+The Elevation recipe uses the existing closest-source-point sampler on the full 39,996-facet mesh, with a 50 m display-to-source distance limit. This assigns values to individual surface patches instead of choosing the first surface on a ray. At the recorded neck regression, the source ray crosses radii of 1,285.607, 1,363.000 and 1,734.557 m: the outer patch is **510.557 m** above the reference sphere, rather than the first-ray value of **61.607 m**. The [independent full-source check](evidence/source-surface/independent.json) verifies both overlapping patches and an offset point against every original triangle. The [regression fixtures](../../../tools/objects/terrestrial-layers/fixtures/source-surface-cases.json) retain their exact coordinates; the existing source-surface test also checks atlas sampling. Flat previews withhold ambiguous rays, while the body atlas samples the corresponding three-dimensional surface.
 
 ## Known problems
 

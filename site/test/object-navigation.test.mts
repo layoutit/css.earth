@@ -3,7 +3,7 @@ import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
-import { OBJECTS } from "../objects.mts";
+import { OBJECTS, SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
 import { objectNavigation, PLANET_SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mts";
 import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mts";
@@ -15,16 +15,16 @@ test("search contains every object, including the Sun; only planets enter the sc
   assert.ok(PLANET_SEARCH_OBJECTS.some(({ id }) => id === "sun"));
   assert.ok(PLANET_NAVIGATION_OBJECTS.every(({ classification }) => classification === "planet"));
   const unknown = [
-    { id: "future-dwarf", classification: "dwarf-planet", distanceAu: 40 },
-    { id: "future-planet", classification: "planet", distanceAu: 4 },
-    { id: "future-star", classification: "star", distanceAu: 0 },
+    { id: "future-dwarf", classification: "dwarf-planet", distance: { meters: 40 } },
+    { id: "future-planet", classification: "planet", distance: { meters: 4 } },
+    { id: "future-star", classification: "star", distance: { meters: 0 } },
   ];
   assert.deepEqual(objectNavigation(unknown).search.map(({ id }) => id), ["future-star", "future-planet", "future-dwarf"]);
   assert.deepEqual(objectNavigation(unknown).planets.map(({ id }) => id), ["future-planet"]);
 });
 
 test("prepared marker addresses and presentation follow packages", async () => {
-  for (const { id } of PLANET_SEARCH_OBJECTS) {
+  for (const { id } of SCENE_OBJECTS) {
     assert.equal(PREPARED_NAVIGATION_MARKERS[id].url, `/navigation/body-${id}.webp`);
     assert.equal(PREPARED_NAVIGATION_MARKERS[id].index, 0);
     assert.equal(PREPARED_NAVIGATION_MARKERS[id].count, 1);
@@ -34,7 +34,7 @@ test("prepared marker addresses and presentation follow packages", async () => {
   for (const descriptor of descriptors) {
     const marker = PREPARED_NAVIGATION_MARKERS[descriptor.planetId];
     const { context: _context, ...atlasMarker } = marker;
-    assert.deepEqual(atlasMarker, { url: `/navigation/body-${descriptor.planetId}.webp`, url2x: `/navigation/body-${descriptor.planetId}@2x.webp`, index: 0, count: 1, presentation: descriptor.presentation });
+    assert.deepEqual(atlasMarker, { url: `/navigation/body-${descriptor.planetId}.webp`, url2x: `/navigation/body-${descriptor.planetId}@2x.webp`, url2xPixels: marker.url2xPixels, index: 0, count: 1, presentation: descriptor.presentation });
     const result = markerStyle(marker, { color: "#ffffff" });
     assert.ok(result.style.includes("color:#ffffff"));
     assert.ok(result.innerStyle.includes("background-size:100% 100%"));

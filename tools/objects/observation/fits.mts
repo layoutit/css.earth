@@ -1,64 +1,14 @@
+import { readFitsImage, fitsHeaderLiterals } from '../../fits.mts';
+export { scanFitsCards, fitsCardValue, readFitsHeader } from '../../fits.mts';
 /** FITS observation decoding and data-defined latitude/longitude/color mapping (moved from the retired static lane). */
 export type FitsColor = {kind: 'signed-asinh'; palette: readonly (readonly number[])[]; softening: number; maximum: number}
   | {kind: 'positive-log'; palette: readonly (readonly number[])[]; range: readonly [number, number]};
 export interface FitsMapRecipe {bitpix: number; width: number; height: number; latitude: 'sine-latitude' | 'equirectangular'; reverseLongitude?: boolean; positiveOnly?: boolean; nearestLatitudeLimit: number; color: FitsColor;}
-/** Walk the 80-byte cards of one header from `start` to END; returns the data
- * offset on the next 2880-byte record boundary. `limit` bounds the scan. */
-export function scanFitsCards(bytes: Buffer, start: number, visit: (key: string, card: string) => void, limit = Infinity) {
-  for (let offset = start; offset + 80 <= bytes.length && offset < start + limit; offset += 80) {
-    const card = bytes.toString('ascii', offset, offset + 80), key = card.slice(0, 8).trim();
-    if (key === 'END') return Math.ceil((offset + 80) / 2880) * 2880;
-    if (card[8] === '=') visit(key, card);
-  }
-  throw new Error('FITS header has no END card.');
-}
-
-/** Typed card value: quoted strings (with '' escapes), T/F logicals, and numbers with D or E exponents. */
-export function fitsCardValue(card: string) {
-  const s = card.slice(10).trimStart();
-  if (s[0] === "'") {
-    let out = '';
-    for (let i = 1; i < s.length; i++) {
-      if (s[i] !== "'") { out += s[i]; continue; }
-      if (s[i + 1] === "'") { out += "'"; i++; continue; }
-      return out.trimEnd();
-    }
-    throw new Error('Unterminated FITS string.');
-  }
-  const value = s.split('/')[0].trim();
-  if (value === 'T' || value === 'F') return value === 'T';
-  const n = Number(value.replaceAll('D', 'E'));
-  if (!value || !Number.isFinite(n)) throw new Error('Invalid FITS scalar.');
-  return n;
-}
-
-/** One header with typed values; duplicate keys are refused. Scans at most 45 records. */
-export function readFitsHeader(bytes: Buffer, start = 0) {
-  const header: Record<string, string | number | boolean> = {};
-  const dataOffset = scanFitsCards(bytes, start, (key, card) => {
-    if (Object.hasOwn(header, key)) throw new Error(`Duplicate FITS field: ${key}`);
-    header[key] = fitsCardValue(card);
-  }, 131040);
-  return { header, dataOffset };
-}
-
+/** Historical name: accepts one 2D primary OR IMAGE-extension HDU. */
 export function readFitsPrimary(bytes: Buffer) {
-  // Raw card text is retained for this reader's consumers; typed values come from readFitsHeader.
-  const header: Record<string, string> = {};
-  const dataOffset = scanFitsCards(bytes, 0, (key, card) => { header[key] = card.slice(10).split('/')[0].trim(); });
-  const bitpix = Number(header.BITPIX), width = Number(header.NAXIS1), height = Number(header.NAXIS2);
-  const bytesPerValue = Math.abs(bitpix) / 8;
-  if (![8, 16, -32, -64].includes(bitpix) || Number(header.NAXIS) !== 2 || !Number.isSafeInteger(width) || width < 1 || !Number.isSafeInteger(height) || height < 1 || dataOffset + width * height * bytesPerValue > bytes.length) throw new Error('Unsupported or truncated FITS image.');
-  const scale = Number(header.BSCALE ?? 1), zero = Number(header.BZERO ?? 0);
-  if (!Number.isFinite(scale) || !Number.isFinite(zero)) throw new Error('Invalid FITS value scaling.');
-  const values = new Float64Array(width * height);
-  for (let index = 0; index < values.length; index++) {
-    const value = bitpix === 8 ? bytes[dataOffset + index] : bitpix === 16 ? bytes.readInt16BE(dataOffset + index * 2) : bitpix === -32
-      ? bytes.readFloatBE(dataOffset + index * bytesPerValue) : bytes.readDoubleBE(dataOffset + index * bytesPerValue);
-    values[index] = value * scale + zero;
-  }
-  return { bitpix, width, height, values, scale, zero, header, dataOffset,
-    nextOffset: Math.ceil((dataOffset + width * height * bytesPerValue) / 2880) * 2880 };
+  const image = readFitsImage(bytes);
+  if (image.dimensions.length !== 2) throw new Error('Unsupported FITS image: expected two dimensions.');
+  return { ...image, header: fitsHeaderLiterals(image.header) };
 }
 
 export function prepareFitsMap(bytes: Buffer, width: number, height: number, recipe: FitsMapRecipe) {
@@ -114,27 +64,9 @@ function nearestValidValue(fits: ReturnType<typeof readFitsPrimary>, x: number, 
 const modulo = (value: number, divisor: number) => ((value % divisor) + divisor) % divisor;
 const clamp = (value: number, minimum: number, maximum: number) => Math.max(minimum, Math.min(maximum, value));
 
-/** One plane of a FITS primary array (NAXIS 2, or NAXIS 3 with a 1-based plane index) as Float64 values with BSCALE/BZERO
- * applied; the header keeps raw card values. Big-endian 16-bit integers and IEEE floats are the layouts archives use here. */
+/** One 1-based primary-array plane; native FITS row order is preserved. */
 export function readFitsPlane(bytes: Buffer, plane = 1) {
-  let endCard = -1;
-  const header: Record<string, string> = {};
-  for (let offset = 0; offset + 80 <= bytes.length; offset += 80) {
-    const card = bytes.toString('ascii', offset, offset + 80), key = card.slice(0, 8).trim();
-    if (key === 'END') { endCard = offset + 80; break; }
-    if (card[8] === '=') header[key] = card.slice(10).split('/')[0].trim();
-  }
-  if (endCard < 0) throw new Error('FITS header has no END card.');
-  const bitpix = Number(header.BITPIX), axes = Number(header.NAXIS), width = Number(header.NAXIS1), height = Number(header.NAXIS2), planes = axes === 3 ? Number(header.NAXIS3) : 1;
-  const dataOffset = Math.ceil(endCard / 2880) * 2880, bytesPerValue = Math.abs(bitpix) / 8, planeBytes = width * height * bytesPerValue;
-  if (![16, -32, -64].includes(bitpix) || ![2, 3].includes(axes) || !Number.isSafeInteger(width) || width < 1 || !Number.isSafeInteger(height) || height < 1 ||
-      !Number.isSafeInteger(planes) || planes < 1 || !Number.isInteger(plane) || plane < 1 || plane > planes || dataOffset + planeBytes * planes > bytes.length) throw new Error('Unsupported or truncated FITS image.');
-  const scale = Number(header.BSCALE ?? 1), zero = Number(header.BZERO ?? 0);
-  if (!Number.isFinite(scale) || !Number.isFinite(zero)) throw new Error('Invalid FITS value scaling.');
-  const values = new Float64Array(width * height), start = dataOffset + (plane - 1) * planeBytes;
-  for (let index = 0; index < values.length; index++) {
-    const at = start + index * bytesPerValue;
-    values[index] = (bitpix === 16 ? bytes.readInt16BE(at) : bitpix === -32 ? bytes.readFloatBE(at) : bytes.readDoubleBE(at)) * scale + zero;
-  }
-  return { bitpix, width, height, planes, values, header };
+  const image = readFitsImage(bytes, { plane });
+  if (image.header.SIMPLE !== true || image.header.XTENSION !== undefined) throw new Error('Expected FITS primary array.');
+  return { ...image, header: fitsHeaderLiterals(image.header) };
 }

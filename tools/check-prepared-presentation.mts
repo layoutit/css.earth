@@ -6,7 +6,7 @@ import { relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseAst } from "vite";
 import type { Node } from 'estree';
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import type { ObjectEntry } from '../site/object-schema.mts';
 import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mts";
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
@@ -169,7 +169,7 @@ export interface PreparedPresentationAuditOptions {
   readText?: RuntimeSourceReader;
   readControls?: (path: string) => Promise<unknown>;
 }
-export async function auditPreparedPresentations({ root = process.cwd(), objects = OBJECTS, strict = true,
+export async function auditPreparedPresentations({ root = process.cwd(), objects = SCENE_OBJECTS, strict = true,
   readText = path => readFile(path, "utf8"), readControls = async path => (await import(pathToFileURL(path).href)).objectControls } : PreparedPresentationAuditOptions = {}) {
   const entries = [];
   for (const object of objects) {
@@ -237,8 +237,8 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
 }
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   const args = process.argv.slice(2), index = args.indexOf("--object"), id = index < 0 ? null : args[index + 1];
-  if (id && !OBJECTS.some(object => object.id === id)) throw new Error(`Unknown registered object: ${id}`);
+  if (id && !SCENE_OBJECTS.some(object => object.id === id)) throw new Error(`Unknown registered object: ${id}`);
   if (!id && !args.includes("--all") && !args.includes("--inventory")) throw new Error("Use --object ID, --all, or --inventory.");
-  const report = await auditPreparedPresentations({ objects: id ? OBJECTS.filter(object => object.id === id) : OBJECTS, strict: !args.includes("--inventory") });
+  const report = await auditPreparedPresentations({ objects: id ? SCENE_OBJECTS.filter(object => object.id === id) : SCENE_OBJECTS, strict: !args.includes("--inventory") });
   console.log(JSON.stringify(report, null, 2));
 }
