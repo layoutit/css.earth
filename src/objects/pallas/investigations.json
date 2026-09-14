@@ -52,12 +52,24 @@
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
       "status": "unresolved",
-      "finding": "The live source folder https://observations.lam.fr/astero/Data/2Pallas/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
-      "revisitWhen": "The original image headers and publication establish a usable projection onto this specific MPCD model, and a native-pixel comparison qualifies geometry, illumination and measured coverage.",
+      "finding": "Final bounded joint registration of the 05:04, 05:08 and 06:05 Camera 2 images used lit outlines and interior matches with the released MPCD mesh and spin fixed. The previously examined 06:05 holdout remains at 2.610 pixels RMS, maximum 5.460. That camera solution was frozen before checking the unused 06:07:17 Camera 2 photograph; with limb-only pointing and no interior adjustment, eight held-out matches give 5.289 pixels RMS, maximum 8.178. All fourteen matches in that fresh frame were evaluation data. This attempt is closed without a photographic surface. It does not prove registration impossible. Earlier simultaneous-camera, short/long transfer, image-identity and source-orientation evidence remains retained; the new evidence adds eight verified input pins and 51 recast/replayed control residuals.",
+      "revisitWhen": "New producer-controlled image geometry or independently verified surface correspondences with measured localization precision would reopen photographic preparation. Joint image-and-limb fitting has now been tried and failed the frozen fresh-exposure check; do not restart equivalent fits to the same uncertain controls. The inherited one-pixel criterion, telescope PSF and raster pole arrows are not established SPHERE camera-error bounds.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/pallas/README.md",
         "https://observations.lam.fr/astero/Data/2Pallas/",
-        "https://observations.lam.fr/astero/"
+        "https://observations.lam.fr/astero/",
+        "https://github.com/layoutit/css.earth/blob/6202baac4686008757eeaba418e37a18b043f06a/src/objects/pallas/evidence/photographic-projection.json",
+        "https://doi.org/10.1038/s41550-019-1007-5",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4395",
+        "https://damit.cuni.cz/pages/documentation",
+        "https://github.com/matvii/ADAM/blob/25810f767b9de349a356df520109f4705f87f7a7/rotate.c",
+        "https://github.com/layoutit/css.earth/blob/ec71fea3d07760962ffea70a13e2ce9fffcdd754/src/objects/pallas/evidence/projected-controls.json",
+        "https://github.com/layoutit/css.earth/blob/ec71fea3d07760962ffea70a13e2ce9fffcdd754/src/objects/pallas/evidence/photographic-controls.json",
+        "https://arxiv.org/pdf/1902.01287",
+        "https://github.com/layoutit/css.earth/pull/204",
+        "https://doi.org/10.1051/0004-6361/201833620",
+        "https://observations.lam.fr/astero/Papers/Vernazza2018.pdf",
+        "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T06_07_17.855_zpl_science_imaging_cam2.fits"
       ],
       "checked": [
         {
@@ -68,6 +80,30 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "6202baac4686008757eeaba418e37a18b043f06a"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "ec71fea3d07760962ffea70a13e2ce9fffcdd754",
+          "pr": 204
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "842edf12b9306aa6871dec197f02df0d93771975",
+          "pr": 204
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "a138c0da555aa8571d98cce49c8a781eb0fcb22d",
+          "pr": 204
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "dc850b5cd46c5c5179e9eaf7a8ac30338b29a146",
+          "pr": 204
         }
       ]
     },
@@ -75,19 +111,77 @@
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
       "status": "excluded",
-      "finding": "The live directory also lists 2_Pallas_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
+      "finding": "The live directory also lists 2_Pallas_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked. Revisited for the photographic frame investigation: DAMIT model 4395, explicitly linked to Marsset et al. (2020), supplies a shape table and separate IAUspin record. Its 1602 vertices and 3200 indexed triangles match the LAM ADAM file exactly apart from a constant translation of (0.066526, 0.043641, 0.075851) km. Maximum residual after that translation is below 5e-14 km. A different ADAM geometry therefore does not explain the unqualified crater-to-image correspondence. It remains excluded as a duplicate delivered shape view; the published model and frame remain useful registration evidence.",
       "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
         "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/pallas/README.md",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/pallas/source/reference/model-properties.json"
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/pallas/source/reference/model-properties.json",
+        "https://github.com/layoutit/css.earth/blob/6202baac4686008757eeaba418e37a18b043f06a/src/objects/pallas/evidence/photographic-projection.json",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4395",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/51211/shape.txt",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/51209/IAUspin"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "6202baac4686008757eeaba418e37a18b043f06a"
+        }
+      ]
+    },
+    {
+      "id": "marsset-crater-map",
+      "subject": "Marsset 2020 Figure 3 as a photographic map",
+      "status": "excluded",
+      "finding": "Read the full article and 40-page supplement. Figure 3 is a Mollweide map of crater annotations, not a photographic raster, so it cannot supply a surface texture. The separately investigated crater-control route remains unresolved.",
+      "revisitWhen": "A separately released photographic raster, with map coordinates and reuse terms, would reopen the map-as-texture route.",
+      "evidence": [
+        "https://doi.org/10.1038/s41550-019-1007-5",
+        "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41550-019-1007-5/MediaObjects/41550_2019_1007_MOESM1_ESM.pdf",
+        "https://github.com/layoutit/css.earth/blob/6202baac4686008757eeaba418e37a18b043f06a/src/objects/pallas/evidence/photographic-projection.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "6202baac4686008757eeaba418e37a18b043f06a"
+        }
+      ]
+    },
+    {
+      "id": "marsset-crater-controls",
+      "subject": "Published crater coordinates as image registration controls",
+      "status": "unresolved",
+      "finding": "Four tentative native centres were recorded before projecting published coordinates with frozen ADAM and MPCD cameras. Toxa, Xyston and Akontia differ by 23–29 pixels; Hoplon by 9–11 pixels. The identification regions are not confidence intervals, so those discrepancies do not establish camera error or model incompatibility. Quadratic illumination correction did not resolve the identities, and no rigid-frame correction was adopted. The shared checker replays input pins, projections, visibility and residuals; its five focused tests and the preparation TypeScript project passed. The later ten-image sequence confirms a persistent lower-right structure, but does not establish its named-crater coordinates. See surface-imagery for the newly identified published-photo pairing. Earlier trials remain in the pinned evidence.",
+      "revisitWhen": "Use the identified 05:08:49 Camera 2 / Vernazza Figure B.2 pairing to resolve the remaining image-to-model pose and interior correspondence. Explain the published pole-marker discrepancy before adopting a correction. Revisit named controls only with new identification or coordinate-frame evidence; do not repeat fits to the same tentative picks.",
+      "evidence": [
+        "https://doi.org/10.1038/s41550-019-1007-5",
+        "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41550-019-1007-5/MediaObjects/41550_2019_1007_MOESM1_ESM.pdf",
+        "https://github.com/layoutit/css.earth/blob/6202baac4686008757eeaba418e37a18b043f06a/src/objects/pallas/evidence/photographic-projection.json",
+        "https://github.com/layoutit/css.earth/blob/ec71fea3d07760962ffea70a13e2ce9fffcdd754/src/objects/pallas/evidence/projected-controls.json",
+        "https://github.com/layoutit/css.earth/blob/ec71fea3d07760962ffea70a13e2ce9fffcdd754/src/objects/pallas/evidence/photographic-controls.json",
+        "https://arxiv.org/pdf/1902.01287",
+        "https://github.com/layoutit/css.earth/pull/204"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "6202baac4686008757eeaba418e37a18b043f06a"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "ec71fea3d07760962ffea70a13e2ce9fffcdd754",
+          "pr": 204
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "842edf12b9306aa6871dec197f02df0d93771975",
+          "pr": 204
         }
       ]
     }
