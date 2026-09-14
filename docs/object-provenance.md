@@ -19,7 +19,8 @@ and combines usage across bodies. Neither infers dependencies from labels or URL
    preparation-family bindings in `tools/objects/provenance-recipes.mts` identify
    consumed inputs and outputs for each operation.
 3. `prepareAuthoredObject` finalizes provenance after preparing assets, content
-   and previews. The record travels with the other prepared JSON outputs.
+   and previews. The write path also finishes CSS bindings, navigation and page
+   metadata in staging before publishing the outputs together.
 4. The Sources compiler follows this lineage and each input's `sourceBinding`.
    It derives usage links to published works. `site/object-sources.mts` retains
    local and unresolved source disclosures in the common panel.
@@ -97,6 +98,29 @@ Shared scene credits retain their existing
 separate owner. The compiler also supports Earth noise page records, but those
 geographic views are absent from Earth's current descriptor. That binding does
 not certify worldwide imagery coverage or remote availability.
+
+## Publishing an authored preparation
+
+The authored write path finishes CSS bindings, navigation, shared-bank transport,
+page metadata and the descriptor in staging. Only then does
+`tools/objects/publication.mts` publish images, minimaps, prepared JSON and root
+metadata together through the existing `writePreparedSet` helper.
+
+A caught write failure restores replaced and retired files and removes newly
+created outputs. Backups stay on disk if rollback itself fails. Shared hash
+banks are append-only dependencies: an unreferenced bank may remain after a
+failure because another object may already use it.
+
+The existing traced preparation receipts and coordinator keep their ownership;
+this adds no receipt schema or locking system. Publication is offline and must
+not overlap another writer for the same object. It does not provide an
+instantaneous multi-file switch for live readers or recovery from process
+termination or power loss.
+
+The publication and prepared-set tests inject failures after image replacement,
+retirement and metadata writes. The Mimas finalization test checks that the real
+CSS compiler reproduces its finalized runtime without changing canonical files.
+These checks do not replace a visual or scientific oracle.
 
 ## Source and mission presentation
 
