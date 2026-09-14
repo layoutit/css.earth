@@ -23,17 +23,22 @@
       "id": "galileo-surface",
       "subject": "Galileo resolved Dactyl observations",
       "status": "deferred",
-      "finding": "The examined Galileo literature and retained package records establish resolved shape and craters, but no camera-controlled surface texture is qualified. Observation availability is distinct from image-to-shape registration.",
+      "finding": "Native SSI frames i1578, i2278 and i2700 are now retrieved, hash-pinned and decoded. i2278 contains the best complete cratered disk. Their labels describe Ida geometry; Dactyl body orientation and independent surface registration remain unresolved. The photographic-lens revisit condition has not been met.",
       "revisitWhen": "Actual SSI products and their camera/shape relation pass independent surface registration for the selected geometry.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/README.md",
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/source/measurements.json",
-        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json"
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json",
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/review.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b"
         }
       ]
     },
@@ -89,6 +94,148 @@
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
         }
       ]
+    },
+    {
+      "id": "ssi-i1578",
+      "subject": "Galileo SSI i1578 IR-8890 exposure",
+      "status": "deferred",
+      "finding": "The preserved 800 by 800, 8-bit FITS image contains a complete but small Dactyl disk. It is a possible second-view check, not a qualified texture. The newer calibrated release contains this exposure, but its PDS4 geometry also targets Ida; that label was read and the calibrated pixels were not retrieved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/i1578-crop.png",
+        "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561578rcal_ir8.xml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b"
+        }
+      ],
+      "revisitWhen": "A Dactyl camera-to-shape binding is available and the resolved image features support a meaningful independent check."
+    },
+    {
+      "id": "ssi-i2278",
+      "subject": "Galileo SSI i2278 CLEAR exposure",
+      "status": "deferred",
+      "finding": "The preserved full detector and inspected crop resolve a complete cratered disk. Raw values are uncalibrated DN. TARGET_NAME is IDA, and the sub-spacecraft coordinates and center distance belong to Ida. No Dactyl camera fit was performed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/i2278-crop.png",
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/native/i2278.lbl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b"
+        }
+      ],
+      "revisitWhen": "The exposure has a source-backed Dactyl body-frame camera solution or distributed surface controls with independent holdouts for the existing ellipsoid."
+    },
+    {
+      "id": "ssi-i2700",
+      "subject": "Galileo SSI i2700 CLEAR exposure as the primary photographic view",
+      "status": "excluded",
+      "finding": "The decoded detector contains only fragments of Dactyl at its left edge. The nominal finer resolution does not supply a complete disk or distributed interior controls, so this frame is excluded as the primary surface view. A future use of a valid edge fragment is not ruled out.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/i2700-crop.png",
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/native/i2700.lbl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b"
+        }
+      ],
+      "revisitWhen": "A separately qualified camera solution and detector-quality mask demonstrate a useful, registered fragment in this exposure."
+    },
+    {
+      "id": "galileo-1993-platform-pointing",
+      "subject": "Reconstructed Galileo 1993 scan-platform CK",
+      "status": "included",
+      "finding": "The native gll_plt_rec_1993_tav_v00.bc is retained as geometry evidence. The shared DAF reader confirms Type 3 segments for platform -77001 relative to B1950; kernel comments list an interpolation interval covering i2278. Camera attitude was not evaluated. This supplies a pointing lead, not Dactyl orientation or a qualified surface.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/native/gll_plt_rec_1993_tav_v00.bc",
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/review.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b"
+        }
+      ]
+    },
+    {
+      "id": "galileo-mission-pck",
+      "subject": "Mission mips_010314.tpc as a Dactyl body-orientation source",
+      "status": "excluded",
+      "finding": "The retrieved, retained mission PCK contains no Dactyl or BODY2431011 assignment. It contains Ida parameters, which cannot establish the moon frame. This is a file-specific finding; it does not establish that PDS lacks Dactyl geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/native/mips_010314.tpc"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b"
+        }
+      ],
+      "revisitWhen": "A Dactyl-specific orientation record with epoch, reference frame and selected-shape axis binding is located."
+    },
+    {
+      "id": "thomas-shape-controls",
+      "subject": "PDS Thomas shape-model collection image-control tables",
+      "status": "excluded",
+      "finding": "The inspected directory inventory includes the Ida image-control table, but no Dactyl-specific model or image-control table. The Ida table cannot control Dactyl. This finding is restricted to the examined release inventory.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
+        "https://sbn.psi.edu/pds/resource/oshape.html",
+        "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b"
+        }
+      ],
+      "revisitWhen": "A Dactyl-specific numerical model or image-control table is identified with its observation and frame bindings."
+    },
+    {
+      "id": "usgs-photo-control",
+      "subject": "USGS Dactyl named-feature photograph and center points",
+      "status": "deferred",
+      "finding": "The USGS Dactyl photograph identifies Acmon and Celmis; the retained Gazetteer centers are respectively latitude -39/east longitude 138 degrees and latitude -46/east longitude 220 degrees. These are two feature centers, not distributed independent camera controls. No pose was fitted to them or validated against them.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
+        "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/dactyl.pdf",
+        "https://planetarynames.wr.usgs.gov/Feature/39",
+        "https://planetarynames.wr.usgs.gov/Feature/1097"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b"
+        }
+      ],
+      "revisitWhen": "An independently bound camera solution can predict the named centers, or additional distributed source controls permit disjoint fitting and validation."
+    },
+    {
+      "id": "veverka-full-camera-details",
+      "subject": "Veverka et al. 1996 full paper camera and shape details",
+      "status": "unresolved",
+      "finding": "The publisher abstract and metadata were inspected. Full PDF access was unsuccessful through the publisher, ADS and article API; the publisher browser route reached a PDF URL but no readable or saved paper. The full text, tables and figures remain unexamined. No absence of controls is inferred from this access failure.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
+        "https://doi.org/10.1006/icar.1996.0045"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b"
+        }
+      ],
+      "revisitWhen": "A readable full paper or author-repository copy permits inspection of the observation geometry, axis convention, tables and figures."
     }
   ]
 }
