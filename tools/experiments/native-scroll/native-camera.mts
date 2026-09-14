@@ -96,7 +96,7 @@ export function addNativeCamera(document: Document, definition: ObjectRuntimeDef
     `calc(${[0,1,2].map(column=>`${turn[column*4+row]} * ${typeof point[column]==='number'?point[column]-centre[column]:`(${point[column]} - ${centre[column]})`}`).join(' + ')} + ${centre[row]})`);
   const eyeCentre=centre.map(n=>n*frame.metersPerUnit);
   return {
-    transform:values.outputMatrix(turn),css:values.css()+'\n'+rules.join('\n'),
+    transform:values.outputMatrix(turn),css:values.css(document.documentElement.outerHTML+rules.join('\n')+turn.join(','))+'\n'+rules.join('\n'),
     eyeCentre,
     eyePoint:point=>relative(point,eyeCentre),
     eyeOffsetPoint:offset=>[0,1,2].map(row=>

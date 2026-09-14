@@ -62,9 +62,9 @@ export function addNativeSolarContext(document: Document, frame: PreparedWorldCa
   const end = document.createElement('span'); end.hidden = true; overlays.append(end);
   const context = mountPreparedWorldContext({ host: stage, presentationHost: overlays, before: end, plan, sprites });
   const rules: string[] = [nativeOrbitCullingCss];
-  const onScreen = (p: readonly string[]) => ({
-    x: `calc(var(--native-focal) * ${p[0]} / max(1, -1 * ${p[2]} + var(--native-dolly-m)))`,
-    y: `calc(var(--native-focal) * ${p[1]} / max(1, -1 * ${p[2]} + var(--native-dolly-m)))`,
+  const onScreen = (p: readonly string[], depth = `calc(-1 * ${p[2]} + var(--native-dolly-m))`) => ({
+    x: `calc(var(--native-focal) * ${p[0]} / max(1, ${depth}))`,
+    y: `calc(var(--native-focal) * ${p[1]} / max(1, ${depth}))`,
     depth: `calc(-1 * ${p[2]} + var(--native-dolly-m))`,
   });
   const project = (point: readonly (number|string)[]) =>
@@ -75,9 +75,11 @@ export function addNativeSolarContext(document: Document, frame: PreparedWorldCa
   const fromEye = (value: number, axis: number) => String((Math.abs(value) < 1e-12 ? 0 : value) - eyeCentre[axis]!);
   // A shared expression rule keeps every chord's prepared coordinates static.
   // Registered results prevent repeated expansion of projection token trees.
-  const endpoint = (names: readonly string[]) => onScreen(nativeCamera?.eyeOffsetPoint(names) ?? names);
-  const a=endpoint(['var(--native-p0x)','var(--native-p0y)','var(--native-p0z)']);
-  const b=endpoint(['var(--native-p1x)','var(--native-p1y)','var(--native-p1z)']);
+  // Both screen coordinates consume the already registered endpoint depth,
+  // instead of repeating its camera projection in each denominator.
+  const endpoint = (names: readonly string[], depth: string) => onScreen(nativeCamera?.eyeOffsetPoint(names) ?? names, depth);
+  const a=endpoint(['var(--native-p0x)','var(--native-p0y)','var(--native-p0z)'], 'var(--native-z0)');
+  const b=endpoint(['var(--native-p1x)','var(--native-p1y)','var(--native-p1z)'], 'var(--native-z1)');
   for(const name of ['--nx0','--ny0','--nx1','--ny1','--ndx','--ndy']) rules.push(`@property ${name}{syntax:'<length>';inherits:false;initial-value:0px}`);
   for(const name of ['--native-z0','--native-z1']) rules.push(`@property ${name}{syntax:'<number>';inherits:false;initial-value:0}`);
   rules.push(`.native-solar-orbits .native-orbit-segment {
