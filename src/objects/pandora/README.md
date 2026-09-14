@@ -10,6 +10,8 @@
 
 ## Evidence
 
+The [additional color-sequence fit](evidence/cassini-coverage/pandora-registration-0-fit.json) failed its independent maximum-residual criterion. The original diagnostic retains source/shape/code hashes and feature controls; scratch paths identify investigated native products. No imagery from this trial is added. See the [investigation ledger](investigations.json) for the decision and reopening condition.
+
 The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/filter-color/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
 **False color:** The color footprint covers part of the large crater and adjacent terrain; the reverse side and other missing intersections stay gray. The [browser record](evidence/filter-color/capture.json) pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The existing Monochrome images, body leaves and picking triangles are unchanged; the selected false-color assets use the revised display encoding. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.

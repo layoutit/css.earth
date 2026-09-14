@@ -53,6 +53,23 @@
           "commit": "4fea925cce611d30704d68df60d91df92596b87c"
         }
       ]
+    },
+    {
+      "id": "cassini-coverage-2026-09-13",
+      "subject": "Published Cassini camera inventory review",
+      "status": "deferred",
+      "finding": "The current package and published shape-camera inventory were reviewed. No additional frame was selected for a native-image or projection trial in this batch. The existing N1630068448 exclusion remains unchanged. This is a source-selection review, not an exhaustive proof that the archive has no further coverage.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/janus_document.pdf",
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
+        }
+      ],
+      "revisitWhen": "A new independent viewing geometry or a qualified resolution of the existing camera/brightness limitation offers useful coverage."
     }
   ]
 }
