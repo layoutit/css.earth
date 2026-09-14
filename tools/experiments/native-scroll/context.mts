@@ -62,18 +62,22 @@ export function addNativeSolarContext(document: Document, frame: PreparedWorldCa
   const end = document.createElement('span'); end.hidden = true; overlays.append(end);
   const context = mountPreparedWorldContext({ host: stage, presentationHost: overlays, before: end, plan, sprites });
   const rules: string[] = [nativeOrbitCullingCss];
-  const project = (point: readonly (number|string)[]) => {
-    const p = nativeCamera?.eyePoint(point) ?? point.map(value=>typeof value==='number'?number(value):value);
-    return {
-      x: `calc(var(--native-focal) * ${p[0]} / max(1, -1 * ${p[2]} + var(--native-dolly-m)))`,
-      y: `calc(var(--native-focal) * ${p[1]} / max(1, -1 * ${p[2]} + var(--native-dolly-m)))`,
-      depth: `calc(-1 * ${p[2]} + var(--native-dolly-m))`,
-    };
-  };
+  const onScreen = (p: readonly string[]) => ({
+    x: `calc(var(--native-focal) * ${p[0]} / max(1, -1 * ${p[2]} + var(--native-dolly-m)))`,
+    y: `calc(var(--native-focal) * ${p[1]} / max(1, -1 * ${p[2]} + var(--native-dolly-m)))`,
+    depth: `calc(-1 * ${p[2]} + var(--native-dolly-m))`,
+  });
+  const project = (point: readonly (number|string)[]) =>
+    onScreen(nativeCamera?.eyePoint(point) ?? point.map(value=>typeof value==='number'?number(value):value));
+  // Chord endpoints are written relative to the eye centre, so each frame multiplies them by the rotation
+  // without first subtracting the centre. The written values are the doubles that subtraction produced.
+  const eyeCentre = nativeCamera?.eyeCentre ?? [0, 0, 0];
+  const fromEye = (value: number, axis: number) => String((Math.abs(value) < 1e-12 ? 0 : value) - eyeCentre[axis]!);
   // A shared expression rule keeps every chord's prepared coordinates static.
   // Registered results prevent repeated expansion of projection token trees.
-  const a=project(['var(--native-p0x)','var(--native-p0y)','var(--native-p0z)']);
-  const b=project(['var(--native-p1x)','var(--native-p1y)','var(--native-p1z)']);
+  const endpoint = (names: readonly string[]) => onScreen(nativeCamera?.eyeOffsetPoint(names) ?? names);
+  const a=endpoint(['var(--native-p0x)','var(--native-p0y)','var(--native-p0z)']);
+  const b=endpoint(['var(--native-p1x)','var(--native-p1y)','var(--native-p1z)']);
   for(const name of ['--nx0','--ny0','--nx1','--ny1','--ndx','--ndy']) rules.push(`@property ${name}{syntax:'<length>';inherits:false;initial-value:0px}`);
   for(const name of ['--native-z0','--native-z1']) rules.push(`@property ${name}{syntax:'<number>';inherits:false;initial-value:0}`);
   rules.push(`.native-solar-orbits .native-orbit-segment {
@@ -130,13 +134,20 @@ export function addNativeSolarContext(document: Document, frame: PreparedWorldCa
         node.classList.add('native-orbit-segment');
         node.style.removeProperty('transform');node.style.removeProperty('opacity');
         for(const [axis,j] of ['x','y','z'].map((axis,j)=>[axis,j] as const)){
-          node.style.setProperty(`--native-p0${axis}`,number(a[j]));
-          node.style.setProperty(`--native-p1${axis}`,number(b[j]));
+          node.style.setProperty(`--native-p0${axis}`,fromEye(a[j],j));
+          node.style.setProperty(`--native-p1${axis}`,fromEye(b[j],j));
         }
         node.style.setProperty('--native-trail',String(orbit.trail[i]??1));
       }
       rules.push(prepareNativeOrbitCulling(orbitRoot,orbit.verticesM,paint.elements,orbit.lod?.levels??[],orbit.lod?.bounds,eye,nativeCamera));
     }
+  }
+  // A segment hidden by its orbit's level of detail skips the projection: these initial values win the
+  // cascade over the projection rule, so the hidden segment's calc() declarations are never evaluated.
+  const projected = ['--nx0', '--ny0', '--nx1', '--ny1', '--native-z0', '--native-z1', '--ndx', '--ndy', 'transform', 'opacity'];
+  const lodLevels = Math.max(0, ...points.map(point => 'orbit' in point && point.orbit ? (point.orbit.lod?.levels ?? []).length : 0));
+  for (let level = 1; level <= lodLevels; level++) {
+    rules.push(`@container native-orbit style(--native-orbit-lod:${level}){.native-solar-orbits .native-orbit-segment:not(.native-lod-${level}){${projected.map(name => `${name}:initial`).join(';')}}}`);
   }
   // Construction listeners have no role in this serialized, script-free proof.
   // Detach them without removing the one returned tree.

@@ -1,16 +1,13 @@
 /** Prepare a CSS expression graph. Registered numbers make intermediate results
- * compute once on the viewport instead of expanding token trees on every leaf. */
+ * compute once on the viewport instead of expanding token trees on every leaf.
+ * None of them inherit: `carry-values.mts` gives each reader, and the ancestors
+ * above it, an explicit `inherit`, so a camera change restyles only those elements. */
 export type Value = number | string;
 export type Matrix = readonly Value[];
 export class CssValues {
   private readonly entries = new Map<string, {name:string;reference:string}>();
   private readonly declarations: string[] = [];
-  private readonly inherited = new Set<string>();
   private readonly matrices: string[] = [];
-  output(value: Value): Value {
-    if(typeof value==='string') this.inherited.add(value);
-    return value;
-  }
   outputMatrix(matrix:Matrix):string {
     const name=`--native-m${this.matrices.length}`;
     this.matrices.push(name);
@@ -71,8 +68,8 @@ export class CssValues {
         :[c,s,0,0,n,c,0,0,0,0,1,0,0,0,0,1];
   }
   css(): string {
-    const registered=Array.from(this.entries.values(),({name,reference})=>`@property ${name}{syntax:'<number>';inherits:${this.inherited.has(reference)};initial-value:0}`).join('\n');
-    const matrices=this.matrices.map(name=>`@property ${name}{syntax:'<transform-list>';inherits:true;initial-value:matrix(1,0,0,1,0,0)}`).join('\n');
+    const registered=Array.from(this.entries.values(),({name})=>`@property ${name}{syntax:'<number>';inherits:false;initial-value:0}`).join('\n');
+    const matrices=this.matrices.map(name=>`@property ${name}{syntax:'<transform-list>';inherits:false;initial-value:matrix(1,0,0,1,0,0)}`).join('\n');
     return `${registered}\n${matrices}\n.planet-viewport{${this.declarations.join(';')}}`;
   }
 }

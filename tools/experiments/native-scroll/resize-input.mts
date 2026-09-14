@@ -29,10 +29,12 @@ export function addNativeResizeInput(document: Document): string {
   surface.setAttribute('aria-label', 'Drag to rotate; scroll to zoom');
   document.documentElement.dataset.nativeDrag = 'resize';
   return `
-@property --native-drag-x-progress { syntax: '<number>'; inherits: true; initial-value: 0; }
-@property --native-drag-y-progress { syntax: '<number>'; inherits: true; initial-value: 0; }
-@property --native-drag-x { syntax: '<number>'; inherits: true; initial-value: 0; }
-@property --native-drag-y { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --native-drag-x-progress { syntax: '<number>'; inherits: false; initial-value: 0; }
+@property --native-drag-y-progress { syntax: '<number>'; inherits: false; initial-value: 0; }
+@property --native-drag-x { syntax: '<number>'; inherits: false; initial-value: 0; }
+@property --native-drag-y { syntax: '<number>'; inherits: false; initial-value: 0; }
+@property --native-yaw { syntax: '*'; inherits: false; }
+@property --native-pitch { syntax: '*'; inherits: false; }
 @keyframes native-drag-x { from { --native-drag-x-progress:0 } to { --native-drag-x-progress:1 } }
 @keyframes native-drag-y { from { --native-drag-y-progress:0 } to { --native-drag-y-progress:1 } }
 .planet-viewport { --native-yaw:0deg; --native-pitch:0deg }

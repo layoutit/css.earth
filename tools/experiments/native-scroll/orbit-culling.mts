@@ -32,7 +32,8 @@ export function prepareNativeOrbitCulling(root:HTMLElement,vertices:readonly (re
     for(const [j,vertex] of level.vertexIndices.entries()){
       const next=level.vertexIndices[(j+1)%level.vertexIndices.length],node=leaves[vertex]!;
       node.classList.add(`native-lod-${n}`);endpoints.get(vertex)!.push(next);
-      const p=eye(vertices[next]);for(const [j,axis] of ['x','y','z'].entries())node.style.setProperty(`--native-next${n}${axis}`,scalar(p[j]));
+      // Written relative to the eye centre, like every chord endpoint the projection reads.
+      const p=eye(vertices[next]);for(const [j,axis] of ['x','y','z'].entries())node.style.setProperty(`--native-next${n}${axis}`,scalar(p[j]-(camera?.eyeCentre[j]??0)));
     }
     rules.push(`@container native-orbit style(--native-orbit-lod:${n}){
       .native-orbit-segment:not(.native-lod-${n}){display:none}
