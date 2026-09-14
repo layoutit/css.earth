@@ -19,6 +19,23 @@
           "pr": 83
         }
       ]
+    },
+    {
+      "id": "cassini-coverage-2026-09-13",
+      "subject": "Additional RED/GRN/BL1 sequence",
+      "status": "deferred",
+      "finding": "N1644754728_1, N1644755236_1 and N1644754662_1 were acquired and trialed. Estimated color coverage rose only from about 21.7% to 22.2%, with a conspicuous brightness boundary. The native sequence is not rejected, but the marginal gain was not promoted and its relative registration still needs qualification.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/calypso_document.pdf",
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
+        }
+      ],
+      "revisitWhen": "Further controlled registration and a source-backed explanation of the brightness boundary justify the added footprint, or another sequence supplies more useful coverage."
     }
   ]
 }
