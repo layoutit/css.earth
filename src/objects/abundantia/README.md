@@ -46,19 +46,7 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 
 <a id="source-survey"></a>
 
-<details>
-<summary>Source survey</summary>
-
-[Model fields and mesh measurements](source/reference/damit-model.json).
-
-- [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/4625) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/53045/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
-- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [Ďurech et al. (2020), Asteroid models reconstructed from ATLAS photometry](https://ui.adsabs.harvard.edu/abs/2020A&A...643A..59D) — original model publication record.
-- [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 42.18 ± 0.49 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
-- [Ďurech et al. (2020), ATLAS photometry](https://arxiv.org/pdf/2010.01820) — retained primary publication; see the body-specific selection and calibration above.
-- [Hanuš et al. (2021), ASAS-SN photometry](https://arxiv.org/pdf/2107.10027) — retained primary publication; see the body-specific selection and calibration above.
-
-</details>
+The [investigation ledger](investigations.json) records the source survey and alternative models.
 
 <a id="preparation-and-qualification"></a>
 

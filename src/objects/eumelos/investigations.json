@@ -1,0 +1,176 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "eumelos",
+  "entries": [
+    {
+      "id": "selected-2019-05-07",
+      "subject": "DAMIT 3920: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-3920.txt. Model 3920, version 2019-05-07, pole (272°, 22°), period 21.2689 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eumelos/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/3920",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/eumelos/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/eumelos/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "selected-2",
+      "subject": "NEOWISE Gr12b: selected thermal size",
+      "status": "included",
+      "finding": "The original IRSA query was rerun for asteroid 5436; its Gr12b row matches the retained diameter 37.6960 km, error 0.3290 km, fit code DVB- and mean epoch 2455205.1770080. D in FIT_CODE means diameter was fitted. This effective-sphere diameter provides an approximate display scale, not a resolved surface or an independent physical-volume fit to the shape.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eumelos/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/eumelos/source/reference/calibration.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/eumelos/source/reference/neowise-query.txt",
+        "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The grid marks unmapped coverage: no registered global reflectance mosaic was found in the selected releases.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eumelos/README.md",
+        "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=5436&phys-par=true"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "The grid marks unmapped coverage: no registered global reflectance mosaic was found in the selected releases. Convex inversion leaves concavities and fine relief unresolved. - Transferring thermal diameter to mesh volume is approximate. The quoted fit error excludes additional thermal/shape uncertainty and does not measure local shape accuracy. - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain. - Absolute phase is arbitrary; accelerated display spin is illustrative. Orbit context is fixed at 2026-09-03 TT. The archive also lists an alternative pole. - The selected sidereal period is 21.2689 h; [SBDB](https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=5436&phys-par=true) repeats French et al. (2013)’s older 38.41 h synodic value. The selected shape and sidereal spin remain paired. The live DAMIT export lists these other models for this target: 3921: pole (96°, 11°), 21.269 h, version 2019-05-07. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eumelos/README.md",
+        "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=5436&phys-par=true",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/3921"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-1",
+      "subject": "Source mesh and calibration preservation",
+      "status": "included",
+      "finding": "The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/12274/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from NOTICE.md.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eumelos/README.md",
+        "https://damit.cuni.cz/projects/damit/pages/documentation",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/eumelos/source/reference/damit-model.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/eumelos/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "Integrated colors as a surface map",
+      "status": "excluded",
+      "finding": "Disk-integrated colors and thermal fits do not supply positions on the surface or a registered regolith map. The diameter fit belongs to the separate selected NEOWISE calibration entry; it was incorrectly mixed into this entry during migration.",
+      "revisitWhen": "A spatially resolved, reusable observation and its registration provide a measured surface product.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eumelos/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "Hanuš 2023: consistency with the existing DAMIT solution",
+      "status": "included",
+      "finding": "The existing-DAMIT table was checked: (272°, 22°), 21.2689 h, agreeing with the selected archive solution to the paper’s printed precision. Included as a source consistency check, not a newly adopted mesh or surface qualification.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eumelos/README.md",
+        "https://arxiv.org/html/2308.05380v1",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/eumelos/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "Alternative archive solution: model 3921, ecliptic pole (96°, 11°)",
+      "status": "unresolved",
+      "finding": "Alternative archive solution: [model 3921](https://damit.cuni.cz/projects/damit/asteroid_models/view/3921), ecliptic pole (96°, 11°).",
+      "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eumelos/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

@@ -79,7 +79,7 @@ Feature notes: 4 of the labelled names carry a caption note, the lead summary of
 
 The visible Stooke shape differs from the Thomas radii used for Elevation, especially in unseen areas and shadowed craters. Neither product establishes global measured terrain. The JPEG has no authoritative validity mask: a narrow edge-connected gray test estimates exterior fill, so ambiguous pixels can remain. Pole, phase and added directional lighting are illustrative.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="mathilde-sources-and-interpretation"></a>
 <a id="selected-products"></a>
@@ -100,18 +100,7 @@ JPL Horizons physical header, retrieved 2026-09-07 and pinned in `source/referen
 
 **Source survey and alternatives**
 
-| Candidate | Disposition | Reason |
-| --- | --- | --- |
-| Thomas 3° radial model / NEAR collected-model duplicate | Included for partial Elevation; excluded as display geometry | Legacy label explicitly identifies the missing-radius sentinel and nonphysical jagged edges. Rendering or smoothing that sentinel boundary would misrepresent the source. |
-| Stooke 5° PDS visualization model | Included as explicitly labeled visualization shape | Published remedy for the incomplete model. It is reusable source-authored modeling, including aesthetic unobserved surfaces, never a claim of measured global topography. |
-| Thomas `253mathm.fit` mosaic | Included as reference evidence only | 795 × 464 byte FITS includes axes and labels, so it cannot be wrapped as a global texture. Higher-resolution Stooke photomosaic preserves the useful mapped observations. |
-| Stooke 3,600 × 1,800 monochrome mosaic | Included | Known simple cylindrical mapping and shared Thomas positional control. Better display sampling than the annotated FITS; partial coverage and photographed illumination remain explicit. |
-| Stooke four 25 m/pixel morphographic quadrangles | Excluded as a separate lens | Same photomosaic in a different projection; 4 of 14 possible sheets reflect partial coverage. They add no independent scientific view and do not repair source resolution or missing terrain. |
-| Stooke shaded-relief drawings | Excluded | Drawn visualization, not measured elevation. The valid Thomas numerical radii support a better-defined scientific lens. |
-| [Weirich, Palmer & Domingue 2019 SPC model](https://www.hou.usra.edu/meetings/lpsc2019/pdf/2681.pdf) and [PSI object page](https://spc.psi.edu/index.php/2019/03/) | Unresolved for reusable source release | Paper describes a later model from 120 NEAR images and only one illumination angle; 6 m grid spacing oversamples imagery no better than 148 m/pixel. It acknowledges remaining image/model differences. The paper and linked object page expose no downloadable model release or redistribution terms; the access page concerns licensed SPC software. This is not evidence that the model does not exist. No contact or acquisition requiring submission was made. |
-| Original NEAR MSI flyby images and geometry list | Two broadband frames included as NEAR close-ups | Thomas’s reconstructed table supports a checked camera; paired raw frames establish detector validity. No recovery of deep shadows, albedo or unseen terrain. |
-
-The survey follows the source papers to actual PDS data rather than treating press images as map products. The journal article [Thomas et al. 1999, *Mathilde: Size, Shape, and Geology*](https://doi.org/10.1006/icar.1999.6121) explains the arbitrary frame and minimum/nominal/maximum hidden-volume interpretations. Copyrighted paper PDFs used for local research are not package inputs.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Preparation and qualification**
 
