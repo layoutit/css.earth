@@ -1,22 +1,26 @@
 {
   "date": "2026-09-14",
-  "baseCommit": "e6ed07b7f549388434520ff17a130d600a7c8f77",
+  "baseCommit": "4b74bbfd599a6ab4f60c2139f3b399ca7349a4db",
   "codePins": {
-    "tools/objects/observation/controlled-map-mosaic.mts": "0d60d7eecf272a4f9975d834105fc6ed556c4bafdbf659151ee25680c420a7d2",
-    "tools/objects/observation/interpret.mts": "b502b66d59705204c46b8dd6a726b68e86dce2b5502286308641a1432ffbba16",
-    "tools/objects/provenance-recipes.mts": "b195923f3bd0768969335ba83b51d5767db8df848815f65ed9838a0fab9a668f",
-    "src/objects/europa/source/preparation/raster.json": "992fb1664ba436fa0b872e1832e068aa3341c1e0de146212e883784bbc236bc8",
-    "src/objects/europa/source/preparation/presentation.json": "4945f58e06db43a310a6fdb432ae42c338a50457aaf8aea8ed21159af94e9195",
-    "src/objects/europa/source/content/object.json": "71e083179c880ceaed1118cff87c9d1e2d4d7bdce55d1d08f191b7f4d1937884",
-    "src/objects/europa/prepared/runtime.refs.json": "f37438d16a396880362ad28350b566c81b98a22155504f7e34cde770298bd367",
-    "src/objects/europa/composition.css": "a15b0cfe2bcb27a51f73f8ba77a014c2aef5744a53e62dbf95d05e0f1ebf53c0"
+    "tools/objects/observation/controlled-map-mosaic.mts": "56767e16ea8781aefab2c2d9b19ad1befea5a11563603d10ba3508b558990e5d",
+    "tools/objects/observation/interpret.mts": "1aaa93936262de4ed289273c1253446102ee6e8aa2c54b5a4a243da7921df0b0",
+    "tools/objects/provenance-recipes.mts": "b1af9d03b242cecd77b21643e5a878f06baa2473131ee869479812eeaf3dcbea",
+    "src/objects/europa/source/preparation/raster.json": "c1fd90d5c68c04e5ff9d901db7442057143ba4c4c12ee2213521fba056decede",
+    "src/objects/europa/source/preparation/presentation.json": "e688a2fc4afd8b205a34e7769384b9d56c4c7ad13e33befc1384119321d42c41",
+    "src/objects/europa/source/content/object.json": "ecdadd63438967d6e9dd54f21b5d7777fd3d4819fa2c1e50bfd38a403c7903ab",
+    "src/objects/europa/prepared/runtime.refs.json": "13cee674704e009995a27dd52d87eb90a2d2e5d234ec7b86e8643a739be4e104",
+    "src/objects/europa/prepared/minimaps/normal.webp": "5a3bebee06e92fcd71bd72739eafb3029384ac71e403522f93bc3b429fb6c1fa",
+    "src/objects/europa/text.json": "012d3d36bbb0acf8bf5fc2532cefb6753d4c74b02425f17edc1e6f0e29fd992a"
   },
   "focusedTests": {
-    "command": "node --test tools/objects/observation/controlled-map-mosaic.test.mts tools/object-provenance.test.mts tests/objects/unit/europa/runtime-contract.test.mts tests/objects/unit/europa/features.test.mts",
-    "tests": 35,
-    "pass": 31,
+    "commands": [
+      "node --test tools/objects/observation/controlled-map-mosaic.test.mts tools/object-provenance.test.mts",
+      "node --test tests/objects/unit/europa/runtime-contract.test.mts tests/objects/unit/europa/features.test.mts"
+    ],
+    "tests": 36,
+    "pass": 32,
     "fail": 4,
-    "meaning": "Native area-integration and polar-coordinate fixtures, all 332 consumed source bindings, retained dataset switching, toggles and feature anchors pass."
+    "meaning": "Native area and projection checks, bounded overlap display matching, all consumed sources, retained eight datasets and features."
   },
   "typeScript": [
     "tsc -p tools/objects/tsconfig.json",
@@ -164,5 +168,6 @@
     "All-body browser conformance",
     "Full object geometry preparation",
     "Physical mobile-device memory/performance qualification"
-  ]
+  ],
+  "reusedBaseline": "The same four failures were reproduced on main 4b74bbfd5 for the original PR checks. This revision re-ran the affected suites and reproduces them again; delivery.json additionally verifies the entire retained runtime and scene definitions equal that main version."
 }

@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {areaSampler,parseControlledFrames,parseControlledMapProfile,controlledMapPoint,controlledMapBounds,samplePolarCell} from './controlled-map-mosaic.mts';
+import {areaSampler,parseControlledFrames,parseControlledMapProfile,controlledMapPoint,controlledMapBounds,samplePolarCell,matchControlledMapLevels} from './controlled-map-mosaic.mts';
 const profile=parseControlledMapProfile({referenceRadiusMeters:100,wavelengthMicrometers:.611,filter:'CLEAR',displayRange:[0,2],polarBoundaryDegrees:78.75});
 const base={id:'frame',path:'frame.tif',width:40,height:40,noData:-999,transform:[-20,1,0,20,0,-1],projection:'polar-stereographic',centerLongitude:0,poleLatitude:90};
 test('area integration agrees with direct source-square intersections',()=>{
@@ -39,4 +39,19 @@ test('projection and identity constraints reject unsupported recipes',()=>{
  assert.throws(()=>parseControlledFrames([base,base]));
  assert.throws(()=>parseControlledFrames([{...base,transform:[0,0,0,0,0,-1]}]));
  assert.throws(()=>parseControlledMapProfile({referenceRadiusMeters:100,wavelengthMicrometers:.611,filter:'GREEN',displayRange:[0,2],polarBoundaryDegrees:78.75}));
+});
+test('photographic inserts preserve the global base and cap fitted exposure against native highlights',()=>{
+ const width=8,height=4,count=width*height,base={rgb:new Uint8Array(count*3).fill(255),missing:new Uint8Array(count)};
+ const result={values:new Float32Array(count),owners:new Uint16Array(count),rgb:new Uint8Array(count*3),missing:new Uint8Array(count).fill(1),
+  report:{display:{range:[0,2]},frames:[{id:'image',nativeMaximum:.5}]}};
+ for(let y=1;y<3;y++)for(let x=2;x<6;x++){const i=y*width+x;result.owners[i]=1;result.missing[i]=0;result.values[i]=.25;}
+ // Missing reference pixels cannot determine the exposure. A valid black
+ // photograph stays black, and a true gap in both observations stays missing.
+ base.missing[10]=1;result.values[11]=0;base.missing[0]=1;
+ const report=matchControlledMapLevels(result,base,width,height,{boundaryPixels:1});
+ assert.equal(report.levels[0]!.requestedGain,8);assert.equal(report.levels[0]!.gain,4);
+ assert.equal(result.rgb[12*3],188);assert.equal(result.rgb[11*3],0);
+ assert.equal(result.rgb[3],255);assert.equal(result.missing[1],0);assert.equal(result.missing[0],1);
+ assert.equal(result.values[12],.25,'Calibrated source value stays unchanged');
+ assert.throws(()=>matchControlledMapLevels(result,base,width,height,{boundaryPixels:0}));
 });

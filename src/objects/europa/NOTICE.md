@@ -12,7 +12,9 @@ B. Archinal, E. Smith and B. Wheeler (2021)**,
 [Improving the Usability of Galileo and Voyager Images of Jupiter's Moon Europa](https://doi.org/10.1029/2021EA001935).
 The 332 controlled CLEAR-filter GeoTIFFs are released under **CC0-1.0**.
 Published projection and measured I/F are retained; overlap selection, sampling,
-fixed grayscale display exposure and missing-coverage grid are prepared by cssEarth.
+bounded overlap-based grayscale display matching, the global-mosaic fallback and
+missing-coverage grid are prepared by cssEarth. This is a display adjustment, not
+additional radiometric or photometric calibration.
 
 Jupiter's context image: **NASA, ESA, STScI, and Amy Simon**, Hubble observation
 of 5 January 2024. The photograph is a prepared context sprite, not a second

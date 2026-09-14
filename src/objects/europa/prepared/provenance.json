@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8312d72ea8ada40b47979fefcaa74d85cc5184713df42d37d404315fd104e203"
+    "sha256": "0eae2657595b8c7804752a71d49114103f50de4be93f21dfa792e51c43a9fff1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-    "bindingsSha256": "b195923f3bd0768969335ba83b51d5767db8df848815f65ed9838a0fab9a668f"
+    "bindingsSha256": "b1af9d03b242cecd77b21643e5a878f06baa2473131ee869479812eeaf3dcbea"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "992fb1664ba436fa0b872e1832e068aa3341c1e0de146212e883784bbc236bc8",
+      "sha256": "c1fd90d5c68c04e5ff9d901db7442057143ba4c4c12ee2213521fba056decede",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/europa/",
@@ -61,32 +61,26 @@
               "nativePhotographicSampling": {
                 "samplesPerAxis": 2,
                 "quality": 95
+              },
+              "detailMosaic": {
+                "format": "controlled-geotiff",
+                "consumer": "galileo-regional",
+                "profile": {
+                  "referenceRadiusMeters": 1560800,
+                  "filter": "CLEAR",
+                  "wavelengthMicrometers": 0.611,
+                  "displayRange": [
+                    0,
+                    2
+                  ],
+                  "polarBoundaryDegrees": 78.75
+                },
+                "levelMatching": {
+                  "boundaryPixels": 4
+                }
               }
             },
             "resolutionScale": 2
-          },
-          {
-            "id": "galileo",
-            "output": "europa-{id}{suffix}.webp",
-            "thumbnail": "europa-lens-{id}.webp",
-            "source": "galileo/s0449967535_36.tif",
-            "falseColor": false,
-            "resolutionScale": 3,
-            "science": {
-              "kind": "terrestrial-mosaic",
-              "format": "controlled-geotiff",
-              "consumer": "galileo-regional",
-              "profile": {
-                "referenceRadiusMeters": 1560800,
-                "filter": "CLEAR",
-                "wavelengthMicrometers": 0.611,
-                "displayRange": [
-                  0,
-                  2
-                ],
-                "polarBoundaryDegrees": 78.75
-              }
-            }
           },
           {
             "id": "enhanced",
@@ -556,7 +550,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "71e083179c880ceaed1118cff87c9d1e2d4d7bdce55d1d08f191b7f4d1937884",
+      "sha256": "ecdadd63438967d6e9dd54f21b5d7777fd3d4819fa2c1e50bfd38a403c7903ab",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -675,19 +669,6 @@
                 "path": "../manifest.json"
               },
               "notes": "USGS Voyager/Galileo mosaic. Source resolution varies from about 200 m to 20 km per pixel. Gray grid marks documented no-data and its resampled boundary. Original image shading remains; globe lighting is approximate.",
-              "noData": true
-            },
-            {
-              "id": "galileo",
-              "label": "Galileo",
-              "thumbnail": "europa-lens-galileo.webp",
-              "surface": "europa-galileo.webp",
-              "poles": "europa-poles-galileo.webp",
-              "source": {
-                "id": "galileo-s0449967535_36",
-                "path": "../manifest.json"
-              },
-              "notes": "Regional Galileo clear-filter photographs, positioned by the USGS control network. Gaps remain gray; original shadows and differences between encounters remain. A fixed display scale maps calibrated I/F from 0 to 2 to gray brightness. This is an observation mosaic, not an albedo map. The finest prepared grid is about 800 m per pixel at the equator; some original photographs are much finer.",
               "noData": true
             },
             {
@@ -1251,70 +1232,6 @@
         ],
         "path": "europa-global-500m.tif",
         "url": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "galileo-s0449967535_36",
-      "path": "galileo/s0449967535_36.tif",
-      "width": 653,
-      "height": 605,
-      "noData": 0,
-      "filter": "CLEAR",
-      "wavelengthMicrometers": 0.611,
-      "transform": [
-        -68572,
-        62,
-        0,
-        85188,
-        0,
-        -62
-      ],
-      "projection": "equirectangular",
-      "centerLongitude": 180,
-      "imageId": "s0449967535_36",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller, Archinal, Smith and Wheeler (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.json"
-      ],
-      "observation": "15ESCILIXS02",
-      "observedAt": "1998-05-31T21:08:11.955000Z",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.json",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "galileo-europa-s0449967535-36",
-            "role": "material",
-            "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.json"
-          }
-        ]
-      },
-      "acquisition": "Download the released radiometrically calibrated, photogrammetrically controlled GeoTIFF and verify its pinned bytes.",
-      "redistribution": "CC0-1.0. Original GeoTIFF is restored from the source archive; retain scientific credit.",
-      "sha256": "d9edf0696816534db3bc7cdccbd0b156a0aa7c95cfbbcb155aa16c63160288e6",
-      "bytes": 1201668,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "galileo-regional"
-        ],
-        "path": "galileo/s0449967535_36.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.equi.photr.tif"
       },
       "verificationOperations": []
     },
@@ -12003,6 +11920,70 @@
         ],
         "path": "galileo/s0449967505_04.tif",
         "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967505_04/s0449967505_04.equi.photr.tif"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "galileo-s0449967535_36",
+      "path": "galileo/s0449967535_36.tif",
+      "width": 653,
+      "height": 605,
+      "noData": 0,
+      "filter": "CLEAR",
+      "wavelengthMicrometers": 0.611,
+      "transform": [
+        -68572,
+        62,
+        0,
+        85188,
+        0,
+        -62
+      ],
+      "projection": "equirectangular",
+      "centerLongitude": 180,
+      "imageId": "s0449967535_36",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller, Archinal, Smith and Wheeler (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.json"
+      ],
+      "observation": "15ESCILIXS02",
+      "observedAt": "1998-05-31T21:08:11.955000Z",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.json",
+            "missionId": "galileo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "galileo-europa-s0449967535-36",
+            "role": "material",
+            "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.json"
+          }
+        ]
+      },
+      "acquisition": "Download the released radiometrically calibrated, photogrammetrically controlled GeoTIFF and verify its pinned bytes.",
+      "redistribution": "CC0-1.0. Original GeoTIFF is restored from the source archive; retain scientific credit.",
+      "sha256": "d9edf0696816534db3bc7cdccbd0b156a0aa7c95cfbbcb155aa16c63160288e6",
+      "bytes": 1201668,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "galileo-regional"
+        ],
+        "path": "galileo/s0449967535_36.tif",
+        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.equi.photr.tif"
       },
       "verificationOperations": []
     },
@@ -23058,8 +23039,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "71e083179c880ceaed1118cff87c9d1e2d4d7bdce55d1d08f191b7f4d1937884",
-      "bytes": 21623,
+      "sha256": "ecdadd63438967d6e9dd54f21b5d7777fd3d4819fa2c1e50bfd38a403c7903ab",
+      "bytes": 20870,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -23189,76 +23170,28 @@
       ],
       "interpretation": {
         "falseColor": false,
-        "polarSampling": "original-photograph-footprint"
-      },
-      "inputs": [
-        "usgs-voyager-galileo-global-500m"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/europa/europa-normal.webp",
-          "bytes": 2634642,
-          "sha256": "8df05d1f567bebdf65d76c45d44117f342147b0b2c7255da7aaf9513b465e956",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-normal@2x.webp",
-          "bytes": 7179116,
-          "sha256": "02d24726df09217cb9ee4403222c49b4454898f74924f1d035db51ab63de1395",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lens-normal.webp",
-          "bytes": 1024,
-          "sha256": "f825c07231986c76e555af5b29eadc1b7a91e96c2cc0b55f01446a4c22b1fd65",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-normal.webp",
-          "bytes": 45126,
-          "sha256": "ea90a7fe35170100a478351bc5e434bd55c941ae193808fb2dcc42948c06001e",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-normal@2x.webp",
-          "bytes": 132918,
-          "sha256": "7e22840665ef366b82653d4455c55e113a84a963f4d36041969e4604d8a973a8",
-          "verification": "asset-manifest-pin"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "galileo",
-      "label": "Galileo",
-      "recipe": "raster",
-      "selector": "/surfaces/1",
-      "parents": [],
-      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [],
-      "lensIds": [
-        "galileo"
-      ],
-      "recipeDependencies": [
-        "raster"
-      ],
-      "interpretation": {
-        "falseColor": false,
-        "controlledPhotographs": {
-          "referenceRadiusMeters": 1560800,
-          "filter": "CLEAR",
-          "wavelengthMicrometers": 0.611,
-          "displayRange": [
-            0,
-            2
-          ],
-          "polarBoundaryDegrees": 78.75
+        "controlledPhotographicDetail": {
+          "format": "controlled-geotiff",
+          "consumer": "galileo-regional",
+          "profile": {
+            "referenceRadiusMeters": 1560800,
+            "filter": "CLEAR",
+            "wavelengthMicrometers": 0.611,
+            "displayRange": [
+              0,
+              2
+            ],
+            "polarBoundaryDegrees": 78.75
+          },
+          "levelMatching": {
+            "boundaryPixels": 4
+          }
         },
         "originalIllumination": true,
         "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
-        "galileo-s0449967535_36",
+        "usgs-voyager-galileo-global-500m",
         "galileo-s0368639400",
         "galileo-s0368639413",
         "galileo-s0368639426",
@@ -23426,6 +23359,7 @@
         "galileo-s0449967488",
         "galileo-s0449967501_00",
         "galileo-s0449967505_04",
+        "galileo-s0449967535_36",
         "galileo-s0449967539_40",
         "galileo-s0449967542_43",
         "galileo-s0449967547_46",
@@ -23593,33 +23527,33 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-galileo.webp",
-          "bytes": 681548,
-          "sha256": "738a446acdc266a5030585a4be5b7a53c240feb0d3fb7c4c32a140c511d82618",
+          "url": "/scenes/europa/europa-normal.webp",
+          "bytes": 2367852,
+          "sha256": "b408e252043299a1003e62449621bb0d13d263fc0228a297570789849f8e2acb",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/europa/europa-galileo@2x.webp",
-          "bytes": 2693178,
-          "sha256": "83127ac98b230ca757c3ca713d883791ff345f516b6f1e47bc0229639021432f",
+          "url": "/scenes/europa/europa-normal@2x.webp",
+          "bytes": 6976746,
+          "sha256": "5e1f982d5483762ec96f269d88d9e4cd2645a06e4def0b1ba27d4d67179a87c9",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/europa/europa-lens-galileo.webp",
-          "bytes": 540,
-          "sha256": "83324d43afe1994747af87d9e8ee8d4c7a3d7c68dc97c9f60ca84013baa1caf2",
+          "url": "/scenes/europa/europa-lens-normal.webp",
+          "bytes": 922,
+          "sha256": "7656c4698d76da9e393e23eb26504436bfbcf5364c6066faca4aa26cc65022d3",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/europa/europa-poles-galileo.webp",
-          "bytes": 23884,
-          "sha256": "f2bbbf8de0e75437704b1a0e8f48b5b3c52588c8f0f57c77da41db46bb35e4fb",
+          "url": "/scenes/europa/europa-poles-normal.webp",
+          "bytes": 46680,
+          "sha256": "dbbd90ec419dad5ebf56f952ac1483b6244d813fb8e8a24f0738b067e7823e33",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/europa/europa-poles-galileo@2x.webp",
-          "bytes": 65330,
-          "sha256": "743707fd8b47eb6d948adcedecceafde18705d69e738345e944db61fb8638fde",
+          "url": "/scenes/europa/europa-poles-normal@2x.webp",
+          "bytes": 141700,
+          "sha256": "4530e8b2d4fbb1bcb190c57fbe2c0d9039809f7fcb254fbc3e860761a6eb16b6",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -23629,7 +23563,7 @@
       "id": "enhanced",
       "label": "False color",
       "recipe": "raster",
-      "selector": "/surfaces/2",
+      "selector": "/surfaces/1",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23685,7 +23619,7 @@
       "id": "elevation",
       "label": "Elevation",
       "recipe": "raster",
-      "selector": "/surfaces/3",
+      "selector": "/surfaces/2",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23739,7 +23673,7 @@
       "id": "geology",
       "label": "Geology",
       "recipe": "raster",
-      "selector": "/surfaces/4",
+      "selector": "/surfaces/3",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23793,7 +23727,7 @@
       "id": "infrared",
       "label": "Infrared",
       "recipe": "raster",
-      "selector": "/surfaces/5",
+      "selector": "/surfaces/4",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23847,7 +23781,7 @@
       "id": "ice-signature",
       "label": "Ice signature",
       "recipe": "raster",
-      "selector": "/surfaces/6",
+      "selector": "/surfaces/5",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23901,7 +23835,7 @@
       "id": "fine-ice",
       "label": "Fine ice",
       "recipe": "raster",
-      "selector": "/surfaces/7",
+      "selector": "/surfaces/6",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23955,7 +23889,7 @@
       "id": "coarse-ice",
       "label": "Coarse ice",
       "recipe": "raster",
-      "selector": "/surfaces/8",
+      "selector": "/surfaces/7",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -24506,34 +24440,10 @@
       ]
     },
     {
-      "id": "preview:galileo",
-      "label": "Galileo preview",
-      "recipe": "raster",
-      "selector": "/surfaces/1",
-      "recipeDependencies": [
-        "raster"
-      ],
-      "inputs": [],
-      "parents": [
-        "galileo"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/galileo.webp",
-          "bytes": 9700,
-          "sha256": "a9130ce6bb52dac63bcdb150db29aa99d1d9b72359dfe4e6a34d9cc1762e0187",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
       "id": "preview:enhanced",
       "label": "False color preview",
       "recipe": "raster",
-      "selector": "/surfaces/2",
+      "selector": "/surfaces/1",
       "recipeDependencies": [
         "raster"
       ],
@@ -24557,7 +24467,7 @@
       "id": "preview:elevation",
       "label": "Elevation preview",
       "recipe": "raster",
-      "selector": "/surfaces/3",
+      "selector": "/surfaces/2",
       "recipeDependencies": [
         "raster"
       ],
@@ -24581,7 +24491,7 @@
       "id": "preview:geology",
       "label": "Geology preview",
       "recipe": "raster",
-      "selector": "/surfaces/4",
+      "selector": "/surfaces/3",
       "recipeDependencies": [
         "raster"
       ],
@@ -24605,7 +24515,7 @@
       "id": "preview:infrared",
       "label": "Infrared preview",
       "recipe": "raster",
-      "selector": "/surfaces/5",
+      "selector": "/surfaces/4",
       "recipeDependencies": [
         "raster"
       ],
@@ -24629,7 +24539,7 @@
       "id": "preview:ice-signature",
       "label": "Ice signature preview",
       "recipe": "raster",
-      "selector": "/surfaces/6",
+      "selector": "/surfaces/5",
       "recipeDependencies": [
         "raster"
       ],
@@ -24653,7 +24563,7 @@
       "id": "preview:fine-ice",
       "label": "Fine ice preview",
       "recipe": "raster",
-      "selector": "/surfaces/7",
+      "selector": "/surfaces/6",
       "recipeDependencies": [
         "raster"
       ],
@@ -24677,7 +24587,7 @@
       "id": "preview:coarse-ice",
       "label": "Coarse ice preview",
       "recipe": "raster",
-      "selector": "/surfaces/8",
+      "selector": "/surfaces/7",
       "recipeDependencies": [
         "raster"
       ],
