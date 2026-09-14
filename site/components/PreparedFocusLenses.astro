@@ -6,6 +6,7 @@ import { parsePreparedVolumePresentation } from '../volume-presentation.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { PreparedVolumeLensBank } from '../../src/renderers/css/volume/prepared-volume-lenses';
 import { CONTEXT_OBJECT_DESCRIPTORS, CONTEXT_OBJECT_PREPARED_JSON } from '../prepared-context-objects.mts';
+import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
 interface Props { factsOnly?: boolean }
 const { factsOnly = false } = Astro.props;
 
@@ -14,7 +15,7 @@ type Descriptor = { id: string; type: string; prepared?: { url: string } };
 const descriptors = CONTEXT_OBJECT_DESCRIPTORS as Record<string, Descriptor>;
 const prepared = CONTEXT_OBJECT_PREPARED_JSON as Record<string, { data: PreparedVolumeLensBank } | undefined>;
 const presentations = CONTEXT_OBJECT_PREPARED_JSON, provenanceDocuments = CONTEXT_OBJECT_PREPARED_JSON;
-const banks = Object.entries(descriptors).filter(([, descriptor]) => descriptor.type === 'volume-lens-bank').map(([path, descriptor]) => {
+const banks = Object.entries(descriptors).filter(([, descriptor]) => descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available).map(([path, descriptor]) => {
   const bank = prepared[path.replace(/object\.json$/u, descriptor.prepared?.url ?? '')]?.data;
   if (!bank || bank.id !== descriptor.id) throw new TypeError(`Prepared focus lenses unavailable: ${descriptor.id}.`);
   const provenance = validateObjectProvenance(provenanceDocuments[path.replace(/object\.json$/u, 'prepared/provenance.json')], bank.id);
