@@ -133,9 +133,9 @@
     },
     {
       "id": "survey-source-reference-9",
-      "subject": "Source reference 9",
-      "status": "included",
-      "finding": "ISAM — original SAGE release sought but unavailable during intake.",
+      "subject": "ISAM SAGE numerical release",
+      "status": "unresolved",
+      "finding": "[ISAM](http://isam.astro.amu.edu.pl/) — original SAGE release sought but unavailable during intake.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/massalia/README.md"
       ],
@@ -143,8 +143,13 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "fe3ff8d6824c46ce6398eba63d8dbd71afc39efd"
         }
-      ]
+      ],
+      "revisitWhen": "An accessible authoritative SAGE numerical release with its coordinate and size calibration records."
     },
     {
       "id": "surface-imagery",
@@ -177,22 +182,6 @@
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
       ]
-    },
-    {
-      "id": "recorded-reference-1",
-      "subject": "ISAM",
-      "status": "unresolved",
-      "finding": "[ISAM](http://isam.astro.amu.edu.pl/) — original SAGE release sought but unavailable during intake.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/massalia/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
-      ],
-      "revisitWhen": "An accessible authoritative SAGE numerical release with its coordinate and size calibration records."
     }
   ]
 }

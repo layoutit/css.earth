@@ -82,11 +82,18 @@ The README links the ledger instead of repeating a source survey. Read the
 ledger before investigating an object. Reopen an excluded, unresolved or
 deferred entry only when its `revisitWhen` condition is met, and say which.
 `node tools/report-investigations.mts` lists every open entry across objects.
-Use `--classification=asteroid --summary` for catalogue coverage, or filter
-decisions with `--status=deferred,unresolved --search=registration`. The
-[asteroid investigation guide](asteroid-investigations.md) explains the imported
-records, evidence gaps and candidate work. Counts measure recorded decisions,
-not qualified views or an exhaustive search of available sources.
+Use `--summary` for catalogue coverage and `--classification` to select an
+existing object classification. Filter decisions with `--status=deferred,unresolved`
+and `--search=registration`, or export with `--json`. Filters select detail rows;
+summary counts cover the selected population. Counts measure recorded decisions,
+not qualified views or an exhaustive source search.
+
+When importing historical records, preserve their source decisions and original
+evidence. Explain the migration method and extent of manual review in the PR.
+A schema or link check does not verify the finding, and the import date is not
+a new source investigation or qualification date. After a finding changes,
+retain its entry id and previous checks, append the new checked revision, and
+preserve the earlier result in the finding or its pinned evidence.
 
 ### Examples
 
