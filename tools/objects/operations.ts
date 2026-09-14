@@ -2,7 +2,7 @@ import { parseSourceBinding } from '../../src/platform/source-catalog.mts';
 import type { SourceBinding } from '../../src/platform/source-catalog.mts';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, type AcquisitionPlan, type AcquisitionTransport } from './operations-acquisition.js';
-export { parseAcquisitionPlan };
+export { executeAcquisition, parseAcquisitionPlan };
 import { isPreparedBlockReference, PREPARED_BLOCK_ENCODING } from '../../src/renderers/css/paging/prepared-block-transport.js';
 import type { PreparedReference } from '../../src/renderers/css/paging/types.js';
 import { createHash, randomUUID } from 'node:crypto';

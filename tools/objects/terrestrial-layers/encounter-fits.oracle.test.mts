@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeEncounterFits } from './encounter-fits.mts';
-import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
+import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../source-values.mts';
 
 /** astropy as the oracle for the encounter FITS reader, one product per instrument layout: Deep Impact ITS, Stardust NAVCAM and MRI. */
@@ -22,7 +22,8 @@ for (const [body, raw] of Object.entries(products)) test(`${body}: planes, heade
   const control = JSON.parse(await readFile(resolve(source, frame.controlPath), 'utf8'));
   assert.equal(`src/objects/${body}/source/${frame.path}`, requireString(product.path));
   assert.equal(control.observation.detectorBorderPixels, requireFiniteNumber(product.detectorBorderPixels));
-  const decoded = decodeEncounterFits(await readFile(resolve(source, frame.path)), control.observation);
+  const input = fixture.inputs.find(input => input.path === product.path); assert.ok(input);
+  const decoded = decodeEncounterFits(await readOracleInput(input), control.observation);
   const identity = requireRecord(product.identity);
   assert.equal(decoded.header.INSTRUME, requireString(identity.instrument));
   assert.equal(decoded.units, requireString(identity.units));
