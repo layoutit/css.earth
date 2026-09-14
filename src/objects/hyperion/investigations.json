@@ -104,6 +104,23 @@
           "commit": "4fea925cce611d30704d68df60d91df92596b87c"
         }
       ]
+    },
+    {
+      "id": "cassini-coverage-2026-09-13",
+      "subject": "N1506393778 high-resolution regional frame",
+      "status": "unresolved",
+      "finding": "The published table has two camera rows for N1506393778_1, while current OPUS supplies calibrated version N1506393778_2. One published center is off-chip, which is possible for a regional image. Both fixed-camera trials against the existing N1506391424 reference failed with Insufficient independent feature patches; neither reached residual qualification. The nominal roughly 21 m/pixel opportunity remains unresolved, rather than being positioned by eye.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf",
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
+        }
+      ],
+      "revisitWhen": "Independent controlled registration establishes the correct native product and camera row, including image coverage outside the body center."
     }
   ]
 }
