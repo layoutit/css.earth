@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Regenerate oracle fixtures through the pinned environment: every fixture
+ * Regenerate Python oracle fixtures through the pinned environment: every fixture
  * oracle (a script under tools/oracles/<group>/ that writes through
  * fixture.py), or only the ones named, such as `spice/dart-draco`. Older
  * standalone audits in the same tree, such as the Borrelly registration, are
@@ -16,7 +16,7 @@ const known = readdirSync(oracles, { withFileTypes: true }).filter(entry => entr
     .filter(file => /^from fixture import .*\bwrite\b/mu.test(readFileSync(resolve(oracles, group.name, file), 'utf8')))
     .map(file => `${group.name}/${file.slice(0, -3)}`)).sort();
 const requested = process.argv.slice(2), unknown = requested.filter(name => name !== 'sbmt/projection' && !known.includes(name));
-if (unknown.length) throw new Error(`Unknown oracle ${unknown.join(', ')}; known: ${known.join(', ')}.`);
+if (unknown.length) throw new Error(`Unknown oracle ${unknown.join(', ')}; known: ${[...known,'sbmt/projection'].join(', ')}.`);
 for (const name of requested.length ? requested : known) {
   console.log(`oracle ${name}`);
   const sbmt = name === 'sbmt/projection';
