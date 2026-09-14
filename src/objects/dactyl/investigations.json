@@ -461,17 +461,22 @@
       "id": "veverka-published-pole-alignment",
       "subject": "Figure 9B south-pole control in original SSI detector coordinates",
       "status": "unresolved",
-      "finding": "The meridian convergence is independently re-examined at approximately (307.5,147.5) in the 427×396 embedded JPEG. The baseline similarity alignment gives native (203.44,213.25), correlation 0.901. Twelve region/filter fits move that inferred pole by up to 2.52 native pixels, with weaker right-half matches under the printed grid. A pole-only ellipsoid fit does not determine the named-feature longitude. No grid spacing is assumed.",
+      "finding": "The meridian convergence is independently re-examined at approximately (307.5,147.5) in the 427×396 embedded JPEG. The baseline similarity alignment gives native (203.44,213.25), correlation 0.901. Twelve region/filter fits move that inferred pole by up to 2.52 native pixels, with weaker right-half matches under the printed grid. A pole-only ellipsoid fit does not determine the named-feature longitude. No grid spacing is assumed. The combined 2026-09-14 first-photograph check revisited Figure 9B and the retained map report: its wireframe intersections still have no numerical coordinate labels. No additional controls or new camera qualification were established; previous fits were not rerun.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-controls.json",
         "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-control-fit.json",
-        "https://doi.org/10.1006/icar.1996.0045"
+        "https://doi.org/10.1006/icar.1996.0045",
+        "https://github.com/layoutit/css.earth/blob/642d15f827ce1ba529068b5b3508ef70a379723e/src/objects/dactyl/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-14",
           "commit": "fc36f37867b7c94edb8bb50c3e634f8070703e84",
           "pr": 199
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "2850792ab49dc0fa64f31198852c16ea2e4d413f"
         }
       ],
       "revisitWhen": "A paper-to-detector transform is supported by spatially distributed identifiable ties or another archived control product, with measured sensitivity appropriate to the native image scale."
