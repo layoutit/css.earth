@@ -143,15 +143,49 @@ The [ledger](investigations.json) also records the sampled neighboring frames
 and paper leads. A smaller earlier image, preliminary label pointing and an
 assumed fixed spin do not provide an independent, controlled surface transfer.
 The readable overview's geometry table still describes Ida; it cannot supply
-Dactyl's camera. The full Veverka shape/surface paper remains unexamined.
-The next useful input is a Dactyl frame or distributed surface controls with
-disjoint checks, not another copy of the same three images.
+Dactyl's camera. The original Veverka paper was opened in the publisher's
+12-page PDF viewer, but only the first page and part of Table I could be read
+before further access required human verification. Its modeled views and
+remaining tables are still unexamined. The next useful input is a Dactyl frame
+or distributed surface controls with disjoint checks, not another copy of the
+same three images.
+
+**Outline extent check.** The original 17 crossings sample only the left limb.
+The [extent experiment](evidence/registration/limb-extent.json) adds 12 lower-cap
+crossings, then two upper-cap crossings, keeping the same instrument distortion,
+ellipsoid, range, Acmon control and 576 starts. Each case selects solely by its
+limb-and-Acmon objective.
+
+![Dactyl fits using the left limb, then also the lower cap, then both caps; a good Celmis prediction does not survive the additional outline samples](evidence/registration/limb-extent.png)
+
+| Sampled bright outline | Crossings | Limb RMS, ideal pixels | Celmis error, native pixels |
+| --- | ---: | ---: | ---: |
+| Left only | 17 | 0.27 | 12.70 |
+| Left and lower cap | 29 | 0.44 | 0.23 |
+| Left and both caps | 31 | 0.59 | 18.48 |
+
+The lower-cap case is a useful candidate, but the upper cap changes the result
+again. A low limb residual does not establish a stable body orientation. These
+are analyst-selected threshold crossings, added cumulatively rather than sampled
+at equal arc length; Celmis was already inspected during development. This is a
+sensitivity check, not a fresh blind validation or proof that the existing
+ellipsoid cannot support any registered area. No candidate is promoted to the
+public surface.
+
+Two further papers do not resolve the missing frame. The complete
+[Veverka spectral paper](https://doi.org/10.1006/icar.1996.0037) presents Dactyl's
+disk-averaged spectra; its mapped figures concern Ida. The two-page
+[Oberst photogrammetry abstract](https://www.lpi.usra.edu/meetings/lpsc1995/pdf/1535.pdf)
+describes an Ida control network and proposed Dactyl ephemeris work, without
+Dactyl surface controls. Retrieved-byte pins and the exact inspection scope are
+in the [additional-source record](evidence/registration/additional-sources.json).
 
 The [reproduction command](../../../tools/objects/source-authoring/galileo-lucy/README.md#dactyl-camera-and-orientation-diagnostic)
 checks native byte identity, clock/CK agreement and the fit in one serial run.
-The tools TypeScript check passes. No application build, browser conformance or
-Pixelmatch was run for this evidence-only change: neither candidate is a
-qualified surface, and the displayed scene is unchanged.
+The tools TypeScript check passes, including the extent-check option.
+No application build, browser conformance or Pixelmatch was run for these
+diagnostic changes: none of the candidates is a qualified surface, and the
+displayed scene is unchanged.
 
 ## Known problems
 

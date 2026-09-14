@@ -56,6 +56,20 @@ from source X/Y to CSS Y/X. The simplified orthographic envelope, rounded range
 and analyst feature picks make this an orientation experiment, not a new
 photographic preparation path. See the [body's interpretation and limits](../../../../src/objects/dactyl/README.md#camera-and-orientation-experiment).
 
+Append `--limb-extent` after the output directory to reproduce the two additional
+outline cases, for example:
+
+```sh
+node tools/objects/source-authoring/galileo-lucy/fit-dactyl.mts output/dactyl-registration --limb-extent
+```
+
+This adds lower and then upper bright-cap crossings and reruns the same search
+serially. `limb-extent.json` records every added crossing, scan definition and
+selected pose; `limb-extent.png` compares the three cases at the same native crop
+and display scale. Celmis never ranks these fits, but it was inspected during
+development, so this is an orientation-sensitivity check rather than blind
+qualification. It changes neither the original input pins nor the renderer.
+
 The independent [numerical fixture](../../../../tests/objects/fixtures/dactyl/galileo-pointing.json)
 records Python 3.12.14, SpiceyPy 8.2.0 and CSPICE N0067, the exact loaded kernels,
 load order, UTCs, API calls and native results. To repeat the native calculation

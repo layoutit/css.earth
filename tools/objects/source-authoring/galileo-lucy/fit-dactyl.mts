@@ -18,6 +18,8 @@ type Pose = [number, number, number, number, number];
 const rad = Math.PI / 180;
 const root = 'src/objects/dactyl/evidence/registration';
 const output = resolve(process.argv[2] ?? 'output/dactyl-registration');
+const checkLimbExtent = process.argv[3] === '--limb-extent';
+if (process.argv[3] && !checkLimbExtent) throw new Error('Unknown diagnostic option.');
 const sha = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 const inputBytes = await readFile(`${root}/inputs.json`);
 const input = requireRecord(JSON.parse(inputBytes.toString('utf8')));
@@ -263,6 +265,51 @@ const report = { schema: 'cssearth-dactyl-registration-result@1', qualifiedSurfa
 for (let y = region.top; y < region.top + region.height; y++) for (let x = region.left; x < region.left + region.width; x++) if (pixels[y * 800 + x] * 2 > 255) report.display.clippedPixels++;
 await writeFile(resolve(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
 await writeFile(resolve(output, 'solutions.json'), JSON.stringify(solutions, null, 2) + '\n');
+if (checkLimbExtent) {
+  const originalLimb = limbPixels.map((p): Pixel => [p[0], p[1]]);
+  // These added detector crossings are an explicit outline-sensitivity experiment,
+  // not new published surface controls. Keep the right-hand terminator excluded.
+  const capScans = [
+    { name: 'lower', firstSample: 182, lastSample: 204, sampleStep: 2, startLine: 248, endLine: 190, direction: -1 },
+    { name: 'upper', firstSample: 188, lastSample: 191, sampleStep: 2, startLine: 190, endLine: 248, direction: 1 },
+  ];
+  const cases = [{ name: 'left only', detectorPixels: originalLimb, bestFit: best }];
+  for (const scan of capScans) {
+    for (let x = scan.firstSample; x <= scan.lastSample; x += scan.sampleStep) {
+      let y = scan.startLine;
+      while (y !== scan.endLine && pixels[y * 800 + x] < threshold) y += scan.direction;
+      if (y === scan.startLine || y === scan.endLine) throw new Error(`No unambiguous ${scan.name} cap at sample ${x}.`);
+      const previous = y - scan.direction, before = pixels[previous * 800 + x], after = pixels[y * 800 + x];
+      if (before >= threshold || after <= before) throw new Error('Ambiguous cap crossing.');
+      limbPixels.push([x, previous + scan.direction * (threshold - before) / (after - before)]);
+    }
+    limbIdeal.splice(0, limbIdeal.length, ...limbPixels.map(ideal));
+    const bestFit = seeds.map(improve).sort((a, b) => a.objective - b.objective)[0];
+    const name = scan.name === 'lower' ? 'left + lower cap' : 'left + lower + upper caps';
+    cases.push({ name, detectorPixels: limbPixels.map((p): Pixel => [p[0], p[1]]), bestFit });
+  }
+  const panels: Buffer[] = [];
+  for (const result of cases) {
+    limbPixels.splice(0, limbPixels.length, ...result.detectorPixels);
+    panels.push(await sharp(overlay(result.bestFit, result.name, 'Selected by limb + Acmon; Celmis not fitted')).png().toBuffer());
+  }
+  await sharp({ create: { width: 1200, height: 490, channels: 3, background: '#15191f' } })
+    .composite(panels.map((panel, i) => ({ input: panel, left: 400 * i, top: 0 })))
+    .png().toFile(resolve(output, 'limb-extent.png'));
+  const extent = {
+    schema: 'cssearth-dactyl-limb-extent@1', qualifiedSurface: false,
+    inputSha256: report.inputSha256, generatorSha256: report.generatorSha256,
+    dependencySha256: report.dependencySha256, thresholdDN: threshold, capScans,
+    selection: 'Each case minimizes the same limb-and-Acmon objective across the same 576 starts; Celmis is never used to rank these cases.',
+    limitations: [
+      'Analyst-selected bright-outline crossings, not a published control network; cap samples are added cumulatively and are not equal arc-length samples.',
+      'Celmis was inspected during development. The residual is a diagnostic check, not a newly blind independent validation.',
+      'Changing which outline samples are included changes the fitted orientation. The result cannot qualify a photographic surface.',
+    ], cases,
+  };
+  await writeFile(resolve(output, 'limb-extent.json'), JSON.stringify(extent, null, 2) + '\n');
+  console.log(JSON.stringify({ limbExtent: cases.map(c => ({ case: c.name, count: c.detectorPixels.length, limbRms: c.bestFit.limbRmsIdealPixels, celmisError: c.bestFit.checkControl.residualPixels })) }, null, 2));
+}
 console.log(JSON.stringify({ output, qualifiedSurface: false, decodedExactly: orientation[1].differentPixels === 0, matrixError,
   limbRmsPixels: best.limbRmsIdealPixels, withheldCelmisResidualPixels: best.checkControl.residualPixels,
   alternativeCelmisResidualPixels: inspectedAlternative.checkControl.residualPixels }, null, 2));
