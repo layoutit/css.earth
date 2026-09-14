@@ -181,7 +181,7 @@ async function proveDatasetInteractions(browser: Browser, planet: ObjectEntry, p
       return nodes.map(node=>{const r=node.getBoundingClientRect();return [r.x,r.y,r.width,r.height];});
     };
     for (const lens of profile.objectControls.lenses?.controls ?? []) {
-      await page.locator(`button[name="lens"][value="${lens.id}"]`).click();
+      await page.locator(`button[name="dataset"][value="${lens.id}"]`).click();
       await page.waitForFunction(({id,lens}) => window.__cssearthTest.required(window.__cssearthTest.required(window.__cssearthTest.object(id).runtime.selection(),'object selection').committed,'committed selection').lensId === lens,
         {id:planet.id,lens:lens.id});
       // Let the authored entry flight finish before measuring a user's drag.
@@ -250,20 +250,10 @@ async function provePreReadyTarget(browser: Browser, planet: ObjectEntry, profil
     await assertRenderedObjectControls(page, profile);
     assert.equal(await page.evaluate(() => window.__cssEarth?.lifecycle), "loading",
       `${planet.id}: gated preparation must remain loading`);
-    if (profile.objectControls.lenses?.controls.length && profile.audit?.lensRace?.preReadyDisabled) {
-      await page.waitForFunction(() =>
-        [...document.querySelectorAll('button[name="lens"]')].every(
-          (button) => {if(!(button instanceof HTMLButtonElement))throw new Error("Expected button");return button.disabled;},
-        ));
-    } else if (profile.objectControls.lenses?.controls.length) {
-      const testId = profile.audit?.lensRace?.slowId ?? profile.objectControls.lenses.defaultLens;
-      await page.locator(
-        `button[name="lens"][value="${testId}"]`,
-      ).evaluate((button) => window.__cssearthTest.htmlElement(button).click());
-      assert.equal(await page.locator(
-        'button[name="lens"][aria-pressed="true"]',
-      ).getAttribute("value"), profile.objectControls.lenses.defaultLens,
-      `${planet.id}: pre-ready lens input must not publish a selection`);
+    if (profile.objectControls.lenses?.controls.length) {
+      assert.equal(await page.locator('button[name="dataset"]').evaluateAll(buttons => buttons.every(button =>
+        button instanceof HTMLButtonElement && !button.disabled && button.type === 'submit' && button.form?.method === 'get')), true,
+      `${planet.id}: native dataset selection must remain usable before runtime readiness`);
     }
     if (profile.objectControls.settings?.controls.some(({ name }) => name === "speed")) {
       assert.equal(await page.locator('input[name="speed"][type="range"]').isDisabled(), true,
@@ -465,9 +455,9 @@ async function proveLensDestroy(browser: Browser, planet: ObjectEntry, profile: 
     assert.equal(await page.locator(`#${planet.id}-lenses`).evaluate((root) =>
       root.classList.contains("is-loading")), false,
     `${planet.id}: destroy must clear lens loading state`);
-    assert.equal(await page.locator('button[name="lens"]').evaluateAll((buttons) =>
-      buttons.every((button) => {if(!(button instanceof HTMLButtonElement))throw new Error("Expected button");return button.disabled;})), true,
-    `${planet.id}: destroy must disable lens controls`);
+    assert.equal(await page.locator('button[name="dataset"]').evaluateAll((buttons) =>
+      buttons.every((button) => {if(!(button instanceof HTMLButtonElement))throw new Error("Expected button");return !button.disabled && button.type === 'submit';})), true,
+    `${planet.id}: destroy must retain native dataset submits`);
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
       stage.style.length), 0,
     `${planet.id}: destroy must clear object-owned inline stage presentation`);
@@ -825,7 +815,7 @@ async function proveSurfaceFeatures(browser: Browser, planet: ObjectEntry, profi
     assert.ok(pinned.visible >= 1 && pinned.outlinePieces > 0, `${planet.id}: the selected feature keeps its label and outline`);
     // The sidebar search lists named features and selecting a row flies to it.
     await page.locator(".planet-sidebar-search").fill(target.text);
-    const row = page.locator(".planet-feature-results li:not([hidden]) button").first();
+    const row = page.locator(".planet-feature-results li:not([hidden]) a").first();
     await row.waitFor({ timeout: 10000 });
     assert.ok((await row.innerText()).includes(target.text), `${planet.id}: the search lists the named feature`);
     await row.click();
@@ -960,7 +950,7 @@ async function exerciseRetainedInteractions(page: Page, planet: ObjectEntry, pro
   await assertRenderedObjectControls(page, profile);
   const lensIds = profile.objectControls.lenses?.controls.length ? required(retained.lensIds) : [];
   for (const id of lensIds) {
-    await page.locator(`button[name="lens"][value="${id}"]`).evaluate((button) => window.__cssearthTest.htmlElement(button).click());
+    await page.locator(`button[name="dataset"][value="${id}"]`).evaluate((button) => window.__cssearthTest.htmlElement(button).click());
     await page.waitForFunction(id => {
       const root = document.getElementById(`${id}-lenses`);
       return root?.getAttribute("aria-busy") !== "true" && !root?.classList.contains("is-loading");

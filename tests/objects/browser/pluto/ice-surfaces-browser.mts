@@ -27,7 +27,7 @@ try {
         }
       }
       for (const id of ['methane-ice', 'nitrogen-ice', 'water-ice', 'surface']) {
-        await page.locator(`button[name="lens"][value="${id}"]`).click();
+        await page.locator(`button[name="dataset"][value="${id}"]`).click();
         await page.waitForFunction(lens => document.querySelector('.planet-stage')?.getAttribute('data-lens') === lens, id);
         const texture = await page.locator('.pluto-body').evaluate((root) => {
           const band = root.querySelector('s:not(.pluto-polar)'), pole = root.querySelector('s.pluto-polar');

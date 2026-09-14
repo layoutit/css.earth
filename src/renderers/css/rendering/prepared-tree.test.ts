@@ -1,5 +1,5 @@
 import { expect, test, vi } from 'vitest';
-import { preparePresentationTree } from './prepared-tree.js';
+import { adoptPreparedTree, preparePresentationTree } from './prepared-tree.js';
 import type { PreparedTree } from './prepared-presentation.js';
 
 function fixture() {
@@ -52,4 +52,46 @@ test('a detached lease rejects mismatched plans/documents and pre-claim disposal
   expect(() => lease.claim(f.tree, {} as Document, () => {})).toThrow('another mount');
   lease.destroy();
   expect(() => lease.claim(f.tree, f.document, () => {})).toThrow('cancelled');
+});
+
+class InitialNode {
+  dataset: Record<string, string> = {};
+  localName = 'div';
+  parentElement: InitialNode | null = null;
+  children: InitialNode[] = [];
+  remove() { if (this.parentElement) this.parentElement.children = this.parentElement.children.filter(child => child !== this); this.parentElement = null; }
+  append(child: InitialNode) { child.remove(); child.parentElement = this; this.children.push(child); }
+  querySelectorAll(): InitialNode[] { return this.children.flatMap(child => [child, ...child.querySelectorAll()]); }
+}
+function initialTree() {
+  const tree: PreparedTree = { camera: 0, scene: 1, properties: [], stageClasses: [],
+    nodes: [-1, 0, 0, 1].map(parent => ({ parent, tag: 'div', className: null, style: '', properties: [], attributes: {} })) };
+  const stage = new InitialNode(); stage.dataset = { objectId: 'fixture', preparedObject: 'fixture', preparedSha256: 'pinned' };
+  const nodes = tree.nodes.map((record, index) => { const node = new InitialNode(); node.dataset.preparedNode = String(index); return node; });
+  tree.nodes.forEach((record, index) => (record.parent === -1 ? stage : nodes[record.parent]).append(nodes[index]));
+  return { tree, stage, nodes, element: stage as unknown as HTMLElement };
+}
+
+test('adoption preserves every existing node even when prepared order differs from DOM preorder', () => {
+  const f = initialTree(), cleanups: (() => void)[] = [];
+  const adopted = adoptPreparedTree(f.tree, f.element, cleanup => cleanups.push(cleanup));
+  expect(adopted?.nodes).toEqual(f.nodes);
+  expect(f.stage.dataset.preparedObject).toBeUndefined();
+  expect(f.stage.dataset.preparedSha256).toBeUndefined();
+  expect(cleanups).toHaveLength(1);
+  cleanups[0]();
+  expect(f.stage.children).toEqual([]);
+});
+
+test.each(['missing', 'duplicate', 'parent', 'order', 'tag', 'object'] as const)('invalid %s cannot claim or replace the initial scene', kind => {
+  const f = initialTree(), own = vi.fn();
+  if (kind === 'missing') f.nodes[3].remove();
+  if (kind === 'duplicate') f.nodes[3].dataset.preparedNode = '2';
+  if (kind === 'parent') f.nodes[2].append(f.nodes[3]);
+  if (kind === 'order') f.nodes[0].children.reverse();
+  if (kind === 'tag') f.nodes[3].localName = 'span';
+  if (kind === 'object') f.stage.dataset.objectId = 'another';
+  expect(() => adoptPreparedTree(f.tree, f.element, own)).toThrow('Initial prepared tree');
+  expect(own).not.toHaveBeenCalled();
+  expect(f.stage.dataset.preparedObject).toBe('fixture');
 });

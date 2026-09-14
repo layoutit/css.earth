@@ -35,10 +35,12 @@ const world = (positionM: readonly [number, number, number] = [0, 0, 0], orienta
   ({ referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM, orientationXyzw } });
 const viewport = { focalPixels: 600, principalOffsetPixels: [17, -11] } as const;
 class FakeElement {
+  readonly nodeType = 1;
   readonly children: FakeElement[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};
   parentNode: FakeElement | null = null; className = ''; textContent = ''; clientWidth = 800; clientHeight = 600;
   readonly ownerDocument: FakeDocument;
-  constructor(ownerDocument: FakeDocument) { this.ownerDocument = ownerDocument; Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } }); }
+  readonly localName: string;
+  constructor(ownerDocument: FakeDocument, localName = 'div') { this.ownerDocument = ownerDocument; this.localName = localName; Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } }); }
   get firstChild(): FakeElement | null { return this.children[0] ?? null; }
   get offsetWidth(): number { return this.textContent.length * 7; }
   get offsetHeight(): number { return 14; }
@@ -53,7 +55,7 @@ class FakeWindow {
   requestAnimationFrame = (callback: (time: number) => void) => { const id = ++this.next; this.pending.set(id, callback); return id; };
   cancelAnimationFrame = (id: number) => { this.pending.delete(id); };
 }
-class FakeDocument { count = 0; defaultView = new FakeWindow(); createElement(): FakeElement { this.count++; return new FakeElement(this); } }
+class FakeDocument { count = 0; defaultView = new FakeWindow(); querySelectorAll(_selector: string): FakeElement[] { return []; } createElement(tag = 'div'): FakeElement { this.count++; return new FakeElement(this, tag); } }
 afterEach(() => vi.unstubAllGlobals());
 
 test('retains exactly six prepared images and changes only shared camera presentation during travel and rotation', () => {

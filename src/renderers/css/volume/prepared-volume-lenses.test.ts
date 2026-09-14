@@ -12,10 +12,12 @@ import { createPreparedResidency } from '../rendering/prepared-residency.js';
 import { cloudCompositeOpacity } from '../../../../labs/nebula/src/viewer/cloud-inspection.js';
 
 class FakeElement {
+  readonly nodeType = 1;
   readonly children: FakeElement[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};
   parentNode: FakeElement | null = null; className = ''; hidden = false; clientWidth = 400; clientHeight = 300;
   readonly ownerDocument: FakeDocument;
-  constructor(ownerDocument: FakeDocument) { this.ownerDocument = ownerDocument;
+  readonly localName: string;
+  constructor(ownerDocument: FakeDocument, localName = 'div') { this.ownerDocument = ownerDocument; this.localName = localName;
     Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } });
   }
   append(child: FakeElement): void { this.insertBefore(child, null); }
@@ -28,7 +30,8 @@ class FakeElement {
 }
 class FakeDocument {
   count = 0;
-  createElement(): FakeElement { this.count++; return new FakeElement(this); }
+  querySelectorAll(_selector: string): FakeElement[] { return []; }
+  createElement(tag = 'div'): FakeElement { this.count++; return new FakeElement(this, tag); }
 }
 const frame = { referenceFrame: 'fixture', epochJdTt: 123, originM: [0, 0, 0] as const,
   localToReferenceXyzw: [0, 0, 0, 1] as const, metersPerUnit: 1,

@@ -6,19 +6,25 @@ interface Props {
   objectId: string;
   lenses: Pick<NonNullable<ShellProps['lenses']>, 'controls' | 'defaultLens'>;
   provenance?: ShellProps['provenance'];
-  controlName?: 'lens' | 'focusLens';
+  controlName?: 'dataset' | 'focusLens';
+  route?: string;
 }
-const { objectId, lenses, provenance, controlName = 'lens' } = Astro.props;
+const { objectId, lenses, provenance, controlName = 'dataset', route = `/${objectId}/` } = Astro.props;
 const focus = controlName === 'focusLens';
 ---
 <section id={`${objectId}-lenses`} class="planet-lenses">
+  <form id={`${objectId}-datasets`} action={route} method="get" data-dataset-form data-focus-form={focus || undefined} hidden>
+    {['v', 'overview', 'focus', focus ? 'dataset' : 'focusLens', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
+    {focus && <input type="hidden" name="focusControls" value="1" />}
+  </form>
   <div id={`${objectId}-layers-menu`} class="planet-layers-menu">
     <nav class="planet-observation-controls" aria-label="Datasets">
       {lenses.controls.map((lens) => (
         <div class="planet-observation-option" data-lens-option>
           <button
             class="planet-observation-control planet-thumbnail-leading"
-            type="button"
+            type="submit"
+            form={`${objectId}-datasets`}
             name={controlName}
             data-focus-lens={focus ? true : undefined}
             value={lens.id}
@@ -56,6 +62,7 @@ const focus = controlName === 'focusLens';
           >
             <img
               class="planet-lens-texture"
+              src={lens.texture.url}
               data-surface-preview-src={lens.texture.url}
               width={lens.texture.width}
               height={lens.texture.height}

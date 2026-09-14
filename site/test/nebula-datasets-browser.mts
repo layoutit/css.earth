@@ -18,8 +18,8 @@ page.on('response', response => { if (response.status() >= 400) failed.push(`${r
 let documents = 0;
 page.on('request', request => { if (request.isNavigationRequest() && request.frame() === page.mainFrame()) documents++; });
 const read = async (id: string, name: string): Promise<unknown> => JSON.parse(await readFile(resolve(`src/objects/${id}/prepared/${name}.json`), 'utf8'));
-const rail = page.locator('.planet-dataset-context-rail');
-const selectedContext = (id: string, lens: string) => rail.locator(`[data-dataset-context-owner="${id}"]:not([hidden]) [data-dataset-context="${lens}"]:not([hidden])`);
+const rail = page.locator('[data-focus-lens-bank]:not([hidden]) > .planet-dataset-context-rail');
+const selectedContext = (id: string, lens: string) => rail.and(page.locator(`[data-dataset-context-owner="${id}"]`)).locator(`[data-dataset-context="${lens}"]:not([hidden])`);
 const waitReady = () => page.waitForFunction(() => document.documentElement.dataset.ready === 'true');
 
 try {
@@ -73,16 +73,16 @@ try {
       await toggle.click();
       assert.equal(await stars.isChecked(), true);
     }
-    await card.getByRole('tab', { name: 'Factsheet', exact: true }).click();
+    await card.getByRole('radio', { name: 'Factsheet', exact: true }).press('Space');
     await rail.waitFor({ state: 'hidden' });
-    await card.getByRole('tab', { name: 'Datasets', exact: true }).click();
+    await card.getByRole('radio', { name: 'Datasets', exact: true }).press('Space');
     await rail.waitFor({ state: 'visible' });
     await page.screenshot({ path: resolve(output, `${objectId}.png`) });
     await page.screenshot({ path: resolve(output, `${objectId}.jpg`), type: 'jpeg', quality: 82 });
   }
   assert.equal(cases.length, 9);
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.waitForFunction(() => document.querySelector('.planet-dataset-context-rail')?.parentElement?.classList.contains('planet-drawer-content'));
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('[data-focus-lens-bank]:not([hidden]) > .planet-dataset-context-rail')!).position === 'static');
   await rail.scrollIntoViewIfNeeded();
   assert.equal(await rail.isVisible(), true);
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
@@ -93,7 +93,7 @@ try {
   await waitReady();
   await selectedContext('mercury', 'enhanced').waitFor({ state: 'visible' });
   assert.equal(await selectedContext('mercury', 'enhanced').locator('[data-mission="messenger"]').isVisible(), true);
-  await page.locator('button[name="lens"][value="topography"]').click();
+  await page.locator('button[name="dataset"][value="topography"]').click();
   await selectedContext('mercury', 'topography').waitFor({ state: 'visible' });
   assert.equal(await selectedContext('mercury', 'topography').locator('[data-mission="messenger"]').isVisible(), true);
   assert.equal(new URL(page.url()).hash, '#dataset=topography');

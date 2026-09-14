@@ -50,8 +50,8 @@ export function assertImageLayerReplay(actual: unknown, expected: unknown): void
 
 export async function restoreEnvironmentObject(objectDirectory: string, verifyReplay = false) {
   const descriptor: Descriptor = JSON.parse(await readFile(join(objectDirectory, 'object.json'), 'utf8'));
-  // Multi-lens reconstructions have their own pinned, multi-stage nebula bake.
-  if (descriptor.type === 'volume-lens-bank') return;
+  // These resources have their own preparation steps later in the build.
+  if (descriptor.type === 'volume-lens-bank' || descriptor.type === 'galaxy-point-field') return;
   const preparedBytes = await verifiedBytes(objectDirectory, { path: descriptor.prepared.url, sha256: descriptor.prepared.sha256 });
   const expected = JSON.parse(preparedBytes.toString());
   const data = expected.data ?? expected;

@@ -411,7 +411,9 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   touch-action: manipulation;
 }
 .planet-header-action:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
-.planet-header-action[aria-pressed="true"] {
+.planet-header-action[aria-pressed="true"],
+.planet-machine-action:has(:checked),
+.planet-ui-layer:has(.planet-settings-panel:popover-open) .planet-settings-action {
   color: var(--shell-text);
   background: var(--explorer-header-control-selected);
 }
@@ -466,6 +468,26 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
 .planet-sidebar::-webkit-scrollbar { display: none; }
 
+.planet-machine-action { position: relative; }
+.planet-machine-toggle {
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.planet-machine-action:has(:focus-visible) { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.planet-settings-panel[popover]:not(:popover-open) { display: none; }
+.planet-settings-panel[popover] { color: var(--shell-text-secondary); }
+.planet-ui-layer:has(.planet-machine-toggle:not(:checked)) .planet-dataset-context-rail,
+.planet-ui-layer:has(.planet-settings-panel:popover-open) .planet-dataset-context-rail,
+.planet-information-panel:is([aria-busy="true"], [data-card-view="overview"]) > .planet-dataset-context-rail,
+.planet-information-panel > .planet-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .planet-dataset-context-rail,
+.planet-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
+
 /* Dataset context uses the same cards as the left sidebar, above the minimap. */
 .planet-dataset-context-dock { display: contents; }
 .planet-dataset-context-rail {
@@ -486,6 +508,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   /* Settings and the spacecraft card take turns in this slot. */
   .planet-dataset-context-rail,
   .planet-dataset-context-dock > .planet-settings-panel {
+    inset: auto;
     --dataset-context-top: var(--explorer-controls-top);
     position: fixed;
     margin: 0;
@@ -566,7 +589,8 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     max-height: calc(100dvh - var(--explorer-controls-top) - var(--explorer-footer-height) - var(--explorer-panel-bottom-gap));
     padding-top: 0;
     pointer-events: auto;
-    contain: layout paint;
+    /* Fixed dataset cards share this DOM; keep their containing block at the viewport. */
+    contain: none;
     background: var(--explorer-panel-background);
   }
 
@@ -672,14 +696,14 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   .planet-search-category { padding-inline: 10px 14px; box-shadow: var(--explorer-float-shadow); }
 
   /* Spacecraft opens like a map's layers button. */
-  .planet-machine-toggle {
+  .planet-machine-action {
     grid-row: 3;
     grid-column: 2;
     width: var(--explorer-search-height);
     height: var(--explorer-search-height);
     box-shadow: var(--explorer-float-shadow);
   }
-  .planet-machine-toggle:disabled { visibility: hidden; }
+  .planet-machine-action:disabled { visibility: hidden; }
 
   /* The wordmark sits over the scene like a map watermark. */
   .explorer-brand-row {
@@ -692,9 +716,11 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   }
 
   .explorer-brand-row,
-  .planet-machine-toggle { transition: opacity 160ms ease, visibility 0s; }
+  .planet-machine-action { transition: opacity 160ms ease, visibility 0s; }
+  .planet-ui-layer:has(.planet-sheet-handle:checked) .explorer-brand-row,
   body:is([data-sheet="half"], [data-sheet="full"]) .explorer-brand-row,
-  body[data-sheet="full"] .planet-machine-toggle {
+  .planet-ui-layer:has(.planet-sheet-handle:checked) .planet-machine-action,
+  body[data-sheet="full"] .planet-machine-action {
     opacity: 0;
     visibility: hidden;
     transition: opacity 160ms ease, visibility 0s 160ms;
@@ -721,13 +747,16 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     touch-action: pan-x;
     will-change: transform;
   }
-  body[data-sheet="half"] .planet-sidebar {
-    transform: translate3d(0, calc(var(--sheet-height) - var(--sheet-half)), 0);
-  }
+  .planet-sidebar:has(:where(.planet-sheet-handle:checked)),
   body[data-sheet="full"] .planet-sidebar {
     transform: none;
     overflow-y: auto;
     touch-action: pan-y;
+  }
+  body[data-sheet="half"] .planet-sidebar {
+    transform: translate3d(0, calc(var(--sheet-height) - var(--sheet-half)), 0);
+    overflow: hidden;
+    touch-action: pan-x;
   }
   .planet-sidebar.is-dragging { transition: none; }
   .planet-sidebar .planet-card { border-radius: 0; }
@@ -763,7 +792,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
       margin-inline: 0 calc(-1 * var(--explorer-panel-left));
       padding-inline: 0 var(--explorer-panel-left);
     }
-    .planet-machine-toggle { grid-row: 2; }
+    .planet-machine-action { grid-row: 2; }
   }
 
   /* Settings opens as a secondary sheet over the information. The spacecraft

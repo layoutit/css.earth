@@ -80,14 +80,14 @@ try {
 if (!(details instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetailsElement observation");
 return details.open; }), true);
     for (const lens of ["enhanced", "topography", "interior", "normal"]) {
-      await page.locator(`button[name="lens"][value="${lens}"]`).click();
+      await page.locator(`button[name="dataset"][value="${lens}"]`).click();
       await page.waitForFunction((id) =>
         document.querySelector<HTMLElement>(".planet-stage")?.dataset.view === "interior"
           ? id === "interior"
           : (document.querySelector<HTMLElement>(".planet-stage")?.dataset.lens || "normal") ===
             id, lens);
       assert.equal(await page.locator(
-        `button[name="lens"][value="${lens}"]`,
+        `button[name="dataset"][value="${lens}"]`,
       ).getAttribute("aria-pressed"), "true");
       await assertRetained();
     }

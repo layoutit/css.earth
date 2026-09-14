@@ -120,7 +120,7 @@ async function toggle(page: Page, name: string, checked: boolean) {
 }
 
 async function clickLens(page: Page, id: string) {
-  await page.locator(`button[name="lens"][value="${id}"]`).evaluate((button) => { if (!(button instanceof HTMLButtonElement)) throw new Error('Lens must be a button.'); button.click(); });
+  await page.locator(`button[name="dataset"][value="${id}"]`).evaluate((button) => { if (!(button instanceof HTMLButtonElement)) throw new Error('Lens must be a button.'); button.click(); });
 }
 
 async function settled(page: Page, id: string, lens: string, controls: Record<string, boolean> = {}) {
@@ -164,7 +164,7 @@ async function snapshot(page: Page, id: string) {
       stageChildren: stage.childElementCount,
       busy: window.__cssearthTest.element(".planet-lenses").classList.contains("is-loading"),
       settingsBusy: window.__cssearthTest.element(".planet-settings").classList.contains("is-loading"),
-      pressed: [...document.querySelectorAll<HTMLButtonElement>('button[name="lens"][aria-pressed="true"]')].map(({ value }) => value),
+      pressed: [...document.querySelectorAll<HTMLButtonElement>('button[name="dataset"][aria-pressed="true"]')].map(({ value }) => value),
       heldDecodes: window.__runtimeComplexProbe.pending.map(({ path }) => path),
     };
   }, id);
@@ -225,7 +225,7 @@ async function neptuneDestroy(page: Page, record: ComplexCase) {
   assert.equal(after.stageChildren, 0);
   assert.equal(after.exterior, null);
   assert.equal(after.busy, false);
-  assert.equal(await page.locator('button[name="lens"]').evaluateAll((buttons) => buttons.every(button => { if (!(button instanceof HTMLButtonElement)) throw new Error('Lens must be a button.'); return button.disabled; })), true);
+  assert.equal(await page.locator('button[name="dataset"]').evaluateAll((buttons) => buttons.every(button => { if (!(button instanceof HTMLButtonElement)) throw new Error('Lens must be a button.'); return !button.disabled && button.type === 'submit'; })), true);
   record.samples.push({ label: "disposed before late completion", ...after });
 }
 

@@ -163,16 +163,16 @@ try {
           return Math.abs(element.getBoundingClientRect().top - (innerHeight - visible)) < 1.5;
       }, expected);
       if (sheetLayout) {
-        // The grabber cycles the sheet from its resting height, and every stop
+        // The native grabber opens the sheet; arrow keys add intermediate stops. Every stop
         // keeps the scene mounted behind it.
         const grabber = page.locator('.planet-sheet-handle');
         await settle('peek');
         const peekTop = await sheetTop();
-        await grabber.click();
+        await grabber.press('ArrowUp');
         await settle('half');
         const halfTop = await sheetTop();
         assert.ok(halfTop < peekTop, `${config.name}: half opens further than peek`);
-        await grabber.click();
+        await grabber.press('ArrowUp');
         await settle('full');
         const fullTop = await sheetTop();
         assert.ok(fullTop < halfTop, `${config.name}: full opens further than half`);

@@ -8,13 +8,14 @@ export function isFocusDatasetUrl(url: URL): boolean {
   catch { return false; }
 }
 
-/** The reserved dataset fragment shares the URL with existing unrelated anchors. */
+/** Query selections work on the server; previously shared fragments remain valid. */
 export function readDatasetUrl(url: URL): { requested: boolean; id: string | null } {
   const fields = url.hash.slice(1).split('&').filter(field => field.startsWith('dataset='));
-  if (!fields.length) return { requested: false, id: null };
-  if (fields.length !== 1) throw new TypeError('The dataset link contains more than one dataset.');
+  const query = url.searchParams.getAll('dataset');
+  if (!fields.length && !query.length) return { requested: false, id: null };
+  if (fields.length + query.length !== 1) throw new TypeError('The dataset link contains more than one dataset.');
   let id: string;
-  try { id = decodeURIComponent(fields[0].slice('dataset='.length)); }
+  try { id = query[0] ?? decodeURIComponent(fields[0].slice('dataset='.length)); }
   catch { throw new TypeError('The dataset link is malformed.'); }
   if (!id || /[\u0000-\u001f]/.test(id)) throw new TypeError('The dataset link is malformed.');
   return { requested: true, id };
@@ -22,12 +23,17 @@ export function readDatasetUrl(url: URL): { requested: boolean; id: string | nul
 
 export function withDataset(url: URL, id: string | null): URL {
   const next = new URL(url);
+  const legacy = !next.searchParams.has('dataset') && next.hash.slice(1).split('&').some(field => field.startsWith('dataset='));
   const fields = next.hash.slice(1).split('&').filter(field => field && !field.startsWith('dataset='));
-  if (id !== null) fields.push(`dataset=${encodeURIComponent(id)}`);
+  next.searchParams.delete('dataset');
+  if (id !== null) {
+    if (legacy) fields.push(`dataset=${encodeURIComponent(id)}`);
+    else next.searchParams.set('dataset', id);
+  }
   next.hash = fields.join('&');
   return next;
 }
 
 export function datasetHref(route: string, lensId: string): string {
-  return `${route}#dataset=${encodeURIComponent(lensId)}`;
+  return `${route}?dataset=${encodeURIComponent(lensId)}`;
 }
