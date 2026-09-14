@@ -13,7 +13,9 @@
         "https://doi.org/10.5281/zenodo.6034904",
         "https://github.com/ortk95/king-2022-compositional-mapping-europa/blob/v1.0.2/README.md",
         "https://github.com/ortk95/king-2022-compositional-mapping-europa/blob/v1.0.2/fit_SPHERE.json.gz",
-        "https://github.com/ortk95/king-2022-compositional-mapping-europa/blob/v1.0.2/reflectance_SPHERE.json.gz"
+        "https://github.com/ortk95/king-2022-compositional-mapping-europa/blob/v1.0.2/reflectance_SPHERE.json.gz",
+        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/europa/evidence/composition/browser.json"
       ],
       "checked": [
         {
@@ -23,6 +25,10 @@
         {
           "date": "2026-09-14",
           "commit": "f8fbdaa0b203f11b4f121b867eb478d38d6c311e"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "78038ef3913db7d48cde75d9fe97248b6db67d98"
         }
       ]
     },
