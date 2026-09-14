@@ -33,7 +33,7 @@ new route.
 | `amica-gaskell` | `formats/geo.mts` | Fitted to the backplanes | Archive backplanes |
 | `pds4-geometry-cube` | `formats/geo.mts` | Fitted to the backplanes | Archive backplanes |
 | `osiris-camera` | `formats/geo.mts` | Archived closure | Source-mesh rays |
-| `llorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
+| `llorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion, bound to a body the frame lists in its field of view | Source-mesh rays |
 | `near-msi-camera` | `formats/geo.mts` | Reconstructed image table and bounded limb refinement | Source-mesh rays; paired raw detector validity |
 | `nh-lorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
 | `nh-mvic-camera` | `formats/geo.mts` | Archived closure through a fitted image transform; three registered filters shown as colour | Source-mesh rays |
