@@ -27,3 +27,9 @@ The camera-transfer diagnostic additionally uses the LAM deconvolved
 05:08:49 photograph through the released MPCD mesh. Linear display stretches,
 an unseen-surface marker and an observed/predicted overlay were added by cssEarth;
 the result remains an unqualified registration diagnostic.
+
+The final joint-fit diagnostic uses the previously untested 2017-10-11
+06:07:17.855 UTC Camera 2 photograph from the same LAM/SPHERE release. cssEarth
+added linear display stretches and matched-feature markers. Its predicted panel
+samples the 05:08:49 photograph through the published MPCD mesh using the frozen
+joint-fit camera. The comparison did not qualify a photographic surface.

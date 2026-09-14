@@ -52,8 +52,8 @@
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
       "status": "unresolved",
-      "finding": "The identified 05:08:49 Camera 2 / Vernazza Figure B.2 pair was tested against the native 06:05:07 Camera 2 frame after 43 degrees of rotation. Frozen limb-adjusted MPCD cameras give 2.716 pixel withheld RMS over six patches; a rigid target fit worsens it to 4.372 pixels. A four-minute pair improves from 3.107 to 1.470 pixels after fitting. Simultaneous camera images disagree by 1.168 pixels after fitting, showing that the current measurements include detector/processing/matcher disagreement without rotation. Selecting reference patches repeatable within one pixel in that independent simultaneous pair leaves only five later-frame matches. Instrument-north, IAUspin, illumination-removal and reference-centering hypotheses do not qualify the transfer. Input pins, 112 camera-replayed control residuals and 34 direction/model comparisons are retained. These are exploratory tests, not an absolute camera-error bound or a prepared photographic surface. Earlier burst, model and tentative crater comparisons remain in the linked evidence.",
-      "revisitWhen": "Establish enough repeatable native interior controls, with measured localization precision and an independently anchored reference camera, before another fit. The shared filter matcher assumes its reference is qualified; these limb-only cameras do not establish that. A source-controlled camera/map or a joint image-and-limb registration method with independent validation would reopen preparation. Do not treat a one-pixel spacecraft criterion, a raster pole arrow, or telescope PSF width as a proven SPHERE camera-error bound.",
+      "finding": "Final bounded joint registration of the 05:04, 05:08 and 06:05 Camera 2 images used lit outlines and interior matches with the released MPCD mesh and spin fixed. The previously examined 06:05 holdout remains at 2.610 pixels RMS, maximum 5.460. That camera solution was frozen before checking the unused 06:07:17 Camera 2 photograph; with limb-only pointing and no interior adjustment, eight held-out matches give 5.289 pixels RMS, maximum 8.178. All fourteen matches in that fresh frame were evaluation data. This attempt is closed without a photographic surface. It does not prove registration impossible. Earlier simultaneous-camera, short/long transfer, image-identity and source-orientation evidence remains retained; the new evidence adds eight verified input pins and 51 recast/replayed control residuals.",
+      "revisitWhen": "New producer-controlled image geometry or independently verified surface correspondences with measured localization precision would reopen photographic preparation. Joint image-and-limb fitting has now been tried and failed the frozen fresh-exposure check; do not restart equivalent fits to the same uncertain controls. The inherited one-pixel criterion, telescope PSF and raster pole arrows are not established SPHERE camera-error bounds.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/pallas/README.md",
         "https://observations.lam.fr/astero/Data/2Pallas/",
@@ -68,7 +68,8 @@
         "https://arxiv.org/pdf/1902.01287",
         "https://github.com/layoutit/css.earth/pull/204",
         "https://doi.org/10.1051/0004-6361/201833620",
-        "https://observations.lam.fr/astero/Papers/Vernazza2018.pdf"
+        "https://observations.lam.fr/astero/Papers/Vernazza2018.pdf",
+        "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T06_07_17.855_zpl_science_imaging_cam2.fits"
       ],
       "checked": [
         {
@@ -97,6 +98,11 @@
         {
           "date": "2026-09-14",
           "commit": "a138c0da555aa8571d98cce49c8a781eb0fcb22d",
+          "pr": 204
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "dc850b5cd46c5c5179e9eaf7a8ac30338b29a146",
           "pr": 204
         }
       ]
