@@ -426,8 +426,8 @@
     {
       "id": "neptune-authored-observations",
       "path": "preparation/observations.json",
-      "expectedBytes": 12645,
-      "expectedSha256": "486f281e6d5fb12449013142a1b20c8fcbf143f712f2ebda2c1d78d212f81973",
+      "expectedBytes": 14390,
+      "expectedSha256": "07663ddafe19626090ff139ee2c0e49ef36eb8361b5eb8eb3861e6e3943e1798",
       "origin": "Checked source-observation preparation parameters, preserving the accepted scientific interpretation",
       "credit": "cssEarth and the institutional sources identified in the recipe",
       "license": "Project-authored specification; observation source terms retained",
@@ -444,8 +444,8 @@
     {
       "id": "neptune-authored-materials",
       "path": "preparation/materials.json",
-      "expectedBytes": 4791,
-      "expectedSha256": "7ddf646b781a982b02f66e22a6bad93964c260da8a1e3abf56cd94b820cbfbc8",
+      "expectedBytes": 6589,
+      "expectedSha256": "472ee4ef2aa39ab2e02bb1c71e6fdce97fd3bf34dcf3ef20159c1f8a9501e33c",
       "origin": "Checked source-informed oblate lighting and retained material preparation parameters",
       "credit": "cssEarth and the institutional sources identified by the source manifest",
       "license": "Project-authored specification",
