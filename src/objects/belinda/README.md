@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - [Karkoschka (2001), DOI 10.1006/icar.2001.6596](https://doi.org/10.1006/icar.2001.6596), Table IV, printed page 55, provides A=64 km and B=32 km.
 
 - **Shape:** Its semiaxes are **64 × 32 × 32 km**. Both short axes are equal by the published model assumption.
@@ -43,18 +45,9 @@ The adjacent text defines the prolate convention. Hubble photometry supports the
 
 `source/measurements.json` is our factual transcription and contains the complete analytic radius formula. The copyrighted full 2001 PDF stays in ignored research; no paper or copied figure is redistributed. Its public Northwestern mirror has a certificate hostname mismatch and is not a required acquisition dependency.
 
-## Source survey and lens dispositions
+## Investigation ledger
 
-- **Voyager/PDS ISS:** original archive products, calibrated products and geometric corrections are available through [PDS](https://pds-rings.seti.org/voyager/). Even an ideal full long diameter spans only 2.74 native pixels at that sampling. Its surface intercept, body center and north-clock fields are null; the target label is Uranus. The search is a geometric candidate list, not proof that Belinda is resolved in that frame.
-
-- **HST photometry:** included as evidence for the measured model; integrated brightness variations do not supply surface texels.
-
-- **Keck spectral photometry:** the [2023 study](https://www.sciencedirect.com/science/article/pii/S0019103522004237) adopts the published axes. Integrated spectra do not create a spatial color or composition map.
-
-- **JWST/NIRCam:** the [official Uranus image](https://science.nasa.gov/asset/webb/uranus-close-up-nircam-image/) identifies inner moons as unresolved points. It does not provide a body texture.
-
-- **Detailed shape, DEM and geology:** no qualified detailed mesh or registered map was located in the inspected mission/map releases and linked publications. The selected approximation remains explicit; this survey is not a claim that no additional research data exist.
-
+The source-survey dispositions and evidence are recorded in the [investigation ledger](investigations.json).
 ## Rotation, scale and preparation
 
 `source/kernels/pck00011.tpc` supplies NAIF body **714 / IAU_BELINDA**. Its legacy 33-km spherical radius is excluded in favor of the later published prolate model. SPICE evaluates the pole and prime meridian, including periodic terms, at JD 2461286.5 TT: RA 257.3371803794°, Dec −15.1673024814°, W 197.5872640108°.

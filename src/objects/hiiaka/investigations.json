@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hiiaka",
+  "entries": [
+    {
+      "id": "occultation-ellipsoid",
+      "subject": "2025 occultation and photometric shape model",
+      "status": "included",
+      "finding": "The selected model uses inferred semiaxes 240±40, 180±30 and 143±7 km under homogeneous surface brightness. These correlated uncertainties do not define independent shape extremes. Numerical facts and an authored ellipsoid are used; the article and workbook are not relicensed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/source/measurements.json",
+        "https://www.nature.com/articles/s41467-025-65749-1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "source-data-epoch",
+      "subject": "Occultation Source Data workbook event label",
+      "status": "unresolved",
+      "finding": "The retained workbook review found a 2023-04-16 label conflicting with 2021 event/year data; the label is not used as an epoch. Article CC BY-NC-ND terms do not establish permission for adapted graphics.",
+      "revisitWhen": "The source resolves the event-label discrepancy and any proposed derivative has applicable reuse terms.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "physical-pole",
+      "subject": "Haumea-aligned pole transformation",
+      "status": "unresolved",
+      "finding": "The Haumea-aligned pole has not been correctly transformed into the display frame. The occultation aspect angle is not inertial declination, so orientation and phase remain illustrative.",
+      "revisitWhen": "A documented inertial transformation and phase convention qualify the physical orientation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jpl-110-orbit",
+      "subject": "Retained JPL number 110 Haumea system solution",
+      "status": "included",
+      "finding": "The fixed-epoch placement uses the older 2005–2008 observation-based JPL solution. Its reported 900 km uncertainty is at 2025-Jan-01 and is not a 2026 bound; runtime extrapolation is disabled.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/source/validation/epoch-state.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "interacting-orbit-2024",
+      "subject": "2024 non-Keplerian Haumea satellite orbit",
+      "status": "deferred",
+      "finding": "The newer interacting-satellite study was identified, but the current package retains JPL number 110. No implementation or current-epoch validation of the newer orbit is claimed.",
+      "revisitWhen": "The interacting solution is acquired with its frame, epoch and uncertainty and independently checked for the application epoch.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/README.md",
+        "https://doi.org/10.3847/PSJ/ad26e9",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/source/validation/epoch-state.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "photometric-surface",
+      "subject": "Occultation and disk photometry as mapped imagery",
+      "status": "excluded",
+      "finding": "The examined observations constrain an inferred shape and integrated brightness. They do not supply a resolved photographic or composition texture; the current surface is unmapped.",
+      "revisitWhen": "A spatially resolved Hiʻiaka observation with controlled surface coordinates is available.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hiiaka/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

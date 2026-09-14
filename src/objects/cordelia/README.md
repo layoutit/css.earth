@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - [Karkoschka (2001), HST photometry, Table IV, printed page 55](https://doi.org/10.1006/icar.2001.6596) adopts major/minor radii 25 × 18 km and prolate spheroids whose major axis points toward Uranus.
 
 - [French et al. (2024), Table 3, PDF page 10](https://arxiv.org/pdf/2401.04634) reproduces **sqrt(A B) = 21 ± 3 km** and **B/A = 0.7 ± 0.2**, attributed to the original Voyager paper's Table V.
@@ -53,12 +55,7 @@ Surface, thumbnail, minimap and purpose-sized context portrait use this same int
 
 Surveyed 2026-09-08:
 
-| Candidate | Disposition |
-| --- | --- |
-| [PDS Voyager ISS products](https://pds-rings.seti.org/voyager/iss/) | The OPUS body-geometry inventory lists 3,871 candidates. The smallest indexed center scale is 10.00939 km/pixel (`vg-iss-2-u-c2687151`), but this frame reports no sampled surface intersection and has a center phase of about 151°. The center scale alone does not establish imaged surface coverage. The ten finest candidates were checked for intersection metadata; their disposition is pinned in `survey/candidate-geometry.json`. The first with sampled surface geometry is `vg-iss-2-u-c2679525`, at **21.38897 km/pixel**, only about two independent samples across the modeled moon. Its original metadata is also pinned. No useful registered texture was qualified. |
-| Published Voyager/HST shape analysis | Included as the stated prolate Shape model. The source analysis estimates size and elongation; the adopted model does not supply local relief. A detailed vertex/facet release was not located in the checked PDS, NAIF or cited-paper repositories. |
-| [NASA discovery illustration](https://science.nasa.gov/uranus/moons/cordelia/) | Establishes the discovery and shepherd-moon context. Its distant, few-pixel image does not supply a global surface map. Excluded as a mapped texture. |
-| HST photometry, ground-based near-infrared studies and mapped-product searches | Integrated flux and adopted sizes do not provide spatial color texels. No qualified registered color, elevation, geological or compositional map was located. The source survey establishes this bounded disposition, not the absence of all other observations. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 ## Preparation and restoration
 

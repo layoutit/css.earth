@@ -4,6 +4,8 @@ Hiʻiaka is Haumea’s largest moon.
 
 ## Sources
 
+[Investigation ledger](investigations.json): recorded source decisions, evidence and conditions for revisiting them.
+
 Published occultation/photometric model with semiaxes 240±40, 180±30 and 143±7 km. The axes are inferred together under homogeneous surface brightness. Display orientation is illustrative. The grid marks unmapped terrain.
 
 - [Hiʻiaka stellar occultations and shape](https://www.nature.com/articles/s41467-025-65749-1)
@@ -45,6 +47,6 @@ The [validation records](source/validation) identify the parent-relative state a
 
 **Survey and sources**
 
-Other candidates and rejected sources are recorded in [the source review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json) and [preparation inputs](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b1-preparation/outer-inputs.json).
+Source decisions and the historical review they came from are recorded in the [investigation ledger](investigations.json).
 
 </details>

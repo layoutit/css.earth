@@ -6,6 +6,8 @@
 
 - The surface is a **smooth reference ellipsoid**, with semi-axes 30 × 20 × 17 km from `BODY516_RADII` in NAIF `pck00011.tpc`.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Evidence
 
 - OPUS owns observer and Sun planetocentric latitude, west-positive longitude and range, checked against recorded phase and image pixel scale.
@@ -36,17 +38,6 @@
 The soft appearance is the information in the original photographs. No invented crater detail or colour is added.
 
 The prepared surface uses 480 native raster triangles and shared flood and directional lighting.
-
-## Candidate survey
-
-| Candidate | Disposition |
-| --- | --- |
-| [Galileo reconstructed SSI archive](https://pds-rings.seti.org/galileo/), January 2000 frame C0532890500 | Included: the best resolved photographic view, at approximately 3 km/pixel. |
-| Earlier Galileo G8/C9/E11 observations | Five complementary views selected after inspecting originals. C0401639113 is badly affected by radiation noise; C0401773600 and C0401786800 add much coarser or redundant coverage and are excluded. |
-| [NASA PIA02531 montage](https://science.nasa.gov/photojournal/best-images-yet-of-thebe-amalthea-and-metis/) | Source comparison only. It is a presentation of the same January 2000 image, not an independent high-resolution texture. |
-| Voyager discovery images and Hubble images in OPUS | Unresolved or nearly unresolved; useful for detection/orbits, not additional surface lenses. |
-| [Stooke shape-model archive](https://sbn.psi.edu/pds/resource/stkshape.html) | No Metis model in this archive's released body list. Thomas et al. (1998) and later research describe a Metis shape reconstruction, but a reusable numerical release was not located. The explicitly labeled PCK ellipsoid is used instead. |
-| Colour, composition, altimetry and geological maps | No registered, resolved complementary map qualified from the inspected mission and mapping releases. Disk-integrated colour or albedo is not a resolved colour map. |
 
 ## Geometry and photographic preparation
 

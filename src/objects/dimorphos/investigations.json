@@ -17,6 +17,125 @@
           "pr": 83
         }
       ]
+    },
+    {
+      "id": "dart-global-v004",
+      "subject": "DART global v004 0.972 m SPC model and radial elevation",
+      "status": "included",
+      "finding": "The selected 98,306-vertex OBJ supplies encounter geometry and radius-minus-75 m Elevation. It is not a post-impact reconstruction, and its reference sphere is not a gravitational datum. Finer source releases do not change the current display geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/source/manifest.json",
+        "https://pds.nasa.gov/ds-view/pds/viewCollection.jsp?identifier=urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "dart-gravity-slope",
+      "subject": "DART v004 gravity-relative slope FITS",
+      "status": "included",
+      "finding": "The 0.972 m slope field is a separate scientific view under the source gravity assumptions, including modeled regions. The documented centroid correspondence binds reordered FITS rows to source triangles; slope is not relabeled as elevation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "draco-mosaic",
+      "subject": "Four calibrated DRACO frames with native geometric backplanes",
+      "status": "included",
+      "finding": "The retained four-frame mosaic spans about 11 to 1.8 seconds before impact, including the last complete image. Native intercepts on the 0.243 m DSK are checked against the retained 0.972 m OBJ; closer frames add detail and approximately 18.08% sampled mesh coverage, not the far side.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/evidence/draco-mosaic-sampling.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/evidence/draco-mosaic-browser.json",
+        "https://doi.org/10.26007/QAAN-F992"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "dart-spice-cross-check",
+      "subject": "DART SPICE v4.0 and independent DRACO camera check",
+      "status": "included",
+      "finding": "Fifteen pinned kernels and the CSPICE oracle supply an independent camera/geometry check. The retained report distinguishes the archived cube’s older pointing/ephemeris from the newer kernel solution and preserves the illumination-angle offset. Kernel availability does not replace per-pixel source interpretation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/README.md",
+        "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "local-impact-models",
+      "subject": "Local 5 cm impact-region DART models",
+      "status": "deferred",
+      "finding": "The retained v003/v004 survey reviewed global and local releases. Local 5 cm impact-region products do not replace the global body and remain outside the selected geometry.",
+      "revisitWhen": "A separately scoped local dataset can bind the released geometry, coverage and source model without presenting it as a global surface.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "other-ancillary-fields",
+      "subject": "Unselected ancillary DART FITS fields",
+      "status": "deferred",
+      "finding": "The existing source account records ancillary fields beyond relative albedo and slope as unselected, without individual product-level qualification. No acceptance or absence conclusion is inferred for those fields.",
+      "revisitWhen": "A specific field is selected for an interpretable scientific question and its units, facet order and uncertainty are qualified.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "liciacube-texture",
+      "subject": "LICIACube images as a separate surface texture",
+      "status": "deferred",
+      "finding": "LICIACube observations contribute to the released shape, but the retained survey does not qualify them as a separate registered surface lens. The selected DRACO mosaic is independently documented.",
+      "revisitWhen": "A specific LICIACube image has documented camera-to-shape registration, usable coverage and calibrated interpretation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dimorphos/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
     }
   ]
 }

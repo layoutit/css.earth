@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "callisto",
+  "entries": [
+    {
+      "id": "usgs-global-mosaic",
+      "subject": "USGS global photographic mosaic",
+      "status": "included",
+      "finding": "The 15,138 × 7,569 USGS Voyager/Galileo global mosaic supplies Monochrome on its roughly 1 km grid. Native detail ranges from 400 m to 60 km; the published Lunar-Lambert/overlap correction and exact-zero no-data are retained.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/callisto/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/callisto/source/manifest.json",
+        "https://planetarymaps.usgs.gov/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "galileo-color",
+      "subject": "NASA/JPL/DLR PIA03456 via the official USGS RGBA release",
+      "status": "included",
+      "finding": "The original 646 × 653 published plate supplies Galileo color, registered to the controlled monochrome mosaic using a frozen perspective camera and independent landmarks/quadrants. The 65° emission limit retains 28.735% of the sphere. These are processed display colors, not calibrated reflectance or natural-color reconstruction.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/callisto/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/callisto/source/validation/galileo-color-registration.json",
+        "https://www.usgs.gov/media/images/callisto-galileo-ssi-color-mosaic"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "nims-g8-registered-observations",
+      "subject": "Galileo NIMS G8CNADLIND01A and G8CNGLOBAL02A",
+      "status": "included",
+      "finding": "The registered Minnaert-corrected CIOF products supply partial Infrared color using same-parity bands near 0.77, 2.25 and 3.66 micrometres. Regional Asgard/Lindr coverage takes priority in overlap. USGS 2013 registered grids control geometry; missing cells remain missing. The view is neither natural color nor mineral abundance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/callisto/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/callisto/source/nims/prepare-composite.json",
+        "https://doi.org/10.17189/4sq6-x165"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "gazetteer-features",
+      "subject": "IAU/USGS Gazetteer centre-point export",
+      "status": "included",
+      "finding": "Selected export supplies nomenclature labels, not terrain boundaries.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/callisto/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/callisto/source/manifest.json",
+        "https://planetarymaps.usgs.gov/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

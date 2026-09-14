@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 Ariel uses Paul Schenk's September 2020 [Uranian Satellites — Global Mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), based on Voyager 2 images and revised cartographic control. The original [author README](https://repository.hou.usra.edu/bitstreams/00528589-53e3-496b-ac5d-b6d86fe527c9/download) is retained in [the retained author notes](source/observations/aaReadMe_uranian_MAP_DEM.txt).
 
 **Monochrome** displays the source-corrected Voyager mosaic. [Schenk and Moore (2020)](https://doi.org/10.1098/rsta.2020.0102) describes lunar-Lambert normalization of the best-resolved images to reduce planetary shading; the result approximates normal reflectance and is not a true albedo map. Ariel's best mosaic has approximately 1 km image samples, with two smeared terminator images replaced by desmeared versions supplied by Stryk and Stooke. Cast shadows, camera marks, seams, and unequal local resolution remain. No additional photometric recovery is claimed.
@@ -59,16 +61,7 @@ Both lenses use the same fixed 5760 × 2880 prepared sampling bank, 64-pixel pro
 
 Minimaps and thumbnails use the same prepared interpretation. The navigation/context marker is a purpose-sized crop of observed southern terrain, with shared full-phase curvature; it is not a new full-disc observation. Its original normalized-map crop is (2200, 1100), 700 × 700 pixels. Original cube bytes are retained unchanged inside gzip with both original and compressed hashes in the manifest. Content-addressed source URLs allow automated restoration without the upstream browser challenge; large source binaries are excluded from Git and runtime installation.
 
-**Dataset survey**
-
-| Candidate | Disposition |
-| --- | --- |
-| Schenk/LPI 2020 native corrected mosaic | Selected as Monochrome for revised registration, documented photometry, and original floating-point data. |
-| Schenk/LPI 2020 merged numeric DEM | Selected as the conceptually distinct Elevation lens, with its own validity and ellipsoid datum. |
-| [JPL simulator Ariel map](https://space.jpl.nasa.gov/tmaps/uranus.html), 1440 × 720 at 4 pixels/degree | Excluded as a duplicate lower-density display mosaic; original LPI data has stronger mapping and processing provenance. |
-| [USGS Ariel Voyager control network](https://astrogeology.usgs.gov/search/map/ariel_voyager_image_control_network) | Registration support, not an additional image or measured-scalar lens. This release republishes RAND and Jigsaw control solutions. |
-| [NASA PIA01351 clear-filter image](https://science.nasa.gov/photojournal/bright-patches-on-ariel/) | Excluded: 47 km image detail and disc projection add no mapped surface capability to the selected mosaic. |
-| [Beddingfield et al. 2025 medial-groove/geology work](https://www.hou.usra.edu/meetings/lpsc2025/pdf/1126.pdf), followed by [Tonoian et al. structural mapping](https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-1554.html) | Unresolved complementary interpretive candidate. The examined releases describe geological figures and continued structural mapping, but did not establish a downloadable georeferenced unit raster/vector closure suitable for this renderer. No geological lens is claimed. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 Physical/orbital values come from the vendored astronomy package: JPL satellite elements and IAU/NAIF Ariel rotation at the shared epoch. [NASA's Ariel overview](https://science.nasa.gov/uranus/moons/ariel/) supplies editorial and discovery facts. No atmospheric shell is supported.
 
