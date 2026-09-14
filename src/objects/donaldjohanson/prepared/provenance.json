@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ba8204666a384a74a39f0aab671a6231e37c8c2f84faed990ff7de556e9425cf"
+    "sha256": "3c23f4965eb9ab281700227ef3bfa559d868df0b8372db0f1ddc820fdd3d995c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "477002ef2153e9fe519e0f8926d037fa2b232037cfa5c705007fe04162f2de1d",
+      "sha256": "cb7b9827001555045e54ea2f472b339d9bffae888371b9455384654ee9fc434e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -31,7 +31,54 @@
           "poleSize": 512,
           "reportMissingPixels": true,
           "observations": [],
-          "scientific": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/lcy_donj_k548_iso20m_v10.obj.gz",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "compression": "gzip",
+                "expectedVertices": 274000,
+                "expectedFaces": 547996
+              },
+              "sampleGrid": {
+                "width": 1025,
+                "height": 513
+              },
+              "valueTransform": {
+                "scale": 1,
+                "offset": -2405.325
+              },
+              "minimum": -1200,
+              "maximum": 2400,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 2405.325,
+                "heightToMeters": 1,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 56
+              }
+            }
+          ],
           "observedColors": [],
           "surfaceQuality": 90,
           "shapeViews": [
@@ -156,7 +203,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d5ac1cd85afb70b1dde6d59b9405a8e18e893627c6db59df44528d413fee9d08",
+      "sha256": "d932591c265563b28b226014e22d784ac9ea919a7991a828b39d4635f4cdd011",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -239,6 +286,33 @@
               "falseColor": false,
               "notes": "Published Lucy shape model",
               "noData": true
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "thumbnail": "/scenes/donaldjohanson/donaldjohanson-elevation-thumbnail.webp",
+              "surface": "donaldjohanson-elevation-surface@2x.webp",
+              "poles": "donaldjohanson-elevation-surface@2x.webp",
+              "source": {
+                "id": "donaldjohanson-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-1200",
+                  "600",
+                  "2400"
+                ],
+                "meta": "m · 2,405.325 m reference sphere",
+                "sourceUrl": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds",
+                "image": "/scenes/donaldjohanson/donaldjohanson-elevation-legend.webp"
+              },
+              "notes": "Color shows radius minus a 2,405.325 m reference sphere, including the body's broad shape. This is model-derived radial height, not gravitational height or a photograph. Brightness adds cartographic relief from the full source model; optional Shadows uses illustrative lighting. Only about 40% of the source shape is stereo-constrained; unseen terrain retains the source authors’ reconstruction. The map follows the closest unique source point within 56 m of the simplified display; the grid marks rejected transfers. Flat previews withhold overlapping radial surfaces."
             }
           ]
         },
@@ -522,8 +596,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d5ac1cd85afb70b1dde6d59b9405a8e18e893627c6db59df44528d413fee9d08",
-      "bytes": 12653,
+      "sha256": "d932591c265563b28b226014e22d784ac9ea919a7991a828b39d4635f4cdd011",
+      "bytes": 14166,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -635,6 +709,48 @@
     }
   ],
   "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "donaldjohanson-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/donaldjohanson/donaldjohanson-elevation-thumbnail.webp",
+          "bytes": 5206,
+          "sha256": "6792dd8994eacdb6c5bd52f7f406a3ee082f59fe343aa27e8cd59d9726750e76",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/donaldjohanson/donaldjohanson-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/donaldjohanson/donaldjohanson-elevation-surface@2x.webp",
+          "bytes": 300128,
+          "sha256": "377757a64a391fdc7116e7f34b875b0c52959cd72b151b28069c8d52447ac4be",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
     {
       "id": "shape",
       "label": "Shape",
@@ -815,6 +931,30 @@
           "url": "object:prepared/minimaps/llorri.webp",
           "bytes": 21142,
           "sha256": "03a840948fc2675c1b09b7dde52ed2d51df8c3b34d0ad4fbb10d16f65e0e5012",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 10206,
+          "sha256": "e2f8a80beb8c704130ab7ae437e521a5399ded9f840b4aac7f005c99d887142a",
           "verification": "bytes-verified"
         }
       ]

@@ -3,5 +3,6 @@ import controls from '../../../../src/objects/toutatis/prepared/controls.json' w
 export const browserProfile=createObjectBrowserProfile({id:'toutatis',controls,audit:{
  preparedAssetPairs:[{one:'/scenes/toutatis/toutatis-directional-sun.webp',two:'/scenes/toutatis/toutatis-directional-sun@2x.webp'}],
  canonicalPreparedAssets:['/scenes/toutatis/toutatis-shape-surface@2x.webp'],
- retained:{lensIds:['shape'],speedClicks:5,allowedMountSelectors:[]}
+ lensRace:{defaultId:'shape',slowId:'elevation',winnerId:'shape',slowAsset:'/scenes/toutatis/toutatis-elevation-surface@2x.webp',preReadyDisabled:true},
+ retained:{lensIds:['shape','elevation'],speedClicks:5,allowedMountSelectors:[]}
 }});
