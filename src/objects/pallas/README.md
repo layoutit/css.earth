@@ -25,6 +25,10 @@ Full source face-centroid checks and 8192 sphere directions found no repeated ra
 
 The [September 2026 photographic projection trial](evidence/photographic-projection.json) examined four native SPHERE frames and the LAM/DAMIT model correspondence. Outline fits on three separated views reached 0.63–1.33 pixels withheld RMS, but cross-observation interior registration did not qualify. The record keeps the cameras, source hashes, matcher trials and their limitations; this was an offline investigation, not a prepared or browser-tested photographic view. See the [ledger](investigations.json) for the remaining source decisions.
 
+![Offline Pallas photographic projection: native SPHERE image, mesh and projected photograph](evidence/photographic-projection.png)
+
+Diagnostic from the LAM SPHERE release, Marsset et al. (2020); observation 2017-10-11 05:04:27 UTC. Linear display stretch retains observed illumination. Grey marks omitted photographic samples. The right panel uses a different viewing direction and scale; it is not an app capture or a pixel-difference comparison.
+
 ## Known problems
 
 Shape uses the shared no-imagery grid. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 255.5 km reference sphere, with a -60 to 40 km legend. This includes global shape, not height above a gravitational equipotential.
