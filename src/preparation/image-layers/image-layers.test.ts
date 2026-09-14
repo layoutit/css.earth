@@ -9,6 +9,20 @@ import { prepareImageLayers, sha256 } from './prepare.js';
 import { assertImageLayerReplay, restoreEnvironmentObject } from '../environment-images.js';
 import { resizeRgbaLanczos3 } from './resize-rgba.js';
 
+test('environment restoration leaves dedicated preparation owners to restore their missing banks', async () => {
+  const { writeFile } = await import('node:fs/promises');
+  const root = await mkdtemp(join(tmpdir(), 'dedicated-environment-'));
+  try {
+    for (const type of ['volume-lens-bank', 'galaxy-point-field']) {
+      const descriptor = JSON.stringify({ id: 'fixture', type,
+        prepared: { url: 'prepared/missing.json', sha256: '0'.repeat(64) } });
+      await writeFile(join(root, 'object.json'), descriptor);
+      await restoreEnvironmentObject(root);
+      assert.equal(await readFile(join(root, 'object.json'), 'utf8'), descriptor);
+    }
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('production preparation preserves canonical flux and supplies nondegenerate edge banks',async()=>{
   const root=await mkdtemp(join(tmpdir(),'image-layers-')),source=join(root,'source'),output=join(root,'prepared');
   const {mkdir,writeFile}=await import('node:fs/promises');await mkdir(source);

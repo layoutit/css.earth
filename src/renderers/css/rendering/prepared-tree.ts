@@ -30,7 +30,39 @@ function builder(tree: PreparedTree, document: Document, own: Own) {
   };
 }
 
-export function buildPreparedTree(tree: PreparedTree, document: Document, own: Own): BuiltTree {
+/** The server can publish this exact tree before the interactive owner arrives.
+ * Validate the entire topology before taking ownership of any existing node. */
+export function adoptPreparedTree(tree: PreparedTree, stage: HTMLElement, own: Own): BuiltTree | null {
+  if (!stage.dataset.preparedObject) return null;
+  if (stage.dataset.preparedObject !== stage.dataset.objectId) throw new TypeError('Initial prepared tree belongs to another object.');
+  const existing = [...stage.querySelectorAll<HTMLElement>('[data-prepared-node]')];
+  if (existing.length !== tree.nodes.length) throw new TypeError('Initial prepared tree has a different node count.');
+  // Prepared records are topological, but need not be in DOM preorder.
+  const indexed = new Map(existing.map(node => [node.dataset.preparedNode, node]));
+  const nodes = tree.nodes.map((_, index) => indexed.get(String(index)));
+  if (indexed.size !== existing.length || nodes.some(node => !node)) throw new TypeError('Initial prepared tree has invalid node identities.');
+  const owned = nodes.filter((node): node is HTMLElement => node !== undefined);
+  const children = tree.nodes.map(() => [] as HTMLElement[]);
+  for (const [index, record] of tree.nodes.entries()) if (record.parent !== -1) children[record.parent].push(owned[index]);
+  const roots: HTMLElement[] = [];
+  for (const [index, node] of owned.entries()) {
+    const record = tree.nodes[index];
+    if (node.dataset.preparedNode !== String(index) || node.localName !== record.tag ||
+        node.parentElement !== (record.parent === -1 ? stage : nodes[record.parent]) ||
+        node.children.length !== children[index].length || [...node.children].some((child, indexInParent) => child !== children[index][indexInParent])) {
+      throw new TypeError(`Initial prepared tree differs at node ${index}.`);
+    }
+    if (record.parent === -1) roots.push(node);
+  }
+  for (const root of roots) own(() => root.remove());
+  delete stage.dataset.preparedObject;
+  delete stage.dataset.preparedSha256;
+  return { nodes: owned, roots };
+}
+
+export function buildPreparedTree(tree: PreparedTree, document: Document, own: Own, stage?: HTMLElement): BuiltTree {
+  const existing = stage ? adoptPreparedTree(tree, stage, own) : null;
+  if (existing) return existing;
   const build = builder(tree, document, own);
   while (!build.complete) build.append();
   return build.result;

@@ -101,9 +101,9 @@ async function sidebarPick(id:string) {
 }
 async function changeDataset() {
   if (!await page.locator('.planet-information-panel').isVisible()) return;
-  const ids = await page.locator('.planet-information-panel button[name="lens"]').evaluateAll(nodes => nodes.map(node=>{if(!(node instanceof HTMLButtonElement))throw new Error("Expected dataset button");return node;}).filter(node => !node.disabled && node.getAttribute('aria-pressed') !== 'true').map(node => node.value));
+  const ids = await page.locator('.planet-information-panel button[name="dataset"]').evaluateAll(nodes => nodes.map(node=>{if(!(node instanceof HTMLButtonElement))throw new Error("Expected dataset button");return node;}).filter(node => !node.disabled && node.getAttribute('aria-pressed') !== 'true').map(node => node.value));
   if (!ids.length) return;
-  const id = choose(ids), button = page.locator(`.planet-information-panel button[name="lens"][value="${id}"]`);
+  const id = choose(ids), button = page.locator(`.planet-information-panel button[name="dataset"][value="${id}"]`);
   const details = button.locator('xpath=ancestor::details[1]');
   if (await details.count() && !await details.evaluate(node => window.__cssearthTest.detailsElement(node).open)) await details.locator('summary').first().click();
   await mark('dataset-pick', { id }); await button.click();

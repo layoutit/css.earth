@@ -35,7 +35,7 @@ type MockWorldMount = { destroy(): void; publish?(world: WorldCameraPose & {pose
 type MockDataset = { ids: readonly string[]; defaultId: string; current(): string; select(id: string, options?: { signal?: AbortSignal }): Promise<boolean>; subscribe(listener: (id: string) => void): () => void };
 type MockMount = Mutable<Omit<ObjectSceneLifecycle, 'navigation' | 'datasets'>> & { id: string; options: MountOptions & {proof?: string}; value: SharedView; calls: string[]; restores: number; publishCamera?(camera: WorldCameraPose): void; manualDataset?(id: string): void; datasets?: MockDataset; navigation?: ObjectWorldNavigation };
 type MockShell = { input: Record<string, never>; options: ShellOptions; destroyed: number; selected: string; playback?: unknown; datasetShown?: boolean; datasetNotice?: string | null; preparedFocus?: PreparedGalaxyRecord | null; focusSources?: readonly SpatialCitation[]; focusPresentation?: PreparedFocusPresentation | null; beginCardNavigation?: (object: ObjectEntry, world: unknown) => () => void; beginOverviewSelection?: (scope?: string) => (() => void) | void; setPlaybackState(value: unknown): void; showDataset(): void; setDatasetNotice(message: string | null): void; setMotionEnabled(value: boolean): void; setPreparedFocus(record: PreparedGalaxyRecord | null, sources: readonly SpatialCitation[], presentation: PreparedFocusPresentation | null): void; setObject(content: { id: string; apply(): void }): void; destroy(): void };
-type MockDocument = EventTarget & {hidden: boolean; documentElement: {dataset: Record<string, string>}; body: {classList: {add(): void; remove(): void}}};
+type MockDocument = EventTarget & {hidden: boolean; querySelector(selector: string): null; documentElement: {dataset: Record<string, string>}; body: {classList: {add(): void; remove(): void}}};
 type MockMedia = EventTarget & {matches: boolean};
 type MockHistory = {readonly state: Record<string, unknown>; replaceState(state: Record<string, unknown>, unused: string, url: string | URL | null): void; pushState(state: Record<string, unknown>, unused: string, url: string | URL | null): void; back(): void; forward(): void};
 type MockWindow = EventTarget & {readonly location: URL; history: MockHistory; matchMedia(): MockMedia; performance: Pick<Performance, 'now'>; setTimeout(callback: () => void, delay?: number): ReturnType<typeof setTimeout> | number; clearTimeout(id: ReturnType<typeof setTimeout> | number | undefined): void; requestAnimationFrame(callback: FrameRequestCallback): number; cancelAnimationFrame(handle: number): void};
@@ -54,7 +54,7 @@ const saved = (distance: number): SharedView => ({ camera: { distanceKilometers:
   pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } },
   playback: { times: [1234], speed: 1, motionRequested: false } });
 function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget, overviewTarget, savedTarget, initialUrl = null, factoryGate = null, contentGate = null, persistentWorldContext = null, withSun = false, worldFrames = null, datasets = false, datasetGate = null }: HarnessOptions = {}): Harness {
-  const documentTarget: MockDocument = Object.assign(new EventTarget(), { hidden: false, documentElement: { dataset: {} }, body: { classList: { add() {}, remove() {} } } });
+  const documentTarget: MockDocument = Object.assign(new EventTarget(), { hidden: false, querySelector: (_selector: string) => null, documentElement: { dataset: {} }, body: { classList: { add() {}, remove() {} } } });
   const media: MockMedia = Object.assign(new EventTarget(), {matches: false});
   const windowTarget = new EventTarget() as MockWindow;
   documentTarget.hidden = false; documentTarget.documentElement = { dataset: {} };
@@ -1062,18 +1062,22 @@ test('only canonical focus dataset URLs bypass ordinary same-body framing', () =
   }
 });
 
-test('manual datasets replace history and ordinary body navigation removes only the dataset fragment', async () => {
+test('manual dataset queries survive Back and preserve unrelated anchors', async () => {
   const h = harness({ datasets: true }); await h.router.settled;
   required(h.mounts[0].manualDataset)('mapped');
-  assert.equal(h.windowTarget.location.hash, '#vault&dataset=mapped');
+  assert.equal(h.windowTarget.location.hash, '#vault');
+  assert.equal(h.windowTarget.location.searchParams.get('dataset'), 'mapped');
   assert.equal(h.writes.includes('push'), false);
   await h.router.navigate('venus');
   assert.equal(h.windowTarget.location.hash, '#vault');
+  assert.equal(h.windowTarget.location.searchParams.has('dataset'), false);
   assert.equal(required(h.mounts[1].datasets).current(), 'normal');
   h.windowTarget.history.back(); await h.router.settled;
   assert.equal(required(required(h.mounts.at(-1)).datasets).current(), 'mapped');
-  assert.equal(h.windowTarget.location.hash, '#vault&dataset=mapped');
+  assert.equal(h.windowTarget.location.hash, '#vault');
+  assert.equal(h.windowTarget.location.searchParams.get('dataset'), 'mapped');
   required(required(h.mounts.at(-1)).manualDataset)('normal'); assert.equal(h.windowTarget.location.hash, '#vault');
+  assert.equal(h.windowTarget.location.searchParams.has('dataset'), false);
   h.router.destroy();
 });
 

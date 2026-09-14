@@ -65,7 +65,7 @@ try {
           title: panel.querySelector('.planet-title')?.getAttribute('aria-label'),
           introduction: panel.querySelector('.planet-introduction')?.textContent,
           facts: panel.querySelectorAll('.planet-fact-value').length,
-          datasets: panel.querySelectorAll('button[name="lens"]').length,
+          datasets: panel.querySelectorAll('button[name="dataset"]').length,
           minimap: Boolean(panel.querySelector('.planet-surface-minimap')),
           hidden: window.__cssearthTest.htmlElement(panel).hidden,
         };
@@ -114,7 +114,7 @@ try {
     required(releaseVenusCard)();
     await page.waitForFunction(() => {
       const panel = window.__cssearthTest.html('.planet-information-panel');
-      return !panel.querySelector(':scope > [data-card-preview]') && panel.querySelector('button[name="lens"]') !== null
+      return !panel.querySelector(':scope > [data-card-preview]') && panel.querySelector('button[name="dataset"]') !== null
         && panel.querySelector('.planet-title')?.getAttribute('aria-label') === 'Venus';
     });
     assert.equal(fragmentRequests.get('venus'), 1, 'The late card and destination content share one fragment request');

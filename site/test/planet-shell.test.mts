@@ -315,7 +315,7 @@ test("publishes dataset text beside the controls, never inside the object model"
 
 function createFakeDocument() {
   const dataset: Record<string, string> = {};
-  return Object.assign(new EventTarget(), { hidden: false, documentElement: { dataset },
+  return Object.assign(new EventTarget(), { hidden: false, querySelector: (_selector: string) => null, documentElement: { dataset },
     body: { classList: createFakeClassList() } });
 }
 

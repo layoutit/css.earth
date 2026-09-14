@@ -203,10 +203,10 @@ try {
       if (config.label === "mercury-desktop") {
         const legend = page.locator('[data-lens-legend="topography"]');
         const interiorLegend = page.locator('[data-lens-legend="interior"]');
-        const enhanced = lensPanel.locator('button[name="lens"][value="enhanced"]');
-        const topography = lensPanel.locator('button[name="lens"][value="topography"]');
-        const interior = lensPanel.locator('button[name="lens"][value="interior"]');
-        const normal = lensPanel.locator('button[name="lens"][value="normal"]');
+        const enhanced = lensPanel.locator('button[name="dataset"][value="enhanced"]');
+        const topography = lensPanel.locator('button[name="dataset"][value="topography"]');
+        const interior = lensPanel.locator('button[name="dataset"][value="interior"]');
+        const normal = lensPanel.locator('button[name="dataset"][value="normal"]');
         assert.equal(await page.locator("[data-lens-legend]").count(), 2,
           "Mercury retains only its meaningful Topography and Interior legends");
         assert.equal(await page.locator(".planet-drawer-content > [data-lens-legend]").count(), 0,
@@ -217,7 +217,7 @@ try {
           "Mercury default 750 nm lens does not show a legend");
         await enhanced.click();
         await page.waitForFunction(() =>
-          document.querySelector('button[name="lens"][value="enhanced"]')
+          document.querySelector('button[name="dataset"][value="enhanced"]')
             ?.getAttribute("aria-pressed") === "true");
         assert.equal(await page.locator("[data-lens-legend]:visible").count(), 0,
           "Mercury Enhanced does not present channel construction as a viewing legend");
@@ -225,7 +225,7 @@ try {
           "Enhanced is a lens choice, not a legend accordion");
         await topography.click();
         await page.waitForFunction(() =>
-          document.querySelector('button[name="lens"][value="topography"]')
+          document.querySelector('button[name="dataset"][value="topography"]')
             ?.getAttribute("aria-pressed") === "true");
         assert.equal(await legend.isVisible(), true,
           "Mercury Topography lens shows its elevation legend");
@@ -240,7 +240,7 @@ try {
         assert.match(await legend.innerText(), /−5,020[\s\S]*−450[\s\S]*4,140 m/u);
         await interior.click();
         await page.waitForFunction(() =>
-          document.querySelector('button[name="lens"][value="interior"]')
+          document.querySelector('button[name="dataset"][value="interior"]')
             ?.getAttribute("aria-pressed") === "true");
         assert.equal(await legend.isVisible(), false,
           "switching away hides the Topography legend");
@@ -249,7 +249,7 @@ try {
         assert.match(await interiorLegend.innerText(), /Metallic core[\s\S]*85% of radius[\s\S]*Mantle \+ crust[\s\S]*366 km shell/u);
         await normal.click();
         await page.waitForFunction(() =>
-          document.querySelector('button[name="lens"][value="normal"]')
+          document.querySelector('button[name="dataset"][value="normal"]')
             ?.getAttribute("aria-pressed") === "true");
         assert.equal(await page.locator("[data-lens-legend]:visible").count(), 0,
           "returning to 750 nm hides every optional legend");

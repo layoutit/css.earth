@@ -46,7 +46,7 @@ try {
         }
       }
       for (const id of ['water-ice', 'ammonia', 'normal']) {
-        await page.locator(`button[name="lens"][value="${id}"]`).click();
+        await page.locator(`button[name="dataset"][value="${id}"]`).click();
         await page.waitForFunction(lens => document.querySelector('.planet-stage')?.getAttribute('data-lens') === lens, id);
         const texture = await page.locator('.charon-body').evaluate((root) => {
           const band = root.querySelector('s:not(.charon-polar)'), pole = root.querySelector('s.charon-polar');
@@ -86,7 +86,7 @@ try {
         assert.ok((await Promise.all(initial.map(node => node.evaluate(element => element.isConnected)))).every(Boolean));
       }
       if (viewport.width === 1440 && density === 1) {
-        await page.locator('button[name="lens"][value="ammonia"]').click();
+        await page.locator('button[name="dataset"][value="ammonia"]').click();
         await page.waitForFunction(() => document.querySelector('.planet-stage')?.getAttribute('data-lens') === 'ammonia');
         await page.locator('.planet-sidebar-search').fill('Organa');
         await page.getByRole('button', { name: 'Organa, Informal crater name, size unpublished', exact: true }).click();

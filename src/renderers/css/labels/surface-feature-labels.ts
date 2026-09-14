@@ -13,6 +13,7 @@ import type { SurfaceFlightHandle } from './surface-feature-flight.js';
 import { rotateWorldPosition } from '../navigation/world-camera-math.js';
 import type { ObjectWorldNavigation } from '../runtime/world-navigation-types.js';
 import type { PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, PreparedSurfaceFeaturePlan, SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats } from './surface-feature-types.js';
+import { surfaceFeatureCaption } from './surface-feature-caption.js';
 
 const LABEL_FADE_MS = 200;
 /** Surface labels paint above the detailed body and any context sprite behind it. */
@@ -42,7 +43,6 @@ interface Entry {
 }
 
 function format(value: number): string { return Math.abs(value) < 1e-9 ? '0' : Number(value.toFixed(2)).toString(); }
-const kilometres = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
 
 /** Retained nomenclature labels for one prepared body. The DOM pool (labels, caption card and
  * outline chords) is sized by the plan at mount; catalogue text arrives later without adding
@@ -50,8 +50,6 @@ const kilometres = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
  * registry; the layer owns no pointer listeners. */
 /** Feature framing on arrival: the published diameter spans this share of the shorter viewport side. */
 const ARRIVAL_DIAMETER_SHARE = 0.45;
-/** Spacecraft sites and traverses have no size to report. */
-const SITE_CODES = new Set(['LS', 'IM', 'SS', 'RT']);
 const MINIMUM_FRAMED_RADIUS_M = 25_000;
 
 const CLICK_SLOP_PIXELS = 5;
@@ -63,7 +61,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   if (!host?.ownerDocument || !target || !scene.contains(target)) throw new TypeError('Surface feature labels need a host and a mesh target inside the scene.');
   const document = host.ownerDocument, windowTarget = document.defaultView;
   if (!windowTarget) throw new TypeError('Surface feature labels require a mounted window.');
-  const root = document.createElement('div');
+  const root = host.querySelector<HTMLElement>(':scope > .prepared-surface-features') ?? document.createElement('div');
+  if (root.dataset.surfaceFeatures && root.dataset.surfaceFeatures !== objectId) throw new TypeError('Prepared feature caption belongs to another object.');
   root.className = 'prepared-surface-features';
   root.dataset.surfaceFeatures = objectId;
   root.style.cssText = 'position:absolute;inset:0;z-index:1;pointer-events:none';
@@ -86,15 +85,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     root.appendChild(element);
     entries.push({ element, feature: null, width: 0, height: 0, targetOpacity: 0, hideTimer: null, x: 0, y: 0 });
   }
-  const tooltip = document.createElement('div');
-  tooltip.dataset.featureTooltip = '';
-  tooltip.setAttribute('role', 'tooltip');
-  tooltip.hidden = true;
-  tooltip.style.cssText = 'position:absolute;left:50%;top:50%;pointer-events:none';
-  const tooltipName = document.createElement('b'), tooltipDetail = document.createElement('span'), tooltipOrigin = document.createElement('p'), tooltipNote = document.createElement('p'), tooltipCredit = document.createElement('small');
-  tooltipName.dataset.featureTooltipName = ''; tooltipDetail.dataset.featureTooltipDetail = ''; tooltipOrigin.dataset.featureTooltipOrigin = ''; tooltipNote.dataset.featureTooltipNote = ''; tooltipCredit.dataset.featureTooltipCredit = '';
-  tooltip.append(tooltipName, tooltipDetail, tooltipOrigin, tooltipNote, tooltipCredit);
-  root.appendChild(tooltip);
+  const caption = surfaceFeatureCaption(root), tooltip = caption.element;
   host.appendChild(root);
   const picking = screenPicking(pickingHost);
   const fader = createOpacityFader(windowTarget);
@@ -258,12 +249,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     }
     const entry = entries[index]!, feature = entry.feature!;
     if (shownIndex !== index) {
-      tooltipName.textContent = feature.name;
-      tooltipDetail.textContent = feature.diameterKm > 0 ? `${feature.type} · ${kilometres.format(feature.diameterKm)} km` : SITE_CODES.has(feature.code) ? feature.type : `${feature.type} · size unpublished`;
-      tooltipOrigin.textContent = feature.origin;
-      tooltipNote.textContent = feature.note?.text ?? '';
-      tooltipCredit.textContent = feature.note?.credit ? `${feature.credit} · ${feature.note.credit}` : feature.credit;
-      tooltip.dataset.featureTooltipFor = feature.id;
+      caption.show(feature);
       root.dataset.featureOutlineFor = feature.id;
       tooltip.hidden = false;
       shownIndex = index;

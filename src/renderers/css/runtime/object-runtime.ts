@@ -21,6 +21,7 @@ import { createPreparedPlayback } from "../rendering/prepared-playback.js";
 import { createRetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import { mountRetainedCubicSky } from "../solar-system/cubic-sky-runtime.js";
 import { mountPreparedPresentation } from "../rendering/prepared-presentation.js";
+import { savedWorldCamera } from '../navigation/saved-world-camera.js';
 import { initialObjectSelection, requireObjectRuntimeDefinition } from "./object-contract.js";
 import { formatSharedView, parseSharedView } from "../navigation/view-url.js";
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
@@ -35,13 +36,30 @@ const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, crea
 export function createObjectRuntime(definition: ObjectRuntimeDefinition, services: Partial<ObjectRuntimeServices> = {}) {
   requireObjectRuntimeDefinition(definition);
   if (!Array.isArray(definition.motion)) throw new TypeError('Object motion bindings must be prepared before mount.');
-  const initialSelection = initialObjectSelection(definition.controls);
   const environment = { ...nativeServices, ...services };
   return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, deferTextureRefinement = false }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
     }
+    const initialLens = stage.dataset.preparedDataset;
+    if (stage.dataset.preparedView) {
+      const saved = parseSharedView(`v=${stage.dataset.preparedView}`);
+      if (!saved || !worldFrame) throw new TypeError('A prepared view requires its shared world frame.');
+      initialWorldCamera ??= savedWorldCamera(saved, worldFrame, { focalPixels: 1, principalOffsetPixels: [0, 0] });
+      delete stage.dataset.preparedView;
+    }
+    const initialSettings: Record<string, boolean | number> = {};
+    for (const control of definition.controls.settings?.controls ?? []) {
+      const input = [...stage.ownerDocument.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')].find(input => input.name === control.name);
+      if (input) initialSettings[control.name] = control.kind === 'toggle' ? input.checked : Number(input.value);
+    }
+    // Validate the server's transported selection even when the user has since
+    // changed a native control. The current controls then own that newer intent.
+    if (stage.dataset.preparedSettings) initialObjectSelection(definition.controls, initialLens, JSON.parse(stage.dataset.preparedSettings));
+    const initialSelection = initialObjectSelection(definition.controls, initialLens, initialSettings);
+    delete stage.dataset.preparedDataset;
+    delete stage.dataset.preparedSettings;
     if (definition.destinations && !capabilities.createDestinations) throw new TypeError("Prepared destinations require an injected runtime capability.");
     if (definition.pageLayers?.length && !capabilities.mountPages) throw new TypeError("Prepared pages require an injected runtime capability.");
     if (definition.features && !capabilities.mountSurfaceFeatures) throw new TypeError("Prepared surface features require an injected runtime capability.");
@@ -331,7 +349,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       skyFade.appendChild(cubicSky.root);
       context.own(() => skyFade.remove());
       if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
-      selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, deferTextureRefinement,
+      selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, deferTextureRefinement, initialLens, initialSettings,
         onCommit: next => {
           playback.setSelection(next);
           for (const layer of pageLayers.values()) { layer.setLens({ id: next.lensId }); layer.setPlaying(allowed && (next.speed ?? 1) !== 0); }
