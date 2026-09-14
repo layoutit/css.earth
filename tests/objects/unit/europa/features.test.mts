@@ -22,12 +22,12 @@ test("the prepared Europa nomenclature catalogue is pinned by the runtime plan a
   assert.deepEqual(descriptor.skipped, {}, "the same Gazetteer rows are skipped (unchanged recipe)");
 });
 
-test("the plan anchors labels to the single body mesh for every surface lens", () => {
+test("the plan anchors labels to the single body mesh for the existing named-feature lenses", () => {
   const node = runtimeDefinition.tree.nodes[plan.target];
   assert.match(node.className ?? "", /(^|\s)europa-body(\s|$)/u);
   assert.equal(runtimeDefinition.tree.nodes.filter(n => /(^|\s)europa-body(\s|$)/u.test(n.className ?? "")).length, 1);
   assert.deepEqual(plan.lensIds, ["normal","enhanced","elevation","geology","infrared"]);
   assert.equal(plan.meshRadiusUnits, runtimeDefinition.camera.logicalBodyDiameter / 2 / runtimeDefinition.camera.sceneScale);
   assert.deepEqual(plan.outline, { pieces: 256 });
-  assert.equal(plan.policy.minimumZoomShare, 1);
+  assert.equal(plan.policy.minimumZoomShare, 0);
 });

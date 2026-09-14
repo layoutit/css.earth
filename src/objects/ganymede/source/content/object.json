@@ -333,6 +333,126 @@
         },
         "notes": "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved.",
         "noData": true
+      },
+      {
+        "id": "ice-fraction",
+        "label": "Ice fraction",
+        "thumbnail": "ganymede-lens-ice-fraction.webp",
+        "surface": "ganymede-ice-fraction.webp",
+        "poles": "ganymede-poles-ice-fraction.webp",
+        "source": {
+          "id": "ganymede-composition-ice-fraction",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.5281/zenodo.6390469"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Ice fraction",
+          "labels": [
+            "0%",
+            "30%",
+            "60%"
+          ],
+          "meta": "modeled fraction",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.6390469",
+          "recipe": {
+            "palette": [
+              [
+                8,
+                29,
+                88
+              ],
+              [
+                34,
+                94,
+                168
+              ],
+              [
+                65,
+                182,
+                196
+              ],
+              [
+                161,
+                218,
+                180
+              ],
+              [
+                255,
+                255,
+                204
+              ]
+            ],
+            "labels": [
+              "0%",
+              "30%",
+              "60%"
+            ]
+          }
+        },
+        "notes": "Published posterior median of total water-ice abundance; this is a spectral mixture estimate, not a direct measurement of ice purity. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
+        "noData": true
+      },
+      {
+        "id": "dark-material",
+        "label": "Dark material",
+        "thumbnail": "ganymede-lens-dark-material.webp",
+        "surface": "ganymede-dark-material.webp",
+        "poles": "ganymede-poles-dark-material.webp",
+        "source": {
+          "id": "ganymede-composition-dark-material",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.5281/zenodo.6390469"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Dark material",
+          "labels": [
+            "0%",
+            "35%",
+            "70%"
+          ],
+          "meta": "modeled fraction",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.6390469",
+          "recipe": {
+            "palette": [
+              [
+                8,
+                29,
+                88
+              ],
+              [
+                34,
+                94,
+                168
+              ],
+              [
+                65,
+                182,
+                196
+              ],
+              [
+                161,
+                218,
+                180
+              ],
+              [
+                255,
+                255,
+                204
+              ]
+            ],
+            "labels": [
+              "0%",
+              "35%",
+              "70%"
+            ]
+          }
+        },
+        "notes": "Published posterior median of the model’s combined synthetic darkening components. This is an unidentified spectral component, not a detected mineral. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
+        "noData": true
       }
     ],
     "labels": {
