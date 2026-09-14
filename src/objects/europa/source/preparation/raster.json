@@ -43,6 +43,23 @@
         "nativePhotographicSampling": {
           "samplesPerAxis": 2,
           "quality": 95
+        },
+        "detailMosaic": {
+          "format": "controlled-geotiff",
+          "consumer": "galileo-regional",
+          "profile": {
+            "referenceRadiusMeters": 1560800,
+            "filter": "CLEAR",
+            "wavelengthMicrometers": 0.611,
+            "displayRange": [
+              0,
+              2
+            ],
+            "polarBoundaryDegrees": 78.75
+          },
+          "levelMatching": {
+            "boundaryPixels": 4
+          }
         }
       },
       "resolutionScale": 2
