@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "helene",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5df237997cef4e131fecea8b8b62cc1fcb83b446e9eecbb5121ad53baeeb5676"
+    "sha256": "822fee9b945fefd481dc7eac215be4594727dd89f70fe80b5b13bb48d366bb60"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d7cbe557e2e47bc17d6eb17d6d3892462bf255989e9bfd85d4603306299075fb",
+      "sha256": "569ff34febc884f7b471327d22c595055c845ded66f4cd4ac8f5f756929b95ff",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -278,13 +278,47 @@
                   ],
                   "pixelAngleMicroradians": 5.989697719921734,
                   "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1675163339_1",
+                  "path": "observations/N1675163339_1_CALIB.IMG",
+                  "labelPath": "observations/N1675163339_1_CALIB.LBL",
+                  "observerLatitude": -4.27,
+                  "observerWestLongitude": 86.81,
+                  "sunLatitude": 7.84,
+                  "sunWestLongitude": 174.04,
+                  "rangeKm": 27742.9,
+                  "northAzimuthDegrees": 232.3,
+                  "center": [
+                    591.4,
+                    655.6
+                  ],
+                  "pixelAngleMicroradians": 5.989697719921734,
+                  "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1519536732_1",
+                  "path": "observations/N1519536732_1_CALIB.IMG",
+                  "labelPath": "observations/N1519536732_1_CALIB.LBL",
+                  "observerLatitude": -0.41,
+                  "observerWestLongitude": 95.93,
+                  "sunLatitude": -18.36,
+                  "sunWestLongitude": 193.82,
+                  "rangeKm": 67839.7,
+                  "northAzimuthDegrees": 359.77,
+                  "center": [
+                    606.6,
+                    522.5
+                  ],
+                  "pixelAngleMicroradians": 5.989697719921734,
+                  "backgroundMaximum": 0.003
                 }
               ],
               "selection": "finest-resolution",
               "levelMatching": {
                 "samplesPerTriangle": 64,
                 "minimumPairs": 64,
-                "maximumGain": 2.1,
+                "maximumGain": 2.5,
                 "maximumAngleDegrees": 70
               },
               "transfer": {
@@ -841,7 +875,7 @@
       "sha256": "d8fbff19525bca341bb3e4bde205ae77d8d05096f5244b77405ab27ebfd83e23",
       "bytes": 2024100,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -895,7 +929,7 @@
       "sha256": "802f813ebd2ffc23c00c17c190ae612c8a44dafc050238fe551723e16cfade28",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -942,7 +976,7 @@
       "sha256": "fe41d6fdd1b19f401506c677b52792f8396b652fac5f8fa4c96e78bcfcc8cd25",
       "bytes": 3824,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -996,7 +1030,7 @@
       "sha256": "8f9ffdce053d9bf1cac251ce6f7553981367018a1b571fdfdf16e2f4d003bc2f",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1043,7 +1077,7 @@
       "sha256": "70c5b2dd9d702bf4758800618e0ceff93ff524fbe34d7c7afeb1b3e36afcb469",
       "bytes": 3825,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1097,7 +1131,7 @@
       "sha256": "b58614e6a6536399060e4b31d3f4ae810fb3d70dbbf6ba36ed1c5b185f95d88e",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1144,7 +1178,7 @@
       "sha256": "2ce2dbfc5d8de33d1fece236ef52e89aa109806c15eba9af9f87fc4b41e9409c",
       "bytes": 3837,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1198,7 +1232,7 @@
       "sha256": "17bf747832227e31841ff470940cd434099a2d3feaffbf30d8656479453bd75a",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1245,7 +1279,7 @@
       "sha256": "fcace31b5dc0e74252d3270a9a55ac92b1d19c250faef12a2ffa0f9de40073b9",
       "bytes": 3836,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1299,7 +1333,7 @@
       "sha256": "7e1651efb458df0b1a08135d5687c91d8e2bbbf8dfceae8b3f1b08752a4d8799",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1346,7 +1380,7 @@
       "sha256": "6cf0c3be2318c02e0b4ae0db3b04a59c0389712acdc2281349df95e5168b3847",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1400,7 +1434,7 @@
       "sha256": "c71ee0f95592a6fbcfbaa8b43e4245b4c73d242d3ee2a4d1b5d42d48de43f622",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1447,7 +1481,7 @@
       "sha256": "b3a1fc45517e2f83d9a9f7139fbd8175f11d9268017cd49714457f0934a94477",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1501,7 +1535,7 @@
       "sha256": "8dd9ca94f4d874f6dde75a28ed386ce59182b2cceeaa033d22bc342887cdc743",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1548,7 +1582,7 @@
       "sha256": "fc0d3188e36d5b8865524aa852d632e2064c2da3ad527d01b1a84b0f904639b9",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1602,7 +1636,7 @@
       "sha256": "43d75167dae48f4d5d311337b3022c865b4abc9bb9ddb1c2dfe2536f5efd0583",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1649,7 +1683,7 @@
       "sha256": "b7835a68cdb0dd5d700d808a031094467176d302cc78935afdb8dbdec8e54a98",
       "bytes": 3828,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1703,7 +1737,7 @@
       "sha256": "8109ea5c5d2114a6dad90f63327648ad39dd7846cd8cacbbf59741240630456b",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1750,7 +1784,7 @@
       "sha256": "a9d1a44c0a7ced41debbc80e7006b09e92bd9b9ec354e69d3d05f710dfdb16db",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1804,7 +1838,7 @@
       "sha256": "b1520fd7b2897e41bebc75b05a8a15e7ae109ee144b76be4a1875a26b73dad86",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1851,7 +1885,7 @@
       "sha256": "b45ec092737cff44e9184a1db66519e876411658da060c5433741c2e47f87768",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1905,7 +1939,7 @@
       "sha256": "02ec07c25d59e6c0e8b8a088a2782ab80f604f735587feedc157f5ff1ff611ee",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1952,7 +1986,7 @@
       "sha256": "7ff6916d3d9955aa69c43109f99bc57dcd0fc67d202680ecd63f854b64fec6fb",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1960,6 +1994,208 @@
         ],
         "path": "observations/N1687121524_1_CALIB.LBL",
         "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2068/data/1687120310_1687333965/N1687121524_1_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1675163339_1",
+      "path": "observations/N1675163339_1_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2067/data/1675101626_1675163412/N1675163339_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1675163339",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/helene_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2067/data/1675101626_1675163412/N1675163339_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2067-data-1675101626-1675163412-n1675163339-1-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2067/data/1675101626_1675163412/N1675163339_1_CALIB.LBL; IMAGE_NUMBER, FILTER_NAME, START_TIME and native calibrated product"
+          }
+        ]
+      },
+      "sha256": "024520817034626e180fe90348268b054a8e93cc29a4ae7403a67a6c811c23e0",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1675163339_1_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2067/data/1675101626_1675163412/N1675163339_1_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1675163339_1-label",
+      "path": "observations/N1675163339_1_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2067/data/1675101626_1675163412/N1675163339_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1675163339",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2067/data/1675101626_1675163412/N1675163339_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2067-data-1675101626-1675163412-n1675163339-1-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2067/data/1675101626_1675163412/N1675163339_1_CALIB.LBL; IMAGE_NUMBER, FILTER_NAME, START_TIME and native calibrated product"
+          }
+        ]
+      },
+      "sha256": "581a5fbb13304d16c6db620df169df98ee46b64fd461d68175bbe25adf1c88c2",
+      "bytes": 3834,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1675163339_1_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2067/data/1675101626_1675163412/N1675163339_1_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1519536732_1",
+      "path": "observations/N1519536732_1_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2020/data/1519478774_1519575099/N1519536732_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1519536732",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/helene_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2020/data/1519478774_1519575099/N1519536732_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2020-data-1519478774-1519575099-n1519536732-1-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2020/data/1519478774_1519575099/N1519536732_1_CALIB.LBL; IMAGE_NUMBER, FILTER_NAME, START_TIME and native calibrated product"
+          }
+        ]
+      },
+      "sha256": "dadc09a1bf9c8106d9d7d43ac99363751d158d8414e15d31a50160b80e6eb8ad",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1519536732_1_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2020/data/1519478774_1519575099/N1519536732_1_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1519536732_1-label",
+      "path": "observations/N1519536732_1_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2020/data/1519478774_1519575099/N1519536732_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1519536732",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2020/data/1519478774_1519575099/N1519536732_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2020-data-1519478774-1519575099-n1519536732-1-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2020/data/1519478774_1519575099/N1519536732_1_CALIB.LBL; IMAGE_NUMBER, FILTER_NAME, START_TIME and native calibrated product"
+          }
+        ]
+      },
+      "sha256": "6720ba701e14e714b8fb42feeb390d00e89080b5e1333f83bb971089c13bc8ed",
+      "bytes": 3818,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1519536732_1_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2020/data/1519478774_1519575099/N1519536732_1_CALIB.LBL"
       },
       "verificationOperations": []
     },
@@ -2006,7 +2242,7 @@
       "sha256": "20b4f6e3fb2e19db45439041cb933302eed876880481768045d2c304b2e33dc2",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2053,7 +2289,7 @@
       "sha256": "386ae8266239f94f614db640498e9f1a6839c3780a0a94c79384a03bf2a09a3d",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2107,7 +2343,7 @@
       "sha256": "049fcd12d9032f50236dbb7d0e4f6cf4b5e34c5aa83ecbc00c334eb513ea086a",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2154,7 +2390,7 @@
       "sha256": "fa9627bf0a5ef42e69299ed21b9d3031bae2fe5048caad37b4f5140e0e4d9c7a",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2208,7 +2444,7 @@
       "sha256": "adae73a24ff17375e37c2764d92359f4eaf6179e6a1e57a01aadeb8e509f38b4",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2255,7 +2491,7 @@
       "sha256": "20ba32245f6decae07fd61cb264162a76ee3181ee6f4c2dea08bbb0ec7a48c6a",
       "bytes": 3829,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2309,7 +2545,7 @@
       "sha256": "ccf6d34185d385f615001715e2ccd83c3cbbe77d43ebb15cfed0075e5d7575d4",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2356,7 +2592,7 @@
       "sha256": "24f8c95d895f620420b4b7ef170ac4c4b1d04331bc46414fb3788ae377ef0e12",
       "bytes": 3828,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2410,7 +2646,7 @@
       "sha256": "8ff657d3eeb67b24e6b16b083e8274229aa81b5baa148c84ae746271ec6a35f5",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2457,7 +2693,7 @@
       "sha256": "975b562b6b43f629ab62a6b5e1e3a4a6c536a7d6be0f40f97fb68d319d36ce98",
       "bytes": 3828,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2511,7 +2747,7 @@
       "sha256": "69511757fd77c8ce014392ab81601364a081e0d3fb13cb42c0967498e605d7df",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2558,7 +2794,7 @@
       "sha256": "2664d7c79b129e61aa29c4276b1d4a734a587ad7d799697a7eb66c83c0716271",
       "bytes": 3827,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2612,7 +2848,7 @@
       "sha256": "04949cea3f5ba86376826d377a7701367f6d76cfa6fbc5ff3093cdf016d772b2",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2659,7 +2895,7 @@
       "sha256": "263646af90935a697db25fc397333494b033add11fdc189116ddcacaf365fdf5",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2713,7 +2949,7 @@
       "sha256": "ed52bc69932ab8eb6298b45c065784da6a8bfd80871af1733fe7a6774307f61d",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2760,7 +2996,7 @@
       "sha256": "adf3204ea14c28f0b58c688d4ed18764e7bab4c264b9dc845718f958d73f2a69",
       "bytes": 3828,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2787,7 +3023,7 @@
       "sha256": "d72059de4472a1ec773a35aa7086413c50fecdf270ec31c74835b81d9bcf110f",
       "bytes": 6941,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -2820,19 +3056,19 @@
           "url": "/scenes/helene/helene-elevation-thumbnail.webp",
           "bytes": 6408,
           "sha256": "a66338684c940ccb25ccde4ae616e861e04f0bd742d963e5c8d0aa9f0d260f4e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/helene/helene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/helene/helene-elevation-surface@2x.webp",
           "bytes": 626068,
           "sha256": "c9708ca1ca69a288380a94e919af0fcfa931f97562d2180beb6c633dd96e04e1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2879,20 +3115,24 @@
         "n1687121224_1-label",
         "n1687121524_1",
         "n1687121524_1-label",
+        "n1675163339_1",
+        "n1675163339_1-label",
+        "n1519536732_1",
+        "n1519536732_1-label",
         "thomas-2018-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/helene/helene-normal-thumbnail.webp",
           "bytes": 1956,
-          "sha256": "6966bcc8c60d19cba0cc90ce9db6866d3b090eabc54bdf478f6513af83df6bbb",
-          "verification": "bytes-verified"
+          "sha256": "1c767b83348e9aa8839a0f2346ff2c4beb1f05604fad79966a00b3ee79270bf1",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/helene/helene-normal-surface@2x.webp",
-          "bytes": 518660,
-          "sha256": "e0c54b79ee0eb0de968655d7b7dc8be8a3095762bf0c01be6396577c057e94cd",
-          "verification": "bytes-verified"
+          "bytes": 558168,
+          "sha256": "61e396cc63b6554942eda3dea247ac0c1d1c78847209e29c19813694d0dcd100",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2940,13 +3180,13 @@
           "url": "/scenes/helene/helene-false-color-thumbnail.webp",
           "bytes": 2294,
           "sha256": "52c864bb9b3972fca7da207c9906a0229ac015c43b1ec842848bcd985ba56105",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/helene/helene-false-color-surface@2x.webp",
           "bytes": 414760,
           "sha256": "59fb71e9df6fd3c2fbe7f57b2a15206c0d48db26bf853acebd55590590333ea4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2994,8 +3234,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 18726,
-          "sha256": "33731e5eb03b0943987be1170ed51ea5ea6fde012730cec1f42b89dad1277d67",
+          "bytes": 19552,
+          "sha256": "91a8574f3da107371103e7d6968aa3975d42c3e61b936f97b939d6789dae86e1",
           "verification": "bytes-verified"
         }
       ]

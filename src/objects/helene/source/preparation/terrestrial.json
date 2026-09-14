@@ -260,13 +260,47 @@
             ],
             "pixelAngleMicroradians": 5.989697719921734,
             "backgroundMaximum": 0.003
+          },
+          {
+            "id": "n1675163339_1",
+            "path": "observations/N1675163339_1_CALIB.IMG",
+            "labelPath": "observations/N1675163339_1_CALIB.LBL",
+            "observerLatitude": -4.27,
+            "observerWestLongitude": 86.81,
+            "sunLatitude": 7.84,
+            "sunWestLongitude": 174.04,
+            "rangeKm": 27742.9,
+            "northAzimuthDegrees": 232.3,
+            "center": [
+              591.4,
+              655.6
+            ],
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
+          },
+          {
+            "id": "n1519536732_1",
+            "path": "observations/N1519536732_1_CALIB.IMG",
+            "labelPath": "observations/N1519536732_1_CALIB.LBL",
+            "observerLatitude": -0.41,
+            "observerWestLongitude": 95.93,
+            "sunLatitude": -18.36,
+            "sunWestLongitude": 193.82,
+            "rangeKm": 67839.7,
+            "northAzimuthDegrees": 359.77,
+            "center": [
+              606.6,
+              522.5
+            ],
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           }
         ],
         "selection": "finest-resolution",
         "levelMatching": {
           "samplesPerTriangle": 64,
           "minimumPairs": 64,
-          "maximumGain": 2.1,
+          "maximumGain": 2.5,
           "maximumAngleDegrees": 70
         },
         "transfer": {

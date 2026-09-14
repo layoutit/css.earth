@@ -57,7 +57,7 @@
           "height": 361
         },
         "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
-        "description": "Cassini shape \u00b7 radial height",
+        "description": "Cassini shape · radial height",
         "title": "Radial height from the Cassini-derived Epimetheus shape model above the 58.2 km reference sphere. Includes the broad irregular figure; not a local geodetic DEM.",
         "labels": [
           "-15",
@@ -163,6 +163,40 @@
             "center": [
               482.8,
               564.3
+            ],
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
+          },
+          {
+            "id": "n1864500586_1",
+            "path": "observations/N1864500586_1_CALIB.IMG",
+            "labelPath": "observations/N1864500586_1_CALIB.LBL",
+            "observerLatitude": 72.62,
+            "observerWestLongitude": 69.88,
+            "sunLatitude": 27.03,
+            "sunWestLongitude": 171.32,
+            "rangeKm": 93632.9,
+            "northAzimuthDegrees": 340.93,
+            "center": [
+              506.3,
+              437.3
+            ],
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
+          },
+          {
+            "id": "n1649345705_1",
+            "path": "observations/N1649345705_1_CALIB.IMG",
+            "labelPath": "observations/N1649345705_1_CALIB.LBL",
+            "observerLatitude": -1.8,
+            "observerWestLongitude": 209.55,
+            "sunLatitude": 3.45,
+            "sunWestLongitude": 140.24,
+            "rangeKm": 86631.1,
+            "northAzimuthDegrees": 153.63,
+            "center": [
+              575.0,
+              589.5
             ],
             "pixelAngleMicroradians": 5.989697719921734,
             "backgroundMaximum": 0.003
@@ -280,6 +314,60 @@
               "coverageInsetPixels": 2,
               "backgroundMaximum": 0.003
             }
+          },
+          {
+            "id": "set-2",
+            "red": {
+              "id": "n1828124265_1",
+              "path": "observations/N1828124265_1_CALIB.IMG",
+              "labelPath": "observations/N1828124265_1_CALIB.LBL",
+              "observerLatitude": 3.53,
+              "observerWestLongitude": 237.96,
+              "sunLatitude": 25.3,
+              "sunWestLongitude": 217.81,
+              "rangeKm": 27206.1,
+              "northAzimuthDegrees": 179.92944884494,
+              "center": [
+                398.2846097285695,
+                530.6032460225546
+              ],
+              "pixelAngleMicroradians": 5.989697719921734,
+              "backgroundMaximum": 0.003
+            },
+            "green": {
+              "id": "n1828122367_1",
+              "path": "observations/N1828122367_1_CALIB.IMG",
+              "labelPath": "observations/N1828122367_1_CALIB.LBL",
+              "observerLatitude": 3.52,
+              "observerWestLongitude": 226.25,
+              "sunLatitude": 25.3,
+              "sunWestLongitude": 207.52,
+              "rangeKm": 37235.3,
+              "northAzimuthDegrees": 180.07,
+              "center": [
+                410.3,
+                524.8
+              ],
+              "pixelAngleMicroradians": 5.989697719921734,
+              "backgroundMaximum": 0.003
+            },
+            "blue": {
+              "id": "n1828122742_1",
+              "path": "observations/N1828122742_1_CALIB.IMG",
+              "labelPath": "observations/N1828122742_1_CALIB.LBL",
+              "observerLatitude": 3.54,
+              "observerWestLongitude": 228.66,
+              "sunLatitude": 25.31,
+              "sunWestLongitude": 209.51,
+              "rangeKm": 35251.0,
+              "northAzimuthDegrees": 180.04939308244178,
+              "center": [
+                404.8495189123158,
+                525.6561533677619
+              ],
+              "pixelAngleMicroradians": 5.989697719921734,
+              "backgroundMaximum": 0.003
+            }
           }
         ],
         "transfer": {
@@ -305,6 +393,13 @@
           "longitudeDegrees": 56.389999999999986,
           "latitudeDegrees": 60.73,
           "zoom": 1.1
+        },
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 128,
+          "maximumGain": 2.3,
+          "maximumAngleDegrees": 70
         }
       }
     ]
