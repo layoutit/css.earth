@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -2167,6 +2167,7 @@
       "label": "Photosphere",
       "recipe": "raster",
       "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2285,6 +2286,7 @@
       "label": "Magnetic field",
       "recipe": "raster",
       "selector": "/surfaces/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2392,6 +2394,13 @@
           "verification": "bytes-verified"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "jsoc-hmi-cr2311-radial-field-synoptic-map",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -2399,6 +2408,7 @@
       "label": "Chromosphere",
       "recipe": "raster",
       "selector": "/surfaces/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2509,6 +2519,13 @@
           "verification": "bytes-verified"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "sdo-aia-304-cr2311-synoptic-map",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -2516,6 +2533,7 @@
       "label": "Corona",
       "recipe": "raster",
       "selector": "/surfaces/3",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2626,6 +2644,13 @@
           "verification": "bytes-verified"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "sdo-aia-171-cr2311-synoptic-map",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/3/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -2633,6 +2658,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -2661,6 +2687,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "photosphere"
@@ -2685,6 +2712,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "magnetic"
@@ -2709,6 +2737,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "chromosphere"
@@ -2733,6 +2762,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "corona"
@@ -2753,5 +2783,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "sun",
+    "materialSha256": "e40dac6ef765bd937c64328b9f444aec237f567ae9e775ce4389f4c3215d1a75",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }
