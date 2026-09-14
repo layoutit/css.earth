@@ -33,7 +33,7 @@ Coverage remains partial and the grid marks gaps. The Thomas mosaic retains phot
 
 Image 107315039 failed to establish four separate registration checks at the retained tolerance and is excluded. The two selected photographs supersede the older single-image presentation; their Thomas-mosaic registration checks share mission observations and are not independent absolute cartography.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="gaspra-source-record"></a>
 <a id="source-survey-and-selection"></a>
@@ -48,16 +48,7 @@ Image 107315039 failed to establish four separate registration checks at the ret
 
 **Source survey and selection**
 
-Survey completed 2026-09-07. Authoritative labels and relevant descriptions are pinned in `source/reference/`.
-
-| Candidate | Contribution and disposition |
-| --- | --- |
-| [Thomas optical shape and mosaic](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/) | **Included.** The 2° planetocentric radius table derives from Galileo stereogrammetry and limb matching. Its associated 720×360, 2 pixels/degree mosaic uses SSI images 107318313 and 107318326, with best source detail about 55 m/pixel. Exact zero explicitly marks poor or missing coverage. |
-| [Stooke shape](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/951gaspra.xml) | **Excluded in favor of the registered Thomas pair.** A coarser 5° model with a documented modification for light-curve agreement. Its newer publication date does not mean better spatial sampling; the model changes are separate from the Thomas mosaic's source geometry. |
-| [Stooke global mosaics and detailed sheets](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html#gaspra) | **Inspected; deferred as a replacement.** They add low-resolution coverage and finer display sampling, based on Thomas positional control. The 3600×1800 cylindrical source is pinned as a comparison. It mixes strongly oversampled imagery, seams and gray gaps without a supplied validity mask identified in this survey. The Thomas map provides explicit missing-data semantics and a directly associated shape. The Stooke image independently supports north-up, east-right array orientation. |
-| [Radiometrically calibrated Galileo SSI images](https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/) | **Included as a separate I/F view:** the selected clear-filter pair, using the camera catalog accompanying the Thomas shape. The archive’s nadir calibration workaround prevents its own geometry calculation; it is not a ready global texture. See the registration and quality checks below. |
-| [2026 color/geometry cubes](https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.color_geom_cubes_v1.0/) | **Deferred, useful future source.** Six 150×150 color/angle cubes and 350×350 geometry cubes, spatially registered by assumed translations and tied to the Thomas model. They contain calibrated six-filter radiance plus incidence/emission/phase, but no latitude/longitude backplanes or photometric correction. A new camera-to-shape registration would be required; this release is not treated as missing or as a ready global color map. |
-| [NIMS spectral image cube](https://sbn.psi.edu/pds/resource/gaspracube.html) and [point spectra](https://sbn.psi.edu/pds/resource/gaspraspec.html) | **Excluded from these surface views.** They are valuable infrared measurements, but point-perspective spectral/point observations are not a global optical surface or elevation map. No composition or thermal lens is inferred from them. |
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Coordinates and interpretation**
 

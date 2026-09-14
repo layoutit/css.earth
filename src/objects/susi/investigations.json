@@ -1,0 +1,85 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "susi",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 5856: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-5856.txt. Model 5856, version 2019-10-23, pole (301°, -10°), period 4.6224 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/susi/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/5856",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/susi/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/susi/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "The retained calibration uses 21.82 ±1.4 km. mean radiometric diameter from IRAS flux-based albedo and H",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/susi/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/susi/source/reference/calibration.json",
+        "https://doi.org/10.26033/pf3k-m168"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The Shape view uses the shared normal grid because the source release provides no registered surface imagery. The grid is a coordinate guide, not regolith, measured albedo or an optical photograph.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/susi/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "damit-alternatives",
+      "subject": "Other DAMIT shape solutions",
+      "status": "unresolved",
+      "finding": "The live DAMIT export lists these other models for this target: 5857: pole (125°, -15°), 4.62239 h, version 2019-10-23. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "Independent shape, spin or scale evidence distinguishes these alternatives, or a changed release offers a demonstrably better supported model.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/5857"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    }
+  ]
+}

@@ -22,7 +22,7 @@ This is the paper’s conservative single-lobe working model, not a uniquely res
 
 The display prime meridian is arbitrary; accelerated rotation and lighting do not propagate a measured present-day attitude.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="bacchus-sources"></a>
 <a id="shape-and-physical-interpretation"></a>
@@ -55,13 +55,6 @@ Pinned JPL Horizons geometric heliocentric ICRF elements at JD 2461286.5 and vec
 
 **Source survey**
 
-- [Original low-density single-lobe radar mesh](https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj): **included**. All 256 vertices / 508 faces retained, with dimensions matching the adopted1999 paper solution. No unnecessary subdivision.
-- [Higher-density PDS representation2048vertices/4092faces](https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/2063bacchus.tab): **excluded**. The first 256 vertices equal the selected JPL source, but extra vertices change extents slightly. The paper’s 256 parameter model and coarse radar resolution do not justify treating subdivision as measured surface detail. PDS label supports km/principal-axis frame.
-- [Alternative two-lobe fit, optical lightcurves and radar albedo](https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf): **included as qualification**. The authors adopt the conservative single-lobe working model. Two-lobe topology and surface composition are not uniquely established; no invented texture.
-- [Spitzer thermal-infrared observations in 2006, 2015, 2017](https://pds-smallbodies.astro.umd.edu/data_other/sptz_02_INNER/a2063.shtml): **excluded from surface lens**. Disk-integrated observations do not provide registered resolved terrain, photographic texture, or a spatial temperature map.
-
-The lower palette boundary includes the source triangle-interior minimum (−0.1217848004 km relative radius), computed by independent full-mesh projection of the origin; vertex-only extrema would miss that minimum.
-
-The delivered Elevation atlas records 0 withheld interior texels of 3,783,647 (0.0000%). The maximum accepted projection distance is 0.000000 m. Independent decoded-atlas checks include 21 final WebP pixel anchors: maximum channel error 2/255 against the source scalar and cartographic-relief recipe. This bound describes those sampled pixels, not every atlas pixel.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 </details>

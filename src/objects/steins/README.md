@@ -35,7 +35,7 @@ The 18:37:16 candidate needed a 1.56 gain, above the 1.35 limit; later frames ha
 
 **Faithfulness status:** The OSIRIS photographic lens is deferred. The separate Stooke Monochrome map remains source material with its own published control; it does not promote the OSIRIS frames to a registered surface.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="steins-source-record"></a>
 <a id="selected-data-and-bounded-survey"></a>
@@ -51,14 +51,7 @@ The 18:37:16 candidate needed a 1.56 gain, above the 1.35 limit; later frames ha
 
 **Selected data and bounded survey**
 
-| Candidate | Contribution and decision |
-| --- | --- |
-| [Jorda, Gaskell and Kaasalainen shape, PDS 2013](https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/dataset.shtml), DOI 10.26007/55FK-CB77 | **Included**. `steins_cart.wrl` has 10,242 vertices and 20,480 triangles in km. The wrapped VRML is parsed directly; source axes, connectivity and physical scale are preserved before meshoptimizer simplification. |
-| [Stooke Small Bodies Maps V3](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html) | **Included** Monochrome. Unannotated 3600×1800 cylindrical map, controlled by Leyrat2010. Higher-resolution visualization compilation than the referenced original figure, but heavily processed and not calibrated reflectance. The gridded and named companions establish the projection and remain reference documents. |
-| [Rosetta NAC reflectance release](https://pdssbn.astro.umd.edu/holdings/ro-a-osinac-4-ast1-steins-reflect-v1.0/dataset.shtml) | The NAC collection remains outside this view; the follow-up below uses the specifically qualified near-opposition WAC image. The earlier survey recorded: The actual release, index, dataset catalog and a resolved flyby image label were examined. Radiometrically calibrated and distortion-corrected 2048×2048 camera images are available; they are not a cylindrical mosaic. The inspected label has camera/quaternion geometry and explicitly lists the SPICE kernels used. Its optional image point-of-interest intercept is `N/A`; the file remains a camera image rather than a geographic map. Reliable reprojection would require the mission camera and SPICE geometry chain plus a source-supported photometric model. None is invented here. |
-| [Rosetta NAC stray-light corrected reflectance](https://pds.nasa.gov/ds-view/pds/viewDataset.jsp?dsid=RO-A-OSINAC-4-AST1-STEINS-STR-REFL-V1.0) and WAC counterparts | **Deferred** with the camera-data route above. Their calibrated products address stray light/distortion, not the per-surface incidence/emission normalization required for a global albedo lens. Catalog availability is not evidence that a ready registered map exists. |
-| [Leyrat et al. 2010](https://doi.org/10.1016/j.pss.2010.04.003) and [Schröder et al. 2010](https://arxiv.org/abs/1702.00184) | **Excluded as texture inputs**. These studies provide photometric/variegation interpretations, and Leyrat controls the selected released map. The bounded archive/citation survey found the registered Stooke release and calibrated mission images; it did not locate an independently released, unannotated global corrected-albedo raster. This remains an unresolved dataset candidate, not a claim no such data exist. |
-| USGS/LPI cartography and IAU nomenclature | **Reference only**. Searches identified nomenclature and annotated image products, not a higher-resolution registered science raster for this package. |
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Geometry and accuracy**
 

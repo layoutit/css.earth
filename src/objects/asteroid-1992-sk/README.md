@@ -22,7 +22,7 @@ This is the published 2006 combined radar and lightcurve model. The north polar 
 
 Prime-meridian display phase is arbitrary. Lighting does not claim an absolute current rotational attitude.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="1992-sk-sources-and-preparation"></a>
 <a id="frame-and-appearance"></a>
@@ -47,13 +47,7 @@ Pinned JPL Horizons elements and independent vectors at JD 2461286.5 and ±30 da
 
 **Independent archive and bounded data survey**
 
-The PDS radar bundle (Lawrence and Benner, 2020; https://doi.org/10.26033/xtkf-wz81) supplies the corresponding a10115_1992sk.obj and XML label. Every parsed vertex and triangle index matches the consumed JPL file exactly, despite formatting differences. The pinned bundle description explicitly identifies kilometer units, center-of-mass origin, principal axes and positive-Z spin axis. Its label describes radar image resolution of 19 m. Facet density and display texel density are not observation resolution.
-
-The pinned PDS spin table records ecliptic pole (99°,-3°), 7.3182 h period, and phase 243° at 1999-02-03 00:00:00. The original paper's pole uncertainties are ±5° and period uncertainty ±0.0003 h (three sigma). These are archival model parameters. The app retains this model's axes and period with arbitrary display phase; the archival epoch is not propagated into a current attitude. The 2006 paper's nominal equal-volume diameter is 1.0 ± 0.2 km and the northern structure may be a fitting artifact.
-
-The pinned [Ďurech et al. (2022) primary paper](https://doi.org/10.1051/0004-6361/202141844) fits later lightcurves with another convex model. Its Table 1 gives pole (94° ± 10°,-56° ± 5°), period 7.320232 ± 0.000010 h at JD 2451192.0, and positive rotational acceleration (8.3 ± 0.6) × 10⁻⁸ rad/day². This differs materially from the historical radar spin interpretation. No source registration is available here to apply that newer pole to the archived radar mesh, and the constant-period display does not claim to model YORP evolution.
-
-Survey decision: retain the calibrated JPL/PDS radar shape plus its source-derived Elevation. The original radar and optical lightcurves constrain geometry and spin, not a resolved optical texture. Gravity/slope estimates in the original paper assume a bulk density and do not supply an independently observed surface field. The newer lightcurve solution is an unregistered alternative shape. No resolved optical map or independently registered composition, temperature, gravity or slope grid was identified in this bounded source survey.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Delivered atlas anchors**
 

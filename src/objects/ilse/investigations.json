@@ -1,0 +1,157 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ilse",
+  "entries": [
+    {
+      "id": "survey-selected-model",
+      "subject": "DAMIT 864: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-864.txt. Model 864, version 2016-01-04, pole (2°, 85°), period 84.995 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ilse/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/864",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/3311/shape.txt",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ilse/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ilse/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "survey-damit-documentation",
+      "subject": "DAMIT documentation",
+      "status": "included",
+      "finding": "[DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ilse/README.md",
+        "https://damit.cuni.cz/projects/damit/pages/documentation"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2016-new-and-updated-convex-shape-models-of-asteroids-",
+      "subject": "Hanuš et al. (2016), New and updated convex shape models of asteroids based on optical data from a large collaboration network",
+      "status": "included",
+      "finding": "[Hanuš et al. (2016), New and updated convex shape models of asteroids based on optical data from a large collaboration network](https://ui.adsabs.harvard.edu/abs/2016A%26A...586A.108H) — original model publication record.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ilse/README.md",
+        "https://ui.adsabs.harvard.edu/abs/2016A%26A...586A.108H"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-akari-acua",
+      "subject": "AKARI AcuA",
+      "status": "included",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 37.03 ± 0.61 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 249 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ilse/README.md",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ilse/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2016-a-a-586-a108",
+      "subject": "Hanuš et al. (2016), A&A 586, A108",
+      "status": "included",
+      "finding": "[Hanuš et al. (2016), A&A 586, A108](https://arxiv.org/pdf/1510.07422) — retained primary publication; see the body-specific selection and calibration above.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ilse/README.md",
+        "https://arxiv.org/pdf/1510.07422"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The release supplies no registered global surface imagery or measured local terrain.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ilse/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "An alternative pole remains possible; no unique orientation is claimed. AKARI thermal effective diameter provides only an explicit volume-scale approximation. Alternative archive solutions: model 865, pole ['222', '41'], [Model 865](https://damit.cuni.cz/projects/damit/asteroid_models/view/865) The live DAMIT export lists these other models for this target: 865: pole (222°, 41°), 84.995 h, version 2016-01-04. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ilse/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/865",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "versioned-view-evidence",
+      "subject": "Versioned browser evidence",
+      "status": "unresolved",
+      "finding": "The README records two browser cases before final integration, with an asset comparison to the integrated files, but no tested code revision for those cases. This is an evidence limitation, not proof of a current rendering defect.",
+      "revisitWhen": "A focused browser check identifies the tested revision, relevant served asset pins and capture settings, or the original report can be reliably bound to that revision and its dependencies.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ilse/README.md#evidence"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

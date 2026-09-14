@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "nereus",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original Nereus_alt1.mod.wf](https://echo.jpl.nasa.gov/asteroids/shapes/Nereus_alt1.mod.wf). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf): Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy. The paper and original geometry are pinned beside the recipe. Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.165 km sphere, from -0.05 to 0.1 km. The scalar is evaluated at the closest source triangle point, not the first center-ray intersection. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments. The live JPL index was checked against the actual preparation input shape/Nereus_alt1.mod.wf; it still links this exact model. The page is dated 2024-08-10, not a new scientific-model release. This confirms the published source route, not new mesh bytes, optical imagery or independent source-fit accuracy.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/nereus/README.md",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/Nereus_alt1.mod.wf",
+        "https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/nereus/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-1",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The [PDS SBN shape index](https://sbn.psi.edu/pds/shape-models/) and JPL model and publication listings were checked for complementary released products. The selected original mesh remains the body geometry; no calibrated optical mosaic, optical reflectance map, geology map or separate elevation survey was located in those releases. This bounded survey is not a claim that no other dataset exists. No resolved optical surface map is supplied.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/nereus/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "preferred-model-identity",
+      "subject": "Nereus_alt1 physical model identity",
+      "status": "included",
+      "finding": "Independently measured vertex extents and volume identify the preferred Table 3 model despite the alt1 filename. The thicker 0.494 × 0.320 × 0.317 km alternative is not this mesh. Reference-radius uncertainty halves the paper’s asymmetric diameter uncertainty.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/nereus/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "radar-gallery-as-texture",
+      "subject": "2021 JPL radar gallery as surface texture",
+      "status": "excluded",
+      "finding": "The newer, finer observations use delay-Doppler coordinates, not a registered optical map.",
+      "revisitWhen": "A released spatially registered product derived from these observations with its quantity and mapping documented.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/nereus/README.md",
+        "https://echo.jpl.nasa.gov/Gallery/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "updated-radar-mesh",
+      "subject": "Numerical shape from the 2021 radar observations",
+      "status": "unresolved",
+      "finding": "The recorded JPL gallery survey found newer observations but the checked download index still linked the older numerical model. An updated mesh was not acquired; this is not evidence that none exists.",
+      "revisitWhen": "A released numerical reconstruction of the newer observations, with scale, frame and uncertainty documentation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/nereus/README.md",
+        "https://echo.jpl.nasa.gov/Gallery/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

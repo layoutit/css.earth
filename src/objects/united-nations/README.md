@@ -86,16 +86,7 @@ Accelerated viewer rotation is illustrative. Orbital position remains owned by t
 
 <a id="available-views-and-candidate-survey"></a>
 
-<details>
-<summary>Available views and candidate survey</summary>
-
-| Source | Disposition |
-| --- | --- |
-| [Current DAMIT model record](https://damit.cuni.cz/projects/damit/asteroid_models/view/1154) | Include original shape and published spin. The examined release supplies no registered optical map, geological map or resolved albedo field. |
-| [Thermal sizing data](https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D6000) | Include a global size estimate and uncertainty only. Unresolved thermal flux/albedo measurements cannot supply spatial texels or a temperature map. |
-| [Other DAMIT matches](https://damit.cuni.cz/?q=6000) | Inspected for calibrated replacements; retain the selected solution and disclose available alternatives. |
-
-</details>
+The [investigation ledger](investigations.json) records the source survey and alternative models.
 
 <a id="intake-evidence-and-remaining-qualification"></a>
 

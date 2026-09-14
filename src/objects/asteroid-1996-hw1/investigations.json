@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "asteroid-1996-hw1",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "1996 HW1 is a contact-binary near-Earth asteroid reconstructed from Arecibo radar and optical lightcurves. The [original NASA/JPL mesh](https://echo.jpl.nasa.gov/asteroids/shapes/1996hw1.obj) and [study](https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf) are pinned by byte count and SHA-256. Shape uses the normal missing-imagery grid on the original source geometry. No regolith texture, optical reflectance or artificial crater imagery is supplied. Shadows default off; prepared directional lighting is available through the common setting. Elevation colors radius of the closest original source-surface point minus 1.01 km. The palette spans -0.57 to 0.95 km, enclosing the original mesh including triangle interiors. It is derived from the same radar model, not independent measured topography. The live JPL index was checked against the actual preparation input shape/1996hw1.obj; it still links this exact model. The page is dated 2024-08-10, not a new scientific-model release. This confirms the published source route, not new mesh bytes, optical imagery or independent source-fit accuracy.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1996-hw1/README.md",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/1996hw1.obj",
+        "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-1996-hw1/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The selected radar-shape release supplies geometry and spin information, not a registered optical surface map. No optical texture is selected in this package; this does not establish that every image archive was searched.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1996-hw1/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-1996-hw1/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-1",
+      "subject": "Original full source radar shape: included",
+      "status": "included",
+      "finding": "- [Original full source radar shape](https://echo.jpl.nasa.gov/asteroids/shapes/1996hw1.obj): **included**. The unmodified source has 1392 vertices and 2780 faces. Original kilometer coordinates are retained.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1996-hw1/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "Published physical properties, radar/lightcurve constraints and model uncertainty: included",
+      "status": "included",
+      "finding": "- [Published physical properties, radar/lightcurve constraints and model uncertainty](https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf): **included**. Half the 2.02 km volume-equivalent diameter in Magri et al. (2011), Table 3, with 8% diameter uncertainty. Original vertices are not rescaled.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1996-hw1/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "PDS source coordinate contract: included as qualification",
+      "status": "included",
+      "finding": "- [PDS source coordinate contract](https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-8567.radar.shape-model/data/a8567.xml): **included as qualification**. The paired a8567.tab has exactly the same numerical vertices and faces as the selected JPL OBJ. The label identifies kilometer units, modeled center of mass, principal axes and positive Z spin axis.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1996-hw1/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "SHERMAN thermophysical study (2017): deferred",
+      "status": "deferred",
+      "finding": "- [SHERMAN thermophysical study (2017)](https://www.sciencedirect.com/science/article/pii/S001910351730060X): **deferred**. The indexed study applies thermal modeling to multiple HW1 observations; full text could not be retrieved in this bounded survey. No thermal field, alternate scale, or surface texture is inferred from an unread source.",
+      "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1996-hw1/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-5",
+      "subject": "Radar images and optical/infrared spectra in the linked study: included as qualification",
+      "status": "included",
+      "finding": "- [Radar images and optical/infrared spectra in the linked study](https://echo.jpl.nasa.gov/asteroids/1996HW1/1996hw1.html): **included as qualification**. Radar delay-Doppler pixels overlap surface locations; disk-integrated spectra do not provide a registered photographic or compositional map. The paper describes weak radar coverage and optical constraints over nearly the entire shape.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1996-hw1/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-6",
+      "subject": "Elevation source-distance rejection",
+      "status": "included",
+      "finding": "The delivered Elevation atlas withholds 2,116 of 5,789,047 interior texels (0.0366%). Maximum accepted correspondence is 25.999939 m. 23 independent decoded final WebP anchors differ from expected source scalar/relief RGB by at most 2/255 per channel. This is a sampled pixel result, not an every-pixel bound.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1996-hw1/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}
