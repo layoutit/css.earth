@@ -1,0 +1,96 @@
+{
+  "date": "2026-09-14",
+  "baseCommit": "e6ed07b7f549388434520ff17a130d600a7c8f77",
+  "tested": "Uncommitted Galileo addition; the exact runtime, CSS and source-recipe hashes are in delivery.json.",
+  "browser": "Codex in-app Chromium",
+  "server": "http://127.0.0.1:4294",
+  "dataset": "galileo",
+  "retainedSurfaceElements": 450,
+  "singleMountedObject": "europa",
+  "observedSurfaceUrls": [
+    "/scenes/europa/europa-galileo@2x.webp",
+    "/scenes/europa/europa-poles-galileo@2x.webp"
+  ],
+  "checks": [
+    "Selected Galileo and switched back to Monochrome on desktop and mobile.",
+    "Minimap keyboard and pointer navigation reached regional and polar footprints.",
+    "The existing Shadows control shaded the same photographed surface.",
+    "Mobile information sheet expanded and lowered by dragging; document width remained 390 pixels at a 390-pixel viewport.",
+    "No browser console errors were observed for the completed interactions."
+  ],
+  "captures": [
+    {
+      "image": "regional.png",
+      "view": "Initial regional focus: 10 degrees N, 178 degrees E",
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "dpr": 1
+      },
+      "shadows": false,
+      "sha256": "a14aea7bd94ffade08f21bdb75194a14088412d6a12fc460f536387b9059e340"
+    },
+    {
+      "image": "southern-regions.png",
+      "view": "Minimap keyboard navigation: approximately 40.4 degrees S, 178 degrees E",
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "dpr": 1
+      },
+      "shadows": false,
+      "sha256": "37514ebc4c1248197c74c735e4f2c2a570b9eeef45c69e6f863f1a5548ce3e6f"
+    },
+    {
+      "image": "south-polar.png",
+      "view": "Minimap pointer navigation: approximately 80.04 degrees S, 177.6 degrees E",
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "dpr": 1
+      },
+      "shadows": false,
+      "sha256": "a7b64ee180b3e043edce06fd2124ff9a519a3b2bd712440a9ffd22be355a8a53"
+    },
+    {
+      "image": "shadows.png",
+      "view": "Regional focus with the shared Shadows control enabled",
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "dpr": 1
+      },
+      "shadows": true,
+      "sha256": "48c0f85022521097c8375c3e4e5aa557c7851f6da94fbaa9e7de1f76f9329ceb"
+    },
+    {
+      "image": "mobile-controls.png",
+      "view": "Galileo selected through the expanded mobile information sheet",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "shadows": false,
+      "sha256": "9ab7605e7f327ef38d41115a05f4832c1afb7e3fe7e7153b3dcf41d95744d328"
+    },
+    {
+      "image": "mobile-surface.png",
+      "view": "Same mobile selection with the information sheet dragged down",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "shadows": false,
+      "sha256": "cc6232bc8c1add835d6fc33cc14150d64019327f99c37d14c85137a32f501498"
+    }
+  ],
+  "matchedUnchangedReference": "pixelmatch.json",
+  "limits": [
+    "These are real browser captures, not full catalogue/browser conformance or physical-phone memory measurements.",
+    "A bare dataset hash selects Galileo without applying its focus during initial mount; selecting Galileo from the control applies the regional focus. Share a saved view URL to preserve framing.",
+    "The retained polar sprites remain 1024 by 512 pixels at detailed density; extreme close zoom shows their existing sampling limit.",
+    "Runtime source, geometry and camera implementation are unchanged. The prepared view adds only its texture resources, control and existing-contract destination."
+  ]
+}

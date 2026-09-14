@@ -61,6 +61,23 @@ test('standalone lineage recovery never claims a fresh preparation, including wi
   assert.ok(verified.sources.every(source => source.verification === 'bytes-verified'));
 });
 
+test('controlled raster mosaics bind every consumed photograph, beyond the representative source', async t => {
+  const context = await fixture(t);
+  const recipePath = resolve(context.source, 'preparation/raster.json'), recipe = await read(recipePath);
+  const surface = requireRecord(requireArray(recipe.surfaces)[0]);
+  surface.science = { kind: 'terrestrial-mosaic', format: 'controlled-geotiff', consumer: 'surfaces',
+    profile: { displayRange: [0, 2], filter: 'CLEAR' } };
+  const bytes = JSON.stringify(recipe);
+  await writeFile(recipePath, bytes);
+  const descriptorPath = resolve(context.objectDirectory, 'object.json'), descriptor = await read(descriptorPath);
+  const sources = requireArray(requireRecord(requireRecord(descriptor.properties).recipe).sources);
+  requireRecord(sources[0]).sha256 = hash(bytes);
+  await writeFile(descriptorPath, JSON.stringify(descriptor));
+  const document = await prepareObjectProvenance(context);
+  assert.deepEqual(productSourceIds(document, 'surface').sort(), ['observation', 'unused']);
+  assert.ok(document.sources.every(source => source.verification === 'bytes-verified'));
+});
+
 test('preparation binds exact input and output bytes and excludes unused archive entries', async t => {
   const context = await fixture(t), document = await prepareObjectProvenance(context);
   assert.equal(document.basis, 'prepared');

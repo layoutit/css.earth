@@ -4,6 +4,8 @@
 
 - The [USGS Voyager/Galileo global mosaic](https://astrogeology.usgs.gov/search/map/europa_voyager_galileo_ssi_global_mosaic_500m) is a 19,631 × 9,816 monochrome GeoTIFF on a nominal 500 m grid.
 
+- **Galileo** adds 332 CLEAR-filter photographs from the [USGS controlled individual-image release](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/), described by [Bland et al. (2021)](https://doi.org/10.1029/2021EA001935). These calibrated, map-projected observations use the published control network. They supply a separate regional view; the global Monochrome mosaic is retained.
+
 - The **Enhanced color** lens uses the [USGS controlled Galileo observations](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/) (CC0), by Bland, Weller and colleagues. The three sequences are G1ESGLOBAL01 (1996-06-28), 12ESGLOCOL01 (1997-12-16), and 14ESGLOCOL01 (1998-03-29).
 
 - The Elevation view adds the released [USGS controlled Agenor DTM](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/).
@@ -17,6 +19,12 @@
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
 ## Evidence
+
+The 14 September 2026 **Galileo** preparation uses 301 equirectangular products and 31 products whose inspected STAC records list only polar GeoTIFFs. The 12,288 × 6,144 geographic preparation covers **15.264% of the sphere**, with 330 photographs contributing visible pixels. The lower preparation level covers 15.184%; its larger complete sampling footprints withhold more edge pixels. Neither level clips any selected brightness values. The detailed surface downloads in 2.69 MB; all five added surface, pole and thumbnail files total 3.46 MB. These are regional photographs with gaps, rather than a replacement global mosaic.
+
+[Browser evidence](evidence/galileo/browser.json) · [Delivery and retained-scene checks](evidence/galileo/delivery.json) · [Two-product fresh restoration](evidence/galileo/restoration.json). Source lineage includes all 332 original GeoTIFFs, not only the representative image shown first in the source list. The prepared asset record retains per-image coverage at both levels. The existing eight views and their image bytes are retained.
+
+[Regional surface](evidence/galileo/regional.png) · [Southern terrain](evidence/galileo/southern-regions.png) · [Polar view](evidence/galileo/south-polar.png) · [Mobile](evidence/galileo/mobile-surface.png). The matched Monochrome crop has **0 / 302,500 changed pixels** at [Pixelmatch threshold 0.1](evidence/galileo/pixelmatch.json), with an identical repeat capture. This compares the retained view, not two different datasets. [Focused validation](evidence/galileo/checks.json): 31 checks pass; three shared startup-fixture failures and one shared import-closure failure reproduce on main `4b74bbfd5`. Strict preparation/tool TypeScript passes. All five new images were downloaded from their immutable public URLs and verified; all 135 old Europa asset files still reproduce their previous hashes. Full application/conformance checks were not run.
 
 The 14 September 2026 composition preparation adds **Ice signature**, **Fine ice**, and **Coarse ice**. [Reflectance evidence](evidence/composition/reflectance-values.json) and [model evidence](evidence/composition/model-values.json) compare all 64,800 geographic nodes in each of five converted grids, including the two retained uncertainty products, with the original release. Values agree exactly after float32 rounding; missing samples and the periodic seam retain their source meaning. [Fresh restoration](evidence/composition/restoration.json) downloads both original archives into an empty source root and reproduces all eleven composition manifest entries.
 
@@ -74,6 +82,10 @@ Composition conversion: **Ice signature** is the observed, photometrically corre
 
 ## Known problems
 
+- **Galileo:** Original illumination and brightness joins remain. The release is controlled on a sphere, not orthorectified against global terrain. Its relative control uncertainties are about 247 m in latitude and 307 m in longitude; absolute placement becomes less secure away from the Cilix anchor. These are published network statistics, not a per-pixel guarantee. The finest delivered geographic grid is about 798 m at the equator, so the 6–629 m native projected grids contain finer information than this fixed globe can display. Native grid spacing is not a claim of independent resolved detail. Existing globe lighting can add shading to shadows already photographed.
+
+- **Galileo delivery:** The detailed packed image is 12,480 × 9,216 pixels, about 439 MiB decoded as RGBA despite its 2.69 MB download. It is selected on demand. This was inspected in desktop Chromium and at mobile width, not profiled on a physical phone. Polar sprites retain the existing 1024 × 512 detailed dimensions. Selecting Galileo applies its regional focus; a bare dataset hash on first load uses the shared initial camera, so a saved view URL is needed to share the framing.
+
 The existing atlas seams can remain visible at extreme close zoom. This change
 retains the geometry and its packing layout.
 
@@ -98,6 +110,23 @@ Feature notes: 12 of the labelled names carry a caption note, the lead summary o
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
+
+<details>
+<summary>Galileo regional photographic preparation</summary>
+
+The selected products are radiometrically calibrated Float32 I/F images from the Galileo SSI CLEAR filter (0.611 µm). The published USGS workflow corrected pointing through photogrammetric bundle adjustment, reassembled interrupted image fragments, and projected them on a 1,560,800 m sphere with planetocentric latitude and east-positive longitude. It did **not** photometrically normalize these products. Original GeoTIFFs, coordinates, capture identities, byte counts and hashes are pinned in [the source manifest](source/manifest.json); each has a download operation and a canonical source record. Native files total 1.55 GB and are restored rather than committed.
+
+Selection takes the released CLEAR-filter equirectangular products below 800 m projected grid spacing, plus the 31 CLEAR products whose inspected STAC records list only polar GeoTIFFs. This selects 332 of the release's 481 Galileo observations. The matching equatorial versions are used where an image also has a polar projection, avoiding duplicate ingestion. The other observations are not declared absent or unusable; they are outside this regional selection.
+
+The [controlled-map decoder](../../../tools/objects/observation/controlled-map-mosaic.mts) verifies the actual GeoTIFF projection, sphere, affine grid, band, dimensions and no-data value before sampling. Bounds come from the raster rectangle, not a cropped catalogue footprint. Equirectangular downsampling integrates native pixel squares. Polar resampling uses a geographic subgrid at source-pixel spacing; this numerically approximates the curved footprint. At magnification, sampling is bilinear. Missing contributors, zero no-data and ISIS special values stay missing; valid black pixels are supported when zero is not the declared no-data value.
+
+One valid photograph supplies each output pixel. Smaller projected pixel grids take precedence, with source ID breaking ties deterministically. This is a selection rule, not a claim of greater effective resolution everywhere. There is no cross-image averaging, feathering, fitted gain, invented terrain or color. Measured I/F remains floating point until a common display interval **0–2** is mapped to linear grayscale **0–1** and encoded with the [shared IEC sRGB transfer](../../../docs/color-preparation.md). This is a documented display exposure, not an albedo calibration or natural-color reconstruction. Selected values span approximately 0.000023–1.04185 at the detailed level; none reach the display clipping limits.
+
+The existing raster packer produces 6K/12K geographic levels in the unchanged latitude-band layout. Polar sprites sample the original controlled maps through the same projection and overlap policy. A separate 640 × 320 minimap shows coverage. The existing camera-focus contract opens near 178°E, 10°N; users can navigate to other footprints. The geometry, camera implementation, materials, lighting banks and prior variants are retained.
+
+A trial global replacement was rejected because brightness joins were worse than the retained mosaic. Global application of photometric parameters fitted to a particular terrain was not qualified. Those trial corrections do not enter this regional view; the ledger records the result and conditions for reopening it.
+
+</details>
 
 <details>
 <summary>Detailed source survey, assumptions and preparation</summary>

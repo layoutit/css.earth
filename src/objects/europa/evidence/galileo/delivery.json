@@ -1,0 +1,170 @@
+{
+  "date": "2026-09-14",
+  "baseCommit": "e6ed07b7f549388434520ff17a130d600a7c8f77",
+  "tested": "Uncommitted Galileo addition above this base; exact files identified below.",
+  "codePins": {
+    "tools/objects/observation/controlled-map-mosaic.mts": "0d60d7eecf272a4f9975d834105fc6ed556c4bafdbf659151ee25680c420a7d2",
+    "tools/objects/observation/interpret.mts": "b502b66d59705204c46b8dd6a726b68e86dce2b5502286308641a1432ffbba16",
+    "tools/objects/provenance-recipes.mts": "b195923f3bd0768969335ba83b51d5767db8df848815f65ed9838a0fab9a668f",
+    "src/objects/europa/source/preparation/raster.json": "992fb1664ba436fa0b872e1832e068aa3341c1e0de146212e883784bbc236bc8",
+    "src/objects/europa/source/preparation/presentation.json": "4945f58e06db43a310a6fdb432ae42c338a50457aaf8aea8ed21159af94e9195",
+    "src/objects/europa/source/content/object.json": "71e083179c880ceaed1118cff87c9d1e2d4d7bdce55d1d08f191b7f4d1937884",
+    "src/objects/europa/prepared/runtime.refs.json": "f37438d16a396880362ad28350b566c81b98a22155504f7e34cde770298bd367",
+    "src/objects/europa/composition.css": "a15b0cfe2bcb27a51f73f8ba77a014c2aef5744a53e62dbf95d05e0f1ebf53c0"
+  },
+  "retained": {
+    "sections": [
+      "camera",
+      "sky",
+      "sun",
+      "tree",
+      "materials",
+      "heliocentricView",
+      "viewBindings",
+      "animations",
+      "features",
+      "motion",
+      "facing"
+    ],
+    "existingVariants": 32,
+    "existingAssets": 135,
+    "previousImageBytesVerified": true,
+    "sceneRefsSha256": "8e16a56dbdd419ddf8a52d1ecedc82933f3912fe01db01128e7df83360ef7df3",
+    "runtimeSourcesChanged": false
+  },
+  "source": {
+    "count": 332,
+    "bytes": 1554362780,
+    "pinListSha256": "54b0b23dfda3f2d3b6734ed13b73553f4cbc53fb633cd7d4a30704dc55cfc739",
+    "allInputsVerifiedAndDecodedDuringBake": true,
+    "freshRestoration": "restoration.json"
+  },
+  "preparation": {
+    "recipeSha256": "992fb1664ba436fa0b872e1832e068aa3341c1e0de146212e883784bbc236bc8",
+    "seconds": 186.934,
+    "maxRssMiB": 4176.96875,
+    "assets": {
+      "europa-lens-galileo.webp": {
+        "bytes": 540,
+        "sha256": "83324d43afe1994747af87d9e8ee8d4c7a3d7c68dc97c9f60ca84013baa1caf2"
+      },
+      "europa-galileo.webp": {
+        "bytes": 681548,
+        "sha256": "738a446acdc266a5030585a4be5b7a53c240feb0d3fb7c4c32a140c511d82618"
+      },
+      "europa-poles-galileo.webp": {
+        "bytes": 23884,
+        "sha256": "f2bbbf8de0e75437704b1a0e8f48b5b3c52588c8f0f57c77da41db46bb35e4fb"
+      },
+      "europa-galileo@2x.webp": {
+        "bytes": 2693178,
+        "sha256": "83127ac98b230ca757c3ca713d883791ff345f516b6f1e47bc0229639021432f"
+      },
+      "europa-poles-galileo@2x.webp": {
+        "bytes": 65330,
+        "sha256": "743707fd8b47eb6d948adcedecceafde18705d69e738345e944db61fb8638fde"
+      }
+    },
+    "profiles": {
+      "1": {
+        "method": "smallest-projected-pixel-valid-single-frame",
+        "sampling": {
+          "equirectangular": "native pixel-area integration; bilinear at magnification",
+          "polar": "geographic subgrid at source-pixel spacing; complete bilinear samples"
+        },
+        "photometricCorrection": false,
+        "display": {
+          "range": [
+            0,
+            2
+          ],
+          "encoding": "IEC sRGB"
+        },
+        "surfacePercent": 15.183622331990874,
+        "clippedHighlights": 0,
+        "clippedNegative": 0,
+        "minimum": 0.00012263604730833322,
+        "maximum": 1.0244990587234497,
+        "contributingFrames": 328
+      },
+      "2": {
+        "method": "smallest-projected-pixel-valid-single-frame",
+        "sampling": {
+          "equirectangular": "native pixel-area integration; bilinear at magnification",
+          "polar": "geographic subgrid at source-pixel spacing; complete bilinear samples"
+        },
+        "photometricCorrection": false,
+        "display": {
+          "range": [
+            0,
+            2
+          ],
+          "encoding": "IEC sRGB"
+        },
+        "surfacePercent": 15.264079997898541,
+        "clippedHighlights": 0,
+        "clippedNegative": 0,
+        "minimum": 0.000023013921236270107,
+        "maximum": 1.0418487787246704,
+        "contributingFrames": 330
+      }
+    }
+  },
+  "delivery": {
+    "freshPublicDownloadsVerified": true,
+    "totalBytes": 3464480,
+    "files": [
+      {
+        "filename": "europa-galileo.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/738a446acdc266a5030585a4be5b7a53c240feb0d3fb7c4c32a140c511d82618/europa-galileo.webp",
+        "bytes": 681548,
+        "sha256": "738a446acdc266a5030585a4be5b7a53c240feb0d3fb7c4c32a140c511d82618",
+        "width": 6240,
+        "height": 4608,
+        "rgbaDecodedMiB": 109.6875
+      },
+      {
+        "filename": "europa-galileo@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/83127ac98b230ca757c3ca713d883791ff345f516b6f1e47bc0229639021432f/europa-galileo@2x.webp",
+        "bytes": 2693178,
+        "sha256": "83127ac98b230ca757c3ca713d883791ff345f516b6f1e47bc0229639021432f",
+        "width": 12480,
+        "height": 9216,
+        "rgbaDecodedMiB": 438.75
+      },
+      {
+        "filename": "europa-lens-galileo.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/83324d43afe1994747af87d9e8ee8d4c7a3d7c68dc97c9f60ca84013baa1caf2/europa-lens-galileo.webp",
+        "bytes": 540,
+        "sha256": "83324d43afe1994747af87d9e8ee8d4c7a3d7c68dc97c9f60ca84013baa1caf2",
+        "width": 64,
+        "height": 64,
+        "rgbaDecodedMiB": 0.015625
+      },
+      {
+        "filename": "europa-poles-galileo.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/f2bbbf8de0e75437704b1a0e8f48b5b3c52588c8f0f57c77da41db46bb35e4fb/europa-poles-galileo.webp",
+        "bytes": 23884,
+        "sha256": "f2bbbf8de0e75437704b1a0e8f48b5b3c52588c8f0f57c77da41db46bb35e4fb",
+        "width": 512,
+        "height": 256,
+        "rgbaDecodedMiB": 0.5
+      },
+      {
+        "filename": "europa-poles-galileo@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/743707fd8b47eb6d948adcedecceafde18705d69e738345e944db61fb8638fde/europa-poles-galileo@2x.webp",
+        "bytes": 65330,
+        "sha256": "743707fd8b47eb6d948adcedecceafde18705d69e738345e944db61fb8638fde",
+        "width": 1024,
+        "height": 512,
+        "rgbaDecodedMiB": 2
+      }
+    ]
+  },
+  "limits": [
+    "No renderer, geometry, camera implementation or prior surface was rebuilt.",
+    "Published control-network accuracy is inherited, not independently re-solved.",
+    "Only two original inputs were freshly restored into an empty source root; all 332 had been retrieved and verified for this bake.",
+    "Desktop Chromium and mobile-width inspection are not physical-device memory or all-browser performance qualification."
+  ]
+}

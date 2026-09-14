@@ -57,16 +57,19 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       // A continuum mosaic names its frames under the science block; its `source` is their directory, not an input.
       const frames = Array.isArray(maybeRecord(maybeRecord(plan.science)?.synoptic)?.mapFiles);
       const used = [...(frames ? [] : [text(plan.source)]), ...paths(plan.coverage), ...paths(plan.science)];
+      const controlledMaps = maybeRecord(plan.science)?.kind === 'terrestrial-mosaic' && maybeRecord(plan.science)?.format === 'controlled-geotiff';
+      if (controlledMaps) used.push(...group(text(record(plan.science).consumer)));
       const outputUrls = [...numbers(raster.densities).map(d => name(plan.output, d, plan.id)), name(plan.thumbnail, 1, plan.id)];
       if (!raster.polesCombined) outputUrls.push(...numbers(raster.densities).map(d => name(raster.polesOutput, d, plan.id)));
       const emission = maybeRecord(raster.emission);
       if (emission) outputUrls.push(...numbers(raster.densities).flatMap(d => [name(emission.offLimbOutput, d, plan.id), name(emission.limbOutput, d, plan.id)]));
       const synoptic = maybeRecord(maybeRecord(plan.science)?.synoptic);
-      const nativePoles = plan.nativeSourcePoles || maybeRecord(plan.science)?.nativePhotographicSampling;
+      const nativePoles = plan.nativeSourcePoles || maybeRecord(plan.science)?.nativePhotographicSampling || controlledMaps;
       add(plan.id, 'raster', `/surfaces/${index}`, used, nativePoles
         ? 'Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.'
         : 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
         urls: outputUrls, interpretation: { falseColor: plan.falseColor,
+          ...(controlledMaps ? { controlledPhotographs: record(plan.science).profile, originalIllumination: true } : {}),
           ...(nativePoles ? { polarSampling: 'original-photograph-footprint' } : {}),
           ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}),
           ...(synoptic ? { synoptic: { kind: synoptic.kind, ...(synoptic.fits ? { fits: synoptic.fits } : {}), ...(maybeRecord(synoptic.continuum) ? { observationInterval: synoptic.continuum } : {}) } } : {}) },

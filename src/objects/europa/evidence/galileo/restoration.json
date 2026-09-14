@@ -1,0 +1,24 @@
+{
+  "date": "2026-09-14",
+  "scope": "Two representative native products restored through the acquisition plan into an empty source root; not a fresh download of all 332 photographs.",
+  "files": [
+    {
+      "id": "galileo-s0449967535_36",
+      "path": "galileo/s0449967535_36.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.equi.photr.tif",
+      "projection": "equirectangular",
+      "bytes": 1201668,
+      "sha256": "d9edf0696816534db3bc7cdccbd0b156a0aa7c95cfbbcb155aa16c63160288e6",
+      "matchesPin": true
+    },
+    {
+      "id": "galileo-s0466670100",
+      "path": "galileo/s0466670100.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670100/s0466670100.spola.photr.tif",
+      "projection": "polar-stereographic",
+      "bytes": 6489700,
+      "sha256": "954c4e74a3e3d10bac30e273f69bae6fd05c1eb0f66c59360c604772ff038c15",
+      "matchesPin": true
+    }
+  ]
+}
