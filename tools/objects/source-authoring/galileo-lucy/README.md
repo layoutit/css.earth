@@ -33,3 +33,40 @@ storage coordinates, nearest-neighbor enlargement and ×2 DN display gain; the
 report counts clipped pixels. This command neither fits a camera nor modifies
 the prepared scene. See the [Dactyl README](../../../../src/objects/dactyl/README.md)
 for the inspected result and remaining registration requirements.
+
+## Dactyl camera and orientation diagnostic
+
+Run `node tools/objects/source-authoring/galileo-lucy/fit-dactyl.mts` from the
+repository root with Node 24. It uses only checked-in inputs and writes to
+`output/dactyl-registration/`; an optional first argument changes that directory.
+It runs serially and does not prepare or mount a scene.
+
+The command verifies every byte pin in Dactyl's `evidence/registration/inputs.json`,
+compares the FITS storage array with original VICAR detector pixels, evaluates
+the original scan-platform CK at shutter-center SCET, and checks that calculation
+against the pinned native CSPICE fixture. It then fits an ellipsoid orientation
+from the bright limb and Acmon, with Celmis withheld. `solutions.json` retains
+all 576 starts in the scratch directory; `report.json` and
+`orientation-candidates.png` preserve the selected result and the alternative
+found after examining Celmis. The latter has no independent holdout.
+
+The fit uses the source instrument's focal length, pitch, optical center and
+radial distortion. It fits in source XYZ, before the existing preparation swap
+from source X/Y to CSS Y/X. The simplified orthographic envelope, rounded range
+and analyst feature picks make this an orientation experiment, not a new
+photographic preparation path. See the [body's interpretation and limits](../../../../src/objects/dactyl/README.md#camera-and-orientation-experiment).
+
+The independent [numerical fixture](../../../../tests/objects/fixtures/dactyl/galileo-pointing.json)
+records Python 3.12.14, SpiceyPy 8.2.0 and CSPICE N0067, the exact loaded kernels,
+load order, UTCs, API calls and native results. To repeat the native calculation
+in a SpiceyPy environment: clear the kernel pool, `furnsh` those three files in
+order, call `str2et(utc)` and `sce2c(-77, et)`, then
+`ckgp(-77001, ticks, 0.0, 'B1950')` and `ckgp(-77001, ticks, 0.0, 'J2000')`.
+The boresight is matrix row 2. Do not add half an exposure to the label's SCET,
+or treat the truncated frame-start SCLK as shutter center. The fixture is a
+comparison reference only; no production camera is generated from its numbers.
+
+The original mission products and kernels remain under their native notices.
+No paper text or figures are redistributed. README numerical claims cite the
+papers and the image/control definitions; detector previews retain NASA/JPL/Galileo
+SSI credit and their declared display gain.
