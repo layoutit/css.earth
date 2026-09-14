@@ -1,0 +1,103 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ryugu",
+  "entries": [
+    {
+      "id": "selected-v-band-reflectance",
+      "subject": "V-band reflectance",
+      "status": "included",
+      "finding": "JAXA ONC v06 corrected numeric map. Its 0–0.035 display is distinct from the brightness-matched color composite.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ryugu/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-color-composite",
+      "subject": "Color composite",
+      "status": "included",
+      "finding": "[Hirata et al. 2026 ONC mapping release](https://doi.org/10.7910/DVN/WW3IH0). Channels p/v/ul are false color, not natural color.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ryugu/README.md",
+        "https://doi.org/10.7910/DVN/WW3IH0"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-shape-and-elevation",
+      "subject": "Shape and Elevation",
+      "status": "included",
+      "finding": "[March 2020 SPC DSK](https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds), selected for registration. Elevation is radius minus 448 m, not gravitational height.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ryugu/README.md",
+        "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-equatorial-close-up",
+      "subject": "Equatorial close-up",
+      "status": "included",
+      "finding": "[JAXA JADE2 ONC I/F mosaic](https://jlpeda.jaxa.jp/en/product/archive/detail_02/), acquired during MASCOT deployment on 3–4 October 2018. It is a spacecraft photograph mosaic, not a lander photograph.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ryugu/README.md",
+        "https://jlpeda.jaxa.jp/en/product/archive/detail_02/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-thermal-inertia",
+      "subject": "Thermal inertia",
+      "status": "included",
+      "finding": "[JAXA JADE2 numeric map](https://jlpeda.jaxa.jp/en/product/archive/detail_02/), based on [Shimaki et al. (2020)](https://doi.org/10.1016/j.icarus.2020.113835). Model-derived resistance to heating and cooling, in J m⁻² K⁻¹ s⁻½.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ryugu/README.md",
+        "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
+        "https://doi.org/10.1016/j.icarus.2020.113835"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-spectral-slope",
+      "subject": "Spectral slope",
+      "status": "included",
+      "finding": "[JAXA JADE2 b–x map](https://jlpeda.jaxa.jp/en/product/archive/detail_02/), from ONC normal albedo and the distribution reported by [Kameda et al. (2021)](https://doi.org/10.1016/j.icarus.2021.114348). Units are µm⁻¹; it is neither terrain slope nor a mineral identification.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ryugu/README.md",
+        "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
+        "https://doi.org/10.1016/j.icarus.2021.114348"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

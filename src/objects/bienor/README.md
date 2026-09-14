@@ -18,7 +18,7 @@
 - Display longitude and absolute phase are arbitrary. Orbit context is fixed at 2026-09-03 TT.
 - Settings is hidden; optional Shadows were checked through the checkbox event. These reports do not establish a full-suite pass or physical-device performance.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods
 
@@ -33,9 +33,7 @@ The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3
 
 ### Source survey
 
-The reference ellipsoid does not reproduce all observed light-curve asymmetry. The paper’s irregular-shape, contact-binary, albedo and satellite scenarios are alternatives rather than uniquely measured geometry. No ring or satellite is displayed because the selected occultations do not establish their geometry. Integrated light curves and spectra are not surface maps.
-
-[The source survey](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#source-survey-dispositions) records the selections and alternatives. Published papers are cited, not relicensed or bundled. Credits and reuse terms for the authored approximation, ESO panorama, Inter font and HYG metadata are in [NOTICE.md](NOTICE.md) and the manifest.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 ### Orbit
 

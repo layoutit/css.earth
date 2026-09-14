@@ -48,19 +48,7 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 
 <a id="source-survey"></a>
 
-<details>
-<summary>Source survey</summary>
-
-[Model fields and mesh measurements](source/reference/damit-model.json).
-
-- [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/154) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/369/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
-- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [T. Michalowski (2004), Photometry and models of selected main-belt asteroids (I): 52 Europa, 115 Thyra, and 382 Dodona](https://ui.adsabs.harvard.edu/abs/2004A&A...416..353M/abstract) — original model publication record.
-- [M. Delbo and P. Tanga (2009), Thermal inertia of main belt asteroids smaller than 100 km from IRAS data](https://ui.adsabs.harvard.edu/abs/2009P%26SS...57..259D) — original model publication record.
-- [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 80.65 ± 0.88 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
-- [Delbo and Tanga (2009), Planetary and Space Science 57, 259–265](https://arxiv.org/pdf/0808.0869) — retained primary publication; see the body-specific selection and calibration above.
-
-</details>
+The [investigation ledger](investigations.json) records the source survey and alternative models.
 
 <a id="preparation-and-qualification"></a>
 

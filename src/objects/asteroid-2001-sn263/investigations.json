@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "asteroid-2001-sn263",
+  "entries": [
+    {
+      "id": "selected-1",
+      "subject": "PDS SN263 V1.0",
+      "status": "included",
+      "finding": "Original alpha mesh, model limits, pole and rotation metadata",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2001-sn263/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-2",
+      "subject": "Becker et al. (2015)",
+      "status": "included",
+      "finding": "Body identity and physical measurements",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2001-sn263/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-3",
+      "subject": "Fang et al. (2011)",
+      "status": "included",
+      "finding": "System interpretation",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2001-sn263/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

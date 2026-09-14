@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gaspra",
+  "entries": [
+    {
+      "id": "recorded-survey-1",
+      "subject": "Thomas optical shape and mosaic",
+      "status": "included",
+      "finding": "[Thomas optical shape and mosaic](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/) — **Included.** The 2° planetocentric radius table derives from Galileo stereogrammetry and limb matching. Its associated 720×360, 2 pixels/degree mosaic uses SSI images 107318313 and 107318326, with best source detail about 55 m/pixel. Exact zero explicitly marks poor or missing coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/gaspra/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "Stooke shape",
+      "status": "excluded",
+      "finding": "[Stooke shape](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/951gaspra.xml) — **Excluded in favor of the registered Thomas pair.** A coarser 5° model with a documented modification for light-curve agreement. Its newer publication date does not mean better spatial sampling; the model changes are separate from the Thomas mosaic's source geometry.",
+      "revisitWhen": "A changed source release adds independently useful geometry or metadata beyond the selected model; compare it before changing the displayed source.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/gaspra/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "Stooke global mosaics and detailed sheets",
+      "status": "deferred",
+      "finding": "[Stooke global mosaics and detailed sheets](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html#gaspra) — **Inspected; deferred as a replacement.** They add low-resolution coverage and finer display sampling, based on Thomas positional control. The 3600×1800 cylindrical source is pinned as a comparison. It mixes strongly oversampled imagery, seams and gray gaps without a supplied validity mask identified in this survey. The Thomas map provides explicit missing-data semantics and a directly associated shape. The Stooke image independently supports north-up, east-right array orientation.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/gaspra/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "Radiometrically calibrated Galileo SSI images",
+      "status": "included",
+      "finding": "[Radiometrically calibrated Galileo SSI images](https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/) — **Included as a separate I/F view:** the selected clear-filter pair, using the camera catalog accompanying the Thomas shape. The archive’s nadir calibration workaround prevents its own geometry calculation; it is not a ready global texture. See the registration and quality checks below.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/gaspra/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-5",
+      "subject": "2026 color/geometry cubes",
+      "status": "deferred",
+      "finding": "[2026 color/geometry cubes](https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.color_geom_cubes_v1.0/) — **Deferred, useful future source.** Six 150×150 color/angle cubes and 350×350 geometry cubes, spatially registered by assumed translations and tied to the Thomas model. They contain calibrated six-filter radiance plus incidence/emission/phase, but no latitude/longitude backplanes or photometric correction. A new camera-to-shape registration would be required; this release is not treated as missing or as a ready global color map.",
+      "revisitWhen": "Bind the released multiband cubes to the selected Thomas mesh using source-supported camera information, verify band alignment and quality masks with independent checks, and document the radiance/color interpretation. The working single-filter SSI route is a starting point, not qualification of these cubes.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/gaspra/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-6",
+      "subject": "NIMS spectral image cube and point spectra",
+      "status": "excluded",
+      "finding": "[NIMS spectral image cube](https://sbn.psi.edu/pds/resource/gaspracube.html) and [point spectra](https://sbn.psi.edu/pds/resource/gaspraspec.html) — **Excluded from these surface views.** They are valuable infrared measurements, but point-perspective spectral/point observations are not a global optical surface or elevation map. No composition or thermal lens is inferred from them.",
+      "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/gaspra/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "rejected-107315039",
+      "subject": "SSI image 107315039",
+      "status": "excluded",
+      "finding": "The candidate failed to establish four separate registration checks at the retained tolerance. Finer source sampling did not qualify its projection.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/gaspra/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ],
+      "revisitWhen": "Corrected source camera information or new independent controls resolve the failed checks without loosening tolerances."
+    }
+  ]
+}

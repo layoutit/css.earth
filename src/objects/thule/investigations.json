@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "thule",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "Shape and spin",
+      "status": "included",
+      "finding": "[DAMIT 16313](https://damit.cuni.cz/projects/damit/asteroid_models/view/16313)",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/thule/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/16313"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "Shape uses the shared missing-imagery grid. DAMIT's viewer illustrations are not source surface maps; no albedo, photographic color, regolith or composition is inferred.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/thule/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "[Alternative pole and 117 km calibrated shape.](https://damit.cuni.cz/projects/damit/asteroid_models/view/16314) — excluded alternative solution. Both solutions remain in the source. This view is explicitly model 16313, not a unique pole determination.",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/thule/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/16314"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "asterope",
+  "entries": [
+    {
+      "id": "survey-selected-model",
+      "subject": "Selected model",
+      "status": "included",
+      "finding": "[Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/1823) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/4019/shape.txt) — included unchanged. Nonconvex ADAM reconstruction constrained by adaptive optics and occultation; fine relief is unresolved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1823",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/4019/shape.txt"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-damit-documentation",
+      "subject": "DAMIT documentation",
+      "status": "included",
+      "finding": "[DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md",
+        "https://damit.cuni.cz/projects/damit/pages/documentation"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2017-volumes-and-bulk-densities-of-forty-asteroids-fro",
+      "subject": "Hanuš et al. (2017), Volumes and bulk densities of forty asteroids from ADAM shape modeling",
+      "status": "included",
+      "finding": "[Hanuš et al. (2017), Volumes and bulk densities of forty asteroids from ADAM shape modeling](https://ui.adsabs.harvard.edu/abs/2017A%26A...601A.114H) — original model publication record.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md",
+        "https://ui.adsabs.harvard.edu/abs/2017A%26A...601A.114H"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-akari-acua",
+      "subject": "AKARI AcuA",
+      "status": "included",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 93.02 ± 0.96 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2017-a-a-601-a114",
+      "subject": "Hanuš et al. (2017), A&A 601, A114",
+      "status": "included",
+      "finding": "[Hanuš et al. (2017), A&A 601, A114](https://arxiv.org/pdf/1702.01996) — retained primary publication; see the body-specific selection and calibration above.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md",
+        "https://arxiv.org/pdf/1702.01996"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "AO and occultation constrain broad shape; no resolved global reflectance or regolith texture is supplied.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "Alternative archive solutions: model 1093, pole ['322', '59'], [Model 1093](https://damit.cuni.cz/projects/damit/asteroid_models/view/1093)",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1093"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "versioned-view-evidence",
+      "subject": "Versioned browser evidence",
+      "status": "unresolved",
+      "finding": "The README records two browser cases before final integration, with an asset comparison to the integrated files, but no tested code revision for those cases. This is an evidence limitation, not proof of a current rendering defect.",
+      "revisitWhen": "A focused browser check identifies the tested revision, relevant served asset pins and capture settings, or the original report can be reliably bound to that revision and its dependencies.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md#evidence"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

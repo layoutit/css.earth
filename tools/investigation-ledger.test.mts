@@ -5,10 +5,19 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { INVESTIGATION_LEDGER_FILE, INVESTIGATION_LEDGER_SCHEMA, parseInvestigationLedger, readInvestigationLedgers } from './investigation-ledger.mts';
 import { fixtureRecord } from './test-values.mts';
+import { readCatalog } from './prepare-catalog.mts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 // The source survey a body README used to carry: list items led by a bold decision such as Included, Excluded or Selected.
 const SURVEY_ITEM = /^\s*[-*] \*\*(?:Included|Excluded|Unresolved|Deferred|Selected|Superseded|Not selected|Older interpretation|Literature)\b/m;
+
+test('every catalogued asteroid retains its source investigation decisions', async () => {
+  const [objects, ledgers] = await Promise.all([readCatalog(resolve(root, 'src/objects')), readInvestigationLedgers(root)]);
+  const recorded = new Set(ledgers.map(ledger => ledger.objectId));
+  const asteroids = objects.filter(object => object.classification === 'asteroid');
+  assert.ok(asteroids.length > 0);
+  assert.deepEqual(asteroids.filter(object => !recorded.has(object.id)).map(object => object.id), [], 'New asteroid packages need a ledger linked by their README.');
+});
 
 test('every investigation ledger parses, and its body README links it instead of repeating a source survey', async () => {
   const ledgers = await readInvestigationLedgers(root);

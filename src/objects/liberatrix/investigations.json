@@ -1,0 +1,137 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "liberatrix",
+  "entries": [
+    {
+      "id": "survey-selected-model",
+      "subject": "Selected model",
+      "status": "included",
+      "finding": "[Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/157) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/383/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/liberatrix/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/157",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/383/shape.txt"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-damit-documentation",
+      "subject": "DAMIT documentation",
+      "status": "included",
+      "finding": "[DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/liberatrix/README.md",
+        "https://damit.cuni.cz/projects/damit/pages/documentation"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-j-urech-2007-physical-models-of-ten-asteroids-from-an-observers-c",
+      "subject": "J. Ďurech (2007), Physical models of ten asteroids from an observers' collaboration network",
+      "status": "included",
+      "finding": "[J. Ďurech (2007), Physical models of ten asteroids from an observers' collaboration network](https://ui.adsabs.harvard.edu/abs/2007A&A...465..331D/abstract) — original model publication record.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/liberatrix/README.md",
+        "https://ui.adsabs.harvard.edu/abs/2007A&A...465..331D/abstract"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-akari-acua",
+      "subject": "AKARI AcuA",
+      "status": "included",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 43.17 ± 0.67 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/liberatrix/README.md",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2018-icarus-309-297-337",
+      "subject": "Hanuš et al. (2018), Icarus 309, 297–337",
+      "status": "included",
+      "finding": "[Hanuš et al. (2018), Icarus 309, 297–337](https://arxiv.org/pdf/1803.06116) — retained primary publication; see the body-specific selection and calibration above.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/liberatrix/README.md",
+        "https://arxiv.org/pdf/1803.06116"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The release supplies no registered surface imagery; the grid marks that gap.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/liberatrix/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/158"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "Ďurech2007 is the actual published collaboration-network shape source. Hanuš2018 TableA.3 uses its pole(95,68), period3.96820 h, QF3 and VS-TPM volume-equivalent diameter51.1±2.1 km. Only this uniform size transfer is applied to nominal DAMIT157. The alternative pole(280,74) has its own50.1±1.3 km fit and remains possible; the varied-model ensemble does not establish byte-identical local terrain. Alternative archive solutions: model 158, pole ['280', '74'], [Model 158](https://damit.cuni.cz/projects/damit/asteroid_models/view/158)",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/liberatrix/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/158"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "versioned-view-evidence",
+      "subject": "Versioned browser evidence",
+      "status": "unresolved",
+      "finding": "The README records two browser cases before final integration, with an asset comparison to the integrated files, but no tested code revision for those cases. This is an evidence limitation, not proof of a current rendering defect.",
+      "revisitWhen": "A focused browser check identifies the tested revision, relevant served asset pins and capture settings, or the original report can be reliably bound to that revision and its dependencies.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/liberatrix/README.md#evidence"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

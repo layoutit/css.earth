@@ -24,7 +24,7 @@ The display prime meridian is arbitrary; accelerated rotation and lighting do no
 
 The JPL release has more vertices than the 512-vertex fit discussed in the paper. Its sampling density is not observation resolution. The paper gives a model-dependent volume upper bound near 8.8 km³; rounded archival geometry is not a new physical measurement. The separate PDS release is thicker and has different coordinates. These variants are not claimed identical. Later thermophysical research favors a thinner/lightcurve-based interpretation; this package intentionally identifies the archived radar reconstruction.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="geographos-sources"></a>
 <a id="shape-and-physical-interpretation"></a>
@@ -55,12 +55,6 @@ Pinned JPL Horizons geometric heliocentric ICRF elements at JD 2461286.5 and vec
 
 **Source survey**
 
-- [Nonconvex kilometer-scale radar geometry](https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj): **included**. Unmodified JPL OBJ; its extents match the named radar model. Archived geometry is explicitly identified, including north-south ambiguity.
-- [PDS radar model at 8,192 vertices / 16,380 triangles](https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/1620geographos.tab): **excluded**. A different archival geometry: extents 5.112129×1.9997933×2.410471km and different first vertex. More vertices do not establish more independent resolving power; no silent substitute for the selected JPL version. PDS XML supplies family frame/units evidence, not exact byte identity.
-- [Thermophysical analysis and comparison of radar, flattened radar and lightcurve shapes](https://arxiv.org/abs/1407.2127): **included as qualification**. Concludes radar thickness can be overestimated. We preserve the cited radar release and disclose this alternative interpretation; no ad hoc flattening or invented correction.
-- [Lightcurve-derived convex shape and later YORP spin solutions](https://astro.troja.mff.cuni.cz/projects/damit/asteroids/view/206): **excluded from this radar presentation**. Distinct inversion assumptions and phase model. Useful future alternative, not a measured optical texture or a correction that can be spliced into the archived radar source.
-- [1994 Goldstone delay-Doppler observations 75–151 m](https://sbn.psi.edu/pds/resource/geograph.html): **excluded from surface lens**. Radar delay-Doppler pixels mix surface locations; cannot be treated as a registered optical/albedo texture.
-
-The delivered Elevation atlas records 1,286 withheld interior texels of 5,784,820 (0.0222%). The maximum accepted projection distance is 29.999850 m. Independent decoded-atlas checks include 23 final WebP pixel anchors: maximum channel error 2/255 against the source scalar and cartographic-relief recipe. This bound describes those sampled pixels, not every atlas pixel.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 </details>

@@ -1,0 +1,130 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "asteroid-2008-ev5",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "2008 EV5 is a small near-Earth asteroid with a radar-derived equatorial ridge interrupted by a large concavity. The [original NASA/JPL mesh](https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj) and [study](https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf) are pinned by byte count and SHA-256. Shape uses the normal missing-imagery grid on the original source geometry. No regolith texture, optical reflectance or artificial crater imagery is supplied. Shadows default off; prepared directional lighting is available through the common setting. Elevation colors radius of the closest original source-surface point minus 0.2 km. The palette spans -0.03 to 0.04 km, enclosing the original mesh including triangle interiors. It is derived from the same radar model, not independent measured topography.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2008-ev5/README.md",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj",
+        "https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The unmodified archive mesh is retained; no resolved optical surface map is supplied.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2008-ev5/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-1",
+      "subject": "Original full source radar shape: included",
+      "status": "included",
+      "finding": "- [Original full source radar shape](https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj): **included**. The unmodified source has 2000 vertices and 3996 faces. Original kilometer coordinates are retained.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2008-ev5/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "Published physical properties, radar/lightcurve constraints and model uncertainty: included",
+      "status": "included",
+      "finding": "- [Published physical properties, radar/lightcurve constraints and model uncertainty](https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf): **included**. Half the 400 ± 50 m equivalent diameter in Busch et al. (2011), Table 2. The archived mesh has a 405.2 m volume-equivalent diameter and is not rescaled to the rounded published value.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2008-ev5/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "Busch et al",
+      "status": "included",
+      "finding": "- [Busch et al. (2019) corrigendum](https://experts.azregents.edu/en/publications/corrigendum-to-radar-observations-and-the-shape-of-near-earth-ast/): **included as qualification**. Corrects the December 21 Goldstone delay-Doppler image resolution to 0.125 microseconds by 1.003 Hz. The authors state that the paper results are unaffected. It does not revise the adopted mesh or spin.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2008-ev5/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "WISE thermophysical constraints (Ali-Lagoa et al., 2013): excluded from spatial lenses",
+      "status": "excluded",
+      "finding": "- [WISE thermophysical constraints (Ali-Lagoa et al., 2013)](https://arxiv.org/abs/1310.6715): **excluded from spatial lenses**. Disk-integrated thermal fits infer effective diameter, thermal inertia and grain-size ranges. These are not resolved regolith imagery or a spatial temperature map; the radar vertices are not silently rescaled to the thermal-fit diameter.",
+      "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2008-ev5/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-5",
+      "subject": "Arecibo/Goldstone radar images and VLBA spin sense: included as qualification",
+      "status": "included",
+      "finding": "- [Arecibo/Goldstone radar images and VLBA spin sense](https://echo.jpl.nasa.gov/asteroids/2008EV5/2008ev5.html): **included as qualification**. VLBA speckle tracking distinguishes the retrograde solution. The north pole is poorly constrained; alternative flattening and facet-scale structures fit the data. Radar images cannot be used as a photographic texture.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2008-ev5/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-6",
+      "subject": "Elevation source-distance rejection",
+      "status": "included",
+      "finding": "The delivered Elevation atlas withholds 382 of 5,733,930 interior texels (0.0067%). Maximum accepted correspondence is 4.999841 m. 21 independent decoded final WebP anchors differ from expected source scalar/relief RGB by at most 8/255 per channel. This is a sampled pixel result, not an every-pixel bound.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2008-ev5/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

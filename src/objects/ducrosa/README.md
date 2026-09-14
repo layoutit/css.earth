@@ -71,16 +71,4 @@ The original co-rotating Cartesian frame is kept: positive Z is the rotation axi
 
 <a id="source-survey-and-credits"></a>
 
-<details>
-<summary>Source survey and credits</summary>
-
-- [DAMIT model record](https://damit.cuni.cz/projects/damit/asteroid_models/view/352) — selected original mesh and spin metadata.
-- [Original shape table](https://damit.cuni.cz/projects/damit/stored_files/open/1322/shape.txt) — counted XYZ vertices and one-based triangle indices.
-- [DAMIT documentation](https://damit.cuni.cz/pages/documentation) — units, frame, spin definitions and archive license.
-- [AcuA primary catalog](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) and [Usui et al. (2011)](https://arxiv.org/abs/1106.1948) — thermal diameter, field meanings and limitations.
-- [Hanuš et al. (2018)](https://arxiv.org/abs/1803.06116) — survey of accepted shape-aware size fits; included for Dike, Ducrosa and Petrina.
-- [Hanuš (2011), A study of asteroid pole-latitude distribution based on an extended set of shape models derived by the lightcurve inversion method](https://ui.adsabs.harvard.edu/abs/2011A%26A...530A.134H)
-
-The [source manifest](source/manifest.json) records input bytes and the calibration record. Source preparation keeps the established native PolyCSS `u` raster triangles, meshoptimizer reduction and prepared atlas path.
-
-</details>
+The [investigation ledger](investigations.json) records the source survey and alternative models.
