@@ -1,0 +1,15 @@
+{
+  "codeRevision": "e70004dbc235b55e2d76af63d28fd35e61e96a8d",
+  "recipeSha256": "a912e380dfc02f25635fbef8fb7c010a654e5360ac6d3845e9e3cbcf3461b11c",
+  "method": "Existing createSurfaceObservation surface-samples display measurement, percentiles [0,99.5], with current recipe frames, shape and policies. Final authored display retains black at zero; percentile measures only the high endpoint.",
+  "result": {
+    "range": "surface-samples",
+    "percentiles": [
+      0,
+      99.5
+    ],
+    "low": 0.010287771119771019,
+    "high": 0.966805366315464,
+    "units": "relative disk-normalized I/F; linear grayscale display"
+  }
+}

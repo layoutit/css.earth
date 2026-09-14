@@ -1,0 +1,84 @@
+{
+  "body": "epimetheus",
+  "sourceRoot": "..",
+  "shape": {
+    "path": "shape/epimetheus_30k_plt.tab",
+    "format": "pds-plate-model",
+    "grid": {
+      "metersPerUnit": 1000,
+      "expectedVertices": 13915,
+      "expectedFaces": 27826,
+      "indexBase": 0
+    },
+    "faceBudget": 2000,
+    "tileSize": 128,
+    "atlasColumns": 16,
+    "simplification": {
+      "method": "source-meshoptimizer",
+      "targetFaces": 720,
+      "maximumErrorMeters": 1000
+    }
+  },
+  "referenceFrame": {
+    "id": "n1828122367_1",
+    "path": "observations/N1828122367_1_CALIB.IMG",
+    "labelPath": "observations/N1828122367_1_CALIB.LBL",
+    "observerLatitude": 3.52,
+    "observerWestLongitude": 226.25,
+    "sunLatitude": 25.3,
+    "sunWestLongitude": 207.52,
+    "rangeKm": 37235.3,
+    "northAzimuthDegrees": 180.07,
+    "center": [
+      410.3,
+      524.8
+    ],
+    "pixelAngleMicroradians": 5.989697719921734
+  },
+  "color": {
+    "channels": [
+      {
+        "filter": "IR3",
+        "frames": [
+          {
+            "id": "n1828124265_1",
+            "path": "observations/N1828124265_1_CALIB.IMG",
+            "labelPath": "observations/N1828124265_1_CALIB.LBL",
+            "observerLatitude": 3.53,
+            "observerWestLongitude": 237.96,
+            "sunLatitude": 25.3,
+            "sunWestLongitude": 217.81,
+            "rangeKm": 27206.1,
+            "northAzimuthDegrees": 180.05,
+            "center": [
+              398.2,
+              530.4
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          }
+        ]
+      },
+      {
+        "filter": "UV3",
+        "frames": [
+          {
+            "id": "n1828122742_1",
+            "path": "observations/N1828122742_1_CALIB.IMG",
+            "labelPath": "observations/N1828122742_1_CALIB.LBL",
+            "observerLatitude": 3.54,
+            "observerWestLongitude": 228.66,
+            "sunLatitude": 25.31,
+            "sunWestLongitude": 209.51,
+            "rangeKm": 35251.0,
+            "northAzimuthDegrees": 180.04,
+            "center": [
+              404.8,
+              525.7
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          }
+        ]
+      }
+    ]
+  }
+}
