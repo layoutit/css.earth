@@ -59,7 +59,7 @@ export interface PreparedPresentationPlan extends PreparedResourceDemand { requi
   /** The mesh is not drawn at this level of detail: its textures only warm. */
   deferredTextures?: boolean; }
 export interface PreparedPresentationContext { own(cleanup: () => void): unknown; registerAnimation(animation: Animation, options: PreparedAnimationOptions): unknown; seekAnimation(animation: Animation, time: number): void; }
-export interface PreparedFramePublication { selection: ObjectSelection; view: PreparedView; resources: PreparedResources; plan?: PreparedPresentationPlan | null; }
+export interface PreparedFramePublication { selection: ObjectSelection; view: PreparedView; resources: Pick<PreparedResources, "has" | "url">; plan?: PreparedPresentationPlan | null; }
 
 import { preparedScenePitch } from "@cssearth/engine";
 import { createPreparedMaterialPublisher } from "./prepared-material.js";
@@ -120,7 +120,7 @@ function writeStyle(element: HTMLElement, name: string, value: string) {
 // callbacks enter this builder. The ordered records are final prepared DOM.
 export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('./physical-projection.js').PhysicalProjection, progressiveActivation = false) {
   const { nodes, roots } = preparedTree ? preparedTree.claim(definition.tree, stage.ownerDocument, context.own)
-    : buildPreparedTree(definition.tree, stage.ownerDocument, context.own);
+    : buildPreparedTree(definition.tree, stage.ownerDocument, context.own, stage);
   const cameraElement = nodes[definition.tree.camera], sceneElement = nodes[definition.tree.scene];
   const owned = () => roots.some(root => root.parentNode === stage);
   const stageBindings = new Map<string, PreparedWrite>();
@@ -146,13 +146,9 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])) : [], context.own);
   // The same prepared groups let the camera bring a resolving mesh back in stages.
   const revealGroups = Object.freeze((definition.tree.activationGroups ?? []).map(group => Object.freeze(group.map(index => nodes[index]))));
-  const publishFacing = createPreparedFacing(definition.facing ?? [], nodes);
-  const publishDepth = createPreparedDepthPartitions(definition.depthPartitions, nodes, sceneElement);
-  if (initialProjection) publishFacing(initialProjection);
-  if (initialProjection) publishDepth(initialProjection);
   // Disable CSS-owned motion before attachment. Prepared handles below own its
   // clock, pause state and disposal without forcing live style discovery.
-  for (const plan of definition.motion ?? []) nodes[plan.target].style.animation = 'none';
+  for (const plan of [...definition.motion ?? [], ...definition.animations]) nodes[plan.target].style.animation = 'none';
   const motion = (definition.motion ?? []).map(plan => {
     const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, iterations: Infinity, easing: 'linear', fill: 'both' });
     animation.id = plan.id;
@@ -168,17 +164,14 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     animation.id = plan.id; context.registerAnimation(animation, { mode: plan.mode });
     return { animation, plan };
   });
-  const materials = new Map(definition.materials.map(track => [track.id,
-    createPreparedMaterialPublisher(track, nodes[track.target], definition.camera)]));
-  let selectionPublications = 0, framePublications = 0, styleWrites = 0, transformWrites = 0;
+  const framePublisher = createPreparedFramePublisher(definition, stage, nodes, sceneElement, controlPitch => {
+    for (const { animation, plan } of animations) context.seekAnimation(animation,
+      Math.max(0, Math.min(plan.duration, (controlPitch - plan.sourceMinimum) * plan.millisecondsPerDegree)));
+  }, initialProjection);
+  let selectionPublications = 0, styleWrites = 0;
   let selectedTextures = new Map<string, { target: number; name: string }>();
   const styleKey = (binding: { target: number; name: string }) => `${binding.target}:${binding.name.startsWith("--") ? binding.name : binding.name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
-  const GEOMETRY_LEVEL_OF_DETAIL = Object.freeze({ stage: "geometry", silhouetteDiameter: null, billboardOpacity: 0, markerOpacity: 0 });
-  const round = (value: number, precision: number | null) => precision === null ? value : Math.round(value * 10 ** precision) / 10 ** precision;
-  const formatNumber = (value: number) => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
   const target = (index: number) => index === -1 ? stage : nodes[index];
-  // Hysteresis needs the step each silhouette binding last published.
-  const silhouetteSteps = new Map<PreparedViewBinding, number>();
   return Object.freeze({ cameraElement, sceneElement, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.lens) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
@@ -219,7 +212,36 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       }
       selectionPublications++;
     },
-    publishFrame({ selection, view, resources, plan }: PreparedFramePublication) {
+    publishFrame: framePublisher.publish,
+    observe() {
+      const frame = framePublisher.observe();
+      return {
+        presentation: { nodes: nodes.length, roots: roots.length, selectionPublications, framePublications: frame.framePublications,
+          styleWrites: styleWrites + frame.styleWrites, transformWrites: frame.transformWrites },
+        materials: frame.materials,
+      };
+    },
+  });
+}
+
+/** Publish the same prepared camera-dependent styles in a browser or a native response. */
+export function createPreparedFramePublisher(definition: PreparedPresentationDefinition, stage: HTMLElement,
+  nodes: readonly HTMLElement[], sceneElement: HTMLElement, seekPose: (controlPitch: number) => void = () => {},
+  initialProjection?: import('./physical-projection.js').PhysicalProjection) {
+  const publishFacing = createPreparedFacing(definition.facing ?? [], nodes);
+  const publishDepth = createPreparedDepthPartitions(definition.depthPartitions, nodes, sceneElement);
+  if (initialProjection) { publishFacing(initialProjection); publishDepth(initialProjection); }
+  const materials = new Map(definition.materials.map(track => [track.id,
+    createPreparedMaterialPublisher(track, nodes[track.target], definition.camera)]));
+  let framePublications = 0, styleWrites = 0, transformWrites = 0;
+  const GEOMETRY_LEVEL_OF_DETAIL = Object.freeze({ stage: "geometry", silhouetteDiameter: null, billboardOpacity: 0, markerOpacity: 0 });
+  const round = (value: number, precision: number | null) => precision === null ? value : Math.round(value * 10 ** precision) / 10 ** precision;
+  const formatNumber = (value: number) => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
+  const target = (index: number) => index === -1 ? stage : nodes[index];
+  // Hysteresis needs the step each silhouette binding last published.
+  const silhouetteSteps = new Map<PreparedViewBinding, number>();
+  return {
+    publish({ selection, view, resources, plan }: PreparedFramePublication) {
       publishDepth(view.projection);
       publishFacing(view.projection);
       // The camera's published level of detail (a perspective dolly, see
@@ -275,8 +297,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
           if (element.style.transform !== counter) { element.style.transform = counter; transformWrites++; }
         }
       }
-      for (const { animation, plan } of animations) context.seekAnimation(animation,
-        Math.max(0, Math.min(plan.duration, (view.controlPitch - plan.sourceMinimum) * plan.millisecondsPerDegree)));
+      seekPose(view.controlPitch);
       if (materials.size) for (const selected of selectedPreparedVariant(definition, selection).materials) {
         const material = materials.get(selected.track);
         if (!material) throw new TypeError(`Unprepared material track: ${selected.track}.`);
@@ -284,11 +305,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       }
       framePublications++;
     },
-    observe() {
-      return {
-        presentation: { nodes: nodes.length, roots: roots.length, selectionPublications, framePublications, styleWrites, transformWrites },
-        materials: Object.fromEntries([...materials].map(([id, material]) => [id, material.observe()])),
-      };
-    },
-  });
+    observe() { return { framePublications, styleWrites, transformWrites,
+      materials: Object.fromEntries([...materials].map(([id, material]) => [id, material.observe()])) }; },
+  };
 }

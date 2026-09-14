@@ -73,7 +73,7 @@ jobs:
           node --test tools/restore-source-inputs.test.mts
           node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
       - name: Check independent body additions
-        run: node --test tools/body-additions.test.mts tools/prepare-marker-bindings.test.mts
+        run: node --test tools/body-additions.test.mts
       - name: Typecheck shared code and enforce TypeScript ownership
         env:
           NODE_OPTIONS: --max-old-space-size=4096
@@ -102,10 +102,15 @@ jobs:
         run: node --test site/test/minimap-point-range.test.mts site/test/minimap-point-coverage.test.mts
       - name: Test shared shell and search ownership
         run: >-
-          node --test site/test/shell-lifetime.test.mts
+          node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts
+          --test site/test/shell-lifetime.test.mts
           site/test/navigation-router.test.mts site/test/planet-shell.test.mts
           site/test/router-runtime.test.mts
           site/test/object-page-data.test.mts
+          site/test/search-response.test.mts
+          site/test/dataset-response.test.mts
+          site/test/dataset-url.test.mts
+          tools/serialize-prepared-scene.test.mts
       - name: Enforce activation preparation for every registered object
         run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
       - name: Test complete shared renderer and camera

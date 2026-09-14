@@ -1,0 +1,12 @@
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# This tiny router preserves optional view and category parameters. Search work
+# runs in a Node function; ordinary pages and scene assets stay on the CDN.
+[[edge_functions]]
+  path = "/*"
+  function = "search-route"

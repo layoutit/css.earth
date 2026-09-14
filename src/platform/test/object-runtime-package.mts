@@ -41,6 +41,7 @@ type FixtureAnimation = Pick<Animation, "play" | "pause" | "cancel" | "playbackR
 };
 class FixtureElement {
     nodeType: 1 | 11 = 1;
+    readonly namespaceURI = "http://www.w3.org/1999/xhtml";
     readonly tagName: string;
     style: FixtureStyle;
     readonly dataset: FixtureDataset = {};
@@ -73,6 +74,7 @@ class FixtureElement {
     else if (["disabled", "checked", "name", "value", "aria-pressed", "type", "min", "max", "step"].includes(name))
         Reflect.set(this, name, text); }
     getAttribute(name: string): string | null { return name.startsWith("data-") ? this.dataset[dataKey(name)] ?? null : this.attributes.get(name) ?? null; }
+    hasAttribute(name: string): boolean { return this.getAttribute(name) !== null; }
     removeAttribute(name: string): void { this.attributes.delete(name); if (name.startsWith("data-"))
         delete this.dataset[dataKey(name)]; }
     contains(child: FixtureElement): boolean { return child === this || this.children.some(node => node.contains(child)); }
@@ -244,14 +246,14 @@ export async function preparedSelectionFixture(value: unknown, { silhouetteDiame
     const inputs = new Map<string, FixtureElement>(), buttons: FixtureElement[] = [];
     const input = (fields: Partial<FixtureElement>): FixtureElement => Object.assign(new FixtureElement(f.document, fields.tagName ?? "input"), fields);
     for (const lens of definition.controls.lenses?.controls ?? [])
-        buttons.push(input({ name: "lens", value: lens.id, tagName: "BUTTON", type: "button" }));
+        buttons.push(input({ name: "dataset", value: lens.id, tagName: "BUTTON", type: "button" }));
     for (const control of definition.controls.settings?.controls ?? [])
         inputs.set(control.name, input({ name: control.name, type: control.kind === "toggle" ? "checkbox" : "range", min: "0", max: "4", step: "1" }));
     const lensRoot = f.document.createElement("div"), settingsRoot = f.document.createElement("div");
     const information = Object.assign(f.document.createElement("section"), {
         querySelector: (selector: string): FixtureElement | null => selector === ".planet-lenses" ? lensRoot : null,
     });
-    lensRoot.querySelectorAll = selector => selector === 'button[name="lens"]' ? buttons : [];
+    lensRoot.querySelectorAll = selector => selector === 'button[name="dataset"]' ? buttons : [];
     settingsRoot.querySelectorAll = selector => selector === 'input[name], button[name]' ? [...inputs.values()] : [];
     f.document.querySelector = selector => selector === ".planet-information-panel" ? information
         : selector === ".planet-settings" ? settingsRoot : null;

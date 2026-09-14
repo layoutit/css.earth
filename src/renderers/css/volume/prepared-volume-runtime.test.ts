@@ -8,6 +8,7 @@ import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from '.
 
 const AXES = ['x', 'y', 'z'] as const;
 class FakeElement {
+  readonly nodeType = 1;
   readonly children: FakeElement[] = [];
   readonly style: Record<string, string> = new Proxy({}, { set: (target: Record<string, string>, key: string, value: string) => { this.propertyWrites.push(key); target[key] = value; return true; } });
   readonly dataset: Record<string, string> = {};
@@ -200,11 +201,11 @@ test('the active band has enough retained copies and remains continuous across g
 
 test('rotation keeps geometry and texture resources stable while publishing leaf opacity', () => {
   const { runtime, document, meshes, resolver, host, before, camera } = mount(payload(3));
-  // Opacity and a zero-alpha copy's display are published presentation, not geometry.
-  const leaves = meshes.flatMap(mesh => mesh.children), count = document.count, styles = leaves.map(leaf => { const { opacity, display, backgroundImage, ...staticStyle } = leaf.style; return staticStyle; });
+  // Opacity, culling and deferred textures are published presentation, not geometry.
+  const leaves = meshes.flatMap(mesh => mesh.children), count = document.count, styles = leaves.map(leaf => { const { opacity, display, visibility, backgroundImage, ...staticStyle } = leaf.style; return staticStyle; });
   for (const direction of [[0, 0, 1], [1, 1, 1], [-1, .2, .5]] as const) runtime.publish(publication(direction));
   expect(document.count).toBe(count); expect(meshes.flatMap(mesh => mesh.children)).toEqual(leaves);
-  expect(leaves.map(leaf => { const { opacity, display, backgroundImage, ...staticStyle } = leaf.style; return staticStyle; })).toEqual(styles); expect(resolver).toHaveBeenCalledTimes(9);
+  expect(leaves.map(leaf => { const { opacity, display, visibility, backgroundImage, ...staticStyle } = leaf.style; return staticStyle; })).toEqual(styles); expect(resolver).toHaveBeenCalledTimes(9);
   expect(camera.style.perspectiveOrigin).toBe('calc(50% + 17px) calc(50% + -11px)');
   runtime.destroy(); runtime.destroy(); expect(host.children).toEqual([before]);
   runtime.publish(publication([1, 0, 0])); expect(document.count).toBe(count);

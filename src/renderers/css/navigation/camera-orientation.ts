@@ -7,6 +7,7 @@ import { rotationAxisAngle } from "@cssearth/engine";
 import { preparedScenePitch } from "@cssearth/engine";
 import { cssDirectionToViewDirection } from "../solar-system/solar-view-direction.js";
 import { validateWorldRotation } from './world-camera-math.js';
+import { preparedSceneMatrix } from './prepared-camera-basis.js';
 
 export function createCubicSkyCameraOrientation({
   controlPitch,
@@ -330,9 +331,7 @@ function parseCameraPoseMatrix(value: string, label: string) {
 }
 
 function createSceneMatrix(controlPitch: number, controlYaw: number, cameraPlan: CameraPlan) {
-  return new DOMMatrix()
-    .rotateAxisAngle(1, 0, 0, preparedScenePitch(controlPitch, cameraPlan))
-    .rotateAxisAngle(0, 1, 0, controlYaw);
+  return new DOMMatrix([...preparedSceneMatrix(cameraPlan, controlPitch, controlYaw)]);
 }
 
 function transformDirection(matrix: DOMMatrixReadOnly, direction: Vector3): Vector3 {

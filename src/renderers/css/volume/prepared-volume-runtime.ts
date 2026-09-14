@@ -9,7 +9,7 @@ const AXES = ['x', 'y', 'z'] as const;
 /** Mounts fixed projective slice geometry. It owns DOM transforms only; all geometry and pixels are prepared. */
 export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): PreparedVolumeRuntime {
   const payload = validatePreparedCssVolume(options.payload);
-  if (!(options.host instanceof HTMLElement) || !(options.before instanceof Element) || typeof options.resolveResource !== 'function') {
+  if (options.host?.nodeType !== 1 || options.before?.nodeType !== 1 || options.before.ownerDocument !== options.host.ownerDocument || typeof options.resolveResource !== 'function') {
     throw new TypeError('Prepared CSS volume mount needs a host, insertion point and resource resolver.');
   }
   const unitScale = options.unitScale ?? 50;
@@ -22,19 +22,20 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     max: [max[1] * unitScale, max[0] * unitScale, max[2] * unitScale],
   };
   const document = options.host.ownerDocument;
+  const create = options.createElement ?? ((tag: string) => document.createElement(tag));
   const roots: HTMLElement[] = [];
   const cameras: HTMLElement[] = [];
   const scenes: HTMLElement[] = [];
-  const boundedLeaves: { nodes: HTMLElement[]; bounds: PreparedLeafBounds | undefined; shown: boolean }[] = [];
-  const pendingTextures = AXES.map(() => new Map<{ nodes: HTMLElement[]; shown: boolean }, string>());
+  const boundedLeaves: { nodes: HTMLElement[]; bounds: PreparedLeafBounds | undefined; shown: boolean | null }[] = [];
+  const pendingTextures = AXES.map(() => new Map<{ nodes: HTMLElement[]; shown: boolean | null }, string>());
   const opticalCopies: { nodes: HTMLElement[][]; alpha: number[] }[] = [];
   for (const axis of AXES) {
     const stack = payload.stacks.find(candidate => candidate.axis === axis);
     if (!stack) throw new TypeError(`Prepared CSS volume has no ${axis} stack.`);
-    const root = document.createElement('div');
-    const camera = document.createElement('div');
-    const scene = document.createElement('div');
-    const mesh = document.createElement('div');
+    const root = create('div');
+    const camera = create('div');
+    const scene = create('div');
+    const mesh = create('div');
     root.className = 'css-volume-projection';
     camera.className = 'css-volume-camera';
     scene.className = 'css-volume-scene';
@@ -45,17 +46,17 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     root.style.opacity = '0';
     root.style.display = 'block';
     root.style.visibility = 'hidden';
-    const copies = { nodes: [[], []] as HTMLElement[][], alpha: [0, 0] };
+    const copies = { nodes: [[], []] as HTMLElement[][], alpha: [NaN, NaN] };
     opticalCopies.push(copies);
     for (const leaf of stack.leaves) {
       const textureUrl = options.resolveResource(leaf.texturePath);
-      const bounded = { nodes: [] as HTMLElement[], bounds: leaf.boundsCssPixels ?? frameBounds, shown: true };
+      const bounded = { nodes: [] as HTMLElement[], bounds: leaf.boundsCssPixels ?? frameBounds, shown: null as boolean | null };
       boundedLeaves.push(bounded);
       pendingTextures[AXES.indexOf(axis)]!.set(bounded, textureUrl);
       // Coincident copies reuse the same prepared pixels and transform. They
       // increase optical length without intersecting another axis's planes.
       for (let copy = 0; copy < 3; copy++) {
-        const node = createLeaf(document, leaf, copy);
+        const node = createLeaf(create, leaf, copy);
         mesh.append(node);
         bounded.nodes.push(node);
         if (copy > 0) copies.nodes[copy - 1]!.push(node);
@@ -81,10 +82,11 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       throw new TypeError('Prepared volume camera viewport is invalid.');
     }
     const transform = preparedVolumeCameraTransform({ world, viewport }, payload.frame, unitScale);
-    const cssTransform = `translate3d(${transform.translationCssPixels.map(value => `${format(value)}px`).join(',')}) ${worldRotationCss(transform.rotation)}`;
+    const translation = transform.translationCssPixels.map((value, axis) => options.nativeFocalCss && axis === 2 ? `calc(${options.nativeFocalCss} + ${format(value - transform.focalPixels)}px)` : `${format(value)}px`);
+    const cssTransform = `translate3d(${translation.join(',')}) ${worldRotationCss(transform.rotation)}`;
     const [principalX, principalY] = viewport.principalOffsetPixels;
     const perspectiveOrigin = `calc(50% + ${format(principalX)}px) calc(50% + ${format(principalY)}px)`;
-    const perspective = `${format(transform.focalPixels)}px`;
+    const perspective = options.nativeFocalCss ?? `${format(transform.focalPixels)}px`;
     if (perspective !== previousPerspective || perspectiveOrigin !== previousOrigin) {
       for (const camera of cameras) {
         if (perspective !== previousPerspective) camera.style.perspective = perspective;
@@ -145,7 +147,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         const previous = copies.alpha[copy - 1]!;
         if (alpha === previous) continue;
         copies.alpha[copy - 1] = alpha;
-        const value = String(alpha), entering = (alpha > 0) !== (previous > 0);
+        const value = String(alpha), entering = !Number.isFinite(previous) || (alpha > 0) !== (previous > 0);
         for (const node of copies.nodes[copy - 1]!) {
           node.style.opacity = value;
           if (entering) node.style.display = alpha > 0 ? '' : 'none';
@@ -182,8 +184,8 @@ export function preparedVolumeCameraTransform(publication: VolumeCameraPublicati
     ] as [number, number, number]), focalPixels: viewport.focalPixels });
 }
 
-function createLeaf(document: Document, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], copy: number): HTMLElement {
-  const node = document.createElement('s');
+function createLeaf(create: (tag: string) => HTMLElement, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], copy: number): HTMLElement {
+  const node = create('s');
   // A zero-alpha optical copy contributes nothing; it stays out of layout and compositing.
   if (copy > 0) { node.style.opacity = '0'; node.style.display = 'none'; }
   node.style.width = leaf.style.width;

@@ -102,7 +102,7 @@ try{for(const dpr of [1,2]){
   }
   await page.keyboard.press('Escape');
   for(const entry of [{name:'color',lens}]){
-   await page.locator(`button[name="lens"][value="${entry.lens}"]`).click();
+   await page.locator(`button[name="dataset"][value="${entry.lens}"]`).click();
    await page.waitForFunction(({body,lens})=>{const o=window.__cssearthTest.object(body);return o.lens().ready&&o.lens().id===lens;},{body,lens:entry.lens});
    await page.evaluate(({body,pose})=>window.__cssearthTest.object(body).setView(pose),{body,pose});
    await page.mouse.move(1420,875);await page.waitForLoadState('networkidle');await page.evaluate(async()=>{await document.fonts.ready;});
@@ -132,7 +132,7 @@ try{
  await phone.waitForFunction(body=>window.__cssEarth?.object(body)?.ready,body);
  const sheet=phone.getByRole('button',{name:'Resize information sheet',exact:true});
  if(await sheet.count()&&await sheet.getAttribute('aria-expanded')!=='true')await sheet.click();
- const row=phone.locator(`button[name="lens"][value="${lens}"]`);
+ const row=phone.locator(`button[name="dataset"][value="${lens}"]`);
  await row.click();
  await phone.waitForFunction(({body,lens})=>{const o=window.__cssearthTest.object(body);return o.lens().ready&&o.lens().id===lens;},{body,lens});
  await phone.evaluate(({body,pose})=>window.__cssearthTest.object(body).setView({...pose,zoom:.6}),{body,pose});

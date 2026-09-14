@@ -108,12 +108,12 @@ try {
       await page.locator("#earth-lenses").evaluate((panel) => {
 if (!(panel instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetailsElement observation");
  panel.open = true; });
-      await page.locator('button[name="lens"][value="topography"]').click();
+      await page.locator('button[name="dataset"][value="topography"]').click();
       await page.waitForFunction(() =>
-        document.querySelector<HTMLButtonElement>('button[name="lens"][value="topography"]')
+        document.querySelector<HTMLButtonElement>('button[name="dataset"][value="topography"]')
           ?.getAttribute("aria-pressed") === "true",
       );
-      await page.locator('button[name="lens"][value="normal"]').click();
+      await page.locator('button[name="dataset"][value="normal"]').click();
       await page.locator("#earth-settings").evaluate((panel) => {
 if (!(panel instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetailsElement observation");
  panel.open = true; });
@@ -167,12 +167,12 @@ return input.click(); });
         name.includes("earth-moon-")), false);
       assert.equal(after.resources.some(({ name }) =>
         name.includes("earth-interior-")), true);
-      await page.locator('button[name="lens"][value="cross-section"]').click();
+      await page.locator('button[name="dataset"][value="cross-section"]').click();
       await page.waitForFunction(() =>
         document.querySelectorAll<HTMLElement>(".earth-cutaway").length === 1,
       );
-      await page.locator('button[name="lens"][value="normal"]').click();
-      await page.locator('button[name="lens"][value="cross-section"]').click();
+      await page.locator('button[name="dataset"][value="normal"]').click();
+      await page.locator('button[name="dataset"][value="cross-section"]').click();
       assert.deepEqual(await page.evaluate(() => {
         function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
 return ({

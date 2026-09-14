@@ -34,11 +34,12 @@ class ControlledImage implements PreparedImage {
   removeAttribute(name: string): void { if (name === "src") this.src = ""; }
 }
 interface HarnessOptions {
+  initialLens?: string;
   onTicket?: (ticket: PreparedResidencyTicket) => void;
   onChange?: (state: Readonly<ObjectSelectionState>) => void;
   deferTextureRefinement?: boolean;
 }
-function harness({ onTicket, onChange, deferTextureRefinement }: HarnessOptions = {}) {
+function harness({ onTicket, onChange, deferTextureRefinement, initialLens }: HarnessOptions = {}) {
   const definition = earthDefinition, f = retainedPresentationFixture(definition);
   const jobs: ImageJob[] = [], commits: { selection: ObjectSelection; plan: PreparedPresentationPlan }[] = [], changes: Readonly<ObjectSelectionState>[] = [], fatal: unknown[] = [], materialErrors: unknown[] = [], created: ReturnType<typeof f.document.createElement>[] = [];
   const createElement = f.document.createElement;
@@ -55,7 +56,7 @@ function harness({ onTicket, onChange, deferTextureRefinement }: HarnessOptions 
   const presentationContext: PreparedPresentationContext & { resources: typeof resources.resources } = { ...f.context, resources: resources.resources };
   const presentation = mountPreparedPresentation(f.stage, presentationContext, definition);
   const coordinator = createObjectSelectionRuntime({ definition, presentation, residency, lifetime: f.lifetime,
-    deferTextureRefinement,
+    deferTextureRefinement, initialLens,
     onChange: state => { changes.push(state); onChange?.(state); }, onCommit: (selection, plan) => commits.push({ selection, plan }),
     onFatalError(error) { fatal.push(error); f.lifetime.destroy(); }, onMaterialError: error => materialErrors.push(error) });
   f.lifetime.onDispose(() => coordinator.destroy());
@@ -88,6 +89,15 @@ function harness({ onTicket, onChange, deferTextureRefinement }: HarnessOptions 
     atmosphereTarget: () => created[definition.materials[1].target],
   };
 }
+
+test('the native dataset is the first desired and committed selection', async t => {
+  const h = harness({ initialLens: 'topography' }); t.after(h.restore);
+  assert.equal(h.coordinator.state().desired.lensId, 'topography');
+  await h.ready();
+  assert.equal(h.commits[0].selection.lensId, 'topography');
+  assert.equal(h.coordinator.state().committed?.lensId, 'topography');
+  assert.ok(h.changes.every(state => state.desired.lensId === 'topography'));
+});
 
 test('initial coarse commit remains successful when its publication immediately requests refinement', async t => {
   let h!: ReturnType<typeof harness>; let requested = false;

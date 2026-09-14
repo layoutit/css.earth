@@ -35,7 +35,7 @@ return ({
         error:requiredDiagnostics(window.__cssEarth).error,
         shadows:requiredInput(document.querySelector('input[name="shadows"]')).checked,
         orbit:requiredInput(document.querySelector('input[name="orbit"]')).checked,
-        datasets:[...document.querySelectorAll<HTMLButtonElement>('button[name="lens"]')].map(b=>b.textContent.trim()),
+        datasets:[...document.querySelectorAll<HTMLButtonElement>('button[name="dataset"]')].map(b=>b.textContent.trim()),
       }); });
       assert.equal(state.scenes,1,`${id}: one mounted detailed scene`);
       assert.equal(state.error,null,`${id}: successful generic handoff`);

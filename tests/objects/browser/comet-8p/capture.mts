@@ -77,7 +77,7 @@ return input.click(); });
   const pose=()=>page.locator('.polycss-scene').evaluate(n=>getComputedStyle(n).transform);
   const initialPose=await pose();
   const select=async (lens: string)=>{
-   await page.locator(`button[name="lens"][value="${lens}"]`).click();
+   await page.locator(`button[name="dataset"][value="${lens}"]`).click();
    await page.waitForFunction(lens=>{
      function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
 return requiredElement(document.querySelector('.planet-stage')).dataset.lens===lens; },lens);

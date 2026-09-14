@@ -19,7 +19,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const information = document.querySelector(".planet-information-panel");
   const lensRoot = information?.querySelector(".planet-lenses");
   const settingsRoot = document.querySelector(".planet-settings");
-  const lensInputs = [...(lensRoot?.querySelectorAll<HTMLButtonElement>('button[name="lens"]') ?? [])];
+  const lensInputs = [...(lensRoot?.querySelectorAll<HTMLButtonElement>('button[name="dataset"]') ?? [])];
   const settingsInputs = [...(settingsRoot?.querySelectorAll<SettingInput>("input[name], button[name]") ?? [])]
     .filter(input => !["motion", "skyContrast", "heliosphere", "asteroidBodies", "asteroidOrbits", "asteroidLabels"].includes(input.name));
   const legends = [...(lensRoot?.querySelectorAll<HTMLElement>("[data-lens-legend]") ?? [])]
@@ -55,6 +55,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     }
   }
   let ready = false, destroyed = false, lastState: Readonly<ObjectSelectionState> | null = null, actions = 0;
+  const nativeChanges = new Map<string, ObjectAction>();
   const listeners: (() => void)[] = [];
   function listen(input: SettingInput, event: string, callback: EventListener) {
     input.addEventListener(event, callback);
@@ -71,12 +72,13 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       root?.setAttribute("aria-busy", String(!ready || next.pending === true));
     }
     for (const [id, input] of lenses) {
-      input.disabled = !ready;
+      input.disabled = input.type === 'submit' ? false : !ready;
       input.setAttribute("aria-pressed", String(pressed.has(id)));
     }
     for (const legend of legends) legend.hidden = !pressed.has(legend.dataset.lensLegend ?? null);
     for (const control of settingPlans) {
       const input = settingInput(control.name);
+      if (nativeChanges.has(control.name)) continue;
       if (control.kind === "toggle" && isInput(input)) input.checked = shown[control.name] === true;
       else {
         const selected = objectCycleStates(control.kind === "cycle" ? control : invalidCycle()).find(state => state.value === shown[control.name]);
@@ -90,12 +92,17 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
         // readiness can block it, and router readiness republishes shell state.
         input.dataset.runtimeReady = String(ready);
         if (!ready) input.disabled = true;
-      } else input.disabled = !ready;
+      } else input.disabled = input.hasAttribute('form') ? false : !ready;
     }
   }
   function act(action: ObjectAction) {
     if (destroyed) return;
-    if (!ready) { publish(); return; }
+    if (!ready) {
+      if (action.kind !== 'lens' && settings.get(action.name)?.hasAttribute('form')) {
+        nativeChanges.set(action.name, requireObjectAction(controls, action));
+      } else publish();
+      return;
+    }
     try {
       const validated = requireObjectAction(controls, action);
       actions++;
@@ -108,7 +115,11 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   try {
     publish();
-    for (const [id, input] of lenses) listen(input, "click", () => act({ kind: "lens", id }));
+    for (const [id, input] of lenses) listen(input, "click", event => {
+      if (!ready) return;
+      event.preventDefault();
+      act({ kind: "lens", id });
+    });
     for (const control of settingPlans) {
       const input = settingInput(control.name);
       const event = control.kind === "toggle" ? "change" : input.type === "range" ? "input" : "click";
@@ -135,7 +146,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     const errors = [];
     for (const remove of listeners.splice(0)) { try { remove(); } catch (error) { errors.push(error); } }
     for (const input of [...lensInputs, ...settingsInputs]) {
-      try { input.disabled = true; if (input.name === "speed") input.dataset.runtimeReady = "false"; }
+      try { input.disabled = input.type !== 'submit' && !input.hasAttribute('form'); if (input.name === "speed") { input.disabled = true; input.dataset.runtimeReady = "false"; } }
       catch (error) { errors.push(error); }
     }
     for (const root of [lensRoot, settingsRoot]) {
@@ -146,7 +157,15 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   return Object.freeze({
     publish,
-    setReady(value = true) { if (destroyed) return; ready = value === true; publish(); },
+    setReady(value = true) {
+      if (destroyed) return;
+      ready = value === true;
+      if (ready) {
+        for (const action of nativeChanges.values()) act(action);
+        nativeChanges.clear();
+      }
+      publish();
+    },
     stats: () => Object.freeze({ ready, destroyed, actions, listenerCount: listeners.length,
       lensIds: Object.freeze([...lenses.keys()]), settings: Object.freeze([...settings.keys()]), state: lastState }),
     destroy() {

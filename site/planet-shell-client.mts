@@ -4,6 +4,7 @@ import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-o
 import { createMotionRecorder, runMotionScript } from './motion-script.mts';
 const isOrbitRenderer = (value: string): value is OrbitRenderer => ['strokes', 'bars'].includes(value);
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
+import { readInitialFocus } from './focus-catalog.mts';
 import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
@@ -17,13 +18,13 @@ export type NavigationContent = Awaited<ReturnType<ReturnType<typeof createNavig
 export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; asteroidBodiesEnabled?: boolean; onAsteroidBodiesChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; orbitRenderer?: OrbitRenderer; onOrbitRendererChange?(renderer: OrbitRenderer): void; onCategoryChange?(classification: string | null): void; }
 interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame | null; commit?(): void; restore(): void; }
 type Panel = readonly [string, HTMLDetailsElement];
-import { objectCategory, matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
+import { matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
 import { createDatasetContextController } from './dataset-context-controller.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mts";
 import { createDestinationBrowser } from "./destination-browser.mts";
 import { createFeatureBrowser } from "./feature-browser.mts";
-import { normalizeDestinationQuery } from './destination-search.mts';
+import { objectSearchLabels, searchObjects } from './object-search.mts';
 import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createExplorerRailController } from "./explorer-rail.mts";
@@ -70,7 +71,7 @@ export function mountPlanetShell({
   let cardNavigation: { view: 'detail' | 'overview' } | null = null;
   let cardObjectId = objectId;
   let overview = false, overviewScope: OverviewScope = 'solar-system', camera: ShellCamera | null = null, unsubscribeOverview: (() => void) | null = null;
-  let preparedFocus: PreparedCatalogObject | null = null;
+  let preparedFocus: PreparedCatalogObject | null = readInitialFocus(documentTarget);
   const focusRoot = drawer.querySelector<HTMLElement>('[data-prepared-focus-card]');
   const focusTabs = createTabsController(focusRoot, lifetime, 'prepared-focus');
   const focusCard = createPreparedFocusCard(focusRoot, id => focusTabs.show(id));
@@ -297,42 +298,19 @@ function createInformationTabsController(drawer: HTMLElement, lifetime: SceneLif
   return createTabsController(drawer.querySelector<HTMLElement>('.planet-information-panel'), lifetime, requestedGroup);
 }
 
-/** Shared tablist behaviour: selection, roving tabindex and arrow keys. */
+/** Programmatic selection for camera/dataset navigation. The browser owns
+ * pointer selection, keyboard focus and panel visibility. */
 export function createTabsController(card: HTMLElement | null, lifetime: SceneLifetime, requestedGroup?: string) {
-  const group = (item: HTMLElement) => item.dataset.informationGroup ?? 'detail';
-  const tabs = [...(card?.querySelectorAll<HTMLElement>('[data-information-tab]:not([hidden])') ?? [])]
-    .filter(tab => requestedGroup === undefined || group(tab) === requestedGroup);
-  const panels = [...(card?.querySelectorAll<HTMLElement>('[data-information-panel]') ?? [])];
-  const events = new AbortController();
-  lifetime.onDispose(() => events.abort());
-  const select = (tab: HTMLElement, focus = false) => {
-    for (const item of tabs.filter(item => group(item) === group(tab))) {
-      const active = item === tab;
-      item.setAttribute('aria-selected', String(active));
-      item.tabIndex = active ? 0 : -1;
-    }
-    for (const panel of panels.filter(panel => group(panel) === group(tab))) {
-      panel.hidden = panel.dataset.informationPanel !== tab.dataset.informationTab;
-    }
-    if (focus) tab.focus();
-  };
-  for (const tab of tabs) {
-    tab.addEventListener('click', () => select(tab), { signal: events.signal });
-    tab.addEventListener('keydown', event => {
-      const siblings = tabs.filter(item => group(item) === group(tab) && !item.hidden);
-      const index = siblings.indexOf(tab);
-      const next = event.key === 'Home' ? 0 : event.key === 'End' ? siblings.length - 1
-        : event.key === 'ArrowRight' ? (index + 1) % siblings.length
-        : event.key === 'ArrowLeft' ? (index - 1 + siblings.length) % siblings.length : null;
-      if (next === null) return;
-      event.preventDefault();
-      select(siblings[next], true);
-    }, { signal: events.signal });
-  }
+  const tabs = [...(card?.querySelectorAll<HTMLInputElement>('[data-information-tab]:not([hidden])') ?? [])]
+    .filter(tab => requestedGroup === undefined || (tab.dataset.informationGroup ?? 'detail') === requestedGroup);
+  let disposed = false;
+  const destroy = () => { disposed = true; };
+  lifetime.onDispose(destroy);
   return { show(id: string) {
+    if (disposed) return;
     const tab = tabs.find(tab => tab.dataset.informationTab === id);
-    if (tab) select(tab);
-  }, destroy() { events.abort(); } };
+    if (tab) { tab.checked = true; tab.dispatchEvent(new Event('change', { bubbles: true })); }
+  }, destroy };
 }
 
 function createLensBrowserController(drawer: HTMLElement, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
@@ -345,7 +323,7 @@ function createLensBrowserController(drawer: HTMLElement, windowTarget: BrowserW
   const options = [...root.querySelectorAll("[data-lens-option]")]
     .filter((option) => option instanceof windowTarget.HTMLElement);
   const buttons = options.map((option) =>
-    requiredElement<HTMLButtonElement>(option, 'button[name="lens"]'));
+    requiredElement<HTMLButtonElement>(option, 'button[name="dataset"]'));
   if (options.length === 0 || buttons.some((button) =>
     !(button instanceof windowTarget.HTMLButtonElement))) {
     throw new Error("Planet shell surface lens browser has no valid lenses.");
@@ -418,6 +396,7 @@ function createSettingsController(
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let motionOn = motionEnabled === true;
+  for (const input of [motion, heliosphere, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = false;
 
   const renderMotion = () => {
     motion.checked = motionOn;
@@ -524,6 +503,7 @@ function createSettingsController(
     },
     destroy() {
       events.abort();
+      for (const input of [motion, heliosphere, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = true;
       delete documentTarget.body.dataset.skyContrast;
     },
   });
@@ -559,11 +539,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   if (items.length === 0) {
     throw new Error("Planet shell object browser has no objects.");
   }
-  const searchNames = new Map(items.map(item => {
-    const names: unknown = JSON.parse(item.dataset.objectSearchNames ?? '[]');
-    if (!Array.isArray(names) || !names.every(name => typeof name === 'string')) throw new TypeError('Prepared object search names are invalid.');
-    return [item, names as string[]] as const;
-  }));
+  const searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
   const tabs = [...browser.querySelectorAll<HTMLElement>('[data-object-tab]')];
   const resultsPanel = requiredElement(browser, '#object-category-results');
   const chunks = [...browser.querySelectorAll<HTMLElement>('.planet-object-chunk')]
@@ -592,6 +568,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
   ];
   let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
+  let initialCategory: string | null = searchCard.hasAttribute('data-search-submitted') ? activeCategory : null;
   // Scroll events arrive after layout. Retain that state so publishing an
   // unchanged camera or selection never forces layout to rewrite a zero offset.
   let resultsScrolled = false;
@@ -635,9 +612,10 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let selectedObjectName = "";
+  let initialObject = true;
   let overview = false;
   let overviewScope: OverviewScope = 'solar-system';
-  let preparedFocus: PreparedCatalogObject | null = null;
+  let preparedFocus: PreparedCatalogObject | null = readInitialFocus(documentTarget);
   const overviewName = () => ({ 'solar-system': 'Solar System', 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe' })[overviewScope];
   let visibleObjects = 0;
   const destinations = createDestinationBrowser({
@@ -653,8 +631,9 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     onSelected() { render(false); search.blur(); },
   });
   lifetime.onDispose(() => features?.destroy());
-  let open = false;
-  let browsing = false;
+  let open = searchCard.hasAttribute('data-search-submitted');
+  let browsing = open;
+  let browseAll = open && search.value.trim().length === 0;
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.planet-search-category')];
   // A pill's classification highlights its bodies in the scene; other searches clear it.
   // Filtering resets then re-marks the category, so report only the settled value.
@@ -676,7 +655,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   let filteredQuery: string | null = null, filteredClassification: string | null | undefined = null;
   const filter = (resetScroll = true) => {
     // Search text belongs to the user; the card context is only a fallback.
-    const query = (browsing ? search.value.trim().toLocaleLowerCase("en") : "")
+    const query = (browsing ? search.value.trim().toLocaleLowerCase("en") || (browseAll ? "all objects" : "") : "")
       || (preparedFocus ? preparedFocus.name.toLocaleLowerCase('en')
         : overview ? overviewName().toLocaleLowerCase("en") : "");
     setPanelHidden(information, query.length > 0);
@@ -715,15 +694,10 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       void destinations?.search(''); void features?.search('');
       return;
     }
-    const showAll = query === "all objects";
-    const classification = items.find(item => {
-      const name = item.dataset.objectClassificationName;
-      return name && (query === name || query === `${name}s` || (name === 'nebula' && query === 'nebulae') || (name === 'galaxy' && query === 'galaxies') || query === item.dataset.objectClassification);
-    })?.dataset.objectClassification;
+    const result = searchObjects(searchLabels, query, activeCategory);
+    const { classification, systemName, showAll } = result;
     markCategory(classification);
     filteredClassification = classification;
-    const systemName = items.find(item =>
-      query === item.dataset.objectSystemName)?.dataset.objectSystemName;
     visibleObjects = 0;
     void destinations?.search(classification || systemName || showAll ? "" : query);
     void features?.search(classification || systemName || showAll ? "" : query);
@@ -734,23 +708,14 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       return;
     }
     setPanelHidden(browser, false);
-    const normalizedQuery = normalizeDestinationQuery(query);
-    for (const item of items) {
-      // A class search stays exact inside grouped tabs; only Planets deliberately includes dwarf planets.
-      const match = classification && classification !== "planet" ? item.dataset.objectClassification === classification
-        : showAll || classification || (systemName
-        ? item.dataset.objectSystemName === systemName
-        : (item.dataset.objectName ?? "").includes(query) || (normalizedQuery.length > 0 && searchNames.get(item)?.some(name => name.includes(normalizedQuery))));
-      item.dataset.objectMatch = String(Boolean(match));
-    }
-    const matches = items.filter(item => item.dataset.objectMatch === 'true');
-    const classifications = matches.map(item => item.dataset.objectClassification);
+    const matches = new Set(result.matches.map(match => match.item));
+    for (const item of items) item.dataset.objectMatch = String(matches.has(item));
+    const classifications = result.matches.map(match => match.classification);
     for (const tab of tabs) {
       requiredElement(tab, '.planet-object-tab-count').textContent = `(${objectCategoryCount(classifications, tab.dataset.objectTab)})`;
     }
-    const nextCategory = classification ? objectCategory(classification)
-      : showAll ? 'all' : matches.some(item => matchesObjectCategory(item.dataset.objectClassification, activeCategory))
-        ? activeCategory : objectCategory(matches[0]?.dataset.objectClassification) ?? activeCategory;
+    const nextCategory = initialCategory ?? result.category;
+    initialCategory = null;
     selectTab(nextCategory, { resetScroll: false });
     empty.hidden = visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll);
   };
@@ -760,6 +725,11 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     // Only an actual open/close transition may reset a scrolled result list.
     if (open !== next) resetResultsScroll();
     open = next;
+    const currentUrl = new URL(windowTarget.location.href);
+    for (const input of documentTarget.querySelectorAll<HTMLInputElement>('[data-search-context], [data-dataset-context]')) {
+      input.value = currentUrl.searchParams.get(input.name) ?? '';
+      input.disabled = !input.value;
+    }
     if (next && resetQuery) search.value = "";
     destinations?.setOpen(next);
     if (next) filter();
@@ -770,21 +740,31 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     }
   };
 
-  trigger.addEventListener("click", () => {
+  trigger.addEventListener("click", event => {
+    event.preventDefault();
     browsing = true;
+    browseAll = search.value.trim().length === 0;
     render(true);
     search.focus();
   }, {
     signal: events.signal,
   });
+  searchCard.addEventListener('submit', event => {
+    event.preventDefault();
+    browsing = true;
+    browseAll = search.value.trim().length === 0;
+    render(true);
+  }, { signal: events.signal });
   // Clearing empties the query and returns to the selected card, like Escape.
-  documentTarget.querySelector<HTMLElement>('.planet-sidebar-search-clear')?.addEventListener('click', () => {
+  documentTarget.querySelector<HTMLElement>('.planet-sidebar-search-clear')?.addEventListener('click', event => {
+    event.preventDefault();
     search.value = "";
     render(false);
     search.focus();
   }, { signal: events.signal });
   for (const button of categoryButtons) {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', event => {
+      event.preventDefault();
       search.value = button.dataset.searchQuery ?? "";
       search.dispatchEvent(new windowTarget.Event('input', { bubbles: true }));
       requiredElement(documentTarget, '.planet-sidebar').scrollTop = 0;
@@ -800,7 +780,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     }, { signal: events.signal });
   }
   for (const tab of tabs) {
-    tab.addEventListener('click', () => selectTab(tab.dataset.objectTab ?? "all"), { signal: events.signal });
+    tab.addEventListener('click', event => { event.preventDefault(); selectTab(tab.dataset.objectTab ?? 'all'); }, { signal: events.signal });
     tab.addEventListener('keydown', event => {
       const index = tabs.indexOf(tab);
       const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1
@@ -812,6 +792,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     }, { signal: events.signal });
   }
   search.addEventListener("input", () => {
+    browseAll = false;
     browsing = true;
     if (!open) render(true);
     else if (open) filter();
@@ -837,6 +818,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     render(false);
   }, { signal: events.signal });
   browser.addEventListener("keydown", (event) => {
+    if ((event.key === 'ArrowDown' || event.key === 'ArrowUp') &&
+        event.target instanceof windowTarget.HTMLInputElement && event.target.hasAttribute('data-information-tab')) return;
     const controls = [...browser.querySelectorAll<HTMLElement>("summary, a, button")].filter(visibleControl);
     const index = controls.findIndex(control => control === documentTarget.activeElement);
     if (event.key === "Escape") { render(false); search.focus(); }
@@ -862,7 +845,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
         searchCard.contains(event.target)) return;
     search.blur();
   }, { signal: events.signal });
-  render(false);
+  render(open);
 
   const markSelection = () => {
     documentTarget.documentElement.dataset.selection = preparedFocus ? 'prepared-focus' : overview ? overviewScope : 'object';
@@ -916,8 +899,15 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       // its query and results until the user chooses or dismisses them.
       const editing = browsing;
       overview = false;
-      preparedFocus = null;
+      if (!initialObject) preparedFocus = null;
+      initialObject = false;
       selectedObjectName = name;
+      const object = SCENE_OBJECTS.find(object => object.name === name);
+      if (object) {
+        searchCard.setAttribute('action', object.route);
+        searchCard.dataset.searchObject = object.id;
+        documentTarget.querySelector('.planet-sidebar-search-clear')?.setAttribute('href', object.route);
+      }
       markSelection();
       destinations?.bind(null); features?.bind(null);
       render(editing);
@@ -1013,7 +1003,7 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
   const handle = documentTarget.querySelector(".planet-sheet-handle");
   const search = documentTarget.querySelector(".planet-sidebar-search");
   if (!(sheet instanceof windowTarget.HTMLElement) ||
-      !(handle instanceof windowTarget.HTMLButtonElement) ||
+      !(handle instanceof windowTarget.HTMLInputElement) ||
       !(search instanceof windowTarget.HTMLInputElement)) {
     throw new Error("Planet shell sheet is incomplete.");
   }
@@ -1024,7 +1014,7 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
   const events = new AbortController();
   const { signal } = events;
   lifetime.onDispose(() => events.abort());
-  let state: SheetState = "peek";
+  let state: SheetState = handle.checked ? "full" : "peek";
   // Search opens the whole sheet; leaving search returns to the earlier height.
   let searchReturn: SheetState | null = null;
   let gesture: SheetGesture | null = null;
@@ -1062,7 +1052,7 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     if (next !== "full") sheet.scrollTop = 0;
     state = next;
     body.dataset.sheet = next;
-    handle.ariaExpanded = String(next !== "peek");
+    handle.checked = next !== "peek";
     sheet.classList.remove("is-dragging");
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = windowTarget.requestAnimationFrame(() => {
@@ -1078,7 +1068,7 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     }
     return false;
   };
-  const ownsGesture = (target: EventTarget | null) => target instanceof windowTarget.Element &&
+  const ownsGesture = (target: EventTarget | null) => target !== handle && target instanceof windowTarget.Element &&
     target.closest("input, select, textarea, [data-surface-minimap]") !== null;
 
   sheet.addEventListener("pointerdown", (event) => {
@@ -1153,10 +1143,10 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     event.stopPropagation();
   }, { capture: true, signal });
 
-  handle.addEventListener("click", () => {
+  handle.addEventListener("change", () => {
     if (!mobile.matches) return;
     searchReturn = null;
-    settle(state === "peek" ? "half" : state === "half" ? "full" : "peek");
+    settle(handle.checked ? "full" : "peek");
   }, { signal });
   handle.addEventListener("keydown", (event) => {
     const step = event.key === "ArrowUp" ? 1 : event.key === "ArrowDown" ? -1 : 0;
@@ -1213,7 +1203,6 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
   lifetime.onDispose(() => body.style.removeProperty("--sheet-keyboard"));
 
   body.dataset.sheet = state;
-  handle.ariaExpanded = "false";
   return Object.freeze({
     // A choice from search reveals its card over the scene.
     showSelection() {
@@ -1228,7 +1217,6 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
       sheet.style.removeProperty("transform");
       sheet.style.removeProperty("--sheet-snap-duration");
       delete body.dataset.sheet;
-      handle.ariaExpanded = "false";
     },
   });
 }

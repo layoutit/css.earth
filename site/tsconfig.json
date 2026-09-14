@@ -14,6 +14,6 @@
     "types": ["node"],
     "typeRoots": ["../packages/engine/node_modules/@types", "../node_modules/@types"]
   },
-  "include": ["**/*.mts", "**/*.ts"],
+  "include": ["**/*.mts", "**/*.ts", "../netlify/**/*.ts"],
   "exclude": ["test"]
 }

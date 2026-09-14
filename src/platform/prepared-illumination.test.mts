@@ -55,7 +55,7 @@ test("missing native addresses retain the applied image and rotation together", 
   const properties = ["backgroundImage", "backgroundPosition", "backgroundSize", "rotate"];
   const before = properties.map(name => f.element.style[name]), observed = f.publisher.observe();
   assert.ok(observed.addressWrites > 0);
-  f.publisher.publish(selection, view([0, 1, 0]), { ...f.resources, has: () => false, readyKeys: () => [], url() { throw new Error("Missing data cannot be addressed"); } });
+  f.publisher.publish(selection, view([0, 1, 0]), { ...f.resources, has: () => false, url() { throw new Error("Missing data cannot be addressed"); } });
   assert.deepEqual(properties.map(name => f.element.style[name]), before);
   assert.equal(f.publisher.observe().appliedFrame, observed.appliedFrame);
   assert.equal(f.publisher.observe().addressWrites, observed.addressWrites);

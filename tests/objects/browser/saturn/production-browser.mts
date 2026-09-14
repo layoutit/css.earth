@@ -87,17 +87,17 @@ try {
       await page.keyboard.press("=");
       await page.keyboard.press("-");
       for (const id of ["ultraviolet", "cross-section", "thermal", "cross-section", "cross-section", "normal"]) {
-        await page.locator(`button[name="lens"][value="${id}"]`).click();
+        await page.locator(`button[name="dataset"][value="${id}"]`).click();
         await page.waitForFunction((lensId) => {
           function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
 
           const stage = requiredElement(document.querySelector(".planet-stage"));
-          const pressed = [...document.querySelectorAll<HTMLButtonElement>('button[name="lens"][aria-pressed="true"]')];
+          const pressed = [...document.querySelectorAll<HTMLButtonElement>('button[name="dataset"][aria-pressed="true"]')];
           return pressed.length === 1 && pressed[0].value === lensId &&
             (stage.dataset.view ?? null) === (lensId === "cross-section" ? "interior" : null) &&
             (stage.dataset.lens ?? null) === (["normal", "cross-section"].includes(lensId) ? null : lensId);
         }, id);
-        assert.deepEqual(await page.locator('button[name="lens"][aria-pressed="true"]')
+        assert.deepEqual(await page.locator('button[name="dataset"][aria-pressed="true"]')
           .evaluateAll(buttons => buttons.map(button => { if (!(button instanceof HTMLButtonElement)) throw new Error("Expected lens button"); return button.value; })), [id]);
       }
 

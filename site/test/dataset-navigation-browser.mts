@@ -33,7 +33,7 @@ page.on('response', response => {
 async function ready(body: string, lens?: string) {
   await page.waitForFunction(({ body, lens }) => document.documentElement.dataset.ready === 'true'
     && document.querySelector<HTMLElement>('.planet-stage')?.dataset.objectId === body
-    && (!lens || document.querySelector<HTMLButtonElement>('button[name="lens"][aria-pressed="true"]')?.value === lens), { body, lens });
+    && (!lens || document.querySelector<HTMLButtonElement>('button[name="dataset"][aria-pressed="true"]')?.value === lens), { body, lens });
   assert.equal(await page.locator('.planet-stage').count(), 1, 'One retained object stage');
 }
 async function visit(path: string, body: string, lens?: string) {
@@ -45,15 +45,15 @@ async function state() {
   return page.evaluate(() => ({ hash: location.hash, pathname: location.pathname,
     camera: new URL(location.href).searchParams.get('v'),
     transform: [...document.querySelectorAll('.planet-stage .polycss-camera > .polycss-scene')].map(node => getComputedStyle(node).transform),
-    lens: document.querySelector<HTMLButtonElement>('button[name="lens"][aria-pressed="true"]')?.value,
-    tab: document.querySelector('[aria-label="Object information"] [aria-selected="true"]')?.textContent?.trim() }));
+    lens: document.querySelector<HTMLButtonElement>('button[name="dataset"][aria-pressed="true"]')?.value,
+    tab: document.querySelector<HTMLInputElement>('[aria-label="Object information"] input:checked')?.labels?.[0]?.textContent?.trim() }));
 }
 async function noOverflow(target: Page) {
   assert.equal(await target.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
 }
 
 try {
-  const rail = page.locator('.planet-dataset-context-rail');
+  const rail = page.locator('.planet-information-panel > .planet-dataset-context-rail');
   const active = () => rail.locator('[data-dataset-context]:not([hidden])');
   await visit('/mars/#dataset=elevation', 'mars', 'elevation');
   assert.equal(await page.getByRole('tab', { name: 'Missions', exact: true }).count(), 0);
@@ -63,7 +63,7 @@ try {
   assert.equal(await page.locator('template[data-object-card]').count(), 0, 'Routes ship no resident card bank');
   const stage = await page.locator('.planet-stage .polycss-camera').elementHandle();
   const before = await state();
-  const thermal = page.locator('button[name="lens"][value="thermal"]');
+  const thermal = page.locator('button[name="dataset"][value="thermal"]');
   await thermal.focus();
   await page.keyboard.press('Enter');
   await ready('mars', 'thermal');
@@ -73,28 +73,28 @@ try {
   assert.equal(selected.hash, '#dataset=thermal');
   assert.deepEqual(selected.transform, before.transform, 'Dataset selection retains the camera');
   assert.equal(await stage?.evaluate(node => node.isConnected), true);
-  await page.getByRole('tab', { name: 'Factsheet', exact: true }).click();
+  await page.getByRole('radio', { name: 'Factsheet', exact: true }).press('Space');
   assert.equal(await rail.isVisible(), false);
-  await page.getByRole('tab', { name: 'Datasets', exact: true }).click();
+  await page.getByRole('radio', { name: 'Datasets', exact: true }).press('Space');
   assert.equal(await rail.isVisible(), true);
   await page.screenshot({ path: resolve(output, 'mars-dataset-context.png') });
   await page.reload(); await ready('mars', 'thermal');
   assert.equal(await active().locator('[data-mission="odyssey"]').isVisible(), true);
   cases.push({ name: 'dataset context, keyboard selection, retained camera, tabs and reload', before, selected });
 
-  await page.getByRole('tablist', { name: 'Object information', exact: true }).getByRole('tab', { name: 'Moons', exact: true }).click();
+  await page.getByRole('radiogroup', { name: 'Object information', exact: true }).getByRole('radio', { name: 'Moons', exact: true }).press('Space');
   assert.equal(await rail.isVisible(), false);
   const moons = page.locator('#mars-moons-content');
   assert.deepEqual(await moons.locator('[data-object-id]').evaluateAll(links => links.map(link => link.getAttribute('data-object-id'))), ['phobos', 'deimos']);
   await moons.locator('[data-object-id="phobos"]').click();
   await ready('phobos');
   await page.goBack(); await ready('mars', 'thermal');
-  await page.getByRole('tab', { name: 'Datasets', exact: true }).click();
+  await page.getByRole('radio', { name: 'Datasets', exact: true }).press('Space');
   assert.equal(await active().locator('[data-mission="odyssey"]').isVisible(), true);
   cases.push({ name: 'Moons navigation selects the body and Back restores dataset context' });
 
   await visit('/mars/#vault&dataset=elevation', 'mars', 'elevation');
-  await page.locator('button[name="lens"][value="normal"]').click();
+  await page.locator('button[name="dataset"][value="normal"]').click();
   await page.waitForFunction(() => location.hash === '#vault');
   assert.equal(await active().locator('[data-mission]').count(), 0);
   assert.match(await active().innerText(), /Viking/);
@@ -102,7 +102,7 @@ try {
 
   await visit('/mars/#dataset=missing', 'mars', 'normal');
   assert.equal(await page.locator('[data-dataset-notice]').isVisible(), true);
-  await page.locator('button[name="lens"][value="normal"]').click();
+  await page.locator('button[name="dataset"][value="normal"]').click();
   await page.waitForFunction(() => !location.hash.includes('dataset='));
   assert.equal(await page.locator('[data-dataset-notice]').isVisible(), false);
   cases.push({ name: 'invalid dataset fallback and manual repair' });
@@ -116,8 +116,7 @@ try {
   await page.getByRole('searchbox').fill('Mercury');
   await page.locator('.planet-object-link[data-object-id="mercury"]').first().click();
   await ready('mercury');
-  assert.equal(await page.locator('template[data-prepared-detail="dataset-context"]').evaluate(template =>
-    template instanceof HTMLTemplateElement && !!template.content.querySelector('[data-mission="messenger"]')), true);
+  assert.equal(await rail.locator('[data-mission="messenger"]').count() > 0, true);
   assert.equal(await rail.locator('[data-mission="mars-global-surveyor"]').count(), 0);
   await page.goBack(); await ready('mars', 'elevation');
   assert.equal(await active().locator('[data-mission="mars-global-surveyor"]').isVisible(), true);
@@ -129,7 +128,7 @@ try {
   const source = active().locator('[data-source]').first();
   await source.focus();
   assert.equal(await source.evaluate(node => getComputedStyle(node).textDecorationLine), 'underline');
-  await page.locator('button[name="lens"][value="interior"]').click();
+  await page.locator('button[name="dataset"][value="interior"]').click();
   await ready('mercury', 'interior');
   assert.equal(await active().locator('[data-mission]').count(), 0);
   assert.equal(await active().getByRole('region', { name: 'Sources', exact: true }).isVisible(), true);
@@ -137,13 +136,13 @@ try {
 
   await visit('/mars/#dataset=elevation', 'mars', 'elevation');
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.waitForFunction(() => document.querySelector('.planet-dataset-context-rail')?.parentElement?.classList.contains('planet-drawer-content'));
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('.planet-information-panel > .planet-dataset-context-rail')!).position === 'static');
   await rail.scrollIntoViewIfNeeded();
   await noOverflow(page);
   assert.equal(await rail.isVisible(), true);
   await page.screenshot({ path: resolve(output, 'dataset-context-mobile.png') });
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.waitForFunction(() => document.querySelector('.planet-dataset-context-rail')?.parentElement?.classList.contains('planet-dataset-context-dock'));
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('.planet-information-panel > .planet-dataset-context-rail')!).position === 'fixed');
   assert.equal(await rail.isVisible(), true);
   cases.push({ name: 'responsive panels remain accessible and return to the right dock' });
 
