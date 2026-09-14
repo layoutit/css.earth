@@ -17,6 +17,7 @@ class Input extends EventTarget {
   readonly attributes: Record<string, string> = {}; tagName = "INPUT"; type = "checkbox"; min = "0"; max = "4"; step = "1";
   constructor(fields: Partial<Input> = {}) { super(); Object.assign(this, fields); }
   setAttribute(key: string, value: string): void { this.attributes[key] = value; }
+  hasAttribute(key: string): boolean { return Object.hasOwn(this.attributes, key); }
   emit(type: string): void { this.dispatchEvent(new Event(type)); }
 }
 class Root {

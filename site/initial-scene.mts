@@ -3,7 +3,7 @@
 export function retainInitialScene(stage: HTMLElement) {
   if (!stage.dataset?.preparedObject || typeof stage.querySelectorAll !== 'function') return null;
   let roots = [...stage.children];
-  let snapshot = [stage, ...stage.querySelectorAll<HTMLElement>('[data-prepared-node]')].map(element => ({
+  let snapshot = [stage, ...stage.querySelectorAll<HTMLElement>('[data-prepared-node], [data-prepared-volume-node], .prepared-surface-features, .prepared-surface-features *')].map(element => ({
     element, children: [...element.children], attributes: [...element.attributes].map(attribute => [attribute.name, attribute.value] as const),
   }));
   let committed = false;

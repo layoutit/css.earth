@@ -9,6 +9,8 @@ import { distanceForSilhouetteRadius } from '../../../src/renderers/css/solar-sy
 import { addNativeSolarContext, solarMaximumDistanceM } from './context.mts';
 import { serializePreparedScene } from '../../serialize-prepared-scene.mts';
 import { publishPreparedNativeView } from '../../../src/renderers/css/rendering/prepared-native-view.js';
+import { addNativeResizeInput } from './resize-input.mts';
+import { addNativeCamera } from './native-camera.mts';
 import type { SharedView } from '../../../src/renderers/css/navigation/view-url.js';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4349';
@@ -25,6 +27,7 @@ const read = async (path: string) => {
 };
 const css = (distanceM: number, metersPerUnit: number, radiusM: number) => `
 @property --native-log-distance { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --native-orbit-alpha { syntax: '<number>'; inherits: true; initial-value: 0; }
 @keyframes native-scroll-distance {
   0% { --native-log-distance: ${Math.log(.5)}; }
   10% { --native-log-distance: 0; }
@@ -43,7 +46,10 @@ const css = (distanceM: number, metersPerUnit: number, radiusM: number) => `
 .native-context-link:hover [data-context-body]::after,
 .native-context-link:focus-visible [data-context-body]::after { opacity: 1; text-decoration: underline; }
 .native-context-link:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; border-radius: 50%; }
-@supports (animation-timeline: scroll()) and (scroll-initial-target: nearest) {
+/* Fully transparent orbit chords do not need projection work. Their retained
+   tree resumes at exactly the same visibility threshold as its existing fade. */
+@container style(--native-orbit-alpha: 0) { .native-solar-orbits { display:none } }
+@supports (animation-timeline: scroll()) {
   .planet-viewport { timeline-scope: --native-zoom;
     animation: native-scroll-distance linear both; animation-timeline: --native-zoom; }
   .planet-input-surface { overflow-x: hidden; overflow-y: auto; scrollbar-width: none; touch-action: pan-y;
@@ -51,7 +57,7 @@ const css = (distanceM: number, metersPerUnit: number, radiusM: number) => `
   .planet-input-surface::-webkit-scrollbar { display: none; }
   .planet-input-surface::before { content: ''; display: block; height: 400px; }
   .planet-input-surface::after { content: ''; display: block; height: 3600px; }
-  .native-zoom-start { display: block; height: 100%; scroll-initial-target: nearest; scroll-snap-align: start; }
+  .native-zoom-start { display: block; height: 100%; scroll-initial-target: nearest; scroll-snap-align: start; outline: none; }
   .polycss-scene { translate: 0 0 calc(var(--native-dolly-m) / ${metersPerUnit} * -1px); }
 }
 `;
@@ -80,7 +86,8 @@ createServer((request, response) => {
         read: () => read(`/objects/${descriptor.id}/${prepared.sha256}.json`),
         readShared: reference => read(`/shared/${reference.kind}/${reference.sha256}.json`),
       });
-      let saved = parseSharedView(url.search);
+      const viewToken = url.searchParams.get('v');
+      let saved = parseSharedView(viewToken === null ? '' : new URLSearchParams({ v: viewToken }).toString());
       if (!saved) {
         // Shared silhouette fitting and prepared orientation, at a fixed reference
         // focal length. This proof does not add a device-specific view.
@@ -100,16 +107,21 @@ createServer((request, response) => {
       stage.setAttribute('style', markup.style);
       for (const [name, value] of Object.entries(markup.attributes)) stage.setAttribute(name, value);
       stage.innerHTML = markup.html;
-      publishPreparedNativeView(definition, initialObjectSelection(definition.controls, lensId), stage, frame, saved);
+      const selection = initialObjectSelection(definition.controls, lensId);
+      const publication = publishPreparedNativeView(definition, selection, stage, frame, saved);
       stage.dataset.preparedView = formatSharedView(saved).slice(2);
       const surface = document.querySelector('.planet-input-surface');
       if (!surface || !document.querySelector('.polycss-scene')) throw new Error('The existing prepared scene is missing.');
-      const rules = addNativeSolarContext(document, frame, saved, descriptor.id);
+      const nativeCamera = url.searchParams.get('drag') === 'resize' ? addNativeCamera(document, definition, selection, frame, publication) : undefined;
+      const rules = addNativeSolarContext(document, frame, saved, descriptor.id, nativeCamera);
       const style = document.createElement('style');
-      style.textContent = css(saved.camera.distanceKilometers! * 1000, frame.metersPerUnit, frame.bodyRadiusM) + rules;
+      style.textContent = css(saved.camera.distanceKilometers! * 1000, frame.metersPerUnit, frame.bodyRadiusM) + rules + (nativeCamera?.css ?? '');
       document.head.append(style);
-      const initial = document.createElement('span'); initial.className = 'native-zoom-start'; initial.setAttribute('aria-hidden', 'true'); surface.append(initial);
+      const initial = document.createElement('span'); initial.className = 'native-zoom-start';
+      initial.setAttribute('autofocus', ''); initial.setAttribute('tabindex', '-1');
+      initial.setAttribute('role', 'group'); initial.setAttribute('aria-label', 'Scene zoom'); surface.append(initial);
       surface.setAttribute('aria-label', `Scroll to zoom ${descriptor.id}`);
+      if (url.searchParams.get('drag') === 'resize') style.textContent += addNativeResizeInput(document);
       body = document.toString();
     } else body = new Uint8Array(await upstream.arrayBuffer());
     response.writeHead(upstream.status, Object.fromEntries(headers)); response.end(body);

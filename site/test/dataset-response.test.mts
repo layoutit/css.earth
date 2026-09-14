@@ -13,7 +13,7 @@ const scene = await loadPreparedSceneMarkup('saturn');
 const prepared = await readPreparedObjectBytes('saturn');
 const html = `<!doctype html><html><head><style>u { color: red }</style></head><body><!--search-shell:start-->
 <input class="planet-sheet-handle" type="checkbox"><section class="planet-information-panel">
-<input type="radio" data-information-tab="dataset"><input type="radio" data-information-tab="factsheet" checked>
+<div class="planet-native-tabs"><input type="radio" data-information-tab="dataset"><input type="radio" data-information-tab="factsheet" checked></div>
 ${['normal', 'ultraviolet', 'cross-section'].map(id => `<button type="submit" name="dataset" value="${id}" aria-pressed="${id === 'normal'}">${id}</button><div data-lens-details="${id}" ${id === 'normal' ? '' : 'hidden'}>${id}</div>`).join('')}
 </section><!--search-shell:end--><!--prepared-descriptor:start--><script data-prepared-descriptor type="application/json">${JSON.stringify(scene.descriptor)}</script><!--prepared-descriptor:end-->
 <!--prepared-scene:start--><main class="planet-stage ${scene.classes.join(' ')}" data-object-id="saturn" data-prepared-object="saturn" data-prepared-sha256="${scene.sha256}" aria-label="Saturn">${scene.html}</main><!--prepared-scene:end--><script src="/app.js"></script></body></html>`;

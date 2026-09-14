@@ -29,8 +29,8 @@ const styleText = (style: ReadonlyMap<string, string>) => [...style].map(([key, 
 
 /** Serialize the selected package's prepared reference view. No replacement mesh,
  * texture generation, camera inference or source processing belongs here. */
-export function serializePreparedScene(definition: ObjectRuntimeDefinition, lensId?: string): PreparedSceneMarkup {
-  const selection = initialObjectSelection(definition.controls, lensId);
+export function serializePreparedScene(definition: ObjectRuntimeDefinition, lensId?: string, settings?: unknown): PreparedSceneMarkup {
+  const selection = initialObjectSelection(definition.controls, lensId, settings);
   const variant = definition.variants.find(entry => Object.entries(entry.when).every(([key, value]) => selection[key] === value));
   if (!variant) throw new TypeError(`${definition.id}: initial presentation is missing.`);
   const elements = definition.tree.nodes.map(node => ({

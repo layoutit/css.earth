@@ -1,10 +1,12 @@
+import { preparedDomAdoption } from '../rendering/prepared-dom-adoption.js';
 import { mountPreparedCssVolume } from './prepared-volume-runtime.js';
 import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
 import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
 import { validatePreparedCssVolume } from './validation.js';
 import type { PreparedCssVolume, VolumeAxis, VolumeCameraPublication } from './types.js';
-import { DEFAULT_POINT_VISIBILITY, projectedVolumeOpacity } from './projected-volume-visibility.js';
+import { DEFAULT_POINT_VISIBILITY, projectedVolumeOpacity, projectedVolumeRadiusPixels } from './projected-volume-visibility.js';
+import { nativeProjectedFade } from '../rendering/native-projection.js';
 import type { PreparedPointVisibility } from './projected-volume-visibility.js';
 import type { PreparedAssets } from '../rendering/prepared-residency.js';
 import { mountPreparedCataloguePoints, samePreparedCatalogueGeometry, samePreparedPhysicalFrame,
@@ -142,13 +144,19 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
     return url;
   };
   return Object.freeze({ assets, payload: data,
-    mount({ host, before }: { host: HTMLElement; before: Element }) {
-      const document = host.ownerDocument, root = document.createElement('div');
+    mount({ host, before, nativeFocalCss }: { host: HTMLElement; before: Element; nativeFocalCss?: string }) {
+      const document = host.ownerDocument;
+      const existing = [...document.querySelectorAll<HTMLElement>('.prepared-volume-lenses[data-prepared-volume-node="0"]')].find(root => root.dataset.volumeLensObject === data.id) ?? null;
+      const dom = preparedDomAdoption(document, existing, nativeFocalCss !== undefined), create = dom.create;
+      const selectedNative = existing?.dataset.selectedLens;
+      const root = create('div');
       root.className = 'prepared-volume-lenses'; root.dataset.volumeLensObject = data.id;
       Object.assign(root.style, { position: 'absolute', inset: '0', pointerEvents: 'none' });
-      const end = document.createElement('span'); end.hidden = true; root.append(end);
-      let selected = data.defaultLens, destroyed = false, latest: VolumeCameraPublication | null = null;
-      let starsVisible = data.starsEnabled ?? true;
+      const end = create('span'); end.hidden = true; root.append(end);
+      let selected = data.lenses.some(lens => lens.id === selectedNative) ? selectedNative! : data.defaultLens, destroyed = false, latest: VolumeCameraPublication | null = null;
+      const nativeStars = existing ? [...document.querySelectorAll<HTMLInputElement>('[data-focus-lens-bank] [data-focus-stars]')]
+        .find(input => input.closest<HTMLElement>('[data-focus-lens-bank]')?.dataset.focusLensBank === data.id) : null;
+      let starsVisible = nativeStars?.checked ?? data.starsEnabled ?? true;
       const listeners = new Set<(state: PreparedVolumeLensState) => void>();
       const lensContent = Object.freeze(data.lenses.map(({ id, label, title, description, sourceUrl }) =>
         Object.freeze({ id, label, title, description, sourceUrl })));
@@ -173,19 +181,22 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         bank.surface.style.opacity = bank.lens.volume.impostors ? '1' : String(opacity);
         const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, bank.lens.volume.frame,
           data.framingRadiusUnits, data.pointVisibility!);
-        stars!.root.style.opacity = String(pointOpacity);
-        stars!.root.style.display = starsVisible && pointOpacity > 0 ? 'block' : 'none';
+        stars!.root.style.opacity = nativeFocalCss === undefined ? String(pointOpacity)
+          : nativeProjectedFade(projectedVolumeRadiusPixels(publication.world, publication.viewport, bank.lens.volume.frame, data.framingRadiusUnits),
+            publication.viewport.focalPixels, nativeFocalCss, data.pointVisibility!.hiddenBelowRadiusPixels, data.pointVisibility!.fullAboveRadiusPixels);
+        const showPoints = starsVisible && (nativeFocalCss !== undefined || pointOpacity > 0);
+        stars!.root.style.display = showPoints ? 'block' : 'none';
         // Hidden points leave layout; projecting them only wrote styles nobody draws.
-        if (starsVisible && pointOpacity > 0) stars!.publish(publication);
+        if (showPoints) stars!.publish(publication);
         root.dataset.pointOpacity = String(pointOpacity); root.dataset.cloudOpacity = String(opacity);
         latest = publication;
       };
       try {
         for (const lens of data.lenses) {
-          const surface = document.createElement('div'); surface.className = 'prepared-volume-lens-cloud'; surface.dataset.volumeLens = lens.id;
+          const surface = create('div'); surface.className = 'prepared-volume-lens-cloud'; surface.dataset.volumeLens = lens.id;
           Object.assign(surface.style, { position: 'absolute', inset: '0', pointerEvents: 'none', display: lens.id === selected ? 'block' : 'none' });
-          const marker = document.createElement('span'); marker.hidden = true; surface.append(marker); root.insertBefore(surface, end);
-          const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: lens.volume, resolveResource: resolvePrepared },
+          const marker = create('span'); marker.hidden = true; surface.append(marker); root.insertBefore(surface, end);
+          const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: lens.volume, resolveResource: resolvePrepared, createElement: create, nativeFocalCss },
             detail => volumeLensCompositeOpacity(detail.roots.map((axisRoot, index) => ({
               axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
             })), lens.brightness));
@@ -193,9 +204,9 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
           for (const axisRoot of runtime.roots) axisRoot.style.background = 'transparent';
           banks.push({ lens, surface, runtime });
         }
-        stars = mountPreparedCataloguePoints({ host: root, before: end, payload: banks.find(bank => bank.lens.id === selected)!.lens.stars });
+        stars = mountPreparedCataloguePoints({ host: root, before: end, payload: banks.find(bank => bank.lens.id === selected)!.lens.stars, createElement: create, nativeFocalCss });
         stars.root.style.display = starsVisible ? 'block' : 'none';
-        root.dataset.selectedLens = selected; host.insertBefore(root, before);
+        root.dataset.selectedLens = selected; host.insertBefore(root, before); dom.finish();
         return Object.freeze({ root, publish, state, destroy,
           subscribe(listener: (state: PreparedVolumeLensState) => void) {
             if (!destroyed) listeners.add(listener);

@@ -1,7 +1,7 @@
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-residency.js';
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
-import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
+import { loadFocusCatalogs } from './focus-catalog.mts';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { mountSpaceMinimap } from './minimap/minimap.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
@@ -13,9 +13,7 @@ import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { OBJECTS } from './objects.mts';
 import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mts';
 
-import galaxyCatalog from '../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
 import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
-import clusterCatalog from '../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
 import clusterPresentation from '../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
@@ -29,15 +27,13 @@ const annotationPriorities = Object.fromEntries(OBJECTS.map(object =>
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
   loadShells(): Promise<{ payload: Awaited<ReturnType<typeof loadPreparedCssSurfaceShell>>; resolveResource(path: string): string }[]>;
-  nebulaSources: ReturnType<typeof parsePreparedNebulaCatalog>['sources'];
+  catalogs: Awaited<ReturnType<typeof loadFocusCatalogs>>;
 };
 let universePromise: Promise<ApplicationUniverse> | null = null;
 function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   universePromise ??= (async () => {
-    const nebulaParts = Object.values(import.meta.glob('../src/objects/*/source/nebula.json', { eager: true, import: 'default' })).map(parsePreparedNebulaCatalog);
-    const nebulaCatalog = parsePreparedNebulaCatalog({ schema: 'cssearth-nebula-catalog@1', frame: galaxyCatalog.frame,
-      sources: [...new Map(nebulaParts.flatMap(part => part.sources).map(source => [source.id, source])).values()],
-      objects: nebulaParts.flatMap(part => part.objects) });
+    const catalogs = await loadFocusCatalogs(document, location.origin);
+    const { galaxies: galaxyCatalog, clusters: clusterCatalog, nebulae: nebulaCatalog } = catalogs;
     // Only the context objects' folders are globbed; bodies share src/objects but are not world resources.
     const descriptors = CONTEXT_OBJECT_DESCRIPTORS, assets = CONTEXT_OBJECT_ASSET_URLS;
     const resourceSet = (objectId: string) => {
@@ -95,7 +91,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const markerPool = 'context-markers';
     const markerEntries = [...new Set(Object.values(sprites).map(sprite => sprite.url))]
       .map((url, index) => ({ key: `${markerPool}:${index}`, url, pool: markerPool }));
-    return { ...universe, loadShells, nebulaSources: nebulaCatalog.sources, assets: {
+    return { ...universe, loadShells, catalogs, assets: {
       entries: [...universe.assets.entries, ...markerEntries],
       pools: [...universe.assets.pools, { id: markerPool, retention: 'mount', capacity: markerEntries.length,
         concurrency: 4, reuse: false, decoding: 'async' }],
@@ -127,7 +123,7 @@ export function createApplicationWorldContext() {
         const layer = prepared.mount(stage, { presentationHost, requestPublication: () => refreshWorld(), onSelectGalaxy: object => { void contextNavigation?.select(object); } });
         pendingLayer = layer;
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
-          sources: [...galaxyCatalog.sources, ...clusterCatalog.sources, ...prepared.nebulaSources], windowTarget });
+          sources: [...prepared.catalogs.galaxies.sources, ...prepared.catalogs.clusters.sources, ...prepared.catalogs.nebulae.sources], windowTarget });
         layer.setHiddenOrbits(hiddenOrbitIds);
         const framePlanner = prepared.createFramePlanner();
         pendingPlanner = framePlanner;

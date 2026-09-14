@@ -42,7 +42,7 @@
   pointer-events: none;
 }
 
-body[data-sky-contrast="high"] .planet-cubic-sky-face {
+body:has(.planet-sky-contrast-setting:checked) .planet-cubic-sky-face {
   background-image: var(--planet-cubic-sky-high-contrast-image);
 }
 

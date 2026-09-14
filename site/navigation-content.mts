@@ -66,7 +66,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
             }
             styles = next.map(({ element }) => element);
             committed = true; signal.removeEventListener('abort', dispose);
-            for (const selector of ['.planet-information-panel', '.planet-settings-panel']) {
+            for (const selector of ['.planet-information-panel', '.planet-settings-panel', '[data-settings-form]']) {
               const target = documentTarget.querySelector<HTMLElement>(selector), incoming = source.querySelector<HTMLElement>(selector);
               if (!target || !incoming) throw new Error(`Object shell content disappeared: ${selector}.`);
               // The selection preview was imported from this same fragment and
@@ -75,11 +75,11 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               if (preserveSidebar && selector === '.planet-information-panel' && !target.querySelector(':scope > [data-card-preview]')) continue;
               target.replaceChildren(...[...incoming.childNodes].map(node => documentTarget.importNode(node, true)));
             }
-            for (const selector of [...required, '.planet-sidebar-view-all', '.planet-sheet-handle',
+            for (const selector of [...required, '[data-settings-form]', '.planet-sidebar-view-all', '.planet-sheet-handle',
               '.explorer-rail-explore', '.explorer-rail-about', '.planet-settings-action', '.explorer-about-panel', '.explorer-about-panel h2']) {
               const target = documentTarget.querySelector<HTMLElement>(selector), incoming = source.querySelector<HTMLElement>(selector);
               if (!target || !incoming) continue;
-              for (const name of ['id', 'aria-label', 'aria-controls', 'aria-labelledby', 'placeholder', 'data-has-destinations']) {
+              for (const name of ['id', 'action', 'aria-label', 'aria-controls', 'aria-labelledby', 'popovertarget', 'placeholder', 'data-has-destinations']) {
                 const value = incoming.getAttribute(name);
                 if (value === null) target.removeAttribute(name); else target.setAttribute(name, value);
               }

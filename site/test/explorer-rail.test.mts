@@ -15,6 +15,7 @@ function fixture({ mobile = false } = {}) {
     scrollIntoView() { this.scrolledIntoView += 1; }
     focus() { documentTarget.activeElement = this; }
     click() { this.dispatchEvent(new Event("click")); }
+    matches() { return false; }
   }
   class Button extends Element {}
   class Input extends Element {}
@@ -67,7 +68,6 @@ test("rail switches the retained About panel without storing or mounting a scene
   assert.equal(f.panel.hidden, true);
   assert.equal(f.explore.ariaPressed, "true");
   assert.equal(f.about.ariaPressed, "false");
-  assert.equal(f.settings.ariaPressed, "false");
   f.about.click();
   assert.equal(f.panel.hidden, false);
   assert.equal(f.drawer.hidden, true);
@@ -96,60 +96,6 @@ test("Escape restores a visible keyboard focus target", () => {
   controller.destroy();
 });
 
-test("settings opens in the context slot and leaves the sidebar panel alone", () => {
-  const f = fixture({ mobile: true });
-  const controller = f.mount();
-  f.about.click();
-  f.settings.click();
-  assert.equal(f.settingsPanel.hidden, false);
-  assert.equal(f.settings.ariaPressed, "true");
-  assert.equal(f.documentTarget.body.dataset.contextPanel, "settings");
-  assert.equal(f.panel.hidden, false);
-  assert.equal(f.drawer.hidden, true);
-  assert.equal(f.search.hidden, false);
-  assert.equal(f.about.ariaPressed, "true");
-  assert.equal(f.aside.ariaLabel, "About cssEarth");
-  assert.deepEqual(f.scrolls, [{ top: 0, behavior: "instant" }], "only the sidebar panel scrolls the page to the top");
-  assert.equal(f.settingsPanel.scrolledIntoView, 1, "mobile brings Settings into view");
-  controller.destroy();
-});
-
-test("settings toggles on repeat clicks, stays open across sidebar panels, and closes first on Escape", () => {
-  const f = fixture();
-  const controller = f.mount();
-  f.settings.click();
-  assert.equal(f.settingsPanel.hidden, false);
-  assert.equal(f.drawer.hidden, false, "the planet card stays visible");
-  f.settings.click();
-  assert.equal(f.settingsPanel.hidden, true, "a repeat click closes Settings");
-  assert.equal(f.settings.ariaPressed, "false");
-  assert.equal(f.documentTarget.body.dataset.contextPanel, undefined);
-  f.settings.click();
-  f.about.click();
-  f.explore.click();
-  assert.equal(f.settingsPanel.hidden, false, "sidebar panels leave Settings open");
-  f.about.click();
-  assert.equal(f.escape().defaultPrevented, true);
-  assert.equal(f.settingsPanel.hidden, true, "Escape closes Settings first");
-  assert.equal(f.panel.hidden, false);
-  assert.equal(f.documentTarget.activeElement, f.settings);
-  assert.equal(f.escape().defaultPrevented, true);
-  assert.equal(f.panel.hidden, true);
-  assert.equal(f.documentTarget.activeElement, f.about);
-  controller.destroy();
-});
-
-test("choosing the machine card closes Settings", () => {
-  const f = fixture();
-  const controller = f.mount();
-  f.settings.click();
-  f.machineToggle.click();
-  assert.equal(f.settingsPanel.hidden, true);
-  assert.equal(f.settings.ariaPressed, "false");
-  assert.equal(f.documentTarget.body.dataset.contextPanel, undefined);
-  controller.destroy();
-});
-
 test("search stays visible in About and Settings and typing returns to the results", () => {
   const f = fixture();
   const controller = f.mount();
@@ -162,14 +108,11 @@ test("search stays visible in About and Settings and typing returns to the resul
   f.searchInput.dispatchEvent(new Event("input"));
   assert.equal(f.panel.hidden, true);
   assert.equal(f.drawer.hidden, false);
-  f.settings.click();
   assert.equal(f.search.hidden, false);
-  assert.equal(f.settingsPanel.hidden, false);
   f.searchInput.dispatchEvent(new Event("input"));
   assert.equal(f.search.hidden, false);
   assert.equal(f.drawer.hidden, false);
   assert.equal(f.panel.hidden, true);
-  assert.equal(f.settingsPanel.hidden, false, "Settings stays open beside the results");
   controller.destroy();
 });
 
@@ -185,13 +128,7 @@ test("destroy resets retained markup and remount does not duplicate listeners", 
   f.about.click();
   assert.equal(f.panel.hidden, true);
   const second = f.mount();
-  f.settings.click();
-  assert.equal(f.settingsPanel.hidden, false);
   second.destroy();
-  assert.equal(f.settingsPanel.hidden, true);
-  assert.equal(f.settings.ariaPressed, "false");
-  f.settings.click();
-  assert.equal(f.settingsPanel.hidden, true);
 });
 
 test("an incomplete rail fails clearly", () => {

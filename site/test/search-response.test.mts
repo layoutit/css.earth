@@ -99,7 +99,10 @@ test('Netlify routing keeps all query parameters, bypasses assets, and never rec
   assert.equal(result?.searchParams.get('category'), 'satellite');
   assert.equal(result?.searchParams.get('v'), 'view');
   assert.equal(searchRoute(new Request(result!)), undefined);
-  for (const path of ['/saturn/?v=view', '/scenes/saturn/image.webp?q=text', '/navigation/saturn/?q=text']) assert.equal(searchRoute(new Request(origin + path)), undefined);
+  for (const query of ['v=view', 'settings=1', 'feature=6152', 'focus=m42', 'focusLens=visible']) {
+    assert.equal(searchRoute(new Request(`${origin}/saturn/?${query}`))?.pathname, '/.netlify/functions/search');
+  }
+  for (const path of ['/saturn/', '/scenes/saturn/image.webp?q=text', '/navigation/saturn/?q=text']) assert.equal(searchRoute(new Request(origin + path)), undefined);
   assert.equal(searchRoute(new Request(origin + '/?q=text'))?.searchParams.get('object'), 'earth');
 });
 

@@ -62,7 +62,7 @@ export function objectCycleStates(control: CycleControl): readonly CycleState[] 
   return states;
 }
 
-export function initialObjectSelection(controls: ObjectControls, lensId?: string): ObjectSelection {
+export function initialObjectSelection(controls: ObjectControls, lensId?: string, settings?: unknown): ObjectSelection {
   requireObjectControls(controls);
   if (lensId !== undefined) requireObjectAction(controls, { kind: 'lens', id: lensId });
   const selection: { lensId: string | null; [name: string]: string | number | boolean | null } = { lensId: lensId ?? controls.lenses?.defaultLens ?? null };
@@ -72,6 +72,15 @@ export function initialObjectSelection(controls: ObjectControls, lensId?: string
       const state = objectCycleStates(control).find(state => state.label === control.state);
       if (!state) throw new TypeError(`Cycle ${control.name} has no initial state.`);
       selection[control.name] = state.value;
+    }
+  }
+  if (settings !== undefined) {
+    if (!settings || typeof settings !== 'object' || Array.isArray(settings)) throw new TypeError('Initial settings must be a record.');
+    for (const [name, value] of Object.entries(settings)) {
+      const control = controls.settings?.controls.find(control => control.name === name);
+      if (!control || (control.kind === 'toggle' ? typeof value !== 'boolean' : typeof value !== 'number')) throw new TypeError(`Invalid initial setting: ${name}.`);
+      requireObjectAction(controls, control.kind === 'toggle' ? { kind: 'toggle', name, value } : { kind: 'cycle', name, value });
+      selection[name] = value;
     }
   }
   return Object.freeze(selection);
