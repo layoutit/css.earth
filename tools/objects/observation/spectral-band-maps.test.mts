@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { estimateBand, fitsCube, paintCell, parseSpectralBandRecipe, prepareSpectralBandMaps } from './spectral-band-maps.mts';
-import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '../../oracles/fixture.mts';
+import { readOracleFixture, assertPinnedInputs, readOracleInput, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '../../source-values.mts';
 
 const source = resolve(ORACLE_ROOT, 'src/objects/charon/source');
@@ -41,6 +41,7 @@ test('surface footprints paint only covered cell centres, including a footprint 
 test('native planes and Organa cell spectra agree with the independent astropy fixture; maps reproduce their pins', async () => {
   const fixture = await readOracleFixture('fits/charon-leisa.json');
   await assertPinnedInputs(fixture.inputs);
+  for (const input of fixture.inputs) await readOracleInput(input);
   const products = requireArray(fixture.cases.products).map(value => requireRecord(value));
   assert.equal(products.length, recipe.scans.length);
   const result = await prepareSpectralBandMaps(source, recipePath);
@@ -62,7 +63,7 @@ test('native planes and Organa cell spectra agree with the independent astropy f
       assert.deepEqual(raw.shape, [planes, scan.height, scan.width]);
       assert.equal(decoded.at(0,0), raw.corner);
       for (const s of requireArray(raw.samples).map(value => requireRecord(value))) assert.equal(decoded.at(requireFiniteNumber(s.plane), requireFiniteNumber(s.index)), s.value);
-      assert.throws(() => fitsCube(bytes.subarray(0, bytes.length-1), scan.width, scan.height, planes), /layout/);
+      assert.throws(() => fitsCube(bytes.subarray(0, bytes.length-1), scan.width, scan.height, planes), /layout|Truncated/);
       assert.throws(() => decoded.at(planes, 0), /outside/);
     }
     for (const rawMap of requireArray(product.maps).map(value => requireRecord(value))) {

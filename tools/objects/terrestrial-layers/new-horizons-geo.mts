@@ -1,5 +1,6 @@
 import { pds4Blocks, pds4Elements } from '../pds-labels.mts';
 import { createHash } from 'node:crypto';
+import { readFitsHdu, fitsImageAccessor } from '../../fits.mts';
 import { readFitsHeader, readFitsPrimary } from '../observation/fits.mts';
 import { archivedCameraFields, array, dimensions, number, shape, sipCameraFields, text } from './source-records.mts';
 import { bindSipCamera, sipPixel } from './llorri-geo.mts';
@@ -85,11 +86,11 @@ export function decodeArrokothMvic(bytes: Buffer, value: unknown, label: string)
     throw new Error('MVIC color requires its native band order, wavelengths and data-number units.');
   const camera = shape({...archivedCameraFields,...dimensions,imageSha256:text,startTime:text,
     imageTransform:array(array(number)),referenceCamera:shape(sipCameraFields)})(value);
-  const {header:h,dataOffset} = readFitsHeader(bytes);
+  const hdu = readFitsHdu(bytes), {header:h,dataOffset} = hdu, at = fitsImageAccessor(bytes, hdu);
   if (createHash('sha256').update(bytes).digest('hex') !== camera.imageSha256 || camera.width !== 300 || camera.height !== 300 ||
       h.SIMPLE !== true || h.BITPIX !== -64 || h.NAXIS !== 3 || h.NAXIS1 !== 300 || h.NAXIS2 !== 300 || h.NAXIS3 !== 4 ||
       h.BSCALE !== undefined || h.BZERO !== undefined || dataOffset+300*300*4*8 !== bytes.length) throw new Error('Unsupported Arrokoth MVIC cube.');
-  const bands = Array.from({length:4}, (_,b) => Float64Array.from({length:90000}, (_,i) => bytes.readDoubleBE(dataOffset+(b*90000+i)*8)));
+  const bands = Array.from({length:4}, (_,b) => Float64Array.from({length:90000}, (_,i) => at(b*90000+i)));
   const transform = camera.imageTransform;
   if (transform.length!==3 || transform.some(row=>row.length!==3) || transform[2].some((v,i)=>v!==Number(i===2))) throw new Error('MVIC requires its fitted image-space transform.');
   const inverse = inverseCameraMatrix(transform), reference = bindSipCamera(camera.referenceCamera);
