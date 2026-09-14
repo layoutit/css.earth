@@ -115,6 +115,8 @@ test("object descriptors count only the fields each owner can change", async () 
     await editDescriptor(root, id, restore);
     assert.ok(await readPreparationReceipt(receiptAt(root)), `${name} restored`);
   }
+  const writtenFirst = await observed(root, { "src/objects/moon/object.json": ["write", "read"] });
+  assert.equal((await seal(root, writtenFirst)).refusal, null, "a descriptor a process wrote before reading has no first state to compare");
   const wider = await seal(root, await observed(root, { "src/objects/moon/object.json": ["read", "write"], "src/objects/pluto/object.json": ["load"] },
     { catalogImporters: [join(root, REGISTRY_MODULE), join(root, "site/prepared-context-objects.mts")] }));
   assert.equal(wider.receipt?.inputs["src/objects/pluto/object.json"]?.evidence, "bytes", "a module reading whole descriptors makes them whole inputs");
