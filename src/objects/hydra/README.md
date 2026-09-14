@@ -11,13 +11,7 @@ Geometry is Simon Porter’s [2021 released Hydra model](https://doi.org/10.6084
 
 The camera uses the PDS New Horizons [`nh_pcnh_010.tpc`](https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/pck/nh_pcnh_010.tpc) (2024-03-12). Its active values are the restored V008-derived Hydra pole, RA 68.9°, Dec 4.7°, and prime meridian 57.0724592° + 837.760665740° per TDB day past J2000. The V009 alternatives are in comments because the release explicitly says they need further checking; they are not used.
 
-| Candidate | Disposition |
-| --- | --- |
-| Porter 2021 mesh | **Included.** The released fit, including the northern concavity, supplies the fixed source geometry for this lens. |
-| PDS LORRI best exposure | **Diagnostic only.** The native observation is restored and projected experimentally; publication awaits controlled image-to-mesh registration. |
-| PDS MVIC color sequence | **Not used as color.** It needs qualified cross-band and image-to-mesh registration. |
-| PDS MVIC/LEISA composition products | **Context only.** They do not supply a registered composition map for this mesh. |
-| Porter et al. 2025 model work | **Not substituted.** No downloadable updated mesh or camera solution was found for the 2021 STL. |
+Source selections and alternative products are recorded in the [investigation ledger](investigations.json).
 
 ## Evidence
 

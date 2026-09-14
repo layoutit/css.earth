@@ -4,7 +4,7 @@
 
 **Additional Monochrome coverage:** clear-filter frames `N1675163339_1` and `N1519536732_1` add views near 87–96°W, using the camera rows in the same PDS shape release. Their nominal central footprints are about 166 m and 406 m per pixel. The existing close views retain priority wherever their samples qualify.
 
-- **Monochrome:** 11 calibrated Cassini ISS NAC photographs, projected using the measured camera records accompanying this moon’s PDS shape. Clear-filter images calibrated to I/F by CISSCAL.
+- **Monochrome:** 13 calibrated Cassini ISS NAC photographs, projected using the measured camera records accompanying this moon’s PDS shape. Clear-filter images calibrated to I/F by CISSCAL.
 
 - **False color:** two Cassini ISS NAC IR3/IR1/UV3 triplets from the June 18, 2011 encounter. Infrared and ultraviolet are encoded as RGB after projection onto the same published shape. This is a scientific false-color display, not natural color or measured albedo.
 
@@ -74,21 +74,9 @@ Navigation portraits and small dedicated minimaps are derived from the prepared 
 
 ## Dataset survey
 
-- Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
+Recorded source selections, alternatives and failed trials are in the [investigation ledger](investigations.json).
 
-- **Not separate lenses:** individual clear-filter frames and alternate contrast versions of the same observations. They contribute complementary resolution or coverage to Monochrome.
-
-- **Investigated, not included as an observed map:** legacy Voyager/Stooke maps and global shaded-relief illustrations. They do not offer the combination of Cassini detail and measured camera registration used here; drawings are not observational textures.
-
-- **Filtered imaging:** IR3 N1687120587_1, IR1 N1687120557_1 and UV3 N1687120624_1 retain the released cameras and are checked against GRN N1687120497_1. The neighboring IR3 N1687119936_1, IR1 N1687119906_1 and UV3 N1687119973_1 sequence is aligned to RED N1687120033_1, which is itself aligned to that green reference. Native labels identify full-resolution, lossless CISSCAL I/F products.
-
-- **Registration:** portable [reference](source/preparation/close-encounters-reference.json) and [filter](source/preparation/close-encounters-filters.json) jobs retain the input cameras; their original [reference fit](source/validation/close-encounters-reference.json) and [filter fits](source/validation/close-encounters-filters.json) retain all accepted controls and residuals. The preparer rechecks the final cameras without refitting. All seven checks pass the existing held-out RMS ≤1 pixel and maximum ≤2 pixels criteria: RMS 0.27–0.86 pixels, maximum 1.51 pixels. The reference fit includes an 8.4-pixel training outlier; its independently held-out residuals pass, and the report keeps that outlier visible.
-
-- **Clear-filter detail:** N1687119135_1 adds a roughly 44 m/pixel close view; N1687121164_1, N1687121224_1 and N1687121524_1 add neighboring views. The former closest selected view was roughly 58 m/pixel. These are nominal source pixel footprints at the model center, not uniform delivered resolution. Accepted map coverage grows only slightly; most of the benefit is additional detail and overlapping observations.
-
-- **Spectroscopy:** [Cassini spectra and photometry of small inner satellites](https://www.usgs.gov/publications/cassini-spectra-and-photometry-025-51-mm-small-inner-satellites-saturn) and [small-moon photometric analyses](https://doi.org/10.3847/1538-3881/ab659d) inform interpretation. Disk-integrated measurements do not supply a spatially resolved composition texture.
-
-- **Facts and imagery reference:** [NASA Helene](https://science.nasa.gov/saturn/moons/helene/), [JPL satellite parameters](https://ssd.jpl.nasa.gov/sats/phys_par/) and the PDS shape document. No atmosphere or internal cross section is claimed.
+**Filter registration:** portable [reference](source/preparation/close-encounters-reference.json) and [filter](source/preparation/close-encounters-filters.json) jobs retain the input cameras; their original [reference fit](source/validation/close-encounters-reference.json) and [filter fits](source/validation/close-encounters-filters.json) retain all accepted controls and residuals. The preparer rechecks the final cameras without refitting. All seven checks pass the existing held-out RMS ≤1 pixel and maximum ≤2 pixels criteria: RMS 0.27–0.86 pixels, maximum 1.51 pixels. The reference fit includes an 8.4-pixel training outlier; its independently held-out residuals pass, and the report keeps that outlier visible.
 
 ## Orbit and orientation limits
 

@@ -2,6 +2,8 @@
 
 ## Sources
 
+[Investigation ledger](investigations.json): recorded source decisions, evidence and conditions for revisiting them.
+
 - Kerberos has one **Shape model** dataset. It represents the explicitly approximate single-triaxial solution in [Porter, Verbiscer and Canup's 2025 presentation](https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf), slide 7: full dimensions **14.5 × 8.2 × 7.2 km**, equivalent diameter about **9.5 km**.
 
 ## Evidence
@@ -39,13 +41,7 @@ Surface, minimap, thumbnail and context portrait use the same no-coverage interp
 
 Surveyed 2026-09-08:
 
-| Candidate | Disposition |
-| --- | --- |
-| PDS New Horizons LORRI calibrated FITS | OPUS body-geometry inventory returned 2,292 observations. The best ten belong to two resolved epochs. Original calibrated `lor_0299153805_0x630_sci.fit` and `lor_0299136735_0x636_sci.fit` were downloaded, decoded and inspected at original pixel scale. OPUS gives 1.96379 and 3.12732 km/pixel respectively. The body spans only a handful of independently sampled pixels, without a converged pole or cartographic registration. Excluded as a mapped albedo lens; the observations still constrain shape and integrated brightness. Metadata and exact inspected-product identities are pinned in `source/survey/`. |
-| [NASA PIA20034, Kerberos Revealed](https://science.nasa.gov/photojournal/kerberos-revealed/) | A useful observational illustration. The Science paper's Figure S1 explains the interlacing, deconvolution and final cosmetic upsampling used for the small-moon portrait. A resampled press image is not a high-density surface map or a geometry solution. Excluded as a surface texture. |
-| [Porter et al. 2025 fitted shapes](https://www.hou.usra.edu/meetings/plutosystem2025/pdf/7035.pdf) | Included: the presentation refines the rounded abstract dimensions and explicitly presents a single-triaxial alternative to a contact binary. No downloadable Kerberos vertex/facet release was located with this work. No screenshot tracing or hobbyist contour mesh is substituted. |
-| [Porter & Canup 2023](https://arxiv.org/abs/2306.08602) | Historical qualification: two low-resolution resolved views did not permit detailed shape modeling. Its older approximate 19 × 10 × 9 km dimensions are superseded here by the explicitly labeled 2025 fit. |
-| MVIC, LEISA, HST photometry and mapped-product searches | The flyby literature and PDS survey do not provide a qualified spatially registered Kerberos color, spectral, topographic or geological map. Integrated reflectivity/lightcurves are measurements, but do not supply a second surface dataset. No such map was located; this is a survey outcome, not a claim that no other observations exist. |
+Source selections and alternative products are recorded in the [investigation ledger](investigations.json).
 
 ## Preparation and restoration
 

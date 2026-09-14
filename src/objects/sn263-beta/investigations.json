@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "sn263-beta",
+  "entries": [
+    {
+      "id": "pds-component-shape",
+      "subject": "PDS 2001 SN263 component radar shape",
+      "status": "included",
+      "finding": "The original beta, larger outer component mesh supplies the Shape view: 1,148 vertices and 2,292 faces in kilometres. Weakly constrained facets remain identified in the archive. The primary-aligned pole is an assumption, and the optical no-data grid is not a radar-coverage map.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/sn263-beta/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/sn263-beta/source/measurements.json",
+        "https://sbn.psi.edu/pds/resource/shape153591.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "native-label-identity",
+      "subject": "Native component labels versus catalog/API inconsistencies",
+      "status": "included",
+      "finding": "Source selection follows native mesh labels and Becker et al. for component identity and January–March 2008 observations. The landing page says 2003; unnamed JPL satellite rows mismatch inner/outer physical values, and rotation-error columns disagree with the paper. Those inconsistent fields are not silently adopted.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/sn263-beta/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/sn263-beta/source/measurements.json",
+        "https://doi.org/10.1016/j.icarus.2014.10.048"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "fang-2011-orbit",
+      "subject": "Fang 2011 mutual-orbit model",
+      "status": "included",
+      "finding": "Approximate orbital context extrapolates the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured by this model; rotation remains illustrative.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/sn263-beta/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/sn263-beta/source/validation/epoch-state.json",
+        "https://arxiv.org/abs/1012.2154"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "optical-scientific-surfaces",
+      "subject": "Resolved optical imagery and mapped composition",
+      "status": "unresolved",
+      "finding": "The retained Beta source review located no resolved optical image, mapped composition field or present spin-phase solution. The selected radar model remains useful, but this is a bounded recorded search outcome.",
+      "revisitWhen": "A component-specific observation, registered scientific map or qualified spin solution is located.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/sn263-beta/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/sn263-beta/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

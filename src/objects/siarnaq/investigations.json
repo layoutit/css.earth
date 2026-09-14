@@ -1,0 +1,93 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "siarnaq",
+  "entries": [
+    {
+      "id": "convex-envelope",
+      "subject": "Siarnaq published convex-model envelope",
+      "status": "included",
+      "finding": "Denk et al. (2018) and the author’s rendered model figure supply the selected approximate convex envelope. It is volume-normalized to a 19.5 km radius from the roughly 39 ± 6 km thermal diameter. Treating effective thermal diameter as volume diameter and adding symmetric elliptical caps are display assumptions; this does not reproduce the original inversion model.",
+      "evidence": [
+        "https://tilmanndenk.de/outersaturnianmoons/siarnaq/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/siarnaq/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/siarnaq/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "native-inversion-mesh",
+      "subject": "Original Siarnaq convex inversion mesh",
+      "status": "unresolved",
+      "finding": "The reviewed author page linked no native OBJ. An analogous author-file URL probe returned HTTP 404; that unsuccessful probe is not proof that the native model is absent. The figure-derived approximation remains explicitly separate.",
+      "revisitWhen": "A released Siarnaq mesh with model frame, method and reuse documentation can be compared with the approximation.",
+      "evidence": [
+        "https://tilmanndenk.de/outersaturnianmoons/siarnaq/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/siarnaq/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "spectral-route",
+      "subject": "Siarnaq JWST NIRSpec PRISM spectrum",
+      "status": "deferred",
+      "finding": "Belyakov and Brown (2025) presents unresolved 0.7–5.3 micrometre NIRSpec PRISM measurements. They constrain unresolved composition and do not support a surface lens.",
+      "revisitWhen": "A released interpretable spectrum can support a chart; a registered spatial product would be needed for a surface lens.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/adc55d",
+        "https://arxiv.org/abs/2503.20046",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/siarnaq/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "terrain-geology",
+      "subject": "Terrain and geology route",
+      "status": "excluded",
+      "finding": "No resolved DEM, registered geology or mapped composition product was qualified; model facets do not establish terrain.",
+      "revisitWhen": "A body-specific registered terrain, geology or composition release can be reviewed.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/siarnaq/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-lightcurve-data",
+      "subject": "Cassini ISS Siarnaq light-curve data",
+      "status": "deferred",
+      "finding": "The Cassini archive and author’s observation record supply disk-integrated data underlying the shape inference. The documented time-series view remains a candidate; no light-curve chart is selected.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/siarnaq/README.md",
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://tilmanndenk.de/outersaturnianmoons/siarnaq/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ],
+      "revisitWhen": "An observation view is in scope and the original time-series samples are validated for units, cadence and uncertainties."
+    }
+  ]
+}

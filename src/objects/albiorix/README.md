@@ -16,7 +16,7 @@
 
 - The display uses an arbitrary north-aligned ICRF pole, meridian and spin sense. This is not an observed attitude or synchronous rotation; display motion is illustrative.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 ## Methods and source notes
 
@@ -31,15 +31,9 @@ It uses a volume-equivalent display radius of 14.3 km, giving semiaxes 17.380912
 
 The approximation does not reproduce the measured lightcurve series. Unknown concavities, terrain and albedo patterns are not synthesized. Shape bounds, maps, thumbnails and context markers derive from this same geometry.
 
-## Dataset candidates
+## Investigation record
 
-- **Cassini ISS:** [PDS archive](https://pds-rings.seti.org/cassini/iss/) and [author’s observations](https://tilmanndenk.de/outersaturnianmoons/albiorix/) provide unresolved images and lightcurve constraints. Selected for bulk shape evidence; not a registered photographic surface.
-
-- **Native inversion model:** [Denk et al. (2026), section 4.2](https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf) reports 13 calculated Saturnian models, with footnote 47 identifying papers in preparation. No downloadable model for Albiorix was qualified in the reviewed releases. This remains an unresolved replacement candidate, not evidence that no model exists.
-
-- **Elevation and geology:** no registered terrain or geology product was qualified in the reviewed sources. Facets of the approximation are not measured relief.
-
-- **JWST spectroscopy:** [Belyakov and Brown (2025)](https://arxiv.org/abs/2503.20046) provides unresolved 0.7–5.3 µm spectra. Useful for a future spectrum chart; not a spatial composition map or texture.
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json), including what would reopen each decision.
 
 ## Orientation and orbit
 

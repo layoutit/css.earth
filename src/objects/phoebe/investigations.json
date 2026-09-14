@@ -1,0 +1,111 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "phoebe",
+  "entries": [
+    {
+      "id": "cassini-spc-2023-shape",
+      "subject": "Cassini 2023 SPC shape and radius products",
+      "status": "included",
+      "finding": "Selected paired products supply Shape and Radial height under their documented source frame and support masks.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/source/manifest.json",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-spc-2023-albedo",
+      "subject": "Cassini 2023 SPC albedo and quality products",
+      "status": "included",
+      "finding": "Selected relative albedo, maplet resolution and image-count products retain support limits and are not natural color or uncertainty.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/source/manifest.json",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "vims-1465671822",
+      "subject": "Cassini VIMS IR 1465671822_1",
+      "status": "included",
+      "finding": "Accepted cube supplies Infrared and Ice absorption from 41 supported native pixels with coarse registration limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/source/manifest.json",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "vims-1465670650",
+      "subject": "Cassini VIMS IR 1465670650_1 fit",
+      "status": "excluded",
+      "finding": "The recorded fit has systematic independent holdout bias and does not inherit the accepted correction.",
+      "revisitWhen": "A new fit passes independent holdouts under documented geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/source/manifest.json",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "sbib-regional-rgb",
+      "subject": "SBIB regional RGB candidate",
+      "status": "unresolved",
+      "finding": "Different ellipsoid and shape convention lack qualified RGB-to-2023-shape registration.",
+      "revisitWhen": "Source-specific registration with independent controls qualifies the candidate.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/source/manifest.json",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "retired-dlr-and-gaskell",
+      "subject": "Older DLR mosaic and Gaskell Q128 source",
+      "status": "excluded",
+      "finding": "Earlier Monochrome is not draped onto the changed centre and shape because it would mix source frames.",
+      "revisitWhen": "A frame-qualified registration to the selected shape is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/phoebe/source/manifest.json",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

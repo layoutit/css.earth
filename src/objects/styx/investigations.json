@@ -1,0 +1,111 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "styx",
+  "entries": [
+    {
+      "id": "porter-2025-triaxial",
+      "subject": "Porter 2025 Styx shape fit",
+      "status": "included",
+      "finding": "Presentation slide 9 gives full axes 10.6 × 6.0 × 5.3 km and a 7.0 km equivalent diameter. The package retains those axes as an approximate ellipsoid, without renormalization or local relief; the newer fit has no unique pole.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/source/measurements.json",
+        "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "weaver-2016-geometry",
+      "subject": "Weaver 2016 older Styx dimensions",
+      "status": "excluded",
+      "finding": "The earlier 16 × 9 × 8 km fit is superseded for geometry. The historical pole and reported 3.24-day period remain illustrative/informational; they do not establish a current rotational phase.",
+      "revisitWhen": "A source reconciliation justifies replacing the 2025 dimensions or separately qualifying the historical geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/source/measurements.json",
+        "https://doi.org/10.1126/science.aae0030"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "lorri-u-tbd-1-02",
+      "subject": "LORRI U_TBD_1_02 native frame lor_0299137075",
+      "status": "excluded",
+      "finding": "The retained survey sorted 2,605 observations; the best six were approximately 3.125–3.133 km/native pixel. The inspected calibrated FITS has only a few source pixels across Styx and no controlled cartographic footprint.",
+      "revisitWhen": "A resolved, independently registered Styx observation supports actual surface information.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/source/survey/native-inspection.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/source/survey/lorri-best-metadata.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "mvic-search",
+      "subject": "MVIC surface-geometry inventory",
+      "status": "unresolved",
+      "finding": "The recorded PDS search returned no indexed Styx observations, and the cited resolved-observation log lists LORRI only. This is an index-specific result, not proof of archive-wide absence.",
+      "revisitWhen": "A Styx-specific MVIC product or a new archive route establishes usable data and geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/source/survey/mvic-search.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "weaver-deconvolved-composite",
+      "subject": "NASA/Weaver six-image composite",
+      "status": "excluded",
+      "finding": "The published composite is enlarged eight times beyond native spacing after deconvolution. It is useful context but does not supply eight times more independent surface detail or a qualified projection.",
+      "revisitWhen": "Native observations and controlled coordinates support a photographic surface independently of display enlargement.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/README.md",
+        "https://doi.org/10.1126/science.aae0030"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "mapped-model-product-search",
+      "subject": "USGS, PDS shape and HST source review",
+      "status": "unresolved",
+      "finding": "The retained source review located no usable Styx map, scalar field or downloadable controlled mesh. HST detections and lightcurves constrain orbit or shape, not local terrain.",
+      "revisitWhen": "A numerical target-specific model or mapped field with usable coordinates and uncertainty is located.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/styx/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

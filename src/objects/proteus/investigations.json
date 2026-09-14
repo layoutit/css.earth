@@ -1,0 +1,126 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "proteus",
+  "entries": [
+    {
+      "id": "voyager-clear-c1137317-c1138920",
+      "subject": "Voyager clear GEOMED frames C1137317 and C1138920",
+      "status": "included",
+      "finding": "The calibrated, geometrically corrected clear frames supply complementary coarse Monochrome coverage. Native detector scales are 1.35 and 8.03 km/pixel; the close frame has dark-current background and low signal, and neither frame establishes feature-controlled terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/source/manifest.json",
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "voyager-filter-color",
+      "subject": "Voyager violet C1137328, blue C1137339 and green C1137350",
+      "status": "included",
+      "finding": "The three calibrated GEOMED frames supply a separate coarse filter-color lens after per-frame geometry, limb and held-out-sector checks. The roughly 60-pixel discs, long exposures and common-interior mask prohibit clear-frame detail transfer, white balance or pan-sharpening.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/source/geometry/color-registration.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/evidence/filter-color/capture.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "stooke-proteus-radius-grid",
+      "subject": "Stooke n8proteus.tab global radius grid",
+      "status": "included",
+      "finding": "The PDS 5-degree west-positive radius grid supplies the shape and radius-relative Elevation lens above 208 km. It represents broad Voyager-derived shape; modeled unseen terrain, possible facet/depression exaggeration and lack of geoid or local altimetry remain explicit.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/source/manifest.json",
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "ted-stryk-composite",
+      "subject": "Ted Stryk Proteus color composite",
+      "status": "excluded",
+      "finding": "The inspected composite is CC BY-NC-ND and supplies no permission to reproject or redistribute derivatives, so it is not used as a texture.",
+      "revisitWhen": "The author or a compatible primary release grants derivative reuse and provides source pixels plus body-fixed registration that improve on the retained Voyager frames.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/README.md",
+        "https://www.planetary.org/space-images/proteus_stryk"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "stooke-shaded-relief-drawings",
+      "subject": "Stooke shaded-relief drawings",
+      "status": "excluded",
+      "finding": "The radius grid is used for shape/Elevation, but its interpretive shaded-relief drawings are not treated as photographic imagery.",
+      "revisitWhen": "A separately documented measured scalar product with its own grid, units and coverage supports a distinct Proteus lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/README.md",
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "stooke-1994-and-mapped-products",
+      "subject": "Stooke 1994 links and USGS/PDS map candidates",
+      "status": "unresolved",
+      "finding": "The survey did not qualify a separately registered color, altimetric DEM or composition product; the linked 1994 paper download was unavailable and absent linked data are not claimed nonexistent.",
+      "revisitWhen": "The original paper or a linked Proteus dataset becomes accessible with documented provenance, coordinates, quantity and reuse terms for source inspection.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "photographic-registration-limit",
+      "subject": "Clear and filter-color photographic registration",
+      "status": "deferred",
+      "finding": "Limb, outline and inter-band checks support coarse observed brightness only. They do not provide independent cartographic feature control; retained frame-centre fits and held-out RMS are not a photographic terrain qualification.",
+      "revisitWhen": "A Proteus camera or surface-control release supports independent interior holdouts from a meaningfully different viewing geometry without weakening the registration criteria.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/source/geometry/registration.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/proteus/source/geometry/color-registration.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}
