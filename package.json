@@ -90,7 +90,7 @@
     "prepare:sources": "node tools/prepare-provenance.mts",
     "pin:documents": "node tools/pin-object-documents.mts",
     "author:sources": "node tools/author-source-records.mts",
-    "predev": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:environment-images && pnpm prepare:nebulae && pnpm prepare:object-json && pnpm prepare:minimap && pnpm prepare:provenance",
+    "predev": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:environment-images && pnpm prepare:object-json && pnpm prepare:minimap && pnpm prepare:provenance",
     "prebuild": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:environment-images && pnpm prepare:nebulae && pnpm prepare:object-json && pnpm prepare:minimap && pnpm prepare:provenance",
     "build:renderer": "pnpm --filter @cssearth/engine exec tsup --config ../../src/renderers/css/tsup.config.ts",
     "build:preparation": "pnpm prepare:shell && pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts",
