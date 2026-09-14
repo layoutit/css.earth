@@ -105,6 +105,32 @@
       "expectedSha256": "ae7114900b3e003c1e5c59842d63100a2651fb2aef79e97f8ab254912a4a38b2",
       "examined": "Author preprint text; illustrations were not available in this PostScript copy.",
       "finding": "Published ellipsoid dimensions, long axis within about 15 degrees of Ida and spin period greater than about 8 hours constrain orientation without specifying a measured full body frame."
+    },
+    {
+      "title": "Ida and Dactyl: Spectral Reflectance and Color Variations",
+      "doi": "10.1006/icar.1996.0037",
+      "url": "https://pdfs.semanticscholar.org/2105/a100f44eb66aa7868dcbf4c52f3b7671d2c0.pdf",
+      "examined": "All eleven pages, figures and the filter table.",
+      "finding": "Dactyl is represented by disk-averaged spectra; mapped figures are Ida. No Dactyl observation-specific body frame or distributed surface controls are provided.",
+      "expectedBytes": 525919,
+      "expectedSha256": "a8ccf2fa077bd6dcf3fabc44af88d1495f8e1952e90aae5aae61f17e55530d3d"
+    },
+    {
+      "title": "Photogrammetric Evaluation of Galileo SSI Ida Images: Preliminary Results",
+      "url": "https://www.lpi.usra.edu/meetings/lpsc1995/pdf/1535.pdf",
+      "examined": "Extracted text of both pages, including the methods, Ida results and Ida satellite paragraph; no numerical controls were transcribed from figures.",
+      "finding": "The 96-point network and more than 5000 matched points are on Ida. The Dactyl paragraph proposes deriving an ephemeris; it does not provide Dactyl surface controls or a body-frame camera.",
+      "expectedBytes": 545374,
+      "expectedSha256": "50b6ace511ec6b2cd5933c7bc9ab9f0980378496e5fae47968c458860bb7f62f"
+    }
+  ],
+  "additionalKernels": [
+    {
+      "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "examined": "File introduction/body inventory and full-file searches for Dactyl and 2431011.",
+      "finding": "No Dactyl record in this generic PCK; this is a file-specific exclusion, not an archive-wide claim."
     }
   ]
 }
