@@ -29,9 +29,9 @@ const read = async (path: string) => {
 const css = (distanceM: number, metersPerUnit: number, radiusM: number) => `
 @property --native-log-distance { syntax: '<number>'; inherits: false; initial-value: 0; }
 @property --native-orbit-alpha { syntax: '<number>'; inherits: false; initial-value: 0; }
-@property --native-distance-m { syntax: '*'; inherits: false; }
-@property --native-dolly-m { syntax: '*'; inherits: false; }
-@property --native-disc-share { syntax: '*'; inherits: false; }
+@property --native-distance-m { syntax: '<number>'; inherits: false; initial-value: 0; }
+@property --native-dolly-m { syntax: '<number>'; inherits: false; initial-value: 0; }
+@property --native-disc-share { syntax: '<number>'; inherits: false; initial-value: 0; }
 @keyframes native-scroll-distance {
   0% { --native-log-distance: ${Math.log(.5)}; }
   10% { --native-log-distance: 0; }
