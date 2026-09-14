@@ -115,3 +115,25 @@ configuration, implementation and dependencies. The tool always reports
 `qualifiedSurface: false` and cannot prepare a public photographic dataset.
 The [Dactyl README](../../../../src/objects/dactyl/README.md#published-pole-and-range)
 explains the remaining map/model correspondence and visibility requirements.
+
+## Dactyl published map review
+
+Run with Node 24 and the same pinned local publisher PDF:
+
+```sh
+node tools/objects/source-authoring/galileo-lucy/review-dactyl-map.mts /path/to/1-s2.0-S0019103596900457-main.pdf
+```
+
+An optional second argument changes `output/dactyl-map-review/`. The command
+verifies the PDF, exact Figure 10 JPEG, native image, instrument, ellipsoid and
+earlier pose dependencies before writing `published-map-review.json`. Eight
+unused printed ticks check the digitized plot frame. Six separate map windows
+then check the fixed unit-weight pole-plus-Acmon pose, using the original SSI
+detector pixels and instrument distortion. Local correlation searches report
+disagreement, competing peaks and search-boundary results; they never alter
+the camera or supply accepted control points.
+
+This lightweight source check writes no scene assets or paper images. It reports
+`qualifiedSurface: false`: a recovered coordinate grid alone does not establish
+the map's reference surface, permitted raster reuse or transfer to our ellipsoid.
+See the [body interpretation](../../../../src/objects/dactyl/README.md#published-map-check).
