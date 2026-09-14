@@ -67,7 +67,7 @@
         "longitudeDirection": "east",
         "referenceRadiusMeters": 17000
       },
-      "coverage": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
+      "coverage": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05\u20130.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
       "expectedBytes": 228242957,
       "expectedSha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
       "capture": {
@@ -113,7 +113,7 @@
         "longitudeDirection": "east",
         "referenceRadiusMeters": 17000
       },
-      "coverage": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
+      "coverage": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05\u20130.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
       "expectedBytes": 228242957,
       "expectedSha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
       "capture": {
@@ -144,7 +144,7 @@
       "expectedSha256": "6c42a16f2ee32aea95f5a4bd753d8723b9ec75c68470f8f3c5f8d5de2ad5f9cb",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EROS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -256,8 +256,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2522,
-      "expectedSha256": "3f5d66af981f0d8dc0d95d8d02369ac42ffe34f53eb0ef7608c3578f285812cb"
+      "expectedBytes": 3576,
+      "expectedSha256": "b8007ace1f1b655e735a35fda198bf9e80b463b5a3db2509ee367a5b5ed98a42"
     },
     {
       "path": "preparation/navigation.json",
@@ -363,6 +363,60 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "observations/M0146235607.SUM",
+      "expectedBytes": 6723,
+      "expectedSha256": "7509644c53314875d4aacc4664c7e47f3f7b6336efda68abc8b6b3e0ae4bc383",
+      "origin": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/sumfiles-updated/M0146235607.SUM",
+      "credit": "NASA/JHUAPL/NEAR and SBMT team",
+      "purpose": "Independent SBMT preparation oracle input; not a production surface or a qualified registration.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "sbmt-m0146235607-sum",
+            "role": "reference",
+            "evidence": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/sumfiles-updated/M0146235607.SUM"
+          }
+        ]
+      }
+    },
+    {
+      "path": "observations/M0146235607F4_2P_CIF_DBL.INFO",
+      "expectedBytes": 4179,
+      "expectedSha256": "b8426142683a18780ad25f44d4ef51bd850c52cedb82e8b6c07ad27dab2809a4",
+      "origin": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/infofiles/M0146235607F4_2P_CIF_DBL.INFO",
+      "credit": "NASA/JHUAPL/NEAR and SBMT team",
+      "purpose": "Independent SBMT preparation oracle input; not a production surface or a qualified registration.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "sbmt-m0146235607f4-2p-cif-dbl-info",
+            "role": "reference",
+            "evidence": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/infofiles/M0146235607F4_2P_CIF_DBL.INFO"
+          }
+        ]
+      }
+    },
+    {
+      "path": "observations/M0146235607F4_2P_CIF_DBL.FIT",
+      "expectedBytes": 535680,
+      "expectedSha256": "3622997c199640d8b400c4a11d4da30ff5ae7634d8ae77830b9d84c187cf5cb3",
+      "origin": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/images/M0146235607F4_2P_CIF_DBL.FIT",
+      "credit": "NASA/JHUAPL/NEAR and SBMT team",
+      "purpose": "Independent SBMT preparation oracle input; not a production surface or a qualified registration.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "sbmt-m0146235607f4-2p-cif-dbl-fit",
+            "role": "reference",
+            "evidence": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/images/M0146235607F4_2P_CIF_DBL.FIT"
+          }
+        ]
       }
     }
   ]

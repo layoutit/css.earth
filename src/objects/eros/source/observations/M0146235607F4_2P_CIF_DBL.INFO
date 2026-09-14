@@ -1,0 +1,96 @@
+PDS_VERSION_ID               = PDS3
+
+/* DDR Identification */
+
+INSTRUMENT_HOST_NAME         = "NEAR EARTH ASTEROID RENDEZVOUS"
+SPACECRAFT_ID                = NEAR
+INSTRUMENT_NAME              = "MULTI-SPECTRAL IMAGER"
+INSTRUMENT_ID                = MSI
+TARGET_NAME                  = EROS
+PRODUCT_TYPE                 = DDR
+PRODUCT_CREATION_TIME        = 2010-06-22T18:13:45
+START_TIME                   = 2000-10-06T09:42:55.017
+STOP_TIME                    = 2000-10-06T09:42:55.120
+SPACECRAFT_CLOCK_START_COUNT = "146235607.816"
+SPACECRAFT_CLOCK_STOP_COUNT  = "146235607.919"
+
+SOURCE_PRODUCT_ID            = {
+      "NAIF0007.TLS",
+      "PCK00007.TPC",
+      "EROSATT_1998329_2001157_V01.BPC",
+      "EROSATT_1999304_2001151.BPC",
+      "NEAR_171.TSC",
+      "GRS12.TI",
+      "MSI15.TI",
+      "NIS14.TI",
+      "XRS12.TI",
+      "NEAR_CRUISE_NAV_V1.BSP",
+      "NEAR_EROSORBIT_NAV_V1.BSP",
+      "NEAR_EROSORBIT_RS_V1.BSP",
+      "NEAR_EROSORBIT_NLR_V1.BSP",
+      "NEAR_EROSLANDED_NAV_V1.BSP",
+      "EROSEPHEM_1999004_2002181.BSP",
+      "EROS80.BSP",
+      "MATH9749.BSP",
+      "DE403S.BSP",
+      "STATIONS.BSP"
+}
+
+PRODUCER_INSTITUTION_NAME    = "APPLIED PHYSICS LABORATORY"
+SOFTWARE_NAME                = "near_ddr"
+SOFTWARE_VERSION_ID          = "1.0"
+
+/* DDR Instrument and Observation Parameters */
+
+PIXEL_AVERAGING_WIDTH        = 1
+
+SPACECRAFT_POSITION            = ( -84.7020711493456275 , 10.5327655787002037 , -49.4959717881705927 )
+MSI_BORESIGHT_DIRECTION = ( 0.8885615376755016 , -0.0918996087687340 , 0.4494584026046261 )
+MSI_UP_DIRECTION        = ( 0.3999658247425220 , 0.6350401862788887 , -0.6608716220635508 )
+MSI_FRUSTUM1        = ( 0.8738244753603205 , -0.0931100493066148 , 0.4783454979720459 )
+MSI_FRUSTUM2        = ( 0.8944256440763126 , -0.0604008296441888 , 0.4443057702165379 )
+MSI_FRUSTUM3        = ( 0.8826974312746906 , -0.1233983878932791 , 0.4546110349927142 )
+MSI_FRUSTUM4        = ( 0.9032985999906827 , -0.0906891682308531 , 0.4205713072372062 )
+
+SUN_POSITION_LT        = ( 182582839.0136549770832062 , 95947154.7501718103885651 , -160160095.7128064036369324 )
+
+
+/* This DDR label describes one data file:                               */
+/* 1. A multiple-band backplane image file with wavelength-independent,  */
+/* spatial pixel-dependent geometric and timing information.             */
+
+/* See the NEAR Data Products SIS for more detailed description.        */
+
+OBJECT                       = FILE
+  ^IMAGE                     = "M0146235607F4_2P_CIF_DBL_DDR.IMG"
+  RECORD_TYPE                = FIXED_LENGTH
+  RECORD_BYTES               = 2148
+  FILE_RECORDS               = 5768
+
+  OBJECT                     = IMAGE
+    LINES                    = 412
+    LINE_SAMPLES             = 537
+    SAMPLE_TYPE              = PC_REAL
+    SAMPLE_BITS              = 32
+    BANDS                    = 14
+    BAND_STORAGE_TYPE        = BAND_SEQUENTIAL
+    BAND_NAME                = ("Latitude, deg",
+                                "Longitude, deg",
+                                "Phase angle, measured against the plate model, deg",
+                                "Emission angle, measured against the plate model, deg",
+                                "Incidence angle, measured against the plate model, deg",
+                                "Approximate ground sample distance of pixel, meters",
+                                "Shadowed flag, 1=shadowed 0=non-shadowed, computed from plate model",
+                                "x coordinate of center of pixel, body fixed coordinate system, km",
+                                "y coordinate of center of pixel, body fixed coordinate system, km",
+                                "z coordinate of center of pixel, body fixed coordinate system, km",
+                                "Local solar time of pixel",
+                                "Slope, relative to equipotential surface",
+                                "Local G, relative to equipotential surface",
+                                "Spare")
+
+  END_OBJECT                 = IMAGE
+
+END_OBJECT                   = FILE
+
+END
