@@ -152,9 +152,21 @@ browser comparisons relevant to the actual feature.
 
 ## Choose a photograph route
 
-Start from what the archive ships beside the image. Each row gives the recipe
-format, a body that uses it, what the body owner writes, and the oracle that
-checks the reader. When nothing fits, open the
+Start with the [photographic investigation route](photographic-investigation.md):
+an existing map need not pass through camera reconstruction. For supported
+cylindrical photographic maps, `tools/objects/terrestrial-layers/native-photograph-source.mts`
+reads the pinned raster with its declared grid and validity policy;
+`native-photograph.mts` samples it onto existing triangle-atlas rectangles.
+`radial-terrain.mts` selects this path through an observation's
+`nativePhotographicSampling`. Inspect its source-schema and configuration guards:
+it does not accept arbitrary projections, recover a paper figure's registration
+or establish compatibility with another shape. Source and atlas checks live in
+`native-photograph-source.test.mts` and `native-photograph.test.mts` beside those
+owners. These paths were inspected at main `943179c7c748c4e9727b9d94e15b214c2d20a68c`.
+
+For individual observations, each row below gives the recipe format, an example,
+what the body owner writes, and the reader oracle. When the selected product needs
+a decoder, route or kernel bank absent from the shared pipeline, open the
 [archive-product issue template](../../../../.github/ISSUE_TEMPLATE/archive-product.md)
 instead of writing a reader for one body.
 
