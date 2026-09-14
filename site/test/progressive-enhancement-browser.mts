@@ -47,6 +47,8 @@ try {
     const context = await browser.newContext({ viewport });
     const page = await context.newPage();
     let release!: () => void;
+    const navigations: string[] = [];
+    page.on('framenavigated', frame => { if (frame === page.mainFrame()) navigations.push(frame.url()); });
     const gate = new Promise<void>(resolve => { release = resolve; });
     await page.route('**/*', async route => {
       if (route.request().resourceType() === 'script') await gate;
@@ -69,6 +71,8 @@ try {
     release();
     await page.waitForFunction(() => document.documentElement.dataset.ready === 'true' || document.documentElement.dataset.ready === 'error', undefined, { timeout: 60000 });
     assert.equal(await page.locator('html').getAttribute('data-ready'), 'true');
+    assert.equal(await page.evaluate(() => Array.isArray(window.__progressiveNodes)), true,
+      `The document reloaded during adoption: ${JSON.stringify(navigations)}`);
     const adopted = await page.evaluate(() => {
       const nodes = [...document.querySelectorAll('.planet-stage [data-prepared-node]')];
       return { sameNodes: nodes.length === window.__progressiveNodes.length && nodes.every((node, i) => node === window.__progressiveNodes[i]),
@@ -110,22 +114,22 @@ try {
   await focus.goto(`${origin}/sun/?focus=m42`);
   await focus.waitForFunction(() => document.documentElement.dataset.ready === 'true' && new URL(location.href).searchParams.has('v'));
   await focus.locator('[data-focus-lens-bank="m42"] button[value="eso-optical"]').click();
-  await focus.locator('#m42-eso-optical-vst-panel').waitFor({ state: 'visible' });
+  await focus.locator('[data-focus-lens-bank="m42"] [data-dataset-context="eso-optical"]').waitFor({ state: 'visible' });
   const session = await focused.newCDPSession(focus);
   await session.send('Emulation.setScriptExecutionDisabled', { value: true });
-  await focus.locator('label[for="m42-eso-optical-vista-tab"]').click();
-  assert.equal(await focus.locator('#m42-eso-optical-vst-panel').isVisible(), false);
-  assert.equal(await focus.locator('#m42-eso-optical-vista-panel').isVisible(), true);
-  await focus.locator('#m42-eso-optical-vista-tab').press('ArrowLeft');
-  assert.equal(await focus.locator('#m42-eso-optical-vst-panel').isVisible(), true);
-  await session.send('Emulation.setScriptExecutionDisabled', { value: false });
   await focus.locator('#prepared-focus-dataset-tab').press('ArrowDown');
   assert.equal(await focus.locator('#prepared-focus-factsheet-content').isVisible(), true);
   assert.equal(await focus.locator('[data-focus-lens-bank="m42"] > .planet-dataset-context-rail').isVisible(), false);
   await focus.locator('#prepared-focus-factsheet-tab').press('ArrowUp');
   assert.equal(await focus.locator('#prepared-focus-dataset-content').isVisible(), true);
   assert.equal(await focus.locator('[data-focus-lens-bank="m42"] > .planet-dataset-context-rail').isVisible(), true);
-  cases.push('Dataset credit tabs work with script execution disabled; prepared focus keeps native arrow keys and context visibility');
+  const stars = focus.locator('.prepared-volume-lenses[data-volume-lens-object="m42"] .prepared-catalogue-points');
+  await focus.locator('[data-focus-lens-bank="m42"] [data-focus-stars]').uncheck();
+  assert.equal(await stars.evaluate(node => getComputedStyle(node).display), 'none');
+  await focus.locator('[data-focus-lens-bank="m42"] [data-focus-stars]').check();
+  assert.notEqual(await stars.evaluate(node => getComputedStyle(node).display), 'none');
+  await session.send('Emulation.setScriptExecutionDisabled', { value: false });
+  cases.push('Prepared focus keeps native information tabs, arrow keys, context visibility and catalogue-star selection with script execution disabled');
   await focused.close();
 
   const failed = await browser.newContext({ viewport: { width: 1280, height: 900 } });

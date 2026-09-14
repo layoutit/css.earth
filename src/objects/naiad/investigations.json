@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "naiad",
+  "entries": [
+    {
+      "id": "published-shape-model",
+      "subject": "Karkoschka 2003 Neptune inner-moon dimensions",
+      "status": "included",
+      "finding": "Karkoschka (2003) 48 × 30 × 26 km semiaxes are included as the Shape model; the 29 km JPL radius is reference scale only. Included as Shape model; no elevation lens from an analytic ellipsoid.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/naiad/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/naiad/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-voyager-geomed-images",
+      "subject": "PDS Voyager GEOMED images",
+      "status": "excluded",
+      "finding": "Excluded as surface textures. Geometry inventory gives best sampling 17.69 km/native pixel (C1135231, 15.36 s exposure), next 21 km/pixel (C1134547). A 96 km maximum diameter spans only about 5 native pixels. Long-exposure smear and sparse geometry do not support terrain mapping. Survey metadata is retained.",
+      "revisitWhen": "A Naiad observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/naiad/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/naiad/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "hst-recovery-of-naiad-showalter-et-al-2019-https-pmc",
+      "subject": "HST recovery of Naiad, Showalter et al. (2019)",
+      "status": "excluded",
+      "finding": "Astrometry and unresolved detections, not a surface map.",
+      "revisitWhen": "A spatially resolved Naiad measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/naiad/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/naiad/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-stooke-shape-release-https-sbn-psi-edu-pds-resou",
+      "subject": "PDS Stooke shape release",
+      "status": "unresolved",
+      "finding": "No Naiad model listed; no detailed mesh adopted.",
+      "revisitWhen": "The inspected shape archive or a cited primary release publishes a Naiad-specific numerical model with its frame, units and reconstruction method.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/naiad/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/naiad/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "usgs-mapping-and-published-photometry",
+      "subject": "USGS mapping and published photometry",
+      "status": "unresolved",
+      "finding": "No usable Naiad cartographic or spatial scalar product found in this pass. Disk-integrated photometry does not supply local color or elevation.",
+      "revisitWhen": "A spatially resolved Naiad measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/naiad/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/naiad/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

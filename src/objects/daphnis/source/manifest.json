@@ -276,7 +276,7 @@
         "type": "body-fixed-mesh",
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Radial height above a 3.8 km reference sphere from the Cassini shape model. Includes the moon\u2019s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+      "coverage": "Radial height above a 3.8 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
       "capture": {
         "attributions": [
           {
@@ -631,18 +631,18 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 66439,
-      "expectedSha256": "89152bff736cbbf17defa35f285136cfc305f6d7ef41c11e52b77cc11d63627b"
+      "expectedBytes": 71562,
+      "expectedSha256": "0a151a85ef1d44e43532a1dda022b80e42e676a58a7a8b5c6fc400c2abf4df7f"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6244,
-      "expectedSha256": "a730f46ca459773e07ee89a79f9eca529c37189152e1277a5e92fa49d2a8c050",
+      "expectedBytes": 5179,
+      "expectedSha256": "e24489061d4d1267b3f4156059e11ab956aef5e09e7d83ec64d1f57cd6a7f0a2",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
@@ -653,7 +653,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1333,
-      "expectedSha256": "ebbd9604cbf37dc7d1cc495ad8bf42050a2b6f3c103ead62859f0ae1ecb5923e"
+      "expectedSha256": "02f4a0e3ed029c72ade4ff424997ec8a721a705da43977d8a68f3d65d5c619db"
     },
     {
       "path": "preparation/rotation.json",
@@ -662,8 +662,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 8888,
-      "expectedSha256": "20c6643655d5bf675a9cffc04514bd15f4413ab21854bac36efa14c0e419644e"
+      "expectedBytes": 9704,
+      "expectedSha256": "48c8488fcabae9a9c2e557f274f9d4b8ce3fbf888160ac3aecf4217e6302cab5"
     },
     {
       "path": "presentation/minimap.json",

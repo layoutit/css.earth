@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "aa5e95c6e9121f06ec86faaafb2937fd260a366809687f1722c3f80e9d9ca044"
+          "sha256": "b90c35b615c40b91265bfc0f4285f2b74d23640ae76bbc6e820b24606b0f0909"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "001adfb976c383e67680a6ed18763d7ea9d09d15f208a8be867059c5d45cc19f"
+        "sha256": "cf604fc80704ac474c2d219024c999d62568ad40e27feb3c76adce9ac18a4ce8"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1954918103121694,
-      "description": "Explore Iclea in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in August 1889.",
       "systemName": "Solar System",
       "order": 353,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2b93a4b8c53ee02b0d8d3d1904f28ce155c490c8ee6b7eb1e3fff908c2fb385b"
+    "sha256": "221ed36be93c3c2b9f3ef918f5d927014aade6f6366754604ec6583dd082388c"
   }
 }

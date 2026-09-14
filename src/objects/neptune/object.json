@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a846978ee662a3094735d2b47ad77d4291530455f63d0a7bdab967bef6b1b236"
+    "sha256": "d02fd9ae8e27523809e4c74d65a26388be0c5eaa066b7e9c733f403008e0bb0b"
   },
   "id": "neptune",
   "properties": {
@@ -66,7 +66,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ba93aa673b78a0117f0841a1e1391d74c4080d904653ee59f802e243d57a3794"
+          "sha256": "e2a3d86cda4fd43a71f449be62b7d42b7d29cebd4689629e4fd278350348cc22"
         },
         {
           "id": "rings",
@@ -214,7 +214,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9b6b14594b3df019dad24b4d9a559538edcb6ecb95d550313cb1c609adee0bdf"
+        "sha256": "5ed0c56ccbefdbcdfd14856b1b728899c57b6542f3f96cc94f31750035c98a58"
       }
     },
     "catalog": {
@@ -222,7 +222,7 @@
       "classification": "planet",
       "color": "#5279bd",
       "distanceAu": 30.05,
-      "description": "Explore Neptune in 3D with cssEarth. Discover the distant blue ice giant, its turbulent atmosphere, faint rings, and orbiting moons.",
+      "description": "The most distant planet, an ice giant whipped by supersonic winds.",
       "systemName": "Solar System",
       "order": 452,
       "context": {

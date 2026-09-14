@@ -4,7 +4,6 @@
   "id": "dejanira",
   "displayName": "Dejanira",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 22.47 km (catalog ±1.24 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
-        "title": "DAMIT 591 shape model",
         "thumbnail": "/scenes/dejanira/dejanira-shape-thumbnail.webp",
         "surface": "dejanira-shape-surface@2x.webp",
         "poles": "dejanira-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 11.235 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 591 radial height",
         "thumbnail": "/scenes/dejanira/dejanira-elevation-thumbnail.webp",
         "surface": "dejanira-elevation-surface@2x.webp",
         "poles": "dejanira-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/591",
           "image": "/scenes/dejanira/dejanira-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 11.235 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

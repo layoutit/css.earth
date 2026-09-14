@@ -1,0 +1,36 @@
+{
+  "id": "publication-richardson2011apj-732-76r",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Richardson2011ApJ...732...76R: PAndAS' Progeny: Extending the M31 Dwarf Galaxy Cabal",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "Richardson2011ApJ...732...76R"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...732...76R",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/prepared/catalogue.json",
+      "revision": "340f4ef6ea7f2a6cc540b906dec35436a1d549c5",
+      "sha256": "1987e9658d963826cc1717afdfa0b9267fa1ce79b79e0d3f9d5905bd55f00c8f",
+      "locator": "/sources/3/references/47"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/3/references/47"
+    }
+  ]
+}

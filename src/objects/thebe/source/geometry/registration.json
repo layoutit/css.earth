@@ -5,39 +5,6 @@
   "northConvention": "https://pds.nasa.gov/data/go-j_jsa-ssi-2-redr-v1.0/go_0018/document/cdvolsis.pdf",
   "frames": [
     {
-      "id": "c0368591600",
-      "encoding": "vicar-byte-dn",
-      "path": "observations/C0368591600R.IMG",
-      "labelPath": "observations/C0368591600R.LBL",
-      "observerLatitude": -0.118,
-      "observerWestLongitude": 59.697,
-      "sunLatitude": -1.616,
-      "sunWestLongitude": 120.058,
-      "rangeKm": 738476.64,
-      "northAzimuthDegrees": 0.7200000000000273,
-      "center": [
-        122.667,
-        133.611
-      ],
-      "pixelAngleMicroradians": 10.152968413462611,
-      "backgroundOffset": 0.0156863,
-      "backgroundMaximum": 0.02,
-      "sourceWidth": 800,
-      "sourceHeight": 800,
-      "registration": {
-        "method": "Original SSI label image roll and OPUS target-centered geometry; image-center translation fitted to illuminated source-shape silhouette",
-        "skyRegion": [
-          20,
-          20,
-          750,
-          380
-        ],
-        "skyMedianDN": 4.0,
-        "skyRobustSigmaDN": 1.4826,
-        "boundaryRmsPixels": 2.85070924741104
-      }
-    },
-    {
       "id": "c0401759200",
       "encoding": "vicar-byte-dn",
       "path": "observations/C0401759200R.IMG",

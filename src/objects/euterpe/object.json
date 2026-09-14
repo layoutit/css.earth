@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "cb3f170936f8d25dcc722be3351abacf524765fc89a9a93c0ac1831610fd2526"
+          "sha256": "68ead611bc35505a7d6ad6e596be1645bb04c1067b4b47c5939edac1a1e532df"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1495b4419d9ef4fc7322afef0e52178333d45ff71bb70ead61c30dc69ada7ad7"
+        "sha256": "9873ba4f784298322ab815282434a84059520cf7ca1605c08e8e32bf40616805"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.347052758675226,
-      "description": "Explore Euterpe in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in November 1853.",
       "systemName": "Solar System",
       "order": 219,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "657901f8927d7b56731df9d2b58d119543adca603394e2fffdd48ee5dc23a7c6"
+    "sha256": "5cfb10fcc75c766e6ffe5149787317af44bb7f59c78d8a5ef89c8de18b762d4c"
   }
 }

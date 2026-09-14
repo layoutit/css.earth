@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "vesta",
+  "entries": [
+    {
+      "id": "recorded-survey-1",
+      "subject": "DLR Dawn HAMO natural color",
+      "status": "included",
+      "finding": "The retained HAMO natural-color label was inspected: 26704×13080 samples, three byte bands, planetocentric simple-cylindrical mapping, east-positive longitude and center longitude 180°. Its 255 km projection sphere is not the mesh’s measured physical radius. The selected publisher color remains photometrically corrected 650/550/430 nm imagery with its recorded clipping and registration limitations; no new browser qualification was performed by reading the label.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/vesta/source/reference/true-color.lbl",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/vesta/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "DLR HAMO corrected monochrome",
+      "status": "excluded",
+      "finding": "DLR HAMO corrected monochrome — Complementary candidate, excluded from this selection: natural color supplies the same broad surface interpretation; a separate grayscale view would duplicate it.",
+      "revisitWhen": "A changed source release adds independently useful geometry or metadata beyond the selected model; compare it before changing the displayed source.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "DLR HAMO Clementine ratios",
+      "status": "included",
+      "finding": "[DLR HAMO Clementine ratios](https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clementine/Vesta_clementine_HAMO-1-2_global.jp2) — Included from the publisher's original PDS ZIP. The three byte planes preserve the published 26,703 × 13,351 Clementine-style ratio composite. JP2 decoding is unnecessary. Ratios emphasize spectral differences, not mineral abundance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "DLR Dawn HAMO 64 ppd terrain",
+      "status": "included",
+      "finding": "[DLR Dawn HAMO 64 ppd terrain](https://dawngis.dlr.de/data/Vesta/dtm_vesta.php) — Included. 23,041 × 11,521 big-endian float grid, about 69.5 m spacing. The release page explicitly defines values as radii in meters.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-5",
+      "subject": "USGS 48 ppd terrain and relief",
+      "status": "excluded",
+      "finding": "[USGS 48 ppd terrain and relief](https://astrogeology.usgs.gov/search/map/vesta_dawn_fc_hamo_global_dtm_93m) — Excluded in favor of the higher-resolution DLR release and its original coordinate system.",
+      "revisitWhen": "A changed source release adds independently useful geometry or metadata beyond the selected model; compare it before changing the displayed source.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-6",
+      "subject": "Le Corre et al. 2017 controlled color mosaics",
+      "status": "unresolved",
+      "finding": "[Le Corre et al. 2017 controlled color mosaics](https://www.hou.usra.edu/meetings/metsoc2017/pdf/6135.pdf) — Unresolved. The conference abstract describes improved registration and planned PDS delivery; this survey has not located a downloadable release corresponding to that work.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-7",
+      "subject": "NASA VIR mineral map",
+      "status": "excluded",
+      "finding": "[NASA VIR mineral map](https://science.nasa.gov/photojournal/global-mineral-map-of-vesta/) — Excluded: a small explanatory press visualization, not the calibrated global scalar grid needed for a quantitative lens.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "versioned-view-evidence",
+      "subject": "Versioned Vesta test and browser evidence",
+      "status": "included",
+      "finding": "Lack of dated evidence was the baseline finding. The LAMO update now has focused qualification at 86364a47f5ab7261a3716897b5e421e81abf5458: three Vesta source/package checks, six projected-image checks and strict preparation types pass. Headless DPR 1/2 checks retain one scene and 800 faces through drag with the same photographic atlas and shadows off. All prior runtime image hashes and draw/hit geometry match the main baseline. New runtime downloads were fetched from their published hash URLs and verified. Evidence is retained beside the body in evidence/lamo-2026-09-14.json; this is not an aggregate build or independent camera-registration result.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md",
+        "https://github.com/layoutit/css.earth/blob/86364a47f5ab7261a3716897b5e421e81abf5458/src/objects/vesta/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "86364a47f5ab7261a3716897b5e421e81abf5458"
+        }
+      ]
+    },
+    {
+      "id": "dlr-lamo-clear-photographs",
+      "subject": "DLR Dawn LAMO clear-filter global photographic mosaic",
+      "status": "included",
+      "finding": "Retrieved the original global 8-bit PNG (80,112 × 40,056) and inspected the companion attached PDS label using a bounded archive range. This is a different observation product from the already selected HAMO color composite and the excluded corrected HAMO grayscale candidate: it retains low-altitude crater and trough photography with source illumination. The label supplies the planetocentric, positive-east Claudia grid, 255 km map radius, 20 m/pixel spacing and fractional pixel offsets. The prepared 8192 × 4096 map and fixed 800-face atlas have coarser display resolution. Exact-black fill is a heuristic because the publisher supplies no independent validity mask; gaps and seams remain visible. Full PDS pixels were not downloaded or compared against the PNG; only the original PNG is the selected photographic input.",
+      "evidence": [
+        "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
+        "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png",
+        "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.pds.zip",
+        "https://github.com/layoutit/css.earth/blob/86364a47f5ab7261a3716897b5e421e81abf5458/src/objects/vesta/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/86364a47f5ab7261a3716897b5e421e81abf5458/src/objects/vesta/source/reference/lamo-clear.lbl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "86364a47f5ab7261a3716897b5e421e81abf5458"
+        }
+      ]
+    }
+  ]
+}

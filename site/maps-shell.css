@@ -84,7 +84,8 @@
 
 /* Keep inactive cards laid out outside the scrollable area. Native inert owns
    their focus, pointer and accessibility exclusion until the controller opens
-   them again. The attribute enables retention only after that owner mounts. */
+   them again. Visibility also invalidates descendant paint when a card reopens.
+   The attribute enables retention only after that owner mounts. */
 .planet-sidebar .maps-object-results[data-retained][hidden] { display: contents; }
 .planet-sidebar .maps-object-results[data-retained][hidden] > .planet-card,
 .planet-sidebar .maps-object-results[data-retained] > .planet-card[hidden],
@@ -94,6 +95,7 @@
   inset-inline: 0;
   bottom: 100%;
   opacity: 0;
+  visibility: hidden;
 }
 
 .planet-object-chunk-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e761f60c582e4f5f2f50f2cec2e5aa4a4c27792c61264f0663a867f7f96f7e07"
+    "sha256": "ec7fd2b1d86391f467539e1f1a5ced82b682a6f0233c317b666ebc0d96ad1bb6"
   },
   "id": "itokawa",
   "properties": {
@@ -57,7 +57,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "961f6522c767d52946ff5bf75a838859b43503620d30145453c9c502e10d5b01"
+          "sha256": "a2bd53758a3dbdc997f70ba728d56d551b485161744c2924a24537e9ac31af4b"
         },
         {
           "id": "rotation",
@@ -67,7 +67,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3518b728b4dce39ae8ac1f5ae4d5fe090b742042ce9cfb4becaba5f669d9aa10"
+          "sha256": "49fa2e4a103cd2ac7cd734a90b6cfb5fe3beae39994dc9b273ecbd99fe9879db"
         },
         {
           "id": "title",
@@ -82,7 +82,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "ba93b10dc3f3eb6470a9cc7d0561cfbcaddc15a8f82bbbcf17e2e8e7f70ac44b"
+          "sha256": "999c80407b4120b1af7a4fe93bb0310b8a88d5055834cd75dd7461211d3701e5"
         },
         {
           "id": "features",
@@ -128,7 +128,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fc38e6f62e1ed982b24fae405dbba03e540f075cb240962bc603b8e1d9f42484"
+        "sha256": "5f0f6d66c6b82ad3332b0bc4cc2430f30a31ae5cdc58015623cee6c41a6d10cf"
       }
     },
     "catalog": {
@@ -136,7 +136,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 1.323,
-      "description": "Explore Itokawa in 3D with cssEarth using mission-derived shape and surface data.",
+      "description": "Small near-Earth asteroid that Hayabusa sampled.",
       "systemName": "Solar System",
       "order": 124,
       "context": {

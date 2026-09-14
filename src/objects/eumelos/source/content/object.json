@@ -4,7 +4,6 @@
   "id": "eumelos",
   "displayName": "Eumelos",
   "panel": {
-    "introduction": "Jupiter Trojan in the L4 leading cloud. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 37.696 km effective diameter (fit ±0.329 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
-        "title": "Eumelos · DAMIT 3920 convex shape",
         "thumbnail": "/scenes/eumelos/eumelos-shape-thumbnail.webp",
         "surface": "eumelos-shape-surface@2x.webp",
         "poles": "eumelos-shape-surface@2x.webp",
@@ -78,13 +75,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "DAMIT model"
+        "notes": "Convex light-curve reconstruction with approximate thermal size: 37.696 km effective diameter (fit ±0.329 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 18.848 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Eumelos · source-model radial height",
         "thumbnail": "/scenes/eumelos/eumelos-elevation-thumbnail.webp",
         "surface": "eumelos-elevation-surface@2x.webp",
         "poles": "eumelos-elevation-surface@2x.webp",
@@ -106,7 +102,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3920",
           "image": "/scenes/eumelos/eumelos-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 18.848 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

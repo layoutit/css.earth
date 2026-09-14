@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "732e5697f309648c42ad4e70439ea567002b3b401537d5569af81510be21b95d"
+          "sha256": "569ff34febc884f7b471327d22c595055c845ded66f4cd4ac8f5f756929b95ff"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "d72059de4472a1ec773a35aa7086413c50fecdf270ec31c74835b81d9bcf110f"
+          "sha256": "8ca61c2308d8a9cc087be1c26e2a9b62e52b4c2d27162b1a83e1e8ec3ac69b33"
         },
         {
           "id": "title",
@@ -38,12 +38,12 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "0c6a0b9660f43b9c71ec28b48446242f9dab21347a98674b0f8debe8ce948d42"
+          "sha256": "bd58348de81d40f9f8990d4247b7009bf510fd92a6fc1e0579e4c7c69fadd6cb"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "dbc7bd7f82473f76cd5477bf978097c64f58be8fd442a9b78c4b50385072f30f"
+          "sha256": "48b44ec2ab14651f727a33e09442713f619b638a865724a6231fc72d624908ec"
         },
         {
           "id": "rotation",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b39ac2bbaefc639c48935ff5b106648b26d5aef95b0fb3b1bd89812a26d40ab0"
+        "sha256": "121c15a57044e16d9f550283049cb25828a08494dcb9c8ad38e02e8dac4c2af1"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#c3bfb7",
       "distanceAu": 9.58,
-      "description": "Explore Helene in 3D with Cassini imagery and its measured irregular shape.",
+      "description": "Small moon that leads Dione around Saturn from a Lagrange point.",
       "systemName": "Solar System",
       "order": 115,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "975dbda3cf14765b20076fd91c8cb7e1d65a58b5f2bfba2ea28e69c9053743a8"
+    "sha256": "4c9db918699ab9bdd7ffb1779cf40b0228a0f93fd00be97240e126fa475c0084"
   }
 }

@@ -4,7 +4,6 @@
   "id": "caliban",
   "displayName": "Caliban",
   "panel": {
-    "introduction": "Caliban is an outer moon of Uranus. Its light curve constrains a minimum elongation, while a tentative thermal measurement sets the adopted size. This is an illustrative ellipsoid with assumed depth and orientation. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "parent",
@@ -44,9 +43,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Approximate minimum-elongation ellipsoid from the K 2 light curve. The tentative thermal diameter is 42 (+20/−12)km. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
-        "title": "Light-curve shape approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/caliban/caliban-model-thumbnail.webp",
         "surface": "caliban-model-surface@2x.webp",
         "poles": "caliban-model-poles@2x.webp",
@@ -54,7 +50,9 @@
           "id": "lightcurve-approximation",
           "path": "../manifest.json",
           "url": "https://arxiv.org/pdf/1706.06837"
-        }
+        },
+        "notes": "Approximate minimum-elongation ellipsoid from the K 2 light curve. The tentative thermal diameter is 42 (+20/−12)km. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

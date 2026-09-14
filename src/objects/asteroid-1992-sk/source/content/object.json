@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "1992 SK is an elongated near-Earth asteroid reconstructed from Goldstone radar and optical lightcurves obtained in 1999. This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -53,8 +52,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Published radar shape model",
-        "title": "Radar shape model",
         "thumbnail": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-thumbnail.webp",
         "surface": "asteroid-1992-sk-shape-surface@2x.webp",
         "poles": "asteroid-1992-sk-shape-surface@2x.webp",
@@ -63,13 +60,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "notes": "Published radar shape model"
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows source-model radius minus a 0.5 km reference sphere, transferred from the closest point on the original triangular surface. It includes overall shape and is not gravitational height or an independent topographic measurement. This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied. Ambiguous or out-of-range samples retain the shared grid.",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-thumbnail.webp",
         "surface": "asteroid-1992-sk-elevation-surface@2x.webp",
         "poles": "asteroid-1992-sk-elevation-surface@2x.webp",
@@ -91,7 +86,8 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/sk.obj",
           "image": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Color shows source-model radius minus a 0.5 km reference sphere, transferred from the closest point on the original triangular surface. It includes overall shape and is not gravitational height or an independent topographic measurement. This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied. Ambiguous or out-of-range samples retain the shared grid.",
+        "noData": true
       }
     ]
   },

@@ -10,7 +10,7 @@ import scene from "../../../../src/objects/moon/prepared/scene.json" with { type
 import lenses from "../../../../src/objects/moon/prepared/lenses.json" with { type: "json" };
 import controls from "../../../../src/objects/moon/prepared/controls.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
-import { OBJECTS } from "../../../../site/objects.mts";
+import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
 const LENS_IDS = ['surface', 'midnight-temperature', 'heat-anomalies', 'rock-abundance', 'topography', 'crust', 'silicate-signature', 'geology'];
@@ -18,7 +18,7 @@ const LENS_IDS = ['surface', 'midnight-temperature', 'heat-anomalies', 'rock-abu
 objectRuntimePackageTests(runtimeDefinition);
 
 test("Moon's actual import closure has only shared runtime owners", async () => {
-  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "moon") });
+  const audit = await auditObjectRuntimeOwnership({ objects: SCENE_OBJECTS.filter(object => object.id === "moon") });
   assert.equal(audit.complete, true);
   for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/object-control-binding", "rendering/prepared-playback", "solar-system/cubic-sky-runtime"]) {
     assert.ok(audit.sharedClosure.includes(`src/renderers/css/${name}.ts`));

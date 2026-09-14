@@ -8,6 +8,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import { executeAcquisition, parseAcquisitionPlan } from './operations-acquisition.js';
 import { acquirePinnedDownloads, verifySources, type SourceManifest } from './operations.js';
 import { gzipSync } from 'node:zlib';
+import { convertMappedComposition, parseMappedCompositionRecipe } from './acquisition/mapped-composition.mts';
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const rawSource = (bytes: Uint8Array) => ({path:'source.img',origin:'https://example.test/source.img',
@@ -21,6 +22,29 @@ const temporary = async (work: (directory: string) => Promise<void>) => {
   const directory=await mkdtemp(join(tmpdir(),'cssearth-stream-source-'));
   try { await work(directory); } finally { await rm(directory,{recursive:true,force:true}); }
 };
+
+test('mapped composition acquisition restores the pinned map and report through the selected group',()=>temporary(async directory=>{
+  const values=Array.from({length:180},()=>Array.from({length:360},()=>0.25));
+  const original=gzipSync(JSON.stringify({metadata:{target:'Fixture',observation_name:'published',nan_value:-99,
+    latitudes:Array.from({length:180},(_,i)=>i-90),longitudes:Array.from({length:360},(_,i)=>i)},
+    best_estimate_abundance:{ice:values},lower_bound_abundance:{ice:values},upper_bound_abundance:{ice:values}}));
+  const recipe=parseMappedCompositionRecipe({schema:'cssearth-mapped-composition@1',target:'Fixture',observationName:'published',
+    referenceRadiusMeters:1000,input:'native.json.gz',sha256:sha256(original),selections:[{id:'ice',kind:'posterior',field:'ice',statistic:'median'}]});
+  const converted=convertMappedComposition(original,recipe),report=Buffer.from(JSON.stringify(converted.report,null,2)+'\n');
+  await writeFile(join(directory,'native.json.gz'),original);
+  await writeFile(join(directory,'recipe.json'),JSON.stringify(recipe));
+  const manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[],documents:[],generatedIntermediates:
+    [['ice.tif',converted.products.ice],['report.json',report]].map(([path,bytes])=>{
+      assert.equal(typeof path,'string');assert.ok(bytes instanceof Uint8Array);
+      return {path,expectedBytes:bytes.length,expectedSha256:sha256(bytes)};
+    })};
+  const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[
+    {kind:'mapped-composition',path:'ice.tif',recipePath:'recipe.json',product:'ice',groups:['composition']},
+    {kind:'mapped-composition',path:'report.json',recipePath:'recipe.json',product:'report',groups:['composition']}]});
+  await executeAcquisition({sourceRoot:directory,manifest,plan,group:'composition',transport:{fetch:async()=>{throw new Error('No network needed for pinned native conversion');}}});
+  assert.deepEqual(await readFile(join(directory,'ice.tif')),Buffer.from(converted.products.ice));
+  assert.deepEqual(await readFile(join(directory,'report.json')),report);
+}));
 function chunkedResponse(chunks: Uint8Array[]): Response {
   let next=0;
   const response=new Response(new ReadableStream<Uint8Array>({

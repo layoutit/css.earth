@@ -4,7 +4,6 @@
   "id": "lycomedes",
   "displayName": "Lycomedes",
   "panel": {
-    "introduction": "Jupiter Trojan in the L4 leading cloud. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 31.736 km effective diameter (fit ±0.243 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
-        "title": "Lycomedes · DAMIT 4284 convex shape",
         "thumbnail": "/scenes/lycomedes/lycomedes-shape-thumbnail.webp",
         "surface": "lycomedes-shape-surface@2x.webp",
         "poles": "lycomedes-shape-surface@2x.webp",
@@ -78,13 +75,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "DAMIT model"
+        "notes": "Convex light-curve reconstruction with approximate thermal size: 31.736 km effective diameter (fit ±0.243 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 15.868 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Lycomedes · source-model radial height",
         "thumbnail": "/scenes/lycomedes/lycomedes-elevation-thumbnail.webp",
         "surface": "lycomedes-elevation-surface@2x.webp",
         "poles": "lycomedes-elevation-surface@2x.webp",
@@ -106,7 +102,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4284",
           "image": "/scenes/lycomedes/lycomedes-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 15.868 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

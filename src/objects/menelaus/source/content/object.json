@@ -4,7 +4,6 @@
   "id": "menelaus",
   "displayName": "Menelaus",
   "panel": {
-    "introduction": "Jupiter Trojan in the L4 leading cloud. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 42.716 km effective diameter (fit ±0.517 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
-        "title": "Menelaus · DAMIT 8131 convex shape",
         "thumbnail": "/scenes/menelaus/menelaus-shape-thumbnail.webp",
         "surface": "menelaus-shape-surface@2x.webp",
         "poles": "menelaus-shape-surface@2x.webp",
@@ -78,13 +75,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "DAMIT model"
+        "notes": "Convex light-curve reconstruction with approximate thermal size: 42.716 km effective diameter (fit ±0.517 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 21.358 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Menelaus · source-model radial height",
         "thumbnail": "/scenes/menelaus/menelaus-elevation-thumbnail.webp",
         "surface": "menelaus-elevation-surface@2x.webp",
         "poles": "menelaus-elevation-surface@2x.webp",
@@ -106,7 +102,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/8131",
           "image": "/scenes/menelaus/menelaus-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 21.358 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

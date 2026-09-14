@@ -74,6 +74,42 @@
       ],
       "path": "features/EROS_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EROS_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/M0146235607.SUM",
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/sumfiles-updated/M0146235607.SUM",
+      "headers": {
+        "Authorization": "Basic cHVibGljOndpZGUtb3Blbg=="
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/M0146235607F4_2P_CIF_DBL.INFO",
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/infofiles/M0146235607F4_2P_CIF_DBL.INFO",
+      "headers": {
+        "Authorization": "Basic cHVibGljOndpZGUtb3Blbg=="
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/M0146235607F4_2P_CIF_DBL.FIT",
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/images/M0146235607F4_2P_CIF_DBL.FIT",
+      "headers": {
+        "Authorization": "Basic cHVibGljOndpZGUtb3Blbg=="
+      }
     }
   ]
 }

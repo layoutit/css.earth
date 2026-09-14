@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {chromium} from 'playwright';
-import {OBJECTS} from '../../../../site/objects.mts';
+import {SCENE_OBJECTS} from '../../../../site/objects.mts';
 import {candidates} from '../../../../tools/objects/celestia-comets/catalog.mts';
 
 const origin=process.argv[2]??'http://127.0.0.1:53135';
 const output=resolve('output/playwright/celestia-catalog-navigation');
-const selected=OBJECTS.filter(o=>candidates.some(c=>c.id===o.id));
+const selected=SCENE_OBJECTS.filter(o=>candidates.some(c=>c.id===o.id));
 assert.equal(selected.length,20);
 await mkdir(output,{recursive:true});
 const browser=await chromium.launch({channel:'chrome',headless:true});

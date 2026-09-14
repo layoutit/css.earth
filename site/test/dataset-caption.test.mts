@@ -7,7 +7,7 @@ import type { ProvenanceDocument } from '../../src/platform/object-provenance.mt
 const read = async (id: string): Promise<ProvenanceDocument> => validateObjectProvenance(
   JSON.parse(await readFile(new URL(`../../src/objects/${id}/prepared/provenance.json`, import.meta.url), 'utf8')), id,
 );
-const lens = (id: string) => ({ id, label: id, title: `${id} instrument dataset`, description: 'Brightness records the measured surface response.' });
+const lens = (id: string) => ({ id, label: id, title: `${id} instrument dataset`, summary: 'Brightness records the measured surface response.' });
 
 test('Mercury titles link the main mosaic, not coverage-completion images or tile templates', async () => {
   const document = await read('mercury');

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "3b1a3f6c846b78f146cd94e403e6c3974506056cc44edee0a09f9c83155371f3"
+    "sha256": "5bc9922498b8ecbe62b81d93db79414169805a2294479632ec413a2ef87b584a"
   },
   "id": "eros",
   "properties": {
@@ -72,7 +72,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a74d3889fef4ca98093d5171922fed1b973e2e0cec643dc3bf2293bb580ace5a"
+          "sha256": "de58cb2b15477c4d00b1667c4232c923fece53b2a3e28abf957ccee14963475e"
         },
         {
           "id": "title",
@@ -87,7 +87,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "0e1f7535b646c906f932e79a57a47a0a53a627dd56966239a5c1971b6b64ab8b"
+          "sha256": "89c982d73713ba2f6a3b0756ede4de0e47c29b40160e45a397de0e682bb90b8d"
         },
         {
           "id": "features",
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "502010e113baa4b62c8784dff6947e06c8b689c242223ba575467a4021d01bc1"
+        "sha256": "a2bfe764f06fd7ebf85da6fa4abc0f508e7afe6f736e1d0628bd6c72168b9e19"
       }
     },
     "catalog": {
@@ -141,7 +141,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 1.458,
-      "description": "Explore Eros in 3D with cssEarth using mission-derived shape and surface data.",
+      "description": "Oblong asteroid, the first near-Earth asteroid ever found.",
       "systemName": "Solar System",
       "order": 129,
       "context": {

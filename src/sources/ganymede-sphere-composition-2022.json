@@ -1,0 +1,53 @@
+{
+  "id": "ganymede-sphere-composition-2022",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Global Modeling of Ganymede’s Surface Composition: Near-IR Mapping From VLT/SPHERE",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.6390469"
+    }
+  ],
+  "version": "v1.0.1",
+  "creators": [
+    "Oliver King",
+    "Leigh N. Fletcher"
+  ],
+  "publisher": "Zenodo",
+  "publicationDate": "2022-03-28",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.5281/zenodo.6390469",
+      "label": "Numerical data release"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1029/2022JE007323",
+      "label": "Methods and interpretation"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/api/records/6390469",
+      "checkedOn": "2026-09-13",
+      "locator": "metadata and files; Open Access / other-open does not specify reuse terms"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Oliver King, Leigh N. Fletcher (2022), VLT/SPHERE observations and published spectral models.",
+      "scope": "Numerical maps",
+      "evidence": "https://doi.org/10.5281/zenodo.6390469"
+    },
+    {
+      "kind": "rights",
+      "text": "Open Access; Zenodo other-open. Explicit numerical-data reuse terms remain unresolved; local scientific preview only.",
+      "scope": "Numerical maps",
+      "evidence": "https://doi.org/10.5281/zenodo.6390469"
+    }
+  ]
+}

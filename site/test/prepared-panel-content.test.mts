@@ -5,7 +5,7 @@ import { OBJECTS } from '../objects.mts';
 import { parsePreparedPanelContent, parsePanelControls } from '../prepared-panel-content.mts';
 
 type PanelContentInput = { schema: string; title: { baseline: unknown }; facts: { value: unknown }[] };
-type PanelControlsInput = { lenses: { controls: { description: unknown }[] } };
+type PanelControlsInput = { lenses: { controls: Record<string, unknown>[] } };
 const read = async (id: string, file: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/${id}/prepared/${file}.json`, import.meta.url), 'utf8'));
 
 test('every registered object supplies typed shared panel content and controls', async () => {
@@ -30,6 +30,6 @@ test('unknown panel values are rejected before they can claim rendered field typ
   const rawControls = await read('earth', 'controls');
   parsePanelControls(rawControls);
   const controls = rawControls as PanelControlsInput;
-  controls.lenses.controls[0].description = null;
-  assert.throws(() => parsePanelControls(controls), /lens description/);
+  Reflect.set(controls.lenses.controls[0], 'summary', 'Reader text published beside the controls.');
+  assert.throws(() => parsePanelControls(controls), /carry reader text \(summary\)/);
 });

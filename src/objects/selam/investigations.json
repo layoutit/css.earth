@@ -1,0 +1,99 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "selam",
+  "entries": [
+    {
+      "id": "lucy-lobe-dimensions",
+      "subject": "Levison 2024 two-lobe dimensions",
+      "status": "included",
+      "finding": "The smooth contact-ellipsoid envelope uses full lobe axes 240 × 200 × 200 m and 280 × 220 × 210 m with approximately 10% uncertainty. Equal density supplies an assumed model origin; a measured neck or terrain is not reconstructed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/selam/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/selam/source/measurements.json",
+        "https://doi.org/10.1038/s41586-024-07378-0"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "llorri-photography",
+      "subject": "Lucy L’LORRI surface registration",
+      "status": "unresolved",
+      "finding": "Resolved Lucy imagery exists, but no independently controlled registration to the present lobe envelope is established. The 2026-09-14 check retrieved Bierhaus 2025 and examined Sections 2.2 and 3.1: Selam craters are measured in unprojected lor_0752129590_03608 because no Selam shape model exists in that study. The archived selam_placeholder_v00.tpc explicitly supplies a placeholder pole and a single ellipsoid. Mission-document v2 adds Donaldjohanson coordinates; the v1 predecessor inventory was checked too. These specific sources do not supply a Selam camera/surface binding, and Dinkinesh geometry cannot substitute for it.",
+      "revisitWhen": "A Selam-specific source geometry/frame and matched camera solution support independent interior surface checks.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/selam/README.md",
+        "https://doi.org/10.3847/PSJ/ade23c",
+        "https://doi.org/10.3847/PSJ/ae1968",
+        "https://github.com/layoutit/css.earth/blob/642d15f827ce1ba529068b5b3508ef70a379723e/src/objects/selam/evidence/registration/source-check.json",
+        "https://github.com/layoutit/css.earth/blob/642d15f827ce1ba529068b5b3508ef70a379723e/src/objects/selam/README.md",
+        "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/pck/selam_placeholder_v00.tpc"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "2850792ab49dc0fa64f31198852c16ea2e4d413f"
+        }
+      ]
+    },
+    {
+      "id": "tempest-two-lobes",
+      "subject": "TEMPEST selam_two_lobes.stl recovered from Git history",
+      "status": "excluded",
+      "finding": "The recovered 186,688-byte STL has 506 distinct vertices and 1,004 triangles of smooth lobe geometry. Its recovery corrects the earlier acquisition account, but does not establish measured terrain, a neck, or photographic registration.",
+      "revisitWhen": "Independent provenance demonstrates observational terrain and a matching frame/camera solution, rather than a smooth simulation envelope.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/selam/README.md",
+        "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/selam_two_lobes.stl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "celestia-projection",
+      "subject": "Earlier unregistered Celestia reconstruction",
+      "status": "excluded",
+      "finding": "The retained source selection excludes the contributed texture and uncontrolled camera fit. No approximate projection is promoted as observed surface terrain.",
+      "revisitWhen": "Native Lucy imagery is tied to the selected shape by controlled, independently checked registration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/selam/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/selam/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "lucy-orbit-constraints",
+      "subject": "Lucy separation and mutual period",
+      "status": "included",
+      "finding": "The 3.11 km separation and 52.67-hour period are measured. Circular equatorial motion, synchronous orientation and current phase are illustrative assumptions; the displayed orbit carries the approximate placement label.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/selam/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/selam/source/orbit/published-parameters.json",
+        "https://doi.org/10.1038/s41586-024-07378-0"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

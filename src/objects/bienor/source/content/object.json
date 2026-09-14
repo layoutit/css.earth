@@ -4,7 +4,6 @@
   "id": "bienor",
   "displayName": "Bienor",
   "panel": {
-    "introduction": "Bienor is an elongated Centaur. Its smooth shape is constrained by stellar occultations and long-term photometry, while the grid marks its unmapped surface. The ellipsoid is a useful global approximation; unresolved shape, albedo or a companion may explain its asymmetric light curve.",
     "facts": [
       {
         "id": "shape",
@@ -39,9 +38,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Smooth triaxial ellipsoid fitted to stellar-occultation chords and rotational light curves, with semiaxes 127 ± 5, 55 ± 4 and 45 ± 4 km (Rizos et al. 2024). This is the study's global reference shape, not resolved terrain. It cannot explain all observed light-curve asymmetry; the paper also explores albedo, irregular-shape and satellite alternatives without uniquely resolving them. Full approximation dimensions: 254 × 110 × 90 km. The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary. The grid marks unmapped terrain.",
-        "title": "Occultation shape approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/bienor/bienor-model-thumbnail.webp",
         "surface": "bienor-model-surface@2x.webp",
         "poles": "bienor-model-poles@2x.webp",
@@ -49,7 +45,9 @@
           "id": "occultation-approximation",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1051/0004-6361/202450833"
-        }
+        },
+        "notes": "Smooth triaxial ellipsoid fitted to stellar-occultation chords and rotational light curves, with semiaxes 127 ± 5, 55 ± 4 and 45 ± 4 km (Rizos et al. 2024). This is the study's global reference shape, not resolved terrain. It cannot explain all observed light-curve asymmetry; the paper also explores albedo, irregular-shape and satellite alternatives without uniquely resolving them. Full approximation dimensions: 254 × 110 × 90 km. The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

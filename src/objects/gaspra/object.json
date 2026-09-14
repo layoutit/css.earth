@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "4422d4a703d9711d6a51099818e59879e15bf1ed0a5636832c7c20b43b21b7c2"
+    "sha256": "0cf5ef2adda82d21e5e2794d482a8903d83956bd77090e31eec0f0a7623a4e94"
   },
   "id": "gaspra",
   "properties": {
@@ -62,7 +62,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "75f6e4ea95ad4548fd765debe62109ccdd84ee0f1ad1ef892884b1f44b013858"
+          "sha256": "33d3053757b3e68179d30b8bb45f2325bd4810a1c1054a0a803288bfd451b97c"
         },
         {
           "id": "rotation",
@@ -72,7 +72,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3609f1150269c46ced3e4175b8e19dfeb37b470f0d88e9a7e7a4666b755535cb"
+          "sha256": "89eace3af6e5324588de7c0db95fce55e61383596d34a77b2a9e7329c313fb08"
         },
         {
           "id": "title",
@@ -82,7 +82,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "bbe53e9759329968afc528eecbf0bf04249ae9180a738514f526fabb051ec1d0"
+          "sha256": "dee47e04d6e3eb8f283c2c847e7699400b19294117ecbf39b45901007e0e46b5"
         },
         {
           "id": "acquisition",
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "13bd93a78c463ba9d5aeb505add64a5137f867faf68f990dcaae34a81e91a4d9"
+        "sha256": "214981fb4b01eccd9d78a075073fd46ca72d048e64866be4d5c7fa03433946d6"
       }
     },
     "catalog": {
@@ -141,7 +141,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.21,
-      "description": "Explore Gaspra in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.",
+      "description": "The first asteroid visited by a spacecraft.",
       "systemName": "Solar System",
       "order": 131,
       "context": {

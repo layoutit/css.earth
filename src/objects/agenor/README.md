@@ -25,7 +25,7 @@ L5 Jupiter Trojan. Source records checked 2026-09-09.
 - Absolute phase is arbitrary; accelerated display spin is illustrative. Orbit context is fixed at 2026-09-03 TT.
 - Hanuš et al. (2023), [*Shape models and spin states of Jupiter Trojans: Testing the streaming instability formation scenario*](https://arxiv.org/abs/2308.05380v1), Table B.2 revises the shape/spin solution. The recorded public target query did not expose its numerical mesh; this view keeps the older mesh and matching pole.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods
 
@@ -37,14 +37,6 @@ L5 Jupiter Trojan. Source records checked 2026-09-09.
 The unmodified source has 574 vertices and 1144 triangles. Its signed tetrahedral volume is 1.0000002162420796 source units³; independent triangle-centroid divergence gives 1.0000002162420796. The existing recipe applies a uniform scale of 40.943786684785003 km per source unit. No unit-volume assumption is made. The Elevation reference sphere has radius 25.3995 km.
 
 Original +Z spin axis and +X reference meridian are retained. The selected ecliptic J2000 pole is (328°, 28°), with sidereal period 20.6338 h. Conversion to equatorial J2000 uses obliquity 23.439291111°. Position uses JPL Horizons heliocentric ICRF elements; TDB is approximated as TT, under 2 ms.
-
-### Source survey
-
-The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/13333/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from [NOTICE.md](NOTICE.md).
-
-Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row and original query are pinned in [the source manifest](source/manifest.json); [column definitions](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html) are shared.
-
-The selected archive query lists no alternative model for this target.
 
 ### Preparation
 

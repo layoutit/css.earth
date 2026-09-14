@@ -9,23 +9,24 @@ import assets from "../../../../src/objects/europa/prepared/assets.json" with { 
 import scene from "../../../../src/objects/europa/prepared/scene.json" with { type: "json" };
 import lenses from "../../../../src/objects/europa/prepared/lenses.json" with { type: "json" };
 import controls from "../../../../src/objects/europa/prepared/controls.json" with { type: "json" };
+import text from "../../../../src/objects/europa/prepared/text.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
-import { OBJECTS } from "../../../../site/objects.mts";
+import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
-const LENS_IDS = ["normal","enhanced","elevation","geology","infrared"];
+const LENS_IDS = ["normal","enhanced","elevation","geology","infrared","ice-signature","fine-ice","coarse-ice"];
 
 objectRuntimePackageTests(runtimeDefinition);
 
 test("Europa's actual import closure has only shared runtime owners", async () => {
-  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "europa") });
+  const audit = await auditObjectRuntimeOwnership({ objects: SCENE_OBJECTS.filter(object => object.id === "europa") });
   assert.equal(audit.complete, true);
   for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/object-control-binding", "rendering/prepared-playback", "solar-system/cubic-sky-runtime"]) {
     assert.ok(audit.sharedClosure.includes(`src/renderers/css/${name}.ts`));
   }
 });
 
-test("Europa is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 5 lenses", () => {
+test("Europa is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 8 lenses", () => {
   assert.equal(scene.schema, "csseuropa-prepared-runtime-scene@1");
   assert.equal(scene.runtimeGeometry, false);
   assert.equal(scene.runtimeRasterization, false);
@@ -53,7 +54,7 @@ test("Europa lenses keep their prepared legends and false-colour declarations", 
   const byId = new Map(controls.lenses.controls.map(control => [control.id, control]));
   for (const control of lenses.controls) {
     const shell = required(byId.get(control.id));
-    assert.equal(typeof shell.description, "string");
+    assert.equal(typeof Object.getOwnPropertyDescriptor(text.datasets, control.id)?.value?.summary, "string");
     if (shell.legend?.kind === "scale") assert.ok((shell.legend.colors?.length ?? 0) >= 2 && (shell.legend.labels?.length ?? 0) >= 2);
     if (shell.legend?.kind === "categories") assert.ok((shell.legend.items?.length ?? 0) >= 2);
   }

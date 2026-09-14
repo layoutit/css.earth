@@ -24,7 +24,7 @@ L4 Jupiter Trojan. Source records checked 2026-09-09.
 - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain.
 - Absolute phase is arbitrary; accelerated display spin is illustrative. Orbit context is fixed at 2026-09-03 TT. The archive also lists an alternative pole.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods
 
@@ -36,14 +36,6 @@ L4 Jupiter Trojan. Source records checked 2026-09-09.
 The unmodified source has 574 vertices and 1144 triangles. Its signed tetrahedral volume is 0.99999985677502146 source units³; independent triangle-centroid divergence gives 0.99999985677502157. The existing recipe applies a uniform scale of 34.42892579757789 km per source unit. No unit-volume assumption is made. The Elevation reference sphere has radius 21.358 km.
 
 Original +Z spin axis and +X reference meridian are retained. The selected ecliptic J2000 pole is (327°, 66°), with sidereal period 17.7464 h. Conversion to equatorial J2000 uses obliquity 23.439291111°. Position uses JPL Horizons heliocentric ICRF elements; TDB is approximated as TT, under 2 ms.
-
-### Source survey
-
-The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/79848/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from [NOTICE.md](NOTICE.md).
-
-Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row and original query are pinned in [the source manifest](source/manifest.json); [column definitions](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html) are shared.
-
-Alternative archive solution: [model 8132](https://damit.cuni.cz/projects/damit/asteroid_models/view/8132), ecliptic pole (148°, 49°).
 
 ### Preparation
 

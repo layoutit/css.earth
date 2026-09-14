@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "m8",
+  "name": "Lagoon Nebula",
+  "defaultLens": "eso-optical",
+  "sharedInputs": [
+    "eso-optical",
+    "eso-vista",
+    "spitzer-mid-infrared",
+    "physical-evidence",
+    "distance",
+    "stellar-field"
+  ],
+  "lenses": [
+    {
+      "id": "eso-optical",
+      "label": "ESO · optical",
+      "title": "Lagoon nebula in visible light",
+      "description": "Relative display colors on one authored coherent front, guided locally by published structure. Gas depth, foreground extinction and distinct molecular clouds are not reconstructed. Thin-layer artifacts, stellar-removal residuals and infrared coverage boundaries remain visible. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Optical display colors on one inferred cloud front; physical depth and foreground extinction are not recovered.",
+      "detail": "4000 × 2679 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Optical · H-alpha / R / V / B"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4000 × 2679"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "93.49 × 62.61 arcmin"
+        }
+      ],
+      "input": "eso-optical",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m8-processed/sources/eso-optical.tif",
+        "sha256": "a0a2b4e1b926592642c1ee550925ca3d770d5d63522e37e39f058b27172d0c22",
+        "bytes": 18672974,
+        "url": "https://cdn.eso.org/images/publicationtiff/eso0936a.tif"
+      }
+    },
+    {
+      "id": "eso-vista",
+      "label": "ESO VISTA · infrared",
+      "title": "Lagoon stars and nebulosity in near infrared",
+      "description": "Relative display colors on one authored coherent front, guided locally by published structure. Gas depth, foreground extinction and distinct molecular clouds are not reconstructed. Thin-layer artifacts, stellar-removal residuals and infrared coverage boundaries remain visible. The reference preview shows the published photograph before star removal and 3D material fitting. The publisher caption identifies J/H/Ks; its conflicting H-alpha metadata is not used. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Near-infrared false color on an inferred cloud front; image coverage is narrower than the optical view.",
+      "detail": "4000 × 2202 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Near-infrared · J / H / Ks"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4000 × 2202"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "71.81 × 39.54 arcmin"
+        }
+      ],
+      "input": "eso-vista",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m8-processed/sources/eso-vista.tif",
+        "sha256": "906a2960105ac9344be261ba524c3e221f5bfdce3ab2efe33c022773cd7db3e9",
+        "bytes": 29816152,
+        "url": "https://cdn.eso.org/images/publicationtiff/eso1101d.tif"
+      }
+    },
+    {
+      "id": "spitzer-mid-infrared",
+      "label": "Spitzer · mid-infrared",
+      "title": "Lagoon warm dust in mid-infrared",
+      "description": "Relative display colors on one authored coherent front, guided locally by published structure. Gas depth, foreground extinction and distinct molecular clouds are not reconstructed. Thin-layer artifacts, stellar-removal residuals and infrared coverage boundaries remain visible. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Mid-infrared false color on an inferred cloud front; image coverage is narrower than the optical view.",
+      "detail": "1757 × 1417 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Mid-infrared · IRAC 3.6 / 4.5 / 5.8 / 8.0 µm + MIPS 24 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "1757 × 1417"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "35.73 × 28.81 arcmin"
+        }
+      ],
+      "input": "spitzer-mid-infrared",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.tif",
+        "sha256": "94ab668c21880706ae4fa6e401f8a7237f440cdcf4bcf3f93b45c0794c21ff34",
+        "bytes": 5591662,
+        "url": "https://www.spitzer.caltech.edu/system/avm_images/binaries/4757/original/sig11-012.tif?1603796898"
+      }
+    }
+  ],
+  "bank": {
+    "path": "src/objects/m8/prepared/lenses.json",
+    "sha256": "3bdbd0a131791ba83048ded4a997bd89c8d529a03bba449a880d453729432588",
+    "bytes": 3326216
+  },
+  "recipes": [
+    {
+      "id": "recipe-1",
+      "path": "src/objects/m8/source/delivery.json",
+      "sha256": "db90282e9c680d25b0e9bbbcab022832c7575dac33eb26bf0cfe38d352a66b04",
+      "bytes": 2002
+    },
+    {
+      "id": "recipe-2",
+      "path": "src/objects/m8/source/request.json",
+      "sha256": "2903c29073da5735902b3298cf75154da8721fdb7dc32a49b640e97e8e39fb8a",
+      "bytes": 353
+    },
+    {
+      "id": "recipe-3",
+      "path": "labs/nebula/models/m8/compiler.json",
+      "sha256": "2eccce756cf2d5448dabcadefefd2dd7aa5ed04821a540d1e3aea53045b94524",
+      "bytes": 1511
+    },
+    {
+      "id": "recipe-4",
+      "path": "labs/nebula/models/m8/depth-model.json",
+      "sha256": "56cd86345e893f8dfcb7e98e9686a096dd6634fa6b15459060c65e2cdd0c559b",
+      "bytes": 3297
+    },
+    {
+      "id": "recipe-5",
+      "path": "labs/nebula/models/m8/physical-evidence.json",
+      "sha256": "922b0da47092eb20e7dab3a669d33e1e5bc49efa71c0cc53a26ac56673f5abb1",
+      "bytes": 14198
+    },
+    {
+      "id": "recipe-6",
+      "path": "labs/nebula/models/m8/processing-observations.json",
+      "sha256": "12963ecaa7f630cd9562e74eb9d85e8cd03f0385784ed92fc69033a59e556db5",
+      "bytes": 5501
+    },
+    {
+      "id": "recipe-7",
+      "path": "labs/nebula/models/m8/processing-structures.json",
+      "sha256": "e871e01e6636080dad59c1a97734d995f740f80eff3a9e37df7f48d1c8e74d6a",
+      "bytes": 420
+    }
+  ]
+}

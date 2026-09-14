@@ -8,7 +8,7 @@ import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
 
 const distance = (a: PositionM, b: PositionM) => Math.hypot(...a.map((value, axis) => value - b[axis]));
-export const solarSystemFocus = (objects: readonly ObjectEntry[]) => objects.find(object => object.classification === 'star' && object.distanceAu === 0);
+export const solarSystemFocus = (objects: readonly ObjectEntry[]) => objects.find(object => object.classification === 'star' && object.distance.meters === 0);
 
 export function overviewExitDistance(frame: PreparedWorldCameraFrame, sunFrame: PreparedWorldCameraFrame) {
   return Math.max(frame.bodyRadiusM * policy.minimumDistanceRadii,

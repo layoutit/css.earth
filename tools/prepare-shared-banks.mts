@@ -1,13 +1,13 @@
 import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { pruneSharedBanks, restorePreparedShared, syncPreparedShared } from '../src/platform/prepared-shared-banks.mts';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 
 function chooseIds(ids: readonly string[] | undefined): string[] {
-  const chosen = ids?.length ? [...ids] : OBJECTS.map(({ id }) => id);
-  if (new Set(chosen).size !== chosen.length || chosen.some(id => !OBJECTS.some(object => object.id === id))) {
+  const chosen = ids?.length ? [...ids] : SCENE_OBJECTS.map(({ id }) => id);
+  if (new Set(chosen).size !== chosen.length || chosen.some(id => !SCENE_OBJECTS.some(object => object.id === id))) {
     throw new TypeError('Choose registered object ids.');
   }
   return chosen;

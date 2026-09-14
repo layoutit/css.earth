@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ff91700d548522fc6c5b8420c7a94f9fbab88a61943de3fdf27502fd7b65c3d2"
+          "sha256": "aa40f7612377d765d78a55358b08906a198e4edbb5950ba462164c15663603ea"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "01baff0658e253f3cbf37fdaca4e892eee0d660dae5dd2f653e280b2c5571932"
+        "sha256": "19a6cb72dc4761506b4e489e1690845f807926508d9f4f00bc8ed622214cbd43"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.197909787831412,
-      "description": "Explore Mentor in 3D with its published shape model and radial elevation.",
+      "description": "Dark Jupiter Trojan asteroid, discovered in April 1984.",
       "systemName": "Solar System",
       "order": 371,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "3eb67d99234ccc2f9d51818ee0aa6ef9ca817e7893e871af9f14d0ca5ca829fb"
+    "sha256": "ed3673ee0003ce51a6910e628144431e5842995096dcaa43120148a02cacf9fb"
   }
 }

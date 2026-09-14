@@ -185,14 +185,12 @@
         "levelMatching": {
           "samplesPerTriangle": 64,
           "minimumPairs": 64,
-          "maximumLogMad": 0.15,
           "maximumGain": 1.2,
           "maximumAngleDegrees": 70
         },
         "transfer": {
-          "maximumSourceDistanceMeters": 8,
           "maximumSeparationMeters": 8,
-          "maximumEmissionDegrees": 80,
+          "maximumEmissionDegrees": 65,
           "visibilityToleranceMeters": 0.5,
           "interpretation": "Every interpolation contributor must match the full Didymos v003 mesh within 8 m and pass visibility. These acceptance limits match the retained mesh preparation budget; they do not estimate scientific accuracy."
         },
@@ -200,14 +198,14 @@
           "model": "lommel-seeliger",
           "referenceIncidenceDegrees": 0,
           "referenceEmissionDegrees": 0,
-          "maximumIncidenceDegrees": 80,
-          "maximumEmissionDegrees": 80,
+          "maximumIncidenceDegrees": 65,
+          "maximumEmissionDegrees": 65,
           "maximumGain": 3
         },
         "display": {
           "percentiles": [
-            1,
-            99
+            1.1,
+            99.9
           ]
         },
         "metadata": {

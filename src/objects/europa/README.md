@@ -4,6 +4,8 @@
 
 - The [USGS Voyager/Galileo global mosaic](https://astrogeology.usgs.gov/search/map/europa_voyager_galileo_ssi_global_mosaic_500m) is a 19,631 × 9,816 monochrome GeoTIFF on a nominal 500 m grid.
 
+- **Monochrome photographic inserts** use 332 CLEAR-filter photographs from the [USGS controlled individual-image release](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/), described by [Bland et al. (2021)](https://doi.org/10.1029/2021EA001935). These calibrated observations use the published control network and replace regional pixels within the existing global Monochrome view. The global mosaic remains underneath.
+
 - The **Enhanced color** lens uses the [USGS controlled Galileo observations](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/) (CC0), by Bland, Weller and colleagues. The three sequences are G1ESGLOBAL01 (1996-06-28), 12ESGLOCOL01 (1997-12-16), and 14ESGLOCOL01 (1998-03-29).
 
 - The Elevation view adds the released [USGS controlled Agenor DTM](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/).
@@ -12,7 +14,23 @@
 
 - The infrared view uses [the registered Galileo NIMS archive](https://doi.org/10.17189/4sz4-5024), observations 17ENGLOBAL01A and 17ENGLOBAL02A, Minnaert-corrected CIOF products.
 
+- **Ice signature**, **Fine ice**, and **Coarse ice** use the VLT/SPHERE release of [King, Fletcher and Ligier (2022)](https://doi.org/10.3847/PSJ/ac596d), pinned as [Zenodo 6034904](https://doi.org/10.5281/zenodo.6034904). [reflectance-conversion.json](source/composition/reflectance-conversion.json) and [model-conversion.json](source/composition/model-conversion.json) bind the exact source bytes and prepared fields.
+
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Evidence
+
+The 14 September 2026 **Monochrome** update inserts 301 equirectangular products and 31 products whose inspected STAC records list only polar GeoTIFFs. The detailed 8,192 × 4,096 geographic preparation receives controlled photographs over **15.224% of the sphere**, with 330 contributing images. The lower level receives 324 images over 15.105%. Outside those footprints, the published global mosaic stays visible. The selector retains its original eight datasets.
+
+[Before and after in the running app](evidence/galileo/browser.json) · [Surface and delivery checks](evidence/galileo/delivery.json) · [Two-product fresh restoration](evidence/galileo/restoration.json). All 332 original GeoTIFFs contribute to the source lineage; the asset record retains the selected area and fitted display gain for each image at each level.
+
+[Regional before](evidence/galileo/regional-before.png) · [Regional after](evidence/galileo/regional.png) · [Southern before](evidence/galileo/southern-before.png) · [Southern after](evidence/galileo/southern-regions.png). These matched views show where photographic inserts change the surface, including remaining brightness boundaries. [Focused validation](evidence/galileo/checks.json) separates the passing checks from four existing shared failures reproduced on main. Strict preparation/tool TypeScript passes. Five replacement images are published and verified against their immutable URLs; the other 130 Europa image files retain their bytes. Renderer, geometry, runtime definition, atlas dimensions and the seven independent views are unchanged. Full application/conformance checks were not run.
+
+The 14 September 2026 composition preparation adds **Ice signature**, **Fine ice**, and **Coarse ice**. [Reflectance evidence](evidence/composition/reflectance-values.json) and [model evidence](evidence/composition/model-values.json) compare all 64,800 geographic nodes in each of five converted grids, including the two retained uncertainty products, with the original release. Values agree exactly after float32 rounding; missing samples and the periodic seam retain their source meaning. [Fresh restoration](evidence/composition/restoration.json) downloads both original archives into an empty source root and reproduces all eleven composition manifest entries.
+
+[Ice signature](evidence/composition/ice-signature.png) · [Fine ice](evidence/composition/fine-ice.png) · [Coarse ice](evidence/composition/coarse-ice.png) · [DPR 2](evidence/composition/ice-signature-dpr2.png) · [Mobile](evidence/composition/coarse-ice-mobile.png). The [browser receipt](evidence/composition/browser.json) pins the tested files above `f8fbdaa0b`, viewport, camera, selected textures and inspected captures. Dataset switching retains 450 surface leaves; minimap rotation and keyboard zoom work. [Delivery evidence](evidence/composition/delivery.json) verifies the unchanged scene and prior assets; fifteen added image files total 222,678 bytes.
+
+Focused checks pass: numeric conversion/acquisition (15), body behavior and content (14 across both moons), source/provenance (30), source-usage conservation (1), and strict preparation/tool TypeScript. Eight shared startup-fixture/import-closure failures across the two bodies were reproduced on base `a15706943`; these remain outside this surface change. Full application checks and public asset installation are not qualified. The local preview omits six unavailable unrelated nebula context banks. Mobile keeps the texture without horizontal overflow, but shared orbit/label clutter and the open information sheet limit visual review. The texture bake receipt retains its original source hashes; later content and provenance refreshes do not claim another full bake.
 
 The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
@@ -50,7 +68,6 @@ those source files, coordinate transforms, masks, geometry and scene structure.
 Its new evidence concerns finer sampling of the photographs; it does not repeat
 the scientific-lens review.
 
-
 Earlier run at base `53b262bd` (12 September 2026): `node tools/objects/dist/prepare-authored.js europa --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/europa/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
 A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, elevation, geology, infrared) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 4878).
@@ -61,7 +78,13 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 - Focused checks are defined in the [unit tests](../../../tests/objects/unit/europa) and [browser profile](../../../tests/objects/browser/europa/browser-profile.mts).
 
+Composition conversion: **Ice signature** is the observed, photometrically corrected `1.30000 / 1.50263 µm` reflectance ratio. The numerator and denominator are exact released samples; “1.51 µm” is only the paper's rounded label. It has 19,644 valid native nodes. **Fine ice** and **Coarse ice** are separate posterior-median model components for crystalline 0.1–0.3 mm and 0.3–1 mm ice, each with 19,616 valid nodes. The pinned source hashes, output hashes, ranges and interval-width uncertainty fields are in the two conversion records; preparation only reorders coordinates, reverses latitude and repeats the periodic seam.
+
 ## Known problems
+
+- **Monochrome inserts:** Original illumination and brightness joins remain. One display gain per photograph matches co-located valid global-mosaic pixels near its selected boundaries, capped against the brightest valid native sample. This does not correct illumination or recover albedo. The controlled release uses a sphere rather than a global terrain model; published relative control uncertainties are about 247 m in latitude and 307 m in longitude, with less secure absolute placement away from Cilix. The older global mosaic has different registration errors. The delivered geographic grid is about 1.20 km at the equator, so finer native information remains beyond this fixed texture budget. Native grid spacing is not a claim of independent resolved detail.
+
+- **Monochrome delivery:** The detailed packed image remains 8,320 × 6,144 pixels, exactly the previous dimensions: 195 MiB decoded as RGBA. Its download is 6.98 MB, down from 7.18 MB. All five replacement images total 9.53 MB, down from 9.99 MB. Polar sprites retain their existing 1024 × 512 detailed dimensions. Browser interaction was inspected, but physical-phone memory/performance was not profiled.
 
 The existing atlas seams can remain visible at extreme close zoom. This change
 retains the geometry and its packing layout.
@@ -80,9 +103,30 @@ Feature notes: 12 of the labelled names carry a caption note, the lead summary o
 
 - **Infrared:** The blue channels differ slightly (0.732919 and 0.740634 µm); this is a spectral color display, not a uniform quantitative abundance map.
 
+- **Composition lenses:** Native coordinates are latitude north-positive and longitude east-positive; source-paper labels in west longitude must therefore be converted before comparison with this body. The 1° release grid is resampling, not independent detail: SPHERE sampling is about 25 km/px but diffraction limits resolved features to about 150 km. Ice signature is a reflectance-ratio proxy, not an abundance. Fine and coarse ice are MCMC component estimates with 16th/84th-percentile bounds; they are not a total-ice posterior, so no component medians or percentile bounds are summed. Individual salt fits remain degenerate.
+
+- **Reuse:** The Zenodo record is open/`other-open`, but neither the tagged source nor the located record metadata provides explicit terms for reusing the numerical release. Article or preprint licensing does not settle those data rights. These composition assets are limited to local preview and a private draft PR; they are not qualified for public publication.
+
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
+
+<details>
+<summary>Galileo regional photographic preparation</summary>
+
+The selected products are radiometrically calibrated Float32 I/F images from the Galileo SSI CLEAR filter (0.611 µm). The published USGS workflow corrected pointing through photogrammetric bundle adjustment, reassembled interrupted image fragments, and projected them on a 1,560,800 m sphere with planetocentric latitude and east-positive longitude. It did **not** photometrically normalize these products. Original GeoTIFFs, coordinates, capture identities, byte counts and hashes are pinned in [the source manifest](source/manifest.json); each has a download operation and a canonical source record. Native files total 1.55 GB and are restored rather than committed.
+
+Selection takes the released CLEAR-filter equirectangular products below 800 m projected grid spacing, plus the 31 CLEAR products whose inspected STAC records list only polar GeoTIFFs. This selects 332 of the release's 481 Galileo observations. The matching equatorial versions are used where an image also has a polar projection, avoiding duplicate ingestion. The other observations are not declared absent or unusable; they are outside this regional selection.
+
+The [controlled-map decoder](../../../tools/objects/observation/controlled-map-mosaic.mts) verifies the actual GeoTIFF projection, sphere, affine grid, band, dimensions and no-data value before sampling. Bounds come from the raster rectangle, not a cropped catalogue footprint. Equirectangular downsampling integrates native pixel squares. Polar resampling uses a geographic subgrid at source-pixel spacing; this numerically approximates the curved footprint. At magnification, sampling is bilinear. Missing contributors, zero no-data and ISIS special values stay missing; valid black pixels are supported when zero is not the declared no-data value.
+
+Within the selected regions, one valid controlled photograph supplies each output pixel. Smaller projected pixel grids take precedence, with source ID breaking ties deterministically. Missing photographic pixels use the published global mosaic; only gaps in both sources receive the gray grid. Calibrated I/F stays floating point through display matching. A four-pixel strip inside each selected image boundary supplies co-located valid samples from the global mosaic. Their median linear-display brightness ratio determines one gain per image, capped so its brightest valid native sample cannot exceed the display range. At detailed density all 330 contributors have overlap samples; fitted gains span 0.306–11.534, with 110 limited by native highlights. The original I/F 0–2 display interval is scaled by that gain, then encoded once using the [shared IEC sRGB transfer](../../../docs/color-preparation.md). This is relative display matching to a contrast-adjusted mosaic, not physical calibration. It changes neither coordinates nor local source contrast ratios, blends no images, and invents no missing terrain. The independent false-color view continues to use its original global base and original preparation.
+
+The existing raster packer produces 4K/8K geographic levels in the unchanged latitude-band layout. Polar sprites sample the original controlled maps through the same projection and fitted display gains, falling back to the original global photograph. The existing 640 × 320 Monochrome minimap is refreshed from the composite. The default camera, geometry, materials, lighting banks and all original variants are retained.
+
+A trial replacement of the entire global mosaic was rejected because its brightness joins were worse. Global application of terrain-specific photometric parameters was not qualified. The delivered Monochrome update instead retains the global mosaic and inserts controlled regional photographs with the bounded display matching described above. No rejected photometric model supplies its pixels.
+
+</details>
 
 <details>
 <summary>Detailed source survey, assumptions and preparation</summary>

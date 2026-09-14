@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7c2b3b7523728a8c4fe2e9ad3d7d0b60978a3a5bfa42a679d438bbfa25085d3d"
+          "sha256": "c22432bb0c8b0fef54a36945a01afed2237456b55e8be6ebc026087503bd5a87"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "69c8fd749397edbf69ed7d63dbc62d1b3ceb376519e41e0d2e56b38f2e225271"
+        "sha256": "b4608f1077f5134247d20cc22c72698a63284124f3b7076a44a20bf658926fed"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 5.312733245360807,
-      "description": "Explore Leucus, a Lucy target, through its observation-constrained approximate ellipsoid.",
+      "description": "Slow-spinning Jupiter Trojan and Lucy target.",
       "systemName": "Solar System",
       "order": 19,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "9ddb8c1b465bba1e05b04318f409f1b02ddc831dd452258bcba5655366b5ee17"
+    "sha256": "2f677558444849197a0d0ac14632f55adfdd9c89879a262e1c0f2e9a0697ba95"
   }
 }

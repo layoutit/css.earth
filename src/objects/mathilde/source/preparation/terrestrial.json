@@ -108,12 +108,10 @@
         "selection": "recipe-order",
         "levelMatching": {
           "minimumPairs": 64,
-          "maximumLogMad": 0.3,
           "maximumGain": 1.5,
           "samplesPerTriangle": 16
         },
         "transfer": {
-          "maximumSourceDistanceMeters": 600,
           "maximumSeparationFootprints": 4,
           "visibilityToleranceMeters": 0.5,
           "maximumEmissionDegrees": 75
@@ -129,7 +127,7 @@
         "display": {
           "percentiles": [
             0,
-            99.5
+            99
           ]
         },
         "metadata": {

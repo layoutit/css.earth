@@ -3,31 +3,6 @@
   "reference": "https://pds.nasa.gov/datastandards/documents/dd/all/current/ch33s02.html",
   "frames": [
     {
-      "id": "c0368603500",
-      "path": "observations/C0368603500R.IMG",
-      "labelPath": "observations/C0368603500R.LBL",
-      "encoding": "vicar-byte-dn",
-      "observerLatitude": -0.009,
-      "observerWestLongitude": 333.853,
-      "sunLatitude": -1.229,
-      "sunWestLongitude": 22.432,
-      "rangeKm": 818766.085,
-      "northAzimuthDegrees": 0.2189999999999941,
-      "center": [
-        264.84,
-        122.08
-      ],
-      "pixelAngleMicroradians": 10.15,
-      "backgroundOffset": 0.0117647,
-      "backgroundMaximum": 0.0078431,
-      "registration": {
-        "method": "Original PDS label body geometry and north azimuth; translation fitted to illuminated shape silhouette",
-        "background": "Median of returned positive low-signal pixels below their60th percentile; no absent telemetry rows",
-        "skyMedianDN": 3.0,
-        "boundaryRmsPixels": 1.3145341383161884
-      }
-    },
-    {
       "id": "c0420626379",
       "path": "observations/C0420626379R.IMG",
       "labelPath": "observations/C0420626379R.LBL",

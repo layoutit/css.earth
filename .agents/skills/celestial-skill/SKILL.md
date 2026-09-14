@@ -5,19 +5,43 @@ description: "Create, repair, and qualify source-backed celestial body packages 
 
 # Celestial Skill
 
-Maintain this skill in the repository. Read the selected checkout's
-[provenance and documentation contract](../../../docs/provenance/CONTRACT.md)
-and the target body's `README.md`, `NOTICE.md` and manifests.
+Maintain this skill in the repository. Read the relevant sections of the selected
+checkout's [provenance and documentation contract](../../../docs/provenance/CONTRACT.md).
+For body data work, inspect the target's README, NOTICE and manifests. For a prose
+correction, inspect the affected claim and its source rather than every body record.
 The contract combines PDS4 1.26.0 provenance guidance with ISO 24495-1:2023
 plain-language principles for our docs and evidence.
 Use its pinned references; add body-specific facts without another report format.
-This skill explains how to prepare and check a body. Update it in the same PR when shared
-preparation changes. Installed copies should follow this version.
+This skill explains how to prepare and check a body. Update affected guidance in
+the same PR when a preparation change alters its documented routes or checks;
+implementation-only changes do not require a skill edit.
+Installed copies should follow this version.
 
 Build a body whose appearance is supported by its sources and whose behavior
 comes from cssEarth's shared application. Follow this workflow for a new body;
 for a repair, enter at the affected stage and reuse valid work already done.
 Research and review requests do not imply implementation or publication.
+
+## Enter at the requested work
+
+Use the selected checkout's skill and contracts; an installed copy or historical
+report may describe an older pipeline. Read only the references needed for the
+changed capability. The stages below are not a checklist to rerun for every task.
+
+| Request | Starting point and completion boundary |
+| --- | --- |
+| Documentation or credit correction | Check the cited spelling/fact and affected records; finish with the corrected prose and links. Unchanged sources and assets need no preparation. |
+| Research, viability or next-PR proposal | Read current PR state and relevant ledgers, then investigate the missing facts. Distinguish examined evidence from remaining possibilities; do not implement or qualify a whole body merely to recommend work. |
+| Repair an existing view or refresh its detail | Reproduce the defect, trace its source/recipe, and reuse valid registration, geometry and interaction evidence. Prepare the affected assets and inspect their changed appearance. |
+| Add a body or selected dataset | Survey the relevant sources, choose the supported presentation, and deliver the selected view end to end. Additional interesting datasets remain recorded opportunities. |
+| Add a shared preparation capability | Establish the missing source interpretation, extend the shared owner within the authorized scope, and check that interpretation and its consumers. An offline decoder is not a runtime change. |
+| Repair findings from a catalog review | Reuse the audit and ledgers, check their revisions and affected inputs, and repair the demonstrated defects. Refresh inventory only for changed membership or missing coverage. |
+
+Choose by the actual quantity as well: a scalar map, shape-only view or metadata
+repair does not require photographic camera reconstruction. A diagnostic needs
+the source/tool checks supporting its claim, not delivery checks for unchanged
+runtime assets. Use the [qualification change table](references/qualification.md#check-what-changed)
+when implementation or delivery changes.
 
 ## Shapes belong to datasets
 
@@ -34,7 +58,8 @@ as the dataset's triangle atlas. Prefer archived per-pixel geometry products
 and the geometry-cube route in the [implementation map](references/implementation-map.md#registered-photographic-mosaics))
 over pointing files whose pixel conventions the archive does not state.
 A restriction on renderer changes does not by itself freeze prepared geometry;
-respect any explicit geometry or topology restriction in the task's scope.
+respect explicit geometry or topology restrictions, including the persisted
+[existing-moon upgrade scope](#scope-for-existing-moon-upgrades) below.
 Explain meaningful model differences beside the dataset and qualify registration,
 coverage and picking against the selected mesh. The [implementation map](references/implementation-map.md)
 locates the existing support for alternative models.
@@ -43,32 +68,9 @@ For shape-only alternatives, bind each `shapeViews` entry to its selected
 `radialTerrain` source as well. Verify that generated surface provenance names
 that mesh, rather than reusing the default mesh's source for every dataset.
 
-Surface places also belong to a source frame. Use `source/preparation/features.json`
-and its pinned `landmarks` document for mission-defined regions, paper coordinates,
-or explicitly inferred model anatomy. Keep mission names distinct from IAU names.
-Derive region anchors from the released map and check them against the unchanged
-display mesh; a label point does not establish a region centre, size or boundary.
-For alternative meshes, select the matching prepared `surfaceHit.lensRanges`
-entry and expose those places only on that dataset. A shared body name does not
-make coordinates transferable between models. Keep approximate placement visible
-in the caption. Unresolved photograph-to-shape registration cannot establish a
-terrain landmark; neither can a camera direction alone.
-
-For a body explicitly prepared as a reference sphere, published geographic
-landmarks can use that sphere without a triangle hit mesh. This exception does
-not apply to missing irregular-body meshes or Cartesian model coordinates.
-
-Check label discovery with no place selected: selection bypasses the zoom gate.
-Inspect whole-body framing, a closer view and rotation on a sparse asteroid,
-comet and small moon. Physical size alone does not require a separate label
-rule: the shared camera expresses zoom relative to the body. The shared feature
-preparer gives sparse catalogues a count floor of 200 when assigning discovery
-tiers, so two names are not stretched from minimum to maximum zoom. Explicit
-mission-landmark tiers remain authored choices; broad regions should appear
-while the whole body is still visible. Keep the existing screen-size, limb,
-overlap and label-cap checks, and verify the smallest named features still need
-enough screen space. Do not use a successful search-and-fly-to as proof that
-places can be discovered by looking at the body.
+When changing places, landmarks or their discovery behavior, read
+[surface places](references/surface-places.md) for source-frame binding and
+label checks. Unchanged labels do not require a new discovery audit.
 
 ## Scope for existing moon upgrades
 
@@ -110,8 +112,16 @@ route when a paper's input model is missing from a repository's current files.
 Follow promising citations to the actual release; a display-texture catalog or
 press-image search alone does not establish what datasets exist.
 
-For photograph-to-shape work, inspect the selected shape release as a bundle
-before deriving a camera or looking for a replacement model. Read its labels,
+For photographic surfaces, choose the investigation route from the available
+product before choosing a tool: a producer map, a mapped paper figure, an image
+with archived surface geometry, or an unmapped photograph. Read
+[photographic investigation](references/photographic-investigation.md) for each
+route's evidence requirements and how to reassess a stalled method. A usable
+controlled map does not require reconstructing its original cameras; it still
+requires a documented frame, coverage and compatibility with the selected mesh.
+
+For unmapped photograph-to-shape work, inspect the selected shape release as a
+bundle before deriving a camera or looking for a replacement model. Read its labels,
 file inventory and linked methods for companion image-geometry tables,
 reconstructed pointing, control points, backplanes and detector-quality files.
 Compare their observation IDs and model frame with the image headers; headers
@@ -134,9 +144,9 @@ receive time, target emission time and aberration conventions to the image.
 Recover and verify the available archive inputs before declaring a source gap.
 
 Search the relevant papers explicitly as well as the data archives. Inspect
-full text, tables, appendices and supplementary files: a usable radius table,
-mesh, camera solution or registration controls may be published there without
-a separate dataset download. Follow authoritative open-access or author-repository
+full text, tables, figures, appendices and supplementary files: a usable map,
+radius table, mesh, camera solution or registration controls may be published
+there without a separate dataset download. Follow authoritative open-access or author-repository
 copies when available. Match the paper's model version, coordinates, units and
 observation identifiers to the selected inputs before using its numbers.
 Record any transcription or digitization and check it against the published
@@ -153,8 +163,12 @@ Compare detail, registration, coverage and reuse terms before choosing. A better
 mosaic can replace a weaker one without becoming a duplicate lens. Missing
 metadata or a failed download leaves a candidate unresolved; it is not evidence
 that the dataset does not exist. Respect explicit user exclusions and scope.
-Stop once the promising candidates have a disposition; do not build an exhaustive
-catalog or repeat this survey for an unrelated repair.
+Stop the source survey once the promising candidates have a disposition; this
+does not finish an authorized implementation. A failed method does not exclude
+every route for its source. Record what failed, distinguish missing information
+from missing tooling, and retain the next useful check in the existing ledger;
+see [reassessing a stalled method](references/photographic-investigation.md#when-a-method-stalls).
+Do not build an exhaustive catalog or repeat the survey for an unrelated repair.
 
 Use the contract's [reference retention rules](../../../docs/provenance/CONTRACT.md#references-and-retained-files)
 to distinguish citations from scientific inputs. Record cited values and their
@@ -164,11 +178,15 @@ Do not commit downloaded webpages as evidence.
 Follow [Sources authoring](../../../docs/sources-catalogue.md#add-or-update-a-source)
 when adding or changing inputs: reuse the published identity, preserve each local
 file and bind its actual role. Refreshing sources must preserve existing bindings.
-Run `pnpm prepare:sources` after source or attribution changes.
+Run `pnpm prepare:sources` when source records, bindings or generated attribution
+change. A README-only spelling correction does not trigger source preparation.
 For factsheets, put citations on the individual facts using the existing
 [factsheet fields](../../../docs/factsheets.md#editing-and-reproduction).
 Preserve each fact's evidence when editing content. A general page credit does
 not supply a citation for every number on that page.
+Write the card line, introduction and dataset text in the body's `text.json`,
+cite the source records a reviewer checks them against, and run
+`pnpm prepare:text`; see [reader text](../../../docs/reader-text.md).
 
 Record the following for selected inputs in the existing source record and
 manifest:
@@ -235,7 +253,8 @@ Read the applicable preparation guidance **before** processing those assets:
 | Surface color, calibrated filters or RGB imagery | [Source-backed surface color](../../../docs/color-preparation.md): identify the input quantity and published color meaning; keep measured bands floating until one final display encoding. Registration and calibration do not qualify natural color. Never guess missing visible bands, white balance or an instrument color transform. |
 | Photographed shading or mosaic seams | [Photographic observations](references/surface-preparation.md#photographic-observations): corrected source or justified per-observation normalization, then bounded level matching where useful. Preserve shared lighting controls. |
 | Soft photographic textures | [Photographic observations](references/surface-preparation.md#photographic-observations): trace intermediate resizes, sample registered originals at the delivered footprint, and separate sampling gains from encoding quality. |
-| Multiple photographs registered to a surface | [Registered photographic mosaics](references/registered-photographic-mosaics.md): camera holdouts, quality and visibility checks, deterministic selection, overlap levels, provenance and area coverage. |
+| Published photographic map or mapped paper figure | [Photographic investigation](references/photographic-investigation.md): verify the map frame, surface reference, usable pixels and inherited uncertainty; qualify any digitization before sampling. |
+| Unmapped photographs or images with archived surface geometry | [Registered photographic mosaics](references/registered-photographic-mosaics.md): camera holdouts where applicable, quality and visibility checks, deterministic selection, overlap levels, provenance and area coverage. |
 | Elevation or another measured scalar | [Scientific maps](references/surface-preparation.md#scientific-maps): datum, palette, readable relief and a truthful legend. |
 | Incomplete coverage | [Coverage](references/surface-preparation.md#coverage): source validity before interpolation; mark real gaps without erasing observed dark terrain. |
 | Irregular terrain or a triangle-mesh budget | [Irregular meshes](references/irregular-meshes.md): choose a representable source shape, simplify before baking, and use PolyCSS native raster triangles. |
@@ -295,15 +314,16 @@ or registration errors in preparation and regenerate affected companion assets.
 Show useful visual results while continuing the authorized work; a preview is
 not an automatic stop for approval.
 
-## 4a. Review every object before a faithfulness PR
+## 4a. Catalog faithfulness reviews and repairs
 
-When a faithfulness change spans the catalog, inventory every registered
-`object.json` and `source/manifest.json` first, plus README-only stubs. Classify
-each package as a controlled source map/camera, a source product with a pending
-shape transfer, a scientific or model-derived field, an insufficiently
-registered photographic lens, or a shape/elevation-only scene. Record the
-counts and complete IDs in a maintained shared review document; do not infer
-coverage from the number of files or from the existence of a texture.
+For a requested catalog-wide review, establish coverage from registered
+`object.json` files, source manifests and README-only stubs. Reuse existing audit
+and ledger classifications, verifying their versions and updating changed or
+unreviewed packages. Classify controlled maps/cameras, pending model transfers,
+scientific/model fields, insufficiently registered photographs and shape-only
+scenes. Keep counts and IDs with the maintained review; file counts or texture
+existence alone do not establish source qualification. A repair of known findings
+does not require repeating the whole catalog review or creating another report.
 
 Accept a producer map only when its body-fixed coordinate frame, shape/map
 reference surface and missing-data convention are documented. Accept a source
@@ -330,19 +350,26 @@ shown. Do not delete a candidate before checking the source release or paper;
 document the unresolved transfer and retain useful non-photographic products.
 Scientific maps, thermal/radar/albedo fields and geology must be labeled by
 quantity and must never be presented as direct photographs merely because they
-are raster data. A catalog faithfulness PR changes package evidence and
-metadata only; it does not change the shared renderer or geometry architecture.
+are raster data.
+
+A requested faithfulness repair fixes the cause in source interpretation,
+registration, preparation or affected package data, then regenerates and checks
+the dependent outputs. Correcting labels is sufficient only when the defect is
+the label itself. Investigate a supported repair before withholding a surface;
+if it remains unqualified, preserve useful source/model data and state the
+unresolved result. Keep renderer and geometry changes within the user's scope.
 
 ## 5. Finish delivery
 
-Use [qualification](references/qualification.md) for the relevant checks,
-source restoration, fresh runtime installation and measured delivery size.
-Choose local checks from its change table and the contract's
+Choose local checks from the [qualification change table](references/qualification.md#check-what-changed)
+and the contract's
 [PR check rules](../../../docs/provenance/CONTRACT.md#pull-requests). Do not launch
 all-body preparation or test suites by default for one body. Reuse passing evidence
 until relevant changes or unresolved failures invalidate it.
 Keep project-required checks; do not add a new dashboard, gate framework,
-Burnlist or exhaustive test matrix to implement an ordinary body.
+Burnlist or exhaustive test matrix to implement an ordinary body. Source
+restoration, fresh runtime installation and delivery measurements apply when
+their triggering acquisition, asset or delivery changes are present.
 
 A body PR is finished when its branch turns the change on end to end. It holds:
 
@@ -351,12 +378,17 @@ A body PR is finished when its branch turns the change on end to end. It holds:
 - the body README's account of sources, processing, results and known problems;
 - any published photometric model as a cited record, used inside its fitted range.
 
-Do not open a mergeable PR with code that nothing uses yet. When an archive
-product needs a reader, route or kernel bank that does not exist, open the
-archive-product issue template instead of writing one for a single body.
+Do not present unused implementation as a finished body feature. When an archive
+product needs a reader, route or kernel bank, first check the shared owners.
+If adding that capability is authorized, implement it there with its source
+checks and a consuming body recipe; the first consumer may be a single body.
+Do not introduce private body executables. If the missing capability is outside
+scope, record the concrete gap and use the archive-product issue template for a
+requested handoff. An issue or research diagnostic does not finish an authorized
+implementation that remains possible within scope.
 
-Update the body README with source choices, processing, results and known
-problems. Update affected credits and reports in the same change. Keep common
+For changed datasets, update the body README's source choices, processing,
+results and known problems. Update affected credits and reports in the same change. Keep common
 usage and commands in shared guides. Save cited screenshots in Git or agreed
 storage and link them; a local output path cannot be reviewed by someone else.
 
@@ -369,9 +401,11 @@ terms and qualifications. Inspect the rendered README with methods collapsed.
 Use reader feedback to fix confusing wording or structure; do not treat agent
 review or a word count as reader testing.
 
-Finish with the working location/URL, supported views, checked outcomes and
-remaining limitations, including useful unresolved dataset candidates recorded in the investigation ledger. A working
-first lens does not establish that the body's useful datasets have been covered.
+Report the result appropriate to the request, checked outcomes and remaining
+limitations. For implementation, include the working location/URL and supported
+views. Finish the selected views; record useful unresolved
+candidates in the ledger without making complete dataset coverage a hidden
+delivery requirement. A first lens proves only its stated claims.
 Complete authorized commit/PR work, respecting the
 user's merge instructions. Source fidelity, visual acceptance and runtime
 correctness are separate claims; a successful build alone proves none of them.

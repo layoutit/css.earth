@@ -4,7 +4,6 @@
   "id": "klytia",
   "displayName": "Klytia",
   "panel": {
-    "introduction": "Published convex shape with a shape-aware thermophysical size calibration. The grid marks unavailable imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve shape with thermophysical volume-equivalent diameter 45.4 ± 1.3 km. The published fit uses the same pole family; an alternative pole remains possible. The grid marks unavailable imagery and rotational phase is illustrative.",
-        "title": "DAMIT shape model",
         "thumbnail": "/scenes/klytia/klytia-shape-thumbnail.webp",
         "surface": "klytia-shape-surface@2x.webp",
         "poles": "klytia-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 22.7 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Shape-derived elevations",
         "thumbnail": "/scenes/klytia/klytia-elevation-thumbnail.webp",
         "surface": "klytia-elevation-surface@2x.webp",
         "poles": "klytia-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/142",
           "image": "/scenes/klytia/klytia-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 22.7 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

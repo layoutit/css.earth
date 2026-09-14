@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "9a3790e0629eca9ca4c0f3853b0e5b85b1991ef75b9c9ecbf9fd883edaefe8c2"
+          "sha256": "0943dc0cb0a8dba4ffee16b2c953954a184ac2997831dac1390b99f10a4c109a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "32ee32d4813758504b7e295fab2a8dbb90eb18de5b00e6c169d640e91609a56e"
+          "sha256": "ba7e1362169705ba4519d58fb75f4d27a8778758c714a83d9d8eab8853ed8a66"
         },
         {
           "id": "title",
@@ -38,12 +38,12 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "fa3845b96870c8165b5c49ce8eb5db35075507f95504929b982d64bafd6356f7"
+          "sha256": "35c21e8ef1870756897324b73d55bcdc5f1367406229c0e2f0d53321089a53ca"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "7c4f277da32b531b0ec81f35875e205b808a7b5e8bf61bf4e9e7d6d4a74cc6d2"
+          "sha256": "ccb191d944676d4fe8ac55dbf562cbf42c9c665813a1a76beb60fd8ffa772ac0"
         },
         {
           "id": "rotation",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4eb5bfbe1f6c898b11f688bd598fb1cfd28207aeead512a8ffb6a4a062a26d3c"
+        "sha256": "d30f12344fe7abcd138b36729d9df6ee6d5eadcbc02c6df461e996325abe78a3"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#c3bfb7",
       "distanceAu": 9.58,
-      "description": "Explore Telesto in 3D with Cassini imagery and its measured irregular shape.",
+      "description": "Small moon that leads Tethys along its orbit around Saturn.",
       "systemName": "Solar System",
       "order": 114,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "dee48c97cb1da801148d37ac1be514c19e09b29faba276e338c382bd47ff8409"
+    "sha256": "e4ad8aba8991d243007e1c91f39175e70b34052bc9cfdb048b7f966de6c0b700"
   }
 }

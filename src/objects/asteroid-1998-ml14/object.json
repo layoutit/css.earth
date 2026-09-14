@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "12fb6d249c110ce694c19d4c0df195d30fb88e9fc1e45875d2be28398e26017b"
+          "sha256": "4ffe06c9db942f16b19bf11ea17ffca74b058f7d3e8ec6490a2c5fdc5729a151"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ff4406dfaef8633a25f5c20f0d3551c389ffb6cceec67eaa27ae17504a2671a1"
+        "sha256": "58ceea8c0231373e469b8c9d06fc30b7fe520365d1a1ba83cbce1e174010a59e"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.407527644248636,
-      "description": "Explore 1998 ML14 in 3D with its published radar shape model.",
+      "description": "Roughly kilometre-wide near-Earth asteroid with a bump and a dent.",
       "systemName": "Solar System",
       "order": 214,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d2941228b449cd53f78bee6ca7e2ef0dbe1fbcfcf7b0b1dbbab0b93d6b6e9371"
+    "sha256": "975c9fb8debf321604d98e4054978cf1b7a0a49faadf38e94a7fb834fb6aeac6"
   }
 }

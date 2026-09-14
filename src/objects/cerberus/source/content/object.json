@@ -4,7 +4,6 @@
   "id": "cerberus",
   "displayName": "Cerberus",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex lightcurve model at an uncertain 1.2 km archive scale. The published thermal fit is poor and its size uncertainty is unconstrained. Grid marks unavailable imagery.",
-        "title": "Cerberus · DAMIT shape model 456",
         "thumbnail": "/scenes/cerberus/cerberus-shape-thumbnail.webp",
         "surface": "cerberus-shape-surface@2x.webp",
         "poles": "cerberus-shape-surface@2x.webp",
@@ -78,13 +75,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "notes": "Convex lightcurve model at an uncertain 1.2 km archive scale. The published thermal fit is poor and its size uncertainty is unconstrained. Grid marks unavailable imagery.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 0.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Cerberus · radius relative to the 0.6 km reference sphere",
         "thumbnail": "/scenes/cerberus/cerberus-elevation-thumbnail.webp",
         "surface": "cerberus-elevation-surface@2x.webp",
         "poles": "cerberus-elevation-surface@2x.webp",
@@ -106,7 +102,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/456",
           "image": "/scenes/cerberus/cerberus-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 0.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

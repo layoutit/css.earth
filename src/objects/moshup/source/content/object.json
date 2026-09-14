@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Moshup is the primary of the near-Earth binary asteroid formerly designated 1999 KW4. Its radar reconstruction has a pronounced equatorial ridge. Explore its original shape and radial heights. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -53,8 +52,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Published radar shape model",
-        "title": "Radar shape model",
         "thumbnail": "/scenes/moshup/moshup-shape-thumbnail.webp",
         "surface": "moshup-shape-surface@2x.webp",
         "poles": "moshup-shape-surface@2x.webp",
@@ -63,14 +60,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape",
-        "summary": "Shape from radar observations. The gray grid marks missing optical imagery; lighting shows the model."
+        "notes": "Published radar shape model",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Source shape · radial height",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/moshup/moshup-elevation-thumbnail.webp",
         "surface": "moshup-elevation-surface@2x.webp",
         "poles": "moshup-elevation-surface@2x.webp",
@@ -92,8 +87,7 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj",
           "image": "/scenes/moshup/moshup-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height",
-        "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+        "notes": "Source shape · radial height"
       }
     ]
   },

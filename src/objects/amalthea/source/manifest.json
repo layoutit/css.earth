@@ -2,89 +2,6 @@
   "schema": "cssamalthea-authoritative-sources@2",
   "inputs": [
     {
-      "id": "c0368603500",
-      "path": "observations/C0368603500R.IMG",
-      "expectedBytes": 831488,
-      "expectedSha256": "0c2786700d45f25d74828a2a274ffc1e8b2cd9fdaf049e5c461e44800b7d48ee",
-      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368603500",
-      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/galileo/ssi/"
-      ],
-      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
-      "redistribution": "Retain NASA/JPL and PDS credits.",
-      "consumers": [
-        "galileo-frames"
-      ],
-      "width": 800,
-      "height": 800,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "geometry/registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "missionId": "galileo",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0017-c3-sml-sats-c0368603500r",
-            "role": "material",
-            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
-      "id": "c0368603500-label",
-      "path": "observations/C0368603500R.LBL",
-      "expectedBytes": 4754,
-      "expectedSha256": "498fc2ee6c38eca35f33051a78f5e4b5ae082914e7dd8deee57f643259f02296",
-      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368603500",
-      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/galileo/ssi/"
-      ],
-      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
-      "redistribution": "Retain NASA/JPL and PDS credits.",
-      "consumers": [
-        "galileo-frames"
-      ],
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "missionId": "galileo",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0017-c3-sml-sats-c0368603500r",
-            "role": "material",
-            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
       "id": "c0420626379",
       "path": "observations/C0420626379R.IMG",
       "expectedBytes": 831488,
@@ -599,7 +516,6 @@
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
-          "c0368603500",
           "c0420626379",
           "c0420652501",
           "c0512324200",
@@ -614,24 +530,19 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 44558,
-      "expectedSha256": "cc24a3d225625321b94229125518492454d0d2262642fdcf215f5c8719c516d7"
+      "expectedBytes": 46346,
+      "expectedSha256": "fac868da09c4a7adf37c39a09588f3661f13f47e989b42af6c3bf3168e070abb"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5982,
-      "expectedSha256": "0ce5495fa7995818a8c3b27514b397a15cdccf86b153d2e3afe8f4d3e7c98243",
+      "expectedBytes": 5379,
+      "expectedSha256": "10a4b76d7c39032187256c5bcfeae8bd779364db61a8a7f35ea905483cd32064",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
-    },
-    {
-      "path": "geometry/c0368603500-opus.json",
-      "expectedBytes": 11797,
-      "expectedSha256": "11558603ad40acad346d3316c5183ea94da07d349bd293b6cd1fff0341dfb651"
     },
     {
       "path": "geometry/c0420626379-opus.json",
@@ -655,23 +566,23 @@
     },
     {
       "path": "geometry/registration.json",
-      "expectedBytes": 5442,
-      "expectedSha256": "fe084d9fa7458808865e61164922942053d18516feb600ea184036381e4d8370"
+      "expectedBytes": 4525,
+      "expectedSha256": "06b779f9cfca636e8770b9b7d1284ab4263e720b478e397967e574cf0dc39684"
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3376,
-      "expectedSha256": "a68c219108489716553c0b2cf1729927e0f944e09709f979c96f5cdd8ec7ac87"
+      "expectedBytes": 2896,
+      "expectedSha256": "c0efd09f334665b1841de95c63250f1b684c2d7734c88f94f02f3dfafc146d3d"
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1335,
-      "expectedSha256": "22fa62d0f01c74e99cb86e2f55fb0ae858053d9498cb9796aa45fcf381a125c4"
+      "expectedBytes": 1312,
+      "expectedSha256": "178b57839f0baa77ffd11ad7b07f29ca76f4d3a085101dced3f7a2c72c11a018"
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 7443,
-      "expectedSha256": "2fd15ae8786fc1886e0aed3b55aa5c186afc20728f253ba70724eb5a8e529bae"
+      "expectedBytes": 7210,
+      "expectedSha256": "5f6ebbc6ba7e99e7815b6687db3817dc1fd853497facbd1dfede9bbfb29b1af5"
     },
     {
       "path": "presentation/minimap.json",

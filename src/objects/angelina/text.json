@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "angelina",
+  "card": {
+    "text": "Main-belt asteroid, discovered in March 1861.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Angelina",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1861-03-04 by Tempel, E. W. at Marseille; albedo: 0.483; orbit class: Main-belt Asteroid; spec_B: Xe; spec_T: E"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "E. W. Tempel found Angelina at Marseille in 1861. Its bright surface reflects about 48% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Angelina",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1861-03-04 by Tempel, E. W. at Marseille; albedo: 0.483; orbit class: Main-belt Asteroid; spec_B: Xe; spec_T: E"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT model 289",
+      "detail": "Published shape",
+      "summary": "Shape inferred from brightness changes as it spins, so hollows are smoothed over."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a reference sphere. Colors mix the overall shape with local relief."
+    }
+  }
+}

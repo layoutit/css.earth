@@ -7,7 +7,7 @@ import { setImmediate } from "node:timers/promises";
 import test from "node:test";
 import type { ObjectCommandOutcome, PreparationCommand, PreparationEvent, PreparationReport } from './run-implemented-planets.mts';
 
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import {
   defaultPreparationConcurrency,
   discoverPlanetTests,
@@ -17,7 +17,7 @@ import {
 } from "./run-implemented-planets.mts";
 
 const root = resolve(import.meta.dirname, "..");
-const ids = OBJECTS.map(({ id }) => id);
+const ids = SCENE_OBJECTS.map(({ id }) => id);
 const success = Object.freeze({ exitCode: 0, signal: null });
 const quiet = () => {};
 const hasPreparationReport = (error: AggregateError): error is AggregateError & { report: PreparationReport } =>
@@ -53,7 +53,7 @@ test("preparation defaults leave headroom for image workers on small and large h
   assert.throws(() => defaultPreparationConcurrency({ cores: 0, memoryBytes: gibibyte }), /capacity/);
 });
 
-test("default preparation covers every actual OBJECTS package exactly once", async () => {
+test("default preparation covers every actual SCENE_OBJECTS package exactly once", async () => {
   const calls: PreparationCommand[] = [], events: PreparationEvent[] = [];
   const report = await runPreparationObjects({
     projectRoot: root, concurrency: 3,
@@ -154,7 +154,7 @@ test("preparation validates selected registry IDs, capacities, and all scripts b
   let calls = 0;
   const options = { projectRoot: root, onEvent: quiet, runCommand: async (): Promise<ObjectCommandOutcome> => { calls++; return success; } };
   for (const objectIds of [[ids[0], ids[0]], ["not-an-object"], ["../escape"]]) {
-    await assert.rejects(runPreparationObjects({ ...options, objectIds }), /OBJECTS/);
+    await assert.rejects(runPreparationObjects({ ...options, objectIds }), /SCENE_OBJECTS/);
   }
   for (const concurrency of [0, -1, 1.5, Infinity]) {
     await assert.rejects(runPreparationObjects({ ...options, concurrency }), /scheduling options/);

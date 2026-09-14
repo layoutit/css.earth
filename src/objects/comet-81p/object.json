@@ -21,12 +21,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "b4201655d61d85f3715b83515edf469c17b1a550cc31040bdab40faddffa30a5"
+          "sha256": "c7b0f7fa08935328332c522be8e312e02e17795c8d60e8aed3fd821b34fb6c86"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "54dd5e5150b7c8cd7792d9e38034486f1073561fe154dfe528793d1b32ed9ef0"
+          "sha256": "42746b8749f390905ec391e1fdb479656876cc37fa46417de959dafadfad3e36"
         },
         {
           "id": "title",
@@ -122,7 +122,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d3f7140b1f1b1a96ef3b10930075e91db088b4c5470389fa5bbd2d6d54215426"
+        "sha256": "f204a149cd3c6c82266f753c845636eea1c2f674e3dafdbc0048ea6a6317a91a"
       }
     },
     "catalog": {
@@ -130,7 +130,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.45,
-      "description": "Explore Wild 2's observed Stardust terrain, preserving its real coverage gaps.",
+      "description": "Comet whose dust Stardust brought back to Earth.",
       "systemName": "Solar System",
       "order": 79,
       "context": {
@@ -142,7 +142,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5be2dc292354bb7677f62ca3f43353a07db64d21071ba63ef0bfaba779fd6874"
+    "sha256": "40e6030db584291679f3f69add93a426b8ce649f8fd3b9ca37f32032291d0d7c"
   },
   "type": "layered-body",
   "id": "comet-81p"

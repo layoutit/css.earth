@@ -1,0 +1,54 @@
+{
+  "id": "europa-sphere-composition-2022",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Compositional Mapping of Europa Using MCMC Modeling of Near-IR VLT/SPHERE and Galileo/NIMS Observations",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.6034904"
+    }
+  ],
+  "version": "v1.0.2",
+  "creators": [
+    "Oliver King",
+    "Leigh N. Fletcher",
+    "Nicolas Ligier"
+  ],
+  "publisher": "Zenodo",
+  "publicationDate": "2022-02-10",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.5281/zenodo.6034904",
+      "label": "Numerical data release"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.3847/PSJ/ac596d",
+      "label": "Methods and interpretation"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/api/records/6034904",
+      "checkedOn": "2026-09-13",
+      "locator": "metadata and files; Open Access / other-open does not specify reuse terms"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022), VLT/SPHERE observations and published spectral models.",
+      "scope": "Numerical maps",
+      "evidence": "https://doi.org/10.5281/zenodo.6034904"
+    },
+    {
+      "kind": "rights",
+      "text": "Open Access; Zenodo other-open. Explicit numerical-data reuse terms remain unresolved; local scientific preview only.",
+      "scope": "Numerical maps",
+      "evidence": "https://doi.org/10.5281/zenodo.6034904"
+    }
+  ]
+}

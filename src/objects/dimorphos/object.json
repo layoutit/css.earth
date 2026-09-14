@@ -67,7 +67,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "3ae6c8f3bb506c1be7b5f25446fecf5aad7d56e8358d8f22837f92c859918105"
+          "sha256": "afe4b3ed0e0ea7327a112c12f712e11abbf4b34e8e5580758f0d726422fadf95"
         },
         {
           "id": "rotation",
@@ -77,7 +77,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "32cc560268b159e5ae8494a556de8f61a6961696cf77e1f545c84a64ef1a523d"
+          "sha256": "e5898eeaab7969dc66bb4f4d1721c14b428cdb920917b63ea30fc214b4475215"
         },
         {
           "id": "title",
@@ -138,7 +138,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "89e3b72f680f728dbafa5aca57e6b46b89322284ef82b284b9df33d7830f0b62"
+        "sha256": "fbc908a31dd70bf7f7689b55acab9cccfee24bad6f8f87db277f26f442c3d152"
       }
     },
     "catalog": {
@@ -146,7 +146,7 @@
       "classification": "satellite",
       "color": "#aaaaaa",
       "distanceAu": 1.6427722213006,
-      "description": "Explore Dimorphos, the moon of Didymos, with its DART encounter shape.",
+      "description": "Small moon of Didymos, target of the first asteroid deflection test.",
       "systemName": "Solar System",
       "order": 136,
       "context": {
@@ -159,6 +159,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "8b9c43bac939a49240286a06d7a20c04770255e3da321d043aa6f240b9ecc3c2"
+    "sha256": "f44c56b2304a57cb9ec56faba27647165de21a25d9b83d00bb418a8518d018f0"
   }
 }

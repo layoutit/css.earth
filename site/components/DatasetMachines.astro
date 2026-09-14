@@ -29,10 +29,10 @@ const contributors = (missionId: string) => new Set((EXPLORATION.graph.byMission
         </div>}
       </SelectedContent>
       {mission.status && <p class="planet-mission-status"><a href={referenceUrl(mission.status)} target="_blank" rel="noreferrer">{mission.status.value.value}</a> as of {mission.status.value.asOf}</p>}
-      <h4>Datasets on this body</h4>
+      <h4>Dataset views on this body</h4>
       <ul class="planet-mission-datasets">{missionDatasets(mission.id, objectId).map(view => <li><a href={view.href} data-dataset-link data-dataset-object={view.objectId} data-dataset-id={view.lensId}>{view.label}</a></li>)}</ul>
       <h4>Machines</h4>
-      {mission.participants.map(member => <MachineDetails machineId={member.machineId} {objectId} contributed={vehicles.has(member.machineId)} />)}
+      {mission.participants.map(member => <MachineDetails machineId={member.machineId} {objectId} contributed={vehicles.has(member.machineId)} missionDescription={mission.description.value} />)}
       <details class="planet-mission-references"><summary>Mission references</summary><SourceCitations citations={references} /></details>
     </article>;
   })}

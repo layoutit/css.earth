@@ -1,0 +1,157 @@
+{
+  "schema": "cssearth-dactyl-published-control-input@1",
+  "objectId": "dactyl",
+  "date": "2026-09-14",
+  "paper": {
+    "title": "Dactyl: Galileo Observations of Ida's Satellite",
+    "doi": "https://doi.org/10.1006/icar.1996.0045",
+    "citation": "Veverka et al. (1996), Icarus 120, 200–211",
+    "provider": "Elsevier / Academic Press",
+    "retrieval": "Complete publisher PDF supplied by the user; all 12 pages read, Tables I–III and Figures 3, 9 and 10 examined. The PDF and extracted figures are local reference inputs, not redistributed assets.",
+    "expectedBytes": 424164,
+    "expectedSha256": "e96e704ad303d090d658a0078a083d7d983b17ec78322531d998da90c66bade9",
+    "images": [
+      {
+        "id": "figure-9a",
+        "page": 208,
+        "offset": 176682,
+        "expectedBytes": 9949,
+        "expectedSha256": "8a30f0f24eb5ededd7fed27e16511480adab32eb1dd7cff189918363830893ff",
+        "width": 414,
+        "height": 350
+      },
+      {
+        "id": "figure-9b",
+        "page": 209,
+        "offset": 191159,
+        "expectedBytes": 35500,
+        "expectedSha256": "c5897000acf3e8896572b81bfa909341be08c3c9f47a47dd7bdf108ee951311b",
+        "width": 427,
+        "height": 396
+      },
+      {
+        "id": "figure-10",
+        "page": 210,
+        "offset": 247141,
+        "expectedBytes": 13695,
+        "expectedSha256": "aaec33473a453e23a8b4fb735bd8193a059720a690a6d2fcde23a7d42920d5dd",
+        "width": 533,
+        "height": 288
+      }
+    ],
+    "extraction": "Exact DCTDecode stream byte slices from this pinned PDF; not screenshots or re-encoded pypdf/Pillow images. Whole-PDF and per-stream hashes must agree before decoding. Offsets are specific to these PDF bytes, not a general PDF parser."
+  },
+  "rangeKm": 3887,
+  "rangeSource": "Table I, p. 201, row 0202562278. The footnote explicitly identifies distance from spacecraft to Dactyl. The tabulated integer is not a published uncertainty interval.",
+  "otherRangesKm": {
+    "0202561578": 8664,
+    "0202562700": 2381
+  },
+  "shapeLimits": {
+    "semiaxesMetres": [
+      800,
+      700,
+      600
+    ],
+    "maximumLimbDeviationMetres": 130,
+    "rmsLimbDeviationUpperBoundMetres": 56,
+    "source": "Table II, p. 201. RMS is at most 8 percent of the 700 m mean radius. These are departures of the real limb from the ellipsoid, not camera error tolerances or Gaussian measurement errors."
+  },
+  "southPole": {
+    "figure": "figure-9b",
+    "figurePixel": [
+      307.5,
+      147.5
+    ],
+    "digitizationHalfWidthFigurePixels": 4,
+    "meaning": "Analyst digitization of the meridian convergence; independently re-examined. The caption identifies it as the south pole and says east is toward the upper left. The coordinate is not tabulated by the authors. The 4-pixel half-width is a sensitivity range for the thick printed intersection, not a statistical confidence bound."
+  },
+  "mapFrame": {
+    "figure": "figure-10",
+    "plotCornersFigurePixels": [
+      [
+        62,
+        15.5
+      ],
+      [
+        518,
+        18
+      ],
+      [
+        516,
+        247.5
+      ],
+      [
+        61.5,
+        244.5
+      ]
+    ],
+    "cornerOrder": "top-left, top-right, bottom-right, bottom-left",
+    "longitudeDegrees": [
+      0,
+      360
+    ],
+    "latitudeDegrees": [
+      90,
+      -90
+    ],
+    "meaning": "Preliminary digitization of the published cylindrical map axes. Figure 10 explicitly uses east-positive longitude. The frame is useful for orientation/coverage checks; no dense detector-to-map correspondence is qualified. Grid intervals in Figure 9B are unlabelled and are not assigned numerical coordinates."
+  },
+  "longitudeConflict": {
+    "prose": "Page 207 gives Celmis as 46 S, 220 W and about 600 m east of Acmon.",
+    "adopted": "220 E, as explicitly given by Belton et al. (1996), Icarus 120, Table III, DOI 10.1006/icar.1996.0032, and USGS Feature 1097; Acmon is 39 S, 138 E. Figure 10 also explicitly uses east-positive longitude.",
+    "interpretation": "The west suffix is probably a prose error, an inference rather than an author correction. The conflicting wording is retained; it does not justify silently reversing the map."
+  },
+  "previousInputPath": "src/objects/dactyl/evidence/registration/inputs.json",
+  "previousInputSha256": "36babc47a849fde247a70d43655cb4e4bbd0a87733b47a1c46f155134ce38b24",
+  "limbReportPath": "src/objects/dactyl/evidence/registration/limb-extent.json",
+  "alignment": {
+    "nativeAnchor": [
+      191,
+      220
+    ],
+    "fitRectangle": [
+      172,
+      199,
+      209,
+      240
+    ],
+    "medianSizes": [
+      3,
+      5,
+      7
+    ],
+    "rectangles": [
+      [
+        172,
+        199,
+        209,
+        240
+      ],
+      [
+        176,
+        202,
+        206,
+        237
+      ],
+      [
+        172,
+        199,
+        191,
+        240
+      ],
+      [
+        192,
+        199,
+        209,
+        240
+      ]
+    ],
+    "meaning": "Similarity alignment of the printed photo to original VICAR detector DN, using normalized correlation. Median filtering applies only to the local paper image to reduce overprinted grid lines. No printed, filtered or re-encoded paper pixels enter the scene. Regional fits are sensitivity checks, not independent spacecraft observations."
+  },
+  "qualification": {
+    "qualifiedSurface": false,
+    "reason": "Published pole and range improve the orientation constraint. Distributed geographic controls, correspondence to the unchanged display ellipsoid, and qualified visibility/coverage remain unresolved. Neither an attractive fit nor same-image correlation supplies those facts."
+  },
+  "limbReportSha256": "86626a3be2235e8a59453dc5ba923cce5d0e661e6e9d6d93a4c0ad343ab38ec0"
+}

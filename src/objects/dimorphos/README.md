@@ -82,15 +82,7 @@ Exact URL, byte size and SHA-256 are in `source/manifest.json`; original label a
 
 ## Survey and disposition
 
-- DART v003 and v004 global and local OBJ/FITS releases were reviewed. Adopted global v004 at 0.972 m spacing; finer releases add geometry beyond the displayed budget. Local 5 cm impact-region products do not replace the global body and are deferred.
-
-- DRACO and LICIACube imagery contributes to the source model. Individual calibrated images require registered camera projection, coverage and photometry to become surface imagery; they are not silently used as global textures.
-
-- Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
-
-- Other ancillary fields remain unselected; slope is not relabeled as elevation.
-
-- Shape uses the shared no-imagery grid and prepared directional lighting.
+The [investigation ledger](investigations.json) records the selected DRACO mosaic, shape and scientific fields, along with deferred local models and other imagery.
 
 ## Relative albedo
 

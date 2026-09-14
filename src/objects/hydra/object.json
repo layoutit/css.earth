@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "5e4d6692114eb03f0372077daf6ef5fe159f1a400f94f243077bcfe7940cb3b1"
+          "sha256": "37961fe127adb95b91c7729421731b84b636e2a08e781f76722ed8e5f84b82fc"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3ba91b4728f2fbf1f406a863056303ba09deed7a431ce8bec702f0a2134a2cdc"
+          "sha256": "db78835311ba8a75c351bbfd73277a69bba4865322b04226e5d762d52d2dd2b9"
         },
         {
           "id": "title",
@@ -115,7 +115,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "970bd39094789d58a57c4c4e976fdb4e0ebd75077e08e329fd361b0d641b9793"
+        "sha256": "9f087be7afb3fc2851e6d7619aede2533b34a176835ca248b48c6167d0a81adb"
       }
     },
     "catalog": {
@@ -123,7 +123,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 39.482,
-      "description": "Explore Hydra’s irregular New Horizons shape and northern depression.",
+      "description": "Irregular outer moon of Pluto that spins about every 10 hours.",
       "systemName": "Solar System",
       "order": 459,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ecfa6f8f6fd48d5aec50d20aae16eb060e7ec33325a747191d6f973531077f88"
+    "sha256": "f79f689d4bb1c45f035f49203c761d50b4fca53e03a636c621c8d1a35c90f3a2"
   }
 }

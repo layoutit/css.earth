@@ -24,12 +24,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "11dfd899e3e6ea6a7ec17a20c3daa83f1dded9eb805403c7ba2927a3459e7ff9"
+          "sha256": "99535fb2c47296cc9319e705cb4d3f424572fca1e5819db00069a7dbec918610"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7bfe9b33e0a27a054ec4817f7f74818d325812021871d0842b44b4ea913a04fd"
+          "sha256": "5c69d2b6f5aca6c2dc3b2b0e5ae0d23c69d4f3b86c44d8d6c4076bcae7db610b"
         },
         {
           "id": "title",
@@ -39,12 +39,12 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "f1de3b89c6cdbf5f4ecf2b1759196931af70e83e011ed6f02ca30786ce1afbd5"
+          "sha256": "ca2aa4305a7546acdd58a232b0cad35ea0114e37161c100d0cce7df5a1cd6a50"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "3caeb0af07e65861f83138a5e002100d0371ca968198b3319ee163e7b32a2e12"
+          "sha256": "30ed1baa076845b608626925b270b3690c9e2bce72d8b8e845644de5ce78519a"
         },
         {
           "id": "features",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "12700ffa9e8478a8a8f3d9eac658b6b5a282c82a20c2493e2508d69094027ef2"
+        "sha256": "5ad8914831827dc6691e244a42242139ef8a35e82597284bb9dc12ef0665271d"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#9f9287",
       "distanceAu": 5.2,
-      "description": "Explore Thebe with Galileo imagery and its source-backed irregular shape.",
+      "description": "One of the four small moons that orbit Jupiter inside the Galilean moons.",
       "systemName": "Solar System",
       "order": 103,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a0638a04269c43c932bf7e39d635e86a1762bb17fb3367d67b9c419586de6077"
+    "sha256": "d4b995363da813fb1b06f03fc9763984d3ca1f296db0ddcdc163f69c98736d34"
   }
 }

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { bodyCardViewAtCamera } from '../overview-context.mts';
@@ -16,7 +16,7 @@ const context = parsePreparedWorldContext(contextInput);
 // Target calculation never requests native frames or queries absent shell nodes.
 const windowTarget = {} as Window;
 const documentTarget = {} as Document;
-const sun = required(required(OBJECTS.find(object => object.id === 'sun')).worldFrame);
+const sun = required(required(SCENE_OBJECTS.find(object => object.id === 'sun')).worldFrame);
 const world: WorldCameraPose = { referenceFrame: sun.referenceFrame, epochJdTt: sun.epochJdTt,
   pose: { positionM: [0, 0, 1e15], orientationXyzw: [0,0,0,1] } };
 const optics: ReturnType<ObjectWorldNavigation["optics"]> = { visibleRect: null, focalPixels: 1100, framingRadiusPixels: 200, detailHandoffDiameterPixels: 14,
@@ -29,10 +29,10 @@ for (const savedValue of [
 ]) test(`system flights keep the viewing angle and approach the center from ${savedValue.slice(0, 8)}`, () => {
   const saved = parseSharedView(`v=${savedValue}`);
   const from = required(savedWorldCamera(required(saved), sun, optics));
-  const navigation = createPreparedWorldNavigation({ objects: OBJECTS, windowTarget, documentTarget });
+  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
   const cameraMount = { sharedView: unusedSharedView, navigation: navigationFixture(sun, () => from, () => optics) };
   for (const [id] of SYSTEM_VIEWS) {
-    const frame = required(required(OBJECTS.find(object => object.id === id)).worldFrame);
+    const frame = required(required(SCENE_OBJECTS.find(object => object.id === id)).worldFrame);
     const to = required(navigation.systemTarget({ objectId: id, fromId: 'sun', mount: cameraMount }));
     const flight = createSelectionFlight({ from: from.pose, to: to.pose, focusPositionM: frame.originM, durationS: .35 });
     let previousOffset = Infinity;
@@ -51,7 +51,7 @@ for (const savedValue of [
 
 test('fitting the current angle is independent of prepared box order and member names', () => {
   const view = required(SYSTEM_VIEWS.get('neptune'));
-  const frame = required(required(OBJECTS.find(object => object.id === 'neptune')).worldFrame);
+  const frame = required(required(SCENE_OBJECTS.find(object => object.id === 'neptune')).worldFrame);
   const rect = systemFramingRect(optics);
   const target = systemViewTarget(world, frame, optics, view, rect);
   const reordered = { ...view, candidates: [...view.candidates].reverse(), memberIds: view.memberIds.map((_, i) => `member-${i}`) };
@@ -65,9 +65,9 @@ test(`each system fits its complete primary orbits at ${width}x${height}, offset
     principalOffsetPixels: offset, framingRadiusPixels: Math.min(width, height) * .28 };
   const cameraMount = { sharedView: unusedSharedView, navigation: navigationFixture(sun, () => world, () => viewport) };
   const rect = systemFramingRect(viewport);
-  const navigation = createPreparedWorldNavigation({ objects: OBJECTS, windowTarget, documentTarget });
+  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
   for (const [id, radiusM] of SYSTEM_FRAMING_RADII) {
-    const frame = OBJECTS.find(object => object.id === id)?.worldFrame;
+    const frame = SCENE_OBJECTS.find(object => object.id === id)?.worldFrame;
     if (!frame) continue;
     const view = required(SYSTEM_VIEWS.get(id));
     assert.ok(view, `${id} has a prepared system view`);
@@ -98,12 +98,12 @@ test(`each system fits its complete primary orbits at ${width}x${height}, offset
 });
 
 test('selecting the system root pulls back from a planet to all major planets, with a normal close-up on repeat', () => {
-  const planets = OBJECTS.filter(object => object.classification === 'planet').map(object => object.id).sort();
+  const planets = SCENE_OBJECTS.filter(object => object.classification === 'planet').map(object => object.id).sort();
   assert.deepEqual([...required(SYSTEM_VIEWS.get(context.focus.id)).memberIds].sort(), planets);
-  const parent = required(required(OBJECTS.find(object => object.id === 'uranus')).worldFrame);
+  const parent = required(required(SCENE_OBJECTS.find(object => object.id === 'uranus')).worldFrame);
   const close = createWorldSelectionTarget(world, parent, optics);
   const mount = { sharedView: unusedSharedView, navigation: navigationFixture(parent, () => close, () => optics) };
-  const navigation = createPreparedWorldNavigation({ objects: OBJECTS, windowTarget, documentTarget });
+  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
   const target = required(navigation.systemTarget({ objectId: context.focus.id, fromId: 'uranus', mount }));
   const range = (pose: WorldCameraPose["pose"]) => Math.hypot(...pose.positionM.map((value, axis) => value - sun.originM[axis]));
   assert.ok(range(target.pose) > range(close.pose), 'the first click moves outward from Uranus');
@@ -134,9 +134,9 @@ test('adding a small distant moon does not pull the initial camera away from the
 });
 
 test('a body without moons uses its normal close-up target on first selection', () => {
-  const navigation = createPreparedWorldNavigation({ objects: OBJECTS, windowTarget, documentTarget });
+  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
   for (const id of ['mercury', 'venus', 'titan']) {
-    const frame = required(required(OBJECTS.find(object => object.id === id)).worldFrame);
+    const frame = required(required(SCENE_OBJECTS.find(object => object.id === id)).worldFrame);
     const target = required(navigation.systemTarget({ objectId: id, fromId: "sun", mount }));
     assert.deepEqual(target, createWorldSelectionTarget(world, frame, optics));
     assert.equal(bodyCardViewAtCamera(target, frame, optics, id), 'detail');
@@ -144,8 +144,8 @@ test('a body without moons uses its normal close-up target on first selection', 
 });
 
 test('clicking the already selected body in close-up does not zoom back out to its moons', () => {
-  const navigation = createPreparedWorldNavigation({ objects: OBJECTS, windowTarget, documentTarget });
-  const frame = required(required(OBJECTS.find(object => object.id === 'saturn')).worldFrame);
+  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
+  const frame = required(required(SCENE_OBJECTS.find(object => object.id === 'saturn')).worldFrame);
   const close = createWorldSelectionTarget(world, frame, optics);
   const closeMount = { sharedView: unusedSharedView, navigation: navigationFixture(frame, () => close, () => optics) };
   assert.equal(navigation.systemTarget({ objectId: 'saturn', fromId: 'saturn', mount: closeMount }), null);
@@ -187,7 +187,7 @@ test('galactic breadcrumbs zoom straight out from the current view without panni
 });
 
 test('a Solar System breadcrumb always restores the system framing from a Sun close-up', () => {
-  const navigation = createPreparedWorldNavigation({ objects: OBJECTS, windowTarget, documentTarget });
+  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
   const closeup = createWorldSelectionTarget(world, sun, optics);
   const camera = { sharedView: unusedSharedView, navigation: { ...mount.navigation, capture: () => closeup } };
   assert.equal(navigation.systemTarget({ objectId: 'sun', fromId: 'sun', mount: camera }), null);

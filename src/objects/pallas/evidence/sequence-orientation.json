@@ -1,0 +1,815 @@
+{
+  "status": "investigation-only",
+  "date": "2026-09-14",
+  "testedCodeCommit": "842edf12b9306aa6871dec197f02df0d93771975",
+  "scope": "Inspect all ten October 11 frames, compare published models at matching epochs, and identify the native image behind the published October 11 view. No camera correction or photographic surface prepared.",
+  "findings": [
+    "The prominent lower-right crater-like structure persists in both cameras at all five exposures. This visual sequence check does not establish its catalogue identity or planetocentric centre.",
+    "Among all ten native frames, 05:08:49 Camera 2 best matches the corresponding Vernazza Figure B.2 photographic panel: fit correlation 0.998325, withheld correlation 0.998630. Camera 1 at the same time gives 0.980083 and 0.990882. The two held-out interior quadrants were not used in the four-parameter image fit; comparing candidate images still makes these selection evidence, not an untouched final validation set.",
+    "The best Camera 2 image-to-paper fit rotates by -0.03125 degrees. It does not support an extra ~2-degree rotation of the released photograph. Rotations for the other observation times vary through the burst, as expected for the rotating body.",
+    "Our frozen model views resemble published broad topography at three matching epochs. Published pole-marker axes differ by 1.44–2.41 degrees. The Marsset October 11 ADAM comparison has interior correlation 0.916 after 2D silhouette centroid/area normalization. These image statistics are not native-pixel camera-error bounds.",
+    "The initial diagnostic used Lambert shading. ADAM Calculate_AO.c defines mu0/(mu+mu0)+0.1*mu0. Using that source-backed law improves correlation with Vernazza OASIS panels from 0.40–0.65 to 0.86–0.90, without changing the frozen cameras. OASIS rendering settings are not reproduced exactly; this is a sensitivity comparison, not a photometric calibration.",
+    "The four old tentative named-crater picks remain unresolved. Their residuals cannot be used as absolute camera errors, and neither the burst nor the published-model comparison qualifies a new photographic surface."
+  ],
+  "nextDiscriminatingCheck": "Use the identified 05:08:49 Camera 2 / Figure B.2 pairing to resolve the remaining image-to-model pose and interior correspondence. Do not rotate or warp the photograph to make uncertain crater names agree; retain the pole-marker discrepancy until its convention or precision is explained.",
+  "sequence": {
+    "status": "native-sequence-inspection",
+    "records": [
+      {
+        "id": "050427-cam1",
+        "file": "pallas-20171011-cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_04_27.347_zpl_science_imaging_cam1.fits",
+        "bytes": 593280,
+        "sha256": "bc1aa695bf130dac60be0d13cc44f6db0e8f6961fd3c1f7621e45cec6cdeaef8",
+        "time": "05:04:27",
+        "camera": 1,
+        "mjd": 58037.21142763,
+        "dateObs": "'2017-10-11T05:04:27.346'",
+        "maximumDisplay": 6642.238494540853,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "id": "050427-cam2",
+        "file": "sequence-050427-cam2.fits",
+        "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_04_27.347_zpl_science_imaging_cam2.fits",
+        "bytes": 593280,
+        "sha256": "7c92bcce7a9e4e25498a5f123226165124b429c72aac27c9c765959c40b2bd94",
+        "time": "05:04:27",
+        "camera": 2,
+        "mjd": 58037.21142763,
+        "dateObs": "'2017-10-11T05:04:27.346'",
+        "maximumDisplay": 6952.495233755689,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "id": "050639-cam1",
+        "file": "sequence-050639-cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_06_39.145_zpl_science_imaging_cam1.fits",
+        "bytes": 593280,
+        "sha256": "cc332c106298be3e97b60b5c8f469f90a8b86ace26fb94c8952d4537059fabff",
+        "time": "05:06:39",
+        "camera": 1,
+        "mjd": 58037.21295307,
+        "dateObs": "'2017-10-11T05:06:39.144'",
+        "maximumDisplay": 6068.117143943892,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "id": "050639-cam2",
+        "file": "sequence-050639-cam2.fits",
+        "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_06_39.145_zpl_science_imaging_cam2.fits",
+        "bytes": 593280,
+        "sha256": "a348ef4551918c8800e807a71ae69cc961d2aedb5f6e551be4b4624d8179fd88",
+        "time": "05:06:39",
+        "camera": 2,
+        "mjd": 58037.21295307,
+        "dateObs": "'2017-10-11T05:06:39.144'",
+        "maximumDisplay": 6385.267976608912,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "id": "050849-cam1",
+        "file": "pallas-201710110508-cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_08_49.597_zpl_science_imaging_cam1.fits",
+        "bytes": 593280,
+        "sha256": "d64dbfcd0ff0d36b83d11c83c27aadb784fe65aac83c2a656ffa677a03513967",
+        "time": "05:08:49",
+        "camera": 1,
+        "mjd": 58037.21446293,
+        "dateObs": "'2017-10-11T05:08:49.596'",
+        "maximumDisplay": 6462.576935114677,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "id": "050849-cam2",
+        "file": "sequence-050849-cam2.fits",
+        "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_08_49.597_zpl_science_imaging_cam2.fits",
+        "bytes": 593280,
+        "sha256": "e75128409331ad93df3f12844608ae72249f66591907e4992c5f1918aaaa0766",
+        "time": "05:08:49",
+        "camera": 2,
+        "mjd": 58037.21446293,
+        "dateObs": "'2017-10-11T05:08:49.596'",
+        "maximumDisplay": 6788.9808548578685,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "id": "051100-cam1",
+        "file": "sequence-051100-cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_11_00.201_zpl_science_imaging_cam1.fits",
+        "bytes": 593280,
+        "sha256": "dc6626714d34ffff522540126944e24e43b98376e36d0c3d5d0c76712da95584",
+        "time": "05:11:00",
+        "camera": 1,
+        "mjd": 58037.21597455,
+        "dateObs": "'2017-10-11T05:11:00.201'",
+        "maximumDisplay": 6763.602536344824,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "id": "051100-cam2",
+        "file": "sequence-051100-cam2.fits",
+        "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_11_00.201_zpl_science_imaging_cam2.fits",
+        "bytes": 593280,
+        "sha256": "6f8444a555f6b4565a39fe6836aa3ffde73ab0b99a3b16bc9a50a3f185b06b79",
+        "time": "05:11:00",
+        "camera": 2,
+        "mjd": 58037.21597455,
+        "dateObs": "'2017-10-11T05:11:00.201'",
+        "maximumDisplay": 7117.514577776262,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "id": "051310-cam1",
+        "file": "sequence-051310-cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_13_10.674_zpl_science_imaging_cam1.fits",
+        "bytes": 593280,
+        "sha256": "28e04e3715e914a2028486deb8b67702f49608e29668fd0bc26b918fbdc86d04",
+        "time": "05:13:10",
+        "camera": 1,
+        "mjd": 58037.21748465,
+        "dateObs": "'2017-10-11T05:13:10.673'",
+        "maximumDisplay": 5454.432245663679,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "id": "051310-cam2",
+        "file": "sequence-051310-cam2.fits",
+        "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_13_10.674_zpl_science_imaging_cam2.fits",
+        "bytes": 593280,
+        "sha256": "0ca72bbdc52955e5c25982d3d66abdf25c6375ee4c36877a7acc191e7722883e",
+        "time": "05:13:10",
+        "camera": 2,
+        "mjd": 58037.21748465,
+        "dateObs": "'2017-10-11T05:13:10.673'",
+        "maximumDisplay": 5756.927263204072,
+        "width": 256,
+        "height": 256
+      }
+    ],
+    "display": {
+      "crop": [
+        56,
+        56,
+        144,
+        144
+      ],
+      "scale": 2,
+      "rowOrder": "reversed native FITS rows",
+      "stretch": "zero-to-99.9-percentile per frame"
+    },
+    "headerCheck": {
+      "CD1_1": -0.00000100833333333333,
+      "CD1_2": 0,
+      "CD2_1": 0,
+      "CD2_2": 0.00000100833333333333,
+      "appliesTo": "all ten primary headers",
+      "interpretation": "3.63 mas square pixels; native rows reversed for north-up, east-left inspection; no additional camera flip inferred"
+    }
+  },
+  "publishedReferences": [
+    {
+      "doi": "10.1038/s41550-019-1007-5",
+      "url": "https://observations.lam.fr/astero/Papers/Marsset2020.pdf",
+      "figure": "2",
+      "pdfPage": 3,
+      "embeddedImage": "fig2-Im0.jpg",
+      "nativeDimensions": [
+        2118,
+        2163
+      ]
+    },
+    {
+      "doi": "10.1051/0004-6361/202141781",
+      "url": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
+      "figure": "B.2",
+      "pdfPage": 20,
+      "embeddedImage": "vernazza-pallas-Im14.png",
+      "nativeDimensions": [
+        1614,
+        2466
+      ],
+      "reuse": "CC BY 4.0, credited in the comparison image"
+    }
+  ],
+  "referencePins": [
+    {
+      "file": "Marsset2020.pdf",
+      "bytes": 2527919,
+      "sha256": "5e5ad5e4478f66e2601eabefadf09e875e63735076f237690b6611cf4125fcf4"
+    },
+    {
+      "file": "Vernazza2021.pdf",
+      "bytes": 25270498,
+      "sha256": "85c45bbcf5705a5173fa1da7593aba777f3c083c61bb6a88ecf15a6513a7725f"
+    },
+    {
+      "file": "fig2-Im0.jpg",
+      "bytes": 158472,
+      "sha256": "b2db8d67098a5979d23a748a150cc2e7bffd45b29130e01cc7ecaedb6855db1c"
+    },
+    {
+      "file": "vernazza-pallas-Im14.png",
+      "bytes": 858736,
+      "sha256": "86c402e6a73b6204aa0118dd68556ccbcebece672bda23cac5ad15c2f6ffe013"
+    }
+  ],
+  "photoIdentity": {
+    "method": "Four-parameter 2D similarity, normalized image correlation; two opposite interior quadrants fit, other two evaluate; no 3D or catalogue controls",
+    "reports": [
+      {
+        "id": "050427-cam1",
+        "source": "pallas-20171011-cam1.fits",
+        "reference": "Vernazza 2021 Fig B.2, 2017-10-11T05:08:49 SPHERE panel",
+        "crop": [
+          345,
+          58,
+          170,
+          170
+        ],
+        "fitPoints": 990,
+        "holdoutPoints": 1045,
+        "fitCorrelation": 0.9818871906966586,
+        "holdoutCorrelation": 0.9929648173036613,
+        "scale": 1.0300237302515776,
+        "rotationDegrees": 3.03125,
+        "targetCentre": [
+          87.74245520960167,
+          72.67853104887807
+        ],
+        "nativeCentre": [
+          126.29483717235901,
+          123.37267672756155
+        ],
+        "initialHoldout": 0.962748788796541
+      },
+      {
+        "id": "050427-cam2",
+        "source": "sequence-050427-cam2.fits",
+        "reference": "Vernazza 2021 Fig B.2, 2017-10-11T05:08:49 SPHERE panel",
+        "crop": [
+          345,
+          58,
+          170,
+          170
+        ],
+        "fitPoints": 994,
+        "holdoutPoints": 1046,
+        "fitCorrelation": 0.9807075105034975,
+        "holdoutCorrelation": 0.9921902208008458,
+        "scale": 1.0338779010091466,
+        "rotationDegrees": 3.21875,
+        "targetCentre": [
+          87.30495520960167,
+          72.74103104887807
+        ],
+        "nativeCentre": [
+          126.7269011260219,
+          122.61668980410303
+        ],
+        "initialHoldout": 0.9559649520059535
+      },
+      {
+        "id": "050639-cam1",
+        "source": "sequence-050639-cam1.fits",
+        "reference": "Vernazza 2021 Fig B.2, 2017-10-11T05:08:49 SPHERE panel",
+        "crop": [
+          345,
+          58,
+          170,
+          170
+        ],
+        "fitPoints": 982,
+        "holdoutPoints": 1024,
+        "fitCorrelation": 0.9828345784615486,
+        "holdoutCorrelation": 0.9915022648550696,
+        "scale": 1.0295480024152537,
+        "rotationDegrees": 1.40625,
+        "targetCentre": [
+          86.80495520960167,
+          72.61603104887807
+        ],
+        "nativeCentre": [
+          125.02722513089006,
+          122.2881192106323
+        ],
+        "initialHoldout": 0.9684993329316354
+      },
+      {
+        "id": "050639-cam2",
+        "source": "sequence-050639-cam2.fits",
+        "reference": "Vernazza 2021 Fig B.2, 2017-10-11T05:08:49 SPHERE panel",
+        "crop": [
+          345,
+          58,
+          170,
+          170
+        ],
+        "fitPoints": 982,
+        "holdoutPoints": 1031,
+        "fitCorrelation": 0.9792104691497134,
+        "holdoutCorrelation": 0.9899171571261566,
+        "scale": 1.0256007839596715,
+        "rotationDegrees": 1.375,
+        "targetCentre": [
+          86.74245520960167,
+          72.55353104887807
+        ],
+        "nativeCentre": [
+          126.1529844900517,
+          121.65118282939056
+        ],
+        "initialHoldout": 0.9658014044840108
+      },
+      {
+        "id": "050849-cam1",
+        "source": "pallas-201710110508-cam1.fits",
+        "reference": "Vernazza 2021 Fig B.2, 2017-10-11T05:08:49 SPHERE panel",
+        "crop": [
+          345,
+          58,
+          170,
+          170
+        ],
+        "fitPoints": 993,
+        "holdoutPoints": 1031,
+        "fitCorrelation": 0.9800831324414004,
+        "holdoutCorrelation": 0.9908816109898106,
+        "scale": 1.0231821032691715,
+        "rotationDegrees": 0.0625,
+        "targetCentre": [
+          86.36745520960167,
+          71.99103104887807
+        ],
+        "nativeCentre": [
+          125.64566031590947,
+          122.97101449275362
+        ],
+        "initialHoldout": 0.9776840363051832
+      },
+      {
+        "id": "050849-cam2",
+        "source": "sequence-050849-cam2.fits",
+        "reference": "Vernazza 2021 Fig B.2, 2017-10-11T05:08:49 SPHERE panel",
+        "crop": [
+          345,
+          58,
+          170,
+          170
+        ],
+        "fitPoints": 989,
+        "holdoutPoints": 1038,
+        "fitCorrelation": 0.9983254963925313,
+        "holdoutCorrelation": 0.9986297822127779,
+        "scale": 1.0233000000063295,
+        "rotationDegrees": -0.03125,
+        "targetCentre": [
+          86.30495520960167,
+          72.17853104887807
+        ],
+        "nativeCentre": [
+          126.23900467548934,
+          122.15429114826848
+        ],
+        "initialHoldout": 0.976397959455859
+      },
+      {
+        "id": "051100-cam1",
+        "source": "sequence-051100-cam1.fits",
+        "reference": "Vernazza 2021 Fig B.2, 2017-10-11T05:08:49 SPHERE panel",
+        "crop": [
+          345,
+          58,
+          170,
+          170
+        ],
+        "fitPoints": 997,
+        "holdoutPoints": 1035,
+        "fitCorrelation": 0.9762018720719664,
+        "holdoutCorrelation": 0.9918592985955311,
+        "scale": 1.0227047005819911,
+        "rotationDegrees": -1.5625,
+        "targetCentre": [
+          86.11745520960167,
+          72.11603104887807
+        ],
+        "nativeCentre": [
+          125.7559668777399,
+          122.81847702549115
+        ],
+        "initialHoldout": 0.9787768180148837
+      },
+      {
+        "id": "051100-cam2",
+        "source": "sequence-051100-cam2.fits",
+        "reference": "Vernazza 2021 Fig B.2, 2017-10-11T05:08:49 SPHERE panel",
+        "crop": [
+          345,
+          58,
+          170,
+          170
+        ],
+        "fitPoints": 993,
+        "holdoutPoints": 1043,
+        "fitCorrelation": 0.9741486605588192,
+        "holdoutCorrelation": 0.9926577011986766,
+        "scale": 1.0212033548325432,
+        "rotationDegrees": -1.15625,
+        "targetCentre": [
+          86.49245520960167,
+          72.05353104887807
+        ],
+        "nativeCentre": [
+          126.69355348396272,
+          122.9687944382999
+        ],
+        "initialHoldout": 0.9745017018230876
+      },
+      {
+        "id": "051310-cam1",
+        "source": "sequence-051310-cam1.fits",
+        "reference": "Vernazza 2021 Fig B.2, 2017-10-11T05:08:49 SPHERE panel",
+        "crop": [
+          345,
+          58,
+          170,
+          170
+        ],
+        "fitPoints": 973,
+        "holdoutPoints": 1011,
+        "fitCorrelation": 0.9721792595521627,
+        "holdoutCorrelation": 0.9887775847935079,
+        "scale": 1.0332290908310697,
+        "rotationDegrees": -3.40625,
+        "targetCentre": [
+          85.86745520960167,
+          72.17853104887807
+        ],
+        "nativeCentre": [
+          124.03354544740357,
+          121.21894885694084
+        ],
+        "initialHoldout": 0.9707690829023137
+      },
+      {
+        "id": "051310-cam2",
+        "source": "sequence-051310-cam2.fits",
+        "reference": "Vernazza 2021 Fig B.2, 2017-10-11T05:08:49 SPHERE panel",
+        "crop": [
+          345,
+          58,
+          170,
+          170
+        ],
+        "fitPoints": 980,
+        "holdoutPoints": 1021,
+        "fitCorrelation": 0.9696933379849773,
+        "holdoutCorrelation": 0.9903157600866279,
+        "scale": 1.0320094287748256,
+        "rotationDegrees": -3,
+        "targetCentre": [
+          85.99245520960167,
+          72.30353104887807
+        ],
+        "nativeCentre": [
+          124.84557078324784,
+          121.46841742592451
+        ],
+        "initialHoldout": 0.9671260172923822
+      }
+    ]
+  },
+  "publishedModels": {
+    "marsset": {
+      "source": "Marsset 2020 Fig 2, 2017-10-11T05:04:27 ADAM panel",
+      "crop": [
+        350,
+        30,
+        320,
+        270
+      ],
+      "normalization": "2D silhouette centroid and area; no rotation, camera fit or warp",
+      "scale": 1.9955914449434256,
+      "translation": [
+        -63.24107340151289,
+        -107.85891501202778
+      ],
+      "interiorPixels": 33856,
+      "interiorCorrelation": 0.9159758987640878
+    },
+    "vernazzaLambert": [
+      {
+        "id": "20171008",
+        "model": "mpcd",
+        "publishedCrop": {
+          "left": 105,
+          "top": 298,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.041620703202135,
+        "translation": [
+          -46.471669172278965,
+          -59.98409444464184
+        ],
+        "interiorPixels": 8953,
+        "interiorCorrelation": 0.6475876707623183,
+        "predictedPoleAngleDegrees": -17.249182576457606,
+        "publishedPoleAxisDegrees": 161.3098057549493,
+        "axialDifferenceDegrees": 1.4410116685930916,
+        "redPixels": 122
+      },
+      {
+        "id": "20171008",
+        "model": "adam",
+        "publishedCrop": {
+          "left": 105,
+          "top": 538,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.0423486452976995,
+        "translation": [
+          -46.58229587260573,
+          -60.06778652066893
+        ],
+        "interiorPixels": 8979,
+        "interiorCorrelation": 0.5782072833236632,
+        "predictedPoleAngleDegrees": -17.249234262183816,
+        "publishedPoleAxisDegrees": 161.3098057549493,
+        "axialDifferenceDegrees": 1.4409599828668718,
+        "redPixels": 122
+      },
+      {
+        "id": "201710110508",
+        "model": "mpcd",
+        "publishedCrop": {
+          "left": 345,
+          "top": 298,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.0429200696509473,
+        "translation": [
+          -45.191407484696356,
+          -57.74799032584846
+        ],
+        "interiorPixels": 9150,
+        "interiorCorrelation": 0.5695521241441104,
+        "predictedPoleAngleDegrees": -15.780569151576675,
+        "publishedPoleAxisDegrees": 161.8107888548741,
+        "axialDifferenceDegrees": 2.4086419935492245,
+        "redPixels": 129
+      },
+      {
+        "id": "201710110508",
+        "model": "adam",
+        "publishedCrop": {
+          "left": 345,
+          "top": 538,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.0442731687598412,
+        "translation": [
+          -45.409872125124835,
+          -57.91687967538424
+        ],
+        "interiorPixels": 9156,
+        "interiorCorrelation": 0.555958754137891,
+        "predictedPoleAngleDegrees": -15.780602420494304,
+        "publishedPoleAxisDegrees": 161.93691968685965,
+        "axialDifferenceDegrees": 2.2824778926460567,
+        "redPixels": 131
+      },
+      {
+        "id": "20190315",
+        "model": "mpcd",
+        "publishedCrop": {
+          "left": 345,
+          "top": 1515,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.0392991698441196,
+        "translation": [
+          -46.229715447887685,
+          -45.46068195568604
+        ],
+        "interiorPixels": 10775,
+        "interiorCorrelation": 0.48074889064774684,
+        "predictedPoleAngleDegrees": 134.44354845207644,
+        "publishedPoleAxisDegrees": 132.82023167370676,
+        "axialDifferenceDegrees": 1.6233167783697127,
+        "redPixels": 270
+      },
+      {
+        "id": "20190315",
+        "model": "adam",
+        "publishedCrop": {
+          "left": 345,
+          "top": 1755,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.0430025172606947,
+        "translation": [
+          -46.40110040655172,
+          -46.635070729709696
+        ],
+        "interiorPixels": 10884,
+        "interiorCorrelation": 0.4007278715173562,
+        "predictedPoleAngleDegrees": 134.44350434016212,
+        "publishedPoleAxisDegrees": 132.87587818171409,
+        "axialDifferenceDegrees": 1.5676261584480358,
+        "redPixels": 276
+      }
+    ],
+    "vernazzaAdamScattering": [
+      {
+        "id": "20171008",
+        "model": "mpcd",
+        "publishedCrop": {
+          "left": 105,
+          "top": 298,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.0341897848301684,
+        "translation": [
+          -45.98973002592247,
+          -58.57468431187806
+        ],
+        "interiorPixels": 8953,
+        "interiorCorrelation": 0.8979265380429814,
+        "predictedPoleAngleDegrees": -17.249182576457606,
+        "publishedPoleAxisDegrees": 161.3098057549493,
+        "axialDifferenceDegrees": 1.4410116685930916,
+        "redPixels": 122
+      },
+      {
+        "id": "20171008",
+        "model": "adam",
+        "publishedCrop": {
+          "left": 105,
+          "top": 538,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.0364597649575997,
+        "translation": [
+          -46.17478863909784,
+          -58.95185357788648
+        ],
+        "interiorPixels": 8979,
+        "interiorCorrelation": 0.8869092710298359,
+        "predictedPoleAngleDegrees": -17.249234262183816,
+        "publishedPoleAxisDegrees": 161.3098057549493,
+        "axialDifferenceDegrees": 1.4409599828668718,
+        "redPixels": 122
+      },
+      {
+        "id": "201710110508",
+        "model": "mpcd",
+        "publishedCrop": {
+          "left": 345,
+          "top": 298,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.0361825333522288,
+        "translation": [
+          -44.751562545360656,
+          -56.48993347995639
+        ],
+        "interiorPixels": 9150,
+        "interiorCorrelation": 0.8926972089622269,
+        "predictedPoleAngleDegrees": -15.780569151576675,
+        "publishedPoleAxisDegrees": 161.8107888548741,
+        "axialDifferenceDegrees": 2.4086419935492245,
+        "redPixels": 129
+      },
+      {
+        "id": "201710110508",
+        "model": "adam",
+        "publishedCrop": {
+          "left": 345,
+          "top": 538,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.035144037710669,
+        "translation": [
+          -44.827403716980754,
+          -56.2423877214019
+        ],
+        "interiorPixels": 9156,
+        "interiorCorrelation": 0.8924928929650793,
+        "predictedPoleAngleDegrees": -15.780602420494304,
+        "publishedPoleAxisDegrees": 161.93691968685965,
+        "axialDifferenceDegrees": 2.2824778926460567,
+        "redPixels": 131
+      },
+      {
+        "id": "20190315",
+        "model": "mpcd",
+        "publishedCrop": {
+          "left": 345,
+          "top": 1515,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.033489130774122,
+        "translation": [
+          -45.917073993366216,
+          -44.734482424182445
+        ],
+        "interiorPixels": 10775,
+        "interiorCorrelation": 0.8775628932343496,
+        "predictedPoleAngleDegrees": 134.44354845207644,
+        "publishedPoleAxisDegrees": 132.82023167370676,
+        "axialDifferenceDegrees": 1.6233167783697127,
+        "redPixels": 270
+      },
+      {
+        "id": "20190315",
+        "model": "adam",
+        "publishedCrop": {
+          "left": 345,
+          "top": 1755,
+          "width": 170,
+          "height": 170
+        },
+        "normalization": "2D silhouette centroid and area only; no rotation, warp or camera fit",
+        "scale": 1.0358972280552987,
+        "translation": [
+          -46.05142073037773,
+          -45.58978481759155
+        ],
+        "interiorPixels": 10884,
+        "interiorCorrelation": 0.8623981895244878,
+        "predictedPoleAngleDegrees": 134.44350434016212,
+        "publishedPoleAxisDegrees": 132.87587818171409,
+        "axialDifferenceDegrees": 1.5676261584480358,
+        "redPixels": 276
+      }
+    ],
+    "scatteringSource": "https://github.com/matvii/ADAM/blob/25810f767b9de349a356df520109f4705f87f7a7/Calculate_AO.c#L160"
+  },
+  "photoFigureDisplay": {
+    "normalization": [
+      {
+        "id": "050849-cam1",
+        "gain": 0.06276792585321478,
+        "offset": -158.06829640328985,
+        "pixels": 10884
+      },
+      {
+        "id": "050849-cam2",
+        "gain": 0.05902703972451739,
+        "offset": -152.70312130711577,
+        "pixels": 10884
+      }
+    ],
+    "difference": "absolute byte difference times four after 2D alignment and affine display brightness matching; clipped at 255; not a calibrated-radiance residual",
+    "annotationOmission": "Rows 158–169 of the 170-square figure crop are black in all displayed panels to omit a paper scale-label fragment below the body."
+  },
+  "experimentScripts": {
+    "location": "Ignored output/pallas-photographic-projection; these exploratory scripts are not a checked-in production recipe.",
+    "sha256": {
+      "sequence.mts": "714d4f7de036d2dba9c2f565578f16b591387be7c75a783839e02691039508f8",
+      "compare-published.mts": "ce03c963752b915be4d4c601f58121f4d67dc2962f61b61b2fbacefd6be196fb",
+      "render-source-model.mts": "080583720e980bd894bf3df360fad1e441e17c1d8516d67f6c4401249a08ddfd",
+      "compare-published-photo.mts": "3380cbed54a5ebe6880d8650c071582d41a516162b844c83ecedafb43aee0c58",
+      "compare-marsset-model.mts": "0441989ece11f5e337e8aa40190d4d8186f3f3f010514b41fd62c9fe8b211c6c",
+      "figure-photo-identity.mts": "d99500f1d64cee9a2d32b444d13aeec8db20a98eae6b12d13bbb020817087253"
+    }
+  },
+  "limits": [
+    "No physical camera correction was fitted from these figure comparisons.",
+    "Silhouette normalization uses image centre and area; it does not establish absolute 3D geometry.",
+    "The correlation holdouts assess image similarity, not independent surface registration.",
+    "The ten photographs are not ten independently confirmed named craters.",
+    "The production body still offers Shape and Elevation; FITS decoding is not the remaining placement problem."
+  ]
+}

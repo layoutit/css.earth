@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "695410b2d47d8a4d0442bf7ac3786c4ed4828eb21e5739acf9eea46297c03074"
+          "sha256": "4bff7f81204e4366540169e6e53ac9daf8f29a571f147c72c89b92bdd708b4c5"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "db169d462e31129fd4e66d35a613a731a985e0e87dc894b57ce315f7bda27699"
+          "sha256": "ed65b2cef22f7556bb7bab60eaaafdf23809bf1dc5faac432659b133d0ddea7c"
         },
         {
           "id": "title",
@@ -38,12 +38,12 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "e45ab8900100657c874467b5d238e1608427bad442e3db98a4b37fc88e968e6c"
+          "sha256": "7e65773ab5195889a704073ad8e3591416e32eace669f886cf24b3b1ffe2a6e7"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "48adf24da156ff1a1736fca1130acb5b03c03db505c62664dac9f0b1bebee7cd"
+          "sha256": "525c0918d39cbaa80ac6ead847761b5888f788806db3e60b0779e930a11e9134"
         },
         {
           "id": "rotation",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ff21ae35926d2248814170efa57f81160a3082efba7ea50e91d884d915e0584d"
+        "sha256": "38c197d95d0312a5923baf93713bd9aba9021b7be5acd74517ad2aca3380caec"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
-      "description": "Explore Janus with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "description": "Moon that shares its orbit with Epimetheus, trading places with it.",
       "systemName": "Solar System",
       "order": 435,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "46e94db75db756de479faa820a27c9e0d2d66f8134754218523fddd968cd9971"
+    "sha256": "69e8182f8831986e226c389a9e3e8a1c7cd2c59153a6a02830d024bab2360a26"
   }
 }

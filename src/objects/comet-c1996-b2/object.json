@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "271dfc489c7b0ad34135e8ae6efec6f288377aa2b4236e875886d4077eb92542"
+          "sha256": "bca3a04b300e92a97bd941b6478504fb5c3e276192ceef2f051ee9938c8223a3"
         },
         {
           "id": "title",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f15ced10466e8af024fe0c59e1773375551ba633ba41515b4c8682197b227003"
+        "sha256": "3bed32a3514c415076b681ad98bdd38e6b75285058e1355d90b63d34a90ffabf"
       }
     },
     "worldFrame": {
@@ -118,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 54.30204219906463,
-      "description": "C/1996 B2: Hyakutake passed just 0.10 AU from Earth in March 1996. Its close approach made it a striking sight despite its much smaller nucleus than Hale–Bopp’s. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Comet that swept unusually close to Earth.",
       "systemName": "Solar System",
       "order": 65,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "96f6bb67e347d6608d2675fad61ed8e916c7b06c9b5ac0c031ecc340760b6f52"
+    "sha256": "d35947d9574ff9de745062070d84608ec1bb04ae7c41bc6bc641b17868af2571"
   }
 }

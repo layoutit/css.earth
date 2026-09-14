@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-nebula-compiler@1",
+  "id": "helix",
+  "label": "Helix",
+  "observationRecipe": "labs/nebula/models/helix/observations.json",
+  "observationCatalogue": ".local/nebula-lab/observations/helix/observations.json",
+  "structureRecipe": "labs/nebula/models/helix/observation-structures.json",
+  "structureCatalogue": ".local/nebula-lab/observations/helix/structures/catalogue.json",
+  "jointRecipe": "labs/nebula/models/helix/joint-fit.json",
+  "defaultSourceId": "eso-wfi",
+  "maximumStars": 2000,
+  "interpretation": "Automatic relative-emission reconstruction from aligned outreach images, with a molecular velocity scaffold where available. Multiscale emission components, front/back allocation and outer-halo depth are conditional model assumptions. Image colors do not redefine the fitted field. Registered WFI, VISTA and wider optical residuals supply one bounded stellar union; the candidate budget includes observed compact cores outside the WFI footprint. App delivery explicitly selects a small image-anchor subset plus its independent Gaia field. Conditional emission-column depths are illustrative, not measured stellar distances or confirmed nebular membership.",
+  "starCatalogue": {
+    "sourceIds": [
+      "eso-wfi",
+      "eso-vista",
+      "eso-wide"
+    ],
+    "mergeRadiusArcsec": 3
+  }
+}

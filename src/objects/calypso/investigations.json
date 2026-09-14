@@ -19,6 +19,107 @@
           "pr": 83
         }
       ]
+    },
+    {
+      "id": "cassini-coverage-2026-09-13",
+      "subject": "Additional RED/GRN/BL1 sequence",
+      "status": "deferred",
+      "finding": "N1644754728_1, N1644755236_1 and N1644754662_1 were acquired and trialed. Estimated color coverage rose only from about 21.7% to 22.2%, with a conspicuous brightness boundary. The native sequence is not rejected, but the marginal gain was not promoted and its relative registration still needs qualification.",
+      "revisitWhen": "Further controlled registration and a source-backed explanation of the brightness boundary justify the added footprint, or another sequence supplies more useful coverage.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/calypso_document.pdf",
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
+        }
+      ]
+    },
+    {
+      "id": "cassini-filter-color",
+      "subject": "Selected calibrated Cassini filter-color observations",
+      "status": "included",
+      "finding": "RED N1644757030_1, GRN N1644756997_1 and BL1 N1644756505_1 supply the retained False color view using the original PDS camera rows. The sequence spans changing phase and roughly nine minutes; it has no colorimetric transform or independent feature refinement.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/source/preparation/terrestrial.json",
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/calypso_document.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "legacy-voyager-stooke-maps",
+      "subject": "Legacy Voyager/Stooke maps and shaded-relief illustrations",
+      "status": "excluded",
+      "finding": "The retained source review did not select these as observed maps: they lack the combination of Cassini detail and measured camera registration used by this package. Shaded-relief drawings are not observational textures.",
+      "revisitWhen": "A registered observational map supplies useful independent coverage or detail on this source frame.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "integrated-spectroscopy",
+      "subject": "Cassini small-moon spectra and integrated photometry",
+      "status": "excluded",
+      "finding": "The examined small-inner-satellite spectra and photometric analyses inform interpretation but are disk-integrated. They do not support painting a spatial composition texture onto this moon.",
+      "revisitWhen": "A spatially resolved, calibrated spectrum or mapped product is tied to this moon’s surface coordinates.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md",
+        "https://www.usgs.gov/publications/cassini-spectra-and-photometry-025-51-mm-small-inner-satellites-saturn",
+        "https://doi.org/10.3847/1538-3881/ab659d"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "clear-extension-2010",
+      "subject": "Cassini clear frames N1644754629_1 and N1644754942_1",
+      "status": "included",
+      "finding": "The retained close-encounter extension adds the two published-camera views westward of the earlier selection. N1506184171_1 still supplies the coarse far side; emission beyond 70 degrees is withheld to prevent single pixels stretching into long strips.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/evidence/close-encounters/qualification.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "filter-feature-refinement",
+      "subject": "Independent refinement of the retained filter cameras",
+      "status": "unresolved",
+      "finding": "The recorded fixed-camera diagnostic did not find the six independent feature patches required for refinement or an independent feature check. The released PDS camera-table registration remains the source basis; no camera was fitted by this failed diagnostic.",
+      "revisitWhen": "Independent interior controls can qualify a refinement without weakening the existing criteria or replacing the published frame.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
     }
   ]
 }

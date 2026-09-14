@@ -55,10 +55,18 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         const world = this.systemTarget({ objectId, fromId, mount, force: true });
         return world ? { world, focusPositionM: frames.get(objectId)!.originM } : null;
       }
-      if (scope !== 'milky-way') return null;
+      if (!['milky-way', 'local-group', 'nearby-universe'].includes(scope)) return null;
       const owner = mount?.navigation;
       const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
       if (!from || !optics) return null;
+      if (scope === 'local-group' || scope === 'nearby-universe') {
+        const frame = frames.get(objectId);
+        if (!frame) return null;
+        const projection = presentWorldCamera(from, frame, optics);
+        const distanceM = (scope === 'local-group' ? 1e6 : 1e8) * 3.085677581491367e16;
+        return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation,
+          distanceUnits: distanceM / frame.metersPerUnit }, frame, optics), focusPositionM: frame.originM };
+      }
       return volumeZoomTarget(from, GALACTIC_VOLUME, optics, systemFramingRect(optics, documentTarget),
         (owner?.frame ?? frames.get(fromId))!.originM);
     },

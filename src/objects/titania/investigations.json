@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "titania",
+  "entries": [
+    {
+      "id": "schenk-lpi-2020-registered-monochrome-mosaic",
+      "subject": "Schenk/LPI 2020 registered monochrome mosaic",
+      "status": "included",
+      "finding": "Included as Monochrome: updated control network, numeric validity and documented source correction.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "schenk-lpi-2020-stereo-plus-limb-dem",
+      "subject": "Schenk/LPI 2020 stereo plus limb DEM",
+      "status": "included",
+      "finding": "Included as Elevation with its own coverage, datum, numeric scale and relief.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jpl-usgs-voyager-display-map-1440-720",
+      "subject": "JPL/USGS Voyager display map, 1440 × 720",
+      "status": "excluded",
+      "finding": "Superseded by the registered numeric LPI mosaic; not a duplicate lens.",
+      "revisitWhen": "A Titania observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/source/manifest.json",
+        "https://space.jpl.nasa.gov/tmaps/uranus.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "nathan-head-and-huber-2024-deblurred-imagery-and-geo",
+      "subject": "Nathan, Head and Huber (2024), deblurred imagery and geologic mapping",
+      "status": "excluded",
+      "finding": "Excluded as a direct mapped replacement. Appendix p. 9 explicitly states that the workflow discards geospatial information and requires registration to another map. The supporting data are paper figures/tables and a processing tutorial; a qualified registered raster was not identified. A future re-registration could improve visual interpretation.",
+      "revisitWhen": "A Titania source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/source/manifest.json",
+        "https://iopscience.iop.org/article/10.3847/PSJ/ad04d6/pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-opus-voyager-frames-including-vg-iss-2-u-c268364",
+      "subject": "PDS OPUS Voyager frames, including vg-iss-2-u-c2683649 used by Nathan et al.",
+      "status": "included",
+      "finding": "Authoritative acquisition archive; selected LPI products already provide controlled mosaicking and DEMs. Reprocessing individual images requires its own calibration/registration evidence.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/source/manifest.json",
+        "https://opus.pds-rings.seti.org/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "nasa-color-composite",
+      "subject": "NASA color composite",
+      "status": "excluded",
+      "finding": "Useful visual reference, excluded as a map lens: a published disc composite does not establish registered global color coverage.",
+      "revisitWhen": "A Titania observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/source/manifest.json",
+        "https://science.nasa.gov/uranus/moons/titania/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "usgs-gazetteer",
+      "subject": "USGS Gazetteer",
+      "status": "included",
+      "finding": "Coordinate and nomenclature reference, not a separate observation lens. Named sample locations also appear in Nathan et al. Table A1.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/source/manifest.json",
+        "https://planetarynames.wr.usgs.gov/Page/TITANIA/target"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "thomson-baynham-2026-geology",
+      "subject": "Thomson and Baynham (2026) historical geology",
+      "status": "included",
+      "finding": "The CC BY 4.0 release supplies ten historical Voyager-era polygon units. Its incompatible Earth CRS is reconstructed from six crater centroids with four independent crater checks, differing by 0.33–0.83 degrees (about 4.5–11.4 km). Categorical coverage is about 35.3%; source holes and unsupported overlap order remain missing. This is mapped interpretation, not measured composition or terrain, and the check differences are not universal boundary uncertainties.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/README.md",
+        "https://zenodo.org/records/20819132",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/source/science/geology-2026/registration.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titania/source/science/geology-2026/categories.receipt.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

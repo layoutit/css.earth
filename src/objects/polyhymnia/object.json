@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "46337b9fc1dd438d28805b9f36369e3c0993d9f7df4c4ab7adf1228a96a93a38"
+          "sha256": "66f81fb029c2a538e5ad6625b0c38f33ffcf77860dff7b3465f23394268249a8"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cc39b2a233ea1dc63343c2c7dd478e30e867510287fea48b7a88aa46cff6fc26"
+        "sha256": "2260c4af69966bdcb547b8f16fc7039feee7cf066ee26e9922a53f39178a5e52"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.8701879510937207,
-      "description": "Explore Polyhymnia in 3D with its published shape model and documented physical size scale.",
+      "description": "Stony main-belt asteroid, discovered on 28 October 1854.",
       "systemName": "Solar System",
       "order": 375,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "da606f2cf19c4fcadf59c37e8985ac34ea7af09297b3cacaa4603d15aa6eedea"
+    "sha256": "1392cf97791d3aa83a6ad44197f2aa281a8fdde68a00f6f8008d059403193bb5"
   }
 }

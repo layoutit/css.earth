@@ -4,7 +4,7 @@ import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefre
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
-import { acquireMurImagery, murEnsoContent, murCapabilitiesUrl, murColormapUrl, murDescriptionUrl, murLayer, sha256 } from './mur-imagery.mts';
+import { acquireMurImagery, murEnsoContent, murEnsoText, murCapabilitiesUrl, murColormapUrl, murDescriptionUrl, murLayer, sha256 } from './mur-imagery.mts';
 import { parseEnsoAdvisory } from './enso-advisory.mts';
 
 const json = (value: unknown) => JSON.stringify(value, null, 2) + '\n';
@@ -40,7 +40,7 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
   const bindings = await readRefreshBindings(join(source, 'content/lens-bindings.json'));
   const binding = bindings.controls.find(lens => lens.id === 'enso');
   if (!binding) throw new Error('ENSO presentation binding is missing.');
-  binding.qualification = lens.description;
+  binding.qualification = lens.notes;
   updates.set('preparation/paged-ellipsoid.json', Buffer.from(json(config)));
   updates.set('content/object.json', Buffer.from(json(content)));
   updates.set('content/lens-bindings.json', Buffer.from(json(bindings)));
@@ -76,6 +76,10 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
   for (const [path, bytes] of updates) await writeFile(join(source, path), bytes);
   await writeFile(join(source, 'manifest.json'), json(manifest));
   await writeFile(join(object, 'object.json'), json(descriptor));
+  // The dated reader text lives beside object.json; pnpm prepare:text publishes it.
+  const text = JSON.parse(await readFile(join(object, 'text.json'), 'utf8'));
+  text.datasets.enso = murEnsoText(recipe);
+  await writeFile(join(object, 'text.json'), json(text));
   return { date: receipt.date, sourceBytes: receipt.sourceBytes, tileCount: receipt.tiles.length, mosaic: receipt.mosaic };
 }
 

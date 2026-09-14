@@ -1,0 +1,43 @@
+{
+  "id": "bailer-jones-2021-distances",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Geometric and photogeometric distances to 1.47 billion stars in Gaia EDR3",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/abd806"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.main",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.main",
+      "checkedOn": "2026-09-13",
+      "locator": "Geometric posterior median and asymmetric16/84percentile distances; not direct depth measurements"
+    }
+  ],
+  "publisher": "C. A. L. Bailer-Jones, J. Rybizki, M. Fouesneau, M. Demleitner and R. Andrae",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "C. A. L. Bailer-Jones, J. Rybizki, M. Fouesneau, M. Demleitner and R. Andrae",
+      "scope": "Geometric posterior median and asymmetric16/84percentile distances; not direct depth measurements",
+      "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.main"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0",
+      "scope": "Published distance catalogue",
+      "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.main"
+    }
+  ],
+  "version": "2021"
+}

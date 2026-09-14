@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3a50b3c8d37da24915f6a03ea993cd1ac8409d6542a6bb0ca5297e08a196baa8"
+          "sha256": "3752cf435c7ca30dcdecf2b61cb45321cdfc23cf5dd0e21c5795797e393c5d55"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "32659363110a02049fd1ca70c75a37b51d08dbe256999b7becfea834c4d50818"
+        "sha256": "1238ff1c723bb40effcbcea9eb6cf7a1a546ef7aad3cbe61f992eecabcc10cb8"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.0457349024000404,
-      "description": "Explore 1996 HW1 in 3D with its published radar shape model.",
+      "description": "Contact-binary near-Earth asteroid with two lobes and a narrow neck.",
       "systemName": "Solar System",
       "order": 210,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "15aacb0cc79893b556667d8481fc0e2a0abce694abd493a8fb2e5fa829cac1ed"
+    "sha256": "40a38d8838b0d36b632bb08ee98594f1791360956081d2fd6b27ab95c8b54fb5"
   }
 }

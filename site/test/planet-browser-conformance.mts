@@ -35,7 +35,7 @@ import { chromium } from "playwright";
 import sharp from "sharp";
 import { conformanceBrowserLaunch } from "./conformance-browser-launch.mts";
 
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { MOBILE_TOUCH_ACTION, WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
   WHEEL_ZOOM_USE_SCROLL_DISTANCE } from "../runtime-policy.mts";
 import { loadPlanetBrowserProfile, assertRenderedObjectControls } from "./load-browser-profile.mts";
@@ -66,7 +66,7 @@ if (evidenceDirectory) {
     "Browser evidence must stay under output/playwright.");
   await mkdir(evidenceDirectory, { recursive: true });
 }
-const implemented = OBJECTS;
+const implemented = SCENE_OBJECTS;
 const selected = requestedId
   ? implemented.filter(({ id }) => id === requestedId)
   : implemented;

@@ -1,0 +1,3924 @@
+{
+  "codeRevision": "e70004dbc235b55e2d76af63d28fd35e61e96a8d",
+  "scope": "Native decoding and target binding only. Header seeds are not qualified surface cameras.",
+  "frames": [
+    {
+      "file": "lor_0752129545_03599_00001_1x1_sci_03.fit",
+      "sha256": "857d5de69526397fcb7fb1e16032c12bd36b38b748fbe5a6a3e511d28d5227a6",
+      "target": "DINKINESH",
+      "startTime": "2023-11-01T16:53:27.450",
+      "width": 1024,
+      "height": 1024,
+      "exposureSeconds": 0.01,
+      "validPixels": 1046433,
+      "rejectedPixels": 2143,
+      "samples": [
+        {
+          "index": 12347,
+          "value": 58.93104553222656,
+          "valid": true
+        },
+        {
+          "index": 20538,
+          "value": 186.9016876220703,
+          "valid": true
+        },
+        {
+          "index": 28729,
+          "value": -28.266521453857422,
+          "valid": true
+        },
+        {
+          "index": 36920,
+          "value": 238.4249725341797,
+          "valid": true
+        },
+        {
+          "index": 45111,
+          "value": 199.50439453125,
+          "valid": true
+        },
+        {
+          "index": 53302,
+          "value": 80.466064453125,
+          "valid": true
+        },
+        {
+          "index": 61493,
+          "value": 65.21759796142578,
+          "valid": true
+        },
+        {
+          "index": 69684,
+          "value": 70.91132354736328,
+          "valid": true
+        },
+        {
+          "index": 77875,
+          "value": 60.736881256103516,
+          "valid": true
+        },
+        {
+          "index": 86066,
+          "value": 55.61635971069336,
+          "valid": true
+        },
+        {
+          "index": 94257,
+          "value": -31.43327522277832,
+          "valid": true
+        },
+        {
+          "index": 102448,
+          "value": 145.60867309570312,
+          "valid": true
+        },
+        {
+          "index": 110639,
+          "value": 65.1311264038086,
+          "valid": true
+        },
+        {
+          "index": 118830,
+          "value": 73.48135375976562,
+          "valid": true
+        },
+        {
+          "index": 127021,
+          "value": 65.17318725585938,
+          "valid": true
+        },
+        {
+          "index": 135212,
+          "value": 65.48013305664062,
+          "valid": true
+        },
+        {
+          "index": 143403,
+          "value": 154.12338256835938,
+          "valid": true
+        },
+        {
+          "index": 151594,
+          "value": 54.042266845703125,
+          "valid": true
+        },
+        {
+          "index": 159785,
+          "value": -53.572757720947266,
+          "valid": true
+        },
+        {
+          "index": 167976,
+          "value": 137.070556640625,
+          "valid": true
+        },
+        {
+          "index": 176167,
+          "value": 153.65499877929688,
+          "valid": true
+        },
+        {
+          "index": 184358,
+          "value": 67.96339416503906,
+          "valid": true
+        },
+        {
+          "index": 192549,
+          "value": 252.17864990234375,
+          "valid": true
+        },
+        {
+          "index": 200740,
+          "value": 53.28868103027344,
+          "valid": true
+        },
+        {
+          "index": 208931,
+          "value": -47.51826858520508,
+          "valid": true
+        },
+        {
+          "index": 217122,
+          "value": -35.95671844482422,
+          "valid": true
+        },
+        {
+          "index": 225313,
+          "value": 64.31929779052734,
+          "valid": true
+        },
+        {
+          "index": 233504,
+          "value": 159.7373809814453,
+          "valid": true
+        },
+        {
+          "index": 241695,
+          "value": 42.68045425415039,
+          "valid": true
+        },
+        {
+          "index": 249886,
+          "value": 46.09223556518555,
+          "valid": true
+        },
+        {
+          "index": 258077,
+          "value": 146.17820739746094,
+          "valid": true
+        },
+        {
+          "index": 266268,
+          "value": -149.9307403564453,
+          "valid": true
+        },
+        {
+          "index": 274459,
+          "value": 142.06700134277344,
+          "valid": true
+        },
+        {
+          "index": 282650,
+          "value": -53.3804817199707,
+          "valid": true
+        },
+        {
+          "index": 290841,
+          "value": 148.23851013183594,
+          "valid": true
+        },
+        {
+          "index": 299032,
+          "value": 160.46937561035156,
+          "valid": true
+        },
+        {
+          "index": 307223,
+          "value": 138.72171020507812,
+          "valid": true
+        },
+        {
+          "index": 315414,
+          "value": 55.84986114501953,
+          "valid": true
+        },
+        {
+          "index": 323605,
+          "value": -68.32606506347656,
+          "valid": true
+        },
+        {
+          "index": 331796,
+          "value": 162.16441345214844,
+          "valid": true
+        },
+        {
+          "index": 339987,
+          "value": 19.542293548583984,
+          "valid": true
+        },
+        {
+          "index": 348178,
+          "value": 239.71896362304688,
+          "valid": true
+        },
+        {
+          "index": 356369,
+          "value": -59.81187057495117,
+          "valid": true
+        },
+        {
+          "index": 364560,
+          "value": -60.8602294921875,
+          "valid": true
+        },
+        {
+          "index": 372751,
+          "value": 53.472537994384766,
+          "valid": true
+        },
+        {
+          "index": 380942,
+          "value": -59.43616485595703,
+          "valid": true
+        },
+        {
+          "index": 389133,
+          "value": 145.13470458984375,
+          "valid": true
+        },
+        {
+          "index": 397324,
+          "value": -150.63946533203125,
+          "valid": true
+        },
+        {
+          "index": 405515,
+          "value": 245.80838012695312,
+          "valid": true
+        },
+        {
+          "index": 413706,
+          "value": 221.13804626464844,
+          "valid": true
+        },
+        {
+          "index": 421897,
+          "value": -49.74909210205078,
+          "valid": true
+        },
+        {
+          "index": 430088,
+          "value": 137.36508178710938,
+          "valid": true
+        },
+        {
+          "index": 438279,
+          "value": 41.91890335083008,
+          "valid": true
+        },
+        {
+          "index": 446470,
+          "value": 44.893402099609375,
+          "valid": true
+        },
+        {
+          "index": 454661,
+          "value": -31.918224334716797,
+          "valid": true
+        },
+        {
+          "index": 462852,
+          "value": 54.61140823364258,
+          "valid": true
+        },
+        {
+          "index": 471043,
+          "value": 166.65631103515625,
+          "valid": true
+        },
+        {
+          "index": 479234,
+          "value": 168.90518188476562,
+          "valid": true
+        },
+        {
+          "index": 487425,
+          "value": -34.27631378173828,
+          "valid": true
+        },
+        {
+          "index": 495616,
+          "value": 20.637399673461914,
+          "valid": true
+        },
+        {
+          "index": 503807,
+          "value": 16.554475784301758,
+          "valid": true
+        },
+        {
+          "index": 511998,
+          "value": 219.008056640625,
+          "valid": true
+        },
+        {
+          "index": 520189,
+          "value": -0.4786522090435028,
+          "valid": true
+        },
+        {
+          "index": 528380,
+          "value": 100.6825180053711,
+          "valid": true
+        },
+        {
+          "index": 536571,
+          "value": -8.878852844238281,
+          "valid": true
+        },
+        {
+          "index": 544762,
+          "value": 197.77334594726562,
+          "valid": true
+        },
+        {
+          "index": 552953,
+          "value": 99.93875122070312,
+          "valid": true
+        },
+        {
+          "index": 561144,
+          "value": 11.29348087310791,
+          "valid": true
+        },
+        {
+          "index": 569335,
+          "value": 103.82469940185547,
+          "valid": true
+        },
+        {
+          "index": 577526,
+          "value": 105.18312072753906,
+          "valid": true
+        },
+        {
+          "index": 585717,
+          "value": 101.7436752319336,
+          "valid": true
+        },
+        {
+          "index": 593908,
+          "value": 95.43881225585938,
+          "valid": true
+        },
+        {
+          "index": 602099,
+          "value": 3.2300050258636475,
+          "valid": true
+        },
+        {
+          "index": 610290,
+          "value": 92.22115325927734,
+          "valid": true
+        },
+        {
+          "index": 618481,
+          "value": 111.38424682617188,
+          "valid": true
+        },
+        {
+          "index": 626672,
+          "value": -86.20149993896484,
+          "valid": true
+        },
+        {
+          "index": 634863,
+          "value": 105.05049133300781,
+          "valid": true
+        },
+        {
+          "index": 643054,
+          "value": 102.80010986328125,
+          "valid": true
+        },
+        {
+          "index": 651245,
+          "value": 113.53844451904297,
+          "valid": true
+        },
+        {
+          "index": 659436,
+          "value": 96.20024871826172,
+          "valid": true
+        },
+        {
+          "index": 667627,
+          "value": 90.02206420898438,
+          "valid": true
+        },
+        {
+          "index": 675818,
+          "value": 111.60884094238281,
+          "valid": true
+        },
+        {
+          "index": 684009,
+          "value": 93.92250061035156,
+          "valid": true
+        },
+        {
+          "index": 692200,
+          "value": -2.4831466674804688,
+          "valid": true
+        },
+        {
+          "index": 700391,
+          "value": 188.13784790039062,
+          "valid": true
+        },
+        {
+          "index": 708582,
+          "value": -1.5390177965164185,
+          "valid": true
+        },
+        {
+          "index": 716773,
+          "value": 101.63385772705078,
+          "valid": true
+        },
+        {
+          "index": 724964,
+          "value": 89.81182098388672,
+          "valid": true
+        },
+        {
+          "index": 733155,
+          "value": 101.90338897705078,
+          "valid": true
+        },
+        {
+          "index": 741346,
+          "value": 99.3067855834961,
+          "valid": true
+        },
+        {
+          "index": 749537,
+          "value": -17.483572006225586,
+          "valid": true
+        },
+        {
+          "index": 757728,
+          "value": 99.6172103881836,
+          "valid": true
+        },
+        {
+          "index": 765919,
+          "value": 11.008322715759277,
+          "valid": true
+        },
+        {
+          "index": 774110,
+          "value": 92.48208618164062,
+          "valid": true
+        },
+        {
+          "index": 782301,
+          "value": 93.47257995605469,
+          "valid": true
+        },
+        {
+          "index": 790492,
+          "value": 207.29348754882812,
+          "valid": true
+        },
+        {
+          "index": 798683,
+          "value": -11.200736999511719,
+          "valid": true
+        },
+        {
+          "index": 806874,
+          "value": -106.695068359375,
+          "valid": true
+        },
+        {
+          "index": 815065,
+          "value": 95.48565673828125,
+          "valid": true
+        },
+        {
+          "index": 823256,
+          "value": 196.8404998779297,
+          "valid": true
+        },
+        {
+          "index": 831447,
+          "value": 195.02064514160156,
+          "valid": true
+        },
+        {
+          "index": 839638,
+          "value": 82.57154846191406,
+          "valid": true
+        },
+        {
+          "index": 847829,
+          "value": 86.62017822265625,
+          "valid": true
+        },
+        {
+          "index": 856020,
+          "value": 92.90670776367188,
+          "valid": true
+        },
+        {
+          "index": 864211,
+          "value": 86.20573425292969,
+          "valid": true
+        },
+        {
+          "index": 872402,
+          "value": 290.8927917480469,
+          "valid": true
+        },
+        {
+          "index": 880593,
+          "value": 179.391357421875,
+          "valid": true
+        },
+        {
+          "index": 888784,
+          "value": 103.09351348876953,
+          "valid": true
+        },
+        {
+          "index": 896975,
+          "value": 186.35630798339844,
+          "valid": true
+        },
+        {
+          "index": 905166,
+          "value": 186.19631958007812,
+          "valid": true
+        },
+        {
+          "index": 913357,
+          "value": 83.6348876953125,
+          "valid": true
+        },
+        {
+          "index": 921548,
+          "value": 191.94091796875,
+          "valid": true
+        },
+        {
+          "index": 929739,
+          "value": 99.84537506103516,
+          "valid": true
+        },
+        {
+          "index": 937930,
+          "value": 79.94173431396484,
+          "valid": true
+        },
+        {
+          "index": 946121,
+          "value": 174.42738342285156,
+          "valid": true
+        },
+        {
+          "index": 954312,
+          "value": 78.84210205078125,
+          "valid": true
+        },
+        {
+          "index": 962503,
+          "value": 195.61355590820312,
+          "valid": true
+        },
+        {
+          "index": 970694,
+          "value": 186.14747619628906,
+          "valid": true
+        },
+        {
+          "index": 978885,
+          "value": 184.43411254882812,
+          "valid": true
+        },
+        {
+          "index": 987076,
+          "value": -27.523279190063477,
+          "valid": true
+        },
+        {
+          "index": 995267,
+          "value": -17.006162643432617,
+          "valid": true
+        },
+        {
+          "index": 1003458,
+          "value": 191.62229919433594,
+          "valid": true
+        },
+        {
+          "index": 1011649,
+          "value": 98.33123016357422,
+          "valid": true
+        },
+        {
+          "index": 1019840,
+          "value": 179.39508056640625,
+          "valid": true
+        },
+        {
+          "index": 1028031,
+          "value": 183.83798217773438,
+          "valid": true
+        },
+        {
+          "index": 1036222,
+          "value": -28.631603240966797,
+          "valid": true
+        },
+        {
+          "index": 1044413,
+          "value": -16.50446319580078,
+          "valid": true
+        },
+        {
+          "index": 4028,
+          "value": 249.67422485351562,
+          "valid": true
+        }
+      ]
+    },
+    {
+      "file": "lor_0752129587_03607_00001_1x1_sci_03.fit",
+      "sha256": "61917cd942aecda5a8a0d1fc16d21aff0892a4564f31d64aef35a56e50c99821",
+      "target": "DINKINESH",
+      "startTime": "2023-11-01T16:54:09.459",
+      "width": 1024,
+      "height": 1024,
+      "exposureSeconds": 0.002,
+      "validPixels": 1046433,
+      "rejectedPixels": 2143,
+      "samples": [
+        {
+          "index": 12347,
+          "value": 400.69287109375,
+          "valid": true
+        },
+        {
+          "index": 20538,
+          "value": 1035.3572998046875,
+          "valid": true
+        },
+        {
+          "index": 28729,
+          "value": 475.4320983886719,
+          "valid": true
+        },
+        {
+          "index": 36920,
+          "value": 765.1904296875,
+          "valid": true
+        },
+        {
+          "index": 45111,
+          "value": 604.827392578125,
+          "valid": true
+        },
+        {
+          "index": 53302,
+          "value": -8.127496719360352,
+          "valid": true
+        },
+        {
+          "index": 61493,
+          "value": 453.9095458984375,
+          "valid": true
+        },
+        {
+          "index": 69684,
+          "value": 467.11090087890625,
+          "valid": true
+        },
+        {
+          "index": 77875,
+          "value": 428.54730224609375,
+          "valid": true
+        },
+        {
+          "index": 86066,
+          "value": 368.6754150390625,
+          "valid": true
+        },
+        {
+          "index": 94257,
+          "value": -64.40545654296875,
+          "valid": true
+        },
+        {
+          "index": 102448,
+          "value": -156.75869750976562,
+          "valid": true
+        },
+        {
+          "index": 110639,
+          "value": -88.48408508300781,
+          "valid": true
+        },
+        {
+          "index": 118830,
+          "value": 1013.4034423828125,
+          "valid": true
+        },
+        {
+          "index": 127021,
+          "value": 435.6849365234375,
+          "valid": true
+        },
+        {
+          "index": 135212,
+          "value": 449.5561828613281,
+          "valid": true
+        },
+        {
+          "index": 143403,
+          "value": -103.62886047363281,
+          "valid": true
+        },
+        {
+          "index": 151594,
+          "value": -129.82351684570312,
+          "valid": true
+        },
+        {
+          "index": 159785,
+          "value": -144.28887939453125,
+          "valid": true
+        },
+        {
+          "index": 167976,
+          "value": -699.48876953125,
+          "valid": true
+        },
+        {
+          "index": 176167,
+          "value": 371.6404724121094,
+          "valid": true
+        },
+        {
+          "index": 184358,
+          "value": -553.6050415039062,
+          "valid": true
+        },
+        {
+          "index": 192549,
+          "value": -138.47291564941406,
+          "valid": true
+        },
+        {
+          "index": 200740,
+          "value": 383.0022277832031,
+          "valid": true
+        },
+        {
+          "index": 208931,
+          "value": -99.41986083984375,
+          "valid": true
+        },
+        {
+          "index": 217122,
+          "value": -55.660560607910156,
+          "valid": true
+        },
+        {
+          "index": 225313,
+          "value": 431.7471618652344,
+          "valid": true
+        },
+        {
+          "index": 233504,
+          "value": 923.599853515625,
+          "valid": true
+        },
+        {
+          "index": 241695,
+          "value": -148.6592559814453,
+          "valid": true
+        },
+        {
+          "index": 249886,
+          "value": 886.2029418945312,
+          "valid": true
+        },
+        {
+          "index": 258077,
+          "value": 359.7659912109375,
+          "valid": true
+        },
+        {
+          "index": 266268,
+          "value": -107.49224853515625,
+          "valid": true
+        },
+        {
+          "index": 274459,
+          "value": 322.34564208984375,
+          "valid": true
+        },
+        {
+          "index": 282650,
+          "value": 383.3327331542969,
+          "valid": true
+        },
+        {
+          "index": 290841,
+          "value": 385.9839782714844,
+          "valid": true
+        },
+        {
+          "index": 299032,
+          "value": 930.47412109375,
+          "valid": true
+        },
+        {
+          "index": 307223,
+          "value": 343.8260498046875,
+          "valid": true
+        },
+        {
+          "index": 315414,
+          "value": 936.2333984375,
+          "valid": true
+        },
+        {
+          "index": 323605,
+          "value": 330.01202392578125,
+          "valid": true
+        },
+        {
+          "index": 331796,
+          "value": -591.4090576171875,
+          "valid": true
+        },
+        {
+          "index": 339987,
+          "value": 221.0784454345703,
+          "valid": true
+        },
+        {
+          "index": 348178,
+          "value": 363.13067626953125,
+          "valid": true
+        },
+        {
+          "index": 356369,
+          "value": -141.525390625,
+          "valid": true
+        },
+        {
+          "index": 364560,
+          "value": 387.68267822265625,
+          "valid": true
+        },
+        {
+          "index": 372751,
+          "value": -79.63483428955078,
+          "valid": true
+        },
+        {
+          "index": 380942,
+          "value": 352.6761474609375,
+          "valid": true
+        },
+        {
+          "index": 389133,
+          "value": -132.62257385253906,
+          "valid": true
+        },
+        {
+          "index": 397324,
+          "value": -109.60819244384766,
+          "valid": true
+        },
+        {
+          "index": 405515,
+          "value": -666.55859375,
+          "valid": true
+        },
+        {
+          "index": 413706,
+          "value": -235.4217529296875,
+          "valid": true
+        },
+        {
+          "index": 421897,
+          "value": 438.3549499511719,
+          "valid": true
+        },
+        {
+          "index": 430088,
+          "value": 858.2208251953125,
+          "valid": true
+        },
+        {
+          "index": 438279,
+          "value": 355.4342041015625,
+          "valid": true
+        },
+        {
+          "index": 446470,
+          "value": 363.4795227050781,
+          "valid": true
+        },
+        {
+          "index": 454661,
+          "value": 437.1412353515625,
+          "valid": true
+        },
+        {
+          "index": 462852,
+          "value": -627.7590942382812,
+          "valid": true
+        },
+        {
+          "index": 471043,
+          "value": -42.928157806396484,
+          "valid": true
+        },
+        {
+          "index": 479234,
+          "value": 521.826416015625,
+          "valid": true
+        },
+        {
+          "index": 487425,
+          "value": 559.6921997070312,
+          "valid": true
+        },
+        {
+          "index": 495616,
+          "value": 956.7051391601562,
+          "valid": true
+        },
+        {
+          "index": 503807,
+          "value": -440.8067321777344,
+          "valid": true
+        },
+        {
+          "index": 511998,
+          "value": 590.5240478515625,
+          "valid": true
+        },
+        {
+          "index": 520189,
+          "value": 498.5046081542969,
+          "valid": true
+        },
+        {
+          "index": 528380,
+          "value": 467.94158935546875,
+          "valid": true
+        },
+        {
+          "index": 536571,
+          "value": -62.009708404541016,
+          "valid": true
+        },
+        {
+          "index": 544762,
+          "value": 464.9013366699219,
+          "valid": true
+        },
+        {
+          "index": 552953,
+          "value": 930.6857299804688,
+          "valid": true
+        },
+        {
+          "index": 561144,
+          "value": 11.29895305633545,
+          "valid": true
+        },
+        {
+          "index": 569335,
+          "value": 495.241943359375,
+          "valid": true
+        },
+        {
+          "index": 577526,
+          "value": 0.5346766114234924,
+          "valid": true
+        },
+        {
+          "index": 585717,
+          "value": -11.162200927734375,
+          "valid": true
+        },
+        {
+          "index": 593908,
+          "value": 431.3097839355469,
+          "valid": true
+        },
+        {
+          "index": 602099,
+          "value": -509.7485046386719,
+          "valid": true
+        },
+        {
+          "index": 610290,
+          "value": 913.2054443359375,
+          "valid": true
+        },
+        {
+          "index": 618481,
+          "value": 28.767946243286133,
+          "valid": true
+        },
+        {
+          "index": 626672,
+          "value": 17.205408096313477,
+          "valid": true
+        },
+        {
+          "index": 634863,
+          "value": 495.7189025878906,
+          "valid": true
+        },
+        {
+          "index": 643054,
+          "value": 976.5211791992188,
+          "valid": true
+        },
+        {
+          "index": 651245,
+          "value": -963.9150390625,
+          "valid": true
+        },
+        {
+          "index": 659436,
+          "value": 433.18768310546875,
+          "valid": true
+        },
+        {
+          "index": 667627,
+          "value": -87.76588439941406,
+          "valid": true
+        },
+        {
+          "index": 675818,
+          "value": -4.122838497161865,
+          "valid": true
+        },
+        {
+          "index": 684009,
+          "value": 416.1707763671875,
+          "valid": true
+        },
+        {
+          "index": 692200,
+          "value": 405.4312438964844,
+          "valid": true
+        },
+        {
+          "index": 700391,
+          "value": -150.085205078125,
+          "valid": true
+        },
+        {
+          "index": 708582,
+          "value": -54.4868278503418,
+          "valid": true
+        },
+        {
+          "index": 716773,
+          "value": -59.837158203125,
+          "valid": true
+        },
+        {
+          "index": 724964,
+          "value": -115.5011978149414,
+          "valid": true
+        },
+        {
+          "index": 733155,
+          "value": -44.18196105957031,
+          "valid": true
+        },
+        {
+          "index": 741346,
+          "value": -75.87650299072266,
+          "valid": true
+        },
+        {
+          "index": 749537,
+          "value": -640.9285888671875,
+          "valid": true
+        },
+        {
+          "index": 757728,
+          "value": -67.12774658203125,
+          "valid": true
+        },
+        {
+          "index": 765919,
+          "value": 488.97869873046875,
+          "valid": true
+        },
+        {
+          "index": 774110,
+          "value": 387.42962646484375,
+          "valid": true
+        },
+        {
+          "index": 782301,
+          "value": -601.2861938476562,
+          "valid": true
+        },
+        {
+          "index": 790492,
+          "value": 435.5301208496094,
+          "valid": true
+        },
+        {
+          "index": 798683,
+          "value": -175.05145263671875,
+          "valid": true
+        },
+        {
+          "index": 806874,
+          "value": 912.4736938476562,
+          "valid": true
+        },
+        {
+          "index": 815065,
+          "value": 379.5161437988281,
+          "valid": true
+        },
+        {
+          "index": 823256,
+          "value": -122.07044982910156,
+          "valid": true
+        },
+        {
+          "index": 831447,
+          "value": -105.61372375488281,
+          "valid": true
+        },
+        {
+          "index": 839638,
+          "value": -201.98570251464844,
+          "valid": true
+        },
+        {
+          "index": 847829,
+          "value": 361.34173583984375,
+          "valid": true
+        },
+        {
+          "index": 856020,
+          "value": -128.4691925048828,
+          "valid": true
+        },
+        {
+          "index": 864211,
+          "value": -158.36734008789062,
+          "valid": true
+        },
+        {
+          "index": 872402,
+          "value": -167.96690368652344,
+          "valid": true
+        },
+        {
+          "index": 880593,
+          "value": 292.6021728515625,
+          "valid": true
+        },
+        {
+          "index": 888784,
+          "value": -82.0869369506836,
+          "valid": true
+        },
+        {
+          "index": 896975,
+          "value": -153.94046020507812,
+          "valid": true
+        },
+        {
+          "index": 905166,
+          "value": 824.5184326171875,
+          "valid": true
+        },
+        {
+          "index": 913357,
+          "value": 285.5047607421875,
+          "valid": true
+        },
+        {
+          "index": 921548,
+          "value": -176.7101593017578,
+          "valid": true
+        },
+        {
+          "index": 929739,
+          "value": -605.9417724609375,
+          "valid": true
+        },
+        {
+          "index": 937930,
+          "value": 286.1289978027344,
+          "valid": true
+        },
+        {
+          "index": 946121,
+          "value": 764.5054321289062,
+          "valid": true
+        },
+        {
+          "index": 954312,
+          "value": -229.19517517089844,
+          "valid": true
+        },
+        {
+          "index": 962503,
+          "value": 846.9518432617188,
+          "valid": true
+        },
+        {
+          "index": 970694,
+          "value": 299.7806396484375,
+          "valid": true
+        },
+        {
+          "index": 978885,
+          "value": 829.767333984375,
+          "valid": true
+        },
+        {
+          "index": 987076,
+          "value": 233.0250244140625,
+          "valid": true
+        },
+        {
+          "index": 995267,
+          "value": 276.32464599609375,
+          "valid": true
+        },
+        {
+          "index": 1003458,
+          "value": -730.6432495117188,
+          "valid": true
+        },
+        {
+          "index": 1011649,
+          "value": 367.01361083984375,
+          "valid": true
+        },
+        {
+          "index": 1019840,
+          "value": -234.53114318847656,
+          "valid": true
+        },
+        {
+          "index": 1028031,
+          "value": 801.9381103515625,
+          "valid": true
+        },
+        {
+          "index": 1036222,
+          "value": 722.3197021484375,
+          "valid": true
+        },
+        {
+          "index": 1044413,
+          "value": 273.3694152832031,
+          "valid": true
+        },
+        {
+          "index": 4028,
+          "value": 593.517333984375,
+          "valid": true
+        }
+      ]
+    },
+    {
+      "file": "lor_0752129602_03610_00001_1x1_sci_03.fit",
+      "sha256": "6b29c2dc01bb8ed31e8d4c3f5608c8ab401c219bb2138eb16a953e4ad939e052",
+      "target": "DINKINESH",
+      "startTime": "2023-11-01T16:54:24.458",
+      "width": 1024,
+      "height": 1024,
+      "exposureSeconds": 0.002,
+      "validPixels": 1046433,
+      "rejectedPixels": 2143,
+      "samples": [
+        {
+          "index": 12347,
+          "value": -182.46759033203125,
+          "valid": true
+        },
+        {
+          "index": 20538,
+          "value": 452.12939453125,
+          "valid": true
+        },
+        {
+          "index": 28729,
+          "value": -120.50486755371094,
+          "valid": true
+        },
+        {
+          "index": 36920,
+          "value": 170.64761352539062,
+          "valid": true
+        },
+        {
+          "index": 45111,
+          "value": 12.85661506652832,
+          "valid": true
+        },
+        {
+          "index": 53302,
+          "value": -94.66846466064453,
+          "valid": true
+        },
+        {
+          "index": 61493,
+          "value": -130.22991943359375,
+          "valid": true
+        },
+        {
+          "index": 69684,
+          "value": 391.2760009765625,
+          "valid": true
+        },
+        {
+          "index": 77875,
+          "value": -147.414306640625,
+          "valid": true
+        },
+        {
+          "index": 86066,
+          "value": 312.8580627441406,
+          "valid": true
+        },
+        {
+          "index": 94257,
+          "value": -142.4624481201172,
+          "valid": true
+        },
+        {
+          "index": 102448,
+          "value": 243.65798950195312,
+          "valid": true
+        },
+        {
+          "index": 110639,
+          "value": -152.78170776367188,
+          "valid": true
+        },
+        {
+          "index": 118830,
+          "value": 410.90576171875,
+          "valid": true
+        },
+        {
+          "index": 127021,
+          "value": 870.9464721679688,
+          "valid": true
+        },
+        {
+          "index": 135212,
+          "value": -154.4453887939453,
+          "valid": true
+        },
+        {
+          "index": 143403,
+          "value": -675.6860961914062,
+          "valid": true
+        },
+        {
+          "index": 151594,
+          "value": -203.8000030517578,
+          "valid": true
+        },
+        {
+          "index": 159785,
+          "value": 281.0398864746094,
+          "valid": true
+        },
+        {
+          "index": 167976,
+          "value": 218.88430786132812,
+          "valid": true
+        },
+        {
+          "index": 176167,
+          "value": -726.63232421875,
+          "valid": true
+        },
+        {
+          "index": 184358,
+          "value": 424.6602478027344,
+          "valid": true
+        },
+        {
+          "index": 192549,
+          "value": -244.20628356933594,
+          "valid": true
+        },
+        {
+          "index": 200740,
+          "value": 299.111328125,
+          "valid": true
+        },
+        {
+          "index": 208931,
+          "value": 859.594482421875,
+          "valid": true
+        },
+        {
+          "index": 217122,
+          "value": 903.3751831054688,
+          "valid": true
+        },
+        {
+          "index": 225313,
+          "value": 370.0152587890625,
+          "valid": true
+        },
+        {
+          "index": 233504,
+          "value": -190.79483032226562,
+          "valid": true
+        },
+        {
+          "index": 241695,
+          "value": 254.00653076171875,
+          "valid": true
+        },
+        {
+          "index": 249886,
+          "value": -191.6525421142578,
+          "valid": true
+        },
+        {
+          "index": 258077,
+          "value": -736.1629028320312,
+          "valid": true
+        },
+        {
+          "index": 266268,
+          "value": -195.7024688720703,
+          "valid": true
+        },
+        {
+          "index": 274459,
+          "value": -225.75706481933594,
+          "valid": true
+        },
+        {
+          "index": 282650,
+          "value": 307.42547607421875,
+          "valid": true
+        },
+        {
+          "index": 290841,
+          "value": 301.7052917480469,
+          "valid": true
+        },
+        {
+          "index": 299032,
+          "value": 840.391357421875,
+          "valid": true
+        },
+        {
+          "index": 307223,
+          "value": 778.2704467773438,
+          "valid": true
+        },
+        {
+          "index": 315414,
+          "value": 375.457763671875,
+          "valid": true
+        },
+        {
+          "index": 323605,
+          "value": 224.94468688964844,
+          "valid": true
+        },
+        {
+          "index": 331796,
+          "value": -138.748291015625,
+          "valid": true
+        },
+        {
+          "index": 339987,
+          "value": 157.71209716796875,
+          "valid": true
+        },
+        {
+          "index": 348178,
+          "value": 790.951171875,
+          "valid": true
+        },
+        {
+          "index": 356369,
+          "value": -214.3201904296875,
+          "valid": true
+        },
+        {
+          "index": 364560,
+          "value": 297.7400207519531,
+          "valid": true
+        },
+        {
+          "index": 372751,
+          "value": 864.0111083984375,
+          "valid": true
+        },
+        {
+          "index": 380942,
+          "value": -222.90599060058594,
+          "valid": true
+        },
+        {
+          "index": 389133,
+          "value": 332.83697509765625,
+          "valid": true
+        },
+        {
+          "index": 397324,
+          "value": 841.3628540039062,
+          "valid": true
+        },
+        {
+          "index": 405515,
+          "value": 300.5471496582031,
+          "valid": true
+        },
+        {
+          "index": 413706,
+          "value": 671.3939208984375,
+          "valid": true
+        },
+        {
+          "index": 421897,
+          "value": -132.31301879882812,
+          "valid": true
+        },
+        {
+          "index": 430088,
+          "value": -245.5035400390625,
+          "valid": true
+        },
+        {
+          "index": 438279,
+          "value": 296.7510070800781,
+          "valid": true
+        },
+        {
+          "index": 446470,
+          "value": -697.070556640625,
+          "valid": true
+        },
+        {
+          "index": 454661,
+          "value": -106.38082122802734,
+          "valid": true
+        },
+        {
+          "index": 462852,
+          "value": -193.07562255859375,
+          "valid": true
+        },
+        {
+          "index": 471043,
+          "value": -116.05279541015625,
+          "valid": true
+        },
+        {
+          "index": 479234,
+          "value": -62.69549560546875,
+          "valid": true
+        },
+        {
+          "index": 487425,
+          "value": -26.393468856811523,
+          "valid": true
+        },
+        {
+          "index": 495616,
+          "value": 291.2632141113281,
+          "valid": true
+        },
+        {
+          "index": 503807,
+          "value": 538.24462890625,
+          "valid": true
+        },
+        {
+          "index": 511998,
+          "value": 19.36168670654297,
+          "valid": true
+        },
+        {
+          "index": 520189,
+          "value": 415.16522216796875,
+          "valid": true
+        },
+        {
+          "index": 528380,
+          "value": -561.4054565429688,
+          "valid": true
+        },
+        {
+          "index": 536571,
+          "value": 830.247314453125,
+          "valid": true
+        },
+        {
+          "index": 544762,
+          "value": 909.1722412109375,
+          "valid": true
+        },
+        {
+          "index": 552953,
+          "value": 398.5182189941406,
+          "valid": true
+        },
+        {
+          "index": 561144,
+          "value": 936.7666625976562,
+          "valid": true
+        },
+        {
+          "index": 569335,
+          "value": 920.0433959960938,
+          "valid": true
+        },
+        {
+          "index": 577526,
+          "value": 932.59765625,
+          "valid": true
+        },
+        {
+          "index": 585717,
+          "value": 410.6760559082031,
+          "valid": true
+        },
+        {
+          "index": 593908,
+          "value": -597.3218383789062,
+          "valid": true
+        },
+        {
+          "index": 602099,
+          "value": 426.2555236816406,
+          "valid": true
+        },
+        {
+          "index": 610290,
+          "value": -129.07772827148438,
+          "valid": true
+        },
+        {
+          "index": 618481,
+          "value": 447.75830078125,
+          "valid": true
+        },
+        {
+          "index": 626672,
+          "value": 944.40185546875,
+          "valid": true
+        },
+        {
+          "index": 634863,
+          "value": -101.23017883300781,
+          "valid": true
+        },
+        {
+          "index": 643054,
+          "value": 411.3034362792969,
+          "valid": true
+        },
+        {
+          "index": 651245,
+          "value": 466.90631103515625,
+          "valid": true
+        },
+        {
+          "index": 659436,
+          "value": -138.00462341308594,
+          "valid": true
+        },
+        {
+          "index": 667627,
+          "value": 336.8373718261719,
+          "valid": true
+        },
+        {
+          "index": 675818,
+          "value": 450.0780944824219,
+          "valid": true
+        },
+        {
+          "index": 684009,
+          "value": -165.81187438964844,
+          "valid": true
+        },
+        {
+          "index": 692200,
+          "value": 395.8164978027344,
+          "valid": true
+        },
+        {
+          "index": 700391,
+          "value": 321.40869140625,
+          "valid": true
+        },
+        {
+          "index": 708582,
+          "value": -153.0059051513672,
+          "valid": true
+        },
+        {
+          "index": 716773,
+          "value": 879.0182495117188,
+          "valid": true
+        },
+        {
+          "index": 724964,
+          "value": 303.7170104980469,
+          "valid": true
+        },
+        {
+          "index": 733155,
+          "value": 385.4010925292969,
+          "valid": true
+        },
+        {
+          "index": 741346,
+          "value": -139.97950744628906,
+          "valid": true
+        },
+        {
+          "index": 749537,
+          "value": 283.75238037109375,
+          "valid": true
+        },
+        {
+          "index": 757728,
+          "value": 359.5539855957031,
+          "valid": true
+        },
+        {
+          "index": 765919,
+          "value": 397.7206726074219,
+          "valid": true
+        },
+        {
+          "index": 774110,
+          "value": 327.1692810058594,
+          "valid": true
+        },
+        {
+          "index": 782301,
+          "value": -174.35511779785156,
+          "valid": true
+        },
+        {
+          "index": 790492,
+          "value": -628.878173828125,
+          "valid": true
+        },
+        {
+          "index": 798683,
+          "value": 291.6883850097656,
+          "valid": true
+        },
+        {
+          "index": 806874,
+          "value": 306.6382751464844,
+          "valid": true
+        },
+        {
+          "index": 815065,
+          "value": -188.0321807861328,
+          "valid": true
+        },
+        {
+          "index": 823256,
+          "value": -672.50048828125,
+          "valid": true
+        },
+        {
+          "index": 831447,
+          "value": -161.47201538085938,
+          "valid": true
+        },
+        {
+          "index": 839638,
+          "value": 267.0743103027344,
+          "valid": true
+        },
+        {
+          "index": 847829,
+          "value": 1786.0914306640625,
+          "valid": true
+        },
+        {
+          "index": 856020,
+          "value": -719.4315795898438,
+          "valid": true
+        },
+        {
+          "index": 864211,
+          "value": 285.2556457519531,
+          "valid": true
+        },
+        {
+          "index": 872402,
+          "value": 797.3157958984375,
+          "valid": true
+        },
+        {
+          "index": 880593,
+          "value": 749.8392944335938,
+          "valid": true
+        },
+        {
+          "index": 888784,
+          "value": 1357.322998046875,
+          "valid": true
+        },
+        {
+          "index": 896975,
+          "value": 763.2846069335938,
+          "valid": true
+        },
+        {
+          "index": 905166,
+          "value": 250.22125244140625,
+          "valid": true
+        },
+        {
+          "index": 913357,
+          "value": 249.31475830078125,
+          "valid": true
+        },
+        {
+          "index": 921548,
+          "value": 246.62144470214844,
+          "valid": true
+        },
+        {
+          "index": 929739,
+          "value": -155.2516326904297,
+          "valid": true
+        },
+        {
+          "index": 937930,
+          "value": -287.742431640625,
+          "valid": true
+        },
+        {
+          "index": 946121,
+          "value": 680.6171264648438,
+          "valid": true
+        },
+        {
+          "index": 954312,
+          "value": 726.3043823242188,
+          "valid": true
+        },
+        {
+          "index": 962503,
+          "value": -221.40463256835938,
+          "valid": true
+        },
+        {
+          "index": 970694,
+          "value": 199.4856719970703,
+          "valid": true
+        },
+        {
+          "index": 978885,
+          "value": 718.6082153320312,
+          "valid": true
+        },
+        {
+          "index": 987076,
+          "value": 172.3016815185547,
+          "valid": true
+        },
+        {
+          "index": 995267,
+          "value": -279.3079833984375,
+          "valid": true
+        },
+        {
+          "index": 1003458,
+          "value": -265.57122802734375,
+          "valid": true
+        },
+        {
+          "index": 1011649,
+          "value": 306.9309387207031,
+          "valid": true
+        },
+        {
+          "index": 1019840,
+          "value": 192.37767028808594,
+          "valid": true
+        },
+        {
+          "index": 1028031,
+          "value": -289.5990905761719,
+          "valid": true
+        },
+        {
+          "index": 1036222,
+          "value": -896.7327880859375,
+          "valid": true
+        },
+        {
+          "index": 1044413,
+          "value": 231.22906494140625,
+          "valid": true
+        },
+        {
+          "index": 4028,
+          "value": 547.9664916992188,
+          "valid": true
+        }
+      ]
+    },
+    {
+      "file": "lor_0752129617_03613_00001_1x1_sci_03.fit",
+      "sha256": "d2c86f7ed98c4f026c5cd52ed4d4dc7eed54d66b1a4ba95af171ccaaba9373d9",
+      "target": "DINKINESH",
+      "startTime": "2023-11-01T16:54:39.458",
+      "width": 1024,
+      "height": 1024,
+      "exposureSeconds": 0.002,
+      "validPixels": 1046433,
+      "rejectedPixels": 2143,
+      "samples": [
+        {
+          "index": 12347,
+          "value": 635.903564453125,
+          "valid": true
+        },
+        {
+          "index": 20538,
+          "value": 263.4398193359375,
+          "valid": true
+        },
+        {
+          "index": 28729,
+          "value": 686.205810546875,
+          "valid": true
+        },
+        {
+          "index": 36920,
+          "value": -19.573335647583008,
+          "valid": true
+        },
+        {
+          "index": 45111,
+          "value": -178.80975341796875,
+          "valid": true
+        },
+        {
+          "index": 53302,
+          "value": -237.85061645507812,
+          "valid": true
+        },
+        {
+          "index": 61493,
+          "value": -818.0912475585938,
+          "valid": true
+        },
+        {
+          "index": 69684,
+          "value": 195.37066650390625,
+          "valid": true
+        },
+        {
+          "index": 77875,
+          "value": 168.3185577392578,
+          "valid": true
+        },
+        {
+          "index": 86066,
+          "value": 645.1422729492188,
+          "valid": true
+        },
+        {
+          "index": 94257,
+          "value": -323.86651611328125,
+          "valid": true
+        },
+        {
+          "index": 102448,
+          "value": -411.3083190917969,
+          "valid": true
+        },
+        {
+          "index": 110639,
+          "value": -356.7265930175781,
+          "valid": true
+        },
+        {
+          "index": 118830,
+          "value": 761.5094604492188,
+          "valid": true
+        },
+        {
+          "index": 127021,
+          "value": 677.6709594726562,
+          "valid": true
+        },
+        {
+          "index": 135212,
+          "value": -291.9616394042969,
+          "valid": true
+        },
+        {
+          "index": 143403,
+          "value": 157.43739318847656,
+          "valid": true
+        },
+        {
+          "index": 151594,
+          "value": 646.9058227539062,
+          "valid": true
+        },
+        {
+          "index": 159785,
+          "value": -893.0208740234375,
+          "valid": true
+        },
+        {
+          "index": 167976,
+          "value": -440.7720947265625,
+          "valid": true
+        },
+        {
+          "index": 176167,
+          "value": -906.09130859375,
+          "valid": true
+        },
+        {
+          "index": 184358,
+          "value": 260.489013671875,
+          "valid": true
+        },
+        {
+          "index": 192549,
+          "value": 611.0445556640625,
+          "valid": true
+        },
+        {
+          "index": 200740,
+          "value": 647.5575561523438,
+          "valid": true
+        },
+        {
+          "index": 208931,
+          "value": -347.42718505859375,
+          "valid": true
+        },
+        {
+          "index": 217122,
+          "value": -316.9023742675781,
+          "valid": true
+        },
+        {
+          "index": 225313,
+          "value": 225.03041076660156,
+          "valid": true
+        },
+        {
+          "index": 233504,
+          "value": 653.8734741210938,
+          "valid": true
+        },
+        {
+          "index": 241695,
+          "value": 117.94173431396484,
+          "valid": true
+        },
+        {
+          "index": 249886,
+          "value": -363.537841796875,
+          "valid": true
+        },
+        {
+          "index": 258077,
+          "value": 103.46749114990234,
+          "valid": true
+        },
+        {
+          "index": 266268,
+          "value": 681.0631103515625,
+          "valid": true
+        },
+        {
+          "index": 274459,
+          "value": 639.5301513671875,
+          "valid": true
+        },
+        {
+          "index": 282650,
+          "value": 130.47314453125,
+          "valid": true
+        },
+        {
+          "index": 290841,
+          "value": 145.92369079589844,
+          "valid": true
+        },
+        {
+          "index": 299032,
+          "value": 184.76466369628906,
+          "valid": true
+        },
+        {
+          "index": 307223,
+          "value": 107.64157104492188,
+          "valid": true
+        },
+        {
+          "index": 315414,
+          "value": 203.57142639160156,
+          "valid": true
+        },
+        {
+          "index": 323605,
+          "value": 630.2894287109375,
+          "valid": true
+        },
+        {
+          "index": 331796,
+          "value": -284.51702880859375,
+          "valid": true
+        },
+        {
+          "index": 339987,
+          "value": -4.502101898193359,
+          "valid": true
+        },
+        {
+          "index": 348178,
+          "value": 139.39427185058594,
+          "valid": true
+        },
+        {
+          "index": 356369,
+          "value": 638.4755859375,
+          "valid": true
+        },
+        {
+          "index": 364560,
+          "value": 128.52854919433594,
+          "valid": true
+        },
+        {
+          "index": 372751,
+          "value": 204.3693084716797,
+          "valid": true
+        },
+        {
+          "index": 380942,
+          "value": 620.203125,
+          "valid": true
+        },
+        {
+          "index": 389133,
+          "value": -319.45111083984375,
+          "valid": true
+        },
+        {
+          "index": 397324,
+          "value": 167.2987823486328,
+          "valid": true
+        },
+        {
+          "index": 405515,
+          "value": -367.0742492675781,
+          "valid": true
+        },
+        {
+          "index": 413706,
+          "value": 14.109464645385742,
+          "valid": true
+        },
+        {
+          "index": 421897,
+          "value": -261.8921203613281,
+          "valid": true
+        },
+        {
+          "index": 430088,
+          "value": 157.66497802734375,
+          "valid": true
+        },
+        {
+          "index": 438279,
+          "value": -340.5144958496094,
+          "valid": true
+        },
+        {
+          "index": 446470,
+          "value": 138.82196044921875,
+          "valid": true
+        },
+        {
+          "index": 454661,
+          "value": 734.8715209960938,
+          "valid": true
+        },
+        {
+          "index": 462852,
+          "value": 156.24049377441406,
+          "valid": true
+        },
+        {
+          "index": 471043,
+          "value": 304.4179992675781,
+          "valid": true
+        },
+        {
+          "index": 479234,
+          "value": 300.79534912109375,
+          "valid": true
+        },
+        {
+          "index": 487425,
+          "value": 353.84539794921875,
+          "valid": true
+        },
+        {
+          "index": 495616,
+          "value": 737.620849609375,
+          "valid": true
+        },
+        {
+          "index": 503807,
+          "value": -6.252647399902344,
+          "valid": true
+        },
+        {
+          "index": 511998,
+          "value": 477.77752685546875,
+          "valid": true
+        },
+        {
+          "index": 520189,
+          "value": -592.6764526367188,
+          "valid": true
+        },
+        {
+          "index": 528380,
+          "value": -101.99177551269531,
+          "valid": true
+        },
+        {
+          "index": 536571,
+          "value": -663.0189819335938,
+          "valid": true
+        },
+        {
+          "index": 544762,
+          "value": -646.0667114257812,
+          "valid": true
+        },
+        {
+          "index": 552953,
+          "value": -130.6124267578125,
+          "valid": true
+        },
+        {
+          "index": 561144,
+          "value": 400.90777587890625,
+          "valid": true
+        },
+        {
+          "index": 569335,
+          "value": -122.80567169189453,
+          "valid": true
+        },
+        {
+          "index": 577526,
+          "value": -91.66614532470703,
+          "valid": true
+        },
+        {
+          "index": 585717,
+          "value": 865.4639282226562,
+          "valid": true
+        },
+        {
+          "index": 593908,
+          "value": 835.846435546875,
+          "valid": true
+        },
+        {
+          "index": 602099,
+          "value": -637.5072021484375,
+          "valid": true
+        },
+        {
+          "index": 610290,
+          "value": 315.4659423828125,
+          "valid": true
+        },
+        {
+          "index": 618481,
+          "value": 1408.4998779296875,
+          "valid": true
+        },
+        {
+          "index": 626672,
+          "value": 924.7105102539062,
+          "valid": true
+        },
+        {
+          "index": 634863,
+          "value": -663.1063842773438,
+          "valid": true
+        },
+        {
+          "index": 643054,
+          "value": -131.79296875,
+          "valid": true
+        },
+        {
+          "index": 651245,
+          "value": 915.9013671875,
+          "valid": true
+        },
+        {
+          "index": 659436,
+          "value": -139.85916137695312,
+          "valid": true
+        },
+        {
+          "index": 667627,
+          "value": -201.67236328125,
+          "valid": true
+        },
+        {
+          "index": 675818,
+          "value": -97.79422760009766,
+          "valid": true
+        },
+        {
+          "index": 684009,
+          "value": 301.43890380859375,
+          "valid": true
+        },
+        {
+          "index": 692200,
+          "value": 342.453125,
+          "valid": true
+        },
+        {
+          "index": 700391,
+          "value": -244.02943420410156,
+          "valid": true
+        },
+        {
+          "index": 708582,
+          "value": -174.1652374267578,
+          "valid": true
+        },
+        {
+          "index": 716773,
+          "value": 361.4746398925781,
+          "valid": true
+        },
+        {
+          "index": 724964,
+          "value": 275.14093017578125,
+          "valid": true
+        },
+        {
+          "index": 733155,
+          "value": -174.14483642578125,
+          "valid": true
+        },
+        {
+          "index": 741346,
+          "value": -684.5288696289062,
+          "valid": true
+        },
+        {
+          "index": 749537,
+          "value": 272.60565185546875,
+          "valid": true
+        },
+        {
+          "index": 757728,
+          "value": -193.9003448486328,
+          "valid": true
+        },
+        {
+          "index": 765919,
+          "value": -122.32260131835938,
+          "valid": true
+        },
+        {
+          "index": 774110,
+          "value": -731.025390625,
+          "valid": true
+        },
+        {
+          "index": 782301,
+          "value": 270.3536376953125,
+          "valid": true
+        },
+        {
+          "index": 790492,
+          "value": -180.47348022460938,
+          "valid": true
+        },
+        {
+          "index": 798683,
+          "value": 249.9178466796875,
+          "valid": true
+        },
+        {
+          "index": 806874,
+          "value": -239.51287841796875,
+          "valid": true
+        },
+        {
+          "index": 815065,
+          "value": 771.623046875,
+          "valid": true
+        },
+        {
+          "index": 823256,
+          "value": 293.0317687988281,
+          "valid": true
+        },
+        {
+          "index": 831447,
+          "value": 774.70849609375,
+          "valid": true
+        },
+        {
+          "index": 839638,
+          "value": 722.6538696289062,
+          "valid": true
+        },
+        {
+          "index": 847829,
+          "value": -236.6898956298828,
+          "valid": true
+        },
+        {
+          "index": 856020,
+          "value": -254.3305206298828,
+          "valid": true
+        },
+        {
+          "index": 864211,
+          "value": -785.1492309570312,
+          "valid": true
+        },
+        {
+          "index": 872402,
+          "value": 223.55447387695312,
+          "valid": true
+        },
+        {
+          "index": 880593,
+          "value": 184.1334991455078,
+          "valid": true
+        },
+        {
+          "index": 888784,
+          "value": 801.3656005859375,
+          "valid": true
+        },
+        {
+          "index": 896975,
+          "value": -292.1947021484375,
+          "valid": true
+        },
+        {
+          "index": 905166,
+          "value": 711.8167114257812,
+          "valid": true
+        },
+        {
+          "index": 913357,
+          "value": -292.98175048828125,
+          "valid": true
+        },
+        {
+          "index": 921548,
+          "value": -295.5360107421875,
+          "valid": true
+        },
+        {
+          "index": 929739,
+          "value": -230.0444793701172,
+          "valid": true
+        },
+        {
+          "index": 937930,
+          "value": 641.2014770507812,
+          "valid": true
+        },
+        {
+          "index": 946121,
+          "value": 632.5696411132812,
+          "valid": true
+        },
+        {
+          "index": 954312,
+          "value": 653.701171875,
+          "valid": true
+        },
+        {
+          "index": 962503,
+          "value": 747.035400390625,
+          "valid": true
+        },
+        {
+          "index": 970694,
+          "value": 663.6212768554688,
+          "valid": true
+        },
+        {
+          "index": 978885,
+          "value": 678.2040405273438,
+          "valid": true
+        },
+        {
+          "index": 987076,
+          "value": -385.36236572265625,
+          "valid": true
+        },
+        {
+          "index": 995267,
+          "value": 654.1713256835938,
+          "valid": true
+        },
+        {
+          "index": 1003458,
+          "value": 1224.237060546875,
+          "valid": true
+        },
+        {
+          "index": 1011649,
+          "value": 711.9551391601562,
+          "valid": true
+        },
+        {
+          "index": 1019840,
+          "value": 1128.611328125,
+          "valid": true
+        },
+        {
+          "index": 1028031,
+          "value": 163.480712890625,
+          "valid": true
+        },
+        {
+          "index": 1036222,
+          "value": 73.02886962890625,
+          "valid": true
+        },
+        {
+          "index": 1044413,
+          "value": 1169.523193359375,
+          "valid": true
+        },
+        {
+          "index": 4028,
+          "value": 953.86328125,
+          "valid": true
+        }
+      ]
+    },
+    {
+      "file": "lor_0752129632_03616_00001_1x1_sci_03.fit",
+      "sha256": "b641b416917d084b57a48ed56df15ccce053e58cd6802e558ae1e04d6b684127",
+      "target": "DINKINESH",
+      "startTime": "2023-11-01T16:54:54.459",
+      "width": 1024,
+      "height": 1024,
+      "exposureSeconds": 0.002,
+      "validPixels": 1046433,
+      "rejectedPixels": 2143,
+      "samples": [
+        {
+          "index": 12347,
+          "value": 473.7387390136719,
+          "valid": true
+        },
+        {
+          "index": 20538,
+          "value": 87.71531677246094,
+          "valid": true
+        },
+        {
+          "index": 28729,
+          "value": 38.86688232421875,
+          "valid": true
+        },
+        {
+          "index": 36920,
+          "value": 351.03228759765625,
+          "valid": true
+        },
+        {
+          "index": 45111,
+          "value": 182.33975219726562,
+          "valid": true
+        },
+        {
+          "index": 53302,
+          "value": -420.603271484375,
+          "valid": true
+        },
+        {
+          "index": 61493,
+          "value": -478.8282470703125,
+          "valid": true
+        },
+        {
+          "index": 69684,
+          "value": -471.4477233886719,
+          "valid": true
+        },
+        {
+          "index": 77875,
+          "value": 1009.9808959960938,
+          "valid": true
+        },
+        {
+          "index": 86066,
+          "value": -519.1262817382812,
+          "valid": true
+        },
+        {
+          "index": 94257,
+          "value": 548.8568115234375,
+          "valid": true
+        },
+        {
+          "index": 102448,
+          "value": 454.1789855957031,
+          "valid": true
+        },
+        {
+          "index": 110639,
+          "value": 545.57275390625,
+          "valid": true
+        },
+        {
+          "index": 118830,
+          "value": -444.4805603027344,
+          "valid": true
+        },
+        {
+          "index": 127021,
+          "value": 542.9315185546875,
+          "valid": true
+        },
+        {
+          "index": 135212,
+          "value": -451.2461242675781,
+          "valid": true
+        },
+        {
+          "index": 143403,
+          "value": -6.177019119262695,
+          "valid": true
+        },
+        {
+          "index": 151594,
+          "value": 448.3116760253906,
+          "valid": true
+        },
+        {
+          "index": 159785,
+          "value": 468.0404357910156,
+          "valid": true
+        },
+        {
+          "index": 167976,
+          "value": 407.6894226074219,
+          "valid": true
+        },
+        {
+          "index": 176167,
+          "value": 473.024169921875,
+          "valid": true
+        },
+        {
+          "index": 184358,
+          "value": 594.1409301757812,
+          "valid": true
+        },
+        {
+          "index": 192549,
+          "value": -47.537811279296875,
+          "valid": true
+        },
+        {
+          "index": 200740,
+          "value": 1020.833251953125,
+          "valid": true
+        },
+        {
+          "index": 208931,
+          "value": 1.1155424118041992,
+          "valid": true
+        },
+        {
+          "index": 217122,
+          "value": 46.88789749145508,
+          "valid": true
+        },
+        {
+          "index": 225313,
+          "value": 576.4812622070312,
+          "valid": true
+        },
+        {
+          "index": 233504,
+          "value": 537.7496337890625,
+          "valid": true
+        },
+        {
+          "index": 241695,
+          "value": -52.39460372924805,
+          "valid": true
+        },
+        {
+          "index": 249886,
+          "value": 2.721189022064209,
+          "valid": true
+        },
+        {
+          "index": 258077,
+          "value": -43.964874267578125,
+          "valid": true
+        },
+        {
+          "index": 266268,
+          "value": 545.853271484375,
+          "valid": true
+        },
+        {
+          "index": 274459,
+          "value": -569.7137451171875,
+          "valid": true
+        },
+        {
+          "index": 282650,
+          "value": -508.9359130859375,
+          "valid": true
+        },
+        {
+          "index": 290841,
+          "value": -12.59814167022705,
+          "valid": true
+        },
+        {
+          "index": 299032,
+          "value": 18.920991897583008,
+          "valid": true
+        },
+        {
+          "index": 307223,
+          "value": -1042.484375,
+          "valid": true
+        },
+        {
+          "index": 315414,
+          "value": 1046.388427734375,
+          "valid": true
+        },
+        {
+          "index": 323605,
+          "value": -559.9929809570312,
+          "valid": true
+        },
+        {
+          "index": 331796,
+          "value": 603.5352172851562,
+          "valid": true
+        },
+        {
+          "index": 339987,
+          "value": -138.98977661132812,
+          "valid": true
+        },
+        {
+          "index": 348178,
+          "value": 490.6788330078125,
+          "valid": true
+        },
+        {
+          "index": 356369,
+          "value": 493.5934753417969,
+          "valid": true
+        },
+        {
+          "index": 364560,
+          "value": 513.7425537109375,
+          "valid": true
+        },
+        {
+          "index": 372751,
+          "value": 593.4440307617188,
+          "valid": true
+        },
+        {
+          "index": 380942,
+          "value": 41.276859283447266,
+          "valid": true
+        },
+        {
+          "index": 389133,
+          "value": 511.927734375,
+          "valid": true
+        },
+        {
+          "index": 397324,
+          "value": 27.783384323120117,
+          "valid": true
+        },
+        {
+          "index": 405515,
+          "value": 1528.651611328125,
+          "valid": true
+        },
+        {
+          "index": 413706,
+          "value": 917.9170532226562,
+          "valid": true
+        },
+        {
+          "index": 421897,
+          "value": 71.40376281738281,
+          "valid": true
+        },
+        {
+          "index": 430088,
+          "value": -8.912799835205078,
+          "valid": true
+        },
+        {
+          "index": 438279,
+          "value": 1034.05712890625,
+          "valid": true
+        },
+        {
+          "index": 446470,
+          "value": 31.96829605102539,
+          "valid": true
+        },
+        {
+          "index": 454661,
+          "value": 585.372802734375,
+          "valid": true
+        },
+        {
+          "index": 462852,
+          "value": 533.1773071289062,
+          "valid": true
+        },
+        {
+          "index": 471043,
+          "value": 142.8615264892578,
+          "valid": true
+        },
+        {
+          "index": 479234,
+          "value": 155.95431518554688,
+          "valid": true
+        },
+        {
+          "index": 487425,
+          "value": -299.57965087890625,
+          "valid": true
+        },
+        {
+          "index": 495616,
+          "value": -0.7005135416984558,
+          "valid": true
+        },
+        {
+          "index": 503807,
+          "value": 448.78216552734375,
+          "valid": true
+        },
+        {
+          "index": 511998,
+          "value": 919.1836547851562,
+          "valid": true
+        },
+        {
+          "index": 520189,
+          "value": -170.58302307128906,
+          "valid": true
+        },
+        {
+          "index": 528380,
+          "value": 799.4752807617188,
+          "valid": true
+        },
+        {
+          "index": 536571,
+          "value": -236.32180786132812,
+          "valid": true
+        },
+        {
+          "index": 544762,
+          "value": -224.47132873535156,
+          "valid": true
+        },
+        {
+          "index": 552953,
+          "value": -187.1404571533203,
+          "valid": true
+        },
+        {
+          "index": 561144,
+          "value": 311.3282775878906,
+          "valid": true
+        },
+        {
+          "index": 569335,
+          "value": 320.45404052734375,
+          "valid": true
+        },
+        {
+          "index": 577526,
+          "value": 804.34228515625,
+          "valid": true
+        },
+        {
+          "index": 585717,
+          "value": 828.0848388671875,
+          "valid": true
+        },
+        {
+          "index": 593908,
+          "value": 792.4924926757812,
+          "valid": true
+        },
+        {
+          "index": 602099,
+          "value": 335.2307434082031,
+          "valid": true
+        },
+        {
+          "index": 610290,
+          "value": 1261.1651611328125,
+          "valid": true
+        },
+        {
+          "index": 618481,
+          "value": -135.7037353515625,
+          "valid": true
+        },
+        {
+          "index": 626672,
+          "value": 339.3388671875,
+          "valid": true
+        },
+        {
+          "index": 634863,
+          "value": 291.6846618652344,
+          "valid": true
+        },
+        {
+          "index": 643054,
+          "value": 301.3131103515625,
+          "valid": true
+        },
+        {
+          "index": 651245,
+          "value": -116.53489685058594,
+          "valid": true
+        },
+        {
+          "index": 659436,
+          "value": 295.6635437011719,
+          "valid": true
+        },
+        {
+          "index": 667627,
+          "value": -249.39767456054688,
+          "valid": true
+        },
+        {
+          "index": 675818,
+          "value": -145.37608337402344,
+          "valid": true
+        },
+        {
+          "index": 684009,
+          "value": 246.06723022460938,
+          "valid": true
+        },
+        {
+          "index": 692200,
+          "value": 770.8914184570312,
+          "valid": true
+        },
+        {
+          "index": 700391,
+          "value": -309.4224548339844,
+          "valid": true
+        },
+        {
+          "index": 708582,
+          "value": 1267.182861328125,
+          "valid": true
+        },
+        {
+          "index": 716773,
+          "value": 257.2063293457031,
+          "valid": true
+        },
+        {
+          "index": 724964,
+          "value": -276.5927429199219,
+          "valid": true
+        },
+        {
+          "index": 733155,
+          "value": -228.84902954101562,
+          "valid": true
+        },
+        {
+          "index": 741346,
+          "value": 244.19149780273438,
+          "valid": true
+        },
+        {
+          "index": 749537,
+          "value": 1206.09912109375,
+          "valid": true
+        },
+        {
+          "index": 757728,
+          "value": -232.86614990234375,
+          "valid": true
+        },
+        {
+          "index": 765919,
+          "value": -180.79052734375,
+          "valid": true
+        },
+        {
+          "index": 774110,
+          "value": 1201.037353515625,
+          "valid": true
+        },
+        {
+          "index": 782301,
+          "value": -771.738525390625,
+          "valid": true
+        },
+        {
+          "index": 790492,
+          "value": 779.86376953125,
+          "valid": true
+        },
+        {
+          "index": 798683,
+          "value": 185.07798767089844,
+          "valid": true
+        },
+        {
+          "index": 806874,
+          "value": 706.193603515625,
+          "valid": true
+        },
+        {
+          "index": 815065,
+          "value": -298.6629638671875,
+          "valid": true
+        },
+        {
+          "index": 823256,
+          "value": 1233.230224609375,
+          "valid": true
+        },
+        {
+          "index": 831447,
+          "value": 220.20411682128906,
+          "valid": true
+        },
+        {
+          "index": 839638,
+          "value": 1164.40478515625,
+          "valid": true
+        },
+        {
+          "index": 847829,
+          "value": 667.1727294921875,
+          "valid": true
+        },
+        {
+          "index": 856020,
+          "value": 672.4208374023438,
+          "valid": true
+        },
+        {
+          "index": 864211,
+          "value": -333.1313171386719,
+          "valid": true
+        },
+        {
+          "index": 872402,
+          "value": 1193.4786376953125,
+          "valid": true
+        },
+        {
+          "index": 880593,
+          "value": 100.74542236328125,
+          "valid": true
+        },
+        {
+          "index": 888784,
+          "value": 740.2694702148438,
+          "valid": true
+        },
+        {
+          "index": 896975,
+          "value": 134.92108154296875,
+          "valid": true
+        },
+        {
+          "index": 905166,
+          "value": 146.71844482421875,
+          "valid": true
+        },
+        {
+          "index": 913357,
+          "value": 600.0061645507812,
+          "valid": true
+        },
+        {
+          "index": 921548,
+          "value": 113.22703552246094,
+          "valid": true
+        },
+        {
+          "index": 929739,
+          "value": 713.7728881835938,
+          "valid": true
+        },
+        {
+          "index": 937930,
+          "value": 104.93766021728516,
+          "valid": true
+        },
+        {
+          "index": 946121,
+          "value": 59.481937408447266,
+          "valid": true
+        },
+        {
+          "index": 954312,
+          "value": 603.3489379882812,
+          "valid": true
+        },
+        {
+          "index": 962503,
+          "value": 170.1338348388672,
+          "valid": true
+        },
+        {
+          "index": 970694,
+          "value": -435.4130859375,
+          "valid": true
+        },
+        {
+          "index": 978885,
+          "value": 95.49128723144531,
+          "valid": true
+        },
+        {
+          "index": 987076,
+          "value": 1003.49462890625,
+          "valid": true
+        },
+        {
+          "index": 995267,
+          "value": 607.7644653320312,
+          "valid": true
+        },
+        {
+          "index": 1003458,
+          "value": 84.9454345703125,
+          "valid": true
+        },
+        {
+          "index": 1011649,
+          "value": -353.41424560546875,
+          "valid": true
+        },
+        {
+          "index": 1019840,
+          "value": 559.697021484375,
+          "valid": true
+        },
+        {
+          "index": 1028031,
+          "value": 584.9651489257812,
+          "valid": true
+        },
+        {
+          "index": 1036222,
+          "value": 15.413980484008789,
+          "valid": true
+        },
+        {
+          "index": 1044413,
+          "value": -446.75604248046875,
+          "valid": true
+        },
+        {
+          "index": 4028,
+          "value": 896.7478637695312,
+          "valid": true
+        }
+      ]
+    },
+    {
+      "file": "lor_0752129722_03634_00001_1x1_sci_03.fit",
+      "sha256": "e18abca430f3ef8109d529f98cb14cd3c21b91f9776569ad325ee8cb48bf0dda",
+      "target": "DINKINESH",
+      "startTime": "2023-11-01T16:56:24.459",
+      "width": 1024,
+      "height": 1024,
+      "exposureSeconds": 0.002,
+      "validPixels": 1046433,
+      "rejectedPixels": 2143,
+      "samples": [
+        {
+          "index": 12347,
+          "value": -228.1075897216797,
+          "valid": true
+        },
+        {
+          "index": 20538,
+          "value": 374.6006774902344,
+          "valid": true
+        },
+        {
+          "index": 28729,
+          "value": -175.0623321533203,
+          "valid": true
+        },
+        {
+          "index": 36920,
+          "value": 614.6322631835938,
+          "valid": true
+        },
+        {
+          "index": 45111,
+          "value": 450.9719543457031,
+          "valid": true
+        },
+        {
+          "index": 53302,
+          "value": 849.26220703125,
+          "valid": true
+        },
+        {
+          "index": 61493,
+          "value": 294.593017578125,
+          "valid": true
+        },
+        {
+          "index": 69684,
+          "value": -200.33856201171875,
+          "valid": true
+        },
+        {
+          "index": 77875,
+          "value": 300.41253662109375,
+          "valid": true
+        },
+        {
+          "index": 86066,
+          "value": 254.57281494140625,
+          "valid": true
+        },
+        {
+          "index": 94257,
+          "value": 1310.7684326171875,
+          "valid": true
+        },
+        {
+          "index": 102448,
+          "value": 200.91647338867188,
+          "valid": true
+        },
+        {
+          "index": 110639,
+          "value": 805.9797973632812,
+          "valid": true
+        },
+        {
+          "index": 118830,
+          "value": 372.23626708984375,
+          "valid": true
+        },
+        {
+          "index": 127021,
+          "value": 803.9310913085938,
+          "valid": true
+        },
+        {
+          "index": 135212,
+          "value": -219.42469787597656,
+          "valid": true
+        },
+        {
+          "index": 143403,
+          "value": 252.37759399414062,
+          "valid": true
+        },
+        {
+          "index": 151594,
+          "value": 241.16758728027344,
+          "valid": true
+        },
+        {
+          "index": 159785,
+          "value": -787.4158935546875,
+          "valid": true
+        },
+        {
+          "index": 167976,
+          "value": 174.0166473388672,
+          "valid": true
+        },
+        {
+          "index": 176167,
+          "value": 230.03201293945312,
+          "valid": true
+        },
+        {
+          "index": 184358,
+          "value": 857.8737182617188,
+          "valid": true
+        },
+        {
+          "index": 192549,
+          "value": -269.0142517089844,
+          "valid": true
+        },
+        {
+          "index": 200740,
+          "value": -261.4302978515625,
+          "valid": true
+        },
+        {
+          "index": 208931,
+          "value": 268.01580810546875,
+          "valid": true
+        },
+        {
+          "index": 217122,
+          "value": 316.2106018066406,
+          "valid": true
+        },
+        {
+          "index": 225313,
+          "value": -173.33517456054688,
+          "valid": true
+        },
+        {
+          "index": 233504,
+          "value": -760.3019409179688,
+          "valid": true
+        },
+        {
+          "index": 241695,
+          "value": -307.4246520996094,
+          "valid": true
+        },
+        {
+          "index": 249886,
+          "value": 253.8121337890625,
+          "valid": true
+        },
+        {
+          "index": 258077,
+          "value": -289.4317932128906,
+          "valid": true
+        },
+        {
+          "index": 266268,
+          "value": 780.9214477539062,
+          "valid": true
+        },
+        {
+          "index": 274459,
+          "value": 196.88282775878906,
+          "valid": true
+        },
+        {
+          "index": 282650,
+          "value": 220.67388916015625,
+          "valid": true
+        },
+        {
+          "index": 290841,
+          "value": 735.9931030273438,
+          "valid": true
+        },
+        {
+          "index": 299032,
+          "value": 245.0894012451172,
+          "valid": true
+        },
+        {
+          "index": 307223,
+          "value": 174.78257751464844,
+          "valid": true
+        },
+        {
+          "index": 315414,
+          "value": 805.9131469726562,
+          "valid": true
+        },
+        {
+          "index": 323605,
+          "value": -323.93402099609375,
+          "valid": true
+        },
+        {
+          "index": 331796,
+          "value": 811.0852661132812,
+          "valid": true
+        },
+        {
+          "index": 339987,
+          "value": 104.99586486816406,
+          "valid": true
+        },
+        {
+          "index": 348178,
+          "value": -757.708740234375,
+          "valid": true
+        },
+        {
+          "index": 356369,
+          "value": 748.5796508789062,
+          "valid": true
+        },
+        {
+          "index": 364560,
+          "value": 221.88619995117188,
+          "valid": true
+        },
+        {
+          "index": 372751,
+          "value": -201.32493591308594,
+          "valid": true
+        },
+        {
+          "index": 380942,
+          "value": -261.92108154296875,
+          "valid": true
+        },
+        {
+          "index": 389133,
+          "value": 246.90765380859375,
+          "valid": true
+        },
+        {
+          "index": 397324,
+          "value": 273.25714111328125,
+          "valid": true
+        },
+        {
+          "index": 405515,
+          "value": 738.4990844726562,
+          "valid": true
+        },
+        {
+          "index": 413706,
+          "value": 98.6618881225586,
+          "valid": true
+        },
+        {
+          "index": 421897,
+          "value": 283.6797180175781,
+          "valid": true
+        },
+        {
+          "index": 430088,
+          "value": -286.5669860839844,
+          "valid": true
+        },
+        {
+          "index": 438279,
+          "value": -270.22967529296875,
+          "valid": true
+        },
+        {
+          "index": 446470,
+          "value": 243.16139221191406,
+          "valid": true
+        },
+        {
+          "index": 454661,
+          "value": 325.4435729980469,
+          "valid": true
+        },
+        {
+          "index": 462852,
+          "value": -239.8199920654297,
+          "valid": true
+        },
+        {
+          "index": 471043,
+          "value": -691.2094116210938,
+          "valid": true
+        },
+        {
+          "index": 479234,
+          "value": 388.67169189453125,
+          "valid": true
+        },
+        {
+          "index": 487425,
+          "value": 447.8042297363281,
+          "valid": true
+        },
+        {
+          "index": 495616,
+          "value": 207.43678283691406,
+          "valid": true
+        },
+        {
+          "index": 503807,
+          "value": -281.783935546875,
+          "valid": true
+        },
+        {
+          "index": 511998,
+          "value": 250.31509399414062,
+          "valid": true
+        },
+        {
+          "index": 520189,
+          "value": -344.103271484375,
+          "valid": true
+        },
+        {
+          "index": 528380,
+          "value": 656.0936279296875,
+          "valid": true
+        },
+        {
+          "index": 536571,
+          "value": 118.24510192871094,
+          "valid": true
+        },
+        {
+          "index": 544762,
+          "value": -372.4887390136719,
+          "valid": true
+        },
+        {
+          "index": 552953,
+          "value": -353.2314453125,
+          "valid": true
+        },
+        {
+          "index": 561144,
+          "value": -289.3280029296875,
+          "valid": true
+        },
+        {
+          "index": 569335,
+          "value": 690.39404296875,
+          "valid": true
+        },
+        {
+          "index": 577526,
+          "value": -321.993896484375,
+          "valid": true
+        },
+        {
+          "index": 585717,
+          "value": 188.4241943359375,
+          "valid": true
+        },
+        {
+          "index": 593908,
+          "value": 155.07888793945312,
+          "valid": true
+        },
+        {
+          "index": 602099,
+          "value": 185.48843383789062,
+          "valid": true
+        },
+        {
+          "index": 610290,
+          "value": 121.15760040283203,
+          "valid": true
+        },
+        {
+          "index": 618481,
+          "value": -270.0621032714844,
+          "valid": true
+        },
+        {
+          "index": 626672,
+          "value": 225.4850616455078,
+          "valid": true
+        },
+        {
+          "index": 634863,
+          "value": -329.2945251464844,
+          "valid": true
+        },
+        {
+          "index": 643054,
+          "value": 187.98831176757812,
+          "valid": true
+        },
+        {
+          "index": 651245,
+          "value": -225.5054473876953,
+          "valid": true
+        },
+        {
+          "index": 659436,
+          "value": 653.0889892578125,
+          "valid": true
+        },
+        {
+          "index": 667627,
+          "value": 144.70420837402344,
+          "valid": true
+        },
+        {
+          "index": 675818,
+          "value": -263.2799377441406,
+          "valid": true
+        },
+        {
+          "index": 684009,
+          "value": 625.41748046875,
+          "valid": true
+        },
+        {
+          "index": 692200,
+          "value": 1184.844970703125,
+          "valid": true
+        },
+        {
+          "index": 700391,
+          "value": 96.44701385498047,
+          "valid": true
+        },
+        {
+          "index": 708582,
+          "value": 163.97723388671875,
+          "valid": true
+        },
+        {
+          "index": 716773,
+          "value": 200.79119873046875,
+          "valid": true
+        },
+        {
+          "index": 724964,
+          "value": 112.77771759033203,
+          "valid": true
+        },
+        {
+          "index": 733155,
+          "value": -828.1979370117188,
+          "valid": true
+        },
+        {
+          "index": 741346,
+          "value": 655.9199829101562,
+          "valid": true
+        },
+        {
+          "index": 749537,
+          "value": 84.85062408447266,
+          "valid": true
+        },
+        {
+          "index": 757728,
+          "value": 676.01904296875,
+          "valid": true
+        },
+        {
+          "index": 765919,
+          "value": 240.0596923828125,
+          "valid": true
+        },
+        {
+          "index": 774110,
+          "value": 172.47984313964844,
+          "valid": true
+        },
+        {
+          "index": 782301,
+          "value": 659.7967529296875,
+          "valid": true
+        },
+        {
+          "index": 790492,
+          "value": 207.4936981201172,
+          "valid": true
+        },
+        {
+          "index": 798683,
+          "value": 136.74435424804688,
+          "valid": true
+        },
+        {
+          "index": 806874,
+          "value": 151.6316680908203,
+          "valid": true
+        },
+        {
+          "index": 815065,
+          "value": 643.3718872070312,
+          "valid": true
+        },
+        {
+          "index": 823256,
+          "value": -319.95947265625,
+          "valid": true
+        },
+        {
+          "index": 831447,
+          "value": 175.19871520996094,
+          "valid": true
+        },
+        {
+          "index": 839638,
+          "value": 76.01591491699219,
+          "valid": true
+        },
+        {
+          "index": 847829,
+          "value": -382.5572814941406,
+          "valid": true
+        },
+        {
+          "index": 856020,
+          "value": -384.007080078125,
+          "valid": true
+        },
+        {
+          "index": 864211,
+          "value": 1122.2962646484375,
+          "valid": true
+        },
+        {
+          "index": 872402,
+          "value": 117.4006118774414,
+          "valid": true
+        },
+        {
+          "index": 880593,
+          "value": 1109.990478515625,
+          "valid": true
+        },
+        {
+          "index": 888784,
+          "value": 717.254150390625,
+          "valid": true
+        },
+        {
+          "index": 896975,
+          "value": 144.9149169921875,
+          "valid": true
+        },
+        {
+          "index": 905166,
+          "value": 159.6595458984375,
+          "valid": true
+        },
+        {
+          "index": 913357,
+          "value": 123.35460662841797,
+          "valid": true
+        },
+        {
+          "index": 921548,
+          "value": 149.44534301757812,
+          "valid": true
+        },
+        {
+          "index": 929739,
+          "value": 703.5700073242188,
+          "valid": true
+        },
+        {
+          "index": 937930,
+          "value": 605.183837890625,
+          "valid": true
+        },
+        {
+          "index": 946121,
+          "value": 76.19283294677734,
+          "valid": true
+        },
+        {
+          "index": 954312,
+          "value": -407.2017822265625,
+          "valid": true
+        },
+        {
+          "index": 962503,
+          "value": 677.2001953125,
+          "valid": true
+        },
+        {
+          "index": 970694,
+          "value": 124.93464660644531,
+          "valid": true
+        },
+        {
+          "index": 978885,
+          "value": -922.9201049804688,
+          "valid": true
+        },
+        {
+          "index": 987076,
+          "value": 53.7291145324707,
+          "valid": true
+        },
+        {
+          "index": 995267,
+          "value": 117.83326721191406,
+          "valid": true
+        },
+        {
+          "index": 1003458,
+          "value": 131.10304260253906,
+          "valid": true
+        },
+        {
+          "index": 1011649,
+          "value": 190.5704803466797,
+          "valid": true
+        },
+        {
+          "index": 1019840,
+          "value": 96.42334747314453,
+          "valid": true
+        },
+        {
+          "index": 1028031,
+          "value": 635.7060546875,
+          "valid": true
+        },
+        {
+          "index": 1036222,
+          "value": 64.44747161865234,
+          "valid": true
+        },
+        {
+          "index": 1044413,
+          "value": 133.3146209716797,
+          "valid": true
+        },
+        {
+          "index": 4028,
+          "value": 1464.41748046875,
+          "valid": true
+        }
+      ]
+    }
+  ]
+}

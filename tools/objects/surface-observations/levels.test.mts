@@ -7,7 +7,7 @@ import { validateSurfaceObservation, loadSurfaceObservation } from './index.mts'
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
-const policy = { minimumPairs: 64, maximumLogMad: .25, maximumGain: 1.35 };
+const policy = { minimumPairs: 64, maximumGain: 1.35 };
 const sample = (radiance: number, maximumEmissionDegrees = 30) => ({ radiance, maximumEmissionDegrees });
 
 test('calibration withholds steep-angle pairs without changing displayed source eligibility', () => {
@@ -19,7 +19,9 @@ test('calibration withholds steep-angle pairs without changing displayed source 
   assert.ok(Math.abs(fit.gains[1] - 1.1) < 1e-12);
   assert.deepEqual([a, b], before);
   assert.equal(selectObservation([a[150], b[150]]), 0);
-  assert.throws(() => fitObservationLevels([a.map(s => ({ ...s, maximumIncidenceDegrees: NaN })), b], { ...policy, maximumAngleDegrees: 70 }), /connect/);
+  // With every pair withheld, each frame keeps its own level.
+  const unlevelled = fitObservationLevels([a.map(s => ({ ...s, maximumIncidenceDegrees: NaN })), b], { ...policy, maximumAngleDegrees: 70 });
+  assert.deepEqual(unlevelled.gains, [1, 1]); assert.deepEqual(unlevelled.groups, [[0], [1]]);
 });
 
 test('robust overlap fit recovers connected source scales despite missing pairs and outliers', () => {
@@ -62,8 +64,13 @@ test('each archived-camera mosaic frame verifies its original source closure bef
   assert.equal(checked, true);
 });
 
-test('level matching rejects disconnected overlaps and excessive brightness gains', () => {
-  assert.throws(() => fitObservationLevels([Array(100).fill(sample(1)), Array(100).fill({ reason: 'missing' })], policy), /connect/);
+test('level matching keeps unconnected frames at their own level, accepts precise overlaps and rejects excessive gains', () => {
+  const unconnected = fitObservationLevels([Array(100).fill(sample(1)), Array(100).fill({ reason: 'missing' })], policy);
+  assert.deepEqual(unconnected.gains, [1, 1]); assert.deepEqual(unconnected.groups, [[0], [1]]);
+  // Overlaps that scatter by a log spread of 0.4 around one 1.2 level ratio: many samples know the level, few do not.
+  const scattered = (n: number) => [Array.from({ length: n }, () => sample(1)), Array.from({ length: n }, (_, i) => sample(Math.exp([-.4, 0, .4][i % 3]) / 1.2))];
+  assert.ok(Math.abs(fitObservationLevels(scattered(999), policy).gains[1] - 1.2) < 1e-12);
+  assert.deepEqual(fitObservationLevels(scattered(99), policy).groups, [[0], [1]]);
   assert.throws(() => fitObservationLevels([Array(100).fill(sample(1)), Array(100).fill(sample(.1))], policy), /budget/);
 });
 

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c54fcb3596221f809c93ba81be80e97ca647abf58ede677f50b257ed5c05426b"
+          "sha256": "8f20eb44f1a5e8f374d782ecedd397fa04725ccdca18226d98c88325cc9a57e8"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c2eb9930c3af6c5fb3744738157a41d355f8b9e773eff3a060919895b7aa7130"
+        "sha256": "4496ef349b1dbd98e2a0d7d550851555a476ecda33b06c3e8236ad41006da5d5"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7660737949851626,
-      "description": "Explore Thisbe in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in June 1866.",
       "systemName": "Solar System",
       "order": 171,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "088ee5c75aee5ae8d6412d6e098971875ec63e7516607100f88c952513d45053"
+    "sha256": "3310a9b3801575a7de3d15411b9d9d87a560d6e5e016ca85c28ca64cee32e7cb"
   }
 }

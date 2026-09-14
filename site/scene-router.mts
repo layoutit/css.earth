@@ -23,7 +23,7 @@ import { mountPlanetShell } from "./planet-shell-client.mts";
 import { automaticPlaybackPolicy } from "./runtime-policy.mts";
 import { createSceneLifetime } from "@cssearth/engine";
 import { bindViewUrl } from "./view-url-runtime.mts";
-import { OBJECTS } from './objects.mts';
+import { SCENE_OBJECTS } from './objects.mts';
 import { createNavigationContent } from './navigation-content.mts';
 import { createNavigationHistory, bindNavigationLinks } from './navigation-history.mts';
 import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
@@ -45,7 +45,7 @@ export function createSceneRouter({
   mountShell = mountPlanetShell,
   reportError = (error) => console.error(error),
   navigation = null,
-  objects = OBJECTS,
+  objects = SCENE_OBJECTS,
   loadContent = null,
   persistentWorldContext = null,
 }: RouterOptions) {
@@ -785,9 +785,9 @@ if (typeof document !== "undefined") {
   if (!(stage instanceof HTMLElement)) throw new Error("Missing cssEarth planet stage.");
   const objectId = stage.dataset.objectId;
   if (!objectId) throw new Error("Missing cssEarth object identity.");
-  const navigation = OBJECTS.find(object => object.id === objectId)?.worldFrame
-    ? createPreparedWorldNavigation({ objects: OBJECTS }) : null;
-  const persistentWorldContext = createWorldContextOwner({ objects: OBJECTS, objectId, navigation, stage });
+  const navigation = SCENE_OBJECTS.find(object => object.id === objectId)?.worldFrame
+    ? createPreparedWorldNavigation({ objects: SCENE_OBJECTS }) : null;
+  const persistentWorldContext = createWorldContextOwner({ objects: SCENE_OBJECTS, objectId, navigation, stage });
   createSceneRouter({ stage, objectId, navigation, persistentWorldContext });
 }
 

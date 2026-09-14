@@ -12,15 +12,22 @@ const sample=()=>{
  const geometry: PixelGeometry={source:'source-mesh-rays',report:{},reject:i=>accepted[i]?null:'no-geometry',
   distanceMeters:(i,p)=>Math.hypot(xyz[i*3]-p[0],xyz[i*3+1]-p[1],xyz[i*3+2]-p[2]),rangeMeters:()=>10,incidence:()=>0,emission:i=>emissions[i]*Math.PI/180,phase:()=>0};
  const image={width:2,height:2,values:[0,-1,2,3],reject:()=>null,startTime:'',filter:'',report:{}};
- return {source:{image,camera:{project:()=>[.5,.5,10]},geometry,photometry:{gain:()=>1}},accepted,xyz};
+ return {source:{image,camera:{project:()=>[.5,.5,10]},geometry,photometry:{gain:()=>1,retainsIllumination:true}},accepted,xyz};
 };
 const limits={maximumSeparationMeters:2,maximumEmissionDegrees:75};
-test('a bilinear footprint retains calibrated darkness and checks every contributor',()=>{
+test('a bilinear footprint retains calibrated darkness and interpolates only the contributors that count',()=>{
  const {source,accepted,xyz}=sample(),point=[.5,.5,0];
  const result=sampleFootprint(source,point,limits);
+ // Each contributor is normalized before interpolation, and the report keeps the steepest emission it used.
  assert.equal(result.radiance,1);assert.ok(Math.abs(required(result.maximumEmissionDegrees)-30)<1e-12);
- for(let i=0;i<4;i++){accepted[i]=0;assert.equal(sampleFootprint(source,point,limits).reason,'no-geometry');accepted[i]=1;}
- xyz[11]=50;assert.equal(sampleFootprint(source,point,limits).reason,'geometry-mismatch');
+ // A contributor without a surface point is left out while the others carry at least half the weight.
+ accepted[0]=0;assert.ok(Math.abs(required(sampleFootprint(source,point,limits).radiance)-4/3)<1e-12);
+ accepted[1]=0;assert.equal(sampleFootprint(source,point,limits).radiance,2.5);
+ accepted[2]=0;assert.equal(sampleFootprint(source,point,limits).reason,'no-geometry');
+ accepted.fill(1);
+ // A contributor on another surface is left out rather than mixed in.
+ xyz[11]=50;assert.ok(Math.abs(required(sampleFootprint(source,point,limits).radiance)-1/3)<1e-12);
+ xyz[2]=50;xyz[5]=50;assert.equal(sampleFootprint(source,point,limits).reason,'geometry-mismatch');
 });
 test('detector edges never interpolate missing contributors',()=>{
  const {source}=sample();
