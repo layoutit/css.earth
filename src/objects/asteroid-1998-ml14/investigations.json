@@ -6,17 +6,23 @@
       "id": "selected-model",
       "subject": "Selected source model",
       "status": "included",
-      "finding": "Geometry is the unchanged [ml14.obj](https://echo.jpl.nasa.gov/asteroids/shapes/ml14.obj) from the [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html), interpreted using [Ostro et al. (2001)](https://echo.jpl.nasa.gov/asteroids/1998ML14/ostro.etal.2001.1998ml14.pdf). This is the historical reconstruction from 1998 Goldstone/Arecibo radar and optical observations. It is not presented as the later shape reconstruction announced from 2013 observations. Shape uses the shared missing-imagery grid. Elevation is radius minus the documented reference sphere, derived from the same radar inverse model; it is not independent topography, optical albedo or height above a gravitational equipotential. Cartographic relief is a prepared display treatment. Shadows are off by default. Optional directional shading and the grid are existing shared rendering treatments, not measured surface appearance.",
+      "finding": "Geometry is the unchanged [ml14.obj](https://echo.jpl.nasa.gov/asteroids/shapes/ml14.obj) from the [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html), interpreted using [Ostro et al. (2001)](https://echo.jpl.nasa.gov/asteroids/1998ML14/ostro.etal.2001.1998ml14.pdf). This is the historical reconstruction from 1998 Goldstone/Arecibo radar and optical observations. It is not presented as the later shape reconstruction announced from 2013 observations. Shape uses the shared missing-imagery grid. Elevation is radius minus the documented reference sphere, derived from the same radar inverse model; it is not independent topography, optical albedo or height above a gravitational equipotential. Cartographic relief is a prepared display treatment. Shadows are off by default. Optional directional shading and the grid are existing shared rendering treatments, not measured surface appearance. The live JPL index was checked against the actual preparation input shape/ml14.obj; it still links this exact model. The page is dated 2024-08-10, not a new scientific-model release. This confirms the published source route, not new mesh bytes, optical imagery or independent source-fit accuracy.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1998-ml14/README.md",
         "https://echo.jpl.nasa.gov/asteroids/shapes/ml14.obj",
         "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
-        "https://echo.jpl.nasa.gov/asteroids/1998ML14/ostro.etal.2001.1998ml14.pdf"
+        "https://echo.jpl.nasa.gov/asteroids/1998ML14/ostro.etal.2001.1998ml14.pdf",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-1998-ml14/source/preparation/terrestrial.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -74,6 +80,7 @@
       "subject": "LPI 2013 radar images",
       "status": "unresolved",
       "finding": "The LPI entry identifies observational radar images; its direct download returned HTTP 403 in the recorded survey. It is a reference, not an acquired input. Delay-Doppler panels and light curves do not themselves provide registered optical surface texels.",
+      "revisitWhen": "An accessible authoritative copy establishes the product contents and any numerical model or calibrated camera/map data it actually supplies.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1998-ml14/README.md",
         "https://www.lpi.usra.edu/resources/asteroids/asteroid/?asteroid_id=1998ML14"
@@ -83,8 +90,7 @@
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
-      ],
-      "revisitWhen": "An accessible authoritative copy establishes the product contents and any numerical model or calibrated camera/map data it actually supplies."
+      ]
     }
   ]
 }

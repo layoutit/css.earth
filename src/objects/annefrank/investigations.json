@@ -6,15 +6,21 @@
       "id": "selected-model",
       "subject": "Selected source model",
       "status": "included",
-      "finding": "Published preliminary ellipsoid using minimum full dimensions from Stardust flyby images. It does not reproduce the observed angular outline or establish a complete global shape. Full approximation dimensions: 6.6 × 5 × 3.4 km. Arbitrary display pole and meridian. The flyby did not establish a spin pole or current surface longitude; the display orientation is not a measured attitude. The grid marks unmapped terrain. Source: [Duxbury et al. (2004), Journal of Geophysical Research: Planets 109, E02002](https://doi.org/10.1029/2003JE002108). Checked 2026-09-09. The full axes are halved once; the reference radius is the geometric mean of these semiaxes. This is the approximation's rendering scale, not an independent observed radius or the volume of the original convex reconstruction. Formal axis uncertainties are included only where the source supplies them.",
+      "finding": "Duxbury et al. (2004) report minimum full dimensions of 6.6 × 5.0 × 3.4 km from limited Stardust flyby viewing. The selected ellipsoid uses those extents as a coarse approximation, without reproducing the angular outline, unseen surface, spin pole or current longitude. The preparation halves the full axes once; its geometric-mean reference radius is a rendering scale. No formal axis error is carried in the retained measurements.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/annefrank/README.md",
-        "https://doi.org/10.1029/2003JE002108"
+        "https://doi.org/10.1029/2003JE002108",
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/annefrank/source/measurements.json",
+        "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2003JE002108"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,30 +28,80 @@
       "id": "surface-imagery",
       "subject": "Registered surface imagery",
       "status": "unresolved",
-      "finding": "Stardust images exist, but no registered global surface mosaic is qualified for this approximation. Integrated spectra are not surface maps.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "finding": "Stardust NAVCAM observations exist, but this review found no reusable global raster registered to the selected display ellipsoid. The existing grid is authored missing-data display, not evidence of mapped coverage; disk-integrated spectra are not surface maps.",
+      "revisitWhen": "A released reusable observation or mapped product supplies its pixel geometry and registration to a source model that can be compared with the selected ellipsoid.",
       "evidence": [
+        "https://pds.nasa.gov/ds-view/pds/viewDataset.jsp?dsid=SDU-A-NAVCAM-2-EDR-ANNEFRANK-V3.0",
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/annefrank/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
     {
       "id": "recorded-survey-1",
-      "subject": "Mission context",
-      "status": "included",
-      "finding": "- [Mission context](https://science.nasa.gov/mission/stardust/).",
+      "subject": "NASA Stardust mission page",
+      "status": "excluded",
+      "finding": "The NASA mission page provides mission context only. It is not a body shape, image, geometry, or map product and supplies no scientific input to this package.",
+      "revisitWhen": "The mission page publishes or links a versioned Annefrank product with enough native metadata to assess it as a source candidate.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/annefrank/README.md"
+        "https://science.nasa.gov/mission/stardust/",
+        "https://github.com/layoutit/css.earth/pull/192"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "stardust-navcam-edr-v3",
+      "subject": "Stardust NAVCAM raw images of Annefrank v3.0",
+      "status": "unresolved",
+      "finding": "The PDS catalogue identifies SDU-A-NAVCAM-2-EDR-ANNEFRANK-V3.0 as raw pre-encounter and encounter images. The catalogue page establishes product existence, but this ledger review did not retrieve labels, image bytes, reconstructed pointing, or a model-registration product. Raw availability therefore does not qualify a texture or a scientific surface view.",
+      "revisitWhen": "The native product labels and applicable SPICE/reconstructed geometry are inspected and can be matched to a released shape or supported registration route.",
+      "evidence": [
+        "https://pds.nasa.gov/ds-view/pds/viewDataset.jsp?dsid=SDU-A-NAVCAM-2-EDR-ANNEFRANK-V3.0",
+        "https://github.com/layoutit/css.earth/pull/192"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "stryk-stooke-2016-partial-map",
+      "subject": "Stryk and Stooke (2016) partial Annefrank map",
+      "status": "deferred",
+      "finding": "The LPSC abstract reports mirrored-image correction, scattered-light removal and frame stacking, and its Figure 4 shows a simple cylindrical partial map. The displayed figure uses tentative ellipsoid control; it does not publish labelled longitude bounds, native raster bytes, or clear reuse terms. It is a promising map route, but does not establish registration to this package’s ellipsoid.",
+      "revisitWhen": "The authors or an archive release the map raster and control/shape definition with terms that permit reuse and comparison with the selected model.",
+      "evidence": [
+        "https://www.hou.usra.edu/meetings/lpsc2016/pdf/1148.pdf",
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/annefrank/README.md",
+        "https://github.com/layoutit/css.earth/pull/192"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

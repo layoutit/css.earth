@@ -43,18 +43,6 @@ The unchanged original shape contains 1020 vertices and 2036 faces. Signed volum
 
 Source pole: ecliptic J2000 (334°,39°). Reference sidereal period: 4.79517 h. Equatorial conversion uses obliquity 23.439291111°. Original +Z axis and +X meridian are retained. Absolute rotational phase is arbitrary; reference-period display rotation is not a YORP propagation model. Heliocentric state is generated through the shared Horizons owner at 2026-09-03; its TDB-as-TT approximation is under 2 ms.
 
-## Source survey
-
-- [Original numerical mesh](https://damit.cuni.cz/projects/damit/stored_files/open/913/shape.txt) — selected, pinned unchanged.
-- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — pole, period, units and archive diameter definitions; CC BY 4.0.
-- [Hanuš et al. (2015), Thermophysical modeling of asteroids from WISE thermal infrared data - Significance of the shape model and the pole orientation uncertainties](https://ui.adsabs.harvard.edu/abs/2015Icar..256..101H)
-- [Kaasalainen et al. (2004), Photometry and models of eight near-Earth asteroids](https://ui.adsabs.harvard.edu/abs/2004Icar..167..178K)
-- [Hanuš et al. (2015), thermophysical fits with shape and pole uncertainty](https://arxiv.org/html/1504.04199)
-
-Alternative shapes/poles: [model 272](https://damit.cuni.cz/projects/damit/asteroid_models/view/272), pole ['336', '39']
-
-No registered global reflectance texture is supplied by the selected release. Lightcurves and disk-integrated thermal/radar measurements do not supply surface texels. The normal grid identifies unavailable imagery. The Elevation view reports source radius minus the stated reference sphere; it is shape-derived false color, not independent topography or gravitational height.
-
 ## Preparation
 
 Existing source-meshoptimizer preparation retains source connectivity, reduces within an 800-native-u-face budget, and uses 128 px raster cells. The source-fit allowance is 74 m; source-model accuracy and simplification error remain separate. Shadows and Orbit start off.

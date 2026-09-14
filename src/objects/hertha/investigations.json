@@ -4,18 +4,26 @@
   "entries": [
     {
       "id": "survey-selected-model",
-      "subject": "Selected model",
+      "subject": "DAMIT 1799: selected shape and spin",
       "status": "included",
-      "finding": "[Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/1799) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/427/shape.txt) — included unchanged. Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations; fine relief is unresolved.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1799.txt. Model 1799, version 2017-06-14, pole (276°, 53°), period 8.4006 h match the retained metadata. The archive diameter field is 79 ±2 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/hertha/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1799",
-        "https://damit.cuni.cz/projects/damit/stored_files/open/427/shape.txt"
+        "https://damit.cuni.cz/projects/damit/stored_files/open/427/shape.txt",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/hertha/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/hertha/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -53,17 +61,25 @@
     },
     {
       "id": "survey-akari-acua",
-      "subject": "AKARI AcuA",
-      "status": "included",
-      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 72.78 ± 0.87 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.",
+      "subject": "AKARI thermal diameter as an alternative scale",
+      "status": "excluded",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 72.78 ± 0.87 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 135 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
+      "revisitWhen": "A source-specific comparison with the selected shape and physical calibration justifies changing the adopted scale.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/hertha/README.md",
-        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/"
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/hertha/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -103,16 +119,22 @@
       "id": "shape-solution",
       "subject": "Shape and spin alternatives",
       "status": "unresolved",
-      "finding": "Alternative archive solutions: model 162, pole ['272', '52'], [Model 162](https://damit.cuni.cz/projects/damit/asteroid_models/view/162)",
+      "finding": "Alternative archive solutions: model 162, pole ['272', '52'], [Model 162](https://damit.cuni.cz/projects/damit/asteroid_models/view/162) The live DAMIT export lists these other models for this target: 162: pole (272°, 52°), 8.4006 h, version 2009-04-15, archive diameter 77 km. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/hertha/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/162"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/162",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

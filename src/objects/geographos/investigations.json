@@ -6,15 +6,22 @@
       "id": "selected-model",
       "subject": "Selected source model",
       "status": "included",
-      "finding": "Geographos is an elongated near-Earth asteroid reconstructed from Goldstone radar and optical light curves. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj) is attributed to Hudson and Ostro (1999), Icarus 140, 369–378; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts and SHA-256 hashes. Shape uses the shared missing-imagery grid. It shows modeled geometry under prepared lighting, without optical reflectance, generic regolith, invented craters or composition. Elevation is false-color source radius minus a 1.284042 km reference sphere, encoded from -0.59 to 1.4 km. It is a derived geometric scalar, not independent topography or gravitational height.",
+      "finding": "Geographos is an elongated near-Earth asteroid reconstructed from Goldstone radar and optical light curves. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj) is attributed to Hudson and Ostro (1999), Icarus 140, 369–378; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts and SHA-256 hashes. Shape uses the shared missing-imagery grid. It shows modeled geometry under prepared lighting, without optical reflectance, generic regolith, invented craters or composition. Elevation is false-color source radius minus a 1.284042 km reference sphere, encoded from -0.59 to 1.4 km. It is a derived geometric scalar, not independent topography or gravitational height. The live JPL index was checked against the actual preparation input shape/geographos.obj; it still links this exact model. The page is dated 2024-08-10, not a new scientific-model release. This confirms the published source route, not new mesh bytes, optical imagery or independent source-fit accuracy.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/geographos/README.md",
-        "https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj"
+        "https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/geographos/source/preparation/terrestrial.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,15 +29,21 @@
       "id": "surface-imagery",
       "subject": "Registered surface imagery",
       "status": "unresolved",
-      "finding": "No resolved optical surface map is supplied.",
+      "finding": "The selected radar-shape release supplies geometry and spin information, not a registered optical surface map. No optical texture is selected in this package; this does not establish that every image archive was searched.",
       "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/geographos/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/geographos/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/geographos/source/manifest.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

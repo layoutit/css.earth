@@ -6,15 +6,22 @@
       "id": "selected-amica-mosaic",
       "subject": "AMICA mosaic",
       "status": "included",
-      "finding": "Eight v-band observations from September–October 2005, with [Gaskell-controlled AMICA records](https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/), original FITS and preflight flat. The October close-ups add finer terrain detail and views north and south of the equator. Relative detector brightness, not absolute radiance or albedo.",
+      "finding": "Eight v-band frames remain the selected AMICA mosaic. The retained label of ST_2402987304_V_DDR was examined: dataset HAY-A-AMICA-3-AMICAGEOM-V1.0, target 25143 ITOKAWA, v filter, 2005-09-24T02:00:02 and 0.087 s exposure. Its Gaskell-derived geometry and detector processing belong to this observation. A check of this label supports source identity, not fresh registration of all eight images or conversion of relative detector brightness into I/F.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/itokawa/README.md",
-        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/"
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/itokawa/source/observations/st_2402987304_v_ddr.lbl",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/itokawa/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

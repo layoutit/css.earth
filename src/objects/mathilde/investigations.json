@@ -21,14 +21,21 @@
       "id": "recorded-survey-2",
       "subject": "Stooke 5° PDS visualization model",
       "status": "included",
-      "finding": "Stooke 5° PDS visualization model — Included as explicitly labeled visualization shape — Published remedy for the incomplete model. It is reusable source-authored modeling, including aesthetic unobserved surfaces, never a claim of measured global topography.",
+      "finding": "The native Stooke label was examined: Thomas’s 3° radius model was resampled at 5°, bad regions were smoothed and shadowed crater floors were aesthetically modified. The selected visualization shape therefore includes modeled unseen terrain; it cannot establish measured global topography. The label also retains an arbitrary pole and prime meridian. The partial valid Thomas radius field remains a separate evidence source for Elevation.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mathilde/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mathilde/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mathilde/source/reference/stooke-253mathilde.xml",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mathilde/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

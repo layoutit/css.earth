@@ -4,17 +4,28 @@
   "entries": [
     {
       "id": "selected-model",
-      "subject": "Selected source model",
+      "subject": "DAMIT 456: selected shape and spin",
       "status": "included",
-      "finding": "Checked 2026-09-09. Original [DAMIT model 456](https://damit.cuni.cz/projects/damit/asteroid_models/view/456), version 2016-04-22. Convex lightcurve model at the uncertain 1.2 km archive diameter. Model fields and mesh measurements.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-456.txt. Model 456, version 2016-04-22, pole (311°, -78°), period 6.803286 h match the retained metadata. The archive diameter field is 1.2 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/cerberus/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/456"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/456",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/cerberus/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/cerberus/source/reference/damit-model.json",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/1783/shape.txt",
+        "https://damit.cuni.cz/projects/damit/pages/documentation",
+        "https://ui.adsabs.harvard.edu/abs/2012A%26A...547A..10D"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,7 +33,7 @@
       "id": "surface-imagery",
       "subject": "Registered surface imagery",
       "status": "unresolved",
-      "finding": "The published thermophysical fit is poor and its diameter uncertainty is unconstrained; the missing error value does not mean zero uncertainty. - No registered reflectance texture is available. Grid marks missing imagery; Elevation is shape-derived radius relative to a sphere, not measured geology.",
+      "finding": "No registered reusable reflectance texture was examined for the selected model. The grid marks missing imagery; Elevation is source-model radius relative to a sphere, not measured geology.",
       "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/cerberus/README.md"
@@ -31,6 +42,11 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -38,7 +54,7 @@
       "id": "shape-solution",
       "subject": "Shape and spin alternatives",
       "status": "unresolved",
-      "finding": "The published thermophysical fit is poor and its diameter uncertainty is unconstrained; the missing error value does not mean zero uncertainty. - No registered reflectance texture is available. Grid marks missing imagery; Elevation is shape-derived radius relative to a sphere, not measured geology. Rotation phase is arbitrary.",
+      "finding": "The checked DAMIT target listing supplies only selected model 456; it did not identify another DAMIT mesh to compare. That bounded listing does not rule out alternatives in other releases. Rotation phase remains arbitrary.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/cerberus/README.md"
@@ -47,6 +63,30 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "physical-scale",
+      "subject": "Cerberus thermophysical scale uncertainty",
+      "status": "included",
+      "finding": "The selected archive scale is 1.2 km, but its diameter uncertainty is absent and retained as unknown. Hanuš et al. (2015), section 4.2, reports a poor Cerberus thermophysical fit and omits a usable uncertainty. The DAMIT calibrated-size flag therefore does not establish a strong physical-size validation; no zero error, total confidence interval or local shape accuracy is inferred.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/cerberus/source/reference/calibration.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/cerberus/source/reference/damit-model.json",
+        "https://arxiv.org/html/1504.04199",
+        "https://ui.adsabs.harvard.edu/abs/2015Icar..256..101H"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

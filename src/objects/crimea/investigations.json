@@ -4,17 +4,25 @@
   "entries": [
     {
       "id": "selected-shape-and-spin",
-      "subject": "Shape and spin",
+      "subject": "DAMIT 403: selected shape and spin",
       "status": "included",
-      "finding": "[DAMIT 403](https://damit.cuni.cz/projects/damit/asteroid_models/view/403)",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-403.txt. Model 403, version 2011-04-21, pole (12°, -73°), period 9.78693 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/crimea/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/403"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/403",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/crimea/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/crimea/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,14 +30,21 @@
       "id": "selected-physical-scale",
       "subject": "Physical scale",
       "status": "included",
-      "finding": "Calibration and uncertainty",
+      "finding": "The retained calibration uses 29.179 ±0.155 km. The thermal effective spherical diameter is used as an approximate volume-equivalent display scale; no joint shape/thermal inversion or independently measured volume is implied.,Quoted ±0.155 km is the catalog fit error; approximately 10% additional systematic diameter uncertainty applies.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/crimea/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/crimea/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/crimea/source/reference/calibration.json",
+        "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1140"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -52,16 +67,24 @@
     {
       "id": "recorded-reference-1",
       "subject": "Other DAMIT matches",
-      "status": "included",
-      "finding": "[Other DAMIT matches](https://damit.cuni.cz/?q=1140) — Inspected for calibrated replacements; retain the selected solution and disclose available alternatives.",
+      "status": "unresolved",
+      "finding": "[Other DAMIT matches](https://damit.cuni.cz/?q=1140) — Inspected for calibrated replacements; retain the selected solution and disclose available alternatives. The live DAMIT export lists these other models for this target: 404: pole (175°, -22°), 9.78694 h, version 2011-04-21. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "A model-specific comparison establishes whether an archived alternative improves the selected shape or resolves its pole/scale ambiguity.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/crimea/README.md",
-        "https://damit.cuni.cz/?q=1140"
+        "https://damit.cuni.cz/?q=1140",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/404"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

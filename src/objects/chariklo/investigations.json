@@ -6,14 +6,21 @@
       "id": "selected-1",
       "subject": "Morgado et al. (2021), Table 6",
       "status": "included",
-      "finding": "Smooth ellipsoid fitted jointly to eleven stellar occultations in 2013–2020: semiaxes 143.8, 135.2 and 99.1 km. These are model estimates.",
+      "finding": "Morgado et al. fit a triaxial ellipsoid jointly to eleven 2013–2020 stellar occultations: semiaxes 143.8 (+1.4/−1.5), 135.2 (+1.4/−2.8) and 99.1 (+5.4/−2.7) km. It is a smooth model estimate, not three independently measured diameters or resolved topography. The prepared approximation uses those semiaxes unchanged; the measurement record also stores their doubled full axes and uncertainties.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/README.md"
+        "https://doi.org/10.1051/0004-6361/202141543",
+        "https://arxiv.org/abs/2107.07904",
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/source/measurements.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -21,14 +28,21 @@
       "id": "selected-2",
       "subject": "Santos-Sanz et al. (2025), Table 1",
       "status": "included",
-      "finding": "Two rings approximated from the first contact of the 18 October 2022 JWST NIRCam F150W2 occultation.",
+      "finding": "The package uses the 18 October 2022 JWST NIRCam F150W2 first-contact values as two circular-annulus approximations: C1R radius 385.9 km and width 7.04 km; C2R radius 400.3 km and width 1.009 km. They are occultation geometry, not observed reflected colour or a scattering model; neutral gray and fixed alpha remain authored schematic display choices.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/README.md"
+        "https://arxiv.org/html/2510.06366v1#S0.T1",
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/source/rings/occultation-2022.json",
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/source/preparation/terrestrial.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -36,30 +50,63 @@
       "id": "surface-imagery",
       "subject": "Registered surface imagery",
       "status": "unresolved",
-      "finding": "The grid marks an unmapped surface. The ellipsoid resolves no terrain, and integrated JWST spectra provide no mapped colors. - Rings are fixed circular annuli. Gray and opacity are schematic; there is no reflected-light, scattering or ring-shadow model. - Spin alignment with the ring normal is assumed; spin direction is unknown, and display longitude and phase are arbitrary. Orbit context is fixed at 2026-09-03 TT. - Settings is hidden; optional Shadows were checked through the checkbox event. These reports do not establish a full-suite pass or physical-device performance.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "finding": "The reviewed occultation and integrated JWST information supplies no reusable surface raster registered to the selected ellipsoid. The grid marks unmapped terrain, and integrated spectra do not supply mapped color or local relief.",
+      "revisitWhen": "A released reusable observation or mapped product supplies pixel geometry and registration to a source model that can be compared with the selected ellipsoid.",
       "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141543",
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
     {
       "id": "recorded-survey-1",
-      "subject": "Complementary source survey",
-      "status": "included",
-      "finding": "[The source survey](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#source-survey-dispositions) records the selected constraints and alternatives; [NASA’s JWST account](https://science.nasa.gov/blogs/webb/2023/01/25/webb-spies-chariklo-ring-system-with-high-precision-technique/) provides observation context. Published papers are cited, not relicensed or bundled. Credits and reuse terms for the authored approximation, ESO panorama, Inter font and HYG metadata are in NOTICE.md and the manifest.",
+      "subject": "Historical Centaur source-survey and NASA observation page",
+      "status": "excluded",
+      "finding": "The historical source-survey and NASA JWST page provide route and observation context. Neither is a primary numerical shape, ring, image, or registration product, so neither supplies a scientific input to this package.",
+      "revisitWhen": "Either page links a versioned source product whose native metadata and terms can be inspected for a concrete use.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/README.md"
+        "https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#source-survey-dispositions",
+        "https://science.nasa.gov/blogs/webb/2023/01/25/webb-spies-chariklo-ring-system-with-high-precision-technique/",
+        "https://github.com/layoutit/css.earth/pull/192"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "ring-photometry-and-spin",
+      "subject": "Ring photometry and body orientation",
+      "status": "unresolved",
+      "finding": "Morgado et al. constrain the ring-plane normal at RA 151.03° ± 0.14°, Dec +41.81° ± 0.07° and assume the body spin axis shares it; they state the angular-momentum direction is unknown. The selected ring widths also vary with longitude, wavelength and epoch. Neither source establishes a precise sidereal phase, a reflected-light/ring-shadow model, or a spatially resolved ring texture.",
+      "revisitWhen": "A released multi-epoch, calibrated ring photometry/scattering product and a body rotational solution provide geometry and phase that can be bound to the selected model.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141543",
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/source/preparation/rotation.json",
+        "https://github.com/layoutit/css.earth/pull/192"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

@@ -118,6 +118,7 @@
       "subject": "OSIRIS 15:43:06, 15:43:54 and 15:45:28 close-ups",
       "status": "excluded",
       "finding": "The 15:43:06.482 northeast holdout correlated at 0.6949, below 0.70. The 15:43:54 image failed model registration; 15:45:28 failed the independent archived surface-intercept check. None is included.",
+      "revisitWhen": "Corrected source geometry or independent registration evidence resolves the recorded failure under the existing acceptance limits.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lutetia/README.md"
       ],
@@ -126,8 +127,24 @@
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
+      ]
+    },
+    {
+      "id": "native-shape-defects",
+      "subject": "Published shape seam and holes",
+      "status": "included",
+      "finding": "The native PDSSBN-SHAPE-MODEL-DEFECTS label identifies LUTETIA_SEAM.PNG and LUTETIA_HOLES.PNG as documentation of discontinuities in the source model. Those limitations are source evidence, not automatically a renderer defect. The label was read; this review did not measure their effect on the currently selected resolution or photographic mosaic.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/lutetia/source/reference/lutetia_shape_defects.lbl",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/lutetia/README.md"
       ],
-      "revisitWhen": "Corrected source geometry or independent registration evidence resolves the recorded failure under the existing acceptance limits."
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
     }
   ]
 }

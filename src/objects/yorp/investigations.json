@@ -6,18 +6,24 @@
       "id": "selected-model",
       "subject": "Selected source model",
       "status": "included",
-      "finding": "Geometry is the unchanged [yorp.obj](https://echo.jpl.nasa.gov/asteroids/shapes/yorp.obj) from the [NASA/JPL radar model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html). Interpretation comes from [the original research](https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf): Taylor et al. (2007), Science 316, 274–277 and supporting material; Arecibo, Goldstone and NASA/JPL. The original OBJ, paper and supporting material, Horizons responses and authored recipe are pinned under source/. the original JPL shape and its scientific paper provide source geometry, scale, spin and limits. Shape displays the shared missing-imagery grid under prepared lighting.",
+      "finding": "Geometry is the unchanged [yorp.obj](https://echo.jpl.nasa.gov/asteroids/shapes/yorp.obj) from the [NASA/JPL radar model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html). Interpretation comes from [the original research](https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf): Taylor et al. (2007), Science 316, 274–277 and supporting material; Arecibo, Goldstone and NASA/JPL. The original OBJ, paper and supporting material, Horizons responses and authored recipe are pinned under source/. the original JPL shape and its scientific paper provide source geometry, scale, spin and limits. Shape displays the shared missing-imagery grid under prepared lighting. The live JPL index was checked against the actual preparation input shape/yorp.obj; it still links this exact model. The page is dated 2024-08-10, not a new scientific-model release. This confirms the published source route, not new mesh bytes, optical imagery or independent source-fit accuracy.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/yorp/README.md",
         "https://echo.jpl.nasa.gov/asteroids/shapes/yorp.obj",
         "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
         "https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf",
-        "https://pds.nasa.gov/ds-view/pds/viewCollection.jsp?identifier=urn%3Anasa%3Apds%3Agbo.ast.jpl.radar.shape_models%3Adocument"
+        "https://pds.nasa.gov/ds-view/pds/viewCollection.jsp?identifier=urn%3Anasa%3Apds%3Agbo.ast.jpl.radar.shape_models%3Adocument",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/yorp/source/preparation/terrestrial.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -57,6 +63,7 @@
       "subject": "Radar figures as surface textures",
       "status": "excluded",
       "finding": "delay-Doppler panels, optical light curves and model figures in the paper are observational constraints and research illustrations, not registered geographic surface textures. No generic regolith or invented surface detail is substituted.",
+      "revisitWhen": "A geographically registered surface product derived from these observations, with calibration and coverage evidence.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/yorp/README.md"
       ],
@@ -65,14 +72,14 @@
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
-      ],
-      "revisitWhen": "A geographically registered surface product derived from these observations, with calibration and coverage evidence."
+      ]
     },
     {
       "id": "pds-archive-access",
       "subject": "PDS radar-shape counterpart",
       "status": "unresolved",
       "finding": "the [PDS radar-shape compilation](https://pds.nasa.gov/ds-view/pds/viewCollection.jsp?identifier=urn%3Anasa%3Apds%3Agbo.ast.jpl.radar.shape_models%3Adocument) lists YORP, but the archive directory returned HTTP 403. The original JPL mesh and paper remain the acquired sources.",
+      "revisitWhen": "The archive becomes accessible through an authoritative release route; compare its numerical data and metadata with the pinned JPL counterpart.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/yorp/README.md"
       ],
@@ -81,8 +88,7 @@
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
-      ],
-      "revisitWhen": "The archive becomes accessible through an authoritative release route; compare its numerical data and metadata with the pinned JPL counterpart."
+      ]
     }
   ]
 }

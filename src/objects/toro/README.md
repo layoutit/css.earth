@@ -41,17 +41,6 @@ The unchanged original shape contains 1022 vertices and 2040 faces. Signed volum
 
 Source pole: ecliptic J2000 (71°,-69°). Reference sidereal period: 10.1978 h. Equatorial conversion uses obliquity 23.439291111°. Original +Z axis and +X meridian are retained. Absolute rotational phase is arbitrary; reference-period display rotation is not a YORP propagation model. Heliocentric state is generated through the shared Horizons owner at 2026-09-03; its TDB-as-TT approximation is under 2 ms.
 
-## Source survey
-
-- [Original numerical mesh](https://damit.cuni.cz/projects/damit/stored_files/open/6127/shape.txt) — selected, pinned unchanged.
-- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — pole, period, units and archive diameter definitions; CC BY 4.0.
-- [Ďurech et al. (2018), YORP and Yarkovsky effects in asteroids (1685) Toro, (2100) Ra-Shalom, (3103) Eger, and (161989) Cacus](https://ui.adsabs.harvard.edu/abs/2018A%26A...609A..86D)
-- [Ďurech et al. (2018), Toro thermophysical scale and YORP](https://arxiv.org/html/1711.05987)
-
-Alternative shapes/poles: None in the checked target listing.
-
-No registered global reflectance texture is supplied by the selected release. Lightcurves and disk-integrated thermal/radar measurements do not supply surface texels. The normal grid identifies unavailable imagery. The Elevation view reports source radius minus the stated reference sphere; it is shape-derived false color, not independent topography or gravitational height.
-
 ## Preparation
 
 Existing source-meshoptimizer preparation retains source connectivity, reduces within an 800-native-u-face budget, and uses 128 px raster cells. The source-fit allowance is 35 m; source-model accuracy and simplification error remain separate. Shadows and Orbit start off.

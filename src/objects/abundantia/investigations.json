@@ -4,18 +4,23 @@
   "entries": [
     {
       "id": "survey-selected-model",
-      "subject": "Selected model",
+      "subject": "DAMIT 4625: selected convex shape and spin",
       "status": "included",
-      "finding": "[Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/4625) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/53045/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.",
+      "finding": "The live model record and target model table were examined against the preparation recipe: model 4625, version 2019-10-23, pole (188°, 32°), period 9.8643 h, nonconvex flag 0. The recipe selects shape/model-4625.txt. The archive has no calibrated diameter for this model; the mesh uses the separately documented AKARI scale. This check compared metadata and the selected local input, not a newly downloaded mesh.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/abundantia/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/4625",
-        "https://damit.cuni.cz/projects/damit/stored_files/open/53045/shape.txt"
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/abundantia/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/abundantia/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -55,15 +60,22 @@
       "id": "survey-akari-acua",
       "subject": "AKARI AcuA",
       "status": "included",
-      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 42.18 ± 0.49 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 42.18 ± 0.49 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 151 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/abundantia/README.md",
-        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/"
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/abundantia/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -103,33 +115,45 @@
       "id": "surface-imagery",
       "subject": "Registered surface imagery",
       "status": "unresolved",
-      "finding": "The release supplies no registered surface imagery; the grid marks that gap.",
+      "finding": "The examined DAMIT release supplies shape and spin files and a model-rendering preview. Neither that preview nor the ATLAS disk-integrated photometry is a registered surface photograph. No surface map was established in this examination; this is not an exhaustive absence claim across other archives.",
       "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/abundantia/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4626"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4625",
+        "https://arxiv.org/html/2010.01820"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
     {
       "id": "shape-solution",
-      "subject": "Shape and spin alternatives",
+      "subject": "DAMIT 4626: competing pole solution",
       "status": "unresolved",
-      "finding": "AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Select one of the two complete 2020 ATLAS convex models, 4625 (188,32). The counterpart 4626 (3,16) remains possible. Alternative archive solutions: model 4626, pole ['3', '16'], [Model 4626](https://damit.cuni.cz/projects/damit/asteroid_models/view/4626)",
+      "finding": "The live target model table lists 4625 and 4626. Model 4626 has pole (3°, 16°) and period 9.864 h; the listing supplies no new independent constraint that selects between them. Convex light-curve inversion describes the broad outline, not craters or concavities. The live DAMIT export lists these other models for this target: 4626: pole (3°, 16°), 9.864 h, version 2019-10-23. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/abundantia/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4626"
+        "https://damit.cuni.cz/projects/damit/asteroids/view/2652",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4626",
+        "https://arxiv.org/html/2010.01820",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -146,6 +170,24 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "mp3c-thermal-size-comparison",
+      "subject": "MP3C individual thermal diameters and aggregate",
+      "status": "unresolved",
+      "finding": "The MP3C physical-property table was examined, including individual measurements: 39.04 ±0.51 km (Masiero 2014), 42.18 ±0.49 km (Usui 2011, the selected AKARI value), and 45.37 ±0.90 km (Tedesco 2002). Its 41.55 km aggregate does not independently calibrate the volume of DAMIT 4625. The spread motivates a model-specific scale comparison; changing to an aggregate would hide differences between observing and thermal-model assumptions.",
+      "revisitWhen": "The individual source methods and observation geometry can be compared against model 4625, or an occultation, resolved outline or shape-aware thermophysical fit supplies a volume calibration.",
+      "evidence": [
+        "https://mp3c.oca.eu/bodies/Abundantia/",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/abundantia/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

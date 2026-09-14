@@ -4,18 +4,23 @@
   "entries": [
     {
       "id": "survey-selected-model",
-      "subject": "Selected model",
+      "subject": "DAMIT 189: selected shape with AO scale",
       "status": "included",
-      "finding": "[Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/189) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/540/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.",
+      "finding": "The live record and preparation recipe select model 189, version 2011-03-28, pole (9°, −4°), period 6.3192 h. The record reports D = 125 km with σD = 15 km but separately comments that the AO size is 104 ±11 km. The recipe uses the latter published calibration. These are different source determinations, not interchangeable fields.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/189",
-        "https://damit.cuni.cz/projects/damit/stored_files/open/540/shape.txt"
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/adelheid/source/preparation/terrestrial.json",
+        "https://arxiv.org/html/1308.0446"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -85,17 +90,25 @@
     },
     {
       "id": "survey-akari-acua",
-      "subject": "AKARI AcuA",
-      "status": "included",
-      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 135.3 ± 2.09 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.",
+      "subject": "AKARI thermal diameter as an alternative scale",
+      "status": "excluded",
+      "finding": "AKARI 135.3 ±2.09 km is retained as a comparison, not the selected scale of the rendered shape. The imported ledger incorrectly marked that comparison as included. The preparation uses the documented 104 ±11 km AO calibration; a thermal effective-sphere diameter is not automatically a better physical-volume calibration. The original catalogue row for asteroid 276 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
+      "revisitWhen": "A model-specific comparison resolves the difference between thermal, AO and occultation scales and justifies changing the selected calibration.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md",
-        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/"
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/adelheid/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -152,16 +165,22 @@
       "id": "shape-solution",
       "subject": "Shape and spin alternatives",
       "status": "unresolved",
-      "finding": "Alternative archive solutions: model 190, pole ['199', '-20'], [Model 190](https://damit.cuni.cz/projects/damit/asteroid_models/view/190)",
+      "finding": "Alternative archive solutions: model 190, pole ['199', '-20'], [Model 190](https://damit.cuni.cz/projects/damit/asteroid_models/view/190) The live DAMIT export lists these other models for this target: 190: pole (199°, -20°), 6.3192 h, version 2011-03-28, archive diameter 117 km. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/190"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/190",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -178,6 +197,24 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "later-size-comparison",
+      "subject": "Choukroun 2025 Table 6: conflicting size determinations",
+      "status": "unresolved",
+      "finding": "The Adelheid row in Table 6 reports a thermophysical diameter of 102.25 (+8.0/−4.9) km from Hung 2022 and an occultation diameter of 121.3 ±5.0 km from Herald 2020. This table compiles earlier determinations; it is not a new 2025 Adelheid mesh. Its footnote allows averaging over two pole solutions, so these numbers cannot be silently assigned to selected DAMIT 189.",
+      "revisitWhen": "The original Hung and Herald solutions, pole choices and definition of diameter have been examined and matched to a released Adelheid shape.",
+      "evidence": [
+        "https://arxiv.org/html/2505.09437v1",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/189"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

@@ -4,31 +4,48 @@
   "entries": [
     {
       "id": "selected-2022-11-29",
-      "subject": "DAMIT model 8131, 2022-11-29; Ďurech & Hanuš (2023)",
+      "subject": "DAMIT 8131: selected shape and spin",
       "status": "included",
-      "finding": "Gaia DR3 convex shape and paired sidereal spin.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-8131.txt. Model 8131, version 2022-11-29, pole (327°, 66°), period 17.7464 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menelaus/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menelaus/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/8131",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/menelaus/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/menelaus/source/reference/damit-model.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
     {
       "id": "selected-2",
-      "subject": "NEOWISE v2, Gr12b; Grav et al. (2012)",
+      "subject": "NEOWISE Gr12b: selected thermal size",
       "status": "included",
-      "finding": "Effective spherical diameter 42.716 ± 0.517 km; approximate mesh-volume scale.",
+      "finding": "The original IRSA query was rerun for asteroid 1647; its Gr12b row matches the retained diameter 42.7160 km, error 0.5170 km, fit code DVBI and mean epoch 2455205.1766260. D in FIT_CODE means diameter was fitted. This effective-sphere diameter provides an approximate display scale, not a resolved surface or an independent physical-volume fit to the shape.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menelaus/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menelaus/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/menelaus/source/reference/calibration.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/menelaus/source/reference/neowise-query.txt",
+        "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -52,15 +69,22 @@
       "id": "shape-solution",
       "subject": "Shape and spin alternatives",
       "status": "unresolved",
-      "finding": "The grid marks unmapped coverage: no registered global reflectance mosaic was found in the selected releases. Convex inversion leaves concavities and fine relief unresolved. - Transferring thermal diameter to mesh volume is approximate. The quoted fit error excludes additional thermal/shape uncertainty and does not measure local shape accuracy. - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain. - Absolute phase is arbitrary; accelerated display spin is illustrative. Orbit context is fixed at 2026-09-03 TT. The archive also lists an alternative pole.",
+      "finding": "The grid marks unmapped coverage: no registered global reflectance mosaic was found in the selected releases. Convex inversion leaves concavities and fine relief unresolved. - Transferring thermal diameter to mesh volume is approximate. The quoted fit error excludes additional thermal/shape uncertainty and does not measure local shape accuracy. - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain. - Absolute phase is arbitrary; accelerated display spin is illustrative. Orbit context is fixed at 2026-09-03 TT. The archive also lists an alternative pole. The live DAMIT export lists these other models for this target: 8132: pole (148°, 49°), 17.7466 h, version 2022-11-29. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menelaus/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menelaus/README.md",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/8132"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -68,22 +92,31 @@
       "id": "recorded-survey-1",
       "subject": "Source mesh and calibration preservation",
       "status": "included",
-      "finding": "The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/79848/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from NOTICE.md.",
+      "finding": "The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/79848/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from NOTICE.md.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menelaus/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menelaus/README.md",
+        "https://damit.cuni.cz/projects/damit/pages/documentation",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/menelaus/source/reference/damit-model.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/menelaus/source/manifest.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
     {
       "id": "recorded-survey-2",
       "subject": "Integrated colors as a surface map",
-      "status": "included",
-      "finding": "Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row and original query are pinned in the source manifest; [column definitions](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html) are shared.",
+      "status": "excluded",
+      "finding": "Disk-integrated colors and thermal fits do not supply positions on the surface or a registered regolith map. The diameter fit belongs to the separate selected NEOWISE calibration entry; it was incorrectly mixed into this entry during migration.",
+      "revisitWhen": "A spatially resolved, reusable observation and its registration provide a measured surface product.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menelaus/README.md"
       ],
@@ -91,6 +124,11 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

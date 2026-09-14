@@ -6,14 +6,21 @@
       "id": "selected-l-lorri-mosaic",
       "subject": "L’LORRI mosaic",
       "status": "included",
-      "finding": "`lor_0798443290_04598_00035_1x1_sci_03.fit` and `lor_0798443242_04596_00001_1x1_sci_03.fit`, 20 April 2025 at 17:50:14.018 and 17:49:26.021 UTC (0.008 and 0.005 s exposures). Relative DN/s with acquisition illumination: the source applied bias/smear/flat corrections but omitted absolute calibration.",
+      "finding": "The retained label for lor_0798443290_04598_00035_1x1_sci_03 was examined: processing_level is Partially Processed and conversion_to_physical_units is false, despite a general description calling it calibrated science data. The selected pair therefore remains relative DN/s after bias/smear/flat processing, with source illumination. The 0.008 s exposure belongs to this frame; the paired 0.005 s exposure is handled separately. No absolute-reflectance qualification follows from the generic product description.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/donaldjohanson/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/donaldjohanson/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/donaldjohanson/source/reference/lor_0798443290_04598_00035_1x1_sci_03.xml",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/donaldjohanson/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -40,6 +47,7 @@
       "subject": "Source-surface Elevation on the contact shape",
       "status": "deferred",
       "finding": "The README withholds radial Elevation because directions can intersect multiple surfaces. The shared closest-source-point sampler already evaluates scalar radius on full source triangles with a finite distance bound. This is a candidate for a bounded qualification trial, not a completed Donaldjohanson lens. The source authors’ modeled unseen terrain would remain modeled.",
+      "revisitWhen": "Bind the existing sampler to this mesh and qualify neck correspondence, source/display distance, scalar interpretation and visual seams within the current face budget.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/donaldjohanson/README.md",
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/obj-shape.mts#L272",
@@ -50,8 +58,7 @@
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
-      ],
-      "revisitWhen": "Bind the existing sampler to this mesh and qualify neck correspondence, source/display distance, scalar interpretation and visual seams within the current face budget."
+      ]
     }
   ]
 }

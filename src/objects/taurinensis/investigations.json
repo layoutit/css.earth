@@ -4,17 +4,27 @@
   "entries": [
     {
       "id": "selected-model",
-      "subject": "Selected source model",
+      "subject": "DAMIT 490: selected shape and spin",
       "status": "included",
-      "finding": "Checked 2026-09-09. Selected DAMIT model [490](https://damit.cuni.cz/projects/damit/asteroid_models/view/490), version **2013-02-11**. Convex lightcurve shape, uniformly scaled to the AKARI effective diameter of 20.87 ±0.36 km. Model fields and mesh measurements.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-490.txt. Model 490, version 2013-02-11, pole (324°, 45°), period 5.582028 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/taurinensis/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/490"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/490",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/taurinensis/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/taurinensis/source/reference/damit-model.json",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/1914/shape.txt",
+        "https://damit.cuni.cz/projects/damit/pages/documentation"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,7 +32,7 @@
       "id": "surface-imagery",
       "subject": "Registered surface imagery",
       "status": "unresolved",
-      "finding": "Catalog error omits additional shape, spin and thermal-model uncertainty; sampled simplification error does not establish terrain accuracy. - No registered surface imagery is available.",
+      "finding": "No registered reusable surface imagery was examined for the selected convex model. The grid marks missing imagery; the AKARI thermal size is a separate scale decision, not a surface map or terrain qualification.",
       "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/taurinensis/README.md"
@@ -31,6 +41,49 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "akari-scale",
+      "subject": "AKARI AcuA thermal scale",
+      "status": "included",
+      "finding": "The retained AcuA row 512 (Taurinensis; seven detections) supplies a 20.87 ± 0.36 km fitted nonrotating-sphere effective diameter. The recipe transfers it uniformly to the uncalibrated DAMIT 490 mesh as an approximate volume scale. The catalog error is thermal-model/statistical only; it does not establish total size uncertainty, local shape accuracy, terrain or imagery. The retrieved original catalogue row was compared field-for-field with the retained row and matches.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/taurinensis/source/reference/damit-model.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/taurinensis/source/reference/calibration.json",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://arxiv.org/abs/1106.1948",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "historical-source-review",
+      "subject": "Historical model and population records",
+      "status": "included",
+      "finding": "Historical review retained the Hanuš et al. (2013) model-publication record and JPL SBDB Mars-crosser classification from the former README survey. They provide source context only: neither alters the only DAMIT model in the checked listing nor qualifies terrain, imagery or the AKARI scale.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2013A%26A...551A..67H",
+        "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=512",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/taurinensis/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }
