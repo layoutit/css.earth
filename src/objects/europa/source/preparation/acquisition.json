@@ -568,6 +568,2662 @@
       "path": "composition/reflectance-conversion.json",
       "recipePath": "composition/reflectance-recipe.json",
       "product": "report"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0368639400.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0368639400/s0368639400.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0368639413.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0368639413/s0368639413.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0368639426.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0368639426/s0368639426.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374667300.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374667300/s0374667300.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374682500.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374682500/s0374682500.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374682513.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374682513/s0374682513.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374682526.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374682526/s0374682526.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374685101_00.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685101_00/s0374685101_00.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374685113.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685113/s0374685113.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374685126.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685126/s0374685126.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374685140_39.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685140_39/s0374685140_39.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374685413.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685413/s0374685413.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374685427_26.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685427_26/s0374685427_26.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374685439.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685439/s0374685439.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0374685452.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685452/s0374685452.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383713700_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713700_01/s0383713700_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383713713.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713713/s0383713713.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383713726.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713726/s0383713726.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383713739.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713739/s0383713739.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383713752.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713752/s0383713752.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383713765.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713765/s0383713765.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383715500.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383715500/s0383715500.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383715504.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383715504/s0383715504.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383717500.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383717500/s0383717500.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383717513.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383717513/s0383717513.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383717526.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383717526/s0383717526.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383717539.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383717539/s0383717539.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383718300.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718300/s0383718300.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383718304.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718304/s0383718304.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383718307.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718307/s0383718307.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383718311_12.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718311_12/s0383718311_12.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383718314.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718314/s0383718314.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383718318.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718318/s0383718318.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383718600.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718600/s0383718600.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383718613.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718613/s0383718613.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383718626.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718626/s0383718626.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383718639.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718639/s0383718639.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0383718652.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718652/s0383718652.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0389778842.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0389778842/s0389778842.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0389779271_70.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0389779271_70/s0389779271_70.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0389779707.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0389779707/s0389779707.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0389780135.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0389780135/s0389780135.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0389780563.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0389780563/s0389780563.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420619200.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619200/s0420619200.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420619213.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619213/s0420619213.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420619226.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619226/s0420619226.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420619239.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619239/s0420619239.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420619252.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619252/s0420619252.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420619265.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619265/s0420619265.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420619278.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619278/s0420619278.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420619300.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619300/s0420619300.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420619313.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619313/s0420619313.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420619326.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619326/s0420619326.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420626700.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626700/s0420626700.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420626713.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626713/s0420626713.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420626726.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626726/s0420626726.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420626739.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626739/s0420626739.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420626752.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626752/s0420626752.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420626765.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626765/s0420626765.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420626778.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626778/s0420626778.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0420626800.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626800/s0420626800.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426267200_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426267200_01/s0426267200_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426271901_00.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426271901_00/s0426271901_00.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426271914_13.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426271914_13/s0426271914_13.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426271927_26.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426271927_26/s0426271927_26.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426271940_39.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426271940_39/s0426271940_39.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426271953_52.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426271953_52/s0426271953_52.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272379_78.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272379_78/s0426272379_78.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272401_00.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272401_00/s0426272401_00.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272405_04.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272405_04/s0426272405_04.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272408_07.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272408_07/s0426272408_07.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272412_11.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272412_11/s0426272412_11.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272415_14.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272415_14/s0426272415_14.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272419_18.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272419_18/s0426272419_18.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272422_21.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272422_21/s0426272422_21.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272426_25.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272426_25/s0426272426_25.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272600.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272600/s0426272600.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272604.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272604/s0426272604.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272607.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272607/s0426272607.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272611.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272611/s0426272611.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272614.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272614/s0426272614.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272618.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272618/s0426272618.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272621.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272621/s0426272621.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272625.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272625/s0426272625.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272628.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272628/s0426272628.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272632.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272632/s0426272632.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272635.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272635/s0426272635.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272639.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272639/s0426272639.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272642.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272642/s0426272642.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272646.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272646/s0426272646.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272649.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272649/s0426272649.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272653.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272653/s0426272653.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272656.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272656/s0426272656.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272660_61.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272660_61/s0426272660_61.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272811.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272811/s0426272811.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272814.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272814/s0426272814.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272818.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272818/s0426272818.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272821.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272821/s0426272821.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272825.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272825/s0426272825.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272828.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272828/s0426272828.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272832.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272832/s0426272832.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272835.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272835/s0426272835.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272839.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272839/s0426272839.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272842.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272842/s0426272842.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272846_47.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272846_47/s0426272846_47.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272849.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272849/s0426272849.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272853.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272853/s0426272853.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426272856.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272856/s0426272856.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426273800.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426273800/s0426273800.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426273813.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426273813/s0426273813.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426273826.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426273826/s0426273826.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0426273839.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426273839/s0426273839.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440948639.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948639/s0440948639.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440948652.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948652/s0440948652.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440948665.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948665/s0440948665.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440948678.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948678/s0440948678.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440948700.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948700/s0440948700.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440948778.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948778/s0440948778.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440948800.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948800/s0440948800.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440948813_14.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948813_14/s0440948813_14.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440948826_27.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948826_27/s0440948826_27.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440948839.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948839/s0440948839.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440948852.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948852/s0440948852.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440949842.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949842/s0440949842.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440949846.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949846/s0440949846.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440949849.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949849/s0440949849.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440949853.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949853/s0440949853.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440949877.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949877/s0440949877.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440949881.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949881/s0440949881.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440949884.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949884/s0440949884.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440949888.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949888/s0440949888.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440953578.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953578/s0440953578.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440953600.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953600/s0440953600.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440953613.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953613/s0440953613.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440953627_26.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953627_26/s0440953627_26.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440953640_39.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953640_39/s0440953640_39.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440953653_52.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953653_52/s0440953653_52.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440953666_65.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953666_65/s0440953666_65.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440953679_78.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953679_78/s0440953679_78.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440953701_00.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953701_00/s0440953701_00.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440955165.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955165/s0440955165.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440955178.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955178/s0440955178.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440955200.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955200/s0440955200.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440955213.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955213/s0440955213.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440955226.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955226/s0440955226.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440955239.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955239/s0440955239.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440955252_53.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955252_53/s0440955252_53.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440955265.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955265/s0440955265.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440955278.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955278/s0440955278.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0440955300.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955300/s0440955300.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449961800_01_02.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961800_01_02/s0449961800_01_02.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449961813_14.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961813_14/s0449961813_14.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449961826_27_28.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961826_27_28/s0449961826_27_28.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449961839_40.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961839_40/s0449961839_40.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449961852_53_54.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961852_53_54/s0449961852_53_54.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449961865_66.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961865_66/s0449961865_66.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449961878_79.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961878_79/s0449961878_79.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449961900_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961900_01/s0449961900_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449961914_13.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961914_13/s0449961914_13.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967442.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967442/s0449967442.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967446.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967446/s0449967446.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967449_50.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967449_50/s0449967449_50.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967454_53.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967454_53/s0449967454_53.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967484.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967484/s0449967484.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967488.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967488/s0449967488.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967501_00.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967501_00/s0449967501_00.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967505_04.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967505_04/s0449967505_04.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967535_36.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967539_40.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967539_40/s0449967539_40.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967542_43.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967542_43/s0449967542_43.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967547_46.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967547_46/s0449967547_46.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967577.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967577/s0449967577.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967582_81.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967582_81/s0449967582_81.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967585_84.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967585_84/s0449967585_84.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967589_88.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967589_88/s0449967589_88.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967752_53_54.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967752_53_54/s0449967752_53_54.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967765_66_67.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967765_66_67/s0449967765_66_67.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449967778_79_80.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967778_79_80/s0449967778_79_80.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449968453_52.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449968453_52/s0449968453_52.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449968465_66.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449968465_66/s0449968465_66.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449968478_79_80.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449968478_79_80/s0449968478_79_80.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974200.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974200/s0449974200.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974213_14.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974213_14/s0449974213_14.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974226.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974226/s0449974226.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974239.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974239/s0449974239.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974252_53.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974252_53/s0449974252_53.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974265_66_67.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974265_66_67/s0449974265_66_67.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974278_79.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974278_79/s0449974278_79.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974300_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974300_01/s0449974300_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974313_14.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974313_14/s0449974313_14.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974326.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974326/s0449974326.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974339.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974339/s0449974339.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974352.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974352/s0449974352.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974365_66_67.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974365_66_67/s0449974365_66_67.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974378_79.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974378_79/s0449974378_79.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974400_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974400_01/s0449974400_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974413.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974413/s0449974413.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974427_26_28_29.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974427_26_28_29/s0449974427_26_28_29.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0449974439_40.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974439_40/s0449974439_40.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664152_53.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664152_53/s0466664152_53.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664165_66.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664165_66/s0466664165_66.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664178_79.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664178_79/s0466664178_79.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664200_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664200_01/s0466664200_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664213_14.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664213_14/s0466664213_14.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664226_27.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664226_27/s0466664226_27.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664239_40_41.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664239_40_41/s0466664239_40_41.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664252_53_54.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664252_53_54/s0466664252_53_54.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664265_66_67.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664265_66_67/s0466664265_66_67.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664278_79.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664278_79/s0466664278_79.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664300_01_02.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664300_01_02/s0466664300_01_02.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664313_14.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664313_14/s0466664313_14.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664326_27.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664326_27/s0466664326_27.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664339_40.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664339_40/s0466664339_40.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664352.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664352/s0466664352.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664365_66.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664365_66/s0466664365_66.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664378_79.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664378_79/s0466664378_79.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664400_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664400_01/s0466664400_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664413_14_15.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664413_14_15/s0466664413_14_15.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664552.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664552/s0466664552.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664565.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664565/s0466664565.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664578.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664578/s0466664578.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664600.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664600/s0466664600.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664613.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664613/s0466664613.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664626.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664626/s0466664626.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664639.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664639/s0466664639.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664652.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664652/s0466664652.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466664665.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664665/s0466664665.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669339.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669339/s0466669339.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669352.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669352/s0466669352.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669500.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669500/s0466669500.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669513.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669513/s0466669513.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669526.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669526/s0466669526.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669539.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669539/s0466669539.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669552.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669552/s0466669552.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669565.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669565/s0466669565.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669578.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669578/s0466669578.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669626.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669626/s0466669626.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669639.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669639/s0466669639.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669652.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669652/s0466669652.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669765.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669765/s0466669765.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669778.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669778/s0466669778.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669800.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669800/s0466669800.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669926.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669926/s0466669926.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466669939.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669939/s0466669939.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676678_79.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676678_79/s0466676678_79.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676700_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676700_01/s0466676700_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676713.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676713/s0466676713.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676726.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676726/s0466676726.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676739.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676739/s0466676739.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676752_53.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676752_53/s0466676752_53.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676765.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676765/s0466676765.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676778_79.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676778_79/s0466676778_79.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676800_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676800_01/s0466676800_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676813.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676813/s0466676813.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676826_27.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676826_27/s0466676826_27.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676839_40.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676839_40/s0466676839_40.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676852_53.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676852_53/s0466676852_53.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676865.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676865/s0466676865.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676879_78_80.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676879_78_80/s0466676879_78_80.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676900_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676900_01/s0466676900_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466676913_14.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676913_14/s0466676913_14.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466677052.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466677052/s0466677052.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484884301_00.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884301_00/s0484884301_00.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484884313.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884313/s0484884313.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484884500.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884500/s0484884500.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484884513_14.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884513_14/s0484884513_14.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484884700_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884700_01/s0484884700_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484884713.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884713/s0484884713.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888243_42.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888243_42/s0484888243_42.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888700_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888700_01/s0484888700_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888713_14.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888713_14/s0484888713_14.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888727_26.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888727_26/s0484888727_26.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888740_39.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888740_39/s0484888740_39.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889800.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889800/s0484889800.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889804.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889804/s0484889804.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889807.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889807/s0484889807.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889811.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889811/s0484889811.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889814.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889814/s0484889814.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889818.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889818/s0484889818.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889821.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889821/s0484889821.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889825.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889825/s0484889825.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889828.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889828/s0484889828.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889832.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889832/s0484889832.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889835_36.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889835_36/s0484889835_36.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889839.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889839/s0484889839.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889842.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889842/s0484889842.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889846.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889846/s0484889846.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889849.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889849/s0484889849.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889918.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889918/s0484889918.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484889921.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889921/s0484889921.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0527275700.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0527275700/s0527275700.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0527275900.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0527275900/s0527275900.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0532836239.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836239/s0532836239.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0532836252.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836252/s0532836252.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0532836800.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836800/s0532836800.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0532836813.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836813/s0532836813.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0532836826_27.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836826_27/s0532836826_27.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0532836839.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836839/s0532836839.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0532837665_66.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532837665_66/s0532837665_66.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0532837678_79.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532837678_79/s0532837678_79.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0532837700_01.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532837700_01/s0532837700_01.equi.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670100.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670100/s0466670100.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670113.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670113/s0466670113.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670126.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670126/s0466670126.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670139.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670139/s0466670139.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670152.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670152/s0466670152.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670165.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670165/s0466670165.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670178.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670178/s0466670178.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670200.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670200/s0466670200.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670213.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670213/s0466670213.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670352.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670352/s0466670352.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670513.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670513/s0466670513.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670526.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670526/s0466670526.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670539.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670539/s0466670539.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670552.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670552/s0466670552.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670700.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670700/s0466670700.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670713.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670713/s0466670713.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670726.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670726/s0466670726.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670739.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670739/s0466670739.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466670752.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670752/s0466670752.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0466677065.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466677065/s0466677065.spola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484884727_26.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884727_26/s0484884727_26.npola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888200.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888200/s0484888200.npola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888204.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888204/s0484888204.npola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888207.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888207/s0484888207.npola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888211.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888211/s0484888211.npola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888246.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888246/s0484888246.npola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888249.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888249/s0484888249.npola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0484888253.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888253/s0484888253.npola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0527272700.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0527272700/s0527272700.npola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0527272713.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0527272713/s0527272713.npola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "galileo-regional"
+      ],
+      "path": "galileo/s0527272726.tif",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0527272726/s0527272726.npola.photr.tif"
     }
   ]
 }

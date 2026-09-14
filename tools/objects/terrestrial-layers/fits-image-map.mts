@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readFitsHeader } from '../observation/fits.mts';
+import { readFitsHdu, fitsImageAccessor } from '../../fits.mts';
 import { shape, text, number, array, optional, dictionary, parseTransform } from './source-records.mts';
 
 const plane = shape({ extension: number, name: text, units: text });
@@ -23,23 +23,23 @@ export function decodeFitsImageMap(bytes: Buffer, value: unknown) {
       recipe.missingTuple?.length === 0 || recipe.missingTuple?.some(p => !Number.isSafeInteger(p.extension) || p.extension < 1)) {
     throw new TypeError('FITS scalar maps require an identified extension, source grid and nearest sampling.');
   }
-  const primary = readFitsHeader(bytes);
+  const primary = readFitsHdu(bytes);
   if (primary.header.SIMPLE !== true || primary.header.BITPIX !== 8 || primary.header.NAXIS !== 0 || primary.header.EXTEND !== true ||
       Object.entries(recipe.primary).some(([key, expected]) => primary.header[key] !== expected)) {
     throw new Error('FITS scalar-map primary identity changed.');
   }
-  const hdus = new Map<number, { header: ReturnType<typeof readFitsHeader>['header']; dataOffset: number }>();
+  const hdus = new Map<number, { header: ReturnType<typeof readFitsHdu>['header']; dataOffset: number; at: (index: number) => number }>();
   const samples = recipe.grid.width * recipe.grid.height;
   if (!Number.isSafeInteger(samples) || samples > 100_000_000) throw new Error('Unbounded FITS scalar grid.');
   let offset = primary.dataOffset, extension = 0;
   while (offset < bytes.length) {
-    const hdu = readFitsHeader(bytes, offset), h = hdu.header;
+    const hdu = readFitsHdu(bytes, offset), h = hdu.header;
     if (h.XTENSION !== 'IMAGE' || h.BITPIX !== -32 || h.NAXIS !== 2 || h.NAXIS1 !== recipe.grid.width || h.NAXIS2 !== recipe.grid.height ||
         h.PCOUNT !== 0 || h.GCOUNT !== 1 || (h.BSCALE ?? 1) !== 1 || (h.BZERO ?? 0) !== 0 || hdu.dataOffset + samples * 4 > bytes.length) {
       throw new Error('FITS scalar-map extension layout changed or is truncated.');
     }
-    hdus.set(++extension, hdu);
-    offset = Math.ceil((hdu.dataOffset + samples * 4) / 2880) * 2880;
+    hdus.set(++extension, { ...hdu, at: fitsImageAccessor(bytes, hdu) });
+    offset = hdu.nextOffset;
   }
   if (offset !== bytes.length) throw new Error('FITS scalar-map padding is truncated.');
   const select = (p: ReturnType<typeof plane>) => {
@@ -49,8 +49,8 @@ export function decodeFitsImageMap(bytes: Buffer, value: unknown) {
   };
   const selected = select(recipe), missing = recipe.missingTuple?.map(p => ({ ...select(p), value: p.value })) ?? [];
   const at = (index: number) => {
-    if (missing.length && missing.every(p => bytes.readFloatBE(p.dataOffset + index * 4) === p.value)) return null;
-    const value = bytes.readFloatBE(selected.dataOffset + index * 4);
+    if (missing.length && missing.every(p => p.at(index) === p.value)) return null;
+    const value = selected.at(index);
     return Number.isFinite(value) ? value * (recipe.valueTransform?.scale ?? 1) + (recipe.valueTransform?.offset ?? 0) : null;
   };
   return {

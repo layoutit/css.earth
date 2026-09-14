@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { serializeObjectJson } from './prepare-object-json.mts';
 import { writePreparedText } from './write-prepared-text.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
@@ -11,8 +11,8 @@ import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 
 /** Restore only pinned JSON transports; never prepare geometry, bindings or assets. */
-export async function restoreObjectJson(ids = OBJECTS.map(({ id }) => id), root = projectRoot) {
-  if (new Set(ids).size !== ids.length || ids.some(id => !OBJECTS.some(object => object.id === id))) {
+export async function restoreObjectJson(ids = SCENE_OBJECTS.map(({ id }) => id), root = projectRoot) {
+  if (new Set(ids).size !== ids.length || ids.some(id => !SCENE_OBJECTS.some(object => object.id === id))) {
     throw new TypeError('Choose registered object ids.');
   }
   let written = 0;

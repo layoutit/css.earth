@@ -34,6 +34,11 @@
               "material": "lighting"
             },
             {
+              "id": "surface",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "ratios",
               "source": "content",
               "material": "lighting"
@@ -62,7 +67,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "2e79a0dc6afd530a826abca14f4570847d273df45094686d886fbd75d4370abe"
+          "sha256": "34f5341fa2301c11b9d6423c2c1756b591909858c3a14b0ff072152ef6cf6020"
         },
         {
           "id": "rotation",
@@ -72,7 +77,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7146275356034ccb26145ca2ceca892540055a34fda22212c610a5d69405de31"
+          "sha256": "97b4de406a5fa5f45c6c511b2b0cb0692f1f88bfe7ebf8a4372ca14918d31925"
         },
         {
           "id": "title",
@@ -87,7 +92,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "1904ffd196f8925cece2e13621313dadb01720099bf082cc64fde8fb6ebef4e2"
+          "sha256": "5f258e2a5837e9f317936d4546ff196e5491bc5a81ac3777f3e1523f0a0e2336"
         },
         {
           "id": "features",

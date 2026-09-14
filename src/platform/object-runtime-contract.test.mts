@@ -2,7 +2,7 @@ import { parsePreparedObjectRuntime } from "../renderers/css/dist/index.js";
 import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { OBJECTS } from "../../site/objects.mts";
+import { SCENE_OBJECTS } from "../../site/objects.mts";
 const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('moon'));
 const objectControls = moonDefinition.controls;
 import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from '../renderers/css/dist/testing.js';
@@ -13,7 +13,7 @@ function definition(overrides: Record<string, unknown> = {}) {
 }
 
 test("validates actions against real controls for every existing object", async () => {
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const {controls} = parsePreparedObjectRuntime(await loadObjectTestDefinition(object.id));
     for (const lens of controls.lenses?.controls ?? []) {
       const action = requireObjectAction(controls, { kind: "lens", id: lens.id });

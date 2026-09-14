@@ -1,7 +1,8 @@
+import { preparationEvidenceApplies } from './preparation-evidence.mts';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFile } from 'node:fs/promises';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
 import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 import { hasErrorCode } from './source-values.mts';
@@ -13,7 +14,7 @@ import { writePreparedSet } from './write-prepared-set.mts';
 // A fresh run stays a fresh run when its pinned lineage still matches. A changed
 // source/recipe/output/binding requires a new record and loses that run claim.
 export function provenanceIdentity(document: ProvenanceDocument) {
-  const { basis, ...identity } = document;
+  const { basis, lastPreparation, ...identity } = document;
   return JSON.stringify({ ...identity,
     sources: identity.sources.map(({ verification, ...source }) => source),
     products: identity.products.map(product => ({ ...product,
@@ -22,7 +23,7 @@ export function provenanceIdentity(document: ProvenanceDocument) {
 }
 
 export async function recoverObjectProvenance(ids: readonly string[] | null = null, { root = process.cwd(), verify = false } = {}) {
-  const selected = OBJECTS.filter(object => !ids || ids.includes(object.id));
+  const selected = SCENE_OBJECTS.filter(object => !ids || ids.includes(object.id));
   if (ids && selected.length !== new Set(ids).size) throw new TypeError('Unknown object requested for provenance.');
   const results = [];
   const outputs: { path: string; text: string }[] = [];
@@ -36,11 +37,12 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
       if (sourceObject(raw).schema !== 'cssearth-object-provenance@3') return null;
       return validateObjectProvenance(raw);
     }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-    const retained = existing && provenanceIdentity(existing) === provenanceIdentity(document) ? existing : document;
+    const retained = existing && provenanceIdentity(existing) === provenanceIdentity(document)
+      ? { ...existing, ...(document.lastPreparation ? { lastPreparation: document.lastPreparation } : {}) } : document;
     documents.set(object.id, retained);
     outputs.push({ path, text: JSON.stringify(retained, null, 2) + '\n' });
     results.push({ id: object.id, products: document.products.length, sources: document.sources.length,
-      unresolved: document.coverage.unresolved });
+      unresolved: document.coverage.unresolved, lastPreparation: retained.lastPreparation ? (preparationEvidenceApplies(retained) ? 'material-matches' : 'material-changed') : 'not-recorded' });
   }
   // Invalid identities, capture pairs, lens IDs or artwork leave the entire
   // previous prepared set in place. Consumers also verify the closure pins.

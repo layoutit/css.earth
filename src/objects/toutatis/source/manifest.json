@@ -27,7 +27,8 @@
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
       "consumers": [
         "terrain",
-        "shape"
+        "shape",
+        "elevation"
       ],
       "lensId": "shape",
       "projection": {
@@ -109,8 +110,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7647,
-      "expectedSha256": "da2f1d7474b29e2cca75357359882cb280fd895b8236badfbb6379ca695254a2",
+      "expectedBytes": 9070,
+      "expectedSha256": "a037a42a4571e1e343cbde40712e3610458ddef7bad8c71ac0816a8c09632393",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -133,8 +134,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 1951,
-      "expectedSha256": "d98d7bd5ad86364d1625a5946c1170d230b20078570dd0a7d366c6f48a9f6140"
+      "expectedBytes": 3029,
+      "expectedSha256": "9fda270f0816598525d738139ad53a2c66984b89bc4d54e3bc88bf9f90a1ff3d"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

@@ -36,7 +36,7 @@ function solarSource(value: unknown): SolarSource { const source = record(value,
 export async function prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config }: CelestialContext): Promise<CelestialAssets> {
   if (typeof sourceDirectory !== 'string' || typeof publicDirectory !== 'string' || typeof outputDirectory !== 'string') throw new TypeError('Celestial preparation needs source, public, and output directories.');
   const options = profile(config); await verifySources(sourceDirectory, options.sources);
-  const solar = solarSource(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation/solar-system.json'), 'utf8'))); const api = await loadCelestialAdapters();
+  const solar = solarSource(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation/solar-system.json'), 'utf8'))); const api = await loadCelestialAdapters(); api.requireSceneObject(solar.bodyId);
   await mkdir(outputDirectory, { recursive: true });
   const sky = json(api.preparePlanetCubicSky({ objectId: solar.bodyId, cameraContract: api.cubicSkyCamera }));
   // A star has no directional Sun; sun.json records null so the runtime contract sees the absence explicitly.

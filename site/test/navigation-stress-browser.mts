@@ -9,7 +9,7 @@ import assert from 'node:assert/strict';
 import { mkdir, open, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 
 const seed = Number(process.env.SEED ?? 9072026) >>> 0;
 let randomState = seed;
@@ -18,7 +18,7 @@ const choose = <T,>(values:readonly T[]):T => required(values[Math.floor(random(
 const dpr = Number(process.env.DPR ?? 1), hops = Number(process.env.HOPS ?? 20);
 const origin = process.env.ORIGIN ?? 'http://127.0.0.1:4221';
 const output = process.env.OUTPUT ?? `output/playwright/navigation-stress/${seed}-dpr${dpr}`;
-const start = choose(OBJECTS.filter(object => object.classification === 'planet'));
+const start = choose(SCENE_OBJECTS.filter(object => object.classification === 'planet'));
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_EXECUTABLE ?? '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary' });
 const page = await createTestPage(browser, { viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr });
@@ -125,7 +125,7 @@ async function pickTarget(hop:number) {
   // A real sidebar choice is allowed when the current projection has no body
   // targets; record it explicitly rather than pretending it was a scene pick.
   const current = (await state()).selected;
-  return { id: choose(OBJECTS.filter(object => object.id !== current)).id, kind: 'sidebar' as const };
+  return { id: choose(SCENE_OBJECTS.filter(object => object.id !== current)).id, kind: 'sidebar' as const };
 }
 let tracing = false;
 try {
@@ -182,7 +182,7 @@ try {
     let expectedId = requested[0].id;
     if (supersede) {
       await page.waitForTimeout(150 + random() * 450);
-      expectedId = choose(OBJECTS.filter(object => object.id !== target.id)).id;
+      expectedId = choose(SCENE_OBJECTS.filter(object => object.id !== target.id)).id;
       await mark('supersede', { hop, id: expectedId }); await sidebarPick(expectedId);
     } else if (interrupt) {
       await page.waitForTimeout(120 + random() * 650);

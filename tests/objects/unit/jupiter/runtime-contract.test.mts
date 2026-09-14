@@ -5,12 +5,12 @@ import {parsePreparedObjectRuntime} from "../../../../src/renderers/css/dist/ind
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import { runtimeDefinition } from "./prepared-fixture.mts";
 import { objectRuntimePackageTests, preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
-import { OBJECTS } from "../../../../site/objects.mts";
+import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
 objectRuntimePackageTests(runtimeDefinition);
 test("Jupiter's actual import closure has no private runtime owner", async () => {
-  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "jupiter") });
+  const audit = await auditObjectRuntimeOwnership({ objects: SCENE_OBJECTS.filter(object => object.id === "jupiter") });
   assert.equal(audit.complete, true);
   assert.ok(audit.sharedClosure.some(path => path.startsWith("src/renderers/css/")));
 });

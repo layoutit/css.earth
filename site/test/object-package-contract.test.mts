@@ -7,7 +7,7 @@ import { dirname, resolve } from "node:path";
 
 import { required } from './navigation-test-values.mts';
 import { SourceEvidence } from './source-evidence-values.mts';
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
 import { planetInformationSource, validatePlanetEditorial } from "../../tools/planet-information-sources.mts";
 import {
@@ -17,7 +17,7 @@ import {
   validateRuntimeAssetManifest,
 } from "../../tools/object-package-contract.mts";
 
-const implemented = OBJECTS;
+const implemented = SCENE_OBJECTS;
 
 test("accepts a complete non-NASA package and still rejects corrupt or undeclared bytes", async (context) => {
   const projectRoot = await mkdtemp(resolve(tmpdir(), "cssearth-provider-neutral-"));

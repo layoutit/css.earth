@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { chromium } from "playwright";
 import sharp from "sharp";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { previewSite } from "./preview.mts";
 import { setupObjectIds } from "./runtime-assets.mts";
 
@@ -23,7 +23,7 @@ const baseUrl = values["base-url"] ?? "http://127.0.0.1:4266";
 let browser;
 try {
   browser = await chromium.launch({ channel: "chrome", headless: true });
-  for (const object of OBJECTS.filter(({ id }) => ids.includes(id))) {
+  for (const object of SCENE_OBJECTS.filter(({ id }) => ids.includes(id))) {
     const page = await browser.newPage({
       viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1,
       reducedMotion: "reduce",

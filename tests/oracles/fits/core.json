@@ -1,0 +1,187 @@
+{
+ "schema": "cssearth-oracle-fixture@1",
+ "oracle": "astropy",
+ "generatedBy": "tools/oracles/fits/core.py",
+ "tool": {
+  "astropy": "8.0.1",
+  "python": "3.12.14",
+  "numpy": "2.5.3"
+ },
+ "inputs": [
+  {
+   "path": "tests/fixtures/fits/byte.fits",
+   "sha256": "a4697bb0e54261c40e72cfca8d6f126cf5270cf3f12054626981a8ae0cca2886",
+   "bytes": 5760
+  },
+  {
+   "path": "tests/fixtures/fits/scaled-blank.fits",
+   "sha256": "a4c56a1350464fc7a3ed7e6c092a429baab0ec0cfdc537dbe5019cdc1397ac7d",
+   "bytes": 5760
+  },
+  {
+   "path": "tests/fixtures/fits/signed-int32.fits",
+   "sha256": "d13a11fe9bfddabea9818488ea211a4817cdc33cfb43e43d3d5ba3302be64fb8",
+   "bytes": 5760
+  },
+  {
+   "path": "tests/fixtures/fits/float32.fits",
+   "sha256": "b39612319fd33b619da91b1775821d994dfce470404de540c03cfbab78db3d2b",
+   "bytes": 5760
+  },
+  {
+   "path": "tests/fixtures/fits/float64.fits",
+   "sha256": "499deafab4cea0b144f3f03693a16f8a21eec5d0ab2fe73015f231fdddd498b3",
+   "bytes": 5760
+  },
+  {
+   "path": "tests/fixtures/fits/cube.fits",
+   "sha256": "f247516bfab2df781cb5e9b08a202aee3fe9e93cb379161ae619e546807242ee",
+   "bytes": 5760
+  },
+  {
+   "path": "tests/fixtures/fits/eso-hierarchy.fits",
+   "sha256": "fd2acdf636a6c0ec1c5cfae0fdfb2496906677c9ed3101f097e5f89b58a4bf49",
+   "bytes": 5760
+  },
+  {
+   "path": "tests/fixtures/fits/extensions.fits",
+   "sha256": "54c22932c64b874701747f7a09a0e6f6d52e1c947e478658af344fc101c46746",
+   "bytes": 8640
+  }
+ ],
+ "cases": {
+  "byte": {
+   "path": "tests/fixtures/fits/byte.fits",
+   "dimensions": [
+    2,
+    2
+   ],
+   "values": [
+    0.0,
+    128.0,
+    255.0,
+    1.0
+   ],
+   "units": "W/(m^2*sr*um)",
+   "observer": "O'Brien / field"
+  },
+  "scaled-blank": {
+   "path": "tests/fixtures/fits/scaled-blank.fits",
+   "dimensions": [
+    2,
+    2
+   ],
+   "values": [
+    null,
+    -2.0,
+    0.0,
+    -6.0
+   ],
+   "units": "W/(m^2*sr*um)",
+   "observer": "O'Brien / field"
+  },
+  "signed-int32": {
+   "path": "tests/fixtures/fits/signed-int32.fits",
+   "dimensions": [
+    2,
+    2
+   ],
+   "values": [
+    -2147483648.0,
+    -1.0,
+    0.0,
+    2147483647.0
+   ],
+   "units": "W/(m^2*sr*um)",
+   "observer": "O'Brien / field"
+  },
+  "float32": {
+   "path": "tests/fixtures/fits/float32.fits",
+   "dimensions": [
+    2,
+    2
+   ],
+   "values": [
+    -1.25,
+    0.0,
+    2.5,
+    null
+   ],
+   "units": "W/(m^2*sr*um)",
+   "observer": "O'Brien / field"
+  },
+  "float64": {
+   "path": "tests/fixtures/fits/float64.fits",
+   "dimensions": [
+    2,
+    2
+   ],
+   "values": [
+    -1e+100,
+    0.0,
+    2.5e-100,
+    null
+   ],
+   "units": "W/(m^2*sr*um)",
+   "observer": "O'Brien / field"
+  },
+  "cube": {
+   "path": "tests/fixtures/fits/cube.fits",
+   "dimensions": [
+    2,
+    2,
+    3
+   ],
+   "values": [
+    0.0,
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0,
+    7.0,
+    8.0,
+    9.0,
+    10.0,
+    11.0
+   ],
+   "units": "W/(m^2*sr*um)",
+   "observer": "O'Brien / field"
+  },
+  "eso-hierarchy": {
+   "path": "tests/fixtures/fits/eso-hierarchy.fits",
+   "dimensions": [
+    2,
+    2
+   ],
+   "values": [
+    1.0,
+    -2.0,
+    0.0,
+    7.5
+   ],
+   "units": "W/(m^2*sr*um)",
+   "observer": "O'Brien / field",
+   "hierarchy": {
+    "ESO OBS AIRM": 2.0,
+    "ESO INS NAME": "O'Brien / field",
+    "ESO DET ACTIVE": true
+   }
+  },
+  "extensions": {
+   "path": "tests/fixtures/fits/extensions.fits",
+   "dimensions": [
+    2,
+    2
+   ],
+   "values": [
+    0,
+    32767,
+    32768,
+    65535
+   ],
+   "extension": 1
+  }
+ }
+}

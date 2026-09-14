@@ -76,32 +76,18 @@
             "startTime": "2005-10-22T13:00:19"
           },
           {
-            "id": "sep24",
-            "path": "observations/st_2402987304_v_ddr.img.gz",
-            "labelPath": "observations/st_2402987304_v_ddr.lbl",
-            "originalPath": "observations/st_2402987304_v.fit",
-            "startTime": "2005-09-24T02:00:02"
+            "id": "amica-2495230070",
+            "path": "observations/st_2495230070_v_ddr.img.gz",
+            "labelPath": "observations/st_2495230070_v_ddr.lbl",
+            "originalPath": "observations/st_2495230070_v.fit",
+            "startTime": "2005-10-27T10:36:18"
           },
           {
-            "id": "sep26",
-            "path": "observations/st_2409592857_v_ddr.img.gz",
-            "labelPath": "observations/st_2409592857_v_ddr.lbl",
-            "originalPath": "observations/st_2409592857_v.fit",
-            "startTime": "2005-09-26T11:20:07"
-          },
-          {
-            "id": "sep29",
-            "path": "observations/st_2417589964_v_ddr.img.gz",
-            "labelPath": "observations/st_2417589964_v_ddr.lbl",
-            "originalPath": "observations/st_2417589964_v.fit",
-            "startTime": "2005-09-29T08:45:09"
-          },
-          {
-            "id": "amica-2480981469",
-            "path": "observations/st_2480981469_v_ddr.img.gz",
-            "labelPath": "observations/st_2480981469_v_ddr.lbl",
-            "originalPath": "observations/st_2480981469_v.fit",
-            "startTime": "2005-10-22T07:00:19"
+            "id": "amica-2493031594",
+            "path": "observations/st_2493031594_v_ddr.img.gz",
+            "labelPath": "observations/st_2493031594_v_ddr.lbl",
+            "originalPath": "observations/st_2493031594_v.fit",
+            "startTime": "2005-10-26T15:31:19"
           },
           {
             "id": "amica-2492513077",
@@ -111,11 +97,18 @@
             "startTime": "2005-10-26T11:01:16"
           },
           {
-            "id": "amica-2495230070",
-            "path": "observations/st_2495230070_v_ddr.img.gz",
-            "labelPath": "observations/st_2495230070_v_ddr.lbl",
-            "originalPath": "observations/st_2495230070_v.fit",
-            "startTime": "2005-10-27T10:36:18"
+            "id": "amica-2492225173",
+            "path": "observations/st_2492225173_v_ddr.img.gz",
+            "labelPath": "observations/st_2492225173_v_ddr.lbl",
+            "originalPath": "observations/st_2492225173_v.fit",
+            "startTime": "2005-10-26T08:31:17"
+          },
+          {
+            "id": "amica-2480981469",
+            "path": "observations/st_2480981469_v_ddr.img.gz",
+            "labelPath": "observations/st_2480981469_v_ddr.lbl",
+            "originalPath": "observations/st_2480981469_v.fit",
+            "startTime": "2005-10-22T07:00:19"
           },
           {
             "id": "amica-2473604354",
@@ -123,10 +116,31 @@
             "labelPath": "observations/st_2473604354_v_ddr.lbl",
             "originalPath": "observations/st_2473604354_v.fit",
             "startTime": "2005-10-19T14:53:17"
+          },
+          {
+            "id": "sep29",
+            "path": "observations/st_2417589964_v_ddr.img.gz",
+            "labelPath": "observations/st_2417589964_v_ddr.lbl",
+            "originalPath": "observations/st_2417589964_v.fit",
+            "startTime": "2005-09-29T08:45:09"
+          },
+          {
+            "id": "sep26",
+            "path": "observations/st_2409592857_v_ddr.img.gz",
+            "labelPath": "observations/st_2409592857_v_ddr.lbl",
+            "originalPath": "observations/st_2409592857_v.fit",
+            "startTime": "2005-09-26T11:20:07"
+          },
+          {
+            "id": "sep24",
+            "path": "observations/st_2402987304_v_ddr.img.gz",
+            "labelPath": "observations/st_2402987304_v_ddr.lbl",
+            "originalPath": "observations/st_2402987304_v.fit",
+            "startTime": "2005-09-24T02:00:02"
           }
         ],
         "flatPath": "observations/flat_v.fit",
-        "selection": "lowest-emission",
+        "selection": "recipe-order",
         "levelMatching": {
           "samplesPerTriangle": 24,
           "minimumPairs": 128,
@@ -154,7 +168,7 @@
         },
         "metadata": {
           "label": "AMICA mosaic",
-          "coverage": "Eight Hayabusa AMICA v-band photographs from September and October 2005, including closer views from north and south of the equator. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows remain. The grid marks unsupported surface coverage.",
+          "coverage": "Ten Hayabusa AMICA v-band photographs from September and October 2005. The established brightness-reference frame comes first, then close-ups take priority over distant views. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows and seams remain. The grid marks unsupported surface coverage.",
           "falseColor": false
         }
       }

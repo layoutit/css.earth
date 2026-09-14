@@ -7,6 +7,15 @@ and [JPL image use policy](https://www.jpl.nasa.gov/jpl-image-use-policy/).
 The repository's software license does not replace source image-use terms.
 No agency or mission endorsement is implied.
 
+Galileo regional photographs: **NASA/JPL/USGS; M. Bland, L. Weller,
+B. Archinal, E. Smith and B. Wheeler (2021)**,
+[Improving the Usability of Galileo and Voyager Images of Jupiter's Moon Europa](https://doi.org/10.1029/2021EA001935).
+The 332 controlled CLEAR-filter GeoTIFFs are released under **CC0-1.0**.
+Published projection and measured I/F are retained; overlap selection, sampling,
+bounded overlap-based grayscale display matching, the global-mosaic fallback and
+missing-coverage grid are prepared by cssEarth. This is a display adjustment, not
+additional radiometric or photometric calibration.
+
 Title outlines derive from Inter by **Rasmus Andersson**, SIL Open Font License 1.1.
 
 Prepared surface textures preserve photographed terrain. Gray grids are

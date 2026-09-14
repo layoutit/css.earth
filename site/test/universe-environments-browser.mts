@@ -1,7 +1,7 @@
 import { createTestPage } from './browser-observations.mts';
 import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import type { ObjectEntry } from '../object-schema.mts';
 import { required } from './navigation-test-values.mts';
 
@@ -41,7 +41,7 @@ try {
   const motion = page.locator('input[name="motion"]');
   if (await motion.isChecked()) await motion.uncheck({ force: true });
   await page.evaluate(frames => { window.__environmentFrames = frames; },
-    Object.fromEntries(OBJECTS.map(object => [object.id, object.worldFrame] as const)));
+    Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, object.worldFrame] as const)));
   snapshots.initial = await read(page);
   assert.equal(Number(snapshots.initial.shell.shellOpacity), 0, 'shell is hidden inside the Solar System');
   assert.equal(snapshots.initial.volumeLeaves, volume.data.stacks.flatMap(stack => stack.leaves).length);

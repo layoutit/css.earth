@@ -1,8 +1,8 @@
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { objectSeo } from "../seo.mts";
 
 export function GET() {
-  const urls = OBJECTS.map((object) =>
+  const urls = SCENE_OBJECTS.map((object) =>
     `  <url><loc>${objectSeo(object).canonical}</loc></url>`).join("\n");
   return new Response(
     `<?xml version="1.0" encoding="UTF-8"?>\n` +

@@ -5,15 +5,15 @@ import { createHash } from "node:crypto";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { type PayloadPage, decodedBodyMetrics, localBaseUrl, measureRoute, payloadCases, runPayloadComparison } from "./measure-object-payloads.mts";
 
 const sha = (value: string | Uint8Array) => createHash("sha256").update(value).digest("hex");
 const baseUrl = "http://127.0.0.1:4321/";
-test("payload coverage derives every OBJECTS route at DPR 1 and 2", () => {
+test("payload coverage derives every SCENE_OBJECTS route at DPR 1 and 2", () => {
   const cases = payloadCases();
-  assert.equal(cases.length, OBJECTS.length * 2);
-  for (const object of OBJECTS) assert.deepEqual(cases.filter(entry => entry.id === object.id), [1, 2].map(dpr => ({ id: object.id, route: object.route, dpr })));
+  assert.equal(cases.length, SCENE_OBJECTS.length * 2);
+  for (const object of SCENE_OBJECTS) assert.deepEqual(cases.filter(entry => entry.id === object.id), [1, 2].map(dpr => ({ id: object.id, route: object.route, dpr })));
   assert.equal(localBaseUrl("http://localhost:4321", "base"), "http://localhost:4321/");
   for (const value of ["https://example.com/", "file:///tmp/", "http://localhost:4321/wrong/", "http://user@localhost:4321/"]) assert.throws(() => localBaseUrl(value, "base"), /local origin/);
 });
@@ -36,11 +36,11 @@ test("a failed route retains partial evidence, covers later objects and never co
   const report = await runPayloadComparison({ browser: {newContext: async () => {throw new Error("Comparison fixture must use supplied measure");}}, baselineUrl: baseUrl, candidateUrl: "http://localhost:4322/", outputRoot: root,
     measure: async (_browser, url, entry) => {
       calls.push({ url, ...entry });
-      if (url === baseUrl && entry.id === OBJECTS[0].id && entry.dpr === 1) throw new Error("deliberate route failure");
+      if (url === baseUrl && entry.id === SCENE_OBJECTS[0].id && entry.dpr === 1) throw new Error("deliberate route failure");
       return { complete: true, bodyBytes: 20, responseCount: 2, gzipEstimateBytes: 12, brotliEstimateBytes: 10, errors: [] };
     } });
-  assert.equal(calls.length, OBJECTS.length * 4);
-  assert.equal(report.cases.length, OBJECTS.length * 2);
+  assert.equal(calls.length, SCENE_OBJECTS.length * 4);
+  assert.equal(report.cases.length, SCENE_OBJECTS.length * 2);
   assert.equal(report.complete, false);
   assert.equal(report.errors.length, 1);
   assert.equal(report.cases[0].bodyBytes, null);

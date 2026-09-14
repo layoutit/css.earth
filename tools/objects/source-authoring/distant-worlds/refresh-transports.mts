@@ -5,12 +5,12 @@ const reportDirectory=process.env.CSSEARTH_AUDIT_OUTPUT ?? 'output/distant-world
 await ensureReportDirectory(reportDirectory, {recursive:true});
 import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {OBJECTS} from '../../../../site/objects.mts';
+import {SCENE_OBJECTS} from '../../../../site/objects.mts';
 import {serializeObjectJson,prepareObjectJson} from '../../../../tools/prepare-object-json.mts';
 import {writePreparedText} from '../../../../tools/write-prepared-text.mts';
 import {preparePageMetadata} from '../../../../tools/prepared-page-metadata.mts';
 const results=[];
-for(const {id} of OBJECTS){
+for(const {id} of SCENE_OBJECTS){
  const root=`src/objects/${id}`,descriptor=requireRecord(JSON.parse(await readFile(`${root}/object.json`, 'utf8')));
  const runtime=requireObjectRuntimeDefinition(JSON.parse(await readFile(`${root}/prepared/runtime.json`, 'utf8')));
  const definition=runtime;

@@ -11,8 +11,8 @@ try {
   const proof = await page.evaluate(async () => {
     const { createNavigationContent } = await import('/site/navigation-content.mts');
     const { mountPlanetShell } = await import('/site/planet-shell-client.mts');
-    const { OBJECTS } = await import('/site/objects.mts');
-    const object = (id: string) => window.__cssearthTest.required(OBJECTS.find(value => value.id === id), `registry object ${id}`);
+    const { SCENE_OBJECTS } = await import('/site/objects.mts');
+    const object = (id: string) => window.__cssearthTest.required(SCENE_OBJECTS.find(value => value.id === id), `registry object ${id}`);
     const headMetadata = (doc: Document) => ({
       title: doc.title,
       tags: [...doc.head.querySelectorAll('link[rel="canonical"], meta[name="description"], meta[property^="og:"], meta[name^="twitter:"]')]

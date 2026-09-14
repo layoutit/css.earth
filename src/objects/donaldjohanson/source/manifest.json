@@ -11,7 +11,8 @@
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
       "consumers": [
         "terrain",
-        "shape"
+        "shape",
+        "elevation"
       ],
       "projection": {
         "kind": "body-fixed-cartesian-triangular-mesh",
@@ -407,8 +408,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12374,
-      "expectedSha256": "21a5367bd068e18a17b3dd358111ecea71b41e2610ea635873fde370d782b106",
+      "expectedBytes": 13887,
+      "expectedSha256": "e30e8ac419cd6e4fac77d0b380cb8c2b6024389399a85afc2bd7e366dcb138da",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -431,8 +432,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4044,
-      "expectedSha256": "8096b8075200d94ae412f63d176050817963eee8643f43157a72e11f2de092c7"
+      "expectedBytes": 5180,
+      "expectedSha256": "1a68bae9b470d0139cbbe16f3ea8c8ce9c294d60e156bbe1e82a1b0b366e91b7"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

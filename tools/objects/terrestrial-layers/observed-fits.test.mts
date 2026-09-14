@@ -18,7 +18,7 @@ test('FITS preserves unsigned byte samples and existing big endian float values'
   assert.deepEqual([...readFitsPrimary(fitsBytes(8, [1,2,3,255,5,6,7,8])).values], [1,2,3,255,5,6,7,8]);
   assert.deepEqual([...readFitsPrimary(fitsBytes(-32, [1,-2,3.5,4,5,6,7,8])).values], [1,-2,3.5,4,5,6,7,8]);
   assert.equal(readFitsPrimary(fitsBytes(-32, [1,2,3,4,5,6,7,8], ['BSCALE  = 2', 'BZERO   = 10'])).values[0], 12);
-  assert.throws(() => readFitsPrimary(fitsBytes(8, [1]).subarray(0, 2885)), /truncated/);
+  assert.throws(() => readFitsPrimary(fitsBytes(8, [1]).subarray(0, 2885)), /truncated/i);
 });
 
 test('source FITS rows and east/west longitudes map to the same north-up eastern grid', () => {

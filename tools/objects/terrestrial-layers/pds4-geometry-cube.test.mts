@@ -55,6 +55,12 @@ function label(edit: (xml: string) => string = xml => xml, units: Record<string,
 }
 const decode = (bytes = bytesOf(), xml = label(), options: Partial<Parameters<typeof decodePds4GeometryCube>[2]> = {}) => decodePds4GeometryCube(bytes, xml, { fileName, cube, filter: 'unfiltered', ...options });
 
+test('FITS storage and label data types must agree before reading geometry', () => {
+  assert.throws(() => decode(bytesOf(), label(xml => xml.replace('IEEE754MSBSingle', 'IEEE754LSBSingle'))), /disagrees with FITS storage/);
+  assert.throws(() => decode(bytesOf({ BITPIX: 32 })), /disagrees with FITS storage/);
+  assert.throws(() => decode(bytesOf({ NAXIS: 2 })), /layout/);
+});
+
 test('selects a target using a native geometry plane before fitting, retaining valid dark image pixels', () => {
   const selection = { plane: 'radius', unit: 'km', minimum: 0.2, maximum: 0.5, interpretation: 'Separate disjoint body radii.' };
   const i = 3 * size + 4, dark = 3 * size + 5;
@@ -132,6 +138,6 @@ test('rejects a label, declaration or cube that does not describe this exact pro
   assert.throws(() => decode(bytesOf({ PLANE02: 'Y coordinate of pixel center' })), /PLANE02 is not xcoord/);
   assert.throws(() => decode(bytesOf({ NAXIS3: 15 })), /cube layout/);
   assert.throws(() => decode(bytesOf({ BSCALE: 2 })), /cube layout/);
-  assert.throws(() => decode(bytesOf().subarray(0, headerLength + 100)), /Truncated geometry cube plane/);
+  assert.throws(() => decode(bytesOf().subarray(0, headerLength + 100)), /Truncated.*(?:FITS|geometry cube plane)/);
   assert.throws(() => decode(bytesOf({}, planes => planes.ioverf.fill(1e10))), /no on-body pixels/);
 });

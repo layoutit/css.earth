@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { record } from '../site/browser-types.mts';
 
 /** One search index over every body's prepared named features, so a feature can be found
@@ -19,7 +19,7 @@ function finite(value: unknown, at: string): number { if (typeof value !== 'numb
 export async function prepareFeatureIndex({ root = process.cwd() }: { root?: string } = {}) {
   const objects: { id: string; name: string; route: string; count: number; lensIds?: string[] }[] = [];
   const features: IndexedFeature[] = [];
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const descriptor: unknown = await readFile(resolve(root, 'src/objects', object.id, 'prepared/features.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
     if (descriptor === null) continue;
     if (!record(descriptor) || descriptor.schema !== 'cssearth-prepared-features@1') throw new TypeError(`${object.id}: prepared features descriptor is invalid.`);
