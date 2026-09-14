@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { mkdir, mkdtemp, copyFile, cp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type SourceReference } from '@cssearth/objects';
@@ -71,34 +71,23 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   if (write) {
     const id = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')), 'descriptor').id;
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid preparation identity.');
-    const stageRoot = resolve(process.cwd(), '.local/object-preparation');
+    const projectRoot = process.cwd(), stageRoot = resolve(projectRoot, '.local/object-preparation');
     await mkdir(stageRoot, { recursive: true });
     const stage = await mkdtemp(resolve(stageRoot, `${id}-`));
-    const stagedPublic = resolve(stage, 'public'), stagedData = resolve(stage, 'prepared');
-    const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData });
-    const { publishPreparedAssets, readPreparedJsonOutputs } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/publication.mts')).href) as typeof import('./publication.mts');
-    if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
-    const outputs = await readPreparedJsonOutputs(stagedData);
-    const manifest = JSON.parse(await readFile(resolve(stagedData, 'runtime-assets.json'), 'utf8'));
-    const previous = await readFile(resolve(objectDirectory, 'runtime-assets.json'), 'utf8').then(JSON.parse,
-      (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
-    await publishPreparedAssets({ id, stage: stagedPublic, destination: publicDirectory, previous, manifest, recovery: resolve(stage, 'previous-public') });
-    await mkdir(outputDirectory, { recursive: true });
-    for (const entry of outputs) {
-      await copyFile(entry.path, resolve(outputDirectory, entry.filename));
-    }
-    await cp(resolve(stagedData, 'minimaps'), resolve(outputDirectory, 'minimaps'), { recursive: true })
-      .catch((error: NodeJS.ErrnoException) => { if (error.code !== 'ENOENT') throw error; });
-    await copyFile(resolve(stagedData, 'runtime-assets.json'), resolve(objectDirectory, 'runtime-assets.json'));
-    const scene = result.scene as Record<string, unknown> | undefined;
-    if (scene?.worldFrame !== undefined) {
-      const path = resolve(objectDirectory, 'object.json'), raw = JSON.parse(await readFile(path, 'utf8'));
-      await writeFile(path, `${JSON.stringify({ ...raw, properties: { ...raw.properties, worldFrame: scene.worldFrame } }, null, 2)}\n`);
-    }
-    await writePreparedObject(id, result.definition as Record<string, unknown>);
-    // The stage holds the previous public files until publication succeeds; a finished preparation removes it.
-    await rm(stage, { recursive: true, force: true });
-    return result;
+    try {
+      const stagedPublic = resolve(stage, 'public'), stagedData = resolve(stage, 'prepared');
+      const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData });
+      if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
+      const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
+      const finalized = await finalizeObjectJson(id, result.definition, { projectRoot, objectDirectory, preparedDirectory: stagedData,
+        descriptorPath: resolve(stage, 'object.json'), sharedRoot: stage });
+      const { prepareObjectProvenance } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
+      await prepareObjectProvenance({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, basis: 'prepared' });
+      const { publishPreparedObject } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/publication.mts')).href) as typeof import('./publication.mts');
+      await publishPreparedObject({ id, stage, objectDirectory, publicDirectory, outputDirectory, projectRoot });
+      return Object.freeze({ ...result, definition: finalized.definition,
+        scene: JSON.parse(await readFile(resolve(stagedData, 'scene.json'), 'utf8')) as unknown });
+    } finally { await rm(stage, { recursive: true, force: true }); }
   }
   const descriptorPath = resolve(objectDirectory, 'object.json');
   const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(descriptorPath, 'utf8')) as unknown);
