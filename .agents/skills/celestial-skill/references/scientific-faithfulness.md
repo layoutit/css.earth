@@ -63,6 +63,24 @@ Check actual leaf backgrounds after selection: a changed sidebar, minimap or
 `data-lens` alone does not prove that the body changed its texture.
 Use concise, body-owned wording rather than a generic disclaimer on every lens.
 
+For released longitude/latitude composition grids, the `mapped-composition`
+acquisition operator converts pinned King et al. SPHERE JSON releases into the
+same numeric GeoTIFF input. Europa and Ganymede's `source/composition/` recipes
+are worked examples. Verify the actual coordinate arrays, missing-value marker,
+selected wavelengths and posterior field names before conversion. Retain
+released uncertainty endpoints; adding component medians or their bounds does
+not recover the posterior of a sum. Prefer an author's released total when one
+exists. A fitted grain-size component is neither total ice nor a direct grain
+measurement. Keep model fractions distinct from measured spectral ratios.
+
+Preserve the native grid nodes when reordering longitude or latitude. A periodic
+seam duplicate repeats an existing sample; it cannot add coverage. Compare
+source and converted values at their geographic coordinates, including gaps,
+zero, both hemispheres and the seam. State the instrument's resolving power
+separately from its resampled grid spacing. If a fit's header conflicts with the
+paper's observation dates, inspect released masks and preserve the discrepancy;
+footprint agreement alone does not establish every cell's acquisition time.
+
 ## Shape scalars must refer to the displayed surface
 
 For an irregular body's radius or elevation layer, bind the scalar to a defined

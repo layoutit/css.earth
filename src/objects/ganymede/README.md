@@ -10,9 +10,17 @@
 
 - The VLT/MUSE views use original July 2019 measured maps from King et al. The [source interpretation](source/muse/INTERPRETATION.md) defines units, coordinate evidence, first-valid-night coverage, registration limits and residual night differences.
 
+- **Ice fraction** and **Dark material** use the mapped VLT/SPHERE MCMC release of [King and Fletcher (2022)](https://doi.org/10.1029/2022JE007323), pinned as [Zenodo 6390469](https://doi.org/10.5281/zenodo.6390469). The native source and conversion record are [fit_SPHERE.json.gz](https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/1ff2f7069a194f6ce356604072077352b4c78f4a/fit_SPHERE.json.gz) and [model-conversion.json](source/composition/model-conversion.json).
+
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
 ## Evidence
+
+The 14 September 2026 composition preparation adds **Ice fraction** and **Dark material**. [Native-value evidence](evidence/composition/native-values.json) compares all 64,800 geographic nodes in each of four converted grids, including the two retained uncertainty products, with the original release. Values agree exactly after float32 rounding; missing samples and the periodic seam retain their source meaning. [Fresh restoration](evidence/composition/restoration.json) downloads the original archive into an empty source root and reproduces all seven composition manifest entries.
+
+[Ice fraction](evidence/composition/ice-fraction.png) · [Dark material](evidence/composition/dark-material.png) · [Shadows](evidence/composition/dark-material-shadows.png) · [DPR 2](evidence/composition/ice-fraction-dpr2.png). The [browser receipt](evidence/composition/browser.json) pins the tested files above `f8fbdaa0b`, viewport, camera, selected textures and inspected captures. Switching datasets retains the same 450 surface leaves. [Delivery evidence](evidence/composition/delivery.json) verifies the unchanged scene and prior assets; ten added image files total 350,918 bytes.
+
+Focused checks pass: numeric conversion/acquisition (15), body behavior and content (14 across both moons), source/provenance (30), source-usage conservation (1), and strict preparation/tool TypeScript. The new provenance check follows converted grids through their pinned recipes to the native archive. Eight shared startup-fixture/import-closure failures across the two bodies were reproduced on base `a15706943`; these remain outside this surface change. Full application checks and public asset installation are not qualified. The local preview omits six unavailable unrelated nebula context banks; see the browser receipt. The texture bake receipt retains its original source hashes; later content and provenance refreshes do not claim another full bake.
 
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 
@@ -23,9 +31,9 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 
 These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/ganymede/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
-Lane change (this PR): the terrestrial solid-observation lane was retired for Ganymede; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 4096 × 2048 (DPR 1) and 8192 × 4096 (DPR 2) — retired 8192 × 4096 atlas. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
+Earlier shared-lane migration (12 September 2026): the terrestrial solid-observation lane was retired for Ganymede; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 4096 × 2048 (DPR 1) and 8192 × 4096 (DPR 2) — retired 8192 × 4096 atlas. That migration's pull request records its package, source-closure, minimap and browser conformance checks; the nomenclature recipe and map edge were unchanged and the labels were re-drawn against the new atlas. The composition addition retains this geometry.
 
-Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js ganymede --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/ganymede/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
+Earlier run, 2026-09-12: `node tools/objects/dist/prepare-authored.js ganymede --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/ganymede/*.test.mts` passed except the shared runtime-package and import-closure tests that failed identically on that main revision (recorded in the migration's pull request).
 
 A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, geology, oxygen-signature) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 2161).
 
@@ -34,6 +42,8 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 - Six distributed point anchors, exact input hashes, and decoder failure cases are tested.
 
 - Focused checks are defined in the [unit tests](../../../tests/objects/unit/ganymede) and [browser profile](../../../tests/objects/browser/ganymede/browser-profile.mts).
+
+Composition conversion: the two lenses consume posterior medians for `derived_total_ices` and `derived_total_synthetic`, respectively. The pinned 8,845,543-byte fit (`cd7843ce…9261c8e4`) contributes 38,473 valid and 26,327 missing native nodes to each lens. It is resampled only by reversing latitude, reordering east-positive longitudes and repeating the seam: no smoothing, gap fill, or abundance aggregation. [The conversion record](source/composition/model-conversion.json) pins the output hashes, value ranges and posterior-interval products.
 
 ## Known problems
 
@@ -46,6 +56,12 @@ Feature notes: 68 of the labelled names carry a caption note, the lead summary o
 - **Color coverage:** In the 210–250° west sector, Voyager measurements supplied green/blue while red was synthesized. This package conservatively uses the observed monochrome base throughout that sector (110–150° east), without claiming its synthesized red as measured color. The shared neutral cartographic grid appears only where no valid surface observation remains.
 
 - The rendered shape is a mean-radius sphere, not a resolved terrain mesh.
+
+- **Composition lenses:** The input coordinates are latitude north-positive and longitude east-positive. The paper uses an equirectangular product, but the 1° node grid is a resampling container, not 1° scientific resolution: SPHERE resolves roughly 100–150 km features. Ice fraction and dark material are fitted MCMC model abundances, with 16th/84th-percentile bounds in the release; they are not direct detections of individual chemicals. The prepared lens keeps source no-data visible.
+
+- **Ganymede fit metadata:** `fit_SPHERE.json.gz` names only the 2015 observation. Its valid mask is, apart from five omitted 2015 nodes, exactly the union of the four released 2015/2021 SPHERE reflectance masks. [The footprint comparison](evidence/composition/registration.json) supports combined coverage but does not establish each cell's contributing epoch or weight. The original header is preserved.
+
+- **Reuse:** Zenodo exposes the release as open/`other-open`, while the tag has no explicit data licence and the paper's availability statement does not grant rights to the numerical files. These lenses are retained for local preview and a private draft PR only; no composition asset is qualified for public publication.
 
 - **Geology:** The separate point labels disagree with final polygon categories at 124 of 3,042 comparable locations; 870 ejecta labels are outside that comparison. The audit retains those disagreements.
 

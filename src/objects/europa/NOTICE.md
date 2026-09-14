@@ -28,6 +28,15 @@ prepared here; they are not natural color or a calibrated albedo product.
 Capture geometry uses NASA/JPL Horizons and the USGS controlled ISIS labels;
 see `README.md` for the model and its limits.
 
+VLT/SPHERE composition release: Oliver King, Leigh Fletcher and Nicolas Ligier
+(2022), [Compositional Mapping of Europa](https://doi.org/10.3847/PSJ/ac596d),
+[Zenodo 6034904](https://doi.org/10.5281/zenodo.6034904), and tagged
+[v1.0.2 source](https://github.com/ortk95/king-2022-compositional-mapping-europa/tree/v1.0.2).
+cssEarth preserves the released ratio and posterior-component interpretation with
+source no-data. No explicit licence for the numerical release was located; it is
+retained for local preview and a private draft PR only, with no public composition
+asset publication.
+
 ## B6 sources
 
 The added views derive from credited public USGS/NASA scientific products. Preserve the source authors, PDS citation and processing qualifications recorded in README.md and the source manifest. No endorsement is implied.

@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-composition-delivery-evidence@1",
+  "baseCommit": "f8fbdaa0b203f11b4f121b867eb478d38d6c311e",
+  "retainedScene": {
+    "path": "src/objects/ganymede/prepared/scene.refs.json",
+    "sha256": "bc41eac8e30f4ef2b853caf485c9ed2e57f945d14db9d63b4b77b82a2380ea1d",
+    "unchanged": true
+  },
+  "unchangedExistingAssets": 115,
+  "addedBytes": 350918,
+  "addedAssets": [
+    {
+      "filename": "ganymede-dark-material.webp",
+      "bytes": 71842,
+      "sha256": "d9b7c3c493189a7766be7066efc9e55c01abb71b2ff95faa4d773304069909bc"
+    },
+    {
+      "filename": "ganymede-dark-material@2x.webp",
+      "bytes": 89810,
+      "sha256": "e8d441e26b173f0f4583edfa4f27376089ccf6c2bb4c6171cd6e3364b3b09114"
+    },
+    {
+      "filename": "ganymede-ice-fraction.webp",
+      "bytes": 67808,
+      "sha256": "c15b604e2d23d41a5a10282431f2484811c20c562036d7fcb47a62e9b266c040"
+    },
+    {
+      "filename": "ganymede-ice-fraction@2x.webp",
+      "bytes": 86476,
+      "sha256": "45f9abceb97d0a2ad760b44c38b7ddb69dbe1f6834ee7abbc1d4f731ba2a1f76"
+    },
+    {
+      "filename": "ganymede-lens-dark-material.webp",
+      "bytes": 4194,
+      "sha256": "6ac505cb56fe32b6338799621ff6c9f7570166add5b7f6d7b29de03cdf6aa23c"
+    },
+    {
+      "filename": "ganymede-lens-ice-fraction.webp",
+      "bytes": 3868,
+      "sha256": "d236ee987c20f37d0325b8db9b8d9f768a4e1c1301531f31c7046480a822a81f"
+    },
+    {
+      "filename": "ganymede-poles-dark-material.webp",
+      "bytes": 3934,
+      "sha256": "0bb77552130b1d225271f45f807fc5e8759b2cdd7d9ee37ddbe0e84f7b066130"
+    },
+    {
+      "filename": "ganymede-poles-dark-material@2x.webp",
+      "bytes": 9526,
+      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
+    },
+    {
+      "filename": "ganymede-poles-ice-fraction.webp",
+      "bytes": 3934,
+      "sha256": "0bb77552130b1d225271f45f807fc5e8759b2cdd7d9ee37ddbe0e84f7b066130"
+    },
+    {
+      "filename": "ganymede-poles-ice-fraction@2x.webp",
+      "bytes": 9526,
+      "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
+    }
+  ]
+}

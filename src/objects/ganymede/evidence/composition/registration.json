@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-ganymede-sphere-composition-coverage@1",
+  "command": "node --experimental-strip-types tools/objects/acquisition/mapped-composition-coverage.mts output/moon-composition/source-review src/objects/ganymede/source/composition/fit_SPHERE.json.gz > src/objects/ganymede/evidence/composition/registration.json",
+  "grid": {
+    "latitudeNodes": "-90 through 89 degrees",
+    "longitudeNodes": "0 through 359 degrees east-positive",
+    "cells": 64800
+  },
+  "fittingBandsMicrometres": [
+    0.95,
+    1.65
+  ],
+  "sources": [
+    {
+      "file": "reflectance_SPHERE-2015-02-01.json.gz",
+      "sha256": "c29b41c90f438c601672487dc7d0978aa22e8557e3eb200cdb8866186534f3b7",
+      "commitUrl": "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/1ff2f7069a194f6ce356604072077352b4c78f4a/reflectance_SPHERE-2015-02-01.json.gz",
+      "validNodes": 19523
+    },
+    {
+      "file": "reflectance_SPHERE-2021-07-21.json.gz",
+      "sha256": "8ec367d96316c9de2f2f29a81d689aba7cd1a0c63bfedf74acd6e796f89accb7",
+      "commitUrl": "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/1ff2f7069a194f6ce356604072077352b4c78f4a/reflectance_SPHERE-2021-07-21.json.gz",
+      "validNodes": 16324
+    },
+    {
+      "file": "reflectance_SPHERE-2021-07-22.json.gz",
+      "sha256": "861edecda689fc1a35063f36b16613464599efcf3f6a18dbe1dfd6c11ff8bc9d",
+      "commitUrl": "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/1ff2f7069a194f6ce356604072077352b4c78f4a/reflectance_SPHERE-2021-07-22.json.gz",
+      "validNodes": 14941
+    },
+    {
+      "file": "reflectance_SPHERE-2021-09-05.json.gz",
+      "sha256": "451dc54e85c8b86d12ed16e3c2bdd974156772c0a8fc0461e93788e6ed90b67d",
+      "commitUrl": "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/1ff2f7069a194f6ce356604072077352b4c78f4a/reflectance_SPHERE-2021-09-05.json.gz",
+      "validNodes": 13910
+    }
+  ],
+  "fit": {
+    "file": "fit_SPHERE.json.gz",
+    "sha256": "cd7843ce36dcf64782907b29c34b7bfb61937288ffb99fd3ee38e2369261c8e4",
+    "commitUrl": "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/1ff2f7069a194f6ce356604072077352b4c78f4a/fit_SPHERE.json.gz",
+    "field": "derived_total_ices",
+    "validNodes": 38473
+  },
+  "comparison": {
+    "reflectanceUnionNodes": 38478,
+    "fitNodes": 38473,
+    "intersectionNodes": 38473,
+    "reflectanceOnlyNodes": 5,
+    "fitOnlyNodes": 0,
+    "excludedFitCoordinates": [
+      {
+        "latitude": 46,
+        "longitude": 175
+      },
+      {
+        "latitude": 52,
+        "longitude": 178
+      },
+      {
+        "latitude": 55,
+        "longitude": 180
+      },
+      {
+        "latitude": 72,
+        "longitude": 210
+      },
+      {
+        "latitude": 74,
+        "longitude": 223
+      }
+    ]
+  },
+  "interpretation": "The fitted-map mask equals the union of the four 0.95–1.65 micrometre reflectance-footprint masks except for these five 2015 nodes. This establishes coverage correspondence with the all-epoch union despite the fit metadata naming the 2015 observation. It does not show which epoch contributed to an individual fitted cell, the relative contribution of epochs, or any quality filtering beyond the compared masks."
+}

@@ -774,8 +774,8 @@
     {
       "id": "ganymede-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 11024,
-      "expectedSha256": "b2cf063a3cb8413f24105db5ad067f84d576dfdc3741c563fd6f919db78c5bb8",
+      "expectedBytes": 14038,
+      "expectedSha256": "ab831101edf4f77f21ca809f7a2800c505e8acf95d268a51ba05c77c9960e2a2",
       "origin": "Repository-authored Ganymede raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -868,8 +868,8 @@
     {
       "id": "ganymede-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2591,
-      "expectedSha256": "1226fc64477bf1e22d8518c602c09e4fc37f5736f0845d6e120457ca5673c55f",
+      "expectedBytes": 4059,
+      "expectedSha256": "10437a0838df348d201569b5b9b9ad54f61a3b95fa161fa2ef9c67d5e304a68f",
       "origin": "Repository-authored Ganymede acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -887,8 +887,8 @@
     {
       "id": "ganymede-object-content",
       "path": "content/object.json",
-      "expectedBytes": 18120,
-      "expectedSha256": "a718326cfe99d522e99a4bb56eec126ae346312a7383d360a6a322d1b4f60fe9",
+      "expectedBytes": 21670,
+      "expectedSha256": "c11b7052988d3d181574ab64934546fb5073c99ff2ff8b46ab2a189062386290",
       "origin": "Repository-authored Ganymede object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -901,6 +901,147 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "ganymede-composition-dark-material",
+      "path": "composition/dark-material.tif",
+      "expectedBytes": 260920,
+      "expectedSha256": "aaf6961e48c6125a804338b6930609ae834a586e7d1f05f1bc934cd094109d3a",
+      "origin": "https://doi.org/10.5281/zenodo.6390469",
+      "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6390469"
+      ],
+      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "dark-material"
+      ],
+      "lensId": "dark-material",
+      "label": "Dark material",
+      "falseColor": true,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ganymede-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6390469"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ganymede-composition-dark-uncertainty",
+      "path": "composition/dark-uncertainty.tif",
+      "expectedBytes": 260920,
+      "expectedSha256": "4fb42e921b4f530359be2f795113d3d2863244daa3f6d679454e7d53923baad9",
+      "origin": "https://doi.org/10.5281/zenodo.6390469",
+      "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6390469"
+      ],
+      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "composition-source"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ganymede-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6390469"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ganymede-composition-fit-SPHERE",
+      "path": "composition/fit_SPHERE.json.gz",
+      "expectedBytes": 8845543,
+      "expectedSha256": "cd7843ce36dcf64782907b29c34b7bfb61937288ffb99fd3ee38e2369261c8e4",
+      "origin": "https://raw.githubusercontent.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/1ff2f7069a194f6ce356604072077352b4c78f4a/fit_SPHERE.json.gz",
+      "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6390469"
+      ],
+      "acquisition": "Download the pinned native release member.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "composition-source"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ganymede-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6390469"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ganymede-composition-ice-fraction",
+      "path": "composition/ice-fraction.tif",
+      "expectedBytes": 260920,
+      "expectedSha256": "b614ac1e22a9d2d4a3f87b3975718c2d988966eab1a807a2fb091b8aaa65b9d5",
+      "origin": "https://doi.org/10.5281/zenodo.6390469",
+      "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6390469"
+      ],
+      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "ice-fraction"
+      ],
+      "lensId": "ice-fraction",
+      "label": "Ice fraction",
+      "falseColor": true,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ganymede-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6390469"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ganymede-composition-ice-uncertainty",
+      "path": "composition/ice-uncertainty.tif",
+      "expectedBytes": 260920,
+      "expectedSha256": "84bb23bfca177af451d1165f85e9abf4889bd3144ba0ff0cd334e1a64acbe776",
+      "origin": "https://doi.org/10.5281/zenodo.6390469",
+      "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
+      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.6390469"
+      ],
+      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
+      "consumers": [
+        "composition-source"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ganymede-sphere-composition-2022",
+            "role": "material",
+            "evidence": "https://doi.org/10.5281/zenodo.6390469"
+          }
+        ]
       }
     }
   ],
@@ -1190,7 +1331,7 @@
       "path": "muse/INTERPRETATION.md",
       "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
       "expectedBytes": 3943,
-      "expectedSha256": "eaf5e6ee0d43d8826952db8b83fa19544c38c778e5f7c24bdf36710840a52bda"
+      "expectedSha256": "30f102ac00ecc7a59d7cd74d2f0b7d3c840d145f18f9761d780db23dd5c7ea66"
     },
     {
       "path": "muse/datacite-license.json",
@@ -1231,6 +1372,24 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "composition/model-conversion.json",
+      "expectedBytes": 3166,
+      "expectedSha256": "8fbb836e3504a2165d747a78091edf1081117d0167c42309ef13ebc74635d37a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Conversion receipt identifying native numerical input, selected fields, coordinate mapping and unchanged coverage."
+      }
+    },
+    {
+      "path": "composition/model-recipe.json",
+      "expectedBytes": 880,
+      "expectedSha256": "3484816c073e6addb01bb505b779bc3fb1034e3152318d1756bbfe36054d6afd",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored selection of exact published numerical fields, wavelengths and output coordinates."
       }
     }
   ]
