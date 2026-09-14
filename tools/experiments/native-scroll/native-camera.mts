@@ -12,7 +12,11 @@ import type { Matrix, Value } from './css-values.mts';
 export interface NativeCameraRotation {
   readonly transform: string;
   readonly css: string;
+  /** The eye centre, in metres, that eyePoint subtracts. */
+  readonly eyeCentre: readonly number[];
   eyePoint(point: readonly Value[]): readonly string[];
+  /** Like eyePoint, for coordinates already written relative to eyeCentre. */
+  eyeOffsetPoint(offset: readonly string[]): readonly string[];
   skyPoint(point: readonly number[], metersPerPixel: number): readonly string[];
 }
 type Publication = ReturnType<typeof publishPreparedNativeView>;
@@ -80,7 +84,7 @@ export function addNativeCamera(document: Document, definition: ObjectRuntimeDef
         return `${i/bank.frames.length*100}%{${css}}${i===bank.frames.length-1?`100%{${css}}`:''}`;
       });
       rules.push(`@keyframes ${name}{${frames.join('')}}`);
-      node.style.animation=`${name} ${bank.frames.length}ms steps(1,end) calc(${values.output(index)} * -1ms) both paused`;
+      node.style.animation=`${name} ${bank.frames.length}ms steps(1,end) calc(${index} * -1ms) both paused`;
     }
     if(track.rotation?.kind!=='ellipsoid') throw new TypeError('The native material projection is not compiled for this rotation kind.');
     const local=readPreparedTransform(track.rotation.systemTransform);
@@ -88,12 +92,15 @@ export function addNativeCamera(document: Document, definition: ObjectRuntimeDef
     node.style.transform=values.outputMatrix(ellipsoid(values,track.rotation,eye,materialCounter,
       selected.rotationEnabled?lightAngle:'0deg'));
   }
-  for(const value of turn) values.output(value);
   const relative=(point:readonly Value[],centre:readonly number[])=>[0,1,2].map(row=>
     `calc(${[0,1,2].map(column=>`${turn[column*4+row]} * ${typeof point[column]==='number'?point[column]-centre[column]:`(${point[column]} - ${centre[column]})`}`).join(' + ')} + ${centre[row]})`);
+  const eyeCentre=centre.map(n=>n*frame.metersPerUnit);
   return {
     transform:values.outputMatrix(turn),css:values.css()+'\n'+rules.join('\n'),
-    eyePoint:point=>relative(point,centre.map(n=>n*frame.metersPerUnit)),
+    eyeCentre,
+    eyePoint:point=>relative(point,eyeCentre),
+    eyeOffsetPoint:offset=>[0,1,2].map(row=>
+      `calc(${[0,1,2].map(column=>`${turn[column*4+row]} * ${offset[column]}`).join(' + ')} + ${eyeCentre[row]})`),
     skyPoint:(point,metersPerPixel)=>relative(point,centre.map(n=>n*frame.metersPerUnit/metersPerPixel)),
   };
 }

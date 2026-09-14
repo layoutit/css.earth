@@ -11,6 +11,7 @@ import { serializePreparedScene } from '../../serialize-prepared-scene.mts';
 import { publishPreparedNativeView } from '../../../src/renderers/css/rendering/prepared-native-view.js';
 import { addNativeResizeInput } from './resize-input.mts';
 import { addNativeCamera } from './native-camera.mts';
+import { carryViewportValues } from './carry-values.mts';
 import type { SharedView } from '../../../src/renderers/css/navigation/view-url.js';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4349';
@@ -26,8 +27,11 @@ const read = async (path: string) => {
   return response.arrayBuffer();
 };
 const css = (distanceM: number, metersPerUnit: number, radiusM: number) => `
-@property --native-log-distance { syntax: '<number>'; inherits: true; initial-value: 0; }
-@property --native-orbit-alpha { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --native-log-distance { syntax: '<number>'; inherits: false; initial-value: 0; }
+@property --native-orbit-alpha { syntax: '<number>'; inherits: false; initial-value: 0; }
+@property --native-distance-m { syntax: '*'; inherits: false; }
+@property --native-dolly-m { syntax: '*'; inherits: false; }
+@property --native-disc-share { syntax: '*'; inherits: false; }
 @keyframes native-scroll-distance {
   0% { --native-log-distance: ${Math.log(.5)}; }
   10% { --native-log-distance: 0; }
@@ -122,6 +126,8 @@ createServer((request, response) => {
       initial.setAttribute('role', 'group'); initial.setAttribute('aria-label', 'Scene zoom'); surface.append(initial);
       surface.setAttribute('aria-label', `Scroll to zoom ${descriptor.id}`);
       if (url.searchParams.get('drag') === 'resize') style.textContent += addNativeResizeInput(document);
+      // Camera values reach only the elements that read them; nothing else restyles when they change.
+      carryViewportValues(document, [...document.querySelectorAll('style')].map(node => node.textContent ?? '').join('\n'));
       body = document.toString();
     } else body = new Uint8Array(await upstream.arrayBuffer());
     response.writeHead(upstream.status, Object.fromEntries(headers)); response.end(body);

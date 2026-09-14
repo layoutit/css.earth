@@ -19,8 +19,9 @@ try {
     const scene = document.querySelector('.polycss-scene')!;
     const style = getComputedStyle(scene);
     const centre = scene.getBoundingClientRect();
+    // The zoom distance is animated on the viewport; scene elements that never read it do not inherit it.
     return { centre: { x: centre.x, y: centre.y }, scroll: node.scrollTop, range: node.scrollHeight - node.clientHeight,
-      logDistance: style.getPropertyValue('--native-log-distance'), translate: style.translate,
+      logDistance: getComputedStyle(document.querySelector('.planet-viewport')!).getPropertyValue('--native-log-distance'), translate: style.translate,
       sceneCount: document.querySelectorAll('.polycss-scene').length,
       skyCount: document.querySelectorAll('.prepared-celestial-sky').length,
       skyFaces: [...document.querySelectorAll('.prepared-celestial-sky [data-sky-face]')].map(node => ({ visible: getComputedStyle(node).visibility, image: getComputedStyle(node).backgroundImage })),
