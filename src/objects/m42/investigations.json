@@ -1,0 +1,164 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m42",
+  "entries": [
+    {
+      "id": "lens-eso-optical",
+      "subject": "eso-optical shipped image lens",
+      "status": "included",
+      "finding": "Default i/H-alpha/r/G display, 4000 by 3106 pixels over 59.95 by 46.56 arcmin. It colors the conditional coherent front; image intensity does not measure gas depth. The rectangular optical coverage transition remains unresolved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m42/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/observations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "lens-eso-vista",
+      "subject": "eso-vista shipped image lens",
+      "status": "included",
+      "finding": "K/J/Z near-IR display, 3252 by 4000 pixels over 71.84 by 88.35 arcmin, on the same cloud geometry as optical. Different coverage and display color do not imply a second view or calibrated common emission.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m42/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/observations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "gaia-surroundings",
+      "subject": "Gaia DR3 astrometry/photometry and Bailer-Jones EDR3 geometric distances",
+      "status": "included",
+      "finding": "2780 Gaia candidates in an authored 50 pc sphere, G < 14; the delivered budget selects 1500 by brightness with spherical and faint-edge fades. Actual catalogue source IDs, median distances and uncertainty intervals are retained. Sphere, quality cuts, budget, brightness response and fade are display selections, not a membership survey; Cardiel BP-RP display color uses a neutral fallback outside its valid range.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m42/source/stellar-field.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m42/source/delivery.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/src/delivery/catalogue-field.ts",
+        "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+        "https://arxiv.org/abs/2012.05220",
+        "https://arxiv.org/abs/2107.08734"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "distance",
+      "subject": "Menten VLBI Orion distance",
+      "status": "included",
+      "finding": "The adopted 414 ± 7 pc scale places the common frame; it is not a per-pixel cloud-distance measurement.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m42/source/nebula.json",
+        "https://arxiv.org/abs/0709.0485"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "local-front-model",
+      "subject": "Wen–O’Dell, Henney and O’Dell central front",
+      "status": "included",
+      "finding": "The qualified literature and theta1 Ori C coordinate anchor guide a local front hypothesis. Approximate 0.2 pc star/front and 0.1 pc layer scales at the paper distance apply near the core; full-field curvature, depths and support weights remain authored.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/physical-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/depth-model.json",
+        "https://doi.org/10.1086/175123",
+        "https://arxiv.org/abs/astro-ph/0504221",
+        "https://arxiv.org/abs/0810.4375"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "muse-diagnostics",
+      "subject": "Central MUSE diagnostic FITS arrays",
+      "status": "deferred",
+      "finding": "Seven complete FITS arrays and headers were inspected, covering about 5.89 by 4.92 arcmin. Missing masks/uncertainties, some units and H-alpha WCS prevent treating them as current numerical constraints; none is fitted.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/physical-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/physical-sources.json",
+        "https://doi.org/10.17876/data/2023_3"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Qualify complete WCS, units, masks and uncertainties, then compare a forward observable on the actual small footprint."
+    },
+    {
+      "id": "foreground-alternatives",
+      "subject": "Orion-S, Red/Dark Bay and competing Veil geometry",
+      "status": "deferred",
+      "finding": "O’Dell/Abel foreground layers and wind bulges and Pabst’s hemispherical Veil are competing interpretations. Local apertures and expansion speeds are not measured dust boundaries or a unique depth field; the shipped single front does not implement their full topology.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/physical-evidence.json",
+        "https://arxiv.org/abs/2507.02147v1",
+        "https://doi.org/10.1038/s41586-018-0844-1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Qualify independent tracer maps and uncertainties and compare separate front/extinction hypotheses without painting neutral foreground matter from optical RGB."
+    },
+    {
+      "id": "reference-image-stars",
+      "subject": "Historical 650 image-detected stars",
+      "status": "excluded",
+      "finding": "The lab’s 650 reference-image points and measured aperture-light correction are historical processing evidence. The app replaces this rectangular, depth-conditioned field with Gaia distances; unchanged image counting is not a stellar membership test.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/README.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m42/source/stellar-field.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Retain any future compact anchor only with positive image/source evidence and an explicit conditional-depth exception, never by restoring the whole photographic rectangle."
+    },
+    {
+      "id": "coverage-and-material",
+      "subject": "Optical rectangle and oblique slice traces",
+      "status": "unresolved",
+      "finding": "The coherent front improved a normalized projected target, but optical coverage still ends visibly and pale residuals/fine bands remain. Old saved-detail result IDs and lab tests do not accept the current physical depth or material.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m42/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Address the source footprint or finite material at its owning layer and verify fixed front, oblique and side views while preserving valid core structure."
+    }
+  ]
+}

@@ -57,7 +57,7 @@
       "label": "ESO VISTA",
       "title": "LMC in near infrared",
       "description": "Near-infrared colors from ESO’s VISTA survey, painted onto the shared simulated LMC density cloud. Depth follows a stellar-density simulation, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D color fitting.",
-      "summary": "Near-infrared · Y / J / Ks",
+      "summary": "Near-infrared false color on simulated stellar density; gas and dust depth are not measured.",
       "detail": "8954 × 10000 px",
       "facts": [
         {
@@ -89,7 +89,7 @@
       "label": "Horálek optical",
       "title": "Petr Horálek’s visible-light LMC",
       "description": "Visible-light colors from Petr Horálek’s NOIRLab wide-field image, painted onto the shared simulated LMC density cloud. Depth follows a stellar-density simulation, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D color fitting.",
-      "summary": "Visible-light photograph",
+      "summary": "Optical photograph colors on simulated stellar density; gas and dust depth are not measured.",
       "detail": "6582 × 4388 px",
       "facts": [
         {
@@ -121,7 +121,7 @@
       "label": "NASA WISE",
       "title": "LMC in WISE infrared",
       "description": "Infrared colors from NASA/IPAC WISE survey data, painted onto the shared simulated LMC density cloud. Depth follows a stellar-density simulation, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D color fitting.",
-      "summary": "Infrared display color · W4 / W2 / W1",
+      "summary": "WISE infrared false color on simulated stellar density; gas and dust depth are not measured.",
       "detail": "6000 × 6000 px",
       "facts": [
         {
