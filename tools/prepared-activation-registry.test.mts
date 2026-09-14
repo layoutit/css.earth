@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS as OBJECTS } from '../site/objects.mts';
 import { prepareActivationGroups } from './prepared-activation-groups.mts';
 
 // The same registry that ships the application owns this gate. A new object

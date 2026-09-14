@@ -4,7 +4,6 @@
   "namespace": "cybele",
   "displayName": "Cybele",
   "publicBase": "/scenes/cybele/",
-  "distanceAu": 3.407076943888485,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -114,12 +113,6 @@
     "sunSource": "Pinned JPL Horizons elements and DAMIT model 1843 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

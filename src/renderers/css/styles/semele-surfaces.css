@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="semele"])[data-lod="billboard"] .semele-scene, .planet-stage:where([data-object-id="semele"])[data-lod="marker"] .semele-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="semele"])[data-lod="marker"] .semele-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="semele"]).semele-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

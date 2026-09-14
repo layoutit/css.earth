@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="fornjot"])[data-lod="billboard"] .fornjot-scene, .planet-stage:where([data-object-id="fornjot"])[data-lod="marker"] .fornjot-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="fornjot"])[data-lod="marker"] .fornjot-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="fornjot"]).fornjot-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,0 +1,60 @@
+{
+  "schema": "csspan-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "pan-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "pan-elevation-shadow@2x.webp",
+      "bytes": 296516,
+      "sha256": "9ccaacfec2024bf55038bd6a432276cf4c9a61aab187f8f69d218ac3badc7c7d"
+    },
+    {
+      "filename": "pan-elevation-surface@2x.webp",
+      "bytes": 492720,
+      "sha256": "b213de4e6f3dd8851edb650afc520b013cacb6e8f1ea6a59f69a1ea61d115a16"
+    },
+    {
+      "filename": "pan-elevation-thumbnail.webp",
+      "bytes": 4756,
+      "sha256": "194b0c49280c80df41e5fbcc7dfef93d011c0ccc529f90a8dc9f84307c850ed8"
+    },
+    {
+      "filename": "pan-filter-color-shadow@2x.webp",
+      "bytes": 307304,
+      "sha256": "5c66063b3c2e90f7ac0d50c259b93e84e9b9821554a05224dc6fb6d0b5817513"
+    },
+    {
+      "filename": "pan-filter-color-surface@2x.webp",
+      "bytes": 383580,
+      "sha256": "71fd8cb9ad9c62849d9983e37f4a3935eb39bfc84d4faa6d5d6363d05e417131"
+    },
+    {
+      "filename": "pan-filter-color-thumbnail.webp",
+      "bytes": 2096,
+      "sha256": "a8c4113f724305da6d50ec5ec3c76519b6ff4c6b6aacc71b578be16bfd849d31"
+    },
+    {
+      "filename": "pan-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "pan-normal-shadow@2x.webp",
+      "bytes": 264760,
+      "sha256": "96e9e457085b1ef85b59033c936fd597146657313cf09726cf3b95cab1bf9d62"
+    },
+    {
+      "filename": "pan-normal-surface@2x.webp",
+      "bytes": 414778,
+      "sha256": "b92a502fbd32de0216f03b14145c93d779e6187c44bdbf1c135e1e128cd929f9"
+    },
+    {
+      "filename": "pan-normal-thumbnail.webp",
+      "bytes": 1614,
+      "sha256": "1efb373911ddf3fb6e8adeba25dca2c7949572c0f5c9ac5ff859bca8b3d884bf"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "cssportia-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "portia-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "portia-model-shadow@2x.webp",
+      "bytes": 42120,
+      "sha256": "54372230e2a03ebd4b6c82b2092e883fbd1bef84960ebea997c976627e068eaf"
+    },
+    {
+      "filename": "portia-model-surface@2x.webp",
+      "bytes": 56192,
+      "sha256": "84252a62810d7cdb0bf89e974455f881ea10319833cc8ebddc213a958a95ecf3"
+    },
+    {
+      "filename": "portia-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

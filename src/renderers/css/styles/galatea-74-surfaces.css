@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="galatea-74"])[data-lod="billboard"] .galatea-74-scene, .planet-stage:where([data-object-id="galatea-74"])[data-lod="marker"] .galatea-74-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="galatea-74"])[data-lod="marker"] .galatea-74-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="galatea-74"]).galatea-74-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

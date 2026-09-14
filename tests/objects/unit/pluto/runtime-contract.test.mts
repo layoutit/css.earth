@@ -42,7 +42,7 @@ test("Pluto keeps its source-radius sphere and Lambert bank across photographic,
   assert.deepEqual(Object.keys(assets.surfaces), LENS_IDS);
   assert.deepEqual(lenses.controls.map(({ id }) => id), LENS_IDS);
   assert.equal(lenses.defaultLens, "surface");
-  assert.deepEqual(controls.settings.controls.map(control => control.name), ["speed", "shadows", "stars"]);
+  assert.deepEqual(controls.settings.controls.map(control => control.name), ["speed", "shadows"]);
   // The composite material is a separate silhouette-fitted root, never a plane inside the scene.
   assert.ok(runtimeDefinition.tree.nodes.some(node => node.className?.includes("pluto-material-composite")));
   assert.ok(runtimeDefinition.viewBindings.some(binding => binding.kind === "silhouette-fit"));
@@ -62,15 +62,14 @@ test("Pluto publishes every declared toggle through the shared controls and sele
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const nodes = f.stage.querySelectorAll("*");
-    for (const name of ["stars", "shadows"]) {
+    for (const name of ["shadows"]) {
       const input = required(f.inputs.get(name));
       input.checked = !input.checked;
       const listener = required(input.listeners.get("change"));
       if (typeof listener === "function") listener(new Event("change")); else listener.handleEvent(new Event("change"));
       await f.settle();
       assert.equal(required(f.selection.state().committed)[name], input.checked);
-      if (name === "stars") assert.equal(f.stage.classList.contains(`pluto-hide-stars`), !input.checked);
-      else assert.equal(f.presentation.observe().materials.lighting.rotationEnabled, input.checked);
+      assert.equal(f.presentation.observe().materials.lighting.rotationEnabled, input.checked);
     }
     assert.equal(f.inputs.get("atmosphere"), undefined, "an airless body declares no atmosphere toggle");
     assert.deepEqual(f.stage.querySelectorAll("*"), nodes);

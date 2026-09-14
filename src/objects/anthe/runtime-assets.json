@@ -1,0 +1,25 @@
+{
+  "schema": "cssanthe-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "anthe-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "anthe-model-shadow@2x.webp",
+      "bytes": 38844,
+      "sha256": "a6c473624b64e4b241932de5a5417d5fb20f6e691855b704ecaaa3c6a3cd058e"
+    },
+    {
+      "filename": "anthe-model-surface@2x.webp",
+      "bytes": 57270,
+      "sha256": "4df51689d4131d18c3c1c4967b965f3254413dd4b6f4dd493daf43be55d2ad45"
+    },
+    {
+      "filename": "anthe-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

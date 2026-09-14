@@ -1,7 +1,7 @@
 export { createObjectRuntime } from './runtime/object-runtime.js';
 export { readObjectDiagnostics } from './runtime/object-diagnostics.js';
 export type { ObjectRuntimeDiagnostics } from './runtime/object-diagnostics.js';
-export type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView, ObjectRuntimeCapabilities, WorldContextLayer } from './runtime/object-runtime-types.js';
+export type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView, ObjectRuntimeCapabilities } from './runtime/object-runtime-types.js';
 export type { ObjectRuntimeServices } from './runtime/object-runtime.js';
 export { OBJECT_RUNTIME_SCHEMA, initialObjectSelection, requireObjectControls, requireObjectAction,
   requireObjectRuntimeDefinition, objectCycleStates, reduceObjectSelection } from './runtime/object-contract.js';
@@ -15,8 +15,7 @@ export type { PreparedPresentationDefinition, PreparedView, PreparedPresentation
 export type { PreparedAssets } from './rendering/prepared-residency.js';
 export { CANONICAL_PREPARED_IMAGE_DENSITY } from './rendering/prepared-object-assets.js';
 export { loadPreparedCssObject, PREPARED_CSS_OBJECT_FORMAT } from './loader.js';
-export type { PreparedCssTransport, SharedReference } from './loader.js';
-export { decodeSharedBank } from './loader.js';
+export type { PreparedCssTransport } from './loader.js';
 export { parsePreparedObjectRuntime } from './validation/index.js';
 export { createDeferredObjectMount } from './runtime/deferred-object-mount.js';
 export type { ObjectDatasets } from './runtime/deferred-object-mount.js';

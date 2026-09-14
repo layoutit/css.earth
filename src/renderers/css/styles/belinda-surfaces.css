@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="belinda"])[data-lod="billboard"] .belinda-scene, .planet-stage:where([data-object-id="belinda"])[data-lod="marker"] .belinda-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="belinda"])[data-lod="marker"] .belinda-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="belinda"]).belinda-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

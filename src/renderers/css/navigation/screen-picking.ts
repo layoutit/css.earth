@@ -1,4 +1,4 @@
-import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
+import type { OrbitSegment } from '../solar-system/types.js';
 
 export type ScreenPickShape =
   | { kind: 'rect'; left: number; top: number; right: number; bottom: number }

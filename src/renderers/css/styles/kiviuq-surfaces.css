@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="kiviuq"])[data-lod="billboard"] .kiviuq-scene, .planet-stage:where([data-object-id="kiviuq"])[data-lod="marker"] .kiviuq-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="kiviuq"])[data-lod="marker"] .kiviuq-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="kiviuq"]).kiviuq-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

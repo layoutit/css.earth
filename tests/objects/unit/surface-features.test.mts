@@ -46,6 +46,7 @@ for (const id of bodies) {
     const hit = (runtime as unknown as { surfaceHit?: { target: number; triangles: number[][][] } }).surfaceHit;
     const band = plan.surfaceRadiusUnits, ellipsoid = plan.surfaceEllipsoidUnits;
     // An oblate body on the paged lane anchors on its rendered leaf surface around the authored reference ellipsoid.
+    assert.ok(Array.isArray(objectDescriptor.properties.recipe.sources));
     const paged = objectDescriptor.properties.recipe.sources.some((source: unknown) => record(source) && source.id === "paged-ellipsoid");
     if (shaped) { assert.ok(hit, `${id} shape body carries a hit mesh`); assert.equal(plan.target, hit!.target); assert.ok(band, `${id} declares its radius band`); assert.equal(ellipsoid, undefined); }
     else if (paged && objectDescriptor.properties.recipe.shape.kind === "ellipsoid") {
@@ -68,8 +69,8 @@ for (const id of bodies) {
         const share = Math.sqrt(Math.max(0, anchor[0] ** 2 + anchor[1] ** 2 + anchor[2] ** 2 - up * up) / ellipsoid.equatorial ** 2 + up * up / ellipsoid.polar ** 2);
         assert.ok(share >= ellipsoid.minimumShare * (1 - 1e-3) && share <= ellipsoid.maximumShare * (1 + 1e-3), `${id}: ${feature.name} anchor lies in the ellipsoid band`);
         const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
-        const longitude = ((Math.atan2(dot(anchor, axes.east), dot(anchor, axes.prime)) * 180 / Math.PI + Number(edge)) % 360 + 360) % 360;
-        const separation = Math.abs(((longitude - feature.longitudeDeg) % 360 + 540) % 360 - 180) * Math.cos(feature.latitudeDeg * Math.PI / 180);
+        const longitude: number = ((Math.atan2(dot(anchor, axes.east), dot(anchor, axes.prime)) * 180 / Math.PI + Number(edge)) % 360 + 360) % 360;
+        const separation: number = Math.abs(((longitude - feature.longitudeDeg) % 360 + 540) % 360 - 180) * Math.cos(feature.latitudeDeg * Math.PI / 180);
         assert.ok(separation < 0.05, `${id}: ${feature.name} anchor keeps its longitude (${longitude.toFixed(3)} vs ${feature.longitudeDeg})`);
         assert.ok(expected.every((n, i) => Math.abs(n - feature.normal[i]!) < 1e-5), `${id}: ${feature.name} normal is the geodetic normal`);
       } else if (shaped) {
@@ -92,8 +93,8 @@ for (const id of bodies) {
       assert.ok(record(rawCatalog.notes) && rawCatalog.notes.count === noted && rawCatalog.notes.license === "CC BY-SA 4.0", `${id}: notes provenance`);
       const pinned: unknown = JSON.parse(await readFile(new URL(`${id}/source/features/notes.json`, roots), "utf8"));
       assert.ok(record(pinned) && Array.isArray(pinned.entries), `${id}: pinned notes`);
-      const byId = new Map((pinned.entries as { id: string; extract: string; url: string }[]).map(entry => [entry.id, entry]));
-      for (const feature of catalog.features) if (feature.note) if (feature.note.credit.startsWith("Wikipedia")) assert.deepEqual(feature.note, { text: byId.get(feature.id)!.extract, title: (byId.get(feature.id) as { title: string }).title, url: byId.get(feature.id)!.url, credit: "Wikipedia, CC BY-SA 4.0" }, `${id}: ${feature.name} note matches its pin`);
+      const byId = new Map((pinned.entries as { id: string; title: string; extract: string; url: string }[]).map(entry => [entry.id, entry]));
+      for (const feature of catalog.features) if (feature.note) if (feature.note.credit.startsWith("Wikipedia")) assert.deepEqual(feature.note, { text: byId.get(feature.id)!.extract, title: byId.get(feature.id)!.title, url: byId.get(feature.id)!.url, credit: "Wikipedia, CC BY-SA 4.0" }, `${id}: ${feature.name} note matches its pin`);
     } else assert.equal(noted, 0, `${id}: notes without a pinned document`);
   });
 }

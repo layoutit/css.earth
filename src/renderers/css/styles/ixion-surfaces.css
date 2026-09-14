@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ixion"])[data-lod="billboard"] .ixion-scene, .planet-stage:where([data-object-id="ixion"])[data-lod="marker"] .ixion-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ixion"])[data-lod="marker"] .ixion-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ixion"]).ixion-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

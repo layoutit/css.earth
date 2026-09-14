@@ -4,7 +4,6 @@
   "namespace": "tethys",
   "displayName": "Tethys",
   "publicBase": "/scenes/tethys/",
-  "distanceAu": 9.58,
   "raster": {
     "width": 8192,
     "height": 4096,
@@ -485,12 +484,6 @@
     "sunSource": "JPL Tethys orbit plus VSOP87 Saturn position and IAU/WGCCRE Tethys rotation"
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      188,
-      187,
-      174
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

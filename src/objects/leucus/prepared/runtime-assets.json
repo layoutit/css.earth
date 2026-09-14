@@ -1,0 +1,25 @@
+{
+  "schema": "cssleucus-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "leucus-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "leucus-model-shadow@2x.webp",
+      "bytes": 33020,
+      "sha256": "f3a091e120c09ce076f6a352d9fac863f947245ded7a1ee12f4ab20c11c265ec"
+    },
+    {
+      "filename": "leucus-model-surface@2x.webp",
+      "bytes": 47842,
+      "sha256": "8fc5b50dc871de86ff9338b37e11232f28434f9d17f16d5c9c348204776d6628"
+    },
+    {
+      "filename": "leucus-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

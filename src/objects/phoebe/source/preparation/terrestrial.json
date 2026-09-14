@@ -4,7 +4,6 @@
   "namespace": "phoebe",
   "displayName": "Phoebe",
   "publicBase": "/scenes/phoebe/",
-  "distanceAu": 9.58,
   "raster": {
     "width": 2880,
     "height": 1440,
@@ -407,12 +406,6 @@
     "sunSource": "JPL Phoebe orbit and the retained Gaskell source-model orientation; the 2023 release uses the same image/kernel set and shifts its origin to the center of figure. Present-day rotation phase is not independently qualified."
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      155,
-      151,
-      146
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

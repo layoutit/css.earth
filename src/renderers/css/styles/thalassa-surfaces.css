@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="thalassa"])[data-lod="billboard"] .thalassa-scene, .planet-stage:where([data-object-id="thalassa"])[data-lod="marker"] .thalassa-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="thalassa"])[data-lod="marker"] .thalassa-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="thalassa"]).thalassa-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/egeria/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'egeria',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/egeria/egeria-directional-sun.webp",
-      "two": "/scenes/egeria/egeria-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/egeria/egeria-shape-surface@2x.webp"
   ],

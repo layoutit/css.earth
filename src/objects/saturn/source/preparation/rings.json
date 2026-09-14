@@ -21,15 +21,6 @@
       "license": "MIT, see ../LICENSE.OPENSPACE-MIT"
     },
     {
-      "id": "hyg-v41-saturn-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 144992,
-      "expectedSha256": "0aec282e4c6362d498fd85452a1bb4ac11a76a67409b752c30b99f00c57fb70e",
-      "origin": "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
-      "credit": "David Nash / Astronexus",
-      "license": "CC-BY-SA-4.0, see stars/LICENSE.md"
-    },
-    {
       "id": "ring-spectral-response",
       "path": "lenses/manifest.json",
       "expectedBytes": 2316,

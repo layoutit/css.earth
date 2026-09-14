@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/polyhymnia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'polyhymnia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/polyhymnia/polyhymnia-directional-sun.webp",
-      "two": "/scenes/polyhymnia/polyhymnia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/polyhymnia/polyhymnia-shape-surface@2x.webp"
   ],

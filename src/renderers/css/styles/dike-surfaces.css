@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="dike"])[data-lod="billboard"] .dike-scene, .planet-stage:where([data-object-id="dike"])[data-lod="marker"] .dike-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="dike"])[data-lod="marker"] .dike-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="dike"]).dike-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

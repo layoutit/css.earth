@@ -45,7 +45,7 @@ alignment. The reference meridian is arbitrary. The 11.05 h photometric period
 has aliases, so no qualified sidereal spin or absolute surface attitude is claimed.
 
 Source recipes pin units, assumptions and numerical axes. Geometry is prepared
-before runtime and uses 480 native raster triangles. Shadows and Orbit default off.
+before runtime and uses 480 native raster triangles. Shadows defaults off.
 
 The [table tool](../../../tools/objects/source-authoring/README.md) reproduces the
 pinned radii from [measurements](source/measurements.json).

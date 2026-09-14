@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/hera/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hera',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/hera/hera-directional-sun.webp",
-      "two": "/scenes/hera/hera-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/hera/hera-shape-surface@2x.webp"
   ],

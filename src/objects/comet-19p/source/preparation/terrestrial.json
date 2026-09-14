@@ -4,7 +4,6 @@
   "namespace": "comet-19p",
   "displayName": "Borrelly",
   "publicBase": "/scenes/comet-19p/",
-  "distanceAu": 3.608969333559339,
   "raster": {
     "width": 512,
     "height": 256,
@@ -371,12 +370,6 @@
     "qualification": "Measured terrain covers the encounter-facing side. The grid marks an illustrative closed surface fitted to each observed outline with an assumed depth; it carries no measured imagery or scalar values."
   },
   "presentation": {
-    "defaultLens": "micas",
-    "pointColor": [
-      184,
-      182,
-      178
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "micas"
   }
 }

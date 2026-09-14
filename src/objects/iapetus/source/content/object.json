@@ -200,12 +200,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "stars",
-        "label": "Stars",
-        "checked": true
       }
     ]
   },
@@ -228,12 +222,6 @@
       "role": "color",
       "description": "Cassini 2014 enhanced-color map",
       "href": "https://www.jpl.nasa.gov/images/pia18436-color-maps-of-iapetus-2014/"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     },
     {
       "label": "Cassini VIMS",

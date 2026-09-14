@@ -1,0 +1,25 @@
+{
+  "schema": "cssfornjot-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "fornjot-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "fornjot-model-shadow@2x.webp",
+      "bytes": 37530,
+      "sha256": "a0fd7a39f0fc57f18b7fe1530511c270793c9f0bb22473aef56a97ba3f5a7b92"
+    },
+    {
+      "filename": "fornjot-model-surface@2x.webp",
+      "bytes": 57180,
+      "sha256": "ae7d38952bbe5e839b7eaf47fc17dd82ce1ea6a42b170e107d612e444bfe5d35"
+    },
+    {
+      "filename": "fornjot-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="naiad"])[data-lod="billboard"] .naiad-scene, .planet-stage:where([data-object-id="naiad"])[data-lod="marker"] .naiad-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="naiad"])[data-lod="marker"] .naiad-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="naiad"]).naiad-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

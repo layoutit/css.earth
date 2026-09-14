@@ -1,9 +1,10 @@
-import {parse, object, string, dictionary, number} from '../material-composition/data-schema.mts';
+import {parse, object, string, dictionary, number, union} from '../material-composition/data-schema.mts';
 import {photometricRecipe, type PhotometricRecipe} from './photometric-contract.mts';
 import type {MaterialAsset} from './material-contract.mts';
 import type {OverlayOptions} from 'sharp';
 export type ResolvedPhotometricRecipe = PhotometricRecipe & {minnaertChannels: number[]};
-const minnaertSource = object({photometricLaw:object({name:string}),mapComposite:dictionary(object({minnaertK:number}))});
+// The observed composite also names its source product, so an entry is a channel coefficient or that label.
+const minnaertSource = object({photometricLaw:object({name:string}),mapComposite:dictionary(union(object({minnaertK:number}),string))});
 import {createHash} from 'node:crypto';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -81,7 +82,7 @@ export async function resolvePhotometricDiscRecipe({sourceDirectory,config: inpu
   if(!config.sources.some(source=>source.path===config.minnaertSource))throw new TypeError('Minnaert source is not pinned.');
   const source=parse(JSON.parse(await readFile(resolve(sourceDirectory,config.minnaertSource),'utf8')), minnaertSource, 'Minnaert source');
   if(source.photometricLaw?.name!=='Minnaert')throw new TypeError('Unsupported photometric law.');
-  const minnaertChannels=config.minnaertSourceChannels.map(channel=>source.mapComposite[channel]?.minnaertK);
+  const minnaertChannels=config.minnaertSourceChannels.map(channel=>{const entry=source.mapComposite[channel];return typeof entry==='object'?entry.minnaertK:undefined;});
   if(!minnaertChannels.every((value): value is number=>typeof value==='number'&&Number.isFinite(value)&&value>0&&value<=2))throw new TypeError('Invalid observed Minnaert coefficients.');
   return{...config,minnaertChannels};
 }

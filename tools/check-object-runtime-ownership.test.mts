@@ -7,7 +7,7 @@ import { resolve } from "node:path";
 import { SCENE_OBJECTS as OBJECTS } from "../site/objects.mts";
 import { auditObjectRuntimeOwnership, inspectObjectRuntimeModule } from "./check-object-runtime-ownership.mts";
 const moonDefinition = requireRecord(await loadObjectTestDefinition('moon'), 'Moon prepared definition');
-const objectControls = requireArray(moonDefinition.controls, 'Moon prepared definition.controls');
+const objectControls = requireRecord(moonDefinition.controls, 'Moon prepared definition.controls');
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mts";
 import { readPreparedJsonModule } from "./check-prepared-presentation.mts";
@@ -53,6 +53,8 @@ function object(id, name, classification, color, distanceAu, description, loadSc
 }
 `;
 const sunContext = await readFile(new URL("../src/objects/sun/prepared/world-context.json", import.meta.url), "utf8");
+const navigationDistance = await readFile(new URL('../site/navigation-distance.mts', import.meta.url), 'utf8');
+const spatialRelations = await readFile(new URL('../packages/catalog/src/spatial-relations.ts', import.meta.url), 'utf8');
 const objectSchema = await readFile(new URL("../site/object-schema.mts", import.meta.url), "utf8");
 const isArray = await readFile(new URL("../src/platform/is-array.mts", import.meta.url), "utf8");
 const browserTypes = await readFile(new URL("../site/browser-types.mts", import.meta.url), "utf8");
@@ -60,6 +62,7 @@ const shared = `import { createPolyCamera } from '@layoutit/polycss';
 export function createObjectRuntime(definition) { return createPolyCamera(definition); }`;
 function fixture(extra: SourceOverlay = {}, definitionTail = ""): AuditOptions {
   const files: SourceOverlay = { [client]: binding, [definitionPath]: definition + definitionTail,
+    "site/navigation-distance.mts": navigationDistance, "packages/catalog/src/spatial-relations.ts": spatialRelations,
     "site/objects.mts": registrySource, "site/object-schema.mts": objectSchema, "site/browser-types.mts": browserTypes, "src/platform/is-array.mts": isArray,
     "site/layouts/PlanetLayout.astro": "<main><slot /></main>",
     "site/components/PlanetShell.astro": "<aside><slot /></aside>",
@@ -339,10 +342,10 @@ test('descriptor binding cannot bypass the shared factory or redirect the prepar
     source.replace('${descriptorInput.prepared.sha256}.json', '${otherDescriptor.prepared.sha256}.json'),
     source.replace("reference !== 'prepared/object.json'", "reference === 'prepared/object.json'"),
     source.replace('createNavigableObjectMount(descriptorInput,', 'createNavigableObjectMount(otherDescriptor,'),
-    source.replace('bindContextualObject(definition, applicationContext,', 'bindContextualObject(definition, otherContext,'),
+    source.replace('bindContextualObject(definition, APPLICATION_WORLD_CONTEXT,', 'bindContextualObject(definition, otherContext,'),
     source.replace('definition => descriptorInput.properties.worldFrame', 'definition => true'),
-    source.replace('bindContextualObject(definition, applicationContext, parsePreparedWorldCameraFrame(descriptorInput.properties.worldFrame) ?? undefined)',
-      'bindContextualObject(definition, applicationContext, applicationContext.frame)'),
+    source.replace('bindContextualObject(definition, APPLICATION_WORLD_CONTEXT, parsePreparedWorldCameraFrame(descriptorInput.properties.worldFrame) ?? undefined)',
+      'bindContextualObject(definition, APPLICATION_WORLD_CONTEXT, APPLICATION_WORLD_CONTEXT.frame)'),
     source.replace(': bindPackagedObject(definition)', ': bindPackagedObject(otherDefinition)'),
     source.replace('mount = createObjectRuntime(definition)', 'mount = createObjectRuntime(otherDefinition)'),
     source.replace('createPreparedObjectNavigation(async () => definition, frame)', 'createPreparedObjectNavigation(async () => otherDefinition, frame)'),
@@ -477,6 +480,8 @@ test('the generated catalogue is checked as data without executing source overla
 
 test('descriptor context binding pins both prepared contexts to the shared factories and physical references', async () => {
   const contextFile = 'src/objects/sun/prepared/world-context.json';
+  const planFile = 'site/world-context-plan.mts';
+  const plan = await readFile(planFile, 'utf8');
   const packagedFile = 'site/packaged-object-runtime.mts', applicationFile = 'site/application-world-context.mts', starsDescriptorFile = 'src/objects/stellar-neighbourhood/object.json';
   const starsPayloadFile = 'src/objects/stellar-neighbourhood/prepared/stars.json', contextObjectsFile = 'site/prepared-context-objects.mts';
   const [contextText, packaged, application, starDescriptorText, starsPayloadText, contextObjects] = await Promise.all([
@@ -491,7 +496,7 @@ test('descriptor context binding pins both prepared contexts to the shared facto
       const orbit = body.orbit === undefined ? undefined : requireRecord(body.orbit, `world context.bodies[${index}].orbit`);
       return { ...body, id: requireString(body.id, `world context.bodies[${index}].id`), positionM: body.positionM, ...(orbit === undefined ? {} : { orbit: { ...orbit, centerBodyId: requireString(orbit.centerBodyId, `world context.bodies[${index}].orbit.centerBodyId`) } }) };
     }),
-    orbitCenters: Object.fromEntries(Object.entries(requireRecord(contextInput.orbitCenters, 'world context.orbitCenters')).map(([id, value]) => {
+    orbitCenters: Object.fromEntries(Object.entries(requireRecord(contextInput.orbitCenters ?? {}, 'world context.orbitCenters')).map(([id, value]) => {
       const center = requireRecord(value, `world context.orbitCenters.${id}`);
       return [id, { ...center, positionM: center.positionM, centerBodyId: requireString(center.centerBodyId, `world context.orbitCenters.${id}.centerBodyId`) }];
     })),
@@ -523,7 +528,7 @@ test('descriptor context binding pins both prepared contexts to the shared facto
   assert.equal((await audit({ [contextFile]: JSON.stringify(orbitless) })).complete, true,
     'An orbitless physical point does not require fabricated orbital geometry');
   const contextMutations: [SourceOverlay, RegExp][] = [
-    [{ [packagedFile]: packaged.replace("with { type: 'json' }", '') }, /forward its prepared transport/],
+    [{ [planFile]: plan.replace("type: 'json'", "type: 'javascript'") }, /world context plan|Dynamic runtime imports/],
     [{ [contextFile]: JSON.stringify({ ...context, volume: { ...context.volume, objectId: '../milky-way' } }) }, /volume identity is not pinned/],
     [{ [contextFile]: JSON.stringify({ ...context, frame: { ...context.frame, originM: [1, 0, 0] } }) }, /physical frame/],
     [{ [contextFile]: JSON.stringify({ ...context, bodies: [] }) }, /body inventory/],
@@ -542,11 +547,11 @@ test('descriptor context binding pins both prepared contexts to the shared facto
     [{ [contextFile]: JSON.stringify({ ...context, stars: { ...context.stars, objectId: '../stellar-neighbourhood' } }) }, /star field identity/],
     [{ [contextFile]: JSON.stringify({ ...context, stars: { ...context.stars, fullDistanceM: context.volume.fadeStartDistanceM } }) }, /star field identity/],
     [{ [packagedFile]: packaged.replace('createWorldContextObjectRuntime', 'createObjectRuntime') }, /Contextual binding/],
-    [{ [packagedFile]: packaged.replace('world-context.json', 'other-context.json') }, /Contextual binding/],
+    [{ [packagedFile]: packaged.replace('./world-context-plan.mts', './other-context-plan.mts') }, /Contextual binding/],
     [{ [applicationFile]: application.replace('createPreparedUniverse', 'createObjectRuntime') }, /Application world context/],
     [{ [applicationFile]: application.replace('assets = CONTEXT_OBJECT_ASSET_URLS', "assets = import.meta.glob('../src/objects/*/prepared/**/*.{json,png,webp,bin}', { query: '?url', import: 'default', eager: true })") }, /Application world context/],
     [{ [contextObjectsFile]: contextObjects.replace('/prepared/**/*.{json,png,webp,bin}', '/prepared/**/*.{json,png,webp}') }, /Application world context/],
-    [{ [applicationFile]: application.replace('loadPreparedCssPointField', 'loadPreparedCssVolume') }, /Application world context/],
+    [{ [applicationFile]: application.replace('loadPreparedPointAppearance', 'loadPreparedCssVolume') }, /Application world context/],
     [{ [applicationFile]: application.replace('loadPreparedCssSurfaceShell', 'loadPreparedCssVolume') }, /Application world context/],
     [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, prepared: { ...starPrepared, sha256: '0'.repeat(64) } }) }, /point field.*(?:identity|hash).*drifted/],
     [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, properties: { ...starProperties, frame: { ...starFrame, epochJdTt: 0 } } }) }, /point field.*frame/],
@@ -557,7 +562,7 @@ test('descriptor context binding pins both prepared contexts to the shared facto
       return [{ [starsDescriptorFile]: JSON.stringify(descriptor), [starsPayloadFile]: bytes }, /point field.*identity/];
     })(),
   ];
-  for (const [changes, expected] of contextMutations) await assert.rejects(audit(changes), expected);
+  for (const [changes, expected] of contextMutations) { assert.ok(Object.entries(changes).every(([file, value]) => value !== ({ [planFile]: plan, [packagedFile]: packaged, [applicationFile]: application } as SourceOverlay)[file]), "Mutation changes its source"); await assert.rejects(audit(changes), expected); }
 });
 
 

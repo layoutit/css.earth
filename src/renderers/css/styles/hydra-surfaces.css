@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hydra"])[data-lod="billboard"] .hydra-scene, .planet-stage:where([data-object-id="hydra"])[data-lod="marker"] .hydra-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hydra"])[data-lod="marker"] .hydra-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hydra"]).hydra-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

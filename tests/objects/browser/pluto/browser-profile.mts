@@ -14,15 +14,7 @@ export const browserProfile = createObjectBrowserProfile({
         one: "/scenes/pluto/pluto-poles-surface.webp",
         two: "/scenes/pluto/pluto-poles-surface@2x.webp",
       }),
-      Object.freeze({
-        one: "/scenes/pluto/pluto-starfield-front.webp",
-        two: "/scenes/pluto/pluto-starfield-front@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/pluto/pluto-directional-sun.webp",
-        two: "/scenes/pluto/pluto-directional-sun@2x.webp",
-      }),
-    ]),
+      ]),
     lensRace: Object.freeze({
       defaultId: "surface",
       slowId: "methane-ice",

@@ -26,33 +26,6 @@
       }
     },
     {
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "id": "eso-milky-way-panorama",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Pinned acquisition plan downloads the official 6000 by 3000 ESO original",
-      "redistribution": "Permitted under CC-BY-4.0 with complete ESO/S. Brunier credit",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/eris/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
       "path": "nasa-eris.glb",
       "expectedBytes": 4398964,
       "expectedSha256": "1b97f1b9eea244b047a72c2a3ac0db315715b7d421033d860d669ffd78681d54",
@@ -72,33 +45,6 @@
             "catalogueId": "source-eris-nasa-vtad-eris-model",
             "role": "material",
             "evidence": "src/planets/eris/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 100844,
-      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/eris/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -133,8 +79,8 @@
     {
       "id": "eris-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1567,
-      "expectedSha256": "074449421f0ffa141060f8a69bc8ab5c60abd681acdf62c3679b8e90852fbe25",
+      "expectedBytes": 270,
+      "expectedSha256": "5b6077564301c1b86d82701c2f3b759fb1a0774fbdb0dac65c963d7d4060fd15",
       "origin": "Repository-authored Eris solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -192,8 +138,8 @@
     {
       "id": "eris-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 222,
-      "expectedSha256": "7382a069ad44040eb34fe2ae29f0cafc6ce1478c2a8847d92296a613cc388584",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Eris celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -248,8 +194,8 @@
     {
       "id": "eris-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 470,
-      "expectedSha256": "e228401d8d2676f4acf78ebb2b0776a22d5d61e10287b6049d93eba8e1e19736",
+      "expectedBytes": 286,
+      "expectedSha256": "d39ca3e764b19adcccc1b5a3dc31c902542cb972ac957c0239a1df5bd2e63d30",
       "origin": "Repository-authored Eris acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -285,8 +231,8 @@
     {
       "id": "eris-object-content",
       "path": "content/object.json",
-      "expectedBytes": 5607,
-      "expectedSha256": "bae4883e58250a946c99e11747303fc2c0305dd0554ba00891e4159b89069c62",
+      "expectedBytes": 5328,
+      "expectedSha256": "e34ff65901163435b3dfc5445d20480ddbfaa5d71f54385a15d0a9f2c32c8930",
       "origin": "Repository-authored Eris object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -307,16 +253,6 @@
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 114,
       "expectedSha256": "677dba4cd7635440de2bde04c6bbee6956ad07c276f146ff7ebef594d7f6b0c2"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     }
   ],
   "generatedIntermediates": []

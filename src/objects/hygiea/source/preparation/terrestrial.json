@@ -4,7 +4,6 @@
   "namespace": "hygiea",
   "displayName": "Hygiea",
   "publicBase": "/scenes/hygiea/",
-  "distanceAu": 3.1509104848150167,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -112,12 +111,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

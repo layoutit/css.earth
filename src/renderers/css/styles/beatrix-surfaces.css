@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="beatrix"])[data-lod="billboard"] .beatrix-scene, .planet-stage:where([data-object-id="beatrix"])[data-lod="marker"] .beatrix-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="beatrix"])[data-lod="marker"] .beatrix-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="beatrix"]).beatrix-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

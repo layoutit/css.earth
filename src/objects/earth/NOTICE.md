@@ -18,8 +18,6 @@ OpenSpace configuration files are redistributed under the OpenSpace MIT licence 
 
 Inter is redistributed under the SIL Open Font License 1.1 in `source/presentation/LICENSE.INTER-OFL`.
 
-The HYG star catalogue is redistributed under CC BY-SA 4.0. Its notice is in `source/stars/LICENSE.md`.
-
 The Earth adapter's prepared HTML, CSS, modules, charts, textures, and scientific presentation specifications are project-authored derivatives. Source credits remain embedded in this record and in the prepared chart metadata.
 
 ## GLAD-M35 mantle model

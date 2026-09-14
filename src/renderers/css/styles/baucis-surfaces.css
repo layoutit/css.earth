@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="baucis"])[data-lod="billboard"] .baucis-scene, .planet-stage:where([data-object-id="baucis"])[data-lod="marker"] .baucis-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="baucis"])[data-lod="marker"] .baucis-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="baucis"]).baucis-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

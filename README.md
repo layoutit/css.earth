@@ -121,8 +121,7 @@ src/objects/<id>/
 ├── object.json                  Pinned capability recipe and transport digest
 ├── source/                      Authored JSON, scientific inputs and provenance
 ├── prepared/                    Baked JSON, committed for clean checkouts
-│   ├── *.refs.json              Runtime, scene and sky with shared banks referenced
-│   ├── runtime.json, scene.json, sky.json   Restored full files (Git-ignored)
+│   ├── runtime.json, scene.json, sky.json   Runtime, scene and sky plans
 │   └── object.json              Rebuilt runtime payload (Git-ignored)
 ├── runtime-assets.json          Reproducible asset inventory
 ├── README.md                    Sources, processing, evidence and known problems

@@ -1,0 +1,25 @@
+{
+  "schema": "cssgreip-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "greip-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "greip-model-shadow@2x.webp",
+      "bytes": 37412,
+      "sha256": "047f8fa09091a3c9a6bf57b999b6e928c2b19324c76ddb0cdfaf0915a46edf8f"
+    },
+    {
+      "filename": "greip-model-surface@2x.webp",
+      "bytes": 55996,
+      "sha256": "f0fabf4a378a0366ec4c0d098855afde309194162e83ed949489dd97cd9cb3bf"
+    },
+    {
+      "filename": "greip-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

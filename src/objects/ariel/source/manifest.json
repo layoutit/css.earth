@@ -127,33 +127,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/ariel/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -259,33 +232,6 @@
       }
     },
     {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 848,
-      "expectedSha256": "e984aae46a79dde088dbbf3217f8737f5d498422a823ba4a46759a2c07186653",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/ariel/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
-          }
-        ]
-      }
-    },
-    {
       "id": "ariel-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 2044,
@@ -315,8 +261,8 @@
     {
       "id": "ariel-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1628,
-      "expectedSha256": "8c153a4a3f0f7b4d975cc507463d82ac37a8b8c9aac1231f8e229f168b1dc605",
+      "expectedBytes": 304,
+      "expectedSha256": "524b1d8aea536ad63cb8a73eb2c778d754768e43a27c1a406607387c35a6b78d",
       "origin": "Repository-authored Ariel solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -374,8 +320,8 @@
     {
       "id": "ariel-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 222,
-      "expectedSha256": "1b6e3aaecbf5ea8b7c629984b5a546ddab73e5cfc9c24e2203da47fd628ef51b",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Ariel celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -430,8 +376,8 @@
     {
       "id": "ariel-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1319,
-      "expectedSha256": "f03d3eaca0cdf89bfe4a4d121473fa083e23eb55ee1285d3bda118506d6fe286",
+      "expectedBytes": 1135,
+      "expectedSha256": "7b0795b4488c591469dc7f50d95cfb284f06d50995a5233175d6f1aa803bff9d",
       "origin": "Repository-authored Ariel acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -449,8 +395,8 @@
     {
       "id": "ariel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7555,
-      "expectedSha256": "905f3658fa3abf655a1640e164d4e05889586cb782a4f912990ed2f7bb9ac690",
+      "expectedBytes": 7276,
+      "expectedSha256": "6354cab8aa87ccfb791c00b3274f596804815450ae221bf708eb7fac4d5eba03",
       "origin": "Repository-authored Ariel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -472,16 +418,6 @@
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
       "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "observations/aaReadMe_uranian_MAP_DEM.txt",

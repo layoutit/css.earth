@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="klytia"])[data-lod="billboard"] .klytia-scene, .planet-stage:where([data-object-id="klytia"])[data-lod="marker"] .klytia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="klytia"])[data-lod="marker"] .klytia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="klytia"]).klytia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

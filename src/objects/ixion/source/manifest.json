@@ -2,33 +2,6 @@
   "schema": "cssixion-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/ixion/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -121,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3552,
-      "expectedSha256": "066e224843f6ddddf005770f97857347f99e6bda8ee55881ede91e6e3fa29f73",
+      "expectedBytes": 3272,
+      "expectedSha256": "6b20d9ac6826b7611c0e2a78d604ca95b338df9d0954ccd1135a43799baf4d9f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -135,8 +108,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 725,
-      "expectedSha256": "faa1557239b00a3ff182b585faf3f3b72bf069601def22e08c012f2406e873a4"
+      "expectedBytes": 522,
+      "expectedSha256": "a9ee06de8e1e94ec8415015dd89100283af1cad587ea4fde288bca079bf87eb3"
     },
     {
       "path": "preparation/navigation.json",
@@ -150,8 +123,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2865,
-      "expectedSha256": "523730b010dd8c6f4c71390facda406149a63716967880a05282b5edf1ca3de9"
+      "expectedBytes": 2711,
+      "expectedSha256": "fdf337162562a84bf37d0389ce2c00c7695caed1724505a3031c4606d1cf87a2"
     },
     {
       "path": "presentation/minimap.json",
@@ -177,21 +150,6 @@
       "path": "reference/ixion-kilic-2026.pdf",
       "expectedBytes": 6578792,
       "expectedSha256": "7169924fc5b849b6d6009e4bb712b0b44820631d8eecbd29a1c3162ba1acbee4"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 848,
-      "expectedSha256": "eac7729c4adc68e795d25b7f50f58d9d3654d1f06ab9bc608c3e25940e0773ff"
     }
   ],
   "generatedIntermediates": [

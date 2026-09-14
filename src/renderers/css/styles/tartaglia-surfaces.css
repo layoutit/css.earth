@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="tartaglia"])[data-lod="billboard"] .tartaglia-scene, .planet-stage:where([data-object-id="tartaglia"])[data-lod="marker"] .tartaglia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="tartaglia"])[data-lod="marker"] .tartaglia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="tartaglia"]).tartaglia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

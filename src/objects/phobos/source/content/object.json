@@ -182,12 +182,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": true
       }
     ]
   },
@@ -204,12 +198,6 @@
       "role": "surface",
       "description": "Multi-mission surface mosaic",
       "href": "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

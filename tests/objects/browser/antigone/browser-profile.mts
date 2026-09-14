@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/antigone/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'antigone',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/antigone/antigone-directional-sun.webp",
-      "two": "/scenes/antigone/antigone-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/antigone/antigone-shape-surface@2x.webp"
   ],

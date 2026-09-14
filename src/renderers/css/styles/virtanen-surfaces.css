@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="virtanen"])[data-lod="billboard"] .virtanen-scene, .planet-stage:where([data-object-id="virtanen"])[data-lod="marker"] .virtanen-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="virtanen"])[data-lod="marker"] .virtanen-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="virtanen"]).virtanen-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

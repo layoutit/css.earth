@@ -1,0 +1,25 @@
+{
+  "schema": "csssalacia-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "salacia-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "salacia-model-shadow@2x.webp",
+      "bytes": 43062,
+      "sha256": "a4a48666234db6c9ecab72fc1d5f4c543d063e9507318a2eeedac438e78e01a3"
+    },
+    {
+      "filename": "salacia-model-surface@2x.webp",
+      "bytes": 57054,
+      "sha256": "9a3256be66c9df8da73034a3a61237ef576e0d5a1a3d2052d133165ce6a0c5f0"
+    },
+    {
+      "filename": "salacia-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="nysa"])[data-lod="billboard"] .nysa-scene, .planet-stage:where([data-object-id="nysa"])[data-lod="marker"] .nysa-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="nysa"])[data-lod="marker"] .nysa-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="nysa"]).nysa-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

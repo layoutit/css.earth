@@ -1,0 +1,25 @@
+{
+  "schema": "cssprospero-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "prospero-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "prospero-model-shadow@2x.webp",
+      "bytes": 36350,
+      "sha256": "956d4115ad7229c9f1ad467b78158a0c33e6a95c9e8e4b6664787bc41df84d38"
+    },
+    {
+      "filename": "prospero-model-surface@2x.webp",
+      "bytes": 55078,
+      "sha256": "8bc802ab91572b53bac24433672af704ff68319866e244ca6966f69e3b0b0fdc"
+    },
+    {
+      "filename": "prospero-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}
