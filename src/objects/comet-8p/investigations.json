@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "comet-8p",
+  "entries": [
+    {
+      "id": "hst-spitzer-contact-model",
+      "subject": "Hubble contact spheres scaled by Spitzer",
+      "status": "included",
+      "finding": "The retained source selection uses Groussin 2019 Table 3 and section 5.3: Hubble lobe proportions with lengths scaled by the square root of the Spitzer flux scale. The smooth inferred shape has no resolved terrain; its equal-density origin and arbitrary meridian are assumptions.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-8p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-8p/source/shape/model.json",
+        "https://arxiv.org/abs/1911.04897"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "arecibo-contact-model",
+      "subject": "Arecibo two-lobe radar alternative",
+      "status": "included",
+      "finding": "The separate Arecibo dataset uses Harmon 2010 full dimensions divided by two, without Spitzer rescaling. Its axes are aligned for comparison; neither a unique radar pole nor an encounter phase is applied.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-8p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-8p/source/shape/arecibo.json",
+        "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "original-radar-mesh",
+      "subject": "Downloadable Tuttle radar terrain mesh",
+      "status": "unresolved",
+      "finding": "The intake found no downloadable Tuttle mesh in the JPL radar shape index. The two published parametric families are usable, but this limited survey does not establish that an original model is unavailable elsewhere.",
+      "revisitWhen": "An original mesh is released with its version, coordinates and reuse record.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-8p/README.md",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "spitzer-surface-texture",
+      "subject": "Spitzer MIPS and IRS as surface texels",
+      "status": "excluded",
+      "finding": "The retained study uses unresolved thermal images and spectra to constrain size and activity. Those data do not supply a registered nucleus surface texture.",
+      "revisitWhen": "A spatially resolved nucleus observation with usable geometry supports a surface map.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-8p/README.md",
+        "https://arxiv.org/abs/1911.04897"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "contact-point-label",
+      "subject": "Contact point as a searchable place",
+      "status": "excluded",
+      "finding": "The contact point was omitted because the camera approach hides it behind the nearer lobe. Large lobe and Small lobe are retained as model-anatomy labels, not observed geography.",
+      "revisitWhen": "A supported camera arrival keeps the actual contact point visible without misplacing the label.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-8p/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    }
+  ]
+}
