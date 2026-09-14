@@ -46,6 +46,11 @@
       "title": "Radar shape model",
       "detail": "Published radar shape",
       "summary": "Shape from 1992 and 1996 radar data; later spacecraft images show some differences."
+    },
+    "elevation": {
+      "title": "Radar-model elevation",
+      "detail": "Height from reference sphere",
+      "summary": "Height above a 1,224 m sphere from the radar model, including broad shape. Later photographs show shape differences."
     }
   }
 }

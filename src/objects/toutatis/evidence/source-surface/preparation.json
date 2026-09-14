@@ -1,0 +1,54 @@
+{
+  "date": "2026-09-14",
+  "id": "toutatis",
+  "geometry": {
+    "triangles": 800,
+    "unchangedFields": [
+      "surfaceTriangles",
+      "bodyLeaves",
+      "camera",
+      "systemTransform"
+    ],
+    "sourceTrianglesSha256": "0ed93618021b28b149574b4e0ef0b6a5613d96c475d7505bbf60365025bde230",
+    "retainedLeavesSha256": "0fc0be7418d47a8071e41e9ab134ba02dc2d3fc963f61595c49d20c24e5511c5"
+  },
+  "recipeSha256": "74a58b7c9677b5ec82db51e333bc67a9c0ff682e77b8030b7c747443bcff443c",
+  "runtimeAssetsSha256": "9e6ed7bbac72169ca4ed2df52a3a6021df080b6684bcd595e92a08c3bbc889c1",
+  "existingImageCount": 31,
+  "allExistingImagesUnchanged": true,
+  "additionalImageBytes": 747604,
+  "additionalImages": [
+    {
+      "filename": "toutatis-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "toutatis-elevation-shadow@2x.webp",
+      "bytes": 360634,
+      "sha256": "2b46563bdcde3253318b48ab52f0f4cb79a63312d6f852b81c221874221bbf3c"
+    },
+    {
+      "filename": "toutatis-elevation-surface@2x.webp",
+      "bytes": 380870,
+      "sha256": "a361add1d3e60980d97304625925ab0146278f90ec40ce73234acdac67b59014"
+    },
+    {
+      "filename": "toutatis-elevation-thumbnail.webp",
+      "bytes": 5802,
+      "sha256": "8172417040d331136b7f5c7905a8a592deb3556da5df383e7465917826da04b8"
+    }
+  ],
+  "transfer": {
+    "sampledTexels": 13107200,
+    "withheldTexels": 0,
+    "maximumDistanceMeters": 47.9473988332843,
+    "includesAtlasBleed": true,
+    "triangleInteriorTexels": 5775099,
+    "withheldTriangleInteriorTexels": 0,
+    "maximumAcceptedDistanceMeters": 50,
+    "method": "Closest full-source triangle point in 3D; source barycentric radius and normal. No radial branch selection."
+  },
+  "coverageInterpretation": "Counts describe prepared atlas texels, not measured surface area or observed terrain.",
+  "preparation": "Full body preparation"
+}
