@@ -61,7 +61,7 @@ Named features run of 2026-09-12 (this version): the catalogue labels 2 IAU name
 
 Smooth regions may lack image coverage; zero sigma can mean one or no images. The release reports about 3.3% volume uncertainty. Shape-specific pole/scale are retained despite later PCK15 revisions and errors in the source coordinate document. Display phase is arbitrary. The heliocentric system-barycentre position approximates the primary, omitting about 10 m of wobble; it is not an exact primary-centre ephemeris.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="didymos-sources-and-interpretation"></a>
 <a id="selected-shape"></a>
@@ -89,16 +89,7 @@ Each triangle uses the shared native PolyCSS `u` primitive with 128 px raster si
 
 **Bounded source survey (updated 2026-09-08)**
 
-| Candidate | Disposition and reason |
-| --- | --- |
-| [DART final Didymos v003 OBJ series](https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/) | Included. Direct original mesh, source labels and SIS; the 9.309 m release is adequate for the selected display budget. Higher nominal-resolution versions share the source accuracy/coverage limitations. |
-| [Didymos relative-albedo facet table](https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml) | Included. The original FITS table names the exact selected OBJ. Its zero-based facet IDs match all 49,152 triangles; latitude, east longitude and radius reproduce their Cartesian centroids to 0.0001132 m maximum residual. The source field is sampled by the closest full-source triangle in 3D within the existing 8 m transfer bound. No albedo is interpolated across invalid facets. |
-| [Derived topography, slope, gravity and tilt products](https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/document/dart_shapemodel_sis.pdf) | Deferred. These are scientifically distinct, but gravity/topography depend on uniform-density assumptions and the rotation model, and share the facet-table decoding requirement. The current Elevation lens explicitly uses a reference sphere instead. |
-| [DRACO calibrated image archive](https://pdssbn.astro.umd.edu/data_sb/missions/dart/index.shtml) and LUKE inputs linked by the shape archive | Two DRACO geometry cubes are included as a registered, partial-coverage mosaic. The native radius plane separates the two bodies before camera fitting; the later partial image takes precedence where it qualifies. LUKE photography remains deferred because its own camera registration has not been qualified here. No RGB composition or terrain fill is authored. |
-| [NAIF DART global DSK](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/dsk/) | Excluded duplicate geometry transport. The directly released OBJ already supplies the original indexed shape at an appropriate resolution without a DSK conversion dependency. |
-| [Mission PCK15](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/pck/didymos_system_15.tpc) | Pinned comparison reference; not substituted for the shape-specific pole or radius. It also documents the distinction between Dimorphos's pre-impact rotation and the post-impact dynamic frame. |
-
-All required source inputs are restored through `source/preparation/acquisition.json` and hash-verified through `source/manifest.json`. The unchanged source documentation, font and sky licensing evidence, authored recipes and generated context pins are part of the same closure. Runtime inventories are generated after preparation and published by the shared delivery owner.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Context brightness**
 

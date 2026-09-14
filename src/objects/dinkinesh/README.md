@@ -80,136 +80,38 @@ The [Shadows-on view](evidence/dinkinesh-shadows-true.png) was also inspected. T
 
 ## Known problems
 
-### Lucy photographic source check, 13 September 2026
+### Lucy photographs remain unqualified
 
-An initial archive survey missed a downloadable mesh in the public history of
-the TEMPEST thermal-model repository. The photographic upgrade now has a
-numerical source candidate; its frame and image registration remain unqualified.
-The recovered mesh is now available as its own shape dataset. Neither it nor
-the Celestia approximation has a qualified photographic surface. Different
-coordinate frames and dimensions prevent transferring cameras or landmarks
-between the models by body name alone.
+The numerical TEMPEST shape is already included. Its original mission-model
+version, prime meridian and observed/fill boundary remain unknown. Native Lucy
+photographs are available and the shared L’LORRI reader now decodes all six
+examined Dinkinesh frames with their sigma and quality companions. That import
+success does not establish their correspondence with the recovered mesh.
 
-- [TEMPEST's `dinkinesh.stl` at commit `7df4c88`](https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl)
-  was retrieved and parsed: 237,239 bytes, 635 distinct vertices, 1,266 triangles,
-  no zero-area faces, and two incident triangles per edge. Its SHA-256 is
-  `3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622`.
-  The repository documents SI units. Interpreting coordinates as metres gives
-  extents of 840.493 × 888.591 × 718.490 m and a signed-volume equivalent
-  diameter of 737.508 m, without rescaling. The file was removed from the current
-  tree in a June 2026 cleanup; the public commit still contains its numeric data.
-- [Lyster et al. (2025)](https://doi.org/10.5194/epsc-dps2025-546)
-  describe reducing the mission photogrammetric model to 1,266 facets for
-  TEMPEST/TESBY. The author repository and matching facet count support that
-  source association, but do not independently establish the exact upstream
-  model version, prime meridian, observed/fill partition or camera solution.
-  [Jackson et al. (2025)](https://doi.org/10.3847/PSJ/ade23c) independently
-  describe a vertex-and-triangle model, version 2.02, reduced from 126,627 to
-  5,186 facets. That is a separate derivative, not the retrieved STL.
+The [registration study](evidence/lucy-registration/study.json) preserves the
+input pins, tested processing identities, numerical trials and limitations.
+The existing Lucy overlap matcher, with native pixels and source visibility,
+produced **2.03 px RMS and 4.74 px maximum over 16 withheld controls** in an
+additional viewing direction. It fails the existing one-pixel RMS requirement.
+A regional fit also failed its additional-view check. Earlier results that
+cropped pixels before convolution are superseded by the retained native-image
+region check. No photographic surface or regional lens has been accepted.
 
-- [Bierhaus et al. (2025), Sections 2.2 and 3.1](https://doi.org/10.3847/PSJ/ae1968)
-  describe an improved mission model and co-registered images in SBMT. The model
-  has 910 × 870 × 716 m extents, a 738 m equivalent diameter, and a median
-  stereo-intersection error of 1.7 m on reconstructed terrain. The paper refers
-  the full model description to Preusker et al. (2026, in preparation); those
-  measurements do not supply mesh connectivity or per-image registration.
-- The [2024 shape-method abstract](https://doi.org/10.5194/epsc2024-963)
-  describes stereo reconstruction plus limb measurements and a prospective
-  monochrome basemap/albedo release. The abstract does not provide those files.
-  The accessible supplementary item for [Levison et al. (2024)](https://doi.org/10.1038/s41586-024-07378-0)
-  is a peer-review PDF, not a mesh or camera/control-point bundle.
-- The PDS catalogue query returned 21 Dinkinesh-related target, instrument and
-  SPICE entries, with no separate shape collection. Both the
-  [archived Lucy DSK directory](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/)
-  and the [current mission directory](https://naif.jpl.nasa.gov/pub/naif/LUCY/kernels/dsk/)
-  listed only Donaldjohanson's DSK. The SBMT Dinkinesh data endpoint requested
-  authentication. These are bounded access findings, not evidence that no
-  scientific model exists or will be released.
-- [Native L'LORRI observations](https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/SUPPORT/dataset.shtml)
-  are available. Their [archive timing note](https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/SUPPORT/NOTES/liens.txt)
-  explains an SPK/SCLK timing mismatch affecting geometric headers near closest
-  approach and identifies the corrected
-  `lcy_230815_240201_240101_dinkinesh_reconstruction_final_v2.bsp`.
-  A future reader must verify the selected product version and its geometry;
-  the existence of TAN-SIP header fields alone is not a camera qualification.
-- The public [`dinkinesh_v10.tpc`](https://naif.jpl.nasa.gov/pub/naif/LUCY/kernels/pck/dinkinesh_v10.tpc)
-  explicitly uses a placeholder pole and retains the pre-encounter 52.67-hour
-  period. It is unsuitable for orienting this mesh. Jackson et al.'s published
-  ecliptic pole (95.53°, −87.05°) and 3.737-hour period do not supply the recovered
-  STL's rotational phase or prove that it uses the same prime meridian.
+![Native photograph, projection through the recovered mesh, and absolute brightness difference](evidence/lucy-registration/native-registration-comparison.png)
 
-The native-pixel diagnostic used
-[`lor_0752129617_03613_00001_1x1_sci_03.fit`](https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/lor_0752129617_03613_00001_1x1_sci_03.fit)
-and its [label](https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/lor_0752129617_03613_00001_1x1_sci_03.xml),
-the recovered STL and the corrected trajectory. The 10,526,400-byte FITS has
-SHA-256 `d2c86f7ed98c4f026c5cd52ed4d4dc7eed54d66b1a4ba95af171ccaaba9373d9`.
-It resolves Dinkinesh's relief and part of Selam. The corrected trajectory
-substantially changes the projected position relative to the old header vector,
-but does not align the model automatically.
+Stereo depth estimates from the two surrounding views differ from the coarse
+mesh by a median absolute 6.47 m while their paired depths disagree by a median
+1.43 m. This supports investigating the source mesh’s lost detail; the cameras
+are still inferred, so these numbers are not an absolute mesh-accuracy result.
+Brightness differences in the figure include changing illumination. The study
+is exploratory evidence, not a clean-checkout reproduction or product check.
 
-Exploratory phase and limb-pointing trials did not qualify a photographic
-surface. An outline-fit candidate passed a limited limb residual check while
-its visible relief disagreed with the photograph. That check used the existing
-pinhole limb helper, not a distortion-aware native-pixel fit; its residual is
-not a photographic accuracy measurement. Both the body orientation and
-independent internal-feature agreement remain unresolved. This diagnostic
-does not replace the existing product evidence or justify a texture bake.
-
-The follow-up checked TEMPEST's public `main`/`dev` inventories and relevant
-commit history. Its historical
-[`analyze_flyby_temperatures.py`](https://github.com/duncanLyster/TEMPEST/blob/b52891180d9e7771a7c2d01ff9937cff7827c944/scripts/analyze_flyby_temperatures.py)
-uses a simplified planar trajectory and references a private configuration
-absent from that public tree. It does not release a matched Lucy camera or an
-epoch-bound Dinkinesh orientation. This narrows the missing input; it is not a
-claim that the author's full TESBY setup lacks those data.
-
-The next diagnostic applied native TAN-SIP distortion within the shared limb
-fit, retained the paired FITS quality/sigma checks, and examined observations
-`lor_0752129545_03599`, `lor_0752129617_03613` and
-`lor_0752129722_03634`. The trial pole stayed fixed at the Jackson et al. value;
-18 phases at 20° intervals were screened on the first two frames with a common
-epoch and the published 3.737-hour period. Four phases passed the middle
-image's limited outline check. All four failed the same check on the later
-view, where their trial rotation phases were propagated rather than refitted.
-Small pointing corrections remained independently fitted per image. No
-candidate qualified across the views, and no internal terrain control network
-was established. This coarse search does not rule out a valid orientation or
-a usable mesh.
-
-A subsequent audit found a sampling defect in that check: limiting the
-raster-ordered edge list to 300 points removed its lower end. On image `9617`,
-the retained boundary ended at row 809 while detected edges extended to row
-949; 94 lower points were omitted. Sampling across the entire list instead
-changes the phase-0 trial from a 2.161-pixel holdout RMS pass to a 5.506-pixel
-failure under the unchanged 3-pixel budget. The earlier passes are therefore
-not evidence of agreement around the full outline.
-
-The corrected helper passes all five limb-refinement tests, including
-nonlinear detector distortion and coverage of all four boundary sides in both
-fit and holdout samples; the preparation TypeScript check passes.
-These checks validate the helper, not a Dinkinesh surface. The STL export
-transform, epoch-bound rotation and agreement with independent terrain features
-remain under investigation using the public model, mission products and papers.
-
-Continue by establishing the retrieved candidate's upstream attribution,
-body-frame and observed/model-filled coverage, and the matching reconstructed
-cameras or control network. Inspect a native-pixel image/model projection with
-independent holdouts before baking.
-The source investigation now supports a separate numerical-shape dataset,
-while photography remains deferred. The corrected SPK positions were compared
-with CSPICE through SpiceyPy 8.2.0 at three observation midpoints and agree.
-That verifies the trajectory calculation, not the recovered mesh orientation.
-
-Native-image features were then matched through the fixed mesh using the
-existing normalized-correlation helper. Joint phase/pointing trials use disjoint
-fit and holdout features. A central patch in image `9617`, bounded by detector
-coordinates [500, 660]–[640, 840], gives roughly 0.6–0.7 px holdout RMS against
-`9602` and `9632`. An additional image, `9587`, gives 1.082 px RMS and 1.724 px
-maximum over six holdouts, exceeding the unchanged one-pixel RMS target. A
-second local fit loses sufficient independent controls in that additional view.
-These are exploratory results, not a qualified surface or an absolute terrain
-accuracy claim. The crop is frozen for the next test; the unsuccessful wider
-views remain evidence against promoting a full photographic lens.
+The [investigation ledger](investigations.json) records the examined sources,
+failed routes and the new evidence needed to reopen them. The
+[earlier investigation](https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/dinkinesh/README.md#known-problems)
+preserves the historical archive and limb-fit results at the version examined.
+The corrected trajectory’s comparison with CSPICE validates the trajectory
+calculation; it does not establish the mesh orientation.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Dinkinesh (snapshot refreshed 2026-09-13 after the missing prior archive had changed upstream, public domain as USGS-produced data; the export ships no FGDC record, so the pin cites the USGS Copyrights and Credits statement) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (no projection file or metadata: the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. Names the Gazetteer has not positioned (centre 0°, 0° with an empty extent) are not placed and are tallied in the prepared descriptor.
 

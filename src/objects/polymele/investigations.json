@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "polymele",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain. Source: [Levison et al. (2023), ACM abstract 2184; Levison et al. (2025), Space Science Reviews 221, 70](https://occultations.org/publications/rasc/2023/2184Polymele1.pdf). Checked 2026-09-08. The full axes are halved once; the reference radius is the geometric mean of these semiaxes. This is the approximation's rendering scale, not an independent observed radius or the volume of the original convex reconstruction. Formal axis uncertainties are included only where the source supplies them.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polymele/README.md",
+        "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "This review did not locate or qualify reusable imagery registered to the six-occultation ellipsoid. Disk-integrated data and DAMIT model metadata are not surface maps.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polymele/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-1",
+      "subject": "Lucy mission and model references",
+      "status": "included",
+      "finding": "The 2025 Lucy mission summary remains a contextual cross-reference. This metadata review did not use it to newly qualify the occultation ellipsoid, a surface product, period or rotational phase.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polymele/README.md",
+        "https://doi.org/10.1007/s11214-025-01173-7",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/polymele/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "damit-catalogue",
+      "subject": "DAMIT model catalogue coverage",
+      "status": "unresolved",
+      "finding": "The cached 2026-09-13 official DAMIT asteroid/model/reference CSV exports were joined by exact asteroid name and contained no Polymele row with a listed model. This is bounded DAMIT coverage, not evidence that no numerical model exists elsewhere.",
+      "revisitWhen": "A future DAMIT export lists Polymele, or another release provides a numerical model with documented frame, scale and terms.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/polymele/source/manifest.json",
+        "https://astro.troja.mff.cuni.cz/projects/damit/pages/documentation",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroids",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    }
+  ]
+}

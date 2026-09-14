@@ -24,7 +24,7 @@ Prime-meridian display phase is arbitrary. Lighting does not claim an absolute c
 
 The sampled display-to-source maximum (29.433514 m) exceeds the 24 m authored transfer cap. Meshoptimizer’s estimate is not a distance bound. The cap is retained: out-of-range Elevation samples remain the shared missing-data grid. No threshold was enlarged to hide this limit.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="ra-shalom-sources-and-preparation"></a>
 <a id="frame-and-appearance"></a>
@@ -49,13 +49,7 @@ Pinned JPL Horizons elements and independent vectors at JD 2461286.5 and ±30 da
 
 **Independent archive and bounded data survey**
 
-The PDS radar bundle (Lawrence and Benner, 2020; https://doi.org/10.26033/xtkf-wz81) supplies the corresponding a2100rashalom.obj and XML label. Every parsed vertex and triangle index matches the consumed JPL file exactly, despite formatting differences. The pinned bundle description explicitly identifies kilometer units, center-of-mass origin, principal axes and positive-Z spin axis. Its label describes radar image resolution of 75–150 m; 128 px display cells add no observational detail.
-
-The pinned PDS spin table records the adopted ecliptic pole (75°,16°), 19.793 h period, and phase 17° at 2003-08-22 00:00:00. These are archival model parameters. The app retains the model axes and period but deliberately uses arbitrary display phase; the archival epoch is not propagated into a current attitude.
-
-The original 2008 multi-wavelength study combines radar, spectroscopy and thermal observations. Its disk-integrated spectra and thermal/roughness results are not a registered surface map. The radar fit did not include the optical lightcurves and could not rule out a retrograde interpretation; the adopted pole was not unique. The independent [JPL 2016 observation planning summary](https://echo.jpl.nasa.gov/asteroids/Ra-Shalom/Ra-Shalom_2016_planning.html), pinned as source evidence, reports Ďurech et al. (2012) lightcurve values of 19.8201 ± 0.0004 h and pole (313°,-45°). Later [lightcurve modeling](https://academic.oup.com/mnras/article/527/3/6814/7419864) also concerns another convex-model solution. A newer pole is not applied to the older radar mesh without a source registration.
-
-Survey decision: retain the calibrated JPL/PDS radar shape plus its source-derived Elevation. The radar images are delay-Doppler measurements, not an optical texture. Disk-integrated spectra, thermal modeling and unregistered alternate convex shapes do not qualify additional surface lenses. No resolved optical map or independently registered composition, temperature, gravity or slope grid was identified in this bounded source survey.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Delivered atlas anchors**
 

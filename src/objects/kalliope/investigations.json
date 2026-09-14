@@ -1,0 +1,115 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kalliope",
+  "entries": [
+    {
+      "id": "selected-shape",
+      "subject": "LAM/SPHERE MPCD: selected reconstruction",
+      "status": "included",
+      "finding": "The current LAM 3Dshape directory lists 22_Kalliope_mpcd.obj, matching the actual preparation input. The retained measurements describe 1286 vertices and 2568 facets in km; the recipe preserves that source scale. This review checked the release listing and local source/recipe binding, not a fresh mesh reconstruction or new source-fit test.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/kalliope/README.md",
+        "https://observations.lam.fr/astero/3Dshape/22_Kalliope_mpcd.obj",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/kalliope/source/reference/model-properties.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/kalliope/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "selected-size-and-pole",
+      "subject": "Size and pole",
+      "status": "included",
+      "finding": "The retained Table 1 and Table A.1 extract records diameter 150 km, ecliptic J2000 pole (195°, 4°), period 4.1482 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 76.36974211932504 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/kalliope/README.md",
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/kalliope/source/reference/model-properties.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Released SPHERE observations and surface registration",
+      "status": "unresolved",
+      "finding": "The live source folder https://observations.lam.fr/astero/Data/22Kalliope/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
+      "revisitWhen": "The original image headers and publication establish a usable projection onto this specific MPCD model, and a native-pixel comparison qualifies geometry, illumination and measured coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/kalliope/README.md",
+        "https://observations.lam.fr/astero/Data/22Kalliope/",
+        "https://observations.lam.fr/astero/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "lam-adam-alternative",
+      "subject": "Released ADAM companion model",
+      "status": "excluded",
+      "finding": "The live directory also lists 22_Kalliope_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
+      "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
+      "evidence": [
+        "https://observations.lam.fr/astero/3Dshape/22_Kalliope_adam.obj",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/kalliope/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/kalliope/source/reference/model-properties.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "lam-sage-alternative",
+      "subject": "Released SAGE companion model",
+      "status": "unresolved",
+      "finding": "The live directory also lists 22_Kalliope_sage.obj, which the imported ledger omitted. Its existence establishes a numerical candidate; method, calibration and independence from the selected MPCD reconstruction still need comparison.",
+      "revisitWhen": "The SAGE companion’s paper, scale and shape constraints have been compared with the selected MPCD release.",
+      "evidence": [
+        "https://observations.lam.fr/astero/3Dshape/22_Kalliope_sage.obj",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/kalliope/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/kalliope/source/reference/model-properties.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    }
+  ]
+}

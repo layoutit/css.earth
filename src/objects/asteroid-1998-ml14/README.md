@@ -26,7 +26,7 @@ The adopted photometric period and uncertainty are retained in the tracked [nume
 
 No calibrated registered optical mosaic, composition map or independent topographic raster was acquired. This is a bounded source disposition, not proof that no other data exist. No generic regolith texture is substituted. The updated numeric reconstruction remains an explicit future replacement candidate.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="1998-ml14-sources-and-preparation"></a>
 <a id="model-identity-scale-and-orientation"></a>
@@ -42,7 +42,7 @@ The source file contains 512 vertices and 1020 triangles in kilometers. The pape
 
 **Source survey and geometry qualification**
 
-Pinned sources are the original JPL OBJ and paper, the newer Warner photometry, the JPL [2013 observing plan](https://echo.jpl.nasa.gov/asteroids/1998ML14/1998ML14_2013_planning.html), and Horizons responses. The observing plan's older 14.98 h catalog value is not substituted for the newer measurement. Radar images, delay-Doppler panels and optical light curves constrain shape and rotation; they are not geographically registered surface mosaics. The [LPI 2013 radar entry](https://www.lpi.usra.edu/resources/asteroids/asteroid/?asteroid_id=1998ML14) likewise provides observational images rather than an acquired registered texture. Its direct download returned HTTP 403; it is a surveyed reference, not a pinned input.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Prepared views and delivery**
 

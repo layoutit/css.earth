@@ -22,7 +22,7 @@ The narrow neck and two lobes are constrained by radar and lightcurves, while we
 
 Display phase is arbitrary; the animation is not a present-day attitude ephemeris.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="1996-hw1-sources"></a>
 <a id="geometry-scale-and-rotation"></a>
@@ -53,12 +53,6 @@ JPL Horizons heliocentric geometric elements at JD 2461286.5 and independent ICR
 
 **Source survey**
 
-- [Original full source radar shape](https://echo.jpl.nasa.gov/asteroids/shapes/1996hw1.obj): **included**. The unmodified source has 1392 vertices and 2780 faces. Original kilometer coordinates are retained.
-- [Published physical properties, radar/lightcurve constraints and model uncertainty](https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf): **included**. Half the 2.02 km volume-equivalent diameter in Magri et al. (2011), Table 3, with 8% diameter uncertainty. Original vertices are not rescaled.
-- [PDS source coordinate contract](https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-8567.radar.shape-model/data/a8567.xml): **included as qualification**. The paired a8567.tab has exactly the same numerical vertices and faces as the selected JPL OBJ. The label identifies kilometer units, modeled center of mass, principal axes and positive Z spin axis.
-- [SHERMAN thermophysical study (2017)](https://www.sciencedirect.com/science/article/pii/S001910351730060X): **deferred**. The indexed study applies thermal modeling to multiple HW1 observations; full text could not be retrieved in this bounded survey. No thermal field, alternate scale, or surface texture is inferred from an unread source.
-- [Radar images and optical/infrared spectra in the linked study](https://echo.jpl.nasa.gov/asteroids/1996HW1/1996hw1.html): **included as qualification**. Radar delay-Doppler pixels overlap surface locations; disk-integrated spectra do not provide a registered photographic or compositional map. The paper describes weak radar coverage and optical constraints over nearly the entire shape.
-
-The delivered Elevation atlas withholds 2,116 of 5,789,047 interior texels (0.0366%). Maximum accepted correspondence is 25.999939 m. 23 independent decoded final WebP anchors differ from expected source scalar/relief RGB by at most 2/255 per channel. This is a sampled pixel result, not an every-pixel bound.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 </details>

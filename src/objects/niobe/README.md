@@ -44,19 +44,7 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 
 <a id="source-survey"></a>
 
-<details>
-<summary>Source survey</summary>
-
-[Model fields and mesh measurements](source/reference/damit-model.json).
-
-- [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/1014) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/3775/shape.txt) — included unchanged. Convex light-curve inversion; fine relief is unresolved.
-- [DAMIT documentation](https://damit.cuni.cz/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [Hanuš et al. (2016), New and updated convex shape models of asteroids based on optical data from a large collaboration network](https://ui.adsabs.harvard.edu/abs/2016A%26A...586A.108H) — original model publication record.
-- [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 80.86 ± 0.8 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
-- [Hanuš et al. 2017](https://arxiv.org/abs/1702.01996), [Viikinkoski et al. 2017](https://arxiv.org/abs/1708.05191), and [Vernazza et al. 2021](https://damit.cuni.cz/projects/damit/references/view/660) — resolved-model releases surveyed; when present in this target’s archive they are preferred over an older convex model. Their disk images constrain geometry but are not registered global reflectance mosaics.
-- [Hanuš et al. 2018](https://arxiv.org/abs/1803.06116) and [occultation dimensions](https://www.asteroidoccultation.com/observations/Asteroid_Dimensions_from_Occultations.html) — size comparison candidates; an independent fit or occultation ellipsoid is not silently equated with this mesh’s volume.
-
-</details>
+The [investigation ledger](investigations.json) records the source survey and alternative models.
 
 <a id="preparation-and-qualification"></a>
 

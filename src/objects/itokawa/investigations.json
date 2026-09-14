@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "itokawa",
+  "entries": [
+    {
+      "id": "selected-amica-mosaic",
+      "subject": "AMICA mosaic",
+      "status": "included",
+      "finding": "Eight v-band frames remain the selected AMICA mosaic. The retained label of ST_2402987304_V_DDR was examined: dataset HAY-A-AMICA-3-AMICAGEOM-V1.0, target 25143 ITOKAWA, v filter, 2005-09-24T02:00:02 and 0.087 s exposure. Its Gaskell-derived geometry and detector processing belong to this observation. A check of this label supports source identity, not fresh registration of all eight images or conversion of relative detector brightness into I/F.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/itokawa/README.md",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/itokawa/source/observations/st_2402987304_v_ddr.lbl",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/itokawa/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "selected-shape-and-elevation",
+      "subject": "Shape and Elevation",
+      "status": "included",
+      "finding": "[Gaskell ver128q](https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab), derived from 775 AMICA images. Elevation is source radius minus 165 m; the original black-rock prime meridian is retained.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/itokawa/README.md",
+        "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-named-features",
+      "subject": "Named features",
+      "status": "included",
+      "finding": "[IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/ITOKAWA/target) Itokawa centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/itokawa/README.md",
+        "https://planetarynames.wr.usgs.gov/Page/ITOKAWA/target"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}
