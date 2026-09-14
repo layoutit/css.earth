@@ -84,3 +84,34 @@ The original mission products and kernels remain under their native notices.
 No paper text or figures are redistributed. README numerical claims cite the
 papers and the image/control definitions; detector previews retain NASA/JPL/Galileo
 SSI credit and their declared display gain.
+
+## Dactyl published-control diagnostic
+
+With the complete publisher PDF available locally, run:
+
+```sh
+node tools/objects/source-authoring/galileo-lucy/fit-dactyl-published-controls.mts /path/to/1-s2.0-S0019103596900457-main.pdf
+```
+
+An optional second argument changes the default `output/dactyl-published-controls/`
+directory. The PDF SHA-256 must match Dactyl's
+[`published-controls.json`](../../../../src/objects/dactyl/evidence/registration/published-controls.json).
+It is a supplied reference input, excluded from redistribution. This command
+reads three exact embedded JPEG streams using offsets specific to that pinned
+PDF; both the complete PDF and each stream are verified before decoding. It
+neither installs a PDF runtime nor re-encodes those streams as new sources.
+
+The report records the paper-to-native similarity alignment, regional/filter
+sensitivity, source instrument distortion, the new 3,887 km Dactyl range, six
+54-start orientation searches and sixteen local control-pick perturbations.
+The existing ellipsoid and complete earlier bright-limb sample set stay fixed.
+The unit-weight pole-plus-Acmon fit is the baseline. Other limb weights and the
+pole-only fit expose sensitivity; they are not alternative qualification gates.
+Celmis never enters the fit or ranking, but was inspected earlier in the work.
+
+Outputs are `published-control-fit.json` and a detector diagnostic PNG made
+solely from the original NASA/JPL/Galileo image. Report pins identify the
+configuration, implementation and dependencies. The tool always reports
+`qualifiedSurface: false` and cannot prepare a public photographic dataset.
+The [Dactyl README](../../../../src/objects/dactyl/README.md#published-pole-and-range)
+explains the remaining map/model correspondence and visibility requirements.
