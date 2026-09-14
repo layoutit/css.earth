@@ -1,11 +1,11 @@
 import type { Locator, Page } from 'playwright';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 
 // The planetary scale bar was retired, so the suites navigate the way a person
 // does: search for the body, then open the result. The object links are plain
 // in-app anchors, and the shell keeps their selected state in sync.
 export function objectName(id: string): string {
-  const object = OBJECTS.find(entry => entry.id === id);
+  const object = SCENE_OBJECTS.find(entry => entry.id === id);
   if (!object) throw new TypeError(`Unknown object: ${id}.`);
   return object.name;
 }

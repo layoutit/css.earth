@@ -8,7 +8,9 @@ import type { Node, Program, ObjectExpression, Property, FunctionDeclaration, Ex
 import { isRecord, requireRecord, requireArray, requireString } from "./source-values.mts";
 import { nodeName, propertyKey, sourceStart, objectProperty, staticObjectProperties } from "./runtime-ast.mts";
 import type { RuntimeSourceReader } from "./runtime-source-graph.mts";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS as OBJECTS } from "../site/objects.mts";
+import { parseNavigationDistance } from '../site/navigation-distance.mts';
+import { definePreparedFocus } from '../site/prepared-focus-object.mts';
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "../src/platform/prepared-presentation-contract.mts";
 import { readPreparedJsonExports, readPreparedPresentationModule, requirePreparedDefinitionSource,
@@ -261,6 +263,18 @@ async function registryLoaders(source: string, root: string, readSource: (path: 
   }
   const definitions = ast.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'VariableDeclaration' ? node.declaration.declarations : []).filter(node => nameOf(node.id) === 'OBJECTS');
   const call = definitions[0]?.init, array = call?.type === 'CallExpression' ? call.arguments[0] : undefined;
+  if (definitions.length === 1 && call?.type === 'CallExpression' && imports.get(nameOf(call.callee)) === 'defineObjects' && call.arguments.length === 1 && array?.type === 'ArrayExpression' && array.elements.length === 2 &&
+      array.elements.every(entry => entry?.type === 'SpreadElement' && entry.argument.type === 'CallExpression')) {
+    const scene = array.elements[0], focus = array.elements[1];
+    if (scene?.type !== 'SpreadElement' || scene.argument.type !== 'CallExpression' || focus?.type !== 'SpreadElement' || focus.argument.type !== 'CallExpression') fail('requires scene and focus capability projections');
+    const mapping = focus.argument;
+    const focusImport = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === './prepared-focus-objects.json');
+    const validatorImport = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === './prepared-focus-object.mts');
+    if (focusImport?.type !== 'ImportDeclaration' || focusImport.specifiers.length !== 1 || focusImport.specifiers[0].type !== 'ImportDefaultSpecifier' ||
+        validatorImport?.type !== 'ImportDeclaration' || !validatorImport.specifiers.some(specifier => specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === 'definePreparedFocus' && nameOf(mapping.arguments[0]) === specifier.local.name) ||
+        mapping.callee.type !== 'MemberExpression' || mapping.callee.computed || nameOf(mapping.callee.object) !== focusImport.specifiers[0].local.name || nameOf(mapping.callee.property) !== 'map' || mapping.arguments.length !== 1) fail('focus destinations must use the prepared inventory and validator');
+    return catalogRegistryLoaders(ast, scene.argument, root, readSource);
+  }
   if (definitions.length === 1 && call?.type === 'CallExpression' && imports.get(nameOf(call.callee)) === 'defineObjects' && call.arguments.length === 1 && array?.type === 'CallExpression') {
     return catalogRegistryLoaders(ast, array, root, readSource);
   }
@@ -361,7 +375,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
   if (pattern.properties.length !== 3 || !['order', 'context'].every((name, index) => {
     const field = pattern.properties[index];
     return field.type === 'Property' && !field.computed && field.kind === 'init' && nameOf(field.key) === name && field.value.type === 'Identifier';
-  }) || binding.optional || nameOf(binding.callee) !== entryNames[0] || binding.arguments.length !== 2 || nameOf(binding.arguments[0]) !== parameter) fail('catalogue loader must forward its bound descriptor unchanged');
+  }) || binding.optional || nameOf(binding.callee) !== entryNames[0] || ![2, 3].includes(binding.arguments.length) || nameOf(binding.arguments[0]) !== parameter) fail('catalogue loader must forward its bound descriptor unchanged');
   const rest = kind(pattern.properties[2], 'RestElement');
   if (nameOf(kind(statements[1], 'ReturnStatement').argument) !== kind(rest.argument, 'Identifier').name) fail('catalogue mapper must return the declared object');
   const loader = kind(binding.arguments[1], 'ArrowFunctionExpression');
@@ -380,7 +394,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
   const entryAst = parseRuntimeSource(await readSource(resolve(root, 'site/object-catalog.mts')), 'site/object-catalog.mts');
   const entry = entryAst.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'FunctionDeclaration' && nameOf(node.declaration.id) === 'catalogEntry' ? [node.declaration] : []);
   const definitions = namedImport(entryAst, './object-schema.mts', 'defineObject');
-  if (entry.length !== 1 || definitions.length !== 1 || entry[0].params.length !== 2) fail('catalogue helper must bind its own actual JSON descriptor');
+  if (entry.length !== 1 || definitions.length !== 1 || ![2, 3].includes(entry[0].params.length)) fail('catalogue helper must bind its own actual JSON descriptor');
   const input = kind(entry[0].params[0], 'Identifier').name, loadScene = kind(entry[0].params[1], 'Identifier').name;
   const objectCalls: CallExpression[] = [];
   walkRuntimeAst(entry[0], node => {
@@ -748,6 +762,12 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     sharedVisits.set(path, serverOnly);
     sharedClosure.add(path);
     const file = relative(root, path);
+    if (file === 'site/prepared-object-distances.json' || file === 'site/prepared-focus-objects.json') {
+      const value: unknown = JSON.parse(await source(path));
+      if (file.endsWith('distances.json')) Object.values(requireRecord(value)).forEach(parseNavigationDistance);
+      else requireArray(value).forEach(definePreparedFocus);
+      return;
+    }
     if (approvedSharedData.has(file)) {
       let context: unknown;
       try { context = JSON.parse(await source(path)); }

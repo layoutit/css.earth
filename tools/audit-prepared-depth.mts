@@ -6,7 +6,7 @@ interface AuditRow {id:string;reason?:string|null;faces?:number;compiled?:boolea
 // Pair this mathematical oracle with native browser screenshots and traces.
 import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 import { partitionSurface, restoreDepthSource } from './prepared-depth-partitions.mts';
 import { verifyRayOrder } from './prepared-visibility-oracle.mts';
@@ -14,7 +14,7 @@ import { verifyRayOrder } from './prepared-visibility-oracle.mts';
 const output = process.argv[2];
 if (!output) throw new TypeError('Usage: node tools/audit-prepared-depth.mts <report.json>');
 const rows:AuditRow[] = [];
-for (const { id } of OBJECTS) {
+for (const { id } of SCENE_OBJECTS) {
   let definition:CheckedObjectRuntimeDefinition|undefined;
   try { definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(`src/objects/${id}/prepared/runtime.json`, 'utf8'))); }
   catch (error) { if (!hasErrorCode(error,'ENOENT')) throw error; }

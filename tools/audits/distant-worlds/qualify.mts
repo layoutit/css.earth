@@ -2,7 +2,7 @@ import { bodies, ids, reportDirectory, captureDirectory } from './selection.mts'
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
-import {OBJECTS} from '../../../site/objects.mts';
+import {SCENE_OBJECTS} from '../../../site/objects.mts';
 import {validatePlanetData} from '../../../tools/object-package-contract.mts';
 import {parsePreparedObjectRuntime} from '../../../src/renderers/css/dist/index.js';
 import {requireRuntimeAssetManifest} from '../../../src/platform/runtime-asset-closure.mts';
@@ -16,7 +16,7 @@ function requirePreparedPage(value:unknown){const page=requireRecord(value,'Prep
 function requireTerrain(value:unknown){const terrain=requireRecord(value,'Prepared terrain'),source=requireRecord(terrain.source,'Prepared terrain source');return {primitive:requireString(source.primitive,'Prepared terrain primitive'),faces:requireArray(terrain.faces,'Prepared terrain faces'),simplification:requireRecord(terrain.simplification,'Prepared terrain simplification')};}
 const results:Array<Record<string,unknown>>=[];
 for(const id of ids){
- const root=`src/objects/${id}`,record=OBJECTS.find(object=>object.id===id),body=bodies.find(candidate=>candidate.id===id);
+ const root=`src/objects/${id}`,record=SCENE_OBJECTS.find(object=>object.id===id),body=bodies.find(candidate=>candidate.id===id);
  assert.ok(record);assert.ok(body);assert.equal(record.classification,requireString(requireRecord(body,'Distant-world selection').classification,'Distant-world classification'));
  const closure=await validatePlanetData(record);
  const descriptor=requireDescriptor(await read(`${root}/object.json`)),runtime=parsePreparedObjectRuntime(await read(`${root}/prepared/runtime.json`));

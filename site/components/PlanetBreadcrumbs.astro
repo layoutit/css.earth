@@ -1,13 +1,13 @@
 ---
 import type { OverviewScope } from '../overview-context.mts';
 interface Props { objectId?: string; scope?: OverviewScope; includeObject?: boolean; }
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import preparedWorld from '../../src/objects/sun/prepared/world-context.json';
 import { solarSystemFocus } from '../overview-selection.mts';
 
 const { objectId, scope, includeObject = false } = Astro.props;
-const object = OBJECTS.find(object => object.id === objectId);
-const systemRoute = solarSystemFocus(OBJECTS)!.route;
+const object = SCENE_OBJECTS.find(object => object.id === objectId);
+const systemRoute = solarSystemFocus(SCENE_OBJECTS)!.route;
 const crumbs: { label: string; href?: string }[] = [
   { label: 'Virgo Supercluster' },
   { label: 'Local Group', href: `${systemRoute}?overview=local-group` },
@@ -17,7 +17,7 @@ if (scope !== 'milky-way') crumbs.push({ label: object?.systemName ?? 'Solar Sys
 if (object && !scope) {
   // Use the same prepared orbit parents as the moon result rows.
   const parentId = preparedWorld.bodies.find(body => body.id === object.id)?.orbit?.centerBodyId;
-  const parent = object.classification === 'satellite' ? OBJECTS.find(body => body.id === parentId) : null;
+  const parent = object.classification === 'satellite' ? SCENE_OBJECTS.find(body => body.id === parentId) : null;
   if (parent) crumbs.push({ label: parent.name, href: parent.route });
 }
 // Mission cards end their trail at the body they describe, which is the current page.

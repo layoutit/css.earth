@@ -5,7 +5,7 @@ import { availableParallelism, totalmem } from "node:os";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { authoredObject } from './authored-object.mts';
 
 export interface ObjectCommand {command: string; argumentsList: readonly string[]; cwd?: string; env?: Readonly<Record<string, string | undefined>>;}
@@ -127,16 +127,16 @@ export async function runObjectCommand({ command, argumentsList, cwd, env }: Obj
 
 export async function runPreparationObjects({
   projectRoot = process.cwd(),
-  objectIds = OBJECTS.map(({ id }) => id),
+  objectIds = SCENE_OBJECTS.map(({ id }) => id),
   concurrency = defaultPreparationConcurrency(),
   argumentsList = [],
   runCommand = runObjectCommand,
   onEvent = printPreparationProgress,
 }: PreparationOptions = {}) {
-  const knownIds = new Set(OBJECTS.map(({ id }) => id));
+  const knownIds = new Set(SCENE_OBJECTS.map(({ id }) => id));
   if (!isArray(objectIds) || objectIds.some(id => !knownIds.has(id)) ||
       new Set(objectIds).size !== objectIds.length) {
-    throw new TypeError("Preparation requires unique IDs from OBJECTS.");
+    throw new TypeError("Preparation requires unique IDs from SCENE_OBJECTS.");
   }
   if (!Number.isSafeInteger(concurrency) || concurrency < 1 ||
       !isArray(argumentsList) || argumentsList.some(value => typeof value !== "string") ||
@@ -248,7 +248,7 @@ async function main(mode = process.argv[2]) {
     return;
   }
 
-  for (const { id } of OBJECTS) {
+  for (const { id } of SCENE_OBJECTS) {
     const argumentsList = mode === "test"
       ? ["--test", ...await discoverPlanetTests(id)]
       : [await resolvePlanetCommand(id, mode), ...(await authoredObject(id) && mode !== 'browser' ? [mode, id] : []), ...process.argv.slice(3)];

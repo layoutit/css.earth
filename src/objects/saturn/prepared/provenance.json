@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
+    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
   },
   "recipes": [
     {
@@ -2377,6 +2377,7 @@
       "label": "Ultraviolet",
       "recipe": "surface",
       "selector": "/lenses/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the declared spectral material operation over the prepared body and ring materials.",
       "limitations": [],
@@ -2431,6 +2432,7 @@
       "label": "Methane",
       "recipe": "surface",
       "selector": "/lenses/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the declared spectral material operation over the prepared body and ring materials.",
       "limitations": [],
@@ -2485,6 +2487,7 @@
       "label": "Thermal illustration",
       "recipe": "surface",
       "selector": "/lenses/2",
+      "observationAttribution": "none",
       "parents": [],
       "process": "Prepare the declared spectral material operation over the prepared body and ring materials.",
       "limitations": [],
@@ -2537,6 +2540,7 @@
       "label": "Visible color",
       "recipe": "geometry",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the source-defined oblate body, ring and cutaway material.",
       "limitations": [],
@@ -2590,6 +2594,7 @@
       "label": "Cross section",
       "recipe": "geometry",
       "selector": "",
+      "observationAttribution": "none",
       "parents": [],
       "process": "Prepare the source-defined oblate body, ring and cutaway material.",
       "limitations": [],
@@ -2628,6 +2633,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -2653,6 +2659,7 @@
       "label": "Saturn modeled disk reflectance",
       "recipe": "charts",
       "selector": "/charts/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
       "limitations": [],
@@ -2681,6 +2688,7 @@
       "label": "Saturn temperature-pressure profile",
       "recipe": "charts",
       "selector": "/charts/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
       "limitations": [],
@@ -2709,6 +2717,7 @@
       "label": "Saturn photometric phase curve",
       "recipe": "charts",
       "selector": "/charts/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
       "limitations": [],
@@ -2741,6 +2750,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -2768,6 +2778,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "ultraviolet"
@@ -2795,6 +2806,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "methane"
@@ -2822,6 +2834,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "none",
       "inputs": [],
       "parents": [
         "thermal"

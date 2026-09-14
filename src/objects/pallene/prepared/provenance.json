@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "pallene",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "187c486d4e53499969cdcf34e77454d1049f4b1cb3e39557aa89c4f18c4b7fe5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
+    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
   },
   "recipes": [
     {
@@ -316,7 +316,7 @@
       "sha256": "66363342333486a6967427925416bdae1aa385de8efcc78e4e820b0447646143",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -368,7 +368,7 @@
       "sha256": "a5f37bb03ca306fb81d8c18e7f9523127abd8c471af1dc3814c9765f51af5cf0",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -413,7 +413,7 @@
       "sha256": "c9baed96538b317f873dd3eb153c6088e4ac319d1ac2c32cbbbaa26cac857448",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -433,7 +433,7 @@
       "sha256": "d8a9211014d0b6048b9201c9c8e10e139aa3b2d252770e0d0990ad9aa1a6ecb4",
       "bytes": 3335,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -444,6 +444,7 @@
       "label": "Monochrome",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [],
@@ -466,13 +467,13 @@
           "url": "/scenes/pallene/pallene-normal-thumbnail.webp",
           "bytes": 1816,
           "sha256": "af697b55c121f343c8351ef32c64831bf485ff5f873416d2c40c38d07ba8a09c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pallene/pallene-normal-surface@2x.webp",
           "bytes": 64508,
           "sha256": "e1c2fd265ec28f13462a6277abcc8e0e59f20bb0cee18df5872c25de23f9c45d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,6 +483,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -510,6 +512,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
