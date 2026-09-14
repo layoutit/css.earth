@@ -1,7 +1,10 @@
 # Published photometric models by body
 
-Which bodies have a published photometric model that `tools/photometry/` can use,
-where its values were read, and what blocks the rest. Searched on 2026-09-12. Add
+Historical search notes from 2026-09-12: published photometric models, where their
+values were read, and questions open at that date. These tables are not the
+current implementation status or a work queue. Check the body's `investigations.json`,
+photometry records and recipe before proposing a search, model addition or bake;
+later evidence may have resolved an entry here. Add
 a model record only from values read in the paper, its archive document, or a
 compilation that cites it, and name the table in the binding's locator. The
 [photometry guide](../../../../tools/photometry/README.md) has the record format and the
@@ -11,7 +14,7 @@ review checklist.
 compilation. "Summary only" means the values were seen only in search results or
 citing papers; confirm them in the source first.
 
-## In use
+## Selected at the survey date
 
 | Body | Model | Source | Read |
 | --- | --- | --- | --- |
@@ -19,15 +22,15 @@ citing papers; confirm them in the source first.
 | Ida | Hapke, one-term Henyey-Greenstein | [Helfenstein et al. 1996](https://doi.org/10.1006/icar.1996.0036) | Abstract; Hasselmann 2016 Table 7 lists the opposition amplitude as 1.53 |
 | Gaspra | Hapke, one-term Henyey-Greenstein | [Helfenstein et al. 1994](https://doi.org/10.1006/icar.1994.1005) | Abstract, with width and asymmetry from Hasselmann 2016 Table 7 |
 
-## Ready to add
+## Candidate values at the survey date
 
-| Body | Values | Source | Read | Next step |
+| Body | Values | Source | Read | Route noted at the survey date |
 | --- | --- | --- | --- | --- |
 | 67P | Hapke (2002): w 0.042, g −0.37, B0SH 2.5, hs 0.079, θ̄ 15°, B0CB 0.188, hCB 0.017; fitted at 1.3–53.9° phase, incidence and emission below 70° | [Fornasier et al. 2015](https://doi.org/10.1051/0004-6361/201525901), Table 4 | Full text ([arXiv 1505.06888](https://arxiv.org/abs/1505.06888)) | Record and recipe switch on the observation seam; 67P prepares again |
 | Ryugu | Hapke with shadow hiding per ONC-T band; v band w 0.044, g −0.388, B0 0.98, h 0.075, θ̄ 28° | [Tatsumi et al. 2020](https://doi.org/10.1051/0004-6361/201937096) | Hayabusa2 ONC data-product document; it flips the sign of g relative to the paper, so check the sign | No photograph lens yet; the archive's L2e images are already corrected to 30° incidence, 0° emission and 30° phase |
 | Eros | Hapke: w 0.33, g −0.25, θ̄ 28° at 550 nm; B0 1.4, h 0.01 | [Li et al. 2004](https://doi.org/10.1016/j.icarus.2004.07.024); Hasselmann 2016 Table 7 | Compilation; abstract summary only | Read the paper; no photograph lens yet |
 
-## Blocked
+## Open questions at the survey date
 
 | Body | What exists | Blocker |
 | --- | --- | --- |
