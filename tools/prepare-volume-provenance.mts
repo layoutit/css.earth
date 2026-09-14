@@ -1,3 +1,5 @@
+import { parseProductInputEvidence } from '../src/platform/product-input-evidence.mts';
+import type { ProductInputEvidence } from '../src/platform/product-input-evidence.mts';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -50,10 +52,10 @@ interface LensRecord {
 }
 interface Presentation {
   objectId: string; name: string; defaultLens: string; bank: Pin; recipes: (Pin & { id: string })[];
-  sharedInputs: string[]; lenses: LensRecord[];
+  sharedInputs: string[]; inputEvidence: ProductInputEvidence[]; lenses: LensRecord[];
 }
 function presentation(raw: unknown): Presentation {
-  const value = sourceObject(raw, ['schema', 'objectId', 'name', 'defaultLens', 'bank', 'recipes', 'sharedInputs', 'lenses']);
+  const value = sourceObject(raw, ['schema', 'objectId', 'name', 'defaultLens', 'bank', 'recipes', 'sharedInputs', 'inputEvidence', 'lenses']);
   if (value.schema !== 'cssearth-volume-presentation-source@1') throw new TypeError('Invalid volume presentation source.');
   const lenses = sourceArray(value.lenses, raw => {
     const lens = sourceObject(raw, ['id', 'label', 'title', 'description', 'summary', 'detail', 'facts', 'input', 'preview']);
@@ -67,7 +69,7 @@ function presentation(raw: unknown): Presentation {
   const defaultLens = sourceId(value.defaultLens);
   if (!lenses.length || !lenses.some(lens => lens.id === defaultLens)) throw new TypeError('Invalid volume default lens.');
   return { objectId: sourceId(value.objectId), name: sourceText(value.name), defaultLens, bank: pin(value.bank), lenses: [...lenses],
-    sharedInputs: [...sourceArray(value.sharedInputs, sourceId)], recipes: [...sourceArray(value.recipes, raw => {
+    sharedInputs: [...sourceArray(value.sharedInputs, sourceId)], inputEvidence: [...sourceArray(value.inputEvidence ?? [], parseProductInputEvidence)], recipes: [...sourceArray(value.recipes, raw => {
       const recipe = sourceObject(raw, ['id', 'path', 'sha256', 'bytes']);
       return { ...pin({ path: recipe.path, sha256: recipe.sha256, bytes: recipe.bytes }), id: sourceId(recipe.id) };
     })] };
@@ -166,7 +168,8 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
         description: lens.description, summary: lens.summary, detail: lens.detail, facts: lens.facts });
       products.push({ id: lens.id, label: lens.label, process: 'Apply the pinned source image to the shared prepared volume field; preserve the saved reconstruction and display settings.',
         recipe: 'presentation', selector: `/lenses/${index}`, recipeDependencies: recipes.map(recipe => recipe.id),
-        inputs: [...new Set([lens.input, ...record.sharedInputs])], parents: [], lensIds: [lens.id],
+        inputs: [...new Set([lens.input, ...record.sharedInputs])],
+        inputEvidence: [{ sourceId: lens.input, role: 'appearance', evidence: `Selected image at source/presentation.json#/lenses/${index}/input.` }, ...record.inputEvidence], parents: [], lensIds: [lens.id],
         observationAttribution: 'source-lineage', interpretation: { kind: 'observation-conditioned-volume', sourceKind: 'published-display-image' }, limitations: [lens.description, lens.detail],
         outputs: [...(bankBytes === undefined ? [] : [{ url: bankPath, sha256: bankSha256, bytes: bankBytes, verification: installedBank === null ? 'descriptor-pin' : 'bytes-verified' }]),
           { url: previewUrl, sha256: digest(image.bytes), bytes: image.bytes.length, verification: 'bytes-verified' }] });

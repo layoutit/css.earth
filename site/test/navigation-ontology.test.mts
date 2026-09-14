@@ -63,3 +63,17 @@ test('galaxy citations resolve across the full prepared catalogue, including the
   const broken = { ...catalogue, objects: [{ ...galaxy, distance: { ...galaxy.distance, sourceRef: 'missing-paper' } }] };
   assert.throws(() => parsePreparedGalaxyCatalog(broken), /Unresolved distance reference/);
 });
+
+
+test('physical hosts remain distinct from scene hosts and M45 retains its measured subject', async () => {
+  const raw: unknown = JSON.parse(await readFile('src/objects/local-group/prepared/catalogue.json', 'utf8'));
+  const catalogue = parsePreparedGalaxyCatalog(raw), satellite = catalogue.objects.find(o => o.id === 'andromeda_01')!;
+  assert.equal(satellite.hostId, 'm_031');
+  assert.equal(prepareFocusObject(satellite, 'sun').sceneHostId, 'sun');
+  assert.equal(catalogue.unpositionedHosts?.find(o => o.id === 'mw')?.sourceRef, 'lvdb-v1.1.1:mw:name_discovery');
+  assert.equal(OBJECTS.some(o => o.id === 'mw'), false, 'a physical host does not fabricate a destination');
+  const m45 = OBJECTS.find(o => o.id === 'm45')!;
+  assert.equal(m45.distance.subject?.id, 'm45-stellar-cluster');
+  assert.match(distanceDescription(m45.distance), /Pleiades stellar cluster/);
+  assert.match(distanceDescription(m45.distance), /dust-filament distances are not measured/);
+});

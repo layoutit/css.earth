@@ -4,7 +4,7 @@ import { parsePreparedGalaxyCatalog } from './spatial.js';
 function fixture() {
   return { schema: 'cssearth-galaxy-catalog@1', frame: { referenceFrame: 'sun-icrf', epochJdTt: 1 },
     sources: [{ id: 'release', url: 'https://example.org/catalog.csv', sha256: 'a'.repeat(64), bytes: 1, citation: 'Measured catalogue' }],
-    objects: [{ id: 'nearby', name: 'Nearby galaxy', aliases: [], positionM: [0, 0, -100],
+    objects: [{ id: 'nearby', name: 'Nearby galaxy', aliases: [], positionM: [0, 0, -3.085677581491367e17],
       skyPosition: { raDeg: 0, decDeg: -90, sourceRef: 'release' },
       distance: { valuePc: 10, sourceRef: 'release', method: 'resolved-stars' },
       membership: { group: 'local-volume', subgroup: 'field', basis: 'Published neighboring nonmember' }, status: 'confirmed' }],
@@ -34,4 +34,24 @@ describe('prepared scientific catalogue boundary', () => {
     const missingMembership = fixture(); missingMembership.objects[0]!.membership.basis = '';
     expect(() => parsePreparedGalaxyCatalog(missingMembership)).toThrow(/membership evidence/);
   });
+});
+
+
+it('rejects contradictory derived positions and unsupported frames', () => {
+  for (const mutate of [(v: ReturnType<typeof fixture>) => { v.objects[0]!.positionM = [0, 0, 0]; },
+    (v: ReturnType<typeof fixture>) => { v.objects[0]!.distance.valuePc *= 2; },
+    (v: ReturnType<typeof fixture>) => { v.frame.referenceFrame = 'unknown'; }]) {
+    const value = fixture(); mutate(value); expect(() => parsePreparedGalaxyCatalog(value)).toThrow();
+  }
+});
+
+it('retains unpositioned physical hosts and rejects dangling, duplicate and cyclic hosts', () => {
+  const base = fixture(), child = { ...base.objects[0]!, hostId: 'host' };
+  const host = { id: 'host', name: 'Physical host', sourceRef: 'release', reason: 'Observer lies inside this host.' };
+  const valid = { ...base, objects: [child], unpositionedHosts: [host] };
+  expect(parsePreparedGalaxyCatalog(valid).unpositionedHosts).toEqual([host]);
+  expect(() => parsePreparedGalaxyCatalog({ ...valid, unpositionedHosts: [] })).toThrow(/Unknown physical host/);
+  expect(() => parsePreparedGalaxyCatalog({ ...valid, objects: [{ ...child, hostId: child.id }] })).toThrow(/Cyclic/);
+  expect(() => parsePreparedGalaxyCatalog({ ...valid, unpositionedHosts: [{ ...host, hostId: child.id }] })).toThrow(/Cyclic/);
+  expect(() => parsePreparedGalaxyCatalog({ ...valid, unpositionedHosts: [host, host] })).toThrow(/Duplicate/);
 });
