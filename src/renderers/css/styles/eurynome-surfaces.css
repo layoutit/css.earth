@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="eurynome"])[data-lod="billboard"] .eurynome-scene, .planet-stage:where([data-object-id="eurynome"])[data-lod="marker"] .eurynome-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="eurynome"])[data-lod="marker"] .eurynome-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="eurynome"]).eurynome-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

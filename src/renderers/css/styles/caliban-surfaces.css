@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="caliban"])[data-lod="billboard"] .caliban-scene, .planet-stage:where([data-object-id="caliban"])[data-lod="marker"] .caliban-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="caliban"])[data-lod="marker"] .caliban-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="caliban"]).caliban-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

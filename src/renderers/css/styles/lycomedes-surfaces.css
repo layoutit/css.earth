@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="lycomedes"])[data-lod="billboard"] .lycomedes-scene, .planet-stage:where([data-object-id="lycomedes"])[data-lod="marker"] .lycomedes-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="lycomedes"])[data-lod="marker"] .lycomedes-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="lycomedes"]).lycomedes-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

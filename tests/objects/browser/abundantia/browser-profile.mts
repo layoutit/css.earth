@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/abundantia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'abundantia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/abundantia/abundantia-directional-sun.webp",
-      "two": "/scenes/abundantia/abundantia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/abundantia/abundantia-shape-surface@2x.webp"
   ],

@@ -1,0 +1,25 @@
+{
+  "schema": "cssorcus-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "orcus-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "orcus-model-shadow@2x.webp",
+      "bytes": 37338,
+      "sha256": "33374a48c9a93f54f2824fa5284dee04a8ba99d9645ae1427c8edbdbe525c4bd"
+    },
+    {
+      "filename": "orcus-model-surface@2x.webp",
+      "bytes": 57208,
+      "sha256": "8a22b20e5613892bf10677f6d5a4663a27874c6db13244d0dc3e093506bc5a61"
+    },
+    {
+      "filename": "orcus-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

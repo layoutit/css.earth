@@ -175,33 +175,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/charon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -370,33 +343,6 @@
       }
     },
     {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 849,
-      "expectedSha256": "3ecb64dfaad394158f12cd0bf2733268a7c58ab76a17f774149b421d30c2937b",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/charon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      }
-    },
-    {
       "id": "charon-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 3829,
@@ -426,8 +372,8 @@
     {
       "id": "charon-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1635,
-      "expectedSha256": "8e90df9d43e45bba8920f56f5137d0e822819e2db80fe21671455d80f5e54350",
+      "expectedBytes": 304,
+      "expectedSha256": "57d3a487c118bb1c37bd8d80e455b790496383237edd2b5b0f2dc2269f950da0",
       "origin": "Repository-authored Charon solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -485,8 +431,8 @@
     {
       "id": "charon-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 223,
-      "expectedSha256": "0a3f5b23d24caac6a9750e43eba0cd8698fa4f099795d7f1bbce422874922d62",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Charon celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -541,8 +487,8 @@
     {
       "id": "charon-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 5239,
-      "expectedSha256": "72b0d3e469914419e0456453cb78a33c1aeef558f0d3529f7dd8ccf00c029bca",
+      "expectedBytes": 5055,
+      "expectedSha256": "3a121500ad606d0eda4de5ec9863f4bedb75bc15b2c66ea2e4b1b01253af8c05",
       "origin": "Repository-authored Charon acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -560,8 +506,8 @@
     {
       "id": "charon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 16017,
-      "expectedSha256": "3cd6668d976b2aab428aef2f601783ff32e21029e6eff73f1d0ee910c03ee140",
+      "expectedBytes": 15738,
+      "expectedSha256": "e4fcaf672048840b9db6daa439ea9a2f6b9c94033fa5af2b330d6a7b077b0cb9",
       "origin": "Repository-authored Charon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1051,16 +997,6 @@
       "path": "presentation/minimap.json",
       "expectedBytes": 36,
       "expectedSha256": "a37bac73fe389c3d53ec16b60d032adbccea9cec413b8d866ae712b28164c0a9"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "editorial/factsheet-review.json",

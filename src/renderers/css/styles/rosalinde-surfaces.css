@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="rosalinde"])[data-lod="billboard"] .rosalinde-scene, .planet-stage:where([data-object-id="rosalinde"])[data-lod="marker"] .rosalinde-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="rosalinde"])[data-lod="marker"] .rosalinde-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="rosalinde"]).rosalinde-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

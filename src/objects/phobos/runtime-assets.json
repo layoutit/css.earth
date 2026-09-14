@@ -1,0 +1,90 @@
+{
+  "schema": "cssphobos-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "phobos-albedo-legend.webp",
+      "bytes": 192,
+      "sha256": "84c28272b31f82773de272bfd6760dd36f6633203510f00fd80df0defb229c44"
+    },
+    {
+      "filename": "phobos-albedo-shadow@2x.webp",
+      "bytes": 2532140,
+      "sha256": "40a9ec2d760e2e2d1ae21f3f21b3ead9a77865c898917280129e6786950a1b8d"
+    },
+    {
+      "filename": "phobos-albedo-surface@2x.webp",
+      "bytes": 2460704,
+      "sha256": "d33bb32fc9a10d308e4a7cf015d6cda46d5823cbd675a0f97f6408f71c8e39ea"
+    },
+    {
+      "filename": "phobos-albedo-thumbnail.webp",
+      "bytes": 960,
+      "sha256": "a4f9cba4cef4f6ff5db276c24a8a6fc7c5d1da488da40b6afb8d24430b8e2885"
+    },
+    {
+      "filename": "phobos-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "phobos-elevation-shadow@2x.webp",
+      "bytes": 639896,
+      "sha256": "c5a7ebb8df68951112753d1b9a472d4709e87aafeaaa6bf7c4570e2c33d95422"
+    },
+    {
+      "filename": "phobos-elevation-surface@2x.webp",
+      "bytes": 1434432,
+      "sha256": "474a121e601cbc39988a7a76e351ca17e060ffab157eb239965f2ad5251464ed"
+    },
+    {
+      "filename": "phobos-elevation-thumbnail.webp",
+      "bytes": 6808,
+      "sha256": "3828184f15417506d2268a3ed4625c926701b6874f51270669b097c608248dc5"
+    },
+    {
+      "filename": "phobos-features.json",
+      "bytes": 37129,
+      "sha256": "24ca15163774d3c26517443d3e7e259a3ef161ac259aa0c3bfae1ed0e4101536"
+    },
+    {
+      "filename": "phobos-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "phobos-normal-shadow@2x.webp",
+      "bytes": 3171078,
+      "sha256": "0e86ffe78d1f59972b996c32e45765490e15aa97e5f85bc682074389eae9e626"
+    },
+    {
+      "filename": "phobos-normal-surface@2x.webp",
+      "bytes": 7669388,
+      "sha256": "9c2934bc09e9fa83c86bf452215d3aac58ff5bade55d14e1e535014cc3c5b97e"
+    },
+    {
+      "filename": "phobos-normal-thumbnail.webp",
+      "bytes": 3912,
+      "sha256": "ff13d8503dd179982e01be968017d8b5f430bff7cefd2cf6fc9d4c47b1b5aea0"
+    },
+    {
+      "filename": "phobos-slope-legend.webp",
+      "bytes": 232,
+      "sha256": "280a1b9142a95b4915e78f4dad454eb491ea0e9fbb6ffb6c721dd6fbf4b3b987"
+    },
+    {
+      "filename": "phobos-slope-shadow@2x.webp",
+      "bytes": 3360524,
+      "sha256": "4cdb82556711327bfa2f5ef8bde262402dd3adb5cd82d907e6b6118a2769a63d"
+    },
+    {
+      "filename": "phobos-slope-surface@2x.webp",
+      "bytes": 3997560,
+      "sha256": "3cd1197cce3ae8d0057be96bc9e1c358d24dfc7ec9f4422e78eff8c921c47fed"
+    },
+    {
+      "filename": "phobos-slope-thumbnail.webp",
+      "bytes": 1942,
+      "sha256": "9659dcdc500210a23420a5ff7c262deea44cc1388fec4ffa9f0ce44aeeab20ac"
+    }
+  ]
+}

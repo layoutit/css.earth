@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="klotho"])[data-lod="billboard"] .klotho-scene, .planet-stage:where([data-object-id="klotho"])[data-lod="marker"] .klotho-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="klotho"])[data-lod="marker"] .klotho-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="klotho"]).klotho-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -13,7 +13,7 @@ import { prepareAtmosphericMaterial } from './atmosphere.js';
 export { parseGeometryProfile } from './profile.js';
 export type { GeometryProfile } from './profile.js';
 export interface PhysicalScene {
- camera:unknown;systemTransform:unknown;presentationFrame:unknown;heliocentricView:unknown;worldFrame:unknown;starfield:unknown;
+ camera:unknown;systemTransform:unknown;presentationFrame:unknown;worldFrame:unknown;starfield:unknown;
 }
 export interface SolarSceneSource extends Record<string, unknown> { bodyId:string;bodyRadiusUnits:number;bodyRadiusKilometers:number;displayName:string; }
 export interface ScenePreparationAdapters {
@@ -30,7 +30,7 @@ export interface GeometrySceneAssets {
 }
 export interface GeometrySceneOptions {
  profile:GeometryProfile;raster:RasterRecipe;assets:GeometrySceneAssets;solarSource:SolarSceneSource;
- starfield:Record<string,unknown> & {faces:readonly unknown[]};sun:Record<string,unknown>|null;
+ starfield:Record<string,unknown>;sun:Record<string,unknown>|null;
  /** The authored world context (prepared spatial context) of a body the ephemeris tables do not place, such as the Sun. */
  worldContext?:unknown;
  adapters:ScenePreparationAdapters;outputDirectory:string;
@@ -58,16 +58,16 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
   assets.lighting?{schema:profile.output.materialSchema,frameCount:assets.lighting.frameCount,logicalDiameter:profile.surface.radius*2,defaultFrame:assets.lighting.defaultFrame,runtimeLighting:false}:
   assets.emission?{...assets.emission,schema:profile.output.materialSchema,model:'emissive',lighting:false,shadows:false,runtimeLighting:false}:undefined;
  if(!material)throw new TypeError('The prepared scene needs a declared material capability.');
- const common={schema:profile.output.schema,camera:physical.camera,systemTransform:physical.systemTransform,presentationFrame:physical.presentationFrame,heliocentricView:physical.heliocentricView,worldFrame:physical.worldFrame,material,starfield:physical.starfield};
+ const common={schema:profile.output.schema,camera:physical.camera,systemTransform:physical.systemTransform,presentationFrame:physical.presentationFrame,worldFrame:physical.worldFrame,material,starfield:physical.starfield};
  const scene=profile.output.layout==='retained'?{
   ...common,meshRotationDegrees:profile.bodyRotationDegrees,bodyTransform:buildPolyMeshTransform({rotation:[0,0,profile.bodyRotationDegrees]}),bodyLeaves,
   preparedSurface:{latitudeSegments:profile.surface.latitudeSegments,longitudeSegments:profile.surface.longitudeSegments,radius:profile.surface.radius,bodyFaceCount:leaves.filter(leaf=>!leaf.polar).length,polarLeafCount:leaves.filter(leaf=>leaf.polar).length+innerPolarLeaves.length,sourceWidth:profile.surface.surface.width,sourceHeight:profile.surface.surfaceLatitudeHeight,retainedSourceLongitudes:profile.surface.longitudeSegments,seamRepair},
   ...(interior?{interior}:{}),...(profile.output.motion?{motion:profile.output.motion}:{}),
-  counts:{bodyLeafCount:bodyLeaves.length,interiorLeafCount:interior?.leafCount??0,textureLeafCount:bodyLeaves.length+1+(interior?.leafCount??0),retainedRootCount:profile.output.retainedRootCount,starfieldFaceCount:starfield.faces.length,sunBillboardCount:1,sunCubemapBakeCount:0}
+  counts:{bodyLeafCount:bodyLeaves.length,interiorLeafCount:interior?.leafCount??0,textureLeafCount:bodyLeaves.length+1+(interior?.leafCount??0),retainedRootCount:profile.output.retainedRootCount}
  }:{...common,runtimeGeometry:false,runtimeRasterization:false,
   body:{leaves:bodyLeaves,equatorialRadius:profile.surface.radius,polarRadius:profile.surface.polarRadius,latitudeSegments:profile.surface.latitudeSegments,longitudeSegments:profile.surface.longitudeSegments,...profile.output.body,sourceMapSize:[profile.surface.surface.width,profile.surface.surface.height],seamRepair},
   ...(profile.output.animation?{animation:profile.output.animation}:{}),
-  counts:{polygonCount:leaves.length,textureLeafCount:bodyLeaves.length,polarLeafCount:leaves.filter(leaf=>leaf.polarCap).length,starfieldFaceCount:starfield.faces.length,sunBillboardCount:1,sunCubemapBakeCount:0}
+  counts:{polygonCount:leaves.length,textureLeafCount:bodyLeaves.length,polarLeafCount:leaves.filter(leaf=>leaf.polarCap).length}
  };
  await mkdir(outputDirectory,{recursive:true});await writeFile(resolve(outputDirectory,'scene.json'),JSON.stringify(scene)+'\n');
  return scene;

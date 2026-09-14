@@ -4,7 +4,6 @@
   "namespace": "asteroid-2001-sn263",
   "displayName": "2001 SN263 Alpha",
   "publicBase": "/scenes/asteroid-2001-sn263/",
-  "distanceAu": 1.9869,
   "raster": {
     "width": 512,
     "height": 256,
@@ -69,12 +68,6 @@
     "sunSource": "Heliocentric placement uses a retained JPL state. The shape is a radar reconstruction from 2008 observations. Published radar and light-curve shape of the primary. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. Rotational phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="gaspra"])[data-lod="billboard"] .gaspra-scene, .planet-stage:where([data-object-id="gaspra"])[data-lod="marker"] .gaspra-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="gaspra"])[data-lod="marker"] .gaspra-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="gaspra"]).gaspra-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

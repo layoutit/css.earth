@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="anthe"])[data-lod="billboard"] .anthe-scene, .planet-stage:where([data-object-id="anthe"])[data-lod="marker"] .anthe-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="anthe"])[data-lod="marker"] .anthe-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="anthe"]).anthe-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

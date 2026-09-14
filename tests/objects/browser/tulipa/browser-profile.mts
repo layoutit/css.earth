@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/tulipa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'tulipa',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/tulipa/tulipa-directional-sun.webp",
-      "two": "/scenes/tulipa/tulipa-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/tulipa/tulipa-shape-surface@2x.webp"
   ],

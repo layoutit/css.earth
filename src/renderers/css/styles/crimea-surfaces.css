@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="crimea"])[data-lod="billboard"] .crimea-scene, .planet-stage:where([data-object-id="crimea"])[data-lod="marker"] .crimea-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="crimea"])[data-lod="marker"] .crimea-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="crimea"]).crimea-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

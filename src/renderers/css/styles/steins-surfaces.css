@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="steins"])[data-lod="billboard"] .steins-scene, .planet-stage:where([data-object-id="steins"])[data-lod="marker"] .steins-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="steins"])[data-lod="marker"] .steins-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="steins"]).steins-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

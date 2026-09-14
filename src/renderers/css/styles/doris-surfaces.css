@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="doris"])[data-lod="billboard"] .doris-scene, .planet-stage:where([data-object-id="doris"])[data-lod="marker"] .doris-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="doris"])[data-lod="marker"] .doris-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="doris"]).doris-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

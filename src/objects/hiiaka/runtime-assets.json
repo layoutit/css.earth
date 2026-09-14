@@ -1,0 +1,25 @@
+{
+  "schema": "csshiiaka-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "hiiaka-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "hiiaka-model-shadow@2x.webp",
+      "bytes": 36154,
+      "sha256": "6080b2131a201f1395af65b9bfd42e4e0130a9ee98eed04ed9750b6d65ba2f94"
+    },
+    {
+      "filename": "hiiaka-model-surface@2x.webp",
+      "bytes": 50996,
+      "sha256": "56f2b3de723f746906e426735eafa3b49b9a5ca809ce01139d0fbd4a4f41c24a"
+    },
+    {
+      "filename": "hiiaka-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

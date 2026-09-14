@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="helene"])[data-lod="billboard"] .helene-scene, .planet-stage:where([data-object-id="helene"])[data-lod="marker"] .helene-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="helene"])[data-lod="marker"] .helene-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="helene"]).helene-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

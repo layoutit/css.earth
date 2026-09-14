@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="kressmannia"])[data-lod="billboard"] .kressmannia-scene, .planet-stage:where([data-object-id="kressmannia"])[data-lod="marker"] .kressmannia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="kressmannia"])[data-lod="marker"] .kressmannia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="kressmannia"]).kressmannia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

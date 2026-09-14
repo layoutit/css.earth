@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/bennu/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'bennu',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/bennu/bennu-directional-sun.webp",
-      "two": "/scenes/bennu/bennu-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/bennu/bennu-normal-surface@2x.webp"
   ],

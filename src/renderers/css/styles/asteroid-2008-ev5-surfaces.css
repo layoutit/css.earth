@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asteroid-2008-ev5"])[data-lod="billboard"] .asteroid-2008-ev5-scene, .planet-stage:where([data-object-id="asteroid-2008-ev5"])[data-lod="marker"] .asteroid-2008-ev5-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asteroid-2008-ev5"])[data-lod="marker"] .asteroid-2008-ev5-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asteroid-2008-ev5"]).asteroid-2008-ev5-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

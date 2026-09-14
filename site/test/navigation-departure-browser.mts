@@ -1,7 +1,7 @@
 import { requireRecord } from '../../tools/source-values.mts';
 import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.js';
 interface DepartingBody {diameter:number|null;centre:number[]|null;intersectsViewport:boolean;sceneHidden:boolean;sceneOpacity:number;publishedDiameter:number;}
-interface DepartureFrame {time:number;id:string|undefined;source:DepartingBody|null;stageOpacity:number;skies:number;scenes:number;previousMarker:unknown;}
+interface DepartureFrame {time:number;id:string|undefined;source:DepartingBody|null;stageOpacity:number;skies:number;scenes:number;}
 interface DepartureProof {start:number;frames:DepartureFrame[];raf:number;}
 declare global {interface Window {__departureProof:DepartureProof;}}
 
@@ -67,8 +67,7 @@ try {
             publishedDiameter: window.__cssearthTest.required(window.__cssearthTest.required(publication,"published view").body,"published body").silhouetteDiameter };
         }
         proof.frames.push({ time, id, source, stageOpacity: Number(getComputedStyle(window.__cssearthTest.required(stage, 'computed style element')).opacity),
-          skies: stage.querySelectorAll('.planet-cubic-sky').length, scenes: stage.querySelectorAll('.polycss-scene').length,
-          previousMarker: id === to ? diagnostics?.sky.state()?.planetarySystem?.bodies?.find(body => body.id === from) : null });
+          skies: stage.querySelectorAll('.planet-cubic-sky').length, scenes: stage.querySelectorAll('.polycss-scene').length });
         proof.raf = requestAnimationFrame(sample);
       }
       proof.raf = requestAnimationFrame(sample);

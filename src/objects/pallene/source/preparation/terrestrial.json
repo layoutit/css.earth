@@ -4,7 +4,6 @@
   "namespace": "pallene",
   "displayName": "Pallene",
   "publicBase": "/scenes/pallene/",
-  "distanceAu": 9.58,
   "raster": {
     "width": 512,
     "height": 256,
@@ -113,12 +112,6 @@
     "sunSource": "JPL Saturn-system geometry; source photograph uses its Cassini 2005 observer/Sun frame. Runtime spin orientation is explicitly approximate outside the mission-era attitude solution."
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

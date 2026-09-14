@@ -52,15 +52,6 @@
         "restore",
         "refresh"
       ],
-      "path": "stars/eso0932a.tif",
-      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "shape/ryugu_shape_spc_200k_v20200323.bds",
       "url": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
     },

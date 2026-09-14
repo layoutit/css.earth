@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="raup"])[data-lod="billboard"] .raup-scene, .planet-stage:where([data-object-id="raup"])[data-lod="marker"] .raup-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="raup"])[data-lod="marker"] .raup-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="raup"]).raup-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

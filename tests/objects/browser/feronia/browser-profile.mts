@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/feronia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'feronia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/feronia/feronia-directional-sun.webp",
-      "two": "/scenes/feronia/feronia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/feronia/feronia-shape-surface@2x.webp"
   ],

@@ -72,33 +72,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Run node tools/objects/dist/operations.js acquire callisto --refresh to restore and verify the pinned ESO original.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -121,34 +94,6 @@
             "catalogueId": "inter-9221beed3",
             "role": "method",
             "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
-      "path": "system/jupiter-hubble.png",
-      "expectedBytes": 1166501,
-      "expectedSha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
-      "origin": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
-      "credit": "NASA, ESA, STScI, and Amy Simon",
-      "license": "NASA media usage guidelines and credited partner rights",
-      "id": "jupiter-hubble-parent",
-      "bodyId": "jupiter",
-      "consumers": [
-        "parent-marker"
-      ],
-      "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
-      ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
-      "redistribution": "Credited prepared observational image; source binary excluded from Git.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hubble-jupiter-2024-01-05",
-            "role": "material",
-            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -441,33 +386,6 @@
       }
     },
     {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 851,
-      "expectedSha256": "89c25f19bea74aed2e06d654b503d0c0b937b8d9d8a3edca31a28c37df5dcc93",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
-          }
-        ]
-      }
-    },
-    {
       "id": "callisto-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 4130,
@@ -497,8 +415,8 @@
     {
       "id": "callisto-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1623,
-      "expectedSha256": "de57dcd7de843dddfab06f175881491789e77ce0dc71e604f6168bab03b37d24",
+      "expectedBytes": 278,
+      "expectedSha256": "c104835d6ad08122a6f52939b9ac27b73edba75e3246235862aa9b8d853d00fc",
       "origin": "Repository-authored Callisto solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -556,8 +474,8 @@
     {
       "id": "callisto-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 225,
-      "expectedSha256": "2ba4089e45fe97b2b8d8fa0ea0c413b7d135b8d93d02026fe1e061c9ef078daf",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Callisto celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -612,8 +530,8 @@
     {
       "id": "callisto-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3596,
-      "expectedSha256": "0b1c9d0f301792db9d95fd1911e1b29b7acff81965284cc250f3f9b69764dd3a",
+      "expectedBytes": 3157,
+      "expectedSha256": "c8a066c0a5ddb21d8741cb8f1189f486addbfa953188713ac4c3b62f05ab0d73",
       "origin": "Repository-authored Callisto acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -631,8 +549,8 @@
     {
       "id": "callisto-object-content",
       "path": "content/object.json",
-      "expectedBytes": 11390,
-      "expectedSha256": "476b0270ae1e908854c1e8c60fd111917f0c83a1a90d8090d10289793e799a69",
+      "expectedBytes": 11111,
+      "expectedSha256": "8c27516c21b2ffdd7a4e890ead1cb15b500bc684720e582b5810ffbd4aeaa8aa",
       "origin": "Repository-authored Callisto object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -650,18 +568,6 @@
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Shared astrometric sky source and licensing."
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Shared astrometric sky source and licensing."
-    },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
@@ -763,7 +669,7 @@
       "path": "validation/registration-independent-review.json",
       "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
       "expectedBytes": 9690,
-      "expectedSha256": "c886e039ff30aeb81992e76748ab37f92db3ea8c810507da8be11e59647754ba"
+      "expectedSha256": "6fa33cfd0a58fffcf51fb0a0d137f87e73ff3cfd2d024fbf373ac57ea717de38"
     },
     {
       "path": "validation/registration-independent-review.md",

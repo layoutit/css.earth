@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "8f1bf7700ac1aa818ae9e601ffba3eb8c9ef64a70352c813ca017194e0f8abfc"
+    "sha256": "217f5163842bb6877ea0a88986fdd40a6c8fc62a5e70bd1b1b1c2020d627db41"
   },
   "id": "earth",
   "properties": {
@@ -30,14 +30,9 @@
           "sha256": "b762907dea0c0f73938fb52b860e4e57196ad5f170dd1624f3d5df4a5f42e653"
         },
         {
-          "id": "celestial",
-          "path": "source/preparation/celestial.json",
-          "sha256": "1d473392f7977901ae43bd7a30318cd620ebbe8915a526a72c5455a94952a55a"
-        },
-        {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "38ff89966c0093260afef6a4d67a3953287ffacb3a78d9d651136453d6364805"
+          "sha256": "501afff1d4429dd6e8023b37e6210ea3ee5726d4d91a532bca13d47b22e345cf"
         },
         {
           "id": "lens-bindings",
@@ -62,7 +57,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "f4d94911db9dfdafac3494c157d5406e6928dd4fb0abda3e3baa5e4ec68cb3fd"
+          "sha256": "75dd96814ad2ce98dd13c709eb4394b1c9c68cfb2f860bbe5947b438311eb6d6"
         },
         {
           "id": "mantle-tomography",
@@ -183,7 +178,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "76feaff8832bf9158cef5e46927aeae782149f73cd8c547c2f316b9a2ff8ec7a"
+        "sha256": "9897c93e8b1a21b9b36a37840174ca8faa0df366a2e9bb9ae663d7a841a028bf"
       }
     },
     "catalog": {

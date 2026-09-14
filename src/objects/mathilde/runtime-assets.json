@@ -1,0 +1,65 @@
+{
+  "schema": "cssmathilde-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "mathilde-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "mathilde-elevation-shadow@2x.webp",
+      "bytes": 262574,
+      "sha256": "8d614e21d6182b39415d7d240044eb8c1c7f6fb865aeabb2303efe71c677742a"
+    },
+    {
+      "filename": "mathilde-elevation-surface@2x.webp",
+      "bytes": 517788,
+      "sha256": "5e4bf08d0e4630afc04f3e88f23f370d3ccc53c9fdb4bfcb4874b15ba7719332"
+    },
+    {
+      "filename": "mathilde-elevation-thumbnail.webp",
+      "bytes": 6858,
+      "sha256": "933f66de7271aead1403e2bbefd7be5fb7202c2d629bfe5739727778bcdf4160"
+    },
+    {
+      "filename": "mathilde-features.json",
+      "bytes": 16823,
+      "sha256": "b9cdc077f2008a2a44f5dc977138380aea69d6c5bfdb3eac400501bd89d68aaa"
+    },
+    {
+      "filename": "mathilde-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "mathilde-near-msi-shadow@2x.webp",
+      "bytes": 191496,
+      "sha256": "c5f784e90aab1578f7d43b8576bd4602155e5700e23325eef9cdd34a389e800b"
+    },
+    {
+      "filename": "mathilde-near-msi-surface@2x.webp",
+      "bytes": 320526,
+      "sha256": "b3573ebb20bfee429b15defe06447e40ff51e7bba276d93ad226e98e9dd9ed85"
+    },
+    {
+      "filename": "mathilde-near-msi-thumbnail.webp",
+      "bytes": 1972,
+      "sha256": "58ac43c4ead4099f2cbca14de4112023b5bc40307afcfc6f3458c2695dad1d0b"
+    },
+    {
+      "filename": "mathilde-normal-shadow@2x.webp",
+      "bytes": 340328,
+      "sha256": "c8a9607720314e20db7d261e36b1046bbca2dffa0b6f071b7cca62fee524d7e8"
+    },
+    {
+      "filename": "mathilde-normal-surface@2x.webp",
+      "bytes": 717042,
+      "sha256": "2188b2e86e1b3ca0b4e8c5044aa01eb45e5fc1e9cafc99eb31dc2cca5aed181f"
+    },
+    {
+      "filename": "mathilde-normal-thumbnail.webp",
+      "bytes": 3222,
+      "sha256": "70fdcc159376b4f0d82ffe49e0436ca7553c913d9aa285f32dc12df825cf7bf7"
+    }
+  ]
+}

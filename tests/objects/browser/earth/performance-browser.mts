@@ -5,7 +5,6 @@ import { chromium } from "playwright";
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from
   "../../../../site/runtime-policy.mts";
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mts";
-import { PREPARED_EARTH_STARFIELD } from "../../unit/earth/prepared-fixture.mts";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const deviceScaleFactor = Number(process.argv[3] ?? 1);
@@ -222,7 +221,7 @@ return (requiredInput(document.querySelector('input[name="motion"]')).checked &&
     PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount);
   const startupRetainedImageCount =
     PREPARED_EARTH_SCENE.body.assets.surface.urls.length + 1 +
-      PREPARED_EARTH_STARFIELD.faces.length * 2 + 1 + 1 +
+      1 +
       PREPARED_EARTH_SCENE.material.atmosphere.transport.initialWarmRows.length;
   assert.equal(report.startup.retainedImageCount, startupRetainedImageCount);
   assert.ok(report.retainedImageCount <= startupRetainedImageCount + 4,

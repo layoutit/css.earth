@@ -258,14 +258,6 @@
       "url": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0171/CR2311.fits"
     },
     {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "stars/eso0932a.tif",
-      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
-    },
-    {
       "kind": "json-document",
       "groups": [
         "refresh"
@@ -369,61 +361,6 @@
         "credit": "NASA Science",
         "recordApiUrl": "https://science.nasa.gov/wp-json/wp/v2/topic/108082",
         "blocksApiUrl": "https://science.nasa.gov/wp-json/vip-block-data-api/v1/posts/108082/blocks"
-      }
-    },
-    {
-      "kind": "catalog-field",
-      "groups": [
-        "refresh"
-      ],
-      "path": "stars/hyg-v41-field.json",
-      "url": "https://raw.githubusercontent.com/astronexus/HYG-Database/c7f7f883fe678cc7680169a50ccd7dcc49b060ce/hyg/CURRENT/hygdata_v41.csv",
-      "sha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd",
-      "catalogRows": 119626,
-      "selectedCount": 1100,
-      "selection": {
-        "model": "gnomonic",
-        "centerRaDegrees": 40,
-        "centerDecDegrees": 7,
-        "horizontalFovDegrees": 112,
-        "aspectRatio": 1.7777777777777777
-      },
-      "template": {
-        "schema": "csssun-prepared-star-source@1",
-        "source": {
-          "id": "hyg-v4.1",
-          "title": "HYG Stellar Database v4.1",
-          "credit": "David Nash / Astronexus",
-          "license": "CC-BY-SA-4.0",
-          "repositoryUrl": "https://github.com/astronexus/HYG-Database",
-          "sourceUrl": "https://raw.githubusercontent.com/astronexus/HYG-Database/c7f7f883fe678cc7680169a50ccd7dcc49b060ce/hyg/CURRENT/hygdata_v41.csv",
-          "commit": "c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
-          "sha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd",
-          "catalogRows": 119626,
-          "retrieved": "2026-08-28"
-        },
-        "projection": {
-          "model": "prepared-gnomonic-representative-celestial-field",
-          "centerRaDegrees": 40,
-          "centerDecDegrees": 7,
-          "horizontalFovDegrees": 112,
-          "qualification": "catalog-derived representative sky; orientation is illustrative because the Sun scene has no absolute observer epoch or inertial camera orientation"
-        },
-        "presentation": {
-          "width": 2560,
-          "height": 1440,
-          "visibleCatalogStars": 19098,
-          "selectedStars": 1100,
-          "selection": "brightest-apparent-magnitude-in-projected-field",
-          "brightestMagnitude": -26.7,
-          "faintestMagnitude": 6.19,
-          "sourcePixelRadii": [
-            0,
-            1,
-            2
-          ],
-          "opacity": 0.5
-        }
       }
     }
   ]

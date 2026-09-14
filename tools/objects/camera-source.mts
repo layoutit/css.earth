@@ -8,8 +8,7 @@ export const camera = object({cameraModel: string, minimumControlPitchDegrees: n
   minimumZoom: number, maximumZoom: number, defaultZoom: number, sceneScale: number, logicalBodyDiameter: number,
   pitchBounded: boolean, yawBounded: boolean, responsiveFit, style: optional(string),
   projection: optional(object({model: string, cssPerspective: string})),
-  dolly: optional(object({model: string, wheelStepPerDelta: number, minimumDistanceRadii: number, maximumDistanceOverOrbitExtent: number, maximumDistanceOverSystemExtent: optional(number)})),
+  dolly: optional(object({model: string, wheelStepPerDelta: number, minimumDistanceRadii: number, maximumDistanceOverOrbitExtent: number})),
   levelOfDetail: optional(object({model: string, billboardFadeStartDiscPixels: number, billboardFullDiscPixels: number, markerFadeStartDiscPixels: number, markerFullDiscPixels: number})),
   orbitLineFade: optional(object({visibleBelowDiscHeightShare: number, hiddenAboveDiscHeightShare: number})),
-  planetarySystem: optional(object({model: string, hiddenBelowDistanceOverOrbitExtent: number, visibleAboveDistanceOverOrbitExtent: number})),
-  sunMarker: optional(object({model: string, fadeStartSpritePixels: number, fullSpritePixels: number})), drag: optional(object({model: string}))});
+  drag: optional(object({model: string}))});

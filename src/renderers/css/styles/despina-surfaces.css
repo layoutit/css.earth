@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="despina"])[data-lod="billboard"] .despina-scene, .planet-stage:where([data-object-id="despina"])[data-lod="marker"] .despina-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="despina"])[data-lod="marker"] .despina-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="despina"]).despina-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

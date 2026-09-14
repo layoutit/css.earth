@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="deedee"])[data-lod="billboard"] .deedee-scene, .planet-stage:where([data-object-id="deedee"])[data-lod="marker"] .deedee-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="deedee"])[data-lod="marker"] .deedee-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="deedee"]).deedee-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

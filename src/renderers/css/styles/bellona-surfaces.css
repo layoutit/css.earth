@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bellona"])[data-lod="billboard"] .bellona-scene, .planet-stage:where([data-object-id="bellona"])[data-lod="marker"] .bellona-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bellona"])[data-lod="marker"] .bellona-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bellona"]).bellona-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

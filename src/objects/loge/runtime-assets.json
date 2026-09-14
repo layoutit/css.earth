@@ -1,0 +1,25 @@
+{
+  "schema": "cssloge-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "loge-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "loge-model-shadow@2x.webp",
+      "bytes": 39008,
+      "sha256": "0a326ed2276cbc5ae1b5f73785ef20a15786c68dc625a847792f170d0f866fba"
+    },
+    {
+      "filename": "loge-model-surface@2x.webp",
+      "bytes": 56322,
+      "sha256": "3186ddff824188f4bc5e59550472be793a715ee014c42b8ed52826925bf74b5e"
+    },
+    {
+      "filename": "loge-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

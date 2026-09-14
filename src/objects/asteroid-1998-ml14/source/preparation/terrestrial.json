@@ -4,7 +4,6 @@
   "namespace": "asteroid-1998-ml14",
   "displayName": "1998 ML14",
   "publicBase": "/scenes/asteroid-1998-ml14/",
-  "distanceAu": 2.407527644248636,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -117,12 +116,6 @@
     "sunQualification": "The archived 1998 radar reconstruction has no determined inertial spin pole. Use the existing fixed arbitrary display frame; optional directional lighting is illustrative. The historical modeling period and newer photometric period are recorded as information only, and neither is propagated into a current attitude."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

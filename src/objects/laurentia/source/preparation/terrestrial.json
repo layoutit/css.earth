@@ -4,7 +4,6 @@
   "namespace": "laurentia",
   "displayName": "Laurentia",
   "publicBase": "/scenes/laurentia/",
-  "distanceAu": 3.0135299301481933,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -118,12 +117,6 @@
     "sunSource": "DAMIT model 325 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

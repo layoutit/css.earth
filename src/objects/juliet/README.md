@@ -43,6 +43,6 @@ The original Voyager paper's full table is paywalled; the 2024 primary study exp
 
 Preparation targets 480 native `u` leaves; input, lighting, preparation and rendering use the existing owners.
 
-The compact analytic radius table, no-data sentinel and context portrait are versioned inputs; the font and ESO panorama have pinned download recipes.
+The compact analytic radius table, no-data sentinel and context portrait are versioned inputs; the font has a pinned download recipe.
 
 </details>

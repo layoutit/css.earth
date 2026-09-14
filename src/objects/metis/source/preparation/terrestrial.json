@@ -4,7 +4,6 @@
   "namespace": "metis",
   "displayName": "Metis",
   "publicBase": "/scenes/metis/",
-  "distanceAu": 5.2,
   "raster": {
     "width": 512,
     "height": 256,
@@ -202,12 +201,6 @@
     "sunSource": "JPL Jupiter-system ephemeris and IAU rotation; PCK reference ellipsoid, east-positive scene longitude."
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      155,
-      151,
-      146
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

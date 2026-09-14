@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="agenor"])[data-lod="billboard"] .agenor-scene, .planet-stage:where([data-object-id="agenor"])[data-lod="marker"] .agenor-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="agenor"])[data-lod="marker"] .agenor-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="agenor"]).agenor-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

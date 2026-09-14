@@ -1,0 +1,60 @@
+{
+  "schema": "cssatlas-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "atlas-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "atlas-elevation-shadow@2x.webp",
+      "bytes": 252810,
+      "sha256": "ec7375884e86d5cede2195554b981d1142fa6a28f6069a05f7346388f9d3da77"
+    },
+    {
+      "filename": "atlas-elevation-surface@2x.webp",
+      "bytes": 433402,
+      "sha256": "fc975bce54c55a4ac7a2895807e36a186e4f3c9de1d71c3e46de6ab33674f617"
+    },
+    {
+      "filename": "atlas-elevation-thumbnail.webp",
+      "bytes": 4104,
+      "sha256": "16aba59a66cd2eddd013dedce572f45d65a31311760fc3eab6c92a564a4d4058"
+    },
+    {
+      "filename": "atlas-filter-color-shadow@2x.webp",
+      "bytes": 242372,
+      "sha256": "3951669225c8014de8e406be6224a7bd4f6b31730978def06af256717e5de98c"
+    },
+    {
+      "filename": "atlas-filter-color-surface@2x.webp",
+      "bytes": 354946,
+      "sha256": "45fb83e9626ffd9745efe390258c77abec5dacd625b767097654289e12bf8733"
+    },
+    {
+      "filename": "atlas-filter-color-thumbnail.webp",
+      "bytes": 2114,
+      "sha256": "a2537e2af8346710dd730cd8462ae257d37d6268c492f4ad8b374d7adefeb955"
+    },
+    {
+      "filename": "atlas-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "atlas-normal-shadow@2x.webp",
+      "bytes": 230028,
+      "sha256": "1f277c427a7a66445c0a53cc756d8a8cd9f51a0340974a628013eb799867b3cb"
+    },
+    {
+      "filename": "atlas-normal-surface@2x.webp",
+      "bytes": 383506,
+      "sha256": "34fb2ca94b55f9cb18faedbd591931feec8cbc96ef233d02f235a6f995c3e185"
+    },
+    {
+      "filename": "atlas-normal-thumbnail.webp",
+      "bytes": 1400,
+      "sha256": "b2a94eb80f5c929a398b8a8d4aab41464ba9fe0b92a1d87a639fe6b473bb3942"
+    }
+  ]
+}

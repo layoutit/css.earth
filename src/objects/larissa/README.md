@@ -61,7 +61,7 @@ Elevation is radius relative to the stated reference sphere, coloured with the s
 
 - Geometry files preserve the original OPUS responses, PDS CK and NAIF clock/frame/leap-second kernels. `source/shape/pck00011.tpc` owns pole/spin conventions. Do not claim navigation ephemeris precision beyond the recorded model budget.
 
-- `source/manifest.json` pins the original inputs and authored documents; `source/preparation/acquisition.json` restores missing image, radius-table, font and starfield inputs. Required small geometry documents and the pinned navigation portrait are checked in, so a fresh source restore does not depend on an ignored generated image.
+- `source/manifest.json` pins the original inputs and authored documents; `source/preparation/acquisition.json` restores missing image, radius-table and font inputs. Required small geometry documents and the pinned navigation portrait are checked in, so a fresh source restore does not depend on an ignored generated image.
 
 Source preparation owns every image, triangle and lighting raster; the generic runtime only decodes the prepared package.
 

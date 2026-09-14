@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="harmonia"])[data-lod="billboard"] .harmonia-scene, .planet-stage:where([data-object-id="harmonia"])[data-lod="marker"] .harmonia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="harmonia"])[data-lod="marker"] .harmonia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="harmonia"]).harmonia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

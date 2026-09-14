@@ -1,0 +1,25 @@
+{
+  "schema": "csshati-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "hati-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "hati-model-shadow@2x.webp",
+      "bytes": 38802,
+      "sha256": "1cfcc45b9aff5867a6c96647e8f39bd3a6232ccf2e260dfe8d6154af5ef08af0"
+    },
+    {
+      "filename": "hati-model-surface@2x.webp",
+      "bytes": 55314,
+      "sha256": "57388f90d0bb073fa428a1120160b5f212ef8ea6bfffb5469b289f1c315baeed"
+    },
+    {
+      "filename": "hati-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

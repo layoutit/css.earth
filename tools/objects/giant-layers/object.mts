@@ -9,17 +9,14 @@ import {parseObservedPolarRecipe} from '../giant-observations/index.mts';
 import {shape,text,number,optional,array} from '../terrestrial-layers/source-records.mts';
 import {isRecord,requireRecord,requireFiniteNumber} from '../../source-values.mts';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
-import {validatePreparedCubicSky} from '../../../src/platform/cubic-sky-contract.mts';
-import {validateDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
-const parseSharedCelestial=shape({schema:text,namespace:text,meanHeliocentricDistanceAu:number});
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile,realpath} from 'node:fs/promises';
 import {resolve,relative,sep} from 'node:path';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
 import {preparePlanetCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
 import {preparePlanetDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
-import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD,CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD} from '../../../src/platform/cubic-sky-contract.mts';
+import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../src/platform/cubic-sky-contract.mts';
 import {requirePreparedPresentation} from '../../../src/platform/prepared-presentation-contract.mts';
 import {prepareGiantLayers,parseRadialLayerRecipe,rasterAnnularField} from './index.mts';
 import {prepareObservedSurfaces} from './observations.mts';
@@ -29,7 +26,7 @@ import {prepareLayeredSurfacePresentation} from './presentation.mts';
 import {preparePhotometricDisc} from './photometric-disc.mts';
 import {prepareNormalizedDiscPresentation} from './normalized-disc-presentation.mts';
 import {prepareObservedPolarSurfaces} from '../giant-observations/index.mts';
-import {appendFocusedHeliocentricPresentation, prepareFocusedHeliocentricPresentation} from '../focused-heliocentric.mts';
+import {withFocusedCamera} from '../focused-camera.mts';
 
 const hash=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 const readJson=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
@@ -49,15 +46,9 @@ export function assertLayeredGiantFrameBank(descriptor:Pick<ReturnType<typeof pa
   if(!normalizedDisc&&presentationConfig.resources?.pools.find(pool=>pool.id===presentationConfig.resources?.rowPool)?.options.capacity!==residentRows)throw new TypeError('Authored material residency differs from its row resource pool.');
 }
 
-export async function prepareSharedCelestial({sourceDirectory,publicDirectory,config:input}: {sourceDirectory:string;publicDirectory:string;config:unknown}) {
-  const config=parseSharedCelestial(input);
-  const sourceManifest=await createSourceManifest({planetId:config.namespace,planetName:config.namespace,sourceRoot:sourceDirectory});
-  if(config?.schema!=='cssearth-shared-celestial@1'||!Number.isFinite(config.meanHeliocentricDistanceAu)||config.meanHeliocentricDistanceAu<=0||!config.namespace)throw new TypeError('Invalid shared celestial source.');
-  const ensureDirectories=()=>mkdir(publicDirectory,{recursive:true});
-  const sky=await preparePlanetCubicSky({objectId:config.namespace,sourceRoot:sourceDirectory,publicRoot:publicDirectory,ensureDirectories,validateSourceGroup:consumer=>sourceManifest.validateGroup(consumer),includeSun:false,cameraContract:CUBIC_SKY_CAMERA_PRESENTATION_STANDARD,pointSourceContract:CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD,writeModule:false});
-  const sun=await preparePlanetDirectionalSun({objectId:config.namespace,publicRoot:publicDirectory,ensureDirectories,meanHeliocentricDistanceAu:config.meanHeliocentricDistanceAu,writeModule:false});
-  const transported=shape({sky:requireRecord,sun:requireRecord})(JSON.parse(JSON.stringify({sky,sun})));
-  return {sky:validatePreparedCubicSky(transported.sky,{requireSun:false}),sun:validateDirectionalSunPlan(transported.sun)};
+/** A giant's sky orientation and directional Sun; the shared universe draws the visible sky and Sun. */
+export function prepareSharedCelestial(namespace:string) {
+  return {sky:preparePlanetCubicSky({objectId:namespace,cameraContract:CUBIC_SKY_CAMERA_PRESENTATION_STANDARD}),sun:preparePlanetDirectionalSun()};
 }
 
 /** Full source regeneration. publicDirectory/outputDirectory are explicitly
@@ -77,9 +68,9 @@ export async function prepareLayeredGiantObject({objectDirectory,publicDirectory
   const observationConfig=requireRecord(observationInput).schema==='cssearth-observed-polar-surfaces@1'?parseObservedPolarRecipe(observationInput):parseObservedSurfaceRecipe(observationInput);
   const materialConfig=requireRecord(materialInput).schema==='cssearth-photometric-disc@1'?parsePhotometricDiscRecipe(materialInput):parseEllipsoidMaterialRecipe(materialInput);
   const presentationConfig=materialConfig.schema==='cssearth-photometric-disc@1'?parse(required('presentation'),normalizedPresentationRecipe,'normalized presentation'):parse(required('presentation'),layeredPresentationRecipe,'layered presentation');
-  const celestialConfig=parseSharedCelestial(required('celestial')),contentConfig=shape({id:text,displayName:text})(required('content')),radialConfig=parseRadialLayerRecipe(required('rings'));
+  const contentConfig=shape({id:text,displayName:text})(required('content')),radialConfig=parseRadialLayerRecipe(required('rings'));
   const normalizedDisc=materialConfig.schema==='cssearth-photometric-disc@1';
-  if(!isLayeredGiantRecipe(geometryConfig)||presentationConfig.namespace!==descriptor.id||celestialConfig.namespace!==descriptor.id||contentConfig.id!==descriptor.id)throw new TypeError('Authored capability identity differs.');
+  if(!isLayeredGiantRecipe(geometryConfig)||presentationConfig.namespace!==descriptor.id||contentConfig.id!==descriptor.id)throw new TypeError('Authored capability identity differs.');
   const ids=descriptor.recipe.surfaces.flatMap(surface=>surface.lenses.map(lens=>lens.id));
   if(JSON.stringify(ids)!==JSON.stringify(observationConfig.lenses.map(lens=>lens.id))||JSON.stringify(ids)!==JSON.stringify((normalizedDisc?shape({lenses:array(shape({id:text}))})(presentationConfig).lenses:materialConfig.lenses).map(lens=>lens.id)))throw new TypeError('Authored lenses disagree across preparation capabilities.');
   const materialShape=normalizedDisc?materialConfig.shape:materialConfig.raster.shape;
@@ -94,12 +85,10 @@ export async function prepareLayeredGiantObject({objectDirectory,publicDirectory
   let radialLayer;
   if ('radialLayer' in materialConfig && materialConfig.radialLayer) {const layer=radialConfig.layers[materialConfig.radialLayer.layerIndex];if(!layer||layer.kind!=='annular-field')throw new TypeError('Material radial layer must bind an annular field.');radialLayer={...materialConfig.radialLayer,data:rasterAnnularField(layer,materialConfig.radialLayer.size)};}
   const material=normalizedDisc?await preparePhotometricDisc({sourceDirectory,config:materialConfig,publicDirectory,write:true}):await prepareEllipsoidMaterials({config:materialConfig,maps:observed.maps,radialLayer,publicDirectory,write:true});
-  const celestial=await prepareSharedCelestial({sourceDirectory,publicDirectory,config:celestialConfig});
+  const celestial=prepareSharedCelestial(descriptor.id);
   const content=await prepareContent({sourceDirectory,publicDirectory,outputDirectory,config:{contentPath:relative(sourceDirectory,requiredSource('content').path),chartsPath:relative(sourceDirectory,requiredSource('charts').path)}});
   const rawPresentation=await (normalizedDisc?prepareNormalizedDiscPresentation:prepareLayeredSurfacePresentation)({config:presentationConfig,geometryConfig,geometry,observationConfig,materialConfig,sky:celestial.sky,sun:celestial.sun});
-  const focus=await prepareFocusedHeliocentricPresentation({bodyId:descriptor.id,publicDirectory,publicBase:`/scenes/${descriptor.id}/`,
-    bodyRadiusUnits:geometryConfig.shape.equatorialRadius,bodyRadiusKilometers:descriptor.recipe.shape.radiusKm,sky:celestial.sky,sun:celestial.sun});
-  const presentation=appendFocusedHeliocentricPresentation(rawPresentation,focus);
+  const presentation=withFocusedCamera(rawPresentation,celestial.sky);
   requirePreparedPresentation(presentation,{controls:content.controls});
   const definition={...presentation,schema:'cssearth-object-runtime@4',id:descriptor.id,controls:content.controls};
   const assetIdentity=<T extends {data?:Uint8Array;filename:string}>({data,...asset}:T)=>({...asset,url:`/scenes/${descriptor.id}/${asset.filename}`});

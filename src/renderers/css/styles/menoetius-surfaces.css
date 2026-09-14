@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="menoetius"])[data-lod="billboard"] .menoetius-scene, .planet-stage:where([data-object-id="menoetius"])[data-lod="marker"] .menoetius-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="menoetius"])[data-lod="marker"] .menoetius-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="menoetius"]).menoetius-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -136,8 +136,19 @@
         {
           "density": 1,
           "shadowless": false,
-          "size": 1024,
+          "size": 512,
           "filename": "neptune-material-normal.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        },
+        {
+          "density": 2,
+          "shadowless": false,
+          "size": 1024,
+          "filename": "neptune-material-normal@2x.webp",
           "encoding": {
             "lossless": true,
             "effort": 6
@@ -147,8 +158,19 @@
         {
           "density": 1,
           "shadowless": true,
-          "size": 1024,
+          "size": 512,
           "filename": "neptune-material-normal-shadowless.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        },
+        {
+          "density": 2,
+          "shadowless": true,
+          "size": 1024,
+          "filename": "neptune-material-normal-shadowless@2x.webp",
           "encoding": {
             "lossless": true,
             "effort": 6
@@ -165,8 +187,19 @@
         {
           "density": 1,
           "shadowless": false,
-          "size": 1024,
+          "size": 512,
           "filename": "neptune-material-methane.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        },
+        {
+          "density": 2,
+          "shadowless": false,
+          "size": 1024,
+          "filename": "neptune-material-methane@2x.webp",
           "encoding": {
             "lossless": true,
             "effort": 6
@@ -176,8 +209,19 @@
         {
           "density": 1,
           "shadowless": true,
-          "size": 1024,
+          "size": 512,
           "filename": "neptune-material-methane-shadowless.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        },
+        {
+          "density": 2,
+          "shadowless": true,
+          "size": 1024,
+          "filename": "neptune-material-methane-shadowless@2x.webp",
           "encoding": {
             "lossless": true,
             "effort": 6
@@ -194,8 +238,19 @@
         {
           "density": 1,
           "shadowless": false,
-          "size": 1024,
+          "size": 512,
           "filename": "neptune-material-near-infrared.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        },
+        {
+          "density": 2,
+          "shadowless": false,
+          "size": 1024,
+          "filename": "neptune-material-near-infrared@2x.webp",
           "encoding": {
             "lossless": true,
             "effort": 6
@@ -205,8 +260,19 @@
         {
           "density": 1,
           "shadowless": true,
-          "size": 1024,
+          "size": 512,
           "filename": "neptune-material-near-infrared-shadowless.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        },
+        {
+          "density": 2,
+          "shadowless": true,
+          "size": 1024,
+          "filename": "neptune-material-near-infrared-shadowless@2x.webp",
           "encoding": {
             "lossless": true,
             "effort": 6

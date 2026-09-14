@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="erriapus"])[data-lod="billboard"] .erriapus-scene, .planet-stage:where([data-object-id="erriapus"])[data-lod="marker"] .erriapus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="erriapus"])[data-lod="marker"] .erriapus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="erriapus"]).erriapus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

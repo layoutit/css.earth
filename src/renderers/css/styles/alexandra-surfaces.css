@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="alexandra"])[data-lod="billboard"] .alexandra-scene, .planet-stage:where([data-object-id="alexandra"])[data-lod="marker"] .alexandra-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="alexandra"])[data-lod="marker"] .alexandra-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="alexandra"]).alexandra-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="castalia"])[data-lod="billboard"] .castalia-scene, .planet-stage:where([data-object-id="castalia"])[data-lod="marker"] .castalia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="castalia"])[data-lod="marker"] .castalia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="castalia"]).castalia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

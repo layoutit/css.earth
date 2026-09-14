@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="aegaeon"])[data-lod="billboard"] .aegaeon-scene, .planet-stage:where([data-object-id="aegaeon"])[data-lod="marker"] .aegaeon-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="aegaeon"])[data-lod="marker"] .aegaeon-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="aegaeon"]).aegaeon-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -211,22 +211,6 @@
       "groups": [
         "restore"
       ],
-      "path": "sun/google-maps-sun.png",
-      "url": "https://mw1.google.com/mw-weather/static/sun.png"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore"
-      ],
-      "path": "stars/eso0932a.tif",
-      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore"
-      ],
       "path": "saturn-surface-original.jpg",
       "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/1/saturn.jpg"
     },

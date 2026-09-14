@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/ariadne/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'ariadne',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/ariadne/ariadne-directional-sun.webp",
-      "two": "/scenes/ariadne/ariadne-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/ariadne/ariadne-shape-surface@2x.webp"
   ],

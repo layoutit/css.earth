@@ -19,11 +19,11 @@ for (const id of ['jupiter', 'saturn', 'uranus', 'neptune']) {
       assert.deepEqual(actual.title[key], expected.title[key], `${id}: title.${key}`);
     }
     // The typed generator changes its own identity; font pins and SVG bytes stay fixed.
-    assert.equal(controls.settings.title.generator, 'tools/prepare-shell-titles.mjs');
+    assert.equal(controls.settings.title.generator, 'tools/prepare-shell-titles.mts');
     assert.deepEqual(actual.settings, { ...controls.settings,
       title: { ...controls.settings.title, generator: 'tools/prepare-shell-titles.mts' } });
-    assert.deepEqual({ ...actual.lenses, controls: actual.lenses.controls.map(({id,label,detail,thumbnailUrl,description,summary,legend,title}) =>
-      ({id,label,...(detail ? {detail} : {}),thumbnailUrl,description,...(summary ? {summary} : {}),...(legend ? {legend} : {}),title})) }, { ...controls.lenses, title: { ...controls.lenses.title, generator: 'tools/prepare-shell-titles.mts' } });
+    assert.deepEqual({ ...actual.lenses, controls: actual.lenses.controls.map(({id,label,thumbnailUrl,noData,facts,legend,legendNote}) =>
+      ({id,label,thumbnailUrl,...(noData === true ? {noData} : {}),...(facts?.length ? {facts} : {}),...(legend ? {legend} : {}),...(legendNote ? {legendNote} : {})})) }, controls.lenses);
     assert.deepEqual(actual.charts.map(({id,title,open,src,width,height,alt})=>({id,title,open,src,width,height,alt})),
       expected.charts.map(({id,title,open,src,width,height,alt}: Record<string, unknown>)=>({
         id, title: (title as Record<string, unknown>).generator === 'tools/prepare-shell-titles.mjs'

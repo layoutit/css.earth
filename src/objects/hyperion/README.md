@@ -128,7 +128,7 @@ The navigation image comes from the same prepared shape and Monochrome map. The 
 
 Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
-Facts and context follow [NASA's Hyperion overview](https://science.nasa.gov/saturn/moons/hyperion/) and the vendored JPL physical/orbital data. The stars and title retain the common ESO/S. Brunier and Inter credits documented beside the source inputs.
+Facts and context follow [NASA's Hyperion overview](https://science.nasa.gov/saturn/moons/hyperion/) and the vendored JPL physical/orbital data. The title retains the common Inter credit documented beside its source input.
 
 The [investigation ledger](investigations.json) records the rejected control rows and SUM2 trials, including their unresolved camera conventions.
 

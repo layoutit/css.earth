@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="nereid"])[data-lod="billboard"] .nereid-scene, .planet-stage:where([data-object-id="nereid"])[data-lod="marker"] .nereid-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="nereid"])[data-lod="marker"] .nereid-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="nereid"]).nereid-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

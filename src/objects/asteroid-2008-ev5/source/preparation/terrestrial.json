@@ -4,7 +4,6 @@
   "namespace": "asteroid-2008-ev5",
   "displayName": "2008 EV5",
   "publicBase": "/scenes/asteroid-2008-ev5/",
-  "distanceAu": 0.9597570834058771,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -116,12 +115,6 @@
     "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

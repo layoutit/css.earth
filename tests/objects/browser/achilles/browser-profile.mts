@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/achilles/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'achilles',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/achilles/achilles-directional-sun.webp",
-      "two": "/scenes/achilles/achilles-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/achilles/achilles-shape-surface@2x.webp"
   ],

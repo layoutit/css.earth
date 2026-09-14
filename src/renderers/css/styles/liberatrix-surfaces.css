@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="liberatrix"])[data-lod="billboard"] .liberatrix-scene, .planet-stage:where([data-object-id="liberatrix"])[data-lod="marker"] .liberatrix-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="liberatrix"])[data-lod="marker"] .liberatrix-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="liberatrix"]).liberatrix-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }
