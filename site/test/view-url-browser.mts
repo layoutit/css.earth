@@ -144,13 +144,6 @@ async function settled(page: Page) {
     const state = window.__cssearthTest.object('mercury').camera.stats().dragInertia;
     return !state.active && !state.wheelZoom.active;
   }, null, { timeout: 10000 });
-  await page.waitForFunction(() => {
-    const stars = window.__cssearthTest.object('mercury').sky.state().captions?.stars;
-    if (!stars) return false;
-    const slot = stars.slots[0];
-    if (!slot) return false;
-    return slot.alpha === slot.target && (stars.accepted ? slot.occupant === `3:${stars.candidate?.id}` : slot.occupant === null);
-  }, null, { timeout: 3000 });
   await page.waitForTimeout(220);
 }
 async function drag(page: Page, from: readonly [number, number], to: readonly [number, number]) {

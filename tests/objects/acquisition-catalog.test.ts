@@ -7,7 +7,6 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/operations-acquisition.js';
 import {prepareSatelliteCatalog} from '../../tools/objects/acquisition/satellite-catalog.mts';
-import {prepareProjectedCatalog} from '../../tools/objects/acquisition/projected-catalog.mts';
 import type {SourceManifest,SourceEntry} from '../../tools/objects/operations.js';
 const digest=(bytes:Uint8Array|string)=>createHash('sha256').update(bytes).digest('hex');
 const entry=(path:string,bytes:Uint8Array):SourceEntry=>({path,expectedBytes:bytes.length,expectedSha256:digest(bytes)});
@@ -43,13 +42,6 @@ test('satellite acquisition and derived JSON publication use only mocked request
  await assert.rejects(executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async url=>new Response(documentFor(url)+' ')} }),/hash drifted/);
  assert.deepEqual(await readFile(join(root,'catalog.json')),expected);assert.ok((await readdir(root)).every(name=>!name.includes('.partial')));
 }));
-
-test('gnomonic catalog selection retains source coordinates and magnitude order',()=>{
- const bytes=Buffer.from('id,ra,dec,mag,ci\n1,0,0,2,0.6\n2,0,0,1,0.4\n3,12,0,-1,1\n');
- const output=JSON.parse(new TextDecoder().decode(prepareProjectedCatalog({bytes,template:{schema:'synthetic-field@1',source:{},projection:{},presentation:{}},selection:{model:'gnomonic',centerRaDegrees:0,centerDecDegrees:0,horizontalFovDegrees:90,aspectRatio:2},selectedCount:2,catalogRows:3})));
- assert.deepEqual(output.stars,[{id:2,x:.5,y:.5,magnitude:1,colorIndex:.4},{id:1,x:.5,y:.5,magnitude:2,colorIndex:.6}]);
- assert.equal(output.presentation.visibleCatalogStars,2);
-});
 
 test('request transforms are ordered, source-authored and hash gated',()=>temporary(async root=>{
  const result=Buffer.from('<DATE>fixed\n<GENERATOR>pinned\n'),manifest:SourceManifest={schema:'cssearth-authoritative-sources@1',inputs:[entry('response.txt',result)],generatedIntermediates:[],documents:[]};

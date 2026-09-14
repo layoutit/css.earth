@@ -6,7 +6,7 @@ test("preparation expands every actual Moon leaf into a stable ordered tree", ()
   const tree = createPreparedNodeTree(), camera = tree.element("div", "polycss-camera"), scene = tree.element("div", "polycss-scene");
   tree.append(null, camera); tree.append(camera, scene);
   const body = tree.mesh("body"), material = tree.element("s"); tree.append(scene, body, material);
-  const leaves = PREPARED_MOON_SCENE.body.bands.flatMap(band => band.leaves);
+  const leaves = PREPARED_MOON_SCENE.body.leaves;
   for (const leaf of leaves) tree.append(body, tree.leaf(leaf));
   const result = tree.finish({ camera, scene });
   assert.equal(result.tree.nodes.length, 4 + leaves.length);
