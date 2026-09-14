@@ -4,11 +4,11 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import test from 'node:test';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { prepareFactsheet } from './prepare-factsheets.mts';
 
 test('every registered factsheet reproduces its pinned authored facts and evidence', async () => {
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     await prepareFactsheet(resolve(import.meta.dirname, '../src/objects', object.id), { check: true });
   }
 });

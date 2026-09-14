@@ -4,7 +4,7 @@ import test from "node:test";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS as OBJECTS } from "../site/objects.mts";
 import { auditObjectRuntimeOwnership, inspectObjectRuntimeModule } from "./check-object-runtime-ownership.mts";
 const moonDefinition = requireRecord(await loadObjectTestDefinition('moon'), 'Moon prepared definition');
 const objectControls = requireArray(moonDefinition.controls, 'Moon prepared definition.controls');

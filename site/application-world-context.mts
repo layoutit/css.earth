@@ -10,7 +10,7 @@ import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_CONT
 import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation/marker-presentation.mts';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
-import { OBJECTS } from './objects.mts';
+import { SCENE_OBJECTS } from './objects.mts';
 import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mts';
 
 import galaxyCatalog from '../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
@@ -20,10 +20,10 @@ import clusterPresentation from '../src/objects/galaxy-clusters/source/presentat
 import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
 
-const annotationOpacities = Object.fromEntries(OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
-const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
-const hiddenOrbitIds = OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id);
-const annotationPriorities = Object.fromEntries(OBJECTS.map(object =>
+const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
+const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
+const hiddenOrbitIds = SCENE_OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id);
+const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
   [object.id, (CONTEXT_ANNOTATION_PRIORITY as Readonly<Partial<Record<typeof object.classification, number>>>)[object.classification] ?? 0]));
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
@@ -242,7 +242,7 @@ export function createApplicationWorldContext() {
           },
           setHighlightedClassification(classification: string | null) {
             if (!destroyed) layer.setHighlighted(classification === null ? []
-              : OBJECTS.filter(object => object.classification === classification).map(object => object.id));
+              : SCENE_OBJECTS.filter(object => object.classification === classification).map(object => object.id));
           },
           setHeliosphereEnabled(enabled: boolean) {
             if (destroyed || heliosphereEnabled === (enabled === true)) return;

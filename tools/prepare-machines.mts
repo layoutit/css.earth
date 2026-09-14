@@ -12,7 +12,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { explorationRecord, explorationArray, explorationText, parseAgencies, parseCapture, validateCapture, parseExplorationCatalog } from '../src/platform/exploration-catalog.mts';
 import { compileContributions } from '../src/platform/exploration-contributions.mts';
 import { parsePreparedExploration, parseExplorationImage } from '../src/platform/prepared-exploration.mts';
@@ -27,6 +27,8 @@ export const explorationCompilerClosure = [
   'tools/prepare-machines.mts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'site/objects.mts', 'site/object-schema.mts',
   'site/object-catalog.mts', 'site/prepared-object-catalog.mts', 'tools/prepare-catalog.mts',
+  'site/prepared-focus-object.mts', 'site/navigation-distance.mts', 'tools/prepare-navigation-destinations.mts',
+  'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
   'site/source/machines/catalog.json', 'site/source/machines/render-library.json', 'site/source/machines/emblem-library.json',
   'site/source/agency-logos.json', 'tools/read-source-catalogue.mts',
   'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
@@ -93,7 +95,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
   }
   const objects: SourceUsageObject[] = [];
   const factsheets = { facts: 0, cited: 0, uncited: [] as { objectId: string; factId: string }[] };
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const base = `src/objects/${object.id}`;
     const descriptor = explorationRecord(await json(`${base}/object.json`));
     const manifest = explorationRecord(await json(`${base}/source/manifest.json`));

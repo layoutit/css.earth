@@ -1,5 +1,5 @@
-import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
-import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
+import { isPreparedCluster, isPreparedNebula, resolveSpatialCitation } from '@cssearth/catalog';
+import type { PreparedCatalogObject, SpatialCatalogSource, SpatialCitation } from '@cssearth/catalog';
 import type { createPreparedUniverse } from '../src/renderers/css/universe/prepared-universe-runtime.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
@@ -14,7 +14,7 @@ export type PreparedFocusPresentation = VolumeLensState & {
 export interface FocusCallbacks {
   onFocusChange?(url: string): void;
   onFlightStart?(): void;
-  onFocusContentChange?(record: PreparedCatalogObject | null, sources: readonly SpatialCatalogSource[], presentation: PreparedFocusPresentation | null): void;
+  onFocusContentChange?(record: PreparedCatalogObject | null, sources: readonly SpatialCitation[], presentation: PreparedFocusPresentation | null): void;
 }
 interface ContextNavigationOptions {
   layer: PreparedContextLayer;
@@ -62,7 +62,12 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         if (!unsubscribeLens) publishLens();
       } } : {}),
     } : null;
-    notifyContent(record, sources.filter(source => references.some(reference => reference === source.id || reference.startsWith(`${source.id}:`))), controls);
+    const citations = references.map(reference => {
+      const citation = resolveSpatialCitation(reference, sources);
+      if (!citation) throw new TypeError(`Unresolved prepared focus reference: ${reference}`);
+      return citation;
+    });
+    notifyContent(record, [...new Map(citations.map(citation => [citation.id, citation])).values()], controls);
   };
   const publishLens = () => {
     if (!ready || !selected) return;

@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-    "bindingsSha256": "b1af9d03b242cecd77b21643e5a878f06baa2473131ee869479812eeaf3dcbea"
+    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
+    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
   },
   "recipes": [
     {
@@ -23159,6 +23159,7 @@
       "label": "Monochrome",
       "recipe": "raster",
       "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [],
@@ -23564,6 +23565,7 @@
       "label": "False color",
       "recipe": "raster",
       "selector": "/surfaces/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23620,6 +23622,7 @@
       "label": "Elevation",
       "recipe": "raster",
       "selector": "/surfaces/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23674,6 +23677,7 @@
       "label": "Geology",
       "recipe": "raster",
       "selector": "/surfaces/3",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23728,6 +23732,7 @@
       "label": "Infrared",
       "recipe": "raster",
       "selector": "/surfaces/4",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23782,6 +23787,7 @@
       "label": "Ice signature",
       "recipe": "raster",
       "selector": "/surfaces/5",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23836,6 +23842,7 @@
       "label": "Fine ice",
       "recipe": "raster",
       "selector": "/surfaces/6",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23890,6 +23897,7 @@
       "label": "Coarse ice",
       "recipe": "raster",
       "selector": "/surfaces/7",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -23944,6 +23952,7 @@
       "label": "lighting",
       "recipe": "raster",
       "selector": "/lighting",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Evaluate the declared surface-lighting model into phase banks.",
       "limitations": [],
@@ -24360,6 +24369,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -24385,6 +24395,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -24423,6 +24434,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -24433,8 +24445,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 54356,
-          "sha256": "ec6c266ba3757e73177910aa0459d040a62259db42151acd32eb4b0bb813d0d7",
+          "bytes": 51960,
+          "sha256": "5a3bebee06e92fcd71bd72739eafb3029384ac71e403522f93bc3b429fb6c1fa",
           "verification": "bytes-verified"
         }
       ]
@@ -24447,6 +24459,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "enhanced"
@@ -24471,6 +24484,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"
@@ -24495,6 +24509,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "geology"
@@ -24519,6 +24534,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "infrared"
@@ -24543,6 +24559,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "ice-signature"
@@ -24567,6 +24584,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "fine-ice"
@@ -24591,6 +24609,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "coarse-ice"

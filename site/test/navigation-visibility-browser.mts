@@ -55,9 +55,9 @@ try {
     required(releaseStartup)();
     await page.waitForFunction(() => window.__cssEarth?.ready === true);
     await page.evaluate(async () => {
-      const objectsUrl='/site/objects.mts';const { OBJECTS }:typeof import('../objects.mts') = await import(objectsUrl);
+      const objectsUrl='/site/objects.mts';const { SCENE_OBJECTS }:typeof import('../objects.mts') = await import(objectsUrl);
       const navigationUrl='/src/renderers/css/dist/navigation.js';const { presentWorldCamera }:typeof import('../../src/renderers/css/dist/navigation.js') = await import(navigationUrl);
-      const frames = Object.fromEntries(OBJECTS.filter(object => object.worldFrame).map(object => [object.id, object.worldFrame]));
+      const frames = Object.fromEntries(SCENE_OBJECTS.filter(object => object.worldFrame).map(object => [object.id, object.worldFrame]));
       const stage = window.__cssearthTest.html('.planet-stage');
       const proof:VisibilityProof = window.__visibilityProof = { raf:0,frames: [], delayedStarts: 0, poseFrames: 0, poseTransitions: 0, poseGaps: [],
         maximumTranslationErrorPixels: 0, maximumProjectedErrorPixels: 0, maximumOrientationErrorDegrees: 0 };

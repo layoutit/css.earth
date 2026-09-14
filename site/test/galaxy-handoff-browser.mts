@@ -1,5 +1,5 @@
 import { required } from '../../tools/test-values.mts';
-import type { OBJECTS } from '../objects.mts';
+import type { SCENE_OBJECTS } from '../objects.mts';
 import { createTestPage } from './browser-observations.mts';
 import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
@@ -13,7 +13,7 @@ import context from '../../src/objects/sun/prepared/world-context.json' with { t
 const output = process.env.GALAXY_HANDOFF_OUTPUT ?? '.local/galaxy-handoff';
 const parsecKm = 3.085677581491367e13;
 const reported = '/sun/?v=QMJCPggu1DfsP78xu57ddXumwnJb4eAJKY4_1druhMxGfj_U7dzCwKAIP-IyYcFa6EcAAQAAAAAAAAAA';
-declare global { interface Window { __handoffFrame:NonNullable<typeof OBJECTS[number]['worldFrame']>; __handoffNodes:Element[]; } }
+declare global { interface Window { __handoffFrame:NonNullable<typeof SCENE_OBJECTS[number]['worldFrame']>; __handoffNodes:Element[]; } }
 type HandoffSample = Awaited<ReturnType<typeof read>> & {background:Awaited<ReturnType<typeof backgroundSignal>>};
 const samples:HandoffSample[] = [], errors:string[] = [];
 await mkdir(output, { recursive: true });
@@ -27,8 +27,8 @@ try {
   const motion = page.locator('input[name="motion"]');
   if (await motion.isChecked()) await motion.uncheck({ force: true });
   await page.evaluate(async () => {
-    const { OBJECTS } = await import('/site/objects.mts');
-    window.__handoffFrame = window.__cssearthTest.required(window.__cssearthTest.required(OBJECTS.find(object => object.id === 'sun'), 'Sun object').worldFrame, 'Sun frame');
+    const { SCENE_OBJECTS } = await import('/site/objects.mts');
+    window.__handoffFrame = window.__cssearthTest.required(window.__cssearthTest.required(SCENE_OBJECTS.find(object => object.id === 'sun'), 'Sun object').worldFrame, 'Sun frame');
     window.__handoffNodes = [...window.__cssearthTest.element('.prepared-universe').querySelectorAll('*')];
   });
   await page.waitForTimeout(600);

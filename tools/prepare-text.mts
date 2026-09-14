@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { datasetContributors } from '../site/dataset-context.mts';
 import {
   PREPARED_TEXT_SCHEMA, catalogueTextWarnings, compositionWarnings, parseObjectText, readerTextErrors, readerTextWarnings,
@@ -69,10 +69,10 @@ function outputs(body: BodyText, descriptor: Record<string, unknown>): [string, 
 
 /** Check every object's reader text, then publish all of it or nothing. Warnings are for a reviewer and never block. */
 export async function prepareText({ ids = [] as readonly string[], check = false, projectRoot = root } = {}) {
-  assert.ok(ids.every(id => OBJECTS.some(object => object.id === id)), 'Unregistered text target');
+  assert.ok(ids.every(id => SCENE_OBJECTS.some(object => object.id === id)), 'Unregistered text target');
   const sourceCatalog = await readSourceCatalog(projectRoot);
   const catalogue = new Set(sourceCatalog.records.map(record => record.id));
-  const bodies = await Promise.all(OBJECTS.map(object => readBody(projectRoot, object, catalogue)));
+  const bodies = await Promise.all(SCENE_OBJECTS.map(object => readBody(projectRoot, object, catalogue)));
   const errors = bodies.flatMap(body => readerTextErrors(body.text, body.context));
   if (errors.length) throw new Error(`Reader text breaks the text contract:\n${describe(errors)}`);
   const warnings = [...bodies.flatMap(body => readerTextWarnings(body.text, body.context)),
