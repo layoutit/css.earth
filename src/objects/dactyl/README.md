@@ -58,8 +58,16 @@ camera disagrees with the mapped terrain across six additional regions.
 Figure 9B's separate wireframe still has no numerical line labels. Picking,
 paper alignment and model correspondence remain material at approximately
 39 m per native pixel.
-The public scene retains its missing-imagery grid; PR #199 stays open for the
-finished surface rather than asking for an intermediate research merge.
+
+The combined first-photograph investigation on 14 September rechecked the
+supplied paper's Figure 9B and the existing map report. The wireframe remains
+unlabelled numerically; its many visible intersections are not additional
+geographic controls unless their coordinates are independently established.
+The earlier fit and map failures remain tied to their original versions. No
+new controlled source was established, and those expensive fits were not rerun.
+The public scene retains its missing-imagery grid. Merged
+[PR #199](https://github.com/layoutit/css.earth/pull/199) preserves the earlier
+investigation; it did not qualify a photographic surface.
 
 The [whole-body label capture](evidence/surface-labels/whole-body-2c24ca749.jpg), taken at
 `2c24ca749` on 2026-09-12 in the in-app browser at 1280 × 720, shows Acmon and
