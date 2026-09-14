@@ -1,32 +1,24 @@
-/** Minimal primary-HDU FITS transport for the offline getsf benchmark, never a science calibration. */
+/** Offline FITS transport; top-down conversion belongs here, not in the shared decoder. */
+import { readFitsImage } from '../../../../tools/fits.mts';
 export type FitsValue = string | number | boolean;
-
-function decodeValue(literal: string): FitsValue {
-  if (literal.startsWith("'")) {
-    let value = '';
-    for (let p = 1; p < literal.length; p++) {
-      if (literal[p] !== "'") { value += literal[p]; continue; }
-      if (literal[p + 1] === "'") { value += "'"; p++; continue; }
-      return value.trimEnd();
-    }
-    throw new TypeError('Unterminated FITS string.');
-  }
-  const value = literal.split('/')[0]!.trim();
-  return value === 'T' ? true : value === 'F' ? false : Number(value.replace('D', 'E'));
-}
 
 export function encodeFits(values: Float32Array, width: number, height: number,
   metadata: Record<string, FitsValue>): Buffer {
   if (!Number.isInteger(width) || !Number.isInteger(height) || width < 1 || height < 1 || values.length !== width * height)
     throw new TypeError('Invalid FITS dimensions.');
+  for (const key of Object.keys(metadata)) {
+    if (/^(?:SIMPLE|BITPIX|NAXIS\d*|BZERO|BSCALE|BLANK|XTENSION|PCOUNT|GCOUNT|END|GROUPS|ZIMAGE|CONTINUE|HIERARCH)$/u.test(key))
+      throw new TypeError('FITS metadata cannot override the transport layout.');
+  }
   const header: Record<string, FitsValue> = { SIMPLE: true, BITPIX: -32, NAXIS: 2,
     NAXIS1: width, NAXIS2: height, BZERO: 0, BSCALE: 1, ...metadata };
   const cards = Object.entries(header).map(([key, value]) => {
-    if (key.length > 8) throw new TypeError('FITS keyword too long.');
+    if (!/^[A-Z0-9_-]{1,8}$/u.test(key)) throw new TypeError('Invalid FITS keyword.');
+    if (typeof value === 'number' && !Number.isFinite(value)) throw new TypeError('Nonfinite FITS metadata.');
     const literal = typeof value === 'string' ? `'${value.replaceAll("'", "''")}'` :
-      typeof value === 'boolean' ? value ? 'T' : 'F' : String(value);
+      typeof value === 'boolean' ? value ? 'T' : 'F' : String(value).replace('e', 'E');
     const card = `${key.padEnd(8)}= ${literal.padStart(20)}`;
-    if (card.length > 80) throw new TypeError('FITS card too long.');
+    if (card.length > 80 || !/^[\x20-\x7e]+$/u.test(card)) throw new TypeError('Invalid or oversized FITS card.');
     return card.padEnd(80);
   });
   cards.push('END'.padEnd(80));
@@ -42,30 +34,13 @@ export function encodeFits(values: Float32Array, width: number, height: number,
 
 /** Returns DOM/top-down samples; retains signed values and rejects invalid/truncated data. */
 export function decodeFits(bytes: Buffer) {
-  const header: Record<string, FitsValue> = {};
-  let offset = 0, ended = false;
-  for (; offset + 80 <= bytes.length; offset += 80) {
-    const card = bytes.toString('ascii', offset, offset + 80), key = card.slice(0, 8).trim();
-    if (key === 'END') { offset += 80; ended = true; break; }
-    if (card[8] !== '=') continue;
-    const literal = card.slice(10).trim();
-    header[key] = decodeValue(literal);
-  }
-  const width = Number(header.NAXIS1), height = Number(header.NAXIS2), bits = Number(header.BITPIX);
-  if (!ended || header.SIMPLE !== true || header.NAXIS !== 2 || ![16, 32, -32, -64].includes(bits) ||
-    !Number.isSafeInteger(width * height) || width < 1 || height < 1) throw new TypeError('Unsupported FITS image.');
-  offset = Math.ceil(offset / 2880) * 2880;
-  const sampleBytes = Math.abs(bits) / 8;
-  if (bytes.length < offset + width * height * sampleBytes) throw new TypeError('Truncated FITS pixels.');
-  const scale = Number(header.BSCALE ?? 1), zero = Number(header.BZERO ?? 0);
-  const values = new Float32Array(width * height);
+  const { header, width, height, dimensions, values: native } = readFitsImage(bytes);
+  if (header.SIMPLE !== true || header.XTENSION !== undefined || dimensions.length !== 2) throw new TypeError('Unsupported FITS transport image.');
+  const values = new Float32Array(native.length);
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-    const address = offset + (y * width + x) * sampleBytes;
-    const raw = bits === -32 ? bytes.readFloatBE(address) : bits === -64 ? bytes.readDoubleBE(address) :
-      bits === 16 ? bytes.readInt16BE(address) : bytes.readInt32BE(address);
-    const value = raw * scale + zero;
-    if (!Number.isFinite(value)) throw new TypeError('Nonfinite FITS pixel.');
-    values[(height - y - 1) * width + x] = value;
+    const target = (height - y - 1) * width + x;
+    values[target] = native[y * width + x]!;
+    if (!Number.isFinite(values[target])) throw new TypeError('Nonfinite FITS pixel.');
   }
   return { width, height, header, values };
 }

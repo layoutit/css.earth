@@ -116,7 +116,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   const implementation = await Promise.all(owners.map(async name => ({ name, sha256: geometrySha(await readFile(resolve(root, 'labs/nebula/src/reconstruction/compiler', name))) })));
   const extraPaths = (await readdir(resolve(root, 'labs/nebula/src/reconstruction/sampled-prior'))).filter(n => n.endsWith('.ts') && !n.endsWith('.test.ts'))
     .sort().map(n => `labs/nebula/src/reconstruction/sampled-prior/${n}`);
-  extraPaths.push('labs/nebula/src/reconstruction/getsf-fits.ts');
+  extraPaths.push('labs/nebula/src/reconstruction/getsf-fits.ts', 'tools/fits.mts');
   const extraImplementation = await Promise.all(extraPaths.map(async path => ({ path, sha256: geometrySha(await readFile(resolve(root, path))) })));
   const inputPins = [{ path: recipe.sampledRecipe, sha256: geometrySha(sampledBytes) }, sampled.evidence,
     { path: sampled.source.path, sha256: sampled.source.sha256 }];
