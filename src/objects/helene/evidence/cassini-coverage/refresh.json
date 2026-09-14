@@ -1,0 +1,1913 @@
+{
+  "id": "helene",
+  "lensIds": [
+    "normal"
+  ],
+  "seconds": 357.1488355,
+  "maxRssMiB": 1622.640625,
+  "recipeSha256": "569ff34febc884f7b471327d22c595055c845ded66f4cd4ac8f5f756929b95ff",
+  "retainedSceneSha256": "bc7dc2c1fc6a7440a9510ec24b02f03039aeee9a02a7089b93cdbc348392a427",
+  "refreshedRuntimeAssets": [
+    {
+      "filename": "helene-normal-surface@2x.webp",
+      "bytes": 558168,
+      "sha256": "61e396cc63b6554942eda3dea247ac0c1d1c78847209e29c19813694d0dcd100"
+    },
+    {
+      "filename": "helene-normal-shadow@2x.webp",
+      "bytes": 246904,
+      "sha256": "9fc269214770d063dd158fcdf7d0600c9bc97db4e7af02861d48fca980e06b77"
+    },
+    {
+      "filename": "helene-normal-thumbnail.webp",
+      "bytes": 1956,
+      "sha256": "1c767b83348e9aa8839a0f2346ff2c4beb1f05604fad79966a00b3ee79270bf1"
+    }
+  ],
+  "retainedRuntimeAssetCount": 35,
+  "provenanceBasis": "recovered",
+  "observations": [
+    {
+      "schema": "cssearth-surface-observation-report@1",
+      "format": "controlled-shape-camera",
+      "camera": {
+        "kind": "control-network",
+        "positionKm": [
+          28308.302414664027,
+          26611.17209583916,
+          -1757.4853983910295
+        ]
+      },
+      "frames": [
+        {
+          "id": "n1563643679_1",
+          "startTime": "2007-201T16:53:26.772",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": -2.59,
+            "observerWestLongitude": 316.77,
+            "sunLatitude": -11.26,
+            "sunWestLongitude": 21.05,
+            "rangeKm": 38892.2,
+            "northAzimuthDegrees": 349.66,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              548.9,
+              376.9
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              460,
+              311,
+              639,
+              456
+            ],
+            "geometryPixels": 18227,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 1030548,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 9850,
+              "onSkyPixels": 0,
+              "share": 0,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 18227,
+            "acceptedPixels": 8327,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "background": 5295,
+              "photometry": 4605
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.98967133599461,
+            "nadirMedianMeters": 232.869786525402,
+            "nadirMinimumMeters": 232.82654577147687,
+            "sampledPixels": 188
+          }
+        },
+        {
+          "id": "n1606207298_1",
+          "startTime": "2008-329T08:02:10.407",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": 25.83,
+            "observerWestLongitude": 348.02,
+            "sunLatitude": -3.89,
+            "sunWestLongitude": 337.66,
+            "rangeKm": 69065.2,
+            "northAzimuthDegrees": 289.49,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              910.1,
+              825.5
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              863,
+              773,
+              956,
+              877
+            ],
+            "geometryPixels": 6272,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 1038165,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 4531,
+              "onSkyPixels": 16,
+              "share": 0.0035312293092032666,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 6272,
+            "acceptedPixels": 3933,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "photometry": 2270,
+              "background": 69
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.989638677215763,
+            "nadirMedianMeters": 413.59650538967094,
+            "nadirMinimumMeters": 413.54947322729436,
+            "sampledPixels": 65
+          }
+        },
+        {
+          "id": "n1646319036_1",
+          "startTime": "2010-062T14:06:22.433",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": -5.3,
+            "observerWestLongitude": 180.21,
+            "sunLatitude": 3.05,
+            "sunWestLongitude": 205.61,
+            "rangeKm": 14169.1,
+            "northAzimuthDegrees": 224.43,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              907.3,
+              922.3
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              683,
+              683,
+              1023,
+              1023
+            ],
+            "geometryPixels": 96038,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 0,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 72408,
+              "onSkyPixels": 0,
+              "share": 0,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 96038,
+            "acceptedPixels": 69918,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "photometry": 26120
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.989627181454574,
+            "nadirMedianMeters": 84.77744192560912,
+            "nadirMinimumMeters": 84.74671266075818,
+            "sampledPixels": 991
+          }
+        },
+        {
+          "id": "n1646319549_1",
+          "startTime": "2010-062T14:14:55.394",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": -3.98,
+            "observerWestLongitude": 182.32,
+            "sunLatitude": 3.04,
+            "sunWestLongitude": 206.38,
+            "rangeKm": 18821.5,
+            "northAzimuthDegrees": 224.32,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              817.6,
+              840.5
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              648,
+              660,
+              976,
+              1009
+            ],
+            "geometryPixels": 76309,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 0,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 63367,
+              "onSkyPixels": 0,
+              "share": 0,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 76309,
+            "acceptedPixels": 60614,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "photometry": 15695
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.9896474883104025,
+            "nadirMedianMeters": 112.65044589913448,
+            "nadirMinimumMeters": 112.61346124327082,
+            "sampledPixels": 787
+          }
+        },
+        {
+          "id": "n1687121104_1",
+          "startTime": "2011-169T19:56:14.702",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": 1.24,
+            "observerWestLongitude": 88.04,
+            "sunLatitude": 9.76,
+            "sunWestLongitude": 30.12,
+            "rangeKm": 9763.5,
+            "northAzimuthDegrees": 179.71,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              489.6,
+              654.9
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              135,
+              363,
+              845,
+              906
+            ],
+            "geometryPixels": 296091,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 531882,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 190353,
+              "onSkyPixels": 0,
+              "share": 0,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 296091,
+            "acceptedPixels": 146738,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "photometry": 132178,
+              "background": 17173,
+              "invalid-value": 2
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.989671282079008,
+            "nadirMedianMeters": 58.39870518208788,
+            "nadirMinimumMeters": 58.362256945314755,
+            "sampledPixels": 3053
+          }
+        },
+        {
+          "id": "n1687121284_1",
+          "startTime": "2011-169T19:59:14.701",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": 1.07,
+            "observerWestLongitude": 85.03,
+            "sunLatitude": 9.75,
+            "sunWestLongitude": 30.39,
+            "rangeKm": 10364.3,
+            "northAzimuthDegrees": 179.71,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              490.6,
+              473.3
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              153,
+              198,
+              827,
+              711
+            ],
+            "geometryPixels": 264638,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 529423,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 177570,
+              "onSkyPixels": 0,
+              "share": 0,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 264638,
+            "acceptedPixels": 138903,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "photometry": 117268,
+              "background": 8467
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.98967269744914,
+            "nadirMedianMeters": 61.998399187979466,
+            "nadirMinimumMeters": 61.960075125358244,
+            "sampledPixels": 2729
+          }
+        },
+        {
+          "id": "n1687121464_1",
+          "startTime": "2011-169T20:02:14.699",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": 0.93,
+            "observerWestLongitude": 82.39,
+            "sunLatitude": 9.76,
+            "sunWestLongitude": 30.67,
+            "rangeKm": 10995.3,
+            "northAzimuthDegrees": 179.72,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              496.3,
+              292.9
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              175,
+              34,
+              815,
+              517
+            ],
+            "geometryPixels": 236306,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 591558,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 164410,
+              "onSkyPixels": 0,
+              "share": 0,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 236306,
+            "acceptedPixels": 130739,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "photometry": 99601,
+              "background": 5966
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.989669591499736,
+            "nadirMedianMeters": 65.77883275644432,
+            "nadirMinimumMeters": 65.7389747306997,
+            "sampledPixels": 2437
+          }
+        },
+        {
+          "id": "n1687119135_1",
+          "startTime": "2011-169T19:23:25.731",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": 3.02,
+            "observerWestLongitude": 147.73,
+            "sunLatitude": 9.75,
+            "sunWestLongitude": 27.12,
+            "rangeKm": 7331.3,
+            "northAzimuthDegrees": 179.77,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              530.3,
+              598.9
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              67,
+              211,
+              1017,
+              932
+            ],
+            "geometryPixels": 518335,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 852219,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 76964,
+              "onSkyPixels": 36,
+              "share": 0.0004677511563848033,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 518335,
+            "acceptedPixels": 49716,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "background": 340025,
+              "photometry": 128594
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.989672217979328,
+            "nadirMedianMeters": 43.83186350630673,
+            "nadirMinimumMeters": 43.78920402454492,
+            "sampledPixels": 5344
+          }
+        },
+        {
+          "id": "n1687121164_1",
+          "startTime": "2011-169T19:57:14.701",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": 1.18,
+            "observerWestLongitude": 87,
+            "sunLatitude": 9.76,
+            "sunWestLongitude": 30.22,
+            "rangeKm": 9960.1,
+            "northAzimuthDegrees": 179.71,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              489.7,
+              593.6
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              141,
+              307,
+              839,
+              840
+            ],
+            "geometryPixels": 285277,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 520119,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 186260,
+              "onSkyPixels": 0,
+              "share": 0,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 285277,
+            "acceptedPixels": 144191,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "photometry": 127508,
+              "background": 13578
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.989672385285067,
+            "nadirMedianMeters": 59.57665662204573,
+            "nadirMinimumMeters": 59.53953655188792,
+            "sampledPixels": 2941
+          }
+        },
+        {
+          "id": "n1687121224_1",
+          "startTime": "2011-169T19:58:14.701",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": 1.13,
+            "observerWestLongitude": 85.99,
+            "sunLatitude": 9.76,
+            "sunWestLongitude": 30.3,
+            "rangeKm": 10160.4,
+            "northAzimuthDegrees": 179.71,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              489,
+              533.9
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              145,
+              253,
+              832,
+              776
+            ],
+            "geometryPixels": 274794,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 525553,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 181936,
+              "onSkyPixels": 0,
+              "share": 0,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 274794,
+            "acceptedPixels": 141572,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "photometry": 122480,
+              "background": 10742
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.989672808229316,
+            "nadirMedianMeters": 60.77661146057517,
+            "nadirMinimumMeters": 60.73942618966164,
+            "sampledPixels": 2833
+          }
+        },
+        {
+          "id": "n1687121524_1",
+          "startTime": "2011-169T20:03:14.699",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": 0.88,
+            "observerWestLongitude": 81.58,
+            "sunLatitude": 9.75,
+            "sunWestLongitude": 30.76,
+            "rangeKm": 11211.4,
+            "northAzimuthDegrees": 179.71,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              498.3,
+              232.1
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              183,
+              0,
+              811,
+              452
+            ],
+            "geometryPixels": 225558,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 638489,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 158990,
+              "onSkyPixels": 0,
+              "share": 0,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 225558,
+            "acceptedPixels": 126946,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "photometry": 92459,
+              "background": 6153
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.989666596463371,
+            "nadirMedianMeters": 67.07318986670921,
+            "nadirMinimumMeters": 67.0330763524012,
+            "sampledPixels": 2326
+          }
+        },
+        {
+          "id": "n1675163339_1",
+          "startTime": "2011-031T10:21:25.307",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": -4.27,
+            "observerWestLongitude": 86.81,
+            "sunLatitude": 7.84,
+            "sunWestLongitude": 174.04,
+            "rangeKm": 27742.9,
+            "northAzimuthDegrees": 232.3,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              591.4,
+              655.6
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              476,
+              542,
+              698,
+              779
+            ],
+            "geometryPixels": 37028,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 1007623,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 18707,
+              "onSkyPixels": 11,
+              "share": 0.0005880151814828674,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 37028,
+            "acceptedPixels": 15337,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "photometry": 19899,
+              "background": 1792
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.989671083260942,
+            "nadirMedianMeters": 166.0931843135793,
+            "nadirMinimumMeters": 166.05354567263933,
+            "sampledPixels": 382
+          }
+        },
+        {
+          "id": "n1519536732_1",
+          "startTime": "2006-056T05:02:20.137",
+          "filter": "CL1+CL2",
+          "camera": {
+            "kind": "control-network",
+            "observerLatitude": -0.41,
+            "observerWestLongitude": 95.93,
+            "sunLatitude": -18.36,
+            "sunWestLongitude": 193.82,
+            "rangeKm": 67839.7,
+            "northAzimuthDegrees": 359.77,
+            "pixelAngleMicroradians": 5.989697719921734,
+            "center": [
+              606.6,
+              522.5
+            ]
+          },
+          "geometry": {
+            "source": "source-mesh-rays",
+            "projectedBounds": [
+              555,
+              484,
+              659,
+              566
+            ],
+            "geometryPixels": 5993,
+            "unconstrainedPixels": 0,
+            "normals": "interpolated welded vertex normals"
+          },
+          "quality": {
+            "encoding": "calibrated",
+            "sampleFormat": "REAL",
+            "rasterOffset": 8192,
+            "background": {
+              "offset": 0,
+              "maximum": 0.003
+            },
+            "coverageInsetPixels": 0,
+            "withheldPixels": {
+              "quality": 0,
+              "background": 1044091,
+              "coverageInset": 0
+            },
+            "silhouette": {
+              "litPixels": 1795,
+              "onSkyPixels": 0,
+              "share": 0,
+              "maximumShare": 0.25
+            }
+          },
+          "pixels": {
+            "geometryPixels": 5993,
+            "acceptedPixels": 1284,
+            "acceptedLossyPixels": 0,
+            "rejectedPixels": {
+              "photometry": 2088,
+              "background": 2621
+            }
+          },
+          "footprint": {
+            "pixelAngleMicroradians": 5.989671919974122,
+            "nadirMedianMeters": 406.24512516053596,
+            "nadirMinimumMeters": 406.23187871913154,
+            "sampledPixels": 62
+          }
+        }
+      ],
+      "limits": {
+        "maximumSeparationFootprints": 2,
+        "visibilityToleranceMeters": 0.5,
+        "maximumEmissionDegrees": 78,
+        "derived": {
+          "maximumSeparationMeters": 8127.32089225937,
+          "coarsestNadirFootprintMeters": 413.59650538967094,
+          "emissionStretch": 4.91259040293522,
+          "separationFootprints": 4,
+          "shapeAllowanceMeters": 0,
+          "rule": "A fixed contributor separation may not exceed four diagonal pixel footprints of the coarsest frame at the emission limit, plus the mesh error when the backplanes come from the archive's own shape model. A per-sample separation scales with each footprint's own range and emission. Every displayed point samples its closest source point."
+        }
+      },
+      "photometry": {
+        "model": "lunar-lambert",
+        "weight": 0.5,
+        "referenceIncidenceDegrees": 0,
+        "referenceEmissionDegrees": 0,
+        "maximumIncidenceDegrees": 80,
+        "maximumEmissionDegrees": 78,
+        "maximumGain": 2.5,
+        "formula": "D=(1-w)*cos(i)+2*w*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; D(0,0)=1.",
+        "applicationLighting": "Uniform flood displays the normalized observation; Shadows applies the existing fixed-epoch Sun bank.",
+        "limitations": "No phase correction, Hapke roughness correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+      },
+      "selection": "finest-resolution",
+      "levelMatching": {
+        "samplesPerTriangle": 64,
+        "minimumPairs": 64,
+        "maximumGain": 2.5,
+        "maximumAngleDegrees": 70,
+        "gains": [
+          1,
+          0.705469051881692,
+          1,
+          0.9856070395101094,
+          0.9313926011775147,
+          0.8967887927267967,
+          0.8661286734522315,
+          1.9958104601277908,
+          0.9185399959345668,
+          0.9067958646282352,
+          0.8568054652370252,
+          2.0925679794331873,
+          2.4975613399969085
+        ],
+        "pairs": [
+          {
+            "a": 0,
+            "b": 1,
+            "samples": 4724,
+            "medianLogRatio": -0.32167313249084417,
+            "logMad": 0.0919175672856575,
+            "levelError": 0.002485006399647478,
+            "accepted": true,
+            "residualLogRatio": 0.02721924308946222
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 0,
+            "b": 4,
+            "samples": 419,
+            "medianLogRatio": -0.08772073761209735,
+            "logMad": 0.04416040799345198,
+            "levelError": 0.004008759479932189,
+            "accepted": true,
+            "residualLogRatio": -0.01664634538193832
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "samples": 663,
+            "medianLogRatio": -0.1107605225721199,
+            "logMad": 0.04321219831072935,
+            "levelError": 0.003118412270044626,
+            "accepted": true,
+            "residualLogRatio": -0.0018256183104304463
+          },
+          {
+            "a": 0,
+            "b": 6,
+            "samples": 844,
+            "medianLogRatio": -0.13947022934182324,
+            "logMad": 0.04305262688930114,
+            "levelError": 0.002753673000611371,
+            "accepted": true,
+            "residualLogRatio": 0.004251568452252941
+          },
+          {
+            "a": 0,
+            "b": 7,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 0,
+            "b": 8,
+            "samples": 512,
+            "medianLogRatio": -0.0958703410065841,
+            "logMad": 0.042831366855097044,
+            "levelError": 0.003517311952352344,
+            "accepted": true,
+            "residualLogRatio": -0.01090051057051887
+          },
+          {
+            "a": 0,
+            "b": 9,
+            "samples": 587,
+            "medianLogRatio": -0.10449144128003045,
+            "logMad": 0.042268331987949936,
+            "levelError": 0.003241753538141782,
+            "accepted": true,
+            "residualLogRatio": -0.006653520519716585
+          },
+          {
+            "a": 0,
+            "b": 10,
+            "samples": 892,
+            "medianLogRatio": -0.14778494074108464,
+            "logMad": 0.04360817588216874,
+            "levelError": 0.0027131226545912155,
+            "accepted": true,
+            "residualLogRatio": 0.00675944046652982
+          },
+          {
+            "a": 0,
+            "b": 11,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 0,
+            "b": 12,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 1,
+            "b": 2,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 1,
+            "b": 4,
+            "samples": 2314,
+            "medianLogRatio": 0.28093545035239287,
+            "logMad": 0.04429624744962091,
+            "levelError": 0.0017110755814636273,
+            "accepted": true,
+            "residualLogRatio": 0.003117467002245508
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "samples": 2589,
+            "medianLogRatio": 0.24101276061922347,
+            "logMad": 0.04198802155306583,
+            "levelError": 0.0015333571426134355,
+            "accepted": true,
+            "residualLogRatio": 0.0010552893006065267
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "samples": 2761,
+            "medianLogRatio": 0.20493911228589756,
+            "logMad": 0.04093150811107868,
+            "levelError": 0.0014474663538117834,
+            "accepted": true,
+            "residualLogRatio": -0.00023146550033265045
+          },
+          {
+            "a": 1,
+            "b": 7,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 1,
+            "b": 8,
+            "samples": 2425,
+            "medianLogRatio": 0.26530490139286617,
+            "logMad": 0.043494823903415414,
+            "levelError": 0.001641215612649223,
+            "accepted": true,
+            "residualLogRatio": 0.0013823562486250107
+          },
+          {
+            "a": 1,
+            "b": 9,
+            "samples": 2511,
+            "medianLogRatio": 0.25327115966321917,
+            "logMad": 0.0416093992986416,
+            "levelError": 0.001542950608357338,
+            "accepted": true,
+            "residualLogRatio": 0.002216704843226641
+          },
+          {
+            "a": 1,
+            "b": 10,
+            "samples": 2807,
+            "medianLogRatio": 0.1948617794205009,
+            "logMad": 0.041645836778302,
+            "levelError": 0.0014606101713814286,
+            "accepted": true,
+            "residualLogRatio": 0.0005137850478089678
+          },
+          {
+            "a": 1,
+            "b": 11,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 1,
+            "b": 12,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 2,
+            "b": 3,
+            "samples": 7687,
+            "medianLogRatio": -0.013236319203373596,
+            "logMad": 0.008004046012066822,
+            "levelError": 0.00016963484657206177,
+            "accepted": true,
+            "residualLogRatio": 0.0012612246649199264
+          },
+          {
+            "a": 2,
+            "b": 4,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 2,
+            "b": 7,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 2,
+            "b": 8,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 2,
+            "b": 9,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 2,
+            "b": 10,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 2,
+            "b": 11,
+            "samples": 938,
+            "medianLogRatio": 0.7358345660777156,
+            "logMad": 0.07344474711545224,
+            "levelError": 0.004455980225884127,
+            "accepted": true,
+            "residualLogRatio": -0.0025574439603995858
+          },
+          {
+            "a": 2,
+            "b": 12,
+            "samples": 1582,
+            "medianLogRatio": 0.9144847650056935,
+            "logMad": 0.11784413677529848,
+            "levelError": 0.005505397409849778,
+            "accepted": true,
+            "residualLogRatio": -0.0008300267925951399
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 3,
+            "b": 6,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 3,
+            "b": 7,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 3,
+            "b": 8,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 3,
+            "b": 9,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 3,
+            "b": 10,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 3,
+            "b": 11,
+            "samples": 837,
+            "medianLogRatio": 0.7553376304404925,
+            "logMad": 0.07034959773923244,
+            "levelError": 0.00451838073952677,
+            "accepted": true,
+            "residualLogRatio": 0.002448076534083854
+          },
+          {
+            "a": 3,
+            "b": 12,
+            "samples": 1495,
+            "medianLogRatio": 0.9310669480782665,
+            "logMad": 0.1177650163035815,
+            "levelError": 0.005659520462765452,
+            "accepted": true,
+            "residualLogRatio": 0.0012546124116843416
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "samples": 8235,
+            "medianLogRatio": -0.03921184371689969,
+            "logMad": 0.008597770748584685,
+            "levelError": 0.00017605079615921827,
+            "accepted": true,
+            "residualLogRatio": -0.0013513316853692725
+          },
+          {
+            "a": 4,
+            "b": 6,
+            "samples": 8234,
+            "medianLogRatio": -0.07356385826306049,
+            "logMad": 0.012608178343783222,
+            "levelError": 0.00025818490441494057,
+            "accepted": true,
+            "residualLogRatio": -0.0009164526991433386
+          },
+          {
+            "a": 4,
+            "b": 7,
+            "samples": 1135,
+            "medianLogRatio": 0.7629512998727855,
+            "logMad": 0.07844794326673432,
+            "levelError": 0.004326807415562874,
+            "accepted": true,
+            "residualLogRatio": 0.0008266941181430676
+          },
+          {
+            "a": 4,
+            "b": 8,
+            "samples": 8218,
+            "medianLogRatio": -0.014233309682837713,
+            "logMad": 0.0062667098556547784,
+            "levelError": 0.00012845187661600962,
+            "accepted": true,
+            "residualLogRatio": -0.00033787147693151165
+          },
+          {
+            "a": 4,
+            "b": 9,
+            "samples": 8229,
+            "medianLogRatio": -0.027026076967078712,
+            "logMad": 0.008887516968181776,
+            "levelError": 0.0001820500682304139,
+            "accepted": true,
+            "residualLogRatio": -0.0002625484369238873
+          },
+          {
+            "a": 4,
+            "b": 10,
+            "samples": 8213,
+            "medianLogRatio": -0.08479496812652625,
+            "logMad": 0.012994577235700216,
+            "levelError": 0.00026643739427567223,
+            "accepted": true,
+            "residualLogRatio": -0.0013249791490708152
+          },
+          {
+            "a": 4,
+            "b": 11,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 4,
+            "b": 12,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 5,
+            "b": 6,
+            "samples": 8819,
+            "medianLogRatio": -0.03567822380371604,
+            "logMad": 0.008574960931678824,
+            "levelError": 0.00016967052866498795,
+            "accepted": true,
+            "residualLogRatio": -0.0008913302713293159
+          },
+          {
+            "a": 5,
+            "b": 7,
+            "samples": 1135,
+            "medianLogRatio": 0.7973057219214151,
+            "logMad": 0.08392961175998448,
+            "levelError": 0.004629149617264799,
+            "accepted": true,
+            "residualLogRatio": -0.0026793958647578497
+          },
+          {
+            "a": 5,
+            "b": 8,
+            "samples": 8437,
+            "medianLogRatio": 0.025031713928352683,
+            "logMad": 0.007035342923009138,
+            "levelError": 0.00014232302989414925,
+            "accepted": true,
+            "residualLogRatio": 0.0010666401027284722
+          },
+          {
+            "a": 5,
+            "b": 9,
+            "samples": 8630,
+            "medianLogRatio": 0.011584059006614501,
+            "logMad": 0.007041391341797778,
+            "levelError": 0.00014084356793967666,
+            "accepted": true,
+            "residualLogRatio": 0.00048707550523890975
+          },
+          {
+            "a": 5,
+            "b": 10,
+            "samples": 8779,
+            "medianLogRatio": -0.04682736417387953,
+            "logMad": 0.00880101230078538,
+            "levelError": 0.00017453962469009087,
+            "accepted": true,
+            "residualLogRatio": -0.0012178872279545172
+          },
+          {
+            "a": 5,
+            "b": 11,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 5,
+            "b": 12,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "samples": 1135,
+            "medianLogRatio": 0.8358903299034903,
+            "logMad": 0.08632189744114438,
+            "levelError": 0.004761096472648793,
+            "accepted": true,
+            "residualLogRatio": 0.001118318584930722
+          },
+          {
+            "a": 6,
+            "b": 8,
+            "samples": 8438,
+            "medianLogRatio": 0.05960814688853162,
+            "logMad": 0.011178802140275078,
+            "levelError": 0.0002261306562955476,
+            "accepted": true,
+            "residualLogRatio": 0.0008561795305206676
+          },
+          {
+            "a": 6,
+            "b": 9,
+            "samples": 8636,
+            "medianLogRatio": 0.04675523008611402,
+            "logMad": 0.008958267969538858,
+            "levelError": 0.0001791231289114345,
+            "accepted": true,
+            "residualLogRatio": 0.0008713530523516977
+          },
+          {
+            "a": 6,
+            "b": 10,
+            "samples": 9093,
+            "medianLogRatio": -0.011376241354678207,
+            "logMad": 0.005931976294827132,
+            "levelError": 0.00011559252368252543,
+            "accepted": true,
+            "residualLogRatio": -0.0005536579411399289
+          },
+          {
+            "a": 6,
+            "b": 11,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 6,
+            "b": 12,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 7,
+            "b": 8,
+            "samples": 1135,
+            "medianLogRatio": -0.7740785181243494,
+            "logMad": 0.08251773897900683,
+            "levelError": 0.004551277574172549,
+            "accepted": true,
+            "residualLogRatio": 0.0019415258361993593
+          },
+          {
+            "a": 7,
+            "b": 9,
+            "samples": 1135,
+            "medianLogRatio": -0.7897703015108031,
+            "logMad": 0.0837754724258637,
+            "levelError": 0.004620648040472198,
+            "accepted": true,
+            "residualLogRatio": -0.0008821672260057312
+          },
+          {
+            "a": 7,
+            "b": 10,
+            "samples": 1135,
+            "medianLogRatio": -0.8476130511248433,
+            "logMad": 0.08890015339402646,
+            "levelError": 0.004903300544694615,
+            "accepted": true,
+            "residualLogRatio": -0.002018456392745366
+          },
+          {
+            "a": 7,
+            "b": 11,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 7,
+            "b": 12,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 8,
+            "b": 9,
+            "samples": 8428,
+            "medianLogRatio": -0.013297093083823718,
+            "logMad": 0.008394410153609526,
+            "levelError": 0.00016990722857605778,
+            "accepted": true,
+            "residualLogRatio": -0.00042900275957509504
+          },
+          {
+            "a": 8,
+            "b": 10,
+            "samples": 8419,
+            "medianLogRatio": -0.07104647079335691,
+            "logMad": 0.011405317968394363,
+            "levelError": 0.00023097292648341922,
+            "accepted": true,
+            "residualLogRatio": -0.0014719200218076822
+          },
+          {
+            "a": 8,
+            "b": 11,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 8,
+            "b": 12,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 9,
+            "b": 10,
+            "samples": 8612,
+            "medianLogRatio": -0.05804273166977708,
+            "logMad": 0.00986215059212639,
+            "levelError": 0.0001974711036982876,
+            "accepted": true,
+            "residualLogRatio": -0.0013362712224764817
+          },
+          {
+            "a": 9,
+            "b": 11,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 9,
+            "b": 12,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 10,
+            "b": 11,
+            "samples": 1,
+            "medianLogRatio": 0.4570301003235258,
+            "logMad": 0,
+            "levelError": 0,
+            "accepted": false
+          },
+          {
+            "a": 10,
+            "b": 12,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          },
+          {
+            "a": 11,
+            "b": 12,
+            "samples": 2225,
+            "medianLogRatio": 0.17664312329297807,
+            "logMad": 0.09545057699551449,
+            "levelError": 0.0037600834591627334,
+            "accepted": true,
+            "residualLogRatio": -0.00027965846719546494
+          }
+        ],
+        "referenceIndex": 0,
+        "groups": [
+          [
+            0,
+            1,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          [
+            2,
+            3,
+            11,
+            12
+          ]
+        ],
+        "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo.",
+        "sampledPoints": 51200
+      },
+      "display": {
+        "range": "authored",
+        "low": 0,
+        "high": 1.26,
+        "units": "relative disk-normalized I/F; linear grayscale display"
+      },
+      "areaCoverage": {
+        "method": "Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed",
+        "samplesPerTriangle": 64,
+        "totalSquareMeters": 4372681282.362758,
+        "acceptedSquareMeters": 3252164220.9861197,
+        "sourceSquareMeters": {
+          "n1646319549_1": 489934077.72652715,
+          "n1646319036_1": 646338038.4016311,
+          "n1563643679_1": 403753479.9785882,
+          "n1687121224_1": 12966030.852612652,
+          "n1687121524_1": 14783390.76830378,
+          "n1687121104_1": 689282563.8576851,
+          "n1687121164_1": 15038132.954706412,
+          "n1687121464_1": 45052519.51715803,
+          "n1687121284_1": 13069067.549130825,
+          "n1519536732_1": 18214500.81391371,
+          "n1675163339_1": 373810180.23009783,
+          "n1606207298_1": 316369101.671715,
+          "n1687119135_1": 213553136.6639603
+        },
+        "acceptedFraction": 0.7437460018190094
+      },
+      "sourceIds": [
+        {
+          "id": "n1563643679_1",
+          "sha256": "802f813ebd2ffc23c00c17c190ae612c8a44dafc050238fe551723e16cfade28"
+        },
+        {
+          "id": "n1563643679_1-label",
+          "sha256": "fe41d6fdd1b19f401506c677b52792f8396b652fac5f8fa4c96e78bcfcc8cd25"
+        },
+        {
+          "id": "n1606207298_1",
+          "sha256": "8f9ffdce053d9bf1cac251ce6f7553981367018a1b571fdfdf16e2f4d003bc2f"
+        },
+        {
+          "id": "n1606207298_1-label",
+          "sha256": "70c5b2dd9d702bf4758800618e0ceff93ff524fbe34d7c7afeb1b3e36afcb469"
+        },
+        {
+          "id": "n1646319036_1",
+          "sha256": "b58614e6a6536399060e4b31d3f4ae810fb3d70dbbf6ba36ed1c5b185f95d88e"
+        },
+        {
+          "id": "n1646319036_1-label",
+          "sha256": "2ce2dbfc5d8de33d1fece236ef52e89aa109806c15eba9af9f87fc4b41e9409c"
+        },
+        {
+          "id": "n1646319549_1",
+          "sha256": "17bf747832227e31841ff470940cd434099a2d3feaffbf30d8656479453bd75a"
+        },
+        {
+          "id": "n1646319549_1-label",
+          "sha256": "fcace31b5dc0e74252d3270a9a55ac92b1d19c250faef12a2ffa0f9de40073b9"
+        },
+        {
+          "id": "n1687121104_1",
+          "sha256": "7e1651efb458df0b1a08135d5687c91d8e2bbbf8dfceae8b3f1b08752a4d8799"
+        },
+        {
+          "id": "n1687121104_1-label",
+          "sha256": "6cf0c3be2318c02e0b4ae0db3b04a59c0389712acdc2281349df95e5168b3847"
+        },
+        {
+          "id": "n1687121284_1",
+          "sha256": "c71ee0f95592a6fbcfbaa8b43e4245b4c73d242d3ee2a4d1b5d42d48de43f622"
+        },
+        {
+          "id": "n1687121284_1-label",
+          "sha256": "b3a1fc45517e2f83d9a9f7139fbd8175f11d9268017cd49714457f0934a94477"
+        },
+        {
+          "id": "n1687121464_1",
+          "sha256": "8dd9ca94f4d874f6dde75a28ed386ce59182b2cceeaa033d22bc342887cdc743"
+        },
+        {
+          "id": "n1687121464_1-label",
+          "sha256": "fc0d3188e36d5b8865524aa852d632e2064c2da3ad527d01b1a84b0f904639b9"
+        },
+        {
+          "id": "n1687119135_1",
+          "sha256": "43d75167dae48f4d5d311337b3022c865b4abc9bb9ddb1c2dfe2536f5efd0583"
+        },
+        {
+          "id": "n1687119135_1-label",
+          "sha256": "b7835a68cdb0dd5d700d808a031094467176d302cc78935afdb8dbdec8e54a98"
+        },
+        {
+          "id": "n1687121164_1",
+          "sha256": "8109ea5c5d2114a6dad90f63327648ad39dd7846cd8cacbbf59741240630456b"
+        },
+        {
+          "id": "n1687121164_1-label",
+          "sha256": "a9d1a44c0a7ced41debbc80e7006b09e92bd9b9ec354e69d3d05f710dfdb16db"
+        },
+        {
+          "id": "n1687121224_1",
+          "sha256": "b1520fd7b2897e41bebc75b05a8a15e7ae109ee144b76be4a1875a26b73dad86"
+        },
+        {
+          "id": "n1687121224_1-label",
+          "sha256": "b45ec092737cff44e9184a1db66519e876411658da060c5433741c2e47f87768"
+        },
+        {
+          "id": "n1687121524_1",
+          "sha256": "02ec07c25d59e6c0e8b8a088a2782ab80f604f735587feedc157f5ff1ff611ee"
+        },
+        {
+          "id": "n1687121524_1-label",
+          "sha256": "7ff6916d3d9955aa69c43109f99bc57dcd0fc67d202680ecd63f854b64fec6fb"
+        },
+        {
+          "id": "n1675163339_1",
+          "sha256": "024520817034626e180fe90348268b054a8e93cc29a4ae7403a67a6c811c23e0"
+        },
+        {
+          "id": "n1675163339_1-label",
+          "sha256": "581a5fbb13304d16c6db620df169df98ee46b64fd461d68175bbe25adf1c88c2"
+        },
+        {
+          "id": "n1519536732_1",
+          "sha256": "dadc09a1bf9c8106d9d7d43ac99363751d158d8414e15d31a50160b80e6eb8ad"
+        },
+        {
+          "id": "n1519536732_1-label",
+          "sha256": "6720ba701e14e714b8fb42feeb390d00e89080b5e1333f83bb971089c13bc8ed"
+        }
+      ],
+      "previewPolicy": "The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D.",
+      "transfer": {
+        "interiorTexels": 5671201,
+        "counts": {
+          "no-qualified-observation": 1139929,
+          "accepted": 4531272
+        },
+        "maximumSourceDistanceMeters": 387.91801642077877,
+        "maximumPixelSeparationMeters": 2575.500254714662,
+        "maximumPhotometricGain": 2.4999972787331832,
+        "method": "Closest full-source triangle point; all bilinear observation contributors checked before interpolation; atlas bleed clamped to retained face.",
+        "sources": {
+          "n1646319549_1": 788001,
+          "n1646319036_1": 1033833,
+          "n1563643679_1": 654609,
+          "n1519536732_1": 25446,
+          "n1687121104_1": 882833,
+          "n1687121164_1": 14906,
+          "n1687121224_1": 13412,
+          "n1687121284_1": 13757,
+          "n1687121524_1": 14609,
+          "n1687121464_1": 45324,
+          "n1675163339_1": 379798,
+          "n1687119135_1": 278602,
+          "n1606207298_1": 386142
+        }
+      },
+      "sampleSources": {
+        "file": "normal-source-index.json",
+        "bytes": 218057,
+        "sha256": "f1af0954cfd9901960b2541287f006ead055127906a5884b73c842ede2d13a76",
+        "width": 2048,
+        "height": 6400,
+        "includesAtlasBleed": true,
+        "codes": {
+          "0": "no-qualified-observation",
+          "1": "n1563643679_1",
+          "2": "n1606207298_1",
+          "3": "n1646319036_1",
+          "4": "n1646319549_1",
+          "5": "n1687121104_1",
+          "6": "n1687121284_1",
+          "7": "n1687121464_1",
+          "8": "n1687119135_1",
+          "9": "n1687121164_1",
+          "10": "n1687121224_1",
+          "11": "n1687121524_1",
+          "12": "n1675163339_1",
+          "13": "n1519536732_1"
+        }
+      }
+    }
+  ]
+}

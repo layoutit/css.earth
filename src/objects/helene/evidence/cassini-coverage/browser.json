@@ -1,0 +1,51 @@
+{
+  "base": "e70004dbc235b55e2d76af63d28fd35e61e96a8d",
+  "uncommittedChanges": "Current Cassini coverage recipes and prepared image assets. Asset hashes are in refresh.json and delivery.json.",
+  "browser": "Codex in-app Chromium browser; exact version unavailable through the capture interface.",
+  "observations": [
+    {
+      "body": "helene",
+      "dpr": 1,
+      "leaves": 800,
+      "lens": "normal",
+      "sceneStyle": "transform: translate3d(0px, 0px, -75.0604px) scale3d(0.02, 0.02, 0.02) matrix3d(0.918379, 0.169528, -0.357547, 0, 0, 0.903578, 0.428424, 0, 0.395701, -0.393456, 0.829827, 0, 0, 0, 0, 1);",
+      "url": "http://127.0.0.1:4284/helene/?v=MMZAVygk41JZnEFCxzNAAAAAP8uGibS6YTQ_yTocOGmv2z-mtep849aFAAA",
+      "view": "normal",
+      "viewport": [
+        1280,
+        720
+      ],
+      "shadows": false,
+      "file": "normal-dpr1.png",
+      "bytes": 92310,
+      "sha256": "9dfda869547199887580af6f861e4e27e2a4c2f6fbe10e8291718d231b61bd06"
+    },
+    {
+      "body": "helene",
+      "dpr": 1,
+      "leaves": 800,
+      "lens": "normal",
+      "sceneStyle": "transform: translate3d(1e-06px, 0px, -75.0604px) scale3d(0.02, 0.02, 0.02) matrix3d(0.721154, 0.176285, 0.669971, 0, -0.367151, 0.917354, 0.153822, 0, -0.587484, -0.35691, 0.726277, 0, 0, 0, 0, 1);",
+      "url": "http://127.0.0.1:4284/helene/?v=MMZAVygk41JZnEFCxzNAAAAAP8HRx1ash2W_1e-ygKY_iz_C9eR8G2JjAAA",
+      "view": "oblique",
+      "viewport": [
+        1280,
+        720
+      ],
+      "shadows": false,
+      "file": "oblique-dpr1.png",
+      "bytes": 94956,
+      "sha256": "d4d0feb18d667056976b3ff28bca314c2cf86c1f388ecb72f31a183059975199"
+    }
+  ],
+  "interpretation": "Inspected application previews, not an independent photographic registration oracle or current-main application qualification. Panorama preparation and source/native registration checks provide separate scientific evidence.",
+  "bootstrap": {
+    "purpose": "Preview bootstrap only. M2-9 used a source-recipe-matched cached bank with a temporary local descriptor SHA. This does not qualify the M2-9 bank. No such descriptor change is included in the PR.",
+    "path": "src/objects/m2-9/prepared/lenses.json",
+    "requiredSha256": "b29c84b6040183f1867e20a85835754a46efec602c8d268c112d28043668e2c9",
+    "availableSha256": "b4ccbd3cd683738e90e1310d2120b4675f291505593a4833de0c9bcec3ac94be",
+    "limitation": "Available bank has the same verified delivery recipe and source volume but differs from the committed M2-9 output pin. This preview does not qualify M2-9 or whole-application source closure.",
+    "temporaryDescriptorChange": "M2-9 prepared SHA-256 temporarily points to this source-recipe-matched cached bank for local preview. Restore byte-for-byte before commit. This is not a release qualification of M2-9."
+  },
+  "remaining": "Repeat on current main with its exact six nebula banks restored. DPR 2/mobile checks and full changed-lens browser review are still pending."
+}

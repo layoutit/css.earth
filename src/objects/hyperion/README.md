@@ -12,6 +12,8 @@
 
 ## Evidence
 
+The new [regional-frame camera checks](evidence/cassini-coverage/hyperion-row-0-check.json) and [alternate-row check](evidence/cassini-coverage/hyperion-row-1-check.json) both lacked independent feature patches. These are unsuccessful fixed-camera investigations against native PDS inputs, recorded with code/shape/image hashes; scratch input paths name the investigated products, not installable new surfaces. Neither published row is promoted. See the [investigation ledger](investigations.json) for the decision and reopening condition.
+
 The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/filter-color/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
 All fifteen filtered cameras pass disjoint holdouts and checks against a separate clear exposure. Across the five pointings, the second-image held-out RMS is 0.242–0.933 detector pixels, with maximum held-out residual 1.689 pixels. The [registration method and original correspondence reports](#filter-camera-registration) preserve every accepted match, including the larger diagnostic residuals. These are relative registration checks within the published shape frame.

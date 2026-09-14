@@ -1,0 +1,627 @@
+{
+  "id": "prometheus",
+  "lensIds": [
+    "filter-color"
+  ],
+  "seconds": 150.723254208,
+  "maxRssMiB": 862.625,
+  "recipeSha256": "fb85c3843043909a5ed247b91434e8dbd840c18eeee2657c771b21ffe3902c21",
+  "retainedSceneSha256": "ad34de8ac9697a93493c74cfacba1448474d1598f9b0cc20d17ba870b8cd6ff6",
+  "refreshedRuntimeAssets": [
+    {
+      "filename": "prometheus-filter-color-surface@2x.webp",
+      "bytes": 409108,
+      "sha256": "2fa606c3f48d2704779b4a6b85a886df126c2cae6631a4957bd62e488bdaf22c"
+    },
+    {
+      "filename": "prometheus-filter-color-shadow@2x.webp",
+      "bytes": 266008,
+      "sha256": "9435e86c660fad10bd9e5a062bd08f4cf92059061fc268b1b959f105d9de3023"
+    },
+    {
+      "filename": "prometheus-filter-color-thumbnail.webp",
+      "bytes": 1908,
+      "sha256": "c30b1c9a8426c0487d8c14054bb2d48b03ca5318b48fbce083137035a7182cd2"
+    }
+  ],
+  "retainedRuntimeAssetCount": 35,
+  "provenanceBasis": "recovered",
+  "observations": [
+    {
+      "schema": "cssearth-surface-observation-report@1",
+      "format": "controlled-shape-color",
+      "camera": {
+        "kind": "control-network",
+        "positionKm": [
+          -9535.425826575696,
+          -55784.538709568755,
+          1946.6252018553137
+        ]
+      },
+      "frames": [
+        {
+          "id": "set-1",
+          "bands": [
+            {
+              "id": "n1640497881",
+              "startTime": "2009-360T05:07:46.899",
+              "filter": "CL1+IR3",
+              "camera": {
+                "kind": "control-network",
+                "observerLatitude": 1.9,
+                "observerWestLongitude": 99.84,
+                "sunLatitude": 2.1,
+                "sunWestLongitude": 68.26,
+                "rangeKm": 56601.5,
+                "northAzimuthDegrees": 46.95,
+                "pixelAngleMicroradians": 5.989697719850105,
+                "center": [
+                  552.2,
+                  603.6
+                ]
+              },
+              "geometry": {
+                "source": "source-mesh-rays",
+                "projectedBounds": [
+                  393,
+                  449,
+                  710,
+                  763
+                ],
+                "geometryPixels": 53985,
+                "unconstrainedPixels": 0,
+                "normals": "interpolated welded vertex normals"
+              },
+              "quality": {
+                "encoding": "calibrated",
+                "sampleFormat": "REAL",
+                "rasterOffset": 8192,
+                "background": {
+                  "offset": 0,
+                  "maximum": 0.003
+                },
+                "coverageInsetPixels": 2,
+                "withheldPixels": {
+                  "quality": 0,
+                  "background": 434511,
+                  "coverageInset": 68898
+                },
+                "silhouette": {
+                  "litPixels": 47138,
+                  "onSkyPixels": 0,
+                  "share": 0,
+                  "maximumShare": 0.25
+                }
+              },
+              "pixels": {
+                "geometryPixels": 53985,
+                "acceptedPixels": 46396,
+                "acceptedLossyPixels": 0,
+                "rejectedPixels": {
+                  "photometry": 7589
+                }
+              },
+              "footprint": {
+                "pixelAngleMicroradians": 5.989672647087683,
+                "nadirMedianMeters": 338.84975122353313,
+                "nadirMinimumMeters": 338.775501381797,
+                "sampledPixels": 557
+              }
+            },
+            {
+              "id": "n1640497816",
+              "startTime": "2009-360T05:06:43.439",
+              "filter": "CL1+GRN",
+              "camera": {
+                "kind": "control-network",
+                "observerLatitude": 1.79,
+                "observerWestLongitude": 100.06,
+                "sunLatitude": 2.1,
+                "sunWestLongitude": 67.82,
+                "rangeKm": 56567,
+                "northAzimuthDegrees": 47,
+                "pixelAngleMicroradians": 5.989697719850105,
+                "center": [
+                  557.4,
+                  603.5
+                ]
+              },
+              "geometry": {
+                "source": "source-mesh-rays",
+                "projectedBounds": [
+                  398,
+                  449,
+                  715,
+                  763
+                ],
+                "geometryPixels": 54038,
+                "unconstrainedPixels": 0,
+                "normals": "interpolated welded vertex normals"
+              },
+              "quality": {
+                "encoding": "calibrated",
+                "sampleFormat": "REAL",
+                "rasterOffset": 8192,
+                "background": {
+                  "offset": 0,
+                  "maximum": 0.003
+                },
+                "coverageInsetPixels": 2,
+                "withheldPixels": {
+                  "quality": 0,
+                  "background": 451485,
+                  "coverageInset": 56081
+                },
+                "silhouette": {
+                  "litPixels": 47069,
+                  "onSkyPixels": 0,
+                  "share": 0,
+                  "maximumShare": 0.25
+                }
+              },
+              "pixels": {
+                "geometryPixels": 54038,
+                "acceptedPixels": 46324,
+                "acceptedLossyPixels": 0,
+                "rejectedPixels": {
+                  "photometry": 7714
+                }
+              },
+              "footprint": {
+                "pixelAngleMicroradians": 5.98967232036767,
+                "nadirMedianMeters": 338.6462782474555,
+                "nadirMinimumMeters": 338.56872253472045,
+                "sampledPixels": 558
+              }
+            },
+            {
+              "id": "n1640497927",
+              "startTime": "2009-360T05:08:24.899",
+              "filter": "CL1+UV3",
+              "camera": {
+                "kind": "control-network",
+                "observerLatitude": 1.97,
+                "observerWestLongitude": 99.7,
+                "sunLatitude": 2.1,
+                "sunWestLongitude": 68.55,
+                "rangeKm": 56627.1,
+                "northAzimuthDegrees": 46.91,
+                "pixelAngleMicroradians": 5.989697719850105,
+                "center": [
+                  551.3,
+                  599.9
+                ]
+              },
+              "geometry": {
+                "source": "source-mesh-rays",
+                "projectedBounds": [
+                  392,
+                  445,
+                  709,
+                  759
+                ],
+                "geometryPixels": 53942,
+                "unconstrainedPixels": 0,
+                "normals": "interpolated welded vertex normals"
+              },
+              "quality": {
+                "encoding": "calibrated",
+                "sampleFormat": "REAL",
+                "rasterOffset": 8192,
+                "background": {
+                  "offset": 0,
+                  "maximum": 0.003
+                },
+                "coverageInsetPixels": 2,
+                "withheldPixels": {
+                  "quality": 0,
+                  "background": 360708,
+                  "coverageInset": 99844
+                },
+                "silhouette": {
+                  "litPixels": 47161,
+                  "onSkyPixels": 0,
+                  "share": 0,
+                  "maximumShare": 0.25
+                }
+              },
+              "pixels": {
+                "geometryPixels": 53942,
+                "acceptedPixels": 46425,
+                "acceptedLossyPixels": 0,
+                "rejectedPixels": {
+                  "photometry": 7517
+                }
+              },
+              "footprint": {
+                "pixelAngleMicroradians": 5.989672621381667,
+                "nadirMedianMeters": 339.00559315216367,
+                "nadirMinimumMeters": 338.92893873080067,
+                "sampledPixels": 557
+              }
+            }
+          ]
+        },
+        {
+          "id": "set-2",
+          "bands": [
+            {
+              "id": "n1643263159_1",
+              "startTime": "2010-027T05:15:25.203",
+              "filter": "CL1+IR3",
+              "camera": {
+                "kind": "control-network",
+                "observerLatitude": 20.13,
+                "observerWestLongitude": 226.31,
+                "sunLatitude": 2.59,
+                "sunWestLongitude": 143.53,
+                "rangeKm": 37197.5,
+                "northAzimuthDegrees": 178.33061937108064,
+                "pixelAngleMicroradians": 5.989697719921734,
+                "center": [
+                  589.6206316928675,
+                  474.8818051240411
+                ]
+              },
+              "geometry": {
+                "source": "source-mesh-rays",
+                "projectedBounds": [
+                  326,
+                  321,
+                  834,
+                  626
+                ],
+                "geometryPixels": 120762,
+                "unconstrainedPixels": 0,
+                "normals": "interpolated welded vertex normals"
+              },
+              "quality": {
+                "encoding": "calibrated",
+                "sampleFormat": "REAL",
+                "rasterOffset": 8192,
+                "background": {
+                  "offset": 0,
+                  "maximum": 0.003
+                },
+                "coverageInsetPixels": 0,
+                "withheldPixels": {
+                  "quality": 0,
+                  "background": 881135,
+                  "coverageInset": 0
+                },
+                "silhouette": {
+                  "litPixels": 25298,
+                  "onSkyPixels": 0,
+                  "share": 0,
+                  "maximumShare": 0.25
+                }
+              },
+              "pixels": {
+                "geometryPixels": 120762,
+                "acceptedPixels": 24217,
+                "acceptedLossyPixels": 0,
+                "rejectedPixels": {
+                  "background": 49807,
+                  "photometry": 46737,
+                  "invalid-value": 1
+                }
+              },
+              "footprint": {
+                "pixelAngleMicroradians": 5.989671946059483,
+                "nadirMedianMeters": 222.61690530612674,
+                "nadirMinimumMeters": 222.48535241604796,
+                "sampledPixels": 1245
+              }
+            },
+            {
+              "id": "n1643263046_1",
+              "startTime": "2010-027T05:13:33.384",
+              "filter": "CL1+GRN",
+              "camera": {
+                "kind": "control-network",
+                "observerLatitude": 20.14,
+                "observerWestLongitude": 226.93,
+                "sunLatitude": 2.58,
+                "sunWestLongitude": 142.76,
+                "rangeKm": 36756,
+                "northAzimuthDegrees": 178.58,
+                "pixelAngleMicroradians": 5.989697719921734,
+                "center": [
+                  588.1,
+                  473.3
+                ]
+              },
+              "geometry": {
+                "source": "source-mesh-rays",
+                "projectedBounds": [
+                  321,
+                  318,
+                  837,
+                  627
+                ],
+                "geometryPixels": 124208,
+                "unconstrainedPixels": 0,
+                "normals": "interpolated welded vertex normals"
+              },
+              "quality": {
+                "encoding": "calibrated",
+                "sampleFormat": "REAL",
+                "rasterOffset": 8192,
+                "background": {
+                  "offset": 0,
+                  "maximum": 0.003
+                },
+                "coverageInsetPixels": 0,
+                "withheldPixels": {
+                  "quality": 0,
+                  "background": 917846,
+                  "coverageInset": 0
+                },
+                "silhouette": {
+                  "litPixels": 25212,
+                  "onSkyPixels": 0,
+                  "share": 0,
+                  "maximumShare": 0.25
+                }
+              },
+              "pixels": {
+                "geometryPixels": 124208,
+                "acceptedPixels": 24113,
+                "acceptedLossyPixels": 0,
+                "rejectedPixels": {
+                  "photometry": 51810,
+                  "background": 48284,
+                  "invalid-value": 1
+                }
+              },
+              "footprint": {
+                "pixelAngleMicroradians": 5.9896720048598375,
+                "nadirMedianMeters": 219.97331780712292,
+                "nadirMinimumMeters": 219.84180445896848,
+                "sampledPixels": 1281
+              }
+            },
+            {
+              "id": "n1643263237_1",
+              "startTime": "2010-027T05:16:27.210",
+              "filter": "CL1+UV3",
+              "camera": {
+                "kind": "control-network",
+                "observerLatitude": 20.11,
+                "observerWestLongitude": 225.94,
+                "sunLatitude": 2.59,
+                "sunWestLongitude": 144,
+                "rangeKm": 37483.3,
+                "northAzimuthDegrees": 178.12916575887223,
+                "pixelAngleMicroradians": 5.989697719921734,
+                "center": [
+                  585.7543282680705,
+                  472.28831147177
+                ]
+              },
+              "geometry": {
+                "source": "source-mesh-rays",
+                "projectedBounds": [
+                  325,
+                  320,
+                  828,
+                  623
+                ],
+                "geometryPixels": 118619,
+                "unconstrainedPixels": 0,
+                "normals": "interpolated welded vertex normals"
+              },
+              "quality": {
+                "encoding": "calibrated",
+                "sampleFormat": "REAL",
+                "rasterOffset": 8192,
+                "background": {
+                  "offset": 0,
+                  "maximum": 0.003
+                },
+                "coverageInsetPixels": 0,
+                "withheldPixels": {
+                  "quality": 0,
+                  "background": 846487,
+                  "coverageInset": 0
+                },
+                "silhouette": {
+                  "litPixels": 25307,
+                  "onSkyPixels": 0,
+                  "share": 0,
+                  "maximumShare": 0.25
+                }
+              },
+              "pixels": {
+                "geometryPixels": 118619,
+                "acceptedPixels": 24243,
+                "acceptedLossyPixels": 0,
+                "rejectedPixels": {
+                  "background": 60717,
+                  "photometry": 33657,
+                  "invalid-value": 2
+                }
+              },
+              "footprint": {
+                "pixelAngleMicroradians": 5.989671940948028,
+                "nadirMedianMeters": 224.33039880059414,
+                "nadirMinimumMeters": 224.1965249660305,
+                "sampledPixels": 1223
+              }
+            }
+          ]
+        }
+      ],
+      "limits": {
+        "maximumSeparationFootprints": 2,
+        "visibilityToleranceMeters": 0.5,
+        "maximumEmissionDegrees": 75,
+        "derived": {
+          "maximumSeparationMeters": 5411.906054136293,
+          "coarsestNadirFootprintMeters": 339.00559315216367,
+          "emissionStretch": 3.9910153132098496,
+          "separationFootprints": 4,
+          "shapeAllowanceMeters": 0,
+          "rule": "A fixed contributor separation may not exceed four diagonal pixel footprints of the coarsest frame at the emission limit, plus the mesh error when the backplanes come from the archive's own shape model. A per-sample separation scales with each footprint's own range and emission. Every displayed point samples its closest source point."
+        }
+      },
+      "photometry": {
+        "model": "retained-observation",
+        "referenceIncidenceDegrees": 0,
+        "referenceEmissionDegrees": 0,
+        "maximumIncidenceDegrees": 75,
+        "maximumEmissionDegrees": 75,
+        "maximumGain": 1,
+        "formula": "Original acquisition illumination retained; no photometric disk correction.",
+        "applicationLighting": "Uniform flood displays the acquisition illumination; Shadows applies the existing fixed-epoch Sun bank.",
+        "limitations": "No phase correction, Hapke roughness correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+      },
+      "selection": "finest-resolution",
+      "levelMatching": {
+        "samplesPerTriangle": 64,
+        "minimumPairs": 128,
+        "maximumGain": 1.1,
+        "maximumAngleDegrees": 70,
+        "gains": [
+          1,
+          1
+        ],
+        "pairs": [
+          {
+            "a": 0,
+            "b": 1,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "levelError": null,
+            "accepted": false
+          }
+        ],
+        "referenceIndex": 0,
+        "groups": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo.",
+        "sampledPoints": 46080
+      },
+      "display": {
+        "range": "authored",
+        "low": 0,
+        "high": 0.8,
+        "units": "relative I/F in each filter, with original illumination; false colour",
+        "colorDisplay": {
+          "kind": "band-composite",
+          "inputQuantity": "radiance-factor",
+          "bands": [
+            "IR3",
+            "GRN",
+            "UV3"
+          ],
+          "displayRange": [
+            0,
+            0.8
+          ],
+          "outputEncoding": "srgb",
+          "interpretation": "false-color",
+          "transferReference": "https://registry.color.org/rgb-registry/files/sRGB.pdf",
+          "processing": "Source values remain floating point through interpolation, photometry and compositing. One common range maps the selected bands to linear display channels; IEC sRGB encoding and 8-bit quantization happen once, at output. This does not reconstruct natural color."
+        }
+      },
+      "areaCoverage": {
+        "method": "Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed",
+        "samplesPerTriangle": 64,
+        "totalSquareMeters": 25869995119.382103,
+        "acceptedSquareMeters": 9858669638.415062,
+        "sourceSquareMeters": {
+          "set-1": 7888883071.647837,
+          "set-2": 1969786566.7676046
+        },
+        "acceptedFraction": 0.38108509850582967
+      },
+      "sourceIds": [
+        {
+          "id": "n1640497881",
+          "sha256": "8a024f5c689356a7a6720f3129e9fbe97b7c2b34047edc067106125164c777f7"
+        },
+        {
+          "id": "n1640497881-label",
+          "sha256": "562a471222ba7921f15681619cd75076e6cdd3cd143b08f2406f678aaeb9b1a7"
+        },
+        {
+          "id": "n1640497816",
+          "sha256": "f9d5b24466f1e9de90d9fece592b975b4c1dd918247a1ca0eac02b28c8a99c42"
+        },
+        {
+          "id": "n1640497816-label",
+          "sha256": "5abb16917642df3e1be82a3b4e7daf879030927b7b2a7fb71a90bce01c3c7c9f"
+        },
+        {
+          "id": "n1640497927",
+          "sha256": "198bff6c8b2cf47f3730aecc7b08b7a8ea22827db124e349d7714f170991de53"
+        },
+        {
+          "id": "n1640497927-label",
+          "sha256": "1e12583a03cf5c4b79b09e23ca24b34d0107212a8bdc9ecad684d6e8bebdb612"
+        },
+        {
+          "id": "n1643263159_1",
+          "sha256": "9b8d41f63ed909a257b0307d9b175d3944daf5ab09417a64b65e7c9b34790bb4"
+        },
+        {
+          "id": "n1643263159_1-label",
+          "sha256": "a4fee7a192a1de4db881b677001a09013f3309c509e82940aad3e76656cb74db"
+        },
+        {
+          "id": "n1643263046_1",
+          "sha256": "3591eed8181b553187f45d65ce84d3c9d1516a60f3978e4a1e3e7bb826c8bb39"
+        },
+        {
+          "id": "n1643263046_1-label",
+          "sha256": "89897ef7d086b1bdd0ad0688f9a20cbaeaae43bca38e97fa7859dbb0d0a8c36c"
+        },
+        {
+          "id": "n1643263237_1",
+          "sha256": "8fba11e1458101342c58ce80b9bfd6832cb6b0118978bc103a3581896c751c9a"
+        },
+        {
+          "id": "n1643263237_1-label",
+          "sha256": "8ce14d3229e355870b16d2834f9e9d38e7c233dbf619530650e556e7e4655e36"
+        }
+      ],
+      "previewPolicy": "The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D.",
+      "transfer": {
+        "interiorTexels": 5152605,
+        "counts": {
+          "no-qualified-observation": 3105580,
+          "accepted": 2047025
+        },
+        "maximumSourceDistanceMeters": 820.7216738297719,
+        "maximumPixelSeparationMeters": 2006.2620975828133,
+        "maximumPhotometricGain": 1,
+        "method": "Closest full-source triangle point; all bilinear observation contributors checked before interpolation; atlas bleed clamped to retained face.",
+        "sources": {
+          "set-1": 1574577,
+          "set-2": 472448
+        }
+      },
+      "sampleSources": {
+        "file": "filter-color-source-index.json",
+        "bytes": 85605,
+        "sha256": "d77529df02a56549e949153587caa9ac06ac92382acef51581ef8085418d5ef7",
+        "width": 2048,
+        "height": 5760,
+        "includesAtlasBleed": true,
+        "codes": {
+          "0": "no-qualified-observation",
+          "1": "set-1",
+          "2": "set-2"
+        }
+      }
+    }
+  ]
+}

@@ -12,6 +12,8 @@
 
 ## Evidence
 
+The [additional color-sequence trial](evidence/cassini-coverage/calypso-color-trial.json) records the native products, camera rows and roughly 0.5-percentage-point marginal coverage gain. It is an unqualified preparation diagnostic, not a released surface or independent registration proof. See the [investigation ledger](investigations.json) for the decision and reopening condition.
+
 - The exact observations, source URLs and restoration pins are in [source/manifest.json](source/manifest.json) and [source/preparation/acquisition.json](source/preparation/acquisition.json). The simplified surface remains closed and outward wound.
 
 - [Source/package qualification](evidence/close-encounters/qualification.json) verifies every delivered asset and source input and preserves the geometry recipe and retained scene geometry from main (ebd16155a). The fixed 2,048 × 1,024 preparation grid accepts 739,595 → 740,795 Monochrome cells and 347,888 False color cells. These are preparation-grid counts, not physical surface-area percentages.
