@@ -133,6 +133,57 @@
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
         }
       ]
+    },
+    {
+      "id": "controlled-galileo-regional-clear",
+      "subject": "USGS controlled Galileo CLEAR regional photographs",
+      "status": "included",
+      "finding": "Selected 332 calibrated controlled products: 301 equirectangular maps on projected grids finer than 800 m and 31 maps whose inspected STAC records list only polar GeoTIFFs. Native grids span 6–629 m. A separate Galileo view uses original I/F and a common 0–2 display interval, without a photometric model or brightness fit. The 12K geographic grid covers 15.264% of the sphere; 330 images contribute after finer-grid priority and complete valid sampling. The existing Monochrome global mosaic is retained. Geographic bounds come from actual GeoTIFF rectangles, including polar products. Native grids contain finer information than the fixed approximately 798 m equatorial delivery can display. All 332 products were retrieved, byte-verified and decoded; two representative projections were freshly restored into an empty source root.",
+      "evidence": [
+        "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/",
+        "https://doi.org/10.1029/2021EA001935"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e6ed07b7f549388434520ff17a130d600a7c8f77"
+        }
+      ]
+    },
+    {
+      "id": "controlled-global-monochrome-replacement",
+      "subject": "Replacing the global mosaic with controlled Galileo and Voyager images",
+      "status": "deferred",
+      "finding": "Retrieved and decoded 379 selected CLEAR Galileo/Voyager maps. A trial 8K global mosaic reached 99.44% area coverage, but its brightness joins were worse than the retained Monochrome surface. A common display stretch did not solve different observed illumination. User approved a separate Galileo regional view instead. Voyager CLEAR and Galileo CLEAR have different spectral responses; their measured I/F is not assumed interchangeable. The global prototype is not delivered.",
+      "revisitWhen": "A released photometrically harmonized global product or a qualified cross-observation model resolves joins, spectral differences and terrain-dependent scattering while preserving source detail. Compare in the running app against the retained global mosaic before replacing it.",
+      "evidence": [
+        "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/",
+        "https://doi.org/10.1029/2021EA001935"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e6ed07b7f549388434520ff17a130d600a7c8f77"
+        }
+      ]
+    },
+    {
+      "id": "global-photometric-model-trials",
+      "subject": "Lambert and terrain-specific Minnaert correction for a global Europa mosaic",
+      "status": "excluded",
+      "finding": "The Lambert global trial produced unacceptable bright-edge clipping (roughly 19–25% in the tested variants). A Minnaert trial using ridged-plains parameters from Dhingra et al. (2021), followed by overlap gains, reduced some joins but did not qualify applying terrain-specific scattering parameters globally. Neither trial supplies production pixels. The regional view preserves original illumination and uses only a fixed display exposure.",
+      "revisitWhen": "A model is supported for the selected filter, terrains and observation geometry, with source-backed applicability limits and improved matched browser evidence; do not retry globally extrapolated terrain parameters as a default.",
+      "evidence": [
+        "https://www.hou.usra.edu/meetings/lpsc2022/pdf/1691.pdf",
+        "https://doi.org/10.3847/PSJ/ac06d6",
+        "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e6ed07b7f549388434520ff17a130d600a7c8f77"
+        }
+      ]
     }
   ]
 }

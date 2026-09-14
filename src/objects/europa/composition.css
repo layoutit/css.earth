@@ -20,3 +20,11 @@
 .planet-stage[data-object-id="europa"][data-lens="coarse-ice"] .polycss-scene s.europa-polar {
   background-image: url("/scenes/europa/europa-poles-coarse-ice@2x.webp") !important;
 }
+
+/* Photographic dataset binding; the retained surface and polar geometry stay fixed. */
+.planet-stage[data-object-id="europa"][data-lens="galileo"] .polycss-scene s:not(.europa-polar) {
+  background-image: url("/scenes/europa/europa-galileo@2x.webp") !important;
+}
+.planet-stage[data-object-id="europa"][data-lens="galileo"] .polycss-scene s.europa-polar {
+  background-image: url("/scenes/europa/europa-poles-galileo@2x.webp") !important;
+}

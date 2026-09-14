@@ -48,6 +48,29 @@
       "resolutionScale": 2
     },
     {
+      "id": "galileo",
+      "output": "europa-{id}{suffix}.webp",
+      "thumbnail": "europa-lens-{id}.webp",
+      "source": "galileo/s0449967535_36.tif",
+      "falseColor": false,
+      "resolutionScale": 3,
+      "science": {
+        "kind": "terrestrial-mosaic",
+        "format": "controlled-geotiff",
+        "consumer": "galileo-regional",
+        "profile": {
+          "referenceRadiusMeters": 1560800,
+          "filter": "CLEAR",
+          "wavelengthMicrometers": 0.611,
+          "displayRange": [
+            0,
+            2
+          ],
+          "polarBoundaryDegrees": 78.75
+        }
+      }
+    },
+    {
       "id": "enhanced",
       "output": "europa-{id}{suffix}.webp",
       "thumbnail": "europa-lens-{id}.webp",
