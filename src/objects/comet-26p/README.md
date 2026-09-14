@@ -14,6 +14,8 @@ One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog'
 
 [Selection, alternatives and assumptions](source/reference/source-record.json) explain the sources and factsheet derivations. [Credits and reuse terms](NOTICE.md) accompany the pinned inputs.
 
+[Investigation ledger](investigations.json) records source choices, failed trials and conditions for retrying. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
+
 ## Evidence
 
 The 800-triangle display remains closed, uses source vertices and preserves volume within 2.5%. [Source and delivery evidence](source-evidence.json) records source/frame checks and fresh byte/hash verification of all 31 runtime assets. [Browser evidence](browser-evidence.json) records desktop and 390px mobile interaction, retained scene identity, and Solar System handoffs at DPR 1 and 2.

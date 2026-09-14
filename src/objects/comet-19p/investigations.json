@@ -1,0 +1,184 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "comet-19p",
+  "entries": [
+    {
+      "id": "usgs-dem",
+      "subject": "Reviewed USGS Borrelly terrain",
+      "status": "included",
+      "finding": "The reviewed PDS release supplies the observed USGS surface. Its 16 m posts oversample roughly 150 m stereo terrain; image-plane heights are not radius or an absolute gravity datum.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/README.md",
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "dlr-dem",
+      "subject": "Independent DLR terrain",
+      "status": "included",
+      "finding": "The DLR dataset uses its own retained geometry after a documented image-plane and vertical-datum registration to USGS. The mapping paper does not supply that final transform; the saved fit is part of this package.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/source/reference/registration.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "micas-orthophoto",
+      "subject": "Mission MICAS orthophoto and XYZ cubes",
+      "status": "included",
+      "finding": "The four original cubes account for every valid USGS post and establish photograph placement. They came from a rescued mission website outside formal PDS product review; this correspondence does not establish radiometric calibration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/README.md",
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/topo.htm"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "height-field",
+      "subject": "USGS image-plane height",
+      "status": "included",
+      "finding": "Height displays source Z in kilometres before the presentation translation. Negative and zero values remain valid; it is displacement above an arbitrary image plane.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/source/reference/registration.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "model-difference",
+      "subject": "USGS minus registered DLR height",
+      "status": "included",
+      "finding": "Difference is restricted to the intersection of the released surfaces. It includes registration sensitivity of about 200–206 m RMS and is not physical surface change.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/source/reference/registration.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "estimated-completion",
+      "subject": "Unobserved rear and interior gaps",
+      "status": "included",
+      "finding": "The scene retains an explicitly estimated completion with grid material. Its rear shape and 3.15 km depth are display assumptions; source-fit measurements exclude them.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/source/reference/completion.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "raw-micas-mosaic",
+      "subject": "Individual raw MICAS near and mid images",
+      "status": "deferred",
+      "finding": "These products were retained as archive references. The selected orthophoto already provides documented terrain registration; an independent multi-frame photographic mosaic has not been qualified.",
+      "revisitWhen": "Individual frames gain reproducible camera-to-terrain registration and improve coverage or useful detail over the orthophoto.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "registered-albedo-release",
+      "subject": "Published Borrelly photometry as a scalar map",
+      "status": "unresolved",
+      "finding": "The consulted DEM and rescued-website archives supplied no established machine-readable, registered scalar albedo release. The photometric analysis remains paper evidence; this is a bounded archive finding.",
+      "revisitWhen": "A released scalar table or reproducible paper method supplies registration, validity and calibration for this source terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "press-shape-completion",
+      "subject": "Press images and 8 by 4 by 4 km illustrations",
+      "status": "excluded",
+      "finding": "These are context references and do not observe or close the unobserved rear. They are not substituted for the measured terrain or used to hide the grid.",
+      "revisitWhen": "New observations actually constrain the missing surface.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "terrain-unit-places",
+      "subject": "Four MICAS terrain-unit places",
+      "status": "included",
+      "finding": "Upper Mottled Terrain, Central Mesas, Central Smooth Terrain and Lower Mottled Terrain transfer through measured map-to-photo and photo-to-orthophoto controls. They are approximate interiors on the MICAS source mesh, not exact boundaries or DLR labels.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/source/features/image-registration.json",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/source/features/evidence/image-landmarks.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "lower-smooth-terrain-place",
+      "subject": "Lower Smooth Terrain label",
+      "status": "excluded",
+      "finding": "The selected point lies too near the photograph support edge for the broad placement check. It remains withheld while the four interior places are included.",
+      "revisitWhen": "A supported interior point or additional registered coverage passes the existing placement check.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-19p/source/features/evidence/image-landmarks.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    }
+  ]
+}

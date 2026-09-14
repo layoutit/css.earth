@@ -1,0 +1,116 @@
+{
+  "status": "not-promoted",
+  "pipelineCommit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d",
+  "matcherChange": "The relative variance test in this change replaces the absolute variance-product floor. Images retain calibrated radiance.",
+  "target": "n2081we02_rr",
+  "startTime": "2004-01-02T19:22:48.441",
+  "sourcePins": [
+    {
+      "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.fit",
+      "bytes": 13668480,
+      "sha256": "fde402873e8064807d1b36526b67d98ddf272c91d37150d2514a2f92d0ea188f"
+    },
+    {
+      "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.lbl",
+      "bytes": 18720,
+      "sha256": "4b2c33854a1a8b15161cbddd174ab2c25e2903244cde81eea0f2ca522b12123f"
+    }
+  ],
+  "method": "Warp an already registered photograph through the original PDS Wild 2 mesh into the candidate camera. Fit image translation only; keep the source attitude and intrinsics fixed. Checkerboard cells assign fit and holdout membership before scoring. No residual-based pruning.",
+  "matching": {
+    "patchRadius": 8,
+    "searchRadius": 40,
+    "gridStride": 22,
+    "gridOrigin": 22,
+    "targetSmoothingSigma": 0.85,
+    "minimumCorrelation": 0.86,
+    "minimumPeakMargin": 0.03,
+    "minimumJointValidFraction": 0.85
+  },
+  "transfer": {
+    "maximumSeparationMeters": 150,
+    "visibilityToleranceMeters": 0.5,
+    "maximumEmissionDegrees": 75
+  },
+  "registrationBudget": {
+    "minimumFitControls": 6,
+    "minimumHoldoutControls": 6,
+    "maximumRmsPixels": 1,
+    "maximumResidualPixels": 2,
+    "absoluteRmsCapMeters": 85,
+    "absoluteResidualCapMeters": 170
+  },
+  "exploratoryVariants": "A 21-pixel patch with stride 26 and search radius 24 against N2079 found only 5 fit controls. A 17-pixel patch with stride 22 and search radius 24 passed the control count but failed the residual gate. The same narrow search against N2077 failed the count. The final 40-pixel search below uses the existing Tempel matching policy; neither anchor qualifies.",
+  "limitations": [
+    "Relative overlap inherits the reference camera and source shape uncertainty; it is not absolute cartography.",
+    "The fix makes low-radiance texture eligible for matching. Strong correlation does not establish a valid camera; both trials still fail independent positional checks."
+  ],
+  "trials": [
+    {
+      "anchor": "n2079we02_rr",
+      "reference": {
+        "id": "n2079we02-rr",
+        "imageSha256": "bf498d851c2189b0baca42c3f79a3969c1cc95d2f28e07f08f3141a7eea79b34",
+        "controlSha256": "803cbfb265ad3020894b642bef466fb3a1acd27bfe400c0ffbcbd984fa45c7cd"
+      },
+      "sourceShapeSha256": "e3950d0afae8b0c1ede31f64197ec68c215d9814bb41c101158912edbaa61e80",
+      "crop": [
+        503,
+        454,
+        680,
+        669
+      ],
+      "nominalPixelScaleMeters": 31.26280149036683,
+      "maximumRmsMeters": 31.26280149036683,
+      "maximumResidualMeters": 62.52560298073366,
+      "residuals": [
+        {
+          "partition": "fit",
+          "count": 13,
+          "rmsPixels": 9.83548377757393,
+          "maximumPixels": 21.946105158283444
+        },
+        {
+          "partition": "holdout",
+          "count": 11,
+          "rmsPixels": 17.83750618557334,
+          "maximumPixels": 58.8096791648135
+        }
+      ],
+      "status": "rejected-registration-budget"
+    },
+    {
+      "anchor": "n2077we02_rr",
+      "reference": {
+        "id": "n2077we02-rr",
+        "imageSha256": "9973470135bcc89507adceaba79f4bd2d499893277f62eabebee353d96b2b575",
+        "controlSha256": "33930e6c289d2e6325455bd36947806fb80c6bf482ce03cb77449bbcfd131771"
+      },
+      "sourceShapeSha256": "e3950d0afae8b0c1ede31f64197ec68c215d9814bb41c101158912edbaa61e80",
+      "crop": [
+        488,
+        451,
+        665,
+        666
+      ],
+      "nominalPixelScaleMeters": 31.26280149036683,
+      "maximumRmsMeters": 31.26280149036683,
+      "maximumResidualMeters": 62.52560298073366,
+      "residuals": [
+        {
+          "partition": "fit",
+          "count": 9,
+          "rmsPixels": 16.77984982803541,
+          "maximumPixels": 47.43757647483626
+        },
+        {
+          "partition": "holdout",
+          "count": 10,
+          "rmsPixels": 5.662018732132303,
+          "maximumPixels": 6.2768070900572095
+        }
+      ],
+      "status": "rejected-registration-budget"
+    }
+  ]
+}
