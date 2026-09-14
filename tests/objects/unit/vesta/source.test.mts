@@ -12,6 +12,38 @@ import { prepareEclipticPresentationFrame } from '../../../../src/platform/solar
 const root = resolve(import.meta.dirname, '../../../..'), base = resolve(root, 'src/objects/vesta');
 const read = async (path: string) => JSON.parse(await readFile(resolve(base, path), 'utf8'));
 
+test('LAMO photography uses the original labeled grid and stays distinct from color and relief', async () => {
+  const [config, content, manifest, descriptor] = await Promise.all([
+    'source/preparation/terrestrial.json', 'source/content/object.json', 'source/manifest.json', 'object.json'
+  ].map(read));
+  const source = manifest.inputs.find((entry: {id: string}) => entry.id === 'dlr-vesta-lamo-clear');
+  const label = await readFile(resolve(base, 'source/reference/lamo-clear.lbl'), 'ascii');
+  const field = (key: string) => required(label.match(new RegExp(`^\\s*${key}\\s*=\\s*([^\\r\\n]+)`, 'm')))[1].trim();
+  assert.equal(field('TARGET_NAME'), 'VESTA');
+  assert.equal(field('SAMPLE_TYPE'), 'UNSIGNED_INTEGER');
+  assert.equal(field('SAMPLE_BITS'), '8');
+  assert.equal(field('BANDS'), '1');
+  assert.equal(field('COORDINATE_SYSTEM_NAME'), 'PLANETOCENTRIC');
+  assert.equal(field('POSITIVE_LONGITUDE_DIRECTION'), 'EAST');
+  assert.equal(field('MAP_PROJECTION_TYPE'), 'SIMPLE_CYLINDRICAL');
+  const metadata = await sharp(resolve(base, 'source', source.path), {limitInputPixels: false}).metadata();
+  assert.deepEqual([metadata.width, metadata.height, metadata.space, metadata.depth], [80112, 40056, 'b-w', 'uchar']);
+  assert.equal(source.width, Number(field('LINE_SAMPLES')));
+  assert.equal(source.height, Number(field('LINES')));
+  assert.equal(source.projection.referenceRadiusMeters, Number(field('A_AXIS_RADIUS')) * 1000);
+  const recipe = config.raster.observations.find((entry: {id: string}) => entry.id === 'surface');
+  assert.deepEqual(recipe.validity.grid, {
+    pixelsPerDegree: Number(field('MAP_RESOLUTION')),
+    sampleOffset: Number(field('SAMPLE_PROJECTION_OFFSET')),
+    lineOffset: Number(field('LINE_PROJECTION_OFFSET'))
+  });
+  assert.equal(recipe.validity.centerLongitude, Number(field('CENTER_LONGITUDE')));
+  assert.equal(recipe.validity.noData, 0);
+  assert.equal(recipe.nativePhotographicSampling, undefined, 'the bounded normalized display does not claim native 20 m sampling');
+  assert.equal(content.lenses.controls.find((entry: {id: string}) => entry.id === 'surface').source.id, source.id);
+  assert.ok(descriptor.properties.recipe.surfaces[0].lenses.some((entry: {id: string}) => entry.id === 'surface'));
+});
+
 test('Dawn radius anchors preserve meters, poles and east longitude; elevation has a numeric datum', async () => {
   const config = await read('source/preparation/terrestrial.json'), profile = config.geometry.radialTerrain;
   const grid = await loadPdsScalarGrid(resolve(base, 'source', profile.path), profile.grid, { width: 361, height: 181 });
