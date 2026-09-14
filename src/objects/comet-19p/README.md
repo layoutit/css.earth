@@ -10,6 +10,8 @@ Borrelly compares two reconstructions of the Deep Space 1 encounter terrain and 
 | MICAS photograph | [Mission orthophoto and XYZ cubes](https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/topo.htm) |
 | Height and difference | Source Z and USGS-minus-registered-DLR Z, in kilometres |
 
+[Investigation ledger](investigations.json) records source choices, failed trials and conditions for retrying. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
+
 ## Evidence
 
 - **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
@@ -137,17 +139,7 @@ original image. Both states remain available.
 </details>
 
 <details>
-<summary>Source survey, restoration and evidence links</summary>
-
-## Source survey and restoration
-
-| Candidate | Disposition |
-| --- | --- |
-| PDS USGS and DLR DEM tables | Included; reviewed terrain and independent reconstructions. |
-| Mission orthophoto with original XYZ cubes | Included; exact registration is independently verified, with the rescued-website qualification retained. |
-| Individual raw MICAS near/mid images | Retained as archive references; the mission orthophoto provides the documented terrain registration. No independently qualified multi-frame photometric mosaic is claimed. |
-| Published photometric/albedo analysis | Paper evidence only; no separate machine-readable, registered scalar release was established in the consulted DEM and rescued-website archives. |
-| Press images and 8 × 4 × 4 km illustrations | Useful context only; they do not close the unobserved surface. |
+<summary>Restoration and evidence links</summary>
 
 All inputs and source documents are pinned in `source/manifest.json`.
 The [contributor guide](../README.md) covers shared commands. The body-specific

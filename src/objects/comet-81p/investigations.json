@@ -9,10 +9,10 @@
       "finding": "The diagnostic trial reduces accepted photographed area from 39.52% to 29.73%; 5 of 6 common-point overlap pairs improve. The running app shows large new grid gaps in photographed depressions. Retain the observed photographs. Parameters were checked in Li 2013 Table 6, but the original H-function approximation is unverified.",
       "revisitWhen": "A verified original model formulation and source-normal or coverage evidence can support normalization without discarding the photographed terrain.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/evidence/photometry/trial.json",
         "https://arxiv.org/abs/1310.4165",
         "https://doi.org/10.1016/j.icarus.2009.06.002",
-        "https://www.lpi.usra.edu/meetings/acm2008/pdf/8290.pdf",
-        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/tools/photometry/README.md"
+        "https://www.lpi.usra.edu/meetings/acm2008/pdf/8290.pdf"
       ],
       "checked": [
         {
@@ -28,14 +28,14 @@
       "finding": "Matching calibrated radiance now finds 13 fit and 11 holdout controls, but the camera fails the unchanged 1-pixel RMS and 2-pixel maximum limits. Fit RMS is 9.84 pixels; holdout RMS is 17.84 pixels. N2081 is not added to the mosaic.",
       "revisitWhen": "New source attitude or intrinsics, independent terrain controls, or an independently qualified registration method resolves the residuals without relaxing the existing positional limits.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/evidence/registration/n2081-overlap.json",
         "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.fit",
-        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.lbl",
-        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/comet-81p/README.md"
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.lbl"
       ],
       "checked": [
         {
           "date": "2026-09-13",
-          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
         }
       ]
     },
@@ -46,14 +46,175 @@
       "finding": "Matching calibrated radiance now finds 9 fit and 10 holdout controls, but the camera fails the unchanged 1-pixel RMS and 2-pixel maximum limits. Fit RMS is 16.78 pixels; holdout RMS is 5.66 pixels. N2081 is not added to the mosaic.",
       "revisitWhen": "New source attitude or intrinsics, independent terrain controls, or an independently qualified registration method resolves the residuals without relaxing the existing positional limits.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/evidence/registration/n2081-overlap.json",
         "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.fit",
-        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.lbl",
-        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/comet-81p/README.md"
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2081we02_rr.lbl"
       ],
       "checked": [
         {
           "date": "2026-09-13",
-          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "pds-completed-shape",
+      "subject": "PDS v2.1 observed and completed Wild 2 mesh",
+      "status": "included",
+      "finding": "The full PDS Cartesian model supplies the closed scene, including the archive authors' estimated rear and joining faces. Observed-only and planetocentric products are retained for comparison; equivalent coordinate products do not create separate datasets.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/README.md",
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "navcam-n2073-n2075-n2077",
+      "subject": "Calibrated NAVCAM N2073, N2075 and N2077",
+      "status": "included",
+      "finding": "The v3 short exposures form the core photographic mosaic. Their frame binding and translation checks use the original observed source mesh; estimated faces remain grid and original illumination remains visible.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/reference/encounter-photography.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/reference/stereo-frame.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "navcam-n2079",
+      "subject": "NAVCAM N2079 footprint extension",
+      "status": "included",
+      "finding": "The recorded trial passes nine fitting and six withheld topographic controls under the 85 m RMS and 170 m maximum budgets. Its coarser sampling has lower priority where the closer accepted images qualify.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/reference/encounter-photography.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/photography/navcam/n2079we02_rr.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "navcam-n2069",
+      "subject": "Earlier NAVCAM N2069",
+      "status": "included",
+      "finding": "The earlier frame is retained as trajectory evidence for the source mapping frame, not as a displayed photographic source.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/reference/encounter-photography.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/reference/stereo-frame.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "navcam-n2071",
+      "subject": "Earlier NAVCAM N2071",
+      "status": "deferred",
+      "finding": "The source note records this frame as surveyed but does not preserve a separate quantitative rejection or an accepted mosaic footprint. Its photographic suitability remains unqualified.",
+      "revisitWhen": "A concrete footprint and registration comparison can demonstrate useful coverage beyond the selected sequence.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "navcam-n2081-topographic-fit",
+      "subject": "NAVCAM N2081 direct topographic matching",
+      "status": "excluded",
+      "finding": "The earlier direct topography-to-image trial produced only four fit and four holdout patches, below the six-control minimum. Today's two image-overlap alternatives have separate entries and also fail qualification.",
+      "revisitWhen": "Additional independent terrain controls satisfy the existing count and positional budgets.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "long-exposure-jet-images",
+      "subject": "Long-exposure NAVCAM alternates",
+      "status": "excluded",
+      "finding": "The surveyed long exposures emphasize jets and saturate the nucleus. They do not replace the short-exposure surface photographs.",
+      "revisitWhen": "A detector-valid unsaturated nucleus footprint is demonstrated in a specific alternate frame.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "stooke-cylindrical-mosaic",
+      "subject": "Published Stooke Wild 2 cylindrical mosaic",
+      "status": "excluded",
+      "finding": "The investigated mosaic reports positional errors that can approach ten degrees. It was not selected over registered native camera observations.",
+      "revisitWhen": "A corrected map or independent registration demonstrates adequate accuracy on the chosen source shape.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "coarse-facet-disk-normalization",
+      "subject": "Earlier disk normalization using coarse facet normals",
+      "status": "excluded",
+      "finding": "The earlier correction imprinted source-facet patterns onto the photographs. The later smooth-normal Hapke trial is recorded separately and also does not replace the observed mosaic.",
+      "revisitWhen": "An independently checked normal and photometric treatment preserves observed coverage and removes the facet artifacts.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "named-terrain-places",
+      "subject": "Mayo, Left Foot and Right Foot landmarks",
+      "status": "included",
+      "finding": "The published diagram and photograph are tied to the native N2073 camera and source mesh through measured image controls. Labels denote approximate feature interiors, not exact boundaries or a new absolute cartographic solution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/features/image-registration.json",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-81p/source/features/evidence/image-landmarks.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
         }
       ]
     }

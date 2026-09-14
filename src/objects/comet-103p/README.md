@@ -14,7 +14,7 @@
 
 The selected scan yields 162 accepted spatial pixels and 757 of the model’s 32,040 facets. These are **facet counts, not area percentages**. The retained values span 337.2–364.3 K and −0.077–4.490%/100 nm. Both views use the same missing-data mask and keep Shadows off by default. The grid marks rejected spectra, unsupported shape, and gaps; it is not filled from nearby values.
 
-[Investigation ledger](investigations.json): tested alternatives and the evidence needed to revisit them.
+[Investigation ledger](investigations.json): tested alternatives and the evidence needed to revisit them. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
 
 ## Evidence
 

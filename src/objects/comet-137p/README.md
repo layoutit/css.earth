@@ -6,6 +6,8 @@
 
 The preparation tessellates a smooth ellipsoid with these axis ratios. Scaling the thermal effective radius as a volume-equivalent radius is an explicit display convention; it does not establish a measured volume or absolute axis lengths.
 
+[Investigation ledger](investigations.json) records source choices, failed trials and conditions for retrying. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
+
 ## Evidence
 
 No dated test report is cited in the existing source notes.
