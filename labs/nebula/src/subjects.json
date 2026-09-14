@@ -29,7 +29,9 @@
         "sha256": "d2213aeb75b7b0a9084a482a6baa361834360599320044c0b18e248043066d12"
       }
     },
-    "imagePath": "labs/nebula/models/lmc/candidates/prepared/vista-infrared.webp"
+    "imagePath": "labs/nebula/models/lmc/candidates/prepared/vista-infrared.webp",
+    "menuLabel": "LMC",
+    "workflow": "density"
   },
   {
     "id": "smc-particles",
@@ -46,6 +48,193 @@
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure."
+    },
+    "menuLabel": "SMC",
+    "workflow": "density"
+  },
+  {
+    "id": "m2-9-inferred",
+    "emissionExperiment": {
+      "directory": ".local/nebula-lab/planetary/m2-9-inferred"
+    },
+    "name": "M2–9 · inferred emission",
+    "directory": ".local/nebula-lab/planetary/m2-9-inferred",
+    "imagePath": ".local/nebula-lab/planetary/m2-9-inferred/input.png",
+    "sourcePageUrl": "https://apod.nasa.gov/apod/ap040201.html",
+    "credit": "Hubble: Balick, Icke, Mellema & NASA. Independent implementation of Wenger, Lorenz & Magnor (2013).",
+    "modelNote": "Experimental emission inferred from one image and approximate axial symmetry. Unmeasured depth and scale; four point sources masked. Not gas mass density.",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "menuLabel": "M2–9",
+    "workflow": "symmetry"
+  },
+  {
+    "id": "helix-single-axis",
+    "name": "Helix · one-axis fit",
+    "directory": ".local/nebula-lab/planetary/helix-single-axis",
+    "imagePath": ".local/nebula-lab/planetary/helix-single-axis/input.png",
+    "emissionExperiment": {
+      "directory": ".local/nebula-lab/planetary/helix-single-axis",
+      "structureDirectory": ".local/nebula-lab/planetary/helix-structures",
+      "modeled": false,
+      "methodUrl": "https://doi.org/10.1111/cgf.12216",
+      "statusNote": "Control: front fits; side geometry fails.",
+      "sourceCatalogue": "labs/nebula/models/helix/source-candidates.json"
+    },
+    "sourcePageUrl": "https://esahubble.org/images/opo0432b/",
+    "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute).",
+    "modelNote": "Experimental relative emission: geometry and depths remain assumptions. Hubble/CTIO native image, NOX separation.",
+    "comparisonGroup": "helix-emission-comparison",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "menuLabel": "Helix · symmetry baseline",
+    "workflow": "symmetry",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/helix/observations.json",
+      "recipe": "labs/nebula/models/helix/observations.json"
+    }
+  },
+  {
+    "id": "helix-model-prior",
+    "name": "Helix · disk/ring prior",
+    "directory": ".local/nebula-lab/planetary/helix-model-prior",
+    "imagePath": ".local/nebula-lab/planetary/helix-model-prior/input.png",
+    "emissionExperiment": {
+      "directory": ".local/nebula-lab/planetary/helix-model-prior",
+      "structureDirectory": ".local/nebula-lab/planetary/helix-structures",
+      "observationStructures": ".local/nebula-lab/observations/helix/structures/catalogue.json",
+      "modeled": true,
+      "methodUrl": "https://doi.org/10.1086/424621",
+      "statusNote": "Previous Hubble baseline: outer emission omitted; side detail unresolved. Not fitted from the ESO structure candidates.",
+      "kinematicsSource": "labs/nebula/models/helix/kinematics-oiii.json",
+      "jointFitSource": "labs/nebula/models/helix/joint-fit.json",
+      "compilerSource": "labs/nebula/models/helix/compiler.json"
+    },
+    "sourcePageUrl": "https://esahubble.org/images/opo0432b/",
+    "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute).",
+    "modelNote": "Experimental relative emission: geometry and depths remain assumptions. Hubble/CTIO native image, NOX separation.",
+    "comparisonGroup": "helix-emission-comparison",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "menuLabel": "Helix",
+    "workflow": "inference",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/helix/observations.json",
+      "recipe": "labs/nebula/models/helix/observations.json"
+    }
+  },
+  {
+    "id": "m42",
+    "name": "M42 · Orion",
+    "menuLabel": "M42 · Orion",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/m42",
+    "hasDetail": false,
+    "modelNote": "Star-forming emission and reflection cloud. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/m42/observations.json",
+      "recipe": "labs/nebula/models/m42/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/m42/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/m42/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/m42.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
+  },
+  {
+    "id": "m8",
+    "name": "M8 · Lagoon",
+    "menuLabel": "M8 · Lagoon",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/m8",
+    "hasDetail": false,
+    "modelNote": "Star-forming emission cloud with obscuring dust. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/m8/observations.json",
+      "recipe": "labs/nebula/models/m8/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/m8/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/m8/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/m8.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
+  },
+  {
+    "id": "carina",
+    "name": "Carina",
+    "menuLabel": "Carina",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/carina",
+    "hasDetail": false,
+    "modelNote": "Extended star-forming emission and dust complex. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/carina/observations.json",
+      "recipe": "labs/nebula/models/carina/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/carina/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/carina/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/carina.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
+  },
+  {
+    "id": "ngc6357",
+    "name": "NGC 6357",
+    "menuLabel": "NGC 6357",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/ngc6357",
+    "hasDetail": false,
+    "modelNote": "Irregular star-forming emission complex. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/ngc6357/observations.json",
+      "recipe": "labs/nebula/models/ngc6357/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/ngc6357/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/ngc6357/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/ngc6357.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
+  },
+  {
+    "id": "m78",
+    "name": "M78",
+    "menuLabel": "M78",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/m78",
+    "hasDetail": false,
+    "modelNote": "Reflection nebula: scattered light does not directly measure gas density. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/m78/observations.json",
+      "recipe": "labs/nebula/models/m78/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/m78/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/m78/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/m78.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
+  },
+  {
+    "id": "horsehead",
+    "name": "Horsehead",
+    "menuLabel": "Horsehead",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/horsehead",
+    "hasDetail": false,
+    "modelNote": "Dark and reflection nebula: the silhouette traces absorption; positive emission fitting cannot recover the obscuring dust. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/horsehead/observations.json",
+      "recipe": "labs/nebula/models/horsehead/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/horsehead/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/horsehead/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/horsehead.json",
+      "statusNote": "Image-only conditional depth; not measured density."
     }
   }
 ]

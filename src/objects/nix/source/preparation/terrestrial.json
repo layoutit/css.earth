@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "nix",
+  "displayName": "Nix",
+  "publicBase": "/scenes/nix/",
+  "distanceAu": 39.482,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "model",
+        "consumer": "model-surface",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Shape model",
+          "modeled": true,
+          "coverage": "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data."
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": [],
+    "mosaics": [],
+    "surfaceObservations": [
+      {
+        "id": "monochrome",
+        "format": "nh-lorri-camera",
+        "consumer": "lorri-observation",
+        "filter": "PANCHROMATIC",
+        "frames": [
+          {
+            "id": "best",
+            "path": "observations/lor_0299174134_0x636_sci.fit",
+            "cameraPath": "observations/best-camera.json",
+            "startTime": "2015-07-14T10:03:35.831"
+          }
+        ],
+        "transfer": {
+          "maximumSeparationFootprints": 1.5,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1
+        },
+        "display": {
+          "percentiles": [
+            2.2,
+            99.7
+          ]
+        },
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "New Horizons LORRI photograph from 14 July 2015, at about 300 m/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map."
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 18.265603887767426,
+    "camera": {
+      "initialScenePitchDegrees": 30,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/nix/nix-model-surface@2x.webp",
+    "polesUrl": "/scenes/nix/nix-model-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/nix_nrf1d3_hipoly.stl.gz",
+      "format": "stl",
+      "grid": {
+        "compression": "gzip",
+        "metersPerUnit": 500,
+        "expectedVertices": 40002,
+        "expectedFaces": 80000
+      },
+      "faceBudget": 800,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 500
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Pluto-system ephemeris; rapid nonsynchronous Nix spin. Mesh prime-meridian registration is unresolved and its orientation is a stated display convention."
+  },
+  "presentation": {
+    "defaultLens": "monochrome",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

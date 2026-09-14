@@ -1,0 +1,187 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "steins",
+  "displayName": "Steins",
+  "publicBase": "/scenes/steins/",
+  "distanceAu": 2.36320692758966,
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 0,
+          "centerLongitude": 0,
+          "connectedEdge": "north",
+          "connectedFillRange": [
+            0,
+            2
+          ]
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/steins_cart.wrl",
+        "format": "vrml-mesh",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 10242,
+          "expectedFaces": 20480
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -2.58
+        },
+        "minimum": -0.7,
+        "maximum": 1.1,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 2580,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90,
+    "surfaceObservations": [
+      {
+        "id": "osiris",
+        "format": "osiris-camera",
+        "consumer": "osiris-observation",
+        "filter": "Empty_OI",
+        "allowLossy": true,
+        "frames": [
+          {
+            "id": "approach",
+            "path": "observations/w20080905t183606461id4df17.img",
+            "cameraPath": "observations/osiris-camera.json",
+            "startTime": "2008-09-05T18:36:22.008"
+          },
+          {
+            "id": "image-w20080905t183630497id4df17",
+            "path": "observations/w20080905t183630497id4df17.img",
+            "cameraPath": "observations/w20080905t183630497id4df17-camera.json",
+            "startTime": "2008-09-05T18:36:46.044"
+          }
+        ],
+        "selection": "lowest-emission",
+        "levelMatching": {
+          "samplesPerTriangle": 24,
+          "minimumPairs": 64,
+          "maximumGain": 1.35
+        },
+        "transfer": {
+          "maximumSeparationMeters": 450,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1
+        },
+        "display": {
+          "percentiles": [
+            1.8,
+            98.7
+          ]
+        },
+        "metadata": {
+          "label": "OSIRIS",
+          "coverage": "Two OI-filter photographs show Šteins as Rosetta approached. Original illumination is retained, with a bounded brightness match where the images overlap. The grid marks gaps; this is not an albedo map.",
+          "falseColor": false
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 2.58,
+    "camera": {
+      "initialScenePitchDegrees": 10,
+      "defaultControlYawDegrees": 180
+    },
+    "mapUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
+    "polesUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/steins_cart.wrl",
+      "format": "vrml-mesh",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 10242,
+        "expectedFaces": 20480
+      },
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 100,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
+  },
+  "presentation": {
+    "defaultLens": "osiris",
+    "pointColor": [
+      180,
+      180,
+      180
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

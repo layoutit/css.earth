@@ -1,0 +1,809 @@
+{
+  "schema": "cssearth-hrii-facet-preparation@1",
+  "target": "9P/TEMPEL 1 (1867 G1)",
+  "targetAliases": [
+    "9P/TEMPEL 1"
+  ],
+  "mesh": {
+    "path": "shape/tempel1_2012_plan.tab",
+    "sha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777",
+    "grid": {
+      "metersPerUnit": 1000,
+      "expectedVertices": 16022,
+      "expectedFaces": 32040
+    }
+  },
+  "solar": {
+    "path": "science/hrii/hriir_020601_2_0.tab",
+    "sha256": "8eab0a393b884c15567f3e8b634d4ec2c3e40658f006732c75c6d85aa6230d8a"
+  },
+  "bodyToJ2000": [
+    [
+      -0.07977201909091047,
+      -0.9905660059968489,
+      -0.11142447098196179
+    ],
+    [
+      0.9090527984850294,
+      -0.02643137955281935,
+      -0.4158417869111657
+    ],
+    [
+      0.40897363550318977,
+      -0.13446326613014215,
+      0.9025852843498605
+    ]
+  ],
+  "offsetPixels": [
+    -2.5,
+    1.25
+  ],
+  "frames": [
+    {
+      "id": "hi05070405_9000036_001_r",
+      "number": 1,
+      "path": "science/hrii/hi05070405_9000036_001_r.fit",
+      "sha256": "28df49131bc824ea4803d97f0ee0135a4b3c95da9732cc0c733a3ee7173ba1e1",
+      "startTime": "2005-07-04T05:31:57.004"
+    },
+    {
+      "id": "hi05070405_9000036_002_r",
+      "number": 2,
+      "path": "science/hrii/hi05070405_9000036_002_r.fit",
+      "sha256": "9d4cd416bba953c98b04856caced1479e5bf9c5bab9d332fd7f6a4e51a25232a",
+      "startTime": "2005-07-04T05:31:59.883"
+    },
+    {
+      "id": "hi05070405_9000036_003_r",
+      "number": 3,
+      "path": "science/hrii/hi05070405_9000036_003_r.fit",
+      "sha256": "2a740848fcacf6bc951e4833ea4e9015370ec68003d6442ff86a5231bc161d60",
+      "startTime": "2005-07-04T05:32:02.766"
+    },
+    {
+      "id": "hi05070405_9000036_004_r",
+      "number": 4,
+      "path": "science/hrii/hi05070405_9000036_004_r.fit",
+      "sha256": "bb05ed63735f10a023f1e1bfdf92764105da4c20622481bd99334d719033ca81",
+      "startTime": "2005-07-04T05:32:05.645"
+    },
+    {
+      "id": "hi05070405_9000036_005_r",
+      "number": 5,
+      "path": "science/hrii/hi05070405_9000036_005_r.fit",
+      "sha256": "1443939a4a1f59a380a1c3d4e6ee15581447ca97f8de415671cf4bf0cadf733d",
+      "startTime": "2005-07-04T05:32:08.528"
+    },
+    {
+      "id": "hi05070405_9000036_006_r",
+      "number": 6,
+      "path": "science/hrii/hi05070405_9000036_006_r.fit",
+      "sha256": "643139d382cfc42cd6625683f1fd9184a0f6478ff4425605efc40b0e51a0907c",
+      "startTime": "2005-07-04T05:32:11.406"
+    },
+    {
+      "id": "hi05070405_9000036_007_r",
+      "number": 7,
+      "path": "science/hrii/hi05070405_9000036_007_r.fit",
+      "sha256": "59d633ffa95d2ff53f14c21512f3cdb5f9ee4601ffa4ce4544faf27c9ef42fa7",
+      "startTime": "2005-07-04T05:32:14.289"
+    },
+    {
+      "id": "hi05070405_9000036_008_r",
+      "number": 8,
+      "path": "science/hrii/hi05070405_9000036_008_r.fit",
+      "sha256": "a8c5ea9e198abd4042351a06b60e9aae8bd6cb2edb52144f5e4ead3e566e07f1",
+      "startTime": "2005-07-04T05:32:17.168"
+    },
+    {
+      "id": "hi05070405_9000036_009_r",
+      "number": 9,
+      "path": "science/hrii/hi05070405_9000036_009_r.fit",
+      "sha256": "0cb578453dc799c1c6e6acf392290d094e26d954c25ac08d77b92eff729f311d",
+      "startTime": "2005-07-04T05:32:20.051"
+    },
+    {
+      "id": "hi05070405_9000036_010_r",
+      "number": 10,
+      "path": "science/hrii/hi05070405_9000036_010_r.fit",
+      "sha256": "c07b33e824b95591701c38627c2f6b4c86308b38ab00fd88a992dd767b2f2818",
+      "startTime": "2005-07-04T05:32:22.930"
+    },
+    {
+      "id": "hi05070405_9000036_011_r",
+      "number": 11,
+      "path": "science/hrii/hi05070405_9000036_011_r.fit",
+      "sha256": "e5b315ac7ef057102639f4e5c4e3444ab1b1c55b62b8d2bd10295101a8c1457a",
+      "startTime": "2005-07-04T05:32:25.813"
+    },
+    {
+      "id": "hi05070405_9000036_012_r",
+      "number": 12,
+      "path": "science/hrii/hi05070405_9000036_012_r.fit",
+      "sha256": "1ca59eaa5ea58e425f79b4319d65108f949fa735085bb1f026bd495971435a62",
+      "startTime": "2005-07-04T05:32:28.696"
+    },
+    {
+      "id": "hi05070405_9000036_013_r",
+      "number": 13,
+      "path": "science/hrii/hi05070405_9000036_013_r.fit",
+      "sha256": "56fd379b566219f8df405ed4e59193df0f94c0d54052665c9d14dfe5b099cd15",
+      "startTime": "2005-07-04T05:32:31.575"
+    },
+    {
+      "id": "hi05070405_9000036_014_r",
+      "number": 14,
+      "path": "science/hrii/hi05070405_9000036_014_r.fit",
+      "sha256": "b7d4de67854e64d7adc5e1460038dbb9654276c5962619f7c5786a1b5afffef9",
+      "startTime": "2005-07-04T05:32:34.457"
+    },
+    {
+      "id": "hi05070405_9000036_015_r",
+      "number": 15,
+      "path": "science/hrii/hi05070405_9000036_015_r.fit",
+      "sha256": "bfddeddabec13ea47cd78c5a26fcf05d2732b8cd2b651f8803c6816aba3f0266",
+      "startTime": "2005-07-04T05:32:37.336"
+    },
+    {
+      "id": "hi05070405_9000036_016_r",
+      "number": 16,
+      "path": "science/hrii/hi05070405_9000036_016_r.fit",
+      "sha256": "4811101b70ee3014bb74e898f6bbf41b9479b8d193fbe81fa5bae324f93d34aa",
+      "startTime": "2005-07-04T05:32:40.219"
+    },
+    {
+      "id": "hi05070405_9000036_017_r",
+      "number": 17,
+      "path": "science/hrii/hi05070405_9000036_017_r.fit",
+      "sha256": "b411dec6bb4229d341adbc93a546afda1ba8bdc41adac73b9b7941a16b2cc96a",
+      "startTime": "2005-07-04T05:32:43.098"
+    },
+    {
+      "id": "hi05070405_9000036_018_r",
+      "number": 18,
+      "path": "science/hrii/hi05070405_9000036_018_r.fit",
+      "sha256": "7490ce73b2360f412307e2d623fe709f9969a39afb49dc948e8ea788903f9c60",
+      "startTime": "2005-07-04T05:32:45.981"
+    },
+    {
+      "id": "hi05070405_9000036_019_r",
+      "number": 19,
+      "path": "science/hrii/hi05070405_9000036_019_r.fit",
+      "sha256": "1abda541eecf93a2ec2e1622546050c19ed7999416c56b630532801e2dca2d59",
+      "startTime": "2005-07-04T05:32:48.860"
+    },
+    {
+      "id": "hi05070405_9000036_020_r",
+      "number": 20,
+      "path": "science/hrii/hi05070405_9000036_020_r.fit",
+      "sha256": "2052ba93a81c04aef722c6236cc1e051010eba08d5e8a56053a3e946c38f66d6",
+      "startTime": "2005-07-04T05:32:51.743"
+    },
+    {
+      "id": "hi05070405_9000036_021_r",
+      "number": 21,
+      "path": "science/hrii/hi05070405_9000036_021_r.fit",
+      "sha256": "e00d1421120d62d607b8dd82259a9c048679d167a1f82659e21cbd7a6d33c544",
+      "startTime": "2005-07-04T05:32:54.622"
+    },
+    {
+      "id": "hi05070405_9000036_022_r",
+      "number": 22,
+      "path": "science/hrii/hi05070405_9000036_022_r.fit",
+      "sha256": "09b50efcda07b41023b657cb245be6f257994ea500cac9cab959d472c075d981",
+      "startTime": "2005-07-04T05:32:57.504"
+    },
+    {
+      "id": "hi05070405_9000036_023_r",
+      "number": 23,
+      "path": "science/hrii/hi05070405_9000036_023_r.fit",
+      "sha256": "a1a784d89d26278bb1050b7de2202f237f2b4e078e24008e833ad266c6c91a55",
+      "startTime": "2005-07-04T05:33:00.383"
+    },
+    {
+      "id": "hi05070405_9000036_024_r",
+      "number": 24,
+      "path": "science/hrii/hi05070405_9000036_024_r.fit",
+      "sha256": "beaa0a2de1c31f1a2deec3373c2a87fc26f7e7d6280203b01ff93f1efc682dcd",
+      "startTime": "2005-07-04T05:33:03.266"
+    },
+    {
+      "id": "hi05070405_9000036_025_r",
+      "number": 25,
+      "path": "science/hrii/hi05070405_9000036_025_r.fit",
+      "sha256": "602e055ffd8976dc37952aae93b4b0b582a9f3fbfcf0507f73f9a1c87979626c",
+      "startTime": "2005-07-04T05:33:06.145"
+    },
+    {
+      "id": "hi05070405_9000036_026_r",
+      "number": 26,
+      "path": "science/hrii/hi05070405_9000036_026_r.fit",
+      "sha256": "8afa208030207aeae7f3f61bca0be7f47ae36a908ff3111ae989ff02c6e428f8",
+      "startTime": "2005-07-04T05:33:09.028"
+    },
+    {
+      "id": "hi05070405_9000036_027_r",
+      "number": 27,
+      "path": "science/hrii/hi05070405_9000036_027_r.fit",
+      "sha256": "966b459375ba4561e940e7ed18dea05ab457b06efb8019f975e6e6f6e83ece3b",
+      "startTime": "2005-07-04T05:33:11.907"
+    },
+    {
+      "id": "hi05070405_9000036_028_r",
+      "number": 28,
+      "path": "science/hrii/hi05070405_9000036_028_r.fit",
+      "sha256": "1c2e31d07bfbf88e313f1d6a534e533f697f18b55b4660afba2f72204280bf4f",
+      "startTime": "2005-07-04T05:33:14.790"
+    },
+    {
+      "id": "hi05070405_9000036_029_r",
+      "number": 29,
+      "path": "science/hrii/hi05070405_9000036_029_r.fit",
+      "sha256": "4bc3a97693304ddcc4b7edb9da833e02e39b21843e12b57f8adc617913cf4e07",
+      "startTime": "2005-07-04T05:33:17.669"
+    },
+    {
+      "id": "hi05070405_9000036_030_r",
+      "number": 30,
+      "path": "science/hrii/hi05070405_9000036_030_r.fit",
+      "sha256": "b86d4aac2b92c5804ebaebc5d90b3c6698894136d3b70c5fb5800a0f866cd19f",
+      "startTime": "2005-07-04T05:33:20.551"
+    },
+    {
+      "id": "hi05070405_9000036_031_r",
+      "number": 31,
+      "path": "science/hrii/hi05070405_9000036_031_r.fit",
+      "sha256": "02deb6c499e84700dd1e1c77c38feecfbbdfbd90a7e14f2f250eee8ab3646eef",
+      "startTime": "2005-07-04T05:33:23.430"
+    },
+    {
+      "id": "hi05070405_9000036_032_r",
+      "number": 32,
+      "path": "science/hrii/hi05070405_9000036_032_r.fit",
+      "sha256": "b7e21b1fd24bf926bef0e46616761a4bae27cac6a3c163bbdb5fa095d8be4bfe",
+      "startTime": "2005-07-04T05:33:26.313"
+    },
+    {
+      "id": "hi05070405_9000036_033_r",
+      "number": 33,
+      "path": "science/hrii/hi05070405_9000036_033_r.fit",
+      "sha256": "4c48e0f0bf1bff4e38d26680709c93a437594c386625c621d33dd81731238df3",
+      "startTime": "2005-07-04T05:33:29.192"
+    },
+    {
+      "id": "hi05070405_9000036_034_r",
+      "number": 34,
+      "path": "science/hrii/hi05070405_9000036_034_r.fit",
+      "sha256": "8167ec571fd6cf65d42198ec09983856488306ea2236ef9866f00118407718ac",
+      "startTime": "2005-07-04T05:33:32.075"
+    },
+    {
+      "id": "hi05070405_9000036_035_r",
+      "number": 35,
+      "path": "science/hrii/hi05070405_9000036_035_r.fit",
+      "sha256": "02497cceab09226946ce5dc745c88e3a7e4ee921014857cd773324f6921780b4",
+      "startTime": "2005-07-04T05:33:34.954"
+    },
+    {
+      "id": "hi05070405_9000036_036_r",
+      "number": 36,
+      "path": "science/hrii/hi05070405_9000036_036_r.fit",
+      "sha256": "cecbc26dc5486d5782e082368a21b03e19073a4df4151a680d0287639f3b5b4b",
+      "startTime": "2005-07-04T05:33:37.837"
+    },
+    {
+      "id": "hi05070405_9000036_037_r",
+      "number": 37,
+      "path": "science/hrii/hi05070405_9000036_037_r.fit",
+      "sha256": "2fac139ca71437fbcac991601f09bf5d2b872052a54370c63584c3a3de4a662b",
+      "startTime": "2005-07-04T05:33:40.720"
+    },
+    {
+      "id": "hi05070405_9000036_038_r",
+      "number": 38,
+      "path": "science/hrii/hi05070405_9000036_038_r.fit",
+      "sha256": "7cf38394e06daaf3f9697d3c5a40edbba6bb2620a9226e9f8f131e4d4dcfee1b",
+      "startTime": "2005-07-04T05:33:43.599"
+    },
+    {
+      "id": "hi05070405_9000036_039_r",
+      "number": 39,
+      "path": "science/hrii/hi05070405_9000036_039_r.fit",
+      "sha256": "2848cc8c90da78824dd3b366fb363c9a6e6117f95c2552fed19eed5105855910",
+      "startTime": "2005-07-04T05:33:46.481"
+    },
+    {
+      "id": "hi05070405_9000036_040_r",
+      "number": 40,
+      "path": "science/hrii/hi05070405_9000036_040_r.fit",
+      "sha256": "d9db939c0ef82072c5fffbceb4fa25a9f73c8e3a55e8f5108e26e4b1dc0ceedd",
+      "startTime": "2005-07-04T05:33:49.360"
+    }
+  ],
+  "registration": {
+    "method": "dense-context-fit-with-terrain-holdouts",
+    "controls": [
+      {
+        "id": "patch-17-2",
+        "frame": 17.967257644133593,
+        "row": 121.7024955874409,
+        "sourcePointMeters": [
+          1758.2313827311154,
+          -2093.9430736023933,
+          -1153.8381453249604
+        ]
+      },
+      {
+        "id": "patch-19-3",
+        "frame": 24.697792019901808,
+        "row": 135.57170611328974,
+        "sourcePointMeters": [
+          -292.07967929774895,
+          -833.0660771206021,
+          -2259.1117513831705
+        ]
+      },
+      {
+        "id": "patch-19-4",
+        "frame": 31.512707478850064,
+        "row": 136.45519521695115,
+        "sourcePointMeters": [
+          61.378015282098204,
+          1259.6095684263855,
+          -2009.1483632009476
+        ]
+      },
+      {
+        "id": "patch-20-2",
+        "frame": 18.49306664699048,
+        "row": 143.49099890764396,
+        "sourcePointMeters": [
+          -1463.1943330068607,
+          -1985.0383685361594,
+          -2136.265580529347
+        ]
+      }
+    ],
+    "maximumRmsPixels": 1.4142135623730951,
+    "maximumResidualPixels": 2,
+    "dense": {
+      "rowStart": 100,
+      "rowEnd": 156,
+      "seedOffsetPixels": [
+        -2.5,
+        1.5
+      ],
+      "radiusPixels": 4,
+      "stepPixels": 0.25,
+      "region": "surface-and-background",
+      "minimumFitPixels": 100,
+      "minimumCorrelation": 0.8
+    }
+  },
+  "coverage": {
+    "maximumIncidenceDegrees": 75,
+    "maximumEmissionDegrees": 75,
+    "edgeMarginPixels": 2
+  },
+  "context": {
+    "path": "science/hrii/hv05070405_9000844_001_r.fit",
+    "sha256": "62449ca95557872405544fae40cec5b7adc972dc1be27940e400b36b3588e109",
+    "reference": {
+      "path": "photography/deep-impact/iv05070405_9000632_001_r.json",
+      "sha256": "2b145f846105a7b972360041c31a94d1f01fdb4e756520a88b8248c44fef4f51"
+    },
+    "offsetPixels": [
+      -27.705813349455507,
+      5.129342692192625
+    ],
+    "maximumRmsMeters": 159,
+    "maximumResidualMeters": 318,
+    "controls": [
+      {
+        "id": "patch-13-17",
+        "partition": "fit",
+        "correlation": 0.9862536821977967,
+        "peakMargin": 0.07879419380257446,
+        "point": [
+          3054.281229039305,
+          -784.7887322101742,
+          -170.07726722583175
+        ],
+        "nativeSourcePixel": [
+          226.5009150124415,
+          174.50849741468508
+        ]
+      },
+      {
+        "id": "patch-13-21",
+        "partition": "fit",
+        "correlation": 0.9014116251349863,
+        "peakMargin": 0.12423551903134111,
+        "point": [
+          2652.1089009273564,
+          -1864.3589801192284,
+          509.82867111079395
+        ],
+        "nativeSourcePixel": [
+          279.49330597928844,
+          174.51336907212416
+        ]
+      },
+      {
+        "id": "patch-14-18",
+        "partition": "fit",
+        "correlation": 0.9693622407794039,
+        "peakMargin": 0.12851069855808195,
+        "point": [
+          2701.4048481759382,
+          -1367.559736924246,
+          -473.798893680796
+        ],
+        "nativeSourcePixel": [
+          240.157893993738,
+          187.82415198674107
+        ]
+      },
+      {
+        "id": "patch-15-18",
+        "partition": "holdout",
+        "correlation": 0.928616219296617,
+        "peakMargin": 0.1682543070216903,
+        "point": [
+          2348.884222861612,
+          -1577.4237869884819,
+          -733.271592983976
+        ],
+        "nativeSourcePixel": [
+          240.06244092446585,
+          200.54132347298514
+        ]
+      },
+      {
+        "id": "patch-15-20",
+        "partition": "holdout",
+        "correlation": 0.9447686632337298,
+        "peakMargin": 0.21809768278633124,
+        "point": [
+          2215.719517021789,
+          -2350.7859740871936,
+          -532.6723387986422
+        ],
+        "nativeSourcePixel": [
+          266.05010807715934,
+          201.0707786091517
+        ]
+      },
+      {
+        "id": "patch-16-14",
+        "partition": "fit",
+        "correlation": 0.9060644945611722,
+        "peakMargin": 0.19402449453423365,
+        "point": [
+          2241.218188916566,
+          457.6819791998714,
+          -1235.0620940793306
+        ],
+        "nativeSourcePixel": [
+          187.6087479069455,
+          214.24642280587815
+        ]
+      },
+      {
+        "id": "patch-16-19",
+        "partition": "holdout",
+        "correlation": 0.9213591797249092,
+        "peakMargin": 0.11429122247396051,
+        "point": [
+          1900.5772221867228,
+          -2126.3585412167013,
+          -1000.0396378785372
+        ],
+        "nativeSourcePixel": [
+          252.56642997563307,
+          214.39522412609676
+        ]
+      },
+      {
+        "id": "patch-16-21",
+        "partition": "holdout",
+        "correlation": 0.9413120577437327,
+        "peakMargin": 0.06266514011493651,
+        "point": [
+          1786.1743433513911,
+          -2666.6414243765175,
+          -393.4174235612154
+        ],
+        "nativeSourcePixel": [
+          279.4979649258487,
+          213.5129005123451
+        ]
+      },
+      {
+        "id": "patch-17-14",
+        "partition": "holdout",
+        "correlation": 0.9154388519384928,
+        "peakMargin": 0.3641682804036168,
+        "point": [
+          1930.8591808005003,
+          203.04941107332706,
+          -1439.6426470112056
+        ],
+        "nativeSourcePixel": [
+          187.69003462643573,
+          226.58297168635167
+        ]
+      },
+      {
+        "id": "patch-17-16",
+        "partition": "holdout",
+        "correlation": 0.9551709270725754,
+        "peakMargin": 0.09206710468066848,
+        "point": [
+          1750.6146149968263,
+          -863.7617125846446,
+          -1428.6585100945085
+        ],
+        "nativeSourcePixel": [
+          214.2964319684003,
+          227.42991929646817
+        ]
+      },
+      {
+        "id": "patch-17-20",
+        "partition": "holdout",
+        "correlation": 0.9542693094341539,
+        "peakMargin": 0.06230094789923013,
+        "point": [
+          1457.5165668091504,
+          -2585.9451241139323,
+          -870.3499367274344
+        ],
+        "nativeSourcePixel": [
+          266.3622722997617,
+          226.93907814737025
+        ]
+      },
+      {
+        "id": "patch-17-22",
+        "partition": "holdout",
+        "correlation": 0.9829055729559906,
+        "peakMargin": 0.09815318072091395,
+        "point": [
+          1317.5375645479653,
+          -2661.1497116405517,
+          -69.08808929845691
+        ],
+        "nativeSourcePixel": [
+          292.49587751733196,
+          227.4954946754257
+        ]
+      },
+      {
+        "id": "patch-18-14",
+        "partition": "fit",
+        "correlation": 0.9134851041359411,
+        "peakMargin": 0.10999785690248065,
+        "point": [
+          1583.9351398268482,
+          127.13138816691935,
+          -1660.9433593899012
+        ],
+        "nativeSourcePixel": [
+          187.71859584165279,
+          240.4031988225565
+        ]
+      },
+      {
+        "id": "patch-18-16",
+        "partition": "fit",
+        "correlation": 0.9302517128219111,
+        "peakMargin": 0.14683714479429366,
+        "point": [
+          1427.3303693042835,
+          -892.0813637133688,
+          -1600.9611671399325
+        ],
+        "nativeSourcePixel": [
+          213.8935979408232,
+          240.22943888639088
+        ]
+      },
+      {
+        "id": "patch-18-21",
+        "partition": "holdout",
+        "correlation": 0.9780205650282127,
+        "peakMargin": 0.120728366578573,
+        "point": [
+          994.2527813850902,
+          -2640.3174988571554,
+          -595.9419263117015
+        ],
+        "nativeSourcePixel": [
+          279.26226978493764,
+          240.01193067052913
+        ]
+      },
+      {
+        "id": "patch-19-23",
+        "partition": "fit",
+        "correlation": 0.9755259018254063,
+        "peakMargin": 0.12129808204171677,
+        "point": [
+          276.00046419969294,
+          -2486.506268406287,
+          209.6830669529736
+        ],
+        "nativeSourcePixel": [
+          305.49502886881464,
+          252.50572853176098
+        ]
+      },
+      {
+        "id": "patch-20-21",
+        "partition": "holdout",
+        "correlation": 0.9710500363317867,
+        "peakMargin": 0.06828833788345778,
+        "point": [
+          253.9697771499632,
+          -2567.9445757661015,
+          -741.4170746766031
+        ],
+        "nativeSourcePixel": [
+          278.5042641727278,
+          265.9785806078699
+        ]
+      },
+      {
+        "id": "patch-21-19",
+        "partition": "fit",
+        "correlation": 0.9162075900880995,
+        "peakMargin": 0.23176286618695197,
+        "point": [
+          55.29066386446357,
+          -2365.412758303806,
+          -1704.7700719814748
+        ],
+        "nativeSourcePixel": [
+          252.68119763671254,
+          278.69723150111787
+        ]
+      },
+      {
+        "id": "patch-22-19",
+        "partition": "holdout",
+        "correlation": 0.916271950782678,
+        "peakMargin": 0.13211519642800507,
+        "point": [
+          -283.46375310758594,
+          -2319.10089587979,
+          -1778.1106728035957
+        ],
+        "nativeSourcePixel": [
+          252.88958750123652,
+          291.7245787939682
+        ]
+      },
+      {
+        "id": "patch-22-20",
+        "partition": "fit",
+        "correlation": 0.9396522708302176,
+        "peakMargin": 0.09698283706777133,
+        "point": [
+          -323.32296890136786,
+          -2414.716176137328,
+          -1278.589218750596
+        ],
+        "nativeSourcePixel": [
+          265.86353836821047,
+          291.8780627794695
+        ]
+      },
+      {
+        "id": "patch-22-21",
+        "partition": "holdout",
+        "correlation": 0.9426027835044273,
+        "peakMargin": 0.22145496182774294,
+        "point": [
+          -495.5920551912859,
+          -2408.598776679486,
+          -933.9716097861528
+        ],
+        "nativeSourcePixel": [
+          279.2322549782424,
+          292.4559062461275
+        ]
+      },
+      {
+        "id": "patch-23-18",
+        "partition": "holdout",
+        "correlation": 0.9704667176760122,
+        "peakMargin": 0.16194875983178758,
+        "point": [
+          -515.0594085959019,
+          -1995.2022252902389,
+          -2171.2955079711974
+        ],
+        "nativeSourcePixel": [
+          240.20072495337104,
+          304.7389480201955
+        ]
+      },
+      {
+        "id": "patch-23-20",
+        "partition": "holdout",
+        "correlation": 0.9071663858229373,
+        "peakMargin": 0.064820613044696,
+        "point": [
+          -713.2636931942543,
+          -2337.699636498466,
+          -1501.321557899937
+        ],
+        "nativeSourcePixel": [
+          265.9144467435415,
+          304.91004386677804
+        ]
+      },
+      {
+        "id": "patch-23-22",
+        "partition": "holdout",
+        "correlation": 0.9410721272511645,
+        "peakMargin": 0.10372104972828888,
+        "point": [
+          -1036.3502774104709,
+          -2417.5779113434255,
+          -566.8728038761765
+        ],
+        "nativeSourcePixel": [
+          292.0456865272698,
+          305.17719557177156
+        ]
+      },
+      {
+        "id": "patch-24-21",
+        "partition": "holdout",
+        "correlation": 0.9614949432176223,
+        "peakMargin": 0.19498960907749763,
+        "point": [
+          -1174.0822116563795,
+          -2403.291200844571,
+          -1116.6964001003653
+        ],
+        "nativeSourcePixel": [
+          278.53328548717184,
+          318.0164577974481
+        ]
+      },
+      {
+        "id": "patch-25-13",
+        "partition": "fit",
+        "correlation": 0.9313456878156755,
+        "peakMargin": 0.08604141777664731,
+        "point": [
+          -997.7503048918443,
+          1384.9609783701599,
+          -1875.327605612576
+        ],
+        "nativeSourcePixel": [
+          174.5290449568178,
+          331.4873251212021
+        ]
+      },
+      {
+        "id": "patch-28-25",
+        "partition": "holdout",
+        "correlation": 0.9705332323578804,
+        "peakMargin": 2.97053323235788,
+        "point": [
+          -3058.1550843192963,
+          -2083.087122304365,
+          355.7537792250514
+        ],
+        "nativeSourcePixel": [
+          331,
+          370.4986695560307
+        ]
+      }
+    ]
+  }
+}

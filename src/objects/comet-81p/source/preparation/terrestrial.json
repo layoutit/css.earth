@@ -1,0 +1,179 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "comet-81p",
+  "displayName": "Wild 2",
+  "publicBase": "/scenes/comet-81p/",
+  "distanceAu": 3.4501886283432213,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "model",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Completed shape model",
+          "modeled": true,
+          "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase."
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": [],
+    "mosaics": [],
+    "surfaceObservations": [
+      {
+        "id": "navcam",
+        "format": "encounter-fits",
+        "consumer": "photographs-navcam",
+        "frames": [
+          {
+            "id": "n2075we02-rr",
+            "path": "photography/navcam/n2075we02_rr.fit",
+            "labelPath": "photography/navcam/n2075we02_rr.lbl",
+            "controlPath": "photography/navcam/n2075we02_rr.json"
+          },
+          {
+            "id": "n2073we02-rr",
+            "path": "photography/navcam/n2073we02_rr.fit",
+            "labelPath": "photography/navcam/n2073we02_rr.lbl",
+            "controlPath": "photography/navcam/n2073we02_rr.json"
+          },
+          {
+            "id": "n2077we02-rr",
+            "path": "photography/navcam/n2077we02_rr.fit",
+            "labelPath": "photography/navcam/n2077we02_rr.lbl",
+            "controlPath": "photography/navcam/n2077we02_rr.json"
+          },
+          {
+            "id": "n2079we02-rr",
+            "path": "photography/navcam/n2079we02_rr.fit",
+            "labelPath": "photography/navcam/n2079we02_rr.lbl",
+            "controlPath": "photography/navcam/n2079we02_rr.json"
+          }
+        ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 32,
+          "minimumPairs": 64,
+          "maximumGain": 3
+        },
+        "transfer": {
+          "maximumSeparationMeters": 150,
+          "maximumEmissionDegrees": 75,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "observed",
+          "maximumGain": 1
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99.7
+          ]
+        },
+        "metadata": {
+          "label": "Stardust photographs",
+          "coverage": "Four Stardust photographs fitted to the measured part of the nucleus. Original shadows and some seams remain. The gray grid marks gaps; surface placement is approximate."
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 1.9171067262613963,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/comet-81p/comet-81p-model-surface@2x.webp",
+    "polesUrl": "/scenes/comet-81p/comet-81p-model-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/wild2_cart_full.tab",
+      "format": "pds-plate-model",
+      "grid": {
+        "metersPerUnit": 1,
+        "indexBase": 0,
+        "expectedVertices": 8761,
+        "expectedFaces": 17518,
+        "provenanceFlags": "observed-ellipsoid"
+      },
+      "faceBudget": 2000,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 1000,
+        "maximumErrorMeters": 55,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u",
+      "sourceLighting": {
+        "maximumDistanceMeters": 150,
+        "rayOffsetMeters": 0.25,
+        "ambient": 0.16,
+        "diffuse": 0.84,
+        "floodLights": [
+          {
+            "direction": [
+              0,
+              0,
+              1
+            ],
+            "weight": 0.36
+          },
+          {
+            "direction": [
+              0,
+              1,
+              0
+            ],
+            "weight": 0.24
+          },
+          {
+            "direction": [
+              1,
+              0,
+              0
+            ],
+            "weight": 0.24
+          }
+        ]
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons osculating elements; PDS v2.1 Wild 2 model axes.",
+    "qualification": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase."
+  },
+  "presentation": {
+    "defaultLens": "model",
+    "pointColor": [
+      184,
+      182,
+      178
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

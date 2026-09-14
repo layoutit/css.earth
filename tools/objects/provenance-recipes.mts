@@ -104,7 +104,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
             ...(plan.nativePhotographicSampling ? {nativePhotographicSampling:plan.nativePhotographicSampling} : {}) },
         });
     });
-    for (const kind of ['scientific', 'mosaics', 'observedColors', 'shapeViews', 'surfaceObservations']) {
+    for (const kind of ['scientific', 'observedColors', 'shapeViews', 'surfaceObservations']) {
       namedRecords(plans[kind] ?? []).forEach((plan, index) => {
         const used = paths(plan);
         if (plan.consumer) used.push(...group(text(plan.consumer)));

@@ -12,7 +12,7 @@ const read = async (path: string): Promise<unknown> => JSON.parse(await readFile
 
 test('every registered dataset has a specific published title, independent of category and source-link availability', async () => {
   for (const { id } of OBJECTS) {
-    const root = `../../src/planets/${id}/`;
+    const root = `../../src/objects/${id}/`;
     const [rawControls, rawText, rawProvenance] = await Promise.all([
       read(root + 'prepared/controls.json'), read(root + 'prepared/text.json'), read(root + 'prepared/provenance.json'),
     ]);

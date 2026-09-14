@@ -1,0 +1,149 @@
+{
+  "id": "donaldjohanson",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Donaldjohanson",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "features",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "llorri",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 2.405325
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "477002ef2153e9fe519e0f8926d037fa2b232037cfa5c705007fe04162f2de1d"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "918b3e0abdbef4a3f392ae495a8b2ecdea847c9343ecf80974fa934672352d2a"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "d5ac1cd85afb70b1dde6d59b9405a8e18e893627c6db59df44528d413fee9d08"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "b1d4b3007fe7d1c1b550a08c4b59ca77d3fa4dd66e5c714f29b5dc63ce974cfb"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "30acf1de1f990c7a3d9ab06371a4bfaf7967aea34519d155db01ade7ce6b3fb9"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "d1ebdb99c197fd1a007039f1913a778afe22cc58886b22711ae370821fedc475"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "e051d0ae8c5eca92e27231fbcdfe7d1dc3780ec19898aa74a8be968b9503b624"
+        }
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        139095794422.29706,
+        -371727141504.62384,
+        -145294153995.44083
+      ],
+      "presentationToReference": [
+        0.3292938173360858,
+        0,
+        0.9442275053525122,
+        -0.8663117986732624,
+        0.3977771559319137,
+        0.3021211705561445,
+        -0.3755921316318081,
+        -0.9174820620691818,
+        0.1309855581259113
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 10.457934782608694,
+      "bodyRadiusM": 2405.325
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/donaldjohanson-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9dc5a25459351e8dc3c0ce55207305e4478ca858301dec69c6b7b7b6cc09d3c2"
+      }
+    },
+    "catalog": {
+      "name": "Donaldjohanson",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3839407716914627,
+      "description": "Contact-binary asteroid that Lucy flew past.",
+      "systemName": "Solar System",
+      "order": 203,
+      "context": {
+        "order": 146
+      }
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "8896e58ebc3bc43e6b1cbf4d4fb8f1bce45e41584b6abaaa86f843cf1494ed16"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "body": "telesto",
+  "lens": {
+    "id": "normal",
+    "ready": true
+  },
+  "purpose": "Inspect the expanded Monochrome mosaic at a closer product view. Source/package qualification and the companion capture report establish source and loaded asset identities.",
+  "baseCommit": "3b40e07237acb14506f39d7a12f6533d28e069f3",
+  "workingTreeChanges": "Cassini close-encounters moon data and capture helper; local nebula preparation changed the M2-9 prepared hash.",
+  "runtimeSha256": "ab72ddcefd805c93a246f8a7b0ac7c5ad82d87d717a1dffc3e0c6dbd6190ce8c",
+  "browser": "152.0.7977.84",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "dpr": 1,
+  "crop": {
+    "x": 360,
+    "y": 80,
+    "width": 720,
+    "height": 660
+  },
+  "image": {
+    "file": "monochrome.png",
+    "sha256": "c9ab01dbfa016dcccee6ef7fcbc8fd02c0415bd133bc5e92aae44eaac6e041ea"
+  },
+  "url": "http://127.0.0.1:4284/telesto/?v=MEZAUQXlJdWTPkFCxzNAAAAAP6ESjn1ChTS_wqo1fSyjGr_MNl8mhsXUAAA",
+  "pose": {
+    "schema": "cssearth-camera-pose@1",
+    "scene": "matrix3d(-0.900615749846,0.128559771725,0.415167022082,0,0,0.955249687661,-0.295800666368,0,-0.434616234315,-0.266402738946,-0.860312913742,0,0,0,0,1)",
+    "skybox": "matrix3d(-0.812917941423,0.172267844931,0.556316546156,0,-0.534321479025,0.159357184395,-0.83012388848,0,-0.231656695472,-0.97207454027,-0.037497890428,0,0,0,0,1)",
+    "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+  },
+  "settings": {
+    "shadows": false,
+    "orbit": true
+  },
+  "stableDom": true,
+  "errors": []
+}

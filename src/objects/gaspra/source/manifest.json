@@ -1,0 +1,750 @@
+{
+  "schema": "cssgaspra-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
+      "license": "NASA PDS public scientific data; retain attribution and source notices.",
+      "acquisition": "Checked-in original; restore and hash-verify through preparation/acquisition.json.",
+      "redistribution": "Attributed scientific visualization derivatives; see NOTICE.md.",
+      "id": "gaspra-shape",
+      "path": "shape/951gaspra.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab",
+      "consumers": [
+        "terrain",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "planetocentric-radial-grid",
+        "longitudeDirection": "west",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 6100
+      },
+      "coverage": "Published complete radial model at 2° spacing. Observational constraints vary; unseen regions are uncertain.",
+      "expectedBytes": 527072,
+      "expectedSha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-shape",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
+      "license": "NASA PDS public scientific data; retain attribution and source notices.",
+      "acquisition": "Checked-in original; restore and hash-verify through preparation/acquisition.json.",
+      "redistribution": "Attributed scientific visualization derivatives; see NOTICE.md.",
+      "id": "gaspra-normal",
+      "path": "maps/951gaspram.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 720,
+      "height": 360,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "west",
+        "centerLongitude": 0,
+        "sourceColumnDirection": "east",
+        "sourceRowOrder": "north-to-south",
+        "registrationEvidence": "reference/registration.md"
+      },
+      "coverage": "High-pass filtered SSI observation mosaic at 2 px/degree, best native detail approximately55 m/px. Zero is poor or no coverage; 64.6022% of unweighted native map pixels are zero. Remaining imagery retains photographed illumination, not calibrated albedo.",
+      "expectedBytes": 262080,
+      "expectedSha256": "7dc37fa0ab91303f1875b2e4293aa420727d67d9479d63fc1e9e680e26ec02e1",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-normal",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-107318326rcal_clr-fit",
+      "path": "observations/107318326rcal_clr.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318326rcal_clr.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "The preserved credit for this input reads: NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)"
+          }
+        ]
+      },
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 2563200,
+      "expectedSha256": "5b6a64135b22c8431ec91f0b3cb8f2cb24e6509edcb2ad4df56bcabdfa07ccc6",
+      "width": 800,
+      "height": 800,
+      "lensId": "calibrated",
+      "label": "Calibrated image",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-107318326rcal-clr-fit",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-107318326rcal_clr-xml",
+      "path": "observations/107318326rcal_clr.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318326rcal_clr.xml",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 9633,
+      "expectedSha256": "53ef20427179844ab1bfc6fcc66395ba78e949244cd2b614a482ddf6fe1a3301",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-107318326rcal-clr-xml",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-e8326-fit",
+      "path": "observations/e8326.fit",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8326.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 645120,
+      "expectedSha256": "ec66eee211c1b1f3de267375f976b01517365bacd7b22e4eb9842713c2e9541d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-e8326-fit",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-e8326-lbl",
+      "path": "observations/e8326.lbl",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8326.lbl",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 10480,
+      "expectedSha256": "dd3e14be6e822c73bd3efbda58e5cb586b0654dfde8da58e9a19c0d306c2e792",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-e8326-lbl",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-gaspbad-tab",
+      "path": "observations/gaspbad.tab",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspbad.tab",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 35828,
+      "expectedSha256": "d38c32fca409f5ceb2c51da96a9bc8fe58e3fcabe7168b52e23886fadcf71654",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-gaspbad-tab",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-gaspbad-lbl",
+      "path": "observations/gaspbad.lbl",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspbad.lbl",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 9120,
+      "expectedSha256": "55be9710b892ce9a79464f42cf358bb2bc4e583231affa557e61a818b3ab6dc9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-gaspbad-lbl",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-gll36001-ti",
+      "path": "reference/gll36001.ti",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/ik/gll36001.ti",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 9964,
+      "expectedSha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "galileo-ssi-gll36001",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-camera-catalog-tab",
+      "path": "reference/951gaspimg.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspimg.tab",
+      "credit": "P. C. Thomas and colleagues; NASA/JPL/Galileo SSI",
+      "license": "Public scientific data; retain source attribution.",
+      "acquisition": "Original camera catalog retained in source/reference/.",
+      "redistribution": "Retain scientific attribution.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 1152,
+      "expectedSha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-camera-catalog-tab",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-camera-catalog-xml",
+      "path": "reference/951gaspimg.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspimg.xml",
+      "credit": "P. C. Thomas and colleagues; NASA/JPL/Galileo SSI",
+      "license": "Public scientific data; retain source attribution.",
+      "acquisition": "Original camera catalog retained in source/reference/.",
+      "redistribution": "Retain scientific attribution.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 8616,
+      "expectedSha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-camera-catalog-xml",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-107318313rcal_clr-fit",
+      "path": "observations/107318313rcal_clr.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318313rcal_clr.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 2563200,
+      "expectedSha256": "33c2768822732f79334f80fba161f86aacc27d3c70de3a4cce2315789b3d9f8e",
+      "width": 800,
+      "height": 800,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-107318313rcal-clr-fit",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-107318313rcal_clr-xml",
+      "path": "observations/107318313rcal_clr.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318313rcal_clr.xml",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 9633,
+      "expectedSha256": "cd2bf7b4bee1f6e2896082dfb78eabe574d62b6880d3fef2d8ec85dd3647c59b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-107318313rcal-clr-xml",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-e8313-fit",
+      "path": "observations/e8313.fit",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8313.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 645120,
+      "expectedSha256": "89e3fe56ef9eddb0e7a2bd1af0a8be0d0ca6ebf92b661fbdf070283e1b6cab00",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-e8313-fit",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaspra-e8313-lbl",
+      "path": "observations/e8313.lbl",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8313.lbl",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 10480,
+      "expectedSha256": "f411a08eb9d4a918e4f9feb6a5929366ffd51cee0654c5de3ccc61be184bf9f3",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-e8313-lbl",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-gaspra-nomenclature-center-pts",
+      "path": "features/GASPRA_nomenclature_center_pts.zip",
+      "expectedBytes": 125910,
+      "expectedSha256": "f4f3eb723f28d36a45690f0ff0a5be07b5ae42a4c52d36bc55506a03936a582f",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GASPRA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Gaspra on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Gaspra centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/GASPRA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "gaspra-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1005,
+      "expectedSha256": "61c8b4787b3d0fdd7587690eac12243cdea76018599f898dc2e40c34429d7c78",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "gaspra-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1129,
+      "expectedSha256": "e56d3db7e5b847cc73d83d0652ad5c4d7658b992b79923a37433422a4941f1a7",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "gaspra-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 153,
+      "expectedSha256": "d7e2f54918ea9f280437edf5ebd10a617c6fd23307f04b1b9670f77b5df71a7d",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit",
+      "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
+      "license": "NASA PDS public scientific data; retain attribution and source notices.",
+      "expectedBytes": 90870,
+      "expectedSha256": "2b8893d9517f0e2a419fa4b6f43cc52dd5ce29888b53479a993f7daca792ac95",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "gaspra-normal",
+          "gaspra-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 300,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 10536,
+      "expectedSha256": "89eace3af6e5324588de7c0db95fce55e61383596d34a77b2a9e7329c313fb08",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 5360,
+      "expectedSha256": "61c1d0ede16f6b967896ee0649e494fb1f44fde3ef3559f84ee05bb02e104043"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1310,
+      "expectedSha256": "dee47e04d6e3eb8f283c2c847e7699400b19294117ecbf39b45901007e0e46b5"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 408,
+      "expectedSha256": "8b47b613cc29dd97ad41bb701310476a82578fe38948bc6cf21b92ea7cf269c8"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 6714,
+      "expectedSha256": "33d3053757b3e68179d30b8bb45f2325bd4810a1c1054a0a803288bfd451b97c"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4935,
+      "expectedSha256": "ea129b86bf5d3cd5e06e8bb2e32242a30df3200924d8908c80ff250a35248147"
+    },
+    {
+      "path": "reference/951gaspra.xml",
+      "expectedBytes": 5531,
+      "expectedSha256": "6d92d943bef6a9bee3e21580c9ea14e9b717490c6dfdf2e989dbdf9d2d62d9e3"
+    },
+    {
+      "path": "reference/951gaspram.lbl",
+      "expectedBytes": 3760,
+      "expectedSha256": "dba7b9d75c22d9e143fdf732c8ba8cb97ecc786ed9b2ce284c805066cddf4b21"
+    },
+    {
+      "path": "reference/951gaspram.xml",
+      "expectedBytes": 7034,
+      "expectedSha256": "6d1f4f0e728b1a3bef00ef038d9e4b22102fcd6c636fe6cd35157bebe10cd7d4"
+    },
+    {
+      "path": "reference/bundle_description.txt",
+      "expectedBytes": 8495,
+      "expectedSha256": "e9e95c6166d77a94f475da744fc1ff828f020f455eb5eda6b725334300bb735d"
+    },
+    {
+      "path": "reference/calibrated-description.txt",
+      "expectedBytes": 5371,
+      "expectedSha256": "1b0c5a3aef3c6b2df91ac55a6a721396bdabb3ec713c167c5a7897715b8cda2a"
+    },
+    {
+      "path": "reference/color-geometry-description.txt",
+      "expectedBytes": 6207,
+      "expectedSha256": "7ae7cdbd5a765556bd2e3b296276f694e546394eedf01dfa8482c02d867d3c7c"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7636,
+      "expectedSha256": "aa1a7acf9d6ae96b98ba85535f11458981f260bedf4ed1cde3f34283c26e178d"
+    },
+    {
+      "path": "reference/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+    },
+    {
+      "path": "reference/registration.json",
+      "expectedBytes": 1724,
+      "expectedSha256": "09cdc6d98819f4a33e25904e1b30915b265845719392b142ecc1d72312b1c03f"
+    },
+    {
+      "path": "reference/registration.md",
+      "expectedBytes": 2476,
+      "expectedSha256": "3852552dd5f60c2e5e192eae4c56c8c28f2cafdecbe3d494e58c98e41c4ec49b"
+    },
+    {
+      "path": "reference/stooke-951gaspra.xml",
+      "expectedBytes": 7034,
+      "expectedSha256": "8d183c5b2f588ea7361a9f32c0fd2939430f6172ac143e7949de918c689bfbb3"
+    },
+    {
+      "path": "reference/stooke-description.txt",
+      "expectedBytes": 5105,
+      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+    },
+    {
+      "path": "reference/stooke-gascylmo.jpg",
+      "expectedBytes": 426988,
+      "expectedSha256": "af98d7470f31015182fc8d5b25e1464ec8d0d6750e98bd56df45c6fb5d0dd91b"
+    },
+    {
+      "path": "reference/stooke-gq5gedis.jpg",
+      "expectedBytes": 226540,
+      "expectedSha256": "52322646ebcc8c0a65dc34f3698a5dcaa59e0951a2421810aa323d74ea4c6893"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 596,
+      "expectedSha256": "e0ce396ecd8248da152da0f67d7e2de2df102c6b81c2c88ca37d66bd35c03009"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 89772,
+      "expectedSha256": "506f238ccd2407eddad42f20cd79a5e32991e473371898f73a7d4242831fd266"
+    },
+    {
+      "path": "reference/calibrated-registration.json",
+      "purpose": "Registration check profile for the archived camera and source mosaic.",
+      "expectedBytes": 632,
+      "expectedSha256": "61ad2efa7008f775b57e80b844595e755de6ae0c47b7250fce65412041ee56fb"
+    },
+    {
+      "path": "reference/calibrated-registration-results.json",
+      "purpose": "Reproducible checks of the archived camera against the pinned Thomas mosaic; no local fit.",
+      "expectedBytes": 3865,
+      "expectedSha256": "db40e4a3b807f497d06291b5df5edf666876efa2519255337a6b9dbdacdccc34"
+    },
+    {
+      "path": "reference/registration-107318313.json",
+      "purpose": "Independent checks of the archived image-to-shape registration.",
+      "expectedBytes": 611,
+      "expectedSha256": "06cc9dffa163a79f446e48e913b6d56baa9388c55e4358e1ea45dce3c5f88d02"
+    },
+    {
+      "path": "reference/mosaic-registration-results.json",
+      "purpose": "Measured, unfitted registration checks for the added Galileo observation.",
+      "expectedBytes": 3923,
+      "expectedSha256": "b17c41f60285417a984be45d573d5b4fb1b52592ec72590e19fa31e45283a6fc"
+    },
+    {
+      "id": "gaspra-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 925,
+      "expectedSha256": "2852ee8636662b09f0592a21b1fe443d68903803e5b8ba5a61eb29642f2f826c",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 1 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts gaspra: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "photometry/helfenstein-1994-hapke.json",
+      "expectedBytes": 579,
+      "expectedSha256": "6cf5b5780d9bcbab552bc7e8b5b7f83d31532b082c76d5d521f565024a4b050d",
+      "purpose": "Published Hapke photometric model of Gaspra, used to normalize the Galileo photograph mosaic.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1006-icar-1994-1005",
+            "role": "method",
+            "evidence": "Helfenstein et al. (1994) give the single-scattering albedo 0.36, opposition amplitude 1.63 and roughness 29 degrees, fitted to Earth-based photometry at 2-25 degrees phase and Galileo data at 33-51 degrees phase.",
+            "locator": "Abstract"
+          },
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2015-11-023",
+            "role": "reference",
+            "evidence": "Hasselmann et al. (2016) tabulate the Helfenstein et al. (1994) Gaspra solution, including the opposition width 0.06, asymmetry factor -0.18 and 560 nm wavelength that the abstract does not state.",
+            "locator": "Table 7, row printed as (941) Gaspra"
+          }
+        ]
+      }
+    }
+  ]
+}

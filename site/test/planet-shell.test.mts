@@ -241,7 +241,7 @@ test("shared router cancels a pending adapter before publication", async () => {
 test("keeps implemented routes backed by object-owned files", async () => {
   for (const planet of OBJECTS) {
     await validateObjectPackageFiles(planet);
-    await access(new URL(`../../src/planets/${planet.id}/prepared/object.json`, import.meta.url));
+    await access(new URL(`../../src/objects/${planet.id}/prepared/object.json`, import.meta.url));
   }
 });
 
@@ -280,7 +280,7 @@ test("keeps source-backed chart data in canonical order with Reflectance first",
   }
 
   const mercury = requireRecord(JSON.parse(await readFile(
-    new URL("../../src/planets/mercury/prepared/content.json", import.meta.url),
+    new URL("../../src/objects/mercury/prepared/content.json", import.meta.url),
     "utf8",
   )), "Mercury content");
   assert.doesNotMatch(JSON.stringify(mercury.charts), /temperature-pressure|mercury-no-atmosphere-profile/u);
@@ -309,7 +309,7 @@ test("publishes dataset text beside the controls, never inside the object model"
   const controls = requireRecord(requireRecord(saturn.object.data, 'Saturn prepared body').controls, 'Saturn controls');
   const lenses = requireArray(requireRecord(controls.lenses, 'Saturn lenses').controls, 'Saturn lens controls').map(value => requireRecord(value, 'lens'));
   assert.ok(lenses.every(lens => ['title', 'detail', 'summary', 'description'].every(key => !Object.hasOwn(lens, key))));
-  const text = parsePreparedText(JSON.parse(await readFile(new URL("../../src/planets/saturn/prepared/text.json", import.meta.url), "utf8")), "saturn");
+  const text = parsePreparedText(JSON.parse(await readFile(new URL("../../src/objects/saturn/prepared/text.json", import.meta.url), "utf8")), "saturn");
   assert.deepEqual(Object.keys(text.datasets), lenses.map(lens => requireString(lens.id, 'lens id')));
 });
 

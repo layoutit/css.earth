@@ -7,7 +7,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadVrmlShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/lutetia/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/lutetia/source');
 const read=createSourceFixtureReader(root);
 
 test('Lutetia preserves its source pins and each runtime preparation input has a restoration operation',async()=>{
@@ -15,6 +15,7 @@ test('Lutetia preserves its source pins and each runtime preparation input has a
  const plan=await read('preparation/acquisition.json');
  for(const input of source.manifest.inputs)if(!['preparation/camera.json','observations/osiris-camera.json',
    'preparation/n20100710t154135529id4df22-camera.json','observations/n20100710t154135529id4df22-camera.json',
+   'preparation/n20100710t154241240id4df22-camera.json','observations/n20100710t154241240id4df22-camera.json',
    // Surface places are project-authored and committed, so they have nothing to restore.
    'features/manifest.json','preparation/features.json','presentation/surface-map.json'].includes(input.path))assert.ok(plan.operations.some(step=>step.path===input.path),`Missing acquisition path for ${input.path}`);
 });

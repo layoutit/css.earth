@@ -1,0 +1,273 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "didymos",
+  "displayName": "Didymos",
+  "publicBase": "/scenes/didymos/",
+  "distanceAu": 1.6427722213006,
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/didymos_g_9309mm_spc_obj_0000n00000_v003.obj",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 24578,
+          "expectedFaces": 49152
+        },
+        "valueTransform": {
+          "scale": 1,
+          "offset": -365
+        },
+        "minimum": -120,
+        "maximum": 90,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 365,
+          "heightToMeters": 1,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        }
+      },
+      {
+        "id": "albedo",
+        "label": "Relative albedo",
+        "consumer": "albedo",
+        "path": "shape/didymos_g_9309mm_spc_obj_0000n00000_v003.obj",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 24578,
+          "expectedFaces": 49152
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        },
+        "minimum": 0.75,
+        "maximum": 1.4,
+        "colors": [
+          "#404040",
+          "#f2f2f2"
+        ],
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 8
+        },
+        "facetField": {
+          "format": "fits-spc-facet-table",
+          "path": "science/didymos_g_9309mm_spc_alb_0000n00000_v003.fits",
+          "labelPath": "science/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
+          "field": "RELATIVE ALBEDO",
+          "target": "DIDYMOS",
+          "sourceVersion": "Palmer-didymos-v003",
+          "mapVersion": "003",
+          "maximumCentroidResidualMeters": 0.001,
+          "validity": "positive-sigma"
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90,
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ],
+    "surfaceObservations": [
+      {
+        "id": "draco",
+        "format": "pds4-geometry-cube",
+        "consumer": "draco-observation",
+        "filter": "unfiltered",
+        "frames": [
+          {
+            "id": "t-minus-94s",
+            "path": "observations/dart_0401929957_21942_01_geo.fits",
+            "labelPath": "observations/dart_0401929957_21942_01_geo.xml",
+            "startTime": "2022-09-26T23:12:49.930Z"
+          },
+          {
+            "id": "t-minus-158s",
+            "path": "observations/dart_0401929893_44487_01_geo.fits",
+            "labelPath": "observations/dart_0401929893_44487_01_geo.xml",
+            "startTime": "2022-09-26T23:11:46.381Z"
+          }
+        ],
+        "cube": {
+          "collection": "urn:nasa:pds:dart:data_dracoddp",
+          "target": "65803 Didymos",
+          "observingSystem": [
+            "DART:Host",
+            "DRACO:Instrument"
+          ],
+          "shapeKernel": "dimorphos_g_00243mm_spc_0000n00000_v004.bds",
+          "quantity": "I/F",
+          "planes": {
+            "image": "ioverf",
+            "x": "xcoord",
+            "y": "ycoord",
+            "z": "zcoord",
+            "incidence": "incidence",
+            "emission": "emission",
+            "phase": "phase",
+            "pixelScale": [
+              "horizpixscale",
+              "vertpixscale"
+            ]
+          },
+          "header": {
+            "MISSION": "DART",
+            "INSTRUME": "DRACO",
+            "TARGET": "65803 Didymos",
+            "BADIMAGE": "FALSE",
+            "IOVERF": "PERFORM",
+            "RADIANCE": "PERFORM",
+            "CALIB": "ON",
+            "BINNING": "ON",
+            "MISPXVAL": "1E10",
+            "PXOUTWIN": "-1E10",
+            "SATPXVAL": "1E09",
+            "GEOINVAL": "-999",
+            "SHAPREF2": "dimorphos_g_0243mm_spc_obj_0000n00000_v004.obj",
+            "SHAPREF1": "didymos_g_1165mm_spc_obj_0000n00000_v003.obj"
+          },
+          "headerTime": "ACQ_UTC",
+          "headerPlaneNames": {
+            "prefix": "PLANE",
+            "names": {
+              "ioverf": "Pixel value",
+              "xcoord": "X coordinate of pixel center",
+              "ycoord": "Y coordinate of pixel center",
+              "zcoord": "Z coordinate of pixel center",
+              "incidence": "Solar incidence angle",
+              "emission": "Emission angle",
+              "phase": "Solar phase angle"
+            }
+          },
+          "geometrySelection": {
+            "plane": "radius",
+            "unit": "km",
+            "minimum": 0.2,
+            "maximum": 0.5,
+            "interpretation": "Select Didymos from a cube containing body-centred intercepts for both asteroids. The 0.2–0.5 km interval brackets the full Didymos v003 source mesh and excludes all Dimorphos v004 radii; camera holdouts and source-mesh transfer are checked independently."
+          }
+        },
+        "selection": "recipe-order",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 64,
+          "maximumGain": 1.2,
+          "maximumAngleDegrees": 70
+        },
+        "transfer": {
+          "maximumSeparationMeters": 8,
+          "maximumEmissionDegrees": 65,
+          "visibilityToleranceMeters": 0.5,
+          "interpretation": "Every interpolation contributor must match the full Didymos v003 mesh within 8 m and pass visibility. These acceptance limits match the retained mesh preparation budget; they do not estimate scientific accuracy."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 65,
+          "maximumEmissionDegrees": 65,
+          "maximumGain": 3
+        },
+        "display": {
+          "percentiles": [
+            1.1,
+            99.9
+          ]
+        },
+        "metadata": {
+          "label": "DRACO mosaic",
+          "falseColor": false,
+          "coverage": "Two DRACO frames from 158 and 94 seconds before impact. The later partial frame supplies closer detail; the earlier frame supplies wider coverage. The unseen surface keeps the grid."
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 0.365,
+    "camera": {
+      "initialScenePitchDegrees": 46.741573033707866,
+      "defaultControlYawDegrees": 120
+    },
+    "mapUrl": "/scenes/didymos/didymos-shape-surface@2x.webp",
+    "polesUrl": "/scenes/didymos/didymos-shape-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/didymos_g_9309mm_spc_obj_0000n00000_v003.obj",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 24578,
+        "expectedFaces": 49152
+      },
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 8,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL heliocentric orbit and the source Didymos v003 pole; arbitrary body phase, fixed-epoch display lighting"
+  },
+  "presentation": {
+    "defaultLens": "shape",
+    "pointColor": [
+      170,
+      170,
+      170
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

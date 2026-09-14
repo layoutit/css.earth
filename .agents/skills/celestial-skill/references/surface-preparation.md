@@ -33,6 +33,13 @@ For multiple photographs projected onto a surface, also read
 [registered photographic mosaics](registered-photographic-mosaics.md) for camera
 validation, surface correspondence, observation selection and coverage evidence.
 
+For an existing single-model observation lens with unchanged geometry, use the
+[observation refresh command](../../../../docs/surface-preparation.md#refresh-photographs-without-rebuilding-geometry)
+to prepare only the selected imagery and its delivery records. It checks the
+retained atlas against the source recipe and reuses the full preparer's owners.
+Run one body at a time; alternative models or source-lighting changes need full
+preparation. A faster refresh still requires source and visual qualification.
+
 When baked illumination needs correction, try the following in preparation:
 
 1. Bind each contributing observation/band to capture time, Sun and observer
@@ -72,9 +79,18 @@ detail into color bands, or silently change independent lenses into a composite.
 
 ## Scientific maps
 
+Numeric GeoTIFFs may use geographic degrees rather than projected metres.
+Read the native GeoKeys, origin, pixel area convention and NoData before choosing
+`grid.coordinates: "degrees"`; the numeric reader verifies angular units, the
+reference sphere and prime meridian. Do not multiply an already angular grid by
+the radius. A declared NoData value may never occur in the raster; inspect the
+actual value distribution and producer legend before treating extrema as gaps.
+Keep any conservative exclusion explicit in the recipe and the lens notes.
+
 Choose labels by meaning through the shared lens vocabulary: Elevation,
 Enhanced color, Thermal infrared, Cross section where those concepts apply.
-Instrument, wavelength, datum, enhancement and caveats belong in descriptions.
+Instrument, wavelength, datum, enhancement and caveats belong in the lens notes;
+the caveats a viewer needs also belong in the dataset summary in `text.json`.
 
 For multi-extension FITS scalar maps, select and check the named quantity,
 units and fit version explicitly; image dimensions alone cannot distinguish

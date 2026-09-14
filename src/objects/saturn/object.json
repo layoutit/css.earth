@@ -1,0 +1,198 @@
+{
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "e830570233fe8a4733680e7d4773f3566b161ee778eab0bd87c99c143b213e67"
+  },
+  "id": "saturn",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Saturn",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "rings",
+          "path": "source/preparation/rings.json",
+          "sha256": "581819f574dc232122019d0c199ac5e64d5a715a89a12643782cc6d80f56e5f7"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "e7dcc2a44ad1b40e1fd2af966049face20495580d77bbf7fee8d36a8b4d7025f"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "9f9d9b32564f69f63cb364879b5ad818210809388aca6fb07e373d9e876b6ce1"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "d7102e88052d1dedf97d58e635bee339c917f10ee1925bf929261c8798f126f4"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "1917a7427018f30692a34d1204575b8bf762dfbe8f45f2f9f7cf5b3c0b880acf"
+        },
+        {
+          "id": "surface",
+          "path": "source/preparation/surface.json",
+          "sha256": "174aaeebbc2c1aa6075903414eace181cf37974dd0eccf1106d62e5ae4dce0e8"
+        },
+        {
+          "id": "materials",
+          "path": "source/preparation/materials.json",
+          "sha256": "11cfcfad7f2e168dff9f759037ebba57d216519de7a4703244ae611720145544"
+        },
+        {
+          "id": "radial-motion",
+          "path": "source/preparation/radial-motion.json",
+          "sha256": "cc0c35fab54fba274693e1cd87762c56ed98763010daa21e3b17d62d992a51df"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "9128adac51d287dfa945137573140a5242446106861fa9d68780b4210da3d5bc"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "d41b923e65b434cf28f664e9c4546c654fb93c61b9169a43c8159c02f22fac59"
+        },
+        {
+          "id": "charts",
+          "path": "source/content/charts.json",
+          "sha256": "fa4ee604146d97d8101e83626a115294eb11eeaecbd603d5f92b39cf96823562"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "1e3ceb80a20c1a3ab12ad7ebaadd56cf3dd66321b565136b6c98a74ec0401938"
+        },
+        {
+          "id": "satellite-catalog",
+          "path": "source/preparation/satellite-catalog.json",
+          "sha256": "a8130fcdc23be3ab84e2d2e824d138287370ec374528ba9757a53c6de14b8ba1"
+        }
+      ],
+      "shape": {
+        "kind": "ellipsoid",
+        "radiusKm": 60268,
+        "polarRadiusKm": 54364
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "surface",
+              "material": "projective"
+            },
+            {
+              "id": "ultraviolet",
+              "source": "surface",
+              "material": "projective"
+            },
+            {
+              "id": "methane",
+              "source": "surface",
+              "material": "projective"
+            },
+            {
+              "id": "thermal",
+              "source": "surface",
+              "material": "projective"
+            },
+            {
+              "id": "cross-section",
+              "source": "surface",
+              "material": "projective"
+            }
+          ]
+        }
+      ],
+      "rings": {
+        "source": "rings"
+      },
+      "materials": [
+        {
+          "id": "projective",
+          "source": "geometry",
+          "model": "lit"
+        }
+      ],
+      "cutaway": {
+        "source": "materials",
+        "surface": "body",
+        "lens": "cross-section"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1390634086629.1033,
+        245139735109.86838,
+        41365218073.91039
+      ],
+      "presentationToReference": [
+        -0.9879788801694436,
+        0.11562179815149831,
+        -0.10261253398755377,
+        -0.07371537340911127,
+        -0.9358122030953988,
+        -0.34470503950608494,
+        -0.1358814779956709,
+        -0.33299717766063786,
+        0.9330857964880623
+      ],
+      "orbitUpReference": [
+        -5.551115123125783e-17,
+        -0.3977771559319137,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 238213.4387351779,
+      "bodyRadiusM": 60268000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/saturn-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c231bd5648d4c55e5ee4a7486aed35fbf6352cccdbac148e629ec62fab60a10f"
+      }
+    },
+    "catalog": {
+      "name": "Saturn",
+      "classification": "planet",
+      "color": "#d2b68c",
+      "distanceAu": 9.58,
+      "description": "Ringed gas giant, sixth planet from the Sun.",
+      "systemName": "Solar System",
+      "order": 430,
+      "context": {
+        "order": 18
+      }
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
+}

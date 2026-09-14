@@ -1,0 +1,40 @@
+{
+  "body": "calypso",
+  "lens": {
+    "id": "normal",
+    "ready": true
+  },
+  "purpose": "Inspect the expanded Monochrome mosaic at a closer product view. Source/package qualification and the companion capture report establish source and loaded asset identities.",
+  "baseCommit": "3b40e07237acb14506f39d7a12f6533d28e069f3",
+  "workingTreeChanges": "Cassini close-encounters moon data and capture helper; local nebula preparation changed the M2-9 prepared hash.",
+  "runtimeSha256": "0d0d4fee9f8cfe3303aa02907e0867ba441f4d41cfe0b8e978adb4de69b50a69",
+  "browser": "152.0.7977.84",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "dpr": 1,
+  "crop": {
+    "x": 360,
+    "y": 80,
+    "width": 720,
+    "height": 660
+  },
+  "image": {
+    "file": "monochrome.png",
+    "sha256": "3984f2dc6998e84e3783371e017bcd75be7e03e86a80fa4d808a97a33c952914"
+  },
+  "url": "http://127.0.0.1:4284/calypso/?v=MEZATX9VGSNP-kFCxzNAAAAAv2x583TZIc2_wvCwsHqRPz-XyMfX__zwAAA",
+  "pose": {
+    "schema": "cssearth-camera-pose@1",
+    "scene": "matrix3d(-0.998896859613,-0.013747537031,-0.04490065791,0,0,0.956185424615,-0.292761735466,0,0.046958107448,-0.292438778172,-0.955130617856,0,0,0,0,1)",
+    "skybox": "matrix3d(-0.992223976965,0.036438425935,0.119011084969,0,-0.114193863506,0.113833672505,-0.986915182272,0,-0.049509099669,-0.992831301878,-0.108787509087,0,0,0,0,1)",
+    "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+  },
+  "settings": {
+    "shadows": false,
+    "orbit": true
+  },
+  "stableDom": true,
+  "errors": []
+}

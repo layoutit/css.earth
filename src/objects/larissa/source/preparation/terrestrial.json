@@ -1,0 +1,173 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "larissa",
+  "displayName": "Larissa",
+  "publicBase": "/scenes/larissa/",
+  "distanceAu": 30.07,
+  "raster": {
+    "width": 1024,
+    "height": 512,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 256,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "scientific-surfaces",
+        "path": "shape/n7larissa.tab",
+        "format": "pds-radius-table",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 2522,
+          "expectedFaces": 5040,
+          "stepDegrees": 5,
+          "longitudeDirection": "west-positive"
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -96
+        },
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 96000,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.45
+        },
+        "sampleGrid": {
+          "width": 361,
+          "height": 181
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceObservations": [
+      {
+        "id": "normal",
+        "format": "controlled-shape-camera",
+        "consumer": "voyager-clear-frames",
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+          "attribution": {
+            "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/voyager/iss/"
+          }
+        },
+        "frames": [
+          {
+            "id": "c1138148",
+            "path": "observations/C1138148_GEOMED.IMG",
+            "labelPath": "observations/C1138148_GEOMED.LBL",
+            "observerLatitude": -23.753,
+            "observerWestLongitude": 89.926,
+            "sunLatitude": -23.383,
+            "sunWestLongitude": 114.142,
+            "rangeKm": 451875.577,
+            "northAzimuthDegrees": 20.526876649622658,
+            "center": [
+              560.283,
+              287.94
+            ],
+            "pixelAngleMicroradians": 7.841764329210524,
+            "backgroundOffset": 0.0006,
+            "backgroundMaximum": 0.0010378
+          }
+        ],
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 75
+        },
+        "photometry": {
+          "model": "lunar-lambert",
+          "weight": 0.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 75,
+          "maximumGain": 2.5
+        },
+        "display": {
+          "displayRange": [
+            0,
+            0.0494
+          ]
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 96,
+    "camera": {
+      "initialScenePitchDegrees": 1.56991509945394,
+      "defaultControlYawDegrees": 9.978294627469573
+    },
+    "mapUrl": "/scenes/larissa/larissa-normal-surface@2x.webp",
+    "polesUrl": "/scenes/larissa/larissa-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/n7larissa.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 2522,
+        "expectedFaces": 5040,
+        "stepDegrees": 5,
+        "longitudeDirection": "west-positive"
+      },
+      "faceBudget": 2000,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 600,
+        "maximumErrorMeters": 1800,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; the Stooke source origin and west-positive longitude are preserved."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      155,
+      151,
+      146
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

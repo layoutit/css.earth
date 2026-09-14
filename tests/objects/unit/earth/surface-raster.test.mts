@@ -180,7 +180,7 @@ test("Earth's production atlas packs 448 unique exterior cells and reuses exactl
   // leaf-derived proof above; that proof always runs in a clean checkout.
   let staging:ReturnType<typeof parseStaging>|undefined;
   try {
-    staging = parseStaging(JSON.parse(await readFile(new URL("../../../../src/planets/earth/prepared/surface-raster-plan.json", import.meta.url), "utf8")));
+    staging = parseStaging(JSON.parse(await readFile(new URL("../../../../src/objects/earth/prepared/surface-raster-plan.json", import.meta.url), "utf8")));
   } catch (error) { if (!hasErrorCode(error,"ENOENT")) throw error; }
   if (staging) {
     assert.deepEqual(staging.atlas, EARTH_SURFACE_ATLAS);

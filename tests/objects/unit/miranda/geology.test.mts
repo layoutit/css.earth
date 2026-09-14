@@ -6,7 +6,7 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import {parseInterpreterRecipe} from '../../../../tools/objects/observation/interpret.mts';
-const source=new URL('../../../../src/planets/miranda/source/',import.meta.url).pathname;
+const source=new URL('../../../../src/objects/miranda/source/',import.meta.url).pathname;
 test('Miranda historical units preserve independently identified craters and unmapped north',async()=>{
   const recipe=parseInterpreterRecipe(JSON.parse((await readFile(source+'preparation/raster.json')).toString('utf8')));
   const lens=required(recipe.surfaces.find(surface=>surface.id==='geology')?.science,'geology science');

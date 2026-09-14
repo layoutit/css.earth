@@ -209,7 +209,7 @@ export async function commitOrthophotoLandmarkOutputs(
 }
 export async function projectOrthophotoLandmarks(objectId: string, write: boolean) {
   if (!/^[a-z0-9-]+$/u.test(objectId)) throw new TypeError('Object id must be lowercase letters, digits or hyphens.');
-  const source = resolve(root, 'src/planets', objectId, 'source'),
+  const source = resolve(root, 'src/objects', objectId, 'source'),
     features = resolve(source, 'features'),
     c = config(JSON.parse(await readFile(resolve(features, 'image-registration.json'), 'utf8')), source),
     b = await bytes(c);

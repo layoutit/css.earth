@@ -1,0 +1,560 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "eos",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "b26adc61cd53355728b32e97a7b7f6a9350880372ecdd913fd4031a25e484240"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "890e9f37cc8bea91eeeeb6adf6ebd63687f6cc35e951d1f4b3975fa498937069",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "eos",
+        "displayName": "Eos",
+        "publicBase": "/scenes/eos/",
+        "distanceAu": 3.011699855683851,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/model-1743.txt",
+              "format": "pds-plate-model",
+              "grid": {
+                "metersPerUnit": 86838.00584414465,
+                "expectedVertices": 1022,
+                "expectedFaces": 2040,
+                "indexBase": 1
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -53.87
+              },
+              "minimum": -10,
+              "maximum": 10,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 53870,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 1077.3999999999999
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 53.87,
+          "camera": {
+            "initialScenePitchDegrees": 25,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/eos/eos-shape-surface@2x.webp",
+          "polesUrl": "/scenes/eos/eos-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model-1743.txt",
+            "format": "pds-plate-model",
+            "grid": {
+              "metersPerUnit": 86838.00584414465,
+              "expectedVertices": 1022,
+              "expectedFaces": 2040,
+              "indexBase": 1
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 1077.3999999999999,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "DAMIT model 1743 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "8bec2735b9427a9bb31b6ce90c66022e930e6636d07ca7fb45bdc2781b8d40b9",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "eos",
+        "displayName": "Eos",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Display reference radius",
+              "value": "53.87 km (approximate thermal scale)",
+              "source": {
+                "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+                "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+                "checked": "2026-09-09",
+                "path": "source/reference/calibration.json",
+                "catalogueId": "akari-acua-v1",
+                "locator": "/diameterKm; radius = diameterKm / 2"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "3.012 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27221%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-09",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "5.23 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27221%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-09",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Model rotation period",
+              "value": "10.4421 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1743",
+                "label": "DAMIT model 1743",
+                "checked": "2026-09-09",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "Model 1743; version 2017-03-31; /periodHours"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "thumbnail": "/scenes/eos/eos-shape-thumbnail.webp",
+              "surface": "eos-shape-surface@2x.webp",
+              "poles": "eos-shape-surface@2x.webp",
+              "source": {
+                "id": "eos-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "noData": true
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "thumbnail": "/scenes/eos/eos-elevation-thumbnail.webp",
+              "surface": "eos-elevation-surface@2x.webp",
+              "poles": "eos-elevation-surface@2x.webp",
+              "source": {
+                "id": "eos-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-10",
+                  "0",
+                  "10"
+                ],
+                "meta": "km · 53.87 km reference sphere",
+                "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1743",
+                "image": "/scenes/eos/eos-elevation-legend.webp"
+              },
+              "notes": "Radius on the shape model minus a 53.87 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Model record",
+            "role": "terrain",
+            "description": "DAMIT model 1743, version 2017-03-31",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1743"
+          },
+          {
+            "label": "Size calibration",
+            "role": "facts",
+            "description": "Usui et al. (2011), PASJ 63, 1117–1138",
+            "href": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Published pole and period; arbitrary display phase",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1743"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1743",
+            "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2018); model 1743, version 2017-03-31."
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        },
+        "title": {
+          "label": "Eos",
+          "viewBox": "0 0 43.3956 35",
+          "width": 43.3956,
+          "height": 35,
+          "path": "M0 29L0 8.63L13.52 8.63L13.52 11.29L3.05 11.29L3.05 17.32L12.74 17.32L12.74 19.95L3.05 19.95L3.05 26.33L13.54 26.33L13.54 29ZM22.5 29.33Q20.43 29.33 18.86 28.36Q17.29 27.4 16.41 25.68Q15.54 23.97 15.54 21.71Q15.54 19.46 16.41 17.73Q17.29 16.01 18.86 15.04Q20.43 14.07 22.5 14.07Q24.6 14.07 26.16 15.04Q27.72 16.01 28.59 17.73Q29.47 19.46 29.47 21.71Q29.47 23.97 28.59 25.68Q27.72 27.4 26.16 28.36Q24.6 29.33 22.5 29.33ZM22.5 26.81Q23.78 26.81 24.68 26.17Q25.57 25.53 26.05 24.38Q26.53 23.23 26.53 21.73Q26.53 20.18 26.05 19.03Q25.57 17.88 24.68 17.24Q23.78 16.59 22.5 16.59Q21.24 16.59 20.34 17.23Q19.45 17.87 18.98 19.03Q18.5 20.18 18.5 21.73Q18.5 23.24 18.98 24.39Q19.45 25.53 20.35 26.17Q21.25 26.81 22.5 26.81ZM37.48 29.33Q35.82 29.33 34.5 28.82Q33.18 28.3 32.37 27.27Q31.56 26.24 31.41 24.72L34.26 24.6Q34.41 25.76 35.23 26.38Q36.05 27 37.43 27Q38.83 27 39.63 26.44Q40.43 25.87 40.43 25.01Q40.43 24.27 39.88 23.81Q39.34 23.35 38.35 23.15L35.93 22.62Q33.87 22.15 32.81 21.1Q31.75 20.06 31.75 18.46Q31.75 17.16 32.46 16.17Q33.18 15.18 34.44 14.62Q35.7 14.07 37.38 14.07Q39.01 14.07 40.25 14.62Q41.5 15.18 42.23 16.2Q42.97 17.21 43.07 18.61L40.32 18.73Q40.24 17.73 39.48 17.06Q38.72 16.39 37.41 16.39Q36.19 16.39 35.44 16.97Q34.69 17.54 34.69 18.36Q34.69 19.12 35.23 19.57Q35.78 20.03 36.82 20.26L39.29 20.81Q41.4 21.28 42.4 22.26Q43.4 23.24 43.4 24.83Q43.4 26.2 42.63 27.22Q41.86 28.23 40.53 28.78Q39.2 29.33 37.48 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "eos-shape",
+      "path": "shape/model-1743.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/5968/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2018); model 1743, version 2017-03-31.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore the original counted triangle table through the pinned acquisition recipe; physical scale is specified separately by the calibration.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration",
+        "metersPerUnit": 86838.00584414465,
+        "referenceRadiusMeters": 53870
+      },
+      "coverage": "Convex light-curve reconstruction with approximate thermal size: 107.74 km effective diameter (catalog ±1.51 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. Hanuš2018 Eos-family study TableB.1 reports27 dense lightcurves across six apparitions and304 sparse measurements, model quality3. Both poles remain; model1743 is selected without rejecting1744. That paper’s91.2±2.2 km column is WISE radiometry rather than a shape calibration; it is retained as a competing thermal estimate against AKARI107.74±1.51 km. The disagreement is an additional systematic limit, not grounds for averaging the catalogs. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-5968",
+            "role": "material",
+            "evidence": "src/planets/eos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
+      "sha256": "83fdebb219ce6f345437cd87e7009a4f15a93682e9e825ebe135f7579ba3c9d4",
+      "bytes": 82708,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/model-1743.txt",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/5968/shape.txt"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "8bec2735b9427a9bb31b6ce90c66022e930e6636d07ca7fb45bdc2781b8d40b9",
+      "bytes": 7684,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "eos-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/eos/eos-elevation-thumbnail.webp",
+          "bytes": 5792,
+          "sha256": "90cf6f2f4c161e3a6f5070ad59d73b9e784b1b38fc03f3ae0a5e596dfbe5b4b8",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/eos/eos-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/eos/eos-elevation-surface@2x.webp",
+          "bytes": 303462,
+          "sha256": "f8b973f4c92549ae22b149dbee9f5275ba47f9a3112ef1f686721d5736dade10",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "eos-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/eos/eos-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/eos/eos-shape-surface@2x.webp",
+          "bytes": 223646,
+          "sha256": "c2150907dfb6ba3b5b772ea2a7a754362e4305ba7bf440fb156425aa5b5f30c7",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5090,
+          "sha256": "7d75a534677c9f1fe9cf9cb30fb761a4fbc54be0ac63df6727dbb8cb44e44eca",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 12434,
+          "sha256": "4254e737a6ca2400e377b8773a5d9453a13b0ce9c307f7ecd773e32ee2993c31",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

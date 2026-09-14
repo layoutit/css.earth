@@ -1,0 +1,169 @@
+{
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "74796f98ee8ca8dbd9985543b18b587a19b2d9f4528b8a56d17fff4c328f76a1"
+  },
+  "id": "ryugu",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ryugu",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "features",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "enhanced",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "close-up",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "thermal-inertia",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "spectral-slope",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 0.448
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "236b312a46c8b994471e2445a38f10a3564fe63a607db0eaebb604c03b70f4f7"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "556d6f72a71cff1c5303fa10ed0034be9023703d72078e6df250713124ee02a1"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "854286864c3262a82af2221ad9e8c0c24e71d430649cff76f6a4fdf474092040"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "f8459547fa630651abcddddf187d276eda8d348567bdda9d73d7a498544def16"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "e23619793ecaf2a309825a3e3ab086844806d4d9176a508b51f923438d744ee1"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "2ea589e3a4683f7fecc35b06874f71f495609d52e17dbbfcf22ae7a2dd0911bb"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "65a2fe24d6ac8595591651b64c0cf23b76467352e5b13ef7625c1a57eebf5eae"
+        }
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -84019354278.1035,
+        -168029236870.60928,
+        -75149311691.16516
+      ],
+      "presentationToReference": [
+        -0.41526603084607183,
+        0,
+        0.9097000184815593,
+        -0.8346334488208338,
+        0.3977771559319137,
+        -0.3809991342879383,
+        -0.3618578861028039,
+        -0.9174820620691819,
+        -0.16518334070508478
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 1.9478260869565218,
+      "bodyRadiusM": 448
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ryugu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8a687b36715cf1f1dade33cbb4d00da375c6458735587007c6b5c1be8bfc909a"
+      }
+    },
+    "catalog": {
+      "name": "Ryugu",
+      "classification": "asteroid",
+      "color": "#a49c8d",
+      "distanceAu": 1.19,
+      "description": "Dark, spinning-top-shaped asteroid sampled by Hayabusa2.",
+      "systemName": "Solar System",
+      "order": 122,
+      "context": {
+        "order": 10
+      }
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
+}

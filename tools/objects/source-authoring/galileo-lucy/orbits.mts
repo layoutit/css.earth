@@ -15,7 +15,7 @@ const eclipticPoleToIcrf = (longitude: number, latitude: number) => {
   return { rightAscensionDegrees: (Math.atan2(y, v[0]) / rad + 360) % 360, declinationDegrees: Math.asin(z) / rad };
 };
 for (const body of bodies) {
-  const s = `src/planets/${body.id}/source`;
+  const s = `src/objects/${body.id}/source`;
   const pole = body.id === 'dactyl' ? { rightAscensionDegrees: 168.76, declinationDegrees: -87.1 } : eclipticPoleToIcrf(95.53, -87.05);
   await write(`${s}/preparation/rotation.json`, { schema: 'cssearth-display-orientation@1', ...pole,
     periodHours: body.periodHours, phase: 'arbitrary-display-phase', displayMeridianDegrees: 0,

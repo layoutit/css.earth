@@ -30,8 +30,9 @@ Prepared navigation framing remains distinct from measured half-light radii.
 `parsePreparedClusterCatalog` validates the separate `cssearth-cluster-catalog@1`
 interchange. Cluster centres carry redshift references and explicit distance
 cosmology; R500 proper and comoving apertures remain distinct from cluster edges.
-`PreparedCatalogObject` composes galaxy and cluster records without assigning
-galaxy membership to clusters. Source tables and coordinate preparation remain
+`PreparedCatalogObject` composes galaxy, cluster and nebula records without assigning
+galaxy membership to other object types. `parsePreparedNebulaCatalog` validates
+source-backed sky centres, distances and classification independently of rendering. Source tables and coordinate preparation remain
 outside this package.
 
 ## Source size

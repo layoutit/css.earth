@@ -1,15 +1,16 @@
 # Documentation
 
 For a body's sources, processing, evidence and known problems, read its
-`src/planets/<id>/README.md`. Examples: [Earth](../src/planets/earth/README.md),
-[Sun](../src/planets/sun/README.md), [Rhea](../src/planets/rhea/README.md) and
-[67P](../src/planets/comet-67p/README.md).
+`src/objects/<id>/README.md`. Examples: [Earth](../src/objects/earth/README.md),
+[Sun](../src/objects/sun/README.md), [Rhea](../src/objects/rhea/README.md) and
+[67P](../src/objects/comet-67p/README.md).
 
 ## Guides
 
 | Topic | Guide |
 | --- | --- |
 | Galaxies, LMC image lenses and extragalactic datasets | [Galaxies and the nearby universe](galaxies/README.md) |
+| Nebula reconstruction, spectral lenses and reproducible delivery | [Prepared nebulae](nebulae/README.md) |
 | Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
 | Catalog-wide image-to-shape faithfulness review | [Surface-registration review](provenance/surface-registration-review.md) |
 | Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |
@@ -26,7 +27,7 @@ For a body's sources, processing, evidence and known problems, read its
 | TypeScript owners, JavaScript exceptions and checks | [TypeScript ownership](architecture/typescript-ownership.md) |
 | Page titles, descriptions and search indexing | [SEO](seo.md) |
 
-For contribution steps, use the [body contributor guide](../src/planets/README.md).
+For contribution steps, use the [body contributor guide](../src/objects/README.md).
 [AGENTS.md](../AGENTS.md) sets application rules; the
 [celestial skill](../.agents/skills/celestial-skill/SKILL.md) points agents to the
 same workflow and implementation.

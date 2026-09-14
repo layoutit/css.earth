@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, mkdtemp, mkdir, copyFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { promisify } from 'node:util';
@@ -17,9 +17,20 @@ import { compileSourceUsage, parseSourceUsage, sourceDatasetViews } from '../src
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
 import { prepareMachines, explorationCompilerClosure } from './prepare-machines.mts';
 import { refreshSourceRecord } from './source-authoring-templates.mts';
+import { prepareVolumeProvenance } from './prepare-volume-provenance.mts';
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path,'utf8'));
 const prepared = parsePreparedSources(await read('site/prepared-sources.json'));
 const exploration = parsePreparedExploration(await read('site/prepared-machines.json'),prepared.sources);
+// Preview originals are bounded pinned image inputs; the source graph never needs a baked volume bank.
+const volumePreviewInputs = async () => {
+  const ids = new Set(prepared.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus=')).map(dataset => dataset.objectId));
+  const paths = new Set<string>();
+  for (const id of ids) {
+    const presentation = sourceObject(await read(`src/objects/${id}/source/presentation.json`));
+    for (const lens of sourceArray(presentation.lenses, sourceObject)) paths.add(sourceText(sourceObject(lens.preview).path));
+  }
+  return [...paths];
+};
 const sourceFixture = (id: string) => ({
   id, title: `Synthetic source ${id}`, kind: 'publication', identityLevel: 'work',
   identifiers: [{type: 'test', value: id}],
@@ -89,14 +100,15 @@ test('source files reject mismatched IDs, duplicate provider identities and stal
 });
 const objectInput = async (id: string) => {
   const object = OBJECTS.find(object => object.id === id)!;
-  const page = sourceObject(await read(`src/planets/${id}/prepared/page.json`)), controls = sourceObject(page.controls);
+  const page = sourceObject(await read(`src/objects/${id}/prepared/page.json`)), controls = sourceObject(page.controls);
   const lenses = controls.lenses === null ? [] : sourceArray(sourceObject(controls.lenses).controls, raw => {
     const lens=sourceObject(raw);return {id:sourceText(lens.id),label:sourceText(lens.label)};
   });
-  return {id,name:object.name,route:object.route,controls:lenses,provenance:validateObjectProvenance(await read(`src/planets/${id}/prepared/provenance.json`))};
+  return {id,name:object.name,route:object.route,base:`src/objects/${id}`,controls:lenses,provenance:validateObjectProvenance(await read(`src/objects/${id}/prepared/provenance.json`))};
 };
 test('source uses conserve all product dependencies, include models, and never convert metadata into observations', async () => {
   const objects = await Promise.all(OBJECTS.map(object=>objectInput(object.id)));
+  objects.push(...await prepareVolumeProvenance());
   const metadata=prepared.usage.edges.filter(edge=>edge.consumerKind!=='object-product');
   assert.deepEqual(compileSourceUsage(objects,prepared.sources,metadata),prepared.usage);
   assert.equal(metadata.filter(edge=>edge.kind==='shared-context').length,4);
@@ -108,12 +120,12 @@ test('source uses conserve all product dependencies, include models, and never c
   assert.ok(prepared.usage.bySource['hyg-v44'].length===1);
   assert.ok(prepared.usage.edges.some(edge=>edge.objectId==='adrastea' && edge.kind==='method' && edge.lensIds.length));
   assert.ok(prepared.usage.edges.some(edge=>edge.objectId==='mercury' && edge.lensIds.includes('interior')));
-  const sourceIds=['bdr','enhanced','topography'].map(term => prepared.inventory.find(row=>row.ownerPath==='src/planets/mercury/source/manifest.json' && row.localId.includes(term) && row.binding.kind==='catalogued')!.binding);
+  const sourceIds=['bdr','enhanced','topography'].map(term => prepared.inventory.find(row=>row.ownerPath==='src/objects/mercury/source/manifest.json' && row.localId.includes(term) && row.binding.kind==='catalogued')!.binding);
   assert.equal(new Set(sourceIds.map(binding=>JSON.stringify(binding))).size,3);
   for (const source of prepared.catalog.records) assert.equal(new Set(sourceDatasetViews(prepared.usage,source.id).map(view=>view.href)).size,sourceDatasetViews(prepared.usage,source.id).length);
 });
 test('new unresolved inputs, unknown bindings, stale lenses and inconsistent usage indexes fail', async () => {
-  const path='src/planets/earth/source/manifest.json', manifest=sourceObject(await read(path));
+  const path='src/objects/earth/source/manifest.json', manifest=sourceObject(await read(path));
   const input=sourceArray(manifest.inputs,sourceObject)[0];
   input.sourceBinding={kind:'unresolved',label:'Unknown input',evidence:'No provider record',reason:'Identity has not been established'};
   assert.throws(()=>sourceInventory(manifest,path,prepared.sources,new Set()),/Unresolved source/);
@@ -136,8 +148,8 @@ test('shared published identities combine usage without combining local input re
   assert.notEqual(prepared.sources.hyg.id, prepared.sources['hyg-v44'].id, 'a work and its release remain distinct');
 });
 test('refreshing document pins retains bindings and native source metadata', async () => {
-  const path = 'src/planets/salacia/source/manifest.json', manifest = sourceObject(await read(path));
-  const document = sourceObject(await read('src/planets/salacia/prepared/provenance.json'));
+  const path = 'src/objects/salacia/source/manifest.json', manifest = sourceObject(await read(path));
+  const document = sourceObject(await read('src/objects/salacia/prepared/provenance.json'));
   const used = new Set(sourceArray(document.sources, sourceObject).map(source => sourceText(source.path)));
   const before = sourceInventory(manifest, path, prepared.sources, used);
   const documents = sourceArray(manifest.documents, sourceObject);
@@ -162,10 +174,10 @@ test('both catalogues prepare deterministically from the same input closure befo
   assert.equal(result.factsheets.facts, result.factsheets.cited + result.factsheets.uncited.length);
   assert.ok(facts.some(edge => edge.objectId === 'earth' && edge.consumerId === 'earth/radius'));
   assert.ok(facts.some(edge => edge.objectId === 'abundantia' && edge.citationUrl?.includes('/4625')));
-  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/planets/earth/source/editorial/factsheet-review.json'));
-  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/planets/abundantia/source/reference/damit-model.json'));
+  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/objects/earth/source/editorial/factsheet-review.json'));
+  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/objects/abundantia/source/reference/damit-model.json'));
   assert.deepEqual(sourceDatasetViews(prepared.usage, 'damit-models'), [], 'factsheet metadata is not a shape or imagery contribution');
-  for (const output of result.outputs) assert.equal(output.text,await readFile(output.path,'utf8'),output.path);
+  for (const output of result.outputs) assert.deepEqual(typeof output.text === 'string' ? Buffer.from(output.text) : output.text,await readFile(output.path),output.path);
   assert.equal(result.prepared.sourceCatalogSha256,result.preparedSources.catalogSha256);
   assert.deepEqual(result.prepared.closure,result.preparedSources.closure);
   const bad=structuredClone(await read('site/prepared-sources.json'));sourceObject(bad).catalogSha256='0'.repeat(64);
@@ -175,44 +187,54 @@ test('both catalogues prepare deterministically from the same input closure befo
   const corruptedBinding=corrupted.sources.find(source=>source.sourceBinding?.kind==='catalogued')?.sourceBinding;
   assert.ok(corruptedBinding?.kind==='catalogued');
   Object.assign(corruptedBinding,{references:[{catalogueId:'missing',role:'material',evidence:'Bad binding'}]});
-  const before=await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8')));
+  const before=await Promise.all(result.outputs.map(output=>readFile(output.path)));
   await assert.rejects(prepareMachines({provenance:new Map([['mercury',corrupted]])}),/Unknown canonical source/);
-  assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8'))),before);
+  assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path))),before);
 });
 
 test('changed fact evidence and stale displayed facts leave both published catalogues intact', async t => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-publication-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const outputs = ['site/prepared-sources.json', 'site/prepared-machines.json'];
-  // Only the compiler's declared inputs are needed; no body assets or downloads.
+  // Declared metadata and bounded preview inputs suffice; no baked body/volume assets or downloads.
   const records = new Set((await promisify(execFile)('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { maxBuffer: 16 * 1024 * 1024 })).stdout.split('\0'));
-  assert.deepEqual(Object.keys(prepared.closure).filter(path => !records.has(path) && path !== 'site/prepared-object-catalog.mts'), [],
-    'Sources must not depend on ignored downloads; the object catalogue is generated');
-  for (const path of [...Object.keys(prepared.closure), ...outputs]) {
+  const generated = new Set(['site/prepared-object-catalog.mts', ...(await prepareVolumeProvenance()).flatMap(volume => volume.outputs.map(output => relative(process.cwd(), output.path)))]);
+  assert.deepEqual(Object.keys(prepared.closure).filter(path => !records.has(path) && !generated.has(path)), [],
+    'Sources may regenerate declared metadata outputs, but must not depend on ignored downloads or baked assets');
+  for (const path of [...Object.keys(prepared.closure), ...outputs, ...await volumePreviewInputs()]) {
     const target = join(root, path);
     await mkdir(join(target, '..'), { recursive: true });
     await copyFile(path, target);
   }
   const before = await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8')));
-  const evidencePath = join(root, 'src/planets/abundantia/source/reference/calibration.json');
+  const evidencePath = join(root, 'src/objects/abundantia/source/reference/calibration.json');
   const evidence = await readFile(evidencePath, 'utf8');
   await writeFile(evidencePath, evidence.replace('42.18', '52.18'));
   await assert.rejects(prepareMachines({ root }), /fact evidence pin differs/);
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
   await writeFile(evidencePath, evidence);
-  const contentPath = join(root, 'src/planets/abundantia/prepared/content.json');
-  const content = sourceObject(await read(contentPath));
+  const contentPath = join(root, 'src/objects/abundantia/prepared/content.json');
+  const originalContent = await readFile(contentPath, 'utf8'), content = sourceObject(JSON.parse(originalContent));
   sourceObject(sourceArray(content.facts, sourceObject)[0]).value = '99 km';
   await writeFile(contentPath, JSON.stringify(content));
   await assert.rejects(prepareMachines({ root }), /Stale factsheet for abundantia/);
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
+  await writeFile(contentPath, originalContent);
+  const rebuilt = await prepareMachines({ root });
+  const focusDatasets = rebuilt.preparedSources.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus='));
+  assert.equal(focusDatasets.length, 9, 'Every LMC and nebula lens retains a source destination without its optional volume assets.');
+  assert.deepEqual(focusDatasets, rebuilt.prepared.graph.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus=')));
+  for (const id of new Set(focusDatasets.map(dataset => dataset.objectId))) {
+    await assert.rejects(readFile(join(root, `src/objects/${id}/prepared/lenses.json`)), { code: 'ENOENT' });
+    assert.ok(rebuilt.preparedSources.inventory.some(entry => entry.ownerPath === `src/objects/${id}/source/manifest.json` && entry.used));
+  }
 });
 
 test('missing cited evidence restores without body assets and leaves catalogues atomic on a bad download', async t => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-restoration-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const outputs = ['site/prepared-sources.json', 'site/prepared-machines.json'];
-  const source = 'src/planets/asteroid-1998-ml14/source';
+  const source = 'src/objects/asteroid-1998-ml14/source';
   const paper = `${source}/reference/warner-2014.pdf`;
   // The cited paper is a pinned download, so no checkout tracks it. Restoring
   // it needs the provider, which this suite must not depend on; a checkout
@@ -226,7 +248,7 @@ test('missing cited evidence restores without body assets and leaves catalogues 
     return;
   }
   const paths = new Set([...Object.keys(prepared.closure), ...explorationCompilerClosure,
-    ...outputs, `${source}/preparation/acquisition.json`]);
+    ...outputs, `${source}/preparation/acquisition.json`, ...await volumePreviewInputs()]);
   paths.delete(paper);
   for (const path of paths) {
     const target = join(root, path);
@@ -259,8 +281,8 @@ test('numerical extraction uses current package records and preserves reviewed s
   const root = await mkdtemp(join(tmpdir(), 'cssearth-source-authoring-'));
   try {
     const script = 'tools/objects/source-authoring/distant-worlds/author.py';
-    const source = 'src/planets/salacia/source';
-    const files = [script, 'src/planets/salacia/object.json', ...[
+    const source = 'src/objects/salacia/source';
+    const files = [script, 'src/objects/salacia/object.json', ...[
       'manifest.json','content/object.json','preparation/terrestrial.json','preparation/acquisition.json','material/neutral.png',
     ].map(path => `${source}/${path}`)];
     for (const path of files) {
@@ -288,7 +310,7 @@ test('numerical extraction uses current package records and preserves reviewed s
     }
     assert.deepEqual(after.documents,before.documents);
     assert.deepEqual(after.generatedIntermediates,before.generatedIntermediates);
-    const descriptor = sourceObject(await read(join(root,'src/planets/salacia/object.json')));
-    assert.deepEqual(sourceObject(descriptor.properties).catalog,sourceObject(sourceObject(await read('src/planets/salacia/object.json')).properties).catalog);
+    const descriptor = sourceObject(await read(join(root,'src/objects/salacia/object.json')));
+    assert.deepEqual(sourceObject(descriptor.properties).catalog,sourceObject(sourceObject(await read('src/objects/salacia/object.json')).properties).catalog);
   } finally { await rm(root,{recursive:true,force:true}); }
 });

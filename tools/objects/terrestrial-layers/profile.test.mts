@@ -4,7 +4,7 @@ import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {parseTerrestrialProfile} from './index.mts';
 import {radialModelForLens} from './radial-models.mts';
-const read = async (id: string) => JSON.parse(await readFile(new URL(`../../../src/planets/${id}/source/preparation/terrestrial.json`,import.meta.url), 'utf8'));
+const read = async (id: string) => JSON.parse(await readFile(new URL(`../../../src/objects/${id}/source/preparation/terrestrial.json`,import.meta.url), 'utf8'));
 test('authored scientific body profiles dispatch without body-named executable recipes',async()=>{
  for(const id of ['dimorphos','bennu','vesta','ryugu','itokawa','eros'])assert.equal(parseTerrestrialProfile(await read(id)).namespace,id);
 });
@@ -18,7 +18,7 @@ test('observation recipes reject ambiguous masks and fallback ordering',async()=
 
 test('a shape display requires a source mesh and consumer for the shared no-imagery grid', async () => {
  const profile=await read('ida');
- profile.raster.observations=[];profile.raster.scientific=[];
+ profile.raster.observations=[];profile.raster.scientific=[];profile.raster.surfaceObservations=[];
  profile.raster.shapeViews=[{id:'shape',label:'Shape',consumer:'geometry'}];
  profile.presentation.defaultLens='shape';
  assert.equal(fixtureRecord(parseTerrestrialProfile(profile),'presentation').defaultLens,'shape');
@@ -30,26 +30,23 @@ test('a shape display requires a source mesh and consumer for the shared no-imag
 test('georeferenced photographs bind quality, physical distances and bounded disk normalization', async () => {
  const profile = await read('comet-67p');
  assert.equal(fixtureRecord(parseTerrestrialProfile(profile),'raster','surfaceObservations',0).id, 'osiris');
- for (const alter of [(p: unknown) => fixtureRecord(p)["qualityPath"] = '../unbound.IMG', (p: unknown) => fixtureRecord(p)["allowLossy"] = undefined,
-(p: unknown) => fixtureRecord(p,"transfer")["maximumSourceDistanceMeters"] = 51, (p: unknown) => fixtureRecord(p,"transfer")["visibilityToleranceMeters"] = 2,
+ for (const alter of [(p: unknown) => fixtureRecord(p,"frames",0)["qualityPath"] = '../unbound.IMG', (p: unknown) => fixtureRecord(p)["allowLossy"] = undefined,
+(p: unknown) => fixtureRecord(p,"transfer")["maximumEmissionDegrees"] = 90, (p: unknown) => fixtureRecord(p,"transfer")["visibilityToleranceMeters"] = 2,
 (p: unknown) => fixtureRecord(p,"photometry")["maximumGain"] = 4, (p: unknown) => fixtureRecord(p,"photometry")["maximumIncidenceDegrees"] = 90,
-(p: unknown) => fixtureRecord(p,"photometry")["referenceIncidenceDegrees"] = 30, (p: unknown) => fixtureRecord(p)["displayPercentiles"] = [99, 1]]) {
+(p: unknown) => fixtureRecord(p,"photometry")["referenceIncidenceDegrees"] = 30, (p: unknown) => fixtureRecord(p,"display")["percentiles"] = [99, 1]]) {
   const changed = structuredClone(profile); alter(changed.raster.surfaceObservations[0]);
   assert.throws(() => parseTerrestrialProfile(changed), /source-bound/);
  }
 });
 
-test('an alternative model owns its observation mesh, transfer limit, and sampler state', async () => {
+test('an alternative model owns its observation mesh and sampler state', async () => {
   const profile = await read('comet-67p');
   const alternative = structuredClone(profile.geometry.radialTerrain);
-  alternative.simplification.maximumErrorMeters = 60;
   profile.geometry.radialTerrainAlternatives = [{ ...alternative, lensId: 'osiris' }];
-  // The OSIRIS transfer limit now exceeds the default mesh bound (50 m) and
-  // stays within its own model's bound; the other 50 m lenses are untouched.
-  profile.raster.surfaceObservations.find((recipe: {id: string}) => recipe.id === 'osiris').transfer.maximumSourceDistanceMeters = 55;
-  assert.doesNotThrow(() => parseTerrestrialProfile(profile), 'OSIRIS transfer limit belongs to its declared alternative mesh');
-  profile.geometry.radialTerrainAlternatives[0].simplification.maximumErrorMeters = 49;
-  assert.throws(() => parseTerrestrialProfile(profile), /source-bound/, 'the alternative mesh enforces the transfer limit');
+  assert.doesNotThrow(() => parseTerrestrialProfile(profile), 'OSIRIS samples its declared alternative mesh');
+  // The OSIRIS lens validates against its own model, which must preserve the source mesh like the default.
+  delete profile.geometry.radialTerrainAlternatives[0].simplification.method;
+  assert.throws(() => parseTerrestrialProfile(profile), /source-bound/, 'the alternative mesh must preserve its source');
 
   const observation = { samplePoint() { return null; } };
   const base: {observationSurfaces?: Map<string, typeof observation>} = {};
@@ -62,12 +59,12 @@ test('an alternative model owns its observation mesh, transfer limit, and sample
   assert.equal(alternativeRadial.observationSurfaces?.get('osiris'), observation);
 });
 
-test('PDS4 geometry cubes declare their planes and identity and bind a lossless, labelled frame within the mesh transfer bound', async () => {
+test('PDS4 geometry cubes declare their planes and identity and bind a lossless, labelled frame within its transfer limits', async () => {
  const profile = await read('dimorphos');
  assert.equal(fixtureRecord(parseTerrestrialProfile(profile),'raster','surfaceObservations',0).format, 'pds4-geometry-cube');
- for (const alter of [(p: unknown) => fixtureRecord(p)["labelPath"] = undefined, (p: unknown) => fixtureRecord(p)["qualityPath"] = 'observations/quality.fits',
-(p: unknown) => fixtureRecord(p)["allowLossy"] = true, (p: unknown) => fixtureRecord(p)["cube"] = undefined, (p: unknown) => fixtureRecord(p)["cameraPath"] = 'observations/camera.json',
-(p: unknown) => fixtureRecord(p,"transfer")["maximumSourceDistanceMeters"] = 3]) {
+ for (const alter of [(p: unknown) => fixtureRecord(p,"frames",0)["labelPath"] = undefined, (p: unknown) => fixtureRecord(p,"frames",0)["qualityPath"] = 'observations/quality.fits',
+(p: unknown) => fixtureRecord(p)["allowLossy"] = true, (p: unknown) => fixtureRecord(p)["cube"] = undefined, (p: unknown) => fixtureRecord(p,"frames",0)["cameraPath"] = 'observations/camera.json',
+(p: unknown) => fixtureRecord(p,"transfer")["maximumEmissionDegrees"] = 90]) {
   const changed = structuredClone(profile); alter(changed.raster.surfaceObservations[0]);
   assert.throws(() => parseTerrestrialProfile(changed), /source-bound/);
  }
@@ -79,7 +76,7 @@ test('a mosaic may rank frames in recipe order when one viewing direction ties t
  recipe.selection = 'recipe-order';
  assert.doesNotThrow(() => parseTerrestrialProfile(profile));
  recipe.selection = 'nearest-frame';
- assert.throws(() => parseTerrestrialProfile(profile), /mosaic/);
+ assert.throws(() => parseTerrestrialProfile(profile), /source-bound/);
 });
 
 test('SPICE camera recipes declare their kernels, bodies, instrument and pixel axes and nothing of the archived-geometry formats', async () => {
@@ -88,20 +85,20 @@ test('SPICE camera recipes declare their kernels, bodies, instrument and pixel a
  const spice = { kernels, observer: -135, target: 120065803, bodyFrame: 'DIMORPHOS_FIXED', instrument: -135102, clock: { header: 'ACQTMSOC', spacecraft: -135 }, aberration: 'LT+S',
   pixels: { focalLength: { key: 'FOCAL_LENGTH', unit: 'mm' }, pixelPitch: { key: 'PIXEL_SIZE', unit: 'micrometre' }, center: 'DETECTOR_CENTER', boresight: 'BORESIGHT', samples: 'PIXEL_SAMPLES', lines: 'PIXEL_LINES', frame: 'FOV_FRAME', origin: 0, column: '-X', row: '-Y' },
   image: { quantity: 'I/F', plane: 1, missingValueKeys: ['MISPXVAL'], saturationKey: 'SATPXVAL' } };
- profile.raster.surfaceObservations[0] = { id: 'draco-spice', format: 'spice-camera', consumer: 'draco-spice', path: cube.path, startTime: cube.startTime, filter: cube.filter, allowLossy: false,
-  metadata: cube.metadata, spice, transfer: cube.transfer, photometry: cube.photometry, displayPercentiles: cube.displayPercentiles };
+ profile.raster.surfaceObservations[0] = { id: 'draco-spice', format: 'spice-camera', consumer: 'draco-spice', filter: cube.filter,
+  frames: [{ id: 'draco-spice', path: cube.frames[0].path, startTime: cube.frames[0].startTime }], metadata: cube.metadata, spice, transfer: cube.transfer, photometry: cube.photometry, display: cube.display };
  assert.doesNotThrow(() => parseTerrestrialProfile(profile));
- for (const alter of [(p: unknown) => fixtureRecord(p)["spice"] = undefined, (p: unknown) => fixtureRecord(p)["labelPath"] = cube.labelPath, (p: unknown) => fixtureRecord(p)["cameraPath"] = 'observations/camera.json',
+ for (const alter of [(p: unknown) => fixtureRecord(p)["spice"] = undefined, (p: unknown) => fixtureRecord(p,"frames",0)["labelPath"] = cube.frames[0].labelPath, (p: unknown) => fixtureRecord(p,"frames",0)["cameraPath"] = 'observations/camera.json',
   (p: unknown) => fixtureRecord(p)["allowLossy"] = true, (p: unknown) => fixtureRecord(p)["cube"] = cube.cube, (p: unknown) => fixtureRecord(p,"spice")["aberration"] = 'XLT+S',
   (p: unknown) => fixtureRecord(p,"spice")["kernels"] = ['spice/lsk/naif0012.tls'], (p: unknown) => fixtureRecord(p,"spice")["kernels"] = [...kernels, '../elsewhere.bsp'],
   (p: unknown) => fixtureRecord(p,"spice","pixels")["row"] = 'X', (p: unknown) => fixtureRecord(p,"spice","pixels")["origin"] = 2, (p: unknown) => fixtureRecord(p,"spice","pixels","pixelPitch")["unit"] = 'nm',
   (p: unknown) => fixtureRecord(p,"spice")["target"] = -135, (p: unknown) => fixtureRecord(p,"spice","image")["plane"] = 0, (p: unknown) => fixtureRecord(p,"photometry")["model"] = 'minnaert']) {
   const changed = structuredClone(profile); alter(changed.raster.surfaceObservations[0]);
-  assert.throws(() => parseTerrestrialProfile(changed), /source-bound|SPICE camera|spice block/);
+  assert.throws(() => parseTerrestrialProfile(changed), /source-bound|SPICE camera/);
  }
  // The cube format may not carry a spice block either.
  const mixed = structuredClone(profile); mixed.raster.surfaceObservations[0] = { ...cube, spice };
- assert.throws(() => parseTerrestrialProfile(mixed), /spice block/);
+ assert.throws(() => parseTerrestrialProfile(mixed), /source-bound/);
  // Limb refinement belongs to the camera formats and keeps its budget within bounds.
  const refined = structuredClone(profile);
  refined.raster.surfaceObservations[0].refinement = { method: 'mesh-limb', maximumCorrectionDegrees: 0.1, maximumResidualPixels: 2, minimumControls: 48, searchPixels: 256, maximumControls: 1500, minimumSharpness: 0.15 };
@@ -112,7 +109,7 @@ test('SPICE camera recipes declare their kernels, bodies, instrument and pixel a
   assert.throws(() => parseTerrestrialProfile(changed), /limb refinement/);
  }
  const cubeRefined = structuredClone(profile); cubeRefined.raster.surfaceObservations[0] = { ...cube, refinement: refined.raster.surfaceObservations[0].refinement };
- assert.throws(() => parseTerrestrialProfile(cubeRefined), /limb refinement/);
+ assert.throws(() => parseTerrestrialProfile(cubeRefined), /source-bound/);
 });
 
 test('a published photometric model block is accepted on the observation seam and the encounter route, and malformed blocks are refused', async () => {

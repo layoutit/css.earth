@@ -7,7 +7,7 @@ import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireHistoricalContent,requireRadialTestConfig,requireScalarAnchors} from '../radial-fixture.mts';
 import {requireFiniteNumber,requireRecord,requireString} from '../../../../tools/source-values.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/ra-shalom/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/ra-shalom/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Ra-Shalom retains original source pins and acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'ra-shalom',planetName:'Ra-Shalom',sourceRoot:root});await source.verify();

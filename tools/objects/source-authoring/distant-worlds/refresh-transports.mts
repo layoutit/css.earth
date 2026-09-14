@@ -13,7 +13,7 @@ import {writePreparedText} from '../../../../tools/write-prepared-text.mts';
 import {preparePageMetadata} from '../../../../tools/prepared-page-metadata.mts';
 const results=[];
 for(const {id} of OBJECTS){
- const root=`src/planets/${id}`,descriptor=requireRecord(JSON.parse(await readFile(`${root}/object.json`, 'utf8')));
+ const root=`src/objects/${id}`,descriptor=requireRecord(JSON.parse(await readFile(`${root}/object.json`, 'utf8')));
  const runtime=requireObjectRuntimeDefinition(JSON.parse(await readFile(`${root}/prepared/runtime.json`, 'utf8')));
  const definition=prepareMarkerBindings(runtime);
  const withoutMarkers=({heliocentricView,...rest}: typeof runtime)=>rest;

@@ -44,6 +44,24 @@ export function bindSipCamera(value: unknown) {
   };
 }
 
+/** Every body in a L'LORRI frame's field of view, from TRGFOV1 to TRGFOVN. */
+export function llorriFieldTargets(header: Record<string, unknown>) {
+  const count = Number(header.TRGFOVN);
+  if (!Number.isInteger(count) || count < 1) throw new Error('L\'LORRI header lists no field-of-view target.');
+  return Array.from({ length: count }, (_, index) => {
+    const target = unquote(header[`TRGFOV${index + 1}`]);
+    if (!target) throw new Error(`L'LORRI header is missing TRGFOV${index + 1}.`);
+    return target;
+  });
+}
+
+/** A camera closure names its body; the frame must list that body in its field of view. */
+export function requireLlorriTarget(header: Record<string, unknown>, target: string) {
+  const targets = llorriFieldTargets(header);
+  if (!targets.includes(target)) throw new Error(`L'LORRI camera target ${target} is not in the frame's field of view (${targets.join(', ')}).`);
+  return target;
+}
+
 /** The partially processed L'LORRI product has co-registered DN, uncertainty and
  * bit-mask FITS HDUs. Do not mistake DN/exposure for absolute radiance or I/F. */
 export function decodeLlorri(bytes: Buffer, value: unknown) {
@@ -54,11 +72,11 @@ export function decodeLlorri(bytes: Buffer, value: unknown) {
   if (image.bitpix !== -32 || sigma.bitpix !== -32 || quality.bitpix !== 16 || quality.zero !== 32768 ||
       [image,sigma,quality].some(f => f.width !== 1024 || f.height !== 1024 || f.scale !== 1) ||
       image.zero !== 0 || sigma.zero !== 0 || image.nextOffset + sigma.nextOffset + quality.nextOffset !== bytes.length ||
-      unquote(h.TRGFOV1) !== 'DONALDJOHANSON' || Number(h.TRGFOVN) !== 1 ||
       unquote(h.STARTUTC) !== camera.startTime || camera.width !== 1024 || camera.height !== 1024 ||
       unquote(h.CTYPE1) !== 'RA---TAN-SIP' || unquote(h.CTYPE2) !== 'DEC--TAN-SIP' ||
       ['BIASCORR','SMEARCOR','FLATCORR'].some(k => unquote(h[k]) !== 'PERFORM') ||
       unquote(h.AVSCORR) !== 'OMIT' || !(Number(h.EXPTIME) > 0)) throw new Error('Unsupported L\'LORRI calibration or paired FITS layout.');
+  requireLlorriTarget(h, camera.target);
   const count = image.values.length, values = new Float32Array(count), flags = quality.values;
   for (let i = 0; i < count; i++) values[i] = image.values[i]/Number(h.EXPTIME);
   return { width:1024,height:1024,planes:{IMAGE:values},camera,...bindSipCamera(camera),
@@ -66,7 +84,7 @@ export function decodeLlorri(bytes: Buffer, value: unknown) {
     acceptPixel:(i: number) => flags[i] === 0 && Number.isFinite(values[i]) && Number.isFinite(sigma.values[i]) && sigma.values[i] >= 0,
     qualityReport:{units:'relative DN per second',pairedSigmaAndQuality:true,exposureSeconds:Number(h.EXPTIME),
       flagDefinition:'All nonzero bits rejected: bias, flat, permanent defect, hot pixel, saturation, missing pixel.',
-      geometry:'Source-mesh intersections through the original TAN-SIP WCS and a two-landmark translation; independent third landmark withheld.',
+      geometry:'Source-mesh intersections through the original TAN-SIP WCS and the registered image-to-surface translation recorded in the pinned camera closure.',
       illumination:'Original acquisition illumination retained. No albedo or disk-normalization claim.',
       limitations:'Partially processed image: bias, smear and flat corrected; absolute calibration omitted by the source.'} };
 }

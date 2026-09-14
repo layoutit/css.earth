@@ -1,0 +1,636 @@
+{
+  "schema": "cssmetis-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "c0532890500",
+      "path": "observations/C0532890500R.IMG",
+      "expectedBytes": 857088,
+      "expectedSha256": "4c3501a4e341b74405b89b285b404361fcff442b4819423a745cd6dbf26fe811",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532890500",
+      "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived by PDS. Retain mission and archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/"
+      ],
+      "acquisition": "Original reconstructed SSI product, unchanged.",
+      "redistribution": "Retain NASA/JPL and PDS attribution.",
+      "consumers": [
+        "galileo-clear-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0023-e26-sml-sats-c0532890500r",
+            "role": "material",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0532890500-label",
+      "path": "observations/C0532890500R.LBL",
+      "expectedBytes": 5033,
+      "expectedSha256": "05b777e7781d3ade918ccbb7ce8993b54624cd7ac1c5a4f237f16f2a6f672bd0",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532890500",
+      "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived by PDS. Retain mission and archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/"
+      ],
+      "acquisition": "Original reconstructed SSI product, unchanged.",
+      "redistribution": "Retain NASA/JPL and PDS attribution.",
+      "consumers": [
+        "galileo-clear-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0023-e26-sml-sats-c0532890500r",
+            "role": "material",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0420681401",
+      "path": "observations/C0420681401R.IMG",
+      "expectedBytes": 831488,
+      "expectedSha256": "9a3e93326e589847d6033a75cae9dbbd884ff52a9022c6f96ae722321f3f8895",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420681401",
+      "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived by PDS. Retain mission and archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/"
+      ],
+      "acquisition": "Original reconstructed SSI product, unchanged.",
+      "redistribution": "Retain NASA/JPL and PDS attribution.",
+      "consumers": [
+        "galileo-clear-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-sml-sats-c0420681401r",
+            "role": "material",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0420681401-label",
+      "path": "observations/C0420681401R.LBL",
+      "expectedBytes": 4837,
+      "expectedSha256": "a2d5298b3f28aaa247d402ae7269d8744233bf97c123fd2d800e09d3c1cfc3a7",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420681401",
+      "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived by PDS. Retain mission and archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/"
+      ],
+      "acquisition": "Original reconstructed SSI product, unchanged.",
+      "redistribution": "Retain NASA/JPL and PDS attribution.",
+      "consumers": [
+        "galileo-clear-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-sml-sats-c0420681401r",
+            "role": "material",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0420685801",
+      "path": "observations/C0420685801R.IMG",
+      "expectedBytes": 831488,
+      "expectedSha256": "d34cbf3bafcc2d7f079c3ad250287660d0dac936082b183436ecc7d1f92c2e3b",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420685801",
+      "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived by PDS. Retain mission and archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/"
+      ],
+      "acquisition": "Original reconstructed SSI product, unchanged.",
+      "redistribution": "Retain NASA/JPL and PDS attribution.",
+      "consumers": [
+        "galileo-clear-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-sml-sats-c0420685801r",
+            "role": "material",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0420685801-label",
+      "path": "observations/C0420685801R.LBL",
+      "expectedBytes": 4837,
+      "expectedSha256": "9e63ce4fcadfc499663fffca4460971ff94b7f7514e13ac55842d9fd18d3dbda",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420685801",
+      "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived by PDS. Retain mission and archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/"
+      ],
+      "acquisition": "Original reconstructed SSI product, unchanged.",
+      "redistribution": "Retain NASA/JPL and PDS attribution.",
+      "consumers": [
+        "galileo-clear-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-sml-sats-c0420685801r",
+            "role": "material",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0394682801",
+      "path": "observations/C0394682801R.IMG",
+      "expectedBytes": 810000,
+      "expectedSha256": "4daafe1c0c21cdaca61cc258f7835d31561ec76e7ac2ef8e07f033471ec67d71",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0394682801",
+      "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived by PDS. Retain mission and archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/"
+      ],
+      "acquisition": "Original reconstructed SSI product, unchanged.",
+      "redistribution": "Retain NASA/JPL and PDS attribution.",
+      "consumers": [
+        "galileo-clear-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0019-g8-sml-sats-c0394682801r",
+            "role": "material",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0394682801-label",
+      "path": "observations/C0394682801R.LBL",
+      "expectedBytes": 4835,
+      "expectedSha256": "9d258a9ae9a4229a9e66d5af9379b205ea50e412c90e64ce7e871bb89b1930db",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0394682801",
+      "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived by PDS. Retain mission and archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/"
+      ],
+      "acquisition": "Original reconstructed SSI product, unchanged.",
+      "redistribution": "Retain NASA/JPL and PDS attribution.",
+      "consumers": [
+        "galileo-clear-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0019-g8-sml-sats-c0394682801r",
+            "role": "material",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0401751800",
+      "path": "observations/C0401751800R.IMG",
+      "expectedBytes": 808000,
+      "expectedSha256": "9df4199697827534e3d6429f4a879d2cc851c5a17f287c8d6b46925227ad3f69",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0401751800",
+      "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived by PDS. Retain mission and archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/"
+      ],
+      "acquisition": "Original reconstructed SSI product, unchanged.",
+      "redistribution": "Retain NASA/JPL and PDS attribution.",
+      "consumers": [
+        "galileo-clear-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0019-c9-sml-sats-c0401751800r",
+            "role": "material",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0401751800-label",
+      "path": "observations/C0401751800R.LBL",
+      "expectedBytes": 4728,
+      "expectedSha256": "73057c454d46f4fa7cc024ab8b005a4742935f38375718255f919e02e0f3693a",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0401751800",
+      "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived by PDS. Retain mission and archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/"
+      ],
+      "acquisition": "Original reconstructed SSI product, unchanged.",
+      "redistribution": "Retain NASA/JPL and PDS attribution.",
+      "consumers": [
+        "galileo-clear-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0019-c9-sml-sats-c0401751800r",
+            "role": "material",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pck-ellipsoid",
+      "path": "shape/metis-ellipsoid.tab",
+      "expectedBytes": 67525,
+      "expectedSha256": "e7dc2d82d1e95a2cfb35ed9466bfcc21196b883887ce48981e96bf61b2c93a91",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+      "credit": "NASA/JPL NAIF; IAU WGCCRE",
+      "license": "Public NASA SPICE data; retain attribution.",
+      "licenseEvidence": [
+        "https://naif.jpl.nasa.gov/naif/rules.html"
+      ],
+      "acquisition": "Checked-in analytic sampling of BODY516_RADII; exact formula and dimensions in shape/model.json.",
+      "redistribution": "Retain NASA/JPL/IAU attribution.",
+      "consumers": [
+        "shape"
+      ],
+      "projection": {
+        "type": "body-centered-radius-grid",
+        "longitudeDirection": "west-positive"
+      },
+      "coverage": "Smooth measured ellipsoid; no resolved topography.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "naif-pck00011",
+            "role": "method",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://pds-rings.seti.org/galileo/",
+      "credit": "NASA/JPL; NASA PDS",
+      "license": "Public PDS scientific data; retain mission and model attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "c0532890500",
+          "c0420681401",
+          "c0420685801",
+          "c0394682801",
+          "c0401751800",
+          "pck-ellipsoid"
+        ],
+        "size": 256,
+        "longitudeDegrees": 202,
+        "latitudeDegrees": 0,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 22483,
+      "expectedSha256": "34dae451cf04ea394693f3caad77e529c0adae6e2bf24cee0d6f8a0baf0b50f8"
+    }
+  ],
+  "documents": [
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 848,
+      "expectedSha256": "fe236f1f1a949ac7701383b8acb8a3567dee8eefd0bfc224196a508de2f96d20"
+    },
+    {
+      "path": "shape/model.json",
+      "expectedBytes": 462,
+      "expectedSha256": "dfb55d3dfbbfc69d6a6d0dbaba47e73f11d820178162701b687d5568c5e667a7"
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3193,
+      "expectedSha256": "4870865583973ce31eced0d17e84743f12cc1666df6f02b4ce957c72cafa8d27"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 2894,
+      "expectedSha256": "b6777d0de5edf71119bde04083370b6f03cab6b0cfc7360e104caec034b27786"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1301,
+      "expectedSha256": "ce15d2ba1f30f83737d716ad8099e2cf310f1702400fda8160a8b75cef08b70d"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 6870,
+      "expectedSha256": "0873b6ad4fa2914a3911b6358db965af59ad0690937c367e6143f9753ce19d38"
+    },
+    {
+      "path": "geometry/c0394682801-opus.json",
+      "expectedBytes": 11711,
+      "expectedSha256": "8e607002875cc50e82e41459cbe43d77ab887eb5c2e0d1eb19ac76ccf52e658d"
+    },
+    {
+      "path": "geometry/c0401751800-opus.json",
+      "expectedBytes": 11699,
+      "expectedSha256": "eb5ed7fbb59a3d1d37758fe30c59a1ee7864816b54e70345fec7d38a688c5c4b"
+    },
+    {
+      "path": "geometry/c0420681401-opus.json",
+      "expectedBytes": 11564,
+      "expectedSha256": "687b7ddf6094c290cef8fa4063a38d93c794de5d84019f815f05a2540cc47372"
+    },
+    {
+      "path": "geometry/c0420685801-opus.json",
+      "expectedBytes": 11545,
+      "expectedSha256": "524e3399b79dd7960015b42627d704c0cc9f90958e8c29d098abcd8e49de3caf"
+    },
+    {
+      "path": "geometry/c0532890500-opus.json",
+      "expectedBytes": 11677,
+      "expectedSha256": "f47d095784328245731a7894d38175f9f6a967549b3baba7b1ebc1eb6a0c1467"
+    },
+    {
+      "path": "geometry/registration.json",
+      "expectedBytes": 3798,
+      "expectedSha256": "64889dbcfab52f8b5ac22a13d71017033066eb1253ae1b644c33bceb961706bb"
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4530,
+      "expectedSha256": "0649f58ed5e3940f634d8716d5224a9641de4c1865c083e6a5c63e9fabf15d1b",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1344,
+      "expectedSha256": "0b7f4e079db56533249b538c063438ab8814736f58723fcad7cb97334add672b"
+    }
+  ]
+}

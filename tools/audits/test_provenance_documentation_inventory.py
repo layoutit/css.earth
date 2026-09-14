@@ -15,10 +15,10 @@ class ProvenanceInventory(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name).resolve()
         self.git('init', '--quiet')
-        self.write('site/objects.mts', "import body from '../src/planets/example/object.json';\n")
-        self.write('src/planets/example/object.json', {'id': 'example', 'properties': {}})
-        self.write('src/planets/example/source/manifest.json', {'inputs': [], 'documents': []})
-        self.write('src/planets/example/README.md', '# Example\n')
+        self.write('site/objects.mts', "import body from '../src/objects/example/object.json';\n")
+        self.write('src/objects/example/object.json', {'id': 'example', 'properties': {}})
+        self.write('src/objects/example/source/manifest.json', {'inputs': [], 'documents': []})
+        self.write('src/objects/example/README.md', '# Example\n')
         self.commit()
 
     def git(self, *args):
@@ -52,13 +52,13 @@ class ProvenanceInventory(unittest.TestCase):
 
     def test_catalogue_reads_selected_snapshot_and_excludes_unregistered_folders(self):
         self.write('site/objects.mts', "import { OBJECT_DESCRIPTORS } from './prepared-object-catalog.mts';\nthrow Error('Never execute');\n")
-        self.write('src/planets/example/object.json', {'id': 'example', 'properties': {'catalog': {}}})
-        self.write('src/planets/unregistered/object.json', {'id': 'unregistered', 'properties': {}})
+        self.write('src/objects/example/object.json', {'id': 'example', 'properties': {'catalog': {}}})
+        self.write('src/objects/unregistered/object.json', {'id': 'unregistered', 'properties': {}})
         self.commit()
-        (self.root / 'src/planets/example/README.md').unlink()
+        (self.root / 'src/objects/example/README.md').unlink()
         self.git('add', '-u')
         # Dirty working bytes must not change either Git snapshot.
-        self.write('src/planets/example/object.json', 'not JSON')
+        self.write('src/objects/example/object.json', 'not JSON')
         result, report = self.run_inventory('--ref', 'HEAD^', '--index')
         self.assertEqual(result.returncode, 0, result.stderr)
         current, legacy, staged = report['snapshots']
@@ -75,7 +75,7 @@ class ProvenanceInventory(unittest.TestCase):
         result, _ = self.run_inventory()
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('No registered bodies found', result.stderr)
-        self.write('src/planets/example/object.json', {'id': 'different', 'properties': {'catalog': {}}})
+        self.write('src/objects/example/object.json', {'id': 'different', 'properties': {'catalog': {}}})
         self.commit()
         result, _ = self.run_inventory()
         self.assertNotEqual(result.returncode, 0)
@@ -84,7 +84,7 @@ class ProvenanceInventory(unittest.TestCase):
     def test_duplicate_html_counts_separate_working_bytes_from_unique_blobs(self):
         page = '<html>Source paper</html>'
         for name in ('first.html', 'second.HTM'):
-            self.write('src/planets/example/source/reference/' + name, page)
+            self.write('src/objects/example/source/reference/' + name, page)
         self.commit()
         result, report = self.run_inventory()
         self.assertEqual(result.returncode, 0, result.stderr)

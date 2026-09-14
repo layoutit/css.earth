@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "achlys",
+  "entries": [
+    {
+      "id": "model-dimensions",
+      "subject": "Published model dimensions",
+      "status": "included",
+      "finding": "The paper’s stated model dimensions are used through the existing ellipsoid recipe.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/achlys/README.md#L36"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "jwst-nirspec-spectrum",
+      "subject": "JWST/NIRSpec spectrum of 2003 AZ84 as surface data",
+      "status": "excluded",
+      "finding": "The [JWST/NIRSpec spectrum of 2003 AZ84](https://doi.org/10.1051/0004-6361/202346998) explicitly treats the target as spatially unresolved. A spectrum cannot become registered surface texels.",
+      "revisitWhen": "A spatially resolved surface map or registered imaging of this object is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/achlys/README.md#L37",
+        "https://doi.org/10.1051/0004-6361/202346998"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    }
+  ]
+}

@@ -6,9 +6,10 @@ import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
-import {decodeCalibratedCamera, prepareShapeCameraColor} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
+import {decodeCalibratedCamera} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
+import {coveredPixels,loadLens} from '../surface-observation-lens.mts';
 
-const source = resolve(import.meta.dirname, '../../../../src/planets/proteus/source');
+const source = resolve(import.meta.dirname, '../../../../src/objects/proteus/source');
 const readJson = async (path: string) => JSON.parse(await readFile(resolve(source, path), 'utf8'));
 const anchors:Record<string,readonly (readonly[number,number,number])[]> = {
   c1137328: [[474, 500, 295], [464, 505, 266], [414, 440, -48], [0, 0, 0]],
@@ -35,26 +36,15 @@ test('Proteus color preserves the six exact public inputs and signed FICOR I/F a
 });
 
 test('Proteus filter color samples all three actual cameras and withholds a missing channel', async () => {
-  const manifest = await readJson('manifest.json');
-  const terrestrial = await readJson('preparation/terrestrial.json');
-  const recipe = terrestrial.raster.mosaics.find((map: { id: string; }) => map.id === 'filter-color');
-  const entries = manifest.inputs.filter((input:unknown) => array(text)(requireRecord(input).consumers).includes(recipe.consumer));
-  const shape = terrestrial.geometry.radialTerrain;
-  const map = await prepareShapeCameraColor(source, entries, recipe, 96, 48, shape);
-  const valid = Array.from(map.missing, (missing, index) => missing ? -1 : index).filter(index => index >= 0);
+  const observation = await loadLens('proteus', 'filter-color');
+  const { rgb, missing } = observation.preview(96, 48);
+  const valid = Array.from(missing, (value, index) => value ? -1 : index).filter(index => index >= 0);
   assert.ok(valid.length > 40, 'the selected three-band interior must contain actual mapped data');
-  assert.ok(valid.length < map.missing.length/2, 'the unseen globe must remain unknown');
-  assert.ok(valid.some(index => map.rgb[index*3] !== map.rgb[index*3+2]), 'filter color must retain measured band differences');
-  for (const channel of map.grid.channels) {
-    assert.ok(channel.coveragePixels >= valid.length);
-    assert.equal(channel.frames[0].level, 1);
-    assert.ok(Number.isFinite(required(channel.beforeDisplay).mean));
-    assert.ok(required(channel.frames[0].maskedSourceSamples).count > 0);
-  }
-  const outside = structuredClone(recipe);
-  outside.channels[2].frames[0].center = [2000, 2000];
-  const missingBand = await prepareShapeCameraColor(source, entries, outside, 32, 16, shape);
-  assert.equal(missingBand.grid.channels[2].coveragePixels, 0);
-  assert.equal(missingBand.grid.coveragePixels, 0, 'no color may be borrowed from other filters when violet is absent');
-  assert.ok(missingBand.missing.every(value => value === 1));
+  assert.ok(valid.length < missing.length/2, 'the unseen globe must remain unknown');
+  assert.ok(valid.some(index => rgb[index*3] !== rgb[index*3+2]), 'filter color must retain measured band differences');
+  const bands = array(requireRecord)(requireRecord(observation.report.frames[0]).bands);
+  assert.deepEqual(bands.map(band => requireRecord(band).filter), ['GREEN', 'BLUE', 'VIOLET']);
+  // Point the violet camera away from the body: no color may be borrowed from the other filters.
+  const outside = await loadLens('proteus', 'filter-color', recipe => { requireRecord(array(requireRecord)(recipe.frames)[0].blue).center = [2000, 2000]; });
+  assert.equal(coveredPixels(outside.preview(32, 16).missing), 0, 'no color may be borrowed from other filters when violet is absent');
 });

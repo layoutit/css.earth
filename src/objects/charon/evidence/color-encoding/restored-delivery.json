@@ -1,0 +1,91 @@
+{
+  "method": "Reproduced retained main assets from their pinned sources; every byte count and SHA-256 must equal the unchanged runtime inventory before copying.",
+  "assets": [
+    {
+      "filename": "charon-lens-elevation.webp",
+      "bytes": 168,
+      "sha256": "c3464c3a2b828b0d9b29a1813fe263b99075860a656e22d6d6d8c09bbbf70fa9",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c3464c3a2b828b0d9b29a1813fe263b99075860a656e22d6d6d8c09bbbf70fa9/charon-lens-elevation.webp",
+      "verified": true
+    },
+    {
+      "filename": "charon-elevation.webp",
+      "bytes": 753412,
+      "sha256": "c8892e3e045357db12cc790c816b7e8634a7b900a446a984b2f8ded10b5e4362",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c8892e3e045357db12cc790c816b7e8634a7b900a446a984b2f8ded10b5e4362/charon-elevation.webp",
+      "verified": true
+    },
+    {
+      "filename": "charon-poles-elevation.webp",
+      "bytes": 50262,
+      "sha256": "ed35e6ab255802e3f9812151bd583de5a63cc629a16a24d63cbd03e63c21701f",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ed35e6ab255802e3f9812151bd583de5a63cc629a16a24d63cbd03e63c21701f/charon-poles-elevation.webp",
+      "verified": true
+    },
+    {
+      "filename": "charon-elevation@2x.webp",
+      "bytes": 2364048,
+      "sha256": "37304b9513340545aadb6a44af74ccc644790bed1d188faa74b8a23ef353079c",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/37304b9513340545aadb6a44af74ccc644790bed1d188faa74b8a23ef353079c/charon-elevation@2x.webp",
+      "verified": true
+    },
+    {
+      "filename": "charon-poles-elevation@2x.webp",
+      "bytes": 156636,
+      "sha256": "9a8354d1b55ac8f82e2642b3db538486cfb8ddb0122aa29d7fa99c6c49d096af",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9a8354d1b55ac8f82e2642b3db538486cfb8ddb0122aa29d7fa99c6c49d096af/charon-poles-elevation@2x.webp",
+      "verified": true
+    },
+    {
+      "filename": "charon-lens-albedo.webp",
+      "bytes": 1154,
+      "sha256": "ec6d5dbec3849608cee76f972d0bd894037504eeed1abb2cf7da99a1c6631c32",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ec6d5dbec3849608cee76f972d0bd894037504eeed1abb2cf7da99a1c6631c32/charon-lens-albedo.webp",
+      "verified": true
+    },
+    {
+      "filename": "charon-albedo.webp",
+      "bytes": 212330,
+      "sha256": "62b306c90bd57b4faf531ed54978a23d1d38605a09694264ad271f5f9d1a1b0f",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/62b306c90bd57b4faf531ed54978a23d1d38605a09694264ad271f5f9d1a1b0f/charon-albedo.webp",
+      "verified": true
+    },
+    {
+      "filename": "charon-poles-albedo.webp",
+      "bytes": 6540,
+      "sha256": "d58f250d556d796b46bd8882da70503e8f14359c16ef997f5828087f68d2ab6b",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d58f250d556d796b46bd8882da70503e8f14359c16ef997f5828087f68d2ab6b/charon-poles-albedo.webp",
+      "verified": true
+    },
+    {
+      "filename": "charon-albedo@2x.webp",
+      "bytes": 295890,
+      "sha256": "b6f320ab2309a6a73ca130f731daacd77aaf2ae66da10075b4e256dbd19502e2",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b6f320ab2309a6a73ca130f731daacd77aaf2ae66da10075b4e256dbd19502e2/charon-albedo@2x.webp",
+      "verified": true
+    },
+    {
+      "filename": "charon-poles-albedo@2x.webp",
+      "bytes": 14168,
+      "sha256": "9abf55667011be61a0c2983c26478b142a56c4f5331bcb94b4cc71b246f908b5",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9abf55667011be61a0c2983c26478b142a56c4f5331bcb94b4cc71b246f908b5/charon-poles-albedo@2x.webp",
+      "verified": true
+    },
+    {
+      "filename": "charon-system-markers.webp",
+      "bytes": 614,
+      "sha256": "24557f3ad439d92283f120588fa2a877f7433769c91b92252314fcac7f84d6ff",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/24557f3ad439d92283f120588fa2a877f7433769c91b92252314fcac7f84d6ff/charon-system-markers.webp",
+      "verified": true
+    },
+    {
+      "filename": "charon-system-markers@2x.webp",
+      "bytes": 1708,
+      "sha256": "8c3f1e7a46f9a6f5af19d29f7d6de089a6700d012a7a4f9b546544250e4736c1",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/8c3f1e7a46f9a6f5af19d29f7d6de089a6700d012a7a4f9b546544250e4736c1/charon-system-markers@2x.webp",
+      "verified": true
+    }
+  ],
+  "baseline": "8cc1a2fae",
+  "delivery": "All twelve unchanged assets were missing at their immutable URLs, were reproduced byte-for-byte from pinned inputs, uploaded, and fetched again with byte/hash verification."
+}

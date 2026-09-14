@@ -1,0 +1,140 @@
+{
+  "method": "OPUS target-centered Sun/observer vectors, range and native angular pixel scale; original Galileo SSI label NORTH_AZIMUTH+90 gives camera north-from-up. Only image center translation is fitted against the illuminated Stooke silhouette. Original early REDR Sun/range values are stale and inconsistent with the recorded phase angle, so they are not used. OPUS center/roll do not align with native rasters and are not used.",
+  "units": "Native SSI digital numbers normalized by 255, not calibrated radiance or I/F. A constant measured sky offset and bounded lunar-Lambert correction are empirical display processing.",
+  "limitations": "The archived Stooke 5-degree shape and original pointing are approximate; no local photogrammetric solution, detector flat field or phase-function calibration is implied. Cast shadows and unreliable limb samples remain unavailable.",
+  "northConvention": "https://pds.nasa.gov/data/go-j_jsa-ssi-2-redr-v1.0/go_0018/document/cdvolsis.pdf",
+  "frames": [
+    {
+      "id": "c0401759200",
+      "encoding": "vicar-byte-dn",
+      "path": "observations/C0401759200R.IMG",
+      "labelPath": "observations/C0401759200R.LBL",
+      "observerLatitude": -1.043,
+      "observerWestLongitude": 204.358,
+      "sunLatitude": -1.088,
+      "sunWestLongitude": 193.424,
+      "rangeKm": 567830.629,
+      "northAzimuthDegrees": 177.961,
+      "center": [
+        566.455,
+        46.091
+      ],
+      "pixelAngleMicroradians": 10.152974682174111,
+      "backgroundOffset": 0.0156863,
+      "backgroundMaximum": 0.02,
+      "sourceWidth": 800,
+      "sourceHeight": 800,
+      "registration": {
+        "method": "Original SSI label image roll and OPUS target-centered geometry; image-center translation fitted to illuminated source-shape silhouette",
+        "skyRegion": [
+          20,
+          20,
+          750,
+          380
+        ],
+        "skyMedianDN": 4.0,
+        "skyRobustSigmaDN": 0.0,
+        "boundaryRmsPixels": 3.0989201001075446
+      }
+    },
+    {
+      "id": "c0401787200",
+      "encoding": "vicar-byte-dn",
+      "path": "observations/C0401787200R.IMG",
+      "labelPath": "observations/C0401787200R.LBL",
+      "observerLatitude": -0.471,
+      "observerWestLongitude": 295.401,
+      "sunLatitude": -1.085,
+      "sunWestLongitude": 298.347,
+      "rangeKm": 839080.257,
+      "northAzimuthDegrees": 164.689,
+      "center": [
+        470.294,
+        87.294
+      ],
+      "pixelAngleMicroradians": 10.152962042580869,
+      "backgroundOffset": 0.0117647,
+      "backgroundMaximum": 0.02,
+      "sourceWidth": 800,
+      "sourceHeight": 800,
+      "registration": {
+        "method": "Original SSI label image roll and OPUS target-centered geometry; image-center translation fitted to illuminated source-shape silhouette",
+        "skyRegion": [
+          20,
+          20,
+          750,
+          380
+        ],
+        "skyMedianDN": 3.0,
+        "skyRobustSigmaDN": 0.0,
+        "boundaryRmsPixels": 2.4859466601354976
+      }
+    },
+    {
+      "id": "c0420691700",
+      "encoding": "vicar-byte-dn",
+      "path": "observations/C0420691700R.IMG",
+      "labelPath": "observations/C0420691700R.LBL",
+      "observerLatitude": 0.486,
+      "observerWestLongitude": 155.213,
+      "sunLatitude": 1.317,
+      "sunWestLongitude": 210.011,
+      "rangeKm": 504359.423,
+      "northAzimuthDegrees": 357.947,
+      "center": [
+        378.8,
+        80.84
+      ],
+      "pixelAngleMicroradians": 10.152957923421209,
+      "backgroundOffset": 0.0235294,
+      "backgroundMaximum": 0.02,
+      "sourceWidth": 800,
+      "sourceHeight": 800,
+      "registration": {
+        "method": "Original SSI label image roll and OPUS target-centered geometry; image-center translation fitted to illuminated source-shape silhouette",
+        "skyRegion": [
+          20,
+          20,
+          750,
+          380
+        ],
+        "skyMedianDN": 6.0,
+        "skyRobustSigmaDN": 0.0,
+        "boundaryRmsPixels": 3.460404600835561
+      }
+    },
+    {
+      "id": "c0532888400",
+      "encoding": "vicar-byte-dn",
+      "path": "observations/C0532888400R.IMG",
+      "labelPath": "observations/C0532888400R.LBL",
+      "observerLatitude": -0.476,
+      "observerWestLongitude": 167.072,
+      "sunLatitude": 3.896,
+      "sunWestLongitude": 107.866,
+      "rangeKm": 192761.897,
+      "northAzimuthDegrees": 185.714,
+      "center": [
+        567.221,
+        228.221
+      ],
+      "pixelAngleMicroradians": 10.152992009618997,
+      "backgroundOffset": 0.0235294,
+      "backgroundMaximum": 0.02,
+      "sourceWidth": 800,
+      "sourceHeight": 800,
+      "registration": {
+        "method": "Original SSI label image roll and OPUS target-centered geometry; image-center translation fitted to illuminated source-shape silhouette",
+        "skyRegion": [
+          20,
+          20,
+          750,
+          380
+        ],
+        "skyMedianDN": 6.0,
+        "skyRobustSigmaDN": 0.0,
+        "boundaryRmsPixels": 3.620575094499019
+      }
+    }
+  ]
+}

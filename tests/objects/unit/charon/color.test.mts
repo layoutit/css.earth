@@ -5,7 +5,7 @@ import { required } from '../../../../tools/test-values.mts';
 import { parseInterpreterRecipe } from '../../../../tools/objects/observation/interpret.mts';
 import { decodePds4Color, mapPds4Color } from '../../../../tools/objects/terrestrial-layers/observed-pds4.mts';
 
-const root = new URL('../../../../src/planets/charon/source/', import.meta.url);
+const root = new URL('../../../../src/objects/charon/source/', import.meta.url);
 test('Charon MVIC bands and missing masks match independent NumPy source anchors', async () => {
   const recipe = parseInterpreterRecipe(JSON.parse((await readFile(new URL('preparation/raster.json', root))).toString('utf8')));
   const manifest = JSON.parse((await readFile(new URL('manifest.json', root))).toString('utf8'));

@@ -1,0 +1,518 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "comet-1p",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "46b0b049586fd4acbce238e92354707c214af7c96d3c419eb8318c69fea73edb"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "5494e1f6ddce35dde8a998547dbe984691495bbe99dc42f13fc21bab4ed96c67",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "comet-1p",
+        "displayName": "Halley",
+        "publicBase": "/scenes/comet-1p/",
+        "distanceAu": 17.859422957021373,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "giotto",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 0,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Giotto + Vega",
+                "coverage": "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid."
+              },
+              "focus": {
+                "longitudeDegrees": 196,
+                "latitudeDegrees": -15,
+                "zoom": 1.1
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": [],
+          "shapeViews": [
+            {
+              "id": "model",
+              "consumer": "shape",
+              "label": "Historical model"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 4.57906433330178,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.7
+          },
+          "mapUrl": "/scenes/comet-1p/comet-1p-model-surface@2x.webp",
+          "polesUrl": "/scenes/comet-1p/comet-1p-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/1682q1halley.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 1000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 1000,
+              "maximumErrorMeters": 100
+            },
+            "primitive": "u",
+            "sourceLighting": {
+              "maximumDistanceMeters": 300,
+              "rayOffsetMeters": 0.25,
+              "ambient": 0.16,
+              "diffuse": 0.84,
+              "floodLights": [
+                {
+                  "direction": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "weight": 0.36
+                },
+                {
+                  "direction": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "weight": 0.24
+                },
+                {
+                  "direction": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "weight": 0.24
+                }
+              ],
+              "uniformFlood": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; illustrative model orientation.",
+          "qualification": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            184,
+            182,
+            178
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "56f7c9b11d48fd68ea935276ad35f6369e3b36edd900596e3af3e9d2c1b3c24a",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "comet-1p",
+        "displayName": "Halley",
+        "panel": {
+          "facts": [
+            {
+              "id": "giotto-approach",
+              "label": "Giotto closest approach",
+              "value": "596 km"
+            },
+            {
+              "id": "vega-approach",
+              "label": "Vega 2 closest approach",
+              "value": "8,032 km"
+            },
+            {
+              "id": "uncertainty",
+              "label": "Shape uncertainty",
+              "value": "About 0.5–1 km"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Historical model",
+            "giotto": "Giotto + Vega"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Historical model",
+              "thumbnail": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
+              "surface": "comet-1p-model-surface@2x.webp",
+              "poles": "comet-1p-model-poles@2x.webp",
+              "source": {
+                "id": "stooke-halley",
+                "path": "../manifest.json",
+                "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
+              },
+              "notes": "A historical shape reconstructed from Giotto and Vega images. The grid follows the model; depressions and fine details are uncertain.",
+              "noData": true
+            },
+            {
+              "id": "giotto",
+              "label": "Giotto + Vega",
+              "thumbnail": "/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
+              "surface": "comet-1p-giotto-surface@2x.webp",
+              "poles": "comet-1p-giotto-poles@2x.webp",
+              "source": {
+                "id": "encounter-projection",
+                "path": "../manifest.json",
+                "url": "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
+              },
+              "notes": "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid.",
+              "noData": true
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Stooke & Abergel · NASA PDS",
+            "role": "surface",
+            "description": "Historical Halley shape, coordinates and uncertainty",
+            "href": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
+          },
+          {
+            "label": "MPS · Giotto HMC",
+            "role": "observations",
+            "description": "Nucleus composite and mission image catalogue",
+            "href": "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
+          },
+          {
+            "label": "NASA PDS · Vega 2 TVS",
+            "role": "observations",
+            "description": "Original and processed visible and near-infrared flyby images",
+            "href": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/dataset.shtml"
+          },
+          {
+            "label": "ESA · Giotto HMC",
+            "role": "observations",
+            "description": "Calibrated encounter images; not used as a surface texture",
+            "href": "https://esdcdoi.esac.esa.int/doi/html/data/planetary/GIOTTO/GIO-C-HMC-3-RDR-HALLEY.html"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml",
+            "credit": "Philip Stooke and Alain Abergel"
+          },
+          "physical": {
+            "path": "../shape/1682q1halley.xml",
+            "credit": "Philip Stooke and Alain Abergel"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "encounter-projection",
+      "path": "material/encounters.png",
+      "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
+      "credit": "© MPS; Giotto HMC team; Vega 2 TVS and KFKI teams; IHW / NASA PDS; shape by Stooke with pointing by Abergel",
+      "license": "MPS educational image terms for Giotto portions; cited PDS scientific data for Vega portions",
+      "licenseEvidence": [
+        "https://www2.mps.mpg.de/de/projekte/giotto/hmc/",
+        "https://pds-ppi.igpp.ucla.edu/faq.jsp"
+      ],
+      "acquisition": "Reproduce with node tools/objects/comet-1p/prepare-encounters.mts --write from pinned original pixels, encounter geometry and authored registration controls.",
+      "redistribution": "Keep the MPS image terms and Vega source credits with derived maps, atlases and thumbnails. The photographic material is not relicensed MIT.",
+      "lensId": "giotto",
+      "width": 512,
+      "height": 256,
+      "label": "Giotto + Vega",
+      "falseColor": false,
+      "coverage": "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 4579.06433330178
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "giotto-halley-hmc-best",
+            "role": "material",
+            "evidence": "src/planets/comet-1p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
+      },
+      "sha256": "8b3877838dfe861e7a9ba0878e38b1aab9bfbb01ab2809fd670a41fbe8b0adfe",
+      "bytes": 26573,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "stooke-halley",
+      "path": "shape/1682q1halley.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
+      "credit": "Philip Stooke; Alain Abergel (pointing); Giotto and Vega missions; NASA PDS",
+      "license": "PDS public scientific archive; credit Stooke and Abergel",
+      "licenseEvidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
+      ],
+      "acquisition": "Original PDS4 radius table; restore exact bytes and SHA-256.",
+      "redistribution": "Preserve the PDS product identifier and the label request to credit both Abergel and Stooke.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-1p-stooke-halley",
+            "role": "material",
+            "evidence": "src/planets/comet-1p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
+      "sha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
+      "bytes": 70226,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "shape/1682q1halley.tab",
+        "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "56f7c9b11d48fd68ea935276ad35f6369e3b36edd900596e3af3e9d2c1b3c24a",
+      "bytes": 3969,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "giotto",
+      "label": "Giotto + Vega",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [],
+      "lensIds": [
+        "giotto"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 0,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "encounter-projection",
+        "stooke-halley"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
+          "bytes": 2416,
+          "sha256": "87505842ef01f312fbeee474ebc4d5274a923023c2a7673d6b451c26dab0363b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
+          "bytes": 125222,
+          "sha256": "600eca0c4295947aab5108a0cf1b8fc99e2d6f03c18e055f2d649d79f78b1ac6",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "model",
+      "label": "Historical model",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "stooke-halley"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/comet-1p/comet-1p-model-surface@2x.webp",
+          "bytes": 92752,
+          "sha256": "9277d8d953863a8117f32ac0624eb3f8cea2567540605b9ab4791192b8479250",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4576,
+          "sha256": "bba84940a56cf2ce67eeb1f629f1606a3b8978f1ced330ddf6ff22ed5a317b06",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:giotto",
+      "label": "Giotto + Vega preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "giotto"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/giotto.webp",
+          "bytes": 6658,
+          "sha256": "ef9f5bc06a46101d39ee5a543b95d2ce70eb0112345f98b10740120f232e3267",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

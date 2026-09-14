@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "daphnis",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+    "credit": "NASA/JPL/Space Science Institute; Peter Thomas and NASA PDS",
+    "license": "Public PDS scientific data; retain mission and model attribution.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "n1656997950_1",
+        "n1656998640_1",
+        "n1863267232_1",
+        "thomas-2018-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 245.82,
+      "latitudeDegrees": 13.81,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "normal"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 71562,
+    "expectedSha256": "0a151a85ef1d44e43532a1dda022b80e42e676a58a7a8b5c6fc400c2abf4df7f"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

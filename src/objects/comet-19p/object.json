@@ -1,0 +1,164 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "comet-19p",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Borrelly",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "features",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "099ce21b0846794fceedae19d3dba123c90e6830374564383449b4bf394f2a1f"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "ab211aaf254a80048dff5a5520b48aee0c6ae3e923ae2809e36ca9e8d80195ef"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "82c7edeecf35e49f13897925a908014d7f5a93905d0425604773044ffdee11c3"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "60b7af01f0d830d6b39e0145fac721344e330474cfb22c2fed993a5dd6604508"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "e09bf4cea77b4c1f18ab48677999bc113db54f08c91eec0d615d7c3f7ebefe82"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "77cc72a8f6d90444a051399509c09b3afc47a902938d1acd93bbc8a390b7aba1"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "7ac6fe2ffaad5b11157eed3232f451c7f9b19bc0110851d507bd3c2234e20de1"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 4
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "micas",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "usgs",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "dlr",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "height",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "difference",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 100
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -93395796826.13634,
+        -707365798795.9866,
+        -385202285075.2003
+      ],
+      "presentationToReference": [
+        -0.11564060236888296,
+        2.7755575615628914e-17,
+        0.9932911210132517,
+        -0.9113267859422471,
+        0.3977771559319139,
+        -0.10609817832032506,
+        -0.3951085171290735,
+        -0.9174820620691817,
+        -0.04599918992054758
+      ],
+      "orbitUpReference": [
+        -2.7755575615628914e-17,
+        -0.3977771559319139,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 17.391304347826086,
+      "bodyRadiusM": 4000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/comet-19p-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2507eaed7e398e5e1fd77ea94f5df9d19ea989f9a3f266a271321528d93608e5"
+      }
+    },
+    "catalog": {
+      "name": "Borrelly",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 3.608969333559339,
+      "description": "Elongated comet that Deep Space 1 flew past in 2001.",
+      "systemName": "Solar System",
+      "order": 76,
+      "context": {
+        "order": 299
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "f70739756def557588e909c272e981024d127f3b88683a2aa86765ff2e66f505"
+  }
+}

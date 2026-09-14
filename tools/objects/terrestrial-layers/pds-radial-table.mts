@@ -1,5 +1,6 @@
 import {parseRadialTableProfile} from './source-records.mts';
 import { readFile } from 'node:fs/promises';
+import { parsePdsRadiusTable } from './obj-shape.mts';
 
 export function validateRadialTableProfile(value: unknown) {
   const profile=parseRadialTableProfile(value);
@@ -22,6 +23,17 @@ export function validateRadialTableProfile(value: unknown) {
  * reject missing cells or inconsistent poles rather than inventing a closure. */
 export async function loadPdsRadialTable(path: string, profile: unknown) {
   return parsePdsRadialTable(await readFile(path, 'utf8'), profile);
+}
+
+/** The released table as a source mesh: its latitude-first rows reordered onto the radius-table grid, so a closest source point can be
+ * found on it. The height field above stays the sampler for radial resampling. */
+export async function loadPdsRadialTableMesh(path: string, value: unknown) {
+  const text = await readFile(path, 'utf8'), grid = parsePdsRadialTable(text, value), profile = parseRadialTableProfile(value);
+  if (profile.latitudeStepDegrees !== profile.longitudeStepDegrees) throw new Error('A radial table mesh requires equal angular steps.');
+  const columns = profile.columns ?? ['latitude', 'longitude', 'radius'];
+  const reordered = text.trim().split(/\r?\n/).map(line => { const row = line.trim().split(/\s+/); return ['longitude', 'latitude', 'radius'].map(name => row[columns.indexOf(name)]).join(' '); }).join('\n');
+  return parsePdsRadiusTable(reordered, { stepDegrees: profile.latitudeStepDegrees, longitudeDirection: `${profile.longitudeDirection}-positive`, metersPerUnit: profile.metersPerUnit,
+    expectedVertices: (grid.width - 1) * (grid.height - 2) + 2, expectedFaces: 2 * (grid.width - 1) * (grid.height - 2) });
 }
 
 export function parsePdsRadialTable(text: string, value: unknown) {

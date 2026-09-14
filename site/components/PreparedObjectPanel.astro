@@ -8,17 +8,17 @@ const { preparedContent, preparedControls } = Astro.props;
 const content = parsePreparedPanelContent(preparedContent);
 const controls = parsePanelControls(preparedControls);
 const previewFiles = import.meta.glob<{ images: Array<{ id: string; path: string; width: number; height: number; attribution?: { label: string; url?: string } }> }>(
-  "../../src/planets/*/prepared/minimaps.json",
+  "../../src/objects/*/prepared/minimaps.json",
   { import: "default" },
 );
 const imageFiles = import.meta.glob<string>(
-  "../../src/planets/*/prepared/minimaps/*.webp",
+  "../../src/objects/*/prepared/minimaps/*.webp",
   { query: "?url", import: "default" },
 );
-const minimapFiles = import.meta.glob("../../src/planets/*/source/presentation/surface-map.json", { import: "default" });
-const provenanceFiles = import.meta.glob("../../src/planets/*/prepared/provenance.json", { import: "default" });
-const textFiles = import.meta.glob("../../src/planets/*/prepared/text.json", { import: "default" });
-const objectRoot = `../../src/planets/${content.objectId}`;
+const minimapFiles = import.meta.glob("../../src/objects/*/source/presentation/surface-map.json", { import: "default" });
+const provenanceFiles = import.meta.glob("../../src/objects/*/prepared/provenance.json", { import: "default" });
+const textFiles = import.meta.glob("../../src/objects/*/prepared/text.json", { import: "default" });
+const objectRoot = `../../src/objects/${content.objectId}`;
 const provenanceData = await provenanceFiles[`${objectRoot}/prepared/provenance.json`]?.();
 const provenance = provenanceData === undefined ? undefined : validateObjectProvenance(provenanceData, content.objectId);
 const text = parsePreparedText(await textFiles[`${objectRoot}/prepared/text.json`]?.(), content.objectId);

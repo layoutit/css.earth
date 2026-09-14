@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "amalthea",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Amalthea",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "features",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "5f6ebbc6ba7e99e7815b6687db3817dc1fd853497facbd1dfede9bbfb29b1af5"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "10a4b76d7c39032187256c5bcfeae8bd779364db61a8a7f35ea905483cd32064"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "e09217233c486be1bed48d9f4d5387cafd9452f4fdfbce8574ea87534b02c2fe"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "178b57839f0baa77ffd11ad7b07f29ca76f4d3a085101dced3f7a2c72c11a018"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "c0efd09f334665b1841de95c63250f1b684c2d7734c88f94f02f3dfafc146d3d"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "d67357bb1382bd4e03ebb6cf82a84390d492634dcafc20f331b03a7a776b479a"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 83.5
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -497681077560.2153,
+        562639003739.9985,
+        253279250704.22565
+      ],
+      "presentationToReference": [
+        -0.6278539418273756,
+        -1.734723475976807e-17,
+        -0.778331181266578,
+        0.714104897161202,
+        0.39777715593191376,
+        -0.5760447292260449,
+        0.30960236365734617,
+        -0.9174820620691819,
+        -0.2497459553207348
+      ],
+      "orbitUpReference": [
+        1.734723475976807e-17,
+        -0.39777715593191376,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 363.04347826086956,
+      "bodyRadiusM": 83500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/amalthea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "70186c555e802af337892213c2c4cf9ef11afc26effba301b0b3298e24130370"
+      }
+    },
+    "catalog": {
+      "name": "Amalthea",
+      "classification": "satellite",
+      "color": "#b39a85",
+      "distanceAu": 5.2,
+      "description": "The reddest object in the solar system, an inner moon of Jupiter.",
+      "systemName": "Solar System",
+      "order": 102,
+      "context": {
+        "order": 62
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "b3cd1f72c1b3b88f5a7983373902632368e109531f09c33c4de32e1b8f5e43ea"
+  }
+}

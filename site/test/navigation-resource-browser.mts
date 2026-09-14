@@ -29,8 +29,8 @@ try {
         const { createObjectViewDemand, resolvePreparedPresentation, initialObjectSelection }:typeof import('../../src/renderers/css/dist/testing.js') = await import(testingUrl);
         const {loadPreparedCssObject}:typeof import('../../src/renderers/css/dist/index.js')=await import(rendererUrl);
         // The transport references shared banks; load it the way the application does.
-        const descriptor:unknown=await (await fetch(`/src/planets/${id}/object.json`)).json();
-        const definition = await loadPreparedCssObject(descriptor, { read: async url => (await fetch(`/src/planets/${id}/${url}`)).arrayBuffer(), sharedUrl: '/shared' });
+        const descriptor:unknown=await (await fetch(`/src/objects/${id}/object.json`)).json();
+        const definition = await loadPreparedCssObject(descriptor, { read: async url => (await fetch(`/src/objects/${id}/${url}`)).arrayBuffer(), sharedUrl: '/shared' });
         const demand = createObjectViewDemand(definition, window.__cssearthTest.required(frame,"world frame")), owner = window.__cssearthTest.object(id);
         const checks = [];
         for (const [pitch, yaw, scale] of [[0, 0, 1], [47, 123, 1], [-76, -215, .001]]) {
@@ -81,8 +81,8 @@ try {
       const preparation = await page.evaluate(async id => {
         const rendererUrl="/src/renderers/css/dist/index.js";
         const {loadPreparedCssObject}:typeof import("../../src/renderers/css/dist/index.js")=await import(rendererUrl);
-        const descriptor:unknown=await (await fetch(`/src/planets/${id}/object.json`)).json();
-        const definition = await loadPreparedCssObject(descriptor, { read: async url => (await fetch(`/src/planets/${id}/${url}`)).arrayBuffer(), sharedUrl: '/shared' });
+        const descriptor:unknown=await (await fetch(`/src/objects/${id}/object.json`)).json();
+        const definition = await loadPreparedCssObject(descriptor, { read: async url => (await fetch(`/src/objects/${id}/${url}`)).arrayBuffer(), sharedUrl: '/shared' });
         const handoff = window.__cssearthTest.required(performance.getEntriesByType('mark').findLast(entry => entry.name.endsWith(':handoff')),'handoff mark').startTime;
         const material=window.__cssearthTest.required(window.__firstMaterial,"first material");
         return { handoff, pools: material.pools,

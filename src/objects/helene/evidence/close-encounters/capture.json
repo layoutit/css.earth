@@ -1,0 +1,317 @@
+{
+  "body": "helene",
+  "lens": "false-color",
+  "changedLenses": [
+    "normal",
+    "false-color"
+  ],
+  "baselineRef": "ebd16155a",
+  "baselineCommit": "ebd16155a5eb408b6a96a7eaf4c9620b8a0b8451",
+  "toolSha256": "081445ea5799e64c2262afdc27d74ee2447ecdeaa16aa37edffb910a7e837ea0",
+  "colorTransferSha256": "8776127478231f2ad63baa212ad499c80a6442c9899f18c0c1a934e84aef0b0b",
+  "recipeSha256": "732e5697f309648c42ad4e70439ea567002b3b401537d5569af81510be21b95d",
+  "runtimeSha256": "2fc8b94a7cfb4eba3940f70b2f7dd0ac599cafe783a1c64b8950a8f1cfa58a67",
+  "geometrySha256": "1e9cd3a8f21a144c91d6294b7db6aafc6d6673ffda39307ce52fba9140b5618a",
+  "surfaceTrianglesSha256": "641fb8995f7c4b7a2ad5568357c43cd9faf8b360ea51cb4e3f8f3eb1f28b2456",
+  "geometryUnchanged": true,
+  "browser": "152.0.7977.84",
+  "channel": "chrome",
+  "purpose": "Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.",
+  "existingAssetChanges": [
+    {
+      "filename": "helene-elevation-shadow@2x.webp",
+      "previousSha256": "25d34ba400512c60ab2fe7d9ec083628465d0c6d461fe62bc499b514bc818f11",
+      "currentSha256": "44eb2f12c7c8b6ee66f54b1aa4c6a40766a35c463736e8ca0e9bb8cc40b7a9da",
+      "baselineRegeneratedSha256": "44eb2f12c7c8b6ee66f54b1aa4c6a40766a35c463736e8ca0e9bb8cc40b7a9da",
+      "bytes": 326030
+    },
+    {
+      "filename": "helene-normal-shadow@2x.webp",
+      "beforeSha256": "0b1a41a5374e189c37d3ee26c54c789e287ab28e207bc0904948f4b33e176206",
+      "afterSha256": "38024b3f3703c60bda7effd54fbc9fe3fe6cc447b30e53a27dbf5d257d2cee27",
+      "reason": "An explicitly declared dataset was re-prepared; its source evidence qualifies this change."
+    },
+    {
+      "filename": "helene-normal-surface@2x.webp",
+      "beforeSha256": "4fa3d21e7df4a34762e909ad6ee062d0689a308a62472518f1003e832520b126",
+      "afterSha256": "c6eb21136fcbad4f023c0db946cdc68acf31a678d78755377a22c6607e82b608",
+      "reason": "An explicitly declared dataset was re-prepared; its source evidence qualifies this change."
+    },
+    {
+      "filename": "helene-normal-thumbnail.webp",
+      "beforeSha256": "464c0a4d348c9b882d68d67e16a4a357f2783c755cb89dcc20ad9ce873b3d229",
+      "afterSha256": "f8d1fc38436659e638664415f69978f63907dab52492b31af71232a987b0ea62",
+      "reason": "An explicitly declared dataset was re-prepared; its source evidence qualifies this change."
+    }
+  ],
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 2,
+    "rowText": "False color\nCassini",
+    "bounds": {
+      "x": 20,
+      "y": 695.6875,
+      "width": 350,
+      "height": 20
+    },
+    "pageWidth": 390,
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(0.416400128373,-0.293456577387,0.860519709408,0,0,0.946477402152,0.32277008414,0,-0.909181463236,-0.134401504471,0.394113311758,0,0,0,0,1)",
+      "skybox": "matrix3d(0.565917314696,-0.266111630048,0.78033453739,0,-0.756429039101,0.208898690543,0.619819555442,0,-0.327952126076,-0.941034422725,-0.083075184353,0,0,0,0,1)",
+      "sunView": "matrix3d(0.022648993517,0.113816688046,-0.993243567618,0,0,0.99349842118,0.113845891949,0,0.999743478645,-0.002578494869,0.022501739301,0,0,0,0,1)"
+    },
+    "stableDom": true,
+    "sha256": "681a38af25f57a5c0d4a19c46134abd08a4ad14df04d3c530a129810b12c25b7",
+    "errors": []
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr1.png",
+          "sha256": "90d83cc40e54b0fdfe39a6f2c91bbd9655af894ca4ceb34b86d8a5e7688cd5fa",
+          "url": "http://127.0.0.1:4284/helene/?v=MMZAYOzAI3Ko1UFCxzNAAAAAP8GfFxb4Aum_4Q2VLzGXjL-2n0z_3g5aAAA#dataset=false-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.416400128373,-0.293456577387,0.860519709408,0,0,0.946477402152,0.32277008414,0,-0.909181463236,-0.134401504471,0.394113311758,0,0,0,0,1)",
+            "skybox": "matrix3d(0.565917314696,-0.266111630048,0.78033453739,0,-0.756429039101,0.208898690543,0.619819555442,0,-0.327952126076,-0.941034422725,-0.083075184353,0,0,0,0,1)",
+            "sunView": "matrix3d(0.022648993517,0.113816688046,-0.993243567618,0,0,0.99349842118,0.113845891949,0,0.999743478645,-0.002578494869,0.022501739301,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "false-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 812,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.730890396297,-0.175522726915,0.659538475706,0,0.098369825515,0.98336608672,0.152690919563,0,-0.675368496473,-0.046721641935,0.735998968849,0,0,0,0,1)",
+          "skybox": "matrix3d(0.835731258068,-0.164931401284,0.523784969354,0,-0.456545897335,0.321354868706,0.829636503174,0,-0.3051540253,-0.932485134934,0.193267591637,0,0,0,0,1)",
+          "sunView": "matrix3d(0.409175570021,0.258764154235,-0.874995123061,0,-0.075325244788,0.965251454384,0.250231367552,0,0.909341223302,-0.036479340622,0.414448787322,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "helene-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "helene-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
+          "filename": "helene-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-normal-surface@2x.webp",
+          "sha256": "c6eb21136fcbad4f023c0db946cdc68acf31a678d78755377a22c6607e82b608",
+          "bytes": 633922
+        },
+        {
+          "filename": "helene-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "helene-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-normal-thumbnail.webp",
+          "sha256": "f8d1fc38436659e638664415f69978f63907dab52492b31af71232a987b0ea62",
+          "bytes": 4106
+        },
+        {
+          "filename": "helene-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-elevation-thumbnail.webp",
+          "sha256": "a66338684c940ccb25ccde4ae616e861e04f0bd742d963e5c8d0aa9f0d260f4e",
+          "bytes": 6408
+        },
+        {
+          "filename": "helene-false-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-false-color-thumbnail.webp",
+          "sha256": "4fbc6071eb7d6053b5a3d6204af63ef8a8143f5518ee5456ef8a4aa874e8eafe",
+          "bytes": 2528
+        },
+        {
+          "filename": "helene-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
+          "filename": "helene-false-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-false-color-surface@2x.webp",
+          "sha256": "ccd538ba4e4fa28bafc351522ca4645008caf03f2d07b00fa64a98ce64e3081b",
+          "bytes": 414930
+        },
+        {
+          "filename": "helene-false-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-false-color-shadow@2x.webp",
+          "sha256": "c3ade3b0c06f3e91724ede24cbab63a77eced5de50e48ed4b92945aa1ed34d61",
+          "bytes": 283248
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr2.png",
+          "sha256": "4542160fbd905e0970dc53d740de64afb7c6c39482fab9307a872f008b54b6f7",
+          "url": "http://127.0.0.1:4284/helene/?v=MMZAYOzAI3Ko1UFCxzNAAAAAP8GfFxb4Aum_4Q2VLzGXjL-2n0z_3g5aAAA#dataset=false-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.416400128373,-0.293456577387,0.860519709408,0,0,0.946477402152,0.32277008414,0,-0.909181463236,-0.134401504471,0.394113311758,0,0,0,0,1)",
+            "skybox": "matrix3d(0.565917314696,-0.266111630048,0.78033453739,0,-0.756429039101,0.208898690543,0.619819555442,0,-0.327952126076,-0.941034422725,-0.083075184353,0,0,0,0,1)",
+            "sunView": "matrix3d(0.022648993517,0.113816688046,-0.993243567618,0,0,0.99349842118,0.113845891949,0,0.999743478645,-0.002578494869,0.022501739301,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "false-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 812,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.730890396297,-0.175522726915,0.659538475706,0,0.098369825515,0.98336608672,0.152690919563,0,-0.675368496473,-0.046721641935,0.735998968849,0,0,0,0,1)",
+          "skybox": "matrix3d(0.835731258068,-0.164931401284,0.523784969354,0,-0.456545897335,0.321354868706,0.829636503174,0,-0.3051540253,-0.932485134934,0.193267591637,0,0,0,0,1)",
+          "sunView": "matrix3d(0.409175570021,0.258764154235,-0.874995123061,0,-0.075325244788,0.965251454384,0.250231367552,0,0.909341223302,-0.036479340622,0.414448787322,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "helene-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "helene-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
+          "filename": "helene-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-normal-surface@2x.webp",
+          "sha256": "c6eb21136fcbad4f023c0db946cdc68acf31a678d78755377a22c6607e82b608",
+          "bytes": 633922
+        },
+        {
+          "filename": "helene-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "helene-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-normal-thumbnail.webp",
+          "sha256": "f8d1fc38436659e638664415f69978f63907dab52492b31af71232a987b0ea62",
+          "bytes": 4106
+        },
+        {
+          "filename": "helene-false-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-false-color-thumbnail.webp",
+          "sha256": "4fbc6071eb7d6053b5a3d6204af63ef8a8143f5518ee5456ef8a4aa874e8eafe",
+          "bytes": 2528
+        },
+        {
+          "filename": "helene-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-elevation-thumbnail.webp",
+          "sha256": "a66338684c940ccb25ccde4ae616e861e04f0bd742d963e5c8d0aa9f0d260f4e",
+          "bytes": 6408
+        },
+        {
+          "filename": "helene-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
+          "filename": "helene-false-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-false-color-surface@2x.webp",
+          "sha256": "ccd538ba4e4fa28bafc351522ca4645008caf03f2d07b00fa64a98ce64e3081b",
+          "bytes": 414930
+        },
+        {
+          "filename": "helene-false-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/helene/helene-false-color-shadow@2x.webp",
+          "sha256": "c3ade3b0c06f3e91724ede24cbab63a77eced5de50e48ed4b92945aa1ed34d61",
+          "bytes": 283248
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

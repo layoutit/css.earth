@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { prepareHyperbolicPath } from '../../../platform/prepare-hyperbolic-path.mts';
-import reference from '../../../../src/planets/mercury/prepared/runtime.json' with {type: 'json'};
+import reference from '../../../../src/objects/mercury/prepared/runtime.json' with {type: 'json'};
 import { parsePreparedObjectRuntime } from '../validation/index.js';
 import { projectHeliocentricView, validatePreparedHeliocentricView, type HeliocentricViewPlan } from './heliocentric-view.js';
 

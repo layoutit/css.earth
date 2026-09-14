@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "dactyl",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Dactyl",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "features",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "5461764de06dc7fb0009ea66e2cea0b687c95358c11c566b79dc3ed38f33ea1b"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "3bd2e9be756a44f9c8eda4ac60d0d507068e5039cd05b1d285e7650987df4ed7"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "2e1e43bca0ff0a5bcc125f3aa5861c9eb41973e328cf39ae5496de28f51e0a24"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "87437d6e6012a10cd25ef0b9d1ae2456c8735a038fa0252c9537b1b5424b7f2c"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "8d44612ea049b4fe1c177a80a41c0d2923d02efecc73ea4c89f2bd080f005f73"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "f5cbdd4577e22481dc57cdc9b6d419f7861734a2dd181fbf8e7b512eee8e1b7f"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "0e98bb5293fca7af9430cada585f2c42ae71d012105044f9985124b0b6937d4a"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 0.6952053289772899
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/dactyl-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "62ed6d967ff5e8a1569c21d477e20001a3041c75c18731539e9f2dfe4e73bbbe"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -360929417327.986,
+        200015467657.88644,
+        85869094625.52826
+      ],
+      "presentationToReference": [
+        -0.8563291760349764,
+        2.7755575615628914e-17,
+        -0.516430384728918,
+        0.47381561429626856,
+        0.39777715593191365,
+        -0.7856666582385735,
+        0.205424209674293,
+        -0.9174820620691817,
+        -0.340628184184712
+      ],
+      "orbitUpReference": [
+        -2.7755575615628914e-17,
+        -0.39777715593191365,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 3.022631865118652,
+      "bodyRadiusM": 695.2053289772899
+    },
+    "catalog": {
+      "name": "Dactyl",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 2.861,
+      "description": "The first moon found orbiting an asteroid, spotted beside Ida in Galileo images.",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "3ef742b89e241be275c62ccd7c6861f0f300247562e500db0eede9c50de6292b"
+  }
+}
