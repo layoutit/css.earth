@@ -26,11 +26,11 @@
   "lenses": [
     {
       "id": "optical",
-      "label": "ESA/Hubble \u00b7 optical",
+      "label": "ESA/Hubble · optical",
       "title": "Wide-field view of the Andromeda Galaxy",
       "description": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth. The wide DSS2 field contains the full visible galaxy and substantial surrounding sky, foreground stars and background objects. Those released sources are retained. Faint halo coverage is limited by the survey composite.",
       "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
-      "detail": "4783 \u00d7 5000 px",
+      "detail": "4783 × 5000 px",
       "facts": [
         {
           "id": "bands",
@@ -40,12 +40,12 @@
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "4783 \u00d7 5000"
+          "value": "4783 × 5000"
         },
         {
           "id": "coverage",
-          "label": "Image field",
-          "value": "361.93 \u00d7 234.08 arcmin"
+          "label": "Parent image field",
+          "value": "361.93 × 234.08 arcmin"
         },
         {
           "id": "license",

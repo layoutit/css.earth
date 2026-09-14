@@ -13,7 +13,7 @@ export function distanceModulusMpc(dm:number):number {
   return 10**((dm-25)/5);
 }
 /** Independent CDS table join. Local Group detail is supplied by the application's separate catalogue. */
-export async function loadScientificCatalogue(radiusMpc:number) {
+export async function loadScientificCatalogue(radiusMpc:number, minimumDistanceMpc=3, hubbleKmSPerMpc=70) {
   if(!Number.isFinite(radiusMpc)||radiusMpc<=3)throw new TypeError('Invalid field radius.');
   const manifest=requireRecord(JSON.parse(await readFile('src/objects/nearby-universe/source/catalogue.json','utf8')));
   if(manifest.schema!=='cssearth-galaxy-field-sources@1'||!Array.isArray(manifest.sources))throw new TypeError('Invalid source manifest.');
@@ -39,9 +39,9 @@ export async function loadScientificCatalogue(radiusMpc:number) {
   for(const id of ids){
     const measuredRow=cf4.get(id),row=measuredRow??pgc.get(id)!;
     const dm=numeric(row.DM),ra=numeric(row.RAdeg),dec=numeric(row.DEdeg);
-    const distance=measuredRow ? distanceModulusMpc(dm) : (velocities.get(id)??NaN)/70;
+    const distance=measuredRow ? distanceModulusMpc(dm) : (velocities.get(id)??NaN)/hubbleKmSPerMpc;
     if(![distance,ra,dec].every(Number.isFinite)||distance<=0){invalid++;continue;}
-    if(distance<=3){local++;continue;}
+    if(distance<=minimumDistanceMpc){local++;continue;}
     if(distance>radiusMpc){outside++;continue;}
     const [x,y,z]=positionMpc(ra,dec,distance);
     points.push({x,y,z,absoluteMagnitude:null,morphology:pgc.get(id)?.MType??''});
@@ -49,8 +49,8 @@ export async function loadScientificCatalogue(radiusMpc:number) {
   }
   return {points,count:ids.size,invalid,outside,local,lineage:{sources:manifest.sources,
     frame:'Heliocentric equatorial J2000 coordinates, converted to Cartesian Mpc.',
-    distancePolicy:'CF4 individual distance modulus takes precedence. Positive HyperLEDA VHI/70 supplies a Hubble-law estimate otherwise; peculiar velocities are not corrected.',
-    selection:'Union of CF4 and the 50,000 largest angular-diameter PGC rows, exact PGC join. Field is limited to 3–200 Mpc; the Local Group is rendered separately.',
+    distancePolicy:`CF4 individual distance modulus takes precedence. Positive HyperLEDA VHI/${hubbleKmSPerMpc} supplies a Hubble-law estimate otherwise; peculiar velocities are not corrected.`,
+    selection:`Union of CF4 and the 50,000 largest angular-diameter PGC rows, exact PGC join. Field is limited to ${minimumDistanceMpc}–${radiusMpc} Mpc; the Local Group is rendered separately.`,
     photometry:'No optical luminosity measurements imported. Point brightness and morphology tints are authored display values.',
     measuredDistanceRows:measured,hubbleDistanceRows:hubble}};
 }

@@ -1,0 +1,46 @@
+{
+  "id": "hyperleda-pgc",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Paturel et al. (2003), HYPERLEDA I, A&A 412, 45",
+  "identifiers": [
+    {
+      "type": "CDS/VizieR",
+      "value": "VII/237/pgc"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:20031411"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237",
+      "label": "CDS catalogue"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361:20031411",
+      "label": "Publication"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/nearby-universe/source/catalogue.json",
+      "revision": "e4dfae5485b0aeeb88485531387366e886f43ef4",
+      "sha256": "1c53eb5de62d6bc2465a4f6a85a02204851a1f821ea7d0605bd6c031b9e0cf7f",
+      "locator": "/sources/1"
+    }
+  ],
+  "publisher": "CDS/VizieR",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Paturel et al. (2003), HYPERLEDA I, A&A 412, 45; CDS/VizieR distribution",
+      "scope": "Published catalogue",
+      "evidence": "src/objects/nearby-universe/source/catalogue.json"
+    }
+  ]
+}

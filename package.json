@@ -12,7 +12,7 @@
     "setup:assets": "pnpm prepare:shell && node tools/setup.mts",
     "publish:runtime-assets": "node tools/publish-runtime-assets.mts",
     "dev": "astro dev --host 127.0.0.1 --port 4210",
-    "postinstall": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:environment-images && pnpm prepare:object-json && pnpm prepare:minimap && pnpm prepare:sources && pnpm prepare:galaxy-field",
+    "postinstall": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:environment-images && pnpm prepare:object-json && pnpm prepare:minimap && pnpm prepare:galaxy-field",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build:catalog": "pnpm --filter @cssearth/catalog build",
     "build": "astro build && pnpm assemble:planets",
@@ -90,8 +90,8 @@
     "prepare:sources": "node tools/prepare-provenance.mts",
     "pin:documents": "node tools/pin-object-documents.mts",
     "author:sources": "node tools/author-source-records.mts",
-    "predev": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:environment-images && pnpm prepare:object-json && pnpm prepare:minimap && pnpm prepare:provenance && pnpm prepare:galaxy-field",
-    "prebuild": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:environment-images && pnpm prepare:nebulae && pnpm prepare:object-json && pnpm prepare:minimap && pnpm prepare:provenance && pnpm prepare:galaxy-field",
+    "predev": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:environment-images && pnpm prepare:object-json && pnpm prepare:minimap && pnpm prepare:galaxy-field",
+    "prebuild": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:environment-images && pnpm prepare:nebulae && pnpm prepare:object-json && pnpm prepare:minimap && pnpm prepare:galaxy-field",
     "build:renderer": "pnpm --filter @cssearth/engine exec tsup --config ../../src/renderers/css/tsup.config.ts",
     "build:preparation": "pnpm prepare:shell && pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts",
     "prepare:volume": "node tools/objects/dist/prepare-volume.js",
@@ -144,7 +144,8 @@
     "lab:nebula:catalogue:enrich": "node --experimental-strip-types labs/nebula/src/run.ts enrich-messier-catalogue",
     "oracles:setup": "node tools/oracles/setup.mts",
     "oracles:run": "node tools/oracles/run.mts",
-    "prepare:galaxy-field": "node tools/galaxy-field/acquire.mts && node tools/galaxy-field/prepare-points.mts"
+    "test:galaxy-field": "pnpm prepare:galaxy-field && node --test tools/galaxy-field/*.test.mts tools/context-provenance.test.mts tools/runtime-assets.test.mts",
+    "prepare:galaxy-field": "node tools/galaxy-field/acquire.mts && node tools/galaxy-field/prepare-points.mts && node tools/prepare-provenance.mts"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

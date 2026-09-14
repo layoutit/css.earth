@@ -64,6 +64,8 @@ jobs:
         run: |
           pnpm prepare:environment-images
           pnpm prepare:minimap
+      - name: Bake and test the scientific galaxy field
+        run: pnpm test:galaxy-field
       - name: Test source records, provenance and scientific credits
         run: pnpm test:sources
       - name: Check source restoration and tracked inputs

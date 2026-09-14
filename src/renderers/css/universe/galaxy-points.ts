@@ -6,11 +6,19 @@ function record(v: unknown): Record<string, unknown> {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Invalid point manifest');
   return v as Record<string, unknown>;
 }
-export async function mountGalaxyPoints({host, manifestUrl, cloudUrl}: {host: HTMLElement; manifestUrl: string; cloudUrl?: string}): Promise<PreparedVolumeRuntime> {
+export async function mountGalaxyPoints({host, manifestUrl, cloudUrl, sha256}: {host: HTMLElement; manifestUrl: string; cloudUrl?: string; sha256?: string}): Promise<PreparedVolumeRuntime> {
   const response = await fetch(manifestUrl); if (!response.ok) throw new Error('Point manifest unavailable');
-  const data = record(await response.json());
+  const bytes=await response.arrayBuffer();
+  if(sha256){
+    const actual=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(n=>n.toString(16).padStart(2,'0')).join('');
+    if(actual!==sha256)throw new TypeError('Galaxy field prepared digest mismatch');
+  }
+  const data = record(JSON.parse(new TextDecoder().decode(bytes)));
   if (data.schema !== 'cssearth-galaxy-points@1' || !Array.isArray(data.points) || data.points.length > 1800) throw new TypeError('Invalid prepared points');
   const frame = parseDensityVolumeFrame(data.frame);
+  const appearance=record(data.appearance);
+  const positive=(value:unknown)=>{if(typeof value!=='number'||!Number.isFinite(value)||value<=0)throw new TypeError('Invalid field appearance');return value;};
+  const pointExposure=positive(appearance.pointExposure), pointReferenceDistanceMpc=positive(appearance.pointReferenceDistanceMpc), cloudExposure=positive(appearance.cloudExposure), cloudMaximumOpacity=positive(appearance.cloudMaximumOpacity);
   const points = data.points.map(v => {
     const p = record(v), xyz = p.position;
     if (!Array.isArray(xyz) || xyz.length !== 3 || !xyz.every(n => typeof n === 'number' && Number.isFinite(n)) ||
@@ -58,7 +66,7 @@ export async function mountGalaxyPoints({host, manifestUrl, cloudUrl}: {host: HT
       const angle=.5*Math.atan2(2*b,a-d);
       c.node.style.transformOrigin='50% 50%';
       c.node.style.display='block';c.node.style.width=`${size}px`;c.node.style.height=`${height}px`;
-      c.node.style.opacity=String(Math.min(.3,2*c.brightness)*Math.min(1,depth/c.radius));
+      c.node.style.opacity=String(Math.min(cloudMaximumOpacity,cloudExposure*c.brightness)*Math.min(1,depth/c.radius));
       c.node.style.transform=`translate(${sx-size/2}px,${sy-height/2}px) rotate(${angle}rad)`;
     }
     let visible = 0;
@@ -73,7 +81,7 @@ export async function mountGalaxyPoints({host, manifestUrl, cloudUrl}: {host: HT
       const distance=Math.hypot(x,y,z);
       // Inverse-square display response with a soft ceiling. Core stays one CSS-pixel radius.
       // Authored exposure lifts distant count glyphs without enlarging their cores.
-      const signal=4*p.brightness*(100/Math.max(1,distance))**2;
+      const signal=pointExposure*p.brightness*(pointReferenceDistanceMpc/Math.max(1,distance))**2;
       // Nearby detailed galaxies replace their context dot; distant galaxies remain.
       const proximity=Math.max(0,Math.min(1,(distance-.2)/.8));
       const alpha=signal/(1+signal)*proximity*proximity*(3-2*proximity);
