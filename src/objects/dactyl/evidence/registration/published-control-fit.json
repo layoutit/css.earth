@@ -1,0 +1,1155 @@
+{
+  "schema": "cssearth-dactyl-published-control-result@1",
+  "qualifiedSurface": false,
+  "date": "2026-09-14",
+  "inputSha256": "82d2bf6df6689e77e4ffd9640538895f2cce980741954bdf33ec5edce2acf0cf",
+  "generatorSha256": "c4635f59bafc40e57d72742ef9d97cd7bd48abfab22c13567b51e23105c73d50",
+  "dependencies": [
+    {
+      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mts",
+      "sha256": "d0942ffb78df494a2a9ae6a76833fdf43ceffbae0cbef6a88fa7e806d23cf262"
+    },
+    {
+      "path": "tools/spice/text-kernel.mts",
+      "sha256": "4b81fb9ee416c4527476a903da3c6e40af4f85aa217b8d726b00d00511ffe0a9"
+    },
+    {
+      "path": "tools/source-values.mts",
+      "sha256": "6a762b3bee9132c09f0d596616c7e1dbe42702df1cf9bd03227874c32dd8a532"
+    }
+  ],
+  "paperSha256": "e96e704ad303d090d658a0078a083d7d983b17ec78322531d998da90c66bade9",
+  "rangeKm": 3887,
+  "alignment": {
+    "parameters": "paper pixels per native pixel, clockwise degrees, paper x/y at native anchor",
+    "baseline": {
+      "figure": "figure-9b",
+      "median": 5,
+      "rectangle": [
+        172,
+        199,
+        209,
+        240
+      ],
+      "fitPixels": 1596,
+      "parameters": [
+        8.59921875,
+        -1.1484375,
+        201.68359375,
+        207.71484375
+      ],
+      "correlation": 0.9007835376604446,
+      "poleDetectorPixel": [
+        203.44322536619995,
+        213.2456765983943
+      ]
+    },
+    "plainPhoto": {
+      "figure": "figure-9a",
+      "median": 5,
+      "rectangle": [
+        172,
+        199,
+        209,
+        240
+      ],
+      "fitPixels": 1596,
+      "parameters": [
+        8.3125,
+        0.84375,
+        199.3515625,
+        184.484375
+      ],
+      "correlation": 0.9792092628050809,
+      "poleDetectorPixel": null
+    },
+    "checks": [
+      {
+        "figure": "figure-9b",
+        "median": 3,
+        "rectangle": [
+          172,
+          199,
+          209,
+          240
+        ],
+        "fitPixels": 1596,
+        "parameters": [
+          8.8,
+          -3.9296875,
+          205.59765625,
+          206.765625
+        ],
+        "correlation": 0.8663030331014931,
+        "poleDetectorPixel": [
+          203.01413257871252,
+          214.07469417066108
+        ]
+      },
+      {
+        "figure": "figure-9b",
+        "median": 3,
+        "rectangle": [
+          176,
+          202,
+          206,
+          237
+        ],
+        "fitPixels": 1116,
+        "parameters": [
+          8.75625,
+          -3.8046875,
+          206.140625,
+          209.83203125
+        ],
+        "correlation": 0.8278587267565891,
+        "poleDetectorPixel": [
+          203.02250488758662,
+          213.6652221196262
+        ]
+      },
+      {
+        "figure": "figure-9b",
+        "median": 3,
+        "rectangle": [
+          172,
+          199,
+          191,
+          240
+        ],
+        "fitPixels": 840,
+        "parameters": [
+          8.764062500000001,
+          -0.015625,
+          205.20703125,
+          206.3828125
+        ],
+        "correlation": 0.9440310900407287,
+        "poleDetectorPixel": [
+          202.67369844089677,
+          213.2845168286948
+        ]
+      },
+      {
+        "figure": "figure-9b",
+        "median": 3,
+        "rectangle": [
+          192,
+          199,
+          209,
+          240
+        ],
+        "fitPixels": 756,
+        "parameters": [
+          7.61171875,
+          -1.90234375,
+          208.67578125,
+          220.3046875
+        ],
+        "correlation": 0.6826251808819769,
+        "poleDetectorPixel": [
+          204.29352606188957,
+          210.87144582872352
+        ]
+      },
+      {
+        "figure": "figure-9b",
+        "median": 5,
+        "rectangle": [
+          172,
+          199,
+          209,
+          240
+        ],
+        "fitPixels": 1596,
+        "parameters": [
+          8.59921875,
+          -1.1484375,
+          201.68359375,
+          207.71484375
+        ],
+        "correlation": 0.9007835376604446,
+        "poleDetectorPixel": [
+          203.44322536619995,
+          213.2456765983943
+        ]
+      },
+      {
+        "figure": "figure-9b",
+        "median": 5,
+        "rectangle": [
+          176,
+          202,
+          206,
+          237
+        ],
+        "fitPixels": 1116,
+        "parameters": [
+          8.642187500000002,
+          2.70703125,
+          203.34375,
+          208.07421875
+        ],
+        "correlation": 0.8709930560740871,
+        "poleDetectorPixel": [
+          202.707586637613,
+          212.42948361241613
+        ]
+      },
+      {
+        "figure": "figure-9b",
+        "median": 5,
+        "rectangle": [
+          172,
+          199,
+          191,
+          240
+        ],
+        "fitPixels": 840,
+        "parameters": [
+          8.77890625,
+          -0.0546875,
+          204.3125,
+          207.91796875
+        ],
+        "correlation": 0.9473895870633547,
+        "poleDetectorPixel": [
+          202.76059039764786,
+          213.1290471230306
+        ]
+      },
+      {
+        "figure": "figure-9b",
+        "median": 5,
+        "rectangle": [
+          192,
+          199,
+          209,
+          240
+        ],
+        "fitPixels": 756,
+        "parameters": [
+          8.046875,
+          1.25,
+          204.71484375,
+          215.96875
+        ],
+        "correlation": 0.7600551191205169,
+        "poleDetectorPixel": [
+          203.58464413284847,
+          211.2146388929267
+        ]
+      },
+      {
+        "figure": "figure-9b",
+        "median": 7,
+        "rectangle": [
+          172,
+          199,
+          209,
+          240
+        ],
+        "fitPixels": 1596,
+        "parameters": [
+          8.63203125,
+          -1.2109375,
+          202.140625,
+          207.47265625
+        ],
+        "correlation": 0.9165435107238787,
+        "poleDetectorPixel": [
+          203.34973093269633,
+          213.31180897122354
+        ]
+      },
+      {
+        "figure": "figure-9b",
+        "median": 7,
+        "rectangle": [
+          176,
+          202,
+          206,
+          237
+        ],
+        "fitPixels": 1116,
+        "parameters": [
+          8.7171875,
+          0.375,
+          204.12109375,
+          206.8828125
+        ],
+        "correlation": 0.8968855808026758,
+        "poleDetectorPixel": [
+          202.8143650370862,
+          213.11037543387522
+        ]
+      },
+      {
+        "figure": "figure-9b",
+        "median": 7,
+        "rectangle": [
+          172,
+          199,
+          191,
+          240
+        ],
+        "fitPixels": 840,
+        "parameters": [
+          8.79453125,
+          -0.0234375,
+          204.6484375,
+          208.296875
+        ],
+        "correlation": 0.9500035602039234,
+        "poleDetectorPixel": [
+          202.69777224427793,
+          213.09175263938477
+        ]
+      },
+      {
+        "figure": "figure-9b",
+        "median": 7,
+        "rectangle": [
+          192,
+          199,
+          209,
+          240
+        ],
+        "fitPixels": 756,
+        "parameters": [
+          8.263281249999995,
+          3.0859375,
+          207.73046875,
+          213.5390625
+        ],
+        "correlation": 0.7988584420361416,
+        "poleDetectorPixel": [
+          202.62609919292254,
+          211.36973989698572
+        ]
+      }
+    ],
+    "maximumPoleDisplacementNativePixels": 2.5219006762245377
+  },
+  "geometry": {
+    "poseOrder": "observer latitude, observer west longitude, north azimuth clockwise from image up, ideal center sample/line",
+    "axesMetres": [
+      800,
+      700,
+      600
+    ],
+    "limbSamples": 31,
+    "fits": [
+      {
+        "useAcmon": true,
+        "limbResidualDivisor": 1,
+        "starts": 54,
+        "best": {
+          "pose": [
+            -27.1875,
+            203.03125,
+            243.8125,
+            191.75625,
+            220.10625
+          ],
+          "objective": 19.520486525065454,
+          "acmonDetectorPixel": [
+            197.032730861507,
+            222.22025035725997
+          ],
+          "acmonErrorPixels": 0.5165759069692891,
+          "poleDetectorPixel": [
+            203.79997362805335,
+            214.04978293794014
+          ],
+          "poleErrorPixels": 0.8796910410099708,
+          "celmisDetectorPixel": [
+            194.52964596497264,
+            207.02894740074032
+          ],
+          "celmisErrorPixels": 0.5304364242974123,
+          "limbRmsIdealPixels": 0.7720893214617056,
+          "maximumLimbIdealPixels": 2.5126594401042053
+        }
+      },
+      {
+        "useAcmon": true,
+        "limbResidualDivisor": 1.42,
+        "starts": 54,
+        "best": {
+          "pose": [
+            -26.84375,
+            202.40625,
+            242,
+            191.75625,
+            220.125
+          ],
+          "objective": 9.955908782215502,
+          "acmonDetectorPixel": [
+            197.26917786206258,
+            222.1337349159007
+          ],
+          "acmonErrorPixels": 0.26676560327930393,
+          "poleDetectorPixel": [
+            203.6413614500371,
+            213.66778065449208
+          ],
+          "poleErrorPixels": 0.4662936219727913,
+          "celmisDetectorPixel": [
+            194.15356307563152,
+            207.00955693063722
+          ],
+          "celmisErrorPixels": 0.15386017392625626,
+          "limbRmsIdealPixels": 0.7929767167995707,
+          "maximumLimbIdealPixels": 2.5914766957560786
+        }
+      },
+      {
+        "useAcmon": true,
+        "limbResidualDivisor": 2,
+        "starts": 54,
+        "best": {
+          "pose": [
+            -26.71875,
+            202.125,
+            241,
+            191.7625,
+            220.1375
+          ],
+          "objective": 5.093137055785234,
+          "acmonDetectorPixel": [
+            197.3805551148313,
+            222.08016473203813
+          ],
+          "acmonErrorPixels": 0.14385223271018902,
+          "poleDetectorPixel": [
+            203.54751476287856,
+            213.46472513939207
+          ],
+          "poleErrorPixels": 0.2426077937182486,
+          "celmisDetectorPixel": [
+            193.94459805007986,
+            207.0036792407151
+          ],
+          "celmisErrorPixels": 0.05552398461199558,
+          "limbRmsIdealPixels": 0.8043097661454773,
+          "maximumLimbIdealPixels": 2.635552009643351
+        }
+      },
+      {
+        "useAcmon": false,
+        "limbResidualDivisor": 1,
+        "starts": 54,
+        "best": {
+          "pose": [
+            -37.5,
+            333.59375,
+            240.1875,
+            192.10625,
+            219.36249999999998
+          ],
+          "objective": 12.02144669373912,
+          "acmonDetectorPixel": [
+            195.8676307631904,
+            202.72769000173415
+          ],
+          "acmonErrorPixels": 19.341317483422387,
+          "poleDetectorPixel": [
+            202.47828800500344,
+            213.27605526966363
+          ],
+          "poleErrorPixels": 0.9654154415074324,
+          "celmisDetectorPixel": [
+            207.6501604297276,
+            213.4712373576551
+          ],
+          "celmisErrorPixels": 15.106415613785165,
+          "limbRmsIdealPixels": 0.5980996712448231,
+          "maximumLimbIdealPixels": 1.0610679142407833
+        }
+      },
+      {
+        "useAcmon": false,
+        "limbResidualDivisor": 1.42,
+        "starts": 54,
+        "best": {
+          "pose": [
+            -34.625,
+            332.59375,
+            241.25,
+            191.97499999999997,
+            219.43125000000006
+          ],
+          "objective": 6.253510446745605,
+          "acmonDetectorPixel": [
+            195.99900358378264,
+            202.79933105407272
+          ],
+          "acmonErrorPixels": 19.259249160146236,
+          "poleDetectorPixel": [
+            202.85048738484184,
+            213.32417432156814
+          ],
+          "poleErrorPixels": 0.5979132103307008,
+          "celmisDetectorPixel": [
+            207.46121032267692,
+            213.694462784546
+          ],
+          "celmisErrorPixels": 15.033962063442063,
+          "limbRmsIdealPixels": 0.6192793691121357,
+          "maximumLimbIdealPixels": 1.0700286229594875
+        }
+      },
+      {
+        "useAcmon": false,
+        "limbResidualDivisor": 2,
+        "starts": 54,
+        "best": {
+          "pose": [
+            -32.40625,
+            331.84375,
+            241.71875,
+            191.88125000000005,
+            219.48749999999998
+          ],
+          "objective": 3.259386739354293,
+          "acmonDetectorPixel": [
+            196.00437774777583,
+            202.8407551415322
+          ],
+          "acmonErrorPixels": 19.217532345961395,
+          "poleDetectorPixel": [
+            203.0920707545973,
+            213.31647781920358
+          ],
+          "poleErrorPixels": 0.3582211246114513,
+          "celmisDetectorPixel": [
+            207.26156939892508,
+            213.7906919272683
+          ],
+          "celmisErrorPixels": 14.899084528036381,
+          "limbRmsIdealPixels": 0.6356164764949014,
+          "maximumLimbIdealPixels": 1.0682392042828275
+        }
+      }
+    ],
+    "interpretation": "The baseline uses unit residual weights. Divisors 1.42 and 2 are sensitivity cases, not loosened acceptance limits; 1.42 is approximately the paper limb RMS bound in native pixels, not a Gaussian sigma. Celmis is never in the objective or ranking, but was seen during earlier development and is not a fresh blind validation.",
+    "sourcePickSensitivity": {
+      "poleHalfWidthNativePixels": 0.4651585354774234,
+      "acmonHalfWidthNativePixels": 1,
+      "meaning": "Sixteen simultaneous corner perturbations, refitted locally from the baseline; not a full uncertainty distribution or a global uniqueness proof.",
+      "cases": [
+        {
+          "polePixel": [
+            202.97806683072253,
+            212.78051806291688
+          ],
+          "acmonPixel": [
+            196.5,
+            221
+          ],
+          "fit": {
+            "pose": [
+              -28.8125,
+              207.75,
+              241.5625,
+              191.89375,
+              220.11874999999998
+            ],
+            "objective": 20.589465601101153,
+            "acmonDetectorPixel": [
+              196.21104408279615,
+              221.38351627044187
+            ],
+            "acmonErrorPixels": 1.4287965374064693,
+            "poleDetectorPixel": [
+              203.5153713730528,
+              213.68631567834422
+            ],
+            "poleErrorPixels": 1.0531692605287089,
+            "celmisDetectorPixel": [
+              194.07649561647182,
+              206.52617083309556
+            ],
+            "celmisErrorPixels": 0.4799642265302242,
+            "limbRmsIdealPixels": 0.7880093305898753,
+            "maximumLimbIdealPixels": 2.529438687903785
+          }
+        },
+        {
+          "polePixel": [
+            202.97806683072253,
+            212.78051806291688
+          ],
+          "acmonPixel": [
+            196.5,
+            223
+          ],
+          "fit": {
+            "pose": [
+              -34.5625,
+              199.78125,
+              240.4375,
+              192.21249999999998,
+              219.9625
+            ],
+            "objective": 19.146878146038933,
+            "acmonDetectorPixel": [
+              196.25577023379785,
+              223.33999466123345
+            ],
+            "acmonErrorPixels": 1.8285768792253736,
+            "poleDetectorPixel": [
+              203.0100699369071,
+              213.69625541274536
+            ],
+            "poleErrorPixels": 0.9162964000127578,
+            "celmisDetectorPixel": [
+              192.88627558275067,
+              207.85528021344388
+            ],
+            "celmisErrorPixels": 1.404238698044589,
+            "limbRmsIdealPixels": 0.7647903888457575,
+            "maximumLimbIdealPixels": 2.479572939210638
+          }
+        },
+        {
+          "polePixel": [
+            202.97806683072253,
+            212.78051806291688
+          ],
+          "acmonPixel": [
+            198.5,
+            221
+          ],
+          "fit": {
+            "pose": [
+              -22.0625,
+              204.34375,
+              241.90625,
+              191.50624999999997,
+              220.21874999999997
+            ],
+            "objective": 22.31370544655024,
+            "acmonDetectorPixel": [
+              197.94626005601913,
+              221.23960569029097
+            ],
+            "acmonErrorPixels": 0.8816731502297573,
+            "poleDetectorPixel": [
+              203.84409547089842,
+              213.49469204484998
+            ],
+            "poleErrorPixels": 1.1225195241398236,
+            "celmisDetectorPixel": [
+              194.6445139106131,
+              206.4923585223687
+            ],
+            "celmisErrorPixels": 0.8204255303106396,
+            "limbRmsIdealPixels": 0.8169498060171532,
+            "maximumLimbIdealPixels": 2.6660965759483024
+          }
+        },
+        {
+          "polePixel": [
+            202.97806683072253,
+            212.78051806291688
+          ],
+          "acmonPixel": [
+            198.5,
+            223
+          ],
+          "fit": {
+            "pose": [
+              -30.375,
+              193.78125,
+              239.3125,
+              191.9375,
+              220.01874999999998
+            ],
+            "objective": 20.75904123178692,
+            "acmonDetectorPixel": [
+              197.97521013158914,
+              223.64385737459105
+            ],
+            "acmonErrorPixels": 1.7111667765481966,
+            "poleDetectorPixel": [
+              203.12437587039378,
+              213.23515721674988
+            ],
+            "poleErrorPixels": 0.47760139791201406,
+            "celmisDetectorPixel": [
+              192.99040478441498,
+              208.310451644799
+            ],
+            "celmisErrorPixels": 1.6542569367207074,
+            "limbRmsIdealPixels": 0.8000197862814724,
+            "maximumLimbIdealPixels": 2.581832432921739
+          }
+        },
+        {
+          "polePixel": [
+            202.97806683072253,
+            213.71083513387174
+          ],
+          "acmonPixel": [
+            196.5,
+            221
+          ],
+          "fit": {
+            "pose": [
+              -28.15625,
+              208.40625,
+              244.875,
+              191.7875,
+              220.1
+            ],
+            "objective": 19.18880754454811,
+            "acmonDetectorPixel": [
+              196.11209111884713,
+              221.40999782320603
+            ],
+            "acmonErrorPixels": 1.5081092901393558,
+            "poleDetectorPixel": [
+              203.83190914717048,
+              214.32054937628664
+            ],
+            "poleErrorPixels": 1.0491892864306114,
+            "celmisDetectorPixel": [
+              194.878414954258,
+              206.5460441431895
+            ],
+            "celmisErrorPixels": 0.9887814479431966,
+            "limbRmsIdealPixels": 0.7571047967406002,
+            "maximumLimbIdealPixels": 2.3924464539152845
+          }
+        },
+        {
+          "polePixel": [
+            202.97806683072253,
+            213.71083513387174
+          ],
+          "acmonPixel": [
+            196.5,
+            223
+          ],
+          "fit": {
+            "pose": [
+              -33.46875,
+              200.65625,
+              243.875,
+              192.09375,
+              219.9875
+            ],
+            "objective": 17.7512262884684,
+            "acmonDetectorPixel": [
+              196.08041856507558,
+              223.31807493043942
+            ],
+            "acmonErrorPixels": 1.9371455734236849,
+            "poleDetectorPixel": [
+              203.3885547711097,
+              214.31467594817323
+            ],
+            "poleErrorPixels": 0.7301534621020447,
+            "celmisDetectorPixel": [
+              193.7232877558837,
+              207.73478281030586
+            ],
+            "celmisErrorPixels": 0.7851595024992442,
+            "limbRmsIdealPixels": 0.7392428988464397,
+            "maximumLimbIdealPixels": 2.4166812417847283
+          }
+        },
+        {
+          "polePixel": [
+            202.97806683072253,
+            213.71083513387174
+          ],
+          "acmonPixel": [
+            198.5,
+            221
+          ],
+          "fit": {
+            "pose": [
+              -21.25,
+              205.5625,
+              244.90625,
+              191.41875000000002,
+              220.19375
+            ],
+            "objective": 21.292922702678105,
+            "acmonDetectorPixel": [
+              197.8525294608635,
+              221.22663567756922
+            ],
+            "acmonErrorPixels": 0.8499231706369315,
+            "poleDetectorPixel": [
+              204.1594685847761,
+              214.0963380614596
+            ],
+            "poleErrorPixels": 1.242707774040093,
+            "celmisDetectorPixel": [
+              195.41299094404167,
+              206.47189164914658
+            ],
+            "celmisErrorPixels": 1.5084567737210353,
+            "limbRmsIdealPixels": 0.7885883316575886,
+            "maximumLimbIdealPixels": 2.524075127083607
+          }
+        },
+        {
+          "polePixel": [
+            202.97806683072253,
+            213.71083513387174
+          ],
+          "acmonPixel": [
+            198.5,
+            223
+          ],
+          "fit": {
+            "pose": [
+              -28.03125,
+              196.25,
+              243.1875,
+              191.75625,
+              220.08124999999998
+            ],
+            "objective": 20.147081627345322,
+            "acmonDetectorPixel": [
+              197.756009614068,
+              223.42253794465913
+            ],
+            "acmonErrorPixels": 1.445390994329998,
+            "poleDetectorPixel": [
+              203.6413525318629,
+              213.93936893400297
+            ],
+            "poleErrorPixels": 0.7015522925197444,
+            "celmisDetectorPixel": [
+              194.06856717466084,
+              207.91502261408684
+            ],
+            "celmisErrorPixels": 0.9175880566633804,
+            "limbRmsIdealPixels": 0.7812902066901822,
+            "maximumLimbIdealPixels": 2.558731329937774
+          }
+        },
+        {
+          "polePixel": [
+            203.90838390167738,
+            212.78051806291688
+          ],
+          "acmonPixel": [
+            196.5,
+            221
+          ],
+          "fit": {
+            "pose": [
+              -27.375,
+              208.34375,
+              243.5,
+              191.81875,
+              220.10625
+            ],
+            "objective": 20.17320636998998,
+            "acmonDetectorPixel": [
+              196.3851817213086,
+              221.22110295967357
+            ],
+            "acmonErrorPixels": 1.359963379629649,
+            "poleDetectorPixel": [
+              203.8093173538569,
+              213.99380407308846
+            ],
+            "poleErrorPixels": 1.2173237545431868,
+            "celmisDetectorPixel": [
+              194.69765439225748,
+              206.42864875548813
+            ],
+            "celmisErrorPixels": 0.9017560067121347,
+            "limbRmsIdealPixels": 0.7752056853114865,
+            "maximumLimbIdealPixels": 2.4450512108257403
+          }
+        },
+        {
+          "polePixel": [
+            203.90838390167738,
+            212.78051806291688
+          ],
+          "acmonPixel": [
+            196.5,
+            223
+          ],
+          "fit": {
+            "pose": [
+              -32.46875,
+              200.78125,
+              242.875,
+              192.09374999999997,
+              219.9875
+            ],
+            "objective": 19.568921665570837,
+            "acmonDetectorPixel": [
+              196.37575734769914,
+              223.09473132576977
+            ],
+            "acmonErrorPixels": 1.5691903061369339,
+            "poleDetectorPixel": [
+              203.41775282883006,
+              214.050723613865
+            ],
+            "poleErrorPixels": 1.361668458657501,
+            "celmisDetectorPixel": [
+              193.69197432191908,
+              207.5994421093883
+            ],
+            "celmisErrorPixels": 0.673951527088631,
+            "limbRmsIdealPixels": 0.7554184999813293,
+            "maximumLimbIdealPixels": 2.443986402123031
+          }
+        },
+        {
+          "polePixel": [
+            203.90838390167738,
+            212.78051806291688
+          ],
+          "acmonPixel": [
+            198.5,
+            221
+          ],
+          "fit": {
+            "pose": [
+              -20.78125,
+              205.3125,
+              243.65625,
+              191.46875,
+              220.19375
+            ],
+            "objective": 21.306538360509418,
+            "acmonDetectorPixel": [
+              198.0717144935315,
+              221.07385063722182
+            ],
+            "acmonErrorPixels": 1.0883979530890286,
+            "poleDetectorPixel": [
+              204.11508943494928,
+              213.7977308798074
+            ],
+            "poleErrorPixels": 1.0380024529506506,
+            "celmisDetectorPixel": [
+              195.22392793891257,
+              206.37970292930282
+            ],
+            "celmisErrorPixels": 1.372139954802812,
+            "limbRmsIdealPixels": 0.8040262970444395,
+            "maximumLimbIdealPixels": 2.5692465420358803
+          }
+        },
+        {
+          "polePixel": [
+            203.90838390167738,
+            212.78051806291688
+          ],
+          "acmonPixel": [
+            198.5,
+            223
+          ],
+          "fit": {
+            "pose": [
+              -27.28125,
+              196.21875,
+              242.28125,
+              191.77499999999998,
+              220.075
+            ],
+            "objective": 20.841347730159256,
+            "acmonDetectorPixel": [
+              198.0143513580923,
+              223.2290845140628
+            ],
+            "acmonErrorPixels": 1.3323685909989054,
+            "poleDetectorPixel": [
+              203.64450286956918,
+              213.70124943574774
+            ],
+            "poleErrorPixels": 0.9577992796100265,
+            "celmisDetectorPixel": [
+              194.02676770031974,
+              207.80722206612495
+            ],
+            "celmisErrorPixels": 0.8076657562503445,
+            "limbRmsIdealPixels": 0.7958690513169336,
+            "maximumLimbIdealPixels": 2.579590155260361
+          }
+        },
+        {
+          "polePixel": [
+            203.90838390167738,
+            213.71083513387174
+          ],
+          "acmonPixel": [
+            196.5,
+            221
+          ],
+          "fit": {
+            "pose": [
+              -27,
+              208.9375,
+              246.53125,
+              191.74375,
+              220.075
+            ],
+            "objective": 18.229588379824083,
+            "acmonDetectorPixel": [
+              196.27216557102548,
+              221.27399362722085
+            ],
+            "acmonErrorPixels": 1.4264160116498703,
+            "poleDetectorPixel": [
+              204.07823204186732,
+              214.59253347402557
+            ],
+            "poleErrorPixels": 0.8979088783145007,
+            "celmisDetectorPixel": [
+              195.42257809522894,
+              206.48975222321982
+            ],
+            "celmisErrorPixels": 1.5113177133661602,
+            "limbRmsIdealPixels": 0.74695871525774,
+            "maximumLimbIdealPixels": 2.302504607573697
+          }
+        },
+        {
+          "polePixel": [
+            203.90838390167738,
+            213.71083513387174
+          ],
+          "acmonPixel": [
+            196.5,
+            223
+          ],
+          "fit": {
+            "pose": [
+              -31.5625,
+              201.5625,
+              246.03125,
+              191.9875,
+              220
+            ],
+            "objective": 17.527017377787455,
+            "acmonDetectorPixel": [
+              196.22242612550824,
+              223.0968409672082
+            ],
+            "acmonErrorPixels": 1.683821579660428,
+            "poleDetectorPixel": [
+              203.73327915716797,
+              214.64963041778594
+            ],
+            "poleErrorPixels": 0.9549859981430385,
+            "celmisDetectorPixel": [
+              194.4579757702187,
+              207.5532742733553
+            ],
+            "celmisErrorPixels": 0.7182299267395098,
+            "limbRmsIdealPixels": 0.7301920580851184,
+            "maximumLimbIdealPixels": 2.3668931673495655
+          }
+        },
+        {
+          "polePixel": [
+            203.90838390167738,
+            213.71083513387174
+          ],
+          "acmonPixel": [
+            198.5,
+            221
+          ],
+          "fit": {
+            "pose": [
+              -20.125,
+              206.375,
+              246.4375,
+              191.39375,
+              220.16874999999996
+            ],
+            "objective": 19.7400993089542,
+            "acmonDetectorPixel": [
+              197.99067160012004,
+              221.09184414523136
+            ],
+            "acmonErrorPixels": 1.032233343636463,
+            "poleDetectorPixel": [
+              204.38746482052645,
+              214.3746338525759
+            ],
+            "poleErrorPixels": 0.8186252291241363,
+            "celmisDetectorPixel": [
+              195.92945890702816,
+              206.41039977331624
+            ],
+            "celmisErrorPixels": 2.0175331722714875,
+            "limbRmsIdealPixels": 0.7787935516172328,
+            "maximumLimbIdealPixels": 2.4313810235335853
+          }
+        },
+        {
+          "polePixel": [
+            203.90838390167738,
+            213.71083513387174
+          ],
+          "acmonPixel": [
+            198.5,
+            223
+          ],
+          "fit": {
+            "pose": [
+              -25.875,
+              197.9375,
+              245.4375,
+              191.6625,
+              220.09374999999997
+            ],
+            "objective": 19.41852687026058,
+            "acmonDetectorPixel": [
+              197.8439478474294,
+              223.13240207368244
+            ],
+            "acmonErrorPixels": 1.1834840844859793,
+            "poleDetectorPixel": [
+              204.01239217034095,
+              214.3195433129234
+            ],
+            "poleErrorPixels": 0.617530053677374,
+            "celmisDetectorPixel": [
+              194.868575189077,
+              207.6346748996588
+            ],
+            "celmisErrorPixels": 1.0757486171671582,
+            "limbRmsIdealPixels": 0.7743727694296366,
+            "maximumLimbIdealPixels": 2.5090159350863965
+          }
+        }
+      ]
+    }
+  },
+  "limits": [
+    "No exact geographic interval is assigned to the unlabelled Figure 9B wireframe.",
+    "Figure 10 is a source-controlled cylindrical projection of the same exposure, not another independent observation.",
+    "The paper gives a non-ellipsoidal shape but does not supply its numeric surface or a full Dactyl camera table. Agreement near Acmon and Celmis does not qualify all ellipsoid samples.",
+    "No source-quality, visibility, model-correspondence or public photographic surface is qualified by this diagnostic."
+  ],
+  "display": {
+    "image": "Original NASA/JPL/Galileo SSI i2278 VICAR DN, uncalibrated monochrome",
+    "gain": 2,
+    "crop": {
+      "left": 158,
+      "top": 188,
+      "width": 64,
+      "height": 64
+    },
+    "zoom": 6,
+    "paperPixelsRedistributed": false
+  }
+}
