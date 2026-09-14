@@ -77,6 +77,19 @@
         "noData": true
       },
       {
+        "id": "surface",
+        "label": "Clear-filter photography",
+        "thumbnail": "/scenes/vesta/vesta-surface-thumbnail.webp",
+        "surface": "vesta-surface-surface@2x.webp",
+        "poles": "vesta-surface-surface@2x.webp",
+        "source": {
+          "id": "dlr-vesta-lamo-clear",
+          "path": "../manifest.json"
+        },
+        "notes": "Dawn low-altitude clear-filter photographs in the published DLR mosaic. Sunlit crater walls, shadows and mosaic seams belong to the observations. The source is 20 m/pixel; this simplified display is coarser. Gray grid marks missing coverage and exact black pixels withheld by the fill heuristic.",
+        "noData": true
+      },
+      {
         "id": "ratios",
         "label": "Spectral ratios",
         "thumbnail": "/scenes/vesta/vesta-ratios-thumbnail.webp",

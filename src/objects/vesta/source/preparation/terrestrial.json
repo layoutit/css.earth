@@ -31,6 +31,20 @@
         }
       },
       {
+        "id": "surface",
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 0,
+          "centerLongitude": 180,
+          "grid": {
+            "pixelsPerDegree": 222.529479629277,
+            "sampleOffset": 40055.3,
+            "lineOffset": 20027
+          },
+          "labelPath": "reference/lamo-clear.lbl"
+        }
+      },
+      {
         "id": "ratios",
         "validity": {
           "kind": "pds3-rgb-zip",
