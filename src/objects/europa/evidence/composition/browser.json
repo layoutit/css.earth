@@ -1,0 +1,362 @@
+{
+  "schema": "cssearth-composition-browser-evidence@1",
+  "date": "2026-09-14",
+  "baseCommit": "f8fbdaa0b203f11b4f121b867eb478d38d6c311e",
+  "revision": "Working tree changes identified by the source and prepared hashes below; shared renderer, geometry, camera and shell match baseCommit.",
+  "browser": "Chrome 153.0.8010.12",
+  "viewportDpr1": [
+    1440,
+    1000
+  ],
+  "pins": [
+    {
+      "path": "src/objects/europa/object.json",
+      "sha256": "d2add4c306364567f001f59966d5eaea74c9282ce8babc536a48cda812cf10a8"
+    },
+    {
+      "path": "src/objects/europa/composition.css",
+      "sha256": "9ba9d466a52259eb155b74a726eea337c4d38e9d48c75e9f5971f7fae04d2b07"
+    },
+    {
+      "path": "src/objects/europa/text.json",
+      "sha256": "cc0d43fe4eeea646a5f6864a52d2f3088b946ac98bea74c14ca7fe295e143e60"
+    },
+    {
+      "path": "src/objects/europa/source/preparation/raster.json",
+      "sha256": "f932b8bacf14fc327519ad725ce0d8a816857e1bb03abc6b4ec07f501fcbb1d6"
+    },
+    {
+      "path": "src/objects/europa/source/content/object.json",
+      "sha256": "ecdadd63438967d6e9dd54f21b5d7777fd3d4819fa2c1e50bfd38a403c7903ab"
+    },
+    {
+      "path": "src/objects/europa/prepared/scene.refs.json",
+      "sha256": "8e16a56dbdd419ddf8a52d1ecedc82933f3912fe01db01128e7df83360ef7df3"
+    },
+    {
+      "path": "src/objects/europa/prepared/lenses.json",
+      "sha256": "61293412c6586df677ac0cc45d9f74109c1b2c0bb64bc1d7ef3640801dab22cf"
+    },
+    {
+      "path": "src/objects/europa/prepared/page.json",
+      "sha256": "033169d9062a0223f52f9a91cb2aa88f1718c0d4bbdc402237afc47c37c2149e"
+    },
+    {
+      "path": "src/objects/europa/runtime-assets.json",
+      "sha256": "8ca126883c8651c42170d71e03c960fee3b58981fc89351f56dc4daafae219fe"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "coarse-ice-mobile.png",
+      "bytes": 164793,
+      "sha256": "ef25534e0a03060f581238b14ede4fcae20a14b0545d468f2445cfe4b3c0863d",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "coarse-ice.png",
+      "bytes": 565816,
+      "sha256": "0e79fb82e308be0ae88196a7592123897fcb6a18274db5a984cf4584c26056aa",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "fine-ice.png",
+      "bytes": 583998,
+      "sha256": "e4a8ac8bf6fa697fe960037d8e41cddf70db9803e236df7b5a32c90a7b12c595",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "ice-signature-dpr2.png",
+      "bytes": 1508410,
+      "sha256": "824d170451b607060b8d73db9e2ec4eaad680ea1d13ad8603e99b234624355d9",
+      "width": 2880,
+      "height": 2000
+    },
+    {
+      "path": "ice-signature.png",
+      "bytes": 572323,
+      "sha256": "035e79397983e0d177bdebee5968fa617295bbb361af2b161a9168c0ddd93f9f",
+      "width": 1440,
+      "height": 1000
+    }
+  ],
+  "desktop": [
+    {
+      "lens": "ice-signature",
+      "retained": true,
+      "leaves": 450,
+      "backgrounds": [
+        "url(\"http://127.0.0.1:4294/scenes/europa/europa-poles-ice-signature@2x.webp\")",
+        "url(\"http://127.0.0.1:4294/scenes/europa/europa-ice-signature@2x.webp\")"
+      ],
+      "url": "http://127.0.0.1:4294/europa/?v=QEY-EORaHKwIMb5ps7ZFocrAwL316SpoOzBBQsczQAAAAD_TW5VWPHOEv9BIYFWPA3w_4xIp10ehVQABAAAAAAAAAAA#dataset=ice-signature",
+      "dpr": 1,
+      "view": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.106676237472,0.11960064966,-0.987074396872,0,0.726098605215,0.687573557089,0.004839328113,0,0.679265040955,-0.716197101497,-0.160189624956,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.461479241785,0.482094521545,0.744729160729,0,-0.178836397451,0.771675503538,-0.610355831695,0,-0.86893856118,-0.41485133289,-0.269896163318,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": 0,
+        "zoom": 1.2396521739107138,
+        "distance": 1130.2405719927697,
+        "distanceKilometers": 7669.910803331804,
+        "distanceRadii": 4.914089443446825,
+        "levelOfDetail": {
+          "stage": "geometry",
+          "silhouetteDiameter": 518.3999999990258,
+          "billboardOpacity": 0,
+          "markerOpacity": 0,
+          "proxyOpacity": 0
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 0,
+        "silhouetteRadius": 259.1999999995129,
+        "bodyCenterKilometers": [
+          9.832438081502914e-10,
+          -4.7873705625534054e-8,
+          -7669.910803331804
+        ]
+      }
+    },
+    {
+      "lens": "fine-ice",
+      "retained": true,
+      "leaves": 450,
+      "backgrounds": [
+        "url(\"http://127.0.0.1:4294/scenes/europa/europa-poles-fine-ice@2x.webp\")",
+        "url(\"http://127.0.0.1:4294/scenes/europa/europa-fine-ice@2x.webp\")"
+      ],
+      "url": "http://127.0.0.1:4294/europa/?v=QEY-EORaHKwIMb5ps7ZFocrAwL316SpoOzBBQsczQAAAAD_TW5VWPHOEv9BIYFWPA3w_4xIp10ehVQABQFCpiTdLZnQ#dataset=fine-ice",
+      "dpr": 1,
+      "view": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.106676237472,0.11960064966,-0.987074396872,0,0.726098605215,0.687573557089,0.004839328113,0,0.679265040955,-0.716197101497,-0.160189624956,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.461479241785,0.482094521545,0.744729160729,0,-0.178836397451,0.771675503538,-0.610355831695,0,-0.86893856118,-0.41485133289,-0.269896163318,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": 0,
+        "zoom": 1.2396521739107138,
+        "distance": 1130.2405719927697,
+        "distanceKilometers": 7669.910803331804,
+        "distanceRadii": 4.914089443446825,
+        "levelOfDetail": {
+          "stage": "geometry",
+          "silhouetteDiameter": 518.3999999990258,
+          "billboardOpacity": 0,
+          "markerOpacity": 0,
+          "proxyOpacity": 0
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 0,
+        "silhouetteRadius": 259.1999999995129,
+        "bodyCenterKilometers": [
+          9.832438081502914e-10,
+          -4.7873705625534054e-8,
+          -7669.910803331804
+        ]
+      }
+    },
+    {
+      "lens": "coarse-ice",
+      "retained": true,
+      "leaves": 450,
+      "backgrounds": [
+        "url(\"http://127.0.0.1:4294/scenes/europa/europa-poles-coarse-ice@2x.webp\")",
+        "url(\"http://127.0.0.1:4294/scenes/europa/europa-coarse-ice@2x.webp\")"
+      ],
+      "url": "http://127.0.0.1:4294/europa/?v=QEY-EORaHKwIMb5ps7ZFocrAwL316SpoOzBBQsczQAAAAD_TW5VWPHOEv9BIYFWPA3w_4xIp10ehVQABQFCqLQ5o5nQ#dataset=coarse-ice",
+      "dpr": 1,
+      "view": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.106676237472,0.11960064966,-0.987074396872,0,0.726098605215,0.687573557089,0.004839328113,0,0.679265040955,-0.716197101497,-0.160189624956,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.461479241785,0.482094521545,0.744729160729,0,-0.178836397451,0.771675503538,-0.610355831695,0,-0.86893856118,-0.41485133289,-0.269896163318,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": 0,
+        "zoom": 1.2396521739107138,
+        "distance": 1130.2405719927697,
+        "distanceKilometers": 7669.910803331804,
+        "distanceRadii": 4.914089443446825,
+        "levelOfDetail": {
+          "stage": "geometry",
+          "silhouetteDiameter": 518.3999999990258,
+          "billboardOpacity": 0,
+          "markerOpacity": 0,
+          "proxyOpacity": 0
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 0,
+        "silhouetteRadius": 259.1999999995129,
+        "bodyCenterKilometers": [
+          9.832438081502914e-10,
+          -4.7873705625534054e-8,
+          -7669.910803331804
+        ]
+      }
+    },
+    {
+      "zoomedView": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.106676237472,0.11960064966,-0.987074396872,0,0.726098605215,0.687573557089,0.004839328113,0,0.679265040955,-0.716197101497,-0.160189624956,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.461479241785,0.482094521545,0.744729160729,0,-0.178836397451,0.771675503538,-0.610355831695,0,-0.86893856118,-0.41485133289,-0.269896163318,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": 0,
+        "zoom": 1.2564567826312012,
+        "distance": 1115.7541071625515,
+        "distanceKilometers": 7571.60439330135,
+        "distanceRadii": 4.851104813750224,
+        "levelOfDetail": {
+          "stage": "geometry",
+          "silhouetteDiameter": 518.3999999990258,
+          "billboardOpacity": 0,
+          "markerOpacity": 0,
+          "proxyOpacity": 0
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 0,
+        "silhouetteRadius": 259.1999999995129,
+        "bodyCenterKilometers": [
+          9.706414231366432e-10,
+          -4.726010107972152e-8,
+          -7571.60439330135
+        ]
+      },
+      "url": "http://127.0.0.1:4294/europa/?v=QEY-EORaHKwIMb5ps7ZFocrAwL316SpoOzBBQsczQAAAAD_TW5VWPHOEv9BIYFWPA3w_4xIp10ehVQABAAAAAAAAAAA#dataset=coarse-ice"
+    }
+  ],
+  "dpr2": {
+    "id": "europa",
+    "dpr": 2,
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "http://127.0.0.1:4294/europa/?v=QEY-EORaHKwIMb5ps7ZFocrAwL316SpoOzBBQsczQAAAAD_TW5VWPHOEv9BIYFWPA3w_4xIp10ehVQABAAAAAAAAAAA#dataset=ice-signature",
+    "lens": {
+      "id": "ice-signature",
+      "ready": true
+    },
+    "view": {
+      "pose": {
+        "schema": "cssearth-camera-pose@1",
+        "scene": "matrix3d(-0.106676237472,0.11960064966,-0.987074396872,0,0.726098605215,0.687573557089,0.004839328113,0,0.679265040955,-0.716197101497,-0.160189624956,0,0,0,0,1)",
+        "skybox": "matrix3d(-0.461479241785,0.482094521545,0.744729160729,0,-0.178836397451,0.771675503538,-0.610355831695,0,-0.86893856118,-0.41485133289,-0.269896163318,0,0,0,0,1)",
+        "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+      },
+      "pitch": 34.230769230769226,
+      "controlPitch": 34.230769230769226,
+      "controlYaw": 0,
+      "zoom": 1.2396521739107138,
+      "distance": 1130.2405719927697,
+      "distanceKilometers": 7669.910803331804,
+      "distanceRadii": 4.914089443446825,
+      "levelOfDetail": {
+        "stage": "geometry",
+        "silhouetteDiameter": 518.3999999990258,
+        "billboardOpacity": 0,
+        "markerOpacity": 0,
+        "proxyOpacity": 0
+      },
+      "focal": 1247.08,
+      "principalOffset": [
+        0,
+        0
+      ],
+      "visibleRect": {
+        "left": -720,
+        "right": 720,
+        "top": -500,
+        "bottom": 500
+      },
+      "offAxisDegrees": 0,
+      "silhouetteRadius": 259.1999999995129,
+      "bodyCenterKilometers": [
+        9.832438081502914e-10,
+        -4.7873705625534054e-8,
+        -7669.910803331804
+      ]
+    },
+    "backgrounds": [
+      "url(\"http://127.0.0.1:4294/scenes/europa/europa-poles-ice-signature@2x.webp\")",
+      "url(\"http://127.0.0.1:4294/scenes/europa/europa-ice-signature@2x.webp\")"
+    ]
+  },
+  "mobile": {
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "dpr": 1,
+    "lens": {
+      "id": "coarse-ice",
+      "ready": true
+    }
+  },
+  "pageErrors": [],
+  "inspection": {
+    "result": "All new datasets change the actual retained surface textures and preserve 450 existing surface leaves; captions, legends and source gaps inspected. Representative DPR 2 views use the same canonical prepared image URLs as DPR 1.",
+    "interaction": "All three dataset buttons, minimap rotation, keyboard + zoom and 390x844 responsive layout exercised.",
+    "limitations": [
+      "The local preview omits six unavailable unrelated prepared nebula context banks (helix, m42, m2-9, m1, m45, m8) through an ignored generated module; no tracked shared shell or registry changes.",
+      "Mobile retains the scientific texture without horizontal overflow, but shared orbit/label clutter and the open information sheet limit visual review.",
+      "This is focused browser evidence, not aggregate application or fresh public-asset installation qualification."
+    ]
+  },
+  "comparison": "These are new scientific datasets, so photographs are not a matched Pixelmatch reference. Native numeric-coordinate comparisons qualify the source conversion; inspected browser images qualify displayed content and interaction."
+}

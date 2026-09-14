@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-mapped-composition-conversion@1",
+  "target": "Europa",
+  "source": {
+    "path": "composition/fit_SPHERE.json.gz",
+    "sha256": "f991ea9cef84b48b09fe5dd0195d98b5962e505b98bf49f562b577f56c537199",
+    "bytes": 2700255,
+    "metadata": {
+      "reference": "Oliver King, Leigh Fletcher & Nicolas Ligier (2022) Compositional Mapping of Europa using MCMC Modelling of Near-IR VLT/SPHERE and Galileo/NIMS Observations",
+      "source_url": "https://github.com/ortk95/king-2022-compositional-mapping-europa",
+      "data_doi": "10.5281/zenodo.6034735",
+      "instrument": "VLT/SPHERE",
+      "observation_name": "SPHER.2014-12-09T07:57:34.998.fits",
+      "observation_date": "2014-12-09T07:57:34.9979",
+      "target": "Europa",
+      "nan_value": -99,
+      "file_creation_date": "2022-02-10T12:13:56.539562"
+    }
+  },
+  "grid": {
+    "width": 361,
+    "height": 180,
+    "coordinates": "degrees",
+    "centerLongitude": 0,
+    "referenceRadiusMeters": 1560800,
+    "origin": [
+      -180.5,
+      89.5
+    ],
+    "resolution": [
+      1,
+      -1
+    ],
+    "wrapLongitude": true,
+    "noData": -99
+  },
+  "processing": "Reverse latitude rows, reorder east-positive longitude nodes, repeat the periodic seam column, round values to float32. No spatial smoothing, gap fill or fitted abundance aggregation.",
+  "products": {
+    "fine-ice": {
+      "selection": {
+        "id": "fine-ice",
+        "kind": "posterior",
+        "field": "H2O_crystalline_100um-300um_110K_GhoSST",
+        "statistic": "median"
+      },
+      "validNativeNodes": 19616,
+      "missingNativeNodes": 45184,
+      "minimum": 0.0116,
+      "maximum": 0.38307,
+      "outputBytes": 260920,
+      "outputSha256": "49d1e99a5ee82018cfebb27d7554a70eb845b83e1bef811400ac66aad8f2ceff"
+    },
+    "coarse-ice": {
+      "selection": {
+        "id": "coarse-ice",
+        "kind": "posterior",
+        "field": "H2O_crystalline_300um-1mm_110K_GhoSST",
+        "statistic": "median"
+      },
+      "validNativeNodes": 19616,
+      "missingNativeNodes": 45184,
+      "minimum": 0.01196,
+      "maximum": 0.52373,
+      "outputBytes": 260920,
+      "outputSha256": "ab127d09bb072a660e6893184bfa4f4e54fbe1095674f86e22dd1f749617b10e"
+    },
+    "fine-ice-uncertainty": {
+      "selection": {
+        "id": "fine-ice-uncertainty",
+        "kind": "posterior",
+        "field": "H2O_crystalline_100um-300um_110K_GhoSST",
+        "statistic": "interval-width"
+      },
+      "validNativeNodes": 19616,
+      "missingNativeNodes": 45184,
+      "minimum": 0.022799999999999997,
+      "maximum": 0.20496,
+      "outputBytes": 260920,
+      "outputSha256": "ac2a7850bb19a41d533c84fc0de32b5966d605f274f5081dcd5b61ff1fead8b1"
+    },
+    "coarse-ice-uncertainty": {
+      "selection": {
+        "id": "coarse-ice-uncertainty",
+        "kind": "posterior",
+        "field": "H2O_crystalline_300um-1mm_110K_GhoSST",
+        "statistic": "interval-width"
+      },
+      "validNativeNodes": 19616,
+      "missingNativeNodes": 45184,
+      "minimum": 0.025269999999999997,
+      "maximum": 0.21449,
+      "outputBytes": 260920,
+      "outputSha256": "b1b7cca42a3714e00d73af4d5503463532cd490ea2306f4c83651e1323459a2f"
+    }
+  }
+}

@@ -118,6 +118,19 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     const verificationOperations = acquisitionOperations.filter(operation => operation.expectedPath === path) ?? [];
     const dependencies = acquisitionOperation?.fileSource
       ? [await bindSource(text(acquisitionOperation.fileSource), new Set([...visiting, path]))] : [];
+    if (acquisitionOperation?.kind === 'mapped-composition') {
+      const recipePath = text(acquisitionOperation.recipePath), recipeEntry = byPath.get(recipePath);
+      if (!recipeEntry) throw new Error(`Unbound composition recipe: ${recipePath}.`);
+      const bytes = await readFile(contained(sourceDirectory, recipePath));
+      // Recovery reads this recipe to discover dependencies, so its bytes must
+      // match even when the original downloaded archive is not installed.
+      assertIdentity({sha256: sha256(bytes), bytes: bytes.length}, {sha256: recipeEntry.expectedSha256, bytes: recipeEntry.expectedBytes}, recipePath);
+      const {parseMappedCompositionRecipe} = await import('./acquisition/mapped-composition.mts');
+      const plan = parseMappedCompositionRecipe(JSON.parse(bytes.toString('utf8')));
+      if (byPath.get(plan.input)?.expectedSha256 !== plan.sha256) throw new Error(`Composition input pin disagrees: ${plan.input}.`);
+      const ancestors = new Set([...visiting, path]);
+      dependencies.push(await bindSource(recipePath, ancestors), await bindSource(plan.input, ancestors));
+    }
     sources.set(entry.id, { ...record, ...pin, dependencies,
       verification: verify ? 'bytes-verified' : 'manifest-pin', acquisitionOperation, verificationOperations });
     return entry.id;
