@@ -141,12 +141,14 @@
       "finding": "Selected 332 calibrated controlled products: 301 equirectangular maps on projected grids finer than 800 m and 31 maps whose inspected STAC records list only polar GeoTIFFs. Native grids span 6–629 m. A separate Galileo view uses original I/F and a common 0–2 display interval, without a photometric model or brightness fit. The 12K geographic grid covers 15.264% of the sphere; 330 images contribute after finer-grid priority and complete valid sampling. The existing Monochrome global mosaic is retained. Geographic bounds come from actual GeoTIFF rectangles, including polar products. Native grids contain finer information than the fixed approximately 798 m equatorial delivery can display. All 332 products were retrieved, byte-verified and decoded; two representative projections were freshly restored into an empty source root.",
       "evidence": [
         "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/",
-        "https://doi.org/10.1029/2021EA001935"
+        "https://doi.org/10.1029/2021EA001935",
+        "https://github.com/layoutit/css.earth/blob/41e761ec941c147c856c9076048e4e32fd416b26/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/41e761ec941c147c856c9076048e4e32fd416b26/src/objects/europa/evidence/galileo/delivery.json"
       ],
       "checked": [
         {
           "date": "2026-09-14",
-          "commit": "e6ed07b7f549388434520ff17a130d600a7c8f77"
+          "commit": "41e761ec941c147c856c9076048e4e32fd416b26"
         }
       ]
     },
@@ -158,12 +160,13 @@
       "revisitWhen": "A released photometrically harmonized global product or a qualified cross-observation model resolves joins, spectral differences and terrain-dependent scattering while preserving source detail. Compare in the running app against the retained global mosaic before replacing it.",
       "evidence": [
         "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/",
-        "https://doi.org/10.1029/2021EA001935"
+        "https://doi.org/10.1029/2021EA001935",
+        "https://github.com/layoutit/css.earth/blob/41e761ec941c147c856c9076048e4e32fd416b26/src/objects/europa/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-14",
-          "commit": "e6ed07b7f549388434520ff17a130d600a7c8f77"
+          "commit": "41e761ec941c147c856c9076048e4e32fd416b26"
         }
       ]
     },
@@ -176,12 +179,13 @@
       "evidence": [
         "https://www.hou.usra.edu/meetings/lpsc2022/pdf/1691.pdf",
         "https://doi.org/10.3847/PSJ/ac06d6",
-        "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/"
+        "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/",
+        "https://github.com/layoutit/css.earth/blob/41e761ec941c147c856c9076048e4e32fd416b26/src/objects/europa/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-14",
-          "commit": "e6ed07b7f549388434520ff17a130d600a7c8f77"
+          "commit": "41e761ec941c147c856c9076048e4e32fd416b26"
         }
       ]
     }
