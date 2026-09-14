@@ -107,6 +107,6 @@ test("the traced environment adds the trace once and keeps other Node options", 
   const environment = tracedPreparationEnvironment("/traces", { NODE_OPTIONS: "--max-old-space-size=4096", PATH: "/bin" });
   assert.equal(environment[PREPARATION_TRACE_VARIABLE], "/traces");
   assert.equal(environment.PATH, "/bin");
-  assert.match(environment.NODE_OPTIONS, /^--max-old-space-size=4096 --import=file:\S+\/tools\/preparation-trace\.mts$/u);
+  assert.match(environment.NODE_OPTIONS ?? "", /^--max-old-space-size=4096 --import=file:\S+\/tools\/preparation-trace\.mts$/u);
   assert.equal(tracedPreparationEnvironment("/traces", environment).NODE_OPTIONS, environment.NODE_OPTIONS);
 });
