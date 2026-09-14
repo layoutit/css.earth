@@ -35,6 +35,16 @@ test('source UV mapping rejects mismatched connectivity and incomplete texel sup
   assert.throws(() => createObjUvFitsSampler(mesh,mapping,{...fits,scale:2},lens), /encoding/);
 });
 
+test('nearest sampling preserves a supported texel while bilinear requires every neighbour', () => {
+  const incomplete = { ...fits, values:[10,NaN,30,40] };
+  const nearest = createObjUvFitsSampler(mesh,mapping,incomplete,{...lens,sampling:'nearest'});
+  assert.equal(required(nearest.samplePoint([-.2,-1,1])).value,10);
+  assert.equal(nearest.samplePoint([.2,-1,1]),null);
+  assert.equal(createObjUvFitsSampler(mesh,mapping,incomplete,lens).samplePoint([-.2,-1,1]),null);
+  const flipped = createObjUvFitsSampler(mesh,mapping,fits,{...lens,sampling:'nearest',grid:{...lens.grid,flipV:true}});
+  assert.equal(required(flipped.samplePoint([.2,-1,1])).value,40);
+});
+
 test('UV recipe binds one original mesh and a finite simplification error bound', () => {
   const recipe = { ...lens, meshPath:'shape/model.obj', labelPath:'science/map.lblx' };
   const terrain = { path:'shape/model.obj', format:'wavefront-obj', simplification:{ method:'source-meshoptimizer', maximumErrorMeters:.1 } };
