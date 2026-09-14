@@ -4,7 +4,7 @@
 
 **False color** combines original Cassini ISS IR3, IR1 and UV3 observations from September 26, 2005, displayed as red, green and blue. Both red and green display channels are infrared; this is false color. Fifteen FULL-resolution, losslessly compressed CISSCAL 4.0beta products cover five neighboring pointings at about 159–208 m per detector pixel near the centre. Their image IDs and registration records are listed below.
 
-- **Monochrome** uses 12 clear-filter Cassini ISS observations, calibrated to I/F by CISSCAL 4.0beta and distributed by the [PDS Ring-Moon Systems Node](https://pds-rings.seti.org/cassini/iss/access.html).
+- **Monochrome** uses 11 clear-filter Cassini ISS observations, calibrated to I/F by CISSCAL 4.0beta and distributed by the [PDS Ring-Moon Systems Node](https://pds-rings.seti.org/cassini/iss/access.html).
 
 - The [PDS Saturn Small Moon Shape Models release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) provides Thomas's Hyperion model: 14,636 vertices and 29,268 triangular plates, with Cartesian coordinates in kilometers.
 
@@ -50,7 +50,6 @@ fits on screen; facing and overlap still control display.
 - No public release of the newer 2025 mosaic and DEM was located; see the [investigation ledger](investigations.json).
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
-
 
 ## Filter camera registration
 
@@ -131,7 +130,7 @@ Every examined source, with its decision and what would reopen it, is in the [in
 
 Facts and context follow [NASA's Hyperion overview](https://science.nasa.gov/saturn/moons/hyperion/) and the vendored JPL physical/orbital data. The stars and title retain the common ESO/S. Brunier and Inter credits documented beside the source inputs.
 
-Three additional published control rows (N1497116847, N1550270298 and N1550320098) produced grossly mismatched source-image silhouettes and were excluded. N1513999046 is excluded for the same reason: its published camera places 36% of the lit source shape on the photograph's sky, and preparation refuses a frame above 25%. Four SUM2 close-up frames were also excluded: their full-resolution center convention was ambiguous and their binned resolution did not improve on the retained full-resolution mosaic images.
+The [investigation ledger](investigations.json) records the rejected control rows and SUM2 trials, including their unresolved camera conventions.
 
 The 1,200-leaf approximation was compared with the released 29,268-plate model using 2,048 equal-area Fibonacci radial rays. Mean radial difference was 371 m, 95th percentile 945 m, 99th percentile 1.34 km and maximum sampled difference 1.94 km. These are sampled approximation errors, not exhaustive bounds or a claim that the observational shape itself is accurate to those values.
 

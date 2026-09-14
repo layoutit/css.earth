@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "6ea21e4f46252bb47f1ad5d130573954838b28f890e5750bc8def3c86579c685"
+          "sha256": "987a8c1d625af683e1eb5ffe74d77bb301865cf733cd197fb937589d6ca29edf"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8f4aa986c8665756c8698c4951c542e5148d4b0c41fb1b4144f34fdb5d1aea75"
+        "sha256": "cf5cfa3e426588868f1094302fa400efcb8c009d1db2d77568cbc5e84b6594a0"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3865357120605415,
-      "description": "Explore 9 Metis in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in April 1848.",
       "systemName": "Solar System",
       "order": 169,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "50675de851541fa3404d405f1525090926fd272fe59ef9439614aa236da6d423"
+    "sha256": "5defe8afb195e1532b1f1fc29bb47f535044c3ca2535b2fca382977763b3fa89"
   }
 }

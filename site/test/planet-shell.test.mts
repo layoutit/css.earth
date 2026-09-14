@@ -5,6 +5,7 @@ import test from "node:test";
 import { objectAdapter } from "../object-adapter.mts";
 import { loadObjectContent } from "./load-object-content.mts";
 import { OBJECTS } from "../objects.mts";
+import { parsePreparedText } from "../object-text.mts";
 import { requireSceneLifecycle } from "../scene-contract.mts";
 import type { RouterOptions } from '../scene-router.mts';
 import type { ShellOptions } from '../planet-shell-client.mts';
@@ -303,12 +304,13 @@ test("keeps the shared shell planet-neutral", async () => {
   );
 });
 
-test("keeps lens descriptions source-bound in the object model", async () => {
+test("publishes dataset text beside the controls, never inside the object model", async () => {
   const saturn = await loadObjectContent("saturn");
-  const saturnPanel = requireRecord(saturn.object.data, 'Saturn prepared body').controls;
-  const saturnSource = await saturn.source("content");
-  const descriptions = lensDescriptions(saturnPanel);
-  assert.deepEqual(descriptions, lensDescriptions(saturnSource));
+  const controls = requireRecord(requireRecord(saturn.object.data, 'Saturn prepared body').controls, 'Saturn controls');
+  const lenses = requireArray(requireRecord(controls.lenses, 'Saturn lenses').controls, 'Saturn lens controls').map(value => requireRecord(value, 'lens'));
+  assert.ok(lenses.every(lens => ['title', 'detail', 'summary', 'description'].every(key => !Object.hasOwn(lens, key))));
+  const text = parsePreparedText(JSON.parse(await readFile(new URL("../../src/objects/saturn/prepared/text.json", import.meta.url), "utf8")), "saturn");
+  assert.deepEqual(Object.keys(text.datasets), lenses.map(lens => requireString(lens.id, 'lens id')));
 });
 
 function createFakeDocument() {
@@ -332,13 +334,6 @@ function createFakeClassList() {
   };
 }
 
-function lensDescriptions(value: unknown) {
-  const lenses = requireRecord(requireRecord(value, 'content').lenses, 'lenses');
-  return Object.fromEntries(requireArray(lenses.controls, 'lens controls').map(value => {
-    const lens = requireRecord(value, 'lens');
-    return [requireString(lens.id, 'lens id'), requireString(lens.description, 'lens description')];
-  }));
-}
 type MinimalRouterOptions = Omit<RouterOptions, 'stage' | 'documentTarget' | 'windowTarget' | 'mountShell' | 'loadObject'> & {
   stage: { ariaBusy: string }; documentTarget: ReturnType<typeof createFakeDocument>; windowTarget: EventTarget;
   mountShell(options: ShellOptions): { destroy(): void }; loadObject(): Promise<() => unknown>;

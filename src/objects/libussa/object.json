@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7746973a289051c6fa5e6322d368c6a86188675a7987dffc1407b6c093d89f27"
+          "sha256": "84ce875d24ca4c848f23d56948d4cfeb45bb1c163114b9250e1f7f7a36041b2e"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5b789e59b66be939a0ec05c25e30a4b4d975b6d2af92b06abf61c33c4e0d7050"
+        "sha256": "47165f662d25b0f20bf291596116c021de1002392dad697c37f47f510da36e1f"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7991273130765797,
-      "description": "Explore Libussa in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in December 1886.",
       "systemName": "Solar System",
       "order": 344,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "0435ac211ef70e063393847cf2d1f221dd0a39355501f373cf887939ab585e1b"
+    "sha256": "294a6f2aa2d2dc76e6ed6df54043c1ff05899116554cff22f3f04da0ebb01d26"
   }
 }

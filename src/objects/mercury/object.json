@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "55d73a8396290c033c7883fe7fb1b7dcc36205dcc06946983b6eebca54530177"
+    "sha256": "7d7c70275e15e9a5b90a9e5b1f77151dd6494bd684c5a97d71c3965006e18df6"
   },
   "id": "mercury",
   "properties": {
@@ -79,7 +79,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4786a8cb8ed870bea24c6128736c5a42488b068365e20a9b30a01c729b45446f"
+          "sha256": "4bf706c01c427935e3f13957f8430284795ea4e0d2389d33239736ec8c7c76f9"
         },
         {
           "id": "solar-system",
@@ -169,7 +169,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2dcbe2e4486b974244bd25b1d26457450e79a90c42113907c6828e386a6cc254"
+        "sha256": "d493fda82357979adeab8743a6ac1b13e604de6116f3621b73c6d3deb28e9440"
       }
     },
     "catalog": {
@@ -177,7 +177,7 @@
       "classification": "planet",
       "color": "#9d9388",
       "distanceAu": 0.39,
-      "description": "Explore Mercury in 3D with cssEarth. Inspect the smallest planet, its cratered surface, and the extreme conditions closest to the Sun.",
+      "description": "The smallest planet and the closest to the Sun.",
       "systemName": "Solar System",
       "order": 117,
       "context": {

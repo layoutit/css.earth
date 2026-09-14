@@ -48,7 +48,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "fc03cf7c708181b9b3d29b199160edc74232bfe1bff00d22651c25b701f73a53"
+          "sha256": "5f3b5fa5532549b0c937f17d1a360d2f4339b74801af247f427aaad7cd65bcd4"
         },
         {
           "id": "solar-system",
@@ -164,7 +164,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1efcd81b0ef7a146815adc23574de1aaa52e987b69751646d2bef506c9a786e6"
+        "sha256": "b2a6e905b7f86908439d5b5428e766ed93c81014664aaa291113edb43843088b"
       }
     },
     "catalog": {
@@ -172,7 +172,7 @@
       "classification": "satellite",
       "color": "#bca06b",
       "distanceAu": 9.58,
-      "description": "Explore Titan in 3D with cssEarth. See through Saturn’s largest moon’s haze with Cassini near-infrared imagery.",
+      "description": "Saturn's largest moon, the only moon with a substantial atmosphere.",
       "systemName": "Solar System",
       "order": 443,
       "context": {
@@ -184,6 +184,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ea314ba7bedf4e74ac48081de3add20a6f4176aa4d47220dacbe791257dd578b"
+    "sha256": "901e38e7eaa7b08d5d24a309a662a1c406ac6ff6b6e812c4a0013f9cc8013842"
   }
 }

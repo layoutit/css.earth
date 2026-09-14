@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "354505c48fe9d118521cb8ea5ab94f61429de8be27e155293d7bc5e4de309323"
+    "sha256": "8cef4ec690056f3ead5769749f82ce7e44626a5076adfb57b707428072e8ab42"
   },
   "id": "ida",
   "properties": {
@@ -72,7 +72,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "6fd1aecbdc81935d450358f95b63085b15ff53c9799a860f68f32e7cc337f737"
+          "sha256": "e18ce2bd9cfb261a76356db3c65174fe7780f2e613b12be9eacbf168a622f6d9"
         },
         {
           "id": "title",
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9963445fd6722375a69f6415415126da0a72cbb818db89d565e8df0429089082"
+        "sha256": "5a758116ec374299dc1fb8b6aa674fe7c8b83f120870ca4159ec1fb84db7905b"
       }
     },
     "catalog": {
@@ -141,7 +141,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.861,
-      "description": "Explore Ida in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.",
+      "description": "Asteroid with a tiny moon, Dactyl.",
       "systemName": "Solar System",
       "order": 130,
       "context": {

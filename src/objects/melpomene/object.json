@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "bd9a3b2c2e0789d07ea2dc151408fb5ca6368117223613fb5094467ca2943edf"
+          "sha256": "94ccf85bf541038934cb09690a3d3ce43f7bb4283982d39c5433c0777b8d0896"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "97fb3b00236a395d05e589fc44c63569c1471e6a3d2bfa38cd3fb06272501855"
+        "sha256": "2860492d8814ccf676cd53f3954c75f9750f0e2e1955878dfe1b0145e0165e2b"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.295895199776688,
-      "description": "Explore Melpomene in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in June 1852.",
       "systemName": "Solar System",
       "order": 163,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "0c19065edd2f739687f1ff6e3d8dba94a43632e3dbcff4f4ba5ea6359cae6032"
+    "sha256": "fd26ea27e0812aecbceb81380baeb5d36eaeb6413e620d72eb068f3a92d7750b"
   }
 }

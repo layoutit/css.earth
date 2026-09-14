@@ -29,7 +29,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7d6a42940651ce580bffa72001fa8240c3edc1ffe2323ab33868d7845335e4f5"
+          "sha256": "ab211aaf254a80048dff5a5520b48aee0c6ae3e923ae2809e36ca9e8d80195ef"
         },
         {
           "id": "title",
@@ -140,7 +140,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ddbf536543bdbeff041f6e8573339c79eefbc8fced8429ee3a891220d93a1e8a"
+        "sha256": "2507eaed7e398e5e1fd77ea94f5df9d19ea989f9a3f266a271321528d93608e5"
       }
     },
     "catalog": {
@@ -148,7 +148,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.608969333559339,
-      "description": "Explore Borrelly's MICAS photograph and independent USGS and DLR terrain reconstructions.",
+      "description": "Elongated comet that Deep Space 1 flew past in 2001.",
       "systemName": "Solar System",
       "order": 76,
       "context": {
@@ -159,6 +159,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d5d6bdc19249112e59f1a042b2e4419b9efd085ee4d17f9076e1a6908524e9db"
+    "sha256": "f70739756def557588e909c272e981024d127f3b88683a2aa86765ff2e66f505"
   }
 }

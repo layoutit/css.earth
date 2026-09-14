@@ -4,7 +4,6 @@
   "id": "comet-c2006-p1",
   "displayName": "McNaught",
   "panel": {
-    "introduction": "McNaught became exceptionally bright during its January 2007 passage around the Sun. JPL lists it among history’s great comets.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "C/2006 P1 McNaught",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-c2006-p1/comet-c2006-p1-model-thumbnail.webp",
         "surface": "comet-c2006-p1-model-surface@2x.webp",
         "poles": "comet-c2006-p1-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "0.173 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "arrokoth",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9752c56ac9f562643511adc4b395b3f431ac655289b1e4da3d276f082a52f517"
+    "sha256": "4d82e3a255b1267ef8a83f52c285d8c59443f53f22ce94d6512ee3063312d238"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -216,14 +216,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "90263d6e9e853754148bf4691a53ff9ca94e77729e84fe7376f5ac40bce98571",
+      "sha256": "5a63306abdb39a70a80e30b57fb39f33d3e2fd26c76f4598af35bd2d3301d73e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "arrokoth",
         "displayName": "Arrokoth",
         "panel": {
-          "introduction": "New Horizons photographed Arrokoth on 1 January 2019. Its two lobes, Wenu and Weeyo, meet at a bright neck. The photograph covers the encounter-facing surface; the grid marks areas it does not show.",
           "facts": [
             {
               "id": "dimensions",
@@ -267,9 +266,6 @@
             {
               "id": "lorri",
               "label": "LORRI",
-              "title": "New Horizons close approach",
-              "detail": "Photograph · 33 m/pixel",
-              "description": "Taken 6,628 km from Arrokoth. Bright patches and the neck are visible in the original grayscale exposure. The photographed lighting is retained; unseen and grazing surfaces remain gridded.",
               "thumbnail": "/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
               "surface": "arrokoth-lorri-surface@2x.webp",
               "poles": "arrokoth-lorri-poles@2x.webp",
@@ -278,15 +274,13 @@
                 "id": "lorri-ca06",
                 "path": "../manifest.json",
                 "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.lbl"
-              }
+              },
+              "notes": "Taken 6,628 km from Arrokoth. Bright patches and the neck are visible in the original grayscale exposure. The photographed lighting is retained; unseen and grazing surfaces remain gridded."
             },
             {
               "id": "mvic",
               "label": "False color",
-              "title": "New Horizons false color",
-              "detail": "New Horizons",
               "falseColor": true,
-              "description": "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is false color, not a human-visible reconstruction, at 340 metres per native pixel; the grid marks unsupported coverage.",
               "thumbnail": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
               "surface": "arrokoth-mvic-surface@2x.webp",
               "poles": "arrokoth-mvic-poles@2x.webp",
@@ -295,14 +289,12 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.26007/fv5e-eh92"
               },
-              "summary": "Near-infrared, red and blue bands show spectral differences at 340 metres per native pixel. This is false color; the grid marks unsupported coverage."
+              "notes": "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is false color, not a human-visible reconstruction, at 340 metres per native pixel; the grid marks unsupported coverage.",
+              "noData": true
             },
             {
               "id": "albedo",
               "label": "Modeled albedo",
-              "description": "Fitted from 30 New Horizons approach observations on 31 December 2018 and 1 January 2019. Grayscale shows the released albedo values. Uniform areas are unconstrained model fill; the archive supplies no coverage mask. This is a fitted surface model, not a global photograph.",
-              "title": "New Horizons LORRI albedo model",
-              "detail": "LORRI · model",
               "thumbnail": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
               "surface": "arrokoth-albedo-surface@2x.webp",
               "poles": "arrokoth-albedo-poles@2x.webp",
@@ -325,14 +317,12 @@
                 "width": 256,
                 "height": 16
               },
-              "falseColor": true
+              "falseColor": true,
+              "notes": "Fitted from 30 New Horizons approach observations on 31 December 2018 and 1 January 2019. Grayscale shows the released albedo values. Uniform areas are unconstrained model fill; the archive supplies no coverage mask. This is a fitted surface model, not a global photograph."
             },
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
-              "title": "Published New Horizons shape",
-              "detail": "Unmapped grid",
               "thumbnail": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
               "surface": "arrokoth-model-surface@2x.webp",
               "poles": "arrokoth-model-poles@2x.webp",
@@ -340,7 +330,9 @@
                 "id": "published-shape",
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.26007/97r3-1e19"
-              }
+              },
+              "notes": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -432,7 +424,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -467,7 +459,7 @@
       "sha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
       "bytes": 3686921,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -511,7 +503,7 @@
       "sha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -548,7 +540,7 @@
       "sha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
       "bytes": 9529,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -582,7 +574,7 @@
       "sha256": "1fbb5124f417ea465db18cfdf5b7b8caee38cc30d8f1663b9939a648e27f0640",
       "bytes": 10532160,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -610,7 +602,7 @@
       "sha256": "5992738be4a7607b8ed2ccfe60643c7aab465f046cd674972c27efa2b426a263",
       "bytes": 3104,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -636,7 +628,7 @@
       "sha256": "37d71a90bd10c2a7812af0b350db1e6cb770c1c3f0e0a26e35a67547efef640e",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -670,7 +662,7 @@
       "sha256": "46565f1d4ecee1a836351365700d8acc01e150ebcece4ec69b39536fd1af36e5",
       "bytes": 18710,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -698,7 +690,7 @@
       "sha256": "8b4f7ef786172c6d928ab7bf3145e1876c6264d916609f4ed3f40235fdccede1",
       "bytes": 5767,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -706,7 +698,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -715,10 +707,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "90263d6e9e853754148bf4691a53ff9ca94e77729e84fe7376f5ac40bce98571",
-      "bytes": 7113,
+      "sha256": "5a63306abdb39a70a80e30b57fb39f33d3e2fd26c76f4598af35bd2d3301d73e",
+      "bytes": 6398,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -731,9 +723,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -756,13 +746,13 @@
           "url": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
           "bytes": 119308,
           "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -774,9 +764,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Fitted from 30 New Horizons approach observations on 31 December 2018 and 1 January 2019. Grayscale shows the released albedo values. Uniform areas are unconstrained model fill; the archive supplies no coverage mask. This is a fitted surface model, not a global photograph."
-      ],
+      "limitations": [],
       "lensIds": [
         "albedo"
       ],
@@ -796,19 +784,19 @@
           "url": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
           "bytes": 610,
           "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
           "bytes": 58,
           "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
           "bytes": 589518,
           "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -820,9 +808,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Taken 6,628 km from Arrokoth. Bright patches and the neck are visible in the original grayscale exposure. The photographed lighting is retained; unseen and grazing surfaces remain gridded."
-      ],
+      "limitations": [],
       "lensIds": [
         "lorri"
       ],
@@ -842,13 +828,13 @@
           "url": "/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
           "bytes": 1386,
           "sha256": "d052723fc643287d472bb5ec0dcbd29558471d9131cc7122b45ae53d2ef70c4f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
           "bytes": 908086,
           "sha256": "ce0dca27dbf24653f3a33e64ed1aad2b25a03ed1149b2a80ca8131cc6c0e3a59",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -860,9 +846,7 @@
       "selector": "/raster/surfaceObservations/1",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is false color, not a human-visible reconstruction, at 340 metres per native pixel; the grid marks unsupported coverage."
-      ],
+      "limitations": [],
       "lensIds": [
         "mvic"
       ],
@@ -883,13 +867,13 @@
           "url": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
           "bytes": 2038,
           "sha256": "03f778e5b96988e4240e80e7bb181649ff9d989909d2d9903c193e33c547c7e5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
           "bytes": 237202,
           "sha256": "7ab316c1be6db0bae750bb6ae543397a3b033e19cf601fdc142cc45048338767",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -900,7 +884,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -912,8 +896,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5467,
-          "sha256": "f49d87ad13a8df6a476a30f44efbb82876e26f649372244b5aa6bd760bd878b1",
+          "bytes": 5251,
+          "sha256": "579caaf139c873d35da51c071ff08d3fda45eeb1a07118e72e0bddb5d88588e8",
           "verification": "bytes-verified"
         }
       ],

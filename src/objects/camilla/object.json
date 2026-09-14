@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "909f4ad16776be4c8e99e205fa72c2076f35e88e53991f8dcd2a48b8f8da45a1"
+          "sha256": "0abe093a060ff2271fa3d18241796afd275d362bb51c7d7729757d8892b04e10"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ec70a488d5ca2b2d86c69a1c9b974f8a2e89208b26ab6e492d0dd9ae9a040fe7"
+        "sha256": "820c52180bcb8de41840972395ced2f980e0a2ab36bcc815897a0a93392443b7"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.4965722547199647,
-      "description": "Explore Camilla in 3D with its published shape model and radial elevation.",
+      "description": "Dark asteroid in the outer main belt with 2 known moons, discovered in November 1868.",
       "systemName": "Solar System",
       "order": 170,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "b8e4b4482703780945aa9d9d370fe963e1454b94af3db4940e224902e69a9eb1"
+    "sha256": "a445d697f017985ce3237b24a13befe20a03958bc787db95cfb2852488f0286c"
   }
 }

@@ -4,7 +4,6 @@
   "id": "comet-c2023-a3",
   "displayName": "Tsuchinshan–ATLAS",
   "panel": {
-    "introduction": "Tsuchinshan–ATLAS became a bright evening comet in October 2024. Its tail stretched across SOHO’s field of view as it passed near the Sun.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "C/2023 A3 Tsuchinshan–ATLAS",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-c2023-a3/comet-c2023-a3-model-thumbnail.webp",
         "surface": "comet-c2023-a3-model-surface@2x.webp",
         "poles": "comet-c2023-a3-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "0.391 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

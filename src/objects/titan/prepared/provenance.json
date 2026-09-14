@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a8d6da769c1334d7ac47d86dbfa4a62aa8493a280453a78953de4afac4b3520"
+    "sha256": "d52406baaea474841d24d5a2b6fdf4493febc21b983ec534cd65632d7acb1726"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -447,7 +447,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fc03cf7c708181b9b3d29b199160edc74232bfe1bff00d22651c25b701f73a53",
+      "sha256": "5f3b5fa5532549b0c937f17d1a360d2f4339b74801af247f427aaad7cd65bcd4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -471,7 +471,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Saturn’s largest moon hides beneath thick haze. Methane rain feeds its rivers and lakes, while dark dunes cover the equator.",
           "facts": [
             {
               "id": "radius",
@@ -543,8 +542,6 @@
             {
               "id": "normal",
               "label": "Near-infrared",
-              "description": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
-              "title": "Controlled infrared mosaic",
               "thumbnail": "titan-lens-normal.webp",
               "surface": "titan-normal.webp",
               "poles": "titan-poles-normal.webp",
@@ -552,13 +549,12 @@
                 "id": "usgs-cassini-iss-2026-938nm",
                 "path": "../manifest.json"
               },
-              "summary": "Surface features show through the haze, along with clouds and seams. Detail varies; the gray grid marks missing observations."
+              "notes": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
+              "noData": true
             },
             {
               "id": "radar",
               "label": "Radar",
-              "description": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
-              "title": "RADAR global mosaic through T126",
               "thumbnail": "titan-lens-radar.webp",
               "surface": "titan-radar.webp",
               "poles": "titan-poles-radar.webp",
@@ -566,13 +562,12 @@
                 "id": "cassini-radar-midr",
                 "path": "../manifest.json"
               },
-              "summary": "Brightness shows radar backscatter rather than elevation or visible color. The gray grid marks areas without measurements."
+              "notes": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
+              "noData": true
             },
             {
               "id": "topography",
               "label": "Measured height",
-              "description": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
-              "title": "GTDR measured heights",
               "thumbnail": "titan-lens-topography.webp",
               "surface": "titan-topography.webp",
               "poles": "titan-poles-topography.webp",
@@ -624,13 +619,13 @@
                     "+2500"
                   ]
                 }
-              }
+              },
+              "notes": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+              "noData": true
             },
             {
               "id": "interpolated",
               "label": "Interpolated height",
-              "description": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
-              "title": "GTDR interpolated topography",
               "thumbnail": "titan-lens-interpolated.webp",
               "surface": "titan-interpolated.webp",
               "poles": "titan-poles-interpolated.webp",
@@ -682,13 +677,12 @@
                     "+2500"
                   ]
                 }
-              }
+              },
+              "notes": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere."
             },
             {
               "id": "coverage-distance",
               "label": "Distance to data",
-              "description": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
-              "title": "GTDR distance to measurements",
               "thumbnail": "titan-lens-coverage-distance.webp",
               "surface": "titan-coverage-distance.webp",
               "poles": "titan-poles-coverage-distance.webp",
@@ -740,14 +734,12 @@
                     "1000"
                   ]
                 }
-              }
+              },
+              "notes": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero."
             },
             {
               "id": "geology",
               "label": "Geology",
-              "description": "Six interpreted terrain classes from Cassini radar and infrared mapping: plains, dunes, hummocky terrain, lakes and basins, labyrinth terrain, and craters. Dataset correlations extend the interpretation beyond direct radar coverage. Colors identify terrains; they do not show visible color, liquid depth or age. Gray grid preserves small gaps and conflicting polygons.",
-              "summary": "Explore Titan’s dunes, plains, highlands and lake basins in the global Cassini interpretation.",
-              "title": "Cassini global geomorphology · Lopes et al. (2020)",
               "thumbnail": "titan-lens-geology.webp",
               "surface": "titan-geology.webp",
               "poles": "titan-poles-geology.webp",
@@ -756,7 +748,6 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.17632/f6jrtyfp66.2"
               },
-              "detail": "Mapped terrains",
               "falseColor": true,
               "legend": {
                 "kind": "categories",
@@ -794,7 +785,9 @@
                   }
                 ],
                 "sourceUrl": "https://doi.org/10.17632/f6jrtyfp66.2"
-              }
+              },
+              "notes": "Six interpreted terrain classes from Cassini radar and infrared mapping: plains, dunes, hummocky terrain, lakes and basins, labyrinth terrain, and craters. Dataset correlations extend the interpretation beyond direct radar coverage. Colors identify terrains; they do not show visible color, liquid depth or age. Gray grid preserves small gaps and conflicting polygons.",
+              "noData": true
             }
           ],
           "labels": {
@@ -1514,10 +1507,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "fc03cf7c708181b9b3d29b199160edc74232bfe1bff00d22651c25b701f73a53",
-      "bytes": 16133,
+      "sha256": "5f3b5fa5532549b0c937f17d1a360d2f4339b74801af247f427aaad7cd65bcd4",
+      "bytes": 15281,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1657,9 +1650,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1714,9 +1705,7 @@
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization."
-      ],
+      "limitations": [],
       "lensIds": [
         "radar"
       ],
@@ -1770,9 +1759,7 @@
       "selector": "/surfaces/2",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere."
-      ],
+      "limitations": [],
       "lensIds": [
         "topography"
       ],
@@ -1827,9 +1814,7 @@
       "selector": "/surfaces/3",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere."
-      ],
+      "limitations": [],
       "lensIds": [
         "interpolated"
       ],
@@ -1884,9 +1869,7 @@
       "selector": "/surfaces/4",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero."
-      ],
+      "limitations": [],
       "lensIds": [
         "coverage-distance"
       ],
@@ -1941,9 +1924,7 @@
       "selector": "/surfaces/5",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Six interpreted terrain classes from Cassini radar and infrared mapping: plains, dunes, hummocky terrain, lakes and basins, labyrinth terrain, and craters. Dataset correlations extend the interpretation beyond direct radar coverage. Colors identify terrains; they do not show visible color, liquid depth or age. Gray grid preserves small gaps and conflicting polygons."
-      ],
+      "limitations": [],
       "lensIds": [
         "geology"
       ],
@@ -2412,7 +2393,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -2424,8 +2405,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5716,
-          "sha256": "74e7ea798cc5aa8307b7940751ade3e680370a5edae6c8024e7f4367bc3b2027",
+          "bytes": 5572,
+          "sha256": "f3f9cd5be8a54b274f3015be4da2d7cc2e3bba35e5e89a72c3c9a9545d6010d0",
           "verification": "bytes-verified"
         }
       ],

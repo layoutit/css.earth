@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "io",
+  "entries": [
+    {
+      "id": "voyager-galileo-monochrome",
+      "subject": "USGS Voyager/Galileo 1 km monochrome mosaic",
+      "status": "included",
+      "finding": "The selected GeoTIFF supplies Monochrome; published controlled and Lunar-Lambert-corrected values retain variable detail, seams and shadows.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "voyager-galileo-enhanced-color",
+      "subject": "USGS Voyager/Galileo 1 km false-color mosaic",
+      "status": "included",
+      "finding": "The selected false-color GeoTIFF supplies Enhanced color; it combines Galileo ratios and Voyager/Galileo detail and is not a single-date natural-color observation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_false_color_global_mosaic_1km"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "enhanced-color-polar-interpolation",
+      "subject": "Interpolated polar color in the USGS false-color mosaic",
+      "status": "excluded",
+      "finding": "USGS reports interpolated polar color; the recipe withholds color at latitude 85 degrees and higher rather than present fill as observation.",
+      "revisitWhen": "A product provides source-resolved polar color and a coverage mask.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_false_color_global_mosaic_1km"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "sim3168-geology",
+      "subject": "USGS SIM 3168 Io geologic polygons",
+      "status": "included",
+      "finding": "The selected polygon members supply the categorical Geology lens; no-data, unmapped poles and category conflicts remain missing, and colors are interpretive.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/source/manifest.json",
+        "https://pubs.usgs.gov/publication/sim3168"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "muse-spectral-slope",
+      "subject": "King et al. July 2019 VLT/MUSE 485 nm spectral-slope maps",
+      "status": "included",
+      "finding": "Pinned native maps supply Spectral slope under the package interpretation record; first-valid-night coverage and residual night differences remain explicit.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/source/manifest.json",
+        "https://doi.org/10.5281/zenodo.11402374"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "muse-visible-absorption",
+      "subject": "King et al. July 2019 VLT/MUSE 560 nm absorption maps",
+      "status": "included",
+      "finding": "Pinned native maps supply Visible absorption; the display does not turn the measured signal into composition abundance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/source/manifest.json",
+        "https://doi.org/10.5281/zenodo.11402374"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

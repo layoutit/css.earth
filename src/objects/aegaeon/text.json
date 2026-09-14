@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "aegaeon",
+  "card": {
+    "text": "Tiny moon inside a bright arc of Saturn's G ring.",
+    "sources": [
+      {
+        "catalogueId": "nasa-saturn-moons",
+        "url": "https://science.nasa.gov/saturn/moons/aegaeon/",
+        "label": "NASA Science · Saturn’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Debris knocked off Aegaeon feeds the arc, which spreads into the rest of the G ring. It is the least reflective of Saturn's moons inside Titan's orbit.",
+    "sources": [
+      {
+        "catalogueId": "nasa-saturn-moons",
+        "url": "https://science.nasa.gov/saturn/moons/aegaeon/",
+        "label": "NASA Science · Saturn’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Measured shape",
+      "summary": "A smooth ellipsoid matching Cassini's measured size; there are no surface images."
+    }
+  }
+}

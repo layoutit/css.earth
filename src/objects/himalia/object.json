@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3f6f9d4ea316aa9923e2dabf6b9e341bad0ab939d640e3f9bc86cc129b7f83e5"
+          "sha256": "6175e7afe46cb5dadef2c63f29c77108393d55c63b44348296c3be045b2929e9"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b6ba2c8c904a9aadc947e9db2edc9d5ece2f3ef0d9898f85dbe4fe2628de3bd6"
+        "sha256": "0a4ff9ab576a12e47c15a7a3b0e8dd9e2df32b8498e96cb93ce229be3b5d68b8"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 5.2,
-      "description": "Explore Himalia, a moon of Jupiter, through its source-backed size model.",
+      "description": "Jupiter's largest irregular moon, glimpsed by Cassini.",
       "systemName": "Solar System",
       "order": 85,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "c320bc85ef068cfd15a04097d4b8c5cdbb7d5d048c93b1ca96c6a9b6f3051422"
+    "sha256": "ac543ee293b1a77748a88e7815d8c3408eda9897ea22f909dcf331ae9f70dcb0"
   }
 }

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a2e275476e815d292e72ce23c88bac579531c6b37a33ca8e110bab184d3c0de6"
+          "sha256": "96c1a61fb983d95d304fa36151ffeb45e0337b3359865cf23618550f4eb5189b"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5114666f3cd6bac8ba2b5ab7cdeadf90c9852a367d8ce0f0788d969629818674"
+        "sha256": "851600f5f4f7be5c2e2b3ae9531af216a3124c028f4d8a906b3a19144153890f"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4333836727227824,
-      "description": "Explore Iphigenia in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in September 1870.",
       "systemName": "Solar System",
       "order": 264,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "7100fc0e88f99eb540daa6caed7e21e5c785d013c55a3a5eccd93849e65656eb"
+    "sha256": "576595eaf0a4bac75b464deed16ffb323f970fee3c1dbb434297760b4f04b414"
   }
 }

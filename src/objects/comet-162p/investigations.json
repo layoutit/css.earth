@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "comet-162p",
+  "entries": [
+    {
+      "id": "donaldson-physical-extents",
+      "subject": "Donaldson thesis physical extents and nominal pole",
+      "status": "included",
+      "finding": "Retained intake decision: Section 3.3.2, printed page 79 physical extents; Table 3.1 supplies axis ratios a/b=1.6 and b/c=2.2. A smooth ellipsoid uses these proportions; no original convex mesh or local terrain is claimed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-162p/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-162p/source/shape/model.json",
+        "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "seppcon-thermal-scale",
+      "subject": "SEPPCoN thermal radius as the display scale",
+      "status": "included",
+      "finding": "The adopted thermal radius is 7.03 km. Using it as a volume-equivalent display radius is an explicit scaling convention; it does not measure a volume or absolute axis lengths.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-162p/source/shape/model.json",
+        "https://doi.org/10.1016/j.icarus.2013.07.021"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "original-convex-mesh",
+      "subject": "Original light-curve inversion mesh",
+      "status": "unresolved",
+      "finding": "Retained intake decision: No public original mesh found in the thesis record or its conference abstract. The 162P paper makes the shape available on request. This package uses published numeric constraints only.",
+      "revisitWhen": "The author or an archive releases the original mesh with version, coordinate frame and reuse terms.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-162p/source/reference/source-record.json",
+        "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "alternative-model-1",
+      "subject": "Inertia-equivalent ellipsoid",
+      "status": "deferred",
+      "finding": "Retained intake decision: The 2023 paper reports inertia-equivalent axes. This scene consistently uses physical extents from the thesis, not a mix of both definitions.",
+      "revisitWhen": "New observations distinguish this alternative, or a comparison consistently uses its own axis definition and scale.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-162p/source/shape/model.json",
+        "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    }
+  ]
+}

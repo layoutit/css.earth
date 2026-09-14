@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "62c8f9435878ce824d6c106d8b9613cefbafd13c3cf436698a9e198931dfe9a6"
+          "sha256": "867a97a0f2f5bf12092b586d1368f19c142f86b6dbaa5ed67ce4dd98dfcec78d"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "65e42a59275226f65a7380c423f8a7541c794741531eeb5e918c3194d93a73d3"
+        "sha256": "b8214e49d1ab08f56a5718479c586b206b708a43d80280bc02c0c2d3ffa208d6"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1164528663194453,
-      "description": "Explore Medea in 3D with its published shape model and radial elevation.",
+      "description": "Very dark main-belt asteroid, discovered in February 1880.",
       "systemName": "Solar System",
       "order": 316,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "c62f4e4b28a908bf4df2698b9ed48469b293ef16c000ebcbc64ebe097fa23bc8"
+    "sha256": "00eb9f96e308486ca35d4cc6134b67478612523fcdf58201a5d07480acb8f5e5"
   }
 }

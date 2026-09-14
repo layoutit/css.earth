@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea1012ccc39b9d3bb484dcaea129f11c242e5b946f02f4656d014d75d37b01aa"
+    "sha256": "12e98a5ffdfcc355a34f35f4e0a6e3dfc61b0652009cb9b6470de995c580a95b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f43f3cfa2e4eea58cc8ff91698a392ad21c07567c50d6f6f95b75540e458e9d1",
+      "sha256": "db95f331df2fea4cdc32c3567dac553605f90883504337a6a04fe452e49e988d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,7 +173,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Thermal diameter 67.986 ± 1.091 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. Another thermal fit gives 82.2 km. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
-              "title": "Light-curve shape model",
               "thumbnail": "/scenes/rusthawelia/rusthawelia-shape-thumbnail.webp",
               "surface": "rusthawelia-shape-surface@2x.webp",
               "poles": "rusthawelia-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Thermal diameter 67.986 ± 1.091 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. Another thermal fit gives 82.2 km. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 33.993 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/rusthawelia/rusthawelia-elevation-thumbnail.webp",
               "surface": "rusthawelia-elevation-surface@2x.webp",
               "poles": "rusthawelia-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3188",
                 "image": "/scenes/rusthawelia/rusthawelia-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 33.993 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -370,10 +366,10 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "f43f3cfa2e4eea58cc8ff91698a392ad21c07567c50d6f6f95b75540e458e9d1",
+      "sha256": "db95f331df2fea4cdc32c3567dac553605f90883504337a6a04fe452e49e988d",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -382,7 +378,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11692,
+      "bytes": 11345,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -397,9 +393,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 33.993 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -441,9 +435,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Thermal diameter 67.986 ± 1.091 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. Another thermal fit gives 82.2 km. This coarse convex model has uncertain shape and pole; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -478,7 +470,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -490,8 +482,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8711,
-          "sha256": "3607a3af3ae4011f03289d4eb16420b4d8f9f2174dfd4c43c2f59cc99d1ae31f",
+          "bytes": 8563,
+          "sha256": "3f9fc96e98486c78f2061350fbe84cc77090e7c532234aeeaeb8c162e7c74a23",
           "verification": "bytes-verified"
         }
       ],

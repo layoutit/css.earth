@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 Michael Bland / USGS, [High Resolution Voyager 2 Images of Neptune’s Moon
 Triton](https://doi.org/10.5066/P9MGH7FB), 2023 processing of 1989 Voyager images.
 We use the CLEAR-filter frames in `fully_processed.zip`, at their native

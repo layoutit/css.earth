@@ -4,7 +4,6 @@
   "id": "asteroid-2001-sn263",
   "displayName": "2001 SN263 Alpha",
   "panel": {
-    "introduction": "2001 SN263 Alpha is the primary of the triple asteroid system 2001 SN263. Published radar and light-curve shape of the primary. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. Rotational phase is illustrative. Heliocentric placement uses a retained JPL state. The shape is a radar reconstruction from 2008 observations.",
     "facts": [
       {
         "id": "parent",
@@ -60,9 +59,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "detail": "Radar",
-        "title": "Radar shape",
-        "description": "Published radar and light-curve shape of the primary. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. Rotational phase is illustrative.",
         "thumbnail": "/scenes/asteroid-2001-sn263/asteroid-2001-sn263-shape-thumbnail.webp",
         "surface": "asteroid-2001-sn263-shape-surface@2x.webp",
         "poles": "asteroid-2001-sn263-shape-poles@2x.webp",
@@ -70,7 +66,8 @@
           "id": "radar-shape",
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591alpha.tab"
-        }
+        },
+        "noData": true
       }
     ]
   },

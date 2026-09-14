@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Geographos is an elongated near-Earth asteroid reconstructed from Goldstone radar and optical light curves. Explore its original shape and radial heights. The grid marks unavailable surface imagery. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied.",
     "facts": [
       {
         "id": "radius",
@@ -53,8 +52,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "The shared grid marks unavailable surface imagery on this radar model. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
-        "title": "Radar shape model",
         "thumbnail": "/scenes/geographos/geographos-shape-thumbnail.webp",
         "surface": "geographos-shape-surface@2x.webp",
         "poles": "geographos-shape-surface@2x.webp",
@@ -63,14 +60,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape",
-        "summary": "Radar shape with north–south ambiguity. Local latitudes depend on the model; no surface imagery is mapped."
+        "notes": "The shared grid marks unavailable surface imagery on this radar model. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "False color shows radius at the nearest source-surface point minus a 1.284042 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 30 m is withheld. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied.",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/geographos/geographos-elevation-thumbnail.webp",
         "surface": "geographos-elevation-surface@2x.webp",
         "poles": "geographos-elevation-surface@2x.webp",
@@ -92,8 +87,7 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj",
           "image": "/scenes/geographos/geographos-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height",
-        "summary": "Radar height relative to a 1.284 km sphere. North–south ambiguity leaves heights and latitudes uncertain."
+        "notes": "False color shows radius at the nearest source-surface point minus a 1.284042 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 30 m is withheld. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied."
       }
     ]
   },

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "54ca301f85e183577f7b214759d2939a1efdce33dd82d509f42beb65c43a9dd2"
+          "sha256": "f7f98fb9f90932e6c709c2fd2808d77e76b7d1cfa5e4a6d35715f08bd235e664"
         },
         {
           "id": "title",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c4d4680e52ef4a500d502e6c914f29ef75e2f41ad36d6df6b082edf71b3d7dda"
+        "sha256": "55764b4840c4e510fc50f2936063c159da07567d5e5332d4883202c0da1c3fff"
       }
     },
     "worldFrame": {
@@ -118,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 4.942382761297321,
-      "description": "26P: Grigg–Skjellerup was Giotto’s second comet encounter. The spacecraft passed about 200 km from its nucleus in July 1992, six years after visiting Halley. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Comet that Giotto visited after Halley.",
       "systemName": "Solar System",
       "order": 53,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ea03adcf79a8008fdad875167f8c6ec584455c22dc486ad2a1edc2698c99e9f5"
+    "sha256": "a622ce1ca2efba76b4008e3ee0121dfdd174809ba60b794ebabb1f4e62e27dc7"
   }
 }

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5a80308dfba270cc515c60437f679ca1fd0b867d9d198b49f20d0ab7f515aea0"
+    "sha256": "a3d546e5280e9f1c4c8739f4b742ec72e75767187dc0a3a02367d96f4ebc1532"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bd6462fee2c9a19d0c884862b6a0e7f9f59f6b5a29aff4d1701b1a8ae28efa97",
+      "sha256": "b30acab924687a390907492616fc62e4e9638959c9a6a2401f632136d8bf9150",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +167,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Betulia is a near-Earth asteroid reconstructed from Arecibo radar and optical light curves. Explore its original shape and radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -199,8 +198,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Published radar shape model",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/betulia/betulia-shape-thumbnail.webp",
               "surface": "betulia-shape-surface@2x.webp",
               "poles": "betulia-shape-surface@2x.webp",
@@ -209,14 +206,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape from radar observations. The gray grid marks missing optical imagery; lighting shows the model."
+              "notes": "Published radar shape model",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/betulia/betulia-elevation-thumbnail.webp",
               "surface": "betulia-elevation-surface@2x.webp",
               "poles": "betulia-elevation-surface@2x.webp",
@@ -238,8 +233,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/betulia.obj",
                 "image": "/scenes/betulia/betulia-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -361,7 +355,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -370,8 +364,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bd6462fee2c9a19d0c884862b6a0e7f9f59f6b5a29aff4d1701b1a8ae28efa97",
-      "bytes": 8028,
+      "sha256": "b30acab924687a390907492616fc62e4e9638959c9a6a2401f632136d8bf9150",
+      "bytes": 7414,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -386,9 +380,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -430,9 +422,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Published radar shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -467,7 +457,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -479,8 +469,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5429,
-          "sha256": "47cb0e7e90ff735d8ae4c33ddc1a231b43a40416b106ea3f32125dccdc817ede",
+          "bytes": 5229,
+          "sha256": "2d375ff0bd92dac9fb4e3f7754f948882536c9a30880bcf1d372ed6b893be9b8",
           "verification": "bytes-verified"
         }
       ],

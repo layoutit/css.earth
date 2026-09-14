@@ -4,7 +4,6 @@
   "id": "hedda",
   "displayName": "Hedda",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 63.91 km effective diameter (catalog ±1 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "DAMIT 4799 shape model",
         "thumbnail": "/scenes/hedda/hedda-shape-thumbnail.webp",
         "surface": "hedda-shape-surface@2x.webp",
         "poles": "hedda-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 31.955 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 4799 radial height",
         "thumbnail": "/scenes/hedda/hedda-elevation-thumbnail.webp",
         "surface": "hedda-elevation-surface@2x.webp",
         "poles": "hedda-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4799",
           "image": "/scenes/hedda/hedda-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 31.955 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

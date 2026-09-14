@@ -1,0 +1,78 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "cordelia",
+  "entries": [
+    {
+      "id": "pds-voyager-iss-products",
+      "subject": "PDS Voyager ISS products",
+      "status": "deferred",
+      "finding": "The OPUS body-geometry inventory lists 3,871 candidates. The smallest indexed center scale is 10.00939 km/pixel (vg-iss-2-u-c2687151), but this frame reports no sampled surface intersection and has a center phase of about 151°. The center scale alone does not establish imaged surface coverage. The ten finest candidates were checked for intersection metadata; their disposition is pinned in survey/candidate-geometry.json. The first with sampled surface geometry is vg-iss-2-u-c2679525, at 21.38897 km/pixel, only about two independent samples across the modeled moon. Its original metadata is also pinned. No useful registered texture was qualified.",
+      "revisitWhen": "A Cordelia observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cordelia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cordelia/source/manifest.json",
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "published-voyager-hst-shape-analysis",
+      "subject": "Karkoschka (2001) adopted Voyager/HST shape",
+      "status": "included",
+      "finding": "Table IV of the HST study supplies the adopted prolate semiaxes 25 × 18 × 18 km. The repeated minor axis is a model assumption, not an independently measured third dimension. French et al. (2024), Table 3 reproduces the separate Voyager size paper’s projected-radius and axis-ratio uncertainties; they are not individual-axis errors. The selected analytic shape supplies no local relief or surface pixels.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cordelia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cordelia/source/manifest.json",
+        "https://doi.org/10.1006/icar.2001.6596",
+        "https://arxiv.org/abs/2401.04634",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cordelia/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "nasa-discovery-illustration",
+      "subject": "NASA discovery illustration",
+      "status": "excluded",
+      "finding": "Establishes the discovery and shepherd-moon context. Its distant, few-pixel image does not supply a global surface map. Excluded as a mapped texture.",
+      "revisitWhen": "A Cordelia observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cordelia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cordelia/source/manifest.json",
+        "https://science.nasa.gov/uranus/moons/cordelia/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "hst-photometry-ground-based-near-infrared-studies-an",
+      "subject": "HST photometry, ground-based near-infrared studies and mapped-product searches",
+      "status": "unresolved",
+      "finding": "Integrated flux and adopted sizes do not provide spatial color texels. No qualified registered color, elevation, geological or compositional map was located. The source survey establishes this bounded disposition, not the absence of all other observations.",
+      "revisitWhen": "A spatially resolved Cordelia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cordelia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/cordelia/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

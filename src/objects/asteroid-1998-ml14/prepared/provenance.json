@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7f053dcbb57428662fbd5dad5fd93ac73cbf3c3cc2c6735af4320c856005e69f"
+    "sha256": "602987109475f908836839ce1462bfbb3c43789dab341760fe75b3ad679b3cf0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -148,7 +148,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "12fb6d249c110ce694c19d4c0df195d30fb88e9fc1e45875d2be28398e26017b",
+      "sha256": "4ffe06c9db942f16b19bf11ea17ffca74b058f7d3e8ec6490a2c5fdc5729a151",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -172,7 +172,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "1998 ML14 is a roughly kilometer-wide near-Earth asteroid with a spheroidal radar-derived shape, a prominent bump and an indentation. Explore its published shape and source-derived radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -212,8 +211,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "The shared grid marks unavailable imagery over the historical 1998 radar reconstruction published in 2001. Its modeling period was later superseded, and no pole solution is attached to this archived mesh. Fixed arbitrary display axes and optional Shadows are illustrative, not a current rotational attitude.",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-shape-thumbnail.webp",
               "surface": "asteroid-1998-ml14-shape-surface@2x.webp",
               "poles": "asteroid-1998-ml14-shape-surface@2x.webp",
@@ -222,13 +219,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "notes": "The shared grid marks unavailable imagery over the historical 1998 radar reconstruction published in 2001. Its modeling period was later superseded, and no pole solution is attached to this archived mesh. Fixed arbitrary display axes and optional Shadows are illustrative, not a current rotational attitude.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows the original model radius minus a 0.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. This is a derived view of the historical 1998 radar model, not the later reconstruction announced from 2013 data. Lighting is illustrative. Cartographic relief is a prepared display treatment.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-elevation-thumbnail.webp",
               "surface": "asteroid-1998-ml14-elevation-surface@2x.webp",
               "poles": "asteroid-1998-ml14-elevation-surface@2x.webp",
@@ -250,7 +246,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/ml14.obj",
                 "image": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Color shows the original model radius minus a 0.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. This is a derived view of the historical 1998 radar model, not the later reconstruction announced from 2013 data. Lighting is illustrative. Cartographic relief is a prepared display treatment."
             }
           ]
         },
@@ -378,7 +374,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -387,8 +383,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "12fb6d249c110ce694c19d4c0df195d30fb88e9fc1e45875d2be28398e26017b",
-      "bytes": 10157,
+      "sha256": "4ffe06c9db942f16b19bf11ea17ffca74b058f7d3e8ec6490a2c5fdc5729a151",
+      "bytes": 9733,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -403,9 +399,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows the original model radius minus a 0.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. This is a derived view of the historical 1998 radar model, not the later reconstruction announced from 2013 data. Lighting is illustrative. Cartographic relief is a prepared display treatment."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -447,9 +441,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The shared grid marks unavailable imagery over the historical 1998 radar reconstruction published in 2001. Its modeling period was later superseded, and no pole solution is attached to this archived mesh. Fixed arbitrary display axes and optional Shadows are illustrative, not a current rotational attitude."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -484,7 +476,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -496,8 +488,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6894,
-          "sha256": "3576bdd0bd3b112b27b92a0b60b967e0f0df518aa16e1ca3070e1d6f8a585031",
+          "bytes": 6636,
+          "sha256": "0addf2d413ef653ca641f84f2892c0cf81fd033dd00dcc8096e9b7834d212d35",
           "verification": "bytes-verified"
         }
       ],

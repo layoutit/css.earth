@@ -1,0 +1,226 @@
+{
+  "status": "not-promoted",
+  "pipelineCommit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d",
+  "method": "Same source mesh, source frames and registered cameras. Fixed production level gains are tested at 48 barycentric points per display triangle, disjoint from the production fit samples. Each pair compares identical source points accepted by both treatments. Coverage uses the production area-weighted sampler and is separate from this overlap comparison.",
+  "limitations": [
+    "Diagnostic parameter trials, not qualified reproductions of the three original publications. The numerical parameters were checked in Li et al. 2013 Table 6; the original papers’ H-function approximation was not verified. These trials use the 1981 approximation.",
+    "A lower overlap error is not proof of more accurate albedo. Smooth source normals do not recover unresolved topography or remove coma.",
+    "Offline source-sampler snapshots were inspected; these trials were not integrated into the application. No screenshot is retained in this numerical record.",
+    "No runtime dataset is replaced. Original photographed shadows remain valid in the delivered views."
+  ],
+  "sourceUrls": [
+    "https://arxiv.org/abs/1310.4165",
+    "https://doi.org/10.1016/j.icarus.2012.11.001",
+    "https://www.lpi.usra.edu/meetings/acm2012/pdf/6385.pdf"
+  ],
+  "preparationSha256": "302776f3802e991ae11e64ae5f3032cbeff14411ea44a3f2b38cd7a4acb8e364",
+  "sourcePins": [
+    {
+      "path": "shape/hartley2_2012_plan.tab",
+      "expectedBytes": 1586079,
+      "expectedSha256": "0553bcaf1733d520efa30abf3832f6af6ba3c93b4d146fa373e8e81f03e21940"
+    },
+    {
+      "path": "photography/mri/mv10110413_6000001_001_r.fit",
+      "expectedBytes": 9512640,
+      "expectedSha256": "b08f4ce6206f6d96778cdaa444cf618a8366a0b27d310760d7f28bb50422781d"
+    },
+    {
+      "path": "photography/mri/mv10110413_6000001_001_r.lbl",
+      "expectedBytes": 32160,
+      "expectedSha256": "392a2ac50ce1dfd0e2200b745779b4c5980a927d99fb7c0485d12d72cfa8fa16"
+    },
+    {
+      "path": "photography/mri/mv10110413_6000001_001_r.json",
+      "expectedBytes": 14582,
+      "expectedSha256": "bf5fc034aa6130874592d90f68e7a9fec2af4aa310f57f1b1b5eb4ce2bbba1da"
+    },
+    {
+      "path": "photography/mri/mv10110413_6000002_001_r.fit",
+      "expectedBytes": 9512640,
+      "expectedSha256": "f97b508d325bce5d158a138c912d09bad7ebb97413569019b45b8601fe1c9271"
+    },
+    {
+      "path": "photography/mri/mv10110413_6000002_001_r.lbl",
+      "expectedBytes": 32160,
+      "expectedSha256": "587ffcde7d28737d773100c72bade2da1e1c4abc04f1fad471e20d7c9586d89e"
+    },
+    {
+      "path": "photography/mri/mv10110413_6000002_001_r.json",
+      "expectedBytes": 14618,
+      "expectedSha256": "bb438ff9ade24691d9810e89b0e4596f5253733e6c7883ca39cd87bef410d345"
+    },
+    {
+      "path": "photography/mri/mv10110414_6000003_001_r.fit",
+      "expectedBytes": 9512640,
+      "expectedSha256": "72c6dd3d9111eb4d2dfd26d136bf70190e313bc6f64297cc3dde935d28f5fa85"
+    },
+    {
+      "path": "photography/mri/mv10110414_6000003_001_r.lbl",
+      "expectedBytes": 32160,
+      "expectedSha256": "435ce9cef892b13b1c1aa77974c8687dfea73bf8fd3d8f2b2e2bc3473fd1a83d"
+    },
+    {
+      "path": "photography/mri/mv10110414_6000003_001_r.json",
+      "expectedBytes": 16613,
+      "expectedSha256": "e969bf8a39f0dfe7ab439bddc5f2b5544d877d87c0d35ec09ecdaf165adb18fb"
+    },
+    {
+      "path": "photography/hri/hv10110413_5004004_001_d050.fit",
+      "expectedBytes": 9501120,
+      "expectedSha256": "0c237b12aad0fa29e5427c2cc5c46bbf5b48059071912f278a731840cdbd07b3"
+    },
+    {
+      "path": "photography/hri/hv10110413_5004004_001_d050.lbl",
+      "expectedBytes": 28800,
+      "expectedSha256": "a25036b5c9254f2c6fc059c0b90a689889b772b5fc9c7d2dcbf8a66779c2dc23"
+    },
+    {
+      "path": "photography/hri/hv10110413_5004004_001_d050.json",
+      "expectedBytes": 12756,
+      "expectedSha256": "2f7da2da6c90bec0582475a86df202a4a662c037d3a9f2f9eeb986209cde2fbc"
+    },
+    {
+      "path": "photography/hri/hv10110413_5004008_001_d050.fit",
+      "expectedBytes": 9501120,
+      "expectedSha256": "eec139c05808fa441b327d2905c5fa9cef45fc917d56d33b8edffe04f797d36f"
+    },
+    {
+      "path": "photography/hri/hv10110413_5004008_001_d050.lbl",
+      "expectedBytes": 28800,
+      "expectedSha256": "13f7c30bb653698fd2cf6bb8275db5a56a73ff49a223e4ed6c8d83b18c9b9c60"
+    },
+    {
+      "path": "photography/hri/hv10110413_5004008_001_d050.json",
+      "expectedBytes": 11985,
+      "expectedSha256": "d37072d51aa81e01433b2e6331f71be129aa78cddd6bea8f8138382d7d1af6c2"
+    }
+  ],
+  "cases": [
+    {
+      "lens": "mri",
+      "model": "li-2013-hapke",
+      "beforeCoverage": 0.579755029318057,
+      "afterCoverage": 0.3199659978927957,
+      "improvedPairs": 8,
+      "pairCount": 10,
+      "pairs": [
+        {
+          "a": "mv10110413-6000001-001-r",
+          "b": "mv10110413-6000002-001-r",
+          "samples": 10364,
+          "before": 0.08389579226720874,
+          "after": 0.06349552797460126
+        },
+        {
+          "a": "mv10110413-6000001-001-r",
+          "b": "mv10110414-6000003-001-r",
+          "samples": 7936,
+          "before": 0.1167677194060021,
+          "after": 0.08719794741437042
+        },
+        {
+          "a": "mv10110413-6000001-001-r",
+          "b": "hv10110413-5004004-001-d050",
+          "samples": 8184,
+          "before": 0.10628834312163574,
+          "after": 0.11352509754804165
+        },
+        {
+          "a": "mv10110413-6000001-001-r",
+          "b": "hv10110413-5004008-001-d050",
+          "samples": 8511,
+          "before": 0.119762089711232,
+          "after": 0.12053308986357035
+        },
+        {
+          "a": "mv10110413-6000002-001-r",
+          "b": "mv10110414-6000003-001-r",
+          "samples": 9645,
+          "before": 0.08578599954484795,
+          "after": 0.07749365810810725
+        },
+        {
+          "a": "mv10110413-6000002-001-r",
+          "b": "hv10110413-5004004-001-d050",
+          "samples": 6086,
+          "before": 0.11794048035430861,
+          "after": 0.10077300720379016
+        },
+        {
+          "a": "mv10110413-6000002-001-r",
+          "b": "hv10110413-5004008-001-d050",
+          "samples": 6400,
+          "before": 0.12113095413180551,
+          "after": 0.10801594166279235
+        },
+        {
+          "a": "mv10110414-6000003-001-r",
+          "b": "hv10110413-5004004-001-d050",
+          "samples": 3674,
+          "before": 0.13457157251635898,
+          "after": 0.10737352691699759
+        },
+        {
+          "a": "mv10110414-6000003-001-r",
+          "b": "hv10110413-5004008-001-d050",
+          "samples": 3979,
+          "before": 0.1356812647848801,
+          "after": 0.11198235584104077
+        },
+        {
+          "a": "hv10110413-5004004-001-d050",
+          "b": "hv10110413-5004008-001-d050",
+          "samples": 9023,
+          "before": 0.08237414396003595,
+          "after": 0.08229740573524158
+        }
+      ],
+      "parameters": {
+        "schema": "cssearth-photometric-model@1",
+        "id": "li-2013-hapke",
+        "instrument": "EPOXI MRI and HRI",
+        "filter": "Clear filter; effective wavelength 625 nm in Li et al. (2013) Table 6",
+        "quantity": "radiance-factor",
+        "model": {
+          "family": "hapke",
+          "singleScatteringAlbedo": 0.036,
+          "hFunction": "hapke-1981",
+          "phaseFunction": {
+            "form": "henyey-greenstein",
+            "asymmetry": -0.46
+          },
+          "shadowHiding": {
+            "amplitude": 1,
+            "width": 0.01
+          },
+          "roughnessDegrees": 15
+        },
+        "fit": {
+          "phaseDegrees": [
+            79,
+            93
+          ]
+        }
+      },
+      "reference": {
+        "model": "photometry/li-2013-hapke.json",
+        "referenceDegrees": {
+          "incidence": 45,
+          "emission": 40,
+          "phase": 85
+        },
+        "limits": {
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 75,
+          "phaseDegrees": [
+            79,
+            93
+          ],
+          "minimumGain": 0.2,
+          "maximumGain": 5
+        }
+      }
+    }
+  ]
+}

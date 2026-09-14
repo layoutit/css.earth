@@ -62,7 +62,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3b70231bb876c41bbe5b6eec127c031a8a94055b30d31b99810a658d1a50fb79"
+          "sha256": "d5ac1cd85afb70b1dde6d59b9405a8e18e893627c6db59df44528d413fee9d08"
         },
         {
           "id": "title",
@@ -123,7 +123,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a159482c18c2c9c7da759309533385d9438a5d66aacc3b628b80c930a0ecb575"
+        "sha256": "9dc5a25459351e8dc3c0ce55207305e4478ca858301dec69c6b7b7b6cc09d3c2"
       }
     },
     "catalog": {
@@ -131,7 +131,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3839407716914627,
-      "description": "Explore Donaldjohanson in 3D with its published Lucy shape model.",
+      "description": "Contact-binary asteroid that Lucy flew past.",
       "systemName": "Solar System",
       "order": 203,
       "context": {
@@ -144,6 +144,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "0fc1a36effc53be69cbe28020dae907f6a6670d28663d3e3211aec0befc097ca"
+    "sha256": "8896e58ebc3bc43e6b1cbf4d4fb8f1bce45e41584b6abaaa86f843cf1494ed16"
   }
 }

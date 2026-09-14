@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Rosetta photographed Lutetia in 2010. Craters and ridges cover this irregular, roughly 100 km asteroid.",
     "facts": [
       {
         "id": "radius",
@@ -67,9 +66,6 @@
       {
         "id": "osiris",
         "label": "OSIRIS",
-        "detail": "OSIRIS",
-        "description": "Three Rosetta close-ups show Lutetia’s craters and ridges during the 2010 flyby, at 68–88 metres per pixel. Brightness is normalized with a published photometric model; shadows and seams remain. The grid marks areas without usable photographs.",
-        "title": "OSIRIS photographs",
         "thumbnail": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
         "surface": "lutetia-osiris-surface@2x.webp",
         "poles": "lutetia-osiris-surface@2x.webp",
@@ -77,7 +73,6 @@
           "id": "lutetia-observations-n20100710t154047674id4df22-img",
           "path": "../manifest.json"
         },
-        "summary": "Three Rosetta close-ups show Lutetia’s craters and ridges during the 2010 flyby, at 68–88 metres per pixel. Brightness is normalized with a published photometric model; shadows and seams remain. The grid marks areas without usable photographs.",
         "facts": [
           {
             "id": "images",
@@ -89,13 +84,13 @@
             "label": "Image scale",
             "value": "68–88 m/pixel"
           }
-        ]
+        ],
+        "notes": "Three Rosetta close-ups show Lutetia’s craters and ridges during the 2010 flyby, at 68–88 metres per pixel. Brightness is normalized with a published photometric model; shadows and seams remain. The grid marks areas without usable photographs.",
+        "noData": true
       },
       {
         "id": "shape",
         "label": "Shape",
-        "description": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
-        "title": "OSIRIS shape reconstruction",
         "thumbnail": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
         "surface": "lutetia-shape-surface@2x.webp",
         "poles": "lutetia-shape-surface@2x.webp",
@@ -104,14 +99,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "PDS",
-        "summary": "Rosetta shape detail in the north, coarser estimates elsewhere. Source seams remain; no imagery is mapped."
+        "notes": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments.",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
         "surface": "lutetia-elevation-surface@2x.webp",
         "poles": "lutetia-elevation-surface@2x.webp",
@@ -133,8 +126,7 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.lbl",
           "image": "/scenes/lutetia/lutetia-elevation-legend.webp"
         },
-        "detail": "PDS",
-        "summary": "Height relative to a 49 km sphere. Rosetta resolved the north; the far side is coarser, with source defects."
+        "notes": "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments."
       }
     ]
   },

@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "iris",
+  "card": {
+    "text": "Stony main-belt asteroid, discovered in August 1847.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Iris",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1847-08-13 by Hind, J. R. at London; albedo: 0.2766; orbit class: Main-belt Asteroid; spec_B: S; spec_T: S"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "J. R. Hind found Iris at London in 1847. Its bright surface reflects about 28% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Iris",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1847-08-13 by Hind, J. R. at London; albedo: 0.2766; orbit class: Main-belt Asteroid; spec_B: S; spec_T: S"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "SPHERE shape reconstruction",
+      "detail": "Published shape",
+      "summary": "Fitted to sharp images of the whole disc and to light curves, so large hollows can show."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a reference sphere. Colors mix the overall shape with local relief."
+    }
+  }
+}

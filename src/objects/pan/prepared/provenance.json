@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "974fa6e7b554bb63fd3746a43627d10ce7ae397cbc29c2257e649ec6fd520939"
+    "sha256": "0b617f1d38f0bbef911c9da9b18bddda3e985ec55a2d2cc53850c53ca7d694fa"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -422,14 +422,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "be6cd9f81e643bae33d3e7f11dbab79b6e0ca4fcea07129c6b20c6a48baa74dc",
+      "sha256": "22b8cc1e8f76c2ddf2258724fcf253cfadf4836b8161c72f5caf83e6fa30dcdc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "pan",
         "displayName": "Pan",
         "panel": {
-          "introduction": "Pan orbits inside the Encke Gap of Saturn’s A ring. Its gravity helps keep the gap open. Cassini revealed a small icy body surrounded by a broad equatorial ridge.",
           "facts": [
             {
               "id": "radius",
@@ -487,9 +486,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
-              "title": "ISS mosaic",
-              "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/pan/pan-normal-thumbnail.webp",
               "surface": "pan-normal-surface@2x.webp",
               "poles": "pan-normal-poles@2x.webp",
@@ -498,14 +494,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/access.html"
               },
-              "summary": "Photographs are mapped onto the measured shape. Shadows and unreliable samples are withheld; the gray grid marks gaps."
+              "notes": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
+              "noData": true
             },
             {
               "id": "filter-color",
               "label": "False color",
-              "description": "Cassini IR1, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
-              "title": "Cassini false color",
-              "detail": "Cassini",
               "thumbnail": "/scenes/pan/pan-filter-color-thumbnail.webp",
               "surface": "pan-filter-color-surface@2x.webp",
               "poles": "pan-filter-color-surface@2x.webp",
@@ -514,14 +508,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
+              "notes": "Cassini IR1, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radial height above a 14 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region.",
-              "title": "Shape-derived radial height",
-              "detail": "Shaded relief",
               "thumbnail": "/scenes/pan/pan-elevation-thumbnail.webp",
               "surface": "pan-elevation-surface@2x.webp",
               "poles": "pan-elevation-poles@2x.webp",
@@ -544,7 +536,7 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
                 "image": "/scenes/pan/pan-elevation-legend.webp"
               },
-              "summary": "Height relative to a 14 km sphere, from the Cassini shape model. Accuracy varies by region."
+              "notes": "Radial height above a 14 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region."
             }
           ]
         },
@@ -1737,7 +1729,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1746,8 +1738,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "be6cd9f81e643bae33d3e7f11dbab79b6e0ca4fcea07129c6b20c6a48baa74dc",
-      "bytes": 6015,
+      "sha256": "22b8cc1e8f76c2ddf2258724fcf253cfadf4836b8161c72f5caf83e6fa30dcdc",
+      "bytes": 5184,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1762,9 +1754,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radial height above a 14 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1806,9 +1796,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1860,9 +1848,7 @@
       "selector": "/raster/surfaceObservations/1",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini IR1, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only."
-      ],
+      "limitations": [],
       "lensIds": [
         "filter-color"
       ],
@@ -1903,7 +1889,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1915,8 +1901,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4174,
-          "sha256": "f0ed727ae7cef2fafd39f204cde1fc7a3e4f24efe99c62b991e9850b0857c86b",
+          "bytes": 3992,
+          "sha256": "bea064b3b2058b414f294524668d2d39ec6d8e201c9e9f43304de59220492c38",
           "verification": "bytes-verified"
         }
       ],

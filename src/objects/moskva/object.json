@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "371671810582278643007e7e7eb2c6028a7a7046f11bcae4707ebc3eb4d748f9"
+          "sha256": "05504543c8231b56bacb9203195ad5a94ea64953c874f73605304d44ce1ddf87"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e0b793fe5bdb953d63561a8622ddeee9564d283e1790240cf9809bc6d3d399d3"
+        "sha256": "5a73bd723f584b23319a2563b774fb8f4a25484297c627b8c2d0e0711401388e"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5406685045126993,
-      "description": "Explore Moskva in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in April 1914.",
       "systemName": "Solar System",
       "order": 395,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2ec548b61d560090fcc32611404634268c22d7fbd6c9265e9344ce64cf4fdf63"
+    "sha256": "87293931d9efe475ba642f6b5a93ede1762c00d179f3b07fb7e434ee4bf941e0"
   }
 }

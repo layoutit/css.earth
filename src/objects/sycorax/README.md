@@ -4,6 +4,8 @@ Sycorax is an outer moon of Uranus with measured rotational variability and ther
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 Approximate minimum-elongation ellipsoid using K2 variability and a 157 (+23/−15) km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.
 
 - [Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer](https://arxiv.org/pdf/1706.06837)
@@ -37,8 +39,7 @@ Thermophysical D=157 +23/-15 km, not the separate NEATM165±13 km solution.
 
 The [validation records](source/validation) identify the parent-relative state and any fit interval. The display uses meridian zero.
 
-**Survey and sources**
+## Investigation ledger
 
-Other candidates and rejected sources are recorded in [the source review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json) and [preparation inputs](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b1-preparation/outer-inputs.json).
-
+The source-survey dispositions and evidence are recorded in the [investigation ledger](investigations.json).
 </details>

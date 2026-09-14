@@ -2109,8 +2109,8 @@
     {
       "id": "europa-object-content",
       "path": "content/object.json",
-      "expectedBytes": 16298,
-      "expectedSha256": "95869f5400c626c6d3302c9466003ede4b3b6eba525f87d6de0e56e516814c81",
+      "expectedBytes": 15477,
+      "expectedSha256": "4d2167638813433949ae30191514e7fd5dcdc9d0a8b156d00a2c9ad45788b484",
       "origin": "Repository-authored Europa object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2122,7 +2122,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     }
   ],

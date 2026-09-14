@@ -4,7 +4,6 @@
   "id": "miranda",
   "displayName": "Miranda",
   "panel": {
-    "introduction": "Miranda is Uranus’s smallest major moon. Voyager 2 revealed huge fault scarps and three striking regions of ridges and grooves called coronae.",
     "facts": [
       {
         "id": "radius",
@@ -81,9 +80,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations.",
-        "title": "Monochrome mosaic",
-        "detail": "Corrected mosaic",
         "thumbnail": "miranda-lens-normal.webp",
         "surface": "miranda-normal.webp",
         "poles": "miranda-poles-normal.webp",
@@ -92,14 +88,12 @@
           "path": "../manifest.json",
           "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
         },
-        "summary": "Illumination is corrected, but cast shadows and image seams remain. Detail varies; the gray grid marks missing observations."
+        "notes": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
-        "title": "Stereo and shading terrain model",
-        "detail": "Shaded relief",
         "thumbnail": "miranda-lens-elevation.webp",
         "surface": "miranda-elevation.webp",
         "poles": "miranda-poles-elevation.webp",
@@ -143,15 +137,12 @@
             ]
           }
         },
-        "summary": "Height from stereo images and shading, relative to the source ellipsoid. Detail varies; gray grid: no measurements."
+        "notes": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
+        "noData": true
       },
       {
         "id": "geology",
         "label": "Geology",
-        "detail": "Historical map",
-        "description": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
-        "title": "Geologic map",
-        "summary": "Historical interpreted units; degree-scale registration limits. Gray grid: unmapped or conflicting units.",
         "thumbnail": "miranda-lens-geology.webp",
         "surface": "miranda-geology.webp",
         "poles": "miranda-poles-geology.webp",
@@ -275,7 +266,9 @@
               "color": "#ffff00"
             }
           ]
-        }
+        },
+        "notes": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+        "noData": true
       }
     ]
   },

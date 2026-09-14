@@ -29,7 +29,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0ce5495fa7995818a8c3b27514b397a15cdccf86b153d2e3afe8f4d3e7c98243"
+          "sha256": "10a4b76d7c39032187256c5bcfeae8bd779364db61a8a7f35ea905483cd32064"
         },
         {
           "id": "title",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "340ce697de6f26b02eaa4db77394d0871c4f80a24755260ffbcc5ab3c845028b"
+        "sha256": "70186c555e802af337892213c2c4cf9ef11afc26effba301b0b3298e24130370"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#b39a85",
       "distanceAu": 5.2,
-      "description": "Explore Amalthea with Galileo imagery and its source-backed irregular shape.",
+      "description": "The reddest object in the solar system, an inner moon of Jupiter.",
       "systemName": "Solar System",
       "order": 102,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "02afd375f15d894f368d03aba9aa0434ab0a18a1cd2d8bed94ad8b5805d92fda"
+    "sha256": "b3cd1f72c1b3b88f5a7983373902632368e109531f09c33c4de32e1b8f5e43ea"
   }
 }

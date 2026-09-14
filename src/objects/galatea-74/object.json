@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e3d361705da66a7934cdf2671cbee4f1b08c3ff04b05ba2e1450bc2de7e10cb4"
+          "sha256": "d05bf2805919a2e79a9e342dafbcc2854551e9fc37a4e9447c880b807a04f8eb"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "203b4b43d2b2a611457e4aa0a49b4065fe7a899c2ea8a38fdf8a2955391f8fd9"
+        "sha256": "1a320c1db506a7f1cac85199a72a2241f683be145e33b56d0ffbb48e4a29c515"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.780620996918218,
-      "description": "Explore 74 Galatea in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in August 1862.",
       "systemName": "Solar System",
       "order": 244,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d4a40f8e785ddb6cf3cd1fd4c7ac201229ca784efac7e7f521552fbcac339b71"
+    "sha256": "e46dc657c349204f839b323498a18ad5400c61d45f2aa8da45c345864e7e9263"
   }
 }

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "69e35ff2d40fc18409fe331272bb9e75544df64b8b92466409b3e288b56c6089"
+    "sha256": "c62d016df4e9edd0259a7cd8a5fee0d310c94aec355249cdc4a1622b53ff2689"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -97,7 +97,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c241a9187643b00a8530d30b509ac5dd67067b1fc089131ecb1fddd0caa8ed7a",
+      "sha256": "4bb942375cb753e010be227203a2497852dea366dfe9928e5ce56b4887e336e1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,7 +121,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Mars is a cold, dusty desert world with a thin atmosphere, polar ice caps, extinct volcanoes, deep canyons, seasons, and weather.",
           "facts": [
             {
               "id": "distance-from-sun",
@@ -240,8 +239,6 @@
             {
               "id": "normal",
               "label": "Visible color",
-              "description": "USGS Viking MDIM 2.1 global mosaic, colorized with NASA Ames processing. Source sampling is about 1 km; resolution and photographed lighting vary. This assembled historical map does not depict the scene date.",
-              "title": "MDIM 2.1 colorized global mosaic",
               "thumbnail": "mars-lens-normal.webp",
               "surface": "mars-surface-normal.webp",
               "poles": "mars-poles-normal.webp",
@@ -249,18 +246,15 @@
                 "id": "normal",
                 "path": "../manifest.json"
               },
-              "detail": "Global mosaic",
-              "summary": "Surface detail comes from Viking images with NASA Ames color. Lighting and resolution vary; these are archival observations.",
               "material": "mars-material.webp",
               "shortLabel": "RGB",
               "falseColor": false,
-              "qualification": "USGS Viking MDIM 2.1 colorized global mosaic"
+              "qualification": "USGS Viking MDIM 2.1 colorized global mosaic",
+              "notes": "USGS Viking MDIM 2.1 global mosaic, colorized with NASA Ames processing. Source sampling is about 1 km; resolution and photographed lighting vary. This assembled historical map does not depict the scene date."
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Mars Global Surveyor MOLA topography shown with the source pseudo-color shaded-relief palette. Colors indicate relative elevation, with cartographic shading; this is a prepared global display mosaic, not a current photograph or numeric height readout.",
-              "title": "MOLA global color shaded relief",
               "thumbnail": "mars-lens-elevation.webp",
               "surface": "mars-surface-elevation.webp",
               "poles": "mars-poles-elevation.webp",
@@ -320,18 +314,15 @@
                 "id": "elevation",
                 "path": "../manifest.json"
               },
-              "detail": "Shaded relief",
-              "summary": "Colors describe terrain height and shading reveals slopes. This published relief image does not provide a numeric readout.",
               "material": "mars-observation-material.webp",
               "shortLabel": "MOLA",
               "falseColor": true,
-              "qualification": "USGS MOLA elevation shown with the source pseudo-color shaded-relief palette"
+              "qualification": "USGS MOLA elevation shown with the source pseudo-color shaded-relief palette",
+              "notes": "Mars Global Surveyor MOLA topography shown with the source pseudo-color shaded-relief palette. Colors indicate relative elevation, with cartographic shading; this is a prepared global display mosaic, not a current photograph or numeric height readout."
             },
             {
               "id": "thermal",
               "label": "Thermal infrared",
-              "description": "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Black areas at the north and south map edges are exact-zero source fill without observations; dark interior samples are real. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date.",
-              "title": "THEMIS daytime infrared mosaic",
               "thumbnail": "mars-lens-thermal.webp",
               "surface": "mars-surface-thermal.webp",
               "poles": "mars-poles-thermal.webp",
@@ -339,12 +330,11 @@
                 "id": "thermal",
                 "path": "../manifest.json"
               },
-              "detail": "Infrared",
-              "summary": "Brightness records daytime infrared intensity from combined observations. Black bands at the map edges are missing source coverage, not measurements.",
               "material": "mars-observation-material.webp",
               "shortLabel": "IR",
               "falseColor": false,
-              "qualification": "USGS/ASU THEMIS daytime infrared brightness mosaic; exact-zero source fill at the map edges stays black. No visible-light substitute; not a calibrated temperature retrieval."
+              "qualification": "USGS/ASU THEMIS daytime infrared brightness mosaic; exact-zero source fill at the map edges stays black. No visible-light substitute; not a calibrated temperature retrieval.",
+              "notes": "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Black areas at the north and south map edges are exact-zero source fill without observations; dark interior samples are real. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date."
             }
           ]
         },
@@ -883,10 +873,10 @@
       "redistribution": "Prepared shell content with source provenance.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "c241a9187643b00a8530d30b509ac5dd67067b1fc089131ecb1fddd0caa8ed7a",
-      "bytes": 15140,
+      "sha256": "4bb942375cb753e010be227203a2497852dea366dfe9928e5ce56b4887e336e1",
+      "bytes": 14249,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1177,8 +1167,7 @@
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
-        "USGS Viking MDIM 2.1 colorized global mosaic",
-        "USGS Viking MDIM 2.1 global mosaic, colorized with NASA Ames processing. Source sampling is about 1 km; resolution and photographed lighting vary. This assembled historical map does not depict the scene date."
+        "USGS Viking MDIM 2.1 colorized global mosaic"
       ],
       "lensIds": [
         "normal"
@@ -1235,8 +1224,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "USGS MOLA elevation shown with the source pseudo-color shaded-relief palette",
-        "Mars Global Surveyor MOLA topography shown with the source pseudo-color shaded-relief palette. Colors indicate relative elevation, with cartographic shading; this is a prepared global display mosaic, not a current photograph or numeric height readout."
+        "USGS MOLA elevation shown with the source pseudo-color shaded-relief palette"
       ],
       "lensIds": [
         "elevation"
@@ -1292,8 +1280,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "USGS/ASU THEMIS daytime infrared brightness mosaic; exact-zero source fill at the map edges stays black. No visible-light substitute; not a calibrated temperature retrieval.",
-        "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Black areas at the north and south map edges are exact-zero source fill without observations; dark interior samples are real. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date."
+        "USGS/ASU THEMIS daytime infrared brightness mosaic; exact-zero source fill at the map edges stays black. No visible-light substitute; not a calibrated temperature retrieval."
       ],
       "lensIds": [
         "thermal"
@@ -1402,7 +1389,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1414,8 +1401,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9414,
-          "sha256": "0e6b6ab5e678dae656e90d089852e5b96f08e1cde278fd58d874cdf85ddf856d",
+          "bytes": 9267,
+          "sha256": "093e641cd49fd0ddbc1b05d4c7633c76b50764531af454bead3b8998921dbe41",
           "verification": "bytes-verified"
         }
       ],

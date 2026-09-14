@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "2002 CE26 Primary is the large spheroidal member of a near-Earth binary system, reconstructed from 2004 radar and optical light-curve data. Explore its published shape and source-derived radial heights. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -53,8 +52,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "The shared grid marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary.",
-        "title": "Radar shape model",
         "thumbnail": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-thumbnail.webp",
         "surface": "asteroid-2002-ce26-shape-surface@2x.webp",
         "poles": "asteroid-2002-ce26-shape-surface@2x.webp",
@@ -63,13 +60,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "notes": "The shared grid marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows the original model radius minus a 1.73 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. Only the primary is included; the north polar region is poorly constrained. Optional Sun lighting uses an approximate pole and arbitrary phase. Cartographic relief is a prepared display treatment.",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-thumbnail.webp",
         "surface": "asteroid-2002-ce26-elevation-surface@2x.webp",
         "poles": "asteroid-2002-ce26-elevation-surface@2x.webp",
@@ -91,7 +87,7 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/ce26.obj",
           "image": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Color shows the original model radius minus a 1.73 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. Only the primary is included; the north polar region is poorly constrained. Optional Sun lighting uses an approximate pole and arbitrary phase. Cartographic relief is a prepared display treatment."
       }
     ]
   },

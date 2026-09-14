@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - [Karkoschka (2001), *Comprehensive Photometry of the Rings and 16 Satellites of Uranus with the Hubble Space Telescope*](https://doi.org/10.1006/icar.2001.6596), Table IV, printed page 55, lists the major and minor radii as 78 × 63 km.
 
 - [French et al. (2024), Table 3, PDF page 10](https://arxiv.org/pdf/2401.04634) reproduces the original Voyager shape measurements and uncertainties: projected radius **sqrt(A B) = 70 ± 4 km**, and minor/major ratio **B/A = 0.8 ± 0.1**.
@@ -49,12 +51,7 @@ Surface, thumbnail, minimap and context portrait all use that interpretation. Sh
 
 Surveyed 2026-09-08, beyond the first press image:
 
-| Candidate | Disposition |
-| --- | --- |
-| [PDS Voyager ISS original and calibrated products](https://pds-rings.seti.org/voyager/iss/) | The OPUS surface-geometry inventory contains 3,422 observations. The finest indexed product is `vg-iss-2-u-c2675821`, about **35.93 km/pixel**, with a 5.76 s exposure and 5:1 scan mode. Portia spans only a few independent image samples. This supports the published size/elongation analysis, but not a useful resolved cartographic texture. Inventory and original metadata are pinned. No imagery is painted onto the model. |
-| Published Voyager/HST shape measurements | Included as the explicitly prolate Shape model described above. A detailed released vertex/facet model was not located in the checked PDS shape collections, NAIF releases or cited papers. No hobbyist mesh or image tracing substitutes for one. |
-| [2023 Keck near-infrared study](https://www.sciencedirect.com/science/article/pii/S0019103522004237) and HST photometry | Integrated brightness/reflectivity measurements, using adopted body sizes; they do not supply spatially resolved color pixels. Excluded as a surface color lens. |
-| USGS/PDS mapped products, elevation, geology and spectroscopy | No registered Portia surface, elevation or compositional map was located in the relevant archive and cited-release survey. Integrated spectral measurements are distinct from a mapped surface dataset. This is a bounded survey result, not a claim that no other observations exist. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 ## Preparation and restoration
 

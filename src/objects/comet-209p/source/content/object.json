@@ -4,17 +4,16 @@
   "id": "comet-209p",
   "displayName": "LINEAR",
   "panel": {
-    "introduction": "LINEAR releases very little gas for a comet of its size. Its close approach in 2014 let Arecibo measure the nucleus through the surrounding dust.",
     "facts": [
       {
         "id": "dimensions",
         "label": "Nucleus size",
-        "value": "\u22483.9 \u00d7 2.7 \u00d7 2.6 km"
+        "value": "≈3.9 × 2.7 × 2.6 km"
       },
       {
         "id": "rotation",
         "label": "Rotation period",
-        "value": "\u224810.9 hours"
+        "value": "≈10.9 hours"
       }
     ],
     "moreFacts": []
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Shape approximation",
-        "detail": "Arecibo",
-        "title": "Radar dimensions",
-        "description": "A smooth approximation of LINEAR\u2019s published radar dimensions. The measurements constrain its size, but do not supply a detailed surface model. The grid marks absent surface photographs; the orientation is illustrative.",
         "thumbnail": "/scenes/comet-209p/comet-209p-model-thumbnail.webp",
         "surface": "comet-209p-model-surface@2x.webp",
         "poles": "comet-209p-model-poles@2x.webp",
@@ -44,14 +40,16 @@
           {
             "id": "dimensions",
             "label": "Nucleus size",
-            "value": "\u22483.9 \u00d7 2.7 \u00d7 2.6 km"
+            "value": "≈3.9 × 2.7 × 2.6 km"
           },
           {
             "id": "rotation",
             "label": "Rotation period",
-            "value": "\u224810.9 hours"
+            "value": "≈10.9 hours"
           }
-        ]
+        ],
+        "notes": "A smooth approximation of LINEAR’s published radar dimensions. The measurements constrain its size, but do not supply a detailed surface model. The grid marks absent surface photographs; the orientation is illustrative.",
+        "noData": true
       }
     ]
   },

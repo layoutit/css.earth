@@ -4,7 +4,6 @@
   "id": "leucus",
   "displayName": "Leucus",
   "panel": {
-    "introduction": "Leucus is an elongated Jupiter Trojan with an unusually slow rotation. This ellipsoid approximates the dimensions of the published light-curve and occultation model; its irregular outline is unresolved here. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "shape",
@@ -39,9 +38,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. It does not reproduce the original irregular convex mesh or occultation silhouettes. Full approximation dimensions: 60.8 × 39.1 × 27.8 km. Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
-        "title": "Convex-model ellipsoid approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/leucus/leucus-model-thumbnail.webp",
         "surface": "leucus-model-surface@2x.webp",
         "poles": "leucus-model-poles@2x.webp",
@@ -49,7 +45,8 @@
           "id": "occultation-approximation",
           "path": "../manifest.json",
           "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf"
-        }
+        },
+        "noData": true
       }
     ]
   },

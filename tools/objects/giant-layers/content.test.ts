@@ -12,7 +12,7 @@ for (const id of ['jupiter', 'saturn', 'uranus', 'neptune']) {
     const expected = JSON.parse(await readFile(resolve(root, 'prepared/content.json'), 'utf8'));
     const controls = JSON.parse(await readFile(resolve(root, 'prepared/controls.json'), 'utf8'));
     const actual = prepareObjectContent(source);
-    for (const key of ['objectId', 'introduction', 'facts', 'moreFacts', 'resources', 'galleries'] as const) {
+    for (const key of ['objectId', 'facts', 'moreFacts', 'resources', 'galleries'] as const) {
       assert.deepEqual(actual[key], expected[key], `${id}: ${key}`);
     }
     for (const key of ['label', 'viewBox', 'path', 'renderViewBox', 'renderWidth', 'renderHeight', 'renderPathOffsetY'] as const) {

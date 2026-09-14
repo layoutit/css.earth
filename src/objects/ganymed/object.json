@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c53ed1c3051e7c77ae169c1f06b96d4942da4ad058ac0029aa51274989179001"
+          "sha256": "33c6de7a8cf40bad62acd10c161c34e0e7685976ee082adf7a2eec4bff5a811d"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8aa2983ad7080c1eac626b7b852fed3448b3680e794580250abf6db2f10102b9"
+        "sha256": "d15c17fb9bdf9f223f746d0a20f8687c73af62aa25c45002fbf2de80115e9387"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.663715621121006,
-      "description": "Explore Ganymed in 3D with its published shape model and radial elevation.",
+      "description": "Stony near-Earth asteroid, discovered in October 1924.",
       "systemName": "Solar System",
       "order": 189,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e9405ad8792543d8ecd90246c32553f5126fdfff33d67f2f561834c2a0bc6fb3"
+    "sha256": "f97a2d28bf590484d17883c342f9e049aeef5c191a405a65de123f682674333b"
   }
 }

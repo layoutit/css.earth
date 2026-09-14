@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7318a681e5d37a392cf67a5752a95547755c851bf9beebdf910c75181fbaf4b2"
+          "sha256": "a157a01c097ea8d8eeb0ba1b26615af46f37d37e9e29a84575d212194ead7e0f"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e0395d59c81179f9dc106935627da258548f9f596cdcca711ffbb23fac023b3d"
+        "sha256": "5366478bd738096f17edcede0de90ca35c951c1d08f61250ef5db96182aaa17f"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.43905767386019,
-      "description": "Explore Velleda in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in November 1872.",
       "systemName": "Solar System",
       "order": 274,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "6cc62e576cc76a86b8d44fa271c034ca6a19a5659a37376c520071530b0e13ec"
+    "sha256": "e7096869fe2a33cf13d33bbd3a6be83298b8c994b13fa27a9cab1cd79b925743"
   }
 }

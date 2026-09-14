@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "396ceb2940cd5110f42a06717f4368852b27e1a7fd91f745b64184c0a82368fe"
+          "sha256": "bde3eab8d327fbadae282f3a3421e1169c476cc8b27772d03aaf5dfb9466bd2e"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1e22bbf979ad5f94f674f7350e5de27a5fe0ed3571201aa71b17bdf70118135e"
+        "sha256": "e4c8acc17af3e72f0c01197189a8eb3079d5a5793116782f3f74d3bf6182ebdf"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 30.07,
-      "description": "Explore Nereid, a moon of Neptune, through its source-backed size model.",
+      "description": "Neptune's third-largest moon, on a stretched, far-flung orbit.",
       "systemName": "Solar System",
       "order": 86,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "39ce236160dc0a25a2ee90338b2ac43c8208a0e7391b6e459d44834ebe5873ac"
+    "sha256": "73da15ee3bc9ee42e8f034401fa1828547b7402323710cdbc6f74b9574247f78"
   }
 }

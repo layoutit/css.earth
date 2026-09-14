@@ -1,0 +1,126 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "rhea",
+  "entries": [
+    {
+      "id": "usgs-cassini-voyager-417m",
+      "subject": "USGS Rhea Cassini–Voyager 417 m mosaic",
+      "status": "included",
+      "finding": "Rhea_Cassini_Voyager_mosaic_global_417m.tif supplies Monochrome. Its actual 764.1 km projection sphere, 180 degrees east left edge, exact-zero gaps, source seams and shadows remain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/rhea_cassini_voyager_global_mosaic_417m"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pia18438-enhanced-color",
+      "subject": "NASA/JPL PIA18438 2014 enhanced-color map",
+      "status": "included",
+      "finding": "The 12,015 by 6,008 ultraviolet/infrared Cassini map supplies Enhanced color. Producer calibration, registration and photometric correction are retained; it is not natural color and has no separate mask.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/source/manifest.json",
+        "https://www.jpl.nasa.gov/images/pia18438-color-maps-of-rhea-2014/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "spc-2025-q128-shape",
+      "subject": "Weirich et al. 2025 Rhea SPC Q128 OBJ",
+      "status": "included",
+      "finding": "rhea_128_o.obj supplies Shape. The 2,000-face regularize:false presentation and 7,635 m limit are display approximation choices, not source uncertainty.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/source/manifest.json",
+        "https://doi.org/10.26033/tqxb-q714"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "spc-2025-radius",
+      "subject": "Weirich et al. 2025 Rhea SPC radius grid",
+      "status": "included",
+      "finding": "rhea_radius_g.tif supplies Elevation as centre-relative radius minus the 763.5 km source sphere; its actual east/south edge strips remain unfilled.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/source/manifest.json",
+        "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_radius_g.tif"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "spc-2025-relative-albedo",
+      "subject": "Weirich et al. 2025 Rhea SPC relative-albedo grid",
+      "status": "included",
+      "finding": "rhea_albedo_g.tif supplies dimensionless Relative albedo. It is normalized near one, affected by terrain and shadows, less validated than topography, and not calibrated reflectance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/source/manifest.json",
+        "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_albedo_g.tif"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "scipioni-combe-vims",
+      "subject": "Scipioni and Combe Rhea Cassini VIMS mosaic collection",
+      "status": "included",
+      "finding": "rhea_notnorm_pc_modified_2 supplies false-color Infrared and continuum-relative Ice absorption with archived wavelengths and phase parameters; missing values remain missing.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/source/manifest.json",
+        "https://doi.org/10.17189/ctqe-ta30"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "absolute-vims-registration",
+      "subject": "Absolute Rhea VIMS registration",
+      "status": "unresolved",
+      "finding": "Fractions-of-a-source-pixel absolute registration remain unresolved; source reading checks do not qualify that alignment.",
+      "revisitWhen": "Independent controls establish the VIMS source frame against the selected body presentation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/rhea/source/manifest.json",
+        "https://doi.org/10.17189/ctqe-ta30"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

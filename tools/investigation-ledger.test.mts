@@ -3,6 +3,7 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { OBJECTS } from '../site/objects.mts';
 import { INVESTIGATION_LEDGER_FILE, INVESTIGATION_LEDGER_SCHEMA, parseInvestigationLedger, readInvestigationLedgers } from './investigation-ledger.mts';
 import { fixtureRecord } from './test-values.mts';
 import { readCatalog } from './prepare-catalog.mts';
@@ -22,10 +23,14 @@ test('every catalogued asteroid retains its source investigation decisions', asy
   assert.deepEqual(asteroids.filter(object => !recorded.has(object.id)).map(object => object.id), [], 'New asteroid packages need a ledger linked by their README.');
 });
 
-test('every investigation ledger parses, and its body README links it instead of repeating a source survey', async () => {
+test('every comet has a ledger, and each ledger parses with a README link instead of a repeated source survey', async () => {
   const [objects, ledgers] = await Promise.all([readCatalog(resolve(root, 'src/objects')), readInvestigationLedgers(root)]);
   assert.ok(ledgers.length > 0, 'At least one object keeps an investigation ledger.');
   const asteroidIds = new Set(objects.filter(object => object.classification === 'asteroid').map(object => object.id));
+  const recordedObjects = new Set(ledgers.map(({ objectId }) => objectId));
+  for (const object of OBJECTS.filter(object => object.classification === 'comet')) {
+    assert.ok(recordedObjects.has(object.id), `${object.id} keeps its investigation history beside the body.`);
+  }
   for (const { objectId } of ledgers) {
     const readme = await readFile(resolve(root, 'src/objects', objectId, 'README.md'), 'utf8');
     assert.ok(readme.includes(`](${INVESTIGATION_LEDGER_FILE})`), `${objectId} README links its investigation ledger.`);

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "1aeb5e660b78a935c76eb8972abb8545db4e895333736c50142e030457838281"
+          "sha256": "681f17e6c28285db0fb362ffb3b6273de9fb4eaa7d004db092d0e3793c692374"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6e008f4abd6356012f34b2f375dbf613e0fafd51334dd8d9ccd03498f7fc0101"
+        "sha256": "7e720625bca238e4a2fb030dce1bfda4000be358bdab49480dd5885402d79235"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 5.1231730197676795,
-      "description": "Explore Orus, a Lucy target, through its observation-constrained approximate ellipsoid.",
+      "description": "Dark Jupiter Trojan that Lucy will visit.",
       "systemName": "Solar System",
       "order": 20,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "9284a244507edaec1afe9affc3ea0a04092bb5c7f9ad3e1ca0a72aa252a61c40"
+    "sha256": "06574cccea902d5b33a9056107bacfec9eac4ab5f4c634135c35947c5ca8f7ca"
   }
 }

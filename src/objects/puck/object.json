@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "9e0ee4df193a7d2e67d39ad24483135c4675478db52e78edeb1cbf147d3c2ce9"
+          "sha256": "33cc13defeaf3dbe010e75fbe43705851d5f3e2c1e1bcad3fafec4307d5d96ef"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9c17d7ef1f35b11da411872fda9de8d1e203368dd3c66c231d27dee148180091"
+        "sha256": "324a94bc01adf56023307b97c56d01c80bf88a2541deab13840d6d57ae7bd435"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Puck with Voyager 2 imagery on its measured-size shape.",
+      "description": "The largest of Uranus's small inner moons.",
       "systemName": "Solar System",
       "order": 101,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "fa01afed8b3edefc2bfa32825f2156d5ae12371892b33eebf19148283812aaa0"
+    "sha256": "441db3c20ad7c612b123217234f67717020f8bea81bcd1d99b3d27f228e31ac4"
   }
 }

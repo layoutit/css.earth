@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2ce1e5ccccf2c1abe5e5645e7907212fc410dd8d6271e75c2ab870d3a2e904ce"
+    "sha256": "efff991b32aaf8f1aea791dc3dda306cba57d9b15822895a71304ebd45ff9622"
   },
   "id": "mathilde",
   "properties": {
@@ -72,7 +72,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "1b633ccaa351b139ccc038ebd20ebd2755c1d794667120d74486827c728fcba6"
+          "sha256": "3ff27bd56d08f24f6abe2f57349d42b5a7db3781ade47de3ff289c5561cb0dfb"
         },
         {
           "id": "title",
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ac5e944b52cb8b9bd4f7e3d336d4fabec01315345de2be8c33278650421a6d09"
+        "sha256": "f98b27e065c675290da572da9e44a71e57a6f7f8f8e5ba3227ac531c84418bd7"
       }
     },
     "catalog": {
@@ -141,7 +141,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.647,
-      "description": "Explore Mathilde with NEAR imagery, measured partial elevation, and a published visualization shape.",
+      "description": "Dark, slowly spinning asteroid scarred by huge craters.",
       "systemName": "Solar System",
       "order": 132,
       "context": {

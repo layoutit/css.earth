@@ -4,7 +4,6 @@
   "id": "quaoar",
   "displayName": "Quaoar",
   "panel": {
-    "introduction": "This large Kuiper-belt object has two known rings. Its oblate shape is fitted to stellar occultations with the ring plane as a pole constraint; surface detail is unresolved.",
     "facts": [
       {
         "id": "shape",
@@ -50,9 +49,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved. Pole RA 259.7°, DEC 53.4° inherits the measured ring-plane prior; arbitrary meridian. The 8.8394 h and 17.6788 h period interpretations remain model-dependent and no sidereal spin is installed. The grid marks unmapped terrain.",
-        "title": "Published occultation shape model",
-        "detail": "Source shape · unmapped surface grid",
         "thumbnail": "/scenes/quaoar/quaoar-model-thumbnail.webp",
         "surface": "quaoar-model-surface@2x.webp",
         "poles": "quaoar-model-poles@2x.webp",
@@ -60,7 +56,9 @@
           "id": "published-shape",
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/2607.06450"
-        }
+        },
+        "notes": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved. Pole RA 259.7°, DEC 53.4° inherits the measured ring-plane prior; arbitrary meridian. The 8.8394 h and 17.6788 h period interpretations remain model-dependent and no sidereal spin is installed. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

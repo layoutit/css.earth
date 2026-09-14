@@ -92,7 +92,7 @@ export function requireHistoricalContent(value: unknown) {
     return { name: requireString(control.name, `Historical body control ${index} name`), checked: control.checked };
   });
   const panel = requireRecord(content.panel, 'Historical body panel');
-  return { settings: { controls }, panel: { facts: requireArray(panel.facts, 'Historical body facts').map((entry, index) => { const fact=requireRecord(entry, `Historical body fact ${index}`); return {id:requireString(fact.id, `Historical body fact ${index} id`), label:requireString(fact.label, `Historical body fact ${index} label`)}; }), introduction: requireString(panel.introduction, 'Historical body introduction') } };
+  return { settings: { controls }, panel: { facts: requireArray(panel.facts, 'Historical body facts').map((entry, index) => { const fact=requireRecord(entry, `Historical body fact ${index}`); return {id:requireString(fact.id, `Historical body fact ${index} id`), label:requireString(fact.label, `Historical body fact ${index} label`)}; }) } };
 }
 
 export function requireObjectRotationReference(value: unknown): { readonly path: string; readonly sha256: string } {

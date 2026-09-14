@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "6477a1f064f9f92bc103e7baa2a3ad4b7fda5ced21d5f35f67377a2f440b6778"
+          "sha256": "d339968c55b8653b4ffede12495e22ff31cdc3ce7f53bd76516458b3b7433266"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cbec070e85be006667d7e169bc423a51bf2d06f8cb6c4c9a1208a89e1a768dd1"
+        "sha256": "402a3abebb8a42a5779fcf01490c1de5885e3d4a369cc36292defa4863e4de1c"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Cressida, an inner moon of Uranus, through its measured shape.",
+      "description": "Inner moon of Uranus, named for the title character of Troilus and Cressida.",
       "systemName": "Solar System",
       "order": 92,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d34918559bbd1de3529e80f41ae5322c2ed907110f0952f698a7b7537b987d42"
+    "sha256": "4b128271ff7109799ac8252e1af1a6ba8dacf8af1664c8c0fa897fcaee9cbbc9"
   }
 }
