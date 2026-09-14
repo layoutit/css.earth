@@ -1,4 +1,5 @@
-import { requireRecord } from '../../tools/source-values.mts';
+import { requireRecord, requireFiniteNumber } from '../../tools/source-values.mts';
+import { readFile } from 'node:fs/promises';
 import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
@@ -17,7 +18,6 @@ import {
   validateDirectionalSunPlan,
   validateDirectionalSunPresentationStandard,
 } from "./directional-sun-contract.mts";
-import { requireObject } from "../../site/objects.mts";
 
 const PLANETS = Object.freeze({
   mercury: PREPARED_MERCURY_SKY_SUN,
@@ -57,11 +57,12 @@ test("all eight planet packages publish the same independent Sun contract", () =
   }
 });
 
-test("prepares the physical solar disc from IAU radius and mean distance", () => {
+test("prepares the physical solar disc from IAU radius and mean distance", async () => {
   const focalX = DIRECTIONAL_SUN_PRESENTATION_STANDARD.projection.focalX;
   let previousShare = Number.POSITIVE_INFINITY;
   for (const [planetId, plan] of Object.entries(PLANETS)) {
-    const meanDistance = requireObject(planetId).distanceAu;
+    const descriptor = requireRecord(JSON.parse(await readFile(`src/objects/${planetId}/object.json`, 'utf8')));
+    const meanDistance = requireFiniteNumber(requireRecord(requireRecord(descriptor.properties).catalog).distanceAu);
     const observerDistance = meanDistance *
       DIRECTIONAL_SUN_DISTANCE_STANDARD.astronomicalUnitKilometers;
     const angularRadius = Math.atan(

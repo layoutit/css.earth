@@ -23,7 +23,7 @@ function interpretFor(objectDirectory: string, objectId: string, recipe: Interpr
   return pending;
 }
 import { recipeSurfacePreviews, assertSurfacePreviewCoverage } from './surface-preview-rasters.mts';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 // Preserve categorical/numeric cells only where the source contract requests it.
@@ -122,7 +122,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const requested = process.argv.slice(2);
-  for (const { id } of OBJECTS) {
+  for (const { id } of SCENE_OBJECTS) {
     if (requested.length && !requested.includes(id)) continue;
     const objectDirectory = resolve(projectRoot, 'src/objects', id);
     const images = await prepareSurfaceMinimaps({ objectDirectory,

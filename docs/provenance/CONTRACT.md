@@ -6,6 +6,10 @@ view means, how we processed it and what the checks prove. Use the existing
 [AGENTS.md](../../AGENTS.md) for application rules and the
 [celestial skill](../../.agents/skills/celestial-skill/SKILL.md) for preparation.
 
+[Navigation identity and evidence](../navigation-identity.md) distinguishes
+subjects, scene capability, rendering resources, dataset views and published
+sources. Preserve these distinctions when changing metadata or attribution.
+
 ## Standards basis
 
 Use **PDS4 1.26.0 and ISO 24495-1:2023 together**: PDS4 guides provenance content;

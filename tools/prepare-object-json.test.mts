@@ -4,9 +4,9 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 
-for (const object of OBJECTS) {
+for (const object of SCENE_OBJECTS) {
   let text;
   try { text = await readFile(new URL(`../src/objects/${object.id}/object.json`, import.meta.url), 'utf8'); }
   catch (error) {

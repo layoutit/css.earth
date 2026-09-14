@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 import test from "node:test";
 import * as fontkit from "fontkit";
 
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { PLANET_TITLE_RECIPE } from
   "../src/platform/planet-title-recipe.mts";
 import { createPreparedTitleLayout, sha256 } from "../src/platform/prepared-title.mts";
@@ -41,9 +41,9 @@ test("regenerates every planet title from one pinned Saturn recipe", async () =>
   const generated = await preparePlanetTitleSources({
     writeSource: async () => {},
   });
-  assert.deepEqual(Object.keys(generated), OBJECTS.map(({ id }) => id));
+  assert.deepEqual(Object.keys(generated), SCENE_OBJECTS.map(({ id }) => id));
 
-  for (const planet of OBJECTS) {
+  for (const planet of SCENE_OBJECTS) {
     const { source, moduleSource } = generated[planet.id];
     const contentPath = resolve(projectRoot, `src/objects/${planet.id}/source/content/object.json`);
     const label = await exists(contentPath) ? JSON.parse(await readFile(contentPath, 'utf8')).displayName : planet.name;

@@ -167,7 +167,7 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
       products.push({ id: lens.id, label: lens.label, process: 'Apply the pinned source image to the shared prepared volume field; preserve the saved reconstruction and display settings.',
         recipe: 'presentation', selector: `/lenses/${index}`, recipeDependencies: recipes.map(recipe => recipe.id),
         inputs: [...new Set([lens.input, ...record.sharedInputs])], parents: [], lensIds: [lens.id],
-        interpretation: { kind: 'observation-conditioned-volume', sourceKind: 'published-display-image' }, limitations: [lens.description, lens.detail],
+        observationAttribution: 'source-lineage', interpretation: { kind: 'observation-conditioned-volume', sourceKind: 'published-display-image' }, limitations: [lens.description, lens.detail],
         outputs: [...(bankBytes === undefined ? [] : [{ url: bankPath, sha256: bankSha256, bytes: bankBytes, verification: installedBank === null ? 'descriptor-pin' : 'bytes-verified' }]),
           { url: previewUrl, sha256: digest(image.bytes), bytes: image.bytes.length, verification: 'bytes-verified' }] });
     }

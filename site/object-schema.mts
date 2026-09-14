@@ -4,14 +4,16 @@ import type { PositionM } from '@cssearth/engine';
 import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
 import type { SceneFactory } from './browser-types.mts';
 import { record } from './browser-types.mts';
+import { parseNavigationDistance } from './navigation-distance.mts';
+import type { NavigationDistance } from './navigation-distance.mts';
 
 export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar';
 export interface ObjectDefinitionInput {
   id: string; name: string; systemName: string; classification: ObjectClassification;
-  color: string; distanceAu: number; route: string; description: string;
+  color: string; distance: NavigationDistance; route: string; description: string;
   loadScene(): Promise<SceneFactory>; worldFrame?: unknown;
 }
-export type ObjectEntry = Readonly<Omit<ObjectDefinitionInput, 'worldFrame'> & { worldFrame: PreparedWorldCameraFrame | null }>;
+export type ObjectEntry = Readonly<Omit<ObjectDefinitionInput, 'worldFrame'> & { kind: 'scene'; worldFrame: PreparedWorldCameraFrame | null }>;
 
 const OBJECT_INPUT_KEYS = new Set([
   "id",
@@ -19,7 +21,7 @@ const OBJECT_INPUT_KEYS = new Set([
   "systemName",
   "classification",
   "color",
-  "distanceAu",
+  "distance",
   "route",
   "loadScene",
   "description",
@@ -42,22 +44,22 @@ export function defineObject(input: ObjectDefinitionInput): ObjectEntry {
     throw new TypeError(`Unsupported object field: ${unsupported.join(", ")}.`);
   }
 
-  const { id, name, systemName, classification, color, distanceAu, route, loadScene, description, worldFrame = null } = input;
+  const { id, name, systemName, classification, color, distance, route, loadScene, description, worldFrame = null } = input;
   if (!safeId(id) || !nonEmpty(name) || !nonEmpty(systemName) || !OBJECT_CLASSIFICATIONS.includes(classification) ||
       !/^#[0-9a-f]{6}$/u.test(color ?? "") ||
-      !Number.isFinite(distanceAu) || distanceAu < 0 ||
       route !== `/${id}/` || typeof loadScene !== "function" ||
       !nonEmpty(description)) {
     throw new TypeError(`Invalid object definition: ${id ?? "unknown"}.`);
   }
 
   return Object.freeze({
+    kind: 'scene',
     id,
     name,
     systemName,
     classification,
     color,
-    distanceAu,
+    distance: parseNavigationDistance(distance),
     route,
     loadScene,
     description,
@@ -65,7 +67,7 @@ export function defineObject(input: ObjectDefinitionInput): ObjectEntry {
   });
 }
 
-export function defineObjects<T extends ObjectEntry>(objects: readonly T[]): readonly T[] {
+export function defineObjects<T extends { id: string; route: string }>(objects: readonly T[]): readonly T[] {
   if (!isArray(objects) || objects.length === 0) {
     throw new TypeError("Object registry must contain at least one object.");
   }

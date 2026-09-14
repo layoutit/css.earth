@@ -40,11 +40,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
   // The application registry owns classification; preparation bakes its orbit presentation.
-  const { OBJECTS } = await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mts')).href) as {
-    OBJECTS: readonly { id: string; classification: string }[];
+  const { SCENE_OBJECTS } = await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mts')).href) as {
+    SCENE_OBJECTS: readonly { id: string; classification: string }[];
   };
-  const planetIds = new Set(OBJECTS.filter(body => body.classification === 'planet').map(body => body.id));
-  const classifications = new Map(OBJECTS.map(body => [body.id, body.classification]));
+  const planetIds = new Set(SCENE_OBJECTS.filter(body => body.classification === 'planet').map(body => body.id));
+  const classifications = new Map(SCENE_OBJECTS.map(body => [body.id, body.classification]));
   const { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_ANGLES } = await import(pathToFileURL(resolve(process.cwd(), 'site/runtime-policy.mts')).href) as {
     SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE: number;
     SYSTEM_FRAMING_ANGLES: { readonly elevationsDegrees: readonly number[]; readonly azimuthStepDegrees: number };

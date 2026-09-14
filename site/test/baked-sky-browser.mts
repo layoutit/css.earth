@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { createTestPage } from './browser-observations.mts';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 
 declare global { interface Window { __bakedSkyFaces: Element[]; } }
-const frame = OBJECTS.find(object => object.id === 'sun')?.worldFrame;
+const frame = SCENE_OBJECTS.find(object => object.id === 'sun')?.worldFrame;
 assert.ok(frame, 'Sun has a prepared world frame');
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = 'output/playwright/baked-sky';
