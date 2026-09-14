@@ -133,6 +133,23 @@
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
       ]
+    },
+    {
+      "id": "dlr-lamo-clear-photographs",
+      "subject": "DLR Dawn LAMO clear-filter global photographic mosaic",
+      "status": "included",
+      "finding": "Retrieved the original global 8-bit PNG (80,112 × 40,056) and inspected the companion attached PDS label using a bounded archive range. This is a different observation product from the already selected HAMO color composite and the excluded corrected HAMO grayscale candidate: it retains low-altitude crater and trough photography with source illumination. The label supplies the planetocentric, positive-east Claudia grid, 255 km map radius, 20 m/pixel spacing and fractional pixel offsets. The prepared 8192 × 4096 map and fixed 800-face atlas have coarser display resolution. Exact-black fill is a heuristic because the publisher supplies no independent validity mask; gaps and seams remain visible. Full PDS pixels were not downloaded or compared against the PNG; only the original PNG is the selected photographic input.",
+      "evidence": [
+        "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
+        "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png",
+        "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.pds.zip"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "943179c7c748c4e9727b9d94e15b214c2d20a68c"
+        }
+      ]
     }
   ]
 }

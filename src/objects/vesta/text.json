@@ -56,6 +56,11 @@
       "title": "HAMO digital terrain model",
       "detail": "Shaded relief",
       "summary": "Height above or below a 255 km sphere; polar gaps are interpolated."
+    },
+    "surface": {
+      "title": "LAMO clear-filter mosaic",
+      "detail": "Dawn FC · 20 m/pixel source",
+      "summary": "Low-altitude photographs reveal crater walls and troughs. Original illumination and seams remain; gray grid marks gaps."
     }
   }
 }

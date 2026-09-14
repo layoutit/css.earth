@@ -7,6 +7,7 @@ Vesta uses Dawn framing-camera mosaics, spectral ratios and a terrain model in t
 | View or quantity | Source |
 | --- | --- |
 | Visible color | [DLR Dawn HAMO mosaic](https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php) from 650, 550 and 430 nm bands |
+| Clear-filter photography | [DLR Dawn LAMO mosaic](https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png), October 2012, 20 m/pixel source |
 | Spectral ratios | [DLR Clementine-style mosaic](https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clementine/Vesta_clementine_HAMO-1-2_global.jp2), from the original PDS archive |
 | Shape and elevation | [DLR HAMO 64-pixel-per-degree terrain model](https://dawngis.dlr.de/data/Vesta/dtm_vesta.php) |
 | Physical placement | JPL Horizons solution #36 |
@@ -31,6 +32,7 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 Feature notes: 9 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 - The visible mosaic has clipped bright terrain and registration artifacts. The black-pixel mask is a heuristic that can hide valid dark pixels.
+- Clear-filter photography retains the illumination and seams of the original low-altitude mosaic. Its 20 m/pixel source is downsampled for this display; it does not change the 800-face mesh or supply 20 m terrain geometry. Northern gaps remain visible.
 - Spectral ratios are not mineral-abundance measurements.
 - Terrain values are radii, despite contradictory generic label wording. Polar interpolation is not independent stereo coverage.
 - The 8 km simplification allowance is an approximation, not an error bound or source uncertainty. Placement uses osculating elements with limited temporal validity.
@@ -58,6 +60,26 @@ from missing data. Uncertain nonzero colors and channel fringes remain intact.
 The shared gray grid marks only the declared missing samples.
 The published image's border also leaves a narrow missing strip at longitude
 zero. It is retained rather than filled with invented surface detail.
+
+### Low-altitude photographs
+
+The clear-filter view adds Dawn's low-altitude photography alongside the color
+composite. It is the publisher's grayscale mosaic, not a desaturated color map
+or synthetic relief. The original PNG has 80,112 × 40,056 one-byte samples.
+Its companion [PDS label](source/reference/lamo-clear.lbl) gives the same
+dimensions, a 255 km projection radius, 222.529479629277 pixels/degree and
+sample/line offsets 40055.3 / 20027. These locate the image in the same
+planetocentric, east-positive Claudia frame as the existing DLR terrain.
+
+Preparation keeps those offsets and the published brightness values. Exact
+black is withheld before interpolation, using the existing fill heuristic;
+the release supplies no separate mask that distinguishes gaps from every
+photographed shadow. A temporary lossless grayscale mask keeps that operation
+at native resolution without allocating a 3.2 GB mask in memory. The mask file
+is removed after resampling. The normalized map is 8,192 × 4,096; the final
+atlas uses the unchanged 800 faces and 128-pixel cells. This view does not
+claim to retain the source's full 20 m resolution. Shadows in the photographs
+are observations; the optional prepared lighting setting remains off by default.
 
 The terrain ZIP contains `Vesta_HAMO_dtm_global_64.pds`. Its generic attached
 label describes heights above a reference surface, but the actual values

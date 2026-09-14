@@ -183,6 +183,14 @@ precise accuracy; increase sampling if a decision depends on that precision.
 
 ## Qualify the result
 
+For very large released maps, check decoded dimensions before preparation.
+The projected byte-image reader writes native validity to a temporary lossless
+mask when it exceeds 64 megapixels, then resamples it separately. This preserves
+the existing rule that mixed fill footprints remain missing without retaining
+a multi-gigabyte mask. Do not combine threshold and resize in one Sharp pipeline:
+Sharp resizes first. Distinguish the publisher's native resolution from the
+normalized map and final atlas resolution in the body's README.
+
 Use the relevant [qualification checks](qualification.md). Exercise changed
 behavior with independent geometric cases and source anchors: displaced or
 occluded patches, interpolation across a discontinuity, valid darkness,
