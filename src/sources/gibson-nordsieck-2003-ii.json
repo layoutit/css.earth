@@ -1,0 +1,35 @@
+{
+  "id": "gibson-nordsieck-2003-ii",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Pleiades Reflection Nebula. II. Simple Model Constraints on Dust Properties and Scattering Geometry",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/374590",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m45/physical-sources.json",
+      "revision": "9d0a453d4c82637ebc54277f97281e0c8426e85b",
+      "sha256": "3e36ad878aa3b3b8489dd636bb49c65e141ca6f522b20bea0ede64541e63af29",
+      "locator": "/products/1"
+    }
+  ],
+  "publisher": "Steven J. Gibson; Kenneth H. Nordsieck",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Steven J. Gibson; Kenneth H. Nordsieck",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m45/physical-sources.json#/products/1"
+    }
+  ],
+  "creators": [
+    "Steven J. Gibson; Kenneth H. Nordsieck"
+  ]
+}

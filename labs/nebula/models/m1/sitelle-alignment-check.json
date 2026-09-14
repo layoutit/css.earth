@@ -1,0 +1,1073 @@
+{
+  "schema": "cssearth-nebula-intake-registration-evidence@1",
+  "objectId": "m1",
+  "source": {
+    "id": "sitelle-deep",
+    "path": ".local/nebula-lab/intake/m1/physical/m1.deep_frame.fits",
+    "sha256": "b1515f62eb6d9e402e93a756609848de86a193b9156fa1a2e47794ca569946c7",
+    "bytes": 16917120,
+    "width": 2048,
+    "height": 2064
+  },
+  "reference": {
+    "id": "hubble-optical",
+    "sha256": "8a4a08d56893e1a03339b2705dc41acb177693da75e21858800bdb584c5901c6",
+    "width": 3864,
+    "height": 3864
+  },
+  "method": "Native log-stretch compact-star identities discovered by a bounded similarity search; affine fit and spatial holdout evaluated by the shared verifyRegistration implementation. This is a model-assisted coordinate diagnostic, not blind identity discovery or independent absolute catalogue astrometry.",
+  "matrix": [
+    0.6096443584356844,
+    0.009038938033117762,
+    -0.008965707972506093,
+    0.6090760895174191,
+    -139.44654162876517,
+    -122.8993332713089
+  ],
+  "evidence": {
+    "status": "verified",
+    "matchedStars": 59,
+    "trainingStars": 39,
+    "trainingCandidates": 39,
+    "rejectedTrainingStars": 0,
+    "heldOutStars": 20,
+    "rmsPixels": 0.3137312207375536,
+    "maxResidualPixels": 0.5762578572746926,
+    "spatialQuadrants": 4,
+    "coverageFraction": [
+      0.9012095047957384,
+      0.7905402743762605
+    ],
+    "relativeScale": 1.0143573352696045,
+    "centreShiftPixels": 0.8356832490622825,
+    "coverageDomain": {
+      "kind": "common-observed-footprint",
+      "sourcePixelPolygon": [
+        [
+          454.41248069052244,
+          435.2610125335219
+        ],
+        [
+          1655.1393825128525,
+          417.35359701031416
+        ],
+        [
+          1673.0358348811274,
+          1617.3431094135394
+        ],
+        [
+          472.3089330587974,
+          1635.2505249367473
+        ]
+      ]
+    },
+    "residualArcseconds": 0.16728246730732838,
+    "matches": [
+      {
+        "source": [
+          525.4192771084338,
+          707.7
+        ],
+        "frame": [
+          174.44729180806155,
+          312.8289357953812
+        ],
+        "predictedFrame": [
+          174.52732494160446,
+          312.89304756735726
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.102545705763858
+      },
+      {
+        "source": [
+          650.6150971599402,
+          517.7556053811659
+        ],
+        "frame": [
+          252.70175041177862,
+          198.59326115396402
+        ],
+        "predictedFrame": [
+          252.55523630890147,
+          198.33409572661517
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.2977131187482444
+      },
+      {
+        "source": [
+          753.3527257933279,
+          492.7872253864931
+        ],
+        "frame": [
+          315.3019636668862,
+          184.0908329050182
+        ],
+        "predictedFrame": [
+          315.4125112078855,
+          184.05509153676164
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.11618177234763848
+      },
+      {
+        "source": [
+          773.5547504025765,
+          749.5128824476651
+        ],
+        "frame": [
+          324.98356636885126,
+          340.49027240989847
+        ],
+        "predictedFrame": [
+          325.42683426963254,
+          340.6031556669567
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.4574156332998648
+      },
+      {
+        "source": [
+          804.7220077220077,
+          683.7818532818533
+        ],
+        "frame": [
+          344.7293590674901,
+          300.40226579197304
+        ],
+        "predictedFrame": [
+          345.01710207456995,
+          300.84967637026125
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.5319513734238629
+      },
+      {
+        "source": [
+          816.6038186157518,
+          577.6336515513126
+        ],
+        "frame": [
+          353.0586547972723,
+          236.1080798913282
+        ],
+        "predictedFrame": [
+          353.2124748324635,
+          236.3047437033072
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.24967430418112163
+      },
+      {
+        "source": [
+          864.6425046267736,
+          509.6135101789019
+        ],
+        "frame": [
+          382.7433574790245,
+          195.111421797004
+        ],
+        "predictedFrame": [
+          383.1088374695397,
+          195.30952069382326
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.415714801742742
+      },
+      {
+        "source": [
+          909.9166666666666,
+          720.7163120567376
+        ],
+        "frame": [
+          408.74222185629657,
+          324.2984727635054
+        ],
+        "predictedFrame": [
+          408.817288866249,
+          324.2964200929258
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.07509506934349967
+      },
+      {
+        "source": [
+          971.7059553349876,
+          557.6091811414392
+        ],
+        "frame": [
+          448.0301747127768,
+          225.5339213731121
+        ],
+        "predictedFrame": [
+          447.9491510186647,
+          225.5102761740135
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.08440340305925745
+      },
+      {
+        "source": [
+          975.2844611528822,
+          598.547619047619
+        ],
+        "frame": [
+          449.88786742641975,
+          250.42091338278314
+        ],
+        "predictedFrame": [
+          449.763724823056,
+          250.47724573720032
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.13632578671736603
+      },
+      {
+        "source": [
+          1017.6323175621492,
+          607.3492381716119
+        ],
+        "frame": [
+          475.47661209528644,
+          255.99679994852545
+        ],
+        "predictedFrame": [
+          475.5019438280592,
+          256.22088114458234
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.2255084901096979
+      },
+      {
+        "source": [
+          1091.8477523324852,
+          686.2362171331637
+        ],
+        "frame": [
+          520.0958556721826,
+          304.69017571678125
+        ],
+        "predictedFrame": [
+          520.0396873284436,
+          304.93988252031716
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.2559460305816281
+      },
+      {
+        "source": [
+          1113.9270386266094,
+          519.2103004291846
+        ],
+        "frame": [
+          535.0964620540032,
+          203.60121349887436
+        ],
+        "predictedFrame": [
+          534.9977052489506,
+          203.4079636268235
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.21702170304340215
+      },
+      {
+        "source": [
+          1188.1145092460881,
+          521.8058321479374
+        ],
+        "frame": [
+          580.1659705706171,
+          205.99768940168212
+        ],
+        "predictedFrame": [
+          580.2024073993053,
+          205.6594158860631
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.3402302365371262
+      },
+      {
+        "source": [
+          1267.7815734989647,
+          587.1542443064183
+        ],
+        "frame": [
+          628.1511133759957,
+          245.9568906690012
+        ],
+        "predictedFrame": [
+          628.1850888943247,
+          246.18167687678536
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.22733933899724823
+      },
+      {
+        "source": [
+          1335.3837814397225,
+          513.7263660017346
+        ],
+        "frame": [
+          670.0530710284806,
+          202.36115388398417
+        ],
+        "predictedFrame": [
+          670.0567264971243,
+          202.0695640658861
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.2916127302939027
+      },
+      {
+        "source": [
+          1422.701072386059,
+          608.4463806970509
+        ],
+        "frame": [
+          722.6163432847181,
+          260.7507379017084
+        ],
+        "predictedFrame": [
+          722.439988325536,
+          260.5505157976255
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.26681447223029436
+      },
+      {
+        "source": [
+          470.2297581493165,
+          861.3717139852787
+        ],
+        "frame": [
+          139.89110423263836,
+          405.72190199257676
+        ],
+        "predictedFrame": [
+          139.5035703521729,
+          405.99195954900097
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.47234901533763934
+      },
+      {
+        "source": [
+          512.5785219399538,
+          1172.7886836027715
+        ],
+        "frame": [
+          162.5394249780877,
+          595.8846046754826
+        ],
+        "predictedFrame": [
+          162.52918167658711,
+          596.0513774646711
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.16708706843840124
+      },
+      {
+        "source": [
+          516.6976967370441,
+          1004.4971209213052
+        ],
+        "frame": [
+          166.62299000577687,
+          493.5870390696794
+        ],
+        "predictedFrame": [
+          166.54926635828238,
+          493.58624353360653
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.07372793959914359
+      },
+      {
+        "source": [
+          554.2229551451187,
+          990.4215039577837
+        ],
+        "frame": [
+          189.20316741636583,
+          485.59886045745526
+        ],
+        "predictedFrame": [
+          189.55252631683405,
+          485.35231028134706
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.4275963408114562
+      },
+      {
+        "source": [
+          615.5024009603842,
+          1066.5384153661464
+        ],
+        "frame": [
+          226.43422177895985,
+          532.5352531376357
+        ],
+        "predictedFrame": [
+          226.22875274671938,
+          532.2672021415244
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.3377408173823019
+      },
+      {
+        "source": [
+          622.6928838951311,
+          988.8548689138577
+        ],
+        "frame": [
+          231.09239453278605,
+          485.29371802227456
+        ],
+        "predictedFrame": [
+          231.3088780940757,
+          485.0170057781951
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.3513328882017102
+      },
+      {
+        "source": [
+          711.6976592977893,
+          1228.392067620286
+        ],
+        "frame": [
+          283.3664865219355,
+          631.5619070885189
+        ],
+        "predictedFrame": [
+          283.42251671998747,
+          631.7178947097796
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.165745350101636
+      },
+      {
+        "source": [
+          733.7808833678399,
+          1023.0631469979297
+        ],
+        "frame": [
+          298.4071526281821,
+          506.76026605196984
+        ],
+        "predictedFrame": [
+          298.72634883097487,
+          506.8565675662229
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.33340695482364185
+      },
+      {
+        "source": [
+          757.3530805687204,
+          1116.5142180094788
+        ],
+        "frame": [
+          312.166964918984,
+          563.9092519585732
+        ],
+        "predictedFrame": [
+          312.2591508580176,
+          563.9884480889551
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.12153301783046096
+      },
+      {
+        "source": [
+          769.6265969802555,
+          1143.5464576074332
+        ],
+        "frame": [
+          319.55277476468353,
+          580.6305047214469
+        ],
+        "predictedFrame": [
+          319.49926773039965,
+          580.5640784284674
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.08529627844667688
+      },
+      {
+        "source": [
+          773.6109616677875,
+          1104.5780094149293
+        ],
+        "frame": [
+          322.1971869438815,
+          556.7176676006968
+        ],
+        "predictedFrame": [
+          322.2776929107397,
+          556.8653428143269
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.16819387450343024
+      },
+      {
+        "source": [
+          778.2858156028369,
+          1154.7085106382979
+        ],
+        "frame": [
+          324.9167944107142,
+          587.3521230252688
+        ],
+        "predictedFrame": [
+          324.6782358042693,
+          587.4408881800373
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.2545377406397565
+      },
+      {
+        "source": [
+          851.9760793465578,
+          1192.936406067678
+        ],
+        "frame": [
+          369.6414515760074,
+          611.630143351627
+        ],
+        "predictedFrame": [
+          369.260349220443,
+          611.3906669662686
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.4500977055718855
+      },
+      {
+        "source": [
+          883.3476605005441,
+          1052.38683351469
+        ],
+        "frame": [
+          389.63970998677644,
+          525.689045607553
+        ],
+        "predictedFrame": [
+          389.64598310934866,
+          526.0688487104014
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.37985490519420606
+      },
+      {
+        "source": [
+          1088.7308707124012,
+          959.5883905013193
+        ],
+        "frame": [
+          515.9122147125329,
+          471.34387310257597
+        ],
+        "predictedFrame": [
+          515.6887022727786,
+          471.4039820366605
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.23145387160658204
+      },
+      {
+        "source": [
+          1521.4650655021835,
+          1217.8144104803494
+        ],
+        "frame": [
+          777.4884086260081,
+          632.5492401294971
+        ],
+        "predictedFrame": [
+          777.1874837425436,
+          632.5947340686511
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.3043443510037254
+      },
+      {
+        "source": [
+          1538.401506373117,
+          1229.8360370799537
+        ],
+        "frame": [
+          787.5617723640171,
+          640.0551955369917
+        ],
+        "predictedFrame": [
+          787.4049069780411,
+          640.0699068271106
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.15755370949090272
+      },
+      {
+        "source": [
+          1574.8290488431876,
+          1049.9884318766067
+        ],
+        "frame": [
+          811.400226603545,
+          530.8014918036193
+        ],
+        "predictedFrame": [
+          811.2252138444038,
+          530.8582970398691
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.18400081719272496
+      },
+      {
+        "source": [
+          1601.6252936570086,
+          881.6942051683634
+        ],
+        "frame": [
+          829.1355625849521,
+          428.96030120296706
+        ],
+        "predictedFrame": [
+          829.070270212536,
+          428.5965171444466
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.3695969901519216
+      },
+      {
+        "source": [
+          1610.8134715025906,
+          915.6882556131261
+        ],
+        "frame": [
+          834.4927409338964,
+          449.5766335278103
+        ],
+        "predictedFrame": [
+          834.3670102713085,
+          449.3845318263841
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.22958933600157108
+      },
+      {
+        "source": [
+          1645.298933739528,
+          945.489337395278
+        ],
+        "frame": [
+          854.6843650769615,
+          468.0797576887885
+        ],
+        "predictedFrame": [
+          855.1236899755806,
+          467.8473701378489
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.49700134846741295
+      },
+      {
+        "source": [
+          1647.4085439229843,
+          1207.526474127557
+        ],
+        "frame": [
+          853.7450090292889,
+          627.2187114689767
+        ],
+        "predictedFrame": [
+          854.06045347653,
+          627.466993322809
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.4014337781473542
+      },
+      {
+        "source": [
+          617.5652003142184,
+          1427.6995286724273
+        ],
+        "frame": [
+          224.6349421347019,
+          751.9575864176213
+        ],
+        "predictedFrame": [
+          224.24826166243983,
+          752.2604462354057
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.4911678499832627
+      },
+      {
+        "source": [
+          662.6386748844376,
+          1328.1748844375963
+        ],
+        "frame": [
+          252.65425332363787,
+          692.0702091114689
+        ],
+        "predictedFrame": [
+          252.61936004554533,
+          692.04978145782
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.04043302968665495
+      },
+      {
+        "source": [
+          714.371686746988,
+          1492.6475903614457
+        ],
+        "frame": [
+          282.57204193688113,
+          792.4959776942992
+        ],
+        "predictedFrame": [
+          282.68348462167444,
+          792.6937855027587
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.2270405273987353
+      },
+      {
+        "source": [
+          805.5085348506401,
+          1464.2652916073969
+        ],
+        "frame": [
+          338.5459679871479,
+          776.1956039139098
+        ],
+        "predictedFrame": [
+          338.49901731589307,
+          776.2305862886701
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.05855025256261076
+      },
+      {
+        "source": [
+          851.292899408284,
+          1541.6025641025642
+        ],
+        "frame": [
+          365.50238285678387,
+          823.5047106266386
+        ],
+        "predictedFrame": [
+          365.71781347244155,
+          823.7487118280919
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.3254949100574626
+      },
+      {
+        "source": [
+          853.6259021651965,
+          1283.4502806736166
+        ],
+        "frame": [
+          369.3772789742327,
+          666.6353359623427
+        ],
+        "predictedFrame": [
+          369.45463342706773,
+          666.5354164045468
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.12636308560462664
+      },
+      {
+        "source": [
+          892.4203980099503,
+          1329.8258706467661
+        ],
+        "frame": [
+          392.656020905225,
+          695.373910396605
+        ],
+        "predictedFrame": [
+          392.68968896042657,
+          695.1323404384228
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.24390486390635596
+      },
+      {
+        "source": [
+          973.8377308707124,
+          1306.6055408970976
+        ],
+        "frame": [
+          442.54842722747,
+          681.995421211056
+        ],
+        "predictedFrame": [
+          442.5334933134312,
+          681.7253190237399
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.2705147193435201
+      },
+      {
+        "source": [
+          991.4595267745952,
+          1528.3860523038604
+        ],
+        "frame": [
+          451.15310826869774,
+          817.4851511082186
+        ],
+        "predictedFrame": [
+          451.28810247247236,
+          816.9658079637518
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.5366010964929261
+      },
+      {
+        "source": [
+          994.7037735849057,
+          1348.5666666666666
+        ],
+        "frame": [
+          454.96552267272244,
+          708.0410394660693
+        ],
+        "predictedFrame": [
+          454.8781473371697,
+          707.4714442863075
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.5762578572746926
+      },
+      {
+        "source": [
+          1036.7402315484806,
+          1520.5716353111434
+        ],
+        "frame": [
+          478.57126735126667,
+          812.7839479468215
+        ],
+        "predictedFrame": [
+          478.9632904645954,
+          812.6155229045163
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.42667214141475823
+      },
+      {
+        "source": [
+          1186.4667036625972,
+          1561.895116537181
+        ],
+        "frame": [
+          569.8930203207424,
+          838.931402806588
+        ],
+        "predictedFrame": [
+          569.8726952323644,
+          839.1380355582745
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.20762996721835164
+      },
+      {
+        "source": [
+          1214.6784741144413,
+          1472.4100817438691
+        ],
+        "frame": [
+          587.9323617320715,
+          784.7072152302268
+        ],
+        "predictedFrame": [
+          587.8741386196801,
+          784.8898449409527
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.19168605076104628
+      },
+      {
+        "source": [
+          1221.53125,
+          1439.7734375
+        ],
+        "frame": [
+          592.57814047753,
+          764.8600669813062
+        ],
+        "predictedFrame": [
+          592.3445053994282,
+          765.0735871065101
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.3165062299335706
+      },
+      {
+        "source": [
+          1239.6982532751092,
+          1379.773362445415
+        ],
+        "frame": [
+          604.425544901582,
+          728.9651270881918
+        ],
+        "predictedFrame": [
+          603.9578596070489,
+          728.693186438363
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.5410002326726349
+      },
+      {
+        "source": [
+          1274.5835051546392,
+          1343.6690721649484
+        ],
+        "frame": [
+          625.9196884936945,
+          707.2302155751122
+        ],
+        "predictedFrame": [
+          625.5491571312215,
+          707.0182521295434
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.42687468047836075
+      },
+      {
+        "source": [
+          1349.5996389891698,
+          1360.386642599278
+        ],
+        "frame": [
+          671.4508268151478,
+          717.9708464273981
+        ],
+        "predictedFrame": [
+          671.1324350605754,
+          717.8785907411315
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.33148819138580327
+      },
+      {
+        "source": [
+          1470.8836734693878,
+          1366.6918367346939
+        ],
+        "frame": [
+          744.9831393509403,
+          722.4619660315469
+        ],
+        "predictedFrame": [
+          745.0160319204311,
+          722.8152126008519
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.35477466066985763
+      },
+      {
+        "source": [
+          1498.4873949579833,
+          1276.2710084033613
+        ],
+        "frame": [
+          762.7705244552724,
+          667.7602730412538
+        ],
+        "predictedFrame": [
+          762.6551717392342,
+          667.9915563978967
+        ],
+        "heldOut": true,
+        "fitInlier": false,
+        "residualPixels": 0.2584535551262853
+      },
+      {
+        "source": [
+          1626.8474137931034,
+          1292.5129310344828
+        ],
+        "frame": [
+          840.4703065064837,
+          678.8792684057206
+        ],
+        "predictedFrame": [
+          840.7635127355408,
+          679.0443613764852
+        ],
+        "heldOut": false,
+        "fitInlier": true,
+        "residualPixels": 0.3364900916130476
+      }
+    ],
+    "interpretation": "Relative field-star alignment to the configured reference image; absolute sky scale and orientation remain publisher metadata. No stellar membership or physical depth."
+  },
+  "visualInspection": "Paired native crops were inspected across the field where the complete crop fits. Border-crossing crop identities remain diagnostic-only; the 59-point affine and its original residuals are preserved without claiming that every pair had a complete inspected crop."
+}

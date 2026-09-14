@@ -1,0 +1,42 @@
+{
+  "id": "eso-eso1101d",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Lagoon Nebula · ESO VISTA · infrared",
+  "identifiers": [
+    {
+      "type": "ESO image",
+      "value": "eso1101d"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1101d/",
+      "label": "Published source"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.eso.org/public/outreach/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m8/processing-observations.json",
+      "revision": "9d0a453d4c82637ebc54277f97281e0c8426e85b",
+      "sha256": "12963ecaa7f630cd9562e74eb9d85e8cd03f0385784ed92fc69033a59e556db5",
+      "locator": "/images/1"
+    }
+  ],
+  "publisher": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m8/processing-observations.json#/images/1"
+    }
+  ]
+}

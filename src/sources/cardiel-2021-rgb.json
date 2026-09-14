@@ -1,0 +1,42 @@
+{
+  "id": "cardiel-2021-rgb",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "RGB photometric calibration of 15 million Gaia stars",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab2124"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2107.08734v1",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2107.08734v1",
+      "checkedOn": "2026-09-13",
+      "locator": "Table1 RGB minus Gaia G polynomials; color range -0.5 < BP-RP < 2.0. Extinction and metallicity limit applicability."
+    }
+  ],
+  "publisher": "Cardiel et al. (2021)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cardiel et al. (2021)",
+      "scope": "Table1 RGB minus Gaia G polynomials; color range -0.5 < BP-RP < 2.0. Extinction and metallicity limit applicability.",
+      "evidence": "https://arxiv.org/abs/2107.08734v1"
+    },
+    {
+      "kind": "limitation",
+      "text": "Applied as a display color approximation; reddened nebula fields need not meet the calibration reference sample assumptions.",
+      "scope": "Rendered star colors",
+      "evidence": "https://arxiv.org/abs/2107.08734v1"
+    }
+  ]
+}

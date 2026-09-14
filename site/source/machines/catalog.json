@@ -2677,6 +2677,624 @@
           }
         ]
       }
+    },
+    {
+      "id": "webb",
+      "name": {
+        "value": "James Webb Space Telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-webb-observatory",
+            "checkedOn": "2026-09-14",
+            "locator": "Explore the Observatory: James Webb Space Telescope"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "A space observatory that records infrared light from stars, nebulae and galaxies.",
+        "citations": [
+          {
+            "catalogueId": "reference-webb-observatory",
+            "checkedOn": "2026-09-14",
+            "locator": "Explore the Observatory; The Largest Telescope Ever Sent into Space: space-based infrared observatory"
+          }
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-webb-observatory",
+            "checkedOn": "2026-09-14",
+            "locator": "Explore the Observatory; The Largest Telescope Ever Sent into Space: space-based infrared observatory"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-webb-observatory",
+            "checkedOn": "2026-09-14",
+            "locator": "Explore the Observatory; The Largest Telescope Ever Sent into Space: space-based infrared observatory"
+          }
+        ]
+      },
+      "band": {
+        "value": "Infrared",
+        "citations": [
+          {
+            "catalogueId": "reference-webb-observatory",
+            "checkedOn": "2026-09-14",
+            "locator": "The Largest Telescope Ever Sent into Space: infrared telescope"
+          }
+        ]
+      }
+    },
+    {
+      "id": "chandra",
+      "name": {
+        "value": "Chandra X-ray Observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-chandra",
+            "checkedOn": "2026-09-14",
+            "locator": "Who we are: NASA’s Chandra X-ray Observatory"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "An orbiting telescope that observes X-ray emission from hot gas, exploded stars and matter around black holes.",
+        "citations": [
+          {
+            "catalogueId": "reference-chandra",
+            "checkedOn": "2026-09-14",
+            "locator": "Who we are: telescope designed to detect X-ray emission from hot regions"
+          }
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-chandra",
+            "checkedOn": "2026-09-14",
+            "locator": "Who we are: telescope designed to detect X-ray emission from hot regions"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-chandra",
+            "checkedOn": "2026-09-14",
+            "locator": "Who we are: Chandra must orbit above the atmosphere"
+          }
+        ]
+      },
+      "band": {
+        "value": "X-ray",
+        "citations": [
+          {
+            "catalogueId": "reference-chandra",
+            "checkedOn": "2026-09-14",
+            "locator": "Who we are: X-ray emission"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vla",
+      "name": {
+        "value": "Karl G. Jansky Very Large Array",
+        "citations": [
+          {
+            "catalogueId": "esahubble-potw1720b",
+            "checkedOn": "2026-09-14",
+            "locator": "Opening paragraph: Karl G. Jansky Very Large Array (VLA)"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "An array of 27 active radio antennas that observe together as one telescope.",
+        "citations": [
+          {
+            "catalogueId": "reference-vla",
+            "checkedOn": "2026-09-14",
+            "locator": "What is the VLA?; equipment table, Number of antennas: 27 active and 1 spare"
+          }
+        ]
+      },
+      "kind": {
+        "value": "radio-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-vla",
+            "checkedOn": "2026-09-14",
+            "locator": "What is the VLA?; equipment table, Number of antennas: 27 active and 1 spare"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-vla",
+            "checkedOn": "2026-09-14",
+            "locator": "Location: Plains of San Agustin in New Mexico"
+          }
+        ]
+      },
+      "band": {
+        "value": "Radio",
+        "citations": [
+          {
+            "catalogueId": "reference-vla",
+            "checkedOn": "2026-09-14",
+            "locator": "What is the VLA?: array of radio dishes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wiyn-0-9m",
+      "name": {
+        "value": "WIYN 0.9-metre telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-wiyn-0-9m",
+            "checkedOn": "2026-09-14",
+            "locator": "About the WIYN 0.9m: 0.9-meter telescope"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The WIYN 0.9-metre telescope at Kitt Peak, Arizona.",
+        "citations": [
+          {
+            "catalogueId": "reference-wiyn-0-9m",
+            "checkedOn": "2026-09-14",
+            "locator": "About the WIYN 0.9m: Kitt Peak telescope and 0.9-meter primary mirror"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-wiyn-0-9m",
+            "checkedOn": "2026-09-14",
+            "locator": "About the WIYN 0.9m: Kitt Peak telescope and 0.9-meter primary mirror"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-wiyn-0-9m",
+            "checkedOn": "2026-09-14",
+            "locator": "About the WIYN 0.9m: Kitt Peak telescope and 0.9-meter primary mirror"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical",
+        "citations": [
+          {
+            "catalogueId": "noirlab-noao-m45",
+            "checkedOn": "2026-09-14",
+            "locator": "https://www.astropix.org/image/noirlab/noao-m45 — NOIRLab-curated Color Mapping Details: WIYN-0.9m (Mosaic I), optical B/V/I"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaia",
+      "name": {
+        "value": "Gaia",
+        "citations": [
+          {
+            "catalogueId": "reference-gaia",
+            "checkedOn": "2026-09-14",
+            "locator": "Page title: Gaia overview"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "A space observatory whose optical telescopes measured stellar positions, motions and spectra.",
+        "citations": [
+          {
+            "catalogueId": "reference-gaia",
+            "checkedOn": "2026-09-14",
+            "locator": "Spacecraft: two optical telescopes and three science instruments; stellar location, velocity and spectrum"
+          }
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-gaia",
+            "checkedOn": "2026-09-14",
+            "locator": "Spacecraft: two optical telescopes and three science instruments; stellar location, velocity and spectrum"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-gaia",
+            "checkedOn": "2026-09-14",
+            "locator": "Spacecraft: two optical telescopes and three science instruments; stellar location, velocity and spectrum"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical",
+        "citations": [
+          {
+            "catalogueId": "reference-gaia",
+            "checkedOn": "2026-09-14",
+            "locator": "Spacecraft: two optical telescopes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cfht",
+      "name": {
+        "value": "Canada-France-Hawaii Telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-cfht",
+            "checkedOn": "2026-09-14",
+            "locator": "Opening overview: Canada-France-Hawaii Telescope Corporation and CFH Telescope"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "A 3.6-metre optical and infrared telescope near the summit of Maunakea.",
+        "citations": [
+          {
+            "catalogueId": "reference-cfht",
+            "checkedOn": "2026-09-14",
+            "locator": "Opening overview: 3.6-meter optical/infrared telescope near the summit of Maunakea"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-cfht",
+            "checkedOn": "2026-09-14",
+            "locator": "Opening overview: 3.6-meter optical/infrared telescope near the summit of Maunakea"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-cfht",
+            "checkedOn": "2026-09-14",
+            "locator": "Opening overview: 3.6-meter optical/infrared telescope near the summit of Maunakea"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical and infrared",
+        "citations": [
+          {
+            "catalogueId": "reference-cfht",
+            "checkedOn": "2026-09-14",
+            "locator": "Opening overview: optical/infrared telescope"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hipparcos",
+      "name": {
+        "value": "Hipparcos",
+        "citations": [
+          {
+            "catalogueId": "reference-hipparcos",
+            "checkedOn": "2026-09-14",
+            "locator": "Page title: Hipparcos overview"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "An astrometry satellite whose main instrument and auxiliary star mapper produced the Hipparcos and Tycho stellar catalogues.",
+        "citations": [
+          {
+            "catalogueId": "reference-hipparcos",
+            "checkedOn": "2026-09-14",
+            "locator": "What’s special?: main instrument generated Hipparcos Catalogue; auxiliary star mapper generated Tycho Catalogue"
+          }
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-hipparcos",
+            "checkedOn": "2026-09-14",
+            "locator": "What’s special?: main instrument generated Hipparcos Catalogue; auxiliary star mapper generated Tycho Catalogue"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-hipparcos",
+            "checkedOn": "2026-09-14",
+            "locator": "Spacecraft: satellite; Journey: observational scheduling in its eccentric orbit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "aro-12m-original",
+      "name": {
+        "value": "ARO 12-metre telescope (original dish)",
+        "citations": [
+          {
+            "catalogueId": "reference-aro-12m-history",
+            "checkedOn": "2026-09-14",
+            "locator": "Page title and replacement-history paragraph: original UArizona 12-meter Telescope"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The original Arizona Radio Observatory 12-metre telescope, distinct from the later ALMA prototype replacement.",
+        "citations": [
+          {
+            "catalogueId": "reference-aro-12m-history",
+            "checkedOn": "2026-09-14",
+            "locator": "Replacement-history paragraph: original dish retired and removed in 2013–2014; replaced with a distinct ALMA prototype antenna"
+          }
+        ]
+      },
+      "kind": {
+        "value": "radio-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-aro-12m-history",
+            "checkedOn": "2026-09-14",
+            "locator": "Page title and introduction: 12-meter radio telescope"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-aro-12m-history",
+            "checkedOn": "2026-09-14",
+            "locator": "Replacement-history paragraph: original telescope in the Kitt Peak dome"
+          }
+        ]
+      },
+      "band": {
+        "value": "Millimetre radio",
+        "citations": [
+          {
+            "catalogueId": "zeigler-2013",
+            "checkedOn": "2026-09-14",
+            "locator": "Abstract: HCO+ J=1–0 observed at 89 GHz with Arizona Radio Observatory 12 m telescope"
+          }
+        ]
+      }
+    },
+    {
+      "id": "blanco-4m",
+      "name": {
+        "value": "Víctor M. Blanco 4-metre telescope",
+        "citations": [
+          {
+            "catalogueId": "noirlab-noirlab2030a",
+            "checkedOn": "2026-09-14",
+            "locator": "https://www.astropix.org/image/noirlab/noirlab2030a — NOIRLab-curated metadata, Facility: Víctor M. Blanco 4-meter Telescope"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The telescope at Cerro Tololo whose DECam instrument recorded the SMASH Large Magellanic Cloud mosaic.",
+        "citations": [
+          {
+            "catalogueId": "noirlab-noirlab2030a",
+            "checkedOn": "2026-09-14",
+            "locator": "https://www.astropix.org/image/noirlab/noirlab2030a — caption and Color Mapping Details: Blanco-4m (DECam), g/r/i/z; CTIO credit"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "noirlab-noirlab2030a",
+            "checkedOn": "2026-09-14",
+            "locator": "https://www.astropix.org/image/noirlab/noirlab2030a — caption and Color Mapping Details: Blanco-4m (DECam), g/r/i/z; CTIO credit"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "noirlab-noirlab2030a",
+            "checkedOn": "2026-09-14",
+            "locator": "https://www.astropix.org/image/noirlab/noirlab2030a — caption: Blanco telescope at Cerro Tololo Inter-American Observatory"
+          }
+        ]
+      }
+    },
+    {
+      "id": "swope-1m",
+      "name": {
+        "value": "Swope 1-metre telescope",
+        "citations": [
+          {
+            "catalogueId": "zaritsky-2004-lmc-photometry",
+            "checkedOn": "2026-09-14",
+            "locator": "PDF page 1, section 2 (The Data): Las Campanas Swope telescope (1m)"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The Las Campanas telescope used with the Great Circle Camera for the Magellanic Clouds Photometric Survey.",
+        "citations": [
+          {
+            "catalogueId": "zaritsky-2004-lmc-photometry",
+            "checkedOn": "2026-09-14",
+            "locator": "PDF page 1, section 2 (The Data): Swope telescope and Great Circle Camera drift-scan observations"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "zaritsky-2004-lmc-photometry",
+            "checkedOn": "2026-09-14",
+            "locator": "PDF page 1, section 2 (The Data): Swope telescope and Great Circle Camera drift-scan observations"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "zaritsky-2004-lmc-photometry",
+            "checkedOn": "2026-09-14",
+            "locator": "PDF page 1, section 2 (The Data): Swope telescope and Great Circle Camera drift-scan observations"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical",
+        "citations": [
+          {
+            "catalogueId": "zaritsky-2004-lmc-photometry",
+            "checkedOn": "2026-09-14",
+            "locator": "PDF page 1, abstract and section 2: U, B, V and I stellar photometry"
+          }
+        ]
+      }
+    },
+    {
+      "id": "curtis-schmidt",
+      "name": {
+        "value": "Michigan Curtis Schmidt telescope",
+        "citations": [
+          {
+            "catalogueId": "massey-2002-ubvr",
+            "checkedOn": "2026-09-14",
+            "locator": "PDF page 3, introduction: Michigan Curtis Schmidt telescope at CTIO"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The telescope at Cerro Tololo used for Massey’s UBVR photometric survey of the Magellanic Clouds.",
+        "citations": [
+          {
+            "catalogueId": "massey-2002-ubvr",
+            "checkedOn": "2026-09-14",
+            "locator": "PDF page 3, section 2.1 (Observations and Reductions): all observations taken with the Curtis Schmidt telescope and Harris UBVR filters"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "massey-2002-ubvr",
+            "checkedOn": "2026-09-14",
+            "locator": "PDF page 3, section 2.1 (Observations and Reductions): all observations taken with the Curtis Schmidt telescope and Harris UBVR filters"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "massey-2002-ubvr",
+            "checkedOn": "2026-09-14",
+            "locator": "PDF page 3, section 2.1 (Observations and Reductions): all observations taken with the Curtis Schmidt telescope and Harris UBVR filters"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical",
+        "citations": [
+          {
+            "catalogueId": "massey-2002-ubvr",
+            "checkedOn": "2026-09-14",
+            "locator": "PDF page 3, section 2.1: standard UBVR system"
+          }
+        ]
+      }
+    },
+    {
+      "id": "niittee-sharpstar-61edph-iii",
+      "name": {
+        "value": "Niittee’s Sharpstar 61EDPH III",
+        "citations": [
+          {
+            "catalogueId": "niittee-plejades",
+            "checkedOn": "2026-09-14",
+            "locator": "Summary, Image Details / Equipment Used: author Taavi Niittee; Telescope: Sharpstar 61EDPH III"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Taavi Niittee’s telescope used with a ZWO ASI071MC Pro camera for the Pleiades photograph from Tõrva, Estonia.",
+        "citations": [
+          {
+            "catalogueId": "niittee-plejades",
+            "checkedOn": "2026-09-14",
+            "locator": "Summary, Image Details / Equipment Used: Tõrva, Estonia; Sharpstar 61EDPH III; ZWO ASI071MC Pro"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "niittee-plejades",
+            "checkedOn": "2026-09-14",
+            "locator": "Summary, Equipment Used: Telescope: Sharpstar 61EDPH III"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "niittee-plejades",
+            "checkedOn": "2026-09-14",
+            "locator": "Summary, Image Details: photograph taken from Tõrva, Estonia"
+          }
+        ]
+      }
     }
   ],
   "missions": [

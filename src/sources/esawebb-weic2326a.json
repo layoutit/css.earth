@@ -1,0 +1,42 @@
+{
+  "id": "esawebb-weic2326a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Crab Nebula · Webb · near/mid-infrared",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "weic2326a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/weic2326a/",
+      "label": "Published source"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m1/observations.json",
+      "revision": "9d0a453d4c82637ebc54277f97281e0c8426e85b",
+      "sha256": "6adf56098e54344fe8615772b27c871e84aa86613a5bd50351f0b8168b3c94f7",
+      "locator": "/images/1"
+    }
+  ],
+  "publisher": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m1/observations.json#/images/1"
+    }
+  ]
+}

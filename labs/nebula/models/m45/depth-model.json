@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-nebula-depth-model@1",
+  "id": "m45",
+  "centerIcrsDegrees": [
+    56.75,
+    24.1167
+  ],
+  "evidence": {
+    "path": "labs/nebula/models/m45/physical-evidence.json",
+    "sha256": "73ec8317dbd6e75b0e39184b2196011495a4ddf0e88571cc1719ec871d9385c4"
+  },
+  "background": {
+    "id": "unconstrained-wide-layer",
+    "methodId": "coherent-irregular-front",
+    "evidenceIds": [
+      "observer-frame",
+      "single-warped-layer",
+      "authored-surface-settings"
+    ],
+    "support": "unconstrained",
+    "centerArcsec": [
+      0,
+      0
+    ],
+    "radiusArcsec": [
+      7560,
+      7560
+    ],
+    "angleDegrees": 0,
+    "depthArcsec": 0,
+    "gradient": [
+      0.018,
+      -0.012
+    ],
+    "curvaturePerArcsec": [
+      0.000003,
+      0.000002,
+      -0.000002
+    ],
+    "thicknessArcsec": 150,
+    "strength": 1,
+    "rationale": "Entire wide background is unmeasured. Authored weak saddle warp preserves shared connected support without brightness-to-depth embossing."
+  },
+  "features": [
+    {
+      "id": "central-west-east-deformation",
+      "methodId": "coherent-irregular-front",
+      "evidenceIds": [
+        "foreground-multilayer-model",
+        "single-warped-layer",
+        "authored-surface-settings"
+      ],
+      "support": "paper-guided",
+      "centerArcsec": [
+        0,
+        0
+      ],
+      "radiusArcsec": [
+        2100,
+        1900
+      ],
+      "angleDegrees": 0,
+      "depthArcsec": -100,
+      "gradient": [
+        0.16,
+        0.03
+      ],
+      "curvaturePerArcsec": [
+        0.00002,
+        -0.000015,
+        0.000008
+      ],
+      "thicknessArcsec": 100,
+      "strength": 0.85,
+      "rationale": "Published central west/east ordering motivates positive westward tilt only; all scales, amplitudes and window are authored. z=0 is not stellar plane, so this does not assert measured dust-star separation or reproduce both layers."
+    },
+    {
+      "id": "hd23512-local-deformation",
+      "methodId": "coherent-irregular-front",
+      "evidenceIds": [
+        "hd23512-anchor",
+        "absorption-kinematics",
+        "single-warped-layer",
+        "authored-surface-settings"
+      ],
+      "support": "paper-guided",
+      "centerArcsec": [
+        354.58079336812915,
+        -1773.5304103361866
+      ],
+      "radiusArcsec": [
+        500,
+        400
+      ],
+      "angleDegrees": 0,
+      "depthArcsec": 280,
+      "gradient": [
+        0.05,
+        -0.06
+      ],
+      "curvaturePerArcsec": [
+        0.0002,
+        0.0001,
+        -0.00015
+      ],
+      "thicknessArcsec": 75,
+      "strength": 0.7,
+      "rationale": "Observed HD23512 direction scopes an authored deformation at a distinct molecular-cloud sightline. The ellipse and all depth parameters are hypotheses; velocity, density and reddening do not set these coefficients. This is still one surface, not a recovered cloud boundary."
+    }
+  ],
+  "detailThicknessRatio": 0.45,
+  "minimumThicknessArcsec": 2,
+  "interpretation": "Authored warped finite display-emission surface inspired by localized scattering/absorption topology. Multiple overlapping dust layers, grain scattering, illumination, extinction and true stellar distances are unsupported. No physical diagnostic or calibrated luminosity is fitted; all four lenses share geometry/alpha/stars."
+}
