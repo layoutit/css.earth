@@ -9,10 +9,10 @@
       "finding": "The diagnostic trial reduces accepted photographed area from 32.58% to 24.48%; only 11 of 28 common-point overlap pairs improve. Retain the Deep Impact photographs. The original H-function approximation and final fitting phase range remain unverified; the tabulated 550 nm model is applied to a clear filter.",
       "revisitWhen": "A verified formulation and matching filter calibration improve both retained terrain coverage and independent overlaps.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/evidence/photometry/trial.json",
         "https://arxiv.org/abs/1310.4165",
         "https://doi.org/10.1016/j.icarus.2012.02.011",
-        "https://www.lpi.usra.edu/meetings/acm2012/pdf/6385.pdf",
-        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/tools/photometry/README.md"
+        "https://www.lpi.usra.edu/meetings/acm2012/pdf/6385.pdf"
       ],
       "checked": [
         {
@@ -28,15 +28,321 @@
       "finding": "The diagnostic trial reduces accepted photographed area from 56.43% to 34.28%; only 4 of 15 common-point overlap pairs improve. Retain the NExT photographs. The original H-function approximation and final fitting phase range remain unverified; the tabulated 550 nm model is applied to a clear filter.",
       "revisitWhen": "A verified formulation and matching filter calibration improve both retained terrain coverage and independent overlaps.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/evidence/photometry/trial.json",
         "https://arxiv.org/abs/1310.4165",
         "https://doi.org/10.1016/j.icarus.2012.02.011",
-        "https://www.lpi.usra.edu/meetings/acm2012/pdf/6385.pdf",
-        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/tools/photometry/README.md"
+        "https://www.lpi.usra.edu/meetings/acm2012/pdf/6385.pdf"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+        }
+      ]
+    },
+    {
+      "id": "its-9000678",
+      "subject": "ITS 9000678 intermediate approach frame",
+      "status": "deferred",
+      "finding": "The retained survey identifies this 7.026 m/pixel frame between selected wider and finer footprints. It was not selected for the existing composite; no failed per-frame camera fit is recorded.",
+      "revisitWhen": "A registered footprint demonstrates useful coverage or detail beyond the selected approach sequence.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "its-9000684",
+      "subject": "ITS 9000684 intermediate approach frame",
+      "status": "deferred",
+      "finding": "The retained survey identifies this 4.286 m/pixel frame between selected wider and finer footprints. It was not selected for the existing composite; no failed per-frame camera fit is recorded.",
+      "revisitWhen": "A registered footprint demonstrates useful coverage or detail beyond the selected approach sequence.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "its-9000692",
+      "subject": "ITS 9000692 final 64 by 64 window",
+      "status": "deferred",
+      "finding": "The retained survey identifies 9000692 among four final windows spanning 2.094 to 0.488 m/pixel. Its small footprint has not been qualified on the current fixed atlas; nominal sampling alone does not establish useful displayed detail.",
+      "revisitWhen": "The frame passes independent terrain-overlap registration and contributes useful detail at the supported atlas resolution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "its-9000697",
+      "subject": "ITS 9000697 final 64 by 64 window",
+      "status": "deferred",
+      "finding": "The retained survey identifies 9000697 among four final windows spanning 2.094 to 0.488 m/pixel. Its small footprint has not been qualified on the current fixed atlas; nominal sampling alone does not establish useful displayed detail.",
+      "revisitWhen": "The frame passes independent terrain-overlap registration and contributes useful detail at the supported atlas resolution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "its-9000704",
+      "subject": "ITS 9000704 final 64 by 64 window",
+      "status": "deferred",
+      "finding": "The retained survey identifies 9000704 among four final windows spanning 2.094 to 0.488 m/pixel. Its small footprint has not been qualified on the current fixed atlas; nominal sampling alone does not establish useful displayed detail.",
+      "revisitWhen": "The frame passes independent terrain-overlap registration and contributes useful detail at the supported atlas resolution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "its-9000710",
+      "subject": "ITS 9000710 final 64 by 64 window",
+      "status": "deferred",
+      "finding": "The retained survey identifies 9000710 among four final windows spanning 2.094 to 0.488 m/pixel. Its small footprint has not been qualified on the current fixed atlas; nominal sampling alone does not establish useful displayed detail.",
+      "revisitWhen": "The frame passes independent terrain-overlap registration and contributes useful detail at the supported atlas resolution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "pds-2012-shape-constraints",
+      "subject": "PDS v2 Tempel 1 shape and source constraints",
+      "status": "included",
+      "finding": "The 16,022-vertex, 32,040-triangle source supplies the shape and its stereo, limb and weak-region flags. The shape and constraint views distinguish those methods; weak regions are not claimed as measured terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/README.md",
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/dataset.shtml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "deep-impact-its-mosaic",
+      "subject": "Eight pre-impact ITS photographs",
+      "status": "included",
+      "finding": "Frames 9000632, 9000639, 9000644, 9000654, 9000673, 9000675, 9000680 and 9000688 form the existing 2005 mosaic. The three cropped close-ups use relative terrain-overlap registration; they improve detail inside an existing footprint and do not establish metre-accurate absolute terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/preparation/closeups.json",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/evidence/closeups/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "next-navcam-mosaic",
+      "subject": "Six Stardust-NExT NAVCAM photographs",
+      "status": "included",
+      "finding": "N30033, N30036, N30039, N30042, N30045 and N30048 form the separate 2011 mosaic. The two encounters retain their own photographs and lighting; they are not combined into a surface-change map.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "mri-9000909",
+      "subject": "MRI 9000909",
+      "status": "excluded",
+      "finding": "The evaluated frame is much coarser, about 88 m per pixel, than the selected ITS approach sequence. It was not selected for the current surface mosaic.",
+      "revisitWhen": "A registered footprint supplies useful terrain missing from the finer selected sources.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "post-impact-mri",
+      "subject": "Later 2005 MRI frames",
+      "status": "deferred",
+      "finding": "Later frames can include the impact plume; the source note distinguishes spacecraft impact time from Earth reception time. No plume-free registered surface contribution was qualified for these candidates.",
+      "revisitWhen": "A specific frame has a supported nucleus-only footprint and independently checked camera registration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "hri-2005-and-spc",
+      "subject": "2005 HRI imagery and later SPC shape",
+      "status": "unresolved",
+      "finding": "Both routes were surveyed without replacing the qualified 2012 source shape. The retained note does not establish a restored matching image, camera and SPC model bundle.",
+      "revisitWhen": "The original image, camera and matching SPC mesh can be restored together and independently registered.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "sbmt-camera-route",
+      "subject": "SBMT source cameras for Tempel 1",
+      "status": "unresolved",
+      "finding": "The earlier survey lacked access to its SBMT camera files. Shared observation tooling has since changed, but this ledger migration does not establish current access or a matching Tempel source bundle.",
+      "revisitWhen": "A public or already-authorized Tempel image, pointing and exact model bundle is available for qualification.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "coarse-facet-normalization",
+      "subject": "Earlier coarse-mesh photometric correction",
+      "status": "excluded",
+      "finding": "The original photographic selection retained acquisition shading after coarse-mesh normalization introduced facet patterns. Today's Li-parameter trials are separate entries with measured coverage losses.",
+      "revisitWhen": "Verified model normals and photometry improve independent overlaps while preserving useful source coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "hrii-color-temperature",
+      "subject": "HRI-IR V3 fitted color temperature",
+      "status": "included",
+      "finding": "The selected 40-exposure scan supplies a fitted temperature field on 1,590 accepted source facets. It is a new fit to calibrated spectra with coarse approximate placement, not a reproduction of the published 2013 temperature map or its uncertainty.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/science/hrii/scan.json",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/science/hrii/preparation.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "hrii-infrared-slope",
+      "subject": "HRI-IR V3 reflected continuum slope",
+      "status": "included",
+      "finding": "The same accepted scan supplies the 1.5–2.2 micrometre continuum slope after thermal separation. It measures spectral reflectance slope, not terrain steepness or identified minerals; missing spectra remain grid.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/science/hrii/scan.json",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/science/hrii/preparation.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "other-hrii-scans",
+      "subject": "Other inbound and outbound HRI-IR scans",
+      "status": "deferred",
+      "finding": "Additional scans remain source candidates. The selected scan's alignment and detector checks do not establish their registration or remove their possible coma contributions.",
+      "revisitWhen": "A specific scan adds useful source facets and passes independent scan-to-shape alignment and spectral-quality checks.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "impact-and-smooth-region-places",
+      "subject": "Deep Impact site and smooth regions S1–S4",
+      "status": "included",
+      "finding": "The site uses the released PDS frame; S1–S4 use representative interiors in Thomas 2013 Fig. 2b. Coordinates are approximate, and the weak shape cells under S1 and S2 do not become precise surveys through label placement.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "closeup-reproduction-at-current-main",
+      "subject": "Reproducing the first cropped ITS camera on current main",
+      "status": "unresolved",
+      "finding": "During this work, preparation of 9000675 fails the source-scale registration budget with both the unchanged main matcher and the unit-corrected matcher. Their regenerated control records are identical before the gate. Existing shipped photographs remain unchanged; earlier recorded reproduction passes do not establish a current pass.",
+      "revisitWhen": "The replay discrepancy is traced to its source, camera or software input and both partitions meet the existing budget.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/preparation/closeups.json",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
         }
       ]
     }

@@ -10,7 +10,7 @@
 
 - **Mayo, Left Foot and Right Foot:** mission-team names and terrain descriptions from [Brownlee et al. (2004), Fig. 2](https://doi.org/10.1126/science.1097899). NASA's [PIA06285 photograph and diagram](https://science.nasa.gov/photojournal/wild-2-close-look/) supply the image callouts. These are approximate places within depressions, with no surveyed centres or boundaries.
 
-[Investigation ledger](investigations.json): tested alternatives and the evidence needed to revisit them.
+[Investigation ledger](investigations.json): tested alternatives and the evidence needed to revisit them. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
 
 ## Evidence
 
