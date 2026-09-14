@@ -9,8 +9,8 @@ export const PREPARATION_TRACE_SCHEMA = 'cssearth-preparation-trace@1';
 /** read: file contents; load: a module; probe: existence; list: directory names; tree: a copied directory; write: created, changed or removed. */
 export type PreparationAccess = 'read' | 'load' | 'probe' | 'list' | 'tree' | 'write';
 export type DescriptorView = 'registry' | 'recipe' | 'pins';
-/** What the path held when the process first touched it: size and modification time, or absence. */
-export interface TracedState { size?: number; modified?: number; missing?: true; views?: Record<DescriptorView, string> }
+/** What the path held when the process first touched it: size and modification time, whether it was a directory, or absence. */
+export interface TracedState { size?: number; modified?: number; directory?: true; missing?: true; views?: Record<DescriptorView, string> }
 export interface TracedFile { accesses: PreparationAccess[]; first: TracedState }
 export interface TracedCommand { command: string; args: string[]; cwd: string; shell: boolean }
 export interface PreparationTrace {

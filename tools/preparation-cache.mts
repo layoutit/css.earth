@@ -134,7 +134,8 @@ async function classifyTrace(root: string, objectId: string, traces: Preparation
   const inputs = new Map<string, { evidence: PreparationEvidence; first: TracedState[] }>(), outputs = new Map<string, PreparationEvidence>();
   const importers = [...traces.catalogImporters].map(inside);
   const registryOnly = importers.every(importer => importer === REGISTRY_MODULE);
-  const presence = (first: TracedState[], evidence: PreparationEvidence): PreparationEvidence => first.some(state => state.missing) ? 'absent' : evidence;
+  const presence = (first: TracedState[], evidence: PreparationEvidence): PreparationEvidence =>
+    first.some(state => state.missing) ? 'absent' : first.some(state => state.directory) && evidence !== 'names' && evidence !== 'tree' ? 'directory' : evidence;
   for (const [absolute, { accesses, first }] of traces.files) {
     const path = inside(absolute);
     if (!path || path === '.git' || path.startsWith('.git/') || path.startsWith('node_modules/')) continue;
