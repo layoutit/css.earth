@@ -3,6 +3,7 @@ import { record, requiredElement } from './browser-types.mts';
 import { OBJECT_CATEGORIES, matchesObjectCategory, objectCategoryCount } from './object-categories.mts';
 import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-search.mts';
 import { parseFeatureIndex, parseFeaturePin, matchFeatures, featureResult } from './feature-search.mts';
+import { renderDatasetResponse } from './dataset-response.mts';
 
 export interface SearchPin { url: string; bytes: number; sha256: string; count: number; }
 export function parseSearchPin(value: unknown): SearchPin {
@@ -65,11 +66,17 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   const value = (url.searchParams.get('browse') ?? url.searchParams.get('q') ?? '').slice(0, SEARCH_QUERY_LIMIT).trim();
   const searching = url.searchParams.has('q');
   search.setAttribute('value', value);
-  for (const input of form.querySelectorAll<HTMLInputElement>('[data-search-context]')) {
+  for (const input of document.querySelectorAll<HTMLInputElement>('[data-search-context], [data-dataset-context]')) {
     const value = url.searchParams.get(input.name);
     input.toggleAttribute('disabled', !value);
     input.setAttribute('value', value?.slice(0, 2048) ?? '');
   }
+  const clear = new URL(`/${objectId}/`, url.origin);
+  for (const name of ['v', 'overview', 'focus', 'focusLens', 'dataset']) {
+    const value = url.searchParams.get(name);
+    if (value) clear.searchParams.set(name, value.slice(0, 2048));
+  }
+  document.querySelector('.planet-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
   const browser = requiredElement<HTMLElement>(document, '.planet-object-browser');
   const information = requiredElement<HTMLElement>(document, '.planet-information-panel');
   browser.hidden = !searching;
@@ -145,7 +152,14 @@ export async function handleSearchRequest(request: Request, fetcher: typeof fetc
   // No query on this fetch: it retrieves the static page without recursing into search.
   const response = await fetcher(new URL(`/${objectId}/`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
   if (!response.ok || !response.headers.get('content-type')?.includes('text/html')) return response;
-  const html = await renderSearchResponse(await response.text(), url, fetcher);
+  let html: string;
+  try {
+    html = await renderDatasetResponse(await response.text(), url, objectId, fetcher);
+    html = await renderSearchResponse(html, url, fetcher);
+  } catch (error) {
+    if (error instanceof RangeError) return new Response(error.message, { status: 400 });
+    throw error;
+  }
   const headers = new Headers(response.headers);
   for (const name of ['content-length', 'content-encoding', 'etag', 'last-modified', 'expires']) headers.delete(name);
   headers.set('cache-control', 'private, no-store');

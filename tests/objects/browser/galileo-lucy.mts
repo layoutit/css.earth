@@ -20,7 +20,7 @@ try {
  const painted=()=>page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
  for(const id of ['dactyl','dinkinesh','selam']) {
   await page.goto(`${origin}/${id}/`,{waitUntil:'networkidle'});await ready(id);
-  const selector=await page.locator('button[name="lens"]').innerText();assert.match(selector,/Shape/);
+  const selector=await page.locator('button[name="dataset"]').innerText();assert.match(selector,/Shape/);
   for(const shadows of [false,true]) {
    await page.locator('input[name="shadows"]').evaluate((input,checked)=>{
 if (!(input instanceof HTMLInputElement)) throw new Error("Expected HTMLInputElement observation");

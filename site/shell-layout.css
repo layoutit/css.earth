@@ -693,7 +693,9 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
   .explorer-brand-row,
   .planet-machine-toggle { transition: opacity 160ms ease, visibility 0s; }
+  body:has(.planet-sheet-handle:checked) .explorer-brand-row,
   body:is([data-sheet="half"], [data-sheet="full"]) .explorer-brand-row,
+  body:has(.planet-sheet-handle:checked) .planet-machine-toggle,
   body[data-sheet="full"] .planet-machine-toggle {
     opacity: 0;
     visibility: hidden;

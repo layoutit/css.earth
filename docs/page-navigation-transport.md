@@ -39,8 +39,8 @@ startup failure restores the original attributes and children on the same
 elements. No second scene is kept as a fallback. Successful startup releases the
 initial attribute snapshot; subsequent navigation uses the existing lifecycle.
 
-JavaScript still provides camera input, animation, live search and category filtering,
-dataset switching and world navigation. Dataset buttons remain disabled until their owner is ready.
+JavaScript provides camera input, animation, live search and category filtering,
+dataset changes in place and world navigation.
 The HTML reference pose does not restore a saved camera URL or publish the
 surrounding interactive world. This change adds prepared HTML to the first page;
 it does not claim a smaller JavaScript bundle.
@@ -52,7 +52,30 @@ cancellation never disturbs another decode. Page disposal rejects pending jobs
 and releases the worker. Failed validation never falls back to main-thread
 scene decoding.
 
-## Native search on Netlify
+## Native dataset selection and search on Netlify
+
+Dataset buttons submit an ordinary GET form to the current object's route, for
+example `/saturn/?dataset=ultraviolet`. The response uses the same prepared
+decoder and scene serializer as the initial page. It verifies the descriptor
+embedded in that page, fetches the content-addressed object and shared banks,
+and applies the requested prepared variant, including material banks, visibility
+and cross-section state. It replaces the existing stage markup and selects the
+existing dataset description and button. The response contains exactly one scene;
+there are no alternate scene templates or dataset-specific styles.
+
+Native choices survive reload, Back, search and Clear search. Dataset source
+links use the query URL too; previously shared `#dataset` links still work with
+JavaScript. The server cannot read fragments. While scripts load or after a
+startup failure, the same buttons remain usable as submits. Once ready, the
+renderer intercepts those buttons and updates the retained scene in place.
+Startup adopts the dataset rendered by the server as its first selection,
+without publishing the default dataset first.
+
+This applies to datasets owned by registered object scenes. Datasets on prepared
+world-context volumes, such as Orion under `/sun/?focus=m42`, still depend on
+the interactive world renderer. Camera restoration and world-context rendering
+remain JavaScript capabilities; the native object scene uses its prepared
+reference pose.
 
 The existing search field is a GET form. Submitting `q` keeps the object URL and
 returns matches in the same shell. Category buttons submit that form too, and
@@ -62,7 +85,7 @@ search. Earth's cities come from its active named-feature index. Feature results
 are links to their owning body with a `feature` parameter; JavaScript adds the
 camera flight after that body is ready.
 
-`netlify/edge-functions/search-route.ts` only routes requests that contain `q`
+`netlify/edge-functions/search-route.ts` routes requests that contain `q` or `dataset`
 to the Node function in `netlify/functions/search.ts`. It keeps optional category
 and view parameters, and passes ordinary pages and assets straight through.
 The search work runs in Node because parsing the shell and searching the index
@@ -71,8 +94,10 @@ pages; it does not need an Astro server adapter.
 
 The function fetches the current object's prebuilt page without a query and
 updates the retained search controls and rows between the `search-shell`
-boundaries. The scene, head, stylesheet bytes and application scripts pass
-through unchanged. It neither bundles nor regenerates scene banks. The feature
+boundaries. Search alone passes the scene through unchanged; dataset requests
+also update the existing stage between the `prepared-scene` boundaries. The
+head, stylesheet bytes and application scripts pass through unchanged. The
+function fetches existing scene banks and never regenerates them. The feature
 index is checked against its byte count and SHA-256 pin from that same page;
 warm function instances cache only authenticated index data. Query responses
 are not cached and carry `noindex, follow`. An index failure leaves object
@@ -103,6 +128,8 @@ node --test tools/serialize-prepared-scene.test.mts
 node site/test/progressive-enhancement-browser.mts http://127.0.0.1:4210
 node --test site/test/search-response.test.mts
 node site/test/search-browser.mts http://127.0.0.1:4210
+node --test site/test/dataset-response.test.mts site/test/dataset-url.test.mts
+node site/test/native-datasets-browser.mts http://127.0.0.1:4210
 ```
 
 Worker reuse, cancellation and disposal are covered by
@@ -126,10 +153,21 @@ The request tests cover parameter routing, escaping, pinned-index
 failure and unchanged scene bytes. Netlify's local function build checks the
 server bundle; it does not prove a deployed site's configuration.
 
+The native dataset browser check switches Saturn textures and cross-sections,
+returns to the default, reloads, goes Back, searches and clears that search with
+JavaScript disabled at desktop and phone widths. Delayed startup verifies the
+same scene and button elements, identical computed button styles and the selected
+dataset as the first live presentation. It also verifies in-place switching and
+native submission after failed object transport. The request tests reject
+unknown or ambiguous datasets and altered prepared bytes.
+
+![Saturn's ultraviolet dataset selected with JavaScript disabled](images/native-dataset.png)
+
 ![A native Titan search in the existing Saturn scene with JavaScript disabled](images/native-search.png)
 
-The [continuous Saturn capture](../site/test/evidence/progressive-enhancement.mp4) shows
-this change at 1280×900: application scripts are held for the first ten seconds,
+The earlier [continuous Saturn capture](../site/test/evidence/progressive-enhancement.mp4)
+was recorded at commit `05ed6415b`, before native dataset submits were added.
+At 1280×900, application scripts are held for the first ten seconds,
 while the existing information tabs work by click and keyboard. Script startup
 then adds camera input and dataset switching to those same 972 scene elements.
 The capture's assertions verify element identity and exactly one detailed scene.

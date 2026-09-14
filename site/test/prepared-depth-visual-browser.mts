@@ -57,7 +57,7 @@ try {
     const initial = await camera(reference);
     await scrollToDistance(reference, initial.distanceKilometers * required(initial.silhouetteRadius) / 350);
     const nearDistance = (await camera(reference)).distanceKilometers;
-    const lenses = await reference.locator('button[name="lens"]').evaluateAll(nodes => nodes.map(node => { if (!(node instanceof HTMLButtonElement)) throw new Error('Expected lens button'); return node.value; }));
+    const lenses = await reference.locator('button[name="dataset"]').evaluateAll(nodes => nodes.map(node => { if (!(node instanceof HTMLButtonElement)) throw new Error('Expected lens button'); return node.value; }));
     const defaultLens = await reference.locator('.planet-stage').getAttribute('data-lens');
     let lens = defaultLens;
     for (const action of ['near', 'orbit', 'dataset', 'marker', 'return', 'resize']) {
@@ -73,8 +73,8 @@ try {
       // Saved view URLs encode the camera. Apply the dataset through its real
       // control on both pages after reloading that camera.
       if (lens !== defaultLens) for (const page of [reference, candidate]) {
-        await page.locator(`button[name="lens"][value="${lens}"]`).click();
-        await page.locator(`button[name="lens"][value="${lens}"][aria-pressed="true"]`).waitFor();
+        await page.locator(`button[name="dataset"][value="${lens}"]`).click();
+        await page.locator(`button[name="dataset"][value="${lens}"][aria-pressed="true"]`).waitFor();
         await page.locator('.planet-lenses[aria-busy="false"]').waitFor();
         await page.waitForTimeout(250);
       }

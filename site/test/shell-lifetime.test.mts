@@ -426,7 +426,7 @@ test('the planet lens controller ignores an earlier retained galaxy bank and bin
   information.selectors.set('.planet-lenses', planetBank);
   button.value = 'planet-observation'; button.ariaPressed = 'true';
   detail.dataset.lensDetails = button.value; detail.hidden = true;
-  option.selectors.set('button[name="lens"]', button);
+  option.selectors.set('button[name="dataset"]', button);
   planetBank.selectors.set('[data-lens-option]', [option]);
   information.selectors.set('[data-lens-details]', [detail]);
   const observed: Node[] = [];

@@ -109,12 +109,12 @@ if (!(panel instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetail
         panel.open = true;
       });
       for (const lens of ["methane", "near-infrared", "normal"]) {
-        await page.locator(`button[name="lens"][value="${lens}"]`).click();
+        await page.locator(`button[name="dataset"][value="${lens}"]`).click();
         await page.waitForFunction((id) =>
           document.querySelector<HTMLElement>(".planet-stage")?.dataset.lens === id,
         lens);
         assert.equal(await page.locator(
-          `button[name="lens"][value="${lens}"]`,
+          `button[name="dataset"][value="${lens}"]`,
         ).getAttribute("aria-pressed"), "true");
       }
 

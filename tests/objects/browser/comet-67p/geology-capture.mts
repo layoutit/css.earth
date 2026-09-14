@@ -32,7 +32,7 @@ export default async (page: Page,{screenshotPrefix='67p-geology',dprs=[1,2]}: { 
 window.__geologyProof={body,nodes:[...body.children],camera:requiredElement(document.querySelector('.polycss-scene')).style.transform};});
       const views=[];
       for(const id of ['regions','geology']){
-        await p.locator(`button[name="lens"][value="${id}"]`).click();
+        await p.locator(`button[name="dataset"][value="${id}"]`).click();
         await p.waitForFunction(id=>{
           function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
 return requiredElement(document.querySelector('.planet-stage')).dataset.lens===id; },id);

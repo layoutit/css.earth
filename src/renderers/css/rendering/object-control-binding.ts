@@ -19,7 +19,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const information = document.querySelector(".planet-information-panel");
   const lensRoot = information?.querySelector(".planet-lenses");
   const settingsRoot = document.querySelector(".planet-settings");
-  const lensInputs = [...(lensRoot?.querySelectorAll<HTMLButtonElement>('button[name="lens"]') ?? [])];
+  const lensInputs = [...(lensRoot?.querySelectorAll<HTMLButtonElement>('button[name="dataset"]') ?? [])];
   const settingsInputs = [...(settingsRoot?.querySelectorAll<SettingInput>("input[name], button[name]") ?? [])]
     .filter(input => !["motion", "skyContrast", "heliosphere", "asteroidBodies", "asteroidOrbits", "asteroidLabels"].includes(input.name));
   const legends = [...(lensRoot?.querySelectorAll<HTMLElement>("[data-lens-legend]") ?? [])]
@@ -71,7 +71,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       root?.setAttribute("aria-busy", String(!ready || next.pending === true));
     }
     for (const [id, input] of lenses) {
-      input.disabled = !ready;
+      input.disabled = input.type === 'submit' ? false : !ready;
       input.setAttribute("aria-pressed", String(pressed.has(id)));
     }
     for (const legend of legends) legend.hidden = !pressed.has(legend.dataset.lensLegend ?? null);
@@ -108,7 +108,11 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   try {
     publish();
-    for (const [id, input] of lenses) listen(input, "click", () => act({ kind: "lens", id }));
+    for (const [id, input] of lenses) listen(input, "click", event => {
+      if (!ready) return;
+      event.preventDefault();
+      act({ kind: "lens", id });
+    });
     for (const control of settingPlans) {
       const input = settingInput(control.name);
       const event = control.kind === "toggle" ? "change" : input.type === "range" ? "input" : "click";
@@ -135,7 +139,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     const errors = [];
     for (const remove of listeners.splice(0)) { try { remove(); } catch (error) { errors.push(error); } }
     for (const input of [...lensInputs, ...settingsInputs]) {
-      try { input.disabled = true; if (input.name === "speed") input.dataset.runtimeReady = "false"; }
+      try { input.disabled = input.type !== 'submit'; if (input.name === "speed") input.dataset.runtimeReady = "false"; }
       catch (error) { errors.push(error); }
     }
     for (const root of [lensRoot, settingsRoot]) {

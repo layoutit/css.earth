@@ -31,11 +31,11 @@ export default async (page: Page) => {
       });
       const prefix = `output/playwright/67p-osiris-product-dpr${dpr}`;
       const select = async (id: string) => {
-        await p.locator(`button[name="lens"][value="${id}"]`).click();
+        await p.locator(`button[name="dataset"][value="${id}"]`).click();
         await p.waitForFunction(id => {
           function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
           function requiredInput(value: Element | null): HTMLButtonElement { if (!(value instanceof HTMLButtonElement)) throw new Error("Expected required HTMLButtonElement"); return value; }
-return requiredInput(document.querySelector(`button[name="lens"][value="${id}"]`)).getAttribute('aria-pressed') === 'true'; }, id);
+return requiredInput(document.querySelector(`button[name="dataset"][value="${id}"]`)).getAttribute('aria-pressed') === 'true'; }, id);
         await p.waitForLoadState('networkidle');
       };
       const digestAtlases = () => p.evaluate(async () => {
