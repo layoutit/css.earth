@@ -61,7 +61,7 @@ contains `data/shape_models/dinkinesh.stl` and `selam_two_lobes.stl`.
 The retrieved Dinkinesh file has 635 distinct vertices and 1,266 triangles;
 the Selam file is a smooth lobe approximation. This establishes accessible
 geometry candidates, not photograph registration. The
-[Dinkinesh source account](../../../../src/objects/dinkinesh/README.md#lucy-photographic-source-check-13-september-2026)
+[Dinkinesh source account](../../../../src/objects/dinkinesh/README.md#lucy-photographs-remain-unqualified)
 owns the inspection results and unresolved model/frame questions.
 
 For a numeric-table example, [Mathilde's Thomas release](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/)
@@ -78,6 +78,6 @@ before substituting image-header pointing for such companion tables.
 | [IAU/USGS Gazetteer](https://planetarynames.wr.usgs.gov/) | Adopted surface names, coordinates, extents, target coordinate systems and GIS exports. | Match the selected model's frame. A centre/extent is not a surveyed feature boundary; unpositioned names cannot establish anchors. |
 
 After selecting a product, return to the existing
-[preparation recipe map](implementation-map.md#registered-photographic-mosaics)
+[preparation recipe map](implementation-map.md)
 and qualification guidance. Add useful newly discovered routes here; keep exact
 body input pins and detailed investigation results in their existing owners.

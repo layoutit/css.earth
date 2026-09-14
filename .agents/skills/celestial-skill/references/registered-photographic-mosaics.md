@@ -1,14 +1,10 @@
 # Registered photographic mosaics
 
-The shared `camera-band-registration.mts` matcher accepts a bounded
-`searchRadiusPixels` (1–64; default 9) when an independently justified pointing
-seed is farther away. This changes the search window only. Preserve its
-correlation, disjoint holdout and residual requirements; a larger search does
-not qualify a camera. Recheck from the fitted camera with the normal window.
-
-Use this when preparing several observations onto a known surface, especially
-an irregular mesh. Reuse already-controlled maps when suitable; this is not a
-requirement to fit a camera for an existing global mosaic. The
+Use this when registering or combining observations on a known surface, especially
+an irregular mesh. First choose the applicable
+[photographic investigation route](photographic-investigation.md). For an existing
+producer map or mapped paper figure, follow that guide's map checks instead of
+the camera reconstruction sequence below. The
 [implementation map](implementation-map.md#registered-photographic-mosaics)
 locates the 67P example and reusable helpers. Keep all decoding, camera fitting,
 selection, level matching and atlas construction in preparation.
@@ -66,6 +62,12 @@ to the actual selected model. Report coverage on different meshes separately;
 compare before/after percentages only on a common, justified surface basis.
 
 ## Bind observations and validate cameras
+
+The shared `camera-band-registration.mts` matcher accepts a bounded
+`searchRadiusPixels` (1–64; default 9) when an independently justified pointing
+seed is farther away. This changes the search window only. Preserve its
+correlation, disjoint holdout and residual requirements; a larger search does
+not qualify a camera. Recheck from the fitted camera with the normal window.
 
 Apply detector distortion inside both the fit and its holdout ray checks, not
 only when drawing the final overlay. The shared limb-refinement helper accepts

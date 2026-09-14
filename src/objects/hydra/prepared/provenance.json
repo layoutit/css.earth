@@ -1,14 +1,14 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hydra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "f7c217a5b4ee8f92fe687e574994529c55b869cd4222b1d2ca1fe6d85370b971"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
@@ -330,7 +330,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -378,7 +378,7 @@
       "sha256": "8bbfce67597caf2bfef95e3f526f66cac7d967e9b425cb183a1088fc0e97d163",
       "bytes": 3043916,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -421,7 +421,7 @@
       "sha256": "7b225229428505208024279bf86104381ce24617e56be89a1cc89236ad17e91b",
       "bytes": 10529280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -448,7 +448,7 @@
       "sha256": "52d4415d0070d87828cf0a4794223bce26bfd5e32d411b3d988c10c8b349bddb",
       "bytes": 2917,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -468,7 +468,7 @@
       "sha256": "db78835311ba8a75c351bbfd73277a69bba4865322b04226e5d762d52d2dd2b9",
       "bytes": 4079,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -504,13 +504,13 @@
           "url": "/scenes/hydra/hydra-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hydra/hydra-model-surface@2x.webp",
           "bytes": 71382,
           "sha256": "a44dab31a19630cf501154fcfac5c659aa9ca5fe20da3e214dc040d58593a5ba",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -542,13 +542,13 @@
           "url": "/scenes/hydra/hydra-monochrome-thumbnail.webp",
           "bytes": 1806,
           "sha256": "1fbbc6a8ad6ef48bf64d273cd5e9d91beeb0b5d610ea7547abb5c13fcfef6bf6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hydra/hydra-monochrome-surface@2x.webp",
           "bytes": 100400,
           "sha256": "aeb9345b6492f3e4443433bb02e0dbe91eb8ac966bf5faa0de067b9119ad0e68",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
