@@ -24,7 +24,7 @@ L4 Jupiter Trojan. Source records checked 2026-09-09.
 - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain.
 - Absolute phase is arbitrary; accelerated display spin is illustrative. Orbit context is fixed at 2026-09-03 TT. The archive also lists an alternative pole.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods
 
@@ -36,16 +36,6 @@ L4 Jupiter Trojan. Source records checked 2026-09-09.
 The unmodified source has 570 vertices and 1136 triangles. Its signed tetrahedral volume is 0.99999985295702809 source units³; independent triangle-centroid divergence gives 0.99999985295702809. The existing recipe applies a uniform scale of 25.579089580075184 km per source unit. No unit-volume assumption is made. The Elevation reference sphere has radius 15.868 km.
 
 Original +Z spin axis and +X reference meridian are retained. The selected ecliptic J2000 pole is (133°, 54°), with sidereal period 18.1094 h. Conversion to equatorial J2000 uses obliquity 23.439291111°. Position uses JPL Horizons heliocentric ICRF elements; TDB is approximated as TT, under 2 ms.
-
-### Source survey
-
-The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/13366/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from [NOTICE.md](NOTICE.md).
-
-Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row and original query are pinned in [the source manifest](source/manifest.json); [column definitions](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html) are shared.
-
-Hanuš et al. (2023), [*Shape models and spin states of Jupiter Trojans: Testing the streaming instability formation scenario*](https://arxiv.org/abs/2308.05380v1), Table B.3 — adopts this existing DAMIT shape/spin solution. No replacement mesh is required by that survey.
-
-Alternative archive solution: [model 4285](https://damit.cuni.cz/projects/damit/asteroid_models/view/4285), ecliptic pole (323°, 53°).
 
 ### Preparation
 

@@ -1,0 +1,4123 @@
+{
+  "status": "diagnostic only; camera solution still inferred",
+  "summary": {
+    "points": 120,
+    "pairs": 56,
+    "stereoAngles": [
+      9.258619804184912,
+      9.3269369367413
+    ],
+    "medianRaySeparationMeters": 0.3236007589528456,
+    "medianAbsoluteDepthErrorMeters": 6.467406273121014,
+    "medianPairDepthDisagreementMeters": 1.4313055056263693,
+    "depthCorrelation": 0.9665723802056078
+  },
+  "pairs": [
+    {
+      "pixel": [
+        552,
+        609
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          552,
+          609
+        ],
+        "stereoAngleDegrees": 9.264049283521441,
+        "raySeparationMeters": 0.2702177310739365,
+        "depthDifferenceMeters": -14.905157518573105,
+        "pointMeters": [
+          435.68511169799604,
+          148.46975731503335,
+          11.199640937664299
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          552,
+          609
+        ],
+        "stereoAngleDegrees": 9.323843788671583,
+        "raySeparationMeters": 1.1378273456451247,
+        "depthDifferenceMeters": -13.904217254719697,
+        "pointMeters": [
+          434.787913040258,
+          148.91190737165743,
+          11.16196723531175
+        ]
+      },
+      "depthDisagreementMeters": 1.0009402638534084
+    },
+    {
+      "pixel": [
+        580,
+        609
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          609
+        ],
+        "stereoAngleDegrees": 9.26324567046901,
+        "raySeparationMeters": 1.0675818634440988,
+        "depthDifferenceMeters": 11.44591050647432,
+        "pointMeters": [
+          397.28627571626566,
+          161.91201749647735,
+          68.9762253011304
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          609
+        ],
+        "stereoAngleDegrees": 9.32301484157113,
+        "raySeparationMeters": 0.2422119216728044,
+        "depthDifferenceMeters": 12.964595980767626,
+        "pointMeters": [
+          395.9249783983105,
+          162.58286149517517,
+          68.91927346750344
+        ]
+      },
+      "depthDisagreementMeters": 1.5186854742933065
+    },
+    {
+      "pixel": [
+        552,
+        637
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          552,
+          637
+        ],
+        "stereoAngleDegrees": 9.264301913855578,
+        "raySeparationMeters": 0.9977745305960137,
+        "depthDifferenceMeters": 5.156645126291551,
+        "pointMeters": [
+          429.84916296991287,
+          85.28761336219031,
+          7.136960137251663
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          552,
+          637
+        ],
+        "stereoAngleDegrees": 9.324578229890474,
+        "raySeparationMeters": 1.4478483048439308,
+        "depthDifferenceMeters": 2.4155205508577637,
+        "pointMeters": [
+          432.30635175900534,
+          84.0771025524009,
+          7.240162715685074
+        ]
+      },
+      "depthDisagreementMeters": 2.741124575433787
+    },
+    {
+      "pixel": [
+        580,
+        637
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          580,
+          637
+        ],
+        "stereoAngleDegrees": 9.263818149499066,
+        "raySeparationMeters": 0.13056339840883735,
+        "depthDifferenceMeters": 14.426699244533665,
+        "pointMeters": [
+          405.03758200397715,
+          92.03157131941407,
+          65.47844013243048
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          580,
+          637
+        ],
+        "stereoAngleDegrees": 9.324056313263316,
+        "raySeparationMeters": 0.28351731338796815,
+        "depthDifferenceMeters": 12.995393738907296,
+        "pointMeters": [
+          406.3206414762535,
+          91.39950243092608,
+          65.53213148377108
+        ]
+      },
+      "depthDisagreementMeters": 1.4313055056263693
+    },
+    {
+      "pixel": [
+        608,
+        637
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          608,
+          637
+        ],
+        "stereoAngleDegrees": 9.263185267332139,
+        "raySeparationMeters": 0.046575118738225195,
+        "depthDifferenceMeters": 3.3645469441544265,
+        "pointMeters": [
+          373.89589179336326,
+          101.89399961807067,
+          123.55977177520799
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          608,
+          637
+        ],
+        "stereoAngleDegrees": 9.323431066693043,
+        "raySeparationMeters": 0.4260172115198615,
+        "depthDifferenceMeters": 1.0095516549190506,
+        "pointMeters": [
+          376.0069935779902,
+          100.8540452545858,
+          123.64778875740376
+        ]
+      },
+      "depthDisagreementMeters": 2.354995289235376
+    },
+    {
+      "pixel": [
+        496,
+        665
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          496,
+          665
+        ],
+        "stereoAngleDegrees": 9.261653268086803,
+        "raySeparationMeters": 0.5504672422660274,
+        "depthDifferenceMeters": 3.4566153502091765,
+        "pointMeters": [
+          309.3111585258157,
+          89.5626407697564,
+          -120.53845311015903
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          496,
+          665
+        ],
+        "stereoAngleDegrees": 9.322129478473423,
+        "raySeparationMeters": 0.43980294651621205,
+        "depthDifferenceMeters": 8.72077646717662,
+        "pointMeters": [
+          304.5920626829029,
+          91.8867848154332,
+          -120.73815575313711
+        ]
+      },
+      "depthDisagreementMeters": 5.264161116967443
+    },
+    {
+      "pixel": [
+        524,
+        665
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          524,
+          665
+        ],
+        "stereoAngleDegrees": 9.263343966541635,
+        "raySeparationMeters": 0.6625555932313736,
+        "depthDifferenceMeters": -1.213726864545606,
+        "pointMeters": [
+          376.8751788485097,
+          50.80709125447902,
+          -58.291861267367494
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          524,
+          665
+        ],
+        "stereoAngleDegrees": 9.324006285708098,
+        "raySeparationMeters": 0.5314655097822837,
+        "depthDifferenceMeters": -3.7858263146481477,
+        "pointMeters": [
+          379.1809812755673,
+          49.67152151741902,
+          -58.19463924791671
+        ]
+      },
+      "depthDisagreementMeters": 2.5720994501025416
+    },
+    {
+      "pixel": [
+        552,
+        665
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          552,
+          665
+        ],
+        "stereoAngleDegrees": 9.264693677921818,
+        "raySeparationMeters": 0.1910327127839185,
+        "depthDifferenceMeters": 5.564338174415752,
+        "pointMeters": [
+          429.93997681181645,
+          19.195191239996348,
+          3.32337224928051
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          552,
+          665
+        ],
+        "stereoAngleDegrees": 9.325295782860998,
+        "raySeparationMeters": 0.015188513146240763,
+        "depthDifferenceMeters": 6.467406273121014,
+        "pointMeters": [
+          429.1303972455207,
+          19.593884352681926,
+          3.2893616827386722
+        ]
+      },
+      "depthDisagreementMeters": 0.903068098705262
+    },
+    {
+      "pixel": [
+        580,
+        665
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          665
+        ],
+        "stereoAngleDegrees": 9.26414263456267,
+        "raySeparationMeters": 0.021240268742656967,
+        "depthDifferenceMeters": 5.802313897700515,
+        "pointMeters": [
+          402.2713109290926,
+          27.343749523162842,
+          61.54042508255043
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          665
+        ],
+        "stereoAngleDegrees": 9.324770839051995,
+        "raySeparationMeters": 0.44581034537604997,
+        "depthDifferenceMeters": 4.966730287531391,
+        "pointMeters": [
+          403.02040031389333,
+          26.974856604880188,
+          61.57177915772627
+        ]
+      },
+      "depthDisagreementMeters": 0.8355836101691239
+    },
+    {
+      "pixel": [
+        608,
+        665
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          608,
+          665
+        ],
+        "stereoAngleDegrees": 9.26348898805679,
+        "raySeparationMeters": 0.2451821191411329,
+        "depthDifferenceMeters": -2.2189912237226963,
+        "pointMeters": [
+          370.24807134707225,
+          37.6372692057339,
+          119.58055145142862
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          608,
+          665
+        ],
+        "stereoAngleDegrees": 9.324103748803843,
+        "raySeparationMeters": 0.826100459117222,
+        "depthDifferenceMeters": -3.0079939083661884,
+        "pointMeters": [
+          370.95540919178165,
+          37.28894708745065,
+          119.61004910721385
+        ]
+      },
+      "depthDisagreementMeters": 0.7890026846434921
+    },
+    {
+      "pixel": [
+        636,
+        665
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          636,
+          665
+        ],
+        "stereoAngleDegrees": 9.262776732476533,
+        "raySeparationMeters": 0.34005127501602334,
+        "depthDifferenceMeters": 2.3021335476078093,
+        "pointMeters": [
+          335.73777313088067,
+          49.155985144054284,
+          177.5221524110384
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          636,
+          665
+        ],
+        "stereoAngleDegrees": 9.323388004026965,
+        "raySeparationMeters": 1.5589445950562386,
+        "depthDifferenceMeters": 1.0574921445222571,
+        "pointMeters": [
+          336.85360132920323,
+          48.60652148240479,
+          177.56851337093758
+        ]
+      },
+      "depthDisagreementMeters": 1.2446414030855522
+    },
+    {
+      "pixel": [
+        524,
+        693
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          524,
+          693
+        ],
+        "stereoAngleDegrees": 9.263543740936347,
+        "raySeparationMeters": 0.31722488688494344,
+        "depthDifferenceMeters": 7.0155707249068655,
+        "pointMeters": [
+          368.8274713821593,
+          -11.277372009237297,
+          -62.44398372095566
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          524,
+          693
+        ],
+        "stereoAngleDegrees": 9.324584684564833,
+        "raySeparationMeters": 0.03128691412168669,
+        "depthDifferenceMeters": 5.4961502474034205,
+        "pointMeters": [
+          370.18967360572424,
+          -11.94800100493012,
+          -62.38653426770543
+        ]
+      },
+      "depthDisagreementMeters": 1.519420477503445
+    },
+    {
+      "pixel": [
+        552,
+        693
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          552,
+          693
+        ],
+        "stereoAngleDegrees": 9.264953506071517,
+        "raySeparationMeters": 0.4558857821277877,
+        "depthDifferenceMeters": 0.29446079168701544,
+        "pointMeters": [
+          424.44458549446426,
+          -44.13536761427531,
+          -0.7247216569885495
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          552,
+          693
+        ],
+        "stereoAngleDegrees": 9.326023747007403,
+        "raySeparationMeters": 0.42731060005374233,
+        "depthDifferenceMeters": -1.8925767926266417,
+        "pointMeters": [
+          426.40534603083506,
+          -45.10064643106307,
+          -0.6423303938336176
+        ]
+      },
+      "depthDisagreementMeters": 2.187037584313657
+    },
+    {
+      "pixel": [
+        580,
+        693
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          580,
+          693
+        ],
+        "stereoAngleDegrees": 9.264407884632051,
+        "raySeparationMeters": 0.46413895904900226,
+        "depthDifferenceMeters": -0.08624988433439285,
+        "pointMeters": [
+          397.00641572946915,
+          -36.10316693224013,
+          57.49759115357665
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          580,
+          693
+        ],
+        "stereoAngleDegrees": 9.325395587654592,
+        "raySeparationMeters": 0.36806547168377385,
+        "depthDifferenceMeters": 1.0684970012516715,
+        "pointMeters": [
+          395.97113101318246,
+          -35.59351285742014,
+          57.45424775714855
+        ]
+      },
+      "depthDisagreementMeters": 1.1547468855860643
+    },
+    {
+      "pixel": [
+        608,
+        693
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          608,
+          693
+        ],
+        "stereoAngleDegrees": 9.263491539660007,
+        "raySeparationMeters": 0.42278574590634166,
+        "depthDifferenceMeters": -16.371498204418458,
+        "pointMeters": [
+          353.8221814268036,
+          -20.318566518020816,
+          115.06771896645114
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          608,
+          693
+        ],
+        "stereoAngleDegrees": 9.324453667995318,
+        "raySeparationMeters": 0.6399338080440001,
+        "depthDifferenceMeters": -14.769256627361756,
+        "pointMeters": [
+          352.3856812522281,
+          -19.611420882487437,
+          115.00779927211806
+        ]
+      },
+      "depthDisagreementMeters": 1.6022415770567022
+    },
+    {
+      "pixel": [
+        636,
+        693
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          636,
+          693
+        ],
+        "stereoAngleDegrees": 9.262705152563347,
+        "raySeparationMeters": 0.2188398203334111,
+        "depthDifferenceMeters": -2.8634782931185327,
+        "pointMeters": [
+          316.1601875007036,
+          -7.2516439372557215,
+          172.87560574785493
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          636,
+          693
+        ],
+        "stereoAngleDegrees": 9.323712858827957,
+        "raySeparationMeters": 0.9863039627994995,
+        "depthDifferenceMeters": -4.061165140999947,
+        "pointMeters": [
+          317.2339930401067,
+          -7.780230732925702,
+          172.9202313963524
+        ]
+      },
+      "depthDisagreementMeters": 1.197686847881414
+    },
+    {
+      "pixel": [
+        664,
+        693
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          664,
+          693
+        ],
+        "stereoAngleDegrees": 9.261734310654557,
+        "raySeparationMeters": 0.5662094345896427,
+        "depthDifferenceMeters": 15.213078826782294,
+        "pointMeters": [
+          270.6597832913976,
+          9.674536363076186,
+          230.36430838135675
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          664,
+          693
+        ],
+        "stereoAngleDegrees": 9.322681475667482,
+        "raySeparationMeters": 0.12208309056066384,
+        "depthDifferenceMeters": 16.06397342053242,
+        "pointMeters": [
+          269.8968917701859,
+          10.050063174916431,
+          230.33272119822504
+        ]
+      },
+      "depthDisagreementMeters": 0.8508945937501267
+    },
+    {
+      "pixel": [
+        496,
+        721
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          496,
+          721
+        ],
+        "stereoAngleDegrees": 9.26274833641202,
+        "raySeparationMeters": 1.155225910909869,
+        "depthDifferenceMeters": 17.529697742604185,
+        "pointMeters": [
+          322.7889797902317,
+          -49.175552501081256,
+          -127.58360720102792
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          496,
+          721
+        ],
+        "stereoAngleDegrees": 9.324205955101167,
+        "raySeparationMeters": 0.8464208610628317,
+        "depthDifferenceMeters": 14.837048366083764,
+        "pointMeters": [
+          325.2031504489132,
+          -50.36369967699284,
+          -127.48139671246827
+        ]
+      },
+      "depthDisagreementMeters": 2.6926493765204214
+    },
+    {
+      "pixel": [
+        552,
+        721
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          552,
+          721
+        ],
+        "stereoAngleDegrees": 9.265041909113734,
+        "raySeparationMeters": 0.2843305834385581,
+        "depthDifferenceMeters": -6.252140814147424,
+        "pointMeters": [
+          411.68575582583435,
+          -103.88023559434805,
+          -5.077980777628909
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          552,
+          721
+        ],
+        "stereoAngleDegrees": 9.32649911907659,
+        "raySeparationMeters": 0.3236007589528456,
+        "depthDifferenceMeters": -7.8390498829539865,
+        "pointMeters": [
+          413.10857469018083,
+          -104.58044321497437,
+          -5.018179775244789
+        ]
+      },
+      "depthDisagreementMeters": 1.5869090688065626
+    },
+    {
+      "pixel": [
+        580,
+        721
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          721
+        ],
+        "stereoAngleDegrees": 9.264234488399858,
+        "raySeparationMeters": 0.35095848230445625,
+        "depthDifferenceMeters": 14.134916174050886,
+        "pointMeters": [
+          373.1249553668313,
+          -90.37733089303947,
+          52.67490886087944
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          721
+        ],
+        "stereoAngleDegrees": 9.32563378607379,
+        "raySeparationMeters": 0.3012387841223929,
+        "depthDifferenceMeters": 14.571540694043506,
+        "pointMeters": [
+          372.7334746407578,
+          -90.18467820022488,
+          52.65851518715681
+        ]
+      },
+      "depthDisagreementMeters": 0.43662451999261975
+    },
+    {
+      "pixel": [
+        608,
+        721
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          608,
+          721
+        ],
+        "stereoAngleDegrees": 9.263315173368193,
+        "raySeparationMeters": 0.6622381671905474,
+        "depthDifferenceMeters": -17.724925032118335,
+        "pointMeters": [
+          329.8109013880603,
+          -74.5340937806759,
+          110.23754491847649
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          608,
+          721
+        ],
+        "stereoAngleDegrees": 9.324707976809202,
+        "raySeparationMeters": 0.048339348554121545,
+        "depthDifferenceMeters": -17.7392233547871,
+        "pointMeters": [
+          329.82372150657466,
+          -74.54040254384745,
+          110.23807980201673
+        ]
+      },
+      "depthDisagreementMeters": 0.01429832266876474
+    },
+    {
+      "pixel": [
+        636,
+        721
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          636,
+          721
+        ],
+        "stereoAngleDegrees": 9.262648268787576,
+        "raySeparationMeters": 0.28320235593240994,
+        "depthDifferenceMeters": -14.490492634940892,
+        "pointMeters": [
+          297.2239047277835,
+          -63.96831224349444,
+          168.25441045811203
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          636,
+          721
+        ],
+        "stereoAngleDegrees": 9.324004935674296,
+        "raySeparationMeters": 0.8887037816622926,
+        "depthDifferenceMeters": -13.41165641223779,
+        "pointMeters": [
+          296.256591474812,
+          -63.492312397487694,
+          168.21420084897
+        ]
+      },
+      "depthDisagreementMeters": 1.078836222703103
+    },
+    {
+      "pixel": [
+        664,
+        721
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          664,
+          721
+        ],
+        "stereoAngleDegrees": 9.261688797348857,
+        "raySeparationMeters": 0.02621105077086064,
+        "depthDifferenceMeters": -1.6639224222744815,
+        "pointMeters": [
+          252.20428759878268,
+          -47.28330523954355,
+          225.76020579435135
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          664,
+          721
+        ],
+        "stereoAngleDegrees": 9.323041220030095,
+        "raySeparationMeters": 0.4162399321574573,
+        "depthDifferenceMeters": -1.1673803112935275,
+        "pointMeters": [
+          251.759069954569,
+          -47.06422685136204,
+          225.74176732694468
+        ]
+      },
+      "depthDisagreementMeters": 0.496542110980954
+    },
+    {
+      "pixel": [
+        468,
+        749
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          468,
+          749
+        ],
+        "stereoAngleDegrees": 9.262419123929114,
+        "raySeparationMeters": 0.028244641267991467,
+        "depthDifferenceMeters": -19.945629537221976,
+        "pointMeters": [
+          296.58076144044753,
+          -96.82979802621412,
+          -191.8835334198211
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          468,
+          749
+        ],
+        "stereoAngleDegrees": 9.324235989273701,
+        "raySeparationMeters": 0.12601487656974703,
+        "depthDifferenceMeters": -20.838310613762587,
+        "pointMeters": [
+          297.38116501818877,
+          -97.2235953991185,
+          -191.84951509801795
+        ]
+      },
+      "depthDisagreementMeters": 0.8926810765406117
+    },
+    {
+      "pixel": [
+        496,
+        749
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          496,
+          749
+        ],
+        "stereoAngleDegrees": 9.263522647605933,
+        "raySeparationMeters": 0.14329299980744734,
+        "depthDifferenceMeters": -6.051589349110145,
+        "pointMeters": [
+          339.1904769955436,
+          -123.27438143567997,
+          -130.6953158137403
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          496,
+          749
+        ],
+        "stereoAngleDegrees": 9.325362944511708,
+        "raySeparationMeters": 0.7031493611158454,
+        "depthDifferenceMeters": -7.518297946488019,
+        "pointMeters": [
+          340.50558448029915,
+          -123.92139368879725,
+          -130.63962418585288
+        ]
+      },
+      "depthDisagreementMeters": 1.466708597377874
+    },
+    {
+      "pixel": [
+        524,
+        749
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          524,
+          749
+        ],
+        "stereoAngleDegrees": 9.264315269074489,
+        "raySeparationMeters": 0.546588171375355,
+        "depthDifferenceMeters": -12.441587590496056,
+        "pointMeters": [
+          368.5898843689356,
+          -143.21593395184027,
+          -70.07778511678589
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          524,
+          749
+        ],
+        "stereoAngleDegrees": 9.326137092607619,
+        "raySeparationMeters": 0.684814841893461,
+        "depthDifferenceMeters": -12.720171857974492,
+        "pointMeters": [
+          368.83967647422105,
+          -143.3388242032379,
+          -70.06724546066107
+        ]
+      },
+      "depthDisagreementMeters": 0.27858426747843623
+    },
+    {
+      "pixel": [
+        552,
+        749
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          552,
+          749
+        ],
+        "stereoAngleDegrees": 9.264794012431452,
+        "raySeparationMeters": 0.5382594186234247,
+        "depthDifferenceMeters": 0.1833553736214526,
+        "pointMeters": [
+          384.65890146489255,
+          -156.59590947948163,
+          -10.031091761984499
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          552,
+          749
+        ],
+        "stereoAngleDegrees": 9.326716180270699,
+        "raySeparationMeters": 1.2621105242384643,
+        "depthDifferenceMeters": -4.6606251175981015,
+        "pointMeters": [
+          389.0022952633444,
+          -158.73266781005077,
+          -9.848496177515699
+        ]
+      },
+      "depthDisagreementMeters": 4.843980491219554
+    },
+    {
+      "pixel": [
+        580,
+        749
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          580,
+          749
+        ],
+        "stereoAngleDegrees": 9.264248297480977,
+        "raySeparationMeters": 0.004667338928586512,
+        "depthDifferenceMeters": 6.061371903459076,
+        "pointMeters": [
+          357.2135269823484,
+          -148.56607122850255,
+          48.1854311891675
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          580,
+          749
+        ],
+        "stereoAngleDegrees": 9.326050314617431,
+        "raySeparationMeters": 0.028998017502698075,
+        "depthDifferenceMeters": 6.311832829727791,
+        "pointMeters": [
+          356.9889467667672,
+          -148.45559084479464,
+          48.17602442749012
+        ]
+      },
+      "depthDisagreementMeters": 0.2504609262687154
+    },
+    {
+      "pixel": [
+        608,
+        749
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          608,
+          749
+        ],
+        "stereoAngleDegrees": 9.262966124424999,
+        "raySeparationMeters": 0.2689281554496666,
+        "depthDifferenceMeters": -9.780702057818417,
+        "pointMeters": [
+          298.4771629195311,
+          -125.14126415160717,
+          105.10077705270669
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          608,
+          749
+        ],
+        "stereoAngleDegrees": 9.324754643854659,
+        "raySeparationMeters": 0.5828835843847507,
+        "depthDifferenceMeters": -9.886909765715245,
+        "pointMeters": [
+          298.5723969641258,
+          -125.18811240408104,
+          105.1047513714966
+        ]
+      },
+      "depthDisagreementMeters": 0.10620770789682865
+    },
+    {
+      "pixel": [
+        636,
+        749
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          636,
+          749
+        ],
+        "stereoAngleDegrees": 9.262142373798245,
+        "raySeparationMeters": 0.7297563706991376,
+        "depthDifferenceMeters": 3.1694174450822175,
+        "pointMeters": [
+          259.2198005708051,
+          -111.29722266516183,
+          162.8391150997104
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          636,
+          749
+        ],
+        "stereoAngleDegrees": 9.32401208773165,
+        "raySeparationMeters": 0.5132939635902757,
+        "depthDifferenceMeters": -1.4336657674866728,
+        "pointMeters": [
+          263.34732535801595,
+          -113.32760744466214,
+          163.0107304838839
+        ]
+      },
+      "depthDisagreementMeters": 4.60308321256889
+    },
+    {
+      "pixel": [
+        664,
+        749
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          664,
+          749
+        ],
+        "stereoAngleDegrees": 9.261333024256436,
+        "raySeparationMeters": 0.2651412161118232,
+        "depthDifferenceMeters": 19.748026690504048,
+        "pointMeters": [
+          220.57601262064418,
+          -97.75319431570824,
+          220.6087631791288
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          664,
+          749
+        ],
+        "stereoAngleDegrees": 9.323049557239377,
+        "raySeparationMeters": 0.062457178944166955,
+        "depthDifferenceMeters": 21.61917056137463,
+        "pointMeters": [
+          218.89816426415928,
+          -96.92786197140231,
+          220.53925922508824
+        ]
+      },
+      "depthDisagreementMeters": 1.8711438708705828
+    },
+    {
+      "pixel": [
+        496,
+        777
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          496,
+          777
+        ],
+        "stereoAngleDegrees": 9.263175560526722,
+        "raySeparationMeters": 0.1693213937198629,
+        "depthDifferenceMeters": -4.210113221721258,
+        "pointMeters": [
+          307.95750197552843,
+          -173.92485777664115,
+          -135.82338738444014
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          496,
+          777
+        ],
+        "stereoAngleDegrees": 9.325387181062485,
+        "raySeparationMeters": 0.14983508438896098,
+        "depthDifferenceMeters": -4.626937567896675,
+        "pointMeters": [
+          308.33126791822724,
+          -174.10868081837543,
+          -135.80755561320439
+        ]
+      },
+      "depthDisagreementMeters": 0.4168243461754173
+    },
+    {
+      "pixel": [
+        524,
+        777
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          524,
+          777
+        ],
+        "stereoAngleDegrees": 9.264091743780822,
+        "raySeparationMeters": 0.23368200310951198,
+        "depthDifferenceMeters": -13.927992740413174,
+        "pointMeters": [
+          342.61176198348403,
+          -196.4450134022918,
+          -74.98513493700193
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          524,
+          777
+        ],
+        "stereoAngleDegrees": 9.326282981012467,
+        "raySeparationMeters": 0.015570669705395123,
+        "depthDifferenceMeters": -12.985853308055084,
+        "pointMeters": [
+          341.76693740760675,
+          -196.02952947543235,
+          -75.02078956595506
+        ]
+      },
+      "depthDisagreementMeters": 0.9421394323580898
+    },
+    {
+      "pixel": [
+        552,
+        777
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          552,
+          777
+        ],
+        "stereoAngleDegrees": 9.264735733768639,
+        "raySeparationMeters": 0.13921810822521036,
+        "depthDifferenceMeters": 0.6747102602967061,
+        "pointMeters": [
+          365.70376037131064,
+          -213.27477240512962,
+          -14.645097410204471
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          552,
+          777
+        ],
+        "stereoAngleDegrees": 9.32693911793858,
+        "raySeparationMeters": 0.0012059359416009608,
+        "depthDifferenceMeters": 1.2810067270183936,
+        "pointMeters": [
+          365.16008320380934,
+          -213.00740020046942,
+          -14.667958890297086
+        ]
+      },
+      "depthDisagreementMeters": 0.6062964667216875
+    },
+    {
+      "pixel": [
+        580,
+        777
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          777
+        ],
+        "stereoAngleDegrees": 9.264112037872861,
+        "raySeparationMeters": 0.10259559554246325,
+        "depthDifferenceMeters": 12.514960606698878,
+        "pointMeters": [
+          334.9435379462084,
+          -203.6176306590787,
+          43.42908670045108
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          777
+        ],
+        "stereoAngleDegrees": 9.32630870332297,
+        "raySeparationMeters": 0.8166432635251898,
+        "depthDifferenceMeters": 12.861202580097597,
+        "pointMeters": [
+          334.63305306230905,
+          -203.46494329249253,
+          43.4160786613902
+        ]
+      },
+      "depthDisagreementMeters": 0.346241973398719
+    },
+    {
+      "pixel": [
+        608,
+        777
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          608,
+          777
+        ],
+        "stereoAngleDegrees": 9.262998150851818,
+        "raySeparationMeters": 0.03163362729164411,
+        "depthDifferenceMeters": -9.445300333900377,
+        "pointMeters": [
+          283.35493472928647,
+          -183.7155322432809,
+          100.63955417869875
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          608,
+          777
+        ],
+        "stereoAngleDegrees": 9.325190928274603,
+        "raySeparationMeters": 0.5310021967337651,
+        "depthDifferenceMeters": -9.803724936849903,
+        "pointMeters": [
+          283.67634758201893,
+          -183.8735891111137,
+          100.65297060895682
+        ]
+      },
+      "depthDisagreementMeters": 0.35842460294952616
+    },
+    {
+      "pixel": [
+        636,
+        777
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          636,
+          777
+        ],
+        "stereoAngleDegrees": 9.261898750395982,
+        "raySeparationMeters": 0.7895966898486878,
+        "depthDifferenceMeters": 2.900490459112916,
+        "pointMeters": [
+          232.37823575461516,
+          -164.11242339556338,
+          157.88637890630707
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          636,
+          777
+        ],
+        "stereoAngleDegrees": 9.324100539513564,
+        "raySeparationMeters": 0.11130970420788468,
+        "depthDifferenceMeters": 1.2422751309350133,
+        "pointMeters": [
+          233.86523593735183,
+          -164.84364438557532,
+          157.94822059809667
+        ]
+      },
+      "depthDisagreementMeters": 1.6582153281779028
+    },
+    {
+      "pixel": [
+        664,
+        777
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          664,
+          777
+        ],
+        "stereoAngleDegrees": 9.260984921371364,
+        "raySeparationMeters": 0.14754840261065172,
+        "depthDifferenceMeters": 23.818846922775265,
+        "pointMeters": [
+          189.28859743429348,
+          -148.385642298148,
+          215.46951780406198
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          664,
+          777
+        ],
+        "stereoAngleDegrees": 9.323123042323724,
+        "raySeparationMeters": 0.16394409026954265,
+        "depthDifferenceMeters": 24.377484413969796,
+        "pointMeters": [
+          188.78763537551276,
+          -148.1393051179184,
+          215.44876073630076
+        ]
+      },
+      "depthDisagreementMeters": 0.5586374911945313
+    },
+    {
+      "pixel": [
+        496,
+        805
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          496,
+          805
+        ],
+        "stereoAngleDegrees": 9.262593839596137,
+        "raySeparationMeters": 0.7190687583949377,
+        "depthDifferenceMeters": -1.6713064797222614,
+        "pointMeters": [
+          266.76647096301895,
+          -219.67345830911654,
+          -141.37298232061767
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          496,
+          805
+        ],
+        "stereoAngleDegrees": 9.325277246792915,
+        "raySeparationMeters": 0.39968050914533787,
+        "depthDifferenceMeters": -5.88921781652607,
+        "pointMeters": [
+          270.54892202699557,
+          -221.53307095877244,
+          -141.21273006015872
+        ]
+      },
+      "depthDisagreementMeters": 4.217911336803809
+    },
+    {
+      "pixel": [
+        524,
+        805
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          524,
+          805
+        ],
+        "stereoAngleDegrees": 9.263628673993765,
+        "raySeparationMeters": 0.23780781870879228,
+        "depthDifferenceMeters": -5.125237021944486,
+        "pointMeters": [
+          306.47035998821957,
+          -244.66960298045888,
+          -80.32141725706242
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          524,
+          805
+        ],
+        "stereoAngleDegrees": 9.326234463841274,
+        "raySeparationMeters": 0.03142792867580488,
+        "depthDifferenceMeters": -5.228094223421067,
+        "pointMeters": [
+          306.5625991364941,
+          -244.71495033154497,
+          -80.31752352309559
+        ]
+      },
+      "depthDisagreementMeters": 0.1028572014765814
+    },
+    {
+      "pixel": [
+        552,
+        805
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          552,
+          805
+        ],
+        "stereoAngleDegrees": 9.264391221952051,
+        "raySeparationMeters": 0.052863510079846875,
+        "depthDifferenceMeters": 5.968283248192165,
+        "pointMeters": [
+          334.6045640791417,
+          -263.97304598995834,
+          -19.770025217849252
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          552,
+          805
+        ],
+        "stereoAngleDegrees": 9.3269369367413,
+        "raySeparationMeters": 0.15840164669887175,
+        "depthDifferenceMeters": 8.98384187486954,
+        "pointMeters": [
+          331.90027536754496,
+          -262.64358019657084,
+          -19.883766589071456
+        ]
+      },
+      "depthDisagreementMeters": 3.0155586266773753
+    },
+    {
+      "pixel": [
+        580,
+        805
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          580,
+          805
+        ],
+        "stereoAngleDegrees": 9.263770800045242,
+        "raySeparationMeters": 0.28508781644685227,
+        "depthDifferenceMeters": 17.878226769331377,
+        "pointMeters": [
+          303.9800606750068,
+          -254.38613766539493,
+          38.307840089944875
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          580,
+          805
+        ],
+        "stereoAngleDegrees": 9.326346029280693,
+        "raySeparationMeters": 0.09669955302022336,
+        "depthDifferenceMeters": 18.93954981060233,
+        "pointMeters": [
+          303.02827851392794,
+          -253.91824185691075,
+          38.26795490262339
+        ]
+      },
+      "depthDisagreementMeters": 1.0613230412709527
+    },
+    {
+      "pixel": [
+        608,
+        805
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          608,
+          805
+        ],
+        "stereoAngleDegrees": 9.26269971468507,
+        "raySeparationMeters": 1.1323613244165498,
+        "depthDifferenceMeters": 0.2519130468717776,
+        "pointMeters": [
+          254.20470679790014,
+          -235.3819899171067,
+          95.59180059795654
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          608,
+          805
+        ],
+        "stereoAngleDegrees": 9.325105044351723,
+        "raySeparationMeters": 0.4583590403550227,
+        "depthDifferenceMeters": 8.39385120884981,
+        "pointMeters": [
+          246.90303267765557,
+          -231.79259262987762,
+          95.28694130294025
+        ]
+      },
+      "depthDisagreementMeters": 8.141938161978032
+    },
+    {
+      "pixel": [
+        636,
+        805
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          636,
+          805
+        ],
+        "stereoAngleDegrees": 9.261571903420116,
+        "raySeparationMeters": 0.6133311806188142,
+        "depthDifferenceMeters": 0.8917069188901223,
+        "pointMeters": [
+          202.0144981937483,
+          -215.1883170515357,
+          152.7856785433287
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          636,
+          805
+        ],
+        "stereoAngleDegrees": 9.324092650592192,
+        "raySeparationMeters": 0.5379486217112069,
+        "depthDifferenceMeters": 2.735919680504594,
+        "pointMeters": [
+          200.36059403966647,
+          -214.37530511719524,
+          152.71687916860174
+        ]
+      },
+      "depthDisagreementMeters": 1.8442127616144717
+    },
+    {
+      "pixel": [
+        496,
+        833
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          496,
+          833
+        ],
+        "stereoAngleDegrees": 9.261291735496094,
+        "raySeparationMeters": 0.3668016279785189,
+        "depthDifferenceMeters": 12.72956609755056,
+        "pointMeters": [
+          194.95885350421304,
+          -250.37093125106185,
+          -148.21984445049202
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          496,
+          833
+        ],
+        "stereoAngleDegrees": 9.324343593921798,
+        "raySeparationMeters": 0.08913942277998736,
+        "depthDifferenceMeters": 9.07251094194362,
+        "pointMeters": [
+          198.23857216420583,
+          -251.98281866827165,
+          -148.08085928328364
+        ]
+      },
+      "depthDisagreementMeters": 3.6570551556069404
+    },
+    {
+      "pixel": [
+        524,
+        833
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          524,
+          833
+        ],
+        "stereoAngleDegrees": 9.262798056257587,
+        "raySeparationMeters": 0.07173033583983471,
+        "depthDifferenceMeters": 2.795083437988069,
+        "pointMeters": [
+          254.7199974420364,
+          -285.21731230957084,
+          -86.31686742671627
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          524,
+          833
+        ],
+        "stereoAngleDegrees": 9.325883298561887,
+        "raySeparationMeters": 0.018435648002918824,
+        "depthDifferenceMeters": -1.6283177703735419,
+        "pointMeters": [
+          258.68703325197566,
+          -287.1669400645187,
+          -86.14936593412313
+        ]
+      },
+      "depthDisagreementMeters": 4.423401208361611
+    },
+    {
+      "pixel": [
+        552,
+        833
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          552,
+          833
+        ],
+        "stereoAngleDegrees": 9.263617675821132,
+        "raySeparationMeters": 0.3464592190371311,
+        "depthDifferenceMeters": 4.071311715582851,
+        "pointMeters": [
+          285.2875974110211,
+          -305.71079099638155,
+          -25.661753233287527
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          552,
+          833
+        ],
+        "stereoAngleDegrees": 9.32666139585241,
+        "raySeparationMeters": 0.10887194124256593,
+        "depthDifferenceMeters": 1.9397360470611602,
+        "pointMeters": [
+          287.1992776056868,
+          -306.6502726249164,
+          -25.581329770231605
+        ]
+      },
+      "depthDisagreementMeters": 2.131575668521691
+    },
+    {
+      "pixel": [
+        580,
+        833
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          833
+        ],
+        "stereoAngleDegrees": 9.26332065648166,
+        "raySeparationMeters": 0.11520971908616023,
+        "depthDifferenceMeters": 9.444568446138874,
+        "pointMeters": [
+          268.40322609600844,
+          -302.8798601447197,
+          32.99245515756411
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          833
+        ],
+        "stereoAngleDegrees": 9.326341742087882,
+        "raySeparationMeters": 0.4112497660917778,
+        "depthDifferenceMeters": 8.001389921701048,
+        "pointMeters": [
+          269.6975388540304,
+          -303.5159226063406,
+          33.04670718734087
+        ]
+      },
+      "depthDisagreementMeters": 1.4431785244378261
+    },
+    {
+      "pixel": [
+        608,
+        833
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          608,
+          833
+        ],
+        "stereoAngleDegrees": 9.261728233646886,
+        "raySeparationMeters": 0.29043841317073865,
+        "depthDifferenceMeters": 11.804513850540388,
+        "pointMeters": [
+          196.4557802095078,
+          -272.9862944405759,
+          89.34859927897924
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          608,
+          833
+        ],
+        "stereoAngleDegrees": 9.32469806930474,
+        "raySeparationMeters": 0.6375799314535175,
+        "depthDifferenceMeters": 11.553050509071909,
+        "pointMeters": [
+          196.68130720494082,
+          -273.09712169127306,
+          89.35801771464867
+        ]
+      },
+      "depthDisagreementMeters": 0.2514633414684795
+    },
+    {
+      "pixel": [
+        636,
+        833
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          636,
+          833
+        ],
+        "stereoAngleDegrees": 9.260787523274983,
+        "raySeparationMeters": 0.07727865553731833,
+        "depthDifferenceMeters": 4.179575034359004,
+        "pointMeters": [
+          152.20979328331305,
+          -256.70292221812997,
+          146.8745588329566
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          636,
+          833
+        ],
+        "stereoAngleDegrees": 9.323760305389687,
+        "raySeparationMeters": 0.3771030917391824,
+        "depthDifferenceMeters": 3.0040891895769164,
+        "pointMeters": [
+          153.26404889835976,
+          -257.22098387486767,
+          146.91842441426888
+        ]
+      },
+      "depthDisagreementMeters": 1.175485844782088
+    },
+    {
+      "pixel": [
+        580,
+        861
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          580,
+          861
+        ],
+        "stereoAngleDegrees": 9.262353340443642,
+        "raySeparationMeters": 0.21847018400696225,
+        "depthDifferenceMeters": -11.689473044825718,
+        "pointMeters": [
+          210.8545136139146,
+          -340.57236943539465,
+          26.75502878302359
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          580,
+          861
+        ],
+        "stereoAngleDegrees": 9.325763468111493,
+        "raySeparationMeters": 0.3827440414515355,
+        "depthDifferenceMeters": -13.32114530832041,
+        "pointMeters": [
+          212.31797509815078,
+          -341.29130631513544,
+          26.8163853031474
+        ]
+      },
+      "depthDisagreementMeters": 1.6316722634946927
+    },
+    {
+      "pixel": [
+        608,
+        861
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          608,
+          861
+        ],
+        "stereoAngleDegrees": 9.26086777890762,
+        "raySeparationMeters": 0.2049883240900162,
+        "depthDifferenceMeters": 4.055331483716145,
+        "pointMeters": [
+          143.43353642575676,
+          -312.9127060218889,
+          83.30116121466381
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          608,
+          861
+        ],
+        "stereoAngleDegrees": 9.32436134755117,
+        "raySeparationMeters": 0.46043727838101595,
+        "depthDifferenceMeters": -2.6213872950756922,
+        "pointMeters": [
+          149.42200984922238,
+          -315.85450563181075,
+          83.55131069485469
+        ]
+      },
+      "depthDisagreementMeters": 6.676718778791837
+    },
+    {
+      "pixel": [
+        636,
+        861
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          636,
+          861
+        ],
+        "stereoAngleDegrees": 9.259862491657152,
+        "raySeparationMeters": 0.1649378507115216,
+        "depthDifferenceMeters": -1.3766817683936097,
+        "pointMeters": [
+          96.4309424124076,
+          -295.28022088782745,
+          140.71290332396347
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          636,
+          861
+        ],
+        "stereoAngleDegrees": 9.323181111521397,
+        "raySeparationMeters": 0.12786575516918094,
+        "depthDifferenceMeters": -0.7033963080029935,
+        "pointMeters": [
+          95.82705365563743,
+          -294.9835728989856,
+          140.68777064850656
+        ]
+      },
+      "depthDisagreementMeters": 0.6732854603906162
+    },
+    {
+      "pixel": [
+        580,
+        889
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          889
+        ],
+        "stereoAngleDegrees": 9.261282104093839,
+        "raySeparationMeters": 0.05860994523344924,
+        "depthDifferenceMeters": -28.020059052680153,
+        "pointMeters": [
+          148.89155454159481,
+          -376.095965575485,
+          20.331196817725868
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          580,
+          889
+        ],
+        "stereoAngleDegrees": 9.325120174960983,
+        "raySeparationMeters": 0.43080145915627094,
+        "depthDifferenceMeters": -31.736531035101507,
+        "pointMeters": [
+          152.22511552961078,
+          -377.7330338691827,
+          20.470991442252853
+        ]
+      },
+      "depthDisagreementMeters": 3.7164719824213535
+    },
+    {
+      "pixel": [
+        608,
+        889
+      ],
+      "before": {
+        "target": 1,
+        "partition": "fit",
+        "pixel": [
+          608,
+          889
+        ],
+        "stereoAngleDegrees": 9.260095003011207,
+        "raySeparationMeters": 0.1551908432614519,
+        "depthDifferenceMeters": -15.408116199774668,
+        "pointMeters": [
+          94.14861815382028,
+          -354.671665990405,
+          77.40829070670588
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "fit",
+        "pixel": [
+          608,
+          889
+        ],
+        "stereoAngleDegrees": 9.323609874681365,
+        "raySeparationMeters": 0.7208886654157091,
+        "depthDifferenceMeters": -4.962607265566476,
+        "pointMeters": [
+          84.77921725832857,
+          -350.0706079637457,
+          77.01682067012916
+        ]
+      },
+      "depthDisagreementMeters": 10.445508934208192
+    },
+    {
+      "pixel": [
+        636,
+        889
+      ],
+      "before": {
+        "target": 1,
+        "partition": "holdout",
+        "pixel": [
+          636,
+          889
+        ],
+        "stereoAngleDegrees": 9.258619804184912,
+        "raySeparationMeters": 1.1770174894756902,
+        "depthDifferenceMeters": 2.9263434006716125,
+        "pointMeters": [
+          27.141751381685026,
+          -327.2212729752064,
+          133.9868175947413
+        ]
+      },
+      "after": {
+        "target": 2,
+        "partition": "holdout",
+        "pixel": [
+          636,
+          889
+        ],
+        "stereoAngleDegrees": 9.32231533942543,
+        "raySeparationMeters": 1.4005304971538002,
+        "depthDifferenceMeters": 3.7787187403300777,
+        "pointMeters": [
+          26.377180493611377,
+          -326.84582380001666,
+          133.95499003443547
+        ]
+      },
+      "depthDisagreementMeters": 0.8523753396584652
+    }
+  ],
+  "rows": [
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        552,
+        609
+      ],
+      "stereoAngleDegrees": 9.264049283521441,
+      "raySeparationMeters": 0.2702177310739365,
+      "depthDifferenceMeters": -14.905157518573105,
+      "pointMeters": [
+        435.68511169799604,
+        148.46975731503335,
+        11.199640937664299
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        609
+      ],
+      "stereoAngleDegrees": 9.26324567046901,
+      "raySeparationMeters": 1.0675818634440988,
+      "depthDifferenceMeters": 11.44591050647432,
+      "pointMeters": [
+        397.28627571626566,
+        161.91201749647735,
+        68.9762253011304
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        552,
+        637
+      ],
+      "stereoAngleDegrees": 9.264301913855578,
+      "raySeparationMeters": 0.9977745305960137,
+      "depthDifferenceMeters": 5.156645126291551,
+      "pointMeters": [
+        429.84916296991287,
+        85.28761336219031,
+        7.136960137251663
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        580,
+        637
+      ],
+      "stereoAngleDegrees": 9.263818149499066,
+      "raySeparationMeters": 0.13056339840883735,
+      "depthDifferenceMeters": 14.426699244533665,
+      "pointMeters": [
+        405.03758200397715,
+        92.03157131941407,
+        65.47844013243048
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        608,
+        637
+      ],
+      "stereoAngleDegrees": 9.263185267332139,
+      "raySeparationMeters": 0.046575118738225195,
+      "depthDifferenceMeters": 3.3645469441544265,
+      "pointMeters": [
+        373.89589179336326,
+        101.89399961807067,
+        123.55977177520799
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        496,
+        665
+      ],
+      "stereoAngleDegrees": 9.261653268086803,
+      "raySeparationMeters": 0.5504672422660274,
+      "depthDifferenceMeters": 3.4566153502091765,
+      "pointMeters": [
+        309.3111585258157,
+        89.5626407697564,
+        -120.53845311015903
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        524,
+        665
+      ],
+      "stereoAngleDegrees": 9.263343966541635,
+      "raySeparationMeters": 0.6625555932313736,
+      "depthDifferenceMeters": -1.213726864545606,
+      "pointMeters": [
+        376.8751788485097,
+        50.80709125447902,
+        -58.291861267367494
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        552,
+        665
+      ],
+      "stereoAngleDegrees": 9.264693677921818,
+      "raySeparationMeters": 0.1910327127839185,
+      "depthDifferenceMeters": 5.564338174415752,
+      "pointMeters": [
+        429.93997681181645,
+        19.195191239996348,
+        3.32337224928051
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        665
+      ],
+      "stereoAngleDegrees": 9.26414263456267,
+      "raySeparationMeters": 0.021240268742656967,
+      "depthDifferenceMeters": 5.802313897700515,
+      "pointMeters": [
+        402.2713109290926,
+        27.343749523162842,
+        61.54042508255043
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        608,
+        665
+      ],
+      "stereoAngleDegrees": 9.26348898805679,
+      "raySeparationMeters": 0.2451821191411329,
+      "depthDifferenceMeters": -2.2189912237226963,
+      "pointMeters": [
+        370.24807134707225,
+        37.6372692057339,
+        119.58055145142862
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        636,
+        665
+      ],
+      "stereoAngleDegrees": 9.262776732476533,
+      "raySeparationMeters": 0.34005127501602334,
+      "depthDifferenceMeters": 2.3021335476078093,
+      "pointMeters": [
+        335.73777313088067,
+        49.155985144054284,
+        177.5221524110384
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        524,
+        693
+      ],
+      "stereoAngleDegrees": 9.263543740936347,
+      "raySeparationMeters": 0.31722488688494344,
+      "depthDifferenceMeters": 7.0155707249068655,
+      "pointMeters": [
+        368.8274713821593,
+        -11.277372009237297,
+        -62.44398372095566
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        552,
+        693
+      ],
+      "stereoAngleDegrees": 9.264953506071517,
+      "raySeparationMeters": 0.4558857821277877,
+      "depthDifferenceMeters": 0.29446079168701544,
+      "pointMeters": [
+        424.44458549446426,
+        -44.13536761427531,
+        -0.7247216569885495
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        580,
+        693
+      ],
+      "stereoAngleDegrees": 9.264407884632051,
+      "raySeparationMeters": 0.46413895904900226,
+      "depthDifferenceMeters": -0.08624988433439285,
+      "pointMeters": [
+        397.00641572946915,
+        -36.10316693224013,
+        57.49759115357665
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        608,
+        693
+      ],
+      "stereoAngleDegrees": 9.263491539660007,
+      "raySeparationMeters": 0.42278574590634166,
+      "depthDifferenceMeters": -16.371498204418458,
+      "pointMeters": [
+        353.8221814268036,
+        -20.318566518020816,
+        115.06771896645114
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        636,
+        693
+      ],
+      "stereoAngleDegrees": 9.262705152563347,
+      "raySeparationMeters": 0.2188398203334111,
+      "depthDifferenceMeters": -2.8634782931185327,
+      "pointMeters": [
+        316.1601875007036,
+        -7.2516439372557215,
+        172.87560574785493
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        664,
+        693
+      ],
+      "stereoAngleDegrees": 9.261734310654557,
+      "raySeparationMeters": 0.5662094345896427,
+      "depthDifferenceMeters": 15.213078826782294,
+      "pointMeters": [
+        270.6597832913976,
+        9.674536363076186,
+        230.36430838135675
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        468,
+        721
+      ],
+      "stereoAngleDegrees": 9.26194513462497,
+      "raySeparationMeters": 0.30137997474875144,
+      "depthDifferenceMeters": -8.254524606454652,
+      "pointMeters": [
+        292.93977863597684,
+        -29.003195643163053,
+        -188.23750226349694
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        496,
+        721
+      ],
+      "stereoAngleDegrees": 9.26274833641202,
+      "raySeparationMeters": 1.155225910909869,
+      "depthDifferenceMeters": 17.529697742604185,
+      "pointMeters": [
+        322.7889797902317,
+        -49.175552501081256,
+        -127.58360720102792
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        524,
+        721
+      ],
+      "stereoAngleDegrees": 9.263959663228441,
+      "raySeparationMeters": 0.2536479482101935,
+      "depthDifferenceMeters": 3.790193252672907,
+      "pointMeters": [
+        369.9808890456916,
+        -77.87986897976953,
+        -66.20751998068226
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        552,
+        721
+      ],
+      "stereoAngleDegrees": 9.265041909113734,
+      "raySeparationMeters": 0.2843305834385581,
+      "depthDifferenceMeters": -6.252140814147424,
+      "pointMeters": [
+        411.68575582583435,
+        -103.88023559434805,
+        -5.077980777628909
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        721
+      ],
+      "stereoAngleDegrees": 9.264234488399858,
+      "raySeparationMeters": 0.35095848230445625,
+      "depthDifferenceMeters": 14.134916174050886,
+      "pointMeters": [
+        373.1249553668313,
+        -90.37733089303947,
+        52.67490886087944
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        608,
+        721
+      ],
+      "stereoAngleDegrees": 9.263315173368193,
+      "raySeparationMeters": 0.6622381671905474,
+      "depthDifferenceMeters": -17.724925032118335,
+      "pointMeters": [
+        329.8109013880603,
+        -74.5340937806759,
+        110.23754491847649
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        636,
+        721
+      ],
+      "stereoAngleDegrees": 9.262648268787576,
+      "raySeparationMeters": 0.28320235593240994,
+      "depthDifferenceMeters": -14.490492634940892,
+      "pointMeters": [
+        297.2239047277835,
+        -63.96831224349444,
+        168.25441045811203
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        664,
+        721
+      ],
+      "stereoAngleDegrees": 9.261688797348857,
+      "raySeparationMeters": 0.02621105077086064,
+      "depthDifferenceMeters": -1.6639224222744815,
+      "pointMeters": [
+        252.20428759878268,
+        -47.28330523954355,
+        225.76020579435135
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        468,
+        749
+      ],
+      "stereoAngleDegrees": 9.262419123929114,
+      "raySeparationMeters": 0.028244641267991467,
+      "depthDifferenceMeters": -19.945629537221976,
+      "pointMeters": [
+        296.58076144044753,
+        -96.82979802621412,
+        -191.8835334198211
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        496,
+        749
+      ],
+      "stereoAngleDegrees": 9.263522647605933,
+      "raySeparationMeters": 0.14329299980744734,
+      "depthDifferenceMeters": -6.051589349110145,
+      "pointMeters": [
+        339.1904769955436,
+        -123.27438143567997,
+        -130.6953158137403
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        524,
+        749
+      ],
+      "stereoAngleDegrees": 9.264315269074489,
+      "raySeparationMeters": 0.546588171375355,
+      "depthDifferenceMeters": -12.441587590496056,
+      "pointMeters": [
+        368.5898843689356,
+        -143.21593395184027,
+        -70.07778511678589
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        552,
+        749
+      ],
+      "stereoAngleDegrees": 9.264794012431452,
+      "raySeparationMeters": 0.5382594186234247,
+      "depthDifferenceMeters": 0.1833553736214526,
+      "pointMeters": [
+        384.65890146489255,
+        -156.59590947948163,
+        -10.031091761984499
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        580,
+        749
+      ],
+      "stereoAngleDegrees": 9.264248297480977,
+      "raySeparationMeters": 0.004667338928586512,
+      "depthDifferenceMeters": 6.061371903459076,
+      "pointMeters": [
+        357.2135269823484,
+        -148.56607122850255,
+        48.1854311891675
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        608,
+        749
+      ],
+      "stereoAngleDegrees": 9.262966124424999,
+      "raySeparationMeters": 0.2689281554496666,
+      "depthDifferenceMeters": -9.780702057818417,
+      "pointMeters": [
+        298.4771629195311,
+        -125.14126415160717,
+        105.10077705270669
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        636,
+        749
+      ],
+      "stereoAngleDegrees": 9.262142373798245,
+      "raySeparationMeters": 0.7297563706991376,
+      "depthDifferenceMeters": 3.1694174450822175,
+      "pointMeters": [
+        259.2198005708051,
+        -111.29722266516183,
+        162.8391150997104
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        664,
+        749
+      ],
+      "stereoAngleDegrees": 9.261333024256436,
+      "raySeparationMeters": 0.2651412161118232,
+      "depthDifferenceMeters": 19.748026690504048,
+      "pointMeters": [
+        220.57601262064418,
+        -97.75319431570824,
+        220.6087631791288
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        496,
+        777
+      ],
+      "stereoAngleDegrees": 9.263175560526722,
+      "raySeparationMeters": 0.1693213937198629,
+      "depthDifferenceMeters": -4.210113221721258,
+      "pointMeters": [
+        307.95750197552843,
+        -173.92485777664115,
+        -135.82338738444014
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        524,
+        777
+      ],
+      "stereoAngleDegrees": 9.264091743780822,
+      "raySeparationMeters": 0.23368200310951198,
+      "depthDifferenceMeters": -13.927992740413174,
+      "pointMeters": [
+        342.61176198348403,
+        -196.4450134022918,
+        -74.98513493700193
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        552,
+        777
+      ],
+      "stereoAngleDegrees": 9.264735733768639,
+      "raySeparationMeters": 0.13921810822521036,
+      "depthDifferenceMeters": 0.6747102602967061,
+      "pointMeters": [
+        365.70376037131064,
+        -213.27477240512962,
+        -14.645097410204471
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        777
+      ],
+      "stereoAngleDegrees": 9.264112037872861,
+      "raySeparationMeters": 0.10259559554246325,
+      "depthDifferenceMeters": 12.514960606698878,
+      "pointMeters": [
+        334.9435379462084,
+        -203.6176306590787,
+        43.42908670045108
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        608,
+        777
+      ],
+      "stereoAngleDegrees": 9.262998150851818,
+      "raySeparationMeters": 0.03163362729164411,
+      "depthDifferenceMeters": -9.445300333900377,
+      "pointMeters": [
+        283.35493472928647,
+        -183.7155322432809,
+        100.63955417869875
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        636,
+        777
+      ],
+      "stereoAngleDegrees": 9.261898750395982,
+      "raySeparationMeters": 0.7895966898486878,
+      "depthDifferenceMeters": 2.900490459112916,
+      "pointMeters": [
+        232.37823575461516,
+        -164.11242339556338,
+        157.88637890630707
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        664,
+        777
+      ],
+      "stereoAngleDegrees": 9.260984921371364,
+      "raySeparationMeters": 0.14754840261065172,
+      "depthDifferenceMeters": 23.818846922775265,
+      "pointMeters": [
+        189.28859743429348,
+        -148.385642298148,
+        215.46951780406198
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        496,
+        805
+      ],
+      "stereoAngleDegrees": 9.262593839596137,
+      "raySeparationMeters": 0.7190687583949377,
+      "depthDifferenceMeters": -1.6713064797222614,
+      "pointMeters": [
+        266.76647096301895,
+        -219.67345830911654,
+        -141.37298232061767
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        524,
+        805
+      ],
+      "stereoAngleDegrees": 9.263628673993765,
+      "raySeparationMeters": 0.23780781870879228,
+      "depthDifferenceMeters": -5.125237021944486,
+      "pointMeters": [
+        306.47035998821957,
+        -244.66960298045888,
+        -80.32141725706242
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        552,
+        805
+      ],
+      "stereoAngleDegrees": 9.264391221952051,
+      "raySeparationMeters": 0.052863510079846875,
+      "depthDifferenceMeters": 5.968283248192165,
+      "pointMeters": [
+        334.6045640791417,
+        -263.97304598995834,
+        -19.770025217849252
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        580,
+        805
+      ],
+      "stereoAngleDegrees": 9.263770800045242,
+      "raySeparationMeters": 0.28508781644685227,
+      "depthDifferenceMeters": 17.878226769331377,
+      "pointMeters": [
+        303.9800606750068,
+        -254.38613766539493,
+        38.307840089944875
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        608,
+        805
+      ],
+      "stereoAngleDegrees": 9.26269971468507,
+      "raySeparationMeters": 1.1323613244165498,
+      "depthDifferenceMeters": 0.2519130468717776,
+      "pointMeters": [
+        254.20470679790014,
+        -235.3819899171067,
+        95.59180059795654
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        636,
+        805
+      ],
+      "stereoAngleDegrees": 9.261571903420116,
+      "raySeparationMeters": 0.6133311806188142,
+      "depthDifferenceMeters": 0.8917069188901223,
+      "pointMeters": [
+        202.0144981937483,
+        -215.1883170515357,
+        152.7856785433287
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        496,
+        833
+      ],
+      "stereoAngleDegrees": 9.261291735496094,
+      "raySeparationMeters": 0.3668016279785189,
+      "depthDifferenceMeters": 12.72956609755056,
+      "pointMeters": [
+        194.95885350421304,
+        -250.37093125106185,
+        -148.21984445049202
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        524,
+        833
+      ],
+      "stereoAngleDegrees": 9.262798056257587,
+      "raySeparationMeters": 0.07173033583983471,
+      "depthDifferenceMeters": 2.795083437988069,
+      "pointMeters": [
+        254.7199974420364,
+        -285.21731230957084,
+        -86.31686742671627
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        552,
+        833
+      ],
+      "stereoAngleDegrees": 9.263617675821132,
+      "raySeparationMeters": 0.3464592190371311,
+      "depthDifferenceMeters": 4.071311715582851,
+      "pointMeters": [
+        285.2875974110211,
+        -305.71079099638155,
+        -25.661753233287527
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        833
+      ],
+      "stereoAngleDegrees": 9.26332065648166,
+      "raySeparationMeters": 0.11520971908616023,
+      "depthDifferenceMeters": 9.444568446138874,
+      "pointMeters": [
+        268.40322609600844,
+        -302.8798601447197,
+        32.99245515756411
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        608,
+        833
+      ],
+      "stereoAngleDegrees": 9.261728233646886,
+      "raySeparationMeters": 0.29043841317073865,
+      "depthDifferenceMeters": 11.804513850540388,
+      "pointMeters": [
+        196.4557802095078,
+        -272.9862944405759,
+        89.34859927897924
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        636,
+        833
+      ],
+      "stereoAngleDegrees": 9.260787523274983,
+      "raySeparationMeters": 0.07727865553731833,
+      "depthDifferenceMeters": 4.179575034359004,
+      "pointMeters": [
+        152.20979328331305,
+        -256.70292221812997,
+        146.8745588329566
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        580,
+        861
+      ],
+      "stereoAngleDegrees": 9.262353340443642,
+      "raySeparationMeters": 0.21847018400696225,
+      "depthDifferenceMeters": -11.689473044825718,
+      "pointMeters": [
+        210.8545136139146,
+        -340.57236943539465,
+        26.75502878302359
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        608,
+        861
+      ],
+      "stereoAngleDegrees": 9.26086777890762,
+      "raySeparationMeters": 0.2049883240900162,
+      "depthDifferenceMeters": 4.055331483716145,
+      "pointMeters": [
+        143.43353642575676,
+        -312.9127060218889,
+        83.30116121466381
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        636,
+        861
+      ],
+      "stereoAngleDegrees": 9.259862491657152,
+      "raySeparationMeters": 0.1649378507115216,
+      "depthDifferenceMeters": -1.3766817683936097,
+      "pointMeters": [
+        96.4309424124076,
+        -295.28022088782745,
+        140.71290332396347
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        889
+      ],
+      "stereoAngleDegrees": 9.261282104093839,
+      "raySeparationMeters": 0.05860994523344924,
+      "depthDifferenceMeters": -28.020059052680153,
+      "pointMeters": [
+        148.89155454159481,
+        -376.095965575485,
+        20.331196817725868
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "fit",
+      "pixel": [
+        608,
+        889
+      ],
+      "stereoAngleDegrees": 9.260095003011207,
+      "raySeparationMeters": 0.1551908432614519,
+      "depthDifferenceMeters": -15.408116199774668,
+      "pointMeters": [
+        94.14861815382028,
+        -354.671665990405,
+        77.40829070670588
+      ]
+    },
+    {
+      "target": 1,
+      "partition": "holdout",
+      "pixel": [
+        636,
+        889
+      ],
+      "stereoAngleDegrees": 9.258619804184912,
+      "raySeparationMeters": 1.1770174894756902,
+      "depthDifferenceMeters": 2.9263434006716125,
+      "pointMeters": [
+        27.141751381685026,
+        -327.2212729752064,
+        133.9868175947413
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        552,
+        609
+      ],
+      "stereoAngleDegrees": 9.323843788671583,
+      "raySeparationMeters": 1.1378273456451247,
+      "depthDifferenceMeters": -13.904217254719697,
+      "pointMeters": [
+        434.787913040258,
+        148.91190737165743,
+        11.16196723531175
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        609
+      ],
+      "stereoAngleDegrees": 9.32301484157113,
+      "raySeparationMeters": 0.2422119216728044,
+      "depthDifferenceMeters": 12.964595980767626,
+      "pointMeters": [
+        395.9249783983105,
+        162.58286149517517,
+        68.91927346750344
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        552,
+        637
+      ],
+      "stereoAngleDegrees": 9.324578229890474,
+      "raySeparationMeters": 1.4478483048439308,
+      "depthDifferenceMeters": 2.4155205508577637,
+      "pointMeters": [
+        432.30635175900534,
+        84.0771025524009,
+        7.240162715685074
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        580,
+        637
+      ],
+      "stereoAngleDegrees": 9.324056313263316,
+      "raySeparationMeters": 0.28351731338796815,
+      "depthDifferenceMeters": 12.995393738907296,
+      "pointMeters": [
+        406.3206414762535,
+        91.39950243092608,
+        65.53213148377108
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        608,
+        637
+      ],
+      "stereoAngleDegrees": 9.323431066693043,
+      "raySeparationMeters": 0.4260172115198615,
+      "depthDifferenceMeters": 1.0095516549190506,
+      "pointMeters": [
+        376.0069935779902,
+        100.8540452545858,
+        123.64778875740376
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        496,
+        665
+      ],
+      "stereoAngleDegrees": 9.322129478473423,
+      "raySeparationMeters": 0.43980294651621205,
+      "depthDifferenceMeters": 8.72077646717662,
+      "pointMeters": [
+        304.5920626829029,
+        91.8867848154332,
+        -120.73815575313711
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        524,
+        665
+      ],
+      "stereoAngleDegrees": 9.324006285708098,
+      "raySeparationMeters": 0.5314655097822837,
+      "depthDifferenceMeters": -3.7858263146481477,
+      "pointMeters": [
+        379.1809812755673,
+        49.67152151741902,
+        -58.19463924791671
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        552,
+        665
+      ],
+      "stereoAngleDegrees": 9.325295782860998,
+      "raySeparationMeters": 0.015188513146240763,
+      "depthDifferenceMeters": 6.467406273121014,
+      "pointMeters": [
+        429.1303972455207,
+        19.593884352681926,
+        3.2893616827386722
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        665
+      ],
+      "stereoAngleDegrees": 9.324770839051995,
+      "raySeparationMeters": 0.44581034537604997,
+      "depthDifferenceMeters": 4.966730287531391,
+      "pointMeters": [
+        403.02040031389333,
+        26.974856604880188,
+        61.57177915772627
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        608,
+        665
+      ],
+      "stereoAngleDegrees": 9.324103748803843,
+      "raySeparationMeters": 0.826100459117222,
+      "depthDifferenceMeters": -3.0079939083661884,
+      "pointMeters": [
+        370.95540919178165,
+        37.28894708745065,
+        119.61004910721385
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        636,
+        665
+      ],
+      "stereoAngleDegrees": 9.323388004026965,
+      "raySeparationMeters": 1.5589445950562386,
+      "depthDifferenceMeters": 1.0574921445222571,
+      "pointMeters": [
+        336.85360132920323,
+        48.60652148240479,
+        177.56851337093758
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        524,
+        693
+      ],
+      "stereoAngleDegrees": 9.324584684564833,
+      "raySeparationMeters": 0.03128691412168669,
+      "depthDifferenceMeters": 5.4961502474034205,
+      "pointMeters": [
+        370.18967360572424,
+        -11.94800100493012,
+        -62.38653426770543
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        552,
+        693
+      ],
+      "stereoAngleDegrees": 9.326023747007403,
+      "raySeparationMeters": 0.42731060005374233,
+      "depthDifferenceMeters": -1.8925767926266417,
+      "pointMeters": [
+        426.40534603083506,
+        -45.10064643106307,
+        -0.6423303938336176
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        580,
+        693
+      ],
+      "stereoAngleDegrees": 9.325395587654592,
+      "raySeparationMeters": 0.36806547168377385,
+      "depthDifferenceMeters": 1.0684970012516715,
+      "pointMeters": [
+        395.97113101318246,
+        -35.59351285742014,
+        57.45424775714855
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        608,
+        693
+      ],
+      "stereoAngleDegrees": 9.324453667995318,
+      "raySeparationMeters": 0.6399338080440001,
+      "depthDifferenceMeters": -14.769256627361756,
+      "pointMeters": [
+        352.3856812522281,
+        -19.611420882487437,
+        115.00779927211806
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        636,
+        693
+      ],
+      "stereoAngleDegrees": 9.323712858827957,
+      "raySeparationMeters": 0.9863039627994995,
+      "depthDifferenceMeters": -4.061165140999947,
+      "pointMeters": [
+        317.2339930401067,
+        -7.780230732925702,
+        172.9202313963524
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        664,
+        693
+      ],
+      "stereoAngleDegrees": 9.322681475667482,
+      "raySeparationMeters": 0.12208309056066384,
+      "depthDifferenceMeters": 16.06397342053242,
+      "pointMeters": [
+        269.8968917701859,
+        10.050063174916431,
+        230.33272119822504
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        496,
+        721
+      ],
+      "stereoAngleDegrees": 9.324205955101167,
+      "raySeparationMeters": 0.8464208610628317,
+      "depthDifferenceMeters": 14.837048366083764,
+      "pointMeters": [
+        325.2031504489132,
+        -50.36369967699284,
+        -127.48139671246827
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        552,
+        721
+      ],
+      "stereoAngleDegrees": 9.32649911907659,
+      "raySeparationMeters": 0.3236007589528456,
+      "depthDifferenceMeters": -7.8390498829539865,
+      "pointMeters": [
+        413.10857469018083,
+        -104.58044321497437,
+        -5.018179775244789
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        721
+      ],
+      "stereoAngleDegrees": 9.32563378607379,
+      "raySeparationMeters": 0.3012387841223929,
+      "depthDifferenceMeters": 14.571540694043506,
+      "pointMeters": [
+        372.7334746407578,
+        -90.18467820022488,
+        52.65851518715681
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        608,
+        721
+      ],
+      "stereoAngleDegrees": 9.324707976809202,
+      "raySeparationMeters": 0.048339348554121545,
+      "depthDifferenceMeters": -17.7392233547871,
+      "pointMeters": [
+        329.82372150657466,
+        -74.54040254384745,
+        110.23807980201673
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        636,
+        721
+      ],
+      "stereoAngleDegrees": 9.324004935674296,
+      "raySeparationMeters": 0.8887037816622926,
+      "depthDifferenceMeters": -13.41165641223779,
+      "pointMeters": [
+        296.256591474812,
+        -63.492312397487694,
+        168.21420084897
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        664,
+        721
+      ],
+      "stereoAngleDegrees": 9.323041220030095,
+      "raySeparationMeters": 0.4162399321574573,
+      "depthDifferenceMeters": -1.1673803112935275,
+      "pointMeters": [
+        251.759069954569,
+        -47.06422685136204,
+        225.74176732694468
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        440,
+        749
+      ],
+      "stereoAngleDegrees": 9.322523532599146,
+      "raySeparationMeters": 2.3578762941908233,
+      "depthDifferenceMeters": -18.62000638077734,
+      "pointMeters": [
+        229.69526706024772,
+        -58.437301790865604,
+        -254.1193365819836
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        468,
+        749
+      ],
+      "stereoAngleDegrees": 9.324235989273701,
+      "raySeparationMeters": 0.12601487656974703,
+      "depthDifferenceMeters": -20.838310613762587,
+      "pointMeters": [
+        297.38116501818877,
+        -97.2235953991185,
+        -191.84951509801795
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        496,
+        749
+      ],
+      "stereoAngleDegrees": 9.325362944511708,
+      "raySeparationMeters": 0.7031493611158454,
+      "depthDifferenceMeters": -7.518297946488019,
+      "pointMeters": [
+        340.50558448029915,
+        -123.92139368879725,
+        -130.63962418585288
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        524,
+        749
+      ],
+      "stereoAngleDegrees": 9.326137092607619,
+      "raySeparationMeters": 0.684814841893461,
+      "depthDifferenceMeters": -12.720171857974492,
+      "pointMeters": [
+        368.83967647422105,
+        -143.3388242032379,
+        -70.06724546066107
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        552,
+        749
+      ],
+      "stereoAngleDegrees": 9.326716180270699,
+      "raySeparationMeters": 1.2621105242384643,
+      "depthDifferenceMeters": -4.6606251175981015,
+      "pointMeters": [
+        389.0022952633444,
+        -158.73266781005077,
+        -9.848496177515699
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        580,
+        749
+      ],
+      "stereoAngleDegrees": 9.326050314617431,
+      "raySeparationMeters": 0.028998017502698075,
+      "depthDifferenceMeters": 6.311832829727791,
+      "pointMeters": [
+        356.9889467667672,
+        -148.45559084479464,
+        48.17602442749012
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        608,
+        749
+      ],
+      "stereoAngleDegrees": 9.324754643854659,
+      "raySeparationMeters": 0.5828835843847507,
+      "depthDifferenceMeters": -9.886909765715245,
+      "pointMeters": [
+        298.5723969641258,
+        -125.18811240408104,
+        105.1047513714966
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        636,
+        749
+      ],
+      "stereoAngleDegrees": 9.32401208773165,
+      "raySeparationMeters": 0.5132939635902757,
+      "depthDifferenceMeters": -1.4336657674866728,
+      "pointMeters": [
+        263.34732535801595,
+        -113.32760744466214,
+        163.0107304838839
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        664,
+        749
+      ],
+      "stereoAngleDegrees": 9.323049557239377,
+      "raySeparationMeters": 0.062457178944166955,
+      "depthDifferenceMeters": 21.61917056137463,
+      "pointMeters": [
+        218.89816426415928,
+        -96.92786197140231,
+        220.53925922508824
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        468,
+        777
+      ],
+      "stereoAngleDegrees": 9.324139209084652,
+      "raySeparationMeters": 0.6589033559541554,
+      "depthDifferenceMeters": -12.785917922039516,
+      "pointMeters": [
+        260.1292429990135,
+        -144.9211498691293,
+        -197.232508393643
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        496,
+        777
+      ],
+      "stereoAngleDegrees": 9.325387181062485,
+      "raySeparationMeters": 0.14983508438896098,
+      "depthDifferenceMeters": -4.626937567896675,
+      "pointMeters": [
+        308.33126791822724,
+        -174.10868081837543,
+        -135.80755561320439
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        524,
+        777
+      ],
+      "stereoAngleDegrees": 9.326282981012467,
+      "raySeparationMeters": 0.015570669705395123,
+      "depthDifferenceMeters": -12.985853308055084,
+      "pointMeters": [
+        341.76693740760675,
+        -196.02952947543235,
+        -75.02078956595506
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        552,
+        777
+      ],
+      "stereoAngleDegrees": 9.32693911793858,
+      "raySeparationMeters": 0.0012059359416009608,
+      "depthDifferenceMeters": 1.2810067270183936,
+      "pointMeters": [
+        365.16008320380934,
+        -213.00740020046942,
+        -14.667958890297086
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        777
+      ],
+      "stereoAngleDegrees": 9.32630870332297,
+      "raySeparationMeters": 0.8166432635251898,
+      "depthDifferenceMeters": 12.861202580097597,
+      "pointMeters": [
+        334.63305306230905,
+        -203.46494329249253,
+        43.4160786613902
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        608,
+        777
+      ],
+      "stereoAngleDegrees": 9.325190928274603,
+      "raySeparationMeters": 0.5310021967337651,
+      "depthDifferenceMeters": -9.803724936849903,
+      "pointMeters": [
+        283.67634758201893,
+        -183.8735891111137,
+        100.65297060895682
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        636,
+        777
+      ],
+      "stereoAngleDegrees": 9.324100539513564,
+      "raySeparationMeters": 0.11130970420788468,
+      "depthDifferenceMeters": 1.2422751309350133,
+      "pointMeters": [
+        233.86523593735183,
+        -164.84364438557532,
+        157.94822059809667
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        664,
+        777
+      ],
+      "stereoAngleDegrees": 9.323123042323724,
+      "raySeparationMeters": 0.16394409026954265,
+      "depthDifferenceMeters": 24.377484413969796,
+      "pointMeters": [
+        188.78763537551276,
+        -148.1393051179184,
+        215.44876073630076
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        496,
+        805
+      ],
+      "stereoAngleDegrees": 9.325277246792915,
+      "raySeparationMeters": 0.39968050914533787,
+      "depthDifferenceMeters": -5.88921781652607,
+      "pointMeters": [
+        270.54892202699557,
+        -221.53307095877244,
+        -141.21273006015872
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        524,
+        805
+      ],
+      "stereoAngleDegrees": 9.326234463841274,
+      "raySeparationMeters": 0.03142792867580488,
+      "depthDifferenceMeters": -5.228094223421067,
+      "pointMeters": [
+        306.5625991364941,
+        -244.71495033154497,
+        -80.31752352309559
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        552,
+        805
+      ],
+      "stereoAngleDegrees": 9.3269369367413,
+      "raySeparationMeters": 0.15840164669887175,
+      "depthDifferenceMeters": 8.98384187486954,
+      "pointMeters": [
+        331.90027536754496,
+        -262.64358019657084,
+        -19.883766589071456
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        580,
+        805
+      ],
+      "stereoAngleDegrees": 9.326346029280693,
+      "raySeparationMeters": 0.09669955302022336,
+      "depthDifferenceMeters": 18.93954981060233,
+      "pointMeters": [
+        303.02827851392794,
+        -253.91824185691075,
+        38.26795490262339
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        608,
+        805
+      ],
+      "stereoAngleDegrees": 9.325105044351723,
+      "raySeparationMeters": 0.4583590403550227,
+      "depthDifferenceMeters": 8.39385120884981,
+      "pointMeters": [
+        246.90303267765557,
+        -231.79259262987762,
+        95.28694130294025
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        636,
+        805
+      ],
+      "stereoAngleDegrees": 9.324092650592192,
+      "raySeparationMeters": 0.5379486217112069,
+      "depthDifferenceMeters": 2.735919680504594,
+      "pointMeters": [
+        200.36059403966647,
+        -214.37530511719524,
+        152.71687916860174
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        664,
+        805
+      ],
+      "stereoAngleDegrees": 9.322740233041557,
+      "raySeparationMeters": 0.12417980696057342,
+      "depthDifferenceMeters": 37.362806556688156,
+      "pointMeters": [
+        139.55173006939003,
+        -189.94267424577265,
+        209.56372808694323
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        496,
+        833
+      ],
+      "stereoAngleDegrees": 9.324343593921798,
+      "raySeparationMeters": 0.08913942277998736,
+      "depthDifferenceMeters": 9.07251094194362,
+      "pointMeters": [
+        198.23857216420583,
+        -251.98281866827165,
+        -148.08085928328364
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        524,
+        833
+      ],
+      "stereoAngleDegrees": 9.325883298561887,
+      "raySeparationMeters": 0.018435648002918824,
+      "depthDifferenceMeters": -1.6283177703735419,
+      "pointMeters": [
+        258.68703325197566,
+        -287.1669400645187,
+        -86.14936593412313
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        552,
+        833
+      ],
+      "stereoAngleDegrees": 9.32666139585241,
+      "raySeparationMeters": 0.10887194124256593,
+      "depthDifferenceMeters": 1.9397360470611602,
+      "pointMeters": [
+        287.1992776056868,
+        -306.6502726249164,
+        -25.581329770231605
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        833
+      ],
+      "stereoAngleDegrees": 9.326341742087882,
+      "raySeparationMeters": 0.4112497660917778,
+      "depthDifferenceMeters": 8.001389921701048,
+      "pointMeters": [
+        269.6975388540304,
+        -303.5159226063406,
+        33.04670718734087
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        608,
+        833
+      ],
+      "stereoAngleDegrees": 9.32469806930474,
+      "raySeparationMeters": 0.6375799314535175,
+      "depthDifferenceMeters": 11.553050509071909,
+      "pointMeters": [
+        196.68130720494082,
+        -273.09712169127306,
+        89.35801771464867
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        636,
+        833
+      ],
+      "stereoAngleDegrees": 9.323760305389687,
+      "raySeparationMeters": 0.3771030917391824,
+      "depthDifferenceMeters": 3.0040891895769164,
+      "pointMeters": [
+        153.26404889835976,
+        -257.22098387486767,
+        146.91842441426888
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        524,
+        861
+      ],
+      "stereoAngleDegrees": 9.324812516427512,
+      "raySeparationMeters": 0.027668195292684314,
+      "depthDifferenceMeters": -0.8825148857431486,
+      "pointMeters": [
+        180.64821527263848,
+        -314.7971209377574,
+        -93.25543586752974
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        552,
+        861
+      ],
+      "stereoAngleDegrees": 9.326185757491489,
+      "raySeparationMeters": 1.0423167103588398,
+      "depthDifferenceMeters": -25.642043254571036,
+      "pointMeters": [
+        234.1254612992634,
+        -346.5394632349198,
+        -31.63187208148338
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        580,
+        861
+      ],
+      "stereoAngleDegrees": 9.325763468111493,
+      "raySeparationMeters": 0.3827440414515355,
+      "depthDifferenceMeters": -13.32114530832041,
+      "pointMeters": [
+        212.31797509815078,
+        -341.29130631513544,
+        26.8163853031474
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        608,
+        861
+      ],
+      "stereoAngleDegrees": 9.32436134755117,
+      "raySeparationMeters": 0.46043727838101595,
+      "depthDifferenceMeters": -2.6213872950756922,
+      "pointMeters": [
+        149.42200984922238,
+        -315.85450563181075,
+        83.55131069485469
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        636,
+        861
+      ],
+      "stereoAngleDegrees": 9.323181111521397,
+      "raySeparationMeters": 0.12786575516918094,
+      "depthDifferenceMeters": -0.7033963080029935,
+      "pointMeters": [
+        95.82705365563743,
+        -294.9835728989856,
+        140.68777064850656
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        580,
+        889
+      ],
+      "stereoAngleDegrees": 9.325120174960983,
+      "raySeparationMeters": 0.43080145915627094,
+      "depthDifferenceMeters": -31.736531035101507,
+      "pointMeters": [
+        152.22511552961078,
+        -377.7330338691827,
+        20.470991442252853
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "fit",
+      "pixel": [
+        608,
+        889
+      ],
+      "stereoAngleDegrees": 9.323609874681365,
+      "raySeparationMeters": 0.7208886654157091,
+      "depthDifferenceMeters": -4.962607265566476,
+      "pointMeters": [
+        84.77921725832857,
+        -350.0706079637457,
+        77.01682067012916
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        636,
+        889
+      ],
+      "stereoAngleDegrees": 9.32231533942543,
+      "raySeparationMeters": 1.4005304971538002,
+      "depthDifferenceMeters": 3.7787187403300777,
+      "pointMeters": [
+        26.377180493611377,
+        -326.84582380001666,
+        133.95499003443547
+      ]
+    },
+    {
+      "target": 2,
+      "partition": "holdout",
+      "pixel": [
+        608,
+        917
+      ],
+      "stereoAngleDegrees": 9.320992019446535,
+      "raySeparationMeters": 5.888836435263274,
+      "depthDifferenceMeters": 81.33373176923487,
+      "pointMeters": [
+        -58.18976603978081,
+        -345.8361557863245,
+        67.20713216963122
+      ]
+    }
+  ]
+}

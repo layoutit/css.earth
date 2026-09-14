@@ -22,7 +22,7 @@ L4 Jupiter Trojan. Source records checked 2026-09-09.
 - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain.
 - Absolute phase is arbitrary; accelerated display spin is illustrative. Orbit context is fixed at 2026-09-03 TT.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods
 
@@ -34,16 +34,6 @@ L4 Jupiter Trojan. Source records checked 2026-09-09.
 The unmodified source has 574 vertices and 1144 triangles. Its signed tetrahedral volume is 0.99999995101356143 source units³; independent triangle-centroid divergence gives 0.99999995101356143. The existing recipe applies a uniform scale of 95.752323632100087 km per source unit. No unit-volume assumption is made. The Elevation reference sphere has radius 59.4 km.
 
 Original +Z spin axis and +X reference meridian are retained. The selected ecliptic J2000 pole is (153.73°, 12.69°), with sidereal period 24.4984 h. Conversion to equatorial J2000 uses obliquity 23.439291111°. Position uses JPL Horizons heliocentric ICRF elements; TDB is approximated as TT, under 2 ms.
-
-### Source survey
-
-The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/13159/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from [NOTICE.md](NOTICE.md).
-
-Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row and original query are pinned in [the source manifest](source/manifest.json); [column definitions](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html) are shared. The [NEOWISE v2 definitions](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html) and [Grav et al. (2012), WISE/NEOWISE Observations of the Jovian Trojan Population: Taxonomy](https://arxiv.org/abs/1209.1549) describe those thermal records; the selected physical scale comes from the occultation fit.
-
-The original archive pole (150°, 5°) and period 24.4987 h remain in [damit-model.json](source/reference/damit-model.json). The [Dutra et al. (2025), Physical Characteristics of Jupiter’s Trojan (1437) Diomedes from a Tri-chord Stellar Occultation in 2020 and Dimensionless 3D Model](https://doi.org/10.1098/rsta.2024.0187) occultation fit drives the presentation. Hanuš et al. (2023), [*Shape models and spin states of Jupiter Trojans: Testing the streaming instability formation scenario*](https://arxiv.org/abs/2308.05380v1), Fig. 13 and Table B.2 proposed a different shape/133 ± 5 km fit whose numerical mesh remains unresolved; the later same-mesh fit is used here.
-
-The selected archive query lists no alternative model for this target.
 
 ### Preparation
 

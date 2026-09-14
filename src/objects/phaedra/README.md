@@ -44,17 +44,7 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 
 <a id="source-survey"></a>
 
-<details>
-<summary>Source survey</summary>
-
-[Model fields and mesh measurements](source/reference/damit-model.json).
-
-- [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/304) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/1091/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
-- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [Marciniak (2011), Photometry and models of selected main belt asteroids. VIII. Low-pole asteroids](https://ui.adsabs.harvard.edu/abs/2011A%26A...529A.107M) — original model publication record.
-- [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 64.08 ± 0.77 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
-
-</details>
+The [investigation ledger](investigations.json) records the source survey and alternative models.
 
 <a id="preparation-and-qualification"></a>
 
