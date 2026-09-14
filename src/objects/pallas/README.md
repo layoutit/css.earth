@@ -23,6 +23,8 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
 
+The [September 2026 photographic projection trial](evidence/photographic-projection.json) examined four native SPHERE frames and the LAM/DAMIT model correspondence. Outline fits on three separated views reached 0.63–1.33 pixels withheld RMS, but cross-observation interior registration did not qualify. The record keeps the cameras, source hashes, matcher trials and their limitations; this was an offline investigation, not a prepared or browser-tested photographic view. See the [ledger](investigations.json) for the remaining source decisions.
+
 ## Known problems
 
 Shape uses the shared no-imagery grid. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 255.5 km reference sphere, with a -60 to 40 km legend. This includes global shape, not height above a gravitational equipotential.
@@ -40,7 +42,7 @@ Rotation has an explicitly arbitrary display meridian, not an absolute rotationa
 
 - [Original ADAM comparison](https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj): radius 256.359287 km. Excluded as a second lens: it is an alternative reconstruction of the same shape. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
 
-- [Released SPHERE images](https://observations.lam.fr/astero/Data/2Pallas/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this PR: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
+- [Released SPHERE images](https://observations.lam.fr/astero/Data/2Pallas/): individual, illuminated, resolved telescope images. They constrain the selected reconstruction. A photographic surface remains under investigation; the native-frame trial and remaining registration checks are recorded in the ledger.
 
 - [Individual research](https://observations.lam.fr/astero/Papers/Marsset2020.pdf): complementary interpretation and model/image comparisons.
 
