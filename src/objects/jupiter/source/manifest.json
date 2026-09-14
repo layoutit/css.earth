@@ -669,8 +669,8 @@
     {
       "id": "jupiter-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 16163,
-      "expectedSha256": "8d7c1c8656b30b7f3b1e6b03f222dfa231dffba6287f781fdc414ce72c18d35b",
+      "expectedBytes": 15410,
+      "expectedSha256": "11aef1fc85e8c0073b14a6fb4f023b528a4ec6ee31b6ee53f29e2090e36ef068",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -681,7 +681,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {

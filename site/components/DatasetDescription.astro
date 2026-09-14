@@ -5,8 +5,7 @@ import { datasetCaption } from "../dataset-caption.mts";
 import SelectedContent from "./SelectedContent.astro";
 const { provenance, lens } = Astro.props;
 const caption = datasetCaption(provenance, lens);
-const description = lens.summary ?? lens.description;
 ---
-<SelectedContent title={caption.title} {description} descriptionDetail={lens.description}>
+<SelectedContent title={caption.title} description={lens.summary} descriptionDetail={lens.description}>
   <slot />
 </SelectedContent>

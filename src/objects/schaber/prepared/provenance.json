@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "19921f2325ff477a5e0c09d23b5f60dcc8df06729c59ff6d58b0e02f76f895af"
+    "sha256": "58d6304f30b7230acc686d49d9e3b4d2cc0020818527bdd6d80ab499c4caa80c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a160d2305fa9a2a00a7f4d7391312105bec87dd7ab23b826fb0da984d623a641",
+      "sha256": "af08f93176a1721ee76938e1faefd34df5c8576ed06dc4c4266683eb30321e6c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,7 +173,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Thermal diameter 26.538 ± 0.262 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
-              "title": "Light-curve shape model",
               "thumbnail": "/scenes/schaber/schaber-shape-thumbnail.webp",
               "surface": "schaber-shape-surface@2x.webp",
               "poles": "schaber-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Thermal diameter 26.538 ± 0.262 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 13.269 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/schaber/schaber-elevation-thumbnail.webp",
               "surface": "schaber-elevation-surface@2x.webp",
               "poles": "schaber-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10836",
                 "image": "/scenes/schaber/schaber-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 13.269 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -370,10 +366,10 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "a160d2305fa9a2a00a7f4d7391312105bec87dd7ab23b826fb0da984d623a641",
+      "sha256": "af08f93176a1721ee76938e1faefd34df5c8576ed06dc4c4266683eb30321e6c",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -382,7 +378,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10358,
+      "bytes": 10011,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -397,9 +393,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 13.269 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -441,9 +435,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Thermal diameter 26.538 ± 0.262 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -478,7 +470,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -490,8 +482,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7462,
-          "sha256": "58c81ce50b5b2bb702ce5fe056928d97d85468e893380c0578bc54e2e4f972f4",
+          "bytes": 7314,
+          "sha256": "34995f2e6249266d3fe37558061391e40cd648cca9b2b805faec5835a13dabb8",
           "verification": "bytes-verified"
         }
       ],

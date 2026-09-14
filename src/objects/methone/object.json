@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "327c9bf6bad91a83fdf0f4990a277da0658416e0a3f43ab16f83e0a8e60ce756"
+          "sha256": "c9b689e7f8de5c562311873486b849fd8d3ebc3ab381ad16b05ee0e449eea59a"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7537e0db80b1cac4f7de504d7b7bc5e9cab2bbcb8d9dc1c1df9801903fb827a2"
+        "sha256": "3f70b8c6c7c7e3ab2a186ecc7c6cdbf53c3bc28fa8fba5cf87a3adee806288bf"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Methone with Cassini imagery on its measured ellipsoid.",
+      "description": "Egg-shaped moon of Saturn with an unusually smooth surface.",
       "systemName": "Solar System",
       "order": 100,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "13c8cb8f49d4296d62d13235f07d222d178a6a7c9f32a11bc0da277373b754b2"
+    "sha256": "bd51de2b74c661ef11a13012a4a778006812a1b86c6f5221e0794e8b71357e44"
   }
 }

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "72a6fdc5589abaff52203872aa06e43ed5bfaddbd10695da4850c2511b499997"
+          "sha256": "cc40cd512bd9e95727f7d29ac82e8c8f418c05aa7f7a212107699bb4f735ff83"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b1a1a2aa11ca46a0f7f456dd2e5e0d6d18c0c288f2c8c1c4ca2e4b521b949125"
+        "sha256": "ca85edf8620bfe03712e656027bf3aaf63639a34eb0e40ebecd3c60882e7a94e"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.4930585312343174,
-      "description": "Explore Sylvia in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Dark asteroid in the outer main belt with 2 known moons, discovered in May 1866.",
       "systemName": "Solar System",
       "order": 145,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2d3ed6e187d6a4526d162a74a1e306e9f915fc93df9c58043b6f2401845885f3"
+    "sha256": "f36505bd7ffdb6dfd1a951a10c586f16fbbe80519c7ca7ecd2d0e922b3087ea5"
   }
 }

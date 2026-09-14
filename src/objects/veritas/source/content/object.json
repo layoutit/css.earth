@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Published lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -69,8 +68,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Thermal diameter 118.803 ± 1.83 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative.",
-        "title": "Light-curve shape model",
         "thumbnail": "/scenes/veritas/veritas-shape-thumbnail.webp",
         "surface": "veritas-shape-surface@2x.webp",
         "poles": "veritas-shape-surface@2x.webp",
@@ -79,13 +76,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "notes": "Thermal diameter 118.803 ± 1.83 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 59.401 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Shape-derived elevations",
         "thumbnail": "/scenes/veritas/veritas-elevation-thumbnail.webp",
         "surface": "veritas-elevation-surface@2x.webp",
         "poles": "veritas-elevation-surface@2x.webp",
@@ -107,7 +103,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/833",
           "image": "/scenes/veritas/veritas-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 59.401 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

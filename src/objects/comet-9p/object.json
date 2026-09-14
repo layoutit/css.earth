@@ -26,7 +26,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a201c29e1e7aabb838f3c06a9b790c68dce95add97d5c00120114f3e5f425f46"
+          "sha256": "71ef160ccdb3e74bca8126a2d210050a236fcfa98e28e2b5755ac6f0f0385ca7"
         },
         {
           "id": "title",
@@ -142,7 +142,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3c6a02fad875ea24a5066868b15b19b5d525c7e7b69cebe724edfb3637f94384"
+        "sha256": "0a7fa63b8cbbc05f34ac80200f17e12b9ae4d592964acd0646ec85aedf66ae49"
       }
     },
     "catalog": {
@@ -150,7 +150,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.305,
-      "description": "Explore Tempel 1's published nucleus model from Deep Impact and Stardust-NExT.",
+      "description": "Comet that Deep Impact struck in 2005.",
       "systemName": "Solar System",
       "order": 81,
       "context": {
@@ -162,7 +162,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "6be387ba6ab38cd9bdefc8085ed40ac274737d807cbd2854bdc604c238cca5de"
+    "sha256": "48ed09369af6a518412a67f19340defed12f7346427d07a2c95cf39f356d8fc7"
   },
   "type": "layered-body",
   "id": "comet-9p"

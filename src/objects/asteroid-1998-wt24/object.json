@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "18378301825528cbe8c2fad7e4f70384c4f53907ebfb026630c237a6ed3cc1a2"
+          "sha256": "a10fc754ead999d8468334dac7dc076b407ee877e2ad54facd00293b0b4b09ea"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "98f7fde2f0499b9f1831b9a8a9b7634ea04ed64c197e1383ef591b3527e94679"
+        "sha256": "df71f767f832dbbeb32161d8a634f96f36bb73f395327a585f094d49ad04d888"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 0.7186940115527254,
-      "description": "Explore 1998 WT24 in 3D with its published shape model and radial elevation.",
+      "description": "Small near-Earth asteroid that passes inside the orbit of Venus.",
       "systemName": "Solar System",
       "order": 183,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a1cf1b822799fe653d23d8c2af019a2865f8480845e9f82a2e482e3335d9d0f3"
+    "sha256": "558b48af2850c320be31a35bfaca8eb1646d17f01553938ae2e7a27dcfff8568"
   }
 }

@@ -887,8 +887,8 @@
     {
       "id": "ganymede-object-content",
       "path": "content/object.json",
-      "expectedBytes": 19049,
-      "expectedSha256": "a4eb854350db772e27c6ac80631f75095378be3db5cca1fd7332e84b877b8b8c",
+      "expectedBytes": 18120,
+      "expectedSha256": "a718326cfe99d522e99a4bb56eec126ae346312a7383d360a6a322d1b4f60fe9",
       "origin": "Repository-authored Ganymede object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -900,7 +900,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     }
   ],

@@ -48,7 +48,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4b276f37299fed0e596a91f6227c33da9e6d079a790e4354c12c28c4e4a2c617"
+          "sha256": "7e10ddc4b9921f30dfe7274b352a70deea75045a53aebf5418bd4cd2f32a5ed7"
         },
         {
           "id": "solar-system",
@@ -149,7 +149,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fa68cc9c7684cde13c92a786ba9bbc84b09f25ce702f4db72cc4f93bb6adfcc3"
+        "sha256": "bd341163b1c8ff5b77587b9377b5eaeba7278e5bace1c52da1fecf3e57271cec"
       }
     },
     "catalog": {
@@ -157,7 +157,7 @@
       "classification": "satellite",
       "color": "#a8a59e",
       "distanceAu": 19.2,
-      "description": "Explore Titania in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.",
+      "description": "Uranus's largest moon, crossed by long fault valleys.",
       "systemName": "Solar System",
       "order": 450,
       "context": {
@@ -168,6 +168,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ac5018a67e489bb96ff3ae21bc759720d9e605bf8c983a438684b4dd65eb2ea4"
+    "sha256": "ff43158ea0189fc3ee8c7fdcc59086f390ebcf9dc5a4dd30504e52e403aabfbd"
   }
 }

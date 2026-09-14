@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "5ea563039827a4a2d65d74627b9e13992183eee756f22e76af17dbe075cf4bf5"
+          "sha256": "1404ff3c716b3a33ecc01b6211bd5fcbcaec962a61a134a4c65b2f6c804a1d0e"
         },
         {
           "id": "title",
@@ -105,7 +105,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ccdc1628fc4531e623b3456eb159afa68a72a69f46dad9874d2e89604f0dcc1c"
+        "sha256": "321f3273a14287b4c2b917b7dfac20a585f0cd9ad66ecc161bd9a73a0e523188"
       }
     },
     "catalog": {
@@ -113,7 +113,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 5.2,
-      "description": "Explore Adrastea through a model based on its measured dimensions.",
+      "description": "Tiny inner moon of Jupiter that orbits faster than the planet spins.",
       "systemName": "Solar System",
       "order": 105,
       "context": {
@@ -124,6 +124,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "847c534117e91798ff557a3e48fb3e1b763f81344ccc4123ed9dbdadaf6856ce"
+    "sha256": "bd01f48acaef6b7fae121119ae462c407abc6725ba9ecf3f6896918664f424de"
   }
 }

@@ -26,7 +26,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "34e97d7d3ff5715b4b443942533e71ccc5844d18a92d1bd762986bf8e5b1a401"
+          "sha256": "bcec99e421a5a39e15e94c96af614d413f7276ff0ed1fe817eb35707f759adbd"
         },
         {
           "id": "title",
@@ -137,7 +137,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7c702745b46953f451b84298088da93b06f224171e9bc352f9ca910d97933344"
+        "sha256": "830460117300ac8db5e5da1b13a2f0818a149b36b5fd988ee8cd022db91f9727"
       }
     },
     "catalog": {
@@ -145,7 +145,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.477,
-      "description": "Explore Hartley 2's published EPOXI nucleus model and its source constraints.",
+      "description": "Small, active comet that EPOXI flew past.",
       "systemName": "Solar System",
       "order": 80,
       "context": {
@@ -157,7 +157,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "4301df22452b504d664ac7e03a9ba1e7c035884c367fab332e525e02e1321e08"
+    "sha256": "92ccfc56a8771200168adbf5035202ac6593ddc1e2e00598b1319fd17598afa3"
   },
   "type": "layered-body",
   "id": "comet-103p"

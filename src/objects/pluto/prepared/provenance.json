@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "65aa889c59e4deb7723412a8350a5c7b371297805433757c33bf3b638e9488de"
+    "sha256": "773e6ea612dfdffa67f3f59dfeaebe8c1ce7c63a3c5cf959bcef33b37b747384"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -548,7 +548,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8cdb254475f0f575d8530bc0ed86f2c83ca5f98f0695a193e252c04a05e04dbf",
+      "sha256": "bcb4d6769eb2a27bf8ca40629f95f408200aaa4d70ef7627ae534adae50c5fec",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -574,7 +574,6 @@
         "panel": {
           "schema": "cssearth-prepared-panel@1",
           "planetId": "pluto",
-          "introduction": "Pluto is an icy dwarf planet in the Kuiper Belt. New Horizons revealed mountains, glaciers, and a heart-shaped plain during its 2015 flyby.",
           "facts": [
             {
               "id": "distance-from-sun",
@@ -695,8 +694,6 @@
             {
               "id": "surface",
               "label": "Visible color",
-              "description": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
-              "title": "MVIC color mosaic",
               "thumbnail": "pluto-lens-surface.webp",
               "surface": "pluto-surface.webp",
               "poles": "pluto-poles-surface.webp",
@@ -704,16 +701,14 @@
                 "id": "surface-pluto-color-mosaic-jpg",
                 "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg?crop=faces%2Cfocalpoint&fit=clip&h=2963&w=5926"
               },
-              "detail": "Color mosaic",
-              "summary": "Color observations cover only part of the surface, with detail varying by region. The gray grid marks missing imagery.",
               "falseColor": false,
-              "qualification": "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
+              "qualification": "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
+              "notes": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
+              "noData": true
             },
             {
               "id": "topography",
               "label": "Elevation",
-              "description": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
-              "title": "Stereo elevation map",
               "thumbnail": "pluto-lens-topography.webp",
               "surface": "pluto-topography.webp",
               "poles": "pluto-poles-topography.webp",
@@ -721,8 +716,6 @@
                 "id": "lenses-pluto-dem-tif",
                 "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
               },
-              "detail": "Stereo relief",
-              "summary": "Colors span heights from −8 to +8 km, with shading to reveal slopes. The gray grid marks areas without elevation data.",
               "legend": {
                 "kind": "scale",
                 "title": "Elevation",
@@ -759,13 +752,13 @@
                 "sourceUrl": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
               },
               "falseColor": true,
-              "qualification": "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data"
+              "qualification": "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+              "notes": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+              "noData": true
             },
             {
               "id": "monochrome",
               "label": "Monochrome",
-              "description": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
-              "title": "LORRI/MVIC mosaic",
               "thumbnail": "pluto-lens-monochrome.webp",
               "surface": "pluto-monochrome.webp",
               "poles": "pluto-poles-monochrome.webp",
@@ -773,16 +766,14 @@
                 "id": "lenses-pluto-monochrome-tif",
                 "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
               },
-              "detail": "Photo mosaic",
-              "summary": "Images from LORRI and MVIC provide varying surface detail. The gray grid marks regions without imagery in this mosaic.",
               "falseColor": false,
-              "qualification": "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
+              "qualification": "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
+              "notes": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
+              "noData": true
             },
             {
               "id": "methane-ice",
               "label": "Methane ice",
-              "title": "LEISA methane ice",
-              "description": "Methane ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
               "thumbnail": "pluto-lens-methane-ice.webp",
               "surface": "pluto-methane-ice.webp",
               "poles": "pluto-poles-methane-ice.webp",
@@ -790,8 +781,6 @@
                 "id": "pluto-leisa-ice-fractions",
                 "url": "https://zenodo.org/records/18825240"
               },
-              "detail": "LEISA",
-              "summary": "Methane-rich ice is widespread in the northern terrain. Colors show its estimated share of each mapped area, fitted from infrared spectra. Grid: no usable fit.",
               "falseColor": true,
               "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
               "legend": {
@@ -838,13 +827,13 @@
                 },
                 "meta": "%",
                 "sourceUrl": "https://zenodo.org/records/18825240"
-              }
+              },
+              "notes": "Methane ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+              "noData": true
             },
             {
               "id": "nitrogen-ice",
               "label": "Nitrogen ice",
-              "title": "LEISA nitrogen ice",
-              "description": "Nitrogen ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
               "thumbnail": "pluto-lens-nitrogen-ice.webp",
               "surface": "pluto-nitrogen-ice.webp",
               "poles": "pluto-poles-nitrogen-ice.webp",
@@ -852,8 +841,6 @@
                 "id": "pluto-leisa-ice-fractions",
                 "url": "https://zenodo.org/records/18825240"
               },
-              "detail": "LEISA",
-              "summary": "Nitrogen-rich ice stands out in Sputnik Planitia. Colors show its estimated share of each mapped area; the result depends on the ice model. Grid: no usable fit.",
               "falseColor": true,
               "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
               "legend": {
@@ -900,13 +887,13 @@
                 },
                 "meta": "%",
                 "sourceUrl": "https://zenodo.org/records/18825240"
-              }
+              },
+              "notes": "Nitrogen ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+              "noData": true
             },
             {
               "id": "water-ice",
               "label": "Water ice",
-              "title": "LEISA water ice",
-              "description": "Water ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
               "thumbnail": "pluto-lens-water-ice.webp",
               "surface": "pluto-water-ice.webp",
               "poles": "pluto-poles-water-ice.webp",
@@ -914,8 +901,6 @@
                 "id": "pluto-leisa-ice-fractions",
                 "url": "https://zenodo.org/records/18825240"
               },
-              "detail": "LEISA",
-              "summary": "Water ice forms part of Pluto’s solid terrain beneath its more volatile ices. Colors show the surface fraction estimated from infrared spectra. Grid: no usable fit.",
               "falseColor": true,
               "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
               "legend": {
@@ -962,7 +947,9 @@
                 },
                 "meta": "%",
                 "sourceUrl": "https://zenodo.org/records/18825240"
-              }
+              },
+              "notes": "Water ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+              "noData": true
             }
           ]
         },
@@ -1371,10 +1358,10 @@
       "redistribution": "Prepared shell content with source provenance.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "8cdb254475f0f575d8530bc0ed86f2c83ca5f98f0695a193e252c04a05e04dbf",
-      "bytes": 17225,
+      "sha256": "bcb4d6769eb2a27bf8ca40629f95f408200aaa4d70ef7627ae534adae50c5fec",
+      "bytes": 15777,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1490,8 +1477,7 @@
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
-        "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
-        "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
+        "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
       ],
       "lensIds": [
         "surface"
@@ -1548,8 +1534,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
-        "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data"
+        "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data"
       ],
       "lensIds": [
         "topography"
@@ -1605,8 +1590,7 @@
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
-        "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
-        "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
+        "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
       ],
       "lensIds": [
         "monochrome"
@@ -1663,8 +1647,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
-        "Methane ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit"
+        "Modeled surface fraction · 7 km map cells · 14 July 2015 observations"
       ],
       "lensIds": [
         "methane-ice"
@@ -1721,8 +1704,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
-        "Nitrogen ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit"
+        "Modeled surface fraction · 7 km map cells · 14 July 2015 observations"
       ],
       "lensIds": [
         "nitrogen-ice"
@@ -1779,8 +1761,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
-        "Water ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit"
+        "Modeled surface fraction · 7 km map cells · 14 July 2015 observations"
       ],
       "lensIds": [
         "water-ice"
@@ -2251,7 +2232,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -2263,8 +2244,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6227,
-          "sha256": "2802a9b39b35bd5b0ed414e0753cbe8e8b3a09e5e1b9d6a5873f531436d1853c",
+          "bytes": 6070,
+          "sha256": "cae841ac98086abff37147f546a439fb81d47439b90e80d795028418d773fc5b",
           "verification": "bytes-verified"
         }
       ],

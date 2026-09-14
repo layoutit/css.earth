@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "714c9d6fa7af1776f43a78f01db825f65d0b5532f39899c75216460274cb1638"
+    "sha256": "cc4259ec5caad3e4edd770b46043a53ced757619b9f02128312be522850527ce"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a6424df8fbad079441148e200d6c78f6cf5a9364ae37fc896c557c59489c2082",
+      "sha256": "90cb7e00c2c2fda158869f9690496ada6fe3bd4ce1c4dada737e361af8912149",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,7 +173,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Thermal diameter 16.848 ± 0.182 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
-              "title": "Light-curve shape model",
               "thumbnail": "/scenes/zachia/zachia-shape-thumbnail.webp",
               "surface": "zachia-shape-surface@2x.webp",
               "poles": "zachia-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Thermal diameter 16.848 ± 0.182 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 8.424 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/zachia/zachia-elevation-thumbnail.webp",
               "surface": "zachia-elevation-surface@2x.webp",
               "poles": "zachia-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5901",
                 "image": "/scenes/zachia/zachia-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 8.424 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -370,10 +366,10 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "a6424df8fbad079441148e200d6c78f6cf5a9364ae37fc896c557c59489c2082",
+      "sha256": "90cb7e00c2c2fda158869f9690496ada6fe3bd4ce1c4dada737e361af8912149",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -382,7 +378,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9322,
+      "bytes": 8975,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -397,9 +393,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 8.424 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -441,9 +435,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Thermal diameter 16.848 ± 0.182 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -478,7 +470,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -490,8 +482,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6443,
-          "sha256": "8285b720fd8a75c59a5ca84d98d287feca5a3c8afa478039a9a8555b64c27337",
+          "bytes": 6295,
+          "sha256": "01b7a03856c863c2fbc1e798d8322c62890ffb6d346d4ebca82b143475866ced",
           "verification": "bytes-verified"
         }
       ],

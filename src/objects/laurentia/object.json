@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "bdad30798c697a8e5274caca87ed1b3280ae4e0fb3f2b1b04320b20289f5d890"
+          "sha256": "71929048e0a922832f8c970c6dffdd7478bb12a9609aeceda1baae4c62beac0b"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9776f28ab3cb8ef3e08f342038fcbeaf2f9bc03d70389671c134c7db878b4b85"
+        "sha256": "fd7a3d69e01f5aa977affc57854739d67cf84ecab46b4d44ea66deec4af9001d"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0135299301481933,
-      "description": "Explore Laurentia in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 21 April 1876.",
       "systemName": "Solar System",
       "order": 294,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "86601bbde3f8690995e6335c922e8ef76b02ca6bc8b79b328065d4974a12aa3f"
+    "sha256": "a19c4d2f7d6a9153238483f719cfef325d996d2bbcd1b8766d81bd6c86bf5101"
   }
 }

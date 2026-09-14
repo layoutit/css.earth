@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "82b2c84a6d17e4fe3bfd2b2bc681c2da27a952f079a4305b63c78ce4e0688c75"
+          "sha256": "d8a9211014d0b6048b9201c9c8e10e139aa3b2d252770e0d0990ad9aa1a6ecb4"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e8ebb10877929b75e279b960629395a1cf55bc34388b9de0efe3d81245724bc2"
+        "sha256": "d3a7b24185d2e6f38ea34d8699d1c5f1abc0636c723eefb958e489200b91d368"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Pallene with Cassini imagery and its measured shape.",
+      "description": "Small moon of Saturn that shares its orbit with a faint dust ring.",
       "systemName": "Solar System",
       "order": 99,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "564f02f7bc22144d1e954b493fe7e65f18d37b1407a144396d5b3c8b15dbb9d8"
+    "sha256": "085453d640567f9c9f603fd71eb4e76ccc8f7231eb142eca163541386a36c755"
   }
 }

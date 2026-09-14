@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "31c92b5e6387f243d36e48ecfa3f2a7665ecbed950851cf3847356a880cd7494"
+    "sha256": "b64679d425761b9017ca1c712ab37a1a5a3e2f8f763b8849e77f45755ce73cd2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -149,14 +149,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e35401a36731324bd3a642e21785326a2e22d796ab227ae1101666ea7cc4cca6",
+      "sha256": "d1985d73dc2aac896aa515fd6981bfee42d712147385ebb837a363d5babe3ef7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "adelheid",
         "displayName": "Adelheid",
         "panel": {
-          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -220,8 +219,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex light-curve reconstruction, 104 ± 11 km volume-equivalent diameter. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "DAMIT 189 shape model",
               "thumbnail": "/scenes/adelheid/adelheid-shape-thumbnail.webp",
               "surface": "adelheid-shape-surface@2x.webp",
               "poles": "adelheid-shape-surface@2x.webp",
@@ -230,13 +227,11 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 52 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "DAMIT 189 radial height",
               "thumbnail": "/scenes/adelheid/adelheid-elevation-thumbnail.webp",
               "surface": "adelheid-elevation-surface@2x.webp",
               "poles": "adelheid-elevation-surface@2x.webp",
@@ -258,7 +253,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/189",
                 "image": "/scenes/adelheid/adelheid-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 52 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -388,7 +383,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -397,8 +392,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e35401a36731324bd3a642e21785326a2e22d796ab227ae1101666ea7cc4cca6",
-      "bytes": 10263,
+      "sha256": "d1985d73dc2aac896aa515fd6981bfee42d712147385ebb837a363d5babe3ef7",
+      "bytes": 9798,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -413,9 +408,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 52 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -457,9 +450,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex light-curve reconstruction, 104 ± 11 km volume-equivalent diameter. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -494,7 +485,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -506,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7245,
-          "sha256": "51f2e636937d4b24ba483109a85a1abf70160027d81a1036b072038daceb41e8",
+          "bytes": 7149,
+          "sha256": "d15d8faad7c1abfd62013e0e69ce9bae35c04a6693816eb23b0b85ed8ffc6da4",
           "verification": "bytes-verified"
         }
       ],

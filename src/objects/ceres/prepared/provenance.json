@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "68b54e5e32c9c8ff79781d1373173b2cf4dbd3a4bafd0787854723135e9c610e"
+    "sha256": "111f1b208d42e1896af49c7543683878f0c563042fe2c9b56b34f2028f6944ee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -176,7 +176,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "465f5536a8561d2c66a0e1cafa0afdca64b6f51f458043e500cb6c115c8d8ea9",
+      "sha256": "2cb2a131acafd655953caef27890548a79e9df8f8c2f0e46d79277b8a7d92463",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Ceres is the largest body in the asteroid belt. NASA's Dawn spacecraft mapped its cratered surface and bright salt deposits.",
           "facts": [
             {
               "id": "radius",
@@ -264,8 +263,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
-              "title": "FC visible-light mosaic",
               "thumbnail": "ceres-lens-normal.webp",
               "surface": "ceres-normal.webp",
               "poles": "ceres-poles-normal.webp",
@@ -273,14 +270,12 @@
                 "id": "usgs-dawn-fc-global-140m",
                 "path": "../manifest.json"
               },
-              "detail": "Global mosaic",
-              "summary": "Photographed shadows remain in the visible-light images. The gray grid marks known gaps; some dark edges remain uncertain."
+              "notes": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+              "noData": true
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
-              "description": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
-              "title": "False-color mosaic PIA19977",
               "thumbnail": "ceres-lens-enhanced.webp",
               "surface": "ceres-enhanced.webp",
               "poles": "ceres-poles-enhanced.webp",
@@ -288,14 +283,12 @@
                 "id": "nasa-dawn-fc-pia19977",
                 "path": "../manifest.json"
               },
-              "detail": "False color",
-              "summary": "The 920, 750 and 440 nm bands are assigned false colors. Photographed shadows remain and the gray grid marks known gaps."
+              "notes": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
-              "title": "HAMO digital terrain model",
               "thumbnail": "ceres-lens-elevation.webp",
               "surface": "ceres-elevation.webp",
               "poles": "ceres-poles-elevation.webp",
@@ -348,8 +341,8 @@
                 "id": "dawn-elevation",
                 "path": "../manifest.json"
               },
-              "detail": "Shaded relief",
-              "summary": "Height relative to a 470 km sphere. Interpolated polar terrain beyond 60° is withheld from this view."
+              "notes": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+              "noData": true
             }
           ]
         },
@@ -675,10 +668,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "465f5536a8561d2c66a0e1cafa0afdca64b6f51f458043e500cb6c115c8d8ea9",
-      "bytes": 10474,
+      "sha256": "2cb2a131acafd655953caef27890548a79e9df8f8c2f0e46d79277b8a7d92463",
+      "bytes": 9725,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -799,9 +792,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -856,9 +847,7 @@
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced"
       ],
@@ -913,9 +902,7 @@
       "selector": "/surfaces/2",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1384,7 +1371,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1396,8 +1383,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5922,
-          "sha256": "ac5aa42919d1630b5e936b5f859c2ebebd654f6ed7170c52536127db621c1cf3",
+          "bytes": 5780,
+          "sha256": "a67c52533affbb045c161a490c54bfff46743740dbbdc8158274c3f0da0dd6be",
           "verification": "bytes-verified"
         }
       ],

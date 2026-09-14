@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fd0381669cb9dd3615b7eff85adb19a3258bac434ceaf028961acc22d0f10a52"
+    "sha256": "5cfdd8be3f0193dfda5ca2ded0c0fe1fe6ffe62824eb2912c9b6efec2bcc8f6c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -220,14 +220,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9e5b017fbb350310376ebb6eac625c3194ab5848f5cd535b93ef4a430a188ba5",
+      "sha256": "d00c37189954eaa16bb6383591b7925d3a39e7c7accb0941c8890c79dca805c3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-8p",
         "displayName": "Tuttle",
         "panel": {
-          "introduction": "Tuttle’s nucleus is thought to have two touching lobes. Hubble, Spitzer and Arecibo observations give different estimates of their shape and size.",
           "facts": [
             {
               "id": "period",
@@ -253,9 +252,6 @@
             {
               "id": "model",
               "label": "Hubble · Spitzer",
-              "description": "Two touching spheres fitted to Hubble and Spitzer observations. This shape fits the thermal measurements better. Surface detail is unknown; the rotation phase is illustrative.",
-              "title": "Hubble-derived contact model scaled by Spitzer measurements.",
-              "detail": "Inferred shape",
               "thumbnail": "/scenes/comet-8p/comet-8p-model-thumbnail.webp",
               "surface": "comet-8p-model-surface@2x.webp",
               "poles": "comet-8p-model-poles@2x.webp",
@@ -275,14 +271,12 @@
                   "label": "Rotation period",
                   "value": "About 11.4 hours"
                 }
-              ]
+              ],
+              "notes": "Two touching spheres fitted to Hubble and Spitzer observations. This shape fits the thermal measurements better. Surface detail is unknown; the rotation phase is illustrative."
             },
             {
               "id": "arecibo",
               "label": "Arecibo",
-              "detail": "Radar model",
-              "title": "Alternative contact-body model fitted to Arecibo radar observations.",
-              "description": "Two elongated lobes fitted to radar echoes. Their axes are aligned with the other model for comparison. Surface detail is unknown; the orientation is illustrative.",
               "thumbnail": "/scenes/comet-8p/comet-8p-arecibo-thumbnail.webp",
               "surface": "comet-8p-arecibo-surface@2x.webp",
               "poles": "comet-8p-arecibo-poles@2x.webp",
@@ -302,7 +296,8 @@
                   "label": "Observed rotation",
                   "value": "About 11.4 hours"
                 }
-              ]
+              ],
+              "notes": "Two elongated lobes fitted to radar echoes. Their axes are aligned with the other model for comparison. Surface detail is unknown; the orientation is illustrative."
             }
           ]
         },
@@ -541,7 +536,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -550,8 +545,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9e5b017fbb350310376ebb6eac625c3194ab5848f5cd535b93ef4a430a188ba5",
-      "bytes": 4066,
+      "sha256": "d00c37189954eaa16bb6383591b7925d3a39e7c7accb0941c8890c79dca805c3",
+      "bytes": 3643,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -632,9 +627,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Two touching spheres fitted to Hubble and Spitzer observations. This shape fits the thermal measurements better. Surface detail is unknown; the rotation phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -675,9 +668,7 @@
       "selector": "/raster/observations/1",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Two elongated lobes fitted to radar echoes. Their axes are aligned with the other model for comparison. Surface detail is unknown; the orientation is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "arecibo"
       ],
@@ -717,7 +708,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -729,8 +720,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3551,
-          "sha256": "580eb5479ea6a4eae8dc2817c14843dcf3a2a9a92c514ec64fbbc3bad3d613b4",
+          "bytes": 3385,
+          "sha256": "8ee0ca7f05817644b06a278c6f2e6ceb1a88e68d30c7923ff38864650a444879",
           "verification": "bytes-verified"
         }
       ],

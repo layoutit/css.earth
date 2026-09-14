@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "b9f36d1b01ad844f7e3190476f02a46b29b9338cfaa4d031c0b5a73988bf707d"
+          "sha256": "ba876d51163b114b739e0f06502f4539ea840fb7b919185cdf578817b2b29f7b"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "68a0a56aca6b521ab93f613e060c3af6aed442412304bb4252bda6bb3fd74eed"
+        "sha256": "a9615b4bb788bdaec1f8d230f6fbad3f78fafb401ceff312596f20e749ae244f"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4520884704604438,
-      "description": "Explore Parthenope in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in May 1850.",
       "systemName": "Solar System",
       "order": 162,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "cefb0700aecd79edd5e2b01963ab4f9e6df0e960d29d7a8dc9e6b72d50b4a9b8"
+    "sha256": "9cf5ea786645c548e74a39671a733111aaf6435c7fa46b7044a3e0615c9ab08b"
   }
 }

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "de5753bbcf12b3f8da677acd57aa69d886280d5fc45b603dfb42117dae7f7843"
+          "sha256": "ee9f53f7479185e2f21bd1494551b7358f8aeaf8aff822ed38e831b9f2af01bb"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2a36c567b6a90501ee0284645b6f630ed5af1e142c107041739d34e904acf440"
+        "sha256": "cdb6aeb6458cfaab4d3d72911c4b8f513f2bca470c3e59ce1db6190bd8bc7d77"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4311351389602276,
-      "description": "Explore Beatrix in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in April 1865.",
       "systemName": "Solar System",
       "order": 248,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5b393fc37dcdbd0e50e68828ca8ce0b61d2914e2144740d26f078b6c4c655cb7"
+    "sha256": "7ab92b5950d9f9f13b8e8194ea18521d2449c3dd1c4c75d6f9ba72f1d4198f86"
   }
 }

@@ -48,13 +48,17 @@ for(const c of intake){
  const diameter=Number((2*c.radiusKm).toPrecision(2));
  const facts=[{id:'diameter',label:'Catalog diameter',value:`≈${diameter} km`},{id:'perihelion',label:'Closest to Sun',value:`${Number(c.perihelionAu.toPrecision(3))} AU`}];
  const introduction=ed.introduction??`${name} follows a distant orbit that stays beyond Saturn at its closest approach to the Sun. Its nucleus is represented here by a size illustration from Celestia’s catalog.`;
- content.panel={introduction,facts,moreFacts:[]};requireRecord(lenses.labels).model='Illustrative nucleus';
- Object.assign(lensControl,{label:'Illustrative nucleus',detail:'Celestia',title:full,description:'Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.',facts});
+ content.panel={facts,moreFacts:[]};requireRecord(lenses.labels).model='Illustrative nucleus';
+ Object.assign(lensControl,{label:'Illustrative nucleus',facts});
  requireRecord(lensControl.source).url=url;requireRecord(lensControl.source).id='celestia-mesh';
  records(requireRecord(content.settings).controls).forEach(x=>{if(x.name==='shadows'||x.name==='orbit')x.checked=false;});
  content.resources=[{label:'Celestia',role:'surface',description:'Catalog entry and estimated scale',href:url},{label:'JPL Horizons',role:'observations',description:'Position at 3 September 2026',href:'https://ssd.jpl.nasa.gov/horizons/'},...(ed.url?[{label:'About this comet',role:'observations',description:'Observations and history',href:ed.url}]:[]),requireArray(content.resources).at(-1)];
  provenance.editorial={url:ed.url??url,credit:ed.url?'Sources listed in reference/source-record.json':credit};provenance.physical={path:'../shape/model.json',credit};
  await write(`${s}/content/object.json`,content);
+ // Reader text stays outside source/; pnpm prepare:text checks it and flags filler for review.
+ const citation={catalogueId:'celestia-comet-catalog-1993a082',url,label:'Celestia comet catalogue',checked:new Date().toISOString().slice(0,10)};
+ await write(`${p}/text.json`,{schema:'cssearth-object-text@1',objectId:c.id,card:{text:ed.card??`Comet ${full}.`,sources:[citation]},introduction:{text:introduction,sources:[citation]},
+  datasets:{[requireString(lensControl.id)]:{title:full,detail:'Catalog size',summary:'Celestia’s mesh at the catalog’s estimated size; the shape is illustrative.',sources:[citation]}}});
  await write(`${s}/reference/source-record.json`,{catalog:{...upstream,entry:c.designation,mesh:c.mesh,radiusKm:c.radiusKm,license:'GPL-2.0-or-later',credit},editorial:ed,
   selected:{identity:'Celestia designation',size:'Catalog Radius, approximate; not a new measurement',position:'Independent JPL heliocentric elements and vectors at JD2461286.5',shape:`Native export of Celestia ${c.mesh}; shared illustrative geometry`,texture:'Shared missing-imagery grid',attitude:'Fixed illustration'},
   candidateSurvey:[{url,disposition:`Celestia references ${c.mesh}, a shared illustrative model. Select the native mesh at catalog scale; no stock texture or invented rotation period.`},{url:'https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/',disposition:'Existing scientifically reconstructed cssEarth comets are preserved. This catalog expansion does not claim a recovered mesh for new entries.'},{url:ed.url??url,disposition:'Coma, tail, spectra and encounter context are useful source material; they do not establish a nucleus surface texture. Additional quantitative shape reconstruction remains a separate source qualification.'}],

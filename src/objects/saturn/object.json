@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "67c961595591c76b376eb40a43b2166463b9c5110f713677223d4d906f232625"
+    "sha256": "e830570233fe8a4733680e7d4773f3566b161ee778eab0bd87c99c143b213e67"
   },
   "id": "saturn",
   "properties": {
@@ -41,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e6227563c894bd830f1825779a3295d1056b29c8bfb9c2bd324773177c3bf4fd"
+          "sha256": "d7102e88052d1dedf97d58e635bee339c917f10ee1925bf929261c8798f126f4"
         },
         {
           "id": "geometry",
@@ -177,7 +177,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7dabc7c02ddf2a161e2ebf1ed9ae32ac999bfd01ef6d39619e5a105281d4d86d"
+        "sha256": "c231bd5648d4c55e5ee4a7486aed35fbf6352cccdbac148e629ec62fab60a10f"
       }
     },
     "catalog": {
@@ -185,7 +185,7 @@
       "classification": "planet",
       "color": "#d2b68c",
       "distanceAu": 9.58,
-      "description": "Explore Saturn in 3D with cssEarth. Orbit its spectacular rings, discover its moons, and browse scientific facts about this gas giant.",
+      "description": "Ringed gas giant, sixth planet from the Sun.",
       "systemName": "Solar System",
       "order": 430,
       "context": {

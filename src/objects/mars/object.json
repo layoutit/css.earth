@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a6343f132ecd0d85b959c9e805ab1cf9e574d487446482943c3b2203fb2eb6f0"
+    "sha256": "2144857642cfad31b8419a32d4c761e221811d0c8d08fa80dcfcf04d66edda8f"
   },
   "id": "mars",
   "properties": {
@@ -79,7 +79,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c241a9187643b00a8530d30b509ac5dd67067b1fc089131ecb1fddd0caa8ed7a"
+          "sha256": "4bb942375cb753e010be227203a2497852dea366dfe9928e5ce56b4887e336e1"
         },
         {
           "id": "solar-system",
@@ -163,7 +163,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "882a13d33c3967e7bd0d5a262a9d54609054c80c27cda4abef9f208ee8e85ed5"
+        "sha256": "f2b13ffffeacc3d3fab0ec3a2d7ee5fce46f667400787f028a144368c00d3147"
       }
     },
     "catalog": {
@@ -171,7 +171,7 @@
       "classification": "planet",
       "color": "#a95e47",
       "distanceAu": 1.52,
-      "description": "Explore Mars in 3D with cssEarth. Discover the red planet’s volcanoes, deep canyons, polar ice, and thin atmosphere in an interactive explorer.",
+      "description": "Dusty red planet with the largest volcano in the solar system.",
       "systemName": "Solar System",
       "order": 121,
       "context": {

@@ -29,7 +29,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "cec87f0cdf5f6c74979f26072032ac6dc79abfb59d5bb856cf6f8d0e4eed00a1"
+          "sha256": "b7729b925bd2024658448631be6ca4df952b132c5206bab390574ab4c6b97129"
         },
         {
           "id": "title",
@@ -155,7 +155,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8416e36cc0215b91ff67763cce42df98e598930dbe174e01747fc19be8b56a35"
+        "sha256": "fa2db3b805f4db7fd2b1578e7f72ac38bcd21928e8150c0cd565f33582131a14"
       }
     },
     "catalog": {
@@ -163,7 +163,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.46,
-      "description": "Explore the measured nucleus of comet 67P/Churyumov–Gerasimenko from Rosetta.",
+      "description": "Comet that Rosetta followed for two years.",
       "systemName": "Solar System",
       "order": 82,
       "context": {
@@ -174,6 +174,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "36bf468f49d8c77c30c1f10f1daf503e073e15e022d20fd6b47a9c9212a5b07d"
+    "sha256": "4805db8a6d9fed2ce0b0024eca4a8389fe0a805f768f28cc9a1bf32bf1677700"
   }
 }

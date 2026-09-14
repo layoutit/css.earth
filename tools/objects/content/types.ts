@@ -46,12 +46,12 @@ export interface LensSource {
 export interface LensRecipe {
   id: string;
   label: string;
-  detail?: string;
   shortLabel?: string;
-  description: string;
-  summary?: string;
+  /** Maintainer notes about the dataset. They are never published; reader text lives in the package's text.json. */
+  notes?: string;
+  /** The prepared surface marks missing observations with the shared no-data grid. */
+  noData?: boolean;
   facts?: Array<{ id: string; label: string; value: string }>;
-  title: string;
   filter?: string;
   qualification?: string;
   falseColor?: boolean;
@@ -100,7 +100,6 @@ export interface ObjectContentSource {
   displayName: string;
   title: TitleSource;
   panel: {
-    introduction: string;
     facts: Fact[];
     moreFacts?: Fact[];
   };
@@ -141,7 +140,6 @@ export interface PreparedObjectContent {
     renderHeight: number;
     renderPathOffsetY: number;
   };
-  introduction: string;
   facts: ObjectContentSource["panel"]["facts"];
   moreFacts: NonNullable<ObjectContentSource["panel"]["moreFacts"]>;
   lenses: {
@@ -194,7 +192,6 @@ export interface PreparedObjectContentDocument {
   schema: "cssearth-prepared-content@1";
   objectId: string;
   title: PreparedObjectContent["title"];
-  introduction: string;
   facts: PreparedObjectContent["facts"];
   moreFacts: PreparedObjectContent["moreFacts"];
   charts: PreparedObjectContent["charts"];

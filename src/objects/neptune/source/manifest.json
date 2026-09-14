@@ -465,8 +465,8 @@
     {
       "id": "neptune-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 15894,
-      "expectedSha256": "ba93aa673b78a0117f0841a1e1391d74c4080d904653ee59f802e243d57a3794",
+      "expectedBytes": 15112,
+      "expectedSha256": "e2a3d86cda4fd43a71f449be62b7d42b7d29cebd4689629e4fd278350348cc22",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -477,7 +477,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {

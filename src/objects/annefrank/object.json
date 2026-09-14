@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "9874c035e76e05a2f2f38ce1449868f081cdfc97e395ab625006e3e431dd14f1"
+          "sha256": "cf0fb78c7db8426785b5e025d6b7a98483b40afcc73aae4ac26b179d61c94830"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f79f46cedfc27a92d38713c7d9413cc386082997b8322b48be9931e51b9dbc02"
+        "sha256": "51cecdab264f4a9025e5c06cdb3ea40da3ebeaa1aceffdbe895c12ad01335913"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.2123334934520815,
-      "description": "Explore Annefrank with a clearly labelled approximation of its published flyby dimensions.",
+      "description": "Small main-belt asteroid that Stardust flew past.",
       "systemName": "Solar System",
       "order": 360,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "c04d8202224c2458590e26c19fb330be40d621fc39334b594e984fe7289b9c4a"
+    "sha256": "554d1ab90af62613655fc5158975743854ac107a933320509620b66a84e24d80"
   }
 }

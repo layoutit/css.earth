@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "26da44c6a47a74c7893aa9e03254e3bc7d964b7f536efd16804d32fef8892de5"
+          "sha256": "4c4786b7ada62be3de49b590e01cc6fced68fa99b237bbaaf433ba860280250e"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d9ded4b20dfa9e6f9d67b6e4cffa99ce7116f57ec71bac9a6fe181ff5364bed8"
+        "sha256": "d47c76e8fdf54be581044db6954a2cc58f26051ffcd0031cca443ca7d71e0680"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4209257475173156,
-      "description": "Explore Asia in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered on 17 April 1861.",
       "systemName": "Solar System",
       "order": 238,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ed5bfb5c67fc99575673ec89c7ee07ba31f2810deca75329a373e50d480a0fbb"
+    "sha256": "2f5987a9075f71362989074a8c17b26ba24654d27288c16a49f910f8506b8ce4"
   }
 }

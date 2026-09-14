@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f636bbbe9d4539bd879cf33d9142a55b52ef1794725112f7f0672c7d43a6aca3"
+    "sha256": "8a408851f5a01c92b6de4672835870bec9ca837f1ade331f4dc363b2d309cf89"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5516fe8ba3daa7a233ba16614a973891526493c86e46de5d75069e6573c3c930",
+      "sha256": "97b7ea2370a9829f5efd79d80b1f547fb20dbbcfa3d7d67a2881df42f22e1210",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +167,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Elektra is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape. Explore its published shape and radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -199,8 +198,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "VLT/SPHERE shape model",
-              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/elektra/elektra-shape-thumbnail.webp",
               "surface": "elektra-shape-surface@2x.webp",
               "poles": "elektra-shape-surface@2x.webp",
@@ -209,14 +206,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape made from VLT/SPHERE observations. Gray grid: no surface imagery; lighting shows the model's form."
+              "notes": "VLT/SPHERE shape model",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/elektra/elektra-elevation-thumbnail.webp",
               "surface": "elektra-elevation-surface@2x.webp",
               "poles": "elektra-elevation-surface@2x.webp",
@@ -238,8 +233,7 @@
                 "sourceUrl": "https://observations.lam.fr/astero/3Dshape/130_Elektra_mpcd.obj",
                 "image": "/scenes/elektra/elektra-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -364,7 +358,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -373,8 +367,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5516fe8ba3daa7a233ba16614a973891526493c86e46de5d75069e6573c3c930",
-      "bytes": 7423,
+      "sha256": "97b7ea2370a9829f5efd79d80b1f547fb20dbbcfa3d7d67a2881df42f22e1210",
+      "bytes": 6723,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -389,9 +383,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -433,9 +425,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "VLT/SPHERE shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -470,7 +460,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -482,8 +472,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4816,
-          "sha256": "5a6eea974761735fb47196bddfc83b989ab07b0b8f6793a228f2a138494dad57",
+          "bytes": 4543,
+          "sha256": "79733c27ff5313de9437278cfd87d79b9ace1986a7150166c44ea10d33ef95b2",
           "verification": "bytes-verified"
         }
       ],

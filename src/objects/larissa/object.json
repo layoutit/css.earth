@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "84300c826f6eb36f2a7191983704c3dff301fed4f080c0203b3af33ff1dfa156"
+          "sha256": "b2b595e255d26e7e8c372ff8e073f9f24e0a246427ec921cce4f3488ffbea6d1"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fbad57d620e2d67985fd0c2249c0f2332dbf72347f16cb2d098b023b68daaacb"
+        "sha256": "c97e392d46af030288f84fc5f0a9964fd15b1c3a263193030e7d5e9df1204a43"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a39e96",
       "distanceAu": 30.07,
-      "description": "Explore Larissa with Voyager 2 imagery and its source-backed irregular shape.",
+      "description": "Cratered moon of Neptune, first glimpsed from Earth in 1981.",
       "systemName": "Solar System",
       "order": 111,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e6b8a284d490f2afef625a262bfdfd3faf3fcb8f59527524d954813fd6e8f83f"
+    "sha256": "b3cd38e635581aa1f2910ce69dd623a921484e6a6f51e503ba9cca1e0ac1db19"
   }
 }

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "266510e2f88d43ee311ce1ede11e04b93a76fb7913ffc6b39eb76ee66d4a2624"
+          "sha256": "765fa99c1dd68cd3840e4ea8ede3b37f87a026530eb74ffb1b12b86b2a1d37c3"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0e5e6b650860874d47faf21309121095569f6fafab1926c65f450a396df50a1d"
+        "sha256": "abd3e5cbe10d7aa7f3021a64c9a22c87501d5dc2b38458d335e550df4021ccb3"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Anthe, a small moon of Saturn, through its measured shape.",
+      "description": "Tiny moon of Saturn whose impact debris feeds a faint ring arc.",
       "systemName": "Solar System",
       "order": 88,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f4cca5a7950f6760824e8f62e2f02d492292c4a8d47feae6a872da420284a29f"
+    "sha256": "444379fd49c77e0c4e21e2c117998cce2c4fb7f847b0fb70eb4ad5d2dfe471ba"
   }
 }

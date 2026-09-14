@@ -4,7 +4,6 @@
   "id": "comet-c2014-un271",
   "displayName": "Bernardinelli–Bernstein",
   "panel": {
-    "introduction": "Bernardinelli–Bernstein has an exceptionally large nucleus. ALMA detected carbon monoxide escaping while the comet was still more than 16 AU from the Sun.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "C/2014 UN271 Bernardinelli–Bernstein",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-c2014-un271/comet-c2014-un271-model-thumbnail.webp",
         "surface": "comet-c2014-un271-model-surface@2x.webp",
         "poles": "comet-c2014-un271-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "11 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

@@ -5,6 +5,7 @@ import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import runtimeDefinition from "../../../../src/objects/pluto/prepared/runtime.json" with { type: "json" };
+import text from "../../../../src/objects/pluto/prepared/text.json" with { type: "json" };
 import assets from "../../../../src/objects/pluto/prepared/assets.json" with { type: "json" };
 import scene from "../../../../src/objects/pluto/prepared/scene.json" with { type: "json" };
 import lenses from "../../../../src/objects/pluto/prepared/lenses.json" with { type: "json" };
@@ -51,7 +52,7 @@ test("Pluto science lenses keep their prepared legends and false-colour declarat
   const byId = new Map(controls.lenses.controls.map(control => [control.id, control]));
   for (const control of lenses.controls) {
     const shell = required(byId.get(control.id));
-    assert.equal(typeof shell.description, "string");
+    assert.equal(typeof Object.getOwnPropertyDescriptor(text.datasets, control.id)?.value?.summary, "string");
     if (control.falseColor) assert.ok(shell.legend, `${control.id} declares a false-colour scale without a legend`);
     if (shell.legend?.kind === "scale") assert.ok((shell.legend.colors?.length ?? 0) >= 2 && (shell.legend.labels?.length ?? 0) >= 2);
   }

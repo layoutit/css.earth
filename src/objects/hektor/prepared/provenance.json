@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "344333e65ece89e4c6b69841632b67286f80f43429b017a44699f824b3d65cb2"
+    "sha256": "65c0fa107fb138d74e3c46743b9c2b35bbb22c6e09231b35ed51dc81ae81e481"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "44b170c087d3b680c1daa3000a93f3aa0f2210c997d4b4d6efe3b4cc4bc80f1d",
+      "sha256": "eb023ad457a6b77c3def25c45133c4d216f08f334b55eb8dbb67e966597311db",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,7 +169,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Hektor is a Jupiter Trojan asteroid. Explore its calibrated convex reconstruction from DAMIT, version 2016-06-27. The grid marks unavailable surface imagery. This is the published convex reconstruction of the primary alone; it does not resolve the proposed lobes or its satellite.",
           "facts": [
             {
               "id": "radius",
@@ -201,8 +200,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Calibrated DAMIT shape",
-              "title": "DAMIT model 232",
               "thumbnail": "/scenes/hektor/hektor-shape-thumbnail.webp",
               "surface": "hektor-shape-surface@2x.webp",
               "poles": "hektor-shape-surface@2x.webp",
@@ -211,14 +208,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
+              "notes": "Calibrated DAMIT shape",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/hektor/hektor-elevation-thumbnail.webp",
               "surface": "hektor-elevation-surface@2x.webp",
               "poles": "hektor-elevation-surface@2x.webp",
@@ -240,8 +235,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/232",
                 "image": "/scenes/hektor/hektor-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -353,7 +347,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -362,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "44b170c087d3b680c1daa3000a93f3aa0f2210c997d4b4d6efe3b4cc4bc80f1d",
-      "bytes": 7070,
+      "sha256": "eb023ad457a6b77c3def25c45133c4d216f08f334b55eb8dbb67e966597311db",
+      "bytes": 6368,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -378,9 +372,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -422,9 +414,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Calibrated DAMIT shape"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -459,7 +449,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -471,8 +461,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4500,
-          "sha256": "ebb1f15adeb0d22a34cf1a4e095d0409961847cd3eb3d91a5ef4806731bc312a",
+          "bytes": 4202,
+          "sha256": "ad8f8cb060a5bd9f9c9152499e25ec2710b371146f916875032b2ff0b9480473",
           "verification": "bytes-verified"
         }
       ],

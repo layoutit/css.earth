@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a0d06de2fc83cd6925d36376037dc6a689d571c812ea37521549a34ab1c6ad3"
+    "sha256": "0189f377be68528126f956172ef3f997d8061fab985ac8f87c3bf678ad88849a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d79c6182cb926954b53eeea5b86a5c502b95bb340320d020629e5bd3487347ab",
+      "sha256": "2605efe3b4c774e23218a0638d2709f6b4b46ce4f6485de023518a9df7633459",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,7 +171,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Nereus is an elongated near-Earth asteroid reconstructed from radar observations around its 2002 encounter. This is the preferred smaller-volume model; its polar dimension is weakly constrained, and a thicker alternative fits comparably. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -203,8 +202,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Published radar shape model",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/nereus/nereus-shape-thumbnail.webp",
               "surface": "nereus-shape-surface@2x.webp",
               "poles": "nereus-shape-surface@2x.webp",
@@ -213,14 +210,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape from radar observations. The gray grid marks missing optical imagery; lighting shows the model."
+              "notes": "Published radar shape model",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows source-model radius minus a 0.165 km reference sphere, transferred from the closest point on the full original triangular surface. This preferred radar reconstruction is not an independent topographic survey or gravitational height map. Its polar dimension is weakly constrained, and a thicker alternative fits comparably. Ambiguous or out-of-range samples retain the shared grid.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/nereus/nereus-elevation-thumbnail.webp",
               "surface": "nereus-elevation-surface@2x.webp",
               "poles": "nereus-elevation-surface@2x.webp",
@@ -242,8 +237,8 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/Nereus_alt1.mod.wf",
                 "image": "/scenes/nereus/nereus-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Radar height relative to a 165 m sphere. The polar thickness is uncertain; a thicker model also fits."
+              "notes": "Color shows source-model radius minus a 0.165 km reference sphere, transferred from the closest point on the full original triangular surface. This preferred radar reconstruction is not an independent topographic survey or gravitational height map. Its polar dimension is weakly constrained, and a thicker alternative fits comparably. Ambiguous or out-of-range samples retain the shared grid.",
+              "noData": true
             }
           ]
         },
@@ -371,7 +366,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -380,8 +375,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d79c6182cb926954b53eeea5b86a5c502b95bb340320d020629e5bd3487347ab",
-      "bytes": 8420,
+      "sha256": "2605efe3b4c774e23218a0638d2709f6b4b46ce4f6485de023518a9df7633459",
+      "bytes": 7731,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -396,9 +391,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows source-model radius minus a 0.165 km reference sphere, transferred from the closest point on the full original triangular surface. This preferred radar reconstruction is not an independent topographic survey or gravitational height map. Its polar dimension is weakly constrained, and a thicker alternative fits comparably. Ambiguous or out-of-range samples retain the shared grid."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -440,9 +433,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Published radar shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -477,7 +468,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -489,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5465,
-          "sha256": "72747672abfaad1f8a248ecf2a9b6f423c4cba34eaa4d99eda3a4b909aae2229",
+          "bytes": 5166,
+          "sha256": "a890591def8a7e0eadaee4871edd470e10dc3be69450d45868424df414aa8153",
           "verification": "bytes-verified"
         }
       ],

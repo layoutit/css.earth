@@ -53,13 +53,12 @@ the cited facts in the prepared source catalogue. The dataset's Sources card
 shows product citations, not this factsheet index. Preparation reports how many
 facts still lack individual citations; those facts acquire no inferred source.
 
-The facts-only preparer preserves the other content and scene data. It also
-rejects changed source pins and an introduction mismatch. For introduction and
-lens prose or label changes, use
-`pnpm prepare:factsheets -- --editorial <object-id>`; add `--check` for verification.
-After writing editorial changes, run `node tools/prepare-object-json.mts <object-id>`
-with the preparation tools built to publish the scene transport and page controls.
-Refresh source provenance with `pnpm prepare:provenance <object-id>`.
+The facts-only preparer preserves the other content and scene data, and rejects
+changed source pins. Card lines, introductions and dataset text are not content:
+they live in the body's `text.json` and publish with `pnpm prepare:text`; see
+[reader text](reader-text.md). After a lens label change, run the body's content
+preparation, then `node tools/prepare-object-json.mts <object-id>` with the
+preparation tools built, and refresh provenance with `pnpm prepare:provenance <object-id>`.
 Imagery, legends, charts, settings, numeric scene data and lens inventory changes
 still require their preparation owners. Shared ordering keeps four initial rows
 and the View more/View less disclosure.

@@ -209,7 +209,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -927,7 +927,7 @@
       "expectedSha256": "be1afafaa7adb0492cef2cfc8dc7ec8dc063f23e386fe9bdebf6d5a3ca2ac37c",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IO_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -1177,8 +1177,8 @@
     {
       "id": "io-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15662,
-      "expectedSha256": "633b7683b64c3b503cdd339edb27922cbeb62894ebb3873e4bc98cf32c52308e",
+      "expectedBytes": 14499,
+      "expectedSha256": "e785f32c1c92fd76b190882b26294d7f77495ae099a61a9c08f7ed8f47c77337",
       "origin": "Repository-authored Io object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1190,7 +1190,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     }
   ],

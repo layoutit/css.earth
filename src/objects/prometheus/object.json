@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "850e02847aba6a2c3db27cdf3fca77674847e34e02da01a61d050831a0fb7046"
+          "sha256": "40832eedad8d52dd7ca9af0242f2ba4e8da34b56c2701ca1abca726b50053a57"
         },
         {
           "id": "title",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7b99ff562a4f1e6dcaa3cde643eb4d4d3ae9c3340c798a0a8c5c2c6b59b7484d"
+        "sha256": "a3bd60a9634d69c0b0c79c21fb06f459e62bffdaf3b7358b31103b5b555b96a0"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
-      "description": "Explore Prometheus with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "description": "Potato-shaped moon that shepherds the inner edge of Saturn's F ring.",
       "systemName": "Solar System",
       "order": 433,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "fc406380186c10c8a0f8039b4a2a6d9b70ad72ae54d41e93abaad9ce8bb8af77"
+    "sha256": "9ad135463aa35b93dfd8428cb5b7e5c4dcf79d38d4c66683422c398aae4e91a4"
   }
 }

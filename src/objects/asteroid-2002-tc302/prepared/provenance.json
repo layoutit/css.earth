@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d7b897ad27674207598b6233670887c3ce71c718f1434c366af0b77d7d7d5ba0"
+    "sha256": "0e535be4486c6142703d393f6cf63e4d7fbfd244c4a57d6a1a3054d397800495"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c6d69e279371a3d1c8dbcad83aa7ef74130d69c85df20c0862cff22f68da35ac",
+      "sha256": "8d179332695a941351acef4e5dd9ae8b0dcadb1e58558e2b0c72a02eb7593469",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "asteroid-2002-tc302",
         "displayName": "2002 TC302",
         "panel": {
-          "introduction": "2002 TC302 has a flattened outline measured during a stellar occultation. Its displayed depth is assumed; newer thermal analysis suggests a possible companion, which is not part of this primary-body model.",
           "facts": [
             {
               "id": "shape",
@@ -158,9 +157,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "The 2018 occultation gives projected full axes 543.2 ±18 × 459.5 ±11 km. This smooth axisymmetric illustration assumes an unseen equatorial depth of 543.2 km and equator-on presentation; true 3D flattening is unresolved. It represents the primary outline, not the larger thermal system-size estimate. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement. The grid marks unmapped terrain.",
-              "title": "Occultation-outline illustration",
-              "detail": "Inferred shape · unmapped surface grid",
               "thumbnail": "/scenes/asteroid-2002-tc302/asteroid-2002-tc302-model-thumbnail.webp",
               "surface": "asteroid-2002-tc302-model-surface@2x.webp",
               "poles": "asteroid-2002-tc302-model-poles@2x.webp",
@@ -168,7 +164,9 @@
                 "id": "published-shape",
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/2005.08881"
-              }
+              },
+              "notes": "The 2018 occultation gives projected full axes 543.2 ±18 × 459.5 ±11 km. This smooth axisymmetric illustration assumes an unseen equatorial depth of 543.2 km and equator-on presentation; true 3D flattening is unresolved. It represents the primary outline, not the larger thermal system-size estimate. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -297,7 +295,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -306,8 +304,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c6d69e279371a3d1c8dbcad83aa7ef74130d69c85df20c0862cff22f68da35ac",
-      "bytes": 3899,
+      "sha256": "8d179332695a941351acef4e5dd9ae8b0dcadb1e58558e2b0c72a02eb7593469",
+      "bytes": 3574,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -322,9 +320,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "The 2018 occultation gives projected full axes 543.2 ±18 × 459.5 ±11 km. This smooth axisymmetric illustration assumes an unseen equatorial depth of 543.2 km and equator-on presentation; true 3D flattening is unresolved. It represents the primary outline, not the larger thermal system-size estimate. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -364,7 +360,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -376,8 +372,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7582,
-          "sha256": "985ff45ce951c0d72aa49208b1ef7c3c97145605ac82b142ddb46c5a6720b605",
+          "bytes": 7359,
+          "sha256": "ced4c67ad15fc71f1ef065a5c24ca652b993ed664d1b9159fc0e7705e3da2453",
           "verification": "bytes-verified"
         }
       ],

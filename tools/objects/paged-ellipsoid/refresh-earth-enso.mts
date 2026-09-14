@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseEnsoAdvisory } from './enso-advisory.mts';
-import { readCoraltempAnomaly, ensoContent } from './sst-anomaly.mts';
+import { readCoraltempAnomaly, ensoContent, ensoText } from './sst-anomaly.mts';
 
 const base = 'https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/';
 const advisoryUrl = 'https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml';
@@ -68,7 +68,7 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
     const bindings = await readRefreshBindings(resolve(source, 'content/lens-bindings.json'));
     const binding = bindings.controls.find(lens => lens.id === 'enso');
     if (!binding) throw new Error('ENSO presentation binding is missing.');
-    binding.qualification = lens.description;
+    binding.qualification = lens.notes;
     const updates = new Map<string, Buffer>([
       ['science/coraltemp-latest.nc', bytes], ['science/coraltemp-latest.nc.md5', checksum],
       ['preparation/paged-ellipsoid.json', json(config)], ['content/object.json', json(content)],
@@ -102,6 +102,10 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
     }
     await writeFile(resolve(source, 'manifest.json'), json(manifest));
     await writeFile(resolve(object, 'object.json'), json(descriptor));
+    // The dated reader text lives beside object.json; pnpm prepare:text publishes it.
+    const text = JSON.parse(await readFile(resolve(object, 'text.json'), 'utf8'));
+    text.datasets.enso = ensoText(recipe);
+    await writeFile(resolve(object, 'text.json'), json(text));
     return { ...decoded.receipt, sourceSha256: digest(bytes), publisherMd5, checked: recipe.checked, advisory: recipe.advisory };
   } finally { await rm(temp, { recursive: true, force: true }); }
 }

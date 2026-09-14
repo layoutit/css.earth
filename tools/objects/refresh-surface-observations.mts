@@ -92,7 +92,7 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   const nextInventory = { ...inventory, assets: assets.map(asset => changed.get(requireString(asset.filename)) ?? asset) };
   for (const path of [resolve(objectDirectory, 'runtime-assets.json'), resolve(outputDirectory, 'runtime-assets.json')]) await writeFile(path, JSON.stringify(nextInventory, null, 2) + '\n');
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
-  await refreshObservationDescriptions(id, lensIds, new Map(surfaces.map(surface => [surface.id, requireString(surface.billboardColor)])));
+  await refreshObservationControls(id, lensIds, new Map(surfaces.map(surface => [surface.id, requireString(surface.billboardColor)])));
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
   if (hash(await readFile(resolve(outputDirectory, 'scene.refs.json'))) !== hash(originals.get('scene.refs.json')!)) throw new Error('Observation refresh changed the scene.');
   const report = { id, lensIds, seconds: (performance.now() - started) / 1000, maxRssMiB: process.resourceUsage().maxRSS / 1024,
@@ -103,22 +103,21 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   return report;
 }
 
-/** Refresh source-owned lens descriptions and the refreshed lenses' billboard colours without rebaking any images. */
-export async function refreshObservationDescriptions(id: string, lensIds: readonly string[], surfaceColors: ReadonlyMap<string, string> = new Map()) {
+/** Refresh the refreshed lenses' no-data flags and billboard colours without rebaking any images. Reader text publishes separately with prepare:text. */
+export async function refreshObservationControls(id: string, lensIds: readonly string[], surfaceColors: ReadonlyMap<string, string> = new Map()) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Invalid object id.');
   const objectDirectory = resolve('src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const descriptor = await json(resolve(objectDirectory, 'object.json'));
   const references = records(requireRecord(requireRecord(descriptor.properties).recipe).sources);
-  // The source-owned description explains the selected observations. Keep the
-  // existing prepared controls, feature catalogue and all other shell content.
+  // Keep the existing prepared controls, feature catalogue and all other shell content; a refreshed control takes only its
+  // no-data flag from the pinned content, because reader text lives in text.json.
   const contentPath = references.find(reference => reference.id === 'content');
-  const descriptions = new Map<string, { description: string; summary: string | undefined }>();
+  const noData = new Map<string, boolean>();
   if (contentPath) {
     const bytes = await readFile(resolve(objectDirectory, requireString(contentPath.path)));
     if (hash(bytes) !== contentPath.sha256) throw new Error('Source content changed from its descriptor pin.');
     const content = requireRecord(JSON.parse(bytes.toString('utf8')));
-    for (const lens of records(requireRecord(content.lenses).controls)) if (lensIds.includes(requireString(lens.id)))
-      descriptions.set(requireString(lens.id), { description: requireString(lens.description), summary: lens.summary === undefined ? undefined : requireString(lens.summary) });
+    for (const lens of records(requireRecord(content.lenses).controls)) if (lensIds.includes(requireString(lens.id))) noData.set(requireString(lens.id), lens.noData === true);
   }
   // As in the full preparer, only the lens catalogue carries control colours. Recolour each control whose image was refreshed, including an interior view of a refreshed default lens; runtime variants take the surface billboard colour.
   const lenses = await json(resolve(outputDirectory, 'lenses.json')), defaultLens = requireString(lenses.defaultLens);
@@ -126,7 +125,14 @@ export async function refreshObservationDescriptions(id: string, lensIds: readon
   const update = (controls: unknown, colored: boolean) => records(controls).map(control => {
     const lensId = requireString(control.id), refreshed = lensIds.includes(lensId);
     const recolored = colored && (refreshed || (control.view === 'interior' && lensIds.includes(defaultLens)));
-    return refreshed || recolored ? { ...control, ...descriptions.get(lensId), ...(recolored ? { billboardColor: controlColors.get(lensId) } : {}) } : control;
+    if (!refreshed && !recolored) return control;
+    const next: Record<string, unknown> = {};
+    for (const [key, value] of Object.entries(control)) {
+      if (['title', 'detail', 'summary', 'description', 'noData'].includes(key)) continue;
+      next[key] = value;
+      if (key === 'thumbnailUrl' && (refreshed ? noData.get(lensId) === true : control.noData === true)) next.noData = true;
+    }
+    return recolored ? { ...next, billboardColor: controlColors.get(lensId) } : next;
   });
   for (const name of ['lenses.json', 'controls.json', 'runtime.json']) {
     const path = resolve(outputDirectory, name), document = await json(path);

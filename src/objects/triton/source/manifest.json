@@ -477,8 +477,8 @@
     {
       "id": "triton-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7856,
-      "expectedSha256": "2dea5b396bb43746389ae3169fb9d7ca4ae87b9e44704441719648bdb1dae773",
+      "expectedBytes": 7219,
+      "expectedSha256": "c24aae7747e4e49814c69fe6d0554a68124b8b49b1551474de68500ea4e21469",
       "origin": "Repository-authored Triton object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -490,7 +490,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     }
   ],

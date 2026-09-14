@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ino",
+  "card": {
+    "text": "Main-belt asteroid, discovered in August 1877.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=173",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1877-08-01 by Borrelly, A. at Marseille; albedo: 0.096; orbit class: Main-belt Asteroid; spec_B: Xk; spec_T: C"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Borrelly found Ino at Marseille in 1877. It is dark, reflecting about 10% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=173",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1877-08-01 by Borrelly, A. at Marseille; albedo: 0.096; orbit class: Main-belt Asteroid; spec_B: Xk; spec_T: C"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 5913 shape model",
+      "detail": "Published shape",
+      "summary": "Fitted to light curves and VLT/SPHERE images, so large hollows can show. The spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "DAMIT 5913 radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 72 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

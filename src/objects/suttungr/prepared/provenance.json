@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8c2fb1e4306bd5a4ad55353e17afcb1aed30b2135b892d989afe6506a0e49b3d"
+    "sha256": "e0e7911f180db6d1f8205ea60baec5e7d04ac2d7a9b826460982338d463848a9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c61817f99aecd51406aadcbe8eb1f81ff25dee1cecb879e2d248adaa905af070",
+      "sha256": "3b9d00fa2d9f97f1b2ba3fe1d4e52aa7804e5eb210282b043c17bccc02983fa4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "suttungr",
         "displayName": "Suttungr",
         "panel": {
-          "introduction": "Suttungr’s brightness curve has two or three peaks per rotation. This ellipsoid illustrates only its minimum equatorial elongation, with assumed depth and orientation. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "diameter",
@@ -168,9 +167,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.18:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
-              "title": "Light-curve shape approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/suttungr/suttungr-model-thumbnail.webp",
               "surface": "suttungr-model-surface@2x.webp",
               "poles": "suttungr-model-poles@2x.webp",
@@ -178,7 +174,9 @@
                 "id": "lightcurve-approximation",
                 "path": "../manifest.json",
                 "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
-              }
+              },
+              "notes": "Approximate ellipsoid adopting minimum equatorial ratio 1.18:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -324,7 +322,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -333,8 +331,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c61817f99aecd51406aadcbe8eb1f81ff25dee1cecb879e2d248adaa905af070",
-      "bytes": 3657,
+      "sha256": "3b9d00fa2d9f97f1b2ba3fe1d4e52aa7804e5eb210282b043c17bccc02983fa4",
+      "bytes": 3358,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -349,9 +347,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Approximate ellipsoid adopting minimum equatorial ratio 1.18:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -391,7 +387,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -403,8 +399,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6054,
-          "sha256": "dc5f9a30275042f12d26001a420b5ba793dcc3f633897a89ccada35a02b5bab2",
+          "bytes": 5834,
+          "sha256": "fc32c040a458634922900d4b67b29b86e0949e2235a3227d631afc9d3d40f758",
           "verification": "bytes-verified"
         }
       ],

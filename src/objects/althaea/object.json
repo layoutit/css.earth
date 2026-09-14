@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a4a94fe08831ed8d0b45752e1e4eb239d22fa154953d01e96df2b674783c0126"
+          "sha256": "e3da45cf7df4a96654411458101b1df45bb3213ee2187f36d518cd4d9a822070"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "30e3d715a6dd5310b5ee1413665a0912bce647eb161e892c060d480fb3d8c795"
+        "sha256": "57b2f169ac6e3a6db4997b3bffa909c8465ab9d2fd11348c1c24aa9fc36dc117"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5814366871947056,
-      "description": "Explore Althaea in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in April 1872.",
       "systemName": "Solar System",
       "order": 268,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "27b5c5e3a592ea3baca30052e79bd15b4f10907cb3e8f36314c66324fdbdd424"
+    "sha256": "05a8a753376d2a6d9f04bdb679d0c0c887204d1b7be15ee124d0d2f75363176e"
   }
 }

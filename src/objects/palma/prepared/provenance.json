@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "67e95be0e552eca9c6fafbd9ff72dff9c9869b52cadb5fc32507053a7cb0e739"
+    "sha256": "5c025a3e437e508ff9eb7a2033dab128d7c6bd5fb2f2dc514ecae04a65a9bd00"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "11efdd9fb5dc3aff8b78c6bd16deaeb7f67fc95e6b5315ae160a140e0625e8ae",
+      "sha256": "5854617cd7b35be62df944444ceb7141d169fcc4eb97c98084178481a60b8d8f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,7 +169,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Palma is a main-belt asteroid. Explore its calibrated convex reconstruction from DAMIT, version 2011-02-18. The grid marks unavailable surface imagery. Two published pole solutions remain; this view uses model 298 at its own calibrated scale.",
           "facts": [
             {
               "id": "radius",
@@ -201,8 +200,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Calibrated DAMIT shape",
-              "title": "DAMIT model 298",
               "thumbnail": "/scenes/palma/palma-shape-thumbnail.webp",
               "surface": "palma-shape-surface@2x.webp",
               "poles": "palma-shape-surface@2x.webp",
@@ -211,14 +208,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
+              "notes": "Calibrated DAMIT shape",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/palma/palma-elevation-thumbnail.webp",
               "surface": "palma-elevation-surface@2x.webp",
               "poles": "palma-elevation-surface@2x.webp",
@@ -240,8 +235,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/298",
                 "image": "/scenes/palma/palma-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -353,7 +347,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -362,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "11efdd9fb5dc3aff8b78c6bd16deaeb7f67fc95e6b5315ae160a140e0625e8ae",
-      "bytes": 7942,
+      "sha256": "5854617cd7b35be62df944444ceb7141d169fcc4eb97c98084178481a60b8d8f",
+      "bytes": 7278,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -378,9 +372,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -422,9 +414,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Calibrated DAMIT shape"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -459,7 +449,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -471,8 +461,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5386,
-          "sha256": "9dfbd2c23a9e59a712d0ef55aad6ebf9f1cd8927d61dd3a65fce151b8420d451",
+          "bytes": 5126,
+          "sha256": "2a9cc1eee7d9b3c224555c27ae3993c8d8981dd15471e9a2ba6253cdc40a05c7",
           "verification": "bytes-verified"
         }
       ],

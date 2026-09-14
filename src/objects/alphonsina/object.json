@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "d74d5a374508b8930a738c82c37d12eb5e41b088eb5ea082ddb4721a4d493469"
+          "sha256": "be3e57965e9a159e0b9d811256e48e0ccae0bdabe4959d2ca9b69d3289856ef0"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "de4e2219368d11f9dbd8cdc51aae1be432970eb7ee2e39cf735101830f0528c7"
+        "sha256": "f795247557aaa86cd8abb6617540dd72fdd40f0e16f197697985c470efcae6ab"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.700987827703556,
-      "description": "Explore Alphonsina in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in January 1920.",
       "systemName": "Solar System",
       "order": 187,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "6cf95d1801a0da29f8089e0d5c92635bd8ac8cefd821fd196f1e23a2e27058a0"
+    "sha256": "5ed84825a1850e29ff5289c56555ea72c9aa3e4cc1fae6df28d7a9c392435925"
   }
 }

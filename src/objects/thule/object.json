@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c5c612ca167572369c08cf101f22949fc435306903c13d7d4b9c1741532c974e"
+          "sha256": "8196b518f7954f0aed0e8a24af55bd57a965ed34db155822eb27c29a33127c0e"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5a87d1f72eef0b70d210e886c6921cee1a504dda85d1066b8b251cfa65781e44"
+        "sha256": "c0c8b34b4dfba118fd3577817ffa2b3d9f290e5c413b29d55c444459186a57b5"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 4.270063067184944,
-      "description": "Explore Thule in 3D with its published shape model and radial elevation.",
+      "description": "Dark asteroid in the outer main belt, discovered in October 1888.",
       "systemName": "Solar System",
       "order": 194,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "9ff70c9695b1743306f766a861870add08ac39ddd55eb735775c8f5b5a9dd93b"
+    "sha256": "5cfbdb32c4aa9da2c1746aae594959726b456a7cefbc5bc807daabedc7ef5f2d"
   }
 }

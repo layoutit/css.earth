@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "11d75e2c62f0d99221d5bdafb34d96fa85d908cf96716ba189939031d76fccd7"
+    "sha256": "58697cb0dea6093b078a986063ae3eb210bdee39bf53850d17dba924a87b0b0d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ac1ed948d2965cc0759e303ae060e882614ad0327664b1e2be861329e52da901",
+      "sha256": "d5f45551f519895efc3d3f0c0dc926388c9bbfabab1ea89fc00e31e7648d4d2c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-c2023-a3",
         "displayName": "Tsuchinshan–ATLAS",
         "panel": {
-          "introduction": "Tsuchinshan–ATLAS became a bright evening comet in October 2024. Its tail stretched across SOHO’s field of view as it passed near the Sun.",
           "facts": [
             {
               "id": "diameter",
@@ -173,9 +172,6 @@
             {
               "id": "model",
               "label": "Illustrative nucleus",
-              "detail": "Celestia",
-              "title": "C/2023 A3 Tsuchinshan–ATLAS",
-              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
               "thumbnail": "/scenes/comet-c2023-a3/comet-c2023-a3-model-thumbnail.webp",
               "surface": "comet-c2023-a3-model-surface@2x.webp",
               "poles": "comet-c2023-a3-model-poles@2x.webp",
@@ -195,7 +191,9 @@
                   "label": "Closest to Sun",
                   "value": "0.391 AU"
                 }
-              ]
+              ],
+              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -294,7 +292,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -303,8 +301,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ac1ed948d2965cc0759e303ae060e882614ad0327664b1e2be861329e52da901",
-      "bytes": 3408,
+      "sha256": "d5f45551f519895efc3d3f0c0dc926388c9bbfabab1ea89fc00e31e7648d4d2c",
+      "bytes": 3180,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -319,9 +317,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -356,7 +352,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -368,8 +364,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9124,
-          "sha256": "a71921742bd835f00176a76d666df87293f9a3ff4e8b9b1101c44f302c0a1e62",
+          "bytes": 8964,
+          "sha256": "3b1da2dc0bd42e60989e8ffbc50ac5751148e378346bafeb065cad722edc8e0c",
           "verification": "bytes-verified"
         }
       ],

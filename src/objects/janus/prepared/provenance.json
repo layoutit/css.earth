@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "janus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3342996aa8e7a98004b17d96f53d0145267eadd7e9d6eb07441cdbddcba70d08"
+    "sha256": "66784b9dac357ca56b0916d422475a6e1ab85e2fa51c0033fd951511f5800f1b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -400,14 +400,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "db169d462e31129fd4e66d35a613a731a985e0e87dc894b57ce315f7bda27699",
+      "sha256": "ed65b2cef22f7556bb7bab60eaaafdf23809bf1dc5faac432659b133d0ddea7c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "janus",
         "displayName": "Janus",
         "panel": {
-          "introduction": "Janus shares an orbit with Epimetheus just beyond Saturn’s main rings. Their gravitational interaction exchanges the inner and outer tracks about every four years. Cassini photographed a small, irregular world covered in softened craters.",
           "facts": [
             {
               "id": "radius",
@@ -484,9 +483,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-              "title": "ISS mosaic",
-              "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/janus/janus-normal-thumbnail.webp",
               "surface": "janus-normal-surface@2x.webp",
               "poles": "janus-normal-surface@2x.webp",
@@ -495,14 +491,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
+              "notes": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "noData": true
             },
             {
               "id": "filter-color",
               "label": "False color",
-              "description": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
-              "title": "Cassini false color",
-              "detail": "Cassini",
               "thumbnail": "/scenes/janus/janus-filter-color-thumbnail.webp",
               "surface": "janus-filter-color-surface@2x.webp",
               "poles": "janus-filter-color-surface@2x.webp",
@@ -511,14 +505,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
+              "notes": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radial height above a 89.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-              "title": "Shape-derived radial height",
-              "detail": "Cassini shape · radial height",
               "thumbnail": "/scenes/janus/janus-elevation-thumbnail.webp",
               "surface": "janus-elevation-surface@2x.webp",
               "poles": "janus-elevation-surface@2x.webp",
@@ -541,7 +533,7 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
                 "image": "/scenes/janus/janus-elevation-legend.webp"
               },
-              "summary": "Height relative to an 89.2 km sphere, from the Cassini shape model. Small craters are unresolved."
+              "notes": "Radial height above a 89.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
             }
           ]
         },
@@ -645,7 +637,7 @@
       "sha256": "e4404f9812c7eb257ac8f6d2e3d35bd9bc854141f529d9b3e3a3f52da48b79de",
       "bytes": 2007000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -699,7 +691,7 @@
       "sha256": "a6e09de3c38d2b89ae2660cc09a5a6ab4f3f850285b294b608c4ea729c8a9ffc",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -746,7 +738,7 @@
       "sha256": "adb4e48f41d54479a6c42d0de4a7744fd28995e76bab35851498e4ff986e2e8f",
       "bytes": 3831,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -800,7 +792,7 @@
       "sha256": "278c8e3ea292235cc7bd1200a54b150173cab2e0c6947080ea8462206ce67bad",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -847,7 +839,7 @@
       "sha256": "61263063ec6c3a2ac2f6e5d77af553c41fd9b5406be4492570dee980fd44e748",
       "bytes": 3857,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -901,7 +893,7 @@
       "sha256": "2614d23eb4fc1f6ef723b8047ee3a2aaf8e52158c41f6483a1fbd5654026ad76",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -948,7 +940,7 @@
       "sha256": "9efc989db2a29e101dea5b03dcb0e0005a35199c4166bd37285db8c6f5a88f27",
       "bytes": 3814,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1002,7 +994,7 @@
       "sha256": "778edc6facaf2a28e50096064df72fccceafa79caa1e255848394b9a6984c368",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1049,7 +1041,7 @@
       "sha256": "aa155d3f064516157d483062ca673ebc416a66121b662c20ab7b36fea961faa3",
       "bytes": 3816,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1103,7 +1095,7 @@
       "sha256": "5de7c1830e7c5a6bff308d477d953b1cbb8ade2348a0101fdf1f6c53a8b20465",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1150,7 +1142,7 @@
       "sha256": "c16eae04f8c411c8e0c8b5dd9078260a45fdfd3693552fea5238dd2a20d31d8a",
       "bytes": 3837,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1204,7 +1196,7 @@
       "sha256": "8f782a42bb71e0c4a4bb24f9a42191952d36316f811e494a991b31693712dab3",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1251,7 +1243,7 @@
       "sha256": "ee9a364a3ccbe302c2b30a0d1ab3f5b25d546fe41020cc03f10ee539916e9176",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1306,7 +1298,7 @@
       "sha256": "ddbec53bda28462bf4beb542b0873c2bb127845cdef04986a1baa0fae400eb0d",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1353,7 +1345,7 @@
       "sha256": "a9d67e0dba328de11652ed9d7ebf0e477bae2f489d3ba1113c3dff367a59cef4",
       "bytes": 3815,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1408,7 +1400,7 @@
       "sha256": "1138fdd28ed127c5d7fc47612492bd77c61824e070f20a25fdc912aba794691f",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1455,7 +1447,7 @@
       "sha256": "8755e24e6ebb0032d39736ea87b741339e522ab65597a086fef877f2935bd002",
       "bytes": 3813,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1510,7 +1502,7 @@
       "sha256": "56e15e2af0e3232ca4de04e7f577a118f52b8ce8b88efc9000d5c96d82001661",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1557,7 +1549,7 @@
       "sha256": "51cde23734c2110c37911320a230c4f42ad1cf0a0f19cac641b492b182921ef0",
       "bytes": 3814,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1572,7 +1564,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1581,10 +1573,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "db169d462e31129fd4e66d35a613a731a985e0e87dc894b57ce315f7bda27699",
-      "bytes": 6822,
+      "sha256": "ed65b2cef22f7556bb7bab60eaaafdf23809bf1dc5faac432659b133d0ddea7c",
+      "bytes": 5873,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1597,9 +1589,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radial height above a 89.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1618,19 +1608,19 @@
           "url": "/scenes/janus/janus-elevation-thumbnail.webp",
           "bytes": 6882,
           "sha256": "214ba20aaa94bada5f93c128355886dce9f624f0b3ba0b5ed0c7dd75b9ccaf9b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/janus/janus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/janus/janus-elevation-surface@2x.webp",
           "bytes": 629020,
           "sha256": "9a2694e683b6a34a425da545333cb96f44f7244a1fd3f19f28827bc7392d53b2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1642,9 +1632,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1674,13 +1662,13 @@
           "url": "/scenes/janus/janus-normal-thumbnail.webp",
           "bytes": 2080,
           "sha256": "94e61e58a6a1e0ddefe697d74ff253788734efbe2630e86e214ac488e6746684",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/janus/janus-normal-surface@2x.webp",
           "bytes": 536500,
           "sha256": "96d915a902fd490f9e5835d1c7514b54992467179dbed6b2072852aecedf4212",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1692,9 +1680,7 @@
       "selector": "/raster/surfaceObservations/1",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only."
-      ],
+      "limitations": [],
       "lensIds": [
         "filter-color"
       ],
@@ -1718,13 +1704,13 @@
           "url": "/scenes/janus/janus-filter-color-thumbnail.webp",
           "bytes": 2678,
           "sha256": "614e681725c17b4236701a6e34cfb8fbd661a2dc2cdb94e1feef8fcdf069f7ca",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/janus/janus-filter-color-surface@2x.webp",
           "bytes": 321064,
           "sha256": "5e1618de606dbe777ce8770fa068da899a2070708759a0caad9911f81fb83d8c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1735,7 +1721,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1747,8 +1733,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5631,
-          "sha256": "f884e4472ec8c81438db61bd4f82b2b2c97a5c9b7e4d44b72378c9f804c538d5",
+          "bytes": 5373,
+          "sha256": "ef442cadb633bb1a620377c08b3cd19434e94ff07c17aafc81f67dc8ff1d0587",
           "verification": "bytes-verified"
         }
       ],

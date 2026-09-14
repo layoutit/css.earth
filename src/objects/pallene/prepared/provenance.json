@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "pallene",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7ef8c2e445fe79fcf4db6f709514f4038df1339413b0e39769cccbe84880a7a"
+    "sha256": "187c486d4e53499969cdcf34e77454d1049f4b1cb3e39557aa89c4f18c4b7fe5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -144,14 +144,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "82b2c84a6d17e4fe3bfd2b2bc681c2da27a952f079a4305b63c78ce4e0688c75",
+      "sha256": "d8a9211014d0b6048b9201c9c8e10e139aa3b2d252770e0d0990ad9aa1a6ecb4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "pallene",
         "displayName": "Pallene",
         "panel": {
-          "introduction": "Pallene is a small, elongated moon between Mimas and Enceladus. Cassini discovered it in 2004 and later resolved its smooth-looking outline. A faint dust ring follows its orbit around Saturn.",
           "facts": [
             {
               "id": "radius",
@@ -191,9 +190,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
-              "title": "ISS clear-filter image",
-              "detail": "Cassini ISS",
               "thumbnail": "/scenes/pallene/pallene-normal-thumbnail.webp",
               "surface": "pallene-normal-surface@2x.webp",
               "poles": "pallene-normal-poles@2x.webp",
@@ -202,7 +198,8 @@
                 "path": "../manifest.json",
                 "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1496910582"
               },
-              "summary": "Only about 8 × 12 source pixels resolve the moon. Brightness shows coarse detail; the gray grid marks unobserved surface."
+              "notes": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
+              "noData": true
             }
           ]
         },
@@ -319,7 +316,7 @@
       "sha256": "66363342333486a6967427925416bdae1aa385de8efcc78e4e820b0447646143",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -371,7 +368,7 @@
       "sha256": "a5f37bb03ca306fb81d8c18e7f9523127abd8c471af1dc3814c9765f51af5cf0",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -416,7 +413,7 @@
       "sha256": "c9baed96538b317f873dd3eb153c6088e4ac319d1ac2c32cbbbaa26cac857448",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -424,7 +421,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -433,10 +430,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "82b2c84a6d17e4fe3bfd2b2bc681c2da27a952f079a4305b63c78ce4e0688c75",
-      "bytes": 3753,
+      "sha256": "d8a9211014d0b6048b9201c9c8e10e139aa3b2d252770e0d0990ad9aa1a6ecb4",
+      "bytes": 3335,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -449,9 +446,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -471,13 +466,13 @@
           "url": "/scenes/pallene/pallene-normal-thumbnail.webp",
           "bytes": 1816,
           "sha256": "af697b55c121f343c8351ef32c64831bf485ff5f873416d2c40c38d07ba8a09c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pallene/pallene-normal-surface@2x.webp",
           "bytes": 64508,
           "sha256": "e1c2fd265ec28f13462a6277abcc8e0e59f20bb0cee18df5872c25de23f9c45d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -488,7 +483,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -500,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5401,
-          "sha256": "eaa38363f4b863482e67e13387ce71a6da6c64faf673437480dbb48b4926e4c1",
+          "bytes": 5192,
+          "sha256": "582b5a23dc1fd65f0441f879a47a5655c506e98ee73e641eaf6497a224cbc42a",
           "verification": "bytes-verified"
         }
       ],

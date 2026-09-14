@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "adrastea",
+  "card": {
+    "text": "Tiny inner moon of Jupiter that orbits faster than the planet spins.",
+    "sources": [
+      {
+        "catalogueId": "nasa-jupiter-moons",
+        "url": "https://science.nasa.gov/jupiter/jupiter-moons/adrastea/",
+        "label": "NASA Science · Jupiter’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Adrastea and Metis orbit inside Jupiter's main ring and supply its material.",
+    "sources": [
+      {
+        "catalogueId": "nasa-jupiter-moons",
+        "url": "https://science.nasa.gov/jupiter/jupiter-moons/adrastea/",
+        "label": "NASA Science · Jupiter’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Measured axes",
+      "summary": "A smooth shape at the 20 × 16 × 14 km size measured by Galileo; there are no surface images."
+    }
+  }
+}

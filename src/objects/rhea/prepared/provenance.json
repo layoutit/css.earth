@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d0630650562f6b43e8c34bc2dc3970862662e7bb9c60628b231ceb4744932fc9"
+    "sha256": "900cea548a70d6e6e191bdb49e18da29797733010117a449a66cafd955f7c8ed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -293,7 +293,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0bd90bb122aa76e11d7a0c698a3a26b3f85244c30fc76e0d2b433843b10fd4d2",
+      "sha256": "5beccc5d2a2f6af6a9d69cd2fbbfb0b731be7cce999233830d1225f8898d3e48",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -317,7 +317,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Saturn’s second-largest moon, an icy world covered in ancient craters, enormous impact basins and bright fractures. The shape view reveals a simplified Cassini SPC model. Relative albedo shows the model’s brightness variation; elevation uses its own stated reference sphere.",
           "facts": [
             {
               "id": "radius",
@@ -396,8 +395,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-              "title": "Global image mosaic",
               "thumbnail": "/scenes/rhea/rhea-normal-thumbnail.webp",
               "surface": "rhea-normal-surface@2x.webp",
               "poles": "rhea-normal-poles@2x.webp",
@@ -405,13 +402,12 @@
                 "id": "cassini-voyager-2012-rhea",
                 "path": "../manifest.json"
               },
-              "summary": "Surface detail and photographed shadows vary across the mosaic. Gray grid marks gaps; the map follows a simplified spacecraft shape model."
+              "notes": "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+              "noData": true
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
-              "description": "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-              "title": "Enhanced-color composite",
               "thumbnail": "/scenes/rhea/rhea-enhanced-thumbnail.webp",
               "surface": "rhea-enhanced-surface@2x.webp",
               "poles": "rhea-enhanced-poles@2x.webp",
@@ -419,13 +415,11 @@
                 "id": "cassini-iss-2014-rhea-color",
                 "path": "../manifest.json"
               },
-              "summary": "Colors extend beyond human vision and show real hemisphere differences. Photographed shading and source seams remain."
+              "notes": "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape.",
-              "title": "SPC terrain model",
               "thumbnail": "/scenes/rhea/rhea-elevation-thumbnail.webp",
               "surface": "rhea-elevation-surface@2x.webp",
               "poles": "rhea-elevation-poles@2x.webp",
@@ -446,13 +440,13 @@
                 "meta": "km",
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
                 "image": "/scenes/rhea/rhea-elevation-legend.webp"
-              }
+              },
+              "notes": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape.",
+              "noData": true
             },
             {
               "id": "relative-albedo",
               "label": "Relative albedo",
-              "description": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
-              "title": "SPC relative brightness model",
               "thumbnail": "/scenes/rhea/rhea-relative-albedo-thumbnail.webp",
               "surface": "rhea-relative-albedo-surface@2x.webp",
               "poles": "rhea-relative-albedo-poles@2x.webp",
@@ -473,27 +467,26 @@
                 "meta": "relative to mean ≈ 1",
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
                 "image": "/scenes/rhea/rhea-relative-albedo-legend.webp"
-              }
+              },
+              "notes": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+              "noData": true
             },
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
-              "title": "SPC shape model",
               "thumbnail": "/scenes/rhea/rhea-shape-thumbnail.webp",
               "surface": "rhea-shape-surface@2x.webp",
               "poles": "rhea-shape-poles@2x.webp",
               "source": {
                 "id": "cassini-spc-2025-rhea-q128-shape",
                 "path": "../manifest.json"
-              }
+              },
+              "notes": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+              "noData": true
             },
             {
               "id": "infrared",
               "label": "Infrared",
-              "description": "Cassini VIMS false color: red 2.00 µm, green 1.57 µm, blue 1.06 µm. The archive corrects illumination to incidence 30° and emergence 0°; fixed display ranges are shared with Dione. One-degree source cells remain visible. Gray grid marks missing spectra. Archive registration is uncertain at about the source-pixel scale; no subdegree positional accuracy is implied.",
-              "summary": "Photometrically corrected infrared spectra, shown as false color.",
-              "title": "Cassini VIMS infrared mosaic",
               "thumbnail": "/scenes/rhea/rhea-infrared-thumbnail.webp",
               "surface": "rhea-infrared-surface@2x.webp",
               "poles": "rhea-infrared-poles@2x.webp",
@@ -502,15 +495,13 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.17189/ctqe-ta30"
               },
-              "detail": "False color",
-              "falseColor": true
+              "falseColor": true,
+              "notes": "Cassini VIMS false color: red 2.00 µm, green 1.57 µm, blue 1.06 µm. The archive corrects illumination to incidence 30° and emergence 0°; fixed display ranges are shared with Dione. One-degree source cells remain visible. Gray grid marks missing spectra. Archive registration is uncertain at about the source-pixel scale; no subdegree positional accuracy is implied.",
+              "noData": true
             },
             {
               "id": "ice-absorption",
               "label": "Ice absorption",
-              "description": "Strength of the 2.02 µm water-ice absorption relative to a linear 1.82–2.20 µm continuum. Derived from Cassini VIMS; this is not ice percentage, grain size or crystallinity. Colors saturate below 0.30 and above 0.75. One-degree source cells and missing or invalid-continuum cells are retained. The archive has unresolved registration differences at source-pixel scale.",
-              "summary": "Water-ice absorption strength, derived from the original spectra.",
-              "title": "Continuum-relative water-ice absorption; not ice abundance",
               "thumbnail": "/scenes/rhea/rhea-ice-absorption-thumbnail.webp",
               "surface": "rhea-ice-absorption-surface@2x.webp",
               "poles": "rhea-ice-absorption-poles@2x.webp",
@@ -519,7 +510,6 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.17189/ctqe-ta30"
               },
-              "detail": "Water-ice signature",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -534,7 +524,8 @@
                 "meta": "2.02 µm band depth",
                 "sourceUrl": "https://doi.org/10.17189/ctqe-ta30",
                 "image": "/scenes/rhea/rhea-ice-absorption-legend.webp"
-              }
+              },
+              "notes": "Strength of the 2.02 µm water-ice absorption relative to a linear 1.82–2.20 µm continuum. Derived from Cassini VIMS; this is not ice percentage, grain size or crystallinity. Colors saturate below 0.30 and above 0.75. One-degree source cells and missing or invalid-continuum cells are retained. The archive has unresolved registration differences at source-pixel scale."
             }
           ]
         },
@@ -1083,7 +1074,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1092,8 +1083,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0bd90bb122aa76e11d7a0c698a3a26b3f85244c30fc76e0d2b433843b10fd4d2",
-      "bytes": 15135,
+      "sha256": "5beccc5d2a2f6af6a9d69cd2fbbfb0b731be7cce999233830d1225f8898d3e48",
+      "bytes": 14023,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1208,9 +1199,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1258,9 +1247,7 @@
       "selector": "/raster/observations/1",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced"
       ],
@@ -1305,9 +1292,7 @@
       "selector": "/raster/observations/2",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Cassini VIMS false color: red 2.00 µm, green 1.57 µm, blue 1.06 µm. The archive corrects illumination to incidence 30° and emergence 0°; fixed display ranges are shared with Dione. One-degree source cells remain visible. Gray grid marks missing spectra. Archive registration is uncertain at about the source-pixel scale; no subdegree positional accuracy is implied."
-      ],
+      "limitations": [],
       "lensIds": [
         "infrared"
       ],
@@ -1352,9 +1337,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1399,9 +1382,7 @@
       "selector": "/raster/scientific/1",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps."
-      ],
+      "limitations": [],
       "lensIds": [
         "relative-albedo"
       ],
@@ -1446,9 +1427,7 @@
       "selector": "/raster/scientific/2",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Strength of the 2.02 µm water-ice absorption relative to a linear 1.82–2.20 µm continuum. Derived from Cassini VIMS; this is not ice percentage, grain size or crystallinity. Colors saturate below 0.30 and above 0.75. One-degree source cells and missing or invalid-continuum cells are retained. The archive has unresolved registration differences at source-pixel scale."
-      ],
+      "limitations": [],
       "lensIds": [
         "ice-absorption"
       ],
@@ -1492,9 +1471,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -1529,7 +1506,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1541,8 +1518,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6156,
-          "sha256": "125634037f6b6371e34821862224488c3afd051baee66c99f850a79d5dd270ed",
+          "bytes": 5860,
+          "sha256": "d239799d614f1ac64c3cb3440014a8e58efab2f4b020d8563ff1842d05012c34",
           "verification": "bytes-verified"
         }
       ],

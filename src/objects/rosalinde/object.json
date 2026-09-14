@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "6bcb91158160424c1470b41d6d0316f3951568bafb5978542e630c9a0f52350e"
+          "sha256": "fc2a9f8fb6111245b7c184896e25f39cfe46f23e6777fdff517a7d7cef8736e3"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9c4f434f5754f9aec5de8b3662233f9a1edf2c056a36d145238846e9099dd738"
+        "sha256": "eb6e659655fcb7209d0377fc33c9dd1347b6a2b0704a3b1ab1141f003420e5c4"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4725643786568288,
-      "description": "Explore Rosalinde in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in August 1918.",
       "systemName": "Solar System",
       "order": 398,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f28bc7bc3af629c6a384c765583ac57993a55c380bfb5919c711fbe31a439756"
+    "sha256": "90d4947d66ba24c2f10bfe5b83c100eeb65101e00a287a9ca2a7b6b00dc420e4"
   }
 }

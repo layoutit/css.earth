@@ -29,7 +29,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "9e5b017fbb350310376ebb6eac625c3194ab5848f5cd535b93ef4a430a188ba5"
+          "sha256": "d00c37189954eaa16bb6383591b7925d3a39e7c7accb0941c8890c79dca805c3"
         },
         {
           "id": "title",
@@ -125,7 +125,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "192a333164ae39ea1f58c30710b623c8b873515af25fdcb8e1baf85e62d248e5"
+        "sha256": "4f73f3dc683eff305b73ba05c94924a7dd6dd01480248743ab688a5f4dc764e9"
       }
     },
     "catalog": {
@@ -133,7 +133,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 5.706764532787596,
-      "description": "Explore Tuttle's inferred contact-body model from Hubble and Spitzer observations.",
+      "description": "Comet whose nucleus may be two touching lobes.",
       "systemName": "Solar System",
       "order": 77,
       "context": {
@@ -144,6 +144,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "01a5547965b071ff4cdd82328db40b89feac0555d491e7d36dd4806f7deb5b36"
+    "sha256": "61789b607aa1679e56901ed18e6bf225a5dd54bf0d7b05503114560c1884c80c"
   }
 }

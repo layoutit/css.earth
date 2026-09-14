@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "83b559eed81eba93ae7a40a4472dd4d7431ba4fafb5af33bee0eaf6328c2eb5a"
+    "sha256": "ec7fd2b1d86391f467539e1f1a5ced82b682a6f0233c317b666ebc0d96ad1bb6"
   },
   "id": "itokawa",
   "properties": {
@@ -67,7 +67,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3518b728b4dce39ae8ac1f5ae4d5fe090b742042ce9cfb4becaba5f669d9aa10"
+          "sha256": "49fa2e4a103cd2ac7cd734a90b6cfb5fe3beae39994dc9b273ecbd99fe9879db"
         },
         {
           "id": "title",
@@ -128,7 +128,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5ec3683e4bf9b9b8d0c4c0994e50950c5a551122a0c3f2ef2564d57d393e3b3f"
+        "sha256": "5f0f6d66c6b82ad3332b0bc4cc2430f30a31ae5cdc58015623cee6c41a6d10cf"
       }
     },
     "catalog": {
@@ -136,7 +136,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 1.323,
-      "description": "Explore Itokawa in 3D with cssEarth using mission-derived shape and surface data.",
+      "description": "Small near-Earth asteroid that Hayabusa sampled.",
       "systemName": "Solar System",
       "order": 124,
       "context": {

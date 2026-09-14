@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "feronia",
+  "card": {
+    "text": "Main-belt asteroid, discovered in May 1861.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=72",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1861-05-29 by Peters, C. H. F. at Clinton; albedo: 0.083; orbit class: Main-belt Asteroid; spec_T: TDG"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "C. H. F. Peters found Feronia at Clinton in 1861. It is dark, reflecting about 8% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=72",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1861-05-29 by Peters, C. H. F. at Clinton; albedo: 0.083; orbit class: Main-belt Asteroid; spec_T: TDG"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT shape model",
+      "detail": "Published shape",
+      "summary": "Fitted to light curves and resolved telescope images, so large hollows can show. The spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 46.5 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

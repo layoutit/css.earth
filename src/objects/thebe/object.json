@@ -29,7 +29,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7bfe9b33e0a27a054ec4817f7f74818d325812021871d0842b44b4ea913a04fd"
+          "sha256": "5c69d2b6f5aca6c2dc3b2b0e5ae0d23c69d4f3b86c44d8d6c4076bcae7db610b"
         },
         {
           "id": "title",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "edf8158de7c93c5f530e4c7c6cda744786c707095c669b0c1785bb2c449df1d2"
+        "sha256": "5ad8914831827dc6691e244a42242139ef8a35e82597284bb9dc12ef0665271d"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#9f9287",
       "distanceAu": 5.2,
-      "description": "Explore Thebe with Galileo imagery and its source-backed irregular shape.",
+      "description": "One of the four small moons that orbit Jupiter inside the Galilean moons.",
       "systemName": "Solar System",
       "order": 103,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "b881e390bfb05c6cf045128390f47048e7f85fadbc111eec0aca7e2cdb7b0811"
+    "sha256": "d4b995363da813fb1b06f03fc9763984d3ca1f296db0ddcdc163f69c98736d34"
   }
 }
