@@ -175,7 +175,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     const identity = await fileIdentity(path).catch((error: unknown) => { if (basis === 'recovered' && hasErrorCode(error, 'ENOENT')) return null; throw error; });
     if (!identity) { unresolved.push({ product: `preview:${preview.id}`, reason: 'Prepared preview file is unavailable.' }); continue; }
     products.push({ id: `preview:${preview.id}`, label: `${parent.label} preview`, recipe: parent.recipe, selector: parent.selector,
-      recipeDependencies: parent.recipeDependencies,
+      recipeDependencies: parent.recipeDependencies, observationAttribution: parent.observationAttribution,
       inputs: [], parents: [parent.id], lensIds: [], process: 'Prepare a small surface preview from the same interpreted dataset.',
       limitations: [], outputs: [{ url: `object:prepared/${preview.path}`, ...identity, verification: 'bytes-verified' }] });
   }

@@ -43,7 +43,7 @@ import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { brotliCompressSync, constants, gzipSync } from "node:zlib";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 
 const CHROME_EXECUTABLE = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const VIEWPORT = Object.freeze({ width: 1280, height: 900 });
@@ -54,7 +54,7 @@ export const COMPRESSION_ESTIMATES = Object.freeze({
   gzip: { level: 9 }, brotli: { quality: 5 },
 });
 
-export function payloadCases(objects: readonly PayloadObject[] = OBJECTS) {
+export function payloadCases(objects: readonly PayloadObject[] = SCENE_OBJECTS) {
   return objects.flatMap(object => [1, 2].map(dpr => ({ id: object.id, route: object.route, dpr })));
 }
 export function decodedBodyMetrics(body: Uint8Array) {
@@ -152,7 +152,7 @@ function comparison(baseline: number | undefined, candidate: number | undefined)
   return { baseline, candidate, difference, percent: baseline === 0 ? null : Number(((difference / baseline) * 100).toFixed(4)) };
 }
 export async function runPayloadComparison<P extends PayloadPage>({ browser, baselineUrl, candidateUrl, outputRoot,
-  objects = OBJECTS, measure = measureRoute }: {
+  objects = SCENE_OBJECTS, measure = measureRoute }: {
     browser: PayloadBrowser<P>; baselineUrl: string; candidateUrl: string; outputRoot?: string;
     objects?: readonly PayloadObject[];
     measure?: (browser: PayloadBrowser<P>, url: string, entry: PayloadCase) => Promise<SideMeasurement>;

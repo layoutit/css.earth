@@ -8,7 +8,7 @@ import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import context from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { overviewExitDistance } from '../overview-selection.mts';
 import { parseSharedView, savedWorldCamera } from '../../src/renderers/css/dist/navigation.js';
@@ -16,8 +16,8 @@ import { parseSharedView, savedWorldCamera } from '../../src/renderers/css/dist/
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = 'output/playwright/overview-selection';
 await mkdir(output, { recursive: true });
-const sun = required(required(OBJECTS.find(object => object.id === 'sun')).worldFrame);
-const ceres = required(required(OBJECTS.find(object => object.id === 'ceres')).worldFrame);
+const sun = required(required(SCENE_OBJECTS.find(object => object.id === 'sun')).worldFrame);
+const ceres = required(required(SCENE_OBJECTS.find(object => object.id === 'ceres')).worldFrame);
 const exitKm = overviewExitDistance(ceres, sun) / 1000;
 function worldFromState(state:CameraState, frame:PreparedWorldCameraFrame) {
   return savedWorldCamera({ camera: { distanceKilometers: required(state.distanceKilometers),

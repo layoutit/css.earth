@@ -1,10 +1,10 @@
 import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
-import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
+import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
 import { requiredElement } from './browser-types.mts';
 
 interface PreparedFocusCard {
-  set(record: PreparedCatalogObject | null, sources?: readonly SpatialCatalogSource[], presentation?: PreparedFocusPresentation | null): void;
+  set(record: PreparedCatalogObject | null, sources?: readonly SpatialCitation[], presentation?: PreparedFocusPresentation | null): void;
   destroy(): void;
 }
 

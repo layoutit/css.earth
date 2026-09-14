@@ -1,6 +1,7 @@
 import { record } from './browser-types.mts';
 import { defineObject } from './object-schema.mts';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.mts';
+import type { NavigationDistance } from './navigation-distance.mts';
 
 export interface CatalogContext { name?: string; color?: string; order?: number; }
 export type CatalogEntry = ObjectEntry & { order?: number; context?: CatalogContext };
@@ -20,7 +21,7 @@ function order(value: unknown): number | undefined {
 }
 
 /** Decode package metadata at both the build and application boundaries. */
-export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['loadScene']): CatalogEntry {
+export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['loadScene'], distance: NavigationDistance): CatalogEntry {
   if (!record(input) || input.schema !== 'cssearth-object@1' || typeof input.id !== 'string' || !record(input.properties)) {
     throw new TypeError('Invalid catalogue descriptor.');
   }
@@ -41,7 +42,9 @@ export function catalogEntry(input: unknown, loadScene: ObjectDefinitionInput['l
     context = { ...(typeof value.name === 'string' ? { name: value.name } : {}),
       ...(typeof value.color === 'string' ? { color: value.color } : {}), order: order(value.order) };
   }
-  return { ...defineObject({ id: input.id, name, systemName, color, distanceAu, description,
+  // Legacy catalog.distanceAu mixes orbital references and positions. It is
+  // validated as authored metadata but never published as a measured distance.
+  return { ...defineObject({ id: input.id, name, systemName, color, distance, description,
     classification: classification(catalog.classification), route: `/${input.id}/`,
     worldFrame: input.properties.worldFrame, loadScene }), order: order(catalog.order), ...(context ? { context } : {}) };
 }

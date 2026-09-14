@@ -6,7 +6,7 @@ import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { browserObjects } from './browser-objects.mts';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const sourcePath = '/sun/?overview=solar-system&v=QMa8GhQkxq0kCjwwjGyvKEVkwdEH0KlHMa5BQsczQAAAAD_NAzq-TAs4v9ZvIAwo9nM_43yA9Ilr5wABAAAAAAAAAAA';
@@ -49,7 +49,7 @@ try {
           return { id, pools: stats.pools.map(({ id, resident, nativeSlots, capacity }) => ({ id, resident, nativeSlots, capacity })),
             committed: stats.committed, allReady: stats.committed.every(key => window.__cssearthTest.required(adopted,"adopted resources").resources.has(key)), scenes: document.querySelectorAll('.polycss-camera').length };
         } finally { adopted?.destroy(); prepared.destroy(); }
-      }, { id: object.id, sourceFrame: required(OBJECTS.find(object => object.id === 'sun')).worldFrame });
+      }, { id: object.id, sourceFrame: required(SCENE_OBJECTS.find(object => object.id === 'sun')).worldFrame });
       for (const pool of bank.pools) { assert.ok(pool.resident <= pool.capacity); assert.ok(pool.nativeSlots <= pool.capacity); }
       assert.equal(bank.allReady, true); assert.equal(bank.scenes, 1);
       results.push({ dpr, type: 'bank', ...bank });
@@ -58,7 +58,7 @@ try {
     // Real flights on the small lighting pools, plus a full default body bank.
     for (const id of ['mars', 'mercury', 'earth', 'saturn', 'haumea', 'makemake', 'eris']) {
       await page.goto(origin + sourcePath); await ready(page, 'sun');
-      const object = required(OBJECTS.find(object => object.id === id));
+      const object = required(SCENE_OBJECTS.find(object => object.id === id));
       await page.locator('.planet-sidebar-search').fill(object.name);
       await page.evaluate(id => {
         window.__flightSelections = [];

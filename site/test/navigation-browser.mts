@@ -18,11 +18,11 @@ try {
   await page.goto(`${origin}/mercury/?campaign=navigation#vault`);
   await page.waitForFunction(() => window.__cssEarth?.ready === true);
   await page.evaluate(async () => {
-    const { OBJECTS } = await import('/site/objects.mts');
+    const { SCENE_OBJECTS } = await import('/site/objects.mts');
     const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content', '.planet-input-surface', '.planet-stage'];
     const proof:NavigationProof = window.__navigationProof = {
       selectors, nodes: selectors.map(selector => document.querySelector(selector)), timeOrigin: performance.timeOrigin,
-      frames: Object.fromEntries(OBJECTS.flatMap(object => object.worldFrame ? [[object.id, object.worldFrame] as const] : [])),
+      frames: Object.fromEntries(SCENE_OBJECTS.flatMap(object => object.worldFrame ? [[object.id, object.worldFrame] as const] : [])),
       samples: [], pushes: 0,
       capture: () => window.__cssearthTest.object().camera.captureWorldCamera(window.__cssearthTest.required(proof.frames[window.__cssearthTest.scene().activeObjectId],"active world frame")),
     };

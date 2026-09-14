@@ -4,7 +4,7 @@ import test from "node:test";
 
 import { objectAdapter } from "../object-adapter.mts";
 import { loadObjectContent } from "./load-object-content.mts";
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { parsePreparedText } from "../object-text.mts";
 import { requireSceneLifecycle } from "../scene-contract.mts";
 import type { RouterOptions } from '../scene-router.mts';
@@ -18,12 +18,12 @@ import { validateObjectPackageFiles } from "../../tools/object-package-contract.
 test("keeps every implemented scene in one object registry", () => {
   assert.deepEqual(
     objectAdapter.routes(),
-    OBJECTS.map(({ route }) => route),
+    SCENE_OBJECTS.map(({ route }) => route),
   );
 });
 
 test("loads every object through the single adapter", async () => {
-  for (const objectRecord of OBJECTS) {
+  for (const objectRecord of SCENE_OBJECTS) {
     assert.equal(typeof await objectAdapter.load(objectRecord.id), "function");
   }
   await assert.rejects(
@@ -239,7 +239,7 @@ test("shared router cancels a pending adapter before publication", async () => {
 });
 
 test("keeps implemented routes backed by object-owned files", async () => {
-  for (const planet of OBJECTS) {
+  for (const planet of SCENE_OBJECTS) {
     await validateObjectPackageFiles(planet);
     await access(new URL(`../../src/objects/${planet.id}/prepared/object.json`, import.meta.url));
   }

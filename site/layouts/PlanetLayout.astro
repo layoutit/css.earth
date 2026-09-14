@@ -1,7 +1,7 @@
 ---
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mts";
-import { requireObject } from "../objects.mts";
+import { requireSceneObject } from "../objects.mts";
 import { objectSeo } from "../seo.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
 import "../../src/platform/cubic-sky.css";
@@ -20,7 +20,7 @@ interface Props {
 }
 
 const { objectId, navigation = false } = Astro.props;
-const objectRecord = requireObject(objectId);
+const objectRecord = requireSceneObject(objectId);
 const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID });
 ---
 

@@ -9,7 +9,7 @@ import { objectRuntimePackageTests, retainedPresentationFixture } from "../../..
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import { initialObjectSelection } from "../../../../src/renderers/css/dist/testing.js";
 import { parsePreparedObjectRuntime } from '../../../../src/renderers/css/dist/index.js';
-import { OBJECTS } from "../../../../site/objects.mts";
+import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 objectRuntimePackageTests(runtimeDefinition);
 test('diagnostic page substitutions preserve the real renderer and verified prepared envelope',async()=>{
@@ -21,7 +21,7 @@ test('diagnostic page substitutions preserve the real renderer and verified prep
   for(const key of Object.keys(runtimeDefinition).filter(key=>key!=='pageLayers'))assert.deepEqual(Reflect.get(prepared.data,key),Reflect.get(runtimeDefinition,key),key);
 });
 test("Earth's actual import closure has only shared runtime owners", async () => {
-  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "earth") });
+  const audit = await auditObjectRuntimeOwnership({ objects: SCENE_OBJECTS.filter(object => object.id === "earth") });
   assert.equal(audit.complete, true);
   for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/object-control-binding", "rendering/prepared-playback", "solar-system/cubic-sky-runtime"]) {
     assert.ok(audit.sharedClosure.includes(`src/renderers/css/${name}.ts`), name);
