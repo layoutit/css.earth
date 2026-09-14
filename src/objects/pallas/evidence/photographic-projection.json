@@ -879,5 +879,38 @@
     "A limb fit and a visually plausible drape do not qualify interior placement.",
     "Crater-table coordinates have not been tied to native FITS control pixels with verified uncertainties. No measured incompatibility with that table is claimed.",
     "No global coverage percentage was measured. No natural-colour, corrected-reflectance or photographic-surface capability was added."
-  ]
+  ],
+  "nativeControlFollowup": {
+    "recipe": "photographic-controls.json",
+    "report": "projected-controls.json",
+    "image": "projected-controls.png",
+    "finding": "Four tentative native crater identifications were recorded before projecting their published coordinates. Three differ by 23\u201329 native pixels for both frozen model cameras; Hoplon differs by 9\u201311 pixels. The picks remain uncertain, so these discrepancies do not establish absolute camera error. No correction or photographic surface was adopted.",
+    "contrastMethodSource": "https://arxiv.org/pdf/1902.01287 (Fetick et al. 2019, section 4.4); cited by Marsset et al. for illumination-gradient removal",
+    "contrastInspection": {
+      "status": "identification-diagnostic-only",
+      "method": "Unweighted quadratic least squares over the observed disc, followed by division. Following the class of method in Fetick et al. 2019 section 4.4, not an exact producer reproduction or reflectance calibration.",
+      "mask": "Existing limbThreshold",
+      "threshold": {
+        "threshold": 1087.6375086944884,
+        "split": 3169.872506913949,
+        "backgroundMedian": 354.7409719863812,
+        "backgroundSigma": 146.57930734162144,
+        "bodyMean": 5906.26288208487
+      },
+      "coefficients": [
+        7512.501131274249,
+        -1774.8112090654859,
+        -209.36544290594247,
+        -19376.087661991187,
+        -920.3381440672113,
+        -17711.128440181034
+      ],
+      "displayRange": [
+        0.5855535742377813,
+        1.2340779921006717
+      ]
+    },
+    "contrastResult": "The exploratory quadratic display did not establish unambiguous independent crater centres. It was not used to change the controls or as a calibrated photographic product.",
+    "rotationSensitivity": "An exploratory 3-D rigid rotation between the first three tentative source/native direction pairs was about 31 degrees; the fourth pair remained 10.6 degrees away. This neither resolves a coordinate-frame rotation nor validates the feature identifications; no transform was adopted."
+  }
 }
