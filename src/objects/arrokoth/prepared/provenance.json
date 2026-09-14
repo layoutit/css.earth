@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -756,6 +756,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "published-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -801,6 +813,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "published-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -838,6 +857,13 @@
           "bytes": 908086,
           "sha256": "ce0dca27dbf24653f3a33e64ed1aad2b25a03ed1149b2a80ca8131cc6c0e3a59",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "published-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -878,6 +904,13 @@
           "bytes": 237202,
           "sha256": "7ab316c1be6db0bae750bb6ae543397a3b033e19cf601fdc142cc45048338767",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "published-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1012,5 +1045,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "arrokoth",
+    "materialSha256": "6970257ffbdb9bbe7ff6ac86b843b76fcee9a09f8b030fd4416daf04bd4fd48d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/arrokoth/prepared/provenance.json",
+      "sha256": "82675421e4e57cf4067b1d5aec06c0f534d2212d8b953a2a23fa6e7662d60d81"
+    }
   }
 }

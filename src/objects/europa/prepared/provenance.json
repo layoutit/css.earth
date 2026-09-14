@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -23558,6 +23558,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-voyager-galileo-global-500m",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -23615,6 +23622,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-s0349875152.equi",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -23668,6 +23682,13 @@
           "bytes": 9464,
           "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-agenor-controlled-dtm",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -23725,6 +23746,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-europa-geologic-units-grid",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/3/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -23778,6 +23806,13 @@
           "bytes": 48712,
           "sha256": "098aede4a8356ea87f179e793fe7f2c020cf31a6446fb89683f1774c8231c8ee",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "europa-registered-nims-composite",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/4/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -23835,6 +23870,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "europa-composition-ice-signature",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/5/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -23890,6 +23932,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "europa-composition-fine-ice",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/6/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -23943,6 +23992,13 @@
           "bytes": 8182,
           "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "europa-composition-coarse-ice",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/7/source."
         }
       ],
       "inputBasis": "bound-inputs"

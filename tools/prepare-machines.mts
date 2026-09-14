@@ -1,3 +1,4 @@
+import { spatialSourceCitations } from './spatial-source-citations.mts';
 import { sourceResolver, parseSourceBinding } from '../src/platform/source-catalog.mts';
 import { compileSourceUsage } from '../src/platform/source-usage.mts';
 import type { SourceUse, SourceUsageObject } from '../src/platform/source-usage.mts';
@@ -24,8 +25,8 @@ import { restoreFactsheetEvidence } from './restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from './restore-factsheet-evidence.mts';
 import { prepareVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
 export const explorationCompilerClosure = [
-  'tools/prepare-machines.mts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
-  'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'site/objects.mts', 'site/object-schema.mts',
+  'tools/prepare-machines.mts', 'tools/spatial-source-citations.mts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
+  'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'src/platform/preparation-evidence.mts', 'tools/preparation-evidence.mts', 'src/platform/product-input-evidence.mts', 'site/objects.mts', 'site/object-schema.mts',
   'site/object-catalog.mts', 'site/prepared-object-catalog.mts', 'tools/prepare-catalog.mts',
   'site/prepared-focus-object.mts', 'site/navigation-distance.mts', 'tools/prepare-navigation-destinations.mts',
   'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
@@ -154,6 +155,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
       else if (!new RegExp(`^public/scenes/${volume.id}/datasets/[a-f0-9]{64}\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
     }
   }
+  metadata.push(...await spatialSourceCitations(root, sources, input));
   const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,catalogSha256:sourceCatalogDigest(sourceCatalog),
     usage:compileSourceUsage(objects,sources,metadata),inventory,closure};
   const preparedSources = parsePreparedSources(sourcePayload);

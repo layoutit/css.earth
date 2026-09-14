@@ -1,3 +1,4 @@
+import { spatialPublicationId } from '@cssearth/catalog';
 import { M_PER_PC } from '@cssearth/astronomy';
 import type { PreparedClusterCatalog, PreparedClusterRecord, SpatialCatalogSource } from '@cssearth/catalog';
 import { galaxyPositionM } from '../galaxy-catalog/prepare.js';
@@ -75,6 +76,7 @@ export function prepareClusterCatalog(rows: readonly McxcRow[], recipe: ClusterR
       presentation: { focusRadiusM: comovingRadiusM * 1.5 } };
   });
   return { schema: 'cssearth-cluster-catalog@1', frame: recipe.frame, cosmology: recipe.cosmology,
-    sources: recipe.sources.map(({ path: _path, ...source }) => source), objects,
+    sources: recipe.sources.map(({ path: _path, ...source }) => source.id === recipe.catalogueSourceId
+      ? { ...source, references: [...new Set(objects.map(row => row.redshift.sourceRef))].map(id => ({ id, catalogueId: spatialPublicationId(id), url: `https://ui.adsabs.harvard.edu/abs/${id}`, citation: `Redshift reference ${id}, transcribed from MCXC-II.` })) } : source), objects,
     selection: { description: recipe.description, distanceCaveat: recipe.distanceCaveat } };
 }

@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -1525,6 +1525,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "surface-pluto-color-mosaic-jpg",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1580,6 +1587,13 @@
           "bytes": 226984,
           "sha256": "82ece25eb73d8495d3b6597167c4430b8005e8335ab95064316c55e337b37d12",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "lenses-pluto-dem-tif",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1640,6 +1654,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "lenses-pluto-monochrome-tif",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1696,6 +1717,13 @@
           "bytes": 141794,
           "sha256": "916199567fbd853cc7ea23e7a629008b7d7b85f6e10fabe063dca89be5808ace",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "pluto-leisa-ice-fractions",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/3/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1756,6 +1784,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "pluto-leisa-ice-fractions",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/4/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1812,6 +1847,13 @@
           "bytes": 64260,
           "sha256": "ef3538ec1263da7f16aaae6cbd2867eb2b59e9c8fead071e1f7d60f53ba66c72",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "pluto-leisa-ice-fractions",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/5/source."
         }
       ],
       "inputBasis": "bound-inputs"

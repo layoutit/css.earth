@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -1588,6 +1588,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-voyager-2010-dione",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "cassini-spc-2025-dione-q128-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1634,6 +1646,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-iss-2014-dione-color",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/1."
+        },
+        {
+          "sourceId": "cassini-spc-2025-dione-q128-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1677,6 +1701,18 @@
           "bytes": 293986,
           "sha256": "e4791d7fb224e216eaccf4d5e495712c6e1f49bbef24ae2c85a5ef3be8d047ee",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "dione-vims-infrared",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/2."
+        },
+        {
+          "sourceId": "cassini-spc-2025-dione-q128-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1729,6 +1765,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-spc-2025-dione-q128-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1779,6 +1822,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-spc-2025-dione-q128-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1824,6 +1874,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-spc-2025-dione-q128-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1859,6 +1916,13 @@
           "bytes": 439616,
           "sha256": "0c5e2a4c8a4ac2ce1d8e055952ddf7169b66b1ac05341cbfe3e274bb223f55d0",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-spc-2025-dione-q128-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"

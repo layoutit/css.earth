@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -1324,6 +1324,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "ida-normal",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "ida-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1365,6 +1377,13 @@
           "bytes": 331480,
           "sha256": "e33a040f19472ad35260f68af3d3d0c6336ed01455301065a669b16589340575",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "ida-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1416,6 +1435,13 @@
           "bytes": 293052,
           "sha256": "13feb7808bfadb00b90dda82ac2fc71e927684e464409327a7a8a72c32509f21",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "ida-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1561,5 +1587,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "ida",
+    "materialSha256": "05332ff20a35258e837bcf7f08eb8188ccb00d8095a29733e1850323b1333a64",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/ida/prepared/provenance.json",
+      "sha256": "01a508d7f2284d003fe4b5f9b30d446ea8731211c410f8211648f3141e307672"
+    }
   }
 }

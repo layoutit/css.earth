@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -1388,6 +1388,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-cassini-infrared",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1433,6 +1445,13 @@
           "bytes": 6997442,
           "sha256": "e7c05e093131d0885c8b2a3d68d39e0b31124ff3b64c1e64fc166a901f327d13",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1482,6 +1501,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1527,6 +1553,13 @@
           "bytes": 368656,
           "sha256": "9ec14c15d1ef5c240fe623068ddab85ba9069d79925cffdd1784f710acaa215c",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1576,6 +1609,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1619,6 +1659,13 @@
           "bytes": 306326,
           "sha256": "35d4b6c771c85f84d9e7683dd76b1f21bf135ee08f67db20b155909e5f7133a1",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"

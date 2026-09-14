@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -1159,6 +1159,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "ryugu-normal",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "ryugu-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1203,6 +1215,18 @@
           "bytes": 4173682,
           "sha256": "56aaf58de7e5c04b418695892e88cac9e5bac7662216502067b97613f3096cd6",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "ryugu-enhanced",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/1."
+        },
+        {
+          "sourceId": "ryugu-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1263,6 +1287,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "ryugu-close-up",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/2."
+        },
+        {
+          "sourceId": "ryugu-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1304,6 +1340,13 @@
           "bytes": 1295984,
           "sha256": "1ee247140b3f768061042fbaf4ede07849181451c6a29892f32e9aeb827f753f",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "ryugu-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1350,6 +1393,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "ryugu-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1392,6 +1442,13 @@
           "bytes": 3706304,
           "sha256": "bb80694074dcb4069d14f906ec14043e2344574f4b6175d8ab9bb22f5715968c",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "ryugu-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"

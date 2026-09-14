@@ -32,7 +32,18 @@ export type CaptureAttribution =
   | { readonly kind: 'machine'; readonly machineId: string; readonly missionId?: string; readonly evidence: string }
   | { readonly kind: 'mission'; readonly missionId: string; readonly evidence: string }
   | { readonly kind: 'unresolved'; readonly label: string; readonly evidence: string; readonly reason: string };
-export interface Capture { readonly attributions: readonly CaptureAttribution[]; }
+export interface CaptureObservation {
+  readonly id: string; readonly target: string; readonly observedAt: string | null;
+  readonly instrument: string | null; readonly bands: string | null; readonly evidence: string;
+}
+export interface Capture { readonly attributions: readonly CaptureAttribution[]; readonly observation?: CaptureObservation; }
+export function parseCaptureObservation(raw: unknown): CaptureObservation {
+  const value = explorationRecord(raw, ['id', 'target', 'observedAt', 'instrument', 'bands', 'evidence']);
+  return { id: explorationText(value.id), target: explorationText(value.target),
+    observedAt: value.observedAt === null ? null : explorationDate(value.observedAt),
+    instrument: value.instrument === null ? null : explorationText(value.instrument),
+    bands: value.bands === null ? null : explorationText(value.bands), evidence: explorationText(value.evidence) };
+}
 
 export function explorationRecord(input: unknown, fields?: readonly string[]): Record<string, unknown> {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Expected an exploration record.');
@@ -179,7 +190,7 @@ export function parseExplorationCatalog(input: unknown, agencies: Readonly<Recor
 }
 
 export function parseCapture(input: unknown): Capture {
-  const capture = explorationRecord(input, ['attributions']);
+  const capture = explorationRecord(input, ['attributions', 'observation']);
   const attributions = explorationArray(capture.attributions, (raw): CaptureAttribution => {
     const record = explorationRecord(raw);
     const evidence = explorationText(record.evidence);
@@ -200,7 +211,7 @@ export function parseCapture(input: unknown): Capture {
   });
   if (!attributions.length) throw new TypeError('Capture needs an attribution.');
   unique(attributions.map(item => item.kind === 'unresolved' ? `unresolved:${item.label}` : item.kind === 'mission' ? `mission:${item.missionId}` : `machine:${item.machineId}:${item.missionId ?? ''}`), 'capture attribution');
-  return Object.freeze({ attributions });
+  return Object.freeze({ attributions, ...(capture.observation === undefined ? {} : { observation: Object.freeze(parseCaptureObservation(capture.observation)) }) });
 }
 export function validateCapture(capture: Capture, catalog: ExplorationCatalog): void {
   for (const attribution of capture.attributions) {

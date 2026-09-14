@@ -66,6 +66,18 @@ It does not download or rebuild body rendering assets.
 - `pnpm prepare:provenance mercury --verify` checks locally available source and
   output bytes without claiming a fresh preparation run.
 
+`lastPreparation` separately retains the fingerprint of the last byte-verified
+preparation and the lineage verifier's identity. It covers object identity,
+source pins and dependencies, recipe pins, product bindings and output pins.
+Metadata recovery carries it forward even when the compiler or credits change.
+The preparation summary reports `material-matches`, `material-changed`, or
+`not-recorded`; a retained fingerprint never grants verification to new bytes.
+A new verified preparation replaces this snapshot. Git retains prior full records;
+this is not an execution log or scientific acceptance certificate.
+
+The 36 historical records recovered from before PR #208 include an exact Git
+revision, path and file hash. Missing historical evidence is left unrecorded.
+
 An acquisition operation records the declared request and processing policy,
 when available. It is not a retrospectively invented execution receipt. Some
 upstream requests only verify an existing source; these are recorded separately
@@ -92,6 +104,13 @@ The [Sources guide](sources-catalogue.md) owns published titles, citation links,
 canonical bindings, credits and usage presentation. Local source records may
 supply `title`, `sourceUrl`, `displayCredit` and `attributionGroup.id` for records
 that remain local or unresolved. These fields never establish consumption.
+
+Products may declare `inputEvidence` for consumed source IDs: appearance,
+geometry, placement, registration, calibration or reference, with evidence for
+the role. The reader rejects unconsumed inputs and duplicate source/role pairs.
+An undeclared role remains `unknown`. Parent products retain their roles;
+acquisition dependencies do not inherit a scientific role automatically.
+Contribution edges expose these roles alongside their credits.
 
 Captured inputs also carry `capture.attributions`. A spacecraft or mission claim
 needs evidence from the input; participation alone does not establish a dataset

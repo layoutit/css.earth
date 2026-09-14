@@ -24,7 +24,7 @@ function preparedDistance(descriptor: unknown) {
 
 /** A capability projection of OBJECTS, never an independently maintained registry. */
 export const SCENE_OBJECTS = Object.freeze(OBJECTS.filter(isSceneObject));
-for (const object of OBJECTS) if (object.kind === 'prepared-focus' && !SCENE_OBJECTS.some(host => host.id === object.hostId)) {
+for (const object of OBJECTS) if (object.kind === 'prepared-focus' && !SCENE_OBJECTS.some(host => host.id === object.sceneHostId)) {
   throw new TypeError(`Prepared focus host is not a registered scene: ${object.id}`);
 }
 

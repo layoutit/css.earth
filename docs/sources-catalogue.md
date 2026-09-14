@@ -109,9 +109,15 @@ need their body and preparation checks.
 ## Coverage and delivery
 
 The graph covers manifest inputs, used provenance documents/intermediates,
-individual factsheet citations, mission and machine citations, approved artwork
+individual factsheet and spatial-measurement citations, mission and machine citations, approved artwork
 and shared environments. The compiler checks and pins each cited factsheet
 evidence file. It rejects stale published facts before replacing either catalogue.
+
+Galaxy and cluster bibliography entries bind their original keys to canonical
+publication records. The spatial citation compiler validates the crosswalk and
+indexes each cited quantity under its object and publication. Catalogue release
+and field locators retain their pinned source owner; paper attribution does not
+claim that the paper was independently reviewed.
 
 Unused retained inputs create no usage edge. Facts without individual citations,
 gallery descriptions, chart annotations and prose citations remain outside the

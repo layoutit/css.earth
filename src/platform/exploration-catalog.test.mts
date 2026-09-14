@@ -99,3 +99,12 @@ test('a ground machine is sited and retired instead of launched', () => {
   assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...arecibo, retired: cited('1962') }] }, agencies), /retired before/);
   assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...arecibo, site: cited({ latitude: 91, longitude: 0 }) }] }, agencies), /site coordinate/);
 });
+
+
+test('capture observations preserve unknown metadata and reject unsupported dates', () => {
+  const attributions = [{ kind: 'machine', machineId: 'juno', evidence: 'Preserved image label.' }];
+  const observation = { id: 'image-1', target: 'Jupiter', observedAt: null, instrument: null, bands: 'Visible', evidence: 'Pinned image label.' };
+  assert.deepEqual(parseCapture({ attributions, observation }).observation, observation);
+  for (const invalid of [{ ...observation, evidence: '' }, { ...observation, target: '' }, { ...observation, observedAt: '2023-02-29' }, { ...observation, bands: undefined }])
+    assert.throws(() => parseCapture({ attributions, observation: invalid }));
+});

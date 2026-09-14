@@ -1,0 +1,36 @@
+{
+  "id": "publication-casey2023mnras-520-4715c",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Casey2023MNRAS.520.4715C: Discovery of a red backsplash galaxy candidate near M81",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "Casey2023MNRAS.520.4715C"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.4715C",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/prepared/catalogue.json",
+      "revision": "340f4ef6ea7f2a6cc540b906dec35436a1d549c5",
+      "sha256": "1987e9658d963826cc1717afdfa0b9267fa1ce79b79e0d3f9d5905bd55f00c8f",
+      "locator": "/sources/3/references/31"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/3/references/31"
+    }
+  ]
+}
