@@ -1,0 +1,265 @@
+{
+  "schema": "cssearth-dactyl-map-review@1",
+  "qualifiedSurface": false,
+  "date": "2026-09-14",
+  "paperSha256": "e96e704ad303d090d658a0078a083d7d983b17ec78322531d998da90c66bade9",
+  "mapSha256": "aaec33473a453e23a8b4fb735bd8193a059720a690a6d2fcde23a7d42920d5dd",
+  "generatorSha256": "23f25291ed206f40b514bbc8720274c951e446698e2a9a9d702aa653bc28018d",
+  "inputs": [
+    {
+      "path": "src/objects/dactyl/evidence/registration/published-controls.json",
+      "sha256": "82d2bf6df6689e77e4ffd9640538895f2cce980741954bdf33ec5edce2acf0cf"
+    },
+    {
+      "path": "src/objects/dactyl/evidence/registration/inputs.json",
+      "sha256": "36babc47a849fde247a70d43655cb4e4bbd0a87733b47a1c46f155134ce38b24"
+    },
+    {
+      "path": "src/objects/dactyl/evidence/registration/native/2278r.img",
+      "sha256": "218a59544dc0d6fafbb870297a161a15ac5621ffaf2a3f9542f5f834a6f37370"
+    },
+    {
+      "path": "src/objects/ida/source/reference/gll36001.ti",
+      "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652"
+    },
+    {
+      "path": "src/objects/dactyl/source/shape/model.json",
+      "sha256": "ad79a5bea948b73c0f842a3609939da15914a0dbb1d88ecc8f371ffefe50c2b4"
+    },
+    {
+      "path": "src/objects/dactyl/evidence/registration/published-control-fit.json",
+      "sha256": "f4f9c30704355171d3e3e35143c174b7420fb05d2197fe32a66fd8cfe6608027"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mts",
+      "sha256": "d0942ffb78df494a2a9ae6a76833fdf43ceffbae0cbef6a88fa7e806d23cf262"
+    },
+    {
+      "path": "tools/spice/text-kernel.mts",
+      "sha256": "4b81fb9ee416c4527476a903da3c6e40af4f85aa217b8d726b00d00511ffe0a9"
+    },
+    {
+      "path": "tools/source-values.mts",
+      "sha256": "6a762b3bee9132c09f0d596616c7e1dbe42702df1cf9bd03227874c32dd8a532"
+    }
+  ],
+  "grid": {
+    "corners": [
+      [
+        62,
+        15.5
+      ],
+      [
+        518,
+        18
+      ],
+      [
+        516,
+        247.5
+      ],
+      [
+        61.5,
+        244.5
+      ]
+    ],
+    "checks": [
+      {
+        "longitude": 90,
+        "latitude": 90,
+        "axis": "sample",
+        "predicted": 176,
+        "measured": 176,
+        "residual": 0
+      },
+      {
+        "longitude": 90,
+        "latitude": -90,
+        "axis": "sample",
+        "predicted": 175.125,
+        "measured": 176,
+        "residual": 0.875
+      },
+      {
+        "longitude": 180,
+        "latitude": 90,
+        "axis": "sample",
+        "predicted": 290,
+        "measured": 289,
+        "residual": -1
+      },
+      {
+        "longitude": 180,
+        "latitude": -90,
+        "axis": "sample",
+        "predicted": 288.75,
+        "measured": 288,
+        "residual": -0.75
+      },
+      {
+        "longitude": 270,
+        "latitude": 90,
+        "axis": "sample",
+        "predicted": 404,
+        "measured": 403,
+        "residual": -1
+      },
+      {
+        "longitude": 270,
+        "latitude": -90,
+        "axis": "sample",
+        "predicted": 402.375,
+        "measured": 401,
+        "residual": -1.375
+      },
+      {
+        "longitude": 0,
+        "latitude": 0,
+        "axis": "line",
+        "predicted": 130,
+        "measured": 130,
+        "residual": 0
+      },
+      {
+        "longitude": 360,
+        "latitude": 0,
+        "axis": "line",
+        "predicted": 132.75,
+        "measured": 133,
+        "residual": 0.25
+      }
+    ],
+    "rmsPixels": 0.8125,
+    "maximumPixels": 1.375,
+    "interpretation": "Agreement checks printed plot digitization only. It does not establish the latitude definition, reference shape, geographic accuracy or photographic coverage."
+  },
+  "fixedPose": {
+    "pose": [
+      -27.1875,
+      203.03125,
+      243.8125,
+      191.75625,
+      220.10625
+    ],
+    "axesMetres": [
+      800,
+      700,
+      600
+    ],
+    "rangeKm": 3887,
+    "patchHalfSpanDegrees": 8,
+    "patchStepDegrees": 2,
+    "searchRadiusNativePixels": 4,
+    "searchStepNativePixels": 0.25,
+    "patches": [
+      {
+        "longitude": 140,
+        "latitude": -20,
+        "unshiftedCorrelation": -0.2934331971871859,
+        "best": {
+          "dx": 3,
+          "dy": 1,
+          "correlation": 0.8238184842368669
+        },
+        "alternative": {
+          "dx": 4,
+          "dy": 2.25,
+          "correlation": 0.7027766817450174
+        },
+        "shiftPixels": 3.1622776601683795,
+        "atSearchBoundary": false
+      },
+      {
+        "longitude": 170,
+        "latitude": -20,
+        "unshiftedCorrelation": 0.6005733223763804,
+        "best": {
+          "dx": 1.25,
+          "dy": 3,
+          "correlation": 0.9444724113989992
+        },
+        "alternative": {
+          "dx": 0.75,
+          "dy": 1.5,
+          "correlation": 0.8596691054382494
+        },
+        "shiftPixels": 3.25,
+        "atSearchBoundary": false
+      },
+      {
+        "longitude": 200,
+        "latitude": -20,
+        "unshiftedCorrelation": 0.35384562975641964,
+        "best": {
+          "dx": 0,
+          "dy": 2.25,
+          "correlation": 0.8585611350351127
+        },
+        "alternative": {
+          "dx": -1,
+          "dy": 3.5,
+          "correlation": 0.7763035252646012
+        },
+        "shiftPixels": 2.25,
+        "atSearchBoundary": false
+      },
+      {
+        "longitude": 140,
+        "latitude": 10,
+        "unshiftedCorrelation": 0.4808469857594443,
+        "best": {
+          "dx": -2.5,
+          "dy": -2.25,
+          "correlation": 0.7610005587512123
+        },
+        "alternative": {
+          "dx": -2,
+          "dy": -3.75,
+          "correlation": 0.7385178568891201
+        },
+        "shiftPixels": 3.363406011768428,
+        "atSearchBoundary": false
+      },
+      {
+        "longitude": 170,
+        "latitude": 10,
+        "unshiftedCorrelation": 0.33493570906728365,
+        "best": {
+          "dx": 2.5,
+          "dy": 4,
+          "correlation": 0.9052897659184291
+        },
+        "alternative": {
+          "dx": 3.5,
+          "dy": 2.75,
+          "correlation": 0.8032968432333077
+        },
+        "shiftPixels": 4.716990566028302,
+        "atSearchBoundary": true
+      },
+      {
+        "longitude": 200,
+        "latitude": 10,
+        "unshiftedCorrelation": -0.26176562926479624,
+        "best": {
+          "dx": 1.5,
+          "dy": 3.5,
+          "correlation": 0.9159271914855527
+        },
+        "alternative": {
+          "dx": 1.75,
+          "dy": 2,
+          "correlation": 0.8958424286948027
+        },
+        "shiftPixels": 3.8078865529319543,
+        "atSearchBoundary": false
+      }
+    ],
+    "interpretation": "Six non-overlapping windows on the printed map, 81 interpolated samples each, not 81 independent detector measurements. The earlier camera is fixed. Local shifts diagnose disagreement; they are not fitted controls or permission to warp a texture. Some competing correlation peaks are nearly equal, and one maximum reaches the search boundary. The map was inspected in earlier development; this is corroboration, not a fresh blind holdout."
+  },
+  "limits": [
+    "The paper shows a non-ellipsoidal shape but does not identify the numeric model or latitude definition behind Figure 10.",
+    "This check tests the existing planetocentric ellipsoid hypothesis; it does not silently establish that hypothesis as the producer convention.",
+    "Source brightness is used only for correlation, never as a photographic-validity mask.",
+    "Publisher figure reuse and image-to-surface transfer are separate unresolved decisions. No figure pixels or new surface assets are written."
+  ]
+}

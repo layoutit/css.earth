@@ -1,0 +1,136 @@
+{
+  "checkedDate": "2026-09-14",
+  "scope": "A bounded additional-source sample, not an exhaustive PDS inventory. These files were retrieved and inspected but are not inputs to the published fit. Original external bytes are identified by URL and hash; paper prose and figures are not redistributed.",
+  "adjacentFrames": [
+    {
+      "id": "2178",
+      "files": [
+        {
+          "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2178r.img",
+          "expectedBytes": 809000,
+          "expectedSha256": "6f9187046700b23a3002f4b659922fc44f5b0dd0af3d0862a1e895b97c0675c0"
+        },
+        {
+          "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2178r.lbl",
+          "expectedBytes": 11760,
+          "expectedSha256": "8e0e089ccad7aae77b8b80bd86d172a305f34eb11daf221cd21e9619c3c573fd"
+        }
+      ],
+      "inspection": "Decoded original 800 by 800 VICAR and inspected the full detector with times-two DN display gain. No extra resolved Dactyl disk identified in this sampled frame.",
+      "contents": "Mostly dark sky with detector/readout line artifacts."
+    },
+    {
+      "id": "2300",
+      "files": [
+        {
+          "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2300r.img",
+          "expectedBytes": 806000,
+          "expectedSha256": "c93f6e9d755963a263682c34074a92142afc71e98b19c85e1b73ae58f9683f4f"
+        },
+        {
+          "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2300r.lbl",
+          "expectedBytes": 11760,
+          "expectedSha256": "79d587359589c41bd33f6efe959c65564b99d0f6ff08f5688a81747b3c9e2843"
+        }
+      ],
+      "inspection": "Decoded original 800 by 800 VICAR and inspected the full detector with times-two DN display gain. No extra resolved Dactyl disk identified in this sampled frame.",
+      "contents": "Large partial Ida limb; not Dactyl."
+    },
+    {
+      "id": "2378",
+      "files": [
+        {
+          "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2378r.img",
+          "expectedBytes": 810000,
+          "expectedSha256": "beee5f1a63b5bd13b8057ff64fb9eb31a70f2baf4370e76a28b841e3cce9f979"
+        },
+        {
+          "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2378r.lbl",
+          "expectedBytes": 11760,
+          "expectedSha256": "a096fc629d797fa778596a2a6f19ce73b26578852409cd8ac22ee80fa4b9c2bb"
+        }
+      ],
+      "inspection": "Decoded original 800 by 800 VICAR and inspected the full detector with times-two DN display gain. No extra resolved Dactyl disk identified in this sampled frame.",
+      "contents": "Mostly dark sky with detector/readout line artifacts."
+    },
+    {
+      "id": "2452",
+      "files": [
+        {
+          "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2452r.img",
+          "expectedBytes": 809000,
+          "expectedSha256": "c60985fd336c749cad1cb27275d8f0a047c594207a397c6dd00788306c838de0"
+        },
+        {
+          "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2452r.lbl",
+          "expectedBytes": 11760,
+          "expectedSha256": "dac8d2a53e62089c03909a50a8e101b930640d92b107ce8a9bdf85e4bb22359a"
+        }
+      ],
+      "inspection": "Decoded original 800 by 800 VICAR and inspected the full detector with times-two DN display gain. No extra resolved Dactyl disk identified in this sampled frame.",
+      "contents": "Mostly dark sky with detector/readout line artifacts."
+    },
+    {
+      "id": "2600",
+      "files": [
+        {
+          "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2600r.img",
+          "expectedBytes": 809000,
+          "expectedSha256": "98e61babf9594d28165ec0b3058dc2cfd1e90fd13ece954d17d3a67adb06635c"
+        },
+        {
+          "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2600r.lbl",
+          "expectedBytes": 11760,
+          "expectedSha256": "9e052dbd250dcf39810132025171f63727b91cef6b5f58f15f63efb0eddcce2d"
+        }
+      ],
+      "inspection": "Decoded original 800 by 800 VICAR and inspected the full detector with times-two DN display gain. No extra resolved Dactyl disk identified in this sampled frame.",
+      "contents": "Mostly dark sky with detector/readout line artifacts."
+    }
+  ],
+  "papers": [
+    {
+      "title": "Galileo’s Encounter with 243 Ida: An Overview of the Imaging Experiment",
+      "doi": "10.1006/icar.1996.0032",
+      "url": "https://pdfs.semanticscholar.org/7447/7d51bd8b602c20870f7006fa6f71a379e1d5.pdf",
+      "expectedBytes": 865965,
+      "expectedSha256": "0328085d194577e6c61e9edddb6d21ba064a0c4e4713af438b79d7066bf8df78",
+      "examined": "Relevant narrative plus visually inspected complete Table I (page 3), Table IIA (pages 5–7), Table III (page 14). This is not a close reading of every page.",
+      "finding": "Table III explicitly gives east longitudes: Acmon -39/138, Celmis -46/220 degrees. Table IIA values match Ida geometry, not a Dactyl body-frame solution. Table I gives Dactyl spin >8 hours, rather than a unique pole/phase."
+    },
+    {
+      "title": "Discovery of a satellite of the asteroid 243 Ida and its physical properties",
+      "url": "https://www2.boulder.swri.edu/~cchapman/dactyl.ps",
+      "expectedBytes": 70525,
+      "expectedSha256": "ae7114900b3e003c1e5c59842d63100a2651fb2aef79e97f8ab254912a4a38b2",
+      "examined": "Author preprint text; illustrations were not available in this PostScript copy.",
+      "finding": "Published ellipsoid dimensions, long axis within about 15 degrees of Ida and spin period greater than about 8 hours constrain orientation without specifying a measured full body frame."
+    },
+    {
+      "title": "Ida and Dactyl: Spectral Reflectance and Color Variations",
+      "doi": "10.1006/icar.1996.0037",
+      "url": "https://pdfs.semanticscholar.org/2105/a100f44eb66aa7868dcbf4c52f3b7671d2c0.pdf",
+      "examined": "All eleven pages, figures and the filter table.",
+      "finding": "Dactyl is represented by disk-averaged spectra; mapped figures are Ida. No Dactyl observation-specific body frame or distributed surface controls are provided.",
+      "expectedBytes": 525919,
+      "expectedSha256": "a8ccf2fa077bd6dcf3fabc44af88d1495f8e1952e90aae5aae61f17e55530d3d"
+    },
+    {
+      "title": "Photogrammetric Evaluation of Galileo SSI Ida Images: Preliminary Results",
+      "url": "https://www.lpi.usra.edu/meetings/lpsc1995/pdf/1535.pdf",
+      "examined": "Extracted text of both pages, including the methods, Ida results and Ida satellite paragraph; no numerical controls were transcribed from figures.",
+      "finding": "The 96-point network and more than 5000 matched points are on Ida. The Dactyl paragraph proposes deriving an ephemeris; it does not provide Dactyl surface controls or a body-frame camera.",
+      "expectedBytes": 545374,
+      "expectedSha256": "50b6ace511ec6b2cd5933c7bc9ab9f0980378496e5fae47968c458860bb7f62f"
+    }
+  ],
+  "additionalKernels": [
+    {
+      "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "examined": "File introduction/body inventory and full-file searches for Dactyl and 2431011.",
+      "finding": "No Dactyl record in this generic PCK; this is a file-specific exclusion, not an archive-wide claim."
+    }
+  ]
+}
