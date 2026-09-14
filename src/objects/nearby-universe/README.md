@@ -1,38 +1,67 @@
-# Nearby galaxy field
+# Nearby Universe galaxy field
 
-The retained renderer displays 1,800 catalogue positions in eight CSS shadow batches and 160 prepared galaxy-count clouds. Clouds describe concentrations of catalogue entries, not gas or measured mass density. No generated images or catalogues are committed.
+A sparse view of galaxies between 3 and 200 Mpc. The 1,800 points preserve
+catalogue positions; 160 faint clouds show concentrations of catalogue entries.
+The clouds are **not gas or measured mass density**. Colors, exposure and
+sampling are authored display choices; no measured luminosities are imported.
 
-## Scientific inputs
+## Sources
 
-All three input tables are downloaded directly from CDS/VizieR. `source/catalogue.json` records the ADQL queries, table identities, response hashes, row counts and download URLs.
-
-| Input | Use |
+| Source | Measurement used |
 | --- | --- |
-| [Cosmicflows-4, Tully et al. (2023), J/ApJ/944/94/table2](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) | Equatorial coordinates and individual distance moduli for 55,877 galaxies. |
-| [HYPERLEDA I, Paturel et al. (2003), VII/237/pgc](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237) | The 50,000 largest angular-diameter catalogue entries; coordinates, PGC identities and morphology. |
-| [HYPERLEDA II, Paturel et al. (2003), VII/238/hidat](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/238) | HI radial velocities for fallback distance estimates. |
+| [Cosmicflows-4 — Tully et al. (2023)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) | Table 2: 55,877 galaxy identities, J2000 coordinates and individual distance moduli. |
+| [HyperLEDA I — Paturel et al. (2003)](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237) | PGC identities, J2000 coordinates, morphology and angular diameter; retain the largest 50,000 by diameter. |
+| [HyperLEDA II — Paturel et al. (2003)](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/238) | Positive HI radial velocities for fallback distance estimates. |
 
-Join by PGC identity. CF4 distance is `10^((DM−25)/5)` Mpc. Otherwise use positive `VHI/70` Mpc; this Hubble-law estimate has no peculiar-velocity correction. Convert equatorial coordinates to Cartesian positions without an extra rotation. Only positions between 3 and 200 Mpc enter this field. The existing Local Group catalogue supplies nearby detailed objects independently.
+[Manifest](source/manifest.json) binds the downloaded bytes and authored
+records to canonical published sources. [Acquisition pins](source/catalogue.json)
+retain exact ADQL queries, URLs, row counts and hashes. These are CDS-distributed
+catalogue inputs, not a borrowed application catalogue. Original source terms
+apply; no blanket redistribution license is established. Downloads stay ignored.
+See the [investigation ledger](investigations.json) for selected and rejected work.
 
-No measured luminosities are imported. Point exposure, morphology colors, count-cloud smoothing and the denser-region sampling preference are authored visualization choices. Selection effects and survey gaps must not be interpreted as real cosmic voids. Source terms remain those of the original tables; CDS/VizieR is the distributor.
+## Evidence
 
-## Reproduce locally
+The [contract conversion comparison](evidence/contract-reproduction.json)
+records exact equality of frame, point and cloud data against PR #215's initial
+commit. A prior cold-cache acquisition reproduced the two runtime assets
+byte-for-byte; it is an acquisition/reproduction check, not scientific acceptance.
 
-From a clean checkout:
+[Context provenance tests](../../../tools/context-provenance.test.mts) verify
+output and inventory pins and reject changed bytes.
+[Catalogue tests](../../../tools/galaxy-field/catalogue.test.mts) check distance
+modulus scale and Cartesian axes. Runtime setup tests exercise installation,
+verified reuse, manifest mirrors and unsafe paths. The renderer uses 170 field
+elements; that bound does not prove a frame rate.
 
-```sh
-pnpm install
-pnpm prepare:galaxy-field
-pnpm dev
-```
+## Known problems
 
-Installation, development startup and production builds run the same bake.
-Acquisition downloads missing CDS tables and verifies cached responses against
-pinned hashes. Inputs live in `.local/galaxy-field/sources`; generated runtime
-assets live in this object's ignored `prepared/` directory. Vite publishes the
-point manifest and shared cloud texture as hashed production assets. Neither
-source downloads nor generated images need to be committed.
+The display is neither a complete galaxy survey nor a map of the observable
+universe. Selection effects and gaps cannot establish cosmic voids. Hubble-law
+fallback distances have no peculiar-velocity correction; uncertainty is not
+shown. Morphology colors are illustrative. No calibrated brightness or mass
+interpretation, native-image fidelity or measured performance claim is made.
 
-## Experiment outcome
+<details>
+<summary>Preparation and delivery</summary>
 
-The rejected XYZ, multi-direction image planes and spatial-chunk experiments were removed from the Nebula Lab. At near-field zoom they introduced visible depth quantization, crossfade disagreement or diffuse point cores. The retained approach projects actual point positions, with prepared covariance clouds behind them. The 170-element count is a DOM bound, not a guarantee of GPU paint cost or frame rate.
+The [recipe](source/preparation/field.json) owns sampling, covariance fitting and
+texture settings. Preparation joins PGC identities, uses `10^((DM−25)/5)` Mpc
+when a CF4 modulus exists, and otherwise positive `VHI/H0`, with H0 declared in
+the recipe. Coordinates are equatorial Cartesian axes in `sun-icrf`; the shared
+navigation epoch tags static context and does not imply a measurement epoch.
+
+The standard descriptor binds the prepared field hash. Generated provenance
+uses the shared object-lineage schema. Identical root and prepared runtime
+inventories list every delivered field and presentation asset. Shared setup
+can install this resource explicitly; the bake restores it from scientific
+inputs without requiring published runtime mirrors. Source publication and
+runtime publication are different operations.
+
+See the [shared setup guide](../../../README.md) for installation.
+
+`prepare:galaxy-field` acquires sources, bakes assets and regenerates provenance
+and source usage. Production builds use the same preparation. Generated images
+and source downloads are ignored. No additional scene or camera is mounted.
+
+</details>

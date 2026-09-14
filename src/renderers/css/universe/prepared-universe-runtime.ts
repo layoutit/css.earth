@@ -30,8 +30,8 @@ import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 // about five doubling wheel steps before the first slice is drawn.
 const GALAXY_PREFETCH_RATIO = 1 / 32;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], volumeLenses = [], backgroundPointManifest, backgroundPointCloud, environmentLinks, catalog, annotationPriorities, annotationOpacities, plannerSource }: {
-  backgroundPointManifest?: string; backgroundPointCloud?: string;
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], volumeLenses = [], backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, annotationPriorities, annotationOpacities, plannerSource }: {
+  backgroundPointManifest?: string; backgroundPointCloud?: string; backgroundPointSha256?: string;
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
   plannerSource?: WorldPlannerSource;
@@ -132,7 +132,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       volumeImage.style.transformStyle = 'flat';
       volumeHost.appendChild(volumeImage);
       const volumeEnd = document.createElement('span'); volumeEnd.hidden = true; volumeImage.appendChild(volumeEnd);
-      const additionalPoints = mountBackgroundPoints(root, end, backgroundPointManifest, backgroundPointCloud);
+      const additionalPoints = mountBackgroundPoints(root, end, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256);
       let volumeLayer: ReturnType<typeof mountPreparedCssVolume> | null = null;
       let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
       let spatial: ReturnType<typeof mountPreparedWorldContext> | null = null;

@@ -1,0 +1,37 @@
+{
+  "id": "lvdb-v1-1-1",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Local Volume Database v1.1.1",
+  "identifiers": [
+    {
+      "type": "release",
+      "value": "v1.1.1; 72dabf7862bf9e9f1cbf6846e8c1a684fdec904c"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://github.com/apace7/local_volume_database/releases/tag/v1.1.1",
+      "label": "Published release"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/source/provenance.json",
+      "revision": "e4dfae5485b0aeeb88485531387366e886f43ef4",
+      "sha256": "0295fed693904100c581ca1ab610ed86244cc8e96f43138db29da4c7115cb7f3",
+      "locator": "/"
+    }
+  ],
+  "publisher": "Andrew B. Pace",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Release identity transcribed from the retained source record; hashes identify the retained files separately.",
+      "scope": "release",
+      "evidence": "src/objects/local-group/source/provenance.json"
+    }
+  ]
+}

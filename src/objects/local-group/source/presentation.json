@@ -1,9 +1,76 @@
 {
-  "fadeStartDistanceM": 3.085677581491367e+19,
-  "fullDistanceM": 3.0856775814913674e+20,
+  "fadeStartDistanceM": 30856775814913670000,
+  "fullDistanceM": 308567758149136740000,
   "maximumDistanceM": 6.171355162982734e+24,
   "minimumDistanceRadii": 0.05,
-  "defaultFocusRadiusM": 1.5428387907456838e+19,
-  "metersPerParsec": 3.085677581491367e+16,
-  "note": "Navigation and label presentation, not measured galaxy structure. The 500 pc fallback is a camera framing radius used only when no measured half-light radius or prepared image bounds exist. The 200 Mpc shared camera limit covers the selected MCXC-II galaxy clusters; it is a navigation limit."
+  "defaultFocusRadiusM": 15428387907456838000,
+  "metersPerParsec": 30856775814913670,
+  "note": "Navigation and label presentation, not measured galaxy structure. The 500 pc fallback is a camera framing radius used only when no measured half-light radius or prepared image bounds exist. The 200 Mpc shared camera limit covers the selected MCXC-II galaxy clusters; it is a navigation limit.",
+  "provenance": {
+    "name": "Nearby galaxy catalogue",
+    "products": [
+      {
+        "id": "catalogue",
+        "label": "Local Volume Database v1.1.1",
+        "process": "Select eligible published rows, resolve membership and citations, and convert adopted angles and distances to Cartesian metres.",
+        "recipe": "source/catalogue.json",
+        "selector": "",
+        "inputs": [
+          "lvdb-v1.1.1",
+          "lvdb-author-inputs",
+          "lvdb-license",
+          "lvdb-bibliography",
+          "mcconnachie-table1-2019",
+          "mcconnachie-table1-text",
+          "mcconnachie-2021-audit",
+          "mcconnachie-2012-audit",
+          "mcconnachie-field-definitions",
+          "smc-distance-paper"
+        ],
+        "outputs": [
+          "prepared/catalogue.json"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Catalogue candidates remain candidates; the navigation epoch is not a measurement epoch."
+        ]
+      },
+      {
+        "id": "display-sample",
+        "label": "Sparse Local Group context sample",
+        "process": "Select at most 48 catalogue-only Local Group entries in 150 kpc cells weighted by square-root counts; preserve catalogue positions.",
+        "recipe": "source/presentation.json",
+        "selector": "/sampling",
+        "inputs": [
+          "lvdb-v1.1.1",
+          "lvdb-author-inputs",
+          "lvdb-license",
+          "lvdb-bibliography",
+          "mcconnachie-table1-2019",
+          "mcconnachie-table1-text",
+          "mcconnachie-2021-audit",
+          "mcconnachie-2012-audit",
+          "mcconnachie-field-definitions",
+          "smc-distance-paper"
+        ],
+        "outputs": [
+          "prepared/display-sample.json"
+        ],
+        "interpretation": {
+          "kind": "display-selection",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Illustrative display density is not mass density or catalogue completeness; all eligible catalogue subjects remain navigable."
+        ]
+      }
+    ]
+  },
+  "sampling": {
+    "budget": 48,
+    "cellSizeMpc": 0.15
+  }
 }

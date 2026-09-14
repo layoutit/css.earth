@@ -10,7 +10,7 @@
       "title": "Deepest, widest view of the Small Magellanic Cloud from SMASH",
       "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
       "displayCredit": "NSF's NOIRLab via AstroPix",
-      "acquisition": "publisher-curated AstroPix JPEG derivative",
+      "acquisition": "publisher-curated AstroPix JPEG derivative. The hash identifies the local JPEG bytes, not a calibrated native scientific array; acquisition details and provider product ID are retained in source/provenance.json.",
       "expectedSha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c",
       "expectedBytes": 4359408,
       "sourceBinding": {
@@ -25,7 +25,7 @@
       },
       "dependencies": [],
       "lensId": "optical",
-      "license": "CC-BY-4.0",
+      "license": "CC-BY-4.0; provider terms: https://noirlab.edu/public/copyright/. Retain the complete recorded credit.",
       "capture": {
         "attributions": [
           {
@@ -37,6 +37,52 @@
       }
     }
   ],
-  "documents": [],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/smc/source/recipe.json",
+      "expectedSha256": "fbe9ee025ef9935b0e037452281ff5acdc0a5e4316372aabb03c07dd41c6fbde",
+      "expectedBytes": 2880,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/smc/source/provenance.json",
+      "expectedSha256": "23ec5aaec69500bce667a2b37bd686fd9e235dbf7b6ecab6fca47428964f4505",
+      "expectedBytes": 1689,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/smc/source/presentation.json",
+      "expectedSha256": "0e78797226503ca2e90f1b2a2fedd2f4da23f4e9a923a5161911e3b74121c01e",
+      "expectedBytes": 2407,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
   "generatedIntermediates": []
 }
