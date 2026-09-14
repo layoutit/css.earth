@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="betulia"])[data-lod="billboard"] .betulia-scene, .planet-stage:where([data-object-id="betulia"])[data-lod="marker"] .betulia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="betulia"])[data-lod="marker"] .betulia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="betulia"]).betulia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

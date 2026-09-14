@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/alkeste/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'alkeste',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/alkeste/alkeste-directional-sun.webp",
-      "two": "/scenes/alkeste/alkeste-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/alkeste/alkeste-shape-surface@2x.webp"
   ],

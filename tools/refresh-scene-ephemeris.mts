@@ -27,7 +27,7 @@ for (const id of ids) {
   const config = parseTerrestrialProfile(JSON.parse(bytes.toString('utf8')));
   if(config.kind!=='solid-observation-body') throw new TypeError(`Expected a solid epoch source: ${id}`);
   const input = requireRecord(JSON.parse(await readFile(resolve(output, 'scene.json'), 'utf8')));
-  const scene={...input,bodyLeaves:requireArray(input.bodyLeaves),systemTransform:requireString(input.systemTransform),sky:validatePreparedCubicSky(input.sky,{requireSun:false}),sun:validateDirectionalSunPlan(input.sun)};
+  const scene={...input,bodyLeaves:requireArray(input.bodyLeaves),systemTransform:requireString(input.systemTransform),sky:validatePreparedCubicSky(input.sky),sun:validateDirectionalSunPlan(input.sun)};
   const definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(resolve(output, 'runtime.json'), 'utf8')));
   const next = await refreshSolidSceneEpoch({ config, scene, definition });
   for (const [name, value] of Object.entries({ scene: next.scene, runtime: next.definition, sky: next.scene.sky, sun: next.scene.sun })) {

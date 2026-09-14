@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="lucina"])[data-lod="billboard"] .lucina-scene, .planet-stage:where([data-object-id="lucina"])[data-lod="marker"] .lucina-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="lucina"])[data-lod="marker"] .lucina-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="lucina"]).lucina-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hygiea"])[data-lod="billboard"] .hygiea-scene, .planet-stage:where([data-object-id="hygiea"])[data-lod="marker"] .hygiea-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hygiea"])[data-lod="marker"] .hygiea-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hygiea"]).hygiea-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

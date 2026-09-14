@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/oenone/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'oenone',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/oenone/oenone-directional-sun.webp",
-      "two": "/scenes/oenone/oenone-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/oenone/oenone-shape-surface@2x.webp"
   ],

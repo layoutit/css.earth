@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/artemis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'artemis',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/artemis/artemis-directional-sun.webp",
-      "two": "/scenes/artemis/artemis-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/artemis/artemis-shape-surface@2x.webp"
   ],

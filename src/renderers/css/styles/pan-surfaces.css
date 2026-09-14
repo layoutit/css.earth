@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="pan"])[data-lod="billboard"] .pan-scene, .planet-stage:where([data-object-id="pan"])[data-lod="marker"] .pan-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="pan"])[data-lod="marker"] .pan-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="pan"]).pan-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

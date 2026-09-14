@@ -47,7 +47,6 @@ test("Charon is prepared by the generic raster lane with the source-radius spher
   // The composite material is a separate silhouette-fitted root, never a plane inside the scene.
   assert.ok(runtimeDefinition.tree.nodes.some(node => node.className?.includes("charon-material-composite")));
   assert.ok(runtimeDefinition.viewBindings.some(binding => binding.kind === "silhouette-fit"));
-  assert.equal(runtimeDefinition.heliocentricView.plan.orbit.centerBodyId, "pluto", "the orbit still surrounds the parent while the Sun keeps its own position");
 });
 
 test("Charon lenses keep their prepared legends and false-colour declarations", () => {

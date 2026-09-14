@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="palma"])[data-lod="billboard"] .palma-scene, .planet-stage:where([data-object-id="palma"])[data-lod="marker"] .palma-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="palma"])[data-lod="marker"] .palma-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="palma"]).palma-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

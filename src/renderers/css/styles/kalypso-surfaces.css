@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="kalypso"])[data-lod="billboard"] .kalypso-scene, .planet-stage:where([data-object-id="kalypso"])[data-lod="marker"] .kalypso-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="kalypso"])[data-lod="marker"] .kalypso-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="kalypso"]).kalypso-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

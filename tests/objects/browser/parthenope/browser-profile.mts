@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/parthenope/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'parthenope',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/parthenope/parthenope-directional-sun.webp",
-      "two": "/scenes/parthenope/parthenope-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/parthenope/parthenope-shape-surface@2x.webp"
   ],

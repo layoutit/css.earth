@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/euterpe/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'euterpe',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/euterpe/euterpe-directional-sun.webp",
-      "two": "/scenes/euterpe/euterpe-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/euterpe/euterpe-shape-surface@2x.webp"
   ],

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="oumuamua"])[data-lod="billboard"] .oumuamua-scene, .planet-stage:where([data-object-id="oumuamua"])[data-lod="marker"] .oumuamua-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="oumuamua"])[data-lod="marker"] .oumuamua-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="oumuamua"]).oumuamua-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

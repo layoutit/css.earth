@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="flora"])[data-lod="billboard"] .flora-scene, .planet-stage:where([data-object-id="flora"])[data-lod="marker"] .flora-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="flora"])[data-lod="marker"] .flora-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="flora"]).flora-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

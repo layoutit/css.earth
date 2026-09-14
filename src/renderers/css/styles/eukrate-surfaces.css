@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="eukrate"])[data-lod="billboard"] .eukrate-scene, .planet-stage:where([data-object-id="eukrate"])[data-lod="marker"] .eukrate-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="eukrate"])[data-lod="marker"] .eukrate-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="eukrate"]).eukrate-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

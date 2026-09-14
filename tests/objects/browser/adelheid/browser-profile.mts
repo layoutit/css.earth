@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/adelheid/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'adelheid',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/adelheid/adelheid-directional-sun.webp",
-      "two": "/scenes/adelheid/adelheid-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/adelheid/adelheid-shape-surface@2x.webp"
   ],

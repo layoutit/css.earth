@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/sapientia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'sapientia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/sapientia/sapientia-directional-sun.webp",
-      "two": "/scenes/sapientia/sapientia-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/sapientia/sapientia-shape-surface@2x.webp"
   ],

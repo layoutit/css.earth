@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/eva/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'eva',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/eva/eva-directional-sun.webp",
-      "two": "/scenes/eva/eva-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/eva/eva-shape-surface@2x.webp"
   ],

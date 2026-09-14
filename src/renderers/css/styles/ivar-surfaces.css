@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ivar"])[data-lod="billboard"] .ivar-scene, .planet-stage:where([data-object-id="ivar"])[data-lod="marker"] .ivar-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ivar"])[data-lod="marker"] .ivar-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ivar"]).ivar-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

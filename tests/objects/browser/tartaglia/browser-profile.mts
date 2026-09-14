@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/tartaglia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'tartaglia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/tartaglia/tartaglia-directional-sun.webp",
-      "two": "/scenes/tartaglia/tartaglia-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/tartaglia/tartaglia-shape-surface@2x.webp"
   ],

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="gallia"])[data-lod="billboard"] .gallia-scene, .planet-stage:where([data-object-id="gallia"])[data-lod="marker"] .gallia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="gallia"])[data-lod="marker"] .gallia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="gallia"]).gallia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

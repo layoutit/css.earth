@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/eurynome/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'eurynome',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/eurynome/eurynome-directional-sun.webp",
-      "two": "/scenes/eurynome/eurynome-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/eurynome/eurynome-shape-surface@2x.webp"
   ],

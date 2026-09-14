@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="una"])[data-lod="billboard"] .una-scene, .planet-stage:where([data-object-id="una"])[data-lod="marker"] .una-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="una"])[data-lod="marker"] .una-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="una"]).una-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

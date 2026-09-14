@@ -13,7 +13,6 @@ import { OBJECTS } from '../site/objects.mts';
 import { authoredObject } from './authored-object.mts';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 import { writePreparedText } from './write-prepared-text.mts';
-import { prepareMarkerBindings } from './prepare-marker-bindings.mts';
 import { sharedTwinName } from '../src/platform/prepared-shared.mts';
 import { syncPreparedShared } from '../src/platform/prepared-shared-banks.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
@@ -44,7 +43,6 @@ export async function writeObjectJson(id:string, definitionValue:unknown, option
   }
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./objects/dist/prepare-world-navigation.js');
   const objectDirectory = resolve(root, 'src/objects', id);
-  definition = prepareMarkerBindings(definition);
   const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot: root });
   definition = requireObjectRuntimeDefinition(preparedNavigation.definition);
   definition = await preparePresentationBindings(definition, root, options);

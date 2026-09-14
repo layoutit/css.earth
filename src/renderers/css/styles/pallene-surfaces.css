@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="pallene"])[data-lod="billboard"] .pallene-scene, .planet-stage:where([data-object-id="pallene"])[data-lod="marker"] .pallene-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="pallene"])[data-lod="marker"] .pallene-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="pallene"]).pallene-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

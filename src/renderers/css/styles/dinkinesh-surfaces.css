@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="dinkinesh"])[data-lod="billboard"] .dinkinesh-scene, .planet-stage:where([data-object-id="dinkinesh"])[data-lod="marker"] .dinkinesh-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="dinkinesh"])[data-lod="marker"] .dinkinesh-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="dinkinesh"]).dinkinesh-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

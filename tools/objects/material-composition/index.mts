@@ -19,7 +19,7 @@ import sharp from 'sharp';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
 import {prepareRuntimeAssetManifest} from '../../../src/platform/runtime-asset-closure.mts';
 import {requirePreparedPresentation} from '../../../src/platform/prepared-presentation-contract.mts';
-import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD,CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD} from '../../../src/platform/cubic-sky-contract.mts';
+import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../src/platform/cubic-sky-contract.mts';
 import {preparePlanetCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
 import {preparePlanetDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
 import {prepareMaterialTracks} from '../../prepare-materials.mts';
@@ -30,8 +30,7 @@ import {prepareRadialMotionAndShadow} from './radial-motion.mts';
 import {prepareSpectralMaterialVariants} from './spectral-variants.mts';
 import {prepareLayeredLeafLayouts} from './leaf-layouts.mts';
 import {prepareLayeredOblatePresentation} from './presentation.mts';
-import {appendFocusedHeliocentricPresentation, prepareFocusedHeliocentricPresentation} from '../focused-heliocentric.mts';
-import {validatePreparedCubicSky} from '../../../src/platform/cubic-sky-contract.mts';
+import {withFocusedCamera} from '../focused-camera.mts';
 
 const hash=(bytes:string|Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 const json=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
@@ -57,9 +56,9 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   }
   const requiredSource=(id:string)=>{const source=sources.get(id);if(!source)throw new TypeError(`Layered preparation requires ${id}.`);return source;};
   const required=(id:string)=>requiredSource(id).value;
-  const geometry=parse(required('geometry'),layeredRecipe,'layered geometry'),surface=parse(required('surface'),spectralRecipe,'spectral material'),materials=parse(required('materials'),cutawayRecipe,'cutaway material'),radialMotion=parse(required('radial-motion'),radialMotionRecipe,'radial motion'),rings=parseRadialLayerRecipe(required('rings')),presentationConfig=parse(required('presentation'),layeredPresentationRecipe,'layered presentation'),celestial=shape({id:text,includeSun:boolean,directionalSun:shape({meanHeliocentricDistanceAu:number})})(required('celestial'));
+  const geometry=parse(required('geometry'),layeredRecipe,'layered geometry'),surface=parse(required('surface'),spectralRecipe,'spectral material'),materials=parse(required('materials'),cutawayRecipe,'cutaway material'),radialMotion=parse(required('radial-motion'),radialMotionRecipe,'radial motion'),rings=parseRadialLayerRecipe(required('rings')),presentationConfig=parse(required('presentation'),layeredPresentationRecipe,'layered presentation');
   const contentSource=shape({displayName:text,lenses:shape({controls:array(shape({id:text}))})})(required('content'));
-  if(!isLayeredOblateRecipe(geometry)||[geometry,surface,materials,radialMotion,presentationConfig].some(config=>config.namespace!==descriptor.id)||celestial.id!==descriptor.id)throw new TypeError('Authored capability identity differs.');
+  if(!isLayeredOblateRecipe(geometry)||[geometry,surface,materials,radialMotion,presentationConfig].some(config=>config.namespace!==descriptor.id))throw new TypeError('Authored capability identity differs.');
   if(descriptor.recipe.shape.kind!=='ellipsoid')throw new TypeError('Layered oblate preparation requires an ellipsoid.');
   if(descriptor.recipe.shape.radiusKm!==geometry.parameters.objectEquatorialRadiusKm||descriptor.recipe.shape.polarRadiusKm!==geometry.parameters.objectPolarRadiusKm)throw new TypeError('Authored ellipsoid shape differs from pinned preparation facts.');
   if(descriptor.recipe.shape.kind!=='ellipsoid'||!descriptor.recipe.rings||!descriptor.recipe.cutaway)throw new TypeError('Layered oblate preparation requires declared ellipsoid, radial layer, and cutaway capabilities.');
@@ -79,9 +78,8 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const compiler=await createLayeredOblatePreparation({...context,config:geometry,preparedInputs:{...radial,lenses:materialLenses,views}});
   const material=await compiler.composeMaterialSurfaces(metadata);
   const {runtimeScene:scene}=await compiler.prepareLayeredScene(material);
-  const ensureDirectories=()=>mkdir(publicDirectory,{recursive:true});
-  const sky=await preparePlanetCubicSky({objectId:descriptor.id,sourceRoot:sourceDirectory,publicRoot:publicDirectory,ensureDirectories,validateSourceGroup:consumer=>sourceManifest.validateGroup(consumer),includeSun:celestial.includeSun,cameraContract:CUBIC_SKY_CAMERA_PRESENTATION_STANDARD,pointSourceContract:CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD,writeModule:false});
-  const sun=await preparePlanetDirectionalSun({objectId:descriptor.id,publicRoot:publicDirectory,ensureDirectories,...celestial.directionalSun,writeModule:false});
+  const sky=preparePlanetCubicSky({objectId:descriptor.id,cameraContract:CUBIC_SKY_CAMERA_PRESENTATION_STANDARD});
+  const sun=preparePlanetDirectionalSun();
   const contentResult=await prepareContent({sourceDirectory,publicDirectory,outputDirectory,config:{contentPath:relative(sourceDirectory,requiredSource('content').path)}});
   const {controls,content}=contentResult;
   const projectRoot=resolve(objectRoot,'../../..'),stylesheetPath=resolve(projectRoot,presentationConfig.stylesheet.path);
@@ -90,10 +88,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const layouts=prepareLayeredLeafLayouts({scene,stylesheet,config:presentationConfig});
   const raw=await prepareLayeredOblatePresentation({publicDirectory,config:presentationConfig,plan:scene,layouts,lenses:materialLenses,views,sky,sun});
   const normalizedPresentation={...raw,materials:prepareMaterialTracks(raw),variants:raw.variants.map(variant=>({...variant,materials:variant.materials.map(material=>({...material,mode:material.mode==='default-pose'?'frames':material.mode}))}))};
-  const focus=await prepareFocusedHeliocentricPresentation({bodyId:descriptor.id,publicDirectory,publicBase:`/scenes/${descriptor.id}/`,
-    bodyRadiusUnits:scene.fixedMaterialPlane.interactionProjection.equatorialRadius,
-    bodyRadiusKilometers:descriptor.recipe.shape.radiusKm,sky:validatePreparedCubicSky(sky,{requireSun:false}),sun});
-  const presentation=appendFocusedHeliocentricPresentation(normalizedPresentation,focus);
+  const presentation=withFocusedCamera(normalizedPresentation,sky);
   requirePreparedPresentation(presentation,{controls});
   const definition={...presentation,schema:'cssearth-object-runtime@4',id:descriptor.id,controls};
   // Only consumer-used scene data is published. Dormant moon/orbit generators,

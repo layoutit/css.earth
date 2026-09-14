@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="reinmuthia"])[data-lod="billboard"] .reinmuthia-scene, .planet-stage:where([data-object-id="reinmuthia"])[data-lod="marker"] .reinmuthia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="reinmuthia"])[data-lod="marker"] .reinmuthia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="reinmuthia"]).reinmuthia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

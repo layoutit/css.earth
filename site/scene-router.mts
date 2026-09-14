@@ -196,7 +196,7 @@ export function createSceneRouter({
       mount = loaded.value(stage, {
         ...handoff?.mountOptions,
         deferTextureRefinement: true,
-        ...(worldContextMount ? { externalWorldContext: true, viewport: worldContextMount.viewport } : {}),
+        ...(worldContextMount ? { viewport: worldContextMount.viewport } : {}),
         ...(framePresenter ? { framePresenter } : {}),
         onMotionRequest: requestMotion,
         onError(error) {

@@ -35,8 +35,8 @@ test("binds the exact Sun source and runtime closures", async () => {
   assert.deepEqual(await source.verify(), { inputCount: 45, generatedIntermediateCount: 0, documentCount: 3 });
   const runtime = JSON.parse(await readFile(new URL("../../../../src/objects/sun/runtime-assets.json", import.meta.url), "utf8"));
   assert.equal(validateRuntimeAssetManifest("sun", runtime), true);
-  // 4 lenses x (surface, poles, corona, limb) x 2 densities + 4 thumbnails + 24 starfield faces + 2 system marker strips.
-  assert.equal(runtime.assets.length, 62);
+  // 4 lenses x (surface, poles, corona, limb) x 2 densities + 4 thumbnails.
+  assert.equal(runtime.assets.length, 36);
 });
 
 test("Sun's actual import closure has only shared runtime owners", async () => {
@@ -73,7 +73,6 @@ test("Sun is prepared by the generic raster lane as an emissive sphere with flat
   assert.equal(runtimeDefinition.sun, null);
   assert.equal(runtimeDefinition.sky.sun, undefined);
   assert.deepEqual(runtimeDefinition.materials, []);
-  assert.equal(runtimeDefinition.heliocentricView, undefined);
   assert.equal(runtimeDefinition.tree.nodes.some(node => node.className?.includes("sun-material-composite")), false);
   for (const layer of ["corona", "limb"]) assert.ok(runtimeDefinition.tree.nodes.some(node => node.className === `sun-${layer}-layer planet-render-root`));
   assert.equal(runtimeDefinition.viewBindings.filter(binding => binding.kind === "silhouette-fit").length, 2);

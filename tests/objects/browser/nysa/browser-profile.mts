@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/nysa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'nysa',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/nysa/nysa-directional-sun.webp",
-      "two": "/scenes/nysa/nysa-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/nysa/nysa-shape-surface@2x.webp"
   ],

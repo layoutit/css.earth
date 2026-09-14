@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="eva"])[data-lod="billboard"] .eva-scene, .planet-stage:where([data-object-id="eva"])[data-lod="marker"] .eva-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="eva"])[data-lod="marker"] .eva-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="eva"]).eva-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

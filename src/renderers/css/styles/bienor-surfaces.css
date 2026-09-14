@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bienor"])[data-lod="billboard"] .bienor-scene, .planet-stage:where([data-object-id="bienor"])[data-lod="marker"] .bienor-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bienor"])[data-lod="marker"] .bienor-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bienor"]).bienor-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

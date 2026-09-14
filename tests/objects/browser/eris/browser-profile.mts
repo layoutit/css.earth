@@ -9,8 +9,7 @@ export const browserProfile = createObjectBrowserProfile({
       Object.freeze({ one: "/scenes/eris/eris-illustration.webp", two: "/scenes/eris/eris-illustration@2x.webp" }),
       Object.freeze({ one: "/scenes/eris/eris-poles-illustration.webp", two: "/scenes/eris/eris-poles-illustration@2x.webp" }),
       Object.freeze({ one: "/scenes/eris/eris-starfield-front.webp", two: "/scenes/eris/eris-starfield-front@2x.webp" }),
-      Object.freeze({ one: "/scenes/eris/eris-directional-sun.webp", two: "/scenes/eris/eris-directional-sun@2x.webp" }),
-    ]),
+      ]),
     retained: Object.freeze({
       lensIds: Object.freeze(["illustration"]),
       allowedMountSelectors: Object.freeze([]),

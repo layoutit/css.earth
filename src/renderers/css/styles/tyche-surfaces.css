@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="tyche"])[data-lod="billboard"] .tyche-scene, .planet-stage:where([data-object-id="tyche"])[data-lod="marker"] .tyche-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="tyche"])[data-lod="marker"] .tyche-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="tyche"]).tyche-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

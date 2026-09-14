@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="clementina"])[data-lod="billboard"] .clementina-scene, .planet-stage:where([data-object-id="clementina"])[data-lod="marker"] .clementina-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="clementina"])[data-lod="marker"] .clementina-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="clementina"]).clementina-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/leto/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'leto',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/leto/leto-directional-sun.webp",
-      "two": "/scenes/leto/leto-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/leto/leto-shape-surface@2x.webp"
   ],

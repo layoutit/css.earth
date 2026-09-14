@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bergelmir"])[data-lod="billboard"] .bergelmir-scene, .planet-stage:where([data-object-id="bergelmir"])[data-lod="marker"] .bergelmir-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bergelmir"])[data-lod="marker"] .bergelmir-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bergelmir"]).bergelmir-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }
