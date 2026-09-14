@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/menippe/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'menippe',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/menippe/menippe-shape-surface@2x.webp"
   ],

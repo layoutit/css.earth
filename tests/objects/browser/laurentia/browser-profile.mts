@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/laurentia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'laurentia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/laurentia/laurentia-shape-surface@2x.webp"
   ],

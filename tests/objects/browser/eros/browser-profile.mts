@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/eros/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'eros',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/eros/eros-normal-surface@2x.webp"
   ],

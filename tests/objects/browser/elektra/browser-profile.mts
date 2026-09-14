@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/elektra/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'elektra',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/elektra/elektra-shape-surface@2x.webp"
   ],

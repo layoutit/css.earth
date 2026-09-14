@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/alkmene/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'alkmene',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/alkmene/alkmene-shape-surface@2x.webp"
   ],

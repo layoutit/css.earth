@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/veritas/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'veritas',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/veritas/veritas-shape-surface@2x.webp"
   ],

@@ -1,16 +1,9 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test, vi } from 'vitest';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { fileURLToPath } from 'node:url';
 import { loadPreparedCssObject } from './loader.js';
-import type { SharedReference } from './loader.js';
-import { sharedBankPath } from '../../platform/prepared-shared-banks.mts';
 
 const root = new URL('../../../', import.meta.url);
-/** The checked-in shared banks, read the way a Node transport would. */
-async function readShared(reference: SharedReference) {
-  return new Uint8Array(await readFile(sharedBankPath(fileURLToPath(root), reference))).buffer;
-}
 async function fixture(id = 'venus') {
   const descriptor = parseObjectDescriptor(await readFile(new URL(`src/objects/${id}/object.json`, root), 'utf8'));
   if (!descriptor.prepared) throw new Error('Fixture requires its prepared reference.');
@@ -32,7 +25,7 @@ async function changedPayload(value: unknown) {
 
 for (const id of ['mercury', 'venus']) test(`${id} loads its actual pinned prepared JSON through the shared decoder`, async () => {
   const f = await fixture(id), read = vi.fn(async () => f.bytes);
-  const definition = await loadPreparedCssObject(f.descriptor, { read, readShared });
+  const definition = await loadPreparedCssObject(f.descriptor, { read });
   expect(read).toHaveBeenCalledExactlyOnceWith(f.reference.url);
   expect(definition.id).toBe(id);
   expect(definition.tree.nodes.length).toBeGreaterThan(100);
@@ -43,13 +36,13 @@ for (const id of ['mercury', 'venus']) test(`${id} loads its actual pinned prepa
 test('stale bytes fail before a mount can be created, even when JSON meaning is unchanged', async () => {
   const f = await fixture(), mount = vi.fn();
   const stale = new TextEncoder().encode(new TextDecoder().decode(f.bytes) + '\n').buffer;
-  await expect(loadPreparedCssObject(f.descriptor, { read: async () => stale, readShared }).then(mount)).rejects.toThrow('SHA-256');
+  await expect(loadPreparedCssObject(f.descriptor, { read: async () => stale }).then(mount)).rejects.toThrow('SHA-256');
   expect(mount).not.toHaveBeenCalled();
 });
 
 for (const field of ['id', 'type', 'format', 'schema']) test(`an authenticated mismatched envelope ${field} fails before mount`, async () => {
   const f = await fixture(), changed = await changedPayload({ ...f.payload, [field]: 'other' }), mount = vi.fn();
-  await expect(loadPreparedCssObject(changed.descriptor, { read: async () => changed.bytes, readShared }).then(mount)).rejects.toThrow(/does not match/);
+  await expect(loadPreparedCssObject(changed.descriptor, { read: async () => changed.bytes }).then(mount)).rejects.toThrow(/does not match/);
   expect(mount).not.toHaveBeenCalled();
 });
 
@@ -57,7 +50,7 @@ test('the decoded CSS definition must match the descriptor as well as its envelo
   const f = await fixture();
   if (!isRecord(f.payload.data)) throw new Error('Fixture requires a CSS definition.');
   const changed = await changedPayload({ ...f.payload, data: { ...f.payload.data, id: 'different' } }), mount = vi.fn();
-  await expect(loadPreparedCssObject(changed.descriptor, { read: async () => changed.bytes, readShared }).then(mount)).rejects.toThrow(/does not match object venus/);
+  await expect(loadPreparedCssObject(changed.descriptor, { read: async () => changed.bytes }).then(mount)).rejects.toThrow(/does not match object venus/);
   expect(mount).not.toHaveBeenCalled();
 });
 
@@ -66,7 +59,7 @@ test('missing preparation, unknown object type and unsupported format never requ
   const { prepared: _prepared, ...unprepared } = f.descriptor;
   for (const descriptor of [unprepared, { ...f.descriptor, type: 'unknown' },
     { ...f.descriptor, prepared: { ...f.reference, format: 'other-artifact@1' } }]) {
-    await expect(loadPreparedCssObject(descriptor, { read, readShared })).rejects.toThrow();
+    await expect(loadPreparedCssObject(descriptor, { read })).rejects.toThrow();
   }
   expect(read).not.toHaveBeenCalled();
 });
@@ -84,17 +77,17 @@ test('cancellation reaches the transport and an already-cancelled load cannot re
     received = signal;
     signal!.addEventListener('abort', () => reject(signal!.reason), { once: true });
   }));
-  const loading = loadPreparedCssObject(f.descriptor, { read, readShared }, { signal: controller.signal });
+  const loading = loadPreparedCssObject(f.descriptor, { read }, { signal: controller.signal });
   expect(received).toBe(controller.signal);
   controller.abort();
   await expect(loading).rejects.toMatchObject({ name: 'AbortError' });
-  await expect(loadPreparedCssObject(f.descriptor, { read, readShared }, { signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
+  await expect(loadPreparedCssObject(f.descriptor, { read }, { signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
   expect(read).toHaveBeenCalledOnce();
 });
 
 test('authenticated invalid UTF-8 JSON fails before the renderer can mount', async () => {
   const f = await fixture(), bytes = new Uint8Array([0xff]).buffer, mount = vi.fn();
   const descriptor = { ...f.descriptor, prepared: { ...f.reference, sha256: await sha256(bytes) } };
-  await expect(loadPreparedCssObject(descriptor, { read: async () => bytes, readShared }).then(mount)).rejects.toThrow('UTF-8 JSON');
+  await expect(loadPreparedCssObject(descriptor, { read: async () => bytes }).then(mount)).rejects.toThrow('UTF-8 JSON');
   expect(mount).not.toHaveBeenCalled();
 });

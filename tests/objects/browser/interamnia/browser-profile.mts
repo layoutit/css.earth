@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/interamnia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'interamnia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/interamnia/interamnia-shape-surface@2x.webp"
   ],

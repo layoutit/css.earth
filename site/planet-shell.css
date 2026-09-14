@@ -1,5 +1,4 @@
 .planet-cubic-sky {
-  --planet-cubic-sky-half-side: max(100cqw, 100cqh);
   --planet-cubic-sky-zoom: 1;
   --planet-cubic-sky-camera-distance: max(
     50cqh,

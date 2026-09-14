@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/klio/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'klio',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/klio/klio-shape-surface@2x.webp"
   ],

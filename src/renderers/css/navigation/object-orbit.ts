@@ -11,7 +11,7 @@ import type { PerspectiveDolly, PerspectiveWorldContext } from './perspective-do
 import type { LegacySharedCamera, PhysicalSharedCamera } from './view-url.js';
 import type { RetainedCubicSky } from '../solar-system/cubic-sky-runtime.js';
 import type { DirectionalSunPlan } from '../solar-system/directional-sun-coordinate.js';
-import { rotationFromMatrix3d } from '../solar-system/heliocentric-view.js';
+import { rotationFromMatrix3d } from '../solar-system/heliocentric-geometry.js';
 import { worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 import type { PositionM } from '@cssearth/engine';

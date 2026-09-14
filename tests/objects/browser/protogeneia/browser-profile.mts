@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/protogeneia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'protogeneia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/protogeneia/protogeneia-shape-surface@2x.webp"
   ],

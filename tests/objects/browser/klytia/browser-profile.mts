@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/klytia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'klytia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/klytia/klytia-shape-surface@2x.webp"
   ],

@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/julia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'julia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/julia/julia-shape-surface@2x.webp"
   ],

@@ -3,7 +3,6 @@ import objectControls from "../../../../src/objects/haumea/prepared/controls.jso
 
 export const browserProfile = createObjectBrowserProfile({ id: "haumea", controls: objectControls,
   audit: {
-    preparedAssetPairs: [],
     canonicalPreparedAssets: ["/scenes/haumea/surface.webp", "/scenes/haumea/poles.webp", "/scenes/haumea/ring.webp"],
     retained: { lensIds: browserProfileLensIds(objectControls), allowedMountSelectors: [] },
   },

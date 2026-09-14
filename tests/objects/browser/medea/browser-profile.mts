@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/medea/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'medea',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/medea/medea-shape-surface@2x.webp"
   ],

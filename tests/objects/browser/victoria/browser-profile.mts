@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/victoria/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'victoria',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/victoria/victoria-shape-surface@2x.webp"
   ],

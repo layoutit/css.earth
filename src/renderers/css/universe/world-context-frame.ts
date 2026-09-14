@@ -1,5 +1,5 @@
 import type { PlannedWorldContext } from './world-context-planner.js';
-import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
+import type { OrbitSegment } from '../solar-system/types.js';
 
 type Body = PlannedWorldContext['projectedBodies'][number];
 type BodyValues = Omit<Body, 'index' | 'segments'>;

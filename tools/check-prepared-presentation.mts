@@ -11,7 +11,6 @@ import type { ObjectEntry } from '../site/object-schema.mts';
 import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mts";
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
 import { requireAuthoredWorldFrame } from './authored-world-frame.mts';
-import { inlineSharedFromBanks } from '../src/platform/prepared-shared-banks.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
 import { requireObjectControls } from '../site/scene-contract.mts';
 import { hasErrorCode, isRecord, requireRecord, requireArray } from './source-values.mts';
@@ -157,8 +156,7 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
   const runtimePath = resolve(preparedDirectory, 'runtime.json');
   const runtime = requireObjectRuntimeDefinition(JSON.parse(await readText(runtimePath)), { objectId });
   const scene: unknown = JSON.parse(await readText(resolve(preparedDirectory, 'scene.json')));
-  const transported = await inlineSharedFromBanks(root, payload.data, { read: readText });
-  if (payload.id !== objectId || !isDeepStrictEqual(transported, runtime)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
+  if (payload.id !== objectId || !isDeepStrictEqual(payload.data, runtime)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
   await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText });
   requireObjectRuntimeDefinition(runtime, { objectId });
   return { runtime, payloadPath, runtimePath };

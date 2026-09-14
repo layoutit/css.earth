@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/circe/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'circe',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/circe/circe-shape-surface@2x.webp"
   ],

@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/iris/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'iris',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/iris/iris-shape-surface@2x.webp"
   ],

@@ -41,14 +41,14 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   const selected = config.raster.surfaceObservations?.filter(recipe => lensIds.includes(recipe.id)) ?? [];
   if (selected.length !== lensIds.length) throw new Error('Unknown surface-observation lens.');
   const originals = new Map<string, Buffer>();
-  for (const name of ['scene.refs.json', 'surfaces.json', 'material.json', 'runtime-assets.json', 'minimaps.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
+  for (const name of ['scene.json', 'surfaces.json', 'material.json', 'runtime-assets.json', 'minimaps.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
   const previousSurfaces = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8')));
   if (lensIds.some(id => !records(previousSurfaces.surfaces).some(surface => surface.id === id))) throw new Error('Refresh cannot add a lens.');
   sharp.concurrency(1); sharp.cache(false);
   const source = await createSourceManifest({ planetId: id, planetName: id, sourceRoot: sourceDirectory });
   const radial = await loadRadialTerrain({ config, sourceDirectory, source });
   if (!radial) throw new Error('Observation refresh requires source terrain.');
-  const retained = retainedPhotographicAtlas(requireRecord(JSON.parse(originals.get('scene.refs.json')!.toString('utf8'))));
+  const retained = retainedPhotographicAtlas(requireRecord(JSON.parse(originals.get('scene.json')!.toString('utf8'))));
   // Reuse the full preparer's source mesh and exact plans. A geometry change needs a full preparation.
   if (retained.width !== radial.width || retained.height !== radial.height || retained.tileSize !== radial.tileSize ||
       retained.plans.length !== radial.plans.length || retained.plans.some((plan, i) =>
@@ -94,9 +94,9 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
   await refreshObservationControls(id, lensIds, new Map(surfaces.map(surface => [surface.id, requireString(surface.billboardColor)])));
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
-  if (hash(await readFile(resolve(outputDirectory, 'scene.refs.json'))) !== hash(originals.get('scene.refs.json')!)) throw new Error('Observation refresh changed the scene.');
+  if (hash(await readFile(resolve(outputDirectory, 'scene.json'))) !== hash(originals.get('scene.json')!)) throw new Error('Observation refresh changed the scene.');
   const report = { id, lensIds, seconds: (performance.now() - started) / 1000, maxRssMiB: process.resourceUsage().maxRSS / 1024,
-    recipeSha256: hash(recipeBytes), retainedSceneSha256: hash(originals.get('scene.refs.json')!), refreshedRuntimeAssets: [...changed.values()],
+    recipeSha256: hash(recipeBytes), retainedSceneSha256: hash(originals.get('scene.json')!), refreshedRuntimeAssets: [...changed.values()],
     retainedRuntimeAssetCount: assets.length - changed.size, provenanceBasis: 'recovered', observations: surfaces.map(surface => surface.observation) };
   await writeFile(resolve(stage, 'refresh.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ id, seconds: report.seconds, maxRssMiB: report.maxRssMiB, refreshedAssets: changed.size, retainedAssets: report.retainedRuntimeAssetCount }));

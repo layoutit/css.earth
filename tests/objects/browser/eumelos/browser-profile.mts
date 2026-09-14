@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/eumelos/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'eumelos',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/eumelos/eumelos-shape-surface@2x.webp"
   ],

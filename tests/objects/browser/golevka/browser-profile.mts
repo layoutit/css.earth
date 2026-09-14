@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/golevka/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'golevka',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/golevka/golevka-shape-surface@2x.webp"
   ],

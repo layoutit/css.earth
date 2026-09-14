@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/byblis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'byblis',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/byblis/byblis-shape-surface@2x.webp"
   ],

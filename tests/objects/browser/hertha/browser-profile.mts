@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/hertha/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hertha',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/hertha/hertha-shape-surface@2x.webp"
   ],

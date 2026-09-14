@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/weringia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'weringia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/weringia/weringia-shape-surface@2x.webp"
   ],

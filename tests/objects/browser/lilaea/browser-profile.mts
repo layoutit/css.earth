@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/lilaea/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'lilaea',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/lilaea/lilaea-shape-surface@2x.webp"
   ],

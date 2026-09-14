@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/rusthawelia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'rusthawelia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/rusthawelia/rusthawelia-shape-surface@2x.webp"
   ],

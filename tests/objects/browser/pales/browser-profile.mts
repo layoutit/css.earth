@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/pales/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'pales',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/pales/pales-shape-surface@2x.webp"
   ],

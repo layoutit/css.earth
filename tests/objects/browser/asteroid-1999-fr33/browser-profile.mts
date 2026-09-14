@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/asteroid-1999-fr33/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'asteroid-1999-fr33',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-surface@2x.webp"
   ],

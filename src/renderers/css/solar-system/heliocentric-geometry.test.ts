@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, rotationFromMatrix3d,
   offAxisFrame, silhouetteEllipse, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle } from './heliocentric-geometry.js';
-import { trailWeightsForSpans, validTrailSpans } from './heliocentric-view.js';
 
 test('off-axis physical distance preserves the requested tangential apparent radius', () => {
   for (const bodyRadius of [1, 243.97, 605.18]) for (const focal of [300, 1247]) {
@@ -47,10 +46,4 @@ test('a planet offset from the Sun cannot falsely occult it while a kiloparsec o
   }
   assert.equal(rayHitsSphereBefore([0, 0, -distance], [0, 0, -distance + separation], radius), true);
   assert.equal(rayHitsSphereBefore([0, 0, -distance], [0, 0, -distance - separation], radius), false);
-});
-
-test('prepared trails retain a solid tail, linear fade and undrawn remainder', () => {
-  assert.deepEqual(trailWeightsForSpans([0, 0.2, 0.3, 0.4, 0.8], {solidTurns: 0.2, fadeTurns: 0.2}), [1, 1, 0.5, 0, 0]);
-  assert.equal(validTrailSpans({solidTurns: 0.4, fadeTurns: 0.6}), false);
-  assert.throws(() => trailWeightsForSpans([0], {solidTurns: 0, fadeTurns: 0}), TypeError);
 });

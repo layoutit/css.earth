@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/eukrate/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'eukrate',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/eukrate/eukrate-shape-surface@2x.webp"
   ],

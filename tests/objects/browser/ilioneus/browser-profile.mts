@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/ilioneus/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'ilioneus',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/ilioneus/ilioneus-shape-surface@2x.webp"
   ],

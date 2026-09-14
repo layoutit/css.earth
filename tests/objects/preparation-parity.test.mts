@@ -39,7 +39,6 @@ for (const id of ['mercury', 'venus']) {
     assert.equal(runtime.schema, 'cssearth-object-runtime@4');
     assert.equal(runtime.id, id);
     assert.ok(runtime.tree.nodes.length > 100);
-    assert.ok(runtime.heliocentricView);
   });
 }
 

@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/libussa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'libussa',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/libussa/libussa-shape-surface@2x.webp"
   ],

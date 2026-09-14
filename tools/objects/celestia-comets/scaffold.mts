@@ -23,10 +23,9 @@ for(const c of intake){
  const p=`src/objects/${c.id}`,s=`${p}/source`;
  try{await access(`${p}/object.json`);throw Error(`Refusing to overwrite ${c.id}`);}catch(e){if(!hasErrorCode(e,'ENOENT'))throw e;}
  const clone=async(rel:string)=>requireRecord(JSON.parse((await readFile(`${base}/${rel}`,'utf8')).replaceAll('comet-209p',c.id).replaceAll('LINEAR',name)));
- for(const rel of ['stars/eso0932a.tif','stars/ESO-IMAGE-LICENSE.md','stars/LICENSE.md','presentation/InterVariable.ttf','presentation/minimap.json']){
+ for(const rel of ['presentation/InterVariable.ttf','presentation/minimap.json']){
   await mkdir(dirname(`${s}/${rel}`),{recursive:true});await copyFile(`${base}/source/${rel}`,`${s}/${rel}`);
  }
- await write(`${s}/stars/hyg-v41-field.json`,await clone('source/stars/hyg-v41-field.json'));
  await writeFile(`${s}/reference/celestia.ssc`,header+c.excerpt+'\n');
  await copyFile(new URL('GPL-2.0-or-later.txt',sourceRoot),`${s}/reference/GPL-2.0-or-later.txt`);
  const {obj,model}=await meshSource(c),meshReport=model.nativeExport;
@@ -72,7 +71,7 @@ for(const c of intake){
  await write(`${p}/object.json`,descriptor);
  await writeFile(`src/renderers/css/styles/${c.id}-surfaces.css`,(await readFile('src/renderers/css/styles/comet-209p-surfaces.css','utf8')).replaceAll('comet-209p',c.id));
  const profile=`tests/objects/browser/${c.id}/browser-profile.mjs`;await mkdir(dirname(profile),{recursive:true});await writeFile(profile,(await readFile('tests/objects/browser/comet-209p/browser-profile.mjs','utf8')).replaceAll('comet-209p',c.id));
- await writeFile(`${p}/NOTICE.md`,`# Sources and reuse\n\nCelestia catalog: ${credit}. GPL-2.0-or-later; see source/reference/celestia.ssc and source/reference/GPL-2.0-or-later.txt. The catalog excerpt and derived size parameters retain these terms. Independent cssEarth code is MIT. Original Celestia mesh code and exported geometry retain GPL-2.0-or-later; no photographic texture is redistributed.\n\nJPL Horizons: fixed-epoch scientific orbit records. ESO/S. Brunier panorama: CC BY 4.0. HYG and Inter retain their notices beside the pinned sources.\n`);
+ await writeFile(`${p}/NOTICE.md`,`# Sources and reuse\n\nCelestia catalog: ${credit}. GPL-2.0-or-later; see source/reference/celestia.ssc and source/reference/GPL-2.0-or-later.txt. The catalog excerpt and derived size parameters retain these terms. Independent cssEarth code is MIT. Original Celestia mesh code and exported geometry retain GPL-2.0-or-later; no photographic texture is redistributed.\n\nJPL Horizons: fixed-epoch scientific orbit records. Inter retains its notice beside the pinned source.\n`);
  await writeFile(`${p}/README.md`,`# ${full}
 
 ${introduction}

@@ -15,8 +15,7 @@ export type { PreparedPresentationDefinition, PreparedView, PreparedPresentation
 export type { PreparedAssets } from './rendering/prepared-residency.js';
 export { CANONICAL_PREPARED_IMAGE_DENSITY } from './rendering/prepared-object-assets.js';
 export { loadPreparedCssObject, PREPARED_CSS_OBJECT_FORMAT } from './loader.js';
-export type { PreparedCssTransport, SharedReference } from './loader.js';
-export { decodeSharedBank } from './loader.js';
+export type { PreparedCssTransport } from './loader.js';
 export { parsePreparedObjectRuntime } from './validation/index.js';
 export { createDeferredObjectMount } from './runtime/deferred-object-mount.js';
 export type { ObjectDatasets } from './runtime/deferred-object-mount.js';

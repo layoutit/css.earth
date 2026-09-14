@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/ivar/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'ivar',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/ivar/ivar-shape-surface@2x.webp"
   ],

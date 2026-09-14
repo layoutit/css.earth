@@ -3,7 +3,6 @@ import objectControls from '../../../../src/objects/thebe/prepared/controls.json
 
 export const browserProfile = createObjectBrowserProfile({ id: 'thebe', controls: objectControls,
   audit: {
-    preparedAssetPairs: [],
     canonicalPreparedAssets: ['/scenes/thebe/thebe-normal-surface@2x.webp', '/scenes/thebe/thebe-lighting.webp'],
     lensRace: { defaultId: 'normal', slowId: 'elevation', winnerId: 'normal',
       slowAsset: '/scenes/thebe/thebe-elevation-surface@2x.webp', preReadyDisabled: true },

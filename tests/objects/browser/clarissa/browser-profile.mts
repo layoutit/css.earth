@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/clarissa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'clarissa',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/clarissa/clarissa-shape-surface@2x.webp"
   ],

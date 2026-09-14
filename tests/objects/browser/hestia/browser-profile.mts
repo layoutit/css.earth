@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/hestia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hestia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/hestia/hestia-shape-surface@2x.webp"
   ],

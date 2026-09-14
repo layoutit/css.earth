@@ -3,7 +3,6 @@ import objectControls from '../../../../src/objects/calypso/prepared/controls.js
 
 export const browserProfile = createObjectBrowserProfile({ id: 'calypso', controls: objectControls,
   audit: {
-    preparedAssetPairs: [],
     canonicalPreparedAssets: ['/scenes/calypso/calypso-normal-surface@2x.webp', '/scenes/calypso/calypso-lighting.webp'],
     lensRace: { defaultId: 'normal', slowId: 'elevation', winnerId: 'normal',
       slowAsset: '/scenes/calypso/calypso-elevation-surface@2x.webp', preReadyDisabled: true },

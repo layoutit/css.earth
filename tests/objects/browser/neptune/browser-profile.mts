@@ -13,10 +13,6 @@ export const browserProfile = createObjectBrowserProfile({
         one: "/scenes/neptune/neptune-surface-normal.webp",
         two: "/scenes/neptune/neptune-surface-normal@2x.webp",
       }),
-      Object.freeze({
-        one: "/scenes/neptune/neptune-starfield-front.webp",
-        two: "/scenes/neptune/neptune-starfield-front@2x.webp",
-      }),
       ]),
     lensRace: Object.freeze({
       defaultId: "normal",

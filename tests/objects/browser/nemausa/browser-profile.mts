@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/nemausa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'nemausa',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/nemausa/nemausa-shape-surface@2x.webp"
   ],

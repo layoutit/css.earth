@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/taurinensis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'taurinensis',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/taurinensis/taurinensis-shape-surface@2x.webp"
   ],

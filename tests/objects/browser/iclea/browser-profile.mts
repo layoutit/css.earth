@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/iclea/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'iclea',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/iclea/iclea-shape-surface@2x.webp"
   ],

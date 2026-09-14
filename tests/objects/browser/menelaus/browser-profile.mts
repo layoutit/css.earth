@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/menelaus/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'menelaus',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/menelaus/menelaus-shape-surface@2x.webp"
   ],

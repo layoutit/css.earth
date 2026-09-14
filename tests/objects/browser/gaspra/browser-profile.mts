@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/gaspra/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'gaspra',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/gaspra/gaspra-normal-surface@2x.webp"
   ],

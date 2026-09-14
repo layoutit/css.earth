@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/lachesis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'lachesis',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/lachesis/lachesis-shape-surface@2x.webp"
   ],

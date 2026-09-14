@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/lamberta/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'lamberta',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/lamberta/lamberta-shape-surface@2x.webp"
   ],

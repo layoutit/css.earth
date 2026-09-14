@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/asterope/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'asterope',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/asterope/asterope-shape-surface@2x.webp"
   ],

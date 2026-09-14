@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/castalia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'castalia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/castalia/castalia-shape-surface@2x.webp"
   ],

@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/ra-shalom/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'ra-shalom',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/ra-shalom/ra-shalom-shape-surface@2x.webp"
   ],

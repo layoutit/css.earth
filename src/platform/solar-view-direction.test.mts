@@ -10,23 +10,22 @@ import { prepareSunReferenceViewDirection } from
   "./prepare-sun-view-direction.mts";
 import { cssDirectionToViewDirection } from "./solar-view-direction.mts";
 
-// The retained sprite projects `forward = -z` and hides the Sun when forward
-// is not positive (see directional-sun-runtime.mjs).
-function spriteForward(viewDirection: readonly number[]) {
+// A view direction lies in front of the camera when `forward = -z` is positive.
+function forward(viewDirection: readonly number[]) {
   return -viewDirection[2];
 }
 
 test("a CSS direction beyond the body projects in front of the camera", () => {
   // CSS +z points toward the viewer, so a Sun beyond the body has negative
-  // CSS z. The sprite must show it, and it must sit on the same side of the
+  // CSS z. It lies in front of the camera, on the same side of the
   // screen as the CSS direction (x right, y down).
   const beyond = cssDirectionToViewDirection([0.6, 0.48, -0.64]);
-  assert.ok(spriteForward(beyond) > 0, "Sun beyond the body is visible");
+  assert.ok(forward(beyond) > 0, "Sun beyond the body is in front of the camera");
   assert.ok(beyond[0] > 0, "screen right stays screen right");
   assert.ok(beyond[1] < 0, "CSS down becomes view down (negative y up)");
 
   const behind = cssDirectionToViewDirection([0.6, 0.48, 0.64]);
-  assert.ok(spriteForward(behind) < 0, "Sun behind the camera is hidden");
+  assert.ok(forward(behind) < 0, "Sun behind the camera is behind it");
 });
 
 test("the physical light map returns the CSS scene direction", () => {
@@ -59,7 +58,7 @@ test("Mercury's reference view direction matches the scene matrix", () => {
   // At the default pose the Sun stands above and behind the camera: the
   // sprite is hidden and the physical overlay shows a lit gibbous disc.
   assert.ok(reference[1] > 0.8);
-  assert.ok(spriteForward(reference) < 0);
+  assert.ok(forward(reference) < 0);
   assert.ok(viewSunDirectionToPhysicalLightDirection(reference)[2] > 0.5);
 });
 
