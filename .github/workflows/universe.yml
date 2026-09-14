@@ -90,7 +90,9 @@ jobs:
         run: pnpm test:fits --unit
       - name: Test SBMT oracle contract and offline projection cases
         # Native SBMT and real-body archive restoration are opt-in local checks.
-        run: pnpm test:sbmt --unit
+        run: |
+          pnpm typecheck:oracles
+          pnpm test:sbmt --unit
       - name: Test selected dataset textures and bounded residency
         run: |
           node --test src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts tests/objects/unit/earth/dataset-selection.test.mts tests/objects/unit/earth/surface-image-banks.test.mts
