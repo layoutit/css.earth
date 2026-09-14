@@ -1,3 +1,4 @@
+import { prepareGalaxyDisplaySample } from '../../src/preparation/galaxy-catalog/display-sample.js';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -41,6 +42,7 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
   const outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory, 'prepared')), path = resolve(outputDirectory, 'catalogue.json');
   await mkdir(dirname(path), { recursive: true });
   await writeFile(`${path}.tmp`, bytes); await rename(`${path}.tmp`, path);
+  await writeFile(resolve(outputDirectory, 'display-sample.json'), JSON.stringify(prepareGalaxyDisplaySample(data), null, 2) + '\n');
   const receipt = { schema: data.schema, path: 'catalogue.json', sha256: sha256(bytes), bytes: bytes.length,
     sourceRows: rows.length, objects: data.objects.length, exclusions: data.exclusions.length,
     localGroup: data.objects.filter(row => row.membership.group === 'local-group').length,

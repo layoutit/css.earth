@@ -1,3 +1,7 @@
+import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog } from '@cssearth/catalog';
+import localGroup from '../../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
+import clusterCatalogue from '../../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
+import { catalogMarkerSvg } from '../../src/renderers/css/universe/catalog-marker.ts';
 import type { PositionM } from '@cssearth/engine';
 // Prepared spatial minimap. Rebuild with: pnpm prepare:minimap
 import { readFile, writeFile } from 'node:fs/promises';
@@ -38,10 +42,16 @@ const stellarPoints = [...selectedStars.values()].map(star => ({
   positionM: rotateWorldPosition(starRotation, [star.positionUnits[0], star.positionUnits[1], star.positionUnits[2]]).map((value, axis) => value * stars.frame.metersPerUnit + stars.frame.originM[axis]),
   color: `rgb(${stars.atlas.colors[star.colorIndex].join(' ')})`,
 }));
-const allPoints = [...stellarPoints, ...points];
+const galaxies = parsePreparedGalaxyCatalog(localGroup), clusters = parsePreparedClusterCatalog(clusterCatalogue);
+for (const catalogue of [galaxies, clusters]) if (catalogue.frame.referenceFrame !== context.frame.referenceFrame || catalogue.frame.epochJdTt !== context.frame.epochJdTt) throw new TypeError('Minimap catalogue frame mismatch.');
+const extragalacticPoints = [
+  ...galaxies.objects.filter(object => object.membership.group === 'local-group' && object.detailedObjectId).map(object => ({id:object.id, positionM:object.positionM, classification:'galaxy', color:'#c2ccd8'})),
+  ...clusters.objects.map(object => ({id:object.id, positionM:object.positionM, classification:'galaxy-cluster', color:'#c2ccd8'})),
+];
+const allPoints = [...stellarPoints, ...points, ...extragalacticPoints];
 const pointOrderX = allPoints.map((_, index) => index)
   .sort((a, b) => allPoints[a].positionM[0] - allPoints[b].positionM[0]);
-const markup = (point: { id: string; classification: string; color: string }) => `<i class="space-minimap-dot" data-body="${point.id}" data-classification="${point.classification}" style="background:${point.color}" hidden></i>`;
+const markup = (point: { id: string; classification: string; color: string }) => `<i class="space-minimap-dot" data-body="${point.id}" data-classification="${point.classification}" style="${['galaxy','galaxy-cluster'].includes(point.classification) ? 'color:'+point.color : 'background:'+point.color}" hidden>${point.classification === 'galaxy' ? catalogMarkerSvg('galaxy') : point.classification === 'galaxy-cluster' ? catalogMarkerSvg('galaxy-cluster') : ''}</i>`;
 const axes = ([[1, 0, 0], [0, -1, 0], [0, 0, -1]] as PositionM[]).map(eclipticJ2000ToIcrf);
 const galaxyRotation = worldRotationFromQuaternion([volume.data.frame.localToReferenceXyzw[0], volume.data.frame.localToReferenceXyzw[1], volume.data.frame.localToReferenceXyzw[2], volume.data.frame.localToReferenceXyzw[3]]);
 const galaxyAxes = ([[1, 0, 0], [0, -1, 0], [0, 0, -1]] as PositionM[]).map(axis => rotateWorldPosition(galaxyRotation, axis));
@@ -74,4 +84,4 @@ for (const quad of slices.quads.filter(quad => quad.axis === 'z' && quad.alphaCo
 await sharp({ create: { width: galaxySize, height: galaxySize, channels: 4, background: '#00000000' } })
   .composite(layers).png().toFile(new URL('./galaxy.png', import.meta.url).pathname);
 
-console.log(`Prepared minimap: ${bodies.length} bodies, ${stellarPoints.length} catalog stars, galaxy density projection.`);
+console.log(`Prepared minimap: ${bodies.length} bodies, ${stellarPoints.length} catalog stars, ${extragalacticPoints.length} extragalactic markers, galaxy density projection.`);

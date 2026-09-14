@@ -140,7 +140,8 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
     }
     const descriptor = sourceObject(json(await input(`${base}/object.json`)));
     const prepared = sourceObject(descriptor.prepared);
-    if (descriptor.id !== record.objectId || descriptor.type !== 'volume-lens-bank' || prepared.format !== 'cssearth-volume-lenses@1') throw new TypeError(`Invalid volume descriptor: ${record.objectId}`);
+    if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-lens-bank' && prepared.format === 'cssearth-volume-lenses@1') ||
+      (descriptor.type === 'image-layer-bank' && prepared.format === 'cssearth-image-layer-bank@1' && record.lenses.length === 1 && record.defaultLens === 'optical'))) throw new TypeError(`Invalid volume descriptor: ${record.objectId}`);
     const bankPath = `${base}/${sourcePath(prepared.url)}`, bankSha256 = sourceDigest(prepared.sha256);
     const installedBank = await readFile(resolve(root, bankPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
     if (installedBank !== null && digest(installedBank) !== bankSha256) throw new Error(`Changed installed volume bank: ${record.objectId}`);

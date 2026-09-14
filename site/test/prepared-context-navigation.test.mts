@@ -249,3 +249,16 @@ test('a lens query without a focus is removed and focused bank subscriptions are
   f.controller.destroy();
   assert.equal(f.lensCallbacks.size, 0);
 });
+
+
+test('an image-layer focus exposes its single optical dataset without volume-only actions', () => {
+  const f = fixture({ imageLayerFrames: {detailed:baseFrame}, object:{detailedObjectId:'detailed'} });
+  f.controller.restore('https://example.test/sun/?focus=catalogue:a&focusLens=optical');
+  assert.deepEqual(f.errors, []);
+  const controls = required(last(f.content).presentation);
+  assert.equal(controls.selectedLens, 'optical');
+  assert.equal(controls.setStarsVisible, undefined);
+  controls.selectLens('optical');
+  assert.deepEqual(f.lensWrites, []);
+  f.controller.destroy();
+});

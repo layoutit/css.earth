@@ -36,7 +36,11 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
   const lensState = (id: string | null) => {
     const object = id ? layer.resolveGalaxy(id) : null;
     const objectId = object && !isPreparedCluster(object) ? object.detailedObjectId : null;
-    return objectId ? layer.volumeLensState?.(objectId) ?? null : null;
+    if (!objectId) return null;
+    const volume = layer.volumeLensState?.(objectId);
+    if (volume) return volume;
+    return layer.imageLayerFrames?.[objectId] ? { objectId, id: 'optical', defaultLens: 'optical', selectedLens: 'optical', starsVisible: false,
+      lenses: [{id:'optical', label:'Optical', title:'Visible-light observation', description:'Prepared image layers', sourceUrl:''}] } : null;
   };
   const writeSelectionUrl = (id: string | null) => {
     const url = new URL(windowTarget.location.href), state = lensState(id);
@@ -54,10 +58,14 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     const controls = state ? { ...state,
       selectLens(lensId: string) {
         if (!canSelect()) return;
+        if (layer.imageLayerFrames?.[state.objectId]) {
+          if (lensId !== 'optical') throw new TypeError('Unknown image-layer dataset.');
+          return;
+        }
         layer.selectVolumeLens(state.objectId, lensId);
         if (!unsubscribeLens) publishLens();
       },
-      ...(layer.setVolumeStarsVisible ? { setStarsVisible(enabled: boolean) {
+      ...(!layer.imageLayerFrames?.[state?.objectId ?? ''] && layer.setVolumeStarsVisible ? { setStarsVisible(enabled: boolean) {
         if (!canSelect()) return;
         layer.setVolumeStarsVisible(state.objectId, enabled);
         if (!unsubscribeLens) publishLens();
@@ -79,7 +87,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     const objectId = lensState(id)?.objectId ?? null;
     if (objectId === lensObjectId) return;
     unsubscribeLens?.(); unsubscribeLens = null; lensObjectId = objectId;
-    if (objectId) unsubscribeLens = layer.subscribeVolumeLens?.(objectId, publishLens) ?? null;
+    if (objectId && !layer.imageLayerFrames?.[objectId]) unsubscribeLens = layer.subscribeVolumeLens?.(objectId, publishLens) ?? null;
   };
   const resolve = (id: string): PreparedNavigationFocus => {
     const object = layer.resolveGalaxy(id);
@@ -129,7 +137,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
           throw new TypeError(`Unknown prepared focus lens: ${lensId}`);
         }
         navigation.setPreparedFocus(focus);
-        if (state && lensId !== undefined) layer.selectVolumeLens(state.objectId, lensId);
+        if (state && lensId !== undefined && !layer.imageLayerFrames?.[state.objectId]) layer.selectVolumeLens(state.objectId, lensId);
         selected = id; layer.selectGalaxy(id); observeLens(id);
         publishContent(id);
         if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);

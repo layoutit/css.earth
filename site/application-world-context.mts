@@ -1,3 +1,4 @@
+import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-residency.js';
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
@@ -87,8 +88,8 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       }));
     // The world worker reads its own prepared context; background stars are already baked.
     const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL };
-    const universe = createPreparedUniverse({ context: applicationContext, volume, pointAppearance, sprites, imageLayers, volumeLenses, annotationPriorities, annotationOpacities, plannerSource,
-      catalog: { payload: galaxyCatalog, nebulae: nebulaCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
+    const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayers, volumeLenses, backgroundPointManifest: new URL('../src/objects/nearby-universe/prepared/points.json', import.meta.url).href, backgroundPointCloud: new URL('../src/objects/nearby-universe/prepared/cloud.webp', import.meta.url).href, annotationPriorities, annotationOpacities, plannerSource,
+      catalog: { payload: galaxyCatalog, galaxySample: galaxyDisplaySample, nebulae: nebulaCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
         fullDistanceM: galaxyPresentation.fullDistanceM,
         clusters: { payload: clusterCatalog, fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),

@@ -33,3 +33,5 @@ flat map; it does not mount another scene or fabricate individual stars.
 The minimap is a passive overview and does not provide separate navigation controls.
 
 Regenerate from the repository root: `pnpm prepare:minimap`.
+
+The extragalactic overview includes the four prepared Local Group galaxies and seven MCXC-II cluster centres, at their catalogue positions and epoch. Galaxy ovals fade in above 100 kpc minimap radius; cluster hexagons above 5 Mpc. These are location markers, not cluster membership maps or physical cluster boundaries. `pnpm prepare:minimap` restores their prepared markup and spatial index.

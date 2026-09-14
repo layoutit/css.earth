@@ -35,3 +35,17 @@ test('indexed candidates preserve exact 3D visible points across physical scales
     assert.deepEqual(indexed, prepared.points.map((_, i) => i).filter(visible));
   }
 });
+
+test('minimap retains the principal Local Group galaxies and published cluster positions', async () => {
+  const {readFile}=await import('node:fs/promises');
+  const {parsePreparedGalaxyCatalog,parsePreparedClusterCatalog}=await import('@cssearth/catalog');
+  const read=async(path:string)=>JSON.parse(await readFile(new URL(path,import.meta.url),'utf8'));
+  const galaxies=parsePreparedGalaxyCatalog(await read('../../src/objects/local-group/prepared/catalogue.json'));
+  const clusters=parsePreparedClusterCatalog(await read('../../src/objects/galaxy-clusters/prepared/catalogue.json'));
+  const expected=[...galaxies.objects.filter(object=>object.membership.group==='local-group'&&object.detailedObjectId),...clusters.objects];
+  assert.equal(prepared.points.filter(point=>['galaxy','galaxy-cluster'].includes(point.classification)).length,expected.length);
+  for(const object of expected){
+    assert.deepEqual(prepared.points.find(point=>point.id===object.id)?.positionM,object.positionM);
+    assert.ok(prepared.pointMarkup.includes(`data-body="${object.id}"`));
+  }
+});
