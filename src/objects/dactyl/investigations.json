@@ -480,19 +480,81 @@
       "id": "veverka-cylindrical-map",
       "subject": "Figure 10 controlled cylindrical Dactyl photograph",
       "status": "unresolved",
-      "finding": "The complete figure and its axes were inspected. It explicitly maps 0–360 east longitude and +90 to −90 latitude, with only the photographed region filled. The plot frame is digitized in the pinned source-control record. It is a projection of i2278, not an independent exposure. No dense correspondence from original SSI samples to this printed map has been qualified; the paper pixels are not used as runtime imagery.",
+      "finding": "Reopened after the complete paper supplied a separately mapped product. Figure 10 explicitly spans 0–360 east longitude and +90 to −90 latitude. Eight ticks not used for its four-corner digitization agree at 0.81 RMS and 1.38 maximum printed pixels. A new fixed-pose check of six non-overlapping map windows gives unshifted correlations −0.29 to 0.60; local searches suggest 2.25–4.72 native-pixel shifts, with ambiguous alternatives and one search-boundary maximum. These are not accepted controls or measured absolute errors. The earlier pole/Acmon/Celmis fit does not qualify distributed terrain. The map latitude definition, numeric reference shape and correspondence to our ellipsoid remain unresolved. It is the same i2278 exposure, not independent imagery; neither map pixels nor local correlation shifts enter preparation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-controls.json",
-        "https://doi.org/10.1006/icar.1996.0045"
+        "https://doi.org/10.1006/icar.1996.0045",
+        "https://github.com/layoutit/css.earth/blob/c976b0bf2eea5e15fca95a118e526f9d519af8a9/src/objects/dactyl/evidence/registration/published-map-review.json",
+        "https://github.com/layoutit/css.earth/blob/c976b0bf2eea5e15fca95a118e526f9d519af8a9/src/objects/dactyl/README.md#published-map-check"
       ],
       "checked": [
         {
           "date": "2026-09-14",
           "commit": "fc36f37867b7c94edb8bb50c3e634f8070703e84",
           "pr": 199
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "c976b0bf2eea5e15fca95a118e526f9d519af8a9",
+          "pr": 199
         }
       ],
-      "revisitWhen": "A native photographic map or a validated detector-to-map correspondence supports transfer in the published frame, with explicit coverage and permitted source reuse."
+      "revisitWhen": "The producer map latitude/frame and reference surface are established with a compatible reusable raster or a validated correspondence to the original NASA exposure and selected display shape. Recovered plot ticks or another fit of the existing camera controls alone do not resolve this."
+    },
+    {
+      "id": "veverka-map-figure-reuse",
+      "subject": "Reuse of the published Figure 10 photographic raster",
+      "status": "unresolved",
+      "finding": "The publisher article page was inspected directly on 2026-09-14 and links CC BY-NC-ND 4.0. Reuse permission for a reprojected public texture made from the figure is not established. The PDF and exact embedded JPEG remain local references; the checked-in report contains numeric measurements and byte identities. Separately archived original NASA pixels are a different source and still need qualified image-to-map correspondence.",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/pii/S0019103596900457",
+        "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "https://github.com/layoutit/css.earth/blob/c976b0bf2eea5e15fca95a118e526f9d519af8a9/src/objects/dactyl/NOTICE.md"
+      ],
+      "revisitWhen": "A producer raster with applicable reuse terms is identified, or the figure supplies validated numeric controls for the separately archived NASA exposure without redistributing paper pixels.",
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "c976b0bf2eea5e15fca95a118e526f9d519af8a9",
+          "pr": 199
+        }
+      ]
+    },
+    {
+      "id": "stooke-photographic-map-guide",
+      "subject": "PDS Stooke maps v3 guide as a source of a Dactyl photographic map",
+      "status": "excluded",
+      "finding": "Retrieved the PDS Stooke maps v3 00_map_guide.html, inspected its inventory and searched the full text for Dactyl. It contains Ida products but no Dactyl entry. This excludes this inspected map guide as a located Dactyl raster source; it does not establish absence from PDS or other releases. This is distinct from the earlier Stooke shape-model search.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html"
+      ],
+      "revisitWhen": "A release inventory, linked supplement or product identifier names a Dactyl mapped raster.",
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "c976b0bf2eea5e15fca95a118e526f9d519af8a9",
+          "pr": 199
+        }
+      ]
+    },
+    {
+      "id": "spud-orbit-code",
+      "subject": "Carcich SPUD code and Dactyl model correspondence",
+      "status": "excluded",
+      "finding": "Searched all 162 entries in the complete recursive tree of drbitboy/Orbit at 03f9dca48ea450a6502efaee9ffbb6f37458a717 (truncated: false), read README.md and inspected the shape input definitions in src/spudshap.c and src/spudshap.h. The software represents radius on a latitude/longitude grid and loads external VIEW/view models. No Dactyl-named model or mapped raster was located in that tree. The shared author and program name do not bind this 2016 code release to the numerical surface and map conventions used in the 1996 Dactyl figure. No viewer build or large clone was needed.",
+      "evidence": [
+        "https://github.com/drbitboy/Orbit/tree/03f9dca48ea450a6502efaee9ffbb6f37458a717",
+        "https://github.com/drbitboy/Orbit/blob/03f9dca48ea450a6502efaee9ffbb6f37458a717/src/spudshap.c",
+        "https://github.com/drbitboy/Orbit/blob/03f9dca48ea450a6502efaee9ffbb6f37458a717/src/spudshap.h"
+      ],
+      "revisitWhen": "A numeric Dactyl model or producer method explicitly binds the Figure 10 raster, latitude convention and body axes to a recoverable source surface.",
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "c976b0bf2eea5e15fca95a118e526f9d519af8a9",
+          "pr": 199
+        }
+      ]
     }
   ]
 }
