@@ -110,6 +110,28 @@
           }
         },
         {
+          "kind": "poles",
+          "filename": "neptune-poles-normal@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 20,
+            "angularMode": "direct-segment",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 95,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
           "kind": "thumbnail",
           "filename": "neptune-lens-normal.webp",
           "transforms": [
@@ -278,6 +300,28 @@
           }
         },
         {
+          "kind": "poles",
+          "filename": "neptune-poles-methane@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 20,
+            "angularMode": "direct-segment",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 95,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
           "kind": "thumbnail",
           "filename": "neptune-lens-methane.webp",
           "transforms": [
@@ -419,6 +463,28 @@
           "filename": "neptune-poles-near-infrared.webp",
           "projection": {
             "tileSize": 128,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 20,
+            "angularMode": "direct-segment",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 95,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "neptune-poles-near-infrared@2x.webp",
+          "projection": {
+            "tileSize": 256,
             "poles": [
               "north",
               "south",
