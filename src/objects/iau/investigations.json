@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "iau",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "Shape and spin",
+      "status": "included",
+      "finding": "[DAMIT 12740](https://damit.cuni.cz/projects/damit/asteroid_models/view/12740)",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/iau/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/12740"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "Calibration and uncertainty",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/iau/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The Shape lens uses cssEarth's existing shared grid to identify unavailable imagery.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/iau/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-reference-1",
+      "subject": "Other DAMIT matches",
+      "status": "included",
+      "finding": "[Other DAMIT matches](https://damit.cuni.cz/?q=5000) — Inspected for calibrated replacements; retain the selected solution and disclose available alternatives.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/iau/README.md",
+        "https://damit.cuni.cz/?q=5000"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

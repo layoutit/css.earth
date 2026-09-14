@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hidalgo",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "Shape and spin",
+      "status": "included",
+      "finding": "[DAMIT 1057](https://damit.cuni.cz/projects/damit/asteroid_models/view/1057)",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/hidalgo/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1057"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "Calibration and uncertainty",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/hidalgo/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The Shape view uses the shared normal grid because the source release provides no registered surface imagery. The grid is a coordinate guide, not regolith, measured albedo or an optical photograph.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/hidalgo/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-reference-1",
+      "subject": "SBDB assumed-albedo diameter 38 km",
+      "status": "excluded",
+      "finding": "[SBDB assumed-albedo diameter 38 km](https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=944&phys-par=1) — excluded — Its own source note says assumed dark albedo 0.06; an available thermal measurement is stronger evidence.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/hidalgo/README.md",
+        "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=944&phys-par=1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ],
+      "revisitWhen": "New source evidence resolves the recorded calibration or spatial-registration limitation; compare it with the selected product before replacement."
+    },
+    {
+      "id": "recorded-reference-2",
+      "subject": "AKARI thermal size 52.45 ± 3.60 km (Usui et al. 2011)",
+      "status": "excluded",
+      "finding": "[AKARI thermal size 52.45 ± 3.60 km (Usui et al. 2011)](https://doi.org/10.1093/pasj/63.5.1117) — alternative — Independent infrared-survey result overlaps the adopted WISE uncertainty. Not averaged with a different thermal model/observing geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/hidalgo/README.md",
+        "https://doi.org/10.1093/pasj/63.5.1117"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ],
+      "revisitWhen": "New calibration or independent size evidence makes this alternative preferable to the currently adopted, physically compatible scale; do not average incompatible thermal fits."
+    },
+    {
+      "id": "recorded-reference-3",
+      "subject": "Ground-based/Spitzer spectrum (Campins et al.)",
+      "status": "excluded",
+      "finding": "[Ground-based/Spitzer spectrum (Campins et al.)](https://www-n.oca.eu/thermops/abstract/campins.pdf) — excluded-view — Disk-integrated spectrum, not a registered surface map.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/hidalgo/README.md",
+        "https://www-n.oca.eu/thermops/abstract/campins.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ],
+      "revisitWhen": "New source evidence resolves the recorded calibration or spatial-registration limitation; compare it with the selected product before replacement."
+    }
+  ]
+}

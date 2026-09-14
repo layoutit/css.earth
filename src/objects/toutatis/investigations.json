@@ -41,18 +41,24 @@
     },
     {
       "id": "radial-elevation",
-      "subject": "Radial Elevation view",
-      "status": "excluded",
-      "finding": "A trial found multiple surface intersections in 7 of 8,192 sampled directions through the concave neck. One direction intersects the source at 1,285.61, 1,363.00 and 1,734.56 m. The current shared radial scalar would assign one ray height to distinct surface patches, so it cannot truthfully color this full connected mesh. Geometry itself retains the neck. A future mesh-attached scalar preparation is needed.",
-      "revisitWhen": "Shared preparation can attach scalars to mesh faces instead of radial directions.",
+      "subject": "Source-surface Elevation after the failed radial trial",
+      "status": "deferred",
+      "finding": "A trial found multiple surface intersections in 7 of 8,192 sampled directions through the concave neck. One direction intersects the source at 1,285.61, 1,363.00 and 1,734.56 m. The trial’s radial scalar would assign one ray height to distinct surface patches, so it cannot truthfully color this full connected mesh. Geometry itself retains the neck. That trial required mesh-attached scalar preparation. The repository audit now identifies an existing closest-source-point sampler that evaluates radius at individual source triangles with a distance bound. This meets the old missing-capability condition at code level, but no Toutatis preparation or qualification using it has been run.",
+      "revisitWhen": "Qualify the existing closest-source-point path on Toutatis: preserve distinct neck surfaces, establish a source/display distance bound and check seams and withheld coverage without changing the geometry budget.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L19"
+        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L19",
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/obj-shape.mts#L272",
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/source-surface.test.mts"
       ],
       "checked": [
         {
           "date": "2026-09-07",
           "commit": "75d25fd259a1e942da153d7b359b84fbb3874917",
           "pr": 34
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
       ]
     },

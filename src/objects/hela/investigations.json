@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hela",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "Checked 2026-09-09. Selected DAMIT model [454](https://damit.cuni.cz/projects/damit/asteroid_models/view/454), version **2012-07-30**. Convex lightcurve shape, uniformly scaled to the AKARI effective diameter of 13.39 ±0.45 km. Model fields and mesh measurements.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/hela/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/454"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "Catalog error omits additional shape, spin and thermal-model uncertainty; sampled simplification error does not establish terrain accuracy. - No registered surface imagery is available.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/hela/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

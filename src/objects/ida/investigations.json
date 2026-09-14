@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ida",
+  "entries": [
+    {
+      "id": "recorded-survey-1",
+      "subject": "Thomas shape + registered FITS mosaic, linked above",
+      "status": "included",
+      "finding": "Thomas shape + registered FITS mosaic, linked above — Coherent body frame, explicit gap semantics, original contributing-frame list — Included for shape, monochrome and radial elevation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ida/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "Stooke Small Bodies Maps V3.0 guide, 2015 revised Ida JPEG",
+      "status": "excluded",
+      "finding": "[Stooke Small Bodies Maps V3.0 guide](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html), [2015 revised Ida JPEG](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/243ida/ida_cylindrical_rev_mosaic.jpg) — Larger 7200×3600 cylindrical visualization based on the Thomas shape; improved presentation, public domain with credit — Downloaded, pinned as a registration reference and visually compared. Excluded from the present lens because the extensively processed JPEG has no separate source-validity mask; its smoothed coarse areas and gaps cannot be assigned the FITS zero semantics. It is explicitly unsuitable for photometric analysis. The larger grid alone is not proof of additional measured detail.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ida/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "Domingue green-filter SSI pair",
+      "status": "included",
+      "finding": "The calibrated seven-filter SSI archive supplies the selected green pair as a separate I/F view. The Thomas shape camera catalogue and archived detector-quality masks bind those frames. The release’s nadir calibration workaround prevents using its own geometry calculation; the included pair does not qualify other filters.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ida/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "USGS/RAND Ida control network",
+      "status": "excluded",
+      "finding": "[USGS/RAND Ida control network](https://astrogeology.usgs.gov/search/map/ida_image_control_network) — Tie points, revised image orientations and source images — Useful future input for rebuilding calibrated image geometry; not an independent surface lens. Excluded from this prepared global package.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ida/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-5",
+      "subject": "HIRES NIMS Ida spectral cubes",
+      "status": "unresolved",
+      "finding": "[HIRES NIMS Ida spectral cubes](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-A-NIMS-4-IDACUBE-V1.0) — Spatially resolved infrared radiance in point-perspective geometry — Unresolved as a scientifically distinct view. Not a registered global texture; spectral selection and instrument-footprint reprojection need their own source-backed recipe.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ida/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-6",
+      "subject": "Sullivan et al. geology and LPSC abstract",
+      "status": "unresolved",
+      "finding": "[Sullivan et al. geology](https://www.usgs.gov/publications/geology-243-ida) and [LPSC abstract](https://www.lpi.usra.edu/meetings/lpsc1995/pdf/1688.pdf) — Interpretations of craters, regolith and color units — Editorial background only. No verified registered machine-readable global geologic-unit release was identified in this concise survey; no painted geology lens or regions are fabricated.",
+      "revisitWhen": "New source evidence resolves the specific limitation recorded here; reuse the pinned prior finding rather than repeat the unchanged survey.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ida/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "ssi-multiband-color",
+      "subject": "Domingue SSI multiband color sets",
+      "status": "deferred",
+      "finding": "The examined release contains I/F images in seven filters and identified color sets. Only the green pair is currently qualified; no ready global color mosaic or registration for every band is established.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ida/README.md",
+        "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-A-SSI-3-IDA-CALIMAGES-V1.0"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ],
+      "revisitWhen": "Select a source-supported band composition, bind each band’s camera and quality mask, and pass independent registration checks against the selected mesh."
+    },
+    {
+      "id": "rejected-green-pair",
+      "subject": "SSI green images 0202558300 and 0202559400",
+      "status": "excluded",
+      "finding": "The useful projected patches did not establish four spatial registration checks at the retained tolerance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ida/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ],
+      "revisitWhen": "Corrected source geometry or new independent controls qualify four separated checks under the existing tolerance."
+    },
+    {
+      "id": "rejected-clear-filter-batch",
+      "subject": "SSI clear images 0202561700, 0202561745, 0202561800, 0202561945, 0202562300 and 0202562339",
+      "status": "excluded",
+      "finding": "The September 2026 follow-up found too little terrain in 0202561700 for four separated checks. Each other image failed a DoG/ZNCC check against the Thomas mosaic: correlation below 0.7, displacement above four pixels, or both. Image 0202562300 correlated at 0.949 with displacement (4, 2); 0202562339 displaced (-1, 13). No local camera correction or larger tolerance was applied.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ida/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ],
+      "revisitWhen": "Corrected source camera geometry or independent controls change the recorded failure; do not repeat the unchanged six-frame trial or raise its acceptance limits."
+    }
+  ]
+}

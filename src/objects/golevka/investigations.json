@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "golevka",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "Geometry is the unchanged [golevka.obj](https://echo.jpl.nasa.gov/asteroids/shapes/golevka.obj) from the [NASA/JPL radar model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html). Interpretation comes from [the original research](https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf): Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL. The original OBJ, paper, Horizons responses and authored recipe are pinned under source/. the original JPL shape and its scientific paper provide source geometry, scale, spin and limits. Shape displays the shared missing-imagery grid under prepared lighting.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/golevka/README.md",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/golevka.obj",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
+        "https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf",
+        "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/6489golevka.xml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The bounded JPL/PDS/paper survey found no calibrated registered optical mosaic, independent elevation measurement or composition map for this package.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/golevka/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "The PDS radar shape collection describes a center-of-mass origin and principal-axis frame, with positive Z as the spin pole. Its Golevka mesh and label were located, but both returned HTTP 403 during this acquisition; an exact numeric comparison to that counterpart remains unresolved. This package binds the original JPL mesh to its own paper’s dimensions and pole.",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/golevka/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "source-radius-elevation",
+      "subject": "Source-radius Elevation",
+      "status": "included",
+      "finding": "Elevation derives source radius minus the 0.265 km reference sphere, with a -0.11 to 0.14 km palette. This is a second visualization of the radar inverse model; it is not independent topography, optical albedo or gravitational elevation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/golevka/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "radar-figures-as-texture",
+      "subject": "Radar figures as surface textures",
+      "status": "excluded",
+      "finding": "delay-Doppler panels, optical light curves and model figures in the paper are observational constraints and research illustrations, not registered geographic surface textures. No generic regolith or invented surface detail is substituted.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/golevka/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ],
+      "revisitWhen": "A geographically registered surface product derived from these observations, with calibration and coverage evidence."
+    },
+    {
+      "id": "pds-archive-access",
+      "subject": "PDS radar-shape counterpart",
+      "status": "unresolved",
+      "finding": "[PDS Golevka counterpart](https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/6489golevka.xml) was located but XML and TAB downloads returned HTTP 403.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/golevka/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ],
+      "revisitWhen": "The archive becomes accessible through an authoritative release route; compare its numerical data and metadata with the pinned JPL counterpart."
+    }
+  ]
+}

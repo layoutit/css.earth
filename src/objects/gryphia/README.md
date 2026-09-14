@@ -82,16 +82,4 @@ Preserve its geometry as a qualified approximation and its spin files as provena
 
 <a id="views-and-source-survey"></a>
 
-<details>
-<summary>Views and source survey</summary>
-
-| Source candidate | Disposition | Reason |
-| --- | --- | --- |
-| DAMIT model search | included | Original body-specific convex shape and spin. Current search found no size-calibrated model. |
-| SBDB physical size and cited radiometry | included-qualified | Effective spherical diameter for approximate uniform physical scaling; retains quoted error and method limitations. |
-| Optical surface / resolved DEM / composition map | excluded | No registered surface map is supplied by the selected lightcurve inversion release. Shared grid and source-shape radial elevation are appropriate; no fabricated texture. |
-| [Pilcher, Franco & Pravec (2017), MPB 44 pp. 270–274](https://mpbulletin.org/issues/MPB_44-3.pdf) | included-limitation | Confirms tumbling, but insufficient cycles to determine second period. Existing fixed illustrative attitude avoids invented or falsely precise time propagation. |
-
-The model page and publication describe disk-integrated inversion data; such photometry cannot be repackaged as registered surface texels. Any unresolved complementary release remains a future source candidate rather than a fabricated view.
-
-</details>
+The [investigation ledger](investigations.json) records the source survey and alternative models.
