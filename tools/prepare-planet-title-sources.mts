@@ -7,7 +7,7 @@ import { pathToFileURL } from "node:url";
 
 import * as fontkit from "fontkit";
 
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { authoredObject } from "./authored-object.mts";
 import { PLANET_TITLE_RECIPE } from
   "../src/platform/planet-title-recipe.mts";
@@ -44,7 +44,7 @@ export async function preparePlanetTitleSources({
     opsz: PLANET_TITLE_RECIPE.opticalSize,
   });
   const prepared: Record<string, {source: PlanetTitleSource; moduleSource: string}> = {};
-  for (const planet of OBJECTS) {
+  for (const planet of SCENE_OBJECTS) {
     let label = planet.name;
     try {
       const content = requireRecord(JSON.parse(await readFile(resolve(projectRoot, `src/objects/${planet.id}/source/content/object.json`), 'utf8')));

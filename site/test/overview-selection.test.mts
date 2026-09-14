@@ -1,3 +1,4 @@
+import { testDistance } from './navigation-test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { overviewExitDistance, selectionAtCamera, watchOverviewSelection } from '../overview-selection.mts';
@@ -11,7 +12,7 @@ const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1] as const;
 const frame = (originM: PreparedWorldCameraFrame["originM"], bodyRadiusM: number): PreparedWorldCameraFrame => ({ originM, bodyRadiusM, referenceFrame: 'test', epochJdTt: 1,
   presentationToReference: rotation, metersPerUnit: 1 });
 const sun = frame([0, 0, 0], 10), ceres = frame([1000, 0, 0], 1);
-const objects = [objectFixture('sun', sun, { classification: 'star', distanceAu: 0 }), objectFixture('ceres', ceres)];
+const objects = [objectFixture('sun', sun, { classification: 'star', distance: testDistance(0) }), objectFixture('ceres', ceres)];
 const viewport = { focalPixels: 1000, principalOffsetPixels: [140, 0] as const };
 const camera = (frame: PreparedWorldCameraFrame, distanceUnits: number) => worldCameraFromCenteredPresentation({ rotation, distanceUnits }, frame, viewport);
 const choose = (world: WorldCameraPose, objectId: string, overview: boolean) => selectionAtCamera({ world, viewport, objects, objectId, overview });

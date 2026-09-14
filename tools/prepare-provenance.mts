@@ -1,7 +1,7 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFile } from 'node:fs/promises';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
 import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 import { hasErrorCode } from './source-values.mts';
@@ -22,7 +22,7 @@ export function provenanceIdentity(document: ProvenanceDocument) {
 }
 
 export async function recoverObjectProvenance(ids: readonly string[] | null = null, { root = process.cwd(), verify = false } = {}) {
-  const selected = OBJECTS.filter(object => !ids || ids.includes(object.id));
+  const selected = SCENE_OBJECTS.filter(object => !ids || ids.includes(object.id));
   if (ids && selected.length !== new Set(ids).size) throw new TypeError('Unknown object requested for provenance.');
   const results = [];
   const outputs: { path: string; text: string }[] = [];

@@ -31,6 +31,7 @@ export function provenanceManifest(value: unknown) {
 }
 export interface ProvenanceRecipeSource {id: string; path: string; sha256: string; parameters: Record<string, unknown>;}
 export interface ProductBinding {
+  observationAttribution: 'source-lineage' | 'none';
   id: string; label: string; recipe: string; selector: string; inputPaths: string[]; parents: string[]; urls: string[];
   process: string; limitations: string[]; lensIds: string[]; recipeDependencies: string[]; interpretation?: Record<string, unknown>;
 }

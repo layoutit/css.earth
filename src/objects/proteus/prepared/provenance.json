@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "proteus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "35fdf448d55f7aa55c4a5b464282caa9c3d4ad5d59ad01bf515e68e9eb4dc346"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
+    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
   },
   "recipes": [
     {
@@ -549,7 +549,7 @@
       "sha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -603,7 +603,7 @@
       "sha256": "2cbc85b09e7424100cc70ae04e2c3e6348de9c16e3d2b470cfcd3c80a6a7dcc5",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -650,7 +650,7 @@
       "sha256": "db382dbdddf392fc4bd259eae704f29d2079a79b0eab16667d3ab564c74f11c2",
       "bytes": 3310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -704,7 +704,7 @@
       "sha256": "37251119522eb390347b918920b14621f9b28ec6aecd12ebe48d79d64fd4223b",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -751,7 +751,7 @@
       "sha256": "647c4c8715e93c784e4fa007640cde04e176a5623507364440edce797abdb257",
       "bytes": 3337,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -805,7 +805,7 @@
       "sha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -852,7 +852,7 @@
       "sha256": "289c5ced3819a5dab6ee26fa1f4b7f0c099d051404b5174fc30d089543f7f9f9",
       "bytes": 3311,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -906,7 +906,7 @@
       "sha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -953,7 +953,7 @@
       "sha256": "baddb97ebd6d2bcfef48e09338dd95d6777744265246c4ba24de75bcf2dbe497",
       "bytes": 3310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1007,7 +1007,7 @@
       "sha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1054,7 +1054,7 @@
       "sha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42",
       "bytes": 3296,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1081,7 +1081,7 @@
       "sha256": "cb2bda1b080fa50e138c76deed52806f10a44ed1ca851b2224ef19bcae09c76c",
       "bytes": 5879,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1092,6 +1092,7 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
       "limitations": [],
@@ -1112,19 +1113,19 @@
           "url": "/scenes/proteus/proteus-elevation-thumbnail.webp",
           "bytes": 7376,
           "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
           "bytes": 376918,
           "sha256": "f44442af0337975d7e9d87ae64de2803245d3a183d0f7ce96ccadf845fa50b28",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1134,6 +1135,7 @@
       "label": "Monochrome",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [],
@@ -1158,13 +1160,13 @@
           "url": "/scenes/proteus/proteus-normal-thumbnail.webp",
           "bytes": 2308,
           "sha256": "be0839dea4f0307484810e2c35e55fa305200b68165004fba74913f91f6d455a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
           "bytes": 374926,
           "sha256": "d09885ebc88d3c251c70e095352fbec59b3894bec1501ff835cfd5380e571a97",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1174,6 +1176,7 @@
       "label": "False color",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [],
@@ -1200,13 +1203,13 @@
           "url": "/scenes/proteus/proteus-filter-color-thumbnail.webp",
           "bytes": 2998,
           "sha256": "215b8373ab113e90c21b1feafa903e3e2578898f33084f555d6c7b47aca73cbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-filter-color-surface@2x.webp",
           "bytes": 172904,
           "sha256": "013d96f4e39db21cefbd47204beeff466160573d66228e0207fc06d1bc8843a5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1216,6 +1219,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -1244,6 +1248,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -1268,6 +1273,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "filter-color"
@@ -1292,6 +1298,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

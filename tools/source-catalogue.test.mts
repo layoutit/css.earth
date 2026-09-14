@@ -6,7 +6,7 @@ import { join, relative } from 'node:path';
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { promisify } from 'node:util';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { sourceInventory } from './source-catalogue-inputs.mts';
 import { hasErrorCode } from './source-values.mts';
 import { sourceObject, sourceArray, sourceText, parseSourceCatalog, sourceResolver } from '../src/platform/source-catalog.mts';
@@ -99,7 +99,7 @@ test('source files reject mismatched IDs, duplicate provider identities and stal
   await assert.rejects(checkSourceCatalog(root, {...prepared, catalogSha256: sourceCatalogDigest(tampered)}), /differs from its records/);
 });
 const objectInput = async (id: string) => {
-  const object = OBJECTS.find(object => object.id === id)!;
+  const object = SCENE_OBJECTS.find(object => object.id === id)!;
   const page = sourceObject(await read(`src/objects/${id}/prepared/page.json`)), controls = sourceObject(page.controls);
   const lenses = controls.lenses === null ? [] : sourceArray(sourceObject(controls.lenses).controls, raw => {
     const lens=sourceObject(raw);return {id:sourceText(lens.id),label:sourceText(lens.label)};
@@ -107,7 +107,7 @@ const objectInput = async (id: string) => {
   return {id,name:object.name,route:object.route,base:`src/objects/${id}`,controls:lenses,provenance:validateObjectProvenance(await read(`src/objects/${id}/prepared/provenance.json`))};
 };
 test('source uses conserve all product dependencies, include models, and never convert metadata into observations', async () => {
-  const objects = await Promise.all(OBJECTS.map(object=>objectInput(object.id)));
+  const objects = await Promise.all(SCENE_OBJECTS.map(object=>objectInput(object.id)));
   objects.push(...await prepareVolumeProvenance());
   const metadata=prepared.usage.edges.filter(edge=>edge.consumerKind!=='object-product');
   assert.deepEqual(compileSourceUsage(objects,prepared.sources,metadata),prepared.usage);

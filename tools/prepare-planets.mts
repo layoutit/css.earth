@@ -18,7 +18,7 @@ export interface CachedPreparationOptions extends Omit<PreparationOptions, 'onEv
 }
 
 import cwebpPath from "cwebp-bin";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { defaultPreparationConcurrency, runObjectCommand, runPreparationObjects } from "./run-implemented-planets.mts";
 import { readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "./preparation-cache.mts";
 import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
@@ -59,12 +59,12 @@ export function tracedPreparationEnvironment(traceDirectory: string, environment
  * with tools/preparation-trace.mts, and its receipt lists exactly the files that run read and wrote.
  */
 export async function runCachedPreparationObjects({ projectRoot = process.cwd(), force = false,
-  objectIds = OBJECTS.map(({ id }) => id), concurrency = defaultPreparationConcurrency(),
+  objectIds = SCENE_OBJECTS.map(({ id }) => id), concurrency = defaultPreparationConcurrency(),
   runCommand = runObjectCommand, schedule = runPreparationObjects,
   environment = preparationEnvironment, sharedFiles = sharedPreparationFiles,
   onEvent = event => console.log(JSON.stringify(event)) }: CachedPreparationOptions = {}) {
   assert.ok(isArray(objectIds) && new Set(objectIds).size === objectIds.length &&
-    objectIds.every(id => OBJECTS.some(object => object.id === id)), "Preparation requires unique IDs from OBJECTS");
+    objectIds.every(id => SCENE_OBJECTS.some(object => object.id === id)), "Preparation requires unique IDs from SCENE_OBJECTS");
   assert.equal(typeof force, "boolean");
   const root = resolve(projectRoot), shared = await sharedFiles(root), toolchain = await environment();
   const pending: string[] = [], cached: string[] = [];
@@ -99,7 +99,7 @@ export async function runCachedPreparationObjects({ projectRoot = process.cwd(),
 }
 
 export async function preparePlanets({ projectRoot = process.cwd(), force = false,
-  objectIds = OBJECTS.map(({ id }) => id), concurrency = defaultPreparationConcurrency() }: Pick<CachedPreparationOptions, "projectRoot" | "force" | "objectIds" | "concurrency"> = {}) {
+  objectIds = SCENE_OBJECTS.map(({ id }) => id), concurrency = defaultPreparationConcurrency() }: Pick<CachedPreparationOptions, "projectRoot" | "force" | "objectIds" | "concurrency"> = {}) {
   const root = resolve(projectRoot), lock = resolve(root, cacheRoot, "running.lock");
   await mkdir(resolve(root, cacheRoot), { recursive: true });
   try { await writeFile(lock, JSON.stringify({ pid: process.pid, started: new Date().toISOString() }) + "\n", { flag: "wx" }); }

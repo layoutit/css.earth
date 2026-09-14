@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "metis",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "7acb7a46ebbca322ddf7eff9e00a06c63f7dd632629e59b16727922df12bec6f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
+    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
   },
   "recipes": [
     {
@@ -432,7 +432,7 @@
       "sha256": "4c3501a4e341b74405b89b285b404361fcff442b4819423a745cd6dbf26fe811",
       "bytes": 857088,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -479,7 +479,7 @@
       "sha256": "05b777e7781d3ade918ccbb7ce8993b54624cd7ac1c5a4f237f16f2a6f672bd0",
       "bytes": 5033,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -533,7 +533,7 @@
       "sha256": "9a3e93326e589847d6033a75cae9dbbd884ff52a9022c6f96ae722321f3f8895",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -580,7 +580,7 @@
       "sha256": "a2d5298b3f28aaa247d402ae7269d8744233bf97c123fd2d800e09d3c1cfc3a7",
       "bytes": 4837,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -634,7 +634,7 @@
       "sha256": "d34cbf3bafcc2d7f079c3ad250287660d0dac936082b183436ecc7d1f92c2e3b",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -681,7 +681,7 @@
       "sha256": "9e63ce4fcadfc499663fffca4460971ff94b7f7514e13ac55842d9fd18d3dbda",
       "bytes": 4837,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -735,7 +735,7 @@
       "sha256": "4daafe1c0c21cdaca61cc258f7835d31561ec76e7ac2ef8e07f033471ec67d71",
       "bytes": 810000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -782,7 +782,7 @@
       "sha256": "9d258a9ae9a4229a9e66d5af9379b205ea50e412c90e64ce7e871bb89b1930db",
       "bytes": 4835,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -836,7 +836,7 @@
       "sha256": "9df4199697827534e3d6429f4a879d2cc851c5a17f287c8d6b46925227ad3f69",
       "bytes": 808000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -883,7 +883,7 @@
       "sha256": "73057c454d46f4fa7cc024ab8b005a4742935f38375718255f919e02e0f3693a",
       "bytes": 4728,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -924,7 +924,7 @@
       "sha256": "e7dc2d82d1e95a2cfb35ed9466bfcc21196b883887ce48981e96bf61b2c93a91",
       "bytes": 67525,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -944,7 +944,7 @@
       "sha256": "0649f58ed5e3940f634d8716d5224a9641de4c1865c083e6a5c63e9fabf15d1b",
       "bytes": 4530,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -955,6 +955,7 @@
       "label": "Monochrome",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [],
@@ -985,13 +986,13 @@
           "url": "/scenes/metis/metis-normal-thumbnail.webp",
           "bytes": 1414,
           "sha256": "dcf8b7a04cb1c530804827acd1340a4faa0ed4f12d553968700659b23c4a2eb7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
           "bytes": 30766,
           "sha256": "f6077d939c90aa90f39ae2cb546ff1f2b311477010f65d753e12df2ca7978859",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1001,6 +1002,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -1029,6 +1031,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"

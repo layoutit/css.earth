@@ -28,7 +28,7 @@ import type { BodyId, SceneSatelliteRecord, RotationElements, Vsop87BodyKey } fr
 import { requireArray, requireRecord, requireString, readJsonSource } from "./source-values.mts";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { loadAstronomyPackage } from "../src/platform/astronomy-package.mts";
 import { loadSceneEpochEphemeris } from "../packages/astronomy/tools/scene-ephemeris.mts";
 
@@ -62,7 +62,7 @@ const {
   BODIES: ASTRONOMY_BODY_DATA,
 } = await loadAstronomyPackage();
 
-const BODIES = OBJECTS.filter(body =>
+const BODIES = SCENE_OBJECTS.filter(body =>
   ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar"].includes(body.classification)).map(body => {
   if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);
   return body.id as BodyId;
