@@ -4,7 +4,6 @@
   "namespace": "arrokoth",
   "displayName": "Arrokoth",
   "publicBase": "/scenes/arrokoth/",
-  "distanceAu": 44.05655144131418,
   "raster": {
     "width": 512,
     "height": 256,
@@ -185,12 +184,6 @@
     "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim."
   },
   "presentation": {
-    "defaultLens": "lorri",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "lorri"
   }
 }

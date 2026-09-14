@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="demodokus"])[data-lod="billboard"] .demodokus-scene, .planet-stage:where([data-object-id="demodokus"])[data-lod="marker"] .demodokus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="demodokus"])[data-lod="marker"] .demodokus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="demodokus"]).demodokus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

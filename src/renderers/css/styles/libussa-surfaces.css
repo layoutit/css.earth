@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="libussa"])[data-lod="billboard"] .libussa-scene, .planet-stage:where([data-object-id="libussa"])[data-lod="marker"] .libussa-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="libussa"])[data-lod="marker"] .libussa-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="libussa"]).libussa-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

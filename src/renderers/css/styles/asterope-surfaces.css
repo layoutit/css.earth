@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asterope"])[data-lod="billboard"] .asterope-scene, .planet-stage:where([data-object-id="asterope"])[data-lod="marker"] .asterope-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asterope"])[data-lod="marker"] .asterope-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asterope"]).asterope-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

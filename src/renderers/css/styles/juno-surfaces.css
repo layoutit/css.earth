@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="juno"])[data-lod="billboard"] .juno-scene, .planet-stage:where([data-object-id="juno"])[data-lod="marker"] .juno-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="juno"])[data-lod="marker"] .juno-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="juno"]).juno-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

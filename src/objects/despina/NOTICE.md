@@ -7,4 +7,4 @@ ISS and PDS Ring-Moon Systems Node. No paper figures or photographic surface
 texels are redistributed as model appearance. Ellipsoid sampling and standard
 no-coverage material: cssEarth, MIT.
 
-Starfield: ESO/S. Brunier, CC BY 4.0. Font: Inter, Rasmus Andersson, SIL OFL 1.1.
+Font: Inter, Rasmus Andersson, SIL OFL 1.1.

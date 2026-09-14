@@ -67,6 +67,6 @@ The shared astronomy package owns Saturn-relative position, scale and orbit. Its
 
 ## Source restoration
 
-The shared acquisition plan restores the pinned scientific inputs for preparation. Runtime users do not download the source plate models, floating-point camera frames or starfield TIFF. See NOTICE.md for credits.
+The shared acquisition plan restores the pinned scientific inputs for preparation. Runtime users do not download the source plate models or floating-point camera frames. See NOTICE.md for credits.
 
 </details>

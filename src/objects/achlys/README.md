@@ -4,7 +4,7 @@ Formerly 2003 AZ84, Achlys is a plutino in Neptune’s 3:2 orbital resonance. It
 
 ## Sources
 
-The published Jacobi-ellipsoid interpretation has semiaxes **470 ±20, 383 ±10 and 245 ±8 km** (full axes **940 × 766 × 490 km**). It assumes hydrostatic equilibrium and a **6.75-hour rotation**. The **Shape model** uses the normal unmapped-surface grid. Shadows and Orbit default off.
+The published Jacobi-ellipsoid interpretation has semiaxes **470 ±20, 383 ±10 and 245 ±8 km** (full axes **940 × 766 × 490 km**). It assumes hydrostatic equilibrium and a **6.75-hour rotation**. The **Shape model** uses the normal unmapped-surface grid. Shadows defaults off.
 
 | Source | Used for |
 | --- | --- |

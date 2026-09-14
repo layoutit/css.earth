@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="xanthippe"])[data-lod="billboard"] .xanthippe-scene, .planet-stage:where([data-object-id="xanthippe"])[data-lod="marker"] .xanthippe-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="xanthippe"])[data-lod="marker"] .xanthippe-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="xanthippe"]).xanthippe-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

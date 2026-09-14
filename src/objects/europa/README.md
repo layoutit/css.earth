@@ -135,7 +135,7 @@ A trial replacement of the entire global mosaic was rejected because its brightn
 
 Europa uses the shared object runtime, camera, shell, lighting placement, and orbital view. Its package owns the imagery and prepared scene. It never mounts inside Jupiter's scene.
 
-Jupiter's context sprite uses a 1024-pixel crop of the credited Hubble image from 5 January 2024. It uses the existing prepared marker contract and stays sharp when Jupiter is large in Europa's sky. Its clouds and photographic orientation are a historical observation, not a simulated view for the pinned epoch. Source bytes are owned by Europa so installation is independent of Jupiter. The scene is fixed at its preparation epoch and does not offer a rotation-speed control. Camera motion, Shadows, and Orbit use the shared controls.
+The scene is fixed at its preparation epoch and does not offer a rotation-speed control. Camera motion and Shadows use the shared controls.
 
 Individual observations range from about 200 m to 20 km per pixel. Differences in source resolution, seams, and observed illumination remain visible. No color, elevation, ocean, or thermal map is inferred from this image.
 
@@ -149,7 +149,7 @@ The source already contains shadows. The Shadows setting adds approximate spheri
 
 At the pinned preparation epoch, the orbital view uses Europa's parent-relative state and Jupiter's gravitational parameter to prepare an ellipse focused on Jupiter. The Sun retains its separate heliocentric position. The shared solar view approximates planet centres using VSOP87 system barycentres; satellites use the package's JPL mean Kepler elements, not a live high-precision ephemeris. The photographed surface uses IAU body orientation without a manual rotation.
 
-The sky uses the same ESO panorama, HYG catalogue, and ICRF preparation as the existing solid bodies. Source hashes, origins, and licenses are pinned in `source/manifest.json`; runtime files are listed in `runtime-assets.json`.
+Source hashes, origins, and licenses are pinned in `source/manifest.json`; runtime files are listed in `runtime-assets.json`.
 
 Original imagery remains unchanged and is excluded from Git. Preparation does not require another body's scene.
 
@@ -181,7 +181,7 @@ The NASA Trek/Jónsson 2015 color mosaic was rejected: its [author documents fic
 
 This package contains authored JSON recipes, source provenance, and generated JSON. Reusable observation masking, projection, lighting, celestial, and retained-scene operations live in `tools/objects/terrestrial-layers/`; no package-local executable preparer or runtime is required.
 
-Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. Lighting stays lossless.
 
 ## Agenor relative stereo terrain
 
@@ -208,6 +208,6 @@ The official USGS archive browser maps Individual Investigations to its working 
 <details>
 <summary>Shape, rotation and camera on the shared raster lane</summary>
 
-The recipe declares a sphere of 1560.8 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 3.5255-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera). The heliocentric view keeps the orbit around Jupiter and the parent marker now comes from the shared navigation atlas.
+The recipe declares a sphere of 1560.8 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 3.5255-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera).
 
 </details>

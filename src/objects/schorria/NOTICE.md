@@ -6,4 +6,4 @@ Physical scale: [Alí-Lagoa & Delbo (2017), A&A603,A55](https://doi.org/10.1051/
 
 No agency, archive, author or mission endorsement is implied. Scientific publications retain their original copyright; paper pages are not runtime assets.
 
-Sky: ESO/S. Brunier, CC-BY-4.0 (source/stars/ESO-IMAGE-LICENSE.md). Stars: HYG 4.1, David Nash/Astronexus, CC-BY-SA-4.0 (source/stars/LICENSE.md). Font: Inter Project Authors, SIL OFL 1.1 (source/presentation/LICENSE.INTER-OFL).
+Font: Inter Project Authors, SIL OFL 1.1 (source/presentation/LICENSE.INTER-OFL).

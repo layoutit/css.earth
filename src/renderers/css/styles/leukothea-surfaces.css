@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="leukothea"])[data-lod="billboard"] .leukothea-scene, .planet-stage:where([data-object-id="leukothea"])[data-lod="marker"] .leukothea-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="leukothea"])[data-lod="marker"] .leukothea-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="leukothea"]).leukothea-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

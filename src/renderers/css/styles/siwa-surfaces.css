@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="siwa"])[data-lod="billboard"] .siwa-scene, .planet-stage:where([data-object-id="siwa"])[data-lod="marker"] .siwa-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="siwa"])[data-lod="marker"] .siwa-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="siwa"]).siwa-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

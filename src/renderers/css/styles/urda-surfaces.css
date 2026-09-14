@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="urda"])[data-lod="billboard"] .urda-scene, .planet-stage:where([data-object-id="urda"])[data-lod="marker"] .urda-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="urda"])[data-lod="marker"] .urda-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="urda"]).urda-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

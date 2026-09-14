@@ -4,7 +4,6 @@
   "namespace": "rosalind",
   "displayName": "Rosalind",
   "publicBase": "/scenes/rosalind/",
-  "distanceAu": 19.19,
   "raster": {
     "width": 512,
     "height": 256,
@@ -78,12 +77,6 @@
     "sunSource": "JPL Uranus-system ephemeris; IAU Rosalind BODY713 pole and meridian from PCK00011, with periodic terms frozen at the prepared epoch."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

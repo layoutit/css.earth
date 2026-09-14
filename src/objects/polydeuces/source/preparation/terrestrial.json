@@ -4,7 +4,6 @@
   "namespace": "polydeuces",
   "displayName": "Polydeuces",
   "publicBase": "/scenes/polydeuces/",
-  "distanceAu": 9.58,
   "raster": {
     "width": 512,
     "height": 256,
@@ -113,12 +112,6 @@
     "sunSource": "JPL Saturn-system ephemeris. Display pole aligned to the fitted orbital normal; arbitrary meridian, no measured spin or current landmark phase is claimed."
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

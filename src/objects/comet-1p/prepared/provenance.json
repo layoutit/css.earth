@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-1p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "46b0b049586fd4acbce238e92354707c214af7c96d3c419eb8318c69fea73edb"
+    "sha256": "194d8d44df31ca1089c1696908bba5cf0472a2af573daecd3229cff00f3f6d69"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5494e1f6ddce35dde8a998547dbe984691495bbe99dc42f13fc21bab4ed96c67",
+      "sha256": "89800ed375058067532088b39facb765d814c7f2fcf8d757b834eee9ef089a4b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-1p",
         "displayName": "Halley",
         "publicBase": "/scenes/comet-1p/",
-        "distanceAu": 17.859422957021373,
         "raster": {
           "width": 512,
           "height": 256,
@@ -141,20 +140,14 @@
           "qualification": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "56f7c9b11d48fd68ea935276ad35f6369e3b36edd900596e3af3e9d2c1b3c24a",
+      "sha256": "4f763104006f4a2fcd271324bb218db639c51ca08a1727431b8e361d14c6e0a0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -226,12 +219,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -260,12 +247,6 @@
             "role": "observations",
             "description": "Calibrated encounter images; not used as a surface texture",
             "href": "https://esdcdoi.esac.esa.int/doi/html/data/planetary/GIOTTO/GIO-C-HMC-3-RDR-HALLEY.html"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -322,7 +303,7 @@
       "sha256": "8b3877838dfe861e7a9ba0878e38b1aab9bfbb01ab2809fd670a41fbe8b0adfe",
       "bytes": 26573,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -351,7 +332,7 @@
       "sha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -375,10 +356,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "56f7c9b11d48fd68ea935276ad35f6369e3b36edd900596e3af3e9d2c1b3c24a",
-      "bytes": 3969,
+      "sha256": "4f763104006f4a2fcd271324bb218db639c51ca08a1727431b8e361d14c6e0a0",
+      "bytes": 3690,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -415,13 +396,13 @@
           "url": "/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
           "bytes": 2416,
           "sha256": "87505842ef01f312fbeee474ebc4d5274a923023c2a7673d6b451c26dab0363b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
           "bytes": 125222,
           "sha256": "600eca0c4295947aab5108a0cf1b8fc99e2d6f03c18e055f2d649d79f78b1ac6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -464,13 +445,13 @@
           "url": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-1p/comet-1p-model-surface@2x.webp",
           "bytes": 92752,
           "sha256": "9277d8d953863a8117f32ac0624eb3f8cea2567540605b9ab4791192b8479250",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -501,8 +482,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4576,
-          "sha256": "bba84940a56cf2ce67eeb1f629f1606a3b8978f1ced330ddf6ff22ed5a317b06",
+          "bytes": 4457,
+          "sha256": "d7e4b5b460ee973e8c62fb209ccd8677e9c8121f3d60b24593a858a789bdf70e",
           "verification": "bytes-verified"
         }
       ],
@@ -537,5 +518,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-1p",
+    "materialSha256": "05ed8e35a6b7ec903cd7bdcf9ac27eccbef0e7735367c6d8bc0dc5fbb0af104c",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

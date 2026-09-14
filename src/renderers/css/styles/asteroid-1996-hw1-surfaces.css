@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asteroid-1996-hw1"])[data-lod="billboard"] .asteroid-1996-hw1-scene, .planet-stage:where([data-object-id="asteroid-1996-hw1"])[data-lod="marker"] .asteroid-1996-hw1-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asteroid-1996-hw1"])[data-lod="marker"] .asteroid-1996-hw1-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asteroid-1996-hw1"]).asteroid-1996-hw1-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="dejanira"])[data-lod="billboard"] .dejanira-scene, .planet-stage:where([data-object-id="dejanira"])[data-lod="marker"] .dejanira-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="dejanira"])[data-lod="marker"] .dejanira-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="dejanira"]).dejanira-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

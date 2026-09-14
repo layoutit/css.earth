@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import test from 'node:test';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS as OBJECTS } from '../site/objects.mts';
 
 // Run after prepare:object-json. The checked-in tree gate also runs in CI
 // without requiring generated transports or an asset download.

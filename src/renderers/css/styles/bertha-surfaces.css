@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bertha"])[data-lod="billboard"] .bertha-scene, .planet-stage:where([data-object-id="bertha"])[data-lod="marker"] .bertha-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bertha"])[data-lod="marker"] .bertha-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bertha"]).bertha-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

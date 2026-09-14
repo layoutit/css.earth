@@ -175,12 +175,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "stars",
-        "label": "Stars",
-        "checked": true
       }
     ]
   },
@@ -203,12 +197,6 @@
       "role": "surface",
       "description": "PIA03456 processed Galileo color, May 2001",
       "href": "https://science.nasa.gov/photojournal/global-callisto-in-color/"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

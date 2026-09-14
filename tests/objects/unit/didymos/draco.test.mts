@@ -38,7 +38,7 @@ for (const frame of recipe.frames) test(`${frame.id}: target selection preserves
   assert.ok(camera.holdoutPixels > 5000 && camera.maximumResidualPixels < 0.00002);
   let sampled = 0;
   for (let i = 0; i < selected.width * selected.height; i += 53) if (selected.valid(i)) {
-    const hit = mesh.closestPoint(selected.xyz(i).map(n => n * 1000), recipe.transfer.maximumSourceDistanceMeters);
+    const hit = mesh.closestPoint(selected.xyz(i).map(n => n * 1000), recipe.transfer.maximumSeparationMeters);
     assert.ok(hit, `selected pixel ${i} misses the source mesh`); sampled++;
   }
   assert.ok(sampled >= 100);

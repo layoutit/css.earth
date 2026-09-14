@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-c1995-o1",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d2261dfa595b2e1bf6204d75c85ee1cfa9c1525b6f69bc36e01698f0f0dd246f"
+    "sha256": "d40a102255e95207bd9964c2eb8314bae242edf2bf091d345bdc9a31453b4829"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "152db3520039e5c892327cc5c799ff8c39c7b66c3521c603801fdf83ce912cbe",
+      "sha256": "58f7750e55b01aad2f0f8335ad134df18c04b72e2c22f3ca5b5158dc5fbbe816",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-c1995-o1",
         "displayName": "Hale–Bopp",
         "publicBase": "/scenes/comet-c1995-o1/",
-        "distanceAu": 51.070270471508714,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dc21d09df7fe172398592ba6f25554b18f6058beb2cb58b1da0f0b06ed5d5428",
+      "sha256": "7721c459a3c645fc5059273c6c872e0c54bb6aab02cdeb857f8a1a23d106baab",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "13f4299aba81945399bc84ccfc96eb0bcbb81524071466c2e4e6a770b932212a",
       "bytes": 439098,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dc21d09df7fe172398592ba6f25554b18f6058beb2cb58b1da0f0b06ed5d5428",
-      "bytes": 3094,
+      "sha256": "7721c459a3c645fc5059273c6c872e0c54bb6aab02cdeb857f8a1a23d106baab",
+      "bytes": 2814,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -336,13 +317,13 @@
           "url": "/scenes/comet-c1995-o1/comet-c1995-o1-model-thumbnail.webp",
           "bytes": 1378,
           "sha256": "be78380ce789be49a62a4ac00449d097f835fb81faf6ae7c3b12851ee7eaae24",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-c1995-o1/comet-c1995-o1-model-surface@2x.webp",
           "bytes": 120364,
           "sha256": "880e9dbc01ce2f4c710df3ae9ecdf3dcc70dbe4555776f0b0c4bafea2629de6f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -373,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6404,
-          "sha256": "5d2599299cf2c0302358bf14d686bfe59fd70659fb827ae7972cad74a75e8bab",
+          "bytes": 6285,
+          "sha256": "cfed94d9f2fa6f0ca4fbf7c4592033562b9b787f6c43146e3cc08d031bf91ccc",
           "verification": "bytes-verified"
         }
       ],
@@ -384,5 +365,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-c1995-o1",
+    "materialSha256": "cef86052071c687da83ea6cdc7b9692e25411b10a876b6569d7d9930f1a13e5f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "medea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "299617091741053fa26c871025c9d9ecea0d54f26b75f290155d2ba59df9be6d"
+    "sha256": "67c8ff6098af6c0fc9a7cc2bbc8b7647d3e841551701384e30107b3e6b99aa3e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "847fb54adee9dd67fa0d9a2af7ecc5e4ec4703f15955de3364bbe5862ba045bd",
+      "sha256": "cbc38da9b84d8583c08127b00175a78083706474d69d9b00e85226b5a5a008a4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "medea",
         "displayName": "Medea",
         "publicBase": "/scenes/medea/",
-        "distanceAu": 3.1164528663194453,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1091 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "867a97a0f2f5bf12092b586d1368f19c142f86b6dbaa5ed67ce4dd98dfcec78d",
+      "sha256": "9ee5030472480510add40b68a985d8f085f4b15aad655f8e138907b97cd56897",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1091"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "7002b307b1713a7ab911659586b73aac5175f32f77a06eadb506f9d2d3c8294f",
       "bytes": 81493,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "867a97a0f2f5bf12092b586d1368f19c142f86b6dbaa5ed67ce4dd98dfcec78d",
-      "bytes": 10019,
+      "sha256": "9ee5030472480510add40b68a985d8f085f4b15aad655f8e138907b97cd56897",
+      "bytes": 9740,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/medea/medea-elevation-thumbnail.webp",
           "bytes": 6010,
           "sha256": "d847f64ade851eb1117ac9c614066abc5d56e604ebacee1a51c18fe969a7df69",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/medea/medea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/medea/medea-elevation-surface@2x.webp",
           "bytes": 298756,
           "sha256": "fdc60961cf7173a070c66cee5ae076d32485e23e11eef6abb1f56d733faf451a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/medea/medea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/medea/medea-shape-surface@2x.webp",
           "bytes": 231836,
           "sha256": "ead32a29960e68af806d235ba557ddc0cff8cae198217dab7065b906ecc6d4a3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7399,
-          "sha256": "5e5b83c0f8a33a4a7b3e40eb29e75d9601a0c8bc6a60d5b12b792239567a4fcd",
+          "bytes": 7280,
+          "sha256": "bd9b189802a839cd72138625dba5e2d7493ee80fc5d9789107a4fbf484f71496",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "medea",
+    "materialSha256": "94f2d3faa0f9e7ad82d1c3127963118ff5e09ec2186aaf839525edd6b7fece88",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -185,9 +185,3 @@ dust structures or reproduce physical disocclusion. It avoids copying cloud
 features across independent depth layers. Neither geometry nor imagery is
 generated in the browser. The NASA source epoch stays in provenance; shared
 camera metadata uses the volume's Sun-centered ICRF frame and epoch.
-
-## Shared banks
-
-`prepared/shared/catalogue-stars/<sha256>.json` is the retained star catalogue
-that every body's cubic sky references by content hash instead of repeating it;
-see [prepared shared banks](../../../docs/prepared-shared-banks.md).

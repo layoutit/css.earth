@@ -53,6 +53,6 @@ Surface/pole atlases, native triangle maps, shared flood/directional lighting, t
 
 ## Restoration and attribution
 
-`source/preparation/acquisition.json` downloads exact archived camera frames, radius table, font and ESO panorama. Authored geometry/source interpretation and the pinned context derivative are checked in; the latter is reproducible with the shared radial snapshot preparer. Physical facts:[NASA Amalthea](https://science.nasa.gov/jupiter/jupiter-moons/amalthea/). Orbit/pole come from the shared vendored JPL astronomy package.
+`source/preparation/acquisition.json` downloads exact archived camera frames, radius table and font. Authored geometry/source interpretation and the pinned context derivative are checked in; the latter is reproducible with the shared radial snapshot preparer. Physical facts:[NASA Amalthea](https://science.nasa.gov/jupiter/jupiter-moons/amalthea/). Orbit/pole come from the shared vendored JPL astronomy package.
 
 </details>

@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/iphigenia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'iphigenia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/iphigenia/iphigenia-directional-sun.webp",
-      "two": "/scenes/iphigenia/iphigenia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/iphigenia/iphigenia-shape-surface@2x.webp"
   ],

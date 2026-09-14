@@ -58,7 +58,6 @@ export function requireCamera(value: unknown): asserts value is CameraPlan {
     const dolly = record(camera.dolly, 'dolly'); choice(dolly.model, ['multiplicative-wheel-distance'], 'dolly model');
     for (const name of ['wheelStepPerDelta', 'minimumDistanceRadii', 'maximumDistanceOverOrbitExtent']) positive(dolly[name], `dolly ${name}`);
     if (!(positive(dolly.minimumDistanceRadii, 'minimum distance') > 1)) fail('camera must remain outside body');
-    if (dolly.maximumDistanceOverSystemExtent !== undefined) positive(dolly.maximumDistanceOverSystemExtent, 'maximum system distance');
   }
   if (camera.levelOfDetail !== undefined) {
     const lod = record(camera.levelOfDetail, 'level of detail'); choice(lod.model, ['silhouette-diameter-crossfade'], 'level of detail model');
@@ -68,14 +67,6 @@ export function requireCamera(value: unknown): asserts value is CameraPlan {
   if (camera.orbitLineFade !== undefined) {
     const fade = record(camera.orbitLineFade, 'orbit line fade');
     if (!(finite(fade.visibleBelowDiscHeightShare, 'visible orbit threshold') < finite(fade.hiddenAboveDiscHeightShare, 'hidden orbit threshold'))) fail('orbit fade bounds are invalid');
-  }
-  if (camera.planetarySystem !== undefined) {
-    const system = record(camera.planetarySystem, 'system fade'); choice(system.model, ['distance-over-orbit-extent-fade'], 'system fade');
-    if (!(positive(system.hiddenBelowDistanceOverOrbitExtent, 'hidden system distance') < positive(system.visibleAboveDistanceOverOrbitExtent, 'visible system distance'))) fail('system fade bounds are invalid');
-  }
-  if (camera.sunMarker !== undefined) {
-    const marker = record(camera.sunMarker, 'Sun marker fade'); choice(marker.model, ['sprite-diameter-crossfade'], 'Sun marker fade');
-    if (!(positive(marker.fadeStartSpritePixels, 'Sun fade start') > positive(marker.fullSpritePixels, 'Sun fade end'))) fail('Sun marker fade bounds are invalid');
   }
   if (camera.drag !== undefined) choice(record(camera.drag, 'drag').model, ['screen-axis-tumble'], 'drag model');
   if (camera.projection !== undefined && (!camera.dolly || !camera.levelOfDetail || !camera.orbitLineFade)) fail('perspective camera requires dolly and appearance thresholds');

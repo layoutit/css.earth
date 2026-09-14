@@ -33,7 +33,7 @@ The candidate dispositions and their source evidence are recorded in the [invest
 
 The published study explains that the inner four Neptunian moons were imaged as small, often trailed disks. Flood lighting and Shadows both describe the same approximate geometry. Surface, thumbnail, minimap and companion portrait use that prepared grid.
 
-Preparation uses the authored terrestrial recipe, native u triangles and existing meshoptimizer with a 480-face target (2,000 maximum). Source acquisition restores pinned external font and starfield inputs; the scientific numeric model is checked in.
+Preparation uses the authored terrestrial recipe, native u triangles and existing meshoptimizer with a 480-face target (2,000 maximum). Source acquisition restores pinned external font input; the scientific numeric model is checked in.
 
 See [NOTICE.md](NOTICE.md) for credits.
 

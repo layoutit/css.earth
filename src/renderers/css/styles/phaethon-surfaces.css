@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="phaethon"])[data-lod="billboard"] .phaethon-scene, .planet-stage:where([data-object-id="phaethon"])[data-lod="marker"] .phaethon-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="phaethon"])[data-lod="marker"] .phaethon-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="phaethon"]).phaethon-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

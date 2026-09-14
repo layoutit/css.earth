@@ -197,14 +197,8 @@ if (!(input instanceof HTMLInputElement)) throw new Error("Expected HTMLInputEle
     const wrongLightingDensity = "/scenes/mercury/mercury-lighting-1x-row-";
     assert.ok(resources.some((url) => url.includes(expectedLightingDensity)));
     assert.equal(resources.some((url) => url.includes(wrongLightingDensity)), false);
-    assert.equal(resources.filter((url) => url.endsWith(
-      "/scenes/mercury/mercury-starfield-front@2x.webp") ||
-      url.endsWith("/scenes/mercury/mercury-starfield-right@2x.webp") ||
-      url.endsWith("/scenes/mercury/mercury-starfield-back@2x.webp") ||
-      url.endsWith("/scenes/mercury/mercury-starfield-left@2x.webp") ||
-      url.endsWith("/scenes/mercury/mercury-starfield-top@2x.webp") ||
-      url.endsWith("/scenes/mercury/mercury-starfield-bottom@2x.webp")
-    ).length, 6);
+    assert.equal(resources.some((url) => url.includes("/scenes/mercury/mercury-starfield")), false,
+      "the shared universe draws the sky");
     assert.deepEqual(externalRequests, []);
     assert.deepEqual(problems, []);
     reports.push({

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="europa-52"])[data-lod="billboard"] .europa-52-scene, .planet-stage:where([data-object-id="europa-52"])[data-lod="marker"] .europa-52-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="europa-52"])[data-lod="marker"] .europa-52-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="europa-52"]).europa-52-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

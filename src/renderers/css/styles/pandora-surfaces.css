@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="pandora"])[data-lod="billboard"] .pandora-scene, .planet-stage:where([data-object-id="pandora"])[data-lod="marker"] .pandora-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="pandora"])[data-lod="marker"] .pandora-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="pandora"]).pandora-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

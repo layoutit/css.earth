@@ -1,4 +1,4 @@
-import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
+import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant, PreparedWrite } from '../../rendering/prepared-presentation.js';
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
@@ -7,8 +7,8 @@ import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard';
 export async function prepareComposite(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
-  const { namespace: ns, scene: plan, assets, lenses, sun, markers: systemMarkerStrip, solarSource: solarSystemSource } = input;
-  const { createPreparedNodeTree, prepareCssomDeclarationReads, prepareCatalogueStars, prepareSolarSystemPresentation, navigationMarkers: PREPARED_NAVIGATION_MARKERS } = adapters;
+  const { namespace: ns, scene: plan, assets, lenses, sun, solarSource: solarSystemSource } = input;
+  const { createPreparedNodeTree, prepareCssomDeclarationReads } = adapters;
 
   const material=plan.material;
   // An airless body carries Mercury's Lambert row bank instead of an atmospheric phase atlas: the composite plane
@@ -17,7 +17,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   const bank=atmospheric?null:assets.lighting?.banks[String(CANONICAL_PREPARED_IMAGE_DENSITY)];
   if(!atmospheric&&(!bank||!bank.billboard||bank.billboard.presentations.length!==assets.lighting.frameCount))throw new TypeError('Airless composite needs the prepared lighting bank and billboard atlas.');
   const layers=atmospheric?(["surface","poles","material"] as const):(["surface","poles"] as const);
-  const warm=[...preparedSunResources(sun,"warm"),
+  const warm=[
     ...(atmospheric?[{key:"lighting",url:canonicalPreparedAsset(material.lightingUrl,material.lighting2xUrl),pool:"warm"}]
       :[{key:"shadowless",url:bank!.presentations[bank!.presentations.length-1]!.url,pool:"warm"},{key:BILLBOARD_LIGHTING_KEY,url:bank!.billboard.url,pool:"warm"}])];
   const lightingRows=atmospheric?[]:bank!.rows.map((row,index)=>({key:`lighting:${index}`,url:row.url,pool:"lighting"}));
@@ -60,12 +60,11 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
       zeroAtPole:false,property:`--${ns}-light-roll`},frameAttribute:null,modeAttribute:null,quoted:true};
   const variants: PreparedVariant[]=[];
   const atmospheres: (boolean|null)[]=atmospheric?[false,true]:[null];
-  for(const lens of lenses.controls)for(const atmosphere of atmospheres)for(const stars of [false,true])for(const shadows of [false,true]){
+  for(const lens of lenses.controls)for(const atmosphere of atmospheres)for(const shadows of [false,true]){
     const focus=input.lensFocus?.[lens.id];
-    variants.push({...(focus?{navigation:adapters.prepareLensNavigation(solarSystemSource.bodyId,focus,plan.camera)}:{}),when:{lensId:lens.id,...(atmosphere===null?{}:{atmosphere}),stars,shadows},required:required(lens.id),writes:[
+    variants.push({...(focus?{navigation:adapters.prepareLensNavigation(solarSystemSource.bodyId,focus,plan.camera)}:{}),when:{lensId:lens.id,...(atmosphere===null?{}:{atmosphere}),shadows},required:required(lens.id),writes:[
       {kind:"attribute",target:-1,name:"data-lens",value:lens.id},{kind:"attribute",target:-1,name:"data-view",value:null},
       ...(atmosphere===null?[]:[{kind:"class",target:-1,name:`${ns}-hide-atmosphere`,value:!atmosphere} as PreparedWrite]),
-      {kind:"class",target:-1,name:`${ns}-hide-stars`,value:!stars},
       ...(atmospheric?[]:[{kind:"class",target:-1,name:`${ns}-hide-shadows`,value:!shadows} as PreparedWrite]),
     ],materials:[atmospheric?{track:"lighting",bank:"lighting",mode:"frames",enabled:true,rotationEnabled:shadows,
       frameOverride:shadows?null:material.frameCount-1,clearWhenHidden:false,fixedMode:"shadowless"}
@@ -75,17 +74,6 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
         addressAttributes:[{name:"data-material-frame",source:shadows?"frame":"literal",value:null},
           {name:"data-material-mode",source:"literal",value:shadows?null:"full-phase-curvature"}]}]});
   }
-  const catalogue = await prepareCatalogueStars({ fovDegrees: plan.starfield.catalogueStars.exposure.fovDegrees });
-  const heliocentricView = prepareSolarSystemPresentation({
-    bodyId: solarSystemSource.bodyId, plan: plan.heliocentricView,
-    navigationMarkers: PREPARED_NAVIGATION_MARKERS, markerAtlasUrl: solarSystemSource.markerAtlasUrl,
-    systemMarkerStrip: systemMarkerStrip, captionNames: solarSystemSource.captionNames, catalogue,
-    phaseAtlas: atmospheric ? { url: canonicalPreparedAsset(material.lightingUrl, material.lighting2xUrl),
-      columns: material.frameColumns, rowCount: material.frameRows, frameCount: material.directionalFrameCount,
-      minimumLightViewZ: material.minimumLightViewZ, maximumLightViewZ: material.maximumLightViewZ,
-      baseLightAzimuthDegrees: material.baseLightAzimuthDegrees }
-      : { ...bank!.billboard, minimumLightViewZ: assets.lighting.minimumLightViewZ, maximumLightViewZ: assets.lighting.maximumLightViewZ, baseLightAzimuthDegrees: assets.lighting.baseLightAzimuthDegrees },
-  });
   return {schema:PREPARED_PRESENTATION_SCHEMA,camera:plan.camera,sky:plan.starfield,sun:sun,
     assets:{entries,pools:[preparedResourcePool("warm",entries,{retention:"warm"}),
       preparedResourcePool("material",entries,{retention:"selection",capacity:6,concurrency:6}),
@@ -93,7 +81,6 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
         concurrency:bank!.transport.maximumRetainedRowCount,eviction:"capacity",reuse:true})])],
       startup:[...new Set([...warm.map(entry=>entry.key),...required(lenses.defaultLens),...(atmospheric?[]:bank!.transport.initialWarmRows.map(row=>`lighting:${row}`))])]},
     tree,variants,...(atmospheric?{}:{resourceOrder:"materials-first" as const}),materials:[track],
-    heliocentricView,
     viewBindings:[{kind:"silhouette-fit",target:index(composite),minimumRadius:POINT_MIN_RADIUS_PX,
       unitScale:2/plan.camera.logicalBodyDiameter},
       {kind:"view-attribute",target:-1,property:"data-lod",source:"level-of-detail-stage",precision:null},

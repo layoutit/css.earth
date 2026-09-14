@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="gkunhomdima"])[data-lod="billboard"] .gkunhomdima-scene, .planet-stage:where([data-object-id="gkunhomdima"])[data-lod="marker"] .gkunhomdima-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="gkunhomdima"])[data-lod="marker"] .gkunhomdima-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="gkunhomdima"]).gkunhomdima-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

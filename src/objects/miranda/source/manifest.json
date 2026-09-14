@@ -127,33 +127,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -1493,33 +1466,6 @@
       }
     },
     {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 850,
-      "expectedSha256": "cd34205b7db415dbbfbb54766ba4ee00d25d9386a84369a93f3ceed7ed9d6ea3",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/52"
-          }
-        ]
-      }
-    },
-    {
       "id": "miranda-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 4848,
@@ -1549,8 +1495,8 @@
     {
       "id": "miranda-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1647,
-      "expectedSha256": "04e06de6bf0f3bc8c05fa0cb4573ec1e09fb0b63b417ec1f063006cef38f8807",
+      "expectedBytes": 309,
+      "expectedSha256": "cd912cd52e1befd4e90e7f3482d4666aac101637d1c272a992fddd5711695ab8",
       "origin": "Repository-authored Miranda solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1608,8 +1554,8 @@
     {
       "id": "miranda-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 224,
-      "expectedSha256": "b1102c6415baeff105db4edc465d679e6d6aba4471601a239f2ab03c49d55847",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Miranda celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1664,8 +1610,8 @@
     {
       "id": "miranda-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 11658,
-      "expectedSha256": "b8601ac3d56112bde7186d5ce564699896ee54078a8243e97c0dd368f7a614c4",
+      "expectedBytes": 11474,
+      "expectedSha256": "a60a9104e95567dfc90348a9bbcee11dde2c141782a40e2f7c5938db6e76a64a",
       "origin": "Repository-authored Miranda acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1683,8 +1629,8 @@
     {
       "id": "miranda-object-content",
       "path": "content/object.json",
-      "expectedBytes": 14572,
-      "expectedSha256": "bd34d98d07f9b0c8c55e7df9c7f10d6cf35396cf14906f07523dcb54d704d777",
+      "expectedBytes": 14293,
+      "expectedSha256": "b7fca560a60263c38b10b9c38ea18b01b72009045153c4a53536ecdf14909077",
       "origin": "Repository-authored Miranda object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1706,16 +1652,6 @@
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
       "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "observations/aaReadMe_uranian_MAP_DEM.txt",

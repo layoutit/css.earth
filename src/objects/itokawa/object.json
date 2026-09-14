@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ec7fd2b1d86391f467539e1f1a5ced82b682a6f0233c317b666ebc0d96ad1bb6"
+    "sha256": "f105059048cc6620e7a17efad0593fa58cfad986e274994f11e2f7b54a4730f5"
   },
   "id": "itokawa",
   "properties": {
@@ -57,7 +57,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "a2bd53758a3dbdc997f70ba728d56d551b485161744c2924a24537e9ac31af4b"
+          "sha256": "946ad3fd14e8966760d8be129150775304983f5ab60b94ca37e04490af1877eb"
         },
         {
           "id": "rotation",
@@ -67,7 +67,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "49fa2e4a103cd2ac7cd734a90b6cfb5fe3beae39994dc9b273ecbd99fe9879db"
+          "sha256": "0caa04610ef4d5f015c555565dd8de6efdad673578b95fe4ebf25e4fbec8b60a"
         },
         {
           "id": "title",
@@ -82,7 +82,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "999c80407b4120b1af7a4fe93bb0310b8a88d5055834cd75dd7461211d3701e5"
+          "sha256": "1ac7591f85caa74f1546e834b9ffe93485636e2e3408b025d6ca8d84c74aec0a"
         },
         {
           "id": "features",
@@ -128,7 +128,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5f0f6d66c6b82ad3332b0bc4cc2430f30a31ae5cdc58015623cee6c41a6d10cf"
+        "sha256": "92bea89fac50aa4366d2aec58cd13b07be570656dabc92d501694ae8fe3c3900"
       }
     },
     "catalog": {

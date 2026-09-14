@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "74796f98ee8ca8dbd9985543b18b587a19b2d9f4528b8a56d17fff4c328f76a1"
+    "sha256": "2b62334a1faf62411608e9b2e512ec999bfc385c0a885f91d1369df4d358a7be"
   },
   "id": "ryugu",
   "properties": {
@@ -77,7 +77,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "236b312a46c8b994471e2445a38f10a3564fe63a607db0eaebb604c03b70f4f7"
+          "sha256": "db35b8b9ea6b6fd11ba9b0133ca04cf3621d7475e92172c9d12d04e2d4d70d38"
         },
         {
           "id": "rotation",
@@ -87,7 +87,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "854286864c3262a82af2221ad9e8c0c24e71d430649cff76f6a4fdf474092040"
+          "sha256": "c69c3b149ca57fb05e0289ce76a4dc91d566d4ad1c8d769d0cc834d62bd8e9c1"
         },
         {
           "id": "title",
@@ -102,7 +102,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2ea589e3a4683f7fecc35b06874f71f495609d52e17dbbfcf22ae7a2dd0911bb"
+          "sha256": "4447dee54993b63f26027f613ddc5de7bc52e45cc191299032919f3911f94284"
         },
         {
           "id": "features",
@@ -148,7 +148,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8a687b36715cf1f1dade33cbb4d00da375c6458735587007c6b5c1be8bfc909a"
+        "sha256": "0ce2526efb1f40455b63afa0f871e1bdbc35ec730a870f3852b8737d4333e9c4"
       }
     },
     "catalog": {

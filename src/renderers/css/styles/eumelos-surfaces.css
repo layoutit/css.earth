@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="eumelos"])[data-lod="billboard"] .eumelos-scene, .planet-stage:where([data-object-id="eumelos"])[data-lod="marker"] .eumelos-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="eumelos"])[data-lod="marker"] .eumelos-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="eumelos"]).eumelos-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

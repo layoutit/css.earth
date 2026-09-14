@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/ganymed/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'ganymed',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/ganymed/ganymed-directional-sun.webp",
-      "two": "/scenes/ganymed/ganymed-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/ganymed/ganymed-shape-surface@2x.webp"
   ],

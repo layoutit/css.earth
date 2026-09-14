@@ -58,6 +58,8 @@ export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory,
       const product = lens.products.find(p => p.kind === 'surface' && p.filename.includes('@2x')) ?? lens.products.find(p => p.kind === 'surface');
       if(!product)throw new TypeError("Observed preview requires a surface product.");
       const image = await read(product.filename);
+      // Only the drawn surface product carries packing; projection and alpha products of the same lens do not.
+      if (!product.packing) throw new TypeError("Observed preview surface product requires its packing.");
       const { bandCount, gutter } = product.packing;
       const width = image.info.width - 2 * gutter, height = image.info.height - 2 * gutter * bandCount;
       yield { id: lens.id, raster: unpackSurfacePreview(image, { width, height, bandCount, gutter }) };

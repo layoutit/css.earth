@@ -72,6 +72,7 @@ test('native photographic maps retain their source grids and defer cloud composi
       map:{path:'base.png',compositeClouds:true,displayGamma:1.25,nativePhotographicSampling:true}});
     assert.deepEqual([prepared.info.width,prepared.info.height,prepared.info.channels],[4,2,3]);
     assert.deepEqual([...prepared.data], [...base], 'gamma remains after native-grid interpolation, before cloud composition');
+    assert.ok('nativePhotographicClouds' in prepared);
     assert.deepEqual(prepared.nativePhotographicClouds && [prepared.nativePhotographicClouds.width,prepared.nativePhotographicClouds.height], [2,1]);
   } finally { await rm(directory,{recursive:true,force:true}); }
 });

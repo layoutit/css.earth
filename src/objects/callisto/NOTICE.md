@@ -10,12 +10,6 @@
   coverage cutoff; no new radiometric calibration is claimed. The source camera
   review uses NASA/JPL/USGS monochrome mapping and IAU/USGS Gazetteer positions
   only as registration evidence, never as replacement color texture.
-- Jupiter context: NASA, ESA, STScI, and Amy Simon. The pinned Hubble photograph
-  is cropped to a prepared disk; see the image URL and NASA media guidance in
-  the source manifest.
-- Sky panorama: ESO/S. Brunier, CC BY 4.0. See `source/stars/ESO-IMAGE-LICENSE.md`.
-- Star catalogue: David Nash / Astronexus, HYG v4.1, CC BY-SA 4.0.
-  See `source/stars/LICENSE.md` and `hyg-v41-field.json`.
 - Title outlines: Inter by Rasmus Andersson, SIL Open Font License 1.1.
 - Physical and orbital context: NASA/JPL and IAU/WGCCRE through the project's
   vendored astronomy package. See that package's provenance and notices.

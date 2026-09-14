@@ -105,9 +105,6 @@ for (const use of SOURCE_CATALOGUE.usage.edges.filter(use => use.kind === 'share
 export function sceneSources(resources: readonly SceneSource[] = []) {
   const result = new Map<string, SceneSource>();
   for (const resource of [...resources, ...sharedSources]) {
-    // Shared world context suppresses the retired photographic sky leaves.
-    // Other ESO sources and object-specific OpenSpace credits remain valid.
-    if (isSupersededPanorama(resource.href)) continue;
     const key = sourceKey(resource.href);
     result.set(key, { ...result.get(key), ...resource });
   }
@@ -140,12 +137,6 @@ export function sceneSourceGroups(sources: readonly SceneSource[]): readonly Sce
     group.members = group.members.map(member => (parts.get(member.part) ?? 0) > 1 ? { ...member, part: member.role } : member);
   }
   return groups;
-}
-
-function isSupersededPanorama(href: string) {
-  const url = new URL(href);
-  return url.hostname.replace(/^www\./u, '') === 'eso.org' &&
-    url.pathname.replace(/\/+$/u, '') === '/public/images/eso0932a';
 }
 
 function normalizedHref(href: string) {

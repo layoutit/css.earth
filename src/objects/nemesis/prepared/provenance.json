@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nemesis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "667af958fdbf02aff5b037f6d4e9822bb3374cd260cbf5d0f685e1eba3af3d85"
+    "sha256": "9aeecf9d96fb7a5f5b3f35095d08831df40517f1d88e82b0414c1a4bafa43542"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0168d1880778a0e78534ca4cf2472da3a0ce6616f2d6c2a104e0ce37441c7622",
+      "sha256": "974809a507be5cd35e3658bf0d9baffdbeadc0edb69850455bf1a54a00681f88",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "nemesis",
         "displayName": "Nemesis",
         "publicBase": "/scenes/nemesis/",
-        "distanceAu": 2.750433032034634,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b12356b7d558eec344744dcb4f9e7150ab755ecd858032cdb83bf1788df0da51",
+      "sha256": "40a8f33b8bafd2ba9ccb361a7d4d6055c0b64d195a44f51afea8626ab41334dc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "901457d4b545e16eb6fa7c3094c9ba54961fbc3554628df147d836d0500cac7c",
       "bytes": 328699,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b12356b7d558eec344744dcb4f9e7150ab755ecd858032cdb83bf1788df0da51",
-      "bytes": 8187,
+      "sha256": "40a8f33b8bafd2ba9ccb361a7d4d6055c0b64d195a44f51afea8626ab41334dc",
+      "bytes": 7908,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/nemesis/nemesis-elevation-thumbnail.webp",
           "bytes": 5830,
           "sha256": "48f7c4d716113a42016037419b1bb48130b1ab59e52b291b53f3d422ca730f5b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemesis/nemesis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemesis/nemesis-elevation-surface@2x.webp",
           "bytes": 320354,
           "sha256": "e4568fbf6d9053ae5182368199a7a6bf13d06df80fa227ec70304ad874f08c58",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -452,13 +433,13 @@
           "url": "/scenes/nemesis/nemesis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemesis/nemesis-shape-surface@2x.webp",
           "bytes": 226724,
           "sha256": "79d0a3635b468e5350bae1670bee5c3e5969856cfbfeb2db953772c9334fe64a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -489,8 +470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6007,
-          "sha256": "1ef0f54cb61e2b91eb925f95a0d7a3200e6ba5ab71cd0dfcbd690d62dc76cac3",
+          "bytes": 5888,
+          "sha256": "1ff1a299973f8d782a133c59972d70c5dfa30f5b7c9198d63f399da843e4685e",
           "verification": "bytes-verified"
         }
       ],
@@ -550,5 +531,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "nemesis",
+    "materialSha256": "f70788d94918c9e1527aa9067dc7073fa024b9c1aada88cff14103d01edf9d32",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

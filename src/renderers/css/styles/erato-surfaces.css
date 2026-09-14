@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="erato"])[data-lod="billboard"] .erato-scene, .planet-stage:where([data-object-id="erato"])[data-lod="marker"] .erato-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="erato"])[data-lod="marker"] .erato-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="erato"]).erato-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

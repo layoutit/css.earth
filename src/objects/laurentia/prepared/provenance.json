@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "laurentia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d9e5140c726ad4cf0fc7148dfbeeb0300654db1653935e6a9be2b6767eee5703"
+    "sha256": "b95aee27ac932ffcc08ff724b229faf0b08b88153b733632d3aed72eb6ab29fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8c953cc57a3998b221392d543fc99b89f1a7751b0e5ea789d12d0916e620939c",
+      "sha256": "d6ba33081395162dff3b1343b25f42f2d2b79cc0d9816c64e5bb5dc5bbb4ce28",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "laurentia",
         "displayName": "Laurentia",
         "publicBase": "/scenes/laurentia/",
-        "distanceAu": 3.0135299301481933,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 325 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "71929048e0a922832f8c970c6dffdd7478bb12a9609aeceda1baae4c62beac0b",
+      "sha256": "c34f186cb47bed1fe9ecc26031c4f4a1435a5bd3aa94e3755231eea3ce7c7a32",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/325"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "cf67b568322176e7a97e90964912e0100a8e9a552dfd757c9eac2686078cb864",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "71929048e0a922832f8c970c6dffdd7478bb12a9609aeceda1baae4c62beac0b",
-      "bytes": 10779,
+      "sha256": "c34f186cb47bed1fe9ecc26031c4f4a1435a5bd3aa94e3755231eea3ce7c7a32",
+      "bytes": 10500,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/laurentia/laurentia-elevation-thumbnail.webp",
           "bytes": 5684,
           "sha256": "015fffab99f8c8596b34addad9e50d42c7ff68d0c38b31f4839ff27d78d2b842",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/laurentia/laurentia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/laurentia/laurentia-elevation-surface@2x.webp",
           "bytes": 283012,
           "sha256": "21c4583a5cbf24c4d65b352dd9210f0951e72633ff770f70eeba6e65e49a9662",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/laurentia/laurentia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/laurentia/laurentia-shape-surface@2x.webp",
           "bytes": 231756,
           "sha256": "6637c6b79f3f1480cbe9151bf0ba832aad5c5547990dfe4b75f5fbdd15354aed",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8109,
-          "sha256": "7d1ff24ccf30e1d2c1b82221b437e08c571d8c7922785f6183b904eb84db8e9d",
+          "bytes": 7990,
+          "sha256": "447b3ce95612e5695e8df259a0d1942930c58d05bb34939790c0e2ba95b3dcd6",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "laurentia",
+    "materialSha256": "f2819c1d1871e3aa63113c79e6f5bdcf25433e13de5a27118eafb07a5e1cbf2d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

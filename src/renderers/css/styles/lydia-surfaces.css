@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="lydia"])[data-lod="billboard"] .lydia-scene, .planet-stage:where([data-object-id="lydia"])[data-lod="marker"] .lydia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="lydia"])[data-lod="marker"] .lydia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="lydia"]).lydia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="fortuna"])[data-lod="billboard"] .fortuna-scene, .planet-stage:where([data-object-id="fortuna"])[data-lod="marker"] .fortuna-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="fortuna"])[data-lod="marker"] .fortuna-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="fortuna"]).fortuna-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

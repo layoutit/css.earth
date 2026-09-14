@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "niobe",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "03c0fb83188ffbf428189aa657db4c9b19dc0aa5e6a6b7102fc0278a08c84320"
+    "sha256": "fb5065d0b1487b5742000229169a345e0bf4021b96b403661c90907425f90445"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ee4efb1e3699bf1aad900d6aadce0067a6ccb1a9dfa9b21639f1a5e3933c3e30",
+      "sha256": "bf762b76ea9006ec0fd0b0ee00c543e12b9006f5a7381a3a971682a3d23e7860",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "niobe",
         "displayName": "Niobe",
         "publicBase": "/scenes/niobe/",
-        "distanceAu": 2.754299168249887,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1014 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4763b32fb7374041e852015ec5f9747c7ea8447649836c16e6f141793c2e30e4",
+      "sha256": "720c2c6da864b95e545e2e234a898b1fe8d34cba322be06f2fa910a75a495315",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1014"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "8b8480da8e3b48bf4e1a93f8e3ae2de0a69315a13dc947a105fe05a0c169338d",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4763b32fb7374041e852015ec5f9747c7ea8447649836c16e6f141793c2e30e4",
-      "bytes": 8911,
+      "sha256": "720c2c6da864b95e545e2e234a898b1fe8d34cba322be06f2fa910a75a495315",
+      "bytes": 8632,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/niobe/niobe-elevation-thumbnail.webp",
           "bytes": 5276,
           "sha256": "f71d9ee2f282af3a54cb7e385a01e42a974840b28e8a999dbab9df80b1cee4bb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/niobe/niobe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/niobe/niobe-elevation-surface@2x.webp",
           "bytes": 267514,
           "sha256": "658c89a9a885585183874692f2a18476426fb5b29ecd57b78236483e080b5615",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/niobe/niobe-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/niobe/niobe-shape-surface@2x.webp",
           "bytes": 209388,
           "sha256": "e444090d93d33ff3889a0b4831edcb3bd65cd0a461d458ff8de2679a54abcfb9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6290,
-          "sha256": "fce03b94cb49113aef39127acef525af84c77d9859a6b0e57d4e18aede8ed96e",
+          "bytes": 6171,
+          "sha256": "53dba9dbfa5a44a01d73e03ff9165e055fabaab4c537ad550a8460187d985eff",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "niobe",
+    "materialSha256": "b6f50149ad2e12a7ccfb00cf627ef4b56a24c0ef219f36a841c6c0e241215a75",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

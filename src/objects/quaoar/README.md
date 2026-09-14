@@ -46,7 +46,7 @@ triaxial interpretation remains possible. The 8.8394 h and 17.6788 h period
 interpretations are model-dependent, so neither is installed as a sidereal spin.
 
 The source recipe pins units, assumptions and numerical axes. The scene uses 480
-prepared native raster triangles. Shadows and Orbit default off; the grid marks
+prepared native raster triangles. Shadows defaults off; the grid marks
 unmapped terrain.
 
 ## Rings

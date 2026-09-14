@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "tulipa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "28d626c11458d34edeaeaa94b88a8bfe8b118ad16eae07706f5c1c723491f887"
+    "sha256": "33ce723dc8ce30fbff9477790bbe1205bb541b08cc1dccb616ea33e6a0ce182c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6bb62e32be1b5e2bd60905527a4d5ad4b476a542687c27db5552464224a5a6b8",
+      "sha256": "35f8b46fb92b2e5303afdeda7114108fd8b8e0d73ae1cbc7de4877fd75caef12",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "tulipa",
         "displayName": "Tulipa",
         "publicBase": "/scenes/tulipa/",
-        "distanceAu": 3.0255703303423154,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6b0373017d5e93a0119786febb5a715b15ce756a92d2173c986fbe9c061aad1d",
+      "sha256": "6273985b4ee64668d5ea370ecf96bab6302f9ca58d7481a0754f9d6ab5894790",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1779"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "e9ca02b70409de00bfcf17b56680e573a8f3840e5e4a0a1446ae83c842206c55",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "6b0373017d5e93a0119786febb5a715b15ce756a92d2173c986fbe9c061aad1d",
+      "sha256": "6273985b4ee64668d5ea370ecf96bab6302f9ca58d7481a0754f9d6ab5894790",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 7706,
+      "bytes": 7427,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/tulipa/tulipa-elevation-thumbnail.webp",
           "bytes": 6516,
           "sha256": "45be12b4c7eeb8723cfdcd3ca77bce74bf941f74ca7c6726a36500b55a1905db",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tulipa/tulipa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tulipa/tulipa-elevation-surface@2x.webp",
           "bytes": 325920,
           "sha256": "7fdb53a6fe92e241b3b196500ab2dc6e2e70582a02a9a4ffe484c9a0ff20fc32",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/tulipa/tulipa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tulipa/tulipa-shape-surface@2x.webp",
           "bytes": 229270,
           "sha256": "2e57360472da90bcbea1ad9e4d9407ff808a7b20af0d6e69ea84019b8192412d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5041,
-          "sha256": "e71025f657e3b3505fe16ec31e9021f3a45af1c20ffec10c03c67b91b1d7638b",
+          "bytes": 4922,
+          "sha256": "03b0945b907a6b25a005a794868d871d73bc79e15fd39091dec8cb63f6459d80",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "tulipa",
+    "materialSha256": "18bba1e005727ca66504325dc0577685f880f134a5173c392ea6a181e9cd74a5",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

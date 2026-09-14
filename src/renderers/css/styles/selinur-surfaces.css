@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="selinur"])[data-lod="billboard"] .selinur-scene, .planet-stage:where([data-object-id="selinur"])[data-lod="marker"] .selinur-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="selinur"])[data-lod="marker"] .selinur-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="selinur"]).selinur-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

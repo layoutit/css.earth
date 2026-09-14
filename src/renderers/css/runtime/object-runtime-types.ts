@@ -6,8 +6,7 @@ import type { RuntimePolicy } from "../navigation/runtime-policy.js";
 import type { PreparedAssets } from "../rendering/prepared-residency.js";
 import type { PreparedPresentationDefinition, mountPreparedPresentation } from "../rendering/prepared-presentation.js";
 import type { CubicSkyPlan } from "../solar-system/cubic-sky-runtime.js";
-import type { DirectionalSunPlan } from "../solar-system/directional-sun-runtime.js";
-import type { HeliocentricMountOptions } from "../solar-system/heliocentric-view-runtime.js";
+import type { DirectionalSunPlan } from "../solar-system/directional-sun-coordinate.js";
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
 import type { PerspectiveWorldContext } from '../navigation/perspective-dolly.js';
@@ -20,8 +19,6 @@ export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition 
   readonly schema: string; readonly id: string; readonly controls: ObjectControls;
   readonly camera: CameraPlan; readonly assets: PreparedAssets; readonly sky: CubicSkyPlan;
   readonly sun?: DirectionalSunPlan | null;
-  readonly heliocentricView?: { plan: HeliocentricMountOptions["plan"]; bodyMarker: HeliocentricMountOptions["markerSprite"];
-    systemMarkers?: HeliocentricMountOptions["systemMarkers"]; labels?: HeliocentricMountOptions["labels"] } | null;
   readonly destinations?: unknown;
   readonly surfaceHit?: PreparedSurfaceHit;
   readonly features?: PreparedSurfaceFeaturePlan;
@@ -44,11 +41,9 @@ export interface ObjectRuntimeCapabilities {
     selectLens(id: string): Promise<boolean>; navigate(camera: Parameters<RetainedCubicSkyOrbit["flyToState"]>[0]): ReturnType<RetainedCubicSkyOrbit["flyToState"]>;
     reset(): ReturnType<RetainedCubicSkyOrbit["flyToState"]> | undefined;
   }): PreparedDestinationRuntime;
-  mountWorldContext?(options: { stage: HTMLElement; before: HTMLElement; skyElement: HTMLElement; worldContext: PerspectiveWorldContext; own(cleanup: () => void): void; onError(error: unknown): void }): WorldContextLayer;
   /** Prepared nomenclature labels anchored to the body mesh; the catalogue is fetched and byte-verified by the layer. */
   mountSurfaceFeatures?(options: SurfaceFeatureMountOptions): SurfaceFeatureLayerRuntime;
 }
-export interface WorldContextLayer { publish(world: WorldCameraPose, viewport: WorldCameraViewport): void; destroy(): void; }
 export interface ObjectMountOptions {
   onError(error: unknown): void; onMotionRequest?(requested: boolean): void;
   inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; mobilePreviewElement?: HTMLElement | null;
@@ -56,8 +51,6 @@ export interface ObjectMountOptions {
   worldFrame?: PreparedWorldCameraFrame; preparedResources?: PreparedResourceLease;
   preparedTree?: import('../rendering/prepared-tree.js').PreparedTreeLease;
   worldContext?: PerspectiveWorldContext;
-  /** The application owns the contextual universe layer for this mount. */
-  externalWorldContext?: boolean;
   framePresenter?: import('../navigation/world-frame-presenter.js').WorldFramePresenter;
   viewport?: import('../navigation/camera-viewport.js').CameraViewport;
   initialWorldCamera?: WorldCameraPose;

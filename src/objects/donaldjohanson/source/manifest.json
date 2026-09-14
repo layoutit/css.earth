@@ -2,33 +2,6 @@
   "schema": "cssdonaldjohanson-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "donaldjohanson-shape",
       "path": "shape/lcy_donj_k548_iso20m_v10.obj.gz",
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds",
@@ -435,8 +408,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 14166,
-      "expectedSha256": "d932591c265563b28b226014e22d784ac9ea919a7991a828b39d4635f4cdd011",
+      "expectedBytes": 13887,
+      "expectedSha256": "e30e8ac419cd6e4fac77d0b380cb8c2b6024389399a85afc2bd7e366dcb138da",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -444,8 +417,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3485,
-      "expectedSha256": "d1ebdb99c197fd1a007039f1913a778afe22cc58886b22711ae370821fedc475"
+      "expectedBytes": 3282,
+      "expectedSha256": "806eddaa5b537dd08037f17f1dd44523a369c59ee7dc8f839cd5b2363ade4e4c"
     },
     {
       "path": "preparation/navigation.json",
@@ -459,8 +432,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5335,
-      "expectedSha256": "cb7b9827001555045e54ea2f472b339d9bffae888371b9455384654ee9fc434e"
+      "expectedBytes": 5180,
+      "expectedSha256": "1a68bae9b470d0139cbbe16f3ea8c8ce9c294d60e156bbe1e82a1b0b366e91b7"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -501,21 +474,6 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 2262,
       "expectedSha256": "d32794459cf610399bb933a030ba21a894c12af6e28ee713951d08e1144c9960"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 144983,
-      "expectedSha256": "cd2e765ce2c5aebdf4e02e8db87aaf3fedef71b7447d780570b591f62a9e0ee5"
     },
     {
       "id": "donaldjohanson-surface-features-source",

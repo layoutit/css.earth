@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "juliet",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5fcaebcfbc526943787f97a12971abddf7395329e8d3c0c3e24158a1001aa6f0"
+    "sha256": "60b046c3dd77f31505fbce703889056872d78a77b95eec76dd2f773c47634dbc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9e0d70960e15204c9a91d913638c3c79e0f8df390453ea4cdd00426f02c4a136",
+      "sha256": "a6fc69602f6ac158978092012dce2cb72f29579e571f70b6700d92cb34012e74",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "juliet",
         "displayName": "Juliet",
         "publicBase": "/scenes/juliet/",
-        "distanceAu": 19.19,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Uranus-system ephemeris; IAU Juliet BODY711 orientation from PCK00011 with the small periodic correction frozen at the prepared epoch."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bcf2db2488dbe56cee2b06684bb03abf060283e4636bd1b72ed7ce659513c03c",
+      "sha256": "aaeed0d22e8424818bb134c25ec63f7d34a27b5d51a765a5aa118e96c3f93d77",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,12 +174,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -215,12 +202,6 @@
             "role": "observations",
             "description": "Voyager ISS archive",
             "href": "https://pds-rings.seti.org/voyager/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -276,7 +257,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -311,7 +292,7 @@
       "sha256": "18becb314a4f4bbe0d0724757c882058f3289fb46ac2467d6d3cfc6732fe758c",
       "bytes": 14147,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -328,10 +309,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bcf2db2488dbe56cee2b06684bb03abf060283e4636bd1b72ed7ce659513c03c",
-      "bytes": 3355,
+      "sha256": "aaeed0d22e8424818bb134c25ec63f7d34a27b5d51a765a5aa118e96c3f93d77",
+      "bytes": 3076,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -368,13 +349,13 @@
           "url": "/scenes/juliet/juliet-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juliet/juliet-model-surface@2x.webp",
           "bytes": 50050,
           "sha256": "3b4fc6043c707e2404ccfdd9c28c9f26b9583da55c03a01e1cf07c99ce5035bd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -410,8 +391,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3999,
-          "sha256": "17b78f76d7e8ae4cb921a64a16131b46a2ef5c9ab95470a7b7e741ccbe5a0e60",
+          "bytes": 3880,
+          "sha256": "c9dc221501dce472060967c82f2b8a2d883aefb6d3779639c562335d61ae0d2e",
           "verification": "bytes-verified"
         }
       ],
@@ -446,5 +427,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "juliet",
+    "materialSha256": "0255a3b44aa0ed6b6a84620f45d028aa9f63c24b1a221055e8bc9303cf2fd4f1",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

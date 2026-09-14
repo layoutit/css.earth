@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mr-spock",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "64d3857e214d8701c4c7faf7a1052440e6aad53b6dae783e8f60c81991d2b4ed"
+    "sha256": "ce38b0d9318122b008ae9cd022b0a0b9154ae23cbadfe535b9024ee4fe698a0f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "aa92144046a6e3ea1dfb01666f5cc748c704d73ce2e65244211a2cc52b326652",
+      "sha256": "4614f184559174666fd090f78201dd5e97bec9f89dcb5a5c8ce24a72f13c2786",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "mr-spock",
         "displayName": "Mr. Spock",
         "publicBase": "/scenes/mr-spock/",
-        "distanceAu": 3.0107561956481725,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "96516b2f5ae0ae8ae420ac6a22957cb907f31a6539fb420f8d80ed785c913005",
+      "sha256": "f03377922a4674e54c7cfd7f07db8e0f34caf41e01055cb72236ff21532a4876",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4874"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "ff1b2b9b522e5f7acc86b42876904882375f591146b706775e37525eac39b065",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "96516b2f5ae0ae8ae420ac6a22957cb907f31a6539fb420f8d80ed785c913005",
+      "sha256": "f03377922a4674e54c7cfd7f07db8e0f34caf41e01055cb72236ff21532a4876",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9715,
+      "bytes": 9436,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/mr-spock/mr-spock-elevation-thumbnail.webp",
           "bytes": 4944,
           "sha256": "dd8abe8369df7a069ed92fb4e821fa377fcdc44a384fe58070dade2db8939b4e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mr-spock/mr-spock-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mr-spock/mr-spock-elevation-surface@2x.webp",
           "bytes": 304118,
           "sha256": "9f0d439c778f9924e82ea3164e78077152dc5a4932fa1d51f30b9160c1ab71d5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/mr-spock/mr-spock-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mr-spock/mr-spock-shape-surface@2x.webp",
           "bytes": 202258,
           "sha256": "ee9337446a2883435647e9cbf21edd4ca227fc0c05664f7b833d523d6805d191",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7006,
-          "sha256": "0a4e8a3a27235ee495ffb79bac5590ef2fc846c779429065ac885a557c1e3b84",
+          "bytes": 6887,
+          "sha256": "177ba357fec67119a813e69013d532c9ee41d7dabe9301b508df32f74d2ebbe2",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "mr-spock",
+    "materialSha256": "224f86f3fccf63e22ba39cfbb5d799be60b1aab9200bb8bdd5771dd3a69a8f96",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ophelia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "34fa6799ca346748e9d514ca5b6d17f274e2e9a3f02a893bb336f6c78b04d2ac"
+    "sha256": "28d0a5a49dc38b599da06592bc4d7b8bea938bff0eed681fc786190bc695ef3f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dd78880106fe6926b2fc9a643c722d27fb04bc80ec360ad279086b4b844e2454",
+      "sha256": "75ba190459039c4469fb388df3dce7ced8118e9e3c1eb58b0b25dabbe647d4be",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "ophelia",
         "displayName": "Ophelia",
         "publicBase": "/scenes/ophelia/",
-        "distanceAu": 19.19,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Uranus-system ephemeris; IAU Ophelia BODY707 from PCK00011 with the small periodic correction frozen at the prepared epoch."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "25ba3537894384ddd30404780f5a37fe9ac81cc17a63e9383f90c121ea2a19e1",
+      "sha256": "464a87dfa84f318a963729b317453b1eeedba235ff5d04a5c577a0dc4bac203b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,12 +174,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -215,12 +202,6 @@
             "role": "observations",
             "description": "Voyager ISS archive",
             "href": "https://pds-rings.seti.org/voyager/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -276,7 +257,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -311,7 +292,7 @@
       "sha256": "67ff26d49e7921af41e37d85a1f5e9cea7f9235b88a94381b40f4d526d1812da",
       "bytes": 14147,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -328,10 +309,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "25ba3537894384ddd30404780f5a37fe9ac81cc17a63e9383f90c121ea2a19e1",
-      "bytes": 3399,
+      "sha256": "464a87dfa84f318a963729b317453b1eeedba235ff5d04a5c577a0dc4bac203b",
+      "bytes": 3120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -368,13 +349,13 @@
           "url": "/scenes/ophelia/ophelia-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ophelia/ophelia-model-surface@2x.webp",
           "bytes": 49918,
           "sha256": "4fa75b2304ef407d2a688641c7834bf541b521a972d186cb49b4788b6f2a2142",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -410,8 +391,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5699,
-          "sha256": "6374f7cf73a57673471284ae3c37b88bcdee7dc57eac56e0930d4c28f132dfa1",
+          "bytes": 5580,
+          "sha256": "3faaf82cd093fa00d67a5cbb6cd87ee2c88c601ce171342d5069501dcdfc92e4",
           "verification": "bytes-verified"
         }
       ],
@@ -446,5 +427,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "ophelia",
+    "materialSha256": "6cdd92e70a62a152f97ea0a50f9461421e117a4d331ef0fa103bdbabadb542f0",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

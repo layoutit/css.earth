@@ -51,7 +51,7 @@ The reported rotation period is an informational fact. Display meridian is arbit
 
 JPL 627, Saturn XXVII, **S/2000 S8**, resolves to **SAT456** under legacy spelling Skadi in the grouped ephemeris table. Mean elements establish identity and context.
 
-The normal acquisition plan restores pinned ESO/font inputs.
+The normal acquisition plan restores the pinned font input.
 
 The B1 source-only authoring script is [author-saturn-packages.mjs](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b1-preparation/author-saturn-packages.mjs). It copies no prepared scene or other body’s orbital validation.
 

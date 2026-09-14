@@ -1,4 +1,10 @@
 import type { Vector3 } from "./types.js";
+
+/** The prepared Sun an object's camera and materials read: its direction in the
+ * scene frame and in view space at the default pose. The shared universe draws
+ * the visible Sun. */
+export interface DirectionalSunPlan { localDirection: Vector3; referenceViewDirection: Vector3; }
+
 // Both maps take a Sun direction in the sprite's view frame (+x right, +y up,
 // +z toward the viewer) and return a light direction in the prepared material
 // frame (+x right, +y down, +z toward the viewer — the frame the overlay banks

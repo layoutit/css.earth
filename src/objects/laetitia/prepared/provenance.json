@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "laetitia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "52165f3b1758f08a24eea62c4546fdab08b409fc22275ad1edb91899c688d3d5"
+    "sha256": "f5da11f25f9f743a818202ea1d92a0e3f963a214ae62cb4810e485af47173a39"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5b4ef4d086e3cf8d769c4123362a9d546911f96185a738c76cad355d50807848",
+      "sha256": "eb519d61a67478d13e31bb86f392b893ed960eee0491ae02ba0402af5ddeb427",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "laetitia",
         "displayName": "Laetitia",
         "publicBase": "/scenes/laetitia/",
-        "distanceAu": 2.7684445031801124,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1835 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c767c302b4af6f6e3103256e87b6a6e0ff043e6fedb0aa8606991fe9b48e5c28",
+      "sha256": "491d197785d2322b49335dbe9716cd30172c9a5ec59fcd51dbd51fd6b4cc0855",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1835"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "399e10e28457f6fe4aa93cb322ddd5d262681eeb9638ac092e55bbf138b5f747",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c767c302b4af6f6e3103256e87b6a6e0ff043e6fedb0aa8606991fe9b48e5c28",
-      "bytes": 10035,
+      "sha256": "491d197785d2322b49335dbe9716cd30172c9a5ec59fcd51dbd51fd6b4cc0855",
+      "bytes": 9756,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/laetitia/laetitia-elevation-thumbnail.webp",
           "bytes": 4876,
           "sha256": "fb4f5098fa81984341c5ab53b5c361dbcd16a3125289f3a3c6c30d5494b05b11",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/laetitia/laetitia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/laetitia/laetitia-elevation-surface@2x.webp",
           "bytes": 292856,
           "sha256": "cd1faf3df19c37879352ed822464056d0b6efc32970e063ce099ca9d9bc304ce",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/laetitia/laetitia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/laetitia/laetitia-shape-surface@2x.webp",
           "bytes": 206150,
           "sha256": "6bc1dc6a7b1bd8a212a54cf91aba489144f85b2c907480cf856f6164585684ca",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7382,
-          "sha256": "a19068a01254d3983201abeb8d372d06339359bcdc6451bb606eb218ad07b7f0",
+          "bytes": 7263,
+          "sha256": "8f0ab4d7a332fb9ebc04472d2bfe6ab7ce3108d7b6fe39e5080fdcdea73be99f",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "laetitia",
+    "materialSha256": "ab9ca55a0260f182ae19d865245b6a2afc908a01f62293f1a87bffdfc05fdd7a",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

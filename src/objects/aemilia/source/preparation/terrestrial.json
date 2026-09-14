@@ -4,7 +4,6 @@
   "namespace": "aemilia",
   "displayName": "Aemilia",
   "publicBase": "/scenes/aemilia/",
-  "distanceAu": 3.10892633182096,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -116,12 +115,6 @@
     "sunSource": "ISAM/SAGE102 original pole and sidereal period; fixed-epoch JPL Horizons orbit. Absolute phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

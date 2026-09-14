@@ -4,7 +4,6 @@
   "namespace": "dactyl",
   "displayName": "Dactyl",
   "publicBase": "/scenes/dactyl/",
-  "distanceAu": 2.861,
   "raster": {
     "width": 512,
     "height": 256,
@@ -69,12 +68,6 @@
     "sunSource": "A smooth ellipsoid at the dimensions measured from Galileo images: 1.6 × 1.4 × 1.2 km. Craters and surface imagery are not represented; the grid marks missing imagery. Approximate orbital placement. The 1993 encounter did not determine a unique orbit; the present orbital phase is illustrative. A synchronous orientation is assumed, not measured."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

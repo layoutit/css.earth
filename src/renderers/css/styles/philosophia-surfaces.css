@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="philosophia"])[data-lod="billboard"] .philosophia-scene, .planet-stage:where([data-object-id="philosophia"])[data-lod="marker"] .philosophia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="philosophia"])[data-lod="marker"] .philosophia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="philosophia"]).philosophia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }
