@@ -4,7 +4,7 @@
 
 **False color** adds three original Cassini ISS NAC filter observations displayed as RGB (IR3 / GRN / UV3), calibrated by CISSCAL 4.0beta into linear I/F. This is false color. Each frame uses its own measured camera row in the [Thomas 2018 janus document](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/janus_document.pdf), registered to the matching original plate model.
 
-- **Monochrome:** 7 Cassini ISS narrow-angle, clear-filter frames calibrated to I/F by CISSCAL and distributed by the PDS Ring-Moon Systems Node.
+- **Monochrome:** 6 Cassini ISS narrow-angle, clear-filter frames calibrated to I/F by CISSCAL and distributed by the PDS Ring-Moon Systems Node.
 
 - **Elevation:** radial height of the released shape above a 89.2 km reference sphere, with a shared shaded-relief palette.
 
@@ -37,7 +37,6 @@ The existing Monochrome and Elevation shadow atlases changed slightly when rebui
 - **Rotation:** Its secular IAU/PCK rotation terms provide an explicitly approximate fixed-epoch display orientation; periodic libration terms and the precise Cassini binary rotation kernel are omitted.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
-
 
 ## False color preparation
 
@@ -94,7 +93,6 @@ The astronomy package already owns the moon's Saturn-relative orbital elements. 
 - **Not added as duplicate lenses:** individual clear-filter photographs of the same terrain. They contribute to one Monochrome map.
 
 Cassini frame `N1630068448_1` is not used. On the lit body its calibrated I/F has a median of 0.046 at 23° phase, a third or less of the 0.14–0.27 measured in the other six clear-filter frames at 39–90° phase, although a lower phase should look brighter. No level between frames reconciles it: with it, Monochrome showed a dark region with bright seams. The 7% of covered area it supplied now shows the missing-coverage grid.
-
 
 - **Facts:** [NASA Janus](https://science.nasa.gov/saturn/moons/janus/) and [JPL physical parameters](https://ssd.jpl.nasa.gov/sats/phys_par/). No substantial atmosphere or cutaway is claimed.
 

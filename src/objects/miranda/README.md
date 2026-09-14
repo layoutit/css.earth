@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 Miranda uses Paul Schenk's September 2020 [Uranian Satellites — Global Mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), based on Voyager 2 images and updated control networks. Both original ISIS3 cubes contain 6294 × 3147 floating-point samples on a 240 m simple-cylindrical grid. Grid spacing is not uniform effective image or elevation resolution. The release's [author README](https://repository.hou.usra.edu/bitstreams/00528589-53e3-496b-ac5d-b6d86fe527c9/download) is retained as text in [the retained author notes](source/observations/aaReadMe_uranian_MAP_DEM.txt).
 
 **Monochrome** uses `mumap-cyl-180180.cub`. Its ISIS history includes `photomet` normalization (2020-02-17, ellipsoid angles, maximum emission 83°, maximum incidence 89.9°). We retain that corrected product and apply one linear display stretch from 0–2400 DN to 0–255. This is a display of the published mosaic, not newly calibrated reflectance. Local cast shadows, camera marks and mosaic seams remain; no detail is invented beneath them.
@@ -65,16 +67,7 @@ The lens includes 18 nonempty styled polygon categories with their original unit
 
 Reproduce the categorical input with `python tools/objects/prepare-geologic-categories.py src/objects/miranda/source/preparation/geology-conversion.json`, using the dependency versions in the converter's header. The recipe pins the archive and registration, checks feature populations and archived CRS identity, and records ambiguous overlaps and the exact output hash in `categories.receipt.json`. Original release MD5 and acquisition SHA-256 receipts remain alongside the sources. Shared preparation then consumes the checked-in categorical input through the existing scientific GeoTIFF path. The runtime receives prepared images only.
 
-**Dataset survey**
-
-| Candidate | Disposition |
-| --- | --- |
-| Schenk/LPI 2020 corrected mosaic | Included as Monochrome; replaces the lower-density JPL display map. |
-| Schenk/LPI 2020 merged numeric DEM | Included as Elevation with its own validity, datum, scale and relief. |
-| [JPL simulator `ura5vuu2.tif`](https://space.jpl.nasa.gov/tmaps/uranus.html), 1440 × 720 | Superseded; not a duplicate Monochrome lens. |
-| [PIA01490 south-polar press mosaic](https://science.nasa.gov/photojournal/south-polar-view-of-miranda/) and color press views | Excluded from mapped lenses: a rendered disc or press image alone does not establish usable surface registration or global color coverage. |
-| [2026 digitized geological map](https://zenodo.org/records/20817533) | Included as historical Geology after page-coordinate reconstruction and independent landmark checks; original coverage and degree-scale registration limits remain explicit. |
-| [USGS Voyager control network](https://astrogeology.usgs.gov/search/map/miranda_voyager_image_control_network) | Registration support, not a separate surface measurement or lens. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 Physical/orbital values come from the vendored astronomy package: JPL satellite elements and IAU/NAIF rotation at the shared epoch. [NASA's overview](https://science.nasa.gov/uranus/moons/miranda/) supplies editorial facts. No atmospheric shell is supported.
 

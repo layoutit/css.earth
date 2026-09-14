@@ -51,7 +51,6 @@ The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) chec
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
-
 ## False color preparation
 
 <details>

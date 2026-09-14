@@ -6,6 +6,8 @@
 
 - [JPL physical parameters](https://ssd.jpl.nasa.gov/sats/phys_par/) give a mean radius of 85 ± 10 km and GM of 0.15155 ± 0.05763 km³/s².
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Evidence
 
 - [Cassini ISS/PDS](https://pds-rings.seti.org/cassini/iss/): 93 catalog matches, first 12 retained in [source/survey/opus.json](source/survey/opus.json). The finest-distance N1355869401 calibrated native frame was inspected: CL1/CB3, 8.2-second exposure, approximately 26.60 km/pixel.
