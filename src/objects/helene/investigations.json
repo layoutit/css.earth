@@ -19,6 +19,23 @@
           "pr": 83
         }
       ]
+    },
+    {
+      "id": "cassini-coverage-2026-09-13",
+      "subject": "Two additional published-camera clear-filter frames",
+      "status": "included",
+      "finding": "N1675163339_1 and N1519536732_1 expand sampled Monochrome physical-area coverage from 65.4% to 74.4%. Overlap-derived gains fit the measured 2.5 budget. The existing disconnected bright pair remains and now supplies about 35% of accepted area; this expansion does not repair its brightness discontinuity. Current-main browser qualification remains pending.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/helene_document.pdf",
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/78e0164f7e892bda98f34aec8db0dcda72c60b37/src/objects/helene/evidence/cassini-coverage/refresh.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
+        }
+      ]
     }
   ]
 }
