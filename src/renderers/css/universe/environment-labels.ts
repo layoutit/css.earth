@@ -17,6 +17,7 @@ export interface EnvironmentLabelPublication {
   readonly world: WorldCameraPose;
   readonly viewport: WorldCameraViewport;
   readonly shellStats: readonly PreparedSurfaceShellStats[];
+  readonly volumeLabelOpacity?: number;
   readonly blockerRects?: readonly LabelScreenRect[];
 }
 
@@ -78,7 +79,7 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
       const local = presentPhysicalPoseInVolume(publication.world.pose, volume.frame);
       const distance = Math.hypot(...local.positionUnits);
       const volumeOpacity = smoothstep(radius, 2 * radius, distance);
-      admit(volumeEntry, volumeOpacity, publication, width, height, [...blockers, ...next], next, fader);
+      admit(volumeEntry, volumeOpacity * (publication.volumeLabelOpacity ?? 1), publication, width, height, [...blockers, ...next], next, fader);
       accepted = Object.freeze(next);
       return accepted;
     },

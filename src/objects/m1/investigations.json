@@ -1,0 +1,269 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m1",
+  "entries": [
+    {
+      "id": "lens-hubble-optical",
+      "subject": "hubble-optical shipped image lens",
+      "status": "included",
+      "finding": "Default WFPC2 optical-line display, 3864² pixels and 6.41 arcmin square; the 1999–2002 mosaic supplies registered color, not calibrated gas density. Native NOX accounting is a processing check.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m1/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/observations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "lens-webb-infrared",
+      "subject": "webb-infrared shipped image lens",
+      "status": "included",
+      "finding": "NIRCam/MIRI display from 2022–2023; 52 direct stellar identities and 18 held-out checks give 0.135 arcsec relative RMS. Unequal PSFs and mixed bands prevent treating RGB as a calibrated spectral cube.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m1/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/observations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "lens-webb-components",
+      "subject": "webb-components shipped image lens",
+      "status": "included",
+      "finding": "Derived synchrotron/sulfur/dust display shares the Webb exposures. Seventy inspected stellar identities support an explicit +2.67 percent scale correction; 24 held-out checks give 0.152 arcsec RMS. The corrected field is approximately 5.47 by 4.75 arcmin; compact component emission is preserved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m1/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/observations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "lens-spitzer-infrared",
+      "subject": "spitzer-infrared shipped image lens",
+      "status": "included",
+      "finding": "MIPS 24 micrometre attribution is from the linked CXC companion metadata. The 5290² outreach raster inherits the 2017 Hubble bridge grid with no independent stellar matches; exposure date and final PSF are unspecified, native compact emission is preserved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m1/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/observations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "lens-vla-radio",
+      "subject": "vla-radio shipped image lens",
+      "status": "included",
+      "finding": "Approximately 3 GHz VLA display; the parent map combines 2012 observations and an older large-scale template. Its 5290² publisher grid inherits the Hubble bridge. Radio knots are not optical field stars and no calibrated flux is recovered.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m1/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/observations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "lens-chandra-xray",
+      "subject": "chandra-xray shipped image lens",
+      "status": "included",
+      "finding": "ACIS false-color display on the same publisher grid; the companion release spans 2000–2013 but exact stack and passband are unspecified. Torus/jet emission is preserved and separately weighted on the conditional wind model; no independent X-ray field-star registration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m1/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/observations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "gaia-surroundings",
+      "subject": "Gaia DR3 astrometry/photometry and Bailer-Jones EDR3 geometric distances",
+      "status": "included",
+      "finding": "280 Gaia sources in an authored 50 pc sphere, G < 16; one explicitly retained Crab pulsar gives 281 points. The pulsar keeps its separate conditional depth and lens-dependent appearance. Actual catalogue source IDs, median distances and uncertainty intervals are retained. Sphere, quality cuts, budget, brightness response and fade are display selections, not a membership survey; Cardiel BP-RP display color uses a neutral fallback outside its valid range.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m1/source/stellar-field.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m1/source/delivery.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/src/delivery/catalogue-field.ts",
+        "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+        "https://arxiv.org/abs/2012.05220",
+        "https://arxiv.org/abs/2107.08734"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "sitelle-ejecta",
+      "subject": "SITELLE 2016 release and expansion depth",
+      "status": "included",
+      "finding": "The pinned Martin release supplies 416,573 paired emission/velocity samples. The 2,000 pc scale and homologous expansion convert velocity into conditional depth; uncertain acceleration, grid smoothing and missing per-row errors remain. The deep-image registration is separate from depth validation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/physical-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/intake-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/sampled.json",
+        "https://doi.org/10.1093/mnras/staa4046"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "hubble-2017-bridge",
+      "subject": "Auxiliary 2017 optical registration bridge",
+      "status": "included",
+      "finding": "129 inspected bridge stars with 43 held-out checks give 0.146 arcsec relative RMS. Its common publisher grid transfers to Spitzer, VLA and Chandra; this is an auxiliary input, not a seventh lens or independent registration in those bands.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/observations.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/source-dossier.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "wind-and-pulsar",
+      "subject": "Ng–Romani tori, Kaplan pulsar astrometry and authored wind",
+      "status": "included",
+      "finding": "The coherent 2004 inner/outer torus pair supplies published radii and orientations. Kaplan anchors the pulsar direction; jet lengths, Gaussian support, internal stellar depth, brightness and diffuse interior remain authored. The 2008 systematic discussion limits interpretation of formal torus errors.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/physical-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/sampled.json",
+        "https://arxiv.org/abs/astro-ph/0310155",
+        "https://arxiv.org/abs/0710.4168",
+        "https://arxiv.org/abs/0801.1142"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "multiwavelength-interpretation",
+      "subject": "Dubner and Temim multiband interpretation",
+      "status": "included",
+      "finding": "Dubner 2017 and Temim 2024 qualify epochs, unequal emission mechanisms, mixed component colors and extended synchrotron. The positive diffuse interior improves a normalized projected target but is not independently observed 3D flow or radiative transfer.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/source-dossier.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/README.md",
+        "https://arxiv.org/abs/1704.02968",
+        "https://arxiv.org/abs/2406.00172"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "vlbi-distance-alternative",
+      "subject": "Lin et al. pulsar VLBI distance",
+      "status": "deferred",
+      "finding": "The reported 1.90 +0.22/-0.18 kpc is consistent with but does not replace the original SITELLE 2 kpc conversion. Its pointing centres are not measured source positions.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/source-dossier.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/m1/source/nebula.json",
+        "https://arxiv.org/abs/2306.01617"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Recompute every physical source transform and uncertainty consistently if adopting the VLBI scale."
+    },
+    {
+      "id": "offset-ring-alternative",
+      "subject": "Weisskopf alternative offset inner ring",
+      "status": "deferred",
+      "finding": "The 13.25 ± 0.26 arcsec peak radius and 1.04 ± 0.13 arcsec axial offset define a competing interpretation, not parameters to average into the selected Ng–Romani pair.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/source-dossier.json",
+        "https://arxiv.org/abs/1109.2868"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Compare the alternative geometry against qualified independent wind observations without mixing incompatible parameter sets."
+    },
+    {
+      "id": "northern-jet-and-expansion",
+      "subject": "Northern ejecta jet and nonuniform expansion",
+      "status": "deferred",
+      "finding": "Martin 2025 proper-motion results warn against one affine expansion correction. Ding 2026 adds northern-jet tracers outside the selected optical/Webb fields; the new cubes were not acquired. This ejecta jet is distinct from the inner X-ray jet.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/source-dossier.json",
+        "https://arxiv.org/abs/2502.19632",
+        "https://arxiv.org/abs/2606.26231"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Acquire the native cubes/motion constraints, qualify masks, epochs and velocity frames, and compare a nonuniform expansion model."
+    },
+    {
+      "id": "material-trials",
+      "subject": "Finite-material and projected-color trials",
+      "status": "unresolved",
+      "finding": "The shipped comparison still repeats image color through depth. Bounded replacement trials lost front structure or produced beads and were not promoted; improved projected residuals do not accept oblique morphology.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/README.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/processing-evidence.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "A bounded replacement must retain front filaments and remove bead/repeated-color artifacts in fixed front, oblique and side views without changing the target or relaxing the gate."
+    }
+  ]
+}

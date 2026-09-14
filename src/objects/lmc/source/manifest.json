@@ -152,7 +152,27 @@
           }
         ]
       },
-      "dependencies": []
+      "dependencies": [],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "swope-1m",
+            "evidence": "https://arxiv.org/abs/0905.1328 — section 2.3.2: table 3 UBVI columns are MCPS; https://arxiv.org/abs/astro-ph/0407006 section 2: Swope 1 m and Great Circle Camera. Preparation consumes B and V, not OGLE or infrared photometry."
+          },
+          {
+            "kind": "machine",
+            "machineId": "curtis-schmidt",
+            "evidence": "https://arxiv.org/abs/astro-ph/0407006 PDF page 4 / Table 2: MCPS replaces bright-star photometry with Massey where available; https://arxiv.org/abs/astro-ph/0110531 section 2.1: Curtis Schmidt at CTIO. The joined Bonanos rows do not identify individual replacement measurements."
+          },
+          {
+            "kind": "unresolved",
+            "label": "Bonanos literature astrometry and spectral classifications",
+            "evidence": "https://arxiv.org/abs/0905.1328 sections 2.1–2.3; labs/nebula/models/lmc/stars/source/refs.dat",
+            "reason": "Positions and classifications combine literature records; an individual observing telescope has not been established for every retained catalogue row. The Swope and Curtis Schmidt attributions apply to the consumed MCPS B/V photometry."
+          }
+        ]
+      }
     },
     {
       "id": "sky-registration",
@@ -331,8 +351,8 @@
     {
       "id": "document-16",
       "path": "src/objects/lmc/source/presentation.json",
-      "expectedSha256": "6dca73f28a6d58496ba2ba645a59583454b2e9eb798656560a9d85cc3fa21a7b",
-      "expectedBytes": 5793,
+      "expectedSha256": "1570c6c345ddbb422be1971ccc91ad7673f0e8511ee963ed9871bbabce56d6c9",
+      "expectedBytes": 5980,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -364,8 +384,26 @@
       "expectedSha256": "68cce2d2ebd9d43839c66f513df4819365e920fa4e6added41cc054f78739d58",
       "expectedBytes": 5126095,
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noirlab2030a",
+            "role": "reference",
+            "evidence": "src/objects/lmc/source/provenance.json#/checkedSource"
+          }
+        ]
+      },
+      "origin": "https://noirlab.edu/public/images/noirlab2030a/",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+      "acquisition": "Unchanged publisher-curated AstroPix 3000-pixel JPEG derivative of NOIRLab noirlab2030a, retained for the superseded SMASH comparison. The pinned bytes identify this derivative, not the larger publisher master.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "blanco-4m",
+            "evidence": "https://noirlab.edu/public/images/noirlab2030a/ — publisher-curated mirror https://www.astropix.org/image/noirlab/noirlab2030a identifies Blanco-4m/DECam in g, r, i and z; this historical image is retained as a source document."
+          }
+        ]
       }
     }
   ],

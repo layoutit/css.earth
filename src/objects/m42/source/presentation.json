@@ -62,26 +62,26 @@
   "lenses": [
     {
       "id": "eso-optical",
-      "label": "ESO \u00b7 optical",
+      "label": "ESO · optical",
       "title": "Orion in visible light",
       "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Optical \u00b7 i / H-alpha / r / G",
-      "detail": "4000 \u00d7 3106 px",
+      "summary": "Optical display colors on an inferred cloud; physical depth and faint outer structure remain uncertain.",
+      "detail": "4000 × 3106 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Optical \u00b7 i / H-alpha / r / G"
+          "value": "Optical · i / H-alpha / r / G"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "4000 \u00d7 3106"
+          "value": "4000 × 3106"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "59.95 \u00d7 46.56 arcmin"
+          "value": "59.95 × 46.56 arcmin"
         }
       ],
       "input": "eso-optical",
@@ -94,26 +94,26 @@
     },
     {
       "id": "eso-vista",
-      "label": "ESO VISTA \u00b7 infrared",
+      "label": "ESO VISTA · infrared",
       "title": "Orion in near infrared",
       "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Near-infrared \u00b7 K / J / Z",
-      "detail": "3252 \u00d7 4000 px",
+      "summary": "Near-infrared false color on the same inferred cloud; the image does not measure its depth.",
+      "detail": "3252 × 4000 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Near-infrared \u00b7 K / J / Z"
+          "value": "Near-infrared · K / J / Z"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "3252 \u00d7 4000"
+          "value": "3252 × 4000"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "71.84 \u00d7 88.35 arcmin"
+          "value": "71.84 × 88.35 arcmin"
         }
       ],
       "input": "eso-vista",

@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/observations/m45-processing/sources/noirlab-optical.tif",
       "origin": "https://noirlab.edu/public/images/noao-m45/",
       "sourceUrl": "https://noirlab.edu/public/images/noao-m45/",
-      "title": "Pleiades \u00b7 NOIRLab \u00b7 optical B / V / I",
+      "title": "Pleiades · NOIRLab · optical B / V / I",
       "credit": "NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
       "displayCredit": "NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -29,10 +29,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "WIYN",
-            "evidence": "https://noirlab.edu/public/images/noao-m45/",
-            "reason": "The published image identifies WIYN, which is not yet represented in the shared machine catalogue."
+            "kind": "machine",
+            "machineId": "wiyn-0-9m",
+            "evidence": "https://noirlab.edu/public/images/noao-m45/ — NOIRLab-curated mirror https://www.astropix.org/image/noirlab/noao-m45 identifies Mosaic on the WIYN 0.9-metre telescope"
           }
         ]
       }
@@ -42,7 +41,7 @@
       "path": ".local/nebula-lab/observations/m45-processing/sources/spitzer-irac.tif",
       "origin": "https://science.nasa.gov/photojournal/pink-pleiades/",
       "sourceUrl": "https://science.nasa.gov/photojournal/pink-pleiades/",
-      "title": "Pleiades \u00b7 Spitzer \u00b7 IRAC 3.6\u20138 \u00b5m",
+      "title": "Pleiades · Spitzer · IRAC 3.6–8 µm",
       "credit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
       "displayCredit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -76,7 +75,7 @@
       "path": ".local/nebula-lab/observations/m45-processing/sources/spitzer-irac-mips.tif",
       "origin": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
       "sourceUrl": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
-      "title": "Pleiades \u00b7 Spitzer \u00b7 IRAC + MIPS 4.5\u201324 \u00b5m",
+      "title": "Pleiades · Spitzer · IRAC + MIPS 4.5–24 µm",
       "credit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
       "displayCredit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -110,7 +109,7 @@
       "path": ".local/nebula-lab/observations/m45-processing/sources/wise-four-band.tif",
       "origin": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
       "sourceUrl": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
-      "title": "Pleiades \u00b7 WISE \u00b7 3.4\u201322 \u00b5m wide field",
+      "title": "Pleiades · WISE · 3.4–22 µm wide field",
       "credit": "NASA/JPL-Caltech/UCLA",
       "displayCredit": "NASA/JPL-Caltech/UCLA",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
@@ -144,9 +143,9 @@
       "path": ".local/nebula-lab/observations/m45-optical-composite/sources/niittee-widefield.tif",
       "origin": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
-      "title": "Pleiades \u00b7 T\u00f5rva / Niittee \u00b7 wide optical",
-      "credit": "Taavi Niittee / T\u00f5rva Astronomy Club",
-      "displayCredit": "Taavi Niittee / T\u00f5rva Astronomy Club",
+      "title": "Pleiades · Tõrva / Niittee · wide optical",
+      "credit": "Taavi Niittee / Tõrva Astronomy Club",
+      "displayCredit": "Taavi Niittee / Tõrva Astronomy Club",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
       "expectedSha256": "96c04d4db1cd317544bd616fe41ce337f32aa1dac2fcd69702419f29c426e5aa",
       "expectedBytes": 16654428,
@@ -166,10 +165,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "Taavi Niittee / T\u00f5rva Astronomy Club",
-            "evidence": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
-            "reason": "This photographer's observing equipment is not represented in the shared machine catalogue."
+            "kind": "machine",
+            "machineId": "niittee-sharpstar-61edph-iii",
+            "evidence": "https://commons.wikimedia.org/wiki/File:Plejades.jpg — author’s Equipment Used: Sharpstar 61EDPH III, ZWO ASI071MC Pro; Tõrva, Estonia"
           }
         ]
       }
@@ -206,8 +204,8 @@
       "path": "labs/nebula/models/m45/stellar-catalogue.json",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/239",
       "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/239",
-      "title": "Pleiades field stars \u00b7 Hipparcos and Tycho-2",
-      "credit": "ESA (1997); H\u00f8g et al. (2000); CDS/VizieR",
+      "title": "Pleiades field stars · Hipparcos and Tycho-2",
+      "credit": "ESA (1997); Høg et al. (2000); CDS/VizieR",
       "acquisition": "Checked-in normalized stellar catalogue from the two pinned CDS cone queries, preserving native astrometry and photometry. Johnson transformations and display-star selection are documented in the stellar source receipt.",
       "expectedSha256": "725466bded167e153b071941c63584313bc73503db6a61ed9aa57649a0ce6ac7",
       "expectedBytes": 1654998,
@@ -226,7 +224,16 @@
           }
         ]
       },
-      "dependencies": []
+      "dependencies": [],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "hipparcos",
+            "evidence": "https://www.esa.int/Science_Exploration/Space_Science/Hipparcos_overview — main instrument and star mapper produced Hipparcos and Tycho; stellar-sources.json pins both catalogue extracts. Tycho-2 proper motions also combine historical catalogues."
+          }
+        ]
+      }
     },
     {
       "id": "distance",
@@ -282,7 +289,16 @@
         ]
       },
       "dependencies": [],
-      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements."
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -309,8 +325,8 @@
     {
       "id": "document-3",
       "path": "src/objects/m45/source/presentation.json",
-      "expectedSha256": "15695f470ae9390ec443557069d4fff5c5fbd63b33cb30c1e287b0551ed6f101",
-      "expectedBytes": 10515,
+      "expectedSha256": "9c9eaf4d42e359855fe384f764387f0c6161a654fff5a7bc7dbd4330fe966367",
+      "expectedBytes": 10585,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."

@@ -1,5 +1,10 @@
 # Pleiades (M45): source evidence and 3D experiment
 
+This file preserves processing studies and their dated results. The
+[current shipped object record](../../../../src/objects/m45/README.md) owns
+the active sources, delivery evidence and known problems. Historical experiments
+below do not qualify later deliveries.
+
 ## Wider optical composite · 13 September 2026
 
 Reconstruction now has an additional **Optical composite · NOIRLab + Niittee** research lens. Niittee's registered optical footprint covers 99.84% of the current model's projected emission, compared with 60.14% for NOIRLab alone. Native NOX and an image composite are prepared; the old cloud and catalogue stars are retained. [Method, exact result, source credits, rejected trials and replay limits](optical-composite-notes.md).

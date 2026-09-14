@@ -1,5 +1,10 @@
 # M2–9: image-to-volume experiment
 
+This file preserves processing studies and their dated results. The
+[current shipped object record](../../../../src/objects/m2-9/README.md) owns
+the active sources, delivery evidence and known problems. Historical experiments
+below do not qualify later deliveries.
+
 An independent TypeScript implementation of the axial group-sparsity method in [Wenger, Lorenz & Magnor (2013)](https://doi.org/10.1111/cgf.12216). It reconstructs **relative RGB emission**, not gas mass density. Unlike LMC/SMC, this experiment has no simulation density to paint.
 
 ## Reproduce locally

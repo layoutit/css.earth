@@ -21,26 +21,26 @@
   "lenses": [
     {
       "id": "hubble-optical",
-      "label": "Hubble \u00b7 optical lines",
+      "label": "Hubble · optical lines",
       "title": "Crab ejecta in optical emission lines",
       "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Optical \u00b7 [O III] 502 nm / [O I] 631 nm / [S II] 673 nm",
-      "detail": "3864 \u00d7 3864 px",
+      "summary": "Optical line colors on expansion-inferred ejecta and a modeled pulsar wind; fine structure is softened.",
+      "detail": "3864 × 3864 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Optical \u00b7 [O III] 502 nm / [O I] 631 nm / [S II] 673 nm"
+          "value": "Optical · [O III] 502 nm / [O I] 631 nm / [S II] 673 nm"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "3864 \u00d7 3864"
+          "value": "3864 × 3864"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "6.41 \u00d7 6.41 arcmin"
+          "value": "6.41 × 6.41 arcmin"
         }
       ],
       "input": "hubble-optical",
@@ -53,26 +53,26 @@
     },
     {
       "id": "webb-infrared",
-      "label": "Webb \u00b7 near/mid-infrared",
+      "label": "Webb · near/mid-infrared",
       "title": "Crab filaments and pulsar wind in infrared",
       "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Near/mid-infrared \u00b7 1.62 / 4.8 / 5.6 / 11.3 / 18 / 21 \u00b5m",
-      "detail": "4000 \u00d7 3483 px",
+      "summary": "Infrared false color on expansion-inferred ejecta and a modeled pulsar wind; fine structure is softened.",
+      "detail": "4000 × 3483 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Near/mid-infrared \u00b7 1.62 / 4.8 / 5.6 / 11.3 / 18 / 21 \u00b5m"
+          "value": "Near/mid-infrared · 1.62 / 4.8 / 5.6 / 11.3 / 18 / 21 µm"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "4000 \u00d7 3483"
+          "value": "4000 × 3483"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "5.47 \u00d7 4.76 arcmin"
+          "value": "5.47 × 4.76 arcmin"
         }
       ],
       "input": "webb-infrared",
@@ -85,26 +85,26 @@
     },
     {
       "id": "webb-components",
-      "label": "Webb \u00b7 dust, sulfur, synchrotron",
+      "label": "Webb · dust, sulfur, synchrotron",
       "title": "Crab dust, sulfur and synchrotron component color",
       "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the publisher display; compact nonstellar emission was explicitly preserved during source treatment. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Derived infrared components \u00b7 4.8 / 18 / 21 \u00b5m",
-      "detail": "2958 \u00d7 2569 px",
+      "summary": "Published dust, sulfur and synchrotron component colors on an inferred 3D model; not measured material density.",
+      "detail": "2958 × 2569 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Derived infrared components \u00b7 4.8 / 18 / 21 \u00b5m"
+          "value": "Derived infrared components · 4.8 / 18 / 21 µm"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "2958 \u00d7 2569"
+          "value": "2958 × 2569"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "5.33 \u00d7 4.62 arcmin"
+          "value": "5.33 × 4.62 arcmin"
         }
       ],
       "input": "webb-components",
@@ -117,26 +117,26 @@
     },
     {
       "id": "spitzer-infrared",
-      "label": "Spitzer \u00b7 mid-infrared",
+      "label": "Spitzer · mid-infrared",
       "title": "Crab mid-infrared emission at 24 micrometres",
       "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the publisher display; compact nonstellar emission was explicitly preserved during source treatment. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Mid-infrared \u00b7 24 \u00b5m (companion CXC metadata)",
-      "detail": "5290 \u00d7 5290 px",
+      "summary": "Mid-infrared false color on inferred ejecta and pulsar-wind geometry; brightness is not calibrated.",
+      "detail": "5290 × 5290 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Mid-infrared \u00b7 24 \u00b5m (companion CXC metadata)"
+          "value": "Mid-infrared · 24 µm (companion CXC metadata)"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "5290 \u00d7 5290"
+          "value": "5290 × 5290"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "8.83 \u00d7 8.83 arcmin"
+          "value": "8.83 × 8.83 arcmin"
         }
       ],
       "input": "spitzer-infrared",
@@ -149,26 +149,26 @@
     },
     {
       "id": "vla-radio",
-      "label": "VLA \u00b7 radio synchrotron",
+      "label": "VLA · radio synchrotron",
       "title": "Crab radio synchrotron emission",
       "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the publisher display; compact nonstellar emission was explicitly preserved during source treatment. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Radio \u00b7 S band, approximately 3 GHz / 10 cm",
-      "detail": "5290 \u00d7 5290 px",
+      "summary": "Radio display colors on modeled wind and ejecta geometry; no measured radio depth.",
+      "detail": "5290 × 5290 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Radio \u00b7 S band, approximately 3 GHz / 10 cm"
+          "value": "Radio · S band, approximately 3 GHz / 10 cm"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "5290 \u00d7 5290"
+          "value": "5290 × 5290"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "8.83 \u00d7 8.83 arcmin"
+          "value": "8.83 × 8.83 arcmin"
         }
       ],
       "input": "vla-radio",
@@ -181,26 +181,26 @@
     },
     {
       "id": "chandra-xray",
-      "label": "Chandra \u00b7 X-ray pulsar wind",
+      "label": "Chandra · X-ray pulsar wind",
       "title": "Crab inner pulsar wind in X-rays",
       "description": "Published SITELLE ejecta and a conditional expansion-depth model share a frame with separate pulsar-wind components. RGB, opacity and component strengths are authored display choices; this is not measured gas or dust density. The historical material repeats image color through depth and remains a known visual limitation. The reference preview shows the publisher display; compact nonstellar emission was explicitly preserved during source treatment. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "X-ray \u00b7 ACIS; exact selected display passband unspecified",
-      "detail": "5290 \u00d7 5290 px",
+      "summary": "X-ray pulsar-wind display on published torus/jet assumptions; depth and emission strength are modeled.",
+      "detail": "5290 × 5290 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "X-ray \u00b7 ACIS; exact selected display passband unspecified"
+          "value": "X-ray · ACIS; exact selected display passband unspecified"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "5290 \u00d7 5290"
+          "value": "5290 × 5290"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "8.83 \u00d7 8.83 arcmin"
+          "value": "8.83 × 8.83 arcmin"
         }
       ],
       "input": "chandra-xray",
