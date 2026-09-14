@@ -1,3 +1,4 @@
+import nearbyUniverseSources from '../src/objects/nearby-universe/source/catalogue.json' with { type: 'json' };
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceObject, sourceArray, sourceUrl } from '../src/platform/source-catalog.mts';
@@ -79,6 +80,7 @@ const sharedSources = Object.freeze([
     "href": "https://noirlab.edu/public/images/noirlab2030b/",
     "description": "Deepest, widest view of the Small Magellanic Cloud from SMASH. CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin. CC-BY-4.0. The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth."
   },
+  ...nearbyUniverseSources.sources.map(source => ({ label: source.id === 'cosmicflows-4' ? 'Cosmicflows-4' : source.id === 'hyperleda-pgc' ? 'HyperLEDA I' : 'HyperLEDA II', role: 'galaxy field', href: source.doi, description: `${source.citation}. CDS/VizieR ${source.catalogue}. Galaxy positions and distance inputs; displayed cloud concentrations and exposure are authored, not gas or measured mass density.` })),
   {
     "label": "MCXC-II",
     "role": "clusters",

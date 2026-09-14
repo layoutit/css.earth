@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "m31",
+  "name": "Andromeda Galaxy",
+  "defaultLens": "optical",
+  "bank": {
+    "path": "src/objects/m31/prepared/image-layers.json",
+    "sha256": "16951a0b2f8fcccdd5c9b7c419cd6e486fda759448437ffe06fc6ba20a3b3957",
+    "bytes": 177609
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m31/source/recipe.json",
+      "sha256": "24505d74fa94294cb448949b21554427c21774774101720abbd685eeb8eca398",
+      "bytes": 2898
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m31/source/provenance.json",
+      "sha256": "52bf488f3fe4d713b23091c6b523d1269bfac2b3d1cae1c098e305029bfa1c66",
+      "bytes": 2088
+    }
+  ],
+  "sharedInputs": [],
+  "lenses": [
+    {
+      "id": "optical",
+      "label": "ESA/Hubble \u00b7 optical",
+      "title": "Wide-field view of the Andromeda Galaxy",
+      "description": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth. The wide DSS2 field contains the full visible galaxy and substantial surrounding sky, foreground stars and background objects. Those released sources are retained. Faint halo coverage is limited by the survey composite.",
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "detail": "4783 \u00d7 5000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "DSS2 R / DSS2 B"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4783 \u00d7 5000"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "361.93 \u00d7 234.08 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m31/source/source.jpg",
+        "sha256": "f0a9a514317745945591c7677e2d76c358357cf4e4ef00b95928e6d350835137",
+        "bytes": 10592116,
+        "url": "https://cdn.esahubble.org/archives/images/large/heic1112f.jpg"
+      }
+    }
+  ]
+}

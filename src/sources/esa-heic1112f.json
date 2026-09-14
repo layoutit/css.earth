@@ -1,0 +1,37 @@
+{
+  "id": "esa-heic1112f",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Wide-field view of the Andromeda Galaxy",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "heic1112f"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/heic1112f/",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/m31/source/provenance.json",
+      "revision": "340f4ef6ea7f2a6cc540b906dec35436a1d549c5",
+      "sha256": "52bf488f3fe4d713b23091c6b523d1269bfac2b3d1cae1c098e305029bfa1c66",
+      "locator": "/"
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Hubble & Digitized Sky Survey 2. Acknowledgment: Davide De Martin (ESA/Hubble)",
+      "scope": "Published source",
+      "evidence": "src/objects/m31/source/provenance.json"
+    }
+  ]
+}

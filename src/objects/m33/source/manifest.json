@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/m33/source/source.jpg",
+      "origin": "https://www.eso.org/public/images/eso1424a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1424a/",
+      "title": "VST snaps a very detailed view of the Triangulum Galaxy",
+      "credit": "ESO",
+      "displayCredit": "ESO",
+      "acquisition": "publisher publication JPEG",
+      "expectedSha256": "24b3d51ec8f2d1ad998bb5bb6f83111f251df0b64b21bcaafd1c2213a5d00853",
+      "expectedBytes": 3788911,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1424a",
+            "role": "material",
+            "evidence": "src/objects/m33/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "optical",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vst",
+            "evidence": "https://www.eso.org/public/images/eso1424a/"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [],
+  "generatedIntermediates": []
+}
