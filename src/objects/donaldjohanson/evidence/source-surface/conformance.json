@@ -1,0 +1,74 @@
+{
+  "date": "2026-09-14",
+  "commit": "22530863b602e90684fe778b16136de3d890fe2d",
+  "headless": true,
+  "cases": [
+    "mobile",
+    "dataset-interactions",
+    "dataset-interactions-dpr-2"
+  ],
+  "reports": [
+    {
+      "id": "donaldjohanson",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 5,
+      "stageElements": 1084,
+      "stable": true
+    },
+    {
+      "id": "donaldjohanson",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 1,
+      "datasets": [
+        {
+          "id": "llorri",
+          "interior": false,
+          "geometryDisplacement": 83.83379217671632,
+          "shadowPixels": null
+        },
+        {
+          "id": "shape",
+          "interior": false,
+          "geometryDisplacement": 159.77556226767874,
+          "shadowPixels": null
+        },
+        {
+          "id": "elevation",
+          "interior": false,
+          "geometryDisplacement": 219.98886295718904,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "donaldjohanson",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 2,
+      "datasets": [
+        {
+          "id": "llorri",
+          "interior": false,
+          "geometryDisplacement": 83.83379217671632,
+          "shadowPixels": null
+        },
+        {
+          "id": "shape",
+          "interior": false,
+          "geometryDisplacement": 159.77556226767874,
+          "shadowPixels": null
+        },
+        {
+          "id": "elevation",
+          "interior": false,
+          "geometryDisplacement": 219.98886295718904,
+          "shadowPixels": null
+        }
+      ]
+    }
+  ]
+}
