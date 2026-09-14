@@ -1,3 +1,4 @@
+import { requireRecord, requireString } from '../../../../tools/source-values.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
@@ -11,7 +12,7 @@ test('Charon MVIC bands and missing masks match independent NumPy source anchors
   const manifest = JSON.parse((await readFile(new URL('manifest.json', root))).toString('utf8'));
   const policy = required(recipe.surfaces.find(surface => surface.id === 'enhanced-color')?.science, 'enhanced-color science').validity;
   const entry = manifest.inputs.find((x: { lensId: string; }) => x.lensId === 'enhanced-color');
-  const source = decodePds4Color(await readFile(new URL(entry.path, root)), await readFile(new URL(required(policy, 'enhanced-color validity').labelPath, root), 'utf8'), entry, policy);
+  const source = decodePds4Color(await readFile(new URL(entry.path, root)), await readFile(new URL(requireString(requireRecord(required(policy, 'enhanced-color validity')).labelPath), root), 'utf8'), entry, policy);
   const anchors = JSON.parse((await readFile(new URL('validation/color-source-inspection.json', root))).toString('utf8'));
   assert.equal(source.sourceMissingPixels, 3145121);
   assert.equal(source.valid.reduce((a, b) => a + b), anchors.validRgbPixels);

@@ -1,6 +1,7 @@
 // Draft replacement for the static-lane Moon unit tests (preparation.test.mts, runtime-contract.test.mts,
 // scientific.test.mts / source.test.mts, surface-raster.test.mts, missing-coverage.test.mts retire with the lane).
 // Modelled on tests/objects/unit/venus/runtime-contract.test.mts and the Mars generic-lane draft.
+import { requireRecord } from '../../../../tools/source-values.mts';
 import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
@@ -8,6 +9,7 @@ import runtimeDefinition from "../../../../src/objects/moon/prepared/runtime.jso
 import assets from "../../../../src/objects/moon/prepared/assets.json" with { type: "json" };
 import scene from "../../../../src/objects/moon/prepared/scene.json" with { type: "json" };
 import lenses from "../../../../src/objects/moon/prepared/lenses.json" with { type: "json" };
+import text from "../../../../src/objects/moon/prepared/text.json" with { type: "json" };
 import controls from "../../../../src/objects/moon/prepared/controls.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
@@ -36,12 +38,12 @@ test("Moon is prepared by the generic raster lane with the source-radius sphere,
   // No atmosphere: the material is the row-sharded Lambert bank, not the atmosphere phase atlas.
   assert.equal(scene.material.runtimeLighting, false);
   assert.equal(scene.material.frameCount, 256);
-  assert.equal(assets.atmosphere, undefined);
+  assert.equal(Object.hasOwn(assets, "atmosphere"), false);
   assert.equal(assets.lighting.frameCount, 256);
   assert.deepEqual(Object.keys(assets.surfaces), LENS_IDS);
   assert.deepEqual(lenses.controls.map(({ id }) => id), LENS_IDS);
   assert.equal(lenses.defaultLens, "surface");
-  assert.deepEqual(controls.settings.controls.map(control => control.name), ["speed", "shadows", "stars"]);
+  assert.deepEqual(controls.settings.controls.map(control => control.name), ["speed", "shadows"]);
   // The composite material is a separate silhouette-fitted root, never a plane inside the scene.
   assert.ok(runtimeDefinition.tree.nodes.some(node => node.className?.includes("moon-material-composite")));
   assert.ok(runtimeDefinition.viewBindings.some(binding => binding.kind === "silhouette-fit"));
@@ -50,11 +52,12 @@ test("Moon is prepared by the generic raster lane with the source-radius sphere,
 test("Moon science lenses keep their prepared legends and false-colour declarations", () => {
   const byId = new Map(controls.lenses.controls.map(control => [control.id, control]));
   for (const control of lenses.controls) {
-    const shell = required(byId.get(control.id));
-    assert.equal(typeof shell.description, "string");
+    const shell = requireRecord(required(byId.get(control.id)));
+    const legend = shell.legend === undefined ? undefined : requireRecord(shell.legend);
+    assert.equal(typeof requireRecord(required(requireRecord(text.datasets)[control.id])).summary, "string");
     if (control.falseColor) assert.ok(shell.legend, `${control.id} declares a false-colour scale without a legend`);
-    if (shell.legend?.kind === "scale") assert.ok((shell.legend.colors?.length ?? 0) >= 2 && (shell.legend.labels?.length ?? 0) >= 2);
-    if (shell.legend?.kind === "categories") assert.ok((shell.legend.items?.length ?? 0) >= 2);
+    if (legend?.kind === "scale") assert.ok(Array.isArray(legend.colors) && legend.colors.length >= 2 && Array.isArray(legend.labels) && legend.labels.length >= 2);
+    if (legend?.kind === "categories") assert.ok(Array.isArray(legend.items) && legend.items.length >= 2);
   }
 });
 
@@ -62,15 +65,14 @@ test("Moon publishes every declared toggle through the shared controls and selec
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const nodes = f.stage.querySelectorAll("*");
-    for (const name of ["stars", "shadows"]) {
+    for (const name of ["shadows"]) {
       const input = required(f.inputs.get(name));
       input.checked = !input.checked;
       const listener = required(input.listeners.get("change"));
       if (typeof listener === "function") listener(new Event("change")); else listener.handleEvent(new Event("change"));
       await f.settle();
       assert.equal(required(f.selection.state().committed)[name], input.checked);
-      if (name === "stars") assert.equal(f.stage.classList.contains(`moon-hide-stars`), !input.checked);
-      else assert.equal(f.presentation.observe().materials.lighting.rotationEnabled, input.checked);
+      assert.equal(f.presentation.observe().materials.lighting.rotationEnabled, input.checked);
     }
     assert.equal(f.inputs.get("atmosphere"), undefined, "an airless body declares no atmosphere toggle");
     assert.deepEqual(f.stage.querySelectorAll("*"), nodes);

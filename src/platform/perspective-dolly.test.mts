@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { parsePreparedWorldCameraFrame } from "../renderers/css/dist/navigation.js";
 
 import {
   createPerspectiveDolly,
@@ -30,7 +31,8 @@ const plan = Object.freeze({
 });
 
 // Mercury's prepared physical frame, with an authored extent standing in for the application's world context.
-const mercuryFrame = PREPARED_MERCURY_SCENE.worldFrame;
+const mercuryFrame = parsePreparedWorldCameraFrame(PREPARED_MERCURY_SCENE.worldFrame);
+assert.ok(mercuryFrame);
 const worldContext = Object.freeze({
   frame: mercuryFrame,
   bodyRadiusUnits: mercuryFrame.bodyRadiusM / mercuryFrame.metersPerUnit,
