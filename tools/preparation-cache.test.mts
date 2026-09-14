@@ -20,7 +20,7 @@ async function put(root: string, path: string, contents: string) {
 async function firstState(root: string, path: string): Promise<TracedState> {
   const entry = await lstat(join(root, path)).catch(() => null);
   if (!entry) return { missing: true };
-  const state: TracedState = { size: entry.size, modified: entry.mtimeMs };
+  const state: TracedState = { size: entry.size, modified: entry.mtimeMs, ...(entry.isDirectory() ? { directory: true as const } : {}) };
   if (path.endsWith("/object.json")) {
     const text = await readFile(join(root, path), "utf8");
     state.views = { registry: descriptorDigest(text, "registry"), recipe: descriptorDigest(text, "recipe"), pins: descriptorDigest(text, "pins") };
@@ -45,11 +45,13 @@ test("a receipt verifies what preparation read, probed, listed and wrote, and no
   await put(root, "listed/a.txt", "a");
   await put(root, "unread.txt", "unread");
   await put(root, "package.json", "{}");
-  const traces = await observed(root, { "input.json": ["read"], "missing.json": ["probe"], listed: ["list"], "output.txt": ["write"] });
+  await mkdir(join(root, "probed"));
+  const traces = await observed(root, { "input.json": ["read"], "missing.json": ["probe"], probed: ["probe"], listed: ["list"], "output.txt": ["write"] });
   await put(root, "output.txt", "prepared");
+  await put(root, "probed/written-later.txt", "a directory's contents do not matter to a probe");
   const { receipt, refusal } = await seal(root, traces, ["package.json"]);
   assert.equal(refusal, null);
-  assert.deepEqual(evidence(receipt?.inputs ?? {}), { "input.json": "bytes", listed: "names", "missing.json": "absent", "package.json": "bytes" });
+  assert.deepEqual(evidence(receipt?.inputs ?? {}), { "input.json": "bytes", listed: "names", "missing.json": "absent", "package.json": "bytes", probed: "directory" });
   assert.deepEqual(evidence(receipt?.outputs ?? {}), { "output.txt": "bytes" });
   const bytes = await readFile(join(root, "receipt.json"), "utf8");
   await seal(root, traces, ["package.json"]);
