@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "lyyli",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "DAMIT 2012: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-2012.txt. Model 2012, version 2018-07-18, pole (64°, -66°), period 11.06207 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lyyli/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/2012",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/lyyli/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/lyyli/source/reference/damit-model.json",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/6562/shape.txt",
+        "https://damit.cuni.cz/projects/damit/pages/documentation"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "No registered reusable surface imagery was examined for the selected convex model. The grid marks missing imagery; the AKARI thermal size is a separate scale decision, not a surface map or terrain qualification.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lyyli/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "damit-alternatives",
+      "subject": "Other DAMIT shape solutions",
+      "status": "unresolved",
+      "finding": "The live DAMIT export lists these other models for this target: 2013: pole (252°, -14°), 11.06211 h, version 2018-07-18. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "Independent shape, spin or scale evidence distinguishes these alternatives, or a changed release offers a demonstrably better supported model.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/2013"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "akari-scale",
+      "subject": "AKARI AcuA thermal scale",
+      "status": "included",
+      "finding": "The retained AcuA row 2204 (Lyyli; three detections) supplies a 27.12 ± 1.31 km fitted nonrotating-sphere effective diameter. The recipe transfers it uniformly to the uncalibrated DAMIT 2012 mesh as an approximate volume scale. The catalog error is thermal-model/statistical only; it does not establish total size uncertainty, local shape accuracy, terrain or imagery. The retrieved original catalogue row was compared field-for-field with the retained row and matches.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/lyyli/source/reference/damit-model.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/lyyli/source/reference/calibration.json",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://arxiv.org/abs/1106.1948",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "historical-source-review",
+      "subject": "Historical model and population records",
+      "status": "included",
+      "finding": "Historical review retained the Ďurech et al. (2018) model-publication record and JPL SBDB Mars-crosser classification from the former README survey. They provide source context only: neither selects between the two DAMIT poles nor qualifies terrain, imagery or the AKARI scale.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2018A%26A...617A..57D",
+        "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=2204",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/lyyli/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    }
+  ]
+}

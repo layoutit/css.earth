@@ -9,6 +9,14 @@ Roughness and Non-Periodic Heating**, submitted to EPSC-DPS 2025.
 The file's exact upstream mission-model version is not established. We do not
 describe it as a NASA public-domain release or transfer that status to it.
 
+Lucy L’LORRI photographs in the registration evidence: NASA/GSFC/SwRI/JHUAPL
+and the Lucy team, distributed in the PDS Small Bodies Node’s
+[version 1.0 Dinkinesh partially processed collection](https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/SUPPORT/dataset.shtml).
+The comparison is our diagnostic derivative of the 1 November 2023 observations:
+it uses a common linear display of relative DN per second and retains acquisition
+illumination. It is neither an archive-supplied basemap nor a calibrated albedo product.
+The image and mesh retain their separate source attributions.
+
 The separate Celestia dataset retains the following attribution:
 
 ItzImcool (2024), domi9 (2024–2025); Celestia contributors. CC-BY-4.0; retain ItzImcool and domi9 attribution and mark conversion/scaling.

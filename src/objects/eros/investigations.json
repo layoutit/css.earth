@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "eros",
+  "entries": [
+    {
+      "id": "selected-visible-and-near-infrared-albedo",
+      "subject": "Visible and near-infrared albedo",
+      "status": "included",
+      "finding": "The selected Golish/USGS maps provide 550 and 950 nm normalized MSI albedo views. The retained 550 nm native label was inspected: 10682×5341 float samples, FilterNumber 1, Center 550 nm, and Equirectangular, planetocentric, east-positive 0–360° mapping centered at 180°. The filename contains sinu, but the label declares the selected projection. Its 17 km cartographic reference radius and 10 m/pixel sampling are not the body’s physical radius or guaranteed terrain resolution. The two bands remain separate, not a mineral-abundance ratio.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eros/README.md",
+        "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/eros/source/reference/eros_nearmsi_filter1.lbl",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/eros/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "selected-shape-and-elevation",
+      "subject": "Shape and Elevation",
+      "status": "included",
+      "finding": "[Gaskell ver128q](https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab), 196,608 released facets. Elevation is radius minus 8.42 km, not gravitational height.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eros/README.md",
+        "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-named-features",
+      "subject": "Named features",
+      "status": "included",
+      "finding": "[IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/EROS/target) Eros centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eros/README.md",
+        "https://planetarynames.wr.usgs.gov/Page/EROS/target"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "mathilde",
+  "entries": [
+    {
+      "id": "recorded-survey-1",
+      "subject": "Thomas 3° radial model / NEAR collected-model duplicate",
+      "status": "included",
+      "finding": "Thomas 3° radial model / NEAR collected-model duplicate — Included for partial Elevation; excluded as display geometry — Legacy label explicitly identifies the missing-radius sentinel and nonphysical jagged edges. Rendering or smoothing that sentinel boundary would misrepresent the source.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mathilde/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "Stooke 5° PDS visualization model",
+      "status": "included",
+      "finding": "The native Stooke label was examined: Thomas’s 3° radius model was resampled at 5°, bad regions were smoothed and shadowed crater floors were aesthetically modified. The selected visualization shape therefore includes modeled unseen terrain; it cannot establish measured global topography. The label also retains an arbitrary pole and prime meridian. The partial valid Thomas radius field remains a separate evidence source for Elevation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mathilde/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mathilde/source/reference/stooke-253mathilde.xml",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mathilde/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "Thomas 253mathm.fit mosaic",
+      "status": "included",
+      "finding": "Thomas `253mathm.fit` mosaic — Included as reference evidence only — 795 × 464 byte FITS includes axes and labels, so it cannot be wrapped as a global texture. Higher-resolution Stooke photomosaic preserves the useful mapped observations.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mathilde/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "Stooke 3,600 × 1,800 monochrome mosaic",
+      "status": "included",
+      "finding": "Stooke 3,600 × 1,800 monochrome mosaic — Included — Known simple cylindrical mapping and shared Thomas positional control. Better display sampling than the annotated FITS; partial coverage and photographed illumination remain explicit.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mathilde/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-5",
+      "subject": "Stooke four 25 m/pixel morphographic quadrangles",
+      "status": "excluded",
+      "finding": "Stooke four 25 m/pixel morphographic quadrangles — Excluded as a separate lens — Same photomosaic in a different projection; 4 of 14 possible sheets reflect partial coverage. They add no independent scientific view and do not repair source resolution or missing terrain.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mathilde/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-6",
+      "subject": "Stooke shaded-relief drawings",
+      "status": "excluded",
+      "finding": "Stooke shaded-relief drawings — Excluded — Drawn visualization, not measured elevation. The valid Thomas numerical radii support a better-defined scientific lens.",
+      "revisitWhen": "New source evidence resolves the specific limitation recorded here; reuse the pinned prior finding rather than repeat the unchanged survey.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mathilde/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-7",
+      "subject": "Weirich, Palmer & Domingue 2019 SPC model and PSI object page",
+      "status": "unresolved",
+      "finding": "[Weirich, Palmer & Domingue 2019 SPC model](https://www.hou.usra.edu/meetings/lpsc2019/pdf/2681.pdf) and [PSI object page](https://spc.psi.edu/index.php/2019/03/) — Unresolved for reusable source release — Paper describes a later model from 120 NEAR images and only one illumination angle; 6 m grid spacing oversamples imagery no better than 148 m/pixel. It acknowledges remaining image/model differences. The paper and linked object page expose no downloadable model release or redistribution terms; the access page concerns licensed SPC software. This is not evidence that the model does not exist. No contact or acquisition requiring submission was made.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mathilde/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-8",
+      "subject": "Original NEAR MSI flyby images and geometry list",
+      "status": "included",
+      "finding": "Original NEAR MSI flyby images and geometry list — Two broadband frames included as NEAR close-ups — Thomas’s reconstructed table supports a checked camera; paired raw frames establish detector validity. No recovery of deep shadows, albedo or unseen terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mathilde/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-reference-1",
+      "subject": "Thomas et al. 1999, *Mathilde: Size, Shape, and Geology*",
+      "status": "included",
+      "finding": "The survey follows the source papers to actual PDS data rather than treating press images as map products. The journal article [Thomas et al. 1999, *Mathilde: Size, Shape, and Geology*](https://doi.org/10.1006/icar.1999.6121) explains the arbitrary frame and minimum/nominal/maximum hidden-volume interpretations. Copyrighted paper PDFs used for local research are not package inputs.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mathilde/README.md",
+        "https://doi.org/10.1006/icar.1999.6121"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

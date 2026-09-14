@@ -80,7 +80,7 @@ The shape joins detailed northern OSIRIS reconstruction to coarser lightcurve/ou
 
 The 15:43:54 candidate failed image/model registration; the 15:45:28 candidate failed the independent archived-intercept check. Neither is included. The dated one- and two-image accounts below describe earlier versions; the three-image expansion is reported above.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="lutetia-source-record"></a>
 <a id="views-and-source-interpretation"></a>
@@ -100,15 +100,7 @@ The 15:43:54 candidate failed image/model registration; the 15:45:28 candidate f
 
 **Bounded source survey (2026-09-07)**
 
-| Candidate | What it adds | Disposition |
-| --- | --- | --- |
-| PDS Rosetta OSIRIS shape release above | Twelve published resolutions, body axes, numerical radii and source confidence | Included: `lutetia_025k_cart.wrl`, 12,265 vertices and 24,526 triangular plates. This provides adequate source detail before reducing to 800 display faces. |
-| [Jorda–Vincent rotation and mapping document](https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/document/lutetia_rotation.pdf) | Exact shape-frame spin parameters; high-resolution and combined low/high-resolution cylindrical maps | Included as coordinate evidence. Both original embedded map rasters were extracted and inspected in the local survey: coordinate grids, ticks or the equator/prime meridian are burned into the image. Excluded as photographic texture; removing these would require reconstructing image pixels. No such repair was performed. |
-| [ESA Lutetia coverage image](https://www.esa.int/ESA_Multimedia/Images/2011/10/Lutetia_coverage) | Larger, publicly accessible combined flyby map | Full-resolution JPEG inspected and pinned as a reference. It also contains burned-in axes and grid lines, and even its longitude labels differ from the PDS document. Excluded from runtime appearance; no assumption that a press map is a clean, registered global raster. |
-| [OSIRIS NAC resampled-D archive](https://pdssbn.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/dataset.shtml) | 2020 release of stray-light corrected, radiometrically calibrated and geometric-distortion corrected reflectance frames, with sigma and quality maps | Implemented in the follow-up OSIRIS reflectance view below. The earlier survey recorded: The actual 2010-07-10 15:42:41.240 frame header was inspected: 2048×2048 32-bit PC_REAL image, camera/spacecraft quaternions, Sun/observer geometry, explicit display directions and separate uncertainty/quality planes. These are camera observations, not a global map. They require a bound source-frame camera reprojection, quality-mask interpretation and photometric qualification. The existing controlled-camera path reads calibrated VICAR, not this OSIRIS multi-plane PDS encoding. No fake projection or ad-hoc brightness correction was substituted. |
-| [shapeViewer mission package](https://comet-toolbox.com/shapeViewer.html) | Source-author software, mission kernels, numerical gravity and slope samples | The 33 MB Rosetta_Lutetia ZIP was downloaded and its contents inspected. It includes a shape and kernels, gravity and slope data, but no photographic map. Excluded as duplicate geometry and unqualified additional scientific lenses. Local survey only. |
-| [ESA geological history map](https://www.esa.int/ESA_Multimedia/Images/2013/07/The_history_of_different_regions_on_Lutetia_s_surface) | Published regional geologic interpretation based on Massironi/Thomas et al. | Excluded as a global lens: perspective illustration with colored regions and no verified registered global raster or vector release. Regions are not painted onto the model. |
-| USGS Astropedia and PDS target catalog | Independent check for registered maps and complementary releases | No additional usable unannotated registered Lutetia map was established in this bounded survey. This is not a claim that none exists. The corrected OSIRIS frames remain the promising next source. |
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Frame, spin and physical scale**
 

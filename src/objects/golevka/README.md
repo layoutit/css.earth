@@ -6,10 +6,7 @@ Golevka is a near-Earth asteroid whose radar reconstruction has angular faces, s
 
 Geometry is the unchanged [golevka.obj](https://echo.jpl.nasa.gov/asteroids/shapes/golevka.obj) from the [NASA/JPL radar model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html). Interpretation comes from [the original research](https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf): Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL. The original OBJ, paper, Horizons responses and authored recipe are pinned under source/.
 
-- Included: the original JPL shape and its scientific paper provide source geometry, scale, spin and limits. Shape displays the shared missing-imagery grid under prepared lighting.
-- Included: Elevation derives source radius minus the 0.265 km reference sphere, with a -0.11 to 0.14 km palette. This is a second visualization of the radar inverse model; it is not independent topography, optical albedo or gravitational elevation.
-- Excluded: delay-Doppler panels, optical light curves and model figures in the paper are observational constraints and research illustrations, not registered geographic surface textures. No generic regolith or invented surface detail is substituted.
-- Unresolved: [PDS Golevka counterpart](https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/6489golevka.xml) was located but XML and TAB downloads returned HTTP 403.
+Shape uses the shared missing-imagery grid. Elevation shows source radius minus a 0.265 km reference sphere, with a -0.11 to 0.14 km palette. It visualizes the radar inverse model, not independent topography, optical albedo or gravitational elevation.
 
 ## Evidence
 
@@ -27,7 +24,7 @@ The bounded JPL/PDS/paper survey found no calibrated registered optical mosaic, 
 
 The published ecliptic pole (202°, -45°) is converted to equatorial J2000 using obliquity 23.439291111°. Body longitude is east-positive; display phase is arbitrary.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="golevka-sources-and-preparation"></a>
 <a id="model-identity-coordinates-and-spin"></a>
