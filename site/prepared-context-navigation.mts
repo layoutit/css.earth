@@ -22,10 +22,11 @@ interface ContextNavigationOptions {
   sources?: readonly SpatialCatalogSource[];
   windowTarget: Window;
   onError?(error: unknown): void;
+  unavailableObjectIds?: readonly string[];
 }
 
 /** Catalogue focus on the current detailed scene's shared camera owner. */
-export function createPreparedContextNavigation({ layer, presentation, sources = [], windowTarget, onError = console.error }: ContextNavigationOptions) {
+export function createPreparedContextNavigation({ layer, presentation, sources = [], windowTarget, onError = console.error, unavailableObjectIds = [] }: ContextNavigationOptions) {
   let navigation: ObjectWorldNavigation | null = null;
   let unsubscribe: (() => void) | null = null, unsubscribeLens: (() => void) | null = null;
   let lensObjectId: string | null = null, selected: string | null = null, ready = false, flight: AbortController | null = null;
@@ -122,7 +123,9 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         if (query.getAll('focusLens').length > 1) throw new TypeError('A saved view may have only one prepared focus lens.');
         const id = query.get('focus'), focus = id ? resolve(id) : null, state = lensState(id);
         const lensId = query.get('focusLens') ?? state?.defaultLens;
-        if (id && lensId !== undefined && (!state || !state.lenses.some(lens => lens.id === lensId))) {
+        const object = id ? layer.resolveGalaxy(id) : null;
+        const unavailable = object && !isPreparedCluster(object) && object.detailedObjectId && unavailableObjectIds.includes(object.detailedObjectId);
+        if (id && !unavailable && lensId !== undefined && (!state || !state.lenses.some(lens => lens.id === lensId))) {
           throw new TypeError(`Unknown prepared focus lens: ${lensId}`);
         }
         navigation.setPreparedFocus(focus);
