@@ -1,0 +1,35 @@
+{
+  "id": "dlr-vesta-lamo-clear",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Vesta LAMO clear-filter mosaic",
+  "identifiers": [],
+  "publisher": "German Aerospace Center (DLR)",
+  "publicationDate": "2012-10",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
+      "label": "DLR Dawn mapping release"
+    },
+    {
+      "role": "original",
+      "url": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png",
+      "label": "Original global PNG"
+    },
+    {
+      "role": "archive",
+      "url": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.pds.zip",
+      "label": "Original PDS image and attached label"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
+      "checkedOn": "2026-09-14",
+      "locator": "Low Altitude Mapping Orbit (LAMO), clear filter mosaic: map scale 20 m/pixel; release October 2012; global PNG and PDS links"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
