@@ -54,6 +54,39 @@
           "pr": 83
         }
       ]
+    },
+    {
+      "id": "cassini-coverage-2026-09-13",
+      "subject": "Additional clear-filter coverage and a second IR3/GRN/UV3 sequence",
+      "status": "included",
+      "finding": "Clear frames N1864500586_1 and N1649345705_1 expand Monochrome coverage from 64.1% to 69.2%. The December 2015 IR3 N1828124265_1, GRN N1828122367_1 and UV3 N1828122742_1 sequence expands False color from 4.1% to 26.6%. Fitted translations and roll pass independent fixed-camera feature checks; released directions, ranges and focal scale are retained. Original acquisition lighting remains, and current-main browser qualification is pending.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/epimetheus_document.pdf",
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/78e0164f7e892bda98f34aec8db0dcda72c60b37/src/objects/epimetheus/evidence/cassini-coverage/refresh.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
+        }
+      ]
+    },
+    {
+      "id": "cassini-2017-southern-color-insufficient-controls",
+      "subject": "Separate 2017 southern IR3/GRN/UV3 candidate",
+      "status": "unresolved",
+      "finding": "N1866367060_1, N1866366919_1 and N1866366996_1 were tried but did not yield enough independent image features for registration. Omitting them leaves the accepted December 2015 expansion at 26.6% coverage. They are not included.",
+      "revisitWhen": "Independent control points qualify these frames without weakening the registration criteria.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/epimetheus_document.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
+        }
+      ]
     }
   ]
 }
