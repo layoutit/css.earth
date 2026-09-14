@@ -17,26 +17,26 @@
   "lenses": [
     {
       "id": "optical-composite",
-      "label": "Optical composite \u00b7 NOIRLab + Niittee",
+      "label": "Optical composite · NOIRLab + Niittee",
       "title": "Pleiades optical cloud with wider image coverage",
       "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. This lens fuses Niittee's wide optical color with central NOIRLab luminance detail; its reference preview shows Niittee's original photograph before fusion. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Optical \u00b7 broadband color camera with Optolong L-Pro light-pollution filter",
-      "detail": "8000 \u00d7 5199 px \u00b7 wide optical source",
+      "summary": "Wide optical photograph with central detail from NOIRLab; cloud depth is inferred and fine filaments are softened.",
+      "detail": "8000 × 5199 px · wide optical source",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Optical \u00b7 broadband color camera with Optolong L-Pro light-pollution filter"
+          "value": "Optical · broadband color camera with Optolong L-Pro light-pollution filter"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "8000 \u00d7 5199"
+          "value": "8000 × 5199"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "264.79 \u00d7 172.08 arcmin"
+          "value": "264.79 × 172.08 arcmin"
         }
       ],
       "input": "niittee-widefield",
@@ -49,26 +49,26 @@
     },
     {
       "id": "noirlab-optical",
-      "label": "NOIRLab \u00b7 optical B / V / I",
+      "label": "NOIRLab · optical B / V / I",
       "title": "Pleiades reflection filaments in visible light",
       "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Optical \u00b7 B 436 nm / V 537 nm / I 805 nm",
-      "detail": "4000 \u00d7 2920 px",
+      "summary": "Optical B/V/I display on an inferred reflection cloud; this image covers only the central region.",
+      "detail": "4000 × 2920 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Optical \u00b7 B 436 nm / V 537 nm / I 805 nm"
+          "value": "Optical · B 436 nm / V 537 nm / I 805 nm"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "4000 \u00d7 2920"
+          "value": "4000 × 2920"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "68.68 \u00d7 50.13 arcmin"
+          "value": "68.68 × 50.13 arcmin"
         }
       ],
       "input": "noirlab-optical",
@@ -81,26 +81,26 @@
     },
     {
       "id": "spitzer-irac",
-      "label": "Spitzer \u00b7 IRAC 3.6\u20138 \u00b5m",
+      "label": "Spitzer · IRAC 3.6–8 µm",
       "title": "Pleiades dust in the Spitzer IRAC bands",
       "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Infrared \u00b7 IRAC 3.6 / 4.5 / 5.8 / 8.0 \u00b5m",
-      "detail": "2855 \u00d7 2855 px",
+      "summary": "IRAC infrared false color on an inferred cloud; the image covers only its central region.",
+      "detail": "2855 × 2855 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Infrared \u00b7 IRAC 3.6 / 4.5 / 5.8 / 8.0 \u00b5m"
+          "value": "Infrared · IRAC 3.6 / 4.5 / 5.8 / 8.0 µm"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "2855 \u00d7 2855"
+          "value": "2855 × 2855"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "58.07 \u00d7 58.07 arcmin"
+          "value": "58.07 × 58.07 arcmin"
         }
       ],
       "input": "spitzer-irac",
@@ -113,26 +113,26 @@
     },
     {
       "id": "spitzer-irac-mips",
-      "label": "Spitzer \u00b7 IRAC + MIPS 4.5\u201324 \u00b5m",
+      "label": "Spitzer · IRAC + MIPS 4.5–24 µm",
       "title": "Pleiades warm dust through 24 micrometres",
       "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Infrared \u00b7 IRAC 4.5 / 8.0 \u00b5m + MIPS 24 \u00b5m",
-      "detail": "2855 \u00d7 2855 px",
+      "summary": "IRAC/MIPS infrared false color on an inferred cloud; the image covers only its central region.",
+      "detail": "2855 × 2855 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Infrared \u00b7 IRAC 4.5 / 8.0 \u00b5m + MIPS 24 \u00b5m"
+          "value": "Infrared · IRAC 4.5 / 8.0 µm + MIPS 24 µm"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "2855 \u00d7 2855"
+          "value": "2855 × 2855"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "58.07 \u00d7 58.07 arcmin"
+          "value": "58.07 × 58.07 arcmin"
         }
       ],
       "input": "spitzer-irac-mips",
@@ -145,26 +145,26 @@
     },
     {
       "id": "wise-four-band",
-      "label": "WISE \u00b7 3.4\u201322 \u00b5m wide field",
+      "label": "WISE · 3.4–22 µm wide field",
       "title": "The wider Pleiades infrared cloud",
       "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
-      "summary": "Infrared \u00b7 W1 3.4 / W2 4.6 / W3 12 / W4 22 \u00b5m",
-      "detail": "4007 \u00d7 3061 px",
+      "summary": "WISE infrared false color on an inferred reflection cloud; dust depth and scattering are not recovered.",
+      "detail": "4007 × 3061 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Infrared \u00b7 W1 3.4 / W2 4.6 / W3 12 / W4 22 \u00b5m"
+          "value": "Infrared · W1 3.4 / W2 4.6 / W3 12 / W4 22 µm"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "4007 \u00d7 3061"
+          "value": "4007 × 3061"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "182.99 \u00d7 139.79 arcmin"
+          "value": "182.99 × 139.79 arcmin"
         }
       ],
       "input": "wise-four-band",

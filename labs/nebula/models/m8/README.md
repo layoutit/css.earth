@@ -1,5 +1,10 @@
 # Lagoon · M8
 
+This file preserves processing studies and their dated results. The
+[current shipped object record](../../../../src/objects/m8/README.md) owns
+the active sources, delivery evidence and known problems. Historical experiments
+below do not qualify later deliveries.
+
 ## Image-edge taper · 2026-09-14
 
 The current recipe uses the existing offline source-edge controls to soften faint image-footprint boundaries before fitting. ESO optical has a 450″ inward source taper and a 450″ common display-window feather; VISTA and Spitzer each have a 240″ source taper. Source weights, background subtraction, Detail/Faint/Depth controls and the depth prior are unchanged. Source images and no-data coverage remain complete. These are authored display choices, not measured nebular boundaries.

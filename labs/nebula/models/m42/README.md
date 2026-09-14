@@ -1,5 +1,10 @@
 # Orion · M42
 
+This file preserves processing studies and their dated results. The
+[current shipped object record](../../../../src/objects/m42/README.md) owns
+the active sources, delivery evidence and known problems. Historical experiments
+below do not qualify later deliveries.
+
 Asymmetric H II region and star-forming nebula.
 
 ## Sources

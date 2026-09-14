@@ -316,10 +316,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             spatial!.publish(world, viewport, frame);
             const foregroundRects = spatial!.backgroundExclusionRects();
-            const environmentRects = environmentLabels!.publish({ world, viewport,
+            const localAnnotations = 1 - logarithmicFade(distanceM, 4e6 * 3.085677581491367e16, 5e6 * 3.085677581491367e16);
+            const environmentRects = environmentLabels!.publish({ world, viewport, volumeLabelOpacity: localAnnotations,
               shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects });
             if (catalog) galaxyCatalog!.publish(world, viewport,
-              logarithmicFade(distanceM, catalog.fadeStartDistanceM, catalog.fullDistanceM), [...foregroundRects, ...environmentRects],
+              localAnnotations * logarithmicFade(distanceM, catalog.fadeStartDistanceM, catalog.fullDistanceM), [...foregroundRects, ...environmentRects],
               catalog.clusters ? logarithmicFade(distanceM, catalog.clusters.fadeStartDistanceM, catalog.clusters.fullDistanceM) : 0);
             const emphasizedId = selectionPreview === undefined ? (overview ? null : selected.id) : selectionPreview;
             focusPoint?.publish(world, viewport, { opacity: (1 - fade) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,

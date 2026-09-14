@@ -1,40 +1,38 @@
-# Pleiades · M45
+# Pleiades (M45)
 
-Five prepared lenses show the reflection nebulosity around the Pleiades in the shared galaxy view. The default optical composite combines Taavi Niittee's wider photograph with central NOIRLab detail. The other views preserve NOIRLab optical, two Spitzer composites and WISE infrared. These are relative display colors on an inferred cloud, not measured dust density.
+Five image lenses share one authored reflection-nebula depth surface. **The default optical composite combines Taavi Niittee’s wide photograph with central NOIRLab detail.** Dust depth, illumination and scattering are not recovered.
 
 ## Sources
 
-| Source | Displayed information | Coverage |
-| --- | --- | --- |
-| [Niittee / Tõrva Astronomy Club](https://commons.wikimedia.org/wiki/File:Plejades.jpg) + [NOIRLab](https://noirlab.edu/public/images/noao-m45/) | Wider optical composite; registered central luminance detail | Niittee 264.79′ × 172.08′; NOIRLab 68.68′ × 50.13′ |
-| [NOIRLab noao-m45](https://noirlab.edu/public/images/noao-m45/) | Publisher B/V/I display | 4000 × 2920 pixels |
-| [Spitzer PIA09262](https://science.nasa.gov/photojournal/pink-pleiades/) | IRAC 3.6/4.5/5.8/8 µm, false color | 2855² pixels; 58.07′ square |
-| [Spitzer PIA09263](https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/) | IRAC 4.5/8 µm + MIPS 24 µm, false color | Same central footprint |
-| [WISE PIA13121](https://science.nasa.gov/photojournal/seven-sisters-get-wise/) | 3.4/4.6/12/22 µm, false color | 4007 × 3061 pixels; 182.99′ × 139.79′ |
-| [Hipparcos and Tycho-2 source receipt](../../../labs/nebula/models/m45/stellar-sources.json) | Observed stellar directions and optical display photometry | Historical 450-light selection from 2,105 records; eight named stars retained in the current field below |
+| Source / lens | Selected image and coverage |
+| --- | --- |
+| [Niittee wide optical](https://commons.wikimedia.org/wiki/File:Plejades.jpg) + [NOIRLab](https://noirlab.edu/public/images/noao-m45/) | Default composite: 8000 × 5199-pixel photograph, 264.79′ × 172.08′, observed 2024-01-04; central detail from the separate NOIRLab image. |
+| [NOIRLab optical](https://noirlab.edu/public/images/noao-m45/) | B/V/I display, 4000 × 2920 pixels, 68.68′ × 50.13′; exposure dates unspecified. |
+| [Spitzer IRAC](https://science.nasa.gov/photojournal/pink-pleiades/) | 3.6/4.5/5.8/8 µm false color; 2855² pixels, 58.07′ square. |
+| [Spitzer IRAC + MIPS](https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/) | 4.5/8/24 µm false color; same 58.07′ field. |
+| [WISE](https://science.nasa.gov/photojournal/seven-sisters-get-wise/) | 3.4/4.6/12/22 µm false color; 4007 × 3061 pixels, 182.99′ × 139.79′. |
 
-Exact native byte pins, complete credits and reuse links are in the [source manifest](source/manifest.json). Niittee is credited under CC BY 4.0; NOIRLab, NASA/JPL-Caltech/J. Stauffer and NASA/JPL-Caltech/UCLA retain their separate provider terms. The [source dossier](../../../labs/nebula/models/m45/source-dossier.json) distinguishes downloaded display rasters from native detector resolution and calibrated scientific arrays.
+Niittee’s processed color-camera image uses an L-Pro filter; its delivered pixel count exceeds the sensor grid and does not establish angular resolution. The infrared composites have distinct beams and nonlinear stretches. The cluster scale is **136.2 ± 1.2 pc** from [Melis et al. (2014), main text and Table 1](https://doi.org/10.1126/science.1256101), not a distance for every dust filament.
 
-World placement adopts **136.2 ± 1.2 pc**, the VLBI cluster distance in [Melis et al. (2014)](https://doi.org/10.1126/science.1256101), main text and Table 1. It does not measure the distance to every dust filament. The [nebula record](source/nebula.json) preserves the processing frame origin, ICRS 56.75°, +24.1167°; this is an adopted display center, not a newly measured centroid.
+The [stellar field](source/stellar-field.json) contains 414 Gaia candidates within an authored 20 pc sphere, G < 12. After angular deduplication, 412 use Bailer-Jones distance estimates and eight named Hipparcos stars retain conditional model depths: 420 points shared by all lenses. Neither population establishes dust membership.
+
+Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; “included” means used by this delivery, not scientifically validated.
 
 ## Evidence
 
-The [delivery recipe](source/delivery.json) and [saved request](source/request.json) define the app inputs. The generated delivery receipt identifies the actual compiled result; its historical lab ID alone does not prove byte identity after a compiler change. The [shared preparation guide](../../../docs/nebulae/README.md) describes restoration and app checks.
-
-The 13 September 2026 integration prepared result `cd1f89e3e0affb327370338346df7f5812c0109ebd46cffeb9c8f702b94ed70c`, with five lenses, 450 shared lights and 821 nonempty slices plus 26 distant-view images per lens. This is the new compiled delivery, distinct from the historical `4510c5bb…` comparison. Source-card validation checked all five bindings and the installed bank identity; this does not establish a new visual acceptance or a clean-cache NOX replay.
-
-[Stellar evidence](../../../labs/nebula/models/m45/stellar-evidence.json) documents the catalog correction and retained cloud. The [optical composite assessment](../../../labs/nebula/models/m45/optical-composite-notes.md) records central registration, native separation, rejected image blends, and the historical front/side failures. Those observations describe their pinned lab results, not a new independent measurement of 3D structure. The [presentation record](source/presentation.json) binds each card to its source; the composite card's reference preview is Niittee's original photograph before fusion.
+- [Recorded app checks](../../../site/test/evidence/nebulae/2026-09-14/field-defaults.json) cover the delivered composite and catalogue field; [report context](../../../site/test/evidence/nebulae/2026-09-14/README.md) limits their claims.
+- [Delivery](source/delivery.json) pins the compiler and composite recipes. The app composite uses a freshly supplied compiler result; the historical standalone composite remains a separate comparison. This is not a new cold-replay or material acceptance claim.
+- [Historical registration evidence](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m45/registration-evidence.json) records relative stellar alignment. Niittee’s 99 held-out stars give 0.450″ RMS only within the central NOIRLab overlap; absolute and outer-field distortion remain unqualified.
 
 ## Known problems
 
-Fine reflection filaments are softened, bright stellar cores and halos survive removal, and side views expose a thin cloud. The original NOIRLab-only view covers about 60% of the historical model's projected emission; the wider Niittee field covers about 99.84%. Those model-specific coverage figures do not describe all Pleiades dust. Absolute outer-field astrometry remains unqualified beyond the central matched overlap.
+- Fine filaments soften, bright-star halos remain, and oblique views can form thin ribbons or show slice/color traces. Prior finite-material trials failed the visual gate.
+- One warped surface cannot represent overlapping foreground/background dust layers. All thicknesses and offsets are authored; the published 0.7 pc scattering-layer hypothesis is not fitted geometry.
+- Each image ends at its own footprint. Wider coverage and exact pixel accounting do not establish complete cloud coverage or calibrated photometry.
 
-All lenses share an authored finite depth surface. Gibson & Nordsieck's scattering interpretation and Ritchey et al.'s absorption sightlines motivate local ordering, but the compiler does not recover multiple dust layers, extinction, illuminating-star distances or a scattering phase function. The [physical ledger](../../../labs/nebula/models/m45/physical-evidence.json) and [lab README](../../../labs/nebula/models/m45/README.md) retain those assumptions and excluded UV, 2MASS, IRIS and wider-image candidates.
+<details>
+<summary>Methods and historical comparisons</summary>
 
-## Current surrounding stars
+The [fixed lab account](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m45/README.md) retains historical replay hashes, native separation checks and failed material views. [Physical evidence](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m45/physical-evidence.json) scopes the Gibson–Nordsieck and Ritchey interpretations. The [source dossier](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m45/source-dossier.json) preserves excluded 2MASS/IRIS and preliminary Usama/Andreo candidates, plus unacquired WISP UV data. General preparation is in the [nebula guide](../../../docs/nebulae/README.md).
 
-The 14 September 2026 app delivery adds 420 shared lights from the pinned [stellar field](source/stellar-field.json): 414 Gaia DR3 rows inside a 20 pc sphere, selected at G < 12. The [shared method](../../../docs/nebulae/stellar-fields.md) records proper-motion propagation, Bailer-Jones distance uncertainty, photometric display scaling, radial fading and the 1,500-point budget. Stars are independent of the image footprint and are not confirmed nebula members.
-
-The displayed set contains 412 Gaia sources and eight retained Hipparcos stars after directional duplicate removal. Those eight retain their previously declared conditional depths.
-
-The verified cloud replay is `cd1f89e3e0affb327370338346df7f5812c0109ebd46cffeb9c8f702b94ed70c`. Resource hashes and source-card bindings passed with the new catalogue; cloud geometry and spectral images are unchanged by this starfield replacement. No new clean-cache native-processing claim is made.
+</details>

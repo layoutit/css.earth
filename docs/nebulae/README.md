@@ -21,10 +21,9 @@ These are **relative display emission** models, not measured 3D gas density. The
 Requires Node 22.18+, pnpm 10.33.0, Python 3.9–3.12 with pip/venv, a supported TensorFlow wheel, internet access and disk space for native images. Run from the repository root. This uses the existing lab processing environment without opening its UI or restarting a running lab.
 
 ```sh
-pnpm install --frozen-lockfile
-python3 -m venv .local/open-star-removal/venv
-.local/open-star-removal/venv/bin/python -m pip install tensorflow==2.16.2 numpy==1.26.4 opencv-python-headless==4.11.0.86 scipy==1.13.1
-curl -fL https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb -o .local/open-star-removal/noxGeneratorColor.pb
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:packages
+node --experimental-strip-types labs/nebula/src/run.ts prepare-processing-environment
 pnpm prepare:nebulae
 pnpm dev
 ```
@@ -96,33 +95,26 @@ The main site's prepared-resource glob includes the generated proxy PNGs automat
 
 ## Integration evidence
 
-`site/test/nebula-datasets-browser.mts` checks prepared lenses, preview decoding, image-source links, retained camera/scene, star toggles and responsive dataset/factsheet panels. Shared source/graph tests verify canonical bindings and actual package ownership. The original pass covered nine lenses. The current shared-world browser checks cover the fourteen Pleiades, Crab and Lagoon lenses, with a separate recorded refresh after their catalogue-field replacement. These checks concern delivery and presentation, not the physical validity of inferred depth.
+The [current provenance inspection](../../site/test/evidence/nebula-provenance-2026-09-14/)
+records the source-card cases, delivered input identities, browser version,
+viewport, DPR and cameras. It concerns application behavior and attribution,
+not scientific validation of inferred cloud depth. Every object README links its
+own investigation ledger and original processing assessments.
 
-The original main-site browser check (`site/test/nebula-world-browser.mts`) exercised M42, Helix and M2–9 and their six lenses through the real shared input surface: label double-clicks navigated with one document load, lens changes retained the camera and scene nodes, and approaching M42/Helix enlarged their prepared compact lights. Front and oblique captures were inspected for that delivery. M2–9 has no prepared star catalogue. That historical result does not cover Pleiades, Crab or Lagoon. Existing image-coverage/background artifacts remain; these checks do not establish measured three-dimensional density.
+The [retained integration reports](../../site/test/evidence/nebulae/2026-09-14/)
+preserve earlier catalogue-field and final Helix/Lagoon visual checks without
+rewriting their results. The capture map locates the original images and their
+hashes; routine navigation screenshots remain scratch. The final historical
+visual report omitted browser version and viewport, a limitation recorded
+beside it rather than filled retrospectively.
 
-In the original three-nebula integration, deleting one prepared M42 texture and replaying preparation restored its exact original hash and retained the assessed result. That preparation run verified M42, Helix and M2–9. A fresh native-image/NOX environment replay was not performed in that check; the clean-checkout sequence above documents its required dependencies. The new Pleiades, Crab and Lagoon READMEs identify their own reproduced results and distinguish preparation checks from visual acceptance.
+The screenshots above show the delivered clouds at `5569fa211`. Their original
+source-card text predates the attribution corrections. All seven prepared
+volume-bank identities remain unchanged during the contract alignment; that
+comparison permits reuse of cloud appearance findings, not old metadata claims.
 
-### Current app evidence · 14 September 2026
-
-The fourteen Pleiades/Crab/Lagoon lenses passed source/Factsheet, decoded texture,
-retained-camera, label placement and distant-view checks. After the surrounding
-fields changed, default M45/M1 views and all three M8 views were repeated; Helix
-was added to the physical point-projection and toggle checks. Final Helix and M8
-passes inspected all six lenses from front and oblique directions, with no
-browser or HTTP errors. The 34 Helix cores persist across source switches, and
-M8’s previously clear local rectangular boundaries now fade softly.
-
-The M45/M1 captures above were taken on `40cc51d00` content; subsequent changes
-leave their prepared geometry, every image identity and all points identical.
-M8 and Helix captures include the following fixes to that revision: union-source
-core retention, anchor photometry, source-card text corrections and M8’s saved
-edge tapers. The object READMEs and generated delivery receipts identify the
-actual compiled results. These are checks of app presentation, not physical
-reconstruction accuracy. Coarse clouds, residual halos and side-view artifacts
-remain qualified in the individual records.
-
-Final local checks: 481 lab tests passed, two optional Helix integration tests
-skipped; strict lab/tools/browser-owner TypeScript; source/lens/alias checks;
-renderer label and shared focus-card tests; Astro check. The full planet suite,
-a cold native-processing replay and new quantitative axis-handoff qualification
-were not run for this integration.
+The [earlier integration account](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/docs/nebulae/README.md#integration-evidence)
+retains its original scope and limitations. Cold native-processing replay,
+quantitative axis-handoff requalification and unrelated planet suites are not
+claimed by a provenance-only update. Existing material defects remain in the
+object records and investigation ledgers.

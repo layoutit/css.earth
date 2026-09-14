@@ -67,19 +67,19 @@ test('all installed volume lenses produce standard source cards with real source
   assert.equal(newLenses.length, 14);
   const newCaptures = captures.filter(capture => ['m1', 'm45', 'm8'].includes(capture.objectId));
   assert.deepEqual([...new Set(newCaptures.map(capture => `${capture.objectId}/${capture.lensId}`))].sort(), newLenses,
-    'All fourteen added observations retain capture attribution, including explicitly unresolved instruments.');
+    'All fourteen added observations name their actual known observing equipment.');
   assert.deepEqual(newCaptures.map(capture => [
     `${capture.objectId}/${capture.lensId}`, capture.attribution.kind,
     capture.attribution.kind === 'machine' ? capture.attribution.machineId : null,
   ]).sort((left, right) => String(left[0]).localeCompare(String(right[0]))), [
-    ['m1/chandra-xray', 'unresolved', null],
+    ['m1/chandra-xray', 'machine', 'chandra'],
     ['m1/hubble-optical', 'machine', 'hubble'],
     ['m1/spitzer-infrared', 'machine', 'spitzer'],
-    ['m1/vla-radio', 'unresolved', null],
-    ['m1/webb-components', 'unresolved', null],
-    ['m1/webb-infrared', 'unresolved', null],
-    ['m45/noirlab-optical', 'unresolved', null],
-    ['m45/optical-composite', 'unresolved', null],
+    ['m1/vla-radio', 'machine', 'vla'],
+    ['m1/webb-components', 'machine', 'webb'],
+    ['m1/webb-infrared', 'machine', 'webb'],
+    ['m45/noirlab-optical', 'machine', 'wiyn-0-9m'],
+    ['m45/optical-composite', 'machine', 'niittee-sharpstar-61edph-iii'],
     ['m45/spitzer-irac', 'machine', 'spitzer'],
     ['m45/spitzer-irac-mips', 'machine', 'spitzer'],
     ['m45/wise-four-band', 'machine', 'wise'],

@@ -42,11 +42,11 @@ test('nearby nebula labels wake and follow the camera while both extragalactic f
   const transform = label.style.transform;
   runtime.publish(camera(1e17, 1e16), viewport, 0, [], 0);
   expect(label.style.transform).not.toBe(transform);
-  label.dispatchEvent(new Event('dblclick')); expect(onSelect).toHaveBeenCalledWith(object);
+  label.dispatchEvent(new Event('click')); expect(onSelect).toHaveBeenCalledWith(object);
   expect(document.count).toBe(nodes); runtime.destroy();
 });
 
-test('nebula label and its double-click target sit above the prepared cloud', () => {
+test('nebula label and its single-click target sit below the prepared cloud', () => {
   const payload = { ...read('local-group/prepared/catalogue.json'), objects: [] };
   const nebulae = read('m42/source/nebula.json'), object = nebulae.objects[0];
   const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
@@ -59,13 +59,13 @@ test('nebula label and its double-click target sit above the prepared cloud', ()
   const pose = { ...nebulae.frame, pose: { positionM: [object.positionM[0], object.positionM[1], object.positionM[2] + 1e17] as const,
     orientationXyzw: [0, 0, 0, 1] as const } };
   runtime.select(object.id);
-  const rectangles = runtime.publish(pose, viewport, 0), top = -600 * 1e16 / 9.8e16;
+  const rectangles = runtime.publish(pose, viewport, 0), bottom = 600 * 1e16 / 9.8e16;
   expect(rectangles).toHaveLength(1);
-  expect(rectangles[0]!.bottom).toBeCloseTo(top - 8);
+  expect(rectangles[0]!.top).toBeCloseTo(bottom + 8);
   const picking = screenPicking(host as unknown as HTMLElement), label = runtime.inspect().labels[object.id]!;
-  expect(picking.pick(0, top - 12)).toBe(label);
+  expect(picking.pick(0, bottom + 12)).toBe(label);
   expect(picking.pick(0, -12)).toBeNull();
-  label.dispatchEvent(new Event('dblclick')); expect(onSelect).toHaveBeenCalledWith(object);
+  label.dispatchEvent(new Event('click')); expect(onSelect).toHaveBeenCalledWith(object);
   runtime.destroy();
 });
 
@@ -101,10 +101,10 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   runtime.publish(shifted, viewport, 1, blockers, 1);
   expect(label.style.pointerEvents).toBe('none');
   expect(picking.pick(-150, -15)).not.toBe(label);
-  label.dispatchEvent(new Event('dblclick')); expect(onSelect).not.toHaveBeenCalled();
+  label.dispatchEvent(new Event('click')); expect(onSelect).not.toHaveBeenCalled();
   document.defaultView.advance(400); expect(Number(label.style.opacity)).toBeGreaterThan(0); expect(Number(label.style.opacity)).toBeLessThan(.425);
   runtime.publish(shifted, viewport, 1, [], 1); document.defaultView.advance(600);
-  expect(Number(label.style.opacity)).toBe(.85); label.dispatchEvent(new Event('dblclick'));
+  expect(Number(label.style.opacity)).toBe(.85); label.dispatchEvent(new Event('click'));
   expect(onSelect).toHaveBeenCalledWith(object); expect(runtime.resolve(object.id)).toMatchObject({kind: 'galaxy-cluster'});
   expect(document.count).toBe(nodes);
   runtime.publish({ ...pose, pose: { ...pose.pose, positionM: [object.positionM[0], object.positionM[1], object.positionM[2] - object.aperture.comovingRadiusM * 4] } }, viewport, 1, [], 1);

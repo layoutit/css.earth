@@ -1,5 +1,10 @@
 # Crab Nebula — measured ejecta and a separate pulsar wind
 
+This file preserves processing studies and their dated results. The
+[current shipped object record](../../../../src/objects/m1/README.md) owns
+the active sources, delivery evidence and known problems. Historical experiments
+below do not qualify later deliveries.
+
 **Material quality remains blocked.** The live bake has finite 3D density but
 repeats photographic color through depth. The replacement material path removes
 that operation, yet the [bounded trials](material-trial.json) lose front detail

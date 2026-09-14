@@ -1,3 +1,4 @@
+import { mountCatalogMarker } from './catalog-marker.js';
 import { isPreparedCluster, isPreparedNebula, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { DensityVolumeFrame } from '@cssearth/objects';
@@ -55,18 +56,18 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
       root.append(aperture);
     }
     marker.dataset.galaxyMarker = object.id;
-    marker.style.cssText = 'position:absolute;left:50%;top:50%;width:2px;height:2px;border-radius:50%;background:#c2ccd8;opacity:0;pointer-events:none';
+    mountCatalogMarker(marker, object);
     label.dataset.galaxyLabel = object.id;
     label.dataset.objectNavigate = object.id;
-    label.dataset.objectNavigateActivation = 'dblclick';
+    label.dataset.objectNavigateActivation = 'click';
     label.textContent = object.name;
     label.title = isPreparedCluster(object) ? `${object.name} — MCXC-II centre; outline is R500, not a cluster boundary` : object.status === 'candidate' ? `${object.name} — candidate galaxy` : object.name;
-    label.style.cssText = 'position:absolute;left:50%;top:50%;font:11px system-ui;color:#c2ccd8;white-space:nowrap;opacity:0;pointer-events:none;cursor:pointer';
+    label.style.cssText = 'position:absolute;left:50%;top:50%;font:400 14px/18px ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#c2ccd8;white-space:nowrap;opacity:0;pointer-events:none;cursor:pointer';
     const activate = (event: Event) => {
       if (label.style.pointerEvents !== 'auto') return;
       event.preventDefault(); event.stopPropagation(); onSelect(object);
     };
-    label.addEventListener('dblclick', activate);
+    label.addEventListener(label.dataset.objectNavigateActivation, activate);
     label.addEventListener('keydown', event => { if (event.key === 'Enter') activate(event); });
     label.setAttribute('role', 'button'); label.tabIndex = -1;
     root.append(marker, label);
@@ -125,7 +126,9 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
         const bounds = entry.cornersM ? projectCatalogBounds(entry.cornersM, world, viewport) : null;
         if (entry.cornersM && !bounds) continue;
         const x = bounds ? (bounds.left + bounds.right) / 2 : point.x;
-        const y = (bounds?.top ?? point.y) - 8;
+        const y = isPreparedNebula(entry.object)
+          ? (bounds?.bottom ?? point.y) + 8 + entry.height
+          : (bounds?.top ?? point.y) - 8;
         entry.labelX = x; entry.labelY = y;
         const labelRect = { left: x - entry.width / 2, right: x + entry.width / 2,
           top: y - entry.height, bottom: y };
@@ -173,7 +176,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
       if (destroyed) return; destroyed = true; fader.destroy();
       picking.remove(root);
       document.fonts?.removeEventListener('loadingdone', measure);
-      for (const entry of entries) entry.label.removeEventListener('dblclick', entry.activate);
+      for (const entry of entries) entry.label.removeEventListener(entry.label.dataset.objectNavigateActivation!, entry.activate);
       root.remove();
     },
   });
