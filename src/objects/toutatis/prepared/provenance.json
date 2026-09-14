@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c8110418fe893c8e14b44122c2ceb3ebfa1d0766d4b463736e79bc6dcf0be439"
+    "sha256": "9029b5fb565458f2aaaf07c32a4f6d9d1f6a350b5641c42eaea7405c3a2b51d1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d98d7bd5ad86364d1625a5946c1170d230b20078570dd0a7d366c6f48a9f6140",
+      "sha256": "9fda270f0816598525d738139ad53a2c66984b89bc4d54e3bc88bf9f90a1ff3d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -30,7 +30,53 @@
           "poleSize": 512,
           "reportMissingPixels": true,
           "observations": [],
-          "scientific": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/4179toutatis2.tab",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 20000,
+                "expectedFaces": 39996
+              },
+              "sampleGrid": {
+                "width": 1025,
+                "height": 513
+              },
+              "valueTransform": {
+                "scale": 1,
+                "offset": -1224
+              },
+              "minimum": -500,
+              "maximum": 1400,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 1224,
+                "heightToMeters": 1,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 50
+              }
+            }
+          ],
           "observedColors": [],
           "surfaceQuality": 90,
           "shapeViews": [
@@ -95,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "da2f1d7474b29e2cca75357359882cb280fd895b8236badfbb6379ca695254a2",
+      "sha256": "a037a42a4571e1e343cbde40712e3610458ddef7bad8c71ac0816a8c09632393",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -174,6 +220,33 @@
               "falseColor": false,
               "notes": "The shared grid marks unavailable surface imagery over the Hudson–Ostro–Scheeres shape reconstructed from 1992 and 1996 radar observations. This is a simplified model, not a photographic texture or measured albedo. Later radar and Chang’e-2 images reveal differences from this model. The long axis is displayed in a fixed arbitrary orientation; the light does not reproduce a specific observation.",
               "noData": true
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "thumbnail": "/scenes/toutatis/toutatis-elevation-thumbnail.webp",
+              "surface": "toutatis-elevation-surface@2x.webp",
+              "poles": "toutatis-elevation-surface@2x.webp",
+              "source": {
+                "id": "toutatis-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-500",
+                  "450",
+                  "1400"
+                ],
+                "meta": "m · 1,224 m reference sphere",
+                "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.tab",
+                "image": "/scenes/toutatis/toutatis-elevation-legend.webp"
+              },
+              "notes": "Color shows radius minus a 1,224 m reference sphere, including the body's broad shape. This is model-derived radial height, not gravitational height or a photograph. Brightness adds cartographic relief from the full source model; optional Shadows uses illustrative lighting. The radar model reflects 1992 and 1996 observations; later images show shape differences. The map follows the closest unique source point within 50 m of the simplified display; the grid marks rejected transfers. Flat previews withhold overlapping radial surfaces."
             }
           ]
         },
@@ -304,8 +377,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "da2f1d7474b29e2cca75357359882cb280fd895b8236badfbb6379ca695254a2",
-      "bytes": 7647,
+      "sha256": "a037a42a4571e1e343cbde40712e3610458ddef7bad8c71ac0816a8c09632393",
+      "bytes": 9070,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -314,10 +387,61 @@
   ],
   "products": [
     {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "toutatis-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/toutatis/toutatis-elevation-thumbnail.webp",
+          "bytes": 5802,
+          "sha256": "8172417040d331136b7f5c7905a8a592deb3556da5df383e7465917826da04b8",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/toutatis/toutatis-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/toutatis/toutatis-elevation-surface@2x.webp",
+          "bytes": 380870,
+          "sha256": "a361add1d3e60980d97304625925ab0146278f90ec40ce73234acdac67b59014",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "toutatis-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "shape",
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
       "limitations": [],
@@ -347,6 +471,13 @@
           "verification": "bytes-verified"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "toutatis-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -354,6 +485,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -382,6 +514,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -397,10 +530,44 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 14820,
+          "sha256": "bd96df884f6824d49924a15abfaef172e66c88a205bdec835bb6839591efdec0",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "toutatis",
+    "materialSha256": "5ae224eb2f06002b7eb77820bd05de177526e4e8aae3ba95e7cbeb5e1fccfbf5",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

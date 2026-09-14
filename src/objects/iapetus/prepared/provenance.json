@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -895,6 +895,7 @@
       "label": "Monochrome",
       "recipe": "raster",
       "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [],
@@ -943,6 +944,13 @@
           "verification": "bytes-verified"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-voyager-2008-iapetus",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -950,6 +958,7 @@
       "label": "Enhanced color",
       "recipe": "raster",
       "selector": "/surfaces/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [],
@@ -998,6 +1007,13 @@
           "verification": "bytes-verified"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-iss-2014-iapetus-color",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1005,6 +1021,7 @@
       "label": "Infrared",
       "recipe": "raster",
       "selector": "/surfaces/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -1052,6 +1069,13 @@
           "verification": "bytes-verified"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "iapetus-cassini-infrared",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1059,6 +1083,7 @@
       "label": "Ice absorption",
       "recipe": "raster",
       "selector": "/surfaces/3",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
@@ -1106,6 +1131,13 @@
           "verification": "bytes-verified"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "iapetus-cassini-ice-absorption",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/3/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1113,6 +1145,7 @@
       "label": "lighting",
       "recipe": "raster",
       "selector": "/lighting",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Evaluate the declared surface-lighting model into phase banks.",
       "limitations": [],
@@ -1529,6 +1562,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -1554,6 +1588,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -1592,6 +1627,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -1616,6 +1652,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "enhanced"
@@ -1640,6 +1677,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "infrared"
@@ -1664,6 +1702,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "ice-absorption"
@@ -1684,5 +1723,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "iapetus",
+    "materialSha256": "5adcb475df21d2aaf69a11273853c9b17c38bdbbc77ee1c8d1d928ef7e74d73f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

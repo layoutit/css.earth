@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -2362,6 +2362,7 @@
       "label": "Ultraviolet",
       "recipe": "surface",
       "selector": "/lenses/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the declared spectral material operation over the prepared body and ring materials.",
       "limitations": [],
@@ -2416,6 +2417,7 @@
       "label": "Methane",
       "recipe": "surface",
       "selector": "/lenses/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the declared spectral material operation over the prepared body and ring materials.",
       "limitations": [],
@@ -2470,6 +2472,7 @@
       "label": "Thermal illustration",
       "recipe": "surface",
       "selector": "/lenses/2",
+      "observationAttribution": "none",
       "parents": [],
       "process": "Prepare the declared spectral material operation over the prepared body and ring materials.",
       "limitations": [],
@@ -2522,6 +2525,7 @@
       "label": "Visible color",
       "recipe": "geometry",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the source-defined oblate body, ring and cutaway material.",
       "limitations": [],
@@ -2575,6 +2579,7 @@
       "label": "Cross section",
       "recipe": "geometry",
       "selector": "",
+      "observationAttribution": "none",
       "parents": [],
       "process": "Prepare the source-defined oblate body, ring and cutaway material.",
       "limitations": [],
@@ -2613,6 +2618,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -2638,6 +2644,7 @@
       "label": "Saturn modeled disk reflectance",
       "recipe": "charts",
       "selector": "/charts/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
       "limitations": [],
@@ -2666,6 +2673,7 @@
       "label": "Saturn temperature-pressure profile",
       "recipe": "charts",
       "selector": "/charts/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
       "limitations": [],
@@ -2694,6 +2702,7 @@
       "label": "Saturn photometric phase curve",
       "recipe": "charts",
       "selector": "/charts/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
       "limitations": [],
@@ -2726,6 +2735,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -2753,6 +2763,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "ultraviolet"
@@ -2780,6 +2791,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "methane"
@@ -2807,6 +2819,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "none",
       "inputs": [],
       "parents": [
         "thermal"
@@ -2827,5 +2840,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "saturn",
+    "materialSha256": "7afcbcb3b076a53d5c5a61bbb69165fdc75d795ee59134aa6fdb427e8119bc23",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

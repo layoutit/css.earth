@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e37ce229f3bacff2ad1d261220958fc8903ab251c6f9853d4da9854e807318cf"
+    "sha256": "186273d7d23cc8556f3b4af1aa8c6cf5b85021ae88ba092b5e92d91fb53ad5ad"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
-    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8096b8075200d94ae412f63d176050817963eee8643f43157a72e11f2de092c7",
+      "sha256": "1a68bae9b470d0139cbbe16f3ea8c8ce9c294d60e156bbe1e82a1b0b366e91b7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -30,7 +30,54 @@
           "poleSize": 512,
           "reportMissingPixels": true,
           "observations": [],
-          "scientific": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/lcy_donj_k548_iso20m_v10.obj.gz",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "compression": "gzip",
+                "expectedVertices": 274000,
+                "expectedFaces": 547996
+              },
+              "sampleGrid": {
+                "width": 1025,
+                "height": 513
+              },
+              "valueTransform": {
+                "scale": 1,
+                "offset": -2405.325
+              },
+              "minimum": -1200,
+              "maximum": 2400,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 2405.325,
+                "heightToMeters": 1,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 56
+              }
+            }
+          ],
           "observedColors": [],
           "surfaceQuality": 90,
           "shapeViews": [
@@ -149,7 +196,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "21a5367bd068e18a17b3dd358111ecea71b41e2610ea635873fde370d782b106",
+      "sha256": "e30e8ac419cd6e4fac77d0b380cb8c2b6024389399a85afc2bd7e366dcb138da",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -232,6 +279,33 @@
               "falseColor": false,
               "notes": "Published Lucy shape model",
               "noData": true
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "thumbnail": "/scenes/donaldjohanson/donaldjohanson-elevation-thumbnail.webp",
+              "surface": "donaldjohanson-elevation-surface@2x.webp",
+              "poles": "donaldjohanson-elevation-surface@2x.webp",
+              "source": {
+                "id": "donaldjohanson-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-1200",
+                  "600",
+                  "2400"
+                ],
+                "meta": "m · 2,405.325 m reference sphere",
+                "sourceUrl": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds",
+                "image": "/scenes/donaldjohanson/donaldjohanson-elevation-legend.webp"
+              },
+              "notes": "Color shows radius minus a 2,405.325 m reference sphere, including the body's broad shape. This is model-derived radial height, not gravitational height or a photograph. Brightness adds cartographic relief from the full source model; optional Shadows uses illustrative lighting. Only about 40% of the source shape is stereo-constrained; unseen terrain retains the source authors’ reconstruction. The map follows the closest unique source point within 56 m of the simplified display; the grid marks rejected transfers. Flat previews withhold overlapping radial surfaces."
             }
           ]
         },
@@ -503,8 +577,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "21a5367bd068e18a17b3dd358111ecea71b41e2610ea635873fde370d782b106",
-      "bytes": 12374,
+      "sha256": "e30e8ac419cd6e4fac77d0b380cb8c2b6024389399a85afc2bd7e366dcb138da",
+      "bytes": 13887,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -617,10 +691,61 @@
   ],
   "products": [
     {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "donaldjohanson-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/donaldjohanson/donaldjohanson-elevation-thumbnail.webp",
+          "bytes": 5206,
+          "sha256": "6792dd8994eacdb6c5bd52f7f406a3ee082f59fe343aa27e8cd59d9726750e76",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/donaldjohanson/donaldjohanson-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/donaldjohanson/donaldjohanson-elevation-surface@2x.webp",
+          "bytes": 300128,
+          "sha256": "377757a64a391fdc7116e7f34b875b0c52959cd72b151b28069c8d52447ac4be",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "donaldjohanson-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "shape",
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
       "limitations": [],
@@ -650,6 +775,13 @@
           "verification": "bytes-verified"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "donaldjohanson-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -657,6 +789,7 @@
       "label": "L’LORRI observation",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [],
@@ -690,6 +823,13 @@
           "verification": "bytes-verified"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "donaldjohanson-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -697,6 +837,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -722,6 +863,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -760,6 +902,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -784,6 +927,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "llorri"
@@ -799,10 +943,44 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 10206,
+          "sha256": "e2f8a80beb8c704130ab7ae437e521a5399ded9f840b4aac7f005c99d887142a",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "donaldjohanson",
+    "materialSha256": "bfd4e61c93494df761c22dd9e3f7b45fb555024ad10c1ee9599c2eafc0fc59f3",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }
