@@ -4,5 +4,5 @@ export const browserProfile=createObjectBrowserProfile({id:'donaldjohanson',cont
  preparedAssetPairs:[{one:'/scenes/donaldjohanson/donaldjohanson-directional-sun.webp',two:'/scenes/donaldjohanson/donaldjohanson-directional-sun@2x.webp'}],
  canonicalPreparedAssets:['/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp'],
  lensRace:{defaultId:'llorri',slowId:'shape',winnerId:'llorri',slowAsset:'/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp',preReadyDisabled:true},
- retained:{lensIds:['llorri','shape'],speedClicks:5,allowedMountSelectors:[]}
+ retained:{lensIds:['llorri','shape','elevation'],speedClicks:5,allowedMountSelectors:[]}
 }});
