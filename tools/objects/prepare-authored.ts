@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { mkdir, mkdtemp, copyFile, cp, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, copyFile, cp, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type SourceReference } from '@cssearth/objects';
@@ -96,6 +96,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
       await writeFile(path, `${JSON.stringify({ ...raw, properties: { ...raw.properties, worldFrame: scene.worldFrame } }, null, 2)}\n`);
     }
     await writePreparedObject(id, result.definition as Record<string, unknown>);
+    // The stage holds the previous public files until publication succeeds; a finished preparation removes it.
+    await rm(stage, { recursive: true, force: true });
     return result;
   }
   const descriptorPath = resolve(objectDirectory, 'object.json');
