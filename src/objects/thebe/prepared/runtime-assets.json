@@ -1,0 +1,50 @@
+{
+  "schema": "cssthebe-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "thebe-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "thebe-elevation-shadow@2x.webp",
+      "bytes": 98368,
+      "sha256": "a6afa5f32fe6c39a224486e6ba30b51402d5955e1a744724e39fdcda55057319"
+    },
+    {
+      "filename": "thebe-elevation-surface@2x.webp",
+      "bytes": 176304,
+      "sha256": "a327d2569e5d653ac24bb304f51cb195d314bfe5394862cfb9836b8310056166"
+    },
+    {
+      "filename": "thebe-elevation-thumbnail.webp",
+      "bytes": 5432,
+      "sha256": "e39728ec27aef691e78471760ea0a306423be968d1765857cdb288ecd32b9349"
+    },
+    {
+      "filename": "thebe-features.json",
+      "bytes": 1732,
+      "sha256": "7e05aec67ad236c47a59b0e79caa6c354f506b3e66513aac70eaf25277f99dab"
+    },
+    {
+      "filename": "thebe-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "thebe-normal-shadow@2x.webp",
+      "bytes": 68790,
+      "sha256": "ae55842bee656afda2dc1b0b5ff203deb9209e01574d674583828882898830b3"
+    },
+    {
+      "filename": "thebe-normal-surface@2x.webp",
+      "bytes": 117868,
+      "sha256": "46d8bacd54fd8baeebbbdf095a64fa7b7445f346a50282b10109192164375282"
+    },
+    {
+      "filename": "thebe-normal-thumbnail.webp",
+      "bytes": 1716,
+      "sha256": "74ca4e237dc043ee761f4e78349275388ccb6c86b0e751860fa0c1e1f64c0e9a"
+    }
+  ]
+}

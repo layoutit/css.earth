@@ -1,0 +1,25 @@
+{
+  "schema": "cssjuliet-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "juliet-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "juliet-model-shadow@2x.webp",
+      "bytes": 43046,
+      "sha256": "b4230c72b454e567bf4ad006de251a066bd9810e75f66e8fbd2ce9b459920672"
+    },
+    {
+      "filename": "juliet-model-surface@2x.webp",
+      "bytes": 50050,
+      "sha256": "3b4fc6043c707e2404ccfdd9c28c9f26b9583da55c03a01e1cf07c99ce5035bd"
+    },
+    {
+      "filename": "juliet-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

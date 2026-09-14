@@ -1,0 +1,60 @@
+{
+  "schema": "cssproteus-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "proteus-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "proteus-elevation-shadow@2x.webp",
+      "bytes": 176520,
+      "sha256": "75c7fb6f3aa0d89e894f24119864569523216e8b24e502e46fdb5f8623bf1d15"
+    },
+    {
+      "filename": "proteus-elevation-surface@2x.webp",
+      "bytes": 376918,
+      "sha256": "f44442af0337975d7e9d87ae64de2803245d3a183d0f7ce96ccadf845fa50b28"
+    },
+    {
+      "filename": "proteus-elevation-thumbnail.webp",
+      "bytes": 7376,
+      "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064"
+    },
+    {
+      "filename": "proteus-filter-color-shadow@2x.webp",
+      "bytes": 102848,
+      "sha256": "9629dd3299000ef0a5b990ba4a9a8a9c6d251c5866c20cc7376d7eb0f4b88efd"
+    },
+    {
+      "filename": "proteus-filter-color-surface@2x.webp",
+      "bytes": 172904,
+      "sha256": "013d96f4e39db21cefbd47204beeff466160573d66228e0207fc06d1bc8843a5"
+    },
+    {
+      "filename": "proteus-filter-color-thumbnail.webp",
+      "bytes": 2998,
+      "sha256": "215b8373ab113e90c21b1feafa903e3e2578898f33084f555d6c7b47aca73cbd"
+    },
+    {
+      "filename": "proteus-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "proteus-normal-shadow@2x.webp",
+      "bytes": 167954,
+      "sha256": "a98c06a818196aec0c3ebd4b75a9d6c44762555fd017c059a3ae393726c1ba8a"
+    },
+    {
+      "filename": "proteus-normal-surface@2x.webp",
+      "bytes": 374926,
+      "sha256": "d09885ebc88d3c251c70e095352fbec59b3894bec1501ff835cfd5380e571a97"
+    },
+    {
+      "filename": "proteus-normal-thumbnail.webp",
+      "bytes": 2308,
+      "sha256": "be0839dea4f0307484810e2c35e55fa305200b68165004fba74913f91f6d455a"
+    }
+  ]
+}

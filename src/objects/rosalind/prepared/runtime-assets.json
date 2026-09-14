@@ -1,0 +1,25 @@
+{
+  "schema": "cssrosalind-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "rosalind-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "rosalind-model-shadow@2x.webp",
+      "bytes": 43674,
+      "sha256": "6d5a8d28a630018b4b7af4b221137ca1da2e37da6f8e7b3af6a7134dd5513572"
+    },
+    {
+      "filename": "rosalind-model-surface@2x.webp",
+      "bytes": 55832,
+      "sha256": "055b99cbb4c711164c0a60f2dde5a2f8e5c8879d2c482b0ef6f2ef7f1b9bb8a7"
+    },
+    {
+      "filename": "rosalind-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}
