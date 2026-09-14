@@ -305,6 +305,16 @@ metadata. Range, focal length and Sun direction are never changed.
 DRACO backplanes: the kernel camera stays within 0.6 px of the archive, and
 cameras pushed 30 and 150 px away return to 0.24 and 0.55 px.
 
+For an initial comparison of published planetocentric coordinates with native
+image picks, `tools/objects/surface-features/check-projected-controls.mts` replays
+a pinned `cssearth-projected-controls@1` recipe. It uses the existing FITS reader,
+OBJ mesh and archived-camera contract, reports visibility and pixel discrepancies,
+and renders the native picks beside projected positions. It does not fit a camera,
+set acceptance limits or qualify a surface. Keep ambiguous identifications explicit;
+a sketch-assisted identification region is not a measurement uncertainty. Pallas's
+`evidence/photographic-controls.json` is a diagnostic example with unresolved
+feature and coordinate correspondence, not a photographic preparation template.
+
 The PDS3 routes (OSIRIS GEO, AMICA) stay instrument decoders behind the same
 pipeline, decided 2026-09-12 after a code review: their archives do not declare
 plane units or semantics the way a PDS4 label does, and about half of each
