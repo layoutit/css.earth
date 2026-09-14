@@ -1,5 +1,10 @@
 # Helix: conditional emission compiler
 
+This file preserves processing studies and their dated results. The
+[current shipped object record](../../../../src/objects/helix/README.md) owns
+the active sources, delivery evidence and known problems. Historical experiments
+below do not qualify later deliveries.
+
 **Current step:** assess the compiled cloud at `/reconstruction?subject=helix-model-prior&inspection=compiler`. **Nebula → Compile nebula** runs the configured sources through separation, evidence, an optional velocity scaffold, positive multiscale emission fitting and a shared three-lens bake. Fit controls apply automatically after the first successful compile; display changes do not bake. The [compiler method and complete setup](../../docs/emission-compiler.md) describe durable jobs, replay and assumptions. Visual acceptance remains open, and another compiler nebula is deferred until this machinery is assessed.
 
 **Initial visual verdict: neither baseline is accepted.** The one-axis fit reproduces the photograph but becomes a box from the side. The disk/ring prior has finite curved components, but is too smooth, cuts off outer emission and changes brightness under rotation. These are deliberately visible comparisons, not production nebula assets.

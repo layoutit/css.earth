@@ -192,6 +192,11 @@ a.reconstruction-image-detail { display: inline-block; }
 .observation-frame img { position: absolute; left: 0; top: 0; max-width: none; transform-origin: 0 0; user-select: none; }
 .observation-camera { left: 14px; width: 230px; }
 .observation-images { width: 310px; }
+.observation-source-info { margin-top: 14px; border-top: 1px solid var(--border-color, #333); }
+.observation-source-info details { margin-top: 12px; font-size: 12px; line-height: 1.5; }
+.observation-source-info summary { cursor: pointer; color: var(--text-secondary); }
+.observation-source-info article { margin: 14px 0; }
+.observation-source-info a { color: var(--text-secondary); }
 .observation-layers { margin-top: 13px; }
 .observation-check { display: flex; align-items: center; gap: 7px; margin: 12px 0; font-size: 12px; color: var(--text-secondary); }
 .observation-images .placement-control { grid-template-columns: 78px minmax(20px, 1fr) 62px; }

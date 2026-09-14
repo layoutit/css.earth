@@ -32,6 +32,8 @@ The app supports density-based LMC/SMC work, the M2–9 symmetry experiment and 
 - Write `models/<object>/physical-evidence.json`: source IDs plus evidence IDs classified `observed`, `published-model` or `authored`, with units, footprint, uncertainty when supplied and limitations. Use Orion's ledger as a record example, not its geometry as a template for other objects.
 - Keep executable method/parameter choices in a separate recipe. Pin its ledger, selected method/evidence IDs and every authored setting. Shared TypeScript owns validation and algorithms; object data owns all target-specific values. Changing evidence must change the affected fit identity.
 - Register constraints to the common image frame. Small core maps cannot constrain an entire complex; label unsupported regions and do not infer depth from image intensity or directly from velocity. Retain competing literature interpretations and explicit tracer-to-model mappings.
+- Released XYZ tables also require qualification: inspect units, array ordering, observer side and the original WCS/velocity products before accepting a transform. Use the sampled-volume operator for qualified spatial points; keep analytic wind/jet terms and per-tracer component weights explicit. Different spectral tracers need not share the same emission alpha, even when their spatial frame is identical.
+- A measured component may leave real image emission unexplained. Inspect the residual rather than treating the spatial table as a complete object. When supported, preserve its samples and fit a separate bounded 3D diffuse prior; record inferred depths, per-tracer coefficients and withheld-image checks. Compare projected brightness using the actual normalized material color. Mixed RGB residuals do not uniquely identify synchrotron, gas or dust.
 
 ## 3. Register before baking
 
@@ -49,11 +51,14 @@ Importing and aligning a candidate does not authorize processing. A user instruc
 - Use the Alignment sidebar's **Quick preview** for native crops when direction/removal quality is uncertain; then **Remove stars** for the full source.
 - NOX runs locally on overlapping tiles. Non-RGB8 sources receive a separate full-size RGB8 working image; keep the higher-depth original unchanged and record the conversion.
 - Inspect **Original / Without stars / Residual**, particularly saturated stars, halos, crowded fields and compact nebular knots. Automatic removal is not a membership catalogue or measurement of the hidden cloud.
+- Do not feed a nonstellar X-ray/radio wind map through optical star removal. An explicit preservation treatment keeps structural compact emission and emits a zero extracted residual, with its status recorded. A publisher's shared grid may transfer astrometry through a star-verified companion; label that transfer separately from independent stars in the nonstellar band.
 - Require completed native diffuse/residual/mask products, source/model/code pins and exact native accounting: original = diffuse + residual. Check real artifacts, not just process exit status.
 - Refresh reconnects to server-owned work. Cancel stops it explicitly. Never restart a server merely to refresh UI while processing.
 - The strength slider blends completed preview products; it does not change detection. Reconstruction consumes the complete native diffuse output, not this display blend, browser WebP or a second removal pass.
 
 ## 5. Process the volume explicitly
+
+**Mandatory for every new acceptance:** attach observed colors to finite 3D structures before compositing. Sampling the same image XY at every Z is a rejected baseline, even with a valid density cloud. Keep a failing counterfactual test for that path and inspect front, oblique and both side axes. Do not recover lost front detail by reinstating photographic extrusion; missing fine structure requires a supported spatial/emission model. Projection-only historical density/symmetry comparisons remain inspectable but are not newly qualified 3D materials. Preserve fixed-density alpha when changing its material method; explicitly distinguish a new inferred-emission fit from that workflow.
 
 Choose the configured method first. The numbered procedure below is the **fixed-density material workflow**. For image/physical-evidence inference, use `docs/emission-compiler.md` and the process guidelines: compile the selected support hypothesis, fit emission, then paint the same geometry with each lens. For symmetry use `docs/planetary-nebulae.md`. A full user-authorized Compile includes configured source stages; do not add repeated acceptance clicks. New unsupported physical operators remain research work until implemented and tested.
 
@@ -79,6 +84,8 @@ Choose the configured method first. The numbered procedure below is the **fixed-
 
 ## 7. Preserve and promote deliberately
 
+- Apply `docs/provenance/CONTRACT.md` to every shipped volume, including older lenses touched by the change. Its object README owns the concise Sources, Evidence and Known problems account; lab records retain detailed methods and original experiments. Add `investigations.json` beside the object README, with one `lens-<lensId>` included entry per shipped lens and separate rejected/deferred trials, pinned evidence and revisit conditions.
+- Known observing telescopes belong in the shared machine catalogue with cited capture bindings. A missing catalogue entry is not an unknown observer. Keep model/method citations separate from observations. Put the inferred/simulated nature and material limitations in the visible source-owned summary, not only a hover title. Preserve browser reports and relevant images at retrievable repository paths with their original revision/settings; ignored logs alone cannot support PR claims.
 - For an accepted source set, write a `cssearth-nebula-bake@1` recipe and use `pnpm lab:nebula:bake --recipe=<path>`. Follow `labs/nebula/docs/baking.md`. Save exact image placement, RGB treatment, star/removal inputs and presentation choices; a local result ID alone cannot rebuild an image.
 - Validate replay from a separate clean clone with no source/processing caches, not only restored results. Use the nebula-only installation sequence in the bake guide; run `pnpm lab:nebula:bake` followed by the read-only `pnpm lab:nebula:verify`. Record the tested commit, platform, cold-run duration and any limits. Keep generated density textures and native/3D caches out of Git. The current three accepted sources include an explicitly pinned pre-NOX baseline; omitting it changes their pixels.
 

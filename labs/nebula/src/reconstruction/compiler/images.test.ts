@@ -39,6 +39,24 @@ test('pinned image layers use native rotation, scale, translation and sky offset
   assert.equal(first.sampleOriginal(-30, 3, rgb), true); assert.deepEqual(rgb, [44, 135, 54.5]);
   assert.equal(first.sampleRgb(1000, 1000, rgb), false);
   assert.deepEqual(images[1].matrix, [1, 0, 0, 1, 2, 3]);
+  // Composite preparation must consume native separation, not the lower-resolution UI layers.
+  const nativeDiffuse = await layer('diffuse', 8, 12, (x, y) => [8 + 10 * x + 3 * y, 40 + 5 * x + 7 * y, 10 + 4 * x + y]);
+  const nativeStars = await layer('stars', 8, 12, () => [0, 0, 0]);
+  const receipt = Buffer.from(JSON.stringify({ schema: 'cssearth-nox-output@1', sourceSha256: 'normalized-source', nativeDimensions: [8, 12],
+    artifactSha256: { 'diffuse.png': nativeDiffuse.sha256, 'stars.png': nativeStars.sha256 },
+    applied: { verification: { coverageComplete: true, maximumReconstructionErrorCodeValues: 0 } } }));
+  await writeFile(join(root, '.local/nebula-lab/layers/result.json'), receipt);
+  const nativeCatalogue = { ...catalogue, images: catalogue.images.map(image => ({ ...image, source: { ...image.source, path: original.path },
+    removal: { settings: { directory: '.local/nebula-lab/layers' }, sourceSha256: 'normalized-source',
+      receiptSha256: createHash('sha256').update(receipt).digest('hex'), diffuseSha256: nativeDiffuse.sha256, residualSha256: nativeStars.sha256 } })) };
+  await writeFile(join(root, 'native-observations.json'), JSON.stringify(nativeCatalogue));
+  const nativeImages = await loadCompilerImages(root, 'native-observations.json', request, [10, .01], true);
+  assert.equal(nativeImages.images[0].diffuse.width, 8); assert.equal(nativeImages.images[0].diffuse.height, 12);
+  assert.ok(nativeImages.images[0].sampleRgb(-30, 3, rgb)); assert.deepEqual(rgb, [61.5, 119, 29.5]);
+  assert.deepEqual(nativeImages.images[0].pixelToSky(3, 10), sky);
+  nativeCatalogue.images[0].removal.diffuseSha256 = '0'.repeat(64);
+  await writeFile(join(root, 'native-observations.json'), JSON.stringify(nativeCatalogue));
+  await assert.rejects(loadCompilerImages(root, 'native-observations.json', request, [10, .01], true), /separation pins differ/);
   catalogue.images[0].layers.original = { ...original, sha256: '0'.repeat(64) };
   await writeFile(join(root, 'observations.json'), JSON.stringify(catalogue));
   await assert.rejects(loadCompilerImages(root, 'observations.json', request, [10, .01]), /Registered resource changed/);

@@ -21,7 +21,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   let currentPresentation: PreparedFocusPresentation | null = null;
   const datasetTab = root.querySelector<HTMLElement>('[data-information-tab="dataset"]');
   let currentRecordId: string | undefined;
-  const banks = [...root.querySelectorAll<HTMLElement>('[data-focus-lens-bank]')].map(bank => ({ root: bank,
+  const banks = [...root.querySelectorAll<HTMLElement>('[data-focus-lens-bank], [data-focus-facts-bank]')].map(bank => ({ root: bank,
     buttons: [...bank.querySelectorAll<HTMLButtonElement>('[data-focus-lens]')],
     details: [...bank.querySelectorAll<HTMLElement>('[data-focus-lens-details]')],
     stars: bank.querySelector<HTMLInputElement>('[data-focus-stars]'),
@@ -42,7 +42,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
       showTab(currentPresentation ? 'dataset' : 'factsheet');
     currentRecordId = record?.id;
     for (const bank of banks) {
-      const active = currentPresentation?.objectId === bank.root.dataset.focusLensBank;
+      const active = currentPresentation?.objectId === (bank.root.dataset.focusLensBank ?? bank.root.dataset.focusFactsBank);
       bank.root.hidden = !active;
       if (!active || !currentPresentation) continue;
       const available = new Set(currentPresentation.lenses.map(lens => lens.id));

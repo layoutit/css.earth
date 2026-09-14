@@ -1,0 +1,248 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "eso-optical",
+      "path": ".local/nebula-lab/observations/m8-processed/sources/eso-optical.tif",
+      "origin": "https://www.eso.org/public/images/eso0936a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso0936a/",
+      "title": "Lagoon Nebula · ESO · optical",
+      "credit": "ESO",
+      "displayCredit": "ESO",
+      "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
+      "expectedSha256": "a0a2b4e1b926592642c1ee550925ca3d770d5d63522e37e39f058b27172d0c22",
+      "expectedBytes": 18672974,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0936a",
+            "role": "material",
+            "evidence": "labs/nebula/models/m8/processing-observations.json#/images/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "eso-optical",
+      "license": "Provider terms: https://www.eso.org/public/outreach/copyright/. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "mpg-eso-2-2m",
+            "evidence": "https://www.eso.org/public/images/eso0936a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-vista",
+      "path": ".local/nebula-lab/observations/m8-processed/sources/eso-vista.tif",
+      "origin": "https://www.eso.org/public/images/eso1101d/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1101d/",
+      "title": "Lagoon Nebula · ESO VISTA · infrared",
+      "credit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "displayCredit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
+      "expectedSha256": "906a2960105ac9344be261ba524c3e221f5bfdce3ab2efe33c022773cd7db3e9",
+      "expectedBytes": 29816152,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1101d",
+            "role": "material",
+            "evidence": "labs/nebula/models/m8/processing-observations.json#/images/1"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "eso-vista",
+      "license": "Provider terms: https://www.eso.org/public/outreach/copyright/. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vista",
+            "evidence": "https://www.eso.org/public/images/eso1101d/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "spitzer-mid-infrared",
+      "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.tif",
+      "origin": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula",
+      "sourceUrl": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula",
+      "title": "Lagoon Nebula · Spitzer · mid-infrared",
+      "credit": "NASA/JPL-Caltech",
+      "displayCredit": "NASA/JPL-Caltech",
+      "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
+      "expectedSha256": "94ab668c21880706ae4fa6e401f8a7237f440cdcf4bcf3f93b45c0794c21ff34",
+      "expectedBytes": 5591662,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "spitzer-sig11-012",
+            "role": "material",
+            "evidence": "labs/nebula/models/m8/processing-observations.json#/images/2"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "spitzer-mid-infrared",
+      "license": "Provider terms: https://www.spitzer.caltech.edu/page/image-use-policy. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "spitzer",
+            "evidence": "https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula"
+          }
+        ]
+      }
+    },
+    {
+      "id": "physical-evidence",
+      "path": "labs/nebula/models/m8/physical-evidence.json",
+      "origin": "https://doi.org/10.1111/j.1365-2966.2005.09829.x",
+      "sourceUrl": "https://doi.org/10.1111/j.1365-2966.2005.09829.x",
+      "title": "Lagoon Nebula physical evidence and authored limits",
+      "credit": "Published structural studies; authored display assumptions",
+      "acquisition": "Checked-in evidence ledger. This pin identifies the metadata record; cited publications and native scientific arrays retain their own identities.",
+      "expectedSha256": "922b0da47092eb20e7dab3a669d33e1e5bc49efa71c0cc53a26ac56673f5abb1",
+      "expectedBytes": 14198,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arias-2006-hourglass",
+            "role": "method",
+            "evidence": "labs/nebula/models/m8/physical-evidence.json#/sources/0"
+          },
+          {
+            "catalogueId": "tiwari-2018-pdr",
+            "role": "method",
+            "evidence": "labs/nebula/models/m8/physical-evidence.json#/sources/5"
+          },
+          {
+            "catalogueId": "tiwari-2020-east",
+            "role": "method",
+            "evidence": "labs/nebula/models/m8/physical-evidence.json#/sources/6"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "distance",
+      "path": "src/objects/m8/source/delivery.json",
+      "origin": "https://arxiv.org/pdf/1903.12176v1",
+      "sourceUrl": "https://arxiv.org/pdf/1903.12176v1",
+      "title": "Lagoon Nebula adopted world placement",
+      "credit": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
+      "acquisition": "Checked-in delivery record. The pin identifies our placement metadata, not downloaded paper bytes; the adopted value and uncertainty are explained in the body README.",
+      "expectedSha256": "db90282e9c680d25b0e9bbbcab022832c7575dac33eb26bf0cfe38d352a66b04",
+      "expectedBytes": 2002,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "wright-2019-kinematics",
+            "role": "reference",
+            "evidence": "src/objects/m8/source/delivery.json#/sky/distancePc"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "stellar-field",
+      "path": "src/objects/m8/source/stellar-field.json",
+      "origin": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "sourceUrl": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "title": "Lagoon Nebula surrounding Gaia DR3 stellar field",
+      "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
+      "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
+      "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
+      "expectedSha256": "9a39f21a5f81d319879be1540267c2faf593ee3363e9590800361e033f3c747e",
+      "expectedBytes": 197922,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gavo",
+            "role": "material",
+            "evidence": "src/objects/m8/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "bailer-jones-2021-distances",
+            "role": "method",
+            "evidence": "src/objects/m8/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/m8/source/stellar-field.json#/provenance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/m8/source/delivery.json",
+      "expectedSha256": "db90282e9c680d25b0e9bbbcab022832c7575dac33eb26bf0cfe38d352a66b04",
+      "expectedBytes": 2002,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/m8/source/nebula.json",
+      "expectedSha256": "dc079e1174e6be2a9792faa7992b1cf1c3d922513769db107e6c3b6ab341a18f",
+      "expectedBytes": 2222,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/m8/source/presentation.json",
+      "expectedSha256": "3be0c4752171b5db8d907e593fe29b3f2ec597b5ba7269e73ff0b0149183ba28",
+      "expectedBytes": 6784,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/m8/source/request.json",
+      "expectedSha256": "2903c29073da5735902b3298cf75154da8721fdb7dc32a49b640e97e8e39fb8a",
+      "expectedBytes": 353,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

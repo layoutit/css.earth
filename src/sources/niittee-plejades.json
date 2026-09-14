@@ -1,0 +1,42 @@
+{
+  "id": "niittee-plejades",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Pleiades · Tõrva / Niittee · wide optical",
+  "identifiers": [
+    {
+      "type": "Wikimedia Commons file",
+      "value": "Plejades.jpg"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
+      "label": "Published source"
+    },
+    {
+      "role": "rights",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m45/optical-composite-observations.json",
+      "revision": "9d0a453d4c82637ebc54277f97281e0c8426e85b",
+      "sha256": "2fa3d672cb4c7d20aea35dc444393a4b9a0fe5b65d5a86fd8409b5a4332f6cfe",
+      "locator": "/images/1"
+    }
+  ],
+  "publisher": "Taavi Niittee / Tõrva Astronomy Club",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Taavi Niittee / Tõrva Astronomy Club",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m45/optical-composite-observations.json#/images/1"
+    }
+  ]
+}

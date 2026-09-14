@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-nebula-edge-taper-evidence@1",
+  "id": "m8",
+  "status": "target-qualified-and-app-inspected",
+  "baselineResult": "dd7eedffd90f02c018b4940b38517d7e3233b5dfef1a9a1d4f5be8d72b2452e5",
+  "baselineMethod": {
+    "path": ".local/nebula-lab/compiler/dd7eedffd90f02c018b4940b38517d7e3233b5dfef1a9a1d4f5be8d72b2452e5/method.json",
+    "sha256": "5fdcf8b2f7e12d7ed67174ffa6acb13c0c07887ff42ff5fd67a0a1281b8ea126"
+  },
+  "inputIdentity": "07b19faccd44114bde21775ff587a6f1105abdb528c86340917943f7939fbb00",
+  "recipe": {
+    "path": "labs/nebula/models/m8/compiler.json",
+    "sha256": "2eccce756cf2d5448dabcadefefd2dd7aa5ed04821a540d1e3aea53045b94524"
+  },
+  "sourceWeights": [
+    1,
+    0.15,
+    0.8
+  ],
+  "targetControls": {
+    "sources": {
+      "eso-optical": {
+        "backgroundSpread": 1.5,
+        "edgeTaperArcsec": 450
+      },
+      "eso-vista": {
+        "backgroundSpread": 1.5,
+        "edgeTaperArcsec": 240
+      },
+      "spitzer-mid-infrared": {
+        "backgroundSpread": 1.5,
+        "edgeTaperArcsec": 240
+      }
+    }
+  },
+  "windowFeatherArcsec": {
+    "before": 90,
+    "after": 450
+  },
+  "comparison": {
+    "coverageUnchanged": true,
+    "boundsUnchanged": true,
+    "targetSumBefore": 10162.79595185241,
+    "targetSumAfter": 9946.624935972235,
+    "coreSelection": {
+      "thresholdFractionOfPeak": 0.75,
+      "pixels": 692
+    },
+    "coreTargetRatio": 0.9991722106330707,
+    "outer90ArcsecStripTargetRatio": 0.038193857708974814
+  },
+  "validation": {
+    "focusedTests": 19,
+    "labTypecheck": "pass",
+    "targetTestAndDiagnosticStrictTypecheck": "pass",
+    "counterfactuals": [
+      "Removing configured source tapers fails the source-boundary regression.",
+      "Restoring the historical 90 arcsecond window fails the outer-boundary regression."
+    ]
+  },
+  "interpretation": "Authored inward source reliability and display extent, not measured nebular boundaries. Original rasters, no-data coverage, source weights, background subtraction and depth-prior parameters stay unchanged. The refit and actual application appearance require a new bake; target agreement does not qualify 3D visual quality.",
+  "appInspection": {
+    "date": "2026-09-14",
+    "sourceResult": "7545a7a3af301ef4cc288c84e4343262add505c4db1f8bff8d1c836a7ad8c3e6",
+    "lenses": [
+      "eso-optical",
+      "eso-vista",
+      "spitzer-mid-infrared"
+    ],
+    "views": [
+      "front",
+      "oblique"
+    ],
+    "result": "All six main-app captures inspected: faint outer footprints fade without the previous clear local rectangular seams. Browser and HTTP errors: zero. Coarse model and incomplete spectral coverage remain.",
+    "evidence": "src/objects/m8/README.md"
+  }
+}

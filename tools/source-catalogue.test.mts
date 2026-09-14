@@ -222,7 +222,9 @@ test('changed fact evidence and stale displayed facts leave both published catal
   await writeFile(contentPath, originalContent);
   const rebuilt = await prepareMachines({ root });
   const focusDatasets = rebuilt.preparedSources.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus='));
-  assert.equal(focusDatasets.length, 9, 'Every LMC and nebula lens retains a source destination without its optional volume assets.');
+  assert.ok(focusDatasets.length > 0, 'The fixture must exercise delivered volume datasets.');
+  assert.deepEqual(focusDatasets, prepared.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus=')),
+    'Every published LMC and nebula lens retains its source destination without optional volume assets.');
   assert.deepEqual(focusDatasets, rebuilt.prepared.graph.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus=')));
   for (const id of new Set(focusDatasets.map(dataset => dataset.objectId))) {
     await assert.rejects(readFile(join(root, `src/objects/${id}/prepared/lenses.json`)), { code: 'ENOENT' });
