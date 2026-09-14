@@ -336,6 +336,7 @@
       "finding": "During this work, preparation of 9000675 fails the source-scale registration budget with both the unchanged main matcher and the unit-corrected matcher. Their regenerated control records are identical before the gate. Existing shipped photographs remain unchanged; earlier recorded reproduction passes do not establish a current pass.",
       "revisitWhen": "The replay discrepancy is traced to its source, camera or software input and both partitions meet the existing budget.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/9338160e7a9f5894439d6f436063470e1a6306d4/src/objects/comet-9p/evidence/registration/closeup-replay.json",
         "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/preparation/closeups.json",
         "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-9p/source/reference/encounter-photography.md"
       ],

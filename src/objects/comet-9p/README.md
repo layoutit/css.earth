@@ -69,6 +69,7 @@ The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 
 
 ## Known problems
 
+- **Close-up replay, 2026-09-13:** regenerating the first cropped ITS camera fails its existing registration budget with both main's matcher (`fc4dfc18`) and the radiance-unit fix (`8475dd92`). The regenerated control records are identical. The [replay comparison](evidence/registration/closeup-replay.json) preserves input identities and the failure; earlier successful reproduction reports do not establish a current pass. The shipped camera records and photographs remain unchanged.
 - Infrared placement is coarse. Terrain residuals test alignment relative to the existing photographic/body frame; they do not establish an independent absolute position. That frame inherits source shape and earlier photographic-anchor uncertainty. Temperature and slope pixels must not be used to locate small surface features.
 - These are new fits to PDS version 3 spectra, not a reproduction of the 2013 paper’s published maps. That paper used earlier calibration and different meshes. Its quoted temperature errors cannot simply be assigned to these views. Calibration, unresolved temperature mixtures, scattered light and geometric uncertainty remain.
 
