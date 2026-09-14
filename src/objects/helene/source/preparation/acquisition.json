@@ -328,6 +328,38 @@
       ],
       "path": "observations/N1687120033_1_CALIB.LBL",
       "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2068/data/1686940076_1687120280/N1687120033_1_CALIB.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1675163339_1_CALIB.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2067/data/1675101626_1675163412/N1675163339_1_CALIB.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1675163339_1_CALIB.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2067/data/1675101626_1675163412/N1675163339_1_CALIB.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1519536732_1_CALIB.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2020/data/1519478774_1519575099/N1519536732_1_CALIB.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1519536732_1_CALIB.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2020/data/1519478774_1519575099/N1519536732_1_CALIB.LBL"
     }
   ]
 }
