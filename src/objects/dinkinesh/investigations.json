@@ -6,16 +6,251 @@
       "id": "lucy-photographs",
       "subject": "Lucy L’LORRI photographs as a photographic lens",
       "status": "unresolved",
-      "finding": "The displayed shape is an authored reconstruction, not the mission photogrammetric model, and no photograph is registered to it. The unmerged feat/lucy-dinkinesh-surfaces branch adds a recovered numerical shape whose frame and image registration remain unqualified.",
-      "revisitWhen": "A mission-derived shape with a documented body frame, and a joint orientation and camera registration that passes interior holdouts from a different viewing direction.",
+      "finding": "PR #182 already includes the recovered TEMPEST numerical shape. PRs #189 and #190 supply the shared photograph pipeline and correct L’LORRI target binding. Six native Dinkinesh frames decode, but full-image, regional and additional-view registration trials remain unqualified; no photographic lens has been baked. The latest independent native-overlap check has 16 holdouts, 2.0284 px RMS and 4.7434 px maximum under the existing 1 px RMS limit.",
+      "revisitWhen": "New mesh-frame or camera/control-network evidence, a finer compatible source mesh, or a specifically demonstrated defect in the existing projection/matching code. Import support alone is now verified and does not justify repeating unchanged registration trials.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ee46ac802f813a6c121b8e16c5e4d265668c0732/src/planets/dinkinesh/README.md#L7",
-        "https://github.com/layoutit/css.earth/blob/2582bfe569f2610623f8890fb5f36e2075338d38/src/planets/dinkinesh/README.md"
+        "https://github.com/layoutit/css.earth/blob/2582bfe569f2610623f8890fb5f36e2075338d38/src/planets/dinkinesh/README.md",
+        "https://github.com/layoutit/css.earth/blob/eda58ecaec73edc4885ffecd41dd09a8c8e10a6c/src/objects/dinkinesh/evidence/lucy-registration/study.json",
+        "https://github.com/layoutit/css.earth/blob/eda58ecaec73edc4885ffecd41dd09a8c8e10a6c/src/objects/dinkinesh/evidence/lucy-registration/llorri-native-overlap-probe.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "2582bfe569f2610623f8890fb5f36e2075338d38"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "eda58ecaec73edc4885ffecd41dd09a8c8e10a6c"
+        }
+      ]
+    },
+    {
+      "id": "tempest-numerical-shape",
+      "subject": "Recovered TEMPEST Dinkinesh STL",
+      "status": "included",
+      "finding": "The displayed TEMPEST dataset uses the preserved 635-vertex, 1,266-face mesh from public Git history. Its original metre coordinates give a 737.508 m equivalent diameter. This is a selected numerical shape, not a qualified photographic frame.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/dinkinesh/README.md",
+        "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl",
+        "https://doi.org/10.5194/epsc-dps2025-546"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+        }
+      ]
+    },
+    {
+      "id": "celestia-reconstruction",
+      "subject": "Celestia authored model and contributed texture",
+      "status": "included",
+      "finding": "The alternative shape dataset retains the CC BY 4.0 authored reconstruction. Its unqualified contributed texture is excluded; detailed relief and the unseen hemisphere remain approximations. Existing Gazetteer places stay on this dataset.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/dinkinesh/README.md",
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/dinkinesh/NOTICE.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+        }
+      ]
+    },
+    {
+      "id": "tempest-companion-geometry",
+      "subject": "TEMPEST history, configuration and flyby companions",
+      "status": "unresolved",
+      "finding": "Historical shape inventory, file history, release assets and configuration did not supply a finer Dinkinesh mesh or a mission-registered camera. The earlier flyby script uses a simplified trajectory and a private configuration absent from the public tree. Configuration spin axes without an epoch do not establish this STL’s mission frame.",
+      "revisitWhen": "A changed public release, linked numeric mesh, camera table or epoch-bound frame declaration matching the selected STL.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/dinkinesh/README.md#known-problems",
+        "https://github.com/duncanLyster/TEMPEST/tree/7df4c88063ebe811cbdd25b97c19f85559607459/data",
+        "https://github.com/duncanLyster/TEMPEST/blob/b52891180d9e7771a7c2d01ff9937cff7827c944/scripts/analyze_flyby_temperatures.py"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "eda58ecaec73edc4885ffecd41dd09a8c8e10a6c"
+        }
+      ]
+    },
+    {
+      "id": "mission-shape-publications",
+      "subject": "Mission shape papers and accessible supplementary material",
+      "status": "unresolved",
+      "finding": "The papers describe finer numerical models and registered imagery, but the examined publications and accessible supplements did not supply their mesh connectivity and matched cameras. Jackson’s 5,186-facet derivative is distinct from the recovered 1,266-face STL. A promised archive release is not proof that the files were located.",
+      "revisitWhen": "A released numeric shape, backplane, control-point or camera bundle associated with one of these papers.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/dinkinesh/README.md#known-problems",
+        "https://doi.org/10.3847/PSJ/ade23c",
+        "https://doi.org/10.3847/PSJ/ae1968",
+        "https://doi.org/10.1038/s41586-024-07378-0",
+        "https://doi.org/10.5194/epsc2024-963"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+        }
+      ]
+    },
+    {
+      "id": "pds-naif-shape-archive",
+      "subject": "PDS catalogue and Lucy DSK inventories",
+      "status": "unresolved",
+      "finding": "The recorded catalogue query and both examined DSK directories exposed no Dinkinesh shape product; the DSK listings contained Donaldjohanson. This is a bounded inventory result, not a claim that no Dinkinesh model exists.",
+      "revisitWhen": "A new Dinkinesh collection, DSK entry, label or linked released mesh.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/dinkinesh/README.md#known-problems",
+        "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/",
+        "https://naif.jpl.nasa.gov/pub/naif/LUCY/kernels/dsk/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+        }
+      ]
+    },
+    {
+      "id": "sbmt-dinkinesh-data",
+      "subject": "SBMT Dinkinesh mesh and registered observations",
+      "status": "unresolved",
+      "finding": "The paper describes co-registered Dinkinesh imagery in SBMT. The examined data endpoint requested authentication, so its mesh/camera contents were not inspected. Access failure does not establish missing data.",
+      "revisitWhen": "A public release or authorized accessible SBMT dataset with its mesh and image geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/dinkinesh/README.md#known-problems",
+        "https://doi.org/10.3847/PSJ/ae1968"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+        }
+      ]
+    },
+    {
+      "id": "native-llorri-decoding",
+      "subject": "Six partially processed Lucy L’LORRI FITS observations",
+      "status": "unresolved",
+      "finding": "Frames 9545, 9587, 9602, 9617, 9632 and 9722 decode through the shared reader at PR #190, each with 1,046,433 accepted and 2,143 rejected detector pixels. Wrong-target binding is rejected. Values are relative DN per second, not I/F. The retained report proves decoding and target binding only; photographic registration remains unresolved.",
+      "revisitWhen": "A qualified source-mesh camera solution. Recheck decoding only when the native product, decoder or declared target changes.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/eda58ecaec73edc4885ffecd41dd09a8c8e10a6c/src/objects/dinkinesh/evidence/lucy-registration/native-reader-check.json",
+        "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/SUPPORT/dataset.shtml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "eda58ecaec73edc4885ffecd41dd09a8c8e10a6c"
+        }
+      ]
+    },
+    {
+      "id": "corrected-lucy-trajectory",
+      "subject": "Corrected Lucy SPK and TAN-SIP header geometry",
+      "status": "unresolved",
+      "finding": "The corrected reconstruction SPK agrees with CSPICE through SpiceyPy at three tested observation midpoints. It corrects the trajectory problem documented in the archive timing note, while neither it nor TAN-SIP headers establishes the recovered mesh’s prime meridian or phase.",
+      "revisitWhen": "A matching body-frame registration or evidence of a specific timing/aberration interpretation error.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/dinkinesh/README.md#known-problems",
+        "https://github.com/layoutit/css.earth/blob/eda58ecaec73edc4885ffecd41dd09a8c8e10a6c/src/objects/dinkinesh/evidence/lucy-registration/study.json",
+        "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/SUPPORT/NOTES/liens.txt"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "eda58ecaec73edc4885ffecd41dd09a8c8e10a6c"
+        }
+      ]
+    },
+    {
+      "id": "placeholder-dinkinesh-pck",
+      "subject": "dinkinesh_v10.tpc body orientation",
+      "status": "excluded",
+      "finding": "The examined kernel explicitly retains a placeholder pole and pre-encounter 52.67-hour period. It is unsuitable for orienting the recovered mesh. The published pole and 3.737-hour period still leave its phase and prime meridian unqualified.",
+      "revisitWhen": "A revised, non-placeholder orientation kernel demonstrably matching this mesh.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/dinkinesh/README.md#known-problems",
+        "https://naif.jpl.nasa.gov/pub/naif/LUCY/kernels/pck/dinkinesh_v10.tpc",
+        "https://doi.org/10.3847/PSJ/ade23c"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+        }
+      ]
+    },
+    {
+      "id": "limb-only-registration",
+      "subject": "Outline-based orientation and pointing trials",
+      "status": "deferred",
+      "finding": "Pinhole and distortion-aware limb trials did not establish internal terrain alignment. A prior apparent pass sampled only part of the outline; fixing that defect changed its holdout RMS from 2.161 to 5.506 px. The historical report preserves the failed multi-view checks and the correction.",
+      "revisitWhen": "New independent terrain/frame evidence. An outline fit alone cannot reopen the photographic lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e70004dbc235b55e2d76af63d28fd35e61e96a8d/src/objects/dinkinesh/README.md#known-problems"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d"
+        }
+      ]
+    },
+    {
+      "id": "native-region-registration",
+      "subject": "Frozen central region and native-image controls",
+      "status": "deferred",
+      "finding": "The earlier crop altered pixels before convolution and its apparent improvement is superseded. Selecting the same region after full-image convolution leaves 14 independent-view holdouts with 1.1861 px RMS. A rigid regional trial also fails the additional view. The region does not qualify a photographic lens.",
+      "revisitWhen": "A specific upstream registration fix or compatible finer shape; do not trim failing holdouts or change the frozen region to obtain a pass.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/eda58ecaec73edc4885ffecd41dd09a8c8e10a6c/src/objects/dinkinesh/evidence/lucy-registration/study.json",
+        "https://github.com/layoutit/css.earth/blob/eda58ecaec73edc4885ffecd41dd09a8c8e10a6c/src/objects/dinkinesh/evidence/lucy-registration/stereo-native-region-9587.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "eda58ecaec73edc4885ffecd41dd09a8c8e10a6c"
+        }
+      ]
+    },
+    {
+      "id": "stereo-depth-diagnostic",
+      "subject": "Paired native-feature depths versus the coarse source mesh",
+      "status": "unresolved",
+      "finding": "The two surrounding views provide 56 shared feature pairs: conditional median absolute mesh-depth difference 6.47 m and median paired-depth disagreement 1.43 m. The correlation supports a coarse-shape limitation hypothesis; inferred cameras prevent an absolute mesh-accuracy claim.",
+      "revisitWhen": "A finer source mesh, independent camera/control solution or counterevidence that separates camera bias from missing shape detail.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/eda58ecaec73edc4885ffecd41dd09a8c8e10a6c/src/objects/dinkinesh/evidence/lucy-registration/depth-audit.json",
+        "https://github.com/layoutit/css.earth/blob/eda58ecaec73edc4885ffecd41dd09a8c8e10a6c/src/objects/dinkinesh/evidence/lucy-registration/joint-rigid-probe.json",
+        "https://doi.org/10.5194/epsc-dps2025-546"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "eda58ecaec73edc4885ffecd41dd09a8c8e10a6c"
+        }
+      ]
+    },
+    {
+      "id": "formation-simulation-archives",
+      "subject": "Dinkinesh–Selam formation simulation releases",
+      "status": "excluded",
+      "finding": "The examined Dinkinesh-Selam_formation v1.3 and Binary_Diversity v1.1 inventories contain simulation code and numerical simulation/source data, not a located mission-registered Dinkinesh shape. Their boulder or particle coordinates are not accepted as observed terrain.",
+      "revisitWhen": "A documented observed mesh or mission registration product in a subsequent release.",
+      "evidence": [
+        "https://zenodo.org/records/17514742",
+        "https://github.com/sr516/Dinkinesh-Selam_formation/tree/v1.3",
+        "https://zenodo.org/records/19695427",
+        "https://github.com/wy-dai/Binary_Diversity/tree/v1.1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "eda58ecaec73edc4885ffecd41dd09a8c8e10a6c"
         }
       ]
     }
