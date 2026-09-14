@@ -4,7 +4,6 @@
   "id": "sedna",
   "displayName": "Sedna",
   "panel": {
-    "introduction": "Sedna follows an exceptionally distant, elongated orbit beyond the planetary region. This grid-covered illustration conveys its thermal size estimate; its actual shape and surface terrain remain unresolved.",
     "facts": [
       {
         "id": "shape",
@@ -45,9 +44,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Size-constrained spherical illustration at the 995 ±80 km thermal diameter. Herschel constrains effective size, not three axes; no resolved global shape or topography is represented. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain.",
-        "title": "Published size model; shape unresolved",
-        "detail": "Inferred shape · unmapped surface grid",
         "thumbnail": "/scenes/sedna/sedna-model-thumbnail.webp",
         "surface": "sedna-model-surface@2x.webp",
         "poles": "sedna-model-poles@2x.webp",
@@ -55,7 +51,9 @@
           "id": "published-shape",
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/1204.0899"
-        }
+        },
+        "notes": "Size-constrained spherical illustration at the 995 ±80 km thermal diameter. Herschel constrains effective size, not three axes; no resolved global shape or topography is represented. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

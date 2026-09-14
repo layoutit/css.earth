@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4af8364540bd204260c072122d6f5d6012b4617019bb5859e7a8a7f9dbd7ec9c"
+          "sha256": "0f520fa23540c3b27792aa3ae1745ceaa365af38b2d4a1c40a6e8351aaac3554"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "bde8198a943822521c3aaf01c30898edb680d93cb0c6fc2c3a4a8c263075c2ac"
+        "sha256": "d8009906381134db4cea772fc0f07a3f962f4c41a74d88bbd1e73aace293dc43"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.064764963618251,
-      "description": "Explore Arethusa in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in November 1867.",
       "systemName": "Solar System",
       "order": 254,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a07637f89ee926ac8f922020a5c4355f65bff83ec9d7f3f18b862c30b6056b64"
+    "sha256": "daec140f19cc98b5990bc05e89beca308324292f4ea9b81f3e90e2c7b18bc455"
   }
 }

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "48782a675a1fafee770a41a21bf22a61dc98bb290edab13e8d7d9bc12a3e6a25"
+          "sha256": "375a1914340732333219e4d8e653e1c29f425ff6f1d196c63c8494e2fa3e2872"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "bbc147b266c7cf238ac97275b80a40cd0b80eb1c226d1106bd7548347b8e21ef"
+        "sha256": "31d364c6642361d5c774ba4cf3ec80e8ca26505d19effd41a03b61293f7937bb"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.216209884720479,
-      "description": "Explore Achilles in 3D with its published shape model and documented physical size scale.",
+      "description": "Jupiter Trojan asteroid found in 1906.",
       "systemName": "Solar System",
       "order": 391,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "01bbc4bce6625c5e1c58736765faee6f4a198b64c464184eeca87ebd72a1234e"
+    "sha256": "b8c5d6feeea73723663228235bf261a7c447733524c7cc6c2508aeae75062f6c"
   }
 }

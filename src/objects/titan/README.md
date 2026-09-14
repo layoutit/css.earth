@@ -8,6 +8,8 @@
 
 - Formal `CO-SSA-RADAR-5-GTDR-V1.0` float products through T126 add three views: measured height (`GTF`), interpolated height (`GTI`) and distance to input data (`GTD`). Heights are metres above the 2575.0 km sphere, distance is kilometres.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Evidence
 
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
@@ -68,10 +70,6 @@ The scene uses the vendored JPL/IAU Titan radius (2,575.5 km), rotation and Satu
 Preparation decodes the attached labels, uses their west-positive longitudes to place the pixels in our east-positive map, and preserves exact `MISSING_CONSTANT = 0` coverage. Valid low-backscatter lakes remain observed. The public label documents incidence-normalized backscatter in logarithmic form: dB = DN × 0.10000012 − 20.10001. Shared globe lighting is an approximate visualization.
 
 The selected archive level is 32 pixels/degree (1.404 km at the equator), prepared at the shared 8,192 × 4,096 size (1.98 km per equatorial texel). The archive also has 351 m grids, but those are not the delivered texel density. Original labels, source dimensions, checksums and acquisition URLs are pinned.
-
-## Other lenses considered
-
-The [2019 VIMS/ISS Enhanced color composite](https://data.caltech.edu/records/8q9an-yt176) was inspected as a candidate. Its [authors document](https://www.hou.usra.edu/meetings/lpsc2019/eposter/1423.pdf) filling missing VIMS color with neighboring values and manually removing seams. The published files do not include a validity mask distinguishing those fills. It is withheld until observed color coverage can be established; the ISS mask cannot establish VIMS coverage. Visible haze also needs a suitable observed map. An orange recoloring of infrared would not be visible imagery.
 
 Facts: [NASA Science](https://science.nasa.gov/saturn/moons/titan/facts/). Exact input identities, acquisition URLs, credits and consumers are in `source/manifest.json`; preparation is authored in `object.json` and source JSON.
 

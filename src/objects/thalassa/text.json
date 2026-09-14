@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "thalassa",
+  "card": {
+    "text": "Disk-shaped moon of Neptune, unusual among irregular moons.",
+    "sources": [
+      {
+        "catalogueId": "nasa-neptune-moons",
+        "url": "https://science.nasa.gov/neptune/moons/thalassa/",
+        "label": "NASA Science · Neptune’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Thalassa stays close to Neptune's equator, and its orbit is slowly decaying.",
+    "sources": [
+      {
+        "catalogueId": "nasa-neptune-moons",
+        "url": "https://science.nasa.gov/neptune/moons/thalassa/",
+        "label": "NASA Science · Neptune’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Measured axes",
+      "summary": "A smooth shape at the size measured from motion-blurred Voyager images; there is no reliable surface map."
+    }
+  }
+}

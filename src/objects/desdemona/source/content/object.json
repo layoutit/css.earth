@@ -4,7 +4,6 @@
   "id": "desdemona",
   "displayName": "Desdemona",
   "panel": {
-    "introduction": "Desdemona is an elongated member of Uranus’s tightly packed inner moon system, discovered in Voyager 2 images in 1986.",
     "facts": [
       {
         "id": "radius",
@@ -44,9 +43,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Published 90 × 54 × 54 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
-        "title": "Approximate shape model",
-        "detail": "Measured shape",
         "thumbnail": "/scenes/desdemona/desdemona-model-thumbnail.webp",
         "surface": "desdemona-model-surface@2x.webp",
         "poles": "desdemona-model-poles@2x.webp",
@@ -55,7 +51,8 @@
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/2401.04634"
         },
-        "summary": "A 90 × 54 × 54 km shape estimate. Two axes are assumed equal; gray grid: no imagery, not observed terrain."
+        "notes": "Published 90 × 54 × 54 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+        "noData": true
       }
     ]
   },

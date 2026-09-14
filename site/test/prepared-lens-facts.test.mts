@@ -56,10 +56,10 @@ test('lens facts reject malformed rows and duplicate ids before publication', as
   }
 });
 
-test('existing description-only lenses keep their original content contract', async () => {
+test('lenses without facts publish none, and no lens carries reader text', async () => {
   const { source } = await fixture();
   for (const lens of source.lenses.controls) Reflect.deleteProperty(lens, 'facts');
   const prepared = prepareObjectContent(source);
   assert.ok(prepared.lenses.controls.every(lens => !Object.hasOwn(lens, 'facts')));
-  assert.deepEqual(prepared.lenses.controls.map(lens => lens.description), source.lenses.controls.map(lens => lens.description));
+  assert.ok(prepared.lenses.controls.every(lens => ['title', 'detail', 'summary', 'description'].every(key => !Object.hasOwn(lens, key))));
 });

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ce8cc03b6dded111537e884f46d230deb333ff35d5c24ae0b9a2f1b9026c4cfe"
+    "sha256": "a375d79c3ff6b237e00a8bbd06dfa42004ebf3413fe0f6cd2ca882656d1d227e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -244,14 +244,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b4880e17682a2bb6f1f2994757444a1536d8472bdcf101cd824cd8bd53d665c7",
+      "sha256": "3e7d7c728d78f8b4a1eaa8bb24034909cf8dc1aac98d2435f7f906c4ba2b7702",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "phobos",
         "displayName": "Phobos",
         "panel": {
-          "introduction": "Phobos is the larger, inner moon of Mars. Its irregular surface is crossed by grooves and dominated by Stickney crater. It completes an orbit in less than eight hours.",
           "facts": [
             {
               "id": "radius",
@@ -329,9 +328,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
-              "title": "Controlled multi-mission mosaic",
-              "detail": "Multi-mission mosaic",
               "thumbnail": "/scenes/phobos/phobos-normal-thumbnail.webp",
               "surface": "phobos-normal-surface@2x.webp",
               "poles": "phobos-normal-poles@2x.webp",
@@ -340,14 +336,11 @@
                 "path": "../manifest.json",
                 "url": "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m"
               },
-              "summary": "Images from several missions are registered to the same surface. Detail varies; photographed shadows and edited seams remain."
+              "notes": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain."
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m.",
-              "title": "Shape-derived radial height",
-              "detail": "Shaded relief",
               "thumbnail": "/scenes/phobos/phobos-elevation-thumbnail.webp",
               "surface": "phobos-elevation-surface@2x.webp",
               "poles": "phobos-elevation-poles@2x.webp",
@@ -370,14 +363,11 @@
                 "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
                 "image": "/scenes/phobos/phobos-elevation-legend.webp"
               },
-              "summary": "Height relative to an 11.1 km sphere, from the 2023 model. Shading shows slopes; mesh spacing is about 148 m."
+              "notes": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m."
             },
             {
               "id": "albedo",
               "label": "Relative albedo",
-              "description": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo.",
-              "title": "SPC relative albedo model",
-              "detail": "Released facet values",
               "thumbnail": "/scenes/phobos/phobos-albedo-thumbnail.webp",
               "surface": "phobos-albedo-surface@2x.webp",
               "poles": "phobos-albedo-surface@2x.webp",
@@ -399,14 +389,12 @@
                 "meta": "SPC relative scale",
                 "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
                 "image": "/scenes/phobos/phobos-albedo-legend.webp"
-              }
+              },
+              "notes": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo."
             },
             {
               "id": "slope",
               "label": "Slope",
-              "description": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table.",
-              "title": "Modeled surface slopes",
-              "detail": "Released facet values",
               "thumbnail": "/scenes/phobos/phobos-slope-thumbnail.webp",
               "surface": "phobos-slope-surface@2x.webp",
               "poles": "phobos-slope-surface@2x.webp",
@@ -428,7 +416,8 @@
                 "meta": "deg",
                 "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
                 "image": "/scenes/phobos/phobos-slope-legend.webp"
-              }
+              },
+              "notes": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table."
             }
           ]
         },
@@ -718,7 +707,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -727,8 +716,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b4880e17682a2bb6f1f2994757444a1536d8472bdcf101cd824cd8bd53d665c7",
-      "bytes": 11732,
+      "sha256": "3e7d7c728d78f8b4a1eaa8bb24034909cf8dc1aac98d2435f7f906c4ba2b7702",
+      "bytes": 10885,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -843,9 +832,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -901,9 +888,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -945,9 +930,7 @@
       "selector": "/raster/scientific/1",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo."
-      ],
+      "limitations": [],
       "lensIds": [
         "albedo"
       ],
@@ -990,9 +973,7 @@
       "selector": "/raster/scientific/2",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table."
-      ],
+      "limitations": [],
       "lensIds": [
         "slope"
       ],
@@ -1034,7 +1015,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1046,8 +1027,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6239,
-          "sha256": "9fb3a14fbc7877a7c9c7efb53fbaa5a74330c2b35334bca48480b8ac37cb6c78",
+          "bytes": 6054,
+          "sha256": "ede4e285c5dd55349c5261e79d7a3caf844e6c295c91089ffb093d635f2fa379",
           "verification": "bytes-verified"
         }
       ],

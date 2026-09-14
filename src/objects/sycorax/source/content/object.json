@@ -4,7 +4,6 @@
   "id": "sycorax",
   "displayName": "Sycorax",
   "panel": {
-    "introduction": "Sycorax is an outer moon of Uranus with measured rotational variability and thermal-size constraints. This ellipsoid adopts the minimum elongation under uniform reflectivity; depth and display orientation remain assumptions. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "parent",
@@ -44,9 +43,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
-        "title": "Light-curve shape approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/sycorax/sycorax-model-thumbnail.webp",
         "surface": "sycorax-model-surface@2x.webp",
         "poles": "sycorax-model-poles@2x.webp",
@@ -54,7 +50,9 @@
           "id": "lightcurve-approximation",
           "path": "../manifest.json",
           "url": "https://arxiv.org/pdf/1706.06837"
-        }
+        },
+        "notes": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

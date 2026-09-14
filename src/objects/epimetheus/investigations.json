@@ -87,6 +87,23 @@
           "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
         }
       ]
+    },
+    {
+      "id": "cassini-filter-color",
+      "subject": "Selected calibrated Cassini filter-color observations",
+      "status": "included",
+      "finding": "The original 2017 IR3/GRN/UV3 close sequence and the independently checked 2015 sequence recorded separately in the coverage entry supply False color. Each filter uses its own camera and only common valid coverage; observed fringes and acquisition shadows remain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/epimetheus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/epimetheus/source/preparation/terrestrial.json",
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/epimetheus_document.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
     }
   ]
 }

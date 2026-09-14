@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "6f247f0e256cb2a485f558f360f381848b94aa28f8dc17087fe575a018eb4e9a"
+          "sha256": "44a42290d474a5041d1e3b5710bcc7ec9f53c013db6ca3e0765282df01341240"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5b88ccd5dd8d0a70bb08d54a69cc8eb07d3195ce081b7656411afc3fce89e361"
+        "sha256": "53d81920033e740d712f3e6b7364ec7290bf0e6167616bd090c7b4730b35ed2c"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5547309956514517,
-      "description": "Explore Amphitrite in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered on 1 March 1854 at London.",
       "systemName": "Solar System",
       "order": 151,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f04ccb71dd626b38096749067cd31ca75500eafeddd4c31a3267183e55da3dd3"
+    "sha256": "91ad36a784589a6814347086825d58bb91c7b84d0cdafbfd761f7e33f566036e"
   }
 }

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "452d59ef2ef4a0079312e5d9d0247602efadefb6616d4e9707ff14d88a12b8b8"
+    "sha256": "5317bc406c73da51236816076e90ce7a4f8ae99280c24dc2f8a43a5690fad8df"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -478,14 +478,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3ab28fe80ee6c32398ab8db11ce54cefd1f9b3116f3230c449477ea8c77fc8b2",
+      "sha256": "532b162aa1aed6966828325f16aeb1942264e0f969114948b25fbb625e16fe7b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "epimetheus",
         "displayName": "Epimetheus",
         "panel": {
-          "introduction": "Epimetheus shares an orbit with the larger moon Janus. The pair exchanges inner and outer tracks about every four years. Cassini revealed a battered icy surface, including a flattened south pole and branching ridges.",
           "facts": [
             {
               "id": "radius",
@@ -562,9 +561,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-              "title": "ISS mosaic",
-              "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/epimetheus/epimetheus-normal-thumbnail.webp",
               "surface": "epimetheus-normal-surface@2x.webp",
               "poles": "epimetheus-normal-surface@2x.webp",
@@ -573,14 +569,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
+              "notes": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "noData": true
             },
             {
               "id": "filter-color",
               "label": "False color",
-              "description": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
-              "title": "Cassini false color",
-              "detail": "Cassini",
               "thumbnail": "/scenes/epimetheus/epimetheus-filter-color-thumbnail.webp",
               "surface": "epimetheus-filter-color-surface@2x.webp",
               "poles": "epimetheus-filter-color-surface@2x.webp",
@@ -589,14 +583,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
+              "notes": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radial height above a 58.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-              "title": "Shape-derived radial height",
-              "detail": "Cassini shape · radial height",
               "thumbnail": "/scenes/epimetheus/epimetheus-elevation-thumbnail.webp",
               "surface": "epimetheus-elevation-surface@2x.webp",
               "poles": "epimetheus-elevation-surface@2x.webp",
@@ -619,7 +611,7 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
                 "image": "/scenes/epimetheus/epimetheus-elevation-legend.webp"
               },
-              "summary": "Height relative to a 58.2 km sphere, from the Cassini shape model. Small craters are unresolved."
+              "notes": "Radial height above a 58.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
             }
           ]
         },
@@ -2054,7 +2046,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -2063,8 +2055,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3ab28fe80ee6c32398ab8db11ce54cefd1f9b3116f3230c449477ea8c77fc8b2",
-      "bytes": 6919,
+      "sha256": "532b162aa1aed6966828325f16aeb1942264e0f969114948b25fbb625e16fe7b",
+      "bytes": 5998,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2079,9 +2071,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radial height above a 58.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -2124,9 +2114,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -2176,9 +2164,7 @@
       "selector": "/raster/surfaceObservations/1",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only."
-      ],
+      "limitations": [],
       "lensIds": [
         "filter-color"
       ],
@@ -2225,7 +2211,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -2237,8 +2223,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7809,
-          "sha256": "f8fb01276a8fd4eb8a7c5afc55e672b76e92435c66375bbd30487d22d3e12171",
+          "bytes": 7575,
+          "sha256": "c4df6bd962fa57b17c3db593ff3740a94c7897ea7a275e1d239c7ed1b9255706",
           "verification": "bytes-verified"
         }
       ],

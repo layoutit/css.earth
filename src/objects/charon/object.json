@@ -48,7 +48,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "598566c1aba93a9a76397911794fb9a818ce470c7cdce48f3a4edb88489d511e"
+          "sha256": "3cd6668d976b2aab428aef2f601783ff32e21029e6eff73f1d0ee910c03ee140"
         },
         {
           "id": "solar-system",
@@ -164,7 +164,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7849b09c158dce754939b8d4ffe95a8170fad66ed002d6e49caeedf92f8bcf98"
+        "sha256": "fa0c4795ec99c95be6364d3a46e9398c77c7b227ea134dfa44314542aa31606f"
       }
     },
     "catalog": {
@@ -172,7 +172,7 @@
       "classification": "satellite",
       "color": "#aaa9a3",
       "distanceAu": 39.48,
-      "description": "Explore Charon with New Horizons imagery, deep canyons and measured elevation.",
+      "description": "Pluto's largest moon, half its size, with a reddish north polar region.",
       "systemName": "Solar System",
       "order": 455,
       "context": {
@@ -183,6 +183,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "75d57e6bb7404a5a53c2a6a232223e3f9d78b2eade42f47c53cb2434569c49fc"
+    "sha256": "5f49e17e06feb709b78a69827220c480a626e0e09bf6e5ed395ab1486e61c800"
   }
 }

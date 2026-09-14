@@ -4,7 +4,6 @@
   "id": "comet-137p",
   "displayName": "Shoemaker–Levy 2",
   "panel": {
-    "introduction": "Shoemaker–Levy 2 turns once in about eight hours. Its changing brightness suggests a rounded nucleus, slightly flattened along the spin axis.",
     "facts": [
       {
         "id": "radius",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Shape approximation",
-        "detail": "Lightcurves",
-        "title": "Inferred shape",
-        "description": "A smooth approximation of the published proportions. Two pole orientations fit the lightcurves; this uses Model 1. The grid marks missing surface imagery. Rotation phase is illustrative.",
         "thumbnail": "/scenes/comet-137p/comet-137p-model-thumbnail.webp",
         "surface": "comet-137p-model-surface@2x.webp",
         "poles": "comet-137p-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Rotation period",
             "value": "7.79 hours"
           }
-        ]
+        ],
+        "notes": "A smooth approximation of the published proportions. Two pole orientations fit the lightcurves; this uses Model 1. The grid marks missing surface imagery. Rotation phase is illustrative.",
+        "noData": true
       }
     ]
   },

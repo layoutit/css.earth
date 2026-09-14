@@ -560,8 +560,8 @@
     {
       "id": "charon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 17364,
-      "expectedSha256": "598566c1aba93a9a76397911794fb9a818ce470c7cdce48f3a4edb88489d511e",
+      "expectedBytes": 16017,
+      "expectedSha256": "3cd6668d976b2aab428aef2f601783ff32e21029e6eff73f1d0ee910c03ee140",
       "origin": "Repository-authored Charon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -573,7 +573,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {

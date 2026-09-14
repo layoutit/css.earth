@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "92883c971cdf9de661462e3650519cfe21ead325244248d8b907e3234a0ae769"
+    "sha256": "1e27d612ea22e4a815c667e58e16a1b9af3df4069d062b9da5d16f1168916099"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "591850b21a67fc843595954ae54d5a1a1a3feac5fb11cd43f90005f710fe4998",
+      "sha256": "59a01391db54a403555eef2411f571576f4b0ab8919f22bd7497752af48b298c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "bianca",
         "displayName": "Bianca",
         "panel": {
-          "introduction": "Bianca is a small inner moon of Uranus discovered by Voyager 2. Measurements constrain its elongated shape, but do not supply a detailed surface map.",
           "facts": [
             {
               "id": "radius",
@@ -156,9 +155,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published 64 × 46 × 46 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
-              "title": "Approximate shape model",
-              "detail": "Measured shape",
               "thumbnail": "/scenes/bianca/bianca-model-thumbnail.webp",
               "surface": "bianca-model-surface@2x.webp",
               "poles": "bianca-model-poles@2x.webp",
@@ -167,7 +163,8 @@
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/2401.04634"
               },
-              "summary": "A 64 × 46 × 46 km shape estimate. Two axes are assumed equal; gray grid: no imagery, not observed terrain."
+              "notes": "Published 64 × 46 × 46 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+              "noData": true
             }
           ]
         },
@@ -311,7 +308,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -320,8 +317,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "591850b21a67fc843595954ae54d5a1a1a3feac5fb11cd43f90005f710fe4998",
-      "bytes": 3383,
+      "sha256": "59a01391db54a403555eef2411f571576f4b0ab8919f22bd7497752af48b298c",
+      "bytes": 3017,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -336,9 +333,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published 64 × 46 × 46 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -378,7 +373,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -390,8 +385,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5990,
-          "sha256": "c17bc9d69ec8669722ec8c8d4e8377be5cbb712dc976cd92ef7493598a5c7d24",
+          "bytes": 5823,
+          "sha256": "e82fa0d22b006b426dfb7f0c5ae725bea51428b8dfb624c61ec8bf16fd01e35f",
           "verification": "bytes-verified"
         }
       ],

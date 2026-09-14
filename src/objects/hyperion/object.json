@@ -29,7 +29,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "1c20f125075eb9fcc25381920cd603153fa4c1466ddb02d85847a0bc13dd18b4"
+          "sha256": "b13c104497d7dbe4bf96be23c447d3169de33b50e4837b725cb6b3afec3f982d"
         },
         {
           "id": "title",
@@ -140,7 +140,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f596c7e8780c3c98caa0e7128b1a1580b5fe4ddf0d6adfda91ce984c035443c9"
+        "sha256": "9161bee31bddc7a895badbb508fd884c0ac7a32abb0fd85ddb4b86b3779284ea"
       }
     },
     "catalog": {
@@ -148,7 +148,7 @@
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
-      "description": "Explore Hyperion with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "description": "Sponge-like moon of Saturn that tumbles chaotically as it orbits.",
       "systemName": "Solar System",
       "order": 437,
       "context": {
@@ -159,6 +159,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d215accc45351f47705b06b360496480d79543a063bb5c38ae1cc01e206e5909"
+    "sha256": "a030ff3636eb12266be7406c2c14dbe11dcfb1a63f6fd3c70d156eeea596f3fc"
   }
 }

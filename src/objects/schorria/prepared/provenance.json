@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "60b461a40105d0e2d763178d3140333ac182d4356d33ce62345d6ad1c1c59e52"
+    "sha256": "cb5fccabb9c05c6a1a86b1bf532e2b52ef7af7753da89dd7930ba2828eaa737b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "23fcfce756464cb5a74e93833d26a316e7cfd2c6419eddf3cb586b0822d5f7ab",
+      "sha256": "448845b80adf63c7dda8fcc7325ae2aed12cbc1acca2579d3c7431ad513eea49",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,7 +173,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Single-band thermal diameter 5.55 km, with at least 20% uncertainty (1.11 km). This exceptionally slow rotator has a coarse convex shape and an unresolved alternative pole; rotational phase is illustrative.",
-              "title": "Light-curve shape model",
               "thumbnail": "/scenes/schorria/schorria-shape-thumbnail.webp",
               "surface": "schorria-shape-surface@2x.webp",
               "poles": "schorria-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Single-band thermal diameter 5.55 km, with at least 20% uncertainty (1.11 km). This exceptionally slow rotator has a coarse convex shape and an unresolved alternative pole; rotational phase is illustrative.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 2.775 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/schorria/schorria-elevation-thumbnail.webp",
               "surface": "schorria-elevation-surface@2x.webp",
               "poles": "schorria-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5955",
                 "image": "/scenes/schorria/schorria-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 2.775 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -370,10 +366,10 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "23fcfce756464cb5a74e93833d26a316e7cfd2c6419eddf3cb586b0822d5f7ab",
+      "sha256": "448845b80adf63c7dda8fcc7325ae2aed12cbc1acca2579d3c7431ad513eea49",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -382,7 +378,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9972,
+      "bytes": 9625,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -397,9 +393,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 2.775 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -441,9 +435,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Single-band thermal diameter 5.55 km, with at least 20% uncertainty (1.11 km). This exceptionally slow rotator has a coarse convex shape and an unresolved alternative pole; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -478,7 +470,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -490,8 +482,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7072,
-          "sha256": "d345bd0c615324040c9ff2b0162e0de6a5b97452f22b8dfcdbc5f646c0197a85",
+          "bytes": 6924,
+          "sha256": "921290a7d3692ed30be9c79873d0fbd0612647927521afd4abb04c1c54762563",
           "verification": "bytes-verified"
         }
       ],

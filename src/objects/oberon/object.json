@@ -48,7 +48,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3e47b5cd546cc90ee38740673d64a03658f53206c12585b07136634792a99ed3"
+          "sha256": "31003eeda76a6bfb69d54e7cd6b14140d91d18097cc8c718961b374974e0705a"
         },
         {
           "id": "solar-system",
@@ -139,7 +139,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2dd0a07ac7bbcef3f163b2ac9207b0b51dea3cc2e7c3d0de6b75d78657c9b473"
+        "sha256": "9da53f2c31f07a494da7b514524b4e1517edd9f2861e570db5ae7c3a461bb317"
       }
     },
     "catalog": {
@@ -147,7 +147,7 @@
       "classification": "satellite",
       "color": "#9f978e",
       "distanceAu": 19.2,
-      "description": "Explore Oberon in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.",
+      "description": "Uranus's second-largest moon, heavily cratered and about half ice, half rock.",
       "systemName": "Solar System",
       "order": 451,
       "context": {
@@ -158,6 +158,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "7b1e49fd93e392139fad137c9df4c8eb4549f71ac1d8b3033580a1068a843729"
+    "sha256": "9d40bcd30f45fb5dddeef71f8b2ca972c761dc352c78f7b849ee75357da6804e"
   }
 }

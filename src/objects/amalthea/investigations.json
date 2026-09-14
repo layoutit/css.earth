@@ -17,6 +17,155 @@
           "commit": "4fea925cce611d30704d68df60d91df92596b87c"
         }
       ]
+    },
+    {
+      "id": "galileo-selected-frames",
+      "subject": "Selected Galileo SSI detector frames",
+      "status": "included",
+      "finding": "C0420626379 (green), C0420652501, C0512324200 and C0532888100 (clear) supply the retained coarse Monochrome view. Native DN, fitted overlap levels and approximate limb registration do not establish calibrated albedo, color or independently registered surface features.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/amalthea/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/amalthea/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "stooke-radius-grid",
+      "subject": "Stooke j5amalthea.tab radius grid",
+      "status": "included",
+      "finding": "The 5-degree west-positive, planetocentric radius grid supplies shape and Elevation relative to 83.5 km. It corrects the historical 315° west bulge but has no Galileo refinement. Modeled unseen regions and exaggerated facets are not local altimetry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/amalthea/README.md",
+        "https://doi.org/10.26033/yt84-5y91"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "galileo-survey-rejections",
+      "subject": "Corrupted and duplicate Galileo SSI observations",
+      "status": "excluded",
+      "finding": "The documented survey inspected available SSI entries and excluded repeated/nearby coverage and several December 1996 frames with sparse corrupted blocks. The retained account does not name those corrupted frame IDs; no precise frame-level identity is invented in this consolidation.",
+      "revisitWhen": "A recoverable original frame adds useful independent coverage without the documented corruption; the original survey must identify its exact product before reconsideration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/amalthea/README.md",
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "galileo-multiband-sequences",
+      "subject": "September and November 1996 multiband sequences",
+      "status": "deferred",
+      "finding": "Original green/violet/756 nm and later multiband detector frames were inspected. Tens-of-pixels discs, differing gains/exposures and noisy backgrounds did not yield qualified color registration or radiometric normalization. Raw stacking is not adopted.",
+      "revisitWhen": "A calibrated multiband reconstruction establishes independent registration and useful common support at native detector resolution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/amalthea/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pia01626-composite",
+      "subject": "NASA PIA01626 color comparison",
+      "status": "excluded",
+      "finding": "The display composite is useful color context but lacks sufficient camera-band calibration and registration provenance for a mapped photographic lens.",
+      "revisitWhen": "A primary release supplies original bands, calibration and body-fixed camera geometry for controlled reconstruction.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/amalthea/README.md",
+        "https://www.jpl.nasa.gov/images/pia01626-comparison-of-amalthea-to-io/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "stooke-shaded-relief",
+      "subject": "Stooke hand-drawn shaded-relief maps",
+      "status": "excluded",
+      "finding": "The interpretive drawings are not observational image mosaics and are not painted as photographic terrain.",
+      "revisitWhen": "A separately documented observed map supplies original pixels, coordinates and coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/amalthea/README.md",
+        "https://sbnarchive.psi.edu/pds3/non_mission/EAR_A_3_RDR_STOOKEMAPS_V1_0/maps/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "thomas-shape-search",
+      "subject": "Thomas shape archive and refined Galileo mesh search",
+      "status": "unresolved",
+      "finding": "The examined Thomas archive target list does not include Amalthea. No alternative downloadable refined Galileo mesh was qualified; the selected Stooke grid remains distinct from that search result.",
+      "revisitWhen": "A primary numerical Amalthea mesh is released with its coordinate frame, units and reconstruction evidence.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/amalthea/README.md",
+        "https://sbn.psi.edu/pds/resource/oshape.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "juno-and-mapped-products",
+      "subject": "Juno detections and complementary mapped products",
+      "status": "unresolved",
+      "finding": "The inspected Juno detections add context without improving Galileo surface detail. No registered composition, thermal or local-altimetry dataset was qualified in the reviewed releases.",
+      "revisitWhen": "A cited release supplies resolved Amalthea measurements with sufficient body-fixed coverage for a distinct lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/amalthea/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "southern-bright-strip",
+      "subject": "Unidentified southern bright strip and angle-cut trial",
+      "status": "unresolved",
+      "finding": "A saturated-looking white strip remains near the south pole and its source frame is not identified. Reducing incidence and emission limits to 70° retained the strip and reduced coverage from 71.0% to 67.5%; the existing 72°/75° limits remain. This failed trial does not establish a physical bright surface feature.",
+      "revisitWhen": "Source-pixel attribution identifies the strip and a source-backed calibration or coverage correction removes the artifact without withholding unrelated observations.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/amalthea/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/amalthea/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
     }
   ]
 }

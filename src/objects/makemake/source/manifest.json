@@ -285,8 +285,8 @@
     {
       "id": "makemake-object-content",
       "path": "content/object.json",
-      "expectedBytes": 9490,
-      "expectedSha256": "be647520d78e5ad638e813468ffb925e90e135a728a812403df14402ceba3305",
+      "expectedBytes": 9111,
+      "expectedSha256": "12c3da160fb915cf57f57e591ea5658b14d8e085a26b797ddb90862803855fa6",
       "origin": "Repository-authored Makemake object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -298,7 +298,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     }
   ],

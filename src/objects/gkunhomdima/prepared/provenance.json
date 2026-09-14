@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "21d3c81467d113f45deab1dc95671b677446db977dc09cf3d8cec90ee2ef64f6"
+    "sha256": "942782d22abed7f627a42a9573bd2f5617ace9ab22a6aebc7bf5098072187f91"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0587e85919d415a69ee81b9e4430729d9d5a666ec96030814b85b2a7729b246b",
+      "sha256": "ebdeedb8fa1b14f7024dd61a5e81eff9894978043b23f2ec704ff68aa81b8702",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "gkunhomdima",
         "displayName": "Gǃkúnǁʼhòmdímà",
         "panel": {
-          "introduction": "A distant dwarf-planet candidate with a measured occultation silhouette. This published spheroidal model combines the occultation with its satellite’s orbit; local terrain is unresolved.",
           "facts": [
             {
               "id": "shape",
@@ -158,9 +157,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model. J2000 pole prior RA 20.6 ± 1.5°, DEC 46.25 ± 0.32° from satellite-orbit alignment. Arbitrary meridian; 11.05 h photometric period has aliases and is not installed as a qualified sidereal spin. The grid marks unmapped terrain.",
-              "title": "Published occultation shape model",
-              "detail": "Source shape · unmapped surface grid",
               "thumbnail": "/scenes/gkunhomdima/gkunhomdima-model-thumbnail.webp",
               "surface": "gkunhomdima-model-surface@2x.webp",
               "poles": "gkunhomdima-model-poles@2x.webp",
@@ -168,7 +164,9 @@
                 "id": "published-shape",
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/2605.28636"
-              }
+              },
+              "notes": "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model. J2000 pole prior RA 20.6 ± 1.5°, DEC 46.25 ± 0.32° from satellite-orbit alignment. Arbitrary meridian; 11.05 h photometric period has aliases and is not installed as a qualified sidereal spin. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -297,7 +295,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -306,8 +304,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0587e85919d415a69ee81b9e4430729d9d5a666ec96030814b85b2a7729b246b",
-      "bytes": 3663,
+      "sha256": "ebdeedb8fa1b14f7024dd61a5e81eff9894978043b23f2ec704ff68aa81b8702",
+      "bytes": 3356,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -322,9 +320,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model. J2000 pole prior RA 20.6 ± 1.5°, DEC 46.25 ± 0.32° from satellite-orbit alignment. Arbitrary meridian; 11.05 h photometric period has aliases and is not installed as a qualified sidereal spin. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -364,7 +360,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -376,8 +372,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8636,
-          "sha256": "043ebc0f2e0a669559633f8cc732e590029eed764348e2d506265daff713354c",
+          "bytes": 8430,
+          "sha256": "b17d6e2a16a5b5661f49a2f98f8f111a4172bb1a8757da9538a6607a56364226",
           "verification": "bytes-verified"
         }
       ],

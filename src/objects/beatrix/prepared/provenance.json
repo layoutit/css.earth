@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cd5425eede4717c92d16b8536766af01768a3f48545343c298a596c4be9f7024"
+    "sha256": "9bc58cd202b9cbad6df59e93eeac53a5d1f912d62c8d8072112ceddca9ba4408"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -149,14 +149,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "de5753bbcf12b3f8da677acd57aa69d886280d5fc45b603dfb42117dae7f7843",
+      "sha256": "ee9f53f7479185e2f21bd1494551b7358f8aeaf8aff822ed38e831b9f2af01bb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "beatrix",
         "displayName": "Beatrix",
         "panel": {
-          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -220,8 +219,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex light-curve reconstruction with approximate thermal size: 87.42 km effective diameter (catalog ±0.84 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
-              "title": "DAMIT shape model",
               "thumbnail": "/scenes/beatrix/beatrix-shape-thumbnail.webp",
               "surface": "beatrix-shape-surface@2x.webp",
               "poles": "beatrix-shape-surface@2x.webp",
@@ -230,13 +227,11 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 43.71 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/beatrix/beatrix-elevation-thumbnail.webp",
               "surface": "beatrix-elevation-surface@2x.webp",
               "poles": "beatrix-elevation-surface@2x.webp",
@@ -258,7 +253,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6195",
                 "image": "/scenes/beatrix/beatrix-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 43.71 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -388,7 +383,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -397,8 +392,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "de5753bbcf12b3f8da677acd57aa69d886280d5fc45b603dfb42117dae7f7843",
-      "bytes": 10420,
+      "sha256": "ee9f53f7479185e2f21bd1494551b7358f8aeaf8aff822ed38e831b9f2af01bb",
+      "bytes": 9859,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -413,9 +408,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 43.71 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -457,9 +450,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex light-curve reconstruction with approximate thermal size: 87.42 km effective diameter (catalog ±0.84 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -494,7 +485,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -506,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7311,
-          "sha256": "ea2dcf3a593d99f85557d1b5e6b18f7d0369be5a00557d6aa9303221fbdecf51",
+          "bytes": 7215,
+          "sha256": "9e62394b4f92d958dab5438f9944fd5d38ad3f1a8e8c5f3af6fdda0160068ee7",
           "verification": "bytes-verified"
         }
       ],

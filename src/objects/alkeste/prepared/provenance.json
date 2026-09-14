@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7259eb7c9d5b3583d0b7a7c323fa384a2c4500ff323baf2abe92fb7fbbf1fe0c"
+    "sha256": "637762321bb534ab8c7a9f59b0f06d54bf1ed4e2ac18eb7d1a6001b76a9f2074"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -149,14 +149,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a96ea749d5170f6df0946962d46491ed7d90a9ee6ed4c0419721bf1c3a732fd0",
+      "sha256": "17fb20395001c9da5fa1810db0d8a0dd62f353a4cccd3117b3a6c5c0897ad687",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "alkeste",
         "displayName": "Alkeste",
         "panel": {
-          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -220,8 +219,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex light-curve reconstruction with approximate thermal size: 81.39 km effective diameter (catalog ±0.93 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "DAMIT 4511 shape model",
               "thumbnail": "/scenes/alkeste/alkeste-shape-thumbnail.webp",
               "surface": "alkeste-shape-surface@2x.webp",
               "poles": "alkeste-shape-surface@2x.webp",
@@ -230,13 +227,11 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 40.695 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "DAMIT 4511 radial height",
               "thumbnail": "/scenes/alkeste/alkeste-elevation-thumbnail.webp",
               "surface": "alkeste-elevation-surface@2x.webp",
               "poles": "alkeste-elevation-surface@2x.webp",
@@ -258,7 +253,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4511",
                 "image": "/scenes/alkeste/alkeste-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 40.695 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -388,7 +383,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -397,8 +392,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a96ea749d5170f6df0946962d46491ed7d90a9ee6ed4c0419721bf1c3a732fd0",
-      "bytes": 9775,
+      "sha256": "17fb20395001c9da5fa1810db0d8a0dd62f353a4cccd3117b3a6c5c0897ad687",
+      "bytes": 9167,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -413,9 +408,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 40.695 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -457,9 +450,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex light-curve reconstruction with approximate thermal size: 81.39 km effective diameter (catalog ±0.93 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -494,7 +485,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -506,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6615,
-          "sha256": "56b84457db43a9485412b84b70a4f8cbee54a6b01ce0f61a4899d2fffc1016b3",
+          "bytes": 6519,
+          "sha256": "9a9d17c2e4ae81c1c054cd89889ed49a00afb9e7820e5c4dd5581485f3c94cdc",
           "verification": "bytes-verified"
         }
       ],

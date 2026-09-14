@@ -2,7 +2,7 @@
 
 ## Sources
 
-- **Monochrome:** 7 calibrated Cassini ISS NAC photographs, projected using the measured camera records accompanying this moon’s PDS shape. Clear-filter images calibrated to I/F by CISSCAL.
+- **Monochrome:** 6 calibrated Cassini ISS NAC photographs, projected using the measured camera records accompanying this moon’s PDS shape. Clear-filter images calibrated to I/F by CISSCAL.
 
 - **False color:** Cassini ISS NAC IR3, green and UV3 photographs, encoded as red, green and blue after each frame is projected with its released PDS shape-camera record. This is false color, not natural color or a calibrated albedo map.
 
@@ -59,17 +59,7 @@ Navigation portraits and small dedicated minimaps are derived from the prepared 
 
 ## Dataset survey
 
-- Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
-
-- **Monochrome extension:** Clear frame N1831468631_1 extends the 2016 released-table sweep beyond the former N1831467723_1 endpoint, through the table’s original camera; no shape, topology or renderer change is involved. Its neighbour N1831469816_1 is excluded: it sees Telesto as a 147° phase crescent, every sample lies at 79–80° incidence, its median value is 0.151 against 0.54–0.74 in the other frames, and no overlap reaches it to set a level.
-
-- **Investigated, not included as an observed map:** legacy Voyager/Stooke maps and global shaded-relief illustrations. They do not offer the combination of Cassini detail and measured camera registration used here; drawings are not observational textures.
-
-- **Filtered imaging:** IR3 N1831466962_1, GRN N1831466394_1 and UV3 N1831467236_1 are CISSCAL 4.0beta calibrated, losslessly compressed ISS NAC products. Their native labels state 1024 × 1024, 32-bit PC_REAL pixels in I/F and identify the filters. The [2018 PDS camera table](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/telesto_document.pdf) supplies each frame’s source camera. The display maps IR3/GRN/UV3 to red/green/blue without a white balance, phase correction or natural-color claim. NASA’s [PIA07697 color composite](https://science.nasa.gov/resource/a-closer-look-at-telesto-false-color/) is a perspective illustration and is not used here.
-
-- **Spectroscopy:** [Cassini spectra and photometry of small inner satellites](https://www.usgs.gov/publications/cassini-spectra-and-photometry-025-51-mm-small-inner-satellites-saturn) and [small-moon photometric analyses](https://doi.org/10.3847/1538-3881/ab659d) inform interpretation. Disk-integrated measurements do not supply a spatially resolved composition texture.
-
-- **Facts and imagery reference:** [NASA Telesto](https://science.nasa.gov/saturn/moons/telesto/), [JPL satellite parameters](https://ssd.jpl.nasa.gov/sats/phys_par/) and the PDS shape document. No atmosphere or internal cross section is claimed.
+Recorded source selections, alternatives and failed trials are in the [investigation ledger](investigations.json).
 
 ## Orbit and orientation limits
 

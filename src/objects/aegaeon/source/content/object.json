@@ -4,7 +4,6 @@
   "id": "aegaeon",
   "displayName": "Aegaeon",
   "panel": {
-    "introduction": "Aegaeon is a tiny, elongated moon embedded in Saturn’s G-ring arc. Cassini images measured its outline; impacts on the moon can supply dust to the arc.",
     "facts": [
       {
         "id": "radius",
@@ -49,9 +48,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
-        "title": "Approximate shape model",
-        "detail": "Measured shape",
         "thumbnail": "/scenes/aegaeon/aegaeon-model-thumbnail.webp",
         "surface": "aegaeon-model-surface@2x.webp",
         "poles": "aegaeon-model-poles@2x.webp",
@@ -60,7 +56,8 @@
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/1912.09192"
         },
-        "summary": "Shape based on Cassini's measured dimensions. Gray grid: no imagery; the model does not resolve local terrain."
+        "notes": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

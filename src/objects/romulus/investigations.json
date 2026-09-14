@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "romulus",
+  "entries": [
+    {
+      "id": "occultation-2014",
+      "subject": "Berthier 2014 projected-limb solution",
+      "status": "included",
+      "finding": "The selected projected equivalent diameter is 23.1±0.7 km and ellipse ratio 2.7±0.3. The authored model assumes unseen depth equals the short axis; this is one admissible three-dimensional interpretation, not a unique measured shape.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/romulus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/romulus/source/measurements.json",
+        "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "occultation-reanalysis",
+      "subject": "Herald 2020 correlated ellipse alternatives",
+      "status": "deferred",
+      "finding": "The retained record notes strong covariance between axes and orientation and an alternative 25±1 km diameter. The package continues to display its explicitly illustrative 2014 family member.",
+      "revisitWhen": "A joint chord and covariance analysis supports choosing or comparing another documented shape-family member.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/romulus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/romulus/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "sylvia-2021-orbit",
+      "subject": "2021 Sylvia-system orbit and Miriade 2024 comparison",
+      "status": "included",
+      "finding": "The fixed-epoch orbit uses the 2021 system parameters. The retained newer-solution comparison differs by about 42 milliarcseconds at the scene epoch and 23–63 over six checks; it supports approximate context, not reproduction of the paper fit RMS.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/romulus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/romulus/source/orbit/published-parameters.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/romulus/source/validation/projection-checks.json",
+        "https://www.aanda.org/articles/aa/pdf/2021/06/aa40342-21.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "primary-mesh-and-terrain",
+      "subject": "Sylvia primary mesh and unresolved companion images",
+      "status": "excluded",
+      "finding": "The historical review distinguishes the released primary Sylvia mesh from its companion and the Romulus occultation silhouette from terrain imagery. Neither supplies a measured Romulus surface map.",
+      "revisitWhen": "A Romulus-specific numerical surface or controlled resolved observation is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/romulus/README.md",
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/romulus/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

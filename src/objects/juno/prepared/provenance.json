@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "65d899c9ba30abbc81f1f64609588b0ca943fef6ff7e4594a3e3398c92e1946d"
+    "sha256": "3375027bc15260a0f9fc00df660c1e94ce4a6434fbed51d1720dd88b0afdd4ba"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a4b6689c0df304a8c1519ef86d826c9eab4fb4891062a318fd3612a170158f3f",
+      "sha256": "89dc119c16d40040f671dd53d8d9e2d04a56cc474b027bbcb6624105b59cd541",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +167,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Juno is an irregular main-belt asteroid with broad departures from an ellipsoid. This model combines light-curve constraints with resolved VLT/SPHERE observations. Explore its published shape and radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -199,8 +198,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "VLT/SPHERE shape model",
-              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/juno/juno-shape-thumbnail.webp",
               "surface": "juno-shape-surface@2x.webp",
               "poles": "juno-shape-surface@2x.webp",
@@ -209,14 +206,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape made from VLT/SPHERE observations. Gray grid: no surface imagery; lighting shows the model's form."
+              "notes": "VLT/SPHERE shape model",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/juno/juno-elevation-thumbnail.webp",
               "surface": "juno-elevation-surface@2x.webp",
               "poles": "juno-elevation-surface@2x.webp",
@@ -238,8 +233,7 @@
                 "sourceUrl": "https://observations.lam.fr/astero/3Dshape/3_Juno_mpcd.obj",
                 "image": "/scenes/juno/juno-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -364,7 +358,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -373,8 +367,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a4b6689c0df304a8c1519ef86d826c9eab4fb4891062a318fd3612a170158f3f",
-      "bytes": 6291,
+      "sha256": "89dc119c16d40040f671dd53d8d9e2d04a56cc474b027bbcb6624105b59cd541",
+      "bytes": 5591,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -389,9 +383,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -433,9 +425,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "VLT/SPHERE shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -470,7 +460,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -482,8 +472,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3729,
-          "sha256": "cd7e909a9b5c3369bb58af680c9b952894af7b647855338a8151a05479472921",
+          "bytes": 3456,
+          "sha256": "8ae6cf64fb5831ae263bb433927a3bfc7f3143d6ff0455aecc87e9158569332e",
           "verification": "bytes-verified"
         }
       ],

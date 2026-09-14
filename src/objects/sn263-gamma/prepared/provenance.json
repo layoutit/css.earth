@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a8539d32ba043f7205f393a2086a28a30c67214c9a3daa17716387833026d1e5"
+    "sha256": "7eef31db6661546e477eb1bfb2c40e37d8c9589b6442e458f9497346236bf3ea"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -100,14 +100,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "03dce908df25238e7dfd73bcae5ba829233366bc63cce6cca2e88d7ace02f45e",
+      "sha256": "8a3b6c0e54a8e1bf40fe217b759278cc9cc50b4cc5abb9de884f4ffcb1411f87",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "sn263-gamma",
         "displayName": "2001 SN263 Gamma",
         "panel": {
-          "introduction": "2001 SN263 Gamma is the smaller, inner moon of the triple asteroid system 2001 SN263. Published radar shape of the smaller, inner moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative. Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured.",
           "facts": [
             {
               "id": "parent",
@@ -163,9 +162,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "detail": "Radar",
-              "title": "Radar shape",
-              "description": "Published radar shape of the smaller, inner moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative.",
               "thumbnail": "/scenes/sn263-gamma/sn263-gamma-shape-thumbnail.webp",
               "surface": "sn263-gamma-shape-surface@2x.webp",
               "poles": "sn263-gamma-shape-poles@2x.webp",
@@ -173,7 +169,8 @@
                 "id": "radar-shape",
                 "path": "../manifest.json",
                 "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591gamma.tab"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -296,7 +293,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -305,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "03dce908df25238e7dfd73bcae5ba829233366bc63cce6cca2e88d7ace02f45e",
-      "bytes": 4412,
+      "sha256": "8a3b6c0e54a8e1bf40fe217b759278cc9cc50b4cc5abb9de884f4ffcb1411f87",
+      "bytes": 3504,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -321,9 +318,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Published radar shape of the smaller, inner moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -358,7 +353,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -370,8 +365,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 12917,
-          "sha256": "bb47acd5d62dd26d6a54bad4575b41078c8e58cc8e746dff3e7cee2d1e5674e3",
+          "bytes": 12381,
+          "sha256": "b06e7cfc241e0edc7889a918d7bc71311dd414c068a8435ca4c85b021867f1f5",
           "verification": "bytes-verified"
         }
       ],

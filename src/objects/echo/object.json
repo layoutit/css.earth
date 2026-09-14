@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0f9eb5862dba8b7ba88f5b064f0f7625ec2e49bae1cb88f166ff2de5dfc0df95"
+          "sha256": "bd842d82754c7f3fdb8c9508bd82a652fb2e0af23406e1730a0f2d9f2572714c"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "da3d1ce174dc90df735adad2e0f94cd7505b9e0b53d9e1446ae9a2f56a51afce"
+        "sha256": "fc8fa02196c04af9da29b5617e1a7a2543e26bcc45f0a914ef80e8e56e935633"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3930398793911873,
-      "description": "Explore Echo in 3D with its published shape model and documented physical size scale.",
+      "description": "Stony main-belt asteroid, discovered in September 1860.",
       "systemName": "Solar System",
       "order": 378,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "0310a2a22a44028ae0e45d6eb0747378e7d92e1a562d38a3528de7e9d714c4a2"
+    "sha256": "2542c1aa37b2062fd18fbb821b083dee71d0a0b16f5cb52481c5b2d2a9a8521e"
   }
 }

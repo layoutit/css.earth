@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "13e3329ce80f23c167c51f82d55a5b0ac4d63dd210a40d49427fbe98b60a1979"
+    "sha256": "c135eeabea3436146b813e95667adbc94df593546821609303729dbc8a53f70a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "191e0628a0ca040390a8b886792d31ba79b4a42b6b0ce191635aa616b1247779",
+      "sha256": "25da2bfaa45f705b780cb2eed66bd714a1ecd011320da95b5c38179bcff8b6e9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "patroclus",
         "displayName": "Patroclus",
         "panel": {
-          "introduction": "Patroclus and Menoetius form a large Trojan binary that Lucy will visit in the trailing swarm. This published ellipsoid represents Patroclus alone. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "shape",
@@ -152,9 +151,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published primary-component ellipsoid combining occultation and light-curve constraints. Its full axes differ from the two-dimensional occultation limb and from the unresolved binary system's radiometric diameter. Full approximation dimensions: 127 × 117 × 98 km. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed. The grid marks unmapped terrain.",
-              "title": "Occultation shape approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/patroclus/patroclus-model-thumbnail.webp",
               "surface": "patroclus-model-surface@2x.webp",
               "poles": "patroclus-model-poles@2x.webp",
@@ -162,7 +158,8 @@
                 "id": "occultation-approximation",
                 "path": "../manifest.json",
                 "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -312,7 +309,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -321,8 +318,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "191e0628a0ca040390a8b886792d31ba79b4a42b6b0ce191635aa616b1247779",
-      "bytes": 3999,
+      "sha256": "25da2bfaa45f705b780cb2eed66bd714a1ecd011320da95b5c38179bcff8b6e9",
+      "bytes": 3246,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -337,9 +334,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published primary-component ellipsoid combining occultation and light-curve constraints. Its full axes differ from the two-dimensional occultation limb and from the unresolved binary system's radiometric diameter. Full approximation dimensions: 127 × 117 × 98 km. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -379,7 +374,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -391,8 +386,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6967,
-          "sha256": "be13362cf9ac80a82b87b61671aff36d0527570612c61be005ff53faa0bb0943",
+          "bytes": 6769,
+          "sha256": "1afb910936883521213a56d5dd6b33317054160c6e48690b01b1db67db4779f8",
           "verification": "bytes-verified"
         }
       ],

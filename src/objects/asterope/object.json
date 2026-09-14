@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "500221ecb1bbb6b72296be388e3b4a72f8414a53325ba123834c25a60eca9d33"
+          "sha256": "4916802f6a7badac246f0293c87af209ef820a6584a67906da20cc7c47f607da"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "be8f55d5ff49ccb58832d81627fe32f5cf49595099e899ed9bf3e661bd816f7f"
+        "sha256": "ed8ed54d2b973f9c146b3cc3b285241a070a24be2b81a69c518ac09b9c24cca8"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.659113942812149,
-      "description": "Explore Asterope in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in May 1883.",
       "systemName": "Solar System",
       "order": 328,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "44377ff7eea8ac51139bc9ae8e928d7505aa2287ee8e3f6d69a69773504bd5e1"
+    "sha256": "f1bda35459b8703a90a5b01d0f629a9d3ae5ff5c87ff56697d24c3cd6d2f1c81"
   }
 }

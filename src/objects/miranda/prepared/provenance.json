@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c6ac81dc0d97c69704223769846269962876d66eac23a95aa4ff2bc45a2da38b"
+    "sha256": "e8add3af052ea371dbe8b01b7a72a9e6d318a566b08ed8413bd09c9c4f1b37f3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -324,14 +324,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3e7037e99ecaf6f185da6abb191cef8c435048e3229bf49331eba12f2908164c",
+      "sha256": "bd34d98d07f9b0c8c55e7df9c7f10d6cf35396cf14906f07523dcb54d704d777",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "miranda",
         "displayName": "Miranda",
         "panel": {
-          "introduction": "Miranda is Uranus’s smallest major moon. Voyager 2 revealed huge fault scarps and three striking regions of ridges and grooves called coronae.",
           "facts": [
             {
               "id": "radius",
@@ -408,9 +407,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations.",
-              "title": "Monochrome mosaic",
-              "detail": "Corrected mosaic",
               "thumbnail": "miranda-lens-normal.webp",
               "surface": "miranda-normal.webp",
               "poles": "miranda-poles-normal.webp",
@@ -419,14 +415,12 @@
                 "path": "../manifest.json",
                 "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
               },
-              "summary": "Illumination is corrected, but cast shadows and image seams remain. Detail varies; the gray grid marks missing observations."
+              "notes": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
-              "title": "Stereo and shading terrain model",
-              "detail": "Shaded relief",
               "thumbnail": "miranda-lens-elevation.webp",
               "surface": "miranda-elevation.webp",
               "poles": "miranda-poles-elevation.webp",
@@ -470,15 +464,12 @@
                   ]
                 }
               },
-              "summary": "Height from stereo images and shading, relative to the source ellipsoid. Detail varies; gray grid: no measurements."
+              "notes": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
+              "noData": true
             },
             {
               "id": "geology",
               "label": "Geology",
-              "detail": "Historical map",
-              "description": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
-              "title": "Geologic map",
-              "summary": "Historical interpreted units; degree-scale registration limits. Gray grid: unmapped or conflicting units.",
               "thumbnail": "miranda-lens-geology.webp",
               "surface": "miranda-geology.webp",
               "poles": "miranda-poles-geology.webp",
@@ -602,7 +593,9 @@
                     "color": "#ffff00"
                   }
                 ]
-              }
+              },
+              "notes": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+              "noData": true
             }
           ]
         },
@@ -922,10 +915,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "3e7037e99ecaf6f185da6abb191cef8c435048e3229bf49331eba12f2908164c",
-      "bytes": 15332,
+      "sha256": "bd34d98d07f9b0c8c55e7df9c7f10d6cf35396cf14906f07523dcb54d704d777",
+      "bytes": 14572,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1040,9 +1033,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1097,9 +1088,7 @@
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1153,9 +1142,7 @@
       "selector": "/surfaces/2",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown."
-      ],
+      "limitations": [],
       "lensIds": [
         "geology"
       ],
@@ -1624,7 +1611,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1636,8 +1623,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7236,
-          "sha256": "9ffe5c0c0e68b83cbc806215bc6f99417303643ec9accd863bca8e93b19e78b4",
+          "bytes": 7074,
+          "sha256": "52c198eb8523b39bbb417c299f5afe7cffcf0f205bd65df4b6a0b8c404918d81",
           "verification": "bytes-verified"
         }
       ],

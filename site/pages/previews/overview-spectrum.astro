@@ -5,6 +5,7 @@ import '../../explorer-rail.css';
 import '../../maps-shell.css';
 import PlanetBodyOverview from '../../components/PlanetBodyOverview.astro';
 import content from '../../../src/objects/uranus/prepared/content.json';
+import text from '../../../src/objects/uranus/prepared/text.json';
 ---
 <!doctype html>
 <html lang="en">
@@ -14,7 +15,7 @@ import content from '../../../src/objects/uranus/prepared/content.json';
       <div class="preview-label">Overview card preview</div>
       <aside class="planet-sidebar">
         <div class="planet-card preview-card">
-          <PlanetBodyOverview objectId="uranus" title={content.title} introduction={content.introduction} />
+          <PlanetBodyOverview objectId="uranus" title={content.title} introduction={text.introduction.text} />
         </div>
       </aside>
     </main>

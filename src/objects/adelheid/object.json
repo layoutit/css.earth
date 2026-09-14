@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e35401a36731324bd3a642e21785326a2e22d796ab227ae1101666ea7cc4cca6"
+          "sha256": "d1985d73dc2aac896aa515fd6981bfee42d712147385ebb837a363d5babe3ef7"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cdee2e1a509d43c338456da0fb756f6f95056ecdfbcc9040576fe792b81d709e"
+        "sha256": "e0a20fd09699d5f45f581fb570d3171d4de2ba35e8d4b5686150ed2e88058dfc"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.118003623819272,
-      "description": "Explore Adelheid in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered on 17 April 1888 at Vienna.",
       "systemName": "Solar System",
       "order": 351,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "49f685ace016a013165b2ccfa2b02e3d0c5ca9a2849c2281bcd15fedd4b81407"
+    "sha256": "a708669c7e40d1a9029b3ceff482f8fdc50cfcb773771f411ca1d5979525f601"
   }
 }

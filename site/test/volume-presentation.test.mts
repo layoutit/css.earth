@@ -16,7 +16,7 @@ const provenance: Pick<ProvenanceDocument, 'objectId' | 'sources' | 'products'> 
 };
 const presentation = {
   schema: 'cssearth-volume-presentation@1', objectId: 'nebula', defaultLens: 'optical',
-  controls: ids.map(id => ({ id, label: id, title: `Observed nebula in ${id}`, description: 'Registered observation over the shared inferred field.',
+  controls: ids.map(id => ({ id, label: id, title: `Observed nebula in ${id}`, summary: 'Registered observation over the shared inferred field.',
     thumbnailUrl: `/scenes/nebula/${id}.webp`,
     texture: { url: `/scenes/nebula/${id}.webp`, width: 600, height: 400,
       attribution: { label: 'Observatory', url: 'https://example.test/source' } } })),

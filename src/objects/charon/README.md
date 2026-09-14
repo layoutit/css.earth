@@ -4,6 +4,8 @@ Charon combines New Horizons photographs, elevation, modeled Bond albedo and two
 
 ## Sources
 
+[Investigation ledger](investigations.json): recorded source decisions, evidence and conditions for revisiting them.
+
 | View or quantity | Source |
 | --- | --- |
 | Monochrome and elevation | [USGS LORRI/MVIC mosaic](https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_mosaic_300m) and [terrain model](https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m) |

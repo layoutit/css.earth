@@ -4,7 +4,6 @@
   "id": "melete",
   "displayName": "Melete",
   "panel": {
-    "introduction": "Nonconvex model constrained by resolved imaging. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Nonconvex model constrained by resolved imaging, 116 ± 5 km volume-equivalent diameter in the selected archive record. An alternative pole solution remains in the archive. Grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "DAMIT shape model",
         "thumbnail": "/scenes/melete/melete-shape-thumbnail.webp",
         "surface": "melete-shape-surface@2x.webp",
         "poles": "melete-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 58 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Shape-derived elevations",
         "thumbnail": "/scenes/melete/melete-elevation-thumbnail.webp",
         "surface": "melete-elevation-surface@2x.webp",
         "poles": "melete-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1851",
           "image": "/scenes/melete/melete-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 58 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

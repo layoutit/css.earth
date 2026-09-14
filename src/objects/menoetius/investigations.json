@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "menoetius",
+  "entries": [
+    {
+      "id": "buie-2015-ellipsoid",
+      "subject": "Buie occultation/lightcurve ellipsoid",
+      "status": "included",
+      "finding": "The selected full axes are 117 × 108 × 90 km, halved for the analytic model. They are a three-dimensional inference distinct from the observed 117.2 × 93 km projected limb; no independent axis errors are invented.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/menoetius/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/menoetius/source/measurements.json",
+        "https://www2.boulder.swri.edu/~buie/biblio/pub099.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "negative-chords",
+      "subject": "Discrepant negative occultation chords",
+      "status": "excluded",
+      "finding": "Ambiguous negative chords and unarchived tapes do not establish a crater or local void on Menoetius. No local shape depression is inferred.",
+      "revisitWhen": "Original timing/chord evidence resolves the discrepancy and supports a reproducible local feature.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/menoetius/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/menoetius/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jpl-82-orbit",
+      "subject": "JPL number 82 system placement and synchronous interpretation",
+      "status": "included",
+      "finding": "The fixed-epoch state uses its matching primary center. The 2024 orbital pole supplies an approximate synchronous spin axis; longitude is arbitrary and runtime extrapolation is disabled.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/menoetius/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/menoetius/source/validation/epoch-state.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/menoetius/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "optical-terrain",
+      "subject": "Occultation, lightcurves and artist surfaces",
+      "status": "excluded",
+      "finding": "The examined occultation/lightcurve material supports shape inference, not a measured surface texture. NASA artist models and the primary Patroclus parameters do not supply Menoetius terrain.",
+      "revisitWhen": "Actual resolved Menoetius imagery with qualified registration or a measured surface product is available.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/menoetius/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/menoetius/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

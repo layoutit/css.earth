@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ce4edea5d29a2797cf1c48151ce9cde2968915967a15a22a981aa44fb514173"
+    "sha256": "710b322851136c66aac6a06c0c0f21b7cb940f4992075a8775b94316331166d0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -156,7 +156,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "738d0e5ba469fc6423d8e5c4dce18a31bb9fcd8267f93b8fcfdb3945fa111195",
+      "sha256": "476b0270ae1e908854c1e8c60fd111917f0c83a1a90d8090d10289793e799a69",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -180,7 +180,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Callisto is Jupiter’s outermost large moon. Bright impact craters cover its ancient icy surface, which may conceal a deep ocean.",
           "facts": [
             {
               "id": "radius",
@@ -252,8 +251,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate.",
-              "title": "Global image mosaic",
               "thumbnail": "callisto-lens-normal.webp",
               "surface": "callisto-normal.webp",
               "poles": "callisto-poles-normal.webp",
@@ -261,14 +258,12 @@
                 "id": "usgs-voyager-galileo-global-1km",
                 "path": "../manifest.json"
               },
-              "detail": "Global mosaic",
-              "summary": "Source detail ranges from 400 m to 60 km per pixel. Photographed shadows and seams remain; the gray grid marks missing data."
+              "notes": "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate.",
+              "noData": true
             },
             {
               "id": "enhanced",
               "label": "Galileo color",
-              "description": "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate.",
-              "title": "Processed color mosaic",
               "thumbnail": "callisto-lens-enhanced.webp",
               "surface": "callisto-enhanced.webp",
               "poles": "callisto-poles-enhanced.webp",
@@ -276,8 +271,6 @@
                 "id": "galileo-pia03456-registered-color",
                 "path": "../manifest.json"
               },
-              "detail": "Partial processed color",
-              "summary": "May 2001 Galileo color over about 29% of the globe. Gray grid: unseen or withheld. Processed display colors, not albedo.",
               "falseColor": true,
               "legend": {
                 "kind": "categories",
@@ -312,13 +305,13 @@
                   "label": "Source detail",
                   "value": "About 8 km per pixel near the disk center"
                 }
-              ]
+              ],
+              "notes": "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate.",
+              "noData": true
             },
             {
               "id": "infrared",
               "label": "Infrared",
-              "description": "Galileo NIMS observations assign red, green and blue to 0.77, 2.25 and 3.66 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
-              "title": "Galileo NIMS spectral color",
               "thumbnail": "callisto-lens-infrared.webp",
               "surface": "callisto-infrared.webp",
               "poles": "callisto-poles-infrared.webp",
@@ -327,8 +320,9 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.17189/4sq6-x165"
               },
-              "detail": "NIMS spectral bands",
-              "falseColor": true
+              "falseColor": true,
+              "notes": "Galileo NIMS observations assign red, green and blue to 0.77, 2.25 and 3.66 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
+              "noData": true
             }
           ]
         },
@@ -665,10 +659,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "738d0e5ba469fc6423d8e5c4dce18a31bb9fcd8267f93b8fcfdb3945fa111195",
-      "bytes": 12032,
+      "sha256": "476b0270ae1e908854c1e8c60fd111917f0c83a1a90d8090d10289793e799a69",
+      "bytes": 11390,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -789,9 +783,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -846,9 +838,7 @@
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced"
       ],
@@ -903,9 +893,7 @@
       "selector": "/surfaces/2",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Galileo NIMS observations assign red, green and blue to 0.77, 2.25 and 3.66 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band."
-      ],
+      "limitations": [],
       "lensIds": [
         "infrared"
       ],
@@ -1374,7 +1362,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1386,8 +1374,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6802,
-          "sha256": "5aba6bda756f41d690916e3dba5388aaacc5eaa2cfeea88916c7d60bac6e1d5b",
+          "bytes": 6654,
+          "sha256": "d20e21f5cdfa4c9f2ab12d24e6b9589bed6582e3727d5de9185cf92b9659c88a",
           "verification": "bytes-verified"
         }
       ],

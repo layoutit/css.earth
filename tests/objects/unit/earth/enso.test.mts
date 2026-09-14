@@ -5,7 +5,7 @@ import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import sharp from 'sharp';
-import { murEnsoContent, parseMurCapabilities, parseMurColors, verifyMurTile, sha256 } from '../../../../tools/objects/paged-ellipsoid/mur-imagery.mts';
+import { murEnsoContent, murEnsoText, parseMurCapabilities, parseMurColors, verifyMurTile, sha256 } from '../../../../tools/objects/paged-ellipsoid/mur-imagery.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readCoraltempAnomaly, anomalyColor } from '../../../../tools/objects/paged-ellipsoid/sst-anomaly.mts';
@@ -39,6 +39,8 @@ test('extracts the NOAA issue date and status and preserves their separate sourc
   assert.throws(() => parseEnsoAdvisory('new format'), /format changed/);
   const content = shape({lenses:shape({controls:array(shape({id:text}))})})(JSON.parse((await readFile(resolve(source, 'content/object.json'))).toString('utf8')));
   assert.deepEqual(content.lenses.controls.find((lens: { id: string; }) => lens.id === 'enso'), murEnsoContent(scientific));
+  // The refresh writes the dated reader text beside object.json; the published entry is that builder's.
+  assert.deepEqual(JSON.parse(await readFile(resolve(source, '../text.json'), 'utf8')).datasets.enso, murEnsoText(scientific));
 });
 
 test('NOAA signed anomalies retain orientation, physical units, and the fill mask', async () => {

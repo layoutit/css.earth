@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d30c27dedefe97a750f585fbe1bb939c8b0a86e230b25e8a3bb6987f9ee2103f"
+    "sha256": "6c822a2bdcd3db1bf35251dd654f76030cc6726d2add3d5e2ba781e89f09315b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -149,14 +149,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e3d361705da66a7934cdf2671cbee4f1b08c3ff04b05ba2e1450bc2de7e10cb4",
+      "sha256": "d05bf2805919a2e79a9e342dafbcc2854551e9fc37a4e9447c880b807a04f8eb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "galatea-74",
         "displayName": "74 Galatea",
         "panel": {
-          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -220,8 +219,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex light-curve reconstruction with approximate thermal size: 113.09 km effective diameter (catalog ±2.15 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
-              "title": "DAMIT shape model",
               "thumbnail": "/scenes/galatea-74/galatea-74-shape-thumbnail.webp",
               "surface": "galatea-74-shape-surface@2x.webp",
               "poles": "galatea-74-shape-surface@2x.webp",
@@ -230,13 +227,11 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 56.545 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/galatea-74/galatea-74-elevation-thumbnail.webp",
               "surface": "galatea-74-elevation-surface@2x.webp",
               "poles": "galatea-74-elevation-surface@2x.webp",
@@ -258,7 +253,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6181",
                 "image": "/scenes/galatea-74/galatea-74-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 56.545 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -388,7 +383,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -397,8 +392,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e3d361705da66a7934cdf2671cbee4f1b08c3ff04b05ba2e1450bc2de7e10cb4",
-      "bytes": 12229,
+      "sha256": "d05bf2805919a2e79a9e342dafbcc2854551e9fc37a4e9447c880b807a04f8eb",
+      "bytes": 11614,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -413,9 +408,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 56.545 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -457,9 +450,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex light-curve reconstruction with approximate thermal size: 113.09 km effective diameter (catalog ±2.15 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -494,7 +485,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -506,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9027,
-          "sha256": "0d3504187959a3b6389891522ded8234e39eca44e22a81e1fdb9e9a0f566e21d",
+          "bytes": 8931,
+          "sha256": "92aceb2390106ba70bcef2e2db6d237649f93df14df3ca42fba8df42027782d7",
           "verification": "bytes-verified"
         }
       ],

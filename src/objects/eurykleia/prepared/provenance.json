@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "181eb0b60686475d150c4f277e5fa7c6d11d51d9e143e6d69e0f04614083e66e"
+    "sha256": "94535ce6bd86afedb3acb44e36453dfcc4e9c0d0415d2fbd87e550fe483f3cc8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -149,14 +149,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6d7434d043f54b37f4da610ce1bd8b235df0f4b55b69c67a8580216ffd416d07",
+      "sha256": "4e3d7155e640f114faa4284c18d53b60dcd10806a4bb40159c514171294f0241",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "eurykleia",
         "displayName": "Eurykleia",
         "panel": {
-          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -220,8 +219,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range 78–98 km). The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "DAMIT 3102 shape model",
               "thumbnail": "/scenes/eurykleia/eurykleia-shape-thumbnail.webp",
               "surface": "eurykleia-shape-surface@2x.webp",
               "poles": "eurykleia-shape-surface@2x.webp",
@@ -230,13 +227,11 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 43.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "DAMIT 3102 radial height",
               "thumbnail": "/scenes/eurykleia/eurykleia-elevation-thumbnail.webp",
               "surface": "eurykleia-elevation-surface@2x.webp",
               "poles": "eurykleia-elevation-surface@2x.webp",
@@ -258,7 +253,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3102",
                 "image": "/scenes/eurykleia/eurykleia-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 43.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -388,7 +383,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -397,8 +392,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6d7434d043f54b37f4da610ce1bd8b235df0f4b55b69c67a8580216ffd416d07",
-      "bytes": 10099,
+      "sha256": "4e3d7155e640f114faa4284c18d53b60dcd10806a4bb40159c514171294f0241",
+      "bytes": 9639,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -413,9 +408,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 43.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -457,9 +450,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range 78–98 km). The grid marks unavailable imagery; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -494,7 +485,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -506,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7068,
-          "sha256": "66961e7dde181154d949d80fffd688aac7347e027629ab2a7c0430b7748108ca",
+          "bytes": 6972,
+          "sha256": "ddc0ce34f3a466189545bc178f5deaad18e0703fd8cbb0c146a76eb9be931b28",
           "verification": "bytes-verified"
         }
       ],

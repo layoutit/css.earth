@@ -13,6 +13,8 @@
 | Infrared and ice absorption | [Scipioni/Combe VIMS collection](https://doi.org/10.17189/ctqe-ta30) | Infrared is false color. Absorption is a spectral indicator, not ice percentage, grain size or temperature. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/RHEA/target) Rhea centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Evidence
 
 The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.

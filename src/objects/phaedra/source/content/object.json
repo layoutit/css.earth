@@ -4,7 +4,6 @@
   "id": "phaedra",
   "displayName": "Phaedra",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 64.08 km (catalog ±0.77 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery.",
-        "title": "DAMIT 304 shape model",
         "thumbnail": "/scenes/phaedra/phaedra-shape-thumbnail.webp",
         "surface": "phaedra-shape-surface@2x.webp",
         "poles": "phaedra-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 32.04 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 304 radial height",
         "thumbnail": "/scenes/phaedra/phaedra-elevation-thumbnail.webp",
         "surface": "phaedra-elevation-surface@2x.webp",
         "poles": "phaedra-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/304",
           "image": "/scenes/phaedra/phaedra-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 32.04 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

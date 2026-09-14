@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e2b51c0dac741f37d9d0093ba55d04be22f54a3b94a66babbe27264f09c21493"
+    "sha256": "5e5f3e37cd68c51cf3cc18f90be2e37b0c977fe5238b8f8b03c32664b1ebbed1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0933e0920cd8203260f8aab69b46e7e75fed0f5beb32d41f902cf059014aa4da",
+      "sha256": "4e07415f500d242ca342e462341d3a219ce7646b9bc8780fe68707a7d8aa93ec",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "mani",
         "displayName": "Máni",
         "panel": {
-          "introduction": "Formerly 2002 MS4, Máni has an outline measured through many stellar occultations. One event revealed a large depression along its edge, but its global terrain and three-dimensional shape remain unresolved.",
           "facts": [
             {
               "id": "shape",
@@ -158,9 +157,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Silhouette-constrained oblate approximation: the observed 824 × 770 km projected ellipse is represented by full axes 824 × 824 × 770 km. The equal equatorial depth and equator-on interpretation are assumptions; true flattening may be larger. Illustrative pole RA 0°, declination 90° and arbitrary meridian; the occultation position angle does not determine an inertial spin pole. The grid marks unmapped terrain.",
-              "title": "Occultation-constrained approximation",
-              "detail": "Inferred shape · unmapped surface grid",
               "thumbnail": "/scenes/mani/mani-model-thumbnail.webp",
               "surface": "mani-model-surface@2x.webp",
               "poles": "mani-model-poles@2x.webp",
@@ -168,7 +164,9 @@
                 "id": "published-shape",
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/2308.08062"
-              }
+              },
+              "notes": "Silhouette-constrained oblate approximation: the observed 824 × 770 km projected ellipse is represented by full axes 824 × 824 × 770 km. The equal equatorial depth and equator-on interpretation are assumptions; true flattening may be larger. Illustrative pole RA 0°, declination 90° and arbitrary meridian; the occultation position angle does not determine an inertial spin pole. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -303,7 +301,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -312,8 +310,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0933e0920cd8203260f8aab69b46e7e75fed0f5beb32d41f902cf059014aa4da",
-      "bytes": 3927,
+      "sha256": "4e07415f500d242ca342e462341d3a219ce7646b9bc8780fe68707a7d8aa93ec",
+      "bytes": 3595,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -328,9 +326,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Silhouette-constrained oblate approximation: the observed 824 × 770 km projected ellipse is represented by full axes 824 × 824 × 770 km. The equal equatorial depth and equator-on interpretation are assumptions; true flattening may be larger. Illustrative pole RA 0°, declination 90° and arbitrary meridian; the occultation position angle does not determine an inertial spin pole. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -370,7 +366,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -382,8 +378,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4905,
-          "sha256": "4318de190a36e3b0334d70cc46f541f938b31d4a9e0b9b5d50e87071a138f59a",
+          "bytes": 4680,
+          "sha256": "1fba9bdf6a2bee192581ac85b57d630fe617dae403aa5ab80e39bf4adc4561f3",
           "verification": "bytes-verified"
         }
       ],

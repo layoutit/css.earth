@@ -16,7 +16,7 @@
 
 - Frozen historical Aegaeon pole from the mission BPC at 2015-12-19T12:32:14.886 UTC, arbitrary display meridian; not a current spin prediction. This is distinct from the orbital position, which uses JPL Horizons samples over 2020–2032 and the shared fitted ellipse plus prepared slow-longitude libration terms. Independent fractional-day reference epochs measure fit residuals, not a universal accuracy bound; extrapolation outside the fitted interval is not qualified.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 ## Methods and source notes
 
@@ -33,15 +33,9 @@ Physical scale uses the volume-equivalent radius 0.327106631018859 km. The 5° r
 
 The UI says Measured shape; this does not imply mapped terrain.
 
-## Source survey
+## Investigation record
 
-- This is not a claim that resolved Aegaeon imagery does not exist.
-
-- Published photometry and visible spectra in Hedman et al. constrain integrated brightness; they are not additional spatial lenses. Table 27 multicolor frames remain a possible later source if registration is resolved.
-
-- [PDS Saturn shape release](https://doi.org/10.26033/ewy3-jy61): no body-specific deliverable for this target was qualified for this package; the measured-axis source above owns the approximation.
-
-- No qualified DEM, geology, or mapped composition product was found in the inspected releases and cited study. No artificial terrain or dust arc is added.
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json), including what would reopen each decision.
 
 ## Orientation, position and delivery
 

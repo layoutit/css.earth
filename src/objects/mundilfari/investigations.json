@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "mundilfari",
+  "entries": [
+    {
+      "id": "lightcurve-ellipsoid",
+      "subject": "Mundilfari lightcurve-constrained display ellipsoid",
+      "status": "included",
+      "finding": "The delivery uses the published 1.43:1 minimum equatorial ratio and 3.5 km reference radius as an equal-short-axis display ellipsoid. The source defines a lower-limit photometric constraint, not a recovered surface.",
+      "evidence": [
+        "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-iss-photometry",
+      "subject": "Mundilfari Cassini ISS photometry",
+      "status": "included",
+      "finding": "Cassini ISS and the Mundilfari observation record supply the disk-integrated brightness and elongation evidence used by the bounded shape model. They are not a registered photographic surface or spatial colour lens.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "native-inversion-mesh",
+      "subject": "Potential native Mundilfari convex inversion mesh",
+      "status": "unresolved",
+      "finding": "The reviewed 2026 report describes calculated Saturnian models and papers in preparation, but did not provide a downloadable Mundilfari mesh. The authored approximation is retained without claiming that a native mesh is absent.",
+      "revisitWhen": "A released Mundilfari mesh with a documented body frame, method and reuse route can be compared with this approximation.",
+      "evidence": [
+        "https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf",
+        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "mapped-surface-route",
+      "subject": "Mundilfari registered imagery, terrain and composition routes",
+      "status": "excluded",
+      "finding": "The reviewed Cassini and author sources qualify no registered image map, DEM, geology layer or spatial composition product for Mundilfari. Integrated observations remain separate from the explicit missing-data grid.",
+      "revisitWhen": "A body-specific registered image, terrain, geology or spatial-composition release can support a separately qualified lens.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "source-reconciliation",
+      "subject": "Mundilfari source reconciliation",
+      "status": "included",
+      "finding": "Older 122-target overview nominal diameter 6.8 km differs from current Table 1C rounding/inputs. Adopt the individual source page’s radius 3.5 km and retain quoted diameter range; do not mix them as precise measurements.",
+      "evidence": [
+        "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

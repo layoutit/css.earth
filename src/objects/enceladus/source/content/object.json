@@ -4,7 +4,6 @@
   "id": "enceladus",
   "displayName": "Enceladus",
   "panel": {
-    "introduction": "An icy moon with an ocean beneath its crust. Jets escape through fractures near the south pole, feeding Saturn’s E ring. The Shape view uses JPL’s corrected v2 surface model. The earlier Schenk elevation map retains its separate ellipsoidal height datum.",
     "facts": [
       {
         "id": "radius",
@@ -83,8 +82,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data.",
-        "title": "Schenk–McKinnon mosaic",
         "thumbnail": "/scenes/enceladus/enceladus-normal-thumbnail.webp",
         "surface": "enceladus-normal-surface@2x.webp",
         "poles": "enceladus-normal-poles@2x.webp",
@@ -92,13 +89,12 @@
           "id": "cassini-schenk-2024-normal",
           "path": "../manifest.json"
         },
-        "summary": "Images are aligned to a common surface model, but source detail varies. Photographed shadows remain; the grid marks gaps."
+        "notes": "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
-        "title": "Stereo and shading terrain model",
         "thumbnail": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
         "surface": "enceladus-elevation-surface@2x.webp",
         "poles": "enceladus-elevation-poles@2x.webp",
@@ -120,27 +116,25 @@
           "sourceUrl": "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-dem-200m-schenk",
           "image": "/scenes/enceladus/enceladus-elevation-legend.webp"
         },
-        "summary": "Height relative to the source ellipsoid, clipped at ±1 km. Gray grid: missing stereo and shading data."
+        "notes": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
+        "noData": true
       },
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
-        "title": "JPL v2 SPC shape model",
         "thumbnail": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
         "surface": "enceladus-shape-surface@2x.webp",
         "poles": "enceladus-shape-poles@2x.webp",
         "source": {
           "id": "jpl-spc-enceladus-v2-q256",
           "path": "../manifest.json"
-        }
+        },
+        "notes": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
+        "noData": true
       },
       {
         "id": "ice-absorption",
         "label": "Ice absorption",
-        "description": "Water-ice absorption relative to a native 1.82–2.20 µm continuum. Six calibrated Cassini VIMS observations cover selected regions; gray grid marks unsupported areas. Strength also varies with viewing geometry and grain size. Archive noise filtering is retained; no photometric correction is applied. This is not ice percentage.",
-        "title": "Partial Cassini VIMS water-ice signature",
-        "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size and archive filtering affect the uncorrected values; these are not ice percentages.",
         "thumbnail": "/scenes/enceladus/enceladus-ice-absorption-thumbnail.webp",
         "surface": "enceladus-ice-absorption-surface@2x.webp",
         "poles": "enceladus-ice-absorption-poles@2x.webp",
@@ -149,7 +143,6 @@
           "path": "../manifest.json",
           "url": "https://vims.univ-nantes.fr/cube/1487299582_1"
         },
-        "detail": "Partial VIMS",
         "falseColor": true,
         "legend": {
           "kind": "scale",
@@ -164,14 +157,13 @@
           "meta": "band-depth fraction",
           "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
           "image": "/scenes/enceladus/enceladus-ice-absorption-legend.webp"
-        }
+        },
+        "notes": "Water-ice absorption relative to a native 1.82–2.20 µm continuum. Six calibrated Cassini VIMS observations cover selected regions; gray grid marks unsupported areas. Strength also varies with viewing geometry and grain size. Archive noise filtering is retained; no photometric correction is applied. This is not ice percentage.",
+        "noData": true
       },
       {
         "id": "infrared-ratio",
         "label": "Infrared ratio",
-        "description": "Median reflectance in three channels near 3.1 µm divided by the near-1.66 µm channel. This samples an ice-sensitive infrared feature in six calibrated Cassini observations. Illumination, grain size and noise affect the ratio; it is not a crystallinity percentage or a temperature map. Archive filtering remains; no photometric correction. Gray grid marks unsupported areas.",
-        "title": "Partial Cassini VIMS spectral ratio",
-        "summary": "A near-3.1/1.66 µm ice-sensitive ratio with partial Cassini coverage. Viewing angle, grain size and archive filtering affect the uncorrected values. Gray grid marks gaps; this does not measure temperature or crystallinity.",
         "thumbnail": "/scenes/enceladus/enceladus-infrared-ratio-thumbnail.webp",
         "surface": "enceladus-infrared-ratio-surface@2x.webp",
         "poles": "enceladus-infrared-ratio-poles@2x.webp",
@@ -180,7 +172,6 @@
           "path": "../manifest.json",
           "url": "https://vims.univ-nantes.fr/cube/1487299582_1"
         },
-        "detail": "Partial VIMS",
         "falseColor": true,
         "legend": {
           "kind": "scale",
@@ -195,7 +186,9 @@
           "meta": "reflectance ratio",
           "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
           "image": "/scenes/enceladus/enceladus-infrared-ratio-legend.webp"
-        }
+        },
+        "notes": "Median reflectance in three channels near 3.1 µm divided by the near-1.66 µm channel. This samples an ice-sensitive infrared feature in six calibrated Cassini observations. Illumination, grain size and noise affect the ratio; it is not a crystallinity percentage or a temperature map. Archive filtering remains; no photometric correction. Gray grid marks unsupported areas.",
+        "noData": true
       }
     ]
   },

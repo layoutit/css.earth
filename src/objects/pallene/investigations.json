@@ -1,0 +1,180 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "pallene",
+  "entries": [
+    {
+      "id": "measured-ellipsoid",
+      "subject": "Thomas et al. and PCK00011 Pallene ellipsoid",
+      "status": "included",
+      "finding": "The published/PCK semiaxes 2.88 by 2.08 by 1.80 km define the selected analytic shape and supersede the earlier LPSC short-axis value.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2013.07.022",
+        "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-n1496910582",
+      "subject": "Cassini N1496910582 low-phase patch",
+      "status": "included",
+      "finding": "The 2005 clear-filter image provides a coarse 8 by 12 pixel brightness patch. Its limb fit supports pointing only, not feature-registered photography.",
+      "evidence": [
+        "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1496910582",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/survey/n1496910582-metadata.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-n1665947247",
+      "subject": "Cassini N1665947247 saturated 2010 trial",
+      "status": "excluded",
+      "finding": "The raw saturation plateau leaves zero valid samples when paired-raw masking, the one-pixel inset and unchanged geometry limits are applied.",
+      "revisitWhen": "An unsaturated source product or independently justified saturated-pixel treatment can be evaluated.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/survey/qualification.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-n1694657087",
+      "subject": "Cassini N1694657087 high-phase 2011 trial",
+      "status": "excluded",
+      "finding": "The 158-degree phase leaves only a thin uncertain illuminated rim, despite finer nominal resolution.",
+      "revisitWhen": "A lower-phase resolved view with usable interior can add coverage.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-n1694661188",
+      "subject": "Cassini N1694661188 narrow-strip 2011 trial",
+      "status": "excluded",
+      "finding": "The trial leaves only four interpolation footprints; the required margin leaves zero samples and limits were not relaxed.",
+      "revisitWhen": "A view with broad qualified interior or independently reduced pointing uncertainty can be assessed.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "feature-registration-followup",
+      "subject": "Pallene feature-registration follow-up",
+      "status": "unresolved",
+      "finding": "The direct 2026-09-10 review found no independently identifiable feature in the 8 by 13 pixel disc. Existing limb fit remains pointing evidence.",
+      "revisitWhen": "Independent surface controls or an image with stable identifiable features can qualify feature registration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/survey/registration-attempt-2026-09-10.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "other-finer-2010-2011-frames",
+      "subject": "Other finer 2010 and 2011 Pallene ISS frames",
+      "status": "excluded",
+      "finding": "The OPUS survey records 39 Pallene-targeted observations at 2 km per pixel or finer. Apart from the separately recorded saturated, high-phase and narrow-strip trials, the remaining 2010/2011 frames have phase, saturation or coverage limits that do not establish a useful qualified addition to the selected 2005 patch.",
+      "revisitWhen": "A distinct frame with broad unsaturated, low- or moderate-phase interior and independently supportable registration can be assessed.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/survey/opus-resolved.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/survey/qualification.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-eleven-body-shape-inventory",
+      "subject": "PDS eleven-body Saturn satellite shape inventory",
+      "status": "excluded",
+      "finding": "The reviewed PDS satellite-shape inventory does not include Pallene, so it cannot supply a detailed Pallene mesh or local elevation field for this package.",
+      "revisitWhen": "A PDS or other released Pallene-specific shape product with a documented frame and provenance can be reviewed.",
+      "evidence": [
+        "https://doi.org/10.26033/ewy3-jy61",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "thomas-helfenstein-2020",
+      "subject": "Thomas and Helfenstein 2020 updated shape survey",
+      "status": "unresolved",
+      "finding": "The updated shape survey was inspected as a route, but the full text was unavailable at review time. It therefore does not establish a new Pallene mesh or elevation source; the current PCK and 2013 published semiaxes remain selected.",
+      "revisitWhen": "Accessible full text or a linked Pallene-specific released model can be assessed against the selected semiaxes.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2019.06.016",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "hedman-integrated-photometry",
+      "subject": "Hedman et al. Pallene integrated photometry",
+      "status": "excluded",
+      "finding": "The reviewed photometry supplies integrated brightness context only. It does not provide a registered colour, composition or terrain map.",
+      "revisitWhen": "A spatially resolved and registered Pallene colour, spectral or composition product can support a lens.",
+      "evidence": [
+        "https://arxiv.org/abs/1912.09192",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

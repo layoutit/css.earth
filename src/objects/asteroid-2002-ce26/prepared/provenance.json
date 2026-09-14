@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d297f9ca1489f7744150b1ea567edb17659cd6e8104b7649d17fd0a34bf321f6"
+    "sha256": "e3fe274a2b180208cdb22c8619de6f4f8d83d75d6d443abadf1d4729b76d6ea0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b787e46acb4a642fc4a20b4d9255eb64835a4710972d8feb001e65cdcb0dc0ba",
+      "sha256": "3147d6c01cfa3e2110da2cdbc3b265a366fa868aee6f719aa02788f6267a340e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,7 +171,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "2002 CE26 Primary is the large spheroidal member of a near-Earth binary system, reconstructed from 2004 radar and optical light-curve data. Explore its published shape and source-derived radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -203,8 +202,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "The shared grid marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary.",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-thumbnail.webp",
               "surface": "asteroid-2002-ce26-shape-surface@2x.webp",
               "poles": "asteroid-2002-ce26-shape-surface@2x.webp",
@@ -213,13 +210,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "notes": "The shared grid marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows the original model radius minus a 1.73 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. Only the primary is included; the north polar region is poorly constrained. Optional Sun lighting uses an approximate pole and arbitrary phase. Cartographic relief is a prepared display treatment.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-thumbnail.webp",
               "surface": "asteroid-2002-ce26-elevation-surface@2x.webp",
               "poles": "asteroid-2002-ce26-elevation-surface@2x.webp",
@@ -241,7 +237,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/ce26.obj",
                 "image": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Color shows the original model radius minus a 1.73 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. Only the primary is included; the north polar region is poorly constrained. Optional Sun lighting uses an approximate pole and arbitrary phase. Cartographic relief is a prepared display treatment."
             }
           ]
         },
@@ -368,7 +364,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -377,8 +373,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b787e46acb4a642fc4a20b4d9255eb64835a4710972d8feb001e65cdcb0dc0ba",
-      "bytes": 13538,
+      "sha256": "3147d6c01cfa3e2110da2cdbc3b265a366fa868aee6f719aa02788f6267a340e",
+      "bytes": 13108,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -393,9 +389,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows the original model radius minus a 1.73 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. Only the primary is included; the north polar region is poorly constrained. Optional Sun lighting uses an approximate pole and arbitrary phase. Cartographic relief is a prepared display treatment."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -437,9 +431,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The shared grid marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -474,7 +466,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -486,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10388,
-          "sha256": "cdd77874db2f310c3f4590459305b285408b09c5204faf21ceb0d137a2550dcf",
+          "bytes": 10124,
+          "sha256": "14014aa8cc2b743a50f95b1e115a818df0bad80311164ac2b513dbf65cf454d8",
           "verification": "bytes-verified"
         }
       ],

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "161e373c09ac3fe6dceb5212f354e8f2d8c71de951bf1c9d15ad8cce0fbab6e6"
+    "sha256": "dd0cd227585c6d4ed227785665824dc2b3c2e7725a4aa2cafe4d0256fa999f73"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6152d114dbe193755a48d14c8ad89f9d3aebb7e4eda22f07d28ac489f35298ca",
+      "sha256": "0523dfd9d99add7cc6857c2fd50b927da83a7fd0002c493f601dbc0571931331",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "rosalind",
         "displayName": "Rosalind",
         "panel": {
-          "introduction": "Rosalind is a small inner moon of Uranus discovered by Voyager 2. Its measured outline is consistent with a nearly spherical body.",
           "facts": [
             {
               "id": "radius",
@@ -156,9 +155,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published 72 × 72 × 72 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
-              "title": "Approximate shape model",
-              "detail": "Measured shape",
               "thumbnail": "/scenes/rosalind/rosalind-model-thumbnail.webp",
               "surface": "rosalind-model-surface@2x.webp",
               "poles": "rosalind-model-poles@2x.webp",
@@ -167,7 +163,8 @@
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/2401.04634"
               },
-              "summary": "A published 72 km spherical shape estimate. The grid marks missing imagery; local terrain is unresolved."
+              "notes": "Published 72 × 72 × 72 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+              "noData": true
             }
           ]
         },
@@ -311,7 +308,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -320,8 +317,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6152d114dbe193755a48d14c8ad89f9d3aebb7e4eda22f07d28ac489f35298ca",
-      "bytes": 3384,
+      "sha256": "0523dfd9d99add7cc6857c2fd50b927da83a7fd0002c493f601dbc0571931331",
+      "bytes": 3041,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -336,9 +333,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published 72 × 72 × 72 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -378,7 +373,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -390,8 +385,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6083,
-          "sha256": "bafc8f7ac5f33a62a66c4d88daf2220913ae3500564efc70e7a236f84778ca27",
+          "bytes": 5935,
+          "sha256": "eacb6fe60dfcc9c6c267c5ba25c95170d06d301302f259e9e2a8a75dad422ee3",
           "verification": "bytes-verified"
         }
       ],

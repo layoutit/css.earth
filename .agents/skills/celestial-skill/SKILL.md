@@ -169,6 +169,9 @@ For factsheets, put citations on the individual facts using the existing
 [factsheet fields](../../../docs/factsheets.md#editing-and-reproduction).
 Preserve each fact's evidence when editing content. A general page credit does
 not supply a citation for every number on that page.
+Write the card line, introduction and dataset text in the body's `text.json`,
+cite the source records a reviewer checks them against, and run
+`pnpm prepare:text`; see [reader text](../../../docs/reader-text.md).
 
 Record the following for selected inputs in the existing source record and
 manifest:

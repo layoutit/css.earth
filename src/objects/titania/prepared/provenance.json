@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c294a94a0dadef39c766da2c8db05adc832715aab3c4c4c73b40b318ba1203c9"
+    "sha256": "925bfe8589d92884e504d0e3bad4ae4ff7165bce76c2b91760752b81b1ccee3b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -284,14 +284,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4b276f37299fed0e596a91f6227c33da9e6d079a790e4354c12c28c4e4a2c617",
+      "sha256": "7e10ddc4b9921f30dfe7274b352a70deea75045a53aebf5418bd4cd2f32a5ed7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "titania",
         "displayName": "Titania",
         "panel": {
-          "introduction": "Titania is Uranus’s largest moon. Voyager 2 revealed an icy, cratered surface crossed by long fault valleys, evidence that its crust once stretched and fractured.",
           "facts": [
             {
               "id": "radius",
@@ -368,9 +367,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Voyager 2 monochrome mosaic with source photometric correction. Native detail is about 2.9 km per pixel at best; photographed shadows and image seams remain. Gray grid marks missing observations.",
-              "title": "Monochrome mosaic",
-              "detail": "Corrected mosaic",
               "thumbnail": "titania-lens-normal.webp",
               "surface": "titania-normal.webp",
               "poles": "titania-poles-normal.webp",
@@ -379,14 +375,12 @@
                 "path": "../manifest.json",
                 "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
               },
-              "summary": "The best source detail is about 2.9 km per pixel. Photographed shadows and seams remain; the gray grid marks missing observations."
+              "notes": "Voyager 2 monochrome mosaic with source photometric correction. Native detail is about 2.9 km per pixel at best; photographed shadows and image seams remain. Gray grid marks missing observations.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Voyager stereo elevations with published limb-profile data, in kilometres relative to the source reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 2.88 km grid spacing is not uniform effective elevation resolution.",
-              "title": "Stereo and limb terrain model",
-              "detail": "Stereo shaded relief",
               "thumbnail": "titania-lens-elevation.webp",
               "surface": "titania-elevation.webp",
               "poles": "titania-poles-elevation.webp",
@@ -430,15 +424,12 @@
                   ]
                 }
               },
-              "summary": "Voyager stereo and limb heights relative to the source ellipsoid. Detail varies; gray grid: no data."
+              "notes": "Voyager stereo elevations with published limb-profile data, in kilometres relative to the source reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 2.88 km grid spacing is not uniform effective elevation resolution.",
+              "noData": true
             },
             {
               "id": "geology",
               "label": "Geology",
-              "detail": "Historical map",
-              "description": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
-              "title": "Geologic map",
-              "summary": "Historical interpreted units; reconstructed registration. Gray grid: unmapped or conflicting units.",
               "thumbnail": "titania-lens-geology.webp",
               "surface": "titania-geology.webp",
               "poles": "titania-poles-geology.webp",
@@ -522,7 +513,9 @@
                     "color": "#730000"
                   }
                 ]
-              }
+              },
+              "notes": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+              "noData": true
             }
           ]
         },
@@ -842,10 +835,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "4b276f37299fed0e596a91f6227c33da9e6d079a790e4354c12c28c4e4a2c617",
-      "bytes": 13209,
+      "sha256": "7e10ddc4b9921f30dfe7274b352a70deea75045a53aebf5418bd4cd2f32a5ed7",
+      "bytes": 12440,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -960,9 +953,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "Voyager 2 monochrome mosaic with source photometric correction. Native detail is about 2.9 km per pixel at best; photographed shadows and image seams remain. Gray grid marks missing observations."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1017,9 +1008,7 @@
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Voyager stereo elevations with published limb-profile data, in kilometres relative to the source reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 2.88 km grid spacing is not uniform effective elevation resolution."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1073,9 +1062,7 @@
       "selector": "/surfaces/2",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown."
-      ],
+      "limitations": [],
       "lensIds": [
         "geology"
       ],
@@ -1544,7 +1531,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1556,8 +1543,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6239,
-          "sha256": "3b9450569a87c1dabfd1be699da314fbf9cad93e2d5663b890bb346e96d93c44",
+          "bytes": 6057,
+          "sha256": "380318ac6cc9dabb34a9798b5e029f7f97adc5aeb44ce4ebcef834e83486f295",
           "verification": "bytes-verified"
         }
       ],

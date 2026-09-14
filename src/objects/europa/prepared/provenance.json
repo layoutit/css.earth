@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f6c799696faa0798a04e3a673e264bdaeea7cc8fa30e1094ac63258c336136a7"
+    "sha256": "9a2a1483a1b9be37b58a2dbb0ce43c4e50c5534161c04b55d42272e9707b1507"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
@@ -374,7 +374,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "95869f5400c626c6d3302c9466003ede4b3b6eba525f87d6de0e56e516814c81",
+      "sha256": "4d2167638813433949ae30191514e7fd5dcdc9d0a8b156d00a2c9ad45788b484",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -398,7 +398,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Europa is an icy moon of Jupiter. Its fractured surface and magnetic signature provide strong evidence for a salty ocean beneath the ice.",
           "facts": [
             {
               "id": "radius",
@@ -486,8 +485,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "USGS Voyager/Galileo mosaic. Source resolution varies from about 200 m to 20 km per pixel. Gray grid marks documented no-data and its resampled boundary. Original image shading remains; globe lighting is approximate.",
-              "title": "Global image mosaic",
               "thumbnail": "europa-lens-normal.webp",
               "surface": "europa-normal.webp",
               "poles": "europa-poles-normal.webp",
@@ -495,14 +492,12 @@
                 "id": "usgs-voyager-galileo-global-500m",
                 "path": "../manifest.json"
               },
-              "detail": "Global mosaic",
-              "summary": "Source detail ranges from 200 m to 20 km per pixel. Photographed shadows remain; the gray grid marks missing imagery."
+              "notes": "USGS Voyager/Galileo mosaic. Source resolution varies from about 200 m to 20 km per pixel. Gray grid marks documented no-data and its resampled boundary. Original image shading remains; globe lighting is approximate.",
+              "noData": true
             },
             {
               "id": "enhanced",
               "label": "False color",
-              "description": "Galileo false color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving linear band ratios. This is not a human-visible color reconstruction. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources.",
-              "title": "Galileo false-color mosaic",
               "thumbnail": "europa-lens-enhanced.webp",
               "surface": "europa-enhanced.webp",
               "poles": "europa-poles-enhanced.webp",
@@ -510,16 +505,13 @@
                 "id": "observed-color",
                 "path": "../manifest.json"
               },
-              "detail": "Galileo",
-              "summary": "Galileo bands at 756, 559 and 404 nm show spectral differences. Monochrome imagery supplies brightness matching and fills missing color; this is not natural color.",
-              "falseColor": true
+              "falseColor": true,
+              "notes": "Galileo false color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving linear band ratios. This is not a human-visible color reconstruction. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "detail": "Agenor · relative",
-              "description": "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Fixed northwest cartographic relief shows slopes; it is not part of the numeric scale. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy.",
-              "title": "Agenor Linea stereo terrain model",
               "thumbnail": "europa-lens-elevation.webp",
               "surface": "europa-elevation.webp",
               "poles": "europa-poles-elevation.webp",
@@ -595,13 +587,13 @@
                     "300"
                   ]
                 }
-              }
+              },
+              "notes": "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Fixed northwest cartographic relief shows slopes; it is not part of the numeric scale. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy.",
+              "noData": true
             },
             {
               "id": "geology",
               "label": "Geology",
-              "description": "USGS interpreted regional plains, bands, chaos terrains and crater deposits (2024; 1:15,000,000). Colors identify map units, not measured surface color. Gray grid marks no-data polygons. Fine line and point features are not represented by this polygon view.",
-              "title": "USGS global geology (2024 SIM 3513)",
               "thumbnail": "europa-lens-geology.webp",
               "surface": "europa-geology.webp",
               "poles": "europa-poles-geology.webp",
@@ -610,7 +602,6 @@
                 "path": "../manifest.json",
                 "url": "https://pubs.usgs.gov/publication/sim3513"
               },
-              "detail": "Mapped units",
               "falseColor": true,
               "legend": {
                 "kind": "categories",
@@ -668,13 +659,13 @@
                   }
                 ],
                 "sourceUrl": "https://pubs.usgs.gov/publication/sim3513"
-              }
+              },
+              "notes": "USGS interpreted regional plains, bands, chaos terrains and crater deposits (2024; 1:15,000,000). Colors identify map units, not measured surface color. Gray grid marks no-data polygons. Fine line and point features are not represented by this polygon view.",
+              "noData": true
             },
             {
               "id": "infrared",
               "label": "Infrared",
-              "description": "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
-              "title": "Galileo NIMS spectral color",
               "thumbnail": "europa-lens-infrared.webp",
               "surface": "europa-infrared.webp",
               "poles": "europa-poles-infrared.webp",
@@ -683,8 +674,9 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.17189/4sz4-5024"
               },
-              "detail": "NIMS spectral bands",
-              "falseColor": true
+              "falseColor": true,
+              "notes": "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
+              "noData": true
             }
           ]
         },
@@ -1169,10 +1161,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "95869f5400c626c6d3302c9466003ede4b3b6eba525f87d6de0e56e516814c81",
-      "bytes": 16298,
+      "sha256": "4d2167638813433949ae30191514e7fd5dcdc9d0a8b156d00a2c9ad45788b484",
+      "bytes": 15477,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1293,9 +1285,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "USGS Voyager/Galileo mosaic. Source resolution varies from about 200 m to 20 km per pixel. Gray grid marks documented no-data and its resampled boundary. Original image shading remains; globe lighting is approximate."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1350,9 +1340,7 @@
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Galileo false color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving linear band ratios. This is not a human-visible color reconstruction. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced"
       ],
@@ -1408,9 +1396,7 @@
       "selector": "/surfaces/2",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Fixed northwest cartographic relief shows slopes; it is not part of the numeric scale. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1464,9 +1450,7 @@
       "selector": "/surfaces/3",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "USGS interpreted regional plains, bands, chaos terrains and crater deposits (2024; 1:15,000,000). Colors identify map units, not measured surface color. Gray grid marks no-data polygons. Fine line and point features are not represented by this polygon view."
-      ],
+      "limitations": [],
       "lensIds": [
         "geology"
       ],
@@ -1520,9 +1504,7 @@
       "selector": "/surfaces/4",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band."
-      ],
+      "limitations": [],
       "lensIds": [
         "infrared"
       ],
@@ -1991,7 +1973,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -2003,8 +1985,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6897,
-          "sha256": "a128ce772059d6badadb59c508a81a150a536dd7325ce7beac67abd13607154d",
+          "bytes": 6742,
+          "sha256": "2b5d43f9fd15de4f06bacaf410d9a1aa4a1ce96439d92c8d695f8747f5fdeb2f",
           "verification": "bytes-verified"
         }
       ],

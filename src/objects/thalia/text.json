@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "thalia",
+  "card": {
+    "text": "Stony main-belt asteroid, discovered in December 1852.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=23",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1852-12-15 by Hind, J. R. at London; albedo: 0.2536; orbit class: Main-belt Asteroid; spec_B: S; spec_T: S"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "J. R. Hind found Thalia at London in 1852. Its bright surface reflects about 25% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=23",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1852-12-15 by Hind, J. R. at London; albedo: 0.2536; orbit class: Main-belt Asteroid; spec_B: S; spec_T: S"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT shape model",
+      "detail": "Published shape",
+      "summary": "Fitted to light curves and resolved telescope images. Another pole also fits, and the spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 57 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

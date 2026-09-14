@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Makemake is a distant, reddish dwarf planet with one known moon. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
     "facts": [
       {
         "id": "radius",
@@ -74,8 +73,6 @@
       {
         "id": "illustration",
         "label": "Illustrative model",
-        "description": "NASA’s illustrative Makemake surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
-        "title": "Surface illustration",
         "qualification": "Illustration; not an observed surface map.",
         "thumbnail": "makemake-lens-illustration.webp",
         "surface": "makemake-illustration.webp",
@@ -85,7 +82,7 @@
           "path": "../manifest.json",
           "url": "https://science.nasa.gov/resource/makemake-3d-model/"
         },
-        "summary": "The depicted terrain is imagined, not photographed. The real surface is unresolved, and the displayed coordinates are arbitrary."
+        "notes": "NASA’s illustrative Makemake surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
       }
     ]
   },

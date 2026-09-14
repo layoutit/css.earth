@@ -493,8 +493,8 @@
     {
       "id": "pluto-object-content",
       "path": "content/object.json",
-      "expectedSha256": "8cdb254475f0f575d8530bc0ed86f2c83ca5f98f0695a193e252c04a05e04dbf",
-      "expectedBytes": 17225,
+      "expectedSha256": "bcb4d6769eb2a27bf8ca40629f95f408200aaa4d70ef7627ae534adae50c5fec",
+      "expectedBytes": 15777,
       "origin": "Repository-authored Pluto panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -506,7 +506,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {

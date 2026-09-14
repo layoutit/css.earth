@@ -4,7 +4,6 @@
   "id": "kemi",
   "displayName": "Kemi",
   "panel": {
-    "introduction": "Kemi is a Mars-crossing asteroid. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex lightcurve reconstruction at approximate thermal scale: 17.98 km effective diameter (catalog ±1.34 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
-        "title": "Kemi · DAMIT shape model 1202",
         "thumbnail": "/scenes/kemi/kemi-shape-thumbnail.webp",
         "surface": "kemi-shape-surface@2x.webp",
         "poles": "kemi-shape-surface@2x.webp",
@@ -78,13 +75,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "notes": "Convex lightcurve reconstruction at approximate thermal scale: 17.98 km effective diameter (catalog ±1.34 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 8.99 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Kemi · radius relative to the 8.99 km reference sphere",
         "thumbnail": "/scenes/kemi/kemi-elevation-thumbnail.webp",
         "surface": "kemi-elevation-surface@2x.webp",
         "poles": "kemi-elevation-surface@2x.webp",
@@ -106,7 +102,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1202",
           "image": "/scenes/kemi/kemi-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 8.99 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },
