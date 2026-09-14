@@ -1,3 +1,4 @@
+import { readFitsHdu, assertUnscaledFitsTable } from '../../fits.mts';
 import type {SourceMesh} from './contracts.mts';
 import {parseFacetField,shape,text} from './source-records.mts';
 import { readFile } from 'node:fs/promises';
@@ -7,16 +8,11 @@ import { basename, resolve } from 'node:path';
 // triangle. They are not images: FACET_NUM and the recorded centroid bind each
 // row to the original mesh before any display simplification is sampled.
 function header(bytes: Buffer, start: number) {
-  const fields: Record<string,string> = {};
-  for (let offset = start; offset + 80 <= bytes.length; offset += 80) {
-    const card = bytes.toString('ascii', offset, offset + 80), key = card.slice(0, 8).trim();
-    if (key === 'END') return { fields, end: Math.ceil((offset + 80) / 2880) * 2880 };
-    if (card[8] !== '=') continue;
-    if (Object.hasOwn(fields, key)) throw new Error(`Duplicate FITS field ${key}.`);
-    const value = card.slice(10).trim();
-    fields[key] = value.startsWith("'") ? value.slice(1, value.indexOf("'", 1)).trim() : value.split('/')[0].trim();
-  }
-  throw new Error('Truncated FITS facet header.');
+  const hdu = readFitsHdu(bytes, start);
+  assertUnscaledFitsTable(hdu.header);
+  const fields = Object.fromEntries(Object.entries(hdu.header).filter(([, v]) => v !== undefined)
+    .map(([k, v]) => [k, typeof v === 'boolean' ? v ? 'T' : 'F' : String(v)]));
+  return { fields, end: hdu.dataOffset };
 }
 
 export function validateFacetFieldRecipe(value: unknown) {
