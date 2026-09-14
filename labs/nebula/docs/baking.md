@@ -2,11 +2,27 @@
 
 Requires **Node 22, pnpm 10.33.0 and Python 3.9–3.12** with `venv`/`pip`, plus internet access and free disk space for the native images, Python environment and results. The pinned TensorFlow release needs a wheel for your OS/CPU. The [clean-install verification](clean-install-verification.md) records the platform actually tested; it is not a claim that every platform produces identical bytes.
 
-From a new temporary clone, run this complete sequence. It targets the PR branch while the change awaits merge:
+## Prepare the processing environment
+
+From the repository root in a clean checkout, this complete setup prepares the prerequisites for `prepare-observations` and `compile-nebula`. For a new environment, `python3` on `PATH` must be Python 3.9–3.12 with `venv` and `pip` available.
+
+```sh
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:packages
+node --experimental-strip-types labs/nebula/src/run.ts prepare-processing-environment
+```
+
+The environment command reads the canonical Python/package and NOX model pins from `models/lmc/bake.json`, creates or verifies `.local/open-star-removal/venv`, and downloads only a missing model. Success requires **`ENVIRONMENT_READY pinned Python packages and NOX model`** followed by **`NOX_MODEL_VERIFIED`** with its SHA-256. A ready environment is reused without reinstalling packages; an altered model fails while preserving its existing bytes. This command prepares no object images, density fields or baked assets.
+
+Use `--python=/absolute/path/to/venv/bin/python` to verify an existing environment without modifying its packages. The same pinned model is still required. The environment-only command was verified against the existing macOS environment on 2026-09-13; this check is not a new clean-cache installation test.
+
+## Rebuild the saved LMC batch
+
+From a new temporary clone, run this complete sequence. The published LMC recipe is available on the default branch:
 
 ```sh
 nebula_dir="$(mktemp -d "${TMPDIR:-/tmp}/cssearth-nebula.XXXXXX")"
-git clone --depth 1 --single-branch --branch feat/local-group https://github.com/layoutit/cssEarth.git "$nebula_dir"
+git clone --depth 1 --single-branch https://github.com/layoutit/css.earth.git "$nebula_dir"
 cd "$nebula_dir"
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:packages
@@ -14,7 +30,7 @@ pnpm lab:nebula:bake
 pnpm lab:nebula:verify
 ```
 
-`--ignore-scripts` avoids the repository-wide postinstall preparation. Building the shared packages supplies the libraries needed by the lab. Only shared packages and nebula assets are built; the bake runs without a browser or GPU server. After this branch merges, use the merged branch in the clone command.
+`--ignore-scripts` avoids the repository-wide postinstall preparation. Building the shared packages supplies the libraries needed by the lab. Only shared packages and nebula assets are built; the bake runs without a browser or GPU server.
 
 Success is **`BAKE_COMPLETE lmc` followed by `NEBULA_VERIFIED`**. The verifier checks the complete native-removal artifacts, saved placement/material settings, shared cloud geometry and catalogue stars, assembled lens-bank manifest, and accepted application textures. It only reads files: a missing or altered output fails without repairing it. The current recipe produces three LMC variants (VISTA, Horálek and WISE), 288 neutral LMC/SMC slices, 432 colored LMC slices, three image previews, six extraction previews and 943 shared stars. SMC gets its neutral density field; it has no accepted color reconstruction yet.
 
@@ -54,7 +70,7 @@ Options with values use `--name=value`. Stages include their preceding dependenc
 | `--recipe=<json>` | Select an explicitly configured source set |
 | `--python=<executable>` | Use an existing environment; verify package versions without modifying it |
 
-Only LMC has accepted color reconstructions. SMC currently supplies its neutral density field, not invented color lenses. New objects require their own approved source/registration/prior configuration and lab subject records before the same processors can be used.
+This fixed-density command supplies the three LMC color comparisons. SMC supplies only its neutral density field. The six Galactic nebulae use separate saved compiler/symmetry delivery recipes; [the shared app guide](../../../docs/nebulae/README.md) documents all 23 lenses and their different scientific limitations. New objects require their own approved source/registration/prior configuration.
 
 For the separate production environment assets (outside this nebula-only workflow), `pnpm prepare:environment-images` restores the M31/M33/SMC layers, Milky Way slices and sky faces, heliosphere atlas and stellar point atlas from their pinned sources. It only bakes missing banks and verifies every restored byte against the accepted resource manifests. Pass `--verify-replay` to independently rebake even a complete bank. These operations preserve the descriptors and saved rendering settings. App startup/build and universe CI restore these images automatically.
 

@@ -95,9 +95,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
     // here spent seconds and hundreds of megabytes that were never reused.
     startup: entries.filter(entry => startupSkyPaths.has(entry.key.slice(pool.length + 1))).map(entry => entry.key),
   };
-  // Their bytes are fetched once, a few wheel steps before the volume fades in.
-  const galaxyUrls = [...entries.filter(entry => !skyPaths.has(entry.key.slice(pool.length + 1))), ...imageEntries,
-    ...lensPlans.flatMap(bank => bank.assets.entries)].map(entry => entry.url);
+  // Warm the galaxy backdrop before its handoff. Nebula lenses own their image
+  // demand: crossing this distance must not fetch every distant/inactive lens.
+  const galaxyUrls = [...entries.filter(entry => !skyPaths.has(entry.key.slice(pool.length + 1))), ...imageEntries]
+    .map(entry => entry.url);
   const galaxyPrefetchDistanceM = (plan.volume.opacityProfile?.fadeStartDistanceM ?? plan.volume.fadeStartDistanceM) * GALAXY_PREFETCH_RATIO;
   return Object.freeze({ assets,
     createFramePlanner: () => createWorldContextPlannerClient(plan, undefined, annotationPriorities, plannerSource),
@@ -199,7 +200,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         spatial = mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities, annotationOpacities, opacityClock });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), opacityClock });
-        if (catalog) galaxyCatalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: catalog.payload, clusters: catalog.clusters?.payload, nebulae: catalog.nebulae, onSelect: onSelectGalaxy, pickingHost: stage });
+        if (catalog) galaxyCatalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: catalog.payload, clusters: catalog.clusters?.payload, nebulae: catalog.nebulae,
+          nebulaFrames: new Map(volumeLenses.map(({ payload }) => [payload.id, payload.lenses[0]!.volume.frame])),
+          onSelect: onSelectGalaxy, pickingHost: stage });
         return Object.freeze({ root, roots: Object.freeze([root, spatial.root]), destroy, opacityClock,
           /** Mount an optional prepared shell after startup, the first time it is enabled. */
           addShell(shell: { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }) {
@@ -306,17 +309,18 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 bank.root.style.display = opacity > 0 ? 'block' : 'none';
                 publishedLensOpacity[index] = opacity;
               }
-              if (opacity > 0) bank.publish({ world, viewport });
+              bank.publish({ world, viewport }, opacity > 0);
             }
             for (const [index, shell] of shellLayers.entries()) {
               shell.publish(world, viewport, shellVisibility[mountedShells[index]!.payload.id] !== false);
             }
             spatial!.publish(world, viewport, frame);
             const foregroundRects = spatial!.backgroundExclusionRects();
-            const environmentRects = environmentLabels!.publish({ world, viewport,
+            const localAnnotations = 1 - logarithmicFade(distanceM, 4e6 * 3.085677581491367e16, 5e6 * 3.085677581491367e16);
+            const environmentRects = environmentLabels!.publish({ world, viewport, volumeLabelOpacity: localAnnotations,
               shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects });
             if (catalog) galaxyCatalog!.publish(world, viewport,
-              logarithmicFade(distanceM, catalog.fadeStartDistanceM, catalog.fullDistanceM), [...foregroundRects, ...environmentRects],
+              localAnnotations * logarithmicFade(distanceM, catalog.fadeStartDistanceM, catalog.fullDistanceM), [...foregroundRects, ...environmentRects],
               catalog.clusters ? logarithmicFade(distanceM, catalog.clusters.fadeStartDistanceM, catalog.clusters.fullDistanceM) : 0);
             const emphasizedId = selectionPreview === undefined ? (overview ? null : selected.id) : selectionPreview;
             focusPoint?.publish(world, viewport, { opacity: (1 - fade) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,

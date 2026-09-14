@@ -21,8 +21,7 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     const node = document.createElement('s');
     node.dataset.volumeImpostor = view.id;
     Object.assign(node.style, { position: 'absolute', left: '50%', top: '50%', display: 'none',
-      pointerEvents: 'none', transformOrigin: '50% 50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%',
-      backgroundImage: `url("${escapeUrl(options.resolveResource(view.texturePath))}")` });
+      pointerEvents: 'none', transformOrigin: '50% 50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%' });
     distant.append(node);
     return [view.id, node] as const;
   }));
@@ -45,6 +44,10 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     // Only the few contributing projections receive screen transforms. Textures and cloud geometry stay fixed.
     for (const view of projection.views) {
       const node = views.get(view.id)!;
+      if (!node.style.backgroundImage) {
+        const texture = bank.views.find(candidate => candidate.id === view.id)!;
+        node.style.backgroundImage = `url("${escapeUrl(options.resolveResource(texture.texturePath))}")`;
+      }
       node.style.display = 'block';
       node.style.opacity = String(view.weight);
       node.style.width = `${diameterPixels}px`; node.style.height = `${diameterPixels}px`;

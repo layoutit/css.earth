@@ -169,6 +169,7 @@ function observationInspectionActive(id = sourceSubject) {
     item.emissionExperiment?.observationStructures && emissionInspection !== 'volume'));
 }
 function selectTab(index: number, updateUrl = true): Promise<void> {
+  if (index === 1 && subjects.find(value => value.id === sourceSubject)?.alignmentOnly) index = 0;
   if (currentTab !== index) emissionInspection = 'structure';
   currentTab = index;
   const item = subjects.find(value => value.id === sourceSubject);
@@ -188,7 +189,8 @@ function selectTab(index: number, updateUrl = true): Promise<void> {
 function setBusy(value: boolean) {
   busy = value; subject.disabled = value; controls.disabled = value;
   reconstruction.setBusy(value);
-  tabs.forEach((tab, index) => { tab.disabled = value || (index === 0 && Boolean(sourceSubject) && !supportsLabAlignment(subjects.find(item => item.id === sourceSubject))); });
+  tabs.forEach((tab, index) => { const item = subjects.find(item => item.id === sourceSubject);
+    tab.disabled = value || (index === 0 && Boolean(sourceSubject) && !supportsLabAlignment(item)) || (index === 1 && Boolean(item?.alignmentOnly)); });
   cloudControls.setBusy(value);
   const density = currentMode === 'density';
   const currentSubject = subjects.find(item => item.id === sourceSubject);
@@ -449,6 +451,10 @@ async function changeSubject(id: string, updateUrl = true) {
   try {
     const item = subjects.find(value => value.id === id);
     if (!item) throw new TypeError('Unknown lab subject.');
+    if (item.alignmentOnly && currentTab !== 0) {
+      currentTab = 0;
+      history.replaceState(history.state, '', labViewUrl(new URL(location.href), 'alignment'));
+    }
     if (observationInspectionActive(id)) {
       updateSubject(id); status.hidden = true;
     } else {
@@ -527,7 +533,7 @@ try {
     } catch (error) { reconstructionImageError = error instanceof Error ? error.message : String(error); }
   }
   const initialSubject = subjects.find(item => item.id === requestedSubject && (item.id.startsWith('lmc') || item.id.startsWith('smc') || item.sourceSubjectId === 'lmc-clouds')) ?? subjects.find(item => item.id === objectId(requestedSubject))!;
-  const mountTab = supportsLabAlignment(initialSubject) ? initialTab : 1;
+  const mountTab = initialSubject.alignmentOnly ? 0 : supportsLabAlignment(initialSubject) ? initialTab : 1;
   selectTab(mountTab);
   updateSubject(initialSubject.id);
   if (observationInspectionActive()) { status.hidden = true; setBusy(false); void refreshOverlayControls(); }

@@ -1,0 +1,2502 @@
+{
+  "base": "http://127.0.0.1:4210",
+  "browser": "148.0.7778.96",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "deviceScaleFactor": 1,
+  "revision": "64d81a70e7d35ef5963def664150b72899d53f1f",
+  "dirtyFiles": [
+    "M .gitignore",
+    " M docs/nebulae/README.md",
+    " M labs/nebula/models/m45/README.md",
+    " M labs/nebula/models/m45/optical-composite-notes.md",
+    " M labs/nebula/src/cli/prepare-nebula-objects.ts",
+    " M labs/nebula/src/delivery/nebula-objects.test.ts",
+    " M labs/nebula/src/delivery/nebula-objects.ts",
+    " M labs/nebula/src/reconstruction/compiler/optical-composite-preparation.ts",
+    " M labs/nebula/src/reconstruction/compiler/prerequisites.ts",
+    " M labs/nebula/src/reconstruction/sampled-prior/compile.ts",
+    " M site/test/nebula-search.test.mts",
+    " M site/test/nebula-world-browser.mts",
+    " M src/objects/helix/README.md",
+    " M src/objects/helix/object.json",
+    " M src/objects/helix/source/delivery.json",
+    " M src/objects/helix/source/manifest.json",
+    " M src/objects/helix/source/presentation.json",
+    " M src/objects/m2-9/README.md",
+    " M src/objects/m2-9/object.json",
+    " M src/objects/m2-9/source/delivery.json",
+    " M src/objects/m2-9/source/manifest.json",
+    " M src/objects/m2-9/source/presentation.json",
+    " M src/objects/m42/README.md",
+    " M src/objects/m42/object.json",
+    " M src/objects/m42/source/delivery.json",
+    " M src/objects/m42/source/manifest.json",
+    " M src/objects/m42/source/presentation.json",
+    " M tools/prepare-volume-provenance.test.mts",
+    "?? .vscode/",
+    "?? docs/nebulae/stellar-fields.md",
+    "?? labs/nebula/src/delivery/catalogue-field.test.ts",
+    "?? labs/nebula/src/delivery/catalogue-field.ts",
+    "?? labs/nebula/src/reconstruction/compiler/optical-composite-inputs.ts",
+    "?? labs/nebula/src/reconstruction/compiler/optical-composite-preparation.test.ts",
+    "?? labs/nebula/src/reconstruction/sampled-prior/compile.test.ts",
+    "?? src/objects/helix/source/stellar-field.json",
+    "?? src/objects/m1/",
+    "?? src/objects/m2-9/source/stellar-field.json",
+    "?? src/objects/m42/source/stellar-field.json",
+    "?? src/objects/m45/",
+    "?? src/objects/m8/",
+    "?? src/planets/",
+    "?? src/sources/arias-2006-hourglass.json",
+    "?? src/sources/bailer-jones-2021-distances.json",
+    "?? src/sources/cardiel-2021-rgb.json",
+    "?? src/sources/esahubble-heic0515a.json",
+    "?? src/sources/esahubble-potw1720b.json",
+    "?? src/sources/esahubble-potw1720c.json",
+    "?? src/sources/esahubble-potw1720d.json",
+    "?? src/sources/esahubble-potw1720f.json",
+    "?? src/sources/esawebb-weic2326a.json",
+    "?? src/sources/esawebb-weic2417a.json",
+    "?? src/sources/eso-eso0936a.json",
+    "?? src/sources/eso-eso1101d.json",
+    "?? src/sources/gaia-dr3-gavo.json",
+    "?? src/sources/gibson-nordsieck-2003-ii.json",
+    "?? src/sources/hipparcos-esa-1997.json",
+    "?? src/sources/kaplan-2008.json",
+    "?? src/sources/lin-2023.json",
+    "?? src/sources/martin-2021.json",
+    "?? src/sources/melis-2014.json",
+    "?? src/sources/nasa-pia09262.json",
+    "?? src/sources/nasa-pia09263.json",
+    "?? src/sources/nasa-pia13121.json",
+    "?? src/sources/ng-romani-2004.json",
+    "?? src/sources/niittee-plejades.json",
+    "?? src/sources/noirlab-noao-m45.json",
+    "?? src/sources/ritchey-2006.json",
+    "?? src/sources/simbad-gaia-crab-pulsar.json",
+    "?? src/sources/sitelle-2016-released-points.json",
+    "?? src/sources/spitzer-sig11-012.json",
+    "?? src/sources/tiwari-2018-pdr.json",
+    "?? src/sources/tiwari-2020-east.json",
+    "?? src/sources/tycho2-hog-2000.json",
+    "?? src/sources/wright-2019-kinematics.json",
+    "?? tools/prepare-nebula-field-catalogues.mts"
+  ],
+  "inputPins": [
+    {
+      "path": "src/objects/m8/prepared/lenses.json",
+      "bytes": 2942060,
+      "sha256": "a2508c927c95ebc87ef3ccd2335e790dd0b2b07c70dce60849549584c0339455"
+    },
+    {
+      "path": "src/objects/m8/prepared/provenance.json",
+      "bytes": 56375,
+      "sha256": "ca45b95bf18a70f72936e4d3edd4bb63a8dbc0bc6de80f09b83c95ec148f00c9"
+    },
+    {
+      "path": "src/objects/m8/prepared/presentation.json",
+      "bytes": 5139,
+      "sha256": "38b686250769c9bcf3c157e581f950772b5ef015f77ff05da7ae89162290fdee"
+    }
+  ],
+  "objects": [
+    {
+      "id": "m8",
+      "queries": [
+        "Lagoon",
+        "M8"
+      ],
+      "lenses": [
+        {
+          "id": "eso-optical",
+          "textures": 645,
+          "sourceIds": [
+            "eso-eso0936a"
+          ],
+          "sourcePixels": "4000 × 2679",
+          "frontLabel": {
+            "gapPixels": 8.000011161319492,
+            "cloud": {
+              "left": 390.00000000000085,
+              "right": 1049.9999999999993,
+              "top": 302.32404680585074
+            },
+            "label": {
+              "left": 680.578125,
+              "right": 759.421875,
+              "bottom": 294.32403564453125
+            }
+          },
+          "obliqueLabel": {
+            "gapPixels": 7.999980274947404,
+            "cloud": {
+              "left": 443.1300705005915,
+              "right": 979.3820265686894,
+              "top": 319.9031785171349
+            },
+            "label": {
+              "left": 671.8341674804688,
+              "right": 750.6779174804688,
+              "bottom": 311.9031982421875
+            }
+          },
+          "cameraRetained": true,
+          "lod": {
+            "distantDiameter": 102.39999999999995,
+            "nearDiameter": 738.3646263871428,
+            "distantImpostor": true,
+            "nearVolume": true
+          }
+        },
+        {
+          "id": "eso-vista",
+          "textures": 645,
+          "sourceIds": [
+            "eso-eso1101d"
+          ],
+          "sourcePixels": "4000 × 2202",
+          "frontLabel": {
+            "gapPixels": 8.000011161319492,
+            "cloud": {
+              "left": 390.00000000000085,
+              "right": 1049.9999999999993,
+              "top": 302.32404680585074
+            },
+            "label": {
+              "left": 680.578125,
+              "right": 759.421875,
+              "bottom": 294.32403564453125
+            }
+          },
+          "obliqueLabel": {
+            "gapPixels": 7.999980274947404,
+            "cloud": {
+              "left": 443.1300705005915,
+              "right": 979.3820265686894,
+              "top": 319.9031785171349
+            },
+            "label": {
+              "left": 671.8341674804688,
+              "right": 750.6779174804688,
+              "bottom": 311.9031982421875
+            }
+          },
+          "cameraRetained": true,
+          "lod": {
+            "distantDiameter": 102.39999999999995,
+            "nearDiameter": 738.3646263871428,
+            "distantImpostor": true,
+            "nearVolume": true
+          }
+        },
+        {
+          "id": "spitzer-mid-infrared",
+          "textures": 645,
+          "sourceIds": [
+            "spitzer-sig11-012"
+          ],
+          "sourcePixels": "1757 × 1417",
+          "frontLabel": {
+            "gapPixels": 8.000011161319492,
+            "cloud": {
+              "left": 390.00000000000085,
+              "right": 1049.9999999999993,
+              "top": 302.32404680585074
+            },
+            "label": {
+              "left": 680.578125,
+              "right": 759.421875,
+              "bottom": 294.32403564453125
+            }
+          },
+          "obliqueLabel": {
+            "gapPixels": 7.999980274947404,
+            "cloud": {
+              "left": 443.1300705005915,
+              "right": 979.3820265686894,
+              "top": 319.9031785171349
+            },
+            "label": {
+              "left": 671.8341674804688,
+              "right": 750.6779174804688,
+              "bottom": 311.9031982421875
+            }
+          },
+          "cameraRetained": true,
+          "lod": {
+            "distantDiameter": 102.39999999999995,
+            "nearDiameter": 738.3646263871428,
+            "distantImpostor": true,
+            "nearVolume": true
+          }
+        }
+      ],
+      "stars": 226,
+      "labelFlyTo": true,
+      "cameraRetainedAcrossLenses": true,
+      "visibleStars": 203,
+      "physicalStarProjection": {
+        "front": {
+          "distance": 19663.78522533263,
+          "visible": 203,
+          "samples": [
+            {
+              "id": "gaia-dr3:4065974968548020352",
+              "depthUnits": 12152.143182331278,
+              "width": 3.46875,
+              "expectedWidth": 3.4781048902089386
+            },
+            {
+              "id": "gaia-dr3:4069039891554728448",
+              "depthUnits": 27020.959512421538,
+              "width": 1.23438,
+              "expectedWidth": 1.2367744012417345
+            },
+            {
+              "id": "gaia-dr3:4069227697572699904",
+              "depthUnits": 13052.66056409624,
+              "width": 1.90625,
+              "expectedWidth": 1.9126226858035342
+            },
+            {
+              "id": "gaia-dr3:4066119760487417344",
+              "depthUnits": 12664.619744495412,
+              "width": 1.9375,
+              "expectedWidth": 1.9531110306045487
+            },
+            {
+              "id": "gaia-dr3:4066068972464771968",
+              "depthUnits": 27322.5284261056,
+              "width": 0.953125,
+              "expectedWidth": 0.963974841364056
+            },
+            {
+              "id": "gaia-dr3:4066480709550363008",
+              "depthUnits": 15851.466604615887,
+              "width": 1.5625,
+              "expectedWidth": 1.5673946043154303
+            },
+            {
+              "id": "gaia-dr3:4069665651119107072",
+              "depthUnits": 19016.963057363024,
+              "width": 1.15625,
+              "expectedWidth": 1.1620253537051566
+            },
+            {
+              "id": "gaia-dr3:4065715861804605696",
+              "depthUnits": 23933.096371163098,
+              "width": 0.90625,
+              "expectedWidth": 0.9108021301253071
+            },
+            {
+              "id": "gaia-dr3:4064314877781058560",
+              "depthUnits": 17259.500062153573,
+              "width": 1.14062,
+              "expectedWidth": 1.1472195500599536
+            },
+            {
+              "id": "gaia-dr3:4065974723702431104",
+              "depthUnits": 20016.84730806829,
+              "width": 0.953125,
+              "expectedWidth": 0.9630675544399719
+            },
+            {
+              "id": "gaia-dr3:4069546388461397504",
+              "depthUnits": 23819.065149735732,
+              "width": 0.796875,
+              "expectedWidth": 0.7984275855642338
+            },
+            {
+              "id": "gaia-dr3:4066488887169122688",
+              "depthUnits": 11594.29535034152,
+              "width": 1.51562,
+              "expectedWidth": 1.5221846705882354
+            },
+            {
+              "id": "gaia-dr3:4066074508707899008",
+              "depthUnits": 15684.755262266626,
+              "width": 1.10938,
+              "expectedWidth": 1.1242374484266373
+            },
+            {
+              "id": "gaia-dr3:4066600453247401088",
+              "depthUnits": 25111.992859610473,
+              "width": 0.703125,
+              "expectedWidth": 0.7144766027380062
+            },
+            {
+              "id": "gaia-dr3:4065839625540747264",
+              "depthUnits": 12914.248952213682,
+              "width": 1.23438,
+              "expectedWidth": 1.2462759392594913
+            },
+            {
+              "id": "gaia-dr3:4069239693437986688",
+              "depthUnits": 22682.630227137204,
+              "width": 0.734375,
+              "expectedWidth": 0.7380196900117517
+            },
+            {
+              "id": "gaia-dr3:4066069144263463552",
+              "depthUnits": 16506.4134923477,
+              "width": 0.96875,
+              "expectedWidth": 0.9754103706676714
+            },
+            {
+              "id": "gaia-dr3:4069270441087212544",
+              "depthUnits": 16238.548766010961,
+              "width": 0.984375,
+              "expectedWidth": 0.989416079224604
+            },
+            {
+              "id": "gaia-dr3:4065975209066204928",
+              "depthUnits": 11144.968803582618,
+              "width": 1.32812,
+              "expectedWidth": 1.3314469451443478
+            },
+            {
+              "id": "gaia-dr3:4064318790471525632",
+              "depthUnits": 16789.761016512944,
+              "width": 0.859375,
+              "expectedWidth": 0.8743660268237857
+            },
+            {
+              "id": "gaia-dr3:4066522181757585536",
+              "depthUnits": 17182.9851226918,
+              "width": 0.828125,
+              "expectedWidth": 0.8318891097914393
+            },
+            {
+              "id": "gaia-dr3:4069249344207868416",
+              "depthUnits": 19493.410905589248,
+              "width": 0.6875,
+              "expectedWidth": 0.6953460093206798
+            },
+            {
+              "id": "gaia-dr3:4069847723366678144",
+              "depthUnits": 19846.27415827106,
+              "width": 0.671875,
+              "expectedWidth": 0.6807710108518729
+            },
+            {
+              "id": "gaia-dr3:4066684565906746368",
+              "depthUnits": 13901.310490868844,
+              "width": 0.890625,
+              "expectedWidth": 0.8923678854061772
+            },
+            {
+              "id": "gaia-dr3:4069659054048680576",
+              "depthUnits": 17696.80721400841,
+              "width": 0.6875,
+              "expectedWidth": 0.6961837770287418
+            },
+            {
+              "id": "gaia-dr3:4066539013685666560",
+              "depthUnits": 15930.446123709424,
+              "width": 0.75,
+              "expectedWidth": 0.7641098340822345
+            },
+            {
+              "id": "gaia-dr3:4066400307801133056",
+              "depthUnits": 20731.181449367712,
+              "width": 0.59375,
+              "expectedWidth": 0.5965893793052143
+            },
+            {
+              "id": "gaia-dr3:4065659202537069952",
+              "depthUnits": 22122.160996209648,
+              "width": 0.53125,
+              "expectedWidth": 0.5407061436561333
+            },
+            {
+              "id": "gaia-dr3:4069465643073485056",
+              "depthUnits": 15321.248386709152,
+              "width": 0.75,
+              "expectedWidth": 0.7545146211769627
+            },
+            {
+              "id": "gaia-dr3:4065674252176051072",
+              "depthUnits": 22264.180008541523,
+              "width": 0.515625,
+              "expectedWidth": 0.530318892307505
+            },
+            {
+              "id": "gaia-dr3:4065975277789825664",
+              "depthUnits": 16317.271843652117,
+              "width": 0.6875,
+              "expectedWidth": 0.7002370125467533
+            },
+            {
+              "id": "gaia-dr3:4069059992001952384",
+              "depthUnits": 13794.09141667244,
+              "width": 0.796875,
+              "expectedWidth": 0.8049688469798576
+            },
+            {
+              "id": "gaia-dr3:4064112017930843264",
+              "depthUnits": 21781.106891116106,
+              "width": 0.515625,
+              "expectedWidth": 0.5272119998486777
+            },
+            {
+              "id": "gaia-dr3:4064106898328933120",
+              "depthUnits": 18224.57401386665,
+              "width": 0.609375,
+              "expectedWidth": 0.6181066070991162
+            },
+            {
+              "id": "gaia-dr3:4066581108714155136",
+              "depthUnits": 14603.62128170937,
+              "width": 0.75,
+              "expectedWidth": 0.7544969469180394
+            },
+            {
+              "id": "gaia-dr3:4065861405285501824",
+              "depthUnits": 15449.357475839732,
+              "width": 0.6875,
+              "expectedWidth": 0.6973812870778786
+            },
+            {
+              "id": "gaia-dr3:4065975930620727040",
+              "depthUnits": 11506.721155039464,
+              "width": 0.90625,
+              "expectedWidth": 0.915098961056928
+            },
+            {
+              "id": "gaia-dr3:4066708858242666368",
+              "depthUnits": 20140.866617686,
+              "width": 0.53125,
+              "expectedWidth": 0.5453420426857056
+            },
+            {
+              "id": "gaia-dr3:4069498594063996544",
+              "depthUnits": 19569.863141882342,
+              "width": 0.546875,
+              "expectedWidth": 0.5509150371559897
+            },
+            {
+              "id": "gaia-dr3:4069268658698561408",
+              "depthUnits": 13864.453636649407,
+              "width": 0.75,
+              "expectedWidth": 0.7546468334045832
+            },
+            {
+              "id": "gaia-dr3:4065050897770101248",
+              "depthUnits": 25893.814121117848,
+              "width": 0.40625,
+              "expectedWidth": 0.414498516989406
+            },
+            {
+              "id": "gaia-dr3:4069463547129269632",
+              "depthUnits": 13409.043892954844,
+              "width": 0.75,
+              "expectedWidth": 0.7530789684281304
+            },
+            {
+              "id": "gaia-dr3:4069475332524506240",
+              "depthUnits": 17629.43523021354,
+              "width": 0.5625,
+              "expectedWidth": 0.5753721844125858
+            },
+            {
+              "id": "gaia-dr3:4069187810231208320",
+              "depthUnits": 19772.96579033725,
+              "width": 0.515625,
+              "expectedWidth": 0.5179136837483126
+            },
+            {
+              "id": "gaia-dr3:4069627717966166016",
+              "depthUnits": 16311.857958989294,
+              "width": 0.59375,
+              "expectedWidth": 0.604901996168011
+            },
+            {
+              "id": "gaia-dr3:4065825950384014720",
+              "depthUnits": 17574.253191426647,
+              "width": 0.53125,
+              "expectedWidth": 0.5447730612768131
+            },
+            {
+              "id": "gaia-dr3:4065660400818474880",
+              "depthUnits": 14961.132530487615,
+              "width": 0.609375,
+              "expectedWidth": 0.6235947468225024
+            },
+            {
+              "id": "gaia-dr3:4069375994206306432",
+              "depthUnits": 23916.564874733776,
+              "width": 0.40625,
+              "expectedWidth": 0.4066930269932111
+            },
+            {
+              "id": "gaia-dr3:4070157403373442176",
+              "depthUnits": 18421.44820846307,
+              "width": 0.5,
+              "expectedWidth": 0.5103484485932891
+            },
+            {
+              "id": "gaia-dr3:4067497517260650752",
+              "depthUnits": 20075.004029247873,
+              "width": 0.46875,
+              "expectedWidth": 0.47045840015594137
+            },
+            {
+              "id": "gaia-dr3:4069470453441642496",
+              "depthUnits": 23029.180487352853,
+              "width": 0.375,
+              "expectedWidth": 0.38984608384666647
+            },
+            {
+              "id": "gaia-dr3:4066190266685684608",
+              "depthUnits": 20904.83693849044,
+              "width": 0.421875,
+              "expectedWidth": 0.4225328211483642
+            },
+            {
+              "id": "gaia-dr3:4065791384497729536",
+              "depthUnits": 16646.820922316663,
+              "width": 0.515625,
+              "expectedWidth": 0.5188397361028553
+            },
+            {
+              "id": "gaia-dr3:4069877749464560640",
+              "depthUnits": 19459.768512013165,
+              "width": 0.4375,
+              "expectedWidth": 0.4439876493173139
+            },
+            {
+              "id": "gaia-dr3:4065700532990360832",
+              "depthUnits": 11480.792480951675,
+              "width": 0.703125,
+              "expectedWidth": 0.716955054660411
+            },
+            {
+              "id": "gaia-dr3:4066567467895538816",
+              "depthUnits": 19873.12722049076,
+              "width": 0.421875,
+              "expectedWidth": 0.4297740339816251
+            },
+            {
+              "id": "gaia-dr3:4066182123413873152",
+              "depthUnits": 15147.26961742282,
+              "width": 0.546875,
+              "expectedWidth": 0.5508051371806894
+            },
+            {
+              "id": "gaia-dr3:4069642045978048256",
+              "depthUnits": 18266.03111178448,
+              "width": 0.453125,
+              "expectedWidth": 0.45951299522496936
+            },
+            {
+              "id": "gaia-dr3:4067371210866622336",
+              "depthUnits": 16096.6671618584,
+              "width": 0.515625,
+              "expectedWidth": 0.516003390102919
+            },
+            {
+              "id": "gaia-dr3:4065679715376399872",
+              "depthUnits": 22119.781747010573,
+              "width": 0.375,
+              "expectedWidth": 0.3860783077171469
+            },
+            {
+              "id": "gaia-dr3:4067424949501550592",
+              "depthUnits": 20918.38128187326,
+              "width": 0.390625,
+              "expectedWidth": 0.40495963552732006
+            },
+            {
+              "id": "gaia-dr3:4069265154005182464",
+              "depthUnits": 18283.640929928235,
+              "width": 0.453125,
+              "expectedWidth": 0.4551591442488034
+            },
+            {
+              "id": "gaia-dr3:4064421392980030848",
+              "depthUnits": 11353.532099093716,
+              "width": 0.703125,
+              "expectedWidth": 0.7077426998054325
+            },
+            {
+              "id": "gaia-dr3:4069271854154374016",
+              "depthUnits": 21089.95352000886,
+              "width": 0.390625,
+              "expectedWidth": 0.3969848540149821
+            },
+            {
+              "id": "gaia-dr3:4069361704890108928",
+              "depthUnits": 18850.557382690404,
+              "width": 0.421875,
+              "expectedWidth": 0.436710244851739
+            },
+            {
+              "id": "gaia-dr3:4069251375749864320",
+              "depthUnits": 23912.99807621912,
+              "width": 0.34375,
+              "expectedWidth": 0.3519785821438834
+            },
+            {
+              "id": "gaia-dr3:4064268595212408960",
+              "depthUnits": 19932.274936078575,
+              "width": 0.40625,
+              "expectedWidth": 0.41152362206760573
+            },
+            {
+              "id": "gaia-dr3:4069471892235490944",
+              "depthUnits": 16930.997176807512,
+              "width": 0.46875,
+              "expectedWidth": 0.47636827901216977
+            },
+            {
+              "id": "gaia-dr3:4066472257055645696",
+              "depthUnits": 15532.348247823356,
+              "width": 0.5,
+              "expectedWidth": 0.5152341398529129
+            },
+            {
+              "id": "gaia-dr3:4067506519512343936",
+              "depthUnits": 14557.690679847583,
+              "width": 0.546875,
+              "expectedWidth": 0.5469503070408225
+            },
+            {
+              "id": "gaia-dr3:4069300132235217920",
+              "depthUnits": 17832.334883666284,
+              "width": 0.4375,
+              "expectedWidth": 0.4477517965857053
+            },
+            {
+              "id": "gaia-dr3:4064286118679056640",
+              "depthUnits": 16437.819585822508,
+              "width": 0.46875,
+              "expectedWidth": 0.48123859607448416
+            },
+            {
+              "id": "gaia-dr3:4064789557594483200",
+              "depthUnits": 20935.18295580048,
+              "width": 0.375,
+              "expectedWidth": 0.3854393697928483
+            },
+            {
+              "id": "gaia-dr3:4065818593055382144",
+              "depthUnits": 17789.442279366285,
+              "width": 0.4375,
+              "expectedWidth": 0.4453035202941193
+            },
+            {
+              "id": "gaia-dr3:4066070248099903104",
+              "depthUnits": 19445.041277743305,
+              "width": 0.40625,
+              "expectedWidth": 0.4092676335135013
+            },
+            {
+              "id": "gaia-dr3:4066557709729291776",
+              "depthUnits": 16421.905132898464,
+              "width": 0.46875,
+              "expectedWidth": 0.47714405063480236
+            },
+            {
+              "id": "gaia-dr3:4067517480266032768",
+              "depthUnits": 10935.830199168657,
+              "width": 0.6875,
+              "expectedWidth": 0.6932580211825556
+            },
+            {
+              "id": "gaia-dr3:4069068547576826880",
+              "depthUnits": 15851.249990670352,
+              "width": 0.484375,
+              "expectedWidth": 0.48688971102210643
+            },
+            {
+              "id": "gaia-dr3:4069658401213613568",
+              "depthUnits": 18256.08916093715,
+              "width": 0.421875,
+              "expectedWidth": 0.42647296047521216
+            },
+            {
+              "id": "gaia-dr3:4064198260881816576",
+              "depthUnits": 17994.936964809098,
+              "width": 0.421875,
+              "expectedWidth": 0.4299990338243162
+            },
+            {
+              "id": "gaia-dr3:4066074847980029440",
+              "depthUnits": 23202.67483737274,
+              "width": 0.328125,
+              "expectedWidth": 0.3413172828829409
+            },
+            {
+              "id": "gaia-dr3:4066492598019826176",
+              "depthUnits": 16081.556119312407,
+              "width": 0.46875,
+              "expectedWidth": 0.4735362660943092
+            },
+            {
+              "id": "gaia-dr3:4066093303486254336",
+              "depthUnits": 26946.95674023793,
+              "width": 0.28125,
+              "expectedWidth": 0.2960117775308925
+            },
+            {
+              "id": "gaia-dr3:4064205510785615104",
+              "depthUnits": 12947.324737595993,
+              "width": 0.5625,
+              "expectedWidth": 0.573838804945066
+            },
+            {
+              "id": "gaia-dr3:4066543897114374656",
+              "depthUnits": 12352.828502205926,
+              "width": 0.59375,
+              "expectedWidth": 0.5962300457610406
+            },
+            {
+              "id": "gaia-dr3:4065479569908091776",
+              "depthUnits": 18378.048150445524,
+              "width": 0.40625,
+              "expectedWidth": 0.41287757436210903
+            },
+            {
+              "id": "gaia-dr3:4064958916766312192",
+              "depthUnits": 17598.29659381987,
+              "width": 0.421875,
+              "expectedWidth": 0.42596646262236726
+            },
+            {
+              "id": "gaia-dr3:4066514931852437120",
+              "depthUnits": 13540.058801070832,
+              "width": 0.53125,
+              "expectedWidth": 0.5403463027810846
+            },
+            {
+              "id": "gaia-dr3:4069569542611376128",
+              "depthUnits": 21253.574562416252,
+              "width": 0.34375,
+              "expectedWidth": 0.3571316426642628
+            },
+            {
+              "id": "gaia-dr3:4065790319345788288",
+              "depthUnits": 22719.585019397833,
+              "width": 0.328125,
+              "expectedWidth": 0.3354860645529129
+            },
+            {
+              "id": "gaia-dr3:4066072167920437632",
+              "depthUnits": 19637.038514960117,
+              "width": 0.375,
+              "expectedWidth": 0.3810003377355223
+            },
+            {
+              "id": "gaia-dr3:4064348649084159232",
+              "depthUnits": 21932.001062821546,
+              "width": 0.34375,
+              "expectedWidth": 0.3450105885366989
+            },
+            {
+              "id": "gaia-dr3:4065662840359898496",
+              "depthUnits": 13191.303410153607,
+              "width": 0.53125,
+              "expectedWidth": 0.5441441017513307
+            },
+            {
+              "id": "gaia-dr3:4069168500057468928",
+              "depthUnits": 11435.81973157406,
+              "width": 0.609375,
+              "expectedWidth": 0.6141672486042422
+            },
+            {
+              "id": "gaia-dr3:4067559296068606848",
+              "depthUnits": 21609.337854233287,
+              "width": 0.328125,
+              "expectedWidth": 0.33655488152079005
+            },
+            {
+              "id": "gaia-dr3:4067749442877770752",
+              "depthUnits": 18303.90991632285,
+              "width": 0.375,
+              "expectedWidth": 0.3906031011008221
+            },
+            {
+              "id": "gaia-dr3:4069432004888451328",
+              "depthUnits": 19402.73474273291,
+              "width": 0.359375,
+              "expectedWidth": 0.36961252968420294
+            },
+            {
+              "id": "gaia-dr3:4069636269221620864",
+              "depthUnits": 16375.264491497877,
+              "width": 0.421875,
+              "expectedWidth": 0.43099398974867953
+            },
+            {
+              "id": "gaia-dr3:4065945002531228928",
+              "depthUnits": 28340.73516908936,
+              "width": 0.25,
+              "expectedWidth": 0.2625435859140824
+            },
+            {
+              "id": "gaia-dr3:4069659157127895808",
+              "depthUnits": 15199.859108356644,
+              "width": 0.453125,
+              "expectedWidth": 0.45897122372584503
+            },
+            {
+              "id": "gaia-dr3:4065712769428771328",
+              "depthUnits": 13126.938777836323,
+              "width": 0.515625,
+              "expectedWidth": 0.5242668356731449
+            },
+            {
+              "id": "gaia-dr3:4067506244631499648",
+              "depthUnits": 14140.691790481149,
+              "width": 0.484375,
+              "expectedWidth": 0.4878933535931806
+            },
+            {
+              "id": "gaia-dr3:4064358961332767744",
+              "depthUnits": 16865.915724713734,
+              "width": 0.40625,
+              "expectedWidth": 0.4138872390149337
+            },
+            {
+              "id": "gaia-dr3:4070192553389461376",
+              "depthUnits": 20749.622696533588,
+              "width": 0.328125,
+              "expectedWidth": 0.3422744526574921
+            },
+            {
+              "id": "gaia-dr3:4069607510121921024",
+              "depthUnits": 16662.57993721373,
+              "width": 0.40625,
+              "expectedWidth": 0.41708975131523396
+            },
+            {
+              "id": "gaia-dr3:4067509916812718208",
+              "depthUnits": 13967.412427707699,
+              "width": 0.484375,
+              "expectedWidth": 0.48914432524327295
+            },
+            {
+              "id": "gaia-dr3:4066069006830061824",
+              "depthUnits": 26188.993347374417,
+              "width": 0.265625,
+              "expectedWidth": 0.2766803685303179
+            },
+            {
+              "id": "gaia-dr3:4064347549572532096",
+              "depthUnits": 13575.963981456136,
+              "width": 0.5,
+              "expectedWidth": 0.5019759100044033
+            },
+            {
+              "id": "gaia-dr3:4067559841512564992",
+              "depthUnits": 16246.478141138852,
+              "width": 0.40625,
+              "expectedWidth": 0.4175374344628197
+            },
+            {
+              "id": "gaia-dr3:4065971115929904384",
+              "depthUnits": 17711.212642962226,
+              "width": 0.375,
+              "expectedWidth": 0.3802558347616662
+            },
+            {
+              "id": "gaia-dr3:4065973044402687872",
+              "depthUnits": 21552.40490104346,
+              "width": 0.3125,
+              "expectedWidth": 0.315385075856852
+            },
+            {
+              "id": "gaia-dr3:4066101579857709952",
+              "depthUnits": 15688.402790597625,
+              "width": 0.40625,
+              "expectedWidth": 0.41999646670069996
+            },
+            {
+              "id": "gaia-dr3:4067361109103874816",
+              "depthUnits": 25047.350020001144,
+              "width": 0.265625,
+              "expectedWidth": 0.2749743014518423
+            },
+            {
+              "id": "gaia-dr3:4067773043689729152",
+              "depthUnits": 26014.28694240132,
+              "width": 0.265625,
+              "expectedWidth": 0.2657226777826831
+            },
+            {
+              "id": "gaia-dr3:4065011624621815168",
+              "depthUnits": 24296.232444060235,
+              "width": 0.265625,
+              "expectedWidth": 0.28061606464956595
+            },
+            {
+              "id": "gaia-dr3:4067363338169981056",
+              "depthUnits": 17306.408704581336,
+              "width": 0.375,
+              "expectedWidth": 0.37908336508096346
+            },
+            {
+              "id": "gaia-dr3:4064449907235035520",
+              "depthUnits": 13439.218034763075,
+              "width": 0.46875,
+              "expectedWidth": 0.4782148492956233
+            },
+            {
+              "id": "gaia-dr3:4065640369088481152",
+              "depthUnits": 24219.786928013527,
+              "width": 0.265625,
+              "expectedWidth": 0.2761656299850998
+            },
+            {
+              "id": "gaia-dr3:4069468524981135232",
+              "depthUnits": 25350.579092983477,
+              "width": 0.25,
+              "expectedWidth": 0.26451642138716974
+            },
+            {
+              "id": "gaia-dr3:4069058338425479936",
+              "depthUnits": 26998.454963756616,
+              "width": 0.234375,
+              "expectedWidth": 0.24923815801295304
+            },
+            {
+              "id": "gaia-dr3:4066185692497217920",
+              "depthUnits": 11306.448796632649,
+              "width": 0.53125,
+              "expectedWidth": 0.5449837095923347
+            },
+            {
+              "id": "gaia-dr3:4065975376537460352",
+              "depthUnits": 10092.62210345668,
+              "width": 0.59375,
+              "expectedWidth": 0.6006089841384703
+            },
+            {
+              "id": "gaia-dr3:4067508890331033856",
+              "depthUnits": 16244.667237390851,
+              "width": 0.375,
+              "expectedWidth": 0.38380944214398904
+            },
+            {
+              "id": "gaia-dr3:4069465570043636224",
+              "depthUnits": 14744.85254539846,
+              "width": 0.40625,
+              "expectedWidth": 0.4190598625427538
+            },
+            {
+              "id": "gaia-dr3:4063350155094119040",
+              "depthUnits": 18483.87658891464,
+              "width": 0.328125,
+              "expectedWidth": 0.3402043071547245
+            },
+            {
+              "id": "gaia-dr3:4067462225498458624",
+              "depthUnits": 15619.792840369944,
+              "width": 0.390625,
+              "expectedWidth": 0.39673065439661476
+            },
+            {
+              "id": "gaia-dr3:4066561695459011328",
+              "depthUnits": 15089.958009687189,
+              "width": 0.40625,
+              "expectedWidth": 0.4089021163216051
+            },
+            {
+              "id": "gaia-dr3:4064863980816400000",
+              "depthUnits": 19880.896327904557,
+              "width": 0.3125,
+              "expectedWidth": 0.3168416498425305
+            },
+            {
+              "id": "gaia-dr3:4069049993318206720",
+              "depthUnits": 15006.491116634352,
+              "width": 0.40625,
+              "expectedWidth": 0.40954303486922855
+            },
+            {
+              "id": "gaia-dr3:4065974964232460416",
+              "depthUnits": 13504.101446709115,
+              "width": 0.4375,
+              "expectedWidth": 0.4495085611743619
+            },
+            {
+              "id": "gaia-dr3:4069867475902793216",
+              "depthUnits": 24059.03972298041,
+              "width": 0.25,
+              "expectedWidth": 0.2635216086930155
+            },
+            {
+              "id": "gaia-dr3:4064365588438851072",
+              "depthUnits": 20269.649815577992,
+              "width": 0.296875,
+              "expectedWidth": 0.30569641491443256
+            },
+            {
+              "id": "gaia-dr3:4066038564096313856",
+              "depthUnits": 21474.086381398636,
+              "width": 0.28125,
+              "expectedWidth": 0.2894142444430784
+            },
+            {
+              "id": "gaia-dr3:4066071721244117632",
+              "depthUnits": 13272.78868836803,
+              "width": 0.4375,
+              "expectedWidth": 0.44918531410692936
+            },
+            {
+              "id": "gaia-dr3:4066064819261901440",
+              "depthUnits": 15142.995356863692,
+              "width": 0.390625,
+              "expectedWidth": 0.39439005837489977
+            },
+            {
+              "id": "gaia-dr3:4069385310008423168",
+              "depthUnits": 14149.091416010915,
+              "width": 0.40625,
+              "expectedWidth": 0.41855650110431913
+            },
+            {
+              "id": "gaia-dr3:4067561147183837952",
+              "depthUnits": 11562.695956750427,
+              "width": 0.5,
+              "expectedWidth": 0.5046316608349873
+            },
+            {
+              "id": "gaia-dr3:4065720843966877312",
+              "depthUnits": 10541.356473073676,
+              "width": 0.546875,
+              "expectedWidth": 0.5500706721926634
+            },
+            {
+              "id": "gaia-dr3:4069433271889575936",
+              "depthUnits": 15970.143629075148,
+              "width": 0.359375,
+              "expectedWidth": 0.3712579913914892
+            },
+            {
+              "id": "gaia-dr3:4064194481309762432",
+              "depthUnits": 16513.86054230343,
+              "width": 0.359375,
+              "expectedWidth": 0.35961133866668715
+            },
+            {
+              "id": "gaia-dr3:4069869881084480640",
+              "depthUnits": 17420.100381322256,
+              "width": 0.328125,
+              "expectedWidth": 0.3415659439556111
+            },
+            {
+              "id": "gaia-dr3:4065974929872743808",
+              "depthUnits": 12747.508123869362,
+              "width": 0.453125,
+              "expectedWidth": 0.45573552300424125
+            },
+            {
+              "id": "gaia-dr3:4067504561004322944",
+              "depthUnits": 14140.770250529931,
+              "width": 0.40625,
+              "expectedWidth": 0.41342942263542726
+            },
+            {
+              "id": "gaia-dr3:4064858723773187072",
+              "depthUnits": 22996.18182626309,
+              "width": 0.25,
+              "expectedWidth": 0.26528511321883075
+            },
+            {
+              "id": "gaia-dr3:4069469555778987264",
+              "depthUnits": 14228.713081580408,
+              "width": 0.40625,
+              "expectedWidth": 0.4104467122412066
+            },
+            {
+              "id": "gaia-dr3:4065886590977590400",
+              "depthUnits": 20180.52973532704,
+              "width": 0.296875,
+              "expectedWidth": 0.29740286401377336
+            },
+            {
+              "id": "gaia-dr3:4066278979190463104",
+              "depthUnits": 17903.23237853093,
+              "width": 0.328125,
+              "expectedWidth": 0.3311139354043229
+            },
+            {
+              "id": "gaia-dr3:4066006162864576128",
+              "depthUnits": 24298.66370902084,
+              "width": 0.25,
+              "expectedWidth": 0.2513045391734922
+            },
+            {
+              "id": "gaia-dr3:4069663001100740608",
+              "depthUnits": 15254.993593948024,
+              "width": 0.375,
+              "expectedWidth": 0.38308092225973694
+            },
+            {
+              "id": "gaia-dr3:4065791139624410624",
+              "depthUnits": 15482.291605819048,
+              "width": 0.375,
+              "expectedWidth": 0.37766899524595887
+            },
+            {
+              "id": "gaia-dr3:4064495365166991232",
+              "depthUnits": 27757.544997468856,
+              "width": 0.21875,
+              "expectedWidth": 0.22090499199629693
+            },
+            {
+              "id": "gaia-dr3:4065447306085256832",
+              "depthUnits": 16288.014768259874,
+              "width": 0.34375,
+              "expectedWidth": 0.3564574185007349
+            },
+            {
+              "id": "gaia-dr3:4066014787157369216",
+              "depthUnits": 13184.484148340493,
+              "width": 0.421875,
+              "expectedWidth": 0.432305662802899
+            },
+            {
+              "id": "gaia-dr3:4064813983029456128",
+              "depthUnits": 22940.891582364395,
+              "width": 0.25,
+              "expectedWidth": 0.2603889479594333
+            },
+            {
+              "id": "gaia-dr3:4064993993696575616",
+              "depthUnits": 22733.70911948524,
+              "width": 0.25,
+              "expectedWidth": 0.2612713296214669
+            },
+            {
+              "id": "gaia-dr3:4069668120701749504",
+              "depthUnits": 19265.919759812023,
+              "width": 0.296875,
+              "expectedWidth": 0.3022790395986045
+            },
+            {
+              "id": "gaia-dr3:4066185383259572864",
+              "depthUnits": 21806.490397693105,
+              "width": 0.265625,
+              "expectedWidth": 0.26958547808862576
+            },
+            {
+              "id": "gaia-dr3:4069335243553776640",
+              "depthUnits": 19181.64780843039,
+              "width": 0.296875,
+              "expectedWidth": 0.30219305382851014
+            },
+            {
+              "id": "gaia-dr3:4066028260504444416",
+              "depthUnits": 19446.897880005774,
+              "width": 0.28125,
+              "expectedWidth": 0.2965653705886953
+            },
+            {
+              "id": "gaia-dr3:4069016282104992896",
+              "depthUnits": 16690.035692928046,
+              "width": 0.328125,
+              "expectedWidth": 0.34066588148378624
+            },
+            {
+              "id": "gaia-dr3:4069263259901895168",
+              "depthUnits": 13684.155695672704,
+              "width": 0.390625,
+              "expectedWidth": 0.4039152258390318
+            },
+            {
+              "id": "gaia-dr3:4066128620971805184",
+              "depthUnits": 13491.330758547116,
+              "width": 0.40625,
+              "expectedWidth": 0.4088485977518277
+            },
+            {
+              "id": "gaia-dr3:4067533384516614528",
+              "depthUnits": 25544.666646754944,
+              "width": 0.21875,
+              "expectedWidth": 0.22848350621666733
+            },
+            {
+              "id": "gaia-dr3:4065022065602795136",
+              "depthUnits": 17970.8638645816,
+              "width": 0.296875,
+              "expectedWidth": 0.3124186546138207
+            },
+            {
+              "id": "gaia-dr3:4066613574317915008",
+              "depthUnits": 16753.669541258812,
+              "width": 0.328125,
+              "expectedWidth": 0.3318575413579491
+            },
+            {
+              "id": "gaia-dr3:4065763209527446400",
+              "depthUnits": 15552.626653011757,
+              "width": 0.34375,
+              "expectedWidth": 0.3548569544995532
+            },
+            {
+              "id": "gaia-dr3:4069571982152801024",
+              "depthUnits": 14350.06400039575,
+              "width": 0.375,
+              "expectedWidth": 0.3816708527541202
+            },
+            {
+              "id": "gaia-dr3:4066119721798729344",
+              "depthUnits": 17836.3456349193,
+              "width": 0.296875,
+              "expectedWidth": 0.31012681084776483
+            },
+            {
+              "id": "gaia-dr3:4069720347501504128",
+              "depthUnits": 18355.110205909474,
+              "width": 0.296875,
+              "expectedWidth": 0.30102830773677636
+            },
+            {
+              "id": "gaia-dr3:4067491981029297792",
+              "depthUnits": 17008.820547003892,
+              "width": 0.3125,
+              "expectedWidth": 0.3222563163380894
+            },
+            {
+              "id": "gaia-dr3:4064351157348575232",
+              "depthUnits": 25747.81881385367,
+              "width": 0.21875,
+              "expectedWidth": 0.2220231050820103
+            },
+            {
+              "id": "gaia-dr3:4064209462155966592",
+              "depthUnits": 24509.85229750243,
+              "width": 0.21875,
+              "expectedWidth": 0.23170425202766673
+            },
+            {
+              "id": "gaia-dr3:4065970325655922304",
+              "depthUnits": 18665.419569819976,
+              "width": 0.28125,
+              "expectedWidth": 0.2957757429336814
+            },
+            {
+              "id": "gaia-dr3:4065467990674564352",
+              "depthUnits": 18571.650739282923,
+              "width": 0.28125,
+              "expectedWidth": 0.2963549020629094
+            },
+            {
+              "id": "gaia-dr3:4066527125216201600",
+              "depthUnits": 13506.755311530365,
+              "width": 0.390625,
+              "expectedWidth": 0.39727066833271557
+            },
+            {
+              "id": "gaia-dr3:4064865797514868736",
+              "depthUnits": 14284.855417203033,
+              "width": 0.375,
+              "expectedWidth": 0.3769058470512032
+            },
+            {
+              "id": "gaia-dr3:4069870778751292160",
+              "depthUnits": 19570.151590809608,
+              "width": 0.28125,
+              "expectedWidth": 0.28167894946465477
+            },
+            {
+              "id": "gaia-dr3:4069341119069603328",
+              "depthUnits": 24194.871805519397,
+              "width": 0.21875,
+              "expectedWidth": 0.22949206868836777
+            },
+            {
+              "id": "gaia-dr3:4064915790936970112",
+              "depthUnits": 23235.535357387107,
+              "width": 0.234375,
+              "expectedWidth": 0.2367853720229371
+            },
+            {
+              "id": "gaia-dr3:4065975754494579840",
+              "depthUnits": 11762.30121838365,
+              "width": 0.4375,
+              "expectedWidth": 0.44053409277719197
+            },
+            {
+              "id": "gaia-dr3:4069283532147523840",
+              "depthUnits": 25139.263123374843,
+              "width": 0.21875,
+              "expectedWidth": 0.2198700144306571
+            },
+            {
+              "id": "gaia-dr3:4069604383385729664",
+              "depthUnits": 22809.225233023855,
+              "width": 0.234375,
+              "expectedWidth": 0.2396537563508379
+            },
+            {
+              "id": "gaia-dr3:4065639647533975168",
+              "depthUnits": 23457.78089573233,
+              "width": 0.21875,
+              "expectedWidth": 0.2337013735844891
+            },
+            {
+              "id": "gaia-dr3:4064248559166313088",
+              "depthUnits": 18674.845808338825,
+              "width": 0.28125,
+              "expectedWidth": 0.2867997173588479
+            },
+            {
+              "id": "gaia-dr3:4066607153396356992",
+              "depthUnits": 23867.72728084146,
+              "width": 0.21875,
+              "expectedWidth": 0.22971517184034962
+            },
+            {
+              "id": "gaia-dr3:4069148154781134848",
+              "depthUnits": 27336.67603613977,
+              "width": 0.203125,
+              "expectedWidth": 0.20370604563399608
+            },
+            {
+              "id": "gaia-dr3:4067494527960253824",
+              "depthUnits": 15550.413857158364,
+              "width": 0.328125,
+              "expectedWidth": 0.3375594366835702
+            },
+            {
+              "id": "gaia-dr3:4064276699793446656",
+              "depthUnits": 22783.249238612767,
+              "width": 0.234375,
+              "expectedWidth": 0.23705408171737047
+            },
+            {
+              "id": "gaia-dr3:4069852018334011648",
+              "depthUnits": 21681.997392340658,
+              "width": 0.234375,
+              "expectedWidth": 0.24711900822719762
+            },
+            {
+              "id": "gaia-dr3:4066580382810647168",
+              "depthUnits": 14694.101652391662,
+              "width": 0.34375,
+              "expectedWidth": 0.35207548846273756
+            },
+            {
+              "id": "gaia-dr3:4065692183581678208",
+              "depthUnits": 17776.46973276233,
+              "width": 0.28125,
+              "expectedWidth": 0.2950939711911904
+            },
+            {
+              "id": "gaia-dr3:4065758738389686272",
+              "depthUnits": 27423.520336201796,
+              "width": 0.1875,
+              "expectedWidth": 0.19921999205622345
+            },
+            {
+              "id": "gaia-dr3:4069850197268487424",
+              "depthUnits": 18319.698654768392,
+              "width": 0.28125,
+              "expectedWidth": 0.28554090931570336
+            },
+            {
+              "id": "gaia-dr3:4066178305155804800",
+              "depthUnits": 19817.66225537721,
+              "width": 0.25,
+              "expectedWidth": 0.2653770120827217
+            },
+            {
+              "id": "gaia-dr3:4069479593127281408",
+              "depthUnits": 16700.585796660576,
+              "width": 0.296875,
+              "expectedWidth": 0.309699160342348
+            },
+            {
+              "id": "gaia-dr3:4066547053867596800",
+              "depthUnits": 22969.424273790966,
+              "width": 0.21875,
+              "expectedWidth": 0.23164425749447043
+            },
+            {
+              "id": "gaia-dr3:4069016797503949056",
+              "depthUnits": 18710.45518226144,
+              "width": 0.265625,
+              "expectedWidth": 0.2779337268022068
+            },
+            {
+              "id": "gaia-dr3:4067445943301984256",
+              "depthUnits": 22631.948741376225,
+              "width": 0.21875,
+              "expectedWidth": 0.2341470048555226
+            },
+            {
+              "id": "gaia-dr3:4064350710668461440",
+              "depthUnits": 16118.544474688983,
+              "width": 0.3125,
+              "expectedWidth": 0.3184129486657463
+            },
+            {
+              "id": "gaia-dr3:4069447569849252992",
+              "depthUnits": 15110.696260323963,
+              "width": 0.328125,
+              "expectedWidth": 0.33655152719770887
+            },
+            {
+              "id": "gaia-dr3:4065668922033588864",
+              "depthUnits": 23087.336588300186,
+              "width": 0.21875,
+              "expectedWidth": 0.22823988248837693
+            },
+            {
+              "id": "gaia-dr3:4069425437869228288",
+              "depthUnits": 24379.10439554983,
+              "width": 0.203125,
+              "expectedWidth": 0.2163174123188785
+            },
+            {
+              "id": "gaia-dr3:4066085362063973376",
+              "depthUnits": 20553.950477974748,
+              "width": 0.25,
+              "expectedWidth": 0.2515710442379943
+            }
+          ]
+        },
+        "closer": {
+          "distance": 9831.892612666315,
+          "visible": 89,
+          "samples": [
+            {
+              "id": "gaia-dr3:4065974968548020352",
+              "depthUnits": 2320.250569664975,
+              "width": 18.2031,
+              "expectedWidth": 18.216320763618455
+            },
+            {
+              "id": "gaia-dr3:4069039891554728448",
+              "depthUnits": 17189.066899755235,
+              "width": 1.9375,
+              "expectedWidth": 1.9441911080367118
+            },
+            {
+              "id": "gaia-dr3:4066119760487417344",
+              "depthUnits": 2832.7271318291087,
+              "width": 8.71875,
+              "expectedWidth": 8.732012428395937
+            },
+            {
+              "id": "gaia-dr3:4066068972464771968",
+              "depthUnits": 17490.635813439298,
+              "width": 1.5,
+              "expectedWidth": 1.5058474881160422
+            },
+            {
+              "id": "gaia-dr3:4065715861804605696",
+              "depthUnits": 14101.203758496793,
+              "width": 1.53125,
+              "expectedWidth": 1.5458478246734686
+            },
+            {
+              "id": "gaia-dr3:4065974723702431104",
+              "depthUnits": 10184.954695401986,
+              "width": 1.89062,
+              "expectedWidth": 1.8927503127021816
+            },
+            {
+              "id": "gaia-dr3:4066074508707899008",
+              "depthUnits": 5852.862649600324,
+              "width": 3,
+              "expectedWidth": 3.0127802907609733
+            },
+            {
+              "id": "gaia-dr3:4066600453247401088",
+              "depthUnits": 15280.100246944172,
+              "width": 1.17188,
+              "expectedWidth": 1.1742024630959944
+            },
+            {
+              "id": "gaia-dr3:4069239693437986688",
+              "depthUnits": 12850.7376144709,
+              "width": 1.29688,
+              "expectedWidth": 1.3026666819523443
+            },
+            {
+              "id": "gaia-dr3:4066069144263463552",
+              "depthUnits": 6674.520879681399,
+              "width": 2.40625,
+              "expectedWidth": 2.412237101838726
+            },
+            {
+              "id": "gaia-dr3:4065975209066204928",
+              "depthUnits": 1313.0761909163157,
+              "width": 11.2969,
+              "expectedWidth": 11.30089386275746
+            },
+            {
+              "id": "gaia-dr3:4066522181757585536",
+              "depthUnits": 7351.092510025498,
+              "width": 1.9375,
+              "expectedWidth": 1.9445188831157896
+            },
+            {
+              "id": "gaia-dr3:4069249344207868416",
+              "depthUnits": 9661.518292922945,
+              "width": 1.39062,
+              "expectedWidth": 1.402953973722586
+            },
+            {
+              "id": "gaia-dr3:4065659202537069952",
+              "depthUnits": 12290.268383543347,
+              "width": 0.96875,
+              "expectedWidth": 0.9732568881585364
+            },
+            {
+              "id": "gaia-dr3:4065674252176051072",
+              "depthUnits": 12432.28739587522,
+              "width": 0.9375,
+              "expectedWidth": 0.9497138301501941
+            },
+            {
+              "id": "gaia-dr3:4065975277789825664",
+              "depthUnits": 6485.379230985814,
+              "width": 1.75,
+              "expectedWidth": 1.761802553368248
+            },
+            {
+              "id": "gaia-dr3:4065861405285501824",
+              "depthUnits": 5617.464863173429,
+              "width": 1.90625,
+              "expectedWidth": 1.917963541108976
+            },
+            {
+              "id": "gaia-dr3:4065975930620727040",
+              "depthUnits": 1674.8285423731622,
+              "width": 6.28125,
+              "expectedWidth": 6.2870845031265805
+            },
+            {
+              "id": "gaia-dr3:4065050897770101248",
+              "depthUnits": 16061.921508451545,
+              "width": 0.65625,
+              "expectedWidth": 0.6682231354919254
+            },
+            {
+              "id": "gaia-dr3:4069187810231208320",
+              "depthUnits": 9941.073177670947,
+              "width": 1.01562,
+              "expectedWidth": 1.0301392382972256
+            },
+            {
+              "id": "gaia-dr3:4065825950384014720",
+              "depthUnits": 7742.360578760343,
+              "width": 1.23438,
+              "expectedWidth": 1.23657114821178
+            },
+            {
+              "id": "gaia-dr3:4069375994206306432",
+              "depthUnits": 14084.672262067472,
+              "width": 0.6875,
+              "expectedWidth": 0.6905876106454193
+            },
+            {
+              "id": "gaia-dr3:4067497517260650752",
+              "depthUnits": 10243.11141658157,
+              "width": 0.921875,
+              "expectedWidth": 0.9220298300607498
+            },
+            {
+              "id": "gaia-dr3:4065791384497729536",
+              "depthUnits": 6814.928309650362,
+              "width": 1.26562,
+              "expectedWidth": 1.2673694838514578
+            },
+            {
+              "id": "gaia-dr3:4066567467895538816",
+              "depthUnits": 10041.234607824454,
+              "width": 0.84375,
+              "expectedWidth": 0.8505880389175418
+            },
+            {
+              "id": "gaia-dr3:4065679715376399872",
+              "depthUnits": 12287.889134344268,
+              "width": 0.6875,
+              "expectedWidth": 0.6949906375774121
+            },
+            {
+              "id": "gaia-dr3:4069251375749864320",
+              "depthUnits": 14081.105463552816,
+              "width": 0.59375,
+              "expectedWidth": 0.5977416460279356
+            },
+            {
+              "id": "gaia-dr3:4065818593055382144",
+              "depthUnits": 7957.549666699982,
+              "width": 0.984375,
+              "expectedWidth": 0.9954950459462228
+            },
+            {
+              "id": "gaia-dr3:4066070248099903104",
+              "depthUnits": 9613.148665077,
+              "width": 0.8125,
+              "expectedWidth": 0.8278480136508538
+            },
+            {
+              "id": "gaia-dr3:4069068547576826880",
+              "depthUnits": 6019.357378004049,
+              "width": 1.28125,
+              "expectedWidth": 1.28216519515839
+            },
+            {
+              "id": "gaia-dr3:4066074847980029440",
+              "depthUnits": 13370.782224706438,
+              "width": 0.578125,
+              "expectedWidth": 0.5922969799384584
+            },
+            {
+              "id": "gaia-dr3:4066492598019826176",
+              "depthUnits": 6249.663506646104,
+              "width": 1.20312,
+              "expectedWidth": 1.2184976086515737
+            },
+            {
+              "id": "gaia-dr3:4066093303486254336",
+              "depthUnits": 17115.064127571626,
+              "width": 0.453125,
+              "expectedWidth": 0.4660582340954195
+            },
+            {
+              "id": "gaia-dr3:4069569542611376128",
+              "depthUnits": 11421.681949749951,
+              "width": 0.65625,
+              "expectedWidth": 0.6645539623110654
+            },
+            {
+              "id": "gaia-dr3:4065790319345788288",
+              "depthUnits": 12887.69240673153,
+              "width": 0.578125,
+              "expectedWidth": 0.5914250531345626
+            },
+            {
+              "id": "gaia-dr3:4066072167920437632",
+              "depthUnits": 9805.145902293814,
+              "width": 0.75,
+              "expectedWidth": 0.7630399772608168
+            },
+            {
+              "id": "gaia-dr3:4064348649084159232",
+              "depthUnits": 12100.108450155243,
+              "width": 0.625,
+              "expectedWidth": 0.6253475021023044
+            },
+            {
+              "id": "gaia-dr3:4067559296068606848",
+              "depthUnits": 11777.445241566984,
+              "width": 0.609375,
+              "expectedWidth": 0.6175132205757191
+            },
+            {
+              "id": "gaia-dr3:4065945002531228928",
+              "depthUnits": 18508.842556423057,
+              "width": 0.390625,
+              "expectedWidth": 0.40200667416407176
+            },
+            {
+              "id": "gaia-dr3:4066069006830061824",
+              "depthUnits": 16357.100734708114,
+              "width": 0.4375,
+              "expectedWidth": 0.4429868378455578
+            },
+            {
+              "id": "gaia-dr3:4065971115929904384",
+              "depthUnits": 7879.320030295923,
+              "width": 0.84375,
+              "expectedWidth": 0.8547427852017377
+            },
+            {
+              "id": "gaia-dr3:4065973044402687872",
+              "depthUnits": 11720.51228837716,
+              "width": 0.578125,
+              "expectedWidth": 0.5799496376411671
+            },
+            {
+              "id": "gaia-dr3:4066101579857709952",
+              "depthUnits": 5856.510177931323,
+              "width": 1.125,
+              "expectedWidth": 1.125085339227711
+            },
+            {
+              "id": "gaia-dr3:4067361109103874816",
+              "depthUnits": 15215.457407334841,
+              "width": 0.4375,
+              "expectedWidth": 0.45265662349719693
+            },
+            {
+              "id": "gaia-dr3:4067773043689729152",
+              "depthUnits": 16182.394329735016,
+              "width": 0.421875,
+              "expectedWidth": 0.42716707095934164
+            },
+            {
+              "id": "gaia-dr3:4065011624621815168",
+              "depthUnits": 14464.339831393932,
+              "width": 0.46875,
+              "expectedWidth": 0.47136013214135364
+            },
+            {
+              "id": "gaia-dr3:4065640369088481152",
+              "depthUnits": 14387.894315347225,
+              "width": 0.453125,
+              "expectedWidth": 0.46488197428202493
+            },
+            {
+              "id": "gaia-dr3:4069468524981135232",
+              "depthUnits": 15518.686480317172,
+              "width": 0.421875,
+              "expectedWidth": 0.4321012909355033
+            },
+            {
+              "id": "gaia-dr3:4069058338425479936",
+              "depthUnits": 17166.562351090313,
+              "width": 0.390625,
+              "expectedWidth": 0.3919855965766484
+            },
+            {
+              "id": "gaia-dr3:4069049993318206720",
+              "depthUnits": 5174.598503968048,
+              "width": 1.1875,
+              "expectedWidth": 1.1876871045998547
+            },
+            {
+              "id": "gaia-dr3:4065974964232460416",
+              "depthUnits": 3672.2088340428136,
+              "width": 1.64062,
+              "expectedWidth": 1.6530130734912507
+            },
+            {
+              "id": "gaia-dr3:4066038564096313856",
+              "depthUnits": 11642.193768732333,
+              "width": 0.53125,
+              "expectedWidth": 0.5338260647979749
+            },
+            {
+              "id": "gaia-dr3:4066071721244117632",
+              "depthUnits": 3440.8960757017276,
+              "width": 1.71875,
+              "expectedWidth": 1.7326712649534552
+            },
+            {
+              "id": "gaia-dr3:4066064819261901440",
+              "depthUnits": 5311.102744197388,
+              "width": 1.10938,
+              "expectedWidth": 1.1244833908154475
+            },
+            {
+              "id": "gaia-dr3:4065974929872743808",
+              "depthUnits": 2915.615511203059,
+              "width": 1.98438,
+              "expectedWidth": 1.9925440304147886
+            },
+            {
+              "id": "gaia-dr3:4065886590977590400",
+              "depthUnits": 10348.637122660735,
+              "width": 0.578125,
+              "expectedWidth": 0.5799553380279576
+            },
+            {
+              "id": "gaia-dr3:4066278979190463104",
+              "depthUnits": 8071.33976586463,
+              "width": 0.734375,
+              "expectedWidth": 0.73445176405338
+            },
+            {
+              "id": "gaia-dr3:4066006162864576128",
+              "depthUnits": 14466.771096354536,
+              "width": 0.421875,
+              "expectedWidth": 0.4220958806395904
+            },
+            {
+              "id": "gaia-dr3:4065791139624410624",
+              "depthUnits": 5650.398993152745,
+              "width": 1.03125,
+              "expectedWidth": 1.0348263055335283
+            },
+            {
+              "id": "gaia-dr3:4064495365166991232",
+              "depthUnits": 17925.652384802554,
+              "width": 0.328125,
+              "expectedWidth": 0.3420673414765791
+            },
+            {
+              "id": "gaia-dr3:4066014787157369216",
+              "depthUnits": 3352.59153567419,
+              "width": 1.6875,
+              "expectedWidth": 1.7000959102273892
+            },
+            {
+              "id": "gaia-dr3:4064993993696575616",
+              "depthUnits": 12901.816506818936,
+              "width": 0.453125,
+              "expectedWidth": 0.4603744291151802
+            },
+            {
+              "id": "gaia-dr3:4066185383259572864",
+              "depthUnits": 11974.597785026803,
+              "width": 0.484375,
+              "expectedWidth": 0.49093199160709555
+            },
+            {
+              "id": "gaia-dr3:4069335243553776640",
+              "depthUnits": 9349.755195764086,
+              "width": 0.609375,
+              "expectedWidth": 0.6199692513145867
+            },
+            {
+              "id": "gaia-dr3:4066028260504444416",
+              "depthUnits": 9615.005267339471,
+              "width": 0.59375,
+              "expectedWidth": 0.599820417797885
+            },
+            {
+              "id": "gaia-dr3:4069016282104992896",
+              "depthUnits": 6858.143080261744,
+              "width": 0.828125,
+              "expectedWidth": 0.829047404638019
+            },
+            {
+              "id": "gaia-dr3:4066128620971805184",
+              "depthUnits": 3659.438145880812,
+              "width": 1.5,
+              "expectedWidth": 1.5073110796112206
+            },
+            {
+              "id": "gaia-dr3:4067533384516614528",
+              "depthUnits": 15712.774034088641,
+              "width": 0.359375,
+              "expectedWidth": 0.37145159651149107
+            },
+            {
+              "id": "gaia-dr3:4065763209527446400",
+              "depthUnits": 5720.734040345454,
+              "width": 0.953125,
+              "expectedWidth": 0.9647289473053464
+            },
+            {
+              "id": "gaia-dr3:4066119721798729344",
+              "depthUnits": 8004.453022252998,
+              "width": 0.6875,
+              "expectedWidth": 0.6910564623913583
+            },
+            {
+              "id": "gaia-dr3:4067491981029297792",
+              "depthUnits": 7176.927934337589,
+              "width": 0.75,
+              "expectedWidth": 0.7637250791537982
+            },
+            {
+              "id": "gaia-dr3:4064351157348575232",
+              "depthUnits": 15915.926201187369,
+              "width": 0.34375,
+              "expectedWidth": 0.35917549565631446
+            },
+            {
+              "id": "gaia-dr3:4064209462155966592",
+              "depthUnits": 14677.95968483613,
+              "width": 0.375,
+              "expectedWidth": 0.3869091560299372
+            },
+            {
+              "id": "gaia-dr3:4065970325655922304",
+              "depthUnits": 8833.526957153676,
+              "width": 0.609375,
+              "expectedWidth": 0.6249800750267112
+            },
+            {
+              "id": "gaia-dr3:4069341119069603328",
+              "depthUnits": 14362.979192853096,
+              "width": 0.375,
+              "expectedWidth": 0.38658631386595654
+            },
+            {
+              "id": "gaia-dr3:4064915790936970112",
+              "depthUnits": 13403.642744720806,
+              "width": 0.40625,
+              "expectedWidth": 0.4104731070900843
+            },
+            {
+              "id": "gaia-dr3:4065975754494579840",
+              "depthUnits": 1930.408605717348,
+              "width": 2.67188,
+              "expectedWidth": 2.6842476151763535
+            },
+            {
+              "id": "gaia-dr3:4069283532147523840",
+              "depthUnits": 15307.37051070854,
+              "width": 0.359375,
+              "expectedWidth": 0.3610920727270398
+            },
+            {
+              "id": "gaia-dr3:4065639647533975168",
+              "depthUnits": 13625.888283066026,
+              "width": 0.390625,
+              "expectedWidth": 0.4023308794766572
+            },
+            {
+              "id": "gaia-dr3:4066607153396356992",
+              "depthUnits": 14035.834668175157,
+              "width": 0.390625,
+              "expectedWidth": 0.3906272197825717
+            },
+            {
+              "id": "gaia-dr3:4069148154781134848",
+              "depthUnits": 17504.783423473466,
+              "width": 0.3125,
+              "expectedWidth": 0.31812139809923284
+            },
+            {
+              "id": "gaia-dr3:4065692183581678208",
+              "depthUnits": 7944.577120096026,
+              "width": 0.65625,
+              "expectedWidth": 0.6602905312520184
+            },
+            {
+              "id": "gaia-dr3:4065758738389686272",
+              "depthUnits": 17591.627723535494,
+              "width": 0.296875,
+              "expectedWidth": 0.3105632741547017
+            },
+            {
+              "id": "gaia-dr3:4066178305155804800",
+              "depthUnits": 9985.769642710908,
+              "width": 0.515625,
+              "expectedWidth": 0.526664662211134
+            },
+            {
+              "id": "gaia-dr3:4066547053867596800",
+              "depthUnits": 13137.531661124664,
+              "width": 0.390625,
+              "expectedWidth": 0.4050026571370624
+            },
+            {
+              "id": "gaia-dr3:4069016797503949056",
+              "depthUnits": 8878.562569595138,
+              "width": 0.578125,
+              "expectedWidth": 0.585710411815988
+            },
+            {
+              "id": "gaia-dr3:4065668922033588864",
+              "depthUnits": 13255.443975633883,
+              "width": 0.390625,
+              "expectedWidth": 0.3975310822911347
+            },
+            {
+              "id": "gaia-dr3:4069425437869228288",
+              "depthUnits": 14547.211782883529,
+              "width": 0.359375,
+              "expectedWidth": 0.3625179076379546
+            },
+            {
+              "id": "gaia-dr3:4066085362063973376",
+              "depthUnits": 10722.057865308443,
+              "width": 0.46875,
+              "expectedWidth": 0.4822561909211801
+            }
+          ]
+        }
+      },
+      "starsToggle": true
+    }
+  ],
+  "captures": [
+    {
+      "path": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-m8/m8-direct-focus.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=eso-optical&v=QEbDTKsX3ZpqI0NcIcemu6QoQ0ym13313UNBQsczQAAAAL_KppTsxotxP9Fdrknc82i_4k446cFGsQABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.258819045103,-0.620885153015,0.739942111694,0,0,0.766044443119,0.642787609687,0,-0.965925826289,0.166365675343,-0.198266891274,0,0,0,0,1)",
+          "skybox": "matrix3d(0.196533301841,0.858451805287,-0.473745651809,0,0.370814881144,0.38220743862,0.846412263285,0,0.907673366537,-0.342020123814,-0.24321032696,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.8248047335874049,
+        "distance": 17394452119361.582,
+        "distanceKilometers": 39036517223999520,
+        "distanceRadii": 56111135868.90833,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 114.40536615171156,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -16138836676760646,
+          31673762909687970,
+          16129487618685574
+        ]
+      }
+    },
+    {
+      "path": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-m8/m8-eso-optical.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=eso-optical&v=QMbC4N7nfD3odUK27IPGnZ2xQ2B3R65OpRtBQsczQAAAAD_hWzU4g4HtP22s0FUyg5m_dvtlG8aGywABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.999910792701,-0.005497877362,-0.01217292012,0,0.013356894838,0.411576715798,0.911277235738,0,0,-0.911358535571,0.41161343472,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.929611298959,0.107712339322,0.352449525672,0,0.304166794379,0.764237895947,0.568702840901,0,-0.208099092164,0.635876085992,-0.74320679468,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.8868006336021039,
+        "distance": 16521881804434.549,
+        "distanceKilometers": 37078300552726180,
+        "distanceRadii": 53296392917.5308,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.76740347240312,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -148396419706691.66,
+          25205078924701.69,
+          37077995025148120
+        ]
+      }
+    },
+    {
+      "path": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-m8/m8-eso-optical-distant.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=eso-optical&v=QMbC4N7nfD3oeEK27IPGnaHKQ0bUu0r0OHNBQsczQAAAAD_hWzU4g4HtP22s0FUyg5m_dvtlG8aGywABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.999910792701,-0.005497877362,-0.01217292012,0,0.013356894838,0.411576715798,0.911277235738,0,0,-0.911358535571,0.41161343472,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.929611298959,0.107712339322,0.352449525672,0,0.304166794379,0.764237895947,0.568702840901,0,-0.208099092164,0.635876085992,-0.74320679468,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.12137480776440819,
+        "distance": 5727483763294.058,
+        "distanceKilometers": 12853582110076372,
+        "distanceRadii": 18475754075.14212,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.32902304405897,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -148396419706691.75,
+          25205078924705.79,
+          12852700738253030
+        ]
+      }
+    },
+    {
+      "path": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-m8/m8-eso-optical-oblique.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=eso-optical&v=QMZDVHEv_rnUB0K27IPGnZulQ1n1axe8ThlBQsczQAAAAD_ghyzijUAfP9AcUaOLYv6_xTPgEz0-8QABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.818388641224,-0.005497877362,-0.574638847677,0,0.52556975335,0.411576715798,0.744567687572,0,0.232414427863,-0.911358535571,0.33971922725,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.568233341131,0.107712339322,0.815787169135,0,0.572153466987,0.764237895947,0.297625217793,0,-0.591397714985,0.635876085992,-0.495893450781,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.7496863862595413,
+        "distance": 16576691665681.031,
+        "distanceKilometers": 37201304489723530,
+        "distanceRadii": 53473198921.55171,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 141.77997407703546,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          23015801940824092,
+          25205078924699.645,
+          29226858905155684
+        ]
+      }
+    },
+    {
+      "path": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-m8/m8-eso-vista.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=eso-vista&v=QMbC4N7nfD3odUK27IPGnZ2xQ2B3R65OpRtBQsczQAAAAD_hWzU4g4HtP22s0FUyg5m_dvtlG8aGywABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.999910792701,-0.005497877362,-0.01217292012,0,0.013356894838,0.411576715798,0.911277235738,0,0,-0.911358535571,0.41161343472,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.929611298959,0.107712339322,0.352449525672,0,0.304166794379,0.764237895947,0.568702840901,0,-0.208099092164,0.635876085992,-0.74320679468,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.8868006336021039,
+        "distance": 16521881804434.549,
+        "distanceKilometers": 37078300552726180,
+        "distanceRadii": 53296392917.5308,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.76740347240312,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -148396419706691.66,
+          25205078924701.69,
+          37077995025148120
+        ]
+      }
+    },
+    {
+      "path": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-m8/m8-eso-vista-distant.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=eso-vista&v=QMbC4N7nfD3oeEK27IPGnaHKQ0bUu0r0OHNBQsczQAAAAD_hWzU4g4HtP22s0FUyg5m_dvtlG8aGywABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.999910792701,-0.005497877362,-0.01217292012,0,0.013356894838,0.411576715798,0.911277235738,0,0,-0.911358535571,0.41161343472,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.929611298959,0.107712339322,0.352449525672,0,0.304166794379,0.764237895947,0.568702840901,0,-0.208099092164,0.635876085992,-0.74320679468,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.12137480776440819,
+        "distance": 5727483763294.058,
+        "distanceKilometers": 12853582110076372,
+        "distanceRadii": 18475754075.14212,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.32902304405897,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -148396419706691.75,
+          25205078924705.79,
+          12852700738253030
+        ]
+      }
+    },
+    {
+      "path": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-m8/m8-eso-vista-oblique.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=eso-vista&v=QMZDVHEv_rnUB0K27IPGnZulQ1n1axe8ThlBQsczQAAAAD_ghyzijUAfP9AcUaOLYv6_xTPgEz0-8QABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.818388641224,-0.005497877362,-0.574638847677,0,0.52556975335,0.411576715798,0.744567687572,0,0.232414427863,-0.911358535571,0.33971922725,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.568233341131,0.107712339322,0.815787169135,0,0.572153466987,0.764237895947,0.297625217793,0,-0.591397714985,0.635876085992,-0.495893450781,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.7496863862595413,
+        "distance": 16576691665681.031,
+        "distanceKilometers": 37201304489723530,
+        "distanceRadii": 53473198921.55171,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 141.77997407703546,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          23015801940824092,
+          25205078924699.645,
+          29226858905155684
+        ]
+      }
+    },
+    {
+      "path": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-m8/m8-spitzer-mid-infrared.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=spitzer-mid-infrared&v=QMbC4N7nfD3odUK27IPGnZ2xQ2B3R65OpRtBQsczQAAAAD_hWzU4g4HtP22s0FUyg5m_dvtlG8aGywABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.999910792701,-0.005497877362,-0.01217292012,0,0.013356894838,0.411576715798,0.911277235738,0,0,-0.911358535571,0.41161343472,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.929611298959,0.107712339322,0.352449525672,0,0.304166794379,0.764237895947,0.568702840901,0,-0.208099092164,0.635876085992,-0.74320679468,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.8868006336021039,
+        "distance": 16521881804434.549,
+        "distanceKilometers": 37078300552726180,
+        "distanceRadii": 53296392917.5308,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.76740347240312,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -148396419706691.66,
+          25205078924701.69,
+          37077995025148120
+        ]
+      }
+    },
+    {
+      "path": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-m8/m8-spitzer-mid-infrared-distant.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=spitzer-mid-infrared&v=QMbC4N7nfD3oeEK27IPGnaHKQ0bUu0r0OHNBQsczQAAAAD_hWzU4g4HtP22s0FUyg5m_dvtlG8aGywABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.999910792701,-0.005497877362,-0.01217292012,0,0.013356894838,0.411576715798,0.911277235738,0,0,-0.911358535571,0.41161343472,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.929611298959,0.107712339322,0.352449525672,0,0.304166794379,0.764237895947,0.568702840901,0,-0.208099092164,0.635876085992,-0.74320679468,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.12137480776440819,
+        "distance": 5727483763294.058,
+        "distanceKilometers": 12853582110076372,
+        "distanceRadii": 18475754075.14212,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.32902304405897,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -148396419706691.75,
+          25205078924705.79,
+          12852700738253030
+        ]
+      }
+    },
+    {
+      "path": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-m8/m8-spitzer-mid-infrared-oblique.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=spitzer-mid-infrared&v=QMZDVHEv_rnUB0K27IPGnZulQ1n1axe8ThlBQsczQAAAAD_ghyzijUAfP9AcUaOLYv6_xTPgEz0-8QABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.818388641224,-0.005497877362,-0.574638847677,0,0.52556975335,0.411576715798,0.744567687572,0,0.232414427863,-0.911358535571,0.33971922725,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.568233341131,0.107712339322,0.815787169135,0,0.572153466987,0.764237895947,0.297625217793,0,-0.591397714985,0.635876085992,-0.495893450781,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.7496863862595413,
+        "distance": 16576691665681.031,
+        "distanceKilometers": 37201304489723530,
+        "distanceRadii": 53473198921.55171,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 141.77997407703546,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          23015801940824092,
+          25205078924699.645,
+          29226858905155684
+        ]
+      }
+    },
+    {
+      "path": "/Users/apresmoi/Documents/cssEarth/output/nebula-field-browser-m8/m8-oblique.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=spitzer-mid-infrared&v=QMZDVHEv_rnUB0K27IPGnZulQ1n1axe8ThlBQsczQAAAAD_ghyzijUAfP9AcUaOLYv6_xTPgEz0-8QABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.818388641224,-0.005497877362,-0.574638847677,0,0.52556975335,0.411576715798,0.744567687572,0,0.232414427863,-0.911358535571,0.33971922725,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.568233341131,0.107712339322,0.815787169135,0,0.572153466987,0.764237895947,0.297625217793,0,-0.591397714985,0.635876085992,-0.495893450781,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.7496863862595413,
+        "distance": 16576691665681.031,
+        "distanceKilometers": 37201304489723530,
+        "distanceRadii": 53473198921.55171,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 141.77997407703546,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          23015801940824092,
+          25205078924699.645,
+          29226858905155684
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "navigationRequests": [
+    "http://127.0.0.1:4210/sun/?focus=m8"
+  ],
+  "result": "PASS"
+}

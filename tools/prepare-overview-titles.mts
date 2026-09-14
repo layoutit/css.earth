@@ -10,7 +10,7 @@ if (sha256(await readFile(fontPath)) !== recipe.sourceSha256) throw new Error('S
 const baseFont = fontkit.openSync(fontPath);
 if (!("getVariation" in baseFont)) throw new TypeError("The pinned overview font must be one font face.");
 const font = baseFont.getVariation({ wght: recipe.weight, opsz: recipe.opticalSize });
-const titles = Object.fromEntries([['solar-system', 'Solar System'], ['milky-way', 'Milky Way']].map(([id, label]) => {
+const titles = Object.fromEntries([['solar-system', 'Solar System'], ['milky-way', 'Milky Way'], ['local-group', 'Local Group'], ['nearby-universe', 'Nearby Universe']].map(([id, label]) => {
   const source = createPlanetTitleSource(label, font);
   return [id, { ...source, ...createPreparedTitleLayout(source) }];
 }));

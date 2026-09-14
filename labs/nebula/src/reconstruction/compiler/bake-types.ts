@@ -8,6 +8,8 @@ export interface CompilerLensVolume {
   id: string;
   label: string;
   volume: CompilerPin;
+  /** Explicit emission support for a physical component mixture; RGB-only lenses use the scene alpha. */
+  alphaSha256?: string;
   coverage: { positiveAlphaTexels: number; recoloredTexels: number; outsideImageTexels: number };
 }
 export interface CompilerStarMaterial { rgb: [number, number, number]; diameterUnits: number; alpha: number }
@@ -24,9 +26,20 @@ export interface PreparedCompilerStar {
   /** Optional on historical preparations; new records contain every configured source lens. */
   materials?: Record<string, CompilerStarMaterial>;
 }
+export interface CompilerStarSprites {
+  schema: 'cssearth-compiler-star-sprites@1';
+  atlas: CompilerPin;
+  width: number; height: number; tileSize: number;
+  entries: Record<string, { x: number; y: number }>;
+  diameterScale: number; alphaScale: number; alphaIntegralPixels: number;
+  /** Exact site profile recipe used offline. */
+  profile: CompilerPin;
+}
 export interface CompilerBakeResult {
   schema: 'cssearth-compiler-bake@1';
   id: string;
+  /** Immutable cloud bank retained during an independently prepared stellar update. */
+  volumeId?: string;
   fieldIdentity: string;
   frame: DensityVolumeFrame;
   boundsArcsec: EmissionBounds;
@@ -41,6 +54,7 @@ export interface CompilerBakeResult {
   neutral: CompilerPin;
   lenses: CompilerLensVolume[];
   stars: PreparedCompilerStar[];
+  starSprites?: CompilerStarSprites;
   alphaSha256: string;
   sampling: { sliceCounts: { x: number; y: number; z: number }; imageWidth: 512; samplesPerSlab: 4 };
 }
@@ -85,8 +99,33 @@ function same(a: unknown, b: readonly number[]): boolean {
   return Array.isArray(a) && a.length === b.length && a.every((n, i) => finite(n) && Math.abs(n - b[i]!) < 1e-10);
 }
 
+/** Optional only for historical cached scenes; new preparations carry a verified sprite bank. */
+export function validCompilerStarSprites(value: unknown, stars: readonly PreparedCompilerStar[]): value is CompilerStarSprites {
+  if (!record(value) || value.schema !== 'cssearth-compiler-star-sprites@1' || !pin(value.atlas) || !pin(value.profile) ||
+      !Number.isInteger(value.width) || !Number.isInteger(value.height) || !Number.isInteger(value.tileSize) ||
+      Number(value.tileSize) < 1 || Number(value.tileSize) > 256 || Number(value.width) > 8192 || Number(value.height) > 8192 ||
+      Number(value.width) < Number(value.tileSize) || Number(value.height) < Number(value.tileSize) ||
+      Number(value.width) % Number(value.tileSize) !== 0 || Number(value.height) % Number(value.tileSize) !== 0 ||
+      !finite(value.diameterScale) || value.diameterScale <= 0 || value.diameterScale > 100 || value.alphaScale !== 1 ||
+      !finite(value.alphaIntegralPixels) || value.alphaIntegralPixels <= 0 || value.alphaIntegralPixels > Number(value.tileSize) ** 2 ||
+      !record(value.entries) || Object.keys(value.entries).length < 1 || Object.keys(value.entries).length > 45000) return false;
+  const tile = Number(value.tileSize), occupied = new Set<string>();
+  if (Math.abs(value.diameterScale ** 2 * value.alphaIntegralPixels / tile ** 2 - Math.PI / 4) > 1e-10) return false;
+  for (const [key, entry] of Object.entries(value.entries)) {
+    if (!/^\d{1,3},\d{1,3},\d{1,3}$/.test(key) || key.split(',').some(n => Number(n) > 255) || !record(entry) ||
+        !Number.isInteger(entry.x) || !Number.isInteger(entry.y) || Number(entry.x) < 0 || Number(entry.y) < 0 ||
+        Number(entry.x) % tile !== 0 || Number(entry.y) % tile !== 0 || Number(entry.x) + tile > Number(value.width) ||
+        Number(entry.y) + tile > Number(value.height)) return false;
+    const cell = `${entry.x},${entry.y}`; if (occupied.has(cell)) return false; occupied.add(cell);
+  }
+  return stars.every(star => [star, ...Object.values(star.materials ?? {})].every(material =>
+    record(value.entries) && Object.hasOwn(value.entries, material.rgb.join(','))));
+}
+
 /** Strict worker/browser validation; no Node, DOM, or renderer imports. */
 export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
+  if (record(value) && value.volumeId !== undefined && (typeof value.volumeId !== 'string' || !/^[a-f0-9]{64}$/.test(value.volumeId)))
+    throw new TypeError('Invalid retained compiler cloud identity.');
   if (!record(value) || value.schema !== 'cssearth-compiler-bake@1' || !safeId(value.id) ||
       typeof value.fieldIdentity !== 'string' || !/^[a-f0-9]{64}$/.test(value.fieldIdentity) ||
       !bounds3(value.boundsArcsec) || !bounds2(value.skyBoundsArcsec) || !pin(value.neutral) ||
@@ -115,6 +154,7 @@ export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
     if (!record(item)) throw new TypeError('Invalid compiler lens volume.');
     const coverage = item.coverage;
     if (!safeId(item.id) || lensIds.has(item.id) || typeof item.label !== 'string' || !item.label.trim() || !pin(item.volume) || !record(coverage) ||
+        (item.alphaSha256 !== undefined && (typeof item.alphaSha256 !== 'string' || !/^[a-f0-9]{64}$/.test(item.alphaSha256))) ||
         !['positiveAlphaTexels', 'recoloredTexels', 'outsideImageTexels'].every(k => Number.isInteger(coverage[k]) && Number(coverage[k]) >= 0))
       throw new TypeError('Invalid compiler lens volume.');
     lensIds.add(item.id);
@@ -127,5 +167,7 @@ export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
       throw new TypeError('Invalid prepared compiler star.');
     starIds.add(star.id);
   }
+  if (value.starSprites !== undefined && !validCompilerStarSprites(value.starSprites, value.stars as unknown as PreparedCompilerStar[]))
+    throw new TypeError('Invalid prepared compiler star sprites.');
   return value as unknown as CompilerBakeResult;
 }

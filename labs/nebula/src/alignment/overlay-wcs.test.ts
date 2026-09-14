@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { overlayCorners, rayToOverlayPlane, wcsPixelRay, type ImageWcs, type OverlayFrame } from './overlay-wcs.js';
 import { registeredOverlayCorners, type ImageRegistration } from './overlay-registration.js';
 
-test('TAN corner and interior rays match independent Astropy WCS fixtures', async () => {
+test('TAN and ordinary SIN rays match independent Astropy WCS fixtures', async () => {
   const oracle = parseLabModelJson(await readFile('labs/nebula/src/alignment/fixtures/astropy-wcs.json', 'utf8'));
   for (const fixture of oracle.fixtures) for (let i = 0; i < fixture.pixels.length; i++) {
     const [x, y] = fixture.pixels[i];

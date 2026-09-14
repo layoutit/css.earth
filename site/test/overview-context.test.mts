@@ -48,7 +48,7 @@ test('overview follows the prepared galaxy fade and restores correctly at maximu
   const { fadeStartDistanceM: start, fullDistanceM: full } = context.volume;
   assert.equal(overviewScopeAtCamera(camera(start)), 'solar-system');
   assert.equal(overviewScopeAtCamera(camera(full)), 'milky-way');
-  assert.equal(overviewScopeAtCamera(camera(context.camera.maximumDistanceM)), 'milky-way');
+  assert.equal(overviewScopeAtCamera(camera(context.camera.maximumDistanceM)), 'nearby-universe');
   assert.equal(overviewScopeAtCamera(camera(start * 1.1), 'milky-way'), 'milky-way');
   assert.equal(overviewScopeAtCamera(camera(start * .99), 'milky-way'), 'solar-system');
 });
@@ -73,4 +73,16 @@ test('prepared focus distance follows its catalogue position independently of th
   assert.ok(Math.abs(value.meters / 1e18 - 1) < 1e-12);
   assert.equal(viewDistance(world, frame, 'solar-system', undefined, focus).meters, value.meters);
   assert.equal(viewDistance(world, frame, 'milky-way').label, 'Distance from Sun:');
+});
+
+
+test('extragalactic overview cards follow zoom with hysteresis and preserve distance meaning', () => {
+  const pc = 3.085677581491367e16;
+  assert.equal(overviewScopeAtCamera(camera(310000 * pc)), 'local-group');
+  assert.equal(overviewScopeAtCamera(camera(250000 * pc), 'local-group'), 'local-group');
+  assert.equal(overviewScopeAtCamera(camera(230000 * pc), 'local-group'), 'milky-way');
+  assert.equal(overviewScopeAtCamera(camera(6e6 * pc)), 'nearby-universe');
+  assert.equal(overviewScopeAtCamera(camera(4.5e6 * pc), 'nearby-universe'), 'nearby-universe');
+  assert.equal(overviewScopeAtCamera(camera(3.9e6 * pc), 'nearby-universe'), 'local-group');
+  assert.equal(viewDistance(camera(6e6 * pc), frameAt([0,0,0], 1), 'nearby-universe').label, 'Distance from Sun:');
 });

@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-nebula-delivery@1",
+  "id": "m8",
+  "method": "compiler",
+  "request": {
+    "path": "src/objects/m8/source/request.json",
+    "sha256": "2903c29073da5735902b3298cf75154da8721fdb7dc32a49b640e97e8e39fb8a"
+  },
+  "inputPins": [
+    {
+      "path": "labs/nebula/models/m8/compiler.json",
+      "sha256": "2eccce756cf2d5448dabcadefefd2dd7aa5ed04821a540d1e3aea53045b94524"
+    },
+    {
+      "path": "labs/nebula/models/m8/depth-model.json",
+      "sha256": "56cd86345e893f8dfcb7e98e9686a096dd6634fa6b15459060c65e2cdd0c559b"
+    },
+    {
+      "path": "labs/nebula/models/m8/physical-evidence.json",
+      "sha256": "922b0da47092eb20e7dab3a669d33e1e5bc49efa71c0cc53a26ac56673f5abb1"
+    },
+    {
+      "path": "labs/nebula/models/m8/processing-observations.json",
+      "sha256": "12963ecaa7f630cd9562e74eb9d85e8cd03f0385784ed92fc69033a59e556db5"
+    },
+    {
+      "path": "labs/nebula/models/m8/processing-structures.json",
+      "sha256": "e871e01e6636080dad59c1a97734d995f740f80eff3a9e37df7f48d1c8e74d6a"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      270.76531645904527,
+      -24.30622861770443
+    ],
+    "distancePc": 1326,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 1
+  },
+  "sourceUrl": "https://www.eso.org/public/images/eso0936a/",
+  "description": "Relative display emission on one authored coherent front, with locally paper-guided topology. Foreground extinction, separate molecular clouds and unknown front/back distances are not reconstructed. Shared RGB lenses retain one geometry; surrounding stars use Gaia astrometry and estimated distances independently of source-image boundaries. No gas velocity is converted to depth.",
+  "defaultLens": "eso-optical",
+  "framingRadiusUnits": 3414.784262,
+  "acceptedLabResult": "1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864",
+  "fieldStars": {
+    "path": "src/objects/m8/source/stellar-field.json",
+    "sha256": "9a39f21a5f81d319879be1540267c2faf593ee3363e9590800361e033f3c747e"
+  }
+}

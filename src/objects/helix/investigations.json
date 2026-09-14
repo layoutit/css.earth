@@ -1,0 +1,288 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "helix",
+  "entries": [
+    {
+      "id": "lens-eso-wfi",
+      "subject": "eso-wfi shipped image lens",
+      "status": "included",
+      "finding": "Default B/V/R photograph, 7059 by 6535 pixels over 28.02 by 25.94 arcmin; source-relative astrometric anchor. Its finite footprint misses some bright outer halos and cannot alone provide all compact image anchors.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/helix/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/observations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "lens-eso-vista",
+      "subject": "eso-vista shipped image lens",
+      "status": "included",
+      "finding": "Y/J/K photograph, 6592² pixels over 37.51 arcmin square; 794 held-out stars give 0.34 arcsec RMS relative to WFI. Outer color and five retained compact cores extend beyond WFI; overlap astrometry is not absolute calibration or membership.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/helix/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/observations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "lens-eso-wide",
+      "subject": "eso-wide shipped image lens",
+      "status": "included",
+      "finding": "Wider ESO 3.6 m photograph, 6850 by 4759 pixels over 48.82 by 33.92 arcmin; filters unspecified. The 229 held-out stars give 1.10 arcsec RMS relative to WFI. Softer structure/artifacts remain; one retained compact core comes from this source.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/helix/source/presentation.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/observations.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "gaia-surroundings",
+      "subject": "Gaia DR3 astrometry/photometry and Bailer-Jones EDR3 geometric distances",
+      "status": "included",
+      "finding": "6627 Gaia candidates in an authored 50 pc sphere, G < 16; 1466 Gaia points share a total 1500-point budget with 34 conditional image anchors. Actual catalogue source IDs, median distances and uncertainty intervals are retained. Sphere, quality cuts, budget, brightness response and fade are display selections, not a membership survey; Cardiel BP-RP display color uses a neutral fallback outside its valid range.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/helix/source/stellar-field.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/helix/source/delivery.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/src/delivery/catalogue-field.ts",
+        "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+        "https://arxiv.org/abs/2012.05220",
+        "https://arxiv.org/abs/2107.08734"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "central-star-distance",
+      "subject": "Benedict central-star parallax scale",
+      "status": "included",
+      "finding": "The adopted 216 -12/+14 pc scale follows the published central-star result, with an explicitly chosen ICRS centre. It is not the distance of every surrounding star or emitting knot.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/helix/source/nebula.json",
+        "https://arxiv.org/abs/0909.4281"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "molecular-scaffold",
+      "subject": "Zeigler HCO+ component catalogue and joint fit",
+      "status": "included",
+      "finding": "The retained 279 measured components constrain a coarse molecular scaffold where supported. Source-count discrepancy, finite beams, equal front/back allocation and unsupported diffuse depth remain explicit; not every optical knot has velocity coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/kinematics-hco.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/joint-fit.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/joint-fit.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "retained-image-cores",
+      "subject": "34 source-proven compact image anchors",
+      "status": "included",
+      "finding": "28 WFI, five VISTA and one wider-ESO core restore visual anchors, including the central star. Canonical source photometry remains visible outside an individual lens footprint. Angular Gaia matches and component offsets are separately recorded; depths stay conditional, and one VISTA edge core has no Gaia match.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/helix/source/stellar-field.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/src/delivery/catalogue-field.ts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ]
+    },
+    {
+      "id": "wfi-only-retention",
+      "subject": "First 28-core WFI-only retention",
+      "status": "excluded",
+      "finding": "The initial correction placed selected cores accurately but missed upper bright halos outside the WFI star footprint. Increasing random top-N points could not repair that source-coverage failure; the three-image union supersedes it.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/helix/source/stellar-field.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/helix/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Reopen only if the wider-source compact detections are disproved by source evidence; do not replace them with unrelated offset points."
+    },
+    {
+      "id": "hubble-ctio-source",
+      "subject": "Historical Hubble/CTIO photograph",
+      "status": "excluded",
+      "finding": "The 4731 by 3129, 20.96 by 13.86 arcmin composite clips outer emission. It remains the source for historical central-detail trials, not the current three-lens compiler.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/README.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/source-candidates.json",
+        "https://esahubble.org/images/opo0432b/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Use as a local-detail contribution only after qualified registration and an explicitly bounded footprint; it cannot replace missing outer observations."
+    },
+    {
+      "id": "single-axis-and-ring",
+      "subject": "One-axis and O’Dell disk/ring baselines",
+      "status": "excluded",
+      "finding": "Both initial models failed visual inspection: the one-axis image fit becomes a box, while the published-geometry disk/ring allocation is smooth, drops outer signal and changes brightness under rotation. Widths and weights were authored, and front agreement was imposed by allocation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/README.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/single-axis.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/model-prior.json",
+        "https://doi.org/10.1086/424621"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "A replacement must represent independent wider structure and improve the same side/oblique failures, not rescue them with exposure or resolution."
+    },
+    {
+      "id": "tuned-and-detector-fits",
+      "subject": "Historical detector and tuned ring-sector fits",
+      "status": "excluded",
+      "finding": "The saved annulus/rim/arc hypotheses preserve explicit widths and depths but remain too smooth, lose fine filaments and show side slab structure. Their residuals include stars/background and do not establish accuracy.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/README.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/tuned-shape-fit.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/helix-fitting-trial.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Revisit only with qualified independent geometry or structure evidence and the same fixed-camera morphology gate."
+    },
+    {
+      "id": "oiii-core-slit",
+      "subject": "Separate ionized-core slit digitization",
+      "status": "deferred",
+      "finding": "The figure-9 O III digitization remains a separate velocity view; it is not the molecular component catalogue or a whole-nebula reconstruction.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/kinematics-oiii.json",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Qualify tracer-specific spatial/velocity uncertainty and a joint forward comparison before using it to constrain the current volume."
+    },
+    {
+      "id": "cfht-optical",
+      "subject": "CFHT/Coelum optical comparison",
+      "status": "deferred",
+      "finding": "The inspected public composite still clips upper extended structures; its high-resolution version requires a request. It is not a compiler input.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/README.md",
+        "https://www.cfht.hawaii.edu/HawaiianStarlight/AIOM/English/CFHT-Coelum-AIOM-Mar2017.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Obtain a usable native image with terms and WCS, then verify broader useful coverage and independent stellar registration."
+    },
+    {
+      "id": "chatzifrantzis-optical",
+      "subject": "Chatzifrantzis 2025 APOD image",
+      "status": "deferred",
+      "finding": "The photograph shows strong outer structure but is watermarked and lacks supplied astrometric registration. APOD hosting does not make it a NASA observation or confer derivative rights.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/README.md",
+        "https://apod.nasa.gov/apod/ap250729.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Acquire permission and a suitable native unwatermarked source, then qualify astrometry and full footprint."
+    },
+    {
+      "id": "outer-geometry-alternatives",
+      "subject": "Bipolar, barrel and infrared-halo interpretations",
+      "status": "deferred",
+      "finding": "O’Dell 2005, Meaburn 2005, Herschel 2015 and Zhang 2012 identify nonunique outer geometry and roughly 40-arcmin infrared halo extent. These alternatives are not implemented; summaries alone do not qualify a depth map or prove the selected images cover all emission.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/README.md",
+        "https://arxiv.org/abs/astro-ph/0505539",
+        "https://arxiv.org/abs/astro-ph/0504295",
+        "https://arxiv.org/abs/1207.4606",
+        "https://www.aanda.org/articles/aa/full_html/2015/02/aa24189-14/aa24189-14.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Acquire and inspect the original tracer data/model parameters with uncertainties and compare alternatives on their valid footprints."
+    },
+    {
+      "id": "diffuse-material",
+      "subject": "Contaminated halos, VISTA streaks and unsupported depth",
+      "status": "unresolved",
+      "finding": "Bright stellar halos survive NOX and some nebular knots enter the residual. Compact anchors improve the visible cores but leave that cloud contamination and the uncertain outer depth intact; registration and exact source accounting are not star-removal or material acceptance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/README.md",
+        "https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/src/objects/helix/source/stellar-field.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "5569fa211db447927cb9c30284f13d2a37049695"
+        }
+      ],
+      "revisitWhen": "Audit source separation and finite emission with positive source evidence, retaining real knots and verified compact anchors, then inspect the same spectral front/side views."
+    }
+  ]
+}
