@@ -9,3 +9,6 @@ source/geology/*.cpg
 # Restored from exact release pins by the composition acquisition group.
 source/composition/fit_SPHERE.json.gz
 source/composition/reflectance_SPHERE.json.gz
+
+# Controlled Galileo regional photographs restored from pinned inputs.
+source/galileo/*.tif
