@@ -17,6 +17,7 @@ Original images, meshes and labels
 | Step | Implementation |
 | --- | --- |
 | Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations.ts) and [checkout restoration](../tools/restore-source-inputs.mts) |
+| Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
 | Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
 | Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../tools/objects/terrestrial-layers/index.mts) |

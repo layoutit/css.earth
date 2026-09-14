@@ -12,6 +12,7 @@ import { checkBandRegistration, controlledShapeCamera, framePaths, insetCoverage
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { bandColorDisplay, type BandColorDisplay } from '../../color-transfer.mts';
 import { pds3Keyword, pds3Values } from '../../pds-labels.mts';
+import { pds3LabelHasReflectance } from './pds3-reflectance.mts';
 import { castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
@@ -225,8 +226,7 @@ export const controlledColorFormat: SurfaceObservationFormat = {
       const bands: ObservationFrame[] = [];
       for (const band of recipe.bands) {
         const source = set[band.channel as Band], { frame, label } = await loadControlledFrame(source, photometry, recipe.transfer, incidenceLimit(recipe.photometry), context);
-        // Cassini labels state UNITS = 'I/F'; Voyager labels give I/F as DN times a 1.0E-4 reflectance scaling factor.
-        const reflectance = pds3Keyword(label, 'UNITS') === 'I/F' || /^1\.0+E-0?4$/i.test(pds3Keyword(label, 'REFLECTANCE_SCALING_FACTOR') ?? '');
+        const reflectance = pds3LabelHasReflectance(label);
         if (!pds3Values(label, 'FILTER_NAME')?.includes(band.filter) || !reflectance) throw new Error(`Band colour needs the actual filter and calibrated reflectance units in its native label: ${source.id}`);
         bands.push(frame);
       }
