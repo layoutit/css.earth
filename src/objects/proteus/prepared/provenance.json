@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "proteus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2cb0c3746dbb8f7c33e62271705941f020ec39011d7e851f6e5e252d5a88468e"
+    "sha256": "35fdf448d55f7aa55c4a5b464282caa9c3d4ad5d59ad01bf515e68e9eb4dc346"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e99b87c68a7c72b9bd9a714b19b7237e47ec5be76d5cbc8c80aab5af0a65e7ae",
+      "sha256": "4d78797270717daf290e77258d20eacddb7733b7e6498c25e39a0b6f0ad7c228",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -78,11 +78,20 @@
             }
           ],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "voyager-clear-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+                "attribution": {
+                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/voyager/iss/"
+                }
+              },
               "frames": [
                 {
                   "id": "c1137317",
@@ -121,118 +130,38 @@
                   "backgroundMaximum": 0.0051891
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumGain": 1.05,
+                "maximumAngleDegrees": 70
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 75
+              },
               "photometry": {
+                "model": "lunar-lambert",
                 "weight": 0.5,
-                "maximumGain": 2.5,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 75,
                 "maximumEmissionDegrees": 75,
-                "displayMaximum": 0.05,
-                "gamma": 1,
-                "minimumLevel": 0.7,
-                "maximumLevel": 1.4,
-                "backgroundMaximum": 0.001
+                "maximumGain": 2.5
               },
-              "metadata": {
-                "label": "Monochrome",
-                "falseColor": false,
-                "coverage": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
-                "attribution": {
-                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
-                  "url": "https://pds-rings.seti.org/voyager/iss/"
-                }
+              "display": {
+                "displayRange": [
+                  0,
+                  0.0587
+                ]
               }
             },
             {
               "id": "filter-color",
               "format": "controlled-shape-color",
               "consumer": "voyager-color-frames",
-              "channels": [
-                {
-                  "channel": "red",
-                  "filter": "GREEN",
-                  "frames": [
-                    {
-                      "id": "c1137350",
-                      "observerLatitude": -27.148,
-                      "observerWestLongitude": 99.3,
-                      "sunLatitude": -23.66,
-                      "sunWestLongitude": 122.857,
-                      "rangeKm": 830648.272,
-                      "northAzimuthDegrees": 12.96074677895093,
-                      "center": [
-                        392.7015186610059,
-                        375.5350675293314
-                      ],
-                      "path": "observations/C1137350_GEOMED.IMG",
-                      "labelPath": "observations/C1137350_GEOMED.LBL",
-                      "pixelAngleMicroradians": 7.841764329210524,
-                      "backgroundOffset": -0.0037,
-                      "backgroundMaximum": 0.00622692,
-                      "coverageInsetPixels": 9,
-                      "allowFiniteSigned": true
-                    }
-                  ]
-                },
-                {
-                  "channel": "green",
-                  "filter": "BLUE",
-                  "frames": [
-                    {
-                      "id": "c1137339",
-                      "observerLatitude": -27.05,
-                      "observerWestLongitude": 97.385,
-                      "sunLatitude": -23.66,
-                      "sunWestLongitude": 120.904,
-                      "rangeKm": 843163.326,
-                      "northAzimuthDegrees": 12.960728432154356,
-                      "center": [
-                        466.5813375784345,
-                        591.0689911870909
-                      ],
-                      "path": "observations/C1137339_GEOMED.IMG",
-                      "labelPath": "observations/C1137339_GEOMED.LBL",
-                      "pixelAngleMicroradians": 7.841764329210524,
-                      "backgroundOffset": -0.0011,
-                      "backgroundMaximum": 0.0048925800000000005,
-                      "coverageInsetPixels": 9,
-                      "allowFiniteSigned": true
-                    }
-                  ]
-                },
-                {
-                  "channel": "blue",
-                  "filter": "VIOLET",
-                  "frames": [
-                    {
-                      "id": "c1137328",
-                      "observerLatitude": -26.955,
-                      "observerWestLongitude": 95.465,
-                      "sunLatitude": -23.66,
-                      "sunWestLongitude": 118.937,
-                      "rangeKm": 855785.645,
-                      "northAzimuthDegrees": 13.455111379559261,
-                      "center": [
-                        473.69993148676184,
-                        499.6632419233105
-                      ],
-                      "path": "observations/C1137328_GEOMED.IMG",
-                      "labelPath": "observations/C1137328_GEOMED.LBL",
-                      "pixelAngleMicroradians": 7.841764329210524,
-                      "backgroundOffset": -0.0017000000000000001,
-                      "backgroundMaximum": 0.00533736,
-                      "coverageInsetPixels": 9,
-                      "allowFiniteSigned": true
-                    }
-                  ]
-                }
-              ],
-              "photometry": {
-                "weight": 0.5,
-                "maximumGain": 2.5,
-                "maximumIncidenceDegrees": 60,
-                "maximumEmissionDegrees": 60,
-                "backgroundMaximum": 0.001
-              },
               "metadata": {
                 "label": "False color",
                 "falseColor": true,
@@ -242,15 +171,110 @@
                   "url": "https://pds-rings.seti.org/voyager/iss/"
                 }
               },
+              "bands": [
+                {
+                  "channel": "red",
+                  "filter": "GREEN"
+                },
+                {
+                  "channel": "green",
+                  "filter": "BLUE"
+                },
+                {
+                  "channel": "blue",
+                  "filter": "VIOLET"
+                }
+              ],
+              "frames": [
+                {
+                  "id": "set-1",
+                  "red": {
+                    "id": "c1137350",
+                    "observerLatitude": -27.148,
+                    "observerWestLongitude": 99.3,
+                    "sunLatitude": -23.66,
+                    "sunWestLongitude": 122.857,
+                    "rangeKm": 830648.272,
+                    "northAzimuthDegrees": 12.96074677895093,
+                    "center": [
+                      392.7015186610059,
+                      375.5350675293314
+                    ],
+                    "path": "observations/C1137350_GEOMED.IMG",
+                    "labelPath": "observations/C1137350_GEOMED.LBL",
+                    "pixelAngleMicroradians": 7.841764329210524,
+                    "backgroundOffset": -0.0037,
+                    "backgroundMaximum": 0.00622692,
+                    "coverageInsetPixels": 9,
+                    "allowFiniteSigned": true
+                  },
+                  "green": {
+                    "id": "c1137339",
+                    "observerLatitude": -27.05,
+                    "observerWestLongitude": 97.385,
+                    "sunLatitude": -23.66,
+                    "sunWestLongitude": 120.904,
+                    "rangeKm": 843163.326,
+                    "northAzimuthDegrees": 12.960728432154356,
+                    "center": [
+                      466.5813375784345,
+                      591.0689911870909
+                    ],
+                    "path": "observations/C1137339_GEOMED.IMG",
+                    "labelPath": "observations/C1137339_GEOMED.LBL",
+                    "pixelAngleMicroradians": 7.841764329210524,
+                    "backgroundOffset": -0.0011,
+                    "backgroundMaximum": 0.0048925800000000005,
+                    "coverageInsetPixels": 9,
+                    "allowFiniteSigned": true
+                  },
+                  "blue": {
+                    "id": "c1137328",
+                    "observerLatitude": -26.955,
+                    "observerWestLongitude": 95.465,
+                    "sunLatitude": -23.66,
+                    "sunWestLongitude": 118.937,
+                    "rangeKm": 855785.645,
+                    "northAzimuthDegrees": 13.455111379559261,
+                    "center": [
+                      473.69993148676184,
+                      499.6632419233105
+                    ],
+                    "path": "observations/C1137328_GEOMED.IMG",
+                    "labelPath": "observations/C1137328_GEOMED.LBL",
+                    "pixelAngleMicroradians": 7.841764329210524,
+                    "backgroundOffset": -0.0017000000000000001,
+                    "backgroundMaximum": 0.00533736,
+                    "coverageInsetPixels": 9,
+                    "allowFiniteSigned": true
+                  }
+                }
+              ],
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 60
+              },
+              "photometry": {
+                "model": "lunar-lambert",
+                "weight": 0.5,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 60,
+                "maximumEmissionDegrees": 60,
+                "maximumGain": 2.5
+              },
+              "display": {
+                "displayRange": [
+                  0,
+                  0.1
+                ]
+              },
               "focus": {
                 "longitudeDegrees": 261,
                 "latitudeDegrees": -27,
                 "zoom": 1.1
-              },
-              "displayRange": [
-                0,
-                0.1
-              ]
+              }
             }
           ]
         },
@@ -312,14 +336,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2456ceb80037284da257500ee13b31c9c888368f8e8cbb26ca6082d7b5dde760",
+      "sha256": "cb2bda1b080fa50e138c76deed52806f10a44ed1ca851b2224ef19bcae09c76c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "proteus",
         "displayName": "Proteus",
         "panel": {
-          "introduction": "Proteus is Neptune’s largest inner moon. Voyager 2 revealed an angular, cratered world, dominated on one side by the enormous impact basin Pharos.",
           "facts": [
             {
               "id": "radius",
@@ -382,9 +405,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed. Fine grain is largely source-image noise and must not be interpreted as resolved terrain.",
-              "title": "Clear-filter mosaic",
-              "detail": "Voyager 2",
               "thumbnail": "/scenes/proteus/proteus-normal-thumbnail.webp",
               "surface": "proteus-normal-surface@2x.webp",
               "poles": "proteus-normal-surface@2x.webp",
@@ -393,15 +413,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/voyager/iss/"
               },
-              "summary": "Brightness is corrected for illumination; much of the fine grain is image noise. The gray grid marks unavailable samples."
+              "notes": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed. Fine grain is largely source-image noise and must not be interpreted as resolved terrain.",
+              "noData": true
             },
             {
               "id": "filter-color",
               "label": "False color",
-              "description": "Voyager green, blue and violet filters are displayed as red, green and blue. Only their common reliable interior is mapped; the gray grid marks unknown samples. Blur and registration uncertainty limit interpretation to broad patterns at roughly 40 km or coarser near the image centre. Small colored details can be image noise or registration error. This is not true color or a calibrated albedo map.",
-              "title": "Voyager false color",
-              "detail": "G / B / V",
-              "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain.",
               "thumbnail": "/scenes/proteus/proteus-filter-color-thumbnail.webp",
               "surface": "proteus-filter-color-surface@2x.webp",
               "poles": "proteus-filter-color-surface@2x.webp",
@@ -409,14 +426,13 @@
                 "id": "c1137350-color",
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/voyager/iss/"
-              }
+              },
+              "notes": "Voyager green, blue and violet filters are displayed as red, green and blue. Only their common reliable interior is mapped; the gray grid marks unknown samples. Blur and registration uncertainty limit interpretation to broad patterns at roughly 40 km or coarser near the image centre. Small colored details can be image noise or registration error. This is not true color or a calibrated albedo map.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
-              "title": "Shape-derived radial height",
-              "detail": "Radial shape",
               "thumbnail": "/scenes/proteus/proteus-elevation-thumbnail.webp",
               "surface": "proteus-elevation-surface@2x.webp",
               "poles": "proteus-elevation-surface@2x.webp",
@@ -439,7 +455,8 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
                 "image": "/scenes/proteus/proteus-elevation-legend.webp"
               },
-              "summary": "Height relative to a 208 km sphere, from a Voyager shape model. Unseen terrain is modeled; small features are uncertain."
+              "notes": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+              "noData": true
             }
           ]
         },
@@ -532,7 +549,7 @@
       "sha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -586,7 +603,7 @@
       "sha256": "2cbc85b09e7424100cc70ae04e2c3e6348de9c16e3d2b470cfcd3c80a6a7dcc5",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -633,7 +650,7 @@
       "sha256": "db382dbdddf392fc4bd259eae704f29d2079a79b0eab16667d3ab564c74f11c2",
       "bytes": 3310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -687,7 +704,7 @@
       "sha256": "37251119522eb390347b918920b14621f9b28ec6aecd12ebe48d79d64fd4223b",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -734,7 +751,7 @@
       "sha256": "647c4c8715e93c784e4fa007640cde04e176a5623507364440edce797abdb257",
       "bytes": 3337,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -788,7 +805,7 @@
       "sha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -835,7 +852,7 @@
       "sha256": "289c5ced3819a5dab6ee26fa1f4b7f0c099d051404b5174fc30d089543f7f9f9",
       "bytes": 3311,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -889,7 +906,7 @@
       "sha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -936,7 +953,7 @@
       "sha256": "baddb97ebd6d2bcfef48e09338dd95d6777744265246c4ba24de75bcf2dbe497",
       "bytes": 3310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -990,7 +1007,7 @@
       "sha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1037,7 +1054,7 @@
       "sha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42",
       "bytes": 3296,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1052,7 +1069,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1061,10 +1078,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2456ceb80037284da257500ee13b31c9c888368f8e8cbb26ca6082d7b5dde760",
-      "bytes": 6697,
+      "sha256": "cb2bda1b080fa50e138c76deed52806f10a44ed1ca851b2224ef19bcae09c76c",
+      "bytes": 5879,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1075,11 +1092,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1097,19 +1113,26 @@
           "url": "/scenes/proteus/proteus-elevation-thumbnail.webp",
           "bytes": 7376,
           "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
           "bytes": 376918,
           "sha256": "f44442af0337975d7e9d87ae64de2803245d3a183d0f7ce96ccadf845fa50b28",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "stooke-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1118,12 +1141,11 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed. Fine grain is largely source-image noise and must not be interpreted as resolved terrain."
-      ],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1131,7 +1153,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "c1137317",
@@ -1143,15 +1165,22 @@
       "outputs": [
         {
           "url": "/scenes/proteus/proteus-normal-thumbnail.webp",
-          "bytes": 3420,
-          "sha256": "93c16a2ac7a30062c0f44c64d611f8cf86afe248e3a3128314fa3c36bb282015",
-          "verification": "bytes-verified"
+          "bytes": 2308,
+          "sha256": "be0839dea4f0307484810e2c35e55fa305200b68165004fba74913f91f6d455a",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
-          "bytes": 426212,
-          "sha256": "3569954d7533c338ad73a0a25f737e54278b3b05aeeb3235842e23908f656153",
-          "verification": "bytes-verified"
+          "bytes": 374926,
+          "sha256": "d09885ebc88d3c251c70e095352fbec59b3894bec1501ff835cfd5380e571a97",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "stooke-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1160,12 +1189,11 @@
       "id": "filter-color",
       "label": "False color",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/1",
+      "selector": "/raster/surfaceObservations/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Voyager green, blue and violet filters are displayed as red, green and blue. Only their common reliable interior is mapped; the gray grid marks unknown samples. Blur and registration uncertainty limit interpretation to broad patterns at roughly 40 km or coarser near the image centre. Small colored details can be image noise or registration error. This is not true color or a calibrated albedo map."
-      ],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
       "lensIds": [
         "filter-color"
       ],
@@ -1173,7 +1201,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "c1137350-color",
@@ -1187,15 +1215,22 @@
       "outputs": [
         {
           "url": "/scenes/proteus/proteus-filter-color-thumbnail.webp",
-          "bytes": 2664,
-          "sha256": "fff84f5716cd883019faf6ea3639b0341dcebf54ebfbe3321c737b3c28013c4f",
-          "verification": "bytes-verified"
+          "bytes": 2998,
+          "sha256": "215b8373ab113e90c21b1feafa903e3e2578898f33084f555d6c7b47aca73cbd",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-filter-color-surface@2x.webp",
-          "bytes": 190164,
-          "sha256": "165fb921fb9de96e9b82b15659e4342d0832bb31dfd6f5f4e50a3fc24a09e160",
-          "verification": "bytes-verified"
+          "bytes": 172904,
+          "sha256": "013d96f4e39db21cefbd47204beeff466160573d66228e0207fc06d1bc8843a5",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "stooke-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1205,8 +1240,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1218,8 +1254,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5782,
-          "sha256": "b80a7010690c7962ae0ba53f5b23a8b88301059d36882ac8bcdf2ba32319f976",
+          "bytes": 5616,
+          "sha256": "64a00c8c89ea36d786a9e303b2d3b4819c5d4674b44b0bea1125e68f3d5e4e4c",
           "verification": "bytes-verified"
         }
       ],
@@ -1229,10 +1265,11 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -1243,8 +1280,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 22918,
-          "sha256": "bdedc167a33d261e3c4bf62daad7d4ef33051e885b356eba76423a73111f0db5",
+          "bytes": 22414,
+          "sha256": "0c46236aa6741417f9f068699b205f94842393941becea324f3024b8671a5903",
           "verification": "bytes-verified"
         }
       ]
@@ -1253,10 +1290,11 @@
       "id": "preview:filter-color",
       "label": "False color preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/1",
+      "selector": "/raster/surfaceObservations/1",
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "filter-color"
@@ -1267,8 +1305,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 6622,
-          "sha256": "c31166a6461d4712d20cda1d8572db74d11a9789a446322e6a41d3b4af4aa3c1",
+          "bytes": 6716,
+          "sha256": "5b733852c439afdb0c424a8377fb8dfbe24ef4dd71ce3ae33334cc6b5059e211",
           "verification": "bytes-verified"
         }
       ]
@@ -1281,6 +1319,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"
@@ -1301,5 +1340,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "proteus",
+    "materialSha256": "e200b41929fa90b0cc7e6aa22f1926ce595649023d834b9c71be8a9db70e1f8e",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/proteus/prepared/provenance.json",
+      "sha256": "8f3081ef4bd272d937f878b1ba4374d73bc44bf43860ce5ed38b6b080c177133"
+    }
   }
 }

@@ -1,3 +1,5 @@
+import { preparationEvidenceApplies, recordPreparationEvidence } from './preparation-evidence.mts';
+import { productInputRoles } from '../src/platform/product-input-evidence.mts';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
@@ -61,6 +63,23 @@ test('standalone lineage recovery never claims a fresh preparation, including wi
   assert.ok(verified.sources.every(source => source.verification === 'bytes-verified'));
 });
 
+test('controlled photographic inserts bind every consumed photograph alongside the global base', async t => {
+  const context = await fixture(t);
+  const recipePath = resolve(context.source, 'preparation/raster.json'), recipe = await read(recipePath);
+  const surface = requireRecord(requireArray(recipe.surfaces)[0]);
+  surface.science = { kind: 'terrestrial-observation', detailMosaic: {format: 'controlled-geotiff', consumer: 'surfaces',
+    profile: { displayRange: [0, 2], filter: 'CLEAR' },levelMatching:{boundaryPixels:4}} };
+  const bytes = JSON.stringify(recipe);
+  await writeFile(recipePath, bytes);
+  const descriptorPath = resolve(context.objectDirectory, 'object.json'), descriptor = await read(descriptorPath);
+  const sources = requireArray(requireRecord(requireRecord(descriptor.properties).recipe).sources);
+  requireRecord(sources[0]).sha256 = hash(bytes);
+  await writeFile(descriptorPath, JSON.stringify(descriptor));
+  const document = await prepareObjectProvenance(context);
+  assert.deepEqual(productSourceIds(document, 'surface').sort(), ['observation', 'unused']);
+  assert.ok(document.sources.every(source => source.verification === 'bytes-verified'));
+});
+
 test('preparation binds exact input and output bytes and excludes unused archive entries', async t => {
   const context = await fixture(t), document = await prepareObjectProvenance(context);
   assert.equal(document.basis, 'prepared');
@@ -86,6 +105,29 @@ test('acquired products retain their configuration input and verify its exact by
   assert.deepEqual(requireValue(document.sources.find(source => source.id === 'observation'), 'observation source').dependencies, ['unused']);
   await writeFile(resolve(context.source, 'unused.dat'), 'changed acquisition configuration');
   await assert.rejects(prepareObjectProvenance(context), /identity mismatch: unused.dat/u);
+});
+
+test('composition lineage follows the pinned conversion recipe to the native archive', async t => {
+  const context = await fixture(t), manifestPath = resolve(context.source, 'manifest.json');
+  const recipe = JSON.stringify({schema: 'cssearth-mapped-composition@1', target: 'Fixture', referenceRadiusMeters: 100,
+    input: 'unused.dat', sha256: hash('unused'), observationName: 'fixture',
+    selections: [{id: 'surface', kind: 'posterior', field: 'ice', statistic: 'median'}]});
+  await writeFile(resolve(context.source, 'conversion.json'), recipe);
+  const manifest = await read(manifestPath);
+  manifest.documents = [{id: 'conversion', path: 'conversion.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe),
+    sourceBinding: {kind: 'local', reason: 'Authored conversion fixture'}, consumers: ['surfaces']}];
+  await writeFile(manifestPath, JSON.stringify(manifest));
+  await writeFile(resolve(context.source, 'preparation/acquisition.json'), JSON.stringify({operations: [
+    {kind: 'mapped-composition', path: 'observation.dat', recipePath: 'conversion.json', product: 'surface'},
+  ]}));
+  const document = await prepareObjectProvenance(context);
+  assert.deepEqual(new Set(productSourceIds(document, 'surface')), new Set(['observation', 'conversion', 'unused']));
+  assert.deepEqual(requireValue(document.sources.find(source => source.id === 'observation'), 'converted grid').dependencies, ['conversion', 'unused']);
+  // Recovery needs the checked-in recipe, but not the downloaded original.
+  await rm(resolve(context.source, 'unused.dat'));
+  assert.deepEqual(new Set(productSourceIds(await prepareObjectProvenance({...context, basis: 'recovered'}), 'surface')), new Set(['observation', 'conversion', 'unused']));
+  await writeFile(resolve(context.source, 'conversion.json'), recipe.replace('unused.dat', 'other.dat'));
+  await assert.rejects(prepareObjectProvenance({...context, basis: 'recovered'}), /identity mismatch: conversion.json/u);
 });
 
 test('upstream verification requests are recorded without inventing acquisition history', async t => {
@@ -264,4 +306,40 @@ test('Mercury coverage completion binds all three maps; previews retain their pa
   assert.deepEqual(new Set(productSourceIds(document, 'preview:enhanced')), new Set(enhanced.inputs));
   assert.ok(document.sources.some(source => source.path === 'spectrum/mascs-global-area-weighted-mean.json'));
   assert.ok(!document.sources.some(source => /stars\/|maps\/globe.asset|psg.*rif/iu.test(source.path)));
+});
+
+
+test('metadata recovery preserves the last verified preparation and checks its material applicability', async t => {
+  const context = await fixture(t), prepared = await prepareObjectProvenance({ ...context, write: true });
+  assert.ok(prepared.lastPreparation);
+  assert.equal(preparationEvidenceApplies(prepared), true);
+  const recovered = await prepareObjectProvenance({ ...context, basis: 'recovered' });
+  assert.deepEqual(recovered.lastPreparation, prepared.lastPreparation);
+  assert.equal(recovered.basis, 'recovered');
+  const metadata = { ...recovered, generator: { ...recovered.generator, sha256: 'a'.repeat(64) } };
+  assert.equal(preparationEvidenceApplies(metadata), true, 'lineage compiler changes do not erase byte evidence');
+  const changed = structuredClone(metadata);
+  Reflect.set(changed.products[0]!.outputs[0]!, 'sha256', '0'.repeat(64));
+  assert.equal(preparationEvidenceApplies(changed), false, 'old evidence cannot certify different material');
+  assert.deepEqual(changed.lastPreparation, prepared.lastPreparation, 'the old evidence remains inspectable');
+  assert.throws(() => recordPreparationEvidence(recovered), /byte-verified preparation/);
+  assert.throws(() => validateObjectProvenance({ ...prepared, lastPreparation: { ...prepared.lastPreparation, objectId: 'another' } }), /different object/);
+});
+
+test('input roles follow recipe consumption and leave unclassified dependencies unknown', async t => {
+  const document = await prepareObjectProvenance(await fixture(t));
+  assert.deepEqual(productInputRoles(document, 'surface').get('observation'), ['appearance']);
+  const surface = document.products.find(p => p.id === 'surface')!;
+  const unknown = { ...document, products: document.products.map(p => ({ ...p, inputEvidence: undefined })) };
+  assert.deepEqual(productInputRoles(unknown, 'surface').get('observation'), ['unknown']);
+  assert.throws(() => validateObjectProvenance({ ...document, products: [{ ...surface, inputEvidence: [{ sourceId: 'not-consumed', role: 'geometry', evidence: 'Invalid link' }] }] }), /consumed input/);
+});
+
+
+test('Gaspra separates its photographic appearance from the source shape in the same product', async () => {
+  const document = validateObjectProvenance(await read('src/objects/gaspra/prepared/provenance.json'));
+  const roles = productInputRoles(document, 'normal');
+  assert.deepEqual(roles.get('gaspra-normal'), ['appearance']);
+  assert.deepEqual(roles.get('gaspra-shape'), ['geometry']);
+  assert.deepEqual(productInputRoles(document, 'preview:normal'), roles);
 });

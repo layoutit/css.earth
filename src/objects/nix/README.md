@@ -11,13 +11,7 @@ Geometry is Simon Porter’s [2021 released Nix model](https://doi.org/10.6084/m
 
 The camera uses the PDS New Horizons [`nh_pcnh_010.tpc`](https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/pck/nh_pcnh_010.tpc) (2024-03-12). Its active values are the restored V008-derived Nix pole, RA 349.1°, Dec −37.7°, and prime meridian 243.5722888° + 197.01579° per TDB day past J2000. The V009 alternatives are in comments because the release explicitly says they need further checking; they are not used.
 
-| Candidate | Disposition |
-| --- | --- |
-| Porter 2021 mesh | **Included.** The released fit supplies the fixed source geometry for this lens. |
-| PDS LORRI best exposure | **Diagnostic only.** The native observation is restored and projected experimentally; publication awaits controlled image-to-mesh registration. |
-| PDS MVIC color sequence | **Not used as color.** It records real band differences, including Nix’s red region, but needs qualified cross-band and image-to-mesh registration. |
-| PDS MVIC/LEISA composition products | **Context only.** Small-moon products do not supply a registered composition map for this mesh. |
-| Porter et al. 2025 model/albedo work | **Not substituted.** No downloadable updated mesh, albedo raster, or camera solution was found for the 2021 STL. |
+Source selections and alternative products are recorded in the [investigation ledger](investigations.json).
 
 ## Evidence
 
@@ -33,7 +27,7 @@ Reversing the transfer exposes a limitation. Using the measured correction for t
 
 ![Reverse Nix source-transfer comparison](evidence/photography/best-separate-view-reverse-interior-transfer.png)
 
-Only contributions within 500 m of the fixed display mesh and 1.5 source footprints are accepted; incidence and emission are each limited to 70°. Gray marks unobserved or rejected coverage. It is not dark terrain, color, or albedo.
+Only contributions within 1.5 source footprints are accepted, and a sample needs at least half of its bilinear weight from them; incidence and emission are each limited to 70°. Gray marks unobserved or rejected coverage. It is not dark terrain, color, or albedo.
 
 The serial body preparation completed and the experimental view was inspected and rotated in the local browser. All 31 existing delivered assets remain byte-identical; the photographic view adds three images. The updated Nix/Hydra source checks pass (four tests), as do the camera tools’ TypeScript check and source-catalogue refresh. The source cameras, input pins and evidence were regenerated together; the camera matrices did not change. These checks do not qualify registration. DPR, mobile and publication validation were not completed because the source-frame gate remains unresolved.
 

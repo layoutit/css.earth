@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-overlay-wcs-oracle@1",
-  "oracle": "Astropy WCS 6.0.1 / WCSLIB; FITS origin=1; CROTA/CDELT; ICRS TAN",
+  "oracle": "Astropy WCS 6.0.1 / WCSLIB; FITS origin=1; CROTA/CDELT; ICRS TAN and ordinary SIN",
   "fixtures": [
     {
       "id": "lmc-overlays-smash-original",
@@ -409,6 +409,70 @@
           0.2988909844352813,
           0.09293080522656373,
           -0.9497515700767496
+        ]
+      ]
+    },
+    {
+      "id": "m45-wise-sin",
+      "wcs": {
+        "projection": "SIN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          4007,
+          3061
+        ],
+        "referencePixel": [
+          2004,
+          1531
+        ],
+        "referenceValueDeg": [
+          56.477089,
+          24.170254
+        ],
+        "scaleDeg": [
+          -0.000761111092288,
+          0.000761111092288
+        ],
+        "rotationDeg": 180
+      },
+      "pixels": [
+        [
+          0.5,
+          0.5
+        ],
+        [
+          4007.5,
+          3061.5
+        ],
+        [
+          2004,
+          1531
+        ],
+        [
+          3200,
+          750
+        ]
+      ],
+      "expectedIcrsRays": [
+        [
+          0.521161751486602,
+          0.7385151612612464,
+          0.4277683781846114
+        ],
+        [
+          0.4859817250030463,
+          0.7817914391411046,
+          0.3906711003500822
+        ],
+        [
+          0.5038543966162788,
+          0.7605799796145987,
+          0.40944943719573257
+        ],
+        [
+          0.48817279472146413,
+          0.7656759153627266,
+          0.4188409186401037
         ]
       ]
     }

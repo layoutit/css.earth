@@ -88,10 +88,10 @@ export function anomalyColor(value: number, recipe: AnomalyPalette) {
     (recipe.palette[Math.min(index + 1, recipe.palette.length - 1)][c] - channel) * fraction));
 }
 
+/** The dated ENSO lens recipe; its reader text is ensoText's and its notes restate the product and date. */
 export function ensoContent(recipe: CoraltempRecipe) {
   const date = new Date(`${recipe.date}T12:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
-  return { id: 'enso', label: 'ENSO', detail: date, title: `ENSO: sea-surface temperature anomalies · ${date}`,
-    description: `NOAA CoralTemp · 5 km · ${date}. Nighttime sea-surface temperature departure from the ${recipe.baseline} average. Gray: land, ice, or unavailable data.`,
+  return { id: 'enso', label: 'ENSO',
     thumbnail: '/scenes/earth/earth-lens-enso.webp', falseColor: true,
     source: { id: 'noaa-coraltemp-anomaly', url: coraltempProductUrl },
     facts: [{ id: 'enso-status', label: 'NOAA status', value: recipe.advisory.status },
@@ -99,5 +99,13 @@ export function ensoContent(recipe: CoraltempRecipe) {
       { id: 'enso-checked', label: 'Source checked', value: recipe.checked.slice(0, 10) }],
     legend: { kind: 'scale', title: 'Temperature anomaly · °C', sourceUrl: coraltempProductUrl,
       recipe: { palette: recipe.palette, labels: ['≤ −5', '0', '≥ +5'] } },
-    legendNote: 'Anomaly map; the ENSO advisory describes the coupled ocean–atmosphere state.' };
+    legendNote: 'Anomaly map; the ENSO advisory describes the coupled ocean–atmosphere state.',
+    notes: `NOAA CoralTemp · 5 km · ${date}. Nighttime sea-surface temperature departure from the ${recipe.baseline} average. Gray: land, ice, or unavailable data.` };
+}
+
+/** Earth's text.json entry for the ENSO dataset on the recipe's date. */
+export function ensoText(recipe: CoraltempRecipe) {
+  const day = (month: 'short' | 'long') => new Date(`${recipe.date}T12:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month, year: 'numeric', timeZone: 'UTC' });
+  return { title: 'Sea-surface temperature anomaly', detail: day('short'),
+    summary: `Nighttime sea-surface temperature compared with the ${recipe.baseline} average, on ${day('long')}. Gray covers land, ice and gaps.` };
 }

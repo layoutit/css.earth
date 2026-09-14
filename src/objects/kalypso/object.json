@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2d24e661836ac75f0952b0e4e8d17c76e63db4f32d4f7b509988a60a3516a694"
+          "sha256": "570068094b8870b28cddbc2773826975518a2be7dfaaf190ef0bcc8740dfc218"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "391a19bba2eb1b4801ee5a1c0eb88d36be6e0e401574a224fdd9352f91010251"
+        "sha256": "1c8a7f7a9155e8d51c49140e94e904b88e75b789f3d7e039c7f7697dc58c51dc"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6180409355001784,
-      "description": "Explore Kalypso in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in April 1858.",
       "systemName": "Solar System",
       "order": 231,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ca10c3c28c96e4b52fa63b49a9636c5936532aecf6057aa79be98f0132408a84"
+    "sha256": "b10d7252243fa03ad8c233861c443b8b715d0f7a280e20e818338408a373263f"
   }
 }

@@ -2,15 +2,11 @@
 import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mts";
 import PlanetObjectResult from "./PlanetObjectResult.astro";
 import PreparedObjectResult from './PreparedObjectResult.astro';
-import { prepareNebulaSearch } from '../prepare-nebula-search.mts';
 import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount, matchesObjectCategory } from "../object-categories.mts";
 
 interface Props { activeObjectId?: string; formId?: string; }
 const { activeObjectId, formId } = Astro.props;
-const host = PLANET_SEARCH_OBJECTS.find(object => object.classification === 'star' && object.distanceAu === 0);
-if (!host) throw new Error('Prepared object search needs the shared world host.');
-const nebulae = prepareNebulaSearch(Object.values(import.meta.glob('../../src/objects/*/source/nebula.json', { eager: true, import: 'default' })), host.route);
-const searchObjects = [...PLANET_SEARCH_OBJECTS, ...nebulae];
+const searchObjects = PLANET_SEARCH_OBJECTS;
 const defaultCategory = 'planet';
 const types = new Map(OBJECT_CATEGORIES);
 for (const object of searchObjects) if (!types.has(objectCategory(object.classification))) {
@@ -46,7 +42,7 @@ const groups = [...types].map(([type, label]) => ({ type, label,
       hidden={!group.some(object => matchesObjectCategory(object.classification, defaultCategory))}
       style={`contain-intrinsic-block-size:${Math.max(0, group.filter(object => matchesObjectCategory(object.classification, defaultCategory)).length * 28 - 8)}px`}>
       <ul class="planet-object-chunk-list" role="presentation">
-        {group.map(object => 'focusId' in object
+        {group.map(object => object.kind === 'prepared-focus'
           ? <PreparedObjectResult object={object} hidden={!matchesObjectCategory(object.classification, defaultCategory)} />
           : <PlanetObjectResult object={object} activeObjectId={activeObjectId}
             hidden={!matchesObjectCategory(object.classification, defaultCategory)} />)}

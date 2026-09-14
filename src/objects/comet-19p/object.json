@@ -24,12 +24,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "863508a7053be085da029310e2aa1acce2814bf9c19e5f80635fd2639092e7eb"
+          "sha256": "099ce21b0846794fceedae19d3dba123c90e6830374564383449b4bf394f2a1f"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7d6a42940651ce580bffa72001fa8240c3edc1ffe2323ab33868d7845335e4f5"
+          "sha256": "ab211aaf254a80048dff5a5520b48aee0c6ae3e923ae2809e36ca9e8d80195ef"
         },
         {
           "id": "title",
@@ -49,7 +49,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "32c964555e3bcf01ddc490344fbba201574ca8076ec669503f6fc3656e42f19b"
+          "sha256": "77cc72a8f6d90444a051399509c09b3afc47a902938d1acd93bbc8a390b7aba1"
         },
         {
           "id": "features",
@@ -140,7 +140,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d9737cab3778677c39634c335b661ff4a52f043414bf3482353e1ab3812d3237"
+        "sha256": "2507eaed7e398e5e1fd77ea94f5df9d19ea989f9a3f266a271321528d93608e5"
       }
     },
     "catalog": {
@@ -148,7 +148,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.608969333559339,
-      "description": "Explore Borrelly's MICAS photograph and independent USGS and DLR terrain reconstructions.",
+      "description": "Elongated comet that Deep Space 1 flew past in 2001.",
       "systemName": "Solar System",
       "order": 76,
       "context": {
@@ -159,6 +159,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "7f3cca6cfbeaf6e00f475d7cb6524d79cc105601d71b66bf7ac51c0fc391dfc9"
+    "sha256": "f70739756def557588e909c272e981024d127f3b88683a2aa86765ff2e66f505"
   }
 }

@@ -4,7 +4,6 @@
   "id": "asteroid-2002-tx300",
   "displayName": "2002 TX300",
   "panel": {
-    "introduction": "2002 TX300 is an icy member of the Haumea family. Reanalysis of a two-chord occultation supports a range of sizes and shapes; this view illustrates one published flattened solution.",
     "facts": [
       {
         "id": "shape",
@@ -45,9 +44,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "The adopted example projected ellipse is 363 × 289 km from the published timing-error reanalysis, with effective diameter 323 (+95/−37) km. This axisymmetric illustration assumes 363 km equatorial depth. The original two chords do not uniquely determine the shape; an old 286 km circular fit is not treated as definitive. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement. The grid marks unmapped terrain.",
-        "title": "Conditional occultation-shape illustration",
-        "detail": "Inferred shape · unmapped surface grid",
         "thumbnail": "/scenes/asteroid-2002-tx300/asteroid-2002-tx300-model-thumbnail.webp",
         "surface": "asteroid-2002-tx300-model-surface@2x.webp",
         "poles": "asteroid-2002-tx300-model-poles@2x.webp",
@@ -55,7 +51,9 @@
           "id": "published-shape",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1051/0004-6361/201732564"
-        }
+        },
+        "notes": "The adopted example projected ellipse is 363 × 289 km from the published timing-error reanalysis, with effective diameter 323 (+95/−37) km. This axisymmetric illustration assumes 363 km equatorial depth. The original two chords do not uniquely determine the shape; an old 286 km circular fit is not treated as definitive. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

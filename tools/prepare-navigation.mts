@@ -36,15 +36,15 @@ import {
   validateMarkerSourceBytes,
 } from "../src/navigation/marker-recipe.mts";
 import { validateMarkerPresentation } from "../src/navigation/marker-presentation.mts";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { optimizePreparedQ75Webp } from "./prepared-webp.mts";
 import { loadAstronomyPackage } from "../src/platform/astronomy-package.mts";
 import { authoredObject } from './authored-object.mts';
 
 const markerTileSize = 16;
 const PLANET_MARKER_PLANETS = Object.freeze(
-  OBJECTS
-    .toSorted((left, right) => left.distanceAu - right.distanceAu),
+  SCENE_OBJECTS
+    .toSorted((left, right) => left.distance.meters - right.distance.meters),
 );
 
 export async function loadMarkerDescriptors({

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c7a1c997630da01527bed05b56193aa1b7389e077c4881bb6a4b61f3263ed0f3"
+    "sha256": "2754d6dadc5da11b91854ca04b441ef5fd5e434c22c453965fae7d6708cf23c7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6e178f020ca1c177fb61d2d464c8ea5acd58e460b576f8bc2efc70878b1f1ec3",
+      "sha256": "4fe1d3481268c1778682eae5d7e84a6575ba7d521d49463bedb938cdd40fa51e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,7 +171,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "2008 EV5 is a small near-Earth asteroid with a radar-derived equatorial ridge interrupted by a large concavity. Explore its original shape and radial heights. The grid marks unavailable surface imagery. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied.",
           "facts": [
             {
               "id": "radius",
@@ -203,8 +202,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "The shared grid marks unavailable surface imagery on this radar model. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-shape-thumbnail.webp",
               "surface": "asteroid-2008-ev5-shape-surface@2x.webp",
               "poles": "asteroid-2008-ev5-shape-surface@2x.webp",
@@ -213,13 +210,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "notes": "The shared grid marks unavailable surface imagery on this radar model. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "False color shows radius at the nearest source-surface point minus a 0.2 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 5 m is withheld. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-thumbnail.webp",
               "surface": "asteroid-2008-ev5-elevation-surface@2x.webp",
               "poles": "asteroid-2008-ev5-elevation-surface@2x.webp",
@@ -241,7 +237,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj",
                 "image": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "False color shows radius at the nearest source-surface point minus a 0.2 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 5 m is withheld. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied."
             }
           ]
         },
@@ -374,7 +370,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -383,8 +379,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6e178f020ca1c177fb61d2d464c8ea5acd58e460b576f8bc2efc70878b1f1ec3",
-      "bytes": 9688,
+      "sha256": "4fe1d3481268c1778682eae5d7e84a6575ba7d521d49463bedb938cdd40fa51e",
+      "bytes": 9023,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -397,11 +393,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "False color shows radius at the nearest source-surface point minus a 0.2 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 5 m is withheld. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -434,6 +429,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "asteroid-2008-ev5-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -441,11 +443,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The shared grid marks unavailable surface imagery on this radar model. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -472,6 +473,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "asteroid-2008-ev5-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -479,8 +487,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -492,8 +501,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6361,
-          "sha256": "c5b52fbb85ca163a8f57280705dfd44ac0634be65dce50d8dc0c98decf5269b0",
+          "bytes": 5862,
+          "sha256": "e5160d2dfc173a3eff6ce4115eb2dd2bef060888ae21d2ecf627f938143cbe91",
           "verification": "bytes-verified"
         }
       ],
@@ -507,6 +516,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -531,6 +541,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

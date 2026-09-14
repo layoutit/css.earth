@@ -72,7 +72,7 @@ function validateRecipe(recipe: Recipe) {
   }
 }
 
-function validateTargetIdentity(header: Record<string, string | number | boolean>, bodyId: string, imagePath: string) {
+function validateTargetIdentity(header: Record<string, string | number | boolean | undefined>, bodyId: string, imagePath: string) {
   const target = header.SPCTCB;
   if (typeof target !== 'string' || target.trim().toLowerCase() !== bodyId.toLowerCase()) {
     throw new Error(`FITS target does not match recipe body ${bodyId}: ${imagePath}`);

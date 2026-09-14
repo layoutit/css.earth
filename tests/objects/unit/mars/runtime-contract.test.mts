@@ -8,13 +8,13 @@ import assets from "../../../../src/objects/mars/prepared/assets.json" with { ty
 import scene from "../../../../src/objects/mars/prepared/scene.json" with { type: "json" };
 import lenses from "../../../../src/objects/mars/prepared/lenses.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
-import { OBJECTS } from "../../../../site/objects.mts";
+import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
 objectRuntimePackageTests(runtimeDefinition);
 
 test("Mars's actual import closure has only shared runtime owners", async () => {
-  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "mars") });
+  const audit = await auditObjectRuntimeOwnership({ objects: SCENE_OBJECTS.filter(object => object.id === "mars") });
   assert.equal(audit.complete, true);
   for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/object-control-binding", "rendering/prepared-playback", "solar-system/cubic-sky-runtime"]) {
     assert.ok(audit.sharedClosure.includes(`src/renderers/css/${name}.ts`));

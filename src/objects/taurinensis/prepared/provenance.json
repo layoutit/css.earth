@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f3b42e6fdddaa2f5ab3840458cd145bd74f29676d6f88bb87855b68c9616f78d"
+    "sha256": "aee6239a99f327c81e12a3b6a463d5bbb0e72f0feef10c013102b8a86f61a7fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -150,14 +150,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cc3d970f1b6e2b6cd16a84c4793665af4ff918cc6795dfea86e153e234970253",
+      "sha256": "24027356508db604a3d08ca0dbf0b891144b9cbd6f5583e456c3ba35008aad60",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "taurinensis",
         "displayName": "Taurinensis",
         "panel": {
-          "introduction": "Taurinensis is a Mars-crossing asteroid. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex lightcurve reconstruction at approximate thermal scale: 20.87 km effective diameter (catalog ±0.36 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
-              "title": "Taurinensis · DAMIT shape model 490",
               "thumbnail": "/scenes/taurinensis/taurinensis-shape-thumbnail.webp",
               "surface": "taurinensis-shape-surface@2x.webp",
               "poles": "taurinensis-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Convex lightcurve reconstruction at approximate thermal scale: 20.87 km effective diameter (catalog ±0.36 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 10.435 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Taurinensis · radius relative to the 10.435 km reference sphere",
               "thumbnail": "/scenes/taurinensis/taurinensis-elevation-thumbnail.webp",
               "surface": "taurinensis-elevation-surface@2x.webp",
               "poles": "taurinensis-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/490",
                 "image": "/scenes/taurinensis/taurinensis-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 10.435 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -389,7 +385,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -398,8 +394,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cc3d970f1b6e2b6cd16a84c4793665af4ff918cc6795dfea86e153e234970253",
-      "bytes": 12117,
+      "sha256": "24027356508db604a3d08ca0dbf0b891144b9cbd6f5583e456c3ba35008aad60",
+      "bytes": 11728,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -412,11 +408,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 10.435 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -449,6 +444,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "taurinensis-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -456,11 +458,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex lightcurve reconstruction at approximate thermal scale: 20.87 km effective diameter (catalog ±0.36 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -487,6 +488,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "taurinensis-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -494,8 +502,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -507,8 +516,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8931,
-          "sha256": "0edbe36f724728ae4df0df3aa0e4a5ff894cf9caedeec70c50b90c415bb8a7c3",
+          "bytes": 8794,
+          "sha256": "381932c00144557639df1cc95466cc237d022a247b3be5a1f9cc9b34c9e8a245",
           "verification": "bytes-verified"
         }
       ],
@@ -522,6 +531,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -546,6 +556,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

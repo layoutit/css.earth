@@ -30,7 +30,7 @@ class CountedEvents extends EventTarget {
   count(type: string) { return this.listeners.get(type)?.size ?? 0; }
 }
 function harness(makeMount: (context: MountOptions, index: number) => Partial<MockMount> = () => ({})) {
-  const documentTarget = Object.assign(new CountedEvents(), { hidden: false, documentElement: { dataset: {} as Record<string, string> }, body: { classList: { add(..._items: string[]) {}, remove(..._items: string[]) {} } } });
+  const documentTarget = Object.assign(new CountedEvents(), { hidden: false, querySelector: (_selector: string) => null, documentElement: { dataset: {} as Record<string, string> }, body: { classList: { add(..._items: string[]) {}, remove(..._items: string[]) {} } } });
   documentTarget.hidden = false;
   documentTarget.documentElement = { dataset: {} };
   const classes = new Set<string>();

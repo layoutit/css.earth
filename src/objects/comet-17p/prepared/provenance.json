@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5e2e256a2d32580c14864d6dacecb4fe1ac207e5dbfc76642d39240625f928d2"
+    "sha256": "95b0b2c2ca852f3f147f14cf9f0bfc336b3285d60bf2ce521092158b7fb16055"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2744e2a41e7e9c6f699fdc44d20b1ac852943b5818747d77647ebf695d9955d2",
+      "sha256": "0d6225a2b2aae891ac6338b0a975ffc229e46da8390ad54505365f24836d0cba",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-17p",
         "displayName": "Holmes",
         "panel": {
-          "introduction": "Holmes became about a million times brighter during its 2007 outburst. The expanding dust cloud was enormous compared with the small nucleus that released it.",
           "facts": [
             {
               "id": "diameter",
@@ -173,9 +172,6 @@
             {
               "id": "model",
               "label": "Illustrative nucleus",
-              "detail": "Celestia",
-              "title": "17P/Holmes",
-              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
               "thumbnail": "/scenes/comet-17p/comet-17p-model-thumbnail.webp",
               "surface": "comet-17p-model-surface@2x.webp",
               "poles": "comet-17p-model-poles@2x.webp",
@@ -195,7 +191,9 @@
                   "label": "Closest to Sun",
                   "value": "2.09 AU"
                 }
-              ]
+              ],
+              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -294,7 +292,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -303,8 +301,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2744e2a41e7e9c6f699fdc44d20b1ac852943b5818747d77647ebf695d9955d2",
-      "bytes": 3307,
+      "sha256": "0d6225a2b2aae891ac6338b0a975ffc229e46da8390ad54505365f24836d0cba",
+      "bytes": 3082,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -317,11 +315,10 @@
       "label": "Illustrative nucleus",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -348,6 +345,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "celestia-mesh",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -355,8 +359,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -368,8 +373,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4797,
-          "sha256": "6e5c704840a1088d4550c178ba716124b87849274f279b1b836bf7a22da808b1",
+          "bytes": 4621,
+          "sha256": "7849ccfd42e5800b7e0a2d473e8cfe8dd0c8a40d31d801d32396f1525a8934ef",
           "verification": "bytes-verified"
         }
       ],

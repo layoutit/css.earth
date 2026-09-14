@@ -24,7 +24,7 @@ No dated test report is cited in the existing source notes.
 
 - The arbitrary display pole and meridian are not measured orientation.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="shape-scale-and-orientation"></a>
 <a id="source-survey"></a>
@@ -43,7 +43,7 @@ records the context image; shared preparation produces the scene.
 
 **Source survey**
 
-- [Mission context](https://science.nasa.gov/mission/deep-space-1/).
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Orbit**
 

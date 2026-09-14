@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "itokawa",
+  "entries": [
+    {
+      "id": "selected-amica-mosaic",
+      "subject": "AMICA mosaic",
+      "status": "included",
+      "finding": "Ten v-band frames now form the AMICA mosaic, using recipe-order to preserve the existing brightness reference and prefer October close-ups over distant September observations. Added 2492225173 and 2493031594 pass exact detector/DDR identity, disjoint backplane camera holdouts and sampled XYZ-to-ver128q checks under unchanged limits. The earlier eight-frame identity review is retained in the prior checked revisions. Current-pipeline sampled display-mesh coverage is 83.24% before and 84.26% after; this is neither exact planetary area nor an absolute albedo map.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/itokawa/README.md",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/itokawa/source/observations/st_2402987304_v_ddr.lbl",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/itokawa/README.md",
+        "https://github.com/layoutit/css.earth/blob/b7e79702738ceda157502dfef311890ba8cef85c/src/objects/itokawa/README.md#close-up-priority-14-september-2026",
+        "https://github.com/layoutit/css.earth/blob/b7e79702738ceda157502dfef311890ba8cef85c/src/objects/itokawa/evidence/close-up-priority/source-transfer.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "b7e79702738ceda157502dfef311890ba8cef85c"
+        }
+      ]
+    },
+    {
+      "id": "selected-shape-and-elevation",
+      "subject": "Shape and Elevation",
+      "status": "included",
+      "finding": "[Gaskell ver128q](https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab), derived from 775 AMICA images. Elevation is source radius minus 165 m; the original black-rock prime meridian is retained.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/itokawa/README.md",
+        "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-named-features",
+      "subject": "Named features",
+      "status": "included",
+      "finding": "[IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/ITOKAWA/target) Itokawa centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/itokawa/README.md",
+        "https://planetarynames.wr.usgs.gov/Page/ITOKAWA/target"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "october-pairs-overlap-gain",
+      "subject": "Additional October paired-exposure candidates",
+      "status": "excluded",
+      "finding": "Reused the 31-product late-October header survey and decoded four additional paired-exposure geometry cubes and original FITS. Two were included above. Trials including 2495806075 or 2506694595 exceeded the existing 1.35 overlap-gain bound; their brightness calibration was not relaxed to admit them. These tested combinations do not establish that every possible mosaic containing either frame must fail.",
+      "evidence": [
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2495806075_v_ddr.lbl",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2506694595_v_ddr.lbl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "b7e79702738ceda157502dfef311890ba8cef85c"
+        }
+      ],
+      "revisitWhen": "A source-backed photometric treatment or another connected frame set explains their overlap brightness within its qualified limits."
+    },
+    {
+      "id": "late-amica-single-exposures",
+      "subject": "Single-exposure and subwindow AMICA photographs",
+      "status": "deferred",
+      "finding": "Inspected original detector previews of 2532629277 (single exposure, 8-bit full frame) and 2516129281 (single exposure, 16-bit subwindow). The former shows a left-side detector artifact in the raw preview. Neither preview establishes calibrated brightness or a registered surface. The current paired-exposure reader was not extended, and neither image was painted onto the mesh.",
+      "evidence": [
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051109/st_2532629277_v.fit",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051103/st_2516129281_v.fit"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "b7e79702738ceda157502dfef311890ba8cef85c"
+        }
+      ],
+      "revisitWhen": "The native single-exposure/subwindow calibration is implemented and checked against the archive, followed by model-registration and transfer checks."
+    },
+    {
+      "id": "sbmt-native-preparation-oracle",
+      "subject": "Native SBMT preparation comparison",
+      "status": "unresolved",
+      "finding": "The generic native SBMT oracle compares the full released mesh, ST_2402987304 v-band FITS and its SUM pointing. Sampled pointing, image values and visible intersections match. The UV stage reports a 1.0021-pixel maximum difference from pinhole projection, exceeding the fixed 0.25-pixel criterion. Keep this mismatch explicit; the existing controlled-DDR production route is unaffected.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/06011cc9dbc174e819eb05aee44f7293cd6f4d9d/tools/oracles/sbmt/README.md",
+        "https://github.com/layoutit/css.earth/blob/06011cc9dbc174e819eb05aee44f7293cd6f4d9d/tests/oracles/sbmt/projection.json",
+        "https://github.com/layoutit/css.earth/blob/06011cc9dbc174e819eb05aee44f7293cd6f4d9d/src/objects/itokawa/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "06011cc9dbc174e819eb05aee44f7293cd6f4d9d"
+        }
+      ],
+      "revisitWhen": "Before using this SUM/UV route in a photographic lens, independently qualify the camera convention and account for the angular-versus-projective difference without fitting to oracle outputs."
+    }
+  ]
+}

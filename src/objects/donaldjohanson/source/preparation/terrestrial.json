@@ -13,7 +13,54 @@
     "poleSize": 512,
     "reportMissingPixels": true,
     "observations": [],
-    "scientific": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/lcy_donj_k548_iso20m_v10.obj.gz",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "compression": "gzip",
+          "expectedVertices": 274000,
+          "expectedFaces": 547996
+        },
+        "sampleGrid": {
+          "width": 1025,
+          "height": 513
+        },
+        "valueTransform": {
+          "scale": 1,
+          "offset": -2405.325
+        },
+        "minimum": -1200,
+        "maximum": 2400,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 2405.325,
+          "heightToMeters": 1,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 56
+        }
+      }
+    ],
     "observedColors": [],
     "surfaceQuality": 90,
     "shapeViews": [
@@ -47,12 +94,10 @@
         "levelMatching": {
           "samplesPerTriangle": 24,
           "minimumPairs": 128,
-          "maximumLogMad": 0.25,
           "maximumGain": 1.5,
           "maximumAngleDegrees": 60
         },
         "transfer": {
-          "maximumSourceDistanceMeters": 56,
           "maximumSeparationMeters": 30,
           "maximumEmissionDegrees": 70,
           "visibilityToleranceMeters": 0.5
@@ -67,8 +112,8 @@
         },
         "display": {
           "percentiles": [
-            1,
-            99
+            1.4,
+            98.8
           ]
         },
         "metadata": {

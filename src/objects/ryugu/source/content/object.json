@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Ryugu is a dark asteroid with a broad equatorial ridge. Hayabusa2 mapped its boulders and craters and returned samples to Earth in 2020.",
     "facts": [
       {
         "id": "radius",
@@ -67,8 +66,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
-        "title": "ONC 548.9 nm reflectance map",
         "thumbnail": "/scenes/ryugu/ryugu-normal-thumbnail.webp",
         "surface": "ryugu-normal-surface@2x.webp",
         "poles": "ryugu-normal-surface@2x.webp",
@@ -77,14 +74,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "ONC v-band · corrected reflectance",
-        "summary": "Corrected reflectance at 548.9 nm is stretched for display. The July 2018 observations leave the poles unobserved."
+        "notes": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
+        "noData": true
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain.",
-        "title": "ONC false-color composite",
         "thumbnail": "/scenes/ryugu/ryugu-enhanced-thumbnail.webp",
         "surface": "ryugu-enhanced-surface@2x.webp",
         "poles": "ryugu-enhanced-surface@2x.webp",
@@ -93,14 +88,11 @@
           "path": "../manifest.json"
         },
         "falseColor": true,
-        "detail": "Controlled ONC color mosaic",
-        "summary": "False colors show differences between images. Brightness matching changes the mosaic values; they are not measured reflectance."
+        "notes": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain."
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows radius minus a 448 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/ryugu/ryugu-elevation-thumbnail.webp",
         "surface": "ryugu-elevation-surface@2x.webp",
         "poles": "ryugu-elevation-surface@2x.webp",
@@ -122,16 +114,11 @@
           "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
           "image": "/scenes/ryugu/ryugu-elevation-legend.webp"
         },
-        "detail": "Shape-derived height",
-        "summary": "Height relative to a 448 m sphere, from the shape model. Colors include Ryugu's broad form; the outline is simplified."
+        "notes": "Color shows radius minus a 448 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces."
       },
       {
         "id": "close-up",
         "label": "Equatorial close-up",
-        "title": "Hayabusa2 ONC MASCOT-operation I/F mosaic",
-        "detail": "ONC-T · 3–4 Oct 2018",
-        "description": "Images taken by Hayabusa2 during MASCOT deployment show boulders across Ryugu’s equatorial strip. The original sampling is about 28 cm per pixel; the display is coarser. Brightness includes the illumination when the photographs were taken. The grid marks gaps and the unobserved poles.",
-        "summary": "Images taken by Hayabusa2 during MASCOT deployment show boulders across Ryugu’s equatorial strip. The original sampling is about 28 cm per pixel; the display is coarser. Brightness includes the illumination when the photographs were taken. The grid marks gaps and the unobserved poles.",
         "thumbnail": "/scenes/ryugu/ryugu-close-up-thumbnail.webp",
         "surface": "ryugu-close-up-surface@2x.webp",
         "poles": "ryugu-close-up-surface@2x.webp",
@@ -140,15 +127,13 @@
           "path": "../manifest.json",
           "url": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/"
         },
-        "falseColor": false
+        "falseColor": false,
+        "notes": "Images taken by Hayabusa2 during MASCOT deployment show boulders across Ryugu’s equatorial strip. The original sampling is about 28 cm per pixel; the display is coarser. Brightness includes the illumination when the photographs were taken. The grid marks gaps and the unobserved poles.",
+        "noData": true
       },
       {
         "id": "thermal-inertia",
         "label": "Thermal inertia",
-        "title": "Hayabusa2 TIR thermal inertia map",
-        "detail": "TIR · model-derived",
-        "description": "False colors show how slowly the surface heats and cools, inferred from a thermal model fitted to Hayabusa2 observations. Higher values mean slower temperature changes. This is a thermal property, not a temperature map. The underlying observations sampled roughly 4.5 m per pixel; the finer map grid adds no measured detail. The grid marks missing values.",
-        "summary": "False colors show how slowly the surface heats and cools, inferred from a thermal model fitted to Hayabusa2 observations. Higher values mean slower temperature changes. This is a thermal property, not a temperature map. The underlying observations sampled roughly 4.5 m per pixel; the finer map grid adds no measured detail. The grid marks missing values.",
         "thumbnail": "/scenes/ryugu/ryugu-thermal-inertia-thumbnail.webp",
         "surface": "ryugu-thermal-inertia-surface@2x.webp",
         "poles": "ryugu-thermal-inertia-poles@2x.webp",
@@ -171,15 +156,13 @@
           "meta": "J m⁻² K⁻¹ s⁻½",
           "sourceUrl": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
           "image": "/scenes/ryugu/ryugu-thermal-inertia-legend.webp"
-        }
+        },
+        "notes": "False colors show how slowly the surface heats and cools, inferred from a thermal model fitted to Hayabusa2 observations. Higher values mean slower temperature changes. This is a thermal property, not a temperature map. The underlying observations sampled roughly 4.5 m per pixel; the finer map grid adds no measured detail. The grid marks missing values.",
+        "noData": true
       },
       {
         "id": "spectral-slope",
         "label": "Spectral slope",
-        "title": "Hayabusa2 ONC b–x spectral slope map",
-        "detail": "ONC-T · normal-albedo spectral slope",
-        "description": "False colors show the change in reflectance from blue to near-infrared light (b–x bands). Positive values mean a redder spectrum; negative values mean bluer. This does not measure terrain slope or identify minerals. The source’s saturated ±1 endpoints are withheld, and the grid marks those pixels. Polar mapping artifacts remain.",
-        "summary": "False colors show the change in reflectance from blue to near-infrared light (b–x bands). Positive values mean a redder spectrum; negative values mean bluer. This does not measure terrain slope or identify minerals. The source’s saturated ±1 endpoints are withheld, and the grid marks those pixels. Polar mapping artifacts remain.",
         "thumbnail": "/scenes/ryugu/ryugu-spectral-slope-thumbnail.webp",
         "surface": "ryugu-spectral-slope-surface@2x.webp",
         "poles": "ryugu-spectral-slope-poles@2x.webp",
@@ -202,7 +185,9 @@
           "meta": "µm⁻¹",
           "sourceUrl": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
           "image": "/scenes/ryugu/ryugu-spectral-slope-legend.webp"
-        }
+        },
+        "notes": "False colors show the change in reflectance from blue to near-infrared light (b–x bands). Positive values mean a redder spectrum; negative values mean bluer. This does not measure terrain slope or identify minerals. The source’s saturated ±1 endpoints are withheld, and the grid marks those pixels. Polar mapping artifacts remain.",
+        "noData": true
       }
     ]
   },

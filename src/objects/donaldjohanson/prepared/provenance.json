@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "donaldjohanson",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f8b5afc589ff67fd9e72fbc5d8014adcc2aaa2eccdeef7e58fe3fb4eb32de935"
+    "sha256": "3c23f4965eb9ab281700227ef3bfa559d868df0b8372db0f1ddc820fdd3d995c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e09b9bd0cb4d23ffeafa89be1f626d8cb4ab8855a93454b4b445f72bf1768b6a",
+      "sha256": "cb7b9827001555045e54ea2f472b339d9bffae888371b9455384654ee9fc434e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -31,7 +31,54 @@
           "poleSize": 512,
           "reportMissingPixels": true,
           "observations": [],
-          "scientific": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/lcy_donj_k548_iso20m_v10.obj.gz",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "compression": "gzip",
+                "expectedVertices": 274000,
+                "expectedFaces": 547996
+              },
+              "sampleGrid": {
+                "width": 1025,
+                "height": 513
+              },
+              "valueTransform": {
+                "scale": 1,
+                "offset": -2405.325
+              },
+              "minimum": -1200,
+              "maximum": 2400,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 2405.325,
+                "heightToMeters": 1,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 56
+              }
+            }
+          ],
           "observedColors": [],
           "surfaceQuality": 90,
           "shapeViews": [
@@ -65,12 +112,10 @@
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
-                "maximumLogMad": 0.25,
                 "maximumGain": 1.5,
                 "maximumAngleDegrees": 60
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 56,
                 "maximumSeparationMeters": 30,
                 "maximumEmissionDegrees": 70,
                 "visibilityToleranceMeters": 0.5
@@ -85,8 +130,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99
+                  1.4,
+                  98.8
                 ]
               },
               "metadata": {
@@ -158,7 +203,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3b70231bb876c41bbe5b6eec127c031a8a94055b30d31b99810a658d1a50fb79",
+      "sha256": "d932591c265563b28b226014e22d784ac9ea919a7991a828b39d4635f4cdd011",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -182,7 +227,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Donaldjohanson is a contact-binary asteroid visited by Lucy in April 2025. Its two lobes meet at a broad neck. This archived model preserves the original scale: Lucy stereo images constrain about 40% of the surface, and the source authors reconstructed the unseen side. The grid marks unavailable surface imagery. Donaldjohanson tumbles, so its orientation and lighting here are illustrative.",
           "facts": [
             {
               "id": "radius",
@@ -219,9 +263,6 @@
             {
               "id": "llorri",
               "label": "L’LORRI observation",
-              "detail": "Spacecraft observation",
-              "description": "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction.",
-              "title": "L’LORRI encounter image",
               "thumbnail": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
               "surface": "donaldjohanson-llorri-surface@2x.webp",
               "poles": "donaldjohanson-llorri-surface@2x.webp",
@@ -229,13 +270,12 @@
                 "id": "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
                 "path": "../manifest.json"
               },
-              "summary": "Two Lucy photographs cover part of the encounter-facing surface. Brightness retains original lighting; the grid marks rejected or unseen areas."
+              "notes": "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction.",
+              "noData": true
             },
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Published Lucy shape model",
-              "title": "Encounter shape model",
               "thumbnail": "/scenes/donaldjohanson/donaldjohanson-shape-thumbnail.webp",
               "surface": "donaldjohanson-shape-surface@2x.webp",
               "poles": "donaldjohanson-shape-surface@2x.webp",
@@ -244,8 +284,35 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Lucy shape model",
-              "summary": "Lucy's published encounter shape. The gray grid marks missing mapped imagery; lighting shows the model."
+              "notes": "Published Lucy shape model",
+              "noData": true
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "thumbnail": "/scenes/donaldjohanson/donaldjohanson-elevation-thumbnail.webp",
+              "surface": "donaldjohanson-elevation-surface@2x.webp",
+              "poles": "donaldjohanson-elevation-surface@2x.webp",
+              "source": {
+                "id": "donaldjohanson-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-1200",
+                  "600",
+                  "2400"
+                ],
+                "meta": "m · 2,405.325 m reference sphere",
+                "sourceUrl": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds",
+                "image": "/scenes/donaldjohanson/donaldjohanson-elevation-legend.webp"
+              },
+              "notes": "Color shows radius minus a 2,405.325 m reference sphere, including the body's broad shape. This is model-derived radial height, not gravitational height or a photograph. Brightness adds cartographic relief from the full source model; optional Shadows uses illustrative lighting. Only about 40% of the source shape is stereo-constrained; unseen terrain retains the source authors’ reconstruction. The map follows the closest unique source point within 56 m of the simplified display; the grid marks rejected transfers. Flat previews withhold overlapping radial surfaces."
             }
           ]
         },
@@ -404,7 +471,7 @@
       "sha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7",
       "bytes": 11193210,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -430,7 +497,7 @@
       "sha256": "74d897d04b791320f1acd63ab93726936bdea402d7f188201d3942af6f472557",
       "bytes": 10526400,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -458,7 +525,7 @@
       "sha256": "7acf747416aebcf252585d62d36b43aa98b299d308de5c7e1bb8fdf1b84e60ac",
       "bytes": 9023,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -484,7 +551,7 @@
       "sha256": "d7b06c7b8cb27ecb630d0b36b4c566adaeb272bfaea4b80ea55079627cdf8284",
       "bytes": 10526400,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -512,7 +579,7 @@
       "sha256": "b0b13261ce3adcd46636d9ece1bfcca4567423d90b08f3046358430773e47003",
       "bytes": 276961,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -520,7 +587,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -529,10 +596,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3b70231bb876c41bbe5b6eec127c031a8a94055b30d31b99810a658d1a50fb79",
-      "bytes": 13495,
+      "sha256": "d932591c265563b28b226014e22d784ac9ea919a7991a828b39d4635f4cdd011",
+      "bytes": 14166,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -554,7 +621,7 @@
       "sha256": "b5ca18dfacbff53035e64239d9e9fc2753a54a5e7cd2ade76b27a44bb25fcb92",
       "bytes": 1339,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -580,7 +647,7 @@
       "sha256": "1f516df5c1da65c45e435aa1a377998814561eec05c9823e1d5ddc715a97d5d9",
       "bytes": 30329,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -609,7 +676,7 @@
       "sha256": "4b235e29f861125fdab3b736f8d727c782bb449da1df0f9df73dfbe4c536bf6a",
       "bytes": 161,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -636,22 +703,71 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
   ],
   "products": [
     {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "donaldjohanson-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/donaldjohanson/donaldjohanson-elevation-thumbnail.webp",
+          "bytes": 5206,
+          "sha256": "6792dd8994eacdb6c5bd52f7f406a3ee082f59fe343aa27e8cd59d9726750e76",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/donaldjohanson/donaldjohanson-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/donaldjohanson/donaldjohanson-elevation-surface@2x.webp",
+          "bytes": 300128,
+          "sha256": "377757a64a391fdc7116e7f34b875b0c52959cd72b151b28069c8d52447ac4be",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "donaldjohanson-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "shape",
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Published Lucy shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -669,13 +785,20 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp",
           "bytes": 205278,
           "sha256": "fdab40973f952fad5e32ed40a551d22a998f19da6ad9cc84c86638b353694a99",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "donaldjohanson-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -685,11 +808,10 @@
       "label": "L’LORRI observation",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction."
-      ],
+      "limitations": [],
       "lensIds": [
         "llorri"
       ],
@@ -709,15 +831,22 @@
       "outputs": [
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
-          "bytes": 1380,
-          "sha256": "658e0d5f48f4f33932012526c2f1687bd7f33f8302095ff79c519b289b5067de",
-          "verification": "bytes-verified"
+          "bytes": 1376,
+          "sha256": "f0645a69bb7abc23377bfa641a5a0efa5a0746601ca08f4d161ff73bd1dd484b",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
-          "bytes": 686116,
-          "sha256": "be9059df07c37f955eda071b92027bb69beefd44b88ccbd6f9b1abc544226792",
-          "verification": "bytes-verified"
+          "bytes": 678120,
+          "sha256": "1bc7651e929605dfa7d596f48a393d2f7dd5ae43ace4442c640018ea2d1d963f",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "donaldjohanson-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -727,8 +856,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -740,8 +870,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10760,
-          "sha256": "5a748f69effe2b2eab13953590ab56e2592b068399e684c5c3dca516c338b63d",
+          "bytes": 10350,
+          "sha256": "e48499506901dbd73477663429151d4c42da817991d808ecff1823bd8a481478",
           "verification": "bytes-verified"
         }
       ],
@@ -752,6 +882,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -777,7 +908,7 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-features.json",
           "bytes": 7930,
           "sha256": "ff7f6eebc5b85ac5912badd40fd4970bec98d95b2b5952ff99701344c4274692",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -790,6 +921,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -814,6 +946,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "llorri"
@@ -824,8 +957,33 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/llorri.webp",
-          "bytes": 20606,
-          "sha256": "01c24f4166d5d3a8e77767f4bf94cf54fa784642e8357afe475e0ef25842c126",
+          "bytes": 21142,
+          "sha256": "03a840948fc2675c1b09b7dde52ed2d51df8c3b34d0ad4fbb10d16f65e0e5012",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 10206,
+          "sha256": "e2f8a80beb8c704130ab7ae437e521a5399ded9f840b4aac7f005c99d887142a",
           "verification": "bytes-verified"
         }
       ]
@@ -834,5 +992,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "donaldjohanson",
+    "materialSha256": "57f29ff6a857a43bc342e39119c1548520153cef5895207778f71e78f81c1f5f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/donaldjohanson/prepared/provenance.json",
+      "sha256": "cd55db41ee427de0db9eacb8d2ab633b90a5e4b3ebae57bd4cc3820f59c70665"
+    }
   }
 }

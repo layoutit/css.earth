@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import type { PreparedGalaxyRecord } from '@cssearth/catalog';
-import { admitGalaxyLabels, projectCatalogAperture, projectCatalogPosition } from './galaxy-catalog-layout.js';
+import { admitGalaxyLabels, catalogVolumeCorners, projectCatalogAperture, projectCatalogBounds, projectCatalogPosition } from './galaxy-catalog-layout.js';
 
 const world = { referenceFrame: 'test', epochJdTt: 1,
   pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } };
@@ -39,4 +39,18 @@ test('an R500 aperture is projected with sphere perspective, including off-axis 
   const off = projectCatalogAperture(10, projectCatalogPosition([50, 0, -100], world, viewport)!, viewport)!;
   expect(off.x).toBeGreaterThan(52); expect(off.a).toBeGreaterThan(off.b);
   expect(projectCatalogAperture(101, centred, viewport)).toBeNull();
+});
+
+test('cloud bounds follow physical scale and orientation instead of its central catalogue marker', () => {
+  const corners = catalogVolumeCorners({ referenceFrame: 'test', epochJdTt: 1,
+    originM: [0, 0, -100], metersPerUnit: 2, localToReferenceXyzw: [0, 0, Math.SQRT1_2, Math.SQRT1_2],
+    boundsUnits: { min: [-10, -2, -3], max: [10, 2, 3] } });
+  const bounds = projectCatalogBounds(corners, world, viewport)!;
+  expect(bounds.top).toBeCloseTo(-3 - 2000 / 94);
+  expect(bounds.right).toBeCloseTo(2 + 400 / 94);
+  const rolled = { ...world, pose: { ...world.pose, orientationXyzw: [0, 0, Math.SQRT1_2, Math.SQRT1_2] as const } };
+  const orbitBounds = projectCatalogBounds(corners, rolled, viewport)!;
+  expect(orbitBounds.top).toBeCloseTo(-3 - 400 / 94);
+  expect(orbitBounds.right).toBeCloseTo(2 + 2000 / 94);
+  expect(projectCatalogBounds(corners, { ...world, pose: { ...world.pose, positionM: [0, 0, -100] } }, viewport)).toBeNull();
 });

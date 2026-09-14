@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6f6628f5af538f1a3fccbd369e9cdcbf77101e2db62f14946c397393a8b26c19"
+    "sha256": "952f31e089f68a5873397867c9433539ab6a5e53f2d7225173406c69c48a9df8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e84242a1a3fec598bb6446066bfbe6cb732db84e380b4f1a8fa0384784e14b34",
+      "sha256": "a2e6bed064bdbd11ede22f99a5a2358a33105ebe5ed499812bbe350d1b2ac147",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,7 +171,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "YORP is a small near-Earth asteroid with a radar-derived flattened northern hemisphere and a prominent concavity. Explore its original shape and radial heights. The grid marks unavailable surface imagery. Its rotation information refers to the 2001 reference epoch.",
           "facts": [
             {
               "id": "radius",
@@ -203,8 +202,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "The shared grid marks unavailable imagery over the original YORP radar reconstruction, shown with prepared lighting. The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris.",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/yorp/yorp-shape-thumbnail.webp",
               "surface": "yorp-shape-surface@2x.webp",
               "poles": "yorp-shape-surface@2x.webp",
@@ -213,14 +210,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Radar shape with stronger coverage in the north. Rotation uses a fixed rate, not a current attitude model."
+              "notes": "The shared grid marks unavailable imagery over the original YORP radar reconstruction, shown with prepared lighting. The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows the original radar-model radius minus a 0.0564 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. About 25% of the model was unseen or observed at high radar incidence; the polar extent is less well constrained. Cartographic relief and optional Sun lighting are display treatments.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/yorp/yorp-elevation-thumbnail.webp",
               "surface": "yorp-elevation-surface@2x.webp",
               "poles": "yorp-elevation-surface@2x.webp",
@@ -242,8 +237,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/yorp.obj",
                 "image": "/scenes/yorp/yorp-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Radar height relative to a 56.4 m sphere. A quarter had poor or no coverage; the polar shape is uncertain."
+              "notes": "Color shows the original radar-model radius minus a 0.0564 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. About 25% of the model was unseen or observed at high radar incidence; the polar extent is less well constrained. Cartographic relief and optional Sun lighting are display treatments."
             }
           ]
         },
@@ -371,7 +365,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -380,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e84242a1a3fec598bb6446066bfbe6cb732db84e380b4f1a8fa0384784e14b34",
-      "bytes": 7303,
+      "sha256": "a2e6bed064bdbd11ede22f99a5a2358a33105ebe5ed499812bbe350d1b2ac147",
+      "bytes": 6596,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -394,11 +388,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows the original radar-model radius minus a 0.0564 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. About 25% of the model was unseen or observed at high radar incidence; the polar extent is less well constrained. Cartographic relief and optional Sun lighting are display treatments."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -431,6 +424,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "yorp-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -438,11 +438,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The shared grid marks unavailable imagery over the original YORP radar reconstruction, shown with prepared lighting. The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -469,6 +468,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "yorp-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -476,8 +482,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -489,8 +496,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3801,
-          "sha256": "2e82e64d25ca7e79f1c38fea4c29b9dc4fd14d50a1eb727c773a955cf4867e2a",
+          "bytes": 3518,
+          "sha256": "cf916d8c37be26b427c076d63ad0e524da7fc5c521e06b8ad1a1c44bd76f5caf",
           "verification": "bytes-verified"
         }
       ],
@@ -504,6 +511,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -528,6 +536,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

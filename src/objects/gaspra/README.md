@@ -33,7 +33,7 @@ Coverage remains partial and the grid marks gaps. The Thomas mosaic retains phot
 
 Image 107315039 failed to establish four separate registration checks at the retained tolerance and is excluded. The two selected photographs supersede the older single-image presentation; their Thomas-mosaic registration checks share mission observations and are not independent absolute cartography.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="gaspra-source-record"></a>
 <a id="source-survey-and-selection"></a>
@@ -48,16 +48,7 @@ Image 107315039 failed to establish four separate registration checks at the ret
 
 **Source survey and selection**
 
-Survey completed 2026-09-07. Authoritative labels and relevant descriptions are pinned in `source/reference/`.
-
-| Candidate | Contribution and disposition |
-| --- | --- |
-| [Thomas optical shape and mosaic](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/) | **Included.** The 2° planetocentric radius table derives from Galileo stereogrammetry and limb matching. Its associated 720×360, 2 pixels/degree mosaic uses SSI images 107318313 and 107318326, with best source detail about 55 m/pixel. Exact zero explicitly marks poor or missing coverage. |
-| [Stooke shape](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/951gaspra.xml) | **Excluded in favor of the registered Thomas pair.** A coarser 5° model with a documented modification for light-curve agreement. Its newer publication date does not mean better spatial sampling; the model changes are separate from the Thomas mosaic's source geometry. |
-| [Stooke global mosaics and detailed sheets](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html#gaspra) | **Inspected; deferred as a replacement.** They add low-resolution coverage and finer display sampling, based on Thomas positional control. The 3600×1800 cylindrical source is pinned as a comparison. It mixes strongly oversampled imagery, seams and gray gaps without a supplied validity mask identified in this survey. The Thomas map provides explicit missing-data semantics and a directly associated shape. The Stooke image independently supports north-up, east-right array orientation. |
-| [Radiometrically calibrated Galileo SSI images](https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/) | **Included as a separate I/F view:** the selected clear-filter pair, using the camera catalog accompanying the Thomas shape. The archive’s nadir calibration workaround prevents its own geometry calculation; it is not a ready global texture. See the registration and quality checks below. |
-| [2026 color/geometry cubes](https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.color_geom_cubes_v1.0/) | **Deferred, useful future source.** Six 150×150 color/angle cubes and 350×350 geometry cubes, spatially registered by assumed translations and tied to the Thomas model. They contain calibrated six-filter radiance plus incidence/emission/phase, but no latitude/longitude backplanes or photometric correction. A new camera-to-shape registration would be required; this release is not treated as missing or as a ready global color map. |
-| [NIMS spectral image cube](https://sbn.psi.edu/pds/resource/gaspracube.html) and [point spectra](https://sbn.psi.edu/pds/resource/gaspraspec.html) | **Excluded from these surface views.** They are valuable infrared measurements, but point-perspective spectral/point observations are not a global optical surface or elevation map. No composition or thermal lens is inferred from them. |
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Coordinates and interpretation**
 
@@ -83,7 +74,7 @@ Projection uses the source mesh's visibility and terrain-shadow rays, incidence/
 
 **Spacecraft mosaic update (2026-09-09)**
 
-Reproduce the added registration check with `python tools/objects/terrestrial-layers/verify-catalog-camera.py src/objects/gaspra/source OUTPUT --frame 107318313 --profile reference/registration-107318313.json`. The existing contribution audit is `node tools/objects/terrestrial-layers/audit-camera-mosaic.mts src/objects/gaspra/source OUTPUT`; it records matched area-weighted before/after sampling and lossless Float32 contribution planes. The audit grids use the authored 4096×2048 cylindrical sampling, not atlas texel counts as surface area.
+Reproduce the added registration check with `python tools/objects/terrestrial-layers/verify-catalog-camera.py src/objects/gaspra/source OUTPUT --frame 107318313 --profile reference/registration-107318313.json`. The prepared observation report records each frame's share of the displayed surface from equal-area samples (`areaCoverage`), and the atlas observation index names the photograph behind every texel.
 
 The original calibrated FITS/XML and raw detector FITS/label are pinned separately. Target, exact time, filter and spacecraft clock bind them to the archived `gaspbad.tab` block mask. The original four-pixel registration limit and five-pixel boundary inset remain. Four separated 16×16 patches on image 107318313 give 2.646 px RMS and 3.162 px maximum error with no local camera fitting. They check registration against the Thomas mosaic on the full original shape; that mosaic shares these photographs and is not independent absolute cartography.
 
@@ -93,7 +84,7 @@ Gaspra uses the published Thomas optical shape and registered Galileo SSI high-p
 
 Elevation colors encode radius minus the 6.1 km reference sphere, using a -2 to +5 km palette. They include the body's overall irregular shape and do not represent height above a gravitational equipotential. Cartographic relief is computed from the source field. Both views retain the shared Shadows control; directional lighting is a prepared diffuse approximation at the shared world epoch and cannot remove photographed shadows or model all terrain self-occlusion.
 
-Both photographs are normalized to 50° incidence, 0° emission and 50° phase with the Hapke model of [Helfenstein et al. (1994)](https://doi.org/10.1006/icar.1994.1005). The abstract gives single-scattering albedo 0.36, shadow-hiding amplitude 1.63 and roughness 29°; the compilation of Hasselmann et al. (2016, Table 7) adds width 0.06 and Henyey–Greenstein asymmetry −0.18. [The model record](source/photometry/helfenstein-1994-hapke.json) cites both. The fit combined Earth-based photometry at 2–25° phase with Galileo data at 33–51°. The clear-filter frames lie at about 51° phase, so the 48–54° phase limit extrapolates the model by up to 3°, and the tabulated 0.56 µm fit is narrower than the clear filter's band. Incidence and emission stay limited to 65°, and gains to 0.4–4; no sample needed withholding. Over 2,540 overlap samples the normalized frames agree to a median ratio of 0.987, so no level gain is fitted. The same fixed calibrated display transfer follows. The existing coarse-to-fine projection blends only near its geometric and detector boundaries. Run the contribution audit below to retain the actual weights for both sources.
+Both photographs are normalized to 50° incidence, 0° emission and 50° phase with the Hapke model of [Helfenstein et al. (1994)](https://doi.org/10.1006/icar.1994.1005). The abstract gives single-scattering albedo 0.36, shadow-hiding amplitude 1.63 and roughness 29°; the compilation of Hasselmann et al. (2016, Table 7) adds width 0.06 and Henyey–Greenstein asymmetry −0.18. [The model record](source/photometry/helfenstein-1994-hapke.json) cites both. The fit combined Earth-based photometry at 2–25° phase with Galileo data at 33–51°. The clear-filter frames lie at about 51° phase, so the 48–54° phase limit extrapolates the model by up to 3°, and the tabulated 0.56 µm fit is narrower than the clear filter's band. Incidence and emission stay limited to 65°, and gains to 0.4–4; no sample needed withholding. Overlap level matching, fitted where both frames see the surface within 70° of incidence and emission, gives the second frame a gain of 1.014. The display range is 0–0.0902 I/F, the 99.5th percentile of displayed samples, shown linearly. Where the frames overlap, each point keeps the finer photograph.
 
 Clear-filter image 107315039 was also downloaded and tested. Its useful detector footprint did not establish four separate registration checks at the retained tolerance, so it is excluded. Earlier lower-resolution clear images are listed in the archive inventory but do not replace the complementary close-up pair.
 

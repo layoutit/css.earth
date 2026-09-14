@@ -4,7 +4,6 @@
   "id": "helene",
   "displayName": "Helene",
   "panel": {
-    "introduction": "Helene shares Dione’s orbit, traveling about 60° ahead of the larger moon. Cassini revealed a small icy world with sweeping gullies and smooth deposits across its irregular surface.",
     "facts": [
       {
         "id": "radius",
@@ -81,9 +80,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-        "title": "ISS mosaic",
-        "detail": "Cassini · corrected mosaic",
         "thumbnail": "/scenes/helene/helene-normal-thumbnail.webp",
         "surface": "helene-normal-surface@2x.webp",
         "poles": "helene-normal-surface@2x.webp",
@@ -92,14 +88,12 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/calibration.html"
         },
-        "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
+        "notes": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+        "noData": true
       },
       {
         "id": "false-color",
         "label": "False color",
-        "description": "Six calibrated Cassini IR3, IR1 and UV3 images cover two neighboring close-encounter views. Infrared and ultraviolet are displayed as RGB; this is false color, not natural color or measured albedo. Only registered three-filter overlap contributes; cast shadows remain.",
-        "title": "Cassini false color",
-        "detail": "Cassini",
         "thumbnail": "/scenes/helene/helene-false-color-thumbnail.webp",
         "surface": "helene-false-color-surface@2x.webp",
         "poles": "helene-false-color-surface@2x.webp",
@@ -108,14 +102,12 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/"
         },
-        "summary": "Infrared and ultraviolet reveal differences in reflected light across the photographed gullies. This scientific color display retains observed shadows and gaps."
+        "notes": "Six calibrated Cassini IR3, IR1 and UV3 images cover two neighboring close-encounter views. Infrared and ultraviolet are displayed as RGB; this is false color, not natural color or measured albedo. Only registered three-filter overlap contributes; cast shadows remain.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radial height above an 18 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-        "title": "Shape-derived radial height",
-        "detail": "Cassini shape · radial height",
         "thumbnail": "/scenes/helene/helene-elevation-thumbnail.webp",
         "surface": "helene-elevation-surface@2x.webp",
         "poles": "helene-elevation-surface@2x.webp",
@@ -138,7 +130,7 @@
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/helene/helene-elevation-legend.webp"
         },
-        "summary": "Height relative to an 18 km sphere, from the Cassini shape model. Small craters are unresolved."
+        "notes": "Radial height above an 18 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
       }
     ]
   },

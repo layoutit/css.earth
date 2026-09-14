@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b12bad442f78be6eb4ed1b8366cea09379fad8587b3e8ce0657d9708791dc576"
+    "sha256": "00085c89c116d68747beec01a838ba412de87131bdc52c37626393447350351e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e48f2a6442ababce7b50883023d86c7170c58b99cffb232445b2617a9599b8ad",
+      "sha256": "ea1fb45d04bed5653622004876c3b6803b93d740eabfcefe5bdfbbd04704ee60",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "galatea",
         "displayName": "Galatea",
         "panel": {
-          "introduction": "Galatea is a small, elongated moon just inside Neptune’s Adams ring. Its gravity disturbs the ring; Voyager images constrain its shape but do not reveal a usable surface map.",
           "facts": [
             {
               "id": "radius",
@@ -169,9 +168,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "A smooth ellipsoid based on the 102 × 92 × 72 km semi-axes measured from Voyager images by Karkoschka (2003). The available images are strongly smeared and do not support a registered surface map. The standard gray grid marks missing imagery; shared lighting shows the model shape. No craters or local elevation are invented.",
-              "title": "Approximate shape model",
-              "detail": "Measured axes",
               "thumbnail": "/scenes/galatea/galatea-model-thumbnail.webp",
               "surface": "galatea-model-surface@2x.webp",
               "poles": "galatea-model-poles@2x.webp",
@@ -180,7 +176,8 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.1016/S0019-1035(03)00002-2"
               },
-              "summary": "Shape estimated from blurred Voyager images. Local terrain is unresolved; gray grid: no mapped imagery."
+              "notes": "A smooth ellipsoid based on the 102 × 92 × 72 km semi-axes measured from Voyager images by Karkoschka (2003). The available images are strongly smeared and do not support a registered surface map. The standard gray grid marks missing imagery; shared lighting shows the model shape. No craters or local elevation are invented.",
+              "noData": true
             }
           ]
         },
@@ -324,7 +321,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -333,8 +330,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e48f2a6442ababce7b50883023d86c7170c58b99cffb232445b2617a9599b8ad",
-      "bytes": 3943,
+      "sha256": "ea1fb45d04bed5653622004876c3b6803b93d740eabfcefe5bdfbbd04704ee60",
+      "bytes": 3556,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -347,11 +344,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "A smooth ellipsoid based on the 102 × 92 × 72 km semi-axes measured from Voyager images by Karkoschka (2003). The available images are strongly smeared and do not support a registered surface map. The standard gray grid marks missing imagery; shared lighting shows the model shape. No craters or local elevation are invented."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -383,6 +379,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "measured-ellipsoid",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -390,8 +398,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -403,8 +412,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7149,
-          "sha256": "ff56a71a7cfd72e727333eb92980f206686c887cf8ad5830b45be38327c348e8",
+          "bytes": 6955,
+          "sha256": "7af31f388de7569ee09fdc62cfe3aadfb0c740c0f107b6efa8c58fef6e38d508",
           "verification": "bytes-verified"
         }
       ],
@@ -418,6 +427,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

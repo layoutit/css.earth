@@ -227,9 +227,15 @@ src/objects/*/source/**/*.bpc
 /src/objects/m42/prepared/
 /src/objects/helix/prepared/
 /src/objects/m2-9/prepared/
+/src/objects/m1/prepared/
+/src/objects/m45/prepared/
+/src/objects/m8/prepared/
 /src/objects/m42/.prepared-*/
 /src/objects/helix/.prepared-*/
 /src/objects/m2-9/.prepared-*/
+/src/objects/m1/.prepared-*/
+/src/objects/m45/.prepared-*/
+/src/objects/m8/.prepared-*/
 # Shared dataset cards and lineage are restored by prepare:nebulae / prepare:sources.
 # Name each object: bodies commit their prepared/provenance.json in the same folder.
 /src/objects/lmc/prepared/presentation.json
@@ -243,3 +249,7 @@ src/spice/**/*.bc
 
 # Restored from the pinned author-hosted method paper, not redistributed in Git.
 /src/objects/charon/source/science/leisa/grundy-2016-supplement.pdf
+
+# Navigation capability projections rebuilt by prepare:catalog.
+/site/prepared-object-distances.json
+/site/prepared-focus-objects.json

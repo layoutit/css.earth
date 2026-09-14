@@ -1,9 +1,11 @@
+import { mountCatalogMarker } from './catalog-marker.js';
 import { isPreparedCluster, isPreparedNebula, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
+import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
-import { admitGalaxyLabels, projectCatalogAperture, projectCatalogPosition } from './galaxy-catalog-layout.js';
+import { admitGalaxyLabels, catalogVolumeCorners, projectCatalogAperture, projectCatalogBounds, projectCatalogPosition } from './galaxy-catalog-layout.js';
 import type { ProjectedGalaxy } from './galaxy-catalog-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
@@ -14,6 +16,7 @@ interface Entry {
   readonly label: HTMLElement;
   readonly aperture: HTMLElement | null;
   readonly activate: (event: Event) => void;
+  readonly cornersM: readonly (readonly number[])[] | null;
   width: number;
   height: number;
   /** This frame's projected label anchor; written to the label only while it shows or fades. */
@@ -24,8 +27,9 @@ interface Entry {
 }
 
 /** One fixed catalogue bank, shared by every detailed scene and every camera focus. */
-export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, nebulae, onSelect = () => {}, pickingHost = host }: {
+export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, nebulae, nebulaFrames, onSelect = () => {}, pickingHost = host }: {
   host: HTMLElement; before: Element; payload: unknown; clusters?: unknown; nebulae?: unknown; onSelect?: (object: PreparedCatalogObject) => void; pickingHost?: HTMLElement;
+  nebulaFrames?: ReadonlyMap<string, DensityVolumeFrame>;
 }) {
   const catalog = parsePreparedGalaxyCatalog(payload), document = host.ownerDocument;
   const clusterCatalog = clusters === undefined ? null : parsePreparedClusterCatalog(clusters);
@@ -52,22 +56,24 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
       root.append(aperture);
     }
     marker.dataset.galaxyMarker = object.id;
-    marker.style.cssText = 'position:absolute;left:50%;top:50%;width:2px;height:2px;border-radius:50%;background:#c2ccd8;opacity:0;pointer-events:none';
+    mountCatalogMarker(marker, object);
     label.dataset.galaxyLabel = object.id;
     label.dataset.objectNavigate = object.id;
-    label.dataset.objectNavigateActivation = 'dblclick';
+    label.dataset.objectNavigateActivation = 'click';
     label.textContent = object.name;
     label.title = isPreparedCluster(object) ? `${object.name} — MCXC-II centre; outline is R500, not a cluster boundary` : object.status === 'candidate' ? `${object.name} — candidate galaxy` : object.name;
-    label.style.cssText = 'position:absolute;left:50%;top:50%;font:11px system-ui;color:#c2ccd8;white-space:nowrap;opacity:0;pointer-events:none;cursor:pointer';
+    label.style.cssText = 'position:absolute;left:50%;top:50%;font:400 14px/18px ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#c2ccd8;white-space:nowrap;opacity:0;pointer-events:none;cursor:pointer';
     const activate = (event: Event) => {
       if (label.style.pointerEvents !== 'auto') return;
       event.preventDefault(); event.stopPropagation(); onSelect(object);
     };
-    label.addEventListener('dblclick', activate);
+    label.addEventListener(label.dataset.objectNavigateActivation, activate);
     label.addEventListener('keydown', event => { if (event.key === 'Enter') activate(event); });
     label.setAttribute('role', 'button'); label.tabIndex = -1;
     root.append(marker, label);
-    return { object, marker, label, aperture, activate, width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
+    const frame = isPreparedNebula(object) ? nebulaFrames?.get(object.detailedObjectId ?? object.id) : undefined;
+    return { object, marker, label, aperture, activate, cornersM: frame ? catalogVolumeCorners(frame) : null,
+      width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
   });
   let destroyed = false, selectedId: string | null = null;
   let exclusions: readonly LabelScreenRect[] = [];
@@ -117,9 +123,14 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
         if (Math.abs(point.x) > width / 2 + 4 || Math.abs(point.y) > height / 2 + 4) continue;
         visible.add(entry.object.id);
         entry.marker.style.transform = `translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
-        const y = point.y - 8;
-        entry.labelX = point.x; entry.labelY = y;
-        const labelRect = { left: point.x - entry.width / 2, right: point.x + entry.width / 2,
+        const bounds = entry.cornersM ? projectCatalogBounds(entry.cornersM, world, viewport) : null;
+        if (entry.cornersM && !bounds) continue;
+        const x = bounds ? (bounds.left + bounds.right) / 2 : point.x;
+        const y = isPreparedNebula(entry.object)
+          ? (bounds?.bottom ?? point.y) + 8 + entry.height
+          : (bounds?.top ?? point.y) - 8;
+        entry.labelX = x; entry.labelY = y;
+        const labelRect = { left: x - entry.width / 2, right: x + entry.width / 2,
           top: y - entry.height, bottom: y };
         const objectAlpha = isPreparedCluster(entry.object) ? clusterAlpha : isPreparedNebula(entry.object) ? 1 : alpha;
         if (labelRect.left >= -width / 2 && labelRect.right <= width / 2 && labelRect.top >= -height / 2 && labelRect.bottom <= height / 2 && objectAlpha > 0) {
@@ -165,7 +176,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
       if (destroyed) return; destroyed = true; fader.destroy();
       picking.remove(root);
       document.fonts?.removeEventListener('loadingdone', measure);
-      for (const entry of entries) entry.label.removeEventListener('dblclick', entry.activate);
+      for (const entry of entries) entry.label.removeEventListener(entry.label.dataset.objectNavigateActivation!, entry.activate);
       root.remove();
     },
   });

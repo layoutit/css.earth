@@ -4,7 +4,6 @@
   "id": "calypso",
   "displayName": "Calypso",
   "panel": {
-    "introduction": "Calypso follows Tethys around Saturn, about 60° behind the larger moon. Its elongated shape carries overlapping craters and unusually smooth, bright surface deposits.",
     "facts": [
       {
         "id": "radius",
@@ -59,9 +58,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-        "title": "ISS mosaic",
-        "detail": "Cassini · corrected mosaic",
         "thumbnail": "/scenes/calypso/calypso-normal-thumbnail.webp",
         "surface": "calypso-normal-surface@2x.webp",
         "poles": "calypso-normal-surface@2x.webp",
@@ -70,14 +66,12 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/calibration.html"
         },
-        "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
+        "notes": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+        "noData": true
       },
       {
         "id": "false-color",
         "label": "False color",
-        "description": "Cassini ISS NAC red, green and blue filters projected independently with the released PDS shape-camera table. Colors explicitly encode those three filters as red, green and blue; they are a registered false-color display, not natural color or a calibrated albedo map. Gray grid marks terrain outside the common reliable observation footprint and cast-shadow terrain is not reconstructed. Blue was captured almost nine minutes before red, at a phase angle of 43 degrees versus 33 degrees. Hue can reflect changing illumination as well as filter response; it does not establish composition.",
-        "title": "Cassini false color",
-        "detail": "Cassini",
         "thumbnail": "/scenes/calypso/calypso-false-color-thumbnail.webp",
         "surface": "calypso-false-color-surface@2x.webp",
         "poles": "calypso-false-color-surface@2x.webp",
@@ -86,14 +80,12 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/"
         },
-        "summary": "False color from registered source filters. The images were taken minutes apart, so changing illumination also affects hue. Gray grid marks missing common coverage."
+        "notes": "Cassini ISS NAC red, green and blue filters projected independently with the released PDS shape-camera table. Colors explicitly encode those three filters as red, green and blue; they are a registered false-color display, not natural color or a calibrated albedo map. Gray grid marks terrain outside the common reliable observation footprint and cast-shadow terrain is not reconstructed. Blue was captured almost nine minutes before red, at a phase angle of 43 degrees versus 33 degrees. Hue can reflect changing illumination as well as filter response; it does not establish composition.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radial height above a 10.7 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-        "title": "Shape-derived radial height",
-        "detail": "Cassini shape · radial height",
         "thumbnail": "/scenes/calypso/calypso-elevation-thumbnail.webp",
         "surface": "calypso-elevation-surface@2x.webp",
         "poles": "calypso-elevation-surface@2x.webp",
@@ -116,7 +108,7 @@
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/calypso/calypso-elevation-legend.webp"
         },
-        "summary": "Height relative to a 10.7 km sphere, from the Cassini shape model. Small craters are unresolved."
+        "notes": "Radial height above a 10.7 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
       }
     ]
   },

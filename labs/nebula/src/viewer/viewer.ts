@@ -33,7 +33,8 @@ export interface LabSubjectRecord {
   name: string;
   menuLabel?: string;
   workflow?: string;
-  observationAlignment?: { manifest: string; recipe: string };
+  observationAlignment?: { manifest: string; recipe: string; dossier?: string; candidates?: { manifest: string; recipe: string; dossier: string } };
+  alignmentOnly?: boolean;
   directory: string;
   /** Comparison image relative to directory, or imagePath relative to the repository. */
   image?: string;
@@ -68,6 +69,10 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
   if (record.workflow !== undefined) readLabWorkflow(record.workflow);
   if (record.observationAlignment && (!relativePath(record.observationAlignment.manifest) || !relativePath(record.observationAlignment.recipe)))
     throw new TypeError(`Lab subject ${record.id} has invalid observation alignment paths.`);
+  if (record.observationAlignment?.dossier && !relativePath(record.observationAlignment.dossier)) throw new TypeError('Invalid observation dossier path.');
+  const candidates = record.observationAlignment?.candidates;
+  if (candidates && ![candidates.manifest, candidates.recipe, candidates.dossier].every(relativePath)) throw new TypeError('Invalid observation candidate paths.');
+  if (record.alignmentOnly !== undefined && (typeof record.alignmentOnly !== 'boolean' || !record.observationAlignment)) throw new TypeError('Alignment-only subjects require observation inputs.');
   if (record.emissionExperiment?.observationStructures !== undefined &&
       (!record.observationAlignment || !relativePath(record.emissionExperiment.observationStructures)))
     throw new TypeError(`Lab subject ${record.id} requires registered observations for its structure catalogue.`);

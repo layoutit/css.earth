@@ -1,0 +1,916 @@
+{
+  "status": "diagnostic-unqualified",
+  "date": "2026-09-14",
+  "baseCommit": "4b74bbfd599a6ab4f60c2139f3b399ca7349a4db",
+  "scope": "Four native SPHERE frames, two source meshes, one projected-photograph diagnostic; no prepared surface, runtime change or browser qualification.",
+  "inputAccess": {
+    "lamPublicCookie": "CesAM_LAM_opens_the_door=1",
+    "nativeInputs": "Retrieved to ignored output/pallas-photographic-projection; not added to production source acquisition."
+  },
+  "inputs": [
+    {
+      "file": "2_Pallas_mpcd.obj",
+      "url": "https://observations.lam.fr/astero/3Dshape/2_Pallas_mpcd.obj",
+      "bytes": 2703739,
+      "sha256": "5bb49df2e0e0879a6377fa20c94a8ac47eea27e626fb3ec8f618c22f90f8184e"
+    },
+    {
+      "file": "2_Pallas_adam.obj",
+      "url": "https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj",
+      "bytes": 121798,
+      "sha256": "519ec4ca5b7ed1d0cfc345174eb3aa53d33faaf45967c2467cc8b72510605655"
+    },
+    {
+      "file": "marsset-shape.txt",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/51211/shape.txt",
+      "bytes": 129688,
+      "sha256": "43a882fc1ced4d291b4fc566c4a8e17531f484dedf4d8e998f0ec1899122f3a6"
+    },
+    {
+      "file": "marsset-IAUspin.txt",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/51209/IAUspin",
+      "bytes": 32,
+      "sha256": "e30f994d22fa8192a0668a0a5031625165a47da527f306593437f7fa446bf2b8"
+    }
+  ],
+  "modelCorrespondence": {
+    "vertices": 1602,
+    "faces": 3200,
+    "sameIndexedFaces": true,
+    "lamMinusDamitTranslationKm": [
+      0.06652599999999989,
+      0.04364100000000029,
+      0.075851
+    ],
+    "maximumTranslationResidualKm": 4.643507800494717e-14
+  },
+  "method": {
+    "frame": "LAM lambda/beta/period/epoch/phase interpreted with the documented DAMIT and ADAM ecliptic-to-body rotation. UTC receive epoch from MJD-OBS, Horizons light-time-corrected geocentric vector, target spin at receive minus light time; Sun vector at target emission. Geocentre, not a fitted site-specific camera solution.",
+    "pixels": "256 x 256 float64 primary FITS array; rows reversed into top-down display. Scale 3.63 mas per pixel from CD1_1. CRPIX 512 is outside the released cutout; initial centre 127.5,127.5 is diagnostic, followed by bounded limb fitting.",
+    "display": "Linear 0-to-99.9th-percentile stretch; retains observed illumination and background. No absolute reflectance or natural-colour claim.",
+    "projection": "Existing controlledShapeCamera, full source mesh ray intersections, interpolated vertex normals. Photograph transfer limited to lit, visible source geometry below 60 degrees emission; omitted samples shown grey. Virtual camera yaw changed 35 degrees, latitude multiplied by 0.65, range by 0.6. Offline nearest-pixel visualization only.",
+    "limb": "Existing refineCameraByLimb with searchPixels 8, maximumControls 120, minimumControls 12, maximumCorrectionDegrees 0.01 and maximumResidualPixels 3. Disjoint edge holdouts; not interior controls.",
+    "registration": "Existing registerCameraBands in checkOnly mode. Scratch comparison changes patch radius from 13 to 6 and sample step from 2 to 1; all correlation, fit-count and holdout limits unchanged. Radius 6 gives a 13-pixel patch, about 2.4 of the paper's nominal 20-mas resolution elements at the native 3.63-mas sampling. This is an exploratory parameter choice, not source-prescribed qualification.",
+    "reproductionLimit": "The camera-derivation and rendering driver is an ignored exploratory script, not a supported preparation recipe. This record pins its source inputs, derived cameras, parameters and results; it is not a clean-checkout surface reproduction claim."
+  },
+  "localDriverHashes": {
+    "acquire-ephemeris.mts": "6df543be14fd0df2017a17628405d323fe7b16ed3eafc9ebdc00863d7f42b415",
+    "project.mts": "21a073cc1ea95dcb3cfe869909509343b8db5f0fd0e265c968934abc985b15bb",
+    "check-transfer.mts": "49638cf9c712a1b7ff0344edc1f2b7865fab1710d838237950ab5fd6c1514835",
+    "registration-small-patches.mts": "4775c7629b53c9495d2f58852211ba8ca2574a64021e867db68e2415f36262c9",
+    "check-small-patches.mts": "7fdd9b02080b6dfc77b6a7d7680bd9bfdc08d9140d731541607da8f89c5e42dc",
+    "check-near-pair.mts": "31357c372010588a1110adc3f14e7897bca50c7ebe116788abab47146ad125dd"
+  },
+  "sharedProducerHashes": {
+    "tools/objects/terrestrial-layers/camera-band-registration.mts": "c0ac20a7f970dff3d8c7ff469e135a91b4688a7add67f6927b4afcf457bf484b",
+    "tools/objects/terrestrial-layers/limb-refinement.mts": "ee2ab7662db8e1ce300d36089185cf7573efdcb70e2f9021cfceb8bf6c5d75f0",
+    "tools/objects/terrestrial-layers/shape-camera-mosaic.mts": "d0942ffb78df494a2a9ae6a76833fdf43ceffbae0cbef6a88fa7e806d23cf262",
+    "tools/objects/surface-observations/geometry.mts": "9421d3f846566ba4654d804f902e7b1d4f8daa337657919bde7917a0e32f450b"
+  },
+  "workingTreeDifference": "camera-band-registration.mts contained pre-existing optional referenceRegionPixels support; these trials did not supply that option. No shared implementation was changed for this investigation.",
+  "frames": [
+    {
+      "id": "20171008",
+      "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-08T04_56_05.317_zpl_science_imaging_cam1.fits",
+      "bytes": 593280,
+      "sha256": "1aef8511bde04ca0624ca9f589249314ffa587add8b411c57e1a4583dfb83f24",
+      "candidateCamera": {
+        "status": "diagnostic-unqualified",
+        "parameters": [
+          41.6397,
+          -14.6316,
+          7.81321892,
+          2433827.77154,
+          0
+        ],
+        "ephemeris": {
+          "receiveJdUtc": 2458034.7056171,
+          "emissionJdUtc": 2458034.695397517,
+          "earth": [
+            -163316454.8486757,
+            -143249820.983564,
+            151253849.4270204
+          ],
+          "sun": [
+            -307779865.3176227,
+            -181597672.6707397,
+            151255686.7068763
+          ],
+          "lightTimeSeconds": 882.9719624571817
+        },
+        "observerLatitude": -69.78085254648929,
+        "observerWestLongitude": 118.86545195051455,
+        "sunLatitude": -76.6156339963344,
+        "sunWestLongitude": 167.92813731423078,
+        "rangeKm": 264708334.9701222,
+        "northAzimuthDegrees": 17.24918046859227,
+        "pixelAngleMicroradians": 0.017598736624276096,
+        "center": [
+          127.5,
+          127.5
+        ]
+      },
+      "refinement": {
+        "camera": {
+          "schema": "cssearth-archived-camera@1",
+          "rayMatrix": [
+            [
+              1.2354999980318212e-08,
+              1.218391611911057e-08,
+              0.16684249397246959
+            ],
+            [
+              -1.24022819937795e-08,
+              1.1292734997805016e-08,
+              0.30267173310466167
+            ],
+            [
+              1.803581881630758e-09,
+              -5.808773970681281e-09,
+              0.938378071032426
+            ]
+          ],
+          "matrix": [
+            [
+              39891466.01107846,
+              -40044068.8615235,
+              5823469.467227747,
+              34359818643.5
+            ],
+            [
+              39339075.69089674,
+              36461674.756261386,
+              -18755071.471196964,
+              33204748919
+            ],
+            [
+              0.1668456226842723,
+              0.30267159163741975,
+              0.9383775603704345,
+              264708334.9701218
+            ]
+          ],
+          "positionKm": [
+            -44165427.86114925,
+            -80119679.34492622,
+            -248396365.84733328
+          ],
+          "sunDirection": [
+            -0.22636346949902308,
+            -0.04841186160494152,
+            -0.9728390778193015
+          ]
+        },
+        "report": {
+          "method": "mesh-limb",
+          "threshold": 1474.690361147504,
+          "matchWindowPixels": 8,
+          "finalWindowPixels": 9,
+          "holdoutMatchedFraction": 0.9736842105263158,
+          "thresholding": {
+            "declared": false,
+            "otsuSplit": 2329.2347327615553,
+            "backgroundMedian": 456.4331447978219,
+            "backgroundSigma": 203.65144326993644,
+            "bodyMean": 4145.305655084923,
+            "minimumSharpness": 0.15
+          },
+          "searchPixels": 8,
+          "edgePoints": {
+            "found": 120,
+            "lit": 77,
+            "fit": 39,
+            "holdout": 38,
+            "retained": 38,
+            "unlitOrUnmatched": 43
+          },
+          "correction": {
+            "rotationVectorMicroradians": [
+              -0.05965592297892709,
+              -0.011576104285155268,
+              -0.02486430005688385
+            ],
+            "degrees": 3.761968086208161e-06,
+            "boresightShiftPixels": 3.0902243762779054
+          },
+          "residuals": {
+            "before": {
+              "fit": {
+                "count": 39,
+                "of": 39,
+                "rmsPixels": 2.2605007570228772,
+                "maximumPixels": 3.921875,
+                "meanPixels": 0.6847956730769231
+              },
+              "holdout": {
+                "count": 38,
+                "of": 38,
+                "rmsPixels": 2.467187233081799,
+                "maximumPixels": 3.984375,
+                "meanPixels": 0.9150904605263158
+              }
+            },
+            "after": {
+              "fit": {
+                "count": 38,
+                "of": 38,
+                "rmsPixels": 1.131035570396828,
+                "maximumPixels": 2.671875,
+                "meanPixels": -0.5333059210526315
+              },
+              "holdout": {
+                "count": 37,
+                "of": 38,
+                "rmsPixels": 1.3299379332024557,
+                "maximumPixels": 3.734375,
+                "meanPixels": -0.5241765202702703
+              }
+            }
+          },
+          "budget": {
+            "maximumCorrectionDegrees": 0.01,
+            "maximumResidualPixels": 3,
+            "minimumControls": 12
+          },
+          "limitations": "One rotation of the camera fitted to the lit limb of the retained mesh; range, focal length and Sun direction keep their source values. Residuals are along-normal limb distances in pixels; terminator and shadow edges are excluded by the mesh lighting, remaining outliers by a robust re-fit."
+        }
+      },
+      "ephemerisQueries": {
+        "earth": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%272%3B%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%40399%27&TLIST=%272458034.7056171%27&TIME_TYPE=%27UT%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%273%27&VEC_CORR=%27LT%27&CSV_FORMAT=%27YES%27",
+        "sun": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%272%3B%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&TLIST=%272458034.695397517%27&TIME_TYPE=%27UT%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%273%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27"
+      }
+    },
+    {
+      "id": "20171011",
+      "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_04_27.347_zpl_science_imaging_cam1.fits",
+      "bytes": 593280,
+      "sha256": "bc1aa695bf130dac60be0d13cc44f6db0e8f6961fd3c1f7621e45cec6cdeaef8",
+      "candidateCamera": {
+        "status": "diagnostic-unqualified",
+        "parameters": [
+          41.6397,
+          -14.6316,
+          7.81321892,
+          2433827.77154,
+          0
+        ],
+        "ephemeris": {
+          "receiveJdUtc": 2458037.71142763,
+          "emissionJdUtc": 2458037.7013050267,
+          "earth": [
+            -161797556.8760917,
+            -138604047.4636107,
+            152831281.4408962
+          ],
+          "sun": [
+            -303960378.8468445,
+            -184344359.9244752,
+            152833499.141473
+          ],
+          "lightTimeSeconds": 874.5929207997691
+        },
+        "observerLatitude": -68.95636585037336,
+        "observerWestLongitude": -155.67364537813043,
+        "sunLatitude": -76.92065521057111,
+        "sunWestLongitude": -110.91250951311697,
+        "rangeKm": 262196361.47596216,
+        "northAzimuthDegrees": 15.78211742889641,
+        "pixelAngleMicroradians": 0.017598736624276096,
+        "center": [
+          127.5,
+          127.5
+        ]
+      },
+      "refinement": {
+        "camera": {
+          "schema": "cssearth-archived-camera@1",
+          "rayMatrix": [
+            [
+              -1.1046863164603473e-08,
+              1.2430797668667612e-08,
+              0.3271974510258137
+            ],
+            [
+              -1.3591479724964832e-08,
+              -1.0872480664329688e-08,
+              -0.14791357341361744
+            ],
+            [
+              1.718727401024897e-09,
+              -6.0811153824822126e-09,
+              0.9333077749875945
+            ]
+          ],
+          "matrix": [
+            [
+              -35667731.01916386,
+              -43883771.44726561,
+              5549493.278122617,
+              32646398758
+            ],
+            [
+              40136219.70572798,
+              -35104750.73148265,
+              -19634399.709418155,
+              32412167005
+            ],
+            [
+              0.3271976274774629,
+              -0.14791669256856707,
+              0.9333072187831268,
+              262196361.47596118
+            ]
+          ],
+          "positionKm": [
+            -85790023.4119675,
+            38783196.87548383,
+            -244709761.7471051
+          ],
+          "sunDirection": [
+            -0.08077602677908727,
+            0.2113930031742198,
+            -0.9740576121086311
+          ]
+        },
+        "report": {
+          "method": "mesh-limb",
+          "threshold": 1087.6375086944884,
+          "matchWindowPixels": 8,
+          "finalWindowPixels": 9,
+          "holdoutMatchedFraction": 1,
+          "thresholding": {
+            "declared": false,
+            "otsuSplit": 3169.872506913949,
+            "backgroundMedian": 354.7409719863812,
+            "backgroundSigma": 146.57930734162144,
+            "bodyMean": 5906.26288208487,
+            "minimumSharpness": 0.15
+          },
+          "searchPixels": 8,
+          "edgePoints": {
+            "found": 120,
+            "lit": 66,
+            "fit": 30,
+            "holdout": 36,
+            "retained": 28,
+            "unlitOrUnmatched": 54
+          },
+          "correction": {
+            "rotationVectorMicroradians": [
+              0.2718714727834884,
+              -0.06645444277150209,
+              0.5223456866423737
+            ],
+            "degrees": 3.3953505384423734e-05,
+            "boresightShiftPixels": 4.899303962747334
+          },
+          "residuals": {
+            "before": {
+              "fit": {
+                "count": 30,
+                "of": 30,
+                "rmsPixels": 3.720407598445056,
+                "maximumPixels": 5.84375,
+                "meanPixels": 1.4846354166666667
+              },
+              "holdout": {
+                "count": 36,
+                "of": 36,
+                "rmsPixels": 4.122852318640511,
+                "maximumPixels": 6.71875,
+                "meanPixels": 0.3142361111111111
+              }
+            },
+            "after": {
+              "fit": {
+                "count": 28,
+                "of": 28,
+                "rmsPixels": 0.5242193113620052,
+                "maximumPixels": 1.1171875,
+                "meanPixels": -0.07603236607142858
+              },
+              "holdout": {
+                "count": 36,
+                "of": 36,
+                "rmsPixels": 0.9375072337683884,
+                "maximumPixels": 2.421875,
+                "meanPixels": -0.3587239583333333
+              }
+            }
+          },
+          "budget": {
+            "maximumCorrectionDegrees": 0.01,
+            "maximumResidualPixels": 3,
+            "minimumControls": 12
+          },
+          "limitations": "One rotation of the camera fitted to the lit limb of the retained mesh; range, focal length and Sun direction keep their source values. Residuals are along-normal limb distances in pixels; terminator and shadow edges are excluded by the mesh lighting, remaining outliers by a robust re-fit."
+        }
+      },
+      "ephemerisQueries": {
+        "earth": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%272%3B%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%40399%27&TLIST=%272458037.71142763%27&TIME_TYPE=%27UT%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%273%27&VEC_CORR=%27LT%27&CSV_FORMAT=%27YES%27",
+        "sun": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%272%3B%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&TLIST=%272458037.7013050267%27&TIME_TYPE=%27UT%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%273%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27"
+      }
+    },
+    {
+      "id": "201710110508",
+      "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_08_49.597_zpl_science_imaging_cam1.fits",
+      "bytes": 593280,
+      "sha256": "d64dbfcd0ff0d36b83d11c83c27aadb784fe65aac83c2a656ffa677a03513967",
+      "candidateCamera": {
+        "status": "diagnostic-unqualified",
+        "parameters": [
+          41.6397,
+          -14.6316,
+          7.81321892,
+          2433827.77154,
+          0
+        ],
+        "ephemeris": {
+          "receiveJdUtc": 2458037.71446293,
+          "emissionJdUtc": 2458037.7043404183,
+          "earth": [
+            -161796193.0437327,
+            -138599399.3930165,
+            152832862.3891219
+          ],
+          "sun": [
+            -303956498.133157,
+            -184347119.2713098,
+            152835080.5701947
+          ],
+          "lightTimeSeconds": 874.5849915119163
+        },
+        "observerLatitude": -68.95554036464605,
+        "observerWestLongitude": -152.31555787872097,
+        "sunLatitude": -76.92094815599408,
+        "sunWestLongitude": -107.55884641156896,
+        "rangeKm": 262193984.3352665,
+        "northAzimuthDegrees": 15.780620862587677,
+        "pixelAngleMicroradians": 0.017598736624276096,
+        "center": [
+          127.5,
+          127.5
+        ]
+      },
+      "refinement": {
+        "camera": {
+          "schema": "cssearth-archived-camera@1",
+          "rayMatrix": [
+            [
+              -1.1823697950137166e-08,
+              1.1772820229111513e-08,
+              0.31798339552717536
+            ],
+            [
+              -1.2921377706163941e-08,
+              -1.1581577695257562e-08,
+              -0.16683178479018787
+            ],
+            [
+              1.7186319353510984e-09,
+              -6.0813890446486195e-09,
+              0.9333025853188226
+            ]
+          ],
+          "matrix": [
+            [
+              -38175952.50698962,
+              -41720169.02772534,
+              5549185.040823391,
+              33499659358.5
+            ],
+            [
+              38011761.16863917,
+              -37394263.8734934,
+              -19635283.302083526,
+              31954227551
+            ],
+            [
+              0.317983389040266,
+              -0.1668349089170016,
+              0.9333020290672912,
+              262193984.33526522
+            ]
+          ],
+          "positionKm": [
+            -83373313.52724949,
+            43743093.310023524,
+            -244706186.6826409
+          ],
+          "sunDirection": [
+            -0.0682699034103926,
+            0.21575155747918082,
+            -0.9740587691374907
+          ]
+        },
+        "report": {
+          "method": "mesh-limb",
+          "threshold": 1077.072205240683,
+          "matchWindowPixels": 8,
+          "finalWindowPixels": 9,
+          "holdoutMatchedFraction": 1,
+          "thresholding": {
+            "declared": false,
+            "otsuSplit": 3082.090825127261,
+            "backgroundMedian": 361.5508081877177,
+            "backgroundSigma": 143.10427941059305,
+            "bodyMean": 5755.426062727214,
+            "minimumSharpness": 0.15
+          },
+          "searchPixels": 8,
+          "edgePoints": {
+            "found": 120,
+            "lit": 50,
+            "fit": 25,
+            "holdout": 25,
+            "retained": 23,
+            "unlitOrUnmatched": 70
+          },
+          "correction": {
+            "rotationVectorMicroradians": [
+              0.3503871709463932,
+              -0.0747687893319561,
+              0.8342808981188191
+            ],
+            "degrees": 5.202211179505954e-05,
+            "boresightShiftPixels": 5.6338496177803865
+          },
+          "residuals": {
+            "before": {
+              "fit": {
+                "count": 25,
+                "of": 25,
+                "rmsPixels": 5.385443161604716,
+                "maximumPixels": 7.59375,
+                "meanPixels": 4.656875
+              },
+              "holdout": {
+                "count": 25,
+                "of": 25,
+                "rmsPixels": 5.385041492412106,
+                "maximumPixels": 7.09375,
+                "meanPixels": 4.71875
+              }
+            },
+            "after": {
+              "fit": {
+                "count": 23,
+                "of": 23,
+                "rmsPixels": 0.6234578886145233,
+                "maximumPixels": 1.9453125,
+                "meanPixels": -0.06046195652173913
+              },
+              "holdout": {
+                "count": 25,
+                "of": 25,
+                "rmsPixels": 0.8082192671478838,
+                "maximumPixels": 2.265625,
+                "meanPixels": -0.21609375
+              }
+            }
+          },
+          "budget": {
+            "maximumCorrectionDegrees": 0.01,
+            "maximumResidualPixels": 3,
+            "minimumControls": 12
+          },
+          "limitations": "One rotation of the camera fitted to the lit limb of the retained mesh; range, focal length and Sun direction keep their source values. Residuals are along-normal limb distances in pixels; terminator and shadow edges are excluded by the mesh lighting, remaining outliers by a robust re-fit."
+        }
+      },
+      "ephemerisQueries": {
+        "earth": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%272%3B%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%40399%27&TLIST=%272458037.71446293%27&TIME_TYPE=%27UT%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%273%27&VEC_CORR=%27LT%27&CSV_FORMAT=%27YES%27",
+        "sun": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%272%3B%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&TLIST=%272458037.7043404183%27&TIME_TYPE=%27UT%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%273%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27"
+      }
+    },
+    {
+      "id": "20190315",
+      "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2019-03-15T06_55_56.078_zpl_science_imaging_cam1.fits",
+      "bytes": 593280,
+      "sha256": "ba1138288ca972020c2b07fbc4495c52c288e10dc6f3e8eb419068256b920f85",
+      "candidateCamera": {
+        "status": "diagnostic-unqualified",
+        "parameters": [
+          41.6397,
+          -14.6316,
+          7.81321892,
+          2433827.77154,
+          0
+        ],
+        "ephemeris": {
+          "receiveJdUtc": 2458557.7888435,
+          "emissionJdUtc": 2458557.779503112,
+          "earth": [
+            201118700.5314746,
+            101120903.8142576,
+            -88648480.44437979
+          ],
+          "sun": [
+            349093762.1582023,
+            85943538.68119952,
+            -88648351.29857153
+          ],
+          "lightTimeSeconds": 807.0095190791362
+        },
+        "observerLatitude": 74.23294630747473,
+        "observerWestLongitude": -84.07415913649767,
+        "sunLatitude": 63.050901259593466,
+        "sunWestLongitude": -57.96275519803934,
+        "rangeKm": 241935367.35413218,
+        "northAzimuthDegrees": 45.55646294235323,
+        "pixelAngleMicroradians": 0.017598736624276096,
+        "center": [
+          127.5,
+          127.5
+        ]
+      },
+      "refinement": {
+        "camera": {
+          "schema": "cssearth-archived-camera@1",
+          "rayMatrix": [
+            [
+              -1.3505257749791651e-08,
+              -1.1272967700313424e-08,
+              -0.02805018768348638
+            ],
+            [
+              -1.0754881207852213e-08,
+              1.3092891364835313e-08,
+              -0.27027516855430783
+            ],
+            [
+              3.4140993083559914e-09,
+              -3.3484213753570715e-09,
+              -0.962374417908088
+            ]
+          ],
+          "matrix": [
+            [
+              -43605365.29756448,
+              -34725064.81642437,
+              11023216.35895271,
+              31595026905
+            ],
+            [
+              -36397815.69898987,
+              42273891.33326978,
+              -10811402.87013954,
+              31025561863
+            ],
+            [
+              -0.028053346907231297,
+              -0.27027487045801285,
+              -0.9623744095341517,
+              241935367.35413182
+            ]
+          ],
+          "positionKm": [
+            6787108.910695343,
+            65389055.77733647,
+            232832404.34690705
+          ],
+          "sunDirection": [
+            0.24040853461225709,
+            0.3841781465887851,
+            0.8914094952204588
+          ]
+        },
+        "report": {
+          "method": "mesh-limb",
+          "threshold": 706.7137363636863,
+          "matchWindowPixels": 8,
+          "finalWindowPixels": 9,
+          "holdoutMatchedFraction": 0.9210526315789473,
+          "thresholding": {
+            "declared": false,
+            "otsuSplit": 2186.9709399435424,
+            "backgroundMedian": 282.52771809355585,
+            "backgroundSigma": 84.83720365402608,
+            "bodyMean": 4085.519712238282,
+            "minimumSharpness": 0.15
+          },
+          "searchPixels": 8,
+          "edgePoints": {
+            "found": 120,
+            "lit": 73,
+            "fit": 35,
+            "holdout": 38,
+            "retained": 33,
+            "unlitOrUnmatched": 47
+          },
+          "correction": {
+            "rotationVectorMicroradians": [
+              0.019305439700613606,
+              -0.10219228259887639,
+              -0.17850837412659348
+            ],
+            "degrees": 1.1836981110025485e-05,
+            "boresightShiftPixels": 3.179915107548272
+          },
+          "residuals": {
+            "before": {
+              "fit": {
+                "count": 35,
+                "of": 35,
+                "rmsPixels": 2.1685902423211263,
+                "maximumPixels": 3.796875,
+                "meanPixels": 1.5452008928571428
+              },
+              "holdout": {
+                "count": 38,
+                "of": 38,
+                "rmsPixels": 2.3170302229404185,
+                "maximumPixels": 3.890625,
+                "meanPixels": 1.4991776315789473
+              }
+            },
+            "after": {
+              "fit": {
+                "count": 33,
+                "of": 33,
+                "rmsPixels": 0.5953703313147214,
+                "maximumPixels": 1.3984375,
+                "meanPixels": -0.10807291666666667
+              },
+              "holdout": {
+                "count": 35,
+                "of": 38,
+                "rmsPixels": 0.632901710532775,
+                "maximumPixels": 1.3828125,
+                "meanPixels": -0.12667410714285715
+              }
+            }
+          },
+          "budget": {
+            "maximumCorrectionDegrees": 0.01,
+            "maximumResidualPixels": 3,
+            "minimumControls": 12
+          },
+          "limitations": "One rotation of the camera fitted to the lit limb of the retained mesh; range, focal length and Sun direction keep their source values. Residuals are along-normal limb distances in pixels; terminator and shadow edges are excluded by the mesh lighting, remaining outliers by a robust re-fit."
+        }
+      },
+      "ephemerisQueries": {
+        "earth": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%272%3B%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%40399%27&TLIST=%272458557.7888435%27&TIME_TYPE=%27UT%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%273%27&VEC_CORR=%27LT%27&CSV_FORMAT=%27YES%27",
+        "sun": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%272%3B%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&TLIST=%272458557.779503112%27&TIME_TYPE=%27UT%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%273%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27"
+      }
+    }
+  ],
+  "registrationTrials": [
+    {
+      "name": "identity",
+      "patchRadiusPixels": 13,
+      "patchSampleStepPixels": 2,
+      "patchGridStepPixels": 28,
+      "candidatePatches": 6,
+      "id": "identity",
+      "accepted": false,
+      "reason": "Insufficient independent feature patches",
+      "acceptedControls": 6
+    },
+    {
+      "name": "forward",
+      "patchRadiusPixels": 13,
+      "patchSampleStepPixels": 2,
+      "patchGridStepPixels": 28,
+      "candidatePatches": 6,
+      "id": "20171011",
+      "accepted": false,
+      "reason": "Insufficient independent feature patches",
+      "acceptedControls": 0
+    },
+    {
+      "name": "reverse",
+      "patchRadiusPixels": 13,
+      "patchSampleStepPixels": 2,
+      "patchGridStepPixels": 28,
+      "candidatePatches": 7,
+      "id": "20171008",
+      "accepted": false,
+      "reason": "Insufficient independent feature patches",
+      "acceptedControls": 0
+    },
+    {
+      "name": "small-identity",
+      "patchRadiusPixels": 6,
+      "patchSampleStepPixels": 1,
+      "patchGridStepPixels": 19,
+      "candidatePatches": 23,
+      "id": "identity",
+      "accepted": true,
+      "fit": {
+        "count": 11,
+        "rmsPixels": 0.19970398352142357,
+        "maximumPixels": 0.4219546208335479
+      },
+      "holdout": {
+        "count": 11,
+        "rmsPixels": 0.11735647385733318,
+        "maximumPixels": 0.2838782813146467
+      },
+      "acceptedControls": 22
+    },
+    {
+      "name": "small-forward",
+      "patchRadiusPixels": 6,
+      "patchSampleStepPixels": 1,
+      "patchGridStepPixels": 19,
+      "candidatePatches": 23,
+      "id": "20171011",
+      "accepted": false,
+      "reason": "Insufficient independent feature patches",
+      "acceptedControls": 3
+    },
+    {
+      "name": "small-reverse",
+      "patchRadiusPixels": 6,
+      "patchSampleStepPixels": 1,
+      "patchGridStepPixels": 19,
+      "candidatePatches": 20,
+      "id": "20171008",
+      "accepted": false,
+      "reason": "Insufficient independent feature patches",
+      "acceptedControls": 4
+    },
+    {
+      "name": "near-identity",
+      "patchRadiusPixels": 6,
+      "patchSampleStepPixels": 1,
+      "patchGridStepPixels": 19,
+      "candidatePatches": 20,
+      "id": "identity",
+      "accepted": true,
+      "fit": {
+        "count": 9,
+        "rmsPixels": 0.12090719153479963,
+        "maximumPixels": 0.2357762458571978
+      },
+      "holdout": {
+        "count": 8,
+        "rmsPixels": 0.07962830252674746,
+        "maximumPixels": 0.1361070595228941
+      },
+      "acceptedControls": 17
+    },
+    {
+      "name": "near-forward",
+      "patchRadiusPixels": 6,
+      "patchSampleStepPixels": 1,
+      "patchGridStepPixels": 19,
+      "candidatePatches": 20,
+      "id": "201710110508",
+      "accepted": false,
+      "reason": "Insufficient independent feature patches",
+      "acceptedControls": 11
+    },
+    {
+      "name": "near-reverse",
+      "patchRadiusPixels": 6,
+      "patchSampleStepPixels": 1,
+      "patchGridStepPixels": 19,
+      "candidatePatches": 21,
+      "id": "20171011",
+      "accepted": false,
+      "reason": "Insufficient independent feature patches",
+      "acceptedControls": 9
+    }
+  ],
+  "limitations": [
+    "Identity comparisons check matcher behaviour only, not astronomical registration.",
+    "Oct 8 / Oct 11 controls fail both before and after the smaller-patch diagnostic; near-pair Oct 11 05:04 / 05:08 also fails unchanged acceptance limits.",
+    "A limb fit and a visually plausible drape do not qualify interior placement.",
+    "Crater-table coordinates have not been tied to native FITS control pixels with verified uncertainties. No measured incompatibility with that table is claimed.",
+    "No global coverage percentage was measured. No natural-colour, corrected-reflectance or photographic-surface capability was added."
+  ],
+  "nativeControlFollowup": {
+    "recipe": "photographic-controls.json",
+    "report": "projected-controls.json",
+    "image": "projected-controls.png",
+    "finding": "Four tentative native crater identifications were recorded before projecting their published coordinates. Three differ by 23\u201329 native pixels for both frozen model cameras; Hoplon differs by 9\u201311 pixels. The picks remain uncertain, so these discrepancies do not establish absolute camera error. No correction or photographic surface was adopted.",
+    "contrastMethodSource": "https://arxiv.org/pdf/1902.01287 (Fetick et al. 2019, section 4.4); cited by Marsset et al. for illumination-gradient removal",
+    "contrastInspection": {
+      "status": "identification-diagnostic-only",
+      "method": "Unweighted quadratic least squares over the observed disc, followed by division. Following the class of method in Fetick et al. 2019 section 4.4, not an exact producer reproduction or reflectance calibration.",
+      "mask": "Existing limbThreshold",
+      "threshold": {
+        "threshold": 1087.6375086944884,
+        "split": 3169.872506913949,
+        "backgroundMedian": 354.7409719863812,
+        "backgroundSigma": 146.57930734162144,
+        "bodyMean": 5906.26288208487
+      },
+      "coefficients": [
+        7512.501131274249,
+        -1774.8112090654859,
+        -209.36544290594247,
+        -19376.087661991187,
+        -920.3381440672113,
+        -17711.128440181034
+      ],
+      "displayRange": [
+        0.5855535742377813,
+        1.2340779921006717
+      ]
+    },
+    "contrastResult": "The exploratory quadratic display did not establish unambiguous independent crater centres. It was not used to change the controls or as a calibrated photographic product.",
+    "rotationSensitivity": "An exploratory 3-D rigid rotation between the first three tentative source/native direction pairs was about 31 degrees; the fourth pair remained 10.6 degrees away. This neither resolves a coordinate-frame rotation nor validates the feature identifications; no transform was adopted."
+  }
+}

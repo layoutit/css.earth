@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "66bd2f763180201759a60ff555effffd29ac9da1efdb2b239d81f6a315e571e5"
+    "sha256": "0b5633bd438300b88ddda1d5aacbf6246c79f375592060c5dab6b576a7a7409a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -185,7 +185,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4786a8cb8ed870bea24c6128736c5a42488b068365e20a9b30a01c729b45446f",
+      "sha256": "4bf706c01c427935e3f13957f8430284795ea4e0d2389d33239736ec8c7c76f9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -209,7 +209,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Closest to the Sun, Mercury is the smallest planet: a cratered terrestrial world with a large metallic core and extreme surface temperatures.",
           "facts": [
             {
               "id": "distance-from-sun",
@@ -341,8 +340,6 @@
             {
               "id": "normal",
               "label": "750 nm",
-              "description": "MESSENGER at 750 nm",
-              "title": "MDIS Global Basemap BDR",
               "thumbnail": "mercury-lens-normal.webp",
               "surface": "mercury-surface-normal.jpg",
               "source": {
@@ -353,14 +350,11 @@
               "falseColor": false,
               "filter": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
               "view": "exterior",
-              "detail": "750 nm",
-              "summary": "Brightness at 750 nm varies with the surface and the lighting when each image was taken. The mosaic is grayscale."
+              "notes": "MESSENGER at 750 nm"
             },
             {
               "id": "enhanced",
               "label": "Enhanced",
-              "description": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color Missing polar regions use reconstructed color from nearby enhanced imagery with BDR and topographic detail; these are not observed enhanced-color coverage.",
-              "title": "MDIS Enhanced Color Mosaic",
               "thumbnail": "mercury-lens-enhanced.webp",
               "surface": "mercury-surface-enhanced.jpg",
               "source": {
@@ -371,8 +365,6 @@
               "falseColor": true,
               "filter": "NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion",
               "view": "exterior",
-              "detail": "False color",
-              "summary": "Colors distinguish surface materials. Missing polar color is reconstructed from nearby imagery and terrain, not observed.",
               "legend": {
                 "kind": "categories",
                 "title": "Enhanced-color terrain",
@@ -394,13 +386,12 @@
                   }
                 ],
                 "sourceUrl": "https://science.nasa.gov/resource/mercury-false-color-rotation-movie/"
-              }
+              },
+              "notes": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color Missing polar regions use reconstructed color from nearby enhanced imagery with BDR and topographic detail; these are not observed enhanced-color coverage."
             },
             {
               "id": "topography",
               "label": "Topography",
-              "description": "MESSENGER shaded relief",
-              "title": "MDIS Color Shaded Relief",
               "thumbnail": "mercury-lens-topography.webp",
               "surface": "mercury-surface-topography.jpg",
               "source": {
@@ -441,14 +432,11 @@
               "falseColor": true,
               "filter": "USGS MESSENGER global color shaded relief",
               "view": "exterior",
-              "detail": "Shaded relief",
-              "summary": "Colors show elevation, while shading makes slopes visible. Both describe the terrain; they do not depict its visible color."
+              "notes": "MESSENGER shaded relief"
             },
             {
               "id": "interior",
               "label": "Interior",
-              "description": "Interior structure",
-              "title": "Interior structure model",
               "thumbnail": "mercury-lens-interior.webp",
               "surface": "mercury-interior-section.webp",
               "source": {
@@ -486,8 +474,7 @@
               "falseColor": false,
               "filter": "NASA-dimensioned retained 3D metallic-core cutaway",
               "view": "interior",
-              "detail": "Structure",
-              "summary": "A large metallic core sits inside a rocky outer shell. Layer sizes follow the structural model; colors identify each layer."
+              "notes": "Interior structure"
             }
           ],
           "labels": {
@@ -1048,10 +1035,10 @@
       "redistribution": "Prepared shell content with source provenance.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "4786a8cb8ed870bea24c6128736c5a42488b068365e20a9b30a01c729b45446f",
-      "bytes": 17101,
+      "sha256": "4bf706c01c427935e3f13957f8430284795ea4e0d2389d33239736ec8c7c76f9",
+      "bytes": 16032,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1286,11 +1273,10 @@
       "label": "Monochrome",
       "recipe": "raster",
       "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "MESSENGER at 750 nm"
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1323,6 +1309,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-messenger-bdr-global-z3",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1330,11 +1323,10 @@
       "label": "Enhanced color",
       "recipe": "raster",
       "selector": "/surfaces/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color Missing polar regions use reconstructed color from nearby enhanced imagery with BDR and topographic detail; these are not observed enhanced-color coverage."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced"
       ],
@@ -1382,6 +1374,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-messenger-enhanced-global-z3",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1389,11 +1388,10 @@
       "label": "Elevation",
       "recipe": "raster",
       "selector": "/surfaces/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "MESSENGER shaded relief"
-      ],
+      "limitations": [],
       "lensIds": [
         "topography"
       ],
@@ -1426,6 +1424,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-messenger-topography-z3",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1433,6 +1438,7 @@
       "label": "surface-poles",
       "recipe": "raster",
       "selector": "/polesOutput",
+      "observationAttribution": "source-lineage",
       "parents": [
         "normal",
         "enhanced",
@@ -1466,11 +1472,10 @@
       "label": "Cross section",
       "recipe": "raster",
       "selector": "/interior",
+      "observationAttribution": "none",
       "parents": [],
       "process": "Prepare a schematic core and outer shell from the structural source; pack the cutaway textures.",
-      "limitations": [
-        "Interior structure"
-      ],
+      "limitations": [],
       "lensIds": [
         "interior"
       ],
@@ -1560,6 +1565,7 @@
       "label": "lighting",
       "recipe": "raster",
       "selector": "/lighting",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Evaluate the declared surface-lighting model into phase banks.",
       "limitations": [],
@@ -1978,8 +1984,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1991,8 +1998,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9540,
-          "sha256": "40d81ff4711712386da8129c7ea183635ef409753aebfd67089cfc8458f0f097",
+          "bytes": 9381,
+          "sha256": "1e0217e18394fa69fca27c56b402ac77983fc9b18b077333e8685b2a6f13412f",
           "verification": "bytes-verified"
         }
       ],
@@ -2003,6 +2010,7 @@
       "label": "Mercury global mean MESSENGER MASCS reflectance",
       "recipe": "charts",
       "selector": "/charts/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
       "limitations": [],
@@ -2031,6 +2039,7 @@
       "label": "Mercury photometric phase curve",
       "recipe": "charts",
       "selector": "/charts/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
       "limitations": [],
@@ -2058,6 +2067,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -2099,6 +2109,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -2123,6 +2134,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "enhanced"
@@ -2147,6 +2159,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "topography"

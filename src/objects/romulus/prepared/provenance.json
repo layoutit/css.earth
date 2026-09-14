@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f1369bc7d0467a1cb3ffa2902371f38b0b7c805170b34c6ba5d7801cb8270ecb"
+    "sha256": "f989b10b3c15173bbc67e5a491076e7c31959fe2ccfda50d9301cad2c6a53032"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3f8715e9595b6883e822a028dfe3bc60cb0ee02ba6583e556930be08d761a9f7",
+      "sha256": "cf62b2707bea4681b3be10fdb032f24482c642a80f5ffcaaa16ffb08554fd312",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "romulus",
         "displayName": "Romulus",
         "panel": {
-          "introduction": "Romulus is Sylvia’s outer moon. This approximation selects one published occultation-limb solution and assumes equal depth. A later reanalysis admits different correlated limb shapes, so this is not a unique measured figure. The grid marks unmapped terrain. The orbit follows a published model; its current phase is approximate.",
           "facts": [
             {
               "id": "parent",
@@ -158,9 +157,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and 2.7±0.3 axis ratio, with equal depth assumed. The 2020 reanalysis allows other correlated ellipse shapes. The grid marks unmapped terrain.",
-              "title": "Occultation shape approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/romulus/romulus-model-thumbnail.webp",
               "surface": "romulus-model-surface@2x.webp",
               "poles": "romulus-model-poles@2x.webp",
@@ -168,7 +164,8 @@
                 "id": "occultation-approximation",
                 "path": "../manifest.json",
                 "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -312,7 +309,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -321,8 +318,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3f8715e9595b6883e822a028dfe3bc60cb0ee02ba6583e556930be08d761a9f7",
-      "bytes": 3756,
+      "sha256": "cf62b2707bea4681b3be10fdb032f24482c642a80f5ffcaaa16ffb08554fd312",
+      "bytes": 3088,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -335,11 +332,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and 2.7±0.3 axis ratio, with equal depth assumed. The 2020 reanalysis allows other correlated ellipse shapes. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -371,6 +367,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "occultation-approximation",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -378,8 +386,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -391,8 +400,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5640,
-          "sha256": "bd34d192dff202d6a0d7a46670c6739224fc859920141676d817f24254c56ec2",
+          "bytes": 5292,
+          "sha256": "d7c9ce22dbc3aa4d658c1bf1f0c20d9192b9031ab90de31ef511ec874f8b31f1",
           "verification": "bytes-verified"
         }
       ],
@@ -406,6 +415,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

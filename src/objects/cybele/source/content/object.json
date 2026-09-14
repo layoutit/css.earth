@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Cybele is a main-belt asteroid. Explore its calibrated nonconvex reconstruction from DAMIT, version 2017-09-21. The grid marks unavailable surface imagery. This displays the 2017 reconstruction at its released scale. Newer SPHERE work reports a smaller, more oblate shape.",
     "facts": [
       {
         "id": "radius",
@@ -53,8 +52,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Calibrated DAMIT shape",
-        "title": "DAMIT model 1843",
         "thumbnail": "/scenes/cybele/cybele-shape-thumbnail.webp",
         "surface": "cybele-shape-surface@2x.webp",
         "poles": "cybele-shape-surface@2x.webp",
@@ -63,14 +60,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape",
-        "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
+        "notes": "Calibrated DAMIT shape",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Source shape · radial height",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/cybele/cybele-elevation-thumbnail.webp",
         "surface": "cybele-elevation-surface@2x.webp",
         "poles": "cybele-elevation-surface@2x.webp",
@@ -92,8 +87,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1843",
           "image": "/scenes/cybele/cybele-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height",
-        "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+        "notes": "Source shape · radial height"
       }
     ]
   },

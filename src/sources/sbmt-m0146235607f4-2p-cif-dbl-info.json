@@ -1,0 +1,23 @@
+{
+  "id": "sbmt-m0146235607f4-2p-cif-dbl-info",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SPICE INFO pointing for NEAR MSI M0146235607",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/infofiles/M0146235607F4_2P_CIF_DBL.INFO",
+      "label": "Native SBMT file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/infofiles/M0146235607F4_2P_CIF_DBL.INFO",
+      "checkedOn": "2026-09-14",
+      "locator": "Native file; product identifier and camera fields in header."
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

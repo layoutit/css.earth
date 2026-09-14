@@ -1,0 +1,111 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kerberos",
+  "entries": [
+    {
+      "id": "porter-2025-triaxial",
+      "subject": "Porter 2025 single-triaxial Kerberos interpretation",
+      "status": "included",
+      "finding": "Presentation slide 7 refines the rounded abstract to full axes 14.5 × 8.2 × 7.2 km. The package retains this approximate ellipsoid without inferred local terrain; the source does not converge on a unique pole.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/source/survey/qualification.json",
+        "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "contact-binary-alternative",
+      "subject": "Porter 2025 contact-binary alternative and numerical mesh",
+      "status": "unresolved",
+      "finding": "Slide 8 compares a contact-binary interpretation, but the retained review located no unique bilobate vertex/facet release or converged pole. No screenshot-traced mesh is substituted.",
+      "revisitWhen": "A numerical Kerberos solution and its uncertainty, pole and coordinate conventions are released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/source/survey/qualification.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "lorri-native-frames",
+      "subject": "LORRI lor_0299153805 and lor_0299136735",
+      "status": "excluded",
+      "finding": "The 2026-09-08 survey decoded and inspected both original calibrated FITS frames at native pixels: approximately 1.964 and 3.127 km/pixel, only a handful of independent samples across Kerberos. They constrain shape and integrated brightness but do not provide a registered surface albedo map.",
+      "revisitWhen": "Resolved surface information and a controlled pose permit a meaningful cartographic footprint for Kerberos.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/source/survey/qualification.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/source/survey/0299153805-metadata.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/source/survey/0299136735-metadata.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pia20034-portrait",
+      "subject": "NASA PIA20034 deconvolved portrait",
+      "status": "excluded",
+      "finding": "The source account identifies interlacing, deconvolution and cosmetic enlargement described by the Science supplement. This portrait is observational context, not added independent surface samples or a camera solution.",
+      "revisitWhen": "The underlying native images and independent registration support an observational texture.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/README.md",
+        "https://science.nasa.gov/photojournal/kerberos-revealed/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "porter-2023-dimensions",
+      "subject": "Porter and Canup 2023 dimensions",
+      "status": "excluded",
+      "finding": "The older approximate 19 × 10 × 9 km dimensions are superseded in this package by the explicitly approximate 2025 triaxial fit; the 2023 discussion still explains the two low-resolution viewing epochs.",
+      "revisitWhen": "A source comparison overturns the selected 2025 dimensions or requires displaying a separately qualified historical model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/README.md",
+        "https://arxiv.org/abs/2306.08602"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "other-mapped-products",
+      "subject": "MVIC, LEISA, HST and mapping-product source review",
+      "status": "unresolved",
+      "finding": "The retained flyby-literature and PDS survey qualified no registered color, spectral, topographic or geological Kerberos map. Disk-integrated measurements are not spatial textures, and this review does not establish that other observations do not exist.",
+      "revisitWhen": "A target-specific spatial product is located with adequate native information and controlled coordinates.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kerberos/source/survey/qualification.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

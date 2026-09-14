@@ -1,0 +1,39 @@
+{
+  "id": "galileo-europa-s0426272856",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Observation: s0426272856",
+  "identifiers": [
+    {
+      "type": "USGS STAC item",
+      "value": "s0426272856.equi"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272856/s0426272856.json",
+      "label": "USGS observation metadata"
+    },
+    {
+      "role": "original",
+      "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272856/s0426272856.equi.photr.tif",
+      "label": "Controlled GeoTIFF"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272856/s0426272856.json",
+      "checkedOn": "2026-09-14",
+      "locator": "/id; /properties/title; /properties/license; /assets"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "part-of",
+      "catalogueId": "usgs-europa-controlled-galileo-images",
+      "evidence": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/"
+    }
+  ],
+  "statements": []
+}

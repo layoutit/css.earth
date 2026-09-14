@@ -78,16 +78,4 @@ IAUspin is retained as provenance and as an independent frame/rate consistency c
 
 <a id="views-and-source-survey"></a>
 
-<details>
-<summary>Views and source survey</summary>
-
-| Source candidate | Disposition | Reason |
-| --- | --- | --- |
-| DAMIT model search | included | Original body-specific convex shape and spin. Current search found no size-calibrated model. |
-| [Hanuš et al. 2023 stellar occultation fit](https://doi.org/10.1051/0004-6361/202346022) | included | Uses the existing DAMIT solution, matching selected pole/period; Fig. A.2 supplies 131 ± 8 km volume-equivalent diameter. |
-| Optical surface / resolved DEM / composition map | excluded | No registered surface map is supplied by the selected lightcurve inversion release. Shared grid and source-shape radial elevation are appropriate; no fabricated texture. |
-| [NEOWISE thermal diameter 130.099 ± 0.554 km](https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=588&phys-par=1) | alternative | Consistent thermal effective diameter, but its formal precision omits systematic errors; occultation volume scale is more directly compatible. |
-
-The model page and publication describe disk-integrated inversion data; such photometry cannot be repackaged as registered surface texels. Any unresolved complementary release remains a future source candidate rather than a fabricated view.
-
-</details>
+The [investigation ledger](investigations.json) records the source survey and alternative models.

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "37fbcfeb87f7b3f90752bd7c232dbbd611cb9b7606c6513f863871f782a90e3e"
+          "sha256": "3f1360bffc6be40a3d561fb9b836f609f5004caa1cf7987c48cfcf756e3a2f58"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "25ba47e342898fee5c3056aea5a3206e24d49836db3658538d6a6f0a1f6a50b7"
+        "sha256": "87f6f5b5dd1db51fae7b1915b70e6a21ac2e676bf1b7a23b6cacbcb2d5be5b4f"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.662913987797179,
-      "description": "Explore Vanadis in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in August 1884.",
       "systemName": "Solar System",
       "order": 331,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "49451ad1b5601e02ac9afdf4f5b7831e27c012ce1b727adeee9658a9c4833faf"
+    "sha256": "df8200e019d07143fdfdedc69ad266afa1501f9a27ecba2592b0161930e6d3ac"
   }
 }

@@ -81,6 +81,59 @@
       ],
       "path": "features/GANYMEDE_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GANYMEDE_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/fit_SPHERE.json.gz",
+      "url": "https://raw.githubusercontent.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/1ff2f7069a194f6ce356604072077352b4c78f4a/fit_SPHERE.json.gz"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/ice-fraction.tif",
+      "recipePath": "composition/model-recipe.json",
+      "product": "ice-fraction"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/dark-material.tif",
+      "recipePath": "composition/model-recipe.json",
+      "product": "dark-material"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/ice-uncertainty.tif",
+      "recipePath": "composition/model-recipe.json",
+      "product": "ice-uncertainty"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/dark-uncertainty.tif",
+      "recipePath": "composition/model-recipe.json",
+      "product": "dark-uncertainty"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/model-conversion.json",
+      "recipePath": "composition/model-recipe.json",
+      "product": "report"
     }
   ]
 }

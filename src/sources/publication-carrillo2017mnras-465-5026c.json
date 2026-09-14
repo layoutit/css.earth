@@ -1,0 +1,36 @@
+{
+  "id": "publication-carrillo2017mnras-465-5026c",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Carrillo2017MNRAS.465.5026C: Characterizing dw1335-29, a recently discovered dwarf satellite of M83",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "Carrillo2017MNRAS.465.5026C"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.5026C",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/prepared/catalogue.json",
+      "revision": "340f4ef6ea7f2a6cc540b906dec35436a1d549c5",
+      "sha256": "1987e9658d963826cc1717afdfa0b9267fa1ce79b79e0d3f9d5905bd55f00c8f",
+      "locator": "/sources/3/references/23"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/3/references/23"
+    }
+  ]
+}

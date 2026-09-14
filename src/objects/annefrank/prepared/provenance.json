@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0281517a02879b8c624eebcb3f154154d02fd83a8582d2fef83e850165d0444b"
+    "sha256": "025778e14819a40ac57a0ee70b98247cf3fb0f4b60ae6eeef548b6a0bcd733fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9874c035e76e05a2f2f38ce1449868f081cdfc97e395ab625006e3e431dd14f1",
+      "sha256": "cf0fb78c7db8426785b5e025d6b7a98483b40afcc73aae4ac26b179d61c94830",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "annefrank",
         "displayName": "Annefrank",
         "panel": {
-          "introduction": "Stardust visited Annefrank in 2002. This approximate ellipsoid shows the minimum dimensions inferred from the flyby; its angular outline and local terrain are unresolved. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "shape",
@@ -152,9 +151,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published preliminary ellipsoid using minimum full dimensions from Stardust flyby images. It does not reproduce the observed angular outline or establish a complete global shape. Full approximation dimensions: 6.6 × 5 × 3.4 km. Arbitrary display pole and meridian. The flyby did not establish a spin pole or current surface longitude; the display orientation is not a measured attitude. The grid marks unmapped terrain.",
-              "title": "Stardust minimum-size approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/annefrank/annefrank-model-thumbnail.webp",
               "surface": "annefrank-model-surface@2x.webp",
               "poles": "annefrank-model-poles@2x.webp",
@@ -162,7 +158,8 @@
                 "id": "occultation-approximation",
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.1029/2003JE002108"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -300,7 +297,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -309,8 +306,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9874c035e76e05a2f2f38ce1449868f081cdfc97e395ab625006e3e431dd14f1",
-      "bytes": 3350,
+      "sha256": "cf0fb78c7db8426785b5e025d6b7a98483b40afcc73aae4ac26b179d61c94830",
+      "bytes": 2604,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -323,11 +320,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published preliminary ellipsoid using minimum full dimensions from Stardust flyby images. It does not reproduce the observed angular outline or establish a complete global shape. Full approximation dimensions: 6.6 × 5 × 3.4 km. Arbitrary display pole and meridian. The flyby did not establish a spin pole or current surface longitude; the display orientation is not a measured attitude. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -359,6 +355,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "occultation-approximation",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -366,8 +374,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -379,8 +388,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5798,
-          "sha256": "2881084e447c0a795299bb6fd09830c150591819724a8a38a090d8fb85058eda",
+          "bytes": 5577,
+          "sha256": "1990fb290d0bcab6e5dd186700b669f7668548d2688c099a3250f7f3662c7931",
           "verification": "bytes-verified"
         }
       ],
@@ -394,6 +403,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

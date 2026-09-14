@@ -28,7 +28,7 @@ import { archiveBackplanes, castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
 import { deriveLimits } from '../limits.mts';
-import { LENS_KEYS, MOSAIC_KEYS, checkKeys, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.mts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.mts';
 
 /** What a format adds to the shared lens shape, and which of the shared choices its product supports. */
 interface GeoSchema {
@@ -50,7 +50,7 @@ export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
     photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
   // AMICA admits lossy frames and counts them in the report; one flat field serves every frame.
   'amica-gaskell': { camera: 'backplane-fit', frame: { required: ['labelPath', 'originalPath'] }, lens: { required: ['filter', 'flatPath'] },
-    photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
+    photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 10 },
   [PDS4_GEOMETRY_CUBE_FORMAT]: { camera: 'backplane-fit', frame: { required: ['labelPath'] }, lens: { required: ['filter', 'cube'] },
     photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
   // Archived cameras close over the exact source mesh, so they may also keep the acquisition illumination.
@@ -101,7 +101,7 @@ const AXES = ['X', '-X', 'Y', '-Y', 'Z', '-Z'];
 
 function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
   const record = requireRecord(value), schema = schemaOf(record.format);
-  checkKeys(record, [...LENS_KEYS, ...schema.lens.required], [...MOSAIC_KEYS, ...(schema.lens.optional ?? [])], CONTEXT);
+  checkKeys(record, [...LENS_KEYS, ...schema.lens.required], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS, ...(schema.lens.optional ?? [])], CONTEXT);
   for (const frame of requireArray(record.frames)) checkKeys(frame, ['id', 'path', 'startTime', ...schema.frame.required], schema.frame.optional ?? [], `${CONTEXT} frame`);
   const recipe = decodeProfile(parseGeoLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
   validateEnvelope(recipe, [...recipe.frames.flatMap(framePaths), ...sharedPaths(recipe)],
@@ -179,8 +179,7 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
     if (decoded.startTime !== frame.startTime || decoded.filter !== recipe.filter) throw new Error('GEO observation identity changed.');
     return { startTime: frame.startTime, filter: recipe.filter };
   };
-  // An authored display range keeps its common scale, so its frame computes no pixel percentiles.
-  const common = { id: frame.id, photometry, limits: recipe.transfer, mesh: radial.grid, displayPercentiles: recipe.display.percentiles };
+  const common = { id: frame.id, photometry, limits: recipe.transfer, mesh: radial.grid };
   // A declared refinement fits one rotation of the camera to the mesh's lit limb before any geometry is derived.
   const refined = <T extends { camera: unknown; width: number; height: number; planes: Record<string, NumericRaster>; acceptPixel?(index: number): boolean; qualityReport: Record<string, unknown> }>(decoded: T): T => {
     if (!recipe.refinement) return decoded;
@@ -272,13 +271,13 @@ export const geoFormat: SurfaceObservationFormat = {
     }
     const { report: limits, exceeded } = deriveLimits(recipe.transfer, frames, context.config.geometry.radialTerrain.simplification.maximumErrorMeters);
     const range = recipe.display.displayRange, color = schemaOf(recipe.format).color;
-    const policy: SurfacePolicy = { format: recipe.format, maximumSourceDistanceMeters: recipe.transfer.maximumSourceDistanceMeters, precheckDisplayPoint: true,
+    const policy: SurfacePolicy = { format: recipe.format,
       selection: frames.length === 1 ? 'single' : recipe.selection === 'recipe-order' ? 'recipe-order' : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
       // A colour product's floating bands are encoded once, after surface transfer, on the shared band display.
       display: range && color ? { range: 'authored', low: range[0], high: range[1], units: color.units,
           colorDisplay: bandColorDisplay(color.bands, color.inputQuantity, range) }
-        : { range: 'reference-pixels', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }, photometry: photometry.report, limits };
+        : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }, photometry: photometry.report, limits };
     return { frames, policy, exceeded };
   },
 };

@@ -12,7 +12,7 @@ const { idPrefix, group, label = group === 'overview' ? 'Body overview' : 'Objec
 // the running scene use these same controls and these same panels.
 // Only selection is generated here. All appearance stays in the shared tab rules.
 const selection = tabs.map(({id}) => `#${idPrefix}-${id}-${panelSuffix} { --information-panel-display: none; }
-.planet-card:has(> .planet-native-tabs > #${idPrefix}-${id}-tab:checked) > #${idPrefix}-${id}-${panelSuffix} { --information-panel-display: block; }`).join('\n');
+.planet-native-tabs:has(> #${idPrefix}-${id}-tab:checked) ~ #${idPrefix}-${id}-${panelSuffix} { --information-panel-display: block; }`).join('\n');
 ---
 <div class:list={[group === 'overview' ? 'planet-object-tabs' : 'planet-card-tabs', 'planet-native-tabs']}
   data-body-overview={group === 'overview' ? true : undefined} role="radiogroup" aria-label={label}>

@@ -4,7 +4,6 @@
   "id": "taurinensis",
   "displayName": "Taurinensis",
   "panel": {
-    "introduction": "Taurinensis is a Mars-crossing asteroid. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex lightcurve reconstruction at approximate thermal scale: 20.87 km effective diameter (catalog ±0.36 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
-        "title": "Taurinensis · DAMIT shape model 490",
         "thumbnail": "/scenes/taurinensis/taurinensis-shape-thumbnail.webp",
         "surface": "taurinensis-shape-surface@2x.webp",
         "poles": "taurinensis-shape-surface@2x.webp",
@@ -78,13 +75,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "notes": "Convex lightcurve reconstruction at approximate thermal scale: 20.87 km effective diameter (catalog ±0.36 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 10.435 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Taurinensis · radius relative to the 10.435 km reference sphere",
         "thumbnail": "/scenes/taurinensis/taurinensis-elevation-thumbnail.webp",
         "surface": "taurinensis-elevation-surface@2x.webp",
         "poles": "taurinensis-elevation-surface@2x.webp",
@@ -106,7 +102,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/490",
           "image": "/scenes/taurinensis/taurinensis-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 10.435 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

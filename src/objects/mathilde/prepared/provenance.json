@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6c533d535d37a835d1b5e78cc1732f0dcc4479e8c620e2642b0b4fc5bf13be52"
+    "sha256": "e2e4363823842f82c0f96e1f6f592d21c54e78e9dc65225de34982a3ea747e4e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "95d57fa2fc62f3d5d2b01a60187b03f5690db61d386886a252348cf850545191",
+      "sha256": "c1086762e7e1201473bf07265b308a5a26232e792878dd74060f011f3de51a8e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -126,12 +126,10 @@
               "selection": "recipe-order",
               "levelMatching": {
                 "minimumPairs": 64,
-                "maximumLogMad": 0.3,
                 "maximumGain": 1.5,
                 "samplesPerTriangle": 16
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 600,
                 "maximumSeparationFootprints": 4,
                 "visibilityToleranceMeters": 0.5,
                 "maximumEmissionDegrees": 75
@@ -147,7 +145,7 @@
               "display": {
                 "percentiles": [
                   0,
-                  99.5
+                  99
                 ]
               },
               "metadata": {
@@ -248,7 +246,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1b633ccaa351b139ccc038ebd20ebd2755c1d794667120d74486827c728fcba6",
+      "sha256": "3ff27bd56d08f24f6abe2f57349d42b5a7db3781ade47de3ff289c5561cb0dfb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -272,7 +270,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Mathilde is a dark, slowly rotating asteroid scarred by enormous impact craters. NEAR photographed part of it during a brief flyby in 1997. This published visualization shape includes estimates for the unseen side and shadowed crater floors; those areas were not measured.",
           "facts": [
             {
               "id": "radius",
@@ -318,8 +315,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Stooke and Pfau’s partial NEAR photomosaic retains photographed shadows and processing seams; it is not calibrated albedo. Gray grid marks exterior map gaps identified by a conservative connected-fill heuristic. The published Stooke visualization shape includes modeled unseen areas and aesthetically modified shadowed crater floors. Shadows adds illustrative lighting: the spin pole and phase are unresolved.",
-              "title": "MSI partial mosaic",
               "thumbnail": "/scenes/mathilde/mathilde-normal-thumbnail.webp",
               "surface": "mathilde-normal-surface@2x.webp",
               "poles": "mathilde-normal-surface@2x.webp",
@@ -328,14 +323,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "NEAR MSI · partial photomosaic",
-              "summary": "Only part of the surface is photographed; shadows and seams remain. The unseen shape is modeled and image gaps are marked."
+              "notes": "Stooke and Pfau’s partial NEAR photomosaic retains photographed shadows and processing seams; it is not calibrated albedo. Gray grid marks exterior map gaps identified by a conservative connected-fill heuristic. The published Stooke visualization shape includes modeled unseen areas and aesthetically modified shadowed crater floors. Shadows adds illustrative lighting: the spin pole and phase are unresolved.",
+              "noData": true
             },
             {
               "id": "near-msi",
               "label": "NEAR close-ups",
-              "description": "Two NEAR MSI broadband photographs from 27 June 1997, calibrated to I/F and registered to the published visualization shape using reconstructed flyby geometry and checked limb alignment. Photographed shadows, scattered light and detector noise remain. The raw companion images identify missing and saturated pixels; the archive quality index remains unresolved. Grid marks unavailable imagery.",
-              "title": "NEAR MSI close-ups",
               "thumbnail": "/scenes/mathilde/mathilde-near-msi-thumbnail.webp",
               "surface": "mathilde-near-msi-surface@2x.webp",
               "poles": "mathilde-near-msi-surface@2x.webp",
@@ -344,14 +337,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "NEAR MSI · 1997 flyby",
-              "summary": "Calibrated photographs retain their original illumination. Unseen areas stay on the grid."
+              "notes": "Two NEAR MSI broadband photographs from 27 June 1997, calibrated to I/F and registered to the published visualization shape using reconstructed flyby geometry and checked limb alignment. Photographed shadows, scattered light and detector noise remain. The raw companion images identify missing and saturated pixels; the archive quality index remains unresolved. Grid marks unavailable imagery.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows Thomas model radius minus a 26.4 km reference sphere. Source samples carrying the unobserved 26.5 km placeholder are withheld before interpolation and shown as gray grid. This is radial height, not gravitational elevation. The displayed Stooke visualization shape separately includes modeled unseen areas and modified crater floors; it is not the measured elevation surface. Brightness adds cartographic relief; Shadows adds illustrative directional lighting.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/mathilde/mathilde-elevation-thumbnail.webp",
               "surface": "mathilde-elevation-surface@2x.webp",
               "poles": "mathilde-elevation-surface@2x.webp",
@@ -373,8 +364,8 @@
                 "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.xml",
                 "image": "/scenes/mathilde/mathilde-elevation-legend.webp"
               },
-              "detail": "Thomas measured-region radius",
-              "summary": "Height relative to a 26.4 km sphere, with unobserved values withheld. The display shape has modeled terrain."
+              "notes": "Color shows Thomas model radius minus a 26.4 km reference sphere. Source samples carrying the unobserved 26.5 km placeholder are withheld before interpolation and shown as gray grid. This is radial height, not gravitational elevation. The displayed Stooke visualization shape separately includes modeled unseen areas and modified crater floors; it is not the measured elevation surface. Brightness adds cartographic relief; Shadows adds illustrative directional lighting.",
+              "noData": true
             }
           ]
         },
@@ -887,7 +878,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -896,8 +887,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1b633ccaa351b139ccc038ebd20ebd2755c1d794667120d74486827c728fcba6",
-      "bytes": 11359,
+      "sha256": "3ff27bd56d08f24f6abe2f57349d42b5a7db3781ade47de3ff289c5561cb0dfb",
+      "bytes": 10455,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1010,11 +1001,10 @@
       "label": "Monochrome",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Stooke and Pfau’s partial NEAR photomosaic retains photographed shadows and processing seams; it is not calibrated albedo. Gray grid marks exterior map gaps identified by a conservative connected-fill heuristic. The published Stooke visualization shape includes modeled unseen areas and aesthetically modified shadowed crater floors. Shadows adds illustrative lighting: the spin pole and phase are unresolved."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1055,6 +1045,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "mathilde-normal",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "mathilde-visualization-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1062,11 +1064,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows Thomas model radius minus a 26.4 km reference sphere. Source samples carrying the unobserved 26.5 km placeholder are withheld before interpolation and shown as gray grid. This is radial height, not gravitational elevation. The displayed Stooke visualization shape separately includes modeled unseen areas and modified crater floors; it is not the measured elevation surface. Brightness adds cartographic relief; Shadows adds illustrative directional lighting."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1100,6 +1101,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "mathilde-visualization-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1107,11 +1115,10 @@
       "label": "NEAR close-ups",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Two NEAR MSI broadband photographs from 27 June 1997, calibrated to I/F and registered to the published visualization shape using reconstructed flyby geometry and checked limb alignment. Photographed shadows, scattered light and detector noise remain. The raw companion images identify missing and saturated pixels; the archive quality index remains unresolved. Grid marks unavailable imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "near-msi"
       ],
@@ -1133,15 +1140,22 @@
       "outputs": [
         {
           "url": "/scenes/mathilde/mathilde-near-msi-thumbnail.webp",
-          "bytes": 1990,
-          "sha256": "814378016dd54e763ed0a0621cbbec43f09de2c2327946d31ea380e410a5b94a",
+          "bytes": 1972,
+          "sha256": "58ac43c4ead4099f2cbca14de4112023b5bc40307afcfc6f3458c2695dad1d0b",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mathilde/mathilde-near-msi-surface@2x.webp",
-          "bytes": 356024,
-          "sha256": "b005eeaa7ea7b358844f004c14c8bc07f7d28de7dd2bb24770b874885736b7d9",
+          "bytes": 320526,
+          "sha256": "b3573ebb20bfee429b15defe06447e40ff51e7bba276d93ad226e98e9dd9ed85",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "mathilde-visualization-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1151,8 +1165,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1164,8 +1179,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6750,
-          "sha256": "cdfeffbd229f1262b85af5002a846a4268b24e195ae16e1b3ba52344deaa3b60",
+          "bytes": 6460,
+          "sha256": "469aa6f247127dd1932038cb6c07bb37aea9b5597c20f21a5d03b36d9df6cf00",
           "verification": "bytes-verified"
         }
       ],
@@ -1176,6 +1191,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -1214,6 +1230,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -1238,6 +1255,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "near-msi"
@@ -1248,8 +1266,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/near-msi.webp",
-          "bytes": 12498,
-          "sha256": "142e74730a054b0dc9aa015709492231820a8a77153fb73ba2f447b84ad71e74",
+          "bytes": 10098,
+          "sha256": "bc83b454af83dcf9083b006b96be5ba931687cfdff227a1f54bf7fbd7f6e56a7",
           "verification": "bytes-verified"
         }
       ]
@@ -1262,6 +1280,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"
@@ -1282,5 +1301,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "mathilde",
+    "materialSha256": "3bdc3e2b0ef2c181da98d4107179865af5c3443e9f761275b4867bcdaa4ebe69",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/mathilde/prepared/provenance.json",
+      "sha256": "1c9bda767def17813582e0dbde4d1ad4e5064f50b29063a773edeb0921bc4058"
+    }
   }
 }

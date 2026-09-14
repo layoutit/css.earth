@@ -1,0 +1,37 @@
+{
+  "id": "gaia-dr3-gavo",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Gaia Data Release 3 astrometry and photometry (GAVO DR3 Lite)",
+  "identifiers": [
+    {
+      "type": "Gaia release",
+      "value": "DR3"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite",
+      "checkedOn": "2026-09-13",
+      "locator": "source_id, ra/dec, proper motions, parallax/error, G, BP/RP and RUWE; epoch J2016.0"
+    }
+  ],
+  "publisher": "Gaia Collaboration; ESA/Gaia/DPAC; GAVO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gaia Collaboration; ESA/Gaia/DPAC; GAVO",
+      "scope": "source_id, ra/dec, proper motions, parallax/error, G, BP/RP and RUWE; epoch J2016.0",
+      "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite"
+    }
+  ],
+  "version": "DR3"
+}

@@ -3,13 +3,13 @@ import assert from 'node:assert/strict';
 import { minimapPointRange } from '../minimap/point-range.mts';
 import prepared from '../minimap/prepared.json' with { type: 'json' };
 import context from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 
 test('prepared minimap index includes every source point once without changing DOM order', () => {
   assert.equal(prepared.pointOrderX.length, prepared.points.length);
   assert.deepEqual([...prepared.pointOrderX].sort((a, b) => a - b), prepared.points.map((_, i) => i));
   assert(prepared.pointOrderX.every((id, i, order) => i === 0 || prepared.points[order[i - 1]].positionM[0] <= prepared.points[id].positionM[0]));
-  const ids = new Set(OBJECTS.map(object => object.id));
+  const ids = new Set(SCENE_OBJECTS.map(object => object.id));
   assert.deepEqual(prepared.bodyIds, [context.focus, ...context.bodies].filter(body => ids.has(body.id)).map(body => body.id));
 });
 

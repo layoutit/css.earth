@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c2168f493dae9eaf0fc53c7341f14a6fc23420c772174ab89cc6dbf5df9789fb"
+    "sha256": "e300a1d788763f99b8c75546292829fc4ed8cfe3a316d635761a5d9177807d16"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "44319fc75a67c7aa2c1859292c2c0857e4220ff3d91bea76d5be0077dec4f379",
+      "sha256": "9125bc063218564f2a44a4c8e1c03bf265dda6a9cb7953e24ef4326b5f9328c5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,7 +65,6 @@
                 }
               ],
               "transfer": {
-                "maximumSourceDistanceMeters": 500,
                 "maximumSeparationFootprints": 1.5,
                 "maximumEmissionDegrees": 70,
                 "visibilityToleranceMeters": 0.5
@@ -80,8 +79,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99.8
+                  2.2,
+                  99.7
                 ]
               },
               "metadata": {
@@ -149,14 +148,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "46e01ae08d160d17c3d053a9c3adf29d8ac142573091a652e666f4defa563a82",
+      "sha256": "06b9324203fe893aa69d9a1f00cafa3392e2c94c8e51a8a53219cd4a4f627085",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "nix",
         "displayName": "Nix",
         "panel": {
-          "introduction": "Nix is a small moon orbiting the Pluto–Charon pair. New Horizons resolved its elongated shape and a reddish region around a large crater. The moon spins much faster than it circles the system; it keeps no single face turned toward Pluto.",
           "facts": [
             {
               "id": "radius",
@@ -202,9 +200,6 @@
             {
               "id": "monochrome",
               "label": "Monochrome",
-              "description": "Experimental image placement; registration is not yet qualified. New Horizons LORRI photograph from 14 July 2015, at about 300 m/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map.",
-              "title": "New Horizons surface photograph",
-              "detail": "300 m/pixel",
               "thumbnail": "/scenes/nix/nix-monochrome-thumbnail.webp",
               "surface": "nix-monochrome-surface@2x.webp",
               "poles": "nix-monochrome-poles@2x.webp",
@@ -213,14 +208,12 @@
                 "path": "../manifest.json",
                 "url": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029917/lor_0299174134_0x636_sci.lbl"
               },
-              "summary": "Experimental placement; registration unverified. LORRI · 14 July 2015 · 300 m/pixel. Acquisition lighting retained; grid marks missing coverage."
+              "notes": "Experimental image placement; registration is not yet qualified. New Horizons LORRI photograph from 14 July 2015, at about 300 m/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map.",
+              "noData": true
             },
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data.",
-              "title": "Porter shape reconstruction",
-              "detail": "Shape",
               "thumbnail": "/scenes/nix/nix-model-thumbnail.webp",
               "surface": "nix-model-surface@2x.webp",
               "poles": "nix-model-poles@2x.webp",
@@ -229,7 +222,8 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.6084/m9.figshare.12779948.v1"
               },
-              "summary": "Published shape reconstruction."
+              "notes": "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data.",
+              "noData": true
             }
           ]
         },
@@ -462,7 +456,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -471,8 +465,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "46e01ae08d160d17c3d053a9c3adf29d8ac142573091a652e666f4defa563a82",
-      "bytes": 4659,
+      "sha256": "06b9324203fe893aa69d9a1f00cafa3392e2c94c8e51a8a53219cd4a4f627085",
+      "bytes": 4049,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -485,11 +479,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -521,6 +514,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "porter-nix-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -528,11 +533,10 @@
       "label": "Monochrome",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Experimental image placement; registration is not yet qualified. New Horizons LORRI photograph from 14 July 2015, at about 300 m/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map."
-      ],
+      "limitations": [],
       "lensIds": [
         "monochrome"
       ],
@@ -550,15 +554,22 @@
       "outputs": [
         {
           "url": "/scenes/nix/nix-monochrome-thumbnail.webp",
-          "bytes": 1820,
-          "sha256": "89dbd39edea44aa9e8668b856385216714c6f4e1a1d61a2879bfdfc0a359c184",
+          "bytes": 1812,
+          "sha256": "430b14f48f3eb4077b78c226f8bdb49ef9e49fdfb7f766220f8dd607e8f8a199",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nix/nix-monochrome-surface@2x.webp",
-          "bytes": 141964,
-          "sha256": "1b29985c8b68bc340110ec88d4596f1d90c33e13376a95c8b24fe09fc1a8d2a2",
+          "bytes": 144698,
+          "sha256": "7ffc31a3716573ce24cb2e9eea51283aaaed3eb10996979e85473b4d88d45874",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "porter-nix-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -568,8 +579,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -581,8 +593,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3420,
-          "sha256": "c69d6160cc2fd280ee7275b6bb1b4b7d5e32cbebd82b7f71baeec610eb06fa4d",
+          "bytes": 3163,
+          "sha256": "fa6c2ea4b7e96f0bbb6339344505e97bc00a4f47db5876be6b7e49f679fb856f",
           "verification": "bytes-verified"
         }
       ],
@@ -596,6 +608,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"
@@ -620,6 +633,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "monochrome"
@@ -630,8 +644,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/monochrome.webp",
-          "bytes": 9678,
-          "sha256": "8daea7724a9501c198e95c9389da94575d5be05c355b4e506955527fcba7af03",
+          "bytes": 10078,
+          "sha256": "8aab96d3a981083ab7f96a098fbc64d1bf0d806ffbfe8c780ec38601103d7927",
           "verification": "bytes-verified"
         }
       ]
@@ -640,5 +654,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "nix",
+    "materialSha256": "5e4b05d334380e0cf18fb8615c3ab0ae64f3ed69b568f9fee0018a8d5a77f30d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/nix/prepared/provenance.json",
+      "sha256": "8a3600ea16f2c3ff017541003ba98e57be314b4d11e45d8aeaea8b7f715f42f8"
+    }
   }
 }

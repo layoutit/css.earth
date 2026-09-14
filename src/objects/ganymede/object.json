@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "65a41e0b95e3171b5d05d03e73847101e016388808e3f18414958df0124470f3"
+    "sha256": "83677ca649f7a10ba86251bfd05df3c11cd99e1d1bce6fb21849d11a388f0cae"
   },
   "id": "ganymede",
   "properties": {
@@ -78,6 +78,16 @@
               "id": "oxygen-signature",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "ice-fraction",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "dark-material",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -98,7 +108,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "b2cf063a3cb8413f24105db5ad067f84d576dfdc3741c563fd6f919db78c5bb8"
+          "sha256": "ab831101edf4f77f21ca809f7a2800c505e8acf95d268a51ba05c77c9960e2a2"
         },
         {
           "id": "geometry",
@@ -118,7 +128,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a4eb854350db772e27c6ac80631f75095378be3db5cca1fd7332e84b877b8b8c"
+          "sha256": "c11b7052988d3d181574ab64934546fb5073c99ff2ff8b46ab2a189062386290"
         },
         {
           "id": "solar-system",
@@ -138,7 +148,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "1226fc64477bf1e22d8518c602c09e4fc37f5736f0845d6e120457ca5673c55f"
+          "sha256": "10437a0838df348d201569b5b9b9ad54f61a3b95fa161fa2ef9c67d5e304a68f"
         },
         {
           "id": "features",
@@ -153,11 +163,12 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/planet-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/objects/ganymede/composition.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e95c787b88436634dc3cbc320c8112c87018c4df3636e1b1835871ab5b7888cb"
+        "sha256": "054c894d046b2bdd8513de19b8d39f32e34c6c8b7e6c5bc9e269bf3f81249c21"
       }
     },
     "catalog": {
@@ -165,7 +176,7 @@
       "classification": "satellite",
       "color": "#a49a83",
       "distanceAu": 5.2,
-      "description": "Explore Ganymede in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s largest moon and its grooved icy surface.",
+      "description": "The largest moon in the solar system, bigger than Mercury.",
       "systemName": "Solar System",
       "order": 428,
       "context": {

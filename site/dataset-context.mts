@@ -12,9 +12,8 @@ interface SourceGroup {
   supporting: { id: string; title: string; href: string }[];
 }
 
-/** Build-time presentation of the prepared dataset's actual contribution edges. */
-export function datasetContext(objectId: string, lensId: string, provenance: ProvenanceDocument | undefined,
-  graph: ContributionGraph, catalog: ExplorationCatalog, usage: SourceUsage, sources: SourceResolver) {
+/** The missions, machines and unresolved credits a dataset card shows beside its summary. */
+export function datasetContributors(objectId: string, lensId: string, graph: ContributionGraph, catalog: ExplorationCatalog) {
   const edges = (graph.byObject[objectId] ?? []).map(index => graph.edges[index])
     .filter(edge => edge.lensIds.includes(lensId));
   const missionIds = new Set(edges.flatMap(({ attribution }) =>
@@ -25,6 +24,16 @@ export function datasetContext(objectId: string, lensId: string, provenance: Pro
   // machine is unknown. Keeping the label lets the card say whose data this is.
   const notes = [...new Map(edges.flatMap(({ attribution }) =>
     attribution.kind === 'unresolved' ? [[attribution.label, { label: attribution.label, reason: attribution.reason }] as const] : [])).values()];
+  return {
+    missions: catalog.missions.filter(mission => missionIds.has(mission.id)),
+    machines: catalog.machines.filter(vehicle => machineIds.has(vehicle.id)),
+    notes,
+  };
+}
+
+/** Build-time presentation of the prepared dataset's actual contribution edges. */
+export function datasetContext(objectId: string, lensId: string, provenance: ProvenanceDocument | undefined,
+  graph: ContributionGraph, catalog: ExplorationCatalog, usage: SourceUsage, sources: SourceResolver) {
   const local = new Map(provenance?.sources.map(source => [source.id, source]));
   const groups = new Map<string, SourceGroup>();
   const seen = new Set<string>();
@@ -55,10 +64,5 @@ export function datasetContext(objectId: string, lensId: string, provenance: Pro
     (!declared || entry.lensId === lensId ? group.links : group.supporting).push(entry.link);
     groups.set(entry.credit, group);
   }
-  return {
-    missions: catalog.missions.filter(mission => missionIds.has(mission.id)),
-    machines: catalog.machines.filter(vehicle => machineIds.has(vehicle.id)),
-    notes,
-    sources: [...groups.values()],
-  };
+  return { ...datasetContributors(objectId, lensId, graph, catalog), sources: [...groups.values()] };
 }

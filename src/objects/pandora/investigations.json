@@ -54,6 +54,56 @@
           "pr": 83
         }
       ]
+    },
+    {
+      "id": "cassini-n1860792100",
+      "subject": "Cassini ISS frame N1860792100_1 in the Monochrome lens",
+      "status": "excluded",
+      "finding": "Its published camera places 99.9% of the lit source shape on the photograph's sky while the body lies elsewhere in the frame, so preparation refuses it; no camera correction is invented.",
+      "revisitWhen": "A corrected camera or pointing solution for the frame registers it with interior holdouts.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/4fea925cce611d30704d68df60d91df92596b87c/src/planets/pandora/README.md#L82"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "4fea925cce611d30704d68df60d91df92596b87c"
+        }
+      ]
+    },
+    {
+      "id": "cassini-coverage-2026-09-13",
+      "subject": "Additional IR3/GRN/UV3 sequence near 249 degrees west",
+      "status": "excluded",
+      "finding": "N1504612418_1, N1504612452_1 and N1504612385_1 were acquired and trialed. A color-coverage trial expanded area from 17.1% to 40.7%, but the fitted IR3 band failed the independent maximum-residual criterion: 2.519 pixels against a 2-pixel limit (RMS 0.796 pixels). This unqualified trial is not shipped. Other published sequences remain possible future candidates.",
+      "revisitWhen": "A controlled fit passes the independent criteria without relaxing them, or a different sequence supplies independently verified coverage.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pandora_document.pdf",
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
+        }
+      ]
+    },
+    {
+      "id": "cassini-filter-color",
+      "subject": "Selected calibrated Cassini filter-color observations",
+      "status": "included",
+      "finding": "The selected IR3/GRN/UV3 triplet supplies False color using the published cameras. The later additional triplet remains excluded under its separate failed-registration entry; valid original coverage is not withdrawn by that failure.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pandora/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pandora/source/preparation/terrestrial.json",
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pandora_document.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
     }
   ]
 }

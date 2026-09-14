@@ -12,6 +12,8 @@ The shared missing-imagery grid covers the surface. The body uses the existing g
 
 ## Scientific sources
 
+[Investigation ledger](investigations.json): recorded source decisions, evidence and conditions for revisiting them.
+
 - [Levison et al. (2024)](https://doi.org/10.1038/s41586-024-07378-0): Lobe dimensions, separation and mutual period.
 - [Bierhaus et al. (2025)](https://doi.org/10.3847/PSJ/ae1968): Later geology and limits of the Selam shape evidence.
 
@@ -38,6 +40,17 @@ but is not a reason to replace the present source-constrained ellipsoid envelope
 The [Dinkinesh source check](../dinkinesh/README.md#lucy-photographic-source-check-13-september-2026)
 records the inspected archives and the L'LORRI geometric-header timing issue.
 No surface texture, inferred neck terrain, or new landmark placement was prepared.
+
+The [14 September source check](evidence/registration/source-check.json)
+retrieved the later Bierhaus paper and checked its Selam-specific methods.
+Section 3.1 explicitly measures Selam in the **unprojected** image
+`lor_0752129590_03608` because it has no shape model. The archived
+[`selam_placeholder_v00.tpc`](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/pck/selam_placeholder_v00.tpc)
+also identifies its pole as a placeholder. Its single ellipsoid cannot serve as
+measured registration for our two lobes. The mission-document v2 delta adds a
+Donaldjohanson coordinate-system document; its v1 predecessor was checked too.
+These specific records do not provide the missing Selam controls. This is a
+targeted source check, not an exhaustive claim that no such release can exist.
 
 ## Orbital placement
 

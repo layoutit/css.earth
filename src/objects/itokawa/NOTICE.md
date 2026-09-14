@@ -1,7 +1,7 @@
 # Itokawa notices
 
 AMICA imagery and controlled geometry: JAXA/ISAS, the Hayabusa AMICA team,
-R. Gaskell and colleagues. Seven v-band observations from September–October
+R. Gaskell and colleagues. Ten v-band observations from September–October
 2005 are preserved with their native labels and source pins. Retain the
 mission credits and the PDS/JAXA archive attribution in derived displays.
 

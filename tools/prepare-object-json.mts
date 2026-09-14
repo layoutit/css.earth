@@ -9,7 +9,7 @@ import { createHash } from 'node:crypto';
 import { access, mkdir, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { authoredObject } from './authored-object.mts';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 import { writePreparedText } from './write-prepared-text.mts';
@@ -32,34 +32,43 @@ export function serializeObjectJson(descriptorValue:unknown, definitionValue:unk
 }
 
 export async function writeObjectJson(id:string, definitionValue:unknown, options?:BindingOptions) {
+  const { definition: _definition, ...pin } = await finalizeObjectJson(id, definitionValue, { projectRoot: root, objectDirectory: resolve(root, 'src/objects', id),
+    preparedDirectory: resolve(root, 'src/objects', id, 'prepared'), descriptorPath: resolve(root, 'src/objects', id, 'object.json'), sharedRoot: root }, options);
+  return pin;
+}
+
+/** Finalize into explicit destinations. Source/style reads still use the real project. */
+export async function finalizeObjectJson(id: string, definitionValue: unknown, target: {
+  projectRoot: string; objectDirectory: string; preparedDirectory: string; descriptorPath: string; sharedRoot: string;
+}, options?: BindingOptions) {
   let definition:RecompiledPresentation<CheckedObjectRuntimeDefinition>=requireObjectRuntimeDefinition(definitionValue);
-  if (!OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== 'cssearth-object-runtime@4') {
+  if (!SCENE_OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== 'cssearth-object-runtime@4') {
     throw new TypeError('Prepared object identity does not match the application registry.');
   }
-  const descriptorPath = resolve(root, 'src/objects', id, 'object.json');
-  const originalDescriptor = requireRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));
+  const { projectRoot, objectDirectory, preparedDirectory } = target;
+  const originalDescriptor = requireRecord(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')));
   let descriptor = parseObjectDescriptor(originalDescriptor);
   if (descriptor.schema !== 'cssearth-object@1' || descriptor.id !== id || typeof descriptor.type !== 'string') {
     throw new TypeError('Prepared object descriptor identity is invalid.');
   }
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./objects/dist/prepare-world-navigation.js');
-  const objectDirectory = resolve(root, 'src/objects', id);
   definition = prepareMarkerBindings(definition);
-  const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot: root });
+  const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot });
   definition = requireObjectRuntimeDefinition(preparedNavigation.definition);
-  definition = await preparePresentationBindings(definition, root, options);
-  const scene:unknown = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/scene.json'), 'utf8'));
-  await writeWorldNavigationArtifacts(resolve(objectDirectory, 'prepared'), { ...preparedNavigation, definition }, requireRecord(scene));
+  definition = await preparePresentationBindings(definition, projectRoot, options);
+  const scene:unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'scene.json'), 'utf8'));
+  await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, requireRecord(scene));
   descriptor = parseObjectDescriptor({ ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } });
-  const pin = await pinPreparedObject(id, originalDescriptor, { worldFrame: preparedNavigation.frame }, root);
-  return { id, ...pin };
+  const pin = await pinPreparedObject(id, originalDescriptor, { worldFrame: preparedNavigation.frame }, projectRoot, target);
+  return { id, ...pin, definition };
 }
 
 /** Sync the shared twins and banks, transport the referenced runtime, and pin descriptor and page to it. */
-async function pinPreparedObject(id: string, originalDescriptor: Record<string, unknown>, properties: Record<string, unknown>, root: string) {
-  const objectDirectory = resolve(root, 'src/objects', id), preparedDirectory = resolve(objectDirectory, 'prepared');
+async function pinPreparedObject(id: string, originalDescriptor: Record<string, unknown>, properties: Record<string, unknown>, root: string,
+  target = { preparedDirectory: resolve(root, 'src/objects', id, 'prepared'), descriptorPath: resolve(root, 'src/objects', id, 'object.json'), sharedRoot: root }) {
+  const { preparedDirectory, descriptorPath, sharedRoot } = target;
   await mkdir(preparedDirectory, { recursive: true });
-  await syncPreparedShared(root, preparedDirectory);
+  await syncPreparedShared(sharedRoot, preparedDirectory);
   const definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8')));
   const runtime: unknown = JSON.parse(await readFile(resolve(preparedDirectory, sharedTwinName('runtime.json')), 'utf8'));
   const originalProperties = requireRecord(originalDescriptor.properties);
@@ -71,7 +80,7 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
   await writePreparedText(resolve(preparedDirectory, 'page.json'), page.text);
   // Validation may normalize key order. Retain the authored document's order
   // so an unchanged prepared object does not rewrite its descriptor.
-  await writePreparedText(resolve(objectDirectory, 'object.json'), `${JSON.stringify({ ...originalDescriptor,
+  await writePreparedText(descriptorPath, `${JSON.stringify({ ...originalDescriptor,
     properties: { ...originalProperties, ...properties,
       page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
   return { bytes: Buffer.byteLength(payload), ...prepared };
@@ -99,7 +108,7 @@ export async function updateObjectJsonForPresentation(target:string|URL, present
 
 export async function prepareObjectJson(ids?:readonly string[]|null, options?:BindingOptions) {
   const results = [];
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     if (ids && !ids.includes(object.id)) continue;
     try { await access(resolve(root, 'src/objects', object.id, 'object.json')); }
     catch (error) { if (hasErrorCode(error,'ENOENT') && !ids) continue; throw error; }
@@ -112,7 +121,7 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
   // Contexts consume finalized body frames. Preparing them first can retain a
   // previous radius and make an otherwise valid destination fail at handoff.
   const { prepareSpatialContext } = await import('./objects/dist/prepare-spatial-context.js');
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const directory = resolve(root, 'src/objects', object.id);
     const descriptor = parseObjectDescriptor(await readFile(resolve(directory, 'object.json'), 'utf8'));
     const recipe=descriptor.properties.recipe;

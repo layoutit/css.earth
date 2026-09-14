@@ -6,7 +6,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 import sharp from "sharp";
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { browserObjects } from './browser-objects.mts';
 import { assertHomepageReachability } from "./seo-discovery.mts";
 
@@ -15,7 +15,7 @@ import { assertHomepageReachability } from "./seo-discovery.mts";
 const origin = "https://css.earth";
 const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
 const walk = browserObjects();
-const canonicalUrls = OBJECTS.map(({ route }) => origin + route);
+const canonicalUrls = SCENE_OBJECTS.map(({ route }) => origin + route);
 const report = [];
 const socialImages = new Set<string>();
 let browser;
@@ -35,15 +35,15 @@ try {
     return [...doc.querySelectorAll("url > loc")].map((loc) => loc.textContent);
   }, xml);
   assert.deepEqual(listed, canonicalUrls);
-  assert.equal(new Set(listed).size, OBJECTS.length);
+  assert.equal(new Set(listed).size, SCENE_OBJECTS.length);
   const robots = await fetch(`${base}/robots.txt`);
   assert.equal(robots.status, 200);
   assert.match(required(robots.headers.get("content-type")), /text\/plain/);
   assert.equal(await robots.text(), `User-agent: *\nAllow: /\n\nSitemap: ${origin}/sitemap.xml\n`);
 
   const aliases = [
-    { route: "/", object: required(OBJECTS.find(({ id }) => id === "earth")) },
-    { route: "/earth/?utm_source=seo-check#view", object: required(OBJECTS.find(({ id }) => id === "earth")) },
+    { route: "/", object: required(SCENE_OBJECTS.find(({ id }) => id === "earth")) },
+    { route: "/earth/?utm_source=seo-check#view", object: required(SCENE_OBJECTS.find(({ id }) => id === "earth")) },
   ];
   const discoveryPages = [];
   const descriptions = new Set();
@@ -69,7 +69,7 @@ try {
     report.push({ mode: "no-javascript", route, canonical: seo.canonical, title: seo.title });
   }
   assert.equal(descriptions.size, walk.length, "Each visited object needs its own description");
-  assertHomepageReachability(discoveryPages, OBJECTS.map(({ route }) => route), base + "/");
+  assertHomepageReachability(discoveryPages, SCENE_OBJECTS.map(({ route }) => route), base + "/");
   // Bodies with a committed capture advertise it; the rest fall back to the
   // default capture so no share preview points at a missing file.
   const captured = new Set(walk.filter(object => socialImages.has(`${origin}/social/${object.id}.jpg`)).map(object => object.id));

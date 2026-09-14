@@ -25,7 +25,7 @@ const provenance = (objectId: string): ProvenanceDocument => ({
     capture: { attributions: [{ kind: 'unresolved', label: 'Observatory', reason: 'Individual telescope not identified.', evidence: 'Native image credit.' }] },
   }],
   recipes: [{ id: 'volume', path: 'source/recipe.json', sha256: pin, parameters: { method: 'measured-image-model' } }],
-  products: [{ id: 'volume', label: 'Optical volume', process: 'Reconstruct observed image', recipe: 'volume', selector: '',
+  products: [{ observationAttribution: 'source-lineage', id: 'volume', label: 'Optical volume', process: 'Reconstruct observed image', recipe: 'volume', selector: '',
     recipeDependencies: ['volume'], inputs: ['image'], parents: [], lensIds: ['optical'],
     outputs: [{ url: 'prepared/lenses.json', sha256: pin, bytes: 1, verification: 'retained-pin' }],
   }],
@@ -33,6 +33,22 @@ const provenance = (objectId: string): ProvenanceDocument => ({
 });
 const object = (id: string, route: string, base: string) => ({ id, name: id, route, base,
   controls: [{ id: 'optical', label: 'Optical' }], provenance: provenance(id) });
+
+test('observation attribution is explicit and independent of descriptive processing labels', () => {
+  const volume = object('m42', '/sun/?focus=m42', 'src/objects/m42');
+  const product = volume.provenance.products[0]!;
+  const withProduct = (change: Partial<typeof product>) => [{ ...volume, provenance: { ...volume.provenance, products: [{ ...product, ...change }] } }];
+  assert.equal(compileContributions(withProduct({ interpretation: { kind: 'future-processing-name' } }), catalog).edges.length, 1);
+  assert.equal(compileContributions(withProduct({ observationAttribution: 'none' }), catalog).edges.length, 0);
+  assert.throws(() => compileContributions(withProduct({ observationAttribution: undefined }), catalog), /Undeclared observation attribution/);
+  const doubled = { ...volume, provenance: { ...volume.provenance, products: [product, { ...product, id: 'second-product' }] } };
+  const graph = compileContributions([doubled], catalog);
+  assert.equal(graph.edges.length, 2);
+  assert.equal(graph.datasets.length, 1, 'a selectable view count is not a source or product count');
+  const preview = { ...product, id: 'preview', inputs: [], parents: [product.id] };
+  const excludedParent = { ...volume, provenance: { ...volume.provenance, products: [{ ...product, observationAttribution: 'none' as const }, preview] } };
+  assert.equal(compileContributions([excludedParent], catalog).edges.length, 0, 'a derived preview cannot reintroduce excluded illustration credit');
+});
 
 test('both graph compilers retain body URLs and admit shared-camera focus URLs with explicit source owners', () => {
   const objects = [object('mercury', '/mercury/', 'src/objects/mercury'), object('m42', '/sun/?focus=m42', 'src/objects/m42')];

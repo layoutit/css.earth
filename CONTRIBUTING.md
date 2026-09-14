@@ -18,6 +18,15 @@ body; `pnpm setup:assets` downloads the prepared browser images; `pnpm dev`
 serves the site on port 4210. The [README](README.md#how-to-build) explains
 the variants, including a single body and production builds.
 
+Development startup checks installed volume packages without preparing every
+nebula. A missing or invalid package leaves its catalogue facts accessible and
+marks its 3D view unavailable; other installed objects keep working. The selected
+body and shared world resources still need their prepared assets. See the
+[nebula guide](docs/nebulae/README.md#reproduce-from-a-clean-checkout) for restoration.
+Restart the server after installing a package: its available banks stay fixed for
+the session. Production builds require every configured volume package and
+reject missing files, invalid metadata and mismatched asset hashes.
+
 Re-preparing a body from its sources needs more: `pnpm prepare:checkout`
 restores pinned source downloads, and some conversions call Python 3 with
 `numpy`. You do not need any of that to work on the shell, renderer or docs.
@@ -40,6 +49,13 @@ issue from the archive-product template instead of writing a reader for one body
 **Standing limit: GitHub Actions does not run on this repository.** Jobs complete
 as a failure with no steps recorded, so no branch has CI evidence and every check
 must be run locally. Cite this section in a PR instead of explaining it again.
+
+Browser checks also require the exact prepared rendering assets. Sources and
+catalogue preparation restore metadata, not those assets. Successfully opening
+an unavailable Helix view does not qualify Helix's rendering or interaction.
+Record the missing bank and any 404s, and restore the pinned assets before
+claiming that object's interaction check. The installed-bank tamper test likewise
+requires its referenced bank to be present.
 
 ## Where things live
 

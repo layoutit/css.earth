@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "99e70ba8c3b691a41777d61189d160fbcec21667b2e945f066aff4286a9bc59c"
+    "sha256": "1bac46aef646bc3d34e1e06512d9192fa7c1c578be4b8441c800d505efb584e5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e39c0dc2c81dc3a57e7a9aafcf5db2d4a3f5bde3f615d80a86b35a0fe171a8de",
+      "sha256": "e704323cd2d5e906d83ca5e56381eaadcd64038cfe6ea4f49821d9821d3cfc15",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,7 +173,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Thermal diameter 4.839 ± 0.167 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. Slow spin and short-wave thermal data leave scale sensitive to viewing aspect; rotational phase is illustrative.",
-              "title": "Light-curve shape model",
               "thumbnail": "/scenes/raup/raup-shape-thumbnail.webp",
               "surface": "raup-shape-surface@2x.webp",
               "poles": "raup-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Thermal diameter 4.839 ± 0.167 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. Slow spin and short-wave thermal data leave scale sensitive to viewing aspect; rotational phase is illustrative.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 2.4195 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/raup/raup-elevation-thumbnail.webp",
               "surface": "raup-elevation-surface@2x.webp",
               "poles": "raup-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835",
                 "image": "/scenes/raup/raup-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 2.4195 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -370,10 +366,10 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "e39c0dc2c81dc3a57e7a9aafcf5db2d4a3f5bde3f615d80a86b35a0fe171a8de",
+      "sha256": "e704323cd2d5e906d83ca5e56381eaadcd64038cfe6ea4f49821d9821d3cfc15",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -382,7 +378,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8209,
+      "bytes": 7862,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -395,11 +391,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 2.4195 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -432,6 +427,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "raup-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -439,11 +441,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Thermal diameter 4.839 ± 0.167 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. Slow spin and short-wave thermal data leave scale sensitive to viewing aspect; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -470,6 +471,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "raup-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -477,8 +485,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -490,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5325,
-          "sha256": "4a6b92aa16743c573db107c9ab362958e6ee2599ab31480acd235b8fd5b8cc2e",
+          "bytes": 5177,
+          "sha256": "3c1f8bcca17b6dc835c455d4ead5c746e1867195a2225d8f074f563366308af4",
           "verification": "bytes-verified"
         }
       ],
@@ -505,6 +514,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -529,6 +539,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

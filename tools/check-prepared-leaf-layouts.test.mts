@@ -3,7 +3,7 @@ import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { createHash } from 'node:crypto';
 import { resolve } from "node:path";
-import { OBJECTS } from "../site/objects.mts";
+import { SCENE_OBJECTS } from "../site/objects.mts";
 import { censusPreparedLeafLayouts, preparedStyleRecord } from "./check-prepared-leaf-layouts.mts";
 import { readPreparedPresentationModule } from "./check-prepared-presentation.mts";
 import { preparedObjectOverlay } from './test-prepared-object-overlay.mts';
@@ -30,7 +30,7 @@ const requirePreparedPlan = (value: unknown, label: string): PreparedPlan => {
   });
   return { ...plan, tree: { ...tree, nodes, properties } };
 };
-const requireObject = <T,>(value: T | undefined, label: string): T => {
+const requireSceneObject = <T,>(value: T | undefined, label: string): T => {
   if (value === undefined) throw new TypeError(`${label} is missing.`);
   return value;
 };
@@ -46,26 +46,26 @@ async function changedObject(id: string, mutate: (plan: PreparedPlan) => unknown
     }
     return result;
   });
-  const result = await censusPreparedLeafLayouts({ objects: OBJECTS.filter(object => object.id === id),
+  const result = await censusPreparedLeafLayouts({ objects: SCENE_OBJECTS.filter(object => object.id === id),
     readText });
   return { result, changed };
 }
 const firstTexture = (plan: PreparedPlan): number => plan.tree.nodes.findIndex(node => node.attributes["data-prepared-projection"] === "single-leaf");
-const omitProperties = (plan: PreparedPlan, node: PreparedNode, names: readonly string[]): void => { node.properties = node.properties.filter(id => !names.includes(requireObject(plan.tree.properties[id], `property ${id}`).name)); };
+const omitProperties = (plan: PreparedPlan, node: PreparedNode, names: readonly string[]): void => { node.properties = node.properties.filter(id => !names.includes(requireSceneObject(plan.tree.properties[id], `property ${id}`).name)); };
 
 test("all existing objects supply complete reachable prepared texture layouts", async () => {
   const result = await censusPreparedLeafLayouts();
   assert.equal(result.complete, true, JSON.stringify(result.objects.flatMap(object => object.failures)));
   assert.equal(result.evidence, "validated-source-data");
-  assert.deepEqual(result.objects.map(object => object.id), OBJECTS.map(object => object.id));
+  assert.deepEqual(result.objects.map(object => object.id), SCENE_OBJECTS.map(object => object.id));
   assert.ok(result.objects.every(object => object.count > 0 && object.failures.length === 0 && object.sourceSha256 !== null && /^[a-f0-9]{64}$/.test(object.sourceSha256)));
-  assert.equal(requireObject(result.objects.find(object => object.id === "saturn"), "Saturn census").completedByDescriptor, 162);
+  assert.equal(requireSceneObject(result.objects.find(object => object.id === "saturn"), "Saturn census").completedByDescriptor, 162);
 });
 test("projective leaves accept only their prepared seam outset after the matrix", async () => {
   const { result } = await changedObject("venus", plan => {
-    const node = requireObject(plan.tree.nodes[firstTexture(plan)], "Venus surface leaf");
+    const node = requireSceneObject(plan.tree.nodes[firstTexture(plan)], "Venus surface leaf");
     const id = node.properties.find(id => plan.tree.properties[id]?.name === "transform");
-    const property = requireObject(id === undefined ? undefined : plan.tree.properties[id], "Venus leaf transform");
+    const property = requireSceneObject(id === undefined ? undefined : plan.tree.properties[id], "Venus leaf transform");
     assert.match(property.value, / translate\(50%, 50%\) scale\(calc\(1 \+ var\(--surface-seam-outset, 0\)/u);
     property.value = property.value.replace(/ translate\(50%, 50%\).*$/u, " scale(1.02)");
   });
@@ -82,7 +82,7 @@ test("native raster triangle audit rejects missing dimensions, addresses, flatte
     }); }, /affine transform/],
   ];
   for (const [mutate, error] of mutations) {
-    const { result } = await changedObject('phoebe', plan => mutate(requireObject(plan.tree.nodes.find(node => node.tag === 'u'), 'raster texture')));
+    const { result } = await changedObject('phoebe', plan => mutate(requireSceneObject(plan.tree.nodes.find(node => node.tag === 'u'), 'raster texture')));
     assert.equal(result.complete, false);
     assert.ok(result.objects[0].failures.some(failure => error.test(failure.error ?? "")), JSON.stringify(result.objects[0].failures));
   }
@@ -109,7 +109,7 @@ test("normalized leaf audit rejects missing atlas extent, missing texture addres
   const properties: readonly [string, RegExp][] = [["--polycss-atlas-width", /explicit positive width/], ["backgroundSize", /explicit backgroundSize/], ["transformStyle", /flattening/]];
   for (const [property, error] of properties) {
     const { result } = await changedObject("moon", plan => {
-      const texture = requireObject(plan.tree.nodes[firstTexture(plan)], 'prepared texture'), parent = texture;
+      const texture = requireSceneObject(plan.tree.nodes[firstTexture(plan)], 'prepared texture'), parent = texture;
       const node = property === "backgroundSize" ? texture : parent;
       const css = property === "backgroundSize" ? "background-size" : property === "transformStyle" ? "transform-style" : property;
       node.style = node.style.split(";").filter(declaration => !declaration.trim().startsWith(`${css}:`)).join(";");
@@ -122,7 +122,7 @@ test("normalized leaf audit rejects missing atlas extent, missing texture addres
 test("normalized leaf audit rejects empty projective coverage and undeclared dictionary references", async () => {
   for (const mutate of [
     (plan: PreparedPlan) => { for (const node of plan.tree.nodes) if (node.attributes["data-prepared-projection"] === "single-leaf") delete node.attributes["data-prepared-projection"]; },
-    (plan: PreparedPlan) => { requireObject(plan.tree.nodes[firstTexture(plan)], 'prepared texture').properties.push(plan.tree.properties.length); },
+    (plan: PreparedPlan) => { requireSceneObject(plan.tree.nodes[firstTexture(plan)], 'prepared texture').properties.push(plan.tree.properties.length); },
     (plan: PreparedPlan) => { plan.tree.nodes.push({ parent: firstTexture(plan), tag: 'span', style: '', properties: [], attributes: {} }); },
   ]) {
     const { result } = await changedObject("moon", mutate);
@@ -143,7 +143,7 @@ test("retained property references preserve last-write order instead of checking
 });
 
 test('descriptor objects audit the transported JSON tree, including a source-matched invalid layout', async () => {
-  const object = requireObject(OBJECTS.find(object => object.id === 'mercury'), 'Mercury object');
+  const object = requireSceneObject(SCENE_OBJECTS.find(object => object.id === 'mercury'), 'Mercury object');
   const descriptorPath = resolve('src/objects/mercury/object.json');
   const sourcePath = resolve('src/objects/mercury/prepared/runtime.json');
   const payloadPath = resolve('src/objects/mercury/prepared/object.json');
@@ -153,7 +153,7 @@ test('descriptor objects audit the transported JSON tree, including a source-mat
   const first = await censusPreparedLeafLayouts({ objects: [object] });
   assert.equal(first.complete, true);
   assert.deepEqual(first.objects[0].modules, ['src/objects/mercury/prepared/object.json']);
-  const parent = requireObject(plan.tree.nodes[firstTexture(plan)], 'Mercury texture');
+  const parent = requireSceneObject(plan.tree.nodes[firstTexture(plan)], 'Mercury texture');
   parent.properties.push(plan.tree.properties.length);
   plan.tree.properties.push({ name: 'width', value: 'auto', custom: false });
   requireRecord(payload.data, 'Mercury payload.data').tree = plan.tree;

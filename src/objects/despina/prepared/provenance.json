@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "265e76728d030880357ab013323dea041275758c6e5895c263fe3073dcc33808"
+    "sha256": "bb4d526e2e4fb13f841f618bdecfd3482d65a2ed0d419f3946b173c9c2bdb608"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1cc04de92923d2d05d5844d2f62d01affc90f29501fbd2be282fc8b2d1b63431",
+      "sha256": "cccdd5cf405a75f9c3708dafd69756684c091094760a2bf7dd65e628e83c5f6b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "despina",
         "displayName": "Despina",
         "panel": {
-          "introduction": "Despina is a small, irregular moon inside Neptune’s faint ring system. Voyager images constrain its overall shape, but do not provide reliable surface mapping at this scale.",
           "facts": [
             {
               "id": "radius",
@@ -161,9 +160,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes of 90 × 74 × 64 km. The images constrain the outline rather than a reliable map of craters or terrain. The standard gray grid marks unavailable surface coverage; shared lighting describes the model shape. The 74 km radius sets the scene scale and is not a replacement for the three measured axes.",
-              "title": "Approximate shape model",
-              "detail": "Measured axes",
               "thumbnail": "/scenes/despina/despina-model-thumbnail.webp",
               "surface": "despina-model-surface@2x.webp",
               "poles": "despina-model-poles@2x.webp",
@@ -172,7 +168,8 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.1016/S0019-1035(03)00002-2"
               },
-              "summary": "Shape estimated from Voyager images. Its outline is measured, but local terrain is unresolved; gray grid: no imagery."
+              "notes": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes of 90 × 74 × 64 km. The images constrain the outline rather than a reliable map of craters or terrain. The standard gray grid marks unavailable surface coverage; shared lighting describes the model shape. The 74 km radius sets the scene scale and is not a replacement for the three measured axes.",
+              "noData": true
             }
           ]
         },
@@ -316,7 +313,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -325,8 +322,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1cc04de92923d2d05d5844d2f62d01affc90f29501fbd2be282fc8b2d1b63431",
-      "bytes": 3712,
+      "sha256": "cccdd5cf405a75f9c3708dafd69756684c091094760a2bf7dd65e628e83c5f6b",
+      "bytes": 3312,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -339,11 +336,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes of 90 × 74 × 64 km. The images constrain the outline rather than a reliable map of craters or terrain. The standard gray grid marks unavailable surface coverage; shared lighting describes the model shape. The 74 km radius sets the scene scale and is not a replacement for the three measured axes."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -375,6 +371,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "measured-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -382,8 +390,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -395,8 +404,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6243,
-          "sha256": "697c63fdf48c3cb0a7ed885db532d637eb81a1be3c439826e3cd1d815019c1f2",
+          "bytes": 6050,
+          "sha256": "2f05037e854c56200f6cc829ee679ac5892f156196b66394604f472684dcade4",
           "verification": "bytes-verified"
         }
       ],
@@ -410,6 +419,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

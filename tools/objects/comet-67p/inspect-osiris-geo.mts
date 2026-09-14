@@ -82,7 +82,7 @@ async function main() {
   const metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
   const eye = camera.positionKm.map(n => n * 1000);
   const footprint = { image: { width: frame.width, height: frame.height, values: frame.planes.IMAGE, reject: () => null, startTime: frame.startTime, filter: frame.filter, report: {} },
-    camera: { project: (point: readonly number[]) => project(camera.matrix, point.map(n => n / 1000)) }, geometry: archiveBackplanes(frame, { positionMeters: eye }), photometry: { gain: () => 1 } };
+    camera: { project: (point: readonly number[]) => project(camera.matrix, point.map(n => n / 1000)) }, geometry: archiveBackplanes(frame, { positionMeters: eye }), photometry: { gain: () => 1, retainsIllumination: true } };
   const rgb = Buffer.alloc(radial.width * radial.height * 3), coverage = Buffer.alloc(rgb.length);
   const counts:Record<string,number> = {}, distances:number[] = [], separations:number[] = [];
   let interiorTexels = 0;

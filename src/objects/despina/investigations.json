@@ -1,0 +1,93 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "despina",
+  "entries": [
+    {
+      "id": "published-shape-model",
+      "subject": "Karkoschka 2003 Neptune inner-moon dimensions",
+      "status": "included",
+      "finding": "Karkoschka (2003) 90 × 74 × 64 km Voyager-fitted semiaxes are included as the Shape model; the 74 km PCK/Horizons radius is only scene scale.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/despina/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/despina/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-voyager-iss-calibrated-geomed-archive-opus-despi",
+      "subject": "PDS Voyager ISS calibrated GEOMED archive, OPUS Despina surface-geometry search",
+      "status": "excluded",
+      "finding": "Inspected the best geometry-ranked frames C1135325, C1135319, C1135255, C1134547 and C1134350. Finest listed original image scale is about 17.15 km/pixel, a disc only about 8–12 pixels across after GEOMED resampling. Points, blur, optical response and illumination dominate; not used as mapped terrain. The search is pinned in survey/opus-candidates.json.",
+      "revisitWhen": "A Despina observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/despina/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/despina/source/manifest.json",
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "karkoschka-2003-additional-despina-images-c1129447-c",
+      "subject": "Karkoschka (2003) additional Despina images C1129447, C1130353 and C1135301",
+      "status": "deferred",
+      "finding": "Downloaded and inspected original GEOMED image bytes and labels. First two are long-trail images against strong Neptune glare; C1135301 offers only a tiny disc. Useful shape evidence in the published analysis, but not a qualified registered texture. The inspected calibration labels are retained; the original product locations are retained in the pinned source account.",
+      "revisitWhen": "A Despina observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/despina/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/despina/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-stooke-shape-collection-and-usgs-mapping",
+      "subject": "PDS Stooke shape collection and USGS mapping",
+      "status": "deferred",
+      "finding": "No Despina terrain mesh, registered mosaic or elevation product was identified in these releases. An ellipsoid is not an Elevation dataset.",
+      "revisitWhen": "The inspected shape archive or a cited primary release publishes a Despina-specific numerical model with its frame, units and reconstruction method.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/despina/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/despina/source/manifest.json",
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "keck-near-infrared-photometry-hubble-and-jwst-nircam",
+      "subject": "Keck near-infrared photometry, Hubble and JWST NIRCam spectral study",
+      "status": "excluded",
+      "finding": "Disk-integrated measurements are relevant to surface composition and brightness, but are not spatial texture maps. No fabricated color/composition lens is added. The source survey does not claim these observations do not exist.",
+      "revisitWhen": "A spatially resolved Despina measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/despina/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/despina/source/manifest.json",
+        "https://www.sciencedirect.com/science/article/am/pii/S0019103524000629"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

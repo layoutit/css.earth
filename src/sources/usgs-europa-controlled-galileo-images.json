@@ -1,0 +1,23 @@
+{
+  "id": "usgs-europa-controlled-galileo-images",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Photogrammetrically Controlled Galileo Individual Observation",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/",
+      "label": "USGS image release"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/",
+      "checkedOn": "2026-09-14",
+      "locator": "Processing; Accuracy, Errors, and Issues; General Usability"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

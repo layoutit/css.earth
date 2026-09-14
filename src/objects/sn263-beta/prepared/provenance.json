@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a50012cb9ccaa96f5426a56510b138795254f470fcb8a22e3efab83221dbaff5"
+    "sha256": "061c86e4bb9d25e9aa65fc137a813dfe7a88c528ce662e6674976431e6de5cee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -100,14 +100,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "44b6e07c7589c7d3404b5f40d4e09a12802a8f518ee987d0fc7fdec8b26098cf",
+      "sha256": "c0e64b6984e24cd0fdb2ca0b94bb2c3bf9f35ef47590098a63de7ef81a2490a0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "sn263-beta",
         "displayName": "2001 SN263 Beta",
         "panel": {
-          "introduction": "2001 SN263 Beta is the larger, outer moon of the triple asteroid system 2001 SN263. Published radar shape of the larger, outer moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative. Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured.",
           "facts": [
             {
               "id": "parent",
@@ -163,9 +162,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "detail": "Radar",
-              "title": "Radar shape",
-              "description": "Published radar shape of the larger, outer moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative.",
               "thumbnail": "/scenes/sn263-beta/sn263-beta-shape-thumbnail.webp",
               "surface": "sn263-beta-shape-surface@2x.webp",
               "poles": "sn263-beta-shape-poles@2x.webp",
@@ -173,7 +169,8 @@
                 "id": "radar-shape",
                 "path": "../manifest.json",
                 "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591beta.tab"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -296,7 +293,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -305,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "44b6e07c7589c7d3404b5f40d4e09a12802a8f518ee987d0fc7fdec8b26098cf",
-      "bytes": 4354,
+      "sha256": "c0e64b6984e24cd0fdb2ca0b94bb2c3bf9f35ef47590098a63de7ef81a2490a0",
+      "bytes": 3475,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -319,11 +316,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Published radar shape of the larger, outer moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -350,6 +346,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "radar-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -357,8 +360,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -370,8 +374,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 11415,
-          "sha256": "ed5d7c0309226b05ed71052b653dbb7a5284f7e82d35a7494a374ac2b4abf026",
+          "bytes": 10882,
+          "sha256": "a68b279e2a1190510e5c4abb56be4288193b82dd0a993e6a6016c662e78d1e80",
           "verification": "bytes-verified"
         }
       ],
@@ -385,6 +389,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"

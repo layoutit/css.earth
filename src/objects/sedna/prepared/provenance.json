@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "27b470086af3162145ea85708cef76958d646f7a30d7939c1c19718dce9d2941"
+    "sha256": "a9cfc667855bd3ca75408cd22c313b69d21fccd939c7140fcc54b5dd408846d0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c6d44c127f063e2f1ebf64794fdb7b9b5aee2b7751bd369e6d9e526c253b1524",
+      "sha256": "75d3723fb99d29f1986d277ddd8cdda81099263518cb8daa2c02b8af6e2a3128",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "sedna",
         "displayName": "Sedna",
         "panel": {
-          "introduction": "Sedna follows an exceptionally distant, elongated orbit beyond the planetary region. This grid-covered illustration conveys its thermal size estimate; its actual shape and surface terrain remain unresolved.",
           "facts": [
             {
               "id": "shape",
@@ -158,9 +157,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Size-constrained spherical illustration at the 995 ±80 km thermal diameter. Herschel constrains effective size, not three axes; no resolved global shape or topography is represented. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain.",
-              "title": "Published size model; shape unresolved",
-              "detail": "Inferred shape · unmapped surface grid",
               "thumbnail": "/scenes/sedna/sedna-model-thumbnail.webp",
               "surface": "sedna-model-surface@2x.webp",
               "poles": "sedna-model-poles@2x.webp",
@@ -168,7 +164,9 @@
                 "id": "published-shape",
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/1204.0899"
-              }
+              },
+              "notes": "Size-constrained spherical illustration at the 995 ±80 km thermal diameter. Herschel constrains effective size, not three axes; no resolved global shape or topography is represented. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -318,7 +316,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -327,8 +325,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c6d44c127f063e2f1ebf64794fdb7b9b5aee2b7751bd369e6d9e526c253b1524",
-      "bytes": 4112,
+      "sha256": "75d3723fb99d29f1986d277ddd8cdda81099263518cb8daa2c02b8af6e2a3128",
+      "bytes": 3780,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -341,11 +339,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Size-constrained spherical illustration at the 995 ±80 km thermal diameter. Herschel constrains effective size, not three axes; no resolved global shape or topography is represented. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -377,6 +374,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "published-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -384,8 +393,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -397,8 +407,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6282,
-          "sha256": "526bdd33f6b157e5ecff69f77bd4c8a3e7caaed84a34c747fac9ca8d32d75332",
+          "bytes": 6058,
+          "sha256": "532b7978a8ab24648a00d0aff7871ac0e5b1003cbe77a682973505a9721a9516",
           "verification": "bytes-verified"
         }
       ],
@@ -412,6 +422,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

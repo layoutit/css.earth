@@ -1,3 +1,4 @@
+import { readFitsHdu, assertUnscaledFitsTable } from '../../fits.mts';
 import type {SourceMesh} from './contracts.mts';
 import {parseFacetLens,parseFacetProfile,parseFacetSampler,parseTransferTerrain,parseFacetTable,parseFacetFitsTable,parseSurfaceLens,text} from './source-records.mts';
 import {readFile} from 'node:fs/promises';
@@ -107,19 +108,9 @@ export function parseFacetCsv(text: string, value: unknown, mesh: SourceMesh) {
 }
 
 function fitsHeader(bytes: Buffer, start: number) {
-  const keys: Record<string,string> = {}; let offset = start, ended = false;
-  while (offset + 80 <= bytes.length) {
-    const card = bytes.toString('ascii', offset, offset + 80); offset += 80;
-    const key = card.slice(0, 8).trim();
-    if (key === 'END') { ended = true; break; }
-    if (card.slice(8, 10) !== '= ') continue;
-    const raw = card.slice(10).trim();
-    const value = raw.startsWith("'") ? /^'((?:[^']|'')*)'/.exec(raw)?.[1]?.replaceAll("''", "'").trim() : raw.split('/')[0].trim();
-    if (value === undefined || keys[key] !== undefined) throw new Error('Malformed or duplicate FITS keyword: ' + key);
-    keys[key] = value;
-  }
-  if (!ended) throw new Error('Missing FITS END card.');
-  return {keys, offset: start + Math.ceil((offset - start) / 2880) * 2880};
+  const hdu = readFitsHdu(bytes, start);
+  assertUnscaledFitsTable(hdu.header);
+  return { keys: Object.fromEntries(Object.entries(hdu.header).filter(([, v]) => v !== undefined).map(([k, v]) => [k, typeof v === 'boolean' ? v ? 'T' : 'F' : String(v)])), offset: hdu.dataOffset };
 }
 
 /** The selected PDS products have an empty primary HDU and one 1J+5E table.

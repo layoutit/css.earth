@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "33f4c16259791a0448fc04896be68c0e5cffdfefecf358b4ccdfcb97b8ea27c8"
+    "sha256": "b1ca7c08cbb1a1588aadd67b123ea8e737095c89d4511564ad4533124fe8587a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -438,14 +438,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dd4648f2620ae6941c904af3938ba21677c41795fd7ebd7dda67c11784a248a3",
+      "sha256": "270b0ca82d464104ec27381735fd90fd8435a4a55e7ce93de65f5ab52bfd283a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "phoebe",
         "displayName": "Phoebe",
         "panel": {
-          "introduction": "Phoebe is a dark, cratered moon on a distant, retrograde orbit around Saturn. Cassini’s 2004 flyby revealed an irregular, ice-bearing surface. It may be a captured object from the outer solar system.",
           "facts": [
             {
               "id": "radius",
@@ -525,9 +524,6 @@
             {
               "id": "normal",
               "label": "Relative albedo",
-              "description": "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
-              "title": "SPC relative brightness model",
-              "detail": "Modeled relative brightness",
               "thumbnail": "/scenes/phoebe/phoebe-normal-thumbnail.webp",
               "surface": "phoebe-normal-surface@2x.webp",
               "poles": "phoebe-normal-poles@2x.webp",
@@ -550,14 +546,11 @@
                 "sourceUrl": "https://doi.org/10.26033/3k3c-5713",
                 "image": "/scenes/phoebe/phoebe-normal-legend.webp"
               },
-              "summary": "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
+              "notes": "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
             },
             {
               "id": "elevation",
               "label": "Radial height",
-              "description": "Q512 model radius minus a 106.5 km sphere, in km; not a geoid or independent altimetry. The paired 2023 model is less certain in poorly imaged regions; unsupported cells are marked. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
-              "title": "Q512 radial height model",
-              "detail": "Modeled radial height",
               "thumbnail": "/scenes/phoebe/phoebe-elevation-thumbnail.webp",
               "surface": "phoebe-elevation-surface@2x.webp",
               "poles": "phoebe-elevation-poles@2x.webp",
@@ -580,14 +573,11 @@
                 "sourceUrl": "https://doi.org/10.26033/3k3c-5713",
                 "image": "/scenes/phoebe/phoebe-elevation-legend.webp"
               },
-              "summary": "Q512 model radius minus a 106.5 km sphere, in km; not a geoid or independent altimetry. The paired 2023 model is less certain in poorly imaged regions; unsupported cells are marked. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
+              "notes": "Q512 model radius minus a 106.5 km sphere, in km; not a geoid or independent altimetry. The paired 2023 model is less certain in poorly imaged regions; unsupported cells are marked. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
             },
             {
               "id": "maplet-resolution",
               "label": "Maplet resolution",
-              "description": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
-              "title": "SPC maplet resolution",
-              "detail": "Best source maplet",
               "thumbnail": "/scenes/phoebe/phoebe-maplet-resolution-thumbnail.webp",
               "surface": "phoebe-maplet-resolution-surface@2x.webp",
               "poles": "phoebe-maplet-resolution-poles@2x.webp",
@@ -609,14 +599,11 @@
                 "sourceUrl": "https://doi.org/10.26033/3k3c-5713",
                 "image": "/scenes/phoebe/phoebe-maplet-resolution-legend.webp"
               },
-              "summary": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing."
+              "notes": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing."
             },
             {
               "id": "image-count",
               "label": "Image count",
-              "description": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
-              "title": "SPC image coverage",
-              "detail": "Source coverage",
               "thumbnail": "/scenes/phoebe/phoebe-image-count-thumbnail.webp",
               "surface": "phoebe-image-count-surface@2x.webp",
               "poles": "phoebe-image-count-poles@2x.webp",
@@ -638,14 +625,11 @@
                 "sourceUrl": "https://doi.org/10.26033/3k3c-5713",
                 "image": "/scenes/phoebe/phoebe-image-count-legend.webp"
               },
-              "summary": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy."
+              "notes": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy."
             },
             {
               "id": "infrared",
               "label": "Infrared",
-              "description": "A small region from Cassini’s 11 June 2004 flyby, supported by 41 original VIMS pixels. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.03 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps. Placement is coarse on the existing shape, with several-kilometer spatial uncertainty. Fine surface positions are not established.",
-              "summary": "False-color 2.02/1.59/1.28 µm infrared from a small 2004 flyby region. Gray grid marks gaps. Values retain illumination and archive filtering; placement has several-kilometer uncertainty.",
-              "title": "Cassini VIMS regional spectra · 11 June 2004",
               "thumbnail": "/scenes/phoebe/phoebe-infrared-thumbnail.webp",
               "surface": "phoebe-infrared-surface@2x.webp",
               "poles": "phoebe-infrared-poles@2x.webp",
@@ -654,15 +638,13 @@
                 "path": "../manifest.json",
                 "url": "https://vims.univ-nantes.fr/cube/1465671822_1"
               },
-              "detail": "Regional VIMS",
-              "falseColor": true
+              "falseColor": true,
+              "notes": "A small region from Cassini’s 11 June 2004 flyby, supported by 41 original VIMS pixels. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.03 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps. Placement is coarse on the existing shape, with several-kilometer spatial uncertainty. Fine surface positions are not established.",
+              "noData": true
             },
             {
               "id": "ice-absorption",
               "label": "Ice absorption",
-              "description": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using 41 original VIMS pixels from one small region in Cassini’s 11 June 2004 flyby. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.1–0.3; original numerical values are retained. Gray grid marks unsupported areas and scan gaps. The region is placed coarsely on the existing shape, with several-kilometer spatial uncertainty.",
-              "summary": "Near-2.02 µm ice absorption in a small, coarsely placed region. Gray grid marks gaps. Uncorrected values depend on viewing angle, grain size, noise and archive filtering; they do not measure ice abundance.",
-              "title": "Cassini VIMS regional water-ice absorption · 11 June 2004",
               "thumbnail": "/scenes/phoebe/phoebe-ice-absorption-thumbnail.webp",
               "surface": "phoebe-ice-absorption-surface@2x.webp",
               "poles": "phoebe-ice-absorption-poles@2x.webp",
@@ -671,7 +653,6 @@
                 "path": "../manifest.json",
                 "url": "https://vims.univ-nantes.fr/cube/1465671822_1"
               },
-              "detail": "Regional VIMS",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -686,7 +667,9 @@
                 "meta": "band-depth fraction",
                 "sourceUrl": "https://vims.univ-nantes.fr/cube/1465671822_1",
                 "image": "/scenes/phoebe/phoebe-ice-absorption-legend.webp"
-              }
+              },
+              "notes": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using 41 original VIMS pixels from one small region in Cassini’s 11 June 2004 flyby. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.1–0.3; original numerical values are retained. Gray grid marks unsupported areas and scan gaps. The region is placed coarsely on the existing shape, with several-kilometer spatial uncertainty.",
+              "noData": true
             }
           ]
         },
@@ -1230,7 +1213,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1239,8 +1222,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dd4648f2620ae6941c904af3938ba21677c41795fd7ebd7dda67c11784a248a3",
-      "bytes": 13496,
+      "sha256": "270b0ca82d464104ec27381735fd90fd8435a4a55e7ce93de65f5ab52bfd283a",
+      "bytes": 11228,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1353,11 +1336,10 @@
       "label": "Infrared",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "A small region from Cassini’s 11 June 2004 flyby, supported by 41 original VIMS pixels. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.03 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps. Placement is coarse on the existing shape, with several-kilometer spatial uncertainty. Fine surface positions are not established."
-      ],
+      "limitations": [],
       "lensIds": [
         "infrared"
       ],
@@ -1406,6 +1388,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-cassini-infrared",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1413,11 +1407,10 @@
       "label": "Relative albedo",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1454,6 +1447,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1461,11 +1461,10 @@
       "label": "Radial height",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Q512 model radius minus a 106.5 km sphere, in km; not a geoid or independent altimetry. The paired 2023 model is less certain in poorly imaged regions; unsupported cells are marked. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1502,6 +1501,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1509,11 +1515,10 @@
       "label": "Maplet resolution",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing."
-      ],
+      "limitations": [],
       "lensIds": [
         "maplet-resolution"
       ],
@@ -1550,6 +1555,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1557,11 +1569,10 @@
       "label": "Image count",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/3",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy."
-      ],
+      "limitations": [],
       "lensIds": [
         "image-count"
       ],
@@ -1598,6 +1609,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1605,11 +1623,10 @@
       "label": "Ice absorption",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/4",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using 41 original VIMS pixels from one small region in Cassini’s 11 June 2004 flyby. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.1–0.3; original numerical values are retained. Gray grid marks unsupported areas and scan gaps. The region is placed coarsely on the existing shape, with several-kilometer spatial uncertainty."
-      ],
+      "limitations": [],
       "lensIds": [
         "ice-absorption"
       ],
@@ -1644,6 +1661,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1651,8 +1675,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1664,8 +1689,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6784,
-          "sha256": "8db594a2de7e28addee9fbb433690b1c0ca06bb81c3b38333dc1415327fdc018",
+          "bytes": 6565,
+          "sha256": "c18956c2d014b971d7002eff36dcda72f0491d05402a58826d27ab12974093a0",
           "verification": "bytes-verified"
         }
       ],
@@ -1676,6 +1701,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -1714,6 +1740,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "infrared"
@@ -1738,6 +1765,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -1762,6 +1790,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"
@@ -1786,6 +1815,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "maplet-resolution"
@@ -1810,6 +1840,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "image-count"
@@ -1834,6 +1865,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "ice-absorption"

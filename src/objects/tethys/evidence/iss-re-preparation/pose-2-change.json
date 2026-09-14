@@ -1,0 +1,35 @@
+{
+  "tool": "pixelmatch",
+  "version": "7.2.0",
+  "settings": {
+    "threshold": 0.1,
+    "includeAA": true,
+    "alpha": 0.2,
+    "diffColor": [
+      255,
+      0,
+      0
+    ]
+  },
+  "reference": {
+    "path": "pose-2-previous.webp",
+    "bytes": 498310,
+    "sha256": "b054848a98b2859bd08bd18c028d5e01c78aa942b45037f66d28267d318ccd31"
+  },
+  "result": {
+    "path": "pose-2-re-prepared.webp",
+    "bytes": 486960,
+    "sha256": "022918cd7ba2a0e36dfdcc4e67fa8ea6af5e2464757b88dfedcceb2c31a3faec"
+  },
+  "diff": {
+    "path": "pose-2-change-diff.png",
+    "bytes": 419826,
+    "sha256": "9e6bfac7573a0ab4330153f42948c773cc3e59b9351603ff5ed553f76fb0894a"
+  },
+  "width": 1480,
+  "height": 1560,
+  "comparedPixels": 2308800,
+  "mismatchedPixels": 215631,
+  "mismatchPercent": 9.339527027027026,
+  "exclusions": "None; every supplied pixel is compared, including anti-aliasing."
+}

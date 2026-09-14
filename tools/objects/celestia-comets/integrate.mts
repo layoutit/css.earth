@@ -14,7 +14,7 @@ for (const candidate of intake) {
   const descriptor = await read(`${directory}/object.json`);
   requireRecord(descriptor.properties).catalog ??= {
     name: requireString(content.displayName), classification: 'comet', color: '#b8b6b2', distanceAu: candidate.distanceAu,
-    systemName: 'Solar System', description: `${candidate.designation}: ${requireString(requireRecord(content.panel).introduction)} Illustrative nucleus at Celestia’s catalog scale.`, context: {},
+    systemName: 'Solar System', description: requireString(requireRecord(requireRecord(await read(`${directory}/text.json`)).card).text), context: {},
   };
   await writeFile(`${directory}/object.json`, JSON.stringify(descriptor, null, 2) + '\n');
   if (!records.has(candidate.id)) await writeBodyRecord({

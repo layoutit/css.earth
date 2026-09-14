@@ -6,4 +6,6 @@ Lucy L’LORRI photographs: NASA/GSFC/SwRI/JHUAPL and the Lucy team, from the PD
 
 The source export retains every original kilometer coordinate and plate. The grid is the project’s explicit missing-imagery treatment. ESO panorama and Inter font retain their checked source licenses.
 
+Elevation derives radius minus a reference sphere from the same released DLR/Lucy shape, including its authors’ reconstruction of unseen terrain. Cartographic relief uses the model’s surface normals. It does not add measured terrain, gravitational height or photographic coverage.
+
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

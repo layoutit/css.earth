@@ -12,6 +12,7 @@ import { validatePreparedCssVolume } from '../../../../../src/renderers/css/volu
 import { recolorCloudSlices } from '../cloud-material.js';
 import { bakeMasterVolumeSlices } from '../master-slices.js';
 import { compilerSlabMaterial } from './material.js';
+import { prepareCompilerStarSprites } from './star-sprites.js';
 import { COMPILER_LONGEST_AXIS_SLICES, readCompilerBakeResult, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial } from './bake-types.js';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from './field-types.js';
 
@@ -21,8 +22,8 @@ export interface CompilerBakeProgress { phase: 'volume' | 'texture' | 'compile';
 export interface CompilerStarInput { id: string; positionArcsec: EmissionVector3; rgb: [number, number, number]; widthPx?: number; diameterUnits?: number; alpha: number; materials?: Record<string, CompilerStarMaterial> }
 export interface CompilerLensInput {
   id: string; label: string;
-  /** Registered source chromaticity in absolute west/north arcseconds. False means outside observed coverage. */
-  sampleRgb(xWestArcsec: number, yNorthArcsec: number, outRgb: Vector3): boolean;
+  /** Component-bound 3D chromaticity in 0..255; false means no observed material. No projected-image fallback. */
+  sampleMaterial(xWestArcsec: number, yNorthArcsec: number, zAwayArcsec: number, outRgb: Vector3): boolean;
 }
 export interface BakeCompilerOptions {
   root: string; outputDirectory: string; id: string; fieldIdentity: string;
@@ -98,8 +99,8 @@ export async function bakeCompiler(options: BakeCompilerOptions): Promise<Compil
       typeof options.sampleEmission !== 'function' || !Array.isArray(options.lenses) || options.lenses.length < 1 || options.lenses.length > 8)
     throw new TypeError('Invalid compiler bake input.');
   const lensIds = new Set<string>();
-  for (const lens of options.lenses) if (!/^[a-z0-9][a-z0-9-]{0,95}$/.test(lens.id) || lensIds.has(lens.id) || !lens.label.trim() || typeof lens.sampleRgb !== 'function')
-    throw new TypeError('Compiler lens identities must be unique and safe.'); else lensIds.add(lens.id);
+  for (const lens of options.lenses) if (!/^[a-z0-9][a-z0-9-]{0,95}$/.test(lens.id) || lensIds.has(lens.id) || !lens.label.trim() || typeof lens.sampleMaterial !== 'function')
+    throw new TypeError('Compiler lenses require unique safe identities and a 3D material sampler.'); else lensIds.add(lens.id);
   const { origin, localBounds, frame } = compilerFrame(boundsArcsec);
   const starIds = new Set<string>(), stars: PreparedCompilerStar[] = [];
   for (const star of options.stars ?? []) {
@@ -147,13 +148,12 @@ export async function bakeCompiler(options: BakeCompilerOptions): Promise<Compil
   const painted: { input: CompilerLensInput; slices: VolumeSlices; coverage: { positiveAlphaTexels: number; recoloredTexels: number; outsideImageTexels: number } }[] = [];
   for (let lensIndex = 0; lensIndex < options.lenses.length; lensIndex++) {
     const lens = options.lenses[lensIndex]!, directory = containedPath(output, `lenses/${lens.id}`);
-    const slabMaterial = options.minimumFeatureScaleArcsec === undefined ? undefined : compilerSlabMaterial(options.sampleEmission, lens.sampleRgb);
+    const slabMaterial = compilerSlabMaterial(options.sampleEmission, lens.sampleMaterial);
     options.progress?.({ phase: 'texture', completed: lensIndex * totalSlices, total: options.lenses.length * totalSlices,
       message: `Painting ${lens.label}; preserving shared opacity` });
     const result = await recolorCloudSlices({ slices: neutralSlices, loadResource: path => readFile(containedPath(neutralDirectory, path)),
-      outputDirectory: directory, encoding: { format: 'png' }, sampleImageRgb(x, y, z, out, slab) {
-        if (slabMaterial) return slabMaterial(x + origin[0], y + origin[1], z + origin[2], out, slab);
-        return lens.sampleRgb(x + origin[0], y + origin[1], out);
+      outputDirectory: directory, encoding: { format: 'png' }, preserveMaterialIntensity: true, sampleImageRgb(x, y, z, out, slab) {
+        return slabMaterial(x + origin[0], y + origin[1], z + origin[2], out, slab);
       }, onProgress(progress) { cancel(signal); options.progress?.({ phase: 'texture', completed: lensIndex * totalSlices + progress.completed,
         total: options.lenses.length * totalSlices, message: `Painting ${lens.label}; preserving shared opacity` }); } });
     await verifyCompilerAlphaIdentity(neutralAlpha, directory, result.slices, signal);
@@ -172,11 +172,12 @@ export async function bakeCompiler(options: BakeCompilerOptions): Promise<Compil
     pins.set(bank.id, await pin(root, relative(root, containedPath(bank.directory, 'volume.json')), volume));
   }
   options.progress?.({ phase: 'compile', completed: banks.length, total: banks.length, message: 'Prepared final cloud and materials' });
+  const starSprites = await prepareCompilerStarSprites(root, outputDirectory, stars);
   return readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: options.id, fieldIdentity: options.fieldIdentity, frame,
     boundsArcsec: structuredClone(boundsArcsec), skyBoundsArcsec: structuredClone(skyBoundsArcsec),
     spanArcsec: Math.max(skyBoundsArcsec.max[0] - skyBoundsArcsec.min[0], skyBoundsArcsec.max[1] - skyBoundsArcsec.min[1]),
     sourceImage: { width: 512, height: 512 }, coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin,
       earthView: 'observer-at-negative-z-looking-away' }, neutral: pins.get('neutral'), alphaSha256: neutralAlpha,
     lenses: painted.map(item => ({ id: item.input.id, label: item.input.label, volume: pins.get(item.input.id), coverage: item.coverage })),
-    stars, sampling: { sliceCounts, imageWidth: IMAGE_WIDTH, samplesPerSlab: DEPTH_SAMPLES } });
+    stars, ...starSprites, sampling: { sliceCounts, imageWidth: IMAGE_WIDTH, samplesPerSlab: DEPTH_SAMPLES } });
 }

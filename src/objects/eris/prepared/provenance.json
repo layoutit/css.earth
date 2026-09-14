@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43ab36cf84082c4c35b851214a0f35b57a6c13b5eb73e2205e1ee20e47af3b28"
+    "sha256": "eb08abd4a59a656a3bbc80d330561a65c79368680ac8351f6e14d669b9d58196"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -107,7 +107,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "649563d1dc65838ad58371ee5a064253dbde2a34d298904934996bfdc056d1c9",
+      "sha256": "bae4883e58250a946c99e11747303fc2c0305dd0554ba00891e4159b89069c62",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -131,7 +131,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Eris is a bright, icy dwarf planet in the distant outer Solar System. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
           "facts": [
             {
               "id": "diameter",
@@ -189,8 +188,6 @@
             {
               "id": "illustration",
               "label": "Illustrative model",
-              "description": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
-              "title": "Surface illustration",
               "qualification": "Illustration; not an observed surface map.",
               "thumbnail": "eris-lens-illustration.webp",
               "surface": "eris-illustration.webp",
@@ -200,7 +197,7 @@
                 "path": "../manifest.json",
                 "url": "https://science.nasa.gov/resource/eris-3d-model/"
               },
-              "summary": "The depicted terrain is imagined, not photographed. The real surface is unresolved, and the displayed coordinates are arbitrary."
+              "notes": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
             }
           ]
         },
@@ -315,10 +312,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "649563d1dc65838ad58371ee5a064253dbde2a34d298904934996bfdc056d1c9",
-      "bytes": 5991,
+      "sha256": "bae4883e58250a946c99e11747303fc2c0305dd0554ba00891e4159b89069c62",
+      "bytes": 5607,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -331,11 +328,11 @@
       "label": "Illustrative model",
       "recipe": "raster",
       "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Illustration; not an observed surface map.",
-        "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
+        "Illustration; not an observed surface map."
       ],
       "lensIds": [
         "illustration"
@@ -381,6 +378,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "nasa-vtad-eris-model",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -388,6 +392,7 @@
       "label": "lighting",
       "recipe": "raster",
       "selector": "/lighting",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Evaluate the declared surface-lighting model into phase banks.",
       "limitations": [],
@@ -804,8 +809,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -817,8 +823,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3998,
-          "sha256": "e58b4cc55603bdc49087e464fd698d0920333c8bd8d1421c75b6d6284b35c4a1",
+          "bytes": 3818,
+          "sha256": "702a2a56f7a5cc0d317f4931fd403ce4590246e53ddf6fdc5af42bb02ec33ebf",
           "verification": "bytes-verified"
         }
       ],
@@ -832,6 +838,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "illustration"

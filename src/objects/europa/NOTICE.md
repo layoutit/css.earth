@@ -7,6 +7,15 @@ and [JPL image use policy](https://www.jpl.nasa.gov/jpl-image-use-policy/).
 The repository's software license does not replace source image-use terms.
 No agency or mission endorsement is implied.
 
+Galileo regional photographs: **NASA/JPL/USGS; M. Bland, L. Weller,
+B. Archinal, E. Smith and B. Wheeler (2021)**,
+[Improving the Usability of Galileo and Voyager Images of Jupiter's Moon Europa](https://doi.org/10.1029/2021EA001935).
+The 332 controlled CLEAR-filter GeoTIFFs are released under **CC0-1.0**.
+Published projection and measured I/F are retained; overlap selection, sampling,
+bounded overlap-based grayscale display matching, the global-mosaic fallback and
+missing-coverage grid are prepared by cssEarth. This is a display adjustment, not
+additional radiometric or photometric calibration.
+
 Jupiter's context image: **NASA, ESA, STScI, and Amy Simon**, Hubble observation
 of 5 January 2024. The photograph is a prepared context sprite, not a second
 mounted body scene or a view reconstructed for Europa's preparation epoch.
@@ -27,6 +36,15 @@ transfer, observation-specific Lunar–Lambert disk normalization, level matchin
 prepared here; they are not natural color or a calibrated albedo product.
 Capture geometry uses NASA/JPL Horizons and the USGS controlled ISIS labels;
 see `README.md` for the model and its limits.
+
+VLT/SPHERE composition release: Oliver King, Leigh Fletcher and Nicolas Ligier
+(2022), [Compositional Mapping of Europa](https://doi.org/10.3847/PSJ/ac596d),
+[Zenodo 6034904](https://doi.org/10.5281/zenodo.6034904), and tagged
+[v1.0.2 source](https://github.com/ortk95/king-2022-compositional-mapping-europa/tree/v1.0.2).
+cssEarth preserves the released ratio and posterior-component interpretation with
+source no-data. No explicit licence for the numerical release was located; it is
+retained for local preview and a private draft PR only, with no public composition
+asset publication.
 
 ## B6 sources
 

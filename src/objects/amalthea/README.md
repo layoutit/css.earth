@@ -2,9 +2,11 @@
 
 ## Sources
 
-- **Monochrome:** original Galileo SSI raw REDR images C0368603500 (1996-11-06, clear), C0420626379 (1997-11-06, green), C0420652501 (1997-11-07, clear), C0512324200 (1999-08-12, clear), C0532888100 (2000-01-04, clear).
+- **Monochrome:** original Galileo SSI raw REDR images C0420626379 (1997-11-06, green), C0420652501 (1997-11-07, clear), C0512324200 (1999-08-12, clear), C0532888100 (2000-01-04, clear).
 
 - **Geometry / Elevation:** [Stooke Small Body Shape Models](https://sbn.psi.edu/pds/resource/stkshape.html), DOI 10.26033/yt84-5y91, `j5amalthea.tab`: west-positive, planetocentric 5°radius grid in kilometres. Original body origin is preserved.
+
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
 ## Evidence
 
@@ -20,11 +22,11 @@ Feature notes: 4 of the labelled names carry a caption note, the lead summary of
 
 - This is approximate registration, not a new photogrammetric solution. The closest observation withholds five source pixels next to known sky/invalid boundaries to reflect that uncertainty; valid lower-resolution imagery supplies overlap.
 
-- **Faithfulness status:** The Monochrome lens is retained as a coarse observation and pointing aid, not as a feature-registered photographic surface. The existing shape and Elevation view remain the supported measured/model views.
+- **Faithfulness status:** The Monochrome lens is retained as a coarse observation and pointing aid, not as a feature-registered photographic surface. A saturated white strip remains near the south pole of the map; its source frame is not identified. Limiting incidence and emission to 70° left the strip and cut coverage from 71.0% to 67.5%, so the lens keeps its 72° incidence and 75° emission limits. The existing shape and Elevation view remain the supported measured/model views.
 
 - **Shape and elevation:** It describes overall shape, not altimetry or height above a geoid; unresolved/modelled regions and potentially exaggerated facets/depressions remain source limitations.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 ## Methods and source notes
 
@@ -43,25 +45,11 @@ Amalthea is a standalone Jupiter moon using the generic object package, shared l
 
 ## Preparation
 
-`source/preparation/terrestrial.json` owns the shared recipe. Source observations are original unsigned 8-bit detector DN, decoded after VICAR telemetry headers and row prefixes. Recorded empty/low-signal sky subtraction, a bounded lunar-Lambert approximation(maximum 2× gain; incidence ≤72°, emission ≤75°) and bounded overlap brightness matching (0.2–4× to reconcile different raw exposures) reduce photographed shading. Cast shadows and absent/unreliable samples are never reconstructed. A neutral gray grid marks gaps.
+`source/preparation/terrestrial.json` owns the shared recipe. Source observations are original unsigned 8-bit detector DN, decoded after VICAR telemetry headers and row prefixes. Recorded empty/low-signal sky subtraction, a bounded lunar-Lambert approximation(maximum 2× gain; incidence ≤72°, emission ≤75°) and overlap level matching fitted where both frames see the surface within 70° of incidence and emission (the widest gain, 8.6, reconciles raw exposures through different filters) reduce photographed shading. C0532888100 withholds pixels within 10 pixels of its background (sky and unlit surface), twice its 5-pixel limb residual. At its former 5-pixel inset, the next ring of pixels lay where the coarse shape predicts grazing light: normalized, it measured 2.1 times the overlapping C0512324200 at the same points and drew a bright stripe. The wider inset keeps 71.0% of the surface covered (71.1% before) and lowers the log spread between those two frames from 0.158 to 0.131. Cast shadows and absent/unreliable samples are never reconstructed. A neutral gray grid marks gaps.
 
 Some old archived raw labels have inconsistent Sun longitude/range. Conversely, OPUS image center and pole angles disagree with the original raw raster. Camera roll therefore uses the original PDS label NORTH_AZIMUTH+90°, following the [documented clockwise-from-image-right convention](https://pds.nasa.gov/datastandards/documents/dd/all/current/ch33s02.html); only center translation is fitted to illuminated source-shape boundaries. Typical residuals are 0.6–2.1pixels; the closest image is about 5pixels because the coarse Voyager shape differs from Galileo’s detailed limb.
 
 Surface/pole atlases, native triangle maps, shared flood/directional lighting, thumbnails, scientific legend, small minimap and complete-silhouette context portrait derive from these same prepared sources. Flood displays the normalized source material without added directional attenuation; Shadows supplies the prepared Sun direction. Context gray areas preserve the known shape without inventing texture.
-
-## Candidate survey
-
-- [Galileo SSI archive](https://pds-rings.seti.org/galileo/ssi/) and the [2026 mission review](https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf): surveyed all available Amalthea SSI entries; selected useful complementary aspects and best resolved clear frame. Repeated versions/nearby frames duplicate coverage. Several December 1996 frames contain sparse corrupted blocks and were excluded.
-
-- September 1996 green/violet/756nm and November 1996 multi-band sequences: original detector frames inspected. The body is only tens of pixels across, with different gains/exposures, noisy background and no qualified registered/radiometrically normalized multiband product. They remain possible future Enhanced color work; raw channel stacking would misstate the color. No artificial red tint is painted onto the monochrome map.
-
-- [NASA PIA01626 color comparison](https://www.jpl.nasa.gov/images/pia01626-comparison-of-amalthea-to-io/): useful color reference; display composite, without sufficient camera-band calibration/registration provenance for this mapped lens.
-
-- [Stooke maps](https://sbnarchive.psi.edu/pds3/non_mission/EAR_A_3_RDR_STOOKEMAPS_V1_0/maps/): hand-drawn shaded relief, not an observational image mosaic; not used as photographic terrain.
-
-- [Thomas shape archive](https://sbn.psi.edu/pds/resource/oshape.html): reviewed; its released target list does not include Amalthea. No alternative downloadable refined Galileo mesh was qualified.
-
-- Juno detections offer context but do not improve Galileo’s resolved surface detail. No registered composition, thermal or local-altimetry dataset was qualified in the reviewed releases.
 
 ## Restoration and attribution
 

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hiiaka",
+  "card": {
+    "text": "Haumea's largest moon, about 370 km across.",
+    "sources": [
+      {
+        "catalogueId": "source-hiiaka-model-surface",
+        "url": "https://www.nature.com/articles/s41467-025-65749-1",
+        "label": "Shape model",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Stellar occultations show Hiʻiaka is elongated, and it turns once every 9.68 hours.",
+    "sources": [
+      {
+        "catalogueId": "source-hiiaka-model-surface",
+        "url": "https://www.nature.com/articles/s41467-025-65749-1",
+        "label": "Shape model",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Occultation shape approximation",
+      "detail": "Approximate shape",
+      "summary": "A 480 × 360 × 286 km ellipsoid from occultations and light curves; its pole and orbital position are approximate."
+    }
+  }
+}

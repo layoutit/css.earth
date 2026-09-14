@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "5a4224ea713e37c27035d2248e3df98609e9936fbbf9fc0f736eb9f427303dda"
+          "sha256": "26de1c85429fe7e04da384d6521449e7796baf06e5b9937e9a3eeaf4328e6ac6"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "52e40271e776a264765a013824590ea06583908661ac1e83158d249393887029"
+        "sha256": "e97fb7cc2baef32d6a239ef43570b456400aadbd79cd91ae52406a8f0253139e"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7392482101612425,
-      "description": "Explore Eukrate in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in March 1885.",
       "systemName": "Solar System",
       "order": 335,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "1c9ebd93590f52ac2678c92e2364171eb76d76fb762e00bf68ef0ed470f98fc2"
+    "sha256": "13f08cf7398290fbefdcb81939423cbf6127301582c8abd271b4862a84e86205"
   }
 }

@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - [JPL physical parameters](https://ssd.jpl.nasa.gov/sats/phys_par/) list a mean radius of 170 ± 25 km.
 
 - [Kiss et al. (2016)](https://doi.org/10.1093/mnras/stw081), equation 4, use the triaxial family `a=(1+X)b`, `c=(1−X)b`, rotating about the shortest axis. Their combined light-curve and thermal modelling favors `X≈0.13`; the selected feasible example uses `X=0.133`, or long/short≈1.3.
@@ -47,14 +49,9 @@
 
 - The [NASA PIA00054 caption](https://science.nasa.gov/resource/nereid/) calls 170 km the distance across. That conflicts with the radius in JPL's table and the research diameter. Do not copy the caption's size into geometry.
 
-## Image and dataset survey
+## Investigation ledger
 
-- [Voyager ISS/PDS](https://pds-rings.seti.org/voyager/iss/): 325 catalog matches, first 12 retained in `source/survey/opus.json`. Their discs span roughly eight and five pixels.
-
-- [Kiss et al. (2016)](https://academic.oup.com/mnras/article/457/3/2908/2588900): K2 rotation, Spitzer/Herschel thermal photometry and model-derived shape constraints add physical context. They do not provide a spatial DEM, thermal map or composition map. The study explicitly says the Voyager data do not constrain the detailed shape. Its roughness inference is not rendered as invented craters.
-
-- [JPL texture inventory](https://space.jpl.nasa.gov/tmaps/neptune.html) supplies no Nereid surface map. No registered terrain product was qualified from the inspected mapping releases or their cited work. Future image registration remains possible research, not a claim that photographs do not exist.
-
+The source-survey dispositions and evidence are recorded in the [investigation ledger](investigations.json).
 ## Included model and shared behavior
 
 The Shape model dataset shows the **approximate ellipsoid** above, with its model origin and non-unique shape/pole visible beside the active lens. The entire surface uses the ordinary shared missing-data grid. No terrain, albedo, rings or atmosphere are invented. Thermal roughness does not supply crater locations, so none are synthesized.

@@ -9,6 +9,13 @@ import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+if (process.argv[2] === 'sbmt') {
+  const result = spawnSync(process.execPath, [resolve(import.meta.dirname, 'sbmt/setup.mts')], { stdio: 'inherit', timeout: 900_000 });
+  if (result.error || result.status !== 0) throw new Error(`SBMT setup failed: ${result.error?.message ?? result.status}`);
+  process.exit(0);
+}
+if (process.argv.length > 2) throw new Error('Usage: pnpm oracles:setup [sbmt]');
+
 const root = resolve(import.meta.dirname, '../..'), venv = resolve(root, '.local/oracles/venv');
 const requirements = resolve(root, 'tools/oracles/requirements.txt');
 const python = process.env.ORACLE_PYTHON ?? (['/opt/homebrew/bin/python3.12', '/usr/local/bin/python3.12'].find(existsSync) ?? 'python3');

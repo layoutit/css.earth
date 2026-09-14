@@ -1,0 +1,92 @@
+{
+  "tool": {
+    "spiceypy": "8.2.0",
+    "cspice": "CSPICE_N0067",
+    "python": "3.12.14"
+  },
+  "purpose": "Independent numerical reference; never consumed as a production camera.",
+  "inputs": [
+    {
+      "path": "src/objects/dactyl/evidence/registration/native/naif0008.tls",
+      "expectedBytes": 4542,
+      "expectedSha256": "bbf419803aa31b787d681bd9b807930f60c7504695df3ad016bd47ca1bb89f42"
+    },
+    {
+      "path": "src/objects/dactyl/evidence/registration/native/mk00062a.tsc",
+      "expectedBytes": 10127,
+      "expectedSha256": "cea5234f9769f83aa6da65f360c6940a70b72461ed2c577cb531448e7498295c"
+    },
+    {
+      "path": "src/objects/dactyl/evidence/galileo/native/gll_plt_rec_1993_tav_v00.bc",
+      "expectedBytes": 342016,
+      "expectedSha256": "0c0c50f8358fe1826e4147a45ec7c6663db92e89df2ebab7bc7e19554a219e86"
+    }
+  ],
+  "calls": [
+    "kclear(); furnsh each input in recorded order",
+    "et = str2et(utc); ticks = sce2c(-77, et)",
+    "ckgp(-77001, ticks, 0.0, B1950), ckgp(-77001, ticks, 0.0, J2000)",
+    "Boresight is C-matrix row 2; RA=atan2(y,x), Dec=asin(z)"
+  ],
+  "i2278": {
+    "id": "i2278",
+    "utc": "1993-08-28T16:47:49.956Z",
+    "et": -200171469.86132875,
+    "encodedClock": 14746534537.945608,
+    "b1950CMatrix": [
+      [
+        -0.2005851195910203,
+        -0.7404967278551063,
+        -0.6414282546275436
+      ],
+      [
+        0.5665263802687734,
+        -0.6218334519426922,
+        0.5407134347365496
+      ],
+      [
+        -0.7992580748783319,
+        -0.2549269583251573,
+        0.544241468156246
+      ]
+    ],
+    "j2000CMatrix": [
+      [
+        -0.1891755482633324,
+        -0.7426753624805098,
+        -0.6423752158230509
+      ],
+      [
+        0.5708084009128054,
+        -0.615476119481286,
+        0.5434766929644952
+      ],
+      [
+        -0.7989933550328397,
+        -0.2638606683700728,
+        0.5403583684006982
+      ]
+    ],
+    "j2000BoresightRaDecDegrees": [
+      198.27536092741585,
+      32.708037867759124
+    ],
+    "returnedClock": 14746534537.945608
+  },
+  "otherExposures": [
+    {
+      "id": "i1578",
+      "utc": "1993-08-28T16:40:45.390Z",
+      "et": -200171894.4273287,
+      "encodedClock": 14746483589.993261,
+      "pointing": null
+    },
+    {
+      "id": "i2700",
+      "utc": "1993-08-28T16:52:01.315Z",
+      "et": -200171218.5023288,
+      "encodedClock": 14746564701.044754,
+      "pointing": null
+    }
+  ]
+}

@@ -121,3 +121,10 @@ src/objects/comet-9p/source/science/hrii/*.tab -text -whitespace
 
 # Preserve the original AMICA fixed-width, CRLF archive labels.
 src/objects/itokawa/source/observations/*.lbl -text -whitespace
+
+# SBMT pointing records retain their original padding and line endings.
+src/objects/*/source/observations/*.SUM -text -whitespace
+src/objects/*/source/observations/*.INFO -text -whitespace
+# Native results and byte inventories are reproducible generated evidence.
+tests/oracles/sbmt/projection.json linguist-generated=true
+tools/oracles/sbmt/runtime.lock.json linguist-generated=true

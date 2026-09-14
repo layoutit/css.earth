@@ -3,10 +3,11 @@ import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
-import { readCompilerRecipe, defaultCompilerControls } from '../reconstruction/compiler/model';
+import { readCompilerRecipe, compilerControlsForRecipe } from '../reconstruction/compiler/model';
 import { compileNebula, validateCompilerResult } from '../reconstruction/compiler/compile';
 import { jointRecord, jointPath } from '../reconstruction/joint-fit/model';
 import { loadDepthModel } from '../reconstruction/compiler/depth-model';
+import { sampledOwnerPins } from '../reconstruction/sampled-prior/ownership';
 
 const [cataloguePath, ...args] = process.argv.slice(2);
 if (!cataloguePath || args.some(arg => arg !== '--alignment-only' && !/^--object=[a-z0-9-]+$/.test(arg))) {
@@ -57,7 +58,7 @@ for (const candidate of selected) {
     } else {
       let lastProgress = '';
       const result = await compileNebula(root, { action: 'apply', imageId: 'compiler', recipePath: candidate.compilerRecipe,
-        cataloguePath: recipe.structureCatalogue, controls: defaultCompilerControls, imageToFrame: {}, evidence: { sensitivity: 1, weights: [] } },
+        cataloguePath: recipe.structureCatalogue, controls: compilerControlsForRecipe(recipe), imageToFrame: {}, evidence: { sensitivity: 1, weights: [] } },
       controller.signal, (message, fraction) => {
         const line = `${candidate.id} ${Math.round((fraction ?? 0) * 100)}% ${message}`;
         if (line !== lastProgress) { console.log(line); lastProgress = line; }
@@ -66,10 +67,13 @@ for (const candidate of selected) {
       const resultPin = await pin(`.local/nebula-lab/compiler/${result.id}/result.json`);
       const inputPaths = [candidate.compilerRecipe, recipe.observationRecipe, recipe.observationCatalogue, recipe.structureRecipe, recipe.structureCatalogue];
       if (recipe.jointRecipe) inputPaths.push(recipe.jointRecipe);
+      if (recipe.observedStars) inputPaths.push(recipe.observedStars.path);
       const depth = recipe.depthRecipe ? await loadDepthModel(root, recipe.depthRecipe, recipe.id) : undefined;
       if (depth) inputPaths.push(depth.recipePath, depth.recipe.evidence.path);
       const method: unknown = JSON.parse(await readFile(result.method.path, 'utf8'));
       if (!jointRecord(method) || !Array.isArray(method.implementation)) throw new TypeError('Missing compiler implementation identity.');
+      const sampledOwners = recipe.sampledRecipe ? sampledOwnerPins(method, recipe.sampledRecipe) : [];
+      inputPaths.push(...sampledOwners.map(owner => owner.path));
       if (depth && (!jointRecord(method.physicalDepth) || !jointRecord(method.physicalDepth.recipe) || !jointRecord(method.physicalDepth.evidence) ||
           method.physicalDepth.recipe.sha256 !== depth.recipeSha256 || method.physicalDepth.evidence.sha256 !== depth.recipe.evidence.sha256))
         throw new TypeError('Compiled depth sources differ from the configured recipe or evidence.');
@@ -78,6 +82,8 @@ for (const candidate of selected) {
         inputPaths.push(`labs/nebula/src/reconstruction/compiler/${owner.name}`);
       }
       const inputs = await Promise.all(inputPaths.map(pin));
+      if (sampledOwners.some(owner => !inputs.some(input => input.path === owner.path && input.sha256 === owner.sha256)))
+        throw new TypeError('Sampled inputs changed during preparation. Compile again.');
       if (depth && (inputs.find(source => source.path === depth.recipePath)?.sha256 !== depth.recipeSha256 ||
           inputs.find(source => source.path === depth.recipe.evidence.path)?.sha256 !== depth.recipe.evidence.sha256))
         throw new TypeError('Depth inputs changed during publication. Compile again.');

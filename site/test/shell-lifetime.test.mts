@@ -390,7 +390,7 @@ test('camera scale changes retained overview content without moving the camera a
   browser.selectors.set('.planet-object-item', items);
   const tabs = browser.querySelectorAll('[data-object-tab]');
   const shell = f.mount(), search = f.selectors.element('.planet-sidebar-search'), listeners: CameraNotifications = new Set();
-  let world = worldAt(context.camera.maximumDistanceM);
+  let world = worldAt(context.volume.fullDistanceM);
   const before = structuredClone(world);
   shell.setOverview(true);
   shell.setCamera(shellCamera(() => world, listeners, { immediate: true }));
@@ -456,7 +456,7 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   lensButton.value = 'prepared-dataset'; lensDetail.dataset.focusLensDetails = lensButton.value;
   lensBank.selectors.set('[data-focus-lens]', [lensButton]);
   lensBank.selectors.set('[data-focus-lens-details]', [lensDetail]);
-  card.selectors.set('[data-focus-lens-bank]', [lensBank]);
+  card.selectors.set('[data-focus-lens-bank], [data-focus-facts-bank]', [lensBank]);
   const readout = new Element();
   for (const selector of ['.planet-view-date', '[data-view-date]', '.planet-view-coordinates', '[data-view-latitude]', '[data-view-longitude]',
     '[data-view-altitude]', '[data-view-distance-label]', '.planet-view-altitude', '.planet-view-scale', '[data-view-scale-label]', '.planet-view-ruler', '.planet-view-measure']) {
@@ -583,7 +583,7 @@ test('clearing search keeps the current object or overview card and permits anot
   checkClear('object', '   ');
   shell.setOverview(true);
   checkClear('solar-system');
-  const world = worldAt(context.camera.maximumDistanceM);
+  const world = worldAt(context.volume.fullDistanceM);
   const before = structuredClone(world);
   shell.setCamera(shellCamera(() => world, new Set(), { immediate: true }));
   checkClear('milky-way');

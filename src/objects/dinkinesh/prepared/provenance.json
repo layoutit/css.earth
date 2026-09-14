@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "67301d0ab5d357c2d28684c0aa68643e0e3f5a2540385e6044582b37d2031d58"
+    "sha256": "37c22a10c9dc470a1a6618aa787da3820071418d6df33161e6780ba9bd4e2738"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -127,14 +127,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5c18d03676a357f07020f1c29522988582011e3d92a885be3cce8e78acab51a2",
+      "sha256": "db1844a83409a3d718aef655a1474d0b7c9a6abd3ab51aba262c0564eb5adfb7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "dinkinesh",
         "displayName": "Dinkinesh",
         "panel": {
-          "introduction": "Dinkinesh was Lucy’s first asteroid encounter. Its equatorial ridge and trough accompany the contact-binary moon Selam. The TEMPEST dataset shows a recovered numerical shape; the earlier Celestia reconstruction remains available for comparison.",
           "facts": [
             {
               "id": "parent",
@@ -173,9 +172,6 @@
             {
               "id": "tempest-shape",
               "label": "TEMPEST shape",
-              "detail": "Model",
-              "title": "Dinkinesh model used by TEMPEST",
-              "description": "Numerical Dinkinesh shape distributed with the TEMPEST thermal model: 635 vertices and 1,266 triangles, retained at their published metre scale. The linked study describes a Lucy stereo-derived model with estimated unseen terrain. This recovered file does not identify its upstream mission-model version or observed/fill boundary. The grid marks missing qualified photography; it does not mark measured terrain.",
               "thumbnail": "/scenes/dinkinesh/dinkinesh-tempest-shape-thumbnail.webp",
               "surface": "dinkinesh-tempest-shape-surface@2x.webp",
               "poles": "dinkinesh-tempest-shape-poles@2x.webp",
@@ -183,14 +179,13 @@
                 "id": "tempest-dinkinesh-model",
                 "path": "../manifest.json",
                 "url": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl"
-              }
+              },
+              "notes": "Numerical Dinkinesh shape distributed with the TEMPEST thermal model: 635 vertices and 1,266 triangles, retained at their published metre scale. The linked study describes a Lucy stereo-derived model with estimated unseen terrain. This recovered file does not identify its upstream mission-model version or observed/fill boundary. The grid marks missing qualified photography; it does not mark measured terrain.",
+              "noData": true
             },
             {
               "id": "shape",
               "label": "Celestia model",
-              "detail": "Model",
-              "title": "Lucy encounter reconstruction",
-              "description": "Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery.",
               "thumbnail": "/scenes/dinkinesh/dinkinesh-shape-thumbnail.webp",
               "surface": "dinkinesh-shape-surface@2x.webp",
               "poles": "dinkinesh-shape-poles@2x.webp",
@@ -198,7 +193,8 @@
                 "id": "shape-model",
                 "path": "../manifest.json",
                 "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/dinkinesh.cmod"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -364,7 +360,7 @@
       "sha256": "3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622",
       "bytes": 237239,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -401,7 +397,7 @@
       "sha256": "830ce983cfcfa1dd44466f708c3eeb92ba0eb80f7bc695aefebc243d55d277b8",
       "bytes": 1476,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -436,7 +432,7 @@
       "sha256": "fb25e4125e5743c6d8599986dc966acefa775c69e5ae30bed840ed90eb2fd04c",
       "bytes": 8490675,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -444,7 +440,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -453,10 +449,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5c18d03676a357f07020f1c29522988582011e3d92a885be3cce8e78acab51a2",
-      "bytes": 5691,
+      "sha256": "db1844a83409a3d718aef655a1474d0b7c9a6abd3ab51aba262c0564eb5adfb7",
+      "bytes": 5018,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -478,7 +474,7 @@
       "sha256": "031d0052c8559b803bccaa617d03b0885da1fc88a8b5ee85a9c9a4fb84fa8320",
       "bytes": 1319,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -504,7 +500,7 @@
       "sha256": "b3e19298f41ce5d9f908fa37fe10621817ecb9a8c78b09096879296060a2c2c4",
       "bytes": 14569,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -533,7 +529,7 @@
       "sha256": "c14cbd72f51a57ba5b63df50709eb050dc4259a334c985a2768c5e819aa07ed7",
       "bytes": 156,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -560,7 +556,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -571,11 +567,10 @@
       "label": "TEMPEST shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Numerical Dinkinesh shape distributed with the TEMPEST thermal model: 635 vertices and 1,266 triangles, retained at their published metre scale. The linked study describes a Lucy stereo-derived model with estimated unseen terrain. This recovered file does not identify its upstream mission-model version or observed/fill boundary. The grid marks missing qualified photography; it does not mark measured terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "tempest-shape"
       ],
@@ -594,13 +589,20 @@
           "url": "/scenes/dinkinesh/dinkinesh-tempest-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-tempest-shape-surface@2x.webp",
           "bytes": 96138,
           "sha256": "0666a03d38bb752031a5f167eb9a7ec8c5bbba80c84089622c523702a45bf2de",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "tempest-dinkinesh-model",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -610,11 +612,10 @@
       "label": "Celestia model",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -633,13 +634,20 @@
           "url": "/scenes/dinkinesh/dinkinesh-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-shape-surface@2x.webp",
           "bytes": 98238,
           "sha256": "d5968fdbef52eea2f5ab8fccb6a81cb2cd56818a1009216770d8ca1fcf62265c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "shape-model",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -649,8 +657,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -662,8 +671,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6786,
-          "sha256": "34c244d3f0b13c46a6625cf2db188a84cdc81db2b5c222c41a2ca32785acae12",
+          "bytes": 6522,
+          "sha256": "4a31ac67ccafba775f37da84e81b542f199bf9c83e96dc9829265a575173ee6a",
           "verification": "bytes-verified"
         }
       ],
@@ -674,6 +683,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -699,7 +709,7 @@
           "url": "/scenes/dinkinesh/dinkinesh-features.json",
           "bytes": 3841,
           "sha256": "5d760d17fb3cddb25203c267c8f3204cb0ae4afab999d2a618ccd08e84a3febe",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -712,6 +722,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "tempest-shape"
@@ -736,6 +747,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"

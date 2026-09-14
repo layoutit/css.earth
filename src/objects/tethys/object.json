@@ -24,12 +24,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "9698cc5bb01abe58e959de591abb3638897525714df844b3c354a69ed452f073"
+          "sha256": "3485dda4743917fd5bb1dd690461767e3cff893da603819a60dc8ecf118e94b9"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "dbed13ca8d267ceb71a322bb1aeef42fe7524c33b1370d786b39541735e107ba"
+          "sha256": "adda5c50d0f8b79493a536b3be4c9f7b8ea5d82d1a1883fd18a1125193633b18"
         },
         {
           "id": "title",
@@ -145,7 +145,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "10e1e09ecbee54700529b29b1e7bc79b52ee505b4d8135f242b703ddec2ea39c"
+        "sha256": "9b736728925c8cc416227a8904147dbaabd84c97a43624027ce53b5fd46fbecf"
       }
     },
     "catalog": {
@@ -153,7 +153,7 @@
       "classification": "satellite",
       "color": "#bcbbae",
       "distanceAu": 9.58,
-      "description": "Explore Tethys in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s icy moon, Odysseus crater, and Ithaca Chasma.",
+      "description": "Icy moon of Saturn scarred by the huge Odysseus crater and the Ithaca Chasma canyon.",
       "systemName": "Solar System",
       "order": 440,
       "context": {
@@ -164,6 +164,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "65d513f36e658e49377757cc7f9e026be3b19801ca5a415e93788ccaff61307a"
+    "sha256": "7eecad9c92bb6a41cd6d750ee88f4b21637d3843248eb10bb03663413080a952"
   }
 }

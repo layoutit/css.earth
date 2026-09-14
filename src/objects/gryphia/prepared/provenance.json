@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1ae9835456fbf12cbeddef4692f7ed6b7450c99e08a502a6a488ff4ae25147f5"
+    "sha256": "d7ac704ef4ae0a2eae60e00a5249e0e8e27f2f52816ee58d060ddc5341ef4358"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "defa2902d9c1e1f4c38a7c7632b25041c00c382a2a595dba5a6a3388fa63586f",
+      "sha256": "3b13c87e678ad54ac8b8d7b3349ea1db62cb3098a962f965dbb280cbcd1c4ed9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,7 +173,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Gryphia tumbles, so this approximate shape uses a fixed illustrative orientation. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Thermal diameter 14.403 ± 0.394 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. The shape reconstruction assumes rotation around one principal axis; the incomplete tumbling solution is not propagated.",
-              "title": "Light-curve shape model",
               "thumbnail": "/scenes/gryphia/gryphia-shape-thumbnail.webp",
               "surface": "gryphia-shape-surface@2x.webp",
               "poles": "gryphia-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Thermal diameter 14.403 ± 0.394 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. The shape reconstruction assumes rotation around one principal axis; the incomplete tumbling solution is not propagated.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 7.2015 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height. The orientation is fixed and illustrative.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/gryphia/gryphia-elevation-thumbnail.webp",
               "surface": "gryphia-elevation-surface@2x.webp",
               "poles": "gryphia-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6121",
                 "image": "/scenes/gryphia/gryphia-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 7.2015 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height. The orientation is fixed and illustrative."
             }
           ]
         },
@@ -370,10 +366,10 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "defa2902d9c1e1f4c38a7c7632b25041c00c382a2a595dba5a6a3388fa63586f",
+      "sha256": "3b13c87e678ad54ac8b8d7b3349ea1db62cb3098a962f965dbb280cbcd1c4ed9",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -382,7 +378,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9410,
+      "bytes": 9068,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -395,11 +391,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 7.2015 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height. The orientation is fixed and illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -432,6 +427,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "gryphia-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -439,11 +441,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Thermal diameter 14.403 ± 0.394 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. The shape reconstruction assumes rotation around one principal axis; the incomplete tumbling solution is not propagated."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -470,6 +471,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "gryphia-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -477,8 +485,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -490,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6438,
-          "sha256": "a4e400e53a35e21ba70d7ad4c7fe9cad4a46153ad98c35cf735208c8ee74769b",
+          "bytes": 6295,
+          "sha256": "d56630d79ff2b0c6e9aa64de70a7d3091cffd827c8370701148e6f005e858052",
           "verification": "bytes-verified"
         }
       ],
@@ -505,6 +514,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -529,6 +539,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

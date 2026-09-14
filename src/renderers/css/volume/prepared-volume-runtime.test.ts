@@ -8,6 +8,7 @@ import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from '.
 
 const AXES = ['x', 'y', 'z'] as const;
 class FakeElement {
+  readonly nodeType = 1;
   readonly children: FakeElement[] = [];
   readonly style: Record<string, string> = new Proxy({}, { set: (target: Record<string, string>, key: string, value: string) => { this.propertyWrites.push(key); target[key] = value; return true; } });
   readonly dataset: Record<string, string> = {};
@@ -200,31 +201,33 @@ test('the active band has enough retained copies and remains continuous across g
 
 test('rotation keeps geometry and texture resources stable while publishing leaf opacity', () => {
   const { runtime, document, meshes, resolver, host, before, camera } = mount(payload(3));
-  // Opacity and a zero-alpha copy's display are published presentation, not geometry.
-  const leaves = meshes.flatMap(mesh => mesh.children), count = document.count, styles = leaves.map(leaf => { const { opacity, display, ...staticStyle } = leaf.style; return staticStyle; });
+  // Opacity, culling and deferred textures are published presentation, not geometry.
+  const leaves = meshes.flatMap(mesh => mesh.children), count = document.count, styles = leaves.map(leaf => { const { opacity, display, visibility, backgroundImage, ...staticStyle } = leaf.style; return staticStyle; });
   for (const direction of [[0, 0, 1], [1, 1, 1], [-1, .2, .5]] as const) runtime.publish(publication(direction));
   expect(document.count).toBe(count); expect(meshes.flatMap(mesh => mesh.children)).toEqual(leaves);
-  expect(leaves.map(leaf => { const { opacity, display, ...staticStyle } = leaf.style; return staticStyle; })).toEqual(styles); expect(resolver).toHaveBeenCalledTimes(9);
+  expect(leaves.map(leaf => { const { opacity, display, visibility, backgroundImage, ...staticStyle } = leaf.style; return staticStyle; })).toEqual(styles); expect(resolver).toHaveBeenCalledTimes(9);
   expect(camera.style.perspectiveOrigin).toBe('calc(50% + 17px) calc(50% + -11px)');
   runtime.destroy(); runtime.destroy(); expect(host.children).toEqual([before]);
   runtime.publish(publication([1, 0, 0])); expect(document.count).toBe(count);
 });
 
 
-test('prepared offscreen bounds retire all optical copies and restore inherited visibility without remounting', () => {
+test.each(['leaf', 'frame'])('prepared %s bounds defer offscreen textures and restore retained optical copies', bounds => {
   const data = payload(3);
-  for (const stack of data.stacks) for (const leaf of stack.leaves) Object.assign(leaf, {
+  if (bounds === 'leaf') for (const stack of data.stacks) for (const leaf of stack.leaves) Object.assign(leaf, {
     boundsCssPixels: compileLeafBounds(leaf.style.transform.slice(9,-1), parseFloat(leaf.style.width), parseFloat(leaf.style.height)),
   });
   const { runtime, meshes, document, resolver } = mount(data), nodes = meshes.flatMap(m => m.children), count = document.count;
   const view = (position: VolumeVector) => ({ ...publication([0,0,1], position), viewport: { focalPixels:600, principalOffsetPixels:[17,-11] as const, widthPixels:1000, heightPixels:800 } });
   runtime.publish(view([100,0,10]));
   expect(nodes.every(n => n.style.visibility === 'hidden')).toBe(true);
+  expect(nodes.every(n => !n.style.backgroundImage)).toBe(true);
   for (const n of nodes) n.propertyWrites.length = 0;
   runtime.publish(view([100,0,10]));
   expect(nodes.flatMap(n => n.propertyWrites)).toEqual([]);
   runtime.publish(view([0,0,10]));
   expect(nodes.every(n => n.style.visibility === '')).toBe(true);
+  expect([...new Set(nodes.map(node => node.style.backgroundImage).filter(Boolean))]).toEqual(['url("/prepared/z.png")']);
   expect(meshes.flatMap(m => m.children)).toEqual(nodes);
   expect(document.count).toBe(count);
   expect(resolver).toHaveBeenCalledTimes(9);

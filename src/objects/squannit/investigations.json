@@ -1,0 +1,93 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "squannit",
+  "entries": [
+    {
+      "id": "original-radar-obj",
+      "subject": "Ostro/JPL 2006 1999 KW4 Beta radar OBJ",
+      "status": "included",
+      "finding": "The selected author OBJ preserves 1,148 vertices and 2,292 faces at the original kilometre scale, with full extents about 0.57 × 0.46 × 0.35 km. Finite and uneven radar constraints do not supply visible-light texture.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/squannit/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/squannit/source/measurements.json",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-xml-and-spin",
+      "subject": "PDS repackaged model XML and beta spin CSV",
+      "status": "unresolved",
+      "finding": "The retained source review records HTTP 403 for these documents. Exact author-OBJ equivalence and spin epoch/Euler conventions remain unverified; this access failure is not evidence that PDS lacks the files.",
+      "revisitWhen": "The native labels and spin table are retrieved and reconciled with the selected author OBJ and attitude conventions.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/squannit/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/squannit/source/measurements.json",
+        "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast.jpl.radar.shape_models_V1_0/data/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "photometric-size-2021",
+      "subject": "Scheirich 2021 larger secondary scale",
+      "status": "deferred",
+      "finding": "The paper fits mutual-event depths with about 130% of the original radar linear scale and a 0.59±0.04 km volume-equivalent diameter, with larger possible actual uncertainty. The displayed OBJ retains its original scale; this alternative is disclosed rather than silently applied.",
+      "revisitWhen": "A source comparison and explicit model-selection scope justify a separately qualified photometric-scale geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/squannit/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/squannit/source/measurements.json",
+        "https://arxiv.org/pdf/1912.06456v2"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "photometric-orbit",
+      "subject": "Scheirich 2021 mutual-orbit solution",
+      "status": "included",
+      "finding": "The fixed-epoch orbit extrapolates the 2000–2019 photometric fit. The recorded approximately 55-degree sum of phase sensitivities is not a confidence interval; no independent 2026 position or current librating attitude is established.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/squannit/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/squannit/source/orbit/published-parameters.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/squannit/source/validation/epoch-state.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "dimorphos-proxy",
+      "subject": "Scaled Squannit-derived Dimorphos proxy",
+      "status": "excluded",
+      "finding": "The historical review distinguishes original 1999 KW4 Beta geometry from a later scaled proxy for Dimorphos. The proxy does not provide a new measured Squannit surface or scale.",
+      "revisitWhen": "A Squannit-specific source model, rather than another body proxy, supports the proposed change.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/squannit/README.md",
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "122de05ed88201487f8a24d17dd42d5f8355384dd1f0d74496524822a31dca34"
+    "sha256": "18f2933e681036f8ce377e502cad71028a410ca49f302ee2839c61229a7174c4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "18378301825528cbe8c2fad7e4f70384c4f53907ebfb026630c237a6ed3cc1a2",
+      "sha256": "a10fc754ead999d8468334dac7dc076b407ee877e2ad54facd00293b0b4b09ea",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +167,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "1998 WT24 is a small near-Earth asteroid reconstructed from radar and optical observations. Explore its original shape and radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -199,8 +198,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Published radar shape model",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-shape-thumbnail.webp",
               "surface": "asteroid-1998-wt24-shape-surface@2x.webp",
               "poles": "asteroid-1998-wt24-shape-surface@2x.webp",
@@ -209,14 +206,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape from radar observations. The gray grid marks missing optical imagery; lighting shows the model."
+              "notes": "Published radar shape model",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-elevation-thumbnail.webp",
               "surface": "asteroid-1998-wt24-elevation-surface@2x.webp",
               "poles": "asteroid-1998-wt24-elevation-surface@2x.webp",
@@ -238,8 +233,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/wt24.obj",
                 "image": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -367,7 +361,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -376,8 +370,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "18378301825528cbe8c2fad7e4f70384c4f53907ebfb026630c237a6ed3cc1a2",
-      "bytes": 9446,
+      "sha256": "a10fc754ead999d8468334dac7dc076b407ee877e2ad54facd00293b0b4b09ea",
+      "bytes": 8832,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -390,11 +384,10 @@
       "label": "Elevation",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -427,6 +420,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "asteroid-1998-wt24-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -434,11 +434,10 @@
       "label": "Shape",
       "recipe": "terrestrial",
       "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Published radar shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -465,6 +464,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "asteroid-1998-wt24-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -472,8 +478,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -485,8 +492,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6717,
-          "sha256": "52ea10c8bb2b98e6a1fe769d8672065b51a711378ac13f25d3248e849d5a2b53",
+          "bytes": 6517,
+          "sha256": "9ca8b9601e95067fcba0bf385a62e898a61d1e1de35461513b66937b6a20d11b",
           "verification": "bytes-verified"
         }
       ],
@@ -500,6 +507,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "shape"
@@ -524,6 +532,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "elevation"

@@ -1,0 +1,104 @@
+{
+  "browser": "Google Chrome 153.0.8010.37, headless",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "dpr": 2,
+  "url": "http://127.0.0.1:4224/tethys/",
+  "lens": "iss",
+  "revision": "800602a0511eae766b173f1646df67c879ec359f",
+  "method": "The lens is selected through the application with motion paused, then each camera state is set and captured losslessly. The previous captures serve main's three ISS images in place of the re-prepared ones; every other served file is unchanged.",
+  "crop": {
+    "left": 700,
+    "top": 200,
+    "width": 1480,
+    "height": 1560
+  },
+  "images": {
+    "previous": {
+      "tethys-iss-surface@2x.webp": {
+        "bytes": 1229446,
+        "sha256": "2817bba8f6cd902ba36826dd06a05a9aee7e03644978bc9a9e6464b522691b6c"
+      },
+      "tethys-iss-shadow@2x.webp": {
+        "bytes": 535022,
+        "sha256": "74a8388fd7f7908b741ca9638dd2d564577029c165b126747263ed72ca7c4a70"
+      },
+      "tethys-iss-thumbnail.webp": {
+        "bytes": 2362,
+        "sha256": "91b8a05c6ddccde302670dcfcdbd943a8fc8dcdf17c665dbced602ff608f8b36"
+      }
+    },
+    "rePrepared": {
+      "tethys-iss-surface@2x.webp": {
+        "bytes": 1224584,
+        "sha256": "8dca5b9a340a322c97176a04ec43c48bde781a14c74e92bdf2003f5b7c21c740"
+      },
+      "tethys-iss-shadow@2x.webp": {
+        "bytes": 531214,
+        "sha256": "7ea8be15cbf3d75333287dafc4020ae58acd81ec0e879a6215987438a1138ed4"
+      },
+      "tethys-iss-thumbnail.webp": {
+        "bytes": 2380,
+        "sha256": "70948d0747c46712b6173f2b8876b30e4296da4cdb9a083a0e1206bc4ece7489"
+      }
+    }
+  },
+  "poses": [
+    {
+      "pose": 1,
+      "cameraState": {
+        "controlPitch": 100,
+        "controlYaw": 0,
+        "zoom": 1.7
+      },
+      "fullCaptures": {
+        "previous": "0ad22b1c6d8805e66961691a49d8b7f837be952beaae8ec78f81cf1dea8d5e6e",
+        "rePrepared": "22ce53ec9bf87e824cab860cc319cd719a40ca657ef6bc826a82669750ec3702",
+        "repeat": "22ce53ec9bf87e824cab860cc319cd719a40ca657ef6bc826a82669750ec3702"
+      },
+      "repeatIdentical": true,
+      "crops": {
+        "previous": {
+          "bytes": 718356,
+          "sha256": "1204379d431e45cc2c8049c4941cddec9992bb1881d4f5a4b12bcc02f2aea66a"
+        },
+        "rePrepared": {
+          "bytes": 701752,
+          "sha256": "252ae82212e8a975c680ec3c480c5d8e9156794fc54f6ee896c60fefe4620cbe"
+        }
+      },
+      "mismatchedPixels": 141030,
+      "comparedPixels": 2308800
+    },
+    {
+      "pose": 2,
+      "cameraState": {
+        "controlPitch": 100,
+        "controlYaw": 90,
+        "zoom": 1.7
+      },
+      "fullCaptures": {
+        "previous": "3a2faab6e0afcba53f5b7807b8af57316e86eb84725a1612e1aa960933c5609c",
+        "rePrepared": "d06a8abb3731695bae7192fa6a32c0b1edacd08d6ffd51c8c4953de11b208d8a",
+        "repeat": "d06a8abb3731695bae7192fa6a32c0b1edacd08d6ffd51c8c4953de11b208d8a"
+      },
+      "repeatIdentical": true,
+      "crops": {
+        "previous": {
+          "bytes": 498310,
+          "sha256": "b054848a98b2859bd08bd18c028d5e01c78aa942b45037f66d28267d318ccd31"
+        },
+        "rePrepared": {
+          "bytes": 486960,
+          "sha256": "022918cd7ba2a0e36dfdcc4e67fa8ea6af5e2464757b88dfedcceb2c31a3faec"
+        }
+      },
+      "mismatchedPixels": 215631,
+      "comparedPixels": 2308800
+    }
+  ],
+  "excluded": "A closer third state (controlPitch 130, controlYaw 20, zoom 3.5) was not used: two captures of the unchanged checkout differed by 102,483 of 5,760,000 pixels.",
+  "errors": []
+}

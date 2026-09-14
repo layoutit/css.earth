@@ -1,4 +1,4 @@
-import { array, boolean, number, shape, text } from '../../../tools/objects/terrestrial-layers/source-records.mts';
+import { array, boolean, dictionary, number, shape, text } from '../../../tools/objects/terrestrial-layers/source-records.mts';
 import { parseSolidPreparationSource } from '../../../tools/objects/terrestrial-layers/profile-source.mts';
 
 export function irregularSatelliteConfig(input: unknown) {
@@ -20,8 +20,10 @@ export const satelliteSurvey = shape({
   rotation: shape({ tentative: boolean }), scale: shape({ geometricAlbedoAssumption: number }),
 });
 export const satelliteContent = shape({
-  lenses: shape({ controls: array(shape({ detail: text, description: text })) }),
+  lenses: shape({ controls: array(shape({ id: text, notes: text })) }),
   panel: shape({ facts: array(shape({ id: text, value: text })) }),
 });
+/** Published reader text: each dataset's chooser detail and summary. */
+export const satelliteText = shape({ datasets: dictionary(shape({ detail: text, summary: text })) });
 export const satelliteRotation = shape({ phase: text, declinationDegrees: number });
 export const simplifiedSatelliteReport = shape({ topology: shape({ eulerCharacteristic: number, signedVolumeCubicMeters: number }) });

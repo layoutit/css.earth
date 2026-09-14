@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "df4ed9eb5429c93ef44e1f17d3f03a15a0b2308e1bd4ef54537f20c867edc690"
+          "sha256": "4860cd935999cb776c88fc42bbfe61e75762ae82539f81a3c80de180ed88ffbe"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f926355b4f2e167c0da5125661f4f0089c516657a993ab293c94bbb4d20e9082"
+        "sha256": "6c8e1223b9f7fe2f97021064016759fab1b51fb6a47c1464ae1e6b178d69f44c"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.177455279524888,
-      "description": "Explore 2001 QW16 in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in August 2001.",
       "systemName": "Solar System",
       "order": 419,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "94f8199693b7de71090eddebfd575c4823cfc6d90d93eb69dbab7b44ff4f0eff"
+    "sha256": "c98df61ee6c67bd0cdfc6bd9c8f124aaa8574fc4a7f24784bcd8864953f13279"
   }
 }

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "82ea81806ddeedcb1c0a8878ff5c25ac1eb0b8518c280b13c900a8e2d37cd50f"
+          "sha256": "705e907b0eb34aebe07aa631646272a55036e5f753acc4eeea5442f5864ae882"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e31d07f85354448f39151829a37008feaff698f71d9ebe69bf626c6584567225"
+        "sha256": "866f79a9eb4f8c388b9ba6d49abe55359f3a0b89db8bc11b5b952bf7ff3d3616"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4443553139909806,
-      "description": "Explore Eurynome in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in September 1863.",
       "systemName": "Solar System",
       "order": 246,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "30a8adb0fe3dbedc1a54f9afcd3783012a6120a301930a82b344b2371021f8df"
+    "sha256": "83164fcec51b16ae48be09a4b0d2d6f64012f999d7f4c593aaee2dae90fe8dd0"
   }
 }

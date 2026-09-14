@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "34079252a3b144d0e792d8d528d6e016a00a59ac40c13fd1b3a383196c985f43"
+          "sha256": "caaf84cc3b18ecd82917c7b1176eede4c4f49cf2d5c48ddcc162c254d35347a9"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3ab28fe80ee6c32398ab8db11ce54cefd1f9b3116f3230c449477ea8c77fc8b2"
+          "sha256": "532b162aa1aed6966828325f16aeb1942264e0f969114948b25fbb625e16fe7b"
         },
         {
           "id": "title",
@@ -38,12 +38,12 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "70e4a6ffba11b68613c9664aea56d3c7c61e738a94d160e11c5c8151d8e44f73"
+          "sha256": "6179436cc56b555ca32c161f52acf1f307b7648a6f8fcee47c48e4a465e0e2cc"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "d0e106c5362fa6d6dc1d442e51f88681829a28fb7620f4b5eeef0eb9eb0be132"
+          "sha256": "b38ee17ea39b7ed37df58823ffc5ad21bc131467e683f95b9f9e56d72bd4fffa"
         },
         {
           "id": "rotation",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4e88dee6ab93170aa9e9ef0bf21f0a294ef07be5ea77148090ce611b55a1cbcb"
+        "sha256": "10c30403f1e04bc3c101801af04b88075106ad4459e2fde82d710bfa66e28477"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
-      "description": "Explore Epimetheus with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "description": "Moon that swaps orbits with its larger partner, Janus.",
       "systemName": "Solar System",
       "order": 436,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "7e397e88c418cdf977772f5c56b6b5aa89dfc9b9a7477b694b630941392c6a11"
+    "sha256": "739da4e3614509baeb468dd5c96c342c1ca0f8f63ea1299fed45bae740095a82"
   }
 }

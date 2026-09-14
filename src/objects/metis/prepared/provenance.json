@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "478fb94fd96ebf87389b541cdae562fe7ff8e4884a9016c4fe8d6d39dd8f9b02"
+    "sha256": "7acb7a46ebbca322ddf7eff9e00a06c63f7dd632629e59b16727922df12bec6f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2fe33f6d6c696ab4eab6fe39b074f3dbd7acd94f927f3376ccf71f7bbe91c5e6",
+      "sha256": "0873b6ad4fa2914a3911b6358db965af59ad0690937c367e6143f9753ce19d38",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -34,11 +34,20 @@
           "observations": [],
           "scientific": [],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "galileo-clear-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
+                "attribution": {
+                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/galileo/"
+                }
+              },
               "frames": [
                 {
                   "id": "c0532890500",
@@ -136,25 +145,32 @@
                   "backgroundMaximum": 0.02352941
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumGain": 1.85,
+                "maximumAngleDegrees": 70
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 70
+              },
               "photometry": {
+                "model": "lunar-lambert",
                 "weight": 0.5,
-                "maximumGain": 2,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 70,
                 "maximumEmissionDegrees": 70,
-                "displayMaximum": 0.8,
-                "gamma": 1,
-                "minimumLevel": 0.7,
-                "maximumLevel": 1.4,
-                "backgroundMaximum": 0.00784313725490196
+                "maximumGain": 1.5
               },
-              "metadata": {
-                "label": "Monochrome",
-                "falseColor": false,
-                "coverage": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
-                "attribution": {
-                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
-                  "url": "https://pds-rings.seti.org/galileo/"
-                }
+              "display": {
+                "displayRange": [
+                  0,
+                  0.893
+                ]
               }
             }
           ]
@@ -217,14 +233,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d7bf6c23227922ed76a45502ab32a0145a2d57f72229f64397579e62cf9fdb08",
+      "sha256": "0649f58ed5e3940f634d8716d5224a9641de4c1865c083e6a5c63e9fabf15d1b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "metis",
         "displayName": "Metis",
         "panel": {
-          "introduction": "Metis is Jupiter’s innermost moon, a small elongated world embedded in the main ring. Dust knocked from its surface helps replenish that faint ring. Synchronous rotation is assumed; its actual rotation period is unknown.",
           "facts": [
             {
               "id": "radius",
@@ -306,9 +321,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
-              "title": "SSI mosaic",
-              "detail": "Galileo SSI",
               "thumbnail": "/scenes/metis/metis-normal-thumbnail.webp",
               "surface": "metis-normal-surface@2x.webp",
               "poles": "metis-normal-surface@2x.webp",
@@ -317,7 +329,8 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/galileo/"
               },
-              "summary": "The finest source pixels span about 3 km; other views are coarser. Brightness is adjusted; the gray grid marks unreliable data."
+              "notes": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
+              "noData": true
             }
           ]
         },
@@ -919,7 +932,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -928,8 +941,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d7bf6c23227922ed76a45502ab32a0145a2d57f72229f64397579e62cf9fdb08",
-      "bytes": 4972,
+      "sha256": "0649f58ed5e3940f634d8716d5224a9641de4c1865c083e6a5c63e9fabf15d1b",
+      "bytes": 4530,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -941,12 +954,11 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo."
-      ],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -954,7 +966,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "c0532890500",
@@ -972,15 +984,22 @@
       "outputs": [
         {
           "url": "/scenes/metis/metis-normal-thumbnail.webp",
-          "bytes": 2544,
-          "sha256": "4a4959fe7939793e83855433f0d1be8f1a4e5b6bf6d7e4e6c8827d9ed4beae67",
+          "bytes": 1414,
+          "sha256": "dcf8b7a04cb1c530804827acd1340a4faa0ed4f12d553968700659b23c4a2eb7",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
-          "bytes": 32284,
-          "sha256": "6b524a2ca6fbf47d05c4856dd44a65012adedda355c4dbc1df995d99592ab791",
+          "bytes": 30766,
+          "sha256": "f6077d939c90aa90f39ae2cb546ff1f2b311477010f65d753e12df2ca7978859",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "pck-ellipsoid",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -990,8 +1009,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1003,8 +1023,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5776,
-          "sha256": "fca6ab5a5b2e37afa706ff2424a536277990c8c84d34f647ef01159d24e9f894",
+          "bytes": 5536,
+          "sha256": "07343bfd08d73830bae6333d3dcdeeb82495ec21d11ad153dd365e17fb13b6b0",
           "verification": "bytes-verified"
         }
       ],
@@ -1014,10 +1034,11 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -1028,8 +1049,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 5382,
-          "sha256": "c28f5c4b7c1f56375eb8e84097c6258f7b91d2aacd9eded9a3159fb24a3335e6",
+          "bytes": 5628,
+          "sha256": "063f037bc0be3aecf108ba2a3b89618b27d14d6fa157c8af0010582bd79a1beb",
           "verification": "bytes-verified"
         }
       ]
@@ -1038,5 +1059,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "metis",
+    "materialSha256": "109fd4ae050cd87f3284713962d9f86414245f6d2d782d8ef386bd30a758dc1d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/metis/prepared/provenance.json",
+      "sha256": "4620998e1b7ebf1854fd3d4f1e90fa05aee7d8fa03f9d978539e4e14da2ccc78"
+    }
   }
 }

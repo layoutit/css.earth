@@ -4,7 +4,6 @@
   "id": "comet-81p",
   "displayName": "Wild 2",
   "panel": {
-    "introduction": "Stardust flew past Wild 2 in 2004 and returned samples of its dust to Earth. Its photographs reveal deep depressions, steep walls and ridges across the sunlit part of the nucleus.",
     "facts": [
       {
         "id": "scale",
@@ -35,9 +34,6 @@
       {
         "id": "model",
         "label": "Completed shape model",
-        "description": "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material.",
-        "title": "Nucleus shape reconstruction",
-        "detail": "PDS",
         "thumbnail": "/scenes/comet-81p/comet-81p-model-thumbnail.webp",
         "surface": "comet-81p-model-surface@2x.webp",
         "poles": "comet-81p-model-poles@2x.webp",
@@ -57,14 +53,13 @@
             "label": "Unseen side",
             "value": "Fitted ellipsoid"
           }
-        ]
+        ],
+        "notes": "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material.",
+        "noData": true
       },
       {
         "id": "navcam",
         "label": "Stardust photographs",
-        "description": "Stardust photographs cover the measured side of Wild 2. Original shadows and some seams remain. Placement is approximate; the gray grid marks gaps.",
-        "title": "NavCam mosaic",
-        "detail": "NAVCAM",
         "thumbnail": "/scenes/comet-81p/comet-81p-navcam-thumbnail.webp",
         "surface": "comet-81p-navcam-surface@2x.webp",
         "poles": "comet-81p-navcam-poles@2x.webp",
@@ -85,7 +80,8 @@
             "value": "14–25 m/pixel"
           }
         ],
-        "summary": "Only the measured side is photographed. Original shadows and some seams remain; the gray grid marks gaps in the coverage."
+        "notes": "Stardust photographs cover the measured side of Wild 2. Original shadows and some seams remain. Placement is approximate; the gray grid marks gaps.",
+        "noData": true
       }
     ]
   },

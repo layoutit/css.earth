@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "25119583aaf4e5ef5c4a2fb74ea773601e4e2ce58a0c761a53ca7856a981d34d"
+          "sha256": "e0c30c4ce9d80dfb66888a3c47dfd940f8e2d2f117b35f7f42bd13f30bb77acb"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8aa3ae1f1a4024cad7aa5156e73a7956c5780287acbe1166437cdb8a2c67abc7"
+        "sha256": "fc9ae9b6ba011de8a4597c5c15ef6220d1a59c50f68945c2966fbcb39934b85e"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Ymir, a moon of Saturn, through its source-constrained shape approximation.",
+      "description": "Backward-orbiting outer moon of Saturn with a triangular outline.",
       "systemName": "Solar System",
       "order": 83,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "02574c3fc431fd82e3c2f4a6d17466cb054bddb9cf61655a3a614eb074b2ddfc"
+    "sha256": "1b0e5ef85b41ea671abc2d26c2294ce4a324d2c5188fecb259c248917d81a5cc"
   }
 }

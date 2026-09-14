@@ -10,18 +10,19 @@ import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_CONT
 import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation/marker-presentation.mts';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
-import { OBJECTS } from './objects.mts';
+import { SCENE_OBJECTS } from './objects.mts';
 import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mts';
 
 import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
 import clusterPresentation from '../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
+import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 
-const annotationOpacities = Object.fromEntries(OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
-const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
-const hiddenOrbitIds = OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id);
-const annotationPriorities = Object.fromEntries(OBJECTS.map(object =>
+const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
+const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
+const hiddenOrbitIds = SCENE_OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id);
+const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
   [object.id, (CONTEXT_ANNOTATION_PRIORITY as Readonly<Partial<Record<typeof object.classification, number>>>)[object.classification] ?? 0]));
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
@@ -74,7 +75,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)
       .map(([id, sprite]) => [id, { ...contextMarkerSprite(sprite),
         minimumDiameterPixels: asteroidIds.includes(id) ? 2 : 2.4 }]));
-    const volumeLenses = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'volume-lens-bank')
+    const volumeLenses = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available)
       .map(async descriptor => {
         const set = resourceSet(descriptor.id);
         return { payload: await loadPreparedVolumeLenses(set.descriptor, set.transport),
@@ -123,6 +124,7 @@ export function createApplicationWorldContext() {
         const layer = prepared.mount(stage, { presentationHost, requestPublication: () => refreshWorld(), onSelectGalaxy: object => { void contextNavigation?.select(object); } });
         pendingLayer = layer;
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
+          unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
           sources: [...prepared.catalogs.galaxies.sources, ...prepared.catalogs.clusters.sources, ...prepared.catalogs.nebulae.sources], windowTarget });
         layer.setHiddenOrbits(hiddenOrbitIds);
         const framePlanner = prepared.createFramePlanner();
@@ -238,7 +240,7 @@ export function createApplicationWorldContext() {
           },
           setHighlightedClassification(classification: string | null) {
             if (!destroyed) layer.setHighlighted(classification === null ? []
-              : OBJECTS.filter(object => object.classification === classification).map(object => object.id));
+              : SCENE_OBJECTS.filter(object => object.classification === classification).map(object => object.id));
           },
           setHeliosphereEnabled(enabled: boolean) {
             if (destroyed || heliosphereEnabled === (enabled === true)) return;

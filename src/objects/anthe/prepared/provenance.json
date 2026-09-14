@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f8eb9f0532e6b6d501a00139eca13430058eedd93e3bed0d772da39f0256c2f3"
+    "sha256": "00eb62e84952e5a87120cb54bc6a730d3aa1e693e226a7d2687129820890591f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "266510e2f88d43ee311ce1ede11e04b93a76fb7913ffc6b39eb76ee66d4a2624",
+      "sha256": "765fa99c1dd68cd3840e4ea8ede3b37f87a026530eb74ffb1b12b86b2a1d37c3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "anthe",
         "displayName": "Anthe",
         "panel": {
-          "introduction": "Anthe is a tiny moon between Mimas and Enceladus, accompanied by a faint arc of dust. Cassini detected it, but did not resolve its shape accurately.",
           "facts": [
             {
               "id": "radius",
@@ -161,9 +160,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery.",
-              "title": "Approximate shape model",
-              "detail": "Estimated size",
               "thumbnail": "/scenes/anthe/anthe-model-thumbnail.webp",
               "surface": "anthe-model-surface@2x.webp",
               "poles": "anthe-model-poles@2x.webp",
@@ -172,7 +168,8 @@
                 "path": "../manifest.json",
                 "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
               },
-              "summary": "A 1 km sphere represents the estimated size. The actual shape is unresolved; gray grid: no surface imagery."
+              "notes": "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -316,7 +313,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -325,8 +322,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "266510e2f88d43ee311ce1ede11e04b93a76fb7913ffc6b39eb76ee66d4a2624",
-      "bytes": 3435,
+      "sha256": "765fa99c1dd68cd3840e4ea8ede3b37f87a026530eb74ffb1b12b86b2a1d37c3",
+      "bytes": 3071,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -339,11 +336,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -375,6 +371,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "measured-ellipsoid",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -382,8 +390,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -395,8 +404,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3977,
-          "sha256": "0dce7a67fc0253afbe68473dbf184e6001afef5edc49e88ac57ec21d402789b3",
+          "bytes": 3811,
+          "sha256": "e452279f1675d05f3e1afd9a032da375c739e61daf35b8cb30c0339100029f90",
           "verification": "bytes-verified"
         }
       ],
@@ -410,6 +419,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"

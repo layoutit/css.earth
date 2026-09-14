@@ -12,10 +12,12 @@ class Element extends EventTarget {
   getAttribute(name: string) { return this.attributes.get(name) ?? null; }
   removeAttribute(name: string) { this.attributes.delete(name); }
 }
-function fixture() {
+function fixture(unavailableObjects = '') {
   const root = new Element(), bank = new Element(), stars = new Element(), datasetTab = new Element();
   const tabs: string[] = [];
   root.selectors.set('[data-information-tab="dataset"]', datasetTab);
+  const unavailable = new Element(); unavailable.dataset.unavailableObjects = unavailableObjects;
+  root.selectors.set('[data-focus-unavailable]', unavailable);
   bank.dataset.focusLensBank = 'prepared-galaxy';
   const ids = ['first', 'second', 'third'];
   const buttons = ids.map(id => Object.assign(new Element(), { value: id }));
@@ -23,7 +25,10 @@ function fixture() {
   bank.selectors.set('[data-focus-lens]', buttons);
   bank.selectors.set('[data-focus-lens-details]', details);
   bank.selectors.set('[data-focus-stars]', stars);
-  root.selectors.set('[data-focus-lens-bank]', [bank]);
+  const factsBank = new Element(); factsBank.dataset.focusFactsBank = 'prepared-galaxy';
+  const facts = ids.map(id => Object.assign(new Element(), { dataset: { focusLensDetails: id }, textContent: 'Source pixels 2048 × 4096' }));
+  factsBank.selectors.set('[data-focus-lens-details]', facts);
+  root.selectors.set('[data-focus-lens-bank], [data-focus-facts-bank]', [bank, factsBank]);
   for (const name of ['name', 'aliases', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']) {
     root.selectors.set(`[data-focus-${name}]`, new Element());
   }
@@ -33,9 +38,24 @@ function fixture() {
   const presentation: PreparedFocusPresentation = { id: 'first', defaultLens: 'first', objectId: 'prepared-galaxy', selectedLens: 'first', starsVisible: true,
     lenses: ids.map(id => ({ id, label: id, title: id, description: id, sourceUrl: 'https://example.test/source' })), selectLens() {}, setStarsVisible() {} };
   // This retained DOM stand-in implements only the card's queried fields and events.
-  return { root, bank, stars, buttons, details, record, presentation, datasetTab, tabs,
+  return { root, bank, factsBank, facts, stars, buttons, details, record, presentation, datasetTab, tabs, unavailable,
     card: createPreparedFocusCard(root as unknown as HTMLElement, id => tabs.push(id)) };
 }
+
+test('an unavailable volume keeps catalogue facts and a retained explanation, without stale dataset controls', () => {
+  const f = fixture('prepared-galaxy');
+  f.card.set(f.record);
+  assert.equal(f.unavailable.hidden, false);
+  assert.match(f.unavailable.textContent, /3D view of Prepared galaxy is unavailable/);
+  assert.equal(f.datasetTab.hidden, true);
+  assert.equal(f.bank.hidden, true);
+  assert.equal(f.root.querySelector('[data-focus-distance]')?.textContent, '50,000 pc');
+  f.card.set({ ...f.record, detailedObjectId: undefined });
+  assert.equal(f.unavailable.hidden, true);
+  f.card.set(f.record); f.card.set(null);
+  assert.equal(f.unavailable.hidden, true);
+  f.card.destroy();
+});
 
 test('prepared focus lenses retain controls and reflect only the applied runtime selection', () => {
   const f = fixture(), requested: string[] = [], starRequests: boolean[] = [];
@@ -45,6 +65,8 @@ test('prepared focus lenses retain controls and reflect only the applied runtime
   assert.equal(f.bank.hidden, false);
   assert.equal(f.buttons[0].getAttribute('aria-pressed'), 'true');
   assert.deepEqual(f.details.map(detail => detail.hidden), [false, true, true]);
+  assert.equal(f.factsBank.hidden, false);
+  assert.deepEqual(f.facts.map(detail => detail.hidden), [false, true, true]);
   assert.equal(f.stars.checked, true);
   f.buttons[1].dispatchEvent(new Event('click'));
   assert.deepEqual(requested, ['second']);
@@ -53,6 +75,7 @@ test('prepared focus lenses retain controls and reflect only the applied runtime
   f.card.set(f.record, [], { ...f.presentation, selectedLens: 'second' });
   assert.deepEqual(f.buttons.map(button => button.getAttribute('aria-pressed')), ['false', 'true', 'false']);
   assert.deepEqual(f.details.map(detail => detail.hidden), [true, false, true]);
+  assert.deepEqual(f.facts.map(detail => detail.hidden), [true, false, true]);
   assert.deepEqual([...f.bank.querySelectorAll('[data-focus-lens]'), ...f.bank.querySelectorAll('[data-focus-lens-details]'), f.bank.querySelector('[data-focus-stars]')], retained);
   f.stars.checked = false; f.stars.dispatchEvent(new Event('change'));
   assert.deepEqual(starRequests, [false]);
@@ -71,6 +94,7 @@ test('departed or unsupported galaxy focus hides its retained lens bank and disa
   f.card.set(f.record, [], f.presentation);
   f.card.set({ ...f.record, detailedObjectId: 'image-galaxy' });
   assert.equal(f.bank.hidden, true);
+  assert.equal(f.factsBank.hidden, true);
   f.buttons[1].dispatchEvent(new Event('click'));
   assert.deepEqual(requested, []);
   f.card.set(f.record, [], f.presentation);

@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "bacchus",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "Bacchus is a small near-Earth asteroid with a prominent central indentation in its radar-derived shape. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj) is attributed to Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts and SHA-256 hashes. Shape uses the shared missing-imagery grid. It shows modeled geometry under prepared lighting, without optical reflectance, generic regolith, invented craters or composition. Elevation is false-color source radius minus a 0.315 km reference sphere, encoded from -0.13 to 0.25 km. It is a derived geometric scalar, not independent topography or gravitational height. The live JPL index was checked against the actual preparation input shape/bacchus.obj; it still links this exact model. The page is dated 2024-08-10, not a new scientific-model release. This confirms the published source route, not new mesh bytes, optical imagery or independent source-fit accuracy.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bacchus/README.md",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/bacchus/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The selected radar-shape release supplies geometry and spin information, not a registered optical surface map. No optical texture is selected in this package; this does not establish that every image archive was searched.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bacchus/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/bacchus/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-1",
+      "subject": "Original low-density single-lobe radar mesh: included",
+      "status": "included",
+      "finding": "- [Original low-density single-lobe radar mesh](https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj): **included**. All 256 vertices / 508 faces retained, with dimensions matching the adopted1999 paper solution. No unnecessary subdivision.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bacchus/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "Higher-density PDS representation2048vertices/4092faces: excluded",
+      "status": "excluded",
+      "finding": "- [Higher-density PDS representation2048vertices/4092faces](https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/2063bacchus.tab): **excluded**. The first 256 vertices equal the selected JPL source, but extra vertices change extents slightly. The paper’s 256 parameter model and coarse radar resolution do not justify treating subdivision as measured surface detail. PDS label supports km/principal-axis frame.",
+      "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bacchus/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "Alternative two-lobe fit, optical lightcurves and radar albedo: included as qualification",
+      "status": "included",
+      "finding": "- [Alternative two-lobe fit, optical lightcurves and radar albedo](https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf): **included as qualification**. The authors adopt the conservative single-lobe working model. Two-lobe topology and surface composition are not uniquely established; no invented texture.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bacchus/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "Spitzer thermal-infrared observations in 2006, 2015, 2017: excluded from surface lens",
+      "status": "excluded",
+      "finding": "- [Spitzer thermal-infrared observations in 2006, 2015, 2017](https://pds-smallbodies.astro.umd.edu/data_other/sptz_02_INNER/a2063.shtml): **excluded from surface lens**. Disk-integrated observations do not provide registered resolved terrain, photographic texture, or a spatial temperature map.",
+      "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bacchus/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-5",
+      "subject": "Source triangle-interior scalar minimum",
+      "status": "included",
+      "finding": "The lower palette boundary includes the source triangle-interior minimum (−0.1217848004 km relative radius), computed by independent full-mesh projection of the origin; vertex-only extrema would miss that minimum.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bacchus/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-6",
+      "subject": "Elevation source-distance rejection",
+      "status": "included",
+      "finding": "The delivered Elevation atlas records 0 withheld interior texels of 3,783,647 (0.0000%). The maximum accepted projection distance is 0.000000 m. Independent decoded-atlas checks include 21 final WebP pixel anchors: maximum channel error 2/255 against the source scalar and cartographic-relief recipe. This bound describes those sampled pixels, not every atlas pixel.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bacchus/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "sbmt-m0146235607f4-2p-cif-dbl-fit",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "NEAR MSI M0146235607 F4 deblurred image in SBMT",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/images/M0146235607F4_2P_CIF_DBL.FIT",
+      "label": "Native SBMT file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/images/M0146235607F4_2P_CIF_DBL.FIT",
+      "checkedOn": "2026-09-14",
+      "locator": "Native file; product identifier and camera fields in header."
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

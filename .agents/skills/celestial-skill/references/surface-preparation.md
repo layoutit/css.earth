@@ -14,6 +14,10 @@ not a physical illumination measurement.
 
 ## Photographic observations
 
+Choose the [investigation route](photographic-investigation.md) before processing:
+producer maps, mapped paper figures and unmapped photographs need different
+registration evidence. The appearance guidance here applies after that choice.
+
 Before increasing a texture budget, trace all resizes between the original
 observation and the delivered atlas. Prefer sampling the pinned original grid
 at the final atlas/pole footprint where the existing registration permits it.
@@ -85,11 +89,12 @@ Read the native GeoKeys, origin, pixel area convention and NoData before choosin
 reference sphere and prime meridian. Do not multiply an already angular grid by
 the radius. A declared NoData value may never occur in the raster; inspect the
 actual value distribution and producer legend before treating extrema as gaps.
-Keep any conservative exclusion explicit in the recipe and dataset description.
+Keep any conservative exclusion explicit in the recipe and the lens notes.
 
 Choose labels by meaning through the shared lens vocabulary: Elevation,
 Enhanced color, Thermal infrared, Cross section where those concepts apply.
-Instrument, wavelength, datum, enhancement and caveats belong in descriptions.
+Instrument, wavelength, datum, enhancement and caveats belong in the lens notes;
+the caveats a viewer needs also belong in the dataset summary in `text.json`.
 
 For multi-extension FITS scalar maps, select and check the named quantity,
 units and fit version explicitly; image dimensions alone cannot distinguish

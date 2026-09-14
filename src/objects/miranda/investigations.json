@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "miranda",
+  "entries": [
+    {
+      "id": "schenk-2020-mosaic",
+      "subject": "Schenk 2020 Voyager corrected mosaic",
+      "status": "included",
+      "finding": "The losslessly retained mumap-cyl-180180.cub supplies Monochrome on its 240 m simple-cylindrical grid. It retains source photomet normalization, seams, camera marks, cast shadows and missing coverage; the 0–2400 DN stretch is display-only.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/miranda/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/miranda/source/manifest.json",
+        "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "schenk-2020-dem",
+      "subject": "Schenk 2020 merged Miranda DEM",
+      "status": "included",
+      "finding": "The losslessly retained mudem-ZT-cyl.cub supplies Elevation: merged stereogrammetry and photoclinometry in kilometres above the published ellipsoid. Its 240 m grid, source errors, smooth patches and missing samples do not establish uniform terrain accuracy.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/miranda/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/miranda/source/manifest.json",
+        "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "thomson-baynham-2026-geology",
+      "subject": "Thomson and Baynham 2026 digitized historical map",
+      "status": "included",
+      "finding": "The CC BY 4.0 GIS release supplies the historical Geology lens after its incompatible page CRS was reconstructed with six Miranda graticule fit intersections, six withheld intersections and three crater checks. It represents Voyager-era unit interpretation, not composition or terrain; coverage is about 44.2% and degree-scale registration limits remain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/miranda/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/miranda/source/science/geology-2026/registration.json",
+        "https://zenodo.org/records/20817533"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jpl-ura5vuu2-display-map",
+      "subject": "JPL ura5vuu2.tif simulator map",
+      "status": "excluded",
+      "finding": "The 1440 × 720 simulator display map is superseded by the denser Schenk mosaic and is not retained as a duplicate Monochrome lens.",
+      "revisitWhen": "A JPL release supplies a higher-detail, source-controlled Miranda map with documented projection and processing that improves on the selected Schenk mosaic.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/miranda/README.md",
+        "https://space.jpl.nasa.gov/tmaps/uranus.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pia01490-and-press-color",
+      "subject": "PIA01490 south-polar and color press images",
+      "status": "excluded",
+      "finding": "The press mosaics were examined as rendered-disc or press imagery; they do not establish a reusable registered surface map or global color coverage.",
+      "revisitWhen": "A primary release provides the underlying Miranda observations with reusable terms, body-fixed geometry and coverage adequate for independent registration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/miranda/README.md",
+        "https://science.nasa.gov/photojournal/south-polar-view-of-miranda/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "usgs-voyager-control-network",
+      "subject": "USGS Miranda Voyager control network",
+      "status": "included",
+      "finding": "The USGS control network is retained as registration support for the selected sources, not as a separate image or measured-scalar lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/miranda/README.md",
+        "https://astrogeology.usgs.gov/search/map/miranda_voyager_image_control_network"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "geology-registration-limit",
+      "subject": "Historical geology registration limit",
+      "status": "deferred",
+      "finding": "The retained 1.3–3.3 degree landmark differences are independent checks, not uncertainty bounds for every geological boundary; ambiguous source layer combinations remain missing.",
+      "revisitWhen": "A source-controlled Miranda geological release or additional independently identified controls can improve the page-to-body registration without converting source annotations or Z values into terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/miranda/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/miranda/source/science/geology-2026/registration.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

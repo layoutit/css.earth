@@ -26,7 +26,7 @@ export function navigationFixture(frame: PreparedWorldCameraFrame, capture: () =
     subscribe() { throw new Error('This fixture does not subscribe to camera changes.'); } };
 }
 export function objectFixture(id: string, worldFrame: PreparedWorldCameraFrame, overrides: Partial<ObjectEntry> = {}): ObjectEntry {
-  return { id, name: id, systemName: id, classification: 'planet', color: '#000000', distanceAu: 1,
+  return { kind: 'scene', id, name: id, systemName: id, classification: 'planet', color: '#000000', distance: testDistance(1),
     route: `/${id}/`, description: id, worldFrame,
     async loadScene() { throw new Error('This fixture does not mount a scene.'); }, ...overrides };
 }
@@ -36,3 +36,5 @@ export const unusedSharedView: import('../../src/renderers/css/runtime/deferred-
   async restore() { throw new Error('This fixture does not restore shared URLs.'); },
   subscribe() { return () => {}; },
 };
+
+export const testDistance = (value: number) => ({ meters: value * 149597870700, value, unit: 'AU' as const, quantity: 'geometric' as const, referencePoint: 'heliocentre' as const, epochJdTt: 2461286.5 });

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d6b39c6deb88d5e384e3c5b008114331ed2bf5ddb5670d4d1dab9ab30e4da112"
+    "sha256": "c4d88d0efe31ae73e7e92ff358c8d87c163f3c4c924487b8d9409b6a939c666c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -538,7 +538,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e6227563c894bd830f1825779a3295d1056b29c8bfb9c2bd324773177c3bf4fd",
+      "sha256": "d7102e88052d1dedf97d58e635bee339c917f10ee1925bf929261c8798f126f4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -562,7 +562,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "The sixth planet from the Sun, Saturn is a vast gas giant surrounded by spectacular rings made of countless pieces of ice and rock.",
           "facts": [
             {
               "id": "distance-from-sun",
@@ -699,8 +698,6 @@
             {
               "id": "normal",
               "label": "Visible color",
-              "description": "Visible-light appearance from the prepared OpenSpace Saturn mosaic. This is a presentation texture assembled from observations, not a live image of the scene date.",
-              "title": "Visible-light mosaic",
               "thumbnail": "/scenes/saturn/saturn-lens-normal.webp",
               "surface": "/scenes/saturn/saturn-surface-body.jpg",
               "poles": "/scenes/saturn/saturn-poles.webp",
@@ -709,14 +706,11 @@
                 "id": "normal",
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
               },
-              "detail": "Visible light",
-              "summary": "Cloud bands are assembled from archival visible-light observations. The mosaic does not depict conditions at the scene date."
+              "notes": "Visible-light appearance from the prepared OpenSpace Saturn mosaic. This is a presentation texture assembled from observations, not a live image of the scene date."
             },
             {
               "id": "ultraviolet",
               "label": "Ultraviolet",
-              "description": "Hubble OPAL F225W (225 nm), August 2025, shown in false color. Broad ultraviolet structure is measured; missing polar/ring-occluded rows are filled along longitude and fine detail comes from a bounded visible-light transfer. This composite is not pure ultraviolet imagery.",
-              "title": "OPAL F225W map",
               "thumbnail": "/scenes/saturn/saturn-lens-ultraviolet.webp",
               "surface": "/scenes/saturn/saturn-surface-ultraviolet.webp",
               "poles": "/scenes/saturn/saturn-poles-ultraviolet.webp",
@@ -754,14 +748,11 @@
                 "id": "ultraviolet",
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
               },
-              "detail": "225 nm",
-              "summary": "The 225 nm observations date to August 2025. Filled rows and added visible-light detail are not ultraviolet measurements."
+              "notes": "Hubble OPAL F225W (225 nm), August 2025, shown in false color. Broad ultraviolet structure is measured; missing polar/ring-occluded rows are filled along longitude and fine detail comes from a bounded visible-light transfer. This composite is not pure ultraviolet imagery."
             },
             {
               "id": "methane",
               "label": "Methane",
-              "description": "Hubble OPAL FQ889N (889 nm), August 2025, shown in false color. This methane-absorption band traces atmospheric structure, not a methane concentration map. Missing rows and fine visible-light detail are filled as described for ultraviolet.",
-              "title": "OPAL FQ889N map",
               "thumbnail": "/scenes/saturn/saturn-lens-methane.webp",
               "surface": "/scenes/saturn/saturn-surface-methane.webp",
               "poles": "/scenes/saturn/saturn-poles-methane.webp",
@@ -799,14 +790,11 @@
                 "id": "methane",
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
               },
-              "detail": "889 nm",
-              "summary": "The 889 nm observations include filled rows and added visible detail. Brightness does not measure methane concentration."
+              "notes": "Hubble OPAL FQ889N (889 nm), August 2025, shown in false color. This methane-absorption band traces atmospheric structure, not a methane concentration map. Missing rows and fine visible-light detail are filled as described for ultraviolet."
             },
             {
               "id": "thermal",
               "label": "Thermal illustration",
-              "description": "Schematic illustration from visible-light morphology and authored patterns. Colors do not measure infrared brightness or temperature; this is not a Cassini observation.",
-              "title": "Thermal-style cloud illustration",
               "thumbnail": "/scenes/saturn/saturn-lens-thermal.webp",
               "surface": "/scenes/saturn/saturn-surface-thermal.webp",
               "poles": "/scenes/saturn/saturn-poles-thermal.webp",
@@ -843,14 +831,11 @@
                 "id": "thermal",
                 "url": "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/"
               },
-              "detail": "Schematic",
-              "summary": "Visible cloud patterns are recolored to suggest a thermal view. The colors do not measure temperature or infrared brightness."
+              "notes": "Schematic illustration from visible-light morphology and authored patterns. Colors do not measure infrared brightness or temperature; this is not a Cassini observation."
             },
             {
               "id": "cross-section",
               "label": "Cross section",
-              "description": "Schematic interior layers based on models of Saturn. Boundaries, colors and exposed structure illustrate inferred composition; they are not photographs or a measured interior map.",
-              "title": "Interior structure model",
               "thumbnail": "/scenes/saturn/saturn-view-interior.webp",
               "view": "interior",
               "legend": {
@@ -901,8 +886,7 @@
                 "id": "cross-section",
                 "url": "https://science.nasa.gov/resource/saturn-interior-cutaway-illustration/"
               },
-              "detail": "Structure",
-              "summary": "Colored layers distinguish the inferred interior structure. Their boundaries illustrate a model, not a measured interior map."
+              "notes": "Schematic interior layers based on models of Saturn. Boundaries, colors and exposed structure illustrate inferred composition; they are not photographs or a measured interior map."
             }
           ]
         },
@@ -2285,10 +2269,10 @@
       "redistribution": "checked authored source with embedded provenance",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "e6227563c894bd830f1825779a3295d1056b29c8bfb9c2bd324773177c3bf4fd",
-      "bytes": 19083,
+      "sha256": "d7102e88052d1dedf97d58e635bee339c917f10ee1925bf929261c8798f126f4",
+      "bytes": 17805,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2393,11 +2377,10 @@
       "label": "Ultraviolet",
       "recipe": "surface",
       "selector": "/lenses/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the declared spectral material operation over the prepared body and ring materials.",
-      "limitations": [
-        "Hubble OPAL F225W (225 nm), August 2025, shown in false color. Broad ultraviolet structure is measured; missing polar/ring-occluded rows are filled along longitude and fine detail comes from a bounded visible-light transfer. This composite is not pure ultraviolet imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "ultraviolet"
       ],
@@ -2449,11 +2432,10 @@
       "label": "Methane",
       "recipe": "surface",
       "selector": "/lenses/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the declared spectral material operation over the prepared body and ring materials.",
-      "limitations": [
-        "Hubble OPAL FQ889N (889 nm), August 2025, shown in false color. This methane-absorption band traces atmospheric structure, not a methane concentration map. Missing rows and fine visible-light detail are filled as described for ultraviolet."
-      ],
+      "limitations": [],
       "lensIds": [
         "methane"
       ],
@@ -2505,11 +2487,10 @@
       "label": "Thermal illustration",
       "recipe": "surface",
       "selector": "/lenses/2",
+      "observationAttribution": "none",
       "parents": [],
       "process": "Prepare the declared spectral material operation over the prepared body and ring materials.",
-      "limitations": [
-        "Schematic illustration from visible-light morphology and authored patterns. Colors do not measure infrared brightness or temperature; this is not a Cassini observation."
-      ],
+      "limitations": [],
       "lensIds": [
         "thermal"
       ],
@@ -2559,11 +2540,10 @@
       "label": "Visible color",
       "recipe": "geometry",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the source-defined oblate body, ring and cutaway material.",
-      "limitations": [
-        "Visible-light appearance from the prepared OpenSpace Saturn mosaic. This is a presentation texture assembled from observations, not a live image of the scene date."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -2614,11 +2594,10 @@
       "label": "Cross section",
       "recipe": "geometry",
       "selector": "",
+      "observationAttribution": "none",
       "parents": [],
       "process": "Prepare the source-defined oblate body, ring and cutaway material.",
-      "limitations": [
-        "Schematic interior layers based on models of Saturn. Boundaries, colors and exposed structure illustrate inferred composition; they are not photographs or a measured interior map."
-      ],
+      "limitations": [],
       "lensIds": [
         "cross-section"
       ],
@@ -2654,8 +2633,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -2667,8 +2647,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10155,
-          "sha256": "683d4a542ac1f34dc694c6b9175afe8523ef5658507daf1bae26f8e65d8eb2b2",
+          "bytes": 10006,
+          "sha256": "ab98c2d4cd383ba54e4c063deac0f5769ed057661981d56baf41e511f161f2b5",
           "verification": "bytes-verified"
         }
       ],
@@ -2679,6 +2659,7 @@
       "label": "Saturn modeled disk reflectance",
       "recipe": "charts",
       "selector": "/charts/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
       "limitations": [],
@@ -2707,6 +2688,7 @@
       "label": "Saturn temperature-pressure profile",
       "recipe": "charts",
       "selector": "/charts/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
       "limitations": [],
@@ -2735,6 +2717,7 @@
       "label": "Saturn photometric phase curve",
       "recipe": "charts",
       "selector": "/charts/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
       "limitations": [],
@@ -2767,6 +2750,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "normal"
@@ -2794,6 +2778,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "ultraviolet"
@@ -2821,6 +2806,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "methane"
@@ -2848,6 +2834,7 @@
         "materials",
         "rings"
       ],
+      "observationAttribution": "none",
       "inputs": [],
       "parents": [
         "thermal"

@@ -14,12 +14,20 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   }
   const unitScale = options.unitScale ?? 50;
   if (!Number.isFinite(unitScale) || unitScale <= 0) throw new TypeError('Prepared CSS volume unit scale must be positive.');
+  const { min, max } = payload.frame.boundsUnits;
+  // Older banks declare whole-volume bounds but no per-slice bounds. Reuse
+  // those in the renderer's [y,x,z] coordinates to reject an offscreen bank.
+  const frameBounds: PreparedLeafBounds = {
+    min: [min[1] * unitScale, min[0] * unitScale, min[2] * unitScale],
+    max: [max[1] * unitScale, max[0] * unitScale, max[2] * unitScale],
+  };
   const document = options.host.ownerDocument;
   const create = options.createElement ?? ((tag: string) => document.createElement(tag));
   const roots: HTMLElement[] = [];
   const cameras: HTMLElement[] = [];
   const scenes: HTMLElement[] = [];
   const boundedLeaves: { nodes: HTMLElement[]; bounds: PreparedLeafBounds | undefined; shown: boolean | null }[] = [];
+  const pendingTextures = AXES.map(() => new Map<{ nodes: HTMLElement[]; shown: boolean | null }, string>());
   const opticalCopies: { nodes: HTMLElement[][]; alpha: number[] }[] = [];
   for (const axis of AXES) {
     const stack = payload.stacks.find(candidate => candidate.axis === axis);
@@ -42,12 +50,13 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     opticalCopies.push(copies);
     for (const leaf of stack.leaves) {
       const textureUrl = options.resolveResource(leaf.texturePath);
-      const bounded = { nodes: [] as HTMLElement[], bounds: leaf.boundsCssPixels, shown: null as boolean | null };
+      const bounded = { nodes: [] as HTMLElement[], bounds: leaf.boundsCssPixels ?? frameBounds, shown: null as boolean | null };
       boundedLeaves.push(bounded);
+      pendingTextures[AXES.indexOf(axis)]!.set(bounded, textureUrl);
       // Coincident copies reuse the same prepared pixels and transform. They
       // increase optical length without intersecting another axis's planes.
       for (let copy = 0; copy < 3; copy++) {
-        const node = createLeaf(create, leaf, textureUrl, copy);
+        const node = createLeaf(create, leaf, copy);
         mesh.append(node);
         bounded.nodes.push(node);
         if (copy > 0) copies.nodes[copy - 1]!.push(node);
@@ -100,13 +109,22 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         for (const node of leaf.nodes) node.style.visibility = shown ? '' : 'hidden';
       }
     }
+    const strengths = axisWeights(presentPhysicalPoseInVolume(world.pose, payload.frame));
+    for (const [axis, pending] of pendingTextures.entries()) {
+      if (strengths[axis]!.weight <= 0) continue;
+      for (const [leaf, url] of pending) {
+        if (!leaf.shown) continue;
+        const image = `url("${escapeUrl(url)}")`;
+        for (const node of leaf.nodes) node.style.backgroundImage = image;
+        pending.delete(leaf);
+      }
+    }
     // Optical length and stack mixing depend on direction, not observer
     // translation. Publish changed coefficients directly to their retained
     // optical copies; base slices and ancestors do not inherit animated state.
     if (previousOrientation && previousOrientation.every((value, axis) => value === world.pose.orientationXyzw[axis])) return;
     previousOrientation = [...world.pose.orientationXyzw];
-    const local = presentPhysicalPoseInVolume(world.pose, payload.frame);
-    const strengths = axisWeights(local);
+
     let total = 0;
     for (let index = 0; index < roots.length; index++) {
       const root = roots[index]!;
@@ -166,7 +184,7 @@ export function preparedVolumeCameraTransform(publication: VolumeCameraPublicati
     ] as [number, number, number]), focalPixels: viewport.focalPixels });
 }
 
-function createLeaf(create: (tag: string) => HTMLElement, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], textureUrl: string, copy: number): HTMLElement {
+function createLeaf(create: (tag: string) => HTMLElement, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], copy: number): HTMLElement {
   const node = create('s');
   // A zero-alpha optical copy contributes nothing; it stays out of layout and compositing.
   if (copy > 0) { node.style.opacity = '0'; node.style.display = 'none'; }
@@ -175,7 +193,6 @@ function createLeaf(create: (tag: string) => HTMLElement, leaf: PreparedCssVolum
   node.style.transform = leaf.style.transform;
   node.style.backgroundSize = leaf.style.backgroundSize;
   node.style.backgroundPosition = leaf.style.backgroundPosition;
-  node.style.backgroundImage = `url("${escapeUrl(textureUrl)}")`;
   return node;
 }
 

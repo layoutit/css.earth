@@ -1,0 +1,16 @@
+{
+  "action": "apply",
+  "imageId": "compiler",
+  "recipePath": "labs/nebula/models/m45/compiler.json",
+  "cataloguePath": ".local/nebula-lab/observations/m45-processing/structures/catalogue.json",
+  "controls": {
+    "detail": 1,
+    "faint": 0.35,
+    "depth": 1
+  },
+  "imageToFrame": {},
+  "evidence": {
+    "sensitivity": 1,
+    "weights": []
+  }
+}

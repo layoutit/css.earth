@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "5ecf981c5f9941c6c1fc50547eec6c532379ca00ceb970325e0ff88581e455f1"
+          "sha256": "4aae26e7662ad0fe7a41bb193483b88e6992e49ed2e6124152827a51aeee705d"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9b1965d989190a0cc45d5a334e7f60cb35325527b97b74af4042189297feaaad"
+        "sha256": "2c61fc929bd6dad84f145565342ba9da6464c96b53dd033fe8d041cb3f63bcb9"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.75816485113467,
-      "description": "Explore 55 Pandora in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in September 1858.",
       "systemName": "Solar System",
       "order": 233,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "95967491e1bd0807db14d47b2e939cfd2e921ac88feb55963ac985e8d706a054"
+    "sha256": "6e41709f695eac091ac9217112033d39d6767dac479f2b837892ddf82498a7f3"
   }
 }

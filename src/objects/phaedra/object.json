@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "de7d3cee82b8a0f493d0a128fce1a50a4e56e60d0a95ec6addb5670fc35238f3"
+          "sha256": "1f82866e4d4fec69255f12b3178db6114dad6202b0d6e4d4fc2034dcabd28351"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "199c32127abcb6185050f3814334529cfa4d4b005ff5af3e309024b7533cbaf2"
+        "sha256": "e215e4a62598929777c05d6ff11c2b28d39b359509d566d0dd5834896b67a4cf"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.8588859462315144,
-      "description": "Explore Phaedra in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in September 1877.",
       "systemName": "Solar System",
       "order": 303,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "44996fbaf769cf6220863ef56d7c4a9601401f1b9a5ede6b7b6419961cadb5ec"
+    "sha256": "eabb2189bf0c821b34af98b3a9d057802a2868e05321ad18030ee0b3a826a843"
   }
 }

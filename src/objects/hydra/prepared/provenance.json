@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "07421eb846b2a0f1e5e230ee5f328afb521cc01bfbff57a4a4a97eb91a3b218c"
+    "sha256": "f7c217a5b4ee8f92fe687e574994529c55b869cd4222b1d2ca1fe6d85370b971"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5e4d6692114eb03f0372077daf6ef5fe159f1a400f94f243077bcfe7940cb3b1",
+      "sha256": "37961fe127adb95b91c7729421731b84b636e2a08e781f76722ed8e5f84b82fc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,7 +65,6 @@
                 }
               ],
               "transfer": {
-                "maximumSourceDistanceMeters": 500,
                 "maximumSeparationFootprints": 1.5,
                 "maximumEmissionDegrees": 70,
                 "visibilityToleranceMeters": 0.5
@@ -80,8 +79,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99.8
+                  1.7,
+                  100
                 ]
               },
               "metadata": {
@@ -149,14 +148,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3ba91b4728f2fbf1f406a863056303ba09deed7a431ce8bec702f0a2134a2cdc",
+      "sha256": "db78835311ba8a75c351bbfd73277a69bba4865322b04226e5d762d52d2dd2b9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "hydra",
         "displayName": "Hydra",
         "panel": {
-          "introduction": "Hydra is Pluto’s outermost known moon. Its bright, water-ice-rich surface was resolved by New Horizons in 2015. A large northern hollow gives the small body its uneven shape, and it spins about ninety times during one orbit around the Pluto–Charon system.",
           "facts": [
             {
               "id": "radius",
@@ -202,9 +200,6 @@
             {
               "id": "monochrome",
               "label": "Monochrome",
-              "description": "Experimental image placement; registration is not yet qualified. New Horizons LORRI photograph from 14 July 2015, at about 1.14 km/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map.",
-              "title": "New Horizons surface photograph",
-              "detail": "1.14 km/pixel",
               "thumbnail": "/scenes/hydra/hydra-monochrome-thumbnail.webp",
               "surface": "hydra-monochrome-surface@2x.webp",
               "poles": "hydra-monochrome-poles@2x.webp",
@@ -213,14 +208,12 @@
                 "path": "../manifest.json",
                 "url": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.lbl"
               },
-              "summary": "Experimental placement; registration unverified. LORRI · 14 July 2015 · 1.14 km/pixel. Acquisition lighting retained; grid marks missing coverage."
+              "notes": "Experimental image placement; registration is not yet qualified. New Horizons LORRI photograph from 14 July 2015, at about 1.14 km/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map.",
+              "noData": true
             },
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data.",
-              "title": "Porter shape reconstruction",
-              "detail": "Shape",
               "thumbnail": "/scenes/hydra/hydra-model-thumbnail.webp",
               "surface": "hydra-model-surface@2x.webp",
               "poles": "hydra-model-poles@2x.webp",
@@ -229,7 +222,8 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.6084/m9.figshare.12779975.v1"
               },
-              "summary": "Published shape reconstruction."
+              "notes": "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data.",
+              "noData": true
             }
           ]
         },
@@ -462,7 +456,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -471,8 +465,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3ba91b4728f2fbf1f406a863056303ba09deed7a431ce8bec702f0a2134a2cdc",
-      "bytes": 4713,
+      "sha256": "db78835311ba8a75c351bbfd73277a69bba4865322b04226e5d762d52d2dd2b9",
+      "bytes": 4079,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -485,11 +479,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -521,6 +514,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "porter-hydra-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -528,11 +533,10 @@
       "label": "Monochrome",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Experimental image placement; registration is not yet qualified. New Horizons LORRI photograph from 14 July 2015, at about 1.14 km/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map."
-      ],
+      "limitations": [],
       "lensIds": [
         "monochrome"
       ],
@@ -550,15 +554,22 @@
       "outputs": [
         {
           "url": "/scenes/hydra/hydra-monochrome-thumbnail.webp",
-          "bytes": 1794,
-          "sha256": "ff730ebd39de810ab436251563977c91e86238a81ec426072a257c25e5f5f8f5",
+          "bytes": 1806,
+          "sha256": "1fbbc6a8ad6ef48bf64d273cd5e9d91beeb0b5d610ea7547abb5c13fcfef6bf6",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hydra/hydra-monochrome-surface@2x.webp",
-          "bytes": 101160,
-          "sha256": "f7ac2fb047cf93d02e1f838a8f7cee8ce79a0c47ad7236649181efc01f37b3e7",
+          "bytes": 100400,
+          "sha256": "aeb9345b6492f3e4443433bb02e0dbe91eb8ac966bf5faa0de067b9119ad0e68",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "porter-hydra-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -568,8 +579,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -581,8 +593,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4961,
-          "sha256": "c0eef62408ba2b0788ad5faf48989dc43a8dc6228beb05e13ae77f5e8c5c8c6c",
+          "bytes": 4684,
+          "sha256": "4352d072db5f8c19318349958f3d9827003757d6c91cbae8b29cc6a680ee334c",
           "verification": "bytes-verified"
         }
       ],
@@ -596,6 +608,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "model"
@@ -620,6 +633,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "monochrome"
@@ -630,8 +644,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/monochrome.webp",
-          "bytes": 4828,
-          "sha256": "be95bc9e3d895d5d62507d8dd53317c9261e07e91ebe2d7c812d89458c39b5c9",
+          "bytes": 4968,
+          "sha256": "b7c6234912d7aae6624b7ecd6855571bac18903834ea7e3d4a1236c2aebbda09",
           "verification": "bytes-verified"
         }
       ]
@@ -640,5 +654,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "hydra",
+    "materialSha256": "0947c662d4cd52ccf89b6f293122b65ac47766e89be6991cad729bd5bc2b5106",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/hydra/prepared/provenance.json",
+      "sha256": "a4e11f74b546d48c6a9d9275a68327be75a23e02aa62ed106b65487611259666"
+    }
   }
 }

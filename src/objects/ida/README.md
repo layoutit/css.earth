@@ -44,7 +44,7 @@ pixels alone do not qualify their projection onto this model.
 
 The Thomas mosaic is processed monochrome, with photographed shadows, local stretches and seams. Its exactly-zero gaps remain a grid. A conflicting PDS4 display-direction label is overridden by the north-up registration evidence below. Elevation is radius minus 16 km, not gravitational height.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="ida-source-record"></a>
 <a id="selected-release-and-interpretation"></a>
@@ -67,14 +67,7 @@ The Thomas mosaic is processed monochrome, with photographed shadows, local stre
 
 **Source survey (2026-09-07)**
 
-| Candidate | What it adds | Disposition |
-| --- | --- | --- |
-| Thomas shape + registered FITS mosaic, linked above | Coherent body frame, explicit gap semantics, original contributing-frame list | Included for shape, monochrome and radial elevation. |
-| [Stooke Small Bodies Maps V3.0 guide](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html), [2015 revised Ida JPEG](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/243ida/ida_cylindrical_rev_mosaic.jpg) | Larger 7200×3600 cylindrical visualization based on the Thomas shape; improved presentation, public domain with credit | Downloaded, pinned as a registration reference and visually compared. Excluded from the present lens because the extensively processed JPEG has no separate source-validity mask; its smoothed coarse areas and gaps cannot be assigned the FITS zero semantics. It is explicitly unsuitable for photometric analysis. The larger grid alone is not proof of additional measured detail. |
-| [Domingue calibrated SSI release](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-A-SSI-3-IDA-CALIMAGES-V1.0) | I/F images in seven filters and identified color sets | The selected green-filter pair is included as a separate I/F view, using the Thomas shape camera catalog and archived detector-quality masks described below. The archive’s nadir calibration workaround prevents its own geometry calculation. Multiband color remains deferred; these are not a ready global color mosaic. |
-| [USGS/RAND Ida control network](https://astrogeology.usgs.gov/search/map/ida_image_control_network) | Tie points, revised image orientations and source images | Useful future input for rebuilding calibrated image geometry; not an independent surface lens. Excluded from this prepared global package. |
-| [HIRES NIMS Ida spectral cubes](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-A-NIMS-4-IDACUBE-V1.0) | Spatially resolved infrared radiance in point-perspective geometry | Unresolved as a scientifically distinct view. Not a registered global texture; spectral selection and instrument-footprint reprojection need their own source-backed recipe. |
-| [Sullivan et al. geology](https://www.usgs.gov/publications/geology-243-ida) and [LPSC abstract](https://www.lpi.usra.edu/meetings/lpsc1995/pdf/1688.pdf) | Interpretations of craters, regolith and color units | Editorial background only. No verified registered machine-readable global geologic-unit release was identified in this concise survey; no painted geology lens or regions are fabricated. |
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Image registration check**
 
@@ -106,7 +99,7 @@ Projection uses the source mesh's visibility and terrain-shadow rays, incidence/
 
 **Spacecraft mosaic update (2026-09-09)**
 
-Reproduce the added registration check with `python tools/objects/terrestrial-layers/verify-catalog-camera.py src/objects/ida/source OUTPUT --frame 202560500 --profile reference/registration-202560500.json`. Run `node tools/objects/terrestrial-layers/audit-camera-mosaic.mts src/objects/ida/source OUTPUT` for matched area-weighted before/after sampling and lossless Float32 contribution planes. The audit grids use the authored 4096×2048 cylindrical sampling, not atlas texel counts as surface area.
+Reproduce the added registration check with `python tools/objects/terrestrial-layers/verify-catalog-camera.py src/objects/ida/source OUTPUT --frame 202560500 --profile reference/registration-202560500.json`. The prepared observation report records each frame's share of the displayed surface from equal-area samples (`areaCoverage`), and the atlas observation index names the photograph behind every texel.
 
 The original calibrated FITS/XML and raw detector FITS/label are pinned separately. Both raw quality companions are identified by target, exact time, filter and spacecraft clock, with the released `idabad.tab` block mask. The original four-pixel registration limit and five-pixel quality-boundary inset remain. Four separated 16×16 patches of image 0202560500 give 1.414 px RMS and 2.236 px maximum residual with no local camera fit. These are checks against the Thomas mosaic on the original shape, which shares mission observations; they are not absolute independent cartography.
 
@@ -114,6 +107,6 @@ The SSI reflectance view now combines green-filter images **0202561278** and **0
 
 The checked Thomas PDS4 release supplies the shape and registered Galileo SSI mosaic: [data directory](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/). The original study is Thomas et al., *The Shape of Ida*, Icarus 120 (1996), [doi:10.1006/icar.1996.0033](https://doi.org/10.1006/icar.1996.0033). `source/manifest.json` pins each byte sequence; the original labels and image list are preserved beside the inputs.
 
-Galileo brightness is normalized to 25° incidence, 0° emission and 25° phase with the Hapke model of [Helfenstein et al. (1996)](https://doi.org/10.1006/icar.1996.0036): single-scattering albedo 0.22, Henyey–Greenstein asymmetry −0.33, shadow-hiding amplitude 1.5 and width 0.020, and roughness 18°, fitted at 0.55 µm to Galileo images at 19.5–109.8° phase. [The model record](source/photometry/helfenstein-1996-hapke.json) transcribes the abstract; Hasselmann et al. (2016, Table 7) list the amplitude as 1.53. The photographs are green-filter frames at about 23° and 26° phase. Incidence and emission stay limited to 65°, and gains to 0.4–4; no sample needed withholding. Over 50,785 overlap samples the normalized frames agree to a median ratio of 1.0015, so no level gain is fitted. A common 0–0.12 I/F, gamma-2.2 display transfer follows. Coarser qualified samples are laid down first, with the finer image replacing the interior and blending at the existing incidence/emission and detector boundaries. Run the contribution audit below to retain the actual weights for both sources.
+Galileo brightness is normalized to 25° incidence, 0° emission and 25° phase with the Hapke model of [Helfenstein et al. (1996)](https://doi.org/10.1006/icar.1996.0036): single-scattering albedo 0.22, Henyey–Greenstein asymmetry −0.33, shadow-hiding amplitude 1.5 and width 0.020, and roughness 18°, fitted at 0.55 µm to Galileo images at 19.5–109.8° phase. [The model record](source/photometry/helfenstein-1996-hapke.json) transcribes the abstract; Hasselmann et al. (2016, Table 7) list the amplitude as 1.53. The photographs are green-filter frames at about 23° and 26° phase. Incidence and emission stay limited to 65°, and gains to 0.4–4; no sample needed withholding. Overlap level matching, fitted where both frames see the surface within 70° of incidence and emission, gives the second frame a gain of 0.994. The display range is 0–0.0931 I/F, the 99.5th percentile of displayed samples, shown linearly. Where the frames overlap, each point keeps the finer photograph.
 
 </details>

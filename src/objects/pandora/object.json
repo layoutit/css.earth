@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "5a1e555f1a608a8f771fe6c48dabf9a56e054d0098d628421e74804277b1ca30"
+          "sha256": "bbac3b032d7b977c287072c9599241e34f741657b4ec989e0c847d9bbe6a300e"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3a63768f20f181f4a6ef8c4eebe1a88b554efc0ab79be1fbb8865d747fd2c1d2"
+          "sha256": "7b0d7edbc49375ba73b4063760149fbf1951a43529a639d63438fada07f02f15"
         },
         {
           "id": "title",
@@ -38,12 +38,12 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "48f4a7e8b2c48d75ab44cf74189c27b68c854e5b4176841f0f3223edce12de0b"
+          "sha256": "7ccb6b2cb97ec2f52d08aaea5b8793b2114742fea46c533440bf444b531e6cc4"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "d0e663f8396e24092eae10c7659cbe74eb42351f63c338e249dc0ee701689eb7"
+          "sha256": "bf2e66f27721552c2d928de7e7223c5ebcad288cd991f6881317ddece43a67f1"
         },
         {
           "id": "rotation",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "18dcbe1364189eb451763e7d6ad9351eadf5ec4f09d7f7345ce4f576cd3a9a74"
+        "sha256": "40e80c9cdc9d9f9ec31c196440e292f408c309c2eb829ad77944c6925acf5dfb"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
-      "description": "Explore Pandora with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "description": "Potato-shaped moon just outside Saturn's F ring, which it tends to disrupt.",
       "systemName": "Solar System",
       "order": 434,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "6bc8dc797305f8e65bfa3f8da098471b6c99533f5e6fff8bf846ff940922d826"
+    "sha256": "8c10994f7c33dd2c4d7abb9511291c9f9f0dc114162975ef8b9af968c0773b0e"
   }
 }

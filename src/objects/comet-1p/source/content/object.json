@@ -4,7 +4,6 @@
   "id": "comet-1p",
   "displayName": "Halley",
   "panel": {
-    "introduction": "Giotto and Vega 2 photographed Halley in 1986. Their images cover about 28% of this nucleus model; the grid shows where the surface is not mapped.",
     "facts": [
       {
         "id": "giotto-approach",
@@ -35,9 +34,6 @@
       {
         "id": "model",
         "label": "Historical model",
-        "description": "A historical shape reconstructed from Giotto and Vega images. The grid follows the model; depressions and fine details are uncertain.",
-        "title": "Stooke nucleus shape reconstruction",
-        "detail": "Highly uncertain",
         "thumbnail": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
         "surface": "comet-1p-model-surface@2x.webp",
         "poles": "comet-1p-model-poles@2x.webp",
@@ -45,14 +41,13 @@
           "id": "stooke-halley",
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
-        }
+        },
+        "notes": "A historical shape reconstructed from Giotto and Vega images. The grid follows the model; depressions and fine details are uncertain.",
+        "noData": true
       },
       {
         "id": "giotto",
         "label": "Giotto + Vega",
-        "description": "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid.",
-        "title": "Halley spacecraft photographic mosaic",
-        "detail": "Partial coverage",
         "thumbnail": "/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
         "surface": "comet-1p-giotto-surface@2x.webp",
         "poles": "comet-1p-giotto-poles@2x.webp",
@@ -60,7 +55,9 @@
           "id": "encounter-projection",
           "path": "../manifest.json",
           "url": "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
-        }
+        },
+        "notes": "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid.",
+        "noData": true
       }
     ]
   },

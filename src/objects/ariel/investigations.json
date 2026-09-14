@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ariel",
+  "entries": [
+    {
+      "id": "schenk-lpi-2020-native-corrected-mosaic",
+      "subject": "Schenk/LPI 2020 native corrected mosaic",
+      "status": "included",
+      "finding": "Selected as Monochrome for revised registration, documented photometry, and original floating-point data.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "schenk-lpi-2020-merged-numeric-dem",
+      "subject": "Schenk/LPI 2020 merged numeric DEM",
+      "status": "included",
+      "finding": "Selected as the conceptually distinct Elevation lens, with its own validity and ellipsoid datum.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jpl-simulator-ariel-map-1440-720-at-4-pixels-degree",
+      "subject": "JPL simulator Ariel map, 1440 × 720 at 4 pixels/degree",
+      "status": "excluded",
+      "finding": "Excluded as a duplicate lower-density display mosaic; original LPI data has stronger mapping and processing provenance.",
+      "revisitWhen": "A Ariel source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/source/manifest.json",
+        "https://space.jpl.nasa.gov/tmaps/uranus.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "nasa-pia01351-clear-filter-image",
+      "subject": "NASA PIA01351 clear-filter image",
+      "status": "excluded",
+      "finding": "Excluded: 47 km image detail and disc projection add no mapped surface capability to the selected mosaic.",
+      "revisitWhen": "A primary Ariel release provides the PIA01351 source image with body-fixed camera geometry and useful mapped coverage beyond the Schenk mosaic.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/source/manifest.json",
+        "https://science.nasa.gov/photojournal/bright-patches-on-ariel/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "beddingfield-et-al-2025-medial-groove-geology-work-f",
+      "subject": "Beddingfield et al. 2025 medial-groove/geology work, followed by Tonoian et al. structural mapping",
+      "status": "unresolved",
+      "finding": "Unresolved complementary interpretive candidate. The examined releases describe geological figures and continued structural mapping, but did not establish a downloadable georeferenced unit raster/vector closure suitable for this renderer. No geological lens is claimed.",
+      "revisitWhen": "A Ariel source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/source/manifest.json",
+        "https://www.hou.usra.edu/meetings/lpsc2025/pdf/1126.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "usgs-voyager-control-network",
+      "subject": "USGS Ariel Voyager control networks",
+      "status": "included",
+      "finding": "The inspected release republishes RAND and Jigsaw control solutions and is retained as registration support. It is not an additional image or measured-scalar lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "monochrome-stretch-trial",
+      "subject": "Monochrome display-range comparison",
+      "status": "included",
+      "finding": "The existing visual trial compared upper bounds of 2400, 3000 and 3600 DN and selected 3000 DN. This is a display-contrast choice applied to the retained numeric mosaic, not an albedo calibration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

@@ -804,8 +804,8 @@
     {
       "id": "iapetus-object-content",
       "path": "content/object.json",
-      "expectedBytes": 13793,
-      "expectedSha256": "9c0d44c1273a05ed51008f0e4c4967af201fcd544a6c0e2251a6d6cf21602748",
+      "expectedBytes": 12674,
+      "expectedSha256": "c30b3306843a145214368fafa7309683aed023533725cb36e3d495169dcf303c",
       "origin": "Repository-authored Iapetus object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -817,7 +817,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     }
   ],

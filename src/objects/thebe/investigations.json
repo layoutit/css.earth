@@ -1,0 +1,120 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "thebe",
+  "entries": [
+    {
+      "id": "galileo-c0368591600",
+      "subject": "Galileo SSI frame C0368591600 in the Monochrome lens",
+      "status": "excluded",
+      "finding": "Thebe is a 77-pixel lit crescent, and no level reconciles it with the other frames: without it their fitted levels span 1 to 0.59 instead of 1 to 0.20.",
+      "revisitWhen": "An overlapping frame can set its level, or a closer view of the same longitudes is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/4fea925cce611d30704d68df60d91df92596b87c/src/planets/thebe/README.md#L58"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "4fea925cce611d30704d68df60d91df92596b87c"
+        }
+      ]
+    },
+    {
+      "id": "galileo-selected-frames",
+      "subject": "Selected Galileo SSI clear frames",
+      "status": "included",
+      "finding": "C0401759200, C0401787200, C0420691700 and C0532888400 supply the retained coarse Monochrome lens. Repeated exposures/cutouts and lower-resolution duplicates add no useful coverage. The selection does not qualify independent surface-feature registration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/thebe/source/manifest.json",
+        "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/j14thebe.tab"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "juno-sru-pia26751",
+      "subject": "Juno SRU PIA26751 image",
+      "status": "unresolved",
+      "finding": "The README records a useful approximately 3 km per pixel candidate but no precise camera geometry, calibration or registered science release.",
+      "revisitWhen": "A source release supplies camera geometry, calibration and a registered product for this observation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/thebe/README.md",
+        "https://science.nasa.gov/photojournal/nasas-juno-misson-captures-jupiter-moon-thebe/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "thebe-press-and-voyager-alternatives",
+      "subject": "Photojournal composites and Voyager observations",
+      "status": "excluded",
+      "finding": "The README records press composites as enlarged or rotated displays and Voyager observations as unresolved or coarser than the selected Galileo coverage.",
+      "revisitWhen": "A native product provides registered coverage that improves the selected Galileo observations.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/thebe/README.md",
+        "https://science.nasa.gov/photojournal/best-images-yet-of-thebe-amalthea-and-metis/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "stooke-radius-grid",
+      "subject": "Stooke j14thebe.tab radius grid",
+      "status": "included",
+      "finding": "The released 5-degree radius grid supplies geometry and explicitly model-derived Elevation, not a separately measured altimetric surface.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/thebe/README.md",
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "galileo-c0420644201",
+      "subject": "Galileo SSI C0420644201",
+      "status": "unresolved",
+      "finding": "The survey retained this frame as an unused candidate because useful registration remained unresolved.",
+      "revisitWhen": "A controlled camera solution demonstrates useful independently registered coverage for C0420644201.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/thebe/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "denk-2026-review",
+      "subject": "Denk et al. (2026), Figure 10",
+      "status": "included",
+      "finding": "The review cross-checks Galileo image identifiers, resolution and native north-down orientation. Its artwork is not a texture; no separate mapped composition or geology product was identified.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/thebe/README.md",
+        "https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

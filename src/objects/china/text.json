@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "china",
+  "card": {
+    "text": "Dark main-belt asteroid, discovered in October 1957.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=China",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1957-10-30 by Chang, Y. C. at Nanking; albedo: 0.078; orbit class: Main-belt Asteroid"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Y. C. Chang found China at Nanking in 1957. It is dark, reflecting about 8% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=China",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1957-10-30 by Chang, Y. C. at Nanking; albedo: 0.078; orbit class: Main-belt Asteroid"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Light-curve shape model",
+      "detail": "Published shape",
+      "summary": "Shape inferred from brightness changes as it spins, so hollows are smoothed over. The spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 13.042 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

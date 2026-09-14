@@ -28,7 +28,11 @@ Both use the original [NASA PDS imagery](https://pdssbn.astro.umd.edu/holdings/d
 
 The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 32,040 facets. These are **facet counts, not area percentages**. The retained values span 288.5–309.2 K and 3.461–4.943%/100 nm. Both views use the same missing-data mask and keep Shadows off by default. The grid marks rejected spectra, unsupported shape, and gaps; it is not filled from nearby values.
 
+[Investigation ledger](investigations.json): tested alternatives and the evidence needed to revisit them. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
+
 ## Evidence
+
+- **Photometric trials, 2026-09-13:** trials with the published Hapke parameters reduced accepted photographic area from 32.58% to 24.48% for Deep Impact and from 56.43% to 34.28% for NExT. Overlap differences improved in only 11 of 28 and four of 15 pairs, respectively. Both original photograph mosaics remain in use. [Parameters, measurements and limitations](evidence/photometry/trial.json) record these diagnostic trials, including the unverified original H-function approximation and the filter mismatch.
 
 - **Recipe update, 2026-09-13:** a full preparation after merging main's observation recipes (`2f2752abb` plus this infrared change) preserves all 49 delivered images byte-for-byte against `be628e35f`. Runtime values are unchanged, so the earlier browser captures still apply to the comet views. The photographic display fields, source pins and navigation receipts use the new shared recipe; source/package and numerical-frame checks pass.
 
@@ -65,6 +69,7 @@ The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 
 
 ## Known problems
 
+- **Close-up replay, 2026-09-13:** regenerating the first cropped ITS camera fails its existing registration budget with both main's matcher (`fc4dfc18`) and the radiance-unit fix (`8475dd92`). The regenerated control records are identical. The [replay comparison](evidence/registration/closeup-replay.json) preserves input identities and the failure; earlier successful reproduction reports do not establish a current pass. The shipped camera records and photographs remain unchanged.
 - Infrared placement is coarse. Terrain residuals test alignment relative to the existing photographic/body frame; they do not establish an independent absolute position. That frame inherits source shape and earlier photographic-anchor uncertainty. Temperature and slope pixels must not be used to locate small surface features.
 - These are new fits to PDS version 3 spectra, not a reproduction of the 2013 paper’s published maps. That paper used earlier calibration and different meshes. Its quoted temperature errors cannot simply be assigned to these views. Calibration, unresolved temperature mixtures, scattered light and geometric uncertainty remain.
 

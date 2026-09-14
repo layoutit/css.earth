@@ -1,8 +1,10 @@
 import type { RuntimeManifest } from './operations.ts';
-import { constants } from 'node:fs';
-import { copyFile, mkdir, readFile, readdir, rename, rm } from 'node:fs/promises';
+import { link, mkdir, readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '../source-values.mts';
+import { writePreparedSet, type PreparedOutput } from '../write-prepared-set.mts';
+import { listSharedBankFiles, readSharedBank, sharedBankPath } from '../../src/platform/prepared-shared-banks.mts';
 
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const safe = (name: unknown): name is string => typeof name === 'string' && /^[a-z0-9][a-z0-9@._-]*$/u.test(name);
@@ -21,8 +23,9 @@ export async function readPreparedJsonOutputs(directory: string) {
   return outputs.sort((left, right) => left.filename.localeCompare(right.filename));
 }
 
-/** Publish a complete verified image set, retaining replaced files for rollback. */
-export async function publishPreparedAssets({ id, stage, destination, previous, manifest, recovery }: { id: string; stage: string; destination: string; previous: RuntimeManifest | null; manifest: RuntimeManifest; recovery: string }) {
+/** Preflight images and describe their writes; metadata joins the same set below. */
+export async function preparedAssetWrites({ id, stage, destination, previous, manifest }: { id: string; stage: string; destination: string; previous: RuntimeManifest | null; manifest: RuntimeManifest }): Promise<PreparedOutput[]> {
+  if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new TypeError('Invalid publication identity.');
   if (manifest.schema !== `css${id}-runtime-assets@1` || !manifest.assets?.length) throw new TypeError('Invalid prepared publication manifest.');
   const names = new Set<string>();
   for (const asset of manifest.assets) {
@@ -31,27 +34,49 @@ export async function publishPreparedAssets({ id, stage, destination, previous, 
     const bytes = await readFile(resolve(stage, asset.filename));
     if (bytes.length !== asset.bytes || digest(bytes) !== asset.sha256) throw new Error(`Prepared publication asset drifted: ${asset.filename}`);
   }
-  await mkdir(destination, { recursive: true });
   const known = new Set(previous?.assets?.map(asset => asset.filename) ?? []);
-  const entries = await readdir(destination, { withFileTypes: true });
+  const entries = await readdir(destination, { withFileTypes: true }).catch(error => { if (hasErrorCode(error, 'ENOENT')) return []; throw error; });
   for (const entry of entries) if (!entry.isFile() || !known.has(entry.name)) throw new Error(`Unowned canonical asset: ${entry.name}`);
-  const prior = new Set(entries.map(entry => entry.name));
-  await mkdir(recovery, { recursive: true });
-  for (const name of prior) await copyFile(resolve(destination, name), resolve(recovery, name), constants.COPYFILE_FICLONE);
-  const published = [];
-  try {
-    for (const name of names) {
-      const temporary = resolve(destination, `${name}.partial-publication`);
-      await copyFile(resolve(stage, name), temporary, constants.COPYFILE_FICLONE);
-      await rename(temporary, resolve(destination, name));
-      published.push(name);
-    }
-    for (const name of prior) if (!names.has(name)) await rm(resolve(destination, name));
-  } catch (error) {
-    for (const name of names) await rm(resolve(destination, `${name}.partial-publication`), { force: true });
-    for (const name of published) if (!prior.has(name)) await rm(resolve(destination, name), { force: true });
-    for (const name of prior) await copyFile(resolve(recovery, name), resolve(destination, name), constants.COPYFILE_FICLONE);
-    throw error;
+  const writes: PreparedOutput[] = [...names].map(name => ({ path: resolve(destination, name), source: resolve(stage, name) }));
+  writes.push(...entries.filter(entry => !names.has(entry.name)).map(entry => ({ path: resolve(destination, entry.name), remove: true as const })));
+  return writes;
+}
+
+const optionalJson = async (path: string): Promise<unknown | null> => readFile(path, 'utf8').then(JSON.parse,
+  error => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+function minimapPaths(value: unknown): string[] {
+  if (value === null) return [];
+  const paths = requireArray(requireRecord(value).images).map(value => requireString(requireRecord(value).path));
+  if (new Set(paths).size !== paths.length || paths.some(path => !/^minimaps\/[a-z0-9][a-z0-9@._-]*\.webp$/.test(path))) throw new TypeError('Invalid minimap output path.');
+  return paths;
+}
+
+/** Publish finalized images, previews, JSON and the descriptor as one prepared set. */
+export async function publishPreparedObject({ id, stage, objectDirectory, publicDirectory, outputDirectory, projectRoot }: {
+  id: string; stage: string; objectDirectory: string; publicDirectory: string; outputDirectory: string; projectRoot: string;
+}) {
+  const data = resolve(stage, 'prepared'), outputs = await readPreparedJsonOutputs(data);
+  const { parseRuntimeManifest } = await import('./dist/operations.js');
+  const manifest = parseRuntimeManifest(await optionalJson(resolve(data, 'runtime-assets.json')), id);
+  const oldManifest = await optionalJson(resolve(objectDirectory, 'runtime-assets.json'));
+  const previous = oldManifest === null ? null : parseRuntimeManifest(oldManifest, id);
+  const writes = await preparedAssetWrites({ id, stage: resolve(stage, 'public'), destination: publicDirectory, previous, manifest });
+  const minimaps = minimapPaths(await optionalJson(resolve(data, 'minimaps.json')));
+  const oldMinimaps = minimapPaths(await optionalJson(resolve(outputDirectory, 'minimaps.json')));
+  writes.push(...minimaps.map(path => ({ path: resolve(outputDirectory, path), source: resolve(data, path) })),
+    ...oldMinimaps.filter(path => !minimaps.includes(path)).map(path => ({ path: resolve(outputDirectory, path), remove: true as const })),
+    ...outputs.map(entry => ({ path: resolve(outputDirectory, entry.filename), source: entry.path })),
+    { path: resolve(objectDirectory, 'runtime-assets.json'), source: resolve(data, 'runtime-assets.json') },
+    { path: resolve(objectDirectory, 'object.json'), source: resolve(stage, 'object.json') });
+  JSON.parse(await readFile(resolve(stage, 'object.json'), 'utf8'));
+  // Shared hash banks are append-only dependencies, not this object's rollback
+  // targets: another concurrently prepared object may adopt the same bank.
+  for (const { reference, path } of await listSharedBankFiles(stage)) {
+    await readSharedBank(stage, reference);
+    const destination = sharedBankPath(projectRoot, reference);
+    await mkdir(resolve(destination, '..'), { recursive: true });
+    await link(path, destination).catch(error => { if (!hasErrorCode(error, 'EEXIST')) throw error; });
+    await readSharedBank(projectRoot, reference);
   }
-  return { published: names.size, retired: [...prior].filter(name => !names.has(name)), recovery };
+  await writePreparedSet(writes);
 }

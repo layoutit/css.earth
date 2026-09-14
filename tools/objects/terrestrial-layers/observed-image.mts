@@ -1,6 +1,22 @@
 import {parseDimensions,parseByteObservationPolicy,parseProjectedBytePolicy} from './source-records.mts';
 import sharp, { type SharpOptions } from 'sharp';
+import { mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { blackFillCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
+
+/** Keep thresholding at native resolution without holding a multi-gigapixel mask
+ * in memory. A separate lossless image is necessary: Sharp otherwise resizes
+ * before thresholding even when threshold() is called first. */
+export async function resizeProjectedValidity(path: string | Buffer, options: SharpOptions, width: number, height: number) {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-observation-mask-'));
+  try {
+    const mask = join(directory, 'mask.png');
+    await sharp(path, options).bandbool('or').threshold(1).toColourspace('b-w').png().toFile(mask);
+    return await sharp(mask, {limitInputPixels: false}).resize(width, height, {fit: 'fill', kernel: 'linear'})
+      .toColourspace('b-w').raw().toBuffer();
+  } finally { await rm(directory, {recursive: true, force: true}); }
+}
 
 /** Byte maps declare an exact missing code, or null when no validity mask is supplied. */
 export async function prepareByteObservation(path: string, sourceEntry: unknown, value: unknown, width: number, height: number) {
@@ -64,13 +80,15 @@ export async function prepareProjectedByteObservation(path: string | Buffer, sou
   const options = { limitInputPixels: false, ...inputOptions };
   // Bitwise OR is zero exactly when all source channels are zero. Resolve this
   // before interpolation; the alpha boundary never borrows fill as terrain.
-  const alpha = sourceAlpha ?? await sharp(path, options).bandbool('or').threshold(1).toColourspace('b-w').raw().toBuffer();
   const intermediateHeight = Math.round(entry.height * width / entry.width);
+  const largeMask = sourceAlpha === undefined && entry.width * entry.height > 64 * 1024 * 1024;
+  const alpha = largeMask ? undefined : sourceAlpha ?? await sharp(path, options).bandbool('or').threshold(1).toColourspace('b-w').raw().toBuffer();
   // Separate pipelines are intentional: joinChannel happens after resize in
   // libvips and a native-sized joined band would restore the original extent.
-  const data = await sharp(path, options).resize(width, intermediateHeight, { fit: 'fill', kernel: 'linear' }).removeAlpha().raw().toBuffer();
-  const validity = await sharp(alpha, { ...options, raw: { width: entry.width, height: entry.height, channels: 1 } })
-    .resize(width, intermediateHeight, { fit: 'fill', kernel: 'linear' }).toColourspace('b-w').raw().toBuffer();
+  const data = await sharp(path, options).resize(width, intermediateHeight, { fit: 'fill', kernel: 'linear' }).removeAlpha().toColourspace('srgb').raw().toBuffer();
+  const validity = largeMask ? await resizeProjectedValidity(path, options, width, intermediateHeight)
+    : await sharp(alpha, { ...options, raw: { width: entry.width, height: entry.height, channels: 1 } })
+      .resize(width, intermediateHeight, { fit: 'fill', kernel: 'linear' }).toColourspace('b-w').raw().toBuffer();
   if (data.length !== width * intermediateHeight * 3 || validity.length !== width * intermediateHeight) throw new Error('Projected observation resampling changed its layout.');
   const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
   const scaleX = width / entry.width, scaleY = intermediateHeight / entry.height;

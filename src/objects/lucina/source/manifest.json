@@ -122,11 +122,11 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9429,
-      "expectedSha256": "66407dd045774dc8177b97153244f14752dc5dc9cf0692a4de0950b2f3d3baeb",
+      "expectedBytes": 8904,
+      "expectedSha256": "2cfe9a4a7fab47c559df0dc8040cfd19003adfff0365c385b011b146ea2252d0",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {

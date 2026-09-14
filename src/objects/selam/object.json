@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "8ed02b573b2a405fa64a0db58dc7ccaae1a630caae4f847a29903837892c4354"
+          "sha256": "44e867b0d91807c84cb17403ae3021fd72f23c3ce4c8083e28563b7257f203fa"
         },
         {
           "id": "title",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "77dabd0a8fd404a2098f2c77865d2840487e41eb7679d7af8a5323c4e23d1103"
+        "sha256": "e57962bf47ee0c19d5174d5d6e790925ca91a9db49509f2c69265f00e6644c6c"
       }
     },
     "worldFrame": {
@@ -119,13 +119,13 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 2.073581431805674,
-      "description": "Selam is the first contact-binary moon discovered around an asteroid. Lucy revealed its two touching lobes while passing Dinkinesh in November 2023.",
+      "description": "The first contact-binary moon found, orbiting the asteroid Dinkinesh.",
       "context": {}
     }
   },
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "268583bfd48049af990e11f6426ad0cf0d56fbfe8465ffdc4d08da284113400f"
+    "sha256": "444d95cb1397c00cd9a38ec50248d3be2f117ba8e391550a09a0d585a0ed6785"
   }
 }

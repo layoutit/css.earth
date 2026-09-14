@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "310a09e6ccaf021e88272c4fafdb3c865e085dfc20f739f7573f60fd8ee99670"
+          "sha256": "40c7d1615000a0b0cd23bcccd01f426d841ade12ed0f1c49e13c5c618cacc8e0"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "aced9e2cb0295a993dd894446f80bd18bca3a21897d919de9f9f6097e56ef5ca"
+        "sha256": "a88c013ff3ebfc438b658b4fe81ebca575c8b6cc06c771019e9f81c9558bf83f"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 0.642389793312345,
-      "description": "Explore Moshup in 3D with its published shape model and radial elevation.",
+      "description": "Near-Earth asteroid with a moon, Squannit, and a sharp equatorial ridge.",
       "systemName": "Solar System",
       "order": 190,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e12649e5241dff2b7d530624de86a076e4c7fa5600f7c3bd1dd0e51f63492d63"
+    "sha256": "0a95e3da6fe680f47e2d2aa6c99fc709fa78dd16735b489cb27786bfb2bb8b6f"
   }
 }

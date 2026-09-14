@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { scrollToDistance as scrollTo } from './wheel-zoom-distance.mts';
 import preparedVolume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = resolve('.local/milky-way-integration');
@@ -46,7 +46,7 @@ try {
     id: window.__cssearthTest.htmlElement(node).dataset.contextLabel, visible: getComputedStyle(node).visibility !== 'hidden' && Number(getComputedStyle(node).opacity) > 0,
   })));
   check('scene labels belong to prepared objects and remain visible at solar-system scale',
-    objectLabels.some(label => label.visible) && objectLabels.every(label => OBJECTS.some(object => object.id === label.id)));
+    objectLabels.some(label => label.visible) && objectLabels.every(label => SCENE_OBJECTS.some(object => object.id === label.id)));
   check('contextual Sun overlaps the detailed object coordinate centre', await page.evaluate(() => {
     const body = window.__cssearthTest.element('.polycss-camera').getBoundingClientRect();
     const marker = window.__cssearthTest.element('[data-context-body="sun"]').getBoundingClientRect();
@@ -69,7 +69,7 @@ try {
   await page.screenshot({ path: resolve(output, 'stellar-neighbourhood-distant.png') });
   const distantPositions = await starPositions(page);
   check('the baked sky follows the shared physical camera',
-    Object.entries(nearbyPositions).some(([id, transform]) => distantPositions[id] && distantPositions[id] !== transform));
+    nearbyPositions.cube !== distantPositions.cube);
   check('stellar textures were ready before leaving the solar system', await starRequests(page) === starRequestsBefore);
   await scrollTo(page, 1.8e18);
   snapshots.galaxy = await read(page);

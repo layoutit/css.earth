@@ -1,0 +1,269 @@
+{
+  "schema": "cssearth-stellar-source-evidence@1",
+  "id": "m45-hipparcos-tycho2",
+  "asOf": "2026-09-13",
+  "catalogue": {
+    "path": "labs/nebula/models/m45/stellar-catalogue.json",
+    "sha256": "725466bded167e153b071941c63584313bc73503db6a61ed9aa57649a0ce6ac7",
+    "records": 2105
+  },
+  "selection": {
+    "centerIcrsDegrees": [
+      56.75,
+      24.1167
+    ],
+    "coneRadiusArcminutes": 255,
+    "hipparcos": "all rows",
+    "tycho2": "VTmag < 12",
+    "reason": "4.25 degree radius covers a proposed six-degree square; field stars are not asserted cluster members."
+  },
+  "sources": [
+    {
+      "id": "hipparcos-esa-1997",
+      "catalogue": "I/239/hip_main",
+      "citation": "ESA 1997, The Hipparcos and Tycho Catalogues, ESA SP-1200",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/239",
+      "coordinateEpochJulianYear": 1991.25,
+      "photometry": "Measured Johnson V and B−V. V error not reported by this table; retained null."
+    },
+    {
+      "id": "tycho2-hog-2000",
+      "catalogue": "I/259/tyc2",
+      "citation": "Høg et al. 2000, A&A 355 L27, The Tycho-2 Catalogue",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/259",
+      "coordinateEpochJulianYear": 2000,
+      "photometry": "Approximate Johnson V = VT − 0.090(BT−VT), B−V = 0.850(BT−VT), exactly as catalogue ReadMe note7. Propagated random errors assume independent BT/VT; transformation systematic/color-range uncertainty is unreported, not zero."
+    }
+  ],
+  "inputs": [
+    {
+      "path": ".local/nebula-lab/stellar-catalogues/m45/hipparcos.tsv",
+      "sha256": "5fcb44ae421ba086684b2933381ff7a0f280ae017bf02c41b661258118400463",
+      "bytes": 19620,
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I%2f239%2fhip_main&-c=56.75+24.1167&-c.r=255&-c.u=arcmin&-out=HIP%2cRAICRS%2cDEICRS%2cVmag%2cB-V%2ce_B-V%2cPlx%2ce_Plx%2cpmRA%2cpmDE%2ce_pmRA%2ce_pmDE&-out.max=10000&-sort=Vmag",
+      "kind": "hipparcos",
+      "dataSha256": "d6b71b22490ab69561c927206b503acecb5cc9580e447d33931baba43d28e6df"
+    },
+    {
+      "path": ".local/nebula-lab/stellar-catalogues/m45/tycho2.tsv",
+      "sha256": "419d0b3e314ec5a176a6726eca1458dc5554c0d951d5b0f5997ee01eaecff51d",
+      "bytes": 205933,
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I%2f259%2ftyc2&-c=56.75+24.1167&-c.r=255&-c.u=arcmin&-out=TYC1%2cTYC2%2cTYC3%2cRAmdeg%2cDEmdeg%2cpmRA%2cpmDE%2ce_pmRA%2ce_pmDE%2cBTmag%2ce_BTmag%2cVTmag%2ce_VTmag%2cHIP&-out.max=20000&VTmag=%3c12&-sort=VTmag",
+      "kind": "tycho2",
+      "dataSha256": "4169e6f2e801cc46c7f32876ac9463127989c1bf3d38d7b1da26cc58b62c3839"
+    },
+    {
+      "path": "output/m45-stars-diagnosis/hipparcos-readme.txt",
+      "sha256": "7a7d54903d16460a76c240f07c41b019d57becfd27b5dfa2908e828f52f90c27",
+      "bytes": 69036,
+      "url": "https://cdsarc.cds.unistra.fr/ftp/I/239/ReadMe"
+    },
+    {
+      "path": "output/m45-stars-diagnosis/tycho2-readme.txt",
+      "sha256": "4c0bf3114eb0f4666acd6e5d20bc0cefa21bdc8279084de25973745874e29548",
+      "bytes": 16801,
+      "url": "https://cdsarc.cds.unistra.fr/ftp/I/259/ReadMe"
+    }
+  ],
+  "preparation": {
+    "method": "HIP rows preferred by explicit Tycho HIP cross-ID; no spatial deduplication of possible resolved companions. First-order proper motion advances Hipparcos 1991.25 to epoch2000. Native coordinates and motions remain preserved per record.",
+    "implementation": {
+      "path": "labs/nebula/src/stars/acquire-field-catalogue.ts",
+      "sha256": "cb29765d4ca026428e2dd10aa9de8bbc0ffed7081a80bfb91408f55821c96633"
+    },
+    "skipped": [
+      {
+        "id": "TYC 1261-546-2",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1799-360-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1247-32-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1803-1031-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1818-454-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1813-431-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1808-1909-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1808-1698-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1256-965-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1817-994-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1798-586-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1798-1206-2",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1799-1118-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1798-395-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1808-529-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1798-560-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1799-36-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1260-900-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1808-2191-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1821-1051-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1821-255-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1812-1797-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1821-904-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1798-666-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1260-857-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1247-1106-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1804-284-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1821-321-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1808-56-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1260-1010-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1821-699-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1799-77-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1243-14-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1260-1439-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1817-1198-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1798-466-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1813-1252-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1817-1938-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1817-1248-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1800-586-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1260-1440-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1799-1218-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1257-9-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1261-1454-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      },
+      {
+        "id": "TYC 1257-920-1",
+        "reason": "missing position or BT/VT color needed for Johnson approximation"
+      }
+    ],
+    "counts": {
+      "hipparcosInput": 168,
+      "tychoInput": 2148,
+      "hipparcosOutput": 168,
+      "tychoOutput": 1937
+    }
+  },
+  "limits": [
+    "NOIRLab optical exposure dates are not published; 2020-06-30 is a release date, not an observation epoch. The catalogue is therefore epoch2000, never labelled exact photo-epoch astrometry.",
+    "No distance or nebular membership inferred from position; catalogue parallax retained without naive inversion.",
+    "Display brightness/color must come from apparent magnitudes/colour indices, not star-removal residual.",
+    "Named-star labels are optional identity metadata and not fabricated from brightness ordering."
+  ]
+}

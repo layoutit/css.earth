@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b9204b2feb948c7a85c08c4df95c0233956f5440d892479d5aad1870ef982a78"
+    "sha256": "ee7649c8c956079edf07887832c03e50ae8d685196440fb111894026d3d11a1e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6eb6ddd56e0f9ef0af48e08763be23af2fb74d50c82440c9d3d1f0fcedf314dd",
+      "sha256": "20ee615d1747723469e7a23e322f357269993df6407aac376438b46e00f73760",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -654,12 +654,10 @@
               "levelMatching": {
                 "samplesPerTriangle": 64,
                 "minimumPairs": 128,
-                "maximumLogMad": 0.25,
                 "maximumGain": 1.35,
                 "maximumAngleDegrees": 65
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 50,
                 "maximumSeparationMeters": 20,
                 "maximumEmissionDegrees": 80,
                 "visibilityToleranceMeters": 0.5,
@@ -685,8 +683,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99
+                  1.9,
+                  99.3
                 ]
               },
               "metadata": {
@@ -786,14 +784,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cec87f0cdf5f6c74979f26072032ac6dc79abfb59d5bb856cf6f8d0e4eed00a1",
+      "sha256": "b7729b925bd2024658448631be6ca4df952b132c5206bab390574ab4c6b97129",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-67p",
         "displayName": "67P",
         "panel": {
-          "introduction": "67P/Churyumov–Gerasimenko is the two-lobed comet explored by Rosetta. Rotate its measured nucleus to inspect the narrow neck, steep cliffs and recessed terrain.",
           "facts": [
             {
               "id": "diameter",
@@ -840,9 +837,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Nucleus shape measured by Rosetta and simplified for display. The gray surface is a model material.",
-              "title": "Nucleus shape reconstruction",
-              "detail": "ESA/RMOC",
               "thumbnail": "/scenes/comet-67p/comet-67p-model-thumbnail.webp",
               "surface": "comet-67p-model-surface@2x.webp",
               "poles": "comet-67p-model-poles@2x.webp",
@@ -862,14 +856,12 @@
                   "label": "Observed",
                   "value": "Aug 2014 – Aug 2015"
                 }
-              ]
+              ],
+              "notes": "Nucleus shape measured by Rosetta and simplified for display. The gray surface is a model material."
             },
             {
               "id": "osiris",
               "label": "OSIRIS mosaic",
-              "description": "Eight Rosetta photographs show cliffs, pits and smoother plains across both hemispheres. Grid marks gaps in the photography; original shadows and some seams remain.",
-              "title": "OSIRIS image mosaic",
-              "detail": "OSIRIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-osiris-thumbnail.webp",
               "surface": "comet-67p-osiris-surface@2x.webp",
               "poles": "comet-67p-osiris-poles@2x.webp",
@@ -895,14 +887,12 @@
                   "value": "Orange · 649 nm"
                 }
               ],
-              "summary": "Eight Rosetta photographs show cliffs, pits and smoother plains across both hemispheres. Grid marks gaps in the photography; original shadows and some seams remain."
+              "notes": "Eight Rosetta photographs show cliffs, pits and smoother plains across both hemispheres. Grid marks gaps in the photography; original shadows and some seams remain.",
+              "noData": true
             },
             {
               "id": "albedo",
               "label": "Albedo",
-              "description": "How strongly surface grains scatter green light. Higher values mean more scattering. Turn Shadows off to read the color scale.",
-              "title": "VIRTIS single-scattering albedo",
-              "detail": "VIRTIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-albedo-thumbnail.webp",
               "surface": "comet-67p-albedo-surface@2x.webp",
               "poles": "comet-67p-albedo-poles@2x.webp",
@@ -936,14 +926,12 @@
                   "label": "Wavelength",
                   "value": "550 nm"
                 }
-              ]
+              ],
+              "notes": "How strongly surface grains scatter green light. Higher values mean more scattering. Turn Shadows off to read the color scale."
             },
             {
               "id": "slope",
               "label": "Spectral slope",
-              "description": "How much reflectance rises from green to red light. Higher values mean a redder spectrum. Turn Shadows off to read the color scale.",
-              "title": "VIRTIS visible spectral slope",
-              "detail": "VIRTIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-slope-thumbnail.webp",
               "surface": "comet-67p-slope-surface@2x.webp",
               "poles": "comet-67p-slope-poles@2x.webp",
@@ -977,14 +965,12 @@
                   "label": "Wavelengths",
                   "value": "500–800 nm"
                 }
-              ]
+              ],
+              "notes": "How much reflectance rises from green to red light. Higher values mean a redder spectrum. Turn Shadows off to read the color scale."
             },
             {
               "id": "absorption",
               "label": "3.2 µm absorption",
-              "description": "Strength of the broad 3.2 µm absorption band. This measurement alone cannot tell us how much organic material is present. Turn Shadows off to read the scale.",
-              "title": "VIRTIS 3.2 µm absorption depth",
-              "detail": "VIRTIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-absorption-thumbnail.webp",
               "surface": "comet-67p-absorption-surface@2x.webp",
               "poles": "comet-67p-absorption-poles@2x.webp",
@@ -1018,14 +1004,12 @@
                   "label": "Quantity",
                   "value": "Absorption depth"
                 }
-              ]
+              ],
+              "notes": "Strength of the broad 3.2 µm absorption band. This measurement alone cannot tell us how much organic material is present. Turn Shadows off to read the scale."
             },
             {
               "id": "ice",
               "label": "Modeled ice",
-              "description": "Estimated ice seen in reflected light, not the ice stored inside the comet. A value of 0% means the model fitted no ice. Turn Shadows off to read the scale.",
-              "title": "VIRTIS surface ice fraction",
-              "detail": "VIRTIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-ice-thumbnail.webp",
               "surface": "comet-67p-ice-surface@2x.webp",
               "poles": "comet-67p-ice-poles@2x.webp",
@@ -1064,14 +1048,12 @@
                   "label": "Model assumes",
                   "value": "Ice mixed with dark grains"
                 }
-              ]
+              ],
+              "notes": "Estimated ice seen in reflected light, not the ice stored inside the comet. A value of 0% means the model fitted no ice. Turn Shadows off to read the scale."
             },
             {
               "id": "regions",
               "label": "Regions",
-              "title": "Named regions of 67P",
-              "description": "Color separates the 26 named regions used to describe the comet’s terrain. These are geographical divisions, not different minerals. Grid marks places where the source maps could not be matched reliably to this shape.",
-              "detail": "OSIRIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-regions-thumbnail.webp",
               "surface": "comet-67p-regions-surface@2x.webp",
               "poles": "comet-67p-regions-poles@2x.webp",
@@ -1201,14 +1183,13 @@
                     "color": "#a7a987"
                   }
                 ]
-              }
+              },
+              "notes": "Color separates the 26 named regions used to describe the comet’s terrain. These are geographical divisions, not different minerals. Grid marks places where the source maps could not be matched reliably to this shape.",
+              "noData": true
             },
             {
               "id": "geology",
               "label": "Geology",
-              "title": "Geological features mapped from OSIRIS",
-              "description": "Fractures, cliffs, terraces and small features mapped from Rosetta images. Lines and dots are map symbols, not their true widths or sizes. Grid marks areas outside the study or without a reliable shape match.",
-              "detail": "OSIRIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-geology-thumbnail.webp",
               "surface": "comet-67p-geology-surface@2x.webp",
               "poles": "comet-67p-geology-poles@2x.webp",
@@ -1286,7 +1267,9 @@
                     "color": "#8cb457"
                   }
                 ]
-              }
+              },
+              "notes": "Fractures, cliffs, terraces and small features mapped from Rosetta images. Lines and dots are map symbols, not their true widths or sizes. Grid marks areas outside the study or without a reliable shape match.",
+              "noData": true
             }
           ]
         },
@@ -2956,7 +2939,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -2965,8 +2948,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cec87f0cdf5f6c74979f26072032ac6dc79abfb59d5bb856cf6f8d0e4eed00a1",
-      "bytes": 19123,
+      "sha256": "b7729b925bd2024658448631be6ca4df952b132c5206bab390574ab4c6b97129",
+      "bytes": 18157,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -3070,11 +3053,10 @@
       "label": "Shape model",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Nucleus shape measured by Rosetta and simplified for display. The gray surface is a model material."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -3106,6 +3088,18 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "mtp019",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -3113,11 +3107,10 @@
       "label": "Albedo",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "How strongly surface grains scatter green light. Higher values mean more scattering. Turn Shadows off to read the color scale."
-      ],
+      "limitations": [],
       "lensIds": [
         "albedo"
       ],
@@ -3163,6 +3156,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "mtp019",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -3170,11 +3170,10 @@
       "label": "Spectral slope",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "How much reflectance rises from green to red light. Higher values mean a redder spectrum. Turn Shadows off to read the color scale."
-      ],
+      "limitations": [],
       "lensIds": [
         "slope"
       ],
@@ -3220,6 +3219,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "mtp019",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -3227,11 +3233,10 @@
       "label": "3.2 µm absorption",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Strength of the broad 3.2 µm absorption band. This measurement alone cannot tell us how much organic material is present. Turn Shadows off to read the scale."
-      ],
+      "limitations": [],
       "lensIds": [
         "absorption"
       ],
@@ -3277,6 +3282,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "mtp019",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -3284,11 +3296,10 @@
       "label": "Modeled ice",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/3",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Estimated ice seen in reflected light, not the ice stored inside the comet. A value of 0% means the model fitted no ice. Turn Shadows off to read the scale."
-      ],
+      "limitations": [],
       "lensIds": [
         "ice"
       ],
@@ -3334,6 +3345,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "mtp019",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -3341,11 +3359,10 @@
       "label": "Regions",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/4",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color separates the 26 named regions used to describe the comet’s terrain. These are geographical divisions, not different minerals. Grid marks places where the source maps could not be matched reliably to this shape."
-      ],
+      "limitations": [],
       "lensIds": [
         "regions"
       ],
@@ -3378,6 +3395,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "mtp019",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -3385,11 +3409,10 @@
       "label": "Geology",
       "recipe": "terrestrial",
       "selector": "/raster/scientific/5",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Fractures, cliffs, terraces and small features mapped from Rosetta images. Lines and dots are map symbols, not their true widths or sizes. Grid marks areas outside the study or without a reliable shape match."
-      ],
+      "limitations": [],
       "lensIds": [
         "geology"
       ],
@@ -3422,6 +3445,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "mtp019",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -3429,11 +3459,10 @@
       "label": "OSIRIS mosaic",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Eight Rosetta photographs show cliffs, pits and smoother plains across both hemispheres. Grid marks gaps in the photography; original shadows and some seams remain."
-      ],
+      "limitations": [],
       "lensIds": [
         "osiris"
       ],
@@ -3465,15 +3494,22 @@
       "outputs": [
         {
           "url": "/scenes/comet-67p/comet-67p-osiris-thumbnail.webp",
-          "bytes": 1806,
-          "sha256": "594555977560fec0eb414cec884b8720ae8abb1d57e1abacacb565616a6394f5",
+          "bytes": 1776,
+          "sha256": "eb5e3d05fa30a7c0af74d6c4692195455872ca0bca63a1a3574df22a6ed8f344",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-osiris-surface@2x.webp",
-          "bytes": 1576412,
-          "sha256": "b7872713ac183adf5c6314ef3df6de6156c4cfe1d81bcef1c40afc982f3d02ab",
+          "bytes": 1696040,
+          "sha256": "949d26b8279f7a7011a7a2a86d771c9cd519d593fbfc41ea22254c33ec6d5f44",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "mtp019",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -3483,8 +3519,9 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -3496,8 +3533,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5076,
-          "sha256": "1383ab82a24ac68338f4341940bb1242b2522f7c4bf54af68ab6a5682d5e7ff6",
+          "bytes": 4896,
+          "sha256": "2c85c676dc93e76c47c428cd103b470138bc7b0e649135e6628a09671da23a69",
           "verification": "bytes-verified"
         }
       ],
@@ -3508,6 +3545,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.",
       "limitations": [],
@@ -3545,6 +3583,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "osiris"
@@ -3555,8 +3594,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 58968,
-          "sha256": "e8296bd0129bd58d97beb3e52370cd00aacd60b2a81a9a2e5615745c2eabdecd",
+          "bytes": 60610,
+          "sha256": "b26307e2cc285052061c7faca59925fc016024202cdb137dbd5e96632ae97326",
           "verification": "bytes-verified"
         }
       ]
@@ -3569,6 +3608,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "albedo"
@@ -3593,6 +3633,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "slope"
@@ -3617,6 +3658,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "absorption"
@@ -3641,6 +3683,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "ice"
@@ -3665,6 +3708,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "regions"
@@ -3689,6 +3733,7 @@
       "recipeDependencies": [
         "terrestrial"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "geology"
@@ -3709,5 +3754,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-67p",
+    "materialSha256": "e611f8db9af700624bb0b8399ad69e92fe174101a76a084828ff15b34ac2ba2f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/comet-67p/prepared/provenance.json",
+      "sha256": "7ec0b80dfa814efb5040586630521bac1a6a894b4cf74648bb4e8e5cae729ef7"
+    }
   }
 }

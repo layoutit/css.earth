@@ -1,7 +1,7 @@
-/** Offline ICRS TAN image footprints. Raster UV is top-left; FITS pixels are bottom-left, one-based. */
+/** Offline ICRS TAN/orthographic SIN footprints. FITS pixels are bottom-left, one-based. */
 export type Vec3 = [number, number, number];
 export interface ImageWcs {
-  projection: 'TAN'; coordinateFrame: 'ICRS';
+  projection: 'TAN' | 'SIN'; coordinateFrame: 'ICRS';
   referenceDimension: [number, number]; referencePixel: [number, number];
   referenceValueDeg: [number, number]; scaleDeg: [number, number]; rotationDeg: number;
 }
@@ -13,7 +13,7 @@ const radians = Math.PI / 180;
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, value, i) => sum + value * b[i]!, 0);
 
 export function validateImageWcs(wcs: ImageWcs): void {
-  if (wcs.projection !== 'TAN' || wcs.coordinateFrame !== 'ICRS') throw new TypeError('Overlay WCS must be ICRS TAN.');
+  if (!['TAN', 'SIN'].includes(wcs.projection) || wcs.coordinateFrame !== 'ICRS') throw new TypeError('Overlay WCS must be ICRS TAN or orthographic SIN.');
   for (const pair of [wcs.referenceDimension, wcs.referencePixel, wcs.referenceValueDeg, wcs.scaleDeg]) {
     if (pair.length !== 2 || !pair.every(Number.isFinite)) throw new TypeError('Invalid WCS coordinate pair.');
   }
@@ -23,16 +23,20 @@ export function validateImageWcs(wcs: ImageWcs): void {
   }
 }
 
-/** Gnomonic ray from a continuous pixel coordinate in the original FITS reference dimensions. */
+/** Calabretta & Greisen (2002): TAN r=tan(theta), ordinary SIN r=sin(theta).
+ * SIN here has zero slant parameters; it is not the generalized slant projection. */
 export function wcsPixelRay(wcs: ImageWcs, x: number, y: number): Vec3 {
   const a = wcs.referenceValueDeg[0] * radians, d = wcs.referenceValueDeg[1] * radians;
   const rotation = wcs.rotationDeg * radians, cosine = Math.cos(rotation), sine = Math.sin(rotation);
   const dx = (x - wcs.referencePixel[0]) * wcs.scaleDeg[0] * radians;
   const dy = (y - wcs.referencePixel[1]) * wcs.scaleDeg[1] * radians;
   const east = cosine * dx - sine * dy, north = sine * dx + cosine * dy;
-  const ray: Vec3 = [Math.cos(d) * Math.cos(a) - east * Math.sin(a) - north * Math.sin(d) * Math.cos(a),
-    Math.cos(d) * Math.sin(a) + east * Math.cos(a) - north * Math.sin(d) * Math.sin(a),
-    Math.sin(d) + north * Math.cos(d)];
+  const radiusSquared = east * east + north * north;
+  if (wcs.projection === 'SIN' && radiusSquared > 1) throw new TypeError('SIN pixel lies outside the visible hemisphere.');
+  const forward = wcs.projection === 'SIN' ? Math.sqrt(1 - radiusSquared) : 1;
+  const ray: Vec3 = [forward * Math.cos(d) * Math.cos(a) - east * Math.sin(a) - north * Math.sin(d) * Math.cos(a),
+    forward * Math.cos(d) * Math.sin(a) + east * Math.cos(a) - north * Math.sin(d) * Math.sin(a),
+    forward * Math.sin(d) + north * Math.cos(d)];
   const length = Math.hypot(...ray);
   return ray.map(value => value / length) as Vec3;
 }

@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "2ec5c5caa9da307035e752d52f47013f5a5b5d4da5094782322708f0d885f70c"
+          "sha256": "906188010b6526c0f881940f6068f4fdd3b21f8aa1afc983963e603b58d87c76"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "90263d6e9e853754148bf4691a53ff9ca94e77729e84fe7376f5ac40bce98571"
+          "sha256": "5a63306abdb39a70a80e30b57fb39f33d3e2fd26c76f4598af35bd2d3301d73e"
         },
         {
           "id": "title",
@@ -88,7 +88,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "99bf4d7e4da7bd42b084074a6fb12618338a5e8fcbfefe2a864b9e8c76c519b1"
+        "sha256": "5e801fc236721991ff0ab8561da90dae571267c4b0ef58ae13dc462aed8446ea"
       }
     },
     "worldFrame": {
@@ -123,7 +123,7 @@
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 44.05655144131418,
-      "description": "Explore its published shape and source constraints.",
+      "description": "Two-lobed Kuiper Belt object that New Horizons flew past.",
       "systemName": "Solar System",
       "order": 357,
       "context": {
@@ -135,6 +135,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "9f10548830571533f80ea33d744b6bcb51a83e8b2b03d7ab0b26fb884cb6d483"
+    "sha256": "574b7be8679ca1f25934b425fa5e9b7481ecb7eaaa0590cedc0333196b20f9aa"
   }
 }
