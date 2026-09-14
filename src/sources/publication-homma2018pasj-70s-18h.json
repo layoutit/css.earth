@@ -1,0 +1,36 @@
+{
+  "id": "publication-homma2018pasj-70s-18h",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Homma2018PASJ...70S..18H: Searches for new Milky Way satellites from the first two years of data of the Subaru/Hyper Suprime-Cam survey: Discovery of Cetus III",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "Homma2018PASJ...70S..18H"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "http://adsabs.harvard.edu/abs/2018PASJ...70S..18H",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/prepared/catalogue.json",
+      "revision": "340f4ef6ea7f2a6cc540b906dec35436a1d549c5",
+      "sha256": "1987e9658d963826cc1717afdfa0b9267fa1ce79b79e0d3f9d5905bd55f00c8f",
+      "locator": "/sources/3/references/66"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/3/references/66"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { validateSpatialPosition } from './spatial-relations.ts';
 import type { PreparedGalaxyRecord, SpatialCatalogSource } from './spatial.js';
 import type { PreparedNebulaRecord } from './nebulae.js';
 
@@ -38,6 +39,10 @@ export function parsePreparedClusterCatalog(input: unknown): PreparedClusterCata
     unique(sourceIds, id);
     if (!/^https:\/\//.test(text(source.url)) || !/^[a-f0-9]{64}$/.test(text(source.sha256)) || !Number.isSafeInteger(positive(source.bytes))) throw new TypeError('Invalid cluster source pin.');
     text(source.citation);
+    for (const value of source.references === undefined ? [] : array(source.references)) {
+      const ref = record(value); unique(sourceIds, text(ref.id)); text(ref.citation);
+      if (!/^https:\/\//.test(text(ref.url))) throw new TypeError('Invalid cluster bibliographic URL.');
+    }
   }
   const ids = new Set<string>(), objects = array(data.objects);
   if (objects.length > 10000) throw new TypeError('Cluster catalogue exceeds its bounded annotation bank.');
@@ -51,7 +56,7 @@ export function parsePreparedClusterCatalog(input: unknown): PreparedClusterCata
     if (ra < 0 || ra >= 360 || dec < -90 || dec > 90) throw new TypeError('Invalid cluster sky position.');
     reference(sky.sourceRef, sourceIds);
     const distance = record(row.distance); positive(distance.valuePc); text(distance.method); reference(distance.sourceRef, sourceIds);
-    const redshift = record(row.redshift); positive(redshift.value); text(redshift.type); text(redshift.sourceRef);
+    const redshift = record(row.redshift); positive(redshift.value); text(redshift.type); reference(redshift.sourceRef, sourceIds);
     const aperture = record(row.aperture);
     if (aperture.definition !== 'R500') throw new TypeError('Unknown cluster aperture definition.');
     positive(aperture.properRadiusM); positive(aperture.comovingRadiusM); reference(aperture.sourceRef, sourceIds);
@@ -59,7 +64,9 @@ export function parsePreparedClusterCatalog(input: unknown): PreparedClusterCata
     if (row.presentation !== undefined) positive(record(row.presentation).focusRadiusM);
   }
   const selection = record(data.selection); text(selection.description); text(selection.distanceCaveat);
-  return input as PreparedClusterCatalog;
+  const validated = input as PreparedClusterCatalog;
+  for (const row of validated.objects) validateSpatialPosition(validated.frame, row);
+  return validated;
 }
 function record(value: unknown): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Expected cluster metadata object.');

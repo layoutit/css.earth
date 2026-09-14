@@ -1,0 +1,36 @@
+{
+  "id": "publication-parodi2002a-a-388-29p",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Parodi2002A&A...388...29P: Structure and stellar content of dwarf galaxies. VII. B and R photometry of 25 southern field dwarfs and a disk parameter analysis of the complete sample of nearby irregulars",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "Parodi2002A&A...388...29P"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2002A&A...388...29P",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/prepared/catalogue.json",
+      "revision": "340f4ef6ea7f2a6cc540b906dec35436a1d549c5",
+      "sha256": "1987e9658d963826cc1717afdfa0b9267fa1ce79b79e0d3f9d5905bd55f00c8f",
+      "locator": "/sources/3/references/161"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/3/references/161"
+    }
+  ]
+}

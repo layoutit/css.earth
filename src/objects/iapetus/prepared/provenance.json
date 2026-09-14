@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -956,6 +956,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-voyager-2008-iapetus",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1010,6 +1017,13 @@
           "bytes": 257574,
           "sha256": "a9dc908ebf2e8b06442e02bc1f2d142d44c844a8ff66451f7aa12db274d4d243",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "cassini-iss-2014-iapetus-color",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1067,6 +1081,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "iapetus-cassini-infrared",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1120,6 +1141,13 @@
           "bytes": 8594,
           "sha256": "af6bfeaf75029d023ff3477dfd4787a7dc65c98bc97d6c20a1d8e8b6dcafc545",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "iapetus-cassini-ice-absorption",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/3/source."
         }
       ],
       "inputBasis": "bound-inputs"

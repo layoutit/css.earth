@@ -10,7 +10,7 @@ catalogue snapshot, not a claim that every real galaxy has been discovered.
   galaxies. Candidate status remains available to the renderer.
 - M31, M33, LMC and SMC link to detailed objects through authored mappings. The
   source MW row lacks a distance; the existing Milky Way keeps its own registration
-  and is not duplicated or assigned invented catalogue coordinates.
+  and is retained as an unpositioned physical host without invented catalogue coordinates. Its 62 satellite references resolve independently of scene hosting.
 - The entire source snapshot has **1,727** rows, including star clusters and
   false positives. Local Volume membership, `dwarf_local_field`, and a 3 Mpc cut
   do not establish Local Group membership.
@@ -36,7 +36,7 @@ The prepared catalogue retains the original bibliography keys and resolves them
 to citations transcribed from the pinned LVDB bibliography. The separate pinned
 SMC distance paper has an explicit key binding in `source/provenance.json`.
 Distance, sky-position, half-light-radius and membership references must resolve
-when the catalogue is read. Paper links do not inherit the bibliography file’s
+when the catalogue is read. Bibliography entries bind to canonical publication records in the shared Sources catalogue, where usage is indexed per measured quantity. Paper links do not inherit the bibliography file’s
 byte hash. See [navigation identity and evidence](../../../docs/navigation-identity.md).
 
 The position/structure compilation is [Pace (2025), Local Volume Database,

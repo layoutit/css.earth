@@ -1,3 +1,4 @@
+import { spatialPublicationId } from '@cssearth/catalog';
 import type { SpatialCitation } from '@cssearth/catalog';
 
 /** Read the retained ADS BibTeX fields; balanced braces preserve nested titles.
@@ -30,7 +31,7 @@ export function readBibliography(input: string): ReadonlyMap<string, SpatialCita
     // Entries never referenced by this catalogue need not have an online locator.
     if (!url || !title) continue;
     if (!/^https?:\/\/[^\s{}"]+$/u.test(url)) throw new TypeError(`Invalid bibliography URL: ${id}`);
-    const citation = { id, url, citation: `${id}: ${title.replace(/[{}]/gu, '').replace(/\s+/gu, ' ')}` };
+    const citation = { id, catalogueId: spatialPublicationId(id), url, citation: `${id}: ${title.replace(/[{}]/gu, '').replace(/\s+/gu, ' ')}` };
     const previous = entries.get(id);
     if (previous && JSON.stringify(previous) !== JSON.stringify(citation)) throw new TypeError(`Conflicting bibliography key: ${id}`);
     entries.set(id, citation);

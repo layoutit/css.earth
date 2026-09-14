@@ -49,6 +49,13 @@ test('all installed volume lenses produce standard source cards with real source
       assert.deepEqual([control.texture?.width, control.texture?.height], [image.width, image.height]);
     }
   }
+  const m45 = entries.find(entry => entry.id === 'm45')!;
+  assert.equal(m45.provenance.products.find(p => p.id === 'noirlab-optical')?.inputEvidence?.find(e => e.sourceId === 'distance')?.role, 'placement');
+  const observationEdge = graph.edges.find(e => e.objectId === 'm45' && e.productId === 'noirlab-optical' && e.sourceId === 'noirlab-optical')!;
+  assert.deepEqual(observationEdge.roles, ['appearance']);
+  assert.equal(observationEdge.observation?.id, 'noao-m45');
+  assert.equal(observationEdge.observation?.observedAt, null);
+  assert.equal(observationEdge.observation?.instrument, null);
   const helix = entries.find(entry => entry.id === 'helix');
   assert.ok(helix);
   for (const product of helix.provenance.products) assert.ok(product.inputs.includes('hco-components'));

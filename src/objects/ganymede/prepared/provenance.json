@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -1872,6 +1872,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-voyager-galileo-mono",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1926,6 +1933,13 @@
           "bytes": 226008,
           "sha256": "43dd5bbe8377315f24d93938407f564f3ed69b4d8ec02f49aea9302e763cc929",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-voyager-galileo-color",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1985,6 +1999,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-sim3237-geologic-units",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -2042,6 +2063,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "ganymede-muse-oxygen-signature-night-1",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/3/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -2097,6 +2125,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "ganymede-composition-ice-fraction",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/4/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -2150,6 +2185,13 @@
           "bytes": 9526,
           "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "ganymede-composition-dark-material",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/5/source."
         }
       ],
       "inputBasis": "bound-inputs"

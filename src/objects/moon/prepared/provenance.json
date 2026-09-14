@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -2452,6 +2452,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "lroc-wac-global-032p",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -2507,6 +2514,13 @@
           "bytes": 9464,
           "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "diviner-ghrm-tbol_m-compact",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2566,6 +2580,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "diviner-ghrm-tbol_anom-compact",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -2621,6 +2642,13 @@
           "bytes": 9464,
           "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "diviner-ghrm-ra_sam-compact",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/3/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2680,6 +2708,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "lro-lola-ldem16-numeric",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/4/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -2735,6 +2770,13 @@
           "bytes": 340552,
           "sha256": "19335c9d0b5982bf2e53da2652db64a0be082878a59c19d327eec946862e4d95",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "nasa-grail-crustal-thickness",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/5/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2794,6 +2836,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "lro-diviner-christiansen-feature",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/6/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -2849,6 +2898,13 @@
           "bytes": 17540,
           "sha256": "0fa33c48c0916ba9474af08592b9f2dbc8faf285beef17fed9e743fa814c3456",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "usgs-moon-geologic-units-grid",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/7/source."
         }
       ],
       "inputBasis": "bound-inputs"

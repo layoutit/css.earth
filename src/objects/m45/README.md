@@ -1,6 +1,6 @@
 # Pleiades (M45)
 
-Five image lenses share one authored reflection-nebula depth surface. **The default optical composite combines Taavi Niittee’s wide photograph with central NOIRLab detail.** Dust depth, illumination and scattering are not recovered.
+Five image lenses share one authored reflection-nebula depth surface. **The default optical composite combines Taavi Niittee’s wide photograph with central NOIRLab detail.** Dust depth, illumination and scattering are not recovered. The catalogue explicitly identifies the Pleiades stellar cluster as the subject of the adopted distance; the nebula uses it for placement. The NOIRLab source carries its published image identity and B/V/I bands, with unknown exposure date and instrument left explicit in that record.
 
 ## Sources
 
