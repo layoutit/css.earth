@@ -67,10 +67,26 @@ export class CssValues {
       :axis==='y'?[c,0,n,0,0,1,0,0,s,0,c,0,0,0,0,1]
         :[c,s,0,0,n,c,0,0,0,0,1,0,0,0,0,1];
   }
-  css(): string {
-    const registered=Array.from(this.entries.values(),({name})=>`@property ${name}{syntax:'<number>';inherits:false;initial-value:0}`).join('\n');
+  css(externalReferences: string): string {
+    const external = new Set([...externalReferences.matchAll(/var\((--native-c\d+)\)/gu)].map(match=>match[1]!));
+    const declarations = new Map(this.declarations.map(declaration=>{
+      const colon=declaration.indexOf(':');
+      return [declaration.slice(0,colon),declaration.slice(colon+1)] as const;
+    }));
+    // The graph is built in dependency order. Inline single-use intermediates
+    // backwards, without duplicating work or touching values read by the scene.
+    for (const [expression,{name,reference}] of [...this.entries].reverse()) {
+      if (external.has(name)) continue;
+      const token=`var(${name})`;
+      const readers=[...declarations].filter(([,value])=>value.includes(token));
+      const uses=readers.reduce((sum,[,value])=>sum+value.split(token).length-1,0);
+      if (uses>1 || (uses===1 && !readers[0]![1].includes(reference))) continue;
+      declarations.delete(name);
+      if (uses===1) declarations.set(readers[0]![0],readers[0]![1].replace(reference,`calc(${expression})`));
+    }
+    const registered=Array.from(this.entries.values()).filter(({name})=>declarations.has(name)).map(({name})=>`@property ${name}{syntax:'<number>';inherits:false;initial-value:0}`).join('\n');
     const matrices=this.matrices.map(name=>`@property ${name}{syntax:'<transform-list>';inherits:false;initial-value:matrix(1,0,0,1,0,0)}`).join('\n');
-    return `${registered}\n${matrices}\n.planet-viewport{${this.declarations.join(';')}}`;
+    return `${registered}\n${matrices}\n.planet-viewport{${[...declarations].map(([name,value])=>`${name}:${value}`).join(';')}}`;
   }
 }
 export const identity: Matrix = [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];

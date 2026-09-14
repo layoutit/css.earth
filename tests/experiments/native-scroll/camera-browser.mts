@@ -12,7 +12,7 @@ import { conformanceBrowserLaunch } from '../../../site/test/conformance-browser
 const engine=process.argv[2]??'chromium';
 if(engine!=='chromium'&&engine!=='webkit') throw new TypeError('Choose chromium or webkit.');
 const capturedReference=process.argv[3];
-const origin='http://127.0.0.1:4352',directory=`output/playwright/native-drag/camera-${engine}-${capturedReference?'captured':'numeric'}`;
+const origin=process.env.CSSEARTH_NATIVE_SCROLL_ORIGIN??'http://127.0.0.1:4352',directory=`output/playwright/native-drag/camera-${engine}-${capturedReference?'captured':'numeric'}`;
 await mkdir(directory,{recursive:true});
 const {document}=parseHTML(await (await fetch(`${origin}/saturn/?drag=resize`)).text());
 const token=document.querySelector<HTMLElement>('.planet-stage')?.dataset.preparedView;
@@ -44,7 +44,7 @@ try{
  }
  await native.goto(`${origin}/saturn/?drag=resize`);await native.waitForLoadState('networkidle');
  const errors:string[]=[];native.on('pageerror',e=>errors.push(e.message));
- for(const [name,dx,dy,wheel] of [['initial',0,0,0],['turn-right',120,60,0],['turn-left',-240,-120,0],['level',220,200,0],['past-pole',0,350,0],['inverted',0,350,0],['zoomed',0,0,700],['solar-system',0,0,2900],['solar-turn',-240,180,0]] as const){
+ for(const [name,dx,dy,wheel] of [['initial',0,0,0],['turn-right',120,60,0],['turn-left',-240,-120,0],['level',220,200,0],['past-pole',0,350,0],['inverted',0,350,0],['zoomed',0,0,700],['solar-system',0,0,2900],['solar-turn',-240,180,0],['orbit-detail',0,0,-700],['orbit-return',0,0,700]] as const){
   if(dx||dy) await drag(native,cdp,name==='solar-turn'?800:640,name==='solar-turn'?250:450,dx,dy);
   if(wheel){await native.mouse.move(640,450);await native.mouse.wheel(0,wheel);}
   if(capturedReference){
@@ -72,7 +72,7 @@ try{
   await native.mouse.move(20,20);await reference.mouse.move(20,20);await pause(500);
   const nativePath=`${directory}/${name}-native.png`,referencePath=`${directory}/${name}-reference.png`;
   await native.screenshot({path:nativePath});await reference.screenshot({path:referencePath});
-  const rect={left:360,top:64,width:560,height:810};
+  const rect=capturedReference?{left:0,top:0,width:1280,height:900}:{left:360,top:64,width:560,height:810};
   const a=await sharp(nativePath).extract(rect).removeAlpha().raw().toBuffer(),b=await sharp(referencePath).extract(rect).removeAlpha().raw().toBuffer();
   let sum=0,different=0;const diff=Buffer.alloc(a.length);
   for(let i=0;i<a.length;i+=3){let max=0;for(let c=0;c<3;c++){const delta=Math.abs(a[i+c]-b[i+c]);sum+=delta;max=Math.max(max,delta);diff[i+c]=Math.min(255,delta*4);}if(max>12)different++;}
