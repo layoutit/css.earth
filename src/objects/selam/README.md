@@ -41,6 +41,17 @@ The [Dinkinesh source check](../dinkinesh/README.md#lucy-photographic-source-che
 records the inspected archives and the L'LORRI geometric-header timing issue.
 No surface texture, inferred neck terrain, or new landmark placement was prepared.
 
+The [14 September source check](evidence/registration/source-check.json)
+retrieved the later Bierhaus paper and checked its Selam-specific methods.
+Section 3.1 explicitly measures Selam in the **unprojected** image
+`lor_0752129590_03608` because it has no shape model. The archived
+[`selam_placeholder_v00.tpc`](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/pck/selam_placeholder_v00.tpc)
+also identifies its pole as a placeholder. Its single ellipsoid cannot serve as
+measured registration for our two lobes. The mission-document v2 delta adds a
+Donaldjohanson coordinate-system document; its v1 predecessor was checked too.
+These specific records do not provide the missing Selam controls. This is a
+targeted source check, not an exhaustive claim that no such release can exist.
+
 ## Orbital placement
 
 [Source parameters](source/orbit/published-parameters.json) separate published constraints from assumptions. The illustration places zero mean anomaly at JD 2461286.5 TT (3 September 2026), rather than extrapolating an uncertain encounter phase. A dashed orbit and circular selected marker distinguish this approximation. No uncertainty region, confidence interval or exact current phase is claimed. The fixed-epoch loader rejects other epochs.
