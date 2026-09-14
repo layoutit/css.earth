@@ -22,6 +22,27 @@ placement, valid coverage and an honest account of the displayed quantity.
 Use the [implementation map](implementation-map.md#choose-a-photograph-route)
 after choosing the route; a missing decoder does not establish missing science.
 
+## Check the measurement method before fitting a camera
+
+When applying image matching to a new kind of observation, test it on a small
+native-pixel example whose geometry is better understood than the proposed
+transfer. Reuse valid checks for an unchanged tool. Useful comparisons, where
+the release provides them, are:
+
+- The same image against itself, to check sampling and coordinate consistency.
+- Simultaneous or nearly repeated observations, to measure disagreement between
+  detectors, processing and feature matching with little or no body rotation.
+- A short-interval transfer before a substantially changed viewing direction,
+  to distinguish local repeatability from transfer across the surface.
+
+These checks diagnose the measurement method; none establishes absolute surface
+coordinates. If simple comparisons already show substantial disagreement,
+investigate that before interpreting a more complex transfer as a camera or
+shape error. Inspect the actual search region, selected controls and rejection
+reasons using the [matcher guidance](registered-photographic-mosaics.md#bind-observations-and-validate-cameras).
+This is a camera-investigation check, not an additional prerequisite for a
+producer map with adequate registration evidence.
+
 ## Reuse a published map
 
 Read the map label and producer's method together. Establish projection and pixel
@@ -88,6 +109,15 @@ high correlation alone cannot resolve an ambiguous rotational phase or map frame
 Use the [camera guidance](registered-photographic-mosaics.md#bind-observations-and-validate-cameras)
 for camera-specific checks. Do not relax registration to an approximate drape.
 
+Reserve an unused exposure early when the release permits a predictive check.
+Freeze the method, reference solution and permitted target adjustments before
+examining its interior matches. State any use of that exposure's metadata or
+limb; it is not wholly withheld if those contributed to pointing. A new exposure
+in the same burst also shares instrument and processing limitations. Within an
+image, account for convolution and interpolation support: distinct patch centers
+or checkerboard partitions can still share source pixels. If validation results
+guide another fit variant, treat them as development evidence thereafter.
+
 ## When a method stalls
 
 Before another fit variant, state which unresolved quantity it would constrain
@@ -114,3 +144,21 @@ discovering a map does not qualify it. Make a small source-space check of the
 remaining route before an expensive bake. Continue useful authorized work, and
 describe a blocker at the level the evidence supports. Research diagnostics and
 ledger updates do not complete a requested photographic surface.
+
+When handing off a decisive experiment for reuse, retain a small runnable driver
+or recipe with its pinned inputs, configuration, partitions and execution command.
+Reuse the shared tools; keep implementation in `tools/`, body records beside the
+body and exploratory runs in ignored `output/`. A hash of an unavailable script
+or a replay of saved residuals does not reproduce the fit that produced them.
+State that limitation when only the measurements can be replayed. Preserve the
+decisive experiment without promoting every exploratory variant into a pipeline.
+
+Pallas illustrates the distinction. Its simultaneous SPHERE camera comparison
+gave 1.17 pixels withheld RMS after detector alignment. The later joint
+image-and-limb attempt still failed on an unused exposure: 5.29 pixels RMS over
+eight held-out matches. Neither the inherited one-pixel matcher limit nor the
+telescope resolution established a camera-error bound. The
+[Pallas investigation](../../../../src/objects/pallas/README.md) retains the
+measurements and limitations, including the missing fit reproduction. This
+supports checking measurement assumptions earlier; it does not make joint fitting
+a preferred method or establish that Pallas cannot be mapped.

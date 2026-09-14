@@ -1,0 +1,380 @@
+{
+  "status": "diagnostic-unqualified",
+  "recipeSha256": "a3f93b854218ee35d787335cb5a2981d1bf0156c107b7b2654d3052e95f19247",
+  "source": "Marsset et al. (2020), Supplementary Table 1, rows 1, 4, 5, 6. https://doi.org/10.1038/s41550-019-1007-5",
+  "limitations": "Visual estimates from the native FITS frame before projecting these four coordinates. Fig. 2 identifies the crater configuration; its illustrative sketch supplies no metric pixels. Native linear and paper-described squared-luminosity views were inspected. Bounds describe ambiguous feature centres, not confidence intervals or camera acceptance limits. The published coordinate table does not give individual crater-centre uncertainties. Its correspondence to the released model remains under investigation; these tentative picks must not authorize a photographic surface.",
+  "image": {
+    "file": "pallas-20171011-cam1.fits",
+    "bytes": 593280,
+    "sha256": "bc1aa695bf130dac60be0d13cc44f6db0e8f6961fd3c1f7621e45cec6cdeaef8",
+    "width": 256,
+    "height": 256,
+    "pixelConvention": "zero-based-x-right-y-down-reversed-fits-rows"
+  },
+  "method": "Project published coordinates without fitting. Residuals are against tentative native-image identifications; regions are not confidence intervals or acceptance limits. No aggregate camera-accuracy claim.",
+  "display": "Linear zero-to-maximum stretch; nearest-neighbour enlargement. Yellow regions and dots are tentative native picks. Cyan crosses are projected catalogue positions.",
+  "models": [
+    {
+      "id": "adam",
+      "shape": {
+        "file": "2_Pallas_adam.obj",
+        "bytes": 121798,
+        "sha256": "519ec4ca5b7ed1d0cfc345174eb3aa53d33faaf45967c2467cc8b72510605655"
+      },
+      "cameraSource": "Frozen 20171011 adam limb-refined diagnostic camera from the photographic-projection investigation; geocentric Horizons, LAM spin and ADAM convention, existing refineCameraByLimb. Not a producer camera or qualified control solution. Native picks did not alter this camera.",
+      "camera": {
+        "schema": "cssearth-archived-camera@1",
+        "rayMatrix": [
+          [
+            -1.1046870951952486e-8,
+            1.2430790733770957e-8,
+            0.32719745280849855
+          ],
+          [
+            -1.359147288361474e-8,
+            -1.0872489279132721e-8,
+            -0.14791355856428182
+          ],
+          [
+            1.7187314495029738e-9,
+            -6.081114156055208e-9,
+            0.9333077767159935
+          ]
+        ],
+        "matrix": [
+          [
+            -35667756.162717134,
+            -43883749.35812252,
+            5549506.349724595,
+            32831393754.5
+          ],
+          [
+            40136197.31454674,
+            -35104778.54669238,
+            -19634395.74956806,
+            32539003771
+          ],
+          [
+            0.3271976292582708,
+            -0.14791667771945757,
+            0.9333072205121984,
+            262196361.47596145
+          ]
+        ],
+        "positionKm": [
+          -85790023.4119675,
+          38783196.87548383,
+          -244709761.7471051
+        ],
+        "sunDirection": [
+          -0.08077602677908727,
+          0.2113930031742198,
+          -0.9740576121086311
+        ]
+      },
+      "controls": [
+        {
+          "id": "toxa",
+          "longitudeDegrees": 119,
+          "latitudeDegrees": -48,
+          "observedPixel": [
+            128,
+            85
+          ],
+          "regionPixels": [
+            123,
+            79,
+            133,
+            92
+          ],
+          "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control.",
+          "sourcePointMeters": [
+            -79996.471199501,
+            144317.4542970949,
+            -183257.6713539549
+          ],
+          "sourceFace": 2898,
+          "projectedPixel": [
+            108.06607398768413,
+            106.25698257163309
+          ],
+          "visible": true,
+          "insideImage": true,
+          "residualPixels": 29.141391770387287,
+          "distanceFromIdentificationRegionPixels": 20.64663890780226
+        },
+        {
+          "id": "xyston",
+          "longitudeDegrees": 148,
+          "latitudeDegrees": -43,
+          "observedPixel": [
+            148,
+            91
+          ],
+          "regionPixels": [
+            142,
+            84,
+            155,
+            98
+          ],
+          "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control.",
+          "sourcePointMeters": [
+            -158817.86554641192,
+            99240.41671560911,
+            -174636.3870651202
+          ],
+          "sourceFace": 2750,
+          "projectedPixel": [
+            126.5155329018158,
+            99.58089573294905
+          ],
+          "visible": true,
+          "insideImage": true,
+          "residualPixels": 23.13469468293676,
+          "distanceFromIdentificationRegionPixels": 15.564959127257787
+        },
+        {
+          "id": "akontia",
+          "longitudeDegrees": 130,
+          "latitudeDegrees": -68,
+          "observedPixel": [
+            135,
+            106
+          ],
+          "regionPixels": [
+            128,
+            98,
+            142,
+            115
+          ],
+          "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control.",
+          "sourcePointMeters": [
+            -52458.98671459918,
+            62518.18588097551,
+            -201996.03477758757
+          ],
+          "sourceFace": 3112,
+          "projectedPixel": [
+            117.61415196608046,
+            122.8274441501136
+          ],
+          "visible": true,
+          "insideImage": true,
+          "residualPixels": 24.1956729289296,
+          "distanceFromIdentificationRegionPixels": 13.005180556486641
+        },
+        {
+          "id": "hoplon",
+          "longitudeDegrees": 230,
+          "latitudeDegrees": -58,
+          "observedPixel": [
+            155,
+            145
+          ],
+          "regionPixels": [
+            148,
+            137,
+            162,
+            153
+          ],
+          "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control.",
+          "sourcePointMeters": [
+            -79028.72684869778,
+            -94182.76914008203,
+            -196756.12668358663
+          ],
+          "sourceFace": 3037,
+          "projectedPixel": [
+            147.56647809456092,
+            139.34812501998675
+          ],
+          "visible": true,
+          "insideImage": true,
+          "residualPixels": 9.33814428611715,
+          "distanceFromIdentificationRegionPixels": 0.4335219054390791
+        }
+      ]
+    },
+    {
+      "id": "mpcd",
+      "shape": {
+        "file": "2_Pallas_mpcd.obj",
+        "bytes": 2703739,
+        "sha256": "5bb49df2e0e0879a6377fa20c94a8ac47eea27e626fb3ec8f618c22f90f8184e"
+      },
+      "cameraSource": "Frozen 20171011 mpcd limb-refined diagnostic camera from the photographic-projection investigation; geocentric Horizons, LAM spin and ADAM convention, existing refineCameraByLimb. Not a producer camera or qualified control solution. Native picks did not alter this camera.",
+      "camera": {
+        "schema": "cssearth-archived-camera@1",
+        "rayMatrix": [
+          [
+            -1.1046863164603473e-8,
+            1.2430797668667612e-8,
+            0.3271974510258137
+          ],
+          [
+            -1.3591479724964832e-8,
+            -1.0872480664329688e-8,
+            -0.14791357341361744
+          ],
+          [
+            1.718727401024897e-9,
+            -6.0811153824822126e-9,
+            0.9333077749875945
+          ]
+        ],
+        "matrix": [
+          [
+            -35667731.01916386,
+            -43883771.44726561,
+            5549493.278122617,
+            32646398758
+          ],
+          [
+            40136219.70572798,
+            -35104750.73148265,
+            -19634399.709418155,
+            32412167005
+          ],
+          [
+            0.3271976274774629,
+            -0.14791669256856707,
+            0.9333072187831268,
+            262196361.47596118
+          ]
+        ],
+        "positionKm": [
+          -85790023.4119675,
+          38783196.87548383,
+          -244709761.7471051
+        ],
+        "sunDirection": [
+          -0.08077602677908727,
+          0.2113930031742198,
+          -0.9740576121086311
+        ]
+      },
+      "controls": [
+        {
+          "id": "toxa",
+          "longitudeDegrees": 119,
+          "latitudeDegrees": -48,
+          "observedPixel": [
+            128,
+            85
+          ],
+          "regionPixels": [
+            123,
+            79,
+            133,
+            92
+          ],
+          "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control.",
+          "sourcePointMeters": [
+            -77583.16260356933,
+            139963.73034182712,
+            -177729.21107417595
+          ],
+          "sourceFace": 42839,
+          "projectedPixel": [
+            107.8779027479779,
+            106.31157895464477
+          ],
+          "visible": true,
+          "insideImage": true,
+          "residualPixels": 29.31010398070763,
+          "distanceFromIdentificationRegionPixels": 20.820641620148155
+        },
+        {
+          "id": "xyston",
+          "longitudeDegrees": 148,
+          "latitudeDegrees": -43,
+          "observedPixel": [
+            148,
+            91
+          ],
+          "regionPixels": [
+            142,
+            84,
+            155,
+            98
+          ],
+          "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control.",
+          "sourcePointMeters": [
+            -152188.7981086957,
+            95098.11564204015,
+            -167347.05357010805
+          ],
+          "sourceFace": 17616,
+          "projectedPixel": [
+            125.75575053383038,
+            100.1206467791415
+          ],
+          "visible": true,
+          "insideImage": true,
+          "residualPixels": 24.041481484780665,
+          "distanceFromIdentificationRegionPixels": 16.38208727485711
+        },
+        {
+          "id": "akontia",
+          "longitudeDegrees": 130,
+          "latitudeDegrees": -68,
+          "observedPixel": [
+            135,
+            106
+          ],
+          "regionPixels": [
+            128,
+            98,
+            142,
+            115
+          ],
+          "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control.",
+          "sourcePointMeters": [
+            -51543.15250111628,
+            61426.73716683657,
+            -198469.56788939444
+          ],
+          "sourceFace": 12304,
+          "projectedPixel": [
+            117.0413203840467,
+            122.36594704292538
+          ],
+          "visible": true,
+          "insideImage": true,
+          "residualPixels": 24.297291951168027,
+          "distanceFromIdentificationRegionPixels": 13.204159752301226
+        },
+        {
+          "id": "hoplon",
+          "longitudeDegrees": 230,
+          "latitudeDegrees": -58,
+          "observedPixel": [
+            155,
+            145
+          ],
+          "regionPixels": [
+            148,
+            137,
+            162,
+            153
+          ],
+          "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control.",
+          "sourcePointMeters": [
+            -78060.30450881235,
+            -93028.64833737508,
+            -194345.066349102
+          ],
+          "sourceFace": 2043,
+          "projectedPixel": [
+            146.5870544650945,
+            138.67753267370867
+          ],
+          "visible": true,
+          "insideImage": true,
+          "residualPixels": 10.52384177310301,
+          "distanceFromIdentificationRegionPixels": 1.4129455349055036
+        }
+      ]
+    }
+  ]
+}

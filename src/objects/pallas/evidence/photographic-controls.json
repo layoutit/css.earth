@@ -1,0 +1,222 @@
+{
+  "schema": "cssearth-projected-controls@1",
+  "purpose": "diagnostic-only",
+  "coordinateConvention": "planetocentric-east-positive-z-north",
+  "source": "Marsset et al. (2020), Supplementary Table 1, rows 1, 4, 5, 6. https://doi.org/10.1038/s41550-019-1007-5",
+  "limitations": "Visual estimates from the native FITS frame before projecting these four coordinates. Fig. 2 identifies the crater configuration; its illustrative sketch supplies no metric pixels. Native linear and paper-described squared-luminosity views were inspected. Bounds describe ambiguous feature centres, not confidence intervals or camera acceptance limits. The published coordinate table does not give individual crater-centre uncertainties. Its correspondence to the released model remains under investigation; these tentative picks must not authorize a photographic surface.",
+  "image": {
+    "file": "pallas-20171011-cam1.fits",
+    "bytes": 593280,
+    "sha256": "bc1aa695bf130dac60be0d13cc44f6db0e8f6961fd3c1f7621e45cec6cdeaef8",
+    "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_04_27.347_zpl_science_imaging_cam1.fits",
+    "format": "fits-primary",
+    "bitpix": -64,
+    "width": 256,
+    "height": 256,
+    "pixelConvention": "zero-based-x-right-y-down-reversed-fits-rows",
+    "crop": [
+      56,
+      56,
+      144,
+      144
+    ]
+  },
+  "controls": [
+    {
+      "id": "toxa",
+      "longitudeDegrees": 119,
+      "latitudeDegrees": -48,
+      "observedPixel": [
+        128,
+        85
+      ],
+      "regionPixels": [
+        123,
+        79,
+        133,
+        92
+      ],
+      "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control."
+    },
+    {
+      "id": "xyston",
+      "longitudeDegrees": 148,
+      "latitudeDegrees": -43,
+      "observedPixel": [
+        148,
+        91
+      ],
+      "regionPixels": [
+        142,
+        84,
+        155,
+        98
+      ],
+      "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control."
+    },
+    {
+      "id": "akontia",
+      "longitudeDegrees": 130,
+      "latitudeDegrees": -68,
+      "observedPixel": [
+        135,
+        106
+      ],
+      "regionPixels": [
+        128,
+        98,
+        142,
+        115
+      ],
+      "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control."
+    },
+    {
+      "id": "hoplon",
+      "longitudeDegrees": 230,
+      "latitudeDegrees": -58,
+      "observedPixel": [
+        155,
+        145
+      ],
+      "regionPixels": [
+        148,
+        137,
+        162,
+        153
+      ],
+      "identification": "Tentative visual crater-centre region; Fig. 2 used for identity, not for metric pixel coordinates. Native point is an estimate, not a measured central-peak or fitted camera control."
+    }
+  ],
+  "models": [
+    {
+      "id": "adam",
+      "input": {
+        "file": "2_Pallas_adam.obj",
+        "bytes": 121798,
+        "sha256": "519ec4ca5b7ed1d0cfc345174eb3aa53d33faaf45967c2467cc8b72510605655",
+        "url": "https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj"
+      },
+      "profile": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 1602,
+        "expectedFaces": 3200
+      },
+      "cameraSource": "Frozen 20171011 adam limb-refined diagnostic camera from the photographic-projection investigation; geocentric Horizons, LAM spin and ADAM convention, existing refineCameraByLimb. Not a producer camera or qualified control solution. Native picks did not alter this camera.",
+      "camera": {
+        "schema": "cssearth-archived-camera@1",
+        "rayMatrix": [
+          [
+            -1.1046870951952486e-8,
+            1.2430790733770957e-8,
+            0.32719745280849855
+          ],
+          [
+            -1.359147288361474e-8,
+            -1.0872489279132721e-8,
+            -0.14791355856428182
+          ],
+          [
+            1.7187314495029738e-9,
+            -6.081114156055208e-9,
+            0.9333077767159935
+          ]
+        ],
+        "matrix": [
+          [
+            -35667756.162717134,
+            -43883749.35812252,
+            5549506.349724595,
+            32831393754.5
+          ],
+          [
+            40136197.31454674,
+            -35104778.54669238,
+            -19634395.74956806,
+            32539003771
+          ],
+          [
+            0.3271976292582708,
+            -0.14791667771945757,
+            0.9333072205121984,
+            262196361.47596145
+          ]
+        ],
+        "positionKm": [
+          -85790023.4119675,
+          38783196.87548383,
+          -244709761.7471051
+        ],
+        "sunDirection": [
+          -0.08077602677908727,
+          0.2113930031742198,
+          -0.9740576121086311
+        ]
+      }
+    },
+    {
+      "id": "mpcd",
+      "input": {
+        "file": "2_Pallas_mpcd.obj",
+        "bytes": 2703739,
+        "sha256": "5bb49df2e0e0879a6377fa20c94a8ac47eea27e626fb3ec8f618c22f90f8184e",
+        "url": "https://observations.lam.fr/astero/3Dshape/2_Pallas_mpcd.obj"
+      },
+      "profile": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 22530,
+        "expectedFaces": 45056
+      },
+      "cameraSource": "Frozen 20171011 mpcd limb-refined diagnostic camera from the photographic-projection investigation; geocentric Horizons, LAM spin and ADAM convention, existing refineCameraByLimb. Not a producer camera or qualified control solution. Native picks did not alter this camera.",
+      "camera": {
+        "schema": "cssearth-archived-camera@1",
+        "rayMatrix": [
+          [
+            -1.1046863164603473e-8,
+            1.2430797668667612e-8,
+            0.3271974510258137
+          ],
+          [
+            -1.3591479724964832e-8,
+            -1.0872480664329688e-8,
+            -0.14791357341361744
+          ],
+          [
+            1.718727401024897e-9,
+            -6.0811153824822126e-9,
+            0.9333077749875945
+          ]
+        ],
+        "matrix": [
+          [
+            -35667731.01916386,
+            -43883771.44726561,
+            5549493.278122617,
+            32646398758
+          ],
+          [
+            40136219.70572798,
+            -35104750.73148265,
+            -19634399.709418155,
+            32412167005
+          ],
+          [
+            0.3271976274774629,
+            -0.14791669256856707,
+            0.9333072187831268,
+            262196361.47596118
+          ]
+        ],
+        "positionKm": [
+          -85790023.4119675,
+          38783196.87548383,
+          -244709761.7471051
+        ],
+        "sunDirection": [
+          -0.08077602677908727,
+          0.2113930031742198,
+          -0.9740576121086311
+        ]
+      }
+    }
+  ]
+}
