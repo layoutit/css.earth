@@ -56,6 +56,23 @@
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
       ]
+    },
+    {
+      "id": "sbmt-native-preparation-oracle",
+      "subject": "Native SBMT preparation comparison",
+      "status": "included",
+      "finding": "The generic native SBMT oracle compares the full released mesh, the MSI FITS exposure and both corrected SUM and SPICE INFO camera cases. Sampled pointing, image values and visible intersections match. Maximum in-image UV difference across the tested orientations/crop is 0.0817 pixel, within the fixed 0.25-pixel criterion. This is preparation test evidence, not qualification of a new surface lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/06011cc9dbc174e819eb05aee44f7293cd6f4d9d/tools/oracles/sbmt/README.md",
+        "https://github.com/layoutit/css.earth/blob/06011cc9dbc174e819eb05aee44f7293cd6f4d9d/tests/oracles/sbmt/projection.json",
+        "https://github.com/layoutit/css.earth/blob/06011cc9dbc174e819eb05aee44f7293cd6f4d9d/src/objects/eros/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "06011cc9dbc174e819eb05aee44f7293cd6f4d9d"
+        }
+      ]
     }
   ]
 }

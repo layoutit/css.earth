@@ -96,6 +96,24 @@
         }
       ],
       "revisitWhen": "The native single-exposure/subwindow calibration is implemented and checked against the archive, followed by model-registration and transfer checks."
+    },
+    {
+      "id": "sbmt-native-preparation-oracle",
+      "subject": "Native SBMT preparation comparison",
+      "status": "unresolved",
+      "finding": "The generic native SBMT oracle compares the full released mesh, ST_2402987304 v-band FITS and its SUM pointing. Sampled pointing, image values and visible intersections match. The UV stage reports a 1.0021-pixel maximum difference from pinhole projection, exceeding the fixed 0.25-pixel criterion. Keep this mismatch explicit; the existing controlled-DDR production route is unaffected.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/06011cc9dbc174e819eb05aee44f7293cd6f4d9d/tools/oracles/sbmt/README.md",
+        "https://github.com/layoutit/css.earth/blob/06011cc9dbc174e819eb05aee44f7293cd6f4d9d/tests/oracles/sbmt/projection.json",
+        "https://github.com/layoutit/css.earth/blob/06011cc9dbc174e819eb05aee44f7293cd6f4d9d/src/objects/itokawa/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "06011cc9dbc174e819eb05aee44f7293cd6f4d9d"
+        }
+      ],
+      "revisitWhen": "Before using this SUM/UV route in a photographic lens, independently qualify the camera convention and account for the angular-versus-projective difference without fitting to oracle outputs."
     }
   ]
 }
