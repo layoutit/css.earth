@@ -1,0 +1,36 @@
+{
+  "id": "publication-mcconnachie2012aj-144-4m",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "McConnachie2012AJ....144....4M: The Observed Properties of Dwarf Galaxies in and around the Local Group",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "McConnachie2012AJ....144....4M"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "http://adsabs.harvard.edu/abs/2012AJ....144....4M",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/prepared/catalogue.json",
+      "revision": "340f4ef6ea7f2a6cc540b906dec35436a1d549c5",
+      "sha256": "1987e9658d963826cc1717afdfa0b9267fa1ce79b79e0d3f9d5905bd55f00c8f",
+      "locator": "/sources/3/references/76"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/3/references/76"
+    }
+  ]
+}

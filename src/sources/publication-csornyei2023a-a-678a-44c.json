@@ -1,0 +1,36 @@
+{
+  "id": "publication-csornyei2023a-a-678a-44c",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Csornyei2023A&A...678A..44C: Reeling in the Whirlpool galaxy: Distance to M 51 clarified through Cepheids and the type IIP supernova 2005cs",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "Csornyei2023A&A...678A..44C"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A..44C",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group/prepared/catalogue.json",
+      "revision": "340f4ef6ea7f2a6cc540b906dec35436a1d549c5",
+      "sha256": "1987e9658d963826cc1717afdfa0b9267fa1ce79b79e0d3f9d5905bd55f00c8f",
+      "locator": "/sources/3/references/148"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/3/references/148"
+    }
+  ]
+}

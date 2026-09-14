@@ -1,3 +1,7 @@
+import { parsePreparationEvidence } from './preparation-evidence.mts';
+import type { PreparationEvidence } from './preparation-evidence.mts';
+import { validateInputEvidence } from './product-input-evidence.mts';
+import type { ProductInputEvidence } from './product-input-evidence.mts';
 import { isArray } from './is-array.mts';
 import { parseCapture } from './exploration-catalog.mts';
 import type { Capture } from './exploration-catalog.mts';
@@ -21,6 +25,7 @@ export interface ProvenanceSource {
 export interface ProvenanceRecipe { readonly id: string; readonly path: string; readonly sha256: string; readonly parameters: ProvenanceJson; }
 export interface ProvenanceOutput { readonly url: string; readonly sha256: string; readonly bytes: number; readonly verification: string; }
 export interface ProvenanceProduct {
+  readonly inputEvidence?: readonly ProductInputEvidence[];
   /** Whether source capture lineage may credit a displayed view; never an observation-quality claim. */
   readonly observationAttribution?: 'source-lineage' | 'none';
   readonly id: string; readonly label: string; readonly process: string; readonly recipe: string; readonly selector: string;
@@ -29,6 +34,7 @@ export interface ProvenanceProduct {
   readonly outputs: readonly ProvenanceOutput[]; readonly limitations?: readonly string[]; readonly lensIds?: readonly string[];
 }
 export interface ProvenanceDocument {
+  readonly lastPreparation?: PreparationEvidence;
   readonly schema: string; readonly objectId: string; readonly basis: string;
   readonly manifest: { readonly path: string; readonly sha256: string };
   readonly generator: { readonly path: string; readonly sha256: string; readonly bindingsSha256: string };
@@ -120,6 +126,7 @@ export function validateObjectProvenance(input: unknown, objectId?: string): Pro
       || !isArray(value.sources) || !isArray(value.recipes) || !isArray(value.products)
       || value.coverage?.scope !== 'object-datasets-and-bound-rendering-products'
       || !isArray(value.coverage?.unresolved)) throw new TypeError('Invalid object provenance document.');
+  if (value.lastPreparation !== undefined && parsePreparationEvidence(value.lastPreparation).objectId !== objectId) throw new TypeError('Preparation evidence belongs to a different object.');
   unique(value.sources.map(source => source.id), 'source');
   unique(value.recipes.map(recipe => recipe.id), 'recipe');
   unique(value.products.map(product => product.id), 'product');
@@ -157,6 +164,7 @@ export function validateObjectProvenance(input: unknown, objectId?: string): Pro
         || !isArray(product.outputs) || product.outputs.length === 0)
       throw new TypeError(`Unbound provenance product: ${product.id}.`);
     unique(product.inputs, 'product input');
+    validateInputEvidence(product);
     unique(product.parents, 'product parent');
     for (const output of product.outputs) {
       if (!nonempty(output.url) || !digest(output.sha256) || !Number.isSafeInteger(output.bytes) || output.bytes < 0)

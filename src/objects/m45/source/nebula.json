@@ -45,7 +45,13 @@
         "minusPc": 1.2,
         "plusPc": 1.2,
         "sourceRef": "melis-2014",
-        "method": "Adopted VLBI stellar-cluster distance from Melis et al. (2014), main text and Table 1; not a measured distance to each dust filament."
+        "method": "Adopted VLBI stellar-cluster distance from Melis et al. (2014), main text and Table 1; not a measured distance to each dust filament.",
+        "subject": {
+          "id": "m45-stellar-cluster",
+          "name": "Pleiades stellar cluster",
+          "relationship": "Associated illuminating stellar cluster",
+          "reason": "The stellar-cluster distance locates the reflection-nebula scene; individual dust-filament distances are not measured."
+        }
       },
       "classification": {
         "name": "Reflection nebula around an open cluster",

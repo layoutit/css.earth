@@ -12,7 +12,7 @@ export interface PreparedFocusObject {
   readonly classification: 'galaxy' | 'galaxy-cluster' | 'nebula';
   readonly systemName: string;
   readonly route: string;
-  readonly hostId: string;
+  readonly sceneHostId: string;
   readonly distance: NavigationDistance;
 }
 export type NavigableObject = ObjectEntry | PreparedFocusObject;
@@ -20,10 +20,10 @@ export const isSceneObject = (object: NavigableObject): object is ObjectEntry =>
 
 /** A focus reuses its host scene and camera; it has no scene loader. */
 export function definePreparedFocus(input: unknown): PreparedFocusObject {
-  if (!record(input) || Object.keys(input).some(key => !['kind', 'id', 'focusId', 'name', 'searchNames', 'classification', 'systemName', 'route', 'hostId', 'distance'].includes(key)) ||
+  if (!record(input) || Object.keys(input).some(key => !['kind', 'id', 'focusId', 'name', 'searchNames', 'classification', 'systemName', 'route', 'sceneHostId', 'distance'].includes(key)) ||
       input.kind !== 'prepared-focus' || typeof input.id !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9_.+-]*$/u.test(input.id) || input.focusId !== input.id ||
-      typeof input.hostId !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(input.hostId) ||
-      input.route !== `/${input.hostId}/?focus=${encodeURIComponent(input.id)}` ||
+      typeof input.sceneHostId !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(input.sceneHostId) ||
+      input.route !== `/${input.sceneHostId}/?focus=${encodeURIComponent(input.id)}` ||
       typeof input.name !== 'string' || !input.name || typeof input.systemName !== 'string' || !input.systemName ||
       (input.classification !== 'galaxy' && input.classification !== 'galaxy-cluster' && input.classification !== 'nebula') ||
       !Array.isArray(input.searchNames) || !input.searchNames.length || !input.searchNames.every(name => typeof name === 'string' && name)) {
@@ -31,5 +31,5 @@ export function definePreparedFocus(input: unknown): PreparedFocusObject {
   }
   return Object.freeze({ kind: input.kind, id: input.id, focusId: input.id, name: input.name,
     searchNames: Object.freeze([...input.searchNames]), classification: input.classification, systemName: input.systemName,
-    route: input.route, hostId: input.hostId, distance: parseNavigationDistance(input.distance) });
+    route: input.route, sceneHostId: input.sceneHostId, distance: parseNavigationDistance(input.distance) });
 }

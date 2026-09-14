@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
-    "bindingsSha256": "8960715ec2e398fe3cd2cbbd2f37fd6f3dc413f947ced0661bee968c2706b73f"
+    "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+    "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
   },
   "recipes": [
     {
@@ -1425,6 +1425,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "new-horizons-charon-monochrome",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1479,6 +1486,13 @@
           "bytes": 120610,
           "sha256": "ca059654e408d48831ed254cff5224c6a99bf49971f843522936148777e67d4f",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "new-horizons-charon-mvic-color",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1536,6 +1550,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "new-horizons-charon-dem",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1589,6 +1610,13 @@
           "bytes": 14168,
           "sha256": "9abf55667011be61a0c2983c26478b142a56c4f5331bcb94b4cc71b246f908b5",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "new-horizons-charon-bond-albedo-grid",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/3/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1646,6 +1674,13 @@
           "verification": "asset-manifest-pin"
         }
       ],
+      "inputEvidence": [
+        {
+          "sourceId": "charon-leisa-water-ice",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/4/source."
+        }
+      ],
       "inputBasis": "bound-inputs"
     },
     {
@@ -1699,6 +1734,13 @@
           "bytes": 71400,
           "sha256": "1c3c00a8145bcc9205ea12933bcd9728ec580be4efc8fc28f92aa9cb16b17661",
           "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "charon-leisa-ammonia",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/5/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2337,5 +2379,19 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "charon",
+    "materialSha256": "a205041e7a6a4ca9ab5e3cb0b99fb0677bec41a2b5ced876ac74eb91b3194d15",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
+      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    },
+    "record": {
+      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
+      "path": "src/objects/charon/prepared/provenance.json",
+      "sha256": "285903b6ea246c49a9cbd2bc3b252f02e1175b1a124d3fe7c6137e8709f63da6"
+    }
   }
 }

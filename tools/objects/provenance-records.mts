@@ -1,3 +1,4 @@
+import type { InputRole } from '../../src/platform/product-input-evidence.mts';
 import {requireArray, requireRecord, requireString, requireFiniteNumber} from '../source-values.mts';
 import { parseCapture } from '../../src/platform/exploration-catalog.mts';
 import { parseSourceBinding } from '../../src/platform/source-catalog.mts';
@@ -31,6 +32,7 @@ export function provenanceManifest(value: unknown) {
 }
 export interface ProvenanceRecipeSource {id: string; path: string; sha256: string; parameters: Record<string, unknown>;}
 export interface ProductBinding {
+  inputRoles?: Readonly<Record<string, { role: InputRole; evidence: string }>>;
   observationAttribution: 'source-lineage' | 'none';
   id: string; label: string; recipe: string; selector: string; inputPaths: string[]; parents: string[]; urls: string[];
   process: string; limitations: string[]; lensIds: string[]; recipeDependencies: string[]; interpretation?: Record<string, unknown>;

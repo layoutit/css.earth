@@ -1,3 +1,4 @@
+import { validateSpatialPosition } from './spatial-relations.ts';
 import type { PreparedGalaxyRecord, SpatialCatalogSource } from './spatial.js';
 
 /** A sourced centre and display model; reconstructed depth is not a measured density. */
@@ -55,5 +56,7 @@ export function parsePreparedNebulaCatalog(input: unknown): PreparedNebulaCatalo
     const classification = record(row.classification); text(classification.name); text(classification.basis); reference(classification.sourceRef);
     if (row.presentation !== undefined) positive(record(row.presentation).focusRadiusM);
   }
-  return input as PreparedNebulaCatalog;
+  const validated = input as PreparedNebulaCatalog;
+  for (const row of validated.objects) validateSpatialPosition(validated.frame, row);
+  return validated;
 }
