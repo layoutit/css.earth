@@ -71,6 +71,9 @@ jobs:
           node --test tools/objects/material-composition/coplanar-raster.test.mts
       - name: Test pinned JSON transport restoration
         run: node --test tools/restore-object-json.test.mts
+      - name: Test FITS decoding and offline reference comparisons
+        # Small independent FITS inputs are checked in; no archive downloads or Python needed.
+        run: pnpm test:fits --unit
       - name: Test selected dataset textures and bounded residency
         run: |
           node --test src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts tests/objects/unit/earth/dataset-selection.test.mts tests/objects/unit/earth/surface-image-banks.test.mts

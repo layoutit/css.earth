@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeLlorri, sipPixel } from './llorri-geo.mts';
-import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
+import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../source-values.mts';
 
 /** astropy as the oracle for the L'LORRI FITS reader and the TAN-SIP distortion (Donaldjohanson). */
@@ -12,7 +12,7 @@ const [input] = fixture.inputs;
 const source = resolve(ORACLE_ROOT, 'src/objects/donaldjohanson/source');
 const config = JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json'), 'utf8'));
 const recipe = config.raster.surfaceObservations[0], camera = JSON.parse(await readFile(resolve(source, recipe.frames[0].cameraPath), 'utf8'));
-const frame = decodeLlorri(await readFile(resolve(ORACLE_ROOT, input.path)), camera);
+const frame = decodeLlorri(await readOracleInput(input), camera);
 const cards = requireRecord(fixture.cases.cards), planes = requireRecord(fixture.cases.planes), sip = requireRecord(fixture.cases.sip);
 const exposure = requireFiniteNumber(cards.EXPTIME);
 

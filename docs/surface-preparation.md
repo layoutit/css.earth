@@ -17,6 +17,7 @@ Original images, meshes and labels
 | Step | Implementation |
 | --- | --- |
 | Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations.ts) and [checkout restoration](../tools/restore-source-inputs.mts) |
+| Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
 | Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
 | Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../tools/objects/terrestrial-layers/index.mts) |
@@ -153,6 +154,71 @@ explains why darkness alone cannot define missing data.
 Cassini VIMS example: infrared false color at left, ice absorption at right;
 gray marks unsupported data. The [original input record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b9-cassini-ice-surfaces/source-review/source-maps.json)
 identifies the cubes and processing behind this illustration.
+
+## FITS support
+
+FITS decoding happens during preparation, never in the browser. The shared
+[reader](../tools/fits.mts) preserves native pixel/axis order and physical numeric
+values. Product adapters still own units, quality masks, camera registration,
+spectral selection, missing-data policies and display transforms.
+
+| Input | Supported contract and owner |
+| --- | --- |
+| Primary images and IMAGE extensions | 2D images or explicitly selected 3D planes; unsigned 8-bit, signed 16/32-bit, IEEE float32/64, big-endian. `BSCALE`/`BZERO` are applied once; integer `BLANK` becomes `NaN` before scaling. Zero and negative measurements remain values. |
+| Multi-HDU observations | Encounter, LORRI/L'LORRI and MVIC adapters require their exact instrument layout, units and quality conventions. Named HDUs do not imply a camera model. |
+| Spectral and geometry cubes | LEISA uses bounded sample access without expanding a whole cube. PDS4 geometry labels must agree with FITS axes, element types and offsets; label special constants remain authoritative. |
+| Fixed facet tables | Only the declared `1J + 5E` BINTABLE profiles, with their mesh identity and centroid checks. Column scaling (`TSCAL`/`TZERO`) and null (`TNULL`) declarations are rejected, not ignored. |
+| Nebula Lab transport | Uses the shared image reader, then reverses rows once for top-down arrays. Missing/nonfinite pixels and float32 overflow are rejected; metadata cannot override structural fields. |
+| Pallas SPHERE metadata | ESO `HIERARCH` names and scalar values are decoded without stripping cards. The four released LAM Deconv frames have exact Astropy comparisons for all 777 extended keywords and all 65,536 pixels per frame. This does not qualify their camera model or surface registration. |
+| MUSE acquisition | The existing [Python converter](../tools/objects/acquisition/muse-spectral-maps.py) remains an exact six-card, 180×90 float64 product reader. Its complete header allowlist rejects scaling and additional conventions; it is not a general FITS reader. |
+
+Value cards support quoted strings (including slashes and doubled quotes),
+booleans, finite numbers with `D` or `E` exponents and undefined optional values.
+The [ESO HIERARCH convention](https://fits.gsfc.nasa.gov/registry/hierarch/hierarch_20Aug2007.pdf)
+is supported for uppercase ESO namespace tokens. For example,
+`readFitsImage(bytes).header['ESO OBS AIRM']` holds its numeric value;
+`.cards` retains the original 80-byte records, including commentary and `END`.
+Duplicate value keys are rejected; `COMMENT` and `HISTORY` can repeat. Required
+fields cannot be undefined. Released SDO quoted values without a space after
+`=` and the unquoted JSOC `T_OBS`/`T_START`/`T_STOP` TAI strings are accepted
+explicitly as text, without time conversion. Header scans stop after 64 records; HDU extents,
+padding and safe-integer sizes are checked before reading. Image-plane decoding
+defaults to a 512 MiB allocation limit. Scanning a BINTABLE does not decode its columns.
+
+SDO's floating-point maps also contain a `BLANK` card. As in Astropy, the
+reader retains that card and reports a warning but does not mask matching
+finite floats: `BLANK` applies only to integer arrays; floating gaps are `NaN`.
+
+This is a tested product subset, not arbitrary FITS support. Compressed images,
+random groups, int64 image decoding, variable-length/general tables, complex
+values, non-ESO/generalized `HIERARCH` names, `CONTINUE` and general WCS interpretation are unsupported.
+FITS `CHECKSUM`/`DATASUM` are retained metadata, not verified checksums; source
+integrity is enforced through the archive's pinned SHA-256 and byte count.
+
+### FITS checks
+
+`pnpm test:fits` runs the focused tests, Nebula Lab transport checks and real
+archive comparisons. Each restored comparison input is verified against its
+manifest hash and size. Astropy and NASA's PDS4 reader provide independent
+reference values; neither runs in the application. The Charon test also
+regenerates spectral maps and compares their exact pinned bytes.
+The [test-only Pallas acquisition record](../tests/fixtures/fits/archive-inputs.json)
+pins the four native files and their source URLs independently of production
+body acquisition. They are restored under ignored `.local/fits-reference/`;
+no Pallas body recipe or surface output changes here.
+
+`pnpm test:fits --unit` runs the offline subset, including small checked-in
+Astropy-generated FITS files. CI runs this subset. It does not prove that the
+large archive files are available or that complete body preparation passed.
+Regenerate the small reference fixtures with `pnpm oracles:setup`, then
+`pnpm oracles:run fits/core`; normal tests need no Python environment.
+
+For missing real inputs, run `pnpm build:preparation`, then
+`pnpm test:fits --restore`. Restoration is sequential and limited to the suite's
+pinned source files (about 1.2 GiB on an empty checkout); existing mismatched
+bytes fail instead of being overwritten. An archive download can still fail:
+in particular the pinned Zenodo Pluto endpoint has returned HTTP 403. An exact,
+hash-verified local copy is valid; substituting a different release is not.
 
 ## Map a surface point to source pixels
 

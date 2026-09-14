@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { writeArrayBuffer } from 'geotiff';
-import { readFitsHeader } from './fits.mts';
+import { readFitsHdu, fitsImageAccessor } from '../../fits.mts';
 import { shape, text, number, array } from '../terrestrial-layers/source-records.mts';
 
 const windowSchema = shape({ minimum: number, maximum: number, minimumChannels: number });
@@ -49,13 +49,13 @@ export function parseSpectralBandRecipe(value: unknown): Recipe {
  * little-endian for the spectra/wavelengths; the native FITS and physical
  * wavelength/geometry anchors determine decoding. No new binary format. */
 export function fitsCube(bytes: Buffer, width: number, height: number, planes: number) {
-  const { header, dataOffset } = readFitsHeader(bytes);
+  const hdu = readFitsHdu(bytes), { header, dataOffset } = hdu, sample = fitsImageAccessor(bytes, hdu);
   if (header.SIMPLE !== true || header.BITPIX !== -32 || header.NAXIS !== 3 || header.NAXIS1 !== width || header.NAXIS2 !== height ||
       header.NAXIS3 !== planes || (header.BSCALE ?? 1) !== 1 || (header.BZERO ?? 0) !== 0 ||
       bytes.length !== Math.ceil((dataOffset + width * height * planes * 4) / 2880) * 2880) throw new Error('Spectral FITS layout changed.');
   return { at(plane: number, index: number) {
     if (!Number.isInteger(plane) || plane < 0 || plane >= planes || !Number.isInteger(index) || index < 0 || index >= width * height) throw new RangeError('Spectral FITS sample outside the cube.');
-    const value = bytes.readFloatBE(dataOffset + 4 * (plane * width * height + index));
+    const value = sample(plane * width * height + index);
     return Number.isFinite(value) && Math.abs(value) < 1e30 ? value : null;
   } };
 }

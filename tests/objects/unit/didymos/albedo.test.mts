@@ -33,7 +33,7 @@ test('facet correspondence rejects reordered rows and displaced source geometry'
   assert.throws(() => decode(reordered), /facet identities/);
   const displaced = Buffer.from(bytes); displaced.writeFloatBE(.9, 8640 + 12);
   assert.throws(() => decode(displaced), /source centroid/);
-  assert.throws(() => decode(bytes.subarray(0, bytes.length - 2880)), /record layout/);
+  assert.throws(() => decode(bytes.subarray(0, bytes.length - 2880)), /record layout|Truncated.*FITS/);
 });
 
 test('nominal albedo fill and invalid uncertainties stay missing before sampling', () => {
