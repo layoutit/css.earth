@@ -3,6 +3,7 @@ import { parseDensityVolumeFrame } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { transposeWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
+import { nativeProjectedLength } from '../rendering/native-projection.js';
 
 export interface PreparedCataloguePoint {
   readonly id: string;
@@ -57,18 +58,19 @@ export function samePreparedPhysicalFrame(left: DensityVolumeFrame, right: Densi
 }
 
 /** Retained catalogue geometry. Only camera projection and prepared point presentation enter runtime. */
-export function mountPreparedCataloguePoints({ host, before, payload }: {
-  host: HTMLElement; before: Element; payload: PreparedCataloguePoints;
+export function mountPreparedCataloguePoints({ host, before, payload, createElement, nativeFocalCss }: {
+  host: HTMLElement; before: Element; payload: PreparedCataloguePoints; createElement?: (tag: string) => HTMLElement; nativeFocalCss?: string;
 }) {
   const data = validatePreparedCataloguePoints(payload), document = host.ownerDocument;
-  const root = document.createElement('div');
+  const create = createElement ?? ((tag: string) => document.createElement(tag));
+  const root = create('div');
   root.className = 'prepared-catalogue-points'; root.ariaHidden = 'true';
   root.dataset.pointCount = String(data.points.length);
   Object.assign(root.style, { position: 'absolute', inset: '0', pointerEvents: 'none', overflow: 'hidden', zIndex: '1' });
   let presentation = data, materials = data.points, destroyed = false, latest: VolumeCameraPublication | null = null;
-  const shownState = new Uint8Array(data.points.length), writtenTransform: string[] = new Array(data.points.length).fill('');
+  const shownState = new Uint8Array(data.points.length).fill(255), writtenTransform: string[] = new Array(data.points.length).fill('');
   const nodes = data.points.map(point => {
-    const node = document.createElement('s'); node.dataset.catalogueSource = point.id;
+    const node = create('s'); node.dataset.catalogueSource = point.id;
     Object.assign(node.style, { position: 'absolute', left: '50%', top: '50%', display: 'block',
       borderRadius: '50%', textDecoration: 'none', visibility: 'hidden' });
     root.append(node); return node;
@@ -111,8 +113,11 @@ export function mountPreparedCataloguePoints({ host, before, payload }: {
       if (shownState[index] !== Number(shown)) { node.style.visibility = shown ? 'visible' : 'hidden'; shownState[index] = Number(shown); }
       if (shown) {
         visible++;
-        if (material.diameterUnits !== undefined) node.style.width = node.style.height = `${size}px`;
-        const transform = `translate(${px - size / 2}px,${py - size / 2}px)`;
+        const length = (value: number) => nativeFocalCss === undefined ? `${value}px` : nativeProjectedLength(value, focal, nativeFocalCss);
+        if (material.diameterUnits !== undefined) node.style.width = node.style.height = length(size);
+        const halfSize = material.diameterUnits === undefined ? `${size / 2}px` : length(size / 2);
+        const transform = nativeFocalCss === undefined ? `translate(${px - size / 2}px,${py - size / 2}px)`
+          : `translate(calc(${ox}px + ${length(px - ox)} - ${halfSize}),calc(${oy}px + ${length(py - oy)} - ${halfSize}))`;
         if (writtenTransform[index] !== transform) { node.style.transform = transform; writtenTransform[index] = transform; }
       }
     }

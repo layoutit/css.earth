@@ -18,9 +18,14 @@ export function volumeFramingRadiusUnits(frame: DensityVolumeFrame): number {
 /** Opacity from a framing radius projected at the camera: none below the lower threshold, full above the upper. */
 export function projectedVolumeOpacity(world: WorldCameraPose, viewport: WorldCameraViewport, frame: DensityVolumeFrame,
   framingRadiusUnits: number, visibility: PreparedPointVisibility = DEFAULT_POINT_VISIBILITY): number {
-  const distanceUnits = Math.hypot(...world.pose.positionM.map((value, axis) => value - frame.originM[axis]!)) / frame.metersPerUnit;
-  const radiusPixels = viewport.focalPixels * framingRadiusUnits / Math.max(Number.MIN_VALUE, distanceUnits);
+  const radiusPixels = projectedVolumeRadiusPixels(world, viewport, frame, framingRadiusUnits);
   const t = Math.max(0, Math.min(1, (radiusPixels - visibility.hiddenBelowRadiusPixels) /
     (visibility.fullAboveRadiusPixels - visibility.hiddenBelowRadiusPixels)));
   return t * t * (3 - 2 * t);
+}
+
+export function projectedVolumeRadiusPixels(world: WorldCameraPose, viewport: WorldCameraViewport, frame: DensityVolumeFrame,
+  framingRadiusUnits: number): number {
+  const distanceUnits = Math.hypot(...world.pose.positionM.map((value, axis) => value - frame.originM[axis]!)) / frame.metersPerUnit;
+  return viewport.focalPixels * framingRadiusUnits / Math.max(Number.MIN_VALUE, distanceUnits);
 }

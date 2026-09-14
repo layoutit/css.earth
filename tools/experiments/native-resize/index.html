@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="script-src 'none'"><title>Where native resize stores X and Y</title>
+<style>
+@property --resize-x { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --resize-y { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --box-width { syntax: '<number>'; inherits: true; initial-value: 150; }
+@property --box-height { syntax: '<number>'; inherits: true; initial-value: 150; }
+@property --yaw { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pitch { syntax: '<number>'; inherits: true; initial-value: 0; }
+@keyframes read-width { from { --resize-x: 0; } to { --resize-x: 1; } }
+@keyframes read-height { from { --resize-y: 0; } to { --resize-y: 1; } }
+* { box-sizing: border-box; }
+body { margin:0; padding:40px 24px; color:#e9e8e4; background:#14191f; font:16px/1.5 system-ui;
+ timeline-scope: --width-timeline, --height-timeline; animation: read-width linear both, read-height linear both;
+ animation-timeline: --width-timeline, --height-timeline;
+ --box-width: calc(900 / var(--resize-x) - 300);
+ --box-height: calc(900 / var(--resize-y) - 300);
+ --yaw: calc((var(--box-width) - 1200) * 1.5); --pitch: calc((var(--box-height) - 1200) * .625); }
+main { max-width:960px; margin:auto; } h1 { font-size:clamp(25px,4vw,38px); line-height:1.2; margin:8px 0 16px; font-weight:600; }
+h2 { font-size:18px; margin:0 0 12px; } p { max-width:720px; margin:8px 0 18px; } code { color:#edbc77; font:14px/1.6 ui-monospace,monospace; } .eyebrow { color:#93a3b4; font-size:13px; letter-spacing:.08em; }
+.panels { display:grid; grid-template-columns:1fr 1fr; gap:32px; margin:30px 0; }
+.panel { min-width:0; border-top:1px solid #3d4856; padding-top:18px; }
+.controls { width:300px; height:300px; position:relative; overflow:hidden; outline:1px solid #55616f; background:#18232e; }
+.controls::after { content:"Drag anywhere"; position:absolute; inset:0; display:grid; place-items:center; color:#beeefa; pointer-events:none; }
+.size-contained .resizable { contain:size; }
+.strict-contained .controls { contain:strict; }
+.strict-contained .resizable { contain:size layout style; }
+.js-input { animation:none; }
+.js-input .controls { background:#234356; touch-action:none; }
+.js-input .resizable { resize:none; pointer-events:none; visibility:hidden; }
+.extent { position:absolute; width:1000px; height:1000px; pointer-events:none; }
+.resizable { position:absolute; left:-600px; top:-600px; min-width:900px; min-height:900px; max-width:1500px; max-height:1500px;
+ overflow:scroll; resize:both; background:transparent; view-timeline: --width-timeline x, --height-timeline y; touch-action:none; }
+.resizable::-webkit-scrollbar { width:900px; height:900px; background:transparent; }
+.resizable::-webkit-scrollbar-thumb { background:transparent; }
+.resizable::-webkit-resizer { background:#234356; }
+.resizable::before { content: attr(style); position:absolute; right:0; bottom:0; width:300px; height:300px;
+ display:grid; place-content:center; padding:16px; font:14px/1.5 ui-monospace,monospace; color:#beeefa; pointer-events:none; }
+.dimension { counter-reset: width round(var(--box-width)) height round(var(--box-height)); margin:16px 0 6px; }
+.dimension::after { content: counter(width) 'px × ' counter(height) 'px'; color:#9edbef; font:22px ui-monospace,monospace; }
+.camera { height:300px; display:grid; place-items:center; perspective:700px; overflow:visible; }
+.cube { width:120px; height:120px; position:relative; transform-style:preserve-3d;
+ transform:rotateX(calc(var(--pitch) * 1deg)) rotateY(calc(var(--yaw) * 1deg)); }
+.face { position:absolute; width:120px; height:120px; display:grid; place-items:center; border:1px solid #f2c078; color:#ffe2b7; background:#64492be0; backface-visibility:hidden; font:24px ui-monospace,monospace; }
+.front { transform:translateZ(60px); } .back { transform:rotateY(180deg) translateZ(60px); }
+.left { transform:rotateY(-90deg) translateZ(60px); } .right { transform:rotateY(90deg) translateZ(60px); }
+.top { transform:rotateX(90deg) translateZ(60px); } .bottom { transform:rotateX(-90deg) translateZ(60px); }
+.angles { counter-reset: yaw round(var(--yaw)) pitch round(var(--pitch)); margin:16px 0 6px; }
+.angles::after { content: counter(yaw) '° yaw / ' counter(pitch) '° pitch'; color:#edbc77; font:22px ui-monospace,monospace; }
+.note { color:#aeb8c3; font-size:14px; } .formula { background:#1d2732; padding:16px; border-radius:6px; }
+.support { display:none; color:#ffbaad; } a { color:#9edbef; }
+@supports not (animation-timeline: view()) { .support { display:block; } }
+@media(max-width:700px) { body { padding:24px 20px; } .panels { grid-template-columns:1fr; gap:24px; } .camera {height:220px;} }
+</style></head><body><main>
+<span class="eyebrow">CSS INPUT EXPERIMENT · SCRIPTS BLOCKED</span>
+<h1>Where does the drag get stored?</h1>
+<p>In the blue element’s <code>style</code> attribute. Drag anywhere in the blue area, release, and move your pointer away. The browser keeps the width and height.</p>
+<p class="support">This browser does not support the CSS view timeline bridge. The native box can still resize.</p>
+<div class="panels">
+<section class="panel"><h2>1. Drag anywhere in this area</h2>
+<div class="controls"><div class="extent" aria-hidden="true"></div><div class="resizable" tabindex="0" aria-label="Native resize experiment; drag anywhere in the blue area" style="width: 1200px; height: 1200px;"></div></div>
+<p class="dimension">Stored size: </p><p class="note">The resized box extends outside this frame. Its 900px native corner covers the whole visible area throughout the allowed resize range. The box’s top-left origin stays fixed.</p></section>
+<section class="panel"><h2>2. CSS carries them to another element</h2>
+<div class="camera" aria-label="Orientation indicator"><div class="cube"><div class="face front">FRONT</div><div class="face back">BACK</div><div class="face left">LEFT</div><div class="face right">RIGHT</div><div class="face top">TOP</div><div class="face bottom">BASE</div></div></div>
+<p class="angles">CSS orientation: </p><p class="note">This indicator sits outside the resize box. The same two CSS numbers can feed a camera transform without moving the scene into the box.</p></section></div>
+<div class="formula"><code>drag → inline width / height → CSS view timelines → yaw / pitch</code></div>
+<p class="note">The timelines measure the box in a fixed 300px scrollport. The box begins 600px before the scrollport. At scroll offset zero, progress = 900 / (300 + size), so CSS recovers size = 900 / progress − 300. No scrolling or script runs to copy the values.</p>
+<p class="note">Custom scrollbar styling is browser-specific. The grip has finite travel and no native arrow-key resize control in this experiment. Reload resets the dimensions. This is an input-mechanism study; integrating cssEarth’s camera also means keeping sky, labels, lighting and depth consistent.</p>
+<p><a href="/">Reload to reset</a> · <a href="http://127.0.0.1:4350/saturn/">Open the scroll-zoom experiment</a></p>
+</main></body></html>

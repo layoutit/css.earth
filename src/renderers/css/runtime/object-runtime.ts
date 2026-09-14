@@ -24,6 +24,7 @@ import { mountRetainedCubicSky } from "../solar-system/cubic-sky-runtime.js";
 import { mountRetainedDirectionalSun } from "../solar-system/directional-sun-runtime.js";
 import { mountRetainedHeliocentricView } from "../solar-system/heliocentric-view-runtime.js";
 import { mountPreparedPresentation } from "../rendering/prepared-presentation.js";
+import { savedWorldCamera } from '../navigation/saved-world-camera.js';
 import { initialObjectSelection, requireObjectRuntimeDefinition } from "./object-contract.js";
 import { formatSharedView, parseSharedView } from "../navigation/view-url.js";
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
@@ -45,8 +46,23 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       throw new TypeError("Object mount requires the registered stage and error owner.");
     }
     const initialLens = stage.dataset.preparedDataset;
-    const initialSelection = initialObjectSelection(definition.controls, initialLens);
+    if (stage.dataset.preparedView) {
+      const saved = parseSharedView(`v=${stage.dataset.preparedView}`);
+      if (!saved || !worldFrame) throw new TypeError('A prepared view requires its shared world frame.');
+      initialWorldCamera ??= savedWorldCamera(saved, worldFrame, { focalPixels: 1, principalOffsetPixels: [0, 0] });
+      delete stage.dataset.preparedView;
+    }
+    const initialSettings: Record<string, boolean | number> = {};
+    for (const control of definition.controls.settings?.controls ?? []) {
+      const input = [...stage.ownerDocument.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')].find(input => input.name === control.name);
+      if (input) initialSettings[control.name] = control.kind === 'toggle' ? input.checked : Number(input.value);
+    }
+    // Validate the server's transported selection even when the user has since
+    // changed a native control. The current controls then own that newer intent.
+    if (stage.dataset.preparedSettings) initialObjectSelection(definition.controls, initialLens, JSON.parse(stage.dataset.preparedSettings));
+    const initialSelection = initialObjectSelection(definition.controls, initialLens, initialSettings);
     delete stage.dataset.preparedDataset;
+    delete stage.dataset.preparedSettings;
     if (definition.destinations && !capabilities.createDestinations) throw new TypeError("Prepared destinations require an injected runtime capability.");
     if (definition.pageLayers?.length && !capabilities.mountPages) throw new TypeError("Prepared pages require an injected runtime capability.");
     if (definition.features && !capabilities.mountSurfaceFeatures) throw new TypeError("Prepared surface features require an injected runtime capability.");
@@ -370,7 +386,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         imageDensity: context.density, objectId: definition.id, before: mounted.cameraElement });
       if (directionalSun) context.own(() => directionalSun.destroy());
       if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
-      selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, deferTextureRefinement, initialLens,
+      selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, deferTextureRefinement, initialLens, initialSettings,
         onCommit: next => {
           playback.setSelection(next);
           for (const layer of pageLayers.values()) { layer.setLens({ id: next.lensId }); layer.setPlaying(allowed && (next.speed ?? 1) !== 0); }

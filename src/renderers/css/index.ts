@@ -30,7 +30,9 @@ export type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './run
 export { createWorldSelectionTarget } from './navigation/selection-target.js';
 export { preparedObjectCapabilities } from './paging/capabilities.js';
 export { mountSurfaceFeatureLabels } from './labels/surface-feature-labels.js';
-export { parsePreparedSurfaceFeatureCatalog } from './labels/surface-feature-catalog.js';
+export { parsePreparedSurfaceFeatureCatalog, loadPreparedSurfaceFeatureCatalog } from './labels/surface-feature-catalog.js';
+export { surfaceFeatureCaption } from './labels/surface-feature-caption.js';
+export { publishPreparedNativeView } from './rendering/prepared-native-view.js';
 export type { PreparedSurfaceFeaturePlan, PreparedSurfaceFeatureCatalog, PreparedSurfaceFeature, SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats, SurfaceFeatureNavigationRuntime } from './labels/surface-feature-types.js';
 export { savedWorldCamera } from './navigation/saved-world-camera.js';
 export { mountPreparedCssVolume } from './volume/prepared-volume-runtime.js';

@@ -70,6 +70,8 @@ export interface PreparedVolumeMountOptions {
   readonly resolveResource: (path: string) => string;
   /** CSS pixels represented by one prepared volume unit. The compiler's tile scale is 50. */
   readonly unitScale?: number;
+  readonly createElement?: (tag: string) => HTMLElement;
+  readonly nativeFocalCss?: string;
 }
 
 export interface PreparedVolumeRuntime {
