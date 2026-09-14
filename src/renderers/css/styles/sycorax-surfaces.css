@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="sycorax"])[data-lod="billboard"] .sycorax-scene, .planet-stage:where([data-object-id="sycorax"])[data-lod="marker"] .sycorax-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="sycorax"])[data-lod="marker"] .sycorax-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="sycorax"]).sycorax-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

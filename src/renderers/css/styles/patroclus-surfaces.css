@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="patroclus"])[data-lod="billboard"] .patroclus-scene, .planet-stage:where([data-object-id="patroclus"])[data-lod="marker"] .patroclus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="patroclus"])[data-lod="marker"] .patroclus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="patroclus"]).patroclus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

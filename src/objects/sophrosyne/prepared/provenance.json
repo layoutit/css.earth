@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "sophrosyne",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f3b3dfb0b72579b5cf28c81315829bae6e9bb0dc17fdbfd5e99b224223e726a8"
+    "sha256": "96b772774adb85b91130c2bafb229873d368564181860c7a9453e403e0cff67c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4c7cae3307f00592ba193ef42104c3960b26be91c57653f12c0543d20a062eab",
+      "sha256": "03921d8eb415999cde1cc9ba27aa37900e1bee4353af705b4e3930642831eee1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "sophrosyne",
         "displayName": "Sophrosyne",
         "publicBase": "/scenes/sophrosyne/",
-        "distanceAu": 2.564014163529194,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 5976 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5cdd7fde9d47aa4a781095b514af813e7057ffbe485ffdcaf2a63e5b863548f3",
+      "sha256": "a00c6db7ed7187b92c03c8dba0391b42d7b2e3e0e29dc8ae07a08aa54689d450",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5976"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "3878aec42eda2f64254bc260a3c0497632f037da3e447fd65082822521883492",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5cdd7fde9d47aa4a781095b514af813e7057ffbe485ffdcaf2a63e5b863548f3",
-      "bytes": 12012,
+      "sha256": "a00c6db7ed7187b92c03c8dba0391b42d7b2e3e0e29dc8ae07a08aa54689d450",
+      "bytes": 11733,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/sophrosyne/sophrosyne-elevation-thumbnail.webp",
           "bytes": 5058,
           "sha256": "7514119a5aadb2c01295ef17dee2c5393b25b81857e40b6213b97d5d663ddf5d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sophrosyne/sophrosyne-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sophrosyne/sophrosyne-elevation-surface@2x.webp",
           "bytes": 273182,
           "sha256": "fa90acbc368c2d375763b3aa581212f057bf1333435e26061df3eae1bfb2c112",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/sophrosyne/sophrosyne-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sophrosyne/sophrosyne-shape-surface@2x.webp",
           "bytes": 216470,
           "sha256": "d2e39365124b2011839a19776e0e6378be3e048c156aca012a915e1ed83e62b2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9328,
-          "sha256": "912a9def39e1e16dab24029e3e88e01e4eb7f1bd17b35046593b590d63f8bc23",
+          "bytes": 9209,
+          "sha256": "3aa56a17639e88940585631bd4ddb090aac55fd1929f2b60ca7f42c762d75004",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "sophrosyne",
+    "materialSha256": "221e727d543c4bfdefa8291740cbfe8438195708a7f657d5f53af6593fe28ef5",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

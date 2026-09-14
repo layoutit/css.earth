@@ -211,60 +211,6 @@ Source references:
 </details>
 
 <details>
-<summary>Background sky and camera comparisons</summary>
-
-## Background stars
-
-The visible background is prepared from ESO's 6,000 by 3,000 pixel
-`eso0932a` photographic panorama of the complete northern and southern sky.
-The exact checked TIFF has SHA-256
-`10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035`.
-The visible credit is **ESO/S. Brunier**. ESO publishes the image under CC BY
-4.0; `source/stars/ESO-IMAGE-LICENSE.md` records the source page, original-file
-URL, credit, license, and qualification.
-
-Preparation projects the 2:1 Galactic panorama into six 1,024-pixel and six
-2,048-pixel cube faces. It fixes the image levels at an 8/255 black point, 1.2
-gamma, and 0.6 gain. Before projection, preparation performs one horizontally
-wrapped 9-pixel Gaussian separation of the checked photograph: it retains 0.85
-of the broad diffuse layer and 0.65 of the source photograph's compact detail.
-It then bakes the separate source-observed Sun into the same faces. The browser
-selects one DPR bank before mount and only transports the prepared images
-through six retained CSS faces. It performs no runtime projection, level
-adjustment, rasterization, masking, filtering, blending, or gradient synthesis.
-
-The level curve and separation are evidence-selected rather than
-exposure-guessed. An 87-pose fit initially selected 2.2 compact-detail gain,
-but the resulting field was rejected visually because its dense small-scale
-contrast competed with Venus. The shipped 0.65 value retains the accepted broad
-Galactic structure while restoring a planet-first visual hierarchy. Lower
-whole-image gain trials and the rejected 2.2 detail bake are not part of the
-runtime closure.
-
-The panorama has one fixed prepare-time registration inside the cube:
-`rotateX(-35.5deg)`, then `rotateY(158.5deg)`, then `rotateZ(-123deg)`. The
-checked calibration tool fits that rotation against 24 widely separated poses
-from the frozen Google sweep while excluding the planet silhouette and Sun.
-It improves the low-resolution source-photo correlation from 0.09965 to
-0.18668. This is a presentation registration, not an astronomical epoch claim.
-
-HYG Stellar Database v4.1 remains a separate coordinate-registration source,
-pinned at commit `c7f7f883fe678cc7680169a50ccd7dcc49b060ce`. Acquisition verifies
-the 119,626-row catalog and preserves a checked 60,000-star subset. Preparation
-uses its declared ICRS camera basis to register the ESO image, including the
-required Y-up-to-standard ICRS axis reorder before the IAU Galactic transform.
-It does not draw a second catalog-star overlay because the photograph already
-contains the visible stars. HYG is credited to David Nash / Astronexus and is
-licensed under CC BY-SA 4.0; `source/stars/LICENSE.md` records that license.
-
-This is a source-photographed full sky, not an epoch-correct sky as observed
-from Venus. ESO notes that the panorama was assembled over months and that
-planets moved between exposures. The scene claims neither a Venus observer
-epoch nor an ephemeris-derived inertial orientation.
-
-</details>
-
-<details>
 <summary>Input verification and shared commands</summary>
 
 ## Reproduction

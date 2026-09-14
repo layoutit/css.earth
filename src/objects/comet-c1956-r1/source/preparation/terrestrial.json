@@ -4,7 +4,6 @@
   "namespace": "comet-c1956-r1",
   "displayName": "Arend–Roland",
   "publicBase": "/scenes/comet-c1956-r1/",
-  "distanceAu": 95.24827628303814,
   "raster": {
     "width": 512,
     "height": 256,
@@ -110,12 +109,6 @@
     "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      184,
-      182,
-      178
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

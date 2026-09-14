@@ -51,6 +51,6 @@ The source grid has 614 welded vertices and 1,224 triangles. Shared preparation 
 
 Scientific measurements: Erich Karkoschka (2003), DOI **10.1016/S0019-1035(03)00002-2**. The equation and sampled model are cssEarth-authored representations of the reported numbers; no publisher figures or invented surface imagery are redistributed. Survey metadata is NASA/JPL mission archive data provided by the PDS Ring-Moon Systems Node. NASA Science supplies the discovery and overview facts. IAU/WGCCRE through NAIF supplies the body orientation; the shared astronomy package supplies navigation ephemerides.
 
-Required model, neutral sentinel, metadata and preparation documents are checked in and pinned in `source/manifest.json`. Shared font/starfield inputs restore through `source/preparation/acquisition.json`. Rejected survey images are not runtime or source-preparation dependencies; their original URLs and observation metadata are retained.
+Required model, neutral sentinel, metadata and preparation documents are checked in and pinned in `source/manifest.json`. The shared font input restores through `source/preparation/acquisition.json`. Rejected survey images are not runtime or source-preparation dependencies; their original URLs and observation metadata are retained.
 
 </details>

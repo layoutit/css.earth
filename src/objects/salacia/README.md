@@ -4,7 +4,7 @@ Salacia is a large, dark Kuiper-belt world with the moon Actaea. Long-term photo
 
 ## Sources
 
-The spherical illustration uses the primary-only **838 ±44 km** ALMA/NEATM estimate. This value is a **2025 conference-abstract result**, with no resolved three-axis shape. The **Shape model** uses the normal unmapped-surface grid. Shadows and Orbit default off.
+The spherical illustration uses the primary-only **838 ±44 km** ALMA/NEATM estimate. This value is a **2025 conference-abstract result**, with no resolved three-axis shape. The **Shape model** uses the normal unmapped-surface grid. Shadows defaults off.
 
 | Source | Used for |
 | --- | --- |

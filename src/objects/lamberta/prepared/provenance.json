@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lamberta",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d7d3470e48a019f10df43de23e497cbea766a15603f5a6e249fcd0dbf86cdb9e"
+    "sha256": "704a371c1092885a1bc5f0285ac260fa4e44d6cf0d279539d4d4e66413662f05"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1cb63bc6beb57e7c767e25369862021d0b07a30dda27599ffbbe7f7f62aa9d0b",
+      "sha256": "600ab5214e23076cb54ab2798664a656e7e95f90991da3fe5dc40035a56e0fc7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "lamberta",
         "displayName": "Lamberta",
         "publicBase": "/scenes/lamberta/",
-        "distanceAu": 2.7320569169080615,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 5914 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "04b8b824cd8fefa8dcb1255de715f67ea4bf1a4e8d01d51bf86ce8dbc0a489c7",
+      "sha256": "2ce6f0740b7a6886ade30046129ca1edd9bba51d80b0e784d7e53b40cbdb3202",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5914"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "2e81472c1dd7a834d7ab49f42b4d545f3a1a7e506194ef887534d3499bde492e",
       "bytes": 72987,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "04b8b824cd8fefa8dcb1255de715f67ea4bf1a4e8d01d51bf86ce8dbc0a489c7",
-      "bytes": 10975,
+      "sha256": "2ce6f0740b7a6886ade30046129ca1edd9bba51d80b0e784d7e53b40cbdb3202",
+      "bytes": 10696,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/lamberta/lamberta-elevation-thumbnail.webp",
           "bytes": 5000,
           "sha256": "729c6ffe0250a33df1bea51b8cfd659426e89a5bf7645d9b1663c3d8828c3651",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lamberta/lamberta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lamberta/lamberta-elevation-surface@2x.webp",
           "bytes": 255818,
           "sha256": "01d10b2c9fedd82934d21fa9d29233c81b41da1f875bd5c5bfb9a0591f5f1a61",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/lamberta/lamberta-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lamberta/lamberta-shape-surface@2x.webp",
           "bytes": 229076,
           "sha256": "e7e5384b8ba589add1f240dfec4996ab2cd77d603d89dabe18b03910fcb89f0b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8320,
-          "sha256": "a6cd14a5b6b9381484a8fb044235ca239702c2a7841c04959dd901b75b182cb1",
+          "bytes": 8201,
+          "sha256": "4600d75652e6a52b05e9a4e4dc44f75fc6b3a7b9f4c1250ad48c9185be422e2b",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "lamberta",
+    "materialSha256": "24fe708f9b5c14cf57737ae2eb551cc2bd42e60820df546ec5877804b6074f25",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

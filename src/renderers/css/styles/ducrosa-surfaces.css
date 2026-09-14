@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ducrosa"])[data-lod="billboard"] .ducrosa-scene, .planet-stage:where([data-object-id="ducrosa"])[data-lod="marker"] .ducrosa-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ducrosa"])[data-lod="marker"] .ducrosa-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ducrosa"]).ducrosa-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

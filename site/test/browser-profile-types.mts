@@ -26,7 +26,7 @@ export interface VisibleView {
 }
 
 export interface BrowserProfileAudit {
-  readonly preparedAssetPairs: readonly { readonly one: string; readonly two: string }[];
+  readonly preparedAssetPairs?: readonly { readonly one: string; readonly two: string }[];
   readonly canonicalPreparedAssets?: readonly string[];
   readonly retained: {
     readonly lensIds?: readonly string[];

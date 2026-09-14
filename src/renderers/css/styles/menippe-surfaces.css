@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="menippe"])[data-lod="billboard"] .menippe-scene, .planet-stage:where([data-object-id="menippe"])[data-lod="marker"] .menippe-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="menippe"])[data-lod="marker"] .menippe-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="menippe"]).menippe-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

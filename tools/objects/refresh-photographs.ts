@@ -90,9 +90,6 @@ export async function refreshSurfaceContent(id: string, lensIds: readonly string
     await writeFile(path, JSON.stringify({ ...content, features: { searchLabel: requireString(features.searchLabel), description: requireString(features.description) } }) + '\n');
   }
   // Asset URLs and the scene are retained. The writer updates the descriptor/page transport from the new content.
-  const { restorePreparedShared } = await import(pathToFileURL(resolve('src/platform/prepared-shared-banks.mts')).href) as typeof import('../../src/platform/prepared-shared-banks.mts');
-  // Checked-in twins own the retained scene; ignored expanded files may predate a merge.
-  await restorePreparedShared(process.cwd(), outputDirectory);
   const runtime = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')));
   const { repinObjectJson } = await import(pathToFileURL(resolve('tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
   const updatedControls = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'controls.json'), 'utf8')));

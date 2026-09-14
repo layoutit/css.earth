@@ -2,33 +2,6 @@
   "schema": "cssdimorphos-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "dimorphos-shape",
       "path": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
       "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
@@ -851,8 +824,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 13778,
-      "expectedSha256": "e5898eeaab7969dc66bb4f4d1721c14b428cdb920917b63ea30fc214b4475215",
+      "expectedBytes": 13499,
+      "expectedSha256": "65351652410db0abaf8ba01a9ed529f9612ce45936a42e2238274dcc88b34824",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -860,8 +833,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 8716,
-      "expectedSha256": "6b6d27e3edef2155e8d0986567410aed553e0342ee48af918d0f1ab6d5f5df4b"
+      "expectedBytes": 8513,
+      "expectedSha256": "95c22d5878f99621d0883ee43a519bc91a8c84d29cf3238f8b0ccd26535d1e33"
     },
     {
       "path": "preparation/navigation.json",
@@ -875,8 +848,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9756,
-      "expectedSha256": "afe4b3ed0e0ea7327a112c12f712e11abbf4b34e8e5580758f0d726422fadf95"
+      "expectedBytes": 9604,
+      "expectedSha256": "b88f535ac8dc77b83760b0b67518fb7bb2b8c74d33ed32526e2c9d394ddb37d0"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -912,21 +885,6 @@
       "path": "reference/shape.xml",
       "expectedBytes": 9206,
       "expectedSha256": "885aedadb7836a6b93a739d64efba816c982e72da427d111b124b5231d3e6eb8"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 89775,
-      "expectedSha256": "24d402ce62ef2a0c31b0782f806340a79acfd0c2c8ecc3074c1984698c36f596"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     },
     {
       "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",

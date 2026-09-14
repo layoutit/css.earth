@@ -4,7 +4,6 @@
   "namespace": "pales",
   "displayName": "Pales",
   "publicBase": "/scenes/pales/",
-  "distanceAu": 3.097178213859086,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -118,12 +117,6 @@
     "sunSource": "DAMIT model 16309 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

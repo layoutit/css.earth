@@ -45,7 +45,6 @@ for body in INPUTS['bodies']:
     source = package / 'source'
     description = body['shapeMeaning'] + ' ' + body['orientationMeaning'] + ' The grid marks unmapped terrain.'
     config = current('source/preparation/terrestrial.json', body)
-    config['distanceAu'] = body['distanceAu']
     config['geometry']['radiusKm'] = radius
     config['geometry']['camera']['framingScale'] = min(1, 2 * radius / max(body['fullAxesKm']))
     terrain = config['geometry']['radialTerrain']
@@ -77,7 +76,7 @@ for body in INPUTS['bodies']:
     for key in ('description', 'title', 'detail', 'summary'): lens.pop(key, None)
     lens['source'].update(id='published-shape',url=body['source'])
     for control in content['settings']['controls']:
-        if control['name'] in ['shadows','orbit']: control['checked'] = False
+        if control['name'] == 'shadows': control['checked'] = False
     content['resources'] = [dict(label='Shape source',role='surface',description=body['credit'],href=body['source'])] + [dict(label='Scientific source',role='facts',description='Published observations and interpretation',href=url) for url in body['papers']] + [content['resources'][-1]]
     content['provenance']['editorial'] = dict(url=body['source'],credit=body['credit'])
     content['provenance']['physical'] = dict(path='../measurements.json',credit=body['credit'])
@@ -112,7 +111,7 @@ for body in INPUTS['bodies']:
             operation = dict(kind='download',groups=['restore','refresh'],path='reference/'+ref['file'],url=ref['url'])
             acquisition['operations'] = [op for op in acquisition['operations'] if op.get('path') != operation['path']] + [operation]
     write(source/'preparation/acquisition.json',acquisition)
-    for file in ['material/neutral.png','stars/eso0932a.tif','presentation/InterVariable.ttf']:
+    for file in ['material/neutral.png','presentation/InterVariable.ttf']:
         target=source/file
         if not target.exists():
             available=ROOT/'src/objects/annefrank/source'/file

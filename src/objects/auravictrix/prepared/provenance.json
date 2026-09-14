@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "auravictrix",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "02d521c234416ae58e2aed9378704c15b2f1ba2d8c104f69f3d304fcc15d9494"
+    "sha256": "b2c346a9770f71557baf0b9249930a2dcf9c8a1356537daa2d1e8dce4deddc69"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "974429d5493dc00cecebc463b20424ce49ae2ff0be1e6a0e183496c9bf8270f4",
+      "sha256": "60c0a5cedf405ca126b8070e59ff83202a57bb8a6622c96f4d6dfe55181188ab",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "auravictrix",
         "displayName": "Auravictrix",
         "publicBase": "/scenes/auravictrix/",
-        "distanceAu": 2.229298325153526,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "93c76da53235b70d8da39797fe5a3033517ad21385fe9c6ebd23928d76da18f0",
+      "sha256": "e826b63842f3724c6242919fc107c93565d33994d03142e0aa94c0061b7f5011",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1654"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "477d88385d0212d76042c2ce706f5ea0b0adafc70b55e44bb0c73291e1a2256f",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "93c76da53235b70d8da39797fe5a3033517ad21385fe9c6ebd23928d76da18f0",
+      "sha256": "e826b63842f3724c6242919fc107c93565d33994d03142e0aa94c0061b7f5011",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9651,
+      "bytes": 9372,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/auravictrix/auravictrix-elevation-thumbnail.webp",
           "bytes": 5430,
           "sha256": "4f24b608cd9fba496e35352b2732d6b011b405e13ec37bdac3e515f8d40d73b9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/auravictrix/auravictrix-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/auravictrix/auravictrix-elevation-surface@2x.webp",
           "bytes": 287974,
           "sha256": "838d9a268e09fda9cd5a2f370b5a5131836117fcac54481822faa7698f09ad73",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/auravictrix/auravictrix-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/auravictrix/auravictrix-shape-surface@2x.webp",
           "bytes": 209274,
           "sha256": "8862485177e6b317f967bba50bc15bfef18feed67baf638aff324a69d073934a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6922,
-          "sha256": "4a9433a5c88e2f1b081992ddfd55d8e76c26c36144a40c65d35a562c7f4215b8",
+          "bytes": 6803,
+          "sha256": "b0741d9d154ffdaa37a1e0e8c5aee0fef6903bf50ac62a3cade0944050d948e3",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "auravictrix",
+    "materialSha256": "0e5e05223ee5d4ee0af4b805dcd460c54a024a2615a086789d8ee4589e72ac58",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

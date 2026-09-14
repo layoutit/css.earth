@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="virginia"])[data-lod="billboard"] .virginia-scene, .planet-stage:where([data-object-id="virginia"])[data-lod="marker"] .virginia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="virginia"])[data-lod="marker"] .virginia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="virginia"]).virginia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

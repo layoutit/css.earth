@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "bavaria",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a7c6afff543be80612a8917e86bf1cad6692e6ceee21799a27e7ffde33a86967"
+    "sha256": "a14eb6c54df3be6e837a6ba71d2c5e547c20b58cfb98f08aa57979d443cd2663"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d1c0787616900e287811427521fa8b203b725e8cc63baf47087770e7b4a8ffe1",
+      "sha256": "01508b8696efb235e123f337bb351453a43ee1c59f27d0e02aa557b46790a7ec",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "bavaria",
         "displayName": "Bavaria",
         "publicBase": "/scenes/bavaria/",
-        "distanceAu": 2.7267724486531284,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 3090 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6184eee1d70315c425fbcbb1a674264582f8d8315548cb9804ed5a2b4408264a",
+      "sha256": "24ee5e6daa0d179f084f29cdace3c2b3b885b9025f9a27f87f3eabf26e8e6905",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3090"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "5ee16a0fbf9aee1a4f1dbe206cbb2c80dc0f125c7f430595b4b128676eb21584",
       "bytes": 81736,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6184eee1d70315c425fbcbb1a674264582f8d8315548cb9804ed5a2b4408264a",
-      "bytes": 10586,
+      "sha256": "24ee5e6daa0d179f084f29cdace3c2b3b885b9025f9a27f87f3eabf26e8e6905",
+      "bytes": 10307,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/bavaria/bavaria-elevation-thumbnail.webp",
           "bytes": 5974,
           "sha256": "acc7f940bb216efc897db82f6d6905018419058bba532b874774959c7c3435cc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bavaria/bavaria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bavaria/bavaria-elevation-surface@2x.webp",
           "bytes": 293678,
           "sha256": "39dad7250d6623fe77ace1536acd3c545b8c084f0c38411fac9ef6a1d747757c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/bavaria/bavaria-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bavaria/bavaria-shape-surface@2x.webp",
           "bytes": 222076,
           "sha256": "df30887dd7ef09cb8ed7aaacd6332c5da9606ca981860014aaa7d3f9dbe5797c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7943,
-          "sha256": "631f7f87f9845f4197118df47793c07ad268630eb49a02759578ac01dc742ddd",
+          "bytes": 7824,
+          "sha256": "99b375f5afd61caea523e6eb66cd9d78e3578146ac6566b5904415fbfac72ae8",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "bavaria",
+    "materialSha256": "7777a87f2ed345a7c520dfccec207b0df93eac88ec3eb17c18ed980ae1f77384",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

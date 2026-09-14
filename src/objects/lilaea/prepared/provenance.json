@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lilaea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ea91abfbfabf1d56d7a807f93ecd787603e61c3ceda93818d78b253a8a3bbaf"
+    "sha256": "119b84b4f81a1882cb2b3bf21be2802f7c3cebd513b67128970d592a19b0b80e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8e0dfc7357a3a8d1f7d7d19273c51db9c133c3fc98725a9f55113177f5cd6fc0",
+      "sha256": "dea385e875e4a30fc91e7d6990b65d8b585c1c684c5e8559af68e325a0bb0dc9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "lilaea",
         "displayName": "Lilaea",
         "publicBase": "/scenes/lilaea/",
-        "distanceAu": 2.752207905556241,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 9003 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c11e55db1f354ba4dfd52746f963351ff1b8721bc9d7b76a1039865b1d3ea2ff",
+      "sha256": "6404acd0c00867bbb733465040f8acba51e5c6b0f1e9bf0f967835a31bb06b89",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/9003"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "0086f2f76f18239a5345be68633ff70bec9e91ef0e30318c0157c07c72bfd27d",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c11e55db1f354ba4dfd52746f963351ff1b8721bc9d7b76a1039865b1d3ea2ff",
-      "bytes": 9369,
+      "sha256": "6404acd0c00867bbb733465040f8acba51e5c6b0f1e9bf0f967835a31bb06b89",
+      "bytes": 9090,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/lilaea/lilaea-elevation-thumbnail.webp",
           "bytes": 5954,
           "sha256": "b94deef21f1ef5b455813160423bd645cc7d2c0361a434dd0b794c03b648875b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lilaea/lilaea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lilaea/lilaea-elevation-surface@2x.webp",
           "bytes": 304710,
           "sha256": "333771bbaf1a9921976c001ca8391e02d69e6bc4f9d949f4193b51cd509cb24c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/lilaea/lilaea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lilaea/lilaea-shape-surface@2x.webp",
           "bytes": 246298,
           "sha256": "82c61441e4e5baf9713d4fcad1ea58a1a8276ed7d753a88c656210a0c3d0b75e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6736,
-          "sha256": "ec5c17ca35f332abf44f322963deea3682aacc864b349e7176042a0cc2d45b19",
+          "bytes": 6617,
+          "sha256": "7cedac7d95f45a176655a22781832f01b1a42da0c6562b0e99da4b15a9e3e062",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "lilaea",
+    "materialSha256": "c394f887242005a83c43bf3c1f71a4eb411b15d900902d1a21bf084138697afa",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -14,7 +14,7 @@ if(!body||!lens||!baseUrl||!baselineRef||!outputDirectory||!/^[a-z0-9-]+$/.test(
  throw new Error('Usage: capture-surface-lens.mts BODY LENS BASE_URL BASELINE_REF OUTPUT_DIRECTORY [REGENERATED_BASELINE_ASSETS]');
 const root=`src/objects/${body}`,read=async(path:string)=>requireRecord(JSON.parse(await readFile(path,'utf8')));
 const hash=(bytes:Uint8Array|string)=>createHash('sha256').update(bytes).digest('hex');
-const runtime=await read(`${root}/prepared/runtime.refs.json`),assets=requireArray((await read(`${root}/runtime-assets.json`)).assets).map(value=>requireRecord(value));
+const runtime=await read(`${root}/prepared/runtime.json`),assets=requireArray((await read(`${root}/runtime-assets.json`)).assets).map(value=>requireRecord(value));
 const variant=requireArray(runtime.variants).map(value=>requireRecord(value)).find(v=>requireRecord(v.when).lensId===lens);
 if(!variant)throw new Error('No prepared dataset');
 const navigation=variant.navigation===undefined?undefined:requireRecord(variant.navigation);
@@ -143,11 +143,11 @@ try{
  const buffer=await phone.screenshot({path:resolve(outputDirectory,'mobile.png'),animations:'disabled'});
  mobile={viewport:{width:390,height:844},dpr:2,rowText:await row.innerText(),bounds,...state,sha256:hash(buffer),errors};
 }finally{await phone.close();}
-const sceneBefore=requireRecord(JSON.parse(execFileSync('git',['show',`${baselineRef}:${root}/prepared/scene.refs.json`],{encoding:'utf8',maxBuffer:32*1024*1024}))),sceneNow=await read(`${root}/prepared/scene.refs.json`);
+const sceneBefore=requireRecord(JSON.parse(execFileSync('git',['show',`${baselineRef}:${root}/prepared/scene.json`],{encoding:'utf8',maxBuffer:32*1024*1024}))),sceneNow=await read(`${root}/prepared/scene.json`);
 const geometry=sceneNow.bodyLeaves??sceneNow.body;assert.ok(geometry,'Missing prepared body geometry');
 assert.deepEqual(geometry,sceneBefore.bodyLeaves??sceneBefore.body);assert.deepEqual(sceneNow.surfaceTriangles,sceneBefore.surfaceTriangles);
 await writeFile(resolve(outputDirectory,'capture.json'),JSON.stringify({body,lens,changedLenses,baselineRef,baselineCommit:execFileSync('git',['rev-parse',baselineRef],{encoding:'utf8',maxBuffer:32*1024*1024}).trim(),
- toolSha256:hash(await readFile(import.meta.filename)),colorTransferSha256:hash(await readFile('tools/objects/color-transfer.mts')),recipeSha256:hash(await readFile(recipePath)),runtimeSha256:hash(await readFile(`${root}/prepared/runtime.refs.json`)),
+ toolSha256:hash(await readFile(import.meta.filename)),colorTransferSha256:hash(await readFile('tools/objects/color-transfer.mts')),recipeSha256:hash(await readFile(recipePath)),runtimeSha256:hash(await readFile(`${root}/prepared/runtime.json`)),
  geometrySha256:hash(JSON.stringify(geometry)),...(sceneNow.surfaceTriangles?{surfaceTrianglesSha256:hash(JSON.stringify(sceneNow.surfaceTriangles))}:{}),geometryUnchanged:true,browser:await browser.version(),channel:channel??'bundled-chromium',
  purpose:'Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.',existingAssetChanges,mobile,reports},null,2)+'\n');
 console.log(`${body}: ${reports.length} DPR cases with retained DOM and verified assets`);

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lucia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "57d0cc75492149e3386a4bc85f5e283700b7ba2f8fc8a06dc18d066d62a1eac9"
+    "sha256": "091ff08926699a09e16556b27dd48efa123c8a40c9dd2d39910ab679277f1658"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f506e4abd3ec17aa95b5fe648f4880b3693975f1287814a99ad96671cbd7b213",
+      "sha256": "4b60a1c379b6b4611bba5271f266700e60e91ed7feb87c47a16766cf983b205b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "lucia",
         "displayName": "Lucia",
         "publicBase": "/scenes/lucia/",
-        "distanceAu": 3.1448952145576423,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8c1a0b1275c3e5bb97029d9381b08b24e0ae6362fc3dac4f49a70f71b142c5f6",
+      "sha256": "ce0302568f0dd409cd4b398adc668c2b5a402f0352a7d1482547346f48ed0ea1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/523"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "295982d8c3626762ce96c29da3029b61b59e8e76fa35dcd9cf78d15b19fd7d14",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "8c1a0b1275c3e5bb97029d9381b08b24e0ae6362fc3dac4f49a70f71b142c5f6",
+      "sha256": "ce0302568f0dd409cd4b398adc668c2b5a402f0352a7d1482547346f48ed0ea1",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 7742,
+      "bytes": 7463,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/lucia/lucia-elevation-thumbnail.webp",
           "bytes": 5844,
           "sha256": "b0283a341dc14e151d68ed5e1c565c8151afc3b0d1d28227c611050d01d5128f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lucia/lucia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lucia/lucia-elevation-surface@2x.webp",
           "bytes": 304176,
           "sha256": "f52bacc71520a2b265e6341e241cb230b2d10a791bea756dcaf748ae33a45a0e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/lucia/lucia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lucia/lucia-shape-surface@2x.webp",
           "bytes": 236020,
           "sha256": "2dcac16539f16e014ae43ddeaed3eaef4d684f518e845d70c156daec41f35994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5105,
-          "sha256": "5400c10da7202dd749c1c73f50b67954b3f7434d37b793848bfaca9d6674a648",
+          "bytes": 4986,
+          "sha256": "4d5082e6d6d957d7cb47724db5857dcdbe64cd4f190a0ce3dda5949d6a0c4f2e",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "lucia",
+    "materialSha256": "6acd80e1bfa7742f0762263f72d834ca728c238ec9611e53243bea46c15c6036",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

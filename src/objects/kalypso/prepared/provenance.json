@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "kalypso",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c7b56f6f7eab45cd8afc92c007bbbc7fc79c8888865e7e5ff20369b833ecbff0"
+    "sha256": "3d70976dbc8f84e8d0dabb98e8ff3850aa02dc9134356b058b8823523e3827ac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5644037e0685d08e8e699d321799e417e7ad43e4d38e12e132bf50fbaf921ef8",
+      "sha256": "bec11ef56ea39be6eb149461469a81c9a174f21eb684b0b0a5ded3934f515006",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "kalypso",
         "displayName": "Kalypso",
         "publicBase": "/scenes/kalypso/",
-        "distanceAu": 2.6180409355001784,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1732 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "570068094b8870b28cddbc2773826975518a2be7dfaaf190ef0bcc8740dfc218",
+      "sha256": "d9c62e8394455a3c70a4266708134cba2e7efed1e2fa194842818e9155e81493",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1732"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "c93cad2380849e859383f912f5f1ef6042c6be167151571b7dc9a27f261165b6",
       "bytes": 82060,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "570068094b8870b28cddbc2773826975518a2be7dfaaf190ef0bcc8740dfc218",
-      "bytes": 10051,
+      "sha256": "d9c62e8394455a3c70a4266708134cba2e7efed1e2fa194842818e9155e81493",
+      "bytes": 9772,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/kalypso/kalypso-elevation-thumbnail.webp",
           "bytes": 5176,
           "sha256": "4c823cdb5cd3810ec70df53de5354b28a25fb898812acd70095749ea41f761bf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalypso/kalypso-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalypso/kalypso-elevation-surface@2x.webp",
           "bytes": 273968,
           "sha256": "94fb70083ed307f5b4537447dd1abb44aab056d4df8e470d45c3207a99d96937",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/kalypso/kalypso-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kalypso/kalypso-shape-surface@2x.webp",
           "bytes": 221236,
           "sha256": "2ebe9104e3568959f4455d9e8af23335083a9e2b9acfb62f8e2d843073c2f344",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7405,
-          "sha256": "e9cb4dc2d9e5d260fa821266f3bb1bf1a9ddc457b0b0695622632c5f54e4b613",
+          "bytes": 7286,
+          "sha256": "a357b48551d9190e4671e896fe1bd04059768c29588295b4a40e77b58155ad83",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "kalypso",
+    "materialSha256": "7b41aa6c26fee3ae7755a51a14ea424260fdfcfb8a4baf560f72173264975d92",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

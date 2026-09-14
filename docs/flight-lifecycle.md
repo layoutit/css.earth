@@ -30,7 +30,7 @@ outgoing scene is removed, and cursor picking consumes the same viewport data.
 
 Navigation annotations fade during flight and suspend projection, decluttering,
 hit targets, and DOM writes until they are needed again. Physical sprites and
-the starfield keep following the camera. Dormant star and orbit leaf blocks keep
+the starfield keep following the camera. Dormant orbit leaf blocks keep
 their DOM identities while leaving active layout. Point publication shares one
 projection/photometry sample per slot, and orbit occlusion uses a conservative
 broad phase before exact chord clipping.

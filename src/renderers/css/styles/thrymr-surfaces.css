@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="thrymr"])[data-lod="billboard"] .thrymr-scene, .planet-stage:where([data-object-id="thrymr"])[data-lod="marker"] .thrymr-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="thrymr"])[data-lod="marker"] .thrymr-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="thrymr"]).thrymr-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,13 +1,7 @@
 {
-  "schema": "cssearth-celestial-preparation@1",
-  "catalogueSchema": "csssun-prepared-star-source@1",
+  "schema": "cssearth-celestial-preparation@2",
   "sources": [
-    "presentation/solar-system.json",
-    "stars/eso0932a.tif",
-    "stars/hyg-v41-field.json"
+    "presentation/solar-system.json"
   ],
-  "directionalSun": false,
-  "sky": {
-    "registration": "world-context-baseline"
-  }
+  "directionalSun": false
 }

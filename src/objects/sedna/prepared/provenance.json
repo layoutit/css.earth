@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "sedna",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a9cfc667855bd3ca75408cd22c313b69d21fccd939c7140fcc54b5dd408846d0"
+    "sha256": "98988e9ca50c31123e06dba4dfcc6b2bba18f3afb0ccb2ccb72eb8b1cd2cd1b0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b046fac2670d1b31fa42c686e3e0d78f086f1eca1717636159bfeddde988105f",
+      "sha256": "7a80e959803490c56b2b0dbc4ffd589c46986974ac44562fea85a46009d60377",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "sedna",
         "displayName": "Sedna",
         "publicBase": "/scenes/sedna/",
-        "distanceAu": 82.85697523892613,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "75d3723fb99d29f1986d277ddd8cdda81099263518cb8daa2c02b8af6e2a3128",
+      "sha256": "ded4759921cf2b842c89d03713dfcacbaa7e2b00b6229bc8df5808d9ecefcb0a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -178,12 +171,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -212,12 +199,6 @@
             "role": "facts",
             "description": "Published observations and interpretation",
             "href": "https://doi.org/10.1016/j.icarus.2024.116017"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -264,7 +245,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -308,7 +289,7 @@
       "sha256": "6c23ef3b0122589774cf8a8a5ed0f989e5f24508206dcf126285383e6a254b23",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -325,10 +306,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "75d3723fb99d29f1986d277ddd8cdda81099263518cb8daa2c02b8af6e2a3128",
-      "bytes": 3780,
+      "sha256": "ded4759921cf2b842c89d03713dfcacbaa7e2b00b6229bc8df5808d9ecefcb0a",
+      "bytes": 3500,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -365,13 +346,13 @@
           "url": "/scenes/sedna/sedna-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sedna/sedna-model-surface@2x.webp",
           "bytes": 57260,
           "sha256": "4af8e92a92224c4e9b46c6cde26016fee3bcab4ae4027be64b0f0521fa6e4f9b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -407,8 +388,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6058,
-          "sha256": "532b7978a8ab24648a00d0aff7871ac0e5b1003cbe77a682973505a9721a9516",
+          "bytes": 5939,
+          "sha256": "7926c493b20e66cb0b8b064ee697e05b1ad909583ba59641f2fa585908059582",
           "verification": "bytes-verified"
         }
       ],
@@ -443,5 +424,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "sedna",
+    "materialSha256": "3c976865bd0191d2d914c463ee9f392150a62d6e5f23631c4a6cc225d345940d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1999-fr33",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "274fb23444e68c3d00988a4841baa3155938c805391a4e317861a1c8ad4574f3"
+    "sha256": "ab7fda3e641174aadeb8753e5562c38459eeece1f28ed402e780c5e6c9c6f7a6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3a35bb8737bf929ef9b240c964804ad8290dc18ae64f4ae8b8c0c118530b3fb2",
+      "sha256": "464dabe7eeaad821973d254151b605486c4c027b674ca46d5863efca87f331ca",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asteroid-1999-fr33",
         "displayName": "1999 FR33",
         "publicBase": "/scenes/asteroid-1999-fr33/",
-        "distanceAu": 2.9765894346509167,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3d680760e2b0e8bb0dd3476eba02c7db6abc1d7755a70defdf48387eab418276",
+      "sha256": "ca44a09cac4c52e9b612244eee1614f52f7852ea82347a96a0e932f0c8fe2c16",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/15145"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "4b80f749069df27aeffc6c40e144a9b7a75ee36025e0845e5fe2a313eb0bc8c5",
       "bytes": 46095,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "3d680760e2b0e8bb0dd3476eba02c7db6abc1d7755a70defdf48387eab418276",
+      "sha256": "ca44a09cac4c52e9b612244eee1614f52f7852ea82347a96a0e932f0c8fe2c16",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11034,
+      "bytes": 10755,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-elevation-thumbnail.webp",
           "bytes": 5444,
           "sha256": "3483429d0c51b4b23456252d7d10332945378737987e318a5efff48e715451ad",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-elevation-surface@2x.webp",
           "bytes": 327852,
           "sha256": "db80841e70756b666a36308b5e88e2e82258f140b80ddae825868ff2f98ca74b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-surface@2x.webp",
           "bytes": 211910,
           "sha256": "20bf82313afa6203e05dd263fddebe4292793f09c1db2364ba1143669172d431",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8202,
-          "sha256": "cf134dad1359be3a4e423d3754c06f1d3a5e15753b4768aba770246934fdd749",
+          "bytes": 8083,
+          "sha256": "405f1adb384575ed81e8b3fecb958f90e8a05066df5a56d9348ec964c2db7dd6",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "asteroid-1999-fr33",
+    "materialSha256": "e0deed1d0bcfd57163fcf9126a0ab96b02d2c4c51bf38d48240520761ae3c558",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

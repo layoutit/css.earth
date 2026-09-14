@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="anahita"])[data-lod="billboard"] .anahita-scene, .planet-stage:where([data-object-id="anahita"])[data-lod="marker"] .anahita-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="anahita"])[data-lod="marker"] .anahita-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="anahita"]).anahita-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dido",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "074390c5a66b7bfbf279e2337bd1577b0f541f67b6d13f0447ebb5ed34e433ca"
+    "sha256": "c9cbee7f344719296cc1d589d9ce6e478515a3d9367137d041f6909e8618c68e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "19c9bd771c1b7eb4ada5e37dd74c4c229ada2a49bc0db32b50c7b337182bab7c",
+      "sha256": "e557ff8aad1eea94d25a3cc57224e0736afa8b086c1fa85a41ea23b958e00cee",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "dido",
         "displayName": "Dido",
         "publicBase": "/scenes/dido/",
-        "distanceAu": 3.1544316494785694,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 3659 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4bd97cd357a8cae524531e45844ac58111005b85f9d6853a61f523bcc5041226",
+      "sha256": "d8904195a2f756b08ca23f0287baa7fc7d1944321f0d3f3b610fa06cd61a6092",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3659"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "461086209e88b1043b79cc9e64ca58de488f781dec10fa938a0d7cc68dcb6dc4",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4bd97cd357a8cae524531e45844ac58111005b85f9d6853a61f523bcc5041226",
-      "bytes": 8138,
+      "sha256": "d8904195a2f756b08ca23f0287baa7fc7d1944321f0d3f3b610fa06cd61a6092",
+      "bytes": 7859,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/dido/dido-elevation-thumbnail.webp",
           "bytes": 5664,
           "sha256": "c9cf8808ccbe29ae07a729e355df875126555043f5261ccf2ddff09ccad78495",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dido/dido-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dido/dido-elevation-surface@2x.webp",
           "bytes": 306366,
           "sha256": "7c19c88e177cd2dd7c5c24e1cb5a373416fb600c7c2845d131b60ca401bedc1c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/dido/dido-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dido/dido-shape-surface@2x.webp",
           "bytes": 218558,
           "sha256": "e0365462182f8725c28f27bd75c04d395ed5b011e664b30f7ff1539a810b2bc3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5529,
-          "sha256": "d5f300e89b63e5c59782db2d010fbf93f7b5712ce633ec5fc261cffc4ed16045",
+          "bytes": 5410,
+          "sha256": "298dbc5454c83faf499b15383bdfc8722b573b49e58b2d640f029834bbecb856",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "dido",
+    "materialSha256": "6b421766fa130fb986fbb99b1fb7995119d467abc39fc47b3e1eefdcacdd448c",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="eurykleia"])[data-lod="billboard"] .eurykleia-scene, .planet-stage:where([data-object-id="eurykleia"])[data-lod="marker"] .eurykleia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="eurykleia"])[data-lod="marker"] .eurykleia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="eurykleia"]).eurykleia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -4,7 +4,6 @@
   "namespace": "telesto",
   "displayName": "Telesto",
   "publicBase": "/scenes/telesto/",
-  "distanceAu": 9.58,
   "raster": {
     "width": 2048,
     "height": 1024,
@@ -359,12 +358,6 @@
     "sunSource": "Vendored JPL Saturn satellite orbit and the Archinal rotation frame documented with the PDS shape model."
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      155,
-      151,
-      146
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

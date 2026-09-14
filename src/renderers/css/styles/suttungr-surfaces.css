@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="suttungr"])[data-lod="billboard"] .suttungr-scene, .planet-stage:where([data-object-id="suttungr"])[data-lod="marker"] .suttungr-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="suttungr"])[data-lod="marker"] .suttungr-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="suttungr"]).suttungr-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "davida",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b888ea3483dcf7a394bd4ed7239ddc7f0e6ce4c033ad5a773e87e9ec2efdb592"
+    "sha256": "fb4da353ff20cf7d6ab55f60ed5f1f49e17c978bb657ed3612f3ec312d6e6708"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "19a1e1d67e1c47e354cba5c4d66d1315ba308001eac1d871bf332ddd14c85a05",
+      "sha256": "2e9e6bd4957c040b524eb46cd6db2d2f44912a989ccdde45e99c4741f33a5748",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "davida",
         "displayName": "Davida",
         "publicBase": "/scenes/davida/",
-        "distanceAu": 3.16136139912591,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3ae44c42d8aeb4870dcd09794dfb25584c9894c9bf9bf4372dcc93f520f32071",
+      "sha256": "f2491dc180ce005a8611deefff05e48a8412ff7583177e7b1337fa926ce2badb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "62b8e0a3ab18b6db52379c0e9738c0a43b3d9e8437e16bc20ce6f0a4f8f88188",
       "bytes": 514939,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3ae44c42d8aeb4870dcd09794dfb25584c9894c9bf9bf4372dcc93f520f32071",
-      "bytes": 7591,
+      "sha256": "f2491dc180ce005a8611deefff05e48a8412ff7583177e7b1337fa926ce2badb",
+      "bytes": 7312,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/davida/davida-elevation-thumbnail.webp",
           "bytes": 5270,
           "sha256": "e4d772f742086b868f505d256d96bdc471ec5772adc6e431898f9ca3dfc5b0ea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/davida/davida-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/davida/davida-elevation-surface@2x.webp",
           "bytes": 298538,
           "sha256": "b45a1359f1acea6e718cca664ddb0e95b5cd873f9a3ca4dfc867b326f2649137",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -452,13 +433,13 @@
           "url": "/scenes/davida/davida-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/davida/davida-shape-surface@2x.webp",
           "bytes": 216384,
           "sha256": "4ed14f91fb8722eacf5f4f45f7d91531893696cc9f6414ddbb3dd3272c8d2e40",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -489,8 +470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5425,
-          "sha256": "8da981335efac4fa3dbd2ff5c50b0e15f022496b460566d514777e57ff778a04",
+          "bytes": 5306,
+          "sha256": "a7ff3dd54933732bfa16b3c84bfc768598ee552a9fef03e5ca53a7f830112209",
           "verification": "bytes-verified"
         }
       ],
@@ -550,5 +531,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "davida",
+    "materialSha256": "858ba5d17ba6f1e75ef9635f632ecc2162b64101a531e0e0a4ebcd7a66610650",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

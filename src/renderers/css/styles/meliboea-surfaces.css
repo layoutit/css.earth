@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="meliboea"])[data-lod="billboard"] .meliboea-scene, .planet-stage:where([data-object-id="meliboea"])[data-lod="marker"] .meliboea-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="meliboea"])[data-lod="marker"] .meliboea-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="meliboea"]).meliboea-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

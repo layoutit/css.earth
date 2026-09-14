@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "sappho",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "13e6ee1a892c0172b76f151681fbba6ea21cd2e05c01a74a1f81d1b3ba8ff174"
+    "sha256": "6a21b626d17ba06e3025bc1840d93543d6bf50e2a95d0964fc71e3f52ebe3a9c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ed00a52c5e31aa83dc8019c0206421a037de620a1686a8ff0fa50874b6ed3c6a",
+      "sha256": "03aeae3e30429bb9934327ff12e07708de2248cb696bffda684ee106f4b066ab",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "sappho",
         "displayName": "Sappho",
         "publicBase": "/scenes/sappho/",
-        "distanceAu": 2.2965637786549675,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 1832 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e5e9554393afdc4f4b4cafe31df5a5b096b6552ce5f48555dd22b0d7a99edbc6",
+      "sha256": "3e4f149601faf6d038afdde0c089aa60815dfb13e532d1efa44f5f38c9de2871",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1832"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "7411239fff379cfd4fb0d9ad54651ea58f077056e999fdb528188903e290ad0e",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e5e9554393afdc4f4b4cafe31df5a5b096b6552ce5f48555dd22b0d7a99edbc6",
-      "bytes": 8341,
+      "sha256": "3e4f149601faf6d038afdde0c089aa60815dfb13e532d1efa44f5f38c9de2871",
+      "bytes": 8062,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -391,19 +372,19 @@
           "url": "/scenes/sappho/sappho-elevation-thumbnail.webp",
           "bytes": 4868,
           "sha256": "5b55f73e9a9314762caa2572284599859a5b749c0eb01bf0351163a5671f2127",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sappho/sappho-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sappho/sappho-elevation-surface@2x.webp",
           "bytes": 266666,
           "sha256": "32b14af3c312a09d74bd7054f2473e9b74a16f4625f6f4086555568bb7697ff4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -441,13 +422,13 @@
           "url": "/scenes/sappho/sappho-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sappho/sappho-shape-surface@2x.webp",
           "bytes": 183768,
           "sha256": "b07a588f71e116c57c6ddfc54b3ad05c578904d3e4e37a0f36b93e524007f89e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -478,8 +459,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6175,
-          "sha256": "e54f1d6bbf3239b659c5efd7dfc9bd8b6322dd85197d618600e6d83c4cbc6a44",
+          "bytes": 6056,
+          "sha256": "0148822d6759ffc4d221fe588f8157aa3bb72f34a0d95dfdc47c422dd5b0fc7e",
           "verification": "bytes-verified"
         }
       ],
@@ -539,5 +520,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "sappho",
+    "materialSha256": "850ac385b7509c8bfdc00946e3d5e1415a29bf1680a9a8d0abc06c2761efb477",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

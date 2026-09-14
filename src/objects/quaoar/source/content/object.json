@@ -70,12 +70,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": false
       }
     ]
   },
@@ -98,12 +92,6 @@
       "role": "facts",
       "description": "Published data and interpretation",
       "href": "https://doi.org/10.1051/0004-6361/202346365"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

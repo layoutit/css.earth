@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "daphne",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "739c0511cc4532b8da882ede4a62554d379c781b5c83fa252a8535911dac8140"
+    "sha256": "f16b041769d305617990dbcb32ace4e675ddfda6f3c9ff80de2a0ce466141e00"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4c323762c692cee4cbf7fe8fe3beb25a8e2c879529637dc1f9177ded4cf2c32d",
+      "sha256": "4bb4c3f874ebb8ba1fb5687513c673d68673391f4aed751c9cfb2525e86664c9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "daphne",
         "displayName": "Daphne",
         "publicBase": "/scenes/daphne/",
-        "distanceAu": 2.766978586312942,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1fe4f01c177c076d071d37cddd01670a5fcbf5beda1a9c82fc24da63b6f80a68",
+      "sha256": "ff5d51b7eeb0a7c819c56d0649fad6c2a7fcd5c52ab4797b440bf339f888ff75",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "46e59ffff48f91e62bac9d3d3c195549698092e721b487e8187b0ae0980d026d",
       "bytes": 344059,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1fe4f01c177c076d071d37cddd01670a5fcbf5beda1a9c82fc24da63b6f80a68",
-      "bytes": 7523,
+      "sha256": "ff5d51b7eeb0a7c819c56d0649fad6c2a7fcd5c52ab4797b440bf339f888ff75",
+      "bytes": 7244,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/daphne/daphne-elevation-thumbnail.webp",
           "bytes": 4990,
           "sha256": "6f54d54d6f0857ef1326ab5ac4e50420cd976977c459cd68605c5371ea040eb1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphne/daphne-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphne/daphne-elevation-surface@2x.webp",
           "bytes": 289234,
           "sha256": "cc543b0d5fada3b45a1880545b3de1400fa56e6f3ba4a8f33be2dfcd24a98090",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -452,13 +433,13 @@
           "url": "/scenes/daphne/daphne-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphne/daphne-shape-surface@2x.webp",
           "bytes": 218214,
           "sha256": "1062deb0d0dc870b0599a0105efce9bf6b2fb32327f3ca6826762ab95fbc2e7d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -489,8 +470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5357,
-          "sha256": "47a1495997b63782b8a575f772fe29402748bc58449a142de2344ce424289a15",
+          "bytes": 5238,
+          "sha256": "29135237007a33e9cd1b87bb14e28b4b23d435a15a0ed8c7630cba6899255dd8",
           "verification": "bytes-verified"
         }
       ],
@@ -550,5 +531,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "daphne",
+    "materialSha256": "cac917e0d5159aca1708b9792ab39c9587d894b52372ec06d1991e757c1f411f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

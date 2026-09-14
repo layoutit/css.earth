@@ -6,8 +6,8 @@ French et al. (2024), arXiv:2401.04634, Table 3 and Sections 9.1–9.2.
 The numeric prolate representation and coverage grid are cssEarth code/data
 under the repository MIT license. No paper graphics are redistributed.
 
-Rotation: NASA/JPL NAIF PCK00011, BODY707. Observational research:
-NASA/JPL, Voyager 2 ISS, NASA Planetary Data System. No image is used as an
-observed surface texture. Discovery and naming: NASA Science.
-Milky Way: ESO/S. Brunier, CC BY 4.0. Inter: Rasmus Andersson, SIL Open Font
-License 1.1. Attribution and source pins accompany the manifest.
+Rotation: NASA/JPL NAIF PCK00011, BODY707. Observational research: NASA/JPL,
+Voyager 2 ISS, NASA Planetary Data System. No image is used as an observed
+surface texture. Discovery and naming: NASA Science. Inter: Rasmus
+Andersson, SIL Open Font License 1.1. Attribution and source pins accompany
+the manifest.

@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/piazzia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'piazzia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/piazzia/piazzia-directional-sun.webp",
-      "two": "/scenes/piazzia/piazzia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/piazzia/piazzia-shape-surface@2x.webp"
   ],

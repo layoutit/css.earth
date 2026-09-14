@@ -4,7 +4,6 @@
   "namespace": "kerberos",
   "displayName": "Kerberos",
   "publicBase": "/scenes/kerberos/",
-  "distanceAu": 39.48,
   "raster": {
     "width": 512,
     "height": 256,
@@ -78,12 +77,6 @@
     "sunSource": "JPL Pluto-system ephemeris; Weaver et al. (2016) flyby rotation as an approximate display orientation. The 2025 shape fit has no converged pole solution."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

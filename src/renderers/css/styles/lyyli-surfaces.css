@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="lyyli"])[data-lod="billboard"] .lyyli-scene, .planet-stage:where([data-object-id="lyyli"])[data-lod="marker"] .lyyli-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="lyyli"])[data-lod="marker"] .lyyli-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="lyyli"]).lyyli-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

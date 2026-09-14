@@ -310,12 +310,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": true
       }
     ]
   },
@@ -372,12 +366,6 @@
       "role": "scene",
       "description": "Globe & lighting",
       "href": "https://github.com/OpenSpace/OpenSpace"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Photographic full-sky panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

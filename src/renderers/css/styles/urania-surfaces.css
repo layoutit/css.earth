@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="urania"])[data-lod="billboard"] .urania-scene, .planet-stage:where([data-object-id="urania"])[data-lod="marker"] .urania-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="urania"])[data-lod="marker"] .urania-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="urania"]).urania-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="protogeneia"])[data-lod="billboard"] .protogeneia-scene, .planet-stage:where([data-object-id="protogeneia"])[data-lod="marker"] .protogeneia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="protogeneia"])[data-lod="marker"] .protogeneia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="protogeneia"]).protogeneia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

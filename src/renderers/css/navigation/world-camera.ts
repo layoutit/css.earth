@@ -1,7 +1,7 @@
 import { cameraPoseFromReferenceFrame, cameraPoseToReferenceFrame } from '@cssearth/engine';
 import type { FocusFrame, PhysicalCameraPose, PositionM } from '@cssearth/engine';
 import { offAxisFrame, silhouetteEllipse } from '../solar-system/heliocentric-geometry.js';
-import type { SilhouetteEllipse } from '../solar-system/heliocentric-view.js';
+import type { SilhouetteEllipse } from '../solar-system/types.js';
 import {
   rotateWorldPosition, scaleWorldPosition, transposeWorldRotation, validateWorldPosition,
   validateWorldRotation, worldQuaternionFromRotation, worldRotationCss, worldRotationFromQuaternion,

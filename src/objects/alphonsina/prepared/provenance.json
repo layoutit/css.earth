@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "alphonsina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "087fa52496a7ebf64c409c36b8c3b040ee08bb1a78f9db8229c1b023c8ea3213"
+    "sha256": "a6ddacca70f4865ee47d43301ef05846bb497d73a7a75cefdab6da44b19a4683"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1e2d0258b4cc4dbc690e73e8b785d224760082ca895d9cef4b8841b3c0440cb6",
+      "sha256": "605c20ac31a7395a06d7295a7ffcb319d6820f87014a72053a8178565bdf4b8c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "alphonsina",
         "displayName": "Alphonsina",
         "publicBase": "/scenes/alphonsina/",
-        "distanceAu": 2.700987827703556,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 301 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "be3e57965e9a159e0b9d811256e48e0ccae0bdabe4959d2ca9b69d3289856ef0",
+      "sha256": "da8d8308cef289d776d91f13ade642a98727bab2efb60bbe29c11f58f2310453",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/301"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "8ca5c066f8feda632970baa9fe3dc73797d253c9fce1fe34901ef1d711a23708",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "be3e57965e9a159e0b9d811256e48e0ccae0bdabe4959d2ca9b69d3289856ef0",
-      "bytes": 8939,
+      "sha256": "da8d8308cef289d776d91f13ade642a98727bab2efb60bbe29c11f58f2310453",
+      "bytes": 8660,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -391,19 +372,19 @@
           "url": "/scenes/alphonsina/alphonsina-elevation-thumbnail.webp",
           "bytes": 5036,
           "sha256": "5a820f5d00e2fb7357d93f04725cf904ac548e40886986c13a79fd1b077b0fc5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alphonsina/alphonsina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alphonsina/alphonsina-elevation-surface@2x.webp",
           "bytes": 360286,
           "sha256": "1cc1fc386de0ffc662ae2be3076a6c89c1b623477ea66ef639898302c8d26464",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -441,13 +422,13 @@
           "url": "/scenes/alphonsina/alphonsina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/alphonsina/alphonsina-shape-surface@2x.webp",
           "bytes": 196568,
           "sha256": "121e191e9293f251dd4d904da857af0e58673b6badf60311292d7197e4eca5c7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -478,8 +459,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6726,
-          "sha256": "100734c185825848982bd35fb02a20bbd51cc04d7dca89c57c0985f43d8ec811",
+          "bytes": 6607,
+          "sha256": "511b9a4af80bc6c2e923fe8787d59b99f46438489b0428c0efccbf8048280c1b",
           "verification": "bytes-verified"
         }
       ],
@@ -539,5 +520,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "alphonsina",
+    "materialSha256": "22504a5b503d84bf215fc0c8e3fff662f12f43e12554fade191ae25cbcaa8e9a",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

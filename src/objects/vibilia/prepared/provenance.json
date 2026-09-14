@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "vibilia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a3259f82124ec209fabcc1b43589b098c4683ef09ef627a90451f062723d7d05"
+    "sha256": "2f3888a3973d711f41ad3142fdefd1c55df6a0c28b2ff79697f82c354db6c551"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "12b89ad804d8a8b57d0f3cda6241a57a6dd0ca3f4b6e9189d727d496efa9c8f5",
+      "sha256": "a0b0efa2ff988cdf6d4b2eb8fe06ba90205bb6126d5a24a30360c995e1ccd26c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "vibilia",
         "displayName": "Vibilia",
         "publicBase": "/scenes/vibilia/",
-        "distanceAu": 2.654067519715369,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1824 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9ab0b52f68ec5d5d4124b9cb0aa9a9ff13e1c473e89b70fd08d9a76f6cd63ef7",
+      "sha256": "e71f2d590abe4de624793b85bd6acb07018e378d7738b6f62decdfb1648b63b4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1824"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "7ad4f599bff34a11ba1ead1d48effff2f784a32ac0d456e695fff177d625ba64",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9ab0b52f68ec5d5d4124b9cb0aa9a9ff13e1c473e89b70fd08d9a76f6cd63ef7",
-      "bytes": 8799,
+      "sha256": "e71f2d590abe4de624793b85bd6acb07018e378d7738b6f62decdfb1648b63b4",
+      "bytes": 8520,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/vibilia/vibilia-elevation-thumbnail.webp",
           "bytes": 5362,
           "sha256": "bcee669f41c9381b6de001dfdd20060b1b02c1f7058d0fabdbd8cea28d7a2d76",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vibilia/vibilia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vibilia/vibilia-elevation-surface@2x.webp",
           "bytes": 273564,
           "sha256": "e1b320182059f83f9c4cad70efbcda32c028d99fbe5b1a836a601dbe182ec4f1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/vibilia/vibilia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vibilia/vibilia-shape-surface@2x.webp",
           "bytes": 197948,
           "sha256": "b6f321a8ffb3cf93c8ee2829fd9b82e9249b349fa3de733f5b13e28cd6592158",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6154,
-          "sha256": "9ddd173efe84326870bf9870af1c000ed4961cfb4a4745432390c775780cf7ee",
+          "bytes": 6035,
+          "sha256": "03da6fa80e8f6e6a864f98833d0f776c7217ff0442a82cc9948e42fc44d8e31a",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "vibilia",
+    "materialSha256": "ab371770a14a7053b8f1dd5f55b1eeae7fe406dad50b47dcbafdbbae075bff72",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

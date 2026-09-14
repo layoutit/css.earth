@@ -1,5 +1,5 @@
 import {shape,text,number,optional,array} from '../terrestrial-layers/source-records.mts';
-export const parseShapeModelConfig=shape({schema:text,displayName:text,displayRadius:number,distanceAu:number,quadBudget:number,surfaceModel:text,
+export const parseShapeModelConfig=shape({schema:text,displayName:text,displayRadius:number,quadBudget:number,surfaceModel:text,
   mesh:shape({latitudeSegments:number,longitudeSegments:number,width:number,height:number,poleSize:number,seamOverlap:number}),
   ring:optional(shape({innerRadiusKm:number,outerRadiusKm:number,segments:number,displayValue:number,displayOpacity:number})),
   camera:shape({initialScenePitchDegrees:number,defaultControlYawDegrees:number,maximumHeightShare:number})});

@@ -93,10 +93,8 @@ chosen, at both prepared densities. Unit checks live under
 - The OpenSpace globe configuration snapshot (commit
   `56e29b54b8592084ff1fef47c2e08de0b22ce516`) is retained as provenance; no
   preparation step reads it.
-- The cubic sky is prepared from ESO/S. Brunier's Milky Way panorama under
-  CC BY 4.0. HYG v4.1 coordinates are used only for registration auditing.
-- The directional Sun uses the repository's clean-room, retained-billboard
-  preparation standard at a mean heliocentric distance of 1 AU. Its direction,
+- The directional Sun follows the repository's clean-room directional-sun
+  preparation standard. Its direction,
   the pole and the prime meridian at the shared epoch come from the IAU/WGCCRE
   rotation model through `src/platform/solar-geometry.mts`, as for every
   prepared body; the previous static lane claimed no epoch orientation.

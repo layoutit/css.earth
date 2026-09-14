@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="egeria"])[data-lod="billboard"] .egeria-scene, .planet-stage:where([data-object-id="egeria"])[data-lod="marker"] .egeria-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="egeria"])[data-lod="marker"] .egeria-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="egeria"]).egeria-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

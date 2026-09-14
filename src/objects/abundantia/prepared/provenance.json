@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "abundantia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d50eab73ebbe955366d41cceea25390be27a43445d285101a76eb2d56830ca99"
+    "sha256": "26e5b1dfd2a7974a2cc05df0f1af30dc1b2bfa8deea1fba238d168ff872e92c1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "14e9c350ff6f519603bdb62fb584f2d3d3ab83c349d2442711052e18155fc7e7",
+      "sha256": "5bb6b87553cb599617c4f6da9784e09d432f6af978a816e9109e2f93c50ab681",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "abundantia",
         "displayName": "Abundantia",
         "publicBase": "/scenes/abundantia/",
-        "distanceAu": 2.5919374543282623,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 4625 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e788422cd74d900b88f81ed74882281e0d3da854ac09dc8f242d6fbb6cd7b3cd",
+      "sha256": "6ee312f66d8c5dc1149e9770823a39744bdf0d8f34309cef23c811daf74e4842",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4625"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "30c56d5b9f294437dfb49eec0cc71c4ff68980845df2ef72f0ccfed1bac61478",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e788422cd74d900b88f81ed74882281e0d3da854ac09dc8f242d6fbb6cd7b3cd",
-      "bytes": 11721,
+      "sha256": "6ee312f66d8c5dc1149e9770823a39744bdf0d8f34309cef23c811daf74e4842",
+      "bytes": 11442,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/abundantia/abundantia-elevation-thumbnail.webp",
           "bytes": 5760,
           "sha256": "bec8fe13fc0d200cadc850de957b448ce40b69c21ddd6d0be445e3a6ceae34f1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/abundantia/abundantia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/abundantia/abundantia-elevation-surface@2x.webp",
           "bytes": 295554,
           "sha256": "fb0e7a091ef9f43755c7e70837407ff2b23393853bcd19f7abf002d61e188666",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/abundantia/abundantia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/abundantia/abundantia-shape-surface@2x.webp",
           "bytes": 241538,
           "sha256": "12c8b2dbc2aa5e2e887f26e3648cce39172d947cd8a160518d55545cbc362a41",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9039,
-          "sha256": "772963f971ce19624570ea958069ad196659f4f257327187f312d21e2054502d",
+          "bytes": 8920,
+          "sha256": "51f883be23c823eeb01ea5392b8d11fd3e3fbf822d8c0df81bb2dad80f97700d",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "abundantia",
+    "materialSha256": "18db3ee456396435f3c593a42f33e52601093e1d8768856d9d879c3f58fd0f19",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

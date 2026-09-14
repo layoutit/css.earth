@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="schaber"])[data-lod="billboard"] .schaber-scene, .planet-stage:where([data-object-id="schaber"])[data-lod="marker"] .schaber-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="schaber"])[data-lod="marker"] .schaber-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="schaber"]).schaber-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

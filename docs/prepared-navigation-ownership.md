@@ -37,8 +37,7 @@ separate selection owner, so mounting never replaces it with an intermediate car
 `tools/prepared-presentation-bindings.mts` reads each object's imported authored CSS
 in offline Chromium and compiles transform-only native motion, including dataset
 specific durations. Both `prepared/runtime.json` and the pinned `prepared/object.json`
-contain these bindings ([shared banks](prepared-shared-banks.md) are referenced, not
-repeated, in the transport). Unsupported keyframes, timing or changing motion membership
+contain these bindings. Unsupported keyframes, timing or changing motion membership
 fail preparation.
 
 The renderer disables the corresponding CSS animation before attaching nodes and

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hedda"])[data-lod="billboard"] .hedda-scene, .planet-stage:where([data-object-id="hedda"])[data-lod="marker"] .hedda-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hedda"])[data-lod="marker"] .hedda-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hedda"]).hedda-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

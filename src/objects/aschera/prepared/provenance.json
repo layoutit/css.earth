@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "aschera",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "876a06a1e1c3a6af3ddecc0a4ac31bb9a1b02bf65f74526835cfc9681e70058e"
+    "sha256": "6f3265600c922cdbc70bde9b0ac0472a9f8a8808a0890652cee1be155aa4ee6e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "073e6cf8965d971ca6128136c3491c0643007f19d7d653dfa88107fffcf340bb",
+      "sha256": "f0530cfe308ea1cdac8790eb5d1e2586012aff518ae72b389e7ec2eaf0e79688",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "aschera",
         "displayName": "Aschera",
         "publicBase": "/scenes/aschera/",
-        "distanceAu": 2.610464215816688,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1435 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dd26aa20b953f43a6006be752bbb83944ece2363105662dfec78937734ea39fc",
+      "sha256": "7ce65e23937ff4449dc2c4fe02e8c9bdb0a2788ac5ac66d95889841e0a23ef2e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1435"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "425c5eaa458c41fc0ecd53191819cd902e7f242a38b77aa0d4860b788d403674",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dd26aa20b953f43a6006be752bbb83944ece2363105662dfec78937734ea39fc",
-      "bytes": 10294,
+      "sha256": "7ce65e23937ff4449dc2c4fe02e8c9bdb0a2788ac5ac66d95889841e0a23ef2e",
+      "bytes": 10015,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/aschera/aschera-elevation-thumbnail.webp",
           "bytes": 5462,
           "sha256": "0536692ee9bea8b89bcdc7afb647f576582e645c3d676642db215545ae5fc0a5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aschera/aschera-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aschera/aschera-elevation-surface@2x.webp",
           "bytes": 276500,
           "sha256": "250d5e4de5c3b314ea6e5875577924c41e92b2953a6af3f6037852e217309fb0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/aschera/aschera-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aschera/aschera-shape-surface@2x.webp",
           "bytes": 216656,
           "sha256": "0cb6dd10e9f2e5e300dfb75ea95f9269c89a91fab93b4ce56f2df6d6ebeef77a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7649,
-          "sha256": "410a9f7af3fa86ce555df11d9d92dfde60555d7d70278c1d103b65085c07ecdf",
+          "bytes": 7530,
+          "sha256": "ccfa182409ecc8a5e58fce264d068a0c6bc2b560b63d2066c27a2187cb9a5042",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "aschera",
+    "materialSha256": "428d3cb5f2fd4fd0d3b8efc131953bc7d6eef55b7ffe6ea04b8ae0d2abfa38f3",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

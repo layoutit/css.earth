@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-c2006-p1",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5ffb3b77397813db80f73844ea8766810f984e96190a052355b827a08696de2f"
+    "sha256": "64f82428cd8c93cb213b326d81d25a997b72826b8efd6f0a405dca6c9bb87e74"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5bb3614f5e7ec9c27cd814cb5297c66ccff82a85a192a88127e4505cbcb1da95",
+      "sha256": "1de7eda776d2e5f29c95e56df7f80b29f1aad74fbc4c3b9aa30dabc2c3773205",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-c2006-p1",
         "displayName": "McNaught",
         "publicBase": "/scenes/comet-c2006-p1/",
-        "distanceAu": 40.6783719290027,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6c3a989efcb310a35c1be5c161539745e132cfd71731acd119517b5e34188b4e",
+      "sha256": "6d9bf4179d9daafdb4aeaadfa4bde36565d8d6eb042b736a13439f775864dd9b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://ssd.jpl.nasa.gov/sb/great_comets.html"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "0e26203a07faff85bb4cf0cdf53ed5261f91492f054dd7132a6de3f094be8310",
       "bytes": 436012,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6c3a989efcb310a35c1be5c161539745e132cfd71731acd119517b5e34188b4e",
-      "bytes": 3053,
+      "sha256": "6d9bf4179d9daafdb4aeaadfa4bde36565d8d6eb042b736a13439f775864dd9b",
+      "bytes": 2773,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -336,13 +317,13 @@
           "url": "/scenes/comet-c2006-p1/comet-c2006-p1-model-thumbnail.webp",
           "bytes": 1398,
           "sha256": "da4d8c2350c4e553bd86d72916ea55bece602b60c5c22a632ede1bc23744d980",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-c2006-p1/comet-c2006-p1-model-surface@2x.webp",
           "bytes": 121602,
           "sha256": "c9463c496eaa3e05914b0a9dbb6c97c691b9feef1c9c161f5d9626443fb64111",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -373,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6606,
-          "sha256": "55a9d005cf8a490fa48d07061b639c300fead005b7b14c3c789ae96d3d9d0f8e",
+          "bytes": 6487,
+          "sha256": "eb553772712cc1249ecd6b798dd2fdf3d521547778bd3fb3de08e8fb004833db",
           "verification": "bytes-verified"
         }
       ],
@@ -384,5 +365,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-c2006-p1",
+    "materialSha256": "5d8e3b1d684347579684596563c524436a4777f8b4e8bdb73d2d36cfa850bd7d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

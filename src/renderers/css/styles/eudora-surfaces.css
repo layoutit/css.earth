@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="eudora"])[data-lod="billboard"] .eudora-scene, .planet-stage:where([data-object-id="eudora"])[data-lod="marker"] .eudora-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="eudora"])[data-lod="marker"] .eudora-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="eudora"]).eudora-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

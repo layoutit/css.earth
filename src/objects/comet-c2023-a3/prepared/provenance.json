@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-c2023-a3",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "58697cb0dea6093b078a986063ae3eb210bdee39bf53850d17dba924a87b0b0d"
+    "sha256": "9762d7347af2ca8f8f26929bf0bc79557dd8b0c9e54fc391e7b6f0e7edce3107"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "921d2797aa1a3fd73370c97497d83779f09a48d9eea0892f46835f8eeb4291dd",
+      "sha256": "0c1d0e41668ef9f40770e7fec1067c514d8917b4bea4f479e28cc854e3837ee1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-c2023-a3",
         "displayName": "Tsuchinshan–ATLAS",
         "publicBase": "/scenes/comet-c2023-a3/",
-        "distanceAu": 8.346468275204865,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d5f45551f519895efc3d3f0c0dc926388c9bbfabab1ea89fc00e31e7648d4d2c",
+      "sha256": "62eaaaa02a8b873d8a52c2125c99e2ccb24717b9c6f85955e9eea1154114bf85",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://science.nasa.gov/science-research/heliophysics/esa-nasas-soho-spies-bright-comet-in-evening-sky/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "3d4535dd6ff9f14e57c314372ad69d3883e33932cde03f461a1c8a846581b11a",
       "bytes": 438882,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d5f45551f519895efc3d3f0c0dc926388c9bbfabab1ea89fc00e31e7648d4d2c",
-      "bytes": 3180,
+      "sha256": "62eaaaa02a8b873d8a52c2125c99e2ccb24717b9c6f85955e9eea1154114bf85",
+      "bytes": 2900,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -336,13 +317,13 @@
           "url": "/scenes/comet-c2023-a3/comet-c2023-a3-model-thumbnail.webp",
           "bytes": 1424,
           "sha256": "a568a738f78602f4e69add60ec299b19f7ed0b399fa469be3c6729233ff163c2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-c2023-a3/comet-c2023-a3-model-surface@2x.webp",
           "bytes": 119440,
           "sha256": "11fe12ef49aa735eed58e6cdbbf28e808019b7ba1dd61323a5e69e99df8b99d9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -373,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8964,
-          "sha256": "3b1da2dc0bd42e60989e8ffbc50ac5751148e378346bafeb065cad722edc8e0c",
+          "bytes": 8845,
+          "sha256": "f004aeaa9f7fadccefee49b6b19c555bfa99bc92dc8b9c152430c9cbe8fa6daa",
           "verification": "bytes-verified"
         }
       ],
@@ -384,5 +365,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-c2023-a3",
+    "materialSha256": "25b34f61b1900404205d9cb2826df4ad565804195f8f1c210855094f53817aca",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

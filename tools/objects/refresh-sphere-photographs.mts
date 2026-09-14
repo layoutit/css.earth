@@ -158,7 +158,7 @@ export async function refreshSpherePhotographs(id:string,lensId:string) {
   if(!/^[a-z][a-z0-9-]*$/.test(id)||!/^[a-z][a-z0-9-]*$/.test(lensId)) throw new TypeError('Use one body id and one lens id.');
   sharp.cache(false);sharp.concurrency(1);
   const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),publicDirectory=resolve('public/scenes',id),stage=resolve('output/sphere-photographs',id,lensId);
-  const [sourceManifest,rasterRecipe,descriptor,scene]=await Promise.all([json(resolve(sourceDirectory,'manifest.json')),json(resolve(sourceDirectory,'preparation/raster.json')),json(resolve(objectDirectory,'object.json')),readFile(resolve(objectDirectory,'prepared/scene.refs.json'))]);
+  const [sourceManifest,rasterRecipe,descriptor,scene]=await Promise.all([json(resolve(sourceDirectory,'manifest.json')),json(resolve(sourceDirectory,'preparation/raster.json')),json(resolve(objectDirectory,'object.json')),readFile(resolve(objectDirectory,'prepared/scene.json'))]);
   const config=recipe(rasterRecipe),lens=config.surfaces.filter(surface=>surface.id===lensId);
   if(lens.length!==1) throw new Error(`Unknown raster lens: ${id}/${lensId}.`);
   const recipePath=resolve(sourceDirectory,'preparation/raster.json'),recipePin=await fingerprint(recipePath),descriptorRecipe=requireArray(requireRecord(requireRecord(descriptor.properties).recipe).sources).map(value=>requireRecord(value)).find(source=>source.id==='raster');
@@ -171,7 +171,7 @@ export async function refreshSpherePhotographs(id:string,lensId:string) {
   const inputs:Record<string,string>={
     [repositoryPath(resolve(sourceDirectory,'manifest.json'))]:(await fingerprint(resolve(sourceDirectory,'manifest.json'))).sha256,
     [repositoryPath(recipePath)]:recipePin.sha256,
-    [repositoryPath(resolve(objectDirectory,'prepared/scene.refs.json'))]:hash(scene)
+    [repositoryPath(resolve(objectDirectory,'prepared/scene.json'))]:hash(scene)
   };
   for(const selectedFile of selectedFiles) inputs[repositoryPath(selectedFile.path)]=selectedFile.actual.sha256;
   if(lens[0]!.coverage) for(const path of [lens[0]!.coverage!.normal,lens[0]!.coverage!.topography]) { const source=sourceRecord(sourceManifest,path),file=await verifySourcePin(sourceDirectory,source); inputs[repositoryPath(file.path)]=file.actual.sha256; }

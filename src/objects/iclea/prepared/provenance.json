@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "iclea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "172da151afe874eabf7dc7a27a56316796ccbdb226fde6294f48de4d4fe1cb2d"
+    "sha256": "887685fcd3af9656397df884b9f379790c02d897240b55117fdbbacc3ce949fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7a7c2e3cdca69ad138010c5442ec55d21006e79978d1da6c6003bd130a992b88",
+      "sha256": "24d5dbc540bbe100042afc8e7d8a2fc0d0e5d3464a915db7c204844661d00a4e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "iclea",
         "displayName": "Iclea",
         "publicBase": "/scenes/iclea/",
-        "distanceAu": 3.1954918103121694,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 5017 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b90c35b615c40b91265bfc0f4285f2b74d23640ae76bbc6e820b24606b0f0909",
+      "sha256": "eef4da9b5c353a72be182cc84ffdb8c28cdea34587b8f1e2298e277b387843bd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5017"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "3212a810d5ca2f09b46bdac82d0817c197955b84313426df41f473fc6f7945fe",
       "bytes": 80439,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b90c35b615c40b91265bfc0f4285f2b74d23640ae76bbc6e820b24606b0f0909",
-      "bytes": 8637,
+      "sha256": "eef4da9b5c353a72be182cc84ffdb8c28cdea34587b8f1e2298e277b387843bd",
+      "bytes": 8358,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/iclea/iclea-elevation-thumbnail.webp",
           "bytes": 6216,
           "sha256": "27ac9e5d66ca23bb275a2a3271e9e30f1913173b85423fde8241ab73a2e7af17",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iclea/iclea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iclea/iclea-elevation-surface@2x.webp",
           "bytes": 304738,
           "sha256": "1876870c4ac7f0682f4c3b73e6e1d39eeb58b25258a78375a1a0619ba78a095d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/iclea/iclea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iclea/iclea-shape-surface@2x.webp",
           "bytes": 220982,
           "sha256": "3a22d2295af3abd3604aa0c873cac7606a21b0c11a5e219e5735c2c3c1cc2a14",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6022,
-          "sha256": "f1b61c137c414a2f37e8ef63d84720d6a34779850d3da655a23915efa72b518c",
+          "bytes": 5903,
+          "sha256": "c7bc4841923a708f375ebc4fed6d4f33235e92133509e80ff3b86e80cf14ae4d",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "iclea",
+    "materialSha256": "faf5265238efa8064a58a128ec15dac9abc3e135ecf3b30c339cbffbe91bae31",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

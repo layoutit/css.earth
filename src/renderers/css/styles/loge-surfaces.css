@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="loge"])[data-lod="billboard"] .loge-scene, .planet-stage:where([data-object-id="loge"])[data-lod="marker"] .loge-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="loge"])[data-lod="marker"] .loge-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="loge"]).loge-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

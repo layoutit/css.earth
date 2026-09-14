@@ -11,7 +11,7 @@ const sha=(data:Uint8Array)=>createHash('sha256').update(data).digest('hex');
 const entry=(path:string,data:Uint8Array):SourceEntry=>({path,expectedBytes:data.length,expectedSha256:sha(data)});
 const temporary=async(work:(root:string)=>Promise<void>)=>{const root=await mkdtemp(join(tmpdir(),'object-operations-'));try{await work(root);}finally{await rm(root,{recursive:true,force:true});}};
 test('source verification rejects byte drift, undeclared files and escaping paths',()=>temporary(async root=>{
- const data=Buffer.from('pinned source'),source=entry('sample.dat',data),manifest:SourceManifest={schema:'cssearth-authoritative-sources@1',inputs:[{...source,id:'sample',origin:'https://example.org/sample',consumers:['raster']}],generatedIntermediates:[],documents:[]};
+ const data=Buffer.from('pinned source'),source=entry('sample.dat',data),manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[{...source,id:'sample',origin:'https://example.org/sample',consumers:['raster']}],generatedIntermediates:[],documents:[]};
  await writeFile(join(root,'sample.dat'),data);assert.equal((await verifySources({sourceRoot:root,manifest})).verifiedCount,1);
  await writeFile(join(root,'sample.dat'),Buffer.from('mutant source'));await assert.rejects(verifySources({sourceRoot:root,manifest}),/hash drifted/);
  await writeFile(join(root,'sample.dat'),data);await writeFile(join(root,'extra.dat'),'undeclared');await assert.rejects(verifySources({sourceRoot:root,manifest}),/coverage failed/);
@@ -38,21 +38,21 @@ test('runtime inventory comes from nested JSON and CSS image addresses with exac
  }finally{await rm(output,{force:true});}
 }));
 test('acquisition runs declared groups and validates downloaded bytes before publication',()=>temporary(async root=>{
- const data=Buffer.from('remote pin'),source={...entry('acquired.txt',data),origin:'https://example.org/source'},manifest:SourceManifest={schema:'cssearth-authoritative-sources@1',inputs:[source],generatedIntermediates:[],documents:[]};
+ const data=Buffer.from('remote pin'),source={...entry('acquired.txt',data),origin:'https://example.org/source'},manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[source],generatedIntermediates:[],documents:[]};
  const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{kind:'download',groups:['refresh'],path:'acquired.txt',url:source.origin}]});
  assert.equal((await executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async()=>new Response(data)}})).operationCount,1);
  await assert.rejects(executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async()=>new Response('unexpected')}}),/size drifted|hash drifted/);
  assert.deepEqual(await readFile(join(root,'acquired.txt')),data);await assert.rejects(executeAcquisition({sourceRoot:root,manifest,plan,group:'undeclared'}),/undeclared/);
 }));
 test('source manifest validates provenance as well as hashes',()=>{
- const source={...entry('input.bin',Buffer.from('x')),id:'source',origin:'https://example.org/source',consumers:['raster'],credit:'Example lab',license:'CC0',acquisition:'Pinned download',redistribution:'Allowed'};
- const value={schema:'cssopen-body-authoritative-sources@1',inputs:[source],generatedIntermediates:[],documents:[]};assert.equal(parseSourceManifest(value,'open-body').inputs.length,1);
+ const source={...entry('input.bin',Buffer.from('x')),id:'source',origin:'https://example.org/source',consumers:['raster'],credit:'Example lab',license:'CC0',acquisition:'Pinned download',redistribution:'Allowed',sourceBinding:{kind:'local',reason:'Authored test fixture'}};
+ const value={schema:'cssearth-authoritative-sources@2',inputs:[source],generatedIntermediates:[],documents:[]};assert.equal(parseSourceManifest(value,'open-body').inputs.length,1);
  assert.throws(()=>parseSourceManifest({...value,inputs:[{...source,credit:''}]},'open-body'),/lacks credit/);
  assert.throws(()=>parseSourceManifest({...value,inputs:[source,source]},'open-body'),/Duplicate/);
 });
 test('default acquisition restores only missing declared pins',()=>temporary(async root=>{
  const existing=Buffer.from('existing'),missing=Buffer.from('missing');await writeFile(join(root,'one.txt'),existing);
- const manifest:SourceManifest={schema:'cssearth-authoritative-sources@1',inputs:[entry('one.txt',existing),entry('two.txt',missing)],documents:[],generatedIntermediates:[]};
+ const manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[entry('one.txt',existing),entry('two.txt',missing)],documents:[],generatedIntermediates:[]};
  const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:['one','two'].map(name=>({kind:'download',path:`${name}.txt`,url:`https://example.org/${name}`,groups:['refresh']}))});
  const calls:string[]=[];
  await restoreMissingSources({sourceRoot:root,manifest,plan,missing:['two.txt'],transport:{fetch:async url=>{calls.push(String(url));return new Response(missing);}}});
@@ -61,7 +61,7 @@ test('default acquisition restores only missing declared pins',()=>temporary(asy
 }));
 test('missing-source restoration verifies existing pins before starting any transfer',()=>temporary(async root=>{
  const existing=Buffer.from('existing'),missing=Buffer.from('missing');await writeFile(join(root,'one.txt'),Buffer.from('modified'));
- const manifest:SourceManifest={schema:'cssearth-authoritative-sources@1',inputs:[entry('one.txt',existing),entry('two.txt',missing)],documents:[],generatedIntermediates:[]};
+ const manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[entry('one.txt',existing),entry('two.txt',missing)],documents:[],generatedIntermediates:[]};
  const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{kind:'download',path:'two.txt',url:'https://example.org/two',groups:['refresh']}]});
  let transfers=0;
  await assert.rejects(restoreMissingSources({sourceRoot:root,manifest,plan,missing:['two.txt'],transport:{fetch:async()=>{transfers++;return new Response(missing);}}}),/hash drifted/);

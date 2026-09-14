@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="deimos"])[data-lod="billboard"] .deimos-scene, .planet-stage:where([data-object-id="deimos"])[data-lod="marker"] .deimos-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="deimos"])[data-lod="marker"] .deimos-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="deimos"]).deimos-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="apophis"])[data-lod="billboard"] .apophis-scene, .planet-stage:where([data-object-id="apophis"])[data-lod="marker"] .apophis-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="apophis"])[data-lod="marker"] .apophis-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="apophis"]).apophis-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

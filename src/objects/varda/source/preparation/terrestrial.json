@@ -4,7 +4,6 @@
   "namespace": "varda",
   "displayName": "Varda",
   "publicBase": "/scenes/varda/",
-  "distanceAu": 45.619915704968584,
   "raster": {
     "width": 512,
     "height": 256,
@@ -79,12 +78,6 @@
     "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Assumes the spin pole aligns with Ilmarë’s orbit: J2000 RA 272.6° and declination −10.8°. This is a model prior; rotational phase and meridian are illustrative."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

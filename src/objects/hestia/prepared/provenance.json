@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hestia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "580e71f28ef823d36aedc1fd665fcbfdb0de48d32babbcabab3cecc48a71f035"
+    "sha256": "a01b7c3ebea5d0ec2e49062854570f37b88318cdf82c3799709fc54be28e4f06"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "11d3b546e9b8430169fad2ffe6bb3cded8f80f9c25e4f5f7eb5a42cb80e8cb06",
+      "sha256": "ee18e3a642752d4cae1038d996adf4aa02c17e827081d34e28fa9b8239c32995",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hestia",
         "displayName": "Hestia",
         "publicBase": "/scenes/hestia/",
-        "distanceAu": 2.5255592116593393,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 4383 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "505ea9a1d13ee9d343fd0bef403e25462f1b677db30e03318b94dd50ba97d6aa",
+      "sha256": "7f74b12be90ccb9e3a4d836728824bc9338c3f769a203cfad2c4a162bc5106d2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4383"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "3c9b6ec13ef63607aaa3b4b2419bcf7b94232652d260b9b4f1a8e0eb5b49350a",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "505ea9a1d13ee9d343fd0bef403e25462f1b677db30e03318b94dd50ba97d6aa",
-      "bytes": 9433,
+      "sha256": "7f74b12be90ccb9e3a4d836728824bc9338c3f769a203cfad2c4a162bc5106d2",
+      "bytes": 9154,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/hestia/hestia-elevation-thumbnail.webp",
           "bytes": 5534,
           "sha256": "794ed42ef0bf53c69f80d4a23ac4686bf35e151152bef78e32c8c34973831cb8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hestia/hestia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hestia/hestia-elevation-surface@2x.webp",
           "bytes": 261146,
           "sha256": "a5ed02887118dc88081f3d5838c65eaa795cfa19c31e39c8d70db5300be4a011",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/hestia/hestia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hestia/hestia-shape-surface@2x.webp",
           "bytes": 233380,
           "sha256": "60f868e5e119a7c59a776ac769e3b85251cb580c55542a7f3fdbaa0c6aad6a23",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6800,
-          "sha256": "46a704f16cff78e55d38795851f655d87dabd457818da9c0978d9e86a0092c2c",
+          "bytes": 6681,
+          "sha256": "d4d2d2028d6630f7de36e75f18ef55b9429aaa39a176a8c1f8de4572e1beaee3",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "hestia",
+    "materialSha256": "08a382ff3bb0b0b6ccbca417c57ed8ea210a748dbc8fb54fc9a88bea6a419796",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

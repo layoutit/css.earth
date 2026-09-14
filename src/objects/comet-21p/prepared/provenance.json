@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-21p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1b97b5f3295ed0e8d4242d328eb18f456b01436619768623ac1541172b44a8a7"
+    "sha256": "78e99dfa314136b7d83d003415a58c43cf87a12656e292753ec43ac60862d323"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8691116390ba514b0fc07cd7ed34cc614b2381d8e54b575c304c5985e69596ac",
+      "sha256": "5f43a7bd15c1c019c72b3f168eded7445d81c522eb721858409b576eb8cd482d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-21p",
         "displayName": "Giacobini–Zinner",
         "publicBase": "/scenes/comet-21p/",
-        "distanceAu": 4.58488201074323,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0e53c0c2b6b2b2460b4a02f245fb4705160150ecab61e75dc632e0f53d54c65e",
+      "sha256": "136f67c84958290e2510f1e4c26561c2a7b778449c475d3a756a8a0ce3de524e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://arxiv.org/abs/2102.01608"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "ad760e9ec5f94f28d46c1794866f0d5132765a7a7d28c2a17abc9a99d2df8f49",
       "bytes": 436427,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0e53c0c2b6b2b2460b4a02f245fb4705160150ecab61e75dc632e0f53d54c65e",
-      "bytes": 3006,
+      "sha256": "136f67c84958290e2510f1e4c26561c2a7b778449c475d3a756a8a0ce3de524e",
+      "bytes": 2726,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -336,13 +317,13 @@
           "url": "/scenes/comet-21p/comet-21p-model-thumbnail.webp",
           "bytes": 1400,
           "sha256": "4b109962b92bed17d3adf9172de2d64f55eccddebe1ff38ddd35a3f6eb17c6dc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-21p/comet-21p-model-surface@2x.webp",
           "bytes": 120388,
           "sha256": "f89f36589885c8fd58964475a3e89f8b63621ad19f82b496449c8a6d5996f4e2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -373,8 +354,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8916,
-          "sha256": "1987ce20ed6817ddf88bb46291363b29f31b9a1a8010f3409e627b3d3e73b5a6",
+          "bytes": 8797,
+          "sha256": "b9df4b698621b6c42b0df76fab3592c7ac4cff48ce9a5f2495b3dc7fada6fa4b",
           "verification": "bytes-verified"
         }
       ],
@@ -384,5 +365,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-21p",
+    "materialSha256": "37b62522306dad6afd17d388917f7d05e8ed6065aa991a96c91b577ec516b886",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="eleonora"])[data-lod="billboard"] .eleonora-scene, .planet-stage:where([data-object-id="eleonora"])[data-lod="marker"] .eleonora-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="eleonora"])[data-lod="marker"] .eleonora-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="eleonora"]).eleonora-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

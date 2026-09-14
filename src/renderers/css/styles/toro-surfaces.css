@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="toro"])[data-lod="billboard"] .toro-scene, .planet-stage:where([data-object-id="toro"])[data-lod="marker"] .toro-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="toro"])[data-lod="marker"] .toro-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="toro"]).toro-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

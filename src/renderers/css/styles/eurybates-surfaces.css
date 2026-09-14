@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="eurybates"])[data-lod="billboard"] .eurybates-scene, .planet-stage:where([data-object-id="eurybates"])[data-lod="marker"] .eurybates-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="eurybates"])[data-lod="marker"] .eurybates-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="eurybates"]).eurybates-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

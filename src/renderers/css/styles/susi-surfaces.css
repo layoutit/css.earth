@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="susi"])[data-lod="billboard"] .susi-scene, .planet-stage:where([data-object-id="susi"])[data-lod="marker"] .susi-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="susi"])[data-lod="marker"] .susi-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="susi"]).susi-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

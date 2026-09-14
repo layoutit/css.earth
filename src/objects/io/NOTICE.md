@@ -7,12 +7,6 @@ Prepared reprojection, coverage indicators and texture packaging retain this cre
 The enhanced source is a published USGS color-ratio merge; it is not true color.
 Its interpolated polar color is withheld. No new image synthesis is applied.
 
-Jupiter parent image: NASA, ESA, STScI, and Amy Simon. See the pinned original in
-`source/manifest.json` and NASA media usage guidance. Only a prepared observational
-marker is used; the image must retain all listed partner credits.
-
-Milky Way: ESO/S. Brunier, CC BY 4.0. Star catalogue: David Nash / Astronexus,
-HYG v4.1, CC BY-SA 4.0. Source license records are in `source/stars/`.
 Title font: Inter, Rasmus Andersson, SIL Open Font License 1.1.
 
 Scientific geometry uses the repository's vendored astronomy/JPL/IAU source

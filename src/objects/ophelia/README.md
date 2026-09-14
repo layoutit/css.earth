@@ -47,6 +47,6 @@ Only compact numeric measurements, our summary, PCK rotation data and archival i
 
 Flood and Shadows use the same mesh and shared lighting. Preparation targets 480 native `u` leaves and introduces no body-specific controller or preparer.
 
-The analytic radius table, no-data sentinel and context portrait are versioned inputs; the font and ESO panorama have pinned download recipes.
+The analytic radius table, no-data sentinel and context portrait are versioned inputs; the font has a pinned download recipe.
 
 </details>

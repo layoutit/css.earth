@@ -2,33 +2,6 @@
   "schema": "csshuya-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/huya/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -121,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3534,
-      "expectedSha256": "9180df44c4cd8f609df5b01b07eab7c9b07d16397609e551127a0cd97b23198c",
+      "expectedBytes": 3254,
+      "expectedSha256": "bf3b79353070b8fea98b705db024307a6748f416b8d2f4fe86feef5f76a19a24",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -135,8 +108,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 725,
-      "expectedSha256": "c990d5bb1fcd18ea058c8e59e98aaf2c22a8993aeaf643be552b22829d0a7122"
+      "expectedBytes": 522,
+      "expectedSha256": "4aedc9a680eee183b0d0352537216937d51b83bded171ed68dfd2a09cf49dd58"
     },
     {
       "path": "preparation/navigation.json",
@@ -150,8 +123,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2963,
-      "expectedSha256": "80f19f9d29f3448951788bba549881090751e25331137c69a1c70ac22a869cad"
+      "expectedBytes": 2808,
+      "expectedSha256": "9fff2932de348a824dae5cc9c9e0be49e55f812690d577c6623ab9794d91bcc0"
     },
     {
       "path": "presentation/minimap.json",
@@ -177,21 +150,6 @@
       "path": "reference/huya-rommel-2025.pdf",
       "expectedBytes": 5003145,
       "expectedSha256": "5f9dc9b853085da6b17c2bf3855dbf74e0839803d44e9475f4b753b30477bffe"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 847,
-      "expectedSha256": "90bbbcaaa4335cbb0e0dfbadbe9f6f9405cefdb15766b21caafbca6e7a37d086"
     }
   ],
   "generatedIntermediates": [

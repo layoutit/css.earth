@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="cressida"])[data-lod="billboard"] .cressida-scene, .planet-stage:where([data-object-id="cressida"])[data-lod="marker"] .cressida-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="cressida"])[data-lod="marker"] .cressida-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="cressida"]).cressida-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

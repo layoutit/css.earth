@@ -114,12 +114,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": true
       }
     ]
   },
@@ -136,12 +130,6 @@
       "role": "surface",
       "description": "Voyager imagery and Stooke shape model",
       "href": "https://sbn.psi.edu/pds/resource/stkshape.html"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

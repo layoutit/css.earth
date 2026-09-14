@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="athamantis"])[data-lod="billboard"] .athamantis-scene, .planet-stage:where([data-object-id="athamantis"])[data-lod="marker"] .athamantis-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="athamantis"])[data-lod="marker"] .athamantis-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="athamantis"]).athamantis-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="vibilia"])[data-lod="billboard"] .vibilia-scene, .planet-stage:where([data-object-id="vibilia"])[data-lod="marker"] .vibilia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="vibilia"])[data-lod="marker"] .vibilia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="vibilia"]).vibilia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

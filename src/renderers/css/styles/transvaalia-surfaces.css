@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="transvaalia"])[data-lod="billboard"] .transvaalia-scene, .planet-stage:where([data-object-id="transvaalia"])[data-lod="marker"] .transvaalia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="transvaalia"])[data-lod="marker"] .transvaalia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="transvaalia"]).transvaalia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

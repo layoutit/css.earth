@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "gryphia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d7ac704ef4ae0a2eae60e00a5249e0e8e27f2f52816ee58d060ddc5341ef4358"
+    "sha256": "1ddb36f68f21ed0497a12733a61528923ef4b0ea271386e07eb397a34484ba2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c1c26af9a605acf9f089e3f113fa0b13b2301bbee6740c1b00658317b3884dd7",
+      "sha256": "b36190825a2483eaea740f706a72e8ed17362e952ed597ea5e99d31d25ae2028",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "gryphia",
         "displayName": "Gryphia",
         "publicBase": "/scenes/gryphia/",
-        "distanceAu": 2.1987067011231507,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Fixed illustrative display orientation for a qualified convex shape of a known tumbler; the incomplete physical attitude is not propagated."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3b13c87e678ad54ac8b8d7b3349ea1db62cb3098a962f965dbb280cbcd1c4ed9",
+      "sha256": "ac9da3a25f57edda9069ac269f42e8fd95e2a173270641b29d7af08c1dc51127",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published incomplete tumbling solution; fixed illustrative display orientation",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6121"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "05dc8e3b5778e2b2ae9b724299774be438553eb90b49329958fae9e42660f16b",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "3b13c87e678ad54ac8b8d7b3349ea1db62cb3098a962f965dbb280cbcd1c4ed9",
+      "sha256": "ac9da3a25f57edda9069ac269f42e8fd95e2a173270641b29d7af08c1dc51127",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9068,
+      "bytes": 8789,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/gryphia/gryphia-elevation-thumbnail.webp",
           "bytes": 5312,
           "sha256": "cd166ac5400b7b54ac69f828bd1b4d9fff944588df4e45e5829ad6b1dff3bc25",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gryphia/gryphia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gryphia/gryphia-elevation-surface@2x.webp",
           "bytes": 289840,
           "sha256": "1af2dcaaaf30480e13d289f7d3ddd3b13282124f1b67fcbc2801d157f2194f9c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/gryphia/gryphia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gryphia/gryphia-shape-surface@2x.webp",
           "bytes": 208148,
           "sha256": "3dff1c4c69afd1629a26466bb8024b24108a06b7de821c2ecfcf4bd4677710d9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6295,
-          "sha256": "d56630d79ff2b0c6e9aa64de70a7d3091cffd827c8370701148e6f005e858052",
+          "bytes": 6176,
+          "sha256": "d9e4f3c0e33ec7ec2f6e6fdfde14256e84754c17128a7fa0371e79b6f51fac67",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "gryphia",
+    "materialSha256": "5be141e438c1794c11cd9eab4e1ac064b11030c29c3c303485bc068fb3d56f7b",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

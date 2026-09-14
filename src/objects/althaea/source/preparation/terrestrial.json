@@ -4,7 +4,6 @@
   "namespace": "althaea",
   "displayName": "Althaea",
   "publicBase": "/scenes/althaea/",
-  "distanceAu": 2.5814366871947056,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -118,12 +117,6 @@
     "sunSource": "DAMIT model 323 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

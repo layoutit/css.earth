@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "gonggong",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d0ecb4610382841dadd42044fa6fe0d0f65786b76af5c52dbc6d4c0b88dd6464"
+    "sha256": "4254321a6d0a34ea22406f05e690ff4b8338274e571cd7928cfc085ff6780632"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4b591b057bd2f40e14d67f77ebd03a291d4d84ea3828e7d5580958a083c59a39",
+      "sha256": "8477d709c84b5ffe80e2d4189f59cc585230a90b7a66f5fa9dea58bdf19b9717",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "gonggong",
         "displayName": "Gonggong",
         "publicBase": "/scenes/gonggong/",
-        "distanceAu": 89.84583026441713,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "71afc70a229b0faadb4f2d45293455f8b66a73d1a0e48fdc1b2d43d8fe818900",
+      "sha256": "bde0de4a9d5361b893f9dae485996880e9a094525eb09af785b42cec5b6ab509",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -178,12 +171,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -206,12 +193,6 @@
             "role": "facts",
             "description": "Published observations and interpretation",
             "href": "https://doi.org/10.1016/j.icarus.2024.116017"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -258,7 +239,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -293,7 +274,7 @@
       "sha256": "8908711d5c8dcf07fe1724cfba74134c1e566611e46ad3f89f8189bdb7cdba56",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -310,10 +291,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "71afc70a229b0faadb4f2d45293455f8b66a73d1a0e48fdc1b2d43d8fe818900",
-      "bytes": 3583,
+      "sha256": "bde0de4a9d5361b893f9dae485996880e9a094525eb09af785b42cec5b6ab509",
+      "bytes": 3303,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -350,13 +331,13 @@
           "url": "/scenes/gonggong/gonggong-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gonggong/gonggong-model-surface@2x.webp",
           "bytes": 57282,
           "sha256": "fadf1c55e665cfdb85c9f8ba8915cffc9519fb2d5b2f5339d87ce51ac9695b36",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -392,8 +373,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7793,
-          "sha256": "8195fb4c087f12f43b7e65f5fc97ea0f0da3af78c903ce14042ba1ebac3264e2",
+          "bytes": 7674,
+          "sha256": "65038e37a1421ca8af94d5f93be6a846c3a9731339b374163d4c126bc3348b48",
           "verification": "bytes-verified"
         }
       ],
@@ -428,5 +409,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "gonggong",
+    "materialSha256": "7d866dafb5fe584f9cc676327b19435961d92bff01ed7a1b7fe7c6da4d8bfdbc",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

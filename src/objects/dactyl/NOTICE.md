@@ -30,7 +30,7 @@ texture. The independent CSPICE numerical fixture is under
 `tests/objects/fixtures/dactyl/`. Paper values are cited numerical facts; no
 paper prose or figures are redistributed.
 
-ESO/S. Brunier panorama: CC BY 4.0. HYG and Inter retain their notices beside the pinned sources.
+Inter retains its notice beside the pinned source.
 
 The retained Celestia catalog and candidate orbit parameters derived from it retain GPL-2.0-or-later, with the full copyright header and license in source/reference/.
 

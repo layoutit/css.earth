@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "schaber",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "58d6304f30b7230acc686d49d9e3b4d2cc0020818527bdd6d80ab499c4caa80c"
+    "sha256": "3e0965ba80fa56b6de993b5a1ac0954cb551227d92e07d7942ce339e879ccdf2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a54936dcd0a0bdb47dac567cc91579074be337c024c3d600292c31d533fb6ba6",
+      "sha256": "89a0d25f1f81c30f789ce4bc8d88f05e8d31b6ac267c18b0ae8fcb3f887091a7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "schaber",
         "displayName": "Schaber",
         "publicBase": "/scenes/schaber/",
-        "distanceAu": 3.1389418599378245,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "af08f93176a1721ee76938e1faefd34df5c8576ed06dc4c4266683eb30321e6c",
+      "sha256": "51e886d827b95ce2fc8f495ff0dde0de12907b0fde224dd35cf62341168ff75f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10836"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "ea0e69a263db99458dc7a9b4e3214a5c0eba1e40472ae713dae7d159fcfaec0e",
       "bytes": 44637,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "af08f93176a1721ee76938e1faefd34df5c8576ed06dc4c4266683eb30321e6c",
+      "sha256": "51e886d827b95ce2fc8f495ff0dde0de12907b0fde224dd35cf62341168ff75f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10011,
+      "bytes": 9732,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/schaber/schaber-elevation-thumbnail.webp",
           "bytes": 6016,
           "sha256": "f7920417be1bea182053a1aed5ef3ead0c0a7c5236db534ebfa7044350d4365f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/schaber/schaber-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/schaber/schaber-elevation-surface@2x.webp",
           "bytes": 351218,
           "sha256": "6be25fdf1568c6712419b0a36db9ef3f4177018fb5068029343a671ecdaed0dc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/schaber/schaber-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/schaber/schaber-shape-surface@2x.webp",
           "bytes": 225174,
           "sha256": "5aae324377d2bac7b642ef9f2acb50b9bc9792f3ddee227bfc3eefbdc4546ab0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7314,
-          "sha256": "34995f2e6249266d3fe37558061391e40cd648cca9b2b805faec5835a13dabb8",
+          "bytes": 7195,
+          "sha256": "f73eee1ea91ee82216b4b5ccb730058fcf7d91541e304ed4a337cc8d3255e950",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "schaber",
+    "materialSha256": "c8e65221d8794e15ce922c6eac1ebc09488645295f6b4563d0dabdabf4f0cd4d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

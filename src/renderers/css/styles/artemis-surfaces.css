@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="artemis"])[data-lod="billboard"] .artemis-scene, .planet-stage:where([data-object-id="artemis"])[data-lod="marker"] .artemis-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="artemis"])[data-lod="marker"] .artemis-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="artemis"]).artemis-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

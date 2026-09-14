@@ -8,9 +8,7 @@ export const browserProfile = createObjectBrowserProfile({
     preparedAssetPairs: Object.freeze([
       Object.freeze({ one: "/scenes/callisto/callisto-normal.webp", two: "/scenes/callisto/callisto-normal@2x.webp" }),
       Object.freeze({ one: "/scenes/callisto/callisto-poles-normal.webp", two: "/scenes/callisto/callisto-poles-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/callisto/callisto-starfield-front.webp", two: "/scenes/callisto/callisto-starfield-front@2x.webp" }),
-      Object.freeze({ one: "/scenes/callisto/callisto-directional-sun.webp", two: "/scenes/callisto/callisto-directional-sun@2x.webp" }),
-    ]),
+      ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "enhanced",

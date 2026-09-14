@@ -23,7 +23,7 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
       resolve(root, "NOTICE.md"),
       resolve(root, "source", "manifest.json"),
       resolve(root, "runtime-assets.json"),
-      ...(authored ? [resolve(root, 'object.json'), resolve(root, 'prepared/runtime.refs.json'),
+      ...(authored ? [resolve(root, 'object.json'), resolve(root, 'prepared/runtime.json'),
         resolve(root, 'prepared/content.json'), resolve(root, 'text.json'), resolve(root, 'prepared/text.json'),
         resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'browser-profile.mts')] : [
       resolve(root, "runtime", "client.mjs"),

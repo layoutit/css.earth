@@ -4,7 +4,7 @@ Varuna’s rapid rotation and changing brightness reveal an elongated world beyo
 
 ## Sources
 
-The published Jacobi fit has **b/a = 0.60** and **c/b = 0.72**, scaled to the paper’s adopted approximate **700 km volume-equivalent diameter**. The resulting full axes are approximately **1098 × 659 × 474 km**; this is an illustrative scale model. The **Shape model** uses the normal unmapped-surface grid. Shadows and Orbit default off.
+The published Jacobi fit has **b/a = 0.60** and **c/b = 0.72**, scaled to the paper’s adopted approximate **700 km volume-equivalent diameter**. The resulting full axes are approximately **1098 × 659 × 474 km**; this is an illustrative scale model. The **Shape model** uses the normal unmapped-surface grid. Shadows defaults off.
 
 | Source | Used for |
 | --- | --- |

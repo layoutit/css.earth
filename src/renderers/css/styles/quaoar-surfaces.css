@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="quaoar"])[data-lod="billboard"] .quaoar-scene, .planet-stage:where([data-object-id="quaoar"])[data-lod="marker"] .quaoar-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="quaoar"])[data-lod="marker"] .quaoar-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="quaoar"]).quaoar-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

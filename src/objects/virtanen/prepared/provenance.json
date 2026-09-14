@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "virtanen",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "76b124b465ae53acf627980d683493175fc11a0367aca048bc20b5b32228294d"
+    "sha256": "7bdd184eb4eeb8a664a434b5fe0c46aa5db7d72cd20f56e49be0b051af21f265"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a6f33b02b037f0e63ff239f9715e51dcf01d59df2224e79f4e3f8aeb21a745c4",
+      "sha256": "6583b7529ea64ae3d7687b25f52db61ad90f9d7a1cfde8d0f020b3c345bf4119",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "virtanen",
         "displayName": "Virtanen",
         "publicBase": "/scenes/virtanen/",
-        "distanceAu": 2.221835773585211,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "391654333daeac940692ce0a85c8f9406808ab6bcc33135fd72b40259deac8b5",
+      "sha256": "1b58105d05ec0a591304b5ebf9d99e2e2e71e8918fc424a0b3bc01ec89e6cfa5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1175"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "1f1b9833f39a6e6c348f2023554a2defac86b47531a8c3a0ac64b4b0bf562983",
       "bytes": 81898,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "391654333daeac940692ce0a85c8f9406808ab6bcc33135fd72b40259deac8b5",
+      "sha256": "1b58105d05ec0a591304b5ebf9d99e2e2e71e8918fc424a0b3bc01ec89e6cfa5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8836,
+      "bytes": 8557,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/virtanen/virtanen-elevation-thumbnail.webp",
           "bytes": 5216,
           "sha256": "c336d1574d7d65e1c33d68f3747c50ecd2419eacab197beb646b63e0b861721e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/virtanen/virtanen-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/virtanen/virtanen-elevation-surface@2x.webp",
           "bytes": 281794,
           "sha256": "bab552d8584fcfd5bdf833f91ca8d6ac573025fa7eacc25532a8678a3fcd9b3f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/virtanen/virtanen-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/virtanen/virtanen-shape-surface@2x.webp",
           "bytes": 204690,
           "sha256": "41f0b4e7a387e1c8d09db3fc49f19b9cc2a939737163e78d241d400d0a7c165e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6147,
-          "sha256": "ca833b9742b6d1e0871e689b8ccf95b34f0881ec84e0c4baae08fe135c1c67c4",
+          "bytes": 6028,
+          "sha256": "2d7aec3ac477b4ac2e3397fa5e38038e297282e91feb0528a4e16f97184e1df3",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "virtanen",
+    "materialSha256": "fd50bd43c987eae239a76671bc84c4e72d4c35f922839aac000892b04ec163ed",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "chariklo",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "53df7af7dbaea072b4b4d1136a01a1dcee8e6d4aa9108ede727ce4af4c5c2801"
+    "sha256": "8358dfa9bea533364075fb33e3f607c6b9bcc6431f71a072754ebcade0e4acc7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d8c62ed0f5d34661c9621e71609d304c1a6e09a49b2e898e25fce48f9dce1b3f",
+      "sha256": "ad70fadd1a15a701d71adb582909b9fecf0928e6d64aae1f2933d6f7f7a095e3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "chariklo",
         "displayName": "Chariklo",
         "publicBase": "/scenes/chariklo/",
-        "distanceAu": 15.733429335695405,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,13 +96,7 @@
           "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. The ICRS ring-plane normal is RA 151.03° ± 0.14°, Dec +41.81° ± 0.07°. The body spin axis is assumed to share that normal, as in the published shape fit. The direction of angular momentum is unknown; the positive-declination pole is the paper's arbitrary choice. The photometric period is an approximate spin rate, not a precise sidereal rotational ephemeris. The displayed longitude origin and rotational phase are arbitrary."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         },
         "rings": {
           "textureSize": 2048,
@@ -133,7 +126,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e1aa07bdf5d512a54c576a01ee3bf3325003f8a32439588012d77483e27cafc6",
+      "sha256": "9af454bf25063184e29f52182b36bee777ba42afc281a5e3754ae695ab2c1442",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -211,12 +204,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -239,12 +226,6 @@
             "role": "facts",
             "description": "Published model and interpretation",
             "href": "https://arxiv.org/abs/2510.06366"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           },
           {
             "label": "Ring measurements",
@@ -306,7 +287,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -341,7 +322,7 @@
       "sha256": "401f0eb94890a9eaa56fa7b04e1cd7c749b294e2ae14bf589c006948b74ef2ee",
       "bytes": 64667,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -358,10 +339,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e1aa07bdf5d512a54c576a01ee3bf3325003f8a32439588012d77483e27cafc6",
-      "bytes": 4548,
+      "sha256": "9af454bf25063184e29f52182b36bee777ba42afc281a5e3754ae695ab2c1442",
+      "bytes": 4268,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -398,13 +379,13 @@
           "url": "/scenes/chariklo/chariklo-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/chariklo/chariklo-model-surface@2x.webp",
           "bytes": 52652,
           "sha256": "5099a3bddbb7e701fa6e5b5b0881733d3f5c426dd8660ae5fe4d3603aa6f72c8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -440,8 +421,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5933,
-          "sha256": "6406d8dc5b1115ef257cd7636555bd97ca1a945d92deffcaf40ddc6c7cb4f5e7",
+          "bytes": 5814,
+          "sha256": "cd9a33c120239e793a83794fb8cf6a640034f0b980d5e083fd4a0cd4b6205356",
           "verification": "bytes-verified"
         }
       ],
@@ -476,5 +457,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "chariklo",
+    "materialSha256": "680e0236096b532bc07da841a5adde9a68116cc3158ec1387a1f71f37cef3e04",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

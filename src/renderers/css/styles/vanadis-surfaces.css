@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="vanadis"])[data-lod="billboard"] .vanadis-scene, .planet-stage:where([data-object-id="vanadis"])[data-lod="marker"] .vanadis-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="vanadis"])[data-lod="marker"] .vanadis-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="vanadis"]).vanadis-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

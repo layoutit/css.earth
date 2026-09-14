@@ -65,33 +65,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/umbriel/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -197,33 +170,6 @@
       }
     },
     {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 850,
-      "expectedSha256": "37126fbcd137b8e7f2838d175c51dfe8cd0dcef0b716645b1893140a451084b2",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/umbriel/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
-          }
-        ]
-      }
-    },
-    {
       "id": "umbriel-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 3447,
@@ -253,8 +199,8 @@
     {
       "id": "umbriel-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1646,
-      "expectedSha256": "31481c1a6bcba32d86352e14f5cd13e0fd8d7388f0acbe13e2b509a7616eb2f9",
+      "expectedBytes": 308,
+      "expectedSha256": "e78a350aececb430fa3c9be9f212f292e7b17eec8796622bbe95d9370d1c1026",
       "origin": "Repository-authored Umbriel solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -312,8 +258,8 @@
     {
       "id": "umbriel-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 224,
-      "expectedSha256": "aa611e5d6a0e5a47fac3f0065de863b0ca343c18d0521bd223b853bab1fd9e7b",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Umbriel celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -368,8 +314,8 @@
     {
       "id": "umbriel-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1032,
-      "expectedSha256": "831114299ba525bd094243d6d4d2d8a615f7d315e0eabfb10260f22211666b19",
+      "expectedBytes": 848,
+      "expectedSha256": "6c3f6a3bb7b9623e48e6d3b3528a7eb80749081fe963847dcacbd67902014d85",
       "origin": "Repository-authored Umbriel acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -387,8 +333,8 @@
     {
       "id": "umbriel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7536,
-      "expectedSha256": "8514d2b7599f63288f07ad7e4f5f587defa282096886b9e74ee4f414c2eef18c",
+      "expectedBytes": 7257,
+      "expectedSha256": "3c804e51ba01a36e34d1d93490ddcae497ee3ee1d2844e2bfe79cb65ce0cb714",
       "origin": "Repository-authored Umbriel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -410,16 +356,6 @@
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
       "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "observations/aaReadMe_uranian_MAP_DEM.txt",

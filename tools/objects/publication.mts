@@ -1,10 +1,9 @@
 import type { RuntimeManifest } from './operations.ts';
-import { link, mkdir, readFile, readdir } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '../source-values.mts';
 import { writePreparedSet, type PreparedOutput } from '../write-prepared-set.mts';
-import { listSharedBankFiles, readSharedBank, sharedBankPath } from '../../src/platform/prepared-shared-banks.mts';
 
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const safe = (name: unknown): name is string => typeof name === 'string' && /^[a-z0-9][a-z0-9@._-]*$/u.test(name);
@@ -69,14 +68,5 @@ export async function publishPreparedObject({ id, stage, objectDirectory, public
     { path: resolve(objectDirectory, 'runtime-assets.json'), source: resolve(data, 'runtime-assets.json') },
     { path: resolve(objectDirectory, 'object.json'), source: resolve(stage, 'object.json') });
   JSON.parse(await readFile(resolve(stage, 'object.json'), 'utf8'));
-  // Shared hash banks are append-only dependencies, not this object's rollback
-  // targets: another concurrently prepared object may adopt the same bank.
-  for (const { reference, path } of await listSharedBankFiles(stage)) {
-    await readSharedBank(stage, reference);
-    const destination = sharedBankPath(projectRoot, reference);
-    await mkdir(resolve(destination, '..'), { recursive: true });
-    await link(path, destination).catch(error => { if (!hasErrorCode(error, 'EEXIST')) throw error; });
-    await readSharedBank(projectRoot, reference);
-  }
   await writePreparedSet(writes);
 }

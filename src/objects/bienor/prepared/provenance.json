@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "bienor",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0c4c29c4b6b989f3b8cfecc0573105b6219b1dfaa88b1f8115babb8757b7d288"
+    "sha256": "2ec4c9a7f38d42f9ddca50c7da9f851f3dcccc1f410528aaba0932052de9ab01"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ff44f9f09561cc77caf7ac409419a78dce8a001fc559a625ce4fbd531c5c3200",
+      "sha256": "67d5adc0dae30fc8f9275941ae769faca5dd2f6a436117c013fefe9d6454584e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "bienor",
         "displayName": "Bienor",
         "publicBase": "/scenes/bienor/",
-        "distanceAu": 16.60224445563277,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "556674b36f484a1c8a3fd7e0b5597dc6e36fb58418bcf9b64284fb9d386ad6c0",
+      "sha256": "c650f399beb78ac6b3161bf12dff820f9a22f00ed18ed0070f2bf313a721d02a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -172,12 +165,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -194,12 +181,6 @@
             "role": "facts",
             "description": "Published model and interpretation",
             "href": "https://arxiv.org/abs/2405.17235"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -255,7 +236,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -290,7 +271,7 @@
       "sha256": "288d27cb043a596db0671f419813bbe461d5754ac859cebd8cdaf76a102fa4f1",
       "bytes": 62513,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -307,10 +288,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "556674b36f484a1c8a3fd7e0b5597dc6e36fb58418bcf9b64284fb9d386ad6c0",
-      "bytes": 3626,
+      "sha256": "c650f399beb78ac6b3161bf12dff820f9a22f00ed18ed0070f2bf313a721d02a",
+      "bytes": 3346,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -347,13 +328,13 @@
           "url": "/scenes/bienor/bienor-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bienor/bienor-model-surface@2x.webp",
           "bytes": 47584,
           "sha256": "7e5c33efea8377b880d68649fa69631a431d3f3963bfa1973867dfce4b8f2f70",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -389,8 +370,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4745,
-          "sha256": "8adec434e1765c633c973145f2bd3264bc1dda015a044d7bb163da0e1b404106",
+          "bytes": 4626,
+          "sha256": "05d36f0f1faa0eea733f8a1674cacf3570c1c1e634f733ce75c54882d6b2ff07",
           "verification": "bytes-verified"
         }
       ],
@@ -425,5 +406,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "bienor",
+    "materialSha256": "bd552c730addc674068b80363acf5b36a05b022f65832be20d9e67af156a6164",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

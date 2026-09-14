@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="juewa"])[data-lod="billboard"] .juewa-scene, .planet-stage:where([data-object-id="juewa"])[data-lod="marker"] .juewa-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="juewa"])[data-lod="marker"] .juewa-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="juewa"]).juewa-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

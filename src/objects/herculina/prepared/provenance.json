@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "herculina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "50bbf66cbb0771866a324298a0c83b4d8296384e07c742a1c39e33466bef15a2"
+    "sha256": "8788b18ba5f5ed606897f78f71503e0d1b88128254730cf10f0221e12b502527"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6ef43620bef4cab71d115e9cf88e08d6062981d87477869af4267b856bb5e558",
+      "sha256": "0e08bdb63df3a3faa0ff1dc3d53305ace24c05847f2f86ab037aa8e36e1a4034",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "herculina",
         "displayName": "Herculina",
         "publicBase": "/scenes/herculina/",
-        "distanceAu": 2.769403168493778,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 1814 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3e8e14650436e1c1a8d8ae5deee071ea49a6a3f673a4d83250da93ea1c37cd16",
+      "sha256": "2b75397cd734f2bf687a7d2ffc6064d2016b8b405a50a1b46832893d008671a3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1814"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "2781684248c883af83718e222c487fa0b6b758a9d6277c2e42631a58d327a5e6",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3e8e14650436e1c1a8d8ae5deee071ea49a6a3f673a4d83250da93ea1c37cd16",
-      "bytes": 8154,
+      "sha256": "2b75397cd734f2bf687a7d2ffc6064d2016b8b405a50a1b46832893d008671a3",
+      "bytes": 7875,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -391,19 +372,19 @@
           "url": "/scenes/herculina/herculina-elevation-thumbnail.webp",
           "bytes": 5224,
           "sha256": "7275d726dfd95bdfcba7e0211e77588184839a17b0e6157111532af8d9e0da5d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/herculina/herculina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/herculina/herculina-elevation-surface@2x.webp",
           "bytes": 280504,
           "sha256": "9073a63770d47ad61c5c306d8bc44d0bacd71be6aa6e216f921f7e9dbe4a5517",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -441,13 +422,13 @@
           "url": "/scenes/herculina/herculina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/herculina/herculina-shape-surface@2x.webp",
           "bytes": 195448,
           "sha256": "76ac26aa9c4932d84962f75aad3601321a9a0a0cd9c3291645805917eb6cea91",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -478,8 +459,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5949,
-          "sha256": "a766e77e89cfe407adf9a0d01780edc4220effc8e2310758b354ba52b985881e",
+          "bytes": 5830,
+          "sha256": "0219827410f56b2f1c43afd3db82d8afcc78b8e42e7511eea451e6c57d7e21b3",
           "verification": "bytes-verified"
         }
       ],
@@ -539,5 +520,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "herculina",
+    "materialSha256": "de1b292a00340e123964226dbd8a842cfe3049620b4b302bdadc2bc1d4d2db51",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

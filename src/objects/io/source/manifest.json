@@ -141,33 +141,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Run node src/objects/io/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -190,34 +163,6 @@
             "catalogueId": "inter-9221beed3",
             "role": "method",
             "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
-          }
-        ]
-      }
-    },
-    {
-      "path": "system/jupiter-hubble.png",
-      "expectedBytes": 1166501,
-      "expectedSha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
-      "origin": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
-      "credit": "NASA, ESA, STScI, and Amy Simon",
-      "license": "NASA media usage guidelines and credited partner rights",
-      "id": "jupiter-hubble-parent",
-      "bodyId": "jupiter",
-      "consumers": [
-        "parent-marker"
-      ],
-      "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
-      ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
-      "redistribution": "Credited prepared observational image; source binary excluded from Git.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hubble-jupiter-2024-01-05",
-            "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
           }
         ]
       }
@@ -987,33 +932,6 @@
       }
     },
     {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 845,
-      "expectedSha256": "69c384abcd20037adbb5ef192c070836650f36c400b61a0d0ea87976cccad11e",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
-          }
-        ]
-      }
-    },
-    {
       "id": "io-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 1189,
@@ -1043,8 +961,8 @@
     {
       "id": "io-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1570,
-      "expectedSha256": "49d2308bd4d28ae21c042d35693552c2625a3ff310624a1cf4e55dae87669335",
+      "expectedBytes": 267,
+      "expectedSha256": "ce0c8a947c0f34cd0136b10a61ecbf555f924837b0658c474dcc52e8226719c2",
       "origin": "Repository-authored Io solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1102,8 +1020,8 @@
     {
       "id": "io-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 219,
-      "expectedSha256": "6966d1cb5f5bb4a7dbddec153bf0ef7feb763647e5bc0a953709358c8018f225",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Io celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1158,8 +1076,8 @@
     {
       "id": "io-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3659,
-      "expectedSha256": "2e25ed6dc5192919b35ecb97436edea3e2c83439608a2d90ec6ac2712ef00976",
+      "expectedBytes": 3220,
+      "expectedSha256": "14b8655d0acafc7c0801a3f7885b44989579f48b7d39cefea6c17ffa81c2a35d",
       "origin": "Repository-authored Io acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1177,8 +1095,8 @@
     {
       "id": "io-object-content",
       "path": "content/object.json",
-      "expectedBytes": 14499,
-      "expectedSha256": "e785f32c1c92fd76b190882b26294d7f77495ae099a61a9c08f7ed8f47c77337",
+      "expectedBytes": 14220,
+      "expectedSha256": "6c2cf6fb9ef6514971297271fd03e69aef9502a41bd08c38750231ef3c42f6db",
       "origin": "Repository-authored Io object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1196,18 +1114,6 @@
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2162,
-      "expectedSha256": "10739160798e9b6be2756a2320ffa2102b0cf3557518866c61e58fab27fcc239",
-      "purpose": "Shared astrometric sky source and licensing."
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 592,
-      "expectedSha256": "0c4fb5173f68c690a47956dfff9674c1eb85a4ed39e1ad0766bfd22c498437e4",
-      "purpose": "Shared astrometric sky source and licensing."
-    },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
@@ -1589,7 +1495,7 @@
       "path": "muse/INTERPRETATION.md",
       "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
       "expectedBytes": 3857,
-      "expectedSha256": "6c3a4c61987547a8ba3523ab046353f640b1a343595ab1611345b0ae96d60b1a"
+      "expectedSha256": "b9b6c93400a3a29fc36ae858eac736618301f1e094278519ef086027b5f5ad25"
     },
     {
       "path": "muse/io-recipe.json",

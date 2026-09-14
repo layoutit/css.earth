@@ -1,4 +1,4 @@
-import type { BodyProjection } from '../solar-system/heliocentric-view.js';
+import type { BodyProjection } from '../solar-system/types.js';
 
 type Bounds = Pick<DOMRect, 'x' | 'y' | 'width' | 'height'>;
 export interface PhysicalBodyHit { focalPixels: number; principalOffsetPixels: readonly [number, number]; bodyRadiusUnits: number; }

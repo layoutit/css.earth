@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "egeria",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "de209bc15e7540507d6771d949e69c58700b8eb3883d5d0066884175813fbcb6"
+    "sha256": "3815cc25b70c860196df73586b865560710f4e18f94ff8a175e395c269a4e178"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b9c065d48bb8066211735e7fd4810287b9d4c3aebbba6a0a5c384449c65c876a",
+      "sha256": "438f0534fd1fe24276eaf9ca09d3655e72a0e08d679f223e6d6c2bc15457554c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "egeria",
         "displayName": "Egeria",
         "publicBase": "/scenes/egeria/",
-        "distanceAu": 2.5764780745110407,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4cbaf4f6b8faf46c488e4f962d70de69d62ee4d6981a8c52170fb82c3fd4c79f",
+      "sha256": "c17c84da8dd71a7393f2721b6a4b225b6cecf3499fb289e409b7243f115c6a3e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "4b3f0fd7817054f32c8d8703149bf81501cdcb41257ce232b3a59d9436864392",
       "bytes": 468859,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4cbaf4f6b8faf46c488e4f962d70de69d62ee4d6981a8c52170fb82c3fd4c79f",
-      "bytes": 7388,
+      "sha256": "c17c84da8dd71a7393f2721b6a4b225b6cecf3499fb289e409b7243f115c6a3e",
+      "bytes": 7109,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/egeria/egeria-elevation-thumbnail.webp",
           "bytes": 5602,
           "sha256": "5391f248ca1b72b1ab0e59b491c886291c18aa5bc5b7e27d3c08e9a5f0fd1f91",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/egeria/egeria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/egeria/egeria-elevation-surface@2x.webp",
           "bytes": 324912,
           "sha256": "e332a2c244cea7840d7808ffe7c35f8caa6cd23d33e7cbf34ffef350f15a065d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -452,13 +433,13 @@
           "url": "/scenes/egeria/egeria-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/egeria/egeria-shape-surface@2x.webp",
           "bytes": 221916,
           "sha256": "7005e3d2255f0c4395c16bbad24925399f7de242a1a2cebb7ec4ea1a4f65213e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -489,8 +470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5224,
-          "sha256": "869b6820057b5984ef87259836c8b53c99d19655c3495cf008422d412a8ee76c",
+          "bytes": 5105,
+          "sha256": "f90d64d3fa767b6e8e5311e288a83afb72a193573a317b942cd830f9f1dcee13",
           "verification": "bytes-verified"
         }
       ],
@@ -550,5 +531,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "egeria",
+    "materialSha256": "a03ba5b049a93d8e846fd00f0dc2b9d23bd9180c2c612f0eb482ca910c864d81",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

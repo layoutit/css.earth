@@ -10,10 +10,6 @@ synchronized resources under that same pinned OpenSpace license and source
 commit. Titan's prepared surface uses the Cassini ISS global mosaic attributed
 by OpenSpace to USGS and NASA/PDS. Hyperion uses no surface image.
 
-The prepared star field derives from the HYG Database v4.1 by David Nash /
-Astronexus under CC BY-SA 4.0. The pinned catalog commit, selected star facts,
-and license text are retained in `source/stars/`.
-
 The ultraviolet and methane observation inputs are Hubble OPAL products from
 NASA, ESA, and the OPAL team. The thermal interpretation and atmospheric
 charts use declared Cassini and NASA Planetary Spectrum Generator authorities.
