@@ -46,6 +46,20 @@ jobs:
           pnpm build:renderer
           pnpm build:preparation
           pnpm prepare:object-json
+      - name: Test unavailable prepared packages and focus controls
+        run: >-
+          node --test tools/prepare-context-availability.test.mts
+          site/test/prepared-context-navigation.test.mts
+          site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts
+      - name: Test authored preparation publication and cache
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          node --test --test-concurrency=1 \
+            tests/objects/prepared-finalization.test.mts \
+            tests/objects/publication.test.mts \
+            tools/write-prepared-set.test.mts \
+            tools/preparation-cache.test.mts \
+            tools/prepare-planets.test.mts
       - name: Restore environment images and prepare minimap
         run: |
           pnpm prepare:environment-images

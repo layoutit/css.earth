@@ -19,6 +19,7 @@ import clusterCatalog from '../src/objects/galaxy-clusters/prepared/catalogue.js
 import clusterPresentation from '../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
+import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 
 const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
@@ -78,7 +79,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)
       .map(([id, sprite]) => [id, { ...contextMarkerSprite(sprite),
         minimumDiameterPixels: asteroidIds.includes(id) ? 2 : 2.4 }]));
-    const volumeLenses = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'volume-lens-bank')
+    const volumeLenses = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available)
       .map(async descriptor => {
         const set = resourceSet(descriptor.id);
         return { payload: await loadPreparedVolumeLenses(set.descriptor, set.transport),
@@ -127,6 +128,7 @@ export function createApplicationWorldContext() {
         const layer = prepared.mount(stage, { presentationHost, requestPublication: () => refreshWorld(), onSelectGalaxy: object => { void contextNavigation?.select(object); } });
         pendingLayer = layer;
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
+          unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
           sources: [...galaxyCatalog.sources, ...clusterCatalog.sources, ...prepared.nebulaSources], windowTarget });
         layer.setHiddenOrbits(hiddenOrbitIds);
         const framePlanner = prepared.createFramePlanner();

@@ -18,6 +18,8 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
   const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-focus-source]')];
   const events = new AbortController();
+  const unavailable = root.querySelector<HTMLElement>('[data-focus-unavailable]');
+  const unavailableIds = new Set(unavailable?.dataset.unavailableObjects?.split(' ') ?? []);
   let currentPresentation: PreparedFocusPresentation | null = null;
   const datasetTab = root.querySelector<HTMLElement>('[data-information-tab="dataset"]');
   let currentRecordId: string | undefined;
@@ -61,6 +63,11 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   const write = (name: string, value: string) => { if (fields[name].textContent !== value) fields[name].textContent = value; };
   return { set(record, sources = [], presentation = null) {
     setPresentation(record, presentation);
+    if (unavailable) {
+      const missing = record && !isPreparedCluster(record) && record.detailedObjectId && unavailableIds.has(record.detailedObjectId);
+      unavailable.hidden = !missing;
+      unavailable.textContent = missing ? `The 3D view of ${record.name} is unavailable in this installation. Catalogue facts remain available.` : '';
+    }
     if (!record) { root.hidden = true; return; }
     root.dataset.preparedFocusId = record.id;
     write('name', record.name);
