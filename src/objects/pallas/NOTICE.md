@@ -13,3 +13,11 @@ release. Crater names and planetocentric coordinates are from Marsset et al.
 Supplementary Table 1, https://doi.org/10.1038/s41550-019-1007-5. The annotated
 native-pixel comparison is a cssEarth diagnostic, not a reproduction of the
 paper's illustrative sketch or an approved photographic surface.
+
+The ten-frame sequence uses the LAM release's 2017-10-11 05:04–05:13 UTC
+observations from both ZIMPOL cameras. The image-identity comparison includes
+the 05:08:49 photographic panel from Vernazza et al. (2021), Figure B.2,
+CC-BY-4.0, alongside the corresponding released camera images. cssEarth cropped
+the panel, aligned and brightness-matched the native images for comparison,
+and displayed an amplified absolute difference. Those display operations do
+not constitute camera registration or reflectance calibration.

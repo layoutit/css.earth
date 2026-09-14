@@ -48,6 +48,30 @@ native-image identifications; cyan marks projected published coordinates. Both
 panels use the same native pixels, linear stretch and nearest-neighbour enlargement.
 They are source-space diagnostics, not app captures or qualified surface imagery.
 
+The [full-sequence follow-up](evidence/sequence-orientation.json) inspected all
+ten October 11 photographs: five exposures in both ZIMPOL cameras, following the
+sequence check described by Marsset et al. The prominent lower-right structure
+persists throughout the sequence. Its persistence does not establish a named
+crater's coordinates; the earlier tentative picks remain unresolved.
+
+![All ten native October 11 SPHERE photographs](evidence/oct11-sequence.png)
+
+The 05:08:49 **Camera 2** frame best matches the photographic panel in Vernazza
+et al. (2021), Figure B.2. Its correlation in the two withheld interior quadrants
+is 0.9986, compared with 0.9909 for Camera 1. The image-to-paper fit needs only
+−0.031° rotation. This identifies a better source/reference pairing for the next
+registration check; it is not a measurement of 3D placement accuracy.
+
+![Published photographic panel compared with the two released cameras](evidence/published-photo-identity.png)
+
+Frozen model projections also reproduce the broad appearance of the published
+models, but their pole-marker directions differ by 1.44–2.41° across three
+matching epochs. Using the scattering law in the published ADAM code, instead
+of the original diagnostic's Lambert shading, improves the model-image
+comparison without changing the cameras. The OASIS renderer settings are not
+reproduced exactly. These findings narrow the investigation; they do not resolve
+the named-crater correspondence or qualify a photographic surface.
+
 ## Known problems
 
 Shape uses the shared no-imagery grid. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 255.5 km reference sphere, with a -60 to 40 km legend. This includes global shape, not height above a gravitational equipotential.
