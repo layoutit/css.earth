@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - **Shape model** uses [Karkoschka (2003)](https://doi.org/10.1016/S0019-1035(03)00002-2) published semi-axes of **54 × 50 × 26 km** (full dimensions 108 × 100 × 52 km).
 
 - The reference radius is the conventional 40 km JPL/PCK value; it does not replace the measured axes.
@@ -33,17 +35,7 @@ Its volume-equivalent radius is about 41.25 km.
 
 There are no invented craters, colors, elevation or atmospheric layers. Flood and directional Shadows use the existing shared preparation and controls. Shape alone does not establish an elevation dataset.
 
-## Candidate survey
-
-| Source | Decision and evidence |
-| --- | --- |
-| [Karkoschka (2003), Icarus 162, 400–407](https://doi.org/10.1016/S0019-1035(03)00002-2) | Included measured ellipsoid axes. The study uses barely resolved Voyager images to constrain overall shape; this does not yield resolved terrain. The publisher’s abstract and article preview supply the dimensions and observation limitations. |
-| [PDS Voyager ISS / OPUS](https://pds-rings.seti.org/voyager/iss/), C1133759 and C1133806 | Downloaded and decoded original calibrated GEOMED products; inspected both. Narrow-angle clear images have about 24.07 and 24.05 km/native pixel and 61.44-second exposures. Thalassa’s major axis spans at most 4.5 native pixels before projection; visible features are motion trails. No usable registered surface appearance, so excluded as a photographic lens. |
-| OPUS C1138527 and adjacent wide-angle sequence | Nominal best sampling is 20.19 km/native pixel, only about five pixels across the longest axis, with only 210 × 89 usable image samples recorded. Inspected original GEOMED; no resolved terrain. Excluded as a photographic lens. |
-| [NASA overview image](https://science.nasa.gov/neptune/moons/thalassa/) | Discovery-context view at 5.9 million km with streaks caused by orbital motion. Useful history, not a surface texture. |
-| [Stooke PDS shape release](https://sbn.psi.edu/pds/resource/stkshape.html) / USGS mapping search | The released Neptune grids are for Larissa and Proteus, not Thalassa. No detailed Thalassa terrain or registered geological/elevation map was qualified. |
-| [HST astrometry and size study](https://www.nature.com/articles/s41586-019-0909-9) | Unresolved moon detections constrain orbit and brightness, not registered surface texels. The paper identifies the synchronous long-axis/short-axis convention used here. |
-| [JWST inner-moon spectroscopy](https://pmc.ncbi.nlm.nih.gov/articles/PMC13418922/) | A relevant recent composition candidate, but disk-integrated spectroscopy is not a geographically resolved Thalassa surface lens. Not included as surface imagery. No claim that Thalassa has no spectral observations. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 The OPUS query uses `surfacegeometrytargetlist=Thalassa`, rather than intended-target name: Voyager did not target Thalassa for close-up images. Recorded sensor sampling refers to original pixels; the 1,000 × 1,000 GEOMED output is geometrically resampled and adds no spatial information.
 

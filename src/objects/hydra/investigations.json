@@ -37,6 +37,76 @@
           "pr": 184
         }
       ]
+    },
+    {
+      "id": "porter-2021-shape",
+      "subject": "Porter 2021 released shape model",
+      "status": "included",
+      "finding": "The released 26,246-vertex STL supplies geometry at kilometres per source unit. Northern shape is better observed; southern radii and the short axis remain poorly constrained. The STL-to-IAU frame binding is not explicitly declared.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hydra/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hydra/source/manifest.json",
+        "https://doi.org/10.6084/m9.figshare.12779975.v1"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pck-v008-camera-input",
+      "subject": "New Horizons nh_pcnh_010.tpc active V008 orientation",
+      "status": "included",
+      "finding": "The recovered PDS kernel supplies the active V008-derived orientation for the diagnostic image projection at target emission time. Commented V009 alternatives are explicitly unverified and are not selected; recovered inputs do not qualify photographic registration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hydra/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hydra/source/geometry/nh_pcnh_010.tpc",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hydra/source/preparation/photography.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "mvic-leisa-composition",
+      "subject": "New Horizons small-moon MVIC/LEISA composition products",
+      "status": "deferred",
+      "finding": "The retained source review treats these products as scientific context; it did not qualify a spatial composition map on the released 2021 mesh. This does not establish that observations are absent.",
+      "revisitWhen": "A target-specific composition product has interpretable calibration, coordinates and qualified transfer onto this source mesh.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hydra/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hydra/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "porter-2025-release",
+      "subject": "Porter et al. 2025 updated model and albedo work",
+      "status": "unresolved",
+      "finding": "The retained review located the 2025 work but no downloadable updated mesh, albedo raster or matched camera solution usable for the 2021 STL. This is the recorded search outcome, not a renewed claim that no release exists.",
+      "revisitWhen": "The numerical model, albedo or camera release is located with its coordinate and version bindings.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/hydra/README.md",
+        "https://www.hou.usra.edu/meetings/plutosystem2025/pdf/7035.pdf",
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
     }
   ]
 }

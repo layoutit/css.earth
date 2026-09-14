@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - [French et al. (2024), Table 3](https://arxiv.org/abs/2401.04634) reproduces the Voyager dimensions from [Karkoschka (2001), Table V](https://doi.org/10.1006/icar.2001.6597). The companion [HST study, Table IV](https://doi.org/10.1006/icar.2001.6596) provides the adopted prolate dimensions.
 
 - Semiaxes are 36 × 36 × 36 km.
@@ -35,20 +37,9 @@ The full papers remain research inputs outside the package; factual measurements
 
 Physical scale uses the derived volume-equivalent radius 35.99999999999999 km, preserving the stated axes.
 
-## Source survey and lens decisions
+## Investigation ledger
 
-- **Voyager ISS photographic products:** [PDS archive](https://pds-rings.seti.org/voyager/iss/), surveyed in OPUS by Rosalind center sampling. Center-resolution metadata alone does not qualify a surface. A separate non-null surface-intersection query returns 1 observations, with best listed sampling 231.75687 km/pixel.
-
-- **Published shape/photometry:** included as the measured model above. Voyager point-spread-function fitting and HST integrated photometry constrain dimensions and elongation; they do not provide new surface texels.
-
-- **Keck near-infrared photometry:** [2023 primary study](https://www.sciencedirect.com/science/article/pii/S0019103522004237), integrated photometry rather than a spatial spectral map. Excluded as a duplicate surface lens.
-
-- **JWST/HST system images:** unresolved moon detections do not establish cartographic coverage. No texture is derived from them.
-
-- **DEM/geology/composition maps:** no qualified spatial product was located in the inspected mission releases and cited studies. This is the survey outcome, not a claim that no other data exist.
-
-No terrain, rings or atmosphere are invented. Both shared Flood and Shadows controls remain available.
-
+The source-survey dispositions and evidence are recorded in the [investigation ledger](investigations.json).
 ## Orientation and reproducibility
 
 NASA/NAIF PCK00011 BODY713 supplies the pole and prime meridian. SPICE evaluates its full periodic terms at JD 2461286.5 TT: RA 257.59660178354534°, Dec -15.137261080008503°, W 120.86514403713575°. Obsolete spherical PCK radii are not used.

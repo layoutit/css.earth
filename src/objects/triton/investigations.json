@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "triton",
+  "entries": [
+    {
+      "id": "bland-2023-clear",
+      "subject": "Bland / USGS 2023 processed Voyager CLEAR frames",
+      "status": "included",
+      "finding": "The CLEAR frames in fully_processed.zip supply Monochrome from calibrated float I/F at about 335–1633 m/pixel. Native grids and ISIS metadata control registration. Per-frame Lunar-Lambert correction and overlap exposure normalization reduce acquisition shading but do not recover calibrated albedo or invert terrain shadows.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/README.md",
+        "https://doi.org/10.5066/P9MGH7FB",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "schenk-2014-color",
+      "subject": "Schenk / LPI 2014 Voyager color mosaic",
+      "status": "included",
+      "finding": "The 14,138 × 7,069 tnmap-cyl-KH.jpg supplies Enhanced color at roughly 600 m/pixel, with variable native color resolution. Orange/green/blue filters approximate natural color with enhanced contrast. The original ±180° map is rolled to east-positive coordinates; black unilluminated northern coverage stays missing.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/README.md",
+        "https://www.lpi.usra.edu/icy_moons/neptune/triton/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "usgs-globalfill",
+      "subject": "USGS GlobalFill derivative",
+      "status": "excluded",
+      "finding": "GlobalFill interpolates over map grid lines. The selected original observations retain missing coverage instead of adopting those interpolated pixels.",
+      "revisitWhen": "A controlled derivative distinguishes measured pixels from filled regions and supplies useful observed coverage beyond the selected originals.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "orthographic-longitude",
+      "subject": "USGS release prose versus embedded orthographic longitude",
+      "status": "included",
+      "finding": "The embedded TIFF grid and original ISIS label specify a 15° east, 18° north orthographic center, while release prose says 15° west. Preparation follows the pixel-owned grid and label, rejects the opposite hemisphere, and preserves ISIS special values as missing.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

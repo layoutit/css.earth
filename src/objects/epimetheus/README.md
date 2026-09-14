@@ -57,7 +57,6 @@ The existing Monochrome and Elevation shadow atlases changed slightly when rebui
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
-
 ## False color preparation
 
 <details>
@@ -111,7 +110,6 @@ The astronomy package already owns the moon's Saturn-relative orbital elements. 
 - Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 - **Not added as duplicate lenses:** individual clear-filter photographs of the same terrain. They contribute to one Monochrome map.
-
 
 - **Facts:** [NASA Epimetheus](https://science.nasa.gov/saturn/moons/epimetheus/) and [JPL physical parameters](https://ssd.jpl.nasa.gov/sats/phys_par/). No substantial atmosphere or cutaway is claimed.
 
