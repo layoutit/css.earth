@@ -71,7 +71,7 @@ test('nebula label and its single-click target sit below the prepared cloud', ()
 
 test('one retained catalogue combines both classes; cluster fades, source-aware focus and aperture follow the same observer', () => {
   const payload = read('local-group/prepared/catalogue.json'), clusters = read('galaxy-clusters/prepared/catalogue.json');
-  const galaxyCount = payload.objects.filter((row: { membership: { group: string } }) => row.membership.group === 'local-group').length;
+  const galaxyCount = payload.objects.filter((row: { membership: { group: string }; detailedObjectId?: string }) => row.membership.group === 'local-group').length;
   const document = new Document(), host = document.createElement(), before = document.createElement(), pickingHost = document.createElement(); host.append(before);
   const picking = screenPicking(pickingHost as unknown as HTMLElement);
   const onSelect = vi.fn();
@@ -89,10 +89,10 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   runtime.select(object.id);
   runtime.publish(pose, viewport, 1, [], 0); document.defaultView.advance(250);
   expect(Number(label.style.opacity)).toBe(0); expect(label.style.pointerEvents).toBe('none');
-  expect(picking.pick(0, -15)).not.toBe(label);
+  expect(picking.pick(0, 15)).not.toBe(label);
   runtime.publish(pose, viewport, 1, [], 1); document.defaultView.advance(350);
-  expect(picking.pick(0, -15)).toBe(label);
-  expect(screenPicking(host as unknown as HTMLElement).pick(0, -15)).toBeNull();
+  expect(picking.pick(0, 15)).toBe(label);
+  expect(screenPicking(host as unknown as HTMLElement).pick(0, 15)).toBeNull();
   expect(Number(label.style.opacity)).toBeCloseTo(.425); expect(Number(aperture.style.opacity)).toBeCloseTo(.1);
   const firstTransform = aperture.style.transform;
   const shifted = { ...pose, pose: { ...pose.pose, positionM: [pose.pose.positionM[0] + object.aperture.comovingRadiusM, ...pose.pose.positionM.slice(1)] as [number,number,number] } };
@@ -100,7 +100,7 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   expect(aperture.style.transform).not.toBe(firstTransform); expect(blockers.length).toBeGreaterThan(0);
   runtime.publish(shifted, viewport, 1, blockers, 1);
   expect(label.style.pointerEvents).toBe('none');
-  expect(picking.pick(-150, -15)).not.toBe(label);
+  expect(picking.pick(-150, 15)).not.toBe(label);
   label.dispatchEvent(new Event('click')); expect(onSelect).not.toHaveBeenCalled();
   document.defaultView.advance(400); expect(Number(label.style.opacity)).toBeGreaterThan(0); expect(Number(label.style.opacity)).toBeLessThan(.425);
   runtime.publish(shifted, viewport, 1, [], 1); document.defaultView.advance(600);
@@ -109,11 +109,11 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   expect(document.count).toBe(nodes);
   runtime.publish({ ...pose, pose: { ...pose.pose, positionM: [object.positionM[0], object.positionM[1], object.positionM[2] - object.aperture.comovingRadiusM * 4] } }, viewport, 1, [], 1);
   document.defaultView.advance(800); expect(Number(label.style.opacity)).toBe(0); expect(Number(aperture.style.opacity)).toBe(0);
-  expect(picking.pick(0, -15)).not.toBe(label);
+  expect(picking.pick(0, 15)).not.toBe(label);
   runtime.publish(pose, viewport, 1, [], 1);
-  expect(picking.pick(0, -15)).toBe(label);
+  expect(picking.pick(0, 15)).toBe(label);
   runtime.destroy(); expect(document.defaultView.frames.size).toBe(0); expect(host.children).toEqual([before]);
-  expect(picking.pick(0, -15)).toBeNull();
+  expect(picking.pick(0, 15)).toBeNull();
 });
 
 test('only labels that show or are still fading out follow the camera', () => {
@@ -140,4 +140,57 @@ test('only labels that show or are still fading out follow the camera', () => {
   runtime.publish(observer(2e21), viewport, 1, cover);
   expect(transforms()).toEqual(fading);
   runtime.destroy();
+});
+
+test('catalogue-only labels remain noninteractive while saved catalogue links still resolve', () => {
+  const payload = read('local-group/prepared/catalogue.json');
+  const unsupported = payload.objects.find((row: {membership:{group:string};detailedObjectId?:string}) => row.membership.group === 'local-group' && !row.detailedObjectId);
+  const supported = payload.objects.find((row: {detailedObjectId?:string}) => row.detailedObjectId);
+  expect(unsupported).toBeTruthy(); expect(supported).toBeTruthy();
+  const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
+  const runtime = mountPreparedGalaxyCatalog({host:host as unknown as HTMLElement, before:before as unknown as HTMLElement,
+    payload, renderedObjectIds:new Set([supported.detailedObjectId])});
+  expect(runtime.resolve(unsupported.id)).toEqual(unsupported);
+  expect(runtime.inspect().labels[unsupported.id]).toBeDefined();
+  expect(runtime.resolve(supported.id)).toEqual(supported);
+  expect(runtime.resolve(supported.detailedObjectId)).toEqual(supported);
+  expect(runtime.inspect().count).toBe(payload.objects.filter((row: {membership:{group:string}}) => row.membership.group === 'local-group').length);
+  const viewport = { focalPixels: 600, principalOffsetPixels: [0,0] as const, widthPixels: 800, heightPixels: 600 };
+  const world = { ...payload.frame, pose: { positionM: [0,0,1e24] as const, orientationXyzw: [0,0,0,1] as const } };
+  runtime.publish(world, viewport, 1); document.defaultView.advance(300);
+  const root = runtime.root as unknown as Element;
+  const dots = root.children.filter(node => node.dataset.galaxyDot && Number(node.style.opacity) > 0);
+  expect(dots.length).toBeGreaterThan(10);
+  expect(Number(root.dataset.visibleLabels)).toBeLessThanOrEqual(12);
+  expect(runtime.inspect().labels[unsupported.id]!.style.pointerEvents).toBe('none');
+  runtime.publish(world, viewport, 0); document.defaultView.advance(600);
+  expect(dots.every(dot => Number(dot.style.opacity) === 0)).toBe(true);
+  runtime.destroy();
+});
+
+test('baked sparse sample shows dots before names without enabling unsupported navigation', () => {
+  const payload = read('local-group/prepared/catalogue.json');
+  const galaxySample = read('local-group/prepared/display-sample.json');
+  const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
+  const onSelect = vi.fn();
+  const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement, before: before as unknown as HTMLElement,
+    payload, galaxySample, onSelect });
+  expect(galaxySample.ids).toHaveLength(48);
+  expect(runtime.inspect().count).toBe(52);
+  const world = { ...payload.frame, pose: { positionM: [0,0,1e24] as const, orientationXyzw: [0,0,0,1] as const } };
+  const viewport = { focalPixels: 600, principalOffsetPixels: [0,0] as const, widthPixels: 800, heightPixels: 600 };
+  runtime.publish(world, viewport, 0, [], 0, 1); document.defaultView.advance(300);
+  const root = runtime.root as unknown as Element;
+  expect(root.children.filter(node => node.dataset.galaxyDot && Number(node.style.opacity) > 0).length).toBeGreaterThan(20);
+  expect(Number(root.dataset.visibleLabels)).toBe(0);
+  runtime.publish(world, viewport, 1, [], 0, 1); document.defaultView.advance(600);
+  expect(Number(root.dataset.visibleLabels)).toBeGreaterThan(0);
+  expect(Number(root.dataset.visibleLabels)).toBeLessThanOrEqual(12);
+  for (const id of galaxySample.ids) {
+    expect(runtime.resolve(id)?.id).toBe(id);
+    expect(runtime.inspect().labels[id]!.dataset.objectNavigate).toBeUndefined();
+    expect(runtime.inspect().labels[id]!.style.cursor).toBe('default');
+    runtime.inspect().labels[id]!.dispatchEvent(new Event('click'));
+  }
+  expect(onSelect).not.toHaveBeenCalled(); runtime.destroy();
 });

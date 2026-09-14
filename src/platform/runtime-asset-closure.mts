@@ -1,6 +1,6 @@
 import { isArray } from './is-array.mts';
-export interface RuntimeAsset { filename: string; bytes: number; sha256: string; }
-export interface RuntimeAssetManifest { schema: string; assets: readonly RuntimeAsset[]; }
+export interface RuntimeAsset { filename: string; bytes: number; sha256: string; location?: 'public'; }
+export interface RuntimeAssetManifest { schema: string; resourceRoot?: 'prepared'; assets: readonly RuntimeAsset[]; }
 import { createHash, randomUUID } from "node:crypto";
 import { readFile, readdir, rename, rm, stat, lstat, unlink, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
@@ -79,23 +79,24 @@ export async function assembleRuntimeAssetClosure({
 }: { planetId: string; manifestPath: string | URL; productionRoot: string }) {
   const manifest: RuntimeAssetManifest = JSON.parse(await readFile(manifestPath, "utf8"));
   validateRuntimeAssetManifest(planetId, manifest);
+  if (manifest.resourceRoot === "prepared") throw new TypeError("Prepared resources cannot be assembled by the public-scene asset assembler.");
   const expected = new Set(manifest.assets.map(({ filename }) => filename));
-  const entries = await readdir(productionRoot, { withFileTypes: true });
-  for (const entry of entries) {
-    if (!entry.isFile()) {
-      throw new Error(`Unexpected ${planetId} production directory: ${entry.name}.`);
-    }
-    if (!expected.has(entry.name)) await unlink(resolve(productionRoot, entry.name));
-  }
+  const entries = await runtimeFiles(productionRoot, planetId, false);
+  for (const name of entries) if (!expected.has(name)) await unlink(resolve(productionRoot, name));
   await verifyRuntimeAssetClosure({ planetId, manifest, root: productionRoot });
   return manifest;
 }
 
-export async function verifyRuntimeAssetClosure({ planetId, manifest, root }: { planetId: string; manifest: RuntimeAssetManifest; root: string }) {
+export async function verifyRuntimeAssetClosure({ planetId, manifest, root, publicRoot }: { planetId: string; manifest: RuntimeAssetManifest; root: string; publicRoot?: string }) {
   validateRuntimeAssetManifest(planetId, manifest);
-  await assertDirectoryClosure(root, manifest.assets.map(({ filename }) => filename), planetId);
+  const publicAssets = manifest.assets.filter(asset => asset.location === "public");
+  if (publicAssets.length && !publicRoot) throw new TypeError("Public runtime assets require an explicit publicRoot for verification.");
+  const prepared = manifest.resourceRoot === "prepared";
+  await assertDirectoryClosure(root, manifest.assets.filter(asset => asset.location !== "public").map(({ filename }) => filename), planetId, prepared,
+    prepared ? ["manifest.json", "runtime-assets.json"] : []);
+  if (publicAssets.length) await assertDirectoryClosure(publicRoot!, publicAssets.map(({ filename }) => filename), planetId, true);
   for (const asset of manifest.assets) {
-    const bytes = await readFile(resolve(root, asset.filename));
+    const bytes = await readFile(resolve(asset.location === "public" ? publicRoot! : root, asset.filename));
     const digest = createHash("sha256").update(bytes).digest("hex");
     if (bytes.byteLength !== asset.bytes || digest !== asset.sha256) {
       throw new Error(`Planet ${planetId} runtime asset drifted: ${asset.filename}.`);
@@ -108,13 +109,18 @@ export function validateRuntimeAssetManifest(planetId: string, input: unknown): 
   const manifest = input as RuntimeAssetManifest;
   if (!manifest || typeof manifest !== "object" || isArray(manifest) ||
       manifest.schema !== `css${planetId}-runtime-assets@1` ||
+      (manifest.resourceRoot !== undefined && manifest.resourceRoot !== "prepared") ||
       !isArray(manifest.assets) || manifest.assets.length === 0) {
     throw new TypeError(`Planet ${planetId} runtime asset manifest is incompatible.`);
   }
   const filenames = new Set();
   for (const asset of manifest.assets) {
     if (!asset || typeof asset !== "object" ||
-        !SAFE_FILENAME.test(asset.filename ?? "") ||
+        typeof asset.filename !== "string" ||
+        (asset.location !== undefined && (manifest.resourceRoot !== "prepared" || asset.location !== "public")) ||
+        !(manifest.resourceRoot === "prepared"
+          ? asset.filename.split("/").every(component => SAFE_FILENAME.test(component))
+          : SAFE_FILENAME.test(asset.filename)) ||
         !Number.isSafeInteger(asset.bytes) || asset.bytes <= 0 ||
         !SHA256.test(asset.sha256 ?? "")) {
       throw new TypeError(`Planet ${planetId} has an invalid runtime asset entry.`);
@@ -132,13 +138,20 @@ export function requireRuntimeAssetManifest(planetId: string, input: unknown): R
   return input as RuntimeAssetManifest;
 }
 
-async function assertDirectoryClosure(root: string, filenames: readonly string[], planetId: string) {
-  const entries = await readdir(root, { withFileTypes: true });
-  const actual = [];
-  for (const entry of entries) {
-    if (!entry.isFile()) throw new Error(`Unexpected ${planetId} asset directory: ${entry.name}.`);
-    actual.push(entry.name);
+async function runtimeFiles(root: string, planetId: string, nested: boolean, prefix = ""): Promise<string[]> {
+  const files: string[] = [];
+  for (const entry of await readdir(root, { withFileTypes: true })) {
+    const name = `${prefix}${entry.name}`;
+    if (entry.isFile()) files.push(name);
+    else if (nested && entry.isDirectory() && SAFE_FILENAME.test(entry.name)) {
+      files.push(...await runtimeFiles(resolve(root, entry.name), planetId, true, `${name}/`));
+    } else throw new Error(`Unexpected ${planetId} asset directory: ${name}.`);
   }
+  return files;
+}
+
+async function assertDirectoryClosure(root: string, filenames: readonly string[], planetId: string, nested = false, metadata: readonly string[] = []) {
+  const actual = (await runtimeFiles(root, planetId, nested)).filter(filename => !metadata.includes(filename) || filenames.includes(filename));
   const expected = [...filenames].sort((left, right) => left.localeCompare(right));
   actual.sort((left, right) => left.localeCompare(right));
   if (expected.join("\0") !== actual.join("\0")) {

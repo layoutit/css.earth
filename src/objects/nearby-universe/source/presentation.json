@@ -1,0 +1,36 @@
+{
+  "provenance": {
+    "name": "Nearby Universe",
+    "products": [
+      {
+        "id": "galaxy-field",
+        "label": "Nearby galaxy distribution",
+        "process": "Join CF4 and HyperLEDA identities; prepare a bounded position sample and Gaussian galaxy-count concentrations.",
+        "recipe": "source/preparation/field.json",
+        "selector": "/sampling",
+        "inputs": [
+          "cosmicflows-4",
+          "hyperleda-pgc",
+          "hyperleda-hi",
+          "navigation-frame"
+        ],
+        "outputs": [
+          "prepared/points.json",
+          "prepared/cloud.webp"
+        ],
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Authored rendering parameters. Sampled points retain measured catalogue positions; covariance clouds represent smoothed galaxy counts, not gas or measured matter density.",
+          "Positive HI velocity / H0 fallback is uncorrected for peculiar velocities. Survey gaps and exclusions do not prove cosmic voids."
+        ]
+      }
+    ]
+  },
+  "pointExposure": 4,
+  "pointReferenceDistanceMpc": 100,
+  "cloudExposure": 2,
+  "cloudMaximumOpacity": 0.3
+}
