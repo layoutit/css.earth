@@ -13,6 +13,8 @@ import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 interface Entry {
   readonly object: PreparedCatalogObject;
   readonly marker: HTMLElement;
+  readonly dot: HTMLElement | null;
+  readonly navigable: boolean;
   readonly label: HTMLElement;
   readonly aperture: HTMLElement | null;
   readonly activate: (event: Event) => void;
@@ -27,16 +29,26 @@ interface Entry {
 }
 
 /** One fixed catalogue bank, shared by every detailed scene and every camera focus. */
-export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, nebulae, nebulaFrames, onSelect = () => {}, pickingHost = host }: {
+export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, galaxySample, nebulae, nebulaFrames, renderedObjectIds, onSelect = () => {}, pickingHost = host }: {
   host: HTMLElement; before: Element; payload: unknown; clusters?: unknown; nebulae?: unknown; onSelect?: (object: PreparedCatalogObject) => void; pickingHost?: HTMLElement;
   nebulaFrames?: ReadonlyMap<string, DensityVolumeFrame>;
+  renderedObjectIds?: ReadonlySet<string>;
+  galaxySample?: unknown;
 }) {
   const catalog = parsePreparedGalaxyCatalog(payload), document = host.ownerDocument;
   const clusterCatalog = clusters === undefined ? null : parsePreparedClusterCatalog(clusters);
   if (clusterCatalog && (clusterCatalog.frame.referenceFrame !== catalog.frame.referenceFrame || clusterCatalog.frame.epochJdTt !== catalog.frame.epochJdTt)) throw new TypeError('Prepared catalogues must share one frame and epoch.');
   const nebulaCatalog = nebulae === undefined ? null : parsePreparedNebulaCatalog(nebulae);
   if (nebulaCatalog && (nebulaCatalog.frame.referenceFrame !== catalog.frame.referenceFrame || nebulaCatalog.frame.epochJdTt !== catalog.frame.epochJdTt)) throw new TypeError('Prepared catalogues must share one frame and epoch.');
-  const objects: readonly PreparedCatalogObject[] = [...catalog.objects.filter(object => object.membership.group === 'local-group'), ...clusterCatalog?.objects ?? [], ...nebulaCatalog?.objects ?? []];
+  let sampleIds: Set<string> | undefined;
+  if (galaxySample !== undefined) {
+    if (!galaxySample || typeof galaxySample !== 'object' || !('schema' in galaxySample) || galaxySample.schema !== 'cssearth-galaxy-display-sample@1' ||
+        !('ids' in galaxySample) || !Array.isArray(galaxySample.ids) || galaxySample.ids.length > 48 ||
+        !galaxySample.ids.every(id => typeof id === 'string' && catalog.objects.some(row => row.id === id && row.membership.group === 'local-group'))) throw new TypeError('Invalid baked galaxy sample.');
+    sampleIds = new Set(galaxySample.ids);
+  }
+  const objects: readonly PreparedCatalogObject[] = [...catalog.objects.filter(object => object.membership.group === 'local-group' && (object.detailedObjectId || !sampleIds || sampleIds.has(object.id))), ...clusterCatalog?.objects ?? [], ...nebulaCatalog?.objects ?? []].filter(object => !isPreparedNebula(object) ||
+    Boolean(object.detailedObjectId && (!renderedObjectIds || renderedObjectIds.has(object.detailedObjectId))));
   if (new Set(objects.map(object => object.id)).size !== objects.length) throw new TypeError('Prepared catalogue focus identifiers must be unique.');
   const root = document.createElement('div');
   root.className = 'prepared-galaxy-catalog';
@@ -48,6 +60,13 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
   // Membership is a prepared scientific fact, never a runtime distance cut.
   const entries: Entry[] = objects.map(object => {
     const marker = document.createElement('span'), label = document.createElement('span');
+    const navigable = isPreparedCluster(object) || Boolean(object.detailedObjectId && (!renderedObjectIds || renderedObjectIds.has(object.detailedObjectId)));
+    const dot = !isPreparedCluster(object) && !isPreparedNebula(object) ? document.createElement('span') : null;
+    if (dot) {
+      dot.dataset.galaxyDot = object.id;
+      dot.style.cssText = 'position:absolute;left:50%;top:50%;width:2px;height:2px;border-radius:50%;background:#c2ccd8;opacity:0;pointer-events:none';
+      root.append(dot);
+    }
     const aperture = isPreparedCluster(object) ? document.createElement('span') : null;
     if (aperture) {
       aperture.dataset.clusterAperture = object.id;
@@ -58,7 +77,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
     marker.dataset.galaxyMarker = object.id;
     mountCatalogMarker(marker, object);
     label.dataset.galaxyLabel = object.id;
-    label.dataset.objectNavigate = object.id;
+    if (navigable) label.dataset.objectNavigate = object.id;
     label.dataset.objectNavigateActivation = 'click';
     label.textContent = object.name;
     label.title = isPreparedCluster(object) ? `${object.name} — MCXC-II centre; outline is R500, not a cluster boundary` : object.status === 'candidate' ? `${object.name} — candidate galaxy` : object.name;
@@ -69,10 +88,12 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
     };
     label.addEventListener(label.dataset.objectNavigateActivation, activate);
     label.addEventListener('keydown', event => { if (event.key === 'Enter') activate(event); });
-    label.setAttribute('role', 'button'); label.tabIndex = -1;
+    if (navigable) label.setAttribute('role', 'button');
+    label.style.cursor = navigable ? 'pointer' : 'default';
+    label.tabIndex = -1;
     root.append(marker, label);
     const frame = isPreparedNebula(object) ? nebulaFrames?.get(object.detailedObjectId ?? object.id) : undefined;
-    return { object, marker, label, aperture, activate, cornersM: frame ? catalogVolumeCorners(frame) : null,
+    return { object, marker, dot, navigable, label, aperture, activate, cornersM: frame ? catalogVolumeCorners(frame) : null,
       width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
   });
   let destroyed = false, selectedId: string | null = null;
@@ -85,9 +106,9 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
   const measure = () => { measured = false; };
   document.fonts?.addEventListener('loadingdone', measure);
   return Object.freeze({ root, catalog,
-    select(id: string | null) { selectedId = id; },
-    resolve(id: string) { return entries.find(entry => entry.object.id === id)?.object ?? null; },
-    publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number, blockerRects: readonly LabelScreenRect[] = [], clusterOpacity = opacity) {
+    select(id: string | null) { selectedId = entries.find(entry => entry.object.id === id || (!isPreparedCluster(entry.object) && entry.object.detailedObjectId === id))?.object.id ?? id; },
+    resolve(id: string) { return [...catalog.objects, ...clusterCatalog?.objects ?? [], ...nebulaCatalog?.objects ?? []].find(object => object.id === id || (!isPreparedCluster(object) && object.detailedObjectId === id)) ?? null; },
+    publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number, blockerRects: readonly LabelScreenRect[] = [], clusterOpacity = opacity, dotOpacity = opacity) {
       if (destroyed) return exclusions;
       if (world.referenceFrame !== catalog.frame.referenceFrame || world.epochJdTt !== catalog.frame.epochJdTt) {
         throw new TypeError('Galaxy catalogue and observer must share a reference frame and epoch.');
@@ -100,7 +121,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
       const clusterAlpha = Math.max(0, Math.min(1, clusterOpacity));
       // Only the extragalactic populations sleep with their fades. Nearby
       // nebulae keep following the camera and remain available as fly-to targets.
-      if (alpha === 0 && clusterAlpha === 0 && !nebulaCatalog?.objects.length) {
+      if (alpha === 0 && dotOpacity === 0 && clusterAlpha === 0 && !nebulaCatalog?.objects.length) {
         if (dormant) return exclusions;
         dormant = true;
       } else dormant = false;
@@ -123,12 +144,11 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
         if (Math.abs(point.x) > width / 2 + 4 || Math.abs(point.y) > height / 2 + 4) continue;
         visible.add(entry.object.id);
         entry.marker.style.transform = `translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
+        if (entry.dot) entry.dot.style.transform = entry.marker.style.transform;
         const bounds = entry.cornersM ? projectCatalogBounds(entry.cornersM, world, viewport) : null;
         if (entry.cornersM && !bounds) continue;
         const x = bounds ? (bounds.left + bounds.right) / 2 : point.x;
-        const y = isPreparedNebula(entry.object)
-          ? (bounds?.bottom ?? point.y) + 8 + entry.height
-          : (bounds?.top ?? point.y) - 8;
+        const y = (bounds?.bottom ?? point.y) + 8 + entry.height;
         entry.labelX = x; entry.labelY = y;
         const labelRect = { left: x - entry.width / 2, right: x + entry.width / 2,
           top: y - entry.height, bottom: y };
@@ -150,10 +170,11 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
         if (visible.has(entry.object.id) && (projected || fader.current(entry.label) > 0)) {
           entry.label.style.transform = `translate(${entry.labelX}px,${entry.labelY}px) translate(-50%,-100%)`;
         }
-        fader.set(entry.marker, visible.has(entry.object.id) ? objectAlpha * .45 : 0, 200);
+        fader.set(entry.marker, projected ? objectAlpha * .45 : 0, 200);
         if (entry.aperture) fader.set(entry.aperture, apertures.has(entry.object.id) ? objectAlpha * .2 : 0, 200);
         // Interactivity flips rarely; rewriting it for every galaxy each frame reflected three attributes.
-        const interactive = labelOpacity > .1;
+        if (entry.dot) fader.set(entry.dot, visible.has(entry.object.id) ? Math.max(0, Math.min(1, dotOpacity)) * (1 - (projected ? objectAlpha : 0)) * .4 : 0, 200);
+        const interactive = entry.navigable && labelOpacity > .1;
         if (entry.interactive !== interactive) {
           entry.label.style.pointerEvents = interactive ? 'auto' : 'none';
           entry.label.tabIndex = interactive ? 0 : -1;
@@ -161,7 +182,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
           entry.interactive = interactive;
         }
         // Catalogue labels remain behind the focus point and detailed bodies.
-        if (projected && labelOpacity > .1) pickTargets.push({ element: entry.label, rank: -2,
+        if (projected && interactive) pickTargets.push({ element: entry.label, rank: -2,
           shape: { kind: 'rect', ...projected.labelRect } });
       }
       picking.publish(root, pickTargets);

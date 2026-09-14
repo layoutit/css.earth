@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFile, mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
+import { readFile, mkdtemp, mkdir, writeFile, rm, cp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { M_PER_PC } from '@cssearth/astronomy';
 import { parsePreparedGalaxyCatalog } from '@cssearth/catalog';
 import { parseGalaxyRecipe } from './config.js';
+import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample } from './display-sample.js';
 import { galaxyPositionM, classifyMembership, prepareGalaxyCatalog } from './prepare.js';
 import { parseGalaxyCsv, parseMembershipTable, readAuthorMetadata } from './source.js';
 import { prepareGalaxyCatalogObject } from '../../../tools/objects/prepare-galaxy-catalog.js';
@@ -26,10 +27,18 @@ function sourceArchive(yaml: string): Buffer {
 }
 
 test('canonical catalogue rebakes byte-for-byte from the independently pinned original inputs', async () => {
-  const out = await mkdtemp(resolve(tmpdir(), 'galaxy-catalog-'));
+  const temporary = await mkdtemp(resolve(tmpdir(), 'galaxy-catalog-'));
+  const objectDirectory = resolve(temporary, 'local-group'), out = resolve(objectDirectory, 'prepared');
   try {
-    const data = await prepareGalaxyCatalogObject({ objectDirectory: directory, outputDirectory: out });
+    await cp(resolve(directory, 'source'), resolve(objectDirectory, 'source'), { recursive: true });
+    const data = await prepareGalaxyCatalogObject({ objectDirectory });
+    assert.deepEqual(await readFile(resolve(objectDirectory, 'object.json')), await readFile(resolve(directory, 'object.json')));
     assert.deepEqual(await readFile(resolve(out, 'catalogue.json')), await readFile(resolve(directory, 'prepared/catalogue.json')));
+    for (const name of ['display-sample.json', 'manifest.json']) {
+      assert.deepEqual(await readFile(resolve(out, name)), await readFile(resolve(directory, 'prepared', name)));
+    }
+    const receipt = JSON.parse(await readFile(resolve(out, 'manifest.json'), 'utf8'));
+    assert.deepEqual(receipt.outputs.map((output: { path: string }) => output.path).sort(), ['catalogue.json', 'display-sample.json']);
     assert.equal(parsePreparedGalaxyCatalog(data), data);
     assert.equal(data.objects.length + data.exclusions.length, 1727);
     assert.equal(data.objects.length, 776);
@@ -43,7 +52,7 @@ test('canonical catalogue rebakes byte-for-byte from the independently pinned or
     assert(data.exclusions.some(row => row.id === 'mw' && row.reason.includes('distance modulus')));
     assert(data.exclusions.some(row => row.id === 'andromeda_36' && row.reason.includes('host')));
     assert.equal(data.objects.find(row => row.id === 'aquarius_4')?.status, 'candidate');
-  } finally { await rm(out, { recursive: true, force: true }); }
+  } finally { await rm(temporary, { recursive: true, force: true }); }
 });
 
 test('four detailed centers retain measured directions and distance references in Sun ICRS', async () => {
@@ -116,7 +125,7 @@ test('pin mutation fails before preparation, rather than silently using altered 
   const temp = await mkdtemp(resolve(tmpdir(), 'galaxy-source-mutation-'));
   try {
     await mkdir(resolve(temp, 'source/lvdb'), { recursive: true });
-    for (const file of ['catalogue.json', 'provenance.json']) await writeFile(resolve(temp, 'source', file), await readFile(resolve(directory, 'source', file)));
+    for (const file of ['catalogue.json', 'provenance.json', 'presentation.json']) await writeFile(resolve(temp, 'source', file), await readFile(resolve(directory, 'source', file)));
     const csv = await readFile(resolve(directory, 'source/lvdb/comb_all.csv'));
     csv[csv.length - 3] = csv[csv.length - 3] === 49 ? 50 : 49;
     await writeFile(resolve(temp, 'source/lvdb/comb_all.csv'), csv);
@@ -139,4 +148,17 @@ test('strict source parser rejects malformed rows, ambiguous recipes and mutated
   const yaml = 'key: new_field\ntable: field\nlocation:\n  ra: 0\n  dec: 0\n';
   assert(readAuthorMetadata(sourceArchive(yaml), 'release/data/', ['field']).has('new_field'));
   assert.throws(() => readAuthorMetadata(sourceArchive(yaml.replace('  ra: 0', '  ra: 0\n  ra: 90')), 'release/data/', ['field']), /Duplicate consumed/);
+});
+
+
+test('display sampling requires the authored budget and scale and preserves catalogue identities', async () => {
+  const catalogue = parsePreparedGalaxyCatalog(await json('prepared/catalogue.json'));
+  for (const input of [undefined, {}, { budget: 48 }, { cellSizeMpc: .15 }, { budget: 0, cellSizeMpc: .15 }, { budget: 1.5, cellSizeMpc: .15 }, { budget: 1, cellSizeMpc: 0 }, { budget: 1, cellSizeMpc: Infinity }]) {
+    assert.throws(() => parseGalaxyDisplaySampling(input));
+  }
+  const sampled = prepareGalaxyDisplaySample(catalogue, parseGalaxyDisplaySampling({ budget: 1, cellSizeMpc: .25 }));
+  assert.equal(sampled.ids.length, 1);
+  assert.equal(sampled.budget, 1);
+  assert.equal(sampled.cellSizeM, 250_000 * M_PER_PC);
+  assert(catalogue.objects.some(row => row.id === sampled.ids[0] && row.membership.group === 'local-group' && !row.detailedObjectId));
 });

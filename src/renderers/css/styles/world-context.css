@@ -143,3 +143,12 @@
 .prepared-world-context [data-context-body][data-context-highlight]::after {
   opacity: 1;
 }
+
+/* Use the same retained picking hover state as body labels. */
+[data-environment-label][data-environment-navigate] {
+  text-decoration: none;
+}
+[data-environment-label][data-environment-navigate][tabindex="0"]:is(:hover, :focus-visible, [data-object-hovered="true"]),
+.prepared-galaxy-catalog [data-galaxy-label][data-object-navigate][tabindex="0"]:is(:hover, :focus-visible, [data-object-hovered="true"]) {
+  text-decoration: underline;
+}

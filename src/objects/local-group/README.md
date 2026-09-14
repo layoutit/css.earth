@@ -18,19 +18,26 @@ catalogue snapshot, not a claim that every real galaxy has been discovered.
   no confirmed galaxy is omitted by that table selection. Uncertain galaxy-table
   rows retain candidate status.
 
-```text
-source/
-  catalogue.json              authored selection, overrides and source pins
-  provenance.json             scientific references and acquisition checksums
-  lvdb/                       original release CSV, archive, bibliography, license
-  mcconnachie/                original tables and reproducible text extraction
-  papers/                     original SMC distance paper
-prepared/
-  catalogue.json              ready positions, labels, references and exclusions
-  manifest.json               prepared hash, byte count and census
-```
+## Sources
 
-## Scientific sources
+| Retained release | Use |
+| --- | --- |
+| LVDB v1.1.1, Pace (2025) | Selected measurements, names, host links and bibliography |
+| McConnachie (2012), October 2019 update | Published Local Group membership |
+| Graczyk et al. (2020) | SMC distance and separate uncertainties |
+
+The [source manifest](source/manifest.json) inventories every retained input and authored record. [Acknowledgments and terms](NOTICE.md) keep upstream rights separate. The [investigation ledger](investigations.json) records source decisions; its initial entries consolidate the existing records, not a new archive search.
+
+## Evidence
+
+The [catalogue tests](../../preparation/galaxy-catalog/galaxy-catalog.test.ts) compare regenerated catalogue, display sample and output receipt byte-for-byte, check cardinal coordinate axes independently, and retain the four detailed galaxies' published directions and adopted distances. The [prepared inventory](prepared/manifest.json) pins both delivered data files. These checks establish derivation and reproduction, not visual or scientific acceptance of a reconstruction.
+
+## Known problems
+
+The display sample is incomplete by design and is not a density measurement. Candidate classifications and source uncertainties remain in the full catalogue. Reuse terms for the retained non-LVDB papers and tables remain unresolved. No fresh browser qualification is claimed by these metadata changes.
+
+## Scientific source details
+
 
 The prepared catalogue retains the original bibliography keys and resolves them
 to citations transcribed from the pinned LVDB bibliography. The separate pinned
@@ -96,24 +103,27 @@ All preparation is offline TypeScript. Runtime consumes the prepared positions;
 it does not read the CSV, YAML, PDF, archive or original papers. Recipe mappings
 own specific galaxy identifiers; shared preparation contains no object-id dispatch.
 
-## Reproduce from a clean checkout
+## Reproduction evidence
 
-All source bytes are checked in. The Python step verifies the original PDF-to-text
-transcription; the TypeScript step verifies source pins and regenerates the bank.
-
-```sh
-pnpm install --frozen-lockfile --ignore-scripts
-python3 -m venv .local/local-group-source-verify
-.local/local-group-source-verify/bin/python -m pip install pypdf==5.9.0
-.local/local-group-source-verify/bin/python src/objects/local-group/source/mcconnachie/extract.py
-pnpm build:packages
-pnpm build:preparation
-pnpm prepare:galaxy-catalog
-node tools/test-preparation.mjs --universe
-```
+All source bytes are checked in. The retained pypdf 5.9.0 extraction receipt checks the original PDF-to-text transcription. The catalogue tests regenerate the declared outputs and compare them byte-for-byte. Common installation and preparation are documented in the [shared contributor guide](../README.md).
 
 `provenance.json` records original download URLs, SHA-256 digests and sizes.
 Redownloading is optional; replacing any checked source requires deliberate pin
 updates and a new preparation receipt. The tests reject corrupted source bytes,
 duplicate consumed YAML fields, coordinate-frame changes, radius-based membership,
 lost candidates, and a changed canonical rebake.
+
+### Sparse context display
+
+`pnpm prepare:galaxy-catalog` also writes `prepared/display-sample.json`.
+The [sampling recipe](source/presentation.json) selects 48 catalogue-only Local Group galaxies using 150 kpc spatial cells,
+weighted by square-root galaxy counts. This balances dense and sparse cells but
+does not guarantee representation of every occupied cell. Positions and scientific source references
+remain those in the validated catalogue. The four galaxies with imagery are
+retained separately. This is a display sample, not a completeness or mass map.
+
+Dots begin appearing at 120 Mpc and reach full visibility at 30 Mpc on approach.
+Names and ovals follow between 40 and 12 Mpc; collision handling limits labels
+to twelve. Images still use their projected-size visibility. Catalogue-only
+entries remain prepared-focus navigation destinations, independently of this display selection. The distant galaxy field remains
+visible behind the transition.
