@@ -178,6 +178,8 @@ async function classifyTrace(root: string, objectId: string, traces: Preparation
 async function unchangedSinceFirstAccess(root: string, path: string, evidence: PreparationEvidence, first: readonly TracedState[], outputs: ReadonlyMap<string, PreparationEvidence>) {
   const absolute = resolve(root, path);
   for (const state of first) {
+    // A process whose first access was a write saw nothing to compare.
+    if (!state.missing && state.size === undefined) continue;
     const current = await lstat(absolute).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT') || hasErrorCode(error, 'ENOTDIR')) return null; throw error; });
     if (state.missing) { if (current) return false; continue; }
     if (!current) return false;
