@@ -119,19 +119,6 @@
         "noData": true
       },
       {
-        "id": "galileo",
-        "label": "Galileo",
-        "thumbnail": "europa-lens-galileo.webp",
-        "surface": "europa-galileo.webp",
-        "poles": "europa-poles-galileo.webp",
-        "source": {
-          "id": "galileo-s0449967535_36",
-          "path": "../manifest.json"
-        },
-        "notes": "Regional Galileo clear-filter photographs, positioned by the USGS control network. Gaps remain gray; original shadows and differences between encounters remain. A fixed display scale maps calibrated I/F from 0 to 2 to gray brightness. This is an observation mosaic, not an albedo map. The finest prepared grid is about 800 m per pixel at the equator; some original photographs are much finer.",
-        "noData": true
-      },
-      {
         "id": "enhanced",
         "label": "False color",
         "thumbnail": "europa-lens-enhanced.webp",

@@ -14,7 +14,7 @@ import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../..
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
-const LENS_IDS = ["normal","galileo","enhanced","elevation","geology","infrared","ice-signature","fine-ice","coarse-ice"];
+const LENS_IDS = ["normal","enhanced","elevation","geology","infrared","ice-signature","fine-ice","coarse-ice"];
 
 objectRuntimePackageTests(runtimeDefinition);
 
@@ -26,7 +26,7 @@ test("Europa's actual import closure has only shared runtime owners", async () =
   }
 });
 
-test("Europa is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 9 lenses", () => {
+test("Europa is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 8 lenses", () => {
   assert.equal(scene.schema, "csseuropa-prepared-runtime-scene@1");
   assert.equal(scene.runtimeGeometry, false);
   assert.equal(scene.runtimeRasterization, false);

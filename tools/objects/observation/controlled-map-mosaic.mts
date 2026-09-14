@@ -2,7 +2,7 @@ import {resolve,relative,isAbsolute} from 'node:path';
 import {fromFile} from 'geotiff';
 import {requireArray,requireFiniteNumber,requireRecord,requireString} from '../../source-values.mts';
 import {numericRasterBands} from '../terrestrial-layers/source-records.mts';
-import {linearToSrgb} from '../color-transfer.mts';
+import {linearToSrgb,srgbToLinear} from '../color-transfer.mts';
 
 /** Area integrals of native pixel squares. The validity integral is independent
  * of brightness: a valid black sample is still an observation. */
@@ -109,7 +109,9 @@ async function loadFrame(sourceDirectory:string,frame:ControlledFrame,profile:Pr
       image.getSamplesPerPixel()!==1||image.getSampleFormat(0)!==3||image.getSampleByteSize(0)!==4||image.getGDALNoData()!==frame.noData||band.DESCRIPTION!=='CLEAR'||Number(band.WAVELENGTH)!==profile.wavelength||
       [origin[0],resolution[0],0,origin[1],0,resolution[1]].some((v,i)=>v!==frame.transform[i]))throw new Error(`Controlled source changed: ${frame.id}`);
     const data=numericRasterBands(await image.readRasters())[0];if(!data)throw new Error('Missing photographic band');
-    return areaSampler(data,frame.width,frame.height,frame.noData);
+    let maximum=0;
+    for(const value of data)if(Number.isFinite(value)&&value!==frame.noData&&Math.abs(value)<1e30)maximum=Math.max(maximum,value);
+    return Object.assign(areaSampler(data,frame.width,frame.height,frame.noData),{maximum});
   }finally{await tiff.close();}
 }
 function pixelPoint(frame:ControlledFrame,profile:Profile,longitude:number,latitude:number) {
@@ -136,8 +138,10 @@ export async function prepareControlledMapMosaic(sourceDirectory:string,entries:
   const profile=parseControlledMapProfile(profileValue),frames=parseControlledFrames(entries),count=width*height;
   if(!Number.isSafeInteger(width)||width<2||height*2!==width)throw new TypeError('Expected a 2:1 output grid.');
   const values=new Float32Array(count),owners=new Uint16Array(count),missing=new Uint8Array(count).fill(1),step=360/width,units=profile.radius*radians;
+  const nativeMaxima:number[]=[];
   for(const [frameIndex,frame] of frames.entries()) {
     const sample=await loadFrame(sourceDirectory,frame,profile),b=controlledMapBounds(frame,profile.radius),t=frame.transform;
+    nativeMaxima.push(sample.maximum);
     const firstY=Math.max(0,Math.floor((90-b.north)/step)),lastY=Math.min(height,Math.ceil((90-b.south)/step));
     const firstX=Math.floor(b.west/step),lastX=Math.ceil(b.east/step);
     for(let y=firstY;y<lastY;y++)for(let col=firstX;col<lastX;col++){
@@ -152,7 +156,7 @@ export async function prepareControlledMapMosaic(sourceDirectory:string,entries:
     }
     onFrame?.(frame.id);
   }
-  const rgb=new Uint8Array(count*3),coverage=frames.map(frame=>({id:frame.id,pixels:0,surfacePercent:0}));
+  const rgb=new Uint8Array(count*3),coverage=frames.map((frame,i)=>({id:frame.id,pixels:0,surfacePercent:0,nativeMaximum:nativeMaxima[i]!}));
   let areaTotal=0,areaCovered=0,clippedHighlights=0,clippedNegative=0,minimum=Infinity,maximum=-Infinity;
   for(let y=0;y<height;y++) {
     const weight=Math.sin((90-y*step)*radians)-Math.sin((90-(y+1)*step)*radians);areaTotal+=weight*width;
@@ -166,8 +170,37 @@ export async function prepareControlledMapMosaic(sourceDirectory:string,entries:
   return {rgb,missing,values,owners,report:{method:'smallest-projected-pixel-valid-single-frame',sampling:{equirectangular:'native pixel-area integration; bilinear at magnification',polar:'geographic subgrid at source-pixel spacing; complete bilinear samples'},
     photometricCorrection:false,display:{range:[0,profile.maximum],encoding:'IEC sRGB'},surfacePercent:areaCovered/areaTotal*100,clippedHighlights,clippedNegative,minimum:Number.isFinite(minimum)?minimum:null,maximum:Number.isFinite(maximum)?maximum:null,frames:coverage}};
 }
+
+/** One display exposure per photograph, fitted to co-located valid base pixels
+ * inside its selected boundary. This changes no coordinates or local contrast,
+ * and is not photometric normalization or albedo recovery. */
+export function matchControlledMapLevels(result:{values:Float32Array;owners:Uint16Array;rgb:Uint8Array;missing:Uint8Array;report:{display:{range:number[]};frames:{id:string;nativeMaximum:number}[]}},
+  base:{rgb:Uint8Array;missing:Uint8Array},width:number,height:number,settings:unknown) {
+  const boundaryPixels=requireFiniteNumber(requireRecord(settings).boundaryPixels),count=width*height;
+  if(!Number.isSafeInteger(boundaryPixels)||boundaryPixels<1||boundaryPixels>=Math.min(width,height)/2||
+    result.values.length!==count||result.owners.length!==count||result.rgb.length!==count*3||result.missing.length!==count||base.rgb.length!==count*3||base.missing.length!==count)throw new TypeError('Invalid photographic display-matching grid.');
+  const maximum=result.report.display.range[1]!;
+  const samples=result.report.frames.map(():number[]=>[]),linear=Array.from({length:256},(_,i)=>srgbToLinear(i/255));
+  for(let y=boundaryPixels;y<height-boundaryPixels;y++)for(let x=0;x<width;x++) {
+    const i=y*width+x,owner=result.owners[i]!;
+    if(!owner||base.missing[i]||result.missing[i])continue;
+    if([i-boundaryPixels*width,i+boundaryPixels*width,y*width+(x+boundaryPixels)%width,y*width+(x+width-boundaryPixels)%width].every(j=>result.owners[j]===owner))continue;
+    const reference=.2126*linear[base.rgb[i*3]!]!+.7152*linear[base.rgb[i*3+1]!]!+.0722*linear[base.rgb[i*3+2]!]!,value=result.values[i]!/maximum;
+    if(reference>0&&value>0)samples[owner-1]!.push(reference/value);
+  }
+  const levels=result.report.frames.map((frame,i)=>{
+    const ratios=samples[i]!.sort((a,b)=>a-b),requestedGain=ratios.length?ratios[Math.floor(ratios.length/2)]!:1;
+    return {id:frame.id,boundarySamples:ratios.length,requestedGain,gain:Math.min(requestedGain,frame.nativeMaximum>0?maximum/frame.nativeMaximum:1)};
+  });
+  for(let i=0;i<count;i++) {
+    const owner=result.owners[i]!;
+    if(owner) {const gray=Math.round(255*linearToSrgb(result.values[i]!/maximum*levels[owner-1]!.gain));result.rgb.fill(gray,i*3,i*3+3);}
+    else if(!base.missing[i]) {result.rgb.set(base.rgb.subarray(i*3,i*3+3),i*3);result.missing[i]=0;}
+  }
+  return {method:'bounded-median-display-ratio-at-selected-footprint-boundaries',boundaryPixels,photometricCorrection:false,levels};
+}
 /** Only photographs intersecting a polar cap remain decoded for its direct sampler. */
-export async function loadControlledMapPoles(sourceDirectory:string,entries:readonly unknown[],profileValue:unknown) {
+export async function loadControlledMapPoles(sourceDirectory:string,entries:readonly unknown[],profileValue:unknown,gains:ReadonlyMap<string,number>=new Map()) {
   const profile=parseControlledMapProfile(profileValue);
   const selected: {frame: ReturnType<typeof parseControlledFrames>[number];sample: Awaited<ReturnType<typeof loadFrame>>}[]=[];
   for(const frame of parseControlledFrames(entries).reverse()) {
@@ -178,7 +211,7 @@ export async function loadControlledMapPoles(sourceDirectory:string,entries:read
   return {sample(longitude:number,latitude:number,color:number[]) {
     for(const {frame,sample} of selected) {
       const [px,py]=pixelPoint(frame,profile,longitude,latitude),value=sample(px,py,0,0);if(value===null)continue;
-      const gray=Math.round(255*linearToSrgb(value/profile.maximum));color[0]=gray;color[1]=gray;color[2]=gray;color[3]=255;return true;
+      const gray=Math.round(255*linearToSrgb(value/profile.maximum*(gains.get(frame.id)??1)));color[0]=gray;color[1]=gray;color[2]=gray;color[3]=255;return true;
     }
     return false;
   }};
