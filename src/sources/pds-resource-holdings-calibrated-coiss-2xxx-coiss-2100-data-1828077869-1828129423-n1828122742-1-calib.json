@@ -1,0 +1,28 @@
+{
+  "id": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2100-data-1828077869-1828129423-n1828122742-1-calib",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS archive product · N1828122742_1_CALIB",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828077869_1828129423/N1828122742_1_CALIB"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828077869_1828129423/N1828122742_1_CALIB.LBL",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828077869_1828129423/N1828122742_1_CALIB.LBL",
+      "checkedOn": "2026-09-13",
+      "locator": "IMAGE_NUMBER, PRODUCT_ID, START_TIME, FILTER_NAME; paired CISSCAL image"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
