@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/erigone/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'erigone',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/erigone/erigone-directional-sun.webp",
-      "two": "/scenes/erigone/erigone-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/erigone/erigone-shape-surface@2x.webp"
   ],

@@ -336,10 +336,6 @@
   background-image: url("/scenes/venus/venus-lighting@2x.webp");
 }
 
-.planet-stage[data-object-id="venus"].venus-hide-stars .venus-skybox {
-  visibility: hidden;
-}
-
 @keyframes venus-body-spin {
   from { transform: rotateZ(-118deg); }
   to { transform: rotateZ(-478deg); }
@@ -453,10 +449,6 @@
 
 .planet-stage[data-object-id="mars"].mars-hide-atmosphere .mars-fixed-material {
   background-image: url("/scenes/mars/mars-lighting@2x.webp");
-}
-
-.planet-stage[data-object-id="mars"].mars-hide-stars .mars-skybox {
-  visibility: hidden;
 }
 
 @keyframes mars-body-spin {
@@ -607,10 +599,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-stage[data-object-id="moon"].moon-hide-stars .moon-skybox {
-  visibility: hidden;
-}
-
 @keyframes moon-body-spin {
   from { transform: rotateZ(0deg); }
   to { transform: rotateZ(-360deg); }
@@ -743,10 +731,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-stage[data-object-id="pluto"].pluto-hide-stars .pluto-skybox {
-  visibility: hidden;
-}
-
 @keyframes pluto-body-spin {
   from { transform: rotateZ(180deg); }
   to { transform: rotateZ(540deg); }
@@ -844,10 +828,6 @@
 
 .planet-stage[data-object-id="ariel"].ariel-hide-shadows .ariel-fixed-material {
   transform: translate(-50%, -50%);
-}
-
-.planet-stage[data-object-id="ariel"].ariel-hide-stars .ariel-skybox {
-  visibility: hidden;
 }
 
 @keyframes ariel-body-spin {
@@ -957,10 +937,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-stage[data-object-id="callisto"].callisto-hide-stars .callisto-skybox {
-  visibility: hidden;
-}
-
 @keyframes callisto-body-spin {
   from { transform: rotateZ(0deg); }
   to { transform: rotateZ(360deg); }
@@ -1066,10 +1042,6 @@
 
 .planet-stage[data-object-id="ceres"].ceres-hide-shadows .ceres-fixed-material {
   transform: translate(-50%, -50%);
-}
-
-.planet-stage[data-object-id="ceres"].ceres-hide-stars .ceres-skybox {
-  visibility: hidden;
 }
 
 @keyframes ceres-body-spin {
@@ -1203,10 +1175,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-stage[data-object-id="charon"].charon-hide-stars .charon-skybox {
-  visibility: hidden;
-}
-
 @keyframes charon-body-spin {
   from { transform: rotateZ(0deg); }
   to { transform: rotateZ(360deg); }
@@ -1297,10 +1265,6 @@
 
 .planet-stage[data-object-id="eris"].eris-hide-shadows .eris-fixed-material {
   transform: translate(-50%, -50%);
-}
-
-.planet-stage[data-object-id="eris"].eris-hide-stars .eris-skybox {
-  visibility: hidden;
 }
 
 @keyframes eris-body-spin {
@@ -1426,10 +1390,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-stage[data-object-id="europa"].europa-hide-stars .europa-skybox {
-  visibility: hidden;
-}
-
 @keyframes europa-body-spin {
   from { transform: rotateZ(0deg); }
   to { transform: rotateZ(360deg); }
@@ -1545,10 +1505,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-stage[data-object-id="ganymede"].ganymede-hide-stars .ganymede-skybox {
-  visibility: hidden;
-}
-
 @keyframes ganymede-body-spin {
   from { transform: rotateZ(0deg); }
   to { transform: rotateZ(360deg); }
@@ -1662,10 +1618,6 @@
 
 .planet-stage[data-object-id="iapetus"].iapetus-hide-shadows .iapetus-fixed-material {
   transform: translate(-50%, -50%);
-}
-
-.planet-stage[data-object-id="iapetus"].iapetus-hide-stars .iapetus-skybox {
-  visibility: hidden;
 }
 
 @keyframes iapetus-body-spin {
@@ -1791,10 +1743,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-stage[data-object-id="io"].io-hide-stars .io-skybox {
-  visibility: hidden;
-}
-
 @keyframes io-body-spin {
   from { transform: rotateZ(0deg); }
   to { transform: rotateZ(360deg); }
@@ -1885,10 +1833,6 @@
 
 .planet-stage[data-object-id="makemake"].makemake-hide-shadows .makemake-fixed-material {
   transform: translate(-50%, -50%);
-}
-
-.planet-stage[data-object-id="makemake"].makemake-hide-stars .makemake-skybox {
-  visibility: hidden;
 }
 
 @keyframes makemake-body-spin {
@@ -1998,10 +1942,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-stage[data-object-id="miranda"].miranda-hide-stars .miranda-skybox {
-  visibility: hidden;
-}
-
 @keyframes miranda-body-spin {
   from { transform: rotateZ(0deg); }
   to { transform: rotateZ(360deg); }
@@ -2092,10 +2032,6 @@
 
 .planet-stage[data-object-id="oberon"].oberon-hide-shadows .oberon-fixed-material {
   transform: translate(-50%, -50%);
-}
-
-.planet-stage[data-object-id="oberon"].oberon-hide-stars .oberon-skybox {
-  visibility: hidden;
 }
 
 @keyframes oberon-body-spin {
@@ -2229,10 +2165,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-stage[data-object-id="titan"].titan-hide-stars .titan-skybox {
-  visibility: hidden;
-}
-
 @keyframes titan-body-spin {
   from { transform: rotateZ(0deg); }
   to { transform: rotateZ(360deg); }
@@ -2340,10 +2272,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-stage[data-object-id="titania"].titania-hide-stars .titania-skybox {
-  visibility: hidden;
-}
-
 @keyframes titania-body-spin {
   from { transform: rotateZ(0deg); }
   to { transform: rotateZ(360deg); }
@@ -2443,10 +2371,6 @@
   transform: translate(-50%, -50%);
 }
 
-.planet-stage[data-object-id="triton"].triton-hide-stars .triton-skybox {
-  visibility: hidden;
-}
-
 @keyframes triton-body-spin {
   from { transform: rotateZ(0deg); }
   to { transform: rotateZ(-360deg); }
@@ -2537,10 +2461,6 @@
 
 .planet-stage[data-object-id="umbriel"].umbriel-hide-shadows .umbriel-fixed-material {
   transform: translate(-50%, -50%);
-}
-
-.planet-stage[data-object-id="umbriel"].umbriel-hide-stars .umbriel-skybox {
-  visibility: hidden;
 }
 
 @keyframes umbriel-body-spin {
@@ -2647,10 +2567,6 @@
   background-size:
     calc(496px * var(--sun-camera-zoom, 1))
     calc(496px * var(--sun-camera-zoom, 1));
-}
-
-.planet-stage[data-object-id="sun"].sun-hide-stars .sun-skybox {
-  visibility: hidden;
 }
 
 /* Spin origin carried from the retired sun-surfaces.css (Carrington longitude 0 faces the default yaw). */

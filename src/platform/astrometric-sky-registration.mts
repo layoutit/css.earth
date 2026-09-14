@@ -1,31 +1,18 @@
-import type { Vector3, Matrix3 } from "../renderers/css/solar-system/types.ts";
-// Astrometric registration of a retained cubic sky: the derived rotation
-// chain that replaces hand-tuned Euler angles for objects that opt in.
+import type { Matrix3 } from "../renderers/css/solar-system/types.ts";
+// Astrometric registration of an object's sky: the derived rotation from the
+// ICRF cube frame of the shared universe sky into the object's ecliptic
+// presentation frame, in place of hand-tuned Euler angles.
 //
-//   panorama pixel  <-  mosaic frame (anchor-fitted correction)
-//                   <-  J2000 galactic (Hipparcos constants)
-//                   <-  ICRF                              [cube-local frame]
-//                   <-  body-fixed (IAU pole and prime meridian at the epoch)
-//                   <-  ecliptic presentation frame       [scene frame]
+//   ICRF                              [sky cube frame]
+//     ->  body-fixed (IAU pole and prime meridian at the epoch)
+//     ->  ecliptic presentation frame [scene frame]
 //
-// The cubemap is sampled in ICRF: cube-local x, y, z are ICRF x, y, z, which
-// is a proper (right-handed) identification because the CSS cube frame
-// (+x right, +y down, +z toward the viewer) is right-handed too. The scene
-// registration the runtime multiplies into the scene matrix then carries the
-// body- and epoch-specific part, so the same sampled cube is correct for any
-// body whose solar geometry is prepared.
+// Cube-local x, y, z are ICRF x, y, z, a proper (right-handed) identification
+// because the CSS cube frame (+x right, +y down, +z toward the viewer) is
+// right-handed too. The runtime multiplies the registration into the scene
+// matrix, so the stars cross the screen exactly as the body's geometry does.
 
-import {
-  GALACTIC_FRAME_J2000,
-  ICRS_TO_GALACTIC,
-  multiplyMatrices,
-  transposeMatrix,
-} from "./galactic-frame.mts";
-import {
-  ESO_PANORAMA,
-  ESO_PANORAMA_ANCHORS,
-  ESO_PANORAMA_REGISTRATION,
-} from "./eso-panorama-registration.mts";
+import { multiplyMatrices, transposeMatrix } from "./galactic-frame.mts";
 import {
   SOLAR_GEOMETRY_EPOCH_LABEL,
   requireBodyFixedToIcrf,
@@ -34,34 +21,6 @@ import { prepareEclipticPresentationFrame } from
   "./solar-presentation-frame.mts";
 
 export const ASTROMETRIC_CUBE_FRAME = "icrf-j2000-as-cube-local-axes";
-
-// Cube-local (ICRF) direction -> panorama galactic direction, row-major.
-export function prepareAstrometricCubeSampling() {
-  const matrix = multiplyMatrices(
-    ESO_PANORAMA_REGISTRATION.matrix,
-    ICRS_TO_GALACTIC,
-  );
-  return Object.freeze({
-    model: "icrf-cube-through-j2000-galactic-into-anchor-registered-panorama",
-    cubeFrame: ASTROMETRIC_CUBE_FRAME,
-    matrix: Object.freeze(matrix),
-    galacticFrame: GALACTIC_FRAME_J2000,
-    icrsToGalactic: ICRS_TO_GALACTIC,
-    panorama: Object.freeze({
-      ...ESO_PANORAMA,
-      anchors: ESO_PANORAMA_ANCHORS,
-      frameCorrection: Object.freeze({
-        model: ESO_PANORAMA_REGISTRATION.model,
-        matrix: ESO_PANORAMA_REGISTRATION.matrix,
-        angleDegrees: ESO_PANORAMA_REGISTRATION.angleDegrees,
-        axisGalacticDegrees: ESO_PANORAMA_REGISTRATION.axisGalacticDegrees,
-        residualsDegrees: ESO_PANORAMA_REGISTRATION.residualsDegrees,
-        uncorrectedResidualsDegrees:
-          ESO_PANORAMA_REGISTRATION.uncorrectedResidualsDegrees,
-      }),
-    }),
-  });
-}
 
 // Scene registration for a body: cube-local (ICRF) direction -> ecliptic
 // presentation frame direction, so the runtime's `scene * registration`

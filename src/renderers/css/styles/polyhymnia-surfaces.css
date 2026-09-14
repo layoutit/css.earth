@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="polyhymnia"])[data-lod="billboard"] .polyhymnia-scene, .planet-stage:where([data-object-id="polyhymnia"])[data-lod="marker"] .polyhymnia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="polyhymnia"])[data-lod="marker"] .polyhymnia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="polyhymnia"]).polyhymnia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

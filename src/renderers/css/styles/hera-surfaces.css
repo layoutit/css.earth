@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hera"])[data-lod="billboard"] .hera-scene, .planet-stage:where([data-object-id="hera"])[data-lod="marker"] .hera-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hera"])[data-lod="marker"] .hera-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hera"]).hera-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

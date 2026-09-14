@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="sibylla"])[data-lod="billboard"] .sibylla-scene, .planet-stage:where([data-object-id="sibylla"])[data-lod="marker"] .sibylla-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="sibylla"])[data-lod="marker"] .sibylla-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="sibylla"]).sibylla-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

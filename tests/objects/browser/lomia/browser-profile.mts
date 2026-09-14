@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/lomia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'lomia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/lomia/lomia-directional-sun.webp",
-      "two": "/scenes/lomia/lomia-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/lomia/lomia-shape-surface@2x.webp"
   ],

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="antigone"])[data-lod="billboard"] .antigone-scene, .planet-stage:where([data-object-id="antigone"])[data-lod="marker"] .antigone-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="antigone"])[data-lod="marker"] .antigone-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="antigone"]).antigone-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

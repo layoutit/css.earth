@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="massalia"])[data-lod="billboard"] .massalia-scene, .planet-stage:where([data-object-id="massalia"])[data-lod="marker"] .massalia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="massalia"])[data-lod="marker"] .massalia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="massalia"]).massalia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

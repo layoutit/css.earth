@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="proserpina"])[data-lod="billboard"] .proserpina-scene, .planet-stage:where([data-object-id="proserpina"])[data-lod="marker"] .proserpina-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="proserpina"])[data-lod="marker"] .proserpina-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="proserpina"]).proserpina-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

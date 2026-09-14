@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="zachia"])[data-lod="billboard"] .zachia-scene, .planet-stage:where([data-object-id="zachia"])[data-lod="marker"] .zachia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="zachia"])[data-lod="marker"] .zachia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="zachia"]).zachia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

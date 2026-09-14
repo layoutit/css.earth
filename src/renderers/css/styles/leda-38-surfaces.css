@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="leda-38"])[data-lod="billboard"] .leda-38-scene, .planet-stage:where([data-object-id="leda-38"])[data-lod="marker"] .leda-38-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="leda-38"])[data-lod="marker"] .leda-38-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="leda-38"]).leda-38-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

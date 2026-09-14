@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="polymele"])[data-lod="billboard"] .polymele-scene, .planet-stage:where([data-object-id="polymele"])[data-lod="marker"] .polymele-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="polymele"])[data-lod="marker"] .polymele-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="polymele"]).polymele-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

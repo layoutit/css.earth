@@ -20,11 +20,7 @@ export const browserProfile = createObjectBrowserProfile({
         one: "/scenes/mercury/mercury-starfield-front.webp",
         two: "/scenes/mercury/mercury-starfield-front@2x.webp",
       }),
-      Object.freeze({
-        one: "/scenes/mercury/mercury-directional-sun.webp",
-        two: "/scenes/mercury/mercury-directional-sun@2x.webp",
-      }),
-    ]),
+      ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "enhanced",

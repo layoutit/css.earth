@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ophelia"])[data-lod="billboard"] .ophelia-scene, .planet-stage:where([data-object-id="ophelia"])[data-lod="marker"] .ophelia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ophelia"])[data-lod="marker"] .ophelia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ophelia"]).ophelia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/sylvia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'sylvia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/sylvia/sylvia-directional-sun.webp",
-      "two": "/scenes/sylvia/sylvia-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/sylvia/sylvia-shape-surface@2x.webp"
   ],

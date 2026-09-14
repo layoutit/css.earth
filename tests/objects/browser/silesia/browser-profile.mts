@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/silesia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'silesia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/silesia/silesia-directional-sun.webp",
-      "two": "/scenes/silesia/silesia-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/silesia/silesia-shape-surface@2x.webp"
   ],

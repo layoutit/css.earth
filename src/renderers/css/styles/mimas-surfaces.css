@@ -22,4 +22,3 @@
 .planet-stage:where([data-object-id="mimas"])[data-lod="billboard"] .mimas-scene, .planet-stage:where([data-object-id="mimas"])[data-lod="marker"] .mimas-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="mimas"])[data-lod="marker"] .mimas-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="mimas"]).mimas-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="phobos"])[data-lod="billboard"] .phobos-scene, .planet-stage:where([data-object-id="phobos"])[data-lod="marker"] .phobos-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="phobos"])[data-lod="marker"] .phobos-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="phobos"]).phobos-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

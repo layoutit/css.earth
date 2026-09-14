@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/ajax/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'ajax',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/ajax/ajax-directional-sun.webp",
-      "two": "/scenes/ajax/ajax-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/ajax/ajax-shape-surface@2x.webp"
   ],

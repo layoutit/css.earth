@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="aethra"])[data-lod="billboard"] .aethra-scene, .planet-stage:where([data-object-id="aethra"])[data-lod="marker"] .aethra-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="aethra"])[data-lod="marker"] .aethra-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="aethra"]).aethra-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

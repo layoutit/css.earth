@@ -9,7 +9,7 @@ export interface MaterialSourceTrack extends Omit<PreparedMaterialTrack, 'frame'
   demand: {capacity: number; defaultFrame: number};
   rotation: (PreparedMaterialRotation & {source?: string}) | null;
 }
-export interface MaterialSourcePlan {sun?: {referenceViewDirection?: readonly number[]} | null; sky: {sun?: {initialViewDirection?: readonly number[]}}; materials: readonly MaterialSourceTrack[];}
+export interface MaterialSourcePlan {sun?: {referenceViewDirection?: readonly number[]} | null; materials: readonly MaterialSourceTrack[];}
 
 // Source lighting is normalized during preparation. Runtime selects by view Z.
 export function prepareFrameLookup(count: number, frameAtPhase: (phase: number) => number) {
@@ -49,7 +49,7 @@ function remap(value: number, mapping: MaterialPhaseRemap | null | undefined) {
 }
 
 export function prepareMaterialTracks(plan: MaterialSourcePlan): PreparedMaterialTrack[] {
-  const reference = plan.sun?.referenceViewDirection?.map((x, i) => i ? -x : x) ?? plan.sky.sun?.initialViewDirection;
+  const reference = plan.sun?.referenceViewDirection?.map((x, i) => i ? -x : x);
   return plan.materials.map(track => {
     const source = track.frame;
     let frame;

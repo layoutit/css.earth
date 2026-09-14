@@ -26,11 +26,7 @@ export const browserProfile = createObjectBrowserProfile({
         one: "/scenes/mars/mars-starfield-front.webp",
         two: "/scenes/mars/mars-starfield-front@2x.webp",
       }),
-      Object.freeze({
-        one: "/scenes/mars/mars-directional-sun.webp",
-        two: "/scenes/mars/mars-directional-sun@2x.webp",
-      }),
-    ]),
+      ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "elevation",

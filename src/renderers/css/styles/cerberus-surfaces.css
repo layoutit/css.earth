@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="cerberus"])[data-lod="billboard"] .cerberus-scene, .planet-stage:where([data-object-id="cerberus"])[data-lod="marker"] .cerberus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="cerberus"])[data-lod="marker"] .cerberus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="cerberus"]).cerberus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

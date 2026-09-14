@@ -5,11 +5,7 @@ import type {ShapeModelConfig} from './source.mts';
 import {parseShapeModelConfig,parseShapeContent} from './source.mts';
 import {requireRecord,requireString} from '../../source-values.mts';
 import {requireObjectRuntimeDefinition} from '../../object-runtime-contract.mts';
-import {validatePreparedCubicSky} from '../../../src/platform/cubic-sky-contract.mts';
 interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets;}
-import sharp from 'sharp';
-import { lambertAttenuationAtlas } from '../terrestrial-layers/solid-raster.mts';
-import { DEFAULT_LABEL_POLICY } from '../../../src/platform/label-field.mts';
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -19,15 +15,13 @@ import { createSourceManifest } from '../../../src/platform/source-manifest.mts'
 import { prepareSolidBodySurface } from '../../../src/platform/prepare-solid-body-surface.mts';
 import { preparePlanetCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
 import { preparePlanetDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
-import { prepareAstrometricCubeSampling } from '../../../src/platform/astrometric-sky-registration.mts';
-import { prepareCatalogueStars } from '../../../src/platform/prepare-catalogue-stars.mts';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
 import { prepareSolarSystemScene, prepareSolarSystemSunPresentation } from '../solar-system-scene.mts';
 import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';
-import { preparedSunResources, preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
+import { preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
 import { createPreparedNodeTree } from '../../prepared-node-tree.mts';
 import { prepareCssomDeclarationReads } from '../../prepared-cssom.mts';
-import { prepareModelMarker, prepareModelRasters, prepareRingRaster, prepareSphereLighting } from './raster.mts';
+import { prepareModelRasters, prepareRingRaster, prepareSphereLighting } from './raster.mts';
 import { prepareShapeLighting } from './lighting.mts';
 import { prepareCoplanarColorRaster } from '../material-composition/coplanar-raster.mts';
 
@@ -71,28 +65,19 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
     }] });
   }
   textures.lighting = await prepareSphereLighting({ publicDirectory, publicBase });
-  await writeFile(resolve(publicDirectory, 'marker.webp'), await prepareModelMarker(axes));
   const ringTexture = config.ring ? await prepareRingRaster({ config, publicDirectory, publicBase }) : null;
-  const skySource = requireRecord(JSON.parse(await readFile(resolve(sourceDirectory, 'stars/hyg-v41-field.json'), 'utf8')));
-  const sky = await preparePlanetCubicSky({ objectId: id, sourceRoot: sourceDirectory, publicRoot: publicDirectory,
-    ensureDirectories: () => mkdir(publicDirectory, { recursive: true }), validateSourceGroup: group => source.validateGroup(group),
-    includeSun: false, writeModule: false, sourceSchema: requireString(skySource.schema),
-    cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, pointSourceContract: CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD,
-    astrometricSampling: prepareAstrometricCubeSampling(),
-    catalogueStars: await prepareCatalogueStars({ fovDegrees: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD.horizontalFovDegrees }) });
+  const sky = preparePlanetCubicSky({ objectId: id, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
   const cameraOptions = { bodyId: id, displayName: config.displayName, ...config.camera };
   const rotation=sources.get('rotation');
   const observedPole = rotation && requireRecord(rotation.value).schema === 'cssearth-observed-pole@1';
   const sunPresentation = { ...prepareSolarSystemSunPresentation(cameraOptions), source: `JPL Kepler orbit and ${observedPole ? 'authored observed pole' : 'arbitrary display orientation'}; arbitrary display phase`,
     qualification: 'Sun direction is computed at the shared prepared epoch. The surface longitude origin is an arbitrary display phase, not a measured rotational ephemeris.' };
-  const sun = await preparePlanetDirectionalSun({ objectId: id, publicRoot: publicDirectory,
-    ensureDirectories: () => mkdir(publicDirectory, { recursive: true }), meanHeliocentricDistanceAu: config.distanceAu,
-    presentation: sunPresentation, writeModule: false });
+  const sun = preparePlanetDirectionalSun({ presentation: sunPresentation });
   const astronomy=await loadAstronomyPackage();
   const bodyId=(Object.keys(astronomy.BODIES) as Array<keyof typeof astronomy.BODIES>).find(key=>key===id);
   if(!bodyId)throw new TypeError(`Shape model has no astronomical body ${id}`);
   const scene = await prepareSolarSystemScene({ ...cameraOptions, bodyId, bodyRadiusUnits: config.displayRadius,
-    bodyRadiusKilometers: axes[0], defaultZoom: .75, geometryScale: 1, starfield: {...validatePreparedCubicSky(sky,{requireSun:false}),astrometricRegistration:Object.assign({},requireRecord(requireRecord(sky).astrometricRegistration),{cubeFrame:requireString(requireRecord(requireRecord(sky).astrometricRegistration).cubeFrame)})}, sun });
+    bodyRadiusKilometers: axes[0], defaultZoom: .75, geometryScale: 1, starfield: sky });
   const bodyLeaves = prepareSolidBodySurface({ id, radius: config.displayRadius,
     secondaryRadius: config.displayRadius * axes[1] / axes[0], polarRadius: config.displayRadius * axes[2] / axes[0],
     mapUrl: textures.surface, polesUrl: textures.poles, latitudeSegments, longitudeSegments,
@@ -116,13 +101,8 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
       `background-size:${ringRaster.width}px ${ringRaster.height}px;background-repeat:no-repeat` })) : [];
   if (ringRaster) await writeFile(resolve(publicDirectory, 'ring.webp'), ringRaster.bytes);
   const preparedContent = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
-  const phase = lambertAttenuationAtlas({ frameSize: 32, columns: 4, frameCount: 32, terminatorWidth: .1, directionalAmbient: .05, fullPhaseAmbient: .35, fullPhaseDiffuse: .65, maximumOpacity: .95 });
-  await sharp(phase.pixels, { raw: { width: phase.width, height: phase.height, channels: 4 } }).webp({ lossless: true }).toFile(resolve(publicDirectory, 'marker-phase.webp'));
-  const { BODIES } = await loadAstronomyPackage();
-  const names: Record<string, string> = Object.fromEntries(Object.entries(BODIES).map(([key, body]) => [key, body.name]));
-  const marker = (name: string) => ({ url: `/navigation/body-${name}.webp`, index: 0, count: 1, size: 5 });
-  const entries = [{ key: 'marker-phase', url: publicBase + 'marker-phase.webp', pool: 'mounted' }, ...preparedSunResources(sun, 'mounted'), ...Object.entries(textures).map(([key, url]) => ({ key, url, pool: 'mounted' })),
-    ...(ringTexture ? [{ key: 'ring', url: ringTexture.url, pool: 'mounted' }] : []), { key: 'marker', url: publicBase + 'marker.webp', pool: 'mounted' }];
+  const entries = [...Object.entries(textures).map(([key, url]) => ({ key, url, pool: 'mounted' })),
+    ...(ringTexture ? [{ key: 'ring', url: ringTexture.url, pool: 'mounted' }] : [])];
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...bodyLeaves, ...ringLeaves].map(leaf => leaf.style)) });
   const camera = b.mesh(`polycss-camera shape-model-camera ${id}-camera planet-render-root`), root = b.mesh('polycss-scene');
   const system = b.mesh('shape-model-system', `transform:${scene.systemTransform}`), body = b.mesh('shape-model-body');
@@ -145,7 +125,6 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
     materialReferenceControlYawDegrees: scene.camera.defaultControlYawDegrees,
   } : {};
   const { tree, index } = b.finish({ camera, scene: root });
-  if(!scene.heliocentricView.system)throw new TypeError("Shape presentation requires its prepared system.");
   function requiredMaterialRoot(){if(!materialRoot)throw new TypeError("Shape silhouette lacks its material root.");return materialRoot;}
   const definition = requireObjectRuntimeDefinition(JSON.parse(JSON.stringify({ schema: 'cssearth-object-runtime@4', id, camera: { ...scene.camera, ...materialReference, responsiveFit: { ...scene.camera.responsiveFit, maximumHeightShare: config.camera.maximumHeightShare } }, sky: scene.starfield, sun,
     controls: preparedContent.controls, tree,
@@ -159,11 +138,6 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
     materials: shapeLighting ? [shapeLighting.track(index(shapeLighting.leaf))] : [], animations: [],
     viewBindings: shapeLighting ? [shapeLighting.binding(index(shapeLighting.counter))] :
       [{ kind: 'silhouette-fit', target: index(requiredMaterialRoot()), minimumRadius: 1.5, unitScale: 2 / scene.camera.logicalBodyDiameter }],
-    heliocentricView: { plan: scene.heliocentricView,
-      bodyMarker: { url: publicBase + 'marker.webp', index: 0, count: 1, size: 3 },
-      systemMarkers: { url: '/navigation/body-sun.webp', sun: marker('sun'), bodies: Object.fromEntries(scene.heliocentricView.system.bodies.map(body => [body.id, marker(body.id)])),
-        phase: { url: publicBase + 'marker-phase.webp', columns: 4, rowCount: 8, frameCount: 32, minimumLightViewZ: -1, maximumLightViewZ: 1, baseLightAzimuthDegrees: 0 } },
-      labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: Object.fromEntries([...new Set([id, 'sun', ...scene.heliocentricView.system.bodies.map(body => body.id)])].map(key => [key, names[key]])) } },
   })));
   const { id: _id, controls: _controls, ...presentation } = definition;
   requirePreparedPresentation({ ...presentation, schema: 'cssearth-prepared-presentation@3' }, { controls: preparedContent.controls });

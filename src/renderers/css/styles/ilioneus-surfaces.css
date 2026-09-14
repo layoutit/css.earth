@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ilioneus"])[data-lod="billboard"] .ilioneus-scene, .planet-stage:where([data-object-id="ilioneus"])[data-lod="marker"] .ilioneus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ilioneus"])[data-lod="marker"] .ilioneus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ilioneus"]).ilioneus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/echo/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'echo',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/echo/echo-directional-sun.webp",
-      "two": "/scenes/echo/echo-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/echo/echo-shape-surface@2x.webp"
   ],

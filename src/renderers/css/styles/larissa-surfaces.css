@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="larissa"])[data-lod="billboard"] .larissa-scene, .planet-stage:where([data-object-id="larissa"])[data-lod="marker"] .larissa-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="larissa"])[data-lod="marker"] .larissa-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="larissa"]).larissa-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

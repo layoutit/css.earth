@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/brucia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'brucia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/brucia/brucia-directional-sun.webp",
-      "two": "/scenes/brucia/brucia-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/brucia/brucia-shape-surface@2x.webp"
   ],

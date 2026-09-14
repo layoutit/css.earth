@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="lamberta"])[data-lod="billboard"] .lamberta-scene, .planet-stage:where([data-object-id="lamberta"])[data-lod="marker"] .lamberta-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="lamberta"])[data-lod="marker"] .lamberta-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="lamberta"]).lamberta-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

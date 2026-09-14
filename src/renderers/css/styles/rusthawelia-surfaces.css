@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="rusthawelia"])[data-lod="billboard"] .rusthawelia-scene, .planet-stage:where([data-object-id="rusthawelia"])[data-lod="marker"] .rusthawelia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="rusthawelia"])[data-lod="marker"] .rusthawelia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="rusthawelia"]).rusthawelia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

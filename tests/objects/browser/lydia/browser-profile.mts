@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/lydia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'lydia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/lydia/lydia-directional-sun.webp",
-      "two": "/scenes/lydia/lydia-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/lydia/lydia-shape-surface@2x.webp"
   ],

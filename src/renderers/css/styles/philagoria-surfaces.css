@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="philagoria"])[data-lod="billboard"] .philagoria-scene, .planet-stage:where([data-object-id="philagoria"])[data-lod="marker"] .philagoria-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="philagoria"])[data-lod="marker"] .philagoria-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="philagoria"]).philagoria-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

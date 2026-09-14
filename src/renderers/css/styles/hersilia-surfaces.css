@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hersilia"])[data-lod="billboard"] .hersilia-scene, .planet-stage:where([data-object-id="hersilia"])[data-lod="marker"] .hersilia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hersilia"])[data-lod="marker"] .hersilia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hersilia"]).hersilia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

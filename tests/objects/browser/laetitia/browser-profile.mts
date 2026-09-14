@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/laetitia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'laetitia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/laetitia/laetitia-directional-sun.webp",
-      "two": "/scenes/laetitia/laetitia-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/laetitia/laetitia-shape-surface@2x.webp"
   ],
