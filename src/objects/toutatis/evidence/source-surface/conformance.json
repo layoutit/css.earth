@@ -1,0 +1,62 @@
+{
+  "date": "2026-09-14",
+  "commit": "22530863b602e90684fe778b16136de3d890fe2d",
+  "headless": true,
+  "cases": [
+    "mobile",
+    "dataset-interactions",
+    "dataset-interactions-dpr-2"
+  ],
+  "reports": [
+    {
+      "id": "toutatis",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 4,
+      "stageElements": 812,
+      "stable": true
+    },
+    {
+      "id": "toutatis",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 1,
+      "datasets": [
+        {
+          "id": "shape",
+          "interior": false,
+          "geometryDisplacement": 167.79385868780523,
+          "shadowPixels": null
+        },
+        {
+          "id": "elevation",
+          "interior": false,
+          "geometryDisplacement": 162.76332833025023,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "toutatis",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 2,
+      "datasets": [
+        {
+          "id": "shape",
+          "interior": false,
+          "geometryDisplacement": 167.79385868780523,
+          "shadowPixels": null
+        },
+        {
+          "id": "elevation",
+          "interior": false,
+          "geometryDisplacement": 162.76332833025023,
+          "shadowPixels": null
+        }
+      ]
+    }
+  ]
+}
