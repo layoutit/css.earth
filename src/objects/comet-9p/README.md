@@ -28,7 +28,11 @@ Both use the original [NASA PDS imagery](https://pdssbn.astro.umd.edu/holdings/d
 
 The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 32,040 facets. These are **facet counts, not area percentages**. The retained values span 288.5–309.2 K and 3.461–4.943%/100 nm. Both views use the same missing-data mask and keep Shadows off by default. The grid marks rejected spectra, unsupported shape, and gaps; it is not filled from nearby values.
 
+[Investigation ledger](investigations.json): tested alternatives and the evidence needed to revisit them.
+
 ## Evidence
+
+- **Photometric trials, 2026-09-13:** trials with the published Hapke parameters reduced accepted photographic area from 32.58% to 24.48% for Deep Impact and from 56.43% to 34.28% for NExT. Overlap differences improved in only 11 of 28 and four of 15 pairs, respectively. Both original photograph mosaics remain in use. [Parameters, measurements and limitations](evidence/photometry/trial.json) record these diagnostic trials, including the unverified original H-function approximation and the filter mismatch.
 
 - **Recipe update, 2026-09-13:** a full preparation after merging main's observation recipes (`2f2752abb` plus this infrared change) preserves all 49 delivered images byte-for-byte against `be628e35f`. Runtime values are unchanged, so the earlier browser captures still apply to the comet views. The photographic display fields, source pins and navigation receipts use the new shared recipe; source/package and numerical-frame checks pass.
 
