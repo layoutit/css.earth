@@ -15,6 +15,8 @@ they are not observed terrain, named geography or Arecibo labels.
 | Arecibo shape and synodic period | [Harmon et al. (2010)](https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf) |
 | Placement and observational comparisons | Retained JPL Horizons responses and independent vectors |
 
+[Investigation ledger](investigations.json) records source choices, failed trials and conditions for retrying. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
+
 ## Evidence
 
 - **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
@@ -142,16 +144,7 @@ approximated as TT within 2 ms, following the shared astronomy convention.
 </details>
 
 <details>
-<summary>Source survey and credits</summary>
-
-## Source survey
-
-| Candidate | Disposition |
-| --- | --- |
-| [Groussin et al. (2019)](https://arxiv.org/abs/1911.04897), Table 3 and Section 5.3 | Included: HST contact-sphere proportions, Spitzer scale, pole and uncertainty. The thermal light curve favors this family. Numerical parameters are transcribed with attribution; the paper is not redistributed. |
-| [Harmon et al. (2010), Arecibo radar observations](https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf) | Included as Arecibo: two prolate lobes using the paper's full dimensions, with an explicit illustrative alignment. The later candidate radar pole in Groussin et al. is recorded separately and is not applied to this comparison view. |
-| [JPL radar shape-model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) | No downloadable Tuttle mesh was listed during intake. The published parametric families remain usable without inventing a measured terrain mesh. |
-| Spitzer MIPS/IRS images and spectra in Groussin et al.; referenced thermal/coma studies | Useful size, thermal and coma observations, but unresolved nucleus measurements do not supply a registered surface texture. No additional surface lens is qualified. |
+<summary>Credits</summary>
 
 Background imagery is ESO/S. Brunier under CC BY 4.0; the shared title font is
 Inter by Rasmus Andersson under SIL OFL 1.1. Credits and restoration pins remain

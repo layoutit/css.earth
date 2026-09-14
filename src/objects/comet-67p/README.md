@@ -16,6 +16,8 @@ The displayed rotation phase is arbitrary. Grid marks missing or rejected imager
 The [southern coverage report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-SOUTHERN-OSIRIS.md) describes
 the current eight-image selection and its calibration.
 
+[Investigation ledger](investigations.json) records source choices, failed trials and conditions for retrying. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
+
 ## Evidence
 
 - **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
@@ -270,21 +272,5 @@ separate legends. Modeled ice is a model result.
 Registration is approximate; missing samples and ambiguous mapping near the neck remain
 gridded. The [VIRTIS report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-VIRTIS.md) contains the decoding and
 registration method.
-
-</details>
-
-<details>
-<summary>Alternative sources considered — 8 September 2026</summary>
-
-| Candidate | Coverage and access | Decision |
-| --- | --- | --- |
-| [ESA/RMOC MTP019](https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/ESA_MODEL_INFO.ASC) | Full nucleus, NAVCAM observations 6 August 2014–25 August 2015. Direct public OBJ; 52,098 vertices and 104,192 triangles in the lower resolution product. | Selected. The model is publicly downloadable and its coordinate frame is documented; the acquisition recipe verifies the file hash. |
-| ESA/RMOC MTP009 | Earlier NAVCAM model; southern areas unconstrained by observations. Same archive documentation. | Superseded by MTP019 for this display. |
-| [OSIRIS SHAP5](https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/SHAP5_MODEL_INFO.ASC) | Global stereo-photogrammetric model and several resolution levels in the same PSA collection. | Follow-up candidate for a higher fidelity nucleus; not the input represented here. |
-| [DLR SHAP7 and textured model](https://europlanet.dlr.de/Rosetta/) | Global shape and a textured model are described; data access is by contacting the provider. | Access and exact texture registration remain unresolved; no request or redistribution claim made. |
-| [MiARD albedo](https://www.miard.eu/homepage/publications/) | Catalog lists a 144 MB release; CORDIS specifies 625 nm. Direct HTTPS timed out, HTTP returned 503, and the Commission report mirror returned HDS-010 on 8 September 2026. | Unresolved: data, registration, coverage and reuse terms could not be inspected. |
-| MiARD SHAP8 | Publication route was not successfully retrieved during this survey. | Unresolved, not evidence that a product is unavailable. |
-| [NAVCAM, 20 July 2015](https://blogs.esa.int/rosetta/2015/07/28/cometwatch-20-july/) | Dated 1024×1024 display image, range 171 km, scale 14.5 m/pixel, visibly active nucleus. | Retained original observational reference, not a registered texture. |
-| [OSIRIS GEO, 5–6 August 2014](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/) | Public calibrated orange-filter radiance with corrected SHAP7 XYZ, angles and a separately matched L4 quality map. | Selected for the grayscale mosaic. The August images remain in the current eight-image selection; October–November 2015 images replaced the later September close-ups. Full source camera/quality checks and conservative surface correspondence precede texture transfer. |
 
 </details>

@@ -16,6 +16,8 @@ The photographic dataset combines the accepted Giotto close-up with two Vega 2 v
 
 - [Samarasinha, Mueller, Belton & Jorda (2004), archived rotation compilation](https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/dataset.shtml), supplies the long-axis state and periods used for the approximate projection. [NASA SPDF Vega ephemerides](https://spdf.gsfc.nasa.gov/pub/data/vega/mag/) and original PDS FITS headers supply the spacecraft geometry. Exact inputs are pinned in the [registration](source/reference/giotto-registration.json).
 
+[Investigation ledger](investigations.json) records source choices, failed trials and conditions for retrying. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
+
 ## Evidence
 
 ### Encounter mosaic
@@ -90,15 +92,9 @@ These are presentation choices, not Halley's physical spin solution. No rotation
 
 Heliocentric placement uses JPL Horizons `DES=1P;CAP;`, centre `500@10`, ICRF, at JD 2461286.5 (3 September 2026). Raw elements and independent geometric vector responses are pinned under `source/reference/`; the generated astronomy fixtures also preserve exact queries. TDB is approximated as TT within 2 ms. The osculating conic omits perturbations and outgassing and is checked against independent vectors at the prepared epoch and ±30 days, not claimed as a long-term ephemeris.
 
-## Focused source survey
+<a id="focused-source-survey"></a>
 
-| Candidate | Disposition |
-| --- | --- |
-| PDS Stooke shape table and specific PDS4 label above | Included: complete radius grid and documented uncertainty/frame. |
-| [PDS bundle description](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/document/bundle_description.txt) | Included: coordinate-convention migration, origin and shape caveats. |
-| [ESA calibrated Giotto HMC archive](https://esdcdoi.esac.esa.int/doi/html/data/planetary/GIOTTO/GIO-C-HMC-3-RDR-HALLEY.html), DOI 10.5270/esa-s11mti2 | Real calibrated encounter images; excluded from this model lens. Registration, coma contamination, missing coverage and photometry have not been qualified for a mapped surface. A calibrated frame is not a global texture. |
-| [PDS Vega 2 processed release](https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/dataset.shtml) | T11190 and T11194 add accepted coverage to the existing photographic dataset. Other Vega products remain outside the accepted footprint. |
-| [Belton et al. (1991)](https://doi.org/10.1016/0019-1035(91)90207-A), referenced by the source label | Historical rotation assumptions inform the shape source. No current attitude propagation is implemented. |
+Source selection and unqualified image candidates are recorded in the [investigation ledger](investigations.json).
 
 This package contains the nucleus model only; no coma, tail or outgassing scene.
 
