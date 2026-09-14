@@ -20,3 +20,16 @@ Run `python3 -m unittest discover -s tools/objects/source-authoring/galileo-lucy
 The CMOD converter rotates `[x,y,z]` to `[x,-z,y]`, centers the source bounding box and scales uniformly. It removes only exactly zero-area source triangles, whose original indices are recorded in `shape/model.json`. The remaining triangles retain their source winding and UVs. The shared preparer then reduces the mesh under its error bound. The original model has no qualified observed/fill texture mask, so no photographic texture is imported.
 
 The moon orbit sources separate published constraints from assumed planes, periapsis and phase. Their effective gravitational parameter makes each display conic consistent with its period; it is not presented as a measured mass. No long-term integration, encounter-camera registration or current phase accuracy is claimed.
+
+## Dactyl photographic source review
+
+Run `node tools/objects/source-authoring/galileo-lucy/review-dactyl.mts` from the
+repository root. It verifies the retained native inputs against
+`src/objects/dactyl/evidence/galileo/inputs.json`, decodes the three FITS frames
+with the shared reader, checks the CK segment identities, and writes
+full-detector PNGs, enlarged crops and a report to `output/dactyl-galileo-review/`.
+An optional first argument changes that output directory. The crops use FITS
+storage coordinates, nearest-neighbor enlargement and ×2 DN display gain; the
+report counts clipped pixels. This command neither fits a camera nor modifies
+the prepared scene. See the [Dactyl README](../../../../src/objects/dactyl/README.md)
+for the inspected result and remaining registration requirements.
