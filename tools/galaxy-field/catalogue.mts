@@ -1,0 +1,56 @@
+import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { requireRecord, requireString } from '../source-values.mts';
+export interface Point { x:number; y:number; z:number; absoluteMagnitude:number|null; morphology:string }
+const numeric=(value:string|undefined)=>value?.trim() ? Number(value) : NaN;
+export function positionMpc(raDeg:number,decDeg:number,distanceMpc:number):[number,number,number] {
+  if(![raDeg,decDeg,distanceMpc].every(Number.isFinite)||raDeg<0||raDeg>=360||Math.abs(decDeg)>90||distanceMpc<=0)throw new TypeError('Invalid catalogue position.');
+  const ra=raDeg*Math.PI/180,dec=decDeg*Math.PI/180;
+  return [distanceMpc*Math.cos(dec)*Math.cos(ra),distanceMpc*Math.cos(dec)*Math.sin(ra),distanceMpc*Math.sin(dec)];
+}
+export function distanceModulusMpc(dm:number):number {
+  if(!Number.isFinite(dm))throw new TypeError('Invalid distance modulus.');
+  return 10**((dm-25)/5);
+}
+/** Independent CDS table join. Local Group detail is supplied by the application's separate catalogue. */
+export async function loadScientificCatalogue(radiusMpc:number) {
+  if(!Number.isFinite(radiusMpc)||radiusMpc<=3)throw new TypeError('Invalid field radius.');
+  const manifest=requireRecord(JSON.parse(await readFile('src/objects/nearby-universe/source/catalogue.json','utf8')));
+  if(manifest.schema!=='cssearth-galaxy-field-sources@1'||!Array.isArray(manifest.sources))throw new TypeError('Invalid source manifest.');
+  const tables=new Map<string,Record<string,string>[]>();
+  for(const input of manifest.sources){
+    const source=requireRecord(input),id=requireString(source.id),path=requireString(source.path);
+    if(!path.startsWith('.local/galaxy-field/sources/')||path.includes('..'))throw new TypeError('Invalid source path.');
+    const bytes=await readFile(path);
+    if(bytes.length!==source.bytes||createHash('sha256').update(bytes).digest('hex')!==source.sha256)throw new Error(`Changed input: ${id}. Run acquisition and review its pins.`);
+    const [header,...lines]=bytes.toString('utf8').trimEnd().split('\n');
+    const names=header!.trim().split('\t');
+    const rows=lines.map(line=>{const values=line.split('\t').map(value=>value.trim().replace(/^"|"$/g,''));if(values.length!==names.length)throw new TypeError(`Invalid TSV row: ${id}`);return Object.fromEntries(names.map((name,i)=>[name,values[i]!]));});
+    if(rows.length!==source.rows)throw new TypeError(`Incomplete source: ${id}`);
+    tables.set(id,rows);
+  }
+  const required=(id:string)=>{const table=tables.get(id);if(!table)throw new TypeError(`Missing source: ${id}`);return table;};
+  const velocities=new Map(required('hyperleda-hi').map(row=>[row.PGC,numeric(row.VHI)]));
+  const pgc=new Map(required('hyperleda-pgc').map(row=>[row.PGC,row]));
+  const cf4=new Map(required('cosmicflows-4').map(row=>[row.PGC,row]));
+  if(cf4.size!==required('cosmicflows-4').length)throw new TypeError('Duplicate CF4 identity.');
+  const ids=new Set([...pgc.keys(),...cf4.keys()]),points:Point[]=[];
+  let invalid=0,outside=0,local=0,measured=0,hubble=0;
+  for(const id of ids){
+    const measuredRow=cf4.get(id),row=measuredRow??pgc.get(id)!;
+    const dm=numeric(row.DM),ra=numeric(row.RAdeg),dec=numeric(row.DEdeg);
+    const distance=measuredRow ? distanceModulusMpc(dm) : (velocities.get(id)??NaN)/70;
+    if(![distance,ra,dec].every(Number.isFinite)||distance<=0){invalid++;continue;}
+    if(distance<=3){local++;continue;}
+    if(distance>radiusMpc){outside++;continue;}
+    const [x,y,z]=positionMpc(ra,dec,distance);
+    points.push({x,y,z,absoluteMagnitude:null,morphology:pgc.get(id)?.MType??''});
+    if(measuredRow)measured++;else hubble++;
+  }
+  return {points,count:ids.size,invalid,outside,local,lineage:{sources:manifest.sources,
+    frame:'Heliocentric equatorial J2000 coordinates, converted to Cartesian Mpc.',
+    distancePolicy:'CF4 individual distance modulus takes precedence. Positive HyperLEDA VHI/70 supplies a Hubble-law estimate otherwise; peculiar velocities are not corrected.',
+    selection:'Union of CF4 and the 50,000 largest angular-diameter PGC rows, exact PGC join. Field is limited to 3–200 Mpc; the Local Group is rendered separately.',
+    photometry:'No optical luminosity measurements imported. Point brightness and morphology tints are authored display values.',
+    measuredDistanceRows:measured,hubbleDistanceRows:hubble}};
+}

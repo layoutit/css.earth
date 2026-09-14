@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/smc/source/source.jpg",
+      "origin": "https://noirlab.edu/public/images/noirlab2030b/",
+      "sourceUrl": "https://noirlab.edu/public/images/noirlab2030b/",
+      "title": "Deepest, widest view of the Small Magellanic Cloud from SMASH",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+      "displayCredit": "NSF's NOIRLab via AstroPix",
+      "acquisition": "publisher-curated AstroPix JPEG derivative",
+      "expectedSha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c",
+      "expectedBytes": 4359408,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noirlab2030b",
+            "role": "material",
+            "evidence": "src/objects/smc/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "optical",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "blanco-4m",
+            "evidence": "https://noirlab.edu/public/images/noirlab2030b/"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [],
+  "generatedIntermediates": []
+}

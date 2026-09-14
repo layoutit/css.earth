@@ -16,7 +16,7 @@ test('all installed volume lenses produce standard source cards with real source
   const closure = new Set<string>();
   const entries = await prepareVolumeProvenance({ root, input: async path => { closure.add(path); return readFile(resolve(root, path)); } });
   assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [
-    ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m42', 2], ['m45', 5], ['m8', 3],
+    ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['smc', 1],
   ]);
   assert.equal(entries.find(entry => entry.id === 'm45')?.defaultLens, 'optical-composite');
   assert.ok([...closure].every(path => !path.startsWith('.local/') && !path.endsWith('/prepared/lenses.json')));
@@ -40,7 +40,7 @@ test('all installed volume lenses produce standard source cards with real source
       assert.ok(own && inputs.includes(own.id));
       const context = datasetContext(entry.id, control.id, entry.provenance, graph, catalog, usage, sources);
       assert.ok(context.sources.some(group => group.links.length));
-      assert.ok(context.sources.some(group => group.supporting.length));
+      if (product.inputs.length > 1) assert.ok(context.sources.some(group => group.supporting.length));
       const output = entry.outputs.find(output => output.path.endsWith(control.thumbnailUrl));
       assert.ok(output && output.text instanceof Uint8Array);
       const image = await sharp(output.text).metadata();

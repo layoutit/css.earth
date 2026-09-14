@@ -117,3 +117,18 @@ Redownloading is optional; replacing any checked source requires deliberate pin
 updates and a new preparation receipt. The tests reject corrupted source bytes,
 duplicate consumed YAML fields, coordinate-frame changes, radius-based membership,
 lost candidates, and a changed canonical rebake.
+
+### Sparse context display
+
+`pnpm prepare:galaxy-catalog` also writes `prepared/display-sample.json`.
+It selects 48 catalogue-only Local Group galaxies using 150 kpc spatial cells,
+weighted by square-root galaxy counts so dense regions receive more points
+without erasing sparse outskirts. Positions and scientific source references
+remain those in the validated catalogue. The four galaxies with imagery are
+retained separately. This is a display sample, not a completeness or mass map.
+
+Dots begin appearing at 120 Mpc and reach full visibility at 30 Mpc on approach.
+Names and ovals follow between 40 and 12 Mpc; collision handling limits labels
+to twelve. Images still use their projected-size visibility. Catalogue-only
+entries never become navigation targets. The distant galaxy field remains
+visible behind the transition.

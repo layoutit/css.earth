@@ -8,7 +8,7 @@ import { required } from './navigation-test-values.mts';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { validatePreparedVolumeLenses } from '../../src/renderers/css/dist/universe.js';
 import { sceneSources, sceneSourceGroups } from '../scene-sources.mts';
-const sharedLabels = ['NASA SVS', 'OpenSpace', 'HYG', 'IBEX', 'LVDB', 'McConnachie', 'ESA/Hubble', 'ESO', 'NOIRLab', 'ESO VISTA', 'NOIRLab Horálek', 'NASA/IPAC WISE', 'Dryad', 'Bonanos', 'NOIRLab', 'MCXC-II'];
+const sharedLabels = ['NASA SVS', 'OpenSpace', 'HYG', 'IBEX', 'LVDB', 'McConnachie', 'ESA/Hubble', 'ESO', 'NOIRLab', 'ESO VISTA', 'NOIRLab Horálek', 'NASA/IPAC WISE', 'Dryad', 'Bonanos', 'NOIRLab', 'Cosmicflows-4', 'HyperLEDA I', 'HyperLEDA II', 'MCXC-II'];
 
 test('small shell attribution records match the checked scientific provenance', async () => {
   const read = async (path: string) => SourceEvidence.parse(JSON.parse(await readFile(new URL(`../../src/objects/${path}`, import.meta.url), 'utf8')));

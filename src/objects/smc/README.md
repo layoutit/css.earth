@@ -9,3 +9,7 @@ Sources, recipes and expected geometry/resource hashes remain tracked. Layer Web
 ## Accepted bytes
 
 Re-accepted on 2026-09-12 on macOS arm64 with sharp 0.35.3 (libwebp 1.6.0): the replay reproduced 95 of 96 layers byte for byte and encoded `layers/x-13.webp` 4 bytes shorter than the earlier acceptance, so its resource digest and the prepared pin were updated to the bytes now committed. Values did not change; the recipe and sources are the same.
+
+## Dataset sidebar
+
+The source-owned presentation and manifest feed the shared nebula provenance pipeline. `pnpm prepare:sources` verifies the image and recipe pins, prepares a bounded preview, and restores the dataset, factsheet and source cards. The optical dataset is the existing image-layer bank, not a new measured volume. Pixel dimensions describe the input image; coverage and depth limitations remain explicit.
