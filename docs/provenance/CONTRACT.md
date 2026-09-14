@@ -79,6 +79,14 @@ or `deferred`), the finding, evidence links and the commit it was checked at.
 An entry that is not included names what would reopen it in `revisitWhen`.
 Link repository evidence at a commit or pull request; a branch link moves.
 
+When consolidating an earlier review, `checked` identifies the version of the
+records reviewed. Preserve the original trial date and result in the finding or
+pinned evidence; consolidation does not claim a fresh archive search or repeat
+qualification. Give distinct source decisions their own entries. `included`
+means selected for the stated use, not that every scientific claim is qualified.
+Ledger coverage counts objects with records, not objects with complete imagery
+or an exhaustive source search.
+
 The README links the ledger instead of repeating a source survey. Read the
 ledger before investigating an object. Reopen an excluded, unresolved or
 deferred entry only when its `revisitWhen` condition is met, and say which.

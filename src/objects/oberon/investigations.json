@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "oberon",
+  "entries": [
+    {
+      "id": "schenk-lpi-2020-oumap-cyl-180180-cub",
+      "subject": "Schenk/LPI 2020 oumap-cyl-180180.cub",
+      "status": "included",
+      "finding": "Included as Monochrome. Updated control network and native numeric samples make it preferable to the older display-texture map. The release supplies photometrically corrected imagery; preserved shadows and seams are disclosed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "schenk-lpi-2020-oumapzlimb-cub",
+      "subject": "Schenk/LPI 2020 oumapZlimb.cub",
+      "status": "excluded",
+      "finding": "Excluded as an Elevation lens. These are sparse digitized limb profiles, not extended surface elevation coverage. The author warns that their older control network may displace them by several degrees. They must not be expanded into neighboring terrain or treated as a registered full-surface DEM.",
+      "revisitWhen": "A released Oberon topographic reconstruction provides extended measured coverage registered to the selected mosaic; sparse limb values alone cannot fill that gap.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/source/manifest.json",
+        "https://repository.hou.usra.edu/bitstreams/c256d12e-7dd9-4e1a-a190-7c2f05932d06/download"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "schenk-and-moore-2023-topography-overview-and-2020-s",
+      "subject": "Schenk and Moore 2023 topography overview and 2020 source paper",
+      "status": "included",
+      "finding": "Supporting scientific context. The authors explicitly describe the lack of extended topography on Oberon and Umbriel, confirming why this package has no Elevation lens. Paper figures are not substitutes for measured raster coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/source/manifest.json",
+        "https://www.hou.usra.edu/meetings/uranusflagship2023/pdf/8140.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jpl-simulator-oberon-texture-1440-720-4-pixels-degre",
+      "subject": "JPL simulator Oberon texture, 1440 × 720, 4 pixels/degree",
+      "status": "excluded",
+      "finding": "Superseded as a display source. It derives from USGS/Voyager grayscale imagery, but does not provide the selected release's revised control metadata and floating-point source values. Its nominal pixel count is not evidence of more native detail. No duplicate lens is added.",
+      "revisitWhen": "A better controlled JPL release provides observed detail or coverage beyond the selected Schenk mosaic.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/source/manifest.json",
+        "https://space.jpl.nasa.gov/tmaps/uranus.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-voyager-2-uranus-iss-edr-archive",
+      "subject": "PDS Voyager 2 Uranus ISS EDR archive",
+      "status": "excluded",
+      "finding": "Underlying observation archive, excluded from this presentation in favor of the already corrected and controlled release. Raw frames would require a separate radiometric and pointing reconstruction; PDS warns about errors in original emission/incidence metadata.",
+      "revisitWhen": "A Oberon observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/source/manifest.json",
+        "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=VG2-U-ISS-2-EDR-V1.0"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "voyager-filter-color-trial",
+      "subject": "Voyager C2683625 / C2683627 / C2683629 color reconstruction",
+      "status": "excluded",
+      "finding": "The 2026-09-07 trial used calibrated GEOMED CLEAR C2683625, VIOLET C2683627 and GREEN C2683629 (about 5 km/pixel, roughly 300-pixel disc), following the Helfenstein photometry route. Final image-space RMS was 0.55, 0.86 and 1.07 pixels respectively. Despite bounded Lunar-Lambert correction and missing unstable limb samples, mounted color views were softer than Monochrome, with chromatic fringes and a visible coverage transition. This trial did not qualify a second lens.",
+      "revisitWhen": "A sharper reconstruction with independently validated inter-band registration removes the chromatic fringes and visible coverage transition without borrowing monochrome detail.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/source/manifest.json",
+        "https://ntrs.nasa.gov/citations/19910046112"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jpl-pia00034-color-disc",
+      "subject": "JPL PIA00034 color disc",
+      "status": "excluded",
+      "finding": "Excluded from mapped lenses. The published disc reconstructs color from violet, clear and green filters; the press image alone does not supply a calibrated, registered surface product or new coverage.",
+      "revisitWhen": "A Oberon observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/source/manifest.json",
+        "https://www.jpl.nasa.gov/images/pia00034-oberon-at-voyager-closest-approach/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "geologic-map-manuscript-catalog",
+      "subject": "Geologic map manuscript catalog",
+      "status": "unresolved",
+      "finding": "Unresolved interpretive candidate. The catalog records a manuscript color plate but supplies no downloadable qualified geospatial units or source projection/coverage metadata. It is not used as a scientific raster.",
+      "revisitWhen": "The catalog’s linked manuscript data become downloadable with geospatial units, projection, coverage and reuse terms.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/oberon/source/manifest.json",
+        "https://planetarymapping.elte.hu/map-catalog/map/6000/geologic-map-of-oberon/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

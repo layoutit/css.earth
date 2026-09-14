@@ -1,0 +1,127 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "metis",
+  "entries": [
+    {
+      "id": "galileo-ssi-selected-frames",
+      "subject": "Selected Galileo SSI reconstructed observations",
+      "status": "included",
+      "finding": "C0532890500 and the documented complementary views supply coarse Monochrome under fixed ellipsoid registration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/source/manifest.json",
+        "https://opus.pds-rings.seti.org/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "radiation-and-coarse-frames",
+      "subject": "C0401639113, C0401773600 and C0401786800 alternatives",
+      "status": "excluded",
+      "finding": "C0401639113 was rejected for radiation noise. C0401773600 and C0401786800 were rejected for much coarser or redundant coverage after inspection of the original G8/C9/E11 observations.",
+      "revisitWhen": "A registration and level review shows distinct usable coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/source/manifest.json",
+        "https://opus.pds-rings.seti.org/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "press-and-unresolved-images",
+      "subject": "PIA02531, Voyager and Hubble alternatives",
+      "status": "excluded",
+      "finding": "The press panel repeats the selected image and Voyager/Hubble are unresolved or nearly unresolved.",
+      "revisitWhen": "A native registered product adds resolved coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/source/manifest.json",
+        "https://opus.pds-rings.seti.org/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pck-ellipsoid",
+      "subject": "PCK ellipsoid shape model",
+      "status": "included",
+      "finding": "The explicitly labeled PCK ellipsoid supplies the current approximate geometry and does not establish resolved topography. The separate Stooke/Thomas investigation records why a numerical research mesh was not adopted.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/source/manifest.json",
+        "https://opus.pds-rings.seti.org/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "unmapped-science",
+      "subject": "Color, composition, altimetry and geology candidates",
+      "status": "deferred",
+      "finding": "The recorded survey found no registered resolved complementary map.",
+      "revisitWhen": "A mapped product has documented quantity, frame and coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/source/manifest.json",
+        "https://opus.pds-rings.seti.org/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "stooke-thomas-shape-search",
+      "subject": "Stooke release and Thomas et al. shape reconstruction",
+      "status": "unresolved",
+      "finding": "The examined Stooke archive has no Metis model in its released target list. Thomas et al. (1998) and later research describe a reconstruction, but the survey did not locate a reusable numerical release.",
+      "revisitWhen": "A primary Metis vertex/facet or numerical radius release provides its coordinate frame, units and reconstruction method.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/README.md",
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "denk-2026-review",
+      "subject": "Denk et al. (2026), Figure 10 and Table 3",
+      "status": "included",
+      "finding": "Image identifiers and comparisons guided the source survey. The paper artwork is not sampled as a texture.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/metis/README.md",
+        "https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

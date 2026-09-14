@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "larissa",
+  "entries": [
+    {
+      "id": "photographic-registration",
+      "subject": "C1138148 surface registration",
+      "status": "deferred",
+      "finding": "The existing registration record states that the photograph remains coarse limb-pointed evidence without independently controlled surface features, so the photographic surface stays deferred.",
+      "revisitWhen": "A Larissa camera or surface-control release supports independent interior holdouts from a different viewing geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/larissa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/larissa/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "voyager-iss-archive-c1138148",
+      "subject": "Voyager ISS archive, C1138148",
+      "status": "included",
+      "finding": "Selected for the retained coarse Monochrome lens: calibrated GEOMED clear frame C1138148, about 3.54 km per corrected pixel (4.18 km/native pixel), with only roughly 50–60 samples across the visible disc. Limb-pointed registration is not independent surface-feature control; photographic terrain qualification remains deferred in the separate registration entry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/larissa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/larissa/source/manifest.json",
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "c1138142-and-c1138153",
+      "subject": "C1138142 and C1138153",
+      "status": "excluded",
+      "finding": "Inspected archive frames. Excluded: repeated similar coverage or much coarser wide-angle sampling; no distinct dataset or useful added detail.",
+      "revisitWhen": "A Larissa observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/larissa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/larissa/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "usgs-pds-mapping-colour-composition-and-altimetry-se",
+      "subject": "USGS/PDS mapping, colour, composition and altimetry searches",
+      "status": "deferred",
+      "finding": "No additional registered scientific layer was qualified. Global radius values are a coarse shape reconstruction and must not be presented as an observed high-resolution DEM.",
+      "revisitWhen": "A Larissa source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/larissa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/larissa/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "stooke-radius-grid",
+      "subject": "Stooke n7larissa.tab radius grid",
+      "status": "included",
+      "finding": "The PDS 5-degree west-positive radius grid supplies shape and radius-relative Elevation above 96 km. It preserves the published origin and modeled unseen shape; broad figure, exaggerated facets and depressions are not local altimetry or a high-resolution terrain survey.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/larissa/README.md",
+        "https://doi.org/10.26033/yt84-5y91",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/larissa/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "stooke-relief-drawings",
+      "subject": "Stooke shaded-relief drawings",
+      "status": "excluded",
+      "finding": "Interpretive shaded-relief drawings are not adopted as photographic imagery; the independently documented numeric radius grid remains the selected shape input.",
+      "revisitWhen": "A measured photographic or scalar product supplies its original pixels or values, coverage and body-fixed registration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/larissa/README.md",
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

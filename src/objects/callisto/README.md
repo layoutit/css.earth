@@ -8,6 +8,8 @@
 
 - The infrared view uses [the registered Galileo NIMS archive](https://doi.org/10.17189/4sq6-x165), observations G8CNADLIND01A and G8CNGLOBAL02A, Minnaert-corrected CIOF products.
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 ## Evidence
 
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.

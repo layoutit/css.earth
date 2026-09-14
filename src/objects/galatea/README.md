@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - Its semiaxes are **102 × 92 × 72 km**, from Karkoschka (2003), *Sizes, shapes, and albedos of the inner satellites of Neptune*, Icarus 162, 400–407, [DOI](https://doi.org/10.1016/S0019-1035(03)00002-2).
 
 ## Evidence
@@ -37,13 +39,7 @@ Surface, minimap, thumbnail and companion portrait share this interpretation. Fl
 
 Surveyed 2026-09-07 beyond the first press image:
 
-| Candidate | Disposition |
-| --- | --- |
-| [PDS Voyager ISS original GEOMED frames](https://pds-rings.seti.org/voyager/iss/) | Original C1135055, C1144523, C1144537 and C1145807 were downloaded and decoded. C1135055 is the finest observation in the OPUS Galatea-geometry inventory: 18.66229 km per original detector pixel, 15.36 s exposure, 13.079° phase. The geometrically corrected image shows an elongated streak rather than independently registered terrain. The other candidates are coarser, at about 134° phase, with 15.36–61.44 s exposures. Excluded from surface mapping: a static perspective projection would turn motion smear into invented features. |
-| [Karkoschka 2003 Voyager reanalysis](https://doi.org/10.1016/S0019-1035(03)00002-2) | Included for measured ellipsoid axes. A measured shape fit is useful even when its contributing photographs do not support a surface texture. Full publisher text was unavailable during this pass; only the explicitly published abstract dimensions are used, without guessed uncertainties or unseen terrain. |
-| [PDS Stooke shape-model release](https://sbn.psi.edu/pds/resource/stkshape.html) | Release contents were checked: Neptune models cover Larissa and Proteus, not Galatea. No Galatea detailed mesh was substituted. |
-| [Keck NIRC2 near-infrared photometry, 2024](https://doi.org/10.1016/j.icarus.2024.116004) | Distinct measured H-band photometry, derived by aperture integration of shifted and stacked moon images. Useful for integrated reflectivity, not a spatially resolved color or composition surface. Excluded as a surface lens. |
-| USGS/LPI mapped products | No registered Galatea cartographic, topographic or geological surface product was located in this survey. This is a search outcome, not a claim that no other observations exist. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 OPUS intended-target searches omit Galatea because those archival frames targeted Neptune/rings. The relevant inventory uses `surfacegeometrytargetlist=Galatea`, sorted by `SURFACEGEOgalatea_centerresolution1`. C1135055 geometric correction resamples the original detector grid to 1000 × 1000 pixels; that does not increase independent resolution.
 

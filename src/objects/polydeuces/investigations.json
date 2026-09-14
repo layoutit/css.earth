@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "polydeuces",
+  "entries": [
+    {
+      "id": "measured-axes",
+      "subject": "Hedman et al. Polydeuces measured axes",
+      "status": "included",
+      "finding": "Hedman et al. (2020), Table 1 and Appendix B supply semiaxes 1.75 × 1.55 × 1.31 km, each with ±0.20 km uncertainty. The selected analytic ellipsoid approximates the overall dimensions and does not reconstruct local terrain.",
+      "evidence": [
+        "https://arxiv.org/abs/1912.09192",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/polydeuces/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/polydeuces/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-cl1-ir1",
+      "subject": "Cassini N1527002576 CL1/IR1 pointing evidence",
+      "status": "included",
+      "finding": "The selected near-infrared frame is a coarse pointing record; at about 9 by 7 pixels it cannot establish surface-feature registration.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/polydeuces/source/survey/native-inspection.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/polydeuces/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-2015-crescent",
+      "subject": "Finer 2015 Polydeuces crescent",
+      "status": "excluded",
+      "finding": "The inspected crescent mixes strong Saturnshine with direct solar illumination and was not used as a surface patch.",
+      "revisitWhen": "A comparable higher-resolution view with separable illumination and registration can be assessed.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/polydeuces/source/survey/native-inspection.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/polydeuces/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "shape-and-mapped-routes",
+      "subject": "Polydeuces shape, terrain and composition alternatives",
+      "status": "excluded",
+      "finding": "No body-specific PDS shape deliverable, DEM, geology or spatial composition product was qualified; integrated photometry is not mapped.",
+      "revisitWhen": "A registered body-specific shape or spatial product can support a qualified route.",
+      "evidence": [
+        "https://doi.org/10.26033/ewy3-jy61",
+        "https://arxiv.org/abs/1912.09192",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/polydeuces/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}
