@@ -26,7 +26,7 @@ import { observationRaster, parseObservationLens, loadNativeObservationPoleSampl
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
 import { encodeBandColor } from '../color-transfer.mts';
-import { prepareControlledMapMosaic, loadControlledMapPoles } from './controlled-map-mosaic.mts';
+import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
 export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; }
@@ -95,8 +95,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
     if (sourceVerification === 'complete') await source.verify();
     else for (const surface of recipe.surfaces) {
       const kind = surface.science?.kind ?? 'static-observation';
-      const controlledPhotograph = kind === 'terrestrial-mosaic' && surface.science?.format === 'controlled-geotiff';
-      if ((!controlledPhotograph && !['static-observation', 'pds-float-map', 'terrestrial-observation', 'terrestrial-observed-color'].includes(String(kind))) ||
+      if ((!['static-observation', 'pds-float-map', 'terrestrial-observation', 'terrestrial-observed-color'].includes(String(kind))) ||
           surface.science?.scientific || surface.science?.elevation || surface.science?.synoptic)
         throw new TypeError('A photographic refresh cannot reprepare scientific, modeled or emissive views.');
       await source.validatePath(surface.source);
@@ -191,6 +190,17 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const { rgb, missing, report } = await observation(surface, width, height);
         const resampling = requireRecord(surface.science.validity).resampling;
         const plan = parseSolidObservation({ id: surface.id, ...surface.science });
+        if(surface.science.detailMosaic!==undefined) {
+          const detail=requireRecord(surface.science.detailMosaic);
+          if(detail.format!=='controlled-geotiff'||!plan.nativePhotographicSampling)throw new TypeError('Controlled detail requires a native photographic base.');
+          const tiles=await (await manifest).validateGroup(requireString(detail.consumer)),profile=requireRecord(detail.profile);
+          const result=await prepareControlledMapMosaic(sourceDirectory,tiles,profile,width,height);
+          const matching=matchControlledMapLevels(result,{rgb,missing},width,height,detail.levelMatching);
+          const poles=await loadControlledMapPoles(sourceDirectory,tiles,profile,new Map(matching.levels.map(level=>[level.id,level.gain])));
+          const base=await nativePhotograph(surface,plan);
+          return {...rgb3(result.rgb,result.missing,width,height,false),report:{...result.report,levelMatching:matching,baseObservation:surface.science.input,baseMeaning:'Published global display mosaic outside controlled photographic coverage.'},
+            nativePhotograph:{width:base.width,height:base.height,sample(longitude:number,latitude:number,color:number[]){return poles.sample(longitude,latitude,color)||base.sample(longitude,latitude,color);}}};
+        }
         const interpreted = {...rgb3(rgb, missing, width, height, resampling === 'source-georeferenced-nearest'),...(report?{report}:{})};
         if (plan.nativePhotographicSampling && interpreted.nearest) {
           throw new TypeError(`${objectId}/${surface.id}: native photographic polar sampling does not apply to nearest-sampled data.`);
@@ -217,12 +227,6 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const plan = shape({ format: text, consumer: text })(surface.science);
         const source = await manifest;
         const tiles = await source.validateGroup(plan.consumer);
-        if (plan.format === 'controlled-geotiff') {
-          const profile = requireRecord(surface.science.profile);
-          const result = await prepareControlledMapMosaic(sourceDirectory, tiles, profile, width, height);
-          return { ...rgb3(result.rgb, result.missing, width, height, false), report: result.report,
-            nativePhotograph: await loadControlledMapPoles(sourceDirectory, tiles, profile) };
-        }
         const photometry = requireRecord(surface.science).photometry as { consumer?: string } | undefined;
         if (photometry?.consumer) await source.validateGroup(photometry.consumer);
         const { rgb, missing } = plan.format === 'controlled-orthographic'

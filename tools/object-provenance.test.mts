@@ -61,12 +61,12 @@ test('standalone lineage recovery never claims a fresh preparation, including wi
   assert.ok(verified.sources.every(source => source.verification === 'bytes-verified'));
 });
 
-test('controlled raster mosaics bind every consumed photograph, beyond the representative source', async t => {
+test('controlled photographic inserts bind every consumed photograph alongside the global base', async t => {
   const context = await fixture(t);
   const recipePath = resolve(context.source, 'preparation/raster.json'), recipe = await read(recipePath);
   const surface = requireRecord(requireArray(recipe.surfaces)[0]);
-  surface.science = { kind: 'terrestrial-mosaic', format: 'controlled-geotiff', consumer: 'surfaces',
-    profile: { displayRange: [0, 2], filter: 'CLEAR' } };
+  surface.science = { kind: 'terrestrial-observation', detailMosaic: {format: 'controlled-geotiff', consumer: 'surfaces',
+    profile: { displayRange: [0, 2], filter: 'CLEAR' },levelMatching:{boundaryPixels:4}} };
   const bytes = JSON.stringify(recipe);
   await writeFile(recipePath, bytes);
   const descriptorPath = resolve(context.objectDirectory, 'object.json'), descriptor = await read(descriptorPath);
