@@ -29,6 +29,25 @@ The [September 2026 photographic projection trial](evidence/photographic-project
 
 Diagnostic from the LAM SPHERE release, Marsset et al. (2020); observation 2017-10-11 05:04:27 UTC. Linear display stretch retains observed illumination. Grey marks omitted photographic samples. The right panel uses a different viewing direction and scale; it is not an app capture or a pixel-difference comparison.
 
+The [native crater check](evidence/projected-controls.json) now replays four
+published crater coordinates against frozen cameras for both source models.
+Three tentative native identifications differ by 23–29 pixels from their projected
+positions; Hoplon differs by 9–11 pixels. The yellow regions below are visual
+identification ranges, not confidence intervals. This does **not** establish an
+absolute camera error: the feature identities and the published coordinate-to-model
+correspondence still need to be resolved. Switching between ADAM and MPCD does
+not remove the discrepancy. No camera correction was adopted from these picks.
+An exploratory quadratic illumination correction, following the method class in
+[Fétick et al. (2019), section 4.4](https://arxiv.org/pdf/1902.01287), did not
+make the crater identifications unambiguous; it is not reflectance calibration.
+
+![Tentative native crater centres and projected catalogue positions for ADAM and MPCD](evidence/projected-controls.png)
+
+October 11 SPHERE image, LAM release / Marsset et al. (2020). Yellow marks tentative
+native-image identifications; cyan marks projected published coordinates. Both
+panels use the same native pixels, linear stretch and nearest-neighbour enlargement.
+They are source-space diagnostics, not app captures or qualified surface imagery.
+
 ## Known problems
 
 Shape uses the shared no-imagery grid. It is not photographed color, reflectance, regolith or inferred composition. Elevation samples the original mesh radius minus a 255.5 km reference sphere, with a -60 to 40 km legend. This includes global shape, not height above a gravitational equipotential.
@@ -82,5 +101,37 @@ TDB is approximated as TT within 2 ms.
 <summary>Reproduction</summary>
 
 Source pins live in [source/manifest.json](source/manifest.json); source/preparation/acquisition.json restores the ignored OBJ, original article, ESO sky panorama and Inter font. LAM's ordinary public-site cookie is explicitly recorded. Generated context.png is force-tracked as a pinned intermediate and regenerated/verified by the existing radial snapshot recipe.  Shared sky and title provenance remain in their source directories.
+
+</details>
+
+<details>
+<summary>Reproduce the native crater comparison</summary>
+
+The [diagnostic recipe](evidence/photographic-controls.json) pins the exact FITS
+image, ADAM and MPCD meshes, frozen cameras, published coordinates and tentative
+native picks. It uses the shared preparation tool
+[check-projected-controls.mts](../../../tools/objects/surface-features/check-projected-controls.mts).
+The tool verifies input bytes before decoding, checks source-mesh visibility and
+reports each discrepancy without fitting or certifying the camera. It replays the
+retained candidate cameras; it does not yet reproduce their derivation as a full
+photographic preparation recipe.
+
+Place the three files named in the recipe in `output/pallas-photographic-projection/`.
+Their original download URLs, byte counts and SHA-256 hashes are in the recipe;
+the LAM downloads require the public-site header
+`Cookie: CesAM_LAM_opens_the_door=1`. The existing investigation cache already
+contains all three, so no new downloads are needed there.
+
+```sh
+node tools/objects/surface-features/check-projected-controls.mts \
+  src/objects/pallas/evidence/photographic-controls.json \
+  output/pallas-photographic-projection \
+  output/pallas-photographic-projection/control-check
+```
+
+The command writes `projected-controls.json` and `projected-controls.png`.
+Five focused tests cover coordinate direction, visibility, uncorrected residuals,
+invalid controls and changed input pins. The preparation TypeScript project also
+passes. These checks prove the inspection tool, not Pallas surface registration.
 
 </details>
