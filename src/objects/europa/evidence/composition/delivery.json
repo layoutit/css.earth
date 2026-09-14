@@ -1,0 +1,88 @@
+{
+  "schema": "cssearth-composition-delivery-evidence@1",
+  "baseCommit": "f8fbdaa0b203f11b4f121b867eb478d38d6c311e",
+  "retainedScene": {
+    "path": "src/objects/europa/prepared/scene.refs.json",
+    "sha256": "8e16a56dbdd419ddf8a52d1ecedc82933f3912fe01db01128e7df83360ef7df3",
+    "unchanged": true
+  },
+  "unchangedExistingAssets": 120,
+  "addedBytes": 222678,
+  "addedAssets": [
+    {
+      "filename": "europa-coarse-ice.webp",
+      "bytes": 20152,
+      "sha256": "6664f29a64af4d48c2cc9d5b8b492d478d0859168fe8d4a7b736f84890b4b1da"
+    },
+    {
+      "filename": "europa-coarse-ice@2x.webp",
+      "bytes": 40214,
+      "sha256": "3445290322e40e6b3f5bf745b69757e140bc89366377d989bf63137491a16e30"
+    },
+    {
+      "filename": "europa-fine-ice.webp",
+      "bytes": 19132,
+      "sha256": "489891eac605bd6f740707a82ad3a7c69bc14af7c3c2da5bfe6afb52114ce619"
+    },
+    {
+      "filename": "europa-fine-ice@2x.webp",
+      "bytes": 37256,
+      "sha256": "8249b8c3fbcc7deec23cf39a11680b84d575abded14da051ca77c7d5670382b0"
+    },
+    {
+      "filename": "europa-ice-signature.webp",
+      "bytes": 19416,
+      "sha256": "213aaaf1feae8facefc96449e0661a3a5c1ae02f1ce43fc2fe65d87daf6a6c7a"
+    },
+    {
+      "filename": "europa-ice-signature@2x.webp",
+      "bytes": 38392,
+      "sha256": "1cb04424881acf1fe3b1bf442ad8fdcb13dedde0320ed372a2a56dba09b2e11e"
+    },
+    {
+      "filename": "europa-lens-coarse-ice.webp",
+      "bytes": 4454,
+      "sha256": "78eef448eb826f1a50fc56756ad375c28dcd0713a37e38f7f305a4f8cf5ddf8d"
+    },
+    {
+      "filename": "europa-lens-fine-ice.webp",
+      "bytes": 4488,
+      "sha256": "e98011c7da839a2ba0093aa5c7a9b2819624cebf513fbb17f0d1aa8e0af2c46b"
+    },
+    {
+      "filename": "europa-lens-ice-signature.webp",
+      "bytes": 4320,
+      "sha256": "1d3747071e6b6dc8d776e686907651eb07c17c66322e899d3541488bef28be53"
+    },
+    {
+      "filename": "europa-poles-coarse-ice.webp",
+      "bytes": 3436,
+      "sha256": "ff5af59f1ac279891d6f751be8d9d4d0ed906c3306cf0739348f32205ee5bdd2"
+    },
+    {
+      "filename": "europa-poles-coarse-ice@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
+    },
+    {
+      "filename": "europa-poles-fine-ice.webp",
+      "bytes": 3436,
+      "sha256": "ff5af59f1ac279891d6f751be8d9d4d0ed906c3306cf0739348f32205ee5bdd2"
+    },
+    {
+      "filename": "europa-poles-fine-ice@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
+    },
+    {
+      "filename": "europa-poles-ice-signature.webp",
+      "bytes": 3436,
+      "sha256": "ff5af59f1ac279891d6f751be8d9d4d0ed906c3306cf0739348f32205ee5bdd2"
+    },
+    {
+      "filename": "europa-poles-ice-signature@2x.webp",
+      "bytes": 8182,
+      "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b"
+    }
+  ]
+}

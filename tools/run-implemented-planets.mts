@@ -8,7 +8,7 @@ import { pathToFileURL } from "node:url";
 import { OBJECTS } from "../site/objects.mts";
 import { authoredObject } from './authored-object.mts';
 
-export interface ObjectCommand {command: string; argumentsList: readonly string[]; cwd?: string;}
+export interface ObjectCommand {command: string; argumentsList: readonly string[]; cwd?: string; env?: Readonly<Record<string, string | undefined>>;}
 export interface PreparationCommand extends ObjectCommand {id: string; cwd: string;}
 export interface ObjectCommandOutcome {exitCode: number | null; signal: string | null;}
 export interface PreparationResult {id: string; script: string; status: 'not-started' | 'running' | 'succeeded' | 'failed'; startedAt?: string; exitCode?: number | null; signal?: string | null; error?: string; elapsedMilliseconds?: number;}
@@ -116,9 +116,9 @@ export function defaultPreparationConcurrency({
   return 1;
 }
 
-export async function runObjectCommand({ command, argumentsList, cwd }: ObjectCommand): Promise<ObjectCommandOutcome> {
+export async function runObjectCommand({ command, argumentsList, cwd, env }: ObjectCommand): Promise<ObjectCommandOutcome> {
   return new Promise<ObjectCommandOutcome>((resolvePromise, reject) => {
-    const child = spawn(command, argumentsList, { cwd, stdio: "inherit" });
+    const child = spawn(command, argumentsList, { cwd, env, stdio: "inherit" });
     child.once("error", reject);
     // close follows process exit and closure of its inherited output streams.
     child.once("close", (exitCode, signal) => resolvePromise({ exitCode, signal }));

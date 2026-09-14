@@ -36,6 +36,90 @@
           "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
         }
       ]
+    },
+    {
+      "id": "cassini-filter-color",
+      "subject": "Selected calibrated Cassini filter-color observations",
+      "status": "included",
+      "finding": "Two June 2011 IR3/IR1/UV3 sequences supply False color. Seven retained relative registration checks pass the existing independent RMS≤1 px and maximum≤2 px criteria; the original 8.4 px training outlier remains visible. These relative fits do not improve the source 150–300 m shape uncertainty.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/helene/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/helene/source/preparation/terrestrial.json",
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/helene_document.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "legacy-voyager-stooke-maps",
+      "subject": "Legacy Voyager/Stooke maps and shaded-relief illustrations",
+      "status": "excluded",
+      "finding": "The retained source review did not select these as observed maps: they lack the combination of Cassini detail and measured camera registration used by this package. Shaded-relief drawings are not observational textures.",
+      "revisitWhen": "A registered observational map supplies useful independent coverage or detail on this source frame.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/helene/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "integrated-spectroscopy",
+      "subject": "Cassini small-moon spectra and integrated photometry",
+      "status": "excluded",
+      "finding": "The examined small-inner-satellite spectra and photometric analyses inform interpretation but are disk-integrated. They do not support painting a spatial composition texture onto this moon.",
+      "revisitWhen": "A spatially resolved, calibrated spectrum or mapped product is tied to this moon’s surface coordinates.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/helene/README.md",
+        "https://www.usgs.gov/publications/cassini-spectra-and-photometry-025-51-mm-small-inner-satellites-saturn",
+        "https://doi.org/10.3847/1538-3881/ab659d"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "clear-close-2011",
+      "subject": "Four additional June2011 Cassini clear views",
+      "status": "included",
+      "finding": "N1687119135_1 adds roughly 44 m/pixel source sampling versus the earlier best58 m/pixel. N1687121164_1, N1687121224_1 and N1687121524_1 add nearby views. The recorded benefit is primarily detail/overlap, not large new coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/helene/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/helene/evidence/close-encounters/qualification.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "isolated-bright-pair",
+      "subject": "Level matching N1646319036_1 and N1646319549_1",
+      "status": "unresolved",
+      "finding": "These25–27-degree phase views overlap no other accepted frame. They remain selected but supply about 35% of displayed area at roughly 1.65 times the brightness; the later coverage expansion did not establish a level connecting them.",
+      "revisitWhen": "An overlapping controlled observation or source-backed photometric solution connects the pair to the other selected observations.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/helene/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/helene/evidence/cassini-coverage/refresh.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
     }
   ]
 }

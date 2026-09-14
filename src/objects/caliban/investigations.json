@@ -1,0 +1,39 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "caliban",
+  "entries": [
+    {
+      "id": "farkas-takacs-k2-thermal",
+      "subject": "Farkas-Takacs et al. K2 light curve and size constraints",
+      "status": "included",
+      "finding": "K2 variability supplies a minimum-elongation model; thermal diameter 42 (+20/−12) km is a tentative one-band fit with broad beaming degeneracy. Table 4 supports the adopted doubled 9.948-hour rotation, while the paper text mistakenly pairs half frequency with 4.9742 hours. Minimum elongation assumes uniform reflectivity and an equator-on view. Equal short axes, volume normalization, pole, spin sense and meridian remain display assumptions; no resolved surface or unique three-dimensional shape is established.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/caliban/README.md",
+        "https://arxiv.org/pdf/1706.06837",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/caliban/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "uranus-flagship-2023-summary",
+      "subject": "2023 Uranian irregular-satellites physical summary and occultation prospects",
+      "status": "included",
+      "finding": "The inspected 2023 physical summary supplies comparison context for the selected light-curve and size interpretation. Its predicted occultation prospects are not measured silhouettes or terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/caliban/README.md",
+        "https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8187.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

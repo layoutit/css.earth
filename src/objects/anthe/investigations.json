@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "anthe",
+  "entries": [
+    {
+      "id": "nominal-sphere",
+      "subject": "Anthe nominal unresolved-size sphere",
+      "status": "included",
+      "finding": "The NASA/JPL nominal 0.5 km radius supplies an explicitly approximate sphere and missing-data grid. The 1 km diameter is an uncertain size estimate, not a measured spherical outline; Anthe’s shape remains unresolved.",
+      "evidence": [
+        "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/anthe/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/anthe/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-native-resolution",
+      "subject": "Cassini OPUS Anthe candidates",
+      "status": "excluded",
+      "finding": "The finest inspected candidate is about 0.714 km per pixel, only roughly 1.4 pixels across the nominal diameter, so it cannot supply a surface map.",
+      "revisitWhen": "A body-resolved observation with adequate native pixels and registered geometry can be assessed.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/anthe/source/survey/native-inspection.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/anthe/source/survey/opus.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/anthe/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "shape-release",
+      "subject": "PDS Saturn shape release for Anthe",
+      "status": "excluded",
+      "finding": "No body-specific deliverable was qualified in the reviewed release.",
+      "revisitWhen": "A released Anthe shape with usable provenance and frame can replace the nominal sphere.",
+      "evidence": [
+        "https://doi.org/10.26033/ewy3-jy61",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/anthe/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "mapped-lenses",
+      "subject": "Anthe terrain, colour and composition routes",
+      "status": "excluded",
+      "finding": "No qualified DEM, geology or mapped composition product was identified; integrated photometry is not spatial data.",
+      "revisitWhen": "A body-specific spatial product can support a lens.",
+      "evidence": [
+        "https://arxiv.org/abs/1912.09192",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/anthe/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

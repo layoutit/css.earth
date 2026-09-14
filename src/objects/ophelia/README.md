@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - [Karkoschka (2001), Table IV, printed page 55](https://doi.org/10.1006/icar.2001.6596) adopts a prolate spheroid with radius axes A=27 km and B=19 km.
 
 - [French et al. (2024), Table 3, PDF page 10](https://arxiv.org/abs/2401.04634) reproduces the Voyager paper's Table V: projected √(AB) radius 23 ± 4 km and B/A=0.7 ± 0.3.
@@ -39,15 +41,7 @@ The **footnote-b row** in French Table 3 gives GM=(2.38 ± 0.22)×10⁻³ km³/s
 
 Coordinates are east-positive body longitude, with the modeled long axis at 0°/180°. Old PCK spherical radii are not used for shape.
 
-| Candidate | Disposition |
-| --- | --- |
-| Karkoschka 2001 adopted shape | Included as a prolate approximation. No craters or local relief inferred. |
-| [PDS Voyager ISS](https://pds-rings.seti.org/voyager/iss/), processed calibrated imagery | Sorted 3,727 indexed Ophelia observations by body-center sampling. Best C2687614 has 11.70539 km per native pixel: at most 4.6 samples across the longest diameter, at phase 150.593°. Downloaded and inspected its actual GEOMED image and label. A 15.36 s ring observation at this crescent phase does not support a useful cartographic surface. Geometric resampling adds no native detail. |
-| Lower-phase Voyager observation C2676439 | Phase 15.799° but 33.48036 km per native pixel, fewer than two samples along the longest diameter. Metadata retained; not adopted as a surface map. |
-| French 2024 occultation/ring analysis | Included for shape uncertainties, ring relationships and dynamically inferred mass. Ring waves are not a spatial map of the moon. |
-| [HST photometry/recovery](https://doi.org/10.1006/icar.2001.6596) and [observer account](https://news.cornell.edu/stories/2000/03/first-time-14-years-astronomers-spot-two-shepherd-uranian-moons) | Recover position and integrated brightness, not resolved surface texels. No Color lens qualified. |
-| USGS mapping, PDS shape releases, [JPL texture catalog](https://space.jpl.nasa.gov/tmaps/uranus.html) | No usable registered surface map, detailed mesh, elevation or geology field located. This is a survey disposition, not proof that no future data could exist. |
-| [NASA overview](https://science.nasa.gov/uranus/moons/ophelia/) | Used for discovery and ring-shepherd context; newer primary dimensions and mass take precedence over old physical estimates. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 Only compact numeric measurements, our summary, PCK rotation data and archival image metadata are versioned. Copyrighted paper PDFs stay in ignored research; preparation does not depend on fetching papers.
 

@@ -88,6 +88,40 @@
           "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
         }
       ]
+    },
+    {
+      "id": "cassini-filter-color",
+      "subject": "Selected calibrated Cassini filter-color observations",
+      "status": "included",
+      "finding": "The original IR3/GRN/UV3 triplet and the independently checked January 2010 sequence supply False color. The two encounters have no accepted overlap for level matching, so relative brightness remains unmatched rather than corrected by guessed gains.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prometheus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prometheus/source/preparation/terrestrial.json",
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/prometheus_document.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "disconnected-color-encounters",
+      "subject": "Relative level between the two false-color encounters",
+      "status": "unresolved",
+      "finding": "No accepted same-surface overlap connects the two color sequences, so their gains remain1. The observed brightness discontinuity is not corrected by per-band equalization or a natural-color assumption.",
+      "revisitWhen": "An independently registered bridge observation or applicable sourced photometry establishes the inter-encounter level.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prometheus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prometheus/evidence/cassini-coverage/refresh.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
     }
   ]
 }

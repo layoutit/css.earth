@@ -1,0 +1,326 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "comet-1p",
+  "entries": [
+    {
+      "id": "giotto-hmc01814",
+      "subject": "Calibrated Giotto HMC hmc01814",
+      "status": "unresolved",
+      "finding": "The retained intake pins hmc01814 (image 3436) and its calibration. It does not establish the Stooke model-to-inertial attitude or a surface coverage mask. Derived-asset reuse also remains unresolved between the cited distribution statements; no surface texture from this frame is qualified.",
+      "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01814.img"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "giotto-hmc01838",
+      "subject": "Calibrated Giotto HMC hmc01838",
+      "status": "unresolved",
+      "finding": "The retained intake pins hmc01838 (image 3460) and its calibration. It does not establish the Stooke model-to-inertial attitude or a surface coverage mask. Derived-asset reuse also remains unresolved between the cited distribution statements; no surface texture from this frame is qualified.",
+      "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01838.img"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "giotto-hmc01848",
+      "subject": "Calibrated Giotto HMC hmc01848",
+      "status": "unresolved",
+      "finding": "The retained intake pins hmc01848 (image 3470) and its calibration. It does not establish the Stooke model-to-inertial attitude or a surface coverage mask. Derived-asset reuse also remains unresolved between the cited distribution statements; no surface texture from this frame is qualified.",
+      "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01848.img"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "giotto-hmc01856",
+      "subject": "Calibrated Giotto HMC hmc01856",
+      "status": "unresolved",
+      "finding": "The retained intake pins hmc01856 (image 3478) and its calibration. It does not establish the Stooke model-to-inertial attitude or a surface coverage mask. Derived-asset reuse also remains unresolved between the cited distribution statements; no surface texture from this frame is qualified.",
+      "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01856.img"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "giotto-hmc01860",
+      "subject": "Calibrated Giotto HMC hmc01860",
+      "status": "unresolved",
+      "finding": "The retained intake pins hmc01860 (image 3482) and its calibration. It does not establish the Stooke model-to-inertial attitude or a surface coverage mask. Derived-asset reuse also remains unresolved between the cited distribution statements; no surface texture from this frame is qualified.",
+      "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01860.img"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "giotto-hmc01869",
+      "subject": "Calibrated Giotto HMC hmc01869",
+      "status": "unresolved",
+      "finding": "The retained intake pins hmc01869 (image 3491) and its calibration. It does not establish the Stooke model-to-inertial attitude or a surface coverage mask. Derived-asset reuse also remains unresolved between the cited distribution statements; no surface texture from this frame is qualified.",
+      "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01869.img"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "giotto-hmc01881",
+      "subject": "Calibrated Giotto HMC hmc01881",
+      "status": "unresolved",
+      "finding": "The retained intake pins hmc01881 (image 3503) and its calibration. It does not establish the Stooke model-to-inertial attitude or a surface coverage mask. Derived-asset reuse also remains unresolved between the cited distribution statements; no surface texture from this frame is qualified.",
+      "revisitWhen": "A camera tied to the exact shape frame and an independently checked nucleus mask qualify its surface placement, and the applicable derived-image reuse terms are resolved.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/giotto-hmc-intake.json",
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01881.img"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "stooke-pds4-shape",
+      "subject": "PDS4 Stooke historical shape",
+      "status": "included",
+      "finding": "The selected 5-degree radius grid uses east-positive longitude and the long axis as its reference axis. Published absolute uncertainty is about 0.5–1 km; its depressions may be exaggerated. The fixed display attitude is illustrative.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md",
+        "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "1991-radius-table-and-camera",
+      "subject": "Stooke and Abergel 1991 Table 1 and Table 2",
+      "status": "excluded",
+      "finding": "The separate 10-degree radius table uses a different rotation-axis frame. Its camera geometry cannot be assigned to the later PDS long-axis model without a demonstrated transformation; the paper also reports limb and terminator mismatches.",
+      "revisitWhen": "An exact version and coordinate transformation binds those cameras to their matching shape or to the selected PDS model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md",
+        "https://articles.adsabs.harvard.edu/pdf/1991A%26A...248..656S"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "revised-1995-model",
+      "subject": "Revised model described in the 1995 LPSC abstract",
+      "status": "unresolved",
+      "finding": "The two-page abstract describes a revised slow long-axis model, but provides neither numerical camera controls nor a radius table. Its shared Belton citation does not establish exact identity with the selected PDS version.",
+      "revisitWhen": "The revised numerical shape and camera or frame records become available.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md",
+        "https://www.lpi.usra.edu/meetings/lpsc1995/pdf/1683.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "mps-giotto-composite",
+      "subject": "MPS Giotto composite region",
+      "status": "included",
+      "finding": "The displayed composite region is retained with approximate encounter projection and the MPS educational-use attribution record. The held-out silhouette check tests outline consistency, not independent internal feature locations.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/giotto-registration.json",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/giotto-projection-report.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "vega2-t11190-t11194",
+      "subject": "Processed Vega 2 T11190 and T11194",
+      "status": "included",
+      "finding": "The two processed images extend the existing Giotto + Vega lens while preserving all previously accepted Giotto map pixels. The relative Vega display gain passes held-out overlap checks; cross-filter brightness is not recovered albedo.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/encounter-registration.json",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/encounter-projection-report.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "image-to-shape-feature-registration",
+      "subject": "Independent Halley feature registration",
+      "status": "deferred",
+      "finding": "The source-and-evidence record defers photographic faithfulness because silhouette agreement does not independently establish interior feature coordinates on this uncertain historical mesh. The Historical model remains the supported shape view.",
+      "revisitWhen": "Independent surface features with a verified model frame validate the photographic placement within stated source uncertainty.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/encounter-registration.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "rotation-and-ephemerides",
+      "subject": "Public rotation compilation and Vega ephemerides",
+      "status": "included",
+      "finding": "The 2004 rotation compilation and mission ephemerides support the approximate projection. Rounded rotation parameters, 148 seconds of observer extrapolation and a single camera for a composite remain limitations; no current tumbling state is inferred.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/giotto-registration.json",
+        "https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/dataset.shtml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "reitsema-feature-catalog",
+      "subject": "Reitsema, Delamere and Keller 1989 feature catalog",
+      "status": "unresolved",
+      "finding": "The cited catalog describes 21 bright features and eight morphological regions that may support independent checks. Its reference frame has not been bound to the selected PDS shape.",
+      "revisitWhen": "The feature coordinates and their original frame can be retrieved and matched to the chosen model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md",
+        "https://doi.org/10.1016/0273-1177(89)90244-5"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "belton-1991-tables",
+      "subject": "Belton 1991 rotation solution",
+      "status": "unresolved",
+      "finding": "The shape label and later public compilation cite this solution, but the full original tables were not established as a directly consumed camera-to-shape source. The public compilation supports the current approximation.",
+      "revisitWhen": "The original tables can be checked against the selected model version and public compilation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md",
+        "https://doi.org/10.1016/0019-1035(91)90207-A"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "mps-other-presentations",
+      "subject": "MPS catalog figures 55, 63 and 66",
+      "status": "deferred",
+      "finding": "These presentations of the close-up region were inspected without establishing an independently qualified extension of the accepted footprint.",
+      "revisitWhen": "A distinct photographed region and independent registration demonstrate useful new coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "ikf-transformed-products",
+      "subject": "IKF transformations of Vega T11190",
+      "status": "excluded",
+      "finding": "These products are transformations of the same observation and add no new viewing geometry. Their copyrighted processed images were not used.",
+      "revisitWhen": "A distinct observation adds useful geometry and its processing and reuse rights are established.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    },
+    {
+      "id": "giotto-vega-cross-mission-gain",
+      "subject": "Cross-mission Giotto/Vega brightness gain",
+      "status": "excluded",
+      "finding": "Only six distinct overlap blocks were available, so the cross-mission gain was rejected. Giotto retains its original RGB; the independently supported Vega-to-Vega gain is retained.",
+      "revisitWhen": "Adequate independent cross-mission overlap supports a bounded gain without changing the meaning of the mixed-filter photographs.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/README.md",
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-1p/source/reference/encounter-projection-report.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
+        }
+      ]
+    }
+  ]
+}

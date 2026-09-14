@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "asteroid-1992-sk",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original sk.obj](https://echo.jpl.nasa.gov/asteroids/shapes/sk.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf): Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy. The paper and original geometry are pinned beside the recipe. Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.5 km sphere, from -0.11 to 0.23 km. The scalar is evaluated at the closest source triangle point, not the first center-ray intersection. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments. The live JPL index was checked against the actual preparation input shape/sk.obj; it still links this exact model. The page is dated 2024-08-10, not a new scientific-model release. This confirms the published source route, not new mesh bytes, optical imagery or independent source-fit accuracy.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1992-sk/README.md",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/sk.obj",
+        "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-1992-sk/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied.",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1992-sk/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-1",
+      "subject": "PDS numerical radar counterpart",
+      "status": "included",
+      "finding": "The PDS radar bundle (Lawrence and Benner, 2020; https://doi.org/10.26033/xtkf-wz81) supplies the corresponding a10115_1992sk.obj and XML label. Every parsed vertex and triangle index matches the consumed JPL file exactly, despite formatting differences. The pinned bundle description explicitly identifies kilometer units, center-of-mass origin, principal axes and positive-Z spin axis. Its label describes radar image resolution of 19 m. Facet density and display texel density are not observation resolution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1992-sk/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "PDS spin and source-frame phase",
+      "status": "included",
+      "finding": "The pinned PDS spin table records ecliptic pole (99°,-3°), 7.3182 h period, and phase 243° at 1999-02-03 00:00:00. The original paper's pole uncertainties are ±5° and period uncertainty ±0.0003 h (three sigma). These are archival model parameters. The app retains this model's axes and period with arbitrary display phase; the archival epoch is not propagated into a current attitude. The 2006 paper's nominal equal-volume diameter is 1.0 ± 0.2 km and the northern structure may be a fitting artifact.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1992-sk/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "Later light-curve shape and spin",
+      "status": "unresolved",
+      "finding": "The pinned [Ďurech et al. (2022) primary paper](https://doi.org/10.1051/0004-6361/202141844) fits later lightcurves with another convex model. Its Table 1 gives pole (94° ± 10°,-56° ± 5°), period 7.320232 ± 0.000010 h at JD 2451192.0, and positive rotational acceleration (8.3 ± 0.6) × 10⁻⁸ rad/day². This differs materially from the historical radar spin interpretation. No source registration is available here to apply that newer pole to the archived radar mesh, and the constant-period display does not claim to model YORP evolution.",
+      "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1992-sk/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "Additional mapped surface fields",
+      "status": "unresolved",
+      "finding": "The original radar and optical lightcurves constrain geometry and spin, not a resolved optical texture. Gravity/slope estimates in the original paper assume a bulk density and do not supply an independently observed surface field. The newer lightcurve solution is an unregistered alternative shape. No resolved optical map or independently registered composition, temperature, gravity or slope grid was identified in this bounded source survey. No resolved optical surface map is supplied.",
+      "revisitWhen": "An acquired field with defined units, coverage and registration to the selected radar mesh; a bulk quantity or unregistered alternative shape does not qualify it.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1992-sk/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

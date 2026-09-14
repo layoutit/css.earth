@@ -24,7 +24,7 @@ Prime-meridian display phase is arbitrary. Lighting does not claim an absolute c
 
 The final Elevation atlas withholds 116 of 5,777,054 triangle-interior texels (0.0020%) to the shared grid. The scientific value is not extrapolated beyond the source-distance allowance. Atlas bleed is counted separately in prepared/surfaces.json.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="nereus-sources-and-preparation"></a>
 <a id="frame-and-appearance"></a>
@@ -49,9 +49,7 @@ Pinned JPL Horizons elements and independent vectors at JD 2461286.5 and ±30 da
 
 **Source survey and independent anchors**
 
-The [PDS SBN shape index](https://sbn.psi.edu/pds/shape-models/) and JPL model and publication listings were checked for complementary released products. The selected original mesh remains the body geometry; no calibrated optical mosaic, optical reflectance map, geology map or separate elevation survey was located in those releases. This bounded survey is not a claim that no other dataset exists.
-
-The archive name Nereus_alt1.mod.wf does not identify the physical alternative by itself: independently measured vertex extents and volume match the preferred Table 3 model. The thicker 0.494 × 0.320 × 0.317 km alternative is not this mesh. The [2021 JPL radar gallery](https://echo.jpl.nasa.gov/Gallery/) supplies newer, finer delay-Doppler observations, excluded as a surface texture because radar-delay/Doppler image coordinates are not a registered optical map. An updated source mesh from those observations remains unresolved; the current download index still links the older model. The reference radius uncertainty is derived by halving the paper’s asymmetric diameter uncertainty.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Prepared scalar and texture checks**
 

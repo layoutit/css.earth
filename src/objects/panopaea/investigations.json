@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "panopaea",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 6171: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-6171.txt. Model 6171, version 2023-10-03, pole (42°, 27°), period 15.8044 h match the retained metadata. The archive diameter field is 128 ±7 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/panopaea/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/panopaea/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/panopaea/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "Shape uses the shared missing-imagery grid. DAMIT's viewer illustrations are not source surface maps; no albedo, photographic color, regolith or composition is inferred.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/panopaea/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "This view uses [model 6171](https://damit.cuni.cz/projects/damit/asteroid_models/view/6171) at its published scale and paired pole. [Model 6172](https://damit.cuni.cz/projects/damit/asteroid_models/view/6172) is an alternative pole/shape solution, excluded from this presentation without claiming the selected pole is unique. The 2023 calibrated release is associated with Marciniak et al., Scaling slowly rotating asteroids with stellar occultations (A&A 679, A60). It scales a lightcurve-inversion shape with occultation evidence; the paired alternative pole solution is retained in the source survey, not blended into this model. The live DAMIT export lists these other models for this target: 6172: pole (240°, 26°), 15.80439 h, version 2023-10-03, archive diameter 127 km. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/panopaea/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/6172",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    }
+  ]
+}

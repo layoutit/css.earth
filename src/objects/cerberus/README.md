@@ -22,7 +22,7 @@ Recorded four-body results retain their [original build identities](https://gith
 - The published thermophysical fit is poor and its diameter uncertainty is unconstrained; the missing error value does not mean zero uncertainty.
 - No registered reflectance texture is available. Grid marks missing imagery; Elevation is shape-derived radius relative to a sphere, not measured geology. Rotation phase is arbitrary.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 
 ## Methods
 
@@ -42,18 +42,6 @@ The unchanged original shape contains 1022 vertices and 2040 faces. Signed volum
 ## Orientation
 
 Source pole: ecliptic J2000 (311°,-78°). Reference sidereal period: 6.80329 h. Equatorial conversion uses obliquity 23.439291111°. Original +Z axis and +X meridian are retained. Absolute rotational phase is arbitrary; reference-period display rotation is not a YORP propagation model. Heliocentric state is generated through the shared Horizons owner at 2026-09-03; its TDB-as-TT approximation is under 2 ms.
-
-## Source survey
-
-- [Original numerical mesh](https://damit.cuni.cz/projects/damit/stored_files/open/1783/shape.txt) — selected, pinned unchanged.
-- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — pole, period, units and archive diameter definitions; CC BY 4.0.
-- [Ďurech et al. (2012), Analysis of the rotation period of asteroids (1865) Cerberus, (2100) Ra-Shalom, and (3103) Eger - search for the YORP effect](https://ui.adsabs.harvard.edu/abs/2012A%26A...547A..10D)
-- [Hanuš et al. (2015), Thermophysical modeling of asteroids from WISE thermal infrared data - Significance of the shape model and the pole orientation uncertainties](https://ui.adsabs.harvard.edu/abs/2015Icar..256..101H)
-- [Hanuš et al. (2015), thermophysical fits with shape and pole uncertainty](https://arxiv.org/html/1504.04199)
-
-Alternative shapes/poles: None in the checked target listing.
-
-No registered global reflectance texture is supplied by the selected release. Lightcurves and disk-integrated thermal/radar measurements do not supply surface texels. The normal grid identifies unavailable imagery. The Elevation view reports source radius minus the stated reference sphere; it is shape-derived false color, not independent topography or gravitational height.
 
 ## Preparation
 
