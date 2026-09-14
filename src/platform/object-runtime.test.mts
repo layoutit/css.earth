@@ -12,7 +12,7 @@ import { createPreparedResidency } from '../renderers/css/dist/testing.js';
 import { createPreparedPlayback } from '../renderers/css/dist/testing.js';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createObjectSelectionRuntime } from '../renderers/css/dist/testing.js';
-import { retainedPresentationFixture } from "./test/object-runtime-package.mts";
+import { retainedPresentationFixture, fixtureObjectCapabilities } from "./test/object-runtime-package.mts";
 const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("moon"));
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("earth"));
 import { earthPagingFixture } from '../../tests/objects/unit/earth/paging-fixture.mts';
@@ -30,7 +30,7 @@ const flush = async () => { for (let index = 0; index < 32; index++) await Promi
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 function publicationForTest(): OrbitPublication {
   return { controlPitch: 0, controlYaw: 0, zoom: 1, sceneMatrix: matrix, skyboxMatrix: matrix,
-    sunViewDirection: null, skySunViewDirection: null, sunPresentation: null, counterRotation: matrix,
+    sunViewDirection: null, skySunViewDirection: null, counterRotation: matrix,
     counterRotationFor: () => matrix };
 }
 type RuntimeServices = NonNullable<Parameters<typeof createObjectRuntime>[1]>;
@@ -79,7 +79,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
   // The package fixture is the controlled native DOM boundary used by this test.
   const stage = f.stage as unknown as HTMLElement;
   const errors: unknown[] = [], jobs: DecodeJob[] = [], events: string[] = [], flights: unknown[][] = [], native = new CSSAnimation(), created: HTMLElement[] = [];
-  f.document.readyState = "complete"; f.document.defaultView = {};
+  f.document.readyState = "complete";
   f.document.querySelector = () => f.stage;
   if (stageId === null) Reflect.deleteProperty(f.stage.dataset, "objectId"); else f.stage.dataset.objectId = stageId;
   f.stage.getAnimations = () => { throw new Error("Mount must not discover live animations"); };
@@ -100,7 +100,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
   const publication: OrbitPublication = { controlPitch: definition.camera.defaultControlPitchDegrees ?? 0,
     controlYaw: definition.camera.defaultControlYawDegrees ?? 0, zoom: definition.camera.defaultZoom,
     sceneMatrix: matrix, counterRotation: matrix, counterRotationFor: () => matrix,
-    skyboxMatrix: matrix, sunPresentation: null, skySunViewDirection: definition.sun?.referenceViewDirection ?? [1, 0, 0], sunViewDirection: [1, 0, 0] };
+    skyboxMatrix: matrix, skySunViewDirection: definition.sun?.referenceViewDirection ?? [1, 0, 0], sunViewDirection: [1, 0, 0] };
   let runtime: Runtime;
   try {
     const mount = runtimeFactory(definition, {
@@ -122,7 +122,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
       waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(), ...overrides,
     });
     runtime = mount(stage, { diagnostics, inputSurface: stage, runtimePolicy,
-      capabilities: { ...preparedObjectCapabilities, ...(overrides.mountPages ? { mountPages: overrides.mountPages } : {}) },
+      capabilities: { ...fixtureObjectCapabilities, ...(overrides.mountPages ? { mountPages: overrides.mountPages } : {}) },
       onError: error => errors.push(error) });
   } catch (error) { f.restore(); throw error; }
   async function resolveJobs() {
@@ -146,7 +146,7 @@ test("one mount owns the actual prepared tree, startup, celestial layers, readin
   assert.equal(h.native.playState, "paused"); assert.equal(h.native.currentTime, 0);
   assert.ok(h.events.includes("sky")); assert.equal(h.events.at(-1), "ready");
   // The harness records the retained sky orientation root in addition to the prepared presentation tree.
-  assert.equal(h.created.length, moonDefinition.tree.nodes.length + 1);
+  assert.equal(h.created.filter(node => !node.closest(".prepared-surface-features")).length, moonDefinition.tree.nodes.length + 2);
   assert.equal(h.selection().stats().commits, 1);
   assert.equal(h.selection().stats().framePublications > 0, true);
   assert.deepEqual(h.orbitArguments().cameraPlan, moonDefinition.camera);
@@ -175,7 +175,7 @@ test("destroy settles never-ending real startup and native rejection stays retir
   const h = harness(); t.after(h.restore); await flush(); assert.ok(h.jobs.length > 0);
   h.runtime.destroy(); await h.runtime.ready;
   for (const job of h.jobs) job.reject(new Error("late decode")); await flush();
-  assert.deepEqual(h.events, []); assert.deepEqual(h.errors, []);
+  assert.deepEqual(h.events, ["remove:camera", "sky", "remove:orbit", "remove:sky", "remove:camera"]); assert.deepEqual(h.errors, []);
   assert.equal(h.resources().stats().images.entries.length, 0);
 });
 test("pre-document destroy starts no native resources or presentation", async t => {

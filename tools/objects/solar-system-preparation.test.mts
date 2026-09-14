@@ -65,7 +65,8 @@ function assertPreparedProjectiveMappings(input: unknown, scene: unknown) {
     const layer = required(sourceLeaves.get(node.style), 'Direct raster must retain its authored geometry');
     const assignments = node.properties.map(id => required(presentation.tree.properties[id]));
     const transform = required(assignments.find(value => value.name === 'transform'));
-    const direct = matrix(transform.value.slice(9, -1)), frame = matrix(layer.frameMatrix), texture = matrix(layer.textureMatrix);
+    const directMatrix = required(/^matrix3d\(([^)]+)\)/u.exec(transform.value)?.[1], 'Prepared matrix precedes the independent seam outset');
+    const direct = matrix(directMatrix), frame = matrix(layer.frameMatrix), texture = matrix(layer.textureMatrix);
     for (const point of [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]) {
       const expected = apply(frame, apply(texture, point));
       apply(direct, point).forEach((value, axis) => assert.ok(Math.abs(value - expected[axis]) < 1e-10,

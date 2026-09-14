@@ -1,4 +1,5 @@
-import type { PreparedView } from "../../renderers/css/rendering/prepared-presentation.ts";
+import { readFile } from 'node:fs/promises';
+import type { OrbitPublication } from "../../renderers/css/navigation/object-orbit.ts";
 import * as runtimePolicy from "../../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
 import test from "node:test";
@@ -10,6 +11,18 @@ import { viewSunDirectionToPreparedLightDirection } from "../directional-sun-coo
 import { createSceneLifetime } from "@cssearth/engine";
 import { requireObjectRuntimeDefinition } from "../../../tools/object-runtime-contract.mts";
 import { initialObjectSelection } from "../../renderers/css/dist/testing.js";
+// Feature catalogues use the checked-in fixture bytes; these image-lifetime
+// tests have no network service. Camera behavior has its own platform fixtures.
+export const fixtureObjectCapabilities = { ...preparedObjectCapabilities,
+  mountSurfaceFeatures(options: Parameters<NonNullable<typeof preparedObjectCapabilities.mountSurfaceFeatures>>[0]) {
+    const mount = preparedObjectCapabilities.mountSurfaceFeatures;
+    assert.ok(mount);
+    return mount({ ...options, transport: async url => {
+      if (!url.startsWith('/scenes/') || url.includes('..')) throw new Error('Invalid fixture catalogue URL');
+      return new Response(new Uint8Array(await readFile(new URL(`../../../public${url}`, import.meta.url))));
+    } });
+  },
+};
 const flush = async (): Promise<void> => { for (let index = 0; index < 32; index++)
     await Promise.resolve(); };
 // The fixture implements the DOM operations exercised by these tests. Native
@@ -71,6 +84,8 @@ class FixtureElement {
     } child.remove(); this.children.push(child); child.parentNode = this; return child; }
     append(...children: FixtureElement[]): void { for (const child of children)
         this.appendChild(child); }
+    prepend(...children: FixtureElement[]): void { for (const child of [...children].reverse()) { child.remove(); this.children.unshift(child); child.parentNode = this; } }
+    insertBefore(child: FixtureElement, reference: FixtureElement | null): FixtureElement { if (reference === null) return this.appendChild(child); child.remove(); const index = this.children.indexOf(reference); if (index < 0) throw new Error("Reference node is not a child"); this.children.splice(index, 0, child); child.parentNode = this; return child; }
     removeChild(child: FixtureElement): FixtureElement { child.remove(); return child; }
     replaceChildren(...children: FixtureElement[]): void { for (const child of [...this.children])
         child.remove(); for (const child of children)
@@ -87,7 +102,7 @@ class FixtureElement {
 }
 class FixtureDocument {
     readyState: DocumentReadyState = "complete";
-    defaultView: Record<string, unknown> = {};
+    defaultView: Record<string, unknown> = { addEventListener() {}, removeEventListener() {}, requestAnimationFrame() { return 1; }, cancelAnimationFrame() {} };
     head!: FixtureElement;
     stage: FixtureElement | null = null;
     readonly animations: FixtureAnimation[] = [];
@@ -125,21 +140,32 @@ class ControlledImage implements PreparedImage {
     removeAttribute(name: string): void { if (name === "src")
         this.src = ""; }
 }
-type FixtureView = PreparedView & {
-    skySunViewDirection: readonly number[] | null;
-};
-function objectView(definition: ObjectRuntimeDefinition, silhouetteDiameter?: number): FixtureView { const sun = definition.sun ?? null, direction = sun?.referenceViewDirection; const view: FixtureView = { controlPitch: definition.camera.defaultControlPitchDegrees ?? 0, controlYaw: definition.camera.defaultControlYawDegrees ?? 0, zoom: definition.camera.defaultZoom, revision: 1, sceneMatrix: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", counterRotation: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", counterRotationFor: () => "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", skySunViewDirection: direction ?? null, sunViewDirection: direction ? viewSunDirectionToPreparedLightDirection(direction) : null, ...(silhouetteDiameter === undefined ? {} : { levelOfDetail: { stage: "geometry", silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0 } }) }; view.reference = view; return view; }
+type FixtureView = OrbitPublication & { reference?: FixtureView; revision: number; };
+function objectView(definition: ObjectRuntimeDefinition, silhouetteDiameter?: number): FixtureView { const sun = definition.sun ?? null, direction = sun?.referenceViewDirection; const view: FixtureView = { controlPitch: definition.camera.defaultControlPitchDegrees ?? 0, controlYaw: definition.camera.defaultControlYawDegrees ?? 0, zoom: definition.camera.defaultZoom, revision: 1, sceneMatrix: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", skyboxMatrix: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", counterRotation: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", counterRotationFor: () => "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", skySunViewDirection: direction ?? null, sunViewDirection: direction ? viewSunDirectionToPreparedLightDirection(direction) : null, ...(silhouetteDiameter === undefined ? {} : { levelOfDetail: { stage: "geometry", silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0, proxyOpacity: 0 } }) }; view.reference = view; return view; }
 export function objectRuntimePackageTests(value: unknown): void {
     const definition = runtimeDefinition(value);
     test(`${definition.id}: the actual definition satisfies the common contract`, () => { resolvePreparedPresentation(definition, { selection: initialObjectSelection(definition.controls), view: objectView(definition) }); });
-    function fixture() { const images: ControlledImage[] = [], errors: unknown[] = [], services: {
+    function fixture() { const base = retainedPresentationFixture(definition); const images: ControlledImage[] = [], errors: unknown[] = [], services: {
         controlsDestroyed?: boolean;
-    } = {}; let resources: ReturnType<typeof createPreparedResidency> | null = null; const document = new FixtureDocument(), stage = document.createElement("div"); document.stage = stage; stage.dataset.objectId = definition.id; const mount = createObjectRuntime(definition, { waitDocument: () => Promise.resolve(), createControls: () => ({ publish() { }, setReady() { }, stats() { return { ready: false, destroyed: false, actions: 0, listenerCount: 0, lensIds: [], settings: [], state: null }; }, destroy() { services.controlsDestroyed = true; } }), createResources(options) { resources = createPreparedResidency({ ...options, createImage: () => { const image = new ControlledImage(); images.push(image); return image; } }); return resources; } }); const runtime = mount(html(stage), { onError: error => errors.push(error), inputSurface: html(stage), runtimePolicy, capabilities: preparedObjectCapabilities }); return { runtime, stage, images, errors, services, resources: (): ReturnType<typeof createPreparedResidency> => { assert.ok(resources); return resources; } }; }
-    test(`${definition.id}: cancellation releases actual startup assets without decode settlement`, async () => { const f = fixture(); await flush(); assert.ok(f.images.length > 0); const catalog = new Set(definition.assets.entries.map(entry => entry.url)); assert.ok(f.images.every(image => catalog.has(image.src))); f.runtime.resume(); f.runtime.pause(); f.runtime.destroy(); await f.runtime.ready; f.stage.dataset.lens = "replacement"; assert.ok(f.images.every(image => image.src === "")); assert.equal(f.resources().stats().images.entries.length, 0); assert.equal(f.services.controlsDestroyed, true); for (const image of f.images)
+    } = {}; let resources: ReturnType<typeof createPreparedResidency> | null = null; const { document, stage } = base; stage.dataset.objectId = definition.id; const mount = createObjectRuntime(definition, { waitDocument: () => Promise.resolve(), createOrbit(options) {
+        const view = objectView(definition), pose = { schema: "cssearth-camera-pose@1" as const, scene: view.sceneMatrix, skybox: view.sceneMatrix, sunView: view.sceneMatrix };
+        const publication = { ...view, skyboxMatrix: view.sceneMatrix };
+        const state = () => ({ ...publication, pitch: view.controlPitch, pose });
+        options.onPublish?.(publication);
+        return { publicationState: () => ({ requestedRevision: 0, presentedRevision: 0, presentedWorld: null }), mobilePageFlow: () => false,
+          initialResponsiveZoom: () => view.zoom, currentResponsiveZoom: () => view.zoom, setZoomOutCentering() {}, preparedFocus: () => null,
+          setPreparedFocus() { throw new Error("Unexpected focus request"); }, async flyToPreparedFocus() { throw new Error("Unexpected focus flight"); },
+          captureWorldCamera() { throw new Error("Unexpected world camera capture"); }, applyWorldCamera() {}, presentWorldCamera() {}, rebaseScene() {},
+          flyToState: async () => ({ completed: true }), invalidate: () => options.onPublish?.(publication), refresh: () => options.onPublish?.(publication),
+          setState: state, state, sharedState: () => ({ controlPitch: view.controlPitch, controlYaw: view.controlYaw, zoom: view.zoom, pose }),
+          skyState: () => ({ sunViewDirection: null, sunVisible: false, sunClassification: "absent" }),
+          stats(): never { throw new Error("Unexpected orbit stats request"); }, destroy() {} };
+      }, createControls: () => ({ publish() { }, setReady() { }, stats() { return { ready: false, destroyed: false, actions: 0, listenerCount: 0, lensIds: [], settings: [], state: null }; }, destroy() { services.controlsDestroyed = true; } }), createResources(options) { resources = createPreparedResidency({ ...options, createImage: () => { const image = new ControlledImage(); images.push(image); return image; } }); return resources; } }); const runtime = mount(html(stage), { onError: error => errors.push(error), inputSurface: html(stage), runtimePolicy, capabilities: fixtureObjectCapabilities }); return { runtime, stage, images, errors, services, restore() { try { runtime.destroy(); } finally { base.restore(); } }, resources: (): ReturnType<typeof createPreparedResidency> => { assert.ok(resources); return resources; } }; }
+    test(`${definition.id}: cancellation releases actual startup assets without decode settlement`, async t => { const f = fixture(); t.after(f.restore); await flush(); assert.ok(f.images.length > 0); const catalog = new Set(definition.assets.entries.map(entry => entry.url)); assert.ok(f.images.every(image => catalog.has(image.src))); f.runtime.resume(); f.runtime.pause(); f.runtime.destroy(); await f.runtime.ready; f.stage.dataset.lens = "replacement"; assert.ok(f.images.every(image => image.src === "")); assert.equal(f.resources().stats().images.entries.length, 0); assert.equal(f.services.controlsDestroyed, true); for (const image of f.images)
         image.reject(new Error("late decode")); await flush(); f.runtime.destroy(); assert.equal(f.stage.dataset.lens, "replacement"); assert.deepEqual(f.errors, []); });
-    test(`${definition.id}: startup rejection releases native siblings and rejects readiness once`, async () => { const f = fixture(); await flush(); const failure = assert.rejects(f.runtime.ready, /decode/i); const first = f.images[0]; assert.ok(first); first.reject(new Error("injected decode failure")); await failure; assert.ok(f.images.every(image => image.src === "")); assert.equal(f.services.controlsDestroyed, true); for (const image of f.images)
+    test(`${definition.id}: startup rejection releases native siblings and rejects readiness once`, async t => { const f = fixture(); t.after(f.restore); await flush(); const failure = assert.rejects(f.runtime.ready, /decode/i); const first = f.images[0]; assert.ok(first); first.reject(new Error("injected decode failure")); await failure; assert.ok(f.images.every(image => image.src === "")); assert.equal(f.services.controlsDestroyed, true); for (const image of f.images)
         image.reject(new Error("late sibling")); await flush(); f.runtime.destroy(); assert.deepEqual(f.errors, []); });
-    test(`${definition.id}: one native release failure does not retain other startup owners`, async () => { const f = fixture(); await flush(); const first = f.images[0]; assert.ok(first); first.removeAttribute = () => { throw new Error("release failed"); }; assert.throws(() => f.runtime.destroy(), /cleanup failed/); await f.runtime.ready; assert.ok(f.images.slice(1).every(image => image.src === "")); assert.equal(f.resources().stats().images.entries.length, 0); assert.equal(f.services.controlsDestroyed, true); for (const image of f.images)
+    test(`${definition.id}: one native release failure does not retain other startup owners`, async t => { const f = fixture(); t.after(f.restore); await flush(); const first = f.images[0]; assert.ok(first); first.removeAttribute = () => { throw new Error("release failed"); }; assert.throws(() => f.runtime.destroy(), /cleanup failed/); await f.runtime.ready; assert.ok(f.images.slice(1).every(image => image.src === "")); assert.equal(f.resources().stats().images.entries.length, 0); assert.equal(f.services.controlsDestroyed, true); for (const image of f.images)
         image.reject(new Error("late")); await flush(); f.runtime.destroy(); assert.deepEqual(f.errors, []); });
 }
 export function retainedPresentationFixture(value: unknown, { failAtElement = null }: {

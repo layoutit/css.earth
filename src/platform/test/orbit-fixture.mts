@@ -60,8 +60,8 @@ export function orbitFixture(failure: OrbitFailure, cleanupFailure = false, depe
   const services: OrbitServices = { ...controlled, ...dependencies };
   const create = (options: RetainedOrbitOptions): RetainedCubicSkyOrbit => createRetainedCubicSkyOrbit(options, services);
   const cameraPlan: CameraPlan = { cameraModel: "accumulated-matrix3d", pitchBounded: false, yawBounded: false, minimumControlPitchDegrees: 1, maximumControlPitchDegrees: 1, defaultControlPitchDegrees: 1, defaultControlYawDegrees: 1, initialScenePitchDegrees: 1, maximumScenePitchDegrees: 1, minimumZoom: 1, maximumZoom: 10, defaultZoom: 1, sceneScale: 1, logicalBodyDiameter: 1, responsiveFit: { model: 'unit', portraitBaseWidthShare: .5, narrowPortraitWidthShareGain: 0, landscapeWidthShareGain: 0, narrowPortraitAspectRatio: .5, portraitAspectRatio: 1, squareAspectRatio: 1, maximumHeightShare: 1, maximumMobilePreviewShare: 1, minimumZoom: 1, maximumZoom: 10 } };
-  const skyPlan: CameraSkyPlan = { cameraPitchResponse: 1, presentationPitchOffsetDegrees: 0, presentationYawOffsetDegrees: 0, sun: null };
-  const cubicSky: OrbitCubicSky = { root: stage.asElement(), setOrientation() {}, starExposure() { return null; } };
+  const skyPlan: CameraSkyPlan = { cameraPitchResponse: 1, presentationPitchOffsetDegrees: 0, presentationYawOffsetDegrees: 0 };
+  const cubicSky: OrbitCubicSky = { root: stage.asElement(), setOrientation() {} };
   const arguments_: RetainedOrbitOptions = { onError(error: unknown): void { throw error; }, stage: stage.asElement(), inputSurface: stage.asElement(), cameraElement: new Surface().asElement(), sceneElement: new Surface().asElement(), cubicSky, skyPlan, cameraPlan, objectId: "unit", requireSun: false, onPublish() { if (failure === "publish") throw new Error("publish failure"); } };
   return { create, callbacks, owners, stage, arguments: arguments_ };
 }
