@@ -1,0 +1,168 @@
+{
+  "date": "2026-09-14",
+  "baseCommit": "e6ed07b7f549388434520ff17a130d600a7c8f77",
+  "codePins": {
+    "tools/objects/observation/controlled-map-mosaic.mts": "0d60d7eecf272a4f9975d834105fc6ed556c4bafdbf659151ee25680c420a7d2",
+    "tools/objects/observation/interpret.mts": "b502b66d59705204c46b8dd6a726b68e86dce2b5502286308641a1432ffbba16",
+    "tools/objects/provenance-recipes.mts": "b195923f3bd0768969335ba83b51d5767db8df848815f65ed9838a0fab9a668f",
+    "src/objects/europa/source/preparation/raster.json": "992fb1664ba436fa0b872e1832e068aa3341c1e0de146212e883784bbc236bc8",
+    "src/objects/europa/source/preparation/presentation.json": "4945f58e06db43a310a6fdb432ae42c338a50457aaf8aea8ed21159af94e9195",
+    "src/objects/europa/source/content/object.json": "71e083179c880ceaed1118cff87c9d1e2d4d7bdce55d1d08f191b7f4d1937884",
+    "src/objects/europa/prepared/runtime.refs.json": "f37438d16a396880362ad28350b566c81b98a22155504f7e34cde770298bd367",
+    "src/objects/europa/composition.css": "a15b0cfe2bcb27a51f73f8ba77a014c2aef5744a53e62dbf95d05e0f1ebf53c0"
+  },
+  "focusedTests": {
+    "command": "node --test tools/objects/observation/controlled-map-mosaic.test.mts tools/object-provenance.test.mts tests/objects/unit/europa/runtime-contract.test.mts tests/objects/unit/europa/features.test.mts",
+    "tests": 35,
+    "pass": 31,
+    "fail": 4,
+    "meaning": "Native area-integration and polar-coordinate fixtures, all 332 consumed source bindings, retained dataset switching, toggles and feature anchors pass."
+  },
+  "typeScript": [
+    "tsc -p tools/objects/tsconfig.json",
+    "tsc -p tools/tsconfig.json"
+  ],
+  "typeScriptResult": "pass",
+  "unchangedFailures": {
+    "main": "4b74bbfd599a6ab4f60c2139f3b399ca7349a4db",
+    "startup": [
+      "cancellation releases actual startup assets without decode settlement",
+      "startup rejection releases native siblings and rejects readiness once",
+      "one native release failure does not retain other startup owners"
+    ],
+    "startupCause": "Existing fake DOM lacks HTMLElement/native-startup behavior; the same three failures occur with the exact main runtime reconstructed from its checked-in references.",
+    "ownership": {
+      "shared": [
+        {
+          "file": "site/world-context-plan.mts",
+          "line": 12,
+          "reason": "Dynamic runtime imports hide ownership from the static closure"
+        },
+        {
+          "file": "site/surface-minimap-rectangle.mts",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Cartesian3.js"
+        },
+        {
+          "file": "site/surface-minimap-rectangle.mts",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Cartesian4.js"
+        },
+        {
+          "file": "site/surface-minimap-rectangle.mts",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/CullingVolume.js"
+        },
+        {
+          "file": "site/surface-minimap-rectangle.mts",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Ellipsoid.js"
+        },
+        {
+          "file": "site/surface-minimap-rectangle.mts",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/IntersectionTests.js"
+        },
+        {
+          "file": "site/surface-minimap-rectangle.mts",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Ray.js"
+        },
+        {
+          "file": "site/vendor/cesium-BoundingSphere.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Cartesian3.js"
+        },
+        {
+          "file": "site/vendor/cesium-BoundingSphere.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Check.js"
+        },
+        {
+          "file": "site/vendor/cesium-BoundingSphere.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Intersect.js"
+        },
+        {
+          "file": "site/vendor/cesium-view-rectangle.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Cartesian2.js"
+        },
+        {
+          "file": "site/vendor/cesium-view-rectangle.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Cartesian3.js"
+        },
+        {
+          "file": "site/vendor/cesium-view-rectangle.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Cartographic.js"
+        },
+        {
+          "file": "site/vendor/cesium-view-rectangle.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/defined.js"
+        },
+        {
+          "file": "site/vendor/cesium-view-rectangle.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Ellipsoid.js"
+        },
+        {
+          "file": "site/vendor/cesium-view-rectangle.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Intersect.js"
+        },
+        {
+          "file": "site/vendor/cesium-view-rectangle.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Math.js"
+        },
+        {
+          "file": "site/vendor/cesium-Rectangle.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Check.js"
+        },
+        {
+          "file": "site/vendor/cesium-Rectangle.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/defined.js"
+        },
+        {
+          "file": "site/vendor/cesium-Rectangle.mjs",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Math.js"
+        },
+        {
+          "file": "site/view-readout.mts",
+          "line": 1,
+          "reason": "Runtime import escapes the source root: @cesium/engine/Source/Core/Ellipsoid.js"
+        },
+        {
+          "file": "site/application-world-context.mts",
+          "line": 1,
+          "reason": "Application world context must use the shared prepared-universe inventory and pinned context."
+        },
+        {
+          "file": "site/packaged-object-runtime.mts",
+          "line": 1,
+          "reason": "Contextual binding must use the shared world-context factories and pinned object inventories."
+        }
+      ],
+      "objects": [
+        {
+          "id": "europa",
+          "violations": []
+        }
+      ]
+    },
+    "ownershipComparison": "Inject the current main version of every changed tracked file into the ownership audit; identical unchanged dependencies are reused.",
+    "ownershipIdentical": true
+  },
+  "omitted": [
+    "Full application build",
+    "All-body browser conformance",
+    "Full object geometry preparation",
+    "Physical mobile-device memory/performance qualification"
+  ]
+}

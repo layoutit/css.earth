@@ -92,6 +92,20 @@
           "locator": "Native mapped numerical grids; methods paper"
         }
       ]
+    },
+    "galileo": {
+      "title": "Galileo regional photographs",
+      "detail": "Regional photos",
+      "summary": "Controlled photographs reveal fractures, chaos terrains and craters. Original shadows remain; gray grid marks gaps.",
+      "sources": [
+        {
+          "catalogueId": "usgs-europa-controlled-galileo-images",
+          "url": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/",
+          "label": "USGS · Galileo SSI",
+          "checked": "2026-09-14",
+          "locator": "Processing; Accuracy, Errors, and Issues; General Usability"
+        }
+      ]
     }
   }
 }
