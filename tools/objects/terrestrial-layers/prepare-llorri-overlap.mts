@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { array, number, shape, text, parseMeshProfile, parseGeoCameraClosure } from './source-records.mts';
+import { array, number, optional, shape, text, parseMeshProfile, parseGeoCameraClosure } from './source-records.mts';
 import { loadKernelSet } from '../../spice/kernel-set.mts';
 import { llorriHeaderCamera } from './llorri-header-camera.mts';
 import { loadObjShape } from './obj-shape.mts';
@@ -16,7 +16,7 @@ import { matchImageFeatures } from './image-feature-matching.mts';
 
 const matching = shape({patchRadius:number,searchRadius:number,gridStride:number,gridOrigin:number,targetSmoothingSigma:number,minimumCorrelation:number,minimumPeakMargin:number,minimumJointValidFraction:number});
 const transfer = shape({maximumSourceDistanceMeters:number,maximumSeparationMeters:number,visibilityToleranceMeters:number,maximumEmissionDegrees:number});
-const parseRecipe = shape({schema:text,shapeSha256:text,bodyId:number,kernels:array(text),margin:number,maximumRmsPixels:number,maximumResidualPixels:number,transfer,
+const parseRecipe = shape({schema:text,shapeSha256:text,bodyId:number,target:optional(text),kernels:array(text),margin:number,maximumRmsPixels:number,maximumResidualPixels:number,transfer,
   frames:array(shape({image:text,label:text,referenceImage:text,referenceCamera:text,output:text,matching}))});
 const parseManifest = shape({inputs:array(shape({path:text,expectedBytes:number,expectedSha256:text}))});
 const parseGeometry = shape({geometry:shape({radialTerrain:shape({path:text,grid:parseMeshProfile})})});
@@ -47,7 +47,7 @@ export async function prepareLlorriOverlap(sourceDirectory:string, write=false) 
     const footprint={image:{width:1024,height:1024,values:reference.planes.IMAGE,startTime:reference.startTime,filter:reference.filter,reject:(i:number)=>reference.acceptPixel(i)?null:'quality',report:reference.qualityReport},
       camera:refCamera,geometry:castSourceRays(refCamera,mesh,1024,1024),photometry:{gain:()=>1,retainsIllumination:true}};
     const targetBytes=await pinned(entry.image); await pinned(entry.label);
-    const seed=llorriHeaderCamera(targetBytes,kernels,recipe.bodyId),target=decodeLlorri(targetBytes,seed),camera=matrixCamera('archived-closure',seed,bindSipCamera(seed));
+    const seed=llorriHeaderCamera(targetBytes,kernels,recipe.bodyId,recipe.target),target=decodeLlorri(targetBytes,seed),camera=matrixCamera('archived-closure',seed,bindSipCamera(seed));
     const width=1024+2*recipe.margin,height=width,values=new Float32Array(width*height),valid=new Uint8Array(width*height),xyz=new Float64Array(width*height*3),uv=new Float64Array(width*height*2);
     for(let y=0;y<height;y++)for(let x=0;x<width;x++) {
       const i=y*width+x,ray=camera.ray(x-recipe.margin,y-recipe.margin),hit=mesh.intersect(camera.positionMeters,ray); if(!hit)continue;
@@ -89,6 +89,7 @@ export async function prepareLlorriOverlap(sourceDirectory:string, write=false) 
   return reports;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href) {
-  assert.ok(process.argv.slice(2).every(a=>a==='--write'));
-  console.log(JSON.stringify(await prepareLlorriOverlap('src/objects/donaldjohanson/source',process.argv.includes('--write')),null,2));
+  const args=process.argv.slice(2),sources=args.filter(a=>a!=='--write');
+  assert.ok(sources.length===1,'Usage: prepare-llorri-overlap.mts src/objects/<id>/source [--write]');
+  console.log(JSON.stringify(await prepareLlorriOverlap(sources[0],args.includes('--write')),null,2));
 }
