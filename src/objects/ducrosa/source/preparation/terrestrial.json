@@ -4,7 +4,6 @@
   "namespace": "ducrosa",
   "displayName": "Ducrosa",
   "publicBase": "/scenes/ducrosa/",
-  "distanceAu": 3.1255060299245687,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -118,12 +117,6 @@
     "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

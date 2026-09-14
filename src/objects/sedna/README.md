@@ -4,7 +4,7 @@ Sedna follows an exceptionally distant, elongated orbit beyond the planetary reg
 
 ## Sources
 
-The spherical illustration uses the **995 ±80 km** effective thermal diameter. Herschel constrains effective size, not three separate axes. The **Shape model** uses the normal unmapped-surface grid. Shadows and Orbit default off.
+The spherical illustration uses the **995 ±80 km** effective thermal diameter. Herschel constrains effective size, not three separate axes. The **Shape model** uses the normal unmapped-surface grid. Shadows defaults off.
 
 | Source | Used for |
 | --- | --- |

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "apophis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c821b9a9cf404603071eeaa0361d4b7385e67f69d2d30f478bdba2c120d211e6"
+    "sha256": "115e75fe28ec6a971786ae6175b93e8d695c8feb38983e079304564183b0b722"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "02d312b7f71557ace676953472d3874066120197ae6ec81c6c062a5074e51a12",
+      "sha256": "0a295936521547ba1a1ca907825b35adaa1069e6eda614bb46c7298aaa19e7bb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "apophis",
         "displayName": "Apophis",
         "publicBase": "/scenes/apophis/",
-        "distanceAu": 0.9223337821550773,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons elements and a fixed illustrative source-model frame; no tumbling attitude propagation"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2fba0a94604dfba048c2fc7ebc1c9b291c6f180f353b8b67dfdb1607e71be4f9",
+      "sha256": "fc9ad3e1c9dff09106caabcba0cffb2de705f3a6e654dad277f4d92688573459",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -250,12 +243,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -278,12 +265,6 @@
             "role": "rotation",
             "description": "Published tumbling state; fixed display frame",
             "href": "https://echo.jpl.nasa.gov/asteroids/brozovic.etal.apophis.2018.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -334,7 +315,7 @@
       "sha256": "226c330bafda3a773533779228a01cf2a009e8d611f209329e872433fc00e266",
       "bytes": 197868,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -359,10 +340,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2fba0a94604dfba048c2fc7ebc1c9b291c6f180f353b8b67dfdb1607e71be4f9",
-      "bytes": 7849,
+      "sha256": "fc9ad3e1c9dff09106caabcba0cffb2de705f3a6e654dad277f4d92688573459",
+      "bytes": 7570,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -394,19 +375,19 @@
           "url": "/scenes/apophis/apophis-elevation-thumbnail.webp",
           "bytes": 6322,
           "sha256": "80d669897d8cbff83ce1ab396ac19aa1b8d7be68c597de26f2bbfe9da10c05ad",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/apophis/apophis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/apophis/apophis-elevation-surface@2x.webp",
           "bytes": 381086,
           "sha256": "11c740abede5da8cf14e7a026814f5bb636cc974d4988f97e3c09993309357fb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -444,13 +425,13 @@
           "url": "/scenes/apophis/apophis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/apophis/apophis-shape-surface@2x.webp",
           "bytes": 225482,
           "sha256": "754ba28ae6eab1caf08a712a648ddf3fc258798d660ac04de9b62a858be284f9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -481,8 +462,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5566,
-          "sha256": "160176d2f8adf8af39e55787794db8724b2629db066965c26ce9e0898d1ae0e9",
+          "bytes": 5447,
+          "sha256": "6170dbe197f8b357a320bd89fd9c11c741533abaad753d769603dd87741a66d4",
           "verification": "bytes-verified"
         }
       ],
@@ -542,5 +523,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "apophis",
+    "materialSha256": "6c9541c9d83e6e0a8c2799e563f5afc33dfd91c62d783cb60afcc3d93dee8a5d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

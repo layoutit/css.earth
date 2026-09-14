@@ -211,30 +211,6 @@
       }
     },
     {
-      "id": "hyg-v41-saturn-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedSha256": "0aec282e4c6362d498fd85452a1bb4ac11a76a67409b752c30b99f00c57fb70e",
-      "origin": "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
-      "credit": "David Nash / Astronexus",
-      "license": "CC-BY-SA-4.0, see stars/LICENSE.md",
-      "acquisition": "prepared checked subset of HYG v4.1",
-      "redistribution": "permitted under CC-BY-SA-4.0 with attribution and share-alike",
-      "consumers": [
-        "assets"
-      ],
-      "expectedBytes": 144992,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
-          }
-        ]
-      }
-    },
-    {
       "id": "saturn-interior-model",
       "path": "interior/manifest.json",
       "expectedSha256": "ec70beed73758cc796becbc3a1338ef3618609e4d2b9788e838ae0e9a1165874",
@@ -617,85 +593,10 @@
       }
     },
     {
-      "id": "eso-saturn-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "expectedBytes": 29082084,
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield",
-        "scene"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
-          }
-        ]
-      }
-    },
-    {
-      "id": "google-maps-saturn-cubic-sky-sun-oracle-asset",
-      "path": "sun/google-maps-sun.png",
-      "expectedSha256": "e9c2b33612abd121905845cd19aad83382b977e2a68b68058bc6702292b15e9f",
-      "expectedBytes": 10947,
-      "origin": "https://mw1.google.com/mw-weather/static/sun.png",
-      "credit": "Google Maps visual presentation reference",
-      "license": "Google proprietary; no redistribution grant verified",
-      "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
-      "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
-      "consumers": [
-        "starfield",
-        "sun-oracle",
-        "scene"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "google-maps-sun-symbol",
-            "role": "material",
-            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
-          }
-        ]
-      }
-    },
-    {
-      "id": "google-maps-saturn-cubic-sky-sun-oracle-measurements",
-      "path": "sun/google-maps-sun-oracle.json",
-      "expectedSha256": "0fcc54b72a064eb76adf2a3be008f23c6fb6f3ffae3cdc5df228b83d16b3a27b",
-      "expectedBytes": 2895,
-      "origin": "https://www.google.com/maps/space/venus/ and https://mw1.google.com/mw-weather/static/sun.png",
-      "credit": "Google Maps visual presentation reference; measurements recorded by this project",
-      "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
-      "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
-      "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
-      "consumers": [
-        "starfield",
-        "sun-oracle",
-        "scene",
-        "lighting"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
-      }
-    },
-    {
       "id": "saturn-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 13371,
-      "expectedSha256": "581819f574dc232122019d0c199ac5e64d5a715a89a12643782cc6d80f56e5f7",
+      "expectedBytes": 12952,
+      "expectedSha256": "592f1ef7ab8f4b6a8aaa745c5e74d0b6aa83f19eec7fd748d8ba456002ce86c1",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -773,8 +674,8 @@
     {
       "id": "saturn-authored-content",
       "path": "content/object.json",
-      "expectedBytes": 17805,
-      "expectedSha256": "d7102e88052d1dedf97d58e635bee339c917f10ee1925bf929261c8798f126f4",
+      "expectedBytes": 17642,
+      "expectedSha256": "b8551757eed1b404ab243c4629d09718e89fe7e7e65e1b86e002aa4bf88128c3",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -879,24 +780,6 @@
       }
     },
     {
-      "id": "saturn-authored-celestial",
-      "path": "preparation/celestial.json",
-      "expectedBytes": 371,
-      "expectedSha256": "d41b923e65b434cf28f664e9c4546c654fb93c61b9169a43c8159c02f22fac59",
-      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
-      "license": "Project-authored specification; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "celestial"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky, Sun and marker preparation settings."
-      }
-    },
-    {
       "id": "saturn-authored-charts",
       "path": "content/charts.json",
       "expectedBytes": 3935,
@@ -917,8 +800,8 @@
     {
       "id": "saturn-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 8228,
-      "expectedSha256": "1e3ceb80a20c1a3ab12ad7ebaadd56cf3dd66321b565136b6c98a74ec0401938",
+      "expectedBytes": 7855,
+      "expectedSha256": "bc22d665a1b8bb0baeafae4c9b90a0a7dd16390d20b2b8ac71b69e1dbfb200f5",
       "origin": "Checked source acquisition recipe retaining the accepted institutional inputs and numerical semantics",
       "credit": "cssEarth and the institutional sources identified in this recipe",
       "license": "Project-authored acquisition specification; referenced observations retain their source terms",
@@ -960,18 +843,6 @@
     }
   ],
   "documents": [
-    {
-      "path": "stars/LICENSE.md",
-      "purpose": "HYG subset attribution and CC-BY-SA-4.0 terms",
-      "expectedBytes": 596,
-      "expectedSha256": "65dfc6192994d4b6c6f725a336aa1a8862f554eb5062e75f77b6e79f186d1a58"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
-      "expectedBytes": 1271,
-      "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
-    },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",

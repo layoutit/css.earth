@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "virginia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "68302453951fad3ce21430590fa220b3fe1d343f82a00538f1b618db21bc46a5"
+    "sha256": "a6cb8efeb8a60d644210d15f88a4c4e54ecf15c077e1eca5c7155c9bc2f0dbdd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8aac17219927d54d47f9adc4f084a17a492053f86ddedf6d85386084e7bb5074",
+      "sha256": "69353df03e564ee548723595725eff975562e825330e302179d71d71a969a31f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "virginia",
         "displayName": "Virginia",
         "publicBase": "/scenes/virginia/",
-        "distanceAu": 2.651502448166739,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4ef78f56fababbce1fa6040a8016fcad114de5b88377fe5d5bfcc589608e1056",
+      "sha256": "1475b49d6438e4ccb1001206b6cd07e32be412f4f461a923a3c6f20b4685fd37",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/12738"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "8b1dc50c7f205bb4935eaab846f570620cca1443dfe383c2b6706ecc7bcf1a42",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "4ef78f56fababbce1fa6040a8016fcad114de5b88377fe5d5bfcc589608e1056",
+      "sha256": "1475b49d6438e4ccb1001206b6cd07e32be412f4f461a923a3c6f20b4685fd37",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8912,
+      "bytes": 8633,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/virginia/virginia-elevation-thumbnail.webp",
           "bytes": 5932,
           "sha256": "039c06e3437535e63bd0aefe020e0a17a640d8780d60f4cc8ba06e671c4f9f4b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/virginia/virginia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/virginia/virginia-elevation-surface@2x.webp",
           "bytes": 312242,
           "sha256": "7043fb3428761fc32c8c93408ec18e980db54bff84c6ea88100a9e31396e7039",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/virginia/virginia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/virginia/virginia-shape-surface@2x.webp",
           "bytes": 222090,
           "sha256": "cec6537dd73e3a0650ef3919875a4ae4ba3348b693260f76485fd36e3d498ae8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6229,
-          "sha256": "9a84487e6f4230c889af2de9b13d7db435539f1efa3caef74f8da3fd01acf0b4",
+          "bytes": 6110,
+          "sha256": "86ae92110588662df1252ed93d878dd74c740e71606a3e271e566f903572972b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "virginia",
+    "materialSha256": "b6a408067b14a049b35cbdbf85f34dedea76b60d89c0a49eb5cc4801e86e797e",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

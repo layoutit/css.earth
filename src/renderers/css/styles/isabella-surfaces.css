@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="isabella"])[data-lod="billboard"] .isabella-scene, .planet-stage:where([data-object-id="isabella"])[data-lod="marker"] .isabella-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="isabella"])[data-lod="marker"] .isabella-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="isabella"]).isabella-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -81,7 +81,6 @@ Originals are acquired from their publishers, not other objects.
 
 | Input | Source and use |
 | --- | --- |
-| Sky | [ESO/S. Brunier panorama](https://www.eso.org/public/images/eso0932a/) and the checked HYG field snapshot, projected through the shared astrometric sky preparer. |
 | Title | Pinned Inter variable font; shared title outline preparation. |
 | Physical/orbit data | Vendored `@cssearth/astronomy` JPL body data, Kepler state vectors and IAU rotation. Mean radius 469.7 km; fixed geometry epoch 2026-09-04T00:00:00 TT. |
 | Facts | [NASA Ceres facts](https://science.nasa.gov/dwarf-planets/ceres/facts/), summarized in `tools/prepare-content.mjs`: asteroid-belt location, Dawn observations, about nine hours per rotation, no moons. |
@@ -90,7 +89,7 @@ The maps share a global equirectangular grid. As with Pluto, exactly black pixel
 
 In particular, JPEG compression can make fill pixels nonzero. We preserve those uncertain pixels instead of raising a brightness threshold that could erase observed dark terrain. The shared grid defines the presentation, not scientific validity for every dataset.
 
-Preparation creates 452 retained surface leaves, polar textures, a lighting atlas, sky faces, and the shared heliocentric presentation. The mesh uses a spherical mean radius; no resolved Ceres shape or elevation model is claimed. The runtime only loads prepared assets and publishes shared view state.
+Preparation creates 452 retained surface leaves, polar textures and a lighting atlas. The mesh uses a spherical mean radius; no resolved Ceres shape or elevation model is claimed. The runtime only loads prepared assets and publishes shared view state.
 
 Surface bands are reprojected for their projective trapezoids before packing; linear image latitude cannot be stretched directly over projective UVs. Polar textures use the cap geometry and hemisphere-specific longitude direction. Both use bilinear source sampling and lossless encoding. Original source files remain unchanged. Prepared maps mark only the identified gaps; the runtime lighting is a separate prepared overlay. The shared perspective camera converts PolyCSS geometry to world units without an extra zoom multiplier. Lighting fits that same projected radius, and its prepared disc stays within the atlas frame. The low-polygon surface still has small geometric facets; the overlay does not represent an atmosphere.
 
@@ -106,7 +105,7 @@ Preparation also derives terrain shading from neighboring model heights at the d
 
 The map and its numeric legend are prepared together. The surface uses the existing Ceres band/pole projection. Generic prepared material selection keeps the same globe curvature shading on every lens. Shadows switches it to approximate directional illumination; it does not change the fixed terrain light direction. No runtime controller or runtime scientific-data parser is added.
 
-Delivery keeps the prepared HD texture dimensions. The photographic normal and enhanced polar sprites sample their pinned source grids directly with a 2 × 2 footprint and retain lossless WebP encoding. Latitude-band and non-photographic prepared assets retain their existing encodings; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+Delivery keeps the prepared HD texture dimensions. The photographic normal and enhanced polar sprites sample their pinned source grids directly with a 2 × 2 footprint and retain lossless WebP encoding. Latitude-band and non-photographic prepared assets retain their existing encodings; source maps remain lossless. Lighting stays lossless.
 
 Preparing elevation requires the original 466.6 MB DTM. The runtime asset installer downloads prepared maps only and does not require that source file. Raw binaries and prepared images are excluded from Git; runtime assets use the existing publisher.
 

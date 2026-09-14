@@ -4,7 +4,6 @@
   "namespace": "sn263-beta",
   "displayName": "2001 SN263 Beta",
   "publicBase": "/scenes/sn263-beta/",
-  "distanceAu": 1.9869,
   "raster": {
     "width": 512,
     "height": 256,
@@ -69,12 +68,6 @@
     "sunSource": "Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured. Published radar and light-curve shape of the larger, outer moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

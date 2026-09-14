@@ -2,7 +2,7 @@
 
 IRAS–Araki–Alcock was discovered in 1983 by the IRAS satellite and two independent observers. Its name records all three discoveries.
 
-One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows and Orbit default off.
+One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.
 
 ## Sources
 

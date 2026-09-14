@@ -4,7 +4,6 @@
   "namespace": "adrastea",
   "displayName": "Adrastea",
   "publicBase": "/scenes/adrastea/",
-  "distanceAu": 5.2,
   "raster": {
     "width": 512,
     "height": 256,
@@ -78,12 +77,6 @@
     "sunSource": "JPL Jupiter-system ephemeris and IAU/WGCCRE rotation; sourced PCK ellipsoid axes."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

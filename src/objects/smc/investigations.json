@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "smc",
+  "entries": [
+    {
+      "id": "lens-optical",
+      "subject": "Publisher optical display image",
+      "status": "included",
+      "finding": "publisher-curated AstroPix JPEG derivative. Selected for image-layer display. The SMASH image covers the main optical body, not the full Bridge, Wing or tidal debris. Released foreground and background sources remain. This ledger consolidates existing records; no fresh source survey or visual qualification was performed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/smc/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/smc/source/recipe.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "parametric-depth",
+      "subject": "Parametric image-layer geometry",
+      "status": "included",
+      "finding": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth. Adopted thickness: 25 kpc. The cited geometry reference is Ripepi et al. 2017, arXiv:1707.04500; the broad envelope is not a thin disk or per-pixel distance map. Selection does not independently qualify those adopted values.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/smc/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/smc/source/recipe.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "scientific-registration",
+      "subject": "Source fields, coordinate registration and depth evidence",
+      "status": "unresolved",
+      "finding": "The retained records identify geometry references but do not preserve exact paper table/section locators, uncertainty and coordinate epoch for every adopted placement or orientation value. Observation dates and an independent crop/sky registration comparison are not recorded. No measured three-dimensional reconstruction is established.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/smc/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/smc/source/recipe.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ],
+      "revisitWhen": "A qualification task supplies the original metadata or paper fields and an independent registration comparison for these exact inputs."
+    }
+  ]
+}

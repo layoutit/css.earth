@@ -450,6 +450,7 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   browser.selectors.set('[data-prepared-focus-card]', card); drawer.selectors.set('[data-prepared-focus-card]', card);
   const names = ['name','aliases','status','distance','uncertainty','membership','association','basis','reference'];
   for (const name of names) card.selectors.set(`[data-focus-${name}]`, new Element());
+  card.selectors.set('[data-focus-fact-label=distance]', new Element());
   const links = [new Element(), new Element(), new Element()];
   card.selectors.set('[data-focus-source]', links);
   const lensBank = new Element(), lensButton = new Element(), lensDetail = new Element();
@@ -512,7 +513,8 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   shell.setPreparedFocus(cluster, [clusters.sources[0]]);
   assert.equal(card.hidden, false); assert.equal(search.value, '');
   assert.equal(card.requireSelector('[data-focus-status]').textContent, 'X-ray selected galaxy cluster');
-  assert.match(card.requireSelector('[data-focus-distance]').textContent, /comoving, redshift-derived/u);
+  assert.equal(card.requireSelector('[data-focus-fact-label=distance]').textContent, 'Comoving distance');
+  assert.match(card.requireSelector('[data-focus-distance]').textContent, /^\d+(?:\.\d+)? Mpc$/u);
   assert.match(card.requireSelector('[data-focus-basis]').textContent, /R500.*not the cluster boundary.*peculiar velocities are not corrected/u);
   assert.equal(links[0].href, clusters.sources[0].url);
   assert.deepEqual([...card.selectors.values()], retained, 'Selection updates the same retained card nodes');

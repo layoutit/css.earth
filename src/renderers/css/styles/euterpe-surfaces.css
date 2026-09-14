@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="euterpe"])[data-lod="billboard"] .euterpe-scene, .planet-stage:where([data-object-id="euterpe"])[data-lod="marker"] .euterpe-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="euterpe"])[data-lod="marker"] .euterpe-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="euterpe"]).euterpe-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

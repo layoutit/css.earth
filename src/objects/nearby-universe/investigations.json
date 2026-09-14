@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "nearby-universe",
+  "entries": [
+    {
+      "id": "cosmicflows-4",
+      "subject": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94",
+      "status": "included",
+      "finding": "Pinned CDS TSV catalogue input for the nearby galaxy distribution; catalogue distance and identity measurements are distinct from authored display brightness and count clouds.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-4357/ac94d8",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/nearby-universe/source/catalogue.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "hyperleda-pgc",
+      "subject": "Paturel et al. (2003), HYPERLEDA I, A&A 412, 45",
+      "status": "included",
+      "finding": "Pinned CDS TSV catalogue input for the nearby galaxy distribution; catalogue distance and identity measurements are distinct from authored display brightness and count clouds.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361:20031411",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/nearby-universe/source/catalogue.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "hyperleda-hi",
+      "subject": "Paturel et al. (2003), HYPERLEDA II, A&A 412, 57",
+      "status": "included",
+      "finding": "Pinned CDS TSV catalogue input for the nearby galaxy distribution; catalogue distance and identity measurements are distinct from authored display brightness and count clouds.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361:20031412",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/nearby-universe/source/catalogue.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "xyz-volume",
+      "subject": "Layered XYZ galaxy point bake",
+      "status": "excluded",
+      "finding": "Rejected during development because point depth quantization and cross-axis transitions reduced point sharpness. Current renderer batches projected catalogue points and uses separate covariance count clouds. This consolidates the recorded implementation decision, not a new benchmark.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/pull/215"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ],
+      "revisitWhen": "A matched rotation benchmark demonstrates sharper stable points at the same bounded rendering cost."
+    }
+  ]
+}

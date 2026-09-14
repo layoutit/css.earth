@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="comet-29p"])[data-lod="billboard"] .comet-29p-scene, .planet-stage:where([data-object-id="comet-29p"])[data-lod="marker"] .comet-29p-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="comet-29p"])[data-lod="marker"] .comet-29p-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="comet-29p"]).comet-29p-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

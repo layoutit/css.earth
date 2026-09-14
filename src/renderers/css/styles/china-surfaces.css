@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="china"])[data-lod="billboard"] .china-scene, .planet-stage:where([data-object-id="china"])[data-lod="marker"] .china-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="china"])[data-lod="marker"] .china-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="china"]).china-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

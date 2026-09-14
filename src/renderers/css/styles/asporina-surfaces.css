@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asporina"])[data-lod="billboard"] .asporina-scene, .planet-stage:where([data-object-id="asporina"])[data-lod="marker"] .asporina-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asporina"])[data-lod="marker"] .asporina-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asporina"]).asporina-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

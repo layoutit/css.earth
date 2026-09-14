@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lachesis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b4ce795b40a5353473522074a33806bff7c07736af7651c8eac65d310f3d0b97"
+    "sha256": "f4245720b97c3a921e020bf5c7f271fb6bfa701e910d1dd19a5380be16369168"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2f3ac73eb889905957ac4655282066ac937d4dc9b9037c447a4ac30ca56b7c86",
+      "sha256": "6171e92c385bbad716eaac96296a22a434725331a1a7a04f7b67c80440e13780",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "lachesis",
         "displayName": "Lachesis",
         "publicBase": "/scenes/lachesis/",
-        "distanceAu": 3.119472040064257,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 943 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e44e4b17c9cb82f4b721f77db1f46583f3c7fc8679cdcc138ca71150a5a87a5f",
+      "sha256": "380c32e5065cf8d5a4c9c1f6359c44f6e64602ec8e0c79c7dae0656ef06a2668",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/943"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "71ab4e0c28a09ae451115ee438139b1772bdfcc1373ed9981d3fb216f6122262",
       "bytes": 81250,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e44e4b17c9cb82f4b721f77db1f46583f3c7fc8679cdcc138ca71150a5a87a5f",
-      "bytes": 10908,
+      "sha256": "380c32e5065cf8d5a4c9c1f6359c44f6e64602ec8e0c79c7dae0656ef06a2668",
+      "bytes": 10629,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/lachesis/lachesis-elevation-thumbnail.webp",
           "bytes": 5392,
           "sha256": "6fbbc9d3ac36102ca86475181a9d9779f8ca0c743b533a57511e751ca068e0f0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lachesis/lachesis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lachesis/lachesis-elevation-surface@2x.webp",
           "bytes": 283658,
           "sha256": "34e77d33c2864c80b725095d7ac2ec336c7f9c535ae1824d66c333fe595c3fb2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/lachesis/lachesis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lachesis/lachesis-shape-surface@2x.webp",
           "bytes": 224876,
           "sha256": "95e8caf95a33e6587ef47fbd2aae480f3ec0059e3fde2128be29eba3b5f6dfd9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8249,
-          "sha256": "0fb44ed51b8561ac5d26fd5a623c37d34b8a59b932b559ea3938fcc7beafb76e",
+          "bytes": 8130,
+          "sha256": "131d3c855d1664846dd16002258d0ce3204ed6a633716e1f3c18bbb949ec85cb",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "lachesis",
+    "materialSha256": "89f0d5f286b3a0a9e9e966a7055d9e39b484e57a910737bc88d860b6c60831e7",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

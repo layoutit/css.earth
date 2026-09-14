@@ -4,7 +4,6 @@
   "namespace": "asteroid-1998-wt24",
   "displayName": "1998 WT24",
   "publicBase": "/scenes/asteroid-1998-wt24/",
-  "distanceAu": 0.7186940115527254,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -112,12 +111,6 @@
     "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

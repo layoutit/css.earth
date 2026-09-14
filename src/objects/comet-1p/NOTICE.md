@@ -11,10 +11,8 @@ blanket ESA image licence is asserted for the numerical table.
 The gray surface grid and display orientation are cssEarth visualization choices
 under the repository MIT licence. The material is not measured albedo.
 
-Ephemeris: NASA/JPL Horizons; exact queries and raw responses accompany the
-source. Milky Way: ESO/S. Brunier, CC BY 4.0; see
-[ESO-IMAGE-LICENSE.md](source/stars/ESO-IMAGE-LICENSE.md). Inter font: Rasmus
-Andersson, SIL Open Font License 1.1. Star catalogue notice remains beside its input.
+Ephemeris: NASA/JPL Horizons; exact queries and raw responses accompany the source.
+Inter font: Rasmus Andersson, SIL Open Font License 1.1.
 
 Giotto photography: © Max Planck Institute for Solar System Research (MPS),
 1986, 1996; Giotto HMC team. The [MPS image page](https://www2.mps.mpg.de/de/projekte/giotto/hmc/)

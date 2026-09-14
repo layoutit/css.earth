@@ -1,6 +1,7 @@
 ---
 import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mts";
 import PlanetInformationPanel from "./PlanetInformationPanel.astro";
+import PreparedClusterFacts from './PreparedClusterFacts.astro';
 import PreparedFocusLenses from "./PreparedFocusLenses.astro";
 import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
 import type { Props } from "../planet-shell-types";
@@ -284,11 +285,15 @@ const searchCategories = ([
           data-information-group="prepared-focus" role="region" aria-label="Factsheet">
           <div class="planet-factsheet-body"><div class="planet-facts"><ul class="planet-primary-facts">
             {[['distance', 'Observer distance'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
-              <li><span class="planet-fact-label">{label}</span><span class="planet-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
+              <li><span class="planet-fact-label" data-focus-fact-label={id}>{label}</span><span class="planet-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
           </ul></div></div>
           <PreparedFocusLenses {objectId} factsOnly />
-          <p class="planet-introduction" data-focus-basis></p>
-          <p class="planet-introduction" data-focus-reference></p>
+          <PreparedClusterFacts />
+          <PlanetAccordion title="Model and measurement notes">
+            <p class="planet-introduction" data-focus-basis></p>
+            <p class="planet-introduction" data-focus-reference></p>
+          </PlanetAccordion>
+          <h2 class="planet-lens-details-title">Sources</h2>
           <div class="planet-resources-links">
             {Array.from({ length: 3 }, () => <a class="planet-resource-row" data-focus-source target="_blank" rel="noreferrer" hidden></a>)}
           </div>
@@ -300,6 +305,14 @@ const searchCategories = ([
           <PlanetBreadcrumbs scope="milky-way" />
         </PlanetCardHeader>
         <PlanetFactsheet id={`${objectId}-milky-way`} facts={overviewFacts['milky-way'].facts} />
+        <PlanetAccordion title="Sources" open>
+          <ul class="planet-resources-links">
+            {sources.filter(source => ['galaxy','sky'].includes(source.role)).map(source => <li class="planet-resource-row">
+              <a class="planet-resource-label" href={source.href} target="_blank" rel="noreferrer">{source.label}</a>
+              <span class="planet-resource-description">{source.description}</span>
+            </li>)}
+          </ul>
+        </PlanetAccordion>
         <PlanetAccordion title="Planetary systems" count={1 + unavailableSystems.length} open>
           <ul class="planet-object-list">
             <li>

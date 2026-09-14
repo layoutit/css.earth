@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "united-nations",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1554ac69a17b73df4c3cf41bdbdf2adec44f2aa934e5c6f1ff92718a0b479f54"
+    "sha256": "5b140e10e3f92edfddf6043706d4c01a442dc07674c5c51b54f31f0f6c37f895"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "295a594675a58264186effec7d60e0d657dc92dbdbba5696fadcbb2c7e98cdb0",
+      "sha256": "217b63eca63412c7b96fe7ec366da6e83a84de4d2d80e8bd85d86e833da6f40a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "united-nations",
         "displayName": "United Nations",
         "publicBase": "/scenes/united-nations/",
-        "distanceAu": 2.603483726490706,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6e3694d1560a3f3a9253ad0896013ca9d2b5a6f3e3f9b6dde635d054274e524c",
+      "sha256": "8a21f53f56f9dd931ae176cf8d47f57a66c2b0dc84187e3d900e4b18d408eef7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1154"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "9f8df63e5658a5f6657a6f9abaa9ca55ed8adbc4712304e6d313c23e28f9167a",
       "bytes": 45528,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "6e3694d1560a3f3a9253ad0896013ca9d2b5a6f3e3f9b6dde635d054274e524c",
+      "sha256": "8a21f53f56f9dd931ae176cf8d47f57a66c2b0dc84187e3d900e4b18d408eef7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11979,
+      "bytes": 11700,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/united-nations/united-nations-elevation-thumbnail.webp",
           "bytes": 5036,
           "sha256": "17b7f67678d52760e977846bbc1d15b8cffb50fdf4a4b192849482dd74e994be",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/united-nations/united-nations-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/united-nations/united-nations-elevation-surface@2x.webp",
           "bytes": 295412,
           "sha256": "7191457b3d8bed8757562495f7add54d5b722a1470f601b748ca3d749897bb0f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/united-nations/united-nations-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/united-nations/united-nations-shape-surface@2x.webp",
           "bytes": 198478,
           "sha256": "ac65dd16aa4f2a329f51b9668afe71a4050aff066aae9c02b313ffa9111bb470",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9224,
-          "sha256": "a0872584f32a485fe07f1b3947c6992b3ddab40c5982b4c1cd5be42f3770d82f",
+          "bytes": 9105,
+          "sha256": "2e39e5cc93c460279a06b92fddc190d71d915b232d1b61daff79e8210bf8c05c",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "united-nations",
+    "materialSha256": "3cabe84ccfbc8c05970c66e791450d7d340cf302a85d3958b28b6cc735faedc1",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

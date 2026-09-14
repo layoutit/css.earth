@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="selam"])[data-lod="billboard"] .selam-scene, .planet-stage:where([data-object-id="selam"])[data-lod="marker"] .selam-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="selam"])[data-lod="marker"] .selam-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="selam"]).selam-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

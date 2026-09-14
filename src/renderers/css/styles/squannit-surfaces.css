@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="squannit"])[data-lod="billboard"] .squannit-scene, .planet-stage:where([data-object-id="squannit"])[data-lod="marker"] .squannit-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="squannit"])[data-lod="marker"] .squannit-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="squannit"]).squannit-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

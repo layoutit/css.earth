@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "kerberos",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "742bcd1434bbe2af163fb4b39798a796dd456483e05330e6b66ed2758fe76ff7"
+    "sha256": "1ff7f57845df8a1d7392e358a5c14c1b856d9538602cc487c854436a34b6c9b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ae527b8b57b62bce1eec465b4ac83bfbfc6964d292174cde6a4cedeacf211fd2",
+      "sha256": "93ec1d5d2a33aa0be83ec67d1fec65d17e8997155a86b3f95dd1899b20dd0de8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "kerberos",
         "displayName": "Kerberos",
         "publicBase": "/scenes/kerberos/",
-        "distanceAu": 39.48,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Pluto-system ephemeris; Weaver et al. (2016) flyby rotation as an approximate display orientation. The 2025 shape fit has no converged pole solution."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0fe1c80f4bd8af328eef91c59039c6e7244a8c579ac9d9f0c1365af4a6274847",
+      "sha256": "6eb8acab34343099109017c6b001855a7b2bcad8d26643c75fc49bd08a3156c9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,12 +174,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -209,12 +196,6 @@
             "role": "observations",
             "description": "Original New Horizons LORRI imagery",
             "href": "https://pds-rings.seti.org/newhorizons/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -270,7 +251,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,7 +286,7 @@
       "sha256": "991139484557da7fefd5ec6793749e4a4fb6e72a6a205bdb77b29bcdbdda8fc1",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -322,10 +303,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0fe1c80f4bd8af328eef91c59039c6e7244a8c579ac9d9f0c1365af4a6274847",
-      "bytes": 3418,
+      "sha256": "6eb8acab34343099109017c6b001855a7b2bcad8d26643c75fc49bd08a3156c9",
+      "bytes": 3139,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -362,13 +343,13 @@
           "url": "/scenes/kerberos/kerberos-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kerberos/kerberos-model-surface@2x.webp",
           "bytes": 49180,
           "sha256": "e4a99e6f5d917642326b8a2799ecd497503d4c18d2aa0c12c95bfb61473103e9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -404,8 +385,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6350,
-          "sha256": "8da17cbef68832d458401512b7fd3032cae4cda6ac034c55c5303250593f3808",
+          "bytes": 6231,
+          "sha256": "ccac734770bb643c1570035c1e8b4bc27fe20b2bd57468e5b1ccf8287b6beb53",
           "verification": "bytes-verified"
         }
       ],
@@ -440,5 +421,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "kerberos",
+    "materialSha256": "9dc19c244cba21c30e65c82f45cd80c5218d0b97e68f01e3cf8ae08b66eacc55",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="parysatis"])[data-lod="billboard"] .parysatis-scene, .planet-stage:where([data-object-id="parysatis"])[data-lod="marker"] .parysatis-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="parysatis"])[data-lod="marker"] .parysatis-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="parysatis"]).parysatis-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

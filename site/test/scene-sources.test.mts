@@ -8,7 +8,7 @@ import { required } from './navigation-test-values.mts';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { validatePreparedVolumeLenses } from '../../src/renderers/css/dist/universe.js';
 import { sceneSources, sceneSourceGroups } from '../scene-sources.mts';
-const sharedLabels = ['NASA SVS', 'OpenSpace', 'HYG', 'IBEX', 'LVDB', 'McConnachie', 'ESA/Hubble', 'ESO', 'NOIRLab', 'ESO VISTA', 'NOIRLab Horálek', 'NASA/IPAC WISE', 'Dryad', 'Bonanos', 'NOIRLab', 'MCXC-II'];
+const sharedLabels = ['NASA SVS', 'OpenSpace', 'HYG', 'IBEX', 'LVDB', 'McConnachie', 'ESA/Hubble', 'ESO', 'NOIRLab', 'ESO VISTA', 'NOIRLab Horálek', 'NASA/IPAC WISE', 'Dryad', 'Bonanos', 'NOIRLab', 'Cosmicflows-4', 'HyperLEDA I', 'HyperLEDA II', 'MCXC-II'];
 
 test('small shell attribution records match the checked scientific provenance', async () => {
   const read = async (path: string) => SourceEvidence.parse(JSON.parse(await readFile(new URL(`../../src/objects/${path}`, import.meta.url), 'utf8')));
@@ -114,10 +114,7 @@ test('every shared route retains its object sources and the actual environment c
     const resources = content.rows('resources').map(source => ({ label: source.text('label'), href: source.text('href'), role: source.text('role'), description: source.text('description') }));
     const sources = sceneSources(resources), byLabel = new Map(sources.map(source => [source.label, source]));
     for (const source of sources) assert.ok(source.role?.trim(), `${object.id}: ${source.label} needs an attribution category`);
-    for (const source of resources) {
-      const retiredPhoto = /^https?:\/\/(?:www\.)?eso\.org\/public\/images\/eso0932a\/?(?:[?#].*)?$/u.test(source.href);
-      assert.equal(sources.some(candidate => candidate.href === source.href), !retiredPhoto, `${object.id}: ${source.label}`);
-    }
+    for (const source of resources) assert.ok(sources.some(candidate => candidate.href === source.href), `${object.id}: ${source.label}`);
     assert.match(required(byLabel.get('NASA SVS')).description, /Milky Way-only.*NASA\/Goddard.*Ernie Wright \(USRA\).*ESA\/Gaia\/DPAC/u);
     assert.equal(required(byLabel.get('NASA SVS')).href, 'https://svs.gsfc.nasa.gov/4851/');
     assert.match(required(byLabel.get('OpenSpace')).description, /Jon Parker.*Emil Axelsson.*Carter Emmart.*National Astronomical Observatory of Japan.*American Museum of Natural History/u);
@@ -130,21 +127,6 @@ test('every shared route retains its object sources and the actual environment c
     assert.match(required(byLabel.get('ESA/Hubble')).description, /Digitized Sky Survey 2.*Davide De Martin.*CC-BY-4\.0.*not measured per-pixel depth/u);
     assert.equal(new Set(sources.map(source => source.href)).size, sources.length);
   }
-});
-
-test('omits only the superseded ESO panorama, preserving other ESO and object OpenSpace sources', () => {
-  const retired = ['https://www.eso.org/public/images/eso0932a/', 'https://eso.org/public/images/eso0932a',
-    'http://www.eso.org/public/images/eso0932a/?view=large#credit'];
-  const retained = [
-    { label: 'ESO observation', role: 'image', description: 'Observation', href: 'https://www.eso.org/public/images/eso0932b/' },
-    { label: 'ESO', role: 'publisher', description: 'Publisher', href: 'https://www.eso.org/' },
-    { label: 'OpenSpace', role: 'scene', description: 'Globe & lighting', href: 'https://github.com/OpenSpace/OpenSpace' },
-    { label: 'OpenSpace', role: 'atmosphere', description: 'Clouds & atmosphere', href: 'https://docs.openspaceproject.com/latest/content/venus/' },
-  ];
-  const sources = sceneSources([...retired.map(href => ({ label: 'ESO', href, role: 'image', description: 'Retired image' })), ...retained]);
-  assert.deepEqual(sources.slice(0, retained.length), retained);
-  assert.equal(sources.length, retained.length + sharedLabels.length);
-  for (const href of retired) assert.equal(sources.some(source => source.href === href), false);
 });
 
 test('merges duplicate source links without dropping full credits or changing the caller', () => {

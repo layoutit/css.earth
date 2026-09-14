@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/dejopeja/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'dejopeja',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/dejopeja/dejopeja-directional-sun.webp",
-      "two": "/scenes/dejopeja/dejopeja-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/dejopeja/dejopeja-shape-surface@2x.webp"
   ],

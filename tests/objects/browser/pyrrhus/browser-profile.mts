@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/pyrrhus/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'pyrrhus',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/pyrrhus/pyrrhus-directional-sun.webp",
-      "two": "/scenes/pyrrhus/pyrrhus-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/pyrrhus/pyrrhus-shape-surface@2x.webp"
   ],

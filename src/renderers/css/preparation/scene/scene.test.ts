@@ -26,7 +26,7 @@ async function prepareAuthored(id:string,direction:[number,number,number],edit:(
  const outputDirectory=await mkdtemp(join(tmpdir(),'geometry-parity-'));
  try{
   const result=await prepareGeometryScene({profile,raster,assets,solarSource:await readJson(`${root}/presentation/solar-system.json`) as SolarSceneSource,starfield:{faces:[]},sun:{},outputDirectory,
-   adapters:{bodyFixedSunDirection:()=>direction,sunReferenceViewDirection:()=>direction,preparePhysicalScene:async()=>({camera:null,systemTransform:null,presentationFrame:null,heliocentricView:null,worldFrame:null,starfield:null})}});
+   adapters:{bodyFixedSunDirection:()=>direction,sunReferenceViewDirection:()=>direction,preparePhysicalScene:async()=>({camera:null,systemTransform:null,presentationFrame:null,worldFrame:null,starfield:null})}});
   assert.deepEqual(JSON.parse(await readFile(join(outputDirectory,'scene.json'),'utf8')),JSON.parse(JSON.stringify(result)));
   return result;
  } finally {await rm(outputDirectory,{recursive:true,force:true});}

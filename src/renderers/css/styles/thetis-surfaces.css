@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="thetis"])[data-lod="billboard"] .thetis-scene, .planet-stage:where([data-object-id="thetis"])[data-lod="marker"] .thetis-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="thetis"])[data-lod="marker"] .thetis-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="thetis"]).thetis-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

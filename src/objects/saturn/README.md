@@ -485,26 +485,9 @@ They are not a rendered dot field in the current Saturn package.
 </details>
 
 <details>
-<summary>Photographic sky and retained catalog reference</summary>
+<summary>Ring statistics cross-check</summary>
 
-## Background stars
-
-The active sky uses the 6,000 × 3,000
-[ESO eso0932a panorama](https://cdn.eso.org/images/original/eso0932a.tif), credited
-to ESO/S. Brunier under CC BY 4.0. Its SHA-256 is
-`10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035`.
-The shared cubic-sky preparer maps that photograph and its point-source detail
-into prepared sky assets. This is an illustrative orientation, not the sky
-observed from Saturn at a specified date.
-
-The retained [HYG Stellar Database v4.1](https://github.com/astronexus/HYG-Database)
-record is credited to David Nash / Astronexus under CC BY-SA 4.0. Its source
-commit is `c7f7f883fe678cc7680169a50ccd7dcc49b060ce`; the 119,626-row CSV has
-SHA-256 `d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd`.
-The archived `source/stars/hyg-v41-field.json` subset records 1,100 bright stars
-in a 112-degree field centred at RA 40°, declination 7°, with identifiers,
-positions, magnitudes, color indices and projection. Its SHA-256 is
-`0aec282e4c6362d498fd85452a1bb4ac11a76a67409b752c30b99f00c57fb70e`.
+## Ring statistics cross-check
 
 The ring boundaries and the faint inner D ring are cross-checked against the
 NASA PDS Ring-Moon Systems Node's

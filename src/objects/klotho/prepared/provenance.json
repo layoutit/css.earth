@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "klotho",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b5341d1a80938e8123db6d899fc9855d3c47190ea25b7c0326c6966091451bc6"
+    "sha256": "7614c5ffec482f3625c6745f0f0ab9c64ca270481d9cfc86019e738cc03afe7b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "55dd1aabcec96965b462db2735885c2b37abfad295c6f2a625a311ab4869dba4",
+      "sha256": "216bdb97b95a5bafc7508cd07a27ddc0a819f12e98b563d8da06be216c1cdcd7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "klotho",
         "displayName": "Klotho",
         "publicBase": "/scenes/klotho/",
-        "distanceAu": 2.6688807426668064,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 321 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a8c8ab32bafe93a1e2609fcf742ac90f40260b9cdcea1e033d30cc08c37d36af",
+      "sha256": "6d05e7719452d266220fdcb28a6bbf9208dc24580af6621af8232f1ec58a269f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/321"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "11db1e440c1fdbe9f28f96d0750381d4238645ba651903e586b56fb08c1c7ccd",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a8c8ab32bafe93a1e2609fcf742ac90f40260b9cdcea1e033d30cc08c37d36af",
-      "bytes": 8295,
+      "sha256": "6d05e7719452d266220fdcb28a6bbf9208dc24580af6621af8232f1ec58a269f",
+      "bytes": 8016,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/klotho/klotho-elevation-thumbnail.webp",
           "bytes": 5398,
           "sha256": "9301f8464972dc5c536dee05073a5c153a41e80d89fee06737637fc63a0bb9b4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klotho/klotho-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klotho/klotho-elevation-surface@2x.webp",
           "bytes": 273012,
           "sha256": "772b1128b5e62c6344f5ad4ce58b456ac7a5719cc6da9f25b44b04b7e4f51d78",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/klotho/klotho-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klotho/klotho-shape-surface@2x.webp",
           "bytes": 224042,
           "sha256": "a836807f45899bb8788bb1ab788115413073d0328b02aae657e8aedcef126bc7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5665,
-          "sha256": "e6663b6e070ad2f65a87d734dbfaf2af266960bdf9812299459696f86a735531",
+          "bytes": 5546,
+          "sha256": "02361db17dbcb6f0a31a0763c6723e8f4a6de584d8dbcf328c846101c71d661a",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "klotho",
+    "materialSha256": "569d3427f58756e26a518d5c515ad3c31cc62a7f612e4e6cbb3b32ae7215b0ef",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

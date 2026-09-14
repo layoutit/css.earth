@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "varuna",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea44ca08634234260dd1f1aa03fdf62cce583bfb6f9bb3f158f0560eac33ed21"
+    "sha256": "0059851db4cf3b343ca8a62e43a2006adcf18693c1c9e1359f8ae83dabf3835b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b6331712db101685dad3582c099c4bee1827a1abeaf953712f8af9e84686fc65",
+      "sha256": "f4b2b6cffe06244633692a5f36fa5e9c1fbd80cdf6a09cebf0cf7b9fc947ffb3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "varuna",
         "displayName": "Varuna",
         "publicBase": "/scenes/varuna/",
-        "distanceAu": 44.266134719069306,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Uses one published pole interpretation, ecliptic longitude 53° ±10° and latitude −64° ±6°, converted with the J2000 mean obliquity for display. The antipodal pole is also allowed; equinox and meridian are display conventions, not a qualified absolute attitude."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f26a4771d091079d5ad315d0a7e9b61d82c7a6574af7fd9ccd25e37e28db2f17",
+      "sha256": "70f70efb09039d6912f43edf6534723947d1fccd8d1a3bcce70eeea553e0b9de",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -178,12 +171,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -206,12 +193,6 @@
             "role": "facts",
             "description": "Published observations and interpretation",
             "href": "https://arxiv.org/abs/1401.5962"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -258,7 +239,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -293,7 +274,7 @@
       "sha256": "3334be7b80c524da80e9b7b216464e52fe6b16fb07d702f4ef53876d7804dfaa",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -310,10 +291,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f26a4771d091079d5ad315d0a7e9b61d82c7a6574af7fd9ccd25e37e28db2f17",
-      "bytes": 3631,
+      "sha256": "70f70efb09039d6912f43edf6534723947d1fccd8d1a3bcce70eeea553e0b9de",
+      "bytes": 3351,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -350,13 +331,13 @@
           "url": "/scenes/varuna/varuna-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/varuna/varuna-model-surface@2x.webp",
           "bytes": 50308,
           "sha256": "19efe906e2b1c8cf18f15745b61c2ba6405bfee445086938d2c1484fe665b21c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -392,8 +373,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5459,
-          "sha256": "e4306162ae3a90487fe71d4f96dbf6537dd5fecc5d4aac998b7d488fb788ce4a",
+          "bytes": 5340,
+          "sha256": "becd320e2d2d887273d1b9c3aab9efb9fabb262ba1044e8c7a60455cc4062a76",
           "verification": "bytes-verified"
         }
       ],
@@ -428,5 +409,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "varuna",
+    "materialSha256": "3762b16b70605b67e206f172ccc15571099cbd03b5bc59b226c0da901cb0ca33",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

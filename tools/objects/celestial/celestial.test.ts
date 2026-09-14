@@ -1,18 +1,14 @@
-import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { access, mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { prepareCelestialAssets } from './index.js';
 
 const root = process.cwd();
-const oracle = JSON.parse(await readFile(resolve(root, 'tests/objects/compatibility/celestial.json'), 'utf8')) as Record<string,Record<string,string>>;
-const hash = (value:unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
-// Hashes were qualified against the original JS preparers at the recorded PR head.
-// See docs/architecture/typescript-celestial-validation.json for all source/asset pins.
-test('celestial preparation reproduces the source-anchored Mercury and Venus contracts', async () => {
+// The committed Mercury and Venus plans are this preparer's output from their pinned sources; it writes no images.
+test('celestial preparation reproduces the prepared Mercury and Venus sky orientation and Sun direction', async () => {
   const scratch = await mkdtemp(join(tmpdir(), 'cssearth-celestial-'));
   try {
     for (const id of ['mercury', 'venus']) {
@@ -20,10 +16,13 @@ test('celestial preparation reproduces the source-anchored Mercury and Venus con
       const config = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/celestial.json'), 'utf8')) as unknown;
       const outputDirectory = resolve(scratch, id), publicDirectory = resolve(scratch, 'public', id);
       const actual = await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config });
-      assert.equal(hash(actual.sky), oracle[id].sky);
-      assert.equal(hash(actual.sun), oracle[id].sun);
-      assert.equal(hash(actual.markers), oracle[id].markers);
-      for (const name of ['sky.json', 'sun.json', 'markers.json']) assert.ok((await readFile(resolve(outputDirectory, name))).byteLength > 2, name);
+      for (const name of ['sky', 'sun'] as const) {
+        const written: unknown = JSON.parse(await readFile(resolve(outputDirectory, `${name}.json`), 'utf8'));
+        assert.deepEqual(written, JSON.parse(JSON.stringify(actual[name])), `${id} ${name}.json`);
+        assert.deepEqual(written, JSON.parse(await readFile(resolve(root, 'src/objects', id, 'prepared', `${name}.json`), 'utf8')), `${id} prepared ${name}`);
+      }
+      await assert.rejects(access(resolve(outputDirectory, 'markers.json')), { code: 'ENOENT' });
+      await assert.rejects(access(publicDirectory), { code: 'ENOENT' });
     }
   } finally { await rm(scratch, { recursive: true, force: true }); }
 });

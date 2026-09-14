@@ -1,6 +1,6 @@
 import type { CubicSkyPlan } from '../solar-system/cubic-sky-runtime.js';
 import type { CameraPlan, CameraAngles, CameraPose, Quaternion, Vector3 } from './types.js';
-export interface CameraSkyPlan { cameraPitchResponse: number; presentationPitchOffsetDegrees: number; presentationYawOffsetDegrees: number; cameraContract?: CubicSkyPlan['cameraContract']; sceneRegistration?: string; sun?: { localDirection: Vector3; initialViewDirection: Vector3 } | null; }
+export interface CameraSkyPlan { cameraPitchResponse: number; presentationPitchOffsetDegrees: number; presentationYawOffsetDegrees: number; cameraContract?: CubicSkyPlan['cameraContract']; sceneRegistration?: string; }
 export interface CameraOrientationOptions extends CameraAngles { cameraPlan: CameraPlan; skyPlan: CameraSkyPlan; requireSun?: boolean; sunDirection?: Vector3 | null; sunReferenceViewDirection?: Vector3 | null; sunTracksScene?: boolean; skyTracksScene?: boolean; }
 export type CubicSkyCameraOrientation = ReturnType<typeof createCubicSkyCameraOrientation>;
 import { rotationAxisAngle } from "@cssearth/engine";
@@ -15,7 +15,7 @@ export function createCubicSkyCameraOrientation({
   cameraPlan,
   skyPlan,
   requireSun = true,
-  sunDirection = skyPlan?.sun?.localDirection ?? null,
+  sunDirection = null,
   sunReferenceViewDirection = null,
   // An observed Sun direction is fixed in the body-fixed frame, so it has to
   // ride the scene matrix exactly like the body does. The reference-view path

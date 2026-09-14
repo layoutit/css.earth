@@ -1,3 +1,4 @@
+import nearbyUniverseSources from '../src/objects/nearby-universe/source/catalogue.json' with { type: 'json' };
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceObject, sourceArray, sourceUrl } from '../src/platform/source-catalog.mts';
@@ -79,6 +80,7 @@ const sharedSources = Object.freeze([
     "href": "https://noirlab.edu/public/images/noirlab2030b/",
     "description": "Deepest, widest view of the Small Magellanic Cloud from SMASH. CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin. CC-BY-4.0. The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth."
   },
+  ...nearbyUniverseSources.sources.map(source => ({ label: source.id === 'cosmicflows-4' ? 'Cosmicflows-4' : source.id === 'hyperleda-pgc' ? 'HyperLEDA I' : 'HyperLEDA II', role: 'galaxy field', href: source.doi, description: `${source.citation}. CDS/VizieR ${source.catalogue}. Galaxy positions and distance inputs; displayed cloud concentrations and exposure are authored, not gas or measured mass density.` })),
   {
     "label": "MCXC-II",
     "role": "clusters",
@@ -103,9 +105,6 @@ for (const use of SOURCE_CATALOGUE.usage.edges.filter(use => use.kind === 'share
 export function sceneSources(resources: readonly SceneSource[] = []) {
   const result = new Map<string, SceneSource>();
   for (const resource of [...resources, ...sharedSources]) {
-    // Shared world context suppresses the retired photographic sky leaves.
-    // Other ESO sources and object-specific OpenSpace credits remain valid.
-    if (isSupersededPanorama(resource.href)) continue;
     const key = sourceKey(resource.href);
     result.set(key, { ...result.get(key), ...resource });
   }
@@ -138,12 +137,6 @@ export function sceneSourceGroups(sources: readonly SceneSource[]): readonly Sce
     group.members = group.members.map(member => (parts.get(member.part) ?? 0) > 1 ? { ...member, part: member.role } : member);
   }
   return groups;
-}
-
-function isSupersededPanorama(href: string) {
-  const url = new URL(href);
-  return url.hostname.replace(/^www\./u, '') === 'eso.org' &&
-    url.pathname.replace(/\/+$/u, '') === '/public/images/eso0932a';
 }
 
 function normalizedHref(href: string) {

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "leto",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c50ba1fb424eba75acb4ac87351e3cecbdbc4fc4e5bbe0e24bdbc50898b4c03e"
+    "sha256": "ee8c0415f90c989ff9eaace91c84320760236565dbcc3a4ce5764f403655f19f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0d86ca20b172ca90d985d47675f30e35326249966403b797b65106c979048387",
+      "sha256": "f8b80735e1f29ab12460343452670f8567dfc99b0f39e86cfdb1903b34ee4db7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "leto",
         "displayName": "Leto",
         "publicBase": "/scenes/leto/",
-        "distanceAu": 2.7855571261884413,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 290 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ac63de49c5300102ce5eaa13cbc84a1b8ec3808b3d57bfc5d34ae5be2e446823",
+      "sha256": "c66f405f2bedd6e38ac5fd10854a2fdb52e692a3cceaf8800b0f825b26cb3026",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/290"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "22c388028d5da32840503e4aaa9a0985447afaf34909ca834b26e941a313f019",
       "bytes": 82222,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ac63de49c5300102ce5eaa13cbc84a1b8ec3808b3d57bfc5d34ae5be2e446823",
-      "bytes": 7800,
+      "sha256": "c66f405f2bedd6e38ac5fd10854a2fdb52e692a3cceaf8800b0f825b26cb3026",
+      "bytes": 7521,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/leto/leto-elevation-thumbnail.webp",
           "bytes": 5360,
           "sha256": "2801bb1e16ba68412f2e7b7e5cdd98900e940e22b0598d5001c06cb7eea5136b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/leto/leto-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/leto/leto-elevation-surface@2x.webp",
           "bytes": 294400,
           "sha256": "0c75b6addead906b6e6c0dc24930a6073bb2c1a47d1b1dc2e8255ddc0e29671c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/leto/leto-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/leto/leto-shape-surface@2x.webp",
           "bytes": 251982,
           "sha256": "0f9570e630d5b8e44e561c74d3eb2c1551e80e7e607b794112c3012e1eefdf70",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5200,
-          "sha256": "6e2e0f6998189655398772027b841393a2d6be0d0bf2d588d8760c13a7d69a75",
+          "bytes": 5081,
+          "sha256": "8249d41e5b4b4f7f24d2a3c8f9f917c7ce722c22d8dd2922e176f9be0573df36",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "leto",
+    "materialSha256": "cb6b7c40d4958e3465b93c7f8fe96188322f1d3274918591f83177ce9ad79d57",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

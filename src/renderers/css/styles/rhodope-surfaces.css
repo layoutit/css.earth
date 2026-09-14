@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="rhodope"])[data-lod="billboard"] .rhodope-scene, .planet-stage:where([data-object-id="rhodope"])[data-lod="marker"] .rhodope-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="rhodope"])[data-lod="marker"] .rhodope-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="rhodope"]).rhodope-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

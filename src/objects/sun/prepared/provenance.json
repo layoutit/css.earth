@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "sun",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "437442b2b504e74a9b40f58cf8b75655adbdd46c12b99928c3a14c7e8c6d194e"
+    "sha256": "9f6d33a14c141cca2bf040eab1b141379ea8f10907e3418f266d142a7e9b7b16"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -303,7 +303,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c679469a83de4d8a33b4c057cf9803d058d9256b31949f8923dd7f194c31849f",
+      "sha256": "aa46441f21942bb8e9212ddbb8f32cafb283bbbdb78646bc4d1f0d82fadbefac",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -602,12 +602,6 @@
             "description": "Magnetic surface lens",
             "href": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html",
             "role": "magnetism"
-          },
-          {
-            "label": "HYG",
-            "description": "Background star field",
-            "href": "https://github.com/astronexus/HYG-Database",
-            "role": "stars"
           }
         ],
         "provenance": {
@@ -678,7 +672,7 @@
       "sha256": "3f892eddb79a3e0918968f789ffde00296fd1dab3db70deb4a3a0e84e2987fd8",
       "bytes": 201610,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -725,7 +719,7 @@
       "sha256": "89397586ef57d2855b5e7e17c1cabc9d614e91b248891dedce7faffd46c40799",
       "bytes": 201167,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -772,7 +766,7 @@
       "sha256": "76cd18e53cdb2300d975f4b5daecdb98ecbe6f928a85f7bf6e573142c6e0b9d8",
       "bytes": 201160,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -819,7 +813,7 @@
       "sha256": "8def98477239d28fe06ee770e221fe65ec7f04b9a0d087849738efb8dadd7fa8",
       "bytes": 200916,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -866,7 +860,7 @@
       "sha256": "36c257e8a54e3225c0dd3ec1b483eb68e590c6763158d75f0aaa3a81cc2c305c",
       "bytes": 201242,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -913,7 +907,7 @@
       "sha256": "6c8f6a2aeba52e13bce42ee142b79a69edfd37dba530547ced0e6032c6121089",
       "bytes": 201369,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -960,7 +954,7 @@
       "sha256": "76ed3f989b3fdc725de3cf6a84816bf9aad0fc375c3e2a9bcf3604eaaf4c99df",
       "bytes": 201555,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1007,7 +1001,7 @@
       "sha256": "1b9002ef8e5a81ddea7487b4411aa5be2e4daf02b0afffe1440fb18d6070bbc2",
       "bytes": 201528,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1054,7 +1048,7 @@
       "sha256": "c429676a01c47cb871edce7821363ee79df6e42861cc1e88a1d87f3b276e4343",
       "bytes": 201697,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1101,7 +1095,7 @@
       "sha256": "82bbdcb50a5555dddbe7d2d1cb5ab50665fe0433a9ba6278c7bca03a12f21f5b",
       "bytes": 201436,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1148,7 +1142,7 @@
       "sha256": "a9ded4a39f69c2cb0a026c74b91a57e9e4d8cfecae1c66c66856c8d11f9f0627",
       "bytes": 201398,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1195,7 +1189,7 @@
       "sha256": "ec35222f178e689b06ea8f5258abe4aec9eb5b75e3ff679ecd8a52c3bb92de1d",
       "bytes": 201853,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1242,7 +1236,7 @@
       "sha256": "a4b6963e8255a1e4b8fe70f2f7419f742a6a2067537127b475075ffa36f88062",
       "bytes": 201921,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1289,7 +1283,7 @@
       "sha256": "2d653bb2d39bcc24e8598951a16b8cf1397292ee1aeff034ce7bd82ca1e7ab7c",
       "bytes": 201937,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1336,7 +1330,7 @@
       "sha256": "9826280d78c56635353ad01bd361f22844314e1a190daad461db4b5c66a57433",
       "bytes": 201925,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1383,7 +1377,7 @@
       "sha256": "9e3ac8a22f13778ea1554e36172cd522646c99f7cb1d8e87eba644fb32842ef5",
       "bytes": 202146,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1430,7 +1424,7 @@
       "sha256": "ee23ebd76fba906742ad5963f8f73273bed0e2ff1c2ca216316952bbd4ed37ba",
       "bytes": 202431,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1477,7 +1471,7 @@
       "sha256": "04acaf1f08d85eac2618b81db5b5746fec37907f5b1992540ef86421be272668",
       "bytes": 201895,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1524,7 +1518,7 @@
       "sha256": "2969b0723e9f7bb30f03d57883c6911a68526730dcbebd906d020c6df241ca58",
       "bytes": 201902,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1571,7 +1565,7 @@
       "sha256": "87b1112185053c05a486607f1afd543ccba1037b34358cfa4064b0849d9afe23",
       "bytes": 202123,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1618,7 +1612,7 @@
       "sha256": "0341a126279acb1bf26dcd253ccd8ceb345ce488b10f93bbaf38c677ab418b26",
       "bytes": 202360,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1665,7 +1659,7 @@
       "sha256": "2e755fdcca312d4e89b9ef00261198f41628ddb3bbbf08ea10e87b5aed74ea0a",
       "bytes": 202812,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1712,7 +1706,7 @@
       "sha256": "1ba5981f51630ad9829eafbe23f51bce9a928438e3c6bb8e36968335c88d66d4",
       "bytes": 202269,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1759,7 +1753,7 @@
       "sha256": "5e9f63736d8fecd37afb5b30354a558c54dc6a9b11c09772f7e23deac25df251",
       "bytes": 202113,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1806,7 +1800,7 @@
       "sha256": "2d3a622440eee08738e68cb09a38320d733abf4473a2fd84cfabfc7a1d33a1c0",
       "bytes": 202295,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1853,7 +1847,7 @@
       "sha256": "8d54b5872061e422d32ac27495d33903460d9cc9d06d487771183e6049514e9f",
       "bytes": 201556,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1900,7 +1894,7 @@
       "sha256": "b26903c43d0ae028d9b95f7609234d1270446ce50cf2d3c43216c8c6f359bbfc",
       "bytes": 201690,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1947,7 +1941,7 @@
       "sha256": "d118b3b2c82315e397c147fa0e5706ffc78130ed7a3febc23abafd8fa4643ee3",
       "bytes": 1039680,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1994,7 +1988,7 @@
       "sha256": "5ac6f520574f74b25c03da86791457eafcfd96d9bad80d2ab961fe5008d624ca",
       "bytes": 31106880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2041,7 +2035,7 @@
       "sha256": "8ae7e4557012f9d4840a2c326158fb9db338f8b5d8dcde3f390bab858456757e",
       "bytes": 206926,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2088,7 +2082,7 @@
       "sha256": "af19f906ca278b25f137340bc1a89948fdc30a2f9cb8b6fe8e58ae98e467258a",
       "bytes": 31106880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2135,7 +2129,7 @@
       "sha256": "2b28d6df1b92cb1b352c6ce52eb7236039092f63fbaf95dc2921cd5e80cf83a6",
       "bytes": 192428,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2159,10 +2153,10 @@
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
-      "sha256": "c679469a83de4d8a33b4c057cf9803d058d9256b31949f8923dd7f194c31849f",
-      "bytes": 11727,
+      "sha256": "aa46441f21942bb8e9212ddbb8f32cafb283bbbdb78646bc4d1f0d82fadbefac",
+      "bytes": 11564,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -2234,55 +2228,55 @@
           "url": "/scenes/sun/sun-surface-photosphere.webp",
           "bytes": 52712,
           "sha256": "230cf0b52fabd6f8eca2056220641f2438b4f8b74bc02e7f359bf29648206534",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-surface-photosphere@2x.webp",
           "bytes": 223392,
           "sha256": "cb560e57c26b8a5c0d3e5c1719f3b27156c03fe4150757b2a06b975b14ae2cef",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-lens-photosphere.webp",
           "bytes": 206,
           "sha256": "4a32502c9ed4012f3154d6400aff3e1c76a87da756d841c3fbbbc57f35357d24",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-photosphere.webp",
           "bytes": 16700,
           "sha256": "d4ca7f01363fe06fc19ba91a0a2e425ee47c9679f01b2b0213126b0b6c4fa0b4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-photosphere@2x.webp",
           "bytes": 37092,
           "sha256": "3fb36d82d85a14c51337778a15f31a1445de339c37de59b01a31771b4992d1c2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-corona-photosphere.webp",
           "bytes": 66,
           "sha256": "94715bb9a573a9dd6e323802010b09cfe8521bf06b17e00a7fe93a8e2a9a1a46",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-limb-photosphere.webp",
           "bytes": 12700,
           "sha256": "76b64002caf9a33df498c4501f5432085c505c73c326551d6e40e01b6ec109af",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-corona-photosphere@2x.webp",
           "bytes": 140,
           "sha256": "1e1f80c2dd16bc84e808ee2779d31f78cfdf7d6b099458708a21faeaed8da5dc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-limb-photosphere@2x.webp",
           "bytes": 34132,
           "sha256": "3615e02c33919acf10bb7a1a6094db55c6dcc589ad3253b59c0815a00dd592bb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2349,55 +2343,55 @@
           "url": "/scenes/sun/sun-surface-magnetic.webp",
           "bytes": 280774,
           "sha256": "c8d081f99d7b76fb77722457d337acf6598a5fb5da255e1db802455d4abfc047",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-surface-magnetic@2x.webp",
           "bytes": 771488,
           "sha256": "2abdaa8759c7d504f440a8d2d1ad78e883c22dc396cb71b98ce8e0da7e22edb2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-lens-magnetic.webp",
           "bytes": 1594,
           "sha256": "f0072abfab9cf70a4a2c46a215ef4a596248236d74919aa19238bdf56c150c85",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-magnetic.webp",
           "bytes": 29154,
           "sha256": "41b37a105ff4e3b5942dfde5d5d968c414a5a10fc5f40da159370e4531fb32e6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-magnetic@2x.webp",
           "bytes": 67324,
           "sha256": "251e48c1e59620f903add6ea55ba78d288300b8cffa55a9d79ea5a8e27b16fad",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-corona-magnetic.webp",
           "bytes": 66,
           "sha256": "94715bb9a573a9dd6e323802010b09cfe8521bf06b17e00a7fe93a8e2a9a1a46",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-limb-magnetic.webp",
           "bytes": 7238,
           "sha256": "12a176da30d1c561fb9089b5699c669ca8de47a28ffd8b76da85e729ca80d92d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-corona-magnetic@2x.webp",
           "bytes": 140,
           "sha256": "1e1f80c2dd16bc84e808ee2779d31f78cfdf7d6b099458708a21faeaed8da5dc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-limb-magnetic@2x.webp",
           "bytes": 20528,
           "sha256": "901f234c4755fb5cf55519172f54a80f3a3e471c4d323a69280cf8b291b55899",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -2474,55 +2468,55 @@
           "url": "/scenes/sun/sun-surface-chromosphere.webp",
           "bytes": 216718,
           "sha256": "b3a392d9f50e5f14672b1746c09acad9994f2d577d2e0e698216198605168877",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-surface-chromosphere@2x.webp",
           "bytes": 599342,
           "sha256": "3ea26ae72464197f235f50425a158d073eed4e5d157c5ae5a5a13a860b97119c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-lens-chromosphere.webp",
           "bytes": 1940,
           "sha256": "9b5b23b749e873c2cc65e6f56d8d820716f3098f6f3323803ee81d5c506cfffb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-chromosphere.webp",
           "bytes": 17854,
           "sha256": "a9b05f825704f74bb2101c8958f52f2fcf857df4a77f4d0fb46592795ee61fa8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-chromosphere@2x.webp",
           "bytes": 40354,
           "sha256": "efe90e0f276e341f2aa7ba48734ca8c64fbea641f578d09a722f0e6cbf6f288b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-corona-chromosphere.webp",
           "bytes": 38960,
           "sha256": "08d5949e1df3eca2bb1d902edcbdd5036b19f3faf15b6667996da30b567e000a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-limb-chromosphere.webp",
           "bytes": 7238,
           "sha256": "f217d13612f00b58a420472eeefdb142f8245d5db5a0c7b8b58be41143897637",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-corona-chromosphere@2x.webp",
           "bytes": 119046,
           "sha256": "65addc3c000317f4987237a1164b54198be49235c0c251180bbb0d421c9a1f69",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-limb-chromosphere@2x.webp",
           "bytes": 20528,
           "sha256": "6518de58c3e7cd37d2acc764a195d44391c73abe0f019f0274cdad8e193d3b0b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -2599,55 +2593,55 @@
           "url": "/scenes/sun/sun-surface-corona.webp",
           "bytes": 187478,
           "sha256": "0f907c2b4c5e093c5845c59c30fc22922fdfe51f458719602ddfbb5deb7116f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-surface-corona@2x.webp",
           "bytes": 478720,
           "sha256": "bd8a8b87f4a0b09805e344f42123492ae08d9677a5b19aadd3ba7f76a19f3c5a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-lens-corona.webp",
           "bytes": 2260,
           "sha256": "b2031b33b9f8b31680dc1c5e196b900617d322b87451970bf9498b195f392815",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-corona.webp",
           "bytes": 25578,
           "sha256": "564b11314dc36696317a46b9484d70ea82695824c5856a64794cce486fb5a0f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-corona@2x.webp",
           "bytes": 64356,
           "sha256": "26b24a09ecf2a73dd099e0adb7d8a1021e520f436492e0eb1a1dd14ef66fa7f2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-corona-corona.webp",
           "bytes": 56282,
           "sha256": "26252495041bebff43786f6e4386cdd062b397a1bd80ac6fa5c8e994d52b43e8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-limb-corona.webp",
           "bytes": 7238,
           "sha256": "ddec547890fe63035b390cb31a0cfa0daa7f25ef925f2b5f72f543739cceb992",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-corona-corona@2x.webp",
           "bytes": 160858,
           "sha256": "33aae3690573b31b09b486780e2a3065e91edaec425ae8ba1015ac6e3cdd9d89",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-limb-corona@2x.webp",
           "bytes": 20528,
           "sha256": "68e4589cdef690afe06366efc72e6d757729ff14d364ba48f2b2cb2d3d3eb745",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -2678,8 +2672,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5210,
-          "sha256": "7d3e649d7daf395b9d1e7fcb385031169b67c4ce6c84dbcce8cc6afeb31cda3b",
+          "bytes": 5089,
+          "sha256": "80c13cc0b50c1327b660209bc0512cd2c4806d718c05bf2bc17cb32730e53397",
           "verification": "bytes-verified"
         }
       ],
@@ -2789,5 +2783,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "sun",
+    "materialSha256": "e40dac6ef765bd937c64328b9f444aec237f567ae9e775ce4389f4c3215d1a75",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

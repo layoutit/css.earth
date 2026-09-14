@@ -46,15 +46,6 @@
       "origin": "https://psg.gsfc.nasa.gov/api.php",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government generated data"
-    },
-    {
-      "id": "google-maps-jupiter-cubic-sky-sun-oracle-measurements",
-      "path": "sun/google-maps-sun-oracle.json",
-      "expectedBytes": 2895,
-      "expectedSha256": "0fcc54b72a064eb76adf2a3be008f23c6fb6f3ffae3cdc5df228b83d16b3a27b",
-      "origin": "https://www.google.com/maps/space/venus/ and https://mw1.google.com/mw-weather/static/sun.png",
-      "credit": "Google Maps visual presentation reference; measurements recorded by this project",
-      "license": "Repository-authored factual measurements; exact referenced asset is separately qualified"
     }
   ],
   "layers": [

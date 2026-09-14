@@ -39,16 +39,11 @@ test("verifies Earth acquisition without a network request", async () => {
   assert.equal(shape({inputCount:number})(JSON.parse(stdout)).inputCount, earthSourceManifest().inputs.length);
 });
 
-test("prepares the shared photographed cubic sky and independent Sun", () => {
-  assert.equal(PREPARED_EARTH_STARFIELD.schema,
-    "cssearth-prepared-cubic-sky@2");
-  assert.equal(PREPARED_EARTH_STARFIELD.faces.length, 6);
-  assert.equal("sun" in PREPARED_EARTH_STARFIELD, false);
-  assert.equal(PREPARED_EARTH_SKY_SUN.schema,
-    "cssearth-prepared-directional-sun@3");
-  assert.equal(PREPARED_EARTH_SKY_SUN.bakedIntoStarfield, false);
-  assert.equal(PREPARED_EARTH_SKY_SUN.billboard, true);
-  assert.equal(Reflect.get(PREPARED_EARTH_SKY_SUN.asset,"googlePixelsRedistributed"), false);
+test("prepares the sky orientation and Sun direction the shared universe reads", () => {
+  assert.equal(PREPARED_EARTH_STARFIELD.schema, "cssearth-prepared-cubic-sky@3");
+  for (const field of ["faces", "catalogueStars", "sun"]) assert.equal(field in PREPARED_EARTH_STARFIELD, false, field);
+  assert.equal(PREPARED_EARTH_SKY_SUN.schema, "cssearth-prepared-directional-sun@4");
+  for (const field of ["asset", "billboard", "bakedIntoStarfield"]) assert.equal(field in PREPARED_EARTH_SKY_SUN, false, field);
 });
 
 test("prepares flat opaque texel thumbnails for Earth surface lenses", async () => {

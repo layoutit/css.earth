@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="arrokoth"])[data-lod="billboard"] .arrokoth-scene, .planet-stage:where([data-object-id="arrokoth"])[data-lod="marker"] .arrokoth-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="arrokoth"])[data-lod="marker"] .arrokoth-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="arrokoth"]).arrokoth-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

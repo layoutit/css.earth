@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="puck"])[data-lod="billboard"] .puck-scene, .planet-stage:where([data-object-id="puck"])[data-lod="marker"] .puck-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="puck"])[data-lod="marker"] .puck-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="puck"]).puck-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

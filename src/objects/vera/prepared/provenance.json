@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "vera",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a79b3b9182618604199492f680a34ee95bd21a3b38374848641c424186cdbaf5"
+    "sha256": "4c361cd165dd3b3ba5383ea14f254b75af057e3232a87dacd68b61d00b97d422"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2fff72978080da298b911d728559ce38480049710449368b815f61bfb104a459",
+      "sha256": "bfecd5c68e8b17f817ba1884a8574d291eb68c69f493e6fbe2681318068d4dd7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "vera",
         "displayName": "Vera",
         "publicBase": "/scenes/vera/",
-        "distanceAu": 3.098448648035085,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1212 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f68cff2aff40bd2229f25ab77ee3101dd8e48b6b95a1d694a3e1f14f2ef50eb5",
+      "sha256": "261f8b458436f3133559fce18fb8f81cd92674f93a1adc06da66c6b4dca59b8a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1212"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "2d0eb67cc470d629766b5c5f396820808162acbb1bd994548ffc9b38329268dc",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f68cff2aff40bd2229f25ab77ee3101dd8e48b6b95a1d694a3e1f14f2ef50eb5",
-      "bytes": 8501,
+      "sha256": "261f8b458436f3133559fce18fb8f81cd92674f93a1adc06da66c6b4dca59b8a",
+      "bytes": 8222,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/vera/vera-elevation-thumbnail.webp",
           "bytes": 5076,
           "sha256": "bd2aa2c6b146358eb246c0a3325a110baf717acd19ae33edb1698a6177f2d49c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vera/vera-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vera/vera-elevation-surface@2x.webp",
           "bytes": 258794,
           "sha256": "5972637dbf7cb6d7d07b099acead481c22b4efd93301bd136289f827f769aac3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/vera/vera-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vera/vera-shape-surface@2x.webp",
           "bytes": 214978,
           "sha256": "45e939b60cfe6b431e0f3519a11d9fbe346b8e3c9d5bb680548cb3fab3d64be7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5893,
-          "sha256": "f1174ce29c6cb21a67348137b02210126b030d28ee6f2fed65fb570c10fd1117",
+          "bytes": 5774,
+          "sha256": "cd5ae2805b792eb34fc9a22758ca6cb8ea010088e6ba95b26bb85a16892b3275",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "vera",
+    "materialSha256": "2f89a8a37e7d4e474b7c26f3f502a2cbaa7cd2190cf1f1ee2da33512c22062cd",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

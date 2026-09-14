@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="taurinensis"])[data-lod="billboard"] .taurinensis-scene, .planet-stage:where([data-object-id="taurinensis"])[data-lod="marker"] .taurinensis-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="taurinensis"])[data-lod="marker"] .taurinensis-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="taurinensis"]).taurinensis-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

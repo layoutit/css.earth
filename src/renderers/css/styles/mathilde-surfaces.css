@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="mathilde"])[data-lod="billboard"] .mathilde-scene, .planet-stage:where([data-object-id="mathilde"])[data-lod="marker"] .mathilde-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="mathilde"])[data-lod="marker"] .mathilde-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="mathilde"]).mathilde-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

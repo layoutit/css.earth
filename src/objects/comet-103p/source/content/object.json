@@ -212,12 +212,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": true
       }
     ]
   },
@@ -240,12 +234,6 @@
       "role": "surface",
       "description": "EPOXI photographs archived encounter images",
       "href": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     },
     {
       "label": "HRI-IR",

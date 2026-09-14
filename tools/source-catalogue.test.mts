@@ -1,3 +1,4 @@
+import { prepareContextProvenance } from './prepare-context-provenance.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, mkdtemp, mkdir, copyFile, writeFile, rm } from 'node:fs/promises';
@@ -108,7 +109,7 @@ const objectInput = async (id: string) => {
 };
 test('source uses conserve all product dependencies, include models, and never convert metadata into observations', async () => {
   const objects = await Promise.all(SCENE_OBJECTS.map(object=>objectInput(object.id)));
-  objects.push(...await prepareVolumeProvenance());
+  objects.push(...await prepareVolumeProvenance(), ...await prepareContextProvenance());
   const metadata=prepared.usage.edges.filter(edge=>edge.consumerKind!=='object-product');
   assert.deepEqual(compileSourceUsage(objects,prepared.sources,metadata),prepared.usage);
   assert.equal(metadata.filter(edge=>edge.kind==='shared-context').length,4);
@@ -198,7 +199,7 @@ test('changed fact evidence and stale displayed facts leave both published catal
   const outputs = ['site/prepared-sources.json', 'site/prepared-machines.json'];
   // Declared metadata and bounded preview inputs suffice; no baked body/volume assets or downloads.
   const records = new Set((await promisify(execFile)('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { maxBuffer: 16 * 1024 * 1024 })).stdout.split('\0'));
-  const generated = new Set(['site/prepared-object-catalog.mts', 'site/prepared-object-distances.json', 'site/prepared-focus-objects.json', ...(await prepareVolumeProvenance()).flatMap(volume => volume.outputs.map(output => relative(process.cwd(), output.path)))]);
+  const generated = new Set(['site/prepared-object-catalog.mts', 'site/prepared-object-distances.json', 'site/prepared-focus-objects.json', ...[...await prepareVolumeProvenance(), ...await prepareContextProvenance()].flatMap(volume => volume.outputs.map(output => relative(process.cwd(), output.path)))]);
   assert.deepEqual(Object.keys(prepared.closure).filter(path => !records.has(path) && !generated.has(path)), [],
     'Sources may regenerate declared metadata outputs, but must not depend on ignored downloads or baked assets');
   for (const path of [...Object.keys(prepared.closure), ...outputs, ...await volumePreviewInputs()]) {
@@ -274,7 +275,6 @@ test('missing cited evidence restores without body assets and leaves catalogues 
   assert.deepEqual(await readFile(join(root, paper)), bytes);
   assert.equal(result.prepared.closure[paper], createHash('sha256').update(bytes).digest('hex'));
   assert.deepEqual(result.prepared.closure, result.preparedSources.closure);
-  await assert.rejects(readFile(join(root, source, 'stars/eso0932a.tif')), { code: 'ENOENT' });
   const offline = await prepareMachines({ root, sourceTransport: { fetch: async () => { throw new Error('Unexpected citation refresh'); } } });
   assert.deepEqual(offline.outputs, result.outputs, 'warm and cold preparation have identical closures');
 });
@@ -292,8 +292,8 @@ test('numerical extraction uses current package records and preserves reviewed s
       await mkdir(join(target,'..'),{recursive:true});
       await copyFile(path,target);
     }
-    // The extractor does not read these retained common assets or change their pins.
-    for (const path of ['stars/eso0932a.tif','presentation/InterVariable.ttf']) {
+    // The extractor does not read this retained common asset or change its pin.
+    for (const path of ['presentation/InterVariable.ttf']) {
       const target = join(root,source,path);
       await mkdir(join(target,'..'),{recursive:true}); await writeFile(target,'');
     }

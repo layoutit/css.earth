@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "himalia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3da4f37708f18edf54eec7ff89fa1f049c4ab637e6176ebad16572a98286118b"
+    "sha256": "227842e754fda50223443535a8fa1ebf2562f24d658867c67c3525ce6f0c48de"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a0e2a4deba872a9f5b381f5c8cf1bc2dec477d2374e2f1526fc943838b066163",
+      "sha256": "e7b4a66f4bd8755207e09ecbba6616066cbea66b33910966a38055c1171ef839",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "himalia",
         "displayName": "Himalia",
         "publicBase": "/scenes/himalia/",
-        "distanceAu": 5.2,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Jupiter-system ephemeris. Illustrative display pole aligned to the fitted orbital normal, with an arbitrary meridian. This is not a measured spin axis, synchronous rotation, or a current landmark phase."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6175e7afe46cb5dadef2c63f29c77108393d55c63b44348296c3be045b2929e9",
+      "sha256": "f112a6fe39fe13d083be8f83100e215e916e4f99bf9e326eeecc0f01096af661",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -172,12 +165,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -200,12 +187,6 @@
             "role": "observations",
             "description": "Cassini imaging archive",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -262,7 +243,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -298,7 +279,7 @@
       "sha256": "4ff1572bad2cc0ff840d4088ad575af66ed0cf5eaba02d8d5d7b13a1db96b8ee",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -315,10 +296,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6175e7afe46cb5dadef2c63f29c77108393d55c63b44348296c3be045b2929e9",
-      "bytes": 2823,
+      "sha256": "f112a6fe39fe13d083be8f83100e215e916e4f99bf9e326eeecc0f01096af661",
+      "bytes": 2544,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -355,13 +336,13 @@
           "url": "/scenes/himalia/himalia-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/himalia/himalia-model-surface@2x.webp",
           "bytes": 57272,
           "sha256": "13b5839d0f36561cbe7e7a8a7bd9f767490aba1eb0dd80abb3eadb06f1af3ac1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -397,8 +378,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5113,
-          "sha256": "4674a1028b1c52a669a184d038a0e5e1e733f0d713e09aec4a03806ab0069294",
+          "bytes": 4994,
+          "sha256": "7ccbe653f51e6a45301e933f1dc8cd8f817759007588a74bdeb2ec9ec73f7a3f",
           "verification": "bytes-verified"
         }
       ],
@@ -433,5 +414,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "himalia",
+    "materialSha256": "3022b8eda4ec4a8cb0c640b68db7b8109ae139d626b418d1de8d963e3f540f81",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

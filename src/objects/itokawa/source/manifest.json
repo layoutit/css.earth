@@ -2,33 +2,6 @@
   "schema": "cssitokawa-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "itokawa-shape",
       "path": "shape/ver128q.tab",
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab",
@@ -391,7 +364,7 @@
       "expectedSha256": "f26f0ede45114bcaaead6c875b6f8992bd0c52498affc647efe14ab059db38a1",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ITOKAWA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -1032,8 +1005,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8830,
-      "expectedSha256": "49fa2e4a103cd2ac7cd734a90b6cfb5fe3beae39994dc9b273ecbd99fe9879db",
+      "expectedBytes": 8551,
+      "expectedSha256": "0caa04610ef4d5f015c555565dd8de6efdad673578b95fe4ebf25e4fbec8b60a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1041,8 +1014,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 10468,
-      "expectedSha256": "999c80407b4120b1af7a4fe93bb0310b8a88d5055834cd75dd7461211d3701e5"
+      "expectedBytes": 10265,
+      "expectedSha256": "1ac7591f85caa74f1546e834b9ffe93485636e2e3408b025d6ca8d84c74aec0a"
     },
     {
       "path": "preparation/navigation.json",
@@ -1056,8 +1029,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 7580,
-      "expectedSha256": "a2bd53758a3dbdc997f70ba728d56d551b485161744c2924a24537e9ac31af4b"
+      "expectedBytes": 7438,
+      "expectedSha256": "946ad3fd14e8966760d8be129150775304983f5ab60b94ca37e04490af1877eb"
     },
     {
       "path": "presentation/title-mark.json",
@@ -1078,21 +1051,6 @@
       "path": "reference/ver128q.xml",
       "expectedBytes": 9864,
       "expectedSha256": "dc81556c9ccb2ccf7efa32ea76621a3c0a8289f4f98920e0007e65ce5b354d45"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 89773,
-      "expectedSha256": "d5d858a8261399806a884792db61716cfe7b7440e032c9f3c2cb8e559abca065"
     },
     {
       "id": "itokawa-surface-feature-notes",

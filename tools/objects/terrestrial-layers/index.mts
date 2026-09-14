@@ -20,10 +20,8 @@ import { validateScalarMapProfile } from './pds-scalar-map.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
-import { prepareAstrometricCubeSampling } from '../../../src/platform/astrometric-sky-registration.mts';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
 import { preparePlanetCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
-import { prepareCatalogueStars } from '../../../src/platform/prepare-catalogue-stars.mts';
 import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from '../../../src/platform/directional-sun-contract.mts';
 import { preparePlanetDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection } from '../../../src/platform/solar-geometry.mts';
@@ -57,7 +55,7 @@ export function parseTerrestrialProfile(input:unknown) {
   const value=parseSolidPreparationSource(input);
   if (!value || value.schema !== 'cssearth-terrestrial-preparation@1' || value.kind !== 'solid-observation-body' ||
       !/^[a-z][a-z0-9-]*$/.test(value.namespace) || value.publicBase !== `/scenes/${value.namespace}/` ||
-      typeof value.displayName !== 'string' || !Number.isFinite(value.distanceAu) || value.distanceAu <= 0 ||
+      typeof value.displayName !== 'string' ||
       value.raster?.width !== value.raster?.height * 2 || !Number.isSafeInteger(value.raster?.width) || value.raster.width <= 0 ||
       !Number.isSafeInteger(value.raster.bandCount) || value.raster.bandCount <= 0 ||
       !Number.isSafeInteger(value.raster.gutter) || value.raster.gutter < 0 ||
@@ -259,24 +257,16 @@ export function parseTerrestrialProfile(input:unknown) {
   return input as typeof value;
 }
 
-export async function prepareTerrestrialCelestial({ sourceDirectory, publicDirectory, outputDirectory, config, source }:TerrestrialContext) {
-  const ensureDirectories = () => mkdir(publicDirectory, { recursive: true });
-  const sky = await preparePlanetCubicSky({ objectId: config.namespace, sourceRoot: sourceDirectory, publicRoot: publicDirectory,
-    ensureDirectories, validateSourceGroup: consumer => source.validateGroup(consumer), includeSun: false,
-    cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, pointSourceContract: CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD,
-    astrometricSampling: prepareAstrometricCubeSampling(),
-    catalogueStars: await prepareCatalogueStars({ fovDegrees: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD.horizontalFovDegrees }), writeModule: false });
-  const sun = await prepareTerrestrialSun({ config, publicDirectory });
+export async function prepareTerrestrialCelestial({ outputDirectory, config }:TerrestrialContext) {
+  const sky = preparePlanetCubicSky({ objectId: config.namespace, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
+  const sun = prepareTerrestrialSun({ config });
   await Promise.all([writeFile(resolve(outputDirectory, 'sky.json'), `${JSON.stringify(sky)}\n`),
     writeFile(resolve(outputDirectory, 'sun.json'), `${JSON.stringify(sun)}\n`)]);
-  // Match the JSON transport boundary used by shared celestial preparation.
-  // Empty catalogue bands contain non-finite limits before serialization.
-  const transported=requireRecord(JSON.parse(JSON.stringify({sky,sun})));
-  return {sky:validatePreparedCubicSky(transported.sky,{requireSun:false}),sun:validateDirectionalSunPlan(transported.sun)};
+  return { sky, sun };
 }
 
 /** Body-owned qualification distinguishes solved orientations from display axes. */
-export async function prepareTerrestrialSun({ config, publicDirectory }:{config:SolidConfig;publicDirectory:string}) {
+export function prepareTerrestrialSun({ config }:{config:SolidConfig}) {
   const frame = prepareEclipticPresentationFrame(config.namespace), sceneDirection = frame.sunDirection;
   const presentation = { ...DIRECTIONAL_SUN_PRESENTATION_STANDARD,
     source: config.celestial.sunSource, sourcePath: 'src/platform/solar-geometry.mts',
@@ -287,9 +277,7 @@ export async function prepareTerrestrialSun({ config, publicDirectory }:{config:
     localDirection: sceneDirection,
     referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: config.namespace, ...config.geometry.camera, sceneDirection }),
   };
-  return preparePlanetDirectionalSun({ objectId: config.namespace, publicRoot: publicDirectory,
-    ensureDirectories: () => mkdir(publicDirectory, { recursive: true }),
-    meanHeliocentricDistanceAu: config.distanceAu, presentation, writeModule: false });
+  return preparePlanetDirectionalSun({ presentation });
 }
 
 /** Source inputs feed reusable raster, geometry, celestial and presentation operations. */

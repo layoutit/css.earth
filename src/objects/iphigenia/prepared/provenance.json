@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "iphigenia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ef9623c8ddc47be488be965dca1248855ae1239c389a5632d4eaa3449a7e0f84"
+    "sha256": "8c517bd1c1ad5800cc8bb281ec038acabcb5907cfcfa7633bab4cd3bd6174dc3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6f6d532b72c378fd0f06a9b3ba56e8766c526dc31f32cd7104004867588063bf",
+      "sha256": "4790165301f20232ffc8626207c9cb566bb2148654c8e26626672ea1bc720045",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "iphigenia",
         "displayName": "Iphigenia",
         "publicBase": "/scenes/iphigenia/",
-        "distanceAu": 2.4333836727227824,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 994 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "96c1a61fb983d95d304fa36151ffeb45e0337b3359865cf23618550f4eb5189b",
+      "sha256": "b5d7ad9766c7c24363ff33d36a1a6a7a6bec6cb58aaa222f29e9f33b918e2938",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/994"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "76e84bb363bc61fff99cee400395d53d29cbb4b11ef0012f4513dfbb689b06cd",
       "bytes": 42693,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "96c1a61fb983d95d304fa36151ffeb45e0337b3359865cf23618550f4eb5189b",
-      "bytes": 10957,
+      "sha256": "b5d7ad9766c7c24363ff33d36a1a6a7a6bec6cb58aaa222f29e9f33b918e2938",
+      "bytes": 10678,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/iphigenia/iphigenia-elevation-thumbnail.webp",
           "bytes": 5402,
           "sha256": "2159229ab8a6072d1970b27a0dd801e099d6bb6833827a3ea41a3a68de1100cb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iphigenia/iphigenia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iphigenia/iphigenia-elevation-surface@2x.webp",
           "bytes": 292530,
           "sha256": "df491fa7a616ca43ceb888068a0ca15176f92d939227e32bf8bb4b59fb109ce4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/iphigenia/iphigenia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iphigenia/iphigenia-shape-surface@2x.webp",
           "bytes": 230164,
           "sha256": "ea2404173015818d1beeb2af638635cb8449a5f3c9b32efc4778653b23db407c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8287,
-          "sha256": "5e255d391775de9df5f9da92c5bd6b63d2898c03d4061433a638461148a27d0f",
+          "bytes": 8168,
+          "sha256": "8fdf7b169d50dfe4971dc762c5f51a52813bc75de468122d7eeef3b76a0e1f5b",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "iphigenia",
+    "materialSha256": "b7dbbc2a28c5f9148e9b2235d90b95f7dcd1b65840eb44f60dad23e373ce15cd",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

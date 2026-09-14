@@ -64,6 +64,8 @@ jobs:
         run: |
           pnpm prepare:environment-images
           pnpm prepare:minimap
+      - name: Bake and test the scientific galaxy field
+        run: pnpm test:galaxy-field
       - name: Test source records, provenance and scientific credits
         run: pnpm test:sources
       - name: Check source restoration and tracked inputs
@@ -71,7 +73,7 @@ jobs:
           node --test tools/restore-source-inputs.test.mts
           node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
       - name: Check independent body additions
-        run: node --test tools/body-additions.test.mts tools/prepare-marker-bindings.test.mts
+        run: node --test tools/body-additions.test.mts
       - name: Typecheck shared code and enforce TypeScript ownership
         env:
           NODE_OPTIONS: --max-old-space-size=4096

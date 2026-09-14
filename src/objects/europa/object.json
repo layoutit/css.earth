@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "4bf1d55fb4ad72e7995544db4caca61717e15bc9c3dedc276aaf885703a0f4e3"
+    "sha256": "4b485ef4f7dd65da863a3bead5e2d9fbdd765447cd1b63bac90005d15309737b"
   },
   "id": "europa",
   "properties": {
@@ -61,11 +61,6 @@
           "lenses": [
             {
               "id": "normal",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "galileo",
               "source": "content",
               "material": "lighting"
             },
@@ -133,7 +128,7 @@
         {
           "id": "celestial",
           "path": "source/preparation/celestial.json",
-          "sha256": "f0a89756833f75ca3f2691e5c98461b21289d9e90eeab6afc44113bcc30fe301"
+          "sha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8"
         },
         {
           "id": "presentation",
@@ -143,12 +138,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ecdadd63438967d6e9dd54f21b5d7777fd3d4819fa2c1e50bfd38a403c7903ab"
+          "sha256": "d387a30b1a49bfba547b8c82b704dc91d89d89781bb5f37b4aef39631a88e148"
         },
         {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
-          "sha256": "4f6d21e75d3b88a7cccf2b984c2cee8778ad8f388159444859324ca477b10df6"
+          "sha256": "ef3e541203fc920505096da3bbf04f19d2454cdcbc01b00e8a3f44e75de29f81"
         },
         {
           "id": "title",
@@ -163,7 +158,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "c867b450940c18b42b6f567f672c3606ee8f61054763881cc66fab2c71164130"
+          "sha256": "a1dc25de8986538341918c4358c6d570947b37f320b6df3eb486696e416cd151"
         },
         {
           "id": "features",
@@ -183,7 +178,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "033169d9062a0223f52f9a91cb2aa88f1718c0d4bbdc402237afc47c37c2149e"
+        "sha256": "018fab0a00770b1899a194b466db527fe7c21d81a4b028f3b426b9bdc96815f9"
       }
     },
     "catalog": {

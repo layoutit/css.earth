@@ -64,12 +64,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": true
       }
     ]
   },
@@ -92,12 +86,6 @@
       "role": "facts",
       "description": "Correlated alternative occultation-limb fits",
       "href": "https://academic.oup.com/mnras/article/499/3/4570/5918397"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

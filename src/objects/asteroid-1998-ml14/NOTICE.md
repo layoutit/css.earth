@@ -4,4 +4,4 @@ Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone,
 
 Retain the authors, observatories and NASA/JPL archive credit. The attributed geometry keeps its original scale; the common grid marks unavailable imagery. Neither NASA nor the source authors endorse this application. Original articles retain publisher copyright and are restoration references; their pages are not runtime surface assets.
 
-Sky: ESO/S. Brunier, CC-BY-4.0 (source/stars/ESO-IMAGE-LICENSE.md). Stars: HYG v4.1, David Nash / Astronexus, CC-BY-SA-4.0 (source/stars/LICENSE.md). Font: Inter Project Authors, SIL OFL1.1 (source/presentation/LICENSE.INTER-OFL).
+Font: Inter Project Authors, SIL OFL1.1 (source/presentation/LICENSE.INTER-OFL).

@@ -80,7 +80,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
       if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
       const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
       const finalized = await finalizeObjectJson(id, result.definition, { projectRoot, objectDirectory, preparedDirectory: stagedData,
-        descriptorPath: resolve(stage, 'object.json'), sharedRoot: stage });
+        descriptorPath: resolve(stage, 'object.json') });
       const { prepareObjectProvenance } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
       await prepareObjectProvenance({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, basis: 'prepared' });
       const { publishPreparedObject } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/publication.mts')).href) as typeof import('./publication.mts');
@@ -170,12 +170,12 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     await prepareSpatialContext({ sourcePath: contextSource.path, outputPath, solarGeometryPath: resolve(process.cwd(), 'src/platform/solar-geometry.mts'), objectsDirectory: resolve(objectDirectory, '..') });
     worldContext = JSON.parse(await readFile(outputPath, 'utf8')) as unknown;
   }
-  const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig, assets: raster as unknown as GeometrySceneAssets, solarSource, starfield: celestial.sky as unknown as Record<string, unknown> & { faces: readonly unknown[] }, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(), outputDirectory });
+  const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig, assets: raster as unknown as GeometrySceneAssets, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(), outputDirectory });
   const contentReference = required(sources, 'content');
   const content = await prepareObjectContentAssets({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: relative(sourceDirectory, contentReference.path) } });
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.lenses);
   const presentation = parsePresentationProfile(required(sources, 'presentation').value);
-  const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.lensFocus ? { lensFocus: presentation.lensFocus } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], markers: celestial.markers, solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'], ...(presentation.textureLevels ? { textureLevels: presentation.textureLevels } : {}) });
+  const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.lensFocus ? { lensFocus: presentation.lensFocus } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'], ...(presentation.textureLevels ? { textureLevels: presentation.textureLevels } : {}) });
   const attached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: definition as unknown as Record<string, unknown> });
   const runtime = attached.definition, features = attached.features !== null;
   if (attached.features) await writeFeatureContent(outputDirectory, attached.features);

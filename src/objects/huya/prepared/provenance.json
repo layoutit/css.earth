@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "huya",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6351cd664e72ddd2a89d72cfc16af573fae2062b64d810d2f317e4453a40fb9b"
+    "sha256": "f9ef32e25931bfbcb8a43cf7942343d756125e34b0f76d5124b544975c669aac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "80f19f9d29f3448951788bba549881090751e25331137c69a1c70ac22a869cad",
+      "sha256": "9fff2932de348a824dae5cc9c9e0be49e55f812690d577c6623ab9794d91bcc0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "huya",
         "displayName": "Huya",
         "publicBase": "/scenes/huya/",
-        "distanceAu": 29.392166722642536,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Uses the paper’s J2000-equatorial satellite-orbit pole RA 20.8° ±1.9°, Dec 34.9° ±1.9° as a body-pole prior under the explicit equatorial-orbit assumption. Arbitrary prime meridian and rotational phase."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9180df44c4cd8f609df5b01b07eab7c9b07d16397609e551127a0cd97b23198c",
+      "sha256": "bf3b79353070b8fea98b705db024307a6748f416b8d2f4fe86feef5f76a19a24",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -178,12 +171,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -200,12 +187,6 @@
             "role": "facts",
             "description": "Published observations and interpretation",
             "href": "https://arxiv.org/abs/2501.09739"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -252,7 +233,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -287,7 +268,7 @@
       "sha256": "ec446a226da81051a2d60296252027374ffba715e1d2e77004e401958cc21199",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -304,10 +285,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9180df44c4cd8f609df5b01b07eab7c9b07d16397609e551127a0cd97b23198c",
-      "bytes": 3534,
+      "sha256": "bf3b79353070b8fea98b705db024307a6748f416b8d2f4fe86feef5f76a19a24",
+      "bytes": 3254,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -344,13 +325,13 @@
           "url": "/scenes/huya/huya-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/huya/huya-model-surface@2x.webp",
           "bytes": 55374,
           "sha256": "34eaeadde0559b6a910e5031ae340beb0f29d96a2546acc40f01224951bcd118",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -386,8 +367,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4060,
-          "sha256": "b9cc88ac73366504ee3b09197b41d2d7c57d7de81a8490d373c49599c3a06208",
+          "bytes": 3941,
+          "sha256": "001da3de9727719dd57c72b02856028773c394e81930471461c9f0f7b6c8a441",
           "verification": "bytes-verified"
         }
       ],
@@ -422,5 +403,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "huya",
+    "materialSha256": "70e9cd59125c6b35b0a0dda4c384a6492a5e7539417bd094b932116ef935d13c",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

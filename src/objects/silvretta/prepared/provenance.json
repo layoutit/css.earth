@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "silvretta",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f02bdbd96c6f065c9d5d33f494c957d9bce464fbf54b0d0377e958d0cebb10cf"
+    "sha256": "82d3cd4c8d46868c527923cca5c8c16eedf209ab66577328277275146086b65f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bea822fc381d82be5bbe0344cba600380665a2a68e8f56a04f066f01a3ba41b7",
+      "sha256": "a1c4e390f6608d7e0e7c43a84274bcc8855c7f1ef3143941668ca81b1c5bf0d7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "silvretta",
         "displayName": "Silvretta",
         "publicBase": "/scenes/silvretta/",
-        "distanceAu": 3.204231585995867,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9dd2ede544d3389cc27f3b5d8578fd0fb656bbae754f1bcaa52a373ac7f8aadd",
+      "sha256": "2c1af89512f29e246e808112da52cd31e1c737b7f767e443794c91bd1010f271",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/513"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "f2abcec4e89d1fbe1b297e546e91239b04bb94ce621998061ddeee09acee3724",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "9dd2ede544d3389cc27f3b5d8578fd0fb656bbae754f1bcaa52a373ac7f8aadd",
+      "sha256": "2c1af89512f29e246e808112da52cd31e1c737b7f767e443794c91bd1010f271",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9372,
+      "bytes": 9093,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/silvretta/silvretta-elevation-thumbnail.webp",
           "bytes": 5866,
           "sha256": "ee0030ec1dc19051e0f29a42e1026a78b5997efb1f9b7672fadda0bd1268904b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/silvretta/silvretta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/silvretta/silvretta-elevation-surface@2x.webp",
           "bytes": 308786,
           "sha256": "626a62c42d16c5742d26ef1defc0824d7d01736dc7b32e897f7f5c573977f448",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/silvretta/silvretta-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/silvretta/silvretta-shape-surface@2x.webp",
           "bytes": 230004,
           "sha256": "364eafafb77a92508c23c3f70602be8433fbfe0423ee5aafe89a730163a8ef9d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6634,
-          "sha256": "02e8b0f8e00cfdf6220204ec1b81db85581aa77574017f331c18f0b2bb34569a",
+          "bytes": 6515,
+          "sha256": "f59dd7c1ad95be9d50bf6e186b0102c126fd01365f82e6594c273aa08f5fd24a",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "silvretta",
+    "materialSha256": "1460b752bc02e09c23f3d29519525daf43c69fed21df5a37a4f2da3d2caced06",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

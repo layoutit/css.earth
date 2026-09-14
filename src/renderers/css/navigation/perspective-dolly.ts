@@ -1,7 +1,7 @@
 import { physicalProjectionFromCamera } from '../rendering/physical-projection.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
-import type { CameraPlan, PerspectiveCameraPlan, CameraUpdate, LevelOfDetailPlan, OrbitLineFade, PlanetarySystemFade, SunMarkerFade } from './types.js';
-import type { BodyProjection, HeliocentricProjection } from '../solar-system/heliocentric-view.js';
+import type { CameraPlan, PerspectiveCameraPlan, CameraUpdate, LevelOfDetailPlan, OrbitLineFade } from './types.js';
+import type { BodyProjection } from '../solar-system/types.js';
 import type { Matrix3dLike, VisibleRect } from '../solar-system/types.js';
 import type { PositionM } from '@cssearth/engine';
 import type { PhysicalProjection } from '../rendering/physical-projection.js';
@@ -9,7 +9,6 @@ import type { CameraViewport } from './camera-viewport.js';
 import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation, worldCameraSilhouetteDiameter } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 import { scaleWorldPosition, validateWorldPosition } from './world-camera-math.js';
-import type { mountRetainedHeliocentricView } from '../solar-system/heliocentric-view-runtime.js';
 export interface PerspectiveWorldContext {
   readonly frame: PreparedWorldCameraFrame;
   readonly bodyRadiusUnits: number;
@@ -21,14 +20,7 @@ export interface PerspectiveWorldContext {
   readonly sceneRegistration?: string;
   readonly onWorldPublish?: (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 }
-// Exactly what the dolly reads from a mounted heliocentric view. Naming that
-// surface lets a caller bind a prepared projection without standing up the
-// whole retained view, and keeps this option honest about its dependency.
-export type PerspectiveHeliocentric = Pick<ReturnType<typeof mountRetainedHeliocentricView>,
-  'plan' | 'setSystemOpacity' | 'setSunMarkerOpacity' | 'setOrbitOpacity' | 'setMarkerOpacity' | 'publish'> & {
-    sunRoot: Pick<HTMLElement, 'style'>;
-  };
-export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; heliocentric: PerspectiveHeliocentric | null; worldContext?: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; viewport?: CameraViewport;
+export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; worldContext: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; viewport?: CameraViewport;
   /** Prepared activation groups of the mesh; a resolving mesh returns through them in stages. */
   revealGroups?: readonly (readonly HTMLElement[])[];
   /** False while the mesh has no committed material; it stays hidden until then. */
@@ -38,15 +30,14 @@ import {
   distanceForSilhouetteRadius,
   rotationFromMatrix3d,
   silhouetteRadiusAtDistance,
-} from "../solar-system/heliocentric-view.js";
+} from "../solar-system/heliocentric-geometry.js";
 
 // A true perspective camera for the shared orbit: the eye sits at the sky's
 // vanishing point (the camera root's CSS perspective, re-read whenever the
 // viewport or the shell layout changes) and frames by dolly. The prepared
 // camera plan declares it with `projection.model`, its wheel `dolly`, the
-// `orbitLineFade` and the `levelOfDetail` crossfade; the body's heliocentric
-// neighbourhood (Sun, orbit, marker) is projected with the same camera in
-// float64 and the body is placed by the same projection.
+// `orbitLineFade` and the `levelOfDetail` crossfade; the prepared world
+// camera places the body in float64.
 //
 // Zoom stays the framing alias the responsive fit, the destination flights
 // and the material overlays speak: silhouette diameter over the logical body
@@ -63,12 +54,8 @@ import {
 // every path; the control pitch anchors in the plan calibrate the affine
 // control-to-scene map and clamp nothing.
 //
-// A plan whose heliocentric view carries the planetary system opts into the
-// wider dolly (`dolly.maximumDistanceOverSystemExtent` against the system's
-// extent instead of the body's orbit), the system's fade-in with distance
-// (`planetarySystem`) and the Sun's marker floor (`sunMarker`). A generic
-// worldContext uses the authored physical extent and publishes the same eye
-// to retained contextual layers without requiring heliocentric geometry.
+// The world context supplies the authored physical extent and publishes the
+// same eye to the retained contextual layers.
 export const PERSPECTIVE_PROJECTION_MODEL = "css-perspective-shared-with-sky";
 export const SCENE_LOCKED_SKY_CAMERA_CONTRACT =
   "scene-locked-unbounded-accumulated-matrix3d";
@@ -85,18 +72,7 @@ function assertPerspectiveCameraPlan(plan: CameraPlan): asserts plan is Perspect
       !Number.isFinite(plan.dolly.wheelStepPerDelta) ||
       !Number.isFinite(plan.dolly.minimumDistanceRadii) ||
       !Number.isFinite(plan.dolly.maximumDistanceOverOrbitExtent) ||
-      (plan.dolly.maximumDistanceOverSystemExtent !== undefined &&
-        !(plan.dolly.maximumDistanceOverSystemExtent > 0)) ||
-      (plan.planetarySystem !== undefined && (
-        plan.planetarySystem?.model !== "distance-over-orbit-extent-fade" ||
-        !Number.isFinite(plan.planetarySystem.hiddenBelowDistanceOverOrbitExtent) ||
-        !(plan.planetarySystem.visibleAboveDistanceOverOrbitExtent >
-          plan.planetarySystem.hiddenBelowDistanceOverOrbitExtent))) ||
       (plan.drag !== undefined && plan.drag?.model !== "screen-axis-tumble") ||
-      (plan.sunMarker !== undefined && (
-        plan.sunMarker?.model !== "sprite-diameter-crossfade" ||
-        !(plan.sunMarker.fadeStartSpritePixels > plan.sunMarker.fullSpritePixels) ||
-        !(plan.sunMarker.fullSpritePixels > 0))) ||
       !plan.orbitLineFade ||
       !Number.isFinite(plan.orbitLineFade.visibleBelowDiscHeightShare) ||
       !Number.isFinite(plan.orbitLineFade?.hiddenAboveDiscHeightShare) ||
@@ -163,34 +139,8 @@ export function orbitLineOpacity(fade: OrbitLineFade, discHeightShare: number) {
   );
 }
 
-// The planetary system fades in with the camera's distance over the body's
-// own orbit extent: hidden while the body's orbit fills the view, opaque
-// once the camera stands well outside it.
-export function planetarySystemOpacity(fade: Pick<PlanetarySystemFade, 'hiddenBelowDistanceOverOrbitExtent' | 'visibleAboveDistanceOverOrbitExtent'>, distanceOverOrbitExtent: number) {
-  return clamp(
-    (distanceOverOrbitExtent - fade.hiddenBelowDistanceOverOrbitExtent) /
-      (fade.visibleAboveDistanceOverOrbitExtent -
-        fade.hiddenBelowDistanceOverOrbitExtent),
-    0,
-    1,
-  );
-}
-
-// The Sun marker fades in as the Sun sprite's projected diameter falls
-// below the marker's size, the same crossfade as the body's own marker.
-export function sunMarkerOpacity(sunMarker: Pick<SunMarkerFade, 'fadeStartSpritePixels' | 'fullSpritePixels'>, spriteDiameter: number | undefined) {
-  if (typeof spriteDiameter !== "number" || !Number.isFinite(spriteDiameter)) return 0;
-  return clamp(
-    (sunMarker.fadeStartSpritePixels - spriteDiameter) /
-      (sunMarker.fadeStartSpritePixels - sunMarker.fullSpritePixels),
-    0,
-    1,
-  );
-}
-
 export function createPerspectiveDolly({
   cameraPlan: unvalidatedCameraPlan,
-  heliocentric,
   worldContext,
   cameraElement,
   sceneElement,
@@ -201,42 +151,26 @@ export function createPerspectiveDolly({
   canReveal,
 }: PerspectiveDollyOptions) {
   const cameraPlan = validatePerspectiveCameraPlan(unvalidatedCameraPlan);
-  const plan = heliocentric?.plan;
-  const bodyRadius = plan?.units.bodyRadiusUnits ?? worldContext?.bodyRadiusUnits;
-  const kilometersPerUnit = plan?.units.kilometersPerUnit ?? worldContext?.kilometersPerUnit;
-  const maximumExtent = plan?.orbit?.maximumExtentUnits ?? worldContext?.maximumExtentUnits;
-  if ((!plan && !worldContext) || !(bodyRadius && bodyRadius > 0) ||
-      !(kilometersPerUnit && kilometersPerUnit > 0) || !(maximumExtent && maximumExtent > 0) ||
-      !cameraElement?.style || !sceneElement?.style || !skyElement ||
-      (heliocentric !== null && !heliocentric.sunRoot?.style) || !stage) {
+  if (!worldContext) throw new TypeError("Perspective dolly requires a prepared physical camera context.");
+  const bodyRadius = worldContext.bodyRadiusUnits;
+  const kilometersPerUnit = worldContext.kilometersPerUnit;
+  const maximumExtent = worldContext.maximumExtentUnits;
+  if (!(bodyRadius > 0) || !(kilometersPerUnit > 0) || !(maximumExtent > 0) ||
+      !cameraElement?.style || !sceneElement?.style || !skyElement || !stage) {
     throw new TypeError("Perspective dolly requires a prepared physical camera context.");
   }
   const levelOfDetail = cameraPlan.levelOfDetail;
-  const framingReferenceZoom = worldContext?.framingReferenceZoom ?? cameraPlan.defaultZoom;
+  const framingReferenceZoom = worldContext.framingReferenceZoom ?? cameraPlan.defaultZoom;
   if (!(framingReferenceZoom > 0)) throw new TypeError('Perspective framing reference zoom must be positive.');
-  if (worldContext && (Math.abs(worldContext.frame.metersPerUnit / (kilometersPerUnit * 1000) - 1) > 1e-9 ||
-      Math.abs(worldContext.frame.bodyRadiusM / (bodyRadius * kilometersPerUnit * 1000) - 1) > 1e-9)) {
+  if (Math.abs(worldContext.frame.metersPerUnit / (kilometersPerUnit * 1000) - 1) > 1e-9 ||
+      Math.abs(worldContext.frame.bodyRadiusM / (bodyRadius * kilometersPerUnit * 1000) - 1) > 1e-9) {
     throw new TypeError('Perspective world context units disagree with its prepared frame.');
   }
-  // The planetary system, when the plan carries it and the camera plan opts
-  // in: the dolly reaches the whole system, and the system fades in.
-  const system = plan?.system ?? null;
-  const systemFade = system !== null ? cameraPlan.planetarySystem ?? null : null;
-  const sunMarker = system !== null ? cameraPlan.sunMarker ?? null : null;
-  if (system !== null && (heliocentric === null || typeof heliocentric.setSystemOpacity !== "function" ||
-      typeof heliocentric.setSunMarkerOpacity !== "function")) {
-    throw new TypeError("Perspective dolly requires the mounted planetary system.");
-  }
-  const maximumDistance = system !== null &&
-      cameraPlan.dolly.maximumDistanceOverSystemExtent !== undefined
-    ? cameraPlan.dolly.maximumDistanceOverSystemExtent * system.maximumExtentUnits
-    : cameraPlan.dolly.maximumDistanceOverOrbitExtent * maximumExtent;
-  // Object packages own their prepared perspective as data; the roots are
-  // never scaled, so the same eye serves the Sun's root and the body's.
-  for (const root of [cameraElement, heliocentric?.sunRoot].filter((root): root is HTMLElement => root !== undefined)) {
-    root.style.perspective = cameraPlan.projection.cssPerspective;
-    if (worldContext) root.style.scale = '1';
-  }
+  const maximumDistance = cameraPlan.dolly.maximumDistanceOverOrbitExtent * maximumExtent;
+  // Object packages own their prepared perspective as data; the root is never
+  // scaled, so its eye is the one the world context publishes.
+  cameraElement.style.perspective = cameraPlan.projection.cssPerspective;
+  cameraElement.style.scale = '1';
   const cameraState = {
     rotX: cameraPlan.defaultControlPitchDegrees,
     rotY: cameraPlan.defaultControlYawDegrees,
@@ -262,11 +196,8 @@ export function createPerspectiveDolly({
   // The stage's rectangle relative to the root's centre: what is actually on
   // screen when the shell lays the root out partly beyond the stage.
   let visibleRect: VisibleRect | null = null;
-  let projection: HeliocentricProjection | null = null;
   let projectedBody: BodyProjection | null = null;
   let lod = levelOfDetailFor(levelOfDetail, Number.POSITIVE_INFINITY);
-  let systemOpacity = 0;
-  let sunMarkerOpacityValue = 0;
   let publishedSceneTransform: string | null = null;
   let transformWrites = 0;
 
@@ -282,7 +213,6 @@ export function createPerspectiveDolly({
       visibleRect = Object.freeze({ left: -viewportWidth / 2, right: viewportWidth / 2,
         top: -viewportHeight / 2, bottom: viewportHeight / 2 });
       cameraElement.style.perspectiveOrigin = '50% 50%';
-      if (heliocentric) heliocentric.sunRoot.style.perspectiveOrigin = '50% 50%';
       return;
     }
     const view = cameraElement.ownerDocument.defaultView;
@@ -319,7 +249,6 @@ export function createPerspectiveDolly({
     const origin = `calc(50% + ${formatNumber(principalOffset[0])}px) ` +
       `calc(50% + ${formatNumber(principalOffset[1])}px)`;
     cameraElement.style.perspectiveOrigin = origin;
-    if (heliocentric) heliocentric.sunRoot.style.perspectiveOrigin = origin;
   };
   const zoomToDistance = (zoom: number) => distanceForSilhouetteRadius(
     bodyRadius,
@@ -436,56 +365,24 @@ export function createPerspectiveDolly({
   const capturePresentation = (sceneMatrix: Matrix3dLike, scenePresentation: string) => ({
     distance: cameraState.distance, rotation: rotationFromMatrix3d(sceneMatrix), scenePresentation,
     bodyCenter: bodyCenter === null ? null : [...bodyCenter] as PositionM,
-    focal, viewportWidth, viewportHeight, principalOffset, stageViewport, visibleRect,
+    focal, viewportWidth, viewportHeight, principalOffset, stageViewport,
   });
   function publishPresentation(snapshot: ReturnType<typeof capturePresentation>, publishedWorld: WorldCameraPose | null) {
-      const { distance, rotation, bodyCenter, focal, viewportWidth, viewportHeight,
-        principalOffset, stageViewport, visibleRect, scenePresentation } = snapshot;
+      const { distance, rotation, focal, viewportWidth, viewportHeight,
+        principalOffset, stageViewport, scenePresentation } = snapshot;
       const viewport = { focalPixels: focal, principalOffsetPixels: [principalOffset[0], principalOffset[1]] as const };
-      const genericPresentation = publishedWorld && !heliocentric && worldContext
-        ? presentWorldCamera(publishedWorld, worldContext.frame, viewport) : null;
-      const genericTranslation = genericPresentation?.translateCssPixels ?? null;
-      // The system's visibility depends on the distance alone, so it is set
-      // before the projection decides whether to work on the system.
-      if (system !== null) {
-      systemOpacity = systemFade === null
-          ? 1
-          : planetarySystemOpacity(systemFade, distance / maximumExtent!);
-        heliocentric?.setSystemOpacity(systemOpacity);
-      }
-      if (heliocentric) {
-        projection = heliocentric.publish({
-          rotation, distance,
-          ...(bodyCenter === null ? {} : { bodyCenter }),
-          focal, viewportWidth, viewportHeight, principalOffset, visibleRect,
-        });
-      }
-      const [bodyX, bodyY, bodyZ] = projection?.body.translate ?? genericTranslation ?? [0, 0, focal - distance];
-      if (projection && heliocentric) {
-        heliocentric.setOrbitOpacity(orbitLineOpacity(
-          cameraPlan.orbitLineFade,
-          projection.body.silhouetteDiameter / viewportHeight,
-        ));
-        lod = levelOfDetailFor(levelOfDetail, projection.body.silhouetteDiameter);
-        heliocentric.setMarkerOpacity(lod.markerOpacity);
-      }
-      if (system !== null && projection && heliocentric) {
-        sunMarkerOpacityValue = sunMarker === null
-          ? 0
-          : sunMarkerOpacity(sunMarker, projection.sun.spriteDiameter);
-        heliocentric.setSunMarkerOpacity(sunMarkerOpacityValue);
-      }
-      if (publishedWorld) worldContext?.onWorldPublish?.(publishedWorld, viewport);
+      const genericPresentation = publishedWorld ? presentWorldCamera(publishedWorld, worldContext.frame, viewport) : null;
+      const [bodyX, bodyY, bodyZ] = genericPresentation?.translateCssPixels ?? [0, 0, focal - distance];
+      if (publishedWorld) worldContext.onWorldPublish?.(publishedWorld, viewport);
       const genericBody = genericPresentation === null ? undefined : genericBodyProjection(
-        genericPresentation, bodyRadius!, focal,
+        genericPresentation, bodyRadius, focal,
       );
-      projectedBody = projection?.body ?? genericBody ?? null;
+      projectedBody = genericBody ?? null;
       if (projectedBody) lod = levelOfDetailFor(levelOfDetail, projectedBody.silhouetteDiameter);
       // A marker-stage body is its proxy (see the presentation policy above).
       // An undrawn mesh publishes no material, so it also waits for the one its
       // resolving camera commits instead of revealing an untextured globe.
-      const hidden = Boolean(lod.stage === 'marker' || (projection && !projection.body.visible) ||
-        (canReveal !== undefined && !canReveal()));
+      const hidden = lod.stage === 'marker' || (canReveal !== undefined && !canReveal());
       // A hidden scene draws nothing: its transform is formatted and written only
       // while shown, so marker-stage motion and fly-tos skip it, and the entry
       // below writes the current pose before the scene is shown.
@@ -522,22 +419,12 @@ export function createPerspectiveDolly({
         viewportWidth,
         viewportHeight,
         principalOffset,
-        ...(projection === null && genericBody === undefined ? {} : {
-          body: projectedBody!, levelOfDetail: lod,
-          ...(projection === null ? {} : { sun: projection.sun }),
-        }),
-        ...(system === null ? {} : {
-          planetarySystem: Object.freeze({
-            opacity: systemOpacity,
-            sunMarkerOpacity: sunMarkerOpacityValue,
-            projected: projection !== null && projection.system !== null,
-          }),
-        }),
+        ...(genericBody === undefined ? {} : { body: genericBody, levelOfDetail: lod }),
       });
   }
   function preparePresentation(sceneMatrix: Matrix3dLike, scenePresentation: string) {
     const snapshot = capturePresentation(sceneMatrix, scenePresentation);
-    const world = !worldContext ? null : snapshot.bodyCenter === null
+    const world = snapshot.bodyCenter === null
       ? worldCameraFromCenteredPresentation({ rotation: snapshot.rotation, distanceUnits: snapshot.distance }, worldContext.frame,
         { focalPixels: snapshot.focal, principalOffsetPixels: [snapshot.principalOffset[0], snapshot.principalOffset[1]] })
       : worldCameraFromPresentation({ rotation: snapshot.rotation, bodyCenterUnits: snapshot.bodyCenter }, worldContext.frame);
@@ -580,9 +467,9 @@ export function createPerspectiveDolly({
       measure();
       if (bodyCenter === null) camera.update({ zoom });
     },
-    // Projects the Sun, the orbit and the body for the accumulated scene
-    // rotation and places the body: its centre `distance` from the eye on the
-    // line that projects to the root's centre, then the rotation. The scene
+    // Places the body for the accumulated scene rotation: its centre
+    // `distance` from the eye on the line that projects to the root's centre,
+    // then the rotation. The scene
     // scale must be uniform in three dimensions: a 2D scale() leaves the
     // body's depth unscaled, which a real perspective camera notices.
     prepare: preparePresentation,
@@ -636,10 +523,6 @@ export function createPerspectiveDolly({
       });
     },
     levelOfDetail: () => lod,
-    planetarySystem: () => system === null ? null : Object.freeze({
-      opacity: systemOpacity,
-      sunMarkerOpacity: sunMarkerOpacityValue,
-    }),
     stats({ wheelDollies = 0 } = {}) {
       return Object.freeze({
         projection: cameraPlan.projection,
@@ -663,13 +546,6 @@ export function createPerspectiveDolly({
         // Nothing on any input path clamps the pitch or the yaw; the
         // control pitch anchors only calibrate the control-to-scene map.
         rotationBounds: "none",
-        planetarySystem: system === null ? null : Object.freeze({
-          fade: systemFade,
-          sunMarker,
-          bodyCount: system.bodies.length,
-          maximumExtentUnits: system.maximumExtentUnits,
-          maximumExtentKilometers: system.maximumExtentUnits * kilometersPerUnit,
-        }),
         sceneTransformWrites: transformWrites,
       });
     },

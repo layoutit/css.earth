@@ -1,24 +1,15 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { parsePreparedWorldCameraFrame } from "../renderers/css/dist/navigation.js";
 
 import {
   createPerspectiveDolly,
   isPerspectiveCameraPlan,
   levelOfDetailFor,
   orbitLineOpacity,
-  planetarySystemOpacity,
-  sunMarkerOpacity,
   validatePerspectiveCameraPlan,
 } from "./perspective-dolly.mts";
-import { projectHeliocentricView } from "./heliocentric-view.mts";
-import { requireHeliocentricPlan } from "../renderers/css/dist/testing.js";
-import type { PerspectiveHeliocentric } from "./perspective-dolly.mts";
-import type { HeliocentricViewPlan, HeliocentricProjectionInput } from "./heliocentric-view.mts";
 import PREPARED_MERCURY_SCENE from "../../src/objects/mercury/prepared/scene.json" with {type: "json"};
-
-const mercuryHeliocentric = PREPARED_MERCURY_SCENE.heliocentricView;
-requireHeliocentricPlan(mercuryHeliocentric);
-assert.ok(mercuryHeliocentric.system);
 
 const levelOfDetail = Object.freeze({
   model: "silhouette-diameter-crossfade",
@@ -30,13 +21,23 @@ const levelOfDetail = Object.freeze({
 
 const plan = Object.freeze({
   ...PREPARED_MERCURY_SCENE.camera,
-  planetarySystem: undefined, sunMarker: undefined, drag: undefined,
+  drag: undefined,
   projection: { model: "css-perspective-shared-with-sky", cssPerspective: "86.6cqw" },
   dolly: { model: "multiplicative-wheel-distance", wheelStepPerDelta: 0.0012,
     minimumDistanceRadii: 1.2, maximumDistanceOverOrbitExtent: 4 },
   orbitLineFade: { visibleBelowDiscHeightShare: 0.12, hiddenAboveDiscHeightShare: 0.3 },
   levelOfDetail,
   logicalBodyDiameter: 460, defaultZoom: 1.1, maximumZoom: 4, sceneScale: 0.022,
+});
+
+// Mercury's prepared physical frame, with an authored extent standing in for the application's world context.
+const mercuryFrame = parsePreparedWorldCameraFrame(PREPARED_MERCURY_SCENE.worldFrame);
+assert.ok(mercuryFrame);
+const worldContext = Object.freeze({
+  frame: mercuryFrame,
+  bodyRadiusUnits: mercuryFrame.bodyRadiusM / mercuryFrame.metersPerUnit,
+  kilometersPerUnit: mercuryFrame.metersPerUnit / 1000,
+  maximumExtentUnits: 1e7,
 });
 
 test("the two stages crossfade in order as the disc shrinks, drawing no billboard disc", () => {
@@ -83,6 +84,7 @@ test("the perspective contract rejects drifted plans", () => {
   for (const drift of [
     { projection: { model: "scaled-camera" } },
     { dolly: { ...plan.dolly, wheelStepPerDelta: Number.NaN } },
+    { dolly: { ...plan.dolly, maximumDistanceOverOrbitExtent: Number.NaN } },
     { levelOfDetail: { ...levelOfDetail, billboardFullDiscPixels: 21 } },
     { levelOfDetail: { ...levelOfDetail, markerFullDiscPixels: 0 } },
     { orbitLineFade: { visibleBelowDiscHeightShare: 0.3, hiddenAboveDiscHeightShare: 0.12 } },
@@ -92,52 +94,16 @@ test("the perspective contract rejects drifted plans", () => {
   }
 });
 
-const planetarySystemFade = Object.freeze({
-  hiddenBelowDistanceOverOrbitExtent: 1.5,
-  visibleAboveDistanceOverOrbitExtent: 2.5,
-});
-
-test("the planetary system fades in with distance over the body's own orbit extent", () => {
-  assert.equal(planetarySystemOpacity(planetarySystemFade, 1.5), 0);
-  assert.equal(planetarySystemOpacity(planetarySystemFade, 1), 0);
-  assert.ok(Math.abs(planetarySystemOpacity(planetarySystemFade, 2) - 0.5) < 1e-9);
-  assert.equal(planetarySystemOpacity(planetarySystemFade, 2.5), 1);
-  assert.equal(planetarySystemOpacity(planetarySystemFade, 3), 1);
-});
-
-const sunMarker = Object.freeze({ fadeStartSpritePixels: 16, fullSpritePixels: 8 });
-
-test("the Sun marker floors in as its sprite falls below the marker's size", () => {
-  assert.equal(sunMarkerOpacity(sunMarker, 16), 0);
-  assert.equal(sunMarkerOpacity(sunMarker, 20), 0);
-  assert.ok(Math.abs(sunMarkerOpacity(sunMarker, 12) - 0.5) < 1e-9);
-  assert.equal(sunMarkerOpacity(sunMarker, 8), 1);
-  assert.equal(sunMarkerOpacity(sunMarker, 4), 1);
-  assert.equal(sunMarkerOpacity(sunMarker, undefined), 0);
-  assert.equal(sunMarkerOpacity(sunMarker, Number.NaN), 0);
-});
-
-test("the perspective contract accepts the real Mercury camera plan and rejects its drifted system options", () => {
+test("the real Mercury camera plan carries no planetary system or Sun marker options", () => {
   const mercuryPlan = PREPARED_MERCURY_SCENE.camera;
   assert.equal(validatePerspectiveCameraPlan(mercuryPlan), mercuryPlan);
-  for (const drift of [
-    { planetarySystem: { ...mercuryPlan.planetarySystem,
-      visibleAboveDistanceOverOrbitExtent: mercuryPlan.planetarySystem.hiddenBelowDistanceOverOrbitExtent } },
-    { sunMarker: { ...mercuryPlan.sunMarker,
-      fadeStartSpritePixels: mercuryPlan.sunMarker.fullSpritePixels } },
-    { dolly: { ...mercuryPlan.dolly, maximumDistanceOverSystemExtent: 0 } },
-  ]) {
-    assert.throws(() => validatePerspectiveCameraPlan({ ...mercuryPlan, ...drift }),
-      /Perspective camera contract drifted/u);
-  }
+  for (const retired of ["planetarySystem", "sunMarker"]) assert.equal(retired in mercuryPlan, false, retired);
+  assert.equal("maximumDistanceOverSystemExtent" in mercuryPlan.dolly, false);
 });
 
 // A minimal fake DOM for `createPerspectiveDolly`'s own measurements: a
 // camera root and a sky root that share one eye (zero principal offset, for
-// arithmetic simplicity), plus a stage for the trackball. No fixture in the
-// repo builds this shape for `createPerspectiveDolly` directly, so it is
-// built here from the same `getBoundingClientRect`/`getComputedStyle`
-// primitives `cubic-sky-runtime.test.mts` fakes elsewhere in this package.
+// arithmetic simplicity), plus a stage for the trackball.
 function fakeDom({ viewportWidth = 1440, viewportHeight = 900, focal = 1247 } = {}) {
   const computedStyles = new Map<object, {perspective: string; perspectiveOrigin: string}>();
   const view = { getComputedStyle: (element: object) => {
@@ -174,110 +140,33 @@ const IDENTITY_MATRIX3D = Object.freeze({
   m13: 0, m23: 0, m33: 1,
 });
 
-// A `heliocentric` mount stand-in that records call order and projects
-// through the real, already-tested `projectHeliocentricView`, so the dolly
-// is exercised against genuine body/Sun/system geometry without mounting any
-// DOM nodes of its own.
-function heliocentricMock(plan: HeliocentricViewPlan) {
-  const calls: Array<[string, number?]> = [];
-  let systemOpacity = 0;
-  return {
-    calls,
-    heliocentric: {
-      plan,
-      sunRoot: { style: {} } as HTMLElement,
-      setSystemOpacity(value: number) {
-        calls.push(["setSystemOpacity", value]);
-        systemOpacity = value;
-      },
-      setSunMarkerOpacity(value: number) {
-        calls.push(["setSunMarkerOpacity", value]);
-      },
-      setOrbitOpacity() {},
-      setMarkerOpacity() {},
-      publish(options: HeliocentricProjectionInput) {
-        calls.push(["publish"]);
-        return projectHeliocentricView(plan, { ...options, system: systemOpacity > 0 });
-      },
-    } satisfies PerspectiveHeliocentric,
-  };
-}
-
-test("the dolly reaches the whole system when the plan carries one", () => {
-  const mercuryPlan = mercuryHeliocentric;
+test("the dolly's farthest distance is the world extent over its orbit-relative bound", () => {
   const cameraPlan = PREPARED_MERCURY_SCENE.camera;
-  const { heliocentric } = heliocentricMock(mercuryPlan);
-  const dolly = createPerspectiveDolly({ cameraPlan, heliocentric, ...fakeDom() });
-  assert.equal(dolly.stats().dolly.maximumDistance, 3 * mercuryPlan.system.maximumExtentUnits);
+  const { dolly: stats } = createPerspectiveDolly({ cameraPlan, worldContext, ...fakeDom() }).stats();
+  assert.equal(stats.maximumDistance, cameraPlan.dolly.maximumDistanceOverOrbitExtent * worldContext.maximumExtentUnits);
+  assert.ok(stats.minimumDistance >= cameraPlan.dolly.minimumDistanceRadii * worldContext.bodyRadiusUnits);
+  assert.ok(stats.minimumDistance < stats.maximumDistance);
 });
 
-test("without a system-relative dolly bound the plan falls back to the orbit-relative one", () => {
-  const mercuryPlan = mercuryHeliocentric;
-  const cameraPlan = {
-    ...PREPARED_MERCURY_SCENE.camera,
-    dolly: { ...PREPARED_MERCURY_SCENE.camera.dolly },
-  };
-  Reflect.deleteProperty(cameraPlan.dolly, "maximumDistanceOverSystemExtent");
-  const { heliocentric } = heliocentricMock(mercuryPlan);
-  const dolly = createPerspectiveDolly({ cameraPlan, heliocentric, ...fakeDom() });
-  assert.equal(dolly.stats().dolly.maximumDistance,
-    4 * mercuryPlan.orbit.maximumExtentUnits);
-});
-
-test("a mounted view lacking the system opacity setters is rejected", () => {
-  const mercuryPlan = mercuryHeliocentric;
+test("a missing world context or one whose units disagree with its prepared frame is refused", () => {
   const cameraPlan = PREPARED_MERCURY_SCENE.camera;
-  const heliocentric = {
-    plan: mercuryPlan,
-    sunRoot: { style: {} } as HTMLElement,
-    setOrbitOpacity() {},
-    setMarkerOpacity() {},
-    publish: () => ({}),
-  };
-  assert.throws(
-    () => Reflect.apply(createPerspectiveDolly, undefined, [{ cameraPlan, heliocentric, ...fakeDom() }]),
-    /Perspective dolly requires the mounted planetary system/u,
-  );
+  assert.throws(() => Reflect.apply(createPerspectiveDolly, undefined, [{ cameraPlan, worldContext: undefined, ...fakeDom() }]),
+    /physical camera context/u);
+  assert.throws(() => createPerspectiveDolly({ cameraPlan, ...fakeDom(),
+    worldContext: { ...worldContext, kilometersPerUnit: worldContext.kilometersPerUnit * 2 } }), /units disagree/u);
 });
 
-test("publication sets the system opacity before publishing and the Sun marker opacity after", () => {
-  const mercuryPlan = mercuryHeliocentric;
+test("publication reports the physical observer and the resolved body it frames", () => {
   const cameraPlan = PREPARED_MERCURY_SCENE.camera;
-  const { heliocentric, calls } = heliocentricMock(mercuryPlan);
-  const dolly = createPerspectiveDolly({ cameraPlan, heliocentric, ...fakeDom() });
-  dolly.camera.update({ distance: dolly.stats().dolly.maximumDistance });
-  dolly.publish(IDENTITY_MATRIX3D, "");
-  assert.deepEqual(calls.map(([name]) => name),
-    ["setSystemOpacity", "publish", "setSunMarkerOpacity"]);
+  const published: unknown[] = [];
+  const dolly = createPerspectiveDolly({ cameraPlan, ...fakeDom(),
+    worldContext: { ...worldContext, onWorldPublish: world => published.push(world) } });
+  const result = dolly.publish(IDENTITY_MATRIX3D, "");
+  assert.equal(published.length, 1);
+  assert.ok(result.body && result.body.silhouetteDiameter > 0);
+  assert.equal(result.levelOfDetail?.stage, "geometry");
+  assert.equal(dolly.state().distanceRadii, dolly.camera.state.distance / worldContext.bodyRadiusUnits);
 });
-
-test("the published system opacity is opaque at the system-fitting distance and hidden at the closest", () => {
-  const mercuryPlan = mercuryHeliocentric;
-  const cameraPlan = PREPARED_MERCURY_SCENE.camera;
-  const { heliocentric } = heliocentricMock(mercuryPlan);
-  const dolly = createPerspectiveDolly({ cameraPlan, heliocentric, ...fakeDom() });
-
-  dolly.camera.update({ distance: 3 * mercuryPlan.system.maximumExtentUnits });
-  const far = dolly.publish(IDENTITY_MATRIX3D, "");
-  assert.ok(far.planetarySystem);
-  assert.equal(far.planetarySystem.opacity, 1);
-
-  dolly.camera.update({ distance: dolly.stats().dolly.minimumDistance });
-  const near = dolly.publish(IDENTITY_MATRIX3D, "");
-  assert.ok(near.planetarySystem);
-  assert.equal(near.planetarySystem.opacity, 0);
-});
-
-test("the wheel's whole travel stays within the intended tens-of-notches range", () => {
-  const mercuryPlan = mercuryHeliocentric;
-  const cameraPlan = PREPARED_MERCURY_SCENE.camera;
-  const { heliocentric } = heliocentricMock(mercuryPlan);
-  const dolly = createPerspectiveDolly({ cameraPlan, heliocentric, ...fakeDom() });
-  const { wheelNotchesEndToEnd } = dolly.stats().dolly;
-  assert.ok(wheelNotchesEndToEnd > 20 && wheelNotchesEndToEnd < 40,
-    `wheelNotchesEndToEnd ${wheelNotchesEndToEnd} is outside (20, 40)`);
-});
-
 
 test("a plan may opt into the tumble-only drag and the trackball carries it; other drag models are refused", () => {
   const plan = PREPARED_MERCURY_SCENE.camera;

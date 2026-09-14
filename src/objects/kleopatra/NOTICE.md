@@ -4,4 +4,4 @@ Geometry: F. Marchis, L. Jorda, P. Vernazza and coauthors; ESO/VLT/SPHERE; Labor
 
 The grid used by the Shape view is a display treatment, not an observed albedo or optical map. Source axes, model limitations and the arbitrary display rotation phase are described in SOURCE.md. The source is simplified to the authored display budget; no additional terrain is synthesized.
 
-Stars: ESO/S. Brunier Milky Way panorama, CC BY 4.0, and the HYG star catalog under the accompanying source notices. Title outlines use Inter by Rasmus Andersson and the Inter Project Authors under SIL Open Font License 1.1. The font and original panorama retain their source notices.
+Title outlines use Inter by Rasmus Andersson and the Inter Project Authors under SIL Open Font License 1.1. The font retains its source notice.

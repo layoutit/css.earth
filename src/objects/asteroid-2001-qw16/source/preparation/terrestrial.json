@@ -4,7 +4,6 @@
   "namespace": "asteroid-2001-qw16",
   "displayName": "2001 QW16",
   "publicBase": "/scenes/asteroid-2001-qw16/",
-  "distanceAu": 3.177455279524888,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -118,12 +117,6 @@
     "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

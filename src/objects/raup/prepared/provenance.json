@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "raup",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1bac46aef646bc3d34e1e06512d9192fa7c1c578be4b8441c800d505efb584e5"
+    "sha256": "8285447f8fc5bb649f2d033b0efe2e32120e50f2dc141d714fa47211bd7e105d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "eb5681c5f9e7f8804b38e08f2c641b0385ec08df3079fbf00c15c108ef7417d1",
+      "sha256": "812b8021a862725c2d0ce4cfc07a9a3f5e4284684ee3a19fe1e4a4dcb1d76150",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "raup",
         "displayName": "Raup",
         "publicBase": "/scenes/raup/",
-        "distanceAu": 1.9862246368080674,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e704323cd2d5e906d83ca5e56381eaadcd64038cfe6ea4f49821d9821d3cfc15",
+      "sha256": "134d657d23d0937484dba6c8c23f3744043ff9b75952641c866d4b814dd7e841",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "ffae22baf0155a59ff90c8363569c60c3261fce268cd2871126416261159367b",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "e704323cd2d5e906d83ca5e56381eaadcd64038cfe6ea4f49821d9821d3cfc15",
+      "sha256": "134d657d23d0937484dba6c8c23f3744043ff9b75952641c866d4b814dd7e841",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 7862,
+      "bytes": 7583,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/raup/raup-elevation-thumbnail.webp",
           "bytes": 5086,
           "sha256": "f18dedd07f2f346786deaaa6e66aafcdaf84f5e40a5392f96a48c86801d090c5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/raup/raup-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/raup/raup-elevation-surface@2x.webp",
           "bytes": 319528,
           "sha256": "76325529b70bb9d62ee619eb50553c7e1897e864d2c2406e0044c8dd9af584af",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/raup/raup-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/raup/raup-shape-surface@2x.webp",
           "bytes": 177216,
           "sha256": "4d565f01521523de25d09ea6da09409f6221e3dc6f217d14899dfd1fd9e88063",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5177,
-          "sha256": "3c1f8bcca17b6dc835c455d4ead5c746e1867195a2225d8f074f563366308af4",
+          "bytes": 5058,
+          "sha256": "409169e9afdea19fdd7feba0ee3e93dba0c0bb2711b36d585c8e454ea941f4dd",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "raup",
+    "materialSha256": "bc2e37003bf83c3f79f04c29389749ba7f0aee56a8e127fa3063186086803fd1",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

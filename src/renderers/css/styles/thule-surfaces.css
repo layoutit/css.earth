@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="thule"])[data-lod="billboard"] .thule-scene, .planet-stage:where([data-object-id="thule"])[data-lod="marker"] .thule-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="thule"])[data-lod="marker"] .thule-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="thule"]).thule-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

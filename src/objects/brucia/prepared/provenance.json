@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "brucia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "04b8c0a2aaf9dcdac290cf4501e00b9d899c05bea808ab194db7a7995e47a2e7"
+    "sha256": "c392bbb136aab213da726a89da06d3bdb5b33adfbafd217a9e269c2616886199"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "675c740ae55a677c00d04badcf49cbf35bf4629485fd0ea728829c8b208d8b91",
+      "sha256": "2459f23d9405867bb45537eda5ef3500775ce913547e203eb45e6340aca7fb2c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "brucia",
         "displayName": "Brucia",
         "publicBase": "/scenes/brucia/",
-        "distanceAu": 2.3823847582527136,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fe99a21599dd39cc9deb006db9c92785ccd45135088b8ba9fb0222ada255f2b3",
+      "sha256": "5c0986dade954dce79d925432fd7c1228a1aeb3013e9c990b442b692cc1467a0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10666"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "5111fbd781aebf114af225f23fe0ce94fa6be333491e0d95299bc5105b0beddf",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "fe99a21599dd39cc9deb006db9c92785ccd45135088b8ba9fb0222ada255f2b3",
+      "sha256": "5c0986dade954dce79d925432fd7c1228a1aeb3013e9c990b442b692cc1467a0",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8630,
+      "bytes": 8351,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +393,19 @@
           "url": "/scenes/brucia/brucia-elevation-thumbnail.webp",
           "bytes": 5368,
           "sha256": "3cb6d28f4c67e60bccdd9bc08a2566cbe9c42c39e0cbace54995e2b96831a3a6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/brucia/brucia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/brucia/brucia-elevation-surface@2x.webp",
           "bytes": 287572,
           "sha256": "4f5449e2ad86579a4210eab1b7f6aff27ebf8baad344396ce893be0205168f88",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -462,13 +443,13 @@
           "url": "/scenes/brucia/brucia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/brucia/brucia-shape-surface@2x.webp",
           "bytes": 216526,
           "sha256": "6d422e410621865cdd3a84d718b4c68c584574e42913ba88ad0dbb949f1f7141",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5956,
-          "sha256": "741a02abd16ba8c2d970a55c8f737e7ec90a6dd935f9b5a7825efb2337ec1eef",
+          "bytes": 5837,
+          "sha256": "afd29f37d738f3a55415d62218c5352bab2818f3812fd153399c53ae535810b9",
           "verification": "bytes-verified"
         }
       ],
@@ -560,5 +541,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "brucia",
+    "materialSha256": "1edac5fd45e5b6efe9922ecef94212102e25195919fa06b28f6d927ead3eec34",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

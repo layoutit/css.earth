@@ -30,14 +30,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "stars/eso0932a.tif",
-      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "features/PLUTO_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PLUTO_nomenclature_center_pts.zip"
     },

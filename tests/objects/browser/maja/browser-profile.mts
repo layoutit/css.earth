@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/maja/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'maja',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/maja/maja-directional-sun.webp",
-      "two": "/scenes/maja/maja-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/maja/maja-shape-surface@2x.webp"
   ],

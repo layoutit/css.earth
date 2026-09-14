@@ -1,17 +1,15 @@
 import type { PreparedLeaf } from '../scene/projector.js';
 import type { CameraPlan } from '../../navigation/types.js';
 import type { CubicSkyPlan } from '../../solar-system/cubic-sky-runtime.js';
-import type { DirectionalSunPlan } from '../../solar-system/directional-sun-runtime.js';
+import type { DirectionalSunPlan } from '../../solar-system/directional-sun-coordinate.js';
 import type { ObjectControls } from '../../runtime/object-contract.js';
 import type { ObjectRuntimeDefinition } from '../../runtime/object-runtime-types.js';
 import type { PreparedAssets } from '../../rendering/prepared-residency.js';
 import type { PreparedTree, PreparedVariant, PreparedViewBinding } from '../../rendering/prepared-presentation.js';
 import type { PreparedMaterialTrack, PreparedMaterialAddress, PreparedMaterialRotation } from '../../rendering/prepared-material.js';
-import type { HeliocentricViewPlan } from '../../../../platform/heliocentric-view.mts';
 import type { PreparedTextureLevels } from '../../rendering/prepared-texture-levels.js';
 import type { PreparedSeamOutset } from '../scene/seam-outset.js';
 type SeamRepair = { outset?: PreparedSeamOutset };
-type PreparedMarkers = Awaited<ReturnType<typeof import('../../../../../tools/objects/solar-system-markers.mts').prepareSolarSystemMarkerStrip>>['plan'];
 
 export interface Lens {
   id: string; view?: string; billboardColor: string;
@@ -42,13 +40,13 @@ export interface CompositeMaterial {
 }
 export interface Scene {
   camera: CameraPlan & {defaultTransform: string}; systemTransform: string; bodyTransform: string;
-  starfield: CubicSkyPlan & {catalogueStars: {exposure: {fovDegrees: number}}};
+  starfield: CubicSkyPlan;
   bodyLeaves: PreparedLeaf[]; body: {leaves: PreparedLeaf[]; seamRepair?: SeamRepair}; preparedSurface?: {seamRepair?: SeamRepair};
   interior: {bodyTransform: string; outerBodyLeaves: PreparedLeaf[]; coreLeaves: PreparedLeaf[]; sectionLeaves: PreparedLeaf[];
     presentationOrbit: {durationMilliseconds: number; millisecondsPerControlDegree: number; keyframes: Keyframe[]}};
-  material: CompositeMaterial; heliocentricView: HeliocentricViewPlan;
+  material: CompositeMaterial;
 }
-export interface SolarSource { bodyId: string; markerAtlasUrl: string; captionNames: Record<string, string>; }
+export interface SolarSource { bodyId: string; }
 export interface SourceMaterialTrack extends Omit<PreparedMaterialTrack, 'frame' | 'defaultFrame' | 'rotation' | 'banks'> {
   frame: {source: string; minimum: number; maximum: number; count: number; baseFrame: number;
     span?: number; maximumFrame?: number; remap: null};
@@ -59,14 +57,14 @@ export interface SourceMaterialTrack extends Omit<PreparedMaterialTrack, 'frame'
 export interface PresentationDraft {
   schema: string; camera: CameraPlan; sky: Scene['starfield']; sun: DirectionalSunPlan | null;
   assets: PreparedAssets; tree: PreparedTree; variants: PreparedVariant[]; materials: SourceMaterialTrack[];
-  resourceOrder?: 'materials-first'; heliocentricView?: ObjectRuntimeDefinition['heliocentricView'];
+  resourceOrder?: 'materials-first';
   viewBindings: PreparedViewBinding[]; animations: ObjectRuntimeDefinition['animations'];
   textureLevels?: PreparedTextureLevels;
 }
 export interface PresentationInputs {
   namespace: string; mode: 'row-bank-cutaway' | 'composite' | 'emissive';
   scene: Scene; assets: RasterAssets; lenses: Lenses; sun: DirectionalSunPlan | null;
-  markers?: PreparedMarkers; solarSource: SolarSource; controls: ObjectControls;
+  solarSource: SolarSource; controls: ObjectControls;
   textureLevels?: TextureLevelProfile;
   /** Authored surface targets (positive-east degrees) a lens selects; composite only. */
   lensFocus?: Record<string, { longitudeDegrees: number; latitudeDegrees: number; zoom: number }>;

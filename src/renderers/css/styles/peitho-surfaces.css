@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="peitho"])[data-lod="billboard"] .peitho-scene, .planet-stage:where([data-object-id="peitho"])[data-lod="marker"] .peitho-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="peitho"])[data-lod="marker"] .peitho-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="peitho"]).peitho-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

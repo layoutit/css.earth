@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-209p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dd789af605011b39c23b713037986fc223d263142f295d5f516cb1b297bfddca"
+    "sha256": "1bd7b74aee2a67cc3ab6be5c530cd452bc02481eb6cb43d942eb580a204c4571"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8f2642ff7be275e5f84319589ce02b13830e7be8f87953cfff831936ce429077",
+      "sha256": "0e42e15c9cedd12406d76619b687f42c9a522b06b20d77e454387b4bcd56be70",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-209p",
         "displayName": "LINEAR",
         "publicBase": "/scenes/comet-209p/",
-        "distanceAu": 2.9567815032538625,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "A smooth approximation of LINEAR’s published radar dimensions. The measurements constrain its size, but do not supply a detailed surface model. The grid marks absent surface photographs; the orientation is illustrative."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6e7791186fd2b549c142258b6537a1edc2d84c5a6bdc7a66f40b12df9d303428",
+      "sha256": "827a14ff75e3339291a9b79b0722bdb4ac888a498807b6d07c510f63938926b0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -227,12 +214,6 @@
             "role": "observations",
             "description": "Orbit and fixed-epoch position",
             "href": "https://ssd.jpl.nasa.gov/horizons/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "dc650cb624fe902e34a7c35d9cba7a754fd6766754a63bcb9a6192c9cbe81da6",
       "bytes": 944,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -295,10 +276,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6e7791186fd2b549c142258b6537a1edc2d84c5a6bdc7a66f40b12df9d303428",
-      "bytes": 2889,
+      "sha256": "827a14ff75e3339291a9b79b0722bdb4ac888a498807b6d07c510f63938926b0",
+      "bytes": 2610,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -330,13 +311,13 @@
           "url": "/scenes/comet-209p/comet-209p-model-thumbnail.webp",
           "bytes": 1480,
           "sha256": "0d11a324311fb5cd30589f0ef600688897bac19321333de46734ef5ec4bb460e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-209p/comet-209p-model-surface@2x.webp",
           "bytes": 116052,
           "sha256": "36587e00f26f1b505b25769c96cc5c78eed9eaca4db4c570a630eedb726a632b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -367,8 +348,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 2914,
-          "sha256": "523e87594d8104442b62aa0abbb3ec330158f719de531b6f03862304bc67982d",
+          "bytes": 2795,
+          "sha256": "d6b9cd6819063f5523142597cfaeb3eb772e4e22ac6ec845133d69675f775832",
           "verification": "bytes-verified"
         }
       ],
@@ -378,5 +359,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "comet-209p",
+    "materialSha256": "2260ba9ea57c02a201bbd5bdf612bcd720b1b83bb2ea66d774c193ad77dc9e14",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

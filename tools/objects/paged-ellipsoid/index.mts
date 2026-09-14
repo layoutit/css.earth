@@ -1,10 +1,9 @@
 import {requireObjectControls} from '../../../site/scene-contract.mts';
-import {validatePreparedCubicSky} from '../../../src/platform/cubic-sky-contract.mts';
 import type {AuthoredObjectDescriptor} from '@cssearth/objects';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
 import {readJsonSource, requireFiniteNumber} from '../../source-values.mts';
 import {validateSourceManifest} from '../../../src/platform/source-manifest.mts';
-import {parsePagedProfile, parsePagedLensBindings, parsePagedCelestial, isPagedEllipsoidRecipe} from './profile-source.mts';
+import {parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe} from './profile-source.mts';
 import {parseInteriorSource} from './source-contract.mts';
 import {parseCitySource, parseBodyAttitude} from '../geographic-pages/source-records.mts';
 export {isPagedEllipsoidRecipe} from './profile-source.mts';
@@ -19,7 +18,7 @@ import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
 import { verifySourceManifest } from '../../../src/platform/source-manifest.mts';
 import { preparePlanetCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
 import { preparePlanetDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
 import { createAtmospherePreparation } from './atmosphere.mts';
 import { createPagedSurfaceRaster } from './surface-raster.mts';
 import { preparePagedEllipsoidScene } from './scene.mts';
@@ -29,7 +28,7 @@ import { prepareLocationPoint, prepareLocationCamera } from '../geographic-pages
 import { prepareVectorOverlay } from '../geographic-pages/vector-overlay.mts';
 import { preparePlaces } from '../geographic-pages/places.mts';
 import { preparePinnedGlobalWmts } from '../geographic-pages/pinned-hierarchy.mts';
-import { appendFocusedHeliocentricPresentation, prepareFocusedHeliocentricPresentation } from '../focused-heliocentric.mts';
+import { withFocusedCamera } from '../focused-camera.mts';
 
 import { prepareTextureLevels } from './texture-levels.mts';
 
@@ -48,7 +47,7 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
     sources.set(reference.id, { reference, path, value: JSON.parse(bytes.toString('utf8')) });
   }
   const required = (id: string) => { const source = sources.get(id); if (!source) throw new TypeError(`Paged ellipsoid requires ${id}.`); return source.value; };
-  const config = parsePagedProfile(required('paged-ellipsoid')), celestialConfig = parsePagedCelestial(required('celestial')), bindingSource = parsePagedLensBindings(required('lens-bindings'));
+  const config = parsePagedProfile(required('paged-ellipsoid')), bindingSource = parsePagedLensBindings(required('lens-bindings'));
   if (!isPagedEllipsoidRecipe(config) || config.namespace !== descriptor.id || config.publicBase !== `/scenes/${descriptor.id}/`) throw new TypeError('Paged ellipsoid identity differs.');
   if (config.geometry.BODY_LATITUDE_SEGMENTS !== 16 || config.geometry.BODY_LONGITUDE_SEGMENTS !== 32) throw new TypeError('Unsupported segmented projective globe topology.');
   if (descriptor.recipe.shape.radiusKm !== config.equatorialRadiusKm || !descriptor.recipe.cutaway || !descriptor.recipe.atmosphere) throw new TypeError('Authored physical capabilities differ from their prepared operators.');
@@ -57,9 +56,8 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const sourceDirectory = resolve(objectDirectory, 'source'), sourceManifest = validateSourceManifest(config.namespace, await json(resolve(sourceDirectory, 'manifest.json')));
   await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, planetName: config.displayName });
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
-  const ensureDirectories = () => mkdir(publicDirectory, { recursive: true });
-  const sun = await preparePlanetDirectionalSun({ objectId: descriptor.id, publicRoot: publicDirectory, ensureDirectories, ...celestialConfig.directionalSun, writeModule: false });
-  const sky = validatePreparedCubicSky(await preparePlanetCubicSky({ objectId: descriptor.id, sourceRoot: sourceDirectory, publicRoot: publicDirectory, ensureDirectories, validateSourceGroup: async () => undefined, includeSun: celestialConfig.includeSun, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, pointSourceContract: CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD, writeModule: false }), {requireSun: celestialConfig.includeSun});
+  const sun = preparePlanetDirectionalSun();
+  const sky = preparePlanetCubicSky({ objectId: descriptor.id, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
   const atmosphere = createAtmospherePreparation({ config, sourceDirectory, sourceManifest, sun }), atmosphereModel = await atmosphere.readAtmosphereModel(), raster = createPagedSurfaceRaster(config);
   const paging = descriptor.recipe.paging, destinations = descriptor.recipe.destinations;
   if (Boolean(paging) !== Boolean(destinations)) throw new TypeError('Geographic paging and destinations must be declared together.');
@@ -105,10 +103,7 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   if (textureLevels) await write(outputDirectory, 'texture-levels', textureLevels);
   const controls = requireObjectControls(preparedContent.controls, descriptor.id);
   const rawDefinition = await preparePagedEllipsoidPresentation({ config, plan: scene, lenses, sky, sun, catalog, city, noise, textureLevels, controls });
-  const focus = await prepareFocusedHeliocentricPresentation({ bodyId: descriptor.id,
-    publicDirectory, publicBase: config.publicBase, bodyRadiusUnits: config.geometry.EQUATORIAL_RADIUS,
-    bodyRadiusKilometers: config.equatorialRadiusKm, sky, sun });
-  const definition = appendFocusedHeliocentricPresentation(rawDefinition, focus);
+  const definition = withFocusedCamera(rawDefinition, sky);
   for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(paging ? { noise, places: catalog, pages: city, 'page-preparation': report } : {}), lenses, content, runtime: definition })) await write(outputDirectory, name, value);
   await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: descriptor.recipe.sources, lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true, geographicPages: Boolean(paging) } });
   return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content };

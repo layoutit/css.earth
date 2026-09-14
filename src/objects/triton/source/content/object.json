@@ -129,12 +129,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "stars",
-        "label": "Stars",
-        "checked": true
       }
     ]
   },
@@ -151,12 +145,6 @@
       "role": "surface",
       "description": "Controlled Voyager imagery · Michael Bland",
       "href": "https://doi.org/10.5066/P9MGH7FB"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     },
     {
       "label": "LPI",

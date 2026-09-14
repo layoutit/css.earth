@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="minerva"])[data-lod="billboard"] .minerva-scene, .planet-stage:where([data-object-id="minerva"])[data-lod="marker"] .minerva-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="minerva"])[data-lod="marker"] .minerva-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="minerva"]).minerva-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

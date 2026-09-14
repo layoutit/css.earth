@@ -81,14 +81,9 @@ test('retains the cropped ring-shadow bitmap on its original logical plane', asy
   assert.equal(scene.counts.ringShadowPlaneCount, 1);
 });
 
-test('warms active material and shared sky assets before declaring ready', () => {
-  for (const key of ['exterior:normal', 'ring-shadow', 'directional-sun']) assert.ok(runtime.assets.startup.includes(key));
-  const sky = runtime.assets.entries.filter((entry: { key: string; }) => entry.key.startsWith('sky:'));
-  assert.equal(sky.length, 12);
-  for (const entry of sky) {
-    assert.match(entry.url, /@2x.webp$/);
-    assert.ok(runtime.assets.startup.includes(entry.key));
-  }
+test('warms active material assets before declaring ready, with no private sky or Sun', () => {
+  for (const key of ['exterior:normal', 'ring-shadow']) assert.ok(runtime.assets.startup.includes(key));
+  assert.equal(runtime.assets.entries.some((entry: { key: string; }) => entry.key.startsWith('sky:') || entry.key === 'directional-sun'), false);
   assert.ok(SCENE_OBJECTS.some(object => object.id === 'saturn'));
   assert.doesNotMatch(JSON.stringify(runtime), /devicePixelRatio|createPreparedSaturn|loadPreparedOrbitBank|DecompressionStream/);
 });

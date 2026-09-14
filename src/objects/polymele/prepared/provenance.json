@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "polymele",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b5706847cfbd4ad433a5ab643fe8701ecc1aa8818383cc14e80ec6ef7f01fd7"
+    "sha256": "10b9579a9f3e774d402943f40de77cd7e31035f30f799a7a7d8fe69c2ef432fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fb0ce8f771f32d8118dc3509ddc55b32a745abae17f5397dc7cdb3404f2724b6",
+      "sha256": "a3f743a3cd497f26e46a883d6cd0a16cc8af677e3a95fa602f2462dbfcb0038a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "polymele",
         "displayName": "Polymele",
         "publicBase": "/scenes/polymele/",
-        "distanceAu": 5.2,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b0cbc7968b0600c6f5748f6b2a18a86f95fa027dfd0029c0ec8f10c5a0e3b1ed",
+      "sha256": "8149a3c5935fa3edbafc17c2895c9396d354fe045cbf958e1333345afe65937f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,12 +164,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -199,12 +186,6 @@
             "role": "facts",
             "description": "Published model and interpretation",
             "href": "https://baas.aas.org/pub/2023n8i107p05"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -260,7 +241,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -295,7 +276,7 @@
       "sha256": "daeaea36b368b7012b45c0bc626085f87478d74d2f79fc75ab4be47a1ebba01c",
       "bytes": 60316,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -312,10 +293,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b0cbc7968b0600c6f5748f6b2a18a86f95fa027dfd0029c0ec8f10c5a0e3b1ed",
-      "bytes": 2918,
+      "sha256": "8149a3c5935fa3edbafc17c2895c9396d354fe045cbf958e1333345afe65937f",
+      "bytes": 2638,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -352,13 +333,13 @@
           "url": "/scenes/polymele/polymele-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polymele/polymele-model-surface@2x.webp",
           "bytes": 43844,
           "sha256": "c78078a9cc51a8e4ca1a8509933b6da44fae7f9718c7a76dc98eef763d688c8d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -394,8 +375,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5550,
-          "sha256": "fc441d27fddbf5f13621d4d5c607ea3993964423c419a993aefb439c834fbedc",
+          "bytes": 5431,
+          "sha256": "b6e3b6aa231d57f8af179ea68f3dcd2a710a33fcf98f60e15a4bca18805abe75",
           "verification": "bytes-verified"
         }
       ],
@@ -430,5 +411,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "polymele",
+    "materialSha256": "7b0ae58a13f14df44237af5b9259b9afac6495e23b87ad0ec66fcb25e011a94b",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

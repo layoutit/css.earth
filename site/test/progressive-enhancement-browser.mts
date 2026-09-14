@@ -124,9 +124,9 @@ try {
   assert.equal(await focus.locator('#prepared-focus-dataset-content').isVisible(), true);
   assert.equal(await focus.locator('[data-focus-lens-bank="m42"] > .planet-dataset-context-rail').isVisible(), true);
   const stars = focus.locator('.prepared-volume-lenses[data-volume-lens-object="m42"] .prepared-catalogue-points');
-  await focus.locator('[data-focus-lens-bank="m42"] [data-focus-stars]').uncheck();
+  await focus.locator('[data-focus-lens-bank="m42"] label:has([data-focus-stars])').click();
   assert.equal(await stars.evaluate(node => getComputedStyle(node).display), 'none');
-  await focus.locator('[data-focus-lens-bank="m42"] [data-focus-stars]').check();
+  await focus.locator('[data-focus-lens-bank="m42"] label:has([data-focus-stars])').click();
   assert.notEqual(await stars.evaluate(node => getComputedStyle(node).display), 'none');
   await session.send('Emulation.setScriptExecutionDisabled', { value: false });
   cases.push('Prepared focus keeps native information tabs, arrow keys, context visibility and catalogue-star selection with script execution disabled');

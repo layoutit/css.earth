@@ -8,9 +8,7 @@ export const browserProfile = createObjectBrowserProfile({
     preparedAssetPairs: Object.freeze([
       Object.freeze({ one: "/scenes/miranda/miranda-normal.webp", two: "/scenes/miranda/miranda-normal@2x.webp" }),
       Object.freeze({ one: "/scenes/miranda/miranda-poles-normal.webp", two: "/scenes/miranda/miranda-poles-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/miranda/miranda-starfield-front.webp", two: "/scenes/miranda/miranda-starfield-front@2x.webp" }),
-      Object.freeze({ one: "/scenes/miranda/miranda-directional-sun.webp", two: "/scenes/miranda/miranda-directional-sun@2x.webp" }),
-    ]),
+      ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "elevation",

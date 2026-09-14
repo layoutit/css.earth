@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="thyra"])[data-lod="billboard"] .thyra-scene, .planet-stage:where([data-object-id="thyra"])[data-lod="marker"] .thyra-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="thyra"])[data-lod="marker"] .thyra-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="thyra"]).thyra-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

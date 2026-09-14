@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ef508148fd37f812dad4587b3446f05de53b41ff44050a7a48d5ee7256dadeba"
+    "sha256": "c0af0a0ef7f9c9af014b5a65a2312366e8a500a1e7a557ed86ba0a71eaee03f0"
   },
   "id": "moon",
   "properties": {
@@ -41,7 +41,7 @@
         {
           "id": "celestial",
           "path": "source/preparation/celestial.json",
-          "sha256": "a510ef9ffb0f65da272702eb8351bae713b0e4056d24f5926378b12424b6d8f6"
+          "sha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8"
         },
         {
           "id": "presentation",
@@ -51,12 +51,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7ab905836804b5f16347c9a1a05db64f3f059659506c38bd9f952679521406f5"
+          "sha256": "4c7daaacb0f6ac8088f8e23ff48a162bd7a9095c74da9f89552d6dd0a697a629"
         },
         {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
-          "sha256": "118b64ae531350d309ff002299cdc2aed9fa42691d0614bcde65ea71cda423cd"
+          "sha256": "6b9c5784ce3388d37a5dd987817701fc28559f779b877768856fcc5b1177d3bb"
         },
         {
           "id": "title",
@@ -66,7 +66,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "bc6948e1ea3f675c7fd483ab664055738784800e0e5f09a507c9eda1697f53fd"
+          "sha256": "14faffc254af1b926c4a55eff2b3c48e605a39c77331b2bc6c9c64ae9e5a43e8"
         },
         {
           "id": "navigation",
@@ -177,7 +177,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4ec9e8a4b6e486a948488abf260256e642377c0476ea0a3a1f819ba7533f316e"
+        "sha256": "c4aef6ae58bc73179065fcff4900668738e648738b277fc67c82ecd79776ea3b"
       }
     },
     "catalog": {

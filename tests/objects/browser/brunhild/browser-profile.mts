@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/brunhild/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'brunhild',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/brunhild/brunhild-directional-sun.webp",
-      "two": "/scenes/brunhild/brunhild-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/brunhild/brunhild-shape-surface@2x.webp"
   ],

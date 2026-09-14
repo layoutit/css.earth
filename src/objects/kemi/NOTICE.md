@@ -6,4 +6,4 @@ Thermal diameter: AKARI AcuA (Usui et al. 2011), ISAS/JAXA. Original catalog val
 
 Shape and derived geometry: DAMIT CC BY 4.0, https://creativecommons.org/licenses/by/4.0/. Original source and selected record: https://damit.cuni.cz/projects/damit/asteroid_models/view/1202.
 
-Background: ESO/S. Brunier, CC BY 4.0. Star data: HYG, see source/stars/LICENSE.md. Title: Inter Project Authors / Rasmus Andersson, SIL Open Font License 1.1.
+Title: Inter Project Authors / Rasmus Andersson, SIL Open Font License 1.1.

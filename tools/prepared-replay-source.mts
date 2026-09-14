@@ -10,7 +10,7 @@ export interface SolidReplayScene {
  rings?: ReplayRings;
  camera:CameraPlan;sky:ReturnType<typeof validatePreparedCubicSky>;sun:ReturnType<typeof validateDirectionalSunPlan>;systemTransform:string;
  bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[];
- heliocentricView:ReturnType<typeof validatePreparedHeliocentricView>;surfaceTriangles?:number[][][];surfaceLensRanges?:readonly {lensId:string;start:number;count:number}[];
+ surfaceTriangles?:number[][][];surfaceLensRanges?:readonly {lensId:string;start:number;count:number}[];
 }
 import {requireRecord} from './source-values.mts';
 import {shape,text,number,array,optional,dictionary,boolean} from './objects/terrestrial-layers/source-records.mts';
@@ -18,20 +18,14 @@ import {camera} from './objects/camera-source.mts';
 import {parse} from './objects/material-composition/data-schema.mts';
 import {validatePreparedCubicSky} from '../src/platform/cubic-sky-contract.mts';
 import {validateDirectionalSunPlan} from '../src/platform/directional-sun-contract.mts';
-import {validatePreparedHeliocentricView} from '../src/platform/heliocentric-view.mts';
 
 const cameraPlan=(value:unknown)=>parse(value,camera,'saved camera');
 const matrix=(value:unknown)=>typeof value==='string'?value:array(number)(value);
 const leaf=shape({tag:optional(text),className:optional(text),style:text,attributes:optional(dictionary(text)),
   projectiveTextureLayer:optional(shape({schema:text,rasterScale:optional(number),textureMatrix:matrix,frameMatrix:matrix}))});
 const parseReplayRings:Decoder<ReplayRings>=shape({leaves:array(leaf),resource:shape({key:text,url:text,pool:text}),coverage:requireRecord,qualification:array(shape({id:text,qualification:text}))});
-const heliocentric=(value:unknown)=>{
-  text(requireRecord(value).bodyId);
-  // This existing scientific validator checks the numerical plan and its system.
-  return validatePreparedHeliocentricView(value as Parameters<typeof validatePreparedHeliocentricView>[0]);
-};
-export const parseSolidReplayScene:Decoder<SolidReplayScene>=shape({rings:optional(parseReplayRings),camera:cameraPlan,sky:value=>validatePreparedCubicSky(value,{requireSun:false}),
-  sun:validateDirectionalSunPlan,systemTransform:text,bodyLeaves:array(leaf),heliocentricView:heliocentric,
+export const parseSolidReplayScene:Decoder<SolidReplayScene>=shape({rings:optional(parseReplayRings),camera:cameraPlan,sky:validatePreparedCubicSky,
+  sun:validateDirectionalSunPlan,systemTransform:text,bodyLeaves:array(leaf),
   surfaceTriangles:optional(array(array(array(number)))),surfaceLensRanges:optional(array(shape({lensId:text,start:number,count:number})))});
 const asset=shape({url:text,width:number,height:number,bytes:number,sha256:text});
 const surfaceFields=shape({id:text,textureScale:optional(number),displaySampling:optional(text),map:asset,surface:asset,thumbnail:asset,

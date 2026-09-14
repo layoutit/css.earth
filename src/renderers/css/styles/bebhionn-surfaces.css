@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bebhionn"])[data-lod="billboard"] .bebhionn-scene, .planet-stage:where([data-object-id="bebhionn"])[data-lod="marker"] .bebhionn-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bebhionn"])[data-lod="marker"] .bebhionn-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bebhionn"]).bebhionn-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

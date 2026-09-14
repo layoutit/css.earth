@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/cybele/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'cybele',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/cybele/cybele-directional-sun.webp",
-      "two": "/scenes/cybele/cybele-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/cybele/cybele-shape-surface@2x.webp"
   ],

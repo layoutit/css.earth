@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "albiorix",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1d6d839d2a25d3af6f3a5d9d52d5e47fb5153483665f050c4f7353f69e88bd25"
+    "sha256": "35eee624e0e364fb42df5b1feb008aa8121df3ef853e72051e8016361381bea7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "02b1918f1bbe209f78fd85395a80c2aef979dc1c904d05d84125e12214f14ae7",
+      "sha256": "9affeb72b9b1d7874d0f528a4a43ce972909799cbae42974a1d2ee0eb50946e5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "albiorix",
         "displayName": "Albiorix",
         "publicBase": "/scenes/albiorix/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Saturn-system ephemeris; illustrative display pole and meridian, not a measured spin attitude."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f7353db800e1e80f21236045a9a73b48260e6a0c6b102e9681bf7f9307ffe6db",
+      "sha256": "8f2e4cd1d2a47288c976660a3f9a47b7aed84fc919d11299cf7cf427cb5b61a7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -177,12 +170,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -205,12 +192,6 @@
             "role": "observations",
             "description": "Cassini ISS archive",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -267,7 +248,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -303,7 +284,7 @@
       "sha256": "6bb49d5f0ce395a7a8c5cce0fa2c983324e1edf12cbe1affbc9142eac4bd8be5",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -320,10 +301,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f7353db800e1e80f21236045a9a73b48260e6a0c6b102e9681bf7f9307ffe6db",
-      "bytes": 3025,
+      "sha256": "8f2e4cd1d2a47288c976660a3f9a47b7aed84fc919d11299cf7cf427cb5b61a7",
+      "bytes": 2746,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -360,13 +341,13 @@
           "url": "/scenes/albiorix/albiorix-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/albiorix/albiorix-model-surface@2x.webp",
           "bytes": 55948,
           "sha256": "0db249ef96fde5e19e354e2415764e51aa02f958866edd6a32c0c7d4a7209850",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -402,8 +383,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4537,
-          "sha256": "99ca546994548f37c84eacfdd95930bb75463d883a03e3e7f4ff177c5f24d8e4",
+          "bytes": 4418,
+          "sha256": "5f8e45c844e0b759ab187c3e58f48d57cdfee750054fa0ea2d060c59b0a7341d",
           "verification": "bytes-verified"
         }
       ],
@@ -438,5 +419,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "albiorix",
+    "materialSha256": "94950ac4525021e511a2df196cb63f8c77703a60afe4a83d5ec835bdb763874d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

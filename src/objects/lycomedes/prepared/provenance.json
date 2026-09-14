@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lycomedes",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6201e189f261bd0ea9ade9794bf53c37e74aff596925933043efa3bcb5f6aeb2"
+    "sha256": "8c28cf53110bc8c68ab64510f1f8052df84cbba982581ec5643d7d61e822de69"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "99a4ed4a9141261672570722dd811e2ca6a2e284234637d01eb2865783d29b38",
+      "sha256": "a8980311638f5df3f1afaf151446a0c5e74a58e2977411afffe36321b54c65fb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "lycomedes",
         "displayName": "Lycomedes",
         "publicBase": "/scenes/lycomedes/",
-        "distanceAu": 5.0677482891717345,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -137,20 +136,14 @@
           "sunSource": "DAMIT model 4284 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4beca554cc2e9c4fc05bc50124ed9432c284d9b1623b91c36efcf587729456db",
+      "sha256": "aa498bf788c67804815c36667b7db9eb4cbea9134a3a74301ff1a8dbdfdf51b6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4284"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -369,7 +350,7 @@
       "sha256": "7499d76e5c762b07f8c6fa687c6028f9e0b577068ffb7f951e4154cf0c140455",
       "bytes": 46095,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -394,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4beca554cc2e9c4fc05bc50124ed9432c284d9b1623b91c36efcf587729456db",
-      "bytes": 11962,
+      "sha256": "aa498bf788c67804815c36667b7db9eb4cbea9134a3a74301ff1a8dbdfdf51b6",
+      "bytes": 11682,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -429,19 +410,19 @@
           "url": "/scenes/lycomedes/lycomedes-elevation-thumbnail.webp",
           "bytes": 6046,
           "sha256": "2c056ef24b92a5b6b7d5ef1bdb4eed2c26fb86777c729938df73e083fcb9f0fe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lycomedes/lycomedes-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lycomedes/lycomedes-elevation-surface@2x.webp",
           "bytes": 299856,
           "sha256": "19eb34d02aad84949069c338d22269823970eb9efa31f39f8b6ef1e958bdaa14",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -479,13 +460,13 @@
           "url": "/scenes/lycomedes/lycomedes-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lycomedes/lycomedes-shape-surface@2x.webp",
           "bytes": 239942,
           "sha256": "b14b5d375872437a33801dd316945d4fed2cd992192de9d33aa7c814e0e0fcab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -516,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8972,
-          "sha256": "0620bb95e500e1b4f42ae5f31709f3e4020cd0fdd4b65ac7c62cddf3466f389c",
+          "bytes": 8853,
+          "sha256": "fc8d76ba3ac2664d1a249054a80b88c4c7f0b70c40b674121653f5261fcda776",
           "verification": "bytes-verified"
         }
       ],
@@ -577,5 +558,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "lycomedes",
+    "materialSha256": "00c4939f8bda7f9376d7100e8f644b7d9ff948619d6ce01dd4440618511db33d",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -3,7 +3,7 @@ import {parsePhotometricDiscRecipe} from '../../tools/objects/giant-layers/photo
 import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { OBJECTS } from "../../site/objects.mts";
+import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";
 import { preparedMaterialAddress, preparedMaterialFrame, preparedMaterialState } from '../renderers/css/dist/testing.js';
 import { resolvePreparedMaterialDemand } from '../renderers/css/dist/testing.js';
 import materialSource from '../objects/jupiter/source/preparation/materials.json' with {type:'json'};

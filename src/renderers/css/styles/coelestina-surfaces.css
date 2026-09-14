@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="coelestina"])[data-lod="billboard"] .coelestina-scene, .planet-stage:where([data-object-id="coelestina"])[data-lod="marker"] .coelestina-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="coelestina"])[data-lod="marker"] .coelestina-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="coelestina"]).coelestina-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -1,6 +1,6 @@
 import { clipSegmentToRectangle, eyeFraction, lerp, splitVisible } from './heliocentric-geometry.js';
 import type { Vector3 } from './types.js';
-import type { OrbitSegment } from './heliocentric-view.js';
+import type { OrbitSegment } from './types.js';
 
 /** A mounted line pool owns one live projection, with the same bounded capacity
  * as its drawing leaves. Consumers finish reading it before the next publish.

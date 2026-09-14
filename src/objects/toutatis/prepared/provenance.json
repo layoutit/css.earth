@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "toutatis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7a1d40f838cc7836873a5162647143b5ef6c6dadeab7ff59026eb1babfcc5bfc"
+    "sha256": "9029b5fb565458f2aaaf07c32a4f6d9d1f6a350b5641c42eaea7405c3a2b51d1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "74a58b7c9677b5ec82db51e333bc67a9c0ff682e77b8030b7c747443bcff443c",
+      "sha256": "9fda270f0816598525d738139ad53a2c66984b89bc4d54e3bc88bf9f90a1ff3d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "toutatis",
         "displayName": "Toutatis",
         "publicBase": "/scenes/toutatis/",
-        "distanceAu": 2.543055738919472,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -135,20 +134,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements; fixed arbitrary display orientation because Toutatis has non-principal-axis tumbling; directional lighting is illustrative"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "636d316b13c161a86e6e5650d192bbbd9dc3a5377c97cba1aa22a67ecc568a4b",
+      "sha256": "a037a42a4571e1e343cbde40712e3610458ddef7bad8c71ac0816a8c09632393",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -299,12 +286,6 @@
             "role": "rotation",
             "description": "Measured tumbling state",
             "href": "https://arxiv.org/abs/1511.04357"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -371,7 +352,7 @@
       "sha256": "28c94e3c5c4fadab97c6f1fc78dbb3800a4248b86302681cf1c629e48df5f00a",
       "bytes": 2879779,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -396,10 +377,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "636d316b13c161a86e6e5650d192bbbd9dc3a5377c97cba1aa22a67ecc568a4b",
-      "bytes": 9349,
+      "sha256": "a037a42a4571e1e343cbde40712e3610458ddef7bad8c71ac0816a8c09632393",
+      "bytes": 9070,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -431,19 +412,19 @@
           "url": "/scenes/toutatis/toutatis-elevation-thumbnail.webp",
           "bytes": 5802,
           "sha256": "8172417040d331136b7f5c7905a8a592deb3556da5df383e7465917826da04b8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toutatis/toutatis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toutatis/toutatis-elevation-surface@2x.webp",
           "bytes": 380870,
           "sha256": "a361add1d3e60980d97304625925ab0146278f90ec40ce73234acdac67b59014",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -481,13 +462,13 @@
           "url": "/scenes/toutatis/toutatis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toutatis/toutatis-shape-surface@2x.webp",
           "bytes": 243256,
           "sha256": "89dbe6aa8d80304ffe388f9eaa16457f3306bfc24970aab8b70380a887d5f176",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -518,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6019,
-          "sha256": "3ad7c371c3633d168c6507cfef8045983d81c5cdff5497b64a869ba184d8f6d8",
+          "bytes": 5900,
+          "sha256": "2c1e199ed4ed9fd4db892ec3e1b4f3926c73b68c197cf32540d03f02df880d35",
           "verification": "bytes-verified"
         }
       ],
@@ -582,16 +563,11 @@
   },
   "lastPreparation": {
     "objectId": "toutatis",
-    "materialSha256": "d4bbd41201649f9cbf07bb155865481e20146a07513bb2f2e6f98e096a937ba9",
+    "materialSha256": "5ae224eb2f06002b7eb77820bd05de177526e4e8aae3ba95e7cbeb5e1fccfbf5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-      "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
-    },
-    "record": {
-      "revision": "4551b3557f1a930bd051039e4c4d1ed6b2e3bb78",
-      "path": "src/objects/toutatis/prepared/provenance.json",
-      "sha256": "d1b8068ae772db638e6be7eed0b0835ec0bced361e0e8fae380034c6f8b08c63"
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
     }
   }
 }

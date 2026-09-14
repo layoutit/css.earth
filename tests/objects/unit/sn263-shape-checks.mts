@@ -6,8 +6,6 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {parseObjShape,createIndexedShape} from '../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {simplifyRadialShape,validateClosedMesh} from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-import {preparePlanetarySystem} from '../../../src/platform/prepare-planetary-system.mts';
-import {prepareEclipticPresentationFrame} from '../../../src/platform/solar-presentation-frame.mts';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 
 // Independent coordinates in the native PDS tables, before metre conversion.
@@ -16,7 +14,7 @@ const expected={
  beta:{extent:[765.735,1037.912,656.261],diameter:[.65,.89],role:'larger, outer satellite'},
  gamma:{extent:[554.912,430.533,421.852],diameter:[.29,.57],role:'smaller, inner satellite'},
 };
-export function checkSn263Shape(id: Parameters<typeof preparePlanetarySystem>[0]["bodyId"],component: keyof typeof expected){
+export function checkSn263Shape(id: string,component: keyof typeof expected){
  const root=new URL(`../../../src/objects/${id}/source/`,import.meta.url);
  const read=async (path: string|URL)=>JSON.parse((await readFile(new URL(path,root))).toString('utf8'));
  test(`${id}: PDS component, units, input closure and shape agree`,async()=>{
@@ -53,11 +51,4 @@ export function checkSn263Shape(id: Parameters<typeof preparePlanetarySystem>[0]
   }
   assert.ok(maximum<=profile.simplification.maximumErrorMeters,`sampled radial deviation ${maximum}m exceeds ${profile.simplification.maximumErrorMeters}m`);
  });
- if(component!=='alpha')test(`${id}: the parent context has source-backed point photometry`,async()=>{
-  const config=await read('preparation/terrestrial.json');
-  const system=await preparePlanetarySystem({bodyId:id,presentationFrame:prepareEclipticPresentationFrame(id),kilometersPerUnit:config.geometry.radiusKm/config.geometry.radius});
-  const parent=required(system.bodies.find(body=>body.id==='asteroid-2001-sn263'));
-  assert.ok(required(parent.pointPresentation).samples.every(Number.isFinite));assert.equal(required(parent.illumination).geometricAlbedo,.048);
- });
-
 }

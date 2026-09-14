@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="antonia"])[data-lod="billboard"] .antonia-scene, .planet-stage:where([data-object-id="antonia"])[data-lod="marker"] .antonia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="antonia"])[data-lod="marker"] .antonia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="antonia"]).antonia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

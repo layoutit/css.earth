@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asteroid-1994-cc"])[data-lod="billboard"] .asteroid-1994-cc-scene, .planet-stage:where([data-object-id="asteroid-1994-cc"])[data-lod="marker"] .asteroid-1994-cc-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asteroid-1994-cc"])[data-lod="marker"] .asteroid-1994-cc-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asteroid-1994-cc"]).asteroid-1994-cc-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

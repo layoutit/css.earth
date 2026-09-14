@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "squannit",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fb0f9bd479cc783d6877d3041f89ca87c0d3e0ede9134a36adb31dcd2dd01d69"
+    "sha256": "aac98f68664212a38d0dd171782da31baabf53b9bcfac1a3cdc4d61854866708"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "afc9c4605910f28e36255135839f796adea67c56ea17993385544749eab77995",
+      "sha256": "56da63557c5a26cdba0b18fefa539a9f6490cc28d959e176ca3b69e120834353",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "squannit",
         "displayName": "Squannit",
         "publicBase": "/scenes/squannit/",
-        "distanceAu": 0.642,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "Scheirich et al. (2021) phase-bearing secular mutual-orbit model, extrapolated from 2000–2019 observations to the retained scene epoch. Current orbital phase is approximate; source/validation/epoch-state.json records limitations. Display attitude remains illustrative."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6d0d54c55943e07c7cb7598d3b99d0d4d07e1bdfeddd1801d99bea6321c88752",
+      "sha256": "711420ccf63b4604de84ccbc46953210831e9b06c2d484650266de6f89b6453e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -182,12 +175,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -210,12 +197,6 @@
             "role": "facts",
             "description": "Source measurements and model interpretation",
             "href": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast.jpl.radar.shape_models_V1_0/data/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -271,7 +252,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -306,7 +287,7 @@
       "sha256": "3d65690a33c5bb2ef1a7b2f40c0a6faf26f40bd87b0f6bc27a7f801d4ec50256",
       "bytes": 67298,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "path": "shape/kw4b.obj",
@@ -331,10 +312,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6d0d54c55943e07c7cb7598d3b99d0d4d07e1bdfeddd1801d99bea6321c88752",
-      "bytes": 3643,
+      "sha256": "711420ccf63b4604de84ccbc46953210831e9b06c2d484650266de6f89b6453e",
+      "bytes": 3364,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -371,13 +352,13 @@
           "url": "/scenes/squannit/squannit-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/squannit/squannit-model-surface@2x.webp",
           "bytes": 68658,
           "sha256": "5cec7c32fcb87b473ac61b0c133f630674b0bd6071c58fec85d26e03b9103a38",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -413,8 +394,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6427,
-          "sha256": "a672d9e040c901a7ce5195431c6558fd4f7779ee729885816252401a11a539a5",
+          "bytes": 6308,
+          "sha256": "de62f43741c089507a030dea803bc18088d277c2b16be449dbd7f5c68174f2a3",
           "verification": "bytes-verified"
         }
       ],
@@ -449,5 +430,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "squannit",
+    "materialSha256": "b6eb3395bc09949d789fb4975c5e2478e9397d6384e83078b00653af0e70cd73",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

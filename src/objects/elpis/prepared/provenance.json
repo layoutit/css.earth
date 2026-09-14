@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "elpis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d8097b0ea840b834e5f3357ebc3375e7f022fb7c0f6330c13b37d92cb83eb81a"
+    "sha256": "950186744e5b4d0bf7c0fc7c53751bfd42a0bd3555359d924ca0b5a33a95a470"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ebadc3eeb03c76fdbc5470994a65fb5d58a9bdbea39bdf2758c8aebddd176f0f",
+      "sha256": "c34a0a6b2de35ec2b5f96e9de10adb016275a1fc38ba8d1166ba0628a6ad6be0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "elpis",
         "displayName": "Elpis",
         "publicBase": "/scenes/elpis/",
-        "distanceAu": 2.7131621894421545,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 6156 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "90d85ba5290c690d7ed942b86310b5a508f985e565bad6ac8751b5868dbf1103",
+      "sha256": "85f3d7030ca5b954f5638efe279e68bf5aa6da0d98dcb79e099a70690dbbaafd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6156"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "6a4303f1791e988fba36d8524815aa00799d0268b7f81d4d263da431f15b331f",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "90d85ba5290c690d7ed942b86310b5a508f985e565bad6ac8751b5868dbf1103",
-      "bytes": 8129,
+      "sha256": "85f3d7030ca5b954f5638efe279e68bf5aa6da0d98dcb79e099a70690dbbaafd",
+      "bytes": 7850,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/elpis/elpis-elevation-thumbnail.webp",
           "bytes": 5454,
           "sha256": "33bb69415659c61393f192140ac1ff9c4393da01fd6d3192a08b029be384ae84",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/elpis/elpis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/elpis/elpis-elevation-surface@2x.webp",
           "bytes": 284578,
           "sha256": "02278b1246bf4fd02b60b420389412f89281834d6cd11f7e6a997fc05aa5a06e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/elpis/elpis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/elpis/elpis-shape-surface@2x.webp",
           "bytes": 204610,
           "sha256": "f4d019d89290f3ebc73c791d156ec8d91e23aac42a2035e9d4ae00550d0a2332",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5509,
-          "sha256": "323d6e7473a99d77e1b058676fb3da5d5d0ffe8fdf8e776634f63b7c70307a7a",
+          "bytes": 5390,
+          "sha256": "667224d8acf22688518f247047345a9be903abbc6e28c8703cfaf82e1dd69c63",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "elpis",
+    "materialSha256": "95aa5b6523aabf51361ef9f7a671309b2972e5d27e205b479bc4c3776ffeefb3",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

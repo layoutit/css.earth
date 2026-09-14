@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="comet-c1996-b2"])[data-lod="billboard"] .comet-c1996-b2-scene, .planet-stage:where([data-object-id="comet-c1996-b2"])[data-lod="marker"] .comet-c1996-b2-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="comet-c1996-b2"])[data-lod="marker"] .comet-c1996-b2-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="comet-c1996-b2"]).comet-c1996-b2-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

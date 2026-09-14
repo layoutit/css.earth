@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="laurentia"])[data-lod="billboard"] .laurentia-scene, .planet-stage:where([data-object-id="laurentia"])[data-lod="marker"] .laurentia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="laurentia"])[data-lod="marker"] .laurentia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="laurentia"]).laurentia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

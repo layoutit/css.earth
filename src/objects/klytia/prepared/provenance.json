@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "klytia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c63d576222ff4b681cf0ffe73d50c8a5a8c3f2c1291ba53119832e3d6709301b"
+    "sha256": "b87a1cf2e80bbf03763d0dc9d2920ffe71166ae6aacfe1603b087e1d8ec387ba"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "65e53c19995719a7ad2f3eb7b197451da1d5137d9b4912cf36d8de44fbf98ebe",
+      "sha256": "fa12125e6be419ebfdf223ac570734aa4d1dd09fe98a97a59d95e115e2776d89",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "klytia",
         "displayName": "Klytia",
         "publicBase": "/scenes/klytia/",
-        "distanceAu": 2.6653201228884313,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 142 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5565268bacf77df887cc7a74f785137ba251d5f252403c12a8ac657a7fa75eee",
+      "sha256": "a952af9237592bd7352b2f15d80db2001153d613f534260b76dfe03658700747",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/142"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "32e8a509863ce93032e7d97e906d1b7413d1c5db35b9229bee8953d0a8af54f7",
       "bytes": 81574,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5565268bacf77df887cc7a74f785137ba251d5f252403c12a8ac657a7fa75eee",
-      "bytes": 8435,
+      "sha256": "a952af9237592bd7352b2f15d80db2001153d613f534260b76dfe03658700747",
+      "bytes": 8156,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/klytia/klytia-elevation-thumbnail.webp",
           "bytes": 5078,
           "sha256": "896587789bd7edd365d02e722e6eb0464b86b04bcea49bca266f637c49551655",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klytia/klytia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klytia/klytia-elevation-surface@2x.webp",
           "bytes": 270842,
           "sha256": "79302591a5ee7f729df83f4b57d95b3665eaf55bc95d46330acc915bd4c5528b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/klytia/klytia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/klytia/klytia-shape-surface@2x.webp",
           "bytes": 223734,
           "sha256": "bbed2fdc91eb568101876af235920e16b3d64fa5c39549b32dd0d10ee72deddd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5805,
-          "sha256": "7f6b5c3100378d50cbc27257c8ab5b151e2ef10784732901604c6cb2cd389540",
+          "bytes": 5686,
+          "sha256": "42a61b30e8480d5b2299c8280b9b2d90d2550d94db22429d12b549b4b71ea726",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "klytia",
+    "materialSha256": "56583b765e9c726a5a82e4ef9e452c7ef2b2ad8d080cf1d328bc07771fe79c2a",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

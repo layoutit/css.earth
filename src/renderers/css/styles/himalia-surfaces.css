@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="himalia"])[data-lod="billboard"] .himalia-scene, .planet-stage:where([data-object-id="himalia"])[data-lod="marker"] .himalia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="himalia"])[data-lod="marker"] .himalia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="himalia"]).himalia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

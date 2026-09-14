@@ -61,12 +61,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": false
       }
     ]
   },
@@ -83,12 +77,6 @@
       "role": "observations",
       "description": "Position at 3 September 2026",
       "href": "https://ssd.jpl.nasa.gov/horizons/"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

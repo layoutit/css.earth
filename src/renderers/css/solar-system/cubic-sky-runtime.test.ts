@@ -5,51 +5,36 @@ import type { CubicSkyPlan } from './cubic-sky-runtime.js';
 
 afterEach(() => vi.unstubAllGlobals());
 
-test('the shared-universe path keeps camera orientation without unused sky images or star observers', () => {
-  const observers = vi.fn();
-  const document = { createElement: () => new Element(),
-    defaultView: { getComputedStyle: () => ({ perspective: '1000px' }) } };
+test('an object sky keeps retained orientation handles and draws no sky images or stars', () => {
   class Element {
     readonly children: Element[] = [];
     readonly style = { setProperty(name: string, value: string) { Object.assign(this, { [name]: value }); } } as unknown as CSSStyleDeclaration;
-    readonly dataset = {};
-    readonly ownerDocument = document;
-    className = ''; ariaHidden = ''; clientWidth = 1440; clientHeight = 900;
-    get childElementCount() { return this.children.length; }
+    className = ''; ariaHidden = ''; removed = false;
     appendChild(child: Element) { this.children.push(child); }
     prepend(child: Element) { this.children.unshift(child); }
-    remove() {}
-    querySelectorAll(selector: string): Element[] {
-      return this.children.flatMap(child => [
-        ...(child.className.split(' ').includes(selector.slice(1)) ? [child] : []),
-        ...child.querySelectorAll(selector),
-      ]);
-    }
+    remove() { this.removed = true; }
   }
-  vi.stubGlobal('document', document);
+  vi.stubGlobal('document', { createElement: () => new Element() });
   vi.stubGlobal('HTMLElement', Element);
-  vi.stubGlobal('ResizeObserver', class { constructor() { observers(); } observe() {} disconnect() {} });
+  const host = new Element();
   const plan = preparedSky as unknown as CubicSkyPlan;
-  const mount = (renderContent: boolean) => mountRetainedCubicSky({ host: new Element() as unknown as HTMLElement,
-    plan, objectId: 'mercury', imageDensity: 2, renderContent });
-  const orientationOnly = mount(false);
-  expect(orientationOnly.faceCount).toBe(0);
-  expect(orientationOnly.retainedStarCount).toBe(0);
-  expect(orientationOnly.starGroup).toBeNull();
-  expect(observers).not.toHaveBeenCalled();
-  const standalone = mount(true);
-  expect(standalone.faceCount).toBe(plan.faces.length);
-  expect(standalone.retainedStarCount).toBe(plan.catalogueStars!.retained.length);
-  expect(observers).toHaveBeenCalledTimes(1);
+  const sky = mountRetainedCubicSky({ host: host as unknown as HTMLElement, plan, objectId: 'mercury' });
+  const node = (element: HTMLElement) => element as unknown as Element;
+  expect(host.children).toEqual([sky.root]);
+  expect(sky.root.className).toBe('planet-cubic-sky mercury-skybox');
+  expect(node(sky.root).children).toEqual([sky.cube]);
+  expect(node(sky.cube).children).toEqual([sky.orientation]);
+  expect(node(sky.orientation).children).toEqual([]);
+  expect(properties(sky.root.style)).toEqual({ '--planet-cubic-sky-camera-distance': plan.projection?.cssPerspective });
   for (const zoom of [1, .5, 3]) {
     const view = { matrix: `rotateY(${zoom * 30}deg)`, zoom, defaultZoom: 1 };
-    orientationOnly.setOrientation(view); standalone.setOrientation(view);
-    expect(orientationOnly.orientation.style).toMatchObject({ transform: view.matrix });
-    expect(properties(orientationOnly.cube.style)).toEqual({});
-    expect(properties(standalone.cube.style)).toEqual({});
-    expect(properties(orientationOnly.root.style)).toEqual(properties(standalone.root.style));
+    sky.setOrientation(view);
+    expect(sky.orientation.style).toMatchObject({ transform: view.matrix });
+    expect(sky.root.style).toMatchObject({ '--planet-cubic-sky-zoom': String(1 + plan.cameraZoomResponse * (zoom - 1)) });
   }
-  orientationOnly.destroy(); standalone.destroy();
+  expect(() => sky.setOrientation({ matrix: 'none', zoom: Number.NaN, defaultZoom: 1 })).toThrow(TypeError);
+  sky.destroy();
+  expect(node(sky.root).removed).toBe(true);
 });
 
 function properties(style: CSSStyleDeclaration) {

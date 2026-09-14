@@ -11,7 +11,7 @@ import type { PreparedWorldCameraFrame } from '../../../src/renderers/css/naviga
 import type { SharedView } from '../../../src/renderers/css/navigation/view-url.js';
 import { contextMarkerSprite } from '../../../src/navigation/marker-presentation.mts';
 import { PREPARED_NAVIGATION_MARKERS } from '../../../site/prepared-navigation-markers.mjs';
-import type { OrbitSegment } from '../../../src/renderers/css/solar-system/heliocentric-view.js';
+import type { OrbitSegment } from '../../../src/renderers/css/solar-system/types.js';
 import type { NativeCameraRotation } from './native-camera.mts';
 import { prepareNativeOrbitCulling,nativeOrbitCullingCss } from './orbit-culling.mts';
 import { BODY_INDICATOR_DIAMETER } from '../../../src/renderers/css/universe/world-context-planner.js';

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2001-sn263",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dffc8642de605865242a71b6f080ce629e78918ca0e50cae6b607dc5ca1e71a6"
+    "sha256": "38ad5d2995a9802dd7408e90d8048924c1f171c43303460fb430ac7f58462f43"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b3920c2ce6ee6cab620595b6e23cb5f89291189884b99eb98f1da29b429fd4e4",
+      "sha256": "bc46649cf2d534b8bd4f6441b054c64201e96be03570e19a70732b1696a12c99",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asteroid-2001-sn263",
         "displayName": "2001 SN263 Alpha",
         "publicBase": "/scenes/asteroid-2001-sn263/",
-        "distanceAu": 1.9869,
         "raster": {
           "width": 512,
           "height": 256,
@@ -87,20 +86,14 @@
           "sunSource": "Heliocentric placement uses a retained JPL state. The shape is a radar reconstruction from 2008 observations. Published radar and light-curve shape of the primary. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. Rotational phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "daf29d0e523c012e1cafc05bcfb9d4aee946e313ed945bf4f76d1eaae7a3ac24",
+      "sha256": "f95a92880fe94f8fd6389a24ca4ed7a9c8a52fde652faefd6fba502fffcf9edf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -182,12 +175,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -210,12 +197,6 @@
             "role": "facts",
             "description": "Mutual orbits and dynamical limits",
             "href": "https://arxiv.org/abs/1012.2154"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -277,7 +258,7 @@
       "sha256": "887f25fdfb961dd2a4baf8848bfae9aad19192976db3c1df3da7465123e021f2",
       "bytes": 144480,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -302,10 +283,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "daf29d0e523c012e1cafc05bcfb9d4aee946e313ed945bf4f76d1eaae7a3ac24",
-      "bytes": 3484,
+      "sha256": "f95a92880fe94f8fd6389a24ca4ed7a9c8a52fde652faefd6fba502fffcf9edf",
+      "bytes": 3205,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -337,13 +318,13 @@
           "url": "/scenes/asteroid-2001-sn263/asteroid-2001-sn263-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2001-sn263/asteroid-2001-sn263-shape-surface@2x.webp",
           "bytes": 77984,
           "sha256": "d6dc2501a7803fcfdf6d9dc142ea534b170aacb127fd09e463deff60d4684f51",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -374,8 +355,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10489,
-          "sha256": "d00d3f1510af293296d1ce71d2fa5e1491484039b893fec2688b5a7cc1f28793",
+          "bytes": 10370,
+          "sha256": "9220c44fddd279e792088343e9ef5d303c052d68f275a254785d2d36c63d5112",
           "verification": "bytes-verified"
         }
       ],
@@ -410,5 +391,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "asteroid-2001-sn263",
+    "materialSha256": "7dc8a798c5bd604ac7b7e897c5276d1f1849fc4d9fa5a07a19cc5f75c841acb7",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

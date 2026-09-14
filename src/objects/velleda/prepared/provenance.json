@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "velleda",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4838e28c3a2d560c4c08e6ae3e79fd8aa92bd461b3fdc04e509f4d70e7163ab2"
+    "sha256": "53abfabf9ff298071f6a83fee4c0cdaad07c3e2cd37abde5f6ba373adb3ca816"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "56f1533e254242badcb4da96561c0cb3aabee9a6af3014454dec81f6f7d766d3",
+      "sha256": "ee71febd78b1d1e1c027260e1746d193165dd9489918c7be04c4942467da634e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "velleda",
         "displayName": "Velleda",
         "publicBase": "/scenes/velleda/",
-        "distanceAu": 2.43905767386019,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 5958 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a157a01c097ea8d8eeb0ba1b26615af46f37d37e9e29a84575d212194ead7e0f",
+      "sha256": "a446d5db8e38752ab109eef76d72369a9f7e689bfbf9bb741f3de287a52bbd11",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5958"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "78ec4654953bce428c657665cc21c70e933184fdeb4952e7243df70d97be698e",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a157a01c097ea8d8eeb0ba1b26615af46f37d37e9e29a84575d212194ead7e0f",
-      "bytes": 9663,
+      "sha256": "a446d5db8e38752ab109eef76d72369a9f7e689bfbf9bb741f3de287a52bbd11",
+      "bytes": 9384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -427,19 +408,19 @@
           "url": "/scenes/velleda/velleda-elevation-thumbnail.webp",
           "bytes": 5560,
           "sha256": "4479395533118ffeb8dccb69506cebab5ab9105fb3beab39229d11d70abdaca7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/velleda/velleda-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/velleda/velleda-elevation-surface@2x.webp",
           "bytes": 295224,
           "sha256": "6e9d4fdb8e523a9637c378b31b0dd4508610b90aff98df0cf0cb8b5f69a85019",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -477,13 +458,13 @@
           "url": "/scenes/velleda/velleda-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/velleda/velleda-shape-surface@2x.webp",
           "bytes": 211014,
           "sha256": "44194f12aefab1207e801c585ca48a8a8ffd3fbdc5d88499986be61643182bad",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -514,8 +495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7018,
-          "sha256": "0a52f902d8d5888c351745b9a6ed1e39a6fce160992db012dde07e832355e262",
+          "bytes": 6899,
+          "sha256": "16eaaf177bfc661d107fd29b28f4ac537c8d813f72bad8b1c95be5be8531c499",
           "verification": "bytes-verified"
         }
       ],
@@ -575,5 +556,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "velleda",
+    "materialSha256": "c81271ce1ea952db3fae95ff48a4690983c7edfaa95d2b9f8dc97580cb3e005f",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

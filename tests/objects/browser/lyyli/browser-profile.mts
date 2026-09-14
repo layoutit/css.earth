@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/lyyli/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'lyyli',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/lyyli/lyyli-directional-sun.webp",
-      "two": "/scenes/lyyli/lyyli-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/lyyli/lyyli-shape-surface@2x.webp"
   ],

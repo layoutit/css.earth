@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "pyrrhus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fb7ed001616b26aba7494cc148b95300214f173bea4f3fef3634e870967c1751"
+    "sha256": "7ff142521687bc7716376249fe8ac39df57395bf3fb1ad72e642e4d37a992201"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e6654dc65438d01d3139a767b89b701ab8445a33c1746a04225708e14f641a80",
+      "sha256": "b44046e1daa17849881ae917c45fa7e2a1a90e7f2f617279a7b89414fb316e6d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "pyrrhus",
         "displayName": "Pyrrhus",
         "publicBase": "/scenes/pyrrhus/",
-        "distanceAu": 5.198966960927357,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -137,20 +136,14 @@
           "sunSource": "DAMIT model 4373 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0940453572dd07cd5f10270f2dca713c7183afd9b39c2c68a378ff8ca7f8c09c",
+      "sha256": "01bae93245632ecab73a779f6ca7e21a8396e3b9640b669e3656ee01428eb4e4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4373"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -369,7 +350,7 @@
       "sha256": "f48628b4019c5f747601fc0b9b289dd0ff7f53eaa8251cd5b762d2763069d0f0",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -394,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0940453572dd07cd5f10270f2dca713c7183afd9b39c2c68a378ff8ca7f8c09c",
-      "bytes": 9395,
+      "sha256": "01bae93245632ecab73a779f6ca7e21a8396e3b9640b669e3656ee01428eb4e4",
+      "bytes": 9115,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -429,19 +410,19 @@
           "url": "/scenes/pyrrhus/pyrrhus-elevation-thumbnail.webp",
           "bytes": 6148,
           "sha256": "e3131a410cbb8ab1ebac8e664c2d1dc2d00ae00334a04c8a34f84ce2dc40b454",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pyrrhus/pyrrhus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pyrrhus/pyrrhus-elevation-surface@2x.webp",
           "bytes": 289352,
           "sha256": "8b073e6a0a1fc4a3f818c4f6b1cc7f4adaff987fa5701d3e622bba82bc609980",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -479,13 +460,13 @@
           "url": "/scenes/pyrrhus/pyrrhus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pyrrhus/pyrrhus-shape-surface@2x.webp",
           "bytes": 228742,
           "sha256": "220fc8a607f9691a2b19df75935a51b417f737331963204d20953ac23275c143",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -516,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6427,
-          "sha256": "132782523ae14b20b09b1d9bce9fb00ef4aa763179db1e751bb27d13a7bfe36f",
+          "bytes": 6308,
+          "sha256": "8b7ac29eb8f6d8aeff8408c6aae4cd6904c40f60545b86361f8487f38d3f8a35",
           "verification": "bytes-verified"
         }
       ],
@@ -577,5 +558,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "pyrrhus",
+    "materialSha256": "c24590b17f81b186af733b1cec55bd3bee427a56413979a46400d251913dfff6",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }

@@ -29,18 +29,16 @@ export interface PreparedContractVariant extends Omit<PreparedVariant, "navigati
   navigation?: { maximumZoom: number; camera: NonNullable<PreparedSelectionNavigation["camera"]> | null };
   materials: readonly (PreparedMaterialSelection & { frameOverride: number | null })[];
 }
-export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema" | "id" | "controls" | "sky" | "sun" | "materials" | "variants" | "animations" | "pageLayers" | "destinations" | "heliocentricView"> & {
+export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema" | "id" | "controls" | "sky" | "sun" | "materials" | "variants" | "animations" | "pageLayers" | "destinations"> & {
   schema: string; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan | null;
   materials: readonly PreparedContractTrack[]; variants: readonly PreparedContractVariant[];
   animations: readonly (Omit<PreparedPresentationDefinition["animations"][number], "keyframes"> & { keyframes: { offset: number; transform: string }[] })[];
   pageLayers?: readonly (Omit<PreparedPageLayer, "plan"> & { plan: { schema: string; assetPath: string } })[];
   destinations?: { catalog: { url: string; bytes: number; count: number; sha256: string }; defaultLens: string; statuses: { detail: string; overview: string } };
-  heliocentricView?: NonNullable<ObjectRuntimeDefinition["heliocentricView"]>;
 };
 import { requireObjectControls } from "../../site/scene-contract.mts";
 import { validatePreparedCubicSky } from "./cubic-sky-contract.mts";
 import { validateDirectionalSunPlan } from "./directional-sun-contract.mts";
-import { validatePreparedHeliocentricView } from "./heliocentric-view.mts";
 
 import { PREPARED_PRESENTATION_SCHEMA } from "./prepared-schema.mts";
 export { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA } from "./prepared-schema.mts";
@@ -81,14 +79,13 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   const controls = requireObjectControls(options.controls);
   const assets = options.assets ?? plan?.assets;
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView", "surfaceHit", "textureLevels", "features"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "pageLayers", "surfaceHit", "textureLevels", "features"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
-  validatePreparedCubicSky(plan.sky, { requireSun: false });
+  validatePreparedCubicSky(plan.sky);
   if (plan.sun !== null) validateDirectionalSunPlan(plan.sun);
   if (!(plan.camera?.sceneScale > 0) || !(plan.camera.minimumZoom > 0) || !(plan.camera.maximumZoom >= plan.camera.minimumZoom)) fail("camera plan is incomplete");
-  if (plan.heliocentricView !== undefined) heliocentricView(plan.heliocentricView, plan);
   if (!isArray(assets?.entries)) fail("resource catalog is missing");
   const resources = new Set(assets.entries.map(entry => entry.key));
   if (plan.textureLevels !== undefined) requireTextureLevels(plan.textureLevels, plan.variants, resources);
@@ -500,34 +497,4 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     }
   }
   return plan;
-}
-
-// The Sun as real geometry with the body's orbit (see heliocentric-view.mjs):
-// needs the observed Sun plan for its direction and sprite, the perspective
-// camera that frames by dolly, and the shell's own navigation sprite as the
-// far-view marker. A planetary system needs one sprite per prepared body and
-// the Sun from the same atlas, and a phase atlas; captions need a policy and
-// a name for every body drawn.
-function heliocentricView(value: NonNullable<ObjectRuntimeDefinition["heliocentricView"]>, plan: PreparedPresentationContract) {
-  record(value, "heliocentric view", ["plan", "bodyMarker", "systemMarkers", "labels"]);
-  const { plan: view, bodyMarker, systemMarkers, labels } = value;
-  validatePreparedHeliocentricView(view);
-  const nonempty = (text: unknown) => typeof text === "string" && text.length > 0;
-  const sprite = (marker: { index: number; count: number; size: number; url?: string } | undefined) => marker !== undefined && Number.isSafeInteger(marker.index) && marker.index >= 0 &&
-    Number.isSafeInteger(marker.count) && marker.count > marker.index && marker.size > 0 &&
-    (marker.url === undefined || nonempty(marker.url));
-  if (plan.sun == null || plan.camera.projection?.model !== "css-perspective-shared-with-sky" ||
-      !nonempty(bodyMarker?.url) || !sprite(bodyMarker)) {
-    fail("a heliocentric view requires the observed Sun plan, a perspective camera and the shell's body marker");
-  }
-  const bodyIds = view.system === undefined ? [] : view.system.bodies.map(body => body.id);
-  if (labels !== undefined && (labels === null || typeof labels.policy !== "object" || typeof labels.names !== "object" ||
-      (view.system !== undefined && (!nonempty(labels.names.sun) || bodyIds.some(id => !nonempty(labels.names[id])))))) {
-    fail("captions require a policy and a name for the observer, the Sun and every system body");
-  }
-  if (view.system !== undefined && (!systemMarkers || !nonempty(systemMarkers.url) || !sprite(systemMarkers.sun) ||
-      bodyIds.some(id => !sprite(systemMarkers.bodies?.[id])) ||
-      !nonempty(systemMarkers.phase?.url) || !(systemMarkers.phase.frameCount > 1))) {
-    fail("a prepared planetary system requires a shell marker for the Sun and every body, and a phase atlas");
-  }
 }

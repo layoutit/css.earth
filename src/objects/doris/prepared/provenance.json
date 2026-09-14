@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "doris",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fc8449ee3994bff084f3967e9d337209f4c33fe348061176420be47151e8a28c"
+    "sha256": "8fd743bb41d51abbeac07bd82249cfdac95cd10a4b35238ad2643fe014442f13"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,14 +15,13 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8f09ceb74b5ba0265b21777c9e4b4a25e73de2a79912de29d411e219fe9b27f5",
+      "sha256": "83642a61748ea7407dae7f54c28d23b8daddcf8884e4e216ce6f5f503ef57efe",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "doris",
         "displayName": "Doris",
         "publicBase": "/scenes/doris/",
-        "distanceAu": 3.11379567922407,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 1845 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "65f261e2f8dde7a25e234c7ea5769388671d035a218397da06656f35e491eae7",
+      "sha256": "34b4d79764769bb387ebf7ef20203ca2742a08b4a6d99f8e2d2df00d066e89a6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1845"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "f0adb78ace9a78951e51b9ab2a9b2618d4c09faca0b886d5ed798a00cdf6f671",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "65f261e2f8dde7a25e234c7ea5769388671d035a218397da06656f35e491eae7",
-      "bytes": 6425,
+      "sha256": "34b4d79764769bb387ebf7ef20203ca2742a08b4a6d99f8e2d2df00d066e89a6",
+      "bytes": 6146,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -391,19 +372,19 @@
           "url": "/scenes/doris/doris-elevation-thumbnail.webp",
           "bytes": 5694,
           "sha256": "b51fbb202d69b17a9452936e3515e152ec57b54a33defedd00a6e7c9d0923c36",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/doris/doris-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/doris/doris-elevation-surface@2x.webp",
           "bytes": 313680,
           "sha256": "ae3223fce187c8525fc2a5d28cdbd558432aba35c2a23dc0795fc33b4c852f04",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -441,13 +422,13 @@
           "url": "/scenes/doris/doris-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/doris/doris-shape-surface@2x.webp",
           "bytes": 203728,
           "sha256": "df72830003dadffdbb63216f7e984cab5b41cb3d60242cfaa8c311fbeb9e0e38",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -478,8 +459,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4273,
-          "sha256": "bd8be71f1efef5d54f5a5b8dfd571fc3e9234b0ff8257b2d9a73662e15259f98",
+          "bytes": 4154,
+          "sha256": "0807a490cb4c0c3aa0fa67d192f5c1b5eda97c9b5368b471974f4c5643770419",
           "verification": "bytes-verified"
         }
       ],
@@ -539,5 +520,14 @@
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
     "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "doris",
+    "materialSha256": "01f148c02ba0c919ea9567fafd9bbd52562dfbe0206009385d438afb403bf058",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
+      "bindingsSha256": "162cc53937bf883decbf20ec4a469a22090e3af18ffdad7e254ec2e101c36726"
+    }
   }
 }
