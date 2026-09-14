@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="herculina"])[data-lod="billboard"] .herculina-scene, .planet-stage:where([data-object-id="herculina"])[data-lod="marker"] .herculina-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="herculina"])[data-lod="marker"] .herculina-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="herculina"]).herculina-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

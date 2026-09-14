@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="weringia"])[data-lod="billboard"] .weringia-scene, .planet-stage:where([data-object-id="weringia"])[data-lod="marker"] .weringia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="weringia"])[data-lod="marker"] .weringia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="weringia"]).weringia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

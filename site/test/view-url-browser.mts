@@ -144,13 +144,6 @@ async function settled(page: Page) {
     const state = window.__cssearthTest.object('mercury').camera.stats().dragInertia;
     return !state.active && !state.wheelZoom.active;
   }, null, { timeout: 10000 });
-  await page.waitForFunction(() => {
-    const stars = window.__cssearthTest.object('mercury').sky.state().captions?.stars;
-    if (!stars) return false;
-    const slot = stars.slots[0];
-    if (!slot) return false;
-    return slot.alpha === slot.target && (stars.accepted ? slot.occupant === `3:${stars.candidate?.id}` : slot.occupant === null);
-  }, null, { timeout: 3000 });
   await page.waitForTimeout(220);
 }
 async function drag(page: Page, from: readonly [number, number], to: readonly [number, number]) {
@@ -180,13 +173,12 @@ async function read(page: Page) {
     const api = window.__cssearthTest.object("mercury"), camera = window.__cssearthTest.physicalCamera("mercury"), playback = api.runtime.playback();
     const sky = api.sky.state(), lighting = window.__cssearthTest.record(api.material.state().lighting, "lighting material");
     const matrix = (selector: string) => Array.from(new DOMMatrix(window.__cssearthTest.html(selector).style.transform).toFloat64Array());
-    const sun = window.__cssearthTest.html(".mercury-directional-sun"), material = window.__cssearthTest.html(".mercury-material");
+    const material = window.__cssearthTest.html(".mercury-material");
     return { camera: { controlPitch: camera.controlPitch, controlYaw: camera.controlYaw, zoom: camera.zoom,
       distanceKilometers: camera.distanceKilometers, pose: camera.pose },
     derivedSky: window.__cssearthTest.required(api.runtime.view(), "published view").skyboxMatrix,
     rendered: { scene: matrix(".mercury-scene"), sky: matrix(".mercury-skybox-orientation"),
-      sun: { direction: window.__cssearthTest.required(sky.sunViewDirection, "sun direction"), visible: sky.sunVisible, classification: sky.sunClassification,
-        centerNdc: sky.sunCenterNdc, spriteDiameter: sky.sunSpriteDiameter, hidden: sun.hidden, transform: sun.style.transform },
+      sun: { direction: window.__cssearthTest.required(sky.sunViewDirection, "sun direction"), visible: sky.sunVisible },
       lighting: { bank: lighting.bank, frame: lighting.frame, image: material.style.backgroundImage, transform: material.style.transform } },
     playback: { times: playback.animations.filter(animation => animation.mode === "motion").map(animation => window.__cssearthTest.number(animation.currentTime, "motion animation time")),
       speed: playback.speed, motionRequested: window.__cssearthTest.scene().playback.motionRequested,

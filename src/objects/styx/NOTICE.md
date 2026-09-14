@@ -9,7 +9,6 @@ Observational research: NASA/Johns Hopkins University Applied Physics
 Laboratory/Southwest Research Institute; New Horizons LORRI; NASA Planetary Data
 System. No observational image is used as the modeled surface texture.
 
-Historical rotation: Weaver et al. (2016), DOI 10.1126/science.aae0030.
-Facts: NASA Science. Milky Way: ESO/S. Brunier, CC BY 4.0. Title font:
-Inter by Rasmus Andersson, SIL Open Font License 1.1. Full records accompany the
-source manifest and starfield license files.
+Historical rotation: Weaver et al. (2016), DOI 10.1126/science.aae0030. Facts:
+NASA Science. Title font: Inter by Rasmus Andersson, SIL Open Font License 1.1.
+Full records accompany the source manifest.

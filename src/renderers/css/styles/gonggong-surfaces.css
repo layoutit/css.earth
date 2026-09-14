@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="gonggong"])[data-lod="billboard"] .gonggong-scene, .planet-stage:where([data-object-id="gonggong"])[data-lod="marker"] .gonggong-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="gonggong"])[data-lod="marker"] .gonggong-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="gonggong"]).gonggong-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

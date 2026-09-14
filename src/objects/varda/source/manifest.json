@@ -2,33 +2,6 @@
   "schema": "cssvarda-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/varda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -121,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3757,
-      "expectedSha256": "cbd0f0d92037fdba099ce40c9fbd59b4182dee9e3a51538a585d89b3c3e9485c",
+      "expectedBytes": 3477,
+      "expectedSha256": "f953c1e5a336e0e3a5380a688346e5e919a019d047ea1df6ea1da94b78d788b6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -135,8 +108,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 929,
-      "expectedSha256": "79efbccb83f82a2eea642a2199d8dc9d52e0391ad80dd4a898be19d70033d79a"
+      "expectedBytes": 726,
+      "expectedSha256": "57ce2544c90e355a75db9df3514bedbabd6ece2467c5d1297d214b00e05adabf"
     },
     {
       "path": "preparation/navigation.json",
@@ -150,8 +123,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2759,
-      "expectedSha256": "cb40f9146eda4fc7b6b7c2eeab6958a80a20c919a05a634e71bd68dafb5d1ec4"
+      "expectedBytes": 2604,
+      "expectedSha256": "0f4dfe2894fbc734f54b79f3377cd2bcb8425d1bd07ef07c7ff3d6a2c4ba4f0a"
     },
     {
       "path": "presentation/minimap.json",
@@ -182,21 +155,6 @@
       "path": "reference/varda-souami-2020.pdf",
       "expectedBytes": 7602546,
       "expectedSha256": "f5f69964b4d8e9778fcbdf3b834fc9aacb296990bf3ae5659c505781c1f080dc"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 848,
-      "expectedSha256": "8b230967da728a8190785d0b960d3769e5f4850bf2fe9e612b4bdfa507915c10"
     }
   ],
   "generatedIntermediates": [

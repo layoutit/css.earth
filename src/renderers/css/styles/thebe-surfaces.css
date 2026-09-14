@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="thebe"])[data-lod="billboard"] .thebe-scene, .planet-stage:where([data-object-id="thebe"])[data-lod="marker"] .thebe-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="thebe"])[data-lod="marker"] .thebe-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="thebe"]).thebe-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

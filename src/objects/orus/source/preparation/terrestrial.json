@@ -4,7 +4,6 @@
   "namespace": "orus",
   "displayName": "Orus",
   "publicBase": "/scenes/orus/",
-  "distanceAu": 5.2,
   "raster": {
     "width": 512,
     "height": 256,
@@ -79,12 +78,6 @@
     "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

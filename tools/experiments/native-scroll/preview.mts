@@ -88,7 +88,6 @@ createServer((request, response) => {
       const prepared = descriptor.prepared;
       const definition = await loadPreparedCssObject(descriptor, {
         read: () => read(`/objects/${descriptor.id}/${prepared.sha256}.json`),
-        readShared: reference => read(`/shared/${reference.kind}/${reference.sha256}.json`),
       });
       const viewToken = url.searchParams.get('v');
       let saved = parseSharedView(viewToken === null ? '' : new URLSearchParams({ v: viewToken }).toString());

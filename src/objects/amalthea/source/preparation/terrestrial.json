@@ -4,7 +4,6 @@
   "namespace": "amalthea",
   "displayName": "Amalthea",
   "publicBase": "/scenes/amalthea/",
-  "distanceAu": 5.2,
   "raster": {
     "width": 1024,
     "height": 512,
@@ -228,12 +227,6 @@
     "sunSource": "JPL Jupiter-system ephemeris and IAU/WGCCRE rotation; the PDS Stooke body origin and west-positive longitude are preserved."
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      155,
-      151,
-      146
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

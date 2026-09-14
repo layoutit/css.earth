@@ -1,0 +1,25 @@
+{
+  "schema": "csssiarnaq-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "siarnaq-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "siarnaq-model-shadow@2x.webp",
+      "bytes": 33036,
+      "sha256": "4ba2de91159e01b29cad69e80066f7cb67b9548b8272cb7ca123a3b95d9325ca"
+    },
+    {
+      "filename": "siarnaq-model-surface@2x.webp",
+      "bytes": 55214,
+      "sha256": "475231fd4b70be3b8ed8d0d8050941db662416587884f32f0da74320dec3f009"
+    },
+    {
+      "filename": "siarnaq-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

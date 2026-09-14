@@ -1,12 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parseHTML } from 'linkedom';
-import { readPreparedObjectBytes, readSharedBankBytes } from '../object-page-data.mts';
+import { readPreparedObjectBytes } from '../object-page-data.mts';
 import { renderDatasetResponse } from '../dataset-response.mts';
 import { loadPreparedSceneMarkup } from '../../tools/load-prepared-scene.mts';
 import { handleSearchRequest } from '../search-response.mts';
 import searchRoute from '../../netlify/edge-functions/search-route.ts';
-import { isSharedBankKind } from '../../src/platform/prepared-shared.mts';
 
 const origin = 'https://example.test';
 const scene = await loadPreparedSceneMarkup('saturn');
@@ -20,14 +19,8 @@ ${['normal', 'ultraviolet', 'cross-section'].map(id => `<button type="submit" na
 const read: typeof fetch = async input => {
   const url = new URL(String(input));
   assert.equal(url.origin, origin);
-  if (url.pathname === `/objects/saturn/${scene.sha256}.json`) return new Response(prepared.bytes);
-  const bank = /^\/shared\/([a-z0-9-]+)\/([a-f0-9]{64})\.json$/u.exec(url.pathname);
-  assert.ok(bank, `Only pinned object and bank requests are allowed: ${url.pathname}`);
-  const kind = bank[1];
-  assert.ok(isSharedBankKind(kind));
-  const bytes = await readSharedBankBytes({ kind, sha256: bank[2] });
-  assert.ok(bytes);
-  return new Response(Uint8Array.from(bytes).buffer);
+  assert.equal(url.pathname, `/objects/saturn/${scene.sha256}.json`, 'Only the pinned object request is allowed');
+  return new Response(prepared.bytes);
 };
 test('native selection replaces only the existing prepared presentation and selected controls', async () => {
   for (const id of ['ultraviolet', 'cross-section', 'normal']) {

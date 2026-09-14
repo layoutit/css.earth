@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="augusta"])[data-lod="billboard"] .augusta-scene, .planet-stage:where([data-object-id="augusta"])[data-lod="marker"] .augusta-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="augusta"])[data-lod="marker"] .augusta-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="augusta"]).augusta-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

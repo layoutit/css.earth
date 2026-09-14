@@ -1,0 +1,133 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "local-group",
+  "entries": [
+    {
+      "id": "lvdb-v1.1.1",
+      "subject": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "status": "included",
+      "finding": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. Selected for the use stated in the retained source record; consolidation does not claim a fresh archive or paper review.",
+      "evidence": [
+        "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/local-group/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "lvdb-author-inputs",
+      "subject": "Unmodified author repository v1.1.1, commit 72dabf7862bf9e9f1cbf6846e8c1a684fdec904c. Original per-object YAML and bibliography.",
+      "status": "included",
+      "finding": "Unmodified author repository v1.1.1, commit 72dabf7862bf9e9f1cbf6846e8c1a684fdec904c. Original per-object YAML and bibliography. Selected for the use stated in the retained source record; consolidation does not claim a fresh archive or paper review.",
+      "evidence": [
+        "https://codeload.github.com/apace7/local_volume_database/tar.gz/refs/tags/v1.1.1",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/local-group/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "mcconnachie-table1-2019",
+      "subject": "McConnachie (2012), AJ 144,4, DOI10.1088/0004-6256/144/1/4; author October2019 Table1 update.",
+      "status": "included",
+      "finding": "McConnachie (2012), AJ 144,4, DOI10.1088/0004-6256/144/1/4; author October2019 Table1 update. Selected for the use stated in the retained source record; consolidation does not claim a fresh archive or paper review.",
+      "evidence": [
+        "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/local-group/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "mcconnachie-table1-text",
+      "subject": "Text extracted from the first seven pages of the original October2019 Table1 with pypdf5.9.0; numeric membership classifications unchanged.",
+      "status": "included",
+      "finding": "Text extracted from the first seven pages of the original October2019 Table1 with pypdf5.9.0; numeric membership classifications unchanged. Selected for the use stated in the retained source record; consolidation does not claim a fresh archive or paper review.",
+      "evidence": [
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/nearby/",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/local-group/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "mcconnachie-2021-audit",
+      "subject": "Author January2021 catalogue: independent audit input, no membership column; astrometry here comes from LVDB.",
+      "status": "included",
+      "finding": "Author January2021 catalogue: independent audit input, no membership column; astrometry here comes from LVDB. Selected for the use stated in the retained source record; consolidation does not claim a fresh archive or paper review.",
+      "evidence": [
+        "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/NearbyGalaxies_Jan2021_PUBLIC.fits",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/local-group/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "mcconnachie-2012-audit",
+      "subject": "Original 2012 machine-readable membership table; retained for audit, superseded for selection by author October2019 table.",
+      "status": "included",
+      "finding": "Original 2012 machine-readable membership table; retained for audit, superseded for selection by author October2019 table. Selected for the use stated in the retained source record; consolidation does not claim a fresh archive or paper review.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/table1.dat",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/local-group/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "smc-distance-paper",
+      "subject": "Graczyk et al. (2020), ApJ904,13; DOI10.3847/1538-4357/abbb2b. Original paper supporting the adopted SMC direct distance and separate statistical/systematic errors.",
+      "status": "included",
+      "finding": "Graczyk et al. (2020), ApJ904,13; DOI10.3847/1538-4357/abbb2b. Original paper supporting the adopted SMC direct distance and separate statistical/systematic errors. Selected for the use stated in the retained source record; consolidation does not claim a fresh archive or paper review.",
+      "evidence": [
+        "https://arxiv.org/pdf/2010.08754",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/local-group/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "spatial-display-sample",
+      "subject": "48-point Local Group context display",
+      "status": "included",
+      "finding": "Deterministic 150 kpc cell sampling is a display selection only. The complete catalogue remains available to navigation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/preparation/galaxy-catalog/display-sample.ts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "csspandora-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "pandora-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "pandora-elevation-shadow@2x.webp",
+      "bytes": 255410,
+      "sha256": "ba6e2810d8aa2adfbbf189915c454ca5b0621b47f8a38f4f24e471c835a095ba"
+    },
+    {
+      "filename": "pandora-elevation-surface@2x.webp",
+      "bytes": 480296,
+      "sha256": "08ab99830ba41a39c1673c8c31fb627fb491fa1247dc363148bb17eb09e4de53"
+    },
+    {
+      "filename": "pandora-elevation-thumbnail.webp",
+      "bytes": 5912,
+      "sha256": "1fb7cff18e6eb255ce4127c4de046a37fabff44b3f233101026a82cfd3f2fd02"
+    },
+    {
+      "filename": "pandora-filter-color-shadow@2x.webp",
+      "bytes": 200876,
+      "sha256": "7525dd4f03f50f505e0386236f2f2c65b9d2292d18c64d76d138f38e0f0e33b5"
+    },
+    {
+      "filename": "pandora-filter-color-surface@2x.webp",
+      "bytes": 297782,
+      "sha256": "a39cb6371a1991f21166ee6c9ebe1580480e1a0e57f4df45d5968eff50963934"
+    },
+    {
+      "filename": "pandora-filter-color-thumbnail.webp",
+      "bytes": 2216,
+      "sha256": "c5453fe4dc33644a88f717513d44a00ea894afe08ad4692af3ca4a930e91ddc9"
+    },
+    {
+      "filename": "pandora-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "pandora-normal-shadow@2x.webp",
+      "bytes": 211624,
+      "sha256": "a5a7eb89e40e992aec4cfb3a063cfd8b2e04177baae00551c0b3b031b15ae3df"
+    },
+    {
+      "filename": "pandora-normal-surface@2x.webp",
+      "bytes": 426024,
+      "sha256": "534e83888c1238b7d07c665479ca75f12c57a51494820360a41617dfb841fa15"
+    },
+    {
+      "filename": "pandora-normal-thumbnail.webp",
+      "bytes": 1612,
+      "sha256": "200959bb89f4549238f9ec0dd39071808cf24325217aa1a41f7482e3ebb853b4"
+    }
+  ]
+}

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="alkmene"])[data-lod="billboard"] .alkmene-scene, .planet-stage:where([data-object-id="alkmene"])[data-lod="marker"] .alkmene-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="alkmene"])[data-lod="marker"] .alkmene-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="alkmene"]).alkmene-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

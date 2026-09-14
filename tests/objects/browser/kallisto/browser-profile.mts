@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/kallisto/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'kallisto',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/kallisto/kallisto-directional-sun.webp",
-      "two": "/scenes/kallisto/kallisto-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/kallisto/kallisto-shape-surface@2x.webp"
   ],

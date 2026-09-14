@@ -4,7 +4,6 @@
   "namespace": "asteroid-1994-cc",
   "displayName": "1994 CC Alpha",
   "publicBase": "/scenes/asteroid-1994-cc/",
-  "distanceAu": 1.637667637945242,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -112,12 +111,6 @@
     "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

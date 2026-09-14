@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="dione-106"])[data-lod="billboard"] .dione-106-scene, .planet-stage:where([data-object-id="dione-106"])[data-lod="marker"] .dione-106-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="dione-106"])[data-lod="marker"] .dione-106-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="dione-106"]).dione-106-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

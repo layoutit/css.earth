@@ -6,7 +6,7 @@ import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternio
 import { levelOfDetailFor, orbitLineOpacity } from '../navigation/perspective-dolly.js';
 import { clipSegmentToRectangle, rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
 import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter } from '../solar-system/prepared-ring-projection.js';
-import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
+import type { OrbitSegment } from '../solar-system/types.js';
 import { createWorldFrameProjection } from './world-frame-projection.js';
 
 export const BODY_INDICATOR_DIAMETER = 16;

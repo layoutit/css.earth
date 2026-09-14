@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bestla"])[data-lod="billboard"] .bestla-scene, .planet-stage:where([data-object-id="bestla"])[data-lod="marker"] .bestla-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bestla"])[data-lod="marker"] .bestla-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bestla"]).bestla-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

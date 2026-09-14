@@ -1,0 +1,25 @@
+{
+  "schema": "csshimalia-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "himalia-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "himalia-model-shadow@2x.webp",
+      "bytes": 41884,
+      "sha256": "3279fbca98c3d989d3f61b1cbb9753dfe89df7e736f9eab8fb2efd58dee4dcbd"
+    },
+    {
+      "filename": "himalia-model-surface@2x.webp",
+      "bytes": 57272,
+      "sha256": "13b5839d0f36561cbe7e7a8a7bd9f767490aba1eb0dd80abb3eadb06f1af3ac1"
+    },
+    {
+      "filename": "himalia-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

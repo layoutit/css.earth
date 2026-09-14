@@ -1,0 +1,65 @@
+{
+  "schema": "csssteins-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "steins-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "steins-elevation-shadow@2x.webp",
+      "bytes": 175902,
+      "sha256": "7826d6bea9e9f3795058a69ce761a2ddc368ce8075ed8840700480bbd67f8e15"
+    },
+    {
+      "filename": "steins-elevation-surface@2x.webp",
+      "bytes": 326066,
+      "sha256": "ad844e537f006d2ad48935b7be2ca29f89fd1eb5bc24ac22b2fb21ef7b458f09"
+    },
+    {
+      "filename": "steins-elevation-thumbnail.webp",
+      "bytes": 5488,
+      "sha256": "c08bbe36248074cd7b95ccc68f8af37ad32b32ce305525cee72d46e53efefc87"
+    },
+    {
+      "filename": "steins-features.json",
+      "bytes": 17067,
+      "sha256": "55da6b09e2ece924b9acbad3608143bf84010df77d4a2606ef149422a0e6f541"
+    },
+    {
+      "filename": "steins-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "steins-normal-shadow@2x.webp",
+      "bytes": 292630,
+      "sha256": "00ea918b45d1f1534aafe06fb45d58caf477f3e1eed78f8f2f5b34daa4f33211"
+    },
+    {
+      "filename": "steins-normal-surface@2x.webp",
+      "bytes": 549196,
+      "sha256": "57e0d02efc28bdcff47299bd63b29b776a12a90bc98cef36f498bfee9c083c1a"
+    },
+    {
+      "filename": "steins-normal-thumbnail.webp",
+      "bytes": 3332,
+      "sha256": "ec0458c470557ad861f7b96fcfbcb3b506fb78c696c6fbb7fc7f69d85c07b7a4"
+    },
+    {
+      "filename": "steins-osiris-shadow@2x.webp",
+      "bytes": 177014,
+      "sha256": "35e9a592ccaa7f7276913801c866ba4a1e91b68d945891e102c076f1aad442d2"
+    },
+    {
+      "filename": "steins-osiris-surface@2x.webp",
+      "bytes": 298938,
+      "sha256": "f288d6973feef9a9ec85fbca44a405f36ed203ba5e86505121d443dd84f56232"
+    },
+    {
+      "filename": "steins-osiris-thumbnail.webp",
+      "bytes": 1672,
+      "sha256": "118b33b0b5ae52e2a5beaf35bfb7f08a74af35cbf1209132d304529b848bc208"
+    }
+  ]
+}

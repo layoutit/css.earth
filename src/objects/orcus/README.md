@@ -4,7 +4,7 @@ Orcus is a large resonant world beyond Neptune, partnered with the substantial m
 
 ## Sources
 
-The spherical illustration uses Orcus’s primary-only thermal diameter, **910 +50/−40 km**. ALMA separated the binary components, allowing their thermal fluxes to be modeled separately instead of using a system-equivalent diameter. The **Shape model** uses the normal unmapped-surface grid. Shadows and Orbit default off.
+The spherical illustration uses Orcus’s primary-only thermal diameter, **910 +50/−40 km**. ALMA separated the binary components, allowing their thermal fluxes to be modeled separately instead of using a system-equivalent diameter. The **Shape model** uses the normal unmapped-surface grid. Shadows defaults off.
 
 | Source | Used for |
 | --- | --- |

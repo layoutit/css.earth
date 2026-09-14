@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="eunomia"])[data-lod="billboard"] .eunomia-scene, .planet-stage:where([data-object-id="eunomia"])[data-lod="marker"] .eunomia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="eunomia"])[data-lod="marker"] .eunomia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="eunomia"]).eunomia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="johanna"])[data-lod="billboard"] .johanna-scene, .planet-stage:where([data-object-id="johanna"])[data-lod="marker"] .johanna-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="johanna"])[data-lod="marker"] .johanna-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="johanna"]).johanna-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

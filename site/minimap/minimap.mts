@@ -132,7 +132,7 @@ export function mountSpaceMinimap(documentTarget: Document) {
       }
       setData('radiusM', String(rangeM));
       setData('centerM', centerM.join(','));
-      setData('scope', galaxyFade > 0 ? 'galaxy' : rangeM > 1e16 ? 'stellar' : 'system');
+      setData('scope', rangeM >= 5e6 * 3.085677581491367e16 ? 'nearby-universe' : rangeM >= 1e5 * 3.085677581491367e16 ? 'local-group' : galaxyFade > 0 ? 'galaxy' : rangeM > 1e16 ? 'stellar' : 'system');
       let visibleBodies = 0;
       const [cx, cy, cz] = centerM;
       const [m0, m1, m2, m3, m4, m5] = referenceToCamera;
@@ -148,7 +148,11 @@ export function mountSpaceMinimap(documentTarget: Document) {
         const projection = projected[index];
         projection.x = (m0 * dx + m1 * dy + m2 * dz) * scale;
         projection.y = (m3 * dx + m4 * dy + m5 * dz) * scale;
-        projection.alpha = baseOpacity[index] * Math.min(1, (1 - fraction) / .06);
+        const classification = prepared.points[index].classification;
+        const startM = classification === 'galaxy' ? 1e5 * 3.085677581491367e16 : classification === 'galaxy-cluster' ? 5e6 * 3.085677581491367e16 : 0;
+        const scaleOpacity = startM > 0 ? Math.max(0, Math.min(1, Math.log2(rangeM / startM))) : 1;
+        if (scaleOpacity === 0) continue;
+        projection.alpha = baseOpacity[index] * Math.min(1, (1 - fraction) / .06) * scaleOpacity;
         included[index] = 1;
         visibleBodies++;
       }

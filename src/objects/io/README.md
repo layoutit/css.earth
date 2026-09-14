@@ -92,7 +92,7 @@ Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif
 
 <a id="io-sources-and-preparation"></a>
 
-Io is Jupiter's innermost Galilean moon. The scene uses the shared standalone object runtime, camera, shell and prepared lighting. Jupiter is a sourced distant parent marker in Io's system context; it is not another mounted surface scene.
+Io is Jupiter's innermost Galilean moon. The scene uses the shared standalone object runtime, camera, shell and prepared lighting.
 
 ## Body and frame
 
@@ -125,7 +125,7 @@ Pole sprite dimensions, geometry, scientific maps and lighting are unchanged.
 Canonical assets are selected once per mount, independently of DPR. Runtime only
 decodes and transports prepared assets.
 
-The shared source-driven parent-marker operation prepares an independent 1024-pixel Hubble Jupiter image from the source entry in this package, so Io can be installed without Jupiter's surface package. Shared sky inputs are ESO/S. Brunier's Milky Way panorama and the HYG catalogue; their attribution files accompany the source manifest. Inter provides prepared title outlines.
+Inter provides prepared title outlines.
 
 Source restoration and prepared runtime installation are separate. The runtime inventory binds all assets needed by this package; installing prepared assets does not require acquiring the source GeoTIFFs.
 
@@ -133,7 +133,7 @@ Source restoration and prepared runtime installation are separate. The runtime i
 
 This package contains authored JSON recipes, source provenance, and generated JSON. Reusable observation masking, projection, lighting, celestial, and retained-scene operations live in `tools/objects/terrestrial-layers/`; no package-local executable preparer or runtime is required.
 
-Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. Lighting stays lossless.
 
 ## Interpreted geology
 
@@ -152,6 +152,6 @@ Every conversion is offline; the scene geometry remains unchanged.
 <details>
 <summary>Shape, rotation and camera on the shared raster lane</summary>
 
-The recipe declares a sphere of 1821.49 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 1.7627-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera). The heliocentric view keeps the orbit around Jupiter and the parent marker now comes from the shared navigation atlas.
+The recipe declares a sphere of 1821.49 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 1.7627-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera).
 
 </details>

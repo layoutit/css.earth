@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="erigone"])[data-lod="billboard"] .erigone-scene, .planet-stage:where([data-object-id="erigone"])[data-lod="marker"] .erigone-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="erigone"])[data-lod="marker"] .erigone-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="erigone"]).erigone-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

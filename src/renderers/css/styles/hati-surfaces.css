@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hati"])[data-lod="billboard"] .hati-scene, .planet-stage:where([data-object-id="hati"])[data-lod="marker"] .hati-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hati"])[data-lod="marker"] .hati-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hati"]).hati-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

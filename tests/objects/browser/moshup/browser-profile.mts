@@ -1,12 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/moshup/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'moshup',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/moshup/moshup-directional-sun.webp",
-      "two": "/scenes/moshup/moshup-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
     "/scenes/moshup/moshup-shape-surface@2x.webp"
   ],

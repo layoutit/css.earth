@@ -1,0 +1,25 @@
+{
+  "schema": "cssthalassa-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "thalassa-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "thalassa-model-shadow@2x.webp",
+      "bytes": 33668,
+      "sha256": "04d9bfc75086bc7a1f9069deac1cd1c4d1c82aa62ca739abe188b9228713eac5"
+    },
+    {
+      "filename": "thalassa-model-surface@2x.webp",
+      "bytes": 45126,
+      "sha256": "ecb4f801a198c7efc0d6444f4b84643919a443c312e0f763502ecbc066d28986"
+    },
+    {
+      "filename": "thalassa-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "baselineCommit": "e4dfae5485b0aeeb88485531387366e886f43ef4",
+  "baselineManifestSha256": "30763291657203350987b9f16ca2b815a47754fdb581d848cb3b698488db10a3",
+  "comparison": "Exact parsed equality for frame, point positions/colors/brightness and cloud positions/covariances/brightness; only resource metadata added.",
+  "equal": {
+    "frame": true,
+    "points": true,
+    "clouds": true
+  },
+  "points": 1800,
+  "clouds": 160,
+  "scope": "Working-tree contract migration relative to PR215 initial commit; not scientific completeness or visual qualification."
+}

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ajax"])[data-lod="billboard"] .ajax-scene, .planet-stage:where([data-object-id="ajax"])[data-lod="marker"] .ajax-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ajax"])[data-lod="marker"] .ajax-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ajax"]).ajax-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -4,7 +4,6 @@
   "namespace": "comet-162p",
   "displayName": "Siding Spring",
   "publicBase": "/scenes/comet-162p/",
-  "distanceAu": 3.091276774723207,
   "raster": {
     "width": 512,
     "height": 256,
@@ -110,12 +109,6 @@
     "qualification": "A smooth approximation of the published proportions. Its thickness is uncertain. The grid marks missing surface imagery; it does not show terrain. Rotation phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      184,
-      182,
-      178
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

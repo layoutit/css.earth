@@ -3,10 +3,6 @@ import objectControls from '../../../../src/objects/dinkinesh/prepared/controls.
 export const browserProfile = createObjectBrowserProfile({
   id: 'dinkinesh', controls: objectControls,
   audit: {
-    preparedAssetPairs: [{
-      one: '/scenes/dinkinesh/dinkinesh-directional-sun.webp',
-      two: '/scenes/dinkinesh/dinkinesh-directional-sun@2x.webp',
-    }],
     canonicalPreparedAssets: [
       '/scenes/dinkinesh/dinkinesh-tempest-shape-surface@2x.webp',
     ],

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="lucia"])[data-lod="billboard"] .lucia-scene, .planet-stage:where([data-object-id="lucia"])[data-lod="marker"] .lucia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="lucia"])[data-lod="marker"] .lucia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="lucia"]).lucia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

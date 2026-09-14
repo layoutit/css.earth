@@ -2,33 +2,6 @@
   "schema": "csschariklo-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/chariklo/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -130,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4548,
-      "expectedSha256": "e1aa07bdf5d512a54c576a01ee3bf3325003f8a32439588012d77483e27cafc6",
+      "expectedBytes": 4268,
+      "expectedSha256": "9af454bf25063184e29f52182b36bee777ba42afc281a5e3754ae695ab2c1442",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -144,8 +117,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
+      "expectedBytes": 304,
+      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
     },
     {
       "path": "preparation/navigation.json",
@@ -159,8 +132,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4367,
-      "expectedSha256": "d8c62ed0f5d34661c9621e71609d304c1a6e09a49b2e898e25fce48f9dce1b3f"
+      "expectedBytes": 4212,
+      "expectedSha256": "ad70fadd1a15a701d71adb582909b9fecf0928e6d64aae1f2933d6f7f7a095e3"
     },
     {
       "path": "presentation/minimap.json",
@@ -176,21 +149,6 @@
       "path": "rings/occultation-2022.json",
       "expectedBytes": 1862,
       "expectedSha256": "4ea83e2dcb08fdefb3f2b13625b711e21fdc1cb7fb40f9f8926b9252d2254d3f"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 851,
-      "expectedSha256": "17d21d3fdb71786d3ff357844af952bf6ab2815da91597615a015fdd354c3798"
     }
   ],
   "generatedIntermediates": [

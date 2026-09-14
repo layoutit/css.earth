@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hypatia"])[data-lod="billboard"] .hypatia-scene, .planet-stage:where([data-object-id="hypatia"])[data-lod="marker"] .hypatia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hypatia"])[data-lod="marker"] .hypatia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hypatia"]).hypatia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

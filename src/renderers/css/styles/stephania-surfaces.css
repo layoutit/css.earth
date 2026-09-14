@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="stephania"])[data-lod="billboard"] .stephania-scene, .planet-stage:where([data-object-id="stephania"])[data-lod="marker"] .stephania-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="stephania"])[data-lod="marker"] .stephania-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="stephania"]).stephania-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

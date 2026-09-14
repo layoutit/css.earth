@@ -1,0 +1,25 @@
+{
+  "schema": "csskerberos-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "kerberos-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "kerberos-model-shadow@2x.webp",
+      "bytes": 35476,
+      "sha256": "af75a8b5ff052f495b2a15271f3dbceba446840c02056e5b76c37799638d369b"
+    },
+    {
+      "filename": "kerberos-model-surface@2x.webp",
+      "bytes": 49180,
+      "sha256": "e4a99e6f5d917642326b8a2799ecd497503d4c18d2aa0c12c95bfb61473103e9"
+    },
+    {
+      "filename": "kerberos-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

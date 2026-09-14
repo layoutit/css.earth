@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { mountPreparedOrbitLines, ORBIT_OPACITY_LEVELS } from './prepared-orbit-lines.js';
-import type { OrbitSegment } from './heliocentric-view.js';
+import type { OrbitSegment } from './types.js';
 
 class FakeElement {
   readonly children: FakeElement[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};

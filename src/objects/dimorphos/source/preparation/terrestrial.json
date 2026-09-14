@@ -4,7 +4,6 @@
   "namespace": "dimorphos",
   "displayName": "Dimorphos",
   "publicBase": "/scenes/dimorphos/",
-  "distanceAu": 1.6427722213006,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -310,12 +309,6 @@
     "sunSource": "JPL Horizons post-impact orbit; observed pole with arbitrary display phase. DART 2022 shape, not a post-impact terrain reconstruction."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

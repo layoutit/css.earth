@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="loreley"])[data-lod="billboard"] .loreley-scene, .planet-stage:where([data-object-id="loreley"])[data-lod="marker"] .loreley-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="loreley"])[data-lod="marker"] .loreley-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="loreley"]).loreley-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

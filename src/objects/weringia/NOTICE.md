@@ -6,4 +6,4 @@ Shape and derived geometry: DAMIT CC BY 4.0, https://creativecommons.org/license
 
 AKARI AcuA: ISAS/JAXA and Usui et al. (2011), PASJ 63, 1117–1138. Retain the source catalog attribution; see the [ISAS data policy](https://www.isas.jaxa.jp/en/researchers/data-policy/).
 
-Background: ESO/S. Brunier, CC BY 4.0. Star data: HYG, see source/stars/LICENSE.md. Title: Inter Project Authors / Rasmus Andersson, SIL Open Font License 1.1.
+Title: Inter Project Authors / Rasmus Andersson, SIL Open Font License 1.1.

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="salacia"])[data-lod="billboard"] .salacia-scene, .planet-stage:where([data-object-id="salacia"])[data-lod="marker"] .salacia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="salacia"])[data-lod="marker"] .salacia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="salacia"]).salacia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

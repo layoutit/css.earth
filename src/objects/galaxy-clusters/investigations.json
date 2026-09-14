@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "galaxy-clusters",
+  "entries": [
+    {
+      "id": "mcxc-ii",
+      "subject": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187",
+      "status": "included",
+      "finding": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187 Selected for the use stated in the retained source record; consolidation does not claim a fresh archive or paper review.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/galaxy-clusters/source/provenance.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    }
+  ]
+}

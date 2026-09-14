@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m31",
+  "entries": [
+    {
+      "id": "lens-optical",
+      "subject": "Publisher optical display image",
+      "status": "included",
+      "finding": "High-resolution crop/resample derived offline from the publisher Large JPEG. Selected for image-layer display. The wide DSS2 field contains the full visible galaxy and substantial surrounding sky, foreground stars and background objects. Those released sources are retained. Faint halo coverage is limited by the survey composite. This ledger consolidates existing records; no fresh source survey or visual qualification was performed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/m31/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/m31/source/recipe.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "parametric-depth",
+      "subject": "Parametric image-layer geometry",
+      "status": "included",
+      "finding": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth. Adopted thickness: 1 kpc. The cited geometry reference is Chemin, Carignan & Foster 2009, arXiv:0909.3846. Selection does not independently qualify those adopted values.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/m31/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/m31/source/recipe.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ]
+    },
+    {
+      "id": "scientific-registration",
+      "subject": "Source fields, coordinate registration and depth evidence",
+      "status": "unresolved",
+      "finding": "The retained records identify geometry references but do not preserve exact paper table/section locators, uncertainty and coordinate epoch for every adopted placement or orientation value. Observation dates and an independent crop/sky registration comparison are not recorded. No measured three-dimensional reconstruction is established.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/m31/source/provenance.json",
+        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/m31/source/recipe.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
+        }
+      ],
+      "revisitWhen": "A qualification task supplies the original metadata or paper fields and an independent registration comparison for these exact inputs."
+    }
+  ]
+}

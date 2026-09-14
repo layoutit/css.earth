@@ -1,0 +1,25 @@
+{
+  "schema": "cssvarda-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "varda-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "varda-model-shadow@2x.webp",
+      "bytes": 43704,
+      "sha256": "30415ed553f9eb20dbdaec783f8387d2b0da5696e4fa14f4e6ffbda45c9f0eeb"
+    },
+    {
+      "filename": "varda-model-surface@2x.webp",
+      "bytes": 49844,
+      "sha256": "aab83d0fe89bd5c2283d521f50c6486cc985a171ca1eef213b6607a18f7788c5"
+    },
+    {
+      "filename": "varda-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

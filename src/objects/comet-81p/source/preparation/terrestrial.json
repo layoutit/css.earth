@@ -4,7 +4,6 @@
   "namespace": "comet-81p",
   "displayName": "Wild 2",
   "publicBase": "/scenes/comet-81p/",
-  "distanceAu": 3.4501886283432213,
   "raster": {
     "width": 512,
     "height": 256,
@@ -168,12 +167,6 @@
     "qualification": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      184,
-      182,
-      178
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

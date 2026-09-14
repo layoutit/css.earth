@@ -139,33 +139,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Run node src/objects/ganymede/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -188,34 +161,6 @@
             "catalogueId": "inter-9221beed3",
             "role": "method",
             "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
-          }
-        ]
-      }
-    },
-    {
-      "path": "system/jupiter-hubble.png",
-      "expectedBytes": 1166501,
-      "expectedSha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
-      "origin": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
-      "credit": "NASA, ESA, STScI, and Amy Simon",
-      "license": "NASA media usage guidelines and credited partner rights",
-      "id": "jupiter-hubble-parent",
-      "bodyId": "jupiter",
-      "consumers": [
-        "parent-marker"
-      ],
-      "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
-      ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
-      "redistribution": "Credited prepared observational image; source binary excluded from Git.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hubble-jupiter-2024-01-05",
-            "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
           }
         ]
       }
@@ -697,33 +642,6 @@
       }
     },
     {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 851,
-      "expectedSha256": "e6871a57d3f93c9957cc3a00415090221a13764647b45bddabad3199e15165c4",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
-          }
-        ]
-      }
-    },
-    {
       "id": "ganymede-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 5805,
@@ -753,8 +671,8 @@
     {
       "id": "ganymede-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1623,
-      "expectedSha256": "b383792c26a9347aa7730d98e43020200ddeba7bd0528da8253c30292c076062",
+      "expectedBytes": 278,
+      "expectedSha256": "41377b320f282dc93d209b7303847a92c63986b073c7e29e0e9e2d6d97fbb6cd",
       "origin": "Repository-authored Ganymede solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -812,8 +730,8 @@
     {
       "id": "ganymede-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 225,
-      "expectedSha256": "8cc8c7fa97d83204fc4f1e0ca20e7fc2f2bff7a34aeff7d0259b597774af3599",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Ganymede celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -868,8 +786,8 @@
     {
       "id": "ganymede-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 4059,
-      "expectedSha256": "10437a0838df348d201569b5b9b9ad54f61a3b95fa161fa2ef9c67d5e304a68f",
+      "expectedBytes": 3620,
+      "expectedSha256": "3db4c10275bd163af170544063b9454199549616ea567662a6355210cf82e581",
       "origin": "Repository-authored Ganymede acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -887,8 +805,8 @@
     {
       "id": "ganymede-object-content",
       "path": "content/object.json",
-      "expectedBytes": 21670,
-      "expectedSha256": "c11b7052988d3d181574ab64934546fb5073c99ff2ff8b46ab2a189062386290",
+      "expectedBytes": 21391,
+      "expectedSha256": "1bab75446052063802b893fcac8c50822c9601e3b2f7352ce3c4d72da579ba41",
       "origin": "Repository-authored Ganymede object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1047,18 +965,6 @@
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "1e5cbcfbae196aeda3ec9f7435968ae1e661ff4e1b9049656f7573613647156e",
-      "purpose": "Shared astrometric sky source and licensing."
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "ddd03e1c01fced9839b1e3dc7ad2c29c23857675337609286751f88c2f066651",
-      "purpose": "Shared astrometric sky source and licensing."
-    },
     {
       "path": "mono.isis.lbl",
       "expectedBytes": 1770,

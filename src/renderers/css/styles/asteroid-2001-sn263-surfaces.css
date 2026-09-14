@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asteroid-2001-sn263"])[data-lod="billboard"] .asteroid-2001-sn263-scene, .planet-stage:where([data-object-id="asteroid-2001-sn263"])[data-lod="marker"] .asteroid-2001-sn263-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asteroid-2001-sn263"])[data-lod="marker"] .asteroid-2001-sn263-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asteroid-2001-sn263"]).asteroid-2001-sn263-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -41,6 +41,6 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 Pole RA 40.57620028935955°, Dec 83.53641614640954°.
 
-Both shared Flood and Shadows remain available. Prepared context, minimap, thumbnail and lighting derive from this same shape and material. Source inputs and authored documents are pinned in source/manifest.json; external files are restorable through preparation/acquisition.json. NASA/PDS source attribution and the separate ESO/font terms are retained.
+Both shared Flood and Shadows remain available. Prepared context, minimap, thumbnail and lighting derive from this same shape and material. Source inputs and authored documents are pinned in source/manifest.json; external files are restorable through preparation/acquisition.json. NASA/PDS source attribution and the separate font terms are retained.
 
 </details>

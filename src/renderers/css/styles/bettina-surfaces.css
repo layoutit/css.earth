@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bettina"])[data-lod="billboard"] .bettina-scene, .planet-stage:where([data-object-id="bettina"])[data-lod="marker"] .bettina-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bettina"])[data-lod="marker"] .bettina-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bettina"]).bettina-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

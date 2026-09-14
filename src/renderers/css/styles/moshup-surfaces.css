@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="moshup"])[data-lod="billboard"] .moshup-scene, .planet-stage:where([data-object-id="moshup"])[data-lod="marker"] .moshup-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="moshup"])[data-lod="marker"] .moshup-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="moshup"]).moshup-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

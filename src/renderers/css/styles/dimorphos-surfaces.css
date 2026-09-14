@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="dimorphos"])[data-lod="billboard"] .dimorphos-scene, .planet-stage:where([data-object-id="dimorphos"])[data-lod="marker"] .dimorphos-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="dimorphos"])[data-lod="marker"] .dimorphos-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="dimorphos"]).dimorphos-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

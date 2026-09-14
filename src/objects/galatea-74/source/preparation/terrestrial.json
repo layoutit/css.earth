@@ -4,7 +4,6 @@
   "namespace": "galatea-74",
   "displayName": "74 Galatea",
   "publicBase": "/scenes/galatea-74/",
-  "distanceAu": 2.780620996918218,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -118,12 +117,6 @@
     "sunSource": "DAMIT model 6181 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

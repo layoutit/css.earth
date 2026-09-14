@@ -43,7 +43,6 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
   const definition = await loadPreparedCssObject(descriptor, {
     // The decoder authenticates the descriptor, then verifies every byte and bank.
     read: () => read(`/objects/${objectId}/${descriptor.prepared!.sha256}.json`),
-    readShared: reference => read(`/shared/${reference.kind}/${reference.sha256}.json`),
   });
   if (definition.id !== objectId) throw new Error('Prepared dataset object identity drifted.');
   const feature = featureIds.length && definition.features ? (await loadPreparedSurfaceFeatureCatalog(definition.features, objectId,

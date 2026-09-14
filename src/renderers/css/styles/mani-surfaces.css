@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="mani"])[data-lod="billboard"] .mani-scene, .planet-stage:where([data-object-id="mani"])[data-lod="marker"] .mani-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="mani"])[data-lod="marker"] .mani-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="mani"]).mani-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

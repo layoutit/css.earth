@@ -31,18 +31,6 @@
         "restore",
         "refresh"
       ],
-      "path": "stars/eso0932a.tif",
-      "url": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "headers": {
-        "User-Agent": "Mozilla/5.0"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "observations/w20080905t183606461id4df17.img",
       "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osiwac-4-ast1-steins-str-refl-v1.0/data/img/w20080905t183606461id4df17.img"
     },

@@ -1,12 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import {
-  ASTROMETRIC_CUBE_FRAME,
-  prepareAstrometricCubeSampling,
-  prepareAstrometricSkySceneRegistration,
-} from "./astrometric-sky-registration.mts";
-import { ESO_PANORAMA_REGISTRATION } from "./eso-panorama-registration.mts";
+import { prepareAstrometricSkySceneRegistration } from "./astrometric-sky-registration.mts";
 import {
   ICRS_TO_GALACTIC,
   multiplyMatrices,
@@ -38,27 +33,6 @@ const BODIES = [
   "neptune",
 ];
 
-test("cube sampling composes the panorama correction after the galactic rotation", () => {
-  const sampling = prepareAstrometricCubeSampling();
-  assert.equal(sampling.cubeFrame, ASTROMETRIC_CUBE_FRAME);
-  const expected = multiplyMatrices(
-    ESO_PANORAMA_REGISTRATION.matrix,
-    ICRS_TO_GALACTIC,
-  );
-  for (let index = 0; index < 9; index += 1) {
-    assert.ok(Math.abs(sampling.matrix[index] - expected[index]) < 1e-15);
-  }
-  // Order matters: the correction lives in the panorama's galactic frame.
-  const swapped = multiplyMatrices(
-    ICRS_TO_GALACTIC,
-    ESO_PANORAMA_REGISTRATION.matrix,
-  );
-  assert.ok(Math.max(...swapped.map((value, index) =>
-    Math.abs(value - sampling.matrix[index]))) > 1e-3);
-  assert.equal(sampling.panorama.anchors.length, 5);
-  assert.ok(sampling.panorama.frameCorrection.angleDegrees > 3);
-});
-
 test("the checked-in body-fixed to ICRF rotations agree with the checked-in ecliptic north", () => {
   for (const bodyId of BODIES) {
     const matrix = requireBodyFixedToIcrf(bodyId);
@@ -82,7 +56,7 @@ test("the scene registration puts ecliptic north up and the Sun where the presen
     assert.ok(Math.abs(north[0]) < 1e-9 && Math.abs(north[2]) < 1e-9, bodyId);
     assert.ok(Math.abs(north[1] + 1) < 1e-9, `${bodyId} north ${north}`);
     // The Sun, taken through ICRF, must coincide with the presentation-frame
-    // Sun the scene and the Sun sprite already use.
+    // Sun the scene already uses.
     const sunIcrf = transformDirection(
       requireBodyFixedToIcrf(bodyId),
       requireBodyFixedSunDirection(bodyId),

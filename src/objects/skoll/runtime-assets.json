@@ -1,0 +1,25 @@
+{
+  "schema": "cssskoll-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "skoll-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "skoll-model-shadow@2x.webp",
+      "bytes": 38004,
+      "sha256": "0ce02fba1ace2ef883f17cb92c26be28e710edf4b3fc3e7a51b67bf874efed06"
+    },
+    {
+      "filename": "skoll-model-surface@2x.webp",
+      "bytes": 56604,
+      "sha256": "15bb95e02fd461f6ea75bea2984f1c17ca553ccb3b85171e9d38e44c30ee00b7"
+    },
+    {
+      "filename": "skoll-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

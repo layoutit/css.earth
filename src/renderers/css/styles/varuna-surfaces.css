@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="varuna"])[data-lod="billboard"] .varuna-scene, .planet-stage:where([data-object-id="varuna"])[data-lod="marker"] .varuna-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="varuna"])[data-lod="marker"] .varuna-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="varuna"]).varuna-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

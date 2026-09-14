@@ -14,12 +14,6 @@ export function canonicalPreparedAsset(pair: string | PreparedAssetPair | null |
   return url;
 }
 
-// The retained sky's selected CSS background loads on demand. Preloading both
-// modes here made every first visit download the unused high-contrast sky.
-export function preparedSunResources(sun: { asset: PreparedAssetPair | string } | null | undefined, pool: string): PreparedResourceEntry[] {
-  return sun ? [{ key: "directional-sun", url: canonicalPreparedAsset(sun.asset), pool }] : [];
-}
-
 export function preparedResourcePool(id: string, entries: readonly PreparedResourceEntry[], { retention = "mount", concurrency, capacity, reuse = false, ...policy }: PreparedResourcePoolOptions = {}): Readonly<PreparedResourcePool> {
   const count = new Set(entries.filter(entry => entry.pool === id).map(entry => entry.url)).size;
   return Object.freeze({ id, capacity: capacity ?? count, concurrency: concurrency ?? count, retention, reuse, ...policy });

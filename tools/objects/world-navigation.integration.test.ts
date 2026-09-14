@@ -1,4 +1,4 @@
-import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
+import { parseAuthoredObjectDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { parsePreparedObjectRuntime } from '../../src/renderers/css/validation/index.js';
 import { requireRecord, requireArray, requireFiniteNumber, hasErrorCode } from '../source-values.mts';
 import { required } from '../test-values.mts';
@@ -23,7 +23,7 @@ const directories = (await readdir(resolve(root, 'src/objects'), { withFileTypes
 const objects: {directory: string; descriptor: ReturnType<typeof descriptorFixture>}[] = [];
 for (const entry of directories) {
   const directory = resolve(root, 'src/objects', entry.name);
-  try { objects.push({ directory, descriptor: descriptorFixture(await read(resolve(directory, 'object.json'))) }); }
+  try { const input = await read(resolve(directory, 'object.json')); const descriptor = parseObjectDescriptor(input); if (descriptor.type === 'layered-body') objects.push({ directory, descriptor: descriptorFixture(input) }); }
   catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
 }
 

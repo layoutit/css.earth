@@ -117,33 +117,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -614,33 +587,6 @@
       }
     },
     {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 850,
-      "expectedSha256": "e2d1c2cb3ff20d9bce2ea1e8062800915cd6fed88b9536c0cf8a2b1da0b59356",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
-          }
-        ]
-      }
-    },
-    {
       "id": "iapetus-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 4294,
@@ -670,8 +616,8 @@
     {
       "id": "iapetus-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1613,
-      "expectedSha256": "82662c36ca137110566273a4e0da22eb53f7a01e368dea3fa86495749d8a959c",
+      "expectedBytes": 275,
+      "expectedSha256": "864d3d128e9245792eabde19e4d710d4f0096be3fc79b0e9aeec465f6da2c0fd",
       "origin": "Repository-authored Iapetus solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -729,8 +675,8 @@
     {
       "id": "iapetus-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 224,
-      "expectedSha256": "232cb864425d421fad81132343c07a8031f5eb50047cf27e701971c8c5d91def",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Iapetus celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -785,8 +731,8 @@
     {
       "id": "iapetus-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3078,
-      "expectedSha256": "58d51e3075b415d3016b0397d5dc9f9c92a5c114c18f24c93808771f5b84bbab",
+      "expectedBytes": 2894,
+      "expectedSha256": "6a98a17c0b400ce592c4bb8bdfcb2ac2585e0437371ce0b0cbb0a6a9a94a2e7e",
       "origin": "Repository-authored Iapetus acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -804,8 +750,8 @@
     {
       "id": "iapetus-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12674,
-      "expectedSha256": "c30b3306843a145214368fafa7309683aed023533725cb36e3d495169dcf303c",
+      "expectedBytes": 12395,
+      "expectedSha256": "3e650d7e3d500029923f2105b82a94fa916dd7aebe24886003184de1aa15d680",
       "origin": "Repository-authored Iapetus object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -822,16 +768,6 @@
     }
   ],
   "documents": [
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
     {
       "path": "observations/catalog.json",
       "expectedBytes": 3235,

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="epimetheus"])[data-lod="billboard"] .epimetheus-scene, .planet-stage:where([data-object-id="epimetheus"])[data-lod="marker"] .epimetheus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="epimetheus"])[data-lod="marker"] .epimetheus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="epimetheus"]).epimetheus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

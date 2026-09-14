@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="juliet"])[data-lod="billboard"] .juliet-scene, .planet-stage:where([data-object-id="juliet"])[data-lod="marker"] .juliet-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="juliet"])[data-lod="marker"] .juliet-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="juliet"]).juliet-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

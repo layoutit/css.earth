@@ -4,7 +4,6 @@
   "namespace": "bienor",
   "displayName": "Bienor",
   "publicBase": "/scenes/bienor/",
-  "distanceAu": 16.60224445563277,
   "raster": {
     "width": 512,
     "height": 256,
@@ -79,12 +78,6 @@
     "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

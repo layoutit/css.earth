@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="dido"])[data-lod="billboard"] .dido-scene, .planet-stage:where([data-object-id="dido"])[data-lod="marker"] .dido-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="dido"])[data-lod="marker"] .dido-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="dido"]).dido-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

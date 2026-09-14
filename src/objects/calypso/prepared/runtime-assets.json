@@ -1,0 +1,60 @@
+{
+  "schema": "csscalypso-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "calypso-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "calypso-elevation-shadow@2x.webp",
+      "bytes": 220564,
+      "sha256": "9776b03c2df81c5dee4850f693a5dfadbdd19d38e75fcd3e07f3287544a53a2f"
+    },
+    {
+      "filename": "calypso-elevation-surface@2x.webp",
+      "bytes": 395062,
+      "sha256": "f00ccd34e415eceb7610b18ed6bfbcc7f9afc92f602058b88ff5807a094b51da"
+    },
+    {
+      "filename": "calypso-elevation-thumbnail.webp",
+      "bytes": 5342,
+      "sha256": "9a19e832557eb1210fbd2a7fedcc497619df800503a70a5e8b6cc5fa54c7a2fa"
+    },
+    {
+      "filename": "calypso-false-color-shadow@2x.webp",
+      "bytes": 210600,
+      "sha256": "7a800973546351536bd00ccb279a28b27d17941fbc520ebf3ed0cda814016cd1"
+    },
+    {
+      "filename": "calypso-false-color-surface@2x.webp",
+      "bytes": 308854,
+      "sha256": "9fe70525b7dbf48cbdaa7f4110b56986233e988e8f105d29bb8f1418261a9410"
+    },
+    {
+      "filename": "calypso-false-color-thumbnail.webp",
+      "bytes": 1638,
+      "sha256": "3d9933a7bb76aa47fe5a1fc99fbe2b2b5f2a9135da0343767a3c570829cf7f9a"
+    },
+    {
+      "filename": "calypso-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "calypso-normal-shadow@2x.webp",
+      "bytes": 191430,
+      "sha256": "431fcdc46dbaabd63e1e65e50b635daabccd2d05dba03b5244ea70adcf6c8bcd"
+    },
+    {
+      "filename": "calypso-normal-surface@2x.webp",
+      "bytes": 307866,
+      "sha256": "5ee57cec0cd75be1acf1498d57257633417a04b38a752ceaaa9b0bc6cd6b8a53"
+    },
+    {
+      "filename": "calypso-normal-thumbnail.webp",
+      "bytes": 1448,
+      "sha256": "eca738d5ff03ad077ae4a1f6a132663c5da27121a7c6d236ed42f349b428f875"
+    }
+  ]
+}

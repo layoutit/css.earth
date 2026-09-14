@@ -4,7 +4,7 @@ The first confirmed interstellar visitor crossed the Solar System in 2017. Its c
 
 ## Sources
 
-The selected DISC light-curve model has full axes **115 × 111 × 19 m**, assuming geometric albedo 0.1. The **Shape model** uses the normal unmapped-surface grid. Shadows and Orbit default off.
+The selected DISC light-curve model has full axes **115 × 111 × 19 m**, assuming geometric albedo 0.1. The **Shape model** uses the normal unmapped-surface grid. Shadows defaults off.
 
 | Source | Used for |
 | --- | --- |

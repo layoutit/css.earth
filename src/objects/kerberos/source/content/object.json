@@ -69,12 +69,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": true
       }
     ]
   },
@@ -97,12 +91,6 @@
       "role": "observations",
       "description": "Original New Horizons LORRI imagery",
       "href": "https://pds-rings.seti.org/newhorizons/"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

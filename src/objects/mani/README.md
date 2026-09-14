@@ -4,7 +4,7 @@ Formerly 2002 MS4, Máni has an outline measured through many stellar occultatio
 
 ## Sources
 
-The silhouette-constrained oblate approximation represents the observed **824 × 770 km** projected ellipse with full axes **824 × 824 × 770 km**. The **Shape model** uses the normal unmapped-surface grid. Shadows and Orbit default off.
+The silhouette-constrained oblate approximation represents the observed **824 × 770 km** projected ellipse with full axes **824 × 824 × 770 km**. The **Shape model** uses the normal unmapped-surface grid. Shadows defaults off.
 
 | Source | Used for |
 | --- | --- |

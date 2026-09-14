@@ -4,7 +4,6 @@
   "namespace": "styx",
   "displayName": "Styx",
   "publicBase": "/scenes/styx/",
-  "distanceAu": 39.48,
   "raster": {
     "width": 512,
     "height": 256,
@@ -78,12 +77,6 @@
     "sunSource": "JPL Pluto-system ephemeris; historical Weaver2016 spin pole used as a static display orientation, since the 2025 study finds no unique pole solution."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="feronia"])[data-lod="billboard"] .feronia-scene, .planet-stage:where([data-object-id="feronia"])[data-lod="marker"] .feronia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="feronia"])[data-lod="marker"] .feronia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="feronia"]).feronia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

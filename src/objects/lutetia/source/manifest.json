@@ -2,33 +2,6 @@
   "schema": "csslutetia-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "lutetia-shape",
       "path": "shape/lutetia_025k_cart.wrl",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
@@ -557,8 +530,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9557,
-      "expectedSha256": "e7f044ab21704eab1dce605a1ae61512e898b5a9bae7e714a57c774aa9288cb1",
+      "expectedBytes": 9278,
+      "expectedSha256": "0cd01f3dd98223333919054398a8f7a4a0ae1ec91795bd93e3f8e32d111abb96",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -566,8 +539,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3784,
-      "expectedSha256": "f51b72478274bf4abd6f4e5166ae027471e349c1add33798abbe439afb581dc2"
+      "expectedBytes": 3581,
+      "expectedSha256": "f9e80844eaa3a806cd9b504143cbecc194499c1f08483edb2ef9b1b1a5c6e686"
     },
     {
       "path": "preparation/navigation.json",
@@ -581,8 +554,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5300,
-      "expectedSha256": "8fd61a24e4831ee7b6b2c473f06aa522d829712b737dff9791fe15c145fb1e3b"
+      "expectedBytes": 5145,
+      "expectedSha256": "f1f0aabbcda3bad21ed38bf235fb61da07ea9d96d194a85f63d582241b16ac8a"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -648,21 +621,6 @@
       "path": "reference/plate_shape_definition.asc",
       "expectedBytes": 6640,
       "expectedSha256": "cc775dc2d1d15cedb26b4badbeb777f480689510fa34652b75cdc6ba85ef677a"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 89773,
-      "expectedSha256": "f613473b1e268a1f3f2b29ea43c0b2c76c921b85b9904fb8c2c0263f8cf8e4f6"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     },
     {
       "id": "lutetia-surface-feature-notes",

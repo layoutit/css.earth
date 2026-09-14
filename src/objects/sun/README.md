@@ -46,13 +46,6 @@ under Known problems. [Unit tests](../../../tests/objects/unit/sun) and the
 [browser profile](../../../tests/objects/browser/sun/browser-profile.mts) define the
 checks; no dated scientific review is cited for this version.
 
-## Shared banks
-
-`prepared/shared/planet-points/` holds the point photometry table of each planet
-and dwarf planet, one file per body and epoch, and `prepared/shared/heliocentric-labels/`
-the heliocentric label set. Every body's prepared runtime references them by
-content hash instead of repeating them; see [prepared shared banks](../../../docs/prepared-shared-banks.md).
-
 ## Known problems
 
 - Polar silhouette dent: the shared sphere closes each pole with one flat
@@ -136,12 +129,5 @@ not replace the globe material. The emissive presentation has no lighting track:
 toggle, no directional Sun, no terminator. At device DPR 1 and 2, the scene uses the same
 highest-resolution surface, polar, limb and off-limb images, selected once when the scene
 opens.
-
-The retained cubic starfield is prepared from ESO/S. Brunier's photographic `eso0932a` full-sky
-panorama at DPR 1 and DPR 2. The HYG v4.1 subset remains the reference for checking sky
-coordinates. The application's shared universe renders the sky; the object's bank only warms it.
-
-The star panorama is not tied to the solar maps’ observation epoch; its background omits the
-Sun itself.
 
 </details>

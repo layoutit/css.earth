@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="aurora"])[data-lod="billboard"] .aurora-scene, .planet-stage:where([data-object-id="aurora"])[data-lod="marker"] .aurora-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="aurora"])[data-lod="marker"] .aurora-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="aurora"]).aurora-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

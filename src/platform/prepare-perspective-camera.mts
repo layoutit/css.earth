@@ -2,17 +2,6 @@ import { buildPolyCameraSceneTransform } from "@layoutit/polycss";
 
 const DOLLY_WHEEL_STEP_PER_DELTA = 0.006;
 const MINIMUM_DISTANCE_RADII = 1.2;
-const MAXIMUM_DISTANCE_OVER_SYSTEM_EXTENT = 3;
-const PLANETARY_SYSTEM_FADE = Object.freeze({
-  model: "distance-over-orbit-extent-fade",
-  hiddenBelowDistanceOverOrbitExtent: 1.5,
-  visibleAboveDistanceOverOrbitExtent: 2.5,
-});
-const SUN_MARKER = Object.freeze({
-  model: "sprite-diameter-crossfade",
-  fadeStartSpritePixels: 16,
-  fullSpritePixels: 8,
-});
 const ORBIT_LINE_FADE = Object.freeze({
   visibleBelowDiscHeightShare: 0.12,
   hiddenAboveDiscHeightShare: 0.3,
@@ -101,14 +90,11 @@ export function preparePerspectiveCamera({ sky, radius = 230, initialScenePitchD
       wheelStepPerDelta: DOLLY_WHEEL_STEP_PER_DELTA,
       minimumDistanceRadii: MINIMUM_DISTANCE_RADII,
       maximumDistanceOverOrbitExtent: 4,
-      maximumDistanceOverSystemExtent: MAXIMUM_DISTANCE_OVER_SYSTEM_EXTENT,
       zoomIsSilhouetteFraming: true,
     }),
     orbitLineFade: ORBIT_LINE_FADE,
     levelOfDetail: LEVEL_OF_DETAIL,
     drag: Object.freeze({ model: "screen-axis-tumble" }),
-    planetarySystem: PLANETARY_SYSTEM_FADE,
-    sunMarker: SUN_MARKER,
     runtimeGeometryDerivation: false,
   });
 }

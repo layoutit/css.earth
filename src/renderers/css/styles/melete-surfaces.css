@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="melete"])[data-lod="billboard"] .melete-scene, .planet-stage:where([data-object-id="melete"])[data-lod="marker"] .melete-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="melete"])[data-lod="marker"] .melete-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="melete"]).melete-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

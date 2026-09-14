@@ -1,0 +1,25 @@
+{
+  "schema": "cssmethone-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "methone-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "methone-normal-shadow@2x.webp",
+      "bytes": 46360,
+      "sha256": "a74221e659f048d290d4e38a6d406abb2f6117bea03d4300a9870b9be7361a1f"
+    },
+    {
+      "filename": "methone-normal-surface@2x.webp",
+      "bytes": 70644,
+      "sha256": "f1578449cb91bd75ffb6fc64d74017553414e441bd4ece61556eec8edc4324e0"
+    },
+    {
+      "filename": "methone-normal-thumbnail.webp",
+      "bytes": 1650,
+      "sha256": "fa9c892e33eaa9b9f8ce833c6e7ae5b1122c0afa5fc1b48f93d46f92ee2bd610"
+    }
+  ]
+}

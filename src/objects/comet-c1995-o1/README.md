@@ -2,7 +2,7 @@
 
 Hale–Bopp remained visible to the naked eye for about 18 months in 1996 and 1997. Its unusually large nucleus helped make it one of the most memorable comets of the twentieth century.
 
-One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows and Orbit default off.
+One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.
 
 ## Sources
 

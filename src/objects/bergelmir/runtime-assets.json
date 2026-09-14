@@ -1,0 +1,25 @@
+{
+  "schema": "cssbergelmir-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "bergelmir-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "bergelmir-model-shadow@2x.webp",
+      "bytes": 37830,
+      "sha256": "858185a52c434e3c37293532bb20468404de994f1fe78af6b3838666726e4408"
+    },
+    {
+      "filename": "bergelmir-model-surface@2x.webp",
+      "bytes": 55160,
+      "sha256": "7f5b449002bb64692214ae943849d1f4e4c6bf4c560bbcd3b8a5c625c996fc07"
+    },
+    {
+      "filename": "bergelmir-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

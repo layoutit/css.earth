@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="vera"])[data-lod="billboard"] .vera-scene, .planet-stage:where([data-object-id="vera"])[data-lod="marker"] .vera-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="vera"])[data-lod="marker"] .vera-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="vera"]).vera-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }
