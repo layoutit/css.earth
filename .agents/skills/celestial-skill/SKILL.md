@@ -110,8 +110,16 @@ route when a paper's input model is missing from a repository's current files.
 Follow promising citations to the actual release; a display-texture catalog or
 press-image search alone does not establish what datasets exist.
 
-For photograph-to-shape work, inspect the selected shape release as a bundle
-before deriving a camera or looking for a replacement model. Read its labels,
+For photographic surfaces, choose the investigation route from the available
+product before choosing a tool: a producer map, a mapped paper figure, an image
+with archived surface geometry, or an unmapped photograph. Read
+[photographic investigation](references/photographic-investigation.md) for each
+route's evidence requirements and how to reassess a stalled method. A usable
+controlled map does not require reconstructing its original cameras; it still
+requires a documented frame, coverage and compatibility with the selected mesh.
+
+For unmapped photograph-to-shape work, inspect the selected shape release as a
+bundle before deriving a camera or looking for a replacement model. Read its labels,
 file inventory and linked methods for companion image-geometry tables,
 reconstructed pointing, control points, backplanes and detector-quality files.
 Compare their observation IDs and model frame with the image headers; headers
@@ -134,9 +142,9 @@ receive time, target emission time and aberration conventions to the image.
 Recover and verify the available archive inputs before declaring a source gap.
 
 Search the relevant papers explicitly as well as the data archives. Inspect
-full text, tables, appendices and supplementary files: a usable radius table,
-mesh, camera solution or registration controls may be published there without
-a separate dataset download. Follow authoritative open-access or author-repository
+full text, tables, figures, appendices and supplementary files: a usable map,
+radius table, mesh, camera solution or registration controls may be published
+there without a separate dataset download. Follow authoritative open-access or author-repository
 copies when available. Match the paper's model version, coordinates, units and
 observation identifiers to the selected inputs before using its numbers.
 Record any transcription or digitization and check it against the published
@@ -153,8 +161,12 @@ Compare detail, registration, coverage and reuse terms before choosing. A better
 mosaic can replace a weaker one without becoming a duplicate lens. Missing
 metadata or a failed download leaves a candidate unresolved; it is not evidence
 that the dataset does not exist. Respect explicit user exclusions and scope.
-Stop once the promising candidates have a disposition; do not build an exhaustive
-catalog or repeat this survey for an unrelated repair.
+Stop the source survey once the promising candidates have a disposition; this
+does not finish an authorized implementation. A failed method does not exclude
+every route for its source. Record what failed, distinguish missing information
+from missing tooling, and retain the next useful check in the existing ledger;
+see [reassessing a stalled method](references/photographic-investigation.md#when-a-method-stalls).
+Do not build an exhaustive catalog or repeat the survey for an unrelated repair.
 
 Use the contract's [reference retention rules](../../../docs/provenance/CONTRACT.md#references-and-retained-files)
 to distinguish citations from scientific inputs. Record cited values and their
@@ -238,7 +250,8 @@ Read the applicable preparation guidance **before** processing those assets:
 | Surface color, calibrated filters or RGB imagery | [Source-backed surface color](../../../docs/color-preparation.md): identify the input quantity and published color meaning; keep measured bands floating until one final display encoding. Registration and calibration do not qualify natural color. Never guess missing visible bands, white balance or an instrument color transform. |
 | Photographed shading or mosaic seams | [Photographic observations](references/surface-preparation.md#photographic-observations): corrected source or justified per-observation normalization, then bounded level matching where useful. Preserve shared lighting controls. |
 | Soft photographic textures | [Photographic observations](references/surface-preparation.md#photographic-observations): trace intermediate resizes, sample registered originals at the delivered footprint, and separate sampling gains from encoding quality. |
-| Multiple photographs registered to a surface | [Registered photographic mosaics](references/registered-photographic-mosaics.md): camera holdouts, quality and visibility checks, deterministic selection, overlap levels, provenance and area coverage. |
+| Published photographic map or mapped paper figure | [Photographic investigation](references/photographic-investigation.md): verify the map frame, surface reference, usable pixels and inherited uncertainty; qualify any digitization before sampling. |
+| Unmapped photographs or images with archived surface geometry | [Registered photographic mosaics](references/registered-photographic-mosaics.md): camera holdouts where applicable, quality and visibility checks, deterministic selection, overlap levels, provenance and area coverage. |
 | Elevation or another measured scalar | [Scientific maps](references/surface-preparation.md#scientific-maps): datum, palette, readable relief and a truthful legend. |
 | Incomplete coverage | [Coverage](references/surface-preparation.md#coverage): source validity before interpolation; mark real gaps without erasing observed dark terrain. |
 | Irregular terrain or a triangle-mesh budget | [Irregular meshes](references/irregular-meshes.md): choose a representable source shape, simplify before baking, and use PolyCSS native raster triangles. |
