@@ -4,7 +4,6 @@
   "id": "comet-153p",
   "displayName": "Ikeya–Zhang",
   "panel": {
-    "introduction": "Ikeya–Zhang brightened the skies in 2002. Its journey around the Sun takes centuries, unlike the frequent returns of comets such as Encke.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "153P/Ikeya–Zhang",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-153p/comet-153p-model-thumbnail.webp",
         "surface": "comet-153p-model-surface@2x.webp",
         "poles": "comet-153p-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "0.494 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

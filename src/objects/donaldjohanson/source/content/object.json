@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Donaldjohanson is a contact-binary asteroid visited by Lucy in April 2025. Its two lobes meet at a broad neck. This archived model preserves the original scale: Lucy stereo images constrain about 40% of the surface, and the source authors reconstructed the unseen side. The grid marks unavailable surface imagery. Donaldjohanson tumbles, so its orientation and lighting here are illustrative.",
     "facts": [
       {
         "id": "radius",
@@ -58,9 +57,6 @@
       {
         "id": "llorri",
         "label": "L’LORRI observation",
-        "detail": "Spacecraft observation",
-        "description": "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction.",
-        "title": "L’LORRI encounter image",
         "thumbnail": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
         "surface": "donaldjohanson-llorri-surface@2x.webp",
         "poles": "donaldjohanson-llorri-surface@2x.webp",
@@ -68,13 +64,12 @@
           "id": "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
           "path": "../manifest.json"
         },
-        "summary": "Two Lucy photographs cover part of the encounter-facing surface. Brightness retains original lighting; the grid marks rejected or unseen areas."
+        "notes": "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction.",
+        "noData": true
       },
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Published Lucy shape model",
-        "title": "Encounter shape model",
         "thumbnail": "/scenes/donaldjohanson/donaldjohanson-shape-thumbnail.webp",
         "surface": "donaldjohanson-shape-surface@2x.webp",
         "poles": "donaldjohanson-shape-surface@2x.webp",
@@ -83,8 +78,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Lucy shape model",
-        "summary": "Lucy's published encounter shape. The gray grid marks missing mapped imagery; lighting shows the model."
+        "notes": "Published Lucy shape model",
+        "noData": true
       }
     ]
   },

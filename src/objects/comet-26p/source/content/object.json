@@ -4,7 +4,6 @@
   "id": "comet-26p",
   "displayName": "Grigg–Skjellerup",
   "panel": {
-    "introduction": "Grigg–Skjellerup was Giotto’s second comet encounter. The spacecraft passed about 200 km from its nucleus in July 1992, six years after visiting Halley.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "26P/Grigg–Skjellerup",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-26p/comet-26p-model-thumbnail.webp",
         "surface": "comet-26p-model-surface@2x.webp",
         "poles": "comet-26p-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "1.08 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

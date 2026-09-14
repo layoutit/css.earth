@@ -4,7 +4,6 @@
   "id": "comet-143p",
   "displayName": "Kowal–Mrkos",
   "panel": {
-    "introduction": "Kowal–Mrkos takes about seventeen hours to rotate. Changes in its brightness reveal a modestly elongated nucleus.",
     "facts": [
       {
         "id": "radius",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Shape approximation",
-        "detail": "Lightcurves",
-        "title": "Inferred shape",
-        "description": "A smooth approximation of the published proportions, sized from infrared observations. The grid marks missing surface imagery. Rotation phase is illustrative.",
         "thumbnail": "/scenes/comet-143p/comet-143p-model-thumbnail.webp",
         "surface": "comet-143p-model-surface@2x.webp",
         "poles": "comet-143p-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Rotation period",
             "value": "17.20 hours"
           }
-        ]
+        ],
+        "notes": "A smooth approximation of the published proportions, sized from infrared observations. The grid marks missing surface imagery. Rotation phase is illustrative.",
+        "noData": true
       }
     ]
   },

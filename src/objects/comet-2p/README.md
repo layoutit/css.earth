@@ -7,6 +7,8 @@
 | Shape approximation | [Harmon & Nolan (2005), Table 3, SAM1](https://doi.org/10.1016/j.icarus.2005.01.012) | A smooth ellipsoid constrained by published radar dimensions; no photographic texture or resolved terrain. |
 | Position | [JPL Horizons records](source/reference/) | Heliocentric ICRF, 3 September 2026 TT. |
 
+[Investigation ledger](investigations.json) records source choices, failed trials and conditions for retrying. Earlier findings were carried forward from the linked records; this is not a fresh archive search.
+
 ## Evidence
 
 The [two-comet report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/ENCKE-LINEAR.md) links the recorded
@@ -33,17 +35,7 @@ No original radar surface mesh was identified in the surveyed releases. Delay-Do
 
 <a id="source-selection"></a>
 
-<details>
-<summary>Source selection</summary>
-
-| Candidate | Disposition |
-| --- | --- |
-| [Harmon & Nolan (2005)](https://doi.org/10.1016/j.icarus.2005.01.012) | Selected numeric dimensions; Table 3: SAM1, P=11.1 h, a=4.58 km, axial ratio 2.60; section 4. Original publication URL, byte count and SHA-256 are pinned in `source/reference/source-record.json`. Paper binaries are not redistributed. |
-| [JPL radar publications](https://echo.jpl.nasa.gov/publications/pubs.html), PDS radar and Stooke shape releases | No downloadable original surface mesh for this nucleus identified in the surveyed releases. Mesh access remains unresolved. |
-| Radar images or spectra | Constrain shape and rotation. Delay-Doppler images are not optical surface textures. No radar brightness is painted onto the model. |
-| Optical and infrared observations cited in the selected paper | Constrain dimensions, period and activity; no resolved optical surface map selected. |
-
-</details>
+Source selection and unresolved alternatives are recorded in the [investigation ledger](investigations.json).
 
 <a id="dimensions-and-limits"></a>
 

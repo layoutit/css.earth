@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "pan",
+  "card": {
+    "text": "Saucer-shaped moon that keeps Saturn's Encke Gap open.",
+    "sources": [
+      {
+        "catalogueId": "nasa-saturn-moons",
+        "url": "https://science.nasa.gov/saturn/moons/pan/",
+        "label": "NASA Science · Saturn’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Pan is Saturn's innermost known moon. Mark Showalter found it in 1990 in Voyager 2 images taken nine years earlier.",
+    "sources": [
+      {
+        "catalogueId": "nasa-saturn-moons",
+        "url": "https://science.nasa.gov/saturn/moons/pan/",
+        "label": "NASA Science · Saturn’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "ISS mosaic",
+      "detail": "Cassini · corrected mosaic",
+      "summary": "Photographs mapped onto the measured shape; shadows and unreliable samples are left out."
+    },
+    "filter-color": {
+      "title": "Cassini false color",
+      "detail": "Cassini",
+      "summary": "Measured filter bands in false color, not human-visible color. Photographed shadows remain."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Shaded relief",
+      "summary": "Height above or below a 14 km sphere from the Cassini shape; accuracy varies by region."
+    }
+  }
+}

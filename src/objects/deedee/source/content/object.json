@@ -4,7 +4,6 @@
   "id": "deedee",
   "displayName": "DeeDee",
   "panel": {
-    "introduction": "DeeDee, the informal nickname of 2014 UZ224, is a distant world discovered by the Dark Energy Survey. ALMA measured its faint thermal emission; the displayed sphere illustrates its inferred size, while its actual shape and surface remain unresolved.",
     "facts": [
       {
         "id": "shape",
@@ -45,9 +44,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Equal-axis size illustration at the Gerdes et al. (2017) thermal-model diameter of 635 km, with +57/−61 km statistical and +32/−39 km systematic uncertainties. The thermal fit assumes a spherical body with uniform surface properties; it does not measure three axes or resolved terrain. DeeDee is an informal nickname, and this view does not assert an official dwarf-planet classification. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole, rotation period or surface attitude is claimed. The grid marks unmapped terrain.",
-        "title": "Thermal-size illustration",
-        "detail": "Inferred shape · unmapped surface grid",
         "thumbnail": "/scenes/deedee/deedee-model-thumbnail.webp",
         "surface": "deedee-model-surface@2x.webp",
         "poles": "deedee-model-poles@2x.webp",
@@ -55,7 +51,9 @@
           "id": "published-shape",
           "path": "../manifest.json",
           "url": "https://doi.org/10.3847/2041-8213/aa64d8"
-        }
+        },
+        "notes": "Equal-axis size illustration at the Gerdes et al. (2017) thermal-model diameter of 635 km, with +57/−61 km statistical and +32/−39 km systematic uncertainties. The thermal fit assumes a spherical body with uniform surface properties; it does not measure three axes or resolved terrain. DeeDee is an informal nickname, and this view does not assert an official dwarf-planet classification. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole, rotation period or surface attitude is claimed. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

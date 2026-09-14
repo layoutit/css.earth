@@ -1,0 +1,112 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "juliet",
+  "entries": [
+    {
+      "id": "karkoschka-2001-hst-photometry-adopted-voyager-dimen",
+      "subject": "Karkoschka (2001) adopted Voyager/HST shape",
+      "status": "included",
+      "finding": "Table IV of the HST study supplies the adopted prolate semiaxes 75 × 37 × 37 km. The repeated minor axis is a model assumption, not an independently measured third dimension. French et al. (2024), Table 3 reproduces the separate Voyager size paper’s projected-radius and axis-ratio uncertainties; they are not individual-axis errors. The selected analytic shape supplies no local relief or surface pixels.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/source/manifest.json",
+        "https://doi.org/10.1006/icar.2001.6596",
+        "https://arxiv.org/abs/2401.04634",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-voyager-iss-calibrated-geometrically-corrected-i",
+      "subject": "PDS Voyager ISS, calibrated/geometrically corrected images",
+      "status": "excluded",
+      "finding": "Sorted 3,441 indexed Juliet observations by body-center sampling. Best C2673225 is 46.28754 km per native pixel, about 3.2 samples along the longest possible diameter. Downloaded and inspected the 1000×1000 GEOMED raster and label: geometric resampling cannot add native surface detail. Its 15.36 s exposure and 5:1 scan also limit an inferred footprint. Excluded as a photographic surface map.",
+      "revisitWhen": "A Juliet observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/source/manifest.json",
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "french-2024-occultation-analysis",
+      "subject": "French 2024 occultation analysis",
+      "status": "included",
+      "finding": "Included for shape uncertainty and orbital context; no spatial surface field.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "hst-photometry-and-keck-near-infrared-photometry",
+      "subject": "HST photometry and Keck near-infrared photometry",
+      "status": "deferred",
+      "finding": "Integrated brightness/color measurements cannot supply resolved surface texels. No separate Color or composition map qualified.",
+      "revisitWhen": "A spatially resolved Juliet measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/source/manifest.json",
+        "https://doi.org/10.1006/icar.2001.6596"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jpl-texture-catalog-pds-shape-releases-and-usgs-mapp",
+      "subject": "JPL texture catalog, PDS shape releases and USGS mapping survey",
+      "status": "unresolved",
+      "finding": "No usable registered Juliet texture, detailed mesh, elevation or geology product located. Absence from the inspected catalogs is not a claim that no future dataset can exist.",
+      "revisitWhen": "The inspected shape archive or a cited primary release publishes a Juliet-specific numerical model with its frame, units and reconstruction method.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/source/manifest.json",
+        "https://space.jpl.nasa.gov/tmaps/uranus.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "nasa-overview",
+      "subject": "NASA overview",
+      "status": "included",
+      "finding": "Used for discovery and naming only. Its older size/albedo paragraph predates the source measurements and does not override them.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/juliet/source/manifest.json",
+        "https://science.nasa.gov/uranus/moons/juliet/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,6 @@
   "id": "orus",
   "displayName": "Orus",
   "panel": {
-    "introduction": "Orus is a dark Jupiter Trojan selected for Lucy's exploration of the leading swarm. This ellipsoid approximates the dimensions of the published light-curve and occultation model. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "shape",
@@ -39,9 +38,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. The original convex mesh and local concavities are not represented. Full approximation dimensions: 70.7 × 63 × 51.4 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
-        "title": "Convex-model ellipsoid approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/orus/orus-model-thumbnail.webp",
         "surface": "orus-model-surface@2x.webp",
         "poles": "orus-model-poles@2x.webp",
@@ -49,7 +45,8 @@
           "id": "occultation-approximation",
           "path": "../manifest.json",
           "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
-        }
+        },
+        "noData": true
       }
     ]
   },

@@ -12,6 +12,8 @@ The shared missing-imagery grid covers the surface. The body uses the existing g
 
 ## Scientific sources
 
+[Investigation ledger](investigations.json): recorded source decisions, evidence and conditions for revisiting them.
+
 - [Levison et al. (2024)](https://doi.org/10.1038/s41586-024-07378-0): Lobe dimensions, separation and mutual period.
 - [Bierhaus et al. (2025)](https://doi.org/10.3847/PSJ/ae1968): Later geology and limits of the Selam shape evidence.
 

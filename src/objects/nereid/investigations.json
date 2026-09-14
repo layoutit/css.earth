@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "nereid",
+  "entries": [
+    {
+      "id": "kiss-2016-shape",
+      "subject": "Kiss et al. (2016) representative triaxial family",
+      "status": "included",
+      "finding": "The selected X=0.133 light-curve/thermal model gives a=(1+X)b and c=(1−X)b. Equal-volume normalization to JPL’s nominal 170 km radius yields derived semiaxes 193.76 × 171.01 × 148.27 km; these are not measured limb dimensions. The representative Figure 8 pole is one feasible solution and the prime meridian is arbitrary. Thermal roughness does not locate craters.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/nereid/README.md",
+        "https://doi.org/10.1093/mnras/stw081",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/nereid/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/nereid/source/survey/kiss2016-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "kiss-caption-parameter",
+      "subject": "Kiss Figure 8 caption parameter discrepancy",
+      "status": "excluded",
+      "finding": "The caption’s X=0.0133 conflicts with equation 4 and the repeated X=0.133 selection in sections 2.3, 3.4 and 4. The preparation follows the selected model in the text and preserves the discrepancy.",
+      "revisitWhen": "An author correction or underlying model record establishes which Figure 8 parameter is intended.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/nereid/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/nereid/source/survey/kiss2016-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "voyager-clear-candidates",
+      "subject": "Voyager clear frames C1137631 and C1129120",
+      "status": "deferred",
+      "finding": "The historical OPUS survey found 325 matches and retained its first 12 records. Calibrated native images C1137631 (43.27 km/pixel, 96.12° phase) and C1129120 (62.09 km/pixel, 55.74° phase) were inspected; their discs span roughly eight and five pixels. Illumination and sampling dominate, and pole/landmark registration is unqualified. No photographic lens is selected.",
+      "revisitWhen": "A controlled reconstruction demonstrates independent body-fixed registration and useful surface information at the native sampling, or a finer observation becomes available.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/nereid/README.md",
+        "https://pds-rings.seti.org/voyager/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/nereid/source/survey/opus.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "jpl-map-search",
+      "subject": "JPL texture inventory and mapped-product search",
+      "status": "unresolved",
+      "finding": "The inspected JPL Neptune texture inventory supplied no Nereid map, and the examined mapping releases and cited work did not yield a qualified terrain product. This bounded search does not establish that no other observations exist.",
+      "revisitWhen": "A linked Nereid map or shape release provides downloadable data with coordinates, quantity and coverage for inspection.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/nereid/README.md",
+        "https://space.jpl.nasa.gov/tmaps/neptune.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pia00054-size-caption",
+      "subject": "NASA PIA00054 size caption",
+      "status": "excluded",
+      "finding": "The caption calls 170 km the distance across, conflicting with JPL’s 170 ± 25 km radius and the paper’s 335–345 km thermal effective diameters. The caption size is not used for geometry; effective thermal diameter is also not silently treated as volume diameter.",
+      "revisitWhen": "A corrected primary size record resolves the radius-versus-diameter discrepancy.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/nereid/README.md",
+        "https://science.nasa.gov/resource/nereid/",
+        "https://ssd.jpl.nasa.gov/sats/phys_par/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

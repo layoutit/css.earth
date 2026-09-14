@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Phaethon is a near-Earth asteroid. Explore its calibrated convex reconstruction from DAMIT, version 2019-12-03. The grid marks unavailable surface imagery. This is the 2018 convex reconstruction. Later radar work resolves features this model cannot show.",
     "facts": [
       {
         "id": "radius",
@@ -53,8 +52,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Calibrated DAMIT shape",
-        "title": "DAMIT model 4394",
         "thumbnail": "/scenes/phaethon/phaethon-shape-thumbnail.webp",
         "surface": "phaethon-shape-surface@2x.webp",
         "poles": "phaethon-shape-surface@2x.webp",
@@ -63,14 +60,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape",
-        "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
+        "notes": "Calibrated DAMIT shape",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Source shape · radial height",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/phaethon/phaethon-elevation-thumbnail.webp",
         "surface": "phaethon-elevation-surface@2x.webp",
         "poles": "phaethon-elevation-surface@2x.webp",
@@ -92,8 +87,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4394",
           "image": "/scenes/phaethon/phaethon-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height",
-        "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+        "notes": "Source shape · radial height"
       }
     ]
   },

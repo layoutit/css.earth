@@ -20,8 +20,8 @@ export const parseAuthoringDescriptor=shape({prepared:shape({sha256:text}),prope
   preparation:optional(shape({state:optional(text)})),recipe:shape({shape:shape({radiusKm:number}),sources:array(shape({path:text,sha256:text}))})})});
 const fact=shape({id:text,label:text,value:text});
 const resource=shape({label:text,role:text,description:text,href:text});
-export const parseAuthoringContent=shape({panel:shape({introduction:text,facts:array(fact),moreFacts:array(fact)}),
-  lenses:shape({controls:array(shape({description:text,title:text,detail:text,source:shape({url:text})}))}),
+export const parseAuthoringContent=shape({panel:shape({facts:array(fact),moreFacts:array(fact)}),
+  lenses:shape({controls:array(shape({id:text,label:text,source:shape({url:text})}))}),
   settings:shape({controls:array(shape({name:text,checked:optional(boolean)}))}),resources:array(resource),provenance:requireRecord});
 export const parseAuthoringNavigation=shape({source:value=>Object.assign({},requireRecord(value),shape({path:text,expectedBytes:number,expectedSha256:text})(value))});
 export function parseAuthoringSolid(value:unknown) {

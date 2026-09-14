@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "17a28c2cd23773a1a4572d4ef56c79e54a2df87d6ad0c00be212304c7793e55e"
+          "sha256": "daf29d0e523c012e1cafc05bcfb9d4aee946e313ed945bf4f76d1eaae7a3ac24"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "38c64a0cd7bde8473707ffe7583e7ce66da8de355edbd7d2f8b0c14922293a4f"
+        "sha256": "cea470f1f8fb39e060fafae67a0047e64480f1656f2e3de8461e08a61fd5189a"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 1.9869,
-      "description": "Explore the primary of 2001 SN263 through its archived radar shape.",
+      "description": "Largest member of a triple asteroid system.",
       "systemName": "Solar System",
       "order": 15,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5b340c7384f228ad219c24916d33a5d22fc8bca86d559a8b3c0f1171b449fd70"
+    "sha256": "96a2c3c5e512c100192a0f442045f1d6cdd4deff70f15325224468b649824065"
   }
 }

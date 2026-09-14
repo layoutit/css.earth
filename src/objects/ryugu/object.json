@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "73c67c44e79fbd34c6f4425e09afe744ab4cba09c7fb1133fe80266ab3c87533"
+    "sha256": "74796f98ee8ca8dbd9985543b18b587a19b2d9f4528b8a56d17fff4c328f76a1"
   },
   "id": "ryugu",
   "properties": {
@@ -87,7 +87,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "9c61ad83073b03c5efa5b10ffa81653906a00e68c873d09ab683b27c27a0482f"
+          "sha256": "854286864c3262a82af2221ad9e8c0c24e71d430649cff76f6a4fdf474092040"
         },
         {
           "id": "title",
@@ -148,7 +148,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ce838ef4305ba5c0152e0c139ab5ab88485c4da88dbcf0a2249b292efba97b22"
+        "sha256": "8a687b36715cf1f1dade33cbb4d00da375c6458735587007c6b5c1be8bfc909a"
       }
     },
     "catalog": {
@@ -156,7 +156,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 1.19,
-      "description": "Explore Ryugu in 3D with cssEarth using mission-derived shape and surface data.",
+      "description": "Dark, spinning-top-shaped asteroid sampled by Hayabusa2.",
       "systemName": "Solar System",
       "order": 122,
       "context": {

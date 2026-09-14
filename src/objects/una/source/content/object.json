@@ -4,7 +4,6 @@
   "id": "una",
   "displayName": "Una",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 77.72 km (catalog ±1.23 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
-        "title": "DAMIT 169 shape model",
         "thumbnail": "/scenes/una/una-shape-thumbnail.webp",
         "surface": "una-shape-surface@2x.webp",
         "poles": "una-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 38.86 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 169 radial height",
         "thumbnail": "/scenes/una/una-elevation-thumbnail.webp",
         "surface": "una-elevation-surface@2x.webp",
         "poles": "una-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/169",
           "image": "/scenes/una/una-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 38.86 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

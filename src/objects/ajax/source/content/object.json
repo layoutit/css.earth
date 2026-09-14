@@ -4,7 +4,6 @@
   "id": "ajax",
   "displayName": "Ajax",
   "panel": {
-    "introduction": "Jupiter Trojan in the L4 leading cloud. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 83.99 km effective diameter (fit ±1.279 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
-        "title": "Ajax · DAMIT 3327 convex shape",
         "thumbnail": "/scenes/ajax/ajax-shape-thumbnail.webp",
         "surface": "ajax-shape-surface@2x.webp",
         "poles": "ajax-shape-surface@2x.webp",
@@ -78,13 +75,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "DAMIT model"
+        "notes": "Convex light-curve reconstruction with approximate thermal size: 83.99 km effective diameter (fit ±1.279 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 41.995 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Ajax · source-model radial height",
         "thumbnail": "/scenes/ajax/ajax-elevation-thumbnail.webp",
         "surface": "ajax-elevation-surface@2x.webp",
         "poles": "ajax-elevation-surface@2x.webp",
@@ -106,7 +102,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3327",
           "image": "/scenes/ajax/ajax-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 41.995 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "1996 HW1 is a contact-binary near-Earth asteroid reconstructed from Arecibo radar and optical lightcurves. Explore its original shape and radial heights. The grid marks unavailable surface imagery. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied.",
     "facts": [
       {
         "id": "radius",
@@ -53,8 +52,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "The shared grid marks unavailable surface imagery on this radar model. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
-        "title": "Radar shape model",
         "thumbnail": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-thumbnail.webp",
         "surface": "asteroid-1996-hw1-shape-surface@2x.webp",
         "poles": "asteroid-1996-hw1-shape-surface@2x.webp",
@@ -63,13 +60,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "notes": "The shared grid marks unavailable surface imagery on this radar model. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "False color shows radius at the nearest source-surface point minus a 1.01 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 26 m is withheld. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied.",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-thumbnail.webp",
         "surface": "asteroid-1996-hw1-elevation-surface@2x.webp",
         "poles": "asteroid-1996-hw1-elevation-surface@2x.webp",
@@ -91,7 +87,7 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/1996hw1.obj",
           "image": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "False color shows radius at the nearest source-surface point minus a 1.01 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 26 m is withheld. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied."
       }
     ]
   },

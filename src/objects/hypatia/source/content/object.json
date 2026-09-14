@@ -4,7 +4,6 @@
   "id": "hypatia",
   "displayName": "Hypatia",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 143.97 km effective diameter (catalog ±1.55 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "DAMIT 3844 shape model",
         "thumbnail": "/scenes/hypatia/hypatia-shape-thumbnail.webp",
         "surface": "hypatia-shape-surface@2x.webp",
         "poles": "hypatia-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 71.985 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 3844 radial height",
         "thumbnail": "/scenes/hypatia/hypatia-elevation-thumbnail.webp",
         "surface": "hypatia-elevation-surface@2x.webp",
         "poles": "hypatia-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3844",
           "image": "/scenes/hypatia/hypatia-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 71.985 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

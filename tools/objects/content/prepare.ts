@@ -64,7 +64,6 @@ export function prepareObjectContent(
   return {
     objectId: source.id,
     title,
-    introduction: source.panel.introduction,
     facts,
     moreFacts,
     lenses: prepareLenses(source.id, {
@@ -101,7 +100,8 @@ export async function prepareObjectContentAssets({
   }
   const sourcePath = resolve(sourceDirectory, config.contentPath ?? "content/object.json");
   const source = JSON.parse(await readFile(sourcePath, "utf8")) as ObjectContentSource;
-  await verifyFactsheetSources(source.panel, { objectDirectory: resolve(sourceDirectory, '..') });
+  const objectDirectory = resolve(sourceDirectory, '..');
+  await verifyFactsheetSources(source.panel, { objectDirectory });
   const titleSourcePath = source.provenance.title?.path;
   let preparedSource = source;
   if (titleSourcePath?.endsWith(".json")) {
@@ -141,7 +141,6 @@ export async function prepareObjectContentAssets({
     schema: "cssearth-prepared-content@1",
     objectId: preparedWithAssets.objectId,
     title: preparedWithAssets.title,
-    introduction: preparedWithAssets.introduction,
     facts: preparedWithAssets.facts,
     moreFacts: preparedWithAssets.moreFacts,
     charts: preparedWithAssets.charts,
@@ -162,17 +161,14 @@ export async function prepareObjectContentAssets({
   const shellLenses = {
     title: preparedWithAssets.lenses.title,
     defaultLens: preparedWithAssets.lenses.defaultLens,
-    controls: preparedWithAssets.lenses.controls.map(({ id, label, detail, thumbnailUrl, description, summary, facts, legend, legendNote, title }) => ({
+    controls: preparedWithAssets.lenses.controls.map(({ id, label, thumbnailUrl, noData, facts, legend, legendNote }) => ({
       id,
       label,
-      ...(detail ? { detail } : {}),
       thumbnailUrl,
-      description,
-      ...(summary ? { summary } : {}),
+      ...(noData === true ? { noData } : {}),
       ...(facts?.length ? { facts } : {}),
       ...(legend ? { legend } : {}),
       ...(legendNote ? { legendNote } : {}),
-      title,
     })),
   };
   const controls = {

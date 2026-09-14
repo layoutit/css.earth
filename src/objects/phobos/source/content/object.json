@@ -4,7 +4,6 @@
   "id": "phobos",
   "displayName": "Phobos",
   "panel": {
-    "introduction": "Phobos is the larger, inner moon of Mars. Its irregular surface is crossed by grooves and dominated by Stickney crater. It completes an orbit in less than eight hours.",
     "facts": [
       {
         "id": "radius",
@@ -82,9 +81,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
-        "title": "Controlled multi-mission mosaic",
-        "detail": "Multi-mission mosaic",
         "thumbnail": "/scenes/phobos/phobos-normal-thumbnail.webp",
         "surface": "phobos-normal-surface@2x.webp",
         "poles": "phobos-normal-poles@2x.webp",
@@ -93,14 +89,11 @@
           "path": "../manifest.json",
           "url": "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m"
         },
-        "summary": "Images from several missions are registered to the same surface. Detail varies; photographed shadows and edited seams remain."
+        "notes": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain."
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m.",
-        "title": "Shape-derived radial height",
-        "detail": "Shaded relief",
         "thumbnail": "/scenes/phobos/phobos-elevation-thumbnail.webp",
         "surface": "phobos-elevation-surface@2x.webp",
         "poles": "phobos-elevation-poles@2x.webp",
@@ -123,14 +116,11 @@
           "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
           "image": "/scenes/phobos/phobos-elevation-legend.webp"
         },
-        "summary": "Height relative to an 11.1 km sphere, from the 2023 model. Shading shows slopes; mesh spacing is about 148 m."
+        "notes": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m."
       },
       {
         "id": "albedo",
         "label": "Relative albedo",
-        "description": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo.",
-        "title": "SPC relative albedo model",
-        "detail": "Released facet values",
         "thumbnail": "/scenes/phobos/phobos-albedo-thumbnail.webp",
         "surface": "phobos-albedo-surface@2x.webp",
         "poles": "phobos-albedo-surface@2x.webp",
@@ -152,14 +142,12 @@
           "meta": "SPC relative scale",
           "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
           "image": "/scenes/phobos/phobos-albedo-legend.webp"
-        }
+        },
+        "notes": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo."
       },
       {
         "id": "slope",
         "label": "Slope",
-        "description": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table.",
-        "title": "Modeled surface slopes",
-        "detail": "Released facet values",
         "thumbnail": "/scenes/phobos/phobos-slope-thumbnail.webp",
         "surface": "phobos-slope-surface@2x.webp",
         "poles": "phobos-slope-surface@2x.webp",
@@ -181,7 +169,8 @@
           "meta": "deg",
           "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
           "image": "/scenes/phobos/phobos-slope-legend.webp"
-        }
+        },
+        "notes": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table."
       }
     ]
   },

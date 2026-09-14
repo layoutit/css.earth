@@ -4,7 +4,6 @@
   "id": "agenor",
   "displayName": "Agenor",
   "panel": {
-    "introduction": "Jupiter Trojan in the L5 trailing cloud. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 50.799 km effective diameter (fit ±1.181 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
-        "title": "Agenor · DAMIT 4273 convex shape",
         "thumbnail": "/scenes/agenor/agenor-shape-thumbnail.webp",
         "surface": "agenor-shape-surface@2x.webp",
         "poles": "agenor-shape-surface@2x.webp",
@@ -78,13 +75,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "DAMIT model"
+        "notes": "Convex light-curve reconstruction with approximate thermal size: 50.799 km effective diameter (fit ±1.181 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 25.3995 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Agenor · source-model radial height",
         "thumbnail": "/scenes/agenor/agenor-elevation-thumbnail.webp",
         "surface": "agenor-elevation-surface@2x.webp",
         "poles": "agenor-elevation-surface@2x.webp",
@@ -106,7 +102,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4273",
           "image": "/scenes/agenor/agenor-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 25.3995 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

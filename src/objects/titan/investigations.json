@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "titan",
+  "entries": [
+    {
+      "id": "iss-near-infrared",
+      "subject": "USGS 2026 Cassini ISS CL1/CB3 938 nm mosaic",
+      "status": "included",
+      "finding": "Selected 32-pixels-per-degree ISS mosaic supplies Near-infrared; exact zero is missing while dark dunes and lakes remain observed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://doi.org/10.5066/P14FAEKS"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-radar-midr",
+      "subject": "Cassini RADAR MIDR hemispheres",
+      "status": "included",
+      "finding": "Paired MIDR products supply Radar; mapped backscatter is not visible-light color.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "gtdr-measured-topography",
+      "subject": "Cassini 2019 GTDR measured-height hemispheres",
+      "status": "included",
+      "finding": "GTIED products supply measured Topography on the stated reference surface and retain missing regions.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N090_T126_V01.IMG.gz"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "gtdr-interpolated-topography",
+      "subject": "Cassini 2019 GTDR interpolated-height hemispheres",
+      "status": "included",
+      "finding": "GTDED products supply Interpolated topography as its own quantity rather than filling measured-height gaps.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N090_T126_V01.IMG.gz"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "gtdr-coverage-distance",
+      "subject": "Cassini 2019 GTDR coverage-distance hemispheres",
+      "status": "included",
+      "finding": "GTFED products supply Coverage distance, preserving its diagnostic meaning instead of treating it as terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N090_T126_V01.IMG.gz"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "titan-geomorphology",
+      "subject": "Titan global geomorphology vector dataset",
+      "status": "included",
+      "finding": "Mendeley geomorphology data supplies categorical Geology; source classes are not observation pixels or elevation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "vims-iss-2019-composite",
+      "subject": "2019 VIMS/ISS enhanced-color composite",
+      "status": "unresolved",
+      "finding": "The candidate fills missing VIMS color and removes seams without a validity mask, so observed coverage cannot be established.",
+      "revisitWhen": "A validity mask and registration distinguish observed VIMS pixels from fills.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://data.caltech.edu/records/8q9an-yt176"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "superseded-cornell-cubes",
+      "subject": "Superseded Cornell cube ZIPs and byte-browse products",
+      "status": "excluded",
+      "finding": "They remain research evidence but are not rendered after selection of retained GTDR products.",
+      "revisitWhen": "A source review establishes a distinct mapped quantity with preserved values and coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://data.astro.cornell.edu/RADAR/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a730f46ca459773e07ee89a79f9eca529c37189152e1277a5e92fa49d2a8c050"
+          "sha256": "e24489061d4d1267b3f4156059e11ab956aef5e09e7d83ec64d1f57cd6a7f0a2"
         },
         {
           "id": "title",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "60bf9a908896e6ec9c02ec59eac8f889c17ce4cc32c25ee96f7ce098b6a106ca"
+        "sha256": "ca82f43ba4f245ccbc0ba4a42f830f8845ddafe562a46b01e89a3da1598e4988"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "satellite",
       "color": "#c3bfb7",
       "distanceAu": 9.58,
-      "description": "Explore Daphnis in 3D with Cassini imagery and its measured irregular shape.",
+      "description": "Tiny moon in Saturn's Keeler Gap that raises waves along the ring edges.",
       "systemName": "Solar System",
       "order": 112,
       "context": {
@@ -139,6 +139,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2489fbd9328af950b17369d82641ffbed0db9b8faf2191f820611b2a19b5db0e"
+    "sha256": "f65be1550bcfd8dd4df1ef65b08f1ddb8551e322cf5ac7de802754fdaaefe66b"
   }
 }

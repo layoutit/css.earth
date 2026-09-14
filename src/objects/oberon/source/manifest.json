@@ -387,8 +387,8 @@
     {
       "id": "oberon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 8134,
-      "expectedSha256": "3e47b5cd546cc90ee38740673d64a03658f53206c12585b07136634792a99ed3",
+      "expectedBytes": 7770,
+      "expectedSha256": "31003eeda76a6bfb69d54e7cd6b14140d91d18097cc8c718961b374974e0705a",
       "origin": "Repository-authored Oberon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -400,7 +400,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     }
   ],

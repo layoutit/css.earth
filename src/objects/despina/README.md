@@ -2,15 +2,15 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - The Shape model uses the **90 × 74 × 64 km semi-axes** fitted to Voyager images by E. Karkoschka (2003), *Icarus* 162, 400–407, [DOI: 10.1016/S0019-1035(03)00002-2](https://doi.org/10.1016/S0019-1035(03)00002-2).
 
 - The 74 km scene reference radius comes from NASA/NAIF PCK00011 BODY805 and the pinned JPL Horizons physical record.
 
 ## Evidence
 
-| Candidate | Outcome |
-| --- | --- |
-| [PDS Voyager ISS calibrated GEOMED archive](https://pds-rings.seti.org/voyager/iss/), OPUS Despina surface-geometry search | Inspected the best geometry-ranked frames C1135325, C1135319, C1135255, C1134547 and C1134350. Finest listed original image scale is about 17.15 km/pixel, a disc only about 8–12 pixels across after GEOMED resampling. Points, blur, optical response and illumination dominate; not used as mapped terrain. The search is pinned in `survey/opus-candidates.json`. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 ## Known problems
 
@@ -39,11 +39,7 @@ The grid, thumbnail, minimap and companion portrait all use this interpretation.
 
 ## Candidate survey, 2026-09-07
 
-| Candidate | Outcome |
-| --- | --- |
-| Karkoschka (2003) additional Despina images C1129447, C1130353 and C1135301 | Downloaded and inspected original GEOMED image bytes and labels. First two are long-trail images against strong Neptune glare; C1135301 offers only a tiny disc. Useful shape evidence in the published analysis, but not a qualified registered texture. The inspected calibration labels are retained; originals remain downloadable at the paths below. |
-| [PDS Stooke shape collection](https://sbn.psi.edu/pds/resource/stkshape.html) and [USGS mapping](https://www.usgs.gov/special-topics/planetary-geologic-mapping) | No Despina terrain mesh, registered mosaic or elevation product was identified in these releases. An ellipsoid is not an Elevation dataset. |
-| [Keck near-infrared photometry](https://www.sciencedirect.com/science/article/am/pii/S0019103524000629), Hubble and [JWST NIRCam spectral study](https://doi.org/10.3847/PSJ/adf325) | Disk-integrated measurements are relevant to surface composition and brightness, but are not spatial texture maps. No fabricated color/composition lens is added. The source survey does not claim these observations do not exist. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 GEOMED source URL pattern for these inspected images: `https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11353XX/C1135301_GEOMED.IMG` (and matching `.LBL`; replace the five-digit directory and seven-digit image id for other frames). Original imagery is calibrated linear I/F, but no deconvolution, photometric recovery or shadow removal is asserted because these frames are not being turned into surface texels. Querying only intended target Despina misses these images; the moons were imaged in frames aimed at Neptune or its rings.
 

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "6b61126f25a3257199a18d2b19201d15783a2daed331f9a65e73956d4d4f4dee"
+          "sha256": "d30ccc2a324837fd75bcb01848512dbd4487a70430f6a4bb75b926f797cc9daa"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4ee6c230410d98395ee3cb403475de2d78f8e7f97aa653345ecc06e8785d3193"
+        "sha256": "d37dc311a875d16aecbc0fc2640fe258c10238710a9c5ad7e281eddb2ae852bf"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6802741704742274,
-      "description": "Explore Angelina in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in March 1861.",
       "systemName": "Solar System",
       "order": 188,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e841dac2984647ee5c1d732004e737a7fae982ff02d7505b43004ac64582de6f"
+    "sha256": "e711dacb7a4fb10357c583fcad9a12d1ab91ba3819dbfee44c1aebfb92eba5ea"
   }
 }

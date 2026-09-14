@@ -4,7 +4,6 @@
   "id": "clarissa",
   "displayName": "Clarissa",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction, 43 ± 4 km volume-equivalent diameter. This pole gives the preferred occultation fit; the rival pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "DAMIT 296 shape model",
         "thumbnail": "/scenes/clarissa/clarissa-shape-thumbnail.webp",
         "surface": "clarissa-shape-surface@2x.webp",
         "poles": "clarissa-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 21.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 296 radial height",
         "thumbnail": "/scenes/clarissa/clarissa-elevation-thumbnail.webp",
         "surface": "clarissa-elevation-surface@2x.webp",
         "poles": "clarissa-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/296",
           "image": "/scenes/clarissa/clarissa-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 21.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

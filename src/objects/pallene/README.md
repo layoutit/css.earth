@@ -24,7 +24,7 @@ This approximate local illumination normalization omits a phase function, multip
 
 The finer 2010/2011 frame trials below were excluded for saturation, high phase or too little reliable coverage. Their limits were not relaxed to add pixels.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 <a id="pallene-sources-and-interpretation"></a>
 <a id="measured-shape"></a>
@@ -47,21 +47,11 @@ OPUS supplies the planetocentric observer/Sun latitude, west-positive longitude,
 
 Preparation rejects connected sky at I/F ≤0.02, insets that source validity by one native pixel, requires incidence and emission ≤55°, and keeps a point only where qualifying pixels carry at least half of its bilinear weight. These controls preserve the reliable interior and exclude the limb/PSF and uncertain pointing boundary. The surface is normalized per observation using a Lommel–Seeliger term, `gain=(mu0+mu)/(2*mu0)`, with gain≤2. The display range is 0–0.492 I/F, the 99.5th percentile of displayed samples, shown linearly. No level multiplier is fitted (one selected image).
 
-**Dataset survey**
+**Investigation record**
 
-Surveyed on 2026-09-08 beyond press images. `survey/opus-resolved.json` records all 39 Pallene-targeted ISS observations at ≤2 km/pixel returned by the actual archive query.
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json), including what would reopen each decision.
 
-| Candidate | Disposition |
-| --- | --- |
-| Calibrated/raw Cassini N1496910582, 2005 low phase | **Included.** Stable low-phase footprint and unsaturated detector signal; registration and photometry in these methods. |
-| Calibrated/raw N1665947247, 2010, 219.77 m/pixel, 74.67° phase | **Excluded after a preparation trial.** The clear-filter view is against Saturn and contains 45 DN255 pixels in a 25 × 25 pixel crop. Calibration turns this clipping plateau into varying I/F 0.249–0.266, so a calibrated-value threshold is unsafe. Full-limb fit with independent north 180.085309313° gives center [114.06381879, 613.17728458], RMS 0.405 pixel. A preparation trial applying a paired-raw saturation mask, one-pixel inset and unchanged 55° incidence/emission limits leave **zero** valid samples. Original image/label and trial recipe/result are pinned for reproduction. No apparent Saturn background is mapped onto the body. |
-| N1694657087, 2011, finest 156.44 m/pixel | **Excluded for mapping.** Actual phase 158.148° leaves a thin, uncertain illuminated rim. The calibrated original and metadata were inspected. Fine nominal resolution does not create reliable illuminated interior texels. |
-| N1694661188, 2011, 243.98 m/pixel, 102.198° phase | **Excluded after a geometry/coverage trial.** Independent north 178.649923287° and fitted center [496.39506156, 419.80630491] give RMS 0.756 pixel. A one-pixel inset leaves 115 resampled map cells in only four interpolation footprints, within a 1.13-pixel-wide strip. A two-pixel margin for its fit/PSF/shape uncertainty leaves zero samples. The coverage limits are not relaxed to obtain more pixels. |
-| Other finer 2010/2011 ISS frames | Calibrated examples and filter/exposure metadata were compared. Higher phase, saturation, different filters and narrow reliable interiors prevent an independently qualified improvement over the selected clear-filter patch. A color lens would require registered, valid unsaturated bands; none is claimed. |
-| [PDS Saturn small-moon shape release](https://doi.org/10.26033/ewy3-jy61) | **Excluded for Pallene.** Its actual eleven-body inventory does not include Pallene. The Buratti et al. 2019 / Thomas 2020 model descriptions identify these tiny ring-arc moons as ellipsoid cases. Another moon's detailed mesh is not substituted. |
-| [Thomas & Helfenstein 2020](https://doi.org/10.1016/j.icarus.2019.06.016) | **Unresolved updated detail.** The abstract/accessible text describes final Cassini fits, but publisher full text returned 403. No more suitable downloadable Pallene detailed shape or controlled surface map was located. Current PCK still supplies the 2013 dimensions; no unseen updated numbers are claimed. |
-| [Hedman et al. photometry](https://arxiv.org/abs/1912.09192) | **Editorial context.** Shape-aware integrated photometry indicates Pallene is relatively dark among the small moons. It is not a registered global albedo/terrain texture. No mapped spectral, thermal or elevation product suitable for a separate Pallene lens was found in the inspected mission/mapping releases. |
-| [NASA Pallene overview](https://science.nasa.gov/saturn/moons/pallene/) | **Editorial context.** Discovery, dust ring and approximate orbit. Press illustrations are not texture inputs. |
+NASA display photographs remain context-only references with photographed illumination; the calibrated PDS product remains the selected surface source.
 
 **Runtime orientation and restoration**
 

@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "494aca5f5727776ca9b1b0c697a0e0df26d18d30d98e403bc2511bdfa29a0272"
+    "sha256": "6b15b94e89559fe94c088c45b6917e464ddbfa7e16e1084dbbf64756a0bf5599"
   },
   "properties": {
     "preparation": {
@@ -44,7 +44,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2e2bdd7262085f7533eea21959a71dea038f22ce696a93f7ecb1394d4721ccec"
+          "sha256": "71afdd3236e654eb583867fe1425ac0ddd658fdbcc89b70cf9c53fea79bc074d"
         },
         {
           "id": "acquisition",
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "34326a1493cff79e00b7cb80bac1fc0717b89122b70aca61a4ad4c3b4df2e62d"
+        "sha256": "f7950e164d58fb810e7edc005f95e4beb9a7e6116999078b9b7870e808bb7be8"
       }
     },
     "catalog": {
@@ -128,7 +128,7 @@
       "classification": "dwarf-planet",
       "color": "#cccccc",
       "distanceAu": 43.1,
-      "description": "Explore Haumea’s measured elongated shape and narrow ring, with an illustrative NASA surface texture.",
+      "description": "Rapidly spinning, elongated dwarf planet with a ring.",
       "systemName": "Solar System",
       "order": 460,
       "context": {

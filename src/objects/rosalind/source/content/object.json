@@ -4,7 +4,6 @@
   "id": "rosalind",
   "displayName": "Rosalind",
   "panel": {
-    "introduction": "Rosalind is a small inner moon of Uranus discovered by Voyager 2. Its measured outline is consistent with a nearly spherical body.",
     "facts": [
       {
         "id": "radius",
@@ -44,9 +43,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Published 72 × 72 × 72 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
-        "title": "Approximate shape model",
-        "detail": "Measured shape",
         "thumbnail": "/scenes/rosalind/rosalind-model-thumbnail.webp",
         "surface": "rosalind-model-surface@2x.webp",
         "poles": "rosalind-model-poles@2x.webp",
@@ -55,7 +51,8 @@
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/2401.04634"
         },
-        "summary": "A published 72 km spherical shape estimate. The grid marks missing imagery; local terrain is unresolved."
+        "notes": "Published 72 × 72 × 72 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+        "noData": true
       }
     ]
   },

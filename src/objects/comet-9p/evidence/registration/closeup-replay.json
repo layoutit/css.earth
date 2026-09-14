@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-closeup-replay-comparison@1",
+  "objectId": "comet-9p",
+  "date": "2026-09-13",
+  "status": "unresolved",
+  "command": "node tools/objects/comet-9p/prepare-closeups.mts",
+  "frame": "iv05070405_9000675_001_r",
+  "comparison": [
+    {
+      "commit": "fc4dfc18e42b5abf7bd898a2da85ae26571a211b",
+      "matcherSha256": "c4871aa719fdc3d89b9b6b4768169a4b14190d99005d513d1f5b55aabdb47307",
+      "outcome": "Encounter camera exceeds its source-scale registration budget."
+    },
+    {
+      "commit": "8475dd92009350873cd597f1c651c7ddec221a58",
+      "matcherSha256": "c6932f526b30e8728e9e6836682383bc3c86f98704c41170e08991398bf325b7",
+      "outcome": "Encounter camera exceeds its source-scale registration budget."
+    }
+  ],
+  "method": "Run the same source preparer and pinned native inputs with each matcher. Diagnostic copies only substitute the matcher import and write the first regenerated camera record immediately before registration validation. No control, mask or tolerance is changed.",
+  "nativeInputs": [
+    {
+      "path": "manifest.json",
+      "bytes": 168402,
+      "sha256": "eaac375e84c16585b2233a370586470ef8544b7182f0a54b6d5a603a7876790b"
+    },
+    {
+      "path": "preparation/closeups.json",
+      "bytes": 1554,
+      "sha256": "65221b0b656805620f31c35be63d023392c133f8734073fe5166720ad7b2908b"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000675_001_r.fit",
+      "bytes": 662400,
+      "sha256": "1e16220cef4edf6961f06b0a0651be5bb1202c8cf716ebdb0e2c74c7fe115520"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
+      "bytes": 662400,
+      "sha256": "26ecb6a0e4f51ea717f922aea44702585d73303c858771a8417368135a1ab026"
+    },
+    {
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.json",
+      "bytes": 13379,
+      "sha256": "41a8b4f8558f50db5dfd8fa7e54aa2bee03d0c5f8a6ef1a0944d914314ef36e1"
+    }
+  ],
+  "regeneratedControl": {
+    "bytes": 57800,
+    "sha256": "9194eb295c86355b0607a438dc6ee5ecfc596c0ccd659f6c70591fc795273b53",
+    "identical": true,
+    "sourceShapeSha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777",
+    "offsetPixels": [
+      -1.992446814780836,
+      -11.27838084428358
+    ],
+    "fitControls": 41,
+    "holdoutControls": 39
+  },
+  "limitations": [
+    "The earlier successful close-up evidence does not establish a current reproduction pass.",
+    "Only the first failing frame is compared; later frames are not reached.",
+    "The cause of this existing replay discrepancy remains unresolved. Shipped controls and photographs were not changed."
+  ]
+}

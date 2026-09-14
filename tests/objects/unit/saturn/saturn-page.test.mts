@@ -9,9 +9,9 @@ const PREPARED_SATURN_PANEL=await readPreparedFixture('saturn','content');
 const PREPARED_SATURN_TITLE=PREPARED_SATURN_PANEL.title;
 const moonCatalog=JSON.parse(await readFile(new URL('../../../../src/objects/saturn/source/moons/saturn-moons.json',import.meta.url),'utf8'));
 
-test("publishes the prepared Saturn shell content", () => {
+test("publishes the prepared Saturn shell content", async () => {
   assert.equal(PREPARED_SATURN_TITLE.label, "Saturn");
-  assert.match(PREPARED_SATURN_PANEL.introduction, /sixth planet from the Sun/u);
+  assert.match(JSON.parse(await readFile(new URL('../../../../src/objects/saturn/prepared/text.json', import.meta.url), 'utf8')).card.text, /sixth planet from the Sun/u);
   assert.deepEqual(PREPARED_SATURN_PANEL.facts.map(({id,label,value})=>({id,label,value})), [
     { id: "distance-from-sun", label: "Solar semimajor axis", value: "9.537 AU" },
     { id: "radius", label: "Mean radius", value: "58,232 km" },

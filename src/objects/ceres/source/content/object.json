@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Ceres is the largest body in the asteroid belt. NASA's Dawn spacecraft mapped its cratered surface and bright salt deposits.",
     "facts": [
       {
         "id": "radius",
@@ -85,8 +84,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
-        "title": "FC visible-light mosaic",
         "thumbnail": "ceres-lens-normal.webp",
         "surface": "ceres-normal.webp",
         "poles": "ceres-poles-normal.webp",
@@ -94,14 +91,12 @@
           "id": "usgs-dawn-fc-global-140m",
           "path": "../manifest.json"
         },
-        "detail": "Global mosaic",
-        "summary": "Photographed shadows remain in the visible-light images. The gray grid marks known gaps; some dark edges remain uncertain."
+        "notes": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+        "noData": true
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
-        "title": "False-color mosaic PIA19977",
         "thumbnail": "ceres-lens-enhanced.webp",
         "surface": "ceres-enhanced.webp",
         "poles": "ceres-poles-enhanced.webp",
@@ -109,14 +104,12 @@
           "id": "nasa-dawn-fc-pia19977",
           "path": "../manifest.json"
         },
-        "detail": "False color",
-        "summary": "The 920, 750 and 440 nm bands are assigned false colors. Photographed shadows remain and the gray grid marks known gaps."
+        "notes": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
-        "title": "HAMO digital terrain model",
         "thumbnail": "ceres-lens-elevation.webp",
         "surface": "ceres-elevation.webp",
         "poles": "ceres-poles-elevation.webp",
@@ -169,8 +162,8 @@
           "id": "dawn-elevation",
           "path": "../manifest.json"
         },
-        "detail": "Shaded relief",
-        "summary": "Height relative to a 470 km sphere. Interpolated polar terrain beyond 60° is withheld from this view."
+        "notes": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+        "noData": true
       }
     ]
   },

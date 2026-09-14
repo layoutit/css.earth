@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "df786156dcbe4defabedc76846f327036d679d2993e3278a33a0d53fb1959078"
+          "sha256": "d26a888e7c2a738145bdaba26f333ebbd3e40ef3c0c1bf9ad8abd8fa5d6316e0"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "47b64fb190958653730ec34c6cba1707bacc352b837800434ac93fea7b843751"
+        "sha256": "07a8346f5bd98ddd902a37ce545e5889908be8c4ffb7d6123b3debd6714b3dd4"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.152308355019594,
-      "description": "Explore Philosophia in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in August 1882.",
       "systemName": "Solar System",
       "order": 325,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "396f464fbdbb15d4f050a8512d5f7e52d6d22d57027f54e845277b1df143f3d5"
+    "sha256": "61cf301bfe3170d6dc8899802b3c3e1843b06eab8d52958e73d7a4cf51dd7953"
   }
 }

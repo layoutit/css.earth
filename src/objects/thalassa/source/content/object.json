@@ -4,7 +4,6 @@
   "id": "thalassa",
   "displayName": "Thalassa",
   "panel": {
-    "introduction": "Thalassa is a small, unusually flattened moon close to Neptune. Voyager 2 barely resolved its disk; this view shows its measured shape with a grid where surface imagery is unavailable.",
     "facts": [
       {
         "id": "radius",
@@ -49,9 +48,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
-        "title": "Approximate shape model",
-        "detail": "Measured axes",
         "thumbnail": "/scenes/thalassa/thalassa-model-thumbnail.webp",
         "surface": "thalassa-model-surface@2x.webp",
         "poles": "thalassa-model-poles@2x.webp",
@@ -60,7 +56,8 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.1016/S0019-1035(03)00002-2"
         },
-        "summary": "Shape estimated from Voyager images with motion blur. No reliable surface map is available; gray grid: no imagery."
+        "notes": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
+        "noData": true
       }
     ]
   },

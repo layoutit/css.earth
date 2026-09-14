@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "5151258be2e0b918182c7c1d408a97f01e0a42c5044c669c8b062ef9502073e4"
+          "sha256": "0d84f807be7a6a7cd1122813ba1a3036440658e8bfec4312214ccc70b0b5487b"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "51e131eb1863d0158c9234165571dd0bfcd1a4e32cc0c323506088bfa6da3988"
+        "sha256": "c9408a8b334000499a28acda29017750af69e9cb8ee08f9dd9b834f6730d3204"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.762763911317985,
-      "description": "Explore Alkmene in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in November 1864.",
       "systemName": "Solar System",
       "order": 247,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "96e8e5e3ebd6fc4ff20095c53461c9d931f9bcce4c9c6869e6a41f599442d6d8"
+    "sha256": "4a121b365c8519ddd7d5402f2c8747c8e64e83979dc59a01dff2d146f870dcaf"
   }
 }

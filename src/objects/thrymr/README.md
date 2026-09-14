@@ -22,7 +22,7 @@
 
 - Orbital fitting is documented separately in [orbital checks](source/validation/orbit-checks.json); the B1 source-only account makes no precision, current-vector or extrapolation claim.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 ## Methods and source notes
 
@@ -39,19 +39,9 @@ Its **derived display semi-axes** are **4.314931 × 3.566059 × 3.566059 km**. E
 
 No terrain, concavities, neck, separate component, or spatial albedo pattern is synthesized. The context image is rendered from the same source mesh, simplifier and grid as the eventual surface.
 
-## Source candidates and limits
+## Investigation record
 
-- **Cassini ISS:** [PDS archive](https://pds-rings.seti.org/cassini/iss/) and the [individual observation page](https://tilmanndenk.de/outersaturnianmoons/thrymr/) supply unresolved photometry. It constrains brightness/elongation; no registered surface photograph is qualified.
-
-- **Native inversion mesh:** [Denk et al. (2026), section 4.2](https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf) reports calculated convex models with papers in preparation. No native Thrymr mesh is asserted by this authored approximation.
-
-- **Terrain, colors, composition and binarity:** these checked sources do not qualify a mapped lens or components for this body. Integrated colors, where measured, are not painted onto the surface.
-
-- Scientific parameters are extracted with attribution; entire papers/pages are not redistributed under MIT.
-
-- **Source reconciliation:** Individual page numeric period cell omits a question mark; retain tentative flag from Table 3 and discussion.
-
-- **Source reconciliation:** Older 122-target overview nominal diameter 7.6 km differs from current Table 1C rounding/inputs. Adopt this row's body-page radius 3.8 km and retain quoted diameter range; do not mix them as precise measurements.
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json), including what would reopen each decision.
 
 ## Orientation and orbit
 

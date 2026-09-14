@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "320aadd5aa05a8b78ff8323bd24cb5ba04040d025ba2dc4887fbd4ef8b6837e6"
+    "sha256": "0cf5ef2adda82d21e5e2794d482a8903d83956bd77090e31eec0f0a7623a4e94"
   },
   "id": "gaspra",
   "properties": {
@@ -72,7 +72,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3609f1150269c46ced3e4175b8e19dfeb37b470f0d88e9a7e7a4666b755535cb"
+          "sha256": "89eace3af6e5324588de7c0db95fce55e61383596d34a77b2a9e7329c313fb08"
         },
         {
           "id": "title",
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4b22bcbb6b546f7d51cfcd2b3b1342afa6f0d00fc1f4cfa8b1c6f6e9ac824413"
+        "sha256": "214981fb4b01eccd9d78a075073fd46ca72d048e64866be4d5c7fa03433946d6"
       }
     },
     "catalog": {
@@ -141,7 +141,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.21,
-      "description": "Explore Gaspra in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.",
+      "description": "The first asteroid visited by a spacecraft.",
       "systemName": "Solar System",
       "order": 131,
       "context": {

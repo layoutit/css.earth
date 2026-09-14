@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a87cba09cde2fe5431647c8d351f75fabd9c5676b9f20be206afb26169d0d2db"
+          "sha256": "37cbc00073077be9366935e76bef3896fbb364aeb5a96f7559301a628391af45"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f7b57b1cb64244dfd04201a89b5d1a4a6a8268d10969d479e860260c5e9146b4"
+        "sha256": "c4cb3f90ea8676cd3afecd57c843de51ad777e13f3a55a503533af4e2dc6bb90"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.201650929201143,
-      "description": "Explore Eumelos in 3D with its published shape model and radial elevation.",
+      "description": "Jupiter Trojan asteroid, discovered in February 1990.",
       "systemName": "Solar System",
       "order": 366,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "422191be9c37c8a16be85318a16cdab5c8cc68ef402a44273cfd72de474b6b33"
+    "sha256": "6b0071aef046b29cd394d2dabc89d5515b4cc87e587e49d82d4fb297b0a26bf8"
   }
 }

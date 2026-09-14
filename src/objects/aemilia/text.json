@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "aemilia",
+  "card": {
+    "text": "Dark, carbon-rich main-belt asteroid, discovered in January 1876.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=159",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1876-01-26 by Henry, Paul at Paris; albedo: 0.064; orbit class: Main-belt Asteroid; spec_B: Ch; spec_T: C"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Paul Henry found Aemilia at Paris in 1876. It is dark, reflecting about 6% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=159",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1876-01-26 by Henry, Paul at Paris; albedo: 0.064; orbit class: Main-belt Asteroid; spec_B: Ch; spec_T: C"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "ISAM SAGE 102 shape model",
+      "detail": "Published shape",
+      "summary": "A nonconvex shape fitted to light curves. Another pole also fits, and the spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "ISAM SAGE 102 radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 67.5 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "02799c9693a3b271c5c382ce7a16f361445653cff135470c571dd61d224931ce"
+          "sha256": "b263bb1b2c5bf875f155a2759fdf920d2b6a380bd46230a6343664221fadf805"
         },
         {
           "id": "title",
@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "eab646b2956bd16da970e283e224e0b1a6fc3f96ea70af8bbace0a969b814164"
+        "sha256": "57c504ab4c6af0ca1e0a3ed2bbdda0f6e7d2812624d150d67846ebae66569886"
       }
     },
     "worldFrame": {
@@ -118,7 +118,7 @@
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 43.528810315844204,
-      "description": "2002 TX300 is an icy member of the Haumea family. Reanalysis of a two-chord occultation supports a range of sizes and shapes; this view illustrates one published flattened solution.",
+      "description": "Bright, icy object beyond Neptune, related to Haumea.",
       "systemName": "Solar System",
       "order": 1,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f7d247f6b2d63cc4ca97c8c6da92695951b0d2c0fc17970a5165e2c1a5893812"
+    "sha256": "596b769ecc835b6a384088ff6a12b4412d3570764103098da5c950d8dba9fcdb"
   }
 }

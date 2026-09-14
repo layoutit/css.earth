@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "puck",
+  "entries": [
+    {
+      "id": "limb-registration-limit",
+      "subject": "C2683716 limb-only registration",
+      "status": "deferred",
+      "finding": "Only a limb-centre translation was fitted; 32.7% raster coverage, bounded illumination normalization and the analytic sphere do not establish landmark-controlled terrain.",
+      "revisitWhen": "A Puck camera or surface-control record permits independent interior holdouts beyond the fitted limb centre.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-voyager-iss-calibrated-image-c2683716",
+      "subject": "PDS Voyager ISS calibrated image C2683716",
+      "status": "included",
+      "finding": "Included. The OPUS target-geometry inventory returned 3,054 observations; this is the finest, at 4.76965 km per original detector pixel. The next candidate is 46.31359 km/pixel, too coarse to add worthwhile mapped detail. The top-ranked inventory and full selected metadata are pinned.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "other-voyager-filters-and-processed-press-images",
+      "subject": "Other Voyager filters and processed press images",
+      "status": "unresolved",
+      "finding": "No separately registered color observation at comparable useful resolution was located. A redistributed enlargement of the same clear image does not justify a second lens.",
+      "revisitWhen": "A Puck observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "karkoschka-2001-voyager-analysis-and-pds-size-catalo",
+      "subject": "Karkoschka (2001) measured scale and PDS size catalog",
+      "status": "included",
+      "finding": "Supports the source survey and measured scale. The catalog's DOI ending 6596 points to the companion HST paper; 6597 is the Voyager size paper. No released detailed Puck vertices/facets were located with the inspected publications. The sphere is openly approximate.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/source/manifest.json",
+        "https://doi.org/10.1006/icar.2001.6597"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-stooke-shape-release-naif-shape-releases-and-usg",
+      "subject": "PDS Stooke shape release, NAIF shape releases and USGS map searches",
+      "status": "unresolved",
+      "finding": "No detailed scientific Puck mesh, DEM, or registered complementary surface map was located. A generic graticule layer is not a new observation. No hobbyist mesh is substituted.",
+      "revisitWhen": "The inspected shape archive or a cited primary release publishes a Puck-specific numerical model with its frame, units and reconstruction method.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/source/manifest.json",
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "near-infrared-photometry-of-uranus-s-inner-moons",
+      "subject": "Near-infrared photometry of Uranus's inner moons",
+      "status": "excluded",
+      "finding": "Integrated spectral/brightness measurements are useful science but do not provide a spatially registered Puck composition or color map. Excluded as a surface lens.",
+      "revisitWhen": "A spatially resolved Puck measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/puck/source/manifest.json",
+        "https://www.sciencedirect.com/science/article/pii/S0019103522004237"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}
