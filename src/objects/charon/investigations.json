@@ -3,6 +3,18 @@
   "objectId": "charon",
   "entries": [
     {
+      "id": "jwst-protopapa-2024-carbon-dioxide-peroxide",
+      "subject": "Protopapa et al. 2024 JWST carbon dioxide and hydrogen peroxide detections",
+      "status": "deferred",
+      "finding": "Inspected the published study as a possible composition-map source. Its detections characterize disk-integrated spectra of the observed northern hemisphere; they do not supply resolved regional abundance maps. Painting regional deposits from these detections would invent spatial information.",
+      "revisitWhen": "A release provides spatially resolved measurements with body-coordinate registration, or a separately authorized non-spatial spectroscopy view makes the existing disk-integrated measurements useful.",
+      "evidence": [
+        "https://doi.org/10.1038/s41467-024-51826-4",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11448499/"
+      ],
+      "checked": [{ "date": "2026-09-13", "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393" }]
+    },
+    {
       "id": "lorri-mvic-mosaic",
       "subject": "USGS New Horizons 300 m monochrome mosaic",
       "status": "included",

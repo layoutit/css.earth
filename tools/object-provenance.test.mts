@@ -88,6 +88,29 @@ test('acquired products retain their configuration input and verify its exact by
   await assert.rejects(prepareObjectProvenance(context), /identity mismatch: unused.dat/u);
 });
 
+test('composition lineage follows the pinned conversion recipe to the native archive', async t => {
+  const context = await fixture(t), manifestPath = resolve(context.source, 'manifest.json');
+  const recipe = JSON.stringify({schema: 'cssearth-mapped-composition@1', target: 'Fixture', referenceRadiusMeters: 100,
+    input: 'unused.dat', sha256: hash('unused'), observationName: 'fixture',
+    selections: [{id: 'surface', kind: 'posterior', field: 'ice', statistic: 'median'}]});
+  await writeFile(resolve(context.source, 'conversion.json'), recipe);
+  const manifest = await read(manifestPath);
+  manifest.documents = [{id: 'conversion', path: 'conversion.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe),
+    sourceBinding: {kind: 'local', reason: 'Authored conversion fixture'}, consumers: ['surfaces']}];
+  await writeFile(manifestPath, JSON.stringify(manifest));
+  await writeFile(resolve(context.source, 'preparation/acquisition.json'), JSON.stringify({operations: [
+    {kind: 'mapped-composition', path: 'observation.dat', recipePath: 'conversion.json', product: 'surface'},
+  ]}));
+  const document = await prepareObjectProvenance(context);
+  assert.deepEqual(new Set(productSourceIds(document, 'surface')), new Set(['observation', 'conversion', 'unused']));
+  assert.deepEqual(requireValue(document.sources.find(source => source.id === 'observation'), 'converted grid').dependencies, ['conversion', 'unused']);
+  // Recovery needs the checked-in recipe, but not the downloaded original.
+  await rm(resolve(context.source, 'unused.dat'));
+  assert.deepEqual(new Set(productSourceIds(await prepareObjectProvenance({...context, basis: 'recovered'}), 'surface')), new Set(['observation', 'conversion', 'unused']));
+  await writeFile(resolve(context.source, 'conversion.json'), recipe.replace('unused.dat', 'other.dat'));
+  await assert.rejects(prepareObjectProvenance({...context, basis: 'recovered'}), /identity mismatch: conversion.json/u);
+});
+
 test('upstream verification requests are recorded without inventing acquisition history', async t => {
   const context = await fixture(t);
   const verification = { kind: 'verify-request', expectedPath: 'observation.dat', url: 'https://example.org/api' };

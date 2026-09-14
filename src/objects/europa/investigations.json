@@ -3,6 +3,47 @@
   "objectId": "europa",
   "entries": [
     {
+      "id": "king-2022-sphere-composition",
+      "subject": "King, Fletcher and Ligier 2022 mapped VLT/SPHERE reflectance and composition fits",
+      "status": "deferred",
+      "finding": "The 2026-09-13 intake established available numerical grids and deferred preparation. The 2026-09-14 implementation below is ready for local review; public inclusion remains deferred for explicit reuse terms. Implemented Ice signature as the measured reflectance ratio at the exact released wavelengths 1.30000/1.50263 micrometres (19,644 valid native nodes). Fine ice (0.1-0.3 mm) and Coarse ice (0.3-1 mm) are separate v1.0.2 posterior-median model components (19,616 valid nodes each), with their own 16th/84th-percentile bounds. The source uses east-positive 0-359 degree longitude and latitude -90 through 89 degrees; the paper's west-positive presentation is converted explicitly. One-degree resampling preserves cells and no-data but does not add detail beyond the approximately 150 km effective SPHERE resolution (about 25 km/px sampling). The release has no aggregate total-ice posterior: do not sum component medians or percentile bounds. Zenodo is other-open/Open Access, but no explicit numerical-data reuse licence was located. Use remains local scientific preview and private draft PR only; do not publish the assets.",
+      "revisitWhen": "Reopen if the authors or archive publish explicit numerical-data reuse terms or a replacement release. Preserve the exact ratio wavelengths, component-specific uncertainty and no-data; do not manufacture an aggregate ice posterior.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/ac596d",
+        "https://doi.org/10.5281/zenodo.6034904",
+        "https://github.com/ortk95/king-2022-compositional-mapping-europa/blob/v1.0.2/README.md",
+        "https://github.com/ortk95/king-2022-compositional-mapping-europa/blob/v1.0.2/fit_SPHERE.json.gz",
+        "https://github.com/ortk95/king-2022-compositional-mapping-europa/blob/v1.0.2/reflectance_SPHERE.json.gz"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "f8fbdaa0b203f11b4f121b867eb478d38d6c311e"
+        }
+      ]
+    },
+    {
+      "id": "jwst-trumbo-brown-2023-carbon-dioxide",
+      "subject": "Trumbo and Brown 2023 JWST spatial distribution of carbon dioxide",
+      "status": "unresolved",
+      "finding": "Read the paper and its data-availability statement. The observations show spatial variation associated with Tara Regio, but the cited availability route provides raw MAST program 1250 observations, calibration program 1538 and reduction software. A released coordinate-bound numerical map was not located in this pass. A plotted paper figure is not a qualified surface input, and lack of a located map is not proof that one does not exist.",
+      "revisitWhen": "Inspect the linked reduction-software release for numerical map outputs and coordinate metadata, or qualify preparation from the MAST observations before proposing a ready carbon-dioxide surface layer.",
+      "evidence": [
+        "https://doi.org/10.1126/science.adg4155",
+        "https://arxiv.org/abs/2309.11684"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
+        }
+      ]
+    },
+    {
       "id": "voyager-galileo-monochrome",
       "subject": "USGS Voyager/Galileo 500 m global mosaic",
       "status": "included",

@@ -505,6 +505,85 @@
       ],
       "path": "features/EUROPA_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EUROPA_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/fit_SPHERE.json.gz",
+      "url": "https://raw.githubusercontent.com/ortk95/king-2022-compositional-mapping-europa/9dc54ad9984875f5766eb3d80d65eb66a74e10ce/fit_SPHERE.json.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/reflectance_SPHERE.json.gz",
+      "url": "https://raw.githubusercontent.com/ortk95/king-2022-compositional-mapping-europa/9dc54ad9984875f5766eb3d80d65eb66a74e10ce/reflectance_SPHERE.json.gz"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/fine-ice.tif",
+      "recipePath": "composition/model-recipe.json",
+      "product": "fine-ice"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/coarse-ice.tif",
+      "recipePath": "composition/model-recipe.json",
+      "product": "coarse-ice"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/fine-ice-uncertainty.tif",
+      "recipePath": "composition/model-recipe.json",
+      "product": "fine-ice-uncertainty"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/coarse-ice-uncertainty.tif",
+      "recipePath": "composition/model-recipe.json",
+      "product": "coarse-ice-uncertainty"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/model-conversion.json",
+      "recipePath": "composition/model-recipe.json",
+      "product": "report"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/ice-signature.tif",
+      "recipePath": "composition/reflectance-recipe.json",
+      "product": "ice-signature"
+    },
+    {
+      "kind": "mapped-composition",
+      "groups": [
+        "composition"
+      ],
+      "path": "composition/reflectance-conversion.json",
+      "recipePath": "composition/reflectance-recipe.json",
+      "product": "report"
     }
   ]
 }
