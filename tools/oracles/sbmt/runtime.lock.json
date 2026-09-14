@@ -1,0 +1,2523 @@
+{
+  "schema": "cssearth-sbmt-runtime@1",
+  "platform": "darwin-arm64",
+  "sbmt": "0.9.2.1",
+  "release": "2026.09.10",
+  "java": "17.0.2",
+  "bridge": "2.8.1",
+  "url": "https://sbmt.jhuapl.edu/publicRelease/releases/sbmt-0.9.2.1-2026.09.10_OSX_ARM.pkg",
+  "package": "sbmt-0.9.2.1-2026.09.10_OSX_ARM.pkg",
+  "bytes": 203749175,
+  "sha256": "822cbc5639c8c05ad051ede65908428dabc482ee81298773620aa46364545d95",
+  "files": [
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/GeographicLib-Java-1.49.jar",
+      "bytes": 36875,
+      "sha256": "78c292f7e6910d51a15fc9088c301fac3b4c0a43ac5ae17499f5763b4dd9aca8"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/HikariCP-6.2.1.jar",
+      "bytes": 168900,
+      "sha256": "c659a083727ce9590277357b8c3f63fbae67207bb04beabc964c8f4f15307dbc"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/LGoodDatePicker-11.2.1.jar",
+      "bytes": 338734,
+      "sha256": "2fa8252f3292286376a32b5494f72890ec6a2df85e36d295960098d8dd5f8092"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/Quaqua-7.3.4.jar",
+      "bytes": 1774828,
+      "sha256": "8e955238a7cae716c6e9744de435fcf8ef4da8bbd57b3ed8eed2113c9dce0926"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/RelativeLayout-v1.0.jar",
+      "bytes": 31973,
+      "sha256": "0376cfcc2a1d92a6ebb500d8c086c4290c16c3e5cebb6c896f4208d16f4d074e"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/altwg-1.0.jar",
+      "bytes": 1279080,
+      "sha256": "93b00f44c322d04f37335a870bd021c9d0b1a7f3a95b83860634873af4ef90a5"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/apiguardian-api-1.1.1.jar",
+      "bytes": 6452,
+      "sha256": "fc68f0d28633caccf3980fdf1e99628fba9c49424ee56dc685cd8b4d2a9fefde"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/auto-common-1.2.jar",
+      "bytes": 110952,
+      "sha256": "326d674b411ea67505273f9ade5311c15bca50644b5211a6c309c9aee590a20a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/auto-service-1.0.1.jar",
+      "bytes": 12617,
+      "sha256": "88d469a5392dc2a292dfa20432591a584c29fae417cfd88b72620f35ec795acf"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/auto-service-annotations-1.0.1.jar",
+      "bytes": 3174,
+      "sha256": "c7bec54b7b5588b5967e870341091c5691181d954cf2039f1bf0a6eeb837473b"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/checker-qual-3.12.0.jar",
+      "bytes": 208835,
+      "sha256": "ff10785ac2a357ec5de9c293cb982a2cbb605c0309ea4cc1cb9b9bc6dbe7f3cb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/commons-io-2.8.0.jar",
+      "bytes": 285424,
+      "sha256": "02f291e5d1243dc143496e3cbbb40a1ced47aa58f2d633d3e38780cd068d5074"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/commons-lang3-3.12.0.jar",
+      "bytes": 587402,
+      "sha256": "d919d904486c037f8d193412da0c92e22a9fa24230b9d67a57855c5c31c7e94e"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/commons-math3-3.6.1.jar",
+      "bytes": 2213560,
+      "sha256": "1e56d7b058d28b65abd256b8458e3885b674c1d588fa43cd7d1cbb9c7ef2b308"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/commons-pool-1.5.4.jar",
+      "bytes": 96221,
+      "sha256": "22095672ac3ad6503e42ec6d4cbc330cd1318040223f6c5d9605473b6d2aa0fd"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/commons-pool2-2.9.0.jar",
+      "bytes": 134858,
+      "sha256": "bc919b426bfafb31ecc45d6652a9f137462465d849fb3873d78d90c3f8d35b01"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/commons-text-1.10.0.jar",
+      "bytes": 238400,
+      "sha256": "770cd903fa7b604d1f7ef7ba17f84108667294b2b478be8ed1af3bffb4ae0018"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/easymock-5.2.0.jar",
+      "bytes": 4566030,
+      "sha256": "e63a6494b96553cbd0dfde13b5f23dabbd811854410d6ebc53a6a6684a1763b5"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/ejml-core-0.41.jar",
+      "bytes": 259045,
+      "sha256": "8d36469e8414d79c875defc0af3b980525d384761c9471d15a4f365b936dd1d5"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/ejml-ddense-0.41.jar",
+      "bytes": 408061,
+      "sha256": "355347e9cac7e96d5d724d331a9b04bb14a8a02e1d111f1ac51c79f25d937123"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/error_prone_annotations-2.11.0.jar",
+      "bytes": 15979,
+      "sha256": "721cb91842b46fa056847d104d5225c8b8e1e8b62263b993051e1e5a0137b7ec"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/failureaccess-1.0.1.jar",
+      "bytes": 4617,
+      "sha256": "a171ee4c734dd2da837e4b16be9df4661afab72a41adaf31eb84dfdaf936ca26"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/flatbuffers-java-2.0.0.jar",
+      "bytes": 67067,
+      "sha256": "89f94a63d5619d0915dcb8bf2b5ff17606038c685f635c3d062157b082b641ca"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/flatlaf-3.6.jar",
+      "bytes": 925551,
+      "sha256": "2df1e3183600262a15f76aa4ae5acc2c154e884f7672bddaaac66842a37cf3f0"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/flatlaf-extras-3.6.jar",
+      "bytes": 118560,
+      "sha256": "0efe624935f249aabff4f0a7ea1a647d3b90503da38b649599158e8e69c22abc"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/gdal-java-all-3.7.0.3.jar",
+      "bytes": 1637,
+      "sha256": "a947522b4dc5405106c2877b8959ec7a6c42624688e032a53500b1b2eb76798a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/gdal-java-generic-3.7.0.3.jar",
+      "bytes": 187907,
+      "sha256": "83578aab856f5ddefb07875d4fd30922397a9c83a866c97de675463eea15be32"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/gdal-java-macos-m1-3.7.0.3.jar",
+      "bytes": 25588124,
+      "sha256": "ea9d713ad013c173c134b346e0dd806877a00f69fbda778882c50b9e4552c4f3"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/gdal-java-selector-3.7.0.3.jar",
+      "bytes": 10363,
+      "sha256": "02b74b2a5f0c39541fadef852b008316c444ff175903cb4bc476f3a1168e51fc"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/glum-1.4.0.jar",
+      "bytes": 493597,
+      "sha256": "2369746f0c8bbdc9fada7a14392793792d6b89ee918049bbe5b5e72272de7673"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/gson-2.8.6.jar",
+      "bytes": 240255,
+      "sha256": "c8fb4839054d280b3033f800d1f5a97de2f028eb8ba2eb458ad287e536f3f25f"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/gt-api-30.0.jar",
+      "bytes": 225389,
+      "sha256": "38c1a1096c0d37988b03543f01abb966b671af1f400e38ec2fe8e354592b1c45"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/gt-http-30.0.jar",
+      "bytes": 25110,
+      "sha256": "8e7f962e72818132c3f577c67d9735b6a0a3ee7e7b096f8a0dcfe0b786e1936b"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/gt-main-30.0.jar",
+      "bytes": 2019163,
+      "sha256": "6b618e70b4e1c10892364e7e276758dce0a698377d34fe93a95a70c26969c903"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/gt-metadata-30.0.jar",
+      "bytes": 501576,
+      "sha256": "5bb156119eef9ddb61a5d08007325a0e91d9dbe73c0d21be6250d9667e42bdb9"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/gt-referencing-30.0.jar",
+      "bytes": 1457126,
+      "sha256": "f8d7f94851f9ea09054fb9e4ad92f24f754f688b070ae0b7ef876e21dabbf1b7"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/gt-shapefile-30.0.jar",
+      "bytes": 243833,
+      "sha256": "1c9a4c679531cf938f24440be4b04cd6ca4ade63849421c8123ebfcbe2163680"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/guava-31.1-jre.jar",
+      "bytes": 2959479,
+      "sha256": "a42edc9cab792e39fe39bb94f3fca655ed157ff87a8af78e1d6ba5b07c4a00ab"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/guava-mini-0.1.1.jar",
+      "bytes": 11156,
+      "sha256": "27ead171e2d11a3228946b512a326525322d96f73c4a21736fec6b00ea2f248d"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/hamcrest-core-1.3.jar",
+      "bytes": 45024,
+      "sha256": "66fdef91e9739348df7a096aa384a5685f4e875584cce89386a7a47251c4d8e9"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/indriya-2.1.3.jar",
+      "bytes": 295700,
+      "sha256": "75faed1f7990655d773526679ab45c8f4cbf15bd2a86ca481012c168e3bbb0b6"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/j2objc-annotations-1.3.jar",
+      "bytes": 8781,
+      "sha256": "21af30c92267bd6122c0e0b4d20cccb6641a37eaf956c6540ec471d584e64a7b"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jackson-core-2.15.2.jar",
+      "bytes": 549207,
+      "sha256": "303c99e82b1faa91a0bae5d8fbeb56f7e2adf9b526a900dd723bf140d62bd4b4"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jafama-2.3.2.jar",
+      "bytes": 49076,
+      "sha256": "f5550bba9c6e14731c4542024180b4c430b26f8f2fb70cadf709a4de6f076991"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jai_core-1.1.3.jar",
+      "bytes": 1900631,
+      "sha256": "8b696cf067533545f44c2f68339e24ab1a2669153ed2081aa5be8749f4d592bf"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jakarta.annotation-api-1.3.4.jar",
+      "bytes": 25150,
+      "sha256": "e65d0194ca63c73d11fcd0a73325e762d905aafb51c90cdb98a5a5968367564a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jama-1.0.3.jar",
+      "bytes": 37424,
+      "sha256": "c7325ee29be1aac1287ddac690f73671f1cd911ca9eca7c619990e86310556fd"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/javax.inject-1.jar",
+      "bytes": 2497,
+      "sha256": "91c77044a50c481636c32d916fd89c9118a72195390452c81065080f957de7ff"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jcodec-0.2.5.jar",
+      "bytes": 2068570,
+      "sha256": "890329dad124e8b739c1d6602a59a53c8a474daddff265c2561e21c498496c81"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jcodec-javase-0.2.5.jar",
+      "bytes": 14008,
+      "sha256": "8a72ff7560bce1c89c1d815816d1304383bb4048afeeb91f200b7a1e213ab6ae"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jcommander-1.82.jar",
+      "bytes": 88407,
+      "sha256": "deeac157c8de6822878d85d0c7bc8467a19cc8484d37788f7804f039dde280b1"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jcommon-1.0.24.jar",
+      "bytes": 330507,
+      "sha256": "13e2596044935f76694cce65a22d1df908907ddcba0da2b49ff030930262d417"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jfreechart-1.5.3.jar",
+      "bytes": 1604073,
+      "sha256": "23bd63ece2284d6578ed51f336cd33681c53f817e4595a705690922a3c0f0f44"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jgoodies-common-1.8.1.jar",
+      "bytes": 37807,
+      "sha256": "ddca10c16e1dc7a1b399c14580f0aae23014851e57d224cb96c260e6d649d2ad"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jgoodies-forms-1.9.0.jar",
+      "bytes": 135313,
+      "sha256": "755c79501abd806f5aa83257dc88b2ca5923e6965f3cbfe873116c7c9768210a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jgoodies-looks-2.7.0.jar",
+      "bytes": 400791,
+      "sha256": "d7dfb4d041c28eae836aa0910c91c1b95b29c28e833200d2ef6d311fa66b4c6d"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jgridshift-core-1.3.jar",
+      "bytes": 13007,
+      "sha256": "303eb6a6f6f87369f6b9e3dcacefd6f9b0ad55920cd65a7f162ab9a23401c722"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jide-oss-3.7.12.jar",
+      "bytes": 2126936,
+      "sha256": "c22da104e865657fee24a8ef739a4827545c73132dcf3d584e9551d80dfbd82f"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/joda-time-2.10.10.jar",
+      "bytes": 644419,
+      "sha256": "dd8e7c92185a678d1b7b933f31209b6203c8ffa91e9880475a1be0346b9617e3"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jsqrl-1.0.1.jar",
+      "bytes": 127936,
+      "sha256": "d10c5a7f0cf861362521d1e48884c99bbc545e814ed857f5019778b255b18ab7"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jsr305-3.0.2.jar",
+      "bytes": 19936,
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jsvg-1.4.0.jar",
+      "bytes": 527530,
+      "sha256": "2f1ea19fb9611cca2f7d0686a9b0313cb0df8cdcba073df574b5cd1a6c8a86a2"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/jts-core-1.19.0.jar",
+      "bytes": 1103721,
+      "sha256": "dbb8644cf324123d06c27aa982f570811e10b4cb1f2aef893b00de237d33efc0"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/junit-4.13.2.jar",
+      "bytes": 384581,
+      "sha256": "8e495b634469d64fb8acfa3495a065cbacc8a0fff55ce1e31007be4c16dc57d3"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+      "bytes": 2199,
+      "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/miglayout-core-11.0.jar",
+      "bytes": 105405,
+      "sha256": "812b9c8a8f326098a43eb9550229dd31100c49f81680eecdf6649da423f0be9f"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/miglayout-swing-11.0.jar",
+      "bytes": 22899,
+      "sha256": "7aa9da079e0ed628a3672f8ddd1b6b05a5a3ec27639f82370956748943989ba6"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/mysql-connector-java-5.1.10.jar",
+      "bytes": 745050,
+      "sha256": "5711ccad4074d67d195c0739b021d2ea522cba93a7a812ecf92a4d09944640aa"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/net.opengis.ows-30.0.jar",
+      "bytes": 586320,
+      "sha256": "8139a451719b3bb40201947c2af3a78e1ccb368c55693cbfe2e9850ff69767be"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/nom-tam-fits-1.15.2.jar",
+      "bytes": 531009,
+      "sha256": "7754bac1d0fdc5a1249f223650e8090e8eb33be30f1da2d7ca5642af0e75cd3a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/objenesis-3.3.jar",
+      "bytes": 49423,
+      "sha256": "02dfd0b0439a5591e35b708ed2f5474eb0948f53abf74637e959b8e4ef69bfeb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/org.eclipse.emf.common-2.15.0.jar",
+      "bytes": 376004,
+      "sha256": "bdb51f83b2daa51446b4ae5d606464e4b22fb7ef98f0477ac95de72551e2978a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/org.eclipse.emf.ecore-2.15.0.jar",
+      "bytes": 1407496,
+      "sha256": "d5e3c25344fe27f14f514f5d6deb6e9cc3f6153fa462361261a8d49a3dfe9bbf"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/org.eclipse.emf.ecore.xmi-2.15.0.jar",
+      "bytes": 235240,
+      "sha256": "712ff33fef916d2fa4d838992fccae85c4817a71639a9a5933fc44568ed6dc57"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/org.w3.xlink-30.0.jar",
+      "bytes": 53263,
+      "sha256": "898e9d66bf6d96dfbc42ca3d098369d77094d58d220473cd2c8fbf77cc471bcb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/picante-1.0.0.jar",
+      "bytes": 1331067,
+      "sha256": "ec7cb1a4ca797cf9bb3a8543e28fd4734f2313b27d3ad0a9ae9bb62b212c72d2"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/picocli-4.7.4.jar",
+      "bytes": 414740,
+      "sha256": "1964e89575b43aa177aa4e534946b25bde9f3a48a9675d61d9ef7c4ca83d94b4"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/plotkit-2020.10.01.jar",
+      "bytes": 115370,
+      "sha256": "46d1af6c05f7d7d0f075aad6099648e2c311a0afd59911a5d6cf5fb2aff8ad64"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/re2j-1.6.jar",
+      "bytes": 113189,
+      "sha256": "c8b5c3472d4db594a865b2e47f835d07fb8b1415eeba559dccfb0a6945f033cd"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/rtree-0.8.6.jar",
+      "bytes": 181100,
+      "sha256": "04a809a341f4e1f588ae16edee31e526632c1541cf9aeaa0ef4d15e799d4cf22"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/rxjava-1.3.8.jar",
+      "bytes": 1159165,
+      "sha256": "387df880f226b01cea4b1026d96d34e1da27d5801562742cfce0413c21ef7690"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/saavtk-1.6.1.jar",
+      "bytes": 1889703,
+      "sha256": "121117ef38b0c94aa666095a878fc64f53eac68ac042235d21541f6dcf5d1f67"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-0.9.2.1-1.0.0.jar",
+      "bytes": 1969,
+      "sha256": "1fa82e2bb92da02762b4d170b911f0892859c4e049f847ad5c8e313a8010ea2c"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-client-1.0.21.jar",
+      "bytes": 3894953,
+      "sha256": "f7683dfde2242314fb604f6c81ba79fe0b9cd824c644dc7d0e1b6e03afac123f"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-config-1.0.6.jar",
+      "bytes": 34912,
+      "sha256": "844d851e483cf19b3c809b6405532b5d35e6afd22ed6f7ea1ff9af38012a8408"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-core-1.2.2.jar",
+      "bytes": 82232,
+      "sha256": "3b9e34a92228e6b03c6531975df372574365f32c4d5749db6ffa507da9c3fdac"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-dem-1.0.3.jar",
+      "bytes": 198766,
+      "sha256": "78f8f49c76d7a9813ad64fae3a2792c3d830e7267d4d7541f8eef2ab90087d21"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-image-2.6.0.jar",
+      "bytes": 909384,
+      "sha256": "f8aa187d751f1a35ec74bbaaf4806a347b328f5fcdbdde96d5c70716a10d4dfc"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-layer-1.0.5.jar",
+      "bytes": 110220,
+      "sha256": "45bd1e8920073721b02c4e5013a6e4a77ff14b59c1a0740d29bc1d1759be55ea"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-lidar-1.0.6.jar",
+      "bytes": 262305,
+      "sha256": "504239f282911063ff7d0552809fe0d4f7eed7444ac8348f53553b8412a2c64c"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-model-2.1.2.jar",
+      "bytes": 375508,
+      "sha256": "51b99bf738802c3d6b31e41bc8342f81971bbc92e8580c691d74e12928116d1d"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-pipeline-1.0.2.jar",
+      "bytes": 17500,
+      "sha256": "e526ec9c82a0ebe8ad0210811d71f7393e7c9a767f173dd86d75cd3d440cc6cb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-pointing-1.1.1.jar",
+      "bytes": 89948,
+      "sha256": "1d6796abe15a2100395fb709f2651267d0766416bd5baaa3585edffb89e5f144"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-query-1.4.0.jar",
+      "bytes": 104682,
+      "sha256": "fb84668f743e124b547c4e29a02bce209c5baee9f499b3d49fda0458bdc89afc"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-spectrum-1.2.0.jar",
+      "bytes": 291864,
+      "sha256": "de428fba5aa5d9d82652f137ca8496407b775ebeaf7191692e665683677af829"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-stateHistory-1.2.1.jar",
+      "bytes": 654704,
+      "sha256": "bbccb13df4a643990899d99b1b9736c2b3364c542caca0f0873204e6989ca7a8"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sbmt-util-1.1.0.jar",
+      "bytes": 149097,
+      "sha256": "9e0c643e0cf75c67c069af8a824c87cdf632b81af07c5e679de9a99a620958da"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/si-quantity-2.1.jar",
+      "bytes": 11403,
+      "sha256": "2cdcfd3e5395db5576f5efc0f224b5bbd0731f3ec7552afee6ee7b63a4f65820"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/si-units-2.1.jar",
+      "bytes": 15256,
+      "sha256": "491ed9956ddf4b2e30180b087e1f6fb51debccb6d46785ae0d52026342013c51"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/slf4j-api-1.7.36.jar",
+      "bytes": 41125,
+      "sha256": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/spice-N0065.jar",
+      "bytes": 325394,
+      "sha256": "af57b7fcab03b425c6e43b381331c38659aee962b9f6d2ca56482c93b52b326d"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/sqlite-jdbc-3.41.2.1.jar",
+      "bytes": 12844673,
+      "sha256": "b3141057bfb685ea9f9ab200c2158bc28b47c4a2d42c88fcb0a1a00954fad26d"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/swing-datetime-picker-2.1.3.jar",
+      "bytes": 100969,
+      "sha256": "a1f59d5cb578327194486676152115741f1801958dd45fcd390666434d941cad"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/systems-common-2.1.jar",
+      "bytes": 27629,
+      "sha256": "b3cc1f3e604dcd18d3bba266db5fd01744bbd6b02f147377d4016585ba375cff"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/unit-api-2.1.2.jar",
+      "bytes": 37008,
+      "sha256": "5d9f1da27b5e7a8a7235aa7b5748db4a349ad03d29a1a20029a885a989e2f63a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/uom-lib-common-2.1.jar",
+      "bytes": 22765,
+      "sha256": "61825f54d61dda9bda95253b407653be1cf9fd9b941da3462c94a3b16f2b1c88"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/vtk-java-all-9.2.6.0.jar",
+      "bytes": 1640,
+      "sha256": "738dba432764bce31fb9ad4ba112f21d07c25b9a60f2335c7973db3f23613e95"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/vtk-java-generic-9.2.6.0.jar",
+      "bytes": 3790907,
+      "sha256": "bd671b3f0bd58448850537ed7e82ec65ae216c93951f2d3ce564eb958b4dba0c"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/vtk-java-jogamp-gluegen-2.4-rc4-9.2.6.0.jar",
+      "bytes": 364586,
+      "sha256": "17746c5130c1a0596dc5e8392f04e6bba8d01b67c12e127f9b5de2cbf7ad8aa2"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/vtk-java-jogamp-jogl-2.4-rc4-9.2.6.0.jar",
+      "bytes": 3588996,
+      "sha256": "36b365d64609497955bf7541b331ead6c3a969a60ce1a3a21ff860dd2de13fae"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/vtk-java-macos-m1-9.2.6.0.jar",
+      "bytes": 81650928,
+      "sha256": "afeff991f520ecb5d4a1bee3dedc480454cb51ac97dbc69446278f4754941d64"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/app/vtk-java-selector-9.2.6.0.jar",
+      "bytes": 9805,
+      "sha256": "726778d66cc605a859e68b525da0cbb090b02b418c9f8be83f2cecf8b53099a0"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/bin/java",
+      "bytes": 69696,
+      "sha256": "bf9f07861b7d099e6105d39b4dd99cc0b9ad4f7c83dc80651b25b163444592f7"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/bin/jrunscript",
+      "bytes": 69696,
+      "sha256": "ace9c88a0f47741cab0f6cff7b704b7a66f6504b7247cf5c3ca136b73c24c168"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/bin/keytool",
+      "bytes": 69696,
+      "sha256": "2f1a69242a9bf9f793af0712071dcd85ca51024bfe63e6f861cb24ddd7e78b8a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/bin/rmiregistry",
+      "bytes": 69696,
+      "sha256": "d5878c22d695ae395631223ae3150d017972197a0f6baaee09f52a579dc5b2de"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/conf/logging.properties",
+      "bytes": 2732,
+      "sha256": "b62d2733ab99556b108a1951d894c5a8d76b1ac7a00c02c388f9eb9be046c56f"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/conf/net.properties",
+      "bytes": 6608,
+      "sha256": "a88eeb56c61c0df79c8d000a43de10dba48c77130c8ada1af942c9a8ce29a787"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/conf/security/java.policy",
+      "bytes": 2180,
+      "sha256": "f2a00a1dec3b7a097f0815f338a84717ba1017d5d7aae96d842d2188d67c3250"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/conf/security/java.security",
+      "bytes": 56964,
+      "sha256": "3aae59d3be37d1c65017d2cb96d08e11a7e35fa20e6dd65ab68c7c9b5c769e44"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/conf/security/policy/README.txt",
+      "bytes": 2390,
+      "sha256": "6da0747334b0fea7592fd92614b2bbc8b126535e129b1fee483774d914e98eb5"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/conf/security/policy/limited/default_US_export.policy",
+      "bytes": 146,
+      "sha256": "758b930a526fc670ab7537f8c26321527050a31f5f42149a2dda623c56a0a1a9"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/conf/security/policy/limited/default_local.policy",
+      "bytes": 647,
+      "sha256": "2b2627548e61316150d47ffc3e6cad465ca05b3cccd4785eb7d21aa7baa0f441"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/conf/security/policy/limited/exempt_local.policy",
+      "bytes": 566,
+      "sha256": "8c3d7648abcd95a272ce12db870082937f4d7f6878d730d83cb7fbb31eb8b2c9"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/conf/security/policy/unlimited/default_US_export.policy",
+      "bytes": 146,
+      "sha256": "758b930a526fc670ab7537f8c26321527050a31f5f42149a2dda623c56a0a1a9"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/conf/security/policy/unlimited/default_local.policy",
+      "bytes": 193,
+      "sha256": "8d8a318e6d90dfd7e26612d2b6385aa704f686ca6134c551f8928418d92b851a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/conf/sound.properties",
+      "bytes": 1210,
+      "sha256": "299c2360b6155eb28990ec49cd21753f97e43442fe8fab03e04f3e213df43a66"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/include/classfile_constants.h",
+      "bytes": 22155,
+      "sha256": "389445772f7783f5329d1666621b95cb33f3eb30b336bd47fe07abb0e1f47ad8"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/include/darwin/jawt_md.h",
+      "bytes": 2772,
+      "sha256": "4af10927ebcfdfdfbf218bbf90c397856d251a312c1fe8f4469b056235da4dfb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/include/darwin/jni_md.h",
+      "bytes": 2208,
+      "sha256": "88cb5c33e306900dd35a78d5a439087123b8e91b0986bb5acb42cc9bd2fcc42e"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/include/jawt.h",
+      "bytes": 12458,
+      "sha256": "85101d07928a589accfef9d7c261850faa8d5afc8ef262af7ec9734008f6f2f5"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/include/jni.h",
+      "bytes": 75678,
+      "sha256": "1266aea5b9f5d5db1cb6f8e5c6c43cfa7f80bc4f72d7fe42c6131bb939dc70f4"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/include/jvmti.h",
+      "bytes": 81725,
+      "sha256": "95b20c58ca3b96bf6a28c13632f671b3f87d5923c0338012e0d90ba4cf157e29"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/include/jvmticmlr.h",
+      "bytes": 4771,
+      "sha256": "6ee3e52d24bdb4f4d0312dfbab3d47bd524cbdac5540a4d790cac0620c59b3c8"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.base/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.base/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.base/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.base/aes.md",
+      "bytes": 1444,
+      "sha256": "45c6d4da48325edfbff3dcf71c704e504c057904435ed23c6d57046d551eb69d"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.base/asm.md",
+      "bytes": 1584,
+      "sha256": "1ff912740e84e024711def5fa482ffbb46eff64559760c467352dfa7c39a3307"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.base/c-libutl.md",
+      "bytes": 1556,
+      "sha256": "bef40679922d6fdfb7e4ddb223ad6722300f6054ba737bbf6188d60fcec517f9"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.base/cldr.md",
+      "bytes": 9130,
+      "sha256": "f2bd33ded550a05d59e8f659416ef382490504548d846e6388b1dffd273aa077"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.base/icu.md",
+      "bytes": 11086,
+      "sha256": "af0057e8553906083f69c2fb9fe9ed4ae8bc2340a0b1e376a424702f00300b29"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.base/public_suffix.md",
+      "bytes": 17785,
+      "sha256": "d9ed58c3132c2c8e82b095eb4ce24cafd1f20531c16a7c9d01f2134843904db7"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.base/unicode.md",
+      "bytes": 2384,
+      "sha256": "5e4e6623a21a63f9bc16ea54af4133b8038e490c0d499a74676f9e5a61b9c5b2"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.compiler/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.compiler/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.compiler/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.datatransfer/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.datatransfer/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.datatransfer/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/colorimaging.md",
+      "bytes": 167,
+      "sha256": "04d61e3e8e71dd452ebe52008af5378d9f6640d14578aeb515dc5375973b0189"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/freetype.md",
+      "bytes": 28780,
+      "sha256": "efe0d96f9c51513a52d60408b0edf746cdcaaeaabbab97f8fdc0a356c96c4dd2"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/giflib.md",
+      "bytes": 1288,
+      "sha256": "c8b99f33890887d27ad56fba9edd8ebbc668cfe0689168505a95613d1d4b32f8"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/harfbuzz.md",
+      "bytes": 2884,
+      "sha256": "9a368ce6f9e123d397216174f39747e39bc3a8805bed6ab06d6f8ffaf9d391f4"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/jpeg.md",
+      "bytes": 3475,
+      "sha256": "580be596216ee11e2554b24ce944973acaede2ebf5ffba34a6bd8cc441c05043"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/lcms.md",
+      "bytes": 1178,
+      "sha256": "41f4d63e670d75f5936a895aae919e226f5d50c54b5b09db3ba4d7052a2c1554"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/libpng.md",
+      "bytes": 5398,
+      "sha256": "f9e1a0e556f3309246d30c62ef159de7e21db39361176deda6fb57821c9872ec"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/mesa3d.md",
+      "bytes": 5732,
+      "sha256": "63f4e6f75caebbccb95d903fb43e46ac7111b3624d0a34f146b276d7d9e7b152"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.desktop/xwd.md",
+      "bytes": 1348,
+      "sha256": "1d4ffa93c87f35084b02a7aa90a21084b4019db4fe1003c2e5ce775b4a384f59"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.instrument/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.instrument/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.instrument/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.logging/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.logging/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.logging/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.management/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.management/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.management/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.naming/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.naming/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.naming/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.prefs/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.prefs/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.prefs/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.rmi/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.rmi/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.rmi/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.scripting/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.scripting/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.scripting/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.security.sasl/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.security.sasl/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.security.sasl/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.sql/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.sql/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.sql/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.transaction.xa/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.transaction.xa/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.transaction.xa/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.xml/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.xml/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.xml/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.xml/bcel.md",
+      "bytes": 11503,
+      "sha256": "066f44a28e921c049acaabc5f2b9c0a258ce6fe6bd59bd86ce378acc39c063c2"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.xml/dom.md",
+      "bytes": 3028,
+      "sha256": "89c41f3ce50acb96280b73d7a9c1710e96dbf6fc97d43cab2b748de93f9fe442"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.xml/jcup.md",
+      "bytes": 1158,
+      "sha256": "8fd4c6732c5c1d63261dc2e87e052f7de7952cd265e387f8b6caf5ab3bf8c594"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.xml/xalan.md",
+      "bytes": 13494,
+      "sha256": "ea67226be5cfe19c7e79725c2c24a16676323264d69f9747c528de0b44541b03"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/java.xml/xerces.md",
+      "bytes": 11852,
+      "sha256": "355bfdf9d7522374abca93b6797e2bb7cd52c7baa661b0d56c5124c2b9c957c3"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/jdk.unsupported/ADDITIONAL_LICENSE_INFO",
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/jdk.unsupported/ASSEMBLY_EXCEPTION",
+      "bytes": 1522,
+      "sha256": "a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/legal/jdk.unsupported/LICENSE",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/classlist",
+      "bytes": 71327,
+      "sha256": "7731050418058c4b9df16603b6da72a6313b92980e715d2ec2cc66f08e076d15"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/fontconfig.bfc",
+      "bytes": 2922,
+      "sha256": "5409952a218126c5c11cf0e4963665711aeeab50f5648264d70866fca705a950"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/fontconfig.properties.src",
+      "bytes": 8931,
+      "sha256": "c8d20a4a39240665252306bdd3dbc8d71e1e246c8cd8c7985b32e4101658a148"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/jrt-fs.jar",
+      "bytes": 110497,
+      "sha256": "e49592e92d25c8087220700876243f818c94d9cdef7f6e60c212a55fccc2e9c9"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/jspawnhelper",
+      "bytes": 71088,
+      "sha256": "4372ff9588bdf70e1babb5a4fc6224bf269175fdd7b378ca35aa6fd4079c6a05"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/jvm.cfg",
+      "bytes": 29,
+      "sha256": "aa9efb969444c1484e29adecab55a122458090616e766b2f1230ef05bc3867e0"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libawt.dylib",
+      "bytes": 530016,
+      "sha256": "b029cf50c17f57e3ab90570ced49b300be6a690551ab685d6d9cefbfa58ece68"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libawt_lwawt.dylib",
+      "bytes": 1170096,
+      "sha256": "392f2d45501ba4e1776931f05ff864c19a1e8c3e35b8cf34a1cf1e9432bc036f"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libfontmanager.dylib",
+      "bytes": 1470528,
+      "sha256": "ff124e92581a9f2745955d78e0e827b52f80f68ffa163b87bfa1853187e17c30"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libfreetype.dylib",
+      "bytes": 630256,
+      "sha256": "96032c372e94cd6f4cf923495989bf7a700445ac7752a19a6bf87739e6303bd0"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libinstrument.dylib",
+      "bytes": 90768,
+      "sha256": "d3b04855805de169b12973c25562f8828b5fcac84eaf8c1f843e81e9fb42f703"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libjava.dylib",
+      "bytes": 201024,
+      "sha256": "ae73491757e656c92f863ae595412e79863de210604f4a2ec6de6fdb579b4903"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libjavajpeg.dylib",
+      "bytes": 261984,
+      "sha256": "45e731aa76875681329240c0895e07ad55ee6aed165b274fc682b3c208266acc"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libjawt.dylib",
+      "bytes": 51936,
+      "sha256": "221214a4d09e126837e1383f9f4a7e36af6d263047e1958e116c72542af90a01"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libjimage.dylib",
+      "bytes": 75968,
+      "sha256": "9c596c71c611968b3b8b1d4464f5b042912ad1a5689babaea802097b0565728a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libjli.dylib",
+      "bytes": 111952,
+      "sha256": "c58522718651479cb96d613ba37ba4549be3ac9472504de02670dd3d865837e3"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libjsig.dylib",
+      "bytes": 69216,
+      "sha256": "295e6ab34c285c09ab1d42e2aea7326dbee67e699d6218fc4e3b1a8bd613c776"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libjsound.dylib",
+      "bytes": 134176,
+      "sha256": "817f2fbc51ad8c73478289126439f92a101c9b81a722267bd4e981d34fc0d7cf"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/liblcms.dylib",
+      "bytes": 387808,
+      "sha256": "686649cf11a66bb50e93cd12aae1d6a44919b721cb1ffb360fa9544c60a4412b"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libmanagement.dylib",
+      "bytes": 75168,
+      "sha256": "156a4b3551f975023f9699a6cfa7bd980bf4a9cb218717345a1cc2e573e01a9a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libmlib_image.dylib",
+      "bytes": 454336,
+      "sha256": "5ec2c6f73f2d6acde2006ac12d76b2b3188a1f7fbea1c8e450231b31f6fa4ab5"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libnet.dylib",
+      "bytes": 136736,
+      "sha256": "8b0b78347b4289da0925d7d27e3e33ed72532541dcf191446985fba8ad3402de"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libnio.dylib",
+      "bytes": 123888,
+      "sha256": "9610d557cbc3ca8c1ff758aef688d0c604b6ed797f3a70243adade4b5ffd69b4"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libosx.dylib",
+      "bytes": 72016,
+      "sha256": "f20fd78a000fa5bc1667c2b2ffc46a85d364764ff8e4e05087aeffe2ea138a09"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libosxapp.dylib",
+      "bytes": 181344,
+      "sha256": "407dc5c3ef9c033e5af3b8bbaeb914ae9d507258c1b722092f08440a065776f2"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libosxsecurity.dylib",
+      "bytes": 72720,
+      "sha256": "d046e31104b4323e6bda4a4840227bf1b5f623ddf5269c9482f0bcb71629a0e8"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libosxui.dylib",
+      "bytes": 96880,
+      "sha256": "f78827281b736ce2af2881a7f328d18cb03a63fdd367e8adc15337dd0dcfa6f4"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libprefs.dylib",
+      "bytes": 72816,
+      "sha256": "5a2327999675b6531c72138d60612fcf781ff4f8bc1b501eba360de312253711"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/librmi.dylib",
+      "bytes": 68064,
+      "sha256": "13907ff280482233ae203198bf100d004b26a046afabcd9bca55854618c240f6"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libsplashscreen.dylib",
+      "bytes": 382192,
+      "sha256": "38ad10df653cd22d08ef96377bf4b37f542de7088d3df1cdfbe2c04c71064d2b"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libverify.dylib",
+      "bytes": 104928,
+      "sha256": "9745ec1566e136a540b047f00d2df7cff20f0eb4331a34b09f64d8703d3b323f"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/libzip.dylib",
+      "bytes": 90688,
+      "sha256": "1a8a870de3f310b02ee20f8ff360af7cf22c13794a995246b6d370f210932300"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/modules",
+      "bytes": 60294436,
+      "sha256": "9555115bd2a5b637f8a6fa094cc8de1a7f694ab01b0a92d7f8d4428ec6143cc4"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/psfont.properties.ja",
+      "bytes": 3793,
+      "sha256": "5a4bd51b969bf187ff86d94f4a71fdfbfa602762975fa3c73d264b4575f7c78f"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/psfontj2d.properties",
+      "bytes": 11390,
+      "sha256": "780c565d5af3ee6f68b887b75c041cdf46a0592f67012f12eeb691283e92630a"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/security/blocked.certs",
+      "bytes": 2488,
+      "sha256": "96572f243f31c2ef81a6e627542e596f6a9295cff3c7ae095c1b595cb1457ded"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/security/cacerts",
+      "bytes": 102206,
+      "sha256": "ccadbb4970973f42ad7391a0a2c4b8aad19559f3b322092a1f2cab044708efaa"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/security/default.policy",
+      "bytes": 10012,
+      "sha256": "a9844ff513cce6041c571a7e914c160facad086ca29c71cd8bd49357b80d5db5"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/security/public_suffix_list.dat",
+      "bytes": 232578,
+      "sha256": "1200ae5fff5720e797186b4afcae436c27a43c1e46d2ae44cec435461727fbbb"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/server/libjsig.dylib",
+      "bytes": 69216,
+      "sha256": "711cf57c0d639a4b9de0c9683330c42e343d1447049640d282222755c6c69f58"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/server/libjvm.dylib",
+      "bytes": 15681776,
+      "sha256": "dfd5258104f46db3c8a7eeb680947ed535f8336d23c6b318e10e5f8bfaa54849"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/shaders.metallib",
+      "bytes": 131693,
+      "sha256": "8f4b6e52ec8c8eb5160c8a7a13c77fc601a64fd38af40e4da6ee1e3471b02a18"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/lib/tzdb.dat",
+      "bytes": 106905,
+      "sha256": "5865a073e635cfd523b4bab03bc0cd62d7f66c6fef63da5b762c4d0a4e541980"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Home/release",
+      "bytes": 252,
+      "sha256": "4511f99877cc70c31766175fea0615c33de50bbf85e73191895f2fe8ed14e224"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/Info.plist",
+      "bytes": 873,
+      "sha256": "d8df8971a7783ba50f732ccd1af4401f400a2a259920d2453de8dd4425adb4aa"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/MacOS/libjli.dylib",
+      "bytes": 112000,
+      "sha256": "9ea868530de7e341c2e9b28cd7a9a352bf64e8e27ed32c9a8bbcc6cd1892c4f2"
+    },
+    {
+      "path": "distribution/sbmt-0.9.2.1-app.pkg/Payload/sbmt-0.9.2.1.app/Contents/runtime/Contents/_CodeSignature/CodeResources",
+      "bytes": 23049,
+      "sha256": "a9581af877b818239f0e2c2ac55c6d9db272b75126e79ebb07013e3ef3216829"
+    }
+  ],
+  "nativeFiles": [
+    {
+      "path": "native/vtkjavanatives-0.1/libJNISpice.jnilib",
+      "bytes": 2764063,
+      "sha256": "e9e136811badbee053e50a4199cf97153ced07abff9fdf8bdfc26f055931bbd8"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libgluegen_rt.dylib",
+      "bytes": 85840,
+      "sha256": "997051045074ca8039328feb29bca1ba7714ac7600c69091937c9a55e2ba6844"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libjogl_desktop.dylib",
+      "bytes": 1705368,
+      "sha256": "4acd9f8c8f8bfe4cd534c2c097054bd642b3286b31363e232def094bb9626aa6"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libjogl_mobile.dylib",
+      "bytes": 842984,
+      "sha256": "cf7e32de55827168e07244969ab9c832aa1db186e40bf1783363dd68478757f1"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libnativewindow_awt.dylib",
+      "bytes": 67896,
+      "sha256": "3009519c345e25839d74a211dd1c806ddff20b069891b4bbf0eb3e44b307d680"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libnativewindow_macosx.dylib",
+      "bytes": 122912,
+      "sha256": "9658760cf57a2b8da45a9212e1fca20e5c367c7910c65a22d811948322f8de92"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libnewt_head.dylib",
+      "bytes": 193424,
+      "sha256": "b0363e92293716b6907872ca08daaf6541e416c3e1a8f85a6baa029a97711432"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkChartsCore-arm64-9.2.6.dylib",
+      "bytes": 1770600,
+      "sha256": "cdf7ccb2829eff533ef2d7cd305b0ea4c81a94dfadfe3540190ec87ac0d60a94"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkChartsCoreJava.jnilib",
+      "bytes": 279064,
+      "sha256": "0b2173ac6fccb74783fea2656b8021f038294ec528fb97416d5ed65729bb7f2c"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonColor-arm64-9.2.6.dylib",
+      "bytes": 128392,
+      "sha256": "28b1647322b7519966adf4159af605a7bc266004b265a35117e65938cc19cdc3"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonColorJava.jnilib",
+      "bytes": 56752,
+      "sha256": "a7f51c6779f516d36ee55d126d300a01ec8aeedeaf1d71ac18329c952137d36e"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonComputationalGeometry-arm64-9.2.6.dylib",
+      "bytes": 178024,
+      "sha256": "c30716fb5335165493398a720528a963280215706ccb848f7f8abe4c61e51f49"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonComputationalGeometryJava.jnilib",
+      "bytes": 126064,
+      "sha256": "e17b11893ce4ccda0fc96e03bad538f028a479c1853adff767753627a5da274c"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonCore-arm64-9.2.6.dylib",
+      "bytes": 10356328,
+      "sha256": "bc556f7b58b7fadfd1bff680a3d118f4c21077aebf7a49e92c9f699333da50f3"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonCoreJava.jnilib",
+      "bytes": 525864,
+      "sha256": "548e03271f3403da7846ffd96f8f58dc0a8d742f85a7fea27c0eac8d5bdb6bd7"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonDataModel-arm64-9.2.6.dylib",
+      "bytes": 4929776,
+      "sha256": "1441966bbc01c7e8779eb5b98ff8daec0ffbe78f7248ff422996973d8c0254b3"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonDataModelJava.jnilib",
+      "bytes": 1323040,
+      "sha256": "822724b3a3c48da12019697ab4f976c0761bc0e217cf56f3b3e8876254211355"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonExecutionModel-arm64-9.2.6.dylib",
+      "bytes": 1098896,
+      "sha256": "f9e533b870eb35ae4e6df8431f0ef5e40c95fbcc46de423705699ad34dff1071"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonExecutionModelJava.jnilib",
+      "bytes": 288200,
+      "sha256": "a142f907d2a7f3f5b7f1b7acd12f02344595b1c4896b489bdef428835116d3e5"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonMath-arm64-9.2.6.dylib",
+      "bytes": 153208,
+      "sha256": "cd3d17c9f661fa4046de17f1be8c046c2de3004cffac62d65057c88d580ad253"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonMathJava.jnilib",
+      "bytes": 90520,
+      "sha256": "ece98c4295c9ab241ea7266aadb9f2928f5237c07d52c10e8216de0bc2333741"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonMisc-arm64-9.2.6.dylib",
+      "bytes": 5282568,
+      "sha256": "b24fe3d210ff6e3fb6b6a2680fbaaf93d8aaaea8e83b733f47415ccd619ac6a2"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonMiscJava.jnilib",
+      "bytes": 73800,
+      "sha256": "1f4e9038a5f08b8ec0dc940cc46b9da5d8651a13840b5c690152cfd99e7bb871"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonSystem-arm64-9.2.6.dylib",
+      "bytes": 211128,
+      "sha256": "09fdadf8a2e19436858ab9e6fe7d6c535fba9778d20635908c9a78f929da1c2e"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonSystemJava.jnilib",
+      "bytes": 66688,
+      "sha256": "c0d9a6dfb6b6969c0f0906679dc62f53b25c4c0076b4e566879a174fa1db1245"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonTransforms-arm64-9.2.6.dylib",
+      "bytes": 250640,
+      "sha256": "52c5dbb6231dc0d48899ab5a8dfde19ed7482bbe9434bb95b924ce491437a0ed"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkCommonTransformsJava.jnilib",
+      "bytes": 128496,
+      "sha256": "1db4d669f75de07df5f604ae94bc13a05f097ff0ea0d85029768ba25d555af72"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkDICOMParser-arm64-9.2.6.dylib",
+      "bytes": 129608,
+      "sha256": "7ad840303a373429bbc49997bb2385b4f36e3d68b0b6e7131977ae63e1aa58d6"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkDomainsChemistry-arm64-9.2.6.dylib",
+      "bytes": 263440,
+      "sha256": "2f540ea52bbd88b83eb24e5f7261743066a913801047a8673a7f63847f654bbc"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkDomainsChemistryJava.jnilib",
+      "bytes": 94192,
+      "sha256": "dc0fb17d8b328d4c02bb66689a6ff7db4f5ae872060a04d8f5f4e4bbbc76e82e"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkDomainsChemistryOpenGL2-arm64-9.2.6.dylib",
+      "bytes": 94232,
+      "sha256": "ecf0ec9acf3c7ac2aa14846063e53edf0cbb71123454d3820aa31e4e7cc20023"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkDomainsChemistryOpenGL2Java.jnilib",
+      "bytes": 68888,
+      "sha256": "a84d1fc71df8a93c7c5bc70ce4247519d89f09d2a21e87384bbd9b8006b8d62a"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersAMR-arm64-9.2.6.dylib",
+      "bytes": 176632,
+      "sha256": "a082ef787f15b932f881027f4e345aef4b91b0b0854000cfab8f9d907f7926d0"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersAMRJava.jnilib",
+      "bytes": 65112,
+      "sha256": "6119e4480261e99f9850fda27cc8855a993f03ab268df8eb8ccd329239433098"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersCore-arm64-9.2.6.dylib",
+      "bytes": 9247960,
+      "sha256": "e5eac597d51a7a239bcf891d99fde181eabda057d57e07f9d7f73a953294c580"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersCoreJava.jnilib",
+      "bytes": 642752,
+      "sha256": "310e83b4fbe53c1b5f74d9f7553cc4e305cfc40bc8b006a14200a0e6aa52030b"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersExtraction-arm64-9.2.6.dylib",
+      "bytes": 1813200,
+      "sha256": "59faeb2c2d91332c95ecabc422bf4cc7cf431b102b6843bad66da7f6863db321"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersExtractionJava.jnilib",
+      "bytes": 170496,
+      "sha256": "1531609ad1cbd931e49947d464cbcbb8f03d146b1748a8a9476ca7543ba60d38"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersFlowPaths-arm64-9.2.6.dylib",
+      "bytes": 1392832,
+      "sha256": "8efb163260777322efabb17866f5f79ae4f09408c6c277dcbb3f37a246ff72a7"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersFlowPathsJava.jnilib",
+      "bytes": 152768,
+      "sha256": "c8d6f125d504738b61b4728b0117db2ade533ba5435e2ba861ac73546874baa6"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersGeneral-arm64-9.2.6.dylib",
+      "bytes": 4564080,
+      "sha256": "f3b19a6ec88072e217aedb2c6087f9ed5ef738fd4a90640ae4f46d02190d7fa1"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersGeneralJava.jnilib",
+      "bytes": 527776,
+      "sha256": "2b1ed56188cb1c874ee61b98ccd4df0fce0c708c004dfe300e01f3d1eaf73bc9"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersGeneric-arm64-9.2.6.dylib",
+      "bytes": 182992,
+      "sha256": "c7669c0273d88996a6d65041c65571bae63715835549085553ca2021fd9181cb"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersGenericJava.jnilib",
+      "bytes": 108032,
+      "sha256": "8bddc1ef000dde53132cc0e43c6524e1af697ad22d658ace34b3315a83827056"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersGeometry-arm64-9.2.6.dylib",
+      "bytes": 1072096,
+      "sha256": "cf685d8b898341c464546592e41aa3341439cbe28aae1975fe1848cf0fc8edf0"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersGeometryJava.jnilib",
+      "bytes": 141712,
+      "sha256": "640f98a04158efe1c2920942840f8842bf8b606cddb2513b620bdf969c29186f"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersHybrid-arm64-9.2.6.dylib",
+      "bytes": 911368,
+      "sha256": "8d7077a00a1fc7534c830b781f110226557bfe3c745c0cf63f8d82fd6dfe7337"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersHybridJava.jnilib",
+      "bytes": 154880,
+      "sha256": "09db751bc257cfd0737a71553699e2afe4cb2d7661d28ba0c5d93536e32a2079"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersHyperTree-arm64-9.2.6.dylib",
+      "bytes": 284672,
+      "sha256": "d1db653341dd26acd7fb8819405ba134edb9d4ffb0fdb9d853c5ccc9c1b576ef"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersHyperTreeJava.jnilib",
+      "bytes": 91232,
+      "sha256": "28c552a9edbb85414730101e1aa3398fecd6df2ccabaf9e4d992c91d5f66ed27"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersImaging-arm64-9.2.6.dylib",
+      "bytes": 123952,
+      "sha256": "c693516ed25a9f3d0071b0dd8a67ea69f0b38000a6073a2849adfbd3b2901123"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersImagingJava.jnilib",
+      "bytes": 62336,
+      "sha256": "988a32f6214514d2a647a479bc24d3c9da53caee8fdc692e4b6a9b3e318b233d"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersModeling-arm64-9.2.6.dylib",
+      "bytes": 1012400,
+      "sha256": "53f2d1010f27a54f0a9fe1b8e721e908d7f497112fa912cd2fad6a10da789278"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersModelingJava.jnilib",
+      "bytes": 201168,
+      "sha256": "a0cd5f6ce1aa820a2dc8b7e4f6a2c53e29ab3e14444952c010cc15fdce6b2967"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersParallel-arm64-9.2.6.dylib",
+      "bytes": 862656,
+      "sha256": "d8c9bde6ef2e79f696112ea8ea2a1c1b54ce73c5a5311b754333265412107899"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersParallelImaging-arm64-9.2.6.dylib",
+      "bytes": 135608,
+      "sha256": "1b409b34c0027b962c5f332862aa772b5b9832b972d726345f555de46f9f46bd"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersParallelImagingJava.jnilib",
+      "bytes": 74248,
+      "sha256": "0f5dcdb0277a52df02564f9e116dbbc1a3463b1dee5750896c1e509aee35c00c"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersParallelJava.jnilib",
+      "bytes": 219024,
+      "sha256": "1666304313810671e9ec914a017eb40c1252c66fd861433a48cc042fc8c3ce5f"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersPoints-arm64-9.2.6.dylib",
+      "bytes": 2367800,
+      "sha256": "081fc43e6a1364c0db1cb8ca00d2f5c39487e28e0f0091019897fb2cd5bc8003"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersPointsJava.jnilib",
+      "bytes": 247104,
+      "sha256": "85092c4a770a481cfedefc1fedcbfed8d01ebbb7112fabc32ba2a1cce92e6909"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersProgrammable-arm64-9.2.6.dylib",
+      "bytes": 79744,
+      "sha256": "b7e04b98ed2ab43bd4b29fe49f50d4e5d0609210ce6952fd33b0d4fad9a3223c"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersProgrammableJava.jnilib",
+      "bytes": 60312,
+      "sha256": "21b64dff3c2f2bd393d77301d59ffd50e533797e3584b277930c76eba8f52702"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersSMP-arm64-9.2.6.dylib",
+      "bytes": 179864,
+      "sha256": "3bf71a73ed296a36076fc5ad8a5b2e6944ff8eac5f7bd26e35f20d9bd1a0a6a6"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersSMPJava.jnilib",
+      "bytes": 54264,
+      "sha256": "ad3aca6686ac989ad5eba2c56d8553a6a9b86b6b904963e9ec80313407cc63e2"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersSelection-arm64-9.2.6.dylib",
+      "bytes": 96080,
+      "sha256": "88599066644ed314dc50a823cdc7756fe2a1bf4ed223a001f82685cfd192251a"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersSelectionJava.jnilib",
+      "bytes": 58224,
+      "sha256": "6547198ccbfe73345eda097c55a20e4bdb9449ff5a5cb4c503a3511dd49f8bf2"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersSources-arm64-9.2.6.dylib",
+      "bytes": 794064,
+      "sha256": "397140f940eb2bc478a32953e068fbd0a999864bbcdb7aa8691d8c140c9fc9bb"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersSourcesJava.jnilib",
+      "bytes": 269584,
+      "sha256": "b7ce579d8bf486b96926e93d1f4b6493d747c8d861b666067af6d374be95a132"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersStatistics-arm64-9.2.6.dylib",
+      "bytes": 978048,
+      "sha256": "03a2c715a07c0d6a5d5bb59eee1d7055102d26335a9186a787f1e07202e3e23d"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersStatisticsJava.jnilib",
+      "bytes": 109024,
+      "sha256": "993eadb7c4566aefdb62ef2469c883521daa561830caa78916f5444cdc7dbe14"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersTexture-arm64-9.2.6.dylib",
+      "bytes": 125296,
+      "sha256": "45fcf60a79e3064462aa33200fd90867c7d62fd3b76621956a8e047e7cc96845"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersTextureJava.jnilib",
+      "bytes": 68688,
+      "sha256": "33e3778912a0a50c255c60601e7cbf79852aada124f09bf8bbbc0f366f0f4736"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersTopology-arm64-9.2.6.dylib",
+      "bytes": 64992,
+      "sha256": "a0d00cf1368d5f36f1626bfb0abc8da78150e8368bb83cd850cf2860ef08ce47"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersTopologyJava.jnilib",
+      "bytes": 52208,
+      "sha256": "7a53c99c5e3520ab3ab02a13db5ee42b691d05171293b53ad2d4d7443a289cc2"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersVerdict-arm64-9.2.6.dylib",
+      "bytes": 233120,
+      "sha256": "687b5dc552327e20a0e74be3da118df2f3d2be9f99696aef26b6019773e0d760"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkFiltersVerdictJava.jnilib",
+      "bytes": 110992,
+      "sha256": "61c0e9c34121f80765beb065799ef08937f363526522787b757eb71a2a76d2b1"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkGeovisCore-arm64-9.2.6.dylib",
+      "bytes": 159096,
+      "sha256": "a4385d3e5e41f05222d860da458eb87c44568b0d90d2d850d67e602a83c6dff0"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkGeovisCoreJava.jnilib",
+      "bytes": 96296,
+      "sha256": "e82d6c9bc62fbb9d2596bcd612272ebc39ad6f6d93daedd23b3727e248c2040f"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOAsynchronous-arm64-9.2.6.dylib",
+      "bytes": 94384,
+      "sha256": "6b5c5c4cf6432c289265ff33620787086973a3c1e58f5c5556718e73ade3665b"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOAsynchronousJava.jnilib",
+      "bytes": 52496,
+      "sha256": "c071fd27e56789b8de8f8de040cbf027552e8cc7359cd936b1e517dd4e87a648"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOCesium3DTiles-arm64-9.2.6.dylib",
+      "bytes": 205152,
+      "sha256": "41ae521b3fd7101e3b0485cae82eedd5b63789af00a10cc773bc6115dc37ce10"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOCesium3DTilesJava.jnilib",
+      "bytes": 55856,
+      "sha256": "2cb7ba76926bc7bd55aa4e7734a5330b7c1e20772791cbd799cf194086163c48"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOChemistry-arm64-9.2.6.dylib",
+      "bytes": 227240,
+      "sha256": "72d7fd20f61c1b0763017b5a44b3209ad9abce60fb9ba4d5f74fc20239b28563"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOChemistryJava.jnilib",
+      "bytes": 61488,
+      "sha256": "decdac842d002691deb97c75353c5dc4af85559cac765569535279af695f755a"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOCityGML-arm64-9.2.6.dylib",
+      "bytes": 141080,
+      "sha256": "9e2f1988db242a67985e471ef65b1fd43bf78770de943dcd21f57749d697972f"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOCityGMLJava.jnilib",
+      "bytes": 53160,
+      "sha256": "f3c135e9b2b2f12b277a919f8c868a67c57f37e6d4e66e8ed5dae8f8634b2de1"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOCore-arm64-9.2.6.dylib",
+      "bytes": 412056,
+      "sha256": "a352b917745218e74461a0f01f99373c8baa27dadedee3930b5c3dc7e9432a59"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOCoreJava.jnilib",
+      "bytes": 120024,
+      "sha256": "b73bd132d0b708819b76c18bffa0e50ba5d54bdfa39838e5ac88782ae00d2655"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOEnSight-arm64-9.2.6.dylib",
+      "bytes": 416184,
+      "sha256": "84509c38c55c936dedb680979bee0d942253556392685b45cfd2fd0169fe596a"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOEnSightJava.jnilib",
+      "bytes": 66296,
+      "sha256": "a6fb79445cb44f4176da4b2b0c8ea6bd4dc75d142ac021f165fd5a52e1c95615"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOExport-arm64-9.2.6.dylib",
+      "bytes": 640040,
+      "sha256": "8bb6fb3fd6be3eaee581d73d15ad213eda0e2e8eeb8057bb3b574afe49d35c46"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOExportGL2PS-arm64-9.2.6.dylib",
+      "bytes": 105816,
+      "sha256": "cfa8c1443b98d50a5df31b1f05b009435dd302b14e8bd0d6f06fe350be4030b6"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOExportGL2PSJava.jnilib",
+      "bytes": 92464,
+      "sha256": "c3df9bcc40784ba818441f136bcda08e79ea16e4478709d483361b59bf9042ba"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOExportJava.jnilib",
+      "bytes": 140984,
+      "sha256": "5e86ef12fa1fc4c7aae8493893ea615e4f126a8fc902f226317cfaa056ca2f09"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOExportPDF-arm64-9.2.6.dylib",
+      "bytes": 138856,
+      "sha256": "5df5340c6d1cc3b8d2f6f7a2d8cbbf1851bfde5b71015b69d90f7b152e656abb"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOExportPDFJava.jnilib",
+      "bytes": 71712,
+      "sha256": "811d96111ff6efef0663b99c00f06472cdcf2ad318e65dc6e8d2e61404c85d46"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOGeometry-arm64-9.2.6.dylib",
+      "bytes": 1677368,
+      "sha256": "e1246b915d6191c3d2d159af7e7e12e3e07e40a716a3cb8ac8b4688b7b482384"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOGeometryJava.jnilib",
+      "bytes": 175224,
+      "sha256": "96e3a82ce39f1f0dc6c3c1065aabba5c0a48ac075d08d6e11a8031bee863864f"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOImage-arm64-9.2.6.dylib",
+      "bytes": 1533816,
+      "sha256": "01c59194668e50796138ec9a0bd18bbc72c2dcd2e3a76beddf2e2b2490687f52"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOImageJava.jnilib",
+      "bytes": 214088,
+      "sha256": "afc0bf3241e6d322842e0b82df6e39b14d461fffdd3aa4a9c52ba9ac335a4dd8"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOImport-arm64-9.2.6.dylib",
+      "bytes": 355976,
+      "sha256": "c63c59d612029055e652217ead01803746ab3a222d524d62d89a82eb43b5f43c"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOImportJava.jnilib",
+      "bytes": 76504,
+      "sha256": "67446f348c06ace2b9c6632bb6f96ccf2c27a3366400c01d172a011eb19ff35a"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOInfovis-arm64-9.2.6.dylib",
+      "bytes": 418936,
+      "sha256": "c5f870e074071bc32fe48c29e94f00bf3b04766b260b641b0fffcf0cfe3cb1d6"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOInfovisJava.jnilib",
+      "bytes": 119816,
+      "sha256": "6b766c59fb0513656dbf1ac92e384fccb20431ff6d6a7420b4424f8b6b415ed1"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOLSDyna-arm64-9.2.6.dylib",
+      "bytes": 349736,
+      "sha256": "09ad9b25adc7c8015c427012981de5ab56ffea462f895636089b007a6fa22bbe"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOLSDynaJava.jnilib",
+      "bytes": 88216,
+      "sha256": "6882b2730daaa8fe9f3abb3117472152a1a0b501dc23f894aa8891ef922fea77"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOLegacy-arm64-9.2.6.dylib",
+      "bytes": 553432,
+      "sha256": "a21cf1d9fba7ce8b94aeb7fd2167dcde7df6589e4ac73955737558048d441ccd"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOLegacyJava.jnilib",
+      "bytes": 159512,
+      "sha256": "156a6032f5cc369e4981367c81af02ae7547a504164a149f89dc7bc4caaa3945"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOMotionFX-arm64-9.2.6.dylib",
+      "bytes": 304536,
+      "sha256": "ac99ce10bfd2a824ad1c7a65119caf026e2e1d18e59bdeda9ea921c2cd24b81c"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOMotionFXJava.jnilib",
+      "bytes": 52392,
+      "sha256": "cdc99c7ca37392dfc1b392b12c9734b47376d6001bd8396409af3abe87821df5"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOMovie-arm64-9.2.6.dylib",
+      "bytes": 65768,
+      "sha256": "de6589742d137e538159d22327b535ed8a1ff9ace47eeb526453ab76ace58717"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOMovieJava.jnilib",
+      "bytes": 52248,
+      "sha256": "e058b946242754c1bf6418304a5352896682496faf608807099a5c24017f1536"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOOggTheora-arm64-9.2.6.dylib",
+      "bytes": 71704,
+      "sha256": "6c1e522f4a07868cc68665cac474ed58dd9a43bedfe7587db953651ddf731601"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOOggTheoraJava.jnilib",
+      "bytes": 52912,
+      "sha256": "1cf00681d3aef6702759913ed3cdf11860df6f922fa0b5ae472e5e50a6528ab5"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOPLY-arm64-9.2.6.dylib",
+      "bytes": 158336,
+      "sha256": "d272e28171b201b22d11d99de17c784d9bd63e4bf6d103be3623d56666c8477d"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOPLYJava.jnilib",
+      "bytes": 59848,
+      "sha256": "74750aef2e6717278f4ff4e197e0c453845b4f48d365f2522513a1134b1a9d95"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOParallel-arm64-9.2.6.dylib",
+      "bytes": 404392,
+      "sha256": "e1c8175f9fd84da34708a4b1eabf85886aacbc1f4e242b1faae5c01739ed52cc"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOParallelJava.jnilib",
+      "bytes": 90408,
+      "sha256": "5d81046621049b342b1854fb99c744da422dcd955194452643b5f44959a5f958"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOParallelXML-arm64-9.2.6.dylib",
+      "bytes": 226136,
+      "sha256": "326859d66f749048bcdbdee9ee9864dc4525ac31eebd9ef8252fd8a70e6d5dcb"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOParallelXMLJava.jnilib",
+      "bytes": 94816,
+      "sha256": "b991773bf8e953e1c91f12b0c01b94d39af06dea2d3ec7086009d5e2d707d98e"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOSQL-arm64-9.2.6.dylib",
+      "bytes": 267648,
+      "sha256": "592eae8211421eb7d861dda730721c41b96304d9064f1e7a82b20f6ad13ea44d"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOSQLJava.jnilib",
+      "bytes": 97784,
+      "sha256": "646a44050c7f3d78e8d0a6618df020c7055b07f22564c3e2a1ae1df964bbe406"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOSegY-arm64-9.2.6.dylib",
+      "bytes": 91208,
+      "sha256": "821080596718ddfb9278d3c9aa601d22b64a8217f5a3d4983508d2715af55a3c"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOSegYJava.jnilib",
+      "bytes": 53944,
+      "sha256": "4ba8ca2b71f38cbe42920b61864de88291c5261f0637ce04f86336e893aa5a2c"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOTecplotTable-arm64-9.2.6.dylib",
+      "bytes": 75152,
+      "sha256": "57575f1047920a715ecca65d3983973c6688a73791f838c97b2af2912e64accf"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOTecplotTableJava.jnilib",
+      "bytes": 54368,
+      "sha256": "3a03fc0f649a00f255c5ea6f9a77a83e19bdddc16c9094344faf5ccb4dc46f19"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOVideo-arm64-9.2.6.dylib",
+      "bytes": 74024,
+      "sha256": "35f72b5e3e56ee6b28748b4dc093838adc57164e9d4caab5143874997cd82bbe"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOVideoJava.jnilib",
+      "bytes": 56184,
+      "sha256": "33452d7e16511e147e8233696d1459b733e14257ab7d1ab7ab8b8ce4b3311349"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOXML-arm64-9.2.6.dylib",
+      "bytes": 835680,
+      "sha256": "9111d6a4e9d1ada4b2d01f223815cb43f98d2104154a26eb90fcd617fe0874d1"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOXMLJava.jnilib",
+      "bytes": 176072,
+      "sha256": "39448e753ec38cf76f87e683c6d9e328bca835745db6adc0e457302e9acf81d3"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOXMLParser-arm64-9.2.6.dylib",
+      "bytes": 118296,
+      "sha256": "a9f720090b19b9fd9abfe90d5533cab453cd0f5fb2f81f70108681b25cfda1bb"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkIOXMLParserJava.jnilib",
+      "bytes": 56528,
+      "sha256": "7b815ccbd774160ca75dd958c724aac6b378077f017b43284673a172e611a0d6"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingColor-arm64-9.2.6.dylib",
+      "bytes": 332504,
+      "sha256": "6b543fb3bb7ec0294208a7ecaef6c6b7465b419a9f0ec2bef840d4590ef1e2b2"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingColorJava.jnilib",
+      "bytes": 62928,
+      "sha256": "d1a81608099293ce5a8f138e1911a8c376d445a6ba6a337982ed90624ca58b1d"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingCore-arm64-9.2.6.dylib",
+      "bytes": 2454008,
+      "sha256": "3324147fb38d070516e30efcb846aa3a247e288a87e3538a21df385e56d61304"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingCoreJava.jnilib",
+      "bytes": 217456,
+      "sha256": "fdfa1574c5ccefe9dd5ec7aabd1ad8e1a3a16d3010e99dd970b9ca763fb4d200"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingFourier-arm64-9.2.6.dylib",
+      "bytes": 140048,
+      "sha256": "b1476468214c8a76cc15cbff802399d46c117e0ff444a972d71a1394d135915a"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingFourierJava.jnilib",
+      "bytes": 62768,
+      "sha256": "66c35c498bcebb4f53e52c8d71c51e568f49c551beae5962766fa30c2e916f98"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingGeneral-arm64-9.2.6.dylib",
+      "bytes": 809200,
+      "sha256": "0eb0ac824d64e60e8768efa3294d18daa06d260bbf9ed094a2848bb1c50d534b"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingGeneralJava.jnilib",
+      "bytes": 123936,
+      "sha256": "c393cf08dd0663e89186862c06596421ab62a0a7f054f7b34411c8d2f5e00388"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingHybrid-arm64-9.2.6.dylib",
+      "bytes": 678072,
+      "sha256": "d612e39271a6977404a3fa4fb5c9ca968e103334137c8946109634074f2bf8ab"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingHybridJava.jnilib",
+      "bytes": 110672,
+      "sha256": "e9a8c199a70319983939a6c19f1d55f38614dd08294c7e5cc8d9c8270cc20211"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingMath-arm64-9.2.6.dylib",
+      "bytes": 295480,
+      "sha256": "9e0a2bb5942dbd6d9769a704d95d3f532870239d4156214449a58706694309df"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingMathJava.jnilib",
+      "bytes": 65120,
+      "sha256": "434146c2eaacc450c4ef5c0184be02c88bb5f288716784e90ac2af178870e7eb"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingMorphological-arm64-9.2.6.dylib",
+      "bytes": 463456,
+      "sha256": "b7a9964b6178ab6385be28f2fb780def5f6dfb75434022968b4a79283d632b1a"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingMorphologicalJava.jnilib",
+      "bytes": 96232,
+      "sha256": "8bfc0829a669a519403efc6706fe2d825d3cec1dbf08e156e47e5d9c775d2d14"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingSources-arm64-9.2.6.dylib",
+      "bytes": 283024,
+      "sha256": "3cf1a46ce3d5d797486120c9f140dbd773e6e4dc4101300895edbe30e668f511"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingSourcesJava.jnilib",
+      "bytes": 90160,
+      "sha256": "ec75950ee230c6ac069746eb9eea8cf53eaa82521a9be6275708d1c22e52c7cd"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingStatistics-arm64-9.2.6.dylib",
+      "bytes": 155712,
+      "sha256": "de83b39d893ad9f8797e4001a12302daa37fb8f3bb66b9635648a1652291e3ac"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingStatisticsJava.jnilib",
+      "bytes": 62256,
+      "sha256": "b0056c19a2b49aacb805470095577d267f4ca26e4630816b892a196dd677e4bb"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingStencil-arm64-9.2.6.dylib",
+      "bytes": 171888,
+      "sha256": "adb4675d9a7daf2c6defc6f11fddd071ac39a91f60e6a8fa8d910486c715c2a7"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkImagingStencilJava.jnilib",
+      "bytes": 66096,
+      "sha256": "649f1897b08261ea3dcf689c8f14333a97876aaf8a5115f2a54b7acbc9c9dee1"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkInfovisCore-arm64-9.2.6.dylib",
+      "bytes": 840136,
+      "sha256": "f0e38c362756806dbe5b5f1b92a9ceb31017af5b140ba43952f0de940a0da10c"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkInfovisCoreJava.jnilib",
+      "bytes": 213472,
+      "sha256": "121b300878c4986dce84662dec6bdcc0e32ed4e98d9ac42a8589368e52dc5905"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkInfovisLayout-arm64-9.2.6.dylib",
+      "bytes": 459400,
+      "sha256": "64029669597b6e13a6ad89c6453f05e38408b6e678b98b691003f3194eb55ad4"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkInfovisLayoutJava.jnilib",
+      "bytes": 187296,
+      "sha256": "540e1a8f6266e771e7292be9bbd0546cec600d1c07ccbc4141ec854ec5d5f9ec"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkInteractionImage-arm64-9.2.6.dylib",
+      "bytes": 117328,
+      "sha256": "797e9762e5b4291dfa50e64e026f3cff1b41f9975f8263b186a864b8b3932f0f"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkInteractionImageJava.jnilib",
+      "bytes": 65488,
+      "sha256": "8d2dff5ce4243ecc0afabc0983151a1d40ec4b38f8cbabe2bbe80aa7f0f48e6d"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkInteractionStyle-arm64-9.2.6.dylib",
+      "bytes": 256880,
+      "sha256": "486eec9495754916fc2bb9e709f1766fae35d2a8b4279197201a1fecdc9c5441"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkInteractionStyleJava.jnilib",
+      "bytes": 131200,
+      "sha256": "2acf51cd8cf5691233122fd3de817a954205dce8a9c2afb6d52f9a4016f5a657"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkInteractionWidgets-arm64-9.2.6.dylib",
+      "bytes": 2257520,
+      "sha256": "2b2997ead734bf6a55bf4cf5796384455fccb020d01a491da1105faa030a561f"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkInteractionWidgetsJava.jnilib",
+      "bytes": 1019696,
+      "sha256": "236b03de5cf85eb3383cde697c93d11b082fea6e137864fada3def435f474c2d"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkJava-arm64-9.2.6.dylib",
+      "bytes": 39664,
+      "sha256": "ac0be4fabb6bc2dcda2beaf3ff028bbb34ec61a0852f0e9c97b8d60496642baa"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkParallelCore-arm64-9.2.6.dylib",
+      "bytes": 367048,
+      "sha256": "eb2e08b04883e91e716c0ed031ef108c313dcc72e6e3448429667e9ca3c99952"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkParallelCoreJava.jnilib",
+      "bytes": 105072,
+      "sha256": "d05a65d56a2a86619d96c8dc4585944c73d77290c684038ecce04ab2ce8b0248"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkParallelDIY-arm64-9.2.6.dylib",
+      "bytes": 1350344,
+      "sha256": "83b82d3008ed94472cc5023e63c35e76af3c190327af8a7eb4c7c1e98b5fdae2"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingAnnotation-arm64-9.2.6.dylib",
+      "bytes": 823200,
+      "sha256": "1744b6213b3d24507add2e0e7487560375a030ab35ea5b9a776e2aaba5d14597"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingAnnotationJava.jnilib",
+      "bytes": 382456,
+      "sha256": "bb23911dfab1f8598485541f129ad0d05b5ae5a51bf29d07723d3c7d43383ed3"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingContext2D-arm64-9.2.6.dylib",
+      "bytes": 241824,
+      "sha256": "6299f140e689084d4f4b61e3b6cddda2c55586f17b68945bd00942bd2921b211"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingContext2DJava.jnilib",
+      "bytes": 140224,
+      "sha256": "937f204daf19ef281e253f3dfdf1f863a51d5ce46711818a756423e0991d1da9"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingContextOpenGL2-arm64-9.2.6.dylib",
+      "bytes": 231000,
+      "sha256": "c359cbf1a0d43fecc0b4dc4e785c7d80fb969a294869f9a3aa9c56997dba86d8"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingContextOpenGL2Java.jnilib",
+      "bytes": 78040,
+      "sha256": "be3f1c7320c5ef034d4b2bc068d7619744f10245966e289351ac6531dce8116d"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingCore-arm64-9.2.6.dylib",
+      "bytes": 1796776,
+      "sha256": "064aa34afd9d2d601bb3c15aee26a835b98e8155a95da6b50b097f2511a206cb"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingCoreJava.jnilib",
+      "bytes": 870544,
+      "sha256": "0257dcd9495f954cecd86a5263cc8546f8c6aef160e8cfb5b51f2428fa76a6f4"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingFreeType-arm64-9.2.6.dylib",
+      "bytes": 680976,
+      "sha256": "4876d22002dfaf666f508ff634ff9b29d57eed163beca1e66206726ae276acab"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingFreeTypeJava.jnilib",
+      "bytes": 80720,
+      "sha256": "00eb0a2ebb460587026887a9c334c9f7df239665f4cda546a9824b5e37423111"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingGL2PSOpenGL2-arm64-9.2.6.dylib",
+      "bytes": 106128,
+      "sha256": "57201c01a1212b6e50dcad3512e2bf3e4e53658338bada3b898673a478c2a4e6"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingGL2PSOpenGL2Java.jnilib",
+      "bytes": 52712,
+      "sha256": "2d7fdfdab4998d6a4d71707db08237900aff572ea7ab55bdab9a4020a96db176"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingHyperTreeGrid-arm64-9.2.6.dylib",
+      "bytes": 72392,
+      "sha256": "bb5b62f8166fdf7887836bfe0b5db085aecfc68fd898a2f127107df1d1d609d4"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingHyperTreeGridJava.jnilib",
+      "bytes": 52888,
+      "sha256": "34cd3a580d545f7c6e4a478760ac136323433aa12b8eaefe150c860ba78202c9"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingImage-arm64-9.2.6.dylib",
+      "bytes": 333968,
+      "sha256": "f8e0558f12612bedb65877a02a669eeb615051d1e1ba17caebaae59c9e56d0fb"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingImageJava.jnilib",
+      "bytes": 65008,
+      "sha256": "cce661e6e13cf8f50061aa126de60c185d5ac7d93c779c9ef8993d83b2f6f490"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingLICOpenGL2-arm64-9.2.6.dylib",
+      "bytes": 477968,
+      "sha256": "5ef30fd08a07f309a0df9c763d83e4f1c7fd5cbf5ced7fac8598f500d01bd5ca"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingLICOpenGL2Java.jnilib",
+      "bytes": 100312,
+      "sha256": "7bc8a1bad30905b2adb10da8be462fb42efd01fa0912202d728c932134f025a7"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingLOD-arm64-9.2.6.dylib",
+      "bytes": 90200,
+      "sha256": "87786c7aa890b50158b4bb23b5393d1b0efb77f804712f5b30e1aa470f129540"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingLODJava.jnilib",
+      "bytes": 57440,
+      "sha256": "1b331a43814944e4eb376dc43a8a2acd4b927b671d1e720539e503d60952bd85"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingLabel-arm64-9.2.6.dylib",
+      "bytes": 526064,
+      "sha256": "4a56a0aa3da435e68fffb4067ae5e2b9ddfc9f3463f1a6943862a6195eb1bacd"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingLabelJava.jnilib",
+      "bytes": 125104,
+      "sha256": "977cb506ef1962bca8c3aaec00e1ec60a97e20bf25857e5f18b14e18684db38b"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingOpenGL2-arm64-9.2.6.dylib",
+      "bytes": 2183344,
+      "sha256": "6b6b0e79b344ec0808b111f86d9cbcb8321f47ec89ee92ea1a9f4d065c5cfc9d"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingOpenGL2Java.jnilib",
+      "bytes": 457280,
+      "sha256": "d90d7615c8c7be50b2e0ed3ccd43cab7b3e251001d501feee5cc5933b1bcfae1"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingSceneGraph-arm64-9.2.6.dylib",
+      "bytes": 127152,
+      "sha256": "cc1780b5805aeb3471e7855d6d3dfdb77d7377618178a2e718c799872490776b"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingSceneGraphJava.jnilib",
+      "bytes": 61448,
+      "sha256": "9a722acc217418e3119dd8aeaeb978164af34361516d9b27384a8299232cb325"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingUI-arm64-9.2.6.dylib",
+      "bytes": 118552,
+      "sha256": "57ab574945a3e988878d6bab350d8f1f072de4c3076a234002cc95063d7d7c80"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingUIJava.jnilib",
+      "bytes": 54624,
+      "sha256": "9e0c6906bd09a5657ab486a7412b8f5f6e4ace5f235c97dce97b95fa6165924b"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingVolume-arm64-9.2.6.dylib",
+      "bytes": 2776944,
+      "sha256": "08b66d6a3e560751ca91c26c45a2e3d56a115a7e4e1acaadf616bc8c93ae43ff"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingVolumeJava.jnilib",
+      "bytes": 199456,
+      "sha256": "47b23710c426eaf6c8ff1ab085e927c6b1de623c363c5a00c6e57c427eac6215"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingVolumeOpenGL2-arm64-9.2.6.dylib",
+      "bytes": 608472,
+      "sha256": "092f109f8eaa49e12b08644463f4daf288c23bef378a2931fd122a495d9debec"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingVolumeOpenGL2Java.jnilib",
+      "bytes": 108152,
+      "sha256": "adc4bbd3c144f0b4241e1ad71e747bd55b9c99ec77a5125b814d326450e61288"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingVtkJS-arm64-9.2.6.dylib",
+      "bytes": 155744,
+      "sha256": "c16b6dfb3cf6eec43e2cf925d0ce21102e616239d0fc63b82429d706b6a2e82f"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkRenderingVtkJSJava.jnilib",
+      "bytes": 55216,
+      "sha256": "49f155d4bee24bdb832e280722b4a8232c9cfea21dce87b78b34e225687ecac2"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkTestingRendering-arm64-9.2.6.dylib",
+      "bytes": 142912,
+      "sha256": "c8a14be6686c62f4d680ad676c231110a3e4eb01f27af93841ec084e8d9de1a6"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkTestingRenderingJava.jnilib",
+      "bytes": 57936,
+      "sha256": "24fc86000a2d6a10fb097c7036e1961fc74b075cd116710858d5c0c1164e7038"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkViewsContext2D-arm64-9.2.6.dylib",
+      "bytes": 76736,
+      "sha256": "e92518a901f0041c27344b16f1305c7f4c6d8140aa51b46c5d5a2c388ee1cd39"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkViewsContext2DJava.jnilib",
+      "bytes": 54704,
+      "sha256": "3d1052fa9aebc2d52eadafdf71a5b7185b72a5c2a74db13a1330e9091604cbbc"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkViewsCore-arm64-9.2.6.dylib",
+      "bytes": 152232,
+      "sha256": "a46710e40a22ae2fc3914dc64143d22b3b474c57d40f7b24e430474a9156fcc4"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkViewsCoreJava.jnilib",
+      "bytes": 88856,
+      "sha256": "34952d89ea7a711fb024757f27b651a65c3344a125ad4f4029ebd3fa538101b6"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkViewsInfovis-arm64-9.2.6.dylib",
+      "bytes": 628840,
+      "sha256": "f01244f8c2659c58455b7082edb651f7e6fb4843530c09fa64d107fb7776d0ec"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkViewsInfovisJava.jnilib",
+      "bytes": 269328,
+      "sha256": "651dd3c35c1cf986a2067cb73133f9c6d046b8512f32bd453347c38d1e9389e9"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkWrappingTools-arm64-9.2.6.dylib",
+      "bytes": 324296,
+      "sha256": "8d54ad2aa72638272f6555b5bd4a8166de5d1b58b0aae952a63edc9effac381c"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkdoubleconversion-arm64-9.2.6.dylib",
+      "bytes": 74112,
+      "sha256": "d5ae09335f06475a1bb47714d49e35bc4e649bc8389e2c190b6c5d08c6ef48d2"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkexpat-arm64-9.2.6.dylib",
+      "bytes": 164944,
+      "sha256": "05b4cae42e1c82312fc93430715ad328748dfff03bb2bdcd2ed0e70854b28fad"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkfmt-arm64-9.2.6.dylib",
+      "bytes": 166336,
+      "sha256": "6f44dd43fd7722cd5e126bf1df01ea49ea0b2a4243e16e23c39c26a4b2067c92"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkfreetype-arm64-9.2.6.dylib",
+      "bytes": 654376,
+      "sha256": "0fa2f5034f6a758d70457e0af05a630ebc890d7d616c467642ff49fd23f9dab3"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkgl2ps-arm64-9.2.6.dylib",
+      "bytes": 141552,
+      "sha256": "1b6140d2da27e27110c482bc8e9c63a424e110e9d8acda8bb7edd0bb1ba25258"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkglew-arm64-9.2.6.dylib",
+      "bytes": 969360,
+      "sha256": "2fba0714a73c78604f4abf97977a8ae959a6180eae65b1724e67b6ba8162140f"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkjpeg-arm64-9.2.6.dylib",
+      "bytes": 336608,
+      "sha256": "aec19edefcac3c57373c3b158da73a6ff645857320518dad00d424f883bd1ca7"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkjsoncpp-arm64-9.2.6.dylib",
+      "bytes": 252152,
+      "sha256": "7937ea1252e032054f1ae12a0d9bc4adabd88b857ceb12bc968b3e90c8751757"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkkissfft-arm64-9.2.6.dylib",
+      "bytes": 34488,
+      "sha256": "df4d345889faa7a594b46d1cb7115570b1785bc74bda46b257e829110b88e8ec"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtklibharu-arm64-9.2.6.dylib",
+      "bytes": 767384,
+      "sha256": "34d9bdd656942e9779124351e6f26b5a6d81e700988264fea9458ea2329cfc6a"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtklibproj-arm64-9.2.6.dylib",
+      "bytes": 3582248,
+      "sha256": "bd1b0df571b196e3a84d17be8a2a33c1f47612494827dedd43a1d530dc95aa12"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtklibxml2-arm64-9.2.6.dylib",
+      "bytes": 1330936,
+      "sha256": "4a816e28c4c64eca12896c3cbc8fd8a99c920c2ef7b370bdd6a9315d1b5db933"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkloguru-arm64-9.2.6.dylib",
+      "bytes": 180568,
+      "sha256": "4d4fe638124318036d9ac6bee8a2a6013b1ae7e79c73724457b6197c444a55d8"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtklz4-arm64-9.2.6.dylib",
+      "bytes": 174928,
+      "sha256": "3029e080d14d650e15df0a99b8fc242d3708d156bcd4c93330b3cbcdb682caee"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtklzma-arm64-9.2.6.dylib",
+      "bytes": 183984,
+      "sha256": "1293c1f29e38aee6e5dcb0616d60abb1e5830669b8980f8194ce660006153c17"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkmetaio-arm64-9.2.6.dylib",
+      "bytes": 619752,
+      "sha256": "bea03ea857cf0bf62ef9b281e103548dbb7307ae51cbccb4d663022a521c3610"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkogg-arm64-9.2.6.dylib",
+      "bytes": 54464,
+      "sha256": "472c72e4a089a240038e3ef9c39f9ce4c1d2f74a6e5b6b61194a2d13d939e354"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkpng-arm64-9.2.6.dylib",
+      "bytes": 245856,
+      "sha256": "b417585cd5c40746fafe265caa75ce3fa6a1b4b03f66bf5c3c5da39cdadc6aee"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkpugixml-arm64-9.2.6.dylib",
+      "bytes": 237368,
+      "sha256": "22d91a282a867c57195fcf1ce1d7012c92c10b05322f663744bad22c03a67f9d"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtksqlite-arm64-9.2.6.dylib",
+      "bytes": 1042776,
+      "sha256": "32e70ee1b554b09a11140b50795035971a83596b5a47b87a9d7d9b319c8bc899"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtksys-arm64-9.2.6.dylib",
+      "bytes": 307968,
+      "sha256": "3040cfdea17a2d88ada0dc8ce71fd778177481d340190d8d9976ec4bb3f07a15"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtktheora-arm64-9.2.6.dylib",
+      "bytes": 245048,
+      "sha256": "9c2920884c5b829efe82a0c058eff01f0a6b90c632db195252fb931507fe8548"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtktiff-arm64-9.2.6.dylib",
+      "bytes": 435440,
+      "sha256": "90a105d485707861bc375a9c37fb53dcb54bfce5c31163e63e62f1c499169792"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkverdict-arm64-9.2.6.dylib",
+      "bytes": 146312,
+      "sha256": "c2b1be4ad8f26f6cf1f012fc9c3358a1eb39be8cdcaf9893d13e76c1b3a5f31f"
+    },
+    {
+      "path": "native/vtkjavanatives-0.1/libvtkzlib-arm64-9.2.6.dylib",
+      "bytes": 107312,
+      "sha256": "c8f90e8dd9b2f35708ed5b50db55174a5af885828f4a234aaff58ed8b40e382a"
+    }
+  ],
+  "bridgeFiles": [
+    {
+      "path": "bridge/node_modules/.package-lock.json",
+      "bytes": 1282,
+      "sha256": "1b28414ec1f9e3d0dcee952f6543f6fa98b68c543a03de93169090b75d12e49b"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/LICENSE",
+      "bytes": 1064,
+      "sha256": "f60faff2bd1fb174b290310432756a817581cdffc3846f2d5c0da5ab0053680e"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/README.md",
+      "bytes": 13686,
+      "sha256": "a7bd7ad783d3a1ee897a25a8726b0551d257f1404fb927d1f517510f02585aad"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/dist/JavaBridge.jar",
+      "bytes": 6517,
+      "sha256": "64939bea39225d0d57c0cb9fdf4e77789d4f57d72ef0d1e0cb6a86aac9ba4a92"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/dist/definitions.d.ts",
+      "bytes": 10180,
+      "sha256": "b2cacafbf9682ae2036abc6f4a823676da61046fab5f7189e27ac70f785f8a3f"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/dist/index.d.ts",
+      "bytes": 750,
+      "sha256": "015326701b96632875c56f0a53755b8b4c166f96ad87b914b7873724d0337a6d"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/dist/index.prod.min.js",
+      "bytes": 13904,
+      "sha256": "e91faffdcd5810c424aa1da14a52c742dc1ea3d405a369beaea4d7e36ea1c386"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/dist/index.prod.min.js.map",
+      "bytes": 66388,
+      "sha256": "0023cc5035328f5e36ee7d1533fd6edc33e53da7d45a9f4654ff300d0ab40ca9"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/dist/java.d.ts",
+      "bytes": 24225,
+      "sha256": "151ece578485dcc2cadfd0d1a4ae057826ae4a828221a2d669558c72f0228cbd"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/dist/native.d.ts",
+      "bytes": 13503,
+      "sha256": "6e7e8e4696944012546d8a925f49a834a0e32a0c5d2d996558c3c92c97eebcd8"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/dist/nativeLib.d.ts",
+      "bytes": 156,
+      "sha256": "c40343b48c22b07ca1704705124e76cc40dd27515e25e156a5919493dbbc3505"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/dist/util.d.ts",
+      "bytes": 550,
+      "sha256": "619b5afc201e89786e785b5a3858fcd68ebb5c2f3c3a09d0de12271e12f8c19d"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/native.d.ts",
+      "bytes": 13503,
+      "sha256": "6e7e8e4696944012546d8a925f49a834a0e32a0c5d2d996558c3c92c97eebcd8"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge/package.json",
+      "bytes": 3830,
+      "sha256": "cb0f88be45433eb71fbc5b9c47a6162edbbfca41aa96945920bb17b9c5a9935b"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge-darwin-arm64/README.md",
+      "bytes": 92,
+      "sha256": "710512c6f7d4181a668728c8733bd66a20d8bdee902a52702f943dc1ebc76c0e"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge-darwin-arm64/java.darwin-arm64.node",
+      "bytes": 1759536,
+      "sha256": "60ea55cec1dcddaf9f2320bb0e044b8864888d0de80682a5c9b13c06d52ca60b"
+    },
+    {
+      "path": "bridge/node_modules/java-bridge-darwin-arm64/package.json",
+      "bytes": 609,
+      "sha256": "4a463095d05824f477ed3511820f9cb19b00175684c0cde14d5852ad92d36bf4"
+    }
+  ]
+}
