@@ -114,6 +114,9 @@
     "expect": "fail",
     "reason": "the readiness wait times out after 30 s"
   },
+  "reader-text-browser.mts": {
+    "expect": "pass"
+  },
   "replacement-flight-browser.mts": {
     "expect": "fail",
     "reason": "needs a production build: dist/_astro is missing on a dev server"

@@ -4,7 +4,6 @@
   "id": "pan",
   "displayName": "Pan",
   "panel": {
-    "introduction": "Pan orbits inside the Encke Gap of Saturn\u2019s A ring. Its gravity helps keep the gap open. Cassini revealed a small icy body surrounded by a broad equatorial ridge.",
     "facts": [
       {
         "id": "radius",
@@ -45,7 +44,7 @@
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Mark Showalter \u00b7 1990"
+        "value": "Mark Showalter · 1990"
       }
     ],
     "moreFacts": []
@@ -62,9 +61,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
-        "title": "ISS mosaic",
-        "detail": "Cassini \u00b7 corrected mosaic",
         "thumbnail": "/scenes/pan/pan-normal-thumbnail.webp",
         "surface": "pan-normal-surface@2x.webp",
         "poles": "pan-normal-poles@2x.webp",
@@ -73,14 +69,12 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/access.html"
         },
-        "summary": "Photographs are mapped onto the measured shape. Shadows and unreliable samples are withheld; the gray grid marks gaps."
+        "notes": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
+        "noData": true
       },
       {
         "id": "filter-color",
         "label": "False color",
-        "description": "Cassini IR1, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
-        "title": "Cassini false color",
-        "detail": "Cassini",
         "thumbnail": "/scenes/pan/pan-filter-color-thumbnail.webp",
         "surface": "pan-filter-color-surface@2x.webp",
         "poles": "pan-filter-color-surface@2x.webp",
@@ -89,14 +83,12 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/"
         },
-        "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
+        "notes": "Cassini IR1, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radial height above a 14 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region.",
-        "title": "Shape-derived radial height",
-        "detail": "Shaded relief",
         "thumbnail": "/scenes/pan/pan-elevation-thumbnail.webp",
         "surface": "pan-elevation-surface@2x.webp",
         "poles": "pan-elevation-poles@2x.webp",
@@ -119,7 +111,7 @@
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/pan/pan-elevation-legend.webp"
         },
-        "summary": "Height relative to a 14 km sphere, from the Cassini shape model. Accuracy varies by region."
+        "notes": "Radial height above a 14 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region."
       }
     ]
   },

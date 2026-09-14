@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "6222aaabcc7aec6f0320acd0db4f8204f7a4022f66fece87c3399c95c99571e8"
+    "sha256": "3bf3d0aafaa9650b41c8abc3537d2f9f324cabec2f0a5926f019dca2199fddfb"
   },
   "id": "venus",
   "properties": {
@@ -80,7 +80,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c37d72b0d97d73041322c7ecd3c5849efe9acba5f426d8166e43acb8ab98dd30"
+          "sha256": "952238549deb7b771d0ea5b6a652d4c36349a013d2e451a856bc62ddad388da7"
         },
         {
           "id": "solar-system",
@@ -163,7 +163,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "51ef65cd3936bf7b80079c30b1d38cf300cd35a9c17498b70e914be6cf9a79b1"
+        "sha256": "3c64ef659679dc590765d50938eff447530f75ffb1c7ae698da3653f6849f9cf"
       }
     },
     "catalog": {
@@ -171,7 +171,7 @@
       "classification": "planet",
       "color": "#d6aa69",
       "distanceAu": 0.72,
-      "description": "Explore Venus in 3D with cssEarth. Look beneath its clouds, discover its volcanic surface, and learn about the hottest planet in our solar system.",
+      "description": "The hottest planet, hidden beneath thick clouds.",
       "systemName": "Solar System",
       "order": 118,
       "context": {

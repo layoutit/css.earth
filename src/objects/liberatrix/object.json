@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7ed8e0d923d4cd31768be550f96e6df6f0372887da1e0ac0564eb1e4497be518"
+          "sha256": "f294906215ba45c4cde5ec9179305efc29d633d09c44e7886527d4dbf0e2d4a9"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cbc9025a25867b03d21faae346ad655843581b02a1dcd906c40b0384089c41fe"
+        "sha256": "8dee13d9cfaac6815e6683e2b558acab3535660705ca416a037d0f4d22b063e2"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.742985442216405,
-      "description": "Explore Liberatrix in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in September 1872.",
       "systemName": "Solar System",
       "order": 273,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "dfd4d402ca448d32d00664e025a38bcd7ee0874cd3322f6c33d3e29e1c6d31b6"
+    "sha256": "7b81f75f4887bb56df061b4e32844f0a480f72cc56b7e513f8c003b0b3e1d6e6"
   }
 }

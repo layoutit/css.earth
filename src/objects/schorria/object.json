@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "23fcfce756464cb5a74e93833d26a316e7cfd2c6419eddf3cb586b0822d5f7ab"
+          "sha256": "448845b80adf63c7dda8fcc7325ae2aed12cbc1acca2579d3c7431ad513eea49"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "174f65d892ba36fbf847052f942b1767cf552c2b80f34575e499ac378112bc2d"
+        "sha256": "9eff86dd6e09bec0fb2e455cd0de20ceb7cb1d0ad4a5dfb0ff0b79d96cc43744"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.9102898161034227,
-      "description": "Explore Schorria in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark, carbon-rich Mars-crossing asteroid, discovered in October 1931.",
       "systemName": "Solar System",
       "order": 408,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "feeb58ecd670d9d20577fbd9da348b2112560d3707c0ad917973d2ab5c36a1d2"
+    "sha256": "9417d60ab8d512ec005ed046bda8640e0d1ff17675980cb1cd33a072d36eeb80"
   }
 }

@@ -4,7 +4,6 @@
   "id": "hersilia",
   "displayName": "Hersilia",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 93.93 km effective diameter (catalog ±0.94 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "DAMIT 3217 shape model",
         "thumbnail": "/scenes/hersilia/hersilia-shape-thumbnail.webp",
         "surface": "hersilia-shape-surface@2x.webp",
         "poles": "hersilia-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 46.965 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 3217 radial height",
         "thumbnail": "/scenes/hersilia/hersilia-elevation-thumbnail.webp",
         "surface": "hersilia-elevation-surface@2x.webp",
         "poles": "hersilia-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3217",
           "image": "/scenes/hersilia/hersilia-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 46.965 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

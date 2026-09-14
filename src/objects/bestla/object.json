@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "80087e4cee737ba39d13a7cc4c28c290c9890c7bde07dee53f4a18c42b421fcf"
+          "sha256": "7400f914c0e35798db91c3f938046fa84bbb5e4e638344b2ca6c871884bcbf4c"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "115cc7a4e0ae705b74ff9246993ef6a7ea3b0aef2bdde36498cefca2ba78f200"
+        "sha256": "b4bbab6378bb9b0c91b82f9bd59647ca47c71ede248b671473e9d271ae43219d"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Bestla, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Norse-group moon of Saturn whose spin axis points roughly south.",
       "systemName": "Solar System",
       "order": 41,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "caa0616ae833686b0fe58ba6de2a6db09feabad769b146410d96d4c50af0fcdb"
+    "sha256": "c8c6e83c08faa4b2493f54d56bc0266f87a6bfb919ed735513bbd57c32dde3bf"
   }
 }

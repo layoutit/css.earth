@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "b4a4a0948362a674ead4d8c02262fb705f78badd3374e76d3bd989d49f25b7a1"
+          "sha256": "cdc220febde34e101a265d4bc5a2b515c68a35e288714e1c7e477f7d5fd66b68"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "19df73265b8226622e1bbebe1dd0a9197146136713264fc30aedbe6f8fc3fa63"
+        "sha256": "5d560f4c6fb5b0f0d1254e35724f2e79971c26ea79d18194f436994145401b4c"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 5.226,
-      "description": "Explore Menoetius, the companion of Patroclus, through its occultation-constrained shape approximation.",
+      "description": "Smaller partner of Patroclus in a binary pair of Jupiter Trojans.",
       "systemName": "Solar System",
       "order": 26,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "1fd0f830509a9b3142f593bc305c6db2fde9800a1c8f8713c8b5eadf03d8d9a8"
+    "sha256": "840ac4a5daebad0347dc38a582255147cff1375e8ebbc78822508c7f7aba4098"
   }
 }

@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "f0f1b744bedbf783ed27c6554ebf22ed927b1d91f9a9b1d937cc62c9e3841525"
+          "sha256": "f070fde8621d6c99bd6bc4bbf57fc1c7830025b7a2fddd79a606d001faa843e5"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8e8485447737eb159af825cfc0466a8dd1bf014f279a54fa45ff3007bd0693c5"
+        "sha256": "f300a0c9a61135b0ffb0ac5cf6c433b4f622b5b9d770a57a373536b920232939"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6551885129968467,
-      "description": "Explore Proserpina in 3D with its published shape model and documented physical size scale.",
+      "description": "Stony main-belt asteroid, discovered in May 1853.",
       "systemName": "Solar System",
       "order": 374,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5ebefda995d085668b8095c242e37b68da3e6c933edf373a371f4f3a4bd27d3b"
+    "sha256": "17a2ec8cd6b6dbc70005b1bdfb0e13cb88cc28de2d9ba485fdd33176c425bf3f"
   }
 }

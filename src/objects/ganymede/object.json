@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "65a41e0b95e3171b5d05d03e73847101e016388808e3f18414958df0124470f3"
+    "sha256": "3f3aed94eba434468ac93dfa0f09cd0c2eba9f91df7203a6f5870338521ceda1"
   },
   "id": "ganymede",
   "properties": {
@@ -118,7 +118,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a4eb854350db772e27c6ac80631f75095378be3db5cca1fd7332e84b877b8b8c"
+          "sha256": "a718326cfe99d522e99a4bb56eec126ae346312a7383d360a6a322d1b4f60fe9"
         },
         {
           "id": "solar-system",
@@ -157,7 +157,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e95c787b88436634dc3cbc320c8112c87018c4df3636e1b1835871ab5b7888cb"
+        "sha256": "e67fdfe9add0e793cdd3571f39855010f3669319ed647731d255d12bf4c553c8"
       }
     },
     "catalog": {
@@ -165,7 +165,7 @@
       "classification": "satellite",
       "color": "#a49a83",
       "distanceAu": 5.2,
-      "description": "Explore Ganymede in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s largest moon and its grooved icy surface.",
+      "description": "The largest moon in the solar system, bigger than Mercury.",
       "systemName": "Solar System",
       "order": 428,
       "context": {

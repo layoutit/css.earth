@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-c1973-e1",
+  "card": {
+    "text": "Comet that passed inside Mercury's orbit on its way out of the Solar System.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=C/1973%20E1",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "C/1973 E1 (Kohoutek); orbit class: Hyperbolic Comet; q: 0.142 au"
+      },
+      {
+        "catalogueId": "jpl-great-comets",
+        "url": "https://ssd.jpl.nasa.gov/sb/great_comets.html",
+        "label": "JPL Solar System Dynamics · Great comets in history",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kohoutek came within about 0.16 AU of the Sun before heading back out for good.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=C/1973%20E1",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "C/1973 E1 (Kohoutek); orbit class: Hyperbolic Comet; q: 0.142 au"
+      },
+      {
+        "catalogueId": "jpl-great-comets",
+        "url": "https://ssd.jpl.nasa.gov/sb/great_comets.html",
+        "label": "JPL Solar System Dynamics · Great comets in history",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Celestia catalog nucleus",
+      "detail": "Catalog size",
+      "summary": "Celestia's nucleus shape at its catalog size. The real shape is unknown."
+    }
+  }
+}

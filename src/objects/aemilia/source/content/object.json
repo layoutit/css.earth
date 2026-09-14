@@ -4,7 +4,6 @@
   "id": "aemilia",
   "displayName": "Aemilia",
   "panel": {
-    "introduction": "Nonconvex shape inferred from light curves, with a published occultation size. The grid marks unavailable imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of 135 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotation phase is illustrative.",
-        "title": "ISAM SAGE 102 shape model",
         "thumbnail": "/scenes/aemilia/aemilia-shape-thumbnail.webp",
         "surface": "aemilia-shape-surface@2x.webp",
         "poles": "aemilia-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the SAGE shape model minus a 67.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "ISAM SAGE 102 radial height",
         "thumbnail": "/scenes/aemilia/aemilia-elevation-thumbnail.webp",
         "surface": "aemilia-elevation-surface@2x.webp",
         "poles": "aemilia-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102",
           "image": "/scenes/aemilia/aemilia-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the SAGE shape model minus a 67.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

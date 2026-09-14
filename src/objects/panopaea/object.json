@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "9473a039446562e8936c5e190cd923351f94c9b99d4f189fc40d428d9827f9b8"
+          "sha256": "e1f4e4edefea04c20ee41e94a10f71eaf28b30dfc1b301c33424800322449b84"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ce1ed169b1cb074f6c5078ef56f2bb403462cacc15cefa16435c631ef58970f7"
+        "sha256": "590ba4d040af81b70f2f767e395c06ca6e00449e6e64ea885f1509050e961350"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6141561893254357,
-      "description": "Explore Panopaea in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in May 1861.",
       "systemName": "Solar System",
       "order": 199,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5bc48245985169da96c263505de0ff1ed655dd4c40eb2f1f8b3f6b1f01b6944e"
+    "sha256": "61c10c8b043ee976894c6f876feddc4e51857d6fd855064deb6ab81957841a8e"
   }
 }

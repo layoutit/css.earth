@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "65946d403c1fa65b17e161985c29410fdb55b6f2fc80dfa14f46cde26b91e271"
+          "sha256": "3bec51999fc8f7488341bc2d4d96ef289fce6efc662d962d8e558e041cb01819"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d5f3ff6ee0952cfc7174e9cdb090e10f92703aa3e6704e6d99a53aef98d8da39"
+        "sha256": "ddb8d3e0bde04dc8c49ff478c244e36c81d938bd900ebbf98574e7410cee6458"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Paaliaq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Inuit-group moon of Saturn whose brightness peaks four times per turn.",
       "systemName": "Solar System",
       "order": 31,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "eff5fb8828e97a2debb9a47bc2f054086f04d4ceebd6766d499e3d3093ce8c33"
+    "sha256": "4e5e066ffcd01f084a72d9e71b29886df21cb3054cf4065ee5822f1d90cd53ba"
   }
 }

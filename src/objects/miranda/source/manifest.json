@@ -1683,8 +1683,8 @@
     {
       "id": "miranda-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15332,
-      "expectedSha256": "3e7037e99ecaf6f185da6abb191cef8c435048e3229bf49331eba12f2908164c",
+      "expectedBytes": 14572,
+      "expectedSha256": "bd34d98d07f9b0c8c55e7df9c7f10d6cf35396cf14906f07523dcb54d704d777",
       "origin": "Repository-authored Miranda object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1696,7 +1696,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     }
   ],

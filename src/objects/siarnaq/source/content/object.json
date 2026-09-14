@@ -4,7 +4,6 @@
   "id": "siarnaq",
   "displayName": "Siarnaq",
   "panel": {
-    "introduction": "Siarnaq is a distant prograde moon of Saturn. This approximate triangular shape follows a published light-curve model’s outline, with assumed depth and polar caps. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "diameter",
@@ -45,9 +44,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
-        "title": "Convex-model envelope approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/siarnaq/siarnaq-model-thumbnail.webp",
         "surface": "siarnaq-model-surface@2x.webp",
         "poles": "siarnaq-model-poles@2x.webp",
@@ -55,7 +51,8 @@
           "id": "shape-approximation",
           "path": "../manifest.json",
           "url": "https://tilmanndenk.de/outersaturnianmoons/siarnaq/"
-        }
+        },
+        "notes": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh."
       }
     ]
   },

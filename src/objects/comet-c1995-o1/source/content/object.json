@@ -4,7 +4,6 @@
   "id": "comet-c1995-o1",
   "displayName": "Hale–Bopp",
   "panel": {
-    "introduction": "Hale–Bopp remained visible to the naked eye for about 18 months in 1996 and 1997. Its unusually large nucleus helped make it one of the most memorable comets of the twentieth century.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "C/1995 O1 Hale–Bopp",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-c1995-o1/comet-c1995-o1-model-thumbnail.webp",
         "surface": "comet-c1995-o1-model-surface@2x.webp",
         "poles": "comet-c1995-o1-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "0.925 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

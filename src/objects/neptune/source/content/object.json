@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Neptune is the eighth and most distant planet from the Sun: a cold blue ice giant with a turbulent atmosphere.",
     "facts": [
       {
         "id": "distance-from-sun",
@@ -153,8 +152,6 @@
       {
         "id": "normal",
         "label": "Visible color",
-        "description": "Color-adjusted Hubble OPAL composite from 2025, with approximate visible-color calibration. North of about 30° N, missing observations are continued from the boundary and faded to a uniform pole; that cap is illustrative.",
-        "title": "OPAL visible-color map",
         "thumbnail": "/scenes/neptune/neptune-lens-normal.webp",
         "surface": "/scenes/neptune/neptune-surface-normal.webp",
         "poles": "/scenes/neptune/neptune-poles-normal.webp",
@@ -164,14 +161,11 @@
           "id": "normal",
           "url": "https://science.nasa.gov/neptune/"
         },
-        "detail": "Visible light",
-        "summary": "Colors approximate visible cloud patterns. North of about 30° N, an illustrative cap replaces missing observations."
+        "notes": "Color-adjusted Hubble OPAL composite from 2025, with approximate visible-color calibration. North of about 30° N, missing observations are continued from the boundary and faded to a uniform pole; that cap is illustrative."
       },
       {
         "id": "methane",
         "label": "Methane",
-        "description": "Hubble OPAL 619 nm reflectance from 2025, in false color. North of about 30° N, boundary continuation supplies an illustrative cap, not measured spectral coverage.",
-        "title": "OPAL FQ619N map",
         "thumbnail": "/scenes/neptune/neptune-lens-methane.webp",
         "surface": "/scenes/neptune/neptune-surface-methane.webp",
         "poles": "/scenes/neptune/neptune-poles-methane.webp",
@@ -210,14 +204,11 @@
           "id": "methane",
           "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
         },
-        "detail": "619 nm",
-        "summary": "False colors show 619 nm reflectance. North of about 30° N, missing coverage is filled from its boundary, not measured."
+        "notes": "Hubble OPAL 619 nm reflectance from 2025, in false color. North of about 30° N, boundary continuation supplies an illustrative cap, not measured spectral coverage."
       },
       {
         "id": "near-infrared",
         "label": "Near infrared",
-        "description": "Hubble OPAL 845 nm reflectance from 2025, in false color. North of about 30° N, boundary continuation supplies an illustrative cap, not measured spectral coverage.",
-        "title": "OPAL F845M map",
         "thumbnail": "/scenes/neptune/neptune-lens-near-infrared.webp",
         "surface": "/scenes/neptune/neptune-surface-near-infrared.webp",
         "poles": "/scenes/neptune/neptune-poles-near-infrared.webp",
@@ -256,8 +247,7 @@
           "id": "near-infrared",
           "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
         },
-        "detail": "845 nm",
-        "summary": "False colors show 845 nm reflectance. North of about 30° N, missing coverage is filled from its boundary, not measured."
+        "notes": "Hubble OPAL 845 nm reflectance from 2025, in false color. North of about 30° N, boundary continuation supplies an illustrative cap, not measured spectral coverage."
       }
     ]
   },

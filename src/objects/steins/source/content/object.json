@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Rosetta flew past diamond-shaped Šteins in 2008. A chain of depressions crosses its surface.",
     "facts": [
       {
         "id": "radius",
@@ -67,9 +66,6 @@
       {
         "id": "osiris",
         "label": "OSIRIS",
-        "detail": "OSIRIS",
-        "description": "Two Rosetta photographs show Šteins during the 2008 approach. The asteroid is only a few dozen pixels wide in each original image, so small surface details aren’t resolved. The grid marks gaps.",
-        "title": "OSIRIS photographs",
         "thumbnail": "/scenes/steins/steins-osiris-thumbnail.webp",
         "surface": "steins-osiris-surface@2x.webp",
         "poles": "steins-osiris-surface@2x.webp",
@@ -77,7 +73,6 @@
           "id": "steins-observations-w20080905t183606461id4df17-img",
           "path": "../manifest.json"
         },
-        "summary": "Two Rosetta photographs show Šteins during the 2008 approach. The asteroid is only a few dozen pixels wide in each original image, so small surface details aren’t resolved. The grid marks gaps.",
         "facts": [
           {
             "id": "images",
@@ -89,13 +84,13 @@
             "label": "Image scale",
             "value": "113–129 m/pixel"
           }
-        ]
+        ],
+        "notes": "Two Rosetta photographs show Šteins during the 2008 approach. The asteroid is only a few dozen pixels wide in each original image, so small surface details aren’t resolved. The grid marks gaps.",
+        "noData": true
       },
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "A visualization mosaic compiled by Phil Stooke from Rosetta OSIRIS observations, controlled against Leyrat et al. (2010). Extensive processing, photographed shadows and a revised south-pole interpretation remain; this is not calibrated reflectance. The gray grid marks exterior gaps identified in the published map. Camera detail is approximately 80 m/pixel at best, despite the enlarged map. Shadows adds approximate fixed-epoch Sun lighting.",
-        "title": "OSIRIS image mosaic",
         "thumbnail": "/scenes/steins/steins-normal-thumbnail.webp",
         "surface": "steins-normal-surface@2x.webp",
         "poles": "steins-normal-surface@2x.webp",
@@ -104,14 +99,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Stooke",
-        "summary": "Photographed shadows, seams and processing edits remain in the published mosaic. The gray grid marks missing map coverage."
+        "notes": "A visualization mosaic compiled by Phil Stooke from Rosetta OSIRIS observations, controlled against Leyrat et al. (2010). Extensive processing, photographed shadows and a revised south-pole interpretation remain; this is not calibrated reflectance. The gray grid marks exterior gaps identified in the published map. Camera detail is approximately 80 m/pixel at best, despite the enlarged map. Shadows adds approximate fixed-epoch Sun lighting.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows radius in the published Jorda shape minus a 2.58 km reference sphere. It includes the broad irregular form and is not gravitational elevation. OSIRIS constrains the observed terrain; light-curve inversion supplies the unseen region. The source has a documented artificial elevation jump where those methods meet, retained here. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting.",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/steins/steins-elevation-thumbnail.webp",
         "surface": "steins-elevation-surface@2x.webp",
         "poles": "steins-elevation-surface@2x.webp",
@@ -133,8 +126,7 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/data/steins_cart.lbl",
           "image": "/scenes/steins/steins-elevation-legend.webp"
         },
-        "detail": "PDS",
-        "summary": "Height relative to a 2.58 km sphere. The far side is modeled; a source seam joins it to image-based terrain."
+        "notes": "Color shows radius in the published Jorda shape minus a 2.58 km reference sphere. It includes the broad irregular form and is not gravitational elevation. OSIRIS constrains the observed terrain; light-curve inversion supplies the unseen region. The source has a documented artificial elevation jump where those methods meet, retained here. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting."
       }
     ]
   },

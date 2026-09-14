@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-46p",
+  "card": {
+    "text": "Comet once chosen as Rosetta's target.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=46P",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "46P/Wirtanen; Discovered 1948-01-15 by Wirtanen, Carl A. at Lick Observatory, California; orbit class: Jupiter-family Comet; q: 1.06 au"
+      },
+      {
+        "catalogueId": "esa-rosetta-wirtanen-camera",
+        "url": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/ESA_s_new_camera_follows_disintegration_of_a_comet",
+        "label": "ESA · New camera follows disintegration of a comet",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Carl Wirtanen found this comet at Lick Observatory in 1948. Its small nucleus returns to the inner Solar System about every five years.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=46P",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "46P/Wirtanen; Discovered 1948-01-15 by Wirtanen, Carl A. at Lick Observatory, California; orbit class: Jupiter-family Comet; q: 1.06 au"
+      },
+      {
+        "catalogueId": "esa-rosetta-wirtanen-camera",
+        "url": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/ESA_s_new_camera_follows_disintegration_of_a_comet",
+        "label": "ESA · New camera follows disintegration of a comet",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Celestia catalog nucleus",
+      "detail": "Catalog size",
+      "summary": "Celestia's nucleus shape at its catalog size. The real shape is unknown."
+    }
+  }
+}

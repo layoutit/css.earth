@@ -4,7 +4,6 @@
   "id": "arrokoth",
   "displayName": "Arrokoth",
   "panel": {
-    "introduction": "New Horizons photographed Arrokoth on 1 January 2019. Its two lobes, Wenu and Weeyo, meet at a bright neck. The photograph covers the encounter-facing surface; the grid marks areas it does not show.",
     "facts": [
       {
         "id": "dimensions",
@@ -48,9 +47,6 @@
       {
         "id": "lorri",
         "label": "LORRI",
-        "title": "New Horizons close approach",
-        "detail": "Photograph · 33 m/pixel",
-        "description": "Taken 6,628 km from Arrokoth. Bright patches and the neck are visible in the original grayscale exposure. The photographed lighting is retained; unseen and grazing surfaces remain gridded.",
         "thumbnail": "/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
         "surface": "arrokoth-lorri-surface@2x.webp",
         "poles": "arrokoth-lorri-poles@2x.webp",
@@ -59,15 +55,13 @@
           "id": "lorri-ca06",
           "path": "../manifest.json",
           "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.lbl"
-        }
+        },
+        "notes": "Taken 6,628 km from Arrokoth. Bright patches and the neck are visible in the original grayscale exposure. The photographed lighting is retained; unseen and grazing surfaces remain gridded."
       },
       {
         "id": "mvic",
         "label": "False color",
-        "title": "New Horizons false color",
-        "detail": "New Horizons",
         "falseColor": true,
-        "description": "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is false color, not a human-visible reconstruction, at 340 metres per native pixel; the grid marks unsupported coverage.",
         "thumbnail": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
         "surface": "arrokoth-mvic-surface@2x.webp",
         "poles": "arrokoth-mvic-poles@2x.webp",
@@ -76,14 +70,12 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.26007/fv5e-eh92"
         },
-        "summary": "Near-infrared, red and blue bands show spectral differences at 340 metres per native pixel. This is false color; the grid marks unsupported coverage."
+        "notes": "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is false color, not a human-visible reconstruction, at 340 metres per native pixel; the grid marks unsupported coverage.",
+        "noData": true
       },
       {
         "id": "albedo",
         "label": "Modeled albedo",
-        "description": "Fitted from 30 New Horizons approach observations on 31 December 2018 and 1 January 2019. Grayscale shows the released albedo values. Uniform areas are unconstrained model fill; the archive supplies no coverage mask. This is a fitted surface model, not a global photograph.",
-        "title": "New Horizons LORRI albedo model",
-        "detail": "LORRI · model",
         "thumbnail": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
         "surface": "arrokoth-albedo-surface@2x.webp",
         "poles": "arrokoth-albedo-poles@2x.webp",
@@ -106,14 +98,12 @@
           "width": 256,
           "height": 16
         },
-        "falseColor": true
+        "falseColor": true,
+        "notes": "Fitted from 30 New Horizons approach observations on 31 December 2018 and 1 January 2019. Grayscale shows the released albedo values. Uniform areas are unconstrained model fill; the archive supplies no coverage mask. This is a fitted surface model, not a global photograph."
       },
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
-        "title": "Published New Horizons shape",
-        "detail": "Unmapped grid",
         "thumbnail": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
         "surface": "arrokoth-model-surface@2x.webp",
         "poles": "arrokoth-model-poles@2x.webp",
@@ -121,7 +111,9 @@
           "id": "published-shape",
           "path": "../manifest.json",
           "url": "https://doi.org/10.26007/97r3-1e19"
-        }
+        },
+        "notes": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

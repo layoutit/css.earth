@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "76758e828888a5e90907fa136b02be1fb349fcc944d4b1622d51978d5fc1a737"
+          "sha256": "dc1fc577d409d2f6f06ce5036bab7ae0c278a8e855fe966ad91e5718dbde2168"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "71d46e52015a5dc6fb8223ba2330967cdf4c71362bc813311d5be689d234ae3c"
+        "sha256": "3bafef7d7f2d4276a5749db6a35c10c025a9e767daf1505391c7ed36fb3b242d"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0044325414876942,
-      "description": "Explore Penthesilea in 3D with its published shape model and radial elevation.",
+      "description": "Very dark main-belt asteroid, discovered in October 1887.",
       "systemName": "Solar System",
       "order": 347,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "29bdf05eb2a81af21b0165cb57ea4194ee903b720e0cab6647b59b3df2135eaa"
+    "sha256": "9a4e045d140960173407c4da50efe07dd044e09b22ccdf5afd29071f715f8054"
   }
 }

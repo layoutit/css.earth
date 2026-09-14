@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "styx",
+  "card": {
+    "text": "Highly elongated small moon of Pluto, found with Hubble in 2012.",
+    "sources": [
+      {
+        "catalogueId": "nasa-pluto-moons",
+        "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/styx/",
+        "label": "NASA Science · Pluto moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Styx circles Pluto and Charon every 20 days, about 42,656 km from the pair's center.",
+    "sources": [
+      {
+        "catalogueId": "nasa-pluto-moons",
+        "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/styx/",
+        "label": "NASA Science · Pluto moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Measured axes",
+      "summary": "Shape estimated from New Horizons images only a few pixels across; the pole is uncertain."
+    }
+  }
+}

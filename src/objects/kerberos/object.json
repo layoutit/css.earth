@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c8666c32b1c73e1c636f01936c3a28b71e346e0a4ccdf1c54f49b0dc92046847"
+          "sha256": "0fe1c80f4bd8af328eef91c59039c6e7244a8c579ac9d9f0c1365af4a6274847"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d3cb4ca9705e0bceda625fcd3214b0b959bbd52c937108f9d78da0409f308d89"
+        "sha256": "661b878745266182772bcf0aa85e04f8fb3963ee0e3da44787d91a6c6b161923"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 39.482,
-      "description": "Explore Kerberos through a clearly labeled approximate shape fit.",
+      "description": "Small, possibly double-lobed moon of Pluto coated in clean water ice.",
       "systemName": "Solar System",
       "order": 458,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a683d327156d7b5194bb09674bc48fa597410bf24a72c92cbbb5d2a73717088a"
+    "sha256": "743b5a286882e216f7882b21002a72a9fbe0b4ad42df533dcbc8052e048a0f4a"
   }
 }

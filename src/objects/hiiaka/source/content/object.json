@@ -4,7 +4,6 @@
   "id": "hiiaka",
   "displayName": "Hiʻiaka",
   "panel": {
-    "introduction": "Hiʻiaka is Haumea’s largest moon. Stellar occultations and photometry constrain this published triaxial model. It illustrates the inferred bulk shape; the display pole and meridian are not a measured current attitude. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "parent",
@@ -50,9 +49,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Published occultation/photometric model with semiaxes 240±40, 180±30 and 143±7 km. The axes are inferred together under homogeneous surface brightness. Display orientation is illustrative. The grid marks unmapped terrain.",
-        "title": "Occultation shape approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/hiiaka/hiiaka-model-thumbnail.webp",
         "surface": "hiiaka-model-surface@2x.webp",
         "poles": "hiiaka-model-poles@2x.webp",
@@ -60,7 +56,8 @@
           "id": "occultation-approximation",
           "path": "../manifest.json",
           "url": "https://www.nature.com/articles/s41467-025-65749-1"
-        }
+        },
+        "noData": true
       }
     ]
   },

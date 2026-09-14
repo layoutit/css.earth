@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "sun",
+  "card": {
+    "text": "Our star, a 4.5-billion-year-old yellow dwarf.",
+    "sources": [
+      {
+        "catalogueId": "nasa-sun-facts",
+        "url": "https://science.nasa.gov/sun/facts/",
+        "label": "NASA Science · Sun facts",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Sun is a hot, glowing ball of hydrogen and helium. Without its energy, life on Earth could not exist.",
+    "sources": [
+      {
+        "catalogueId": "nasa-sun-facts",
+        "url": "https://science.nasa.gov/sun/facts/",
+        "label": "NASA Science · Sun facts",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "photosphere": {
+      "title": "HMI continuum mosaic CR2311",
+      "detail": "Continuum",
+      "summary": "Visible-light observations from May–June 2026, color-adjusted, with polar gaps filled."
+    },
+    "magnetic": {
+      "title": "HMI radial magnetic field CR2311",
+      "detail": "Radial field",
+      "summary": "Radial magnetic field on a nonlinear scale, from May–June 2026 rather than one instant."
+    },
+    "chromosphere": {
+      "title": "AIA 304 Å synoptic map CR2311",
+      "detail": "304 Å",
+      "summary": "304 Å measurements from May–June 2026; gaps use nearby latitudes, and the outer image is from 27 May."
+    },
+    "corona": {
+      "title": "AIA 171 Å synoptic map CR2311",
+      "detail": "171 Å",
+      "summary": "171 Å images of the corona from May–June 2026, with gaps filled from nearby latitudes."
+    }
+  }
+}

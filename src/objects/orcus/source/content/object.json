@@ -4,7 +4,6 @@
   "id": "orcus",
   "displayName": "Orcus",
   "panel": {
-    "introduction": "Orcus is a large resonant world beyond Neptune, partnered with the substantial moon Vanth. The displayed size belongs to Orcus alone; its smooth shape and grid surface are illustrative.",
     "facts": [
       {
         "id": "shape",
@@ -45,9 +44,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Size-constrained spherical illustration at Orcus’s primary-only thermal diameter, 910 +50/−40 km. ALMA separated the binary components but did not resolve Orcus’s terrain or measure three shape axes. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain.",
-        "title": "Published size model; shape unresolved",
-        "detail": "Inferred shape · unmapped surface grid",
         "thumbnail": "/scenes/orcus/orcus-model-thumbnail.webp",
         "surface": "orcus-model-surface@2x.webp",
         "poles": "orcus-model-poles@2x.webp",
@@ -55,7 +51,9 @@
           "id": "published-shape",
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/1801.07221"
-        }
+        },
+        "notes": "Size-constrained spherical illustration at Orcus’s primary-only thermal diameter, 910 +50/−40 km. ALMA separated the binary components but did not resolve Orcus’s terrain or measure three shape axes. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

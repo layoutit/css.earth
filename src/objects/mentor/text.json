@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "mentor",
+  "card": {
+    "text": "Dark Jupiter Trojan asteroid, discovered in April 1984.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3451",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1984-04-19 by Mrkos, A. at Klet; albedo: 0.044; orbit class: Jupiter Trojan; spec_B: X"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Mrkos found Mentor at Klet in 1984. It is very dark, reflecting only about 4% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3451",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1984-04-19 by Mrkos, A. at Klet; albedo: 0.044; orbit class: Jupiter Trojan; spec_B: X"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 4281 convex shape",
+      "detail": "DAMIT model",
+      "summary": "Shape inferred from brightness changes as it spins, so hollows are smoothed over. Another pole also fits."
+    },
+    "elevation": {
+      "title": "source-model radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 63.144 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

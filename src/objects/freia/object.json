@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "6e78913a7463f57f36ee663e8a91752efa68211c6bd5e99cfcff96d7513dba43"
+          "sha256": "952d0b6fd23e9c917335af1f961cdecffe1b9377a8a0dc80557a8f29d23a909b"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a463a053eff08d8e0f8a5336916f3b67be0efc661b90871cf27325de958ff36e"
+        "sha256": "5ea874c35a30da03c5b733f193ea876e6f9dbe33bb35b3fc21e8aa27262cda5f"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.4087870327567744,
-      "description": "Explore Freia in 3D with its published shape model and radial elevation.",
+      "description": "Dark asteroid in the outer main belt, discovered in October 1862.",
       "systemName": "Solar System",
       "order": 245,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "4af5d6a89e4edee4d37789202a6b07c9b50e967a4d350f86b6a7759bbdc38c52"
+    "sha256": "0e453398da4fb7defa0163b44ef03c2053e736e04ba328cb152f0b2ebada6400"
   }
 }

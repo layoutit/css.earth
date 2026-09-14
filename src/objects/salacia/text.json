@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "salacia",
+  "card": {
+    "text": "Large, dark Kuiper Belt object with a moon, Actaea.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Salacia",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "120347 Salacia (2004 SB60); Discovered 2004 Sept. 22 by H. G. Roe, M. E. Brown and K. M. Barkume at Palomar.; orbit class: TransNeptunian Object; q: 37.7 au"
+      },
+      {
+        "catalogueId": "doi-10-5194-epsc-dps2025-905",
+        "url": "https://doi.org/10.5194/epsc-dps2025-905",
+        "label": "Research publication · DOI 10.5194/epsc-dps2025-905",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Salacia seems to spin in step with Actaea's orbit, about once every 5.5 days.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Salacia",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "120347 Salacia (2004 SB60); Discovered 2004 Sept. 22 by H. G. Roe, M. E. Brown and K. M. Barkume at Palomar.; orbit class: TransNeptunian Object; q: 37.7 au"
+      },
+      {
+        "catalogueId": "doi-10-5194-epsc-dps2025-905",
+        "url": "https://doi.org/10.5194/epsc-dps2025-905",
+        "label": "Research publication · DOI 10.5194/epsc-dps2025-905",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Published size model; shape unresolved",
+      "detail": "Inferred shape",
+      "summary": "A sphere at its estimated size; its shape and surface are unknown."
+    }
+  }
+}

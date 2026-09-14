@@ -70,12 +70,11 @@ for body in INPUTS['bodies']:
     write(source / 'shape/ellipsoid.tab', '\n'.join(lines) + '\n')
     manifest['inputs'].append(dict(id='published-shape', path='shape/ellipsoid.tab', **pin(source/'shape/ellipsoid.tab'), origin=body['source'], credit=body['credit'], license='MIT numeric extraction of published scientific facts', licenseEvidence=[body['source']], consumers=['shape'], coverage=description, projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
     content = current('source/content/object.json', body)
-    content['panel']['introduction'] = body['introduction']
     dimension_text = ' × '.join(f'{x*1000:g}' for x in body['fullAxesKm'])+' m' if radius < 1 else ' × '.join(f'{x:.0f}' for x in body['fullAxesKm'])+' km'
     content['panel']['facts'] = [dict(id='shape',label='Shape evidence',value=body['shapeLabel']), dict(id='dimensions',label='Display model extents',value=dimension_text), dict(id='rotation',label='Rotation',value=body['periodText']), dict(id='class',label='Population',value=body['population'])]
     content['panel']['moreFacts'] = [dict(id='uncertainty',label='Shape interpretation',value=body['shapeMeaning'])]
     lens = content['lenses']['controls'][0]
-    lens.update(description=description, title=body['shapeLabel'], detail='Inferred shape · unmapped surface grid')
+    for key in ('description', 'title', 'detail', 'summary'): lens.pop(key, None)
     lens['source'].update(id='published-shape',url=body['source'])
     for control in content['settings']['controls']:
         if control['name'] in ['shadows','orbit']: control['checked'] = False
@@ -84,6 +83,13 @@ for body in INPUTS['bodies']:
     content['provenance']['physical'] = dict(path='../measurements.json',credit=body['credit'])
     content['displayName'] = body.get('titleLabel', name)
     write(source/'content/object.json',content)
+    # Reader text stays outside source/; pnpm prepare:text checks it and flags filler for review.
+    binding = next(entry for entry in reviewed[ident]['inputs'] if entry['id'] == 'published-shape')['sourceBinding']
+    citation = dict(catalogueId=binding['references'][0]['catalogueId'], url=body['source'], label=body['credit'], checked=INPUTS['checkedOn'])
+    write(package/'text.json', dict(schema='cssearth-object-text@1', objectId=ident,
+        card=dict(text=body.get('card', body['introduction']), sources=[citation]),
+        introduction=dict(text=body['introduction'], sources=[citation]),
+        datasets={lens['id']: dict(title=body['shapeLabel'], detail='Inferred shape', summary=body.get('datasetSummary', body['shapeMeaning']), sources=[citation])}))
     write(source/'preparation/terrestrial.json',config)
     write(source/'preparation/rotation.json',dict(schema='cssearth-display-orientation@1',rightAscensionDegrees=body['poleIcrfDegrees'][0],declinationDegrees=body['poleIcrfDegrees'][1],displayMeridianDegrees=0,phase='arbitrary-display-phase',source=body['source'],qualification=body['orientationMeaning']))
     write(source/'measurements.json',dict(schema='cssearth-distant-world-model@1',checkedOn=INPUTS['checkedOn'],**body))

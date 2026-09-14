@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "achlys",
+  "card": {
+    "text": "Plutino locked in a 3:2 resonance with Neptune.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2003%20AZ84",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "208996 Achlys (2003 AZ84); orbit class: TransNeptunian Object; q: 32.7 au"
+      },
+      {
+        "catalogueId": "arxiv-1705-10895",
+        "url": "https://arxiv.org/abs/1705.10895",
+        "label": "Research publication · arXiv 1705.10895",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Long known as 2003 AZ84, Achlys circles the Sun twice for every three orbits of Neptune. A grazing occultation hints at a dip along its edge.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2003%20AZ84",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "208996 Achlys (2003 AZ84); orbit class: TransNeptunian Object; q: 32.7 au"
+      },
+      {
+        "catalogueId": "arxiv-1705-10895",
+        "url": "https://arxiv.org/abs/1705.10895",
+        "label": "Research publication · arXiv 1705.10895",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Published Jacobi ellipsoid",
+      "detail": "Inferred shape",
+      "summary": "A published Jacobi ellipsoid fitted to occultations, assuming a fluid-like body spinning every 6.75 hours."
+    }
+  }
+}

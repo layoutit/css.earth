@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "8f8025f72d5a50f3eba425b0c84d33f62a251f112864b8b02e1b45a4703ed727"
+    "sha256": "13e879b0e843a20d1086e331940801197cf6ca3a945c48c5560335a2d117408e"
   },
   "properties": {
     "preparation": {
@@ -56,7 +56,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "be647520d78e5ad638e813468ffb925e90e135a728a812403df14402ceba3305"
+          "sha256": "12c3da160fb915cf57f57e591ea5658b14d8e085a26b797ddb90862803855fa6"
         },
         {
           "id": "solar-system",
@@ -139,7 +139,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a4a53990e5b1755a19c3e3003c72e52aafe7eaca1473e3460d3aa87606f24e86"
+        "sha256": "2d12b5dbe829bb9d8b682fbb8b9218fa781a7602e9cf2453ec1595bc6ec075c0"
       }
     },
     "catalog": {
@@ -147,7 +147,7 @@
       "classification": "dwarf-planet",
       "color": "#bfa48b",
       "distanceAu": 45.8,
-      "description": "Explore Makemake with an illustrative NASA surface texture and its distant orbit around the Sun.",
+      "description": "Distant, reddish dwarf planet with one small moon.",
       "systemName": "Solar System",
       "order": 461,
       "context": {

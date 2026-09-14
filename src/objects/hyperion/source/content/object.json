@@ -4,7 +4,6 @@
   "id": "hyperion",
   "displayName": "Hyperion",
   "panel": {
-    "introduction": "Hyperion is Saturn\u2019s sponge-like, chaotically tumbling moon. Deep craters cover a porous, irregular body whose dark crater floors contrast with brighter icy walls. The displayed orientation and lighting are illustrative; its chaotic tumbling is not simulated.",
     "facts": [
       {
         "id": "radius",
@@ -50,14 +49,14 @@
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "William Lassell and William and George Bond \u00b7 1848"
+        "value": "William Lassell and William and George Bond · 1848"
       }
     ],
     "moreFacts": [
       {
         "id": "density",
         "label": "Mean density",
-        "value": "0.54 \u00b1 0.05 g/cm\u00b3",
+        "value": "0.54 ± 0.05 g/cm³",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
           "label": "NASA/JPL reference",
@@ -81,9 +80,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked.",
-        "title": "ISS calibrated mosaic",
-        "detail": "Cassini clear-filter mosaic",
         "thumbnail": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
         "surface": "hyperion-normal-surface@2x.webp",
         "poles": "hyperion-normal-poles@2x.webp",
@@ -92,14 +88,11 @@
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
         },
-        "summary": "Twelve Cassini frames, including a regional ~100 m/pixel close view. Shape and registration limit detail; shadows and marked gaps remain."
+        "notes": "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked."
       },
       {
         "id": "filter-color",
         "label": "False color",
-        "description": "Five Cassini pointings in IR3, IR1 and UV3, displayed as red, green and blue. Cameras use measured registration in the published shape frame; complete three-filter footprints are combined.",
-        "title": "Cassini false color",
-        "detail": "Cassini",
         "thumbnail": "/scenes/hyperion/hyperion-filter-color-thumbnail.webp",
         "surface": "hyperion-filter-color-surface@2x.webp",
         "poles": "hyperion-filter-color-surface@2x.webp",
@@ -108,14 +101,12 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/"
         },
-        "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
+        "notes": "Five Cassini pointings in IR3, IR1 and UV3, displayed as red, green and blue. Cameras use measured registration in the published shape frame; complete three-filter footprints are combined.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side.",
-        "title": "Shape-derived radial height",
-        "detail": "Shape-derived radial height",
         "thumbnail": "/scenes/hyperion/hyperion-elevation-thumbnail.webp",
         "surface": "hyperion-elevation-surface@2x.webp",
         "poles": "hyperion-elevation-poles@2x.webp",
@@ -130,7 +121,7 @@
           "width": 256,
           "height": 16,
           "labels": [
-            "\u221250",
+            "−50",
             "0",
             "60"
           ],
@@ -138,7 +129,7 @@
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/hyperion/hyperion-elevation-legend.webp"
         },
-        "summary": "Cassini-model height relative to a 135 km sphere. Shape errors reach 6 km on the less-observed side."
+        "notes": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side."
       }
     ]
   },

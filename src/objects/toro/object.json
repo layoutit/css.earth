@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "49160c0ff214bbe68edf58b722dd5fbb20b595faad68d5e70cf75dc152fc00ae"
+          "sha256": "71a9c76a341f7563050db9bdce3e2e422faf16219cd7b9fc28ddce1ade4723c3"
         },
         {
           "id": "title",
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5cba7e0da13e7ea3f96c31a1614a06823ebea94fb26e65534e87eb061e69d885"
+        "sha256": "b787e2e4cd83a4982bd0643a8d585fd81c7c5da07212aeb505e4615a278fe46a"
       }
     },
     "catalog": {
@@ -121,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.3678992132175503,
-      "description": "Explore Toro, a near-Earth asteroid, through its published shape model.",
+      "description": "Stony near-Earth asteroid, discovered in July 1948.",
       "systemName": "Solar System",
       "order": 126,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "23e8746e4edfc61bb8dc1e081fd9d5492dde738866494de5ccdf52f275d7742a"
+    "sha256": "c6188ca145ebd475ad52eb78c12a3c02501fa1cd64cff209c65210d0633b9159"
   }
 }

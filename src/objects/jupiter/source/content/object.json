@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "The fifth planet from the Sun, Jupiter is the solar system's largest planet: a gas giant wrapped in colorful clouds and enormous storms.",
     "facts": [
       {
         "id": "distance-from-sun",
@@ -166,8 +165,6 @@
       {
         "id": "normal",
         "label": "Visible color",
-        "description": "Hubble visible-color map from 27 June 2019 with Juno-derived polar cloud structure and transferred visible color. Polar sources are not registered to the Hubble longitudes. This multi-source illustration does not depict one observation date or a geodetic polar map.",
-        "title": "WFC3 visible-color map",
         "thumbnail": "/scenes/jupiter/jupiter-lens-normal.webp",
         "surface": "/scenes/jupiter/jupiter-surface.webp",
         "poles": "/scenes/jupiter/jupiter-poles.webp",
@@ -176,14 +173,11 @@
           "id": "normal",
           "url": "https://science.nasa.gov/asset/hubble/jupiter-global-map-2019/"
         },
-        "detail": "Visible light",
-        "summary": "Cloud detail combines a 2019 global map with separate polar images. The poles are illustrative and not aligned to its longitudes."
+        "notes": "Hubble visible-color map from 27 June 2019 with Juno-derived polar cloud structure and transferred visible color. Polar sources are not registered to the Hubble longitudes. This multi-source illustration does not depict one observation date or a geodetic polar map."
       },
       {
         "id": "ultraviolet",
         "label": "Ultraviolet",
-        "description": "Hubble OPAL at 275 nm (F275W), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
-        "title": "OPAL F275W map",
         "thumbnail": "/scenes/jupiter/jupiter-lens-ultraviolet-thumbnail.webp",
         "surface": "/scenes/jupiter/jupiter-lens-ultraviolet.webp",
         "poles": "/scenes/jupiter/jupiter-lens-ultraviolet-poles.webp",
@@ -221,14 +215,12 @@
           "id": "ultraviolet",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
         },
-        "detail": "275 nm",
-        "summary": "False colors represent 275 nm reflectance measured in December 2025. The gray grid marks missing observations."
+        "notes": "Hubble OPAL at 275 nm (F275W), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
+        "noData": true
       },
       {
         "id": "methane",
         "label": "Methane",
-        "description": "Hubble OPAL at 889 nm (FQ889N), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
-        "title": "OPAL FQ889N map",
         "thumbnail": "/scenes/jupiter/jupiter-lens-methane-thumbnail.webp",
         "surface": "/scenes/jupiter/jupiter-lens-methane.webp",
         "poles": "/scenes/jupiter/jupiter-lens-methane-poles.webp",
@@ -266,8 +258,8 @@
           "id": "methane",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
         },
-        "detail": "889 nm",
-        "summary": "False colors represent 889 nm reflectance measured in December 2025. The gray grid marks missing observations."
+        "notes": "Hubble OPAL at 889 nm (FQ889N), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
+        "noData": true
       }
     ]
   },

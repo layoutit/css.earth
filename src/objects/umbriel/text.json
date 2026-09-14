@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "umbriel",
+  "card": {
+    "text": "The darkest of Uranus's large moons, about as reflective as the lunar highlands.",
+    "sources": [
+      {
+        "catalogueId": "nasa-uranus-moons",
+        "url": "https://science.nasa.gov/uranus/moons/umbriel/",
+        "label": "NASA Science · Uranus’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Voyager 2 spotted a bright ring on Umbriel's dark surface. It may be frost around an impact crater.",
+    "sources": [
+      {
+        "catalogueId": "nasa-uranus-moons",
+        "url": "https://science.nasa.gov/uranus/moons/umbriel/",
+        "label": "NASA Science · Uranus’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "Monochrome mosaic",
+      "detail": "Corrected mosaic",
+      "summary": "Lighting is corrected, but shadows and seams in the photographs remain."
+    }
+  }
+}

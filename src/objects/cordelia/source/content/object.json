@@ -4,7 +4,6 @@
   "id": "cordelia",
   "displayName": "Cordelia",
   "panel": {
-    "introduction": "Cordelia travels just inside Uranus’s bright epsilon ring. Its gravity helps confine the ring’s inner edge, while Voyager observations constrain the moon’s elongated shape.",
     "facts": [
       {
         "id": "radius",
@@ -59,9 +58,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Published prolate shape fit: 50 × 36 × 36 km. The third axis is assumed equal to the shorter measured axis. Voyager observations constrain size and elongation but do not resolve a useful mapped surface. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
-        "title": "Shape approximation",
-        "detail": "Measured shape",
         "thumbnail": "/scenes/cordelia/cordelia-model-thumbnail.webp",
         "surface": "cordelia-model-surface@2x.webp",
         "poles": "cordelia-model-poles@2x.webp",
@@ -70,7 +66,8 @@
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/2401.04634"
         },
-        "summary": "A 50 × 36 × 36 km shape estimate from Voyager. Two axes are assumed equal; gray grid: no surface imagery."
+        "notes": "Published prolate shape fit: 50 × 36 × 36 km. The third axis is assumed equal to the shorter measured axis. Voyager observations constrain size and elongation but do not resolve a useful mapped surface. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+        "noData": true
       }
     ]
   },

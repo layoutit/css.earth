@@ -4,7 +4,6 @@
   "id": "huya",
   "displayName": "Huya",
   "panel": {
-    "introduction": "Huya is a trans-Neptunian world with a moon. Occultations and the satellite orbit constrain this oblate model of Huya itself; the grid marks its unmapped surface.",
     "facts": [
       {
         "id": "shape",
@@ -45,9 +44,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Published primary-body oblate model with semiaxes a=b=218.05 ±0.11 km and c=187.5 ±2.4 km. The depth and inferred flattening depend on an equatorial satellite-orbit assumption. The paper disfavors hydrostatic Maclaurin equilibrium; this view does not assert it. The satellite is excluded from the displayed primary dimensions. Uses the paper’s J2000-equatorial satellite-orbit pole RA 20.8° ±1.9°, Dec 34.9° ±1.9° as a body-pole prior under the explicit equatorial-orbit assumption. Arbitrary prime meridian and rotational phase. The grid marks unmapped terrain.",
-        "title": "Occultation-constrained oblate model",
-        "detail": "Inferred shape · unmapped surface grid",
         "thumbnail": "/scenes/huya/huya-model-thumbnail.webp",
         "surface": "huya-model-surface@2x.webp",
         "poles": "huya-model-poles@2x.webp",
@@ -55,7 +51,9 @@
           "id": "published-shape",
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/2501.09739"
-        }
+        },
+        "notes": "Published primary-body oblate model with semiaxes a=b=218.05 ±0.11 km and c=187.5 ±2.4 km. The depth and inferred flattening depend on an equatorial satellite-orbit assumption. The paper disfavors hydrostatic Maclaurin equilibrium; this view does not assert it. The satellite is excluded from the displayed primary dimensions. Uses the paper’s J2000-equatorial satellite-orbit pole RA 20.8° ±1.9°, Dec 34.9° ±1.9° as a body-pole prior under the explicit equatorial-orbit assumption. Arbitrary prime meridian and rotational phase. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

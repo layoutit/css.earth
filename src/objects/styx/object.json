@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "972b8c5ca1a43dae92cf3fef1ec7531591c3171e965c1db9583985ced320def4"
+          "sha256": "c04c62da569d3c69c1bf7c01eee18192f3889c2f1faea7a7bac77160fd3a7b5a"
         },
         {
           "id": "title",
@@ -110,7 +110,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f6fcc1a472a2b4e937718cac332959a3d86afc0565a18baaa0ccebbef5f28845"
+        "sha256": "9c66f6354f58fc24a4b2394718a937d75880b3d09048ce24105e257ecfaa14b1"
       }
     },
     "catalog": {
@@ -118,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 39.482,
-      "description": "Explore Styx through a clearly labeled approximate shape fit.",
+      "description": "Highly elongated small moon of Pluto, found with Hubble in 2012.",
       "systemName": "Solar System",
       "order": 456,
       "context": {
@@ -129,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "528fe9b9c978d1086bf1ea55a2f19680b5df1294c339df67d94fc76e7dc470cf"
+    "sha256": "fce7cbf6582794dbc24a73bb8b11da8ec7f7a293db2973c20dff237f96fcac2f"
   }
 }
