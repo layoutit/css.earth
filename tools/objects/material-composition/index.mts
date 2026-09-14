@@ -1,6 +1,5 @@
 import {parse} from './data-schema.mts';
 import {PREPARED_CSS_OBJECT_FORMAT} from '../../../src/renderers/css/dist/index.js';
-import {extractPreparedShared,syncPreparedShared} from '../../../src/platform/prepared-shared-banks.mts';
 import {layeredRecipe} from './layered-recipe.mts';
 import {spectralRecipe} from './spectral-recipe.mts';
 import {radialMotionRecipe} from './radial-motion-recipe.mts';
@@ -96,10 +95,9 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const values={scene,sky,sun,runtime:definition,'material-lenses':materialLenses,views,layouts};
   for(const[name,value]of Object.entries(values))await writeJson(resolve(outputDirectory,`${name}.json`),value);
   const manifest=await prepareLayeredConsumerManifest({id:descriptor.id,definition,content,stylesheet,publicDirectory,manifestPath:resolve(outputDirectory,'runtime-assets.json')});
-  const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:descriptor.id,type:descriptor.type,format:PREPARED_CSS_OBJECT_FORMAT,data:extractPreparedShared(definition).value});
+  const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:descriptor.id,type:descriptor.type,format:PREPARED_CSS_OBJECT_FORMAT,data:definition});
   await writeFile(resolve(outputDirectory,'object.json'),payload);
   if(write) {
-    await syncPreparedShared(projectRoot,outputDirectory);
     await writeFile(descriptorPath,JSON.stringify({...rawDescriptor,prepared:{format:PREPARED_CSS_OBJECT_FORMAT,url:'prepared/object.json',sha256:hash(payload)}},null,2)+'\n');
     await writeFile(resolve(objectRoot,'runtime-assets.json'),JSON.stringify(manifest,null,2)+'\n');
   }

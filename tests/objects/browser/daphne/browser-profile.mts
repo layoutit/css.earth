@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/daphne/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'daphne',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/daphne/daphne-shape-surface@2x.webp"
   ],

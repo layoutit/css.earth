@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/felicitas/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'felicitas',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/felicitas/felicitas-shape-surface@2x.webp"
   ],

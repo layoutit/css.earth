@@ -308,7 +308,7 @@ layout and transform matrices, prepares only the selected lenses, and updates
 their photographs, thumbnails, minimaps, source indices and delivery pins.
 It records each refreshed surface's billboard colour and the lens catalogue's
 control colour with the same steps as a full preparation.
-Geometry, other lenses and starfields remain retained. Provenance uses the
+Geometry and other lenses remain retained. Provenance uses the
 existing `recovered` basis because this is a partial refresh. The run's timings,
 source recipe hash and changed asset list are kept in ignored
 `output/surface-observation-refresh/<body>/refresh.json`. Alternative models or

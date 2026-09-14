@@ -28,12 +28,11 @@ export function validatePlanetBrowserProfile(planet: BrowserProfileObject, brows
   const audit = browserProfile.audit;
   assert.ok(audit && typeof audit === "object",
     `${planet.id}: browser profile must provide audit expectations`);
-  assert.ok(Array.isArray(audit.preparedAssetPairs) &&
-    audit.preparedAssetPairs.length > 0 &&
+  assert.ok(audit.preparedAssetPairs === undefined || (Array.isArray(audit.preparedAssetPairs) &&
     audit.preparedAssetPairs.every(({ one, two }) =>
       typeof one === "string" && one.startsWith("/") &&
-      typeof two === "string" && two.startsWith("/")),
-  `${planet.id}: browser profile must provide prepared asset pairs`);
+      typeof two === "string" && two.startsWith("/"))),
+  `${planet.id}: browser profile prepared asset pairs must name prepared paths`);
   const race = audit.lensRace;
   const defaultLens = objectControls.lenses?.defaultLens;
   if (lensIds.length > 1) assert.ok(race &&

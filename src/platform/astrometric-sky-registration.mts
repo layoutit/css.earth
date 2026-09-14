@@ -20,7 +20,7 @@ import {
 import { prepareEclipticPresentationFrame } from
   "./solar-presentation-frame.mts";
 
-export const ASTROMETRIC_CUBE_FRAME = "icrf-j2000-as-cube-local-axes";
+const ASTROMETRIC_CUBE_FRAME = "icrf-j2000-as-cube-local-axes";
 
 // Scene registration for a body: cube-local (ICRF) direction -> ecliptic
 // presentation frame direction, so the runtime's `scene * registration`

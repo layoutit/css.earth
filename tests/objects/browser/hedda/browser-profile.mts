@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/hedda/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hedda',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/hedda/hedda-shape-surface@2x.webp"
   ],

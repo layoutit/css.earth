@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/badenia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'badenia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/badenia/badenia-shape-surface@2x.webp"
   ],

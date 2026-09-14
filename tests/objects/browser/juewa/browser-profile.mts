@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/juewa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'juewa',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/juewa/juewa-shape-surface@2x.webp"
   ],

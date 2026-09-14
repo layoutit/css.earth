@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/mithra/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'mithra',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/mithra/mithra-shape-surface@2x.webp"
   ],

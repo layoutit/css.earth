@@ -3,7 +3,6 @@ import objectControls from '../../../../src/objects/phobos/prepared/controls.jso
 
 export const browserProfile = createObjectBrowserProfile({ id: 'phobos', controls: objectControls,
   audit: {
-    preparedAssetPairs: [],
     canonicalPreparedAssets: ['/scenes/phobos/phobos-normal-surface@2x.webp', '/scenes/phobos/phobos-lighting.webp'],
     lensRace: { defaultId: 'normal', slowId: 'elevation', winnerId: 'normal',
       slowAsset: '/scenes/phobos/phobos-elevation-surface@2x.webp', preReadyDisabled: true },

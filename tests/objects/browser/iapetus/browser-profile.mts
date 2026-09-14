@@ -8,7 +8,6 @@ export const browserProfile = createObjectBrowserProfile({
     preparedAssetPairs: Object.freeze([
       Object.freeze({ one: "/scenes/iapetus/iapetus-normal.webp", two: "/scenes/iapetus/iapetus-normal@2x.webp" }),
       Object.freeze({ one: "/scenes/iapetus/iapetus-poles-normal.webp", two: "/scenes/iapetus/iapetus-poles-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/iapetus/iapetus-starfield-front.webp", two: "/scenes/iapetus/iapetus-starfield-front@2x.webp" }),
       ]),
     lensRace: Object.freeze({
       defaultId: "normal",

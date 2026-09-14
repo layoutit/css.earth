@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/phaethon/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'phaethon',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/phaethon/phaethon-shape-surface@2x.webp"
   ],

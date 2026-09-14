@@ -8,7 +8,6 @@ export const browserProfile = createObjectBrowserProfile({
     preparedAssetPairs: Object.freeze([
       Object.freeze({ one: "/scenes/io/io-normal.webp", two: "/scenes/io/io-normal@2x.webp" }),
       Object.freeze({ one: "/scenes/io/io-poles-normal.webp", two: "/scenes/io/io-poles-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/io/io-starfield-front.webp", two: "/scenes/io/io-starfield-front@2x.webp" }),
       ]),
     lensRace: Object.freeze({
       defaultId: "normal",

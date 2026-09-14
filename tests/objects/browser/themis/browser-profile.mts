@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/themis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'themis',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/themis/themis-shape-surface@2x.webp"
   ],

@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/irene/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'irene',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/irene/irene-shape-surface@2x.webp"
   ],

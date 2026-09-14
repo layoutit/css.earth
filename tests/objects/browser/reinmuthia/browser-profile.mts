@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/reinmuthia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'reinmuthia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/reinmuthia/reinmuthia-shape-surface@2x.webp"
   ],

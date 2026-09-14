@@ -3,7 +3,6 @@ import objectControls from '../../../../src/objects/pandora/prepared/controls.js
 
 export const browserProfile = createObjectBrowserProfile({ id: 'pandora', controls: objectControls,
   audit: {
-    preparedAssetPairs: [],
     canonicalPreparedAssets: ['/scenes/pandora/pandora-normal-surface@2x.webp', '/scenes/pandora/pandora-lighting.webp'],
     lensRace: { defaultId: 'normal', slowId: 'elevation', winnerId: 'normal',
       slowAsset: '/scenes/pandora/pandora-elevation-surface@2x.webp', preReadyDisabled: true },

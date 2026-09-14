@@ -11,9 +11,7 @@ import {gzipSync} from 'node:zlib';
 import { containedPath, publishPinnedSource, publishPinnedSourceStream } from './operations.js';
 import type { SourceManifest } from './operations.js';
 import {prepareSatelliteCatalog,validateSatelliteCatalogRecipe} from './acquisition/satellite-catalog.mts';
-import {prepareProjectedCatalog} from './acquisition/projected-catalog.mts';
 import {prepareDskMesh,validateDskMeshRecipe} from './acquisition/dsk-mesh.mts';
-import {csvRow} from './acquisition/csv.mts';
 interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}
 interface SpectralBandMaps extends OperationBase {kind:'spectral-band-maps';path:string;recipePath:string;product:string;}
 interface MappedComposition extends OperationBase {kind:'mapped-composition';path:string;recipePath:string;product:string;}
@@ -28,17 +26,16 @@ interface VerifyDownload extends OperationBase {kind:'verify-download';url:strin
 interface Mosaic extends OperationBase {kind:'tile-mosaic';path:string;url:string;tileSize:number;columns:number;rows:number;dataWidth:number;dataHeight:number;width:number;height:number;forceRgb:boolean;concurrency:number;}
 interface RequestCheck extends OperationBase {kind:'verify-request';url:string;form:Record<string,string>;fileSource?:string;expectedPath:string;selector:'trim'|'numeric-lines'|'before-marker';marker?:string;rowCount?:number;headers?:Record<string,string>;}
 interface JsonCheck extends OperationBase {kind:'verify-json';url:string;expectedPath:string;fields:Record<string,string>;}
-interface Catalog extends OperationBase {kind:'catalog-field';path:string;url:string;sha256:string;catalogRows:number;selectedCount:number;selection?:{model:'gnomonic';centerRaDegrees:number;centerDecDegrees:number;horizontalFovDegrees:number;aspectRatio:number};template:{schema:string;source:Record<string,unknown>;projection:Record<string,unknown>;presentation:Record<string,unknown>;starColumns?:string[]};}
-export type AcquisitionOperation=MappedComposition|SpectralBandMaps|HriiFacets|DskMesh|Download|RequestDownload|JsonDocument|ZipMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|Catalog;
+export type AcquisitionOperation=MappedComposition|SpectralBandMaps|HriiFacets|DskMesh|Download|RequestDownload|JsonDocument|ZipMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck;
 export interface AcquisitionPlan {schema:'cssearth-acquisition-plan@1';operations:AcquisitionOperation[];}
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
 export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
  const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations)||!plan.operations.length)throw new TypeError('Invalid acquisition plan.');
  for(const value of plan.operations){const step=record(value);if(!['json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','satellite-catalog','zip-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
-  if(!['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','catalog-field'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
+  if(!['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
   for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
-  if(['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','tile-mosaic','catalog-field'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
+  if(['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','tile-mosaic'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
   if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.archiveSha256!=='string'||!/^[a-f0-9]{64}$/.test(step.archiveSha256)||!Number.isSafeInteger(step.archiveBytes)||Number(step.archiveBytes)<=0||typeof step.member!=='string'||!/^[A-Za-z0-9_./-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
   if(step.headers!==undefined){const headers=record(step.headers);if(Object.values(headers).some(value=>typeof value!=='string'))throw new TypeError('Acquisition headers must be text.');}
   if(step.kind==='request-download'||step.kind==='verify-request'){const form=record(step.form);if(Object.values(form).some(value=>typeof value!=='string'))throw new TypeError('Acquisition form values must be text.');}
@@ -52,24 +49,14 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
   if(['spectral-band-maps','mapped-composition'].includes(String(step.kind))&&(typeof step.recipePath!=='string'||typeof step.product!=='string'||!/^[a-z][a-z0-9-]*$/.test(step.product)))throw new TypeError('Invalid numeric-map acquisition.');
   if(step.kind==='dsk-mesh')validateDskMeshRecipe(step.recipe);
   if(step.kind==='satellite-catalog'&&typeof step.recipePath!=='string')throw new TypeError('Satellite catalog recipe is missing.');
-  if(step.kind==='verify-download'||step.kind==='catalog-field')if(typeof step.sha256!=='string'||!/^[a-f0-9]{64}$/.test(step.sha256))throw new TypeError('Acquisition integrity hash is missing.');
+  if(step.kind==='verify-download')if(typeof step.sha256!=='string'||!/^[a-f0-9]{64}$/.test(step.sha256))throw new TypeError('Acquisition integrity hash is missing.');
   if(step.kind==='tile-mosaic')for(const key of ['tileSize','columns','rows','dataWidth','dataHeight','width','height','concurrency'])if(typeof step[key]!=='number'||!Number.isSafeInteger(step[key])||step[key]<=0)throw new TypeError(`Invalid mosaic ${key}.`);
   if(step.kind==='verify-request'){record(step.form);if(typeof step.expectedPath!=='string'||!['trim','numeric-lines','before-marker'].includes(String(step.selector)))throw new TypeError('Invalid source response comparator.');if(step.selector==='before-marker'&&typeof step.marker!=='string')throw new TypeError('Source marker is missing.');}
   if(step.kind==='verify-json')record(step.fields);
-  if(step.kind==='catalog-field'){const template=record(step.template);for(const key of ['source','projection','presentation'])record(template[key]);if(typeof step.catalogRows!=='number'||typeof step.selectedCount!=='number'||step.selectedCount<=0||step.selection===undefined&&!Array.isArray(template.starColumns))throw new TypeError('Invalid catalogue acquisition template.');if(step.selection!==undefined){const selection=record(step.selection);if(selection.model!=='gnomonic'||['centerRaDegrees','centerDecDegrees','horizontalFovDegrees','aspectRatio'].some(key=>typeof selection[key]!=='number'||!Number.isFinite(selection[key])))throw new TypeError('Invalid projected catalogue selection.');}}
  }
  return plan as unknown as AcquisitionPlan;
 }
 const digest=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
-function prepareCatalog(step:Catalog,bytes:Uint8Array):Uint8Array {
- if(digest(bytes)!==step.sha256)throw new Error('Pinned catalogue source drifted.');
- if(step.selection)return prepareProjectedCatalog({bytes,template:step.template,selection:step.selection,selectedCount:step.selectedCount,catalogRows:step.catalogRows});
- const rows=new TextDecoder().decode(bytes).trimEnd().split('\n');if(rows.length-1!==step.catalogRows)throw new Error('Pinned catalogue row count drifted.');
- const stars:number[][]=[];
- for(const row of rows.slice(1)){const fields=csvRow(row);if(fields[0]==='0')continue;const ra=Number(fields[7]),dec=Number(fields[8]),magnitude=Number(fields[13]),color=Number(fields[16]);if(![ra,dec,magnitude].every(Number.isFinite))continue;stars.push([Number(fields[0]),Number((ra*15).toFixed(7)),Number(dec.toFixed(7)),Number(magnitude.toFixed(3)),Number.isFinite(color)?Number(color.toFixed(3)):0.65]);}
- stars.sort((a,b)=>a[3]-b[3]||a[0]-b[0]);const selected=stars.slice(0,step.selectedCount);if(selected.length!==step.selectedCount)throw new Error('Catalogue population is too small.');
- return new TextEncoder().encode(JSON.stringify({...step.template,presentation:{...step.template.presentation,candidateStars:stars.length,selectedStars:selected.length,brightestMagnitude:selected[0][3],faintestMagnitude:selected[selected.length-1][3]},stars:selected},null,2)+'\n');
-}
 export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch}}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport}) {
  const selected=plan.operations.filter(step=>step.groups.includes(group));if(!selected.length)throw new Error(`Acquisition group ${group} is undeclared.`);
  const request=async(url:string,init?:RequestInit)=>{const response=await transport.fetch(url,init);if(!response.ok)throw new Error(`Source request failed ${response.status}: ${url}.`);return response;};
@@ -141,7 +128,6 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    await publish(step.path,new TextEncoder().encode(text));
   }
   else if(step.kind==='verify-download'){if(digest(await bytes(step.url))!==step.sha256)throw new Error(`Pinned upstream bytes drifted: ${step.url}.`);}
-  else if(step.kind==='catalog-field')await publish(step.path,prepareCatalog(step,await bytes(step.url)));
   else if(step.kind==='verify-json'){const expected=record(JSON.parse(await readFile(containedPath(sourceRoot,step.expectedPath),'utf8')) as unknown),actual=record(await(await request(step.url)).json());for(const [remote,local] of Object.entries(step.fields))if(actual[remote]!==expected[local])throw new Error(`Source identity field ${remote} drifted.`);}
   else if(step.kind==='verify-request'){
    const form={...step.form};if(step.fileSource)form.file=await readFile(containedPath(sourceRoot,step.fileSource),'utf8');

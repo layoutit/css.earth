@@ -3,7 +3,6 @@ import objectControls from '../../../../src/objects/comet-1p/prepared/controls.j
 
 export const browserProfile = createObjectBrowserProfile({ id: 'comet-1p', controls: objectControls,
   audit: {
-    preparedAssetPairs: [],
     canonicalPreparedAssets: ['/scenes/comet-1p/comet-1p-model-surface@2x.webp', '/scenes/comet-1p/comet-1p-lighting.webp'],
     lensRace: { defaultId:'model', slowId:'giotto', winnerId:'model',
       slowAsset:'/scenes/comet-1p/comet-1p-giotto-surface@2x.webp', preReadyDisabled:false },

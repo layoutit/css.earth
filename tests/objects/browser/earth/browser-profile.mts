@@ -9,7 +9,6 @@ export const browserProfile = createObjectBrowserProfile({
       ...PREPARED_EARTH_SCENE.body.assets.surface.urls,
       "/scenes/earth/earth-surface-poles.webp",
     ]),
-    preparedAssetPairs: Object.freeze([]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "topography",

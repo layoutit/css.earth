@@ -22,10 +22,6 @@ export const browserProfile = createObjectBrowserProfile({
         one: "/scenes/mars/mars-lighting.webp",
         two: "/scenes/mars/mars-lighting@2x.webp",
       }),
-      Object.freeze({
-        one: "/scenes/mars/mars-starfield-front.webp",
-        two: "/scenes/mars/mars-starfield-front@2x.webp",
-      }),
       ]),
     lensRace: Object.freeze({
       defaultId: "normal",

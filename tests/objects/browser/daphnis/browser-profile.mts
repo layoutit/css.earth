@@ -3,7 +3,6 @@ import objectControls from '../../../../src/objects/daphnis/prepared/controls.js
 
 export const browserProfile = createObjectBrowserProfile({ id: 'daphnis', controls: objectControls,
   audit: {
-    preparedAssetPairs: [],
     canonicalPreparedAssets: ['/scenes/daphnis/daphnis-normal-surface@2x.webp', '/scenes/daphnis/daphnis-lighting.webp'],
     lensRace: { defaultId: 'normal', slowId: 'elevation', winnerId: 'normal',
       slowAsset: '/scenes/daphnis/daphnis-elevation-surface@2x.webp', preReadyDisabled: true },

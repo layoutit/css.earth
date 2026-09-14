@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/dike/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'dike',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/dike/dike-shape-surface@2x.webp"
   ],

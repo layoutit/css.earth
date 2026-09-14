@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/hopi/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hopi',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/hopi/hopi-shape-surface@2x.webp"
   ],

@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/davida/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'davida',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/davida/davida-shape-surface@2x.webp"
   ],

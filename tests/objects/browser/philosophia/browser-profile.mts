@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/philosophia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'philosophia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/philosophia/philosophia-shape-surface@2x.webp"
   ],

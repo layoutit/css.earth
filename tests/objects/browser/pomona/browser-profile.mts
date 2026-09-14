@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/pomona/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'pomona',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/pomona/pomona-shape-surface@2x.webp"
   ],

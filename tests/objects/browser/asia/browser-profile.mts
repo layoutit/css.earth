@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/asia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'asia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/asia/asia-shape-surface@2x.webp"
   ],

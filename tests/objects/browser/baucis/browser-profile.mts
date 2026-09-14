@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/baucis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'baucis',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/baucis/baucis-shape-surface@2x.webp"
   ],

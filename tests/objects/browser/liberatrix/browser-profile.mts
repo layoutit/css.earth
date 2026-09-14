@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/liberatrix/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'liberatrix',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/liberatrix/liberatrix-shape-surface@2x.webp"
   ],

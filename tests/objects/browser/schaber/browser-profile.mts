@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/schaber/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'schaber',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/schaber/schaber-shape-surface@2x.webp"
   ],

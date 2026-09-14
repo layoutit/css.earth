@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/united-nations/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'united-nations',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/united-nations/united-nations-shape-surface@2x.webp"
   ],

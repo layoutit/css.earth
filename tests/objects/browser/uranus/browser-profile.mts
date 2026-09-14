@@ -17,10 +17,6 @@ export const browserProfile = createObjectBrowserProfile({
         one: "/scenes/uranus/uranus-rings.webp",
         two: "/scenes/uranus/uranus-rings@2x.webp",
       }),
-      Object.freeze({
-        one: "/scenes/uranus/uranus-starfield-front.webp",
-        two: "/scenes/uranus/uranus-starfield-front@2x.webp",
-      }),
       ]),
     lensRace: Object.freeze({
       defaultId: "normal",

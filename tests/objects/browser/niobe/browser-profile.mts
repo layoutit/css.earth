@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/niobe/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'niobe',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/niobe/niobe-shape-surface@2x.webp"
   ],

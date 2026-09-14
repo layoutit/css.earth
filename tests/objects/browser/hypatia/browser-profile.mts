@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/hypatia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hypatia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/hypatia/hypatia-shape-surface@2x.webp"
   ],

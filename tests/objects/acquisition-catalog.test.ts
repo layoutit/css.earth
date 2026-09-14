@@ -71,16 +71,6 @@ test('all pinned satellite records survive source-table normalization without ch
  const documents={discovery:config.discoverySection.start+discoveries.join('')+config.discoverySection.end,elements:'<table id="sat_elem"><tbody>'+elements.join('')+'</tbody></table>',s2009s2:'distance of approximately '+approximate[1].semiMajorAxisKm+' km'};
  const result=prepareSatelliteCatalog({config,documents});assert.deepEqual(result.moons,pinned.moons);
 });
-
-test('Sun HYG refresh regenerates every pinned projected star from the local full catalogue',()=>temporary(async root=>{
- const sourceRoot='src/objects/sun/source',manifest=JSON.parse(await readFile(sourceRoot+'/manifest.json','utf8'));
- const authored=JSON.parse(await readFile(sourceRoot+'/preparation/acquisition.json','utf8'));
- const plan=parseAcquisitionPlan({...authored,operations:authored.operations.filter((step:{kind:string})=>step.kind==='catalog-field')});
- const bytes=await readFile('src/objects/earth/source/stars/hygdata_v41.csv');let requests=0;
- await executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async url=>{assert.ok(url.includes('hygdata_v41.csv'));requests++;return new Response(bytes);}}});
- assert.equal(requests,1);assert.deepEqual(await readFile(join(root,'stars/hyg-v41-field.json')),await readFile(sourceRoot+'/stars/hyg-v41-field.json'));
-}));
-
 test('Earth refresh preserves normalized PSG, gzip, editorial and pinned derived records',()=>temporary(async root=>{
  const sourceRoot='src/objects/earth/source',manifest=JSON.parse(await readFile(sourceRoot+'/manifest.json','utf8'));
  const authored=JSON.parse(await readFile(sourceRoot+'/preparation/acquisition.json','utf8'));

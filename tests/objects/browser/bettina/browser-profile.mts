@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/bettina/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'bettina',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/bettina/bettina-shape-surface@2x.webp"
   ],

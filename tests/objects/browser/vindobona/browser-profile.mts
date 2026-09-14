@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/vindobona/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'vindobona',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/vindobona/vindobona-shape-surface@2x.webp"
   ],

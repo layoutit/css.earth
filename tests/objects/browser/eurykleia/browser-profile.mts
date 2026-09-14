@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/eurykleia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'eurykleia',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/eurykleia/eurykleia-shape-surface@2x.webp"
   ],

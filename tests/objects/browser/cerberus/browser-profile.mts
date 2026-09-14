@@ -1,7 +1,6 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/cerberus/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'cerberus',controls,audit:{
-  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/cerberus/cerberus-shape-surface@2x.webp"
   ],

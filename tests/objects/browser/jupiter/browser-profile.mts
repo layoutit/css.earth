@@ -18,10 +18,6 @@ export const browserProfile = createObjectBrowserProfile({
         one: "/scenes/jupiter/jupiter-rings.webp",
         two: "/scenes/jupiter/jupiter-rings@2x.webp",
       }),
-      Object.freeze({
-        one: "/scenes/jupiter/jupiter-starfield-front.webp",
-        two: "/scenes/jupiter/jupiter-starfield-front@2x.webp",
-      }),
       ]),
     lensRace: Object.freeze({
       defaultId: "normal",
