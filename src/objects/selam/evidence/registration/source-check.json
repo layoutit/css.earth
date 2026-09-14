@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-photograph-investigation@1",
+  "objectId": "selam",
+  "checkedDate": "2026-09-14",
+  "baseCommit": "ac10d55b023e5eb8c493eabe65d5240dabf0ce28",
+  "qualifiedSurface": false,
+  "sources": [
+    {
+      "path": "selam_placeholder_v00.tpc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/pck/selam_placeholder_v00.tpc",
+      "expectedBytes": 3574,
+      "expectedSha256": "21ec347def1bd4f638a8ad1911c4c7483f9139f45c686bd04862720e1c7f4bcf",
+      "examined": "Complete text kernel, including its warning, pole, prime meridian and radii.",
+      "finding": "The release explicitly uses placeholder pole RA 0 and Dec 90. Its single-ellipsoid radii 0.260, 0.110, 0.105 km do not bind the current two-lobe surface to Lucy images."
+    },
+    {
+      "path": "lucy-document-v2-inventory.csv",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.mission:document-v2.0/collection_inventory.csv",
+      "expectedBytes": 61,
+      "expectedSha256": "aef448d8b96bed441755d3ff633847fb06b45c3cb3cb55d33113231d35952450",
+      "examined": "Complete delta collection inventory and directory listing.",
+      "finding": "The added document concerns the Donaldjohanson coordinate system, not a Selam registration release."
+    },
+    {
+      "path": "lucy-document-v1-inventory.csv",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.mission:document-v1.0/collection_inventory.csv",
+      "expectedBytes": 299,
+      "expectedSha256": "3db2edb3d7b80d19fdc1de8e0de5aed0bfc540c7dce3eae3cc88b534c9137673",
+      "examined": "Complete inventory and directory listing; checked the predecessor collection because v2 is a delta.",
+      "finding": "The collection lists mission and instrument papers. It is not a numerical Selam surface/control release."
+    },
+    {
+      "path": "bierhaus2025.pdf",
+      "origin": "https://elib.dlr.de/221656/1/Bierhaus_2025_Planet._Sci._J._6_299.pdf",
+      "expectedBytes": 76326333,
+      "expectedSha256": "39487f83bf438bec7990347d156b517bc1eb7279d6bd3caa59e21a414a0157e3",
+      "doi": "10.3847/PSJ/ae1968",
+      "examined": "Sections 2.2 and 3.1, Selam-specific shape and image references, and data availability. The full PDF was retrieved; this was a targeted reading, not a review of every result.",
+      "finding": "Section 3.1 explicitly uses unprojected lor_0752129590_03608 for Selam crater measurements because Selam has no shape model. The newer numerical shape discussed elsewhere belongs to Dinkinesh."
+    }
+  ],
+  "decision": "Resolved images remain available, but these sources do not qualify registration to the fixed two-lobe envelope. Do not use the placeholder PCK or the Dinkinesh shape as Selam controls.",
+  "revisitWhen": "A numerical Selam reference surface and matched image controls, or an independently qualified measured registration, establish surface correspondence to the selected representation."
+}
