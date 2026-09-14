@@ -10,7 +10,7 @@
 | Shape model | The same Porter mesh with the unmapped-surface grid. |
 
 All four views use the existing 1,000-triangle reduction of the released
-40,960-face, two-lobed mesh. Shadows and Orbit default off. The photographs cover
+40,960-face, two-lobed mesh. Shadows defaults off. The photographs cover
 part of the encounter-facing surface; the grid marks unseen, grazing or rejected
 coverage. The unseen northern shape remains a model estimate. Sources checked
 2026-09-12.
@@ -177,7 +177,7 @@ estimate.
 
 The revised pole comes from the bundled Porter paper Table 2. Its PDS XML gives
 an inconsistent earlier pole. The paper pole is used with an arbitrary reference
-meridian. Shadows and Orbit default off. Source recipes pin units and model axes;
+meridian. Shadows defaults off. Source recipes pin units and model axes;
 geometry is prepared before runtime.
 
 ## Albedo

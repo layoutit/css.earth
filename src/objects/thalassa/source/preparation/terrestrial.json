@@ -4,7 +4,6 @@
   "namespace": "thalassa",
   "displayName": "Thalassa",
   "publicBase": "/scenes/thalassa/",
-  "distanceAu": 30.07,
   "raster": {
     "width": 512,
     "height": 256,
@@ -78,12 +77,6 @@
     "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; Karkoschka2003 measured ellipsoid dimensions."
   },
   "presentation": {
-    "defaultLens": "model",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "model"
   }
 }

@@ -10,8 +10,6 @@ and attribution conditions. No agency or mission endorsement is implied.
 - USGS product terms and credits are preserved in the checked metadata pages.
 - JPL physical facts: NASA Jet Propulsion Laboratory / Solar System Dynamics.
 - NASA editorial facts: NASA Science. The short introduction is authored here.
-- ESO/S. Brunier sky imagery: CC BY 4.0; see `source/stars/ESO-IMAGE-LICENSE.md`.
-- HYG v4.1 field: David Nash, CC BY-SA 4.0; see `source/stars/LICENSE.md`.
 - Inter title outline: Inter Project Authors, SIL Open Font License 1.1; the
   repository-pinned font and license remain in the shared title preparation inputs.
 

@@ -156,60 +156,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "expectedBytes": 29082084,
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "https://www.eso.org/public/images/eso0932a/"
-      ],
-      "acquisition": "checked ESO all-sky panorama",
-      "redistribution": "CC BY 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
-          }
-        ]
-      }
-    },
-    {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedSha256": "49eb1e69ecf508ebebf98e688b5732c96200d9abf3252754a78f2fdd45a1e303",
-      "expectedBytes": 144990,
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
-          }
-        ]
-      }
-    },
-    {
       "id": "lro-lola-ldem16-numeric",
       "path": "science/ldem_16.img",
       "expectedSha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
@@ -751,8 +697,8 @@
     {
       "id": "moon-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "118b64ae531350d309ff002299cdc2aed9fa42691d0614bcde65ea71cda423cd",
-      "expectedBytes": 1587,
+      "expectedSha256": "6b9c5784ce3388d37a5dd987817701fc28559f779b877768856fcc5b1177d3bb",
+      "expectedBytes": 270,
       "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -810,8 +756,8 @@
     {
       "id": "moon-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedSha256": "a510ef9ffb0f65da272702eb8351bae713b0e4056d24f5926378b12424b6d8f6",
-      "expectedBytes": 222,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
+      "expectedBytes": 108,
       "origin": "Repository-authored Moon sky, sun, and marker recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -866,8 +812,8 @@
     {
       "id": "moon-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "bc6948e1ea3f675c7fd483ab664055738784800e0e5f09a507c9eda1697f53fd",
-      "expectedBytes": 6252,
+      "expectedSha256": "14faffc254af1b926c4a55eff2b3c48e605a39c77331b2bc6c9c64ae9e5a43e8",
+      "expectedBytes": 6068,
       "origin": "Repository-authored Moon acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -885,8 +831,8 @@
     {
       "id": "moon-object-content",
       "path": "content/object.json",
-      "expectedSha256": "7ab905836804b5f16347c9a1a05db64f3f059659506c38bd9f952679521406f5",
-      "expectedBytes": 34535,
+      "expectedSha256": "4c7daaacb0f6ac8088f8e23ff48a162bd7a9095c74da9f89552d6dd0a697a629",
+      "expectedBytes": 34253,
       "origin": "Repository-authored Moon panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1007,18 +953,6 @@
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
-      "expectedBytes": 1271,
-      "purpose": "Checked ESO image credit and CC BY 4.0 evidence"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedSha256": "6cff6933451962c3db6fc5dc1f8989a8cee8af1cd919fcd43960ac6c1770ec7e",
-      "expectedBytes": 387,
-      "purpose": "Checked HYG database attribution and license notice"
-    },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",

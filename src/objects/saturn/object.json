@@ -26,7 +26,7 @@
         {
           "id": "rings",
           "path": "source/preparation/rings.json",
-          "sha256": "581819f574dc232122019d0c199ac5e64d5a715a89a12643782cc6d80f56e5f7"
+          "sha256": "592f1ef7ab8f4b6a8aaa745c5e74d0b6aa83f19eec7fd748d8ba456002ce86c1"
         },
         {
           "id": "navigation",
@@ -41,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "d7102e88052d1dedf97d58e635bee339c917f10ee1925bf929261c8798f126f4"
+          "sha256": "b8551757eed1b404ab243c4629d09718e89fe7e7e65e1b86e002aa4bf88128c3"
         },
         {
           "id": "geometry",
@@ -69,11 +69,6 @@
           "sha256": "9128adac51d287dfa945137573140a5242446106861fa9d68780b4210da3d5bc"
         },
         {
-          "id": "celestial",
-          "path": "source/preparation/celestial.json",
-          "sha256": "d41b923e65b434cf28f664e9c4546c654fb93c61b9169a43c8159c02f22fac59"
-        },
-        {
           "id": "charts",
           "path": "source/content/charts.json",
           "sha256": "fa4ee604146d97d8101e83626a115294eb11eeaecbd603d5f92b39cf96823562"
@@ -81,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "1e3ceb80a20c1a3ab12ad7ebaadd56cf3dd66321b565136b6c98a74ec0401938"
+          "sha256": "bc22d665a1b8bb0baeafae4c9b90a0a7dd16390d20b2b8ac71b69e1dbfb200f5"
         },
         {
           "id": "satellite-catalog",

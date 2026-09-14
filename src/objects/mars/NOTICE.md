@@ -13,15 +13,10 @@ This package combines prepared material derived from the following sources:
   `source/editorial/factsheet-review.json`.
 - NASA GSFC Planetary Spectrum Generator output and NASA Science editorial
   information.
-- The HYG v4.1 registration subset is by David Nash/Astronexus under
-  CC-BY-SA-4.0. The ESO `eso0932a` full-sky panorama is credited to
-  ESO/S. Brunier under CC-BY-4.0. Their checked license texts are retained in
-  `source/stars/`.
-- The Sun billboard follows the shared clean-room directional-sun standard.
-  That standard cites the earlier Google Earth Pro Mars behavioural
-  measurements retained in `source/sky/google-earth-pro-contract.json`; no
-  Google sky, shader, or Sun pixels are shipped, and Mars preparation no longer
-  reads that record.
+- The shared clean-room directional-sun standard cites the earlier Google Earth
+  Pro Mars behavioural measurements retained in
+  `source/sky/google-earth-pro-contract.json`; no Google sky, shader, or Sun
+  pixels are shipped, and Mars preparation no longer reads that record.
 - [Mars in opposition 2016](https://esahubble.org/images/heic1609a/), released
   by ESA/Hubble under
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The prepared

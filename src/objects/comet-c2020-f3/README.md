@@ -2,7 +2,7 @@
 
 NEOWISE was discovered by NASA’s infrared survey telescope in March 2020. Within months it became a bright comet visible to observers on Earth.
 
-One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows and Orbit default off.
+One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.
 
 ## Sources
 

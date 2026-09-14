@@ -4,7 +4,6 @@
   "namespace": "desdemona-666",
   "displayName": "666 Desdemona",
   "publicBase": "/scenes/desdemona-666/",
-  "distanceAu": 2.594914886847624,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -114,12 +113,6 @@
     "sunSource": "Pinned JPL Horizons elements and DAMIT model 6218 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

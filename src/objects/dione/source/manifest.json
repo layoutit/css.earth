@@ -268,33 +268,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -976,21 +949,6 @@
   ],
   "documents": [
     {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 848,
-      "expectedSha256": "99ad2505fb6a4e465b7067dfe7aff0999b71a1374723570de6fa1ba586bc4fa7"
-    },
-    {
       "path": "observations/catalog.json",
       "expectedBytes": 2333,
       "expectedSha256": "d0f1338ced2baf599b5f94ab627bfc41755ee7704a7060b47f8771621a0e7627"
@@ -1017,8 +975,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 10945,
-      "expectedSha256": "80d4ea346ca435f14e7d6c1b07887649d5813884f8b8caf8cc35e8ce02c0e865"
+      "expectedBytes": 10804,
+      "expectedSha256": "94fd6def95fa54b08099b87081eb184a33022bf3a2485eed2b0491dcc3468e26"
     },
     {
       "path": "preparation/navigation.json",
@@ -1027,13 +985,13 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 11597,
-      "expectedSha256": "93f7e1a9a8090e0825a0aaecfe24d998cd9b16722d097849346b7d67ab06439e"
+      "expectedBytes": 11413,
+      "expectedSha256": "685a78b7b32e513262348b5e016d1620648624ab6d1b37d709126cadea9a55b7"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 13755,
-      "expectedSha256": "3684ab2d09995231a3e3c89d489c6e763dd1d9f9fe6537862530cbaf071e0f78",
+      "expectedBytes": 13476,
+      "expectedSha256": "1099552edb7bc654768bc9b5b5553333b3a0ca560c65eab8666e1029d4d8669b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."

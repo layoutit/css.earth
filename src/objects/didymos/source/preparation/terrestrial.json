@@ -4,7 +4,6 @@
   "namespace": "didymos",
   "displayName": "Didymos",
   "publicBase": "/scenes/didymos/",
-  "distanceAu": 1.6427722213006,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -262,12 +261,6 @@
     "sunSource": "JPL heliocentric orbit and the source Didymos v003 pole; arbitrary body phase, fixed-epoch display lighting"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

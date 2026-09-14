@@ -29,33 +29,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/comet-1p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -634,8 +607,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3969,
-      "expectedSha256": "56f7c9b11d48fd68ea935276ad35f6369e3b36edd900596e3af3e9d2c1b3c24a",
+      "expectedBytes": 3690,
+      "expectedSha256": "4f763104006f4a2fcd271324bb218db639c51ca08a1727431b8e361d14c6e0a0",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -643,8 +616,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 4304,
-      "expectedSha256": "42e44c6cad46a27c63fd3e48c82d165e81f773c376015ecfc3fabc43ce5c5851"
+      "expectedBytes": 4120,
+      "expectedSha256": "467c0e47bc9a06de31194aab11da3570afb86ac893b560e22ebcfc75fde85827"
     },
     {
       "path": "preparation/navigation.json",
@@ -658,8 +631,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3638,
-      "expectedSha256": "5494e1f6ddce35dde8a998547dbe984691495bbe99dc42f13fc21bab4ed96c67"
+      "expectedBytes": 3483,
+      "expectedSha256": "89800ed375058067532088b39facb765d814c7f2fcf8d757b834eee9ef089a4b"
     },
     {
       "path": "presentation/minimap.json",
@@ -690,21 +663,6 @@
       "path": "shape/1682q1halley.xml",
       "expectedBytes": 9520,
       "expectedSha256": "3f8d349a7328bb6683d94ddc6d0df80c798bae89b8d009797c1fb83c60bca9a7"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 851,
-      "expectedSha256": "cccea4cd70e7d73b7585417f652f4cabd0892df85174ab43a993993675faa1f2"
     },
     {
       "path": "reference/giotto-hmc-intake.json",

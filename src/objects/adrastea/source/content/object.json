@@ -77,12 +77,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
-        "checked": true
       }
     ]
   },
@@ -105,12 +99,6 @@
       "role": "observations",
       "description": "Galileo observations of the inner moons",
       "href": "https://science.nasa.gov/photojournal/shapes-of-the-small-inner-satellites-of-jupiter/"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Milky Way panorama",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

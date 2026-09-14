@@ -67,33 +67,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "node tools/objects/dist/operations.js acquire titan restores this pinned shared input.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -1819,33 +1792,6 @@
       }
     },
     {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 848,
-      "expectedSha256": "a331430a197b0a24a9b5e466ce3031832a012284e46f94b27addd212bfb0fc59",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/58"
-          }
-        ]
-      }
-    },
-    {
       "id": "titan-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 2559,
@@ -1875,8 +1821,8 @@
     {
       "id": "titan-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1596,
-      "expectedSha256": "15e967900bca207b7d76ed95bf266e1e8da76f3174bcbbad46cd0aaed15833df",
+      "expectedBytes": 272,
+      "expectedSha256": "ec1575f70725357e6fcc5a559b501faf6d8d441e4716a97a6e70d469dcb1a69d",
       "origin": "Repository-authored Titan solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1934,8 +1880,8 @@
     {
       "id": "titan-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 222,
-      "expectedSha256": "732ebb21ef9a26a15156c0a11598ae7d765b44bd4b12074b03a9d4f47ee1d9f9",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Titan celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1990,8 +1936,8 @@
     {
       "id": "titan-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 18771,
-      "expectedSha256": "ea46750b1a654aa2b999009928056505793a36b3b6cc30bee1265b251d82f94c",
+      "expectedBytes": 18587,
+      "expectedSha256": "92fbc59e215ff38d0b567d440813fa3aeebd194d7e703320c980dd63510c6de7",
       "origin": "Repository-authored Titan acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2009,8 +1955,8 @@
     {
       "id": "titan-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15281,
-      "expectedSha256": "5f3b5fa5532549b0c937f17d1a360d2f4339b74801af247f427aaad7cd65bcd4",
+      "expectedBytes": 15002,
+      "expectedSha256": "c41e2cf1f1571a27ee9cf0de22ff2b54e65d91f3c3ac49f94660c30ed3030af7",
       "origin": "Repository-authored Titan object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2039,16 +1985,6 @@
       "expectedBytes": 23275,
       "expectedSha256": "193072253161304133478829a0786391354ea5fdddea82a644b632037ba8868d",
       "purpose": "Original USGS projection, spectral band and scientific processing metadata."
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "radar/MIBEF00N090_T126S00_V01.LBL",

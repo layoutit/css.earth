@@ -228,108 +228,6 @@
       }
     },
     {
-      "id": "hyg-v41-uranus-cubic-sky-registration",
-      "path": "stars/hyg-v41-field.json",
-      "expectedSha256": "0d3febfe0b5a88ea0a22614787252eb7a83faa697038def7a252a5331ff59311",
-      "expectedBytes": 144992,
-      "origin": "HYG Stellar Database v4.1 commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
-      "credit": "David Nash / Astronexus",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "stars/LICENSE.md"
-      ],
-      "acquisition": "Prepared deterministic coordinate-registration subset from the pinned HYG v4.1 source.",
-      "redistribution": "Share-alike prepared subset with attribution and license evidence.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "HYG v4.1 at commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce; the local record retains the extracted stars or licence."
-          }
-        ]
-      }
-    },
-    {
-      "id": "eso-uranus-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "expectedBytes": 29082084,
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield",
-        "scene"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
-          }
-        ]
-      }
-    },
-    {
-      "id": "google-maps-uranus-cubic-sky-sun-oracle-asset",
-      "path": "sun/google-maps-sun.png",
-      "expectedSha256": "e9c2b33612abd121905845cd19aad83382b977e2a68b68058bc6702292b15e9f",
-      "expectedBytes": 10947,
-      "origin": "https://mw1.google.com/mw-weather/static/sun.png",
-      "credit": "Google Maps visual presentation reference",
-      "license": "Google proprietary; no redistribution grant verified",
-      "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
-      "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
-      "consumers": [
-        "starfield",
-        "sun-oracle",
-        "scene"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "google-maps-sun-symbol",
-            "role": "material",
-            "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
-          }
-        ]
-      }
-    },
-    {
-      "id": "google-maps-uranus-cubic-sky-sun-oracle-measurements",
-      "path": "sun/google-maps-sun-oracle.json",
-      "expectedSha256": "0fcc54b72a064eb76adf2a3be008f23c6fb6f3ffae3cdc5df228b83d16b3a27b",
-      "expectedBytes": 2895,
-      "origin": "https://www.google.com/maps/space/venus/ and https://mw1.google.com/mw-weather/static/sun.png",
-      "credit": "Google Maps visual presentation reference; measurements recorded by this project",
-      "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
-      "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
-      "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
-      "consumers": [
-        "starfield",
-        "sun-oracle",
-        "scene",
-        "lighting"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
-      }
-    },
-    {
       "id": "uranus-authored-preparation-rings",
       "path": "preparation/rings.json",
       "expectedBytes": 9408,
@@ -429,8 +327,8 @@
     {
       "id": "uranus-authored-observations",
       "path": "preparation/observations.json",
-      "expectedBytes": 14043,
-      "expectedSha256": "7460b922b37079359b23c2b321b1abb739270f83e18fefc34b9832b01ec9021e",
+      "expectedBytes": 13693,
+      "expectedSha256": "d9663f61e4a395238ec8ac73bbbc93bd2bf0d6b552239fd2de8dc4c72cd154df",
       "origin": "Checked source-observation preparation parameters, preserving the accepted scientific interpretation",
       "credit": "cssEarth and the institutional sources identified in the recipe",
       "license": "Project-authored specification; observation source terms retained",
@@ -542,28 +440,10 @@
       }
     },
     {
-      "id": "uranus-authored-celestial",
-      "path": "preparation/celestial.json",
-      "expectedBytes": 328,
-      "expectedSha256": "d9a200db859e0a87f8d6c949bec7808afbb00473d30142f83cbb9c6b518da6cc",
-      "origin": "Checked shared photographic sky and clean-room directional Sun presentation inputs",
-      "credit": "cssEarth; ESO/S. Brunier; HYG Stellar Database",
-      "license": "Project-authored specification; original sky-source terms retained",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source",
-      "consumers": [
-        "celestial"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky and Sun display settings; photographic, star and Sun inputs retain separate source records."
-      }
-    },
-    {
       "id": "uranus-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3118,
-      "expectedSha256": "1254fcbcd5b3fdaeba73e40d7d59498a34a00b74aebc21a2525e69db9efa5353",
+      "expectedBytes": 2745,
+      "expectedSha256": "532c0dae4a5274c62ce06b4bbf3a31a17af2b0d4b9918576f8ca7dd0f35a52bc",
       "origin": "Checked source restoration and verification operations",
       "credit": "cssEarth with original source credits preserved per input",
       "license": "Project-authored acquisition specification",
@@ -580,18 +460,6 @@
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "stars/LICENSE.md",
-      "expectedSha256": "5590879b8df6e808e0c8287a28fe7c1a421b1eca88cb23575b5a82a470c989b2",
-      "expectedBytes": 597,
-      "purpose": "HYG v4.1 attribution and CC-BY-SA-4.0 license record"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
-      "expectedBytes": 1271,
-      "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
-    },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",

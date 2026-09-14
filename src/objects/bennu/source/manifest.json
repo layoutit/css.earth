@@ -2,33 +2,6 @@
   "schema": "cssbennu-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/bennu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "bennu-shape",
       "path": "shape/g_00880mm_alt_ptm_0000n00000_v020.obj",
       "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj",
@@ -266,8 +239,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9484,
-      "expectedSha256": "d73caff18cac76959cc430a1ecfb578a70dba3bf72c4742f2678595ed38e65f4",
+      "expectedBytes": 9205,
+      "expectedSha256": "53c164436bbf170f5fd1f2763cbbe17412178f90d83588bccf71b87fe8d9c26e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -275,8 +248,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2867,
-      "expectedSha256": "1a6598bcdf5a252189cb74246545630b9f9c7a5489f1fa8e3ad007d9691a70c5"
+      "expectedBytes": 2664,
+      "expectedSha256": "b85d0d454504851dead6fcceb12a31a908c3ce6260de004d3609c230cf360d56"
     },
     {
       "path": "preparation/navigation.json",
@@ -290,8 +263,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4527,
-      "expectedSha256": "474742a81253cf44def05af1f313f657374b1ed758556fa76c29df4f883694af"
+      "expectedBytes": 4385,
+      "expectedSha256": "4dfe4ba2d4a181d7d34a72e582df5f9a975b7dda6c85728918725c64a13d29d1"
     },
     {
       "path": "presentation/title-mark.json",
@@ -307,21 +280,6 @@
       "path": "reference/horizons-physical.txt",
       "expectedBytes": 2913,
       "expectedSha256": "d0192dbe1f3344ded793d9aef79ad4a5985082681c1945d255daa8292d98419a"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 89771,
-      "expectedSha256": "30af0bb7e1f7da7f55bbde209c6e61b4215a044089010dca9a483b8b2eb24c4a"
     },
     {
       "path": "reference/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.lbl",

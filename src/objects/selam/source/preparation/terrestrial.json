@@ -4,7 +4,6 @@
   "namespace": "selam",
   "displayName": "Selam",
   "publicBase": "/scenes/selam/",
-  "distanceAu": 2.073581431805674,
   "raster": {
     "width": 512,
     "height": 256,
@@ -69,12 +68,6 @@
     "sunSource": "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation. Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      160,
-      160,
-      160
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

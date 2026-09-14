@@ -26,33 +26,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Run node tools/objects/dist/operations.js acquire makemake to restore pinned source inputs.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/makemake/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
       "id": "nasa-vtad-makemake-model",
       "path": "nasa-makemake.glb",
       "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/m/Makemake_1_1430.glb",
@@ -72,33 +45,6 @@
             "catalogueId": "source-makemake-nasa-vtad-makemake-model",
             "role": "material",
             "evidence": "src/planets/makemake/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 100844,
-      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/makemake/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -133,8 +79,8 @@
     {
       "id": "makemake-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1594,
-      "expectedSha256": "e4342c2a3283ebcc30277a4e82de574be31223624ad7f70ba89aaaa4acf6ce62",
+      "expectedBytes": 277,
+      "expectedSha256": "32882aba0f6583b155814c4a73ac16bccf929135fd578b9e2009e7943a0c2474",
       "origin": "Repository-authored Makemake solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -192,8 +138,8 @@
     {
       "id": "makemake-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 222,
-      "expectedSha256": "7382a069ad44040eb34fe2ae29f0cafc6ce1478c2a8847d92296a613cc388584",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Makemake celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -248,8 +194,8 @@
     {
       "id": "makemake-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 478,
-      "expectedSha256": "c225d749e019370943458a69a661efcf6762396d69fd5a41e847c667731b1024",
+      "expectedBytes": 294,
+      "expectedSha256": "2c63113739abbfb89e513b065c3f25fca9a31a79471b0f74922764fa69f93f2e",
       "origin": "Repository-authored Makemake acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -285,8 +231,8 @@
     {
       "id": "makemake-object-content",
       "path": "content/object.json",
-      "expectedBytes": 9111,
-      "expectedSha256": "12c3da160fb915cf57f57e591ea5658b14d8e085a26b797ddb90862803855fa6",
+      "expectedBytes": 8832,
+      "expectedSha256": "8dbbaef295ffaf86432844216ed2fa46ef55af90e6cdcc554e1f1032d9c40b4c",
       "origin": "Repository-authored Makemake object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -303,16 +249,6 @@
     }
   ],
   "documents": [
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
-    },
     {
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 137,

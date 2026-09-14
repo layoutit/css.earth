@@ -4,7 +4,6 @@
   "namespace": "hyperion",
   "displayName": "Hyperion",
   "publicBase": "/scenes/hyperion/",
-  "distanceAu": 9.58,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -817,12 +816,6 @@
     "qualification": "The ephemeris locates the Sun, but Hyperion\u2019s body attitude is an explicitly arbitrary display orientation. Its directional lighting is a display convention, not a prediction of the current tumbling surface phase."
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      157,
-      147,
-      130
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

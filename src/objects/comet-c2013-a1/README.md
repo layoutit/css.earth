@@ -2,7 +2,7 @@
 
 This Siding Spring comet passed close to Mars in October 2014. It is a different object from the short-period comet 162P/Siding Spring.
 
-One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows and Orbit default off.
+One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.
 
 ## Sources
 

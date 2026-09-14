@@ -10,7 +10,6 @@ Scientific facts: NASA Science. Physical and orbital data: NASA/JPL Horizons.
 The prepared display and its simplification are cssEarth's interpretation;
 the source institutions do not endorse it.
 
-ESO/S. Brunier panorama and HYG star catalog retain the notices in `source/stars/`.
 Inter title outlines derive from Inter Variable under the SIL Open Font License.
 
 Clementine ratio composite: NASA/JPL-Caltech/UCLA/MPS/DLR/IDA; DLR Institute of Planetary Research. Retain the published scientific attribution and source notices.

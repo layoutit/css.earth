@@ -4,7 +4,6 @@
   "namespace": "circe",
   "displayName": "Circe",
   "publicBase": "/scenes/circe/",
-  "distanceAu": 2.6871357085881864,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -118,12 +117,6 @@
     "sunSource": "DAMIT model 129 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

@@ -416,12 +416,6 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
-      },
-      {
-        "kind": "toggle",
-        "name": "stars",
-        "label": "Stars",
-        "checked": true
       }
     ]
   },
@@ -456,12 +450,6 @@
       "role": "physical",
       "description": "Physical parameters",
       "href": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
-    },
-    {
-      "label": "ESO",
-      "role": "stars",
-      "description": "Background star field",
-      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {

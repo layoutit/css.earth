@@ -4,4 +4,4 @@ Levison et al. (2024), Lucy science team. Numerical scientific facts; independen
 
 Scientific sources are linked in source/measurements.json. This package does not redistribute paper prose or figures.
 
-ESO/S. Brunier panorama: CC BY 4.0. HYG and Inter retain their notices beside the pinned sources.
+Inter retains its notice beside the pinned source.

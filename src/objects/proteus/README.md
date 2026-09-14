@@ -77,7 +77,7 @@ The reproducible source check is `python source/preparation/register-voyager-col
 
 - Geometry files preserve the original OPUS responses, PDS CK and NAIF clock/frame/leap-second kernels. `source/shape/pck00011.tpc` owns pole/spin conventions. The displayed ephemeris and IAU/WGCCRE spin use the vendored astronomy package and are separate from the 1989 image-registration inputs.
 
-- `source/manifest.json` pins the original inputs and authored documents; `source/preparation/acquisition.json` restores missing image, radius-table, font and starfield inputs. Required small geometry documents and the pinned navigation portrait are checked in, so a fresh source restore does not depend on an ignored generated image.
+- `source/manifest.json` pins the original inputs and authored documents; `source/preparation/acquisition.json` restores missing image, radius-table and font inputs. Required small geometry documents and the pinned navigation portrait are checked in, so a fresh source restore does not depend on an ignored generated image.
 
 Source preparation owns every image, triangle and lighting raster; the generic runtime only decodes the prepared package.
 

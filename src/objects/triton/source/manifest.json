@@ -101,33 +101,6 @@
       }
     },
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -287,33 +260,6 @@
       }
     },
     {
-      "id": "hyg-registration-field",
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 849,
-      "expectedSha256": "cb4de5e6903336c7735cc075cd6671337eecf351e8e938eb8e7e9fd4b914b452",
-      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-      "credit": "David Nash",
-      "license": "CC-BY-SA-4.0",
-      "licenseEvidence": [
-        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
-      ],
-      "acquisition": "checked prepared registration field from HYG v4.1",
-      "redistribution": "CC BY-SA 4.0 with attribution",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "hyg-v41",
-            "role": "material",
-            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
-          }
-        ]
-      }
-    },
-    {
       "id": "triton-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 2409,
@@ -343,8 +289,8 @@
     {
       "id": "triton-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1638,
-      "expectedSha256": "85b0b1aa6b199010892e6ec43a2d0d76ef78c2a85b1deedbef0804f489bbf866",
+      "expectedBytes": 307,
+      "expectedSha256": "d047e35e1ef884d4a5bf74d7929747a3bccb6468dca4332bc272a20bd0766992",
       "origin": "Repository-authored Triton solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -402,8 +348,8 @@
     {
       "id": "triton-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 223,
-      "expectedSha256": "cb025a596b25308ab3fbbfe25241e99eb1c526b1919feba2335f42d5dd82ee2c",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Triton celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -458,8 +404,8 @@
     {
       "id": "triton-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1232,
-      "expectedSha256": "3583a84c7a04b0c15c1c864b40357f875a2b9415e73de27009492b1dccbb80b5",
+      "expectedBytes": 1048,
+      "expectedSha256": "e5a0f0fd21702453e33b0eda03f39641826f1cb8dd62f38e30e8185096924df8",
       "origin": "Repository-authored Triton acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -477,8 +423,8 @@
     {
       "id": "triton-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7219,
-      "expectedSha256": "c24aae7747e4e49814c69fe6d0554a68124b8b49b1551474de68500ea4e21469",
+      "expectedBytes": 6940,
+      "expectedSha256": "aa086ee5b6e6ea17ee9510c0422965406fed137f6c65c8dbe03195cbfe16bdf1",
       "origin": "Repository-authored Triton object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -504,16 +450,6 @@
       "path": "presentation/minimap.json",
       "expectedBytes": 29,
       "expectedSha256": "7439571ba65953b5180445c9bc1b68d6086904d7182c157a468f0f23b8698bd6"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "editorial/factsheet-review.json",

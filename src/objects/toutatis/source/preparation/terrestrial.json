@@ -4,7 +4,6 @@
   "namespace": "toutatis",
   "displayName": "Toutatis",
   "publicBase": "/scenes/toutatis/",
-  "distanceAu": 2.543055738919472,
   "raster": {
     "width": 4096,
     "height": 2048,
@@ -71,12 +70,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements; fixed arbitrary display orientation because Toutatis has non-principal-axis tumbling; directional lighting is illustrative"
   },
   "presentation": {
-    "defaultLens": "shape",
-    "pointColor": [
-      170,
-      170,
-      170
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "shape"
   }
 }

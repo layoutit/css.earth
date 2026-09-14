@@ -4,7 +4,6 @@
   "namespace": "bennu",
   "displayName": "Bennu",
   "publicBase": "/scenes/bennu/",
-  "distanceAu": 1.126,
   "raster": {
     "width": 8192,
     "height": 4096,
@@ -178,12 +177,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
   },
   "presentation": {
-    "defaultLens": "normal",
-    "pointColor": [
-      180,
-      180,
-      180
-    ],
-    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+    "defaultLens": "normal"
   }
 }

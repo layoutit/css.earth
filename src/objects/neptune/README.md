@@ -23,13 +23,10 @@ kernel lineage. JPL Solar System Dynamics discovery, mean-elements, and
 physical-parameter tables supply the prepared 16-moon catalog. The PDS Rings
 Node Neptune table supplies the prepared ring radii and widths.
 
-Two panel charts are prepared from the committed NASA GSFC Planetary
-Spectrum Generator configuration and raw I/F response; the third uses the
-pinned photometric phase coefficients. The panel prose and
-facts are prepared from the committed NASA Science `Neptune: Facts` snapshot.
-The shared cubic photographic sky uses the pinned ESO panorama and its HYG
-registration inputs. The historical HYG field snapshot remains preserved;
-runtime does not interpret a star catalog or synthesize a fallback background.
+Two panel charts are prepared from the committed NASA GSFC Planetary Spectrum
+Generator configuration and raw I/F response; the third uses the pinned
+photometric phase coefficients. The panel prose and facts are prepared from
+the committed NASA Science `Neptune: Facts` snapshot.
 
 ## Evidence
 

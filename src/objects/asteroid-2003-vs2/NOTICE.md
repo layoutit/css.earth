@@ -7,4 +7,4 @@ Vara-Lubiano et al. (2022), A&A, Table 7 and §4.3 (2019 occultation).: https://
 
 Published numerical facts are credited. The analytical model extraction and missing-coverage grid are cssEarth MIT work. Paper originals are reacquired through their pinned URLs; scientific figures are not copied into surface maps.
 
-Shared sky: ESO/S. Brunier panorama, CC BY 4.0; [ESO terms](source/stars/ESO-IMAGE-LICENSE.md). Star catalog: HYG, [supplied license](source/stars/LICENSE.md). Type: Inter, SIL Open Font License 1.1.
+Type: Inter, SIL Open Font License 1.1.

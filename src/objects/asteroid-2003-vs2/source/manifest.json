@@ -2,33 +2,6 @@
   "schema": "cssasteroid-2003-vs2-authoritative-sources@2",
   "inputs": [
     {
-      "id": "eso-milky-way-panorama",
-      "path": "stars/eso0932a.tif",
-      "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
-      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "stars/ESO-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore using the pinned acquisition recipe.",
-      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": [
-        "starfield"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "eso-eso0932a",
-            "role": "material",
-            "evidence": "src/planets/asteroid-2003-vs2/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "expectedBytes": 862936,
@@ -121,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3656,
-      "expectedSha256": "a5c151a45266cfcd046b5f00ced4fc2e4b608f8546ab830ce3e7fa467a14a61d",
+      "expectedBytes": 3376,
+      "expectedSha256": "42982019fd8f1d9f36cdc50b10032813e2218834b0e4b88cead0bf8ec6efcbdf",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -135,8 +108,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1003,
-      "expectedSha256": "88b2e16fd89eb2c864813d23095e0114696c4295ec8e3e53589bf17021b5021b"
+      "expectedBytes": 800,
+      "expectedSha256": "3b7be3deab2fcf5b297fb031e6f560e53b9c43997b9b6a28735cc7fb3ea7571f"
     },
     {
       "path": "preparation/navigation.json",
@@ -150,8 +123,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3181,
-      "expectedSha256": "c92e72deb05a163144a3ea1df3afd21bffe77b5d11fdefe31ae5a6811d552720"
+      "expectedBytes": 3027,
+      "expectedSha256": "15e6e0471bf5f55f6186b6e5afcc2285fd53ca611426efece24086a8aeb97f9d"
     },
     {
       "path": "presentation/minimap.json",
@@ -182,21 +155,6 @@
       "path": "reference/vs2-vara-lubiano-2022-publisher.pdf",
       "expectedBytes": 2151178,
       "expectedSha256": "8cc2589921d078f7d88fd6c38b2fddedcd91e1e98e630070b84cc5c1a327b810"
-    },
-    {
-      "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "stars/LICENSE.md",
-      "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 860,
-      "expectedSha256": "655888307edc7cb18ea54356ae93c1339fc57e63a0f0058791f12f74517879ac"
     }
   ],
   "generatedIntermediates": [

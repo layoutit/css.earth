@@ -2,7 +2,7 @@
 
 Kohoutek passed close to the Sun in late 1973. It is now travelling outward into the distant Solar System.
 
-One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows and Orbit default off.
+One **Illustrative nucleus** dataset uses Celestia's native mesh at the catalog's estimated scale. The whole surface carries the missing-imagery grid. Shadows defaults off.
 
 ## Sources
 

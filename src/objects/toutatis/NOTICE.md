@@ -4,4 +4,4 @@ Geometry: Hudson, R. S., Ostro, S. J., and Scheeres, D. J. (2003), *High-resolut
 
 The published model does not resolve all actual terrain. Directional lighting uses a fixed arbitrary display orientation and does not simulate the measured non-principal-axis tumble. Physical size comes from the source mesh; orbital context comes from NASA/JPL Horizons.
 
-ESO/S. Brunier Milky Way panorama: CC BY 4.0; complete notice in `source/stars/ESO-IMAGE-LICENSE.md`. HYG Stellar Database: David Nash/Astronexus, CC BY-SA 4.0; `source/stars/LICENSE.md`. Inter title/font: Inter Project Authors, SIL Open Font License 1.1; `source/presentation/LICENSE.INTER-OFL`.
+Inter title/font: Inter Project Authors, SIL Open Font License 1.1; `source/presentation/LICENSE.INTER-OFL`.

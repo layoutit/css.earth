@@ -82,7 +82,7 @@
         {
           "id": "observations",
           "path": "source/preparation/observations.json",
-          "sha256": "7460b922b37079359b23c2b321b1abb739270f83e18fefc34b9832b01ec9021e"
+          "sha256": "d9663f61e4a395238ec8ac73bbbc93bd2bf0d6b552239fd2de8dc4c72cd154df"
         },
         {
           "id": "materials",
@@ -110,14 +110,9 @@
           "sha256": "3756adbfc034398fedab0113bf7e967a9a95944a4fcf5028b3b78e2bc59257e4"
         },
         {
-          "id": "celestial",
-          "path": "source/preparation/celestial.json",
-          "sha256": "d9a200db859e0a87f8d6c949bec7808afbb00473d30142f83cbb9c6b518da6cc"
-        },
-        {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "1254fcbcd5b3fdaeba73e40d7d59498a34a00b74aebc21a2525e69db9efa5353"
+          "sha256": "532c0dae4a5274c62ce06b4bbf3a31a17af2b0d4b9918576f8ca7dd0f35a52bc"
         }
       ],
       "shape": {
