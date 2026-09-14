@@ -6,7 +6,7 @@ import { resolve } from "node:path";
 import test from "node:test";
 import sharp from "sharp";
 
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
 import { optimizePreparedQ75Webp } from "../../tools/prepared-webp.mts";
 import {
@@ -54,7 +54,7 @@ test('metadata-only preparation does not replace or remove images', async contex
   await writeFile(resolve(root, 'sun-context.webp'), 'unrelated existing context');
   const before = new Map(await Promise.all((await readdir(root)).map(async file => [file, await readFile(resolve(root, file))] as const)));
   const presentationPath = resolve(root, 'presentation.mjs');
-  await prepareNavigation({ projectRoot, outputRoot: root, planets: OBJECTS.filter(body => body.id === 'sun'), presentationPath, catalogOnly: true });
+  await prepareNavigation({ projectRoot, outputRoot: root, planets: SCENE_OBJECTS.filter(body => body.id === 'sun'), presentationPath, catalogOnly: true });
   for (const [file, bytes] of before) assert.deepEqual(await readFile(resolve(root, file)), bytes, file);
   assert.equal((await readdir(root)).length, before.size + 1);
   assert.match(await readFile(presentationPath, 'utf8'), /body-sun@2x.webp/);
@@ -62,8 +62,8 @@ test('metadata-only preparation does not replace or remove images', async contex
 
 test("composes every orbiting-object marker descriptor in catalog order", async () => {
   const descriptors = await loadMarkerDescriptors({ projectRoot });
-  const markerPlanets = OBJECTS
-    .toSorted((left, right) => left.distanceAu - right.distanceAu);
+  const markerPlanets = SCENE_OBJECTS
+    .toSorted((left, right) => left.distance.meters - right.distance.meters);
   assert.deepEqual(
     descriptors.map(({ planetId }) => planetId),
     markerPlanets.map(({ id }) => id),

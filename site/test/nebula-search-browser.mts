@@ -2,13 +2,13 @@ import assert from 'node:assert/strict';
 import { mkdir, readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { createTestPage } from './browser-observations.mts';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { validatePreparedVolumeLenses } from '../../src/renderers/css/dist/universe.js';
 import { requireRecord } from '../../tools/source-values.mts';
 
 const browser = await chromium.launch({headless:true});
 const errors: string[] = [], navigations: string[] = [];
-const reference = OBJECTS.find(object=>object.id==='mercury')?.worldFrame;
+const reference = SCENE_OBJECTS.find(object=>object.id==='mercury')?.worldFrame;
 assert.ok(reference);
 try {
   const page = await createTestPage(browser,{viewport:{width:1440,height:1000},reducedMotion:'reduce'});

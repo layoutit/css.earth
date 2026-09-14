@@ -1,0 +1,36 @@
+import { record } from './browser-types.mts';
+
+/** Display and sort values are prepared together; catalogue epochs are not measurement epochs. */
+export interface NavigationDistance {
+  readonly meters: number;
+  readonly value: number;
+  readonly unit: 'AU' | 'pc';
+  readonly quantity: 'geometric' | 'catalogue' | 'comoving';
+  readonly referencePoint: 'heliocentre' | 'observer';
+  readonly epochJdTt: number | null;
+}
+
+export function parseNavigationDistance(input: unknown): NavigationDistance {
+  if (!record(input) || Object.keys(input).some(key => !['meters', 'value', 'unit', 'quantity', 'referencePoint', 'epochJdTt'].includes(key)) ||
+      typeof input.meters !== 'number' || !Number.isFinite(input.meters) || input.meters < 0 ||
+      typeof input.value !== 'number' || !Number.isFinite(input.value) || input.value < 0 ||
+      (input.unit !== 'AU' && input.unit !== 'pc') || (input.quantity !== 'geometric' && input.quantity !== 'catalogue' && input.quantity !== 'comoving') ||
+      (input.referencePoint !== 'heliocentre' && input.referencePoint !== 'observer') ||
+      !(input.epochJdTt === null || typeof input.epochJdTt === 'number' && Number.isFinite(input.epochJdTt)) ||
+      (input.quantity === 'geometric' ? input.referencePoint !== 'heliocentre' || input.epochJdTt === null || input.unit !== 'AU'
+        : input.referencePoint !== 'observer' || input.epochJdTt !== null || input.unit !== 'pc')) {
+    throw new TypeError('Invalid prepared navigation distance.');
+  }
+  const expectedMeters = input.value * (input.unit === 'AU' ? 149597870700 : 3.085677581491367e16);
+  if (!Number.isFinite(expectedMeters) || Math.abs(input.meters - expectedMeters) > Math.max(1, expectedMeters) * 1e-12) {
+    throw new TypeError('Prepared navigation distance has inconsistent display and sort values.');
+  }
+  return Object.freeze({ meters: input.meters, value: input.value, unit: input.unit, quantity: input.quantity,
+    referencePoint: input.referencePoint, epochJdTt: input.epochJdTt });
+}
+
+export function distanceDescription(distance: NavigationDistance): string {
+  return distance.quantity === 'geometric' ? `Distance from the Sun at JD ${distance.epochJdTt} TT`
+    : distance.quantity === 'comoving' ? 'Observer distance: redshift-derived comoving distance'
+      : 'Observer distance adopted from the catalogue; measurement epoch is source-specific';
+}

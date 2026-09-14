@@ -4,7 +4,7 @@ import test from "node:test";
 
 import { auditObjectRuntimeOwnership } from "../../tools/check-object-runtime-ownership.mts";
 import { loadObjectContent } from "./load-object-content.mts";
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { required } from './navigation-test-values.mts';
 import { SourceEvidence } from './source-evidence-values.mts';
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../runtime-policy.mts";
@@ -15,7 +15,7 @@ test("every object mounts one canonical high-density image bank", async () => {
   assert.equal(ownership.complete, true);
   const head = await readFile(new URL("../components/PreparedObjectHead.astro", import.meta.url), "utf8");
   assert.doesNotMatch(head, /imagesrcset|devicePixelRatio/u);
-  for (const { id } of OBJECTS) {
+  for (const { id } of SCENE_OBJECTS) {
     const entry = required(ownership.entries.find(entry => entry.id === id));
     assert.equal(entry.factoryCalls, 1, id + ": actual loader must have one runtime factory");
     assert.equal(required(entry.presentation).format, "json", id + ": runtime consumes prepared data");

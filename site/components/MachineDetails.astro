@@ -11,7 +11,7 @@ const uses = machineDatasets(machineId);
 const references = uniqueCitations([vehicle.name, vehicle.description, vehicle.kind, ...vehicle.aliases, ...(vehicle.launch ? [vehicle.launch] : [])].flatMap(field => field.citations));
 ---
 <details class="planet-machine-details" data-machine={vehicle.id}>
-  <summary><span>{vehicle.name.value}</span> <small>{contributed ? 'Dataset contributor' : 'Mission participant'}</small></summary>
+  <summary><span>{vehicle.name.value}</span> <small>{contributed ? 'Contributes to dataset views' : 'Mission participant'}</small></summary>
   {/* A spacecraft that is its mission's only machine shares its description; the mission card already shows it. */}
   {vehicle.description.value !== missionDescription && <p>{vehicle.description.value}</p>}
   <p class="planet-machine-facts">{vehicle.kind.value}{vehicle.launch && <> · Launched <a href={referenceUrl(vehicle.launch)} target="_blank" rel="noreferrer">{vehicle.launch.value}</a></>}</p>

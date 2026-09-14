@@ -8,8 +8,8 @@
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
+    "sha256": "517080efd788cfb7ffc874173e0bc74a914b2c3f423abb60dbc039d54b337efb",
+    "bindingsSha256": "ed78a3a952f988e7a1c8417fdeae45db39a728c6a6362b4a42537094ed09086e"
   },
   "recipes": [
     {
@@ -2402,6 +2402,7 @@
       "label": "Monochrome",
       "recipe": "raster",
       "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2458,6 +2459,7 @@
       "label": "Midnight temperature",
       "recipe": "raster",
       "selector": "/surfaces/1",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2514,6 +2516,7 @@
       "label": "Heat anomalies",
       "recipe": "raster",
       "selector": "/surfaces/2",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2570,6 +2573,7 @@
       "label": "Rock abundance",
       "recipe": "raster",
       "selector": "/surfaces/3",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2626,6 +2630,7 @@
       "label": "Elevation",
       "recipe": "raster",
       "selector": "/surfaces/4",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2682,6 +2687,7 @@
       "label": "Crust",
       "recipe": "raster",
       "selector": "/surfaces/5",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2738,6 +2744,7 @@
       "label": "Silicate signature",
       "recipe": "raster",
       "selector": "/surfaces/6",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2794,6 +2801,7 @@
       "label": "Geology",
       "recipe": "raster",
       "selector": "/surfaces/7",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
@@ -2850,6 +2858,7 @@
       "label": "lighting",
       "recipe": "raster",
       "selector": "/lighting",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Evaluate the declared surface-lighting model into phase banks.",
       "limitations": [],
@@ -3266,6 +3275,7 @@
       "label": "Object information",
       "recipe": "content",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
@@ -3291,6 +3301,7 @@
       "label": "Named features",
       "recipe": "features",
       "selector": "",
+      "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
@@ -3332,6 +3343,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "surface"
@@ -3356,6 +3368,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "midnight-temperature"
@@ -3380,6 +3393,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "heat-anomalies"
@@ -3404,6 +3418,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "rock-abundance"
@@ -3428,6 +3443,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "topography"
@@ -3452,6 +3468,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "crust"
@@ -3476,6 +3493,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "silicate-signature"
@@ -3500,6 +3518,7 @@
       "recipeDependencies": [
         "raster"
       ],
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "geology"

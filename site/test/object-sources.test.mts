@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { objectSources } from '../object-sources.mts';
 import { productSourceIds, validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 
@@ -29,7 +29,7 @@ test('shared attribution keeps Mercury’s three distinct product links and cred
 });
 
 test('every registered body uses the same projection and keeps every consumed source identity', async () => {
-  for (const { id } of OBJECTS) {
+  for (const { id } of SCENE_OBJECTS) {
     const document = validateObjectProvenance(await read(id), id), before = JSON.stringify(document);
     const groups = objectSources(document), links = groups.flatMap(group => group.links);
     const used = new Set(document.products.flatMap(product => productSourceIds(document, product.id)));

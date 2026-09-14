@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { TEXT_BUDGETS, parsePreparedText } from '../object-text.mts';
 import { requireArray, requireRecord, requireString } from '../../tools/source-values.mts';
 
@@ -12,7 +12,7 @@ import { requireArray, requireRecord, requireString } from '../../tools/source-v
 const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? 'http://127.0.0.1:4210').replace(/\/$/u, '');
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 
-const bodies = await Promise.all(OBJECTS.map(async ({ id }) => {
+const bodies = await Promise.all(SCENE_OBJECTS.map(async ({ id }) => {
   const text = parsePreparedText(await read(`../../src/objects/${id}/prepared/text.json`), id);
   const lenses = requireRecord(await read(`../../src/objects/${id}/prepared/controls.json`)).lenses;
   const labels = new Map(lenses === null || lenses === undefined ? [] : requireArray(requireRecord(lenses).controls).map(value => {

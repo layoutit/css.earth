@@ -3,7 +3,7 @@ import type { PositionM } from '@cssearth/engine';
 import { readFile, writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { eclipticJ2000ToIcrf } from '@cssearth/astronomy';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import context from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import starDescriptor from '../../src/objects/stellar-neighbourhood/object.json' with { type: 'json' };
 import { loadPreparedCssPointField } from '../../src/renderers/css/dist/index.js';
@@ -12,7 +12,7 @@ import slices from '../../src/objects/milky-way/prepared/volume-slices.json' wit
 import { worldRotationFromQuaternion, rotateWorldPosition } from '../../src/renderers/css/dist/navigation.js';
 
 const radius = 88;
-const registry = new Map(OBJECTS.map(object => [object.id, object]));
+const registry = new Map(SCENE_OBJECTS.map(object => [object.id, object]));
 const bodies = [context.focus, ...context.bodies].filter(body => registry.has(body.id));
 const rim = `<i class="space-minimap-ring space-minimap-rim" style="width:${2 * radius}px;height:${2 * radius}px"></i>`;
 const spokes = [0, 45, 90, 135].map(angle =>

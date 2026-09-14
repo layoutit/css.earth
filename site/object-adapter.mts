@@ -1,7 +1,7 @@
-import { OBJECTS } from "./objects.mts";
+import { SCENE_OBJECTS } from "./objects.mts";
 
 export const objectAdapter = Object.freeze({
-  async load(objectId: string, objects = OBJECTS) {
+  async load(objectId: string, objects = SCENE_OBJECTS) {
     const objectRecord = objects.find(({ id }) => id === objectId);
     if (!objectRecord) {
       throw new Error(`Unknown cssEarth object: ${objectId ?? "unknown"}.`);
@@ -15,7 +15,7 @@ export const objectAdapter = Object.freeze({
     return mount;
   },
 
-  routes(objects = OBJECTS) {
+  routes(objects = SCENE_OBJECTS) {
     return objects.map(({ route }) => route);
   },
 });

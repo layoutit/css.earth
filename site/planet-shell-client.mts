@@ -1,5 +1,5 @@
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
-import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
+import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import { createMotionRecorder, runMotionScript } from './motion-script.mts';
 const isOrbitRenderer = (value: string): value is OrbitRenderer => ['strokes', 'bars'].includes(value);
@@ -33,7 +33,7 @@ import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
 import { bindNavigationIntent, navigationFragments } from './navigation-fragments.mts';
-import { OBJECTS } from './objects.mts';
+import { SCENE_OBJECTS } from './objects.mts';
 import { objectClassificationLabel } from './planet-search-objects.mts';
 import { MOBILE_SHEET_POLICY, MOBILE_VIEWPORT_QUERY, mobileSheetKeyboardInset } from './runtime-policy.mts';
 
@@ -101,7 +101,7 @@ export function mountPlanetShell({
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, onCategoryChange));
     // Hover, focus or press on another body fetches its card before the click.
-    own(bindNavigationIntent({ documentTarget, windowTarget, objects: OBJECTS, fragments, skip: id => id === cardObjectId }));
+    own(bindNavigationIntent({ documentTarget, windowTarget, objects: SCENE_OBJECTS, fragments, skip: id => id === cardObjectId }));
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime));
     own(createExplorerRailController(documentTarget, windowTarget, {
       onOpenSolarSystem: () => objectBrowser.showSolarSystem(),
@@ -227,7 +227,7 @@ export function mountPlanetShell({
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
     setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setFeatures(provider); },
-    setPreparedFocus(record: PreparedCatalogObject | null, sources: readonly SpatialCatalogSource[] = [], presentation: PreparedFocusPresentation | null = null) {
+    setPreparedFocus(record: PreparedCatalogObject | null, sources: readonly SpatialCitation[] = [], presentation: PreparedFocusPresentation | null = null) {
       if (lifetime.disposed) return;
       preparedFocus = record; focusCard.set(record, sources, presentation);
       objectBrowser.setPreparedFocus(record); viewReadout.setPreparedFocus(record);
@@ -586,7 +586,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   }
   browser.dataset.retained = '';
   information.dataset.retained = '';
-  const distanceOrder = items.toSorted((a, b) => Number(a.dataset.objectDistanceAu) - Number(b.dataset.objectDistanceAu));
+  const distanceOrder = items.toSorted((a, b) => Number(a.dataset.objectDistanceM) - Number(b.dataset.objectDistanceM));
   const planetOrder = [
     ...distanceOrder.filter(item => item.dataset.objectClassification === 'planet'),
     ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
@@ -718,7 +718,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     const showAll = query === "all objects";
     const classification = items.find(item => {
       const name = item.dataset.objectClassificationName;
-      return name && (query === name || query === `${name}s` || (name === 'nebula' && query === 'nebulae') || query === item.dataset.objectClassification);
+      return name && (query === name || query === `${name}s` || (name === 'nebula' && query === 'nebulae') || (name === 'galaxy' && query === 'galaxies') || query === item.dataset.objectClassification);
     })?.dataset.objectClassification;
     markCategory(classification);
     filteredClassification = classification;

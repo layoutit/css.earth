@@ -19,7 +19,7 @@ import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../..
 import { validateRuntimeAssetManifest } from "../../../../src/platform/runtime-asset-closure.mts";
 import { createSourceManifest } from "../../../../src/platform/source-manifest.mts";
 import { scientificFalseColor, prepareFitsMap, readFitsPrimary } from "../../../../tools/objects/observation/fits.mts";
-import { OBJECTS } from "../../../../site/objects.mts";
+import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 import { projectRoot } from "../../fixtures.mts";
 import { resolve } from "node:path";
@@ -40,7 +40,7 @@ test("binds the exact Sun source and runtime closures", async () => {
 });
 
 test("Sun's actual import closure has only shared runtime owners", async () => {
-  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "sun") });
+  const audit = await auditObjectRuntimeOwnership({ objects: SCENE_OBJECTS.filter(object => object.id === "sun") });
   assert.equal(audit.complete, true);
   assert.ok(audit.sharedClosure.includes("src/renderers/css/universe/world-context-runtime.ts"));
   for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/prepared-playback"]) {

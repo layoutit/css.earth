@@ -26,7 +26,7 @@ export async function loadCelestialAdapters() {
     import(path('tools/objects/solar-system-markers.mts')) as Promise<Markers>,
     import(path('tools/objects/solar-system-scene.mts')) as Promise<typeof import('../solar-system-scene.mts')>,
   ]);
-  return { requireObject: objects.requireObject, prepareAstrometricCubeSampling: astrometry.prepareAstrometricCubeSampling,
+  return { requireSceneObject: objects.requireSceneObject, prepareAstrometricCubeSampling: astrometry.prepareAstrometricCubeSampling,
     prepareCatalogueStars: catalogue.prepareCatalogueStars, preparePlanetCubicSky: sky.preparePlanetCubicSky,
     preparePlanetDirectionalSun: sun.preparePlanetDirectionalSun, prepareSolarSystemMarkerStrip: markers.prepareSolarSystemMarkerStrip,
     prepareSolarSystemSunPresentation: scene.prepareSolarSystemSunPresentation,
