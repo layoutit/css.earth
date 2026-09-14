@@ -30,7 +30,7 @@ function firstState(path: string): TracedState {
   let stats;
   try { stats = original.statSync(path, { throwIfNoEntry: false }); } catch { return { missing: true }; }
   if (!stats) return { missing: true };
-  const state: TracedState = { size: stats.size, modified: stats.mtimeMs };
+  const state: TracedState = { size: stats.size, modified: stats.mtimeMs, ...(stats.isDirectory() ? { directory: true as const } : {}) };
   if (stats.isFile() && DESCRIPTOR_PATH.test(path)) {
     const text = original.readFileSync(path, 'utf8');
     state.views = { registry: descriptorDigest(text, 'registry'), recipe: descriptorDigest(text, 'recipe'), pins: descriptorDigest(text, 'pins') };
