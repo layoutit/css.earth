@@ -23,7 +23,7 @@
       "id": "galileo-surface",
       "subject": "Galileo resolved Dactyl observations",
       "status": "deferred",
-      "finding": "Native SSI data and evaluated spacecraft pointing are retained, but the fixed-ellipsoid orientation is sensitive to the sampled outline. Celmis error is 12.70 pixels using the left limb, 0.23 after adding the lower cap, and 18.48 with both caps. Each fit is selected without Celmis; the development check is not a fresh blind validation. No photographic lens is enabled.",
+      "finding": "Earlier limb-only fits changed orientation with the sampled caps; the historical reports remain pinned. With the new published pole, Acmon, all 31 bright-limb crossings and 3887 km range, the unit-weight fit predicts Celmis within 0.53 native pixel. Paper-alignment variants move the pole by up to 2.52 pixels, and combined control-pick perturbations yield Celmis errors of 0.48–2.02 pixels. This improves the orientation constraint but does not qualify distributed map/model correspondence or surface visibility. No photographic lens is enabled.",
       "revisitWhen": "Actual SSI products and their camera/shape relation pass independent surface registration for the selected geometry.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dactyl/README.md",
@@ -31,7 +31,9 @@
         "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json",
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/review.json",
         "https://github.com/layoutit/css.earth/blob/6b8250ac355c000c592e161fe0522ed5d74d3b18/src/objects/dactyl/evidence/registration/report.json",
-        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/limb-extent.json"
+        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/limb-extent.json",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-controls.json",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-control-fit.json"
       ],
       "checked": [
         {
@@ -49,6 +51,11 @@
         {
           "date": "2026-09-14",
           "commit": "7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08",
+          "pr": 199
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "fc36f37867b7c94edb8bb50c3e634f8070703e84",
           "pr": 199
         }
       ]
@@ -110,12 +117,13 @@
       "id": "ssi-i1578",
       "subject": "Galileo SSI i1578 IR-8890 exposure",
       "status": "deferred",
-      "finding": "The smaller complete IR-8890 disk remains a candidate second view. The recovered telemetry CK has no zero-tolerance coverage at this exposure's shutter-center SCET. An exploratory transfer using preliminary label pointing, approximate range and assumed fixed orientation was not controlled surface evidence. The calibrated-image label was inspected; calibrated pixels remain unexamined.",
+      "finding": "The smaller complete IR-8890 disk remains a candidate second view. Veverka Table I now establishes its Dactyl range as 8664 km. The retained telemetry CK still has no zero-tolerance coverage at shutter-center SCET; the earlier transfer using preliminary pointing and assumed fixed orientation remains uncontrolled. The calibrated-image label was inspected; calibrated pixels remain unexamined.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/i1578-crop.png",
         "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561578rcal_ir8.xml",
-        "https://github.com/layoutit/css.earth/blob/6b8250ac355c000c592e161fe0522ed5d74d3b18/src/objects/dactyl/evidence/registration/report.json"
+        "https://github.com/layoutit/css.earth/blob/6b8250ac355c000c592e161fe0522ed5d74d3b18/src/objects/dactyl/evidence/registration/report.json",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-controls.json"
       ],
       "checked": [
         {
@@ -125,6 +133,11 @@
         {
           "date": "2026-09-14",
           "commit": "6b8250ac355c000c592e161fe0522ed5d74d3b18"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "fc36f37867b7c94edb8bb50c3e634f8070703e84",
+          "pr": 199
         }
       ],
       "revisitWhen": "A Dactyl camera-to-shape binding is available and the resolved image features support a meaningful independent check."
@@ -133,13 +146,15 @@
       "id": "ssi-i2278",
       "subject": "Galileo SSI i2278 CLEAR exposure",
       "status": "deferred",
-      "finding": "Original VICAR proves the FITS vertical inversion and the diagnostic includes SSI radial distortion. Additional lower and upper outline crossings change the selected orientation despite limb RMS below 0.60 pixels. The apparently successful lower-cap fit does not survive the upper-cap check. This is an unresolved camera/shape interpretation, not evidence that a faithful registered area is impossible.",
+      "finding": "The original VICAR, detector orientation and instrument distortion remain verified. The full Veverka paper now supplies Dactyl range and a digitizable south-pole overlay. The pole-plus-Acmon fit predicts Celmis at 0.53 native pixel with unit weights, but printed-image alignment and feature-picking sensitivity remain material. This is a stronger source-constrained candidate, not yet a qualified photographic surface on the unchanged ellipsoid.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/i2278-crop.png",
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/native/i2278.lbl",
         "https://github.com/layoutit/css.earth/blob/6b8250ac355c000c592e161fe0522ed5d74d3b18/src/objects/dactyl/evidence/registration/report.json",
-        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/limb-extent.json"
+        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/limb-extent.json",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-controls.json",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-control-fit.json"
       ],
       "checked": [
         {
@@ -153,6 +168,11 @@
         {
           "date": "2026-09-14",
           "commit": "7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08",
+          "pr": 199
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "fc36f37867b7c94edb8bb50c3e634f8070703e84",
           "pr": 199
         }
       ],
@@ -237,13 +257,15 @@
       "id": "usgs-photo-control",
       "subject": "USGS Dactyl named-feature photograph and center points",
       "status": "deferred",
-      "finding": "Acmon (-39,138E) and Celmis (-46,220E) are confirmed by the current Gazetteer and Belton 1996 overview Table III. Analyst detector picks have about one-pixel uncertainty. Fitting the limb plus Acmon fails on withheld Celmis; selecting another solution after inspecting Celmis removes its independence. The two centers still do not supply a distributed control network.",
+      "finding": "Acmon (-39,138E) and Celmis (-46,220E) are confirmed by the Gazetteer and Belton overview Table III. Veverka page 207 conflicts by printing 220W; its map is explicitly east-positive, so the conflict is recorded rather than silently reversing coordinates. With the published pole added, the unit-weight Acmon fit predicts Celmis at 0.53 native pixel. The analyst picks remain approximately one-pixel measurements, Celmis was seen earlier, and these two craters do not establish distributed surface registration.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
         "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/dactyl.pdf",
         "https://planetarynames.wr.usgs.gov/Feature/39",
         "https://planetarynames.wr.usgs.gov/Feature/1097",
-        "https://github.com/layoutit/css.earth/blob/6b8250ac355c000c592e161fe0522ed5d74d3b18/src/objects/dactyl/evidence/registration/report.json"
+        "https://github.com/layoutit/css.earth/blob/6b8250ac355c000c592e161fe0522ed5d74d3b18/src/objects/dactyl/evidence/registration/report.json",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-controls.json",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-control-fit.json"
       ],
       "checked": [
         {
@@ -253,6 +275,11 @@
         {
           "date": "2026-09-14",
           "commit": "6b8250ac355c000c592e161fe0522ed5d74d3b18"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "fc36f37867b7c94edb8bb50c3e634f8070703e84",
+          "pr": 199
         }
       ],
       "revisitWhen": "An independently bound camera solution can predict the named centers, or additional distributed source controls permit disjoint fitting and validation."
@@ -260,12 +287,14 @@
     {
       "id": "veverka-full-camera-details",
       "subject": "Veverka et al. 1996 full paper camera and shape details",
-      "status": "unresolved",
-      "finding": "The publisher opens a 12-page full PDF. The first page and part of Table I were read in the browser, but modeled views and remaining tables are still unexamined: subsequent access reached human verification. ADS legacy routes, Semantic Scholar and OpenAlex did not provide a downloadable alternative. This paper is partly retrieved, not fully reviewed.",
+      "status": "included",
+      "finding": "The earlier access gap is resolved by the complete user-supplied publisher PDF. All 12 pages were read and Tables I–III plus Figures 3, 9 and 10 examined. Table I gives the Dactyl-specific i2278 range as 3887 km. Figure 9B identifies the south pole and east direction; Figure 10 is an east-positive cylindrical map of that exposure. The unlabelled wireframe supplies no numeric grid interval, and the paper contains no full numerical Dactyl camera or shape table. The PDF and embedded JPEG identities are pinned. Included as a source of measured range, shape limits and published figure controls, not as a qualified texture.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/41d0d260f12e5e2b7ac8280aae098b4f3f2ef85b/src/objects/dactyl/evidence/galileo/inputs.json",
         "https://doi.org/10.1006/icar.1996.0045",
-        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/README.md#camera-and-orientation-experiment"
+        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/README.md#camera-and-orientation-experiment",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-controls.json",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-control-fit.json"
       ],
       "checked": [
         {
@@ -276,9 +305,13 @@
           "date": "2026-09-14",
           "commit": "7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08",
           "pr": 199
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "fc36f37867b7c94edb8bb50c3e634f8070703e84",
+          "pr": 199
         }
-      ],
-      "revisitWhen": "A readable full paper or author-repository copy permits inspection of the observation geometry, axis convention, tables and figures."
+      ]
     },
     {
       "id": "ssi-original-detector-orientation",
@@ -350,15 +383,22 @@
       "id": "ssi-limb-extent",
       "subject": "i2278 bright-outline extent and orientation sensitivity",
       "status": "unresolved",
-      "finding": "The serial experiment compares 17, 29 and 31 native threshold crossings with the same 576 pose starts, instrument distortion, fixed ellipsoid and Acmon control. The selected Celmis discrepancy changes from 12.70 to 0.23 to 18.48 native pixels. The cap samples are not equally spaced by arc length, and Celmis has been inspected during development.",
+      "finding": "The historical 17/29/31-crossing experiment changes the selected Celmis error from 12.70 to 0.23 to 18.48 pixels. Veverka Table II now confirms real-limb departures from the fitted ellipsoid of up to 130 m and RMS at most 56 m; these are not camera error limits. The published-pole experiment retains all 31 crossings, improves the orientation constraint and reports 0.77-pixel limb RMS with a 2.51-pixel maximum. Surface correspondence still requires validation beyond the outline.",
       "revisitWhen": "A source-backed Dactyl frame and independent surface evidence resolve the sensitivity without selecting an outline subset for its desired crater fit.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/limb-extent.json"
+        "https://github.com/layoutit/css.earth/blob/7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08/src/objects/dactyl/evidence/registration/limb-extent.json",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-controls.json",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-control-fit.json"
       ],
       "checked": [
         {
           "date": "2026-09-14",
           "commit": "7e4ee3afd6a5bc68e8980dc8fd0f0a00663e4e08",
+          "pr": 199
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "fc36f37867b7c94edb8bb50c3e634f8070703e84",
           "pr": 199
         }
       ]
@@ -416,6 +456,43 @@
           "pr": 199
         }
       ]
+    },
+    {
+      "id": "veverka-published-pole-alignment",
+      "subject": "Figure 9B south-pole control in original SSI detector coordinates",
+      "status": "unresolved",
+      "finding": "The meridian convergence is independently re-examined at approximately (307.5,147.5) in the 427×396 embedded JPEG. The baseline similarity alignment gives native (203.44,213.25), correlation 0.901. Twelve region/filter fits move that inferred pole by up to 2.52 native pixels, with weaker right-half matches under the printed grid. A pole-only ellipsoid fit does not determine the named-feature longitude. No grid spacing is assumed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-controls.json",
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-control-fit.json",
+        "https://doi.org/10.1006/icar.1996.0045"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "fc36f37867b7c94edb8bb50c3e634f8070703e84",
+          "pr": 199
+        }
+      ],
+      "revisitWhen": "A paper-to-detector transform is supported by spatially distributed identifiable ties or another archived control product, with measured sensitivity appropriate to the native image scale."
+    },
+    {
+      "id": "veverka-cylindrical-map",
+      "subject": "Figure 10 controlled cylindrical Dactyl photograph",
+      "status": "unresolved",
+      "finding": "The complete figure and its axes were inspected. It explicitly maps 0–360 east longitude and +90 to −90 latitude, with only the photographed region filled. The plot frame is digitized in the pinned source-control record. It is a projection of i2278, not an independent exposure. No dense correspondence from original SSI samples to this printed map has been qualified; the paper pixels are not used as runtime imagery.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/fc36f37867b7c94edb8bb50c3e634f8070703e84/src/objects/dactyl/evidence/registration/published-controls.json",
+        "https://doi.org/10.1006/icar.1996.0045"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-14",
+          "commit": "fc36f37867b7c94edb8bb50c3e634f8070703e84",
+          "pr": 199
+        }
+      ],
+      "revisitWhen": "A native photographic map or a validated detector-to-map correspondence supports transfer in the published frame, with explicit coverage and permitted source reuse."
     }
   ]
 }
