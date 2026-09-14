@@ -52,10 +52,12 @@ the pole, Acmon and complete sampled bright limb predict Celmis within **0.53
 native pixel** with unit residual weights. Celmis is excluded from this fit
 and its selection, but was inspected in earlier experiments.
 
-**The photographic surface is still unqualified.** The paper's printed grid
-has no numerical line labels, and its cylindrical map has not yet supplied a
-validated detector-to-surface correspondence. Picking and paper-alignment
-sensitivity are material at this image's approximately 39 m/pixel scale.
+**The photographic surface is still unqualified.** A new [map check](#published-map-check)
+recovers Figure 10's labelled grid within 1.38 printed pixels, but the existing
+camera disagrees with the mapped terrain across six additional regions.
+Figure 9B's separate wireframe still has no numerical line labels. Picking,
+paper alignment and model correspondence remain material at approximately
+39 m per native pixel.
 The public scene retains its missing-imagery grid; PR #199 stays open for the
 finished surface rather than asking for an intermediate research merge.
 
@@ -247,6 +249,46 @@ reproduces these results serially from the pinned local paper and native inputs.
 The tools TypeScript check passes with this generator. No renderer, mesh,
 preparation recipe or public imagery changes; application/browser suites and
 Pixelmatch are not evidence for this detector-coordinate investigation.
+
+## Published map check
+
+The [map review](evidence/registration/published-map-review.json), run on
+2026-09-14, tests Figure 10 as a separate source route. Its input and generator
+hashes bind the result to the exact PDF, original VICAR frame, earlier pose and
+unchanged camera implementation. It does not rerun the camera search.
+
+Eight unused printed ticks check the four-corner plot digitization: RMS **0.81**
+and maximum **1.38 figure pixels**, roughly one degree along the plot axes.
+This establishes how accurately the printed coordinates were recovered; it does
+not establish the producer's latitude definition or correspondence to our
+ellipsoid. Figure 3 shows a non-ellipsoidal model, whose numerical surface and
+binding to Figure 10 remain unresolved. The current PDS Stooke map guide has no
+Dactyl entry. The ledger records that limited inspection and the SPUD source-code
+lead; neither is treated as proof that no usable map exists elsewhere.
+
+The earlier pole-plus-Acmon camera is also checked against six disjoint map
+windows. Their unshifted normalized correlations range from **−0.29 to 0.60**.
+Searching local translations suggests shifts of **2.25–4.72 native pixels**;
+one optimum reaches the search boundary and some competing matches are nearly
+equal. These are diagnostic suggestions, not measured control errors or an
+accepted warp. Each window's 81 interpolated samples are not 81 independent
+detector observations. The map was examined during earlier development, so this
+is additional corroboration rather than a fresh blind holdout.
+
+This disagreement prevents the 0.53-pixel Celmis result from qualifying the whole
+surface. The remaining discriminator is a supported map frame and source-model
+correspondence, or distributed image controls that survive checking beyond the
+two named craters. Another camera optimization using the same inputs does not
+supply that missing evidence. No photographic surface has been enabled.
+
+The publisher currently identifies the paper as **CC BY-NC-ND 4.0**; see
+[reuse terms](NOTICE.md). The paper figure has not been cleared as a public texture.
+Its coordinate measurements and the separately archived NASA pixels remain
+distinct inputs. The [reproduction command](../../../tools/objects/source-authoring/galileo-lucy/README.md#dactyl-published-map-review)
+checks source bytes and writes a numerical report without redistributing the
+figure. A focused strict TypeScript check covers the new tool and its imported
+dependencies; no application bake, renderer test or Pixelmatch is relevant to
+this source-only change.
 
 ## Known problems
 
