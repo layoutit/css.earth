@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-nebula-observation-recipe@1",
+  "id": "m45-optical-composite",
+  "referenceId": "noirlab-optical",
+  "frame": {
+    "width": 2048,
+    "height": 2048,
+    "fieldArcminutes": [
+      252,
+      252
+    ],
+    "centerIcrsDegrees": [
+      56.75,
+      24.1167
+    ],
+    "northUp": true
+  },
+  "images": [
+    {
+      "id": "noirlab-optical",
+      "label": "NOIRLab · optical B / V / I",
+      "url": "https://storage.noirlab.edu/media/archives/images/publicationtiff/noao-m45.tif",
+      "page": "https://noirlab.edu/public/images/noao-m45/",
+      "sha256": "473b92b49bee00f7a7028c80d9d63ea8f384ae80e46eb470558fecf93b255544",
+      "width": 4000,
+      "height": 2920,
+      "fieldArcminutes": [
+        68.676,
+        50.1264
+      ],
+      "centerIcrsDegrees": [
+        56.55435826,
+        24.11007308
+      ],
+      "northRightDegrees": 90.69909386,
+      "bands": "Optical · B 436 nm / V 537 nm / I 805 nm",
+      "credit": "NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
+      "termsUrl": "https://noirlab.edu/public/about/image-usage/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          9700,
+          7080
+        ],
+        "referencePixel": [
+          4929.330811,
+          3330.368286
+        ],
+        "referenceValueDeg": [
+          56.55435826,
+          24.11007308
+        ],
+        "scaleDeg": [
+          -0.000118,
+          0.000118
+        ],
+        "rotationDeg": -90.69909386
+      },
+      "bytes": 25288332,
+      "bitDepth": 8,
+      "localCache": ".local/nebula-lab/intake/m45/noirlab-optical.tif",
+      "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
+      "master": {
+        "url": "https://storage.noirlab.edu/media/archives/images/original/noao-m45.tif",
+        "width": 9700,
+        "height": 7080,
+        "sha256": "a7780281f9ef87ab815d1dbf93f6dd596a25d14f263d8d66fc6b82a17d758e91",
+        "hashStatus": "publisher-published; original not downloaded"
+      },
+      "processingVariant": "Publisher 4K TIFF, complete 9700×7080 master footprint. Embedded AVM reference grid retained."
+    },
+    {
+      "id": "niittee-widefield",
+      "label": "Tõrva / Niittee · wide optical",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Plejades.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
+      "sha256": "96c04d4db1cd317544bd616fe41ce337f32aa1dac2fcd69702419f29c426e5aa",
+      "width": 8000,
+      "height": 5199,
+      "bytes": 16654428,
+      "bitDepth": 8,
+      "fieldArcminutes": [
+        264.79361625291585,
+        172.0827513623637
+      ],
+      "centerIcrsDegrees": [
+        56.612919319746084,
+        24.081835114047628
+      ],
+      "northRightDegrees": 13.470993295858381,
+      "bands": "Optical · broadband color camera with Optolong L-Pro light-pollution filter",
+      "credit": "Taavi Niittee / Tõrva Astronomy Club",
+      "termsUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          8000,
+          5199
+        ],
+        "referencePixel": [
+          3794.5752278245623,
+          2714.2027373494307
+        ],
+        "referenceValueDeg": [
+          56.75,
+          24.1167
+        ],
+        "scaleDeg": [
+          -0.0005516533671935747,
+          0.0005516533671935747
+        ],
+        "rotationDeg": -13.470993295858381
+      },
+      "registrationMode": "field-stars",
+      "coordinateOrigin": "authored-bright-star-seed",
+      "localCache": ".local/nebula-lab/intake/m45/widefield/niittee-pleiades.jpg",
+      "license": "CC BY 4.0",
+      "metadataNote": "Full published 8000 × 5199 processed RGB8 JPEG, not a claim of 8000-pixel detector resolution. Listed ASI071MC Pro sensor is 4944 × 3284; stacking/resampling details unreported. No publisher WCS; initial geometry seeded from bright-star correspondences then verified against native NOIRLab field stars.",
+      "processingVariant": "Original downloaded JPEG preserved byte-for-byte; candidate for Alignment only, no new NOX or reconstruction.",
+      "registrationDetection": {
+        "sourceMaximum": 8000,
+        "referenceMaximum": 4000,
+        "maximumStars": 20000
+      }
+    }
+  ],
+  "nativeRemoval": {
+    "model": {
+      "path": ".local/open-star-removal/noxGeneratorColor.pb",
+      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
+    },
+    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+  },
+  "intakeStatus": "Authorized two-source optical composition. Qualified native NOX outputs are reused; source registration and removal receipts record the completed stages. This recipe does not fit a new cloud or establish physical dust density.",
+  "nativeSeparationCache": {
+    "recipe": {
+      "path": "labs/nebula/models/m45/processing-observations.json",
+      "sha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705"
+    }
+  }
+}

@@ -3,6 +3,7 @@ import test from 'node:test';
 import { fitEmissionField } from './fit.js';
 import { createEmissionField, emissionKernel, EMISSION_KERNEL_INTEGRAL, projectEmissionComponent } from './field.js';
 import { readCompilerControls, type EmissionFieldModel, type EmissionFitInput } from './field-types.js';
+import { createEmissionWindowSampler, type EmissionWindow } from './emission-window';
 
 function target(size = 128): EmissionFitInput {
   const values = new Float32Array(size * size);
@@ -26,6 +27,25 @@ function singleModel(): EmissionFieldModel {
     components: [{ id: 'g', basisId: 'g', center: [2, -3, 11], sigma: [4, 6, 9], angleRadians: 0, projectedWeight: .8, depthAssignment: 'halo-far', velocityCovered: false }],
     assumptions: { kernel: 'test', projectionUnits: 'test', depth: 'test', halo: 'test', haloRadiusArcsec: 20, equalNearFarSplit: true, velocityUncoveredComponents: 1 } };
 }
+
+test('a fitted optical window has the same clipped projection and numerical XYZ integral after serialization', () => {
+  const emissionWindow: EmissionWindow = { sourceId: 'optical', polygonArcsec: [[-90, 80], [95, 35], [65, -95], [-120, -50]], featherArcsec: 15, interpretation: 'Display crop.' };
+  const input = { ...target(64), emissionWindow }, window = createEmissionWindowSampler(emissionWindow), dx = 400 / input.width;
+  input.target = Float32Array.from(input.target, (n, p) => n * window(-200 + (p % input.width + .5) * dx, 200 - (Math.floor(p / input.width) + .5) * dx));
+  const fitted = fitEmissionField(input, { detail: .2, faint: .5, depth: 1 });
+  assert.deepEqual(fitted.field.emissionWindow, emissionWindow);
+  const field = createEmissionField(fitted.field), steps = 2048, dz = (field.bounds.max[2] - field.bounds.min[2]) / steps;
+  let outside = 0;
+  for (let p = 0; p < fitted.projection.length; p++) {
+    const x = -200 + (p % input.width + .5) * dx, y = 200 - (Math.floor(p / input.width) + .5) * dx;
+    if (window(x, y) === 0) { outside++; assert.equal(fitted.projection[p], 0); assert.equal(value(field, x, y, 0), 0); }
+    if (p % 149 !== 0) continue;
+    let integrated = 0;
+    for (let z = 0; z < steps; z++) integrated += value(field, x, y, field.bounds.min[2] + (z + .5) * dz) * dz;
+    assert.ok(Math.abs(integrated - fitted.projection[p]!) < 1e-6);
+  }
+  assert.ok(outside > 2000); assert.ok(fitted.metrics.afterRmse < fitted.metrics.beforeRmse / 3);
+});
 test('finite smooth neutral field retains XYZ support and its actual z integral matches the analytic projection', () => {
   const model = singleModel(), field = createEmissionField(model), center = model.components[0].center;
   assert.equal(field.empty, false);

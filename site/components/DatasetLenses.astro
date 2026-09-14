@@ -28,7 +28,6 @@ const focus = controlName === 'focusLens';
           >
             <img class="planet-lens-icon" src={lens.thumbnailUrl} width="14" height="14" alt="" />
             <span class="planet-lens-label">{lens.label}</span>
-            {lens.detail && <span class="planet-lens-detail">{lens.detail}</span>}
           </button>
         </div>
       ))}
@@ -75,7 +74,7 @@ const focus = controlName === 'focusLens';
           </div>}
           <DatasetLegend {objectId} {lens} />
         </DatasetDescription>
-        {lens.facts && lens.facts.length > 0 && <details class="planet-lens-facts">
+        {!focus && lens.facts && lens.facts.length > 0 && <details class="planet-lens-facts">
           <summary>Dataset details</summary>
           <ul class="planet-facts" aria-label={`${lens.label} facts`}>
             {lens.facts.map((fact) => <li>

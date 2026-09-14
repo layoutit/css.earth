@@ -8,7 +8,9 @@ import { solarSystemFocus } from '../overview-selection.mts';
 const { objectId, scope, includeObject = false } = Astro.props;
 const object = OBJECTS.find(object => object.id === objectId);
 const systemRoute = solarSystemFocus(OBJECTS)!.route;
-const crumbs: { label: string; href: string }[] = [
+const crumbs: { label: string; href?: string }[] = [
+  { label: 'Virgo Supercluster' },
+  { label: 'Local Group', href: `${systemRoute}?overview=local-group` },
   { label: 'Milky Way', href: `${systemRoute}?overview=milky-way` },
 ];
 if (scope !== 'milky-way') crumbs.push({ label: object?.systemName ?? 'Solar System', href: `${systemRoute}?overview=solar-system` });
@@ -20,7 +22,7 @@ if (object && !scope) {
 }
 // Mission cards end their trail at the body they describe, which is the current page.
 if (object && includeObject) crumbs.push({ label: object.name, href: object.route });
-const visibleCrumbs = crumbs.slice(-2);
+const visibleCrumbs = crumbs;
 const lastIsCurrent = Boolean(scope) || includeObject;
 ---
 
@@ -29,7 +31,7 @@ const lastIsCurrent = Boolean(scope) || includeObject;
     {visibleCrumbs.map((crumb, index) => <li>
       {index > 0 && <span class="planet-breadcrumb-separator" aria-hidden="true">&raquo;</span>}
       {lastIsCurrent && index === visibleCrumbs.length - 1 ? <span aria-current="page">{crumb.label}</span>
-        : <a href={crumb.href}>{crumb.label}</a>}
+        : crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span>{crumb.label}</span>}
     </li>)}
   </ol>
 </nav>

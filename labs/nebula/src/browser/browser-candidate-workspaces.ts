@@ -16,7 +16,7 @@ page.on('request', request => {
   if (/compiler-published\/(?:m42|m8|carina|ngc6357|m78|horsehead)\//.test(request.url())) baselineRequests.push(request.url());
 });
 // Model a clean installation even while the operator prepares candidates in another session.
-await page.route(url => candidates.some(id => url.pathname.includes(`/observations/${id}/`) || url.pathname.endsWith(`/compiler-published/${id}.json`)),
+await page.route(url => candidates.some(id => url.pathname.includes(`/observations/${id}/`) || url.pathname.includes(`/observations/${id}-alignment/`) || url.pathname.endsWith(`/compiler-published/${id}.json`)),
   route => route.fulfill({ status: 404, body: 'Not prepared' }));
 try {
   for (const id of candidates) {

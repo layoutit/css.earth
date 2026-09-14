@@ -68,14 +68,57 @@
         ]
       },
       "dependencies": []
+    },
+    {
+      "id": "stellar-field",
+      "path": "src/objects/m2-9/source/stellar-field.json",
+      "origin": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "sourceUrl": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "title": "Twin Jet Nebula surrounding Gaia DR3 stellar field",
+      "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
+      "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
+      "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
+      "expectedSha256": "d2d7d05e3147c312d8c2741a72aea5864a19daee2ef8caee3414ce6ed0b2425c",
+      "expectedBytes": 19733,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gavo",
+            "role": "material",
+            "evidence": "src/objects/m2-9/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "bailer-jones-2021-distances",
+            "role": "method",
+            "evidence": "src/objects/m2-9/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/m2-9/source/stellar-field.json#/provenance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+          }
+        ]
+      }
     }
   ],
   "documents": [
     {
       "id": "document-1",
       "path": "src/objects/m2-9/source/delivery.json",
-      "expectedSha256": "b4c999b140798a2e00b20d61f62d9e1c0eca1273d178b7230cbba7c8667f279d",
-      "expectedBytes": 1156,
+      "expectedSha256": "e737db3770654a8d820445967a6c886a30374f4a9aeb334389f894a01c08d12e",
+      "expectedBytes": 1382,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -104,8 +147,8 @@
     {
       "id": "document-4",
       "path": "src/objects/m2-9/source/presentation.json",
-      "expectedSha256": "881664089c3242281f6989a014efa070ed10dd9d5f30ee7c0fbb8e14d21f187c",
-      "expectedBytes": 2297,
+      "expectedSha256": "be6897bfddc28a6e8694f6b6d6bd926e9cdf8ac0279510e3dac7cfe213620f0e",
+      "expectedBytes": 2496,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."

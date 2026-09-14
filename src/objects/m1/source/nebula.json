@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-nebula-catalog@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "sources": [
+    {
+      "id": "martin-2021",
+      "url": "https://arxiv.org/pdf/2101.02709v1",
+      "sha256": "11e28a7280788f67f2d61bc5aa82626c68793af7b779e734239cd5feb4f0fef9",
+      "bytes": 17057529,
+      "citation": "Martin, Milisavljevic & Drissen (2021), 3D mapping of the Crab Nebula with SITELLE. I"
+    },
+    {
+      "id": "m1-registered-frame",
+      "url": "https://github.com/layoutit/css.earth/blob/9d0a453d4c82637ebc54277f97281e0c8426e85b/labs/nebula/models/m1/observations.json",
+      "sha256": "6adf56098e54344fe8615772b27c871e84aa86613a5bd50351f0b8168b3c94f7",
+      "bytes": 14682,
+      "citation": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid."
+    }
+  ],
+  "objects": [
+    {
+      "id": "m1",
+      "kind": "nebula",
+      "name": "Crab Nebula",
+      "aliases": [
+        "M1",
+        "NGC 1952",
+        "Crab"
+      ],
+      "positionM": [
+        6344354362860136000,
+        56860857745615634000,
+        23133406124448793000
+      ],
+      "skyPosition": {
+        "raDeg": 83.6334511837,
+        "decDeg": 22.0151236394,
+        "sourceRef": "m1-registered-frame"
+      },
+      "distance": {
+        "valuePc": 2000,
+        "sourceRef": "martin-2021",
+        "method": "Adopted 2 kpc reconstruction scale from Martin et al. (2021), section 3.4, following Trimble (1973). The cited 1.7–2.4 kpc range is not a statistical error. Lin et al. (2023) independently find 1.90 −0.18/+0.22 kpc; no distance refit is applied."
+      },
+      "classification": {
+        "name": "Supernova remnant and pulsar wind nebula",
+        "basis": "Released SITELLE ejecta samples use a conditional expansion-to-depth model; a separate published torus interpretation and authored jets describe the pulsar wind. Spectral display colors are not calibrated gas or dust density.",
+        "sourceRef": "m1-registered-frame"
+      },
+      "status": "confirmed",
+      "detailedObjectId": "m1"
+    }
+  ]
+}

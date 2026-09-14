@@ -103,9 +103,12 @@ test('switching selects one retained cloud, keeps one catalogue and never resolv
   const f = dom(), data = payload();
   const prepared = createPreparedVolumeLenses({ payload: data, resolveResource: vi.fn(path => `/prepared/${path}`) });
   const runtime = prepared.mount(f.options), root = runtime.root as unknown as FakeElement;
+  runtime.publish(publication());
+  for (const id of ['second', 'third', 'first']) runtime.selectLens(id);
   const initial = descendants(root), cloudRoots = root.children.filter(node => node.className === 'prepared-volume-lens-cloud');
   const catalogue = root.children.find(node => node.className === 'prepared-catalogue-points')!;
   const pointsBefore = [...catalogue.children], leaves = initial.filter(node => node.style.backgroundImage);
+  expect(leaves).toHaveLength(9);
   const textures = leaves.map(node => node.style.backgroundImage), geometry = leaves.map(node => node.style.transform);
   runtime.publish(publication());
   for (const id of ['second', 'third', 'first']) {
@@ -174,7 +177,9 @@ test('distant prepared images suspend the retained slice renderer and hand off b
   const detail = initial.find(node => node.className === 'css-volume-detail')!;
   const distant = initial.find(node => node.className === 'css-volume-impostors')!;
   const scenes = initial.filter(node => node.className === 'css-volume-scene');
+  expect(descendants(root).filter(node => node.style.backgroundImage)).toHaveLength(0);
   runtime.publish(publication(100));
+  expect(descendants(root).filter(node => node.style.backgroundImage && !node.dataset.volumeImpostor)).toHaveLength(0);
   expect(detail.style.display).toBe('none'); expect(distant.style.display).toBe('block');
   expect(distant.dataset.activeViews).toBe('1');
   const inactiveTransforms = scenes.map(scene => scene.style.transform);
@@ -212,28 +217,27 @@ test('saved star visibility stays toggleable with retained points and committed 
   runtime.destroy(); runtime.setStarsVisible(false); expect(notify).toHaveBeenCalledTimes(count);
 });
 
-test('the complete fixed lens resource bank participates in asynchronous resource readiness', async () => {
-  const resolve = vi.fn((path: string) => `/prepared/${path}`);
-  const prepared = createPreparedVolumeLenses({ payload: payload(), resolveResource: resolve });
-  const decodes = new Map<string, () => void>();
-  const createResources: typeof createPreparedResidency = options => createPreparedResidency({ ...options,
-    createImage: () => ({ src: '', decoding: 'async', naturalWidth: 1, naturalHeight: 1,
-      decode() { return new Promise<void>(done => decodes.set(this.src, done)); } }),
+test('declared lens resources do not download at startup or for inactive lenses and axes', async () => {
+  const prepared = createPreparedVolumeLenses({ payload: payload(), resolveResource: path => '/prepared/' + path });
+  const createImage = vi.fn(() => ({ src: '', decoding: 'async' as const, naturalWidth: 1, naturalHeight: 1, decode: async () => {} }));
+  const lease = prepareObjectResources(prepared.assets, {
+    createResources: options => createPreparedResidency({ ...options, createImage }),
   });
-  const lease = prepareObjectResources(prepared.assets, { createResources });
-  let ready = false; void lease.ready.then(() => { ready = true; });
-  expect(prepared.assets.startup).toHaveLength(9); expect(resolve).toHaveBeenCalledTimes(9);
-  expect(prepared.assets.pools[0]).toMatchObject({ retention: 'mount', capacity: 9 });
-  await vi.waitFor(() => expect(decodes.size).toBe(4)); expect(ready).toBe(false);
-  const resolved = new Set<string>();
-  while (resolved.size < 9) {
-    await vi.waitFor(() => expect(decodes.size).toBeGreaterThan(resolved.size));
-    for (const [url, finish] of decodes) if (!resolved.has(url)) { resolved.add(url); finish(); }
-  }
-  await lease.ready; expect(ready).toBe(true);
+  await lease.ready;
+  expect(prepared.assets.entries).toHaveLength(9);
+  expect(prepared.assets.startup).toEqual([]);
+  expect(createImage).not.toHaveBeenCalled();
   const f = dom(), runtime = prepared.mount(f.options);
-  runtime.publish(publication()); runtime.selectLens('third');
-  expect(resolve).toHaveBeenCalledTimes(9); expect(decodes.size).toBe(9);
+  const attached = () => [...new Set(descendants(runtime.root as unknown as FakeElement)
+    .map(node => node.style.backgroundImage).filter(Boolean))];
+  expect(attached()).toEqual([]);
+  runtime.publish(publication());
+  expect(attached()).toEqual(['url("/prepared/first/z.webp")']);
+  runtime.publish(publication(100), false);
+  runtime.selectLens('second');
+  expect(attached()).toEqual(['url("/prepared/first/z.webp")']);
+  runtime.publish(publication());
+  expect(attached()).toEqual(['url("/prepared/first/z.webp")', 'url("/prepared/second/z.webp")']);
   runtime.destroy(); lease.destroy();
 });
 

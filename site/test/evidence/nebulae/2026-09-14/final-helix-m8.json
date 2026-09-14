@@ -1,0 +1,937 @@
+{
+  "result": "PASS",
+  "inputs": [
+    {
+      "id": "helix",
+      "sourceResult": "2794e4cc5c3a11f4fb19c7290d75b721362c9f4fdce8686ba58fdbc22caba292",
+      "payloadSha256": "ec721e6c151bdc4ec26b1ca042ffb92797c6e4049aa1de4c61f1183da6e14989"
+    },
+    {
+      "id": "m8",
+      "sourceResult": "7545a7a3af301ef4cc288c84e4343262add505c4db1f8bff8d1c836a7ad8c3e6",
+      "payloadSha256": "3bdbd0a131791ba83048ded4a997bd89c8d529a03bba449a880d453729432588"
+    }
+  ],
+  "captures": [
+    {
+      "id": "helix",
+      "lens": "eso-wfi",
+      "view": "front",
+      "path": "output/nebula-final-visual/helix-eso-wfi-front.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=helix&focusLens=eso-wfi&v=QMbCoCs7yYm4b8KHgQUPJ-C0QzacFACLypVBQsczQAAAAD_eOAGS3miuP9QoUbvHmoe_3T2AoiYCsgABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.384122771954,-0.328423771021,-0.862894850312,0,0.923282024122,0.136637610182,0.35899925824,0,0,-0.934595094205,0.355713381654,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.032922792714,0.311288365929,0.949744926966,0,0.885203480674,0.450277374012,-0.116897416183,0,-0.46403756316,0.836869041436,-0.29037788486,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.8093306503243156,
+        "distance": 2835792056469.0215,
+        "distanceKilometers": 6364066237695155,
+        "distanceRadii": 9147716311.190392,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.91485199607584,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -8888936350940.217,
+          -3230362887420.088,
+          6364059210074773
+        ]
+      },
+      "points": [
+        {
+          "id": "eso-wfi-1508",
+          "x": 682.080322265625,
+          "y": 486.19268798828125,
+          "width": 0.640625,
+          "visibility": "visible",
+          "opacity": 0.780392
+        },
+        {
+          "id": "eso-vista-12992",
+          "x": 569.6380615234375,
+          "y": 343.10394287109375,
+          "width": 0.953125,
+          "visibility": "visible",
+          "opacity": 0.745098
+        },
+        {
+          "id": "eso-vista-13414",
+          "x": 631.3311157226562,
+          "y": 360.197998046875,
+          "width": 0.96875,
+          "visibility": "visible",
+          "opacity": 0.658824
+        },
+        {
+          "id": "eso-vista-11915",
+          "x": 670.7803955078125,
+          "y": 351.268798828125,
+          "width": 1.15625,
+          "visibility": "visible",
+          "opacity": 0.54902
+        },
+        {
+          "id": "eso-vista-17840",
+          "x": 753.54345703125,
+          "y": 346.6527404785156,
+          "width": 0.984375,
+          "visibility": "visible",
+          "opacity": 0.470588
+        },
+        {
+          "id": "eso-vista-10069",
+          "x": 791.7950439453125,
+          "y": 336.8615417480469,
+          "width": 1.1875,
+          "visibility": "visible",
+          "opacity": 0.588235
+        },
+        {
+          "id": "eso-wide-785",
+          "x": 829.9486694335938,
+          "y": 585.181396484375,
+          "width": 1.03125,
+          "visibility": "visible",
+          "opacity": 0.898039
+        }
+      ]
+    },
+    {
+      "id": "helix",
+      "lens": "eso-vista",
+      "view": "front",
+      "path": "output/nebula-final-visual/helix-eso-vista-front.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=helix&focusLens=eso-vista&v=QMbCoCs7yYm4b8KHgQUPJ-C0QzacFACLypVBQsczQAAAAD_eOAGS3miuP9QoUbvHmoe_3T2AoiYCsgABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.384122771954,-0.328423771021,-0.862894850312,0,0.923282024122,0.136637610182,0.35899925824,0,0,-0.934595094205,0.355713381654,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.032922792714,0.311288365929,0.949744926966,0,0.885203480674,0.450277374012,-0.116897416183,0,-0.46403756316,0.836869041436,-0.29037788486,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.8093306503243156,
+        "distance": 2835792056469.0215,
+        "distanceKilometers": 6364066237695155,
+        "distanceRadii": 9147716311.190392,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.91485199607584,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -8888936350940.217,
+          -3230362887420.088,
+          6364059210074773
+        ]
+      },
+      "points": [
+        {
+          "id": "eso-wfi-1508",
+          "x": 682.080322265625,
+          "y": 486.19268798828125,
+          "width": 0.640625,
+          "visibility": "visible",
+          "opacity": 0.780392
+        },
+        {
+          "id": "eso-vista-12992",
+          "x": 569.6380615234375,
+          "y": 343.10394287109375,
+          "width": 0.953125,
+          "visibility": "visible",
+          "opacity": 0.745098
+        },
+        {
+          "id": "eso-vista-13414",
+          "x": 631.3311157226562,
+          "y": 360.197998046875,
+          "width": 0.96875,
+          "visibility": "visible",
+          "opacity": 0.658824
+        },
+        {
+          "id": "eso-vista-11915",
+          "x": 670.7803955078125,
+          "y": 351.268798828125,
+          "width": 1.15625,
+          "visibility": "visible",
+          "opacity": 0.54902
+        },
+        {
+          "id": "eso-vista-17840",
+          "x": 753.54345703125,
+          "y": 346.6527404785156,
+          "width": 0.984375,
+          "visibility": "visible",
+          "opacity": 0.470588
+        },
+        {
+          "id": "eso-vista-10069",
+          "x": 791.7950439453125,
+          "y": 336.8615417480469,
+          "width": 1.1875,
+          "visibility": "visible",
+          "opacity": 0.588235
+        },
+        {
+          "id": "eso-wide-785",
+          "x": 829.9486694335938,
+          "y": 585.181396484375,
+          "width": 1.03125,
+          "visibility": "visible",
+          "opacity": 0.898039
+        }
+      ]
+    },
+    {
+      "id": "helix",
+      "lens": "eso-wide",
+      "view": "front",
+      "path": "output/nebula-final-visual/helix-eso-wide-front.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=helix&focusLens=eso-wide&v=QMbCoCs7yYm4b8KHgQUPJ-C0QzacFACLypVBQsczQAAAAD_eOAGS3miuP9QoUbvHmoe_3T2AoiYCsgABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.384122771954,-0.328423771021,-0.862894850312,0,0.923282024122,0.136637610182,0.35899925824,0,0,-0.934595094205,0.355713381654,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.032922792714,0.311288365929,0.949744926966,0,0.885203480674,0.450277374012,-0.116897416183,0,-0.46403756316,0.836869041436,-0.29037788486,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.8093306503243156,
+        "distance": 2835792056469.0215,
+        "distanceKilometers": 6364066237695155,
+        "distanceRadii": 9147716311.190392,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.91485199607584,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -8888936350940.217,
+          -3230362887420.088,
+          6364059210074773
+        ]
+      },
+      "points": [
+        {
+          "id": "eso-wfi-1508",
+          "x": 682.080322265625,
+          "y": 486.19268798828125,
+          "width": 0.640625,
+          "visibility": "visible",
+          "opacity": 0.780392
+        },
+        {
+          "id": "eso-vista-12992",
+          "x": 569.6380615234375,
+          "y": 343.10394287109375,
+          "width": 0.953125,
+          "visibility": "visible",
+          "opacity": 0.745098
+        },
+        {
+          "id": "eso-vista-13414",
+          "x": 631.3311157226562,
+          "y": 360.197998046875,
+          "width": 0.96875,
+          "visibility": "visible",
+          "opacity": 0.658824
+        },
+        {
+          "id": "eso-vista-11915",
+          "x": 670.7803955078125,
+          "y": 351.268798828125,
+          "width": 1.15625,
+          "visibility": "visible",
+          "opacity": 0.54902
+        },
+        {
+          "id": "eso-vista-17840",
+          "x": 753.54345703125,
+          "y": 346.6527404785156,
+          "width": 0.984375,
+          "visibility": "visible",
+          "opacity": 0.470588
+        },
+        {
+          "id": "eso-vista-10069",
+          "x": 791.7950439453125,
+          "y": 336.8615417480469,
+          "width": 1.1875,
+          "visibility": "visible",
+          "opacity": 0.588235
+        },
+        {
+          "id": "eso-wide-785",
+          "x": 829.9486694335938,
+          "y": 585.181396484375,
+          "width": 1.03125,
+          "visibility": "visible",
+          "opacity": 0.898039
+        }
+      ]
+    },
+    {
+      "id": "helix",
+      "lens": "eso-wfi",
+      "view": "oblique",
+      "path": "output/nebula-final-visual/helix-eso-wfi-oblique.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=helix&focusLens=eso-wfi&v=QIZDKrAYHcIUEsKHgQUPUTzwQzJcQy79YjhBQsczQAAAAL_UOl8orgyvv-AbDMWBcdO_4fXKsGb3rwABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.170196878369,-0.32842377102,-0.929069883928,0,0.964723766233,0.136637610183,-0.225029372189,0,0.200850883638,-0.934595094205,0.293582922578,0,0,0,0,1)",
+          "skybox": "matrix3d(0.509093971288,0.311288365928,0.802447920414,0,0.664584712834,0.450277374013,-0.596303083651,0,-0.546946414659,0.836869041436,0.022356107254,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.7318871930208465,
+        "distance": 2846771812074.279,
+        "distanceKilometers": 6388706934387341,
+        "distanceRadii": 9183134877.658964,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 143.99116241438253,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          3755983509719561,
+          -3230362888743.617,
+          5167993201713720
+        ]
+      },
+      "points": [
+        {
+          "id": "eso-wfi-1508",
+          "x": 711.2797241210938,
+          "y": 487.6158142089844,
+          "width": 0.578125,
+          "visibility": "visible",
+          "opacity": 0.780392
+        },
+        {
+          "id": "eso-vista-12992",
+          "x": 596.2509155273438,
+          "y": 350.88128662109375,
+          "width": 0.90625,
+          "visibility": "visible",
+          "opacity": 0.745098
+        },
+        {
+          "id": "eso-vista-13414",
+          "x": 653.575439453125,
+          "y": 370.93243408203125,
+          "width": 0.890625,
+          "visibility": "visible",
+          "opacity": 0.658824
+        },
+        {
+          "id": "eso-vista-11915",
+          "x": 684.9833984375,
+          "y": 364.9599304199219,
+          "width": 1.046875,
+          "visibility": "visible",
+          "opacity": 0.54902
+        },
+        {
+          "id": "eso-vista-17840",
+          "x": 749.7147827148438,
+          "y": 365.5564880371094,
+          "width": 0.859375,
+          "visibility": "visible",
+          "opacity": 0.470588
+        },
+        {
+          "id": "eso-vista-10069",
+          "x": 773.7304077148438,
+          "y": 358.94482421875,
+          "width": 1.03125,
+          "visibility": "visible",
+          "opacity": 0.588235
+        },
+        {
+          "id": "eso-wide-785",
+          "x": 793.6778564453125,
+          "y": 572.75830078125,
+          "width": 0.875,
+          "visibility": "visible",
+          "opacity": 0.898039
+        }
+      ]
+    },
+    {
+      "id": "helix",
+      "lens": "eso-vista",
+      "view": "oblique",
+      "path": "output/nebula-final-visual/helix-eso-vista-oblique.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=helix&focusLens=eso-vista&v=QIZDKrAYHcIUEsKHgQUPUTzwQzJcQy79YjhBQsczQAAAAL_UOl8orgyvv-AbDMWBcdO_4fXKsGb3rwABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.170196878369,-0.32842377102,-0.929069883928,0,0.964723766233,0.136637610183,-0.225029372189,0,0.200850883638,-0.934595094205,0.293582922578,0,0,0,0,1)",
+          "skybox": "matrix3d(0.509093971288,0.311288365928,0.802447920414,0,0.664584712834,0.450277374013,-0.596303083651,0,-0.546946414659,0.836869041436,0.022356107254,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.7318871930208465,
+        "distance": 2846771812074.279,
+        "distanceKilometers": 6388706934387341,
+        "distanceRadii": 9183134877.658964,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 143.99116241438253,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          3755983509719561,
+          -3230362888743.617,
+          5167993201713720
+        ]
+      },
+      "points": [
+        {
+          "id": "eso-wfi-1508",
+          "x": 711.2797241210938,
+          "y": 487.6158142089844,
+          "width": 0.578125,
+          "visibility": "visible",
+          "opacity": 0.780392
+        },
+        {
+          "id": "eso-vista-12992",
+          "x": 596.2509155273438,
+          "y": 350.88128662109375,
+          "width": 0.90625,
+          "visibility": "visible",
+          "opacity": 0.745098
+        },
+        {
+          "id": "eso-vista-13414",
+          "x": 653.575439453125,
+          "y": 370.93243408203125,
+          "width": 0.890625,
+          "visibility": "visible",
+          "opacity": 0.658824
+        },
+        {
+          "id": "eso-vista-11915",
+          "x": 684.9833984375,
+          "y": 364.9599304199219,
+          "width": 1.046875,
+          "visibility": "visible",
+          "opacity": 0.54902
+        },
+        {
+          "id": "eso-vista-17840",
+          "x": 749.7147827148438,
+          "y": 365.5564880371094,
+          "width": 0.859375,
+          "visibility": "visible",
+          "opacity": 0.470588
+        },
+        {
+          "id": "eso-vista-10069",
+          "x": 773.7304077148438,
+          "y": 358.94482421875,
+          "width": 1.03125,
+          "visibility": "visible",
+          "opacity": 0.588235
+        },
+        {
+          "id": "eso-wide-785",
+          "x": 793.6778564453125,
+          "y": 572.75830078125,
+          "width": 0.875,
+          "visibility": "visible",
+          "opacity": 0.898039
+        }
+      ]
+    },
+    {
+      "id": "helix",
+      "lens": "eso-wide",
+      "view": "oblique",
+      "path": "output/nebula-final-visual/helix-eso-wide-oblique.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=helix&focusLens=eso-wide&v=QIZDKrAYHcIUEsKHgQUPUTzwQzJcQy79YjhBQsczQAAAAL_UOl8orgyvv-AbDMWBcdO_4fXKsGb3rwABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.170196878369,-0.32842377102,-0.929069883928,0,0.964723766233,0.136637610183,-0.225029372189,0,0.200850883638,-0.934595094205,0.293582922578,0,0,0,0,1)",
+          "skybox": "matrix3d(0.509093971288,0.311288365928,0.802447920414,0,0.664584712834,0.450277374013,-0.596303083651,0,-0.546946414659,0.836869041436,0.022356107254,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.7318871930208465,
+        "distance": 2846771812074.279,
+        "distanceKilometers": 6388706934387341,
+        "distanceRadii": 9183134877.658964,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 143.99116241438253,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          3755983509719561,
+          -3230362888743.617,
+          5167993201713720
+        ]
+      },
+      "points": [
+        {
+          "id": "eso-wfi-1508",
+          "x": 711.2797241210938,
+          "y": 487.6158142089844,
+          "width": 0.578125,
+          "visibility": "visible",
+          "opacity": 0.780392
+        },
+        {
+          "id": "eso-vista-12992",
+          "x": 596.2509155273438,
+          "y": 350.88128662109375,
+          "width": 0.90625,
+          "visibility": "visible",
+          "opacity": 0.745098
+        },
+        {
+          "id": "eso-vista-13414",
+          "x": 653.575439453125,
+          "y": 370.93243408203125,
+          "width": 0.890625,
+          "visibility": "visible",
+          "opacity": 0.658824
+        },
+        {
+          "id": "eso-vista-11915",
+          "x": 684.9833984375,
+          "y": 364.9599304199219,
+          "width": 1.046875,
+          "visibility": "visible",
+          "opacity": 0.54902
+        },
+        {
+          "id": "eso-vista-17840",
+          "x": 749.7147827148438,
+          "y": 365.5564880371094,
+          "width": 0.859375,
+          "visibility": "visible",
+          "opacity": 0.470588
+        },
+        {
+          "id": "eso-vista-10069",
+          "x": 773.7304077148438,
+          "y": 358.94482421875,
+          "width": 1.03125,
+          "visibility": "visible",
+          "opacity": 0.588235
+        },
+        {
+          "id": "eso-wide-785",
+          "x": 793.6778564453125,
+          "y": 572.75830078125,
+          "width": 0.875,
+          "visibility": "visible",
+          "opacity": 0.898039
+        }
+      ]
+    },
+    {
+      "id": "m8",
+      "lens": "eso-optical",
+      "view": "front",
+      "path": "output/nebula-final-visual/m8-eso-optical-front.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=eso-optical&v=QMbC4N7nfErIcUK27IPGgWhDQ2B3R65Or05BQsczQAAAAD_hWzU4g4azP22s0FUyi8K_dvtlG8aNHQABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.999910792701,-0.005497877362,-0.01217292012,0,0.013356894838,0.411576715797,0.911277235738,0,0,-0.911358535571,0.41161343472,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.929611298959,0.107712339322,0.352449525673,0,0.304166794379,0.764237895947,0.568702840901,0,-0.208099092164,0.635876085993,-0.743206794679,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.8868006336042574,
+        "distance": 16521881804443.9,
+        "distanceKilometers": 37078300552747160,
+        "distanceRadii": 53296392917.56097,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.76740347235923,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -148396419733059.53,
+          25205078917480.26,
+          37077995025169010
+        ]
+      },
+      "points": []
+    },
+    {
+      "id": "m8",
+      "lens": "eso-vista",
+      "view": "front",
+      "path": "output/nebula-final-visual/m8-eso-vista-front.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=eso-vista&v=QMbC4N7nfErIcUK27IPGgWhDQ2B3R65Or05BQsczQAAAAD_hWzU4g4azP22s0FUyi8K_dvtlG8aNHQABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.999910792701,-0.005497877362,-0.01217292012,0,0.013356894838,0.411576715797,0.911277235738,0,0,-0.911358535571,0.41161343472,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.929611298959,0.107712339322,0.352449525673,0,0.304166794379,0.764237895947,0.568702840901,0,-0.208099092164,0.635876085993,-0.743206794679,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.8868006336042574,
+        "distance": 16521881804443.9,
+        "distanceKilometers": 37078300552747160,
+        "distanceRadii": 53296392917.56097,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.76740347235923,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -148396419733059.53,
+          25205078917480.26,
+          37077995025169010
+        ]
+      },
+      "points": []
+    },
+    {
+      "id": "m8",
+      "lens": "spitzer-mid-infrared",
+      "view": "front",
+      "path": "output/nebula-final-visual/m8-spitzer-mid-infrared-front.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=spitzer-mid-infrared&v=QMbC4N7nfErIcUK27IPGgWhDQ2B3R65Or05BQsczQAAAAD_hWzU4g4azP22s0FUyi8K_dvtlG8aNHQABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.999910792701,-0.005497877362,-0.01217292012,0,0.013356894838,0.411576715797,0.911277235738,0,0,-0.911358535571,0.41161343472,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.929611298959,0.107712339322,0.352449525673,0,0.304166794379,0.764237895947,0.568702840901,0,-0.208099092164,0.635876085993,-0.743206794679,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.8868006336042574,
+        "distance": 16521881804443.9,
+        "distanceKilometers": 37078300552747160,
+        "distanceRadii": 53296392917.56097,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 179.76740347235923,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          -148396419733059.53,
+          25205078917480.26,
+          37077995025169010
+        ]
+      },
+      "points": []
+    },
+    {
+      "id": "m8",
+      "lens": "eso-optical",
+      "view": "oblique",
+      "path": "output/nebula-final-visual/m8-eso-optical-oblique.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=eso-optical&v=QMZDVHEv_rnQFEK27IPGteZlQ1n1axe8Nu1BQsczQAAAAD_ghyzijUAfP9AcUaOLYv6_xTPgEz0-8QABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.818388641224,-0.005497877362,-0.574638847677,0,0.52556975335,0.411576715798,0.744567687572,0,0.232414427863,-0.911358535571,0.33971922725,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.568233341131,0.107712339323,0.815787169135,0,0.572153466987,0.764237895948,0.297625217793,0,-0.591397714985,0.635876085992,-0.495893450781,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.7496863862571161,
+        "distance": 16576691665671.611,
+        "distanceKilometers": 37201304489702380,
+        "distanceRadii": 53473198921.521324,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 141.77997407701346,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          23015801940820050,
+          25205078930918.395,
+          29226858905131956
+        ]
+      },
+      "points": []
+    },
+    {
+      "id": "m8",
+      "lens": "eso-vista",
+      "view": "oblique",
+      "path": "output/nebula-final-visual/m8-eso-vista-oblique.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=eso-vista&v=QMZDVHEv_rnQFEK27IPGteZlQ1n1axe8Nu1BQsczQAAAAD_ghyzijUAfP9AcUaOLYv6_xTPgEz0-8QABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.818388641224,-0.005497877362,-0.574638847677,0,0.52556975335,0.411576715798,0.744567687572,0,0.232414427863,-0.911358535571,0.33971922725,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.568233341131,0.107712339323,0.815787169135,0,0.572153466987,0.764237895948,0.297625217793,0,-0.591397714985,0.635876085992,-0.495893450781,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.7496863862571161,
+        "distance": 16576691665671.611,
+        "distanceKilometers": 37201304489702380,
+        "distanceRadii": 53473198921.521324,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 141.77997407701346,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          23015801940820050,
+          25205078930918.395,
+          29226858905131956
+        ]
+      },
+      "points": []
+    },
+    {
+      "id": "m8",
+      "lens": "spitzer-mid-infrared",
+      "view": "oblique",
+      "path": "output/nebula-final-visual/m8-spitzer-mid-infrared-oblique.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=m8&focusLens=spitzer-mid-infrared&v=QMZDVHEv_rnQFEK27IPGteZlQ1n1axe8Nu1BQsczQAAAAD_ghyzijUAfP9AcUaOLYv6_xTPgEz0-8QABAAAAAAAAAAA",
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.818388641224,-0.005497877362,-0.574638847677,0,0.52556975335,0.411576715798,0.744567687572,0,0.232414427863,-0.911358535571,0.33971922725,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.568233341131,0.107712339323,0.815787169135,0,0.572153466987,0.764237895948,0.297625217793,0,-0.591397714985,0.635876085992,-0.495893450781,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": -105,
+        "zoom": 0.7496863862571161,
+        "distance": 16576691665671.611,
+        "distanceKilometers": 37201304489702380,
+        "distanceRadii": 53473198921.521324,
+        "levelOfDetail": {
+          "stage": "marker",
+          "silhouetteDiameter": 0,
+          "billboardOpacity": 0,
+          "markerOpacity": 1,
+          "proxyOpacity": 1
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 141.77997407701346,
+        "silhouetteRadius": 0,
+        "bodyCenterKilometers": [
+          23015801940820050,
+          25205078930918.395,
+          29226858905131956
+        ]
+      },
+      "points": []
+    }
+  ],
+  "errors": [],
+  "failed": []
+}
