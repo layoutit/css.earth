@@ -5,7 +5,7 @@ import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
-import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.mts';
 const directory=resolve(import.meta.dirname,'../../../../src/objects/toutatis'),root=resolve(directory,'source');
@@ -23,7 +23,12 @@ test('Toutatis retains the published kilometer axes, closed volume and concave n
  assert.ok(Math.abs(topology.signedVolumeCubicMeters/1e9-7.681121590257912)<1e-10);
  for(const[lon,lat,radius]of [[0,90,2449.7862822961642],[0,-90,1980.9096282333576],[0,0,1160.9794404202087],[90,0,876.140196401419],[180,0,1072.3449403952625],[270,0,847.7430851125813]] as const)assert.ok(Math.abs(required(mesh.sample(lon,lat))-radius)<1e-8);
  const lon=193.3851258165014*Math.PI/180,lat=63.30780877427701*Math.PI/180,d=[Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat)],first=required(mesh.intersect([0,0,0],d)),second=required(mesh.intersect(d.map(v=>v*(first.radius+.001)),d));
- assert.ok(second.radius>70&&second.radius<80,'The neck has more than one surface on a source ray');assert.deepEqual(config.raster.scientific,[],'A single-valued radial scalar cannot color this entire concave surface');
+ assert.ok(second.radius>70&&second.radius<80,'The neck has more than one surface on a source ray');
+ const sampler=createShapeSurfaceSampler(mesh,config.raster.scientific.find((lens:{id:string})=>lens.id==='elevation'));
+ const outer=required(sampler.samplePoint([-757.9932613463443,-180.37153357385466,1549.709995282336]));
+ assert.equal(outer.faceId,10456);assert.ok(Math.abs(outer.value-510.55721838405475)<1e-7);
+ assert.ok(Math.abs(first.radius-1224-61.60656447048087)<1e-7,'The rejected first-ray value stays distinct from the outer neck surface');
+ assert.equal(sampler.samplePoint([0,0,0]),null,'Out-of-bound transfers stay missing');
 });
 
 test('Toutatis preserves connected geometry as 800 native raster triangles with a fixed illustrative orientation',async()=>{
