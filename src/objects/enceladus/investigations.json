@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "enceladus",
+  "entries": [
+    {
+      "id": "schenk-scientific-rasters",
+      "subject": "Schenk scientific raster products",
+      "status": "included",
+      "finding": "Selected products supply documented numeric scientific views; no-data and special values remain missing.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://doi.org/10.1029/2023JE008054"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "corrected-v2-dsk",
+      "subject": "Corrected Enceladus v2 DSK",
+      "status": "deferred",
+      "finding": "The v2 DSK is retained as a source-intake and recipe proposal. Image-to-v2 alignment, prepared error, browser limb and feature qualification remain pending.",
+      "revisitWhen": "Image alignment and the prepared-shape qualification record are completed for the v2 source.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://doi.org/10.1029/2023JE008054"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "superseded-v1-dsk",
+      "subject": "2024 original v1 DSK and associated harmonics",
+      "status": "excluded",
+      "finding": "README records that NAIF reprocessed imagery after errors in the original model.",
+      "revisitWhen": "A documented reconciled replacement changes the source decision.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://doi.org/10.1029/2023JE008054"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "atmosphere-and-plume",
+      "subject": "Atmosphere, plume and interior presentation alternatives",
+      "status": "excluded",
+      "finding": "No selected observed surface map supports a visible atmosphere, invented plume animation or interior lens.",
+      "revisitWhen": "A source-backed mapped product supports the claimed visible quantity.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://doi.org/10.1029/2023JE008054"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "six-vims-chemistry-observations",
+      "subject": "Six calibrated Cassini VIMS observations with navigation backplanes",
+      "status": "included",
+      "finding": "The selected six-observation set supplies Infrared ratio and Ice absorption under the pinned channel, mask, overlap and coverage rules. It remains partially supported and is not photometrically corrected.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/vims-chemistry/INTERPRETATION.md",
+        "https://vims.univ-nantes.fr/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

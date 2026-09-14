@@ -1,0 +1,191 @@
+{
+  "status": "not-promoted",
+  "pipelineCommit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d",
+  "method": "Same source mesh, source frames and registered cameras. Fixed production level gains are tested at 48 barycentric points per display triangle, disjoint from the production fit samples. Each pair compares identical source points accepted by both treatments. Coverage uses the production area-weighted sampler and is separate from this overlap comparison.",
+  "limitations": [
+    "Diagnostic parameter trials, not qualified reproductions of the three original publications. The numerical parameters were checked in Li et al. 2013 Table 6; the original papers’ H-function approximation was not verified. These trials use the 1981 approximation.",
+    "A lower overlap error is not proof of more accurate albedo. Smooth source normals do not recover unresolved topography or remove coma.",
+    "Offline source-sampler snapshots and a full material-owner bake were inspected. Wild 2 was also checked in the running application; no screenshot is retained in this numerical record.",
+    "No runtime dataset is replaced. Original photographed shadows remain valid in the delivered views."
+  ],
+  "sourceUrls": [
+    "https://arxiv.org/abs/1310.4165",
+    "https://doi.org/10.1016/j.icarus.2009.06.002",
+    "https://www.lpi.usra.edu/meetings/acm2008/pdf/8290.pdf"
+  ],
+  "preparationSha256": "c7b0f7fa08935328332c522be8e312e02e17795c8d60e8aed3fd821b34fb6c86",
+  "sourcePins": [
+    {
+      "path": "shape/wild2_cart_full.tab",
+      "expectedBytes": 1392840,
+      "expectedSha256": "e3950d0afae8b0c1ede31f64197ec68c215d9814bb41c101158912edbaa61e80"
+    },
+    {
+      "path": "photography/navcam/n2073we02_rr.fit",
+      "expectedBytes": 13668480,
+      "expectedSha256": "f6944a7e778a556afd929e365585bbd0919ccdd573e1422b4b2c0379b33c035f"
+    },
+    {
+      "path": "photography/navcam/n2073we02_rr.lbl",
+      "expectedBytes": 18720,
+      "expectedSha256": "005c37d785b6622598e76ecb528feb07ac82d16f7fb7dbf5bfa35ad7f15c6180"
+    },
+    {
+      "path": "photography/navcam/n2073we02_rr.json",
+      "expectedBytes": 10236,
+      "expectedSha256": "0267d6fe1f8a4c779b0821783337227af8b694bbf060848a8f4c0ab805c02239"
+    },
+    {
+      "path": "photography/navcam/n2075we02_rr.fit",
+      "expectedBytes": 13668480,
+      "expectedSha256": "49729e94642129eccf402c03241a21717c31150725cc48826ecf31afa03d6fb0"
+    },
+    {
+      "path": "photography/navcam/n2075we02_rr.lbl",
+      "expectedBytes": 18720,
+      "expectedSha256": "ff61f12cc61b6113de1ebca60526de757fbb1aeb41663267d8833d5684f93e00"
+    },
+    {
+      "path": "photography/navcam/n2075we02_rr.json",
+      "expectedBytes": 22375,
+      "expectedSha256": "ee8baf4db4bdddc9606823ead83f6585709b7f04be79b2c2be80fc8c28e39e6a"
+    },
+    {
+      "path": "photography/navcam/n2077we02_rr.fit",
+      "expectedBytes": 13668480,
+      "expectedSha256": "9973470135bcc89507adceaba79f4bd2d499893277f62eabebee353d96b2b575"
+    },
+    {
+      "path": "photography/navcam/n2077we02_rr.lbl",
+      "expectedBytes": 18720,
+      "expectedSha256": "a99e07f4e073b00a448122f111b99660d55f6d172aa516befde9b40dfcfb59d0"
+    },
+    {
+      "path": "photography/navcam/n2077we02_rr.json",
+      "expectedBytes": 16501,
+      "expectedSha256": "33930e6c289d2e6325455bd36947806fb80c6bf482ce03cb77449bbcfd131771"
+    },
+    {
+      "path": "photography/navcam/n2079we02_rr.fit",
+      "expectedBytes": 13668480,
+      "expectedSha256": "bf498d851c2189b0baca42c3f79a3969c1cc95d2f28e07f08f3141a7eea79b34"
+    },
+    {
+      "path": "photography/navcam/n2079we02_rr.lbl",
+      "expectedBytes": 18720,
+      "expectedSha256": "74248fbcbc0ae603ea29c950cc8f93ea377084e53da95542da0593870292b984"
+    },
+    {
+      "path": "photography/navcam/n2079we02_rr.json",
+      "expectedBytes": 8964,
+      "expectedSha256": "803cbfb265ad3020894b642bef466fb3a1acd27bfe400c0ffbcbd984fa45c7cd"
+    }
+  ],
+  "cases": [
+    {
+      "lens": "navcam",
+      "model": "li-2009-hapke",
+      "beforeCoverage": 0.39516951024124325,
+      "afterCoverage": 0.29730845176015946,
+      "improvedPairs": 5,
+      "pairCount": 6,
+      "pairs": [
+        {
+          "a": "n2075we02-rr",
+          "b": "n2073we02-rr",
+          "samples": 13682,
+          "before": 0.09510483918358115,
+          "after": 0.06380633361172014
+        },
+        {
+          "a": "n2075we02-rr",
+          "b": "n2077we02-rr",
+          "samples": 12291,
+          "before": 0.05480058356784915,
+          "after": 0.052286634504624264
+        },
+        {
+          "a": "n2075we02-rr",
+          "b": "n2079we02-rr",
+          "samples": 9766,
+          "before": 0.06643896952185181,
+          "after": 0.06505086102748651
+        },
+        {
+          "a": "n2073we02-rr",
+          "b": "n2077we02-rr",
+          "samples": 12024,
+          "before": 0.12195544398191825,
+          "after": 0.09739852668629312
+        },
+        {
+          "a": "n2073we02-rr",
+          "b": "n2079we02-rr",
+          "samples": 9668,
+          "before": 0.1136681249226641,
+          "after": 0.09872070804530744
+        },
+        {
+          "a": "n2077we02-rr",
+          "b": "n2079we02-rr",
+          "samples": 9740,
+          "before": 0.036356735317745074,
+          "after": 0.038134786032420695
+        }
+      ],
+      "parameters": {
+        "schema": "cssearth-photometric-model@1",
+        "id": "li-2009-hapke",
+        "instrument": "Stardust NAVCAM",
+        "filter": "Broadband clear",
+        "quantity": "radiance-factor",
+        "model": {
+          "family": "hapke",
+          "singleScatteringAlbedo": 0.038,
+          "hFunction": "hapke-1981",
+          "phaseFunction": {
+            "form": "henyey-greenstein",
+            "asymmetry": -0.52
+          },
+          "shadowHiding": {
+            "amplitude": 1,
+            "width": 0.01
+          },
+          "roughnessDegrees": 27
+        },
+        "fit": {
+          "phaseDegrees": [
+            11,
+            100
+          ],
+          "incidenceDegrees": [
+            0,
+            75
+          ],
+          "emissionDegrees": [
+            0,
+            75
+          ]
+        }
+      },
+      "reference": {
+        "model": "photometry/li-2009-hapke.json",
+        "referenceDegrees": {
+          "incidence": 40,
+          "emission": 0,
+          "phase": 40
+        },
+        "limits": {
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 75,
+          "phaseDegrees": [
+            11,
+            100
+          ],
+          "minimumGain": 0.2,
+          "maximumGain": 5
+        }
+      }
+    }
+  ]
+}

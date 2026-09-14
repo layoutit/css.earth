@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ophelia",
+  "entries": [
+    {
+      "id": "karkoschka-2001-adopted-shape",
+      "subject": "Karkoschka (2001) adopted Voyager/HST shape",
+      "status": "included",
+      "finding": "Table IV of the HST study supplies the adopted prolate semiaxes 27 × 19 × 19 km. The repeated minor axis is a model assumption, not an independently measured third dimension. French et al. (2024), Table 3 reproduces the separate Voyager size paper’s projected-radius and axis-ratio uncertainties; they are not individual-axis errors. The selected analytic shape supplies no local relief or surface pixels.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/source/manifest.json",
+        "https://doi.org/10.1006/icar.2001.6596",
+        "https://arxiv.org/abs/2401.04634",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/source/measurements.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "pds-voyager-iss-processed-calibrated-imagery",
+      "subject": "PDS Voyager ISS, processed calibrated imagery",
+      "status": "deferred",
+      "finding": "Sorted 3,727 indexed Ophelia observations by body-center sampling. Best C2687614 has 11.70539 km per native pixel: at most 4.6 samples across the longest diameter, at phase 150.593°. Downloaded and inspected its actual GEOMED image and label. A 15.36 s ring observation at this crescent phase does not support a useful cartographic surface. Geometric resampling adds no native detail.",
+      "revisitWhen": "A Ophelia observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/source/manifest.json",
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "lower-phase-voyager-observation-c2676439",
+      "subject": "Lower-phase Voyager observation C2676439",
+      "status": "deferred",
+      "finding": "Phase 15.799° but 33.48036 km per native pixel, fewer than two samples along the longest diameter. Metadata retained; not adopted as a surface map.",
+      "revisitWhen": "A Ophelia observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "french-2024-occultation-ring-analysis",
+      "subject": "French 2024 occultation/ring analysis",
+      "status": "included",
+      "finding": "Included for shape uncertainties, ring relationships and dynamically inferred mass. Ring waves are not a spatial map of the moon.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "hst-photometry-recovery-and-observer-account",
+      "subject": "HST photometry/recovery and observer account",
+      "status": "deferred",
+      "finding": "Recover position and integrated brightness, not resolved surface texels. No Color lens qualified.",
+      "revisitWhen": "A spatially resolved Ophelia measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/source/manifest.json",
+        "https://doi.org/10.1006/icar.2001.6596"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "usgs-mapping-pds-shape-releases-jpl-texture-catalog",
+      "subject": "USGS mapping, PDS shape releases, JPL texture catalog",
+      "status": "unresolved",
+      "finding": "No usable registered surface map, detailed mesh, elevation or geology field located. This is a survey disposition, not proof that no future data could exist.",
+      "revisitWhen": "The inspected shape archive or a cited primary release publishes a Ophelia-specific numerical model with its frame, units and reconstruction method.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/source/manifest.json",
+        "https://space.jpl.nasa.gov/tmaps/uranus.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "nasa-overview",
+      "subject": "NASA overview",
+      "status": "included",
+      "finding": "Used for discovery and ring-shepherd context; newer primary dimensions and mass take precedence over old physical estimates.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ophelia/source/manifest.json",
+        "https://science.nasa.gov/uranus/moons/ophelia/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

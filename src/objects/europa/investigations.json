@@ -1,0 +1,138 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "europa",
+  "entries": [
+    {
+      "id": "king-2022-sphere-composition",
+      "subject": "King, Fletcher and Ligier 2022 mapped VLT/SPHERE reflectance and composition fits",
+      "status": "deferred",
+      "finding": "The 2026-09-13 intake established available numerical grids and deferred preparation. The 2026-09-14 implementation below is ready for local review; public inclusion remains deferred for explicit reuse terms. Implemented Ice signature as the measured reflectance ratio at the exact released wavelengths 1.30000/1.50263 micrometres (19,644 valid native nodes). Fine ice (0.1-0.3 mm) and Coarse ice (0.3-1 mm) are separate v1.0.2 posterior-median model components (19,616 valid nodes each), with their own 16th/84th-percentile bounds. The source uses east-positive 0-359 degree longitude and latitude -90 through 89 degrees; the paper's west-positive presentation is converted explicitly. One-degree resampling preserves cells and no-data but does not add detail beyond the approximately 150 km effective SPHERE resolution (about 25 km/px sampling). The release has no aggregate total-ice posterior: do not sum component medians or percentile bounds. Zenodo is other-open/Open Access, but no explicit numerical-data reuse licence was located. Use remains local scientific preview and private draft PR only; do not publish the assets.",
+      "revisitWhen": "Reopen if the authors or archive publish explicit numerical-data reuse terms or a replacement release. Preserve the exact ratio wavelengths, component-specific uncertainty and no-data; do not manufacture an aggregate ice posterior.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/ac596d",
+        "https://doi.org/10.5281/zenodo.6034904",
+        "https://github.com/ortk95/king-2022-compositional-mapping-europa/blob/v1.0.2/README.md",
+        "https://github.com/ortk95/king-2022-compositional-mapping-europa/blob/v1.0.2/fit_SPHERE.json.gz",
+        "https://github.com/ortk95/king-2022-compositional-mapping-europa/blob/v1.0.2/reflectance_SPHERE.json.gz",
+        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/europa/evidence/composition/browser.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "f8fbdaa0b203f11b4f121b867eb478d38d6c311e"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "78038ef3913db7d48cde75d9fe97248b6db67d98"
+        }
+      ]
+    },
+    {
+      "id": "jwst-trumbo-brown-2023-carbon-dioxide",
+      "subject": "Trumbo and Brown 2023 JWST spatial distribution of carbon dioxide",
+      "status": "unresolved",
+      "finding": "Read the paper and its data-availability statement. The observations show spatial variation associated with Tara Regio, but the cited availability route provides raw MAST program 1250 observations, calibration program 1538 and reduction software. A released coordinate-bound numerical map was not located in this pass. A plotted paper figure is not a qualified surface input, and lack of a located map is not proof that one does not exist.",
+      "revisitWhen": "Inspect the linked reduction-software release for numerical map outputs and coordinate metadata, or qualify preparation from the MAST observations before proposing a ready carbon-dioxide surface layer.",
+      "evidence": [
+        "https://doi.org/10.1126/science.adg4155",
+        "https://arxiv.org/abs/2309.11684"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
+        }
+      ]
+    },
+    {
+      "id": "voyager-galileo-monochrome",
+      "subject": "USGS Voyager/Galileo 500 m global mosaic",
+      "status": "included",
+      "finding": "Selected global GeoTIFF supplies Monochrome with published control, variable resolution, seams and gaps.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/source/manifest.json",
+        "https://astrogeology.usgs.gov/search/map/europa_voyager_galileo_ssi_global_mosaic_500m"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "controlled-galileo-color",
+      "subject": "USGS controlled Galileo SSI color sequences",
+      "status": "included",
+      "finding": "G1ESGLOBAL01, 12ESGLOCOL01 and 14ESGLOCOL01 supply Enhanced color only where registered three-band support is present.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/source/manifest.json",
+        "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "agenor-dtm",
+      "subject": "USGS controlled Agenor DTM",
+      "status": "included",
+      "finding": "Released controlled Agenor DTM supplies Elevation; it is regional terrain and does not establish global relief.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/source/manifest.json",
+        "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "sim3513-geology",
+      "subject": "USGS SIM 3513 Europa geologic units",
+      "status": "included",
+      "finding": "Ten source units and no-data regions supply categorical Geology; colors are interpretation rather than observed color or chemistry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/source/manifest.json",
+        "https://pubs.usgs.gov/publication/sim3513"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "nims-infrared",
+      "subject": "Registered Galileo NIMS 17ENGLOBAL01A and 17ENGLOBAL02A CIOF observations",
+      "status": "included",
+      "finding": "Two Minnaert-corrected registered observations supply Infrared within their documented coverage and registration limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/europa/source/manifest.json",
+        "https://doi.org/10.17189/4sz4-5024"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

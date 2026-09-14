@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "apophis",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "The live PDS product label identifies urn:nasa:pds:gbo.ast-apophis.jpl.radar.shape_model:data:apophis_v233s7_obj version 1.0 as Model B of Brozović 2018. It describes 2000 vertices, kilometer coordinates and longitude zero along the long positive X principal axis. Its 2025 file creation and 2026 archive publication are not new radar observations or a newer physical solution. The retained original mesh and spin labels support the selected shape; optical imagery remains unqualified.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/apophis/README.md",
+        "https://sbn.psi.edu/pds/resource/apophis_shape.html",
+        "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-apophis.jpl.radar.shape_model_v1.0/data/apophis_v233s7.xml",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/apophis/source/reference/apophis_v233s7.xml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The selected radar-shape release supplies geometry and spin information, not a registered optical surface map. No optical texture is selected in this package; this does not establish that every image archive was searched.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/apophis/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/apophis/source/manifest.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    }
+  ]
+}

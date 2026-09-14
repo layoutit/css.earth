@@ -1,0 +1,150 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "lutetia",
+  "entries": [
+    {
+      "id": "recorded-survey-1",
+      "subject": "PDS Rosetta OSIRIS shape release above",
+      "status": "included",
+      "finding": "PDS Rosetta OSIRIS shape release above — Twelve published resolutions, body axes, numerical radii and source confidence — Included: `lutetia_025k_cart.wrl`, 12,265 vertices and 24,526 triangular plates. This provides adequate source detail before reducing to 800 display faces.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lutetia/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "Jorda–Vincent rotation and mapping document",
+      "status": "included",
+      "finding": "[Jorda–Vincent rotation and mapping document](https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/document/lutetia_rotation.pdf) — Exact shape-frame spin parameters; high-resolution and combined low/high-resolution cylindrical maps — Included as coordinate evidence. Both original embedded map rasters were extracted and inspected in the local survey: coordinate grids, ticks or the equator/prime meridian are burned into the image. Excluded as photographic texture; removing these would require reconstructing image pixels. No such repair was performed.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lutetia/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "ESA Lutetia coverage image",
+      "status": "excluded",
+      "finding": "[ESA Lutetia coverage image](https://www.esa.int/ESA_Multimedia/Images/2011/10/Lutetia_coverage) — Larger, publicly accessible combined flyby map — Full-resolution JPEG inspected and pinned as a reference. It also contains burned-in axes and grid lines, and even its longitude labels differ from the PDS document. Excluded from runtime appearance; no assumption that a press map is a clean, registered global raster.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lutetia/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "OSIRIS NAC resampled-D archive",
+      "status": "included",
+      "finding": "The resampled-D STR-REFL archive supplies calibrated camera images with separate sigma, quality and camera records. The current three-image orange-filter view uses the existing controlled OSIRIS camera path. An earlier source survey predated that decoder and registration implementation; its pipeline limitation no longer applies. Partial coverage, observed shadows and source-specific correction flags still limit interpretation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lutetia/README.md",
+        "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/dataset.shtml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-5",
+      "subject": "shapeViewer gravity and slope fields",
+      "status": "deferred",
+      "finding": "The recorded survey downloaded the 33 MB Rosetta_Lutetia package and inspected shape, kernels, numerical gravity and slope samples. Its geometry duplicates the selected source; the scalar fields remain distinct unqualified candidates. No photographic map was found in that package.",
+      "revisitWhen": "Verify the scalar definitions, units, density/rotation assumptions, facet correspondence and invalid coverage against the selected source mesh; qualify a bounded preparation and its scientific interpretation.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lutetia/README.md",
+        "https://comet-toolbox.com/shapeViewer.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-6",
+      "subject": "ESA geological history map",
+      "status": "excluded",
+      "finding": "[ESA geological history map](https://www.esa.int/ESA_Multimedia/Images/2013/07/The_history_of_different_regions_on_Lutetia_s_surface) — Published regional geologic interpretation based on Massironi/Thomas et al. — Excluded as a global lens: perspective illustration with colored regions and no verified registered global raster or vector release. Regions are not painted onto the model.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lutetia/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-7",
+      "subject": "USGS Astropedia and PDS target catalog",
+      "status": "unresolved",
+      "finding": "USGS Astropedia and PDS target catalog — Independent check for registered maps and complementary releases — No additional usable unannotated registered Lutetia map was established in this bounded survey. This is not a claim that none exists. The corrected OSIRIS frames now supply the selected photographic view; the unresolved route here is an additional unannotated registered map.",
+      "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lutetia/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "rejected-closeups",
+      "subject": "OSIRIS 15:43:06, 15:43:54 and 15:45:28 close-ups",
+      "status": "excluded",
+      "finding": "The 15:43:06.482 northeast holdout correlated at 0.6949, below 0.70. The 15:43:54 image failed model registration; 15:45:28 failed the independent archived surface-intercept check. None is included.",
+      "revisitWhen": "Corrected source geometry or independent registration evidence resolves the recorded failure under the existing acceptance limits.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lutetia/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "native-shape-defects",
+      "subject": "Published shape seam and holes",
+      "status": "included",
+      "finding": "The native PDSSBN-SHAPE-MODEL-DEFECTS label identifies LUTETIA_SEAM.PNG and LUTETIA_HOLES.PNG as documentation of discontinuities in the source model. Those limitations are source evidence, not automatically a renderer defect. The label was read; this review did not measure their effect on the currently selected resolution or photographic mosaic.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/lutetia/source/reference/lutetia_shape_defects.lbl",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/lutetia/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    }
+  ]
+}

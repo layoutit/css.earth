@@ -1,0 +1,257 @@
+{
+  "schema": "cssearth-composition-browser-evidence@1",
+  "date": "2026-09-14",
+  "baseCommit": "f8fbdaa0b203f11b4f121b867eb478d38d6c311e",
+  "revision": "Working tree changes identified by the source and prepared hashes below; shared renderer, geometry, camera and shell match baseCommit.",
+  "browser": "Chrome 153.0.8010.12",
+  "viewportDpr1": [
+    1440,
+    1000
+  ],
+  "pins": [
+    {
+      "path": "src/objects/ganymede/object.json",
+      "sha256": "812cdba29ad406c00e58f69e5cd9d5e55dd73de92e83f753e6eeb963c2eff75a"
+    },
+    {
+      "path": "src/objects/ganymede/composition.css",
+      "sha256": "2c8f3bed59af164cf449a554a12804ea0f99442e9428431615a8fa6fdf54641c"
+    },
+    {
+      "path": "src/objects/ganymede/text.json",
+      "sha256": "92fc06df837beef5fcd50c495d243e20cbbff74e246777dc2134e48af0644901"
+    },
+    {
+      "path": "src/objects/ganymede/source/preparation/raster.json",
+      "sha256": "ab831101edf4f77f21ca809f7a2800c505e8acf95d268a51ba05c77c9960e2a2"
+    },
+    {
+      "path": "src/objects/ganymede/source/content/object.json",
+      "sha256": "c11b7052988d3d181574ab64934546fb5073c99ff2ff8b46ab2a189062386290"
+    },
+    {
+      "path": "src/objects/ganymede/prepared/scene.refs.json",
+      "sha256": "bc41eac8e30f4ef2b853caf485c9ed2e57f945d14db9d63b4b77b82a2380ea1d"
+    },
+    {
+      "path": "src/objects/ganymede/prepared/lenses.json",
+      "sha256": "dde4315c7f1a9cff0b64959ffab3fd460fcadcd570d721e433724c805ddfb2f8"
+    },
+    {
+      "path": "src/objects/ganymede/prepared/page.json",
+      "sha256": "054c894d046b2bdd8513de19b8d39f32e34c6c8b7e6c5bc9e269bf3f81249c21"
+    },
+    {
+      "path": "src/objects/ganymede/runtime-assets.json",
+      "sha256": "c364272100fd2006f4442d5dfa18f848a2d209ca3510ea9becf1f63c06895583"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "dark-material-shadows.png",
+      "bytes": 581888,
+      "sha256": "fe19d818de700e0766f375f5d2bbc5a40e71a1b312b49c141c9661b416900e08",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "dark-material.png",
+      "bytes": 673626,
+      "sha256": "d4ec5e297d4962c4a00b9569576b5ddea61b19da27556495be8450df0b47df57",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "ice-fraction-dpr2.png",
+      "bytes": 1782412,
+      "sha256": "be3a2cad1f2e4d5b6bf8420906d9874c3d2f03be35c2a6d9774ba0b1327df780",
+      "width": 2880,
+      "height": 2000
+    },
+    {
+      "path": "ice-fraction.png",
+      "bytes": 662255,
+      "sha256": "d2e8174a72fa2c57097a150f3696922f1df80070832a90a2d1de713c29448ba0",
+      "width": 1440,
+      "height": 1000
+    }
+  ],
+  "desktop": [
+    {
+      "lens": "ice-fraction",
+      "retained": true,
+      "leaves": 450,
+      "backgrounds": [
+        "url(\"http://127.0.0.1:4294/scenes/ganymede/ganymede-poles-ice-fraction@2x.webp\")",
+        "url(\"http://127.0.0.1:4294/scenes/ganymede/ganymede-ice-fraction@2x.webp\")"
+      ],
+      "url": "http://127.0.0.1:4294/ganymede/?v=QAa-YeztkWhysL5sXnbItDlXwM2iEiQvmhBBQsczQAAAAL_dbPV-YoQzP8Vri7FTEm0_sLLQk_bUsQABAAAAAAAAAAA#dataset=ice-fraction",
+      "dpr": 1,
+      "view": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.521204911321,-0.777885872598,0.351054140593,0,-0.821548401989,-0.568703783566,-0.040425607573,0,0.231092327014,-0.267337943005,-0.935482100644,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.506802920633,0.695965762301,0.50870644998,0,-0.087175765586,-0.628455058976,0.772945235095,0,0.857642716686,0.347384093164,0.379174226853,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": 0,
+        "zoom": 1.0502608695669025,
+        "distance": 1326.2361651492474,
+        "distanceKilometers": 15172.14172930739,
+        "distanceRadii": 5.766244196301076,
+        "levelOfDetail": {
+          "stage": "geometry",
+          "silhouetteDiameter": 439.2000000007046,
+          "billboardOpacity": 0,
+          "markerOpacity": 0,
+          "proxyOpacity": 0
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 0,
+        "silhouetteRadius": 219.6000000003523,
+        "bodyCenterKilometers": [
+          -3.338884562253952e-8,
+          -5.284138023853301e-8,
+          -15172.14172930739
+        ]
+      }
+    },
+    {
+      "lens": "dark-material",
+      "retained": true,
+      "leaves": 450,
+      "backgrounds": [
+        "url(\"http://127.0.0.1:4294/scenes/ganymede/ganymede-poles-dark-material@2x.webp\")",
+        "url(\"http://127.0.0.1:4294/scenes/ganymede/ganymede-dark-material@2x.webp\")"
+      ],
+      "url": "http://127.0.0.1:4294/ganymede/?v=QAa-YeztkWhysL5sXnbItDlXwM2iEiQvmhBBQsczQAAAAL_dbPV-YoQzP8Vri7FTEm0_sLLQk_bUsQABQFCs3S8QGug#dataset=dark-material",
+      "dpr": 1,
+      "view": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.521204911321,-0.777885872598,0.351054140593,0,-0.821548401989,-0.568703783566,-0.040425607573,0,0.231092327014,-0.267337943005,-0.935482100644,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.506802920633,0.695965762301,0.50870644998,0,-0.087175765586,-0.628455058976,0.772945235095,0,0.857642716686,0.347384093164,0.379174226853,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 34.230769230769226,
+        "controlPitch": 34.230769230769226,
+        "controlYaw": 0,
+        "zoom": 1.0502608695669025,
+        "distance": 1326.2361651492474,
+        "distanceKilometers": 15172.14172930739,
+        "distanceRadii": 5.766244196301076,
+        "levelOfDetail": {
+          "stage": "geometry",
+          "silhouetteDiameter": 439.2000000007046,
+          "billboardOpacity": 0,
+          "markerOpacity": 0,
+          "proxyOpacity": 0
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -500,
+          "bottom": 500
+        },
+        "offAxisDegrees": 0,
+        "silhouetteRadius": 219.6000000003523,
+        "bodyCenterKilometers": [
+          -3.338884562253952e-8,
+          -5.284138023853301e-8,
+          -15172.14172930739
+        ]
+      }
+    },
+    {
+      "lens": {
+        "id": "dark-material",
+        "ready": true
+      },
+      "shadows": true,
+      "url": "http://127.0.0.1:4294/ganymede/?v=QAa-YeztkWhysL5sXnbItDlXwM2iEiQvmhBBQsczQAAAAL_dbPV-YoQzP8Vri7FTEm0_sLLQk_bUsQABAAAAAAAAAAA#dataset=dark-material"
+    }
+  ],
+  "dpr2": {
+    "id": "ganymede",
+    "dpr": 2,
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "http://127.0.0.1:4294/ganymede/?v=QAa-OUEGJN0vG75VjvnbItDlwMlA-d_XYs5BQsczQAAAAL_dbPV-YcynP8Vri7FTvi0_sLLQk_Zr-gABAAAAAAAAAAA#dataset=ice-fraction",
+    "lens": {
+      "id": "ice-fraction",
+      "ready": true
+    },
+    "view": {
+      "pose": {
+        "schema": "cssearth-camera-pose@1",
+        "scene": "matrix3d(0.521204911325,-0.777885872595,0.351054140595,0,-0.821548401985,-0.568703783571,-0.040425607574,0,0.231092327017,-0.267337943005,-0.935482100643,0,0,0,0,1)",
+        "skybox": "matrix3d(-0.506802920638,0.695965762298,0.508706449978,0,-0.087175765584,-0.628455058975,0.772945235095,0,0.857642716683,0.34738409317,0.379174226854,0,0,0,0,1)",
+        "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+      },
+      "pitch": 34.230769230769226,
+      "controlPitch": 34.230769230769226,
+      "controlYaw": 0,
+      "zoom": 1.2396521739108495,
+      "distance": 1130.2405719926512,
+      "distanceKilometers": 12929.952143595929,
+      "distanceRadii": 4.91408944344631,
+      "levelOfDetail": {
+        "stage": "geometry",
+        "silhouetteDiameter": 518.3999999990826,
+        "billboardOpacity": 0,
+        "markerOpacity": 0,
+        "proxyOpacity": 0
+      },
+      "focal": 1247.08,
+      "principalOffset": [
+        0,
+        0
+      ],
+      "visibleRect": {
+        "left": -720,
+        "right": 720,
+        "top": -500,
+        "bottom": 500
+      },
+      "offAxisDegrees": 0,
+      "silhouetteRadius": 259.1999999995413,
+      "bodyCenterKilometers": [
+        -5.879905074834824e-9,
+        -2.0077917724847792e-8,
+        -12929.952143595929
+      ]
+    },
+    "backgrounds": [
+      "url(\"http://127.0.0.1:4294/scenes/ganymede/ganymede-poles-ice-fraction@2x.webp\")",
+      "url(\"http://127.0.0.1:4294/scenes/ganymede/ganymede-ice-fraction@2x.webp\")"
+    ]
+  },
+  "inspection": {
+    "result": "All new datasets change the actual retained surface textures and preserve 450 existing surface leaves; captions, legends and source gaps inspected. Representative DPR 2 views use the same canonical prepared image URLs as DPR 1.",
+    "interaction": "Both dataset buttons, minimap rotation and Shadows on/off exercised.",
+    "limitations": [
+      "The local preview omits six unavailable unrelated prepared nebula context banks (helix, m42, m2-9, m1, m45, m8) through an ignored generated module; no tracked shared shell or registry changes.",
+      "This is focused browser evidence, not aggregate application or fresh public-asset installation qualification."
+    ]
+  },
+  "comparison": "These are new scientific datasets, so photographs are not a matched Pixelmatch reference. Native numeric-coordinate comparisons qualify the source conversion; inspected browser images qualify displayed content and interaction."
+}

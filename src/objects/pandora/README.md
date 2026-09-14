@@ -4,7 +4,7 @@
 
 **False color** adds three original Cassini ISS NAC filter observations displayed as RGB (IR3 / GRN / UV3), calibrated by CISSCAL 4.0beta into linear I/F. This is false color. Each frame uses its own measured camera row in the [Thomas 2018 pandora document](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pandora_document.pdf), registered to the matching original plate model.
 
-- **Monochrome** uses 11 original Cassini ISS NAC clear-filter images, calibrated by the PDS Ring-Moon Systems Node with CISSCAL 4.0beta into linear I/F.
+- **Monochrome** uses 10 original Cassini ISS NAC clear-filter images, calibrated by the PDS Ring-Moon Systems Node with CISSCAL 4.0beta into linear I/F.
 
 - **Elevation** comes from the same [Thomas, Joseph and Ansty (2018) PDS shape release](https://doi.org/10.26033/ewy3-jy61), shown as radial height above an explicitly chosen 40.6 km reference sphere.
 
@@ -33,7 +33,6 @@ The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) chec
 - **Orientation:** Small optical librations and dynamical phase errors are not represented.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
-
 
 ## False color preparation
 

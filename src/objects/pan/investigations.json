@@ -85,6 +85,40 @@
           "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
         }
       ]
+    },
+    {
+      "id": "cassini-filter-color",
+      "subject": "Selected calibrated Cassini filter-color observations",
+      "status": "included",
+      "finding": "The selected IR1/GRN/UV3 sequence supplies a partial southern-face/ridge False color view through the published cameras. Common coverage and ring-shadow exclusions remain; calibrated band ratios are not natural color or composition.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pan/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pan/source/preparation/terrestrial.json",
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pan_document.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "coverage-brightness-seams",
+      "subject": "Level consistency of added coarse Pan views",
+      "status": "unresolved",
+      "finding": "The accepted extra views expand coverage but remain coarse and leave bright seams near the ridge. The maximum overlap gain is about 2.40 within2.5; the measured display stretch does not establish absolute albedo or resolve the seam.",
+      "revisitWhen": "Independent overlap/calibration evidence supports a more consistent level without inventing far-side brightness.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pan/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pan/evidence/cassini-coverage/display-measurement.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
     }
   ]
 }

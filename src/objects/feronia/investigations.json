@@ -1,0 +1,169 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "feronia",
+  "entries": [
+    {
+      "id": "survey-selected-model",
+      "subject": "DAMIT 1853: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1853.txt. Model 1853, version 2017-09-21, pole (98°, -52°), period 8.09068 h match the retained metadata. The archive diameter field is 93 ±10 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/feronia/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1853",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/2550/shape.txt",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/feronia/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/feronia/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "survey-damit-documentation",
+      "subject": "DAMIT documentation",
+      "status": "included",
+      "finding": "[DAMIT documentation](https://damit.cuni.cz/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/feronia/README.md",
+        "https://damit.cuni.cz/pages/documentation"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-viikinkoski-et-al-2017-adaptive-optics-and-lightcurve-data-of-ast",
+      "subject": "Viikinkoski et al. (2017), Adaptive optics and lightcurve data of asteroids: twenty shape models and information content analysis",
+      "status": "included",
+      "finding": "[Viikinkoski et al. (2017), Adaptive optics and lightcurve data of asteroids: twenty shape models and information content analysis](https://ui.adsabs.harvard.edu/abs/2017A%26A...607A.117V) — original model publication record.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/feronia/README.md",
+        "https://ui.adsabs.harvard.edu/abs/2017A%26A...607A.117V"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-akari-acua",
+      "subject": "AKARI thermal diameter as an alternative scale",
+      "status": "excluded",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the selected archive model has a physical size calibration. Its fitted nonrotating-sphere diameter is 83.11 ± 0.94 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 72 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
+      "revisitWhen": "A source-specific comparison with the selected shape and physical calibration justifies changing the adopted scale.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/feronia/README.md",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/feronia/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2017",
+      "subject": "Resolved-model publication supporting DAMIT 1853",
+      "status": "included",
+      "finding": "The live DAMIT model-to-reference export binds selected model 1853 to Adaptive optics and lightcurve data of asteroids: twenty shape models and information content analysis (2017). That publication supports the selected reconstruction. The imported entry conflated three surveys; listing them together did not establish three usable models or a registered reflectance mosaic.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/feronia/README.md",
+        "https://arxiv.org/abs/1702.01996",
+        "https://arxiv.org/abs/1708.05191",
+        "https://damit.cuni.cz/projects/damit/references/view/660",
+        "https://damit.cuni.cz/projects/damit/references/view/171",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models_references"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2018",
+      "subject": "Hanuš et al. 2018",
+      "status": "included",
+      "finding": "[Hanuš et al. 2018](https://arxiv.org/abs/1803.06116) and [occultation dimensions](https://www.asteroidoccultation.com/observations/Asteroid_Dimensions_from_Occultations.html) — size comparison candidates; an independent fit or occultation ellipsoid is not silently equated with this mesh’s volume.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/feronia/README.md",
+        "https://arxiv.org/abs/1803.06116",
+        "https://www.asteroidoccultation.com/observations/Asteroid_Dimensions_from_Occultations.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The release supplies no registered surface imagery; the grid marks that gap.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/feronia/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/646"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "Alternative archive solutions: model 646, pole ['102', '-55'], [Model 646](https://damit.cuni.cz/projects/damit/asteroid_models/view/646) The live DAMIT export lists these other models for this target: 646: pole (102°, -55°), 8.09068 h, version 2013-02-11, archive diameter 74 km. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/feronia/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/646",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    }
+  ]
+}

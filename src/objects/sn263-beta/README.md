@@ -4,6 +4,8 @@ A selectable larger, outer moon through the shared CSS object renderer. Publishe
 
 ## Sources
 
+[Investigation ledger](investigations.json): recorded source decisions, evidence and conditions for revisiting them.
+
 | Source | Used for |
 | --- | --- |
 | [PDS SN263 V1.0](https://sbn.psi.edu/pds/resource/shape153591.html) | Original beta mesh, model limits, pole and rotation metadata |

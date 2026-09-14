@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ymir",
+  "entries": [
+    {
+      "id": "convex-envelope",
+      "subject": "Ymir published convex-model envelope",
+      "status": "included",
+      "finding": "Denk and Mottola (2013), EP7.2 and the author’s numeric table constrain an approximate triangular body with equatorial edges 20, 24 and 25 km and an adopted 8 km polar semiaxis. The selected elliptical polar-cap law is assumed. The separate 9.6 km photometric radius is not used to rescale those dimensions; no original inversion mesh is claimed.",
+      "evidence": [
+        "https://tilmanndenk.de/outersaturnianmoons/ymir/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ymir/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ymir/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "native-inversion-mesh",
+      "subject": "Original Ymir convex inversion mesh",
+      "status": "unresolved",
+      "finding": "The actual linked 619_Ymi_5_Shape.obj endpoint returned HTTP 404 during the documented survey, consistent with its unavailable status on the page. The authored approximation is not presented as a recovered native model.",
+      "revisitWhen": "A released Ymir mesh with model frame, method and reuse documentation can be compared with the approximation.",
+      "evidence": [
+        "https://tilmanndenk.de/outersaturnianmoons/ymir/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ymir/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "spectral-route",
+      "subject": "Ymir spectroscopy route",
+      "status": "unresolved",
+      "finding": "Published disk-integrated colors do not establish a spatial color map. The author notes possible UVIS/VIMS observations, but the survey did not qualify an extracted spectrum. Instrument observations alone do not establish an interpretable spectral lens.",
+      "revisitWhen": "A released interpretable spectrum can support a chart; a registered spatial product would be needed for a surface lens.",
+      "evidence": [
+        "https://tilmanndenk.de/outersaturnianmoons/ymir/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ymir/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "terrain-geology",
+      "subject": "Terrain and geology route",
+      "status": "excluded",
+      "finding": "No resolved DEM, registered geology or mapped composition product was qualified; model facets do not establish terrain.",
+      "revisitWhen": "A body-specific registered terrain, geology or composition release can be reviewed.",
+      "evidence": [
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ymir/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-lightcurve-data",
+      "subject": "Cassini ISS Ymir light-curve data",
+      "status": "deferred",
+      "finding": "The author’s multi-observation table 619_Ymi_4_LC_Paper1.txt and 2008 series 619_ymi_4_lc064.txt were identified as observation-chart candidates. Their disk-integrated samples are not registered surface pixels, and no chart is selected.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ymir/README.md",
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://tilmanndenk.de/outersaturnianmoons/ymir/",
+        "https://tilmanndenk.de/wp-content/uploads/619_Ymi_4_LC_Paper1.txt",
+        "https://tilmanndenk.de/wp-content/uploads/619_ymi_4_lc064.txt"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ],
+      "revisitWhen": "An observation view is in scope and the original time-series samples are validated for units, cadence and uncertainties."
+    }
+  ]
+}

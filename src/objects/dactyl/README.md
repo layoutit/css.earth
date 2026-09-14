@@ -12,6 +12,8 @@ The shared missing-imagery grid covers the surface. The body uses the existing g
 
 ## Scientific sources
 
+[Investigation ledger](investigations.json): recorded source decisions, evidence and conditions for revisiting them.
+
 - [Veverka et al. (1996)](https://doi.org/10.1006/icar.1996.0045): Galileo dimensions, shape and surface observations.
 - [Belton et al. (1996)](https://doi.org/10.1006/icar.1996.0044): Discovery and encounter orbit constraints.
 - [Petit et al. (1997)](https://doi.org/10.1006/icar.1997.5788): Long-term orbit stability and candidate solutions.
@@ -25,6 +27,35 @@ The dimensions describe a smooth envelope. Galileo’s resolved craters are evid
 [Source parameters](source/orbit/published-parameters.json) separate published constraints from assumptions. The illustration places zero mean anomaly at JD 2461286.5 TT (3 September 2026), rather than extrapolating an uncertain encounter phase. A dashed orbit and circular selected marker distinguish this approximation. No uncertainty region, confidence interval or exact current phase is claimed. The fixed-epoch loader rejects other epochs.
 
 ## Evidence
+
+The [native Galileo frame review](evidence/galileo/review.json), prepared on
+2026-09-14 against `ef958900c9ecab2632fff75fd629fa4789947f79`, preserves three
+800 × 800, 8-bit SSI images, their original PDS labels, the bad-pixel records,
+and two mission kernels. [Input identities](evidence/galileo/inputs.json) bind
+every original to its download URL, byte count and SHA-256. This is source
+inspection, not a rendered surface or a successful registration test.
+
+![Galileo i2278 detector crop, uncalibrated monochrome DN multiplied by two and enlarged five times](evidence/galileo/i2278-crop.png)
+
+The complete cratered disk in `i2278` is the best of these three candidates.
+[i1578](evidence/galileo/i1578-crop.png) shows a smaller complete disk;
+[i2700](evidence/galileo/i2700-crop.png) contains fragments at the detector edge.
+These crops retain decoded FITS storage orientation, use nearest-neighbor
+enlargement and a declared ×2 display gain, and clip zero pixels. They have no
+color reconstruction, calibration, bad-pixel masking or surface projection.
+The [review command](../../../tools/objects/source-authoring/galileo-lucy/README.md#dactyl-photographic-source-review)
+also writes full-detector PNGs at unchanged DN values.
+
+**Registration remains unresolved.** Each image label names `IDA` as its geometry
+target. Its sub-spacecraft latitude, longitude and center distance cannot be used
+as Dactyl's. The recovered telemetry CK describes the Galileo scan platform in
+B1950 and its comment interval covers `i2278`; the examined mission PCK contains
+no Dactyl orientation. The kernel reader verifies the CK segment identity and
+type; no camera attitude or surface fit has been evaluated. The two Gazetteer
+names do not provide distributed independent controls for a fitted camera.
+The full Veverka paper was not retrieved successfully, so its camera details
+remain an open lead. The [ledger](investigations.json) records the examined
+routes and precise conditions for continuing. The public scene is unchanged.
 
 The [whole-body label capture](evidence/surface-labels/whole-body-2c24ca749.jpg), taken at
 `2c24ca749` on 2026-09-12 in the in-app browser at 1280 × 720, shows Acmon and

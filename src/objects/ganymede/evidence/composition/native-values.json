@@ -1,0 +1,535 @@
+{
+  "schema": "cssearth-mapped-composition-evidence@1",
+  "target": "Ganymede",
+  "recipe": {
+    "path": "composition/model-recipe.json",
+    "sha256": "3484816c073e6addb01bb505b779bc3fb1034e3152318d1756bbfe36054d6afd"
+  },
+  "input": {
+    "path": "composition/fit_SPHERE.json.gz",
+    "sha256": "cd7843ce36dcf64782907b29c34b7bfb61937288ffb99fd3ee38e2369261c8e4"
+  },
+  "comparison": "Every native geographic node matches exactly after float32 rounding; missing samples remain null. Seam equivalence and absent north-pole coverage checked.",
+  "products": [
+    {
+      "id": "ice-fraction",
+      "path": "composition/ice-fraction.tif",
+      "sha256": "b614ac1e22a9d2d4a3f87b3975718c2d988966eab1a807a2fb091b8aaa65b9d5",
+      "checkedNodes": 64800,
+      "valid": 38473,
+      "missing": 26327,
+      "anchors": [
+        {
+          "eastLongitude": 0,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": -45,
+          "native": 0.23899,
+          "prepared": 0.23898999392986298
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": -45,
+          "native": 0.25842,
+          "prepared": 0.2584199905395508
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": -45,
+          "native": 0.47247,
+          "prepared": 0.4724699854850769
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": -45,
+          "native": 0.45362,
+          "prepared": 0.45361998677253723
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 0,
+          "native": 0.18981,
+          "prepared": 0.18980999290943146
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 0,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 0,
+          "native": 0.20894,
+          "prepared": 0.20893999934196472
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 0,
+          "native": 0.25343,
+          "prepared": 0.25343000888824463
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 45,
+          "native": 0.26707,
+          "prepared": 0.2670699954032898
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 45,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 45,
+          "native": 0.2877,
+          "prepared": 0.28769999742507935
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 45,
+          "native": 0.27242,
+          "prepared": 0.2724199891090393
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        }
+      ]
+    },
+    {
+      "id": "dark-material",
+      "path": "composition/dark-material.tif",
+      "sha256": "aaf6961e48c6125a804338b6930609ae834a586e7d1f05f1bc934cd094109d3a",
+      "checkedNodes": 64800,
+      "valid": 38473,
+      "missing": 26327,
+      "anchors": [
+        {
+          "eastLongitude": 0,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": -45,
+          "native": 0.43646,
+          "prepared": 0.4364599883556366
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": -45,
+          "native": 0.33972,
+          "prepared": 0.3397200107574463
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": -45,
+          "native": 0.15039,
+          "prepared": 0.15038999915122986
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": -45,
+          "native": 0.17226,
+          "prepared": 0.17226000130176544
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 0,
+          "native": 0.52531,
+          "prepared": 0.5253099799156189
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 0,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 0,
+          "native": 0.46439,
+          "prepared": 0.46439000964164734
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 0,
+          "native": 0.39127,
+          "prepared": 0.3912700116634369
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 45,
+          "native": 0.42382,
+          "prepared": 0.42381998896598816
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 45,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 45,
+          "native": 0.32369,
+          "prepared": 0.3236899971961975
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 45,
+          "native": 0.33203,
+          "prepared": 0.3320299983024597
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        }
+      ]
+    },
+    {
+      "id": "ice-uncertainty",
+      "path": "composition/ice-uncertainty.tif",
+      "sha256": "84bb23bfca177af451d1165f85e9abf4889bd3144ba0ff0cd334e1a64acbe776",
+      "checkedNodes": 64800,
+      "valid": 38473,
+      "missing": 26327,
+      "anchors": [
+        {
+          "eastLongitude": 0,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": -45,
+          "native": 0.07837,
+          "prepared": 0.07836999744176865
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": -45,
+          "native": 0.08555999999999997,
+          "prepared": 0.08556000143289566
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": -45,
+          "native": 0.09403,
+          "prepared": 0.094030000269413
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": -45,
+          "native": 0.10077000000000003,
+          "prepared": 0.1007699966430664
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 0,
+          "native": 0.07824,
+          "prepared": 0.07823999971151352
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 0,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 0,
+          "native": 0.08392000000000002,
+          "prepared": 0.08392000198364258
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 0,
+          "native": 0.09242,
+          "prepared": 0.09241999685764313
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 45,
+          "native": 0.08528000000000002,
+          "prepared": 0.08528000116348267
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 45,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 45,
+          "native": 0.09171000000000001,
+          "prepared": 0.09171000123023987
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 45,
+          "native": 0.10114000000000001,
+          "prepared": 0.10113999992609024
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        }
+      ]
+    },
+    {
+      "id": "dark-uncertainty",
+      "path": "composition/dark-uncertainty.tif",
+      "sha256": "4fb42e921b4f530359be2f795113d3d2863244daa3f6d679454e7d53923baad9",
+      "checkedNodes": 64800,
+      "valid": 38473,
+      "missing": 26327,
+      "anchors": [
+        {
+          "eastLongitude": 0,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": -90,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": -45,
+          "native": 0.08972000000000002,
+          "prepared": 0.08972000330686569
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": -45,
+          "native": 0.08682000000000001,
+          "prepared": 0.08681999891996384
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": -45,
+          "native": 0.08051999999999998,
+          "prepared": 0.08051999658346176
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": -45,
+          "native": 0.08790999999999999,
+          "prepared": 0.087909996509552
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 0,
+          "native": 0.07976999999999995,
+          "prepared": 0.07976999878883362
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 0,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 0,
+          "native": 0.09670999999999996,
+          "prepared": 0.09670999646186829
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 0,
+          "native": 0.09798000000000001,
+          "prepared": 0.09798000007867813
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 45,
+          "native": 0.08401999999999998,
+          "prepared": 0.08402000367641449
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 45,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 45,
+          "native": 0.11422000000000004,
+          "prepared": 0.11422000080347061
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 45,
+          "native": 0.11354999999999998,
+          "prepared": 0.11354999989271164
+        },
+        {
+          "eastLongitude": 0,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 90,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 180,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        },
+        {
+          "eastLongitude": 270,
+          "northLatitude": 89,
+          "native": null,
+          "prepared": null
+        }
+      ]
+    }
+  ]
+}

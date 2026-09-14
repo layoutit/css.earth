@@ -184,9 +184,14 @@ pnpm prepare:planets
 
 Preparation uses the same object registry as the application. Independent object
 chains run in parallel, with a conservative limit based on available CPU and
-memory. Unchanged objects reuse prepared files only after their source, generator,
-toolchain, and output hashes have been verified. Missing or changed output files
-rebuild their object. A changed shared generator invalidates affected caches.
+memory. Each object's preparation runs with a file trace
+(`tools/preparation-trace.mts`), and its receipt in `.local/preparation` records
+exactly the files that run read, probed, listed and wrote. An object reuses its
+prepared files only while all of those, the dependency lockfile and the toolchain
+still match. Editing a file its preparation never read, such as reader text, a
+runtime module or another object's recipe, does not rebuild it. A card that
+`pnpm prepare:text` writes into `object.json` does not rebuild it either. Missing
+or changed output files rebuild their object.
 
 Use `pnpm prepare:planets:full` for a full rebuild, including reproducibility
 checks. Use `pnpm prepare:planets --object=saturn` to prepare one existing object,

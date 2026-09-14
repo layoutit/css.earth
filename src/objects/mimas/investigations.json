@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "mimas",
+  "entries": [
+    {
+      "id": "cassini-iss-2017-monochrome",
+      "subject": "NASA 2017 Cassini ISS monochrome map",
+      "status": "included",
+      "finding": "Selected 5,760 by 2,880 map supplies Monochrome; black shadows remain observed because the published rectangular map has no validity mask.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mimas/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mimas/source/manifest.json",
+        "https://science.nasa.gov/resource/mimas-global-map-june-2017/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "cassini-iss-2014-enhanced",
+      "subject": "NASA/JPL PIA18437 infrared-green-ultraviolet map",
+      "status": "included",
+      "finding": "Selected 6,356 by 3,178 map supplies Enhanced color, with producer calibration and registration retained and no claim of natural color.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mimas/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mimas/source/manifest.json",
+        "https://www.jpl.nasa.gov/images/pia18437-color-maps-of-mimas-2014/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "spc-q128-shape",
+      "subject": "Mimas 2025 SPC Q128 OBJ",
+      "status": "included",
+      "finding": "Selected complete Q128 OBJ supplies geometry and Shape; the 720-face simplification is a display approximation, not source uncertainty.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mimas/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mimas/source/manifest.json",
+        "https://doi.org/10.26033/y8wv-r303"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "spc-radius-elevation",
+      "subject": "Mimas 2025 SPC radius GeoTIFF",
+      "status": "included",
+      "finding": "Selected numeric raster supplies Elevation as centre-relative radius minus the source 198.2 km sphere, with no extrapolation or gap filling.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mimas/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mimas/source/manifest.json",
+        "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.tif"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    },
+    {
+      "id": "elevation-geotransform-gap",
+      "subject": "Mimas radius GeoTIFF edge outside actual geotransform",
+      "status": "included",
+      "finding": "All source cells are valid, but the actual GeoTIFF ends at 359.1517 degrees east and 89.5759 degrees south. The narrow uncovered edge stays gray rather than adopting nominal label bounds.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mimas/README.md",
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mimas/source/manifest.json",
+        "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.tif"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+        }
+      ]
+    }
+  ]
+}

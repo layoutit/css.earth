@@ -2,6 +2,8 @@
 
 ## Sources
 
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
 - Puck has one **Monochrome** dataset: the original calibrated Voyager 2 narrow-angle clear-filter observation **C2683716**, acquired on 24 January 1986.
 
 - It is registered to an explicitly approximate **81 km reference sphere**, using the 162 km mean diameter in the [PDS Uranus satellite table](https://pds-rings.seti.org/uranus/uranus_satellites_table.html).
@@ -61,13 +63,7 @@ Surface, poles, thumbnail, minimap and full-silhouette context portrait share th
 
 Surveyed 2026-09-08:
 
-| Candidate | Disposition |
-| --- | --- |
-| PDS Voyager ISS calibrated image C2683716 | Included. The OPUS target-geometry inventory returned 3,054 observations; this is the finest, at 4.76965 km per original detector pixel. The next candidate is 46.31359 km/pixel, too coarse to add worthwhile mapped detail. The top-ranked inventory and full selected metadata are pinned. |
-| Other Voyager filters and processed press images | No separately registered color observation at comparable useful resolution was located. A redistributed enlargement of the same clear image does not justify a second lens. |
-| [Karkoschka 2001 Voyager analysis](https://doi.org/10.1006/icar.2001.6597) and PDS size catalog | Supports the source survey and measured scale. The catalog's DOI ending 6596 points to the companion HST paper; 6597 is the Voyager size paper. No released detailed Puck vertices/facets were located with the inspected publications. The sphere is openly approximate. |
-| [PDS Stooke shape release](https://sbn.psi.edu/pds/resource/stkshape.html), NAIF shape releases and USGS map searches | No detailed scientific Puck mesh, DEM, or registered complementary surface map was located. A generic graticule layer is not a new observation. No hobbyist mesh is substituted. |
-| [Near-infrared photometry of Uranus's inner moons](https://www.sciencedirect.com/science/article/pii/S0019103522004237) | Integrated spectral/brightness measurements are useful science but do not provide a spatially registered Puck composition or color map. Excluded as a surface lens. |
+The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 
 ## Preparation and restoration
 

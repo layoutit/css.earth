@@ -20,7 +20,7 @@
 
 - Display pole aligned to the fitted orbital normal; arbitrary meridian, no measured spin or current landmark phase is claimed. This is distinct from the orbital position, which uses JPL Horizons samples over 2020–2032 and the shared fitted ellipse plus prepared slow-longitude libration terms. Independent fractional-day reference epochs measure fit residuals, not a universal accuracy bound; extrapolation outside the fitted interval is not qualified.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 ## Methods and source notes
 
@@ -37,15 +37,9 @@ Physical scale uses the volume-equivalent radius 1.525973578806757 km. The 5° r
 
 Table 7 provides camera center, north azimuth, observer/Sun coordinates and range; the shared camera projection uses the measured-axis approximation.
 
-## Source survey
+## Investigation record
 
-- [Cassini ISS/PDS](https://pds-rings.seti.org/cassini/iss/): actual OPUS source products were downloaded and inspected at native resolution. The finer 2015 crescent is excluded because it mixes strong Saturnshine with direct solar illumination.
-
-- Published photometry and visible spectra in Hedman et al. constrain integrated brightness; they are not additional spatial lenses.
-
-- [PDS Saturn shape release](https://doi.org/10.26033/ewy3-jy61): no body-specific deliverable for this target was qualified for this package; the measured-axis source above owns the approximation.
-
-- No qualified DEM, geology, or mapped composition product was found in the inspected releases and cited study. No artificial terrain or dust arc is added.
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json), including what would reopen each decision.
 
 ## Orientation, position and delivery
 

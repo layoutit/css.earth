@@ -59,17 +59,7 @@ Navigation portraits and small dedicated minimaps are derived from the prepared 
 
 ## Dataset survey
 
-- Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
-
-- **Monochrome extension:** Clear frames N1644754629_1 and N1644754942_1 extend the released-table coverage westward from the former 2010 selection. They contribute through the table’s original cameras; no shape, topology or renderer change is involved.
-
-- **Investigated, not included as an observed map:** legacy Voyager/Stooke maps and global shaded-relief illustrations. They do not offer the combination of Cassini detail and measured camera registration used here; drawings are not observational textures.
-
-- **Filtered imaging:** RED/CL2 N1644757030_1, CL1/GRN N1644756997_1 and BL1/CL2 N1644756505_1 are CISSCAL 4.0beta calibrated, losslessly compressed ISS NAC products. Their native labels state 1024 × 1024, 32-bit PC_REAL pixels in I/F and identify the filters. The [2018 PDS camera table](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/calypso_document.pdf) supplies each frame’s source camera. The display maps red/green/BL1 to red/green/blue without a white balance, phase correction or natural-color claim.
-
-- **Spectroscopy:** [Cassini spectra and photometry of small inner satellites](https://www.usgs.gov/publications/cassini-spectra-and-photometry-025-51-mm-small-inner-satellites-saturn) and [small-moon photometric analyses](https://doi.org/10.3847/1538-3881/ab659d) inform interpretation. Disk-integrated measurements do not supply a spatially resolved composition texture.
-
-- **Facts and imagery reference:** [NASA Calypso](https://science.nasa.gov/saturn/moons/calypso/), [JPL satellite parameters](https://ssd.jpl.nasa.gov/sats/phys_par/) and the PDS shape document. No atmosphere or internal cross section is claimed.
+Recorded source selections, alternatives and failed trials are in the [investigation ledger](investigations.json).
 
 ## Orbit and orientation limits
 
