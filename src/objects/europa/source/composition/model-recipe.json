@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-mapped-composition@1",
+  "target": "Europa",
+  "referenceRadiusMeters": 1560800,
+  "input": "composition/fit_SPHERE.json.gz",
+  "sha256": "f991ea9cef84b48b09fe5dd0195d98b5962e505b98bf49f562b577f56c537199",
+  "observationName": "SPHER.2014-12-09T07:57:34.998.fits",
+  "selections": [
+    {
+      "id": "fine-ice",
+      "kind": "posterior",
+      "field": "H2O_crystalline_100um-300um_110K_GhoSST",
+      "statistic": "median"
+    },
+    {
+      "id": "coarse-ice",
+      "kind": "posterior",
+      "field": "H2O_crystalline_300um-1mm_110K_GhoSST",
+      "statistic": "median"
+    },
+    {
+      "id": "fine-ice-uncertainty",
+      "kind": "posterior",
+      "field": "H2O_crystalline_100um-300um_110K_GhoSST",
+      "statistic": "interval-width"
+    },
+    {
+      "id": "coarse-ice-uncertainty",
+      "kind": "posterior",
+      "field": "H2O_crystalline_300um-1mm_110K_GhoSST",
+      "statistic": "interval-width"
+    }
+  ]
+}
