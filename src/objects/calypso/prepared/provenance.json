@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "calypso",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "a39f27253685dc607bfa4d0ece83bbea0aee2071fb20748835ef98618dbfc642"
@@ -605,7 +605,7 @@
       "sha256": "840fc381659291b29fbaa51bdaf09c870da6bcc96b4ae791709e2a354048fb63",
       "bytes": 2120850,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -659,7 +659,7 @@
       "sha256": "0ee9c5e4d7a3a99c41698b975da561991932d5809d2c053a5321d5ea2344b4bd",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -706,7 +706,7 @@
       "sha256": "1cf87f1821323ab7c78e22303c99a0999ea9f73f422936722d2d8e7adc230801",
       "bytes": 3821,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -760,7 +760,7 @@
       "sha256": "b3a3f70a3ff562937099c36fd7f2638341fbfe80ba4d18d9d5598f7f4a682237",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -807,7 +807,7 @@
       "sha256": "bb3cf286532af151da58864d86a5b749d25e5d4af9dc2ee496c2ba09fbbce593",
       "bytes": 3845,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -861,7 +861,7 @@
       "sha256": "892d48c10a42f6144408bc94c6010cb1cda689146c91e13106e072ba2146fcc8",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -908,7 +908,7 @@
       "sha256": "f1be56d59aa8b847a8ffe26eb419668ebfd2b017c071064f8cb8d07de1c3d7a3",
       "bytes": 3846,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -962,7 +962,7 @@
       "sha256": "cb02955542d85f16c96d6f8ee31392185417876c2e913c69c53bfba7f0a43f56",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1009,7 +1009,7 @@
       "sha256": "78bd0afb7754a4e3cb4b2a2cece76aa548f0df8c80aa8a7c585837b4928aa630",
       "bytes": 3846,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1063,7 +1063,7 @@
       "sha256": "7cf3ab2e0df179cbda7e6f8e2b6e09504dfd27a7b6a2166f8e1897dc2316843b",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1110,7 +1110,7 @@
       "sha256": "96511a2858b1d4c2c7ea66fa6ae74f3d0e56721a0498c012011f8296eb84ee4f",
       "bytes": 3845,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1164,7 +1164,7 @@
       "sha256": "54471e72a479d75668f0744717bb9e4d1ac3dab1a337367b4622697836db7ded",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1211,7 +1211,7 @@
       "sha256": "a712b84565fa995d770463b12d2cbb31193d5419a310628dd0bda1ef0eab07dd",
       "bytes": 3845,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1265,7 +1265,7 @@
       "sha256": "61d31cc9af9e4b6e88d74ea8e26d278b6dc7ad6a3819cc43f60b4b3b03ed915f",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1312,7 +1312,7 @@
       "sha256": "fe452c6fa7fe2d3027c38de50b6ee8a7ab511d64ac947bd9ed057cc3c426dfa6",
       "bytes": 3847,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1366,7 +1366,7 @@
       "sha256": "103e5fe61f63b2d2bf7b255fc95656d49a66fe0507643c76550a790c1440d1ca",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1413,7 +1413,7 @@
       "sha256": "fa97e916303126c0bc41fd9c2e81b4f5f9cd900cdb684b2398fcf9bfc3e473de",
       "bytes": 3847,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1467,7 +1467,7 @@
       "sha256": "758ab961ee2f2d857f840a9aaf0cbfdb35d0e2cd14b7d7149761b9e393b87936",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1514,7 +1514,7 @@
       "sha256": "3a2c79b2dbadd0307326f5669f54cb0afc55cdec4fbdb25f59e8cb02974f6f98",
       "bytes": 3856,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1541,7 +1541,7 @@
       "sha256": "056216b95c0e91cad93d502460aae2c74857798a4d9aa77a976636a090d3a60b",
       "bytes": 5625,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1572,19 +1572,19 @@
           "url": "/scenes/calypso/calypso-elevation-thumbnail.webp",
           "bytes": 5342,
           "sha256": "9a19e832557eb1210fbd2a7fedcc497619df800503a70a5e8b6cc5fa54c7a2fa",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/calypso/calypso-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/calypso/calypso-elevation-surface@2x.webp",
           "bytes": 395062,
           "sha256": "f00ccd34e415eceb7610b18ed6bfbcc7f9afc92f602058b88ff5807a094b51da",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1626,13 +1626,13 @@
           "url": "/scenes/calypso/calypso-normal-thumbnail.webp",
           "bytes": 1448,
           "sha256": "eca738d5ff03ad077ae4a1f6a132663c5da27121a7c6d236ed42f349b428f875",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/calypso/calypso-normal-surface@2x.webp",
           "bytes": 307866,
           "sha256": "5ee57cec0cd75be1acf1498d57257633417a04b38a752ceaaa9b0bc6cd6b8a53",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1668,13 +1668,13 @@
           "url": "/scenes/calypso/calypso-false-color-thumbnail.webp",
           "bytes": 1638,
           "sha256": "3d9933a7bb76aa47fe5a1fc99fbe2b2b5f2a9135da0343767a3c570829cf7f9a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/calypso/calypso-false-color-surface@2x.webp",
           "bytes": 308854,
           "sha256": "9fe70525b7dbf48cbdaa7f4110b56986233e988e8f105d29bb8f1418261a9410",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

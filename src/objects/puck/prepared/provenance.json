@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "puck",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "0f91d1ac2ad63c1c06ecc25e78cb7f00199cc85ccb89123c7c2f14d26eb57afc"
@@ -307,7 +307,7 @@
       "sha256": "b13a0124dc199090c2047ef316df5bee68c12cb6b008ff2a49beb238a6c38832",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -354,7 +354,7 @@
       "sha256": "084f2e10d36a1145501a2545a936ed106e52fdd63c33064395d54f02976dda88",
       "bytes": 3294,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -396,7 +396,7 @@
       "sha256": "45d0f9b644507f15a1e08ec5cb945382cd5739d7fab74909f12216753446b3fe",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -416,7 +416,7 @@
       "sha256": "33cc13defeaf3dbe010e75fbe43705851d5f3e2c1e1bcad3fafec4307d5d96ef",
       "bytes": 2842,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -449,13 +449,13 @@
           "url": "/scenes/puck/puck-normal-thumbnail.webp",
           "bytes": 2464,
           "sha256": "079ce2ca4b769905f89c0271bdb0fa5a4194fea7694520c87138d55bb2158285",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/puck/puck-normal-surface@2x.webp",
           "bytes": 76150,
           "sha256": "4ba643c5b5dac95deb0fcbfd65c40d21e9478013b890f1b0df0ab091e892e237",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
