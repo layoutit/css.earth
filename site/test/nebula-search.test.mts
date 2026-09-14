@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFile } from 'node:fs/promises';
-import { prepareNebulaSearch } from '../prepare-nebula-search.mts';
+import { OBJECTS } from '../objects.mts';
+import { defineObjects } from '../object-schema.mts';
+import { definePreparedFocus } from '../prepared-focus-object.mts';
+import type { PreparedFocusObject } from '../prepared-focus-object.mts';
 import { normalizeDestinationQuery } from '../destination-search.mts';
 
 test('rendered nebulae contribute common names and catalogue aliases to search', async () => {
-  const inputs = await Promise.all(['m42','helix','m2-9','m45','m1','m8'].map(id => readFile(new URL(`../../src/objects/${id}/source/nebula.json`,import.meta.url),'utf8').then(JSON.parse)));
-  const rows = prepareNebulaSearch(inputs, '/sun/');
+  const rows = OBJECTS.filter((object): object is PreparedFocusObject => object.kind === 'prepared-focus' && object.classification === 'nebula');
   assert.equal(rows.length, 6);
   for (const [query,id] of [['orion','m42'],['M42','m42'],['NGC 1976','m42'],['helix','helix'],['NGC 7293','helix'],['m2-9','m2-9'],['M2–9','m2-9'],['Twin Jet','m2-9'],
     ['Pleiades','m45'],['M45','m45'],['Seven Sisters','m45'],['Crab','m1'],['M1','m1'],['NGC 1952','m1'],['Lagoon','m8'],['M8','m8'],['NGC 6523','m8']]) {
@@ -14,6 +15,6 @@ test('rendered nebulae contribute common names and catalogue aliases to search',
     assert.equal(match?.focusId,id);
     assert.equal(match?.route,`/sun/?focus=${id}`);
   }
-  assert.throws(()=>prepareNebulaSearch([inputs[0],inputs[0]],'/sun/'),/Duplicate nebula/);
-  assert.throws(()=>prepareNebulaSearch([{}],'/sun/'));
+  assert.throws(()=>defineObjects([rows[0]!,rows[0]!]),/Duplicate object/);
+  assert.throws(()=>definePreparedFocus({}));
 });

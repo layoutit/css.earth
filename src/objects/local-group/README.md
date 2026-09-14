@@ -32,6 +32,13 @@ prepared/
 
 ## Scientific sources
 
+The prepared catalogue retains the original bibliography keys and resolves them
+to citations transcribed from the pinned LVDB bibliography. The separate pinned
+SMC distance paper has an explicit key binding in `source/provenance.json`.
+Distance, sky-position, half-light-radius and membership references must resolve
+when the catalogue is read. Paper links do not inherit the bibliography file’s
+byte hash. See [navigation identity and evidence](../../../docs/navigation-identity.md).
+
 The position/structure compilation is [Pace (2025), Local Volume Database,
 DOI 10.33232/001c.144859](https://doi.org/10.33232/001c.144859), release
 [v1.1.1](https://github.com/apace7/local_volume_database/releases/tag/v1.1.1),

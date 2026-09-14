@@ -1,3 +1,4 @@
+import { testDistance } from './navigation-test-values.mts';
 import assert from "node:assert/strict";
 import test, { type TestContext } from "node:test";
 import { required } from "./navigation-test-values.mts";
@@ -7,7 +8,7 @@ import { resolve } from "node:path";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
 
 import { defineObject, defineObjects, OBJECT_CLASSIFICATIONS } from "../object-schema.mts";
-import { OBJECTS, requireObject } from "../objects.mts";
+import { SCENE_OBJECTS, requireSceneObject } from "../objects.mts";
 import { parsePreparedWorldCameraFrame } from '../../src/renderers/css/dist/index.js';
 import {
   discoverPlanetTests,
@@ -22,7 +23,7 @@ const fixture = Object.freeze({
   systemName: "Test System",
   classification: "dwarf-planet",
   color: "#abcdef",
-  distanceAu: 1,
+  distance: testDistance(1),
   route: "/fixture/",
   loadScene,
   description: "Prepared fixture object.",
@@ -31,12 +32,13 @@ const fixture = Object.freeze({
 test("defines one generic renderable-object contract", () => {
   const objectRecord = defineObject(fixture);
   assert.deepEqual(Object.keys(objectRecord), [
+    "kind",
     "id",
     "name",
     "systemName",
     "classification",
     "color",
-    "distanceAu",
+    "distance",
     "route",
     "loadScene",
     "description",
@@ -66,7 +68,7 @@ test('world-frame capability is validated and copied at the registry boundary', 
   }
   frame.originM[0] = 999;
   assert.equal(required(value.worldFrame).originM[0], 1);
-  for (const object of OBJECTS) assert.deepEqual(object.worldFrame, parsePreparedWorldCameraFrame(object.worldFrame));
+  for (const object of SCENE_OBJECTS) assert.deepEqual(object.worldFrame, parsePreparedWorldCameraFrame(object.worldFrame));
 });
 
 test("rejects invalid object definitions and renderer-specific fields", () => {
@@ -83,8 +85,8 @@ test("rejects invalid object definitions and renderer-specific fields", () => {
     /Invalid object definition/);
   assert.throws(() => defineObject({ ...fixture, color: "tan" }),
     /Invalid object definition/);
-  assert.throws(() => defineObject({ ...fixture, distanceAu: -1 }),
-    /Invalid object definition/);
+  assert.throws(() => defineObject({ ...fixture, distance: testDistance(-1) }),
+    /Invalid prepared navigation distance/);
   assert.throws(() => defineObject({ ...fixture, route: "/wrong/" }),
     /Invalid object definition/);
   assert.throws(() => Reflect.apply(defineObject, undefined, [{ ...fixture, loadScene: true }]),
@@ -107,13 +109,13 @@ test("keeps one open-ended object registry with unique ids and routes", () => {
     () => defineObjects([defineObject(fixture), defineObject(fixture)]),
     /Duplicate object definition/,
   );
-  assert.equal(new Set(OBJECTS.map(({ id }) => id)).size, OBJECTS.length);
-  assert.equal(new Set(OBJECTS.map(({ route }) => route)).size, OBJECTS.length);
+  assert.equal(new Set(SCENE_OBJECTS.map(({ id }) => id)).size, SCENE_OBJECTS.length);
+  assert.equal(new Set(SCENE_OBJECTS.map(({ route }) => route)).size, SCENE_OBJECTS.length);
 
-  assert.ok(OBJECTS.every((objectRecord) =>
-    Object.keys(objectRecord).join("\0") === Object.keys(OBJECTS[0]).join("\0")));
-  assert.equal(requireObject("sun").name, "Sun");
-  assert.throws(() => requireObject("missing"), /Unknown cssEarth object/);
+  assert.ok(SCENE_OBJECTS.every((objectRecord) =>
+    Object.keys(objectRecord).join("\0") === Object.keys(SCENE_OBJECTS[0]).join("\0")));
+  assert.equal(requireSceneObject("sun").name, "Sun");
+  assert.throws(() => requireSceneObject("missing"), /Unknown cssEarth object/);
 });
 
 async function authoredFixture(context: TestContext) {

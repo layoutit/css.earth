@@ -9,7 +9,7 @@ import { createHash } from 'node:crypto';
 import { access, mkdir, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import { authoredObject } from './authored-object.mts';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 import { writePreparedText } from './write-prepared-text.mts';
@@ -33,7 +33,7 @@ export function serializeObjectJson(descriptorValue:unknown, definitionValue:unk
 
 export async function writeObjectJson(id:string, definitionValue:unknown, options?:BindingOptions) {
   let definition:RecompiledPresentation<CheckedObjectRuntimeDefinition>=requireObjectRuntimeDefinition(definitionValue);
-  if (!OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== 'cssearth-object-runtime@4') {
+  if (!SCENE_OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== 'cssearth-object-runtime@4') {
     throw new TypeError('Prepared object identity does not match the application registry.');
   }
   const descriptorPath = resolve(root, 'src/objects', id, 'object.json');
@@ -99,7 +99,7 @@ export async function updateObjectJsonForPresentation(target:string|URL, present
 
 export async function prepareObjectJson(ids?:readonly string[]|null, options?:BindingOptions) {
   const results = [];
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     if (ids && !ids.includes(object.id)) continue;
     try { await access(resolve(root, 'src/objects', object.id, 'object.json')); }
     catch (error) { if (hasErrorCode(error,'ENOENT') && !ids) continue; throw error; }
@@ -112,7 +112,7 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
   // Contexts consume finalized body frames. Preparing them first can retain a
   // previous radius and make an otherwise valid destination fail at handoff.
   const { prepareSpatialContext } = await import('./objects/dist/prepare-spatial-context.js');
-  for (const object of OBJECTS) {
+  for (const object of SCENE_OBJECTS) {
     const directory = resolve(root, 'src/objects', object.id);
     const descriptor = parseObjectDescriptor(await readFile(resolve(directory, 'object.json'), 'utf8'));
     const recipe=descriptor.properties.recipe;

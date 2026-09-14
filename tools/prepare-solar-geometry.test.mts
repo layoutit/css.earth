@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../packages/astronomy/tools/scene-ephemeris.mts';
 import { loadAstronomyPackage } from '../src/platform/astronomy-package.mts';
-import { OBJECTS } from '../site/objects.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
 import * as geometry from '../src/platform/solar-geometry.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from './source-values.mts';
 import { parseSolidPreparationSource } from './objects/terrestrial-layers/profile-source.mts';
@@ -84,7 +84,7 @@ test('Earth is displaced from the EMB by the retained Earth-center vector and th
 });
 
 test('regeneration retains every current registry orbit, including moons and comets', () => {
-  assert.deepEqual(Object.keys(geometry.BODY_ORBITS), OBJECTS.filter(body =>
+  assert.deepEqual(Object.keys(geometry.BODY_ORBITS), SCENE_OBJECTS.filter(body =>
     ['planet', 'dwarf-planet', 'satellite', 'asteroid', 'trans-neptunian', 'interstellar', 'comet'].includes(body.classification)).map(body => body.id));
   assert.equal(new Map(Object.entries(geometry.BODY_POSITION_PROVENANCE)).get('daphnis'), undefined, 'unavailable contemporary ephemeris is not relabeled as observed');
 });

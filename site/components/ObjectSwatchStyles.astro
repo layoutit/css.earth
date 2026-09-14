@@ -1,5 +1,5 @@
 ---
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { contextLocatorImages } from '../../src/navigation/context-locator.mts';
 
 // Resolve provenance-bearing swatches during the page build. Colors and
@@ -9,7 +9,7 @@ const swatches = import.meta.glob<{ hex: string; display?: { hex: string } }>('.
   eager: true,
   import: 'default',
 });
-const styles = OBJECTS.map(({ id }) => {
+const styles = SCENE_OBJECTS.map(({ id }) => {
   const swatch = swatches[`../../src/objects/${id}/swatch.json`];
   if (!swatch) return '';
   const hex = swatch.display?.hex ?? swatch.hex;
@@ -20,7 +20,7 @@ const styles = OBJECTS.map(({ id }) => {
   return `${group}, ${orbit} { color: ${hex}; }\n${group}[data-context-selected="true"]::before { background-image: ${locator}; }\n${group}[data-context-selected="true"][data-context-indicator-hovered="true"]::before { background-image: ${hover}; }`;
 }).join('\n');
 const defaults = '.prepared-world-context { color: #dfdfdf; }';
-const majorBodyLabelStyles = OBJECTS
+const majorBodyLabelStyles = SCENE_OBJECTS
   .filter(({ classification }) => classification === 'star' || classification === 'planet')
   .map(({ id }) => `.prepared-world-context [data-context-label="${id}"] { text-transform: uppercase; }`)
   .join('\n');

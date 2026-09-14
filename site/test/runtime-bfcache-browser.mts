@@ -2,7 +2,7 @@ declare global {interface Window {__cacheEvidence:{token:string;shows:boolean[]}
 import { createTestPage } from './browser-observations.mts';
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { browserObjects } from './browser-objects.mts';
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";

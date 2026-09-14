@@ -1,10 +1,24 @@
 /** Prepared scientific positions and their evidence. This does not alter GXCT. */
-export interface SpatialCatalogSource {
+export interface SpatialCitation {
   readonly id: string;
   readonly url: string;
+  readonly citation: string;
+}
+export interface SpatialCatalogSource extends SpatialCitation {
   readonly sha256: string;
   readonly bytes: number;
-  readonly citation: string;
+  /** Bibliographic entries transcribed from this pinned source; their URLs are not byte pins. */
+  readonly references?: readonly SpatialCitation[];
+}
+
+export function resolveSpatialCitation(reference: string, sources: readonly SpatialCatalogSource[]): SpatialCitation | undefined {
+  for (const source of sources) {
+    const entry = source.references?.find(entry => entry.id === reference);
+    if (entry) return entry;
+  }
+  // Prefer the longest source id when a reference includes a row/field locator.
+  return sources.filter(source => reference === source.id || reference.startsWith(`${source.id}:`))
+    .sort((a, b) => b.id.length - a.id.length)[0];
 }
 
 export interface SpatialMeasurement {
@@ -53,7 +67,7 @@ export function parsePreparedGalaxyCatalog(input: unknown): PreparedGalaxyCatalo
   if (data.schema !== 'cssearth-galaxy-catalog@1') throw new TypeError('Unsupported galaxy catalogue schema.');
   const frame = record(data.frame, 'catalogue frame');
   text(frame.referenceFrame, 'reference frame'); finite(frame.epochJdTt, 'epoch');
-  const sources = array(data.sources, 'sources'), sourceIds = new Set<string>();
+  const sources = array(data.sources, 'sources'), sourceIds = new Set<string>(), referenceIds = new Set<string>();
   for (const item of sources) {
     const source = record(item, 'source'), id = text(source.id, 'source id');
     unique(sourceIds, id, 'source');
@@ -61,7 +75,20 @@ export function parsePreparedGalaxyCatalog(input: unknown): PreparedGalaxyCatalo
     if (!/^[a-f0-9]{64}$/.test(text(source.sha256, 'source digest'))) throw new TypeError('Invalid catalogue source digest.');
     if (!Number.isSafeInteger(positive(source.bytes, 'source byte count'))) throw new TypeError('Invalid source byte count.');
     text(source.citation, 'source citation');
+    for (const value of source.references === undefined ? [] : array(source.references, 'source references')) {
+      const reference = record(value, 'bibliographic reference');
+      unique(referenceIds, text(reference.id, 'reference id'), 'bibliographic reference');
+      if (!/^https?:\/\//u.test(text(reference.url, 'reference URL'))) throw new TypeError('Invalid bibliographic URL.');
+      text(reference.citation, 'reference citation');
+    }
   }
+  if ([...sourceIds].some(id => referenceIds.has(id))) throw new TypeError('Ambiguous source and bibliographic identity.');
+  const boundReference = (value: unknown, label: string) => {
+    const reference = text(value, label);
+    if (!referenceIds.has(reference) && ![...sourceIds].some(id => reference === id || reference.startsWith(`${id}:`))) {
+      throw new TypeError(`Unresolved ${label}: ${reference}`);
+    }
+  };
   const ids = new Set<string>(), detailIds = new Set<string>();
   for (const item of array(data.objects, 'objects')) {
     const row = record(item, 'galaxy'), id = text(row.id, 'galaxy id');
@@ -74,15 +101,16 @@ export function parsePreparedGalaxyCatalog(input: unknown): PreparedGalaxyCatalo
     const sky = record(row.skyPosition, 'sky position');
     const ra = finite(sky.raDeg, 'right ascension'), dec = finite(sky.decDeg, 'declination');
     if (ra < 0 || ra >= 360 || dec < -90 || dec > 90) throw new TypeError('Galaxy sky coordinates are outside their domain.');
-    text(sky.sourceRef, 'sky position reference');
+    boundReference(sky.sourceRef, 'sky position reference');
     const distance = measurement(row.distance, 'distance');
+    boundReference(distance.sourceRef, 'distance reference');
     text(distance.method, 'distance method');
     if (distance.uncertainty !== undefined) {
       const uncertainty = record(distance.uncertainty, 'distance uncertainty');
       nonnegative(uncertainty.statisticalPc, 'statistical distance error');
       nonnegative(uncertainty.systematicPc, 'systematic distance error');
     }
-    if (row.halfLightRadius !== undefined) measurement(row.halfLightRadius, 'half-light radius');
+    if (row.halfLightRadius !== undefined) boundReference(measurement(row.halfLightRadius, 'half-light radius').sourceRef, 'half-light radius reference');
     if (row.hostId !== undefined) text(row.hostId, 'host id');
     const membership = record(row.membership, 'membership');
     if (!['local-group', 'local-volume', 'uncertain'].includes(String(membership.group)) ||
@@ -90,7 +118,7 @@ export function parsePreparedGalaxyCatalog(input: unknown): PreparedGalaxyCatalo
       throw new TypeError('Unknown catalogue membership classification.');
     }
     text(membership.basis, 'membership evidence');
-    if (membership.sourceRef !== undefined) text(membership.sourceRef, 'membership reference');
+    if (membership.sourceRef !== undefined) boundReference(membership.sourceRef, 'membership reference');
     if (row.status !== 'confirmed' && row.status !== 'candidate') throw new TypeError('Unknown galaxy confirmation status.');
     if (row.detailedObjectId !== undefined) unique(detailIds, text(row.detailedObjectId, 'detailed object id'), 'detailed object');
     if (row.presentation !== undefined) positive(record(row.presentation, 'presentation').focusRadiusM, 'navigation framing radius');

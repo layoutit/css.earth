@@ -3,7 +3,7 @@ import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mts";
 import PlanetInformationPanel from "./PlanetInformationPanel.astro";
 import PreparedFocusLenses from "./PreparedFocusLenses.astro";
 import type { Props } from "../planet-shell-types";
-import { OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { objectClassificationLabel } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mts";
@@ -54,8 +54,8 @@ const speedValues: Readonly<Record<string, number>> = Object.freeze({
 });
 const initialSpeedState = speedSetting?.state ?? "normal";
 const initialSpeedValue = speedValues[initialSpeedState] ?? 1;
-const activeObject = OBJECTS.find((object) => object.id === objectId);
-const systemStar = OBJECTS.find(object => object.classification === 'star' && object.distanceAu === 0)!;
+const activeObject = SCENE_OBJECTS.find((object) => object.id === objectId);
+const systemStar = SCENE_OBJECTS.find(object => object.classification === 'star' && object.distance.meters === 0)!;
 const unavailableSystems = planetarySystems.unavailable.map(system => ({
   ...system,
   markerColor: `rgb(${temperatureColor(system.temperatureK).join(' ')})`,
@@ -272,7 +272,7 @@ const searchCategories = ([
         <div class="planet-card-tabpanel" id="prepared-focus-factsheet-content" data-information-panel="factsheet"
           data-information-group="prepared-focus" role="tabpanel" aria-labelledby="prepared-focus-factsheet-tab" tabindex="0" hidden>
           <div class="planet-factsheet-body"><div class="planet-facts"><ul class="planet-primary-facts">
-            {[['distance', 'Distance from Sun'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
+            {[['distance', 'Observer distance'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
               <li><span class="planet-fact-label">{label}</span><span class="planet-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
           </ul></div></div>
           <PreparedFocusLenses factsOnly />
