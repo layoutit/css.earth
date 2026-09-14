@@ -52,8 +52,8 @@
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
       "status": "unresolved",
-      "finding": "The prior directory-only finding is retained in the earlier checked revision. Reopened after reading native FITS headers, Marsset et al. (2020) and its supplement, the LAM spin release, DAMIT model 4395 and the documented ADAM rotation convention. Four 256 x 256 float64 SPHERE frames were decoded at 3.63 mas per pixel. The retained CRPIX value 512 is outside the cutout, so it does not provide its detector centre. Source-spin/Horizons cameras plus bounded limb fitting produced a first offline photograph-to-MPCD projection. Three separated views have withheld limb RMS 1.330, 0.938 and 0.633 native pixels; these are outline measurements, not interior registration. The existing 27-pixel patch matcher fails even an identity comparison because only six patches survive. An exploratory 13-pixel patch comparison, with all acceptance criteria unchanged, passes identity but fails cross-observation checks, including two Oct 11 frames four minutes apart. This shows both a fixed-patch applicability limit and a remaining unqualified image-to-surface placement; it does not prove missing source geometry. No photographic surface was added.",
-      "revisitWhen": "Establish native-image interior controls or an applicable independent registration check against the published model/frame. Smaller patches alone did not qualify cross-observation placement; do not repeat the directory search or relax acceptance merely to obtain a pass.",
+      "finding": "Four native 256 x 256 float64 SPHERE frames were decoded at 3.63 mas per pixel. The prior camera investigation retains the LAM/DAMIT/ADAM frame interpretation, light-time-corrected Horizons vectors and bounded limb fits: three separated views reached 0.63–1.33 pixel withheld RMS, but cross-observation interior registration did not qualify. The standard 27-pixel patches also failed identity through insufficient count; exploratory 13-pixel patches passed identity but not observation transfer. The new reproducible native-crater comparison remains unqualified; see marsset-crater-controls for the measured discrepancies and identification limits. The original directory-only assessment and full prior trials remain in the pinned evidence. No photographic surface or camera correction has been adopted.",
+      "revisitWhen": "Resolve the native crater identities and their published-coordinate correspondence to the released model, using independent evidence. The pinned diagnostic recipe can replay changes without camera fitting. Do not treat these tentative picks, a good limb fit, or successful FITS decoding as photographic qualification.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/pallas/README.md",
         "https://observations.lam.fr/astero/Data/2Pallas/",
@@ -62,7 +62,10 @@
         "https://doi.org/10.1038/s41550-019-1007-5",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/4395",
         "https://damit.cuni.cz/pages/documentation",
-        "https://github.com/matvii/ADAM/blob/25810f767b9de349a356df520109f4705f87f7a7/rotate.c"
+        "https://github.com/matvii/ADAM/blob/25810f767b9de349a356df520109f4705f87f7a7/rotate.c",
+        "https://github.com/layoutit/css.earth/blob/ec71fea3d07760962ffea70a13e2ce9fffcdd754/src/objects/pallas/evidence/projected-controls.json",
+        "https://github.com/layoutit/css.earth/blob/ec71fea3d07760962ffea70a13e2ce9fffcdd754/src/objects/pallas/evidence/photographic-controls.json",
+        "https://arxiv.org/pdf/1902.01287"
       ],
       "checked": [
         {
@@ -77,6 +80,11 @@
         {
           "date": "2026-09-14",
           "commit": "6202baac4686008757eeaba418e37a18b043f06a"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "ec71fea3d07760962ffea70a13e2ce9fffcdd754",
+          "pr": 204
         }
       ]
     },
@@ -130,17 +138,25 @@
       "id": "marsset-crater-controls",
       "subject": "Published crater coordinates as image registration controls",
       "status": "unresolved",
-      "finding": "Figure 2 compares observations, ADAM renders and crater sketches; Supplementary Table 1 provides planetocentric crater coordinates. Those coordinates remain a possible independent registration route, but the sketches and native FITS pixels have not been tied by a verified transform with stated uncertainties. Visual differences in provisional markers are not a measured model incompatibility.",
-      "revisitWhen": "Establish the published crater centres in native FITS pixels and quantify their identification uncertainty before testing the selected model and camera on independent controls.",
+      "finding": "Reopened after inspecting native October 11 pixels against the crater configuration in Marsset Figure 2 and Supplementary Table 1. Four tentative centre picks were recorded before projecting their published coordinates. Toxa, Xyston and Akontia differ by 23–29 pixels on both frozen ADAM and MPCD cameras; Hoplon differs by 9–11 pixels. The visual identification regions are not confidence intervals, so these discrepancies do not establish absolute camera error or model incompatibility. Exploratory quadratic illumination correction following Fetick et al. (2019), section 4.4, did not resolve the identities. A three-control rigid-frame sensitivity trial left the fourth direction 10.6 degrees away; no transform was adopted. A shared TypeScript checker now verifies pinned inputs and replays the projections, visibility and residuals. Five focused tests and the preparation TypeScript project pass; source registration is still unresolved. Earlier marker and sketch-transform limitations remain in the pinned prior evidence.",
+      "revisitWhen": "Resolve the native crater identities and their published-coordinate correspondence to the released model, using independent evidence. The pinned diagnostic recipe can replay changes without camera fitting. Do not treat these tentative picks, a good limb fit, or successful FITS decoding as photographic qualification.",
       "evidence": [
         "https://doi.org/10.1038/s41550-019-1007-5",
         "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41550-019-1007-5/MediaObjects/41550_2019_1007_MOESM1_ESM.pdf",
-        "https://github.com/layoutit/css.earth/blob/6202baac4686008757eeaba418e37a18b043f06a/src/objects/pallas/evidence/photographic-projection.json"
+        "https://github.com/layoutit/css.earth/blob/6202baac4686008757eeaba418e37a18b043f06a/src/objects/pallas/evidence/photographic-projection.json",
+        "https://github.com/layoutit/css.earth/blob/ec71fea3d07760962ffea70a13e2ce9fffcdd754/src/objects/pallas/evidence/projected-controls.json",
+        "https://github.com/layoutit/css.earth/blob/ec71fea3d07760962ffea70a13e2ce9fffcdd754/src/objects/pallas/evidence/photographic-controls.json",
+        "https://arxiv.org/pdf/1902.01287"
       ],
       "checked": [
         {
           "date": "2026-09-14",
           "commit": "6202baac4686008757eeaba418e37a18b043f06a"
+        },
+        {
+          "date": "2026-09-14",
+          "commit": "ec71fea3d07760962ffea70a13e2ce9fffcdd754",
+          "pr": 204
         }
       ]
     }
