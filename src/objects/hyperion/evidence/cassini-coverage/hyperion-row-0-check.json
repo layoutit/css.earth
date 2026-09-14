@@ -1,0 +1,64 @@
+{
+  "body": "hyperion",
+  "mode": "fixed-camera-validation",
+  "recipeSha256": "db650721f8880503799e94252f0eb2459bb020684ca89571d7369e24da44e064",
+  "referenceCamera": {
+    "id": "n1506391424",
+    "observerLatitude": 10.62,
+    "observerWestLongitude": 204.06,
+    "sunLatitude": 11.11,
+    "sunWestLongitude": 255.22,
+    "rangeKm": 16782.2,
+    "northAzimuthDegrees": 329.3949554495464,
+    "center": [
+      72.10596576651524,
+      374.01763246187295
+    ],
+    "pixelAngleMicroradians": 5.9896977199,
+    "path": "observations/N1506391424_2_CALIB.IMG",
+    "labelPath": "observations/N1506391424_2_CALIB.LBL",
+    "coverageInsetPixels": 16,
+    "backgroundMaximum": 0.003
+  },
+  "implementationSha256": "554e629a61076d47a5e3357ad941cd75d86bd42bf8c9dd8e6a45f2afdfa9b7c4",
+  "mesh": {
+    "path": "shape/hyperion_30k_plt.tab",
+    "sha256": "cf90156a297d3078375583a99c2367bfe265bc5175710772e173544a25c37002"
+  },
+  "settings": {
+    "patchRadiusPixels": 13,
+    "patchSampleStepPixels": 2,
+    "patchGridStepPixels": 76,
+    "searchRadiusPixels": 9,
+    "detailBoxWidthsPixels": [
+      5,
+      31
+    ],
+    "maximumEmissionDegrees": 65,
+    "maximumReferenceIncidenceDegrees": 75,
+    "minimumValidSignal": 0.002,
+    "minimumDetailVariance": 0.000001,
+    "minimumConvolutionMarginPixels": 16,
+    "maximumSourceMeshVisibilityResidualMeters": 1
+  },
+  "method": "Rigid detector translation and roll fitted to interior image features through the published source mesh; disjoint checkerboard patches held out. A 5-pixel minus31-pixel box-mean image isolates detail for correlation only; original I/F stays unchanged. Fixed source range, focal scale, body and solar directions.",
+  "criteria": {
+    "minimumCorrelation": 0.9,
+    "minimumSeparatedPeakMargin": 0.01,
+    "minimumPeakCurvature": 0.002,
+    "minimumFitControls": 6,
+    "minimumHoldoutControls": 6,
+    "maximumHoldoutRmsPixels": 1,
+    "maximumHoldoutResidualPixels": 2
+  },
+  "reports": [
+    {
+      "filter": "CL1+CL2",
+      "id": "n1506393778_2",
+      "accepted": false,
+      "reason": "Insufficient independent feature patches",
+      "controls": 0,
+      "patches": 116
+    }
+  ]
+}

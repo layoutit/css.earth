@@ -19,6 +19,23 @@
           "pr": 83
         }
       ]
+    },
+    {
+      "id": "cassini-coverage-2026-09-13",
+      "subject": "Four repeat clear-filter candidates",
+      "status": "deferred",
+      "finding": "N1656997840_1, N1656997895_1, N1656998530_1 and N1656998585_1 were acquired and their published camera rows inventoried. They repeat the existing 2010 viewing geometry. No new surface trial or independent registration was completed for these candidates, and the existing crescent/illumination limitations remain. The package is unchanged; this inventory is not a qualification result.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/daphnis_document.pdf",
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
+        }
+      ],
+      "revisitWhen": "A bounded native-image and projected-coverage comparison demonstrates useful additional reliable terrain, followed by independent registration checks."
     }
   ]
 }
