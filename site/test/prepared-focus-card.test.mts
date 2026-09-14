@@ -12,10 +12,12 @@ class Element extends EventTarget {
   getAttribute(name: string) { return this.attributes.get(name) ?? null; }
   removeAttribute(name: string) { this.attributes.delete(name); }
 }
-function fixture() {
+function fixture(unavailableObjects = '') {
   const root = new Element(), bank = new Element(), stars = new Element(), datasetTab = new Element();
   const tabs: string[] = [];
   root.selectors.set('[data-information-tab="dataset"]', datasetTab);
+  const unavailable = new Element(); unavailable.dataset.unavailableObjects = unavailableObjects;
+  root.selectors.set('[data-focus-unavailable]', unavailable);
   bank.dataset.focusLensBank = 'prepared-galaxy';
   const ids = ['first', 'second', 'third'];
   const buttons = ids.map(id => Object.assign(new Element(), { value: id }));
@@ -36,9 +38,24 @@ function fixture() {
   const presentation: PreparedFocusPresentation = { id: 'first', defaultLens: 'first', objectId: 'prepared-galaxy', selectedLens: 'first', starsVisible: true,
     lenses: ids.map(id => ({ id, label: id, title: id, description: id, sourceUrl: 'https://example.test/source' })), selectLens() {}, setStarsVisible() {} };
   // This retained DOM stand-in implements only the card's queried fields and events.
-  return { root, bank, factsBank, facts, stars, buttons, details, record, presentation, datasetTab, tabs,
+  return { root, bank, factsBank, facts, stars, buttons, details, record, presentation, datasetTab, tabs, unavailable,
     card: createPreparedFocusCard(root as unknown as HTMLElement, id => tabs.push(id)) };
 }
+
+test('an unavailable volume keeps catalogue facts and a retained explanation, without stale dataset controls', () => {
+  const f = fixture('prepared-galaxy');
+  f.card.set(f.record);
+  assert.equal(f.unavailable.hidden, false);
+  assert.match(f.unavailable.textContent, /3D view of Prepared galaxy is unavailable/);
+  assert.equal(f.datasetTab.hidden, true);
+  assert.equal(f.bank.hidden, true);
+  assert.equal(f.root.querySelector('[data-focus-distance]')?.textContent, '50,000 pc');
+  f.card.set({ ...f.record, detailedObjectId: undefined });
+  assert.equal(f.unavailable.hidden, true);
+  f.card.set(f.record); f.card.set(null);
+  assert.equal(f.unavailable.hidden, true);
+  f.card.destroy();
+});
 
 test('prepared focus lenses retain controls and reflect only the applied runtime selection', () => {
   const f = fixture(), requested: string[] = [], starRequests: boolean[] = [];
