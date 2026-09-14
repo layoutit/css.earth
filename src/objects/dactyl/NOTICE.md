@@ -4,6 +4,14 @@ Veverka et al. (1996), Galileo imaging team. Numerical scientific facts; indepen
 
 Scientific sources are linked in source/measurements.json. This package does not redistribute paper prose or figures.
 
+On 2026-09-14, the [publisher's Veverka article page](https://www.sciencedirect.com/science/article/pii/S0019103596900457)
+identifies its open-archive license as [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+That does not establish permission to publish a reprojected texture made from
+the paper figure. The supplied PDF and extracted JPEGs remain local references;
+the map-review report records numerical measurements and source identities.
+The independently archived original NASA exposure is a separate source under
+the mission notices below.
+
 The native Galileo SSI images, PDS labels and detector-quality records retained
 under `evidence/galileo/native/` are public NASA mission scientific data from
 NASA/JPL/Galileo SSI, distributed by the PDS Small Bodies Node. The scan-platform
