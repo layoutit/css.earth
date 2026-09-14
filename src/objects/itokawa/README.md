@@ -10,6 +10,24 @@
 
 ## Evidence
 
+### Native SBMT comparison, 14 September 2026
+
+The [shared SBMT oracle](../../../tools/oracles/sbmt/README.md) independently
+reads the full Gaskell ver128q shape, the 1024×1024 ST_2402987304 v-band FITS
+image and its [archived SUM pointing](source/observations/N2402987304.SUM).
+Pointing, sampled FITS values and visible surface intersections agree with the
+repository's numerical code. **UV projection differs by up to 1.0021 pixels**
+across the tested orientations, beyond the fixed 0.25-pixel criterion. That
+result is retained as a difference in the oracle's report and regression test.
+It is consistent with SBMT's angular UV approximation differing from a pinhole
+camera; it is not a solved registration or a measured ground-truth error.
+
+The [fixture](../../../tests/oracles/sbmt/projection.json) pins the inputs,
+generator and native software. The existing AMICA mosaic continues to use its
+controlled DDR route described below. This test does not replace that route or
+change its published texture. The SUM download uses SBMT's published public
+access pair (`public` / `wide-open`) and its manifest byte pin.
+
 ### Close-up priority, 14 September 2026
 
 The AMICA view adds two controlled October photographs and uses the existing

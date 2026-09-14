@@ -347,6 +347,16 @@ distortion) need conda and arrive with the first Cassini ISS lens. ISIS's
 photometric models are checked against the truth files of their unit tests,
 which need no ISIS install. See `tools/oracles/README.md`.
 
+For SUM/INFO image-to-shape investigations, use the optional
+[native SBMT preparation oracle](../../../../tools/oracles/sbmt/README.md).
+Add a source-pinned case to its shared inventory rather than writing a body-only
+reference script. Its staged comparison separates pointing, visible intercepts,
+FITS samples and UV projection. SBMT's angular UV approximation is not exact
+pinhole projection, and its clamped off-image UVs are not photographic coverage.
+Keep discrepancies explicit; a green regression test can mean a known mismatch
+was correctly detected. A/A repetition establishes reproducibility, not source
+registration. Oracle output must never become a camera recipe or surface input.
+
 ## Commands and test routing
 
 Read `package.json` for the selected checkout. The commands below have distinct
