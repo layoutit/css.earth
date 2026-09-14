@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/nausikaa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'nausikaa',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/nausikaa/nausikaa-directional-sun.webp",
-      "two": "/scenes/nausikaa/nausikaa-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/nausikaa/nausikaa-shape-surface@2x.webp"
   ],

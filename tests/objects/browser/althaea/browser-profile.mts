@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/althaea/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'althaea',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/althaea/althaea-directional-sun.webp",
-      "two": "/scenes/althaea/althaea-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/althaea/althaea-shape-surface@2x.webp"
   ],

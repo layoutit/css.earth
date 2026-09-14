@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="aglaja"])[data-lod="billboard"] .aglaja-scene, .planet-stage:where([data-object-id="aglaja"])[data-lod="marker"] .aglaja-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="aglaja"])[data-lod="marker"] .aglaja-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="aglaja"]).aglaja-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

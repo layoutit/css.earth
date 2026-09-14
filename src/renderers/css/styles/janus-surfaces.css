@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="janus"])[data-lod="billboard"] .janus-scene, .planet-stage:where([data-object-id="janus"])[data-lod="marker"] .janus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="janus"])[data-lod="marker"] .janus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="janus"]).janus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

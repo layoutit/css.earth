@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/vera/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'vera',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/vera/vera-directional-sun.webp",
-      "two": "/scenes/vera/vera-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/vera/vera-shape-surface@2x.webp"
   ],

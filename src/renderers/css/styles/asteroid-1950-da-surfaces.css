@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asteroid-1950-da"])[data-lod="billboard"] .asteroid-1950-da-scene, .planet-stage:where([data-object-id="asteroid-1950-da"])[data-lod="marker"] .asteroid-1950-da-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asteroid-1950-da"])[data-lod="marker"] .asteroid-1950-da-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asteroid-1950-da"]).asteroid-1950-da-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="penthesilea"])[data-lod="billboard"] .penthesilea-scene, .planet-stage:where([data-object-id="penthesilea"])[data-lod="marker"] .penthesilea-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="penthesilea"])[data-lod="marker"] .penthesilea-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="penthesilea"]).penthesilea-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

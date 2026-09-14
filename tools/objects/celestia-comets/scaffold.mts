@@ -34,7 +34,7 @@ for(const c of intake){
  await writeFile(`${s}/shape/model.obj`,obj);
  await copyFile(new URL(c.mesh,sourceRoot),`${s}/shape/${c.mesh}`);
  await write(`${s}/shape/model.json`,model);
- const config=await clone('source/preparation/terrestrial.json');config.distanceAu=c.distanceAu;const geometry=requireRecord(config.geometry),radialTerrain=requireRecord(geometry.radialTerrain);geometry.radiusKm=model.volumeEquivalentRadiusKm;
+ const config=await clone('source/preparation/terrestrial.json');const geometry=requireRecord(config.geometry),radialTerrain=requireRecord(geometry.radialTerrain);geometry.radiusKm=model.volumeEquivalentRadiusKm;
  radialTerrain.path='shape/model.obj';radialTerrain.format='wavefront-obj';radialTerrain.grid={metersPerUnit:1,expectedVertices:meshReport.vertices,expectedFaces:meshReport.faces};
  records(requireRecord(config.raster).shapeViews)[0].label='Illustrative nucleus';
  requireRecord(radialTerrain.simplification).maximumErrorMeters=c.radiusKm*50;
@@ -51,7 +51,7 @@ for(const c of intake){
  content.panel={facts,moreFacts:[]};requireRecord(lenses.labels).model='Illustrative nucleus';
  Object.assign(lensControl,{label:'Illustrative nucleus',facts});
  requireRecord(lensControl.source).url=url;requireRecord(lensControl.source).id='celestia-mesh';
- records(requireRecord(content.settings).controls).forEach(x=>{if(x.name==='shadows'||x.name==='orbit')x.checked=false;});
+ records(requireRecord(content.settings).controls).forEach(x=>{if(x.name==='shadows')x.checked=false;});
  content.resources=[{label:'Celestia',role:'surface',description:'Catalog entry and estimated scale',href:url},{label:'JPL Horizons',role:'observations',description:'Position at 3 September 2026',href:'https://ssd.jpl.nasa.gov/horizons/'},...(ed.url?[{label:'About this comet',role:'observations',description:'Observations and history',href:ed.url}]:[]),requireArray(content.resources).at(-1)];
  provenance.editorial={url:ed.url??url,credit:ed.url?'Sources listed in reference/source-record.json':credit};provenance.physical={path:'../shape/model.json',credit};
  await write(`${s}/content/object.json`,content);

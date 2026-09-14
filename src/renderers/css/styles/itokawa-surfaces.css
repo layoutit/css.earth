@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="itokawa"])[data-lod="billboard"] .itokawa-scene, .planet-stage:where([data-object-id="itokawa"])[data-lod="marker"] .itokawa-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="itokawa"])[data-lod="marker"] .itokawa-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="itokawa"]).itokawa-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

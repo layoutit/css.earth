@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="varda"])[data-lod="billboard"] .varda-scene, .planet-stage:where([data-object-id="varda"])[data-lod="marker"] .varda-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="varda"])[data-lod="marker"] .varda-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="varda"]).varda-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

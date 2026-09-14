@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bianca"])[data-lod="billboard"] .bianca-scene, .planet-stage:where([data-object-id="bianca"])[data-lod="marker"] .bianca-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bianca"])[data-lod="marker"] .bianca-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bianca"]).bianca-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

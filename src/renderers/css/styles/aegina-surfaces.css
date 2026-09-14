@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="aegina"])[data-lod="billboard"] .aegina-scene, .planet-stage:where([data-object-id="aegina"])[data-lod="marker"] .aegina-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="aegina"])[data-lod="marker"] .aegina-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="aegina"]).aegina-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

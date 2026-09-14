@@ -18,11 +18,7 @@ export const browserProfile = createObjectBrowserProfile({
         one: "/scenes/moon/moon-starfield-front.webp",
         two: "/scenes/moon/moon-starfield-front@2x.webp",
       }),
-      Object.freeze({
-        one: "/scenes/moon/moon-directional-sun.webp",
-        two: "/scenes/moon/moon-directional-sun@2x.webp",
-      }),
-    ]),
+      ]),
     lensRace: Object.freeze({
       defaultId: "surface",
       slowId: "topography",

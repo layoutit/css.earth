@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="diomedes"])[data-lod="billboard"] .diomedes-scene, .planet-stage:where([data-object-id="diomedes"])[data-lod="marker"] .diomedes-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="diomedes"])[data-lod="marker"] .diomedes-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="diomedes"]).diomedes-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

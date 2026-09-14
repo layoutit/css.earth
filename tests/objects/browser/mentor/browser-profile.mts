@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/mentor/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'mentor',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/mentor/mentor-directional-sun.webp",
-      "two": "/scenes/mentor/mentor-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/mentor/mentor-shape-surface@2x.webp"
   ],

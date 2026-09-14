@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/aglaja/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'aglaja',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/aglaja/aglaja-directional-sun.webp",
-      "two": "/scenes/aglaja/aglaja-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/aglaja/aglaja-shape-surface@2x.webp"
   ],

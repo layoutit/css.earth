@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/gallia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'gallia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/gallia/gallia-directional-sun.webp",
-      "two": "/scenes/gallia/gallia-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/gallia/gallia-shape-surface@2x.webp"
   ],

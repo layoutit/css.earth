@@ -34,8 +34,6 @@ export interface LevelOfDetailPlan {
   markerFadeStartDiscPixels: number; markerFullDiscPixels: number;
 }
 export interface OrbitLineFade { visibleBelowDiscHeightShare: number; hiddenAboveDiscHeightShare: number; }
-export interface PlanetarySystemFade { model: string; hiddenBelowDistanceOverOrbitExtent: number; visibleAboveDistanceOverOrbitExtent: number; }
-export interface SunMarkerFade { model: string; fadeStartSpritePixels: number; fullSpritePixels: number; }
 export interface CameraPlan extends PitchCalibration {
   cameraModel: string; pitchBounded: boolean; yawBounded: boolean;
   minimumControlPitchDegrees: number; defaultControlYawDegrees: number; maximumScenePitchDegrees: number;
@@ -44,9 +42,9 @@ export interface CameraPlan extends PitchCalibration {
   logicalBodyDiameter: number; responsiveFit: ResponsiveFit;
   projection?: { model: string; cssPerspective: string };
   dolly?: { model: string; wheelStepPerDelta: number; minimumDistanceRadii: number;
-    maximumDistanceOverOrbitExtent: number; maximumDistanceOverSystemExtent?: number };
+    maximumDistanceOverOrbitExtent: number };
   levelOfDetail?: LevelOfDetailPlan; orbitLineFade?: OrbitLineFade;
-  planetarySystem?: PlanetarySystemFade; sunMarker?: SunMarkerFade; drag?: { model: string };
+  drag?: { model: string };
 }
 export interface PerspectiveCameraPlan extends CameraPlan {
   projection: NonNullable<CameraPlan['projection']>; dolly: NonNullable<CameraPlan['dolly']>;

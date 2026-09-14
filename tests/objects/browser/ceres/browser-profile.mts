@@ -9,8 +9,7 @@ export const browserProfile = createObjectBrowserProfile({
       Object.freeze({ one: "/scenes/ceres/ceres-normal.webp", two: "/scenes/ceres/ceres-normal@2x.webp" }),
       Object.freeze({ one: "/scenes/ceres/ceres-poles-normal.webp", two: "/scenes/ceres/ceres-poles-normal@2x.webp" }),
       Object.freeze({ one: "/scenes/ceres/ceres-starfield-front.webp", two: "/scenes/ceres/ceres-starfield-front@2x.webp" }),
-      Object.freeze({ one: "/scenes/ceres/ceres-directional-sun.webp", two: "/scenes/ceres/ceres-directional-sun@2x.webp" }),
-    ]),
+      ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "enhanced",

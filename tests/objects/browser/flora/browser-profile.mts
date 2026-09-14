@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/flora/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'flora',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/flora/flora-directional-sun.webp",
-      "two": "/scenes/flora/flora-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/flora/flora-shape-surface@2x.webp"
   ],

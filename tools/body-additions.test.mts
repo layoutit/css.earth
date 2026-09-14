@@ -7,7 +7,6 @@ import test from 'node:test';
 import { readCatalog, prepareCatalog } from './prepare-catalog.mts';
 import { prepareBodyRecords } from '../packages/astronomy/tools/body-records.mts';
 import { literalRecords } from '../packages/astronomy/tools/lib/write-record-sections.mts';
-import { prepareMarkerBindings } from './prepare-marker-bindings.mts';
 import type { PathLike } from 'node:fs';
 
 const write = async (path: string, value: unknown) => {
@@ -26,10 +25,7 @@ async function addBody(root: string, id: string, classification: string, parent 
     id, classification, physical: { name: id, horizonsCode: null, meanRadiusKm: 1,
       gravitationalParameterKm3PerS2: 0, parent: id === 'sun' ? null : parent },
   });
-  await write(resolve(root, `src/objects/${id}/prepared/runtime.json`), prepareMarkerBindings({
-    id, heliocentricView: { bodyMarker: { url: '/navigation/planet-markers.webp', index: 7, count: 12, size: 5 },
-      systemMarkers: { url: '/navigation/planet-markers.webp', sun: { index: 0, count: 12, size: 5 }, bodies: {} } },
-  }));
+  await write(resolve(root, `src/objects/${id}/prepared/runtime.json`), { id });
 }
 
 test('independent asteroid, moon and comet branches merge without changing existing packages', async t => {

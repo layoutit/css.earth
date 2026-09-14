@@ -3,11 +3,9 @@ import {requireObjectRuntimeDefinition} from '../../../object-runtime-contract.m
 import { mkdir as ensureReportDirectory } from 'node:fs/promises';
 const reportDirectory=process.env.CSSEARTH_AUDIT_OUTPUT ?? 'output/distant-worlds';
 await ensureReportDirectory(reportDirectory, {recursive:true});
-import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {OBJECTS} from '../../../../site/objects.mts';
-import {prepareMarkerBindings} from '../../../../tools/prepare-marker-bindings.mts';
 import {serializeObjectJson,prepareObjectJson} from '../../../../tools/prepare-object-json.mts';
 import {writePreparedText} from '../../../../tools/write-prepared-text.mts';
 import {preparePageMetadata} from '../../../../tools/prepared-page-metadata.mts';
@@ -15,9 +13,7 @@ const results=[];
 for(const {id} of OBJECTS){
  const root=`src/objects/${id}`,descriptor=requireRecord(JSON.parse(await readFile(`${root}/object.json`, 'utf8')));
  const runtime=requireObjectRuntimeDefinition(JSON.parse(await readFile(`${root}/prepared/runtime.json`, 'utf8')));
- const definition=prepareMarkerBindings(runtime);
- const withoutMarkers=({heliocentricView,...rest}: typeof runtime)=>rest;
- assert.deepEqual(withoutMarkers(definition),withoutMarkers(runtime));
+ const definition=runtime;
  const payload=serializeObjectJson(descriptor,definition);
  const sha256=createHash('sha256').update(payload).digest('hex');
  await writePreparedText(`${root}/prepared/runtime.json`,JSON.stringify(definition)+'\n');
@@ -25,10 +21,10 @@ for(const {id} of OBJECTS){
  const page=preparePageMetadata(id,sha256,definition);
  await writePreparedText(`${root}/prepared/page.json`,page.text);
  await writePreparedText(`${root}/object.json`,JSON.stringify({...descriptor,prepared:{...requireRecord(descriptor.prepared),sha256},properties:{...requireRecord(descriptor.properties),page:{...requireRecord(requireRecord(descriptor.properties).page),metadata:page.reference}}},null,2)+'\n');
- results.push({id,bytes:Buffer.byteLength(payload),sha256,scope:'Existing marker binding and object serializer; all non-marker runtime fields retained exactly.'});
+ results.push({id,bytes:Buffer.byteLength(payload),sha256,scope:'Existing object serializer; all runtime fields retained exactly.'});
 }
 // Empty selection skips presentation compilation and refreshes contexts from
 // the already finalized descriptor frames through the existing context owner.
 await prepareObjectJson([]);
 await writeFile(`${reportDirectory}/transports.json`,JSON.stringify(results,null,2)+'\n');
-console.log('Marker bindings, transports and contexts refreshed:',results.length,'; zero presentation recompiles');
+console.log('Transports and contexts refreshed:',results.length,'; zero presentation recompiles');

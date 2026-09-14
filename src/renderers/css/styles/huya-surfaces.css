@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="huya"])[data-lod="billboard"] .huya-scene, .planet-stage:where([data-object-id="huya"])[data-lod="marker"] .huya-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="huya"])[data-lod="marker"] .huya-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="huya"]).huya-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

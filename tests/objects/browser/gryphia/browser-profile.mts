@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/gryphia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'gryphia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/gryphia/gryphia-directional-sun.webp",
-      "two": "/scenes/gryphia/gryphia-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/gryphia/gryphia-shape-surface@2x.webp"
   ],

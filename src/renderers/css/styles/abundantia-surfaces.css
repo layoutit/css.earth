@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="abundantia"])[data-lod="billboard"] .abundantia-scene, .planet-stage:where([data-object-id="abundantia"])[data-lod="marker"] .abundantia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="abundantia"])[data-lod="marker"] .abundantia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="abundantia"]).abundantia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

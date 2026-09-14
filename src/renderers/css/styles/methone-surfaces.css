@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="methone"])[data-lod="billboard"] .methone-scene, .planet-stage:where([data-object-id="methone"])[data-lod="marker"] .methone-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="methone"])[data-lod="marker"] .methone-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="methone"]).methone-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

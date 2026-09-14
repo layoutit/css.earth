@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/cyrene/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'cyrene',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/cyrene/cyrene-directional-sun.webp",
-      "two": "/scenes/cyrene/cyrene-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/cyrene/cyrene-shape-surface@2x.webp"
   ],

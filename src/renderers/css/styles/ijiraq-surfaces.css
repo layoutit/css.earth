@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ijiraq"])[data-lod="billboard"] .ijiraq-scene, .planet-stage:where([data-object-id="ijiraq"])[data-lod="marker"] .ijiraq-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ijiraq"])[data-lod="marker"] .ijiraq-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ijiraq"]).ijiraq-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="brunhild"])[data-lod="billboard"] .brunhild-scene, .planet-stage:where([data-object-id="brunhild"])[data-lod="marker"] .brunhild-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="brunhild"])[data-lod="marker"] .brunhild-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="brunhild"]).brunhild-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

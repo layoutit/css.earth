@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="nix"])[data-lod="billboard"] .nix-scene, .planet-stage:where([data-object-id="nix"])[data-lod="marker"] .nix-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="nix"])[data-lod="marker"] .nix-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="nix"]).nix-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

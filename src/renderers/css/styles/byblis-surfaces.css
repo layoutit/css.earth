@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="byblis"])[data-lod="billboard"] .byblis-scene, .planet-stage:where([data-object-id="byblis"])[data-lod="marker"] .byblis-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="byblis"])[data-lod="marker"] .byblis-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="byblis"]).byblis-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

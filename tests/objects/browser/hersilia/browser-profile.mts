@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/hersilia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hersilia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/hersilia/hersilia-directional-sun.webp",
-      "two": "/scenes/hersilia/hersilia-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/hersilia/hersilia-shape-surface@2x.webp"
   ],

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="psyche"])[data-lod="billboard"] .psyche-scene, .planet-stage:where([data-object-id="psyche"])[data-lod="marker"] .psyche-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="psyche"])[data-lod="marker"] .psyche-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="psyche"]).psyche-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

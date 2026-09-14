@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="kolga"])[data-lod="billboard"] .kolga-scene, .planet-stage:where([data-object-id="kolga"])[data-lod="marker"] .kolga-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="kolga"])[data-lod="marker"] .kolga-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="kolga"]).kolga-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

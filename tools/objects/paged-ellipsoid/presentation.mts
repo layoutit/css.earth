@@ -22,7 +22,7 @@ export interface PagedPresentationInput { config: PresentationConfiguration; pla
   catalog?: Awaited<ReturnType<typeof preparePlaces>>; city?: NonNullable<Awaited<ReturnType<typeof preparePinnedGlobalWmts>>['plan']>;
   noise?: Awaited<ReturnType<typeof prepareVectorOverlay>>; }
 const materialIds: readonly MaterialId[] = ['lighting', 'atmosphere'];
-import { canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
+import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
 import { prepareCssomDeclarationReads } from "../../prepared-cssom.mts";
 import { createPreparedNodeTree } from "../../prepared-node-tree.mts";
@@ -59,8 +59,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     }
     return [lens.id,interiorUrls.map((url,i)=>({key:`interior:${lens.id}:${i}`,url:overrides[url]??url,pool:'mounted'}))];
   }));
-  const celestial=preparedSunResources(sun,"mounted");
-  const entries=[...celestial,...(textureLevels?.entries??banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"})))),
+  const entries=[...(textureLevels?.entries??banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"})))),
     ...lenses.controls.flatMap(lens=>lens.view==="interior"?
       [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(plan.interior.outerAssets.poles),pool:"mounted"},
         {key:`poles:${lens.id}-lit`,url:canonicalPreparedAsset(plan.interior.outerAssets.litPoles),pool:"mounted"}]:
@@ -165,7 +164,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2*(textureLevels?.textureLevels.levels.length??1),eviction:"capacity",
         ...(textureLevels?{maximumDecodedBytes:textureLevels.maximumDecodedBytes}: {})}),
       ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],
-      startup:[...celestial.map(entry=>entry.key),...pageKeys(defaultLens).map(initialResource),"poles:normal","shadowless:lighting","default:lighting","default:atmosphere",
+      startup:[...pageKeys(defaultLens).map(initialResource),"poles:normal","shadowless:lighting","default:lighting","default:atmosphere",
         ...plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`)]},
     tree,variants,materials:tracks,viewBindings:[{kind:"counter-rotation",target:index(materialCounter),systemTransform:null}],animations:[],
     motionFrame:[index(system),index(body.surface[0])],

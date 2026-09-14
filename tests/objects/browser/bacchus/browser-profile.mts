@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/bacchus/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'bacchus',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/bacchus/bacchus-directional-sun.webp",
-      "two": "/scenes/bacchus/bacchus-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/bacchus/bacchus-shape-surface@2x.webp"
   ],

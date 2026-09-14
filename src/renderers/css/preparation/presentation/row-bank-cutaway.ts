@@ -1,4 +1,4 @@
-import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
+import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant, PreparedWrite } from '../../rendering/prepared-presentation.js';
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
@@ -8,8 +8,8 @@ import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard';
 export async function prepareRowBankCutaway(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
-  const { namespace: ns, scene: plan, assets, lenses, sun, markers: systemMarkerStrip, solarSource: solarSystemSource } = input;
-  const { createPreparedNodeTree, prepareCssomDeclarationReads, prepareCatalogueStars, prepareSolarSystemPresentation, navigationMarkers: PREPARED_NAVIGATION_MARKERS } = adapters;
+  const { namespace: ns, scene: plan, assets, lenses, sun } = input;
+  const { createPreparedNodeTree, prepareCssomDeclarationReads } = adapters;
 
   const bank = assets.lighting.banks[String(CANONICAL_PREPARED_IMAGE_DENSITY)], normal = lenses.controls.find(lens => lens.id === lenses.defaultLens);
   if (!normal) throw new TypeError("The default lens is missing.");
@@ -30,7 +30,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   // shared selection refines by projected silhouette after first paint.
   const levels = input.textureLevels ? prepareSurfaceTextureLevels(input.textureLevels, lenses.controls, assets.surfaceDimensions?.width) : null;
   const initialResource = (key: string) => levels?.textureLevels.levels[0].resources[key] ?? key;
-  const entries = [...preparedSunResources(sun, "warm"),
+  const entries = [
     { key: "poles", url: canonicalPreparedAsset(assets.poles), pool: "warm" },
     { key: "shadowless", url: bank.presentations[bank.presentations.length - 1].url, pool: "warm" },
     { key: BILLBOARD_LIGHTING_KEY, url: billboard.url, pool: "warm" },
@@ -101,9 +101,9 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
     demand: { capacity: bank.transport.maximumRetainedRowCount, defaultFrame: bank.transport.defaultFrame },
     rotation: { kind: "angle", source: "view-sun", reference: "prepared", baseDegrees: assets.lighting.baseLightAzimuthDegrees,
       zeroAtPole: false, property: `--${ns}-light-roll` }, frameAttribute: null, modeAttribute: null, quoted: true };
-  const variants: PreparedVariant[] = lenses.controls.flatMap(lens => [false, true].flatMap(shadows => [false, true].map(orbit => {
+  const variants: PreparedVariant[] = lenses.controls.flatMap(lens => [false, true].map(shadows => {
     const interior = lens.view === "interior", writeTexture = (target: PreparedNode, name: string, resource: string): PreparedWrite => ({ kind: "texture", target: index(target), name, resource, quoted: true });
-    return { when: { lensId: lens.id, shadows, orbit }, required: interior
+    return { when: { lensId: lens.id, shadows }, required: interior
       ? [`surface:${lenses.defaultLens}`, "poles", ...interiorKeys.filter(name => shadows ? !name.endsWith('Unlit') : !['outerSurface','outerPoles'].includes(name)).map(name => `interior:${name}`)] : [`surface:${lens.id}`, "poles"],
       writes: [
         { kind: "style", target: index(cutaway), name: "display", value: interior ? "block" : "none" },
@@ -114,8 +114,6 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
         { kind: "attribute", target: -1, name: "data-view", value: interior ? "interior" : null },
         { kind: "attribute", target: -1, name: "data-lens", value: interior || lens.id === lenses.defaultLens ? null : lens.id },
         { kind: "class", target: -1, name: `${ns}-hide-shadows`, value: !shadows },
-        // The orbit line is retained either way; the class only hides it.
-        { kind: "class", target: -1, name: `${ns}-hide-orbit`, value: !orbit },
         { kind: "style", target: index(materialRoot), name: `--${ns}-billboard-color`, value: lens.billboardColor },
       ], materials: [{ track: "lighting", bank: "rows", mode: shadows ? "frames" : "fixed", enabled: true, rotationEnabled: shadows,
         frameOverride: shadows ? null : assets.lighting.frameCount - 1, clearWhenHidden: false, fixedMode: "full-phase-curvature",
@@ -123,16 +121,8 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
         addressAttributes: [{ name: "data-material-frame", source: shadows ? "frame" : "literal", value: null },
           { name: "data-material-mode", source: "literal", value: shadows ? null : "full-phase-curvature" }],
       }] };
-  })));
+  }));
   const pose = plan.interior.presentationOrbit;
-  const catalogue = await prepareCatalogueStars({ fovDegrees: plan.starfield.catalogueStars.exposure.fovDegrees });
-  const heliocentricView = prepareSolarSystemPresentation({
-    bodyId: solarSystemSource.bodyId, plan: plan.heliocentricView,
-    navigationMarkers: PREPARED_NAVIGATION_MARKERS, markerAtlasUrl: solarSystemSource.markerAtlasUrl,
-    systemMarkerStrip, captionNames: solarSystemSource.captionNames, catalogue,
-    phaseAtlas: { ...billboard, minimumLightViewZ: assets.lighting.minimumLightViewZ,
-      maximumLightViewZ: assets.lighting.maximumLightViewZ, baseLightAzimuthDegrees: assets.lighting.baseLightAzimuthDegrees },
-  });
   const startup = entries.filter(entry => entry.pool === "warm" && initialResource(entry.key) === entry.key).map(entry => entry.key);
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun,
     ...(levels ? { textureLevels: levels.textureLevels } : {}),
@@ -142,7 +132,6 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
         concurrency: bank.transport.maximumRetainedRowCount, eviction: "capacity", reuse: true })],
       startup: [...startup, ...bank.transport.initialWarmRows.map(row => `lighting:${row}`)] },
     tree, variants, resourceOrder: "materials-first", materials: [track],
-    heliocentricView,
     viewBindings: [
       // The terminator overlay fitted to the projected silhouette; it never
       // shrinks below the marker it lights at the far stage.

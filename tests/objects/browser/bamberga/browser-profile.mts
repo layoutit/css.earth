@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/bamberga/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'bamberga',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/bamberga/bamberga-directional-sun.webp",
-      "two": "/scenes/bamberga/bamberga-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/bamberga/bamberga-shape-surface@2x.webp"
   ],

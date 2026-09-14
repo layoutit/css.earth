@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ymir"])[data-lod="billboard"] .ymir-scene, .planet-stage:where([data-object-id="ymir"])[data-lod="marker"] .ymir-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ymir"])[data-lod="marker"] .ymir-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ymir"]).ymir-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

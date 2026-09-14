@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="irene"])[data-lod="billboard"] .irene-scene, .planet-stage:where([data-object-id="irene"])[data-lod="marker"] .irene-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="irene"])[data-lod="marker"] .irene-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="irene"]).irene-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

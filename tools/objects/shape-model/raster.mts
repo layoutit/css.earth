@@ -47,18 +47,6 @@ export async function prepareRingRaster({ config, publicDirectory, publicBase }:
 }
 
 // A tiny schematic marker, generated from the same axes, not borrowed imagery.
-export async function prepareModelMarker(axes:readonly number[]) {
-  const size = 64, pixels = Buffer.alloc(size * size * 4);
-  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
-    const dx = (x + .5 - size / 2) / 29, dy = (y + .5 - size / 2) / (29 * axes[2] / axes[0]);
-    if (dx * dx + dy * dy > 1) continue;
-    const value = Math.round(110 + 105 * Math.sqrt(1 - dx * dx - dy * dy));
-    pixels.set([value, value, value, 255], (y * size + x) * 4);
-  }
-  return sharp(pixels, { raw: { width: size, height: size, channels: 4 } }).webp({ lossless: true }).toBuffer();
-}
-
-/** Same full-phase curvature as terrestrial bodies, with no directional shadow bank. */
 export async function prepareSphereLighting({ publicDirectory, publicBase }:OutputDirectories) {
   const size = 512;
   const atlas = lambertAttenuationAtlas({ frameSize: size, columns: 2, frameCount: 2,

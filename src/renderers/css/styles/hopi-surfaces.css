@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hopi"])[data-lod="billboard"] .hopi-scene, .planet-stage:where([data-object-id="hopi"])[data-lod="marker"] .hopi-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hopi"])[data-lod="marker"] .hopi-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hopi"]).hopi-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

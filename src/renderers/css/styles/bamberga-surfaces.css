@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="bamberga"])[data-lod="billboard"] .bamberga-scene, .planet-stage:where([data-object-id="bamberga"])[data-lod="marker"] .bamberga-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="bamberga"])[data-lod="marker"] .bamberga-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="bamberga"]).bamberga-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

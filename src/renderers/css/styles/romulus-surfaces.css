@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="romulus"])[data-lod="billboard"] .romulus-scene, .planet-stage:where([data-object-id="romulus"])[data-lod="marker"] .romulus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="romulus"])[data-lod="marker"] .romulus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="romulus"]).romulus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -2,9 +2,6 @@
 import type { PreparedDestinationPlan } from "./prepared-destinations.mts";
 import type { PreparedPagePlan } from "../renderers/css/paging/types.ts";
 import type { PreparedPageLayer } from "./prepared-presentation.mts";
-import type { TrailSpans } from "./heliocentric-view.mts";
-import type { LabelPolicyOptions } from "../renderers/css/solar-system/heliocentric-captions.ts";
-import type { ExposureOptions } from "@cssearth/engine";
 export type ObjectRuntimeDefinition = Omit<RendererObjectRuntimeDefinition, "destinations" | "pageLayers"> & {
   destinations?: PreparedDestinationPlan;
   pageLayers?: readonly (Omit<PreparedPageLayer, "plan"> & { plan: PreparedPagePlan })[];
@@ -15,7 +12,6 @@ import type { ObjectRuntimeDefinition as RendererObjectRuntimeDefinition, Object
 import type { ObjectSelectionState } from "../renderers/css/rendering/object-selection-runtime.ts";
 import type { OrbitPublication, RetainedCubicSkyOrbit } from "./object-orbit.mts";
 import type { SharedView } from "./view-url.mts";
-import type { RetainedHeliocentricView } from "./heliocentric-view-runtime.mts";
 import type { ObjectWorldNavigation, ObjectWorldNavigationListener } from "../renderers/css/runtime/world-navigation-types.ts";
 import type { WorldCameraPose, WorldCameraViewport } from "../renderers/css/navigation/world-camera.ts";
 export type ObjectRuntimeServices = typeof nativeServices;
@@ -30,8 +26,6 @@ import { createObjectControlBinding } from "./object-control-binding.mts";
 import { createPreparedPlayback } from "./prepared-playback.mts";
 import { createRetainedCubicSkyOrbit } from "./object-orbit.mts";
 import { mountRetainedCubicSky } from "./cubic-sky-runtime.mts";
-import { mountRetainedDirectionalSun } from "./directional-sun-runtime.mts";
-import { mountRetainedHeliocentricView } from "./heliocentric-view-runtime.mts";
 import { mountPreparedPresentation } from "./prepared-presentation.mts";
 import { initialObjectSelection, requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
 import { formatSharedView, parseSharedView } from "./view-url.mts";
@@ -40,7 +34,7 @@ const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, createResources: createPreparedResidency,
   createPlayback: createPreparedPlayback, createSelection: createObjectSelectionRuntime, createControls: createObjectControlBinding, createOrbit: createRetainedCubicSkyOrbit,
   mountPages: mountPreparedMapPages,
-  mountSky: mountRetainedCubicSky, mountSun: mountRetainedDirectionalSun, mountHeliocentric: mountRetainedHeliocentricView,
+  mountSky: mountRetainedCubicSky,
   waitDocument: waitForSceneDocument, waitPaint: waitForScenePaint });
 
 // Every registry loader binds this factory. The optional services argument is
@@ -58,7 +52,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     let readyPublished = false, settled = false, resolveReady: () => void, rejectReady: (error: unknown) => void;
     const ready = new Promise<void>((resolve, reject) => { resolveReady = resolve; rejectReady = reject; });
     ready.catch(() => {});
-    let mounted: ReturnType<typeof mountPreparedPresentation> | null = null, orbit: RetainedCubicSkyOrbit | null = null, currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null, heliocentric: RetainedHeliocentricView | null = null;
+    let mounted: ReturnType<typeof mountPreparedPresentation> | null = null, orbit: RetainedCubicSkyOrbit | null = null, currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
     const pageLayers = new Map<string, PageLayerRuntime>();
     let allowed = false, navigatedLens: string | null = null, maximumZoom = definition.camera.maximumZoom;
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
@@ -97,7 +91,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
         controlYaw: definition.camera.defaultControlYawDegrees, zoom: orbit!.initialResponsiveZoom() }),
     }) : null;
-    const preparedEpochJdTt = definition.heliocentricView?.plan.system?.epochJdTt ?? null;
+    const preparedEpochJdTt: number | null = null;
     let restoreVersion = 0;
     const sharedView = Object.freeze({
       capture(motionRequested = false) {
@@ -218,21 +212,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       syncPagePlayback();
       // Presentation owns its roots immediately during construction, including
       // partial construction failures. Shared celestial layers join afterwards.
-      const cubicSky = environment.mountSky({ host: stage, plan: definition.sky,
-        imageDensity: context.density, objectId: definition.id, requireSun: false });
+      const cubicSky = environment.mountSky({ host: stage, plan: definition.sky, objectId: definition.id });
       context.own(() => cubicSky.destroy());
-      // A heliocentric view renders the Sun as real geometry beneath the body
-      // (its own perspective root before the camera root) with the orbit and
-      // marker overlay; otherwise the Sun is the directional billboard.
-      heliocentric = definition.heliocentricView == null ? null : environment.mountHeliocentric({ host: stage,
-        before: mounted!.cameraElement, plan: definition.heliocentricView.plan, objectId: definition.id,
-        sunImageUrl: context.density === 2 ? definition.sun!.asset.url2x : definition.sun!.asset.url,
-        markerSprite: definition.heliocentricView.bodyMarker, systemMarkers: definition.heliocentricView.systemMarkers ?? null,
-        labels: definition.heliocentricView.labels ?? null });
-      if (heliocentric) context.own(() => heliocentric!.destroy());
-      const directionalSun = definition.sun == null || heliocentric ? null : environment.mountSun({ host: stage, plan: definition.sun,
-        imageDensity: context.density, objectId: definition.id, before: mounted!.cameraElement });
-      if (directionalSun) context.own(() => directionalSun.destroy());
       for (const animation of stage.getAnimations({ subtree: true })) {
         const initialTime = animation.constructor?.name === "CSSAnimation" ? 0 : undefined;
         playback.register(animation, { initialTime });
@@ -248,7 +229,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         onMaterialError: error => console.error(error) });
       context.own(() => selection!.destroy());
       orbit = environment.createOrbit({ stage, inputSurface, cameraElement: mounted!.cameraElement, sceneElement: mounted!.sceneElement,
-        cubicSky, skyPlan: definition.sky, directionalSun, directionalSunPlan: definition.sun ?? null, heliocentric,
+        cubicSky, skyPlan: definition.sky, directionalSunPlan: definition.sun ?? null,
         cameraPlan, objectId: definition.id, requireSun: false,
         mobilePreviewElement: stage.ownerDocument.querySelector<HTMLElement>(".planet-sidebar"), onPublish: publication => guarded(() => publish(publication)), onError: fatal });
       context.own(() => orbit!.destroy());
@@ -262,11 +243,11 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       controls!.setReady();
       readyPublished = true;
-      if (DEVELOPMENT_DIAGNOSTICS) publishDiagnostics(cubicSky);
+      if (DEVELOPMENT_DIAGNOSTICS) publishDiagnostics();
       settled = true;
       resolveReady();
     }
-    function publishDiagnostics(cubicSky: ReturnType<typeof mountRetainedCubicSky>) {
+    function publishDiagnostics() {
       const target = stage.ownerDocument.defaultView, key = `__${definition.id}`;
       if (!target) throw new Error("Object diagnostics require a window.");
       const nodes = Object.freeze([...stage.querySelectorAll("*")]);
@@ -285,25 +266,12 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       diagnostics = Object.freeze({ ready: true,
         view: () => orbit!.state(), setView: (state: Parameters<RetainedCubicSkyOrbit["setState"]>[0]) => orbit!.setState(state), lens: lensState, selectLens,
         camera: Object.freeze({ state: orbit!.state, setState: orbit!.setState, flyToState: orbit!.flyToState, stats: orbit!.stats }),
-        // Session knobs (development diagnostics): the orbit trails' spans,
-        // the caption policy and the catalogue stars' exposure; null restores
-        // the prepared values, which stay what ships.
-        ...(heliocentric === null ? {} : { orbitTrail: (spans: TrailSpans | null) => {
-          const applied = heliocentric!.setTrailSpans(spans);
-          orbit!.refresh();
-          return Object.freeze({ spans: heliocentric!.state().trailSpans, source: heliocentric!.state().trailSpansSource, applied });
-        },
-        labelPolicy: (options: LabelPolicyOptions | null) => { const applied = heliocentric!.setLabelPolicy(options); orbit!.refresh(); return applied; } }),
-        ...(typeof cubicSky.setStarExposure !== "function" || cubicSky.starGroup == null ? {}
-          : { starExposure: (options: Partial<ExposureOptions> | null) => { const applied = cubicSky.setStarExposure(options); orbit!.refresh(); return applied; } }),
         sky: Object.freeze({ state: () => Object.freeze({ ...orbit!.skyState(),
-          sunViewDirection: currentView?.sunViewDirection ?? null, skySunViewDirection: currentView?.skySunViewDirection ?? null,
-          sunPresentation: currentView?.sunPresentation }),
+          sunViewDirection: currentView?.sunViewDirection ?? null, skySunViewDirection: currentView?.skySunViewDirection ?? null }),
           // The prepared registrations the sky and Sun ride, for tests that
           // project them independently.
           sceneRegistration: definition.sky.sceneRegistration ?? null,
-          sunLocalDirection: definition.sun?.localDirection ?? null,
-          heliocentricView: definition.heliocentricView?.plan ?? null }),
+          sunLocalDirection: definition.sun?.localDirection ?? null }),
         lenses: Object.freeze({ state: lensState, select: selectLens }),
         options, settings: Object.freeze({ state: settings() }), features,
         renderStats: Object.freeze({
@@ -316,14 +284,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         }),
         dom: Object.freeze({ retainedInitialNodeCount: nodes.length,
           retainedLeafCount: stage.querySelectorAll("b, s, u").length,
-          retainedSkyboxFaceCount: stage.querySelectorAll(".planet-cubic-sky-face").length,
-          retainedSunBillboardCount: definition.sun == null ? 0 : 1,
-          retainedOrbitPieceCount: heliocentric?.retainedOrbitPieceCount ?? 0,
-          retainedBodyMarkerCount: heliocentric === null ? 0 : 1,
-          retainedSystemOrbitPieceCount: heliocentric?.retainedSystemOrbitPieceCount ?? 0,
-          retainedSystemMarkerCount: heliocentric?.retainedSystemMarkerCount ?? 0,
-          retainedSunMarkerCount: heliocentric?.retainedSunMarkerCount ?? 0,
-          retainedCaptionCount: heliocentric?.retainedCaptionCount ?? 0,
           runtimeDomGrowth: false, runtimeDomGrowthPolicy: "none" }),
         runtime: Object.freeze({ lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
           selection: selection!.state, controls: controls!.stats, view: () => currentView,

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="interamnia"])[data-lod="billboard"] .interamnia-scene, .planet-stage:where([data-object-id="interamnia"])[data-lod="marker"] .interamnia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="interamnia"])[data-lod="marker"] .interamnia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="interamnia"]).interamnia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

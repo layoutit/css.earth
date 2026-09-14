@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="piazzia"])[data-lod="billboard"] .piazzia-scene, .planet-stage:where([data-object-id="piazzia"])[data-lod="marker"] .piazzia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="piazzia"])[data-lod="marker"] .piazzia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="piazzia"]).piazzia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="thalia"])[data-lod="billboard"] .thalia-scene, .planet-stage:where([data-object-id="thalia"])[data-lod="marker"] .thalia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="thalia"])[data-lod="marker"] .thalia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="thalia"]).thalia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

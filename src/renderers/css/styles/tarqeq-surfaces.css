@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="tarqeq"])[data-lod="billboard"] .tarqeq-scene, .planet-stage:where([data-object-id="tarqeq"])[data-lod="marker"] .tarqeq-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="tarqeq"])[data-lod="marker"] .tarqeq-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="tarqeq"]).tarqeq-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

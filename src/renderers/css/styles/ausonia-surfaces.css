@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="ausonia"])[data-lod="billboard"] .ausonia-scene, .planet-stage:where([data-object-id="ausonia"])[data-lod="marker"] .ausonia-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="ausonia"])[data-lod="marker"] .ausonia-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="ausonia"]).ausonia-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

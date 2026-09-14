@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="asteroid-2002-tx300"])[data-lod="billboard"] .asteroid-2002-tx300-scene, .planet-stage:where([data-object-id="asteroid-2002-tx300"])[data-lod="marker"] .asteroid-2002-tx300-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="asteroid-2002-tx300"])[data-lod="marker"] .asteroid-2002-tx300-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="asteroid-2002-tx300"]).asteroid-2002-tx300-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

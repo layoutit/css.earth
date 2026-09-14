@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="aschera"])[data-lod="billboard"] .aschera-scene, .planet-stage:where([data-object-id="aschera"])[data-lod="marker"] .aschera-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="aschera"])[data-lod="marker"] .aschera-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="aschera"]).aschera-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

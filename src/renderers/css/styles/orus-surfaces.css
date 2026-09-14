@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="orus"])[data-lod="billboard"] .orus-scene, .planet-stage:where([data-object-id="orus"])[data-lod="marker"] .orus-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="orus"])[data-lod="marker"] .orus-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="orus"]).orus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

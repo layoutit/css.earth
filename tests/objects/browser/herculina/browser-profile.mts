@@ -1,12 +1,7 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/objects/herculina/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'herculina',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/herculina/herculina-directional-sun.webp",
-      "two": "/scenes/herculina/herculina-directional-sun@2x.webp"
-    }
-  ],
+  "preparedAssetPairs": [],
   "canonicalPreparedAssets": [
     "/scenes/herculina/herculina-shape-surface@2x.webp"
   ],

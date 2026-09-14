@@ -32,7 +32,10 @@ export interface PreparedHyperbolicPath {
 // +x and motion toward +y. Weber, Orbital Mechanics & Astrodynamics, eq.233:
 // https://orbital-mechanics.space/time-since-periapsis-and-keplers-equation/hyperbolic-trajectories.html
 // This is a finite visualization window, never a physical apoapsis or period.
-import { add, magnitude, round, scale } from "./heliocentric-view.mts";
+function add(a: Vector3, b: Vector3): [number, number, number] { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
+function scale(vector: Vector3, factor: number): [number, number, number] { return [vector[0] * factor, vector[1] * factor, vector[2] * factor]; }
+function magnitude(vector: Vector3) { return Math.hypot(vector[0], vector[1], vector[2]); }
+function round(value: number) { return Number(value.toFixed(6)); }
 
 export function prepareHyperbolicPath({
   semiMajorAxisUnits: a, eccentricity: e, trueAnomalyRad,

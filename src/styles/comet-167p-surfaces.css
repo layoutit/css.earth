@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="comet-167p"])[data-lod="billboard"] .comet-167p-scene, .planet-stage:where([data-object-id="comet-167p"])[data-lod="marker"] .comet-167p-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="comet-167p"])[data-lod="marker"] .comet-167p-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="comet-167p"]).comet-167p-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

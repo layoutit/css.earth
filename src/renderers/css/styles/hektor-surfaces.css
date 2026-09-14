@@ -23,4 +23,3 @@
 .planet-stage:where([data-object-id="hektor"])[data-lod="billboard"] .hektor-scene, .planet-stage:where([data-object-id="hektor"])[data-lod="marker"] .hektor-scene { visibility: hidden; }
 .planet-stage:where([data-object-id="hektor"])[data-lod="marker"] .hektor-billboard { opacity: 0; }
 
-.planet-stage:where([data-object-id="hektor"]).hektor-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

@@ -19,7 +19,6 @@ export * from './paging/wms-image.js';
 export * from './paging/wmts-image.js';
 export * from './paging/city-asset-url.js';
 export * from './solar-system/prepared-ellipsoid-projection.js';
-export { requireHeliocentricPlan } from './validation/heliocentric.js';
 export { publishObjectDiagnostics, readObjectDiagnostics } from './runtime/object-diagnostics.js';
 
 export {parsePreparedPagePlan} from "./paging/capabilities.js";
