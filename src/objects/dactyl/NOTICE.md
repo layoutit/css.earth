@@ -12,6 +12,16 @@ preserved. The crop PNGs are declared display derivatives for source inspection.
 Keep the mission credit and native file identities in `evidence/galileo/inputs.json`.
 These files do not supply an enabled photographic surface.
 
+The original VICAR image and label under `evidence/registration/native/` come
+from NASA/JPL's PDS Imaging Node GO_0016 release. The accompanying mission
+catalog document, SCLK and LSK are NASA/JPL records; their original notices are
+retained. `evidence/registration/inputs.json` pins these files and the previously
+retained SSI instrument definition. The orientation overlays are measurement
+diagnostics on uncalibrated image DN, not additional observations or a qualified
+texture. The independent CSPICE numerical fixture is under
+`tests/objects/fixtures/dactyl/`. Paper values are cited numerical facts; no
+paper prose or figures are redistributed.
+
 ESO/S. Brunier panorama: CC BY 4.0. HYG and Inter retain their notices beside the pinned sources.
 
 The retained Celestia catalog and candidate orbit parameters derived from it retain GPL-2.0-or-later, with the full copyright header and license in source/reference/.

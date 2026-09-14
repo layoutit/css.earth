@@ -1,0 +1,682 @@
+CCSD3ZF0000100000001NJPL3IF0PDS200000001 = SFDU_LABEL
+RECORD_TYPE                     = STREAM
+SPACECRAFT_NAME                 = "GALILEO ORBITER"
+OBJECT                          = TEXT
+NOTE                            = "CATALOG STATUS DESCRIPTION"
+END_OBJECT
+END
+
+
+CATALOG STATUS DESCRIPTION
+
+The following memorandum describes the current status of the MIPS Galileo SSI
+Catalog after being updated with SPICE information. 
+
+
+                                                      INTEROFFICE MEMORANDUM
+                                                      21 June, 1993
+
+To: Lisa Wainio
+From: Gary Yagi
+Subject: Status of SSI Catalog SPICE information
+
+CATSPICE currently does not enter information into the following fields of
+the Overview Domain of the SSI Catalog:
+
+    ASD               Angular semi-diameter (missing routines EDLIMB, EL2CGV)
+    HOUR_ANGLE
+    SMEAR_MAGNITUDE   Magnitude of camera smear (pixels)
+
+CATSPICE currently does not enter ORBIT_NUMBER in the Predict Domain of the
+PWS Catalog (not available in min-E-kernel).
+
+You should not expect these fields to be implemented in the near future since
+there are more pressing matters which need to be dealt with.
+
+The following problems involving Earth2 encounter frames have been corrected:
+
+    (1) TCA and TCA_SAT was calculated from Earth1 rather than Earth2.
+
+    (2) SCET was wrong for all extended-exposure summation mode frames and all
+        extended-exposure dark-current frames.
+
+The SSI Overview Domain has been updated using the actual (telemetered)
+C-kernels for Earth2.  There were approximately 200 frames for which the actual
+pointing was not available.  I have requested Nat Bachman to use interpolation
+to compute these missing values.  However, systematic processing should proceed
+without waiting for these.
+
+Some of the Catalog fields dealing with image geometery are only computed
+if the target is a planetary body or asteroid (not for BLACK_SKY or
+calibration).  Other fields are computed only if the target is within the
+predicted field-of-view.  See the section on "COMPUTING GEOMETRY DATA" in the
+CATSPICE help file for details.
+
+SPICE information for SSI is available for the following loads:
+
+       EV06     180626.00-190641.00   VENUS
+       VE09     593358.00-599050.00   OPNAV & Calibration
+       VE11     609591.00-620411.00   EARTH1
+       VE12     622949.00-623035.00   OPNAV & Calibration
+       EE02     997577.00-1061289.45  OPNAV
+       EE3P    1072715.70-1073185.13  GASPRA
+       EE09    1632882.89-1645416.43  EARTH2
+       EE11    1649094.89-1665095.59  EARTH2
+
+SPICE information for PWS is available for the following loads:
+
+       EV06     177221.52-191567.13   VENUS
+       VE09     543042.13-605226.13
+       VE11     608579.00-620409.00   EARTH1
+       VE12     622781.13-701216.65
+       EE3     1071597.52-1073790.00  GASPRA
+       EE09    1629606.89-1640602.05  EARTH2
+       EE11    1650777.05-1672083.00  EARTH2
+
+
+  The following tables summarize the SSI Overview or PWS Predict fields updated
+  as a function of type of kernel input.  All non-blank entries are updated.
+  An 'I' indicates that the data comes directly from the input kernel.  An 'X'
+  indicates that the data comes from the best CK or SPK available.  A 'C'
+  indicates that the field is computed from SPICE data or represents a flag.
+  Fields not yet implemented by CATSPICE are indicated by an '*'.
+
+  SSI OVERVIEW FIELD   EK   SPK  CK         SSI OVERVIEW FIELD   EK   SPK  CK
+  ------------------   ---  ---  ---        ------------------   ---  ---  ---
+  SCLK                  I                   RA,DEC,TWIST          X    X    I
+  SCET                  I                   SC_TGT_RANGE          X    I    X
+  SCET_YEAR             I                   SC_CB_RANGE           X    I    X
+  SCET_DAY              I                   SC_LAT                X    I    X
+  SCET_HOUR             I                   SC_LON                X    I    X
+  SCET_MINUTE           I                   SUN_LAT               X    I    X
+  SCET_SECOND           I                   SUN_LON               X    I    X
+  SCET_MILLI            I                   SC_SUB_RANGE          C    C    C
+  ACTIVITY_ID           I                   SLANT_RANGE           C    C    C
+  ORBIT_NUMBER          I                   TCA                   C    C    C
+  OAPEL                 I                   TCA_SAT               C    C    C
+  ACT_SEQNUM            I                   RESOLUTION            C    C    C
+  ACTIVITY_SUB          I                   MIN_LAT               C    C    C
+  PICNO                 I                   MAX_LAT               C    C    C
+  TARGET                I                   MIN_LON               C    C    C
+  PRED_IMAGING          I                   MAX_LON               C    C    C
+  PRED_EXPOS            I                   C_LAT                 C    C    C
+  PRED_TLMFMT           I                   C_LON                 C    C    C
+  PRED_FILTER           I                   INCIDENCE             C    C    C
+  PRED_GAIN             I                   PHASE                 C    C    C
+  SPICE_E_ID            I                   EMISSION              C    C    C
+  SPICE_P_ID                 I              ASD*                  C    C    C
+  SPICE_S_ID                 I              HOUR_ANGLE*           C    C    C
+  SPICE_C_ID                      I         SMEAR_MAGNITUDE*      C    C    C
+  VIEWUPD_DAY           C    C    C
+  VIEWUPD_YEAR          C    C    C
+
+
+  PWS PREDICT FIELD    EK   SPK          PWS PREDICT FIELD    EK   SPK
+  ------------------   ---  ---          ------------------   ---  ---
+  BEGIN_SCLK            I                ACTIVITY_ID           I
+  END_SCLK              I                TARGET                I
+  BEGIN_SCET            I                WF_MODE               I
+  END_SCET              I                WF_SELECT             I
+  B_SCET_YEAR           I                ANTENNA_SW            I
+  B_SCET_DAY            I                CALIBRATION           I
+  B_SCET_HOUR           I                WF_REC_MODE           I
+  B_SCET_MINUTE         I                ANTENNA_MODE          I
+  B_SCET_SECOND         I                POWER                 I
+  B_SCET_MILLI          I                ORBIT_NUMBER*         I
+  E_SCET_YEAR           I                SC_CB_RANGE           X     I
+  E_SCET_DAY            I                SC_LON                X     I
+  E_SCET_HOUR           I                SC_LAT                X     I
+  E_SCET_MINUTE         I                PHASE                 X     I
+  E_SCET_SECOND         I                SPICE_E_ID            I
+  E_SCET_MILLI          I                SPICE_P_ID                  I
+  PREDUPD_DAY           C     C          SPICE_S_ID                  I
+  PREDUPD_YEAR          C     C
+
+Distribution:
+
+  Megan O'Shaughnessy
+  Helen Mortensen
+  Teri Hefferan
+
+
+
+The following is the help of the MIPS program CATSPICE
+
+        CATSPICE - Creates/updates frame records in the Galileo Catalog
+
+
+PURPOSE:
+
+CATSPICE reads SSI and PWS SPICE kernels and stores the data in the Galileo
+Catalog.  For NIMS kernels, see program CATNIMS.  See also programs SSIMEK and
+PWSMEK. 
+
+EXECUTION STATEMENT:
+
+  CATSPICE  INP=ssi-e-kernel-filename  'EK  'SSI  user-parameters...
+  CATSPICE  INP=pws-e-kernel-filename  'EK  'PWS  user-parameters...
+  CATSPICE  INP=spk-kernel-filename  'SPK  user-parameters...
+  CATSPICE  INP=c-kernel-filename  'CK  user-parameters...
+
+The keywords 'EK,'SPK,or 'CK identify the type of kernel being input.
+The keywords 'SSI or 'PWS specify the Catalog to be updated (default is
+'ALL).
+
+REFERENCES:
+
+(1) GLL SIS 232-12   SSI Image Catalog (Cruise)
+(2) GLL SIS 232-13   PWS Data Catalog (Cruise)
+(3) IOM SROP-GLL-90-038, V. Henderson, "20 Character Activity ID"
+(4) FORTRAN source for NAIF subroutine MEKRDS
+(5) GLL Sequence Component Definition Document, 625-540, vols. II and III
+(6) GLL document 625-610: SIS 211-13, Standard Sequence Data File
+(7) GLL document 625-610: SIS 211-13, Spacecraft Even File
+
+OPERATION:
+
+CATSPICE will accept the following types of kernels as input:
+
+    SSI or PWS mini-E kernels (EK)
+    S-kernels, P-kernels, or SP-kernels (SK,PK,SPK)
+    SSI shutter-centered C-kernels (CK)
+
+The EK consists of ancillary data records for a sequence of camera events. For
+the SSI, a data record contains the activity-id, spacecraft clock (SCLK),
+spacecraft-event-time (SCET), filter number, shutter setting, gain state,
+telemetry format, imaging mode, and data compression mode for a given image. 
+
+An SP-kernel contains ephemeris (position and velocity) information for the
+spacecraft, planet, and satellites for a specific time interval. 
+
+A C-kernel contains the camera pointing information for a sequence of SSI
+images.  Only SSI shutter-centered C-kernels may be input. 
+
+If an E-kernel is input (as indicated by the 'EK keyword), the keyword 'SSI or
+'PWS must be specified to indicate which instrument it applies to. When an 
+E-kernel is processed, new entries are normally created in the SSI Overview
+Domain or the PWS Predict domain.  However, if a Catalog entry for the
+same SCLK already exists, that entry is retrieved and updated with the
+information in the EK.  In addition, CATSPICE will access the Kernel Database
+and determine the best camera pointing and ephemeris information currently
+available.  This information is retrieved by loading the appropriate CK and/or
+SPK and used to add or update the geometric fields for the Catalog entry. 
+
+If an SP-kernel is input (as indicated by the 'SPK keyword), all existing
+Catalog entries for the time period covered by the SPK are updated with
+ephemeris information retrieved from the SPK.  In addition, each such entry is
+updated with the best camera pointing information available, as determined by
+scanning the Kernel Database. 
+
+If a C-kernel is input (as indicated by the 'CK keyword), all existing Catalog
+records for these images are updated with the pointing information retrieved
+from the CK.  In addition, each such entry is updated with the best ephemeris
+information available, as determined by scanning the Kernel Database.  Note
+that only the SSI Overview Domain is updated, since PWS data are not effected
+by platform pointing information.
+
+Note that inputing an SPK or CK will only update existing catalog entries,
+i.e., entries already created by a previous execution of CATSPICE on an
+E-kernel. 
+
+The keyword 'NOUPDATE suppresses updating of the Galileo Catalog.  The default
+is 'UPDATE. 
+
+The keyword 'NOLIST will suppress printing of catalogue information for each
+entry updated.  Default is 'LIST.
+
+The SCLK parameter specifies a spacecraft clock range.  Only SPICE kernel data
+within this range are stored in the Catalog.  The default is to use the entire
+kernel.
+
+The keywords 'SK,'PK,and 'SPK are functionally equivalent and will lead to
+identical program operation.
+
+More detailed information is given below under the following headings:
+
+      SSI MINI-E-KERNEL PROCESSING
+      SSI SPK PROCESSING
+      SSI CK PROCESSING
+      COMPUTING SSI GEOMETRY DATA
+      PWS MINI-E-KERNEL PROCESSING
+      PWS SPK PROCESSING
+      COMPUTING PWS GEOMETRY DATA
+      PROGRAM HISTORY
+      EXAMPLES 
+
+EXAMPLES:
+
+  DCL ASSIGN GLL3:[SPICE_KER.MEK] SPICE$MEK
+  STOREKDB  SPICE$KER:T900129.BSP_1  'SPK
+  STOREKDB  SPICE$KER:PRED_EV6.CK  'CK
+  CATSPICE  SPICE$KER:SSI_EV06DG.MEK  'EK  'SSI
+  CATSPICE  SPICE$KER:PWS_EV06DG.MEK  'EK  'PWS
+
+Predict SPK and CK covering the Galileo Venus encounter are first entered into
+the Kernel Database via program STOREKDB.  SSI and PWS mini-E-kernels are then
+catalogued, creating new entries in the SSI Overview Domain and PWS Predict
+Domain.  CATSPICE will retrieve the SPK and CK from the Kernel Database and
+use these data to transfer the ephemeris and pointing data to each new entry. 
+
+  STOREKDB  SPICE$KER:T900129.BSP_2  'SPK
+  CATSPICE  SPICE$KER:T900129.BSP_2  'SPK
+
+At some later time, a better SPK for the Venus encounter is received from
+NAIF. STOREKDB is used to enter the SPK into the Kernel Database (optional)
+and CATSPICE is used to update both SSI Overview and PWS Predict Domains of
+the Galileo Catalog with the improved ephemeris data. 
+
+  CATSPICE  SPICE$KER:MIPS_NAV.CK  'CK  SCLK=(18062500,19067300)
+
+After all Venus frames have been navigated via VICAR program NAV, CATSPICE is
+used to update the SSI Overview Domain with the improved camera pointing
+information.  The SCLK parameter is specified to limit the updated records to
+the Venus frames.  STOREKDB is not run here because the NAV CK is already in
+the Kernel Database.  The PWS Predict Domain is not updated since this domain
+contains no camera pointing information. 
+
+It is recommended that all kernels reside in the same disk directory and that
+the logical name SPICE$KER be used to reference this directory.  This will
+facilitate relocation of the files. 
+
+SSI MINI-E-KERNEL PROCESSING:
+
+The following items are extracted from each mini-E-kernel record: activity-ID,
+SCLK, telemetry format, picture count, imaging mode, filter position, exposure
+setting, and gain-state.  The remaining items in the EK (SCET, picno,
+extension code, compressor state, compressor mode, light flood) are ignored. 
+
+An EK record is ignored if:
+  (1) the picture count is the same as that for the previous EK record, or
+  (2) the exposure number is 0 (NO_SHUT) or greater than 29, or
+  (3) the SCLK is outside the user-specified range
+
+Extracting the telemetry format:  The telemetry format field in the EK
+contains a 3-character real-time format which is sometimes followed by a
+3-character tape-recorder format.  The real-time and tape-recorder format
+are examined as follows: 
+  (1) If the format is "NCG" (no change), the format is replaced by the
+      format for the previous record.
+  (2) The format is compared with a list of valid telemetry formats.
+  (3) If the format is valid, it is checked to see if it contains data for
+      the requested instrument (SSI or PWS).
+If the real-time format contains useful data, it is used.  If not, the
+tape-recorder format is used.  If neither format contains useful data, the
+telemetry format is replaced by "?".
+
+Adjusting the SCLK:  The spacecraft clock in the EK is the time the command is
+issued.  This time has to be adjusted by rounding up to the start of the next
+frame-cycle.  This is dependent on image mode as follows: 
+
+    IMODE      STARTING MOD91
+    ------     ----------------------------------------------------
+    60 2/3     0
+    30 1/3     0, 45
+     8 2/3     0, 13, 26, 39, 52, 65, 78 (multiples of 13)
+     3 1/3     0, 4, 7, 11, 14, 18, 21, 25, 28, 32, 35, 39, 42,
+               46, 49, 53, 56, 60, 63, 67, 70, 74, 77, 81, 84,
+               88 (multiples of 3.5 rounded up)
+
+The resulting time will correspond to the spacecraft clock recorded in the
+picture labels of images received by the real-time system.  Note that this
+algorithm makes use of the RIM and MOD91 counters only. 
+
+Determining the target-ID:  Prior to Earth-1 (SCLK=59335800) the target-ID
+was determined from the first character of the activity-ID.  Starting with
+Earth-1, the third character is used (ref 3).
+
+Computing the SCET at shutter-center:  The SCET in the EK is ignored. Instead,
+the Spacecraft-Event-Time at shutter-center is computed from the spacecraft
+clock (see routine SSIMIDPT).  The SCLK at frame-start is first converted to
+milliseconds and then the camera prepare cycle (filter-wheel step and
+dark-current sweep), shutter-offset, and half of the exposure time is added.
+The result is converted to encoded-SCLK, ephemeris time, and UTC. 
+
+The following fields of the SSI Overview Domain are updated based upon
+information extracted from the E-kernel:
+
+  SCLK          Spacecraft clock (100*RIM + MOD91)
+  SCET          Spacecraft-Event-Time: YYDDDHHMM
+  SCET_YEAR     Spacecraft-Event-Time year
+  SCET_DAY      Spacecraft-Event-Time day-of-year
+  SCET_HOUR     Spacecraft-Event-Time hours
+  SCET_MINUTE   Spacecraft-Event-Time minutes
+  SCET_SECOND   Spacecraft-Event-Time seconds
+  SCET_MILLI    Spacecraft-Event-Time milliseconds
+  ACTIVITY_ID   Activity-ID
+  ORBIT_NUMBER  Orbit or cruise phase (characters 1-2 of Activity-ID)
+  OAPEL         6-char OAPEL (characters 5-10 of Activity ID)
+  ACT_SEQNUM    2-char sequence number (characters 11-12 of Activity-ID)
+  ACTIVITY_SUB  Activity-ID subfields (characters 13-20 of Activity-ID)
+  PICNO         Picture number
+  TARGET        Target-body name (12 characters)
+  PRED_IMAGING  Predict imaging mode (2.333, 8.667, 30.333, 60.667)
+  PRED_EXPOS    Predict exposure time (msec)
+  PRED_TLMFMT   Predict telemetry format (3 characters)
+  PRED_FILTER   Predict filter name (7 characters)
+  PRED_GAIN     Predict gain-state (10K, 40K, 100K, 400K)
+  SPICE_E_ID    E-kernel ID (always "N001")
+
+In addition, the geometric data in the Overview Domain are updated using the
+best CK and SPK data available in the Kernel Database (see COMPUTING SSI
+GEOMETRY DATA below). 
+
+Finally, Overview fields VIEWUPD_DAY and VIEWUPD_YEAR are updated with the
+current date.
+
+SSI SPK PROCESSING:
+
+All entries within the SCET range covered by the SPK are retrieved from the
+SSI Overview Domain and the geometry data for these frames are updated (see
+COMPUTING SSI GEOMETRY DATA below).
+
+In addition, if the kernel is an SPK or PK, then the following Overview field
+is updated: 
+
+  SPICE_P_ID    P-kernel ID (e.g. N0001)
+
+If the kernel is an SPK or SK, then the following Overview field is updated:
+
+  SPICE_S_ID    S-kernel ID (e.g. N0001)
+
+Finally, Overview fields VIEWUPD_DAY and VIEWUPD_YEAR are updated with the
+current date.
+
+SSI CK PROCESSING:
+
+All entries within the SCET range covered by the CK are retrieved from the SSI
+Overview Domain and the geometry data for these frames are updated (see
+COMPUTING SSI GEOMETRY DATA below). 
+
+Finally, Overview fields VIEWUPD_DAY and VIEWUPD_YEAR are updated with the
+current date.
+
+COMPUTING SSI GEOMETRY DATA
+
+All SSI geometry data is computed at shutter-center.  The best CK and SPK data
+recorded in the Kernel Database is normally used.  However, if a CK or SPK is
+input to CATSPICE, that kernel will take precedence over all other kernels in
+the database. 
+
+If the CK data is available for a given SCLK, the following SSI Overview
+fields are updated: 
+  SPICE_C_ID    C-Kernel used (NAIF, DAVI, NAV, FARE, NAV2, NEAR, AMOS)
+  RA            Scan-platform right-ascension (degrees)
+  DEC           Scan-platform declination (degrees)
+  TWIST         Scan-platform twist (degrees)
+
+If the target body is BLACK_SKY or calibration, no other geometry data is
+computed. If the target body is a planet, satellite, or asteroid, and if the
+corresponding SPK data is available, the following Overview fields are
+updated: 
+
+  SC_TGT_RANGE  Distance from spacecraft to center of target-body (km)
+  SC_CB_RANGE   Distance from spacecraft to center of central-body (km)
+  SC_LON        Subspacecraft-point west-longitude (degrees)
+  SC_LAT        Subspacecraft-point planetocentric latitude (degrees)
+  SUN_LON       Subsolar-point west-longitude (degrees)
+  SUN_LAT       Subsolar-point planetocentric latitude (degrees)
+  SC_SUB_RANGE  Spacecraft-to-Subspacecraft-Point distance (km)
+  TCA           Time from closest approach to central-body (DDDHHMMSS)
+  TCA_SAT       Time from closest approach to target-body (DDDHHMMSS)
+
+If any portion of the target-body is visible in the image, the following
+Overview fields are also computed:
+
+  RESOLUTION    Picture scale in km/pixel
+  SLANT_RANGE   Distance from spacecraft to optical-axis intercept point (km)
+  MIN_LAT       Minimum latitude in image
+  MAX_LAT       Maximum latitude in image
+  MIN_LON       Minimum west-longitude in image
+  MAX_LON       Maximum west-longitude in image
+
+The point in the image at which the RESOLUTION and SLANT_RANGE are computed is
+determined as follows: 
+
+  (1) If all four corners of the image lie on the target-surface, the center
+      of the image is used.
+  (2) Otherwise, if the planet-center is visible, it is used.
+  (3) Otherwise, the margins of the image are scanned at 20-pixel
+      intervals for a point at highest resolution. 
+
+The algorithm for computing the minimum and maximum latitudes and longitudes
+is an approximation: 
+
+  (1) If the diameter of the target-body (in pixels) is less than the width of
+      the image, it is assumed that the whole disk is visible.
+  (2) If all four corners of the image lie on the target-surface, the minimum
+      and maximum latitudes and longitudes of these are used.
+  (3) Otherwise, the latitude and longitude is computed at 100-pixel intervals
+      over the entire image, and the minimum and maximum of these are used.
+  (4) If either pole is visible, the longitude range is 0-360 degrees.
+
+In addition, if the P5-point (center of the image) lies on the target-body,
+the following Overview fields are updated:
+
+  C_LAT         Geocentric-latitude of P5-point (degrees)
+  C_LON         West-longitude of P5-point (degrees)
+  INCIDENCE     Incidence angle at P5-point (degrees)
+  PHASE         Phase angle at P5-point (degrees)
+  EMISSION      Emission angle at P5-point (degrees)
+
+Note: In all of the above calculations, the camera pointing from the CK is
+used to compute latitudes and longitudes or to determine whether a point on
+the target-body is "visible" in the image (i.e what you see is not necessarily
+what you get). 
+
+MISSING FIELDS IN THE SSI OVERVIEW DOMAIN:
+
+The following Overview fields are not currently updated by CATSPICE:
+
+  ASD              Angular semi-diameter (missing routines EDLIMB, EL2CGV)
+  HOUR_ANGLE
+  SMEAR_MAGNITUDE  Magnitude of camera smear (pixels)
+
+PWS MINI-E-KERNEL PROCESSING:
+
+The following items are extracted from each PWS mini-E-kernel record:
+command, activity-ID, SCLK, SCET, waveform receiver mode, antenna switch,
+antenna mode, calibration, waveform select, and waveform mode.  Items
+telemetry mode, waveform power, and power on/off status are not used.
+
+The instrument power status is determined from the PWS commands "23A" and
+"23AR":
+  (1) If the command is "23A", the power is set to ON and the remainder
+      of the record is ignored.
+  (2) If the command is "23AR", the power is set to OFF and the remainder
+      of the record is ignored.
+Until one of these two commands is encountered, the power status is
+indeterminate.  CATSPICE assumes that the power is ON at the beginning of
+the MEK.  The initial power status may be specified via the POWER keyword.
+
+If the command is "23PWS", the activity-ID, SCLK, SCET, waveform receiver
+mode, antenna switch, antenna mode, calibration, waveform select, and waveform
+mode are extracted. 
+
+If any other command is encountered, the entire record is ignored.
+
+A Catalog record is stored the whenever there is a change in instrument
+status, i.e. whenever one of the above three commands are encountered. 
+
+For the PWS instrument, the target-body is the central-body, and is determined
+by the spacecraft clock: 
+
+        Venus:  less than 192000.00
+        Earth:  192000.00 to 1070000.00
+        Gaspra: 1070000.00 to 1080000.00
+        Earth:  1080000.00 to ?
+        Jupiter: ?
+
+The following fields of the PWS Predict Domain are updated based upon
+information extracted from the E-kernel:
+
+  BEGIN_SCLK    Beginning spacecraft clock (100*RIM + MOD91)
+  END_SCLK      Ending spacecraft clock (100*RIM + MOD91)
+  BEGIN_SCET    Beginning Spacecraft-Event-Time: YYDDDHHMM
+  END_SCET      Ending Spacecraft-Event-Time: YYDDDHHMM
+  B_SCET_YEAR   Beginning Spacecraft-Event-Time year
+  B_SCET_DAY    Beginning Spacecraft-Event-Time day-of-year
+  B_SCET_HOUR   Beginning Spacecraft-Event-Time hours
+  B_SCET_MINUTE Beginning Spacecraft-Event-Time minutes
+  B_SCET_SECOND Beginning Spacecraft-Event-Time seconds
+  B_SCET_MILLI  Beginning Spacecraft-Event-Time milliseconds
+  E_SCET_YEAR   Ending Spacecraft-Event-Time year
+  E_SCET_DAY    Ending Spacecraft-Event-Time day-of-year
+  E_SCET_HOUR   Ending Spacecraft-Event-Time hours
+  E_SCET_MINUTE Ending Spacecraft-Event-Time minutes
+  E_SCET_SECOND Ending Spacecraft-Event-Time seconds
+  E_SCET_MILLI  Ending Spacecraft-Event-Time milliseconds
+  ACTIVITY_ID   Activity-ID (20 ch aracters)
+  TARGET        Target-body name (12 characters)
+  WF_MODE       PWS instrument mode
+  WF_SELECT     Waveform select (E or B)
+  ANTENNA_SW    Antenna switch (E or B)
+  CALIBRATION   Calibration (ENA or INH)
+  WF_REC_MODE   Waveform receiver mode (ENA or INH)
+  ANTENNA_MODE  Antenna mode (CYC or INH)
+  POWER         Power (ON or OFF)
+  SPICE_E_ID    E-kernel ID (always "N001")
+
+In addition, the geometric data in the Predict Domain are updated using the
+best SPK data available in the Kernel Database (see COMPUTING PWS GEOMETRY
+DATA below). 
+
+Finally, predict fields PREDUPD_DAY and PREDUPD_YEAR are updated with the
+current date. 
+
+PWS SPK PROCESSING:
+
+All entries within the SCET range covered by the SPK are retrieved from the
+PWS Predict Domain and the geometry data for these frames are updated (see
+COMPUTING PWS GEOMETRY DATA below). 
+
+In addition, if the kernel is an SPK or PK, then the following Predict field
+is updated: 
+
+  SPICE_P_ID    P-kernel ID (e.g. N0001)
+
+If the kernel is an SPK or SK, then the following Predict field is updated:
+
+  SPICE_S_ID    S-kernel ID (e.g. N0001)
+
+Finally, predict fields PREDUPD_DAY and PREDUPD_YEAR are updated with the
+current date.
+
+COMPUTING PWS GEOMETRY DATA
+
+PWS geometry data is normally computed using the best SPK data recorded in the
+Kernel Database.  However, if an SPK is input to CATSPICE, that kernel will
+take precedence over all other kernels in the database. 
+
+If the SPK data is available for the relevant time period, the following
+Predict fields of the PWS catalog are updated:
+
+  SC_CB_RANGE   Distance from spacecraft to center of central-body (km)
+  SC_LON        Subspacecraft-point west-longitude (degrees)
+  SC_LAT        Subspacecraft-point planetocentric latitude (degrees)
+  PHASE_ANGLE   Phase angle (degrees)
+
+For PWS, the phase angle is defined as the angular separation between the
+solar vector and the spacecraft vector.
+
+These values are computed at the beginning SCLK.  Note that if the time 
+interval between beginning and ending SCLK is long, these values may change 
+significantly.
+
+MISSING FIELDS IN THE PWS PREDICT DOMAIN:
+
+The following fields of the Predict Domain are not currently calculated:
+
+  ORBIT_NUMBER  Orbit number
+
+PROGRAM HISTORY:
+
+Original Programmmer:  S. Tews,Feb 15,1989
+Cognizent Programmer:  Gary Yagi
+Source Code:        :  C
+Revisions:
+ 12 Nov 90  G.Yagi      Modify to new C-kernel format.
+ 15 Nov 90  G.Yagi      Fix GET_KDB_ID so new NAIF C-kernels do no take
+                        precedence over MIPS C-kernels.
+ 16 Nov 90  G.Yagi      Store C-euler angles in degrees rather than radians
+                        Suppress all processing of NIMS kernels.
+                        Expand help file.
+ 24 Nov 90  G.Yagi      Add NUPKDB parameter
+                        Change default from 'NOUPDATE to 'UPDATE
+                        Prevent creation of duplicate records in KDB__DATA.
+ 29 Nov 90  G. Yagi     Fix reading of SSI MEKs (FR 64666).
+ 05 Dec 90  G. Yagi     Fix extraction of Target Name (FR 64661).
+ 26 Aug 91  G. Yagi     Output SCET at shutter center.
+ 01 Sep 91  G. Yagi     Use MIPS C-kernels.
+ 19 Sep 91  G. Yagi     Initialize E-kernel data with null values.
+ 18 Dec 91  G. Yagi     Test for NCG telemetry format.
+ 10 Feb 92  G. Yagi     Rewrite help file.
+  1 Apr 92  G. Yagi	Add SC_LON, SC_LAT, PHASE_ANGLE to PWS Predict domain
+ 21 Oct 92  G. Yagi	Added Predict Present flag in SSI Overview domain
+
+         Parameter INP
+ 
+REQUIRED STRING
+Filename of input kernel
+ 
+CATSPICE will accept the following types of kernels as input:
+    SSI or PWS mini-E kernels (EK)
+    S-kernels, P-kernels, or SP-kernels (SK,PK,SPK)
+    SSI shutter-centered C-kernels (CK)
+
+         Parameter KTYPE
+ 
+REQUIRED KEYWORD
+Type of input kernel
+ 
+Indicates the input kernel type.  Valid values are 'EK, 'CK, 'SK, 'PK, and
+'SPK.  The values 'SK, 'PK, and 'SPK are functionally equivalent and result in
+identical program operation. 
+
+         Parameter CATALOG
+ 
+Catalog which is to be updated
+ 
+Instrument name for which catalog is to be updated.  Valid values are 'SSI,
+'PWS, and 'ALL (default). 
+
+If an EK is input (KTYPE=EK), the keyword 'SSI or 'PWS must be specified to
+indicate which instrument it applies to. 
+
+If an SPK is input (KTYPE=SPK), the CATALOGS keyword is optional.  Specifying
+'SSI or 'PWS will restrict processing to the SSI Overview or PWS Predict
+domains of the Galileo Catalog.  If defaulted, both domains are updated. 
+
+If a CK is input (KTYPE=CK), the CATALOGS keyword should not be specified.
+Updating of the SSI Overview Domain is assumed. 
+
+         Parameter LIST
+ 
+OPTIONAL KEYWORD
+Print summary of overview
+or predict records
+ 
+Optional keyword causing a summary of each Overview or Predict record
+processed to be printed. 
+
+         Parameter UPDATE
+ 
+OPTIONAL KEYWORD
+Update catalog
+ 
+Optional keyword.  Specifying 'NOUPDATE suppresses updating of the Galileo
+Catalog.  The default is 'UPDATE. 
+
+         Parameter SCLK
+ 
+OPTIONAL 2 INTEGERS
+SCLK range
+ 
+Optional 2 integers.  Specifies the spacecraft clock range over which
+processing will be done.  The SCLK is specified in the form NNNNNNNNMM where
+NNNNNNNN is the RIM count and MM is the MOD91 count. 
+
+         Parameter POWER
+ 
+TBD
+ 
+TBD

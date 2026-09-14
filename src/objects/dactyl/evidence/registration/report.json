@@ -1,0 +1,377 @@
+{
+  "schema": "cssearth-dactyl-registration-result@1",
+  "qualifiedSurface": false,
+  "baseCommit": "6644779ec06eb1e8cb3142d0b1336d94ac52382c",
+  "inputSha256": "36babc47a849fde247a70d43655cb4e4bbd0a87733b47a1c46f155134ce38b24",
+  "generatorSha256": "83eba83b3283dc0940fd057883a74e223c08d211086f74adf98b3b7f7813cb08",
+  "dependencySha256": [
+    {
+      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mts",
+      "sha256": "d0942ffb78df494a2a9ae6a76833fdf43ceffbae0cbef6a88fa7e806d23cf262"
+    },
+    {
+      "path": "tools/objects/observation/fits.mts",
+      "sha256": "7e500791e91d41e7ef93c9ce13f0239b2b85a1ad3944fec8935f704d79171a66"
+    },
+    {
+      "path": "tools/spice/ck.mts",
+      "sha256": "8ffd9a8af1045820cd90cf0529932bfa018c0838aa60def22b48abb1dd5e67f8"
+    },
+    {
+      "path": "tools/spice/daf.mts",
+      "sha256": "a58acc8044398b154326d6ce886133e7b719229efecb6e94944c7c94b62f87e6"
+    },
+    {
+      "path": "tools/spice/sclk.mts",
+      "sha256": "509b222632dc9f42020913297947128ce0e5848c3cf04bb3237be604459c25fd"
+    },
+    {
+      "path": "tools/spice/lsk.mts",
+      "sha256": "08b4990bfaa2eb8f387bccc36464240ecf85b740bbe76e887a32f5e5f0c18623"
+    },
+    {
+      "path": "tools/spice/text-kernel.mts",
+      "sha256": "4b81fb9ee416c4527476a903da3c6e40af4f85aa217b8d726b00d00511ffe0a9"
+    }
+  ],
+  "runtime": {
+    "node": "v24.21.0",
+    "sharp": "0.35.3"
+  },
+  "originalDetector": {
+    "orientation": [
+      {
+        "flipFitsVertically": false,
+        "comparedPixels": 640000,
+        "differentPixels": 316986,
+        "maxDifferenceDN": 106
+      },
+      {
+        "flipFitsVertically": true,
+        "comparedPixels": 640000,
+        "differentPixels": 0,
+        "maxDifferenceDN": 0
+      }
+    ],
+    "vicarPixelOffset": 8000,
+    "width": 800,
+    "height": 800,
+    "originalLabelUtc": "1993-08-28T16:47:49.956Z"
+  },
+  "pointing": [
+    {
+      "id": "i1578",
+      "shutterCenterUtc": "1993-08-28T16:40:45.390Z",
+      "et": -200171894.4273287,
+      "encodedClock": 14746483589.993258,
+      "labelFrameStartSclk": "02025615.78",
+      "frameStartUtc": "1993-08-28T16:40:44.140Z",
+      "shutterCenterMinusFrameStartSeconds": 1.2499430179595947,
+      "toleranceTicks": 0,
+      "pointing": null
+    },
+    {
+      "id": "i2278",
+      "shutterCenterUtc": "1993-08-28T16:47:49.956Z",
+      "et": -200171469.86132875,
+      "encodedClock": 14746534537.945604,
+      "labelFrameStartSclk": "02025622.78",
+      "frameStartUtc": "1993-08-28T16:47:48.806Z",
+      "shutterCenterMinusFrameStartSeconds": 1.149545967578888,
+      "toleranceTicks": 0,
+      "pointing": {
+        "frameId": 2,
+        "cMatrix": [
+          [
+            -0.20058511955369895,
+            -0.7404967278814198,
+            -0.6414282546088368
+          ],
+          [
+            0.566526380239559,
+            -0.6218334519197934,
+            0.5407134347934925
+          ],
+          [
+            -0.799258074908406,
+            -0.2549269583045786,
+            0.5442414681217196
+          ]
+        ],
+        "angularVelocity": [
+          0.00015033931713895606,
+          0.0014755449988686881,
+          0.0009117842473456204
+        ]
+      }
+    },
+    {
+      "id": "i2700",
+      "shutterCenterUtc": "1993-08-28T16:52:01.315Z",
+      "et": -200171218.5023288,
+      "encodedClock": 14746564701.04475,
+      "labelFrameStartSclk": "02025627.00",
+      "frameStartUtc": "1993-08-28T16:52:00.140Z",
+      "shutterCenterMinusFrameStartSeconds": 1.175372153520584,
+      "toleranceTicks": 0,
+      "pointing": null
+    }
+  ],
+  "oracleComparison": {
+    "oracle": {
+      "spiceypy": "8.2.0",
+      "cspice": "CSPICE_N0067",
+      "python": "3.12.14"
+    },
+    "matrixMaxAbsoluteError": 5.694289484381443e-11,
+    "etErrorSeconds": 0,
+    "clockErrorTicks": 0.000003814697265625,
+    "tolerances": {
+      "matrix": 1e-9,
+      "etSeconds": 0.000001,
+      "clockTicks": 0.001
+    },
+    "j2000ComparisonFromNativeOracleOnly": {
+      "reconstructedRaDecDegrees": [
+        198.27536092741585,
+        32.708037867759124
+      ],
+      "labelRaDecDegrees": [
+        198.306,
+        32.6
+      ],
+      "separationDegrees": 0.11107490230350828,
+      "angularSeparationInNativePixels": 190.94149418242174
+    }
+  },
+  "fit": {
+    "geometry": "fixed published ellipsoid envelope, not a recovered crater mesh",
+    "sourceAxes": "X: 0E; Y: 90E; Z: north, before the existing CSS X/Y swap",
+    "semiaxesMetres": [
+      800,
+      700,
+      600
+    ],
+    "rangeKm": 3900,
+    "rangeMeaning": "Rounded Dactyl range from NASA PIA00297 caption; not a measured full camera position and not an uncertainty bound.",
+    "distortion": {
+      "model": "R = r + A*r^3; R detector, r ideal",
+      "coefficient": 6.58e-9,
+      "opticalCenterZeroBased": [
+        399,
+        399
+      ]
+    },
+    "camera": "body pose fitted to image controls; reconstructed CK does not provide Dactyl orientation",
+    "cameraPoseOrder": [
+      "observer latitude deg",
+      "observer west longitude deg",
+      "north azimuth clockwise from image up deg",
+      "center ideal sample",
+      "center ideal line"
+    ],
+    "features": {
+      "fit": {
+        "name": "Acmon",
+        "xyz": [
+          -391.7703426527037,
+          352.7516009604451,
+          -426.90113324236114
+        ],
+        "detectorPixel": [
+          197.5,
+          222
+        ],
+        "idealPixel": [
+          197.59523632210897,
+          222.0836567196689
+        ]
+      },
+      "holdout": {
+        "name": "Celmis",
+        "xyz": [
+          -351.9002694274152,
+          -295.2793862877295,
+          -475.69484994822943
+        ],
+        "detectorPixel": [
+          194,
+          207
+        ],
+        "idealPixel": [
+          194.106248001135,
+          207.09951032301421
+        ]
+      }
+    },
+    "limbDetectorPixels": [
+      [
+        185.07142857142858,
+        202
+      ],
+      [
+        182.71428571428572,
+        204
+      ],
+      [
+        181.07142857142858,
+        206
+      ],
+      [
+        179.2,
+        208
+      ],
+      [
+        177.71428571428572,
+        210
+      ],
+      [
+        176.23076923076923,
+        212
+      ],
+      [
+        175.28571428571428,
+        214
+      ],
+      [
+        174.71428571428572,
+        216
+      ],
+      [
+        174.23529411764707,
+        218
+      ],
+      [
+        174.36363636363637,
+        220
+      ],
+      [
+        175.0222222222222,
+        222
+      ],
+      [
+        175.21052631578948,
+        224
+      ],
+      [
+        176.02173913043478,
+        226
+      ],
+      [
+        176.8,
+        228
+      ],
+      [
+        178.10714285714286,
+        230
+      ],
+      [
+        180.04761904761904,
+        232
+      ],
+      [
+        182.625,
+        234
+      ]
+    ],
+    "limbThresholdDN": 10,
+    "search": {
+      "starts": 576,
+      "initialLatitudes": [
+        -75,
+        -45,
+        -15,
+        15,
+        45,
+        75
+      ],
+      "initialLongitudeStep": 45,
+      "initialRollStep": 30,
+      "latitudeBounds": [
+        -89,
+        89
+      ],
+      "finalAngularStepDegrees": 0.03125,
+      "method": "coordinate descent, step 8 to 0.03125, at most 80 passes per step; center step = 0.3 times angular step",
+      "objective": "limb approximate normal distances squared + twice-weighted Acmon coordinate residuals squared + backface penalty; Celmis excluded",
+      "globalOptimumProven": false
+    },
+    "bestFit": {
+      "pose": [
+        -51.5,
+        199.09375,
+        188.9375,
+        192.91228752927344,
+        218.4291891477882
+      ],
+      "objective": 1.2293172443937361,
+      "limbRmsIdealPixels": 0.2688500929402912,
+      "fitControl": {
+        "name": "Acmon",
+        "predictedDetectorPixel": [
+          197.4885145616002,
+          222.00245678472803
+        ],
+        "residualPixels": 0.011745258040396946,
+        "observerFacingCosine": 0.9462101614573931
+      },
+      "checkControl": {
+        "name": "Celmis",
+        "predictedDetectorPixel": [
+          183.4008868381705,
+          214.0031192330637
+        ],
+        "residualPixels": 12.703734837038052,
+        "observerFacingCosine": 0.7951969657277156
+      }
+    },
+    "alternativeSelectedUsingCelmis": {
+      "pose": [
+        -24.03125,
+        203.8125,
+        242.625,
+        191.50603752927321,
+        220.6135641477884
+      ],
+      "objective": 4.927923337860906,
+      "limbRmsIdealPixels": 0.5375722573819509,
+      "fitControl": {
+        "name": "Acmon",
+        "predictedDetectorPixel": [
+          197.49257268283165,
+          222.06123595170365
+        ],
+        "residualPixels": 0.061684737345401225,
+        "observerFacingCosine": 0.8308789096829517
+      },
+      "checkControl": {
+        "name": "Celmis",
+        "predictedDetectorPixel": [
+          194.50589767807614,
+          207.18201245418834
+        ],
+        "residualPixels": 0.5376439287879017,
+        "observerFacingCosine": 0.4992802693356856
+      }
+    },
+    "alternativeHasIndependentHoldout": false,
+    "limitations": [
+      "Two analyst-picked named features, each with about one-pixel picking uncertainty; not a distributed published control network.",
+      "Rounded source range held at 3900 km; range, source shape and point uncertainty are not inferred confidence intervals.",
+      "Envelope is orthographic, point projection is perspective; finite runtime mesh facets and crater relief are not fitted.",
+      "No photometric calibration, shadow removal, unseen-coverage fill or prepared photographic surface."
+    ]
+  },
+  "display": {
+    "crop": {
+      "left": 158,
+      "top": 188,
+      "width": 64,
+      "height": 64
+    },
+    "gain": 2,
+    "zoom": 6,
+    "interpolation": "nearest",
+    "clippedPixels": 0
+  }
+}
