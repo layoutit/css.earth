@@ -46,6 +46,39 @@ Single-exposure products `2532629277` and `2516129281` were inspected as raw
 previews only; their calibration remains unqualified. No detector correction or
 brightness-bound relaxation was introduced to include them.
 
+[Matched comparison](evidence/close-up-priority/comparison.webp) ·
+[Before](evidence/close-up-priority/before.webp) ·
+[After](evidence/close-up-priority/after.webp) ·
+[Pixelmatch diff](evidence/close-up-priority/diff.webp) ·
+[Capture settings](evidence/close-up-priority/browser.json) ·
+[Source-transfer checks](evidence/close-up-priority/source-transfer.json) ·
+[Preparation and restoration measurements](evidence/close-up-priority/preparation.json).
+
+The comparison swaps the previous eight-image bank and the new ten-image bank
+in the same Chrome 153 application at `b7e797027`, with the same scene, camera,
+1440×1000 viewport and DPR 1. Identical unscaled body crops exclude the current
+UI text. Pixelmatch 7.2.0 at threshold 0.1 finds 26,682 changed pixels among
+353,280; this locates texture changes, not sharpness or scientific accuracy.
+The inspected views show additional small terrain detail while preserving the
+silhouette. Three orientations, real mouse dragging, AMICA/Elevation switching
+and optional lighting were checked. Dragging retains all 794 triangle nodes.
+Shadows defaults off and returns off after the lighting check. Inspected
+[DPR 2](evidence/close-up-priority/dpr2.webp),
+[390×844 mobile layout](evidence/close-up-priority/mobile.webp) and
+[lighting](evidence/close-up-priority/shadows.webp) captures accompany the record.
+DPR 1 and 2 request the same body assets; the mobile check is viewport emulation,
+not physical-device performance evidence.
+
+The partial refresh took 542.8 s, peaking at 1,670 MiB RSS. It replaced three
+runtime images and retained 33 assets. All six added native files restored into
+an empty directory; all 36 runtime files (11.85 MB) independently installed into
+another empty directory with exact byte/hash agreement. Twelve focused
+profile/package tests, preparation typechecking, the post-bake package check and
+all 54 source-file checks pass. The source suite reports 74 passes, one existing
+missing-PDF skip and one failure in Europa's unchanged tracked preparation
+receipt: its content hash differs from current `main` content. That unrelated
+failure remains outside this change. Full repository suites were not run.
+
 ### Eight-image expansion, 13 September 2026
 
 This historical record predates the current transfer implementation. The same
