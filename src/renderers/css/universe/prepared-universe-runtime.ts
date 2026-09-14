@@ -95,9 +95,10 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
     // here spent seconds and hundreds of megabytes that were never reused.
     startup: entries.filter(entry => startupSkyPaths.has(entry.key.slice(pool.length + 1))).map(entry => entry.key),
   };
-  // Their bytes are fetched once, a few wheel steps before the volume fades in.
-  const galaxyUrls = [...entries.filter(entry => !skyPaths.has(entry.key.slice(pool.length + 1))), ...imageEntries,
-    ...lensPlans.flatMap(bank => bank.assets.entries)].map(entry => entry.url);
+  // Warm the galaxy backdrop before its handoff. Nebula lenses own their image
+  // demand: crossing this distance must not fetch every distant/inactive lens.
+  const galaxyUrls = [...entries.filter(entry => !skyPaths.has(entry.key.slice(pool.length + 1))), ...imageEntries]
+    .map(entry => entry.url);
   const galaxyPrefetchDistanceM = (plan.volume.opacityProfile?.fadeStartDistanceM ?? plan.volume.fadeStartDistanceM) * GALAXY_PREFETCH_RATIO;
   return Object.freeze({ assets,
     createFramePlanner: () => createWorldContextPlannerClient(plan, undefined, annotationPriorities, plannerSource),
@@ -308,7 +309,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 bank.root.style.display = opacity > 0 ? 'block' : 'none';
                 publishedLensOpacity[index] = opacity;
               }
-              if (opacity > 0) bank.publish({ world, viewport });
+              bank.publish({ world, viewport }, opacity > 0);
             }
             for (const [index, shell] of shellLayers.entries()) {
               shell.publish(world, viewport, shellVisibility[mountedShells[index]!.payload.id] !== false);
