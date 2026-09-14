@@ -141,7 +141,7 @@ export const parseEncounterRegistration = shape({sourceShapeSha256:text,method:t
     sourcePixel:array(number),referencePixel:optional(array(number)),projectionOffsetPixels:optional(array(number)),normal:optional(array(number))}))});
 export const sipCameraFields = {matrix:array(array(number)),sip:shape({referencePixel:array(number),a:array(array(number)),b:array(array(number)),offsetPixels:array(number)})};
 export const parseSipCamera = shape(sipCameraFields);
-export const parseLlorriCamera = shape({...sipCameraFields,imageSha256:text,startTime:text,width:number,height:number});
+export const parseLlorriCamera = shape({...sipCameraFields,target:text,imageSha256:text,startTime:text,width:number,height:number});
 
 export const archivedCameraFields = {schema:text,matrix:array(array(number)),rayMatrix:array(array(number)),positionKm:array(number),sunDirection:array(number)};
 export const parseArchivedCamera = shape(archivedCameraFields);

@@ -71,10 +71,28 @@ def osiris(source, profile):
         matrix=p.tolist(),rayMatrix=np.linalg.inv(p[:,:3]).tolist(),positionKm=eye.tolist(),sunDirection=sun.tolist(),checks=checks)
 
 
+def llorri_target(header, profile):
+    """The camera's body must be one of the frame's field-of-view targets; a frame showing several needs the profile to name it."""
+    targets = [str(header[f'TRGFOV{i}']).strip() for i in range(1, int(header['TRGFOVN']) + 1)]
+    target = profile.get('target', targets[0] if len(targets) == 1 else None)
+    if target not in targets:
+        raise ValueError(f"L'LORRI camera target {target} is not among the frame's field-of-view targets {targets}")
+    return target
+
+
+def body_frame_note(target, profile):
+    """Name the body frame from the profile's one PCK kernel, which is valid near the encounter only."""
+    kernels = [Path(path).stem for path in profile['kernels'] if path.endswith('.tpc')]
+    if len(kernels) != 1:
+        raise ValueError("Expected one body-frame PCK kernel in the L'LORRI profile")
+    version = re.search(r'_(v\d+)$', kernels[0])
+    return f"{target.title()} {version.group(1) if version else kernels[0]}; valid near the encounter epoch only"
+
+
 def llorri(source, profile):
     from astropy.io import fits
     from astropy.wcs import WCS
-    h = fits.getheader(source / profile['image']); w = WCS(h)
+    h = fits.getheader(source / profile['image']); w = WCS(h); target = llorri_target(h, profile)
     et = sp.str2et(h['MIDUTC']); r = sp.tipbod('J2000', profile['bodyId'], et).T
     eye = np.array([h['SPCTSC'+c] for c in 'XYZ']); sun = r.T @ np.array([h['SPCTSO'+c] for c in 'XYZ']); sun /= np.linalg.norm(sun)
     ra, dec = np.radians([h['CRVAL1'],h['CRVAL2']])
@@ -103,11 +121,11 @@ def llorri(source, profile):
         for y in [41,211,557,933]:
             ra,dec=np.radians(w.all_pix2world([[x,y]],0)[0]);v=np.array([np.cos(dec)*np.cos(ra),np.cos(dec)*np.sin(ra),np.sin(dec)])
             oracle.append(dict(pointKm=(r.T@(eye+v*1272)).tolist(),pixel=(np.array([x,y])+offset).tolist()))
-    return dict(schema='cssearth-archived-camera@1',target='DONALDJOHANSON',startTime=h['STARTUTC'],filter='PANCHROMATIC',
+    return dict(schema='cssearth-archived-camera@1',target=target,startTime=h['STARTUTC'],filter='PANCHROMATIC',
         width=1024,height=1024,matrix=p.tolist(),rayMatrix=np.linalg.inv(k@r).tolist(),positionKm=(r.T@eye).tolist(),sunDirection=sun.tolist(),
         sip=dict(referencePixel=ref.tolist(),a=terms('A'),b=terms('B'),offsetPixels=offset.tolist()),
         checks=dict(anchors=anchors,maximumHoldoutResidualPixels=maximum,maximumAcceptedHoldoutResidualPixels=3,
-            astropyProjectionAnchors=oracle,bodyFrame='Donaldjohanson v12; valid near the encounter epoch only',
+            astropyProjectionAnchors=oracle,bodyFrame=body_frame_note(target,profile),
             pointing='Two published landmarks constrain translation; third withheld. Original TAN-SIP distortion unchanged.'))
 
 
