@@ -41,3 +41,5 @@ Resolved optical imagery, mapped composition and a present spin-phase solution w
 
 This system adds two selectable moons, [Beta](../sn263-beta/README.md) and [Gamma](../sn263-gamma/README.md), plus Alpha, bringing the catalog at this revision to 97 moons and 464 objects. The [original candidate review](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/README.md#carried-forward-candidates) records the unresolved shape, image-registration and orbital-phase evidence for Dactyl, Selam, the 2000 DP107 secondary and the 1998 QE2 secondary. They are not shipped by this addition.
 </details>
+
+[Investigation ledger](investigations.json).

@@ -6,10 +6,7 @@ YORP is a small near-Earth asteroid with a radar-derived flattened northern hemi
 
 Geometry is the unchanged [yorp.obj](https://echo.jpl.nasa.gov/asteroids/shapes/yorp.obj) from the [NASA/JPL radar model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html). Interpretation comes from [the original research](https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf): Taylor et al. (2007), Science 316, 274–277 and supporting material; Arecibo, Goldstone and NASA/JPL. The original OBJ, paper and supporting material, Horizons responses and authored recipe are pinned under source/.
 
-- Included: the original JPL shape and its scientific paper provide source geometry, scale, spin and limits. Shape displays the shared missing-imagery grid under prepared lighting.
-- Included: Elevation derives source radius minus the 0.0564 km reference sphere, with a -0.03 to 0.03 km palette. This is a second visualization of the radar inverse model; it is not independent topography, optical albedo or gravitational elevation.
-- Excluded: delay-Doppler panels, optical light curves and model figures in the paper are observational constraints and research illustrations, not registered geographic surface textures. No generic regolith or invented surface detail is substituted.
-- Unresolved: the [PDS radar-shape compilation](https://pds.nasa.gov/ds-view/pds/viewCollection.jsp?identifier=urn%3Anasa%3Apds%3Agbo.ast.jpl.radar.shape_models%3Adocument) lists YORP, but the archive directory returned HTTP 403. The original JPL mesh and paper remain the acquired sources.
+Shape uses the shared missing-imagery grid. Elevation shows source radius minus a 0.0564 km reference sphere, with a -0.03 to 0.03 km palette. It visualizes the radar inverse model, not independent topography, optical albedo or gravitational elevation.
 
 ## Evidence
 
@@ -27,7 +24,7 @@ The supplement states that about 25% of the surface was unobserved or seen above
 
 The bounded JPL/PDS/paper survey found no calibrated registered optical mosaic, independent elevation measurement or composition map for this package. Failed archive requests do not establish dataset absence.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="yorp-sources-and-preparation"></a>
 <a id="model-identity-coordinates-and-spin"></a>

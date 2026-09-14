@@ -22,7 +22,7 @@ No dated test report is cited in the existing source notes.
 
 - Queta is outside this standalone asteroid package.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="shape-scale-and-orientation"></a>
 <a id="source-survey"></a>
@@ -41,7 +41,7 @@ records the context image; shared preparation produces the scene.
 
 **Source survey**
 
-- [Lucy mission summary](https://doi.org/10.1007/s11214-025-01173-7) supplies the mission context and complementary model descriptions.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Orbit**
 

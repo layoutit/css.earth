@@ -1,0 +1,175 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "menippe",
+  "entries": [
+    {
+      "id": "survey-selected-model",
+      "subject": "DAMIT 327: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-327.txt. Model 327, version 2011-04-21, pole (32°, 48°), period 11.97647 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menippe/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/327",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/1204/shape.txt",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/menippe/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/menippe/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "survey-damit-documentation",
+      "subject": "DAMIT documentation",
+      "status": "included",
+      "finding": "[DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menippe/README.md",
+        "https://damit.cuni.cz/projects/damit/pages/documentation"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-hanu-2011-a-study-of-asteroid-pole-latitude-distribution-based-on",
+      "subject": "Hanuš (2011), A study of asteroid pole-latitude distribution based on an extended set of shape models derived by the lightcurve inversion method",
+      "status": "included",
+      "finding": "[Hanuš (2011), A study of asteroid pole-latitude distribution based on an extended set of shape models derived by the lightcurve inversion method](https://ui.adsabs.harvard.edu/abs/2011A%26A...530A.134H) — original model publication record.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menippe/README.md",
+        "https://ui.adsabs.harvard.edu/abs/2011A%26A...530A.134H"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-akari-acua",
+      "subject": "AKARI thermal diameter as an alternative scale",
+      "status": "excluded",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 39.33 ± 0.44 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 188 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
+      "revisitWhen": "A source-specific comparison with the selected shape and physical calibration justifies changing the adopted scale.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menippe/README.md",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/menippe/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2011-original-light-curve-inversion-study",
+      "subject": "Hanuš et al. (2011), original light-curve inversion study",
+      "status": "included",
+      "finding": "[Hanuš et al. (2011), original light-curve inversion study](https://arxiv.org/pdf/1104.4114) — retained primary publication; see the body-specific selection and calibration above.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menippe/README.md",
+        "https://arxiv.org/pdf/1104.4114"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2018-vs-tpm-size-study-table-a-3",
+      "subject": "Hanuš et al. (2018), VS-TPM size study, Table A.3",
+      "status": "included",
+      "finding": "[Hanuš et al. (2018), VS-TPM size study, Table A.3](https://arxiv.org/pdf/1803.06116) — retained primary publication; see the body-specific selection and calibration above.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menippe/README.md",
+        "https://arxiv.org/pdf/1803.06116"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The release supplies no registered surface imagery; the grid marks that gap.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menippe/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/328"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "An alternative pole remains possible. Select Hanuš (2011) nominal pole1 model327 (32,48), with328 (198,25) retained. Hanuš et al. (2018), TableA.3, explicitly gives VS-TPM volume-equivalent35.3 ±0.9 km for this nominal pole and period11.9765 h; use this shape-aware calibration instead of AKARI39.33 ±0.44 km. The varied-shape ensemble does not establish identical mesh bytes or local shape accuracy, and its alternative pole remains possible. Alternative archive solutions: model 328, pole ['198', '25'], [Model 328](https://damit.cuni.cz/projects/damit/asteroid_models/view/328) The live DAMIT export lists these other models for this target: 328: pole (198°, 25°), 11.97648 h, version 2011-04-21. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menippe/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/328",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "versioned-view-evidence",
+      "subject": "Versioned browser evidence",
+      "status": "unresolved",
+      "finding": "The README records two browser cases before final integration, with an asset comparison to the integrated files, but no tested code revision for those cases. This is an evidence limitation, not proof of a current rendering defect.",
+      "revisitWhen": "A focused browser check identifies the tested revision, relevant served asset pins and capture settings, or the original report can be reliably bound to that revision and its dependencies.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/menippe/README.md#evidence"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

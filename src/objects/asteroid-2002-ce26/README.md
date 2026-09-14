@@ -24,7 +24,7 @@ No calibrated registered optical mosaic, composition map or independent topograp
 
 Rotational phase is arbitrary, not a present-attitude ephemeris. The prior 3.2930 h synodic light-curve value is not substituted for the model period. The secondary's approximately 15.6 h orbit is not a primary spin period.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="2002-ce26-primary-sources-and-preparation"></a>
 <a id="model-identity-scale-and-spin"></a>
@@ -44,7 +44,7 @@ The study derives a primary mass of (1.95 ± 0.25) × 10¹³ kg from the seconda
 
 **Source survey and geometry qualification**
 
-The original shape, study, [JPL 2014 observing plan](https://echo.jpl.nasa.gov/asteroids/2002CE26/2002CE26_planning.html), and Horizons responses are pinned. Paper delay-Doppler panels and light curves are model constraints, not registered surface textures. Its unresolved near-infrared spectra describe bulk properties rather than a spatial composition map. The later [Rozitis et al. (2018) thermal study](https://academic.oup.com/mnras/article/477/2/1782/4931778) uses the Shepard model; its bulk thermal results do not provide an acquired registered optical texture or a replacement mesh.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Prepared views and delivery**
 

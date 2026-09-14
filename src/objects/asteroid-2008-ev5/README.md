@@ -22,7 +22,7 @@ The north pole was not covered by the radar images, so its topography and flatte
 
 Display phase is arbitrary; the animation is not a present-day attitude ephemeris.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="2008-ev5-sources"></a>
 <a id="geometry-scale-and-rotation"></a>
@@ -53,12 +53,6 @@ JPL Horizons heliocentric geometric elements at JD 2461286.5 and independent ICR
 
 **Source survey**
 
-- [Original full source radar shape](https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj): **included**. The unmodified source has 2000 vertices and 3996 faces. Original kilometer coordinates are retained.
-- [Published physical properties, radar/lightcurve constraints and model uncertainty](https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf): **included**. Half the 400 ± 50 m equivalent diameter in Busch et al. (2011), Table 2. The archived mesh has a 405.2 m volume-equivalent diameter and is not rescaled to the rounded published value.
-- [Busch et al. (2019) corrigendum](https://experts.azregents.edu/en/publications/corrigendum-to-radar-observations-and-the-shape-of-near-earth-ast/): **included as qualification**. Corrects the December 21 Goldstone delay-Doppler image resolution to 0.125 microseconds by 1.003 Hz. The authors state that the paper results are unaffected. It does not revise the adopted mesh or spin.
-- [WISE thermophysical constraints (Ali-Lagoa et al., 2013)](https://arxiv.org/abs/1310.6715): **excluded from spatial lenses**. Disk-integrated thermal fits infer effective diameter, thermal inertia and grain-size ranges. These are not resolved regolith imagery or a spatial temperature map; the radar vertices are not silently rescaled to the thermal-fit diameter.
-- [Arecibo/Goldstone radar images and VLBA spin sense](https://echo.jpl.nasa.gov/asteroids/2008EV5/2008ev5.html): **included as qualification**. VLBA speckle tracking distinguishes the retrograde solution. The north pole is poorly constrained; alternative flattening and facet-scale structures fit the data. Radar images cannot be used as a photographic texture.
-
-The delivered Elevation atlas withholds 382 of 5,733,930 interior texels (0.0067%). Maximum accepted correspondence is 4.999841 m. 21 independent decoded final WebP anchors differ from expected source scalar/relief RGB by at most 8/255 per channel. This is a sampled pixel result, not an every-pixel bound.
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 </details>
