@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-galaxy-field-recipe@1",
+  "minimumDistanceMpc": 3,
+  "maximumDistanceMpc": 200,
+  "hubbleKmSPerMpc": 70,
+  "sampling": {
+    "spreadCount": 900,
+    "concentrationCount": 900,
+    "cellSizeMpc": 4
+  },
+  "clouds": {
+    "count": 160,
+    "iterations": 12,
+    "minimumMembers": 20,
+    "covarianceFloorMpc2": 0.25,
+    "maximumBrightness": 0.14,
+    "exposure": 0.045
+  },
+  "texture": {
+    "size": 128,
+    "rgb": [
+      125,
+      155,
+      200
+    ],
+    "falloff": 6
+  },
+  "points": {
+    "unknownBrightness": 0.35,
+    "ellipticalColor": "#ffe6cc",
+    "spiralColor": "#cbdfff",
+    "unknownColor": "#e6e6ff"
+  },
+  "description": "Authored rendering parameters. Sampled points retain measured catalogue positions; covariance clouds represent smoothed galaxy counts, not gas or measured matter density."
+}

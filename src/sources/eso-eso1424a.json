@@ -1,0 +1,37 @@
+{
+  "id": "eso-eso1424a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "VST snaps a very detailed view of the Triangulum Galaxy",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "eso1424a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1424a/",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/m33/source/provenance.json",
+      "revision": "340f4ef6ea7f2a6cc540b906dec35436a1d549c5",
+      "sha256": "17e205fb26ff54083afb30859f6bec0df62377b1467bc1a8d26a249894434e0d",
+      "locator": "/"
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO",
+      "scope": "Published source",
+      "evidence": "src/objects/m33/source/provenance.json"
+    }
+  ]
+}

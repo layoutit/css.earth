@@ -70,17 +70,25 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     }
     if (!record) { root.hidden = true; return; }
     root.dataset.preparedFocusId = record.id;
+    for (const bank of root.querySelectorAll<HTMLElement>('[data-focus-record-bank]')) bank.hidden = bank.dataset.focusRecordBank !== record.id;
     write('name', record.name);
     write('aliases', record.aliases.length ? `Also known as ${record.aliases.join(', ')}` : '');
     fields.aliases.hidden = record.aliases.length === 0;
     const cluster = isPreparedCluster(record), nebula = isPreparedNebula(record);
     write('status', cluster || nebula ? record.classification.name : `${words(record.status)} galaxy`);
-    write('distance', `${number.format(record.distance.valuePc)} pc${cluster ? ' (comoving, redshift-derived)' : ''}`);
+    const distanceScale = record.distance.valuePc >= 1e6 ? 1e6 : record.distance.valuePc >= 1e3 ? 1e3 : 1;
+    write('distance', `${number.format(record.distance.valuePc / distanceScale)} ${distanceScale === 1e6 ? 'Mpc' : distanceScale === 1e3 ? 'kpc' : 'pc'}`);
+    const associationLabel = root.querySelector<HTMLElement>('[data-focus-fact-label=association]');
+    if (associationLabel) associationLabel.textContent = cluster ? 'Redshift' : 'Association';
+    const distanceLabel = root.querySelector<HTMLElement>('[data-focus-fact-label=distance]');
+    if (distanceLabel) distanceLabel.textContent = cluster ? 'Comoving distance' : 'Observer distance';
     const { minusPc, plusPc, uncertainty } = record.distance;
     write('uncertainty', uncertainty ? `${number.format(uncertainty.statisticalPc)} pc statistical; ${number.format(uncertainty.systematicPc)} pc systematic`
       : minusPc !== undefined && plusPc !== undefined ? `−${number.format(minusPc)} / +${number.format(plusPc)} pc` : 'Not supplied');
+    if (fields.uncertainty.parentElement) fields.uncertainty.parentElement.hidden = !uncertainty && minusPc === undefined && plusPc === undefined;
+    if (fields.membership.parentElement) fields.membership.parentElement.hidden = cluster;
     write('membership', cluster ? 'Galaxy cluster' : nebula ? 'Milky Way' : words(record.membership.group));
-    write('association', cluster ? `Spectroscopic redshift ${record.redshift.value}` : nebula ? 'Galactic nebula' : words(record.membership.subgroup));
+    write('association', cluster ? `${record.redshift.value}` : nebula ? 'Galactic nebula' : words(record.membership.subgroup));
     write('basis', cluster || nebula ? `${record.classification.basis} ${record.distance.method}` : record.membership.basis);
     write('reference', `Distance reference: ${record.distance.sourceRef}`);
     for (const [index, link] of links.entries()) {

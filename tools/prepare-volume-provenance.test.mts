@@ -16,7 +16,7 @@ test('all installed volume lenses produce standard source cards with real source
   const closure = new Set<string>();
   const entries = await prepareVolumeProvenance({ root, input: async path => { closure.add(path); return readFile(resolve(root, path)); } });
   assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [
-    ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m42', 2], ['m45', 5], ['m8', 3],
+    ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['smc', 1],
   ]);
   assert.equal(entries.find(entry => entry.id === 'm45')?.defaultLens, 'optical-composite');
   assert.ok([...closure].every(path => !path.startsWith('.local/') && !path.endsWith('/prepared/lenses.json')));
@@ -40,7 +40,7 @@ test('all installed volume lenses produce standard source cards with real source
       assert.ok(own && inputs.includes(own.id));
       const context = datasetContext(entry.id, control.id, entry.provenance, graph, catalog, usage, sources);
       assert.ok(context.sources.some(group => group.links.length));
-      assert.ok(context.sources.some(group => group.supporting.length));
+      if (product.inputs.length > 1) assert.ok(context.sources.some(group => group.supporting.length));
       const output = entry.outputs.find(output => output.path.endsWith(control.thumbnailUrl));
       assert.ok(output && output.text instanceof Uint8Array);
       const image = await sharp(output.text).metadata();
@@ -113,4 +113,58 @@ test('source-lens binding and recipe pins fail closed when their properties are 
     const value = sourceObject(JSON.parse(bytes.toString('utf8'))); mutation.mutate(value);
     return Buffer.from(JSON.stringify(value));
   } }), mutation.error);
+});
+
+test('image-layer deliveries retain authored documents and every layer in matching runtime inventories', async () => {
+  const { mkdtemp, mkdir, symlink, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { createHash } = await import('node:crypto');
+  const fixture = await mkdtemp(resolve(tmpdir(), 'image-layer-provenance-'));
+  try {
+    await mkdir(resolve(fixture, 'src/objects'), { recursive: true });
+    for (const id of ['m31', 'm33', 'smc']) await mkdir(resolve(fixture, 'src/objects', id));
+    for (const path of ['tools', 'site', ...['m31', 'm33', 'smc'].flatMap(id => ['source', 'prepared', 'object.json'].map(name => `src/objects/${id}/${name}`))]) {
+      await symlink(resolve(root, path), resolve(fixture, path));
+    }
+    const entries = await prepareVolumeProvenance({ root: fixture });
+    assert.equal(entries.length, 3);
+    for (const entry of entries) {
+      assert.equal(entry.provenance.sources.filter(source => source.kind === 'authored-document').length, 3);
+      const bank = sourceObject(JSON.parse(await readFile(resolve(root, entry.base, 'prepared/image-layers.json'), 'utf8')));
+      assert.ok(Array.isArray(bank.resources));
+      const rootInventory = entry.outputs.find(output => output.path === resolve(fixture, entry.base, 'runtime-assets.json'));
+      const stagingInventory = entry.outputs.find(output => output.path === resolve(fixture, entry.base, 'prepared/runtime-assets.json'));
+      assert.ok(rootInventory && stagingInventory);
+      assert.equal(rootInventory.text, stagingInventory.text);
+      const inventory = sourceObject(JSON.parse(String(rootInventory.text)));
+      assert.equal(inventory.resourceRoot, 'prepared');
+      assert.ok(Array.isArray(inventory.assets));
+      assert.equal(inventory.assets.length, bank.resources.length + 4);
+      assert.equal(inventory.assets.filter(raw => sourceObject(raw).location === 'public').length, 1);
+      for (const raw of bank.resources) {
+        const resource = sourceObject(raw);
+        assert.ok(entry.provenance.products[0]?.outputs.some(output => output.url === `${entry.base}/prepared/${resource.path}` && output.sha256 === resource.sha256));
+      }
+      for (const raw of inventory.assets) {
+        const asset = sourceObject(raw);
+        const path = asset.location === 'public'
+          ? resolve(fixture, 'public/scenes', entry.id, String(asset.filename))
+          : resolve(fixture, entry.base, 'prepared', String(asset.filename));
+        const generated = entry.outputs.find(output => output.path === path);
+        const bytes = generated ? Buffer.from(generated.text) : await readFile(path);
+        assert.equal(asset.bytes, bytes.length);
+        assert.equal(asset.sha256, createHash('sha256').update(bytes).digest('hex'));
+      }
+    }
+    await assert.rejects(prepareVolumeProvenance({ root: fixture, input: async path => {
+      const bytes = await readFile(resolve(fixture, path));
+      if (path !== 'src/objects/m31/source/manifest.json') return bytes;
+      const manifest = sourceObject(JSON.parse(bytes.toString()));
+      assert.ok(Array.isArray(manifest.documents));
+      sourceObject(manifest.documents[0]).expectedSha256 = '0'.repeat(64);
+      return Buffer.from(JSON.stringify(manifest));
+    } }), /Changed source document/);
+  } finally {
+    await rm(fixture, { recursive: true, force: true });
+  }
 });

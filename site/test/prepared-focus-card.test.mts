@@ -49,7 +49,7 @@ test('an unavailable volume keeps catalogue facts and a retained explanation, wi
   assert.match(f.unavailable.textContent, /3D view of Prepared galaxy is unavailable/);
   assert.equal(f.datasetTab.hidden, true);
   assert.equal(f.bank.hidden, true);
-  assert.equal(f.root.querySelector('[data-focus-distance]')?.textContent, '50,000 pc');
+  assert.equal(f.root.querySelector('[data-focus-distance]')?.textContent, '50 kpc');
   f.card.set({ ...f.record, detailedObjectId: undefined });
   assert.equal(f.unavailable.hidden, true);
   f.card.set(f.record); f.card.set(null);
