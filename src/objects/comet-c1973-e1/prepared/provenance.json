@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-c1973-e1",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "32c25c6540b967cb8eda636d1efacd4d37e713dccb1768abc78fbe6a8fc2c6d6"
+    "sha256": "241d4fea70a03a83b5528bc590b59835329d211f4441c70e480f9cc84a5536fd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b313a9f47f817313abd42a317f957be613974e2d092ff46e359c873113affad3",
+      "sha256": "9ea5a3b9289788f20a0d35255a6a7f46afedbe020ea27559a403605475a86375",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-c1973-e1",
         "displayName": "Kohoutek",
         "publicBase": "/scenes/comet-c1973-e1/",
-        "distanceAu": 78.55468108744893,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d693a32f9ec8932c677425a885c4f7ac7b6858bf5493d0994922192a3aaaab8c",
+      "sha256": "6c7603ea166bd502a8a7f9ab9fa85339775cbbe55483fe439a102b076e4e6635",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://ssd.jpl.nasa.gov/sb/great_comets.html"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "453c2359d447538740168493e6994ea031a6959c95675cd1ea86a9d31e855709",
       "bytes": 438244,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d693a32f9ec8932c677425a885c4f7ac7b6858bf5493d0994922192a3aaaab8c",
-      "bytes": 3053,
+      "sha256": "6c7603ea166bd502a8a7f9ab9fa85339775cbbe55483fe439a102b076e4e6635",
+      "bytes": 2773,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -335,13 +316,13 @@
           "url": "/scenes/comet-c1973-e1/comet-c1973-e1-model-thumbnail.webp",
           "bytes": 1408,
           "sha256": "5af6528b9616dbfbf47e0368e39258ba55d04fa3d8c38d2f889246bf6ebf80eb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-c1973-e1/comet-c1973-e1-model-surface@2x.webp",
           "bytes": 119832,
           "sha256": "52f53cc65c49a83059fb3f9c55b3dc9111d35772b6220efb89c81746ff94018d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -364,8 +345,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5067,
-          "sha256": "e4155ed00732e9ed1d25e5edc9378d3e765dd8e263a036ed8a483c39b6bec56a",
+          "bytes": 4948,
+          "sha256": "e14250ba9bff42728451272afe4e0e8b323b39dfc06ef3eebcb147d9821636c4",
           "verification": "bytes-verified"
         }
       ],

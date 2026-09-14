@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "cyrene",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "40d4eb8124eab1ed25dc138086dd576705893e680ac895b1dffa84dd778baaca"
+    "sha256": "4f9afb0984397bd6f5bf67214b9f1fd1c2504eb4053f017a6992ee897ffae7c0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b0551ec4272efbd1102c2aecbb2c06061ba20b9fc5c63ef5245a2a9802cd8487",
+      "sha256": "75a00f4830c5035b885272e3e27847d2852da9f2062912555cfebb89504b9547",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "cyrene",
         "displayName": "Cyrene",
         "publicBase": "/scenes/cyrene/",
-        "distanceAu": 3.07124717724166,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 5972 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7ae3132f8b3700ea3f061716e8c2ae2e84e0e31ac88dbb5d8c5f6e9fba5c327d",
+      "sha256": "f9cb9de6ae8eebbb2db3aba26803a623139988ec3ebd2b1f09dc234fa0e4fa6b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5972"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "dc5fd920f10ed35377a2bbca5487dd096bd62756b3d78b4fa9007b127dc80d87",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7ae3132f8b3700ea3f061716e8c2ae2e84e0e31ac88dbb5d8c5f6e9fba5c327d",
-      "bytes": 9440,
+      "sha256": "f9cb9de6ae8eebbb2db3aba26803a623139988ec3ebd2b1f09dc234fa0e4fa6b",
+      "bytes": 9161,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/cyrene/cyrene-elevation-thumbnail.webp",
           "bytes": 6222,
           "sha256": "1d761ea76809e7b40125cdbeb5601114b87a767aac8145a48685366e0ece3fea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/cyrene/cyrene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/cyrene/cyrene-elevation-surface@2x.webp",
           "bytes": 302730,
           "sha256": "eee346bbef3f0b40c757dfc65812847c5dc274d0fb838fbfa628ac0c0db13c94",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/cyrene/cyrene-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/cyrene/cyrene-shape-surface@2x.webp",
           "bytes": 227070,
           "sha256": "4c8aa55a1d1915d63a3e27252b0658d3f144b3521fffeef7288e9fa91977c795",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6809,
-          "sha256": "01f7c4e12da5adfc716a947024778d75c0a4c42d62d382daaca346fd67a00227",
+          "bytes": 6690,
+          "sha256": "e0fb34b664c7b36122f28920f49c73f6546a869d151ac73b69e55a9210c5af92",
           "verification": "bytes-verified"
         }
       ],

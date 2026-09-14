@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "salacia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "237f3553f0b54daaaf0724c2e056ce4352e40ad28664229bcec0fa28459ff16a"
+    "sha256": "6b75273cde6e56936e4772eefeb77cde839e409c84db81cb778bd79c8de7c177"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "344f297be1dc82132ead1739459e4ede3be8638243fb325e9b065ce02e5826e4",
+      "sha256": "54d5c34e64b0d55a45da560d0e52bdaba1042c6d612a0db0f6db79ab344003dd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "salacia",
         "displayName": "Salacia",
         "publicBase": "/scenes/salacia/",
-        "distanceAu": 45.37159590675732,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d097e5b04a5eb9babd5e50dda15cc585044d8434dc6fc514a829fc87177a1e63",
+      "sha256": "dd356217d3890b8af97357089806be71abbf03fc5334e0ce6a36134ce88e18a4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -178,12 +171,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -212,12 +199,6 @@
             "role": "facts",
             "description": "Published observations and interpretation",
             "href": "https://arxiv.org/abs/2508.17101"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -264,7 +245,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -299,7 +280,7 @@
       "sha256": "6d876936b4cf3d44aa70cb3f5e7ea4eda7cef728e7a060dd54fbb7db64376a4d",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -316,10 +297,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d097e5b04a5eb9babd5e50dda15cc585044d8434dc6fc514a829fc87177a1e63",
-      "bytes": 3808,
+      "sha256": "dd356217d3890b8af97357089806be71abbf03fc5334e0ce6a36134ce88e18a4",
+      "bytes": 3528,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -355,13 +336,13 @@
           "url": "/scenes/salacia/salacia-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/salacia/salacia-model-surface@2x.webp",
           "bytes": 57054,
           "sha256": "9a3256be66c9df8da73034a3a61237ef576e0d5a1a3d2052d133165ce6a0c5f0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -384,8 +365,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7412,
-          "sha256": "14e5cb88e741767ccfd00f706a849d1218f3109a9655a3963489dfe477c87c66",
+          "bytes": 7293,
+          "sha256": "a78656c0b4feb78047eaf1af6a740e786da4d8b6b32db2af70c418366d605dd5",
           "verification": "bytes-verified"
         }
       ],

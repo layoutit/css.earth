@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "athamantis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5cc07bc708a8986661d700d2f3caafe7d7f441438938f70c7788fbc9d4ce8d01"
+    "sha256": "742d18825ecc5574220d626a05a5514f25f78ed6f35372231c69712b95c41c23"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ededb3042d40ac30a6ef98c28afb612be190fa101f5475e80c84a553d2f66f39",
+      "sha256": "ccadeb9cde7d719c8ab172db30d043f4a17ce8252411a91742e10520aa818f89",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "athamantis",
         "displayName": "Athamantis",
         "publicBase": "/scenes/athamantis/",
-        "distanceAu": 2.3819120669248703,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 185 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e481aefeb84fb0435ea78d702d06c0bd050a2df568de6eace8e1183235253867",
+      "sha256": "420a7a50d093373d56b71f487724da90492078e5121f18f954275005f43ee18e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/185"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "ca781392c88cb7da8f861e4f7a98da4c5d7677394a5bc8a3e79d6c7e766707d3",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e481aefeb84fb0435ea78d702d06c0bd050a2df568de6eace8e1183235253867",
-      "bytes": 11498,
+      "sha256": "420a7a50d093373d56b71f487724da90492078e5121f18f954275005f43ee18e",
+      "bytes": 11219,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/athamantis/athamantis-elevation-thumbnail.webp",
           "bytes": 5720,
           "sha256": "3d753b63d441851ecc0ede6bf4d3964b74b6b3c9a4c92aa16e14c53fa2ae5b0c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/athamantis/athamantis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/athamantis/athamantis-elevation-surface@2x.webp",
           "bytes": 272194,
           "sha256": "60499a517d83c4e683d33a1c12af308fed3e8af01cfa86d53e825a71ce68fbbc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/athamantis/athamantis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/athamantis/athamantis-shape-surface@2x.webp",
           "bytes": 244014,
           "sha256": "e49c42ede326763c7c494aa4d03e2aa679ff905dd5024bb1c83f397e3bd4bdd6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8818,
-          "sha256": "8303730d8fb67970f22b22dcf2f9424283f6d7b336d7c48474377430b205be29",
+          "bytes": 8699,
+          "sha256": "3e5c34f4e03f043ab353fa585b0cedf2fdedbc6d0fe53fde16e4398e999b4f6d",
           "verification": "bytes-verified"
         }
       ],

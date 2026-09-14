@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-c2014-un271",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "892b7400c345b22a156e511bf93dee8e2ef3f48412a11a588cf32cb44005a98e"
+    "sha256": "24dc247578d4a8608b55e11e1308353dd432c4b9525ca3bfd31541393315dcca"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ed2dbe610f21bdf80843450e08781d918e16493983122ce1acdae5e4497ed343",
+      "sha256": "0e5dedda964bf95b42d74af1b0a54b34a25ea6e812e896d39cd4dc9412edcad4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-c2014-un271",
         "displayName": "Bernardinelli–Bernstein",
         "publicBase": "/scenes/comet-c2014-un271/",
-        "distanceAu": 13.653451901646743,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f25f3a77dbdad24f25bcb3639bcd91deae1e8d5e243478898d4c8bee1f8b2fad",
+      "sha256": "8159d787d635245671a9973d5f3f854f43e3179bdf42ed9a8a0cfca196e65a89",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://ntrs.nasa.gov/api/citations/20250006397/downloads/UN271_ALMA_ApJL_aasv7_Accepted.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "82859ed223bc22b0f4838b34069f5d8f458319e4d7c4144112ff404074b61e4d",
       "bytes": 437335,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f25f3a77dbdad24f25bcb3639bcd91deae1e8d5e243478898d4c8bee1f8b2fad",
-      "bytes": 3173,
+      "sha256": "8159d787d635245671a9973d5f3f854f43e3179bdf42ed9a8a0cfca196e65a89",
+      "bytes": 2893,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -335,13 +316,13 @@
           "url": "/scenes/comet-c2014-un271/comet-c2014-un271-model-thumbnail.webp",
           "bytes": 1632,
           "sha256": "cc6fd37fe2f4f53d2ca7ead118f7b3b60df40b9dba8088dbeb2590de1a580115",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-c2014-un271/comet-c2014-un271-model-surface@2x.webp",
           "bytes": 133882,
           "sha256": "ebbd6f1a85a8a6e001066bbc4b0289087a1e60a6a62ae69a7c6d006e109afdbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -364,8 +345,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 12093,
-          "sha256": "b667ed7b6b4eba0e3a93eec0350aec788cd316cbc01eaaad5170689927a54b4a",
+          "bytes": 11974,
+          "sha256": "8c04cca349ab21069b84c3d90ff6350a551a54b35212c28c2552bca4d96e3803",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "pomona",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dfca609d10ff37fd500d0c64e4e7750a82215c7128456d35ddbbba436493ada2"
+    "sha256": "e888b6d567c825a2f2202f62fcd358c5149d0df7e0ce94238f673f8e8f98c26e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "190bebaee2c7fa000dc2fcff21c1d4ea89c9966269e30baecd04c1bbf5fe6a50",
+      "sha256": "0cea336628dc249e16c6125d01e84f2b94a5ac6b038f1cab75c2fbc869d56e3a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "pomona",
         "displayName": "Pomona",
         "publicBase": "/scenes/pomona/",
-        "distanceAu": 2.588787675965266,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 16306 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "967a9d6d7fd3e1dceeaab7f9b8f90fa5858506b0ebce7395386ed6ab3b5c5f98",
+      "sha256": "8c50140de040e35737c102c71aec79ed58e423d5d2a41e86a7c9773b05976655",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16306"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "348c1281cc6d9a359f9dfa7efa783ca0500239edfa49473380627394b9fcfb4e",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "967a9d6d7fd3e1dceeaab7f9b8f90fa5858506b0ebce7395386ed6ab3b5c5f98",
-      "bytes": 9788,
+      "sha256": "8c50140de040e35737c102c71aec79ed58e423d5d2a41e86a7c9773b05976655",
+      "bytes": 9509,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/pomona/pomona-elevation-thumbnail.webp",
           "bytes": 5308,
           "sha256": "7b746c447209c16ec23f9402d2017c5e71fb25838341c949707f13e73021af33",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pomona/pomona-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pomona/pomona-elevation-surface@2x.webp",
           "bytes": 265080,
           "sha256": "052f38a86269c398de091505de5d82099e2ce36ac76b29937f0411a519f8cdca",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/pomona/pomona-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pomona/pomona-shape-surface@2x.webp",
           "bytes": 219404,
           "sha256": "dec13cfb8c89722a9ae289b0405b5d22c33239b21e621d4271981415480e7a85",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7156,
-          "sha256": "28a66515ffbb71458954f4986dc773542867ff0d70d18d03cba89d3986c9327d",
+          "bytes": 7037,
+          "sha256": "99cd150a47c20b0cad5e39d293c6a1135d2e173074d468ef60a7236fe766104f",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "golevka",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8897aa72d1a5ffd0f52c3c7bf3edb10183280583d365fe1d6849c0e73684d817"
+    "sha256": "2ae47d562adfe6637d48d886aaf228aa42c17c368c952008d4f870a87b7d3476"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ac5faa154696574ea6bab590752d91741aabeddc147ca78c37b6451069f35f90",
+      "sha256": "cf1b2aca4ff33c40ce34621c5200ea9994122fd5e056336bc467d9e60f9637b8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "golevka",
         "displayName": "Golevka",
         "publicBase": "/scenes/golevka/",
-        "distanceAu": 2.4737870762656686,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -134,20 +133,14 @@
           "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "75970961757ded21b2b0cc337da6a4bd8e92012ed610b4d4906b7526f5e3d2fb",
+      "sha256": "8284fdc5e7361c150c285a64d66913238887c0990253d0e656eeadbd6dfcfb60",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -249,12 +242,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -277,12 +264,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -343,7 +324,7 @@
       "sha256": "294881d2e3988029b35a9cef93e38e6b53cb02574b2c59df938759cf286af79d",
       "bytes": 123654,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -368,10 +349,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "75970961757ded21b2b0cc337da6a4bd8e92012ed610b4d4906b7526f5e3d2fb",
-      "bytes": 8346,
+      "sha256": "8284fdc5e7361c150c285a64d66913238887c0990253d0e656eeadbd6dfcfb60",
+      "bytes": 8067,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -402,19 +383,19 @@
           "url": "/scenes/golevka/golevka-elevation-thumbnail.webp",
           "bytes": 7048,
           "sha256": "265c96dbfba1fb178487c2358684b7b74e682941697b0d126ad6f5938d25fc56",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/golevka/golevka-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/golevka/golevka-elevation-surface@2x.webp",
           "bytes": 441626,
           "sha256": "9567bd03765a15f29328386a53f85c202da5701414d64c6c98c9a49333bc0a01",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +425,13 @@
           "url": "/scenes/golevka/golevka-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/golevka/golevka-shape-surface@2x.webp",
           "bytes": 232630,
           "sha256": "5ca924645c7bc657105e19f429b96a8e5ff8ec94755b14158bf663636b1e7ff5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -473,8 +454,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5387,
-          "sha256": "4928abeaf179ef4687e3abe42a620c6e2beda56d83346ad368c6ea5fa96d0a6b",
+          "bytes": 5268,
+          "sha256": "b81e56d98f8e7f84cf75c7d8af697372829dc2704a20d04502ea99912c4d5176",
           "verification": "bytes-verified"
         }
       ],

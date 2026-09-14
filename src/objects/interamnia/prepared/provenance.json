@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "interamnia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "032cdbfeaa26f51ecf654c2de2d25ec7fd1e6e73106f847f350ea78d4468f9a1"
+    "sha256": "1de77bbc129539e044514382e5c5f2489947a48ab43badc083b934ed2621fc48"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "306e921e8f8c04ae8c5bf678606458ddeb325e0ff1e334462e972a020878aaa4",
+      "sha256": "2cbc948d6e03d7fcaedcd401fc566a59f4a41777f1c9ec32d285d51c34ae7067",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "interamnia",
         "displayName": "Interamnia",
         "publicBase": "/scenes/interamnia/",
-        "distanceAu": 3.057028354640983,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fc273900154689ea70bbd7fb8d412078b22456f2427dfb61065ab497dec5862b",
+      "sha256": "7c366a0d17f304361291ecf85e8a6b0c543699178501a949a84f070a7052ad9e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "4dade83b4091c1acf53071534aff13f0a09ef2bc526b16280ea58dbcf8fcfeb1",
       "bytes": 781819,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fc273900154689ea70bbd7fb8d412078b22456f2427dfb61065ab497dec5862b",
-      "bytes": 9168,
+      "sha256": "7c366a0d17f304361291ecf85e8a6b0c543699178501a949a84f070a7052ad9e",
+      "bytes": 8889,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -401,19 +382,19 @@
           "url": "/scenes/interamnia/interamnia-elevation-thumbnail.webp",
           "bytes": 5778,
           "sha256": "52e6aafbf6cbe6863a11ad450d40e64a1d7af7925766bfac5d0528beda10185f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/interamnia/interamnia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/interamnia/interamnia-elevation-surface@2x.webp",
           "bytes": 302206,
           "sha256": "7604c074538b038a8fe2250d590983b03920124aa779f43484902eda0c50ca02",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -443,13 +424,13 @@
           "url": "/scenes/interamnia/interamnia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/interamnia/interamnia-shape-surface@2x.webp",
           "bytes": 226258,
           "sha256": "17773700a9cd48d792b3fe159d5d9d3f5c4efcb4ae28c777bc17851b4afcb28d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -472,8 +453,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6949,
-          "sha256": "f5dfabb491c2a44018be72223cee089de963d23222d12a09557043277faaf50e",
+          "bytes": 6830,
+          "sha256": "f5ac44d56d1c2238f6b8f519628c8553c8ca57f0841ec0021613d21f55311d6d",
           "verification": "bytes-verified"
         }
       ],

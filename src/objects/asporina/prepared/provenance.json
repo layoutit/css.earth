@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asporina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "460a2351fe4d438d637e788dc3164a8d362e20c3ccff3c74b17e640f66fbe26b"
+    "sha256": "ff821bb54ca177f71ba2106f94c280267ea3f46fb5e1ee2d2c935ef90afb9804"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8a05463d7a3a2099c86b307b3e5a3a6b7dcff8c90609a99f3966b65c1a72f29a",
+      "sha256": "01b1fa0f68e538efd81a85a44f1bc099fb374c978ad297dc1a28b9ecf10dd5da",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asporina",
         "displayName": "Asporina",
         "publicBase": "/scenes/asporina/",
-        "distanceAu": 2.6955752258853334,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 872 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0c10d516fe6654fc511b3e585c1ed91aab81179acad028fad0d6ca795aba10da",
+      "sha256": "4e5d5ca8d7991ff0487455fe24bb8055a3841e7d113b493704ab2ea9ececbd46",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/872"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "e6bad1a6ce84bdc4c206b59b166082c2c28e56dff40f22e1febc5df90f122f55",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0c10d516fe6654fc511b3e585c1ed91aab81179acad028fad0d6ca795aba10da",
-      "bytes": 10556,
+      "sha256": "4e5d5ca8d7991ff0487455fe24bb8055a3841e7d113b493704ab2ea9ececbd46",
+      "bytes": 10277,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/asporina/asporina-elevation-thumbnail.webp",
           "bytes": 5098,
           "sha256": "d60c9b10a56811006464a1d2806c2bd80c9e248c529b1981c1b524c33663af8f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asporina/asporina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asporina/asporina-elevation-surface@2x.webp",
           "bytes": 269458,
           "sha256": "2fdd52693659beb1216b6e59e61fcced34bed1ff6d490c1a2757749861cfa982",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/asporina/asporina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asporina/asporina-shape-surface@2x.webp",
           "bytes": 230986,
           "sha256": "9ad27747334f183e187cc9cd2739338afa444fae7444f3f0bf051c5923a2785d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7897,
-          "sha256": "4946a110759caabd73f1502b28367fd0ab685dd8f048bbf8746eb4590081b3ed",
+          "bytes": 7778,
+          "sha256": "10481ede0c5825b97f9fb1b8ec9c20b75c390adebd9049d1cc61176a6f65592a",
           "verification": "bytes-verified"
         }
       ],

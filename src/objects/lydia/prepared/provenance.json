@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lydia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "30f4534c8f7802f00d384bfb40930385f76ec35520144b56d5231242c85f5d42"
+    "sha256": "ddee720f6fa5a80659a56ab068d1f893088746060d8da9d18b8f463e7add5f79"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "58bea1e7ddd9bad65029d063471a03977d975279e961915c5a435649c41d5093",
+      "sha256": "1783f24fb443d0af69fe33540b03f9de631c3075fa088f7f88ff98e8ed985949",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "lydia",
         "displayName": "Lydia",
         "publicBase": "/scenes/lydia/",
-        "distanceAu": 2.732268290476554,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 152 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d08368c96081684a1f10b79b4f69e44977119a6ea1d045f90ac6c07ce2d28f16",
+      "sha256": "0051ca9eaa455bf181e4d4a62c96463ec1244efdd5a696d46487053ef40e9390",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/152"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "ce4560318a58f130ddd60a01038a7fdb3bcc30554d3507ade899cda740975004",
       "bytes": 129283,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d08368c96081684a1f10b79b4f69e44977119a6ea1d045f90ac6c07ce2d28f16",
-      "bytes": 8585,
+      "sha256": "0051ca9eaa455bf181e4d4a62c96463ec1244efdd5a696d46487053ef40e9390",
+      "bytes": 8306,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/lydia/lydia-elevation-thumbnail.webp",
           "bytes": 4916,
           "sha256": "0f3cc379838439fdc2f204369d51e6becd80ad38ece70a25ba6a3214c12d814e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lydia/lydia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lydia/lydia-elevation-surface@2x.webp",
           "bytes": 265110,
           "sha256": "e7c9c67bbd8c6d1e7fafe570936f7ed3610f66b4c9ef7ecb88bb3f9aeeddbb76",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/lydia/lydia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lydia/lydia-shape-surface@2x.webp",
           "bytes": 212108,
           "sha256": "9d0f14e4acc9c8aace2ec279dfba25f6d7aeeff63a12a847e78ae6383a787f53",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5968,
-          "sha256": "455dd9592354544f2d5a208622bc162755a0c2a19e74eaa2ff37596954f6bae4",
+          "bytes": 5849,
+          "sha256": "58c0dff65b460d77a984f9f4b4c541caef4694bfa31a2f4f699d99e2c1e21292",
           "verification": "bytes-verified"
         }
       ],

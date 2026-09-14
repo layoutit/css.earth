@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "adrastea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b925118d131b5a3527449b4c7fe0b126e7e45b333c16208e528d8e642270d8a3"
+    "sha256": "ee60290c221f3eec000011b64a928482befc9e129905534691dfc615cd43a95f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d83f67138ddfba3dfa614b41cba2031f0a95219c48810fee8ed7395e127458f9",
+      "sha256": "ad3bf7c3b93799bec41954abceecd2e62ec5e735995744fbf2ad9f9bb369eda1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "adrastea",
         "displayName": "Adrastea",
         "publicBase": "/scenes/adrastea/",
-        "distanceAu": 5.2,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Jupiter-system ephemeris and IAU/WGCCRE rotation; sourced PCK ellipsoid axes."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1404ff3c716b3a33ecc01b6211bd5fcbcaec962a61a134a4c65b2f6c804a1d0e",
+      "sha256": "ce8b6af07b0e8ee7d3d98a11ffe3a6b2a4e65a7ba9e85d5153be09b5c522b27b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -189,12 +182,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -217,12 +204,6 @@
             "role": "observations",
             "description": "Galileo observations of the inner moons",
             "href": "https://science.nasa.gov/photojournal/shapes-of-the-small-inner-satellites-of-jupiter/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "bytes": 135,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -313,7 +294,7 @@
       "sha256": "d9b3466827f7dd7ebe80fbc16885035f635257cadaaba8f6b43adc302732dc88",
       "bytes": 13447,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -330,10 +311,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1404ff3c716b3a33ecc01b6211bd5fcbcaec962a61a134a4c65b2f6c804a1d0e",
-      "bytes": 3670,
+      "sha256": "ce8b6af07b0e8ee7d3d98a11ffe3a6b2a4e65a7ba9e85d5153be09b5c522b27b",
+      "bytes": 3391,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -369,13 +350,13 @@
           "url": "/scenes/adrastea/adrastea-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/adrastea/adrastea-model-surface@2x.webp",
           "bytes": 49466,
           "sha256": "1afa25a76c7da6c9c2bed59345bcb530a0a0f9ac9b19e6d21c1435da1c911f63",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -398,8 +379,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7305,
-          "sha256": "086ace039d9c54289242fc8c9ee6f529388920255934d7e92f2615cd1485baa1",
+          "bytes": 7186,
+          "sha256": "512178433c00a0e8ecc32fb63d14a29a5dbbcad61f762f92e396fed31abdb0a3",
           "verification": "bytes-verified"
         }
       ],

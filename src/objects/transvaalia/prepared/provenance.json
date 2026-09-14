@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "transvaalia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "49f677e9891ed59623347e4dfcd41145a2988f05034268e539793ab1a3ec816f"
+    "sha256": "cf2da7d004141b265ce216500721dc4128329c0ca8712f304b1e75cdaa77e9b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "073f356ad3e75b1c839103d1fddff0ad12cb39bc9909f107e5cdf7d396397885",
+      "sha256": "6b5f12976bd56f87f0f76271843f9735b11d7021bff3cb008268dfbde84d97ea",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "transvaalia",
         "displayName": "Transvaalia",
         "publicBase": "/scenes/transvaalia/",
-        "distanceAu": 2.766754099697322,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1ee9391cb1f79c5568d5b0d77fa9afcdebf7af8124f2621e5fe60ec7f811951d",
+      "sha256": "a279c116a5e75163edeee8220e0e8005efb0867915ae2fd30f1b4a3796c14d29",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3722"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "e9273c2a279f53c89a3d5df3735e5c836f2e4edb88bef6cee4dce35b2874fd1e",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "1ee9391cb1f79c5568d5b0d77fa9afcdebf7af8124f2621e5fe60ec7f811951d",
+      "sha256": "a279c116a5e75163edeee8220e0e8005efb0867915ae2fd30f1b4a3796c14d29",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11604,
+      "bytes": 11325,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/transvaalia/transvaalia-elevation-thumbnail.webp",
           "bytes": 6038,
           "sha256": "30701e4f558d18884cd01c0f99c1d3aecd5ddf6b9dc01154c2c52981c0027887",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/transvaalia/transvaalia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/transvaalia/transvaalia-elevation-surface@2x.webp",
           "bytes": 301674,
           "sha256": "7a8ad7c8986a130cbd527089f0c708c09f3be5219a0f5278730ec7f0814d31f5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/transvaalia/transvaalia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/transvaalia/transvaalia-shape-surface@2x.webp",
           "bytes": 248764,
           "sha256": "f8593f648a3dbceaca0fa7574913486ab390db403a6f92bfb8bd92550409b48b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8859,
-          "sha256": "205a10e1044308b4f62122a592462790c1497b849b64696ca53c14b1847367fe",
+          "bytes": 8740,
+          "sha256": "f4b8b978b7f60d970a8bc6a95aaa477e1b9380f79a5f1a28be667172e2a3c706",
           "verification": "bytes-verified"
         }
       ],

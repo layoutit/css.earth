@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-c1996-b2",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "01ba7bfa3c43e591e633e779a403ca7d8093564760f737e4268442fae80b527c"
+    "sha256": "7c1d2f136a40be0fcd04eb0bc43141107d63ec666cd5146c44ede572649220fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b6051fdc83b2bef93a4dee45ce7b79b54b35d81c11774eddc643498ae54bb496",
+      "sha256": "e71b70a53b2ab75b5df551ae010f9f854b39b724cc9962dbbf12fd1fe7116bf7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-c1996-b2",
         "displayName": "Hyakutake",
         "publicBase": "/scenes/comet-c1996-b2/",
-        "distanceAu": 54.30204219906463,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bca3a04b300e92a97bd941b6478504fb5c3e276192ceef2f051ee9938c8223a3",
+      "sha256": "475aff3bb89f111871f10accb7db420089f226f4c39d56dd8eebf102c84a8852",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -233,12 +220,6 @@
             "role": "observations",
             "description": "Observations and history",
             "href": "https://ssd.jpl.nasa.gov/sb/great_comets.html"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -284,7 +265,7 @@
       "sha256": "453c2359d447538740168493e6994ea031a6959c95675cd1ea86a9d31e855709",
       "bytes": 438244,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,10 +282,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bca3a04b300e92a97bd941b6478504fb5c3e276192ceef2f051ee9938c8223a3",
-      "bytes": 3052,
+      "sha256": "475aff3bb89f111871f10accb7db420089f226f4c39d56dd8eebf102c84a8852",
+      "bytes": 2772,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -335,13 +316,13 @@
           "url": "/scenes/comet-c1996-b2/comet-c1996-b2-model-thumbnail.webp",
           "bytes": 1408,
           "sha256": "5af6528b9616dbfbf47e0368e39258ba55d04fa3d8c38d2f889246bf6ebf80eb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-c1996-b2/comet-c1996-b2-model-surface@2x.webp",
           "bytes": 119832,
           "sha256": "52f53cc65c49a83059fb3f9c55b3dc9111d35772b6220efb89c81746ff94018d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -364,8 +345,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6114,
-          "sha256": "b9a6ae7d41544e58e4d1547dedaacd54bc0bfb325059f6453d297adbbb1699f0",
+          "bytes": 5995,
+          "sha256": "6582600895ba07eae74232e09b9c5cbc8b731dfe77a647f85a0941ef40c4ab73",
           "verification": "bytes-verified"
         }
       ],

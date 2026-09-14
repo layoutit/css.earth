@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dactyl",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "26d2ec5564dbd78bbca0186332c0ca69af3927025c3cd1ed7ba621c57dcc4dfc"
+    "sha256": "331eb678a8bbe60369e91047a116bef1295b0c10ea27ca1a1551db3c6cab8a9d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5461764de06dc7fb0009ea66e2cea0b687c95358c11c566b79dc3ed38f33ea1b",
+      "sha256": "efe84d223c66807448a4c050ad0466988f196e4855211c2cacd0a3147eb9110a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "dactyl",
         "displayName": "Dactyl",
         "publicBase": "/scenes/dactyl/",
-        "distanceAu": 2.861,
         "raster": {
           "width": 512,
           "height": 256,
@@ -87,20 +86,14 @@
           "sunSource": "A smooth ellipsoid at the dimensions measured from Galileo images: 1.6 × 1.4 × 1.2 km. Craters and surface imagery are not represented; the grid marks missing imagery. Approximate orbital placement. The 1993 encounter did not determine a unique orbit; the present orbital phase is illustrative. A synchronous orientation is assumed, not measured."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3bd2e9be756a44f9c8eda4ac60d0d507068e5039cd05b1d285e7650987df4ed7",
+      "sha256": "36a12de779f9ee900cd5f9963da8307528bf64ccbdf93eb63bfba3ff00bd97ac",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -156,12 +149,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -190,12 +177,6 @@
             "description": "Resolved encounter observations and context",
             "role": "observations",
             "href": "https://science.nasa.gov/photojournal/high-resolution-view-of-dactyl/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -295,7 +276,7 @@
       "sha256": "ad79a5bea948b73c0f842a3609939da15914a0dbb1d88ecc8f371ffefe50c2b4",
       "bytes": 163,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -312,10 +293,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3bd2e9be756a44f9c8eda4ac60d0d507068e5039cd05b1d285e7650987df4ed7",
-      "bytes": 2731,
+      "sha256": "36a12de779f9ee900cd5f9963da8307528bf64ccbdf93eb63bfba3ff00bd97ac",
+      "bytes": 2452,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -337,7 +318,7 @@
       "sha256": "115d0cc3a554d49831e5858129c8a93359c67829d85a0bb26d479b8eb5f93895",
       "bytes": 1066,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -363,7 +344,7 @@
       "sha256": "90b788ae7b1212174e6f98bf2fe305040883a0404afbd62c38f186eb63fdee09",
       "bytes": 42071,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,7 +373,7 @@
       "sha256": "e4cf71e29027f0275c16de63ac1146d120953c0777bc32b22dcefdfe515b61a8",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -419,7 +400,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -450,13 +431,13 @@
           "url": "/scenes/dactyl/dactyl-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dactyl/dactyl-shape-surface@2x.webp",
           "bytes": 53806,
           "sha256": "2e56e5dd6f8a78adf8602c84239a2ceb028916917e3b630aac864a584a1a1582",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -479,8 +460,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4907,
-          "sha256": "744494788ae98af5503042a6690a3ea6bbcbe70a10bf87086e4556c75b449867",
+          "bytes": 4788,
+          "sha256": "a5881dddc297c498885f0fafd2339acfc7db39a816bd6736a1eac45cabd1df7f",
           "verification": "bytes-verified"
         }
       ],
@@ -516,7 +497,7 @@
           "url": "/scenes/dactyl/dactyl-features.json",
           "bytes": 2490,
           "sha256": "68041afcde9f9de7ed21bea04cb90cd5e0d9eafaec75ece9b287965141183e66",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

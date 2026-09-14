@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hati",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a35fa4eef3277aa85a09d94ba4ab5cba95564299e78aae22e9d9dc55d87a3298"
+    "sha256": "d654086bcd00f682ae03c90ffa27735d73da50bec9400552555669b01ee261f5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8f15c8b95b1d5edb47a557d31edecbb1f63f9fd8d1c716fe6d50177c00c03297",
+      "sha256": "4821413131ea717bb81928e4f8f5b07f94ea5a582e925874436659fe971204b5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hati",
         "displayName": "Hati",
         "publicBase": "/scenes/hati/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Saturn-system ephemeris; Physical pole, spin sense and current rotational phase remain unmeasured. The displayed motion does not fit the Cassini lightcurve."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5175136381a487446b858434e93054062bb0f36815962a2cadddee0b291686e1",
+      "sha256": "6d5b31ff701a2b94688b55e3593f7ad890fe0fdda1f9b1c48868e11f89650f45",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -188,12 +181,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -216,12 +203,6 @@
             "role": "observations",
             "description": "Cassini ISS archive",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -314,7 +295,7 @@
       "sha256": "8faef9572117df7e001cfc2b0f3b94148403c5679932d791619400564bf427d2",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -331,10 +312,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5175136381a487446b858434e93054062bb0f36815962a2cadddee0b291686e1",
-      "bytes": 3328,
+      "sha256": "6d5b31ff701a2b94688b55e3593f7ad890fe0fdda1f9b1c48868e11f89650f45",
+      "bytes": 3049,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -370,13 +351,13 @@
           "url": "/scenes/hati/hati-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hati/hati-model-surface@2x.webp",
           "bytes": 55314,
           "sha256": "57388f90d0bb073fa428a1120160b5f212ef8ea6bfffb5469b289f1c315baeed",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -399,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3793,
-          "sha256": "b17447a6606e161e38b15d903170d2ea5f76d240be7dee2e0f1cc3c76fb276fc",
+          "bytes": 3674,
+          "sha256": "f619bbbf7fa5c7106a738016e8085a74fe6b79b396f057ee4169094bbace6219",
           "verification": "bytes-verified"
         }
       ],

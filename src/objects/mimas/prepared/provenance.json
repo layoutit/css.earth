@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mimas",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "abd0d1854302d4f7f418e74e449754aaa06c52b28c4fd1ca00b33708d1a22807"
+    "sha256": "74b665816e1a3238d5d4029df85a64adc48c6c76e35a1cb9e7c2f646cc6db950"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "36ff61912771d30b358dff5c52db241335a2277fa5bbb0ffc2f126e8f622e808",
+      "sha256": "1528d9691fd7c73ea895524bf58fe52bf7ad38b63cb0382bb962216116ead37c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "mimas",
         "displayName": "Mimas",
         "publicBase": "/scenes/mimas/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 8192,
           "height": 4096,
@@ -155,20 +154,14 @@
           "sunSource": "JPL Mimas orbit plus VSOP87 Saturn position and IAU/WGCCRE Mimas rotation"
         },
         "presentation": {
-          "defaultLens": "normal",
-          "pointColor": [
-            174,
-            171,
-            165
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "normal"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "337740c77a94892688e3493e2b63541895c91f50be25cd9b359ece27c869aedb",
+      "sha256": "b655a7719bac1d343a99439cb79d56ebc4230fb41b644eb10370af938ec5e493",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -309,12 +302,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -343,12 +330,6 @@
             "role": "elevation",
             "description": "Weirich, Gaskell, Palmer and Domingue (2025), Mimas SPC terrain",
             "href": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -501,7 +482,7 @@
       "sha256": "f8ffa667b2c35ec890973ea3300a33d3ee506f596b53d3818cdfee56943e038b",
       "bytes": 6959979,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -554,7 +535,7 @@
       "sha256": "e8191c356f899817536ef1d71dbddedc21077bd6bc44f1883264df2929a540ca",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -625,7 +606,7 @@
       "sha256": "303d5653875d507e8859a26d0afdedd0173c7d4e691f27c3266ca63d1aa4f97f",
       "bytes": 1848860,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -691,7 +672,7 @@
       "sha256": "cb2368b033cde32ae6cda6831d248299929518cbcf747bc832e671cc5751fc2c",
       "bytes": 9881891,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -718,10 +699,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "337740c77a94892688e3493e2b63541895c91f50be25cd9b359ece27c869aedb",
-      "bytes": 10293,
+      "sha256": "b655a7719bac1d343a99439cb79d56ebc4230fb41b644eb10370af938ec5e493",
+      "bytes": 10014,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -741,7 +722,7 @@
       "sha256": "65137b88ab2c9016e6ad318e0b95d1f2639b1bb17d0c3586a8694902b62f6631",
       "bytes": 1000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -767,7 +748,7 @@
       "sha256": "5fc3398feafe7379934e6a6b3b145450f96088981cf4a150bb1cadf072036836",
       "bytes": 147178,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -794,7 +775,7 @@
       "sha256": "9597bd1485f74cf558df8674b3f221bc9939775a5be3b8ce042e69ce34814b2c",
       "bytes": 152,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -821,7 +802,7 @@
       "sha256": "28297a1c7b8eff50e9860d2894ba2c820b8facbaa623dbd7e031e688ead480c5",
       "bytes": 1391,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -861,13 +842,13 @@
           "url": "/scenes/mimas/mimas-normal-thumbnail.webp",
           "bytes": 3512,
           "sha256": "5a2389f1edc4b94f766810fee2b2bfa95a546ad0e8f05d91b98adf86d603b981",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mimas/mimas-normal-surface@2x.webp",
           "bytes": 6635886,
           "sha256": "c2e727a8729b5c1580bc63811cf1a05facbcf583a70759aededbb7ac3e08f311",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -906,13 +887,13 @@
           "url": "/scenes/mimas/mimas-enhanced-thumbnail.webp",
           "bytes": 6952,
           "sha256": "8dd35129a7c0920bf379219fa69c54e4f5c46ecea83609576dc46b7866fc7391",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mimas/mimas-enhanced-surface@2x.webp",
           "bytes": 8189424,
           "sha256": "ffdee2030ac3cce437040c56bccd6b634ce287b6612770addfb4fdb2bebcf3f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -944,19 +925,19 @@
           "url": "/scenes/mimas/mimas-elevation-thumbnail.webp",
           "bytes": 7984,
           "sha256": "1f562fc11bd7a38e18555734c15bb7d7abda51c8dae1491c2a6894ff418084a3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mimas/mimas-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mimas/mimas-elevation-surface@2x.webp",
           "bytes": 2419150,
           "sha256": "cd244dd80eb2a96e0d2c2714d7eff15a492306598eb5aa21ff88b5c9bc7763f5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -979,8 +960,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6413,
-          "sha256": "e2ec746a6054fe372346a85ee32471d1b367008db8b94f030623142292aa41fa",
+          "bytes": 6294,
+          "sha256": "070b21b3358eb268203ecfd9d1df5a3999cdffd2d900c7bbee2b140ac4b1d968",
           "verification": "bytes-verified"
         }
       ],
@@ -1016,7 +997,7 @@
           "url": "/scenes/mimas/mimas-features.json",
           "bytes": 82491,
           "sha256": "c2327d0e677e08589cd35e3900b14be8ad75e458e742dc08cbba2e893c6ef582",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

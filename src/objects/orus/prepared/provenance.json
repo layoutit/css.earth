@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "orus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6a6be47c507e23981ba80b28a909e004f8f004e86e318d351e7795044f945dc9"
+    "sha256": "462114fcb24a62c6ee62cbbfa89037ef1199c453f5b0529186bb71e267b51667"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "029a4584356822a2beda0e9269736f754dd31245e2a315dff6376b6d745e0613",
+      "sha256": "0948d4990a56dcfc6c5c97094b04ca9919811eca61088a949bd946871446415f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "orus",
         "displayName": "Orus",
         "publicBase": "/scenes/orus/",
-        "distanceAu": 5.2,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "681f17e6c28285db0fb362ffb3b6273de9fb4eaa7d004db092d0e3793c692374",
+      "sha256": "c5f1d7b1519f9570606ec62180cf6a2a5990e48d9c0aa48bcc1f67bc51bde2e7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,12 +164,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -199,12 +186,6 @@
             "role": "facts",
             "description": "Published model and interpretation",
             "href": "https://doi.org/10.1007/s11214-025-01173-7"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -260,7 +241,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -295,7 +276,7 @@
       "sha256": "2b69dc6bc37425b8bf6cb4bc2d41f300a7d6b0040a1106ba59623e18a6e914c9",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -312,10 +293,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "681f17e6c28285db0fb362ffb3b6273de9fb4eaa7d004db092d0e3793c692374",
-      "bytes": 3057,
+      "sha256": "c5f1d7b1519f9570606ec62180cf6a2a5990e48d9c0aa48bcc1f67bc51bde2e7",
+      "bytes": 2777,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -351,13 +332,13 @@
           "url": "/scenes/orus/orus-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/orus/orus-model-surface@2x.webp",
           "bytes": 55618,
           "sha256": "507ee9c55c6d92b332a8fe208218fa99751d57eb692a000cb6dc30fc19ef6f22",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -380,8 +361,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4104,
-          "sha256": "e59e15353ee8c4f2ceafdd364288a0447946382b75508d75b6d5bfbc566d760c",
+          "bytes": 3985,
+          "sha256": "56f2e2680118b67e0edbe47523a3a7baf37e72c9b3054df8592f8b570481ee81",
           "verification": "bytes-verified"
         }
       ],

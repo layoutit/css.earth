@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ymir",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "000583a2f3e6393b758ce4077a18f3c17ab1e6a4e0dedd098e418945b5018260"
+    "sha256": "57d224f4f3cccb099edd75e4198e29b79f4ea58c6dfa6ea8aead286349f99761"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0030611f9857a66f88792172021fbd2f05f5c7f4cf79293209993b4f9f7eb293",
+      "sha256": "6428899f62df4d722a6599ed73040377da60b00f2c1402c9d8352d51490a2c2b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "ymir",
         "displayName": "Ymir",
         "publicBase": "/scenes/ymir/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Saturn-system ephemeris. Published approximate spin pole converted from ecliptic J2000 to ICRF; arbitrary initial meridian. This is not a known current surface phase."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e0c30c4ce9d80dfb66888a3c47dfd940f8e2d2f117b35f7f42bd13f30bb77acb",
+      "sha256": "bdea0ccc480e9e451e2b49182c91e07eb1dbdc9c4597612e005e3b100173c528",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -177,12 +170,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -199,12 +186,6 @@
             "role": "observations",
             "description": "Cassini ISS observation archive",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -260,7 +241,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -295,7 +276,7 @@
       "sha256": "2fdb8e55a019f95bee8e6f5f301dafc6bd99377729db01e12b34ff5461a75888",
       "bytes": 59863,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -312,10 +293,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e0c30c4ce9d80dfb66888a3c47dfd940f8e2d2f117b35f7f42bd13f30bb77acb",
-      "bytes": 2744,
+      "sha256": "bdea0ccc480e9e451e2b49182c91e07eb1dbdc9c4597612e005e3b100173c528",
+      "bytes": 2465,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -351,13 +332,13 @@
           "url": "/scenes/ymir/ymir-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ymir/ymir-model-surface@2x.webp",
           "bytes": 69360,
           "sha256": "c61a070d5ee3688c35e39dca25ed436cc1dec2dd5bad00b8e2397014f9b3dbd3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -380,8 +361,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3086,
-          "sha256": "e67b7b68a93a1711c0e1b3b19bd9903d0b985789fa903791f53a3886456e1e08",
+          "bytes": 2967,
+          "sha256": "7e7ae20280ffba53c5c9f880b3ff332bb9cb027d4402b638ad7ed87ed2265f14",
           "verification": "bytes-verified"
         }
       ],

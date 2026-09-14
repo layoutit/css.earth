@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "irene",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ca7f0ebf5b23bc08189053e2008fe8a13f2ad22946d786ce1d265cd8a07e83e5"
+    "sha256": "14f51351a93c6c24910526a37ae4ddcec193a76843873c54dffbf045c9019079"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5774a50413604726689131ff508979a2b4c449a83dc99e2c63a3e9f32ec8cd3a",
+      "sha256": "bb063face2d72cf73d488c0e5de666da2e1b44cb335ecc215ac6c1e3137f68bb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "irene",
         "displayName": "Irene",
         "publicBase": "/scenes/irene/",
-        "distanceAu": 2.58851145680903,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 1842 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "df9bc1ca7bfddc8e43b6a49aebe574f199de4fcd91abad43436960341075d197",
+      "sha256": "4609a47af465bcfc14d09f2c87476746b68a471d873fc185b0ac50f050accde1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1842"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "edc70e0c7e153dc6f5197a709bcc5a4aa396ce1a9a9f9a26da75b657a236ec21",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "df9bc1ca7bfddc8e43b6a49aebe574f199de4fcd91abad43436960341075d197",
-      "bytes": 6235,
+      "sha256": "4609a47af465bcfc14d09f2c87476746b68a471d873fc185b0ac50f050accde1",
+      "bytes": 5956,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -390,19 +371,19 @@
           "url": "/scenes/irene/irene-elevation-thumbnail.webp",
           "bytes": 5744,
           "sha256": "5ff363a38230a621331a76463eca8bfe3ddb33aac80baa6260a65a1a6b543326",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/irene/irene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/irene/irene-elevation-surface@2x.webp",
           "bytes": 310018,
           "sha256": "f52ed7365e38f5e2b0327fed9ddd5e341b9f83497e8cf68e2e93b4f01112acfd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -432,13 +413,13 @@
           "url": "/scenes/irene/irene-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/irene/irene-shape-surface@2x.webp",
           "bytes": 212648,
           "sha256": "a8c81d73b5c490127322e4e6d539cbc1e2a3fc7b13bdd66b19bb60c72745411d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -461,8 +442,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4081,
-          "sha256": "3733ca12dd97029b5865e446bb2d987d3539c2ec5a00a1e8819d27ed3b4e2ec0",
+          "bytes": 3962,
+          "sha256": "8f582dcc69b4c6b92f10b247f0174c4e00f1d370a6692bf9f2d97e3176f18a61",
           "verification": "bytes-verified"
         }
       ],

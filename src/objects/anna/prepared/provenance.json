@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "anna",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "03f4d1e565f2c35bbc38c6401b9b90285a5ebed5513afecbaf3ecf83c41fda04"
+    "sha256": "65c0a80c54cda596c209ffb248b8af2e235c27514ad6e9af50f3d5f6be4ca463"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "333b676de88844427d8ecca6c0f5afa618677e6e4ddc571259a0b3d2c1910e8b",
+      "sha256": "de3dcc2fd7611a9b916fc3c931f02a6be55fb5be0bb2bff38fc04499fdd0fa5e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "anna",
         "displayName": "Anna",
         "publicBase": "/scenes/anna/",
-        "distanceAu": 2.420854512785924,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 686 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8233574774936cf666baaa3d3377442d10410877957fa559e8454d5c5807d718",
+      "sha256": "f663dbb0a6797df5173529276b90f6b833f585eca7113d81ab1984e0422a01ab",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/686"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "afffd52ce5fa7564a907f0a7aa6b0dd4c63842ac4dfb0ab6182b57e9968335be",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8233574774936cf666baaa3d3377442d10410877957fa559e8454d5c5807d718",
-      "bytes": 8259,
+      "sha256": "f663dbb0a6797df5173529276b90f6b833f585eca7113d81ab1984e0422a01ab",
+      "bytes": 7980,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/anna/anna-elevation-thumbnail.webp",
           "bytes": 5074,
           "sha256": "d2304d3210c199a9583feec7c8a82e274bd507171e481417e5ad35f6ba7451e8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anna/anna-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anna/anna-elevation-surface@2x.webp",
           "bytes": 271150,
           "sha256": "77b2ae316f9152760900ecd93f77449104e1ddc929b4cd4c1738f98aad8eab87",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/anna/anna-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anna/anna-shape-surface@2x.webp",
           "bytes": 183584,
           "sha256": "074a8ddc8ec2a73609631ec1cd55589739bdfcad84a66ea01ebac5ac07f37a0d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5654,
-          "sha256": "2f0baeaeff97c39d86f5b593f904e36b0ce24336289dbd2c0c5c08cd80071a2e",
+          "bytes": 5535,
+          "sha256": "e000bd6bb910d522c8a36230ec6142b7d069aeca4b7a1afe25c4acb35da0b260",
           "verification": "bytes-verified"
         }
       ],

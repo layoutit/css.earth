@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "weringia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "62f91662d1f27e2d8a789e67d2d0b14c1dcefacbf5dddcd69aaece52d097c33f"
+    "sha256": "74f37eb899a88a45c559b791febb14d03d76e521c25f5624cbe80b89879e34d0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "88e38e76329fcb8baa69f74f10619fbe9f0640f64035cc1ff796003bcfced204",
+      "sha256": "14100d4f5d8d6bdc9df218c0ebb0f105c41ed9ed3a11be960c00825bb74092a5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "weringia",
         "displayName": "Weringia",
         "publicBase": "/scenes/weringia/",
-        "distanceAu": 2.7118191273654264,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1074 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9132de1df85d00d10fa9bdf3d2e7f64ffd62bd74f4ae2da846cf6421e0abdb47",
+      "sha256": "58b9fd8f3e1cd3b3509ee67f325058662550bbdd188b2e47ef9ab180552cdbff",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1074"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "b5ea3c7a8dacc9eb8d62f5ea85376eeeec1d1d521461ea669a201a5f7d97646b",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9132de1df85d00d10fa9bdf3d2e7f64ffd62bd74f4ae2da846cf6421e0abdb47",
-      "bytes": 10651,
+      "sha256": "58b9fd8f3e1cd3b3509ee67f325058662550bbdd188b2e47ef9ab180552cdbff",
+      "bytes": 10372,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/weringia/weringia-elevation-thumbnail.webp",
           "bytes": 5368,
           "sha256": "6fb84fd2d684afec85bce485eb6582573c9aef77ac584d75c7c31106b95ae05a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/weringia/weringia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/weringia/weringia-elevation-surface@2x.webp",
           "bytes": 506902,
           "sha256": "c487ff0d3c5199316ffcf133ad1cc51ff534e6bf66f71b3eb30cbeefae130308",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/weringia/weringia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/weringia/weringia-shape-surface@2x.webp",
           "bytes": 273858,
           "sha256": "49af421f616f761bdadc857f98d90f470054bc7962342137085f233127d139c8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7995,
-          "sha256": "52b6dfe2479a6c81d976e48f5f1118bc06e826482a7c4ef249ae3125a923e88c",
+          "bytes": 7876,
+          "sha256": "86cf01d4de0c76bc551209a03a5601dc9216942c60e23b09072fcffbaf8d1580",
           "verification": "bytes-verified"
         }
       ],

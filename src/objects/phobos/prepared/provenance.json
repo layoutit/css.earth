@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "phobos",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a375d79c3ff6b237e00a8bbd06dfa42004ebf3413fe0f6cd2ca882656d1d227e"
+    "sha256": "0b96596b97479ec686d979773e372099c70561f22130b09fa0adab8b131def4e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bd9cbf6aac267e2c7a730df7d48c4b2a7293ce0fb2c0c5f37610d6a17a34cb30",
+      "sha256": "34cf6c8909b35890b4fc83185786f2e41776cd2e9d200260dbc870518a329765",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "phobos",
         "displayName": "Phobos",
         "publicBase": "/scenes/phobos/",
-        "distanceAu": 1.52,
         "raster": {
           "width": 5760,
           "height": 2880,
@@ -231,20 +230,14 @@
           "sunSource": "Vendored JPL Horizons Mars satellite elements and IAU/NAIF rotation at the shared epoch."
         },
         "presentation": {
-          "defaultLens": "normal",
-          "pointColor": [
-            154,
-            149,
-            142
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "normal"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3e7d7c728d78f8b4a1eaa8bb24034909cf8dc1aac98d2435f7f906c4ba2b7702",
+      "sha256": "58bba52c78ae3373b08b442a320eec534a2255b2657e15dd756b334296d763fd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -429,12 +422,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -451,12 +438,6 @@
             "role": "surface",
             "description": "Multi-mission surface mosaic",
             "href": "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -609,7 +590,7 @@
       "sha256": "d7934d5b209e5f31ed26297e1e85a4713d8d0aa2906111ffe4b3d60d02ae0ccb",
       "bytes": 103738243,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -654,7 +635,7 @@
       "sha256": "69fffc77f4fd799767e50fc03631bea43f8d9110edcae8f355fad926136339fa",
       "bytes": 3018535,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -692,7 +673,7 @@
       "sha256": "ac77f93a5fe2c547f118b566f37444713de7e25579bafc77bbd5499c8259e49d",
       "bytes": 34508570,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -716,10 +697,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3e7d7c728d78f8b4a1eaa8bb24034909cf8dc1aac98d2435f7f906c4ba2b7702",
-      "bytes": 10885,
+      "sha256": "58bba52c78ae3373b08b442a320eec534a2255b2657e15dd756b334296d763fd",
+      "bytes": 10606,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -739,7 +720,7 @@
       "sha256": "673d791d153a1a513b372a318eaede63c9b08f216aeb89fe5c3a8c3b88afa434",
       "bytes": 1004,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -765,7 +746,7 @@
       "sha256": "6eb5a87209dc6c9b6020befcd96e8a60f40687a14db128f07b0163bef6c1fae5",
       "bytes": 89557,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -792,7 +773,7 @@
       "sha256": "96dea3504ca2046445cb280056c5f4d6a4afa1e2af10c6db783ce59acbbb3b30",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -819,7 +800,7 @@
       "sha256": "4ec49c52048f7a43cbc1720871eefd120be8ad2e44c5dcb7ead7ffb7289494b4",
       "bytes": 1716,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -870,13 +851,13 @@
           "url": "/scenes/phobos/phobos-normal-thumbnail.webp",
           "bytes": 3912,
           "sha256": "ff13d8503dd179982e01be968017d8b5f430bff7cefd2cf6fc9d4c47b1b5aea0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phobos/phobos-normal-surface@2x.webp",
           "bytes": 7669388,
           "sha256": "9c2934bc09e9fa83c86bf452215d3aac58ff5bade55d14e1e535014cc3c5b97e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -906,19 +887,19 @@
           "url": "/scenes/phobos/phobos-elevation-thumbnail.webp",
           "bytes": 6808,
           "sha256": "3828184f15417506d2268a3ed4625c926701b6874f51270669b097c608248dc5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phobos/phobos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phobos/phobos-elevation-surface@2x.webp",
           "bytes": 1434432,
           "sha256": "474a121e601cbc39988a7a76e351ca17e060ffab157eb239965f2ad5251464ed",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -949,19 +930,19 @@
           "url": "/scenes/phobos/phobos-albedo-thumbnail.webp",
           "bytes": 960,
           "sha256": "a4f9cba4cef4f6ff5db276c24a8a6fc7c5d1da488da40b6afb8d24430b8e2885",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phobos/phobos-albedo-legend.webp",
           "bytes": 192,
           "sha256": "84c28272b31f82773de272bfd6760dd36f6633203510f00fd80df0defb229c44",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phobos/phobos-albedo-surface@2x.webp",
           "bytes": 2460704,
           "sha256": "d33bb32fc9a10d308e4a7cf015d6cda46d5823cbd675a0f97f6408f71c8e39ea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -992,19 +973,19 @@
           "url": "/scenes/phobos/phobos-slope-thumbnail.webp",
           "bytes": 1942,
           "sha256": "9659dcdc500210a23420a5ff7c262deea44cc1388fec4ffa9f0ce44aeeab20ac",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phobos/phobos-slope-legend.webp",
           "bytes": 232,
           "sha256": "280a1b9142a95b4915e78f4dad454eb491ea0e9fbb6ffb6c721dd6fbf4b3b987",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/phobos/phobos-slope-surface@2x.webp",
           "bytes": 3997560,
           "sha256": "3cd1197cce3ae8d0057be96bc9e1c358d24dfc7ec9f4422e78eff8c921c47fed",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1027,8 +1008,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6054,
-          "sha256": "ede4e285c5dd55349c5261e79d7a3caf844e6c295c91089ffb093d635f2fa379",
+          "bytes": 5935,
+          "sha256": "6f55f4b66cf1cda99bde4403df4c2144a94e5aea30ac55dc85b5c02a92f510bf",
           "verification": "bytes-verified"
         }
       ],
@@ -1064,7 +1045,7 @@
           "url": "/scenes/phobos/phobos-features.json",
           "bytes": 37129,
           "sha256": "24ca15163774d3c26517443d3e7e259a3ef161ac259aa0c3bfae1ed0e4101536",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

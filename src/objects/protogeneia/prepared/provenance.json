@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "protogeneia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f5698572de7d88d7a7054f3fe901afac7d06f06aa984cb162e1f7de48900672e"
+    "sha256": "a43f211c37c46f3fae42cd2ba4aa64572c0878fdd3831d81066a3827031ed861"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a5278cf24e5119bd5ce105b7f70b39b0ccf588f724655c3699c31b53bedfbde1",
+      "sha256": "4674fd65b20443c14e60a0774a191d009db4e35fd984e6e493e41a54541b5832",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "protogeneia",
         "displayName": "Protogeneia",
         "publicBase": "/scenes/protogeneia/",
-        "distanceAu": 3.13636157165271,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 557 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2e2a394b0bc95aa05bd635cbbcd1e5cdaee9fcbae345fb3b03e3d87a1e8c636c",
+      "sha256": "8d0de1f73e71b7202edb9d90ab150a4cc5716e6258ec31d8a3cc646fa5e16649",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/557"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "903c54800b229e30bd4b5b7aed8a99f3bef189f87ccf99d29fdce35aea38979c",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2e2a394b0bc95aa05bd635cbbcd1e5cdaee9fcbae345fb3b03e3d87a1e8c636c",
-      "bytes": 12654,
+      "sha256": "8d0de1f73e71b7202edb9d90ab150a4cc5716e6258ec31d8a3cc646fa5e16649",
+      "bytes": 12375,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/protogeneia/protogeneia-elevation-thumbnail.webp",
           "bytes": 5102,
           "sha256": "efbf6fb50b56d978143c33554430f3e56cb1afb62eb5738d750fb7a1ebfe6de2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/protogeneia/protogeneia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/protogeneia/protogeneia-elevation-surface@2x.webp",
           "bytes": 267060,
           "sha256": "1d98e44f9199aa2cfc8c229501dd726ccc4e226134d7118b079aef15a4e23c56",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/protogeneia/protogeneia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/protogeneia/protogeneia-shape-surface@2x.webp",
           "bytes": 208458,
           "sha256": "8857d83920e2e7320d30c79615ed26d65e5ae7d8bb9dbe0e559656fadab8e827",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9957,
-          "sha256": "54cd34e5658e2cfaba4cd6b07a8ca773da45defd74dba471e8933e978d38cafb",
+          "bytes": 9838,
+          "sha256": "33b53d37a0c7c9df831cd22a7bc7b00eb8d33a7269966f451020244bb2477a84",
           "verification": "bytes-verified"
         }
       ],

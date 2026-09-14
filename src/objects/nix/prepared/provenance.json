@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nix",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e300a1d788763f99b8c75546292829fc4ed8cfe3a316d635761a5d9177807d16"
+    "sha256": "ad2a198d93f25a23f1e3ab954a8436ebabdb05e0aee1bc8175bcf59f25ccd0e9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9125bc063218564f2a44a4c8e1c03bf265dda6a9cb7953e24ef4326b5f9328c5",
+      "sha256": "bfba347ed65c010cb7d3957aaf34daeba1fd52799d0209bd4aa860c4fd6cd353",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "nix",
         "displayName": "Nix",
         "publicBase": "/scenes/nix/",
-        "distanceAu": 39.482,
         "raster": {
           "width": 512,
           "height": 256,
@@ -135,20 +134,14 @@
           "sunSource": "JPL Pluto-system ephemeris; rapid nonsynchronous Nix spin. Mesh prime-meridian registration is unresolved and its orientation is a stated display convention."
         },
         "presentation": {
-          "defaultLens": "monochrome",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "monochrome"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "06b9324203fe893aa69d9a1f00cafa3392e2c94c8e51a8a53219cd4a4f627085",
+      "sha256": "81a1333d0647405ea05f99c24b6bc8a4bdceb8d759a871b5ce859de83109a83c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -235,12 +228,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -269,12 +256,6 @@
             "role": "composition",
             "description": "Calibrated LEISA spectral products",
             "href": "https://doi.org/10.26007/mc7j-ef52"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -330,7 +311,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -378,7 +359,7 @@
       "sha256": "331a11972b5d1f55fd901d0cfd358aee49e77070d7bf606729a51ba95be20428",
       "bytes": 4586869,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -421,7 +402,7 @@
       "sha256": "78f83c9887e252cfddbf4232002659d44cb0b1763df7fd1629a429cc9844fa1c",
       "bytes": 10529280,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -448,7 +429,7 @@
       "sha256": "de22290d16e8a1713cc762b262a2a42972298a67d563535aedfbca9fab1567e3",
       "bytes": 2921,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -465,10 +446,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "06b9324203fe893aa69d9a1f00cafa3392e2c94c8e51a8a53219cd4a4f627085",
-      "bytes": 4049,
+      "sha256": "81a1333d0647405ea05f99c24b6bc8a4bdceb8d759a871b5ce859de83109a83c",
+      "bytes": 3770,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -504,13 +485,13 @@
           "url": "/scenes/nix/nix-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nix/nix-model-surface@2x.webp",
           "bytes": 73950,
           "sha256": "ca35a6ea514c2cde36091f4e29990720b80050b1241b278fe697c487d5639c41",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -542,13 +523,13 @@
           "url": "/scenes/nix/nix-monochrome-thumbnail.webp",
           "bytes": 1812,
           "sha256": "430b14f48f3eb4077b78c226f8bdb49ef9e49fdfb7f766220f8dd607e8f8a199",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nix/nix-monochrome-surface@2x.webp",
           "bytes": 144698,
           "sha256": "7ffc31a3716573ce24cb2e9eea51283aaaed3eb10996979e85473b4d88d45874",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -571,8 +552,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3163,
-          "sha256": "fa6c2ea4b7e96f0bbb6339344505e97bc00a4f47db5876be6b7e49f679fb856f",
+          "bytes": 3044,
+          "sha256": "c7ec867c8ea70a98b8f0a5bc4c75dc665388b436af5116a831e5eb3af630b20e",
           "verification": "bytes-verified"
         }
       ],

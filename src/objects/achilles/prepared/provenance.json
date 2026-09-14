@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "achilles",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4e6356cd7988d527c9b9137687fd7a9c09b43a4964b1719c7b9680ecbb5d806a"
+    "sha256": "bdee6c87d319d64935873af4241cb773166344f378fa4422f2b00f2ecdd3e08b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "31f69104178330f64ba58560a0703b5a510a602d10ac824395f762186703225f",
+      "sha256": "a45d4b9f96a3bae826482d9174f86a75b0acdff0fe57b682b1bf9f61ea98201f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "achilles",
         "displayName": "Achilles",
         "publicBase": "/scenes/achilles/",
-        "distanceAu": 5.216209884720479,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "375a1914340732333219e4d8e653e1c29f425ff6f1d196c63c8494e2fa3e2872",
+      "sha256": "3af9633368bcc8fab5979f4c1f95fd3dc5602b3408da1d6aa7f395d80d3cf5a8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3934"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "38db827d7d93b048832ba643e1644e072e5fb5a681e122f3085e9735600220ca",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "375a1914340732333219e4d8e653e1c29f425ff6f1d196c63c8494e2fa3e2872",
+      "sha256": "3af9633368bcc8fab5979f4c1f95fd3dc5602b3408da1d6aa7f395d80d3cf5a8",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8209,
+      "bytes": 7930,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/achilles/achilles-elevation-thumbnail.webp",
           "bytes": 5822,
           "sha256": "070b72c7de7e5cd657f3047a3cf4681656573b6b95ad246f2650ec0b58356ce2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/achilles/achilles-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/achilles/achilles-elevation-surface@2x.webp",
           "bytes": 312368,
           "sha256": "15d8926ee5c3324a0b108dc9c1295f2d39fa547aa8189440cba998a7288cba7a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/achilles/achilles-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/achilles/achilles-shape-surface@2x.webp",
           "bytes": 203600,
           "sha256": "452c354f1310126b1e58a71b92363bcc48e6e8344f59c41689ec6a89cfd96758",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5580,
-          "sha256": "d80456dcce17f6802fd51aed8c2155c6757c32b3b369ab4f745e8cd8eb4a7e85",
+          "bytes": 5461,
+          "sha256": "10714165bd832314d004137419db513abe948a0dd18b8e45e756817c3e439ce3",
           "verification": "bytes-verified"
         }
       ],

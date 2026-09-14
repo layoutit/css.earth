@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "itokawa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c54a0c89533223ee984e333d7e7e654d5f5644652d3a6f1356cbc7e89fc78656"
+    "sha256": "73a0d4524e81fca887db33c3efdeaef4233d9977d37112412bbb27a5d57600a5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "df110cb56dbba619ac22f174338b27039aa870341dd883b04f6e1ff32eee77e0",
+      "sha256": "8e4ddf36d2b23879a99e7466d60f104eb1f78fbdb023d739a2f9554eb9b93076",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "itokawa",
         "displayName": "Itokawa",
         "publicBase": "/scenes/itokawa/",
-        "distanceAu": 1.323,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -223,20 +222,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
         },
         "presentation": {
-          "defaultLens": "amica",
-          "pointColor": [
-            180,
-            180,
-            180
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "amica"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "49fa2e4a103cd2ac7cd734a90b6cfb5fe3beae39994dc9b273ecbd99fe9879db",
+      "sha256": "0caa04610ef4d5f015c555565dd8de6efdad673578b95fe4ebf25e4fbec8b60a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -337,12 +330,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -371,12 +358,6 @@
             "role": "terrain",
             "description": "Released shape model",
             "href": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -495,7 +476,7 @@
       "sha256": "e9d3a15129ec04b01064840a3425def21238e2fc818f127311b9d52fa52f5964",
       "bytes": 16897935,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -531,7 +512,7 @@
       "sha256": "7b59b7616c5bb5973e4f7137d1b9325c421708ab7315e15f2a738fcbe6a0a928",
       "bytes": 25666359,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -567,7 +548,7 @@
       "sha256": "c6a4671ee695d5a451c51c7a728cae8728c7f1acc767f3bdddfa6b5efaec6b09",
       "bytes": 6640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -602,7 +583,7 @@
       "sha256": "d1ff54eb9a55159f1dc655d4a7e4f68af83dff777ad503c8e1045dcd2a9905a8",
       "bytes": 1056960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -636,7 +617,7 @@
       "sha256": "f5fae5ef42a701c050693523d1d149a99b85b83da6e1c0c5ce58626decee1ca6",
       "bytes": 1861460,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -670,7 +651,7 @@
       "sha256": "f6cf948ba2df7c3196732b02e414710e9a7e80a71fcb859c6a586b37cd6085e6",
       "bytes": 6640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -704,7 +685,7 @@
       "sha256": "639a57f2daaf2bac9700307565449bcb9b540a714e223d1bf321ff0d4c4f1c32",
       "bytes": 1056960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -738,7 +719,7 @@
       "sha256": "589cb14fb9df512057d4446a556633fdfa106e2d69efaa66813ad56786726540",
       "bytes": 2686546,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -772,7 +753,7 @@
       "sha256": "db3803da5a7ee636edf6e3282c679fb13788c97a64a2a2977f62aedd70733435",
       "bytes": 6640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -806,7 +787,7 @@
       "sha256": "771627b27137dc9a3fe3b35cf8c89084415e186920f5d86f307e0ef76fa8883d",
       "bytes": 1056960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -840,7 +821,7 @@
       "sha256": "8b7a63ee56d362fcb7e59c80187c2706305955aacb6b517dbfb2a470b6762266",
       "bytes": 8142529,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -874,7 +855,7 @@
       "sha256": "d9cc5ecc1ca1e98103ed3acbfe8ec5d10bd04f5067d17a11c8bc2c7c3f24189f",
       "bytes": 6640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -908,7 +889,7 @@
       "sha256": "796fbc5cff65320b6d66f9e541a36e3d1933b3460217980dfc6b3334a3d8c7ad",
       "bytes": 1056960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -944,7 +925,7 @@
       "sha256": "6258068a9de0722b72255e9e727c25f770a8e90748de6bda6bb25f3ad0a956d0",
       "bytes": 28891943,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -980,7 +961,7 @@
       "sha256": "953e823514e2fa1ade56cc353fac7265ec3fd5080049763db3bd2df93b3db9d4",
       "bytes": 6640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1015,7 +996,7 @@
       "sha256": "52117052336333442c52754a242cadc45939b98288cf3b63f698d8fc31b6e938",
       "bytes": 1056960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1051,7 +1032,7 @@
       "sha256": "d3684ac52b7acf53502a0bb2c09e77450824825bc0c48f4fd4fff58035f51132",
       "bytes": 17052744,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1087,7 +1068,7 @@
       "sha256": "8cd89d023e484cbada0ece6173e256efe5235ea634e0fc7445c8ca6a9b2dfdb0",
       "bytes": 6640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1122,7 +1103,7 @@
       "sha256": "dd3cf6042057d50e87b50d09c58563e252cafce34dcebc2130ecdd3f30e837b9",
       "bytes": 1056960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1158,7 +1139,7 @@
       "sha256": "bbf8c65b2bc7094208a11f65542098e20046dbc9bebda5b5a74cdd6aaf3740b6",
       "bytes": 31131915,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1194,7 +1175,7 @@
       "sha256": "a9f15d06923aee52bcd48c3deaa8e48413c17906515068f85f3080e92c6fbd8c",
       "bytes": 6640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1229,7 +1210,7 @@
       "sha256": "7fcfe4069083c86611724dc92b8f14776b617db0032b4e1c88057321474daeb6",
       "bytes": 1056960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1265,7 +1246,7 @@
       "sha256": "8388ce181b20156c072230ca9cdb34618e577c6894ee05d083055e7cca196a5c",
       "bytes": 19500685,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1301,7 +1282,7 @@
       "sha256": "b9a2926adf3fc22b5ccc88a9b4e9c2b743512f742e65a93bd3190a422b6a0db8",
       "bytes": 6640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1336,7 +1317,7 @@
       "sha256": "81dd34cc05b6d547c876cfbf1c69161c5d88e97bdc4dbcffae5d30578d892daa",
       "bytes": 1056960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1370,7 +1351,7 @@
       "sha256": "b68d5b25053f7a6574d876619cb4f00dd5f609392a861d1c3998976f9f8980d6",
       "bytes": 4199040,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1395,10 +1376,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "49fa2e4a103cd2ac7cd734a90b6cfb5fe3beae39994dc9b273ecbd99fe9879db",
-      "bytes": 8830,
+      "sha256": "0caa04610ef4d5f015c555565dd8de6efdad673578b95fe4ebf25e4fbec8b60a",
+      "bytes": 8551,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1418,7 +1399,7 @@
       "sha256": "b57556ffe5028a8041de33852d8239fe1900eb05d47caa8748bc97212e52b891",
       "bytes": 1009,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1444,7 +1425,7 @@
       "sha256": "f26f0ede45114bcaaead6c875b6f8992bd0c52498affc647efe14ab059db38a1",
       "bytes": 81389,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1471,7 +1452,7 @@
       "sha256": "20963b041eabf0efcd3a8b7b1ece44e045b7f43f316b3224ff62fe7d4ab73b8e",
       "bytes": 154,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1498,7 +1479,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1529,19 +1510,19 @@
           "url": "/scenes/itokawa/itokawa-elevation-thumbnail.webp",
           "bytes": 5648,
           "sha256": "add0ac1961a98fc08b94692da8b36925015b44c5ac32eb54bcf384f8de9d5fb0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/itokawa/itokawa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/itokawa/itokawa-elevation-surface@2x.webp",
           "bytes": 918790,
           "sha256": "c9f9fec5995292bdf489d6da4ad09adf804424458c279f24c2302fa5b8d7f6af",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1596,13 +1577,13 @@
           "url": "/scenes/itokawa/itokawa-amica-thumbnail.webp",
           "bytes": 1302,
           "sha256": "201c0a2c3a03736b451e6831e45834f097753d339c00e926f1b2cdbb91f586ff",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/itokawa/itokawa-amica-surface@2x.webp",
           "bytes": 2090908,
           "sha256": "19db8f2d7dc8f1c40720d839ae1f65f91ae95d890f0c8a5479e626b948fe1e77",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1625,8 +1606,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5847,
-          "sha256": "15d8d2f126b6699dfc7ba9b90553e887988a028c559a1780973d7147832922a2",
+          "bytes": 5728,
+          "sha256": "a89bb16a04d20ea0fc3a9acb3eb7a39d360d8967da147104d5971711a1220121",
           "verification": "bytes-verified"
         }
       ],
@@ -1662,7 +1643,7 @@
           "url": "/scenes/itokawa/itokawa-features.json",
           "bytes": 12072,
           "sha256": "7a9b5acc16b6c2e3c72f097b7d53b7bebcda54602e0d8dfbe13ded0f32e8fbd5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

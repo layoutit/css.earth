@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "baucis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "32b883864694b994797ff1aa9c3db8e03556f358faf100a1c3683e76616c2ab1"
+    "sha256": "d53c6b204652e68e9fb10af4f6ed5c5d867822f1310c3bc99e66705117548701"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "83349f36b4f4cec28217f81253ae9498fec64c744cb7cb119cec66d9ec6febdb",
+      "sha256": "c6bfe2ecf6f8981be38123c476aab01bed55edbd9140df0dab0cb7d870a44149",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "baucis",
         "displayName": "Baucis",
         "publicBase": "/scenes/baucis/",
-        "distanceAu": 2.3794646807346385,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 4695 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1f6ba70cbc3c1aa65ccfeb1f56876fa43b11bd44915d8406ca31cb7dbf8703c9",
+      "sha256": "8837e623e905defad66a4935fd9b226a4d9fb3a9212c41839e0bed410a086ff8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4695"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "f5b9e2aa2266ce412b20de2bddc7242224f042d7aa0aecbb1a579d00ab6d18ba",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1f6ba70cbc3c1aa65ccfeb1f56876fa43b11bd44915d8406ca31cb7dbf8703c9",
-      "bytes": 9993,
+      "sha256": "8837e623e905defad66a4935fd9b226a4d9fb3a9212c41839e0bed410a086ff8",
+      "bytes": 9714,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/baucis/baucis-elevation-thumbnail.webp",
           "bytes": 5182,
           "sha256": "143f542f8c172165d0a30edad849fc13bb2fc9a8115065364fff986b2675053e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/baucis/baucis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/baucis/baucis-elevation-surface@2x.webp",
           "bytes": 278790,
           "sha256": "23366949ad508ae3494f57cd41bee233227d70366ff44888c85ccc07ff214549",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/baucis/baucis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/baucis/baucis-shape-surface@2x.webp",
           "bytes": 244170,
           "sha256": "10cfa508ebae2c37e4dc9a8db4c3de6c7717e553b0e24e75d33b83c327018787",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7358,
-          "sha256": "c052f9da1aa4449c1e8e08c510a2bd13f4cbf1123de3368bde41a2d019b0b2d6",
+          "bytes": 7239,
+          "sha256": "992e18b353d7fc00fb85ddb2af0cbbb68ac46ab36baa845c74439e3b500f869f",
           "verification": "bytes-verified"
         }
       ],

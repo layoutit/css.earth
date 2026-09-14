@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "sn263-beta",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "061c86e4bb9d25e9aa65fc137a813dfe7a88c528ce662e6674976431e6de5cee"
+    "sha256": "9551837ac90205c69efdc378ad632b4c9115b61fa7fe8872e7b3fcc832f7e0c4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "68705cd7e62544603b167c44c1c1417b9c0da9ff574e0fe441d56d1a50286a19",
+      "sha256": "b350a29cc198ff31bc78f422b81b0531e2700aaaa0ab8aa9b1c553913658793d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "sn263-beta",
         "displayName": "2001 SN263 Beta",
         "publicBase": "/scenes/sn263-beta/",
-        "distanceAu": 1.9869,
         "raster": {
           "width": 512,
           "height": 256,
@@ -87,20 +86,14 @@
           "sunSource": "Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured. Published radar and light-curve shape of the larger, outer moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c0e64b6984e24cd0fdb2ca0b94bb2c3bf9f35ef47590098a63de7ef81a2490a0",
+      "sha256": "171f1268ba47594877a8acc7344ab5b6d3096e403c74eaed49ef0b65b12f3b58",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -182,12 +175,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -210,12 +197,6 @@
             "role": "facts",
             "description": "Mutual orbits and dynamical limits",
             "href": "https://arxiv.org/abs/1012.2154"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -277,7 +258,7 @@
       "sha256": "f4b13bd627d65f085a70855a706f3bd6afc4704aa4973356b6d96da80f549feb",
       "bytes": 144480,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -302,10 +283,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c0e64b6984e24cd0fdb2ca0b94bb2c3bf9f35ef47590098a63de7ef81a2490a0",
-      "bytes": 3475,
+      "sha256": "171f1268ba47594877a8acc7344ab5b6d3096e403c74eaed49ef0b65b12f3b58",
+      "bytes": 3196,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -336,13 +317,13 @@
           "url": "/scenes/sn263-beta/sn263-beta-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sn263-beta/sn263-beta-shape-surface@2x.webp",
           "bytes": 73040,
           "sha256": "1072977e6eb9a6653fe3fd93f511e5674e0f3d5df0aee559f5b382453f5f6c87",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -365,8 +346,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10882,
-          "sha256": "a68b279e2a1190510e5c4abb56be4288193b82dd0a993e6a6016c662e78d1e80",
+          "bytes": 10763,
+          "sha256": "c9053fa4931f02655f121220e3e34e9635c0794b00c175957605ec66c9192a37",
           "verification": "bytes-verified"
         }
       ],

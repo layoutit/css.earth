@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "aglaja",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c2bb4ffacfd81b66b0093268fe2e8098fbbe4d62cbc576710a15482dfcb98656"
+    "sha256": "25643d9ee865e1b32d25741f07d36fa0f7e768699d16ecb7596f3891738d757a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c89bb86f7228f7e8b1ca1d9918c378f8a1020debf5177e00f68bcdb199ef677f",
+      "sha256": "79c056bd87bad40c2c38933b6f5f4710c5a5b0bb080d72daab0ff4c8153bb2b6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "aglaja",
         "displayName": "Aglaja",
         "publicBase": "/scenes/aglaja/",
-        "distanceAu": 2.878732649484092,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 3233 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e6fe1376082c6877b508c2f0288eba02ac518e16449d6c861bd4586c7264fd1d",
+      "sha256": "b9e940b88718a63cf4590258da67d07c25cd4d192dc26ef976a1a11b97e5869b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3233"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "5d85d9ffc8185618d1fb1a32c0b452dc7d5f1efcfc0008f25dd00f2a54d738e5",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e6fe1376082c6877b508c2f0288eba02ac518e16449d6c861bd4586c7264fd1d",
-      "bytes": 9996,
+      "sha256": "b9e940b88718a63cf4590258da67d07c25cd4d192dc26ef976a1a11b97e5869b",
+      "bytes": 9717,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/aglaja/aglaja-elevation-thumbnail.webp",
           "bytes": 5576,
           "sha256": "3717c78930ad243f9d829c6514b53bac820e8966808875e0826ae459a8e037cd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aglaja/aglaja-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aglaja/aglaja-elevation-surface@2x.webp",
           "bytes": 286484,
           "sha256": "38808bbe1795abda451c5818bc80c22fc9de1c18fb1c97f71b144efc79b342f1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/aglaja/aglaja-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aglaja/aglaja-shape-surface@2x.webp",
           "bytes": 241078,
           "sha256": "107308c85401df2f9ea447b1c357547b498d3361eac616d05d7e16cd12f84f52",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7360,
-          "sha256": "bc08f390c384051f7c427fd433709b98a8f8326f974d82e28a32a9b73e9d8b8c",
+          "bytes": 7241,
+          "sha256": "0dcefa1bdea0d28064a116be410c89358b8bec58033150954678bf15d4260c9d",
           "verification": "bytes-verified"
         }
       ],

@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dinkinesh",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "37c22a10c9dc470a1a6618aa787da3820071418d6df33161e6780ba9bd4e2738"
+    "sha256": "365fb95228941184cf5cc266f410f72afd39d45ad05578f5ae2e7b3c9f65836e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a947a9fe3f37ae64b5cafd2fa765e9fc3c427aab48398db61b3dfc5d827a4708",
+      "sha256": "a387bf1837192c532599affe164a3f8b4d3ca5242f3fea16c819d212cf0c6ef3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "dinkinesh",
         "displayName": "Dinkinesh",
         "publicBase": "/scenes/dinkinesh/",
-        "distanceAu": 2.073581431805674,
         "raster": {
           "width": 512,
           "height": 256,
@@ -114,20 +113,14 @@
           "sunSource": "Numerical Dinkinesh shape distributed with the TEMPEST thermal model: 635 vertices and 1,266 triangles, retained at their published metre scale. The linked study describes a Lucy stereo-derived model with estimated unseen terrain. This recovered file does not identify its upstream mission-model version or observed/fill boundary. The grid marks missing qualified photography; it does not mark measured terrain. JPL supplies the heliocentric orbit; the mesh view has no propagated spin epoch."
         },
         "presentation": {
-          "defaultLens": "tempest-shape",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "tempest-shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "db1844a83409a3d718aef655a1474d0b7c9a6abd3ab51aba262c0564eb5adfb7",
+      "sha256": "72f3c36ce8b0ec32e356b7f3905e99724b201793c15902d749829b00ca1a873d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -206,12 +199,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -252,12 +239,6 @@
             "description": "Resolved encounter observations and context",
             "role": "observations",
             "href": "https://science.nasa.gov/mission/lucy/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -360,7 +341,7 @@
       "sha256": "3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622",
       "bytes": 237239,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -397,7 +378,7 @@
       "sha256": "830ce983cfcfa1dd44466f708c3eeb92ba0eb80f7bc695aefebc243d55d277b8",
       "bytes": 1476,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -432,7 +413,7 @@
       "sha256": "fb25e4125e5743c6d8599986dc966acefa775c69e5ae30bed840ed90eb2fd04c",
       "bytes": 8490675,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -449,10 +430,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "db1844a83409a3d718aef655a1474d0b7c9a6abd3ab51aba262c0564eb5adfb7",
-      "bytes": 5018,
+      "sha256": "72f3c36ce8b0ec32e356b7f3905e99724b201793c15902d749829b00ca1a873d",
+      "bytes": 4739,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -474,7 +455,7 @@
       "sha256": "031d0052c8559b803bccaa617d03b0885da1fc88a8b5ee85a9c9a4fb84fa8320",
       "bytes": 1319,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -500,7 +481,7 @@
       "sha256": "b3e19298f41ce5d9f908fa37fe10621817ecb9a8c78b09096879296060a2c2c4",
       "bytes": 14569,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -529,7 +510,7 @@
       "sha256": "c14cbd72f51a57ba5b63df50709eb050dc4259a334c985a2768c5e819aa07ed7",
       "bytes": 156,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -556,7 +537,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -588,13 +569,13 @@
           "url": "/scenes/dinkinesh/dinkinesh-tempest-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-tempest-shape-surface@2x.webp",
           "bytes": 96138,
           "sha256": "0666a03d38bb752031a5f167eb9a7ec8c5bbba80c84089622c523702a45bf2de",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -625,13 +606,13 @@
           "url": "/scenes/dinkinesh/dinkinesh-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-shape-surface@2x.webp",
           "bytes": 98238,
           "sha256": "d5968fdbef52eea2f5ab8fccb6a81cb2cd56818a1009216770d8ca1fcf62265c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -654,8 +635,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6522,
-          "sha256": "4a31ac67ccafba775f37da84e81b542f199bf9c83e96dc9829265a575173ee6a",
+          "bytes": 6403,
+          "sha256": "c9ce179440e3f05692e812a4155f89f359350170aefa6d1368663a91fd0e296e",
           "verification": "bytes-verified"
         }
       ],
@@ -691,7 +672,7 @@
           "url": "/scenes/dinkinesh/dinkinesh-features.json",
           "bytes": 3841,
           "sha256": "5d760d17fb3cddb25203c267c8f3204cb0ae4afab999d2a618ccd08e84a3febe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

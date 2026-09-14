@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "althaea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "09d6af9fec6c5feaeb3ed9a7420a06d654c99f6db7b7ef39a38261727d91a0bf"
+    "sha256": "b8c72529ef847b4fc4715b1ea46f0f946861ba25fc6ce5148cf23e0e7139e584"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "89065f19ca2bfb4673d09ae68493d5233dd8f61f27c10bb15b50854c560a181c",
+      "sha256": "2fc023eea623a77f6dbee1adb9e233214bbd64c7e97759e51672f96a751bfcbf",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "althaea",
         "displayName": "Althaea",
         "publicBase": "/scenes/althaea/",
-        "distanceAu": 2.5814366871947056,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 323 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e3da45cf7df4a96654411458101b1df45bb3213ee2187f36d518cd4d9a822070",
+      "sha256": "b0e26424203758ade08adc39eb23bc7950e46ce2f0c8e98b1f02d4d0a7fcbf41",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/323"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "6d8297de717271593165d8e34c141a3d1565e851957dd91ddaea2ce0f15945c3",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e3da45cf7df4a96654411458101b1df45bb3213ee2187f36d518cd4d9a822070",
-      "bytes": 9983,
+      "sha256": "b0e26424203758ade08adc39eb23bc7950e46ce2f0c8e98b1f02d4d0a7fcbf41",
+      "bytes": 9704,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/althaea/althaea-elevation-thumbnail.webp",
           "bytes": 4480,
           "sha256": "baaa83871a974ac4f448af97a219ab5306ea3658f6183cda6a468a70b972f0bd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/althaea/althaea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/althaea/althaea-elevation-surface@2x.webp",
           "bytes": 285670,
           "sha256": "09a961a8b898b4d521f7451071228e6e4eaaf30098b9706eb885c7c01ecdd7f6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/althaea/althaea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/althaea/althaea-shape-surface@2x.webp",
           "bytes": 192374,
           "sha256": "e16cb86f652423d4838197a1e5da447f037797492282661bd95003e3d3118698",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7336,
-          "sha256": "daa1e10bee7758613075ab209936bac2fb560d77b144ac7e8e8343b24d8bd396",
+          "bytes": 7217,
+          "sha256": "8df810f93a4ebc129c763c25c222289d2b109cfa67c58dc400de976ec8601bbe",
           "verification": "bytes-verified"
         }
       ],

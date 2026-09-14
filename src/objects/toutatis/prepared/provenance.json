@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "toutatis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "004eb8d5cfe4921906b508311cf7b6b06ea4e0049aade8f5ee038fa433ce7fa1"
+    "sha256": "c8110418fe893c8e14b44122c2ceb3ebfa1d0766d4b463736e79bc6dcf0be439"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6c32e54d541c090334da48beb4b1e8bd0cd0a476b1cc67ed700325ca8ab1ba0b",
+      "sha256": "d98d7bd5ad86364d1625a5946c1170d230b20078570dd0a7d366c6f48a9f6140",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "toutatis",
         "displayName": "Toutatis",
         "publicBase": "/scenes/toutatis/",
-        "distanceAu": 2.543055738919472,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -89,20 +88,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements; fixed arbitrary display orientation because Toutatis has non-principal-axis tumbling; directional lighting is illustrative"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c4af125e98ce449ca48ec363db5b52093c9696a28b440d4ae11afdf29edb5c50",
+      "sha256": "da2f1d7474b29e2cca75357359882cb280fd895b8236badfbb6379ca695254a2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -192,12 +185,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -226,12 +213,6 @@
             "role": "rotation",
             "description": "Measured tumbling state",
             "href": "https://arxiv.org/abs/1511.04357"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -298,7 +279,7 @@
       "sha256": "28c94e3c5c4fadab97c6f1fc78dbb3800a4248b86302681cf1c629e48df5f00a",
       "bytes": 2879779,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -323,10 +304,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c4af125e98ce449ca48ec363db5b52093c9696a28b440d4ae11afdf29edb5c50",
-      "bytes": 7926,
+      "sha256": "da2f1d7474b29e2cca75357359882cb280fd895b8236badfbb6379ca695254a2",
+      "bytes": 7647,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -357,13 +338,13 @@
           "url": "/scenes/toutatis/toutatis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/toutatis/toutatis-shape-surface@2x.webp",
           "bytes": 243256,
           "sha256": "89dbe6aa8d80304ffe388f9eaa16457f3306bfc24970aab8b70380a887d5f176",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -386,8 +367,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6019,
-          "sha256": "3ad7c371c3633d168c6507cfef8045983d81c5cdff5497b64a869ba184d8f6d8",
+          "bytes": 5900,
+          "sha256": "2c1e199ed4ed9fd4db892ec3e1b4f3926c73b68c197cf32540d03f02df880d35",
           "verification": "bytes-verified"
         }
       ],

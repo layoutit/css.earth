@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "anahita",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cec55a4c7c9bdd3a14b21d14b9b251c2e1e6a199e1f325376bb259e4805ca3d7"
+    "sha256": "1f527e73958ad3cb2b997ffc478a4d851a4df0f0b8bfc5406632a7775533ae67"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4800cef7d192364f453720869987d38156a3b39268f1c7680b7759258d2b2cf3",
+      "sha256": "27b1de93218fde540a67f91e9efe6cce6d315ebf299c0f18c5a1700ef764c420",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "anahita",
         "displayName": "Anahita",
         "publicBase": "/scenes/anahita/",
-        "distanceAu": 2.1978820172913154,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 1183 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cdb57ef733f2548008d00982c0a5b9c25ecb99a43d0d5431563d1306af1c41ee",
+      "sha256": "6ed1672e7ed06e30839166cef7094639bd4ca71c2270a766da107fbe474eddfb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1183"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "8d486e3f083430418ce79d7578da3ebb901e03d365b1d37324e3b437c6f25065",
       "bytes": 82060,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cdb57ef733f2548008d00982c0a5b9c25ecb99a43d0d5431563d1306af1c41ee",
-      "bytes": 9855,
+      "sha256": "6ed1672e7ed06e30839166cef7094639bd4ca71c2270a766da107fbe474eddfb",
+      "bytes": 9576,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/anahita/anahita-elevation-thumbnail.webp",
           "bytes": 5676,
           "sha256": "d8c7186946fc607d45bbf170506cbab524b69c97ad2154404e15a0195c9e5f9e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anahita/anahita-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anahita/anahita-elevation-surface@2x.webp",
           "bytes": 300584,
           "sha256": "0f65b390b781af902aca7e2dc15f6d5869c22b95b0819deebb9c548a20f3a716",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/anahita/anahita-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/anahita/anahita-shape-surface@2x.webp",
           "bytes": 238546,
           "sha256": "9d1ba4217f73059fcd969854ce75b4540c6a9dbfc3ccfccc780daf582238c0ea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7209,
-          "sha256": "baf3aca9a9f80c81fdd571e066a347b276448e69cf75125f81275a14d293fa34",
+          "bytes": 7090,
+          "sha256": "753b076bfa9aea5b5972966cc9fbe78fcc7f263f4a9a19c05a944357f4fa973e",
           "verification": "bytes-verified"
         }
       ],

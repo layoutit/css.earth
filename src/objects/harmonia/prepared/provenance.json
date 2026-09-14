@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "harmonia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6728b72c12ecd13d45eb47daa91fa09e4e5ed84bbfec42417515f7f9497ff227"
+    "sha256": "adc0043d813a01778d96cf90e7f7afe3e6883ca32057e00ad203b7331e9b6478"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9902d860836a6fb4762eabaac609277bdd5ed7ce1cf1df32f30b7778c8f15813",
+      "sha256": "0dafb95b6e45d2c1bec44cee760ce5110f73204d620b9755f2a01011071c93b2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "harmonia",
         "displayName": "Harmonia",
         "publicBase": "/scenes/harmonia/",
-        "distanceAu": 2.267273879169896,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 1855 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0df4e5f6d2865e52000689b575d31dc3df30eaca654f7ba1d524ab0310b98dbd",
+      "sha256": "980a492f08eab0a55b6f96a05697b2c4cf31a1fb8525ebc952cda521a12f4df0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1855"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "4e44cc89be4e6dcae8998f3558b6730e03238d8a7e45f9c94516f88d26c58d5d",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0df4e5f6d2865e52000689b575d31dc3df30eaca654f7ba1d524ab0310b98dbd",
-      "bytes": 8636,
+      "sha256": "980a492f08eab0a55b6f96a05697b2c4cf31a1fb8525ebc952cda521a12f4df0",
+      "bytes": 8357,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -390,19 +371,19 @@
           "url": "/scenes/harmonia/harmonia-elevation-thumbnail.webp",
           "bytes": 5178,
           "sha256": "10bf12a711ae8bc91e122351f3ed706a0d63f7273df27e4ccde507739755e12a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/harmonia/harmonia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/harmonia/harmonia-elevation-surface@2x.webp",
           "bytes": 295506,
           "sha256": "57a4fe6d0eb39b01e4dd34e58f83db44923a25c8947beb137e2aef3e8231bb08",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -432,13 +413,13 @@
           "url": "/scenes/harmonia/harmonia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/harmonia/harmonia-shape-surface@2x.webp",
           "bytes": 192188,
           "sha256": "8496b653fa71c2281942e158c8be872c90966b36c332530f84bb25d6835bc6b9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -461,8 +442,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6446,
-          "sha256": "294d4bbaa2cc8b1816bcb6978d08746adf044a263fe589f0b862c3b6d35742a5",
+          "bytes": 6327,
+          "sha256": "4b56984afbd42c65c28c5ff6f8498d546d53453281e79d7065206385b605ba31",
           "verification": "bytes-verified"
         }
       ],

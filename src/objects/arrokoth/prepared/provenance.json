@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "arrokoth",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4d82e3a255b1267ef8a83f52c285d8c59443f53f22ce94d6512ee3063312d238"
+    "sha256": "5cb91bc71e9bc6c0cb03d423c8dd8b3f0bad005bd4660d1563c9e80c8d40cbdb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "906188010b6526c0f881940f6068f4fdd3b21f8aa1afc983963e603b58d87c76",
+      "sha256": "849a16ad63a4285db8ca600b32b6428dc39d83854ea5e5e4c84080d6e7b60943",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "arrokoth",
         "displayName": "Arrokoth",
         "publicBase": "/scenes/arrokoth/",
-        "distanceAu": 44.05655144131418,
         "raster": {
           "width": 512,
           "height": 256,
@@ -203,20 +202,14 @@
           "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim."
         },
         "presentation": {
-          "defaultLens": "lorri",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "lorri"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5a63306abdb39a70a80e30b57fb39f33d3e2fd26c76f4598af35bd2d3301d73e",
+      "sha256": "9668cd5af7067a590fe26e8ede1c67224f539b8b5cecbad254e0671468ee6330",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -344,12 +337,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -372,12 +359,6 @@
             "role": "facts",
             "description": "Published data and interpretation",
             "href": "https://arxiv.org/abs/2001.00125"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -424,7 +405,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -459,7 +440,7 @@
       "sha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
       "bytes": 3686921,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -503,7 +484,7 @@
       "sha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -540,7 +521,7 @@
       "sha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
       "bytes": 9529,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -574,7 +555,7 @@
       "sha256": "1fbb5124f417ea465db18cfdf5b7b8caee38cc30d8f1663b9939a648e27f0640",
       "bytes": 10532160,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -602,7 +583,7 @@
       "sha256": "5992738be4a7607b8ed2ccfe60643c7aab465f046cd674972c27efa2b426a263",
       "bytes": 3104,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -628,7 +609,7 @@
       "sha256": "37d71a90bd10c2a7812af0b350db1e6cb770c1c3f0e0a26e35a67547efef640e",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -662,7 +643,7 @@
       "sha256": "46565f1d4ecee1a836351365700d8acc01e150ebcece4ec69b39536fd1af36e5",
       "bytes": 18710,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -690,7 +671,7 @@
       "sha256": "8b4f7ef786172c6d928ab7bf3145e1876c6264d916609f4ed3f40235fdccede1",
       "bytes": 5767,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -707,10 +688,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5a63306abdb39a70a80e30b57fb39f33d3e2fd26c76f4598af35bd2d3301d73e",
-      "bytes": 6398,
+      "sha256": "9668cd5af7067a590fe26e8ede1c67224f539b8b5cecbad254e0671468ee6330",
+      "bytes": 6118,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -746,13 +727,13 @@
           "url": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
           "bytes": 119308,
           "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -784,19 +765,19 @@
           "url": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
           "bytes": 610,
           "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
           "bytes": 58,
           "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
           "bytes": 589518,
           "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -828,13 +809,13 @@
           "url": "/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
           "bytes": 1386,
           "sha256": "d052723fc643287d472bb5ec0dcbd29558471d9131cc7122b45ae53d2ef70c4f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
           "bytes": 908086,
           "sha256": "ce0dca27dbf24653f3a33e64ed1aad2b25a03ed1149b2a80ca8131cc6c0e3a59",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -867,13 +848,13 @@
           "url": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
           "bytes": 2038,
           "sha256": "03f778e5b96988e4240e80e7bb181649ff9d989909d2d9903c193e33c547c7e5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
           "bytes": 237202,
           "sha256": "7ab316c1be6db0bae750bb6ae543397a3b033e19cf601fdc142cc45048338767",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -896,8 +877,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5251,
-          "sha256": "579caaf139c873d35da51c071ff08d3fda45eeb1a07118e72e0bddb5d88588e8",
+          "bytes": 5132,
+          "sha256": "141045eb51b0de943a2ae23c38c732c2dba542d0b16816bb6ae5692367a763e4",
           "verification": "bytes-verified"
         }
       ],

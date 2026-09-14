@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "erriapus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5aa96f482c2bc9ba2bd4a2fca791596c1575f447614d6d14c509cb670aad098b"
+    "sha256": "96f8bc9c8abcd0f50a60de82e8d9796732c43ac7901046fefddb3e6d8a3fd09c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e721f2381c8188076be556a1f26d3224729e5043b8be6f48e2ee353e5ec2b056",
+      "sha256": "f79ac479e38e220e4796ef54f9af21a12d8bd056d78ed22ca3cc96108600dc76",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "erriapus",
         "displayName": "Erriapus",
         "publicBase": "/scenes/erriapus/",
-        "distanceAu": 9.58,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Saturn-system ephemeris; Physical pole, spin sense and current rotational phase remain unmeasured. The displayed motion does not fit the Cassini lightcurve."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cc02548d87ea64859b6b7bd8c94377b523cbf87ef29b1e1f11e09d10f061cddf",
+      "sha256": "3e66b502d54558b7b83f103194bb1eb89336ea89bf8fb13d187833417d8cd932",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -188,12 +181,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -216,12 +203,6 @@
             "role": "observations",
             "description": "Cassini ISS archive",
             "href": "https://pds-rings.seti.org/cassini/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -314,7 +295,7 @@
       "sha256": "c0c0b3a0cc7688d041ecd5a0407807eefe2ea353c81ceb72c22aec7a03da228b",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -331,10 +312,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cc02548d87ea64859b6b7bd8c94377b523cbf87ef29b1e1f11e09d10f061cddf",
-      "bytes": 3357,
+      "sha256": "3e66b502d54558b7b83f103194bb1eb89336ea89bf8fb13d187833417d8cd932",
+      "bytes": 3078,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -370,13 +351,13 @@
           "url": "/scenes/erriapus/erriapus-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/erriapus/erriapus-model-surface@2x.webp",
           "bytes": 53648,
           "sha256": "c5d4c73ee96168216b6b3e5728da8a16c9cce8c2292551eff0ae18b6c15cc01e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -399,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5820,
-          "sha256": "228a729a211e4f586e6ec1a1f187e0a3c9e66a97539822a9879e1e9c55a45825",
+          "bytes": 5701,
+          "sha256": "c5bc32f59cbdc1e7bedd789345350760a7a48b2cf764a89ee487d9e6fe499674",
           "verification": "bytes-verified"
         }
       ],

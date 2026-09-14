@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "vanadis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a82e517386dc14b827851d8690c4c2199f60907e01e591f0c983c6aeb79cfe52"
+    "sha256": "37090499b41c550fdd6d6932d0d723fdeb6898d87c9615e0e7262f6665bd80b8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4aebca8bd4486b6b1c7ee25775e154452087b4f123c1d0a409fc8abec4a8a9ed",
+      "sha256": "20a65450adb6f78479f25a1b8a0c970c1bbebdcae2eaa2af143aa171aef1618f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "vanadis",
         "displayName": "Vanadis",
         "publicBase": "/scenes/vanadis/",
-        "distanceAu": 2.662913987797179,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 6039 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3f1360bffc6be40a3d561fb9b836f609f5004caa1cf7987c48cfcf756e3a2f58",
+      "sha256": "ad85793156de334071de8439cd537c8d4321fbef455ef50620e5d27cf4cf9edd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6039"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "616f9e9caf14dd14bfb662642e787d1d22478f53727d8f3eef207287cdfd109b",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3f1360bffc6be40a3d561fb9b836f609f5004caa1cf7987c48cfcf756e3a2f58",
-      "bytes": 10496,
+      "sha256": "ad85793156de334071de8439cd537c8d4321fbef455ef50620e5d27cf4cf9edd",
+      "bytes": 10217,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/vanadis/vanadis-elevation-thumbnail.webp",
           "bytes": 5362,
           "sha256": "df39766986d82405c6f2e53f2b4357e92b4e3e30688dd0b4847f2fd5b560b374",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vanadis/vanadis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vanadis/vanadis-elevation-surface@2x.webp",
           "bytes": 269418,
           "sha256": "fdbc97a77d3e49e022667d597f9e422f9d3364a8562d1135953955a18a1e17ef",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/vanadis/vanadis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vanadis/vanadis-shape-surface@2x.webp",
           "bytes": 233370,
           "sha256": "4e5b8928d77a5aa6922ca3d4d66eddec44c981eb01282c3e507e15db564011ce",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7848,
-          "sha256": "3fbd002f3b909f40cb3ede122f1b1c5b39d9252ed4dabd38f164fcd91f97d128",
+          "bytes": 7729,
+          "sha256": "d13fff60f631858f3588a1291659be677f357084f75cfd8e278020f2c657ca51",
           "verification": "bytes-verified"
         }
       ],

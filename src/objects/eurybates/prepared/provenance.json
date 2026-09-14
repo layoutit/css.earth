@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "eurybates",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "82ce5497bce2ca2b7a65a7c5439424999da85e22c8e1014d295b0eeaf530a43d"
+    "sha256": "ddee95e4b02dce830201e0e7fab49af9ffe41d05746d2d5892d86a92180d3893"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bca0d1d176317961961b810b99bbbac6db0a52d63f54e28667a43d1b69b5cb0c",
+      "sha256": "b631513ca35bcfa047d79aa2e8e5beed6d1ea1bb5a6cd40306646da8b4b0d119",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "eurybates",
         "displayName": "Eurybates",
         "publicBase": "/scenes/eurybates/",
-        "distanceAu": 5.2,
         "raster": {
           "width": 512,
           "height": 256,
@@ -97,20 +96,14 @@
           "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bbeda93714d3f6036f85df24f14a2b8d44f6b3eb87af6232a4b7b497bbe7cba2",
+      "sha256": "b37df8c5089e1162ba16a59e7d8d7719b04e13e300709f68169d2a6f1f7342ef",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,12 +164,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -199,12 +186,6 @@
             "role": "facts",
             "description": "Published model and interpretation",
             "href": "https://doi.org/10.1007/s11214-025-01173-7"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -260,7 +241,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -295,7 +276,7 @@
       "sha256": "2edc96d2951372989e6e8ae6f959f4d7a916b1247cd0728fb024e3aeff77f0f4",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -312,10 +293,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bbeda93714d3f6036f85df24f14a2b8d44f6b3eb87af6232a4b7b497bbe7cba2",
-      "bytes": 2928,
+      "sha256": "b37df8c5089e1162ba16a59e7d8d7719b04e13e300709f68169d2a6f1f7342ef",
+      "bytes": 2648,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -351,13 +332,13 @@
           "url": "/scenes/eurybates/eurybates-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eurybates/eurybates-model-surface@2x.webp",
           "bytes": 53996,
           "sha256": "a6bf13f37581a48e580c6ce4efab271af09cfe8b5b3b7c9c71d3748951df368e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -380,8 +361,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6712,
-          "sha256": "f680592bb52ba16ff552496ef4b62d059a4d018506c3ed09e4d990815b81638c",
+          "bytes": 6593,
+          "sha256": "556a9c4c95dc4181dbe69261b07e27e129f71d62f43566bd2f3a92231f46e147",
           "verification": "bytes-verified"
         }
       ],

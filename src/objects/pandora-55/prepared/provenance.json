@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "pandora-55",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "80bd83713eb4964c8702499c159a11f58d0799dbf9d00cb09dd53bf10efa1d4e"
+    "sha256": "37fa4262e52bddc4dfb47e599e18ee912466c5c34200c01035f8f60f4760595b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f4a540bc117557aab51603050c0125cf56055eba11ee2f7dce0eb8c822a189ec",
+      "sha256": "9c61c8edd433e1da330d1e77716b61f33acf411aa489170e8c5ea3dc4506e9d5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "pandora-55",
         "displayName": "55 Pandora",
         "publicBase": "/scenes/pandora-55/",
-        "distanceAu": 2.75816485113467,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 139 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4aae26e7662ad0fe7a41bb193483b88e6992e49ed2e6124152827a51aeee705d",
+      "sha256": "b92333d5abbd3001c7092e941a8369a6982902db1a01a87abdb9b5def5b81257",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/139"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "2f8825e7125544f7cbcf50fa479dc601268d3add0960b3acb46f0696c90eabb4",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4aae26e7662ad0fe7a41bb193483b88e6992e49ed2e6124152827a51aeee705d",
-      "bytes": 11997,
+      "sha256": "b92333d5abbd3001c7092e941a8369a6982902db1a01a87abdb9b5def5b81257",
+      "bytes": 11718,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/pandora-55/pandora-55-elevation-thumbnail.webp",
           "bytes": 6214,
           "sha256": "3befe4bf248414899628f03456a696eb5e871b3aa16f56880ad1b7d28b0be44d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pandora-55/pandora-55-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pandora-55/pandora-55-elevation-surface@2x.webp",
           "bytes": 302886,
           "sha256": "4f8643f0311d795f2e63793b91c36f7896150775180b2265e42c56d7c26a383a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/pandora-55/pandora-55-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pandora-55/pandora-55-shape-surface@2x.webp",
           "bytes": 228060,
           "sha256": "eec135e9b1a25c5d9481232e149aba413fc65ef6f74a680f9a0d103f2d65fcd5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9323,
-          "sha256": "af5f3ef848f6ddb8d4407abc55c5d7891898cf3e18f9673a1b46dec320deab56",
+          "bytes": 9204,
+          "sha256": "c55849ebe5b257212898c08edd2d8af460577e75cd9d970144690e1048d4d1f2",
           "verification": "bytes-verified"
         }
       ],

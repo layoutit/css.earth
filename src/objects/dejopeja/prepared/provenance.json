@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dejopeja",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "25c51866ebaa01c1d034f2367776b45477e86dc11d668cb0565ceb6a47bb8fe9"
+    "sha256": "402160aaf2866879924529dc521d266e2b036f6bac4fea3a71ba481b3a70582d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bb0183aea1ead1368fe1d68ac124bf0f84ca8cc45baaac9ffc319d155f145d07",
+      "sha256": "4da15b300de138d6439e775d257598fe74c4d7e57b3c5e072628d3be154c5f8d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "dejopeja",
         "displayName": "Dejopeja",
         "publicBase": "/scenes/dejopeja/",
-        "distanceAu": 3.1906659584251518,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 175 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b03942590a04461c6750f3b2a0ef024b0d8adbb2852a42cf8f51da24fb574340",
+      "sha256": "ba43572f5375f7324490dc4cd05df8ef967b29655467a8dbb41a96b8b32df304",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/175"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "e455562c300f5594cb401f42d3237cb86e3e415ad7c03f54f2569637b435f9db",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b03942590a04461c6750f3b2a0ef024b0d8adbb2852a42cf8f51da24fb574340",
-      "bytes": 11038,
+      "sha256": "ba43572f5375f7324490dc4cd05df8ef967b29655467a8dbb41a96b8b32df304",
+      "bytes": 10759,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/dejopeja/dejopeja-elevation-thumbnail.webp",
           "bytes": 6000,
           "sha256": "a10c682203a1b786433e75469aa37bb80c87b9e9b0be0b4f6dee008ec63db739",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dejopeja/dejopeja-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dejopeja/dejopeja-elevation-surface@2x.webp",
           "bytes": 299024,
           "sha256": "887aca2c893315364f262fef08510b810adc5450372a2e844057228480346dfe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/dejopeja/dejopeja-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dejopeja/dejopeja-shape-surface@2x.webp",
           "bytes": 222144,
           "sha256": "9983a1c1fe33122488668b4e80248be9f720ce907c41cbb8085c958f2ddc7350",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8382,
-          "sha256": "0ad9c262bd6e9db88df6f317d3405bfb7b4ae36bebedbb226bb8fc890a3ae42b",
+          "bytes": 8263,
+          "sha256": "1692592d759f48b0fa179ea2a0e0fde433a4c7cd99368f2a0eb5f616dbd3dd4a",
           "verification": "bytes-verified"
         }
       ],

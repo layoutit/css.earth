@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "byblis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "685c53ae798869400625a8dae00ab9e53b079376bc92636cf00a69ae0639037c"
+    "sha256": "67ee3a94d5275f61cf17656915445ddff97f569c67f817c0fdb855ca768c67e6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8f1ba210f59138691ee975f06dd29f623ec15cbe8838760cd9133a4286076d22",
+      "sha256": "5b47fcce2a2fdff31f34f90cfadeeab880b9cf65863ce3eca7a2b19f99f3c2f0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "byblis",
         "displayName": "Byblis",
         "publicBase": "/scenes/byblis/",
-        "distanceAu": 3.1628105645290394,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 506 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fb5011b7aebba13bc4b215cab36ee3064ca15b31779be647076080bcbf93ff0a",
+      "sha256": "b05d7692b0a7a25fda1a38baa711a0122875da371e1fa9f77d29e67ec0283da9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/506"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "3482d76fa479e2335f9e524abeaa2a38a9f0d974298a2520006bfa807d2cd056",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fb5011b7aebba13bc4b215cab36ee3064ca15b31779be647076080bcbf93ff0a",
-      "bytes": 8941,
+      "sha256": "b05d7692b0a7a25fda1a38baa711a0122875da371e1fa9f77d29e67ec0283da9",
+      "bytes": 8662,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/byblis/byblis-elevation-thumbnail.webp",
           "bytes": 5364,
           "sha256": "2fd943ccea6a01107b11400cf9e564902f331f92d0486fd96c8bb347d5c1eaa4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/byblis/byblis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/byblis/byblis-elevation-surface@2x.webp",
           "bytes": 291672,
           "sha256": "fbc23e56c5df21aa8102f30234354d34e5b522fd0f845f5dd5d3d8e11400d4ae",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/byblis/byblis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/byblis/byblis-shape-surface@2x.webp",
           "bytes": 211488,
           "sha256": "81f934b72be3da583bbb443e2d09b40d5a8dd535c5742bab884fa02288f8e482",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6308,
-          "sha256": "6e487195b57c683c44708955ae186e8a8a42b52166b36a129c1db79aa4cde8e7",
+          "bytes": 6189,
+          "sha256": "a1f6b24a599bc0d15018d99a277e8ffcd643be7ac7a0c2dff8aa5d5f81dc29c7",
           "verification": "bytes-verified"
         }
       ],

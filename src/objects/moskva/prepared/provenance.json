@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "moskva",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a0260dd504b4406a0d5690c282bf52cfdf9ba788c50aa58358866f41820b116f"
+    "sha256": "483a7665225c41516cdfc32cf3d038f4f395a5331afe926739a46561bf192729"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "932892e036f724027a25104681e309d19d2d41c3b22f112fe49c8df1a18603b7",
+      "sha256": "510874b419f426b12db2233b3aa5d25e1010e3a7c8ab427ad88f4baef4d9c566",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "moskva",
         "displayName": "Moskva",
         "publicBase": "/scenes/moskva/",
-        "distanceAu": 2.5406685045126993,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "05504543c8231b56bacb9203195ad5a94ea64953c874f73605304d44ce1ddf87",
+      "sha256": "47ace8e40bca3c6d7fea09fd6a111ada31c6c5854c7012d876957fd9fb498c52",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/515"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "76ada158146d485d5ca583742e60825d7cdf15f7d4febff30655d63234863503",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "05504543c8231b56bacb9203195ad5a94ea64953c874f73605304d44ce1ddf87",
+      "sha256": "47ace8e40bca3c6d7fea09fd6a111ada31c6c5854c7012d876957fd9fb498c52",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8693,
+      "bytes": 8414,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/moskva/moskva-elevation-thumbnail.webp",
           "bytes": 5132,
           "sha256": "dd21a3302d903e7ae7b40a6531b562812594b682da8d21ff2a9d63b4d680ab4a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moskva/moskva-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moskva/moskva-elevation-surface@2x.webp",
           "bytes": 281352,
           "sha256": "8b0703f02e7eccd862223e06f9966fd3409c07b9f19b943b7a1e088b6de7312a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/moskva/moskva-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moskva/moskva-shape-surface@2x.webp",
           "bytes": 202348,
           "sha256": "cdc0a3757ffe955ee49c57275b4965bdcf2347d8edb4c8189666bbffaba76c5c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6028,
-          "sha256": "8da77a4b8a2c8316176979ac5a6e1aab200ade6b214c673ff09be9c9ff690c2e",
+          "bytes": 5909,
+          "sha256": "d061e72c19a76a52abfd3e85ea7cecbc310dcc72793b7d943350d7b252847daf",
           "verification": "bytes-verified"
         }
       ],

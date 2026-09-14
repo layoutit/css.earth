@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "proserpina",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c041a147a4f5c1dc56eeef242d627ade7ac3dfd24a5740a6674a4e000897b016"
+    "sha256": "b36ceaa068243048a7e0286383c1ca1c6542e2ff810aa5f6673d6869842d6994"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ee581a1480742a02dcbfcae59b8e374c1eca37bf624d47703a96d333f433424c",
+      "sha256": "c65d2f671e7b5292f7346b3bea3a0dcc3b6cc1ad9d624c78551a43db3b206b0f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "proserpina",
         "displayName": "Proserpina",
         "publicBase": "/scenes/proserpina/",
-        "distanceAu": 2.6551885129968467,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f070fde8621d6c99bd6bc4bbf57fc1c7830025b7a2fddd79a606d001faa843e5",
+      "sha256": "3962bacbef36f0288722e8cf770e8dd9684e4ff6e46b0c47847191af62a9310f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1189"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "5451a43f38b22110427c9ac5aee9fc2dba99a37ef7248f5f3986bca7f375f2f7",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "f070fde8621d6c99bd6bc4bbf57fc1c7830025b7a2fddd79a606d001faa843e5",
+      "sha256": "3962bacbef36f0288722e8cf770e8dd9684e4ff6e46b0c47847191af62a9310f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10766,
+      "bytes": 10487,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/proserpina/proserpina-elevation-thumbnail.webp",
           "bytes": 5814,
           "sha256": "7112f3d67a91ba02c79d65b4649abe4ec3ba048c6a3f9c0c73134a05d73f500b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proserpina/proserpina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proserpina/proserpina-elevation-surface@2x.webp",
           "bytes": 298268,
           "sha256": "2045531eb42e052c9aece306950b861207bafcdd7e0744520838cb12efc564a6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/proserpina/proserpina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proserpina/proserpina-shape-surface@2x.webp",
           "bytes": 212016,
           "sha256": "d84487fc52256aad5cabdaf42f4f81c16c4a25f8ab90e1ab49a54654cdc75447",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8059,
-          "sha256": "79bf8e2e3ff10947d6df0715b077537acbee85c036672764c393a125f7824681",
+          "bytes": 7940,
+          "sha256": "63e8d26c70a3f6c27fd92282c79a9857023eada27d90fab9baee12ec6f8df674",
           "verification": "bytes-verified"
         }
       ],

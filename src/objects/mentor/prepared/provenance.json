@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mentor",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "30034b19f2df3b16ca9e0c9902dc5067a3c4fcefa2ecf43cdd128478e4e95d4f"
+    "sha256": "e20f6411716d487c428e1645b031fbd79dad4badd9751afdd7b904d7606e2c48"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c4ff5d03564a14c922ae3f4ae0ad26e63c3c72b3bcc1c78ac17243e586240790",
+      "sha256": "9855d2c9c248817e6005e376dc31240159fb665daf8e8c7743706aa248bf37c1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "mentor",
         "displayName": "Mentor",
         "publicBase": "/scenes/mentor/",
-        "distanceAu": 5.197909787831412,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -137,20 +136,14 @@
           "sunSource": "DAMIT model 4281 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "aa40f7612377d765d78a55358b08906a198e4edbb5950ba462164c15663603ea",
+      "sha256": "5407c5e638872343c0c1ae0fabefde8bc9fd30b78a00a29cf7bd2c2d9e69c2a4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": false
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4281"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -369,7 +350,7 @@
       "sha256": "649f240ede7aa6604f30dd9a05ddf905cc9bf0ff53d1765c5265f89082b195ab",
       "bytes": 46257,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -394,10 +375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "aa40f7612377d765d78a55358b08906a198e4edbb5950ba462164c15663603ea",
-      "bytes": 9526,
+      "sha256": "5407c5e638872343c0c1ae0fabefde8bc9fd30b78a00a29cf7bd2c2d9e69c2a4",
+      "bytes": 9246,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -428,19 +409,19 @@
           "url": "/scenes/mentor/mentor-elevation-thumbnail.webp",
           "bytes": 5940,
           "sha256": "d13d81bcd85158c5ad1e8efe94b1306c279ae3a753cb6089df94ae0fbe225092",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mentor/mentor-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mentor/mentor-elevation-surface@2x.webp",
           "bytes": 296892,
           "sha256": "3cf597e9d6f300a82c0dfc69164188c638506beddf16c5a3e3510b1daa94a7a2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -470,13 +451,13 @@
           "url": "/scenes/mentor/mentor-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mentor/mentor-shape-surface@2x.webp",
           "bytes": 221822,
           "sha256": "18589ed7bb44c2af1678f2d77175f8ebc84f565ec47e5a2a282200a693fadcbf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -499,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6570,
-          "sha256": "5026def80fb47fd21a562a1cba01835981b8b9562762a5afc6e4cb3cbd01cb86",
+          "bytes": 6451,
+          "sha256": "9f071bd18a521498b8941cfc33d9b34443a3861137e37040053dbdc59bdcd258",
           "verification": "bytes-verified"
         }
       ],

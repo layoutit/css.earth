@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dike",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dc94dca306b36759d6fa6b482acd491ab95c17c8688b482f16c8739100e98980"
+    "sha256": "e0c862aa3158b78361891b8f413158c3df6025b6cd1c1544342025f118d6addc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ff82cb7312a1bafe92e96344356fc5c878cf77818a36d69d140134a27732f968",
+      "sha256": "212dc5df578ea9067b57e671cbc4c92dfcaff20c0c61d37e392267231b59075d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "dike",
         "displayName": "Dike",
         "publicBase": "/scenes/dike/",
-        "distanceAu": 2.662672838262387,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "430c95dab824fa3ffdd801c05ebf90a3f2405f08152a2a194a763e1b32d3087e",
+      "sha256": "d553b0f54132f9afeeb3c15800ba398bb2e8ab2b015a9b9c4bf249c4786a136d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1144"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "fa976b4d7167a12345ebcc95c09b74f06e4700a16ce25c9a8381e2a8de94626f",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "430c95dab824fa3ffdd801c05ebf90a3f2405f08152a2a194a763e1b32d3087e",
+      "sha256": "d553b0f54132f9afeeb3c15800ba398bb2e8ab2b015a9b9c4bf249c4786a136d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 6610,
+      "bytes": 6331,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/dike/dike-elevation-thumbnail.webp",
           "bytes": 6248,
           "sha256": "04ac169bb9e19a5877b23c517f6189b259693d4d18ff5f0347be1fa522b54eb5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dike/dike-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dike/dike-elevation-surface@2x.webp",
           "bytes": 309532,
           "sha256": "89928f5135b5bc89d25ab39b43e02dac1e9e0455f0fd3bc99fc1fa0d9ef979b8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/dike/dike-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dike/dike-shape-surface@2x.webp",
           "bytes": 225390,
           "sha256": "096be63cc4cf8572fbc3dc7aa20ba7633d164b73212d2ec135dd2f2ba995886c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4011,
-          "sha256": "19201e9eeb1924cc4e7fdff8b43edd26513a4bdcd51a7fffcf380619b3e241a5",
+          "bytes": 3892,
+          "sha256": "abc4e0b362ad3b0452f7810a2e92175deb3f504202f4573520cb9b872f2cb9c6",
           "verification": "bytes-verified"
         }
       ],

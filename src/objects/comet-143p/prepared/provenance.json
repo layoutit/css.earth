@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-143p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1cc7a711544c182ddf96f70e5334a9987759737822663daf7e2d399c4151b8f9"
+    "sha256": "d30707c1218bccd6724b4f2fd6c4da72af9e41b9fde0324ad4777733b09eca99"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a043542a63ef775eb0b940e534525bc1643814f172f6b3e62213969fb27a58fb",
+      "sha256": "a8ea1dd73b68b417e37a4f43052eafe3226184303efb2c7a5c332c4a5e3f99e9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "comet-143p",
         "displayName": "Kowal–Mrkos",
         "publicBase": "/scenes/comet-143p/",
-        "distanceAu": 4.744148140394379,
         "raster": {
           "width": 512,
           "height": 256,
@@ -128,20 +127,14 @@
           "qualification": "A smooth approximation of the published proportions, sized from infrared observations. The grid marks missing surface imagery. Rotation phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            184,
-            182,
-            178
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a3214f85daec78b8fb1ee9cbf3daec003825bb94fef1a3911af69a499d187a8b",
+      "sha256": "2f796dc9e7fa8060e76e5b762ebf44f826b666ffe9712a7e5c901365bdb046fb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,12 +198,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -227,12 +214,6 @@
             "role": "observations",
             "description": "Infrared nucleus size measurements",
             "href": "https://doi.org/10.1016/j.icarus.2013.07.021"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -278,7 +259,7 @@
       "sha256": "d191f56540f31b93e2c48626907b55af2c4f37aa07dc5e1f0d747343e92a3f88",
       "bytes": 1325,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -295,10 +276,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a3214f85daec78b8fb1ee9cbf3daec003825bb94fef1a3911af69a499d187a8b",
-      "bytes": 2752,
+      "sha256": "2f796dc9e7fa8060e76e5b762ebf44f826b666ffe9712a7e5c901365bdb046fb",
+      "bytes": 2473,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -329,13 +310,13 @@
           "url": "/scenes/comet-143p/comet-143p-model-thumbnail.webp",
           "bytes": 1504,
           "sha256": "53888388312bde6fad84f7ac5506007cc6385f483da75c051023951f0e030e1c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-143p/comet-143p-model-surface@2x.webp",
           "bytes": 112240,
           "sha256": "288ceec39fa3f1b52ea6e9cf1218ab62f3a4e307a5b14e42ef504d3e8a7fa1ee",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -358,8 +339,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6672,
-          "sha256": "d8e2051d1fa6d0811815d310d106bd84cf3d5bc55940521829c3b1277cdb8496",
+          "bytes": 6553,
+          "sha256": "402abf1b4d8b2d934c2e4780ac680cc5a3fb58e30f4a266d1b2961ff19ba9629",
           "verification": "bytes-verified"
         }
       ],

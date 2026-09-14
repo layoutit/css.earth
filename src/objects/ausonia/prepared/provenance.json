@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ausonia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf946bd262143f420e68ea6a2aa9a6182b4a875f5434f9474475f42a4eaa828a"
+    "sha256": "02735ab66ac55858959854b473dcee7c72d029bbd0e0a0c111b715a705486e70"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3455e5b6168213a60216c3af594a71b71c9597302efb9499a863e360ff094e86",
+      "sha256": "1f391d6a939769674c3a4c64a71e698a0269ea39d19f90b8ff1b8d7b3e8382d3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "ausonia",
         "displayName": "Ausonia",
         "publicBase": "/scenes/ausonia/",
-        "distanceAu": 2.39418991368127,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 5924 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3a27f01957c0b035004b0b3b28457ae1b1b64dab6bdf88abc348b03c8efd8e41",
+      "sha256": "14f87990071d280a8ac6219ab8cb2a2c5942321e5acfd479d1e9bb63e83308af",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5924"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "aa9daa8b781ee63a11e7a9efe3519ced4c1582ba90c9be3fd366ebaa6e177e76",
       "bytes": 46743,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3a27f01957c0b035004b0b3b28457ae1b1b64dab6bdf88abc348b03c8efd8e41",
-      "bytes": 9695,
+      "sha256": "14f87990071d280a8ac6219ab8cb2a2c5942321e5acfd479d1e9bb63e83308af",
+      "bytes": 9416,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/ausonia/ausonia-elevation-thumbnail.webp",
           "bytes": 5032,
           "sha256": "98b4d06a2f68538b69ed024100f883d98af4ab7005d2dcba30114bee2a69fe22",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ausonia/ausonia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ausonia/ausonia-elevation-surface@2x.webp",
           "bytes": 270646,
           "sha256": "ea4492153dd564225601af6aad81a0386cd1fbda90c2c13049d00d76b83e89bc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/ausonia/ausonia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ausonia/ausonia-shape-surface@2x.webp",
           "bytes": 209004,
           "sha256": "cdf2690d3b4a043a6a3280c35171930f59d0ed1001087b10854657abc36d336d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7050,
-          "sha256": "d6dbb9eda3adc6fa7a85cde7fe6daadf5c565a700887b1d23e3e21c6d2ab63a5",
+          "bytes": 6931,
+          "sha256": "700593411596077b8eae3e21628c0ef51dc4245c24279ffce4b6464d61c79e7b",
           "verification": "bytes-verified"
         }
       ],

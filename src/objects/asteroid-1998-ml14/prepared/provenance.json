@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1998-ml14",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "602987109475f908836839ce1462bfbb3c43789dab341760fe75b3ad679b3cf0"
+    "sha256": "bc82796d1fc9cb9a1c26b62b7eeff98d330f4c3a4af6f521a8dca306bfe301ce"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9f79ed3b276c87ef7147f3b86d1618272b1027cdd8d4ea22bbddd290728efee0",
+      "sha256": "7bf80a9eeeac9205d4f882b3230c0098116584b13ce67debffb80764fca413ba",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asteroid-1998-ml14",
         "displayName": "1998 ML14",
         "publicBase": "/scenes/asteroid-1998-ml14/",
-        "distanceAu": 2.407527644248636,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -135,20 +134,14 @@
           "sunQualification": "The archived 1998 radar reconstruction has no determined inertial spin pole. Use the existing fixed arbitrary display frame; optional directional lighting is illustrative. The historical modeling period and newer photometric period are recorded as information only, and neither is propagated into a current attitude."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4ffe06c9db942f16b19bf11ea17ffca74b058f7d3e8ec6490a2c5fdc5729a151",
+      "sha256": "a6ccb1e01b2fa77d73127c4be1d6c909c1d005c3252083a8c50eccfdb4c1f1e7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -258,12 +251,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -286,12 +273,6 @@
             "role": "rotation",
             "description": "Historical modeling period and unsolved pole; arbitrary display orientation",
             "href": "https://echo.jpl.nasa.gov/asteroids/1998ML14/ostro.etal.2001.1998ml14.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -358,7 +339,7 @@
       "sha256": "8166bb5a7f6d8baa5cc82cec22304c011202f1254a403be1ff19eba0abfe6abe",
       "bytes": 29003,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -383,10 +364,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4ffe06c9db942f16b19bf11ea17ffca74b058f7d3e8ec6490a2c5fdc5729a151",
-      "bytes": 9733,
+      "sha256": "a6ccb1e01b2fa77d73127c4be1d6c909c1d005c3252083a8c50eccfdb4c1f1e7",
+      "bytes": 9454,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -417,19 +398,19 @@
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-elevation-thumbnail.webp",
           "bytes": 7792,
           "sha256": "4e656410a0aa9f83b2926e35e2873e8ae02a8bf775176d19c19718bfb811950c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-elevation-surface@2x.webp",
           "bytes": 345938,
           "sha256": "c75288a51098a47aee47119967feec0f5730f9071aa1d4ed4c839c9a67303a82",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -459,13 +440,13 @@
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-shape-surface@2x.webp",
           "bytes": 208362,
           "sha256": "11c15e3ede9047b2461985bea04221cda7cb1239ed53c05f39fb121ecce57a82",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -488,8 +469,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6636,
-          "sha256": "0addf2d413ef653ca641f84f2892c0cf81fd033dd00dcc8096e9b7834d212d35",
+          "bytes": 6517,
+          "sha256": "90511a6cab69f1ced76a798536b874507b0f1bf6bff53c2a3e5c0b89df24dea7",
           "verification": "bytes-verified"
         }
       ],

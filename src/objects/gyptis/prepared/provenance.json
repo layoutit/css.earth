@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "gyptis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5d233ff7ea22e11dd00927ab4d7d5d072a49e5910b5856343554f5dd0ed07197"
+    "sha256": "ad41ff72e9521f11fd09eb676913cad20de13df1cba7396bb748b1e2a14a0a2b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "91ebd809d5a22add7385dda4087783f64203d333a41ce38f96ea2d8fc906e79d",
+      "sha256": "8fcb4554f332adb084293be27728fd1f594274eb9a8d6a72ab7524a46912f91f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "gyptis",
         "displayName": "Gyptis",
         "publicBase": "/scenes/gyptis/",
-        "distanceAu": 2.7713762475315957,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "40533dd23db46b32b0e87f2b56f30492b922ac86b6b1cb7d572e5de063d692eb",
+      "sha256": "bfd7e1d0428c0739bdbb8df7be6c3472d28ea92d41ca466ba36eede3a9e75741",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5394"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "94376fbdeea8797ce676895cb19d9fe4c3853b0672024314875c10dcb77b7fc1",
       "bytes": 44313,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "40533dd23db46b32b0e87f2b56f30492b922ac86b6b1cb7d572e5de063d692eb",
+      "sha256": "bfd7e1d0428c0739bdbb8df7be6c3472d28ea92d41ca466ba36eede3a9e75741",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8379,
+      "bytes": 8100,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/gyptis/gyptis-elevation-thumbnail.webp",
           "bytes": 5400,
           "sha256": "c582cf17be52a741fa3896c3a405cd03d28287a1bc2dd964c31cf5205834a70c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gyptis/gyptis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gyptis/gyptis-elevation-surface@2x.webp",
           "bytes": 288110,
           "sha256": "d0d934bba384b68b8f7eae68cd8c004795c2d0a247106666d3d41bb6452b4cc6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/gyptis/gyptis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gyptis/gyptis-shape-surface@2x.webp",
           "bytes": 228110,
           "sha256": "17da7354107308cc626e28fd06d5ae02609c57772eafd2861ef699ed633dd6ce",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5703,
-          "sha256": "f657f63e1ddaad131acc3bde7d2f3bfa96f25022b7313bb05869a835b302928a",
+          "bytes": 5584,
+          "sha256": "08a7e71dc379ea15e7a7fbbcdc3fbb92b62ed3335da2abac7c3afda82d5ec566",
           "verification": "bytes-verified"
         }
       ],

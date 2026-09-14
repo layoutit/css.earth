@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "sapientia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e9ad9183c7f5fb3eb7e04139cd72eb6e67bcc5c12a016a3d4bb86bc883db00d3"
+    "sha256": "90e8f6c0679df78317f70b7c7548468112f91f86503a158df7e7a359d7b5a6e5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "83c5715be31c3a9546c7346b31b26b1a7ef8c54c31d3e90886a93746cf02835c",
+      "sha256": "ed5f66b50f0997d49030b0db9730ddbd86b199bf9c3301f743e2e44d84fe47e9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "sapientia",
         "displayName": "Sapientia",
         "publicBase": "/scenes/sapientia/",
-        "distanceAu": 2.771802925757048,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 16284 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1b5733a7e5ad24d11a8e3a8259f965e37134c7bdf380d32a0dc1c9d0e18539cc",
+      "sha256": "3c3a307db5a59a891015d8b26dacd3673ebe72e48a09d520b6e2041789344a59",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16284"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "420f22693cd4653eaae4ff9229b13793ead35898a874f4ab8738a779e91bc0c4",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1b5733a7e5ad24d11a8e3a8259f965e37134c7bdf380d32a0dc1c9d0e18539cc",
-      "bytes": 11662,
+      "sha256": "3c3a307db5a59a891015d8b26dacd3673ebe72e48a09d520b6e2041789344a59",
+      "bytes": 11383,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/sapientia/sapientia-elevation-thumbnail.webp",
           "bytes": 6240,
           "sha256": "a506ef4bd736544f6c05eac13509289fc846224e8c793d9bd10736646435b61d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sapientia/sapientia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sapientia/sapientia-elevation-surface@2x.webp",
           "bytes": 317748,
           "sha256": "ca854e16d11169e9c4932d85e79517a6454e2899b08d47d0ee0dbaf9a4a8d287",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/sapientia/sapientia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sapientia/sapientia-shape-surface@2x.webp",
           "bytes": 222602,
           "sha256": "88b34870fd6871564236caa205887aeb154bf2ddf69357c6b936384d8a60a313",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8992,
-          "sha256": "98492a96a9eaefa141f4efffa692060ef43e685a1182151562b29702c436c638",
+          "bytes": 8873,
+          "sha256": "923ce8db5aa73c500e2dbdaa85e759768d6f091409cb4c79427d1b8f1e49ba71",
           "verification": "bytes-verified"
         }
       ],

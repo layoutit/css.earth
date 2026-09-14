@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "nysa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cd7c1ee516f159b824386c3dcc528e3efa9ec7c5b0b9df21976a2693685d0739"
+    "sha256": "927d4511474daf682e4690685a72cc5a46edb82ee97d5b571e970c76bc30beb9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0d9dd9e45cbbe12a5fefc78e26d002a84f7a093f743d24d6d003714c1718de30",
+      "sha256": "3bd0056ac53e2bbbe17462c2bcf2230253c9799f1d2c56b29a29df9364d8a397",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "nysa",
         "displayName": "Nysa",
         "publicBase": "/scenes/nysa/",
-        "distanceAu": 2.422203726127018,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 16324 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "88487d3dd7034c6186c28662a145f143a7f42be9cc410446ea2dd6ee01e51860",
+      "sha256": "3aab0f7bfcc019b9096726a08a71d6e982261ad1c3355afa56242cbd1bd6af8c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16324"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "49ddba465ca9b6391d7dc8299c49c2309a360f30268bece4d8c1a7adadee7fa5",
       "bytes": 129688,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "88487d3dd7034c6186c28662a145f143a7f42be9cc410446ea2dd6ee01e51860",
-      "bytes": 6756,
+      "sha256": "3aab0f7bfcc019b9096726a08a71d6e982261ad1c3355afa56242cbd1bd6af8c",
+      "bytes": 6477,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -390,19 +371,19 @@
           "url": "/scenes/nysa/nysa-elevation-thumbnail.webp",
           "bytes": 4998,
           "sha256": "6e401cf417ae9dda94d21a9508c57ed727ad9d5b4ae38d3fdc58db49bba2823b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nysa/nysa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nysa/nysa-elevation-surface@2x.webp",
           "bytes": 302888,
           "sha256": "a502f05e025a34a63fc573925233573590f7ae12c2eebc22ff5857a7618b6e25",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -432,13 +413,13 @@
           "url": "/scenes/nysa/nysa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nysa/nysa-shape-surface@2x.webp",
           "bytes": 202846,
           "sha256": "4e3f8f0f84a4664740b4d2b0fab6dfd9d45e896eb437184069e7da2e3ab51fa6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -461,8 +442,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4615,
-          "sha256": "8199840dc8a7cdb87d09bc9131898dd092ffb03966ac6ff792edc5a19861e3bf",
+          "bytes": 4496,
+          "sha256": "d6141c9e0823767922eaa35b0232ccb43c89d63a60f9d0a90ec98929a0aa898d",
           "verification": "bytes-verified"
         }
       ],

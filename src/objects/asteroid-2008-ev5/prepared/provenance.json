@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2008-ev5",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2754d6dadc5da11b91854ca04b441ef5fd5e434c22c453965fae7d6708cf23c7"
+    "sha256": "8ed5d4e3bdb1e1850a2254752bdc2b236b9084c8e4ba6339d929372ae3b4c251"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "269d23f72d52f68c3d7cbc8016660bb5f8abba0796c88302575c3bc852afdf2f",
+      "sha256": "e437b492f827ce5214201d3cee85956efdf78fde57860949a06010c36d3c6575",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "asteroid-2008-ev5",
         "displayName": "2008 EV5",
         "publicBase": "/scenes/asteroid-2008-ev5/",
-        "distanceAu": 0.9597570834058771,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -134,20 +133,14 @@
           "sunSource": "Pinned JPL Horizons elements and the published radar-model pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4fe1d3481268c1778682eae5d7e84a6575ba7d521d49463bedb938cdd40fa51e",
+      "sha256": "87eac4b2711819f8ff96cd520ee63c9bf65da89eb8b81e864b63d1b30e91c9cb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -249,12 +242,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -277,12 +264,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -354,7 +335,7 @@
       "sha256": "c8cf2f1466cef4ef8cedd033e83a00ef625a64313068255954003d64ae2b6dd9",
       "bytes": 120483,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,10 +360,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4fe1d3481268c1778682eae5d7e84a6575ba7d521d49463bedb938cdd40fa51e",
-      "bytes": 9023,
+      "sha256": "87eac4b2711819f8ff96cd520ee63c9bf65da89eb8b81e864b63d1b30e91c9cb",
+      "bytes": 8744,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -413,19 +394,19 @@
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-thumbnail.webp",
           "bytes": 7908,
           "sha256": "c844a149db64d42481a91418c3d8ffdc0f3b845f90ad0cb3b6b48a0b3ea3e52c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-surface@2x.webp",
           "bytes": 510070,
           "sha256": "17fa683a8dcaef876e485cb54cd38f67ce6d2cd39032d828f7130dc7200cb045",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -455,13 +436,13 @@
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-shape-surface@2x.webp",
           "bytes": 234248,
           "sha256": "279cd11e42a84e32bdc4df02f6a84c89c16dc2ceab24395612c05a675a60d834",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -484,8 +465,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5862,
-          "sha256": "e5160d2dfc173a3eff6ce4115eb2dd2bef060888ae21d2ecf627f938143cbe91",
+          "bytes": 5743,
+          "sha256": "28bedf77a617d0f9de05c1401cf23c04c3157802b0070250e941e32163ccd5ae",
           "verification": "bytes-verified"
         }
       ],

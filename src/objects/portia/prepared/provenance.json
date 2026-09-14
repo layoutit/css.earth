@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "portia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6491eb0a6f8f352466542ff6b362c124f11e926530271fd34a7e0fc976a009f9"
+    "sha256": "fd1363830c95f267ffe97629e4fed8e4ab39abe2813722929f58f3ab453b3482"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "91c675759b4e5af412dd4315592be1a94460e0da2fe703f685df902c26f5cc29",
+      "sha256": "ee67e871d646f424e7ad7ac587af5b4c291b979e64259f0021f239a671727d9c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "portia",
         "displayName": "Portia",
         "publicBase": "/scenes/portia/",
-        "distanceAu": 19.19,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Uranus-system ephemeris; IAU/WGCCRE Portia pole and prime meridian from PCK712."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "786430c1966ea97ae27f7ebb1bc50f5d038f4070436ceaab1ae12bcdd2c6f99c",
+      "sha256": "237e1ffc0661cd240ac8da03aaf19ab06ed4d94f08073e01d839c1ebc101e597",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,12 +174,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -209,12 +196,6 @@
             "role": "observations",
             "description": "Voyager source inventory",
             "href": "https://pds-rings.seti.org/voyager/iss/"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -270,7 +251,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,7 +286,7 @@
       "sha256": "4d7d73d3c6b92bd7105e11a2737d3de21a4e12fa32e807d03ed4c719d0510bef",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -322,10 +303,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "786430c1966ea97ae27f7ebb1bc50f5d038f4070436ceaab1ae12bcdd2c6f99c",
-      "bytes": 3172,
+      "sha256": "237e1ffc0661cd240ac8da03aaf19ab06ed4d94f08073e01d839c1ebc101e597",
+      "bytes": 2893,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -361,13 +342,13 @@
           "url": "/scenes/portia/portia-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/portia/portia-model-surface@2x.webp",
           "bytes": 56192,
           "sha256": "84252a62810d7cdb0bf89e974455f881ea10319833cc8ebddc213a958a95ecf3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -390,8 +371,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4741,
-          "sha256": "fc2d645b73de058a9741d4b99ed52db44fd77f86a2785e17303f41872614ce5b",
+          "bytes": 4622,
+          "sha256": "eb7117d8ef6cd4ca9b9efd8933593d745a864c3097c4f21be5f754d5336b2c28",
           "verification": "bytes-verified"
         }
       ],

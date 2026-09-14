@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "thyra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "86ff007c640afc1e3b54717a16557da84e303bd9f937f94d75c775a4ee250f5d"
+    "sha256": "be2749eb2aa22905305a0b1404e87470d979e1dfc4253c01f05b453b218a25d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bfba8ad0ef6ef71897a24c3bd2ab5970baaf975b21d6ce1b603cbacbd2741900",
+      "sha256": "718c3206696cbd65b332c040b3dbd18476afdf42ff77fc85c882af278e7455a1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "thyra",
         "displayName": "Thyra",
         "publicBase": "/scenes/thyra/",
-        "distanceAu": 2.379742056440902,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 154 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9ba4f2a2826bdee0020b128e876eb0b70ea41a6006b7d9d7e8decec5622b62a2",
+      "sha256": "179ad22c6309bf92adb12f402e6008d051874427e66194869b42f018beaf6e9f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/154"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "d3e017daf4e6a4b91d1854af583a2e128397c945dc62d2c384b8420bf8094a2f",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9ba4f2a2826bdee0020b128e876eb0b70ea41a6006b7d9d7e8decec5622b62a2",
-      "bytes": 8341,
+      "sha256": "179ad22c6309bf92adb12f402e6008d051874427e66194869b42f018beaf6e9f",
+      "bytes": 8062,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/thyra/thyra-elevation-thumbnail.webp",
           "bytes": 5310,
           "sha256": "ec55cabe72eff16017447ae253c036490ca046a24c62a491041ea41c9f3e815a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thyra/thyra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thyra/thyra-elevation-surface@2x.webp",
           "bytes": 259376,
           "sha256": "7d130bcf7796c588869aa26430bb1aa505de11ed076b59d416525abcb209b8e5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/thyra/thyra-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thyra/thyra-shape-surface@2x.webp",
           "bytes": 227008,
           "sha256": "4bd5780c871f506ba6c24b9cb730c0af4da40c71114929976e0c7b09d4342f5c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5728,
-          "sha256": "a17dd474f1c37824aa8ee79738b7a62df019df4af02a118f4a7ff4aa1f7ab13d",
+          "bytes": 5609,
+          "sha256": "10cbb8acc14b1960233e833909a1e14c655e4f2f9d60be986f590ab7f95ced4b",
           "verification": "bytes-verified"
         }
       ],

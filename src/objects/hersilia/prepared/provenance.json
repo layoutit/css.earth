@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hersilia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a35ddbb224b21fd9a0bc67c68c5152119e2251b9756d90b2c43a41ae10d29d3"
+    "sha256": "eb26a219c06da07b96a0c8d6ff12406ba16ddd663dba4c22201a4ae2b92e5e2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "17d7145e184ead52a00a7968a91638a29637386d4e0a0f9cbe305b708412ecb5",
+      "sha256": "9fadae51a6173a8919734d38935185a586538465d130453d55892396da28fcad",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hersilia",
         "displayName": "Hersilia",
         "publicBase": "/scenes/hersilia/",
-        "distanceAu": 2.741003699475706,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 3217 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "89493c10c1caee054389265e8462bf3effa5a521e31a3aa7e5e863de4a02c97b",
+      "sha256": "9dc24252ea3405488fb9d188990a0acd3ab8d2e10e133357b7629a677ed42e45",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3217"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "8e2c5f76b6378e942e105825b60568612becb8902a67d2c7c4dfc34d92b31b2f",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "89493c10c1caee054389265e8462bf3effa5a521e31a3aa7e5e863de4a02c97b",
-      "bytes": 9676,
+      "sha256": "9dc24252ea3405488fb9d188990a0acd3ab8d2e10e133357b7629a677ed42e45",
+      "bytes": 9397,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/hersilia/hersilia-elevation-thumbnail.webp",
           "bytes": 5608,
           "sha256": "c902259a675829b40098723e593f847013445d2e17e0ec38f1358130c033e092",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hersilia/hersilia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hersilia/hersilia-elevation-surface@2x.webp",
           "bytes": 265880,
           "sha256": "3f5e4821382fab8b91d74611c06c286cc0c0d102c678bb93b7eb867c96d53a04",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/hersilia/hersilia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hersilia/hersilia-shape-surface@2x.webp",
           "bytes": 256840,
           "sha256": "189fbb35c2691dbe13e667cd8caba86927fc96dc5fc5225987ffdf9b1bbd444b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7015,
-          "sha256": "08489c532c73bfce285e666e790c7d5f43c2fe0dffecf4835a8fcac48e707eb0",
+          "bytes": 6896,
+          "sha256": "0aa2d008c2b1bb8af44160dcfc79634c2ca6735a677104c81aa1d9bc3f730f63",
           "verification": "bytes-verified"
         }
       ],

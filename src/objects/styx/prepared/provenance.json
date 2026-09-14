@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "styx",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "44a53b4c06b0cf63abae62f0c81298552b881c3c36c4e801c61e4235362e7ac7"
+    "sha256": "b4e685cdb8f4971fd12ac82ec769e9b3d9b8f229d1e44228e54fdaba3d0ebf02"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d09f4e9f3840bf5fedc1da1e5669eab5c9e034132005bf0e845a0bb87acdffc9",
+      "sha256": "fad8ff43dc913035c2589f1fef8d3cb47af42e935e2807e4ff126996d26e491a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "styx",
         "displayName": "Styx",
         "publicBase": "/scenes/styx/",
-        "distanceAu": 39.48,
         "raster": {
           "width": 512,
           "height": 256,
@@ -96,20 +95,14 @@
           "sunSource": "JPL Pluto-system ephemeris; historical Weaver2016 spin pole used as a static display orientation, since the 2025 study finds no unique pole solution."
         },
         "presentation": {
-          "defaultLens": "model",
-          "pointColor": [
-            160,
-            160,
-            160
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "model"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c04c62da569d3c69c1bf7c01eee18192f3889c2f1faea7a7bac77160fd3a7b5a",
+      "sha256": "20fdfcfea33b351c9777ec9a1b6af641faf4511e07342e6d19f5465b611c4d06",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,12 +174,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -209,12 +196,6 @@
             "role": "observations",
             "description": "New Horizons calibrated LORRI archive",
             "href": "https://pds-smallbodies.astro.umd.edu/data_sb/missions/newhorizons/index.shtml"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -270,7 +251,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,7 +286,7 @@
       "sha256": "7451d881aa65e2765a9fdadef697b10828796af9af7da5df09fbe19bd0c70542",
       "bytes": 13444,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -322,10 +303,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c04c62da569d3c69c1bf7c01eee18192f3889c2f1faea7a7bac77160fd3a7b5a",
-      "bytes": 3351,
+      "sha256": "20fdfcfea33b351c9777ec9a1b6af641faf4511e07342e6d19f5465b611c4d06",
+      "bytes": 3072,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -361,13 +342,13 @@
           "url": "/scenes/styx/styx-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/styx/styx-model-surface@2x.webp",
           "bytes": 50252,
           "sha256": "2fb5d3a0dfdcc73da8052a16625ec478121ad5a2f1edffcf44b2fb7909f2b344",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -390,8 +371,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4021,
-          "sha256": "234fe7224bcd50901618157dce597b2157d0087ff5c94548c03fd1c9e4dc6ec3",
+          "bytes": 3902,
+          "sha256": "a04a045f97e2624acb4d8c16d408992eea0fcaa22ba80d38566d0f92a64b5853",
           "verification": "bytes-verified"
         }
       ],

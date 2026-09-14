@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "hidalgo",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d4d5436953873c450042095df7741418b9837dd0015fa965a53bc48e5f1af3e"
+    "sha256": "a7e01886b311a55016c058cf01a580f6b3601cc1092e90e11cb434e6d4a8138d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "33e3c2744279f87b6f1c064425f45019cc96c5a038df2d1c5f3748454d53bd2b",
+      "sha256": "848e63bc509f04d84152da31ebf049f12935838d23b6e0159d66e93e811ff56f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "hidalgo",
         "displayName": "Hidalgo",
         "publicBase": "/scenes/hidalgo/",
-        "distanceAu": 5.728989790748572,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ee4b5445cd1b6e8f2af3fa782d788b0926328c1991dff6716da2bcde0e3d2577",
+      "sha256": "0e5f2e38ddcf653a791df21b143e80b302f1b6c719088d7e41da9ec1641fedab",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,12 +260,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -295,12 +282,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1057"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -352,7 +333,7 @@
       "sha256": "8dcf880fd622ce2d704c95bae87e662a63ae63c5a92d4649ff232341222e4f00",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,7 +347,7 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "ee4b5445cd1b6e8f2af3fa782d788b0926328c1991dff6716da2bcde0e3d2577",
+      "sha256": "0e5f2e38ddcf653a791df21b143e80b302f1b6c719088d7e41da9ec1641fedab",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -378,9 +359,9 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8867,
+      "bytes": 8588,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -411,19 +392,19 @@
           "url": "/scenes/hidalgo/hidalgo-elevation-thumbnail.webp",
           "bytes": 4836,
           "sha256": "0807dbc0e8b8b76c79521cd974a899980767f6b993b811af3acabd9ba77801c7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hidalgo/hidalgo-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hidalgo/hidalgo-elevation-surface@2x.webp",
           "bytes": 294198,
           "sha256": "e83b7ca6d0b0c5094b720b140e4b4049f4ab2583fa0d7a027df2f7299a857c1a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -453,13 +434,13 @@
           "url": "/scenes/hidalgo/hidalgo-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hidalgo/hidalgo-shape-surface@2x.webp",
           "bytes": 173796,
           "sha256": "7e2f47ac04711c93f7cf2fce0b96e1a9425e546d6f2750848d866e36e343dbc4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -482,8 +463,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6204,
-          "sha256": "b3ec1ad6661768ff91693f7e13a4f1523f59be3c90e56c3ab9b04805523d140a",
+          "bytes": 6085,
+          "sha256": "8f0fec4bd9eefe3429e5a6817882a9dbea823dec60fd8e91f95f023d9eff3259",
           "verification": "bytes-verified"
         }
       ],

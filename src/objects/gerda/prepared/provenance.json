@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "gerda",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "404a28f494497242e8d150f3c4dc25a8bda31cee88bcccb20952c40c3207088f"
+    "sha256": "c356a85c83e9b5437548838c41c7592497a911488a78e3373fab14cead160eed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "58bc36a84942f868435d79f20f765596e7d33c9f94dbe13fe2ab48aa6ef282a4",
+      "sha256": "a9fee671b37ca1d0bc8ed1161dc622584c7abb6647b47cd503f3e120d91e702f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "gerda",
         "displayName": "Gerda",
         "publicBase": "/scenes/gerda/",
-        "distanceAu": 3.2256949669977946,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 968 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bda133f928abe69bac38535b23dc920b2d4acb9d327d5af000517cffa88f7349",
+      "sha256": "f1b38494ef4993788d46f65e0a49d1c20d209c4d6ea8ce9026008f8695798647",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/968"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "d0b4a2670b3b5be50f4ea2a72901937964545ef598a904c82ba6b06d2e4c37cc",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bda133f928abe69bac38535b23dc920b2d4acb9d327d5af000517cffa88f7349",
-      "bytes": 9654,
+      "sha256": "f1b38494ef4993788d46f65e0a49d1c20d209c4d6ea8ce9026008f8695798647",
+      "bytes": 9375,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/gerda/gerda-elevation-thumbnail.webp",
           "bytes": 5422,
           "sha256": "17d61188526d40ef2dd7f7720b54dfd155057475e145e8aeded3d413cc570c13",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gerda/gerda-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gerda/gerda-elevation-surface@2x.webp",
           "bytes": 268992,
           "sha256": "573fac41966f8c8fe3a28d9933136a25ddb8d3e2386c0b5883ba3c8010f1e996",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/gerda/gerda-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gerda/gerda-shape-surface@2x.webp",
           "bytes": 244562,
           "sha256": "bde5f4e5db985d70d986593a12a38e524ed5a8ab3c74f80807d844bd1083a4c2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7031,
-          "sha256": "5b6b59e81a1a30c8a92f242dc91b4967f27fb683a9356c6f2fd8f87a5d295b3f",
+          "bytes": 6912,
+          "sha256": "90e298a7dce428c4b95150e66bb5ac7bb9bd86d5878bb6a6003aeefa8991dd37",
           "verification": "bytes-verified"
         }
       ],

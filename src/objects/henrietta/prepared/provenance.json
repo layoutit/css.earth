@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "henrietta",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2f23b8ab542c670bcc1db4808b081ebe6ee324efe1a4719399013e58b8486537"
+    "sha256": "bd974860a04cfd46fdeaddde22b6e69405d99ec9a9546e070c981761e587d4c9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b256e91ca5ee90db54e09f737aeebcbc6788a4dea358c092661a58716db6df80",
+      "sha256": "8a9a8f094283f7813e976844f74a19c58db4b88819ea7d5f87b53bc11e5c3d6f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "henrietta",
         "displayName": "Henrietta",
         "publicBase": "/scenes/henrietta/",
-        "distanceAu": 3.397844277767737,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 4859 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d5f2ded7e346881102a7111834244ea1974b705cb0b87de2318e0f8747f3e05c",
+      "sha256": "cda097b3e1e1037a68266b537821915f8c8f95141e09c4474a557bfcfbc3fbdd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4859"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "02061f1763d9d4005b8cf226e8abace734b5796a9ee5d651bf1e767ce8ab04f3",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d5f2ded7e346881102a7111834244ea1974b705cb0b87de2318e0f8747f3e05c",
-      "bytes": 10366,
+      "sha256": "cda097b3e1e1037a68266b537821915f8c8f95141e09c4474a557bfcfbc3fbdd",
+      "bytes": 10087,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/henrietta/henrietta-elevation-thumbnail.webp",
           "bytes": 5068,
           "sha256": "6df974f6d175ac54457361b380b6a1c0ad536b0db6b8014a7275b29c9fa55c69",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/henrietta/henrietta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/henrietta/henrietta-elevation-surface@2x.webp",
           "bytes": 266334,
           "sha256": "2a959cbb4ee66f1d079b158e5afdeada835af8f56fa2503182cfb95a85151630",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/henrietta/henrietta-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/henrietta/henrietta-shape-surface@2x.webp",
           "bytes": 201198,
           "sha256": "bbc03fc7e02c04f656b6750594ffbac2ee2de1cc161ad32ac492603225ed6678",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7693,
-          "sha256": "890ab9b33db590c93f845e4d28a5a964c608b6dd280499b002151441a143d86a",
+          "bytes": 7574,
+          "sha256": "63d59f0569813dfce37d1dd1600eefa71e278d852fb2637fe4dfdfa937ce09bf",
           "verification": "bytes-verified"
         }
       ],

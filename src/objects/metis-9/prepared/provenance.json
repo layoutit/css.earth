@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "metis-9",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f7dd6c2fb305cd430051eeef2dfbcd5d56607aa2125225b56d1e82964eaff3be"
+    "sha256": "f1649483f8385df23ad6e40f0b62590b7e83e4591e6bb3c74379db93c866cff0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7684aad1b74d5032e34b102cbbfbd38e29a8a8024f6944ad64ebb21295028c46",
+      "sha256": "6652dbe3cc913c6f67ca2d029dd4e4b87b482ee3a51a9f3dc4acf791d863f8df",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "metis-9",
         "displayName": "9 Metis",
         "publicBase": "/scenes/metis-9/",
-        "distanceAu": 2.3865357120605415,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -130,20 +129,14 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "987a8c1d625af683e1eb5ffe74d77bb301865cf733cd197fb937589d6ca29edf",
+      "sha256": "b2247efcf8c8dda8ee18f2171483bd22c56e6da93a3d0140f30ff345d96d2e16",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,12 +238,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -273,12 +260,6 @@
             "role": "rotation",
             "description": "Observed pole and period; arbitrary display phase",
             "href": "https://doi.org/10.1051/0004-6361/202141781"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -339,7 +320,7 @@
       "sha256": "e53e042ecbcf006f31aa24746026265c2a99f43b034fd0156a7e6f0cad34e875",
       "bytes": 355579,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,10 +348,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "987a8c1d625af683e1eb5ffe74d77bb301865cf733cd197fb937589d6ca29edf",
-      "bytes": 7627,
+      "sha256": "b2247efcf8c8dda8ee18f2171483bd22c56e6da93a3d0140f30ff345d96d2e16",
+      "bytes": 7348,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -401,19 +382,19 @@
           "url": "/scenes/metis-9/metis-9-elevation-thumbnail.webp",
           "bytes": 5514,
           "sha256": "1ff8995ddebaadff81ef88bc2886dc766877d4d459e96dcbfb76c3441c140a72",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis-9/metis-9-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis-9/metis-9-elevation-surface@2x.webp",
           "bytes": 344396,
           "sha256": "772efcb054ff9aee4ff72bb1fef8f893f611ab056b614b1555c3d23d0460cd9c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -443,13 +424,13 @@
           "url": "/scenes/metis-9/metis-9-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis-9/metis-9-shape-surface@2x.webp",
           "bytes": 217836,
           "sha256": "9606a5032611eba4feeda5d02789e031053821961143cb9c8a05b8bc6daf4950",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -472,8 +453,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5450,
-          "sha256": "90beb687d9f0323ed921419c49bc404f0e70e9c06252f87f0be53e2d2d25addb",
+          "bytes": 5331,
+          "sha256": "62e515f08623f23c3dc9d43e43a4cde58ccd4b48a65f4c2a0b9fd2036e6df74d",
           "verification": "bytes-verified"
         }
       ],

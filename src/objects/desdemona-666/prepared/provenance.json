@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "desdemona-666",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9ab3690719bc5db7b17cdd7c83555290689b6f3dfb51ee123a29e911040ca908"
+    "sha256": "6654b2811f5d96fdb387211ffe577c382c044005b93cea55932d2ac7baaec0a4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "34fdb9949dd10ca609a454f2044efae9937386720383d69b7b4b9114652edb7e",
+      "sha256": "eaf924dcf6202a925eea47483f275047ba3724b02a4ae2ad18d73d579e8237e9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "desdemona-666",
         "displayName": "666 Desdemona",
         "publicBase": "/scenes/desdemona-666/",
-        "distanceAu": 2.594914886847624,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -132,20 +131,14 @@
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 6218 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c6123cdf07cc23524ee8664923e0073a7d9c957e772761f6ba4b359a055ed6df",
+      "sha256": "82b8da364202b7ece4632bf20a7ff4dfc561e22cfdcd3740fb45fb5afb63a95d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,12 +240,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -275,12 +262,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6218"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -331,7 +312,7 @@
       "sha256": "991cb9699f0cfeacb5f8304d276bd87c6fa9b28d6bdc5322f17b5286618131b0",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +337,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c6123cdf07cc23524ee8664923e0073a7d9c957e772761f6ba4b359a055ed6df",
-      "bytes": 13179,
+      "sha256": "82b8da364202b7ece4632bf20a7ff4dfc561e22cfdcd3740fb45fb5afb63a95d",
+      "bytes": 12900,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -390,19 +371,19 @@
           "url": "/scenes/desdemona-666/desdemona-666-elevation-thumbnail.webp",
           "bytes": 5012,
           "sha256": "009a7848f6b530a3ef43d1214d0c75f875c5d1dbe81027b8a3bc8a7b0a7bac72",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/desdemona-666/desdemona-666-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/desdemona-666/desdemona-666-elevation-surface@2x.webp",
           "bytes": 308728,
           "sha256": "2933c6e977cde9ff043d4cc34a6d7b9d16cc15c9b3d94e1385ff65587ef5b2e9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -432,13 +413,13 @@
           "url": "/scenes/desdemona-666/desdemona-666-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/desdemona-666/desdemona-666-shape-surface@2x.webp",
           "bytes": 243930,
           "sha256": "22b064b6922694068acff5148c171e1fbc0eebdd84bb8f092b7c8610d0567525",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -461,8 +442,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10923,
-          "sha256": "1de77080dcebe5d53f7b47a1c6e6b9dcf7ba898cc53df2e4d09bb7d4228a4acd",
+          "bytes": 10804,
+          "sha256": "8fd50a0d94807bf9bddddfb4146520b3c6dac41054cfd9c721c42a1294fae2df",
           "verification": "bytes-verified"
         }
       ],

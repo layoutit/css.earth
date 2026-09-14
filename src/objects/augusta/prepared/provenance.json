@@ -1,28 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "augusta",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b189c1d50e9cdb04109415bd03f0bca1ff605775ee7cbdfe0480105c3ecd7b53"
+    "sha256": "ea90ca81c7063970691c98a0883ba876dab792670b622d2a52cf0b97a5168531"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
+    "sha256": "ccadf475074ea60ea7b2bb42a027989b182bbb3f208d5e3ef4276d3c9a993279",
     "bindingsSha256": "c684d063c0625b33b88487b9cbd518c0135c6bde9399a33fc00a645d9dfb14c4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8effb67c93573184b3ff08344c7510c0e7e9da1d6719639ce65caed5379e0ace",
+      "sha256": "78b015eb3ffe09738276efebef235d31b09d49154a2895180366ae6164fc413b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
         "namespace": "augusta",
         "displayName": "Augusta",
         "publicBase": "/scenes/augusta/",
-        "distanceAu": 2.194929996448645,
         "raster": {
           "width": 4096,
           "height": 2048,
@@ -136,20 +135,14 @@
           "sunSource": "DAMIT model 845 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
         },
         "presentation": {
-          "defaultLens": "shape",
-          "pointColor": [
-            170,
-            170,
-            170
-          ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "defaultLens": "shape"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b3185ad29a88e44830d8ca17a20504fa5f885545edf470fd892460a30ccfd7ad",
+      "sha256": "d306763e5a3d2b7a1812a10d0ee6147dc3181dd30a3a47c4b01816db670adeb9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,12 +258,6 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
-            },
-            {
-              "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
-              "checked": true
             }
           ]
         },
@@ -293,12 +280,6 @@
             "role": "rotation",
             "description": "Published pole and period; arbitrary display phase",
             "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/845"
-          },
-          {
-            "label": "ESO",
-            "role": "stars",
-            "description": "Milky Way panorama",
-            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -367,7 +348,7 @@
       "sha256": "e0158056d0fcd78655afea95b3e0bff52c8430f45bd2c6c6b5efc1fdff30d188",
       "bytes": 82060,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -392,10 +373,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b3185ad29a88e44830d8ca17a20504fa5f885545edf470fd892460a30ccfd7ad",
-      "bytes": 10265,
+      "sha256": "d306763e5a3d2b7a1812a10d0ee6147dc3181dd30a3a47c4b01816db670adeb9",
+      "bytes": 9986,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -426,19 +407,19 @@
           "url": "/scenes/augusta/augusta-elevation-thumbnail.webp",
           "bytes": 5376,
           "sha256": "c85d48b3f7edcf5706e5288c0a344fa50209de64b4155c464ad96ddf59463143",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/augusta/augusta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/augusta/augusta-elevation-surface@2x.webp",
           "bytes": 282346,
           "sha256": "7c64444c6977a000a958786b9d0ddb855c3841b1ff1b9269279e8314c4611a16",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -468,13 +449,13 @@
           "url": "/scenes/augusta/augusta-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/augusta/augusta-shape-surface@2x.webp",
           "bytes": 230450,
           "sha256": "024dafb58e1a669b74d2076412c000ce40273136b6e7c6e6c7da6cbd03f71fa9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,8 +478,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7623,
-          "sha256": "9c0af8bc82b098c02ddf3f65b22f8a9d5bffd4f99d6c66f448555000e414d139",
+          "bytes": 7504,
+          "sha256": "23123a2842ff832b61ea185526d2871514a6ca3ff781111e5e9775a3c404f717",
           "verification": "bytes-verified"
         }
       ],
