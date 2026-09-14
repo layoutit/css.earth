@@ -1,7 +1,7 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parsePreparedGalaxyCatalog } from '@cssearth/catalog';
+import { parsePreparedGalaxyCatalog, spatialPublicationId } from '@cssearth/catalog';
 import { parseGalaxyRecipe, record, text } from '../../src/preparation/galaxy-catalog/config.js';
 import { prepareGalaxyCatalog } from '../../src/preparation/galaxy-catalog/prepare.js';
 import { parseGalaxyCsv, parseMembershipTable, readAuthorMetadata } from '../../src/preparation/galaxy-catalog/source.js';
@@ -23,7 +23,7 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     const references = path.endsWith('.bib') ? [...readBibliography(bytes.toString('utf8')).values()] : s.references;
     if (references !== undefined && !Array.isArray(references)) throw new TypeError('Source references must be an array.');
     sources.push({ id: text(s.id, 'Source id'), path, sha256: hash, bytes: bytes.length, url: text(s.url, 'Source URL'), citation: text(s.citation, 'Source citation'),
-      ...(references ? { references: references.map(value => { const r = record(value, 'Source reference'); return { id: text(r.id, 'Reference id'), url: text(r.url, 'Reference URL'), citation: text(r.citation, 'Reference citation') }; }) } : {}) });
+      ...(references ? { references: references.map(value => { const r = record(value, 'Source reference'); return { id: text(r.id, 'Reference id'), catalogueId: spatialPublicationId(text(r.id, 'Reference id')), url: text(r.url, 'Reference URL'), citation: text(r.citation, 'Reference citation') }; }) } : {}) });
   }
   const read = async (pin: { path: string; sha256: string; bytes: number }) => {
     const bytes = await verifiedBytes(sourceDirectory, pin);

@@ -1,3 +1,5 @@
+import { preparationEvidenceApplies, recordPreparationEvidence } from './preparation-evidence.mts';
+import { productInputRoles } from '../src/platform/product-input-evidence.mts';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
@@ -304,4 +306,40 @@ test('Mercury coverage completion binds all three maps; previews retain their pa
   assert.deepEqual(new Set(productSourceIds(document, 'preview:enhanced')), new Set(enhanced.inputs));
   assert.ok(document.sources.some(source => source.path === 'spectrum/mascs-global-area-weighted-mean.json'));
   assert.ok(!document.sources.some(source => /stars\/|maps\/globe.asset|psg.*rif/iu.test(source.path)));
+});
+
+
+test('metadata recovery preserves the last verified preparation and checks its material applicability', async t => {
+  const context = await fixture(t), prepared = await prepareObjectProvenance({ ...context, write: true });
+  assert.ok(prepared.lastPreparation);
+  assert.equal(preparationEvidenceApplies(prepared), true);
+  const recovered = await prepareObjectProvenance({ ...context, basis: 'recovered' });
+  assert.deepEqual(recovered.lastPreparation, prepared.lastPreparation);
+  assert.equal(recovered.basis, 'recovered');
+  const metadata = { ...recovered, generator: { ...recovered.generator, sha256: 'a'.repeat(64) } };
+  assert.equal(preparationEvidenceApplies(metadata), true, 'lineage compiler changes do not erase byte evidence');
+  const changed = structuredClone(metadata);
+  Reflect.set(changed.products[0]!.outputs[0]!, 'sha256', '0'.repeat(64));
+  assert.equal(preparationEvidenceApplies(changed), false, 'old evidence cannot certify different material');
+  assert.deepEqual(changed.lastPreparation, prepared.lastPreparation, 'the old evidence remains inspectable');
+  assert.throws(() => recordPreparationEvidence(recovered), /byte-verified preparation/);
+  assert.throws(() => validateObjectProvenance({ ...prepared, lastPreparation: { ...prepared.lastPreparation, objectId: 'another' } }), /different object/);
+});
+
+test('input roles follow recipe consumption and leave unclassified dependencies unknown', async t => {
+  const document = await prepareObjectProvenance(await fixture(t));
+  assert.deepEqual(productInputRoles(document, 'surface').get('observation'), ['appearance']);
+  const surface = document.products.find(p => p.id === 'surface')!;
+  const unknown = { ...document, products: document.products.map(p => ({ ...p, inputEvidence: undefined })) };
+  assert.deepEqual(productInputRoles(unknown, 'surface').get('observation'), ['unknown']);
+  assert.throws(() => validateObjectProvenance({ ...document, products: [{ ...surface, inputEvidence: [{ sourceId: 'not-consumed', role: 'geometry', evidence: 'Invalid link' }] }] }), /consumed input/);
+});
+
+
+test('Gaspra separates its photographic appearance from the source shape in the same product', async () => {
+  const document = validateObjectProvenance(await read('src/objects/gaspra/prepared/provenance.json'));
+  const roles = productInputRoles(document, 'normal');
+  assert.deepEqual(roles.get('gaspra-normal'), ['appearance']);
+  assert.deepEqual(roles.get('gaspra-shape'), ['geometry']);
+  assert.deepEqual(productInputRoles(document, 'preview:normal'), roles);
 });

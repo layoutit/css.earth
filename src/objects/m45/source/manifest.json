@@ -33,7 +33,15 @@
             "machineId": "wiyn-0-9m",
             "evidence": "https://noirlab.edu/public/images/noao-m45/ — NOIRLab-curated mirror https://www.astropix.org/image/noirlab/noao-m45 identifies Mosaic on the WIYN 0.9-metre telescope"
           }
-        ]
+        ],
+        "observation": {
+          "id": "noao-m45",
+          "target": "Pleiades",
+          "observedAt": null,
+          "instrument": null,
+          "bands": "Optical B 436 nm / V 537 nm / I 805 nm",
+          "evidence": "labs/nebula/models/m45/processing-observations.json#/images/0; exposure date and instrument are not specified in that pinned record."
+        }
       }
     },
     {

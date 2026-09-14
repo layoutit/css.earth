@@ -93,5 +93,20 @@ export function prepareGalaxyCatalog(rows: readonly CsvRow[], metadata: Readonly
   for (const id of [...Object.keys(recipe.distanceOverrides), ...Object.keys(recipe.detailObjects)]) if (!seen.has(id)) throw new TypeError(`Authored override refers to an absent source row: ${id}`);
   objects.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
   exclusions.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
-  return { schema: 'cssearth-galaxy-catalog@1', frame: recipe.frame, sources, objects, exclusions, selection: { description: recipe.description } };
+  const positioned = new Set(objects.map(row => row.id));
+  const pending = objects.flatMap(row => row.hostId && !positioned.has(row.hostId) ? [row.hostId] : []);
+  const unpositionedHosts: NonNullable<PreparedGalaxyCatalog['unpositionedHosts']>[number][] = [];
+  const included = new Set<string>();
+  for (const id of pending) {
+    if (included.has(id)) continue;
+    included.add(id);
+    const source = rows.find(row => row.key === id), author = metadata.get(id);
+    const reason = exclusions.find(row => row.id === id)?.reason;
+    if (!source?.name || !author || !reason) throw new TypeError(`Physical host has no source identity: ${id}`);
+    const hostId = source.host || undefined;
+    unpositionedHosts.push({ id, name: source.name, sourceRef: `${recipe.catalogueSourceId}:${id}:name_discovery`, reason, ...(hostId ? { hostId } : {}) });
+    if (hostId && !positioned.has(hostId)) pending.push(hostId);
+  }
+  unpositionedHosts.sort((a, b) => a.id.localeCompare(b.id));
+  return { schema: 'cssearth-galaxy-catalog@1', unpositionedHosts, frame: recipe.frame, sources, objects, exclusions, selection: { description: recipe.description } };
 }

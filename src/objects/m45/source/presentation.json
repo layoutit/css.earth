@@ -242,5 +242,12 @@
       "sha256": "2237970cf3a72f09ad43ea694a6cc40a4f8b0a692986f6d5b9eb20106ebb84fa",
       "bytes": 1320
     }
+  ],
+  "inputEvidence": [
+    {
+      "sourceId": "distance",
+      "role": "placement",
+      "evidence": "source/nebula.json#/objects/0/distance: the cluster distance locates the shared reflection-nebula scene."
+    }
   ]
 }
