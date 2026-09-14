@@ -8,6 +8,13 @@ const read = async (id: string) => JSON.parse(await readFile(new URL(`../../../s
 test('authored scientific body profiles dispatch without body-named executable recipes',async()=>{
  for(const id of ['dimorphos','bennu','vesta','ryugu','itokawa','eros'])assert.equal(parseTerrestrialProfile(await read(id)).namespace,id);
 });
+test('the ten-frame AMICA consumer remains bounded and rejects an eleventh frame', async () => {
+ const profile = await read('itokawa');
+ assert.doesNotThrow(() => parseTerrestrialProfile(profile));
+ const recipe = profile.raster.surfaceObservations[0];
+ recipe.frames.push({ ...recipe.frames[0], id: 'extra-frame' });
+ assert.throws(() => parseTerrestrialProfile(profile), /source-bound/);
+});
 test('observation recipes reject ambiguous masks and fallback ordering',async()=>{
  const profile=await read('tethys');
  profile.raster.observations[0].validity.zeroValidity='dark';
