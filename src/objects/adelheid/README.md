@@ -46,21 +46,7 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 
 <a id="source-survey"></a>
 
-<details>
-<summary>Source survey</summary>
-
-[Model fields and mesh measurements](source/reference/damit-model.json).
-
-- [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/189) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/540/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
-- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [A. Marciniak (2007), Photometry and models of selected main belt asteroids. IV. 184 Dejopeja, 276 Adelheid, 556 Phyllis](https://ui.adsabs.harvard.edu/abs/2007A%26A...473..633M) — original model publication record.
-- [Ďurech et al. (2011), Combining asteroid models derived by lightcurve inversion with asteroidal occultation silhouettes](https://ui.adsabs.harvard.edu/abs/2011Icar..214..652D) — original model publication record.
-- [Hanuš et al. (2013), Sizes of main-belt asteroids by combining shape models and Keck Adaptive Optics observations](https://ui.adsabs.harvard.edu/abs/2013Icar..226.1045H) — original model publication record.
-- [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 135.3 ± 2.09 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
-- [Hanuš et al. (2013), Icarus 226, 1045–1057](https://arxiv.org/pdf/1308.0446) — retained primary publication; see the body-specific selection and calibration above.
-- [Ďurech et al. (2011), Icarus 214, 652–670](https://arxiv.org/pdf/1104.4227) — retained primary publication; see the body-specific selection and calibration above.
-
-</details>
+The [investigation ledger](investigations.json) records the source survey and alternative models.
 
 <a id="preparation-and-qualification"></a>
 

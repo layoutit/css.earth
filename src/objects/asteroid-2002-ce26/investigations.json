@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "asteroid-2002-ce26",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "Geometry is the unchanged [ce26.obj](https://echo.jpl.nasa.gov/asteroids/shapes/ce26.obj) from the [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html). Its source study is [Shepard et al. (2006), Icarus 184, 198–210](https://echo.jpl.nasa.gov/asteroids/2002CE26/shepard.etal.2006.2002ce26.pdf), using 2004 Arecibo radar, optical light curves and NASA IRTF observations. Shape uses the shared missing-imagery grid. Elevation is radius minus the documented reference sphere, derived from the same radar inverse model; it is not independent topography, optical albedo or height above a gravitational equipotential. Cartographic relief is a prepared display treatment. Shadows are off by default. Optional directional shading and the grid are existing shared rendering treatments, not measured surface appearance.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2002-ce26/README.md",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/ce26.obj",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
+        "https://echo.jpl.nasa.gov/asteroids/2002CE26/shepard.etal.2006.2002ce26.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "No calibrated registered optical mosaic, composition map or independent topographic raster was acquired in the bounded survey. Shape therefore uses the common grid and no generic regolith texture.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2002-ce26/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "context-references",
+      "subject": "Shepard study, JPL plan and Horizons context",
+      "status": "included",
+      "finding": "The original shape, Shepard study, JPL 2014 observing plan and Horizons responses are pinned. The 2018 Rozitis thermal study uses the Shepard shape rather than supplying a replacement numerical mesh.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2002-ce26/README.md",
+        "https://echo.jpl.nasa.gov/asteroids/2002CE26/2002CE26_planning.html",
+        "https://academic.oup.com/mnras/article/477/2/1782/4931778"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "integrated-data-as-map",
+      "subject": "Radar panels and integrated spectra as surface maps",
+      "status": "excluded",
+      "finding": "The paper’s delay-Doppler panels and light curves constrain the inverse model. Its spatially unresolved near-infrared spectra and later bulk thermal results are not an acquired spatial composition or optical map.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2002-ce26/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ],
+      "revisitWhen": "A spatially resolved product with source-frame registration and a defined measured quantity."
+    }
+  ]
+}

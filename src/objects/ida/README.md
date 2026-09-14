@@ -44,7 +44,7 @@ pixels alone do not qualify their projection onto this model.
 
 The Thomas mosaic is processed monochrome, with photographed shadows, local stretches and seams. Its exactly-zero gaps remain a grid. A conflicting PDS4 display-direction label is overridden by the north-up registration evidence below. Elevation is radius minus 16 km, not gravitational height.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="ida-source-record"></a>
 <a id="selected-release-and-interpretation"></a>
@@ -67,14 +67,7 @@ The Thomas mosaic is processed monochrome, with photographed shadows, local stre
 
 **Source survey (2026-09-07)**
 
-| Candidate | What it adds | Disposition |
-| --- | --- | --- |
-| Thomas shape + registered FITS mosaic, linked above | Coherent body frame, explicit gap semantics, original contributing-frame list | Included for shape, monochrome and radial elevation. |
-| [Stooke Small Bodies Maps V3.0 guide](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html), [2015 revised Ida JPEG](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/243ida/ida_cylindrical_rev_mosaic.jpg) | Larger 7200×3600 cylindrical visualization based on the Thomas shape; improved presentation, public domain with credit | Downloaded, pinned as a registration reference and visually compared. Excluded from the present lens because the extensively processed JPEG has no separate source-validity mask; its smoothed coarse areas and gaps cannot be assigned the FITS zero semantics. It is explicitly unsuitable for photometric analysis. The larger grid alone is not proof of additional measured detail. |
-| [Domingue calibrated SSI release](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-A-SSI-3-IDA-CALIMAGES-V1.0) | I/F images in seven filters and identified color sets | The selected green-filter pair is included as a separate I/F view, using the Thomas shape camera catalog and archived detector-quality masks described below. The archive’s nadir calibration workaround prevents its own geometry calculation. Multiband color remains deferred; these are not a ready global color mosaic. |
-| [USGS/RAND Ida control network](https://astrogeology.usgs.gov/search/map/ida_image_control_network) | Tie points, revised image orientations and source images | Useful future input for rebuilding calibrated image geometry; not an independent surface lens. Excluded from this prepared global package. |
-| [HIRES NIMS Ida spectral cubes](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-A-NIMS-4-IDACUBE-V1.0) | Spatially resolved infrared radiance in point-perspective geometry | Unresolved as a scientifically distinct view. Not a registered global texture; spectral selection and instrument-footprint reprojection need their own source-backed recipe. |
-| [Sullivan et al. geology](https://www.usgs.gov/publications/geology-243-ida) and [LPSC abstract](https://www.lpi.usra.edu/meetings/lpsc1995/pdf/1688.pdf) | Interpretations of craters, regolith and color units | Editorial background only. No verified registered machine-readable global geologic-unit release was identified in this concise survey; no painted geology lens or regions are fabricated. |
+See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
 
 **Image registration check**
 

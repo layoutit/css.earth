@@ -144,6 +144,9 @@ table or figure. A paper's availability does not establish image or data reuse
 rights; unresolved access remains unresolved evidence, not proof of absence.
 
 Read the object's investigation ledger (`investigations.json`) before searching.
+For an asteroid batch, use the [investigation guide](../../../docs/provenance/asteroid-investigations.md)
+and `node tools/report-investigations.mts --classification=asteroid --summary`
+to locate missing records and distinguish source opportunities from evidence gaps.
 Reopen an excluded, unresolved or deferred entry only when its `revisitWhen`
 condition is met, and say which. Record each examined source, route, lens or
 frame there once, including failed trials: status, finding, evidence pinned to a

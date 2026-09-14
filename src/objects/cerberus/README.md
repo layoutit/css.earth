@@ -22,7 +22,7 @@ Recorded four-body results retain their [original build identities](https://gith
 - The published thermophysical fit is poor and its diameter uncertainty is unconstrained; the missing error value does not mean zero uncertainty.
 - No registered reflectance texture is available. Grid marks missing imagery; Elevation is shape-derived radius relative to a sphere, not measured geology. Rotation phase is arbitrary.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 
 ## Methods
 

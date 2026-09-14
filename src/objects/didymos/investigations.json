@@ -1,0 +1,117 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "didymos",
+  "entries": [
+    {
+      "id": "recorded-survey-1",
+      "subject": "DART final Didymos v003 OBJ series",
+      "status": "included",
+      "finding": "[DART final Didymos v003 OBJ series](https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/) — Included. Direct original mesh, source labels and SIS; the 9.309 m release is adequate for the selected display budget. Higher nominal-resolution versions share the source accuracy/coverage limitations.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/didymos/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "Didymos relative-albedo facet table",
+      "status": "included",
+      "finding": "[Didymos relative-albedo facet table](https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml) — Included. The original FITS table names the exact selected OBJ. Its zero-based facet IDs match all 49,152 triangles; latitude, east longitude and radius reproduce their Cartesian centroids to 0.0001132 m maximum residual. The source field is sampled by the closest full-source triangle in 3D within the existing 8 m transfer bound. No albedo is interpolated across invalid facets.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/didymos/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "Derived topography, slope, gravity and tilt products",
+      "status": "deferred",
+      "finding": "The source release includes topography, slope, gravity and tilt fields. The earlier survey cited facet-table decoding as a prerequisite; the current relative-albedo view already uses facet correspondence. These additional quantities remain unqualified and depend on their own density, rotation and reference-surface assumptions. The current Elevation view uses a reference sphere.",
+      "revisitWhen": "A source-bound scalar recipe verifies this field’s units, assumptions, facet correspondence and invalid coverage on the selected mesh.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/didymos/README.md",
+        "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/document/dart_shapemodel_sis.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-4",
+      "subject": "DRACO calibrated image mosaic",
+      "status": "included",
+      "finding": "Two DRACO geometry cubes supply the registered partial-coverage mosaic. The native radius plane separates the bodies before camera fitting; the later partial image takes precedence where it qualifies. This does not qualify LUKE camera registration.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/didymos/README.md",
+        "https://pdssbn.astro.umd.edu/data_sb/missions/dart/index.shtml"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-5",
+      "subject": "NAIF DART global DSK",
+      "status": "excluded",
+      "finding": "[NAIF DART global DSK](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/dsk/) — Excluded duplicate geometry transport. The directly released OBJ already supplies the original indexed shape at an appropriate resolution without a DSK conversion dependency.",
+      "revisitWhen": "A changed source release adds independently useful geometry or metadata beyond the selected model; compare it before changing the displayed source.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/didymos/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-6",
+      "subject": "Mission PCK15",
+      "status": "excluded",
+      "finding": "[Mission PCK15](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/pck/didymos_system_15.tpc) — Pinned comparison reference; not substituted for the shape-specific pole or radius. It also documents the distinction between Dimorphos's pre-impact rotation and the post-impact dynamic frame.",
+      "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/didymos/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "luke-photography",
+      "subject": "LICIACube LUKE photographs",
+      "status": "deferred",
+      "finding": "The shape archive links LUKE inputs, but their own camera registration has not been qualified here. The accepted DRACO mosaic does not establish LUKE projection, RGB composition or unseen terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/didymos/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ],
+      "revisitWhen": "Bind the actual LUKE products and source-frame cameras and pass independent registration and quality checks before adding coverage."
+    }
+  ]
+}

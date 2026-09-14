@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "sylvia",
+  "entries": [
+    {
+      "id": "selected-shape",
+      "subject": "Shape",
+      "status": "included",
+      "finding": "[LAM `87_Sylvia_mpcd.obj`](https://observations.lam.fr/astero/3Dshape/87_Sylvia_mpcd.obj), [Vernazza et al. 2021](https://doi.org/10.1051/0004-6361/202141781). SPHERE-constrained reconstruction; original kilometer coordinates retained.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/sylvia/README.md",
+        "https://observations.lam.fr/astero/3Dshape/87_Sylvia_mpcd.obj",
+        "https://doi.org/10.1051/0004-6361/202141781"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-elevation",
+      "subject": "Elevation",
+      "status": "included",
+      "finding": "Radius minus 137 km, false color over −50 to +70 km; broad shape, not gravitational height.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/sylvia/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-position",
+      "subject": "Position",
+      "status": "included",
+      "finding": "Retained Sylvia vector at 3 September 2026 TT, shared with Romulus.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/sylvia/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

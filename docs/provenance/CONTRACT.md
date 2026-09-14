@@ -82,6 +82,11 @@ The README links the ledger instead of repeating a source survey. Read the
 ledger before investigating an object. Reopen an excluded, unresolved or
 deferred entry only when its `revisitWhen` condition is met, and say which.
 `node tools/report-investigations.mts` lists every open entry across objects.
+Use `--classification=asteroid --summary` for catalogue coverage, or filter
+decisions with `--status=deferred,unresolved --search=registration`. The
+[asteroid investigation guide](asteroid-investigations.md) explains the imported
+records, evidence gaps and candidate work. Counts measure recorded decisions,
+not qualified views or an exhaustive search of available sources.
 
 ### Examples
 

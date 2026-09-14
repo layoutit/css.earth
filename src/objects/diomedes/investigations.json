@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "diomedes",
+  "entries": [
+    {
+      "id": "selected-2019-05-07",
+      "subject": "DAMIT model 4215, 2019-05-07; Ďurech et al. (2019)",
+      "status": "included",
+      "finding": "Original convex mesh; archive spin is retained for reference. The selected archive query lists no alternative model for this target.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/diomedes/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "selected-2",
+      "subject": "Dutra et al. (2025)",
+      "status": "included",
+      "finding": "Same-mesh occultation fit: 118.8 ± 0.6 km volume-equivalent diameter, with refined pole and period.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/diomedes/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "The grid marks unmapped coverage: no registered global reflectance mosaic was found in the selected releases. They do not resolve local terrain, albedo, craters or regolith. - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain. - Absolute phase is arbitrary; accelerated display spin is illustrative.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/diomedes/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-1",
+      "subject": "Source mesh and calibration preservation",
+      "status": "included",
+      "finding": "The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/13159/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from NOTICE.md.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/diomedes/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-2",
+      "subject": "Integrated colors as a surface map",
+      "status": "included",
+      "finding": "Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row and original query are pinned in the source manifest; [column definitions](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html) are shared. The [NEOWISE v2 definitions](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html) and [Grav et al. (2012), WISE/NEOWISE Observations of the Jovian Trojan Population: Taxonomy](https://arxiv.org/abs/1209.1549) describe those thermal records; the selected physical scale comes from the occultation fit.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/diomedes/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "recorded-survey-3",
+      "subject": "Source pole and period preservation",
+      "status": "unresolved",
+      "finding": "The original archive pole (150°, 5°) and period 24.4987 h remain in damit-model.json. The [Dutra et al. (2025), Physical Characteristics of Jupiter’s Trojan (1437) Diomedes from a Tri-chord Stellar Occultation in 2020 and Dimensionless 3D Model](https://doi.org/10.1098/rsta.2024.0187) occultation fit drives the presentation. Hanuš et al. (2023), [*Shape models and spin states of Jupiter Trojans: Testing the streaming instability formation scenario*](https://arxiv.org/abs/2308.05380v1), Fig. 13 and Table B.2 proposed a different shape/133 ± 5 km fit whose numerical mesh remains unresolved; the later same-mesh fit is used here.",
+      "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/diomedes/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}

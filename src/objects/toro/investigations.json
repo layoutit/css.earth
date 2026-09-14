@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toro",
+  "entries": [
+    {
+      "id": "selected-model",
+      "subject": "Selected source model",
+      "status": "included",
+      "finding": "Checked 2026-09-09. Original [DAMIT model 1862](https://damit.cuni.cz/projects/damit/asteroid_models/view/1862), version 2017-11-21. Convex lightcurve model at a thermophysical diameter of 3.5 km; the published interval is 3.1–3.8 km. Model fields and mesh measurements.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/toro/README.md",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1862"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "Reference-period display rotation does not propagate the published YORP effect. - No registered reflectance texture is available. Grid marks missing imagery; Elevation is shape-derived radius relative to a sphere, not measured geology.",
+      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/toro/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    }
+  ]
+}
