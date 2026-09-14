@@ -1,0 +1,42 @@
+{
+  "id": "noirlab-noao-m45",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Pleiades · NOIRLab · optical B / V / I",
+  "identifiers": [
+    {
+      "type": "NOIRLab image",
+      "value": "noao-m45"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/noao-m45/",
+      "label": "Published source"
+    },
+    {
+      "role": "rights",
+      "url": "https://noirlab.edu/public/about/image-usage/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m45/processing-observations.json",
+      "revision": "9d0a453d4c82637ebc54277f97281e0c8426e85b",
+      "sha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705",
+      "locator": "/images/0"
+    }
+  ],
+  "publisher": "NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m45/processing-observations.json#/images/0"
+    }
+  ]
+}

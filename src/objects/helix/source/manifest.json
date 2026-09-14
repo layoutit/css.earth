@@ -129,7 +129,16 @@
           }
         ]
       },
-      "dependencies": []
+      "dependencies": [],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "aro-12m-original",
+            "evidence": "https://doi.org/10.1088/0004-637X/778/1/16 — Zeigler et al. (2013) abstract: HCO+ J=1–0 at 89 GHz mapped with the Arizona Radio Observatory 12 m telescope; https://experts.arizona.edu/en/publications/the-helix-nebula-viewed-in-hcosupsup-large-scale-mapping-of-the-j/"
+          }
+        ]
+      }
     },
     {
       "id": "distance",
@@ -139,8 +148,8 @@
       "title": "Helix adopted world placement",
       "credit": "Benedict et al. (2009); cssEarth placement",
       "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
-      "expectedSha256": "7946d16e15b9fc00f837211e439f3d20bb9956a68a6b86ceecb25d7cc03ad38c",
-      "expectedBytes": 1555,
+      "expectedSha256": "cf8a4a8675cd1aa5b6fcdf254aa1950db47384f6964a328e181e6d5fa3c15a9f",
+      "expectedBytes": 1875,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -152,14 +161,57 @@
         ]
       },
       "dependencies": []
+    },
+    {
+      "id": "stellar-field",
+      "path": "src/objects/helix/source/stellar-field.json",
+      "origin": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "sourceUrl": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "title": "Helix Nebula surrounding Gaia DR3 stellar field",
+      "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
+      "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
+      "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
+      "expectedSha256": "5dca1a7a9abf3aab176e5c6677134ee647cc2c5e0278b3234cc76d43c5fc8dd2",
+      "expectedBytes": 3009127,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gavo",
+            "role": "material",
+            "evidence": "src/objects/helix/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "bailer-jones-2021-distances",
+            "role": "method",
+            "evidence": "src/objects/helix/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/helix/source/stellar-field.json#/provenance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+          }
+        ]
+      }
     }
   ],
   "documents": [
     {
       "id": "document-1",
       "path": "src/objects/helix/source/delivery.json",
-      "expectedSha256": "7946d16e15b9fc00f837211e439f3d20bb9956a68a6b86ceecb25d7cc03ad38c",
-      "expectedBytes": 1555,
+      "expectedSha256": "cf8a4a8675cd1aa5b6fcdf254aa1950db47384f6964a328e181e6d5fa3c15a9f",
+      "expectedBytes": 1875,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -178,8 +230,8 @@
     {
       "id": "document-3",
       "path": "src/objects/helix/source/presentation.json",
-      "expectedSha256": "69e3fb4546b5a1820dcd61a8e0332bccfa3afc503e659d6e35ac2a1937e12d24",
-      "expectedBytes": 5631,
+      "expectedSha256": "366c4687f11385174311ef512dc6ee7fb48a0ca14f6d7c451ab04e619f329228",
+      "expectedBytes": 6334,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."

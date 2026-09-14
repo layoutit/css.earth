@@ -9,7 +9,7 @@
   "inputPins": [
     {
       "path": "labs/nebula/models/helix/compiler.json",
-      "sha256": "6589cf8db6deb4f418e8b9d33fbc1cdd9e7fe248fb3d7e1af49afd34c57adac2"
+      "sha256": "ce2aa4f55bc2569784b50cae163ecc98502fc3f76add6c07b0a4fd64b6a3ff85"
     },
     {
       "path": "labs/nebula/models/helix/observations.json",
@@ -34,8 +34,12 @@
     "arcsecPerUnit": 1
   },
   "sourceUrl": "https://www.eso.org/public/images/eso0907a/",
-  "description": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths.",
+  "description": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and front/back assignment remain conditional. The surrounding field uses Gaia astrometry and estimated distances. A bounded set of bright image cores stays attached to residual halos at the existing model depth; these placements are illustrative, not their measured stellar distances.",
   "defaultLens": "eso-wfi",
   "framingRadiusUnits": 1500,
-  "acceptedLabResult": "2e6d9eccd15ca15ccc053b1d564e2b0763522207c1c6ba79c42c86111796c9ce"
+  "acceptedLabResult": "2e6d9eccd15ca15ccc053b1d564e2b0763522207c1c6ba79c42c86111796c9ce",
+  "fieldStars": {
+    "path": "src/objects/helix/source/stellar-field.json",
+    "sha256": "5dca1a7a9abf3aab176e5c6677134ee647cc2c5e0278b3234cc76d43c5fc8dd2"
+  }
 }
