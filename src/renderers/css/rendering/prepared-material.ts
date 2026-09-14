@@ -80,7 +80,7 @@ export function createPreparedMaterialPublisher(track: PreparedMaterialTrack,ele
     return true;
   };
   return Object.freeze({
-    publish(selected: PreparedMaterialSelection,view: PreparedView,resources: PreparedResources,_committedPlan?: PreparedMaterialDemand){
+    publish(selected: PreparedMaterialSelection,view: PreparedView,resources: Pick<PreparedResources, "has" | "url">,_committedPlan?: PreparedMaterialDemand){
       const next=preparedMaterialState(track,selected,view);
       state={...state,bank:next.bank.id,frame:next.frame,calculatedFrame:next.calculatedFrame,row:next.row,mode:selected.modeLabel??next.mode,enabled:next.enabled,
         rotationEnabled:next.rotationEnabled,sunViewDirection:next.sunViewDirection};
