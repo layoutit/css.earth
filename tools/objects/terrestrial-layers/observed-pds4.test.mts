@@ -74,3 +74,14 @@ test('unsupported identities, orders, projection conventions, units, scales and 
   assert.throws(() => validatePds4ObservationPolicy({ ...policy, displayRange: [1, 0] }), /policy/);
   assert.throws(() => validatePds4ObservationPolicy({ ...policy, colorDisplay: {} }), /unknown colorDisplay/);
 });
+
+test('empty or non-decimal zero-valued projection fields cannot masquerade as valid metadata', () => {
+  for (const field of ['offset', 'cart:latitude_of_projection_origin', 'cart:standard_parallel_1']) {
+    const pattern = new RegExp(`(<${field} unit="[^"]+">)0(?:\\.0*)?(</${field}>)`);
+    assert.ok(pattern.test(small), `fixture has a zero-valued ${field}`);
+    for (const value of ['', '  ', '0x0', '0b0', 'NaN', 'Infinity']) {
+      const corrupted = small.replace(pattern, (_match, opening: string, closing: string) => `${opening}${value}${closing}`);
+      assert.throws(() => decodePds4Color(bytes(), corrupted, entry, policy), /Invalid PDS4 number/);
+    }
+  }
+});
