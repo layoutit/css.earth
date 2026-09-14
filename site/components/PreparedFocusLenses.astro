@@ -4,7 +4,9 @@ import DatasetContextPanels from './DatasetContextPanels.astro';
 import { parsePreparedVolumePresentation } from '../volume-presentation.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { PreparedVolumeLensBank } from '../../src/renderers/css/volume/prepared-volume-lenses';
-import { CONTEXT_OBJECT_DESCRIPTORS, CONTEXT_OBJECT_PREPARED_JSON } from '../prepared-context-objects.mts';
+import { CONTEXT_OBJECT_DESCRIPTORS, CONTEXT_OBJECT_PREPARED_JSON, CONTEXT_OBJECT_ASSET_URLS } from '../prepared-context-objects.mts';
+interface Props { objectId: string; }
+const { objectId } = Astro.props;
 
 type Descriptor = { id: string; type: string; prepared?: { url: string } };
 // Bodies share src/objects; only the generated context objects' prepared JSON is read here.
@@ -16,15 +18,19 @@ const banks = Object.entries(descriptors).filter(([, descriptor]) => descriptor.
   if (!bank || bank.id !== descriptor.id) throw new TypeError(`Prepared focus lenses unavailable: ${descriptor.id}.`);
   const provenance = validateObjectProvenance(provenanceDocuments[path.replace(/object\.json$/u, 'prepared/provenance.json')], bank.id);
   const presentation = parsePreparedVolumePresentation(presentations[path.replace(/object\.json$/u, 'prepared/presentation.json')], bank, provenance);
-  return { bank, provenance, presentation };
+  const prefix = path.replace(/object\.json$/u, '');
+  const resources = Object.fromEntries(Object.entries(CONTEXT_OBJECT_ASSET_URLS).filter(([path]) => path.startsWith(prefix)).map(([path, url]) => [path.slice(prefix.length), url]));
+  return { bank, provenance, presentation, descriptor, resources };
 });
 ---
-{banks.map(({ bank, provenance, presentation }) => <div class="planet-dataset-content" data-focus-lens-bank={bank.id} hidden>
-  <DatasetLenses objectId={`focus-${bank.id}`} lenses={presentation} {provenance} controlName="focusLens" />
+{banks.map(({ bank, provenance, presentation, descriptor, resources }) => <div class="planet-dataset-content" data-focus-lens-bank={bank.id} hidden>
+  <script is:inline type="application/json" data-focus-resources set:html={JSON.stringify({ descriptor, resources }).replace(/</g, '\\u003c')}></script>
+  <DatasetLenses objectId={`focus-${bank.id}`} route={`/${objectId}/`} lenses={presentation} {provenance} controlName="focusLens" />
     {bank.lenses.some(lens => lens.stars.points.length > 0) && <label class="planet-setting-control">
-      <input type="checkbox" data-focus-stars checked />
+      <input type="checkbox" data-focus-stars name="focusStars" form={`focus-${bank.id}-datasets`} checked />
       <span class="planet-setting-text">Catalogue stars</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>}
   <DatasetContextPanels objectId={bank.id} lenses={presentation} {provenance} />
+  <style is:inline set:html={`body:has([data-focus-lens-bank="${bank.id}"] [data-focus-stars]:not(:checked)) .prepared-volume-lenses[data-volume-lens-object="${bank.id}"] .prepared-catalogue-points { display:none !important; }`}></style>
 </div>)}

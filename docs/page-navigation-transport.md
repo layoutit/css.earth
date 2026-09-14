@@ -39,11 +39,16 @@ startup failure restores the original attributes and children on the same
 elements. No second scene is kept as a fallback. Successful startup releases the
 initial attribute snapshot; subsequent navigation uses the existing lifecycle.
 
-JavaScript provides camera input, animation, live search and category filtering,
-dataset changes in place and world navigation.
-The HTML reference pose does not restore a saved camera URL or publish the
-surrounding interactive world. This change adds prepared HTML to the first page;
-it does not claim a smaller JavaScript bundle.
+Settings opens through a native popover. Its prepared object settings submit a
+GET form; sky contrast follows its checkbox directly in CSS. Dataset attribution
+cards are already present, and CSS owns their placement and visibility. Startup
+preserves open settings, early selections and these same elements.
+
+The response can restore a saved camera URL and select a prepared focus volume.
+JavaScript adds camera input, animation, live filtering, dataset changes in place
+and continuing world navigation. The separate [native camera experiment](native-resize-input.md)
+explores scroll zoom and resize rotation; it is not enabled in the normal site.
+This change does not claim a smaller JavaScript bundle or unchanged performance.
 
 The prepared-object decoder retains one module worker across successful jobs.
 Jobs are serialized and their bytes transfer only on activation. Cancelling an
@@ -71,22 +76,26 @@ renderer intercepts those buttons and updates the retained scene in place.
 Startup adopts the dataset rendered by the server as its first selection,
 without publishing the default dataset first.
 
-This applies to datasets owned by registered object scenes. Datasets on prepared
-world-context volumes, such as Orion under `/sun/?focus=m42`, still depend on
-the interactive world renderer. Camera restoration and world-context rendering
-remain JavaScript capabilities; the native object scene uses its prepared
-reference pose.
+Prepared focus volumes, such as Orion under `/sun/?focus=m42`, use the same
+request path. Their dataset buttons submit `focusLens`; the response selects
+the authenticated bank inside the existing scene and fills the shared focus
+card. Catalogue transport is separate pinned JSON, shared by the response and
+browser. Construction-order identities let the live volume publisher adopt
+the response's elements and selected lens. Responsive CSS lengths retain the
+prepared camera's projection until the browser resolves its viewport.
 
 The existing search field is a GET form. Submitting `q` keeps the object URL and
 returns matches in the same shell. Category buttons submit that form too, and
 Clear search is an ordinary link. An empty submission lists all objects. Object
 names, nebula aliases and named features use the same matching code as live
 search. Earth's cities come from its active named-feature index. Feature results
-are links to their owning body with a `feature` parameter; JavaScript adds the
-camera flight after that body is ready.
+are links to their owning body with a `feature` parameter. The response selects
+a compatible dataset and publishes the same feature caption used by live labels;
+JavaScript adds the camera flight after that body is ready.
 
-`netlify/edge-functions/search-route.ts` routes requests that contain `q` or `dataset`
-to the Node function in `netlify/functions/search.ts`. It keeps optional category
+`netlify/edge-functions/search-route.ts` routes requests containing `q`, `dataset`,
+`settings`, `feature`, `v`, `focus` or `focusLens` to the Node function in
+`netlify/functions/search.ts`. It keeps optional category
 and view parameters, and passes ordinary pages and assets straight through.
 The search work runs in Node because parsing the shell and searching the index
 can exceed Netlify's edge CPU budget. The application continues to build static
@@ -94,8 +103,9 @@ pages; it does not need an Astro server adapter.
 
 The function fetches the current object's prebuilt page without a query and
 updates the retained search controls and rows between the `search-shell`
-boundaries. Search alone passes the scene through unchanged; dataset requests
-also update the existing stage between the `prepared-scene` boundaries. The
+boundaries. Search alone passes the scene through unchanged; dataset, setting,
+saved-view and focus requests also update the existing stage between the
+`prepared-scene` boundaries. The
 head, stylesheet bytes and application scripts pass through unchanged. The
 function fetches existing scene banks and never regenerates them. The feature
 index is checked against its byte count and SHA-256 pin from that same page;
@@ -105,9 +115,10 @@ search usable and displays a retry message in the existing feature section.
 
 JavaScript adopts the submitted query and selected category, keeps the form and
 result elements, and adds live filtering and in-place navigation. Both native
-and enhanced controls use the same styles. Native navigation still uses the
-prepared reference pose described above; camera restoration and feature flights
-require JavaScript.
+and enhanced controls use the same styles. Settings and view context carry across
+native submits; a small form binding refreshes that context after interactive
+camera movement. Feature flights and continuous camera input require JavaScript
+in the normal site.
 
 `tools/search-server.mts` calls the same routing and request handler in Astro dev
 and `pnpm preview`. `netlify.toml` declares the production build, Node function
@@ -130,6 +141,7 @@ node --test site/test/search-response.test.mts
 node site/test/search-browser.mts http://127.0.0.1:4210
 node --test site/test/dataset-response.test.mts site/test/dataset-url.test.mts
 node site/test/native-datasets-browser.mts http://127.0.0.1:4210
+node site/test/native-shell-browser.mts http://127.0.0.1:4210
 ```
 
 Worker reuse, cancellation and disposal are covered by
@@ -160,6 +172,10 @@ same scene and button elements, identical computed button styles and the selecte
 dataset as the first live presentation. It also verifies in-place switching and
 native submission after failed object transport. The request tests reject
 unknown or ambiguous datasets and altered prepared bytes.
+
+The native shell browser check covers desktop and phone settings, keyboard
+dismissal, persistent object settings and native dataset cards. Delayed and
+failed startup cases verify that settings, choices and scene elements survive.
 
 ![Saturn's ultraviolet dataset selected with JavaScript disabled](images/native-dataset.png)
 

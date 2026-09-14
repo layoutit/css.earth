@@ -13,7 +13,7 @@ export interface VolumeImpostorProjection {
 }
 
 /** Project a prepared bounding sphere through the same physical camera as the full volume. */
-export function projectVolumeImpostors(publication: VolumeCameraPublication, frame: PreparedCssVolume['frame'], bank: PreparedVolumeImpostors): VolumeImpostorProjection {
+export function projectVolumeImpostors(publication: VolumeCameraPublication, frame: PreparedCssVolume['frame'], bank: PreparedVolumeImpostors, includeFullViews = false): VolumeImpostorProjection {
   const { world, viewport } = publication;
   if (world.referenceFrame !== frame.referenceFrame || world.epochJdTt !== frame.epochJdTt) throw new TypeError('Volume impostor camera frame and epoch differ.');
   if (!(viewport.focalPixels > 0) || !Number.isFinite(viewport.focalPixels) || !viewport.principalOffsetPixels.every(Number.isFinite)) {
@@ -34,7 +34,7 @@ export function projectVolumeImpostors(publication: VolumeCameraPublication, fra
   const visible = depth + radius > 0 && (depth <= radius ||
     (Math.abs(x) <= (viewport.widthPixels ?? Infinity) / 2 + extent && Math.abs(y) <= (viewport.heightPixels ?? Infinity) / 2 + extent));
   return { x, y, diameterPixels, volumeMix, visible,
-    views: visible && volumeMix < 1 ? selectImpostorViews(bank.views, back).map(({ view, weight }) => {
+    views: visible && (volumeMix < 1 || includeFullViews) ? selectImpostorViews(bank.views, back).map(({ view, weight }) => {
       const imageRight = transport(view.right, view.back, back), imageDown = transport(view.down, view.back, back);
       return { id: view.id, weight, matrix: [dot(imageRight, right), dot(imageRight, down), dot(imageDown, right), dot(imageDown, down)] };
     }) : [] };

@@ -85,7 +85,7 @@ const searchCategories = ([
     <ExplorerRail objectId={objectId} />
     <form id={searchFormId} class="planet-sidebar-search-card" role="search" aria-label="Object search"
       action={activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
-      {['v', 'overview', 'focus', 'focusLens', 'dataset'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
+      {['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
       <input
         class="planet-sidebar-search"
         type="search"
@@ -124,28 +124,31 @@ const searchCategories = ([
     <a class="planet-header-link" href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
       <GitHubIcon />
     </a>
-    <button class="planet-header-action planet-settings-action" type="button"
-      aria-label="Settings" title="Settings" aria-controls={`${objectId}-settings`} aria-pressed="false">
+    <button class="planet-header-action planet-settings-action" type="button" popovertarget={`${objectId}-settings`}
+      aria-label="Settings" title="Settings" aria-controls={`${objectId}-settings`}>
       <MaterialSymbol name="settings" />
     </button>
-    <button class="planet-header-action planet-machine-toggle" type="button" disabled
-      aria-pressed="false" aria-label="Machines" title="Machines">
+    <label class="planet-header-action planet-machine-action" title="Machines">
+      <input class="planet-machine-toggle" type="checkbox" aria-label="Machines" checked />
       <MaterialSymbol name="satellite_alt" />
-    </button>
+    </label>
   </div>
 </header>
 <div class="planet-dataset-context-dock">
-<aside class="planet-dataset-context-rail" aria-label="Selected dataset context" hidden></aside>
+<form id={`${objectId}-settings-form`} action={`/${objectId}/`} method="get" data-settings-form hidden>
+  <input type="hidden" name="settings" value="1" />
+  {['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
+</form>
 <section
   id={`${objectId}-settings`}
   class="planet-settings-panel explorer-settings-panel"
   aria-labelledby={`${objectId}-settings-title`}
-  hidden
+  popover="auto"
 >
   <h2 id={`${objectId}-settings-title`}>{PREPARED_SHELL_TITLES.settings.label}</h2>
   <div class="planet-settings">
     <label class="planet-setting-control planet-motion-setting-control">
-      <input class="planet-motion-setting" type="checkbox" name="motion" aria-describedby={`${objectId}-motion-description`} />
+      <input class="planet-motion-setting" type="checkbox" name="motion" aria-describedby={`${objectId}-motion-description`} disabled />
       <span class="planet-setting-text">Illustrative rotation</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
       <span id={`${objectId}-motion-blocked`} class="planet-motion-blocked" hidden>
@@ -160,6 +163,7 @@ const searchCategories = ([
         class="planet-speed-setting"
         type="range"
         name={speedSetting.name}
+        form={`${objectId}-settings-form`}
         min="0"
         max="4"
         step="1"
@@ -170,7 +174,7 @@ const searchCategories = ([
       />
     </label>}
     {shadowSetting && <label class="planet-setting-control">
-      <input type="checkbox" name={shadowSetting.name} checked={shadowSetting.checked} />
+      <input type="checkbox" name={shadowSetting.name} checked={shadowSetting.checked} form={`${objectId}-settings-form`} />
       <span class="planet-setting-text">{shadowSetting.label}</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>}
@@ -179,33 +183,34 @@ const searchCategories = ([
         class="planet-sky-contrast-setting"
         type="checkbox"
         name="skyContrast"
+        form={`${objectId}-settings-form`}
       />
       <span class="planet-setting-text">High contrast</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
-      <input class="planet-heliosphere-setting" type="checkbox" name="heliosphere" />
+      <input class="planet-heliosphere-setting" type="checkbox" name="heliosphere" disabled />
       <span class="planet-setting-text">Heliosphere</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
-      <input class="planet-asteroid-bodies-setting" type="checkbox" name="asteroidBodies" />
+      <input class="planet-asteroid-bodies-setting" type="checkbox" name="asteroidBodies" disabled />
       <span class="planet-setting-text">Asteroids</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
-      <input class="planet-asteroid-orbits-setting" type="checkbox" name="asteroidOrbits" />
+      <input class="planet-asteroid-orbits-setting" type="checkbox" name="asteroidOrbits" disabled />
       <span class="planet-setting-text">Asteroid orbits</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
-      <input class="planet-asteroid-labels-setting" type="checkbox" name="asteroidLabels" />
+      <input class="planet-asteroid-labels-setting" type="checkbox" name="asteroidLabels" disabled />
       <span class="planet-setting-text">Asteroid labels</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
       <span class="planet-setting-text">Orbit lines</span>
-      <select class="planet-orbit-renderer-setting planet-setting-select" name="orbitRenderer">
+      <select class="planet-orbit-renderer-setting planet-setting-select" name="orbitRenderer" disabled>
         <option value="strokes">SVG strokes</option>
         <option value="bars">CSS chords</option>
       </select>
@@ -216,11 +221,12 @@ const searchCategories = ([
       </button>
       ) : (
       <label class="planet-setting-control">
-        <input type="checkbox" name={setting.name} checked={setting.checked} />
+        <input type="checkbox" name={setting.name} checked={setting.checked} form={`${objectId}-settings-form`} />
         <span class="planet-setting-text">{setting.label}</span>
         <span class="planet-setting-switch" aria-hidden="true"></span>
       </label>
       ))}
+    <button class="planet-setting-control planet-settings-submit" type="submit" form={`${objectId}-settings-form`}>Apply settings</button>
   </div>
 </section>
 </div>
@@ -268,7 +274,7 @@ const searchCategories = ([
         <InformationTabs idPrefix="prepared-focus" group="prepared-focus" tabs={[{id: 'dataset', label: 'Datasets'}, {id: 'factsheet', label: 'Factsheet'}]} />
         <div class="planet-card-tabpanel" id="prepared-focus-dataset-content" data-information-panel="dataset"
           data-information-group="prepared-focus" role="region" aria-label="Datasets">
-          <PreparedFocusLenses />
+          <PreparedFocusLenses {objectId} />
         </div>
         <div class="planet-card-tabpanel" id="prepared-focus-factsheet-content" data-information-panel="factsheet"
           data-information-group="prepared-focus" role="region" aria-label="Factsheet">

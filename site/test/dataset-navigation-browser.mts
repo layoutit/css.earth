@@ -53,7 +53,7 @@ async function noOverflow(target: Page) {
 }
 
 try {
-  const rail = page.locator('.planet-dataset-context-rail');
+  const rail = page.locator('.planet-information-panel > .planet-dataset-context-rail');
   const active = () => rail.locator('[data-dataset-context]:not([hidden])');
   await visit('/mars/#dataset=elevation', 'mars', 'elevation');
   assert.equal(await page.getByRole('tab', { name: 'Missions', exact: true }).count(), 0);
@@ -116,8 +116,7 @@ try {
   await page.getByRole('searchbox').fill('Mercury');
   await page.locator('.planet-object-link[data-object-id="mercury"]').first().click();
   await ready('mercury');
-  assert.equal(await page.locator('template[data-prepared-detail="dataset-context"]').evaluate(template =>
-    template instanceof HTMLTemplateElement && !!template.content.querySelector('[data-mission="messenger"]')), true);
+  assert.equal(await rail.locator('[data-mission="messenger"]').count() > 0, true);
   assert.equal(await rail.locator('[data-mission="mars-global-surveyor"]').count(), 0);
   await page.goBack(); await ready('mars', 'elevation');
   assert.equal(await active().locator('[data-mission="mars-global-surveyor"]').isVisible(), true);
@@ -137,13 +136,13 @@ try {
 
   await visit('/mars/#dataset=elevation', 'mars', 'elevation');
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.waitForFunction(() => document.querySelector('.planet-dataset-context-rail')?.parentElement?.classList.contains('planet-drawer-content'));
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('.planet-information-panel > .planet-dataset-context-rail')!).position === 'static');
   await rail.scrollIntoViewIfNeeded();
   await noOverflow(page);
   assert.equal(await rail.isVisible(), true);
   await page.screenshot({ path: resolve(output, 'dataset-context-mobile.png') });
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.waitForFunction(() => document.querySelector('.planet-dataset-context-rail')?.parentElement?.classList.contains('planet-dataset-context-dock'));
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('.planet-information-panel > .planet-dataset-context-rail')!).position === 'fixed');
   assert.equal(await rail.isVisible(), true);
   cases.push({ name: 'responsive panels remain accessible and return to the right dock' });
 

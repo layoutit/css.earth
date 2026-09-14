@@ -55,7 +55,7 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
   return bands.every(Boolean) && new Set(bands).size === bands.length;
 };
 ---
-<template data-prepared-detail="dataset-context" data-context-object={objectId}>
+<aside class="planet-dataset-context-rail" data-dataset-context-owner={objectId} aria-label="Selected dataset context">
   {contexts.map(context => {
     const credited = contributors(context);
     const tabbed = credited.length > 1 && distinctBands(credited);
@@ -112,4 +112,4 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
       </PlanetCard>}
     </div>;
   })}
-</template>
+</aside>

@@ -15,6 +15,7 @@ import "../shell-layout.css";
 import "../minimap/minimap.css";
 import type { PreparedSceneMarkup } from '../../tools/serialize-prepared-scene.mts';
 import type { loadPreparedSceneMarkup } from '../../tools/load-prepared-scene.mts';
+import { FOCUS_CATALOG_DATA } from '../focus-catalog-data.mts';
 
 interface Props {
   objectId: string;
@@ -58,6 +59,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
   </head>
   <body data-object-shell={objectRecord.id}>
     <!--search-shell:start-->
+    <script is:inline type="application/json" data-focus-catalogs set:html={JSON.stringify(FOCUS_CATALOG_DATA.map(entry => entry.pin)).replace(/</g, '\\u003c')}></script>
     <div class="planet-ui-layer">
       <slot name="planet-ui" />
     </div>
@@ -84,7 +86,12 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
       <div class="planet-scene-overlays"></div>
     </div>
     {!navigation && <script>
-      import "../scene-router.mts";
+      import { bindNativeViewForms } from '../native-view-forms.mts';
+      bindNativeViewForms(document, window);
+      import("../scene-router.mts").catch(error => {
+        document.documentElement.dataset.ready = 'error';
+        console.error('The interactive scene could not load.', error);
+      });
     </script>}
   </body>
 </html>

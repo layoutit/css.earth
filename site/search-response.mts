@@ -63,24 +63,40 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   const objectId = form.dataset.searchObject;
   if (!objectId || !/^[a-z][a-z0-9-]*$/u.test(objectId)) throw new Error('Prepared search object is invalid.');
   const search = requiredElement<HTMLInputElement>(form, '.planet-sidebar-search');
-  const value = (url.searchParams.get('browse') ?? url.searchParams.get('q') ?? '').slice(0, SEARCH_QUERY_LIMIT).trim();
+  const focusCard = document.querySelector<HTMLElement>('[data-prepared-focus-card][data-prepared-focus-id]');
+  const value = (url.searchParams.get('browse') ?? url.searchParams.get('q') ?? (focusCard ? search.getAttribute('value') : '') ?? '').slice(0, SEARCH_QUERY_LIMIT).trim();
   const searching = url.searchParams.has('q');
   search.setAttribute('value', value);
-  for (const input of document.querySelectorAll<HTMLInputElement>('[data-search-context], [data-dataset-context]')) {
+  for (const input of document.querySelectorAll<HTMLInputElement>('input[data-search-context], input[data-view-context]')) {
     const value = url.searchParams.get(input.name);
     input.toggleAttribute('disabled', !value);
     input.setAttribute('value', value?.slice(0, 2048) ?? '');
   }
+  // Native searches and dataset submits carry the same declared object settings.
+  if (url.searchParams.get('settings') === '1') {
+    const names = ['settings', 'skyContrast', ...[...document.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')].map(input => input.name)];
+    for (const form of document.querySelectorAll<HTMLFormElement>('[data-dataset-form], .planet-sidebar-search-card')) {
+      for (const name of new Set(names)) {
+        const value = url.searchParams.get(name);
+        if (value === null) continue;
+        const input = document.createElement('input');
+        input.type = 'hidden'; input.name = name; input.value = value;
+        input.dataset.currentSetting = '';
+        form.append(input);
+      }
+    }
+  }
   const clear = new URL(`/${objectId}/`, url.origin);
-  for (const name of ['v', 'overview', 'focus', 'focusLens', 'dataset']) {
+  for (const name of ['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature', 'settings', 'skyContrast', ...[...document.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')].map(input => input.name)]) {
     const value = url.searchParams.get(name);
     if (value) clear.searchParams.set(name, value.slice(0, 2048));
   }
   document.querySelector('.planet-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
   const browser = requiredElement<HTMLElement>(document, '.planet-object-browser');
   const information = requiredElement<HTMLElement>(document, '.planet-information-panel');
-  browser.hidden = !searching;
-  information.hidden = searching;
+  browser.hidden = !searching && !focusCard;
+  information.hidden = searching || !!focusCard;
+  if (focusCard) focusCard.hidden = searching;
   if (searching) requiredElement(document, '.planet-sheet-handle').setAttribute('checked', '');
   form.toggleAttribute('data-search-submitted', searching);
   const galactic = searching && value.toLocaleLowerCase('en') === 'milky way';
@@ -88,7 +104,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   const galaxy = browser.querySelector<HTMLElement>('[data-galactic-overview]');
   const system = browser.querySelector<HTMLElement>('[data-solar-system-results]');
   if (galaxy) galaxy.hidden = !galactic;
-  if (system) system.hidden = galactic;
+  if (system) system.hidden = galactic || !searching && !!focusCard;
   if (searching && !galactic) {
     const items = [...browser.querySelectorAll<HTMLElement>('.planet-object-item')];
     const labels = items.map(item => ({ ...objectSearchLabels(item), item }));

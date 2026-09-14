@@ -53,7 +53,7 @@ export function createSceneRouter({
   let mountTask: Promise<boolean | undefined> | null = null;
   let motionEnabled = false;
   let heliosphereEnabled = false;
-  let highContrastSky = false;
+  let highContrastSky = documentTarget.querySelector<HTMLInputElement>('.planet-sky-contrast-setting')?.checked ?? false;
   let asteroidBodiesEnabled = false;
   let asteroidOrbitsEnabled = false;
   let asteroidLabelsEnabled = false;

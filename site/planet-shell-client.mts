@@ -3,6 +3,7 @@ import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-o
 import { createMotionRecorder, runMotionScript } from './motion-script.mts';
 const isOrbitRenderer = (value: string): value is OrbitRenderer => ['strokes', 'bars'].includes(value);
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
+import { readInitialFocus } from './focus-catalog.mts';
 import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
@@ -69,7 +70,7 @@ export function mountPlanetShell({
   let cardNavigation: { view: 'detail' | 'overview' } | null = null;
   let cardObjectId = objectId;
   let overview = false, overviewScope: OverviewScope = 'solar-system', camera: ShellCamera | null = null, unsubscribeOverview: (() => void) | null = null;
-  let preparedFocus: PreparedCatalogObject | null = null;
+  let preparedFocus: PreparedCatalogObject | null = readInitialFocus(documentTarget);
   const focusRoot = drawer.querySelector<HTMLElement>('[data-prepared-focus-card]');
   const focusTabs = createTabsController(focusRoot, lifetime, 'prepared-focus');
   const focusCard = createPreparedFocusCard(focusRoot, id => focusTabs.show(id));
@@ -394,6 +395,7 @@ function createSettingsController(
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let motionOn = motionEnabled === true;
+  for (const input of [motion, heliosphere, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = false;
 
   const renderMotion = () => {
     motion.checked = motionOn;
@@ -500,6 +502,7 @@ function createSettingsController(
     },
     destroy() {
       events.abort();
+      for (const input of [motion, heliosphere, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = true;
       delete documentTarget.body.dataset.skyContrast;
     },
   });
@@ -607,9 +610,10 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let selectedObjectName = "";
+  let initialObject = true;
   let overview = false;
   let overviewScope: OverviewScope = 'solar-system';
-  let preparedFocus: PreparedCatalogObject | null = null;
+  let preparedFocus: PreparedCatalogObject | null = readInitialFocus(documentTarget);
   const overviewName = () => overviewScope === 'milky-way' ? 'Milky Way' : 'Solar System';
   let visibleObjects = 0;
   const destinations = createDestinationBrowser({
@@ -887,7 +891,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       // its query and results until the user chooses or dismisses them.
       const editing = browsing;
       overview = false;
-      preparedFocus = null;
+      if (!initialObject) preparedFocus = null;
+      initialObject = false;
       selectedObjectName = name;
       const object = OBJECTS.find(object => object.name === name);
       if (object) {

@@ -14,6 +14,7 @@ export interface ObjectSelectionRuntimeOptions {
   onFatalError: (error: unknown) => void; onMaterialError?: (error: unknown) => void;
   deferTextureRefinement?: boolean;
   initialLens?: string;
+  initialSettings?: unknown;
 }
 interface SelectionRequest { selection: ObjectSelection; kind: "initial" | "selection" | "frame"; ticket: PreparedResidencyTicket | null; plan: PreparedPresentationPlan | null; previous: SelectionRequest | null; }
 
@@ -23,10 +24,10 @@ import { initialObjectSelection, reduceObjectSelection, requireObjectAction } fr
 const sameKeys = (a: readonly string[], b: readonly string[]) => a.length === b.length && a.every((key, index) => key === b[index]);
 
 export function createObjectSelectionRuntime({
-  definition, presentation, residency, lifetime, initialLens,
+  definition, presentation, residency, lifetime, initialLens, initialSettings,
   onChange = () => {}, onCommit = () => {}, onFatalError, onMaterialError = () => {}, deferTextureRefinement = false,
 }: ObjectSelectionRuntimeOptions) {
-  const initialSelection = initialObjectSelection(definition.controls, initialLens);
+  const initialSelection = initialObjectSelection(definition.controls, initialLens, initialSettings);
   let desired = initialSelection, committed: ObjectSelection | null = null, committedPlan: PreparedPresentationPlan | null = null, view: PreparedView | null = null;
   let active: SelectionRequest | null = null, destroyed = false, started = false, busy = false, error: string | null = null;
   let requests = 0, passes = 0, commits = 0, framePublications = 0;

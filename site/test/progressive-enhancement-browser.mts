@@ -79,7 +79,7 @@ try {
     assert.equal(await page.locator('.planet-stage').getAttribute('data-prepared-object'), null);
     assert.equal(await page.locator('#saturn-factsheet-tab').isChecked(), true, 'Startup preserves an early native selection');
     assert.deepEqual(await tabStyle(), initialTabStyle, 'JavaScript does not restyle the selected tab');
-    assert.equal(await page.locator('.planet-dataset-context-rail').isVisible(), false, 'Dataset context follows native panel selection');
+    assert.equal(await page.locator('.planet-information-panel > .planet-dataset-context-rail').isVisible(), false, 'Dataset context follows native panel selection');
     if (viewport.width < 821) {
       assert.equal(await page.locator('.planet-sheet-handle').isChecked(), true, 'Startup preserves the open sheet');
       await page.locator('.planet-sheet-handle').uncheck();
@@ -98,7 +98,7 @@ try {
     assert.equal(await page.locator('.planet-stage [data-prepared-node]').count(), count);
     if (viewport.width < 821) await page.locator('.planet-sheet-handle').check();
     await page.locator('label[for="saturn-dataset-tab"]').click();
-    assert.equal(await page.locator('.planet-dataset-context-rail').isVisible(), true);
+    assert.equal(await page.locator('.planet-information-panel > .planet-dataset-context-rail').isVisible(), true);
     await page.locator('button[name="dataset"][value="ultraviolet"]').click();
     await page.screenshot({ path: `${output}/enhanced-${viewport.width}.png` });
     cases.push(`Interactive startup adopts all ${count} scene elements, preserves native selection, and adds drag and dataset controls at ${viewport.width}px`);
@@ -121,10 +121,10 @@ try {
   await session.send('Emulation.setScriptExecutionDisabled', { value: false });
   await focus.locator('#prepared-focus-dataset-tab').press('ArrowDown');
   assert.equal(await focus.locator('#prepared-focus-factsheet-content').isVisible(), true);
-  assert.equal(await focus.locator('.planet-dataset-context-rail').isVisible(), false);
+  assert.equal(await focus.locator('[data-focus-lens-bank="m42"] > .planet-dataset-context-rail').isVisible(), false);
   await focus.locator('#prepared-focus-factsheet-tab').press('ArrowUp');
   assert.equal(await focus.locator('#prepared-focus-dataset-content').isVisible(), true);
-  assert.equal(await focus.locator('.planet-dataset-context-rail').isVisible(), true);
+  assert.equal(await focus.locator('[data-focus-lens-bank="m42"] > .planet-dataset-context-rail').isVisible(), true);
   cases.push('Dataset credit tabs work with script execution disabled; prepared focus keeps native arrow keys and context visibility');
   await focused.close();
 

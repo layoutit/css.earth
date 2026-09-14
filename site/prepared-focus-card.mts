@@ -27,8 +27,10 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     stars: bank.querySelector<HTMLInputElement>('[data-focus-stars]'),
   }));
   for (const bank of banks) {
-    for (const button of bank.buttons) button.addEventListener('click', () => {
-      if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) currentPresentation.selectLens(button.value);
+    for (const button of bank.buttons) button.addEventListener('click', event => {
+      if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) {
+        event.preventDefault(); currentPresentation.selectLens(button.value);
+      }
     }, { signal: events.signal });
     bank.stars?.addEventListener('change', () => {
       if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) currentPresentation.setStarsVisible?.(bank.stars!.checked);
