@@ -38,10 +38,6 @@ The unmodified source has 574 vertices and 1144 triangles. Its signed tetrahedra
 
 Original +Z spin axis and +X reference meridian are retained. The selected ecliptic J2000 pole is (272°, 22°), with sidereal period 21.2689 h. Conversion to equatorial J2000 uses obliquity 23.439291111°. Position uses JPL Horizons heliocentric ICRF elements; TDB is approximated as TT, under 2 ms.
 
-### Source survey
-
-See the [investigation ledger](investigations.json) for the recorded sources, decisions and reopening conditions.
-
 ### Preparation
 
 The [terrestrial recipe](source/preparation/terrestrial.json) reads the original mesh through `source-meshoptimizer` and targets at most 800 native PolyCSS `u` raster triangles with 128 px raster cells. Its error allowance is 376.96 m. Sampled source-fit distances measure preparation error separately from source accuracy; they are not exhaustive Hausdorff bounds.

@@ -6,15 +6,22 @@
       "id": "selected-albedo-and-monochrome",
       "subject": "Albedo and Monochrome",
       "status": "included",
-      "finding": "[NASA SVS release](https://svs.gsfc.nasa.gov/5069): 6.25 cm zero-phase albedo on OLA v20 and separate 5 cm PolyCam basemap. They use different normalization/control and do not fill each other’s gaps.",
+      "finding": "The live NASA SVS 5069 source page was examined against the selected release filenames. It separately supplies the 6.25 cm zero-phase albedo and 5 cm PolyCam basemap, with distinct acquisition/control and photometric histories. The selected package keeps them separate; SVS’s example blend is not a single calibrated albedo dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bennu/README.md",
-        "https://svs.gsfc.nasa.gov/5069"
+        "https://svs.gsfc.nasa.gov/5069",
+        "https://svs.gsfc.nasa.gov/5069/",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/bennu/source/preparation/acquisition.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -48,6 +55,41 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        }
+      ]
+    },
+    {
+      "id": "ola-v21-and-local-tiles",
+      "subject": "OLA v21 and 5 cm local shape tiles",
+      "status": "deferred",
+      "finding": "SVS lists a 17.9-million-polygon OLA v21 model, alongside selected 3.4-million-polygon v20, and directs users to SBMT for the full 5 cm tile collection. These are concrete higher-detail candidates. They were identified from the release page, not downloaded or qualified for the current prepared budget and map frame.",
+      "revisitWhen": "A bounded source comparison demonstrates useful visible detail and map compatibility for a selected model or tile within the established geometry and payload budget.",
+      "evidence": [
+        "https://svs.gsfc.nasa.gov/5069/",
+        "https://sbmt.jhuapl.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "svs-printing-and-blended-examples",
+      "subject": "SVS blended texture and printing models",
+      "status": "excluded",
+      "finding": "The page describes filling albedo-map polar gaps with a differently normalized image basemap. It also labels sample-site meshes modified for printing, with changed scale/centering and modeled post-TAG offsets. These visualization derivatives are not adopted as unchanged measurement inputs.",
+      "revisitWhen": "A scientific use explicitly requires the derivative, with its modifications and original source correspondence preserved.",
+      "evidence": [
+        "https://svs.gsfc.nasa.gov/5069/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

@@ -4,17 +4,28 @@
   "entries": [
     {
       "id": "selected-model",
-      "subject": "Selected source model",
+      "subject": "DAMIT 161: selected shape and spin",
       "status": "included",
-      "finding": "Checked 2026-09-09. Selected DAMIT model [161](https://damit.cuni.cz/projects/damit/asteroid_models/view/161), version **2011-04-19**. Convex lightcurve shape, uniformly scaled to the AKARI effective diameter of 44.47 ±0.74 km. Model fields and mesh measurements.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-161.txt. Model 161, version 2011-04-19, pole (326°, 67°), period 5.168274 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aethra/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/161"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/161",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aethra/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aethra/source/reference/damit-model.json",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/417/shape.txt",
+        "https://ui.adsabs.harvard.edu/abs/2009A%26A...493..291A",
+        "https://ui.adsabs.harvard.edu/abs/2011A%26A...530A.134H"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,15 +33,77 @@
       "id": "surface-imagery",
       "subject": "Registered surface imagery",
       "status": "unresolved",
-      "finding": "Catalog error omits additional shape, spin and thermal-model uncertainty; sampled simplification error does not establish terrain accuracy. - No registered surface imagery is available.",
+      "finding": "The selected DAMIT shape/spin release and AcuA thermal catalogue provide no registered optical map for the package. These checked routes support shape and approximate size, not resolved regolith or albedo. Other image archives have not been exhaustively searched; the earlier blanket absence wording was too broad.",
       "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aethra/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aethra/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aethra/source/manifest.json",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/161"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "akari-physical-scale",
+      "subject": "AKARI AcuA: selected approximate scale",
+      "status": "included",
+      "finding": "Original AcuA row 132 was matched to the retained calibration: Aethra, five detections, diameter 44.47 ±0.74 km. The recipe transfers this thermal effective diameter to mesh volume. Usui 2011 sections 2.2.4 and 3.1 describe the spherical thermal model and omitted rotational/shape effects; the catalogue error is not total scale uncertainty or terrain accuracy.",
+      "evidence": [
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://arxiv.org/html/1106.1948",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aethra/source/reference/calibration.json",
+        "https://arxiv.org/abs/1106.1948"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "damit-publications",
+      "subject": "Selected model publication links and coordinate convention",
+      "status": "included",
+      "finding": "The official model-reference export links selected model 161 to Ďurech 2009 and Hanuš 2011. This verifies the publication identity attached to the retained convex reconstruction; it does not independently reproduce either inversion. The selected archive mesh remains in the documented +Z spin-axis frame, with a separate physical scale.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models_references",
+        "https://damit.cuni.cz/projects/damit/exports/table/references",
+        "https://damit.cuni.cz/projects/damit/pages/documentation",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aethra/source/reference/damit-model.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "sbdb-classification",
+      "subject": "Retained JPL population classification",
+      "status": "included",
+      "finding": "The retained SBDB response identifies number 132, SPK 20000132, orbit class MCA (Mars-crossing Asteroid), and orbit solution 93 dated 2026-06-05. This is the population evidence cited in the existing source survey; no fresh orbital solution or current-position accuracy is established by reading it.",
+      "evidence": [
+        "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=132",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aethra/source/reference/sbdb.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

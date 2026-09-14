@@ -6,15 +6,22 @@
       "id": "selected-visible-and-near-infrared-albedo",
       "subject": "Visible and near-infrared albedo",
       "status": "included",
-      "finding": "[USGS/Golish 2023 deblurred MSI release](https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics), 550 and 950 nm maps. Dimensionless I/F normalized to zero phase/incidence/emission, both displayed linearly over 0.05–0.40; not a quantitative mineral indicator.",
+      "finding": "The selected Golish/USGS maps provide 550 and 950 nm normalized MSI albedo views. The retained 550 nm native label was inspected: 10682×5341 float samples, FilterNumber 1, Center 550 nm, and Equirectangular, planetocentric, east-positive 0–360° mapping centered at 180°. The filename contains sinu, but the label declares the selected projection. Its 17 km cartographic reference radius and 10 m/pixel sampling are not the body’s physical radius or guaranteed terrain resolution. The two bands remain separate, not a mineral-abundance ratio.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eros/README.md",
-        "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
+        "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/eros/source/reference/eros_nearmsi_filter1.lbl",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/eros/source/preparation/terrestrial.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

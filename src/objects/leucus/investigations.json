@@ -15,6 +15,11 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -31,6 +36,11 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -38,15 +48,22 @@
       "id": "shape-solution",
       "subject": "Shape and spin alternatives",
       "status": "unresolved",
-      "finding": "DAMIT models 6692 and 6693 have different poles and no matched absolute scale; their geometry is not mixed with this solution.",
+      "finding": "The cached 2026-09-13 official DAMIT exports list models 6692 (λ,β = 321°, 77°; P = 445.8 h) and 6693 (152°, 51°; P = 445.8 h) for Leucus. Both leave calibrated_size and diameter blank and have no matched absolute scale; their poles differ from the selected Mottola solution. Their numerical files were not adopted or scientifically qualified here.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/leucus/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/leucus/README.md",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroids",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -54,14 +71,21 @@
       "id": "recorded-survey-1",
       "subject": "Lucy mission and model references",
       "status": "included",
-      "finding": "- [Lucy mission summary](https://doi.org/10.1007/s11214-025-01173-7) supplies the mission context and complementary model descriptions.",
+      "finding": "The 2025 Lucy mission summary remains a contextual cross-reference. This metadata review did not use it to newly qualify geometry, imagery or rotational phase.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/leucus/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/leucus/README.md",
+        "https://doi.org/10.1007/s11214-025-01173-7",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/leucus/source/measurements.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

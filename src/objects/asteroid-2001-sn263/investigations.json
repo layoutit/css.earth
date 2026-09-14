@@ -6,14 +6,21 @@
       "id": "selected-1",
       "subject": "PDS SN263 V1.0",
       "status": "included",
-      "finding": "Original alpha mesh, model limits, pole and rotation metadata",
+      "finding": "The retained native alpha-mesh and unseen-facet labels were examined with the body’s source interpretation. The selected source is the primary component: 1148 vertices and 2292 faces in km. The original 2008 radar/light-curve observations control the scientific date, despite the landing page’s conflicting 2003 summary. Exact mesh volume is a model measurement, not a more precise observation than the published 2.5 ±0.3 km diameter.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2001-sn263/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2001-sn263/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-2001-sn263/source/reference/a153591alpha.xml",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-2001-sn263/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -21,14 +28,21 @@
       "id": "selected-2",
       "subject": "Becker et al. (2015)",
       "status": "included",
-      "finding": "Body identity and physical measurements",
+      "finding": "Becker 2015 Table 4 was examined: Alpha equivalent diameter 2.5 ±0.3 km, volume 8.2 ±1.1 km³, period 3.4256 ±0.0002 h and pole (309°, −80°) ±15°. These constraints support the retained model; its precisely computed volume is not an independent, more accurate physical measurement. The table separates Alpha from outer Beta and inner Gamma.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2001-sn263/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2001-sn263/README.md",
+        "https://echo.jpl.nasa.gov/asteroids/becker.etal.2015.2001sn263.pdf",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-2001-sn263/source/measurements.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -36,14 +50,39 @@
       "id": "selected-3",
       "subject": "Fang et al. (2011)",
       "status": "included",
-      "finding": "System interpretation",
+      "finding": "Fang 2011 identifies Gamma as the inner companion (semimajor axis 3.804 km) and Beta as the outer companion (16.633 km). The inspected orbital discussion supports component identity and records a possible mutual-plane tilt. It does not qualify a present rotation phase or justify treating an orbital pole as a measured spin pole.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2001-sn263/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-2001-sn263/README.md",
+        "https://arxiv.org/html/1012.2154",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-2001-sn263/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "radar-unseen-facets",
+      "subject": "Native radar coverage list",
+      "status": "deferred",
+      "finding": "The original a153591alpha_unseen label identifies 96 one-based facet IDs that were never seen below 60° emission angle. This is a concrete source constraint distinct from missing optical imagery; the shared grid does not communicate radar confidence. A future coverage view must bind those IDs to the full source mesh before simplification. Ninety-six facets is not an observed surface-area percentage.",
+      "revisitWhen": "The existing scientific-data preparation qualifies this source facet list as a distinct coverage view while preserving its angular threshold and facet correspondence.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-2001-sn263/source/reference/a153591alpha_unseen.xml",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-2001-sn263/source/reference/a153591alpha_unseen.tab"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

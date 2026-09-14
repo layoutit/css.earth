@@ -21,14 +21,21 @@
       "id": "recorded-survey-2",
       "subject": "Didymos relative-albedo facet table",
       "status": "included",
-      "finding": "[Didymos relative-albedo facet table](https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml) — Included. The original FITS table names the exact selected OBJ. Its zero-based facet IDs match all 49,152 triangles; latitude, east longitude and radius reproduce their Cartesian centroids to 0.0001132 m maximum residual. The source field is sampled by the closest full-source triangle in 3D within the existing 8 m transfer bound. No albedo is interpolated across invalid facets.",
+      "finding": "The retained native FITS-table label explicitly names didymos_g_9309mm_spc_obj_0000n00000_v003.obj and describes relative albedo at facet centers, with facet number, latitude, longitude and radius columns. This supports pairing it with that exact selected mesh. The existing centroid comparison qualifies correspondence; this ledger review read the source label and retained result, and did not rerun the fit. Relative albedo is not absolute I/F or mineral abundance.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/didymos/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/didymos/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/didymos/source/science/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/didymos/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -102,6 +109,7 @@
       "subject": "LICIACube LUKE photographs",
       "status": "deferred",
       "finding": "The shape archive links LUKE inputs, but their own camera registration has not been qualified here. The accepted DRACO mosaic does not establish LUKE projection, RGB composition or unseen terrain.",
+      "revisitWhen": "Bind the actual LUKE products and source-frame cameras and pass independent registration and quality checks before adding coverage.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/didymos/README.md"
       ],
@@ -110,8 +118,7 @@
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
-      ],
-      "revisitWhen": "Bind the actual LUKE products and source-frame cameras and pass independent registration and quality checks before adding coverage."
+      ]
     }
   ]
 }

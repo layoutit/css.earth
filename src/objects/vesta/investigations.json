@@ -6,14 +6,21 @@
       "id": "recorded-survey-1",
       "subject": "DLR Dawn HAMO natural color",
       "status": "included",
-      "finding": "[DLR Dawn HAMO natural color](https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php) — Included. Calibrated and photometrically corrected 650/550/430 nm composite. The 26,704 × 13,080 PNG retains the publisher's bright-terrain clipping and some registration artifacts.",
+      "finding": "The retained HAMO natural-color label was inspected: 26704×13080 samples, three byte bands, planetocentric simple-cylindrical mapping, east-positive longitude and center longitude 180°. Its 255 km projection sphere is not the mesh’s measured physical radius. The selected publisher color remains photometrically corrected 650/550/430 nm imagery with its recorded clipping and registration limitations; no new browser qualification was performed by reading the label.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/vesta/source/reference/true-color.lbl",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/vesta/source/preparation/terrestrial.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -116,6 +123,7 @@
       "subject": "Versioned Vesta test and browser evidence",
       "status": "unresolved",
       "finding": "The baseline README says it cites no dated test result or browser report. The source/recipe inventory therefore cannot establish current view qualification. No new browser run is claimed by this ledger migration.",
+      "revisitWhen": "Retain focused source/registration and browser evidence identifying the actual tested revision, dataset and served input pins.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/vesta/README.md"
       ],
@@ -124,8 +132,7 @@
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
         }
-      ],
-      "revisitWhen": "Retain focused source/registration and browser evidence identifying the actual tested revision, dataset and served input pins."
+      ]
     }
   ]
 }

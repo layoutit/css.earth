@@ -42,17 +42,6 @@ The unchanged original shape contains 1000 vertices and 1996 faces. Signed volum
 
 Source pole: ecliptic J2000 (36°,30°). Reference sidereal period: 2.39006 h. Equatorial conversion uses obliquity 23.439291111°. Original +Z axis and +X meridian are retained. Absolute rotational phase is arbitrary; reference-period display rotation is not a YORP propagation model. Heliocentric state is generated through the shared Horizons owner at 2026-09-03; its TDB-as-TT approximation is under 2 ms.
 
-## Source survey
-
-- [Original numerical mesh](https://damit.cuni.cz/projects/damit/stored_files/open/66623/shape.txt) — selected, pinned unchanged.
-- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — pole, period, units and archive diameter definitions; CC BY 4.0.
-- [Rożek et al. (2022), Physical properties of near-Earth asteroid (2102) Tantalus from multiwavelength observations](https://ui.adsabs.harvard.edu/abs/2022MNRAS.515.4551R)
-- [Rożek et al. (2022), radar and optical Tantalus shape](https://arxiv.org/html/2206.14306)
-
-Alternative shapes/poles: [model 6203](https://damit.cuni.cz/projects/damit/asteroid_models/view/6203), pole ['210', '-30']; [model 6204](https://damit.cuni.cz/projects/damit/asteroid_models/view/6204), pole ['180', '-30']
-
-No registered global reflectance texture is supplied by the selected release. Lightcurves and disk-integrated thermal/radar measurements do not supply surface texels. The normal grid identifies unavailable imagery. The Elevation view reports source radius minus the stated reference sphere; it is shape-derived false color, not independent topography or gravitational height.
-
 ## Preparation
 
 Existing source-meshoptimizer preparation retains source connectivity, reduces within an 800-native-u-face budget, and uses 128 px raster cells. The source-fit allowance is 14.5 m; source-model accuracy and simplification error remain separate. Shadows and Orbit start off.

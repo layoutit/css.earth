@@ -68,16 +68,26 @@
     {
       "id": "recorded-survey-5",
       "subject": "LAM reduced/deconvolved SPHERE images and CDS J/A+A/653/A57",
-      "status": "excluded",
-      "finding": "[LAM reduced/deconvolved SPHERE images](https://observations.lam.fr/astero/Data/216Kleopatra/) and [CDS J/A+A/653/A57](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/653/A57) — Actual disk-resolved observations and FITS metadata — One 2017-07-14 05:00:59.538 deconvolved camera-1 observation was downloaded and its 256×256, 64-bit float FITS header inspected and pinned. These are sky-plane images, not global maps. A photographic view needs a resolved shape-frame camera projection and photometric qualification. The paper states its significant inferred albedo features lie near limbs and likely originate in deconvolution artifacts. Excluded as runtime imagery.",
+      "status": "deferred",
+      "finding": "[LAM reduced/deconvolved SPHERE images](https://observations.lam.fr/astero/Data/216Kleopatra/) and [CDS J/A+A/653/A57](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/653/A57) — Actual disk-resolved observations and FITS metadata — One 2017-07-14 05:00:59.538 deconvolved camera-1 observation was downloaded and its 256×256, 64-bit float FITS header inspected and pinned. These are sky-plane images, not global maps. A photographic view needs a resolved shape-frame camera projection and photometric qualification. The paper states its significant inferred albedo features lie near limbs and likely originate in deconvolution artifacts. This remains a deferred source opportunity, not runtime imagery. The public LAM gate returns the source models with `CesAM_LAM_opens_the_door=1`; a 417 without that ordinary cookie is not evidence that the source is absent.",
       "revisitWhen": "A reusable product with the required camera or map registration, quantity definition and validity information; qualify it against the selected body model before promotion.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/kleopatra/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/kleopatra/README.md",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/kleopatra/source/reference/sphere-example-header.txt",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/kleopatra/source/preparation/acquisition.json",
+        "https://observations.lam.fr/astero/Data/216Kleopatra/",
+        "https://observations.lam.fr/astero/3Dshape/216_Kleopatra_mpcd.obj",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A%2BA/653/A57"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

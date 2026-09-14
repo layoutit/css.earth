@@ -6,17 +6,40 @@
       "id": "selected-model",
       "subject": "Selected source model",
       "status": "included",
-      "finding": "The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original kw4a.obj](https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html): Ostro et al. (2006), Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276–1280, DOI 10.1126/science.1133622; Arecibo, Goldstone and NASA/JPL. The paper and original geometry are pinned beside the recipe. Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.6585 km sphere, from -0.1 to 0.13 km. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments.",
+      "finding": "The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original kw4a.obj](https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html): Ostro et al. (2006), Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276–1280, DOI 10.1126/science.1133622; Arecibo, Goldstone and NASA/JPL. The paper and original geometry are pinned beside the recipe. Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.6585 km sphere, from -0.1 to 0.13 km. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments. The live JPL index was checked against the actual preparation input shape/kw4a.obj; it still links this exact model. The page is dated 2024-08-10, not a new scientific-model release. This confirms the published source route, not new mesh bytes, optical imagery or independent source-fit accuracy.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/moshup/README.md",
         "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
         "https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj",
-        "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html"
+        "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/moshup/source/preparation/terrestrial.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "radar-primary-component",
+      "subject": "Radar model covers the primary component",
+      "status": "included",
+      "finding": "The JPL index labels this selected release Alpha (primary). Its geometry must not be described as the complete multiple-asteroid system; unseen companions or their mutual geometry are not part of this input.",
+      "evidence": [
+        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

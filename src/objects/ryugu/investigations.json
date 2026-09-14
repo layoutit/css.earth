@@ -37,15 +37,22 @@
       "id": "selected-shape-and-elevation",
       "subject": "Shape and Elevation",
       "status": "included",
-      "finding": "[March 2020 SPC DSK](https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds), selected for registration. Elevation is radius minus 448 m, not gravitational height.",
+      "finding": "The retained native DSK label identifies the March 2020 SPC model, about 200,000 plates, from ONC-T/W1/W2 observations spanning 2018-06-19 to 2019-11-19. Its 2025 publication/transport creation is distinct from the model version. The label’s 1950–2050 time bounds are SPICE coverage, not decades of observations. The selected model supports map registration and source radius relative to 448 m; it is not a new 2025 surface reconstruction.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ryugu/README.md",
-        "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
+        "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ryugu/source/reference/ryugu_shape_spc_200k_v20200323.xml",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ryugu/source/preparation/terrestrial.json"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },

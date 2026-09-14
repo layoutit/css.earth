@@ -4,17 +4,27 @@
   "entries": [
     {
       "id": "selected-model",
-      "subject": "Selected source model",
+      "subject": "DAMIT 6205: selected shape and spin",
       "status": "included",
-      "finding": "Checked 2026-09-09. Original [DAMIT model 6205](https://damit.cuni.cz/projects/damit/asteroid_models/view/6205), version 2022-07-13. Prograde radar/optical reconstruction at a radar-calibrated diameter of 1.45 ±0.2 km. Model fields and mesh measurements.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-6205.txt. Model 6205, version 2022-07-13, pole (36°, 30°), period 2.39006 h match the retained metadata. The archive diameter field is 1.45 ±0.2 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/tantalus/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/6205"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/6205",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/tantalus/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/tantalus/source/reference/damit-model.json",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/66623/shape.txt",
+        "https://damit.cuni.cz/projects/damit/pages/documentation"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,7 +32,7 @@
       "id": "surface-imagery",
       "subject": "Registered surface imagery",
       "status": "unresolved",
-      "finding": "The alternative retrograde pole remains unresolved. - Sampled geometry distance reaches 16.79 m; the 14.5 m transfer cutoff withholds 0.0321% of interior Elevation texels. - No registered reflectance texture is available. Grid marks missing imagery; Elevation is shape-derived radius relative to a sphere, not measured geology.",
+      "finding": "No registered reusable reflectance texture was examined for the selected radar/optical model. The grid marks missing imagery; Elevation is source-model radius relative to a sphere, not measured geology.",
       "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/tantalus/README.md"
@@ -31,6 +41,48 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "damit-alternatives",
+      "subject": "Other DAMIT shape solutions",
+      "status": "unresolved",
+      "finding": "The live DAMIT export lists these other models for this target: 6203: pole (210°, -30°), 2.385454 h, version 2022-07-13; 6204: pole (180°, -30°), 2.390874 h, version 2022-07-13, archive diameter 1.26 km. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "Independent shape, spin or scale evidence distinguishes these alternatives, or a changed release offers a demonstrably better supported model.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/6203",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/6204"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "rozek-2022-selection",
+      "subject": "Rożek et al. radar and optical model selection",
+      "status": "included",
+      "finding": "Rożek et al. (2022) combines radar and optical data and reports the 1.45 ± 0.20 km prograde model 6205 as more consistent with the WISE size determination than retrograde 6204; the convex-only 6203 is not substituted. This supports retaining the selected numerical model and its calibrated scale, but it does not resolve the alternative pole, provide a registered surface map, or qualify local terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/tantalus/source/reference/damit-model.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/tantalus/source/reference/calibration.json",
+        "https://arxiv.org/html/2206.14306",
+        "https://ui.adsabs.harvard.edu/abs/2022MNRAS.515.4551R"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }

@@ -4,17 +4,28 @@
   "entries": [
     {
       "id": "selected-model",
-      "subject": "Selected source model",
+      "subject": "DAMIT 1862: selected shape and spin",
       "status": "included",
-      "finding": "Checked 2026-09-09. Original [DAMIT model 1862](https://damit.cuni.cz/projects/damit/asteroid_models/view/1862), version 2017-11-21. Convex lightcurve model at a thermophysical diameter of 3.5 km; the published interval is 3.1–3.8 km. Model fields and mesh measurements.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1862.txt. Model 1862, version 2017-11-21, pole (71°, -69°), period 10.19782 h match the retained metadata. The archive diameter field is 3.5 ±0.4 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/toro/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1862"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1862",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/toro/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/toro/source/reference/damit-model.json",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/6127/shape.txt",
+        "https://damit.cuni.cz/projects/damit/pages/documentation",
+        "https://ui.adsabs.harvard.edu/abs/2018A%26A...609A..86D"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     },
@@ -22,7 +33,7 @@
       "id": "surface-imagery",
       "subject": "Registered surface imagery",
       "status": "unresolved",
-      "finding": "Reference-period display rotation does not propagate the published YORP effect. - No registered reflectance texture is available. Grid marks missing imagery; Elevation is shape-derived radius relative to a sphere, not measured geology.",
+      "finding": "No registered reusable reflectance texture was examined for the selected model. The grid marks missing imagery; Elevation is source-model radius relative to a sphere, not measured geology.",
       "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/toro/README.md"
@@ -31,6 +42,32 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
+        }
+      ]
+    },
+    {
+      "id": "yorp-propagation",
+      "subject": "Toro YORP rotation propagation",
+      "status": "excluded",
+      "finding": "Ďurech et al. (2018) and its later Toro analysis report a secular YORP term alongside the 10.19782 h reference period. The prepared display retains the selected DAMIT period with an arbitrary phase; it does not propagate that acceleration into a current attitude. This is a deliberate runtime scope decision, not a finding that YORP is absent.",
+      "revisitWhen": "A source-frame phase epoch, propagation convention and validation target are selected for a time-dependent rotational attitude.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/toro/source/reference/calibration.json",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1862",
+        "https://arxiv.org/abs/1711.05987",
+        "https://astro.troja.mff.cuni.cz/davok/papers/yorp_AA2022.pdf",
+        "https://arxiv.org/html/1711.05987"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
+          "pr": 192
         }
       ]
     }
