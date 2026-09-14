@@ -32,6 +32,25 @@ pnpm dev
 
 Source recipes, provenance, requests and small object descriptors are committed. Textures, prepared descriptors and receipts under each object's `prepared/`, native caches and intermediate results are ignored. Runtime consumes prepared geometry and pixels only.
 
+For work elsewhere in the application, `pnpm dev` no longer runs this full nebula
+preparation. Startup checks each volume's bank, textures, previews and presentation
+against its existing identities. Missing or invalid packages show an unavailable
+3D view with their catalogue facts; installed packages remain usable. This is an
+installation state, not a change to the object registry or scientific catalogue.
+Production builds require all configured packages, including when invoking
+`astro build` directly.
+
+To restore one of the six Galactic nebulae through its existing delivery recipe:
+
+```sh
+node --experimental-strip-types labs/nebula/src/run.ts prepare-nebula-objects --object=helix --if-missing
+pnpm prepare:sources
+```
+
+The processing prerequisites above still apply. Restart the development server
+after restoration; available banks are selected once at startup. LMC keeps the
+existing `bake-nebula --if-missing` preparation used by `pnpm prepare:nebulae`.
+
 ## Spectral datasets and source cards
 
 | Object | Every lens rebuilt by the command | Saved processing choices |
